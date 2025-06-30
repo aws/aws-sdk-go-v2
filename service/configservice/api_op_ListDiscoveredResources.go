@@ -11,40 +11,20 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of resource resource identifiers for the specified resource
-// types for the resources of that type. A resource identifier includes the
-// resource type, ID, and (if available) the custom resource name.
-//
-// The results consist of resources that Config has discovered, including those
-// that Config is not currently recording. You can narrow the results to include
-// only resources that have specific resource IDs or a resource name.
+// Accepts a resource type and returns a list of resource identifiers for the
+// resources of that type. A resource identifier includes the resource type, ID,
+// and (if available) the custom resource name. The results consist of resources
+// that Config has discovered, including those that Config is not currently
+// recording. You can narrow the results to include only resources that have
+// specific resource IDs or a resource name.
 //
 // You can specify either resource IDs or a resource name, but not both, in the
 // same request.
 //
-// # CloudFormation stack recording behavior in Config
-//
-// When a CloudFormation stack fails to create (for example, it enters the
-// ROLLBACK_FAILED state), Config does not record a configuration item (CI) for
-// that stack. Configuration items are only recorded for stacks that reach the
-// following states:
-//
-//   - CREATE_COMPLETE
-//
-//   - UPDATE_COMPLETE
-//
-//   - UPDATE_ROLLBACK_COMPLETE
-//
-//   - UPDATE_ROLLBACK_FAILED
-//
-//   - DELETE_FAILED
-//
-//   - DELETE_COMPLETE
-//
-// Because no CI is created for a failed stack creation, you won't see
-// configuration history for that stack in Config, even after the stack is deleted.
-// This helps make sure that Config only tracks resources that were successfully
-// provisioned.
+// The response is paginated. By default, Config lists 100 resource identifiers on
+// each page. You can customize this number with the limit parameter. The response
+// includes a nextToken string. To get the next page of results, run the request
+// again and specify the string for the nextToken parameter.
 func (c *Client) ListDiscoveredResources(ctx context.Context, params *ListDiscoveredResourcesInput, optFns ...func(*Options)) (*ListDiscoveredResourcesOutput, error) {
 	if params == nil {
 		params = &ListDiscoveredResourcesInput{}

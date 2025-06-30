@@ -44,10 +44,15 @@ type CopyImageSetInput struct {
 	// This member is required.
 	SourceImageSetId *string
 
-	// Setting this flag will force the CopyImageSet operation, even if Patient,
-	// Study, or Series level metadata are mismatched across the sourceImageSet and
-	// destinationImageSet .
+	// Providing this parameter will force completion of the CopyImageSet operation,
+	// even if there are inconsistent Patient, Study, and/or Series level metadata
+	// elements between the sourceImageSet and destinationImageSet .
 	Force *bool
+
+	// Providing this parameter will configure the CopyImageSet operation to promote
+	// the given image set to the primary DICOM hierarchy. If successful, a new primary
+	// image set ID will be returned as the destination image set.
+	PromoteToPrimary *bool
 
 	noSmithyDocumentSerde
 }

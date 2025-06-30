@@ -12,6 +12,9 @@ import (
 )
 
 // Returns the description of the specified StackSet operation.
+//
+// This API provides strongly consistent reads meaning it will always return the
+// most up-to-date data.
 func (c *Client) DescribeStackSetOperation(ctx context.Context, params *DescribeStackSetOperationInput, optFns ...func(*Options)) (*DescribeStackSetOperationOutput, error) {
 	if params == nil {
 		params = &DescribeStackSetOperationInput{}

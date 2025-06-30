@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_CancelPracticeRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelPracticeRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CancelPracticeRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CancelZonalShift(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CancelZonalShift(context.Background(), nil, func(o *Options) {
@@ -158,6 +170,18 @@ func TestCheckSnapshot_ListZonalShifts(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartPracticeRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartPracticeRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartPracticeRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartZonalShift(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartZonalShift(context.Background(), nil, func(o *Options) {
@@ -217,6 +241,18 @@ func TestCheckSnapshot_UpdateZonalShift(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_CancelPracticeRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelPracticeRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CancelPracticeRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CancelZonalShift(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CancelZonalShift(context.Background(), nil, func(o *Options) {
@@ -306,6 +342,18 @@ func TestUpdateSnapshot_ListZonalShifts(t *testing.T) {
 	_, err := svc.ListZonalShifts(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListZonalShifts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartPracticeRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartPracticeRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartPracticeRun")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

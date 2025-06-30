@@ -64,7 +64,9 @@ type ListMFADevicesInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful ListMFADevices request.
+// Contains the response to a successful [ListMFADevices] request.
+//
+// [ListMFADevices]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListMFADevices.html
 type ListMFADevicesOutput struct {
 
 	// A list of MFA devices.

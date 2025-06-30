@@ -44,6 +44,29 @@ func (ApplicationType) Values() []ApplicationType {
 	}
 }
 
+type AttributeType string
+
+// Enum values for AttributeType
+const (
+	AttributeTypeString     AttributeType = "STRING"
+	AttributeTypeNumber     AttributeType = "NUMBER"
+	AttributeTypeBoolean    AttributeType = "BOOLEAN"
+	AttributeTypeStringList AttributeType = "STRING_LIST"
+)
+
+// Values returns all known values for AttributeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AttributeType) Values() []AttributeType {
+	return []AttributeType{
+		"STRING",
+		"NUMBER",
+		"BOOLEAN",
+		"STRING_LIST",
+	}
+}
+
 type AuthorizationStatus string
 
 // Enum values for AuthorizationStatus
@@ -1005,6 +1028,26 @@ func (RegionAvailability) Values() []RegionAvailability {
 	}
 }
 
+type RerankingMetadataSelectionMode string
+
+// Enum values for RerankingMetadataSelectionMode
+const (
+	RerankingMetadataSelectionModeSelective RerankingMetadataSelectionMode = "SELECTIVE"
+	RerankingMetadataSelectionModeAll       RerankingMetadataSelectionMode = "ALL"
+)
+
+// Values returns all known values for RerankingMetadataSelectionMode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RerankingMetadataSelectionMode) Values() []RerankingMetadataSelectionMode {
+	return []RerankingMetadataSelectionMode{
+		"SELECTIVE",
+		"ALL",
+	}
+}
+
 type RetrieveAndGenerateType string
 
 // Enum values for RetrieveAndGenerateType
@@ -1146,5 +1189,23 @@ func (Status) Values() []Status {
 	return []Status{
 		"REGISTERED",
 		"INCOMPATIBLE_ENDPOINT",
+	}
+}
+
+type VectorSearchRerankingConfigurationType string
+
+// Enum values for VectorSearchRerankingConfigurationType
+const (
+	VectorSearchRerankingConfigurationTypeBedrockRerankingModel VectorSearchRerankingConfigurationType = "BEDROCK_RERANKING_MODEL"
+)
+
+// Values returns all known values for VectorSearchRerankingConfigurationType.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VectorSearchRerankingConfigurationType) Values() []VectorSearchRerankingConfigurationType {
+	return []VectorSearchRerankingConfigurationType{
+		"BEDROCK_RERANKING_MODEL",
 	}
 }

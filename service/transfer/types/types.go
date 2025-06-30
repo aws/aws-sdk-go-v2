@@ -329,7 +329,8 @@ type DescribedAccess struct {
 	//
 	// A HomeDirectory example is /bucket_name/home/mydirectory .
 	//
-	// The HomeDirectory parameter is only used if HomeDirectoryType is set to PATH .
+	// You can use the HomeDirectory parameter for HomeDirectoryType when it is set to
+	// either PATH or LOGICAL .
 	HomeDirectory *string
 
 	// Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and
@@ -883,6 +884,23 @@ type DescribedServer struct {
 	// function in the Function parameter for the IdentityProviderDetails data type.
 	IdentityProviderType IdentityProviderType
 
+	// Specifies whether to use IPv4 only, or to use dual-stack (IPv4 and IPv6) for
+	// your Transfer Family endpoint. The default value is IPV4 .
+	//
+	// The IpAddressType parameter has the following limitations:
+	//
+	//   - It cannot be changed while the server is online. You must stop the server
+	//   before modifying this parameter.
+	//
+	//   - It cannot be updated to DUALSTACK if the server has AddressAllocationIds
+	//   specified.
+	//
+	// When using DUALSTACK as the IpAddressType , you cannot set the
+	// AddressAllocationIds parameter for the [EndpointDetails] for the server.
+	//
+	// [EndpointDetails]: https://docs.aws.amazon.com/transfer/latest/APIReference/API_EndpointDetails.html
+	IpAddressType IpAddressType
+
 	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
 	// that allows a server to turn on Amazon CloudWatch logging for Amazon S3 or
 	// Amazon EFS events. When set, you can view user activity in your CloudWatch logs.
@@ -1032,7 +1050,8 @@ type DescribedUser struct {
 	//
 	// A HomeDirectory example is /bucket_name/home/mydirectory .
 	//
-	// The HomeDirectory parameter is only used if HomeDirectoryType is set to PATH .
+	// You can use the HomeDirectory parameter for HomeDirectoryType when it is set to
+	// either PATH or LOGICAL .
 	HomeDirectory *string
 
 	// Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and
@@ -1289,6 +1308,10 @@ type EndpointDetails struct {
 	//   specify three address allocation IDs.
 	//
 	//   - Call the UpdateServer API to set or change this parameter.
+	//
+	//   - You can't set address allocation IDs for servers that have an IpAddressType
+	//   set to DUALSTACK You can only set this property if IpAddressType is set to
+	//   IPV4 .
 	//
 	// [Address]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Address.html
 	// [Create an internet-facing endpoint for your server]: https://docs.aws.amazon.com/transfer/latest/userguide/create-server-in-vpc.html#create-internet-facing-endpoint
@@ -1547,7 +1570,8 @@ type ListedAccess struct {
 	//
 	// A HomeDirectory example is /bucket_name/home/mydirectory .
 	//
-	// The HomeDirectory parameter is only used if HomeDirectoryType is set to PATH .
+	// You can use the HomeDirectory parameter for HomeDirectoryType when it is set to
+	// either PATH or LOGICAL .
 	HomeDirectory *string
 
 	// The type of landing directory (folder) that you want your users' home directory
@@ -1827,7 +1851,8 @@ type ListedUser struct {
 	//
 	// A HomeDirectory example is /bucket_name/home/mydirectory .
 	//
-	// The HomeDirectory parameter is only used if HomeDirectoryType is set to PATH .
+	// You can use the HomeDirectory parameter for HomeDirectoryType when it is set to
+	// either PATH or LOGICAL .
 	HomeDirectory *string
 
 	// The type of landing directory (folder) that you want your users' home directory

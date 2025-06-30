@@ -20,6 +20,16 @@ type Address struct {
 	// This member is required.
 	City *string
 
+	// The name of the contact.
+	//
+	// This member is required.
+	ContactName *string
+
+	// The phone number of the contact.
+	//
+	// This member is required.
+	ContactPhoneNumber *string
+
 	// The ISO-3166 two-letter country code for the address.
 	//
 	// This member is required.
@@ -40,12 +50,6 @@ type Address struct {
 
 	// The third line of the address.
 	AddressLine3 *string
-
-	// The name of the contact.
-	ContactName *string
-
-	// The phone number of the contact.
-	ContactPhoneNumber *string
 
 	// The district or county for the address.
 	DistrictOrCounty *string

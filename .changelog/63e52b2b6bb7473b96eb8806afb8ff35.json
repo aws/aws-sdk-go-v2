@@ -1,0 +1,8 @@
+{
+    "id": "63e52b2b-6bb7-473b-96eb-8806afb8ff35",
+    "type": "feature",
+    "description": "Increase minimum length of queryId parameter to 1 character.",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

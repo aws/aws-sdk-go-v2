@@ -73,9 +73,9 @@ type InvokeModelWithResponseStreamInput struct {
 	//   - If you use a provisioned model, specify the ARN of the Provisioned
 	//   Throughput. For more information, see [Run inference using a Provisioned Throughput]in the Amazon Bedrock User Guide.
 	//
-	//   - If you use a custom model, first purchase Provisioned Throughput for it.
-	//   Then specify the ARN of the resulting provisioned model. For more information,
-	//   see [Use a custom model in Amazon Bedrock]in the Amazon Bedrock User Guide.
+	//   - If you use a custom model, specify the ARN of the custom model deployment
+	//   (for on-demand inference) or the ARN of your provisioned model (for Provisioned
+	//   Throughput). For more information, see [Use a custom model in Amazon Bedrock]in the Amazon Bedrock User Guide.
 	//
 	//   - If you use an [imported model], specify the ARN of the imported model. You can get the
 	//   model ARN from a successful call to [CreateModelImportJob]or from the Imported models page in the

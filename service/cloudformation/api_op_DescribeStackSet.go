@@ -12,6 +12,9 @@ import (
 )
 
 // Returns the description of the specified StackSet.
+//
+// This API provides strongly consistent reads meaning it will always return the
+// most up-to-date data.
 func (c *Client) DescribeStackSet(ctx context.Context, params *DescribeStackSetInput, optFns ...func(*Options)) (*DescribeStackSetOutput, error) {
 	if params == nil {
 		params = &DescribeStackSetInput{}

@@ -55,6 +55,9 @@ func ExampleSearchByAttributeValue_outputUsage() {
 	case *types.SearchByAttributeValueMemberDICOMStudyInstanceUID:
 		_ = v.Value // Value is string
 
+	case *types.SearchByAttributeValueMemberIsPrimary:
+		_ = v.Value // Value is bool
+
 	case *types.SearchByAttributeValueMemberUpdatedAt:
 		_ = v.Value // Value is time.Time
 
@@ -73,4 +76,5 @@ var _ *string
 var _ *string
 var _ *string
 var _ *string
+var _ *bool
 var _ *time.Time

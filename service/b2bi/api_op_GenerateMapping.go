@@ -19,6 +19,15 @@ import (
 // Interchange you must enable models in Amazon Bedrock. For details, see [AI-assisted template mapping prerequisites]in the
 // Amazon Web Services B2B Data Interchange User guide.
 //
+// To generate a mapping, perform the following steps:
+//
+//   - Start with an X12 EDI document to use as the input.
+//
+//   - Call TestMapping using your EDI document.
+//
+//   - Use the output from the TestMapping operation as either input or output for
+//     your GenerateMapping call, along with your sample file.
+//
 // [AI-assisted template mapping prerequisites]: https://docs.aws.amazon.com/b2bi/latest/userguide/ai-assisted-mapping.html#ai-assist-prereq
 func (c *Client) GenerateMapping(ctx context.Context, params *GenerateMappingInput, optFns ...func(*Options)) (*GenerateMappingOutput, error) {
 	if params == nil {
@@ -37,8 +46,8 @@ func (c *Client) GenerateMapping(ctx context.Context, params *GenerateMappingInp
 
 type GenerateMappingInput struct {
 
-	// Provide the contents of a sample X12 EDI file (for inbound EDI) or JSON/XML
-	// file (for outbound EDI) to use as a starting point for the mapping.
+	// Provide the contents of a sample X12 EDI file, either in JSON or XML format, to
+	// use as a starting point for the mapping.
 	//
 	// This member is required.
 	InputFileContent *string
@@ -48,8 +57,8 @@ type GenerateMappingInput struct {
 	// This member is required.
 	MappingType types.MappingType
 
-	// Provide the contents of a sample X12 EDI file (for outbound EDI) or JSON/XML
-	// file (for inbound EDI) to use as a target for the mapping.
+	// Provide the contents of a sample X12 EDI file, either in JSON or XML format, to
+	// use as a target for the mapping.
 	//
 	// This member is required.
 	OutputFileContent *string

@@ -49,7 +49,9 @@ type GetSAMLProviderInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful GetSAMLProvider request.
+// Contains the response to a successful [GetSAMLProvider] request.
+//
+// [GetSAMLProvider]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetSAMLProvider.html
 type GetSAMLProviderOutput struct {
 
 	// Specifies the encryption setting for the SAML provider.

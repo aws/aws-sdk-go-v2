@@ -1,0 +1,8 @@
+{
+    "id": "76f5041c-e7de-46c0-9665-7e08e0d1883a",
+    "type": "feature",
+    "description": "Fixed the validation pattern for an instance profile Amazon Resource Name (ARN) in AWS PCS.",
+    "modules": [
+        "service/pcs"
+    ]
+}

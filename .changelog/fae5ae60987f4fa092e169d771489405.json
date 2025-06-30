@@ -1,0 +1,8 @@
+{
+    "id": "fae5ae60-987f-4fa0-92e1-69d771489405",
+    "type": "feature",
+    "description": "Added support for on-demand practice runs and balanced capacity checks in ARC autoshift practice.",
+    "modules": [
+        "service/arczonalshift"
+    ]
+}

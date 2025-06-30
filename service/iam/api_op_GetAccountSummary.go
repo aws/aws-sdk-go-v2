@@ -35,7 +35,9 @@ type GetAccountSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful GetAccountSummary request.
+// Contains the response to a successful [GetAccountSummary] request.
+//
+// [GetAccountSummary]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountSummary.html
 type GetAccountSummaryOutput struct {
 
 	// A set of key–value pairs containing information about IAM entity usage and IAM

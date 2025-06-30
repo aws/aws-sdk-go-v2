@@ -26,12 +26,77 @@ func ExampleAsyncInvokeOutputDataConfig_outputUsage() {
 
 var _ *types.AsyncInvokeS3OutputDataConfig
 
+func ExampleCitationGeneratedContent_outputUsage() {
+	var union types.CitationGeneratedContent
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CitationGeneratedContentMemberText:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
+func ExampleCitationLocation_outputUsage() {
+	var union types.CitationLocation
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CitationLocationMemberDocumentChar:
+		_ = v.Value // Value is types.DocumentCharLocation
+
+	case *types.CitationLocationMemberDocumentChunk:
+		_ = v.Value // Value is types.DocumentChunkLocation
+
+	case *types.CitationLocationMemberDocumentPage:
+		_ = v.Value // Value is types.DocumentPageLocation
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.DocumentPageLocation
+var _ *types.DocumentCharLocation
+var _ *types.DocumentChunkLocation
+
+func ExampleCitationSourceContent_outputUsage() {
+	var union types.CitationSourceContent
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CitationSourceContentMemberText:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
 func ExampleContentBlock_outputUsage() {
 	var union types.ContentBlock
 	// type switches can be used to check the union value
 	switch v := union.(type) {
 	case *types.ContentBlockMemberCachePoint:
 		_ = v.Value // Value is types.CachePointBlock
+
+	case *types.ContentBlockMemberCitationsContent:
+		_ = v.Value // Value is types.CitationsContentBlock
 
 	case *types.ContentBlockMemberDocument:
 		_ = v.Value // Value is types.DocumentBlock
@@ -66,6 +131,7 @@ func ExampleContentBlock_outputUsage() {
 	}
 }
 
+var _ *types.CitationsContentBlock
 var _ *types.DocumentBlock
 var _ *string
 var _ types.ReasoningContentBlock
@@ -80,6 +146,9 @@ func ExampleContentBlockDelta_outputUsage() {
 	var union types.ContentBlockDelta
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ContentBlockDeltaMemberCitation:
+		_ = v.Value // Value is types.CitationsDelta
+
 	case *types.ContentBlockDeltaMemberReasoningContent:
 		_ = v.Value // Value is types.ReasoningContentBlockDelta
 
@@ -101,6 +170,7 @@ func ExampleContentBlockDelta_outputUsage() {
 var _ types.ReasoningContentBlockDelta
 var _ *types.ToolUseBlockDelta
 var _ *string
+var _ *types.CitationsDelta
 
 func ExampleContentBlockStart_outputUsage() {
 	var union types.ContentBlockStart
@@ -176,15 +246,12 @@ var _ *types.ContentBlockDeltaEvent
 var _ *types.ContentBlockStartEvent
 var _ *types.ConverseStreamMetadataEvent
 
-func ExampleDocumentSource_outputUsage() {
-	var union types.DocumentSource
+func ExampleDocumentContentBlock_outputUsage() {
+	var union types.DocumentContentBlock
 	// type switches can be used to check the union value
 	switch v := union.(type) {
-	case *types.DocumentSourceMemberBytes:
-		_ = v.Value // Value is []byte
-
-	case *types.DocumentSourceMemberS3Location:
-		_ = v.Value // Value is types.S3Location
+	case *types.DocumentContentBlockMemberText:
+		_ = v.Value // Value is string
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -195,7 +262,36 @@ func ExampleDocumentSource_outputUsage() {
 	}
 }
 
+var _ *string
+
+func ExampleDocumentSource_outputUsage() {
+	var union types.DocumentSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.DocumentSourceMemberBytes:
+		_ = v.Value // Value is []byte
+
+	case *types.DocumentSourceMemberContent:
+		_ = v.Value // Value is []types.DocumentContentBlock
+
+	case *types.DocumentSourceMemberS3Location:
+		_ = v.Value // Value is types.S3Location
+
+	case *types.DocumentSourceMemberText:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
 var _ *types.S3Location
+var _ []types.DocumentContentBlock
 var _ []byte
 
 func ExampleGuardrailContentBlock_outputUsage() {

@@ -20401,6 +20401,13 @@ func awsAwsjson11_serializeDocumentIntegrationConfig(v *types.IntegrationConfig,
 		ok.String(*v.RefreshInterval)
 	}
 
+	if v.SourceProperties != nil {
+		ok := object.Key("SourceProperties")
+		if err := awsAwsjson11_serializeDocumentIntegrationSourcePropertiesMap(v.SourceProperties, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -20478,6 +20485,17 @@ func awsAwsjson11_serializeDocumentIntegrationPartitionSpecList(v []types.Integr
 		if err := awsAwsjson11_serializeDocumentIntegrationPartition(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentIntegrationSourcePropertiesMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
 	}
 	return nil
 }

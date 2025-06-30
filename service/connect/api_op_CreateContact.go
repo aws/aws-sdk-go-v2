@@ -11,11 +11,24 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Only the EMAIL and VOICE channels are supported. The supported initiation
-// methods for EMAIL are: OUTBOUND, AGENT_REPLY, and FLOW. For VOICE the supported
-// initiation methods are TRANSFER and the subtype connect:ExternalAudio.
+// Only the VOICE, EMAIL, and TASK channels are supported.
 //
-// Creates a new EMAIL or VOICE contact.
+//   - For VOICE: The supported initiation method is TRANSFER . The contacts
+//     created with this initiation method have a subtype connect:ExternalAudio .
+//
+//   - For EMAIL: The supported initiation methods are OUTBOUND , AGENT_REPLY , and
+//     FLOW .
+//
+//   - For TASK: The supported initiation method is API . Contacts created with
+//     this API have a sub-type of connect:ExternalTask .
+//
+// Creates a new VOICE, EMAIL, or TASK contact.
+//
+// After a contact is created, you can move it to the desired state by using the
+// InitiateAs parameter. While you can use API to create task contacts that are in
+// the COMPLETED state, you must contact Amazon Web Services Support before using
+// it for bulk import use cases. Bulk import causes your requests to be throttled
+// or fail if your CreateContact limits aren't high enough.
 func (c *Client) CreateContact(ctx context.Context, params *CreateContactInput, optFns ...func(*Options)) (*CreateContactOutput, error) {
 	if params == nil {
 		params = &CreateContactInput{}
@@ -33,25 +46,27 @@ func (c *Client) CreateContact(ctx context.Context, params *CreateContactInput, 
 
 type CreateContactInput struct {
 
-	// The channel for the contact
+	// The channel for the contact.
 	//
-	// CreateContact only supports the EMAIL and VOICE channels. The following
-	// information that states other channels are supported is incorrect. We are
-	// working to update this topic.
+	// The CHAT channel is not supported. The following information is incorrect.
+	// We're working to correct it.
 	//
 	// This member is required.
 	Channel types.Channel
 
 	// Indicates how the contact was initiated.
 	//
-	// CreateContact only supports the following initiation methods:
+	// CreateContact only supports the following initiation methods. Valid values by
+	// channel are:
 	//
-	//   - For EMAIL: OUTBOUND, AGENT_REPLY, and FLOW.
+	//   - For VOICE: TRANSFER and the subtype connect:ExternalAudio
 	//
-	//   - For VOICE: TRANSFER and the subtype connect:ExternalAudio.
+	//   - For EMAIL: OUTBOUND | AGENT_REPLY | FLOW
 	//
-	// The following information that states other initiation methods are supported is
-	// incorrect. We are working to update this topic.
+	//   - For TASK: API
+	//
+	// The other channels listed below are incorrect. We're working to correct this
+	// information.
 	//
 	// This member is required.
 	InitiationMethod types.ContactInitiationMethod
@@ -85,7 +100,8 @@ type CreateContactInput struct {
 	// Number of minutes the contact will be active for before expiring
 	ExpiryDurationInMinutes *int32
 
-	// Initial state of the contact when it's created
+	// Initial state of the contact when it's created. Only TASK channel contacts can
+	// be initiated with COMPLETED state.
 	InitiateAs types.InitiateAs
 
 	// The name of a the contact.
@@ -100,7 +116,7 @@ type CreateContactInput struct {
 
 	// A formatted URL that is shown to an agent in the Contact Control Panel (CCP).
 	// Tasks can have the following reference types at the time of creation: URL |
-	// NUMBER | STRING | DATE | EMAIL | ATTACHMENT.
+	// NUMBER | STRING | DATE | EMAIL | ATTACHMENT .
 	References map[string]types.Reference
 
 	// The identifier of the contact in this instance of Amazon Connect.

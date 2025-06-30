@@ -132,6 +132,8 @@ func serviceAuthOptions(params *AuthResolverParameters) []*smithyauth.Option {
 				return props
 			}(),
 		},
+
+		{SchemeID: smithyauth.SchemeIDHTTPBearer},
 	}
 }
 

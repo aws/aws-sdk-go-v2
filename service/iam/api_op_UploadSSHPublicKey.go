@@ -71,7 +71,9 @@ type UploadSSHPublicKeyInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful UploadSSHPublicKey request.
+// Contains the response to a successful [UploadSSHPublicKey] request.
+//
+// [UploadSSHPublicKey]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_UploadSSHPublicKey.html
 type UploadSSHPublicKeyOutput struct {
 
 	// Contains information about the SSH public key.

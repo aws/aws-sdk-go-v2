@@ -44,11 +44,12 @@ import (
 // communication using the thumbprints set in the IdP's configuration.
 //
 // The trust for the OIDC provider is derived from the IAM provider that this
-// operation creates. Therefore, it is best to limit access to the CreateOpenIDConnectProvideroperation to
+// operation creates. Therefore, it is best to limit access to the [CreateOpenIDConnectProvider]operation to
 // highly privileged users.
 //
 // [OpenID Connect (OIDC)]: http://openid.net/connect/
 // [Creating a role for web identity or OpenID connect federation]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html
+// [CreateOpenIDConnectProvider]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateOpenIDConnectProvider.html
 func (c *Client) CreateOpenIDConnectProvider(ctx context.Context, params *CreateOpenIDConnectProviderInput, optFns ...func(*Options)) (*CreateOpenIDConnectProviderOutput, error) {
 	if params == nil {
 		params = &CreateOpenIDConnectProviderInput{}
@@ -132,11 +133,15 @@ type CreateOpenIDConnectProviderInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful CreateOpenIDConnectProvider request.
+// Contains the response to a successful [CreateOpenIDConnectProvider] request.
+//
+// [CreateOpenIDConnectProvider]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateOpenIDConnectProvider.html
 type CreateOpenIDConnectProviderOutput struct {
 
 	// The Amazon Resource Name (ARN) of the new IAM OpenID Connect provider that is
-	// created. For more information, see OpenIDConnectProviderListEntry.
+	// created. For more information, see [OpenIDConnectProviderListEntry].
+	//
+	// [OpenIDConnectProviderListEntry]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_OpenIDConnectProviderListEntry.html
 	OpenIDConnectProviderArn *string
 
 	// A list of tags that are attached to the new IAM OIDC provider. The returned

@@ -12,13 +12,19 @@ import (
 	"time"
 )
 
-// Start a query to return the with the Network Flow Monitor query interface.
-// Specify the query that you want to start by providing a query ID and a monitor
-// name. This query returns the data for top contributors for workload insights.
+// Create a query with the Network Flow Monitor query interface that you can run
+// to return data for workload insights top contributors. Specify the scope that
+// you want to create a query for.
+//
+// The call returns a query ID that you can use with [GetQueryResultsWorkloadInsightsTopContributorsData] to run the query and return
+// the data for the top contributors for the workload insights for a scope.
 //
 // Top contributors in Network Flow Monitor are network flows with the highest
-// values for a specific metric type, related to a scope (for workload insights) or
-// a monitor.
+// values for a specific metric type. Top contributors can be across all workload
+// insights, for a given scope, or for a specific monitor. Use the applicable call
+// for the top contributors that you want to be returned.
+//
+// [GetQueryResultsWorkloadInsightsTopContributorsData]: https://docs.aws.amazon.com/networkflowmonitor/2.0/APIReference/API_GetQueryResultsWorkloadInsightsTopContributorsData.html
 func (c *Client) StartQueryWorkloadInsightsTopContributorsData(ctx context.Context, params *StartQueryWorkloadInsightsTopContributorsDataInput, optFns ...func(*Options)) (*StartQueryWorkloadInsightsTopContributorsDataOutput, error) {
 	if params == nil {
 		params = &StartQueryWorkloadInsightsTopContributorsDataInput{}

@@ -22663,6 +22663,13 @@ func awsRestjson1_serializeDocumentAthenaParameters(v *types.AthenaParameters, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.IdentityCenterConfiguration != nil {
+		ok := object.Key("IdentityCenterConfiguration")
+		if err := awsRestjson1_serializeDocumentIdentityCenterConfiguration(v.IdentityCenterConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RoleArn != nil {
 		ok := object.Key("RoleArn")
 		ok.String(*v.RoleArn)
@@ -24160,9 +24167,39 @@ func awsRestjson1_serializeDocumentCapabilities(v *types.Capabilities, value smi
 		ok.String(string(v.ExportToCsv))
 	}
 
+	if len(v.ExportToCsvInScheduledReports) > 0 {
+		ok := object.Key("ExportToCsvInScheduledReports")
+		ok.String(string(v.ExportToCsvInScheduledReports))
+	}
+
 	if len(v.ExportToExcel) > 0 {
 		ok := object.Key("ExportToExcel")
 		ok.String(string(v.ExportToExcel))
+	}
+
+	if len(v.ExportToExcelInScheduledReports) > 0 {
+		ok := object.Key("ExportToExcelInScheduledReports")
+		ok.String(string(v.ExportToExcelInScheduledReports))
+	}
+
+	if len(v.ExportToPdf) > 0 {
+		ok := object.Key("ExportToPdf")
+		ok.String(string(v.ExportToPdf))
+	}
+
+	if len(v.ExportToPdfInScheduledReports) > 0 {
+		ok := object.Key("ExportToPdfInScheduledReports")
+		ok.String(string(v.ExportToPdfInScheduledReports))
+	}
+
+	if len(v.IncludeContentInScheduledReportsEmail) > 0 {
+		ok := object.Key("IncludeContentInScheduledReportsEmail")
+		ok.String(string(v.IncludeContentInScheduledReportsEmail))
+	}
+
+	if len(v.PrintReports) > 0 {
+		ok := object.Key("PrintReports")
+		ok.String(string(v.PrintReports))
 	}
 
 	if len(v.RenameSharedFolders) > 0 {
@@ -40822,6 +40859,13 @@ func awsRestjson1_serializeDocumentSheetTextBox(v *types.SheetTextBox, value smi
 		ok.String(*v.Content)
 	}
 
+	if v.Interactions != nil {
+		ok := object.Key("Interactions")
+		if err := awsRestjson1_serializeDocumentTextBoxInteractionOptions(v.Interactions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SheetTextBoxId != nil {
 		ok := object.Key("SheetTextBoxId")
 		ok.String(*v.SheetTextBoxId)
@@ -42800,6 +42844,32 @@ func awsRestjson1_serializeDocumentTextAreaControlDisplayOptions(v *types.TextAr
 		if err := awsRestjson1_serializeDocumentLabelOptions(v.TitleOptions, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTextBoxInteractionOptions(v *types.TextBoxInteractionOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TextBoxMenuOption != nil {
+		ok := object.Key("TextBoxMenuOption")
+		if err := awsRestjson1_serializeDocumentTextBoxMenuOption(v.TextBoxMenuOption, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTextBoxMenuOption(v *types.TextBoxMenuOption, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AvailabilityStatus) > 0 {
+		ok := object.Key("AvailabilityStatus")
+		ok.String(string(v.AvailabilityStatus))
 	}
 
 	return nil

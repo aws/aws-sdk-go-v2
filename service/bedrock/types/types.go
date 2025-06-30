@@ -883,6 +883,19 @@ type ExternalSourcesRetrieveAndGenerateConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies a field to be used during the reranking process in a Knowledge Base
+// vector search. This structure identifies metadata fields that should be
+// considered when reordering search results to improve relevance.
+type FieldForReranking struct {
+
+	// The name of the metadata field to be used during the reranking process.
+	//
+	// This member is required.
+	FieldName *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the name of the metadata attribute/field to apply filters. You must
 // match the name of the attribute/field in your data source/document metadata.
 type FilterAttribute struct {
@@ -2320,6 +2333,28 @@ type HumanWorkflowConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for implicit filtering in Knowledge Base vector searches.
+// Implicit filtering allows you to automatically filter search results based on
+// metadata attributes without requiring explicit filter expressions in each query.
+type ImplicitFilterConfiguration struct {
+
+	// A list of metadata attribute schemas that define the structure and properties
+	// of metadata fields used for implicit filtering. Each attribute defines a key,
+	// type, and optional description.
+	//
+	// This member is required.
+	MetadataAttributes []MetadataAttributeSchema
+
+	// The Amazon Resource Name (ARN) of the foundation model used for implicit
+	// filtering. This model processes the query to extract relevant filtering
+	// criteria.
+	//
+	// This member is required.
+	ModelArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about the imported model.
 type ImportedModelSummary struct {
 
@@ -2556,6 +2591,11 @@ type KnowledgeBaseVectorSearchConfiguration struct {
 	// sources before returning results.
 	Filter RetrievalFilter
 
+	// Configuration for implicit filtering in Knowledge Base vector searches. This
+	// allows the system to automatically apply filters based on the query context
+	// without requiring explicit filter expressions.
+	ImplicitFilterConfiguration *ImplicitFilterConfiguration
+
 	// The number of text chunks to retrieve; the number of results to return.
 	NumberOfResults *int32
 
@@ -2566,6 +2606,11 @@ type KnowledgeBaseVectorSearchConfiguration struct {
 	// embeddings. For other vector store configurations, only SEMANTIC search is
 	// available.
 	OverrideSearchType SearchType
+
+	// Configuration for reranking search results in Knowledge Base vector searches.
+	// Reranking improves search relevance by reordering initial vector search results
+	// using more sophisticated relevance models.
+	RerankingConfiguration *VectorSearchRerankingConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -2681,6 +2726,52 @@ type MarketplaceModelEndpointSummary struct {
 
 	// Additional information about the overall status, if available.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// Defines the schema for a metadata attribute used in Knowledge Base vector
+// searches. Metadata attributes provide additional context for documents and can
+// be used for filtering and reranking search results.
+type MetadataAttributeSchema struct {
+
+	// An optional description of the metadata attribute that provides additional
+	// context about its purpose and usage.
+	//
+	// This member is required.
+	Description *string
+
+	// The unique identifier for the metadata attribute. This key is used to reference
+	// the attribute in filter expressions and reranking configurations.
+	//
+	// This member is required.
+	Key *string
+
+	// The data type of the metadata attribute. The type determines how the attribute
+	// can be used in filter expressions and reranking.
+	//
+	// This member is required.
+	Type AttributeType
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for how metadata should be used during the reranking process in
+// Knowledge Base vector searches. This determines which metadata fields are
+// included or excluded when reordering search results.
+type MetadataConfigurationForReranking struct {
+
+	// The mode for selecting which metadata fields to include in the reranking
+	// process. Valid values are ALL (use all available metadata fields) or SELECTIVE
+	// (use only specified fields).
+	//
+	// This member is required.
+	SelectionMode RerankingMetadataSelectionMode
+
+	// Configuration for selective mode, which allows you to explicitly include or
+	// exclude specific metadata fields during reranking. This is only used when
+	// selectionMode is set to SELECTIVE.
+	SelectiveModeConfiguration RerankingMetadataSelectiveModeConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -3415,6 +3506,42 @@ type RequestMetadataFiltersMemberOrAll struct {
 
 func (*RequestMetadataFiltersMemberOrAll) isRequestMetadataFilters() {}
 
+// Configuration for selectively including or excluding metadata fields during the
+// reranking process. This allows you to control which metadata attributes are
+// considered when reordering search results.
+//
+// The following types satisfy this interface:
+//
+//	RerankingMetadataSelectiveModeConfigurationMemberFieldsToExclude
+//	RerankingMetadataSelectiveModeConfigurationMemberFieldsToInclude
+type RerankingMetadataSelectiveModeConfiguration interface {
+	isRerankingMetadataSelectiveModeConfiguration()
+}
+
+// A list of metadata field names to explicitly exclude from the reranking
+// process. All metadata fields except these will be considered when reordering
+// search results. This parameter cannot be used together with fieldsToInclude.
+type RerankingMetadataSelectiveModeConfigurationMemberFieldsToExclude struct {
+	Value []FieldForReranking
+
+	noSmithyDocumentSerde
+}
+
+func (*RerankingMetadataSelectiveModeConfigurationMemberFieldsToExclude) isRerankingMetadataSelectiveModeConfiguration() {
+}
+
+// A list of metadata field names to explicitly include in the reranking process.
+// Only these fields will be considered when reordering search results. This
+// parameter cannot be used together with fieldsToExclude.
+type RerankingMetadataSelectiveModeConfigurationMemberFieldsToInclude struct {
+	Value []FieldForReranking
+
+	noSmithyDocumentSerde
+}
+
+func (*RerankingMetadataSelectiveModeConfigurationMemberFieldsToInclude) isRerankingMetadataSelectiveModeConfiguration() {
+}
+
 // Specifies the filters to use on the metadata attributes/fields in the knowledge
 // base data sources before returning results.
 //
@@ -3954,6 +4081,69 @@ type ValidityTerm struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for using Amazon Bedrock foundation models to rerank Knowledge
+// Base vector search results. This enables more sophisticated relevance ranking
+// using large language models.
+type VectorSearchBedrockRerankingConfiguration struct {
+
+	// Configuration for the Amazon Bedrock foundation model used for reranking. This
+	// includes the model ARN and any additional request fields required by the model.
+	//
+	// This member is required.
+	ModelConfiguration *VectorSearchBedrockRerankingModelConfiguration
+
+	// Configuration for how document metadata should be used during the reranking
+	// process. This determines which metadata fields are included when reordering
+	// search results.
+	MetadataConfiguration *MetadataConfigurationForReranking
+
+	// The maximum number of results to rerank. This limits how many of the initial
+	// vector search results will be processed by the reranking model. A smaller number
+	// improves performance but may exclude potentially relevant results.
+	NumberOfRerankedResults *int32
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for the Amazon Bedrock foundation model used for reranking vector
+// search results. This specifies which model to use and any additional parameters
+// required by the model.
+type VectorSearchBedrockRerankingModelConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the foundation model to use for reranking.
+	// This model processes the query and search results to determine a more relevant
+	// ordering.
+	//
+	// This member is required.
+	ModelArn *string
+
+	// A list of additional fields to include in the model request during reranking.
+	// These fields provide extra context or configuration options specific to the
+	// selected foundation model.
+	AdditionalModelRequestFields map[string]document.Interface
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for reranking vector search results to improve relevance.
+// Reranking applies additional relevance models to reorder the initial vector
+// search results based on more sophisticated criteria.
+type VectorSearchRerankingConfiguration struct {
+
+	// The type of reranking to apply to vector search results. Currently, the only
+	// supported value is BEDROCK, which uses Amazon Bedrock foundation models for
+	// reranking.
+	//
+	// This member is required.
+	Type VectorSearchRerankingConfigurationType
+
+	// Configuration for using Amazon Bedrock foundation models to rerank search
+	// results. This is required when the reranking type is set to BEDROCK.
+	BedrockRerankingConfiguration *VectorSearchBedrockRerankingConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // The configuration of a virtual private cloud (VPC). For more information, see [Protect your data using Amazon Virtual Private Cloud and Amazon Web Services PrivateLink].
 //
 // [Protect your data using Amazon Virtual Private Cloud and Amazon Web Services PrivateLink]: https://docs.aws.amazon.com/bedrock/latest/userguide/usingVPC.html
@@ -3983,22 +4173,23 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isAutomatedEvaluationCustomMetricSource() {}
-func (*UnknownUnionMember) isCustomizationConfig()                   {}
-func (*UnknownUnionMember) isEndpointConfig()                        {}
-func (*UnknownUnionMember) isEvaluationConfig()                      {}
-func (*UnknownUnionMember) isEvaluationDatasetLocation()             {}
-func (*UnknownUnionMember) isEvaluationInferenceConfig()             {}
-func (*UnknownUnionMember) isEvaluationModelConfig()                 {}
-func (*UnknownUnionMember) isEvaluationPrecomputedRagSourceConfig()  {}
-func (*UnknownUnionMember) isEvaluatorModelConfig()                  {}
-func (*UnknownUnionMember) isInferenceProfileModelSource()           {}
-func (*UnknownUnionMember) isInvocationLogSource()                   {}
-func (*UnknownUnionMember) isKnowledgeBaseConfig()                   {}
-func (*UnknownUnionMember) isModelDataSource()                       {}
-func (*UnknownUnionMember) isModelInvocationJobInputDataConfig()     {}
-func (*UnknownUnionMember) isModelInvocationJobOutputDataConfig()    {}
-func (*UnknownUnionMember) isRAGConfig()                             {}
-func (*UnknownUnionMember) isRatingScaleItemValue()                  {}
-func (*UnknownUnionMember) isRequestMetadataFilters()                {}
-func (*UnknownUnionMember) isRetrievalFilter()                       {}
+func (*UnknownUnionMember) isAutomatedEvaluationCustomMetricSource()       {}
+func (*UnknownUnionMember) isCustomizationConfig()                         {}
+func (*UnknownUnionMember) isEndpointConfig()                              {}
+func (*UnknownUnionMember) isEvaluationConfig()                            {}
+func (*UnknownUnionMember) isEvaluationDatasetLocation()                   {}
+func (*UnknownUnionMember) isEvaluationInferenceConfig()                   {}
+func (*UnknownUnionMember) isEvaluationModelConfig()                       {}
+func (*UnknownUnionMember) isEvaluationPrecomputedRagSourceConfig()        {}
+func (*UnknownUnionMember) isEvaluatorModelConfig()                        {}
+func (*UnknownUnionMember) isInferenceProfileModelSource()                 {}
+func (*UnknownUnionMember) isInvocationLogSource()                         {}
+func (*UnknownUnionMember) isKnowledgeBaseConfig()                         {}
+func (*UnknownUnionMember) isModelDataSource()                             {}
+func (*UnknownUnionMember) isModelInvocationJobInputDataConfig()           {}
+func (*UnknownUnionMember) isModelInvocationJobOutputDataConfig()          {}
+func (*UnknownUnionMember) isRAGConfig()                                   {}
+func (*UnknownUnionMember) isRatingScaleItemValue()                        {}
+func (*UnknownUnionMember) isRequestMetadataFilters()                      {}
+func (*UnknownUnionMember) isRerankingMetadataSelectiveModeConfiguration() {}
+func (*UnknownUnionMember) isRetrievalFilter()                             {}

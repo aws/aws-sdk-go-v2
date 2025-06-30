@@ -12,9 +12,6 @@ import (
 )
 
 // Describes auto scaling settings across replicas of the global table at once.
-//
-// For global tables, this operation only applies to global tables using Version
-// 2019.11.21 (Current version).
 func (c *Client) DescribeTableReplicaAutoScaling(ctx context.Context, params *DescribeTableReplicaAutoScalingInput, optFns ...func(*Options)) (*DescribeTableReplicaAutoScalingOutput, error) {
 	if params == nil {
 		params = &DescribeTableReplicaAutoScalingInput{}

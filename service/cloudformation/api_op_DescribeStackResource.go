@@ -55,7 +55,7 @@ type DescribeStackResourceInput struct {
 // The output for a DescribeStackResource action.
 type DescribeStackResourceOutput struct {
 
-	// A StackResourceDetail structure containing the description of the specified
+	// A StackResourceDetail structure that contains the description of the specified
 	// resource in the specified stack.
 	StackResourceDetail *types.StackResourceDetail
 

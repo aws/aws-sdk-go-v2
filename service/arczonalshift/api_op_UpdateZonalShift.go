@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Update an active zonal shift in Amazon Route 53 Application Recovery Controller
-// in your Amazon Web Services account. You can update a zonal shift to set a new
+// Update an active zonal shift in Amazon Application Recovery Controller in your
+// Amazon Web Services account. You can update a zonal shift to set a new
 // expiration, or edit or replace the comment for the zonal shift.
 func (c *Client) UpdateZonalShift(ctx context.Context, params *UpdateZonalShiftInput, optFns ...func(*Options)) (*UpdateZonalShiftOutput, error) {
 	if params == nil {
@@ -99,8 +99,21 @@ type UpdateZonalShiftOutput struct {
 	// The identifier for the resource that Amazon Web Services shifts traffic for.
 	// The identifier is the Amazon Resource Name (ARN) for the resource.
 	//
-	// At this time, supported resources are Network Load Balancers and Application
-	// Load Balancers with cross-zone load balancing turned off.
+	// Amazon Application Recovery Controller currently supports enabling the
+	// following resources for zonal shift and zonal autoshift:
+	//
+	// [Amazon EC2 Auto Scaling groups]
+	//
+	// [Amazon Elastic Kubernetes Service]
+	//
+	// [Application Load Balancer]
+	//
+	// [Network Load Balancer]
+	//
+	// [Amazon EC2 Auto Scaling groups]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.ec2-auto-scaling-groups.html
+	// [Amazon Elastic Kubernetes Service]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.eks.html
+	// [Application Load Balancer]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.app-load-balancers.html
+	// [Network Load Balancer]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.network-load-balancers.html
 	//
 	// This member is required.
 	ResourceIdentifier *string
@@ -114,7 +127,7 @@ type UpdateZonalShiftOutput struct {
 	//
 	// The Status for a zonal shift can have one of the following values:
 	//
-	//   - ACTIVE: The zonal shift has been started and active.
+	//   - ACTIVE: The zonal shift has been started and is active.
 	//
 	//   - EXPIRED: The zonal shift has expired (the expiry time was exceeded).
 	//

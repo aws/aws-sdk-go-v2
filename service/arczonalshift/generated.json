@@ -8,6 +8,7 @@
     "files": [
         "api_client.go",
         "api_client_test.go",
+        "api_op_CancelPracticeRun.go",
         "api_op_CancelZonalShift.go",
         "api_op_CreatePracticeRunConfiguration.go",
         "api_op_DeletePracticeRunConfiguration.go",
@@ -16,6 +17,7 @@
         "api_op_ListAutoshifts.go",
         "api_op_ListManagedResources.go",
         "api_op_ListZonalShifts.go",
+        "api_op_StartPracticeRun.go",
         "api_op_StartZonalShift.go",
         "api_op_UpdateAutoshiftObserverNotificationStatus.go",
         "api_op_UpdatePracticeRunConfiguration.go",

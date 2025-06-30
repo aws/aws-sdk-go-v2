@@ -16,10 +16,11 @@ import (
 // Amazon Web Services account root user password is not affected by this
 // operation.
 //
-// Use UpdateLoginProfile to use the CLI, the Amazon Web Services API, or the Users page in the IAM
+// Use [UpdateLoginProfile] to use the CLI, the Amazon Web Services API, or the Users page in the IAM
 // console to change the password for any IAM user. For more information about
 // modifying passwords, see [Managing passwords]in the IAM User Guide.
 //
+// [UpdateLoginProfile]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateLoginProfile.html
 // [Managing passwords]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html
 func (c *Client) ChangePassword(ctx context.Context, params *ChangePasswordInput, optFns ...func(*Options)) (*ChangePasswordOutput, error) {
 	if params == nil {

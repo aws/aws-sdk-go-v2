@@ -112,6 +112,10 @@ func awsRestjson1_serializeOpHttpBindingsCopyImageSetInput(v *CopyImageSetInput,
 		encoder.SetQuery("force").Boolean(*v.Force)
 	}
 
+	if v.PromoteToPrimary != nil {
+		encoder.SetQuery("promoteToPrimary").Boolean(*v.PromoteToPrimary)
+	}
+
 	if v.SourceImageSetId == nil || len(*v.SourceImageSetId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member sourceImageSetId must not be empty")}
 	}
@@ -1782,6 +1786,10 @@ func awsRestjson1_serializeDocumentSearchByAttributeValue(v types.SearchByAttrib
 	case *types.SearchByAttributeValueMemberDICOMStudyInstanceUID:
 		av := object.Key("DICOMStudyInstanceUID")
 		av.String(uv.Value)
+
+	case *types.SearchByAttributeValueMemberIsPrimary:
+		av := object.Key("isPrimary")
+		av.Boolean(uv.Value)
 
 	case *types.SearchByAttributeValueMemberUpdatedAt:
 		av := object.Key("updatedAt")

@@ -16,16 +16,6 @@ import (
 // an organization. For information on how many conformance packs you can have per
 // account, see [Service Limits]in the Config Developer Guide.
 //
-// When you use PutConformancePack to deploy conformance packs in your account,
-// the operation can create Config rules and remediation actions without requiring
-// config:PutConfigRule or config:PutRemediationConfigurations permissions in your
-// account IAM policies.
-//
-// This API uses the AWSServiceRoleForConfigConforms service-linked role in your
-// account to create conformance pack resources. This service-linked role includes
-// the permissions to create Config rules and remediation configurations, even if
-// your account IAM policies explicitly deny these actions.
-//
 // This API creates a service-linked role AWSServiceRoleForConfigConforms in your
 // account. The service-linked role is created only when the role does not exist in
 // your account.
@@ -69,7 +59,7 @@ type PutConformancePackInput struct {
 	// This field is optional.
 	DeliveryS3KeyPrefix *string
 
-	// A string that contains the full conformance pack template body. The structure
+	// A string containing the full conformance pack template body. The structure
 	// containing the template body has a minimum length of 1 byte and a maximum length
 	// of 51,200 bytes.
 	//

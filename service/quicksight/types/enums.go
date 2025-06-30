@@ -4337,6 +4337,7 @@ type ServiceType string
 const (
 	ServiceTypeRedshift  ServiceType = "REDSHIFT"
 	ServiceTypeQbusiness ServiceType = "QBUSINESS"
+	ServiceTypeAthena    ServiceType = "ATHENA"
 )
 
 // Values returns all known values for ServiceType. Note that this can be expanded
@@ -4347,6 +4348,7 @@ func (ServiceType) Values() []ServiceType {
 	return []ServiceType{
 		"REDSHIFT",
 		"QBUSINESS",
+		"ATHENA",
 	}
 }
 

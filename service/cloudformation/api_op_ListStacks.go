@@ -52,7 +52,7 @@ type ListStacksOutput struct {
 	// stacks. If no additional page exists, this value is null.
 	NextToken *string
 
-	// A list of StackSummary structures containing information about the specified
+	// A list of StackSummary structures that contains information about the specified
 	// stacks.
 	StackSummaries []types.StackSummary
 

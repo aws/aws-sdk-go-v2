@@ -71,7 +71,9 @@ type ListSSHPublicKeysInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful ListSSHPublicKeys request.
+// Contains the response to a successful [ListSSHPublicKeys] request.
+//
+// [ListSSHPublicKeys]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListSSHPublicKeys.html
 type ListSSHPublicKeysOutput struct {
 
 	// A flag that indicates whether there are more items to return. If your results

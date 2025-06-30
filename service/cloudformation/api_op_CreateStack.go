@@ -116,17 +116,17 @@ type CreateStackInput struct {
 	//
 	// Only one of the Capabilities and ResourceType parameters can be specified.
 	//
-	// [AWS::IAM::ManagedPolicy]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-managedpolicy.html
-	// [AWS::IAM::AccessKey]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-accesskey.html
+	// [AWS::IAM::ManagedPolicy]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-managedpolicy.html
+	// [AWS::IAM::AccessKey]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-accesskey.html
 	// [AWS::Include]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-include.html
-	// [AWS::IAM::User]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-user.html
-	// [AWS::IAM::InstanceProfile]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
+	// [AWS::IAM::User]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-user.html
+	// [AWS::IAM::InstanceProfile]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-instanceprofile.html
 	// [Acknowledging IAM resources in CloudFormation templates]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html#using-iam-capabilities
 	// [Perform custom processing on CloudFormation templates with template macros]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
-	// [AWS::IAM::Policy]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html
-	// [AWS::IAM::Group]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-group.html
-	// [AWS::IAM::UserToGroupAddition]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-usertogroupaddition.html
-	// [AWS::IAM::Role]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
+	// [AWS::IAM::Policy]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-policy.html
+	// [AWS::IAM::Group]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-group.html
+	// [AWS::IAM::UserToGroupAddition]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-usertogroupaddition.html
+	// [AWS::IAM::Role]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-role.html
 	// [AWS::Serverless]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html
 	Capabilities []types.Capability
 
@@ -227,17 +227,20 @@ type CreateStackInput struct {
 	// updating operations, and for the specified monitoring period afterwards.
 	RollbackConfiguration *types.RollbackConfiguration
 
-	// Structure containing the stack policy body. For more information, see [Prevent updates to stack resources] in the
-	// CloudFormation User Guide. You can specify either the StackPolicyBody or the
-	// StackPolicyURL parameter, but not both.
+	// Structure that contains the stack policy body. For more information, see [Prevent updates to stack resources] in
+	// the CloudFormation User Guide. You can specify either the StackPolicyBody or
+	// the StackPolicyURL parameter, but not both.
 	//
 	// [Prevent updates to stack resources]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html
 	StackPolicyBody *string
 
-	// Location of a file containing the stack policy. The URL must point to a policy
-	// (maximum size: 16 KB) located in an S3 bucket in the same Region as the stack.
-	// The location for an Amazon S3 bucket must start with https:// . You can specify
-	// either the StackPolicyBody or the StackPolicyURL parameter, but not both.
+	// Location of a file that contains the stack policy. The URL must point to a
+	// policy (maximum size: 16 KB) located in an S3 bucket in the same Region as the
+	// stack. The location for an Amazon S3 bucket must start with https:// . URLs from
+	// S3 static websites are not supported.
+	//
+	// You can specify either the StackPolicyBody or the StackPolicyURL parameter, but
+	// not both.
 	StackPolicyURL *string
 
 	// Key-value pairs to associate with this stack. CloudFormation also propagates
@@ -245,16 +248,16 @@ type CreateStackInput struct {
 	// can be specified.
 	Tags []types.Tag
 
-	// Structure containing the template body with a minimum length of 1 byte and a
+	// Structure that contains the template body with a minimum length of 1 byte and a
 	// maximum length of 51,200 bytes.
 	//
-	// Conditional: You must specify either the TemplateBody or the TemplateURL
-	// parameter, but not both.
+	// Conditional: You must specify either TemplateBody or TemplateURL , but not both.
 	TemplateBody *string
 
-	// The URL of a file containing the template body. The URL must point to a
+	// The URL of a file that contains the template body. The URL must point to a
 	// template (max size: 1 MB) that's located in an Amazon S3 bucket or a Systems
-	// Manager document. The location for an Amazon S3 bucket must start with https:// .
+	// Manager document. The location for an Amazon S3 bucket must start with https://
+	// . URLs from S3 static websites are not supported.
 	//
 	// Conditional: You must specify either the TemplateBody or the TemplateURL
 	// parameter, but not both.

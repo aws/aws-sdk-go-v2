@@ -227,6 +227,21 @@ func validateCachePointBlock(v *types.CachePointBlock) error {
 	}
 }
 
+func validateCitationsConfig(v *types.CitationsConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CitationsConfig"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateContentBlock(v types.ContentBlock) error {
 	if v == nil {
 		return nil
@@ -303,9 +318,6 @@ func validateDocumentBlock(v *types.DocumentBlock) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DocumentBlock"}
-	if len(v.Format) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Format"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
@@ -314,6 +326,11 @@ func validateDocumentBlock(v *types.DocumentBlock) error {
 	} else if v.Source != nil {
 		if err := validateDocumentSource(v.Source); err != nil {
 			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Citations != nil {
+		if err := validateCitationsConfig(v.Citations); err != nil {
+			invalidParams.AddNested("Citations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

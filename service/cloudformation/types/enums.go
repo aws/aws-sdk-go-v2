@@ -1377,6 +1377,7 @@ const (
 	StackResourceDriftStatusModified   StackResourceDriftStatus = "MODIFIED"
 	StackResourceDriftStatusDeleted    StackResourceDriftStatus = "DELETED"
 	StackResourceDriftStatusNotChecked StackResourceDriftStatus = "NOT_CHECKED"
+	StackResourceDriftStatusUnknown    StackResourceDriftStatus = "UNKNOWN"
 )
 
 // Values returns all known values for StackResourceDriftStatus. Note that this
@@ -1389,6 +1390,7 @@ func (StackResourceDriftStatus) Values() []StackResourceDriftStatus {
 		"MODIFIED",
 		"DELETED",
 		"NOT_CHECKED",
+		"UNKNOWN",
 	}
 }
 

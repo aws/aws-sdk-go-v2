@@ -61,7 +61,9 @@ type CreateGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful CreateGroup request.
+// Contains the response to a successful [CreateGroup] request.
+//
+// [CreateGroup]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateGroup.html
 type CreateGroupOutput struct {
 
 	// A structure containing details about the new group.

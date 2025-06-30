@@ -56,7 +56,7 @@ type DescribeDocumentPermissionInput struct {
 type DescribeDocumentPermissionOutput struct {
 
 	// The account IDs that have permission to use this document. The ID can be either
-	// an Amazon Web Services account or All.
+	// an Amazon Web Services account number or all .
 	AccountIds []string
 
 	// A list of Amazon Web Services accounts where the current document is shared and

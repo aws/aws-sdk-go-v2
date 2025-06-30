@@ -112,6 +112,27 @@ func (FromFormat) Values() []FromFormat {
 	}
 }
 
+type LineTerminator string
+
+// Enum values for LineTerminator
+const (
+	LineTerminatorCrlf LineTerminator = "CRLF"
+	LineTerminatorLf   LineTerminator = "LF"
+	LineTerminatorCr   LineTerminator = "CR"
+)
+
+// Values returns all known values for LineTerminator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LineTerminator) Values() []LineTerminator {
+	return []LineTerminator{
+		"CRLF",
+		"LF",
+		"CR",
+	}
+}
+
 type Logging string
 
 // Enum values for Logging
@@ -223,6 +244,107 @@ func (TransformerStatus) Values() []TransformerStatus {
 	return []TransformerStatus{
 		"active",
 		"inactive",
+	}
+}
+
+type WrapFormat string
+
+// Enum values for WrapFormat
+const (
+	WrapFormatSegment    WrapFormat = "SEGMENT"
+	WrapFormatOneLine    WrapFormat = "ONE_LINE"
+	WrapFormatLineLength WrapFormat = "LINE_LENGTH"
+)
+
+// Values returns all known values for WrapFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WrapFormat) Values() []WrapFormat {
+	return []WrapFormat{
+		"SEGMENT",
+		"ONE_LINE",
+		"LINE_LENGTH",
+	}
+}
+
+type X12FunctionalAcknowledgment string
+
+// Enum values for X12FunctionalAcknowledgment
+const (
+	X12FunctionalAcknowledgmentDoNotGenerate                             X12FunctionalAcknowledgment = "DO_NOT_GENERATE"
+	X12FunctionalAcknowledgmentGenerateAllSegments                       X12FunctionalAcknowledgment = "GENERATE_ALL_SEGMENTS"
+	X12FunctionalAcknowledgmentGenerateWithoutTransactionSetResponseLoop X12FunctionalAcknowledgment = "GENERATE_WITHOUT_TRANSACTION_SET_RESPONSE_LOOP"
+)
+
+// Values returns all known values for X12FunctionalAcknowledgment. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (X12FunctionalAcknowledgment) Values() []X12FunctionalAcknowledgment {
+	return []X12FunctionalAcknowledgment{
+		"DO_NOT_GENERATE",
+		"GENERATE_ALL_SEGMENTS",
+		"GENERATE_WITHOUT_TRANSACTION_SET_RESPONSE_LOOP",
+	}
+}
+
+type X12GS05TimeFormat string
+
+// Enum values for X12GS05TimeFormat
+const (
+	X12GS05TimeFormatHhmm     X12GS05TimeFormat = "HHMM"
+	X12GS05TimeFormatHhmmss   X12GS05TimeFormat = "HHMMSS"
+	X12GS05TimeFormatHhmmssdd X12GS05TimeFormat = "HHMMSSDD"
+)
+
+// Values returns all known values for X12GS05TimeFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (X12GS05TimeFormat) Values() []X12GS05TimeFormat {
+	return []X12GS05TimeFormat{
+		"HHMM",
+		"HHMMSS",
+		"HHMMSSDD",
+	}
+}
+
+type X12SplitBy string
+
+// Enum values for X12SplitBy
+const (
+	X12SplitByNone        X12SplitBy = "NONE"
+	X12SplitByTransaction X12SplitBy = "TRANSACTION"
+)
+
+// Values returns all known values for X12SplitBy. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (X12SplitBy) Values() []X12SplitBy {
+	return []X12SplitBy{
+		"NONE",
+		"TRANSACTION",
+	}
+}
+
+type X12TechnicalAcknowledgment string
+
+// Enum values for X12TechnicalAcknowledgment
+const (
+	X12TechnicalAcknowledgmentDoNotGenerate       X12TechnicalAcknowledgment = "DO_NOT_GENERATE"
+	X12TechnicalAcknowledgmentGenerateAllSegments X12TechnicalAcknowledgment = "GENERATE_ALL_SEGMENTS"
+)
+
+// Values returns all known values for X12TechnicalAcknowledgment. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (X12TechnicalAcknowledgment) Values() []X12TechnicalAcknowledgment {
+	return []X12TechnicalAcknowledgment{
+		"DO_NOT_GENERATE",
+		"GENERATE_ALL_SEGMENTS",
 	}
 }
 

@@ -124,7 +124,9 @@ type CreatePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful CreatePolicy request.
+// Contains the response to a successful [CreatePolicy] request.
+//
+// [CreatePolicy]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicy.html
 type CreatePolicyOutput struct {
 
 	// A structure containing details about the new policy.

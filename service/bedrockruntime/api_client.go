@@ -19,6 +19,7 @@ import (
 	internalmiddleware "github.com/aws/aws-sdk-go-v2/internal/middleware"
 	smithy "github.com/aws/smithy-go"
 	smithyauth "github.com/aws/smithy-go/auth"
+	"github.com/aws/smithy-go/auth/bearer"
 	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/metrics"
@@ -190,6 +191,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 	resolveIdempotencyTokenProvider(&options)
 
 	resolveEndpointResolverV2(&options)
+
+	resolveBearerAuthSigner(&options)
 
 	resolveTracerProvider(&options)
 
@@ -367,6 +370,7 @@ func resolveAuthSchemes(options *Options) {
 				Logger:     options.Logger,
 				LogSigning: options.ClientLogMode.IsSigning(),
 			}),
+			internalauth.NewHTTPAuthScheme("smithy.api#httpBearerAuth", &internalauthsmithy.BearerTokenSignerAdapter{Signer: options.BearerAuthSigner}),
 		}
 	}
 }
@@ -426,15 +430,16 @@ func setResolvedDefaultsMode(o *Options) {
 // NewFromConfig returns a new client from the provided config.
 func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 	opts := Options{
-		Region:             cfg.Region,
-		DefaultsMode:       cfg.DefaultsMode,
-		RuntimeEnvironment: cfg.RuntimeEnvironment,
-		HTTPClient:         cfg.HTTPClient,
-		Credentials:        cfg.Credentials,
-		APIOptions:         cfg.APIOptions,
-		Logger:             cfg.Logger,
-		ClientLogMode:      cfg.ClientLogMode,
-		AppID:              cfg.AppID,
+		Region:                  cfg.Region,
+		DefaultsMode:            cfg.DefaultsMode,
+		RuntimeEnvironment:      cfg.RuntimeEnvironment,
+		HTTPClient:              cfg.HTTPClient,
+		Credentials:             cfg.Credentials,
+		BearerAuthTokenProvider: cfg.BearerAuthTokenProvider,
+		APIOptions:              cfg.APIOptions,
+		Logger:                  cfg.Logger,
+		ClientLogMode:           cfg.ClientLogMode,
+		AppID:                   cfg.AppID,
 	}
 	resolveAWSRetryerProvider(cfg, &opts)
 	resolveAWSRetryMaxAttempts(cfg, &opts)
@@ -747,6 +752,16 @@ func resolveAccountID(identity smithyauth.Identity, mode aws.AccountIDEndpointMo
 	}
 
 	return nil
+}
+
+func resolveBearerAuthSigner(o *Options) {
+	if o.BearerAuthSigner != nil {
+		return
+	}
+	o.BearerAuthSigner = newDefaultBearerAuthSigner(*o)
+}
+func newDefaultBearerAuthSigner(o Options) bearer.Signer {
+	return bearer.NewSignHTTPSMessage()
 }
 
 func addTimeOffsetBuild(stack *middleware.Stack, c *Client) error {

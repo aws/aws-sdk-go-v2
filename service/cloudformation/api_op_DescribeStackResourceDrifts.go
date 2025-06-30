@@ -69,6 +69,8 @@ type DescribeStackResourceDriftsInput struct {
 	//   configuration.
 	//
 	//   - NOT_CHECKED : CloudFormation doesn't currently return this value.
+	//
+	//   - UNKNOWN : CloudFormation could not run drift detection for the resource.
 	StackResourceDriftStatusFilters []types.StackResourceDriftStatus
 
 	noSmithyDocumentSerde

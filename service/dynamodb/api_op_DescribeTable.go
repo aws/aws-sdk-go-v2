@@ -19,9 +19,6 @@ import (
 // Returns information about the table, including the current status of the table,
 // when it was created, the primary key schema, and any indexes on the table.
 //
-// For global tables, this operation only applies to global tables using Version
-// 2019.11.21 (Current version).
-//
 // If you issue a DescribeTable request immediately after a CreateTable request,
 // DynamoDB might return a ResourceNotFoundException . This is because
 // DescribeTable uses an eventually consistent query, and the metadata for your

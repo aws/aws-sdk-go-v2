@@ -6486,6 +6486,31 @@ func awsRestjson1_serializeDocumentExternalSourcesRetrieveAndGenerateConfigurati
 	return nil
 }
 
+func awsRestjson1_serializeDocumentFieldForReranking(v *types.FieldForReranking, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FieldName != nil {
+		ok := object.Key("fieldName")
+		ok.String(*v.FieldName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFieldsForReranking(v []types.FieldForReranking, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentFieldForReranking(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentFilterAttribute(v *types.FilterAttribute, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7192,6 +7217,25 @@ func awsRestjson1_serializeDocumentHumanWorkflowConfig(v *types.HumanWorkflowCon
 	return nil
 }
 
+func awsRestjson1_serializeDocumentImplicitFilterConfiguration(v *types.ImplicitFilterConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MetadataAttributes != nil {
+		ok := object.Key("metadataAttributes")
+		if err := awsRestjson1_serializeDocumentMetadataAttributeSchemaList(v.MetadataAttributes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ModelArn != nil {
+		ok := object.Key("modelArn")
+		ok.String(*v.ModelArn)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentInferenceProfileModelSource(v types.InferenceProfileModelSource, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7351,6 +7395,13 @@ func awsRestjson1_serializeDocumentKnowledgeBaseVectorSearchConfiguration(v *typ
 		}
 	}
 
+	if v.ImplicitFilterConfiguration != nil {
+		ok := object.Key("implicitFilterConfiguration")
+		if err := awsRestjson1_serializeDocumentImplicitFilterConfiguration(v.ImplicitFilterConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.NumberOfResults != nil {
 		ok := object.Key("numberOfResults")
 		ok.Integer(*v.NumberOfResults)
@@ -7359,6 +7410,13 @@ func awsRestjson1_serializeDocumentKnowledgeBaseVectorSearchConfiguration(v *typ
 	if len(v.OverrideSearchType) > 0 {
 		ok := object.Key("overrideSearchType")
 		ok.String(string(v.OverrideSearchType))
+	}
+
+	if v.RerankingConfiguration != nil {
+		ok := object.Key("rerankingConfiguration")
+		if err := awsRestjson1_serializeDocumentVectorSearchRerankingConfiguration(v.RerankingConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -7400,6 +7458,60 @@ func awsRestjson1_serializeDocumentLoggingConfig(v *types.LoggingConfig, value s
 	if v.VideoDataDeliveryEnabled != nil {
 		ok := object.Key("videoDataDeliveryEnabled")
 		ok.Boolean(*v.VideoDataDeliveryEnabled)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMetadataAttributeSchema(v *types.MetadataAttributeSchema, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.Key != nil {
+		ok := object.Key("key")
+		ok.String(*v.Key)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMetadataAttributeSchemaList(v []types.MetadataAttributeSchema, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentMetadataAttributeSchema(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMetadataConfigurationForReranking(v *types.MetadataConfigurationForReranking, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.SelectionMode) > 0 {
+		ok := object.Key("selectionMode")
+		ok.String(string(v.SelectionMode))
+	}
+
+	if v.SelectiveModeConfiguration != nil {
+		ok := object.Key("selectiveModeConfiguration")
+		if err := awsRestjson1_serializeDocumentRerankingMetadataSelectiveModeConfiguration(v.SelectiveModeConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -7794,6 +7906,30 @@ func awsRestjson1_serializeDocumentRequestMetadataMap(v map[string]string, value
 	for key := range v {
 		om := object.Key(key)
 		om.String(v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRerankingMetadataSelectiveModeConfiguration(v types.RerankingMetadataSelectiveModeConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.RerankingMetadataSelectiveModeConfigurationMemberFieldsToExclude:
+		av := object.Key("fieldsToExclude")
+		if err := awsRestjson1_serializeDocumentFieldsForReranking(uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RerankingMetadataSelectiveModeConfigurationMemberFieldsToInclude:
+		av := object.Key("fieldsToInclude")
+		if err := awsRestjson1_serializeDocumentFieldsForReranking(uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
 	}
 	return nil
 }
@@ -8239,6 +8375,70 @@ func awsRestjson1_serializeDocumentValidators(v []types.Validator, value smithyj
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVectorSearchBedrockRerankingConfiguration(v *types.VectorSearchBedrockRerankingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MetadataConfiguration != nil {
+		ok := object.Key("metadataConfiguration")
+		if err := awsRestjson1_serializeDocumentMetadataConfigurationForReranking(v.MetadataConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ModelConfiguration != nil {
+		ok := object.Key("modelConfiguration")
+		if err := awsRestjson1_serializeDocumentVectorSearchBedrockRerankingModelConfiguration(v.ModelConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NumberOfRerankedResults != nil {
+		ok := object.Key("numberOfRerankedResults")
+		ok.Integer(*v.NumberOfRerankedResults)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVectorSearchBedrockRerankingModelConfiguration(v *types.VectorSearchBedrockRerankingModelConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AdditionalModelRequestFields != nil {
+		ok := object.Key("additionalModelRequestFields")
+		if err := awsRestjson1_serializeDocumentAdditionalModelRequestFields(v.AdditionalModelRequestFields, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ModelArn != nil {
+		ok := object.Key("modelArn")
+		ok.String(*v.ModelArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVectorSearchRerankingConfiguration(v *types.VectorSearchRerankingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BedrockRerankingConfiguration != nil {
+		ok := object.Key("bedrockRerankingConfiguration")
+		if err := awsRestjson1_serializeDocumentVectorSearchBedrockRerankingConfiguration(v.BedrockRerankingConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
 	return nil
 }
 

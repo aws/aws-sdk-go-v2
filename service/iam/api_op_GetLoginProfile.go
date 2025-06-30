@@ -58,7 +58,9 @@ type GetLoginProfileInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful GetLoginProfile request.
+// Contains the response to a successful [GetLoginProfile] request.
+//
+// [GetLoginProfile]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetLoginProfile.html
 type GetLoginProfileOutput struct {
 
 	// A structure containing the user name and the profile creation date for the user.

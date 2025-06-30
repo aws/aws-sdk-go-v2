@@ -73,7 +73,9 @@ type CreateServiceLinkedRoleInput struct {
 
 type CreateServiceLinkedRoleOutput struct {
 
-	// A Role object that contains details about the newly created role.
+	// A [Role] object that contains details about the newly created role.
+	//
+	// [Role]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_Role.html
 	Role *types.Role
 
 	// Metadata pertaining to the operation's result.

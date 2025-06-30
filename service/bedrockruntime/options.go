@@ -8,6 +8,7 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	internalauthsmithy "github.com/aws/aws-sdk-go-v2/internal/auth/smithy"
 	smithyauth "github.com/aws/smithy-go/auth"
+	"github.com/aws/smithy-go/auth/bearer"
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/metrics"
 	"github.com/aws/smithy-go/middleware"
@@ -33,6 +34,12 @@ type Options struct {
 	// providing a custom base endpoint that is subject to modifications by the
 	// processing EndpointResolverV2.
 	BaseEndpoint *string
+
+	// Signer for authenticating requests with bearer auth
+	BearerAuthSigner bearer.Signer
+
+	// Bearer token value provider
+	BearerAuthTokenProvider bearer.TokenProvider
 
 	// Configures the events that will be sent to the configured logger.
 	ClientLogMode aws.ClientLogMode
@@ -143,6 +150,9 @@ func (o Options) Copy() Options {
 func (o Options) GetIdentityResolver(schemeID string) smithyauth.IdentityResolver {
 	if schemeID == "aws.auth#sigv4" {
 		return getSigV4IdentityResolver(o)
+	}
+	if schemeID == "smithy.api#httpBearerAuth" {
+		return &internalauthsmithy.BearerTokenProviderAdapter{Provider: o.BearerAuthTokenProvider}
 	}
 	if schemeID == "smithy.api#noAuth" {
 		return &smithyauth.AnonymousIdentityResolver{}

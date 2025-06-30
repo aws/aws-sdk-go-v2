@@ -62,7 +62,9 @@ type ListGroupsForUserInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful ListGroupsForUser request.
+// Contains the response to a successful [ListGroupsForUser] request.
+//
+// [ListGroupsForUser]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListGroupsForUser.html
 type ListGroupsForUserOutput struct {
 
 	// A list of groups.

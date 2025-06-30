@@ -20171,6 +20171,19 @@ func awsAwsquery_deserializeDocumentStackResourceDrift(v **types.StackResourceDr
 				sv.ActualProperties = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("DriftStatusReason", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DriftStatusReason = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("ExpectedProperties", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

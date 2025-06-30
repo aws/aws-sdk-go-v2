@@ -18,6 +18,17 @@ import (
 // (completely or partially, below or above a specified failure tolerance), the
 // stack set is updated with your changes. Subsequent CreateStackInstancescalls on the specified stack
 // set use the updated stack set.
+//
+// The maximum number of organizational unit (OUs) supported by a UpdateStackSet
+// operation is 50.
+//
+// If you need more than 50, consider the following options:
+//
+//   - Batch processing: If you don't want to expose your OU hierarchy, split up
+//     the operations into multiple calls with less than 50 OUs each.
+//
+//   - Parent OU strategy: If you don't mind exposing the OU hierarchy, target a
+//     parent OU that contains all desired child OUs.
 func (c *Client) UpdateStackSet(ctx context.Context, params *UpdateStackSetInput, optFns ...func(*Options)) (*UpdateStackSetOutput, error) {
 	if params == nil {
 		params = &UpdateStackSetInput{}
@@ -156,16 +167,16 @@ type UpdateStackSetInput struct {
 	//   with service-managed permissions, if you reference a macro in your template the
 	//   stack set operation will fail.
 	//
-	// [AWS::IAM::AccessKey]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-accesskey.html
+	// [AWS::IAM::AccessKey]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-accesskey.html
 	// [AWS::Include]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-include.html
-	// [AWS::IAM::User]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-user.html
-	// [AWS::IAM::InstanceProfile]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
+	// [AWS::IAM::User]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-user.html
+	// [AWS::IAM::InstanceProfile]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-instanceprofile.html
 	// [Acknowledging IAM resources in CloudFormation templates]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html#using-iam-capabilities
 	// [Perform custom processing on CloudFormation templates with template macros]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
-	// [AWS::IAM::Policy]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html
-	// [AWS::IAM::Group]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-group.html
-	// [AWS::IAM::UserToGroupAddition]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-usertogroupaddition.html
-	// [AWS::IAM::Role]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
+	// [AWS::IAM::Policy]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-policy.html
+	// [AWS::IAM::Group]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-group.html
+	// [AWS::IAM::UserToGroupAddition]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-usertogroupaddition.html
+	// [AWS::IAM::Role]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-role.html
 	// [AWS::Serverless]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html
 	Capabilities []types.Capability
 
@@ -297,7 +308,7 @@ type UpdateStackSetInput struct {
 	// The URL of a file that contains the template body. The URL must point to a
 	// template (maximum size: 1 MB) that is located in an Amazon S3 bucket or a
 	// Systems Manager document. The location for an Amazon S3 bucket must start with
-	// https:// .
+	// https:// . S3 static website URLs are not supported.
 	//
 	// Conditional: You must specify only one of the following parameters: TemplateBody
 	// or TemplateURL —or set UsePreviousTemplate to true.

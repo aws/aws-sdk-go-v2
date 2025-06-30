@@ -10,13 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stop a query with the Network Flow Monitor query interface. Specify the query
-// that you want to stop by providing a query ID and a monitor name. This query
-// returns the top contributors for a specific monitor.
+// Stop a top contributors query for workload insights. Specify the query that you
+// want to stop by providing a query ID and a scope ID.
 //
 // Top contributors in Network Flow Monitor are network flows with the highest
-// values for a specific metric type, related to a scope (for workload insights) or
-// a monitor.
+// values for a specific metric type. Top contributors can be across all workload
+// insights, for a given scope, or for a specific monitor. Use the applicable call
+// for the top contributors that you want to be returned.
 func (c *Client) StopQueryWorkloadInsightsTopContributors(ctx context.Context, params *StopQueryWorkloadInsightsTopContributorsInput, optFns ...func(*Options)) (*StopQueryWorkloadInsightsTopContributorsOutput, error) {
 	if params == nil {
 		params = &StopQueryWorkloadInsightsTopContributorsInput{}
@@ -35,7 +35,7 @@ func (c *Client) StopQueryWorkloadInsightsTopContributors(ctx context.Context, p
 type StopQueryWorkloadInsightsTopContributorsInput struct {
 
 	// The identifier for the query. A query ID is an internally-generated identifier
-	// for a specific query returned from an API call to start a query.
+	// for a specific query returned from an API call to create a query.
 	//
 	// This member is required.
 	QueryId *string

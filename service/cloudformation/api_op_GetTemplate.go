@@ -71,7 +71,7 @@ type GetTemplateOutput struct {
 	// set, the Processed template becomes available.
 	StagesAvailable []types.TemplateStage
 
-	// Structure containing the template body.
+	// Structure that contains the template body.
 	//
 	// CloudFormation returns the same template that was used when the stack was
 	// created.

@@ -69,7 +69,9 @@ type ListSigningCertificatesInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful ListSigningCertificates request.
+// Contains the response to a successful [ListSigningCertificates] request.
+//
+// [ListSigningCertificates]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListSigningCertificates.html
 type ListSigningCertificatesOutput struct {
 
 	// A list of the user's signing certificate information.

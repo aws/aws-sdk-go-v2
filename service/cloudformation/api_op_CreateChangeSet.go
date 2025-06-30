@@ -136,17 +136,17 @@ type CreateChangeSetInput struct {
 	//
 	// Only one of the Capabilities and ResourceType parameters can be specified.
 	//
-	// [AWS::IAM::ManagedPolicy]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-managedpolicy.html
-	// [AWS::IAM::AccessKey]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-accesskey.html
+	// [AWS::IAM::ManagedPolicy]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-managedpolicy.html
+	// [AWS::IAM::AccessKey]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-accesskey.html
 	// [AWS::Include]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-include.html
-	// [AWS::IAM::User]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-user.html
-	// [AWS::IAM::InstanceProfile]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
+	// [AWS::IAM::User]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-user.html
+	// [AWS::IAM::InstanceProfile]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-instanceprofile.html
 	// [Acknowledging IAM resources in CloudFormation templates]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html#using-iam-capabilities
 	// [Perform custom processing on CloudFormation templates with template macros]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
-	// [AWS::IAM::Policy]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html
-	// [AWS::IAM::Group]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-group.html
-	// [AWS::IAM::UserToGroupAddition]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-usertogroupaddition.html
-	// [AWS::IAM::Role]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
+	// [AWS::IAM::Policy]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-policy.html
+	// [AWS::IAM::Group]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-group.html
+	// [AWS::IAM::UserToGroupAddition]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-usertogroupaddition.html
+	// [AWS::IAM::Role]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-role.html
 	// [AWS::Serverless]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html
 	Capabilities []types.Capability
 
@@ -172,15 +172,16 @@ type CreateChangeSetInput struct {
 	// A description to help you identify this change set.
 	Description *string
 
-	// Indicates if the change set imports resources that already exist.
+	// Indicates if the change set auto-imports resources that already exist. For more
+	// information, see [Import Amazon Web Services resources into a CloudFormation stack automatically]in the CloudFormation User Guide.
 	//
 	// This parameter can only import resources that have custom names in templates.
 	// For more information, see [name type]in the CloudFormation User Guide. To import resources
-	// that do not accept custom names, such as EC2 instances, use the resource import
-	// feature instead. For more information, see [Import Amazon Web Services resources into a CloudFormation stack with a resource import]in the CloudFormation User Guide.
+	// that do not accept custom names, such as EC2 instances, use the
+	// ResourcesToImport parameter instead.
 	//
-	// [Import Amazon Web Services resources into a CloudFormation stack with a resource import]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import.html
-	// [name type]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html
+	// [Import Amazon Web Services resources into a CloudFormation stack automatically]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/import-resources-automatically.html
+	// [name type]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-properties-name.html
 	ImportExistingResources *bool
 
 	// Creates a change set for the all nested stacks specified in the template. The
@@ -269,7 +270,7 @@ type CreateChangeSetInput struct {
 	// template (max size: 1 MB) that's located in an Amazon S3 bucket or a Systems
 	// Manager document. CloudFormation generates the change set by comparing this
 	// template with the stack that you specified. The location for an Amazon S3 bucket
-	// must start with https:// .
+	// must start with https:// . URLs from S3 static websites are not supported.
 	//
 	// Conditional: You must specify only TemplateBody or TemplateURL .
 	TemplateURL *string

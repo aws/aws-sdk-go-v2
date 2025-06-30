@@ -12,10 +12,9 @@ import (
 )
 
 // Get information about a resource that's been registered for zonal shifts with
-// Amazon Route 53 Application Recovery Controller in this Amazon Web Services
-// Region. Resources that are registered for zonal shifts are managed resources in
-// ARC. You can start zonal shifts and configure zonal autoshift for managed
-// resources.
+// Amazon Application Recovery Controller in this Amazon Web Services Region.
+// Resources that are registered for zonal shifts are managed resources in ARC. You
+// can start zonal shifts and configure zonal autoshift for managed resources.
 func (c *Client) GetManagedResource(ctx context.Context, params *GetManagedResourceInput, optFns ...func(*Options)) (*GetManagedResourceOutput, error) {
 	if params == nil {
 		params = &GetManagedResourceInput{}
@@ -36,8 +35,21 @@ type GetManagedResourceInput struct {
 	// The identifier for the resource that Amazon Web Services shifts traffic for.
 	// The identifier is the Amazon Resource Name (ARN) for the resource.
 	//
-	// At this time, supported resources are Network Load Balancers and Application
-	// Load Balancers with cross-zone load balancing turned off.
+	// Amazon Application Recovery Controller currently supports enabling the
+	// following resources for zonal shift and zonal autoshift:
+	//
+	// [Amazon EC2 Auto Scaling groups]
+	//
+	// [Amazon Elastic Kubernetes Service]
+	//
+	// [Application Load Balancer]
+	//
+	// [Network Load Balancer]
+	//
+	// [Amazon EC2 Auto Scaling groups]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.ec2-auto-scaling-groups.html
+	// [Amazon Elastic Kubernetes Service]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.eks.html
+	// [Application Load Balancer]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.app-load-balancers.html
+	// [Network Load Balancer]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.network-load-balancers.html
 	//
 	// This member is required.
 	ResourceIdentifier *string

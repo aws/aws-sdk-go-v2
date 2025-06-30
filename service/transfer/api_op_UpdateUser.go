@@ -67,7 +67,8 @@ type UpdateUserInput struct {
 	//
 	// A HomeDirectory example is /bucket_name/home/mydirectory .
 	//
-	// The HomeDirectory parameter is only used if HomeDirectoryType is set to PATH .
+	// You can use the HomeDirectory parameter for HomeDirectoryType when it is set to
+	// either PATH or LOGICAL .
 	HomeDirectory *string
 
 	// Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and

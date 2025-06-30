@@ -29,6 +29,17 @@ import (
 // stack instance has been updated with the new parameter, you can then override
 // the parameter value using UpdateStackInstances .
 //
+// The maximum number of organizational unit (OUs) supported by a
+// UpdateStackInstances operation is 50.
+//
+// If you need more than 50, consider the following options:
+//
+//   - Batch processing: If you don't want to expose your OU hierarchy, split up
+//     the operations into multiple calls with less than 50 OUs each.
+//
+//   - Parent OU strategy: If you don't mind exposing the OU hierarchy, target a
+//     parent OU that contains all desired child OUs.
+//
 // [CreateStackInstances]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateStackInstances.html
 // [UpdateStackSet]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html
 func (c *Client) UpdateStackInstances(ctx context.Context, params *UpdateStackInstancesInput, optFns ...func(*Options)) (*UpdateStackInstancesOutput, error) {

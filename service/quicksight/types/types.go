@@ -1667,6 +1667,13 @@ type AssetOptions struct {
 // Parameters for Amazon Athena.
 type AthenaParameters struct {
 
+	// An optional parameter that configures IAM Identity Center authentication to
+	// grant Amazon QuickSight access to your workgroup.
+	//
+	// This parameter can only be specified if your Amazon QuickSight account is
+	// configured with IAM Identity Center.
+	IdentityCenterConfiguration *IdentityCenterConfiguration
+
 	// Use the RoleArn structure to override an account-wide role for a specific
 	// Athena data source. For example, say an account administrator has turned off all
 	// Athena access with an account-wide role. The administrator can then use RoleArn
@@ -2621,11 +2628,29 @@ type Capabilities struct {
 	// The ability to create shared folders.
 	CreateSharedFolders CapabilityState
 
-	// The ability to export to CSV files.
+	// The ability to export to CSV files from the UI.
 	ExportToCsv CapabilityState
 
-	// The ability to export to Excel files.
+	// The ability to export to CSV files in scheduled email reports.
+	ExportToCsvInScheduledReports CapabilityState
+
+	// The ability to export to Excel files from the UI.
 	ExportToExcel CapabilityState
+
+	// The ability to export to Excel files in scheduled email reports.
+	ExportToExcelInScheduledReports CapabilityState
+
+	// The ability to export to PDF files from the UI.
+	ExportToPdf CapabilityState
+
+	// The ability to export to PDF files in scheduled email reports.
+	ExportToPdfInScheduledReports CapabilityState
+
+	// The ability to include content in scheduled email reports.
+	IncludeContentInScheduledReportsEmail CapabilityState
+
+	// The ability to print reports.
+	PrintReports CapabilityState
 
 	// The ability to rename shared folders.
 	RenameSharedFolders CapabilityState
@@ -4639,7 +4664,7 @@ type DataSet struct {
 	// The time that this dataset was created.
 	CreatedTime *time.Time
 
-	// The ID of the dataset.
+	// The ID of the dataset. Limited to 96 characters.
 	DataSetId *string
 
 	// The usage configuration to apply to child datasets that reference this dataset
@@ -14279,6 +14304,9 @@ type SheetTextBox struct {
 	// The content that is displayed in the text box.
 	Content *string
 
+	// The general textbox interactions setup for a textbox.
+	Interactions *TextBoxInteractionOptions
+
 	noSmithyDocumentSerde
 }
 
@@ -15791,6 +15819,25 @@ type TextAreaControlDisplayOptions struct {
 
 	// The options to configure the title visibility, name, and font size.
 	TitleOptions *LabelOptions
+
+	noSmithyDocumentSerde
+}
+
+// The general textbox interactions setup for textbox publish options.
+type TextBoxInteractionOptions struct {
+
+	// The menu options for the textbox.
+	TextBoxMenuOption *TextBoxMenuOption
+
+	noSmithyDocumentSerde
+}
+
+// The menu options for the interactions of a textbox.
+type TextBoxMenuOption struct {
+
+	// The availability status of the textbox menu. If the value of this property is
+	// set to ENABLED , dashboard readers can interact with the textbox menu.
+	AvailabilityStatus DashboardBehavior
 
 	noSmithyDocumentSerde
 }

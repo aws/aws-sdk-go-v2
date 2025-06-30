@@ -23,8 +23,8 @@ import (
 // to ensure that shifting away traffic from an Availability Zone during an
 // autoshift is safe for your application.
 //
-// For more information, see [Considerations when you configure zonal autoshift] in the Amazon Route 53 Application Recovery
-// Controller Developer Guide.
+// For more information, see [Considerations when you configure zonal autoshift] in the Amazon Application Recovery Controller
+// Developer Guide.
 //
 // [Considerations when you configure zonal autoshift]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-autoshift.considerations.html
 func (c *Client) CreatePracticeRunConfiguration(ctx context.Context, params *CreatePracticeRunConfigurationInput, optFns ...func(*Options)) (*CreatePracticeRunConfigurationOutput, error) {
@@ -60,8 +60,21 @@ type CreatePracticeRunConfigurationInput struct {
 	// a practice run zonal shift. The identifier is the Amazon Resource Name (ARN) for
 	// the resource.
 	//
-	// At this time, supported resources are Network Load Balancers and Application
-	// Load Balancers with cross-zone load balancing turned off.
+	// Amazon Application Recovery Controller currently supports enabling the
+	// following resources for zonal shift and zonal autoshift:
+	//
+	// [Amazon EC2 Auto Scaling groups]
+	//
+	// [Amazon Elastic Kubernetes Service]
+	//
+	// [Application Load Balancer]
+	//
+	// [Network Load Balancer]
+	//
+	// [Amazon EC2 Auto Scaling groups]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.ec2-auto-scaling-groups.html
+	// [Amazon Elastic Kubernetes Service]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.eks.html
+	// [Application Load Balancer]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.app-load-balancers.html
+	// [Network Load Balancer]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.network-load-balancers.html
 	//
 	// This member is required.
 	ResourceIdentifier *string

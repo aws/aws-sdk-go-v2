@@ -52,7 +52,9 @@ type GetInstanceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful GetInstanceProfile request.
+// Contains the response to a successful [GetInstanceProfile] request.
+//
+// [GetInstanceProfile]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetInstanceProfile.html
 type GetInstanceProfileOutput struct {
 
 	// A structure containing details about the instance profile.

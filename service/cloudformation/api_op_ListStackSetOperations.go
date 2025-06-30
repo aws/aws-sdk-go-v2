@@ -12,6 +12,9 @@ import (
 )
 
 // Returns summary information about operations performed on a stack set.
+//
+// This API provides eventually consistent reads meaning it may take some time but
+// will eventually return the most up-to-date data.
 func (c *Client) ListStackSetOperations(ctx context.Context, params *ListStackSetOperationsInput, optFns ...func(*Options)) (*ListStackSetOperationsOutput, error) {
 	if params == nil {
 		params = &ListStackSetOperationsInput{}

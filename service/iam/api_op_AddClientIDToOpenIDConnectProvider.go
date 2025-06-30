@@ -40,7 +40,9 @@ type AddClientIDToOpenIDConnectProviderInput struct {
 
 	// The Amazon Resource Name (ARN) of the IAM OpenID Connect (OIDC) provider
 	// resource to add the client ID to. You can get a list of OIDC provider ARNs by
-	// using the ListOpenIDConnectProvidersoperation.
+	// using the [ListOpenIDConnectProviders]operation.
+	//
+	// [ListOpenIDConnectProviders]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListOpenIDConnectProviders.html
 	//
 	// This member is required.
 	OpenIDConnectProviderArn *string

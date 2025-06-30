@@ -7,6 +7,17 @@ import (
 	"time"
 )
 
+// A structure that contains advanced options for EDI processing. Currently, only
+// X12 advanced options are supported.
+type AdvancedOptions struct {
+
+	// A structure that contains X12-specific advanced options, such as split options
+	// for processing X12 EDI files.
+	X12 *X12AdvancedOptions
+
+	noSmithyDocumentSerde
+}
+
 // A capability object. Currently, only EDI (electronic data interchange)
 // capabilities are supported. A trading capability contains the information
 // required to transform incoming EDI documents into JSON or XML outputs.
@@ -29,6 +40,9 @@ func (*CapabilityConfigurationMemberEdi) isCapabilityConfiguration() {}
 
 // Contains the details for an Outbound EDI capability.
 type CapabilityOptions struct {
+
+	// A structure that contains the inbound EDI options for the capability.
+	InboundEdi *InboundEdiOptions
 
 	// A structure that contains the outbound EDI options.
 	OutboundEdi OutboundEdiOptions
@@ -203,6 +217,17 @@ type FormatOptionsMemberX12 struct {
 
 func (*FormatOptionsMemberX12) isFormatOptions() {}
 
+// Contains options for processing inbound EDI files. These options allow for
+// customizing how incoming EDI documents are processed.
+type InboundEdiOptions struct {
+
+	// A structure that contains X12-specific options for processing inbound X12 EDI
+	// files.
+	X12 *X12InboundEdiOptions
+
+	noSmithyDocumentSerde
+}
+
 // Contains the input formatting options for an inbound transformer (takes an
 // X12-formatted EDI document as input and converts it to JSON or XML.
 type InputConversion struct {
@@ -211,6 +236,11 @@ type InputConversion struct {
 	//
 	// This member is required.
 	FromFormat FromFormat
+
+	// Specifies advanced options for the input conversion process. These options
+	// provide additional control over how EDI files are processed during
+	// transformation.
+	AdvancedOptions *AdvancedOptions
 
 	// A structure that contains the formatting options for an inbound transformer.
 	FormatOptions FormatOptions
@@ -557,6 +587,103 @@ type TransformerSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Contains options for wrapping (line folding) in X12 EDI files. Wrapping
+// controls how long lines are handled in the EDI output.
+type WrapOptions struct {
+
+	// Specifies the method used for wrapping lines in the EDI output. Valid values:
+	//
+	//   - SEGMENT : Wraps by segment.
+	//
+	//   - ONE_LINE : Indicates that the entire content is on a single line.
+	//
+	// When you specify ONE_LINE , do not provide either the line length nor the line
+	//   terminator value.
+	//
+	//   - LINE_LENGTH : Wraps by character count, as specified by lineLength value.
+	//
+	// This member is required.
+	WrapBy WrapFormat
+
+	// Specifies the maximum length of a line before wrapping occurs. This value is
+	// used when wrapBy is set to LINE_LENGTH .
+	LineLength *int32
+
+	// Specifies the character sequence used to terminate lines when wrapping. Valid
+	// values:
+	//
+	//   - CRLF : carriage return and line feed
+	//
+	//   - LF : line feed)
+	//
+	//   - CR : carriage return
+	LineTerminator LineTerminator
+
+	noSmithyDocumentSerde
+}
+
+// Contains options for configuring X12 acknowledgments. These options control how
+// functional and technical acknowledgments are handled.
+type X12AcknowledgmentOptions struct {
+
+	// Specifies whether functional acknowledgments (997/999) should be generated for
+	// incoming X12 transactions. Valid values are DO_NOT_GENERATE ,
+	// GENERATE_ALL_SEGMENTS and GENERATE_WITHOUT_TRANSACTION_SET_RESPONSE_LOOP .
+	//
+	// If you choose GENERATE_WITHOUT_TRANSACTION_SET_RESPONSE_LOOP , Amazon Web
+	// Services B2B Data Interchange skips the AK2_Loop when generating an
+	// acknowledgment document.
+	//
+	// This member is required.
+	FunctionalAcknowledgment X12FunctionalAcknowledgment
+
+	// Specifies whether technical acknowledgments (TA1) should be generated for
+	// incoming X12 interchanges. Valid values are DO_NOT_GENERATE and
+	// GENERATE_ALL_SEGMENTS and.
+	//
+	// This member is required.
+	TechnicalAcknowledgment X12TechnicalAcknowledgment
+
+	noSmithyDocumentSerde
+}
+
+// Contains advanced options specific to X12 EDI processing, such as splitting
+// large X12 files into smaller units.
+type X12AdvancedOptions struct {
+
+	// Specifies options for splitting X12 EDI files. These options control how large
+	// X12 files are divided into smaller, more manageable units.
+	SplitOptions *X12SplitOptions
+
+	noSmithyDocumentSerde
+}
+
+// Contains configuration for X12 control numbers used in X12 EDI generation.
+// Control numbers are used to uniquely identify interchanges, functional groups,
+// and transaction sets.
+type X12ControlNumbers struct {
+
+	// Specifies the starting functional group control number (GS06) to use for X12
+	// EDI generation. This number is incremented for each new functional group. For
+	// the GS (functional group) envelope, Amazon Web Services B2B Data Interchange
+	// generates a functional group control number that is unique to the sender ID,
+	// receiver ID, and functional identifier code combination.
+	StartingFunctionalGroupControlNumber *int32
+
+	// Specifies the starting interchange control number (ISA13) to use for X12 EDI
+	// generation. This number is incremented for each new interchange. For the ISA
+	// (interchange) envelope, Amazon Web Services B2B Data Interchange generates an
+	// interchange control number that is unique for the ISA05 and ISA06 (sender) &
+	// ISA07 and ISA08 (receiver) combination.
+	StartingInterchangeControlNumber *int32
+
+	// Specifies the starting transaction set control number (ST02) to use for X12 EDI
+	// generation. This number is incremented for each new transaction set.
+	StartingTransactionSetControlNumber *int32
+
+	noSmithyDocumentSerde
+}
+
 // In X12 EDI messages, delimiters are used to mark the end of segments or
 // elements, and are defined in the interchange control header. The delimiters are
 // part of the message's syntax and divide up its different elements.
@@ -609,6 +736,10 @@ type X12Envelope struct {
 	// A container for the X12 outbound EDI headers.
 	Common *X12OutboundEdiHeaders
 
+	// Contains options for wrapping (line folding) in X12 EDI files. Wrapping
+	// controls how long lines are handled in the EDI output.
+	WrapOptions *WrapOptions
+
 	noSmithyDocumentSerde
 }
 
@@ -626,6 +757,16 @@ type X12FunctionalGroupHeaders struct {
 
 	// A code that identifies the issuer of the standard, at position GS-07.
 	ResponsibleAgencyCode *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains options specific to processing inbound X12 EDI files.
+type X12InboundEdiOptions struct {
+
+	// Specifies acknowledgment options for inbound X12 EDI files. These options
+	// control how functional and technical acknowledgments are handled.
+	AcknowledgmentOptions *X12AcknowledgmentOptions
 
 	noSmithyDocumentSerde
 }
@@ -687,6 +828,11 @@ type X12InterchangeControlHeaders struct {
 // A structure containing the details for an outbound EDI object.
 type X12OutboundEdiHeaders struct {
 
+	// Specifies control number configuration for outbound X12 EDI headers. These
+	// settings determine the starting values for interchange, functional group, and
+	// transaction set control numbers.
+	ControlNumbers *X12ControlNumbers
+
 	// The delimiters, for example semicolon ( ; ), that separates sections of the
 	// headers for the X12 object.
 	Delimiters *X12Delimiters
@@ -694,12 +840,45 @@ type X12OutboundEdiHeaders struct {
 	// The functional group headers for the X12 object.
 	FunctionalGroupHeaders *X12FunctionalGroupHeaders
 
+	// Specifies the time format in the GS05 element (time) of the functional group
+	// header. The following formats use 24-hour clock time:
+	//
+	//   - HHMM - Hours and minutes
+	//
+	//   - HHMMSS - Hours, minutes, and seconds
+	//
+	//   - HHMMSSDD - Hours, minutes, seconds, and decimal seconds
+	//
+	// Where:
+	//
+	//   - HH - Hours (00-23)
+	//
+	//   - MM - Minutes (00-59)
+	//
+	//   - SS - Seconds (00-59)
+	//
+	//   - DD - Hundredths of seconds (00-99)
+	Gs05TimeFormat X12GS05TimeFormat
+
 	// In X12 EDI messages, delimiters are used to mark the end of segments or
 	// elements, and are defined in the interchange control header.
 	InterchangeControlHeaders *X12InterchangeControlHeaders
 
 	// Specifies whether or not to validate the EDI for this X12 object: TRUE or FALSE .
 	ValidateEdi *bool
+
+	noSmithyDocumentSerde
+}
+
+// Contains options for splitting X12 EDI files into smaller units. This is useful
+// for processing large EDI files more efficiently.
+type X12SplitOptions struct {
+
+	// Specifies the method used to split X12 EDI files. Valid values include
+	// TRANSACTION (split by individual transaction sets), or NONE (no splitting).
+	//
+	// This member is required.
+	SplitBy X12SplitBy
 
 	noSmithyDocumentSerde
 }

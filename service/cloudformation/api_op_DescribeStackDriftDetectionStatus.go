@@ -116,7 +116,8 @@ type DescribeStackDriftDetectionStatusOutput struct {
 	//   - IN_SYNC : The stack's actual configuration matches its expected template
 	//   configuration.
 	//
-	//   - UNKNOWN : This value is reserved for future use.
+	//   - UNKNOWN : CloudFormation could not run drift detection for a resource in the
+	//   stack. See the DetectionStatusReason for details.
 	StackDriftStatus types.StackDriftStatus
 
 	// Metadata pertaining to the operation's result.

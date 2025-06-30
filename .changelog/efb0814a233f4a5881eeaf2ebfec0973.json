@@ -1,0 +1,8 @@
+{
+    "id": "efb0814a-233f-4a58-81ee-af2ebfec0973",
+    "type": "feature",
+    "description": "This change adds support for witnesses in global tables. It also adds a new table status, REPLICATION_NOT_AUTHORIZED. This status will indicate scenarios where global replicas table can't be utilized for data plane operations.",
+    "modules": [
+        "service/dynamodb"
+    ]
+}

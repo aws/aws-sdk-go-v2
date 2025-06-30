@@ -74,7 +74,9 @@ type ListAccessKeysInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful ListAccessKeys request.
+// Contains the response to a successful [ListAccessKeys] request.
+//
+// [ListAccessKeys]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListAccessKeys.html
 type ListAccessKeysOutput struct {
 
 	// A list of objects containing metadata about the access keys.

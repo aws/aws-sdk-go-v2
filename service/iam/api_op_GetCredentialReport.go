@@ -36,7 +36,9 @@ type GetCredentialReportInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful GetCredentialReport request.
+// Contains the response to a successful [GetCredentialReport] request.
+//
+// [GetCredentialReport]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetCredentialReport.html
 type GetCredentialReportOutput struct {
 
 	// Contains the credential report. The report is Base64-encoded.

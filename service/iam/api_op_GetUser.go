@@ -52,7 +52,9 @@ type GetUserInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful GetUser request.
+// Contains the response to a successful [GetUser] request.
+//
+// [GetUser]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetUser.html
 type GetUserOutput struct {
 
 	// A structure containing details about the IAM user.

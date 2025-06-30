@@ -94,7 +94,7 @@ type DescribeChangeSetOutput struct {
 	// resources that do not accept custom names, such as EC2 instances, use the [resource import]
 	// feature instead.
 	//
-	// [custom names]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html
+	// [custom names]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-properties-name.html
 	// [resource import]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import.html
 	ImportExistingResources *bool
 

@@ -1170,6 +1170,41 @@ const (
 	ResourceTypeRedshiftEndpointAccess                               ResourceType = "AWS::Redshift::EndpointAccess"
 	ResourceTypeRoute53ResolverFirewallRuleGroup                     ResourceType = "AWS::Route53Resolver::FirewallRuleGroup"
 	ResourceTypeSSMDocument                                          ResourceType = "AWS::SSM::Document"
+	ResourceTypeAppConfigExtensionAssociation                        ResourceType = "AWS::AppConfig::ExtensionAssociation"
+	ResourceTypeAppIntegrationsApplication                           ResourceType = "AWS::AppIntegrations::Application"
+	ResourceTypeAppSyncApiCache                                      ResourceType = "AWS::AppSync::ApiCache"
+	ResourceTypeBedrockGuardrail                                     ResourceType = "AWS::Bedrock::Guardrail"
+	ResourceTypeBedrockKnowledgeBase                                 ResourceType = "AWS::Bedrock::KnowledgeBase"
+	ResourceTypeCognitoIdentityPool                                  ResourceType = "AWS::Cognito::IdentityPool"
+	ResourceTypeConnectRule                                          ResourceType = "AWS::Connect::Rule"
+	ResourceTypeConnectUser                                          ResourceType = "AWS::Connect::User"
+	ResourceTypeEC2ClientVpnTargetNetworkAssociation                 ResourceType = "AWS::EC2::ClientVpnTargetNetworkAssociation"
+	ResourceTypeEC2EIPAssociation                                    ResourceType = "AWS::EC2::EIPAssociation"
+	ResourceTypeEC2IPAMResourceDiscovery                             ResourceType = "AWS::EC2::IPAMResourceDiscovery"
+	ResourceTypeEC2IPAMResourceDiscoveryAssociation                  ResourceType = "AWS::EC2::IPAMResourceDiscoveryAssociation"
+	ResourceTypeEC2InstanceConnectEndpoint                           ResourceType = "AWS::EC2::InstanceConnectEndpoint"
+	ResourceTypeEC2SnapshotBlockPublicAccess                         ResourceType = "AWS::EC2::SnapshotBlockPublicAccess"
+	ResourceTypeEC2VPCBlockPublicAccessExclusion                     ResourceType = "AWS::EC2::VPCBlockPublicAccessExclusion"
+	ResourceTypeEC2VPCBlockPublicAccessOptions                       ResourceType = "AWS::EC2::VPCBlockPublicAccessOptions"
+	ResourceTypeEC2VPCEndpointConnectionNotification                 ResourceType = "AWS::EC2::VPCEndpointConnectionNotification"
+	ResourceTypeEC2VPNConnectionRoute                                ResourceType = "AWS::EC2::VPNConnectionRoute"
+	ResourceTypeEvidentlySegment                                     ResourceType = "AWS::Evidently::Segment"
+	ResourceTypeIAMOIDCProvider                                      ResourceType = "AWS::IAM::OIDCProvider"
+	ResourceTypeInspectorV2Activation                                ResourceType = "AWS::InspectorV2::Activation"
+	ResourceTypeMSKClusterPolicy                                     ResourceType = "AWS::MSK::ClusterPolicy"
+	ResourceTypeMSKVpcConnection                                     ResourceType = "AWS::MSK::VpcConnection"
+	ResourceTypeMediaConnectGateway                                  ResourceType = "AWS::MediaConnect::Gateway"
+	ResourceTypeMemoryDBSubnetGroup                                  ResourceType = "AWS::MemoryDB::SubnetGroup"
+	ResourceTypeOpenSearchServerlessCollection                       ResourceType = "AWS::OpenSearchServerless::Collection"
+	ResourceTypeOpenSearchServerlessVpcEndpoint                      ResourceType = "AWS::OpenSearchServerless::VpcEndpoint"
+	ResourceTypeRedshiftEndpointAuthorization                        ResourceType = "AWS::Redshift::EndpointAuthorization"
+	ResourceTypeRoute53ProfilesProfile                               ResourceType = "AWS::Route53Profiles::Profile"
+	ResourceTypeS3StorageLensGroup                                   ResourceType = "AWS::S3::StorageLensGroup"
+	ResourceTypeS3ExpressBucketPolicy                                ResourceType = "AWS::S3Express::BucketPolicy"
+	ResourceTypeS3ExpressDirectoryBucket                             ResourceType = "AWS::S3Express::DirectoryBucket"
+	ResourceTypeSageMakerInferenceExperiment                         ResourceType = "AWS::SageMaker::InferenceExperiment"
+	ResourceTypeSecurityHubStandard                                  ResourceType = "AWS::SecurityHub::Standard"
+	ResourceTypeTransferProfile                                      ResourceType = "AWS::Transfer::Profile"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -1585,6 +1620,41 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::Redshift::EndpointAccess",
 		"AWS::Route53Resolver::FirewallRuleGroup",
 		"AWS::SSM::Document",
+		"AWS::AppConfig::ExtensionAssociation",
+		"AWS::AppIntegrations::Application",
+		"AWS::AppSync::ApiCache",
+		"AWS::Bedrock::Guardrail",
+		"AWS::Bedrock::KnowledgeBase",
+		"AWS::Cognito::IdentityPool",
+		"AWS::Connect::Rule",
+		"AWS::Connect::User",
+		"AWS::EC2::ClientVpnTargetNetworkAssociation",
+		"AWS::EC2::EIPAssociation",
+		"AWS::EC2::IPAMResourceDiscovery",
+		"AWS::EC2::IPAMResourceDiscoveryAssociation",
+		"AWS::EC2::InstanceConnectEndpoint",
+		"AWS::EC2::SnapshotBlockPublicAccess",
+		"AWS::EC2::VPCBlockPublicAccessExclusion",
+		"AWS::EC2::VPCBlockPublicAccessOptions",
+		"AWS::EC2::VPCEndpointConnectionNotification",
+		"AWS::EC2::VPNConnectionRoute",
+		"AWS::Evidently::Segment",
+		"AWS::IAM::OIDCProvider",
+		"AWS::InspectorV2::Activation",
+		"AWS::MSK::ClusterPolicy",
+		"AWS::MSK::VpcConnection",
+		"AWS::MediaConnect::Gateway",
+		"AWS::MemoryDB::SubnetGroup",
+		"AWS::OpenSearchServerless::Collection",
+		"AWS::OpenSearchServerless::VpcEndpoint",
+		"AWS::Redshift::EndpointAuthorization",
+		"AWS::Route53Profiles::Profile",
+		"AWS::S3::StorageLensGroup",
+		"AWS::S3Express::BucketPolicy",
+		"AWS::S3Express::DirectoryBucket",
+		"AWS::SageMaker::InferenceExperiment",
+		"AWS::SecurityHub::Standard",
+		"AWS::Transfer::Profile",
 	}
 }
 

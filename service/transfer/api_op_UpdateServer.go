@@ -137,6 +137,23 @@ type UpdateServerInput struct {
 	// authentication API method.
 	IdentityProviderDetails *types.IdentityProviderDetails
 
+	// Specifies whether to use IPv4 only, or to use dual-stack (IPv4 and IPv6) for
+	// your Transfer Family endpoint. The default value is IPV4 .
+	//
+	// The IpAddressType parameter has the following limitations:
+	//
+	//   - It cannot be changed while the server is online. You must stop the server
+	//   before modifying this parameter.
+	//
+	//   - It cannot be updated to DUALSTACK if the server has AddressAllocationIds
+	//   specified.
+	//
+	// When using DUALSTACK as the IpAddressType , you cannot set the
+	// AddressAllocationIds parameter for the [EndpointDetails] for the server.
+	//
+	// [EndpointDetails]: https://docs.aws.amazon.com/transfer/latest/APIReference/API_EndpointDetails.html
+	IpAddressType types.IpAddressType
+
 	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
 	// that allows a server to turn on Amazon CloudWatch logging for Amazon S3 or
 	// Amazon EFS events. When set, you can view user activity in your CloudWatch logs.

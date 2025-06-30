@@ -594,6 +594,9 @@ const (
 	ReplicaStatusActive                            ReplicaStatus = "ACTIVE"
 	ReplicaStatusRegionDisabled                    ReplicaStatus = "REGION_DISABLED"
 	ReplicaStatusInaccessibleEncryptionCredentials ReplicaStatus = "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
+	ReplicaStatusArchiving                         ReplicaStatus = "ARCHIVING"
+	ReplicaStatusArchived                          ReplicaStatus = "ARCHIVED"
+	ReplicaStatusReplicationNotAuthorized          ReplicaStatus = "REPLICATION_NOT_AUTHORIZED"
 )
 
 // Values returns all known values for ReplicaStatus. Note that this can be
@@ -609,6 +612,9 @@ func (ReplicaStatus) Values() []ReplicaStatus {
 		"ACTIVE",
 		"REGION_DISABLED",
 		"INACCESSIBLE_ENCRYPTION_CREDENTIALS",
+		"ARCHIVING",
+		"ARCHIVED",
+		"REPLICATION_NOT_AUTHORIZED",
 	}
 }
 
@@ -857,6 +863,7 @@ const (
 	TableStatusInaccessibleEncryptionCredentials TableStatus = "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
 	TableStatusArchiving                         TableStatus = "ARCHIVING"
 	TableStatusArchived                          TableStatus = "ARCHIVED"
+	TableStatusReplicationNotAuthorized          TableStatus = "REPLICATION_NOT_AUTHORIZED"
 )
 
 // Values returns all known values for TableStatus. Note that this can be expanded
@@ -872,6 +879,7 @@ func (TableStatus) Values() []TableStatus {
 		"INACCESSIBLE_ENCRYPTION_CREDENTIALS",
 		"ARCHIVING",
 		"ARCHIVED",
+		"REPLICATION_NOT_AUTHORIZED",
 	}
 }
 
@@ -895,5 +903,26 @@ func (TimeToLiveStatus) Values() []TimeToLiveStatus {
 		"DISABLING",
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type WitnessStatus string
+
+// Enum values for WitnessStatus
+const (
+	WitnessStatusCreating WitnessStatus = "CREATING"
+	WitnessStatusDeleting WitnessStatus = "DELETING"
+	WitnessStatusActive   WitnessStatus = "ACTIVE"
+)
+
+// Values returns all known values for WitnessStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WitnessStatus) Values() []WitnessStatus {
+	return []WitnessStatus{
+		"CREATING",
+		"DELETING",
+		"ACTIVE",
 	}
 }

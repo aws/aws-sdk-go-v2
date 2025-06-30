@@ -52,7 +52,9 @@ type ListAccountAliasesInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful ListAccountAliases request.
+// Contains the response to a successful [ListAccountAliases] request.
+//
+// [ListAccountAliases]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListAccountAliases.html
 type ListAccountAliasesOutput struct {
 
 	// A list of aliases associated with the account. Amazon Web Services supports

@@ -1466,6 +1466,15 @@ func awsRestjson1_deserializeOpDocumentGetImageSetOutput(v **GetImageSetOutput, 
 				sv.ImageSetWorkflowStatus = types.ImageSetWorkflowStatus(jtv)
 			}
 
+		case "isPrimary":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsPrimary = ptr.Bool(jtv)
+			}
+
 		case "message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4522,6 +4531,15 @@ func awsRestjson1_deserializeDocumentImageSetProperties(v **types.ImageSetProper
 				sv.ImageSetWorkflowStatus = types.ImageSetWorkflowStatus(jtv)
 			}
 
+		case "isPrimary":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsPrimary = ptr.Bool(jtv)
+			}
+
 		case "message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4688,6 +4706,15 @@ func awsRestjson1_deserializeDocumentImageSetsMetadataSummary(v **types.ImageSet
 					return fmt.Errorf("expected ImageSetId to be of type string, got %T instead", value)
 				}
 				sv.ImageSetId = ptr.String(jtv)
+			}
+
+		case "isPrimary":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsPrimary = ptr.Bool(jtv)
 			}
 
 		case "updatedAt":

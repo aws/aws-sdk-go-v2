@@ -5441,6 +5441,11 @@ func awsAwsjson11_serializeOpDocumentCreateServerInput(v *CreateServerInput, val
 		ok.String(string(v.IdentityProviderType))
 	}
 
+	if len(v.IpAddressType) > 0 {
+		ok := object.Key("IpAddressType")
+		ok.String(string(v.IpAddressType))
+	}
+
 	if v.LoggingRole != nil {
 		ok := object.Key("LoggingRole")
 		ok.String(*v.LoggingRole)
@@ -6873,6 +6878,11 @@ func awsAwsjson11_serializeOpDocumentUpdateServerInput(v *UpdateServerInput, val
 		if err := awsAwsjson11_serializeDocumentIdentityProviderDetails(v.IdentityProviderDetails, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.IpAddressType) > 0 {
+		ok := object.Key("IpAddressType")
+		ok.String(string(v.IpAddressType))
 	}
 
 	if v.LoggingRole != nil {

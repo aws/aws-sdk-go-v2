@@ -193,9 +193,8 @@ func (e *InsufficientPermissionsException) ErrorCode() string {
 }
 func (e *InsufficientPermissionsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The configuration recorder name is not valid. The prefix "
-// AWSConfigurationRecorderFor " is reserved for service-linked configuration
-// recorders.
+// You have provided a name for the customer managed configuration recorder that
+// is not valid.
 type InvalidConfigurationRecorderNameException struct {
 	Message *string
 

@@ -760,6 +760,39 @@ type CaseSlaConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the overall participant interactions at the contact level.
+type ChatContactMetrics struct {
+
+	// The time for an agent to respond after obtaining a chat contact.
+	AgentFirstResponseTimeInMillis *int64
+
+	// The agent first response timestamp for a chat contact.
+	AgentFirstResponseTimestamp *time.Time
+
+	// The time it took for a contact to end after the last customer message.
+	ConversationCloseTimeInMillis *int64
+
+	// The number of conversation turns in a chat contact, which represents the
+	// back-and-forth exchanges between customer and other participants.
+	ConversationTurnCount *int32
+
+	// A boolean flag indicating whether multiparty chat or supervisor barge were
+	// enabled on this contact.
+	MultiParty *bool
+
+	// The total number of characters from bot and automated messages on a chat
+	// contact.
+	TotalBotMessageLengthInChars *int32
+
+	// The total number of bot and automated messages on a chat contact.
+	TotalBotMessages *int32
+
+	// The number of chat messages on the contact.
+	TotalMessages *int32
+
+	noSmithyDocumentSerde
+}
+
 // Chat integration event containing payload to perform different chat actions
 // such as:
 //
@@ -826,6 +859,21 @@ type ChatMessage struct {
 	//
 	// This member is required.
 	ContentType *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about how agent, bot, and customer interact in a chat contact.
+type ChatMetrics struct {
+
+	// Information about agent interactions in a contact.
+	AgentMetrics *ParticipantMetrics
+
+	// Information about the overall participant interactions at the contact level.
+	ChatContactMetrics *ChatContactMetrics
+
+	// Information about customer interactions in a contact.
+	CustomerMetrics *ParticipantMetrics
 
 	noSmithyDocumentSerde
 }
@@ -988,6 +1036,9 @@ type Contact struct {
 
 	// How the contact reached your contact center.
 	Channel Channel
+
+	// Information about how agent, bot, and customer interact in a chat contact.
+	ChatMetrics *ChatMetrics
 
 	// The timestamp when customer endpoint connected to Amazon Connect.
 	ConnectedToSystemTimestamp *time.Time
@@ -4329,6 +4380,41 @@ type ParticipantDetailsToAdd struct {
 
 	// The role of the participant being added.
 	ParticipantRole ParticipantRole
+
+	noSmithyDocumentSerde
+}
+
+// Information about a participant's interactions in a contact.
+type ParticipantMetrics struct {
+
+	// A boolean flag indicating whether the chat conversation was abandoned by a
+	// Participant.
+	ConversationAbandon *bool
+
+	// Timestamp of last chat message by Participant.
+	LastMessageTimestamp *time.Time
+
+	// Maximum chat response time by Participant.
+	MaxResponseTimeInMillis *int64
+
+	// Number of chat characters sent by Participant.
+	MessageLengthInChars *int32
+
+	// Number of chat messages sent by Participant.
+	MessagesSent *int32
+
+	// Number of chat messages sent by Participant.
+	NumResponses *int32
+
+	// The Participant's ID.
+	ParticipantId *string
+
+	// Information about the conversation participant. Following are the participant
+	// types: [Agent, Customer, Supervisor].
+	ParticipantType ParticipantType
+
+	// Total chat response time by Participant.
+	TotalResponseTimeInMillis *int64
 
 	noSmithyDocumentSerde
 }

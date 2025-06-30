@@ -1,0 +1,8 @@
+{
+    "id": "97021794-151e-4c53-b79a-69ab0c92e323",
+    "type": "feature",
+    "description": "Introduces AccessType, a new filter value for the DescribeSessions API.",
+    "modules": [
+        "service/ssm"
+    ]
+}

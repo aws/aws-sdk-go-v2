@@ -20,17 +20,29 @@ import (
 // Services account in an Amazon Web Services Region. Resources are automatically
 // registered with ARC by Amazon Web Services services.
 //
-// At this time, you can only start a zonal shift for Network Load Balancers and
-// Application Load Balancers with cross-zone load balancing turned off.
+// Amazon Application Recovery Controller currently supports enabling the
+// following resources for zonal shift and zonal autoshift:
+//
+// [Amazon EC2 Auto Scaling groups]
+//
+// [Amazon Elastic Kubernetes Service]
+//
+// [Application Load Balancer]
+//
+// [Network Load Balancer]
 //
 // When you start a zonal shift, traffic for the resource is no longer routed to
 // the Availability Zone. The zonal shift is created immediately in ARC. However,
 // it can take a short time, typically up to a few minutes, for existing,
 // in-progress connections in the Availability Zone to complete.
 //
-// For more information, see [Zonal shift] in the Amazon Route 53 Application Recovery
-// Controller Developer Guide.
+// For more information, see [Zonal shift] in the Amazon Application Recovery Controller
+// Developer Guide.
 //
+// [Amazon EC2 Auto Scaling groups]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.ec2-auto-scaling-groups.html
+// [Amazon Elastic Kubernetes Service]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.eks.html
+// [Application Load Balancer]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.app-load-balancers.html
+// [Network Load Balancer]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.network-load-balancers.html
 // [Zonal shift]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.html
 func (c *Client) StartZonalShift(ctx context.Context, params *StartZonalShiftInput, optFns ...func(*Options)) (*StartZonalShiftOutput, error) {
 	if params == nil {
@@ -89,8 +101,21 @@ type StartZonalShiftInput struct {
 	// The identifier for the resource that Amazon Web Services shifts traffic for.
 	// The identifier is the Amazon Resource Name (ARN) for the resource.
 	//
-	// At this time, supported resources are Network Load Balancers and Application
-	// Load Balancers with cross-zone load balancing turned off.
+	// Amazon Application Recovery Controller currently supports enabling the
+	// following resources for zonal shift and zonal autoshift:
+	//
+	// [Amazon EC2 Auto Scaling groups]
+	//
+	// [Amazon Elastic Kubernetes Service]
+	//
+	// [Application Load Balancer]
+	//
+	// [Network Load Balancer]
+	//
+	// [Amazon EC2 Auto Scaling groups]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.ec2-auto-scaling-groups.html
+	// [Amazon Elastic Kubernetes Service]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.eks.html
+	// [Application Load Balancer]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.app-load-balancers.html
+	// [Network Load Balancer]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.network-load-balancers.html
 	//
 	// This member is required.
 	ResourceIdentifier *string
@@ -132,8 +157,21 @@ type StartZonalShiftOutput struct {
 	// The identifier for the resource that Amazon Web Services shifts traffic for.
 	// The identifier is the Amazon Resource Name (ARN) for the resource.
 	//
-	// At this time, supported resources are Network Load Balancers and Application
-	// Load Balancers with cross-zone load balancing turned off.
+	// Amazon Application Recovery Controller currently supports enabling the
+	// following resources for zonal shift and zonal autoshift:
+	//
+	// [Amazon EC2 Auto Scaling groups]
+	//
+	// [Amazon Elastic Kubernetes Service]
+	//
+	// [Application Load Balancer]
+	//
+	// [Network Load Balancer]
+	//
+	// [Amazon EC2 Auto Scaling groups]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.ec2-auto-scaling-groups.html
+	// [Amazon Elastic Kubernetes Service]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.eks.html
+	// [Application Load Balancer]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.app-load-balancers.html
+	// [Network Load Balancer]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.resource-types.network-load-balancers.html
 	//
 	// This member is required.
 	ResourceIdentifier *string
@@ -147,7 +185,7 @@ type StartZonalShiftOutput struct {
 	//
 	// The Status for a zonal shift can have one of the following values:
 	//
-	//   - ACTIVE: The zonal shift has been started and active.
+	//   - ACTIVE: The zonal shift has been started and is active.
 	//
 	//   - EXPIRED: The zonal shift has expired (the expiry time was exceeded).
 	//

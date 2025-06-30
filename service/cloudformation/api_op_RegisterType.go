@@ -56,8 +56,8 @@ func (c *Client) RegisterType(ctx context.Context, params *RegisterTypeInput, op
 
 type RegisterTypeInput struct {
 
-	// A URL to the S3 bucket containing the extension project package that contains
-	// the necessary files for the extension you want to register.
+	// A URL to the S3 bucket that contains the extension project package that
+	// contains the necessary files for the extension you want to register.
 	//
 	// For information about generating a schema handler package for the extension you
 	// want to register, see [submit]in the CloudFormation Command Line Interface (CLI) User

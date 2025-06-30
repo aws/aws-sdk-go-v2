@@ -14392,6 +14392,80 @@ func awsRestjson1_deserializeDocumentExternalSourcesRetrieveAndGenerateConfigura
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentFieldForReranking(v **types.FieldForReranking, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FieldForReranking
+	if *v == nil {
+		sv = &types.FieldForReranking{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "fieldName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.FieldName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFieldsForReranking(v *[]types.FieldForReranking, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.FieldForReranking
+	if *v == nil {
+		cv = []types.FieldForReranking{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.FieldForReranking
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentFieldForReranking(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentFilterAttribute(v **types.FilterAttribute, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -16504,6 +16578,51 @@ func awsRestjson1_deserializeDocumentHumanWorkflowConfig(v **types.HumanWorkflow
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentImplicitFilterConfiguration(v **types.ImplicitFilterConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ImplicitFilterConfiguration
+	if *v == nil {
+		sv = &types.ImplicitFilterConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "metadataAttributes":
+			if err := awsRestjson1_deserializeDocumentMetadataAttributeSchemaList(&sv.MetadataAttributes, value); err != nil {
+				return err
+			}
+
+		case "modelArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BedrockModelArn to be of type string, got %T instead", value)
+				}
+				sv.ModelArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentImportedModelSummary(v **types.ImportedModelSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17223,6 +17342,11 @@ func awsRestjson1_deserializeDocumentKnowledgeBaseVectorSearchConfiguration(v **
 				return err
 			}
 
+		case "implicitFilterConfiguration":
+			if err := awsRestjson1_deserializeDocumentImplicitFilterConfiguration(&sv.ImplicitFilterConfiguration, value); err != nil {
+				return err
+			}
+
 		case "numberOfResults":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17243,6 +17367,11 @@ func awsRestjson1_deserializeDocumentKnowledgeBaseVectorSearchConfiguration(v **
 					return fmt.Errorf("expected SearchType to be of type string, got %T instead", value)
 				}
 				sv.OverrideSearchType = types.SearchType(jtv)
+			}
+
+		case "rerankingConfiguration":
+			if err := awsRestjson1_deserializeDocumentVectorSearchRerankingConfiguration(&sv.RerankingConfiguration, value); err != nil {
+				return err
 			}
 
 		default:
@@ -17603,6 +17732,143 @@ func awsRestjson1_deserializeDocumentMarketplaceModelEndpointSummary(v **types.M
 					return err
 				}
 				sv.UpdatedAt = ptr.Time(t)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMetadataAttributeSchema(v **types.MetadataAttributeSchema, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MetadataAttributeSchema
+	if *v == nil {
+		sv = &types.MetadataAttributeSchema{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "key":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Key = ptr.String(jtv)
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AttributeType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.AttributeType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMetadataAttributeSchemaList(v *[]types.MetadataAttributeSchema, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.MetadataAttributeSchema
+	if *v == nil {
+		cv = []types.MetadataAttributeSchema{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.MetadataAttributeSchema
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentMetadataAttributeSchema(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMetadataConfigurationForReranking(v **types.MetadataConfigurationForReranking, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MetadataConfigurationForReranking
+	if *v == nil {
+		sv = &types.MetadataConfigurationForReranking{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "selectionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RerankingMetadataSelectionMode to be of type string, got %T instead", value)
+				}
+				sv.SelectionMode = types.RerankingMetadataSelectionMode(jtv)
+			}
+
+		case "selectiveModeConfiguration":
+			if err := awsRestjson1_deserializeDocumentRerankingMetadataSelectiveModeConfiguration(&sv.SelectiveModeConfiguration, value); err != nil {
+				return err
 			}
 
 		default:
@@ -19868,6 +20134,52 @@ func awsRestjson1_deserializeDocumentRequestMetadataMap(v *map[string]string, va
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentRerankingMetadataSelectiveModeConfiguration(v *types.RerankingMetadataSelectiveModeConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.RerankingMetadataSelectiveModeConfiguration
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "fieldsToExclude":
+			var mv []types.FieldForReranking
+			if err := awsRestjson1_deserializeDocumentFieldsForReranking(&mv, value); err != nil {
+				return err
+			}
+			uv = &types.RerankingMetadataSelectiveModeConfigurationMemberFieldsToExclude{Value: mv}
+			break loop
+
+		case "fieldsToInclude":
+			var mv []types.FieldForReranking
+			if err := awsRestjson1_deserializeDocumentFieldsForReranking(&mv, value); err != nil {
+				return err
+			}
+			uv = &types.RerankingMetadataSelectiveModeConfigurationMemberFieldsToInclude{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.ResourceNotFoundException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -21612,6 +21924,150 @@ func awsRestjson1_deserializeDocumentValidityTerm(v **types.ValidityTerm, value 
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.AgreementDuration = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVectorSearchBedrockRerankingConfiguration(v **types.VectorSearchBedrockRerankingConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VectorSearchBedrockRerankingConfiguration
+	if *v == nil {
+		sv = &types.VectorSearchBedrockRerankingConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "metadataConfiguration":
+			if err := awsRestjson1_deserializeDocumentMetadataConfigurationForReranking(&sv.MetadataConfiguration, value); err != nil {
+				return err
+			}
+
+		case "modelConfiguration":
+			if err := awsRestjson1_deserializeDocumentVectorSearchBedrockRerankingModelConfiguration(&sv.ModelConfiguration, value); err != nil {
+				return err
+			}
+
+		case "numberOfRerankedResults":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.NumberOfRerankedResults = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVectorSearchBedrockRerankingModelConfiguration(v **types.VectorSearchBedrockRerankingModelConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VectorSearchBedrockRerankingModelConfiguration
+	if *v == nil {
+		sv = &types.VectorSearchBedrockRerankingModelConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "additionalModelRequestFields":
+			if err := awsRestjson1_deserializeDocumentAdditionalModelRequestFields(&sv.AdditionalModelRequestFields, value); err != nil {
+				return err
+			}
+
+		case "modelArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BedrockRerankingModelArn to be of type string, got %T instead", value)
+				}
+				sv.ModelArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVectorSearchRerankingConfiguration(v **types.VectorSearchRerankingConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VectorSearchRerankingConfiguration
+	if *v == nil {
+		sv = &types.VectorSearchRerankingConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "bedrockRerankingConfiguration":
+			if err := awsRestjson1_deserializeDocumentVectorSearchBedrockRerankingConfiguration(&sv.BedrockRerankingConfiguration, value); err != nil {
+				return err
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VectorSearchRerankingConfigurationType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.VectorSearchRerankingConfigurationType(jtv)
 			}
 
 		default:

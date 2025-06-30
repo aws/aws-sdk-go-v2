@@ -379,6 +379,9 @@ func awsAwsjson10_deserializeOpErrorBatchWriteItem(response *smithyhttp.Response
 	case strings.EqualFold("ProvisionedThroughputExceededException", errorCode):
 		return awsAwsjson10_deserializeErrorProvisionedThroughputExceededException(response, errorBody)
 
+	case strings.EqualFold("ReplicatedWriteConflictException", errorCode):
+		return awsAwsjson10_deserializeErrorReplicatedWriteConflictException(response, errorBody)
+
 	case strings.EqualFold("RequestLimitExceeded", errorCode):
 		return awsAwsjson10_deserializeErrorRequestLimitExceeded(response, errorBody)
 
@@ -11523,6 +11526,89 @@ func awsAwsjson10_deserializeDocumentGlobalTableNotFoundException(v **types.Glob
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentGlobalTableWitnessDescription(v **types.GlobalTableWitnessDescription, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GlobalTableWitnessDescription
+	if *v == nil {
+		sv = &types.GlobalTableWitnessDescription{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "RegionName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RegionName to be of type string, got %T instead", value)
+				}
+				sv.RegionName = ptr.String(jtv)
+			}
+
+		case "WitnessStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WitnessStatus to be of type string, got %T instead", value)
+				}
+				sv.WitnessStatus = types.WitnessStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentGlobalTableWitnessDescriptionList(v *[]types.GlobalTableWitnessDescription, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.GlobalTableWitnessDescription
+	if *v == nil {
+		cv = []types.GlobalTableWitnessDescription{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.GlobalTableWitnessDescription
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentGlobalTableWitnessDescription(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentIdempotentParameterMismatchException(v **types.IdempotentParameterMismatchException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -15882,6 +15968,11 @@ func awsAwsjson10_deserializeDocumentTableDescription(v **types.TableDescription
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.GlobalTableVersion = ptr.String(jtv)
+			}
+
+		case "GlobalTableWitnesses":
+			if err := awsAwsjson10_deserializeDocumentGlobalTableWitnessDescriptionList(&sv.GlobalTableWitnesses, value); err != nil {
+				return err
 			}
 
 		case "ItemCount":

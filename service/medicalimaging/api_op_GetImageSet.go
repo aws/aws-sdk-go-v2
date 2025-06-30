@@ -80,6 +80,9 @@ type GetImageSetOutput struct {
 	// The image set workflow status.
 	ImageSetWorkflowStatus types.ImageSetWorkflowStatus
 
+	// The flag to determine whether the image set is primary or not.
+	IsPrimary *bool
+
 	// The error message thrown if an image set action fails.
 	Message *string
 

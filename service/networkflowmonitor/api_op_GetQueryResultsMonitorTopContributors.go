@@ -21,8 +21,9 @@ import (
 // for your account by CreateScope .
 //
 // Top contributors in Network Flow Monitor are network flows with the highest
-// values for a specific metric type, related to a scope (for workload insights) or
-// a monitor.
+// values for a specific metric type. Top contributors can be across all workload
+// insights, for a given scope, or for a specific monitor. Use the applicable call
+// for the top contributors that you want to be returned.
 func (c *Client) GetQueryResultsMonitorTopContributors(ctx context.Context, params *GetQueryResultsMonitorTopContributorsInput, optFns ...func(*Options)) (*GetQueryResultsMonitorTopContributorsOutput, error) {
 	if params == nil {
 		params = &GetQueryResultsMonitorTopContributorsInput{}
@@ -46,7 +47,7 @@ type GetQueryResultsMonitorTopContributorsInput struct {
 	MonitorName *string
 
 	// The identifier for the query. A query ID is an internally-generated identifier
-	// for a specific query returned from an API call to start a query.
+	// for a specific query returned from an API call to create a query.
 	//
 	// This member is required.
 	QueryId *string

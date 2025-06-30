@@ -62,7 +62,9 @@ type CreateAccessKeyInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful CreateAccessKey request.
+// Contains the response to a successful [CreateAccessKey] request.
+//
+// [CreateAccessKey]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateAccessKey.html
 type CreateAccessKeyOutput struct {
 
 	// A structure with details about the access key.

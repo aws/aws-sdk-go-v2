@@ -78,7 +78,9 @@ type CreateInstanceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful CreateInstanceProfile request.
+// Contains the response to a successful [CreateInstanceProfile] request.
+//
+// [CreateInstanceProfile]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateInstanceProfile.html
 type CreateInstanceProfileOutput struct {
 
 	// A structure containing details about the new instance profile.

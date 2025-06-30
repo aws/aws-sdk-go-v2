@@ -1,0 +1,8 @@
+{
+    "id": "2ec09776-8042-47d9-a0b1-f29bc06508f4",
+    "type": "feature",
+    "description": "Add API Key and document citations support for Bedrock Runtime APIs",
+    "modules": [
+        "service/bedrockruntime"
+    ]
+}

@@ -3907,6 +3907,42 @@ func awsAwsjson10_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentAdvancedOptions(v **types.AdvancedOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AdvancedOptions
+	if *v == nil {
+		sv = &types.AdvancedOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "x12":
+			if err := awsAwsjson10_deserializeDocumentX12AdvancedOptions(&sv.X12, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentCapabilityConfiguration(v *types.CapabilityConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4003,6 +4039,11 @@ func awsAwsjson10_deserializeDocumentCapabilityOptions(v **types.CapabilityOptio
 
 	for key, value := range shape {
 		switch key {
+		case "inboundEdi":
+			if err := awsAwsjson10_deserializeDocumentInboundEdiOptions(&sv.InboundEdi, value); err != nil {
+				return err
+			}
+
 		case "outboundEdi":
 			if err := awsAwsjson10_deserializeDocumentOutboundEdiOptions(&sv.OutboundEdi, value); err != nil {
 				return err
@@ -4285,6 +4326,42 @@ loop:
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentInboundEdiOptions(v **types.InboundEdiOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InboundEdiOptions
+	if *v == nil {
+		sv = &types.InboundEdiOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "x12":
+			if err := awsAwsjson10_deserializeDocumentX12InboundEdiOptions(&sv.X12, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentInputConversion(v **types.InputConversion, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4307,6 +4384,11 @@ func awsAwsjson10_deserializeDocumentInputConversion(v **types.InputConversion, 
 
 	for key, value := range shape {
 		switch key {
+		case "advancedOptions":
+			if err := awsAwsjson10_deserializeDocumentAdvancedOptions(&sv.AdvancedOptions, value); err != nil {
+				return err
+			}
+
 		case "formatOptions":
 			if err := awsAwsjson10_deserializeDocumentFormatOptions(&sv.FormatOptions, value); err != nil {
 				return err
@@ -4582,6 +4664,42 @@ func awsAwsjson10_deserializeDocumentOutputConversion(v **types.OutputConversion
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentParsedSplitFileContentsList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -5569,6 +5687,223 @@ func awsAwsjson10_deserializeDocumentValidationMessages(v *[]string, value inter
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentWrapOptions(v **types.WrapOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WrapOptions
+	if *v == nil {
+		sv = &types.WrapOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "lineLength":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected LineLength to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.LineLength = ptr.Int32(int32(i64))
+			}
+
+		case "lineTerminator":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LineTerminator to be of type string, got %T instead", value)
+				}
+				sv.LineTerminator = types.LineTerminator(jtv)
+			}
+
+		case "wrapBy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WrapFormat to be of type string, got %T instead", value)
+				}
+				sv.WrapBy = types.WrapFormat(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentX12AcknowledgmentOptions(v **types.X12AcknowledgmentOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.X12AcknowledgmentOptions
+	if *v == nil {
+		sv = &types.X12AcknowledgmentOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "functionalAcknowledgment":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected X12FunctionalAcknowledgment to be of type string, got %T instead", value)
+				}
+				sv.FunctionalAcknowledgment = types.X12FunctionalAcknowledgment(jtv)
+			}
+
+		case "technicalAcknowledgment":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected X12TechnicalAcknowledgment to be of type string, got %T instead", value)
+				}
+				sv.TechnicalAcknowledgment = types.X12TechnicalAcknowledgment(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentX12AdvancedOptions(v **types.X12AdvancedOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.X12AdvancedOptions
+	if *v == nil {
+		sv = &types.X12AdvancedOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "splitOptions":
+			if err := awsAwsjson10_deserializeDocumentX12SplitOptions(&sv.SplitOptions, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentX12ControlNumbers(v **types.X12ControlNumbers, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.X12ControlNumbers
+	if *v == nil {
+		sv = &types.X12ControlNumbers{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "startingFunctionalGroupControlNumber":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected StartingFunctionalGroupControlNumber to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StartingFunctionalGroupControlNumber = ptr.Int32(int32(i64))
+			}
+
+		case "startingInterchangeControlNumber":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected StartingInterchangeControlNumber to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StartingInterchangeControlNumber = ptr.Int32(int32(i64))
+			}
+
+		case "startingTransactionSetControlNumber":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected StartingTransactionSetControlNumber to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StartingTransactionSetControlNumber = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentX12Delimiters(v **types.X12Delimiters, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5703,6 +6038,11 @@ func awsAwsjson10_deserializeDocumentX12Envelope(v **types.X12Envelope, value in
 				return err
 			}
 
+		case "wrapOptions":
+			if err := awsAwsjson10_deserializeDocumentWrapOptions(&sv.WrapOptions, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -5759,6 +6099,42 @@ func awsAwsjson10_deserializeDocumentX12FunctionalGroupHeaders(v **types.X12Func
 					return fmt.Errorf("expected X12ResponsibleAgencyCode to be of type string, got %T instead", value)
 				}
 				sv.ResponsibleAgencyCode = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentX12InboundEdiOptions(v **types.X12InboundEdiOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.X12InboundEdiOptions
+	if *v == nil {
+		sv = &types.X12InboundEdiOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "acknowledgmentOptions":
+			if err := awsAwsjson10_deserializeDocumentX12AcknowledgmentOptions(&sv.AcknowledgmentOptions, value); err != nil {
+				return err
 			}
 
 		default:
@@ -5886,6 +6262,11 @@ func awsAwsjson10_deserializeDocumentX12OutboundEdiHeaders(v **types.X12Outbound
 
 	for key, value := range shape {
 		switch key {
+		case "controlNumbers":
+			if err := awsAwsjson10_deserializeDocumentX12ControlNumbers(&sv.ControlNumbers, value); err != nil {
+				return err
+			}
+
 		case "delimiters":
 			if err := awsAwsjson10_deserializeDocumentX12Delimiters(&sv.Delimiters, value); err != nil {
 				return err
@@ -5894,6 +6275,15 @@ func awsAwsjson10_deserializeDocumentX12OutboundEdiHeaders(v **types.X12Outbound
 		case "functionalGroupHeaders":
 			if err := awsAwsjson10_deserializeDocumentX12FunctionalGroupHeaders(&sv.FunctionalGroupHeaders, value); err != nil {
 				return err
+			}
+
+		case "gs05TimeFormat":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected X12GS05TimeFormat to be of type string, got %T instead", value)
+				}
+				sv.Gs05TimeFormat = types.X12GS05TimeFormat(jtv)
 			}
 
 		case "interchangeControlHeaders":
@@ -5908,6 +6298,46 @@ func awsAwsjson10_deserializeDocumentX12OutboundEdiHeaders(v **types.X12Outbound
 					return fmt.Errorf("expected X12ValidateEdi to be of type *bool, got %T instead", value)
 				}
 				sv.ValidateEdi = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentX12SplitOptions(v **types.X12SplitOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.X12SplitOptions
+	if *v == nil {
+		sv = &types.X12SplitOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "splitBy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected X12SplitBy to be of type string, got %T instead", value)
+				}
+				sv.SplitBy = types.X12SplitBy(jtv)
 			}
 
 		default:
@@ -7419,6 +7849,11 @@ func awsAwsjson10_deserializeOpDocumentTestParsingOutput(v **TestParsingOutput, 
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ParsedFileContent = ptr.String(jtv)
+			}
+
+		case "parsedSplitFileContents":
+			if err := awsAwsjson10_deserializeDocumentParsedSplitFileContentsList(&sv.ParsedSplitFileContents, value); err != nil {
+				return err
 			}
 
 		default:

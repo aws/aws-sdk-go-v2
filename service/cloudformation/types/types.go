@@ -410,8 +410,8 @@ type ManagedExecution struct {
 // [Create reusable resource configurations that can be included across templates with CloudFormation modules]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/modules.html
 type ModuleInfo struct {
 
-	// A concatenated list of the logical IDs of the module or modules containing the
-	// resource. Modules are listed starting with the inner-most nested module, and
+	// A concatenated list of the logical IDs of the module or modules that contains
+	// the resource. Modules are listed starting with the inner-most nested module, and
 	// separated by / .
 	//
 	// In the following example, the resource was created from a module, moduleA ,
@@ -424,8 +424,9 @@ type ModuleInfo struct {
 	// [Reference module resources in CloudFormation templates]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/module-ref-resources.html
 	LogicalIdHierarchy *string
 
-	// A concatenated list of the module type or types containing the resource. Module
-	// types are listed starting with the inner-most nested module, and separated by / .
+	// A concatenated list of the module type or types that contains the resource.
+	// Module types are listed starting with the inner-most nested module, and
+	// separated by / .
 	//
 	// In the following example, the resource was created from a module of type
 	// AWS::First::Example::MODULE , that's nested inside a parent module of type
@@ -633,12 +634,12 @@ type ResourceChange struct {
 	// determined).
 	Action ChangeAction
 
-	// An encoded JSON string containing the context of the resource after the change
-	// is executed.
+	// An encoded JSON string that contains the context of the resource after the
+	// change is executed.
 	AfterContext *string
 
-	// An encoded JSON string containing the context of the resource before the change
-	// is executed.
+	// An encoded JSON string that contains the context of the resource before the
+	// change is executed.
 	BeforeContext *string
 
 	// The change set ID of the nested change set.
@@ -1015,9 +1016,9 @@ type ResourceToImport struct {
 	noSmithyDocumentSerde
 }
 
-// Structure containing the rollback triggers for CloudFormation to monitor during
-// stack creation and updating operations, and for the specified monitoring period
-// afterwards.
+// Structure that contains the rollback triggers for CloudFormation to monitor
+// during stack creation and updating operations, and for the specified monitoring
+// period afterwards.
 //
 // Rollback triggers enable you to have CloudFormation monitor the state of your
 // application during stack creation and updating, and to roll back that operation
@@ -1090,8 +1091,8 @@ type RollbackTrigger struct {
 
 	// The resource type of the rollback trigger. Specify either [AWS::CloudWatch::Alarm] or [AWS::CloudWatch::CompositeAlarm] resource types.
 	//
-	// [AWS::CloudWatch::CompositeAlarm]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudwatch-compositealarm.html
-	// [AWS::CloudWatch::Alarm]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudwatch-alarm.html
+	// [AWS::CloudWatch::CompositeAlarm]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-cloudwatch-compositealarm.html
+	// [AWS::CloudWatch::Alarm]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-cloudwatch-alarm.html
 	//
 	// This member is required.
 	Type *string
@@ -1259,13 +1260,12 @@ type Stack struct {
 	// A list of Parameter structures.
 	Parameters []Parameter
 
-	// For nested stacks--stacks created as resources for another stack--the stack ID
-	// of the direct parent of this stack. For the first level of nested stacks, the
-	// root stack is also the parent stack.
+	// For nested stacks, the stack ID of the direct parent of this stack. For the
+	// first level of nested stacks, the root stack is also the parent stack.
 	//
-	// For more information, see [Embed stacks within other stacks using nested stacks] in the CloudFormation User Guide.
+	// For more information, see [Nested stacks] in the CloudFormation User Guide.
 	//
-	// [Embed stacks within other stacks using nested stacks]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
+	// [Nested stacks]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
 	ParentId *string
 
 	// When set to true , newly created resources are deleted when the operation rolls
@@ -1284,12 +1284,12 @@ type Stack struct {
 	// updating operations, and for the specified monitoring period afterwards.
 	RollbackConfiguration *RollbackConfiguration
 
-	// For nested stacks--stacks created as resources for another stack--the stack ID
-	// of the top-level stack to which the nested stack ultimately belongs.
+	// For nested stacks, the stack ID of the top-level stack to which the nested
+	// stack ultimately belongs.
 	//
-	// For more information, see [Embed stacks within other stacks using nested stacks] in the CloudFormation User Guide.
+	// For more information, see [Nested stacks] in the CloudFormation User Guide.
 	//
-	// [Embed stacks within other stacks using nested stacks]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
+	// [Nested stacks]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
 	RootId *string
 
 	// Unique identifier of the stack.
@@ -1341,7 +1341,8 @@ type StackDriftInformation struct {
 	//   - IN_SYNC : The stack's actual configuration matches its expected template
 	//   configuration.
 	//
-	//   - UNKNOWN : This value is reserved for future use.
+	//   - UNKNOWN : CloudFormation could not run drift detection for a resource in the
+	//   stack.
 	//
 	// This member is required.
 	StackDriftStatus StackDriftStatus
@@ -1372,7 +1373,8 @@ type StackDriftInformationSummary struct {
 	//   - IN_SYNC : The stack's actual configuration matches its expected template
 	//   configuration.
 	//
-	//   - UNKNOWN : This value is reserved for future use.
+	//   - UNKNOWN : CloudFormation could not run drift detection for a resource in the
+	//   stack.
 	//
 	// This member is required.
 	StackDriftStatus StackDriftStatus
@@ -1422,8 +1424,8 @@ type StackEvent struct {
 	// Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002 .
 	ClientRequestToken *string
 
-	// An optional field containing information about the detailed status of the stack
-	// event.
+	// An optional field that contains information about the detailed status of the
+	// stack event.
 	//
 	//   - CONFIGURATION_COMPLETE - all of the resources in the stack have reached that
 	//   event. For more information, see [Understand CloudFormation stack creation events]in the CloudFormation User Guide.
@@ -2000,6 +2002,9 @@ type StackResourceDrift struct {
 	//
 	//   - NOT_CHECKED : CloudFormation does not currently return this value.
 	//
+	//   - UNKNOWN : CloudFormation could not run drift detection for the resource. See
+	//   the DriftStatusReason for details.
+	//
 	// This member is required.
 	StackResourceDriftStatus StackResourceDriftStatus
 
@@ -2008,14 +2013,17 @@ type StackResourceDrift struct {
 	// This member is required.
 	Timestamp *time.Time
 
-	// A JSON structure containing the actual property values of the stack resource.
+	// A JSON structure that contains the actual property values of the stack resource.
 	//
 	// For resources whose StackResourceDriftStatus is DELETED , this structure will
 	// not be present.
 	ActualProperties *string
 
-	// A JSON structure containing the expected property values of the stack resource,
-	// as defined in the stack template and any values specified as template
+	// The reason for the drift status.
+	DriftStatusReason *string
+
+	// A JSON structure that contains the expected property values of the stack
+	// resource, as defined in the stack template and any values specified as template
 	// parameters.
 	//
 	// For resources whose StackResourceDriftStatus is DELETED , this structure will
@@ -2498,8 +2506,8 @@ type StackSetOperationPreferences struct {
 	// in a Region, CloudFormation doesn't attempt the operation in any subsequent
 	// Regions.
 	//
-	// Conditional: You must specify either FailureToleranceCount or
-	// FailureTolerancePercentage (but not both).
+	// You can specify either FailureToleranceCount or FailureTolerancePercentage , but
+	// not both.
 	//
 	// By default, 0 is specified.
 	FailureToleranceCount *int32
@@ -2512,8 +2520,8 @@ type StackSetOperationPreferences struct {
 	// When calculating the number of accounts based on the specified percentage,
 	// CloudFormation rounds down to the next whole number.
 	//
-	// Conditional: You must specify either FailureToleranceCount or
-	// FailureTolerancePercentage , but not both.
+	// You can specify either FailureToleranceCount or FailureTolerancePercentage , but
+	// not both.
 	//
 	// By default, 0 is specified.
 	FailureTolerancePercentage *int32
@@ -2527,8 +2535,8 @@ type StackSetOperationPreferences struct {
 	// deployments, under certain circumstances the actual number of accounts acted
 	// upon concurrently may be lower due to service throttling.
 	//
-	// Conditional: You must specify either MaxConcurrentCount or
-	// MaxConcurrentPercentage , but not both.
+	// You can specify either MaxConcurrentCount or MaxConcurrentPercentage , but not
+	// both.
 	//
 	// By default, 1 is specified.
 	MaxConcurrentCount *int32
@@ -2545,8 +2553,8 @@ type StackSetOperationPreferences struct {
 	// deployments, under certain circumstances the actual number of accounts acted
 	// upon concurrently may be lower due to service throttling.
 	//
-	// Conditional: You must specify either MaxConcurrentCount or
-	// MaxConcurrentPercentage , but not both.
+	// You can specify either MaxConcurrentCount or MaxConcurrentPercentage , but not
+	// both.
 	//
 	// By default, 1 is specified.
 	MaxConcurrentPercentage *int32
@@ -2782,21 +2790,20 @@ type StackSummary struct {
 	// stack has been updated at least once.
 	LastUpdatedTime *time.Time
 
-	// For nested stacks--stacks created as resources for another stack--the stack ID
-	// of the direct parent of this stack. For the first level of nested stacks, the
-	// root stack is also the parent stack.
+	// For nested stacks, the stack ID of the direct parent of this stack. For the
+	// first level of nested stacks, the root stack is also the parent stack.
 	//
-	// For more information, see [Embed stacks within other stacks using nested stacks] in the CloudFormation User Guide.
+	// For more information, see [Nested stacks] in the CloudFormation User Guide.
 	//
-	// [Embed stacks within other stacks using nested stacks]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
+	// [Nested stacks]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
 	ParentId *string
 
-	// For nested stacks--stacks created as resources for another stack--the stack ID
-	// of the top-level stack to which the nested stack ultimately belongs.
+	// For nested stacks, the stack ID of the top-level stack to which the nested
+	// stack ultimately belongs.
 	//
-	// For more information, see [Embed stacks within other stacks using nested stacks] in the CloudFormation User Guide.
+	// For more information, see [Nested stacks] in the CloudFormation User Guide.
 	//
-	// [Embed stacks within other stacks using nested stacks]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
+	// [Nested stacks]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
 	RootId *string
 
 	// Unique stack identifier.
@@ -2822,7 +2829,7 @@ type Tag struct {
 	// This member is required.
 	Key *string
 
-	//  Required. A string containing the value for this tag. You can specify a
+	//  Required. A string that contains the value for this tag. You can specify a
 	// maximum of 256 characters for a tag value.
 	//
 	// This member is required.

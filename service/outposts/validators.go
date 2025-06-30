@@ -687,6 +687,12 @@ func validateAddress(v *types.Address) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Address"}
+	if v.ContactName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactName"))
+	}
+	if v.ContactPhoneNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactPhoneNumber"))
+	}
 	if v.AddressLine1 == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AddressLine1"))
 	}

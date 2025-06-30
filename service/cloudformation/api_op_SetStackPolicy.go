@@ -34,18 +34,20 @@ type SetStackPolicyInput struct {
 	// This member is required.
 	StackName *string
 
-	// Structure containing the stack policy body. For more information, see [Prevent updates to stack resources] in the
-	// CloudFormation User Guide. You can specify either the StackPolicyBody or the
-	// StackPolicyURL parameter, but not both.
+	// Structure that contains the stack policy body. For more information, see [Prevent updates to stack resources] in
+	// the CloudFormation User Guide. You can specify either the StackPolicyBody or
+	// the StackPolicyURL parameter, but not both.
 	//
 	// [Prevent updates to stack resources]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html
 	StackPolicyBody *string
 
-	// Location of a file containing the stack policy. The URL must point to a policy
-	// (maximum size: 16 KB) located in an Amazon S3 bucket in the same Amazon Web
-	// Services Region as the stack. The location for an Amazon S3 bucket must start
-	// with https:// . You can specify either the StackPolicyBody or the StackPolicyURL
-	// parameter, but not both.
+	// Location of a file that contains the stack policy. The URL must point to a
+	// policy (maximum size: 16 KB) located in an Amazon S3 bucket in the same Amazon
+	// Web Services Region as the stack. The location for an Amazon S3 bucket must
+	// start with https:// . URLs from S3 static websites are not supported.
+	//
+	// You can specify either the StackPolicyBody or the StackPolicyURL parameter, but
+	// not both.
 	StackPolicyURL *string
 
 	noSmithyDocumentSerde

@@ -21,10 +21,11 @@ import (
 // StartQueryWorkloadInsightsTopContributorsData .
 //
 // Top contributors in Network Flow Monitor are network flows with the highest
-// values for a specific metric type, related to a scope (for workload insights) or
-// a monitor.
+// values for a specific metric type. Top contributors can be across all workload
+// insights, for a given scope, or for a specific monitor. Use the applicable call
+// for the top contributors that you want to be returned.
 //
-// The top contributor network flows overall for a specific metric type, for
+// The top contributor network flows overall are for a specific metric type, for
 // example, the number of retransmissions.
 func (c *Client) GetQueryStatusWorkloadInsightsTopContributorsData(ctx context.Context, params *GetQueryStatusWorkloadInsightsTopContributorsDataInput, optFns ...func(*Options)) (*GetQueryStatusWorkloadInsightsTopContributorsDataOutput, error) {
 	if params == nil {

@@ -49077,6 +49077,11 @@ func awsRestjson1_deserializeDocumentAthenaParameters(v **types.AthenaParameters
 
 	for key, value := range shape {
 		switch key {
+		case "IdentityCenterConfiguration":
+			if err := awsRestjson1_deserializeDocumentIdentityCenterConfiguration(&sv.IdentityCenterConfiguration, value); err != nil {
+				return err
+			}
+
 		case "RoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -52368,6 +52373,15 @@ func awsRestjson1_deserializeDocumentCapabilities(v **types.Capabilities, value 
 				sv.ExportToCsv = types.CapabilityState(jtv)
 			}
 
+		case "ExportToCsvInScheduledReports":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ExportToCsvInScheduledReports = types.CapabilityState(jtv)
+			}
+
 		case "ExportToExcel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -52375,6 +52389,51 @@ func awsRestjson1_deserializeDocumentCapabilities(v **types.Capabilities, value 
 					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
 				}
 				sv.ExportToExcel = types.CapabilityState(jtv)
+			}
+
+		case "ExportToExcelInScheduledReports":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ExportToExcelInScheduledReports = types.CapabilityState(jtv)
+			}
+
+		case "ExportToPdf":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ExportToPdf = types.CapabilityState(jtv)
+			}
+
+		case "ExportToPdfInScheduledReports":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ExportToPdfInScheduledReports = types.CapabilityState(jtv)
+			}
+
+		case "IncludeContentInScheduledReportsEmail":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.IncludeContentInScheduledReportsEmail = types.CapabilityState(jtv)
+			}
+
+		case "PrintReports":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.PrintReports = types.CapabilityState(jtv)
 			}
 
 		case "RenameSharedFolders":
@@ -90095,6 +90154,11 @@ func awsRestjson1_deserializeDocumentSheetTextBox(v **types.SheetTextBox, value 
 				sv.Content = ptr.String(jtv)
 			}
 
+		case "Interactions":
+			if err := awsRestjson1_deserializeDocumentTextBoxInteractionOptions(&sv.Interactions, value); err != nil {
+				return err
+			}
+
 		case "SheetTextBoxId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -95529,6 +95593,82 @@ func awsRestjson1_deserializeDocumentTextAreaControlDisplayOptions(v **types.Tex
 		case "TitleOptions":
 			if err := awsRestjson1_deserializeDocumentLabelOptions(&sv.TitleOptions, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTextBoxInteractionOptions(v **types.TextBoxInteractionOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TextBoxInteractionOptions
+	if *v == nil {
+		sv = &types.TextBoxInteractionOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "TextBoxMenuOption":
+			if err := awsRestjson1_deserializeDocumentTextBoxMenuOption(&sv.TextBoxMenuOption, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTextBoxMenuOption(v **types.TextBoxMenuOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TextBoxMenuOption
+	if *v == nil {
+		sv = &types.TextBoxMenuOption{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AvailabilityStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DashboardBehavior to be of type string, got %T instead", value)
+				}
+				sv.AvailabilityStatus = types.DashboardBehavior(jtv)
 			}
 
 		default:

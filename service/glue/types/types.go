@@ -5434,6 +5434,12 @@ type IntegrationConfig struct {
 	// 8640 minutes (six days). Currently supports creation of RefreshInterval only.
 	RefreshInterval *string
 
+	//  A collection of key-value pairs that specify additional properties for the
+	// integration source. These properties provide configuration options that can be
+	// used to customize the behavior of the ODB source during data integration
+	// operations.
+	SourceProperties map[string]string
+
 	noSmithyDocumentSerde
 }
 

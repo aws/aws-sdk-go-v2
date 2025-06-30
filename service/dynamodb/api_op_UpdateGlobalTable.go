@@ -26,9 +26,7 @@ import (
 // To determine which version you're using, see [Determining the global table version you are using]. To update existing global tables
 // from version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see [Upgrading global tables].
 //
-// For global tables, this operation only applies to global tables using Version
-// 2019.11.21 (Current version). If you are using global tables [Version 2019.11.21]you can use [UpdateTable]
-// instead.
+// If you are using global tables [Version 2019.11.21] (Current) you can use [UpdateTable] instead.
 //
 // Although you can use UpdateGlobalTable to add replicas and remove replicas in a
 // single request, for simplicity we recommend that you issue separate requests for

@@ -20,9 +20,6 @@ import (
 // returns a ResourceNotFoundException . If table is already in the DELETING
 // state, no error is returned.
 //
-// For global tables, this operation only applies to global tables using Version
-// 2019.11.21 (Current version).
-//
 // DynamoDB might continue to accept data read and write operations, such as
 // GetItem and PutItem , on a table in the DELETING state until the table deletion
 // is complete. For the full list of table states, see [TableStatus].

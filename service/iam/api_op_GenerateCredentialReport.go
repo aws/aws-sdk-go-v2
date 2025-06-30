@@ -35,7 +35,9 @@ type GenerateCredentialReportInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the response to a successful GenerateCredentialReport request.
+// Contains the response to a successful [GenerateCredentialReport] request.
+//
+// [GenerateCredentialReport]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GenerateCredentialReport.html
 type GenerateCredentialReportOutput struct {
 
 	// Information about the credential report.

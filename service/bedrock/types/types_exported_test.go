@@ -369,6 +369,27 @@ func ExampleRequestMetadataFilters_outputUsage() {
 var _ []types.RequestMetadataBaseFilters
 var _ map[string]string
 
+func ExampleRerankingMetadataSelectiveModeConfiguration_outputUsage() {
+	var union types.RerankingMetadataSelectiveModeConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RerankingMetadataSelectiveModeConfigurationMemberFieldsToExclude:
+		_ = v.Value // Value is []types.FieldForReranking
+
+	case *types.RerankingMetadataSelectiveModeConfigurationMemberFieldsToInclude:
+		_ = v.Value // Value is []types.FieldForReranking
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.FieldForReranking
+
 func ExampleRetrievalFilter_outputUsage() {
 	var union types.RetrievalFilter
 	// type switches can be used to check the union value
