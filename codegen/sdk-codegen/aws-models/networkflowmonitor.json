@@ -401,6 +401,9 @@
                     "target": "com.amazonaws.networkflowmonitor#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.networkflowmonitor#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.networkflowmonitor#InternalServerException"
                 },
                 {
@@ -526,22 +529,7 @@
                     "uri": "/monitors/{monitorName}",
                     "method": "GET"
                 },
-                "smithy.api#readonly": {},
-                "smithy.test#smokeTests": [
-                    {
-                        "id": "GetMonitorSuccess",
-                        "params": {
-                            "monitorName": "SmokeTestMonitor"
-                        },
-                        "expect": {
-                            "success": {}
-                        },
-                        "vendorParamsShape": "aws.test#AwsVendorParams",
-                        "vendorParams": {
-                            "region": "us-east-1"
-                        }
-                    }
-                ]
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.networkflowmonitor#GetMonitorInput": {
@@ -656,7 +644,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to get the results of a query that retrieves top contributors data for a monitor"
                 },
-                "smithy.api#documentation": "<p>Return the data for a query with the Network Flow Monitor query interface. \n   \t\tYou specify the query that you want to return results for by providing a query ID \n   \t\tand a monitor name. This query returns the top contributors for a specific monitor.</p>\n         <p>Create a query ID for this call by calling the corresponding API call to start the query, \n   \t\t<code>StartQueryMonitorTopContributors</code>. Use the scope ID that was returned\n   \t\tfor your account by <code>CreateScope</code>.</p>\n         <p>Top contributors in Network Flow Monitor are network flows with the highest values for a specific \n   \t\tmetric type, related to a scope (for workload insights) or a monitor.</p>",
+                "smithy.api#documentation": "<p>Return the data for a query with the Network Flow Monitor query interface. \n   \t\tYou specify the query that you want to return results for by providing a query ID \n   \t\tand a monitor name. This query returns the top contributors for a specific monitor.</p>\n         <p>Create a query ID for this call by calling the corresponding API call to start the query, \n   \t\t<code>StartQueryMonitorTopContributors</code>. Use the scope ID that was returned\n   \t\tfor your account by <code>CreateScope</code>.</p>\n         <p>Top contributors in Network Flow Monitor are network flows with the highest values for a specific \n   \t\tmetric type. Top contributors can be across all workload insights, for a given scope, or for \n   \t\ta specific monitor. Use the applicable call for the top contributors that you want to be\n   \t\treturned.</p>",
                 "smithy.api#http": {
                     "uri": "/monitors/{monitorName}/topContributorsQueries/{queryId}/results",
                     "method": "GET"
@@ -684,7 +672,7 @@
                 "queryId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the query. A query ID is an internally-generated \n   \t\tidentifier for a specific query returned from an API call to start a query.</p>",
+                        "smithy.api#documentation": "<p>The identifier for the query. A query ID is an internally-generated \n   \t\tidentifier for a specific query returned from an API call to create a query.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -767,7 +755,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to get the results of a query that retrieves top contributors for workload insights"
                 },
-                "smithy.api#documentation": "<p>Return the data for a query with the Network Flow Monitor query interface. \n   \t\tYou specify the query that you want to return results for by providing a query ID \n   \t\tand a monitor name.</p>\n         <p>This query returns the top contributors for a scope for workload insights. Workload \n   \t\tinsights provide a high level view of network flow performance data collected by agents.\n   \t\tTo return the data for the top contributors, see <code>GetQueryResultsWorkloadInsightsTopContributorsData</code>.</p>\n         <p>Create a query ID for this call by calling the corresponding API call to start the query, \n   \t\t<code>StartQueryWorkloadInsightsTopContributors</code>. Use the scope ID that was returned\n   \t\tfor your account by <code>CreateScope</code>.</p>\n         <p>Top contributors in Network Flow Monitor are network flows with the highest values for a specific \n   \t\tmetric type, related to a scope (for workload insights) or a monitor.</p>",
+                "smithy.api#documentation": "<p>Return the data for a query with the Network Flow Monitor query interface. \n   \t\tYou specify the query that you want to return results for by providing a query ID \n   \t\tand a monitor name.</p>\n         <p>This query returns the top contributors for a scope for workload insights. Workload \n   \t\tinsights provide a high level view of network flow performance data collected by agents.\n   \t\tTo return the data for the top contributors, see <code>GetQueryResultsWorkloadInsightsTopContributorsData</code>.</p>\n         <p>Create a query ID for this call by calling the corresponding API call to start the query, \n   \t\t<code>StartQueryWorkloadInsightsTopContributors</code>. Use the scope ID that was returned\n   \t\tfor your account by <code>CreateScope</code>.</p>\n         <p>Top contributors in Network Flow Monitor are network flows with the highest values for a specific \n   \t\tmetric type. Top contributors can be across all workload insights, for a given scope, or for \n   \t\ta specific monitor. Use the applicable call for the top contributors that you want to be\n   \t\treturned.</p>",
                 "smithy.api#http": {
                     "uri": "/workloadInsights/{scopeId}/topContributorsQueries/{queryId}/results",
                     "method": "GET"
@@ -814,7 +802,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to get the results of a query that retrieves top contributors data points for workload insights"
                 },
-                "smithy.api#documentation": "<p>Return the data for a query with the Network Flow Monitor query interface. \n   \t\tSpecify the query that you want to return results for by providing a query ID \n   \t\tand a scope ID.</p>\n         <p>This query returns the data for top contributors for workload insights for a specific scope. \n   \t\tWorkload insights provide a high level view of network flow performance data collected by agents \n   \t\tfor a scope. To return just the top contributors, see <code>GetQueryResultsWorkloadInsightsTopContributors</code>.</p>\n         <p>Create a query ID for this call by calling the corresponding API call to start the query, \n   \t\t<code>StartQueryWorkloadInsightsTopContributorsData</code>. Use the scope ID that was returned\n   \t\tfor your account by <code>CreateScope</code>.</p>\n         <p>Top contributors in Network Flow Monitor are network flows with the highest values for a specific \n   \t\tmetric type, related to a scope (for workload insights) or a monitor.</p>\n         <p>The top contributor network flows overall for a specific metric type, for example, the \n   \t\tnumber of retransmissions.</p>",
+                "smithy.api#documentation": "<p>Return the data for a query with the Network Flow Monitor query interface. \n   \t\tSpecify the query that you want to return results for by providing a query ID \n   \t\tand a scope ID.</p>\n         <p>This query returns the data for top contributors for workload insights for a specific scope. \n   \t\tWorkload insights provide a high level view of network flow performance data collected by agents \n   \t\tfor a scope. To return just the top contributors, see <code>GetQueryResultsWorkloadInsightsTopContributors</code>.</p>\n         <p>Create a query ID for this call by calling the corresponding API call to start the query, \n   \t\t<code>StartQueryWorkloadInsightsTopContributorsData</code>. Use the scope ID that was returned\n   \t\tfor your account by <code>CreateScope</code>.</p>\n         <p>Top contributors in Network Flow Monitor are network flows with the highest values for a specific \n   \t\tmetric type. Top contributors can be across all workload insights, for a given scope, or for \n   \t\ta specific monitor. Use the applicable call for the top contributors that you want to be\n   \t\treturned.</p>\n         <p>The top contributor network flows overall are for a specific metric type, for example, the \n   \t\tnumber of retransmissions.</p>",
                 "smithy.api#http": {
                     "uri": "/workloadInsights/{scopeId}/topContributorsDataQueries/{queryId}/results",
                     "method": "GET"
@@ -842,7 +830,7 @@
                 "queryId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the query. A query ID is an internally-generated \n   \t\tidentifier for a specific query returned from an API call to start a query.</p>",
+                        "smithy.api#documentation": "<p>The identifier for the query. A query ID is an internally-generated \n   \t\tidentifier for a specific query returned from an API call to create a query.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -908,7 +896,7 @@
                 "queryId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the query. A query ID is an internally-generated \n   \t\tidentifier for a specific query returned from an API call to start a query.</p>",
+                        "smithy.api#documentation": "<p>The identifier for the query. A query ID is an internally-generated \n   \t\tidentifier for a specific query returned from an API call to create a query.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -982,7 +970,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to get the status of a query that retrieves top contributors data for a monitor"
                 },
-                "smithy.api#documentation": "<p>Returns the current status of a query for the Network Flow Monitor query interface, for a specified query ID and monitor. \n   \t\tThis call returns the query status for the top contributors for a monitor.</p>\n         <p>When you start a query, use this call to check the status of the query to make sure that it has \n   \t\thas <code>SUCCEEDED</code> before you reviewStartQueryWorkloadInsightsTopContributorsData  the results. Use the same query ID that you used for \n   \t\tthe corresponding API call to start the query, <code>StartQueryMonitorTopContributors</code>.</p>\n         <p>When you run a query, use this call to check the status of the query to make sure that the query \n   \t\thas <code>SUCCEEDED</code> before you review the results.</p>",
+                "smithy.api#documentation": "<p>Returns the current status of a query for the Network Flow Monitor query interface, for a specified query ID and monitor. \n   \t\tThis call returns the query status for the top contributors for a monitor.</p>\n         <p>When you create a query, use this call to check the status of the query to make sure that it has \n   \t\thas <code>SUCCEEDED</code> before you review the results. Use the same query ID that you used for \n   \t\tthe corresponding API call to start (create) the query, <code>StartQueryMonitorTopContributors</code>.</p>\n         <p>When you run a query, use this call to check the status of the query to make sure that the query \n   \t\thas <code>SUCCEEDED</code> before you review the results.</p>",
                 "smithy.api#http": {
                     "uri": "/monitors/{monitorName}/topContributorsQueries/{queryId}/status",
                     "method": "GET"
@@ -1059,7 +1047,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to get the status of a query that retrieves top contributors for workload insights"
                 },
-                "smithy.api#documentation": "<p>Return the data for a query with the Network Flow Monitor query interface. \n   \t\tSpecify the query that you want to return results for by providing a query ID \n   \t\tand a monitor name. This query returns the top contributors for workload insights.</p>\n         <p>When you start a query, use this call to check the status of the query to make sure that it has \n   \t\thas <code>SUCCEEDED</code> before you review the results. Use the same query ID that you used for \n   \t\tthe corresponding API call to start the query, <code>StartQueryWorkloadInsightsTopContributors</code>.</p>\n         <p>Top contributors in Network Flow Monitor are network flows with the highest values for a specific \n   \t\tmetric type, related to a scope (for workload insights) or a monitor.</p>",
+                "smithy.api#documentation": "<p>Return the data for a query with the Network Flow Monitor query interface. \n   \t\tSpecify the query that you want to return results for by providing a query ID \n   \t\tand a monitor name. This query returns the top contributors for workload insights.</p>\n         <p>When you start a query, use this call to check the status of the query to make sure that it has \n   \t\thas <code>SUCCEEDED</code> before you review the results. Use the same query ID that you used for \n   \t\tthe corresponding API call to start the query, <code>StartQueryWorkloadInsightsTopContributors</code>.</p>\n         <p>Top contributors in Network Flow Monitor are network flows with the highest values for a specific \n   \t\tmetric type. Top contributors can be across all workload insights, for a given scope, or for \n   \t\ta specific monitor. Use the applicable call for the top contributors that you want to be\n   \t\treturned.</p>",
                 "smithy.api#http": {
                     "uri": "/workloadInsights/{scopeId}/topContributorsQueries/{queryId}/status",
                     "method": "GET"
@@ -1097,7 +1085,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to get the status of a query that retrieves top contributors data points for workload insights"
                 },
-                "smithy.api#documentation": "<p>Returns the current status of a query for the Network Flow Monitor query interface, for a specified query ID and monitor. \n   \t\tThis call returns the query status for the top contributors data for workload insights.</p>\n         <p>When you start a query, use this call to check the status of the query to make sure that it has \n   \t\thas <code>SUCCEEDED</code> before you review the results. Use the same query ID that you used for \n   \t\tthe corresponding API call to start the query, <code>StartQueryWorkloadInsightsTopContributorsData</code>.</p>\n         <p>Top contributors in Network Flow Monitor are network flows with the highest values for a specific \n   \t\tmetric type, related to a scope (for workload insights) or a monitor.</p>\n         <p>The top contributor network flows overall for a specific metric type, for example, the \n   \t\tnumber of retransmissions.</p>",
+                "smithy.api#documentation": "<p>Returns the current status of a query for the Network Flow Monitor query interface, for a specified query ID and monitor. \n   \t\tThis call returns the query status for the top contributors data for workload insights.</p>\n         <p>When you start a query, use this call to check the status of the query to make sure that it has \n   \t\thas <code>SUCCEEDED</code> before you review the results. Use the same query ID that you used for \n   \t\tthe corresponding API call to start the query, <code>StartQueryWorkloadInsightsTopContributorsData</code>.</p>\n         <p>Top contributors in Network Flow Monitor are network flows with the highest values for a specific \n   \t\tmetric type. Top contributors can be across all workload insights, for a given scope, or for \n   \t\ta specific monitor. Use the applicable call for the top contributors that you want to be\n   \t\treturned.</p>\n         <p>The top contributor network flows overall are for a specific metric type, for example, the \n   \t\tnumber of retransmissions.</p>",
                 "smithy.api#http": {
                     "uri": "/workloadInsights/{scopeId}/topContributorsDataQueries/{queryId}/status",
                     "method": "GET"
@@ -1400,7 +1388,19 @@
                     "pageSize": "maxResults",
                     "items": "monitors"
                 },
-                "smithy.api#readonly": {}
+                "smithy.api#readonly": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListMonitors",
+                        "expect": {
+                            "success": {}
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.networkflowmonitor#ListMonitorsInput": {
@@ -2858,7 +2858,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to start a query for retrieving top contributors data for a monitor"
                 },
-                "smithy.api#documentation": "<p>Start a query to return the data with the Network Flow Monitor query interface. \n   \t\tSpecify the query that you want to return results for by providing a query ID \n   \t\tand a monitor name. This query returns the top contributors for a specific monitor.</p>\n         <p>Top contributors in Network Flow Monitor are network flows with the highest values for a specific \n   \t\tmetric type, related to a scope (for workload insights) or a monitor.</p>",
+                "smithy.api#documentation": "<p>Create a query that you can use with the Network Flow Monitor query interface to return the top \n   \t\tcontributors for a monitor. Specify the monitor that you want to create the query for. </p>\n         <p>The call returns a query ID that you can use with \n   \t\t<a href=\"https://docs.aws.amazon.com/networkflowmonitor/2.0/APIReference/API_GetQueryResultsMonitorTopContributors.html\">\n   \t\t\tGetQueryResultsMonitorTopContributors</a>\n   \t\tto run the query and return the top contributors for a specific monitor.</p>\n         <p>Top contributors in Network Flow Monitor are network flows with the highest values for a specific \n   \t\tmetric type. Top contributors can be across all workload insights, for a given scope, or for \n   \t\ta specific monitor. Use the applicable APIs for the top contributors that you want to be\n   \t\treturned.</p>",
                 "smithy.api#http": {
                     "uri": "/monitors/{monitorName}/topContributorsQueries",
                     "method": "POST"
@@ -2895,7 +2895,7 @@
                 "metricName": {
                     "target": "com.amazonaws.networkflowmonitor#MonitorMetric",
                     "traits": {
-                        "smithy.api#documentation": "<p>The metric that you want to query top contributors for. That is, you can specify this metric to \n   \t\treturn the top contributor network flows, for this type of metric, for a monitor and (optionally) within \n   \t\ta specific category, such as network flows between Availability Zones.</p>",
+                        "smithy.api#documentation": "<p>The metric that you want to query top contributors for. That is, you can specify a metric \n   \t\twith this call and return the top contributor network flows, for that type of metric, for a monitor \n   \t\tand (optionally) within a specific category, such as network flows between Availability Zones.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2962,7 +2962,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to start a query for retrieving top contributors data for workload insights"
                 },
-                "smithy.api#documentation": "<p>Start a query to return the data with the Network Flow Monitor query interface.\n   \t\tSpecify the query that you want to start by providing a query ID \n   \t\tand a monitor name. This query returns the top contributors for a specific monitor.</p>\n         <p>Top contributors in Network Flow Monitor are network flows with the highest values for a specific \n   \t\tmetric type, related to a scope (for workload insights) or a monitor.</p>",
+                "smithy.api#documentation": "<p>Create a query with the Network Flow Monitor query interface that you can run to return workload insights top contributors.\n   \t\tSpecify the scope that you want to create a query for.</p>\n         <p>The call returns a query ID that you can use with \n   \t\t<a href=\"https://docs.aws.amazon.com/networkflowmonitor/2.0/APIReference/API_GetQueryResultsWorkloadInsightsTopContributors.html\">\n   \t\t\tGetQueryResultsWorkloadInsightsTopContributors</a>\n   \t\tto run the query and return the top contributors for the workload insights for a scope.</p>\n         <p>Top contributors in Network Flow Monitor are network flows with the highest values for a specific \n   \t\tmetric type. Top contributors can be across all workload insights, for a given scope, or for \n   \t\ta specific monitor. Use the applicable APIs for the top contributors that you want to be\n   \t\treturned.</p>",
                 "smithy.api#http": {
                     "uri": "/workloadInsights/{scopeId}/topContributorsQueries",
                     "method": "POST"
@@ -3000,7 +3000,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to start a query for retrieving top contributors data points for workload insights"
                 },
-                "smithy.api#documentation": "<p>Start a query to return the with the Network Flow Monitor query interface.\n   \t\tSpecify the query that you want to start by providing a query ID \n   \t\tand a monitor name. This query returns the data for top contributors for workload insights.</p>\n         <p>Top contributors in Network Flow Monitor are network flows with the highest values for a specific \n   \t\tmetric type, related to a scope (for workload insights) or a monitor.</p>",
+                "smithy.api#documentation": "<p>Create a query with the Network Flow Monitor query interface that you can run to return data for\n   \t\tworkload insights top contributors. Specify the scope that you want to create a query for.</p>\n         <p>The call returns a query ID that you can use with \n   \t\t<a href=\"https://docs.aws.amazon.com/networkflowmonitor/2.0/APIReference/API_GetQueryResultsWorkloadInsightsTopContributorsData.html\">\n   \t\t\tGetQueryResultsWorkloadInsightsTopContributorsData</a>\n   \t\tto run the query and return the data for the top contributors for the workload insights for a scope.</p>\n         <p>Top contributors in Network Flow Monitor are network flows with the highest values for a specific \n   \t\tmetric type. Top contributors can be across all workload insights, for a given scope, or for \n   \t\ta specific monitor. Use the applicable call for the top contributors that you want to be\n   \t\treturned.</p>",
                 "smithy.api#http": {
                     "uri": "/workloadInsights/{scopeId}/topContributorsDataQueries",
                     "method": "POST"
@@ -3166,7 +3166,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to stop a query for retrieving top contributors data for a monitor"
                 },
-                "smithy.api#documentation": "<p>Stop a query with the Network Flow Monitor query interface. \n   \t\tSpecify the query that you want to stop by providing a query ID \n   \t\tand a monitor name. This query returns the top contributors for a specific monitor.</p>\n         <p>Top contributors in Network Flow Monitor are network flows with the highest values for a specific \n   \t\tmetric type, related to a scope (for workload insights) or a monitor.</p>",
+                "smithy.api#documentation": "<p>Stop a top contributors query for a monitor. \n   \t\tSpecify the query that you want to stop by providing a query ID \n   \t\tand a monitor name. </p>\n         <p>Top contributors in Network Flow Monitor are network flows with the highest values for a specific \n   \t\tmetric type. Top contributors can be across all workload insights, for a given scope, or for \n   \t\ta specific monitor. Use the applicable call for the top contributors that you want to be\n   \t\treturned.</p>",
                 "smithy.api#http": {
                     "uri": "/monitors/{monitorName}/topContributorsQueries/{queryId}",
                     "method": "DELETE"
@@ -3188,7 +3188,7 @@
                 "queryId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the query. A query ID is an internally-generated \n   \t\tidentifier for a specific query returned from an API call to start a query.</p>",
+                        "smithy.api#documentation": "<p>The identifier for the query. A query ID is an internally-generated \n   \t\tidentifier for a specific query returned from an API call to create a query.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3235,7 +3235,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to stop a query for retrieving top contributors for workload insights"
                 },
-                "smithy.api#documentation": "<p>Stop a query with the Network Flow Monitor query interface. \n   \t\tSpecify the query that you want to stop by providing a query ID \n   \t\tand a monitor name. This query returns the top contributors for a specific monitor.</p>\n         <p>Top contributors in Network Flow Monitor are network flows with the highest values for a specific \n   \t\tmetric type, related to a scope (for workload insights) or a monitor.</p>",
+                "smithy.api#documentation": "<p>Stop a top contributors query for workload insights. \n   \t\tSpecify the query that you want to stop by providing a query ID \n   \t\tand a scope ID. </p>\n         <p>Top contributors in Network Flow Monitor are network flows with the highest values for a specific \n   \t\tmetric type. Top contributors can be across all workload insights, for a given scope, or for \n   \t\ta specific monitor. Use the applicable call for the top contributors that you want to be\n   \t\treturned.</p>",
                 "smithy.api#http": {
                     "uri": "/workloadInsights/{scopeId}/topContributorsQueries/{queryId}",
                     "method": "DELETE"
@@ -3273,7 +3273,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to stop a query for retrieving top contributors data points for workload insights"
                 },
-                "smithy.api#documentation": "<p>Return the data for a query with the Network Flow Monitor query interface. \n   \t\tSpecify the query that you want to return results for by providing a query ID \n   \t\tand a scope ID. This query returns data for the top contributors for workload insights.\n   \t\tWorkload insights provide a high level view of network flow performance data collected by agents \n   \t\tfor a scope.</p>\n         <p>Top contributors in Network Flow Monitor are network flows with the highest values for a specific \n   \t\tmetric type, related to a scope (for workload insights) or a monitor.</p>\n         <p>The top contributor network flows overall for a specific metric type, for example, the \n   \t\tnumber of retransmissions.</p>",
+                "smithy.api#documentation": "<p>Stop a top contributors data query for workload insights. \n   \t\tSpecify the query that you want to stop by providing a query ID \n   \t\tand a scope ID. </p>\n         <p>Top contributors in Network Flow Monitor are network flows with the highest values for a specific \n   \t\tmetric type. Top contributors can be across all workload insights, for a given scope, or for \n   \t\ta specific monitor. Use the applicable call for the top contributors that you want to be\n   \t\treturned.</p>",
                 "smithy.api#http": {
                     "uri": "/workloadInsights/{scopeId}/topContributorsDataQueries/{queryId}",
                     "method": "DELETE"
@@ -3295,7 +3295,7 @@
                 "queryId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the query. A query ID is an internally-generated \n   \t\tidentifier for a specific query returned from an API call to start a query.</p>",
+                        "smithy.api#documentation": "<p>The identifier for the query. A query ID is an internally-generated \n   \t\tidentifier for a specific query returned from an API call to create a query.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3326,7 +3326,7 @@
                 "queryId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the query. A query ID is an internally-generated \n   \t\tidentifier for a specific query returned from an API call to start a query.</p>",
+                        "smithy.api#documentation": "<p>The identifier for the query. A query ID is an internally-generated \n   \t\tidentifier for a specific query returned from an API call to create a query.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3862,6 +3862,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.networkflowmonitor#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkflowmonitor#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.networkflowmonitor#InternalServerException"

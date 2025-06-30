@@ -1174,6 +1174,9 @@
                     "target": "com.amazonaws.dynamodb#ProvisionedThroughputExceededException"
                 },
                 {
+                    "target": "com.amazonaws.dynamodb#ReplicatedWriteConflictException"
+                },
+                {
                     "target": "com.amazonaws.dynamodb#RequestLimitExceeded"
                 },
                 {
@@ -1984,7 +1987,7 @@
                 "OnDemandThroughput": {
                     "target": "com.amazonaws.dynamodb#OnDemandThroughput",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of read and write units for the global secondary index being\n            created. If you use this parameter, you must specify <code>MaxReadRequestUnits</code>,\n                <code>MaxWriteRequestUnits</code>, or both. You must use either\n            <code>OnDemand Throughput</code> or <code>ProvisionedThroughput</code> based on your table's\n        capacity mode.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of read and write units for the global secondary index being\n            created. If you use this parameter, you must specify <code>MaxReadRequestUnits</code>,\n                <code>MaxWriteRequestUnits</code>, or both. You must use either <code>OnDemand\n                Throughput</code> or <code>ProvisionedThroughput</code> based on your table's\n            capacity mode.</p>"
                     }
                 },
                 "WarmThroughput": {
@@ -2067,6 +2070,21 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.dynamodb#CreateGlobalTableWitnessGroupMemberAction": {
+            "type": "structure",
+            "members": {
+                "RegionName": {
+                    "target": "com.amazonaws.dynamodb#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region name to be added as a witness Region for the MRSC global\n            table. The witness must be in a different Region than the replicas and within the same\n            Region set:</p>\n         <ul>\n            <li>\n               <p>US Region set: US East (N. Virginia), US East (Ohio), US West (Oregon)</p>\n            </li>\n            <li>\n               <p>EU Region set: Europe (Ireland), Europe (London), Europe (Paris), Europe\n                    (Frankfurt)</p>\n            </li>\n            <li>\n               <p>AP Region set: Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific\n                    (Osaka)</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the action to add a new witness Region to a MRSC global table. A MRSC global\n            table can be configured with either three replicas, or with two replicas and one\n            witness.</p>"
             }
         },
         "com.amazonaws.dynamodb#CreateReplicaAction": {
@@ -2188,13 +2206,13 @@
                 "LocalSecondaryIndexes": {
                     "target": "com.amazonaws.dynamodb#LocalSecondaryIndexList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more local secondary indexes (the maximum is 5) to be created on the table.\n            Each index is scoped to a given partition key value. There is a 10 GB size limit per\n            partition key value; otherwise, the size of a local secondary index is\n            unconstrained.</p>\n         <p>Each local secondary index in the array includes the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IndexName</code> - The name of the local secondary index. Must be unique\n                    only for this table.</p>\n               <p></p>\n            </li>\n            <li>\n               <p>\n                  <code>KeySchema</code> - Specifies the key schema for the local secondary index.\n                    The key schema must begin with the same partition key as the table.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Projection</code> - Specifies attributes that are copied (projected) from\n                    the table into the index. These are in addition to the primary key attributes\n                    and index key attributes, which are automatically projected. Each attribute\n                    specification is composed of:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ProjectionType</code> - One of the following:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>KEYS_ONLY</code> - Only the index and primary keys are\n                                    projected into the index.</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>INCLUDE</code> - Only the specified table attributes are\n                                    projected into the index. The list of projected attributes is in\n                                        <code>NonKeyAttributes</code>.</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>ALL</code> - All of the table attributes are projected\n                                    into the index.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>NonKeyAttributes</code> - A list of one or more non-key attribute\n                            names that are projected into the secondary index. The total count of\n                            attributes provided in <code>NonKeyAttributes</code>, summed across all\n                            of the secondary indexes, must not exceed 100. If you project the same\n                            attribute into two different indexes, this counts as two distinct\n                            attributes when determining the total. This limit only applies when you\n                            specify the ProjectionType of <code>INCLUDE</code>. You still can specify the\n                            ProjectionType of <code>ALL</code> to project all attributes from the\n                            source table, even if the table has more than 100 attributes.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>One or more local secondary indexes (the maximum is 5) to be created on the table.\n            Each index is scoped to a given partition key value. There is a 10 GB size limit per\n            partition key value; otherwise, the size of a local secondary index is\n            unconstrained.</p>\n         <p>Each local secondary index in the array includes the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IndexName</code> - The name of the local secondary index. Must be unique\n                    only for this table.</p>\n               <p></p>\n            </li>\n            <li>\n               <p>\n                  <code>KeySchema</code> - Specifies the key schema for the local secondary index.\n                    The key schema must begin with the same partition key as the table.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Projection</code> - Specifies attributes that are copied (projected) from\n                    the table into the index. These are in addition to the primary key attributes\n                    and index key attributes, which are automatically projected. Each attribute\n                    specification is composed of:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ProjectionType</code> - One of the following:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>KEYS_ONLY</code> - Only the index and primary keys are\n                                    projected into the index.</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>INCLUDE</code> - Only the specified table attributes are\n                                    projected into the index. The list of projected attributes is in\n                                        <code>NonKeyAttributes</code>.</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>ALL</code> - All of the table attributes are projected\n                                    into the index.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>NonKeyAttributes</code> - A list of one or more non-key attribute\n                            names that are projected into the secondary index. The total count of\n                            attributes provided in <code>NonKeyAttributes</code>, summed across all\n                            of the secondary indexes, must not exceed 100. If you project the same\n                            attribute into two different indexes, this counts as two distinct\n                            attributes when determining the total. This limit only applies when you\n                            specify the ProjectionType of <code>INCLUDE</code>. You still can\n                            specify the ProjectionType of <code>ALL</code> to project all attributes\n                            from the source table, even if the table has more than 100\n                            attributes.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 },
                 "GlobalSecondaryIndexes": {
                     "target": "com.amazonaws.dynamodb#GlobalSecondaryIndexList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more global secondary indexes (the maximum is 20) to be created on the table.\n            Each global secondary index in the array includes the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IndexName</code> - The name of the global secondary index. Must be unique\n                    only for this table.</p>\n               <p></p>\n            </li>\n            <li>\n               <p>\n                  <code>KeySchema</code> - Specifies the key schema for the global secondary\n                    index.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Projection</code> - Specifies attributes that are copied (projected) from\n                    the table into the index. These are in addition to the primary key attributes\n                    and index key attributes, which are automatically projected. Each attribute\n                    specification is composed of:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ProjectionType</code> - One of the following:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>KEYS_ONLY</code> - Only the index and primary keys are\n                                    projected into the index.</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>INCLUDE</code> - Only the specified table attributes are\n                                    projected into the index. The list of projected attributes is in\n                                        <code>NonKeyAttributes</code>.</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>ALL</code> - All of the table attributes are projected\n                                    into the index.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>NonKeyAttributes</code> - A list of one or more non-key attribute\n                            names that are projected into the secondary index. The total count of\n                            attributes provided in <code>NonKeyAttributes</code>, summed across all\n                            of the secondary indexes, must not exceed 100. If you project the same\n                            attribute into two different indexes, this counts as two distinct\n                            attributes when determining the total. This limit only applies when you\n                            specify the ProjectionType of <code>INCLUDE</code>. You still can\n                            specify the ProjectionType of <code>ALL</code> to project all attributes\n                            from the source table, even if the table has more than 100 attributes.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>ProvisionedThroughput</code> - The provisioned throughput settings for the\n                    global secondary index, consisting of read and write capacity units.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>One or more global secondary indexes (the maximum is 20) to be created on the table.\n            Each global secondary index in the array includes the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IndexName</code> - The name of the global secondary index. Must be unique\n                    only for this table.</p>\n               <p></p>\n            </li>\n            <li>\n               <p>\n                  <code>KeySchema</code> - Specifies the key schema for the global secondary\n                    index.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Projection</code> - Specifies attributes that are copied (projected) from\n                    the table into the index. These are in addition to the primary key attributes\n                    and index key attributes, which are automatically projected. Each attribute\n                    specification is composed of:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ProjectionType</code> - One of the following:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>KEYS_ONLY</code> - Only the index and primary keys are\n                                    projected into the index.</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>INCLUDE</code> - Only the specified table attributes are\n                                    projected into the index. The list of projected attributes is in\n                                        <code>NonKeyAttributes</code>.</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>ALL</code> - All of the table attributes are projected\n                                    into the index.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>NonKeyAttributes</code> - A list of one or more non-key attribute\n                            names that are projected into the secondary index. The total count of\n                            attributes provided in <code>NonKeyAttributes</code>, summed across all\n                            of the secondary indexes, must not exceed 100. If you project the same\n                            attribute into two different indexes, this counts as two distinct\n                            attributes when determining the total. This limit only applies when you\n                            specify the ProjectionType of <code>INCLUDE</code>. You still can\n                            specify the ProjectionType of <code>ALL</code> to project all attributes\n                            from the source table, even if the table has more than 100\n                            attributes.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>ProvisionedThroughput</code> - The provisioned throughput settings for the\n                    global secondary index, consisting of read and write capacity units.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "BillingMode": {
@@ -2456,6 +2474,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Represents a global secondary index to be deleted from an existing table.</p>"
+            }
+        },
+        "com.amazonaws.dynamodb#DeleteGlobalTableWitnessGroupMemberAction": {
+            "type": "structure",
+            "members": {
+                "RegionName": {
+                    "target": "com.amazonaws.dynamodb#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The witness Region name to be removed from the MRSC global table.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the action to remove a witness Region from a MRSC global table. You cannot\n            delete a single witness from a MRSC global table - you must delete both a replica and\n            the witness together. The deletion of both a witness and replica converts the remaining\n            replica to a single-Region DynamoDB table. </p>"
             }
         },
         "com.amazonaws.dynamodb#DeleteItem": {
@@ -2776,7 +2809,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": false
                 },
-                "smithy.api#documentation": "<p>The <code>DeleteTable</code> operation deletes a table and all of its items. After a\n                <code>DeleteTable</code> request, the specified table is in the\n                <code>DELETING</code> state until DynamoDB completes the deletion. If the table is\n            in the <code>ACTIVE</code> state, you can delete it. If a table is in\n                <code>CREATING</code> or <code>UPDATING</code> states, then DynamoDB returns a\n                <code>ResourceInUseException</code>. If the specified table does not exist, DynamoDB\n            returns a <code>ResourceNotFoundException</code>. If table is already in the\n                <code>DELETING</code> state, no error is returned. </p>\n         <important>\n            <p>For global tables, this operation only applies to\n                global tables using Version 2019.11.21 (Current version). </p>\n         </important>\n         <note>\n            <p>DynamoDB might continue to accept data read and write operations, such as\n                    <code>GetItem</code> and <code>PutItem</code>, on a table in the\n                    <code>DELETING</code> state until the table deletion is complete. For the full\n                list of table states, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_TableDescription.html#DDB-Type-TableDescription-TableStatus\">TableStatus</a>.</p>\n         </note>\n         <p>When you delete a table, any indexes on that table are also deleted.</p>\n         <p>If you have DynamoDB Streams enabled on the table, then the corresponding stream on\n            that table goes into the <code>DISABLED</code> state, and the stream is automatically\n            deleted after 24 hours.</p>\n         <p>Use the <code>DescribeTable</code> action to check the status of the table. </p>",
+                "smithy.api#documentation": "<p>The <code>DeleteTable</code> operation deletes a table and all of its items. After a\n                <code>DeleteTable</code> request, the specified table is in the\n                <code>DELETING</code> state until DynamoDB completes the deletion. If the table is\n            in the <code>ACTIVE</code> state, you can delete it. If a table is in\n                <code>CREATING</code> or <code>UPDATING</code> states, then DynamoDB returns a\n                <code>ResourceInUseException</code>. If the specified table does not exist, DynamoDB\n            returns a <code>ResourceNotFoundException</code>. If table is already in the\n                <code>DELETING</code> state, no error is returned. </p>\n         <note>\n            <p>DynamoDB might continue to accept data read and write operations, such as\n                    <code>GetItem</code> and <code>PutItem</code>, on a table in the\n                    <code>DELETING</code> state until the table deletion is complete. For the full\n                list of table states, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_TableDescription.html#DDB-Type-TableDescription-TableStatus\">TableStatus</a>.</p>\n         </note>\n         <p>When you delete a table, any indexes on that table are also deleted.</p>\n         <p>If you have DynamoDB Streams enabled on the table, then the corresponding stream on\n            that table goes into the <code>DISABLED</code> state, and the stream is automatically\n            deleted after 24 hours.</p>\n         <p>Use the <code>DescribeTable</code> action to check the status of the table. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "To delete a table",
@@ -3466,7 +3499,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": false
                 },
-                "smithy.api#documentation": "<p>Returns information about the table, including the current status of the table, when\n            it was created, the primary key schema, and any indexes on the table.</p>\n         <important>\n            <p>For global tables, this operation only applies to global tables using Version\n                2019.11.21 (Current version). </p>\n         </important>\n         <note>\n            <p>If you issue a <code>DescribeTable</code> request immediately after a\n                    <code>CreateTable</code> request, DynamoDB might return a\n                    <code>ResourceNotFoundException</code>. This is because\n                    <code>DescribeTable</code> uses an eventually consistent query, and the metadata\n                for your table might not be available at that moment. Wait for a few seconds, and\n                then try the <code>DescribeTable</code> request again.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Returns information about the table, including the current status of the table, when\n            it was created, the primary key schema, and any indexes on the table.</p>\n         <note>\n            <p>If you issue a <code>DescribeTable</code> request immediately after a\n                    <code>CreateTable</code> request, DynamoDB might return a\n                    <code>ResourceNotFoundException</code>. This is because\n                    <code>DescribeTable</code> uses an eventually consistent query, and the metadata\n                for your table might not be available at that moment. Wait for a few seconds, and\n                then try the <code>DescribeTable</code> request again.</p>\n         </note>",
                 "smithy.waiters#waitable": {
                     "TableExists": {
                         "acceptors": [
@@ -3554,7 +3587,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes auto scaling settings across replicas of the global table at once.</p>\n         <important>\n            <p>For global tables, this operation only applies to global tables using Version\n                2019.11.21 (Current version).</p>\n         </important>"
+                "smithy.api#documentation": "<p>Describes auto scaling settings across replicas of the global table at once.</p>"
             }
         },
         "com.amazonaws.dynamodb#DescribeTableReplicaAutoScalingInput": {
@@ -4118,8 +4151,8 @@
                                                             "authSchemes": [
                                                                 {
                                                                     "signingRegion": "us-east-1",
-                                                                    "name": "sigv4",
-                                                                    "signingName": "dynamodb"
+                                                                    "signingName": "dynamodb",
+                                                                    "name": "sigv4"
                                                                 }
                                                             ]
                                                         },
@@ -7833,9 +7866,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -7869,9 +7902,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -7921,9 +7954,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -7949,9 +7982,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -7977,9 +8010,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -8005,9 +8038,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -8033,9 +8066,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -8061,9 +8094,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -8136,9 +8169,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -8174,9 +8207,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -8212,9 +8245,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -8250,9 +8283,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -8319,9 +8352,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -8369,9 +8402,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -8396,9 +8429,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -8458,9 +8491,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -8494,9 +8527,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -8546,9 +8579,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -8574,9 +8607,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -8602,9 +8635,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -8630,9 +8663,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -8658,9 +8691,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -8686,9 +8719,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -8761,9 +8794,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -8799,9 +8832,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -8837,9 +8870,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -8875,9 +8908,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -8944,9 +8977,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -8994,9 +9027,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -9021,9 +9054,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -9083,9 +9116,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -9119,9 +9152,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -9171,9 +9204,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -9199,9 +9232,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -9227,9 +9260,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -9255,9 +9288,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -9283,9 +9316,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -9311,9 +9344,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -9386,9 +9419,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -9424,9 +9457,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -9462,9 +9495,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -9500,9 +9533,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -9569,9 +9602,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -9619,9 +9652,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -9646,9 +9679,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "signingName": "dynamodb",
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "dynamodb"
                                             }
                                         ]
                                     },
@@ -14658,13 +14691,13 @@
                 "ProvisionedThroughput": {
                     "target": "com.amazonaws.dynamodb#ProvisionedThroughput",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents the provisioned throughput settings for the specified global secondary\n            index. You must use either\n            <code>OnDemandThroughput</code> or <code>ProvisionedThroughput</code> based\n            on your table's capacity mode.</p>\n         <p>For current minimum and maximum provisioned throughput values, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html\">Service,\n                Account, and Table Quotas</a> in the <i>Amazon DynamoDB Developer\n                Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Represents the provisioned throughput settings for the specified global secondary\n            index. You must use either <code>OnDemandThroughput</code> or\n                <code>ProvisionedThroughput</code> based on your table's capacity mode.</p>\n         <p>For current minimum and maximum provisioned throughput values, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html\">Service,\n                Account, and Table Quotas</a> in the <i>Amazon DynamoDB Developer\n                Guide</i>.</p>"
                     }
                 },
                 "OnDemandThroughput": {
                     "target": "com.amazonaws.dynamodb#OnDemandThroughput",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of read and write units for the specified global secondary index.\n            If you use this parameter, you must specify <code>MaxReadRequestUnits</code>,\n                <code>MaxWriteRequestUnits</code>, or both. You must use either\n        <code>OnDemandThroughput</code> or <code>ProvisionedThroughput</code> based\n        on your table's capacity mode.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of read and write units for the specified global secondary index.\n            If you use this parameter, you must specify <code>MaxReadRequestUnits</code>,\n                <code>MaxWriteRequestUnits</code>, or both. You must use either\n                <code>OnDemandThroughput</code> or <code>ProvisionedThroughput</code> based on your\n            table's capacity mode.</p>"
                     }
                 },
                 "WarmThroughput": {
@@ -15050,6 +15083,64 @@
                 }
             }
         },
+        "com.amazonaws.dynamodb#GlobalTableWitnessDescription": {
+            "type": "structure",
+            "members": {
+                "RegionName": {
+                    "target": "com.amazonaws.dynamodb#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon Web Services Region that serves as a witness for the MRSC global\n            table.</p>"
+                    }
+                },
+                "WitnessStatus": {
+                    "target": "com.amazonaws.dynamodb#WitnessStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the witness Region in the MRSC global table.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the properties of a witness Region in a MRSC global table. </p>"
+            }
+        },
+        "com.amazonaws.dynamodb#GlobalTableWitnessDescriptionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.dynamodb#GlobalTableWitnessDescription"
+            }
+        },
+        "com.amazonaws.dynamodb#GlobalTableWitnessGroupUpdate": {
+            "type": "structure",
+            "members": {
+                "Create": {
+                    "target": "com.amazonaws.dynamodb#CreateGlobalTableWitnessGroupMemberAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a witness Region to be added to a new MRSC global table. The witness must be\n            added when creating the MRSC global table.</p>"
+                    }
+                },
+                "Delete": {
+                    "target": "com.amazonaws.dynamodb#DeleteGlobalTableWitnessGroupMemberAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a witness Region to be removed from an existing global table. Must be done\n            in conjunction with removing a replica. The deletion of both a witness and replica\n            converts the remaining replica to a single-Region DynamoDB table.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents one of the following:</p>\n         <ul>\n            <li>\n               <p>A new witness to be added to a new global table.</p>\n            </li>\n            <li>\n               <p>An existing witness to be removed from an existing global table.</p>\n            </li>\n         </ul>\n         <p>You can configure one witness per MRSC global table.</p>"
+            }
+        },
+        "com.amazonaws.dynamodb#GlobalTableWitnessGroupUpdateList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.dynamodb#GlobalTableWitnessGroupUpdate"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.dynamodb#IdempotentParameterMismatchException": {
             "type": "structure",
             "members": {
@@ -15079,7 +15170,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            There was a conflict when importing from the specified S3 source. \n            This can occur when the current import conflicts with a previous import request \n            that had the same client token.\n            </p>",
+                "smithy.api#documentation": "<p> There was a conflict when importing from the specified S3 source. This can occur when\n            the current import conflicts with a previous import request that had the same client\n            token. </p>",
                 "smithy.api#error": "client"
             }
         },
@@ -15104,7 +15195,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            The specified import was not found.\n            </p>",
+                "smithy.api#documentation": "<p> The specified import was not found. </p>",
                 "smithy.api#error": "client"
             }
         },
@@ -15985,7 +16076,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>There is no limit to the number of daily on-demand backups that can be taken. </p>\n         <p>For most purposes, up to 500 simultaneous table operations are allowed per account. These operations\n            include <code>CreateTable</code>, <code>UpdateTable</code>,\n                <code>DeleteTable</code>,<code>UpdateTimeToLive</code>,\n                <code>RestoreTableFromBackup</code>, and <code>RestoreTableToPointInTime</code>. </p>\n         <p>When you are creating a table with one or more secondary\n            indexes, you can have up to 250 such requests running at a time. However, if the table or\n            index specifications are complex, then DynamoDB might temporarily reduce the number\n            of concurrent operations.</p>\n         <p>When importing into DynamoDB, up to 50 simultaneous import table operations are allowed per account.</p>\n         <p>There is a soft account quota of 2,500 tables.</p>\n         <p>GetRecords was called with a value of more than 1000 for the limit request parameter.</p>\n         <p>More than 2 processes are reading from the same streams shard at the same time. Exceeding\n            this limit may result in request throttling.</p>",
+                "smithy.api#documentation": "<p>There is no limit to the number of daily on-demand backups that can be taken. </p>\n         <p>For most purposes, up to 500 simultaneous table operations are allowed per account.\n            These operations include <code>CreateTable</code>, <code>UpdateTable</code>,\n                <code>DeleteTable</code>,<code>UpdateTimeToLive</code>,\n                <code>RestoreTableFromBackup</code>, and <code>RestoreTableToPointInTime</code>. </p>\n         <p>When you are creating a table with one or more secondary indexes, you can have up\n            to 250 such requests running at a time. However, if the table or index specifications\n            are complex, then DynamoDB might temporarily reduce the number of concurrent\n            operations.</p>\n         <p>When importing into DynamoDB, up to 50 simultaneous import table operations are\n            allowed per account.</p>\n         <p>There is a soft account quota of 2,500 tables.</p>\n         <p>GetRecords was called with a value of more than 1000 for the limit request\n            parameter.</p>\n         <p>More than 2 processes are reading from the same streams shard at the same time.\n            Exceeding this limit may result in request throttling.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -16975,7 +17066,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The operation tried to access a nonexistent resource-based policy.</p>\n         <p>If you specified an <code>ExpectedRevisionId</code>, it's possible that a policy is present for the resource but its revision ID didn't match the expected value.</p>",
+                "smithy.api#documentation": "<p>The operation tried to access a nonexistent resource-based policy.</p>\n         <p>If you specified an <code>ExpectedRevisionId</code>, it's possible that a policy is\n            present for the resource but its revision ID didn't match the expected value.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -17036,7 +17127,7 @@
                 "NonKeyAttributes": {
                     "target": "com.amazonaws.dynamodb#NonKeyAttributeNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents the non-key attribute names which will be projected into the index.</p>\n         <p>For global and local secondary indexes, the total count of <code>NonKeyAttributes</code> summed\n            across all of the secondary indexes, must not exceed 100. If you project the same\n            attribute into two different indexes, this counts as two distinct attributes when\n            determining the total. This limit only applies when you specify the ProjectionType of\n            <code>INCLUDE</code>. You still can specify the ProjectionType of <code>ALL</code> to\n            project all attributes from the source table, even if the table has more than 100\n            attributes.</p>"
+                        "smithy.api#documentation": "<p>Represents the non-key attribute names which will be projected into the index.</p>\n         <p>For global and local secondary indexes, the total count of\n                <code>NonKeyAttributes</code> summed across all of the secondary indexes, must not\n            exceed 100. If you project the same attribute into two different indexes, this counts as\n            two distinct attributes when determining the total. This limit only applies when you\n            specify the ProjectionType of <code>INCLUDE</code>. You still can specify the\n            ProjectionType of <code>ALL</code> to project all attributes from the source table, even\n            if the table has more than 100 attributes.</p>"
                     }
                 }
             },
@@ -18302,6 +18393,24 @@
                     "traits": {
                         "smithy.api#enumValue": "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
                     }
+                },
+                "ARCHIVING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ARCHIVING"
+                    }
+                },
+                "ARCHIVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ARCHIVED"
+                    }
+                },
+                "REPLICATION_NOT_AUTHORIZED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REPLICATION_NOT_AUTHORIZED"
+                    }
                 }
             }
         },
@@ -18345,8 +18454,9 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request was rejected because one or more items in the request are being modified by a request in another Region. </p>",
-                "smithy.api#error": "client"
+                "smithy.api#documentation": "<p>The request was rejected because one or more items in the request are being modified\n            by a request in another Region. </p>",
+                "smithy.api#error": "client",
+                "smithy.api#retryable": {}
             }
         },
         "com.amazonaws.dynamodb#ReplicationGroupUpdate": {
@@ -18418,7 +18528,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The operation conflicts with the resource's availability. For example:</p>\n         <ul>\n            <li>\n               <p>You attempted to recreate an existing table.</p>\n            </li>\n            <li>\n               <p>You tried to delete a table currently in the <code>CREATING</code> state.</p>\n            </li>\n            <li>\n               <p>You tried to update a resource that was already being updated.</p>\n            </li>\n         </ul>\n         <p>When appropriate, wait for the ongoing update to complete and attempt the request again.</p>",
+                "smithy.api#documentation": "<p>The operation conflicts with the resource's availability. For example:</p>\n         <ul>\n            <li>\n               <p>You attempted to recreate an existing table.</p>\n            </li>\n            <li>\n               <p>You tried to delete a table currently in the <code>CREATING</code>\n                    state.</p>\n            </li>\n            <li>\n               <p>You tried to update a resource that was already being updated.</p>\n            </li>\n         </ul>\n         <p>When appropriate, wait for the ongoing update to complete and attempt the request\n            again.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -19704,13 +19814,13 @@
                 "LocalSecondaryIndexes": {
                     "target": "com.amazonaws.dynamodb#LocalSecondaryIndexDescriptionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents one or more local secondary indexes on the table. Each index is scoped to a\n            given partition key value. Tables with one or more local secondary indexes are subject\n            to an item collection size limit, where the amount of data within a given item\n            collection cannot exceed 10 GB. Each element is composed of:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IndexName</code> - The name of the local secondary index.</p>\n            </li>\n            <li>\n               <p>\n                  <code>KeySchema</code> - Specifies the complete index key schema. The attribute\n                    names in the key schema must be between 1 and 255 characters (inclusive). The\n                    key schema must begin with the same partition key as the table.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Projection</code> - Specifies attributes that are copied (projected) from\n                    the table into the index. These are in addition to the primary key attributes\n                    and index key attributes, which are automatically projected. Each attribute\n                    specification is composed of:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ProjectionType</code> - One of the following:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>KEYS_ONLY</code> - Only the index and primary keys are\n                                    projected into the index.</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>INCLUDE</code> - Only the specified table attributes are\n                                    projected into the index. The list of projected attributes is in\n                                        <code>NonKeyAttributes</code>.</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>ALL</code> - All of the table attributes are projected\n                                    into the index.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>NonKeyAttributes</code> - A list of one or more non-key attribute\n                            names that are projected into the secondary index. The total count of\n                            attributes provided in <code>NonKeyAttributes</code>, summed across all\n                            of the secondary indexes, must not exceed 100. If you project the same\n                            attribute into two different indexes, this counts as two distinct\n                            attributes when determining the total. This limit only applies when you\n                            specify the ProjectionType of <code>INCLUDE</code>. You still can\n                            specify the ProjectionType of <code>ALL</code> to project all attributes\n                            from the source table, even if the table has more than 100 attributes.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>IndexSizeBytes</code> - Represents the total size of the index, in bytes.\n                    DynamoDB updates this value approximately every six hours. Recent changes might\n                    not be reflected in this value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ItemCount</code> - Represents the number of items in the index. DynamoDB\n                    updates this value approximately every six hours. Recent changes might not be\n                    reflected in this value.</p>\n            </li>\n         </ul>\n         <p>If the table is in the <code>DELETING</code> state, no information about indexes will\n            be returned.</p>"
+                        "smithy.api#documentation": "<p>Represents one or more local secondary indexes on the table. Each index is scoped to a\n            given partition key value. Tables with one or more local secondary indexes are subject\n            to an item collection size limit, where the amount of data within a given item\n            collection cannot exceed 10 GB. Each element is composed of:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IndexName</code> - The name of the local secondary index.</p>\n            </li>\n            <li>\n               <p>\n                  <code>KeySchema</code> - Specifies the complete index key schema. The attribute\n                    names in the key schema must be between 1 and 255 characters (inclusive). The\n                    key schema must begin with the same partition key as the table.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Projection</code> - Specifies attributes that are copied (projected) from\n                    the table into the index. These are in addition to the primary key attributes\n                    and index key attributes, which are automatically projected. Each attribute\n                    specification is composed of:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ProjectionType</code> - One of the following:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>KEYS_ONLY</code> - Only the index and primary keys are\n                                    projected into the index.</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>INCLUDE</code> - Only the specified table attributes are\n                                    projected into the index. The list of projected attributes is in\n                                        <code>NonKeyAttributes</code>.</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>ALL</code> - All of the table attributes are projected\n                                    into the index.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>NonKeyAttributes</code> - A list of one or more non-key attribute\n                            names that are projected into the secondary index. The total count of\n                            attributes provided in <code>NonKeyAttributes</code>, summed across all\n                            of the secondary indexes, must not exceed 100. If you project the same\n                            attribute into two different indexes, this counts as two distinct\n                            attributes when determining the total. This limit only applies when you\n                            specify the ProjectionType of <code>INCLUDE</code>. You still can\n                            specify the ProjectionType of <code>ALL</code> to project all attributes\n                            from the source table, even if the table has more than 100\n                            attributes.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>IndexSizeBytes</code> - Represents the total size of the index, in bytes.\n                    DynamoDB updates this value approximately every six hours. Recent changes might\n                    not be reflected in this value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ItemCount</code> - Represents the number of items in the index. DynamoDB\n                    updates this value approximately every six hours. Recent changes might not be\n                    reflected in this value.</p>\n            </li>\n         </ul>\n         <p>If the table is in the <code>DELETING</code> state, no information about indexes will\n            be returned.</p>"
                     }
                 },
                 "GlobalSecondaryIndexes": {
                     "target": "com.amazonaws.dynamodb#GlobalSecondaryIndexDescriptionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The global secondary indexes, if any, on the table. Each index is scoped to a given\n            partition key value. Each element is composed of:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Backfilling</code> - If true, then the index is currently in the\n                    backfilling phase. Backfilling occurs only when a new global secondary index is\n                    added to the table. It is the process by which DynamoDB populates the new index\n                    with data from the table. (This attribute does not appear for indexes that were\n                    created during a <code>CreateTable</code> operation.) </p>\n               <p> You can delete an index that is being created during the\n                        <code>Backfilling</code> phase when <code>IndexStatus</code> is set to\n                    CREATING and <code>Backfilling</code> is true. You can't delete the index that\n                    is being created when <code>IndexStatus</code> is set to CREATING and\n                        <code>Backfilling</code> is false. (This attribute does not appear for\n                    indexes that were created during a <code>CreateTable</code> operation.)</p>\n            </li>\n            <li>\n               <p>\n                  <code>IndexName</code> - The name of the global secondary index.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IndexSizeBytes</code> - The total size of the global secondary index, in\n                    bytes. DynamoDB updates this value approximately every six hours. Recent changes\n                    might not be reflected in this value. </p>\n            </li>\n            <li>\n               <p>\n                  <code>IndexStatus</code> - The current status of the global secondary\n                    index:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>CREATING</code> - The index is being created.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>UPDATING</code> - The index is being updated.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>DELETING</code> - The index is being deleted.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ACTIVE</code> - The index is ready for use.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>ItemCount</code> - The number of items in the global secondary index.\n                    DynamoDB updates this value approximately every six hours. Recent changes might\n                    not be reflected in this value. </p>\n            </li>\n            <li>\n               <p>\n                  <code>KeySchema</code> - Specifies the complete index key schema. The attribute\n                    names in the key schema must be between 1 and 255 characters (inclusive). The\n                    key schema must begin with the same partition key as the table.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Projection</code> - Specifies attributes that are copied (projected) from\n                    the table into the index. These are in addition to the primary key attributes\n                    and index key attributes, which are automatically projected. Each attribute\n                    specification is composed of:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ProjectionType</code> - One of the following:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>KEYS_ONLY</code> - Only the index and primary keys are\n                                    projected into the index.</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>INCLUDE</code> - In addition to the attributes described\n                                    in <code>KEYS_ONLY</code>, the secondary index will include\n                                    other non-key attributes that you specify.</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>ALL</code> - All of the table attributes are projected\n                                    into the index.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>NonKeyAttributes</code> - A list of one or more non-key attribute\n                            names that are projected into the secondary index. The total count of\n                            attributes provided in <code>NonKeyAttributes</code>, summed across all\n                            of the secondary indexes, must not exceed 100. If you project the same\n                            attribute into two different indexes, this counts as two distinct\n                            attributes when determining the total. This limit only applies when you\n                            specify the ProjectionType of <code>INCLUDE</code>. You still can\n                            specify the ProjectionType of <code>ALL</code> to project all attributes\n                            from the source table, even if the table has more than 100 attributes.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>ProvisionedThroughput</code> - The provisioned throughput settings for the\n                    global secondary index, consisting of read and write capacity units, along with\n                    data about increases and decreases. </p>\n            </li>\n         </ul>\n         <p>If the table is in the <code>DELETING</code> state, no information about indexes will\n            be returned.</p>"
+                        "smithy.api#documentation": "<p>The global secondary indexes, if any, on the table. Each index is scoped to a given\n            partition key value. Each element is composed of:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Backfilling</code> - If true, then the index is currently in the\n                    backfilling phase. Backfilling occurs only when a new global secondary index is\n                    added to the table. It is the process by which DynamoDB populates the new index\n                    with data from the table. (This attribute does not appear for indexes that were\n                    created during a <code>CreateTable</code> operation.) </p>\n               <p> You can delete an index that is being created during the\n                        <code>Backfilling</code> phase when <code>IndexStatus</code> is set to\n                    CREATING and <code>Backfilling</code> is true. You can't delete the index that\n                    is being created when <code>IndexStatus</code> is set to CREATING and\n                        <code>Backfilling</code> is false. (This attribute does not appear for\n                    indexes that were created during a <code>CreateTable</code> operation.)</p>\n            </li>\n            <li>\n               <p>\n                  <code>IndexName</code> - The name of the global secondary index.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IndexSizeBytes</code> - The total size of the global secondary index, in\n                    bytes. DynamoDB updates this value approximately every six hours. Recent changes\n                    might not be reflected in this value. </p>\n            </li>\n            <li>\n               <p>\n                  <code>IndexStatus</code> - The current status of the global secondary\n                    index:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>CREATING</code> - The index is being created.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>UPDATING</code> - The index is being updated.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>DELETING</code> - The index is being deleted.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ACTIVE</code> - The index is ready for use.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>ItemCount</code> - The number of items in the global secondary index.\n                    DynamoDB updates this value approximately every six hours. Recent changes might\n                    not be reflected in this value. </p>\n            </li>\n            <li>\n               <p>\n                  <code>KeySchema</code> - Specifies the complete index key schema. The attribute\n                    names in the key schema must be between 1 and 255 characters (inclusive). The\n                    key schema must begin with the same partition key as the table.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Projection</code> - Specifies attributes that are copied (projected) from\n                    the table into the index. These are in addition to the primary key attributes\n                    and index key attributes, which are automatically projected. Each attribute\n                    specification is composed of:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ProjectionType</code> - One of the following:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>KEYS_ONLY</code> - Only the index and primary keys are\n                                    projected into the index.</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>INCLUDE</code> - In addition to the attributes described\n                                    in <code>KEYS_ONLY</code>, the secondary index will include\n                                    other non-key attributes that you specify.</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>ALL</code> - All of the table attributes are projected\n                                    into the index.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>NonKeyAttributes</code> - A list of one or more non-key attribute\n                            names that are projected into the secondary index. The total count of\n                            attributes provided in <code>NonKeyAttributes</code>, summed across all\n                            of the secondary indexes, must not exceed 100. If you project the same\n                            attribute into two different indexes, this counts as two distinct\n                            attributes when determining the total. This limit only applies when you\n                            specify the ProjectionType of <code>INCLUDE</code>. You still can\n                            specify the ProjectionType of <code>ALL</code> to project all attributes\n                            from the source table, even if the table has more than 100\n                            attributes.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>ProvisionedThroughput</code> - The provisioned throughput settings for the\n                    global secondary index, consisting of read and write capacity units, along with\n                    data about increases and decreases. </p>\n            </li>\n         </ul>\n         <p>If the table is in the <code>DELETING</code> state, no information about indexes will\n            be returned.</p>"
                     }
                 },
                 "StreamSpecification": {
@@ -19741,6 +19851,12 @@
                     "target": "com.amazonaws.dynamodb#ReplicaDescriptionList",
                     "traits": {
                         "smithy.api#documentation": "<p>Represents replicas of the table.</p>"
+                    }
+                },
+                "GlobalTableWitnesses": {
+                    "target": "com.amazonaws.dynamodb#GlobalTableWitnessDescriptionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The witness Region and its current status in the MRSC global table. Only one witness\n            Region can be configured per MRSC global table.</p>"
                     }
                 },
                 "RestoreSummary": {
@@ -19788,7 +19904,7 @@
                 "MultiRegionConsistency": {
                     "target": "com.amazonaws.dynamodb#MultiRegionConsistency",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates one of the following consistency modes for a global table:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EVENTUAL</code>: Indicates that the global table is configured for multi-Region eventual consistency.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STRONG</code>: Indicates that the global table is configured for multi-Region strong consistency (preview).</p>\n               <note>\n                  <p>Multi-Region strong consistency (MRSC) is a new DynamoDB global tables capability currently available in preview mode. For more information, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/PreviewFeatures.html#multi-region-strong-consistency-gt\">Global tables multi-Region strong consistency</a>.</p>\n               </note>\n            </li>\n         </ul>\n         <p>If you don't specify this field, the global table consistency mode defaults to <code>EVENTUAL</code>.</p>"
+                        "smithy.api#documentation": "<p>Indicates one of the following consistency modes for a global table:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EVENTUAL</code>: Indicates that the global table is configured for\n                    multi-Region eventual consistency (MREC).</p>\n            </li>\n            <li>\n               <p>\n                  <code>STRONG</code>: Indicates that the global table is configured for\n                    multi-Region strong consistency (MRSC).</p>\n            </li>\n         </ul>\n         <p>If you don't specify this field, the global table consistency mode defaults to\n                <code>EVENTUAL</code>. For more information about global tables consistency modes,\n            see <a href=\"https://docs.aws.amazon.com/V2globaltables_HowItWorks.html#V2globaltables_HowItWorks.consistency-modes\">\n                Consistency modes</a> in DynamoDB developer guide. </p>"
                     }
                 }
             },
@@ -19838,7 +19954,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A source table with the name <code>TableName</code> does not currently exist within\n            the subscriber's account or the subscriber is operating in the wrong Amazon Web Services Region.</p>",
+                "smithy.api#documentation": "<p>A source table with the name <code>TableName</code> does not currently exist within\n            the subscriber's account or the subscriber is operating in the wrong Amazon Web Services\n            Region.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -19886,6 +20002,12 @@
                     "traits": {
                         "smithy.api#enumValue": "ARCHIVED"
                     }
+                },
+                "REPLICATION_NOT_AUTHORIZED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REPLICATION_NOT_AUTHORIZED"
+                    }
                 }
             }
         },
@@ -19912,7 +20034,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the warm throughput value (in read units per second and write units per second)\n            of the table. Warm throughput is applicable for DynamoDB Standard-IA tables and specifies\n            the minimum provisioned capacity maintained for immediate data access.</p>"
+                "smithy.api#documentation": "<p>Represents the warm throughput value (in read units per second and write units per\n            second) of the table. Warm throughput is applicable for DynamoDB Standard-IA tables and\n            specifies the minimum provisioned capacity maintained for immediate data access.</p>"
             }
         },
         "com.amazonaws.dynamodb#Tag": {
@@ -20376,7 +20498,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The entire transaction request was canceled.</p>\n         <p>DynamoDB cancels a <code>TransactWriteItems</code> request under the following\n            circumstances:</p>\n         <ul>\n            <li>\n               <p>A condition in one of the condition expressions is not met.</p>\n            </li>\n            <li>\n               <p>A table in the <code>TransactWriteItems</code> request is in a different\n                    account or region.</p>\n            </li>\n            <li>\n               <p>More than one action in the <code>TransactWriteItems</code> operation\n                    targets the same item.</p>\n            </li>\n            <li>\n               <p>There is insufficient provisioned capacity for the transaction to be\n                    completed.</p>\n            </li>\n            <li>\n               <p>An item size becomes too large (larger than 400 KB), or a local secondary\n                    index (LSI) becomes too large, or a similar validation error occurs because of\n                    changes made by the transaction.</p>\n            </li>\n            <li>\n               <p>There is a user error, such as an invalid data format.</p>\n            </li>\n            <li>\n               <p>\n                    There is an ongoing <code>TransactWriteItems</code> operation that conflicts with a concurrent \n                    <code>TransactWriteItems</code> request. In this case the <code>TransactWriteItems</code> operation \n                    fails with a <code>TransactionCanceledException</code>.\n                </p>\n            </li>\n         </ul>\n         <p>DynamoDB cancels a <code>TransactGetItems</code> request under the\n            following circumstances:</p>\n         <ul>\n            <li>\n               <p>There is an ongoing <code>TransactGetItems</code> operation that conflicts\n                    with a concurrent <code>PutItem</code>, <code>UpdateItem</code>,\n                        <code>DeleteItem</code> or <code>TransactWriteItems</code> request. In this\n                    case the <code>TransactGetItems</code> operation fails with a\n                        <code>TransactionCanceledException</code>.</p>\n            </li>\n            <li>\n               <p>A table in the <code>TransactGetItems</code> request is in a different\n                    account or region.</p>\n            </li>\n            <li>\n               <p>There is insufficient provisioned capacity for the transaction to be\n                    completed.</p>\n            </li>\n            <li>\n               <p>There is a user error, such as an invalid data format.</p>\n            </li>\n         </ul>\n         <note>\n            <p>If using Java, DynamoDB lists the cancellation reasons on the\n                    <code>CancellationReasons</code> property. This property is not set for other\n                languages. Transaction cancellation reasons are ordered in the order of requested\n                items, if an item has no error it will have <code>None</code> code and\n                    <code>Null</code> message.</p>\n         </note>\n         <p>Cancellation reason codes and possible error messages:</p>\n         <ul>\n            <li>\n               <p>No Errors:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>None</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Message: <code>null</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Conditional Check Failed:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>ConditionalCheckFailed</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Message: The conditional request failed. </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Item Collection Size Limit Exceeded:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>ItemCollectionSizeLimitExceeded</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Message: Collection size exceeded.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Transaction Conflict:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>TransactionConflict</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Message: Transaction is ongoing for the item.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Provisioned Throughput Exceeded:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>ProvisionedThroughputExceeded</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Messages:</p>\n                     <ul>\n                        <li>\n                           <p>The level of configured provisioned throughput for the\n                                    table was exceeded. Consider increasing your provisioning level\n                                    with the UpdateTable API.</p>\n                           <note>\n                              <p>This Message is received when provisioned throughput is\n                                        exceeded is on a provisioned DynamoDB\n                                        table.</p>\n                           </note>\n                        </li>\n                        <li>\n                           <p>The level of configured provisioned throughput for one or\n                                    more global secondary indexes of the table was exceeded.\n                                    Consider increasing your provisioning level for the\n                                    under-provisioned global secondary indexes with the UpdateTable\n                                    API.</p>\n                           <note>\n                              <p>This message is returned when provisioned throughput is\n                                        exceeded is on a provisioned GSI.</p>\n                           </note>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Throttling Error:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>ThrottlingError</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Messages: </p>\n                     <ul>\n                        <li>\n                           <p>Throughput exceeds the current capacity of your table or\n                                    index. DynamoDB is automatically scaling your table or\n                                    index so please try again shortly. If exceptions persist, check\n                                    if you have a hot key:\n                                    https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-partition-key-design.html.</p>\n                           <note>\n                              <p>This message is returned when writes get throttled on an\n                                        On-Demand table as DynamoDB is automatically\n                                        scaling the table.</p>\n                           </note>\n                        </li>\n                        <li>\n                           <p>Throughput exceeds the current capacity for one or more\n                                    global secondary indexes. DynamoDB is automatically\n                                    scaling your index so please try again shortly.</p>\n                           <note>\n                              <p>This message is returned when writes get throttled on\n                                        an On-Demand GSI as DynamoDB is automatically\n                                        scaling the GSI.</p>\n                           </note>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Validation Error:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>ValidationError</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Messages: </p>\n                     <ul>\n                        <li>\n                           <p>One or more parameter values were invalid.</p>\n                        </li>\n                        <li>\n                           <p>The update expression attempted to update the secondary\n                                    index key beyond allowed size limits.</p>\n                        </li>\n                        <li>\n                           <p>The update expression attempted to update the secondary\n                                    index key to unsupported type.</p>\n                        </li>\n                        <li>\n                           <p>An operand in the update expression has an incorrect data\n                                    type.</p>\n                        </li>\n                        <li>\n                           <p>Item size to update has exceeded the maximum allowed\n                                    size.</p>\n                        </li>\n                        <li>\n                           <p>Number overflow. Attempting to store a number with\n                                    magnitude larger than supported range.</p>\n                        </li>\n                        <li>\n                           <p>Type mismatch for attribute to update.</p>\n                        </li>\n                        <li>\n                           <p>Nesting Levels have exceeded supported limits.</p>\n                        </li>\n                        <li>\n                           <p>The document path provided in the update expression is\n                                    invalid for update.</p>\n                        </li>\n                        <li>\n                           <p>The provided expression refers to an attribute that does\n                                    not exist in the item.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>The entire transaction request was canceled.</p>\n         <p>DynamoDB cancels a <code>TransactWriteItems</code> request under the following\n            circumstances:</p>\n         <ul>\n            <li>\n               <p>A condition in one of the condition expressions is not met.</p>\n            </li>\n            <li>\n               <p>A table in the <code>TransactWriteItems</code> request is in a different\n                    account or region.</p>\n            </li>\n            <li>\n               <p>More than one action in the <code>TransactWriteItems</code> operation\n                    targets the same item.</p>\n            </li>\n            <li>\n               <p>There is insufficient provisioned capacity for the transaction to be\n                    completed.</p>\n            </li>\n            <li>\n               <p>An item size becomes too large (larger than 400 KB), or a local secondary\n                    index (LSI) becomes too large, or a similar validation error occurs because of\n                    changes made by the transaction.</p>\n            </li>\n            <li>\n               <p>There is a user error, such as an invalid data format.</p>\n            </li>\n            <li>\n               <p> There is an ongoing <code>TransactWriteItems</code> operation that\n                    conflicts with a concurrent <code>TransactWriteItems</code> request. In this\n                    case the <code>TransactWriteItems</code> operation fails with a\n                        <code>TransactionCanceledException</code>. </p>\n            </li>\n         </ul>\n         <p>DynamoDB cancels a <code>TransactGetItems</code> request under the\n            following circumstances:</p>\n         <ul>\n            <li>\n               <p>There is an ongoing <code>TransactGetItems</code> operation that conflicts\n                    with a concurrent <code>PutItem</code>, <code>UpdateItem</code>,\n                        <code>DeleteItem</code> or <code>TransactWriteItems</code> request. In this\n                    case the <code>TransactGetItems</code> operation fails with a\n                        <code>TransactionCanceledException</code>.</p>\n            </li>\n            <li>\n               <p>A table in the <code>TransactGetItems</code> request is in a different\n                    account or region.</p>\n            </li>\n            <li>\n               <p>There is insufficient provisioned capacity for the transaction to be\n                    completed.</p>\n            </li>\n            <li>\n               <p>There is a user error, such as an invalid data format.</p>\n            </li>\n         </ul>\n         <note>\n            <p>If using Java, DynamoDB lists the cancellation reasons on the\n                    <code>CancellationReasons</code> property. This property is not set for other\n                languages. Transaction cancellation reasons are ordered in the order of requested\n                items, if an item has no error it will have <code>None</code> code and\n                    <code>Null</code> message.</p>\n         </note>\n         <p>Cancellation reason codes and possible error messages:</p>\n         <ul>\n            <li>\n               <p>No Errors:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>None</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Message: <code>null</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Conditional Check Failed:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>ConditionalCheckFailed</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Message: The conditional request failed. </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Item Collection Size Limit Exceeded:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>ItemCollectionSizeLimitExceeded</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Message: Collection size exceeded.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Transaction Conflict:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>TransactionConflict</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Message: Transaction is ongoing for the item.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Provisioned Throughput Exceeded:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>ProvisionedThroughputExceeded</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Messages:</p>\n                     <ul>\n                        <li>\n                           <p>The level of configured provisioned throughput for the\n                                    table was exceeded. Consider increasing your provisioning level\n                                    with the UpdateTable API.</p>\n                           <note>\n                              <p>This Message is received when provisioned throughput is\n                                        exceeded is on a provisioned DynamoDB\n                                        table.</p>\n                           </note>\n                        </li>\n                        <li>\n                           <p>The level of configured provisioned throughput for one or\n                                    more global secondary indexes of the table was exceeded.\n                                    Consider increasing your provisioning level for the\n                                    under-provisioned global secondary indexes with the UpdateTable\n                                    API.</p>\n                           <note>\n                              <p>This message is returned when provisioned throughput is\n                                        exceeded is on a provisioned GSI.</p>\n                           </note>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Throttling Error:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>ThrottlingError</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Messages: </p>\n                     <ul>\n                        <li>\n                           <p>Throughput exceeds the current capacity of your table or\n                                    index. DynamoDB is automatically scaling your table or\n                                    index so please try again shortly. If exceptions persist, check\n                                    if you have a hot key:\n                                    https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-partition-key-design.html.</p>\n                           <note>\n                              <p>This message is returned when writes get throttled on an\n                                        On-Demand table as DynamoDB is automatically\n                                        scaling the table.</p>\n                           </note>\n                        </li>\n                        <li>\n                           <p>Throughput exceeds the current capacity for one or more\n                                    global secondary indexes. DynamoDB is automatically\n                                    scaling your index so please try again shortly.</p>\n                           <note>\n                              <p>This message is returned when writes get throttled on an\n                                        On-Demand GSI as DynamoDB is automatically scaling\n                                        the GSI.</p>\n                           </note>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Validation Error:</p>\n               <ul>\n                  <li>\n                     <p>Code: <code>ValidationError</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Messages: </p>\n                     <ul>\n                        <li>\n                           <p>One or more parameter values were invalid.</p>\n                        </li>\n                        <li>\n                           <p>The update expression attempted to update the secondary\n                                    index key beyond allowed size limits.</p>\n                        </li>\n                        <li>\n                           <p>The update expression attempted to update the secondary\n                                    index key to unsupported type.</p>\n                        </li>\n                        <li>\n                           <p>An operand in the update expression has an incorrect data\n                                    type.</p>\n                        </li>\n                        <li>\n                           <p>Item size to update has exceeded the maximum allowed\n                                    size.</p>\n                        </li>\n                        <li>\n                           <p>Number overflow. Attempting to store a number with\n                                    magnitude larger than supported range.</p>\n                        </li>\n                        <li>\n                           <p>Type mismatch for attribute to update.</p>\n                        </li>\n                        <li>\n                           <p>Nesting Levels have exceeded supported limits.</p>\n                        </li>\n                        <li>\n                           <p>The document path provided in the update expression is\n                                    invalid for update.</p>\n                        </li>\n                        <li>\n                           <p>The provided expression refers to an attribute that does\n                                    not exist in the item.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
                 "smithy.api#error": "client"
             }
         },
@@ -20400,7 +20522,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The transaction with the given request token is already in progress.</p>\n         <p>\n            Recommended Settings            \n        </p>\n         <note>\n            <p>\n                This is a general recommendation for handling the <code>TransactionInProgressException</code>. These settings help \n                ensure that the client retries will trigger completion of the ongoing <code>TransactWriteItems</code> request.\n            </p>\n         </note>\n         <ul>\n            <li>\n               <p>\n                    Set <code>clientExecutionTimeout</code> to a value that allows at least one retry to be processed after 5 \n                    seconds have elapsed since the first attempt for the <code>TransactWriteItems</code> operation.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Set <code>socketTimeout</code> to a value a little lower than the <code>requestTimeout</code> setting.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>requestTimeout</code> should be set based on the time taken for the individual retries of a single \n                    HTTP request for your use case, but setting it to 1 second or higher should work well to reduce chances of \n                    retries and <code>TransactionInProgressException</code> errors.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Use exponential backoff when retrying and tune backoff if needed.\n                </p>\n            </li>\n         </ul>\n         <p>\n            Assuming <a href=\"https://github.com/aws/aws-sdk-java/blob/fd409dee8ae23fb8953e0bb4dbde65536a7e0514/aws-java-sdk-core/src/main/java/com/amazonaws/retry/PredefinedRetryPolicies.java#L97\">default retry policy</a>, \n            example timeout settings based on the guidelines above are as follows:            \n        </p>\n         <p>Example timeline:</p>\n         <ul>\n            <li>\n               <p>0-1000 first attempt</p>\n            </li>\n            <li>\n               <p>1000-1500 first sleep/delay (default retry policy uses 500 ms as base delay for 4xx errors)</p>\n            </li>\n            <li>\n               <p>1500-2500 second attempt</p>\n            </li>\n            <li>\n               <p>2500-3500 second sleep/delay (500 * 2, exponential backoff)</p>\n            </li>\n            <li>\n               <p>3500-4500 third attempt</p>\n            </li>\n            <li>\n               <p>4500-6500 third sleep/delay (500 * 2^2)</p>\n            </li>\n            <li>\n               <p>6500-7500 fourth attempt (this can trigger inline recovery since 5 seconds have elapsed since the first attempt reached TC)</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>The transaction with the given request token is already in progress.</p>\n         <p> Recommended Settings </p>\n         <note>\n            <p> This is a general recommendation for handling the\n                    <code>TransactionInProgressException</code>. These settings help ensure that the\n                client retries will trigger completion of the ongoing\n                    <code>TransactWriteItems</code> request. </p>\n         </note>\n         <ul>\n            <li>\n               <p> Set <code>clientExecutionTimeout</code> to a value that allows at least one\n                    retry to be processed after 5 seconds have elapsed since the first attempt for\n                    the <code>TransactWriteItems</code> operation. </p>\n            </li>\n            <li>\n               <p> Set <code>socketTimeout</code> to a value a little lower than the\n                        <code>requestTimeout</code> setting. </p>\n            </li>\n            <li>\n               <p>\n                  <code>requestTimeout</code> should be set based on the time taken for the\n                    individual retries of a single HTTP request for your use case, but setting it to\n                    1 second or higher should work well to reduce chances of retries and\n                        <code>TransactionInProgressException</code> errors. </p>\n            </li>\n            <li>\n               <p> Use exponential backoff when retrying and tune backoff if needed. </p>\n            </li>\n         </ul>\n         <p> Assuming <a href=\"https://github.com/aws/aws-sdk-java/blob/fd409dee8ae23fb8953e0bb4dbde65536a7e0514/aws-java-sdk-core/src/main/java/com/amazonaws/retry/PredefinedRetryPolicies.java#L97\">default retry policy</a>, example timeout settings based on the guidelines\n            above are as follows: </p>\n         <p>Example timeline:</p>\n         <ul>\n            <li>\n               <p>0-1000 first attempt</p>\n            </li>\n            <li>\n               <p>1000-1500 first sleep/delay (default retry policy uses 500 ms as base delay\n                    for 4xx errors)</p>\n            </li>\n            <li>\n               <p>1500-2500 second attempt</p>\n            </li>\n            <li>\n               <p>2500-3500 second sleep/delay (500 * 2, exponential backoff)</p>\n            </li>\n            <li>\n               <p>3500-4500 third attempt</p>\n            </li>\n            <li>\n               <p>4500-6500 third sleep/delay (500 * 2^2)</p>\n            </li>\n            <li>\n               <p>6500-7500 fourth attempt (this can trigger inline recovery since 5 seconds\n                    have elapsed since the first attempt reached TC)</p>\n            </li>\n         </ul>",
                 "smithy.api#error": "client"
             }
         },
@@ -20540,7 +20662,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": false
                 },
-                "smithy.api#documentation": "<p>\n            <code>UpdateContinuousBackups</code> enables or disables point in time recovery for\n            the specified table. A successful <code>UpdateContinuousBackups</code> call returns the\n            current <code>ContinuousBackupsDescription</code>. Continuous backups are\n                <code>ENABLED</code> on all tables at table creation. If point in time recovery is\n            enabled, <code>PointInTimeRecoveryStatus</code> will be set to ENABLED.</p>\n         <p> Once continuous backups and point in time recovery are enabled, you can restore to\n            any point in time within <code>EarliestRestorableDateTime</code> and\n                <code>LatestRestorableDateTime</code>. </p>\n         <p>\n            <code>LatestRestorableDateTime</code> is typically 5 minutes before the current time.\n            You can restore your table to any point in time in the last 35 days. You can set the\n            <code>RecoveryPeriodInDays</code> to any value between 1 and 35 days.</p>"
+                "smithy.api#documentation": "<p>\n            <code>UpdateContinuousBackups</code> enables or disables point in time recovery for\n            the specified table. A successful <code>UpdateContinuousBackups</code> call returns the\n            current <code>ContinuousBackupsDescription</code>. Continuous backups are\n                <code>ENABLED</code> on all tables at table creation. If point in time recovery is\n            enabled, <code>PointInTimeRecoveryStatus</code> will be set to ENABLED.</p>\n         <p> Once continuous backups and point in time recovery are enabled, you can restore to\n            any point in time within <code>EarliestRestorableDateTime</code> and\n                <code>LatestRestorableDateTime</code>. </p>\n         <p>\n            <code>LatestRestorableDateTime</code> is typically 5 minutes before the current time.\n            You can restore your table to any point in time in the last 35 days. You can set the\n                <code>RecoveryPeriodInDays</code> to any value between 1 and 35 days.</p>"
             }
         },
         "com.amazonaws.dynamodb#UpdateContinuousBackupsInput": {
@@ -20727,7 +20849,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": false
                 },
-                "smithy.api#documentation": "<p>Adds or removes replicas in the specified global table. The global table must already\n            exist to be able to use this operation. Any replica to be added must be empty, have the\n            same name as the global table, have the same key schema, have DynamoDB Streams enabled,\n            and have the same provisioned and maximum write capacity units.</p>\n         <important>\n            <p>This documentation is for version 2017.11.29 (Legacy) of global tables, which should be avoided for new global tables. Customers should use <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html\">Global Tables version 2019.11.21 (Current)</a> when possible, because it provides greater flexibility, higher efficiency, and consumes less write capacity than 2017.11.29 (Legacy).</p>\n            <p>To determine which version you're using, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html\">Determining the global table version you are using</a>. To update existing global tables from version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html\">Upgrading global tables</a>.</p>\n         </important>\n         <note>\n            <p> For global tables, this operation only applies to global tables using Version\n                2019.11.21 (Current version). If you are using global tables <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html\">Version\n                    2019.11.21</a> you can use <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateTable.html\">UpdateTable</a> instead. </p>\n            <p> Although you can use <code>UpdateGlobalTable</code> to add replicas and remove\n                replicas in a single request, for simplicity we recommend that you issue separate\n                requests for adding or removing replicas. </p>\n         </note>\n         <p> If global secondary indexes are specified, then the following conditions must also be\n            met: </p>\n         <ul>\n            <li>\n               <p> The global secondary indexes must have the same name. </p>\n            </li>\n            <li>\n               <p> The global secondary indexes must have the same hash key and sort key (if\n                    present). </p>\n            </li>\n            <li>\n               <p> The global secondary indexes must have the same provisioned and maximum write\n                    capacity units. </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Adds or removes replicas in the specified global table. The global table must already\n            exist to be able to use this operation. Any replica to be added must be empty, have the\n            same name as the global table, have the same key schema, have DynamoDB Streams enabled,\n            and have the same provisioned and maximum write capacity units.</p>\n         <important>\n            <p>This documentation is for version 2017.11.29 (Legacy) of global tables, which should be avoided for new global tables. Customers should use <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html\">Global Tables version 2019.11.21 (Current)</a> when possible, because it provides greater flexibility, higher efficiency, and consumes less write capacity than 2017.11.29 (Legacy).</p>\n            <p>To determine which version you're using, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html\">Determining the global table version you are using</a>. To update existing global tables from version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html\">Upgrading global tables</a>.</p>\n         </important>\n         <note>\n            <p> If you are using global tables <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html\">Version\n                    2019.11.21</a> (Current) you can use <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateTable.html\">UpdateTable</a> instead. </p>\n            <p> Although you can use <code>UpdateGlobalTable</code> to add replicas and remove\n                replicas in a single request, for simplicity we recommend that you issue separate\n                requests for adding or removing replicas. </p>\n         </note>\n         <p> If global secondary indexes are specified, then the following conditions must also be\n            met: </p>\n         <ul>\n            <li>\n               <p> The global secondary indexes must have the same name. </p>\n            </li>\n            <li>\n               <p> The global secondary indexes must have the same hash key and sort key (if\n                    present). </p>\n            </li>\n            <li>\n               <p> The global secondary indexes must have the same provisioned and maximum write\n                    capacity units. </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.dynamodb#UpdateGlobalTableInput": {
@@ -21265,7 +21387,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": false
                 },
-                "smithy.api#documentation": "<p>Modifies the provisioned throughput settings, global secondary indexes, or DynamoDB\n            Streams settings for a given table.</p>\n         <important>\n            <p>For global tables, this operation only applies to global tables using Version\n                2019.11.21 (Current version). </p>\n         </important>\n         <p>You can only perform one of the following operations at once:</p>\n         <ul>\n            <li>\n               <p>Modify the provisioned throughput settings of the table.</p>\n            </li>\n            <li>\n               <p>Remove a global secondary index from the table.</p>\n            </li>\n            <li>\n               <p>Create a new global secondary index on the table. After the index begins\n                    backfilling, you can use <code>UpdateTable</code> to perform other\n                    operations.</p>\n            </li>\n         </ul>\n         <p>\n            <code>UpdateTable</code> is an asynchronous operation; while it's executing, the table\n            status changes from <code>ACTIVE</code> to <code>UPDATING</code>. While it's\n                <code>UPDATING</code>, you can't issue another <code>UpdateTable</code> request.\n            When the table returns to the <code>ACTIVE</code> state, the <code>UpdateTable</code>\n            operation is complete.</p>"
+                "smithy.api#documentation": "<p>Modifies the provisioned throughput settings, global secondary indexes, or DynamoDB\n            Streams settings for a given table.</p>\n         <p>You can only perform one of the following operations at once:</p>\n         <ul>\n            <li>\n               <p>Modify the provisioned throughput settings of the table.</p>\n            </li>\n            <li>\n               <p>Remove a global secondary index from the table.</p>\n            </li>\n            <li>\n               <p>Create a new global secondary index on the table. After the index begins\n                    backfilling, you can use <code>UpdateTable</code> to perform other\n                    operations.</p>\n            </li>\n         </ul>\n         <p>\n            <code>UpdateTable</code> is an asynchronous operation; while it's executing, the table\n            status changes from <code>ACTIVE</code> to <code>UPDATING</code>. While it's\n                <code>UPDATING</code>, you can't issue another <code>UpdateTable</code> request.\n            When the table returns to the <code>ACTIVE</code> state, the <code>UpdateTable</code>\n            operation is complete.</p>"
             }
         },
         "com.amazonaws.dynamodb#UpdateTableInput": {
@@ -21320,7 +21442,7 @@
                 "ReplicaUpdates": {
                     "target": "com.amazonaws.dynamodb#ReplicationGroupUpdateList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of replica update actions (create, delete, or update) for the table.</p>\n         <note>\n            <p>For global tables, this property only applies to global tables using Version\n                2019.11.21 (Current version). </p>\n         </note>"
+                        "smithy.api#documentation": "<p>A list of replica update actions (create, delete, or update) for the table.</p>"
                     }
                 },
                 "TableClass": {
@@ -21338,7 +21460,13 @@
                 "MultiRegionConsistency": {
                     "target": "com.amazonaws.dynamodb#MultiRegionConsistency",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the consistency mode for a new global table. This parameter is only valid\n            when you create a global table by specifying one or more <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ReplicationGroupUpdate.html#DDB-Type-ReplicationGroupUpdate-Create\">Create</a> actions in the <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateTable.html#DDB-UpdateTable-request-ReplicaUpdates\">ReplicaUpdates</a> action list.</p>\n         <p>You can specify one of the following consistency modes:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EVENTUAL</code>: Configures a new global table for multi-Region eventual\n                    consistency. This is the default consistency mode for global tables.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STRONG</code>: Configures a new global table for multi-Region strong\n                    consistency (preview).</p>\n               <note>\n                  <p>Multi-Region strong consistency (MRSC) is a new DynamoDB global\n                        tables capability currently available in preview mode. For more information,\n                        see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/PreviewFeatures.html#multi-region-strong-consistency-gt\">Global tables multi-Region strong consistency</a>.</p>\n               </note>\n            </li>\n         </ul>\n         <p>If you don't specify this parameter, the global table consistency mode defaults to\n                <code>EVENTUAL</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the consistency mode for a new global table. This parameter is only valid\n            when you create a global table by specifying one or more <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ReplicationGroupUpdate.html#DDB-Type-ReplicationGroupUpdate-Create\">Create</a> actions in the <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateTable.html#DDB-UpdateTable-request-ReplicaUpdates\">ReplicaUpdates</a> action list.</p>\n         <p>You can specify one of the following consistency modes:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EVENTUAL</code>: Configures a new global table for multi-Region eventual\n                    consistency (MREC). This is the default consistency mode for global\n                    tables.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STRONG</code>: Configures a new global table for multi-Region strong\n                    consistency (MRSC).</p>\n            </li>\n         </ul>\n         <p>If you don't specify this field, the global table consistency mode defaults to\n                <code>EVENTUAL</code>. For more information about global tables consistency modes,\n            see <a href=\"https://docs.aws.amazon.com/V2globaltables_HowItWorks.html#V2globaltables_HowItWorks.consistency-modes\">\n                Consistency modes</a> in DynamoDB developer guide. </p>"
+                    }
+                },
+                "GlobalTableWitnessUpdates": {
+                    "target": "com.amazonaws.dynamodb#GlobalTableWitnessGroupUpdateList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of witness updates for a  MRSC global table. A witness provides a cost-effective\n            alternative to a full replica in a MRSC global table by maintaining replicated change\n            data written to global table replicas. You cannot perform read or write operations on a\n            witness. For each witness, you can request one action:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Create</code> - add a new witness to the global table.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Delete</code> - remove a witness from the global table.</p>\n            </li>\n         </ul>\n         <p>You can create or delete only one witness per <code>UpdateTable</code>\n            operation.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_HowItWorks.html#V2globaltables_HowItWorks.consistency-modes\">Multi-Region strong consistency (MRSC)</a> in the Amazon DynamoDB\n            Developer Guide</p>"
                     }
                 },
                 "OnDemandThroughput": {
@@ -21397,7 +21525,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates auto scaling settings on your global tables at once.</p>\n         <important>\n            <p>For global tables, this operation only applies to global tables using Version\n                2019.11.21 (Current version). </p>\n         </important>"
+                "smithy.api#documentation": "<p>Updates auto scaling settings on your global tables at once.</p>"
             }
         },
         "com.amazonaws.dynamodb#UpdateTableReplicaAutoScalingInput": {
@@ -21537,6 +21665,29 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides visibility into the number of read and write operations your table or\n            secondary index can instantaneously support. The settings can be modified using the\n                <code>UpdateTable</code> operation to meet the throughput requirements of an\n            upcoming peak event.</p>"
+            }
+        },
+        "com.amazonaws.dynamodb#WitnessStatus": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                }
             }
         },
         "com.amazonaws.dynamodb#WriteRequest": {

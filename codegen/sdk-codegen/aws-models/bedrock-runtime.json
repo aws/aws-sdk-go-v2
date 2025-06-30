@@ -9,7 +9,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request is denied because you do not have sufficient permissions to perform the requested action. For troubleshooting this error, \n         see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-access-denied\">AccessDeniedException</a> in the Amazon Bedrock User Guide</p>",
+                "smithy.api#documentation": "<p>The request is denied because you do not have sufficient permissions to perform the requested action. For troubleshooting this error, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-access-denied\">AccessDeniedException</a> in the Amazon Bedrock User Guide</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
             }
@@ -70,7 +70,12 @@
                         "http/1.1"
                     ]
                 },
+                "smithy.api#auth": [
+                    "aws.auth#sigv4",
+                    "smithy.api#httpBearerAuth"
+                ],
                 "smithy.api#documentation": "<p>Describes the API operations for running inference using Amazon Bedrock models.</p>",
+                "smithy.api#httpBearerAuth": {},
                 "smithy.api#title": "Amazon Bedrock Runtime",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -774,7 +779,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The action to apply a guardrail.</p>\n         <p>For troubleshooting some of the common errors you might encounter when using the <code>ApplyGuardrail</code> API, \n            see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html\">Troubleshooting Amazon Bedrock API Error Codes</a> in the Amazon Bedrock User Guide</p>",
+                "smithy.api#documentation": "<p>The action to apply a guardrail.</p> <p>For troubleshooting some of the common errors you might encounter when using the <code>ApplyGuardrail</code> API, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html\">Troubleshooting Amazon Bedrock API Error Codes</a> in the Amazon Bedrock User Guide</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -818,7 +823,7 @@
                 "outputScope": {
                     "target": "com.amazonaws.bedrockruntime#GuardrailOutputScope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the scope of the output that you get in the response. Set to <code>FULL</code> to return the entire output, including any detected and non-detected entries in the response for enhanced debugging.</p>\n         <p>Note that the full output scope doesn't apply to word filters or regex in sensitive information filters. It does apply to all other filtering policies, including sensitive information with filters that can detect personally identifiable information (PII).</p>"
+                        "smithy.api#documentation": "<p>Specifies the scope of the output that you get in the response. Set to <code>FULL</code> to return the entire output, including any detected and non-detected entries in the response for enhanced debugging.</p> <p>Note that the full output scope doesn't apply to word filters or regex in sensitive information filters. It does apply to all other filtering policies, including sensitive information with filters that can detect personally identifiable information (PII).</p>"
                     }
                 }
             },
@@ -1067,7 +1072,7 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>The Model automatically decides if a tool should be called or whether to generate text instead.\n         For example, <code>{\"auto\" : {}}</code>.</p>"
+                "smithy.api#documentation": "<p>The Model automatically decides if a tool should be called or whether to generate text instead. For example, <code>{\"auto\" : {}}</code>.</p>"
             }
         },
         "com.amazonaws.bedrockruntime#BidirectionalInputPayloadPart": {
@@ -1135,6 +1140,185 @@
                 }
             }
         },
+        "com.amazonaws.bedrockruntime#Citation": {
+            "type": "structure",
+            "members": {
+                "title": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title or identifier of the source document being cited.</p>"
+                    }
+                },
+                "sourceContent": {
+                    "target": "com.amazonaws.bedrockruntime#CitationSourceContentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific content from the source document that was referenced or cited in the generated response.</p>"
+                    }
+                },
+                "location": {
+                    "target": "com.amazonaws.bedrockruntime#CitationLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The precise location within the source document where the cited content can be found, including character positions, page numbers, or chunk identifiers.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a citation that references a specific source document. Citations provide traceability between the model's generated response and the source documents that informed that response.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#CitationGeneratedContent": {
+            "type": "union",
+            "members": {
+                "text": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text content that was generated by the model and is supported by the associated citation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the generated text content that corresponds to or is supported by a citation from a source document.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#CitationGeneratedContentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockruntime#CitationGeneratedContent"
+            }
+        },
+        "com.amazonaws.bedrockruntime#CitationLocation": {
+            "type": "union",
+            "members": {
+                "documentChar": {
+                    "target": "com.amazonaws.bedrockruntime#DocumentCharLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The character-level location within the document where the cited content is found.</p>"
+                    }
+                },
+                "documentPage": {
+                    "target": "com.amazonaws.bedrockruntime#DocumentPageLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The page-level location within the document where the cited content is found.</p>"
+                    }
+                },
+                "documentChunk": {
+                    "target": "com.amazonaws.bedrockruntime#DocumentChunkLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The chunk-level location within the document where the cited content is found, typically used for documents that have been segmented into logical chunks.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the precise location within a source document where cited content can be found. This can include character-level positions, page numbers, or document chunks depending on the document type and indexing method.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#CitationSourceContent": {
+            "type": "union",
+            "members": {
+                "text": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text content from the source document that is being cited.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the actual text content from a source document that is being cited or referenced in the model's response.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#CitationSourceContentDelta": {
+            "type": "structure",
+            "members": {
+                "text": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An incremental update to the text content from the source document that is being cited.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains incremental updates to the source content text during streaming responses, allowing clients to build up the cited content progressively.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#CitationSourceContentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockruntime#CitationSourceContent"
+            }
+        },
+        "com.amazonaws.bedrockruntime#CitationSourceContentListDelta": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockruntime#CitationSourceContentDelta"
+            }
+        },
+        "com.amazonaws.bedrockruntime#Citations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockruntime#Citation"
+            }
+        },
+        "com.amazonaws.bedrockruntime#CitationsConfig": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether document citations should be included in the model's response. When set to true, the model can generate citations that reference the source documents used to inform the response.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration settings for enabling and controlling document citations in Converse API responses. When enabled, the model can include citation information that links generated content back to specific source documents.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#CitationsContentBlock": {
+            "type": "structure",
+            "members": {
+                "content": {
+                    "target": "com.amazonaws.bedrockruntime#CitationGeneratedContentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The generated content that is supported by the associated citations.</p>"
+                    }
+                },
+                "citations": {
+                    "target": "com.amazonaws.bedrockruntime#Citations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of citations that reference the source documents used to generate the associated content.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A content block that contains both generated text and associated citation information. This block type is returned when document citations are enabled, providing traceability between the generated content and the source documents that informed the response.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#CitationsDelta": {
+            "type": "structure",
+            "members": {
+                "title": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title or identifier of the source document being cited.</p>"
+                    }
+                },
+                "sourceContent": {
+                    "target": "com.amazonaws.bedrockruntime#CitationSourceContentListDelta",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific content from the source document that was referenced or cited in the generated response.</p>"
+                    }
+                },
+                "location": {
+                    "target": "com.amazonaws.bedrockruntime#CitationLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the precise location within a source document where cited content can be found. This can include character-level positions, page numbers, or document chunks depending on the document type and indexing method.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains incremental updates to citation information during streaming responses. This allows clients to build up citation data progressively as the response is generated.</p>"
+            }
+        },
         "com.amazonaws.bedrockruntime#ConflictException": {
             "type": "structure",
             "members": {
@@ -1160,7 +1344,7 @@
                 "image": {
                     "target": "com.amazonaws.bedrockruntime#ImageBlock",
                     "traits": {
-                        "smithy.api#documentation": "<p>Image to include in the message. </p>\n         <note>\n            <p>This field is only supported by Anthropic Claude 3 models.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Image to include in the message. </p> <note> <p>This field is only supported by Anthropic Claude 3 models.</p> </note>"
                     }
                 },
                 "document": {
@@ -1190,7 +1374,7 @@
                 "guardContent": {
                     "target": "com.amazonaws.bedrockruntime#GuardrailConverseContentBlock",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the content to assess with the guardrail. If you don't specify\n            <code>guardContent</code> in a call to the Converse API, the guardrail (if passed in the\n         Converse API) assesses the entire message.</p>\n         <p>For more information, see  <i>Use a guardrail with the Converse API</i> in the <i>Amazon Bedrock User Guide</i>.\n\n      </p>"
+                        "smithy.api#documentation": "<p>Contains the content to assess with the guardrail. If you don't specify <code>guardContent</code> in a call to the Converse API, the guardrail (if passed in the Converse API) assesses the entire message.</p> <p>For more information, see <i>Use a guardrail with the Converse API</i> in the <i>Amazon Bedrock User Guide</i>. </p>"
                     }
                 },
                 "cachePoint": {
@@ -1203,6 +1387,12 @@
                     "target": "com.amazonaws.bedrockruntime#ReasoningContentBlock",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains content regarding the reasoning that is carried out by the model. Reasoning refers to a Chain of Thought (CoT) that the model generates to enhance the accuracy of its final response.</p>"
+                    }
+                },
+                "citationsContent": {
+                    "target": "com.amazonaws.bedrockruntime#CitationsContentBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A content block that contains both generated text and associated citation information, providing traceability between the response and source documents.</p>"
                     }
                 }
             },
@@ -1229,6 +1419,12 @@
                     "target": "com.amazonaws.bedrockruntime#ReasoningContentBlockDelta",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains content regarding the reasoning that is carried out by the model. Reasoning refers to a Chain of Thought (CoT) that the model generates to enhance the accuracy of its final response.</p>"
+                    }
+                },
+                "citation": {
+                    "target": "com.amazonaws.bedrockruntime#CitationsDelta",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Incremental citation information that is streamed as part of the response generation process.</p>"
                     }
                 }
             },
@@ -1278,7 +1474,7 @@
                 "start": {
                     "target": "com.amazonaws.bedrockruntime#ContentBlockStart",
                     "traits": {
-                        "smithy.api#documentation": "<p>Start information about a content block start event.  </p>",
+                        "smithy.api#documentation": "<p>Start information about a content block start event. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1380,7 +1576,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sends messages to the specified Amazon Bedrock model. <code>Converse</code> provides\n         a consistent interface that works with all models that\n         support messages. This allows you to write code once and use it with different models.\n         If a model has unique inference parameters, you can also pass those unique parameters\n         to the model.</p>\n         <p>Amazon Bedrock doesn't store any text, images, or documents that you provide as content. The data is only used to generate the response.</p>\n         <p>You can submit a prompt by including it in the <code>messages</code> field, specifying the <code>modelId</code> of a foundation model or inference profile to run inference on it, and including any other fields that are relevant to your use case.</p>\n         <p>You can also submit a prompt from Prompt management by specifying the ARN of the prompt version and including a map of variables to values in the <code>promptVariables</code> field. You can append more messages to the prompt by using the <code>messages</code> field. If you use a prompt from Prompt management, you can't include the following fields in the request: <code>additionalModelRequestFields</code>, <code>inferenceConfig</code>, <code>system</code>, or <code>toolConfig</code>. Instead, these fields must be defined through Prompt management. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-use.html\">Use a prompt from Prompt management</a>.</p>\n         <p>For information about the Converse API, see <i>Use the Converse API</i> in the <i>Amazon Bedrock User Guide</i>.\n            To use a guardrail, see  <i>Use a guardrail with the Converse API</i> in the <i>Amazon Bedrock User Guide</i>.\n            To use a tool with a model, see <i>Tool use (Function calling)</i> in the <i>Amazon Bedrock User Guide</i>\n         </p>\n         <p>For example code, see <i>Converse API examples</i> in the <i>Amazon Bedrock User Guide</i>.\n      </p>\n         <p>This operation requires permission for the <code>bedrock:InvokeModel</code> action. </p>\n         <important>\n            <p>To deny all inference access to resources that you specify in the modelId field, you\n         need to deny access to the <code>bedrock:InvokeModel</code> and\n         <code>bedrock:InvokeModelWithResponseStream</code> actions. Doing this also denies\n         access to the resource through the base inference actions (<a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html\">InvokeModel</a> and <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModelWithResponseStream.html\">InvokeModelWithResponseStream</a>). For more information see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html#security_iam_id-based-policy-examples-deny-inference\">Deny access for inference on specific models</a>.\n      </p>\n         </important>\n         <p>For troubleshooting some of the common errors you might encounter when using the <code>Converse</code> API, \n         see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html\">Troubleshooting Amazon Bedrock API Error Codes</a> in the Amazon Bedrock User Guide</p>",
+                "smithy.api#documentation": "<p>Sends messages to the specified Amazon Bedrock model. <code>Converse</code> provides a consistent interface that works with all models that support messages. This allows you to write code once and use it with different models. If a model has unique inference parameters, you can also pass those unique parameters to the model.</p> <p>Amazon Bedrock doesn't store any text, images, or documents that you provide as content. The data is only used to generate the response.</p> <p>You can submit a prompt by including it in the <code>messages</code> field, specifying the <code>modelId</code> of a foundation model or inference profile to run inference on it, and including any other fields that are relevant to your use case.</p> <p>You can also submit a prompt from Prompt management by specifying the ARN of the prompt version and including a map of variables to values in the <code>promptVariables</code> field. You can append more messages to the prompt by using the <code>messages</code> field. If you use a prompt from Prompt management, you can't include the following fields in the request: <code>additionalModelRequestFields</code>, <code>inferenceConfig</code>, <code>system</code>, or <code>toolConfig</code>. Instead, these fields must be defined through Prompt management. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-use.html\">Use a prompt from Prompt management</a>.</p> <p>For information about the Converse API, see <i>Use the Converse API</i> in the <i>Amazon Bedrock User Guide</i>. To use a guardrail, see <i>Use a guardrail with the Converse API</i> in the <i>Amazon Bedrock User Guide</i>. To use a tool with a model, see <i>Tool use (Function calling)</i> in the <i>Amazon Bedrock User Guide</i> </p> <p>For example code, see <i>Converse API examples</i> in the <i>Amazon Bedrock User Guide</i>. </p> <p>This operation requires permission for the <code>bedrock:InvokeModel</code> action. </p> <important> <p>To deny all inference access to resources that you specify in the modelId field, you need to deny access to the <code>bedrock:InvokeModel</code> and <code>bedrock:InvokeModelWithResponseStream</code> actions. Doing this also denies access to the resource through the base inference actions (<a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html\">InvokeModel</a> and <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModelWithResponseStream.html\">InvokeModelWithResponseStream</a>). For more information see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html#security_iam_id-based-policy-examples-deny-inference\">Deny access for inference on specific models</a>. </p> </important> <p>For troubleshooting some of the common errors you might encounter when using the <code>Converse</code> API, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html\">Troubleshooting Amazon Bedrock API Error Codes</a> in the Amazon Bedrock User Guide</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1394,7 +1590,7 @@
                 "latencyMs": {
                     "target": "smithy.api#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The latency of the call to <code>Converse</code>, in milliseconds.\n         </p>",
+                        "smithy.api#documentation": "<p>The latency of the call to <code>Converse</code>, in milliseconds. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1423,7 +1619,7 @@
                 "modelId": {
                     "target": "com.amazonaws.bedrockruntime#ConversationalModelId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the model or throughput with which to run inference, or the prompt resource to use in inference. The value depends on the resource that you use:</p>\n         <ul>\n            <li>\n               <p>If you use a base model, specify the model ID or its ARN. For a list of model IDs for base models, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns\">Amazon Bedrock base model IDs (on-demand throughput)</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use an inference profile, specify the inference profile ID or its ARN. For a list of inference profile IDs, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html\">Supported Regions and models for cross-region inference</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a provisioned model, specify the ARN of the Provisioned Throughput. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html\">Run inference using a Provisioned Throughput</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a custom model, first purchase Provisioned Throughput for it. Then specify the ARN of the resulting provisioned model. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html\">Use a custom model in Amazon Bedrock</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>To include a prompt that was defined in <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management.html\">Prompt management</a>, specify the ARN of the prompt version to use.</p>\n            </li>\n         </ul>\n         <p>The Converse API doesn't support <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html\">imported models</a>.</p>",
+                        "smithy.api#documentation": "<p>Specifies the model or throughput with which to run inference, or the prompt resource to use in inference. The value depends on the resource that you use:</p> <ul> <li> <p>If you use a base model, specify the model ID or its ARN. For a list of model IDs for base models, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns\">Amazon Bedrock base model IDs (on-demand throughput)</a> in the Amazon Bedrock User Guide.</p> </li> <li> <p>If you use an inference profile, specify the inference profile ID or its ARN. For a list of inference profile IDs, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html\">Supported Regions and models for cross-region inference</a> in the Amazon Bedrock User Guide.</p> </li> <li> <p>If you use a provisioned model, specify the ARN of the Provisioned Throughput. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html\">Run inference using a Provisioned Throughput</a> in the Amazon Bedrock User Guide.</p> </li> <li> <p>If you use a custom model, first purchase Provisioned Throughput for it. Then specify the ARN of the resulting provisioned model. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html\">Use a custom model in Amazon Bedrock</a> in the Amazon Bedrock User Guide.</p> </li> <li> <p>To include a prompt that was defined in <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management.html\">Prompt management</a>, specify the ARN of the prompt version to use.</p> </li> </ul> <p>The Converse API doesn't support <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html\">imported models</a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1443,13 +1639,13 @@
                 "inferenceConfig": {
                     "target": "com.amazonaws.bedrockruntime#InferenceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Inference parameters to pass to the model. <code>Converse</code> and <code>ConverseStream</code> support a base\n         set of inference parameters. If you need to pass additional parameters that the model\n         supports, use the <code>additionalModelRequestFields</code> request field.</p>"
+                        "smithy.api#documentation": "<p>Inference parameters to pass to the model. <code>Converse</code> and <code>ConverseStream</code> support a base set of inference parameters. If you need to pass additional parameters that the model supports, use the <code>additionalModelRequestFields</code> request field.</p>"
                     }
                 },
                 "toolConfig": {
                     "target": "com.amazonaws.bedrockruntime#ToolConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration information for the tools that the model can use when generating a response. </p>\n         <p>For information about models that support tool use, see \n         <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html#conversation-inference-supported-models-features\">Supported models and model features</a>.</p>"
+                        "smithy.api#documentation": "<p>Configuration information for the tools that the model can use when generating a response. </p> <p>For information about models that support tool use, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html#conversation-inference-supported-models-features\">Supported models and model features</a>.</p>"
                     }
                 },
                 "guardrailConfig": {
@@ -1461,7 +1657,7 @@
                 "additionalModelRequestFields": {
                     "target": "smithy.api#Document",
                     "traits": {
-                        "smithy.api#documentation": "<p>Additional inference parameters that the model supports, beyond the\n         base set of inference parameters that <code>Converse</code> and <code>ConverseStream</code> support in the <code>inferenceConfig</code>\n         field. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Model parameters</a>.</p>"
+                        "smithy.api#documentation": "<p>Additional inference parameters that the model supports, beyond the base set of inference parameters that <code>Converse</code> and <code>ConverseStream</code> support in the <code>inferenceConfig</code> field. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Model parameters</a>.</p>"
                     }
                 },
                 "promptVariables": {
@@ -1473,7 +1669,7 @@
                 "additionalModelResponseFieldPaths": {
                     "target": "com.amazonaws.bedrockruntime#AdditionalModelResponseFieldPaths",
                     "traits": {
-                        "smithy.api#documentation": "<p>Additional model parameters field paths to return in the\n         response. <code>Converse</code> and <code>ConverseStream</code> return the requested fields as a JSON Pointer object in the\n         <code>additionalModelResponseFields</code> field. The following is example JSON for <code>additionalModelResponseFieldPaths</code>.</p>\n         <p>\n            <code>[\n         \"/stop_sequence\"\n         ]</code>\n         </p>\n         <p>For information about the JSON Pointer syntax, see the\n         <a href=\"https://datatracker.ietf.org/doc/html/rfc6901\">Internet Engineering Task Force (IETF)</a> documentation.</p>\n         <p>\n            <code>Converse</code> and <code>ConverseStream</code> reject an empty JSON Pointer or incorrectly structured\n         JSON Pointer with a <code>400</code> error code. if the JSON Pointer is valid, but the requested\n         field is not in the model response, it is ignored by <code>Converse</code>.</p>",
+                        "smithy.api#documentation": "<p>Additional model parameters field paths to return in the response. <code>Converse</code> and <code>ConverseStream</code> return the requested fields as a JSON Pointer object in the <code>additionalModelResponseFields</code> field. The following is example JSON for <code>additionalModelResponseFieldPaths</code>.</p> <p> <code>[ \"/stop_sequence\" ]</code> </p> <p>For information about the JSON Pointer syntax, see the <a href=\"https://datatracker.ietf.org/doc/html/rfc6901\">Internet Engineering Task Force (IETF)</a> documentation.</p> <p> <code>Converse</code> and <code>ConverseStream</code> reject an empty JSON Pointer or incorrectly structured JSON Pointer with a <code>400</code> error code. if the JSON Pointer is valid, but the requested field is not in the model response, it is ignored by <code>Converse</code>.</p>",
                         "smithy.api#length": {
                             "max": 10
                         }
@@ -1516,7 +1712,7 @@
                 "usage": {
                     "target": "com.amazonaws.bedrockruntime#TokenUsage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total number of tokens used in the call to <code>Converse</code>. The total includes\n         the tokens input to the model and the tokens generated by the model.</p>",
+                        "smithy.api#documentation": "<p>The total number of tokens used in the call to <code>Converse</code>. The total includes the tokens input to the model and the tokens generated by the model.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1588,7 +1784,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sends messages to the specified Amazon Bedrock model and returns\n         the response in a stream. <code>ConverseStream</code> provides a consistent API\n         that works with all Amazon Bedrock models that support messages.\n         This allows you to write code once and use it with different models. Should a\n         model have unique inference parameters, you can also pass those unique parameters to the\n         model. </p>\n         <p>To find out if a model supports streaming, call <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetFoundationModel.html\">GetFoundationModel</a>\n         and check the <code>responseStreamingSupported</code> field in the response.</p>\n         <note>\n            <p>The CLI doesn't support streaming operations in Amazon Bedrock, including <code>ConverseStream</code>.</p>\n         </note>\n         <p>Amazon Bedrock doesn't store any text, images, or documents that you provide as content. The data is only used to generate the response.</p>\n         <p>You can submit a prompt by including it in the <code>messages</code> field, specifying the <code>modelId</code> of a foundation model or inference profile to run inference on it, and including any other fields that are relevant to your use case.</p>\n         <p>You can also submit a prompt from Prompt management by specifying the ARN of the prompt version and including a map of variables to values in the <code>promptVariables</code> field. You can append more messages to the prompt by using the <code>messages</code> field. If you use a prompt from Prompt management, you can't include the following fields in the request: <code>additionalModelRequestFields</code>, <code>inferenceConfig</code>, <code>system</code>, or <code>toolConfig</code>. Instead, these fields must be defined through Prompt management. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-use.html\">Use a prompt from Prompt management</a>.</p>\n         <p>For information about the Converse API, see <i>Use the Converse API</i> in the <i>Amazon Bedrock User Guide</i>.\n         To use a guardrail, see  <i>Use a guardrail with the Converse API</i> in the <i>Amazon Bedrock User Guide</i>.\n         To use a tool with a model, see <i>Tool use (Function calling)</i> in the <i>Amazon Bedrock User Guide</i>\n         </p>\n         <p>For example code, see <i>Conversation streaming example</i> in the <i>Amazon Bedrock User Guide</i>.\n      </p>\n         <p>This operation requires permission for the <code>bedrock:InvokeModelWithResponseStream</code> action.</p>\n         <important>\n            <p>To deny all inference access to resources that you specify in the modelId field, you\n         need to deny access to the <code>bedrock:InvokeModel</code> and\n         <code>bedrock:InvokeModelWithResponseStream</code> actions. Doing this also denies\n         access to the resource through the base inference actions (<a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html\">InvokeModel</a> and <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModelWithResponseStream.html\">InvokeModelWithResponseStream</a>). For more information see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html#security_iam_id-based-policy-examples-deny-inference\">Deny access for inference on specific models</a>.\n      </p>\n         </important>\n         <p>For troubleshooting some of the common errors you might encounter when using the <code>ConverseStream</code> API, \n         see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html\">Troubleshooting Amazon Bedrock API Error Codes</a> in the Amazon Bedrock User Guide</p>",
+                "smithy.api#documentation": "<p>Sends messages to the specified Amazon Bedrock model and returns the response in a stream. <code>ConverseStream</code> provides a consistent API that works with all Amazon Bedrock models that support messages. This allows you to write code once and use it with different models. Should a model have unique inference parameters, you can also pass those unique parameters to the model. </p> <p>To find out if a model supports streaming, call <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetFoundationModel.html\">GetFoundationModel</a> and check the <code>responseStreamingSupported</code> field in the response.</p> <note> <p>The CLI doesn't support streaming operations in Amazon Bedrock, including <code>ConverseStream</code>.</p> </note> <p>Amazon Bedrock doesn't store any text, images, or documents that you provide as content. The data is only used to generate the response.</p> <p>You can submit a prompt by including it in the <code>messages</code> field, specifying the <code>modelId</code> of a foundation model or inference profile to run inference on it, and including any other fields that are relevant to your use case.</p> <p>You can also submit a prompt from Prompt management by specifying the ARN of the prompt version and including a map of variables to values in the <code>promptVariables</code> field. You can append more messages to the prompt by using the <code>messages</code> field. If you use a prompt from Prompt management, you can't include the following fields in the request: <code>additionalModelRequestFields</code>, <code>inferenceConfig</code>, <code>system</code>, or <code>toolConfig</code>. Instead, these fields must be defined through Prompt management. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-use.html\">Use a prompt from Prompt management</a>.</p> <p>For information about the Converse API, see <i>Use the Converse API</i> in the <i>Amazon Bedrock User Guide</i>. To use a guardrail, see <i>Use a guardrail with the Converse API</i> in the <i>Amazon Bedrock User Guide</i>. To use a tool with a model, see <i>Tool use (Function calling)</i> in the <i>Amazon Bedrock User Guide</i> </p> <p>For example code, see <i>Conversation streaming example</i> in the <i>Amazon Bedrock User Guide</i>. </p> <p>This operation requires permission for the <code>bedrock:InvokeModelWithResponseStream</code> action.</p> <important> <p>To deny all inference access to resources that you specify in the modelId field, you need to deny access to the <code>bedrock:InvokeModel</code> and <code>bedrock:InvokeModelWithResponseStream</code> actions. Doing this also denies access to the resource through the base inference actions (<a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html\">InvokeModel</a> and <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModelWithResponseStream.html\">InvokeModelWithResponseStream</a>). For more information see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html#security_iam_id-based-policy-examples-deny-inference\">Deny access for inference on specific models</a>. </p> </important> <p>For troubleshooting some of the common errors you might encounter when using the <code>ConverseStream</code> API, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html\">Troubleshooting Amazon Bedrock API Error Codes</a> in the Amazon Bedrock User Guide</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1699,19 +1895,19 @@
                 "validationException": {
                     "target": "com.amazonaws.bedrockruntime#ValidationException",
                     "traits": {
-                        "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by <i>Amazon Bedrock</i>. For troubleshooting this error, \n         see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-validation-error\">ValidationError</a> in the Amazon Bedrock User Guide</p>"
+                        "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by <i>Amazon Bedrock</i>. For troubleshooting this error, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-validation-error\">ValidationError</a> in the Amazon Bedrock User Guide</p>"
                     }
                 },
                 "throttlingException": {
                     "target": "com.amazonaws.bedrockruntime#ThrottlingException",
                     "traits": {
-                        "smithy.api#documentation": "<p>Your request was denied due to exceeding the account quotas for <i>Amazon Bedrock</i>. For\n         troubleshooting this error, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-throttling-exception\">ThrottlingException</a> in the Amazon Bedrock User Guide</p>"
+                        "smithy.api#documentation": "<p>Your request was denied due to exceeding the account quotas for <i>Amazon Bedrock</i>. For troubleshooting this error, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-throttling-exception\">ThrottlingException</a> in the Amazon Bedrock User Guide</p>"
                     }
                 },
                 "serviceUnavailableException": {
                     "target": "com.amazonaws.bedrockruntime#ServiceUnavailableException",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service isn't currently available. For troubleshooting this error, \n         see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-service-unavailable\">ServiceUnavailable</a> in the Amazon Bedrock User Guide</p>"
+                        "smithy.api#documentation": "<p>The service isn't currently available. For troubleshooting this error, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-service-unavailable\">ServiceUnavailable</a> in the Amazon Bedrock User Guide</p>"
                     }
                 }
             },
@@ -1726,7 +1922,7 @@
                 "modelId": {
                     "target": "com.amazonaws.bedrockruntime#ConversationalModelId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the model or throughput with which to run inference, or the prompt resource to use in inference. The value depends on the resource that you use:</p>\n         <ul>\n            <li>\n               <p>If you use a base model, specify the model ID or its ARN. For a list of model IDs for base models, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns\">Amazon Bedrock base model IDs (on-demand throughput)</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use an inference profile, specify the inference profile ID or its ARN. For a list of inference profile IDs, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html\">Supported Regions and models for cross-region inference</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a provisioned model, specify the ARN of the Provisioned Throughput. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html\">Run inference using a Provisioned Throughput</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a custom model, first purchase Provisioned Throughput for it. Then specify the ARN of the resulting provisioned model. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html\">Use a custom model in Amazon Bedrock</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>To include a prompt that was defined in <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management.html\">Prompt management</a>, specify the ARN of the prompt version to use.</p>\n            </li>\n         </ul>\n         <p>The Converse API doesn't support <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html\">imported models</a>.</p>",
+                        "smithy.api#documentation": "<p>Specifies the model or throughput with which to run inference, or the prompt resource to use in inference. The value depends on the resource that you use:</p> <ul> <li> <p>If you use a base model, specify the model ID or its ARN. For a list of model IDs for base models, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns\">Amazon Bedrock base model IDs (on-demand throughput)</a> in the Amazon Bedrock User Guide.</p> </li> <li> <p>If you use an inference profile, specify the inference profile ID or its ARN. For a list of inference profile IDs, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html\">Supported Regions and models for cross-region inference</a> in the Amazon Bedrock User Guide.</p> </li> <li> <p>If you use a provisioned model, specify the ARN of the Provisioned Throughput. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html\">Run inference using a Provisioned Throughput</a> in the Amazon Bedrock User Guide.</p> </li> <li> <p>If you use a custom model, first purchase Provisioned Throughput for it. Then specify the ARN of the resulting provisioned model. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html\">Use a custom model in Amazon Bedrock</a> in the Amazon Bedrock User Guide.</p> </li> <li> <p>To include a prompt that was defined in <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management.html\">Prompt management</a>, specify the ARN of the prompt version to use.</p> </li> </ul> <p>The Converse API doesn't support <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html\">imported models</a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1746,13 +1942,13 @@
                 "inferenceConfig": {
                     "target": "com.amazonaws.bedrockruntime#InferenceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Inference parameters to pass to the model. <code>Converse</code> and <code>ConverseStream</code> support a base\n         set of inference parameters. If you need to pass additional parameters that the model\n         supports, use the <code>additionalModelRequestFields</code> request field.</p>"
+                        "smithy.api#documentation": "<p>Inference parameters to pass to the model. <code>Converse</code> and <code>ConverseStream</code> support a base set of inference parameters. If you need to pass additional parameters that the model supports, use the <code>additionalModelRequestFields</code> request field.</p>"
                     }
                 },
                 "toolConfig": {
                     "target": "com.amazonaws.bedrockruntime#ToolConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration information for the tools that the model can use when generating a response.</p>\n         <p>For information about models that support streaming tool use, see \n            <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html#conversation-inference-supported-models-features\">Supported models and model features</a>.</p>"
+                        "smithy.api#documentation": "<p>Configuration information for the tools that the model can use when generating a response.</p> <p>For information about models that support streaming tool use, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html#conversation-inference-supported-models-features\">Supported models and model features</a>.</p>"
                     }
                 },
                 "guardrailConfig": {
@@ -1764,7 +1960,7 @@
                 "additionalModelRequestFields": {
                     "target": "smithy.api#Document",
                     "traits": {
-                        "smithy.api#documentation": "<p>Additional inference parameters that the model supports, beyond the\n         base set of inference parameters that <code>Converse</code> and <code>ConverseStream</code> support in the <code>inferenceConfig</code>\n         field. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Model parameters</a>.</p>"
+                        "smithy.api#documentation": "<p>Additional inference parameters that the model supports, beyond the base set of inference parameters that <code>Converse</code> and <code>ConverseStream</code> support in the <code>inferenceConfig</code> field. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Model parameters</a>.</p>"
                     }
                 },
                 "promptVariables": {
@@ -1776,7 +1972,7 @@
                 "additionalModelResponseFieldPaths": {
                     "target": "com.amazonaws.bedrockruntime#AdditionalModelResponseFieldPaths",
                     "traits": {
-                        "smithy.api#documentation": "<p>Additional model parameters field paths to return in the\n         response. <code>Converse</code> and <code>ConverseStream</code> return the requested fields as a JSON Pointer object in the\n         <code>additionalModelResponseFields</code> field. The following is example JSON for <code>additionalModelResponseFieldPaths</code>.</p>\n         <p>\n            <code>[\n         \"/stop_sequence\"\n         ]</code>\n         </p>\n         <p>For information about the JSON Pointer syntax, see the\n         <a href=\"https://datatracker.ietf.org/doc/html/rfc6901\">Internet Engineering Task Force (IETF)</a> documentation.</p>\n         <p>\n            <code>Converse</code> and <code>ConverseStream</code> reject an empty JSON Pointer or incorrectly structured\n         JSON Pointer with a <code>400</code> error code. if the JSON Pointer is valid, but the requested\n         field is not in the model response, it is ignored by <code>Converse</code>.</p>",
+                        "smithy.api#documentation": "<p>Additional model parameters field paths to return in the response. <code>Converse</code> and <code>ConverseStream</code> return the requested fields as a JSON Pointer object in the <code>additionalModelResponseFields</code> field. The following is example JSON for <code>additionalModelResponseFieldPaths</code>.</p> <p> <code>[ \"/stop_sequence\" ]</code> </p> <p>For information about the JSON Pointer syntax, see the <a href=\"https://datatracker.ietf.org/doc/html/rfc6901\">Internet Engineering Task Force (IETF)</a> documentation.</p> <p> <code>Converse</code> and <code>ConverseStream</code> reject an empty JSON Pointer or incorrectly structured JSON Pointer with a <code>400</code> error code. if the JSON Pointer is valid, but the requested field is not in the model response, it is ignored by <code>Converse</code>.</p>",
                         "smithy.api#length": {
                             "max": 10
                         }
@@ -1860,14 +2056,15 @@
                 "format": {
                     "target": "com.amazonaws.bedrockruntime#DocumentFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>The format of a document, or its extension.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "txt",
+                        "smithy.api#documentation": "<p>The format of a document, or its extension.</p>"
                     }
                 },
                 "name": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A name for the document. The name can only contain the following characters:</p>\n         <ul>\n            <li>\n               <p>Alphanumeric characters</p>\n            </li>\n            <li>\n               <p>Whitespace characters (no more than one in a row)</p>\n            </li>\n            <li>\n               <p>Hyphens</p>\n            </li>\n            <li>\n               <p>Parentheses</p>\n            </li>\n            <li>\n               <p>Square brackets</p>\n            </li>\n         </ul>\n         <note>\n            <p>This field is vulnerable to prompt injections, because the model might inadvertently interpret it as instructions. Therefore, we recommend that you specify a neutral name.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>A name for the document. The name can only contain the following characters:</p> <ul> <li> <p>Alphanumeric characters</p> </li> <li> <p>Whitespace characters (no more than one in a row)</p> </li> <li> <p>Hyphens</p> </li> <li> <p>Parentheses</p> </li> <li> <p>Square brackets</p> </li> </ul> <note> <p>This field is vulnerable to prompt injections, because the model might inadvertently interpret it as instructions. Therefore, we recommend that you specify a neutral name.</p> </note>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 200
@@ -1881,10 +2078,112 @@
                         "smithy.api#documentation": "<p>Contains the content of the document.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "context": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contextual information about how the document should be processed or interpreted by the model when generating citations.</p>"
+                    }
+                },
+                "citations": {
+                    "target": "com.amazonaws.bedrockruntime#CitationsConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration settings that control how citations should be generated for this specific document.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>A document to include in a message.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#DocumentCharLocation": {
+            "type": "structure",
+            "members": {
+                "documentIndex": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The index of the document within the array of documents provided in the request.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "start": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The starting character position of the cited content within the document.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "end": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ending character position of the cited content within the document.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a character-level location within a document, providing precise positioning information for cited content using start and end character indices.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#DocumentChunkLocation": {
+            "type": "structure",
+            "members": {
+                "documentIndex": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The index of the document within the array of documents provided in the request.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "start": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The starting chunk identifier or index of the cited content within the document.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "end": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ending chunk identifier or index of the cited content within the document.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a chunk-level location within a document, providing positioning information for cited content using logical document segments or chunks.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#DocumentContentBlock": {
+            "type": "union",
+            "members": {
+                "text": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text content of the document.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the actual content of a document that can be processed by the model and potentially cited in the response.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#DocumentContentBlocks": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockruntime#DocumentContentBlock"
             }
         },
         "com.amazonaws.bedrockruntime#DocumentFormat": {
@@ -1946,6 +2245,41 @@
                 }
             }
         },
+        "com.amazonaws.bedrockruntime#DocumentPageLocation": {
+            "type": "structure",
+            "members": {
+                "documentIndex": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The index of the document within the array of documents provided in the request.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "start": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The starting page number of the cited content within the document.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "end": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ending page number of the cited content within the document.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a page-level location within a document, providing positioning information for cited content using page numbers.</p>"
+            }
+        },
         "com.amazonaws.bedrockruntime#DocumentSource": {
             "type": "union",
             "members": {
@@ -1962,6 +2296,18 @@
                     "target": "com.amazonaws.bedrockruntime#S3Location",
                     "traits": {
                         "smithy.api#documentation": "<p>The location of a document object in an Amazon S3 bucket. To see which models support S3 uploads, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference-supported-models-features.html\">Supported models and features for Converse</a>.</p>"
+                    }
+                },
+                "text": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text content of the document source.</p>"
+                    }
+                },
+                "content": {
+                    "target": "com.amazonaws.bedrockruntime#DocumentContentBlocks",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The structured content of the document source, which may include various content blocks such as text, images, or other document elements.</p>"
                     }
                 }
             },
@@ -2195,7 +2541,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration information for a guardrail that you use with the  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html\">Converse</a> operation.</p>"
+                "smithy.api#documentation": "<p>Configuration information for a guardrail that you use with the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html\">Converse</a> operation.</p>"
             }
         },
         "com.amazonaws.bedrockruntime#GuardrailContentBlock": {
@@ -2578,7 +2924,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>\n         <p>A content block for selective guarding with the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html\">Converse</a> or <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html\">ConverseStream</a> API operations.\n      </p>"
+                "smithy.api#documentation": "<p/> <p>A content block for selective guarding with the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html\">Converse</a> or <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html\">ConverseStream</a> API operations. </p>"
             }
         },
         "com.amazonaws.bedrockruntime#GuardrailConverseContentQualifier": {
@@ -3315,12 +3661,12 @@
                     "target": "com.amazonaws.bedrockruntime#GuardrailStreamProcessingMode",
                     "traits": {
                         "smithy.api#default": "sync",
-                        "smithy.api#documentation": "<p>The processing mode. </p>\n         <p>The processing mode. For more information, see <i>Configure streaming response behavior</i> in the <i>Amazon Bedrock User Guide</i>.\n      </p>"
+                        "smithy.api#documentation": "<p>The processing mode. </p> <p>The processing mode. For more information, see <i>Configure streaming response behavior</i> in the <i>Amazon Bedrock User Guide</i>. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration information for a guardrail that you use with the <a>ConverseStream</a> action.\n            </p>"
+                "smithy.api#documentation": "<p>Configuration information for a guardrail that you use with the <a>ConverseStream</a> action. </p>"
             }
         },
         "com.amazonaws.bedrockruntime#GuardrailStreamProcessingMode": {
@@ -3713,7 +4059,7 @@
                 "maxTokens": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of tokens to allow in the generated response. The default value is\n         the maximum allowed value for the model that you are using. For more information, see\n            <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Inference parameters for foundation models</a>. </p>",
+                        "smithy.api#documentation": "<p>The maximum number of tokens to allow in the generated response. The default value is the maximum allowed value for the model that you are using. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Inference parameters for foundation models</a>. </p>",
                         "smithy.api#range": {
                             "min": 1
                         }
@@ -3722,7 +4068,7 @@
                 "temperature": {
                     "target": "smithy.api#Float",
                     "traits": {
-                        "smithy.api#documentation": "<p>The likelihood of the model selecting higher-probability options while generating a\n         response. A lower value makes the model more likely to choose higher-probability options,\n         while a higher value makes the model more likely to choose lower-probability\n         options.</p>\n         <p>The default value is the default value for the model that\n         you are using. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Inference parameters for foundation\n            models</a>. </p>",
+                        "smithy.api#documentation": "<p>The likelihood of the model selecting higher-probability options while generating a response. A lower value makes the model more likely to choose higher-probability options, while a higher value makes the model more likely to choose lower-probability options.</p> <p>The default value is the default value for the model that you are using. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Inference parameters for foundation models</a>. </p>",
                         "smithy.api#range": {
                             "min": 0,
                             "max": 1
@@ -3732,7 +4078,7 @@
                 "topP": {
                     "target": "smithy.api#Float",
                     "traits": {
-                        "smithy.api#documentation": "<p>The percentage of most-likely candidates that the model considers for the next token. For\n         example, if you choose a value of 0.8 for <code>topP</code>, the model selects from the top 80% of the\n         probability distribution of tokens that could be next in the sequence.</p>\n         <p>The default value is the default value for the model that you are using. For more information, see\n         <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Inference parameters for foundation models</a>. </p>",
+                        "smithy.api#documentation": "<p>The percentage of most-likely candidates that the model considers for the next token. For example, if you choose a value of 0.8 for <code>topP</code>, the model selects from the top 80% of the probability distribution of tokens that could be next in the sequence.</p> <p>The default value is the default value for the model that you are using. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Inference parameters for foundation models</a>. </p>",
                         "smithy.api#range": {
                             "min": 0,
                             "max": 1
@@ -3742,7 +4088,7 @@
                 "stopSequences": {
                     "target": "com.amazonaws.bedrockruntime#NonEmptyStringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of stop sequences. A stop sequence is a sequence of characters that causes the\n         model to stop generating the response. </p>",
+                        "smithy.api#documentation": "<p>A list of stop sequences. A stop sequence is a sequence of characters that causes the model to stop generating the response. </p>",
                         "smithy.api#length": {
                             "max": 4
                         }
@@ -3750,7 +4096,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Base inference parameters to pass to a model in a call to <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html\">Converse</a> or <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html\">ConverseStream</a>. For more information,\n         see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Inference parameters for foundation models</a>.</p>\n         <p>If you need to pass additional parameters that the model\n         supports, use the <code>additionalModelRequestFields</code> request field in the call to <code>Converse</code>\n         or <code>ConverseStream</code>.\n         For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Model parameters</a>.</p>"
+                "smithy.api#documentation": "<p>Base inference parameters to pass to a model in a call to <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html\">Converse</a> or <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html\">ConverseStream</a>. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Inference parameters for foundation models</a>.</p> <p>If you need to pass additional parameters that the model supports, use the <code>additionalModelRequestFields</code> request field in the call to <code>Converse</code> or <code>ConverseStream</code>. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Model parameters</a>.</p>"
             }
         },
         "com.amazonaws.bedrockruntime#InferenceResource": {
@@ -3781,7 +4127,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An internal server error occurred. For troubleshooting this error, \n         see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-internal-failure\">InternalFailure</a> in the Amazon Bedrock User Guide</p>",
+                "smithy.api#documentation": "<p>An internal server error occurred. For troubleshooting this error, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-internal-failure\">InternalFailure</a> in the Amazon Bedrock User Guide</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
             }
@@ -3837,7 +4183,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Invokes the specified Amazon Bedrock model to run inference using the prompt and inference parameters provided in the request body. \n         You use model inference to generate text, images, and embeddings.</p>\n         <p>For example code, see <i>Invoke model code examples</i> in the <i>Amazon Bedrock User Guide</i>.\n      </p>\n         <p>This operation requires permission for the <code>bedrock:InvokeModel</code> action.</p>\n         <important>\n            <p>To deny all inference access to resources that you specify in the modelId field, you\n         need to deny access to the <code>bedrock:InvokeModel</code> and\n            <code>bedrock:InvokeModelWithResponseStream</code> actions. Doing this also denies\n         access to the resource through the Converse API actions (<a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html\">Converse</a> and <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html\">ConverseStream</a>). For more information see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html#security_iam_id-based-policy-examples-deny-inference\">Deny access for inference on specific models</a>.\n            </p>\n         </important>\n         <p>For troubleshooting some of the common errors you might encounter when using the <code>InvokeModel</code> API, \n         see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html\">Troubleshooting Amazon Bedrock API Error Codes</a> in the Amazon Bedrock User Guide</p>",
+                "smithy.api#documentation": "<p>Invokes the specified Amazon Bedrock model to run inference using the prompt and inference parameters provided in the request body. You use model inference to generate text, images, and embeddings.</p> <p>For example code, see <i>Invoke model code examples</i> in the <i>Amazon Bedrock User Guide</i>. </p> <p>This operation requires permission for the <code>bedrock:InvokeModel</code> action.</p> <important> <p>To deny all inference access to resources that you specify in the modelId field, you need to deny access to the <code>bedrock:InvokeModel</code> and <code>bedrock:InvokeModelWithResponseStream</code> actions. Doing this also denies access to the resource through the Converse API actions (<a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html\">Converse</a> and <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html\">ConverseStream</a>). For more information see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html#security_iam_id-based-policy-examples-deny-inference\">Deny access for inference on specific models</a>. </p> </important> <p>For troubleshooting some of the common errors you might encounter when using the <code>InvokeModel</code> API, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html\">Troubleshooting Amazon Bedrock API Error Codes</a> in the Amazon Bedrock User Guide</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -3868,7 +4214,7 @@
                 "contentType": {
                     "target": "com.amazonaws.bedrockruntime#MimeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The MIME type of the input data in the request. You must specify\n            <code>application/json</code>.</p>",
+                        "smithy.api#documentation": "<p>The MIME type of the input data in the request. You must specify <code>application/json</code>.</p>",
                         "smithy.api#httpHeader": "Content-Type"
                     }
                 },
@@ -3882,7 +4228,7 @@
                 "modelId": {
                     "target": "com.amazonaws.bedrockruntime#InvokeModelIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the model to invoke to run inference.</p>\n         <p>The <code>modelId</code> to provide depends on the type of model or throughput that you use:</p>\n         <ul>\n            <li>\n               <p>If you use a base model, specify the model ID or its ARN. For a list of model IDs for base models, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns\">Amazon Bedrock base model IDs (on-demand throughput)</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use an inference profile, specify the inference profile ID or its ARN. For a list of inference profile IDs, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html\">Supported Regions and models for cross-region inference</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a provisioned model, specify the ARN of the Provisioned Throughput. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html\">Run inference using a Provisioned Throughput</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a custom model, first purchase Provisioned Throughput for it. Then specify the ARN of the resulting provisioned model. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html\">Use a custom model in Amazon Bedrock</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use an <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html\">imported model</a>, specify the ARN of the imported model. You can get the model ARN from a successful call to <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateModelImportJob.html\">CreateModelImportJob</a> or from the Imported models page in the Amazon Bedrock console.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The unique identifier of the model to invoke to run inference.</p> <p>The <code>modelId</code> to provide depends on the type of model or throughput that you use:</p> <ul> <li> <p>If you use a base model, specify the model ID or its ARN. For a list of model IDs for base models, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns\">Amazon Bedrock base model IDs (on-demand throughput)</a> in the Amazon Bedrock User Guide.</p> </li> <li> <p>If you use an inference profile, specify the inference profile ID or its ARN. For a list of inference profile IDs, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html\">Supported Regions and models for cross-region inference</a> in the Amazon Bedrock User Guide.</p> </li> <li> <p>If you use a provisioned model, specify the ARN of the Provisioned Throughput. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html\">Run inference using a Provisioned Throughput</a> in the Amazon Bedrock User Guide.</p> </li> <li> <p>If you use a custom model, specify the ARN of the custom model deployment (for on-demand inference) or the ARN of your provisioned model (for Provisioned Throughput). For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html\">Use a custom model in Amazon Bedrock</a> in the Amazon Bedrock User Guide.</p> </li> <li> <p>If you use an <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html\">imported model</a>, specify the ARN of the imported model. You can get the model ARN from a successful call to <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateModelImportJob.html\">CreateModelImportJob</a> or from the Imported models page in the Amazon Bedrock console.</p> </li> </ul>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3897,7 +4243,7 @@
                 "guardrailIdentifier": {
                     "target": "com.amazonaws.bedrockruntime#GuardrailIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the guardrail that you want to use. If you don't provide a value, no guardrail is applied\n            to the invocation.</p>\n         <p>An error will be thrown in the following situations.</p>\n         <ul>\n            <li>\n               <p>You don't provide a guardrail identifier but you specify the <code>amazon-bedrock-guardrailConfig</code> field in the request body.</p>\n            </li>\n            <li>\n               <p>You enable the guardrail but the <code>contentType</code> isn't <code>application/json</code>.</p>\n            </li>\n            <li>\n               <p>You provide a guardrail identifier, but <code>guardrailVersion</code> isn't specified.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The unique identifier of the guardrail that you want to use. If you don't provide a value, no guardrail is applied to the invocation.</p> <p>An error will be thrown in the following situations.</p> <ul> <li> <p>You don't provide a guardrail identifier but you specify the <code>amazon-bedrock-guardrailConfig</code> field in the request body.</p> </li> <li> <p>You enable the guardrail but the <code>contentType</code> isn't <code>application/json</code>.</p> </li> <li> <p>You provide a guardrail identifier, but <code>guardrailVersion</code> isn't specified.</p> </li> </ul>",
                         "smithy.api#httpHeader": "X-Amzn-Bedrock-GuardrailIdentifier"
                     }
                 },
@@ -3996,7 +4342,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Invoke the specified Amazon Bedrock model to run inference using the bidirectional stream. The response is returned in a stream that remains open for 8 minutes. A single session can contain multiple prompts and responses from the model. The prompts to the model are provided as audio files and the model's responses are spoken back to the user and transcribed.</p>\n         <p>It is possible for users to interrupt the model's response with a new prompt, which will halt the response speech. The model will retain contextual awareness of the conversation while pivoting to respond to the new prompt.</p>",
+                "smithy.api#documentation": "<p>Invoke the specified Amazon Bedrock model to run inference using the bidirectional stream. The response is returned in a stream that remains open for 8 minutes. A single session can contain multiple prompts and responses from the model. The prompts to the model are provided as audio files and the model's responses are spoken back to the user and transcribed.</p> <p>It is possible for users to interrupt the model's response with a new prompt, which will halt the response speech. The model will retain contextual awareness of the conversation while pivoting to respond to the new prompt.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -4154,7 +4500,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Invoke the specified Amazon Bedrock model to run inference using the prompt and inference parameters provided in the request body. The response is returned in a stream.</p>\n         <p>To see if a model supports streaming, call <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetFoundationModel.html\">GetFoundationModel</a>\n         and check the <code>responseStreamingSupported</code> field in the response.</p>\n         <note>\n            <p>The CLI doesn't support streaming operations in Amazon Bedrock, including <code>InvokeModelWithResponseStream</code>.</p>\n         </note>\n         <p>For example code, see <i>Invoke model with streaming code\n         example</i> in the <i>Amazon Bedrock User Guide</i>.\n      </p>\n         <p>This operation requires permissions to perform the <code>bedrock:InvokeModelWithResponseStream</code> action. </p>\n         <important>\n            <p>To deny all inference access to resources that you specify in the modelId field, you\n         need to deny access to the <code>bedrock:InvokeModel</code> and\n            <code>bedrock:InvokeModelWithResponseStream</code> actions. Doing this also denies\n         access to the resource through the Converse API actions (<a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html\">Converse</a> and <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html\">ConverseStream</a>). For more information see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html#security_iam_id-based-policy-examples-deny-inference\">Deny access for inference on specific models</a>.\n            </p>\n         </important>\n         <p>For troubleshooting some of the common errors you might encounter when using the <code>InvokeModelWithResponseStream</code> API, \n         see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html\">Troubleshooting Amazon Bedrock API Error Codes</a> in the Amazon Bedrock User Guide</p>",
+                "smithy.api#documentation": "<p>Invoke the specified Amazon Bedrock model to run inference using the prompt and inference parameters provided in the request body. The response is returned in a stream.</p> <p>To see if a model supports streaming, call <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetFoundationModel.html\">GetFoundationModel</a> and check the <code>responseStreamingSupported</code> field in the response.</p> <note> <p>The CLI doesn't support streaming operations in Amazon Bedrock, including <code>InvokeModelWithResponseStream</code>.</p> </note> <p>For example code, see <i>Invoke model with streaming code example</i> in the <i>Amazon Bedrock User Guide</i>. </p> <p>This operation requires permissions to perform the <code>bedrock:InvokeModelWithResponseStream</code> action. </p> <important> <p>To deny all inference access to resources that you specify in the modelId field, you need to deny access to the <code>bedrock:InvokeModel</code> and <code>bedrock:InvokeModelWithResponseStream</code> actions. Doing this also denies access to the resource through the Converse API actions (<a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html\">Converse</a> and <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html\">ConverseStream</a>). For more information see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html#security_iam_id-based-policy-examples-deny-inference\">Deny access for inference on specific models</a>. </p> </important> <p>For troubleshooting some of the common errors you might encounter when using the <code>InvokeModelWithResponseStream</code> API, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html\">Troubleshooting Amazon Bedrock API Error Codes</a> in the Amazon Bedrock User Guide</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -4175,21 +4521,21 @@
                 "contentType": {
                     "target": "com.amazonaws.bedrockruntime#MimeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The MIME type of the input data in the request. You must specify\n            <code>application/json</code>.</p>",
+                        "smithy.api#documentation": "<p>The MIME type of the input data in the request. You must specify <code>application/json</code>.</p>",
                         "smithy.api#httpHeader": "Content-Type"
                     }
                 },
                 "accept": {
                     "target": "com.amazonaws.bedrockruntime#MimeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The desired MIME type of the inference body in the response. The default value is\n            <code>application/json</code>.</p>",
+                        "smithy.api#documentation": "<p>The desired MIME type of the inference body in the response. The default value is <code>application/json</code>.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Bedrock-Accept"
                     }
                 },
                 "modelId": {
                     "target": "com.amazonaws.bedrockruntime#InvokeModelIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the model to invoke to run inference.</p>\n         <p>The <code>modelId</code> to provide depends on the type of model or throughput that you use:</p>\n         <ul>\n            <li>\n               <p>If you use a base model, specify the model ID or its ARN. For a list of model IDs for base models, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns\">Amazon Bedrock base model IDs (on-demand throughput)</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use an inference profile, specify the inference profile ID or its ARN. For a list of inference profile IDs, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html\">Supported Regions and models for cross-region inference</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a provisioned model, specify the ARN of the Provisioned Throughput. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html\">Run inference using a Provisioned Throughput</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a custom model, first purchase Provisioned Throughput for it. Then specify the ARN of the resulting provisioned model. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html\">Use a custom model in Amazon Bedrock</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use an <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html\">imported model</a>, specify the ARN of the imported model. You can get the model ARN from a successful call to <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateModelImportJob.html\">CreateModelImportJob</a> or from the Imported models page in the Amazon Bedrock console.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The unique identifier of the model to invoke to run inference.</p> <p>The <code>modelId</code> to provide depends on the type of model or throughput that you use:</p> <ul> <li> <p>If you use a base model, specify the model ID or its ARN. For a list of model IDs for base models, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns\">Amazon Bedrock base model IDs (on-demand throughput)</a> in the Amazon Bedrock User Guide.</p> </li> <li> <p>If you use an inference profile, specify the inference profile ID or its ARN. For a list of inference profile IDs, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html\">Supported Regions and models for cross-region inference</a> in the Amazon Bedrock User Guide.</p> </li> <li> <p>If you use a provisioned model, specify the ARN of the Provisioned Throughput. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html\">Run inference using a Provisioned Throughput</a> in the Amazon Bedrock User Guide.</p> </li> <li> <p>If you use a custom model, specify the ARN of the custom model deployment (for on-demand inference) or the ARN of your provisioned model (for Provisioned Throughput). For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html\">Use a custom model in Amazon Bedrock</a> in the Amazon Bedrock User Guide.</p> </li> <li> <p>If you use an <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html\">imported model</a>, specify the ARN of the imported model. You can get the model ARN from a successful call to <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateModelImportJob.html\">CreateModelImportJob</a> or from the Imported models page in the Amazon Bedrock console.</p> </li> </ul>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4204,7 +4550,7 @@
                 "guardrailIdentifier": {
                     "target": "com.amazonaws.bedrockruntime#GuardrailIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the guardrail that you want to use. If you don't provide a value, no guardrail is applied\n            to the invocation.</p>\n         <p>An error is thrown in the following situations.</p>\n         <ul>\n            <li>\n               <p>You don't provide a guardrail identifier but you specify the <code>amazon-bedrock-guardrailConfig</code> field in the request body.</p>\n            </li>\n            <li>\n               <p>You enable the guardrail but the <code>contentType</code> isn't <code>application/json</code>.</p>\n            </li>\n            <li>\n               <p>You provide a guardrail identifier, but <code>guardrailVersion</code> isn't specified.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The unique identifier of the guardrail that you want to use. If you don't provide a value, no guardrail is applied to the invocation.</p> <p>An error is thrown in the following situations.</p> <ul> <li> <p>You don't provide a guardrail identifier but you specify the <code>amazon-bedrock-guardrailConfig</code> field in the request body.</p> </li> <li> <p>You enable the guardrail but the <code>contentType</code> isn't <code>application/json</code>.</p> </li> <li> <p>You provide a guardrail identifier, but <code>guardrailVersion</code> isn't specified.</p> </li> </ul>",
                         "smithy.api#httpHeader": "X-Amzn-Bedrock-GuardrailIdentifier"
                     }
                 },
@@ -4414,7 +4760,7 @@
                 "content": {
                     "target": "com.amazonaws.bedrockruntime#ContentBlocks",
                     "traits": {
-                        "smithy.api#documentation": "<p>The message content. Note the following restrictions:</p>\n         <ul>\n            <li>\n               <p>You can include up to 20 images. Each image's size, height, and width must be no more than 3.75 MB, 8000 px, and 8000 px, respectively.</p>\n            </li>\n            <li>\n               <p>You can include up to five documents. Each document's size must be no more than 4.5 MB.</p>\n            </li>\n            <li>\n               <p>If you include a <code>ContentBlock</code> with a <code>document</code> field in the array, you must also include a <code>ContentBlock</code> with a <code>text</code> field.</p>\n            </li>\n            <li>\n               <p>You can only include images and documents if the <code>role</code> is <code>user</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The message content. Note the following restrictions:</p> <ul> <li> <p>You can include up to 20 images. Each image's size, height, and width must be no more than 3.75 MB, 8000 px, and 8000 px, respectively.</p> </li> <li> <p>You can include up to five documents. Each document's size must be no more than 4.5 MB.</p> </li> <li> <p>If you include a <code>ContentBlock</code> with a <code>document</code> field in the array, you must also include a <code>ContentBlock</code> with a <code>text</code> field.</p> </li> <li> <p>You can only include images and documents if the <code>role</code> is <code>user</code>.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4507,7 +4853,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The model specified in the request is not ready to serve inference requests. The AWS SDK\n         will automatically retry the operation up to 5 times. For information about configuring\n         automatic retries, see <a href=\"https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html\">Retry behavior</a> in the <i>AWS SDKs and Tools</i>\n      reference guide.</p>",
+                "smithy.api#documentation": "<p>The model specified in the request is not ready to serve inference requests. The AWS SDK will automatically retry the operation up to 5 times. For information about configuring automatic retries, see <a href=\"https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html\">Retry behavior</a> in the <i>AWS SDKs and Tools</i> reference guide.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429,
                 "smithy.api#retryable": {}
@@ -4799,7 +5145,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The specified resource ARN was not found. For troubleshooting this error, \n         see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-resource-not-found\">ResourceNotFound</a> in the Amazon Bedrock User Guide</p>",
+                "smithy.api#documentation": "<p>The specified resource ARN was not found. For troubleshooting this error, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-resource-not-found\">ResourceNotFound</a> in the Amazon Bedrock User Guide</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -4907,7 +5253,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The service isn't currently available. For troubleshooting this error, \n         see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-service-unavailable\">ServiceUnavailable</a> in the Amazon Bedrock User Guide</p>",
+                "smithy.api#documentation": "<p>The service isn't currently available. For troubleshooting this error, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-service-unavailable\">ServiceUnavailable</a> in the Amazon Bedrock User Guide</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 503
             }
@@ -4952,7 +5298,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The model must request a specific tool.  For example, <code>{\"tool\" : {\"name\" : \"Your tool name\"}}</code>.</p>\n         <note>\n            <p>This field is only supported by Anthropic Claude 3 models.</p>\n         </note>"
+                "smithy.api#documentation": "<p>The model must request a specific tool. For example, <code>{\"tool\" : {\"name\" : \"Your tool name\"}}</code>.</p> <note> <p>This field is only supported by Anthropic Claude 3 models.</p> </note>"
             }
         },
         "com.amazonaws.bedrockruntime#StartAsyncInvoke": {
@@ -4990,7 +5336,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts an asynchronous invocation.</p>\n         <p>This operation requires permission for the <code>bedrock:InvokeModel</code> action.</p>\n         <important>\n            <p>To deny all inference access to resources that you specify in the modelId field, you\n         need to deny access to the <code>bedrock:InvokeModel</code> and\n            <code>bedrock:InvokeModelWithResponseStream</code> actions. Doing this also denies\n         access to the resource through the Converse API actions (<a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html\">Converse</a> and <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html\">ConverseStream</a>). For more information see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html#security_iam_id-based-policy-examples-deny-inference\">Deny access for inference on specific models</a>.\n            </p>\n         </important>",
+                "smithy.api#documentation": "<p>Starts an asynchronous invocation.</p> <p>This operation requires permission for the <code>bedrock:InvokeModel</code> action.</p> <important> <p>To deny all inference access to resources that you specify in the modelId field, you need to deny access to the <code>bedrock:InvokeModel</code> and <code>bedrock:InvokeModelWithResponseStream</code> actions. Doing this also denies access to the resource through the Converse API actions (<a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html\">Converse</a> and <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html\">ConverseStream</a>). For more information see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html#security_iam_id-based-policy-examples-deny-inference\">Deny access for inference on specific models</a>. </p> </important>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -5118,7 +5464,7 @@
                 "guardContent": {
                     "target": "com.amazonaws.bedrockruntime#GuardrailConverseContentBlock",
                     "traits": {
-                        "smithy.api#documentation": "<p>A content block to assess with the guardrail. Use with the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html\">Converse</a> or <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html\">ConverseStream</a> API operations. </p>\n         <p>For more information, see <i>Use a guardrail with the Converse\n            API</i> in the <i>Amazon Bedrock User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A content block to assess with the guardrail. Use with the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html\">Converse</a> or <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html\">ConverseStream</a> API operations. </p> <p>For more information, see <i>Use a guardrail with the Converse API</i> in the <i>Amazon Bedrock User Guide</i>.</p>"
                     }
                 },
                 "cachePoint": {
@@ -5206,7 +5552,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Your request was denied due to exceeding the account quotas for <i>Amazon Bedrock</i>. For\n         troubleshooting this error, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-throttling-exception\">ThrottlingException</a> in the Amazon Bedrock User Guide</p>",
+                "smithy.api#documentation": "<p>Your request was denied due to exceeding the account quotas for <i>Amazon Bedrock</i>. For troubleshooting this error, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-throttling-exception\">ThrottlingException</a> in the Amazon Bedrock User Guide</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
             }
@@ -5311,12 +5657,12 @@
                 "tool": {
                     "target": "com.amazonaws.bedrockruntime#SpecificToolChoice",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Model must request the specified tool.  Only supported by Anthropic Claude 3 models. </p>"
+                        "smithy.api#documentation": "<p>The Model must request the specified tool. Only supported by Anthropic Claude 3 models. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Determines which tools the model should request in a call to <code>Converse</code> or <code>ConverseStream</code>.\n         <code>ToolChoice</code> is only supported by\n      Anthropic Claude 3 models and by Mistral AI Mistral Large.</p>"
+                "smithy.api#documentation": "<p>Determines which tools the model should request in a call to <code>Converse</code> or <code>ConverseStream</code>. <code>ToolChoice</code> is only supported by Anthropic Claude 3 models and by Mistral AI Mistral Large.</p>"
             }
         },
         "com.amazonaws.bedrockruntime#ToolConfiguration": {
@@ -5387,12 +5733,12 @@
                 "status": {
                     "target": "com.amazonaws.bedrockruntime#ToolResultStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status for the tool result content block.</p>\n         <note>\n            <p>This field is only supported Anthropic Claude 3 models.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The status for the tool result content block.</p> <note> <p>This field is only supported Anthropic Claude 3 models.</p> </note>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A tool result block that contains the results for a tool request that\n      the model previously made.</p>"
+                "smithy.api#documentation": "<p>A tool result block that contains the results for a tool request that the model previously made.</p>"
             }
         },
         "com.amazonaws.bedrockruntime#ToolResultContentBlock": {
@@ -5413,7 +5759,7 @@
                 "image": {
                     "target": "com.amazonaws.bedrockruntime#ImageBlock",
                     "traits": {
-                        "smithy.api#documentation": "<p>A tool result that is an image.</p>\n         <note>\n            <p>This field is only supported by Anthropic Claude 3 models.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A tool result that is an image.</p> <note> <p>This field is only supported by Anthropic Claude 3 models.</p> </note>"
                     }
                 },
                 "document": {
@@ -5510,7 +5856,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A tool use content block. Contains information about a tool that the model\n      is requesting be run., The model uses the result from the tool to generate a response. </p>"
+                "smithy.api#documentation": "<p>A tool use content block. Contains information about a tool that the model is requesting be run., The model uses the result from the tool to generate a response. </p>"
             }
         },
         "com.amazonaws.bedrockruntime#ToolUseBlockDelta": {
@@ -5597,7 +5943,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by <i>Amazon Bedrock</i>. For troubleshooting this error, \n         see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-validation-error\">ValidationError</a> in the Amazon Bedrock User Guide</p>",
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by <i>Amazon Bedrock</i>. For troubleshooting this error, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-validation-error\">ValidationError</a> in the Amazon Bedrock User Guide</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -5703,7 +6049,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A video source. You can upload a smaller video as a base64-encoded string as\n    long as the encoded file is less than 25MB. You can also transfer videos up to 1GB in size\n    from an S3 bucket.</p>"
+                "smithy.api#documentation": "<p>A video source. You can upload a smaller video as a base64-encoded string as long as the encoded file is less than 25MB. You can also transfer videos up to 1GB in size from an S3 bucket.</p>"
             }
         }
     }

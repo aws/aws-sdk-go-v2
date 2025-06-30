@@ -80,7 +80,7 @@
                     }
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>This is the <i>AWS HealthImaging API Reference</i>. AWS HealthImaging is a HIPAA eligible service\n            that empowers healthcare providers, life science organizations, and their software partners to store,\n            analyze, and share medical images in the cloud at petabyte scale. For an introduction to the service, see the\n            <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/what-is.html\">\n               <i>AWS HealthImaging Developer Guide</i>\n            </a>.</p>\n         <note>\n            <p>We recommend using one of the AWS Software Development Kits (SDKs) for your programming language, as\n                    they take care of request authentication, serialization, and connection management. For more information,\n                    see <a href=\"http://aws.amazon.com/developer/tools\">Tools to build on AWS</a>.</p>\n         </note>\n         <p>The following sections list AWS HealthImaging API actions categorized according to functionality. Links are \n             provided to actions within this Reference, along with links back to corresponding sections in the \n             <i>AWS HealthImaging Developer Guide</i> where you can view tested code examples.</p>\n         <p class=\"title\">\n            <b>Data store actions</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_CreateDatastore.html\">CreateDatastore</a>\n                       – See \n                       <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/create-data-store.html\">Creating a data store</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_GetDatastore.html\">GetDatastore</a>\n                       – See \n                       <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/get-data-store.html\">Getting data store properties</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_ListDatastores.html\">ListDatastores</a>\n                       – See \n                       <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/list-data-stores.html\">Listing data stores</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_DeleteDatastore.html\">DeleteDatastore</a>\n                       – See \n                       <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/delete-data-store.html\">Deleting a data store</a>.</p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Import job actions</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_StartDICOMImportJob.html\">StartDICOMImportJob</a>\n                       – See \n                       <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/start-dicom-import-job.html\">Starting an import job</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_GetDICOMImportJob.html\">GetDICOMImportJob</a>\n                       – See \n                       <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/get-dicom-import-job.html\">Getting import job properties</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_ListDICOMImportJobs.html\">ListDICOMImportJobs</a>\n                       – See \n                       <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/list-dicom-import-jobs.html\">Listing import jobs</a>.</p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Image set access actions</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_SearchImageSets.html\">SearchImageSets</a>\n                        – See \n                        <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/search-image-sets.html\">Searching image sets</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_GetImageSet.html\">GetImageSet</a>\n                       – See \n                       <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/get-image-set-properties.html\">Getting image set properties</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_GetImageSetMetadata.html\">GetImageSetMetadata</a>\n                        – See \n                        <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/get-image-set-metadata.html\">Getting image set metadata</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_GetImageFrame.html\">GetImageFrame</a>\n                        – See \n                        <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/get-image-frame.html\">Getting image set pixel data</a>.</p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Image set modification actions</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_ListImageSetVersions.html\">ListImageSetVersions</a>\n                        – See \n                        <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/list-image-set-versions.html\">Listing image set versions</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_UpdateImageSetMetadata.html\">UpdateImageSetMetadata</a>\n                        – See \n                        <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/update-image-set-metadata.html\">Updating image set metadata</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_CopyImageSet.html\">CopyImageSet</a>\n                        – See \n                        <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/copy-image-set.html\">Copying an image set</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_DeleteImageSet.html\">DeleteImageSet</a>\n                        – See \n                        <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/delete-image-set.html\">Deleting an image set</a>.</p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Tagging actions</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_TagResource.html\">TagResource</a>\n                        – See <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/tag-resource.html\">Tagging a resource</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_ListTagsForResource.html\">ListTagsForResource</a>\n                        – See <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/list-tag-resource.html\">Listing tags for a resource</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_UntagResource.html\">UntagResource</a>\n                        – See <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/untag-resource.html\">Untagging a resource</a>.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>This is the <i>AWS HealthImaging API Reference</i>. For an introduction to the service, see <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/what-is.html\">What is AWS HealthImaging?</a> in the <i>AWS HealthImaging Developer Guide</i>.</p>",
                 "smithy.api#title": "AWS Health Imaging",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -983,8 +983,15 @@
                 "force": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Setting this flag will force the <code>CopyImageSet</code> operation, even if Patient, Study, or Series level\n            metadata are mismatched across the <code>sourceImageSet</code> and <code>destinationImageSet</code>.</p>",
+                        "smithy.api#documentation": "<p>Providing this parameter will force completion of the <code>CopyImageSet</code> operation, even if there are inconsistent Patient, Study, and/or Series level metadata elements between the <code>sourceImageSet</code> and <code>destinationImageSet</code>.</p>",
                         "smithy.api#httpQuery": "force"
+                    }
+                },
+                "promoteToPrimary": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Providing this parameter will configure the <code>CopyImageSet</code> operation to promote the given image set to the primary DICOM hierarchy. If successful, a new primary image set ID will be returned as the destination image set.</p>",
+                        "smithy.api#httpQuery": "promoteToPrimary"
                     }
                 }
             },
@@ -1034,7 +1041,7 @@
                 "DICOMCopies": {
                     "target": "com.amazonaws.medicalimaging#MetadataCopies",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains <code>MetadataCopies</code> structure and wraps information related to specific copy use cases.\n            For example, when copying subsets.</p>"
+                        "smithy.api#documentation": "<p>Contains <code>MetadataCopies</code> structure and wraps information related to specific copy use cases. For example, when copying subsets.</p>"
                     }
                 }
             },
@@ -1628,7 +1635,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The DICOM attributes returned as a part of a response. Each image set has these properties\n           as part of a search result.</p>"
+                "smithy.api#documentation": "<p>The DICOM attributes returned as a part of a response. Each image set has these properties as part of a search result.</p>"
             }
         },
         "com.amazonaws.medicalimaging#DICOMUpdates": {
@@ -1869,7 +1876,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Delete a data store.</p>\n         <note>\n            <p>Before a data store can be deleted, you must first delete all image sets within it.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Delete a data store.</p> <note> <p>Before a data store can be deleted, you must first delete all image sets within it.</p> </note>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/datastore/{datastoreId}"
@@ -2044,7 +2051,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Get the import job properties to learn more about the job or job progress.</p>\n         <note>\n            <p>The <code>jobStatus</code> refers to the execution of the import job. Therefore, an import job can return a <code>jobStatus</code> as\n               <code>COMPLETED</code> even if validation issues are discovered during the import process. If a <code>jobStatus</code> returns\n               as <code>COMPLETED</code>, we still recommend you review the output manifests written to S3, as they provide details on the success\n               or failure of individual P10 object imports.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Get the import job properties to learn more about the job or job progress.</p> <note> <p>The <code>jobStatus</code> refers to the execution of the import job. Therefore, an import job can return a <code>jobStatus</code> as <code>COMPLETED</code> even if validation issues are discovered during the import process. If a <code>jobStatus</code> returns as <code>COMPLETED</code>, we still recommend you review the output manifests written to S3, as they provide details on the success or failure of individual P10 object imports.</p> </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/getDICOMImportJob/datastore/{datastoreId}/job/{jobId}"
@@ -2242,7 +2249,7 @@
                 "contentType": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The format in which the image frame information is returned to the customer. Default is \n           <code>application/octet-stream</code>.</p>",
+                        "smithy.api#documentation": "<p>The format in which the image frame information is returned to the customer. Default is <code>application/octet-stream</code>.</p> <note> <ul> <li> <p>If the stored transfer syntax is <code>1.2.840.10008.1.2.1</code>, the returned <code>contentType</code> is <code>application/octet-stream</code>.</p> </li> </ul> <ul> <li> <p>If the stored transfer syntax is <code>1.2.840.10008.1.2.4.50</code>, the returned <code>contentType</code> is <code>image/jpeg</code>.</p> </li> </ul> <ul> <li> <p>If the stored transfer syntax is <code>1.2.840.10008.1.2.4.91</code>, the returned <code>contentType</code> is <code>image/j2c</code>.</p> </li> </ul> <ul> <li> <p>If the stored transfer syntax is MPEG2, <code>1.2.840.10008.1.2.4.100</code>, <code>1.2.840.10008.1.2.4.100.1</code>, <code>1.2.840.10008.1.2.4.101</code>, or <code>1.2.840.10008.1.2.4.101.1</code>, the returned <code>contentType</code> is <code>video/mpeg</code>.</p> </li> </ul> <ul> <li> <p>If the stored transfer syntax is MPEG-4 AVC/H.264, UID <code>1.2.840.10008.1.2.4.102</code>, <code>1.2.840.10008.1.2.4.102.1</code>, <code>1.2.840.10008.1.2.4.103</code>, <code>1.2.840.10008.1.2.4.103.1</code>, <code>1.2.840.10008.1.2.4.104</code>, <code>1.2.840.10008.1.2.4.104.1</code>, <code>1.2.840.10008.1.2.4.105</code>, <code>1.2.840.10008.1.2.4.105.1</code>, <code>1.2.840.10008.1.2.4.106</code>, or <code>1.2.840.10008.1.2.4.106.1</code>, the returned <code>contentType</code> is <code>video/mp4</code>.</p> </li> </ul> <ul> <li> <p>If the stored transfer syntax is HEVC/H.265, UID <code>1.2.840.10008.1.2.4.107</code> or <code>1.2.840.10008.1.2.4.108</code>, the returned <code>contentType</code> is <code>video/H256</code>.</p> </li> </ul> <ul> <li> <p>If the stored transfer syntax is <code>1.2.840.10008.1.2.4.202</code> or if the stored transfer syntax is <i>missing</i>, the returned <code>contentType</code> is <code>image/jph</code>.</p> </li> </ul> <ul> <li> <p>If the stored transfer syntax is <code>1.2.840.10008.1.2.4.203</code>, the returned contentType is <code>image/jphc</code>.</p> </li> </ul> </note>",
                         "smithy.api#httpHeader": "Content-Type"
                     }
                 }
@@ -2493,7 +2500,13 @@
                 "overrides": {
                     "target": "com.amazonaws.medicalimaging#Overrides",
                     "traits": {
-                        "smithy.api#documentation": "<p>This object contains the details of any overrides used while creating a specific image set version.\n            If an image set was copied or updated using the <code>force</code> flag, this object will contain the\n            <code>forced</code> flag.</p>"
+                        "smithy.api#documentation": "<p>This object contains the details of any overrides used while creating a specific image set version. If an image set was copied or updated using the <code>force</code> flag, this object will contain the <code>forced</code> flag.</p>"
+                    }
+                },
+                "isPrimary": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The flag to determine whether the image set is primary or not.</p>"
                     }
                 }
             },
@@ -2597,7 +2610,13 @@
                 "overrides": {
                     "target": "com.amazonaws.medicalimaging#Overrides",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains details on overrides used when creating the returned version of an image set.\n            For example, if <code>forced</code> exists, the <code>forced</code> flag was used when \n            creating the image set.</p>"
+                        "smithy.api#documentation": "<p>Contains details on overrides used when creating the returned version of an image set. For example, if <code>forced</code> exists, the <code>forced</code> flag was used when creating the image set.</p>"
+                    }
+                },
+                "isPrimary": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The flag to determine whether the image set is primary or not.</p>"
                     }
                 }
             },
@@ -2744,7 +2763,7 @@
                 "createdAt": {
                     "target": "com.amazonaws.medicalimaging#Date",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time an image set is created. Sample creation \n            date is provided in <code>1985-04-12T23:20:50.52Z</code> format.</p>"
+                        "smithy.api#documentation": "<p>The time an image set is created. Sample creation date is provided in <code>1985-04-12T23:20:50.52Z</code> format.</p>"
                     }
                 },
                 "updatedAt": {
@@ -2757,6 +2776,12 @@
                     "target": "com.amazonaws.medicalimaging#DICOMTags",
                     "traits": {
                         "smithy.api#documentation": "<p>The DICOM tags associated with the image set.</p>"
+                    }
+                },
+                "isPrimary": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The flag to determine whether the image set is primary or not.</p>"
                     }
                 }
             },
@@ -3232,7 +3257,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains copiable <code>Attributes</code> structure and wraps information related to specific copy use cases.\n            For example, when copying subsets.</p>"
+                "smithy.api#documentation": "<p>Contains copiable <code>Attributes</code> structure and wraps information related to specific copy use cases. For example, when copying subsets.</p>"
             }
         },
         "com.amazonaws.medicalimaging#MetadataUpdates": {
@@ -3247,7 +3272,7 @@
                 "revertToVersionId": {
                     "target": "com.amazonaws.medicalimaging#ImageSetExternalVersionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the previous image set version ID to revert the current image set back to.</p>\n         <note>\n            <p>You must provide either <code>revertToVersionId</code> or <code>DICOMUpdates</code> in your request. A \n                <code>ValidationException</code> error is thrown if both parameters are provided at the same time.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies the previous image set version ID to revert the current image set back to.</p> <note> <p>You must provide either <code>revertToVersionId</code> or <code>DICOMUpdates</code> in your request. A <code>ValidationException</code> error is thrown if both parameters are provided at the same time.</p> </note>"
                     }
                 }
             },
@@ -3288,12 +3313,12 @@
                 "forced": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Setting this flag will force the <code>CopyImageSet</code> and <code>UpdateImageSetMetadata</code>\n            operations, even if Patient, Study, or Series level metadata are mismatched.</p>"
+                        "smithy.api#documentation": "<p>Providing this parameter will force completion of the <code>CopyImageSet</code> and <code>UpdateImageSetMetadata</code> actions, even if metadata is inconsistent at the Patient, Study, and/or Series levels.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the overrides used in image set modification calls to <code>CopyImageSet</code> and \n                <code>UpdateImageSetMetadata</code>.</p>"
+                "smithy.api#documentation": "<p>Specifies the overrides used in image set modification calls to <code>CopyImageSet</code> and <code>UpdateImageSetMetadata</code>.</p>"
             }
         },
         "com.amazonaws.medicalimaging#PayloadBlob": {
@@ -3390,6 +3415,12 @@
                     "target": "com.amazonaws.medicalimaging#DICOMStudyDateAndTime",
                     "traits": {
                         "smithy.api#documentation": "<p>The aggregated structure containing DICOM study date and study time for search.</p>"
+                    }
+                },
+                "isPrimary": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The primary image set flag provided for search.</p>"
                     }
                 }
             },
@@ -3489,7 +3520,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Search image sets based on defined input attributes.</p>\n         <note>\n            <p>\n               <code>SearchImageSets</code> accepts a single search query parameter and returns a paginated\n               response of all image sets that have the matching criteria. All date range queries must be input\n               as <code>(lowerBound, upperBound)</code>.</p>\n            <p>By default, <code>SearchImageSets</code> uses the <code>updatedAt</code> field for sorting \n               in descending order from newest to oldest.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Search image sets based on defined input attributes.</p> <note> <p> <code>SearchImageSets</code> accepts a single search query parameter and returns a paginated response of all image sets that have the matching criteria. All date range queries must be input as <code>(lowerBound, upperBound)</code>.</p> <p>By default, <code>SearchImageSets</code> uses the <code>updatedAt</code> field for sorting in descending order from newest to oldest.</p> </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "runtime-"
                 },
@@ -3537,7 +3568,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.medicalimaging#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token used for pagination of results returned in the response. Use the token returned from the previous\n           request to continue results where the previous request ended.</p>",
+                        "smithy.api#documentation": "<p>The token used for pagination of results returned in the response. Use the token returned from the previous request to continue results where the previous request ended.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
@@ -3683,7 +3714,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Start importing bulk data into an <code>ACTIVE</code> data store. The import job imports DICOM P10 files\n           found in the S3 prefix specified by the <code>inputS3Uri</code> parameter. The import job stores\n           processing results in the file specified by the <code>outputS3Uri</code> parameter.</p>",
+                "smithy.api#documentation": "<p>Start importing bulk data into an <code>ACTIVE</code> data store. The import job imports DICOM P10 files found in the S3 prefix specified by the <code>inputS3Uri</code> parameter. The import job stores processing results in the file specified by the <code>outputS3Uri</code> parameter.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/startDICOMImportJob/datastore/{datastoreId}"
@@ -4078,7 +4109,7 @@
                 "force": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Setting this flag will force the <code>UpdateImageSetMetadata</code> operation for the following attributes:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Tag.StudyInstanceUID</code>, <code>Tag.SeriesInstanceUID</code>, <code>Tag.SOPInstanceUID</code>, and <code>Tag.StudyID</code>\n               </p>\n            </li>\n            <li>\n               <p>Adding, removing, or updating private tags for an individual SOP Instance</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Setting this flag will force the <code>UpdateImageSetMetadata</code> operation for the following attributes:</p> <ul> <li> <p> <code>Tag.StudyInstanceUID</code>, <code>Tag.SeriesInstanceUID</code>, <code>Tag.SOPInstanceUID</code>, and <code>Tag.StudyID</code> </p> </li> <li> <p>Adding, removing, or updating private tags for an individual SOP Instance</p> </li> </ul>",
                         "smithy.api#httpQuery": "force"
                     }
                 },

@@ -10918,7 +10918,7 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 0,
+                    "min": 1,
                     "max": 256
                 }
             }

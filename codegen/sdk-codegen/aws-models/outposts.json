@@ -112,13 +112,15 @@
                 "ContactName": {
                     "target": "com.amazonaws.outposts#ContactName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the contact.</p>"
+                        "smithy.api#documentation": "<p>The name of the contact.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "ContactPhoneNumber": {
                     "target": "com.amazonaws.outposts#ContactPhoneNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The phone number of the contact.</p>"
+                        "smithy.api#documentation": "<p>The phone number of the contact.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "AddressLine1": {

@@ -3690,6 +3690,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.</p>"
                     }
+                },
+                "IdentityCenterConfiguration": {
+                    "target": "com.amazonaws.quicksight#IdentityCenterConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional parameter that configures IAM Identity Center authentication to grant Amazon QuickSight access to your workgroup.</p>\n         <p>This parameter can only be specified if your Amazon QuickSight account is configured with IAM Identity Center.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5902,13 +5908,25 @@
                 "ExportToCsv": {
                     "target": "com.amazonaws.quicksight#CapabilityState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ability to export to CSV files.</p>"
+                        "smithy.api#documentation": "<p>The ability to export to CSV files from the UI.</p>"
                     }
                 },
                 "ExportToExcel": {
                     "target": "com.amazonaws.quicksight#CapabilityState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ability to export to Excel files.</p>"
+                        "smithy.api#documentation": "<p>The ability to export to Excel files from the UI.</p>"
+                    }
+                },
+                "ExportToPdf": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to export to PDF files from the UI.</p>"
+                    }
+                },
+                "PrintReports": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to print reports.</p>"
                     }
                 },
                 "CreateAndUpdateThemes": {
@@ -5999,6 +6017,30 @@
                     "target": "com.amazonaws.quicksight#CapabilityState",
                     "traits": {
                         "smithy.api#documentation": "<p>The ability to create a SPICE dataset.</p>"
+                    }
+                },
+                "ExportToPdfInScheduledReports": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to export to PDF files in scheduled email reports.</p>"
+                    }
+                },
+                "ExportToCsvInScheduledReports": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to export to CSV files in scheduled email reports.</p>"
+                    }
+                },
+                "ExportToExcelInScheduledReports": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to export to Excel files in scheduled email reports.</p>"
+                    }
+                },
+                "IncludeContentInScheduledReportsEmail": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to include content in scheduled email reports.</p>"
                     }
                 }
             },
@@ -13446,7 +13488,7 @@
                 "DataSetId": {
                     "target": "com.amazonaws.quicksight#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the dataset.</p>"
+                        "smithy.api#documentation": "<p>The ID of the dataset. Limited to 96 characters.</p>"
                     }
                 },
                 "Name": {
@@ -48547,6 +48589,12 @@
                     "traits": {
                         "smithy.api#enumValue": "QBUSINESS"
                     }
+                },
+                "ATHENA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ATHENA"
+                    }
                 }
             }
         },
@@ -49306,6 +49354,12 @@
                     "target": "com.amazonaws.quicksight#SheetTextBoxContent",
                     "traits": {
                         "smithy.api#documentation": "<p>The content that is displayed in the text box.</p>"
+                    }
+                },
+                "Interactions": {
+                    "target": "com.amazonaws.quicksight#TextBoxInteractionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The general textbox interactions setup for a textbox.</p>"
                     }
                 }
             },
@@ -53127,6 +53181,34 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The display options of a control.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#TextBoxInteractionOptions": {
+            "type": "structure",
+            "members": {
+                "TextBoxMenuOption": {
+                    "target": "com.amazonaws.quicksight#TextBoxMenuOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The menu options for the textbox.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The general textbox interactions setup for textbox publish options.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#TextBoxMenuOption": {
+            "type": "structure",
+            "members": {
+                "AvailabilityStatus": {
+                    "target": "com.amazonaws.quicksight#DashboardBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The availability status of the textbox menu. If the value of this property is set to <code>ENABLED</code>, dashboard readers can interact with the textbox menu.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The menu options for the interactions of a textbox.</p>"
             }
         },
         "com.amazonaws.quicksight#TextConditionalFormat": {

@@ -1696,6 +1696,41 @@
                 "smithy.api#idempotent": {},
                 "smithy.api#tags": [
                     "ComputeNodeGroup"
+                ],
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "InstanceArnSuccess",
+                        "params": {
+                            "clusterIdentifier": "testCluster",
+                            "computeNodeGroupName": "testNodeGroupName",
+                            "subnetIds": [
+                                "subnet-0cbf727bae9405b47"
+                            ],
+                            "scalingConfiguration": {
+                                "minInstanceCount": 1,
+                                "maxInstanceCount": 1
+                            },
+                            "iamInstanceProfileArn": "arn:aws:iam::975050141277:instance-profile/aws-pcs/example-role-2",
+                            "customLaunchTemplate": {
+                                "id": "lt-0b8f8ee3f92b73dc0",
+                                "version": "1"
+                            },
+                            "instanceConfigs": [
+                                {
+                                    "instanceType": "t3.medium"
+                                }
+                            ]
+                        },
+                        "expect": {
+                            "failure": {
+                                "errorId": "com.amazonaws.pcs#AccessDeniedException"
+                            }
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        }
+                    }
                 ]
             }
         },
@@ -2491,7 +2526,7 @@
         "com.amazonaws.pcs#InstanceProfileArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws([a-zA-Z-]{0,10})?:iam::[0-9]{12}:instance-profile/[\\w+=,.@-]{1,128}$"
+                "smithy.api#pattern": "^arn:aws([a-zA-Z-]{0,10})?:iam::[0-9]{12}:instance-profile/[/\\w+=,.@-]{1,128}$"
             }
         },
         "com.amazonaws.pcs#InternalServerException": {

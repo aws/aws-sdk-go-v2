@@ -97,6 +97,23 @@
                 }
             }
         },
+        "com.amazonaws.ssm#AccessType": {
+            "type": "enum",
+            "members": {
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Standard"
+                    }
+                },
+                "JUSTINTIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JustInTime"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ssm#Account": {
             "type": "string"
         },
@@ -932,7 +949,7 @@
                     "name": "ssm"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Amazon Web Services Systems Manager is the operations hub for your Amazon Web Services applications and resources and a secure\n   end-to-end management solution for hybrid cloud environments that enables safe and secure\n   operations at scale.</p>\n         <p>This reference is intended to be used with the <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/\">Amazon Web Services Systems Manager User Guide</a>. To get started, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html\">Setting up Amazon Web Services Systems Manager</a>.</p>\n         <p class=\"title\">\n            <b>Related resources</b>\n         </p>\n         <ul>\n            <li>\n               <p>For information about each of the tools that comprise Systems Manager, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-tools.html\">Using\n      Systems Manager tools</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n            </li>\n            <li>\n               <p>For details about predefined runbooks for Automation, a tool in Amazon Web Services Systems Manager, see the\n       <i>\n                     <a href=\"https://docs.aws.amazon.com/systems-manager-automation-runbooks/latest/userguide/automation-runbook-reference.html\">Systems Manager Automation runbook reference</a>\n                  </i>.</p>\n            </li>\n            <li>\n               <p>For information about AppConfig, a tool in Systems Manager, see the <i>\n                     <a href=\"https://docs.aws.amazon.com/appconfig/latest/userguide/\">AppConfig User Guide</a>\n                  </i>\n     and the <i>\n                     <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/\">AppConfig\n       API Reference</a>\n                  </i>.</p>\n            </li>\n            <li>\n               <p>For information about Incident Manager, a tool in Systems Manager, see the <i>\n                     <a href=\"https://docs.aws.amazon.com/incident-manager/latest/userguide/\">Systems Manager Incident Manager User\n       Guide</a>\n                  </i> and the <i>\n                     <a href=\"https://docs.aws.amazon.com/incident-manager/latest/APIReference/\">Systems Manager Incident Manager API\n     Reference</a>\n                  </i>.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Amazon Web Services Systems Manager is the operations hub for your Amazon Web Services applications and resources and a secure\n   end-to-end management solution for hybrid cloud environments that enables safe and secure\n   operations at scale.</p>\n         <p>This reference is intended to be used with the <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/\">Amazon Web Services Systems Manager User Guide</a>. To get started, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up-console.html\">Setting up\n    Amazon Web Services Systems Manager</a>.</p>\n         <p class=\"title\">\n            <b>Related resources</b>\n         </p>\n         <ul>\n            <li>\n               <p>For information about each of the tools that comprise Systems Manager, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-tools.html\">Using\n      Systems Manager tools</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n            </li>\n            <li>\n               <p>For details about predefined runbooks for Automation, a tool in Amazon Web Services Systems Manager, see the\n       <i>\n                     <a href=\"https://docs.aws.amazon.com/systems-manager-automation-runbooks/latest/userguide/automation-runbook-reference.html\">Systems Manager Automation runbook reference</a>\n                  </i>.</p>\n            </li>\n            <li>\n               <p>For information about AppConfig, a tool in Systems Manager, see the <i>\n                     <a href=\"https://docs.aws.amazon.com/appconfig/latest/userguide/\">AppConfig User Guide</a>\n                  </i>\n     and the <i>\n                     <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/\">AppConfig\n       API Reference</a>\n                  </i>.</p>\n            </li>\n            <li>\n               <p>For information about Incident Manager, a tool in Systems Manager, see the <i>\n                     <a href=\"https://docs.aws.amazon.com/incident-manager/latest/userguide/\">Systems Manager Incident Manager User\n       Guide</a>\n                  </i> and the <i>\n                     <a href=\"https://docs.aws.amazon.com/incident-manager/latest/APIReference/\">Systems Manager Incident Manager API\n     Reference</a>\n                  </i>.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "Amazon Simple Systems Manager (SSM)",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://ssm.amazonaws.com/doc/2014-11-06/"
@@ -6369,6 +6386,9 @@
                 },
                 {
                     "target": "com.amazonaws.ssm#MaxDocumentSizeExceeded"
+                },
+                {
+                    "target": "com.amazonaws.ssm#TooManyUpdates"
                 }
             ],
             "traits": {
@@ -7044,7 +7064,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The temporary security credentials, which include an access key ID, a secret access key, and a security (or session) token.</p>"
+                "smithy.api#documentation": "<p>The temporary security credentials, which include an access key ID, a secret access key, and\n   a security (or session) token.</p>"
             }
         },
         "com.amazonaws.ssm#CustomSchemaCountLimitExceededException": {
@@ -7212,6 +7232,9 @@
                 },
                 {
                     "target": "com.amazonaws.ssm#InvalidDocumentOperation"
+                },
+                {
+                    "target": "com.amazonaws.ssm#TooManyUpdates"
                 }
             ],
             "traits": {
@@ -8661,7 +8684,7 @@
                 "Name": {
                     "target": "com.amazonaws.ssm#DocumentName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the document for which you are the owner.</p>",
+                        "smithy.api#documentation": "<p>The name of the document for which you are the owner. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8695,7 +8718,7 @@
                 "AccountIds": {
                     "target": "com.amazonaws.ssm#AccountIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account IDs that have permission to use this document. The ID can be either an\n   Amazon Web Services account or <i>All</i>.</p>"
+                        "smithy.api#documentation": "<p>The account IDs that have permission to use this document. The ID can be either an\n   Amazon Web Services account number or <code>all</code>.</p>"
                     }
                 },
                 "AccountSharingInfoList": {
@@ -8721,7 +8744,7 @@
                 "Name": {
                     "target": "com.amazonaws.ssm#DocumentARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the SSM document.</p>",
+                        "smithy.api#documentation": "<p>The name of the SSM document.</p>\n         <note>\n            <p>If you're calling a shared SSM document from a different Amazon Web Services account,\n     <code>Name</code> is the full Amazon Resource Name (ARN) of the document.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12345,7 +12368,7 @@
                 "Credentials": {
                     "target": "com.amazonaws.ssm#Credentials",
                     "traits": {
-                        "smithy.api#documentation": "<p>The temporary security credentials which can be used to start just-in-time node access sessions.</p>"
+                        "smithy.api#documentation": "<p>The temporary security credentials which can be used to start just-in-time node access\n   sessions.</p>"
                     }
                 },
                 "AccessRequestStatus": {
@@ -15581,7 +15604,7 @@
                 "Key": {
                     "target": "com.amazonaws.ssm#InstanceInformationStringFilterKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filter key name to describe your managed nodes.</p>\n         <p>Valid filter key values: ActivationIds | AgentVersion | AssociationStatus | IamRole |\n   InstanceIds | PingStatus | PlatformTypes | ResourceType | SourceIds | SourceTypes | \"tag-key\" |\n    \"tag:<code>{keyname}</code>\n         </p>\n         <ul>\n            <li>\n               <p>Valid values for the <code>AssociationStatus</code> filter key: Success | Pending |\n     Failed</p>\n            </li>\n            <li>\n               <p>Valid values for the <code>PingStatus</code> filter key: Online | ConnectionLost |\n     Inactive (deprecated)</p>\n            </li>\n            <li>\n               <p>Valid values for the <code>PlatformType</code> filter key: Windows | Linux | MacOS</p>\n            </li>\n            <li>\n               <p>Valid values for the <code>ResourceType</code> filter key: EC2Instance |\n     ManagedInstance</p>\n            </li>\n            <li>\n               <p>Valid values for the <code>SourceType</code> filter key: AWS::EC2::Instance |\n     AWS::SSM::ManagedInstance | AWS::IoT::Thing</p>\n            </li>\n            <li>\n               <p>Valid tag examples: <code>Key=tag-key,Values=Purpose</code> |\n      <code>Key=tag:Purpose,Values=Test</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The filter key name to describe your managed nodes.</p>\n         <p>Valid filter key values: ActivationIds | AgentVersion | AssociationStatus | IamRole |\n   InstanceIds | PingStatus | PlatformType | ResourceType | SourceIds | SourceTypes | \"tag-key\" |\n    \"tag:<code>{keyname}</code>\n         </p>\n         <ul>\n            <li>\n               <p>Valid values for the <code>AssociationStatus</code> filter key: Success | Pending |\n     Failed</p>\n            </li>\n            <li>\n               <p>Valid values for the <code>PingStatus</code> filter key: Online | ConnectionLost |\n     Inactive (deprecated)</p>\n            </li>\n            <li>\n               <p>Valid values for the <code>PlatformType</code> filter key: Windows | Linux | MacOS</p>\n            </li>\n            <li>\n               <p>Valid values for the <code>ResourceType</code> filter key: EC2Instance |\n     ManagedInstance</p>\n            </li>\n            <li>\n               <p>Valid values for the <code>SourceType</code> filter key: AWS::EC2::Instance |\n     AWS::SSM::ManagedInstance | AWS::IoT::Thing</p>\n            </li>\n            <li>\n               <p>Valid tag examples: <code>Key=tag-key,Values=Purpose</code> |\n      <code>Key=tag:Purpose,Values=Test</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -28270,7 +28293,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request exceeds the service quota. Service quotas, also referred to as limits, are the maximum number of service resources or operations for your Amazon Web Services account.</p>",
+                "smithy.api#documentation": "<p>The request exceeds the service quota. Service quotas, also referred to as limits, are the\n   maximum number of service resources or operations for your Amazon Web Services account.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -28423,6 +28446,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum duration of a session before it terminates.</p>"
                     }
+                },
+                "AccessType": {
+                    "target": "com.amazonaws.ssm#AccessType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>Standard</code> access type is the default for Session Manager sessions.\n    <code>JustInTime</code> is the access type for <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-just-in-time-node-access.html\">Just-in-time node access</a>. </p>"
+                    }
                 }
             },
             "traits": {
@@ -28497,6 +28526,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "SessionId"
+                    }
+                },
+                "ACCESS_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccessType"
                     }
                 }
             }
@@ -30266,7 +30301,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request or operation couldn't be performed because the service is throttling requests.</p>",
+                "smithy.api#documentation": "<p>The request or operation couldn't be performed because the service is throttling\n   requests.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -30952,6 +30987,9 @@
                 },
                 {
                     "target": "com.amazonaws.ssm#InvalidDocumentVersion"
+                },
+                {
+                    "target": "com.amazonaws.ssm#TooManyUpdates"
                 }
             ],
             "traits": {

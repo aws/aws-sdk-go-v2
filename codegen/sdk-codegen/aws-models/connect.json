@@ -5205,6 +5205,62 @@
                 }
             }
         },
+        "com.amazonaws.connect#ChatContactMetrics": {
+            "type": "structure",
+            "members": {
+                "MultiParty": {
+                    "target": "com.amazonaws.connect#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A boolean flag indicating whether multiparty chat or supervisor barge were enabled on this contact.</p>"
+                    }
+                },
+                "TotalMessages": {
+                    "target": "com.amazonaws.connect#Count",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of chat messages on the contact.</p>"
+                    }
+                },
+                "TotalBotMessages": {
+                    "target": "com.amazonaws.connect#Count",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of bot and automated messages on a chat contact.</p>"
+                    }
+                },
+                "TotalBotMessageLengthInChars": {
+                    "target": "com.amazonaws.connect#Count",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of characters from bot and automated messages on a chat contact.</p>"
+                    }
+                },
+                "ConversationCloseTimeInMillis": {
+                    "target": "com.amazonaws.connect#DurationMillis",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time it took for a contact to end after the last customer message.</p>"
+                    }
+                },
+                "ConversationTurnCount": {
+                    "target": "com.amazonaws.connect#Count",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of conversation turns in a chat contact, which represents the back-and-forth exchanges between customer and other participants.</p>"
+                    }
+                },
+                "AgentFirstResponseTimestamp": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The agent first response timestamp for a chat contact.</p>"
+                    }
+                },
+                "AgentFirstResponseTimeInMillis": {
+                    "target": "com.amazonaws.connect#DurationMillis",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time for an agent to respond after obtaining a chat contact.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the overall participant interactions at the contact level.</p>"
+            }
+        },
         "com.amazonaws.connect#ChatContent": {
             "type": "string",
             "traits": {
@@ -5302,6 +5358,32 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A chat message.</p>"
+            }
+        },
+        "com.amazonaws.connect#ChatMetrics": {
+            "type": "structure",
+            "members": {
+                "ChatContactMetrics": {
+                    "target": "com.amazonaws.connect#ChatContactMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the overall participant interactions at the contact level.</p>"
+                    }
+                },
+                "AgentMetrics": {
+                    "target": "com.amazonaws.connect#ParticipantMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about agent interactions in a contact.</p>"
+                    }
+                },
+                "CustomerMetrics": {
+                    "target": "com.amazonaws.connect#ParticipantMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about customer interactions in a contact.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about how agent, bot, and customer interact in a chat contact.</p>"
             }
         },
         "com.amazonaws.connect#ChatParticipantRoleConfig": {
@@ -5948,6 +6030,12 @@
                     "target": "com.amazonaws.connect#QualityMetrics",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the quality of the participant's media connection.</p>"
+                    }
+                },
+                "ChatMetrics": {
+                    "target": "com.amazonaws.connect#ChatMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about how agent, bot, and customer interact in a chat contact.</p>"
                     }
                 },
                 "DisconnectDetails": {
@@ -7318,6 +7406,9 @@
                 "smithy.api#documentation": "<p>An object that can be used to specify Tag conditions or Hierarchy Group conditions inside\n   the <code>SearchFilter</code>.</p>\n         <p>This accepts an <code>OR</code> of <code>AND</code> (List of List) input where:</p>\n         <ul>\n            <li>\n               <p>The top level list specifies conditions that need to be applied with <code>OR</code>\n     operator</p>\n            </li>\n            <li>\n               <p>The inner list specifies conditions that need to be applied with <code>AND</code>\n     operator.</p>\n            </li>\n         </ul>\n         <note>\n            <p>Only one field can be populated. Maximum number of allowed Tag conditions is 25. Maximum\n    number of allowed Hierarchy Group conditions is 20. </p>\n         </note>"
             }
         },
+        "com.amazonaws.connect#Count": {
+            "type": "integer"
+        },
         "com.amazonaws.connect#CreateAgentStatus": {
             "type": "operation",
             "input": {
@@ -7486,7 +7577,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<important>\n            <p>Only the EMAIL and VOICE channels are supported. The supported initiation methods for EMAIL\n    are: OUTBOUND, AGENT_REPLY, and FLOW. For VOICE the supported initiation methods are TRANSFER\n    and the subtype connect:ExternalAudio. </p>\n         </important>\n         <p>Creates a new EMAIL or VOICE contact. </p>",
+                "smithy.api#documentation": "<important>\n            <p>Only the VOICE, EMAIL, and TASK channels are supported. </p>\n            <ul>\n               <li>\n                  <p>For VOICE: The supported initiation method is <code>TRANSFER</code>. The contacts created\n      with this initiation method have a subtype <code>connect:ExternalAudio</code>. </p>\n               </li>\n               <li>\n                  <p>For EMAIL: The supported initiation methods are <code>OUTBOUND</code>,\n       <code>AGENT_REPLY</code>, and <code>FLOW</code>. </p>\n               </li>\n               <li>\n                  <p>For TASK: The supported initiation method is <code>API</code>. Contacts created with this\n      API have a sub-type of <code>connect:ExternalTask</code>.</p>\n               </li>\n            </ul>\n         </important>\n         <p>Creates a new VOICE, EMAIL, or TASK contact. </p>\n         <p>After a contact is created, you can move it to the desired state by using the\n    <code>InitiateAs</code> parameter. While you can use API to create task contacts that are in the\n    <code>COMPLETED</code> state, you must contact Amazon Web Services Support before using it for\n   bulk import use cases. Bulk import causes your requests to be throttled or fail if your\n   CreateContact limits aren't high enough. </p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/contact/create-contact",
@@ -7882,20 +7973,20 @@
                 "References": {
                     "target": "com.amazonaws.connect#ContactReferences",
                     "traits": {
-                        "smithy.api#documentation": "<p>A formatted URL that is shown to an agent in the Contact Control Panel (CCP). Tasks can have\n   the following reference types at the time of creation: URL | NUMBER | STRING | DATE | EMAIL |\n   ATTACHMENT.</p>"
+                        "smithy.api#documentation": "<p>A formatted URL that is shown to an agent in the Contact Control Panel (CCP). Tasks can have\n   the following reference types at the time of creation: <code>URL</code> | <code>NUMBER</code> |\n    <code>STRING</code> | <code>DATE</code> | <code>EMAIL</code> | <code>ATTACHMENT</code>.</p>"
                     }
                 },
                 "Channel": {
                     "target": "com.amazonaws.connect#Channel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The channel for the contact</p>\n         <important>\n            <p>CreateContact only supports the EMAIL and VOICE channels. The following information that\n    states other channels are supported is incorrect. We are working to update this topic.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The channel for the contact.</p>\n         <important>\n            <p>The CHAT channel is not supported. The following information is incorrect. We're working to\n    correct it.</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
                 "InitiationMethod": {
                     "target": "com.amazonaws.connect#ContactInitiationMethod",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates how the contact was initiated. </p>\n         <important>\n            <p>CreateContact only supports the following initiation methods: </p>\n            <ul>\n               <li>\n                  <p>For EMAIL: OUTBOUND, AGENT_REPLY, and FLOW. </p>\n               </li>\n               <li>\n                  <p>For VOICE: TRANSFER and the subtype connect:ExternalAudio. </p>\n               </li>\n            </ul>\n            <p>The following information that states other initiation methods are supported is incorrect.\n    We are working to update this topic.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>Indicates how the contact was initiated. </p>\n         <important>\n            <p>CreateContact only supports the following initiation methods. Valid values by channel are: </p>\n            <ul>\n               <li>\n                  <p>For VOICE: <code>TRANSFER</code> and the subtype <code>connect:ExternalAudio</code>\n                  </p>\n               </li>\n               <li>\n                  <p>For EMAIL: <code>OUTBOUND</code> | <code>AGENT_REPLY</code> | <code>FLOW</code>\n                  </p>\n               </li>\n               <li>\n                  <p>For TASK: <code>API</code>\n                  </p>\n               </li>\n            </ul>\n            <p>The other channels listed below are incorrect. We're working to correct this\n    information.</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7908,13 +7999,13 @@
                 "UserInfo": {
                     "target": "com.amazonaws.connect#UserInfo",
                     "traits": {
-                        "smithy.api#documentation": "<p>User details for the contact</p>\n         <important>\n            <p>UserInfo is required when creating an EMAIL contact with OUTBOUND and AGENT_REPLY contact\n    initiation methods.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>User details for the contact</p>\n         <important>\n            <p>UserInfo is required when creating an EMAIL contact with <code>OUTBOUND</code> and\n     <code>AGENT_REPLY</code> contact initiation methods.</p>\n         </important>"
                     }
                 },
                 "InitiateAs": {
                     "target": "com.amazonaws.connect#InitiateAs",
                     "traits": {
-                        "smithy.api#documentation": "<p>Initial state of the contact when it's created</p>"
+                        "smithy.api#documentation": "<p>Initial state of the contact when it's created. Only TASK channel contacts can be initiated\n   with <code>COMPLETED</code> state.</p>"
                     }
                 },
                 "Name": {
@@ -16183,6 +16274,14 @@
         "com.amazonaws.connect#DurationInSeconds": {
             "type": "integer"
         },
+        "com.amazonaws.connect#DurationMillis": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
         "com.amazonaws.connect#EffectiveHoursOfOperationList": {
             "type": "list",
             "member": {
@@ -21242,18 +21341,18 @@
                 "ToAddresses": {
                     "target": "com.amazonaws.connect#EmailAddressRecipientList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <b>additional</b> recipients information present in to list.\n   You must have 1 required recipient (<code>DestinationEmailAddress</code>). You can then specify up to\n   49 additional recipients (across <code>ToAddresses</code> and <code>CcAddresses</code>), for a total of 50 recipients.</p>"
+                        "smithy.api#documentation": "<p>The <b>additional</b> recipients information present in to list.\n   You must have 1 required recipient (<code>DestinationEmailAddress</code>). You can then specify\n   up to 49 additional recipients (across <code>ToAddresses</code> and <code>CcAddresses</code>),\n   for a total of 50 recipients.</p>"
                     }
                 },
                 "CcAddresses": {
                     "target": "com.amazonaws.connect#EmailAddressRecipientList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <b>additional</b> recipients information present in cc list.\n   You must have 1 required recipient (<code>DestinationEmailAddress</code>). You can then specify up to\n   49 additional recipients (across <code>ToAddresses</code> and <code>CcAddresses</code>), for a total of 50 recipients.</p>"
+                        "smithy.api#documentation": "<p>The <b>additional</b> recipients information present in cc list.\n   You must have 1 required recipient (<code>DestinationEmailAddress</code>). You can then specify\n   up to 49 additional recipients (across <code>ToAddresses</code> and <code>CcAddresses</code>),\n   for a total of 50 recipients.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the additional TO and CC recipients of an inbound email contact.</p>\n         <note>\n            <p>You can include up to 50 email addresses in total, distributed across\n    <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_StartEmailContact.html#API_StartEmailContact_RequestBody\">DestinationEmailAddress</a>, <code>ToAddresses</code>, and <code>CcAddresses</code>. This total must include one required\n    <code>DestinationEmailAddress</code>. You can then specify up to 49 addresses allocated across <code>ToAddresses</code>\n    and <code>CcAddresses</code> as needed.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Information about the additional TO and CC recipients of an inbound email contact.</p>\n         <note>\n            <p>You can include up to 50 email addresses in total, distributed across <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_StartEmailContact.html#API_StartEmailContact_RequestBody\">DestinationEmailAddress</a>, <code>ToAddresses</code>, and <code>CcAddresses</code>. This\n    total must include one required <code>DestinationEmailAddress</code>. You can then specify up to\n    49 addresses allocated across <code>ToAddresses</code> and <code>CcAddresses</code> as\n    needed.</p>\n         </note>"
             }
         },
         "com.amazonaws.connect#InboundCallsEnabled": {
@@ -27963,6 +28062,9 @@
                 "smithy.api#documentation": "<p>The type of notification recipient.</p>"
             }
         },
+        "com.amazonaws.connect#NullableBoolean": {
+            "type": "boolean"
+        },
         "com.amazonaws.connect#NullableProficiencyLevel": {
             "type": "float",
             "traits": {
@@ -28198,7 +28300,7 @@
                 "CcEmailAddresses": {
                     "target": "com.amazonaws.connect#EmailAddressRecipientList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the <b>additional</b> CC email address recipients.\n   Email recipients are limited to 50 total addresses: 1 required recipient in the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_SendOutboundEmail.html#API_SendOutboundEmail_RequestBody\">DestinationEmailAddress</a> field and up to 49 recipients in the 'CcEmailAddresses'\n   field.</p>"
+                        "smithy.api#documentation": "<p>Information about the <b>additional</b> CC email address\n   recipients. Email recipients are limited to 50 total addresses: 1 required recipient in the\n    <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_SendOutboundEmail.html#API_SendOutboundEmail_RequestBody\">DestinationEmailAddress</a> field and up to 49 recipients in the 'CcEmailAddresses'\n   field.</p>"
                     }
                 }
             },
@@ -28525,6 +28627,68 @@
                     "min": 1,
                     "max": 256
                 }
+            }
+        },
+        "com.amazonaws.connect#ParticipantMetrics": {
+            "type": "structure",
+            "members": {
+                "ParticipantId": {
+                    "target": "com.amazonaws.connect#ParticipantId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Participant's ID.</p>"
+                    }
+                },
+                "ParticipantType": {
+                    "target": "com.amazonaws.connect#ParticipantType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the conversation participant. Following are the participant types: [Agent, Customer, Supervisor].</p>"
+                    }
+                },
+                "ConversationAbandon": {
+                    "target": "com.amazonaws.connect#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A boolean flag indicating whether the chat conversation was abandoned by a Participant.</p>"
+                    }
+                },
+                "MessagesSent": {
+                    "target": "com.amazonaws.connect#Count",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Number of chat messages sent by Participant.</p>"
+                    }
+                },
+                "NumResponses": {
+                    "target": "com.amazonaws.connect#Count",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Number of chat messages sent by Participant.</p>"
+                    }
+                },
+                "MessageLengthInChars": {
+                    "target": "com.amazonaws.connect#Count",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Number of chat characters sent by Participant.</p>"
+                    }
+                },
+                "TotalResponseTimeInMillis": {
+                    "target": "com.amazonaws.connect#DurationMillis",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total chat response time by Participant.</p>"
+                    }
+                },
+                "MaxResponseTimeInMillis": {
+                    "target": "com.amazonaws.connect#DurationMillis",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum chat response time by Participant.</p>"
+                    }
+                },
+                "LastMessageTimestamp": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestamp of last chat message by Participant.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a participant's interactions in a contact.</p>"
             }
         },
         "com.amazonaws.connect#ParticipantRole": {

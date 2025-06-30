@@ -26885,6 +26885,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the frequency at which CDC (Change Data Capture) pulls or incremental loads should occur. This parameter provides flexibility to align \n      the refresh rate with your specific data update patterns, system load considerations, and performance optimization goals. Time increment can be set from  \n    15 minutes to 8640 minutes (six days). Currently supports creation of <code>RefreshInterval</code> only.</p>"
                     }
+                },
+                "SourceProperties": {
+                    "target": "com.amazonaws.glue#IntegrationSourcePropertiesMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A collection of key-value pairs that specify additional properties for the integration source. These properties provide configuration options that \n      can be used to customize the behavior of the ODB source during data integration operations.\n    </p>"
+                    }
                 }
             },
             "traits": {
@@ -27043,6 +27049,15 @@
                 "smithy.api#documentation": "<p>The data processed through your integration exceeded your quota.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.glue#IntegrationSourcePropertiesMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.glue#IntegrationString"
+            },
+            "value": {
+                "target": "com.amazonaws.glue#IntegrationString"
             }
         },
         "com.amazonaws.glue#IntegrationStatus": {
