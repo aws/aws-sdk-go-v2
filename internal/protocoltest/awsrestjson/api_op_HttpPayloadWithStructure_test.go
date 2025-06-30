@@ -152,6 +152,14 @@ func TestClient_HttpPayloadWithStructure_awsRestjson1Deserialize(t *testing.T) {
 				},
 			},
 		},
+		// Serializes a structure in the payload
+		"RestJsonHttpPayloadWithStructureAndEmptyResponseBody": {
+			StatusCode: 200,
+			Body:       []byte(``),
+			ExpectResult: &HttpPayloadWithStructureOutput{
+				Nested: nil,
+			},
+		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {

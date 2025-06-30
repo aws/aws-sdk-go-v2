@@ -9,5 +9,5 @@
 // directory, but the service under test here has the xmlNamespace trait applied
 // to it.
 //
-// See https://github.com/awslabs/smithy/issues/616
+// See https://github.com/smithy-lang/smithy/issues/616
 package restxmlwithnamespace
