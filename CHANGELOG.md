@@ -1,3 +1,44 @@
+# Release (2025-06-30)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/arczonalshift`: [v1.18.0](service/arczonalshift/CHANGELOG.md#v1180-2025-06-30)
+  * **Feature**: Added support for on-demand practice runs and balanced capacity checks in ARC autoshift practice.
+* `github.com/aws/aws-sdk-go-v2/service/b2bi`: [v1.0.0-preview.70](service/b2bi/CHANGELOG.md#v100-preview70-2025-06-30)
+  * **Feature**: Updated APIs to support inbound EDI split capabilities and additional Partnership-level configurations of generated EDI files' contents and format.
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.38.0](service/bedrock/CHANGELOG.md#v1380-2025-06-30)
+  * **Feature**: Add support for API Keys, Re-Ranker, implicit filter for RAG / KB evaluation for Bedrock APIs.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.31.0](service/bedrockruntime/CHANGELOG.md#v1310-2025-06-30)
+  * **Feature**: Add API Key and document citations support for Bedrock Runtime APIs
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.61.0](service/cloudformation/CHANGELOG.md#v1610-2025-06-30)
+  * **Feature**: Added support for UNKNOWN drift status.
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.53.0](service/configservice/CHANGELOG.md#v1530-2025-06-30)
+  * **Feature**: Updated ResourceType enum with new resource types onboarded by AWS Config as of June 2025
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.131.0](service/connect/CHANGELOG.md#v11310-2025-06-30)
+  * **Feature**: This release introduces ChatMetrics to the model, providing comprehensive analytics insights for Amazon Connect chat conversations. Users can access these detailed metrics through the AWS Connect API by using the DescribeContact operation with their specific instance and contact IDs
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.44.0](service/dynamodb/CHANGELOG.md#v1440-2025-06-30)
+  * **Feature**: This change adds support for witnesses in global tables. It also adds a new table status, REPLICATION_NOT_AUTHORIZED. This status will indicate scenarios where global replicas table can't be utilized for data plane operations.
+* `github.com/aws/aws-sdk-go-v2/service/eventbridge`: [v1.40.0](service/eventbridge/CHANGELOG.md#v1400-2025-06-30)
+  * **Feature**: Added support for EventBridge Dualstack endpoints in AWS GovCloud (US) regions (us-gov-east-1 and us-gov-west-1). The dualstack endpoints are identical for both FIPS and non-FIPS configurations, following the format: events.{region}.api.aws
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.117.0](service/glue/CHANGELOG.md#v11170-2025-06-30)
+  * **Feature**: releasing source processing properties to support source properties for ODB integrations
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.43.0](service/iam/CHANGELOG.md#v1430-2025-06-30)
+  * **Feature**: Updated IAM ServiceSpecificCredential support to include expiration, API Key output format instead of username and password for services that will support API keys, and the ability to list credentials for all users in the account for a given service configuration.
+* `github.com/aws/aws-sdk-go-v2/service/medicalimaging`: [v1.16.0](service/medicalimaging/CHANGELOG.md#v1160-2025-06-30)
+  * **Feature**: Added new fields to support the concept of primary image sets within the storage hierarchy.
+* `github.com/aws/aws-sdk-go-v2/service/networkflowmonitor`: [v1.3.0](service/networkflowmonitor/CHANGELOG.md#v130-2025-06-30)
+  * **Feature**: Add ConflictExceptions to UpdateScope and DeleteScope operations for scopes being mutated.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.51.0](service/outposts/CHANGELOG.md#v1510-2025-06-30)
+  * **Feature**: Make ContactName and ContactPhoneNumber required fields when creating and updating Outpost Site Addresses.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.87.0](service/quicksight/CHANGELOG.md#v1870-2025-06-30)
+  * **Feature**: Introduced custom permission capabilities for reporting content. Added menu option in exploration to preserve configuration data when textbox menu option is used. Added support for Athena trusted identity propagation.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.60.0](service/ssm/CHANGELOG.md#v1600-2025-06-30)
+  * **Feature**: Introduces AccessType, a new filter value for the DescribeSessions API.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.61.0](service/transfer/CHANGELOG.md#v1610-2025-06-30)
+  * **Feature**: Added support for dual-stack (IPv4 and IPv6) endpoints for SFTP public endpoints and VPC-internal endpoints (SFTP, FTPS, FTP, and AS2), enabling customers to configure new servers with IPv4 or dual-stack mode, convert existing servers to dual-stack, and use IPv6 with service APIs.
+
 # Release (2025-06-27)
 
 ## Module Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "279447d8-fe49-490f-b5e1-5f73415ac5eb",
-    "type": "feature",
-    "description": "Added support for UNKNOWN drift status.",
-    "modules": [
-        "service/cloudformation"
-    ]
-}

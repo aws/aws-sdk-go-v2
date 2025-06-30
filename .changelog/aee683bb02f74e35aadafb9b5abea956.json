@@ -1,8 +1,0 @@
-{
-    "id": "aee683bb-02f7-4e35-aada-fb9b5abea956",
-    "type": "feature",
-    "description": "Introduced custom permission capabilities for reporting content. Added menu option in exploration to preserve configuration data when textbox menu option is used. Added support for Athena trusted identity propagation.",
-    "modules": [
-        "service/quicksight"
-    ]
-}

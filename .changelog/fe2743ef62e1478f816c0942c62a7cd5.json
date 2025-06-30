@@ -1,8 +1,0 @@
-{
-    "id": "fe2743ef-62e1-478f-816c-0942c62a7cd5",
-    "type": "feature",
-    "description": "Added new fields to support the concept of primary image sets within the storage hierarchy.",
-    "modules": [
-        "service/medicalimaging"
-    ]
-}

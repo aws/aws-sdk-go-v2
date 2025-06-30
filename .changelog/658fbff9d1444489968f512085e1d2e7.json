@@ -1,8 +1,0 @@
-{
-    "id": "658fbff9-d144-4489-968f-512085e1d2e7",
-    "type": "feature",
-    "description": "releasing source processing properties to support source properties for ODB integrations",
-    "modules": [
-        "service/glue"
-    ]
-}

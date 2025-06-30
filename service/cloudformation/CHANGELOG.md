@@ -1,3 +1,7 @@
+# v1.61.0 (2025-06-30)
+
+* **Feature**: Added support for UNKNOWN drift status.
+
 # v1.60.3 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

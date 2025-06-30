@@ -1,3 +1,7 @@
+# v1.61.0 (2025-06-30)
+
+* **Feature**: Added support for dual-stack (IPv4 and IPv6) endpoints for SFTP public endpoints and VPC-internal endpoints (SFTP, FTPS, FTP, and AS2), enabling customers to configure new servers with IPv4 or dual-stack mode, convert existing servers to dual-stack, and use IPv6 with service APIs.
+
 # v1.60.3 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

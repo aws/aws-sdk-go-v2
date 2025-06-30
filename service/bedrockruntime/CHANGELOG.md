@@ -1,3 +1,7 @@
+# v1.31.0 (2025-06-30)
+
+* **Feature**: Add API Key and document citations support for Bedrock Runtime APIs
+
 # v1.30.2 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

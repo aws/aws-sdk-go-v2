@@ -1,8 +1,0 @@
-{
-    "id": "c5af4582-419c-4579-a38b-ed8981e398bf",
-    "type": "feature",
-    "description": "This release introduces ChatMetrics to the model, providing comprehensive analytics insights for Amazon Connect chat conversations. Users can access these detailed metrics through the AWS Connect API by using the DescribeContact operation with their specific instance and contact IDs",
-    "modules": [
-        "service/connect"
-    ]
-}

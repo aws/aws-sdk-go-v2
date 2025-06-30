@@ -1,3 +1,7 @@
+# v1.60.0 (2025-06-30)
+
+* **Feature**: Introduces AccessType, a new filter value for the DescribeSessions API.
+
 # v1.59.3 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

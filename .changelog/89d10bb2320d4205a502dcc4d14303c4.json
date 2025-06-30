@@ -1,8 +1,0 @@
-{
-    "id": "89d10bb2-320d-4205-a502-dcc4d14303c4",
-    "type": "feature",
-    "description": "Added support for EventBridge Dualstack endpoints in AWS GovCloud (US) regions (us-gov-east-1 and us-gov-west-1). The dualstack endpoints are identical for both FIPS and non-FIPS configurations, following the format: events.{region}.api.aws",
-    "modules": [
-        "service/eventbridge"
-    ]
-}

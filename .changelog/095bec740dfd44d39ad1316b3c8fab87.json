@@ -1,8 +1,0 @@
-{
-    "id": "095bec74-0dfd-44d3-9ad1-316b3c8fab87",
-    "type": "feature",
-    "description": "Add support for API Keys, Re-Ranker, implicit filter for RAG / KB evaluation for Bedrock APIs.",
-    "modules": [
-        "service/bedrock"
-    ]
-}

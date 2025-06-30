@@ -1,3 +1,7 @@
+# v1.40.0 (2025-06-30)
+
+* **Feature**: Added support for EventBridge Dualstack endpoints in AWS GovCloud (US) regions (us-gov-east-1 and us-gov-west-1). The dualstack endpoints are identical for both FIPS and non-FIPS configurations, following the format: events.{region}.api.aws
+
 # v1.39.3 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

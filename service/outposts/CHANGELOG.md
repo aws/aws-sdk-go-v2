@@ -1,3 +1,7 @@
+# v1.51.0 (2025-06-30)
+
+* **Feature**: Make ContactName and ContactPhoneNumber required fields when creating and updating Outpost Site Addresses.
+
 # v1.50.3 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

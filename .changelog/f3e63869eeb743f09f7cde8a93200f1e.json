@@ -1,8 +1,0 @@
-{
-    "id": "f3e63869-eeb7-43f0-9f7c-de8a93200f1e",
-    "type": "feature",
-    "description": "Add ConflictExceptions to UpdateScope and DeleteScope operations for scopes being mutated.",
-    "modules": [
-        "service/networkflowmonitor"
-    ]
-}

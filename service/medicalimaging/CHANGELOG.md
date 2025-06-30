@@ -1,3 +1,7 @@
+# v1.16.0 (2025-06-30)
+
+* **Feature**: Added new fields to support the concept of primary image sets within the storage hierarchy.
+
 # v1.15.4 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

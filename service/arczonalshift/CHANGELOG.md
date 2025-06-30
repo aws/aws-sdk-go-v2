@@ -1,3 +1,7 @@
+# v1.18.0 (2025-06-30)
+
+* **Feature**: Added support for on-demand practice runs and balanced capacity checks in ARC autoshift practice.
+
 # v1.17.3 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

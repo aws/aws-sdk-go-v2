@@ -1,8 +1,0 @@
-{
-    "id": "c3b42e91-c973-4994-8a7e-9ecd7b188ec2",
-    "type": "feature",
-    "description": "Updated APIs to support inbound EDI split capabilities and additional Partnership-level configurations of generated EDI files' contents and format.",
-    "modules": [
-        "service/b2bi"
-    ]
-}

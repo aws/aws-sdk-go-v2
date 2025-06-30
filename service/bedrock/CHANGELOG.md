@@ -1,3 +1,7 @@
+# v1.38.0 (2025-06-30)
+
+* **Feature**: Add support for API Keys, Re-Ranker, implicit filter for RAG / KB evaluation for Bedrock APIs.
+
 # v1.37.0 (2025-06-24)
 
 * **Feature**: We are making ListFoundationModelAgreementOffers, DeleteFoundationModelAgreement, CreateFoundationModelAgreement, GetFoundationModelAvailability, PutUseCaseForModelAccess and GetUseCaseForModelAccess APIs public, previously they were console.

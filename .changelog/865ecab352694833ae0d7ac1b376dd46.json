@@ -1,8 +1,0 @@
-{
-    "id": "865ecab3-5269-4833-ae0d-7ac1b376dd46",
-    "type": "feature",
-    "description": "This release updates resource Id with alphanumeric constraint, including Asset id, Revision id, Data Set id, Job id, and Event Action id.",
-    "modules": [
-        "service/dataexchange"
-    ]
-}

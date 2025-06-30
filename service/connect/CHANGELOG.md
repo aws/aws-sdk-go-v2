@@ -1,3 +1,7 @@
+# v1.131.0 (2025-06-30)
+
+* **Feature**: This release introduces ChatMetrics to the model, providing comprehensive analytics insights for Amazon Connect chat conversations. Users can access these detailed metrics through the AWS Connect API by using the DescribeContact operation with their specific instance and contact IDs
+
 # v1.130.0 (2025-06-27)
 
 * **Feature**: This release adds the following value to an InitiateAs enum: COMPLETED

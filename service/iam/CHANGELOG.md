@@ -1,3 +1,7 @@
+# v1.43.0 (2025-06-30)
+
+* **Feature**: Updated IAM ServiceSpecificCredential support to include expiration, API Key output format instead of username and password for services that will support API keys, and the ability to list credentials for all users in the account for a given service configuration.
+
 # v1.42.2 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

@@ -9,9 +9,9 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.36.4
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.30.4
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.45.5
-	github.com/aws/aws-sdk-go-v2/service/athena v1.51.2
+	github.com/aws/aws-sdk-go-v2/service/athena v1.51.3
 	github.com/aws/aws-sdk-go-v2/service/batch v1.53.0
-	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.60.3
+	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.61.0
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.46.3
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.30.4
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.49.3
@@ -21,14 +21,14 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.30.6
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.42.2
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.53.2
-	github.com/aws/aws-sdk-go-v2/service/configservice v1.52.7
+	github.com/aws/aws-sdk-go-v2/service/configservice v1.53.0
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.29.4
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.53.0
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.31.2
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.32.5
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.31.7
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.41.6
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.43.4
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.44.0
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.227.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.45.1
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.58.1
@@ -39,13 +39,13 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.46.0
 	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.33.6
 	github.com/aws/aws-sdk-go-v2/service/emr v1.49.3
-	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.39.3
+	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.40.0
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.37.7
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.42.1
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.27.5
-	github.com/aws/aws-sdk-go-v2/service/glue v1.116.0
+	github.com/aws/aws-sdk-go-v2/service/glue v1.117.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.30.4
-	github.com/aws/aws-sdk-go-v2/service/iam v1.42.2
+	github.com/aws/aws-sdk-go-v2/service/iam v1.43.0
 	github.com/aws/aws-sdk-go-v2/service/iot v1.64.4
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.35.3
 	github.com/aws/aws-sdk-go-v2/service/kms v1.41.2
@@ -71,7 +71,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.31.5
 	github.com/aws/aws-sdk-go-v2/service/sns v1.34.7
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.38.8
-	github.com/aws/aws-sdk-go-v2/service/ssm v1.59.3
+	github.com/aws/aws-sdk-go-v2/service/ssm v1.60.0
 	github.com/aws/aws-sdk-go-v2/service/sts v1.34.0
 	github.com/aws/aws-sdk-go-v2/service/support v1.27.4
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.26.2

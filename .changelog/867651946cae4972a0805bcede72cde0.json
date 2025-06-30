@@ -1,8 +1,0 @@
-{
-    "id": "86765194-6cae-4972-a080-5bcede72cde0",
-    "type": "feature",
-    "description": "Make ContactName and ContactPhoneNumber required fields when creating and updating Outpost Site Addresses.",
-    "modules": [
-        "service/outposts"
-    ]
-}

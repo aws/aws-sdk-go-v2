@@ -1,3 +1,7 @@
+# v1.0.0-preview.70 (2025-06-30)
+
+* **Feature**: Updated APIs to support inbound EDI split capabilities and additional Partnership-level configurations of generated EDI files' contents and format.
+
 # v1.0.0-preview.69 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

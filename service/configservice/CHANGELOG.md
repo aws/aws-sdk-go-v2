@@ -1,3 +1,7 @@
+# v1.53.0 (2025-06-30)
+
+* **Feature**: Updated ResourceType enum with new resource types onboarded by AWS Config as of June 2025
+
 # v1.52.7 (2025-06-27)
 
 * **Documentation**: Added important considerations to the PutConformancePack and PutOrganizationConformancPack APIs.

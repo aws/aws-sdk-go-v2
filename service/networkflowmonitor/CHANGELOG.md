@@ -1,3 +1,7 @@
+# v1.3.0 (2025-06-30)
+
+* **Feature**: Add ConflictExceptions to UpdateScope and DeleteScope operations for scopes being mutated.
+
 # v1.2.3 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

@@ -1,3 +1,7 @@
+# v1.44.0 (2025-06-30)
+
+* **Feature**: This change adds support for witnesses in global tables. It also adds a new table status, REPLICATION_NOT_AUTHORIZED. This status will indicate scenarios where global replicas table can't be utilized for data plane operations.
+
 # v1.43.4 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

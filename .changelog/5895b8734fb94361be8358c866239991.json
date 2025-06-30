@@ -1,8 +1,0 @@
-{
-    "id": "5895b873-4fb9-4361-be83-58c866239991",
-    "type": "feature",
-    "description": "Added support for dual-stack (IPv4 and IPv6) endpoints for SFTP public endpoints and VPC-internal endpoints (SFTP, FTPS, FTP, and AS2), enabling customers to configure new servers with IPv4 or dual-stack mode, convert existing servers to dual-stack, and use IPv6 with service APIs.",
-    "modules": [
-        "service/transfer"
-    ]
-}
