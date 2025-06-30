@@ -65,6 +65,15 @@
   [modules."internal/protocoltest/smithyrpcv2cborquerycompatible"]
     no_tag = true
 
+  [modules."internal/protocoltest/querycompatiblejsonrpc10"]
+    no_tag = true
+
+  [modules."internal/protocoltest/querycompatiblerpcv2protocol"]
+    no_tag = true
+
+  [modules."internal/protocoltest/nonquerycompatiblerpcv2protocol"]
+    no_tag = true
+
   [modules."internal/kitchensinktest"]
     no_tag = true
 

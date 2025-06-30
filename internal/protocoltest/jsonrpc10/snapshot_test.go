@@ -230,6 +230,18 @@ func TestCheckSnapshot_PutWithContentEncoding(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_QueryIncompatibleOperation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.QueryIncompatibleOperation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "QueryIncompatibleOperation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_SimpleScalarProperties(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SimpleScalarProperties(context.Background(), nil, func(o *Options) {
@@ -402,6 +414,18 @@ func TestUpdateSnapshot_PutWithContentEncoding(t *testing.T) {
 	_, err := svc.PutWithContentEncoding(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutWithContentEncoding")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_QueryIncompatibleOperation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.QueryIncompatibleOperation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "QueryIncompatibleOperation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
