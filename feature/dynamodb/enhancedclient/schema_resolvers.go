@@ -28,7 +28,7 @@ func (s *Schema[T]) resolveTableName() error {
 	}
 
 	if r.Kind() != reflect.Struct {
-		return fmt.Errorf("resolveTableName() expected the type to be a struct or struct pointer, got: %T", reflect.New(s.typ).Interface())
+		return fmt.Errorf("resolveTableName() expected the type to be a struct or struct pointer, got: %V", reflect.New(s.typ).Interface())
 	}
 
 	s.tableName = pointer(r.Name())
@@ -45,27 +45,27 @@ func (s *Schema[T]) resolveKeySchema() error {
 	var sort []string
 
 	for _, f := range s.cachedFields.fields {
-		if f.tag.Partition && f.tag.Sort {
-			return fmt.Errorf("field %s is both primary and sort", f.Name)
+		if f.Tag.Partition && f.Tag.Sort {
+			return fmt.Errorf("Field %s is both primary and sort", f.Name)
 		}
 
-		if f.tag.Partition {
+		if f.Tag.Partition {
 			primary = append(primary, f.Name)
 		}
 
-		if f.tag.Sort {
+		if f.Tag.Sort {
 			sort = append(sort, f.Name)
 		}
 	}
 
 	cp := len(primary)
 	if cp != 1 {
-		return fmt.Errorf("exactly 1 primary field is expected, %d given, fields: %s", len(primary), strings.Join(primary, ", "))
+		return fmt.Errorf("exactly 1 primary Field is expected, %d given, fields: %s", len(primary), strings.Join(primary, ", "))
 	}
 
 	cs := len(sort)
 	if cs > 1 {
-		return fmt.Errorf("exactly 0 or 1 sort field is expected, %d given, fields: %s", len(sort), strings.Join(sort, ", "))
+		return fmt.Errorf("exactly 0 or 1 sort Field is expected, %d given, fields: %s", len(sort), strings.Join(sort, ", "))
 	}
 
 	s.keySchema = make([]types.KeySchemaElement, cp+cs)
@@ -83,8 +83,8 @@ func (s *Schema[T]) resolveKeySchema() error {
 // []types.AttributeDefinition
 func (s *Schema[T]) resolveAttributeDefinitions() error {
 	for _, f := range s.cachedFields.fields {
-		isKey := f.tag.Partition || f.tag.Sort
-		for _, i := range f.tag.Indexes {
+		isKey := f.Tag.Partition || f.Tag.Sort
+		for _, i := range f.Tag.Indexes {
 			isKey = isKey || i.Partition || i.Sort
 		}
 
@@ -106,7 +106,7 @@ func (s *Schema[T]) resolveAttributeDefinitions() error {
 	return nil
 }
 
-func extractIndexes(fields []field) (map[string][][]int, map[string][][]int, error) {
+func extractIndexes(fields []Field) (map[string][][]int, map[string][][]int, error) {
 	globals := make(map[string][][]int)
 	locals := make(map[string][][]int)
 	unknowns := make(map[string][][]int)
@@ -115,15 +115,15 @@ func extractIndexes(fields []field) (map[string][][]int, map[string][][]int, err
 	for f, fld := range fields {
 		for i, idx := range fld.Indexes {
 			if idx.Global && idx.Local {
-				return nil, nil, fmt.Errorf(`field "%s" for index "%s" is configured to be both local and global`, fld.Name, idx.Name)
+				return nil, nil, fmt.Errorf(`Field "%s" for index "%s" is configured to be both local and global`, fld.Name, idx.Name)
 			}
 
 			if idx.Partition && idx.Sort {
-				return nil, nil, fmt.Errorf(`field "%s" for index "%s" is configured to be both primarty and sort`, fld.Name, idx.Name)
+				return nil, nil, fmt.Errorf(`Field "%s" for index "%s" is configured to be both primarty and sort`, fld.Name, idx.Name)
 			}
 
 			if idx.Partition && idx.Local {
-				return nil, nil, fmt.Errorf(`field "%s" for index "%s" is configured to be the primarty key for a local index, local indexes inherit the primary from the table`, fld.Name, idx.Name)
+				return nil, nil, fmt.Errorf(`Field "%s" for index "%s" is configured to be the primarty key for a local index, local indexes inherit the primary from the table`, fld.Name, idx.Name)
 			}
 
 			pos := []int{f, i}
@@ -199,7 +199,22 @@ func (s *Schema[T]) resolveSecondaryIndexes() error {
 	return nil
 }
 
-func processGSIs(fields []field, globals map[string][][]int) ([]types.GlobalSecondaryIndex, error) {
+func (s *Schema[T]) resolveDefaultExtensions() error {
+	if s.extensions == nil {
+		s.extensions = map[ExecutionPhase][]Extension{}
+	} else {
+		return nil
+	}
+
+	// register expression builder extensions first
+	s.WithExtension(BeforeWrite, &VersionExtension[T]{})
+	s.WithExtension(BeforeWrite, &AtomicCounterExtension[T]{})
+	s.WithExtension(BeforeWrite, &AutogenerateExtension[T]{})
+
+	return nil
+}
+
+func processGSIs(fields []Field, globals map[string][][]int) ([]types.GlobalSecondaryIndex, error) {
 	gs := make([]types.GlobalSecondaryIndex, 0, len(globals))
 
 	// build globals
@@ -270,7 +285,7 @@ func ksSortFunc(a, b types.KeySchemaElement) int {
 	}
 }
 
-func processLSIs(fields []field, tablePrimary types.KeySchemaElement, locals map[string][][]int) ([]types.LocalSecondaryIndex, error) {
+func processLSIs(fields []Field, tablePrimary types.KeySchemaElement, locals map[string][][]int) ([]types.LocalSecondaryIndex, error) {
 	ls := make([]types.LocalSecondaryIndex, 0, len(locals))
 	numSorts := 0
 
@@ -292,7 +307,7 @@ func processLSIs(fields []field, tablePrimary types.KeySchemaElement, locals map
 
 			switch {
 			case i.Partition:
-				return nil, fmt.Errorf(`index "%s" has field "%s" is configured as the primary key for a secondary index, secondary indexes inherit the primary key of their table`, name, f.Name)
+				return nil, fmt.Errorf(`index "%s" has Field "%s" is configured as the primary key for a secondary index, secondary indexes inherit the primary key of their table`, name, f.Name)
 			case i.Sort:
 				l.KeySchema = append(l.KeySchema, types.KeySchemaElement{
 					AttributeName: pointer(f.Name),

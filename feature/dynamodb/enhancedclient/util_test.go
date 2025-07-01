@@ -75,14 +75,12 @@ func TestTypeToScalarAttributeType(t *testing.T) {
 			ok:       true,
 		},
 		{
-			input:    reflect.TypeFor[complex64](),
-			expected: types.ScalarAttributeTypeN,
-			ok:       true,
+			input: reflect.TypeFor[complex64](),
+			ok:    false,
 		},
 		{
-			input:    reflect.TypeFor[complex128](),
-			expected: types.ScalarAttributeTypeN,
-			ok:       true,
+			input: reflect.TypeFor[complex128](),
+			ok:    false,
 		},
 		{
 			input:    reflect.TypeFor[string](),
@@ -99,8 +97,6 @@ func TestTypeToScalarAttributeType(t *testing.T) {
 			expected: types.ScalarAttributeTypeB,
 			ok:       true,
 		},
-		///
-
 		{
 			input:    reflect.TypeFor[*uint](),
 			expected: types.ScalarAttributeTypeN,
@@ -162,14 +158,12 @@ func TestTypeToScalarAttributeType(t *testing.T) {
 			ok:       true,
 		},
 		{
-			input:    reflect.TypeFor[*complex64](),
-			expected: types.ScalarAttributeTypeN,
-			ok:       true,
+			input: reflect.TypeFor[*complex64](),
+			ok:    false,
 		},
 		{
-			input:    reflect.TypeFor[*complex128](),
-			expected: types.ScalarAttributeTypeN,
-			ok:       true,
+			input: reflect.TypeFor[*complex128](),
+			ok:    false,
 		},
 		{
 			input:    reflect.TypeFor[*string](),

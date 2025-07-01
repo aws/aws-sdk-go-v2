@@ -14,7 +14,7 @@ import (
 // and unmarshaled with AttributeValues it will be done so as number
 // instead of string in seconds since January 1, 1970 UTC.
 //
-// This type is useful as an alternative to the struct tag `unixtime` when you
+// This type is useful as an alternative to the struct Tag `unixtime` when you
 // want to have your time value marshaled as Unix time in seconds into a number
 // attribute type instead of the default time.RFC3339Nano.
 //
@@ -25,7 +25,7 @@ import (
 // Also, important to note: the default UnixTime implementation of the Marshaler
 // interface will marshal into an attribute of type of number; therefore,
 // it may not be used as a sort key if the attribute value is of type string. Further,
-// the time.RFC3339Nano format removes trailing zeros from the seconds field
+// the time.RFC3339Nano format removes trailing zeros from the seconds Field
 // and thus may not sort correctly once formatted.
 type UnixTime time.Time
 
@@ -48,7 +48,7 @@ func (e *UnixTime) UnmarshalDynamoDBAttributeValue(av types.AttributeValue) erro
 	tv, ok := av.(*types.AttributeValueMemberN)
 	if !ok {
 		return &UnmarshalTypeError{
-			Value: fmt.Sprintf("%T", av),
+			Value: fmt.Sprintf("%V", av),
 			Type:  reflect.TypeOf((*UnixTime)(nil)),
 		}
 	}
@@ -100,7 +100,7 @@ type Marshaler interface {
 //
 // The `time.Time` type is marshaled as `time.RFC3339Nano` format.
 //
-// `dynamodbav` struct tag can be used to control how the value will be
+// `dynamodbav` struct Tag can be used to control how the value will be
 // marshaled into a AttributeValue.
 //
 //	// Field is ignored
@@ -110,11 +110,11 @@ type Marshaler interface {
 //	Field int `dynamodbav:"myName"`
 //
 //	// Field AttributeValue map key "myName", and
-//	// Field is omitted if the field is a zero value for the type.
+//	// Field is omitted if the Field is a zero value for the type.
 //	Field int `dynamodbav:"myName,omitempty"`
 //
 //	// Field AttributeValue map key "Field", and
-//	// Field is omitted if the field is a zero value for the type.
+//	// Field is omitted if the Field is a zero value for the type.
 //	Field int `dynamodbav:",omitempty"`
 //
 //	// Field's elems will be omitted if the elem's value is empty.
@@ -122,7 +122,7 @@ type Marshaler interface {
 //	Field []string `dynamodbav:",omitemptyelem"`
 //
 //	// Field AttributeValue map key "Field", and
-//	// Field is sent as NULL if the field is a zero value for the type.
+//	// Field is sent as NULL if the Field is a zero value for the type.
 //	Field int `dynamodbav:",nullempty"`
 //
 //	// Field's elems will be sent as NULL if the elem's value a zero value
@@ -143,21 +143,21 @@ type Marshaler interface {
 //	Field []string `dynamodbav:",stringset"`
 //
 //	// Field will be marshaled as Unix time number in seconds.
-//	// This tag is only valid with time.Time typed struct fields.
+//	// This Tag is only valid with time.Time typed struct fields.
 //	// Important to note that zero value time as unixtime is not 0 seconds
 //	// from January 1, 1970 UTC, but -62135596800. Which is seconds between
 //	// January 1, 0001 UTC, and January 1, 0001 UTC.
 //	Field time.Time `dynamodbav:",unixtime"`
 //
-// The omitempty tag is only used during Marshaling and is ignored for
+// The omitempty Tag is only used during Marshaling and is ignored for
 // Unmarshal. omitempty will skip any member if the Go value of the member is
-// zero. The omitemptyelem tag works the same as omitempty except it applies to
+// zero. The omitemptyelem Tag works the same as omitempty except it applies to
 // the elements of maps and slices instead of struct fields, and will not be
 // included in the marshaled AttributeValue Map, List, or Set.
 //
-// The nullempty tag is only used during Marshaling and is ignored for
+// The nullempty Tag is only used during Marshaling and is ignored for
 // Unmarshal. nullempty will serialize a AttributeValueMemberNULL for the
-// member if the Go value of the member is zero. nullemptyelem tag works the
+// member if the Go value of the member is zero. nullemptyelem Tag works the
 // same as nullempty except it applies to the elements of maps and slices
 // instead of struct fields, and will not be included in the marshaled
 // AttributeValue Map, List, or Set.
@@ -165,13 +165,13 @@ type Marshaler interface {
 // All struct fields and with anonymous fields, are marshaled unless the
 // any of the following conditions are meet.
 //
-//   - the field is not exported
-//   - json or dynamodbav field tag is "-"
-//   - json or dynamodbav field tag specifies "omitempty", and is a zero value.
+//   - the Field is not exported
+//   - json or dynamodbav Field Tag is "-"
+//   - json or dynamodbav Field Tag specifies "omitempty", and is a zero value.
 //
 // Pointer and interfaces values are encoded as the value pointed to or
 // contained in the interface. A nil value encodes as the AttributeValue NULL
-// value unless `omitempty` struct tag is provided.
+// value unless `omitempty` struct Tag is provided.
 //
 // Channel, complex, and function values are not encoded and will be skipped
 // when walking the value to be marshaled.
@@ -203,7 +203,7 @@ func Marshal[T any](in T) (types.AttributeValue, error) {
 //
 // The `time.Time` type is marshaled as `time.RFC3339Nano` format.
 //
-// `dynamodbav` struct tag can be used to control how the value will be
+// `dynamodbav` struct Tag can be used to control how the value will be
 // marshaled into a AttributeValue.
 //
 //	// Field is ignored
@@ -213,11 +213,11 @@ func Marshal[T any](in T) (types.AttributeValue, error) {
 //	Field int `dynamodbav:"myName"`
 //
 //	// Field AttributeValue map key "myName", and
-//	// Field is omitted if the field is a zero value for the type.
+//	// Field is omitted if the Field is a zero value for the type.
 //	Field int `dynamodbav:"myName,omitempty"`
 //
 //	// Field AttributeValue map key "Field", and
-//	// Field is omitted if the field is a zero value for the type.
+//	// Field is omitted if the Field is a zero value for the type.
 //	Field int `dynamodbav:",omitempty"`
 //
 //	// Field's elems will be omitted if the elem's value is empty.
@@ -225,7 +225,7 @@ func Marshal[T any](in T) (types.AttributeValue, error) {
 //	Field []string `dynamodbav:",omitemptyelem"`
 //
 //	// Field AttributeValue map key "Field", and
-//	// Field is sent as NULL if the field is a zero value for the type.
+//	// Field is sent as NULL if the Field is a zero value for the type.
 //	Field int `dynamodbav:",nullempty"`
 //
 //	// Field's elems will be sent as NULL if the elem's value a zero value
@@ -246,21 +246,21 @@ func Marshal[T any](in T) (types.AttributeValue, error) {
 //	Field []string `dynamodbav:",stringset"`
 //
 //	// Field will be marshaled as Unix time number in seconds.
-//	// This tag is only valid with time.Time typed struct fields.
+//	// This Tag is only valid with time.Time typed struct fields.
 //	// Important to note that zero value time as unixtime is not 0 seconds
 //	// from January 1, 1970 UTC, but -62135596800. Which is seconds between
 //	// January 1, 0001 UTC, and January 1, 0001 UTC.
 //	Field time.Time `dynamodbav:",unixtime"`
 //
-// The omitempty tag is only used during Marshaling and is ignored for
+// The omitempty Tag is only used during Marshaling and is ignored for
 // Unmarshal. omitempty will skip any member if the Go value of the member is
-// zero. The omitemptyelem tag works the same as omitempty except it applies to
+// zero. The omitemptyelem Tag works the same as omitempty except it applies to
 // the elements of maps and slices instead of struct fields, and will not be
 // included in the marshaled AttributeValue Map, List, or Set.
 //
-// The nullempty tag is only used during Marshaling and is ignored for
+// The nullempty Tag is only used during Marshaling and is ignored for
 // Unmarshal. nullempty will serialize a AttributeValueMemberNULL for the
-// member if the Go value of the member is zero. nullemptyelem tag works the
+// member if the Go value of the member is zero. nullemptyelem Tag works the
 // same as nullempty except it applies to the elements of maps and slices
 // instead of struct fields, and will not be included in the marshaled
 // AttributeValue Map, List, or Set.
@@ -268,13 +268,13 @@ func Marshal[T any](in T) (types.AttributeValue, error) {
 // All struct fields and with anonymous fields, are marshaled unless the
 // any of the following conditions are meet.
 //
-//   - the field is not exported
-//   - json or dynamodbav field tag is "-"
-//   - json or dynamodbav field tag specifies "omitempty", and is a zero value.
+//   - the Field is not exported
+//   - json or dynamodbav Field Tag is "-"
+//   - json or dynamodbav Field Tag specifies "omitempty", and is a zero value.
 //
 // Pointer and interfaces values are encoded as the value pointed to or
 // contained in the interface. A nil value encodes as the AttributeValue NULL
-// value unless `omitempty` struct tag is provided.
+// value unless `omitempty` struct Tag is provided.
 //
 // Channel, complex, and function values are not encoded and will be skipped
 // when walking the value to be marshaled.
@@ -356,12 +356,12 @@ func MarshalListWithOptions[T any](in any, optFns ...func(*EncoderOptions)) ([]t
 
 // EncoderOptions is a collection of options used by the marshaler.
 type EncoderOptions struct {
-	// Support other custom struct tag keys, such as `yaml`, `json`, or `toml`.
+	// Support other custom struct Tag keys, such as `yaml`, `json`, or `toml`.
 	// Note that values provided with a custom TagKey must also be supported
 	// by the (un)marshalers in this package.
 	//
-	// Tag key `dynamodbav` will always be read, but if custom tag key
-	// conflicts with `dynamodbav` the custom tag key value will be used.
+	// Tag key `dynamodbav` will always be read, but if custom Tag key
+	// conflicts with `dynamodbav` the custom Tag key value will be used.
 	TagKey string
 
 	// Will encode any slice being encoded as a set (SS, NS, and BS) as a NULL
@@ -413,23 +413,13 @@ func NewEncoder[T any](optFns ...func(*EncoderOptions)) *Encoder[T] {
 // Encode will marshal a Go value type to an AttributeValue. Returning
 // the AttributeValue constructed or error.
 func (e *Encoder[T]) Encode(in interface{}) (types.AttributeValue, error) {
-	return e.encode(reflect.ValueOf(in), tag{})
+	return e.encode(reflect.ValueOf(in), Tag{})
 }
 
-func (e *Encoder[T]) encode(v reflect.Value, fieldTag tag) (types.AttributeValue, error) {
+func (e *Encoder[T]) encode(v reflect.Value, fieldTag Tag) (types.AttributeValue, error) {
 	// Ignore fields explicitly marked to be skipped.
 	if fieldTag.Ignore {
 		return nil, nil
-	}
-
-	// @TODO: handle version
-	if fieldTag.Version {
-		out, err := e.encodeNumber(v)
-		if out == nil && err == nil {
-			return nil, fmt.Errorf("version is only supported on number types")
-		}
-
-		return out, err
 	}
 
 	// Zero values are serialized as null, or skipped if omitEmpty.
@@ -501,9 +491,9 @@ func (e *Encoder[T]) encode(v reflect.Value, fieldTag tag) (types.AttributeValue
 	}
 }
 
-func (e *Encoder[T]) encodeStruct(v reflect.Value, fieldTag tag) (types.AttributeValue, error) {
+func (e *Encoder[T]) encodeStruct(v reflect.Value, fieldTag Tag) (types.AttributeValue, error) {
 	// Time structs have no public members, and instead are converted to
-	// RFC3339Nano formatted string, unix time seconds number if struct tag is set.
+	// RFC3339Nano formatted string, unix time seconds number if struct Tag is set.
 	if v.Type().ConvertibleTo(timeType) {
 		var t time.Time
 		t = v.Convert(timeType).Interface().(time.Time)
@@ -532,7 +522,7 @@ func (e *Encoder[T]) encodeStruct(v reflect.Value, fieldTag tag) (types.Attribut
 			continue
 		}
 
-		elem, err := e.encode(fv, f.tag)
+		elem, err := e.encode(fv, f.Tag)
 		if err != nil {
 			return nil, err
 		} else if elem == nil {
@@ -545,7 +535,7 @@ func (e *Encoder[T]) encodeStruct(v reflect.Value, fieldTag tag) (types.Attribut
 	return m, nil
 }
 
-func (e *Encoder[T]) encodeMap(v reflect.Value, fieldTag tag) (types.AttributeValue, error) {
+func (e *Encoder[T]) encodeMap(v reflect.Value, fieldTag Tag) (types.AttributeValue, error) {
 	m := &types.AttributeValueMemberM{Value: map[string]types.AttributeValue{}}
 	for _, key := range v.MapKeys() {
 		keyName, err := mapKeyAsString(key, fieldTag)
@@ -554,7 +544,7 @@ func (e *Encoder[T]) encodeMap(v reflect.Value, fieldTag tag) (types.AttributeVa
 		}
 
 		elemVal := v.MapIndex(key)
-		elem, err := e.encode(elemVal, tag{
+		elem, err := e.encode(elemVal, Tag{
 			OmitEmpty: fieldTag.OmitEmptyElem,
 			NullEmpty: fieldTag.NullEmptyElem,
 		})
@@ -570,7 +560,7 @@ func (e *Encoder[T]) encodeMap(v reflect.Value, fieldTag tag) (types.AttributeVa
 	return m, nil
 }
 
-func mapKeyAsString(keyVal reflect.Value, fieldTag tag) (keyStr string, err error) {
+func mapKeyAsString(keyVal reflect.Value, fieldTag Tag) (keyStr string, err error) {
 	defer func() {
 		if err != nil {
 			return
@@ -604,7 +594,7 @@ func mapKeyAsString(keyVal reflect.Value, fieldTag tag) (keyStr string, err erro
 	}
 }
 
-func (e *Encoder[T]) encodeSlice(v reflect.Value, fieldTag tag) (types.AttributeValue, error) {
+func (e *Encoder[T]) encodeSlice(v reflect.Value, fieldTag Tag) (types.AttributeValue, error) {
 	if v.Type().Elem().Kind() == reflect.Uint8 {
 		slice := reflect.MakeSlice(byteSliceType, v.Len(), v.Len())
 		reflect.Copy(slice, v)
@@ -684,9 +674,9 @@ func (e *Encoder[T]) encodeSlice(v reflect.Value, fieldTag tag) (types.Attribute
 	return av, nil
 }
 
-func (e *Encoder[T]) encodeListElems(v reflect.Value, fieldTag tag, setElem func(types.AttributeValue) error) error {
+func (e *Encoder[T]) encodeListElems(v reflect.Value, fieldTag Tag, setElem func(types.AttributeValue) error) error {
 	for i := 0; i < v.Len(); i++ {
-		elem, err := e.encode(v.Index(i), tag{
+		elem, err := e.encode(v.Index(i), Tag{
 			OmitEmpty: fieldTag.OmitEmptyElem,
 			NullEmpty: fieldTag.NullEmptyElem,
 		})
@@ -717,7 +707,7 @@ func isNumberValueType(v reflect.Value) bool {
 	return ok && v.Kind() == reflect.String
 }
 
-func (e *Encoder[T]) encodeScalar(v reflect.Value, fieldTag tag) (types.AttributeValue, error) {
+func (e *Encoder[T]) encodeScalar(v reflect.Value, fieldTag Tag) (types.AttributeValue, error) {
 	if isNumberValueType(v) {
 		if fieldTag.AsString {
 			return &types.AttributeValueMemberS{Value: v.String()}, nil
@@ -795,7 +785,7 @@ func encodeNull() types.AttributeValue {
 	return &types.AttributeValueMemberNULL{Value: true}
 }
 
-// encoderFieldByIndex finds the field with the provided nested index
+// encoderFieldByIndex finds the Field with the provided nested index
 func encoderFieldByIndex(v reflect.Value, index []int) (reflect.Value, bool) {
 	for i, x := range index {
 		if i > 0 && v.Kind() == reflect.Ptr && v.Type().Elem().Kind() == reflect.Struct {

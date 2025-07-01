@@ -5,8 +5,8 @@ import (
 	"sort"
 )
 
-type field struct {
-	tag
+type Field struct {
+	Tag
 
 	Name        string
 	NameFromTag bool
@@ -15,11 +15,11 @@ type field struct {
 	Type  reflect.Type
 }
 
-func buildField(pIdx []int, i int, sf reflect.StructField, fieldTag tag) field {
-	f := field{
+func buildField(pIdx []int, i int, sf reflect.StructField, fieldTag Tag) Field {
+	f := Field{
 		Name: sf.Name,
 		Type: sf.Type,
-		tag:  fieldTag,
+		Tag:  fieldTag,
 	}
 	if len(fieldTag.Name) != 0 {
 		f.NameFromTag = true
@@ -34,18 +34,18 @@ func buildField(pIdx []int, i int, sf reflect.StructField, fieldTag tag) field {
 }
 
 type structFieldOptions struct {
-	// Support other custom struct tag keys, such as `yaml`, `json`, or `toml`.
+	// Support other custom struct Tag keys, such as `yaml`, `json`, or `toml`.
 	// Note that values provided with a custom TagKey must also be supported
 	// by the (un)marshalers in this package.
 	//
-	// Tag key `dynamodbav` will always be read, but if custom tag key
-	// conflicts with `dynamodbav` the custom tag key value will be used.
+	// Tag key `dynamodbav` will always be read, but if custom Tag key
+	// conflicts with `dynamodbav` the custom Tag key value will be used.
 	TagKey string
 }
 
-// unionStructFields returns a list of cachedFields for the given type. Type info is cached
+// unionStructFields returns a list of CachedFields for the given type. Type info is cached
 // to avoid repeated calls into the reflect package
-func unionStructFields(t reflect.Type, opts structFieldOptions) *cachedFields {
+func unionStructFields(t reflect.Type, opts structFieldOptions) *CachedFields {
 	key := fieldCacheKey{
 		typ:  t,
 		opts: opts,
@@ -59,7 +59,7 @@ func unionStructFields(t reflect.Type, opts structFieldOptions) *cachedFields {
 	sort.Sort(fieldsByName(f))
 	f = visibleFields(f)
 
-	fs := &cachedFields{
+	fs := &CachedFields{
 		fields:       f,
 		fieldsByName: make(map[string]int, len(f)),
 	}
@@ -72,21 +72,21 @@ func unionStructFields(t reflect.Type, opts structFieldOptions) *cachedFields {
 }
 
 // enumFields will recursively iterate through a structure and its nested
-// anonymous cachedFields.
+// anonymous CachedFields.
 //
-// Based on the enoding/json struct field enumeration of the Go Stdlib
+// Based on the enoding/json struct Field enumeration of the Go Stdlib
 // https://golang.org/src/encoding/json/encode.go typeField func.
-func enumFields(t reflect.Type, opts structFieldOptions) []field {
+func enumFields(t reflect.Type, opts structFieldOptions) []Field {
 	// Fields to explore
-	current := []field{}
-	next := []field{{Type: t}}
+	current := []Field{}
+	next := []Field{{Type: t}}
 
 	// count of queued names
 	count := map[reflect.Type]int{}
 	nextCount := map[reflect.Type]int{}
 
 	visited := map[reflect.Type]struct{}{}
-	fields := []field{}
+	fields := []Field{}
 
 	for len(next) > 0 {
 		current, next = next, current[:0]
@@ -101,7 +101,7 @@ func enumFields(t reflect.Type, opts structFieldOptions) []field {
 			for i := 0; i < f.Type.NumField(); i++ {
 				sf := f.Type.Field(i)
 
-				fieldTag := tag{}
+				fieldTag := Tag{}
 				fieldTag.parseAVTag(sf.Tag)
 				// Because MarshalOptions.TagKey must be explicitly set.
 				if opts.TagKey != "" && opts.TagKey != defaultTagKey {
@@ -109,9 +109,9 @@ func enumFields(t reflect.Type, opts structFieldOptions) []field {
 				}
 
 				if sf.PkgPath != "" && !sf.Anonymous && fieldTag.Getter == "" && fieldTag.Setter == "" {
-					// Ignore unexported and non-anonymous cachedFields
-					// unexported but anonymous field may still be used if
-					// the type has exported nested cachedFields
+					// Ignore unexported and non-anonymous CachedFields
+					// unexported but anonymous Field may still be used if
+					// the type has exported nested CachedFields
 					// or if they have a getter and setter
 					continue
 				}
@@ -152,23 +152,23 @@ func enumFields(t reflect.Type, opts structFieldOptions) []field {
 	return fields
 }
 
-// visibleFields will return a slice of cachedFields which are visible based on
+// visibleFields will return a slice of CachedFields which are visible based on
 // Go's standard visiblity rules with the exception of ties being broken
-// by depth and struct tag naming.
+// by depth and struct Tag naming.
 //
-// Based on the enoding/json field filtering of the Go Stdlib
+// Based on the enoding/json Field filtering of the Go Stdlib
 // https://golang.org/src/encoding/json/encode.go typeField func.
-func visibleFields(fields []field) []field {
-	// Delete all cachedFields that are hidden by the Go rules for embedded cachedFields,
-	// except that cachedFields with JSON tags are promoted.
+func visibleFields(fields []Field) []Field {
+	// Delete all CachedFields that are hidden by the Go rules for embedded CachedFields,
+	// except that CachedFields with JSON tags are promoted.
 
-	// The cachedFields are sorted in primary order of name, secondary order
-	// of field index length. Loop over names; for each name, delete
-	// hidden cachedFields by choosing the one dominant field that survives.
+	// The CachedFields are sorted in primary order of name, secondary order
+	// of Field index length. Loop over names; for each name, delete
+	// hidden CachedFields by choosing the one dominant Field that survives.
 	out := fields[:0]
 	for advance, i := 0, 0; i < len(fields); i += advance {
 		// One iteration per name.
-		// Find the sequence of cachedFields with the name of this first field.
+		// Find the sequence of CachedFields with the name of this first Field.
 		fi := fields[i]
 		name := fi.Name
 		for advance = 1; i+advance < len(fields); advance++ {
@@ -177,7 +177,7 @@ func visibleFields(fields []field) []field {
 				break
 			}
 		}
-		if advance == 1 { // Only one field with this name
+		if advance == 1 { // Only one Field with this name
 			out = append(out, fi)
 			continue
 		}
@@ -193,21 +193,21 @@ func visibleFields(fields []field) []field {
 	return fields
 }
 
-// dominantField looks through the cachedFields, all of which are known to
-// have the same name, to find the single field that dominates the
+// dominantField looks through the CachedFields, all of which are known to
+// have the same name, to find the single Field that dominates the
 // others using Go's embedding rules, modified by the presence of
-// JSON tags. If there are multiple top-level cachedFields, the boolean
+// JSON tags. If there are multiple top-level CachedFields, the boolean
 // will be false: This condition is an error in Go and we skip all
-// the cachedFields.
+// the CachedFields.
 //
-// Based on the enoding/json field filtering of the Go Stdlib
+// Based on the enoding/json Field filtering of the Go Stdlib
 // https://golang.org/src/encoding/json/encode.go dominantField func.
-func dominantField(fields []field) (field, bool) {
-	// The cachedFields are sorted in increasing index-length order. The winner
+func dominantField(fields []Field) (Field, bool) {
+	// The CachedFields are sorted in increasing index-length order. The winner
 	// must therefore be one with the shortest index length. Drop all
 	// longer entries, which is easy: just truncate the slice.
 	length := len(fields[0].Index)
-	tagged := -1 // Index of first tagged field.
+	tagged := -1 // Index of first tagged Field.
 	for i, f := range fields {
 		if len(f.Index) > length {
 			fields = fields[:i]
@@ -215,9 +215,9 @@ func dominantField(fields []field) (field, bool) {
 		}
 		if f.NameFromTag {
 			if tagged >= 0 {
-				// Multiple tagged cachedFields at the same level: conflict.
-				// Return no field.
-				return field{}, false
+				// Multiple tagged CachedFields at the same level: conflict.
+				// Return no Field.
+				return Field{}, false
 			}
 			tagged = i
 		}
@@ -225,22 +225,22 @@ func dominantField(fields []field) (field, bool) {
 	if tagged >= 0 {
 		return fields[tagged], true
 	}
-	// All remaining cachedFields have the same length. If there's more than one,
-	// we have a conflict (two cachedFields named "X" at the same level) and we
-	// return no field.
+	// All remaining CachedFields have the same length. If there's more than one,
+	// we have a conflict (two CachedFields named "X" at the same level) and we
+	// return no Field.
 	if len(fields) > 1 {
-		return field{}, false
+		return Field{}, false
 	}
 	return fields[0], true
 }
 
-// fieldsByName sorts field by name, breaking ties with depth,
-// then breaking ties with "name came from json tag", then
+// fieldsByName sorts Field by name, breaking ties with depth,
+// then breaking ties with "name came from json Tag", then
 // breaking ties with index sequence.
 //
-// Based on the enoding/json field filtering of the Go Stdlib
+// Based on the enoding/json Field filtering of the Go Stdlib
 // https://golang.org/src/encoding/json/encode.go fieldsByName type.
-type fieldsByName []field
+type fieldsByName []Field
 
 func (x fieldsByName) Len() int { return len(x) }
 
@@ -259,11 +259,11 @@ func (x fieldsByName) Less(i, j int) bool {
 	return fieldsByIndex(x).Less(i, j)
 }
 
-// fieldsByIndex sorts field by index sequence.
+// fieldsByIndex sorts Field by index sequence.
 //
-// Based on the enoding/json field filtering of the Go Stdlib
+// Based on the enoding/json Field filtering of the Go Stdlib
 // https://golang.org/src/encoding/json/encode.go fieldsByIndex type.
-type fieldsByIndex []field
+type fieldsByIndex []Field
 
 func (x fieldsByIndex) Len() int { return len(x) }
 

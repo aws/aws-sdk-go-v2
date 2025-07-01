@@ -10,10 +10,13 @@ import (
 
 type Schema[T any] struct {
 	options      SchemaOptions
-	cachedFields *cachedFields
+	cachedFields *CachedFields
 	enc          *Encoder[T]
 	dec          *Decoder[T]
 	typ          reflect.Type
+
+	//generators map[string]enhancedclient2.Generator[T]
+	extensions map[ExecutionPhase][]Extension
 
 	// common
 	attributeDefinitions      []types.AttributeDefinition
@@ -112,6 +115,7 @@ func NewSchema[T any](fns ...func(options *SchemaOptions)) (*Schema[T], error) {
 		(*Schema[T]).resolveKeySchema,
 		(*Schema[T]).resolveAttributeDefinitions,
 		(*Schema[T]).resolveSecondaryIndexes,
+		(*Schema[T]).resolveDefaultExtensions,
 	}
 
 	for _, fn := range resolversFns {

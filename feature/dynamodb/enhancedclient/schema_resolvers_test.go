@@ -100,19 +100,19 @@ func TestResolveKeySchema(t *testing.T) {
 	sk := "sk"
 
 	cases := []struct {
-		input    []field
+		input    []Field
 		expected any
 		error    bool
 	}{
 		{
-			input: []field{
+			input: []Field{
 				{
 					Name: "pk",
-					tag:  tag{Partition: true},
+					Tag:  Tag{Partition: true},
 				},
 				{
 					Name: "sk",
-					tag:  tag{Sort: true},
+					Tag:  Tag{Sort: true},
 				},
 				{},
 				{},
@@ -131,10 +131,10 @@ func TestResolveKeySchema(t *testing.T) {
 			error: false,
 		},
 		{
-			input: []field{
+			input: []Field{
 				{
 					Name: "pk",
-					tag:  tag{Partition: true},
+					Tag:  Tag{Partition: true},
 				},
 				{},
 				{},
@@ -149,14 +149,14 @@ func TestResolveKeySchema(t *testing.T) {
 			error: false,
 		},
 		{
-			input: []field{
+			input: []Field{
 				{
 					Name: "pk",
-					tag:  tag{Partition: true},
+					Tag:  Tag{Partition: true},
 				},
 				{
 					Name: "sk",
-					tag:  tag{Partition: true},
+					Tag:  Tag{Partition: true},
 				},
 				{},
 				{},
@@ -166,18 +166,18 @@ func TestResolveKeySchema(t *testing.T) {
 			error:    true,
 		},
 		{
-			input: []field{
+			input: []Field{
 				{
 					Name: "pk",
-					tag:  tag{Partition: true},
+					Tag:  Tag{Partition: true},
 				},
 				{
 					Name: "sk",
-					tag:  tag{Sort: true},
+					Tag:  Tag{Sort: true},
 				},
 				{
 					Name: "sk",
-					tag:  tag{Sort: true},
+					Tag:  Tag{Sort: true},
 				},
 				{},
 				{},
@@ -186,7 +186,7 @@ func TestResolveKeySchema(t *testing.T) {
 			error:    true,
 		},
 		{
-			input: []field{
+			input: []Field{
 				{
 					Name: "pk",
 				},
@@ -204,7 +204,7 @@ func TestResolveKeySchema(t *testing.T) {
 	for i, c := range cases {
 		t.Run(fmt.Sprintf("%d", i), func(t *testing.T) {
 			o := &Schema[order]{
-				cachedFields: &cachedFields{
+				cachedFields: &CachedFields{
 					fields: c.input,
 				},
 			}
@@ -231,18 +231,18 @@ func TestResolveKeySchema(t *testing.T) {
 
 func TestResolveAttributeDefinitions(t *testing.T) {
 	cases := []struct {
-		input    []field
+		input    []Field
 		expected []types.AttributeDefinition
 	}{
 		{
-			input:    []field{},
+			input:    []Field{},
 			expected: []types.AttributeDefinition(nil),
 		},
 		{
-			input: []field{
+			input: []Field{
 				{
 					Name: "pk",
-					tag: tag{
+					Tag: Tag{
 						Partition: true,
 					},
 					Type: reflect.TypeFor[string](),
@@ -256,10 +256,10 @@ func TestResolveAttributeDefinitions(t *testing.T) {
 			},
 		},
 		{
-			input: []field{
+			input: []Field{
 				{
 					Name: "pk",
-					tag: tag{
+					Tag: Tag{
 						Partition: true,
 					},
 					Type: reflect.TypeFor[int32](),
@@ -273,10 +273,10 @@ func TestResolveAttributeDefinitions(t *testing.T) {
 			},
 		},
 		{
-			input: []field{
+			input: []Field{
 				{
 					Name: "pk",
-					tag: tag{
+					Tag: Tag{
 						Partition: true,
 					},
 					Type: reflect.TypeFor[[]byte](),
@@ -290,10 +290,10 @@ func TestResolveAttributeDefinitions(t *testing.T) {
 			},
 		},
 		{
-			input: []field{
+			input: []Field{
 				{
 					Name: "sk",
-					tag: tag{
+					Tag: Tag{
 						Sort: true,
 					},
 					Type: reflect.TypeFor[[]byte](),
@@ -311,7 +311,7 @@ func TestResolveAttributeDefinitions(t *testing.T) {
 	for i, c := range cases {
 		t.Run(fmt.Sprintf("%d", i), func(t *testing.T) {
 			s := &Schema[any]{
-				cachedFields: &cachedFields{
+				cachedFields: &CachedFields{
 					fields: c.input,
 				},
 			}
@@ -329,7 +329,7 @@ func TestResolveAttributeDefinitions(t *testing.T) {
 
 func TestResolveSecondaryIndexes(t *testing.T) {
 	cases := []struct {
-		input        []field
+		input        []Field
 		expectedLSIs []types.LocalSecondaryIndex
 		expectedGSIs []types.GlobalSecondaryIndex
 		error        bool
@@ -338,14 +338,14 @@ func TestResolveSecondaryIndexes(t *testing.T) {
 			error: true,
 		},
 		{
-			input: []field{},
+			input: []Field{},
 			error: true,
 		},
 		{
-			input: []field{
+			input: []Field{
 				{
 					Name: "pk",
-					tag: tag{
+					Tag: Tag{
 						Partition: true,
 						Indexes: []Index{
 							{
@@ -362,7 +362,7 @@ func TestResolveSecondaryIndexes(t *testing.T) {
 				},
 				{
 					Name: "sk",
-					tag: tag{
+					Tag: Tag{
 						Indexes: []Index{
 							{
 								Name: "gsi1",
@@ -420,7 +420,7 @@ func TestResolveSecondaryIndexes(t *testing.T) {
 	for i, c := range cases {
 		t.Run(fmt.Sprintf("%d", i), func(t *testing.T) {
 			o := &Schema[order]{
-				cachedFields: &cachedFields{
+				cachedFields: &CachedFields{
 					fields: c.input,
 				},
 			}
