@@ -236,3 +236,15 @@ func (s *Schema[T]) WithReplicaUpdates(replicaUpdates []types.ReplicationGroupUp
 
 	return s
 }
+
+func (s *Schema[T]) WithExtension(when ExecutionPhase, extension Extension) *Schema[T] {
+	if s.extensions == nil {
+		s.extensions = map[ExecutionPhase][]Extension{}
+	}
+
+	e := s.extensions[when]
+	e = append(e, extension)
+	s.extensions[when] = e
+
+	return s
+}

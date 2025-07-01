@@ -35,7 +35,7 @@ func (m Map) String() string {
 // Note: [3] and [5] are not actual values we search for, they are just examples to illustrate go arrays vs go slices
 func (m Map) With(key string, value any) Map {
 	v := reflect.ValueOf(value)
-	t := tag{}
+	t := Tag{}
 	if v.Kind() == reflect.Array {
 		k := v.Type().Elem().Kind()
 		t.AsStrSet = k == reflect.String

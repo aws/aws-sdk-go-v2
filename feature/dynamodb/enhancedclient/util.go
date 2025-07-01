@@ -18,6 +18,16 @@ func unwrap[T any](v *T) T {
 	return *new(T)
 }
 
+func inArray[V comparable, A ~[]V](v V, a A) bool {
+	for i := range a {
+		if a[i] == v {
+			return true
+		}
+	}
+
+	return false
+}
+
 func typeToScalarAttributeType(t reflect.Type) (types.ScalarAttributeType, bool) {
 	if t.Kind() == reflect.Ptr {
 		t = t.Elem()

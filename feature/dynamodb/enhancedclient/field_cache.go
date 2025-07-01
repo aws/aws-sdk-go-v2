@@ -17,28 +17,28 @@ type fieldCacher struct {
 	cache sync.Map
 }
 
-func (c *fieldCacher) Load(key fieldCacheKey) (*cachedFields, bool) {
+func (c *fieldCacher) Load(key fieldCacheKey) (*CachedFields, bool) {
 	if v, ok := c.cache.Load(key); ok {
-		return v.(*cachedFields), true
+		return v.(*CachedFields), true
 	}
 	return nil, false
 }
 
-func (c *fieldCacher) LoadOrStore(key fieldCacheKey, fs *cachedFields) (*cachedFields, bool) {
+func (c *fieldCacher) LoadOrStore(key fieldCacheKey, fs *CachedFields) (*CachedFields, bool) {
 	v, ok := c.cache.LoadOrStore(key, fs)
-	return v.(*cachedFields), ok
+	return v.(*CachedFields), ok
 }
 
-type cachedFields struct {
-	fields       []field
+type CachedFields struct {
+	fields       []Field
 	fieldsByName map[string]int
 }
 
-func (f *cachedFields) All() []field {
+func (f *CachedFields) All() []Field {
 	return f.fields
 }
 
-func (f *cachedFields) FieldByName(name string) (field, bool) {
+func (f *CachedFields) FieldByName(name string) (Field, bool) {
 	if i, ok := f.fieldsByName[name]; ok {
 		return f.fields[i], ok
 	}
@@ -47,5 +47,5 @@ func (f *cachedFields) FieldByName(name string) (field, bool) {
 			return f, true
 		}
 	}
-	return field{}, false
+	return Field{}, false
 }

@@ -231,7 +231,7 @@ func TestCachedFields(t *testing.T) {
 
 				const expectedNumFields = 2
 				if numFields := len(fields.All()); numFields != expectedNumFields {
-					t.Errorf("expect %v cachedFields, got %d", expectedNumFields, numFields)
+					t.Errorf("expect %v CachedFields, got %d", expectedNumFields, numFields)
 				}
 
 				f, found := fields.FieldByName(c.Name)
@@ -239,7 +239,7 @@ func TestCachedFields(t *testing.T) {
 					t.Errorf("expect %v found, got %v", c.Found, found)
 				}
 				if found && f.Name != c.FieldName {
-					t.Errorf("expect %v field name, got %s", c.FieldName, f.Name)
+					t.Errorf("expect %v Field name, got %s", c.FieldName, f.Name)
 				}
 			})
 		}

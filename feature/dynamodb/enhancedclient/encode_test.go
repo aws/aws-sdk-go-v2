@@ -841,41 +841,45 @@ func TestEncodeEmptyTime(t *testing.T) {
 
 func TestEncodeVersion(t *testing.T) {
 	cases := []struct {
-		ft       tag
+		ft       Tag
 		actual   any
 		expected types.AttributeValue
 		error    bool
 	}{
 		{
-			ft:     tag{Version: true},
+			ft:     Tag{Version: true},
 			actual: int(5),
 			expected: &types.AttributeValueMemberN{
 				Value: "5",
 			},
 		},
 		{
-			ft:     tag{Version: true},
+			ft:     Tag{Version: true},
 			actual: uint(5),
 			expected: &types.AttributeValueMemberN{
 				Value: "5",
 			},
 		},
 		{
-			ft:     tag{Version: true},
+			ft:     Tag{Version: true},
 			actual: float32(5),
 			expected: &types.AttributeValueMemberN{
 				Value: "5",
 			},
 		},
 		{
-			ft:     tag{Version: true, AsString: true},
+			ft:     Tag{Version: true, AsString: true},
 			actual: "",
-			error:  true,
+			expected: &types.AttributeValueMemberS{
+				Value: "",
+			},
 		},
 		{
-			ft:     tag{Version: true},
+			ft:     Tag{Version: true},
 			actual: "",
-			error:  true,
+			expected: &types.AttributeValueMemberS{
+				Value: "",
+			},
 		},
 	}
 	for i, c := range cases {

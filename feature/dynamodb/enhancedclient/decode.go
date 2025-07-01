@@ -44,8 +44,8 @@ type Unmarshaler interface {
 // unmarshal the AttributeValue into the provided type value.
 //
 // When unmarshaling AttributeValues into structs Unmarshal matches
-// the field names of the struct to the AttributeValue Map keys.
-// Initially it will look for exact field name matching, but will
+// the Field names of the struct to the AttributeValue Map keys.
+// Initially it will look for exact Field name matching, but will
 // fall back to case insensitive if not exact match is found.
 //
 // With the exception of omitempty, omitemptyelem, binaryset, numberset
@@ -91,8 +91,8 @@ func Unmarshal[T any](av types.AttributeValue, out interface{}) error {
 // unmarshal the AttributeValue into the provided type value.
 //
 // When unmarshaling AttributeValues into structs Unmarshal matches
-// the field names of the struct to the AttributeValue Map keys.
-// Initially it will look for exact field name matching, but will
+// the Field names of the struct to the AttributeValue Map keys.
+// Initially it will look for exact Field name matching, but will
 // fall back to case insensitive if not exact match is found.
 //
 // With the exception of omitempty, omitemptyelem, binaryset, numberset
@@ -288,7 +288,7 @@ func (d *Decoder[T]) Decode(av types.AttributeValue, out interface{}, opts ...fu
 		return &InvalidUnmarshalError{Type: reflect.TypeOf(out)}
 	}
 
-	return d.decode(av, v, tag{})
+	return d.decode(av, v, Tag{})
 }
 
 var stringInterfaceMapType = reflect.TypeOf(map[string]interface{}(nil))
@@ -296,7 +296,7 @@ var byteSliceType = reflect.TypeOf([]byte(nil))
 var byteSliceSliceType = reflect.TypeOf([][]byte(nil))
 var timeType = reflect.TypeOf(time.Time{})
 
-func (d *Decoder[T]) decode(av types.AttributeValue, v reflect.Value, fieldTag tag) error {
+func (d *Decoder[T]) decode(av types.AttributeValue, v reflect.Value, fieldTag Tag) error {
 	var u Unmarshaler
 	_, isNull := av.(*types.AttributeValueMemberNULL)
 	if av == nil || isNull {
@@ -354,7 +354,7 @@ func (d *Decoder[T]) decode(av types.AttributeValue, v reflect.Value, fieldTag t
 		return d.decodeStringSet(tv.Value, v)
 
 	default:
-		return fmt.Errorf("unsupported AttributeValue type, %T", av)
+		return fmt.Errorf("unsupported AttributeValue type, %V", av)
 	}
 }
 
@@ -461,7 +461,7 @@ func (d *Decoder[T]) decodeBinarySet(bs [][]byte, v reflect.Value) error {
 	return nil
 }
 
-func (d *Decoder[T]) decodeNumber(n string, v reflect.Value, fieldTag tag) error {
+func (d *Decoder[T]) decodeNumber(n string, v reflect.Value, fieldTag Tag) error {
 	switch v.Kind() {
 	case reflect.Interface:
 		i, err := d.decodeNumberToInterface(n)
@@ -561,7 +561,7 @@ func (d *Decoder[T]) decodeNumberSet(ns []string, v reflect.Value) error {
 		if d.options.UseNumber {
 			set := make([]Number, len(ns))
 			for i, n := range ns {
-				if err := d.decodeNumber(n, reflect.ValueOf(&set[i]).Elem(), tag{}); err != nil {
+				if err := d.decodeNumber(n, reflect.ValueOf(&set[i]).Elem(), Tag{}); err != nil {
 					return err
 				}
 			}
@@ -569,7 +569,7 @@ func (d *Decoder[T]) decodeNumberSet(ns []string, v reflect.Value) error {
 		} else {
 			set := make([]float64, len(ns))
 			for i, n := range ns {
-				if err := d.decodeNumber(n, reflect.ValueOf(&set[i]).Elem(), tag{}); err != nil {
+				if err := d.decodeNumber(n, reflect.ValueOf(&set[i]).Elem(), Tag{}); err != nil {
 					return err
 				}
 			}
@@ -592,7 +592,7 @@ func (d *Decoder[T]) decodeNumberSet(ns []string, v reflect.Value) error {
 			}
 			continue
 		}
-		if err := d.decodeNumber(ns[i], elem, tag{}); err != nil {
+		if err := d.decodeNumber(ns[i], elem, Tag{}); err != nil {
 			return err
 		}
 	}
@@ -616,7 +616,7 @@ func (d *Decoder[T]) decodeList(avList []types.AttributeValue, v reflect.Value) 
 	case reflect.Interface:
 		s := make([]interface{}, len(avList))
 		for i, av := range avList {
-			if err := d.decode(av, reflect.ValueOf(&s[i]).Elem(), tag{}); err != nil {
+			if err := d.decode(av, reflect.ValueOf(&s[i]).Elem(), Tag{}); err != nil {
 				return err
 			}
 		}
@@ -631,7 +631,7 @@ func (d *Decoder[T]) decodeList(avList []types.AttributeValue, v reflect.Value) 
 		if !isArray {
 			v.SetLen(i + 1)
 		}
-		if err := d.decode(avList[i], v.Index(i), tag{}); err != nil {
+		if err := d.decode(avList[i], v.Index(i), Tag{}); err != nil {
 			return err
 		}
 	}
@@ -640,7 +640,7 @@ func (d *Decoder[T]) decodeList(avList []types.AttributeValue, v reflect.Value) 
 }
 
 func (d *Decoder[T]) decodeMap(avMap map[string]types.AttributeValue, v reflect.Value) (err error) {
-	var decodeMapKey func(v string, key reflect.Value, fieldTag tag) error
+	var decodeMapKey func(v string, key reflect.Value, fieldTag Tag) error
 
 	switch v.Kind() {
 	case reflect.Map:
@@ -668,7 +668,7 @@ func (d *Decoder[T]) decodeMap(avMap map[string]types.AttributeValue, v reflect.
 			key := reflect.New(keyType).Elem()
 			// handle pointer keys
 			_, indirectKey := indirect[Unmarshaler](key, indirectOptions{skipUnmarshaler: true})
-			if err := decodeMapKey(k, indirectKey, tag{}); err != nil {
+			if err := decodeMapKey(k, indirectKey, Tag{}); err != nil {
 				return &UnmarshalTypeError{
 					Value: fmt.Sprintf("map key %q", k),
 					Type:  keyType,
@@ -677,7 +677,7 @@ func (d *Decoder[T]) decodeMap(avMap map[string]types.AttributeValue, v reflect.
 			}
 
 			elem := reflect.New(valueType).Elem()
-			if err := d.decode(av, elem, tag{}); err != nil {
+			if err := d.decode(av, elem, Tag{}); err != nil {
 				return err
 			}
 
@@ -690,7 +690,7 @@ func (d *Decoder[T]) decodeMap(avMap map[string]types.AttributeValue, v reflect.
 		for k, av := range avMap {
 			if f, ok := fields.FieldByName(k); ok {
 				fv := decoderFieldByIndex(v, f.Index)
-				if err := d.decode(av, fv, f.tag); err != nil {
+				if err := d.decode(av, fv, f.Tag); err != nil {
 					return err
 				}
 			}
@@ -703,10 +703,10 @@ func (d *Decoder[T]) decodeMap(avMap map[string]types.AttributeValue, v reflect.
 var numberType = reflect.TypeOf(Number(""))
 var textUnmarshalerType = reflect.TypeOf((*encoding.TextUnmarshaler)(nil)).Elem()
 
-func (d *Decoder[T]) getMapKeyDecoder(keyType reflect.Type) (func(string, reflect.Value, tag) error, error) {
+func (d *Decoder[T]) getMapKeyDecoder(keyType reflect.Type) (func(string, reflect.Value, Tag) error, error) {
 	// Test the key type to determine if it implements the TextUnmarshaler interface.
 	if reflect.PtrTo(keyType).Implements(textUnmarshalerType) || keyType.Implements(textUnmarshalerType) {
-		return func(v string, k reflect.Value, _ tag) error {
+		return func(v string, k reflect.Value, _ Tag) error {
 			if !k.CanAddr() {
 				return fmt.Errorf("cannot take address of map key, %v", k.Type())
 			}
@@ -714,11 +714,11 @@ func (d *Decoder[T]) getMapKeyDecoder(keyType reflect.Type) (func(string, reflec
 		}, nil
 	}
 
-	var decodeMapKey func(v string, key reflect.Value, fieldTag tag) error
+	var decodeMapKey func(v string, key reflect.Value, fieldTag Tag) error
 
 	switch keyType.Kind() {
 	case reflect.Bool:
-		decodeMapKey = func(v string, key reflect.Value, fieldTag tag) error {
+		decodeMapKey = func(v string, key reflect.Value, fieldTag Tag) error {
 			b, err := strconv.ParseBool(v)
 			if err != nil {
 				return err
@@ -752,7 +752,7 @@ func (d *Decoder[T]) decodeNull(v reflect.Value) error {
 	return nil
 }
 
-func (d *Decoder[T]) decodeString(s string, v reflect.Value, fieldTag tag) error {
+func (d *Decoder[T]) decodeString(s string, v reflect.Value, fieldTag Tag) error {
 	if fieldTag.AsString {
 		return d.decodeNumber(s, v, fieldTag)
 	}
@@ -796,7 +796,7 @@ func (d *Decoder[T]) decodeStringSet(ss []string, v reflect.Value) error {
 	case reflect.Interface:
 		set := make([]string, len(ss))
 		for i, s := range ss {
-			if err := d.decodeString(s, reflect.ValueOf(&set[i]).Elem(), tag{}); err != nil {
+			if err := d.decodeString(s, reflect.ValueOf(&set[i]).Elem(), Tag{}); err != nil {
 				return err
 			}
 		}
@@ -818,7 +818,7 @@ func (d *Decoder[T]) decodeStringSet(ss []string, v reflect.Value) error {
 			}
 			continue
 		}
-		if err := d.decodeString(ss[i], elem, tag{}); err != nil {
+		if err := d.decodeString(ss[i], elem, Tag{}); err != nil {
 			return err
 		}
 	}
@@ -837,7 +837,7 @@ func decodeUnixTime(n string) (time.Time, error) {
 	return time.Unix(v, 0), nil
 }
 
-// decoderFieldByIndex finds the field with the provided nested index, allocating
+// decoderFieldByIndex finds the Field with the provided nested index, allocating
 // embedded parent structs if needed
 func decoderFieldByIndex(v reflect.Value, index []int) reflect.Value {
 	for i, x := range index {
