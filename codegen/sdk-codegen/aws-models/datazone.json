@@ -25986,7 +25986,7 @@
                 "useAssetType": {
                     "target": "com.amazonaws.datazone#UseAssetTypePolicyGrantDetail",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies the domain unit(s) whose projects can use this asset type while creating asset or asset revisions.</p>"
+                        "smithy.api#documentation": "<p> Specifies the domain unit(s) whose projects can use this asset type while creating\n         asset or asset revisions.</p>"
                     }
                 }
             },
@@ -34448,6 +34448,12 @@
                         "smithy.api#documentation": "<p>The glossary terms to be updated as part of the <code>UpdateProject</code>\n         action.</p>"
                     }
                 },
+                "domainUnitId": {
+                    "target": "com.amazonaws.datazone#DomainUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain unit.</p>"
+                    }
+                },
                 "environmentDeploymentDetails": {
                     "target": "com.amazonaws.datazone#EnvironmentDeploymentDetails",
                     "traits": {
@@ -35623,7 +35629,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the domain unit(s) whose projects can use this asset type while creating asset or asset revisions.</p>"
+                "smithy.api#documentation": "<p>Specifies the domain unit(s) whose projects can use this asset type while creating asset\n         or asset revisions.</p>"
             }
         },
         "com.amazonaws.datazone#UserAssignment": {

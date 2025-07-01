@@ -2063,6 +2063,150 @@
                 "smithy.api#streaming": {}
             }
         },
+        "com.amazonaws.qbusiness#ChatResponseConfiguration": {
+            "type": "structure",
+            "members": {
+                "chatResponseConfigurationId": {
+                    "target": "com.amazonaws.qbusiness#ChatResponseConfigurationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for your chat response configuration settings, used to reference and manage the configuration within the Amazon Q Business service.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "chatResponseConfigurationArn": {
+                    "target": "com.amazonaws.qbusiness#ChatResponseConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the chat response configuration, which uniquely identifies the resource across all Amazon Web Services services and accounts.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "displayName": {
+                    "target": "com.amazonaws.qbusiness#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable name for the chat response configuration, making it easier to identify and manage multiple configurations within an organization.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "responseConfigurationSummary": {
+                    "target": "com.amazonaws.qbusiness#ResponseConfigurationSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of the response configuration settings, providing a concise overview of the key parameters that define how responses are generated and formatted.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.qbusiness#ChatResponseConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the chat response configuration, indicating whether it is active, pending, or in another state that affects its availability for use in chat interactions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.qbusiness#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp indicating when the chat response configuration was initially created, useful for tracking the lifecycle of configuration resources.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.qbusiness#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp indicating when the chat response configuration was last modified, helping administrators track changes and maintain version awareness.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration details that define how Amazon Q Business generates and formats responses to user queries in chat interactions. This configuration allows administrators to customize response characteristics to meet specific organizational needs and communication standards.</p>"
+            }
+        },
+        "com.amazonaws.qbusiness#ChatResponseConfigurationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1284
+                },
+                "smithy.api#pattern": "^arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}$"
+            }
+        },
+        "com.amazonaws.qbusiness#ChatResponseConfigurationDetail": {
+            "type": "structure",
+            "members": {
+                "responseConfigurations": {
+                    "target": "com.amazonaws.qbusiness#ResponseConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of specific response configuration settings that collectively define how responses are generated, formatted, and presented to users in chat interactions.</p>"
+                    }
+                },
+                "responseConfigurationSummary": {
+                    "target": "com.amazonaws.qbusiness#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of the response configuration details, providing a concise overview of the key parameters and settings that define the response generation behavior.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.qbusiness#ChatResponseConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the chat response configuration, indicating whether it is active, pending, or in another state that affects its availability for use.</p>"
+                    }
+                },
+                "error": {
+                    "target": "com.amazonaws.qbusiness#ErrorDetail"
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.qbusiness#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp indicating when the detailed chat response configuration was last modified, helping administrators track changes and maintain version awareness.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Detailed information about a chat response configuration, including comprehensive settings and parameters that define how Amazon Q Business generates and formats responses.</p>"
+            }
+        },
+        "com.amazonaws.qbusiness#ChatResponseConfigurationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{35}$"
+            }
+        },
+        "com.amazonaws.qbusiness#ChatResponseConfigurationStatus": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.qbusiness#ChatResponseConfigurations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qbusiness#ChatResponseConfiguration"
+            }
+        },
         "com.amazonaws.qbusiness#ChatSync": {
             "type": "operation",
             "input": {
@@ -2902,6 +3046,123 @@
                     "target": "com.amazonaws.qbusiness#ApplicationArn",
                     "traits": {
                         "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the Amazon Q Business application. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qbusiness#CreateChatResponseConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qbusiness#CreateChatResponseConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qbusiness#CreateChatResponseConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qbusiness#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "qbusiness:GetChatResponseConfiguration",
+                        "qbusiness:TagResource",
+                        "qbusiness:ListTagsForResource"
+                    ]
+                },
+                "smithy.api#documentation": "<p>Creates a new chat response configuration for an Amazon Q Business application. This operation establishes a set of parameters that define how the system generates and formats responses to user queries in chat interactions.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/applications/{applicationId}/chatresponseconfigurations"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.qbusiness#CreateChatResponseConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "applicationId": {
+                    "target": "com.amazonaws.qbusiness#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q Business application for which to create the new chat response configuration.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "displayName": {
+                    "target": "com.amazonaws.qbusiness#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable name for the new chat response configuration, making it easier to identify and manage among multiple configurations.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.qbusiness#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure idempotency of the request. This helps prevent the same configuration from being created multiple times if retries occur.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "responseConfigurations": {
+                    "target": "com.amazonaws.qbusiness#ResponseConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of response configuration settings that define how Amazon Q Business will generate and format responses to user queries in chat interactions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.qbusiness#Tags",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "full",
+                        "smithy.api#documentation": "<p>A list of key-value pairs to apply as tags to the new chat response configuration, enabling categorization and management of resources across Amazon Web Services services.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qbusiness#CreateChatResponseConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "chatResponseConfigurationId": {
+                    "target": "com.amazonaws.qbusiness#ChatResponseConfigurationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier assigned to a newly created chat response configuration, used for subsequent operations on this resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "chatResponseConfigurationArn": {
+                    "target": "com.amazonaws.qbusiness#ChatResponseConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the newly created chat response configuration, which uniquely identifies the resource across all Amazon Web Services services. </p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -3998,8 +4259,7 @@
                 "apiSchema": {
                     "target": "com.amazonaws.qbusiness#APISchema",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains either details about the S3 object containing the OpenAPI schema for the action group or the JSON or YAML-formatted payload defining the schema.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Contains either details about the S3 object containing the OpenAPI schema for the action group or the JSON or YAML-formatted payload defining the schema.</p>"
                     }
                 }
             },
@@ -4613,7 +4873,7 @@
                 "boostingLevel": {
                     "target": "com.amazonaws.qbusiness#DocumentAttributeBoostingLevel",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies how much a document attribute is boosted.</p>",
+                        "smithy.api#documentation": "<p>Specifies the priority tier ranking of boosting applied to document attributes. For version 2, this parameter indicates the relative ranking between boosted fields (ONE being highest priority, TWO being second highest, etc.) and determines the order in which attributes influence document ranking in search results. For version 1, this parameter specifies the boosting intensity. For version 2, boosting intensity (VERY HIGH, HIGH, MEDIUM, LOW, NONE) are not supported. Note that in version 2, you are not allowed to boost on only one field and make this value TWO.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4828,6 +5088,79 @@
             }
         },
         "com.amazonaws.qbusiness#DeleteChatControlsConfigurationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qbusiness#DeleteChatResponseConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qbusiness#DeleteChatResponseConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qbusiness#DeleteChatResponseConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qbusiness#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "qbusiness:GetChatResponseConfiguration"
+                    ]
+                },
+                "smithy.api#documentation": "<p>Deletes a specified chat response configuration from an Amazon Q Business application.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/applications/{applicationId}/chatresponseconfigurations/{chatResponseConfigurationId}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.qbusiness#DeleteChatResponseConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "applicationId": {
+                    "target": "com.amazonaws.qbusiness#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of theAmazon Q Business application from which to delete the chat response configuration.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "chatResponseConfigurationId": {
+                    "target": "com.amazonaws.qbusiness#ChatResponseConfigurationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the chat response configuration to delete from the specified application. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qbusiness#DeleteChatResponseConfigurationResponse": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -5593,6 +5926,15 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.qbusiness#DisplayName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.qbusiness#Document": {
             "type": "structure",
             "members": {
@@ -5802,30 +6144,30 @@
                 "numberConfiguration": {
                     "target": "com.amazonaws.qbusiness#NumberAttributeBoostingConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides information on boosting <code>NUMBER</code> type document attributes.</p>"
+                        "smithy.api#documentation": "<p>Provides information on boosting <code>NUMBER</code> type document attributes.</p> <p> <code>NUMBER</code> attributes are not supported when using <code>NativeIndexConfiguration</code> version 2, which focuses on <code>DATE</code> attributes for recency and <code>STRING</code> attributes for source prioritization.</p>"
                     }
                 },
                 "stringConfiguration": {
                     "target": "com.amazonaws.qbusiness#StringAttributeBoostingConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides information on boosting <code>STRING</code> type document attributes.</p>"
+                        "smithy.api#documentation": "<p>Provides information on boosting <code>STRING</code> type document attributes.</p> <p>Version 2 assigns priority tiers to <code>STRING</code> attributes, establishing clear hierarchical relationships with other boosted attributes.</p>"
                     }
                 },
                 "dateConfiguration": {
                     "target": "com.amazonaws.qbusiness#DateAttributeBoostingConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides information on boosting <code>DATE</code> type document attributes.</p>"
+                        "smithy.api#documentation": "<p>Provides information on boosting <code>DATE</code> type document attributes.</p> <p>Version 2 assigns priority tiers to <code>DATE</code> attributes, establishing clear hierarchical relationships with other boosted attributes.</p>"
                     }
                 },
                 "stringListConfiguration": {
                     "target": "com.amazonaws.qbusiness#StringListAttributeBoostingConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides information on boosting <code>STRING_LIST</code> type document attributes.</p>"
+                        "smithy.api#documentation": "<p>Provides information on boosting <code>STRING_LIST</code> type document attributes.</p> <p> <code>STRING_LIST</code> attributes are not supported when using <code>NativeIndexConfiguration</code> version 2, which focuses on <code>DATE</code> attributes for recency and <code>STRING</code> attributes for source prioritization.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information on boosting supported Amazon Q Business document attribute types. When an end user chat query matches document attributes that have been boosted, Amazon Q Business prioritizes generating responses from content that matches the boosted document attributes.</p> <note> <p>For <code>STRING</code> and <code>STRING_LIST</code> type document attributes to be used for boosting on the console and the API, they must be enabled for search using the <a href=\"https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeConfiguration.html\">DocumentAttributeConfiguration</a> object of the <a href=\"https://docs.aws.amazon.com/amazonq/latest/api-reference/API_UpdateIndex.html\">UpdateIndex</a> API. If you haven't enabled searching on these attributes, you can't boost attributes of these data types on either the console or the API.</p> </note> <p>For more information on how boosting document attributes work in Amazon Q Business, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html\">Boosting using document attributes</a>.</p>"
+                "smithy.api#documentation": "<p>Provides information on boosting supported Amazon Q Business document attribute types. When an end user chat query matches document attributes that have been boosted, Amazon Q Business prioritizes generating responses from content that matches the boosted document attributes.</p> <p>In version 2, boosting uses numeric values (ONE, TWO) to indicate priority tiers that establish clear hierarchical relationships between boosted attributes. This allows for more precise control over how different attributes influence search results.</p> <note> <p>For <code>STRING</code> and <code>STRING_LIST</code> type document attributes to be used for boosting on the console and the API, they must be enabled for search using the <a href=\"https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeConfiguration.html\">DocumentAttributeConfiguration</a> object of the <a href=\"https://docs.aws.amazon.com/amazonq/latest/api-reference/API_UpdateIndex.html\">UpdateIndex</a> API. If you haven't enabled searching on these attributes, you can't boost attributes of these data types on either the console or the API.</p> </note> <p>For more information on how boosting document attributes work in Amazon Q Business, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html\">Boosting using document attributes</a>.</p>"
             }
         },
         "com.amazonaws.qbusiness#DocumentAttributeBoostingLevel": {
@@ -5859,6 +6201,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "VERY_HIGH"
+                    }
+                },
+                "ONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ONE"
+                    }
+                },
+                "TWO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TWO"
                     }
                 }
             }
@@ -6456,6 +6810,9 @@
                     "target": "com.amazonaws.qbusiness#CreateAnonymousWebExperienceUrl"
                 },
                 {
+                    "target": "com.amazonaws.qbusiness#CreateChatResponseConfiguration"
+                },
+                {
                     "target": "com.amazonaws.qbusiness#CreateSubscription"
                 },
                 {
@@ -6466,6 +6823,9 @@
                 },
                 {
                     "target": "com.amazonaws.qbusiness#DeleteChatControlsConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#DeleteChatResponseConfiguration"
                 },
                 {
                     "target": "com.amazonaws.qbusiness#DeleteConversation"
@@ -6483,6 +6843,9 @@
                     "target": "com.amazonaws.qbusiness#GetChatControlsConfiguration"
                 },
                 {
+                    "target": "com.amazonaws.qbusiness#GetChatResponseConfiguration"
+                },
+                {
                     "target": "com.amazonaws.qbusiness#GetGroup"
                 },
                 {
@@ -6496,6 +6859,9 @@
                 },
                 {
                     "target": "com.amazonaws.qbusiness#ListAttachments"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ListChatResponseConfigurations"
                 },
                 {
                     "target": "com.amazonaws.qbusiness#ListConversations"
@@ -6550,6 +6916,9 @@
                 },
                 {
                     "target": "com.amazonaws.qbusiness#UpdateChatControlsConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#UpdateChatResponseConfiguration"
                 },
                 {
                     "target": "com.amazonaws.qbusiness#UpdateSubscription"
@@ -7341,6 +7710,113 @@
                     "target": "com.amazonaws.qbusiness#HallucinationReductionConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p> The hallucination reduction settings for your application.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qbusiness#GetChatResponseConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qbusiness#GetChatResponseConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qbusiness#GetChatResponseConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qbusiness#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "qbusiness:ListTagsForResource"
+                    ]
+                },
+                "smithy.api#documentation": "<p>Retrieves detailed information about a specific chat response configuration from an Amazon Q Business application. This operation returns the complete configuration settings and metadata.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/applications/{applicationId}/chatresponseconfigurations/{chatResponseConfigurationId}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.qbusiness#GetChatResponseConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "applicationId": {
+                    "target": "com.amazonaws.qbusiness#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q Business application containing the chat response configuration to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "chatResponseConfigurationId": {
+                    "target": "com.amazonaws.qbusiness#ChatResponseConfigurationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the chat response configuration to retrieve from the specified application.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qbusiness#GetChatResponseConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "chatResponseConfigurationId": {
+                    "target": "com.amazonaws.qbusiness#ChatResponseConfigurationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the retrieved chat response configuration.</p>"
+                    }
+                },
+                "chatResponseConfigurationArn": {
+                    "target": "com.amazonaws.qbusiness#ChatResponseConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the retrieved chat response configuration, which uniquely identifies the resource across all Amazon Web Services services. </p>"
+                    }
+                },
+                "displayName": {
+                    "target": "com.amazonaws.qbusiness#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The human-readable name of the retrieved chat response configuration, making it easier to identify among multiple configurations.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.qbusiness#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp indicating when the chat response configuration was initially created.</p>"
+                    }
+                },
+                "inUseConfiguration": {
+                    "target": "com.amazonaws.qbusiness#ChatResponseConfigurationDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The currently active configuration settings that are being used to generate responses in the Amazon Q Business application.</p>"
+                    }
+                },
+                "lastUpdateConfiguration": {
+                    "target": "com.amazonaws.qbusiness#ChatResponseConfigurationDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the most recent update to the configuration, including timestamp and modification details.</p>"
                     }
                 }
             },
@@ -9184,6 +9660,72 @@
                 "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$"
             }
         },
+        "com.amazonaws.qbusiness#Instruction": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 5,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.qbusiness#InstructionCollection": {
+            "type": "structure",
+            "members": {
+                "responseLength": {
+                    "target": "com.amazonaws.qbusiness#Instruction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the desired length of responses generated by Amazon Q Business. This parameter allows administrators to control whether responses are concise and brief or more detailed and comprehensive.</p>"
+                    }
+                },
+                "targetAudience": {
+                    "target": "com.amazonaws.qbusiness#Instruction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the intended audience for the responses, allowing Amazon Q Business to tailor its language, terminology, and explanations appropriately. This could range from technical experts to general users with varying levels of domain knowledge.</p>"
+                    }
+                },
+                "perspective": {
+                    "target": "com.amazonaws.qbusiness#Instruction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines the point of view or perspective from which Amazon Q Business generates responses, such as first-person, second-person, or third-person perspective, affecting how information is presented to users.</p>"
+                    }
+                },
+                "outputStyle": {
+                    "target": "com.amazonaws.qbusiness#Instruction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the formatting and structural style of responses, such as bullet points, paragraphs, step-by-step instructions, or other organizational formats that enhance readability and comprehension.</p>"
+                    }
+                },
+                "identity": {
+                    "target": "com.amazonaws.qbusiness#Instruction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the persona or identity that Amazon Q Business should adopt when responding to users, allowing for customization of the assistant's character, role, or representation within an organization.</p>"
+                    }
+                },
+                "tone": {
+                    "target": "com.amazonaws.qbusiness#Instruction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Controls the emotional tone and communication style of responses, such as formal, casual, technical, friendly, or professional, to align with organizational communication standards and user expectations.</p>"
+                    }
+                },
+                "customInstructions": {
+                    "target": "com.amazonaws.qbusiness#Instruction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows administrators to provide specific, custom instructions that guide how Amazon Q Business should respond in particular scenarios or to certain types of queries, enabling fine-grained control over response generation.</p>"
+                    }
+                },
+                "examples": {
+                    "target": "com.amazonaws.qbusiness#Instruction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides sample responses or templates that Amazon Q Business can reference when generating responses, helping to establish consistent patterns and formats for different types of user queries.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A set of instructions that define how Amazon Q Business should generate and format responses to user queries. This collection includes parameters for controlling response characteristics such as length, audience targeting, perspective, style, identity, tone, and custom instructions.</p>"
+            }
+        },
         "com.amazonaws.qbusiness#Integer": {
             "type": "integer"
         },
@@ -9469,6 +10011,96 @@
                     "target": "com.amazonaws.qbusiness#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If the response is truncated, Amazon Q Business returns this token, which you can use in a later request to list the next set of attachments.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qbusiness#ListChatResponseConfigurations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qbusiness#ListChatResponseConfigurationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qbusiness#ListChatResponseConfigurationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qbusiness#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list of all chat response configurations available in a specified Amazon Q Business application. This operation returns summary information about each configuration to help administrators manage and select appropriate response settings.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/applications/{applicationId}/chatresponseconfigurations"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "chatResponseConfigurations"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.qbusiness#ListChatResponseConfigurationsRequest": {
+            "type": "structure",
+            "members": {
+                "applicationId": {
+                    "target": "com.amazonaws.qbusiness#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q Business application for which to list available chat response configurations.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.qbusiness#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of chat response configurations to return in a single response. This parameter helps control pagination of results when many configurations exist.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.qbusiness#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token used to retrieve the next set of results when the number of configurations exceeds the specified <code>maxResults</code> value.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qbusiness#ListChatResponseConfigurationsResponse": {
+            "type": "structure",
+            "members": {
+                "chatResponseConfigurations": {
+                    "target": "com.amazonaws.qbusiness#ChatResponseConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of chat response configuration summaries, each containing key information about an available configuration in the specified application.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.qbusiness#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token that can be used in a subsequent request to retrieve additional chat response configurations if the results were truncated due to the <code>maxResults</code> parameter.</p>"
                     }
                 }
             },
@@ -11613,6 +12245,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "version": {
+                    "target": "com.amazonaws.qbusiness#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A read-only field that specifies the version of the <code>NativeIndexConfiguration</code>.</p> <p>Amazon Q Business introduces enhanced document retrieval capabilities in version 2 of <code>NativeIndexConfiguration</code>, focusing on streamlined metadata boosting that prioritizes recency and source relevance to deliver more accurate responses to your queries. Version 2 has the following differences from version 1:</p> <ul> <li> <p>Version 2 supports a single Date field (created_at OR last_updated_at) for recency boosting</p> </li> <li> <p>Version 2 supports a single String field with an ordered list of up to 5 values</p> </li> <li> <p>Version 2 introduces number-based boost levels (ONE, TWO) alongside the text-based levels</p> </li> <li> <p>Version 2 allows specifying prioritization between Date and String fields</p> </li> <li> <p>Version 2 maintains backward compatibility with existing configurations</p> </li> </ul>"
+                    }
+                },
                 "boostingOverride": {
                     "target": "com.amazonaws.qbusiness#DocumentAttributeBoostingOverrideMap",
                     "traits": {
@@ -11655,19 +12293,19 @@
                 "boostingLevel": {
                     "target": "com.amazonaws.qbusiness#DocumentAttributeBoostingLevel",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the duration, in seconds, of a boost applies to a <code>NUMBER</code> type document attribute.</p>",
+                        "smithy.api#documentation": "<p>Specifies the priority of boosted document attributes in relation to other boosted attributes. This parameter determines how strongly the attribute influences document ranking in search results. <code>NUMBER</code> attributes can serve as additional boosting factors when needed, but are not supported when using <code>NativeIndexConfiguration</code> version 2.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "boostingType": {
                     "target": "com.amazonaws.qbusiness#NumberAttributeBoostingType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies how much a document attribute is boosted.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether higher or lower numeric values should be prioritized when boosting. Valid values are ASCENDING (higher numbers are more important) and DESCENDING (lower numbers are more important).</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information on boosting <code>NUMBER</code> type document attributes.</p> <p>For more information on how boosting document attributes work in Amazon Q Business, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html\">Boosting using document attributes</a>.</p>"
+                "smithy.api#documentation": "<p>Provides information on boosting <code>NUMBER</code> type document attributes.</p> <p>In the current boosting implementation, boosting focuses primarily on <code>DATE</code> attributes for recency and <code>STRING</code> attributes for source prioritization. <code>NUMBER</code> attributes can serve as additional boosting factors when needed, but are not supported when using <code>NativeIndexConfiguration</code> version 2.</p> <p>For more information on how boosting document attributes work in Amazon Q Business, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html\">Boosting using document attributes</a>.</p>"
             }
         },
         "com.amazonaws.qbusiness#NumberAttributeBoostingType": {
@@ -12757,6 +13395,55 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.qbusiness#ResponseConfiguration": {
+            "type": "structure",
+            "members": {
+                "instructionCollection": {
+                    "target": "com.amazonaws.qbusiness#InstructionCollection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of instructions that guide how Amazon Q Business generates responses, including parameters for response length, target audience, perspective, output style, identity, tone, and custom instructions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration settings to define how Amazon Q Business generates and formats responses to user queries. This includes customization options for response style, tone, length, and other characteristics.</p>"
+            }
+        },
+        "com.amazonaws.qbusiness#ResponseConfigurationSummary": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.qbusiness#ResponseConfigurationType": {
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.qbusiness#ResponseConfigurations": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.qbusiness#ResponseConfigurationType"
+            },
+            "value": {
+                "target": "com.amazonaws.qbusiness#ResponseConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.qbusiness#ResponseScope": {
             "type": "enum",
             "members": {
@@ -13698,14 +14385,14 @@
                 "boostingLevel": {
                     "target": "com.amazonaws.qbusiness#DocumentAttributeBoostingLevel",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies how much a document attribute is boosted.</p>",
+                        "smithy.api#documentation": "<p>Specifies the priority tier ranking of boosting applied to document attributes. For version 2, this parameter indicates the relative ranking between boosted fields (ONE being highest priority, TWO being second highest, etc.) and determines the order in which attributes influence document ranking in search results. For version 1, this parameter specifies the boosting intensity. For version 2, boosting intensity (VERY HIGH, HIGH, MEDIUM, LOW, NONE) are not supported. Note that in version 2, you are not allowed to boost on only one field and make this value TWO.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "attributeValueBoosting": {
                     "target": "com.amazonaws.qbusiness#StringAttributeValueBoosting",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies specific values of a <code>STRING</code> type document attribute being boosted.</p>"
+                        "smithy.api#documentation": "<p>Specifies specific values of a <code>STRING</code> type document attribute being boosted. When using <code>NativeIndexConfiguration</code> version 2, you can specify up to five values in order of priority.</p>"
                     }
                 }
             },
@@ -13754,6 +14441,36 @@
                     "traits": {
                         "smithy.api#enumValue": "VERY_HIGH"
                     }
+                },
+                "ONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ONE"
+                    }
+                },
+                "TWO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TWO"
+                    }
+                },
+                "THREE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THREE"
+                    }
+                },
+                "FOUR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FOUR"
+                    }
+                },
+                "FIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIVE"
+                    }
                 }
             }
         },
@@ -13763,13 +14480,13 @@
                 "boostingLevel": {
                     "target": "com.amazonaws.qbusiness#DocumentAttributeBoostingLevel",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies how much a document attribute is boosted.</p>",
+                        "smithy.api#documentation": "<p>Specifies the priority of boosted document attributes in relation to other boosted attributes. This parameter determines how strongly the attribute influences document ranking in search results. <code>STRING_LIST</code> attributes can serve as additional boosting factors when needed, but are not supported when using <code>NativeIndexConfiguration</code> version 2.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information on boosting <code>STRING_LIST</code> type document attributes.</p> <note> <p>For <code>STRING</code> and <code>STRING_LIST</code> type document attributes to be used for boosting on the console and the API, they must be enabled for search using the <a href=\"https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeConfiguration.html\">DocumentAttributeConfiguration</a> object of the <a href=\"https://docs.aws.amazon.com/amazonq/latest/api-reference/API_UpdateIndex.html\">UpdateIndex</a> API. If you haven't enabled searching on these attributes, you can't boost attributes of these data types on either the console or the API.</p> </note> <p>For more information on how boosting document attributes work in Amazon Q Business, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html\">Boosting using document attributes</a>.</p>"
+                "smithy.api#documentation": "<p>Provides information on boosting <code>STRING_LIST</code> type document attributes.</p> <p>In the current boosting implementation, boosting focuses primarily on <code>DATE</code> attributes for recency and <code>STRING</code> attributes for source prioritization. <code>STRING_LIST</code> attributes can serve as additional boosting factors when needed, but are not supported when using <code>NativeIndexConfiguration</code> version 2.</p> <note> <p>For <code>STRING</code> and <code>STRING_LIST</code> type document attributes to be used for boosting on the console and the API, they must be enabled for search using the <a href=\"https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeConfiguration.html\">DocumentAttributeConfiguration</a> object of the <a href=\"https://docs.aws.amazon.com/amazonq/latest/api-reference/API_UpdateIndex.html\">UpdateIndex</a> API. If you haven't enabled searching on these attributes, you can't boost attributes of these data types on either the console or the API.</p> </note> <p>For more information on how boosting document attributes work in Amazon Q Business, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html\">Boosting using document attributes</a>.</p>"
             }
         },
         "com.amazonaws.qbusiness#SubnetId": {
@@ -14602,6 +15319,102 @@
             }
         },
         "com.amazonaws.qbusiness#UpdateChatControlsConfigurationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qbusiness#UpdateChatResponseConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qbusiness#UpdateChatResponseConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qbusiness#UpdateChatResponseConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qbusiness#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "qbusiness:GetChatResponseConfiguration",
+                        "qbusiness:TagResource",
+                        "qbusiness:UntagResource",
+                        "qbusiness:ListTagsForResource"
+                    ]
+                },
+                "smithy.api#documentation": "<p>Updates an existing chat response configuration in an Amazon Q Business application. This operation allows administrators to modify configuration settings, display name, and response parameters to refine how the system generates responses.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/applications/{applicationId}/chatresponseconfigurations/{chatResponseConfigurationId}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.qbusiness#UpdateChatResponseConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "applicationId": {
+                    "target": "com.amazonaws.qbusiness#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q Business application containing the chat response configuration to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "chatResponseConfigurationId": {
+                    "target": "com.amazonaws.qbusiness#ChatResponseConfigurationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the chat response configuration to update within the specified application.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "displayName": {
+                    "target": "com.amazonaws.qbusiness#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new human-readable name to assign to the chat response configuration, making it easier to identify among multiple configurations.</p>"
+                    }
+                },
+                "responseConfigurations": {
+                    "target": "com.amazonaws.qbusiness#ResponseConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated collection of response configuration settings that define how Amazon Q Business generates and formats responses to user queries.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.qbusiness#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure idempotency of the request. This helps prevent the same update from being processed multiple times if retries occur.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qbusiness#UpdateChatResponseConfigurationResponse": {
             "type": "structure",
             "members": {},
             "traits": {

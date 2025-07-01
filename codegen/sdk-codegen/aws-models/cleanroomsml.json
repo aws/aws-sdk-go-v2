@@ -97,7 +97,7 @@
                     ],
                     "maxAge": 86400
                 },
-                "smithy.api#documentation": "<p>Welcome to the <i>Amazon Web Services Clean Rooms ML API Reference</i>.</p>\n         <p>Amazon Web Services Clean Rooms ML provides a privacy-enhancing method for two parties to identify similar users in their data without the need to share their data with each other. The first party brings the training data to Clean Rooms so that they can create and configure an audience model (lookalike model) and associate it with a collaboration. The second party then brings their seed data to Clean Rooms  and generates an audience (lookalike segment) that resembles the training data.</p>\n         <p>To learn more about Amazon Web Services Clean Rooms ML concepts, procedures, and best practices, see the\n       <a href=\"https://docs.aws.amazon.com/clean-rooms/latest/userguide/machine-learning.html\">Clean Rooms User Guide</a>.</p>\n         <p>To learn more about SQL commands, functions, and conditions supported in Clean Rooms, see the\n       <a href=\"https://docs.aws.amazon.com/clean-rooms/latest/sql-reference/sql-reference.html\">Clean Rooms SQL Reference</a>.</p>",
+                "smithy.api#documentation": "<p>Welcome to the <i>Amazon Web Services Clean Rooms ML API Reference</i>.</p> <p>Amazon Web Services Clean Rooms ML provides a privacy-enhancing method for two parties to identify similar users in their data without the need to share their data with each other. The first party brings the training data to Clean Rooms so that they can create and configure an audience model (lookalike model) and associate it with a collaboration. The second party then brings their seed data to Clean Rooms and generates an audience (lookalike segment) that resembles the training data.</p> <p>To learn more about Amazon Web Services Clean Rooms ML concepts, procedures, and best practices, see the <a href=\"https://docs.aws.amazon.com/clean-rooms/latest/userguide/machine-learning.html\">Clean Rooms User Guide</a>.</p> <p>To learn more about SQL commands, functions, and conditions supported in Clean Rooms, see the <a href=\"https://docs.aws.amazon.com/clean-rooms/latest/sql-reference/sql-reference.html\">Clean Rooms SQL Reference</a>.</p>",
                 "smithy.api#title": "AWS Clean Rooms ML",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -1019,7 +1019,7 @@
                 "dataSource": {
                     "target": "com.amazonaws.cleanroomsml#S3ConfigMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the Amazon S3 bucket where the seed audience for the generating audience is stored. A valid data source is a JSON line file in the following format:</p>\n         <p>\n            <code>{\"user_id\": \"111111\"}</code>\n         </p>\n         <p>\n            <code>{\"user_id\": \"222222\"}</code>\n         </p>\n         <p>\n            <code>...</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Defines the Amazon S3 bucket where the seed audience for the generating audience is stored. A valid data source is a JSON line file in the following format:</p> <p> <code>{\"user_id\": \"111111\"}</code> </p> <p> <code>{\"user_id\": \"222222\"}</code> </p> <p> <code>...</code> </p>"
                     }
                 },
                 "roleArn": {
@@ -1330,7 +1330,7 @@
                 "recallMetric": {
                     "target": "smithy.api#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>The recall score of the generated audience. Recall is the percentage of the most similar users (by default, the most similar 20%) from a sample of the training data that are included in the seed audience by the audience generation job. Values range from 0-1, larger values indicate a better audience. A recall value approximately equal to the maximum bin size indicates that the audience model is equivalent to random selection.\n      </p>",
+                        "smithy.api#documentation": "<p>The recall score of the generated audience. Recall is the percentage of the most similar users (by default, the most similar 20%) from a sample of the training data that are included in the seed audience by the audience generation job. Values range from 0-1, larger values indicate a better audience. A recall value approximately equal to the maximum bin size indicates that the audience model is equivalent to random selection. </p>",
                         "smithy.api#range": {
                             "min": 0.0,
                             "max": 1.0
@@ -1348,7 +1348,7 @@
                 "type": {
                     "target": "com.amazonaws.cleanroomsml#AudienceSizeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether the audience size is defined in absolute terms or as a percentage. You can use the <code>ABSOLUTE</code>\n            <a>AudienceSize</a> to configure out audience sizes using the count of identifiers in the output. You can use the <code>Percentage</code>\n            <a>AudienceSize</a> to configure sizes in the range 1-100 percent.</p>",
+                        "smithy.api#documentation": "<p>Whether the audience size is defined in absolute terms or as a percentage. You can use the <code>ABSOLUTE</code> <a>AudienceSize</a> to configure out audience sizes using the count of identifiers in the output. You can use the <code>Percentage</code> <a>AudienceSize</a> to configure sizes in the range 1-100 percent.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1396,7 +1396,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns the relevance scores at these audience sizes when used in the <a>GetAudienceGenerationJob</a> for a specified audience generation job and configured audience model.</p>\n         <p>Specifies the list of allowed <code>audienceSize</code> values when used in the <a>StartAudienceExportJob</a> for an audience generation job. You can use the <code>ABSOLUTE</code>\n            <a>AudienceSize</a> to configure out audience sizes using the count of identifiers in the output. You can use the <code>Percentage</code>\n            <a>AudienceSize</a> to configure sizes in the range 1-100 percent.</p>"
+                "smithy.api#documentation": "<p>Returns the relevance scores at these audience sizes when used in the <a>GetAudienceGenerationJob</a> for a specified audience generation job and configured audience model.</p> <p>Specifies the list of allowed <code>audienceSize</code> values when used in the <a>StartAudienceExportJob</a> for an audience generation job. You can use the <code>ABSOLUTE</code> <a>AudienceSize</a> to configure out audience sizes using the count of identifiers in the output. You can use the <code>Percentage</code> <a>AudienceSize</a> to configure sizes in the range 1-100 percent.</p>"
             }
         },
         "com.amazonaws.cleanroomsml#AudienceSizeType": {
@@ -1444,6 +1444,9 @@
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
                 }
             ],
@@ -1474,6 +1477,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -1530,6 +1536,13 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the trained model job that you want to cancel.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "versionIdentifier": {
+                    "target": "com.amazonaws.cleanroomsml#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier of the trained model to cancel. This parameter allows you to specify which version of the trained model you want to cancel when multiple versions exist.</p> <p>If <code>versionIdentifier</code> is not specified, the base model will be cancelled.</p>",
+                        "smithy.api#httpQuery": "versionIdentifier"
                     }
                 }
             },
@@ -1772,6 +1785,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "trainedModelVersionIdentifier": {
+                    "target": "com.amazonaws.cleanroomsml#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier of the trained model that was exported in this job.</p>"
+                    }
+                },
                 "membershipIdentifier": {
                     "target": "com.amazonaws.cleanroomsml#UUID",
                     "traits": {
@@ -1825,6 +1844,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the trained model that is used for the trained model inference job.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "trainedModelVersionIdentifier": {
+                    "target": "com.amazonaws.cleanroomsml#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier of the trained model that was used for inference in this job.</p>"
                     }
                 },
                 "collaborationIdentifier": {
@@ -1950,6 +1975,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the trained model.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "versionIdentifier": {
+                    "target": "com.amazonaws.cleanroomsml#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier of this trained model version.</p>"
+                    }
+                },
+                "incrementalTrainingDataChannels": {
+                    "target": "com.amazonaws.cleanroomsml#IncrementalTrainingDataChannelsOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the incremental training data channels used to create this version of the trained model.</p>"
                     }
                 },
                 "description": {
@@ -2342,7 +2379,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws[-a-z]*:cleanrooms-ml:[-a-z0-9]+:[0-9]{12}:(membership/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/)?configured-model-algorithm-association/[-a-zA-Z0-9_/.]+$"
+                "smithy.api#pattern": "^arn:aws[-a-z]*:cleanrooms-ml:[-a-z0-9]+:[0-9]{12}:membership/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/configured-model-algorithm-association/[-a-zA-Z0-9_/.]+$"
             }
         },
         "com.amazonaws.cleanroomsml#ConfiguredModelAlgorithmAssociationArnList": {
@@ -2516,7 +2553,7 @@
                 "imageUri": {
                     "target": "com.amazonaws.cleanroomsml#AlgorithmImage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The registry path of the docker image that contains the algorithm. Clean Rooms ML supports both <code>registry/repository[:tag]</code> and <code>registry/repositry[@digest]</code> image path formats. For more information about using images in Clean Rooms ML, see the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AlgorithmSpecification.html#sagemaker-Type-AlgorithmSpecification-TrainingImage\">Sagemaker API reference</a>.</p>",
+                        "smithy.api#documentation": "<p>The registry path of the docker image that contains the algorithm. Clean Rooms ML currently only supports the <code>registry/repository[:tag]</code> image path format. For more information about using images in Clean Rooms ML, see the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AlgorithmSpecification.html#sagemaker-Type-AlgorithmSpecification-TrainingImage\">Sagemaker API reference</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2640,7 +2677,7 @@
                 "tags": {
                     "target": "com.amazonaws.cleanroomsml#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>"
                     }
                 },
                 "description": {
@@ -2751,19 +2788,19 @@
                 "audienceSizeConfig": {
                     "target": "com.amazonaws.cleanroomsml#AudienceSizeConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configure the list of output sizes of audiences that can be created using this configured audience model. A request to <a>StartAudienceGenerationJob</a> that uses this configured audience model must have an <code>audienceSize</code> selected from this list. You can use the <code>ABSOLUTE</code>\n            <a>AudienceSize</a> to configure out audience sizes using the count of identifiers in the output. You can use the <code>Percentage</code>\n            <a>AudienceSize</a> to configure sizes in the range 1-100 percent.</p>"
+                        "smithy.api#documentation": "<p>Configure the list of output sizes of audiences that can be created using this configured audience model. A request to <a>StartAudienceGenerationJob</a> that uses this configured audience model must have an <code>audienceSize</code> selected from this list. You can use the <code>ABSOLUTE</code> <a>AudienceSize</a> to configure out audience sizes using the count of identifiers in the output. You can use the <code>Percentage</code> <a>AudienceSize</a> to configure sizes in the range 1-100 percent.</p>"
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.cleanroomsml#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>"
                     }
                 },
                 "childResourceTagOnCreatePolicy": {
                     "target": "com.amazonaws.cleanroomsml#TagOnCreatePolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configure how the service tags audience generation jobs created using this configured audience model. If you specify <code>NONE</code>, the tags from the <a>StartAudienceGenerationJob</a> request determine the tags of the audience generation job. If you specify <code>FROM_PARENT_RESOURCE</code>, the audience generation job inherits the tags from the configured audience model, by default. Tags in the <a>StartAudienceGenerationJob</a> will override the default.</p>\n         <p>When the client is in a different account than the configured audience model, the tags from the client are never applied to a resource in the caller's account.</p>"
+                        "smithy.api#documentation": "<p>Configure how the service tags audience generation jobs created using this configured audience model. If you specify <code>NONE</code>, the tags from the <a>StartAudienceGenerationJob</a> request determine the tags of the audience generation job. If you specify <code>FROM_PARENT_RESOURCE</code>, the audience generation job inherits the tags from the configured audience model, by default. Tags in the <a>StartAudienceGenerationJob</a> will override the default.</p> <p>When the client is in a different account than the configured audience model, the tags from the client are never applied to a resource in the caller's account.</p>"
                     }
                 }
             },
@@ -2840,6 +2877,9 @@
                     "target": "com.amazonaws.cleanroomsml#ServiceQuotaExceededException"
                 },
                 {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
                 }
             ],
@@ -2893,7 +2933,7 @@
                 "tags": {
                     "target": "com.amazonaws.cleanroomsml#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>"
                     }
                 }
             },
@@ -2954,7 +2994,7 @@
                 "tags": {
                     "target": "com.amazonaws.cleanroomsml#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>"
                     }
                 },
                 "kmsKeyArn": {
@@ -3003,6 +3043,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -3080,7 +3123,7 @@
                 "tags": {
                     "target": "com.amazonaws.cleanroomsml#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>"
                     }
                 }
             },
@@ -3119,10 +3162,16 @@
                     "target": "com.amazonaws.cleanroomsml#ConflictException"
                 },
                 {
+                    "target": "com.amazonaws.cleanroomsml#InternalServiceException"
+                },
+                {
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -3188,11 +3237,24 @@
                         "smithy.api#documentation": "<p>The criteria that is used to stop model training.</p>"
                     }
                 },
+                "incrementalTrainingDataChannels": {
+                    "target": "com.amazonaws.cleanroomsml#IncrementalTrainingDataChannels",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the incremental training data channels for the trained model. </p> <p>Incremental training allows you to create a new trained model with updates without retraining from scratch. You can specify up to one incremental training data channel that references a previously trained model and its version.</p> <p>Limit: Maximum of 20 channels total (including both <code>incrementalTrainingDataChannels</code> and <code>dataChannels</code>).</p>"
+                    }
+                },
                 "dataChannels": {
                     "target": "com.amazonaws.cleanroomsml#ModelTrainingDataChannels",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the data channels that are used as input for the trained model request.</p>",
+                        "smithy.api#documentation": "<p>Defines the data channels that are used as input for the trained model request.</p> <p>Limit: Maximum of 20 channels total (including both <code>dataChannels</code> and <code>incrementalTrainingDataChannels</code>).</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "trainingInputMode": {
+                    "target": "com.amazonaws.cleanroomsml#TrainingInputMode",
+                    "traits": {
+                        "smithy.api#default": "File",
+                        "smithy.api#documentation": "<p>The input mode for accessing the training data. This parameter determines how the training data is made available to the training algorithm. Valid values are:</p> <ul> <li> <p> <code>File</code> - The training data is downloaded to the training instance and made available as files.</p> </li> <li> <p> <code>FastFile</code> - The training data is streamed directly from Amazon S3 to the training algorithm, providing faster access for large datasets.</p> </li> <li> <p> <code>Pipe</code> - The training data is streamed to the training algorithm using named pipes, which can improve performance for certain algorithms.</p> </li> </ul>"
                     }
                 },
                 "description": {
@@ -3210,7 +3272,7 @@
                 "tags": {
                     "target": "com.amazonaws.cleanroomsml#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>"
                     }
                 }
             },
@@ -3226,6 +3288,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the trained model.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "versionIdentifier": {
+                    "target": "com.amazonaws.cleanroomsml#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique version identifier assigned to the newly created trained model. This identifier can be used to reference this specific version of the trained model in subsequent operations such as inference jobs or incremental training.</p> <p>The initial version identifier for the base version of the trained model is \"NULL\".</p>"
                     }
                 }
             },
@@ -3275,7 +3343,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.cleanroomsml#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role that Clean Rooms ML can assume to read the data referred to in the <code>dataSource</code> field of each dataset.</p>\n         <p>Passing a role across AWS accounts is not allowed. If you pass a role that isn't in your account, you get an <code>AccessDeniedException</code> error.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that Clean Rooms ML can assume to read the data referred to in the <code>dataSource</code> field of each dataset.</p> <p>Passing a role across AWS accounts is not allowed. If you pass a role that isn't in your account, you get an <code>AccessDeniedException</code> error.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3293,7 +3361,7 @@
                 "tags": {
                     "target": "com.amazonaws.cleanroomsml#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>"
                     }
                 },
                 "description": {
@@ -3648,6 +3716,9 @@
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
                 }
             ],
@@ -3717,6 +3788,9 @@
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
                 }
             ],
@@ -3763,6 +3837,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -3821,11 +3898,14 @@
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the output of a trained model.</p>",
+                "smithy.api#documentation": "<p>Deletes the model artifacts stored by the service.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "DELETE",
@@ -3851,6 +3931,13 @@
                         "smithy.api#documentation": "<p>The membership ID of the member that is deleting the trained model output.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "versionIdentifier": {
+                    "target": "com.amazonaws.cleanroomsml#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier of the trained model to delete. If not specified, the operation will delete the base version of the trained model. When specified, only the particular version will be deleted.</p>",
+                        "smithy.api#httpQuery": "versionIdentifier"
                     }
                 }
             },
@@ -4250,6 +4337,9 @@
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
                 }
             ],
@@ -4376,6 +4466,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -4538,6 +4631,9 @@
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
                 }
             ],
@@ -4569,6 +4665,13 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
+                },
+                "versionIdentifier": {
+                    "target": "com.amazonaws.cleanroomsml#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier of the trained model to retrieve. If not specified, the operation returns information about the latest version of the trained model.</p>",
+                        "smithy.api#httpQuery": "versionIdentifier"
+                    }
                 }
             },
             "traits": {
@@ -4597,6 +4700,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the trained model.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "versionIdentifier": {
+                    "target": "com.amazonaws.cleanroomsml#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier of the trained model. This unique identifier distinguishes this version from other versions of the same trained model.</p>"
+                    }
+                },
+                "incrementalTrainingDataChannels": {
+                    "target": "com.amazonaws.cleanroomsml#IncrementalTrainingDataChannelsOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the incremental training data channels used to create this version of the trained model. This includes details about the base model that was used for incremental training and the channel configuration.</p>"
                     }
                 },
                 "name": {
@@ -4633,6 +4748,12 @@
                     "target": "com.amazonaws.cleanroomsml#ResourceConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The EC2 resource configuration that was used to train this model.</p>"
+                    }
+                },
+                "trainingInputMode": {
+                    "target": "com.amazonaws.cleanroomsml#TrainingInputMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input mode that was used for accessing the training data when this trained model was created. This indicates how the training data was made available to the training algorithm.</p>"
                     }
                 },
                 "stoppingCondition": {
@@ -4894,7 +5015,7 @@
                 "audienceSizeConfig": {
                     "target": "com.amazonaws.cleanroomsml#AudienceSizeConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of output sizes of audiences that can be created using this configured audience model. A request to <a>StartAudienceGenerationJob</a> that uses this configured audience model must have an <code>audienceSize</code> selected from this list. You can use the <code>ABSOLUTE</code>\n            <a>AudienceSize</a> to configure out audience sizes using the count of identifiers in the output. You can use the <code>Percentage</code>\n            <a>AudienceSize</a> to configure sizes in the range 1-100 percent.</p>"
+                        "smithy.api#documentation": "<p>The list of output sizes of audiences that can be created using this configured audience model. A request to <a>StartAudienceGenerationJob</a> that uses this configured audience model must have an <code>audienceSize</code> selected from this list. You can use the <code>ABSOLUTE</code> <a>AudienceSize</a> to configure out audience sizes using the count of identifiers in the output. You can use the <code>Percentage</code> <a>AudienceSize</a> to configure sizes in the range 1-100 percent.</p>"
                     }
                 },
                 "tags": {
@@ -4957,6 +5078,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -5065,7 +5189,7 @@
                 "tags": {
                     "target": "com.amazonaws.cleanroomsml#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The optional metadata that you applied to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The optional metadata that you applied to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>"
                     }
                 }
             },
@@ -5150,7 +5274,7 @@
                 "tags": {
                     "target": "com.amazonaws.cleanroomsml#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The optional metadata that you applied to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The optional metadata that you applied to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>"
                     }
                 },
                 "kmsKeyArn": {
@@ -5178,6 +5302,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -5261,6 +5388,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -5437,7 +5567,7 @@
                 "tags": {
                     "target": "com.amazonaws.cleanroomsml#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The optional metadata that you applied to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The optional metadata that you applied to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>"
                     }
                 }
             },
@@ -5459,6 +5589,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -5488,6 +5621,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -5580,6 +5716,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "trainedModelVersionIdentifier": {
+                    "target": "com.amazonaws.cleanroomsml#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier of the trained model used for this inference job. This identifies the specific version of the trained model that was used to generate the inference results.</p>"
+                    }
+                },
                 "resourceConfig": {
                     "target": "com.amazonaws.cleanroomsml#InferenceResourceConfig",
                     "traits": {
@@ -5668,7 +5810,7 @@
                 "tags": {
                     "target": "com.amazonaws.cleanroomsml#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The optional metadata that you applied to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The optional metadata that you applied to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>"
                     }
                 }
             },
@@ -5693,6 +5835,13 @@
                         "smithy.api#documentation": "<p>The membership ID of the member that created the trained model that you are interested in.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "versionIdentifier": {
+                    "target": "com.amazonaws.cleanroomsml#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier of the trained model to retrieve. If not specified, the operation returns information about the latest version of the trained model.</p>",
+                        "smithy.api#httpQuery": "versionIdentifier"
                     }
                 }
             },
@@ -5722,6 +5871,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the trained model.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "versionIdentifier": {
+                    "target": "com.amazonaws.cleanroomsml#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier of the trained model. This unique identifier distinguishes this version from other versions of the same trained model.</p>"
+                    }
+                },
+                "incrementalTrainingDataChannels": {
+                    "target": "com.amazonaws.cleanroomsml#IncrementalTrainingDataChannelsOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the incremental training data channels used to create this version of the trained model. This includes details about the base model that was used for incremental training and the channel configuration.</p>"
                     }
                 },
                 "name": {
@@ -5758,6 +5919,12 @@
                     "target": "com.amazonaws.cleanroomsml#ResourceConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The EC2 resource configuration that was used to create the trained model.</p>"
+                    }
+                },
+                "trainingInputMode": {
+                    "target": "com.amazonaws.cleanroomsml#TrainingInputMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input mode that was used for accessing the training data when this trained model was created. This indicates how the training data was made available to the training algorithm.</p>"
                     }
                 },
                 "stoppingCondition": {
@@ -5833,7 +6000,7 @@
                 "tags": {
                     "target": "com.amazonaws.cleanroomsml#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The optional metadata that you applied to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The optional metadata that you applied to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>"
                     }
                 },
                 "dataChannels": {
@@ -6064,13 +6231,93 @@
                 "smithy.api#pattern": "^arn:aws[-a-z]*:iam::[0-9]{12}:role/.+$"
             }
         },
+        "com.amazonaws.cleanroomsml#IncrementalTrainingDataChannel": {
+            "type": "structure",
+            "members": {
+                "trainedModelArn": {
+                    "target": "com.amazonaws.cleanroomsml#TrainedModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the base trained model to use for incremental training. This model serves as the starting point for the incremental training process.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionIdentifier": {
+                    "target": "com.amazonaws.cleanroomsml#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier of the base trained model to use for incremental training. If not specified, the latest version of the trained model is used.</p>"
+                    }
+                },
+                "channelName": {
+                    "target": "com.amazonaws.cleanroomsml#ModelTrainingDataChannelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the incremental training data channel. This name is used to identify the channel during the training process and must be unique within the training job.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines an incremental training data channel that references a previously trained model. Incremental training allows you to update an existing trained model with new data, building upon the knowledge from a base model rather than training from scratch. This can significantly reduce training time and computational costs while improving model performance with additional data.</p>"
+            }
+        },
+        "com.amazonaws.cleanroomsml#IncrementalTrainingDataChannelOutput": {
+            "type": "structure",
+            "members": {
+                "channelName": {
+                    "target": "com.amazonaws.cleanroomsml#ModelTrainingDataChannelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the incremental training data channel that was used.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionIdentifier": {
+                    "target": "com.amazonaws.cleanroomsml#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier of the trained model that was used for incremental training.</p>"
+                    }
+                },
+                "modelName": {
+                    "target": "com.amazonaws.cleanroomsml#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the base trained model that was used for incremental training.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about an incremental training data channel that was used to create a trained model. This structure provides details about the base model and channel configuration used during incremental training.</p>"
+            }
+        },
+        "com.amazonaws.cleanroomsml#IncrementalTrainingDataChannels": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cleanroomsml#IncrementalTrainingDataChannel"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.cleanroomsml#IncrementalTrainingDataChannelsOutput": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cleanroomsml#IncrementalTrainingDataChannelOutput"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.cleanroomsml#InferenceContainerConfig": {
             "type": "structure",
             "members": {
                 "imageUri": {
                     "target": "com.amazonaws.cleanroomsml#AlgorithmImage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The registry path of the docker image that contains the inference algorithm. Clean Rooms ML supports both <code>registry/repository[:tag]</code> and <code>registry/repositry[@digest]</code> image path formats. For more information about using images in Clean Rooms ML, see the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AlgorithmSpecification.html#sagemaker-Type-AlgorithmSpecification-TrainingImage\">Sagemaker API reference</a>.</p>",
+                        "smithy.api#documentation": "<p>The registry path of the docker image that contains the inference algorithm. Clean Rooms ML currently only supports the <code>registry/repository[:tag]</code> image path format. For more information about using images in Clean Rooms ML, see the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AlgorithmSpecification.html#sagemaker-Type-AlgorithmSpecification-TrainingImage\">Sagemaker API reference</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6787,7 +7034,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.cleanroomsml#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role that Clean Rooms ML can assume to read the data referred to in the <code>dataSource</code> field the input channel.</p>\n         <p>Passing a role across AWS accounts is not allowed. If you pass a role that isn't in your account, you get an <code>AccessDeniedException</code> error.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role used to run the query specified in the <code>dataSource</code> field of the input channel.</p> <p>Passing a role across AWS accounts is not allowed. If you pass a role that isn't in your account, you get an <code>AccessDeniedException</code> error.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7346,6 +7593,22 @@
                 }
             }
         },
+        "com.amazonaws.cleanroomsml#InternalServiceException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An internal service error occurred. Retry your request. If the problem persists, contact AWS Support.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
         "com.amazonaws.cleanroomsml#KmsKeyArn": {
             "type": "string",
             "traits": {
@@ -7618,6 +7881,9 @@
                     "target": "com.amazonaws.cleanroomsml#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
                 }
             ],
@@ -7699,6 +7965,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.cleanroomsml#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -7784,6 +8053,9 @@
                     "target": "com.amazonaws.cleanroomsml#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
                 }
             ],
@@ -7835,6 +8107,13 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
+                },
+                "trainedModelVersionIdentifier": {
+                    "target": "com.amazonaws.cleanroomsml#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier of the trained model to filter export jobs by. When specified, only export jobs for this specific version of the trained model are returned.</p>",
+                        "smithy.api#httpQuery": "trainedModelVersionIdentifier"
+                    }
                 }
             },
             "traits": {
@@ -7873,6 +8152,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.cleanroomsml#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -7925,6 +8207,13 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the trained model that was used to create the trained model inference jobs that you are interested in.</p>",
                         "smithy.api#httpQuery": "trainedModelArn"
                     }
+                },
+                "trainedModelVersionIdentifier": {
+                    "target": "com.amazonaws.cleanroomsml#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier of the trained model to filter inference jobs by. When specified, only inference jobs that used this specific version of the trained model are returned.</p>",
+                        "smithy.api#httpQuery": "trainedModelVersionIdentifier"
+                    }
                 }
             },
             "traits": {
@@ -7963,6 +8252,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.cleanroomsml#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -8123,6 +8415,9 @@
                     "target": "com.amazonaws.cleanroomsml#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
                 }
             ],
@@ -8281,6 +8576,9 @@
                     "target": "com.amazonaws.cleanroomsml#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
                 }
             ],
@@ -8423,6 +8721,9 @@
                     "target": "com.amazonaws.cleanroomsml#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
                 }
             ],
@@ -8473,6 +8774,13 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a trained model that was used to create the trained model inference jobs that you are interested in.</p>",
                         "smithy.api#httpQuery": "trainedModelArn"
                     }
+                },
+                "trainedModelVersionIdentifier": {
+                    "target": "com.amazonaws.cleanroomsml#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier of the trained model to filter inference jobs by. When specified, only inference jobs that used this specific version of the trained model are returned.</p>",
+                        "smithy.api#httpQuery": "trainedModelVersionIdentifier"
+                    }
                 }
             },
             "traits": {
@@ -8500,6 +8808,110 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cleanroomsml#ListTrainedModelVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cleanroomsml#ListTrainedModelVersionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cleanroomsml#ListTrainedModelVersionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cleanroomsml#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of trained model versions for a specified trained model. This operation allows you to view all versions of a trained model, including information about their status and creation details. You can use this to track the evolution of your trained models and select specific versions for inference or further training.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/memberships/{membershipIdentifier}/trained-models/{trainedModelArn}/versions"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "trainedModels"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.cleanroomsml#ListTrainedModelVersionsRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.cleanroomsml#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from a previous <code>ListTrainedModelVersions</code> request. Use this token to retrieve the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.cleanroomsml#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of trained model versions to return in a single page. The default value is 10, and the maximum value is 100.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "membershipIdentifier": {
+                    "target": "com.amazonaws.cleanroomsml#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The membership identifier for the collaboration that contains the trained model.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "trainedModelArn": {
+                    "target": "com.amazonaws.cleanroomsml#TrainedModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the trained model for which to list versions.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.cleanroomsml#TrainedModelStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter the results to only include trained model versions with the specified status. Valid values include <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>, <code>ACTIVE</code>, <code>CREATE_FAILED</code>, and others.</p>",
+                        "smithy.api#httpQuery": "status"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cleanroomsml#ListTrainedModelVersionsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.cleanroomsml#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use in a subsequent <code>ListTrainedModelVersions</code> request to retrieve the next page of results. This value is null when there are no more results to return.</p>"
+                    }
+                },
+                "trainedModels": {
+                    "target": "com.amazonaws.cleanroomsml#TrainedModelList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of trained model versions that match the specified criteria. Each entry contains summary information about a trained model version, including its version identifier, status, and creation details.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cleanroomsml#ListTrainedModels": {
             "type": "operation",
             "input": {
@@ -8511,6 +8923,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.cleanroomsml#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -9089,6 +9504,13 @@
                         "smithy.api#documentation": "<p>The name of the training data channel.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "s3DataDistributionType": {
+                    "target": "com.amazonaws.cleanroomsml#S3DataDistributionType",
+                    "traits": {
+                        "smithy.api#default": "FullyReplicated",
+                        "smithy.api#documentation": "<p>Specifies how the training data stored in Amazon S3 should be distributed to training instances. This parameter controls the data distribution strategy for the training job:</p> <ul> <li> <p> <code>FullyReplicated</code> - The entire dataset is replicated on each training instance. This is suitable for smaller datasets and algorithms that require access to the complete dataset.</p> </li> <li> <p> <code>ShardedByS3Key</code> - The dataset is distributed across training instances based on Amazon S3 key names. This is suitable for larger datasets and distributed training scenarios where each instance processes a subset of the data.</p> </li> </ul>"
+                    }
                 }
             },
             "traits": {
@@ -9287,7 +9709,7 @@
                 "analysisTemplateArn": {
                     "target": "com.amazonaws.cleanroomsml#AnalysisTemplateArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) associated with the analysis template within a\n         collaboration.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) associated with the analysis template within a collaboration.</p>"
                     }
                 },
                 "parameters": {
@@ -9401,6 +9823,9 @@
                     "target": "com.amazonaws.cleanroomsml#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
                 }
             ],
@@ -9477,7 +9902,7 @@
                         "smithy.api#documentation": "<p>The number of resources that are used to train the model.</p>",
                         "smithy.api#range": {
                             "min": 1,
-                            "max": 1
+                            "max": 5
                         }
                     }
                 },
@@ -9553,6 +9978,23 @@
                 "smithy.api#documentation": "<p>Provides information about an Amazon S3 bucket and path.</p>"
             }
         },
+        "com.amazonaws.cleanroomsml#S3DataDistributionType": {
+            "type": "enum",
+            "members": {
+                "FULLY_REPLICATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FullyReplicated"
+                    }
+                },
+                "SHARDED_BY_S3_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ShardedByS3Key"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cleanroomsml#S3Path": {
             "type": "string",
             "traits": {
@@ -9570,6 +10012,22 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#required": {}
+                    }
+                },
+                "quotaName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the service quota limit that was exceeded"
+                    }
+                },
+                "quotaValue": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "The current limit on the service quota that was exceeded",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 100000
+                        }
                     }
                 }
             },
@@ -9687,6 +10145,9 @@
                     "target": "com.amazonaws.cleanroomsml#ServiceQuotaExceededException"
                 },
                 {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
                 }
             ],
@@ -9746,7 +10207,7 @@
                 "tags": {
                     "target": "com.amazonaws.cleanroomsml#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>"
                     }
                 }
             },
@@ -9788,6 +10249,9 @@
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
                 }
             ],
@@ -9817,6 +10281,12 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the trained model that you want to export.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "trainedModelVersionIdentifier": {
+                    "target": "com.amazonaws.cleanroomsml#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier of the trained model to export. This specifies which version of the trained model should be exported to the specified destination.</p>"
                     }
                 },
                 "membershipIdentifier": {
@@ -9867,6 +10337,9 @@
                     "target": "com.amazonaws.cleanroomsml#ServiceQuotaExceededException"
                 },
                 {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
                 }
             ],
@@ -9903,6 +10376,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the trained model that is used for this trained model inference job.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "trainedModelVersionIdentifier": {
+                    "target": "com.amazonaws.cleanroomsml#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier of the trained model to use for inference. This specifies which version of the trained model should be used to generate predictions on the input data.</p>"
                     }
                 },
                 "configuredModelAlgorithmAssociationArn": {
@@ -9959,7 +10438,7 @@
                 "tags": {
                     "target": "com.amazonaws.cleanroomsml#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>"
                     }
                 }
             },
@@ -10115,7 +10594,7 @@
                 "tags": {
                     "target": "com.amazonaws.cleanroomsml#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -10150,7 +10629,23 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws[-a-z]*:cleanrooms-ml:[-a-z0-9]+:[0-9]{12}:(membership/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/(configured-model-algorithm-association|trained-model|trained-model-inference-job|ml-input-channel)|training-dataset|audience-model|configured-audience-model|audience-generation-job|configured-model-algorithm|configured-model-algorithm-association|trained-model|trained-model-inference-job)/[-a-zA-Z0-9_/.]+$"
+                "smithy.api#pattern": "^arn:aws[-a-z]*:cleanrooms-ml:[-a-z0-9]+:[0-9]{12}:((membership/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/(configured-model-algorithm-association|trained-model|trained-model-inference-job|ml-input-channel))|training-dataset|audience-model|configured-audience-model|audience-generation-job|configured-model-algorithm)/[-a-zA-Z0-9_/.]+$"
+            }
+        },
+        "com.amazonaws.cleanroomsml#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
             }
         },
         "com.amazonaws.cleanroomsml#TrainedModel": {
@@ -10178,6 +10673,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#GetCollaborationTrainedModel"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ListTrainedModelVersions"
                 }
             ],
             "traits": {
@@ -10198,7 +10696,49 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws[-a-z]*:cleanrooms-ml:[-a-z0-9]+:[0-9]{12}:(membership/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/)?trained-model/[-a-zA-Z0-9_/.]+$"
+                "smithy.api#pattern": "^arn:aws[-a-z]*:cleanrooms-ml:[-a-z0-9]+:[0-9]{12}:membership/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/trained-model/[-a-zA-Z0-9_/.]+$"
+            }
+        },
+        "com.amazonaws.cleanroomsml#TrainedModelArtifactMaxSize": {
+            "type": "structure",
+            "members": {
+                "unit": {
+                    "target": "com.amazonaws.cleanroomsml#TrainedModelArtifactMaxSizeUnitType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unit of measurement for the maximum artifact size. Valid values include common storage units such as bytes, kilobytes, megabytes, gigabytes, and terabytes.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.cleanroomsml#TrainedModelArtifactMaxSizeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The numerical value for the maximum artifact size limit. This value is interpreted according to the specified unit.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the maximum size limit for trained model artifacts. This configuration helps control storage costs and ensures that trained models don't exceed specified size constraints. The size limit applies to the total size of all artifacts produced by the training job.</p>"
+            }
+        },
+        "com.amazonaws.cleanroomsml#TrainedModelArtifactMaxSizeUnitType": {
+            "type": "enum",
+            "members": {
+                "GB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GB"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cleanroomsml#TrainedModelArtifactMaxSizeValue": {
+            "type": "double",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0.01,
+                    "max": 10.0
+                }
             }
         },
         "com.amazonaws.cleanroomsml#TrainedModelExportFileType": {
@@ -10259,7 +10799,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws[-a-z]*:cleanrooms-ml:[-a-z0-9]+:[0-9]{12}:trained-model-export-job/[-a-zA-Z0-9_/.]+$"
+                "smithy.api#pattern": "^arn:aws[-a-z]*:cleanrooms-ml:[-a-z0-9]+:[0-9]{12}:membership/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/trained-model-export-job/[-a-zA-Z0-9_/.]+$"
             }
         },
         "com.amazonaws.cleanroomsml#TrainedModelExportJobStatus": {
@@ -10436,7 +10976,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws[-a-z]*:cleanrooms-ml:[-a-z0-9]+:[0-9]{12}:(membership/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/)?trained-model-inference-job/[-a-zA-Z0-9_/.]+$"
+                "smithy.api#pattern": "^arn:aws[-a-z]*:cleanrooms-ml:[-a-z0-9]+:[0-9]{12}:membership/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/trained-model-inference-job/[-a-zA-Z0-9_/.]+$"
             }
         },
         "com.amazonaws.cleanroomsml#TrainedModelInferenceJobList": {
@@ -10526,6 +11066,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the trained model that is used for the trained model inference job.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "trainedModelVersionIdentifier": {
+                    "target": "com.amazonaws.cleanroomsml#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier of the trained model that was used for inference in this job.</p>"
                     }
                 },
                 "collaborationIdentifier": {
@@ -10665,7 +11211,7 @@
             "traits": {
                 "smithy.api#range": {
                     "min": 0.01,
-                    "max": 10.0
+                    "max": 50.0
                 }
             }
         },
@@ -10772,6 +11318,18 @@
                         "smithy.api#required": {}
                     }
                 },
+                "versionIdentifier": {
+                    "target": "com.amazonaws.cleanroomsml#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier of this trained model version.</p>"
+                    }
+                },
+                "incrementalTrainingDataChannels": {
+                    "target": "com.amazonaws.cleanroomsml#IncrementalTrainingDataChannelsOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the incremental training data channels used to create this version of the trained model.</p>"
+                    }
+                },
                 "name": {
                     "target": "com.amazonaws.cleanroomsml#NameString",
                     "traits": {
@@ -10831,6 +11389,12 @@
                     "target": "com.amazonaws.cleanroomsml#MetricsConfigurationPolicy",
                     "traits": {
                         "smithy.api#documentation": "<p>The container for the metrics of the trained model.</p>"
+                    }
+                },
+                "maxArtifactSize": {
+                    "target": "com.amazonaws.cleanroomsml#TrainedModelArtifactMaxSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum size limit for trained model artifacts as defined in the configuration policy. This setting helps enforce consistent size limits across trained models in the collaboration.</p>"
                     }
                 }
             },
@@ -10944,6 +11508,29 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides information about the training dataset.</p>"
+            }
+        },
+        "com.amazonaws.cleanroomsml#TrainingInputMode": {
+            "type": "enum",
+            "members": {
+                "FILE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "File"
+                    }
+                },
+                "FAST_FILE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FastFile"
+                    }
+                },
+                "PIPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Pipe"
+                    }
+                }
             }
         },
         "com.amazonaws.cleanroomsml#UUID": {

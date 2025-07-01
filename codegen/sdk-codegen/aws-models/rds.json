@@ -5079,7 +5079,7 @@
                 "MultiAZ": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the DB instance is a Multi-AZ deployment. You can't set \n          the <code>AvailabilityZone</code> parameter if the DB instance is a Multi-AZ deployment.</p>\n         <p>This setting doesn't apply to the following DB instances:</p>\n         <ul>\n            <li>\n               <p>Amazon Aurora (DB instance Availability Zones (AZs) are managed by the DB cluster.)</p>\n            </li>\n            <li>\n               <p>RDS Custom</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies whether the DB instance is a Multi-AZ deployment. You can't set \n          the <code>AvailabilityZone</code> parameter if the DB instance is a Multi-AZ deployment.</p>\n         <p>This setting doesn't apply to Amazon Aurora because the DB instance Availability Zones (AZs)\n          are managed by the DB cluster.</p>"
                     }
                 },
                 "EngineVersion": {

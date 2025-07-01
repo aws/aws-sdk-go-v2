@@ -10744,8 +10744,7 @@
                     "target": "com.amazonaws.sagemaker#ClusterInstanceGroupSpecifications",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The instance groups to be created in the SageMaker HyperPod cluster.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The instance groups to be created in the SageMaker HyperPod cluster.</p>"
                     }
                 },
                 "VpcConfig": {
@@ -40637,7 +40636,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.sagemaker#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set the maximum number of SageMaker HyperPod clusters to list.</p>"
+                        "smithy.api#documentation": "<p>Specifies the maximum number of clusters to evaluate for the operation (not necessarily the number of matching items). After SageMaker processes the number of clusters up to <code>MaxResults</code>, it stops the operation and returns the matching clusters up to that point. If all the matching clusters are desired, SageMaker will go through all the clusters until <code>NextToken</code> is empty.</p>"
                     }
                 },
                 "NameContains": {
@@ -74268,8 +74267,7 @@
                     "target": "com.amazonaws.sagemaker#ClusterInstanceGroupSpecifications",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Specify the instance groups to update.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Specify the instance groups to update.</p>"
                     }
                 },
                 "NodeRecovery": {
