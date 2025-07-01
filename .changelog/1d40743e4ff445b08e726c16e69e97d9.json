@@ -1,8 +1,0 @@
-{
-    "id": "1d40743e-4ff4-45b0-8e72-6c16e69e97d9",
-    "type": "feature",
-    "description": "Add Context to GetInstanceTypesFromInstanceRequirements API",
-    "modules": [
-        "service/ec2"
-    ]
-}

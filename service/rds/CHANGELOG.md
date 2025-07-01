@@ -1,3 +1,7 @@
+# v1.99.1 (2025-07-01)
+
+* **Documentation**: Amazon RDS Custom for Oracle now supports multi-AZ database instances.
+
 # v1.99.0 (2025-06-27)
 
 * **Feature**: StartDBCluster and StopDBCluster can now throw InvalidDBShardGroupStateFault.

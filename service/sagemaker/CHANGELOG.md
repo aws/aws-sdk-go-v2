@@ -1,3 +1,7 @@
+# v1.199.0 (2025-07-01)
+
+* **Feature**: Updated field validation requirements for InstanceGroups.
+
 # v1.198.0 (2025-06-19)
 
 * **Feature**: This release introduces alternative support for utilizing CFN templates from S3 for SageMaker Projects.

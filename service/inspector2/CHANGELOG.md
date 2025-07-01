@@ -1,3 +1,7 @@
+# v1.38.1 (2025-07-01)
+
+* No change notes available for this release.
+
 # v1.38.0 (2025-06-17)
 
 * **Feature**: Add Code Repository Scanning as part of AWS InspectorV2

@@ -1,8 +1,0 @@
-{
-    "id": "04aff5db-287f-49fb-9c45-4cd68f597737",
-    "type": "feature",
-    "description": "Add support for the new optional domain-unit-id parameter in the UpdateProject API.",
-    "modules": [
-        "service/datazone"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.31.0 (2025-07-01)
+
+* **Feature**: Add support for the new optional domain-unit-id parameter in the UpdateProject API.
+
 # v1.30.3 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

@@ -1,8 +1,0 @@
-{
-    "id": "62dfd92e-7eaa-448e-8019-42459b4f8b01",
-    "type": "documentation",
-    "description": "Amazon RDS Custom for Oracle now supports multi-AZ database instances.",
-    "modules": [
-        "service/rds"
-    ]
-}

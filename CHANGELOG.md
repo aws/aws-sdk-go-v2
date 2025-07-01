@@ -1,3 +1,22 @@
+# Release (2025-07-01)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cleanroomsml`: [v1.13.0](service/cleanroomsml/CHANGELOG.md#v1130-2025-07-01)
+  * **Feature**: This release introduces support for incremental training and distributed training for custom models in AWS Clean Rooms ML.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.31.0](service/datazone/CHANGELOG.md#v1310-2025-07-01)
+  * **Feature**: Add support for the new optional domain-unit-id parameter in the UpdateProject API.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.228.0](service/ec2/CHANGELOG.md#v12280-2025-07-01)
+  * **Feature**: Add Context to GetInstanceTypesFromInstanceRequirements API
+* `github.com/aws/aws-sdk-go-v2/service/odb`: [v1.0.0](service/odb/CHANGELOG.md#v100-2025-07-01)
+  * **Release**: New AWS service client module
+  * **Feature**: This release adds API operations for Oracle Database@AWS. You can use the APIs to create Exadata infrastructure, ODB networks, and Exadata and Autonomous VM clusters inside AWS data centers. The infrastructure is managed by OCI. You can integrate these resources with AWS services.
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.28.0](service/qbusiness/CHANGELOG.md#v1280-2025-07-01)
+  * **Feature**: New ChatResponseConfiguration to Customize Q Business chat responses for specific use cases and communication needs. Updated Boosting capability allowing admins to provide preference on date attributes for recency and/or provide a preferred data source.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.99.1](service/rds/CHANGELOG.md#v1991-2025-07-01)
+  * **Documentation**: Amazon RDS Custom for Oracle now supports multi-AZ database instances.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.199.0](service/sagemaker/CHANGELOG.md#v11990-2025-07-01)
+  * **Feature**: Updated field validation requirements for InstanceGroups.
+
 # Release (2025-06-30)
 
 ## General Highlights

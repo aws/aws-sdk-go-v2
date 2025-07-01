@@ -1,3 +1,7 @@
+# v1.13.0 (2025-07-01)
+
+* **Feature**: This release introduces support for incremental training and distributed training for custom models in AWS Clean Rooms ML.
+
 # v1.12.4 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

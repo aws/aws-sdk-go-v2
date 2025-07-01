@@ -1,3 +1,7 @@
+# v1.228.0 (2025-07-01)
+
+* **Feature**: Add Context to GetInstanceTypesFromInstanceRequirements API
+
 # v1.227.0 (2025-06-26)
 
 * **Feature**: This release adds support for OdbNetworkArn as a target in VPC Route Tables
