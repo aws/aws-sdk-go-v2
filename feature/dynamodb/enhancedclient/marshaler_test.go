@@ -210,7 +210,7 @@ var marshallerMapTestInputs = map[string]marshallerTestInput{
 		}{},
 		expected: map[string]types.AttributeValue{},
 	},
-	"nested ignored field": {
+	"nested ignored Field": {
 		input: struct {
 			Simple []string `dynamodbav:"-"`
 		}{},

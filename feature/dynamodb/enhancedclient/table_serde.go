@@ -14,8 +14,8 @@ func (s *Schema[T]) Encode(t *T) (map[string]types.AttributeValue, error) {
 		var fv reflect.Value
 		var err error
 
-		if f.tag.Getter != "" {
-			m := v.MethodByName(f.tag.Getter)
+		if f.Tag.Getter != "" {
+			m := v.MethodByName(f.Tag.Getter)
 			fv = m.Call([]reflect.Value{})[0]
 		} else {
 			fv, err = v.Elem().FieldByIndexErr(f.Index)
@@ -28,7 +28,7 @@ func (s *Schema[T]) Encode(t *T) (map[string]types.AttributeValue, error) {
 			}
 		}
 
-		av, err := s.enc.encode(fv, f.tag)
+		av, err := s.enc.encode(fv, f.Tag)
 		if err != nil && unwrap(s.options.ErrorOnMissingField) {
 			return nil, err
 		}
@@ -49,19 +49,19 @@ func (s *Schema[T]) Decode(m map[string]types.AttributeValue) (*T, error) {
 			continue
 		}
 
-		if f.tag.Setter != "" && f.tag.Getter != "" {
-			current := v.MethodByName(f.tag.Getter).
+		if f.Tag.Setter != "" && f.Tag.Getter != "" {
+			current := v.MethodByName(f.Tag.Getter).
 				Call([]reflect.Value{})[0]
 
 			if current.Kind() != reflect.Ptr {
 				current = reflect.New(current.Type())
 			}
 
-			if err := s.dec.decode(av, current, f.tag); err != nil {
+			if err := s.dec.decode(av, current, f.Tag); err != nil {
 				return nil, err
 			}
 
-			v.MethodByName(f.tag.Setter).
+			v.MethodByName(f.Tag.Setter).
 				Call([]reflect.Value{
 					current.Elem(),
 				})
@@ -78,7 +78,7 @@ func (s *Schema[T]) Decode(m map[string]types.AttributeValue) (*T, error) {
 			}
 		}
 
-		err = s.dec.decode(av, fv, f.tag)
+		err = s.dec.decode(av, fv, f.Tag)
 		if err != nil {
 			return nil, err
 		}
