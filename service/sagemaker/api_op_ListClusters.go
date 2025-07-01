@@ -62,7 +62,11 @@ type ListClustersInput struct {
 	// [Timestamp]: https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp
 	CreationTimeBefore *time.Time
 
-	// Set the maximum number of SageMaker HyperPod clusters to list.
+	// Specifies the maximum number of clusters to evaluate for the operation (not
+	// necessarily the number of matching items). After SageMaker processes the number
+	// of clusters up to MaxResults , it stops the operation and returns the matching
+	// clusters up to that point. If all the matching clusters are desired, SageMaker
+	// will go through all the clusters until NextToken is empty.
 	MaxResults *int32
 
 	// Set the maximum number of instances to print in the list.
@@ -207,7 +211,11 @@ func (c *Client) addOperationListClustersMiddlewares(stack *middleware.Stack, op
 
 // ListClustersPaginatorOptions is the paginator options for ListClusters
 type ListClustersPaginatorOptions struct {
-	// Set the maximum number of SageMaker HyperPod clusters to list.
+	// Specifies the maximum number of clusters to evaluate for the operation (not
+	// necessarily the number of matching items). After SageMaker processes the number
+	// of clusters up to MaxResults , it stops the operation and returns the matching
+	// clusters up to that point. If all the matching clusters are desired, SageMaker
+	// will go through all the clusters until NextToken is empty.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

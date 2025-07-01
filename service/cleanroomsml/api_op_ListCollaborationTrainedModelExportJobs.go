@@ -48,6 +48,11 @@ type ListCollaborationTrainedModelExportJobsInput struct {
 	// results.
 	NextToken *string
 
+	// The version identifier of the trained model to filter export jobs by. When
+	// specified, only export jobs for this specific version of the trained model are
+	// returned.
+	TrainedModelVersionIdentifier *string
+
 	noSmithyDocumentSerde
 }
 

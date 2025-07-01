@@ -164,6 +164,11 @@ type GetTrainedModelInferenceJobOutput struct {
 	//   of aws do not count against your tags per resource limit.
 	Tags map[string]string
 
+	// The version identifier of the trained model used for this inference job. This
+	// identifies the specific version of the trained model that was used to generate
+	// the inference results.
+	TrainedModelVersionIdentifier *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

@@ -46,6 +46,11 @@ type ListTrainedModelInferenceJobsInput struct {
 	// trained model inference jobs that you are interested in.
 	TrainedModelArn *string
 
+	// The version identifier of the trained model to filter inference jobs by. When
+	// specified, only inference jobs that used this specific version of the trained
+	// model are returned.
+	TrainedModelVersionIdentifier *string
+
 	noSmithyDocumentSerde
 }
 

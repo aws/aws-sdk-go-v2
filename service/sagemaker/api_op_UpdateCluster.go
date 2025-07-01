@@ -35,8 +35,6 @@ type UpdateClusterInput struct {
 	ClusterName *string
 
 	// Specify the instance groups to update.
-	//
-	// This member is required.
 	InstanceGroups []types.ClusterInstanceGroupSpecification
 
 	// Specify the names of the instance groups to delete. Use a single , as the

@@ -40,8 +40,6 @@ type CreateClusterInput struct {
 	ClusterName *string
 
 	// The instance groups to be created in the SageMaker HyperPod cluster.
-	//
-	// This member is required.
 	InstanceGroups []types.ClusterInstanceGroupSpecification
 
 	// The node recovery mode for the SageMaker HyperPod cluster. When set to Automatic

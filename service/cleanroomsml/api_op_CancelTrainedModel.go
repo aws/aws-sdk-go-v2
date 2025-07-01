@@ -38,6 +38,13 @@ type CancelTrainedModelInput struct {
 	// This member is required.
 	TrainedModelArn *string
 
+	// The version identifier of the trained model to cancel. This parameter allows
+	// you to specify which version of the trained model you want to cancel when
+	// multiple versions exist.
+	//
+	// If versionIdentifier is not specified, the base model will be cancelled.
+	VersionIdentifier *string
+
 	noSmithyDocumentSerde
 }
 

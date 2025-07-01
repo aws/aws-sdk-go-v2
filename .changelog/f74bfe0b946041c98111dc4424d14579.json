@@ -1,0 +1,8 @@
+{
+    "id": "f74bfe0b-9460-41c9-8111-dc4424d14579",
+    "type": "feature",
+    "description": "New ChatResponseConfiguration to Customize Q Business chat responses for specific use cases and communication needs. Updated Boosting capability allowing admins to provide preference on date attributes for recency and/or provide a preferred data source.",
+    "modules": [
+        "service/qbusiness"
+    ]
+}

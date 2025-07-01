@@ -669,6 +669,25 @@ func (PolicyExistenceCondition) Values() []PolicyExistenceCondition {
 	}
 }
 
+type S3DataDistributionType string
+
+// Enum values for S3DataDistributionType
+const (
+	S3DataDistributionTypeFullyReplicated S3DataDistributionType = "FullyReplicated"
+	S3DataDistributionTypeShardedByS3Key  S3DataDistributionType = "ShardedByS3Key"
+)
+
+// Values returns all known values for S3DataDistributionType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (S3DataDistributionType) Values() []S3DataDistributionType {
+	return []S3DataDistributionType{
+		"FullyReplicated",
+		"ShardedByS3Key",
+	}
+}
+
 type SharedAudienceMetrics string
 
 // Enum values for SharedAudienceMetrics
@@ -704,6 +723,24 @@ func (TagOnCreatePolicy) Values() []TagOnCreatePolicy {
 	return []TagOnCreatePolicy{
 		"FROM_PARENT_RESOURCE",
 		"NONE",
+	}
+}
+
+type TrainedModelArtifactMaxSizeUnitType string
+
+// Enum values for TrainedModelArtifactMaxSizeUnitType
+const (
+	TrainedModelArtifactMaxSizeUnitTypeGb TrainedModelArtifactMaxSizeUnitType = "GB"
+)
+
+// Values returns all known values for TrainedModelArtifactMaxSizeUnitType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TrainedModelArtifactMaxSizeUnitType) Values() []TrainedModelArtifactMaxSizeUnitType {
+	return []TrainedModelArtifactMaxSizeUnitType{
+		"GB",
 	}
 }
 
@@ -868,6 +905,27 @@ const (
 func (TrainingDatasetStatus) Values() []TrainingDatasetStatus {
 	return []TrainingDatasetStatus{
 		"ACTIVE",
+	}
+}
+
+type TrainingInputMode string
+
+// Enum values for TrainingInputMode
+const (
+	TrainingInputModeFile     TrainingInputMode = "File"
+	TrainingInputModeFastFile TrainingInputMode = "FastFile"
+	TrainingInputModePipe     TrainingInputMode = "Pipe"
+)
+
+// Values returns all known values for TrainingInputMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TrainingInputMode) Values() []TrainingInputMode {
+	return []TrainingInputMode{
+		"File",
+		"FastFile",
+		"Pipe",
 	}
 }
 

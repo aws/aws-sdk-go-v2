@@ -15172,6 +15172,11 @@ func awsRestjson1_serializeOpDocumentUpdateProjectInput(v *UpdateProjectInput, v
 		ok.String(*v.Description)
 	}
 
+	if v.DomainUnitId != nil {
+		ok := object.Key("domainUnitId")
+		ok.String(*v.DomainUnitId)
+	}
+
 	if v.EnvironmentDeploymentDetails != nil {
 		ok := object.Key("environmentDeploymentDetails")
 		if err := awsRestjson1_serializeDocumentEnvironmentDeploymentDetails(v.EnvironmentDeploymentDetails, ok); err != nil {

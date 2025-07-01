@@ -37,6 +37,9 @@ type CreateTrainedModelInput struct {
 
 	// Defines the data channels that are used as input for the trained model request.
 	//
+	// Limit: Maximum of 20 channels total (including both dataChannels and
+	// incrementalTrainingDataChannels ).
+	//
 	// This member is required.
 	DataChannels []types.ModelTrainingDataChannel
 
@@ -64,6 +67,16 @@ type CreateTrainedModelInput struct {
 	// Algorithm-specific parameters that influence the quality of the model. You set
 	// hyperparameters before you start the learning process.
 	Hyperparameters map[string]string
+
+	// Specifies the incremental training data channels for the trained model.
+	//
+	// Incremental training allows you to create a new trained model with updates
+	// without retraining from scratch. You can specify up to one incremental training
+	// data channel that references a previously trained model and its version.
+	//
+	// Limit: Maximum of 20 channels total (including both
+	// incrementalTrainingDataChannels and dataChannels ).
+	IncrementalTrainingDataChannels []types.IncrementalTrainingDataChannel
 
 	// The Amazon Resource Name (ARN) of the KMS key. This key is used to encrypt and
 	// decrypt customer-owned data in the trained ML model and the associated data.
@@ -102,6 +115,19 @@ type CreateTrainedModelInput struct {
 	//   of aws do not count against your tags per resource limit.
 	Tags map[string]string
 
+	// The input mode for accessing the training data. This parameter determines how
+	// the training data is made available to the training algorithm. Valid values are:
+	//
+	//   - File - The training data is downloaded to the training instance and made
+	//   available as files.
+	//
+	//   - FastFile - The training data is streamed directly from Amazon S3 to the
+	//   training algorithm, providing faster access for large datasets.
+	//
+	//   - Pipe - The training data is streamed to the training algorithm using named
+	//   pipes, which can improve performance for certain algorithms.
+	TrainingInputMode types.TrainingInputMode
+
 	noSmithyDocumentSerde
 }
 
@@ -111,6 +137,14 @@ type CreateTrainedModelOutput struct {
 	//
 	// This member is required.
 	TrainedModelArn *string
+
+	// The unique version identifier assigned to the newly created trained model. This
+	// identifier can be used to reference this specific version of the trained model
+	// in subsequent operations such as inference jobs or incremental training.
+	//
+	// The initial version identifier for the base version of the trained model is
+	// "NULL".
+	VersionIdentifier *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

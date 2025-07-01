@@ -60,6 +60,33 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// An internal service error occurred. Retry your request. If the problem
+// persists, contact AWS Support.
+type InternalServiceException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InternalServiceException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InternalServiceException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InternalServiceException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InternalServiceException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
 // The resource you are requesting does not exist.
 type ResourceNotFoundException struct {
 	Message *string
@@ -92,6 +119,9 @@ type ServiceQuotaExceededException struct {
 
 	ErrorCodeOverride *string
 
+	QuotaName  *string
+	QuotaValue *float64
+
 	noSmithyDocumentSerde
 }
 
@@ -111,6 +141,32 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The request was denied due to request throttling.
+type ThrottlingException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ThrottlingException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ThrottlingException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ThrottlingException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ThrottlingException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request parameters for this request are incorrect.
 type ValidationException struct {

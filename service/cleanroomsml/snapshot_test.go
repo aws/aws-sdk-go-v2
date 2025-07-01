@@ -638,6 +638,18 @@ func TestCheckSnapshot_ListTrainedModels(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListTrainedModelVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTrainedModelVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListTrainedModelVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListTrainingDatasets(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTrainingDatasets(context.Background(), nil, func(o *Options) {
@@ -1326,6 +1338,18 @@ func TestUpdateSnapshot_ListTrainedModels(t *testing.T) {
 	_, err := svc.ListTrainedModels(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTrainedModels")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListTrainedModelVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTrainedModelVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListTrainedModelVersions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

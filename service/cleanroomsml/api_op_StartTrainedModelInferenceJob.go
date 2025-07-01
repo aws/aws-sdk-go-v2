@@ -109,6 +109,11 @@ type StartTrainedModelInferenceJobInput struct {
 	//   of aws do not count against your tags per resource limit.
 	Tags map[string]string
 
+	// The version identifier of the trained model to use for inference. This
+	// specifies which version of the trained model should be used to generate
+	// predictions on the input data.
+	TrainedModelVersionIdentifier *string
+
 	noSmithyDocumentSerde
 }
 

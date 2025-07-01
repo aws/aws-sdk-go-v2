@@ -1,0 +1,8 @@
+{
+    "id": "53f052f2-6a30-40b7-b3af-59c87b93296f",
+    "type": "feature",
+    "description": "This release introduces support for incremental training and distributed training for custom models in AWS Clean Rooms ML.",
+    "modules": [
+        "service/cleanroomsml"
+    ]
+}

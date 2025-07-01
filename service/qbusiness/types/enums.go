@@ -242,6 +242,30 @@ func (ChatMode) Values() []ChatMode {
 	}
 }
 
+type ChatResponseConfigurationStatus string
+
+// Enum values for ChatResponseConfigurationStatus
+const (
+	ChatResponseConfigurationStatusCreating ChatResponseConfigurationStatus = "CREATING"
+	ChatResponseConfigurationStatusUpdating ChatResponseConfigurationStatus = "UPDATING"
+	ChatResponseConfigurationStatusFailed   ChatResponseConfigurationStatus = "FAILED"
+	ChatResponseConfigurationStatusActive   ChatResponseConfigurationStatus = "ACTIVE"
+)
+
+// Values returns all known values for ChatResponseConfigurationStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChatResponseConfigurationStatus) Values() []ChatResponseConfigurationStatus {
+	return []ChatResponseConfigurationStatus{
+		"CREATING",
+		"UPDATING",
+		"FAILED",
+		"ACTIVE",
+	}
+}
+
 type ContentType string
 
 // Enum values for ContentType
@@ -385,6 +409,8 @@ const (
 	DocumentAttributeBoostingLevelMedium   DocumentAttributeBoostingLevel = "MEDIUM"
 	DocumentAttributeBoostingLevelHigh     DocumentAttributeBoostingLevel = "HIGH"
 	DocumentAttributeBoostingLevelVeryHigh DocumentAttributeBoostingLevel = "VERY_HIGH"
+	DocumentAttributeBoostingLevelOne      DocumentAttributeBoostingLevel = "ONE"
+	DocumentAttributeBoostingLevelTwo      DocumentAttributeBoostingLevel = "TWO"
 )
 
 // Values returns all known values for DocumentAttributeBoostingLevel. Note that
@@ -399,6 +425,8 @@ func (DocumentAttributeBoostingLevel) Values() []DocumentAttributeBoostingLevel 
 		"MEDIUM",
 		"HIGH",
 		"VERY_HIGH",
+		"ONE",
+		"TWO",
 	}
 }
 
@@ -993,6 +1021,23 @@ func (ReadAccessType) Values() []ReadAccessType {
 	}
 }
 
+type ResponseConfigurationType string
+
+// Enum values for ResponseConfigurationType
+const (
+	ResponseConfigurationTypeAll ResponseConfigurationType = "ALL"
+)
+
+// Values returns all known values for ResponseConfigurationType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResponseConfigurationType) Values() []ResponseConfigurationType {
+	return []ResponseConfigurationType{
+		"ALL",
+	}
+}
+
 type ResponseScope string
 
 // Enum values for ResponseScope
@@ -1123,6 +1168,11 @@ const (
 	StringAttributeValueBoostingLevelMedium   StringAttributeValueBoostingLevel = "MEDIUM"
 	StringAttributeValueBoostingLevelHigh     StringAttributeValueBoostingLevel = "HIGH"
 	StringAttributeValueBoostingLevelVeryHigh StringAttributeValueBoostingLevel = "VERY_HIGH"
+	StringAttributeValueBoostingLevelOne      StringAttributeValueBoostingLevel = "ONE"
+	StringAttributeValueBoostingLevelTwo      StringAttributeValueBoostingLevel = "TWO"
+	StringAttributeValueBoostingLevelThree    StringAttributeValueBoostingLevel = "THREE"
+	StringAttributeValueBoostingLevelFour     StringAttributeValueBoostingLevel = "FOUR"
+	StringAttributeValueBoostingLevelFive     StringAttributeValueBoostingLevel = "FIVE"
 )
 
 // Values returns all known values for StringAttributeValueBoostingLevel. Note
@@ -1136,6 +1186,11 @@ func (StringAttributeValueBoostingLevel) Values() []StringAttributeValueBoosting
 		"MEDIUM",
 		"HIGH",
 		"VERY_HIGH",
+		"ONE",
+		"TWO",
+		"THREE",
+		"FOUR",
+		"FIVE",
 	}
 }
 

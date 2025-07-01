@@ -1,0 +1,8 @@
+{
+    "id": "80017f44-18b5-4dfe-aa19-748d20400f26",
+    "type": "feature",
+    "description": "Updated field validation requirements for InstanceGroups.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

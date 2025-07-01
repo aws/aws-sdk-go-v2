@@ -14346,9 +14346,7 @@ func validateOpCreateClusterInput(v *CreateClusterInput) error {
 	if v.ClusterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
 	}
-	if v.InstanceGroups == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceGroups"))
-	} else if v.InstanceGroups != nil {
+	if v.InstanceGroups != nil {
 		if err := validateClusterInstanceGroupSpecifications(v.InstanceGroups); err != nil {
 			invalidParams.AddNested("InstanceGroups", err.(smithy.InvalidParamsError))
 		}
@@ -19308,9 +19306,7 @@ func validateOpUpdateClusterInput(v *UpdateClusterInput) error {
 	if v.ClusterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
 	}
-	if v.InstanceGroups == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceGroups"))
-	} else if v.InstanceGroups != nil {
+	if v.InstanceGroups != nil {
 		if err := validateClusterInstanceGroupSpecifications(v.InstanceGroups); err != nil {
 			invalidParams.AddNested("InstanceGroups", err.(smithy.InvalidParamsError))
 		}

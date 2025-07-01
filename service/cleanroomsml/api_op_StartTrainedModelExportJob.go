@@ -53,6 +53,10 @@ type StartTrainedModelExportJobInput struct {
 	// The description of the trained model export job.
 	Description *string
 
+	// The version identifier of the trained model to export. This specifies which
+	// version of the trained model should be exported to the specified destination.
+	TrainedModelVersionIdentifier *string
+
 	noSmithyDocumentSerde
 }
 

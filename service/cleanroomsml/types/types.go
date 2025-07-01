@@ -408,6 +408,9 @@ type CollaborationTrainedModelExportJobSummary struct {
 	// Details about the status of a resource.
 	StatusDetails *StatusDetails
 
+	// The version identifier of the trained model that was exported in this job.
+	TrainedModelVersionIdentifier *string
+
 	noSmithyDocumentSerde
 }
 
@@ -487,6 +490,10 @@ type CollaborationTrainedModelInferenceJobSummary struct {
 	// Details about the metrics status for trained model inference job.
 	MetricsStatusDetails *string
 
+	// The version identifier of the trained model that was used for inference in this
+	// job.
+	TrainedModelVersionIdentifier *string
+
 	noSmithyDocumentSerde
 }
 
@@ -541,6 +548,13 @@ type CollaborationTrainedModelSummary struct {
 
 	// The description of the trained model.
 	Description *string
+
+	// Information about the incremental training data channels used to create this
+	// version of the trained model.
+	IncrementalTrainingDataChannels []IncrementalTrainingDataChannelOutput
+
+	// The version identifier of this trained model version.
+	VersionIdentifier *string
 
 	noSmithyDocumentSerde
 }
@@ -724,9 +738,8 @@ type ConfiguredModelAlgorithmSummary struct {
 type ContainerConfig struct {
 
 	// The registry path of the docker image that contains the algorithm. Clean Rooms
-	// ML supports both registry/repository[:tag] and registry/repositry[@digest]
-	// image path formats. For more information about using images in Clean Rooms ML,
-	// see the [Sagemaker API reference].
+	// ML currently only supports the registry/repository[:tag] image path format. For
+	// more information about using images in Clean Rooms ML, see the [Sagemaker API reference].
 	//
 	// [Sagemaker API reference]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AlgorithmSpecification.html#sagemaker-Type-AlgorithmSpecification-TrainingImage
 	//
@@ -832,13 +845,62 @@ type GlueDataSource struct {
 	noSmithyDocumentSerde
 }
 
+// Defines an incremental training data channel that references a previously
+// trained model. Incremental training allows you to update an existing trained
+// model with new data, building upon the knowledge from a base model rather than
+// training from scratch. This can significantly reduce training time and
+// computational costs while improving model performance with additional data.
+type IncrementalTrainingDataChannel struct {
+
+	// The name of the incremental training data channel. This name is used to
+	// identify the channel during the training process and must be unique within the
+	// training job.
+	//
+	// This member is required.
+	ChannelName *string
+
+	// The Amazon Resource Name (ARN) of the base trained model to use for incremental
+	// training. This model serves as the starting point for the incremental training
+	// process.
+	//
+	// This member is required.
+	TrainedModelArn *string
+
+	// The version identifier of the base trained model to use for incremental
+	// training. If not specified, the latest version of the trained model is used.
+	VersionIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about an incremental training data channel that was used
+// to create a trained model. This structure provides details about the base model
+// and channel configuration used during incremental training.
+type IncrementalTrainingDataChannelOutput struct {
+
+	// The name of the incremental training data channel that was used.
+	//
+	// This member is required.
+	ChannelName *string
+
+	// The name of the base trained model that was used for incremental training.
+	//
+	// This member is required.
+	ModelName *string
+
+	// The version identifier of the trained model that was used for incremental
+	// training.
+	VersionIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides configuration information for the inference container.
 type InferenceContainerConfig struct {
 
 	// The registry path of the docker image that contains the inference algorithm.
-	// Clean Rooms ML supports both registry/repository[:tag] and
-	// registry/repositry[@digest] image path formats. For more information about using
-	// images in Clean Rooms ML, see the [Sagemaker API reference].
+	// Clean Rooms ML currently only supports the registry/repository[:tag] image path
+	// format. For more information about using images in Clean Rooms ML, see the [Sagemaker API reference].
 	//
 	// [Sagemaker API reference]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AlgorithmSpecification.html#sagemaker-Type-AlgorithmSpecification-TrainingImage
 	//
@@ -905,8 +967,8 @@ type InputChannel struct {
 	// This member is required.
 	DataSource InputChannelDataSource
 
-	// The ARN of the IAM role that Clean Rooms ML can assume to read the data
-	// referred to in the dataSource field the input channel.
+	// The Amazon Resource Name (ARN) of the role used to run the query specified in
+	// the dataSource field of the input channel.
 	//
 	// Passing a role across AWS accounts is not allowed. If you pass a role that
 	// isn't in your account, you get an AccessDeniedException error.
@@ -1071,6 +1133,19 @@ type ModelTrainingDataChannel struct {
 	// This member is required.
 	MlInputChannelArn *string
 
+	// Specifies how the training data stored in Amazon S3 should be distributed to
+	// training instances. This parameter controls the data distribution strategy for
+	// the training job:
+	//
+	//   - FullyReplicated - The entire dataset is replicated on each training
+	//   instance. This is suitable for smaller datasets and algorithms that require
+	//   access to the complete dataset.
+	//
+	//   - ShardedByS3Key - The dataset is distributed across training instances based
+	//   on Amazon S3 key names. This is suitable for larger datasets and distributed
+	//   training scenarios where each instance processes a subset of the data.
+	S3DataDistributionType S3DataDistributionType
+
 	noSmithyDocumentSerde
 }
 
@@ -1200,6 +1275,28 @@ type StoppingCondition struct {
 	// The maximum amount of time, in seconds, that model training can run before it
 	// is terminated.
 	MaxRuntimeInSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the maximum size limit for trained model artifacts. This
+// configuration helps control storage costs and ensures that trained models don't
+// exceed specified size constraints. The size limit applies to the total size of
+// all artifacts produced by the training job.
+type TrainedModelArtifactMaxSize struct {
+
+	// The unit of measurement for the maximum artifact size. Valid values include
+	// common storage units such as bytes, kilobytes, megabytes, gigabytes, and
+	// terabytes.
+	//
+	// This member is required.
+	Unit TrainedModelArtifactMaxSizeUnitType
+
+	// The numerical value for the maximum artifact size limit. This value is
+	// interpreted according to the specified unit.
+	//
+	// This member is required.
+	Value *float64
 
 	noSmithyDocumentSerde
 }
@@ -1342,6 +1439,10 @@ type TrainedModelInferenceJobSummary struct {
 	// Details about the metrics status for the trained model inference job.
 	MetricsStatusDetails *string
 
+	// The version identifier of the trained model that was used for inference in this
+	// job.
+	TrainedModelVersionIdentifier *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1369,6 +1470,11 @@ type TrainedModelsConfigurationPolicy struct {
 
 	// The container for the metrics of the trained model.
 	ContainerMetrics *MetricsConfigurationPolicy
+
+	// The maximum size limit for trained model artifacts as defined in the
+	// configuration policy. This setting helps enforce consistent size limits across
+	// trained models in the collaboration.
+	MaxArtifactSize *TrainedModelArtifactMaxSize
 
 	noSmithyDocumentSerde
 }
@@ -1419,6 +1525,13 @@ type TrainedModelSummary struct {
 
 	// The description of the trained model.
 	Description *string
+
+	// Information about the incremental training data channels used to create this
+	// version of the trained model.
+	IncrementalTrainingDataChannels []IncrementalTrainingDataChannelOutput
+
+	// The version identifier of this trained model version.
+	VersionIdentifier *string
 
 	noSmithyDocumentSerde
 }

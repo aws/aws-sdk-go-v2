@@ -190,6 +190,26 @@ func (m *validateOpCreateApplication) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateChatResponseConfiguration struct {
+}
+
+func (*validateOpCreateChatResponseConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateChatResponseConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateChatResponseConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateChatResponseConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDataAccessor struct {
 }
 
@@ -405,6 +425,26 @@ func (m *validateOpDeleteChatControlsConfiguration) HandleInitialize(ctx context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteChatControlsConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteChatResponseConfiguration struct {
+}
+
+func (*validateOpDeleteChatResponseConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteChatResponseConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteChatResponseConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteChatResponseConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -650,6 +690,26 @@ func (m *validateOpGetChatControlsConfiguration) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetChatResponseConfiguration struct {
+}
+
+func (*validateOpGetChatResponseConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetChatResponseConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetChatResponseConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetChatResponseConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetDataAccessor struct {
 }
 
@@ -865,6 +925,26 @@ func (m *validateOpListAttachments) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListAttachmentsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListChatResponseConfigurations struct {
+}
+
+func (*validateOpListChatResponseConfigurations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListChatResponseConfigurations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListChatResponseConfigurationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListChatResponseConfigurationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1350,6 +1430,26 @@ func (m *validateOpUpdateChatControlsConfiguration) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateChatResponseConfiguration struct {
+}
+
+func (*validateOpUpdateChatResponseConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateChatResponseConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateChatResponseConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateChatResponseConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateDataAccessor struct {
 }
 
@@ -1546,6 +1646,10 @@ func addOpCreateApplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateApplication{}, middleware.After)
 }
 
+func addOpCreateChatResponseConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateChatResponseConfiguration{}, middleware.After)
+}
+
 func addOpCreateDataAccessorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDataAccessor{}, middleware.After)
 }
@@ -1588,6 +1692,10 @@ func addOpDeleteAttachmentValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteChatControlsConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteChatControlsConfiguration{}, middleware.After)
+}
+
+func addOpDeleteChatResponseConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteChatResponseConfiguration{}, middleware.After)
 }
 
 func addOpDeleteConversationValidationMiddleware(stack *middleware.Stack) error {
@@ -1638,6 +1746,10 @@ func addOpGetChatControlsConfigurationValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpGetChatControlsConfiguration{}, middleware.After)
 }
 
+func addOpGetChatResponseConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetChatResponseConfiguration{}, middleware.After)
+}
+
 func addOpGetDataAccessorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDataAccessor{}, middleware.After)
 }
@@ -1680,6 +1792,10 @@ func addOpGetWebExperienceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListAttachmentsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAttachments{}, middleware.After)
+}
+
+func addOpListChatResponseConfigurationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListChatResponseConfigurations{}, middleware.After)
 }
 
 func addOpListConversationsValidationMiddleware(stack *middleware.Stack) error {
@@ -1776,6 +1892,10 @@ func addOpUpdateApplicationValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateChatControlsConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateChatControlsConfiguration{}, middleware.After)
+}
+
+func addOpUpdateChatResponseConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateChatResponseConfiguration{}, middleware.After)
 }
 
 func addOpUpdateDataAccessorValidationMiddleware(stack *middleware.Stack) error {
@@ -2423,9 +2543,7 @@ func validateCustomPluginConfiguration(v *types.CustomPluginConfiguration) error
 	if len(v.ApiSchemaType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiSchemaType"))
 	}
-	if v.ApiSchema == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApiSchema"))
-	} else if v.ApiSchema != nil {
+	if v.ApiSchema != nil {
 		if err := validateAPISchema(v.ApiSchema); err != nil {
 			invalidParams.AddNested("ApiSchema", err.(smithy.InvalidParamsError))
 		}
@@ -3870,6 +3988,32 @@ func validateOpCreateApplicationInput(v *CreateApplicationInput) error {
 	}
 }
 
+func validateOpCreateChatResponseConfigurationInput(v *CreateChatResponseConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateChatResponseConfigurationInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.DisplayName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DisplayName"))
+	}
+	if v.ResponseConfigurations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResponseConfigurations"))
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateDataAccessorInput(v *CreateDataAccessorInput) error {
 	if v == nil {
 		return nil
@@ -4171,6 +4315,24 @@ func validateOpDeleteChatControlsConfigurationInput(v *DeleteChatControlsConfigu
 	}
 }
 
+func validateOpDeleteChatResponseConfigurationInput(v *DeleteChatResponseConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteChatResponseConfigurationInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.ChatResponseConfigurationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChatResponseConfigurationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteConversationInput(v *DeleteConversationInput) error {
 	if v == nil {
 		return nil
@@ -4387,6 +4549,24 @@ func validateOpGetChatControlsConfigurationInput(v *GetChatControlsConfiguration
 	}
 }
 
+func validateOpGetChatResponseConfigurationInput(v *GetChatResponseConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetChatResponseConfigurationInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.ChatResponseConfigurationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChatResponseConfigurationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetDataAccessorInput(v *GetDataAccessorInput) error {
 	if v == nil {
 		return nil
@@ -4581,6 +4761,21 @@ func validateOpListAttachmentsInput(v *ListAttachmentsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListAttachmentsInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListChatResponseConfigurationsInput(v *ListChatResponseConfigurationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListChatResponseConfigurationsInput"}
 	if v.ApplicationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
 	}
@@ -5071,6 +5266,27 @@ func validateOpUpdateChatControlsConfigurationInput(v *UpdateChatControlsConfigu
 		if err := validateCreatorModeConfiguration(v.CreatorModeConfiguration); err != nil {
 			invalidParams.AddNested("CreatorModeConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateChatResponseConfigurationInput(v *UpdateChatResponseConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateChatResponseConfigurationInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.ChatResponseConfigurationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChatResponseConfigurationId"))
+	}
+	if v.ResponseConfigurations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResponseConfigurations"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

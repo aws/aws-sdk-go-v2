@@ -870,6 +870,26 @@ func (m *validateOpListTrainedModels) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListTrainedModelVersions struct {
+}
+
+func (*validateOpListTrainedModelVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTrainedModelVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTrainedModelVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTrainedModelVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutConfiguredAudienceModelPolicy struct {
 }
 
@@ -1222,6 +1242,10 @@ func addOpListTrainedModelsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTrainedModels{}, middleware.After)
 }
 
+func addOpListTrainedModelVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTrainedModelVersions{}, middleware.After)
+}
+
 func addOpPutConfiguredAudienceModelPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutConfiguredAudienceModelPolicy{}, middleware.After)
 }
@@ -1523,6 +1547,41 @@ func validateGlueDataSource(v *types.GlueDataSource) error {
 	}
 	if v.DatabaseName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIncrementalTrainingDataChannel(v *types.IncrementalTrainingDataChannel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IncrementalTrainingDataChannel"}
+	if v.TrainedModelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrainedModelArn"))
+	}
+	if v.ChannelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIncrementalTrainingDataChannels(v []types.IncrementalTrainingDataChannel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IncrementalTrainingDataChannels"}
+	for i := range v {
+		if err := validateIncrementalTrainingDataChannel(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1899,6 +1958,24 @@ func validateS3ConfigMap(v *types.S3ConfigMap) error {
 	}
 }
 
+func validateTrainedModelArtifactMaxSize(v *types.TrainedModelArtifactMaxSize) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrainedModelArtifactMaxSize"}
+	if len(v.Unit) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Unit"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTrainedModelExportOutputConfiguration(v *types.TrainedModelExportOutputConfiguration) error {
 	if v == nil {
 		return nil
@@ -2043,6 +2120,11 @@ func validateTrainedModelsConfigurationPolicy(v *types.TrainedModelsConfiguratio
 	if v.ContainerMetrics != nil {
 		if err := validateMetricsConfigurationPolicy(v.ContainerMetrics); err != nil {
 			invalidParams.AddNested("ContainerMetrics", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MaxArtifactSize != nil {
+		if err := validateTrainedModelArtifactMaxSize(v.MaxArtifactSize); err != nil {
+			invalidParams.AddNested("MaxArtifactSize", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2243,6 +2325,11 @@ func validateOpCreateTrainedModelInput(v *CreateTrainedModelInput) error {
 	} else if v.ResourceConfig != nil {
 		if err := validateResourceConfig(v.ResourceConfig); err != nil {
 			invalidParams.AddNested("ResourceConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IncrementalTrainingDataChannels != nil {
+		if err := validateIncrementalTrainingDataChannels(v.IncrementalTrainingDataChannels); err != nil {
+			invalidParams.AddNested("IncrementalTrainingDataChannels", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.DataChannels == nil {
@@ -2819,6 +2906,24 @@ func validateOpListTrainedModelsInput(v *ListTrainedModelsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTrainedModelsInput"}
 	if v.MembershipIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListTrainedModelVersionsInput(v *ListTrainedModelVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTrainedModelVersionsInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.TrainedModelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrainedModelArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

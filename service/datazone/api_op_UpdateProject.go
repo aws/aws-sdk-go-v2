@@ -43,6 +43,9 @@ type UpdateProjectInput struct {
 	// The description to be updated as part of the UpdateProject action.
 	Description *string
 
+	// The ID of the domain unit.
+	DomainUnitId *string
+
 	// The environment deployment details of the project.
 	EnvironmentDeploymentDetails *types.EnvironmentDeploymentDetails
 

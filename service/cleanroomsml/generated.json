@@ -55,6 +55,7 @@
         "api_op_ListMLInputChannels.go",
         "api_op_ListTagsForResource.go",
         "api_op_ListTrainedModelInferenceJobs.go",
+        "api_op_ListTrainedModelVersions.go",
         "api_op_ListTrainedModels.go",
         "api_op_ListTrainingDatasets.go",
         "api_op_PutConfiguredAudienceModelPolicy.go",
