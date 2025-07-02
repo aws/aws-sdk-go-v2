@@ -210,6 +210,26 @@ func (m *validateOpCreateTemplate) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteCase struct {
+}
+
+func (*validateOpDeleteCase) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCase) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCaseInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCaseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteCaseRule struct {
 }
 
@@ -285,6 +305,26 @@ func (m *validateOpDeleteLayout) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteLayoutInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteRelatedItem struct {
+}
+
+func (*validateOpDeleteRelatedItem) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRelatedItem) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRelatedItemInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRelatedItemInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -810,6 +850,10 @@ func addOpCreateTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateTemplate{}, middleware.After)
 }
 
+func addOpDeleteCaseValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCase{}, middleware.After)
+}
+
 func addOpDeleteCaseRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCaseRule{}, middleware.After)
 }
@@ -824,6 +868,10 @@ func addOpDeleteFieldValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteLayoutValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteLayout{}, middleware.After)
+}
+
+func addOpDeleteRelatedItemValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRelatedItem{}, middleware.After)
 }
 
 func addOpDeleteTemplateValidationMiddleware(stack *middleware.Stack) error {
@@ -1955,6 +2003,24 @@ func validateOpCreateTemplateInput(v *CreateTemplateInput) error {
 	}
 }
 
+func validateOpDeleteCaseInput(v *DeleteCaseInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCaseInput"}
+	if v.DomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if v.CaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CaseId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteCaseRuleInput(v *DeleteCaseRuleInput) error {
 	if v == nil {
 		return nil
@@ -2016,6 +2082,27 @@ func validateOpDeleteLayoutInput(v *DeleteLayoutInput) error {
 	}
 	if v.LayoutId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LayoutId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteRelatedItemInput(v *DeleteRelatedItemInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRelatedItemInput"}
+	if v.DomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if v.CaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CaseId"))
+	}
+	if v.RelatedItemId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RelatedItemId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

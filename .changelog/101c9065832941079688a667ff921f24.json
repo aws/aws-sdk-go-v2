@@ -1,0 +1,8 @@
+{
+    "id": "101c9065-8329-4107-9688-a667ff921f24",
+    "type": "feature",
+    "description": "AWS Site-to-Site VPN now supports IPv6 addresses on outer tunnel IPs, making it easier for customers to build or transition to IPv6-only networks.",
+    "modules": [
+        "service/ec2"
+    ]
+}

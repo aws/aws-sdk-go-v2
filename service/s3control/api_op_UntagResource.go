@@ -15,26 +15,39 @@ import (
 	"strings"
 )
 
-//	This operation removes the specified Amazon Web Services resource tags from an
+// This operation removes the specified user-defined tags from an S3 resource. You
+// can pass one or more tag keys.
 //
-// S3 resource. Each tag is a label consisting of a user-defined key and value.
-// Tags can help you manage, identify, organize, search for, and filter resources.
+// This operation is only supported for the following Amazon S3 resources:
 //
-// This operation is only supported for [S3 Storage Lens groups] and for [S3 Access Grants]. The tagged resource can be an
-// S3 Storage Lens group or S3 Access Grants instance, registered location, or
-// grant.
+// [Directory buckets]
 //
-// Permissions You must have the s3:UntagResource permission to use this
-// operation.
+// [Storage Lens groups]
+//
+// [S3 Access Grants instances, registered locations, and grants]
+//   - .
+//
+// Permissions For Storage Lens groups and S3 Access Grants, you must have the
+// s3:UntagResource permission to use this operation.
 //
 // For more information about the required Storage Lens Groups permissions, see [Setting account permissions to use S3 Storage Lens groups].
+//
+// Directory bucket permissions For directory buckets, you must have the
+// s3express:UntagResource permission to use this operation. For more information
+// about directory buckets policies and permissions, see [Identity and Access Management (IAM) for S3 Express One Zone]in the Amazon S3 User
+// Guide.
+//
+// HTTP Host header syntax  Directory buckets - The HTTP Host header syntax is
+// s3express-control.region.amazonaws.com .
 //
 // For information about S3 Tagging errors, see [List of Amazon S3 Tagging error codes].
 //
 // [Setting account permissions to use S3 Storage Lens groups]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
-// [S3 Access Grants]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html
+// [S3 Access Grants instances, registered locations, and grants]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html
 // [List of Amazon S3 Tagging error codes]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList
-// [S3 Storage Lens groups]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html
+// [Directory buckets]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-tagging.html
+// [Identity and Access Management (IAM) for S3 Express One Zone]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-permissions.html
+// [Storage Lens groups]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -58,8 +71,9 @@ type UntagResourceInput struct {
 	// This member is required.
 	AccountId *string
 
-	//  The Amazon Resource Name (ARN) of the S3 resource that you're trying to remove
-	// the tags from.
+	// The Amazon Resource Name (ARN) of the S3 resource that you're removing tags
+	// from. The tagged resource can be a directory bucket, S3 Storage Lens group or S3
+	// Access Grants instance, registered location, or grant.
 	//
 	// This member is required.
 	ResourceArn *string
@@ -76,6 +90,7 @@ type UntagResourceInput struct {
 func (in *UntagResourceInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.AccountId = in.AccountId
+	p.ResourceArn = in.ResourceArn
 	p.RequiresAccountId = ptr.Bool(true)
 }
 

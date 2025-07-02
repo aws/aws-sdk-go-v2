@@ -1,0 +1,8 @@
+{
+    "id": "0053862f-6196-4f45-a813-43b89dfb444b",
+    "type": "feature",
+    "description": "Added support for directory bucket creation with tags and bucket ARN retrieval in CreateBucket, ListDirectoryBuckets, and HeadBucket operations",
+    "modules": [
+        "service/s3"
+    ]
+}

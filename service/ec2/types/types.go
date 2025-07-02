@@ -3241,10 +3241,12 @@ type CustomerGateway struct {
 	// The name of customer gateway device.
 	DeviceName *string
 
-	//  IPv4 address for the customer gateway device's outside interface. The address
-	// must be static. If OutsideIpAddressType in your VPN connection options is set
-	// to PrivateIpv4 , you can use an RFC6598 or RFC1918 private IPv4 address. If
-	// OutsideIpAddressType is set to PublicIpv4 , you can use a public IPv4 address.
+	//  The IP address for the customer gateway device's outside interface. The
+	// address must be static. If OutsideIpAddressType in your VPN connection options
+	// is set to PrivateIpv4 , you can use an RFC6598 or RFC1918 private IPv4 address.
+	// If OutsideIpAddressType is set to PublicIpv4 , you can use a public IPv4
+	// address. If OutsideIpAddressType is set to Ipv6 , you can use a public IPv6
+	// address.
 	IpAddress *string
 
 	// The current state of the customer gateway ( pending | available | deleting |
@@ -22925,7 +22927,7 @@ type VpnConnectionOptions struct {
 	// The type of IPv4 address assigned to the outside interface of the customer
 	// gateway.
 	//
-	// Valid values: PrivateIpv4 | PublicIpv4
+	// Valid values: PrivateIpv4 | PublicIpv4 | Ipv6
 	//
 	// Default: PublicIpv4
 	OutsideIpAddressType *string
@@ -22970,10 +22972,10 @@ type VpnConnectionOptionsSpecification struct {
 	// Default: ::/0
 	LocalIpv6NetworkCidr *string
 
-	// The type of IPv4 address assigned to the outside interface of the customer
+	// The type of IP address assigned to the outside interface of the customer
 	// gateway device.
 	//
-	// Valid values: PrivateIpv4 | PublicIpv4
+	// Valid values: PrivateIpv4 | PublicIpv4 | Ipv6
 	//
 	// Default: PublicIpv4
 	OutsideIpAddressType *string

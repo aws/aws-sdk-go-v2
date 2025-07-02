@@ -16,26 +16,42 @@ import (
 	"strings"
 )
 
-//	Creates a new Amazon Web Services resource tag or updates an existing resource
+//	Creates a new user-defined tag or updates an existing tag. Each tag is a label
 //
-// tag. Each tag is a label consisting of a user-defined key and value. Tags can
-// help you manage, identify, organize, search for, and filter resources. You can
-// add up to 50 Amazon Web Services resource tags for each S3 resource.
+// consisting of a key and value that is applied to your resource. Tags can help
+// you organize, track costs for, and control access to your resources. You can add
+// up to 50 Amazon Web Services resource tags for each S3 resource.
 //
-// This operation is only supported for [S3 Storage Lens groups] and for [S3 Access Grants]. The tagged resource can be an
-// S3 Storage Lens group or S3 Access Grants instance, registered location, or
-// grant.
+// This operation is only supported for the following Amazon S3 resource:
 //
-// Permissions You must have the s3:TagResource permission to use this operation.
+// [Directory buckets]
+//
+// [S3 Storage Lens groups]
+//
+// [S3 Access Grants instances, registered locations, or grants]
+//   - .
+//
+// Permissions For Storage Lens groups and S3 Access Grants, you must have the
+// s3:TagResource permission to use this operation.
 //
 // For more information about the required Storage Lens Groups permissions, see [Setting account permissions to use S3 Storage Lens groups].
+//
+// Directory bucket permissions For directory buckets, you must have the
+// s3express:TagResource permission to use this operation. For more information
+// about directory buckets policies and permissions, see [Identity and Access Management (IAM) for S3 Express One Zone]in the Amazon S3 User
+// Guide.
+//
+// HTTP Host header syntax  Directory buckets - The HTTP Host header syntax is
+// s3express-control.region.amazonaws.com .
 //
 // For information about S3 Tagging errors, see [List of Amazon S3 Tagging error codes].
 //
 // [Setting account permissions to use S3 Storage Lens groups]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
-// [S3 Access Grants]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html
 // [List of Amazon S3 Tagging error codes]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList
+// [Directory buckets]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-tagging.html
+// [Identity and Access Management (IAM) for S3 Express One Zone]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-permissions.html
 // [S3 Storage Lens groups]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html
+// [S3 Access Grants instances, registered locations, or grants]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -59,9 +75,9 @@ type TagResourceInput struct {
 	// This member is required.
 	AccountId *string
 
-	// The Amazon Resource Name (ARN) of the S3 resource that you're trying to add
-	// tags to. The tagged resource can be an S3 Storage Lens group or S3 Access Grants
-	// instance, registered location, or grant.
+	// The Amazon Resource Name (ARN) of the S3 resource that you're applying tags to.
+	// The tagged resource can be a directory bucket, S3 Storage Lens group or S3
+	// Access Grants instance, registered location, or grant.
 	//
 	// This member is required.
 	ResourceArn *string
@@ -78,6 +94,7 @@ type TagResourceInput struct {
 func (in *TagResourceInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.AccountId = in.AccountId
+	p.ResourceArn = in.ResourceArn
 	p.RequiresAccountId = ptr.Bool(true)
 }
 
