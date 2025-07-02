@@ -409,6 +409,11 @@
                             "documentation": "When an Access Point ARN is provided and this flag is enabled, the SDK MUST use the ARN's region when constructing the endpoint instead of the client's configured region.",
                             "type": "Boolean"
                         },
+                        "ResourceArn": {
+                            "required": false,
+                            "documentation": "The resource ARN included in the request.  Only set on TagResource, UntagResourceand ListTagsForResource",
+                            "type": "String"
+                        },
                         "UseS3ExpressControlEndpoint": {
                             "required": false,
                             "documentation": "Internal parameter to indicate whether S3Express operation should use control plane, (ex. ListDirectoryAccessPoints)",
@@ -766,6 +771,281 @@
                                                     "conditions": [],
                                                     "error": "Invalid region: region was not a valid DNS name.",
                                                     "type": "error"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "ResourceArn"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "aws.parseArn",
+                                            "argv": [
+                                                {
+                                                    "ref": "ResourceArn"
+                                                }
+                                            ],
+                                            "assign": "resourceArn"
+                                        },
+                                        {
+                                            "fn": "stringEquals",
+                                            "argv": [
+                                                {
+                                                    "fn": "getAttr",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "resourceArn"
+                                                        },
+                                                        "service"
+                                                    ]
+                                                },
+                                                "s3express"
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "partitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "aws.partition",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "resourceArn"
+                                                                        },
+                                                                        "region"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "assign": "arnPartition"
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "arnPartition"
+                                                                                },
+                                                                                "name"
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "partitionResult"
+                                                                                },
+                                                                                "name"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [
+                                                                        {
+                                                                            "fn": "isSet",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "UseArnRegion"
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "fn": "booleanEquals",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "UseArnRegion"
+                                                                                },
+                                                                                false
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "fn": "not",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "fn": "stringEquals",
+                                                                                    "argv": [
+                                                                                        {
+                                                                                            "fn": "getAttr",
+                                                                                            "argv": [
+                                                                                                {
+                                                                                                    "ref": "resourceArn"
+                                                                                                },
+                                                                                                "region"
+                                                                                            ]
+                                                                                        },
+                                                                                        "{Region}"
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ],
+                                                                    "error": "Invalid configuration: region from ARN `{resourceArn#region}` does not match client region `{Region}` and UseArnRegion is `false`",
+                                                                    "type": "error"
+                                                                },
+                                                                {
+                                                                    "conditions": [
+                                                                        {
+                                                                            "fn": "isSet",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "Endpoint"
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "fn": "booleanEquals",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "UseDualStack"
+                                                                                },
+                                                                                true
+                                                                            ]
+                                                                        }
+                                                                    ],
+                                                                    "error": "Invalid Configuration: DualStack and custom endpoint are not supported",
+                                                                    "type": "error"
+                                                                },
+                                                                {
+                                                                    "conditions": [
+                                                                        {
+                                                                            "fn": "booleanEquals",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "UseDualStack"
+                                                                                },
+                                                                                true
+                                                                            ]
+                                                                        }
+                                                                    ],
+                                                                    "error": "S3Express does not support Dual-stack.",
+                                                                    "type": "error"
+                                                                },
+                                                                {
+                                                                    "conditions": [
+                                                                        {
+                                                                            "fn": "isSet",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "Endpoint"
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "fn": "parseURL",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "Endpoint"
+                                                                                }
+                                                                            ],
+                                                                            "assign": "url"
+                                                                        }
+                                                                    ],
+                                                                    "endpoint": {
+                                                                        "url": "{url#scheme}://{url#authority}",
+                                                                        "properties": {
+                                                                            "authSchemes": [
+                                                                                {
+                                                                                    "disableDoubleEncoding": true,
+                                                                                    "name": "sigv4",
+                                                                                    "signingName": "s3express",
+                                                                                    "signingRegion": "{Region}"
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                },
+                                                                {
+                                                                    "conditions": [
+                                                                        {
+                                                                            "fn": "booleanEquals",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "UseFIPS"
+                                                                                },
+                                                                                true
+                                                                            ]
+                                                                        }
+                                                                    ],
+                                                                    "endpoint": {
+                                                                        "url": "https://s3express-control-fips.{Region}.{partitionResult#dnsSuffix}",
+                                                                        "properties": {
+                                                                            "authSchemes": [
+                                                                                {
+                                                                                    "disableDoubleEncoding": true,
+                                                                                    "name": "sigv4",
+                                                                                    "signingName": "s3express",
+                                                                                    "signingRegion": "{Region}"
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                },
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://s3express-control.{Region}.{partitionResult#dnsSuffix}",
+                                                                        "properties": {
+                                                                            "authSchemes": [
+                                                                                {
+                                                                                    "disableDoubleEncoding": true,
+                                                                                    "name": "sigv4",
+                                                                                    "signingName": "s3express",
+                                                                                    "signingRegion": "{Region}"
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "Client was configured for partition `{partitionResult#name}` but ARN has `{arnPartition#name}`",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
                                                 }
                                             ],
                                             "type": "tree"
@@ -7167,6 +7447,483 @@
                                 "Endpoint": "https://10.0.1.12:433",
                                 "UseFIPS": false,
                                 "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "Tagging on express bucket routed to s3express-control",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingName": "s3express",
+                                                "signingRegion": "us-east-1",
+                                                "disableDoubleEncoding": true
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://s3express-control.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1"
+                                    },
+                                    "operationName": "TagResource",
+                                    "operationParams": {
+                                        "ResourceArn": "arn:aws:s3express:us-east-1:871317572157:bucket/crachlintest--use1-az4--x-s3",
+                                        "AccountId": "871317572157",
+                                        "Tags": []
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1"
+                                    },
+                                    "operationName": "UntagResource",
+                                    "operationParams": {
+                                        "ResourceArn": "arn:aws:s3express:us-east-1:871317572157:bucket/crachlintest--use1-az4--x-s3",
+                                        "AccountId": "871317572157",
+                                        "TagKeys": []
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1"
+                                    },
+                                    "operationName": "ListTagsForResource",
+                                    "operationParams": {
+                                        "ResourceArn": "arn:aws:s3express:us-east-1:871317572157:bucket/crachlintest--use1-az4--x-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                }
+                            ],
+                            "params": {
+                                "ResourceArn": "arn:aws:s3express:us-east-1:871317572157:bucket/crachlintest--use1-az4--x-s3",
+                                "AccountId": "871317572157",
+                                "Region": "us-east-1",
+                                "RequiresAccountId": true,
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "Tagging on express ap routed to s3express-control",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingName": "s3express",
+                                                "signingRegion": "us-east-1",
+                                                "disableDoubleEncoding": true
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://s3express-control.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1"
+                                    },
+                                    "operationName": "TagResource",
+                                    "operationParams": {
+                                        "ResourceArn": "arn:aws:s3express:us-east-1:871317572157:accesspoint/crachlintest--use1-az4--xa-s3",
+                                        "AccountId": "871317572157",
+                                        "Tags": []
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1"
+                                    },
+                                    "operationName": "UntagResource",
+                                    "operationParams": {
+                                        "ResourceArn": "arn:aws:s3express:us-east-1:871317572157:accesspoint/crachlintest--use1-az4--xa-s3",
+                                        "AccountId": "871317572157",
+                                        "TagKeys": []
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1"
+                                    },
+                                    "operationName": "ListTagsForResource",
+                                    "operationParams": {
+                                        "ResourceArn": "arn:aws:s3express:us-east-1:871317572157:accesspoint/crachlintest--use1-az4--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                }
+                            ],
+                            "params": {
+                                "ResourceArn": "arn:aws:s3express:us-east-1:871317572157:accesspoint/crachlintest--use1-az4--xa-s3",
+                                "AccountId": "871317572157",
+                                "Region": "us-east-1",
+                                "RequiresAccountId": true,
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "Tagging on express bucket routed to s3express-control FIPS when FIPS enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingName": "s3express",
+                                                "signingRegion": "us-east-1",
+                                                "disableDoubleEncoding": true
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://s3express-control-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1",
+                                        "AWS::UseFIPS": true
+                                    },
+                                    "operationName": "TagResource",
+                                    "operationParams": {
+                                        "ResourceArn": "arn:aws:s3express:us-east-1:871317572157:bucket/crachlintest--use1-az4--x-s3",
+                                        "AccountId": "871317572157",
+                                        "Tags": []
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1",
+                                        "AWS::UseFIPS": true
+                                    },
+                                    "operationName": "UntagResource",
+                                    "operationParams": {
+                                        "ResourceArn": "arn:aws:s3express:us-east-1:871317572157:bucket/crachlintest--use1-az4--x-s3",
+                                        "AccountId": "871317572157",
+                                        "TagKeys": []
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1",
+                                        "AWS::UseFIPS": true
+                                    },
+                                    "operationName": "ListTagsForResource",
+                                    "operationParams": {
+                                        "ResourceArn": "arn:aws:s3express:us-east-1:871317572157:bucket/crachlintest--use1-az4--x-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                }
+                            ],
+                            "params": {
+                                "ResourceArn": "arn:aws:s3express:us-east-1:871317572157:bucket/crachlintest--use1-az4--x-s3",
+                                "AccountId": "871317572157",
+                                "Region": "us-east-1",
+                                "RequiresAccountId": true,
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "Tagging on express bucket cn routed to s3express-control china endpoint",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingName": "s3express",
+                                                "signingRegion": "cn-north-1",
+                                                "disableDoubleEncoding": true
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://s3express-control.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "cn-north-1"
+                                    },
+                                    "operationName": "TagResource",
+                                    "operationParams": {
+                                        "ResourceArn": "arn:aws-cn:s3express:cn-north-1:871317572157:bucket/crachlintest--use1-az4--x-s3",
+                                        "AccountId": "871317572157",
+                                        "Tags": []
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "cn-north-1"
+                                    },
+                                    "operationName": "UntagResource",
+                                    "operationParams": {
+                                        "ResourceArn": "arn:aws-cn:s3express:cn-north-1:871317572157:bucket/crachlintest--use1-az4--x-s3",
+                                        "AccountId": "871317572157",
+                                        "TagKeys": []
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "cn-north-1"
+                                    },
+                                    "operationName": "ListTagsForResource",
+                                    "operationParams": {
+                                        "ResourceArn": "arn:aws-cn:s3express:cn-north-1:871317572157:bucket/crachlintest--use1-az4--x-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                }
+                            ],
+                            "params": {
+                                "ResourceArn": "arn:aws-cn:s3express:cn-north-1:871317572157:bucket/crachlintest--use1-az4--x-s3",
+                                "AccountId": "871317572157",
+                                "Region": "cn-north-1",
+                                "RequiresAccountId": true,
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "Tagging on express bucket cn routed to s3express-control china endpoint with FIPS",
+                            "expect": {
+                                "error": "Partition does not support FIPS"
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "cn-north-1",
+                                        "AWS::UseFIPS": true
+                                    },
+                                    "operationName": "TagResource",
+                                    "operationParams": {
+                                        "ResourceArn": "arn:aws-cn:s3express:cn-north-1:871317572157:bucket/crachlintest--use1-az4--x-s3",
+                                        "AccountId": "871317572157",
+                                        "Tags": []
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "cn-north-1",
+                                        "AWS::UseFIPS": true
+                                    },
+                                    "operationName": "UntagResource",
+                                    "operationParams": {
+                                        "ResourceArn": "arn:aws-cn:s3express:cn-north-1:871317572157:bucket/crachlintest--use1-az4--x-s3",
+                                        "AccountId": "871317572157",
+                                        "TagKeys": []
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "cn-north-1",
+                                        "AWS::UseFIPS": true
+                                    },
+                                    "operationName": "ListTagsForResource",
+                                    "operationParams": {
+                                        "ResourceArn": "arn:aws-cn:s3express:cn-north-1:871317572157:bucket/crachlintest--use1-az4--x-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                }
+                            ],
+                            "params": {
+                                "ResourceArn": "arn:aws-cn:s3express:cn-north-1:871317572157:bucket/crachlintest--use1-az4--x-s3",
+                                "AccountId": "871317572157",
+                                "Region": "cn-north-1",
+                                "RequiresAccountId": true,
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "Tagging on express bucket with custom endpoint routed to custom endpoint",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingName": "s3express",
+                                                "signingRegion": "us-east-1",
+                                                "disableDoubleEncoding": true
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://my-endpoint.express-control.s3.aws.dev"
+                                }
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1",
+                                        "SDK::Endpoint": "https://my-endpoint.express-control.s3.aws.dev"
+                                    },
+                                    "operationName": "TagResource",
+                                    "operationParams": {
+                                        "ResourceArn": "arn:aws:s3express:us-east-1:871317572157:bucket/crachlintest--use1-az4--x-s3",
+                                        "AccountId": "871317572157",
+                                        "Tags": []
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1",
+                                        "SDK::Endpoint": "https://my-endpoint.express-control.s3.aws.dev"
+                                    },
+                                    "operationName": "UntagResource",
+                                    "operationParams": {
+                                        "ResourceArn": "arn:aws:s3express:us-east-1:871317572157:bucket/crachlintest--use1-az4--x-s3",
+                                        "AccountId": "871317572157",
+                                        "TagKeys": []
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1",
+                                        "SDK::Endpoint": "https://my-endpoint.express-control.s3.aws.dev"
+                                    },
+                                    "operationName": "ListTagsForResource",
+                                    "operationParams": {
+                                        "ResourceArn": "arn:aws:s3express:us-east-1:871317572157:bucket/crachlintest--use1-az4--x-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                }
+                            ],
+                            "params": {
+                                "ResourceArn": "arn:aws:s3express:us-east-1:871317572157:bucket/crachlintest--use1-az4--x-s3",
+                                "Endpoint": "https://my-endpoint.express-control.s3.aws.dev",
+                                "AccountId": "871317572157",
+                                "Region": "us-east-1",
+                                "RequiresAccountId": true,
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "Tagging on express access point with custom endpoint routed to custom endpoint",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingName": "s3express",
+                                                "signingRegion": "us-east-1",
+                                                "disableDoubleEncoding": true
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://my-endpoint.express-control.s3.aws.dev"
+                                }
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1",
+                                        "SDK::Endpoint": "https://my-endpoint.express-control.s3.aws.dev"
+                                    },
+                                    "operationName": "TagResource",
+                                    "operationParams": {
+                                        "ResourceArn": "arn:aws:s3express:us-east-1:871317572157:accesspoint/crachlintest--use1-az4--xa-s3",
+                                        "AccountId": "871317572157",
+                                        "Tags": []
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1",
+                                        "SDK::Endpoint": "https://my-endpoint.express-control.s3.aws.dev"
+                                    },
+                                    "operationName": "UntagResource",
+                                    "operationParams": {
+                                        "ResourceArn": "arn:aws:s3express:us-east-1:871317572157:accesspoint/crachlintest--use1-az4--xa-s3",
+                                        "AccountId": "871317572157",
+                                        "TagKeys": []
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1",
+                                        "SDK::Endpoint": "https://my-endpoint.express-control.s3.aws.dev"
+                                    },
+                                    "operationName": "ListTagsForResource",
+                                    "operationParams": {
+                                        "ResourceArn": "arn:aws:s3express:us-east-1:871317572157:accesspoint/crachlintest--use1-az4--xa-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                }
+                            ],
+                            "params": {
+                                "ResourceArn": "arn:aws:s3express:us-east-1:871317572157:accesspoint/crachlintest--use1-az4--xa-s3",
+                                "Endpoint": "https://my-endpoint.express-control.s3.aws.dev",
+                                "AccountId": "871317572157",
+                                "Region": "us-east-1",
+                                "RequiresAccountId": true,
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "Tagging on express bucket with dualstack and custom endpoint fails",
+                            "expect": {
+                                "error": "Invalid Configuration: DualStack and custom endpoint are not supported"
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1",
+                                        "SDK::Endpoint": "https://my-endpoint.express-control.s3.aws.dev",
+                                        "AWS::UseDualStack": true
+                                    },
+                                    "operationName": "TagResource",
+                                    "operationParams": {
+                                        "ResourceArn": "arn:aws:s3express:us-east-1:871317572157:bucket/crachlintest--use1-az4--x-s3",
+                                        "AccountId": "871317572157",
+                                        "Tags": []
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1",
+                                        "SDK::Endpoint": "https://my-endpoint.express-control.s3.aws.dev",
+                                        "AWS::UseDualStack": true
+                                    },
+                                    "operationName": "UntagResource",
+                                    "operationParams": {
+                                        "ResourceArn": "arn:aws:s3express:us-east-1:871317572157:bucket/crachlintest--use1-az4--x-s3",
+                                        "AccountId": "871317572157",
+                                        "TagKeys": []
+                                    }
+                                },
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1",
+                                        "SDK::Endpoint": "https://my-endpoint.express-control.s3.aws.dev",
+                                        "AWS::UseDualStack": true
+                                    },
+                                    "operationName": "ListTagsForResource",
+                                    "operationParams": {
+                                        "ResourceArn": "arn:aws:s3express:us-east-1:871317572157:bucket/crachlintest--use1-az4--x-s3",
+                                        "AccountId": "871317572157"
+                                    }
+                                }
+                            ],
+                            "params": {
+                                "ResourceArn": "arn:aws:s3express:us-east-1:871317572157:bucket/crachlintest--use1-az4--x-s3",
+                                "Endpoint": "https://my-endpoint.express-control.s3.aws.dev",
+                                "AccountId": "871317572157",
+                                "Region": "us-east-1",
+                                "RequiresAccountId": true,
+                                "UseDualStack": true,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -16742,7 +17499,7 @@
                 "target": "com.amazonaws.s3control#ListTagsForResourceResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>This operation allows you to list all the Amazon Web Services resource tags for a specified resource. Each tag is a label consisting of a user-defined key and value. Tags can help you manage, identify, organize, search for, and filter resources. </p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3:ListTagsForResource</code> permission to use this operation. </p>\n            </dd>\n         </dl>\n         <note>\n            <p>This operation is only supported for <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html\">S3 Storage Lens groups</a> and for <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html\">S3 Access Grants</a>. The tagged resource can be an S3 Storage Lens group or S3 Access Grants instance, registered location, or grant. </p>\n         </note>\n         <p>For more information about the required Storage Lens\n      Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about S3 Tagging errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList\">List of Amazon S3 Tagging error codes</a>.</p>",
+                "smithy.api#documentation": "<p>This operation allows you to list all of the tags for a specified resource. Each tag is a label consisting of a key and value. Tags can help you organize, track costs for, and control access to resources. </p>\n         <note>\n            <p>This operation is only supported for the following Amazon S3 resources:</p>\n            <ul>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-tagging.html\">Directory buckets</a>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html\">Storage Lens groups</a>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html\">S3 Access Grants instances, registered locations, and grants</a>.</p>\n               </li>\n            </ul>\n         </note>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>For Storage Lens groups and S3 Access Grants, you must have the <code>s3:ListTagsForResource</code> permission to use this operation. </p>\n               <p>For more information about the required Storage Lens Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n            </dd>\n            <dt>Directory bucket permissions</dt>\n            <dd>\n               <p>For directory buckets, you must have the <code>s3express:ListTagsForResource</code> permission to use this operation. For more information about directory buckets policies and permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-permissions.html\">Identity and Access Management (IAM) for S3 Express One Zone</a> in the <i>Amazon S3 User Guide</i>.</p>\n            </dd>\n            <dt>HTTP Host header syntax</dt>\n            <dd>\n               <p>\n                  <b>Directory buckets </b> - The HTTP Host header syntax is <code>s3express-control.<i>region</i>.amazonaws.com</code>.</p>\n            </dd>\n         </dl>\n         <p>For information about S3 Tagging errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList\">List of Amazon S3 Tagging error codes</a>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -16776,9 +17533,12 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.s3control#S3ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe Amazon Resource Name (ARN) of the S3 resource that you want to list the tags for. The tagged resource can be an S3 Storage Lens group or S3 Access Grants instance, registered location, or grant.\n</p>",
+                        "smithy.api#documentation": "<p>\nThe Amazon Resource Name (ARN) of the S3 resource that you want to list tags for. The tagged resource can be a directory bucket, S3 Storage Lens group or S3 Access Grants instance, registered location, or grant.\n</p>",
                         "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "ResourceArn"
+                        }
                     }
                 }
             },
@@ -20339,7 +21099,7 @@
                     "min": 0,
                     "max": 1011
                 },
-                "smithy.api#pattern": "^arn:[^:]+:s3:[^:]"
+                "smithy.api#pattern": "^arn:[^:]+:s3(express)?:[^:]"
             }
         },
         "com.amazonaws.s3control#S3Retention": {
@@ -21303,7 +22063,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n   An Amazon Web Services resource tag that's associated with your S3 resource. You can add tags to new objects when you upload them, or you can add object tags to existing objects. \n</p>\n         <note>\n            <p>This operation is only supported for <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html\">S3 Storage Lens groups</a> and for <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html\">S3 Access Grants</a>. The tagged resource can be an S3 Storage Lens group or S3 Access Grants instance, registered location, or grant. </p>\n         </note>"
+                "smithy.api#documentation": "<p>\n   A key-value pair that you use to label your resources. You can add tags to new resources when you create them, or you can add tags to existing resources. Tags can help you organize, track costs for, and control access to resources.\n</p>"
             }
         },
         "com.amazonaws.s3control#TagKeyList": {
@@ -21352,7 +22112,7 @@
                 "target": "com.amazonaws.s3control#TagResourceResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p> Creates a new Amazon Web Services resource tag or updates an existing resource tag. Each tag is a label consisting of a user-defined key and value. Tags can help you manage, identify, organize, search for, and filter resources. You can add up to 50 Amazon Web Services resource tags for each S3 resource. </p>\n         <note>\n            <p>This operation is only supported for <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html\">S3 Storage Lens groups</a> and for <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html\">S3 Access Grants</a>. The tagged resource can be an S3 Storage Lens group or S3 Access Grants instance, registered location, or grant. </p>\n         </note>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3:TagResource</code> permission to use this operation. </p>\n            </dd>\n         </dl>\n         <p>For more information about the required Storage Lens\n      Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about S3 Tagging errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList\">List of Amazon S3 Tagging error codes</a>.</p>",
+                "smithy.api#documentation": "<p> Creates a new user-defined tag or updates an existing tag. Each tag is a label consisting of a key and value that is applied to your resource. Tags can help you organize, track costs for, and control access to your resources. You can add up to 50 Amazon Web Services resource tags for each S3 resource. </p>\n         <note>\n            <p>This operation is only supported for the following Amazon S3 resource:</p>\n            <ul>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-tagging.html\">Directory buckets</a>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html\">S3 Storage Lens groups</a>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html\">S3 Access Grants instances, registered locations, or grants</a>.</p>\n               </li>\n            </ul>\n         </note>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>For Storage Lens groups and S3 Access Grants, you must have the <code>s3:TagResource</code> permission to use this operation. </p>\n               <p>For more information about the required Storage Lens Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n            </dd>\n            <dt>Directory bucket permissions</dt>\n            <dd>\n               <p>For directory buckets, you must have the <code>s3express:TagResource</code> permission to use this operation. For more information about directory buckets policies and permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-permissions.html\">Identity and Access Management (IAM) for S3 Express One Zone</a> in the <i>Amazon S3 User Guide</i>.</p>\n            </dd>\n            <dt>HTTP Host header syntax</dt>\n            <dd>\n               <p>\n                  <b>Directory buckets </b> - The HTTP Host header syntax is <code>s3express-control.<i>region</i>.amazonaws.com</code>.</p>\n            </dd>\n         </dl>\n         <p>For information about S3 Tagging errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList\">List of Amazon S3 Tagging error codes</a>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -21386,9 +22146,12 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.s3control#S3ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the S3 resource that you're trying to add tags to. The tagged resource can be an S3 Storage Lens group or S3 Access Grants instance, registered location, or grant.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the S3 resource that you're applying tags to. The tagged resource can be a directory bucket, S3 Storage Lens group or S3 Access Grants instance, registered location, or grant.</p>",
                         "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "ResourceArn"
+                        }
                     }
                 },
                 "Tags": {
@@ -21551,7 +22314,7 @@
                 "target": "com.amazonaws.s3control#UntagResourceResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p> This operation removes the specified Amazon Web Services resource tags from an S3 resource. Each tag is a label consisting of a user-defined key and value. Tags can help you manage, identify, organize, search for, and filter resources. </p>\n         <note>\n            <p>This operation is only supported for <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html\">S3 Storage Lens groups</a> and for <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html\">S3 Access Grants</a>. The tagged resource can be an S3 Storage Lens group or S3 Access Grants instance, registered location, or grant. </p>\n         </note>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3:UntagResource</code> permission to use this operation. </p>\n            </dd>\n         </dl>\n         <p>For more information about the required Storage\n         Lens Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n         <p>For information about S3 Tagging errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList\">List of Amazon S3\n            Tagging error codes</a>.</p>",
+                "smithy.api#documentation": "<p>This operation removes the specified user-defined tags from an S3 resource. You can pass one or more tag keys. </p>\n         <note>\n            <p>This operation is only supported for the following Amazon S3 resources:</p>\n            <ul>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-tagging.html\">Directory buckets</a>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html\">Storage Lens groups</a>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html\">S3 Access Grants instances, registered locations, and grants</a>.</p>\n               </li>\n            </ul>\n         </note>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>For Storage Lens groups and S3 Access Grants, you must have the <code>s3:UntagResource</code> permission to use this operation. </p>\n               <p>For more information about the required Storage Lens Groups permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions\">Setting account permissions to use S3 Storage Lens groups</a>.</p>\n            </dd>\n            <dt>Directory bucket permissions</dt>\n            <dd>\n               <p>For directory buckets, you must have the <code>s3express:UntagResource</code> permission to use this operation. For more information about directory buckets policies and permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-permissions.html\">Identity and Access Management (IAM) for S3 Express One Zone</a> in the <i>Amazon S3 User Guide</i>.</p>\n            </dd>\n            <dt>HTTP Host header syntax</dt>\n            <dd>\n               <p>\n                  <b>Directory buckets </b> - The HTTP Host header syntax is <code>s3express-control.<i>region</i>.amazonaws.com</code>.</p>\n            </dd>\n         </dl>\n         <p>For information about S3 Tagging errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList\">List of Amazon S3\n            Tagging error codes</a>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -21585,9 +22348,12 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.s3control#S3ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The Amazon Resource Name (ARN) of the S3 resource that you're trying to remove the tags from.\n   </p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the S3 resource that you're removing tags from. The tagged resource can be a directory bucket, S3 Storage Lens group or S3 Access Grants instance, registered location, or grant.</p>",
                         "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "ResourceArn"
+                        }
                     }
                 },
                 "TagKeys": {

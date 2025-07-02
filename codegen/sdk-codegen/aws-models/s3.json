@@ -21106,6 +21106,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n            <code>BucketRegion</code> indicates the Amazon Web Services region where the bucket is located. If the\n         request contains at least one valid parameter, it is included in the response.</p>"
                     }
+                },
+                "BucketArn": {
+                    "target": "com.amazonaws.s3#S3RegionalOrS3ExpressBucketArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the S3 bucket. ARNs uniquely identify Amazon Web Services resources across all of Amazon Web Services.</p>\n         <note>\n            <p>This parameter is only supported for S3 directory buckets. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-tagging.html\">Using tags with directory buckets</a>.</p>\n         </note>"
+                    }
                 }
             },
             "traits": {
@@ -22935,6 +22941,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the information about the bucket that will be created.</p>\n         <note>\n            <p>This functionality is only supported by directory buckets.</p>\n         </note>"
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.s3#TagSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of tags that you can apply to the bucket that you're creating. Tags are key-value pairs of metadata used to categorize and organize your buckets, track costs, and control access. </p>\n         <note>\n            <p>This parameter is only supported for S3 directory buckets. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-tagging.html\">Using tags with directory buckets</a>.</p>\n         </note>"
+                    }
                 }
             },
             "traits": {
@@ -23024,6 +23036,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A forward slash followed by the name of the bucket.</p>",
                         "smithy.api#httpHeader": "Location"
+                    }
+                },
+                "BucketArn": {
+                    "target": "com.amazonaws.s3#S3RegionalOrS3ExpressBucketArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the S3 bucket. ARNs uniquely identify Amazon Web Services resources across all of Amazon Web Services.</p>\n         <note>\n            <p>This parameter is only supported for S3 directory buckets. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-tagging.html\">Using tags with directory buckets</a>.</p>\n         </note>",
+                        "smithy.api#httpHeader": "x-amz-bucket-arn"
                     }
                 }
             },
@@ -25073,7 +25092,7 @@
                 "StorageClass": {
                     "target": "com.amazonaws.s3#StorageClass",
                     "traits": {
-                        "smithy.api#documentation": "<p> The storage class to use when replicating objects, such as S3 Standard or reduced\n         redundancy. By default, Amazon S3 uses the storage class of the source object to create the\n         object replica. </p>\n         <p>For valid values, see the <code>StorageClass</code> element of the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html\">PUT Bucket\n            replication</a> action in the <i>Amazon S3 API Reference</i>.</p>"
+                        "smithy.api#documentation": "<p> The storage class to use when replicating objects, such as S3 Standard or reduced\n         redundancy. By default, Amazon S3 uses the storage class of the source object to create the\n         object replica. </p>\n         <p>For valid values, see the <code>StorageClass</code> element of the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html\">PUT Bucket\n            replication</a> action in the <i>Amazon S3 API Reference</i>.</p>\n         <p>\n            <code>FSX_OPENZFS</code> is not an accepted value when replicating objects.</p>"
                     }
                 },
                 "AccessControlTranslation": {
@@ -28756,6 +28775,13 @@
         "com.amazonaws.s3#HeadBucketOutput": {
             "type": "structure",
             "members": {
+                "BucketArn": {
+                    "target": "com.amazonaws.s3#S3RegionalOrS3ExpressBucketArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the S3 bucket. ARNs uniquely identify Amazon Web Services resources across all of Amazon Web Services.</p>\n         <note>\n            <p>This parameter is only supported for S3 directory buckets. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-tagging.html\">Using tags with directory buckets</a>.</p>\n         </note>",
+                        "smithy.api#httpHeader": "x-amz-bucket-arn"
+                    }
+                },
                 "BucketLocationType": {
                     "target": "com.amazonaws.s3#LocationType",
                     "traits": {
@@ -30974,7 +31000,7 @@
                 "Delimiter": {
                     "target": "com.amazonaws.s3#Delimiter",
                     "traits": {
-                        "smithy.api#documentation": "<p>Character you use to group keys.</p>\n         <p>All keys that contain the same string between the prefix, if specified, and the first\n         occurrence of the delimiter after the prefix are grouped under a single result element,\n            <code>CommonPrefixes</code>. If you don't specify the prefix parameter, then the\n         substring starts at the beginning of the key. The keys that are grouped under\n            <code>CommonPrefixes</code> result element are not returned elsewhere in the\n         response.</p>\n         <note>\n            <p>\n               <b>Directory buckets</b> - For directory buckets, <code>/</code> is the only supported delimiter.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>Character you use to group keys.</p>\n         <p>All keys that contain the same string between the prefix, if specified, and the first\n         occurrence of the delimiter after the prefix are grouped under a single result element,\n            <code>CommonPrefixes</code>. If you don't specify the prefix parameter, then the\n         substring starts at the beginning of the key. The keys that are grouped under\n            <code>CommonPrefixes</code> result element are not returned elsewhere in the\n         response.</p>\n         <p>\n            <code>CommonPrefixes</code> is filtered out from results if it is not lexicographically greater than the key-marker.</p>\n         <note>\n            <p>\n               <b>Directory buckets</b> - For directory buckets, <code>/</code> is the only supported delimiter.</p>\n         </note>",
                         "smithy.api#httpQuery": "delimiter"
                     }
                 },
@@ -31205,7 +31231,7 @@
                 "Delimiter": {
                     "target": "com.amazonaws.s3#Delimiter",
                     "traits": {
-                        "smithy.api#documentation": "<p>A delimiter is a character that you specify to group keys. All keys that contain the\n         same string between the <code>prefix</code> and the first occurrence of the delimiter are\n         grouped under a single result element in <code>CommonPrefixes</code>. These groups are\n         counted as one result against the <code>max-keys</code> limitation. These keys are not\n         returned elsewhere in the response.</p>",
+                        "smithy.api#documentation": "<p>A delimiter is a character that you specify to group keys. All keys that contain the\n         same string between the <code>prefix</code> and the first occurrence of the delimiter are\n         grouped under a single result element in <code>CommonPrefixes</code>. These groups are\n         counted as one result against the <code>max-keys</code> limitation. These keys are not\n         returned elsewhere in the response.</p>\n         <p>\n            <code>CommonPrefixes</code> is filtered out from results if it is not lexicographically greater than the key-marker.</p>",
                         "smithy.api#httpQuery": "delimiter"
                     }
                 },
@@ -31424,7 +31450,7 @@
                 "Delimiter": {
                     "target": "com.amazonaws.s3#Delimiter",
                     "traits": {
-                        "smithy.api#documentation": "<p>A delimiter is a character that you use to group keys.</p>",
+                        "smithy.api#documentation": "<p>A delimiter is a character that you use to group keys.</p>\n         <p>\n            <code>CommonPrefixes</code> is filtered out from results if it is not lexicographically greater than the key-marker.</p>",
                         "smithy.api#httpQuery": "delimiter"
                     }
                 },
@@ -31651,7 +31677,7 @@
                 "Delimiter": {
                     "target": "com.amazonaws.s3#Delimiter",
                     "traits": {
-                        "smithy.api#documentation": "<p>A delimiter is a character that you use to group keys.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>\n                     <b>Directory buckets</b> - For directory buckets, <code>/</code> is the only supported delimiter.</p>\n               </li>\n               <li>\n                  <p>\n                     <b>Directory buckets </b> - When you query\n                     <code>ListObjectsV2</code> with a delimiter during in-progress multipart\n                  uploads, the <code>CommonPrefixes</code> response parameter contains the prefixes\n                  that are associated with the in-progress multipart uploads. For more information\n                  about multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html\">Multipart Upload Overview</a> in\n                  the <i>Amazon S3 User Guide</i>.</p>\n               </li>\n            </ul>\n         </note>",
+                        "smithy.api#documentation": "<p>A delimiter is a character that you use to group keys.</p>\n         <p>\n            <code>CommonPrefixes</code> is filtered out from results if it is not lexicographically greater than the <code>StartAfter</code> value.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>\n                     <b>Directory buckets</b> - For directory buckets, <code>/</code> is the only supported delimiter.</p>\n               </li>\n               <li>\n                  <p>\n                     <b>Directory buckets </b> - When you query\n                     <code>ListObjectsV2</code> with a delimiter during in-progress multipart\n                  uploads, the <code>CommonPrefixes</code> response parameter contains the prefixes\n                  that are associated with the in-progress multipart uploads. For more information\n                  about multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html\">Multipart Upload Overview</a> in\n                  the <i>Amazon S3 User Guide</i>.</p>\n               </li>\n            </ul>\n         </note>",
                         "smithy.api#httpQuery": "delimiter"
                     }
                 },
@@ -37451,6 +37477,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes an Amazon S3 location that will receive the results of the restore request.</p>"
+            }
+        },
+        "com.amazonaws.s3#S3RegionalOrS3ExpressBucketArnString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^arn:[^:]+:(s3|s3express):"
             }
         },
         "com.amazonaws.s3#S3TablesArn": {
