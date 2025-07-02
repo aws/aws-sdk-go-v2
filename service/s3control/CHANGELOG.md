@@ -1,3 +1,7 @@
+# v1.60.0 (2025-07-02)
+
+* **Feature**: Added TagResource, UntagResource, and ListTagsForResource support for directory bucket
+
 # v1.59.0 (2025-06-25)
 
 * **Feature**: Add support for the ability to use Amazon S3 Access Points with Amazon FSx for OpenZFS file systems.

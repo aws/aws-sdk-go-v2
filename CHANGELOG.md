@@ -1,3 +1,18 @@
+# Release (2025-07-02)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.26.0](service/connectcases/CHANGELOG.md#v1260-2025-07-02)
+  * **Feature**: This release adds DeleteCase and DeleteRelatedItem APIs, which enable deleting cases and comments, undoing contact association, and removing service level agreements (SLAs) from cases. Contact center admins can use these APIs to delete cases when requested by customers and correct agent errors.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.229.0](service/ec2/CHANGELOG.md#v12290-2025-07-02)
+  * **Feature**: AWS Site-to-Site VPN now supports IPv6 addresses on outer tunnel IPs, making it easier for customers to build or transition to IPv6-only networks.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.83.0](service/s3/CHANGELOG.md#v1830-2025-07-02)
+  * **Feature**: Added support for directory bucket creation with tags and bucket ARN retrieval in CreateBucket, ListDirectoryBuckets, and HeadBucket operations
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.60.0](service/s3control/CHANGELOG.md#v1600-2025-07-02)
+  * **Feature**: Added TagResource, UntagResource, and ListTagsForResource support for directory bucket
+
 # Release (2025-07-01)
 
 ## Module Highlights

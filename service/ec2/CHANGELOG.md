@@ -1,3 +1,7 @@
+# v1.229.0 (2025-07-02)
+
+* **Feature**: AWS Site-to-Site VPN now supports IPv6 addresses on outer tunnel IPs, making it easier for customers to build or transition to IPv6-only networks.
+
 # v1.228.0 (2025-07-01)
 
 * **Feature**: Add Context to GetInstanceTypesFromInstanceRequirements API

@@ -1,8 +1,0 @@
-{
-    "id": "55ac722f-5f2e-481a-bbda-ef1c8ad5c09b",
-    "type": "feature",
-    "description": "Added TagResource, UntagResource, and ListTagsForResource support for directory bucket",
-    "modules": [
-        "service/s3control"
-    ]
-}

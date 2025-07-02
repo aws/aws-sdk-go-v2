@@ -1,8 +1,0 @@
-{
-    "id": "9880234d-9536-42ec-8a46-b41a3d59e7ba",
-    "type": "feature",
-    "description": "This release adds DeleteCase and DeleteRelatedItem APIs, which enable deleting cases and comments, undoing contact association, and removing service level agreements (SLAs) from cases. Contact center admins can use these APIs to delete cases when requested by customers and correct agent errors.",
-    "modules": [
-        "service/connectcases"
-    ]
-}
