@@ -1138,7 +1138,7 @@
                 "LastObjectTimestamp": {
                     "target": "com.amazonaws.customerprofiles#timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp of the newest object included in the calculated attribute calculation.</p>"
+                        "smithy.api#documentation": "<p>The timestamp of the newest object included in the calculated attribute\n         calculation.</p>"
                     }
                 }
             },
@@ -1717,7 +1717,7 @@
                 "Layout": {
                     "target": "com.amazonaws.customerprofiles#sensitiveString1To2000000",
                     "traits": {
-                        "smithy.api#documentation": "<p>A customizable layout that can be used to view data under a Customer Profiles\n         domain.</p>",
+                        "smithy.api#documentation": "<p>A customizable layout that can be used to view data under a Customer Profiles domain.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2805,6 +2805,99 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.customerprofiles#CreateUploadJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#CreateUploadJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#CreateUploadJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an Upload job to ingest data for segment imports. The metadata is created for\n         the job with the provided field mapping and unique key. </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/domains/{DomainName}/upload-jobs",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#CreateUploadJobRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain. Domain should be exists for the upload job to be created.\n      </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the upload job. Could be a file name to identify the upload\n         job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Fields": {
+                    "target": "com.amazonaws.customerprofiles#FieldMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mapping between CSV Columns and Profile Object attributes. A map of the name and\n         ObjectType field.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UniqueKey": {
+                    "target": "com.amazonaws.customerprofiles#text",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique key columns for de-duping the profiles used to map data to the profile.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataExpiry": {
+                    "target": "com.amazonaws.customerprofiles#expirationDaysInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiry duration for the profiles ingested with the job. If not provided, the system\n         default of 2 weeks is used. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#CreateUploadJobResponse": {
+            "type": "structure",
+            "members": {
+                "JobId": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the created upload job. </p>",
+                        "smithy.api#jsonName": "JobId",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.customerprofiles#CustomAttributes": {
             "type": "map",
             "key": {
@@ -2856,6 +2949,9 @@
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#CreateSegmentSnapshot"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#CreateUploadJob"
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#DeleteCalculatedAttributeDefinition"
@@ -2948,6 +3044,12 @@
                     "target": "com.amazonaws.customerprofiles#GetSimilarProfiles"
                 },
                 {
+                    "target": "com.amazonaws.customerprofiles#GetUploadJob"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#GetUploadJobPath"
+                },
+                {
                     "target": "com.amazonaws.customerprofiles#GetWorkflow"
                 },
                 {
@@ -3005,6 +3107,9 @@
                     "target": "com.amazonaws.customerprofiles#ListTagsForResource"
                 },
                 {
+                    "target": "com.amazonaws.customerprofiles#ListUploadJobs"
+                },
+                {
                     "target": "com.amazonaws.customerprofiles#ListWorkflows"
                 },
                 {
@@ -3021,6 +3126,12 @@
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#SearchProfiles"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#StartUploadJob"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#StopUploadJob"
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#TagResource"
@@ -5478,7 +5589,7 @@
         "com.amazonaws.customerprofiles#FieldMap": {
             "type": "map",
             "key": {
-                "target": "com.amazonaws.customerprofiles#name"
+                "target": "com.amazonaws.customerprofiles#fieldName"
             },
             "value": {
                 "target": "com.amazonaws.customerprofiles#ObjectTypeField"
@@ -6278,7 +6389,7 @@
                 "LastObjectTimestamp": {
                     "target": "com.amazonaws.customerprofiles#timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp of the newest object included in the calculated attribute calculation.</p>"
+                        "smithy.api#documentation": "<p>The timestamp of the newest object included in the calculated attribute\n         calculation.</p>"
                     }
                 }
             },
@@ -6419,7 +6530,7 @@
                 "Layout": {
                     "target": "com.amazonaws.customerprofiles#sensitiveString1To2000000",
                     "traits": {
-                        "smithy.api#documentation": "<p>A customizable layout that can be used to view data under a Customer Profiles\n         domain.</p>",
+                        "smithy.api#documentation": "<p>A customizable layout that can be used to view data under a Customer Profiles domain.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7968,6 +8079,230 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.customerprofiles#GetUploadJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#GetUploadJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#GetUploadJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This API retrieves the details of a specific upload job. </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/domains/{DomainName}/upload-jobs/{JobId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#GetUploadJobPath": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#GetUploadJobPathRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#GetUploadJobPathResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This API retrieves the pre-signed URL and client token for uploading the file associated\n         with the upload job. </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/domains/{DomainName}/upload-jobs/{JobId}/path",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#GetUploadJobPathRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain containing the upload job. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the upload job to retrieve the upload path for. This is\n         generated from the CreateUploadJob API. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#GetUploadJobPathResponse": {
+            "type": "structure",
+            "members": {
+                "Url": {
+                    "target": "com.amazonaws.customerprofiles#stringTo2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pre-signed S3 URL for uploading the CSV file associated with the upload job. </p>",
+                        "smithy.api#jsonName": "Url",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.customerprofiles#text",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The plaintext data key used to encrypt the upload file. </p>\n         <p>To persist to the pre-signed url, use the client token and MD5 client token as header.\n         The required headers are as follows: </p>\n         <ul>\n            <li>\n               <p>x-amz-server-side-encryption-customer-key: Client Token </p>\n            </li>\n            <li>\n               <p>x-amz-server-side-encryption-customer-key-MD5: MD5 Client Token </p>\n            </li>\n            <li>\n               <p>x-amz-server-side-encryption-customer-algorithm: AES256 </p>\n            </li>\n         </ul>",
+                        "smithy.api#jsonName": "ClientToken"
+                    }
+                },
+                "ValidUntil": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiry timestamp for the pre-signed URL, after which the URL will no longer be\n         valid. </p>",
+                        "smithy.api#jsonName": "ValidUntil"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#GetUploadJobRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain containing the upload job. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the upload job to retrieve. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#GetUploadJobResponse": {
+            "type": "structure",
+            "members": {
+                "JobId": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the upload job. </p>",
+                        "smithy.api#jsonName": "JobId"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the upload job. Could be a file name to identify the upload job.\n      </p>",
+                        "smithy.api#jsonName": "DisplayName"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.customerprofiles#UploadJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status describing the status for the upload job. The following are Valid Values: </p>\n         <ul>\n            <li>\n               <p>\n                  <b>CREATED</b>: The upload job has been created, but has\n               not started processing yet. </p>\n            </li>\n            <li>\n               <p>\n                  <b>IN_PROGRESS</b>: The upload job is currently in\n               progress, ingesting and processing the profile data. </p>\n            </li>\n            <li>\n               <p>\n                  <b>PARTIALLY_SUCCEEDED</b>: The upload job has\n               successfully completed the ingestion and processing of all profile data. </p>\n            </li>\n            <li>\n               <p>\n                  <b>SUCCEEDED</b>: The upload job has successfully\n               completed the ingestion and processing of all profile data. </p>\n            </li>\n            <li>\n               <p>\n                  <b>FAILED</b>: The upload job has failed to complete.\n            </p>\n            </li>\n            <li>\n               <p>\n                  <b>STOPPED</b>: The upload job has been manually stopped\n               or terminated before completion. </p>\n            </li>\n         </ul>",
+                        "smithy.api#jsonName": "Status"
+                    }
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.customerprofiles#StatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the current status of the upload job. Possible reasons: </p>\n         <ul>\n            <li>\n               <p>\n                  <b>VALIDATION_FAILURE</b>: The upload job has\n               encountered an error or issue and was unable to complete the profile data ingestion.\n            </p>\n            </li>\n            <li>\n               <p>\n                  <b>INTERNAL_FAILURE</b>: Failure caused from service\n               side </p>\n            </li>\n         </ul>",
+                        "smithy.api#jsonName": "StatusReason"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the upload job was created. </p>",
+                        "smithy.api#jsonName": "CreatedAt"
+                    }
+                },
+                "CompletedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the upload job was completed. </p>",
+                        "smithy.api#jsonName": "CompletedAt"
+                    }
+                },
+                "Fields": {
+                    "target": "com.amazonaws.customerprofiles#FieldMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mapping between CSV Columns and Profile Object attributes for the upload job.\n      </p>",
+                        "smithy.api#jsonName": "Fields"
+                    }
+                },
+                "UniqueKey": {
+                    "target": "com.amazonaws.customerprofiles#text",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique key columns used for de-duping the keys in the upload job. </p>",
+                        "smithy.api#jsonName": "UniqueKey"
+                    }
+                },
+                "ResultsSummary": {
+                    "target": "com.amazonaws.customerprofiles#ResultsSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary of results for the upload job, including the number of updated, created, and\n         failed records. </p>",
+                        "smithy.api#jsonName": "ResultsSummary"
+                    }
+                },
+                "DataExpiry": {
+                    "target": "com.amazonaws.customerprofiles#expirationDaysInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiry duration for the profiles ingested with the upload job. </p>",
+                        "smithy.api#jsonName": "DataExpiry"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.customerprofiles#GetWorkflow": {
             "type": "operation",
             "input": {
@@ -8908,7 +9243,7 @@
                 "LastObjectTimestamp": {
                     "target": "com.amazonaws.customerprofiles#timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp of the newest object included in the calculated attribute calculation.</p>"
+                        "smithy.api#documentation": "<p>The timestamp of the newest object included in the calculated attribute\n         calculation.</p>"
                     }
                 }
             },
@@ -10403,6 +10738,98 @@
                     "target": "com.amazonaws.customerprofiles#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#ListUploadJobs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#ListUploadJobsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#ListUploadJobsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This API retrieves a list of upload jobs for the specified domain. </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/domains/{DomainName}/upload-jobs",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Items",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ListUploadJobsRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain to list upload jobs for. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.customerprofiles#MaxSize500",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of upload jobs to return per page. </p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from the previous call to retrieve the next page of results.\n      </p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#ListUploadJobsResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use to retrieve the next page of results. </p>",
+                        "smithy.api#jsonName": "NextToken"
+                    }
+                },
+                "Items": {
+                    "target": "com.amazonaws.customerprofiles#UploadJobsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of upload jobs for the specified domain. </p>",
+                        "smithy.api#jsonName": "Items"
                     }
                 }
             },
@@ -12526,6 +12953,35 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.customerprofiles#ResultsSummary": {
+            "type": "structure",
+            "members": {
+                "UpdatedRecords": {
+                    "target": "com.amazonaws.customerprofiles#optionalLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of records that were updated during the upload job. </p>",
+                        "smithy.api#jsonName": "UpdatedRecords"
+                    }
+                },
+                "CreatedRecords": {
+                    "target": "com.amazonaws.customerprofiles#optionalLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of records that were newly created during the upload job. </p>",
+                        "smithy.api#jsonName": "CreatedRecords"
+                    }
+                },
+                "FailedRecords": {
+                    "target": "com.amazonaws.customerprofiles#optionalLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of records that failed to be processed during the upload job. </p>",
+                        "smithy.api#jsonName": "FailedRecords"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of results for an upload job, including the number of updated, created, and\n         failed records. </p>"
+            }
+        },
         "com.amazonaws.customerprofiles#RoleArn": {
             "type": "string",
             "traits": {
@@ -13732,6 +14188,71 @@
         "com.amazonaws.customerprofiles#Start": {
             "type": "integer"
         },
+        "com.amazonaws.customerprofiles#StartUploadJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#StartUploadJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#StartUploadJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This API starts the processing of an upload job to ingest profile data. </p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/domains/{DomainName}/upload-jobs/{JobId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#StartUploadJobRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain containing the upload job to start. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the upload job to start. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#StartUploadJobResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.customerprofiles#Statistic": {
             "type": "enum",
             "members": {
@@ -13839,6 +14360,88 @@
             "type": "integer",
             "traits": {
                 "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.customerprofiles#StatusReason": {
+            "type": "enum",
+            "members": {
+                "VALIDATION_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATION_FAILURE"
+                    }
+                },
+                "INTERNAL_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_FAILURE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#StopUploadJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#StopUploadJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#StopUploadJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This API stops the processing of an upload job. </p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/domains/{DomainName}/upload-jobs/{JobId}/stop",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#StopUploadJobRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain containing the upload job to stop. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the upload job to stop. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#StopUploadJobResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.customerprofiles#StringDimensionType": {
@@ -14640,7 +15243,7 @@
                 "Layout": {
                     "target": "com.amazonaws.customerprofiles#sensitiveString1To2000000",
                     "traits": {
-                        "smithy.api#documentation": "<p>A customizable layout that can be used to view data under a Customer Profiles\n         domain.</p>"
+                        "smithy.api#documentation": "<p>A customizable layout that can be used to view data under a Customer Profiles domain.</p>"
                     }
                 }
             },
@@ -15192,6 +15795,110 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#UploadJobItem": {
+            "type": "structure",
+            "members": {
+                "JobId": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the upload job. </p>",
+                        "smithy.api#jsonName": "JobId"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the upload job. </p>",
+                        "smithy.api#jsonName": "DisplayName"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.customerprofiles#UploadJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the upload job. </p>",
+                        "smithy.api#jsonName": "Status"
+                    }
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.customerprofiles#StatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the current status of the upload job. </p>",
+                        "smithy.api#jsonName": "StatusReason"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the upload job was created. </p>",
+                        "smithy.api#jsonName": "CreatedAt"
+                    }
+                },
+                "CompletedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the upload job was completed. </p>",
+                        "smithy.api#jsonName": "CompletedAt"
+                    }
+                },
+                "DataExpiry": {
+                    "target": "com.amazonaws.customerprofiles#expirationDaysInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiry duration for the profiles ingested with the upload job. </p>",
+                        "smithy.api#jsonName": "DataExpiry"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary information for an individual upload job. </p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#UploadJobStatus": {
+            "type": "enum",
+            "members": {
+                "CREATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATED"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "PARTIALLY_SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARTIALLY_SUCCEEDED"
+                    }
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#UploadJobsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#UploadJobItem"
             }
         },
         "com.amazonaws.customerprofiles#Value": {

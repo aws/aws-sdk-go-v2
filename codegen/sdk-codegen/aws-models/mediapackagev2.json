@@ -461,6 +461,12 @@
                     "traits": {
                         "smithy.api#enumValue": "CMAF"
                     }
+                },
+                "ISM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ISM"
+                    }
                 }
             }
         },
@@ -1435,6 +1441,45 @@
                 "target": "com.amazonaws.mediapackagev2#CreateLowLatencyHlsManifestConfiguration"
             }
         },
+        "com.amazonaws.mediapackagev2#CreateMssManifestConfiguration": {
+            "type": "structure",
+            "members": {
+                "ManifestName": {
+                    "target": "com.amazonaws.mediapackagev2#ManifestName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A short string that's appended to the endpoint URL to create a unique path to this MSS manifest. The manifest name must be unique within the origin endpoint and can contain letters, numbers, hyphens, and underscores.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ManifestWindowSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total duration (in seconds) of the manifest window. This determines how much content is available in the manifest at any given time. The manifest window slides forward as new segments become available, maintaining a consistent duration of content. The minimum value is 30 seconds.</p>",
+                        "smithy.api#range": {
+                            "min": 30
+                        }
+                    }
+                },
+                "FilterConfiguration": {
+                    "target": "com.amazonaws.mediapackagev2#FilterConfiguration"
+                },
+                "ManifestLayout": {
+                    "target": "com.amazonaws.mediapackagev2#MssManifestLayout",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines the layout format of the MSS manifest. This controls how the manifest is structured and presented to client players, affecting compatibility with different MSS-compatible devices and applications.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration parameters for creating a Microsoft Smooth Streaming (MSS) manifest. MSS is a streaming media format developed by Microsoft that delivers adaptive bitrate streaming content to compatible players and devices.</p>"
+            }
+        },
+        "com.amazonaws.mediapackagev2#CreateMssManifests": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediapackagev2#CreateMssManifestConfiguration"
+            }
+        },
         "com.amazonaws.mediapackagev2#CreateOriginEndpoint": {
             "type": "operation",
             "input": {
@@ -2075,6 +2120,110 @@
                                 "key2": "value2"
                             }
                         }
+                    },
+                    {
+                        "title": "Creating an OriginEndpoint with container type ISM, and encryption enabled",
+                        "input": {
+                            "ChannelGroupName": "exampleChannelGroup",
+                            "ChannelName": "exampleChannel",
+                            "OriginEndpointName": "exampleOriginEndpointISM",
+                            "ContainerType": "ISM",
+                            "Description": "Description for exampleOriginEndpointISM",
+                            "StartoverWindowSeconds": 300,
+                            "ForceEndpointErrorConfiguration": {
+                                "EndpointErrorConditions": [
+                                    "STALE_MANIFEST",
+                                    "INCOMPLETE_MANIFEST",
+                                    "MISSING_DRM_KEY",
+                                    "SLATE_INPUT"
+                                ]
+                            },
+                            "Segment": {
+                                "SegmentDurationSeconds": 2,
+                                "SegmentName": "segmentName",
+                                "Encryption": {
+                                    "EncryptionMethod": {
+                                        "IsmEncryptionMethod": "CENC"
+                                    },
+                                    "SpekeKeyProvider": {
+                                        "EncryptionContractConfiguration": {
+                                            "PresetSpeke20Audio": "SHARED",
+                                            "PresetSpeke20Video": "SHARED"
+                                        },
+                                        "ResourceId": "ResourceId",
+                                        "DrmSystems": [
+                                            "PLAYREADY"
+                                        ],
+                                        "RoleArn": "arn:aws:iam::123456789012:role/empRole",
+                                        "Url": "https://speke-key-provider.example.com"
+                                    }
+                                }
+                            },
+                            "MssManifests": [
+                                {
+                                    "ManifestName": "exampleMssManifest1",
+                                    "ManifestWindowSeconds": 60,
+                                    "ManifestLayout": "FULL"
+                                }
+                            ],
+                            "Tags": {
+                                "key1": "value1",
+                                "key2": "value2"
+                            }
+                        },
+                        "output": {
+                            "ChannelGroupName": "exampleChannelGroup",
+                            "ChannelName": "exampleChannel",
+                            "OriginEndpointName": "exampleOriginEndpointISM",
+                            "Description": "Description for exampleOriginEndpointISM",
+                            "Arn": "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannel/originEndpoint/exampleOriginEndpointISM",
+                            "CreatedAt": "2022-10-18T09:36:00.00Z",
+                            "ModifiedAt": "2022-10-18T09:36:00.00Z",
+                            "ContainerType": "ISM",
+                            "StartoverWindowSeconds": 300,
+                            "ForceEndpointErrorConfiguration": {
+                                "EndpointErrorConditions": [
+                                    "STALE_MANIFEST",
+                                    "INCOMPLETE_MANIFEST",
+                                    "MISSING_DRM_KEY",
+                                    "SLATE_INPUT"
+                                ]
+                            },
+                            "Segment": {
+                                "SegmentDurationSeconds": 2,
+                                "SegmentName": "segmentName",
+                                "Encryption": {
+                                    "EncryptionMethod": {
+                                        "IsmEncryptionMethod": "CENC"
+                                    },
+                                    "SpekeKeyProvider": {
+                                        "EncryptionContractConfiguration": {
+                                            "PresetSpeke20Audio": "SHARED",
+                                            "PresetSpeke20Video": "SHARED"
+                                        },
+                                        "ResourceId": "ResourceId",
+                                        "DrmSystems": [
+                                            "PLAYREADY"
+                                        ],
+                                        "RoleArn": "arn:aws:iam::123456789012:role/empRole",
+                                        "Url": "https://speke-key-provider.example.com"
+                                    }
+                                }
+                            },
+                            "MssManifests": [
+                                {
+                                    "ManifestName": "exampleMssManifest1",
+                                    "ManifestWindowSeconds": 60,
+                                    "ManifestLayout": "FULL",
+                                    "Url": "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointISM/exampleMssManifest1.ism/Manifest"
+                                }
+                            ],
+                            "ETag": "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=",
+                            "Tags": {
+                                "key1": "value1",
+                                "key2": "value2"
+                            }
+                        }
                     }
                 ],
                 "smithy.api#http": {
@@ -2166,6 +2315,13 @@
                     "traits": {
                         "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>A DASH manifest configuration.</p>"
+                    }
+                },
+                "MssManifests": {
+                    "target": "com.amazonaws.mediapackagev2#CreateMssManifests",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>A list of Microsoft Smooth Streaming (MSS) manifest configurations for the origin endpoint. You can configure multiple MSS manifests to provide different streaming experiences or to support different client requirements.</p>"
                     }
                 },
                 "ForceEndpointErrorConfiguration": {
@@ -2273,6 +2429,12 @@
                     "target": "com.amazonaws.mediapackagev2#GetDashManifests",
                     "traits": {
                         "smithy.api#documentation": "<p>A DASH manifest configuration.</p>"
+                    }
+                },
+                "MssManifests": {
+                    "target": "com.amazonaws.mediapackagev2#GetMssManifests",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Microsoft Smooth Streaming (MSS) manifest configurations that were created for this origin endpoint.</p>"
                     }
                 },
                 "ForceEndpointErrorConfiguration": {
@@ -3212,6 +3374,12 @@
                         }
                     }
                 },
+                "CmafExcludeSegmentDrmMetadata": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Excludes SEIG and SGPD boxes from segment metadata in CMAF containers.</p>\n         <p>When set to <code>true</code>, MediaPackage omits these DRM metadata boxes from CMAF segments, which can improve compatibility with certain devices and players that don't support these boxes.</p>\n         <p>Important considerations:</p>\n         <ul>\n            <li>\n               <p>This setting only affects CMAF container formats</p>\n            </li>\n            <li>\n               <p>Key rotation can still be handled through media playlist signaling</p>\n            </li>\n            <li>\n               <p>PSSH and TENC boxes remain unaffected</p>\n            </li>\n            <li>\n               <p>Default behavior is preserved when this setting is disabled</p>\n            </li>\n         </ul>\n         <p>Valid values: <code>true</code> | <code>false</code>\n         </p>\n         <p>Default: <code>false</code>\n         </p>"
+                    }
+                },
                 "SpekeKeyProvider": {
                     "target": "com.amazonaws.mediapackagev2#SpekeKeyProvider",
                     "traits": {
@@ -3259,6 +3427,12 @@
                     "target": "com.amazonaws.mediapackagev2#CmafEncryptionMethod",
                     "traits": {
                         "smithy.api#documentation": "<p>The encryption method to use.</p>"
+                    }
+                },
+                "IsmEncryptionMethod": {
+                    "target": "com.amazonaws.mediapackagev2#IsmEncryptionMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption method used for Microsoft Smooth Streaming (MSS) content. This specifies how the MSS segments are encrypted to protect the content during delivery to client players.</p>"
                     }
                 }
             },
@@ -4333,6 +4507,49 @@
                 "target": "com.amazonaws.mediapackagev2#GetLowLatencyHlsManifestConfiguration"
             }
         },
+        "com.amazonaws.mediapackagev2#GetMssManifestConfiguration": {
+            "type": "structure",
+            "members": {
+                "ManifestName": {
+                    "target": "com.amazonaws.mediapackagev2#ManifestName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the MSS manifest. This name is appended to the origin endpoint URL to create the unique path for accessing this specific MSS manifest.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Url": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The complete URL for accessing the MSS manifest. Client players use this URL to retrieve the manifest and begin streaming the Microsoft Smooth Streaming content.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FilterConfiguration": {
+                    "target": "com.amazonaws.mediapackagev2#FilterConfiguration"
+                },
+                "ManifestWindowSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The duration (in seconds) of the manifest window. This represents the total amount of content available in the manifest at any given time.</p>"
+                    }
+                },
+                "ManifestLayout": {
+                    "target": "com.amazonaws.mediapackagev2#MssManifestLayout",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The layout format of the MSS manifest, which determines how the manifest is structured for client compatibility.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration details for a Microsoft Smooth Streaming (MSS) manifest associated with an origin endpoint. This includes all the settings and properties that define how the MSS content is packaged and delivered.</p>"
+            }
+        },
+        "com.amazonaws.mediapackagev2#GetMssManifests": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediapackagev2#GetMssManifestConfiguration"
+            }
+        },
         "com.amazonaws.mediapackagev2#GetOriginEndpoint": {
             "type": "operation",
             "input": {
@@ -4464,6 +4681,73 @@
                                 }
                             ],
                             "ETag": "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=",
+                            "Tags": {
+                                "key1": "value1",
+                                "key2": "value2"
+                            }
+                        }
+                    },
+                    {
+                        "title": "Getting an OriginEndpoint with ISM container",
+                        "input": {
+                            "ChannelGroupName": "exampleChannelGroup",
+                            "ChannelName": "exampleChannel",
+                            "OriginEndpointName": "exampleOriginEndpointISM"
+                        },
+                        "output": {
+                            "ChannelGroupName": "exampleChannelGroup",
+                            "ChannelName": "exampleChannel",
+                            "OriginEndpointName": "exampleOriginEndpointISM",
+                            "Description": "Description for exampleOriginEndpointISM",
+                            "Arn": "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannel/originEndpoint/exampleOriginEndpointISM",
+                            "CreatedAt": "2022-10-18T09:36:00.00Z",
+                            "ModifiedAt": "2022-10-18T09:36:00.00Z",
+                            "ContainerType": "ISM",
+                            "StartoverWindowSeconds": 300,
+                            "ForceEndpointErrorConfiguration": {
+                                "EndpointErrorConditions": [
+                                    "STALE_MANIFEST",
+                                    "INCOMPLETE_MANIFEST",
+                                    "MISSING_DRM_KEY",
+                                    "SLATE_INPUT"
+                                ]
+                            },
+                            "Segment": {
+                                "SegmentDurationSeconds": 2,
+                                "SegmentName": "segmentName",
+                                "Encryption": {
+                                    "EncryptionMethod": {
+                                        "IsmEncryptionMethod": "CENC"
+                                    },
+                                    "SpekeKeyProvider": {
+                                        "EncryptionContractConfiguration": {
+                                            "PresetSpeke20Audio": "SHARED",
+                                            "PresetSpeke20Video": "SHARED"
+                                        },
+                                        "ResourceId": "ResourceId",
+                                        "DrmSystems": [
+                                            "PLAYREADY"
+                                        ],
+                                        "RoleArn": "arn:aws:iam::123456789012:role/empRole",
+                                        "Url": "https://speke-key-provider.example.com"
+                                    }
+                                }
+                            },
+                            "MssManifests": [
+                                {
+                                    "ManifestName": "exampleMssManifest1",
+                                    "ManifestWindowSeconds": 60,
+                                    "ManifestLayout": "FULL",
+                                    "Url": "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointISM/exampleMssManifest1.ism/Manifest"
+                                },
+                                {
+                                    "ManifestName": "exampleMssManifest2",
+                                    "ManifestWindowSeconds": 30,
+                                    "ManifestLayout": "COMPACT",
+                                    "Url": "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointISM/exampleMssManifest2.ism/Manifest"
+                                }
+                            ],
+                            "ETag": "HmgU+ewBzHJS5xvz9nLXm2SEQxTsjRfk0rVvuMayoyl=",
                             "Tags": {
                                 "key1": "value1",
                                 "key2": "value2"
@@ -4721,6 +5005,12 @@
                     "target": "com.amazonaws.mediapackagev2#GetDashManifests",
                     "traits": {
                         "smithy.api#documentation": "<p>A DASH manifest configuration.</p>"
+                    }
+                },
+                "MssManifests": {
+                    "target": "com.amazonaws.mediapackagev2#GetMssManifests",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Microsoft Smooth Streaming (MSS) manifest configurations associated with this origin endpoint.</p>"
                     }
                 },
                 "ForceEndpointErrorConfiguration": {
@@ -5126,6 +5416,17 @@
                 "smithy.api#httpError": 500
             }
         },
+        "com.amazonaws.mediapackagev2#IsmEncryptionMethod": {
+            "type": "enum",
+            "members": {
+                "CENC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CENC"
+                    }
+                }
+            }
+        },
         "com.amazonaws.mediapackagev2#ListChannelGroups": {
             "type": "operation",
             "input": {
@@ -5451,11 +5752,7 @@
                                     "CreatedAt": "2024-05-28T09:36:00.00Z",
                                     "ModifiedAt": "2024-05-28T09:36:00.00Z",
                                     "Status": "QUEUED",
-                                    "ETag": "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=",
-                                    "Tags": {
-                                        "key1": "value1",
-                                        "key2": "value2"
-                                    }
+                                    "ETag": "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk="
                                 },
                                 {
                                     "ChannelGroupName": "exampleChannelGroup",
@@ -5494,11 +5791,7 @@
                                     "CreatedAt": "2024-05-28T15:30:00.00Z",
                                     "ModifiedAt": "2024-05-28T15:30:00.00Z",
                                     "Status": "IN_PROGRESS",
-                                    "ETag": "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=",
-                                    "Tags": {
-                                        "key1": "value1",
-                                        "key2": "value2"
-                                    }
+                                    "ETag": "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk="
                                 }
                             ],
                             "NextToken": "someTokenValue"
@@ -5549,11 +5842,7 @@
                                     "CreatedAt": "2024-05-28T09:36:00.00Z",
                                     "ModifiedAt": "2024-05-28T09:36:00.00Z",
                                     "Status": "QUEUED",
-                                    "ETag": "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=",
-                                    "Tags": {
-                                        "key1": "value1",
-                                        "key2": "value2"
-                                    }
+                                    "ETag": "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk="
                                 },
                                 {
                                     "ChannelGroupName": "exampleChannelGroup",
@@ -5591,11 +5880,7 @@
                                     "Arn": "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannelName/originEndpoint/exampleOriginEndpointName2/harvestJob/HarvestJobName2",
                                     "CreatedAt": "2024-05-28T15:30:00.00Z",
                                     "ModifiedAt": "2024-05-28T15:30:00.00Z",
-                                    "Status": "IN_PROGRESS",
-                                    "Tags": {
-                                        "key1": "value1",
-                                        "key2": "value2"
-                                    }
+                                    "Status": "IN_PROGRESS"
                                 }
                             ],
                             "NextToken": "someTokenValue"
@@ -5884,6 +6169,33 @@
                 "target": "com.amazonaws.mediapackagev2#ListLowLatencyHlsManifestConfiguration"
             }
         },
+        "com.amazonaws.mediapackagev2#ListMssManifestConfiguration": {
+            "type": "structure",
+            "members": {
+                "ManifestName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the MSS manifest configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Url": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL for accessing the MSS manifest.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about a Microsoft Smooth Streaming (MSS) manifest configuration. This provides key details about the MSS manifest without including all configuration parameters.</p>"
+            }
+        },
+        "com.amazonaws.mediapackagev2#ListMssManifests": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediapackagev2#ListMssManifestConfiguration"
+            }
+        },
         "com.amazonaws.mediapackagev2#ListOriginEndpoints": {
             "type": "operation",
             "input": {
@@ -6011,6 +6323,34 @@
                                         {
                                             "ManifestName": "exampleDashManifest2",
                                             "Url": "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointCMAF/exampleDashManifest2.mpd"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "ChannelGroupName": "exampleChannelGroup",
+                                    "ChannelName": "exampleChannel",
+                                    "OriginEndpointName": "exampleOriginEndpointISM",
+                                    "Description": "Description for exampleOriginEndpointISM",
+                                    "Arn": "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannel/originEndpoint/exampleOriginEndpointISM",
+                                    "CreatedAt": "2022-10-18T09:36:00.00Z",
+                                    "ModifiedAt": "2022-10-18T09:36:00.00Z",
+                                    "ContainerType": "ISM",
+                                    "ForceEndpointErrorConfiguration": {
+                                        "EndpointErrorConditions": [
+                                            "STALE_MANIFEST",
+                                            "INCOMPLETE_MANIFEST",
+                                            "MISSING_DRM_KEY",
+                                            "SLATE_INPUT"
+                                        ]
+                                    },
+                                    "MssManifests": [
+                                        {
+                                            "ManifestName": "exampleMssManifest1",
+                                            "Url": "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointISM/exampleMssManifest1.ism/Manifest"
+                                        },
+                                        {
+                                            "ManifestName": "exampleMssManifest2",
+                                            "Url": "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointISM/exampleMssManifest2.ism/Manifest"
                                         }
                                     ]
                                 }
@@ -6179,6 +6519,23 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
             }
         },
+        "com.amazonaws.mediapackagev2#MssManifestLayout": {
+            "type": "enum",
+            "members": {
+                "FULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FULL"
+                    }
+                },
+                "COMPACT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPACT"
+                    }
+                }
+            }
+        },
         "com.amazonaws.mediapackagev2#OriginEndpointListConfiguration": {
             "type": "structure",
             "members": {
@@ -6251,6 +6608,12 @@
                     "target": "com.amazonaws.mediapackagev2#ListDashManifests",
                     "traits": {
                         "smithy.api#documentation": "<p>A DASH manifest configuration.</p>"
+                    }
+                },
+                "MssManifests": {
+                    "target": "com.amazonaws.mediapackagev2#ListMssManifests",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Microsoft Smooth Streaming (MSS) manifest configurations associated with the origin endpoint. Each configuration represents a different MSS streaming option available from this endpoint.</p>"
                     }
                 },
                 "ForceEndpointErrorConfiguration": {
@@ -8041,6 +8404,117 @@
                                 "key2": "value2"
                             }
                         }
+                    },
+                    {
+                        "title": "Updating an OriginEndpoint with ISM container",
+                        "input": {
+                            "ChannelGroupName": "exampleChannelGroup",
+                            "ChannelName": "exampleChannel",
+                            "OriginEndpointName": "exampleOriginEndpointISM",
+                            "ContainerType": "ISM",
+                            "Description": "Updated description for exampleOriginEndpointISM",
+                            "StartoverWindowSeconds": 600,
+                            "ForceEndpointErrorConfiguration": {
+                                "EndpointErrorConditions": [
+                                    "STALE_MANIFEST",
+                                    "INCOMPLETE_MANIFEST",
+                                    "MISSING_DRM_KEY",
+                                    "SLATE_INPUT"
+                                ]
+                            },
+                            "Segment": {
+                                "SegmentDurationSeconds": 2,
+                                "SegmentName": "segmentName2",
+                                "Encryption": {
+                                    "EncryptionMethod": {
+                                        "IsmEncryptionMethod": "CENC"
+                                    },
+                                    "SpekeKeyProvider": {
+                                        "EncryptionContractConfiguration": {
+                                            "PresetSpeke20Audio": "SHARED",
+                                            "PresetSpeke20Video": "SHARED"
+                                        },
+                                        "ResourceId": "ResourceId",
+                                        "DrmSystems": [
+                                            "PLAYREADY"
+                                        ],
+                                        "RoleArn": "arn:aws:iam::123456789012:role/empRole",
+                                        "Url": "https://speke-key-provider.example.com"
+                                    }
+                                }
+                            },
+                            "MssManifests": [
+                                {
+                                    "ManifestName": "exampleMssManifest1",
+                                    "ManifestWindowSeconds": 60,
+                                    "ManifestLayout": "FULL"
+                                },
+                                {
+                                    "ManifestName": "exampleMssManifest2",
+                                    "ManifestWindowSeconds": 30,
+                                    "ManifestLayout": "COMPACT"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "ChannelGroupName": "exampleChannelGroup",
+                            "ChannelName": "exampleChannel",
+                            "OriginEndpointName": "exampleOriginEndpointISM",
+                            "Description": "Updated description for exampleOriginEndpointISM",
+                            "Arn": "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannel/originEndpoint/exampleOriginEndpointISM",
+                            "CreatedAt": "2022-10-18T09:36:00.00Z",
+                            "ModifiedAt": "2022-10-18T09:37:00.00Z",
+                            "ContainerType": "ISM",
+                            "StartoverWindowSeconds": 600,
+                            "ForceEndpointErrorConfiguration": {
+                                "EndpointErrorConditions": [
+                                    "STALE_MANIFEST",
+                                    "INCOMPLETE_MANIFEST",
+                                    "MISSING_DRM_KEY",
+                                    "SLATE_INPUT"
+                                ]
+                            },
+                            "Segment": {
+                                "SegmentDurationSeconds": 2,
+                                "SegmentName": "segmentName2",
+                                "Encryption": {
+                                    "EncryptionMethod": {
+                                        "IsmEncryptionMethod": "CENC"
+                                    },
+                                    "SpekeKeyProvider": {
+                                        "EncryptionContractConfiguration": {
+                                            "PresetSpeke20Audio": "SHARED",
+                                            "PresetSpeke20Video": "SHARED"
+                                        },
+                                        "ResourceId": "ResourceId",
+                                        "DrmSystems": [
+                                            "PLAYREADY"
+                                        ],
+                                        "RoleArn": "arn:aws:iam::123456789012:role/empRole",
+                                        "Url": "https://speke-key-provider.example.com"
+                                    }
+                                }
+                            },
+                            "MssManifests": [
+                                {
+                                    "ManifestName": "exampleMssManifest1",
+                                    "ManifestWindowSeconds": 60,
+                                    "ManifestLayout": "FULL",
+                                    "Url": "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointISM/exampleMssManifest1.ism/Manifest"
+                                },
+                                {
+                                    "ManifestName": "exampleMssManifest2",
+                                    "ManifestWindowSeconds": 30,
+                                    "ManifestLayout": "COMPACT",
+                                    "Url": "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointISM/exampleMssManifest2.ism/Manifest"
+                                }
+                            ],
+                            "ETag": "HmgU+ewBzHJS5xvz9nLXm2SEQxTsjRfk0rVvuMayoyl=",
+                            "Tags": {
+                                "key1": "value1",
+                                "key2": "value2"
+                            }
+                        }
                     }
                 ],
                 "smithy.api#http": {
@@ -8126,6 +8600,13 @@
                     "traits": {
                         "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>A DASH manifest configuration.</p>"
+                    }
+                },
+                "MssManifests": {
+                    "target": "com.amazonaws.mediapackagev2#CreateMssManifests",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>A list of Microsoft Smooth Streaming (MSS) manifest configurations to update for the origin endpoint. This replaces the existing MSS manifest configurations.</p>"
                     }
                 },
                 "ForceEndpointErrorConfiguration": {
@@ -8228,6 +8709,12 @@
                     "target": "com.amazonaws.mediapackagev2#GetLowLatencyHlsManifests",
                     "traits": {
                         "smithy.api#documentation": "<p>A low-latency HLS manifest configuration.</p>"
+                    }
+                },
+                "MssManifests": {
+                    "target": "com.amazonaws.mediapackagev2#GetMssManifests",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated Microsoft Smooth Streaming (MSS) manifest configurations for this origin endpoint.</p>"
                     }
                 },
                 "ForceEndpointErrorConfiguration": {
@@ -8335,6 +8822,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ENCRYPTION_CONTRACT_WITHOUT_AUDIO_RENDITION_INCOMPATIBLE"
+                    }
+                },
+                "ENCRYPTION_CONTRACT_WITH_ISM_CONTAINER_INCOMPATIBLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENCRYPTION_CONTRACT_WITH_ISM_CONTAINER_INCOMPATIBLE"
                     }
                 },
                 "ENCRYPTION_CONTRACT_UNENCRYPTED": {
@@ -8625,18 +9118,6 @@
                         "smithy.api#enumValue": "START_TAG_TIME_OFFSET_INVALID"
                     }
                 },
-                "ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_INPUT_SWITCHING": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_INPUT_SWITCHING"
-                    }
-                },
-                "ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_OUTPUT_CONFIGURATION": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_OUTPUT_CONFIGURATION"
-                    }
-                },
                 "INCOMPATIBLE_DASH_PROFILE_DVB_DASH_CONFIGURATION": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -8659,6 +9140,66 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "INCOMPATIBLE_XML_ENCODING"
+                    }
+                },
+                "CMAF_EXCLUDE_SEGMENT_DRM_METADATA_INCOMPATIBLE_CONTAINER_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CMAF_EXCLUDE_SEGMENT_DRM_METADATA_INCOMPATIBLE_CONTAINER_TYPE"
+                    }
+                },
+                "ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_INPUT_SWITCHING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_INPUT_SWITCHING"
+                    }
+                },
+                "ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_OUTPUT_CONFIGURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_OUTPUT_CONFIGURATION"
+                    }
+                },
+                "TS_CONTAINER_TYPE_WITH_MSS_MANIFEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TS_CONTAINER_TYPE_WITH_MSS_MANIFEST"
+                    }
+                },
+                "CMAF_CONTAINER_TYPE_WITH_MSS_MANIFEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CMAF_CONTAINER_TYPE_WITH_MSS_MANIFEST"
+                    }
+                },
+                "ISM_CONTAINER_TYPE_WITH_HLS_MANIFEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ISM_CONTAINER_TYPE_WITH_HLS_MANIFEST"
+                    }
+                },
+                "ISM_CONTAINER_TYPE_WITH_LL_HLS_MANIFEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ISM_CONTAINER_TYPE_WITH_LL_HLS_MANIFEST"
+                    }
+                },
+                "ISM_CONTAINER_TYPE_WITH_DASH_MANIFEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ISM_CONTAINER_TYPE_WITH_DASH_MANIFEST"
+                    }
+                },
+                "ISM_CONTAINER_TYPE_WITH_SCTE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ISM_CONTAINER_TYPE_WITH_SCTE"
+                    }
+                },
+                "ISM_CONTAINER_WITH_KEY_ROTATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ISM_CONTAINER_WITH_KEY_ROTATION"
                     }
                 }
             }

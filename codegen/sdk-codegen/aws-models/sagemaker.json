@@ -3038,6 +3038,32 @@
                 "smithy.api#pattern": ".*"
             }
         },
+        "com.amazonaws.sagemaker#AuthorizedUrl": {
+            "type": "structure",
+            "members": {
+                "Url": {
+                    "target": "com.amazonaws.sagemaker#LongS3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The presigned S3 URL that provides temporary, secure access to download the file. URLs expire within 15 minutes for security purposes.</p>"
+                    }
+                },
+                "LocalPath": {
+                    "target": "com.amazonaws.sagemaker#LocalPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommended local file path where the downloaded file should be stored to maintain proper directory structure and file organization.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains a presigned URL and its associated local file path for downloading hub content artifacts.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#AuthorizedUrlConfigs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#AuthorizedUrl"
+            }
+        },
         "com.amazonaws.sagemaker#AutoGenerateEndpointName": {
             "type": "boolean"
         },
@@ -11457,16 +11483,14 @@
                     "target": "com.amazonaws.sagemaker#Subnets",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The VPC subnets that the domain uses for communication.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The VPC subnets that the domain uses for communication.</p>"
                     }
                 },
                 "VpcId": {
                     "target": "com.amazonaws.sagemaker#VpcId",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The ID of the Amazon Virtual Private Cloud (VPC) that the domain uses for communication.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The ID of the Amazon Virtual Private Cloud (VPC) that the domain uses for communication.</p>"
                     }
                 },
                 "Tags": {
@@ -12203,6 +12227,102 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Create a hub.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CreateHubContentPresignedUrls": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#CreateHubContentPresignedUrlsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#CreateHubContentPresignedUrlsResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Creates presigned URLs for accessing hub content artifacts. This operation generates time-limited, secure URLs that allow direct download of model artifacts and associated files from Amazon SageMaker hub content, including gated models that require end-user license agreement acceptance.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "AuthorizedUrlConfigs",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#CreateHubContentPresignedUrlsRequest": {
+            "type": "structure",
+            "members": {
+                "HubName": {
+                    "target": "com.amazonaws.sagemaker#HubNameOrArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the hub that contains the content. For public content, use <code>SageMakerPublicHub</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HubContentType": {
+                    "target": "com.amazonaws.sagemaker#HubContentType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The type of hub content to access. Valid values include <code>Model</code>, <code>Notebook</code>, and <code>ModelReference</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HubContentName": {
+                    "target": "com.amazonaws.sagemaker#HubContentName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the hub content for which to generate presigned URLs. This identifies the specific model or content within the hub.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HubContentVersion": {
+                    "target": "com.amazonaws.sagemaker#HubContentVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the hub content. If not specified, the latest version is used.</p>"
+                    }
+                },
+                "AccessConfig": {
+                    "target": "com.amazonaws.sagemaker#PresignedUrlAccessConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration settings for accessing the hub content, including end-user license agreement acceptance for gated models and expected S3 URL validation.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.sagemaker#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of presigned URLs to return in the response. Default value is 100. Large models may contain hundreds of files, requiring pagination to retrieve all URLs.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A token for pagination. Use this token to retrieve the next set of presigned URLs when the response is truncated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#CreateHubContentPresignedUrlsResponse": {
+            "type": "structure",
+            "members": {
+                "AuthorizedUrlConfigs": {
+                    "target": "com.amazonaws.sagemaker#AuthorizedUrlConfigs",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>An array of authorized URL configurations, each containing a presigned URL and its corresponding local file path for proper file organization during download.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token for pagination. If present, indicates that more presigned URLs are available. Use this token in a subsequent request to retrieve additional URLs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.sagemaker#CreateHubContentReference": {
@@ -47554,8 +47674,28 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#LocalPath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^\\/"
+            }
+        },
         "com.amazonaws.sagemaker#Long": {
             "type": "long"
+        },
+        "com.amazonaws.sagemaker#LongS3Uri": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^(https|s3)://([^/]+)/?(.*)$"
+            }
         },
         "com.amazonaws.sagemaker#MLFramework": {
             "type": "string",
@@ -55423,6 +55563,26 @@
         "com.amazonaws.sagemaker#PresignedDomainUrl": {
             "type": "string"
         },
+        "com.amazonaws.sagemaker#PresignedUrlAccessConfig": {
+            "type": "structure",
+            "members": {
+                "AcceptEula": {
+                    "target": "com.amazonaws.sagemaker#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates acceptance of the End User License Agreement (EULA) for gated models. Set to true to acknowledge acceptance of the license terms required for accessing gated content.</p>"
+                    }
+                },
+                "ExpectedS3Url": {
+                    "target": "com.amazonaws.sagemaker#S3ModelUri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expected S3 URL prefix for validation purposes. This parameter helps ensure consistency between the resolved S3 URIs and the deployment configuration, reducing potential compatibility issues.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for accessing hub content through presigned URLs, including license agreement acceptance and URL validation settings.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#PriorityClass": {
             "type": "structure",
             "members": {
@@ -61819,6 +61979,16 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#ResourceIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:.*\\/"
+            }
+        },
         "com.amazonaws.sagemaker#ResourceInUse": {
             "type": "structure",
             "members": {
@@ -62744,6 +62914,9 @@
                     "target": "com.amazonaws.sagemaker#CreateHub"
                 },
                 {
+                    "target": "com.amazonaws.sagemaker#CreateHubContentPresignedUrls"
+                },
+                {
                     "target": "com.amazonaws.sagemaker#CreateHubContentReference"
                 },
                 {
@@ -63549,6 +63722,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#StartPipelineExecution"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#StartSession"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#StopAutoMLJob"
@@ -65960,6 +66136,15 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#SessionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.sagemaker#ShadowModeConfig": {
             "type": "structure",
             "members": {
@@ -66744,6 +66929,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A file system, created by you, that you assign to a space for an Amazon SageMaker AI Domain. Permitted users can access this file system in Amazon SageMaker AI Studio.</p>"
                     }
+                },
+                "RemoteAccess": {
+                    "target": "com.amazonaws.sagemaker#FeatureStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A setting that enables or disables remote access for a SageMaker space. When enabled, this allows you to connect to the remote space from your local IDE.</p>"
+                    }
                 }
             },
             "traits": {
@@ -66757,6 +66948,12 @@
                     "target": "com.amazonaws.sagemaker#AppType",
                     "traits": {
                         "smithy.api#documentation": "<p>The type of app created within the space.</p>"
+                    }
+                },
+                "RemoteAccess": {
+                    "target": "com.amazonaws.sagemaker#FeatureStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A setting that enables or disables remote access for a SageMaker space. When enabled, this allows you to connect to the remote space from your local IDE.</p>"
                     }
                 },
                 "SpaceStorageSettings": {
@@ -67293,6 +67490,68 @@
                     "target": "com.amazonaws.sagemaker#PipelineExecutionArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the pipeline execution.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemaker#StartSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#StartSessionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#StartSessionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceLimitExceeded"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Initiates a remote connection session between a local integrated development environments (IDEs) and a remote SageMaker space.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#StartSessionRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceIdentifier": {
+                    "target": "com.amazonaws.sagemaker#ResourceIdentifier",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to which the remote connection will be established. For example, this identifies the specific ARN space application you want to connect to from your local IDE.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#StartSessionResponse": {
+            "type": "structure",
+            "members": {
+                "SessionId": {
+                    "target": "com.amazonaws.sagemaker#SessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the established remote connection session.</p>"
+                    }
+                },
+                "StreamUrl": {
+                    "target": "com.amazonaws.sagemaker#StreamUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A WebSocket URL used to establish a SSH connection between the local IDE and remote SageMaker space.</p>"
+                    }
+                },
+                "TokenValue": {
+                    "target": "com.amazonaws.sagemaker#TokenValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An encrypted token value containing session and caller information. </p>"
                     }
                 }
             },
@@ -68070,6 +68329,9 @@
                     }
                 }
             }
+        },
+        "com.amazonaws.sagemaker#StreamUrl": {
+            "type": "string"
         },
         "com.amazonaws.sagemaker#String": {
             "type": "string"
@@ -69541,6 +69803,15 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 256
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#TokenValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
                 }
             }
         },
