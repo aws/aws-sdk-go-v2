@@ -1,8 +1,0 @@
-{
-    "id": "8301d75b-1cc5-48bf-9c05-53c1f3823321",
-    "type": "feature",
-    "description": "Amazon Route 53 now supports the iso-e regions for private DNS Amazon VPCs and cloudwatch healthchecks.",
-    "modules": [
-        "service/route53"
-    ]
-}

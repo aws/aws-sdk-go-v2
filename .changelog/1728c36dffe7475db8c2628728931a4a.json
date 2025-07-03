@@ -1,8 +1,0 @@
-{
-    "id": "1728c36d-ffe7-475d-b8c2-628728931a4a",
-    "type": "feature",
-    "description": "This release adds GroupOwnerId as a response member to the DescribeSecurityGroupVpcAssociations API and also adds waiters for SecurityGroupVpcAssociations (SecurityGroupVpcAssociationAssociated and SecurityGroupVpcAssociationDisassociated).",
-    "modules": [
-        "service/ec2"
-    ]
-}

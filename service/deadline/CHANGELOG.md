@@ -1,3 +1,7 @@
+# v1.15.0 (2025-07-03)
+
+* **Feature**: Added fields for output manifest reporting and task chunking parameters
+
 # v1.14.0 (2025-06-26)
 
 * **Feature**: Added fields to track cumulative task retry attempts for steps and jobs

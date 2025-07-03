@@ -1,3 +1,7 @@
+# v1.47.0 (2025-07-03)
+
+* **Feature**: This release introduces capability of create Segments via importing a CSV file directly. This consumes the CSV file and creates/updates corresponding profiles for the particular domain.
+
 # v1.46.2 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

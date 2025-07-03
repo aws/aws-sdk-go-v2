@@ -1,3 +1,7 @@
+# v1.24.0 (2025-07-03)
+
+* **Feature**: This release adds support for Microsoft Smooth Streaming (MSS) and allows users to exclude DRM segment Metadata in MediaPackage v2 Origin Endpoints
+
 # v1.23.2 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

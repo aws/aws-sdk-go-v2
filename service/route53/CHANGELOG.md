@@ -1,3 +1,7 @@
+# v1.53.0 (2025-07-03)
+
+* **Feature**: Amazon Route 53 now supports the iso-e regions for private DNS Amazon VPCs and cloudwatch healthchecks.
+
 # v1.52.2 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

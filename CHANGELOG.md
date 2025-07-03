@@ -1,3 +1,19 @@
+# Release (2025-07-03)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.47.0](service/customerprofiles/CHANGELOG.md#v1470-2025-07-03)
+  * **Feature**: This release introduces capability of create Segments via importing a CSV file directly. This consumes the CSV file and creates/updates corresponding profiles for the particular domain.
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.15.0](service/deadline/CHANGELOG.md#v1150-2025-07-03)
+  * **Feature**: Added fields for output manifest reporting and task chunking parameters
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.230.0](service/ec2/CHANGELOG.md#v12300-2025-07-03)
+  * **Feature**: This release adds GroupOwnerId as a response member to the DescribeSecurityGroupVpcAssociations API and also adds waiters for SecurityGroupVpcAssociations (SecurityGroupVpcAssociationAssociated and SecurityGroupVpcAssociationDisassociated).
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.24.0](service/mediapackagev2/CHANGELOG.md#v1240-2025-07-03)
+  * **Feature**: This release adds support for Microsoft Smooth Streaming (MSS) and allows users to exclude DRM segment Metadata in MediaPackage v2 Origin Endpoints
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.53.0](service/route53/CHANGELOG.md#v1530-2025-07-03)
+  * **Feature**: Amazon Route 53 now supports the iso-e regions for private DNS Amazon VPCs and cloudwatch healthchecks.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.200.0](service/sagemaker/CHANGELOG.md#v12000-2025-07-03)
+  * **Feature**: Changes include new StartSession API for SageMaker Studio spaces and CreateHubContentPresignedUrls API for SageMaker JumpStart.
+
 # Release (2025-07-02)
 
 ## General Highlights

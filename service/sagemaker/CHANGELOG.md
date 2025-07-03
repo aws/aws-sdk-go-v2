@@ -1,3 +1,7 @@
+# v1.200.0 (2025-07-03)
+
+* **Feature**: Changes include new StartSession API for SageMaker Studio spaces and CreateHubContentPresignedUrls API for SageMaker JumpStart.
+
 # v1.199.0 (2025-07-01)
 
 * **Feature**: Updated field validation requirements for InstanceGroups.
