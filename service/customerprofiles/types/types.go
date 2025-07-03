@@ -1924,6 +1924,22 @@ type Readiness struct {
 	noSmithyDocumentSerde
 }
 
+// The summary of results for an upload job, including the number of updated,
+// created, and failed records.
+type ResultsSummary struct {
+
+	// The number of records that were newly created during the upload job.
+	CreatedRecords *int64
+
+	// The number of records that failed to be processed during the upload job.
+	FailedRecords *int64
+
+	// The number of records that were updated during the upload job.
+	UpdatedRecords *int64
+
+	noSmithyDocumentSerde
+}
+
 // The request to enable the rule-based matching.
 type RuleBasedMatchingRequest struct {
 
@@ -2342,6 +2358,33 @@ type UpdateAddress struct {
 
 	// The state in which a customer lives.
 	State *string
+
+	noSmithyDocumentSerde
+}
+
+// The summary information for an individual upload job.
+type UploadJobItem struct {
+
+	// The timestamp when the upload job was completed.
+	CompletedAt *time.Time
+
+	// The timestamp when the upload job was created.
+	CreatedAt *time.Time
+
+	// The expiry duration for the profiles ingested with the upload job.
+	DataExpiry *int32
+
+	// The name of the upload job.
+	DisplayName *string
+
+	// The unique identifier of the upload job.
+	JobId *string
+
+	// The current status of the upload job.
+	Status UploadJobStatus
+
+	// The reason for the current status of the upload job.
+	StatusReason StatusReason
 
 	noSmithyDocumentSerde
 }

@@ -270,6 +270,26 @@ func (m *validateOpCreateSegmentSnapshot) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateUploadJob struct {
+}
+
+func (*validateOpCreateUploadJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateUploadJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateUploadJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateUploadJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteCalculatedAttributeDefinition struct {
 }
 
@@ -870,6 +890,46 @@ func (m *validateOpGetSimilarProfiles) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetUploadJob struct {
+}
+
+func (*validateOpGetUploadJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetUploadJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetUploadJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetUploadJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetUploadJobPath struct {
+}
+
+func (*validateOpGetUploadJobPath) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetUploadJobPath) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetUploadJobPathInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetUploadJobPathInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetWorkflow struct {
 }
 
@@ -1210,6 +1270,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListUploadJobs struct {
+}
+
+func (*validateOpListUploadJobs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListUploadJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListUploadJobsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListUploadJobsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListWorkflows struct {
 }
 
@@ -1325,6 +1405,46 @@ func (m *validateOpSearchProfiles) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpSearchProfilesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartUploadJob struct {
+}
+
+func (*validateOpStartUploadJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartUploadJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartUploadJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartUploadJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopUploadJob struct {
+}
+
+func (*validateOpStopUploadJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopUploadJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopUploadJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopUploadJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1522,6 +1642,10 @@ func addOpCreateSegmentSnapshotValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpCreateSegmentSnapshot{}, middleware.After)
 }
 
+func addOpCreateUploadJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateUploadJob{}, middleware.After)
+}
+
 func addOpDeleteCalculatedAttributeDefinitionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCalculatedAttributeDefinition{}, middleware.After)
 }
@@ -1642,6 +1766,14 @@ func addOpGetSimilarProfilesValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpGetSimilarProfiles{}, middleware.After)
 }
 
+func addOpGetUploadJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetUploadJob{}, middleware.After)
+}
+
+func addOpGetUploadJobPathValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetUploadJobPath{}, middleware.After)
+}
+
 func addOpGetWorkflowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetWorkflow{}, middleware.After)
 }
@@ -1710,6 +1842,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpListUploadJobsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListUploadJobs{}, middleware.After)
+}
+
 func addOpListWorkflowsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListWorkflows{}, middleware.After)
 }
@@ -1732,6 +1868,14 @@ func addOpPutProfileObjectTypeValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpSearchProfilesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearchProfiles{}, middleware.After)
+}
+
+func addOpStartUploadJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartUploadJob{}, middleware.After)
+}
+
+func addOpStopUploadJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopUploadJob{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -3561,6 +3705,30 @@ func validateOpCreateSegmentSnapshotInput(v *CreateSegmentSnapshotInput) error {
 	}
 }
 
+func validateOpCreateUploadJobInput(v *CreateUploadJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateUploadJobInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.DisplayName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DisplayName"))
+	}
+	if v.Fields == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Fields"))
+	}
+	if v.UniqueKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UniqueKey"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteCalculatedAttributeDefinitionInput(v *DeleteCalculatedAttributeDefinitionInput) error {
 	if v == nil {
 		return nil
@@ -4127,6 +4295,42 @@ func validateOpGetSimilarProfilesInput(v *GetSimilarProfilesInput) error {
 	}
 }
 
+func validateOpGetUploadJobInput(v *GetUploadJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetUploadJobInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetUploadJobPathInput(v *GetUploadJobPathInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetUploadJobPathInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetWorkflowInput(v *GetWorkflowInput) error {
 	if v == nil {
 		return nil
@@ -4408,6 +4612,21 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	}
 }
 
+func validateOpListUploadJobsInput(v *ListUploadJobsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListUploadJobsInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListWorkflowsInput(v *ListWorkflowsInput) error {
 	if v == nil {
 		return nil
@@ -4524,6 +4743,42 @@ func validateOpSearchProfilesInput(v *SearchProfilesInput) error {
 		if err := validateAdditionalSearchKeysList(v.AdditionalSearchKeys); err != nil {
 			invalidParams.AddNested("AdditionalSearchKeys", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartUploadJobInput(v *StartUploadJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartUploadJobInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopUploadJobInput(v *StopUploadJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopUploadJobInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

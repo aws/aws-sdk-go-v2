@@ -966,10 +966,11 @@ type StepParameterType string
 
 // Enum values for StepParameterType
 const (
-	StepParameterTypeInt    StepParameterType = "INT"
-	StepParameterTypeFloat  StepParameterType = "FLOAT"
-	StepParameterTypeString StepParameterType = "STRING"
-	StepParameterTypePath   StepParameterType = "PATH"
+	StepParameterTypeInt      StepParameterType = "INT"
+	StepParameterTypeFloat    StepParameterType = "FLOAT"
+	StepParameterTypeString   StepParameterType = "STRING"
+	StepParameterTypePath     StepParameterType = "PATH"
+	StepParameterTypeChunkInt StepParameterType = "CHUNK_INT"
 )
 
 // Values returns all known values for StepParameterType. Note that this can be
@@ -982,6 +983,7 @@ func (StepParameterType) Values() []StepParameterType {
 		"FLOAT",
 		"STRING",
 		"PATH",
+		"CHUNK_INT",
 	}
 }
 

@@ -1085,6 +1085,25 @@ func (Status) Values() []Status {
 	}
 }
 
+type StatusReason string
+
+// Enum values for StatusReason
+const (
+	StatusReasonValidationFailure StatusReason = "VALIDATION_FAILURE"
+	StatusReasonInternalFailure   StatusReason = "INTERNAL_FAILURE"
+)
+
+// Values returns all known values for StatusReason. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StatusReason) Values() []StatusReason {
+	return []StatusReason{
+		"VALIDATION_FAILURE",
+		"INTERNAL_FAILURE",
+	}
+}
+
 type StringDimensionType string
 
 // Enum values for StringDimensionType
@@ -1195,6 +1214,33 @@ const (
 func (Unit) Values() []Unit {
 	return []Unit{
 		"DAYS",
+	}
+}
+
+type UploadJobStatus string
+
+// Enum values for UploadJobStatus
+const (
+	UploadJobStatusCreated            UploadJobStatus = "CREATED"
+	UploadJobStatusInProgress         UploadJobStatus = "IN_PROGRESS"
+	UploadJobStatusPartiallySucceeded UploadJobStatus = "PARTIALLY_SUCCEEDED"
+	UploadJobStatusSucceeded          UploadJobStatus = "SUCCEEDED"
+	UploadJobStatusFailed             UploadJobStatus = "FAILED"
+	UploadJobStatusStopped            UploadJobStatus = "STOPPED"
+)
+
+// Values returns all known values for UploadJobStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UploadJobStatus) Values() []UploadJobStatus {
+	return []UploadJobStatus{
+		"CREATED",
+		"IN_PROGRESS",
+		"PARTIALLY_SUCCEEDED",
+		"SUCCEEDED",
+		"FAILED",
+		"STOPPED",
 	}
 }
 

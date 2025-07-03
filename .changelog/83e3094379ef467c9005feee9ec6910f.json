@@ -1,0 +1,8 @@
+{
+    "id": "83e30943-79ef-467c-9005-feee9ec6910f",
+    "type": "feature",
+    "description": "Changes include new StartSession API for SageMaker Studio spaces and CreateHubContentPresignedUrls API for SageMaker JumpStart.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

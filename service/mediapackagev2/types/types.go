@@ -291,6 +291,37 @@ type CreateLowLatencyHlsManifestConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration parameters for creating a Microsoft Smooth Streaming (MSS)
+// manifest. MSS is a streaming media format developed by Microsoft that delivers
+// adaptive bitrate streaming content to compatible players and devices.
+type CreateMssManifestConfiguration struct {
+
+	// A short string that's appended to the endpoint URL to create a unique path to
+	// this MSS manifest. The manifest name must be unique within the origin endpoint
+	// and can contain letters, numbers, hyphens, and underscores.
+	//
+	// This member is required.
+	ManifestName *string
+
+	// Filter configuration includes settings for manifest filtering, start and end
+	// times, and time delay that apply to all of your egress requests for this
+	// manifest.
+	FilterConfiguration *FilterConfiguration
+
+	// Determines the layout format of the MSS manifest. This controls how the
+	// manifest is structured and presented to client players, affecting compatibility
+	// with different MSS-compatible devices and applications.
+	ManifestLayout MssManifestLayout
+
+	// The total duration (in seconds) of the manifest window. This determines how
+	// much content is available in the manifest at any given time. The manifest window
+	// slides forward as new segments become available, maintaining a consistent
+	// duration of content. The minimum value is 30 seconds.
+	ManifestWindowSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
 // The base URLs to use for retrieving segments. You can specify multiple
 // locations and indicate the priority and weight for when each should be used, for
 // use in mutli-CDN workflows.
@@ -456,6 +487,27 @@ type Encryption struct {
 	// This member is required.
 	SpekeKeyProvider *SpekeKeyProvider
 
+	// Excludes SEIG and SGPD boxes from segment metadata in CMAF containers.
+	//
+	// When set to true , MediaPackage omits these DRM metadata boxes from CMAF
+	// segments, which can improve compatibility with certain devices and players that
+	// don't support these boxes.
+	//
+	// Important considerations:
+	//
+	//   - This setting only affects CMAF container formats
+	//
+	//   - Key rotation can still be handled through media playlist signaling
+	//
+	//   - PSSH and TENC boxes remain unaffected
+	//
+	//   - Default behavior is preserved when this setting is disabled
+	//
+	// Valid values: true | false
+	//
+	// Default: false
+	CmafExcludeSegmentDrmMetadata *bool
+
 	// A 128-bit, 16-byte hex value represented by a 32-character string, used in
 	// conjunction with the key for encrypting content. If you don't specify a value,
 	// then MediaPackage creates the constant initialization vector (IV).
@@ -555,6 +607,11 @@ type EncryptionMethod struct {
 
 	// The encryption method to use.
 	CmafEncryptionMethod CmafEncryptionMethod
+
+	// The encryption method used for Microsoft Smooth Streaming (MSS) content. This
+	// specifies how the MSS segments are encrypted to protect the content during
+	// delivery to client players.
+	IsmEncryptionMethod IsmEncryptionMethod
 
 	// The encryption method to use.
 	TsEncryptionMethod TsEncryptionMethod
@@ -826,6 +883,40 @@ type GetLowLatencyHlsManifestConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration details for a Microsoft Smooth Streaming (MSS) manifest
+// associated with an origin endpoint. This includes all the settings and
+// properties that define how the MSS content is packaged and delivered.
+type GetMssManifestConfiguration struct {
+
+	// The name of the MSS manifest. This name is appended to the origin endpoint URL
+	// to create the unique path for accessing this specific MSS manifest.
+	//
+	// This member is required.
+	ManifestName *string
+
+	// The complete URL for accessing the MSS manifest. Client players use this URL to
+	// retrieve the manifest and begin streaming the Microsoft Smooth Streaming
+	// content.
+	//
+	// This member is required.
+	Url *string
+
+	// Filter configuration includes settings for manifest filtering, start and end
+	// times, and time delay that apply to all of your egress requests for this
+	// manifest.
+	FilterConfiguration *FilterConfiguration
+
+	// The layout format of the MSS manifest, which determines how the manifest is
+	// structured for client compatibility.
+	ManifestLayout MssManifestLayout
+
+	// The duration (in seconds) of the manifest window. This represents the total
+	// amount of content available in the manifest at any given time.
+	ManifestWindowSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
 // Information about a harvested DASH manifest.
 type HarvestedDashManifest struct {
 
@@ -1054,6 +1145,22 @@ type ListLowLatencyHlsManifestConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Summary information about a Microsoft Smooth Streaming (MSS) manifest
+// configuration. This provides key details about the MSS manifest without
+// including all configuration parameters.
+type ListMssManifestConfiguration struct {
+
+	// The name of the MSS manifest configuration.
+	//
+	// This member is required.
+	ManifestName *string
+
+	// The URL for accessing the MSS manifest.
+	Url *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration of the origin endpoint.
 type OriginEndpointListConfiguration struct {
 
@@ -1110,6 +1217,11 @@ type OriginEndpointListConfiguration struct {
 
 	// The date and time the origin endpoint was modified.
 	ModifiedAt *time.Time
+
+	// A list of Microsoft Smooth Streaming (MSS) manifest configurations associated
+	// with the origin endpoint. Each configuration represents a different MSS
+	// streaming option available from this endpoint.
+	MssManifests []ListMssManifestConfiguration
 
 	noSmithyDocumentSerde
 }

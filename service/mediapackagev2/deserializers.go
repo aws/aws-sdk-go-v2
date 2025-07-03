@@ -1212,6 +1212,11 @@ func awsRestjson1_deserializeOpDocumentCreateOriginEndpointOutput(v **CreateOrig
 				}
 			}
 
+		case "MssManifests":
+			if err := awsRestjson1_deserializeDocumentGetMssManifests(&sv.MssManifests, value); err != nil {
+				return err
+			}
+
 		case "OriginEndpointName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3004,6 +3009,11 @@ func awsRestjson1_deserializeOpDocumentGetOriginEndpointOutput(v **GetOriginEndp
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "MssManifests":
+			if err := awsRestjson1_deserializeDocumentGetMssManifests(&sv.MssManifests, value); err != nil {
+				return err
 			}
 
 		case "OriginEndpointName":
@@ -5686,6 +5696,11 @@ func awsRestjson1_deserializeOpDocumentUpdateOriginEndpointOutput(v **UpdateOrig
 				}
 			}
 
+		case "MssManifests":
+			if err := awsRestjson1_deserializeDocumentGetMssManifests(&sv.MssManifests, value); err != nil {
+				return err
+			}
+
 		case "OriginEndpointName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6996,6 +7011,15 @@ func awsRestjson1_deserializeDocumentEncryption(v **types.Encryption, value inte
 
 	for key, value := range shape {
 		switch key {
+		case "CmafExcludeSegmentDrmMetadata":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.CmafExcludeSegmentDrmMetadata = ptr.Bool(jtv)
+			}
+
 		case "ConstantInitializationVector":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7115,6 +7139,15 @@ func awsRestjson1_deserializeDocumentEncryptionMethod(v **types.EncryptionMethod
 					return fmt.Errorf("expected CmafEncryptionMethod to be of type string, got %T instead", value)
 				}
 				sv.CmafEncryptionMethod = types.CmafEncryptionMethod(jtv)
+			}
+
+		case "IsmEncryptionMethod":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IsmEncryptionMethod to be of type string, got %T instead", value)
+				}
+				sv.IsmEncryptionMethod = types.IsmEncryptionMethod(jtv)
 			}
 
 		case "TsEncryptionMethod":
@@ -7789,6 +7822,116 @@ func awsRestjson1_deserializeDocumentGetLowLatencyHlsManifests(v *[]types.GetLow
 		var col types.GetLowLatencyHlsManifestConfiguration
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentGetLowLatencyHlsManifestConfiguration(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGetMssManifestConfiguration(v **types.GetMssManifestConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GetMssManifestConfiguration
+	if *v == nil {
+		sv = &types.GetMssManifestConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FilterConfiguration":
+			if err := awsRestjson1_deserializeDocumentFilterConfiguration(&sv.FilterConfiguration, value); err != nil {
+				return err
+			}
+
+		case "ManifestLayout":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MssManifestLayout to be of type string, got %T instead", value)
+				}
+				sv.ManifestLayout = types.MssManifestLayout(jtv)
+			}
+
+		case "ManifestName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ManifestName to be of type string, got %T instead", value)
+				}
+				sv.ManifestName = ptr.String(jtv)
+			}
+
+		case "ManifestWindowSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ManifestWindowSeconds = ptr.Int32(int32(i64))
+			}
+
+		case "Url":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Url = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGetMssManifests(v *[]types.GetMssManifestConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.GetMssManifestConfiguration
+	if *v == nil {
+		cv = []types.GetMssManifestConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.GetMssManifestConfiguration
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentGetMssManifestConfiguration(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -8753,6 +8896,89 @@ func awsRestjson1_deserializeDocumentListLowLatencyHlsManifests(v *[]types.ListL
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentListMssManifestConfiguration(v **types.ListMssManifestConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ListMssManifestConfiguration
+	if *v == nil {
+		sv = &types.ListMssManifestConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ManifestName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceName to be of type string, got %T instead", value)
+				}
+				sv.ManifestName = ptr.String(jtv)
+			}
+
+		case "Url":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Url = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentListMssManifests(v *[]types.ListMssManifestConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ListMssManifestConfiguration
+	if *v == nil {
+		cv = []types.ListMssManifestConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ListMssManifestConfiguration
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentListMssManifestConfiguration(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentOriginEndpointListConfiguration(v **types.OriginEndpointListConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8870,6 +9096,11 @@ func awsRestjson1_deserializeDocumentOriginEndpointListConfiguration(v **types.O
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "MssManifests":
+			if err := awsRestjson1_deserializeDocumentListMssManifests(&sv.MssManifests, value); err != nil {
+				return err
 			}
 
 		case "OriginEndpointName":

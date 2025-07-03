@@ -218,6 +218,18 @@ func TestCheckSnapshot_CreateSegmentSnapshot(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateUploadJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateUploadJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateUploadJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteCalculatedAttributeDefinition(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteCalculatedAttributeDefinition(context.Background(), nil, func(o *Options) {
@@ -578,6 +590,30 @@ func TestCheckSnapshot_GetSimilarProfiles(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetUploadJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetUploadJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetUploadJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetUploadJobPath(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetUploadJobPath(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetUploadJobPath")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetWorkflow(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetWorkflow(context.Background(), nil, func(o *Options) {
@@ -806,6 +842,18 @@ func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListUploadJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListUploadJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListUploadJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListWorkflows(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListWorkflows(context.Background(), nil, func(o *Options) {
@@ -871,6 +919,30 @@ func TestCheckSnapshot_SearchProfiles(t *testing.T) {
 	_, err := svc.SearchProfiles(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "SearchProfiles")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartUploadJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartUploadJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartUploadJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StopUploadJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopUploadJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopUploadJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1110,6 +1182,18 @@ func TestUpdateSnapshot_CreateSegmentSnapshot(t *testing.T) {
 	_, err := svc.CreateSegmentSnapshot(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateSegmentSnapshot")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateUploadJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateUploadJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateUploadJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1477,6 +1561,30 @@ func TestUpdateSnapshot_GetSimilarProfiles(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetUploadJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetUploadJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetUploadJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetUploadJobPath(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetUploadJobPath(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetUploadJobPath")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetWorkflow(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetWorkflow(context.Background(), nil, func(o *Options) {
@@ -1705,6 +1813,18 @@ func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListUploadJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListUploadJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListUploadJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListWorkflows(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListWorkflows(context.Background(), nil, func(o *Options) {
@@ -1770,6 +1890,30 @@ func TestUpdateSnapshot_SearchProfiles(t *testing.T) {
 	_, err := svc.SearchProfiles(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "SearchProfiles")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartUploadJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartUploadJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartUploadJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopUploadJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopUploadJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopUploadJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

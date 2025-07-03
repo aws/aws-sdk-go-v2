@@ -590,6 +590,26 @@ func (m *validateOpCreateFlowDefinition) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateHubContentPresignedUrls struct {
+}
+
+func (*validateOpCreateHubContentPresignedUrls) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateHubContentPresignedUrls) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateHubContentPresignedUrlsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateHubContentPresignedUrlsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateHubContentReference struct {
 }
 
@@ -4650,6 +4670,26 @@ func (m *validateOpStartPipelineExecution) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartSession struct {
+}
+
+func (*validateOpStartSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStopAutoMLJob struct {
 }
 
@@ -5946,6 +5986,10 @@ func addOpCreateFlowDefinitionValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpCreateFlowDefinition{}, middleware.After)
 }
 
+func addOpCreateHubContentPresignedUrlsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateHubContentPresignedUrls{}, middleware.After)
+}
+
 func addOpCreateHubContentReferenceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateHubContentReference{}, middleware.After)
 }
@@ -6756,6 +6800,10 @@ func addOpStartNotebookInstanceValidationMiddleware(stack *middleware.Stack) err
 
 func addOpStartPipelineExecutionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartPipelineExecution{}, middleware.After)
+}
+
+func addOpStartSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartSession{}, middleware.After)
 }
 
 func addOpStopAutoMLJobValidationMiddleware(stack *middleware.Stack) error {
@@ -14651,12 +14699,6 @@ func validateOpCreateDomainInput(v *CreateDomainInput) error {
 			invalidParams.AddNested("DomainSettings", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.SubnetIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
-	}
-	if v.VpcId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VpcId"))
-	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
@@ -14950,6 +14992,27 @@ func validateOpCreateFlowDefinitionInput(v *CreateFlowDefinitionInput) error {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateHubContentPresignedUrlsInput(v *CreateHubContentPresignedUrlsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateHubContentPresignedUrlsInput"}
+	if v.HubName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HubName"))
+	}
+	if len(v.HubContentType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("HubContentType"))
+	}
+	if v.HubContentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HubContentName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -18986,6 +19049,21 @@ func validateOpStartPipelineExecutionInput(v *StartPipelineExecutionInput) error
 		if err := validateSelectiveExecutionConfig(v.SelectiveExecutionConfig); err != nil {
 			invalidParams.AddNested("SelectiveExecutionConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartSessionInput(v *StartSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartSessionInput"}
+	if v.ResourceIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

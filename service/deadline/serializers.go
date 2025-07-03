@@ -12591,6 +12591,36 @@ func awsRestjson1_serializeDocumentTags(v map[string]string, value smithyjson.Va
 	return nil
 }
 
+func awsRestjson1_serializeDocumentTaskRunManifestPropertiesListRequest(v []types.TaskRunManifestPropertiesRequest, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentTaskRunManifestPropertiesRequest(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTaskRunManifestPropertiesRequest(v *types.TaskRunManifestPropertiesRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.OutputManifestHash != nil {
+		ok := object.Key("outputManifestHash")
+		ok.String(*v.OutputManifestHash)
+	}
+
+	if v.OutputManifestPath != nil {
+		ok := object.Key("outputManifestPath")
+		ok.String(*v.OutputManifestPath)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentUpdatedSessionActionInfo(v *types.UpdatedSessionActionInfo, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -12603,6 +12633,13 @@ func awsRestjson1_serializeDocumentUpdatedSessionActionInfo(v *types.UpdatedSess
 	if v.EndedAt != nil {
 		ok := object.Key("endedAt")
 		ok.String(smithytime.FormatDateTime(*v.EndedAt))
+	}
+
+	if v.Manifests != nil {
+		ok := object.Key("manifests")
+		if err := awsRestjson1_serializeDocumentTaskRunManifestPropertiesListRequest(v.Manifests, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ProcessExitCode != nil {

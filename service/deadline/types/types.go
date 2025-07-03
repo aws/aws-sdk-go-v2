@@ -2541,6 +2541,9 @@ type SessionActionSummary struct {
 	// The date and time the resource ended running.
 	EndedAt *time.Time
 
+	// The list of manifest properties that describe file attachments for the task run.
+	Manifests []TaskRunManifestPropertiesResponse
+
 	// The completion percentage for the session action.
 	ProgressPercent *float32
 
@@ -3093,6 +3096,7 @@ type SyncInputJobAttachmentsSessionActionDefinitionSummary struct {
 //
 // The following types satisfy this interface:
 //
+//	TaskParameterValueMemberChunkInt
 //	TaskParameterValueMemberFloat
 //	TaskParameterValueMemberInt
 //	TaskParameterValueMemberPath
@@ -3100,6 +3104,16 @@ type SyncInputJobAttachmentsSessionActionDefinitionSummary struct {
 type TaskParameterValue interface {
 	isTaskParameterValue()
 }
+
+// A range (for example 1-10) or selection of specific (for example 1,3,7,8,10)
+// integers represented as a string.
+type TaskParameterValueMemberChunkInt struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*TaskParameterValueMemberChunkInt) isTaskParameterValue() {}
 
 // A double precision IEEE-754 floating point number represented as a string.
 type TaskParameterValueMemberFloat struct {
@@ -3137,6 +3151,32 @@ type TaskParameterValueMemberString struct {
 
 func (*TaskParameterValueMemberString) isTaskParameterValue() {}
 
+// The output manifest properties reported by the worker agent for a completed
+// task run.
+type TaskRunManifestPropertiesRequest struct {
+
+	// The hash value of the file.
+	OutputManifestHash *string
+
+	// The manifest file path.
+	OutputManifestPath *string
+
+	noSmithyDocumentSerde
+}
+
+// The manifest properties for a task run, corresponding to the manifest
+// properties in the job.
+type TaskRunManifestPropertiesResponse struct {
+
+	// The hash value of the file.
+	OutputManifestHash *string
+
+	// The manifest file path.
+	OutputManifestPath *string
+
+	noSmithyDocumentSerde
+}
+
 // The task, step, and parameters for the task run in the session action.
 type TaskRunSessionActionDefinition struct {
 
@@ -3163,6 +3203,9 @@ type TaskRunSessionActionDefinitionSummary struct {
 	//
 	// This member is required.
 	StepId *string
+
+	// The parameters of a task run in a session action.
+	Parameters map[string]TaskParameterValue
 
 	// The task ID.
 	TaskId *string
@@ -3265,6 +3308,10 @@ type UpdatedSessionActionInfo struct {
 
 	// The date and time the resource ended running.
 	EndedAt *time.Time
+
+	// A list of output manifest properties reported by the worker agent, with each
+	// entry corresponding to a manifest property in the job.
+	Manifests []TaskRunManifestPropertiesRequest
 
 	// The process exit code. The default Deadline Cloud worker agent converts
 	// unsigned 32-bit exit codes to signed 32-bit exit codes.

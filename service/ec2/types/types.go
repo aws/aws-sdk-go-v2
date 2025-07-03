@@ -17737,6 +17737,9 @@ type SecurityGroupVpcAssociation struct {
 	// The association's security group ID.
 	GroupId *string
 
+	// The Amazon Web Services account ID of the owner of the security group.
+	GroupOwnerId *string
+
 	// The association's state.
 	State SecurityGroupVpcAssociationState
 

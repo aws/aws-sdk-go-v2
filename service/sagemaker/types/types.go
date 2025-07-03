@@ -1507,6 +1507,21 @@ type AthenaDatasetDefinition struct {
 	noSmithyDocumentSerde
 }
 
+// Contains a presigned URL and its associated local file path for downloading hub
+// content artifacts.
+type AuthorizedUrl struct {
+
+	// The recommended local file path where the downloaded file should be stored to
+	// maintain proper directory structure and file organization.
+	LocalPath *string
+
+	// The presigned S3 URL that provides temporary, secure access to download the
+	// file. URLs expire within 15 minutes for security purposes.
+	Url *string
+
+	noSmithyDocumentSerde
+}
+
 // The selection of algorithms trained on your dataset to generate the model
 // candidates for an Autopilot job.
 type AutoMLAlgorithmConfig struct {
@@ -14585,6 +14600,23 @@ type PredefinedMetricSpecification struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for accessing hub content through presigned URLs, including
+// license agreement acceptance and URL validation settings.
+type PresignedUrlAccessConfig struct {
+
+	// Indicates acceptance of the End User License Agreement (EULA) for gated models.
+	// Set to true to acknowledge acceptance of the license terms required for
+	// accessing gated content.
+	AcceptEula *bool
+
+	// The expected S3 URL prefix for validation purposes. This parameter helps ensure
+	// consistency between the resolved S3 URIs and the deployment configuration,
+	// reducing potential compatibility issues.
+	ExpectedS3Url *string
+
+	noSmithyDocumentSerde
+}
+
 // Priority class configuration. When included in PriorityClasses , these class
 // configurations define how tasks are queued.
 type PriorityClass struct {
@@ -17907,6 +17939,10 @@ type SpaceSettings struct {
 	// The KernelGateway app settings.
 	KernelGatewayAppSettings *KernelGatewayAppSettings
 
+	// A setting that enables or disables remote access for a SageMaker space. When
+	// enabled, this allows you to connect to the remote space from your local IDE.
+	RemoteAccess FeatureStatus
+
 	// If you enable this option, SageMaker AI creates the following resources on your
 	// behalf when you create the space:
 	//
@@ -17926,6 +17962,10 @@ type SpaceSettingsSummary struct {
 
 	// The type of app created within the space.
 	AppType AppType
+
+	// A setting that enables or disables remote access for a SageMaker space. When
+	// enabled, this allows you to connect to the remote space from your local IDE.
+	RemoteAccess FeatureStatus
 
 	// The storage settings for a space.
 	SpaceStorageSettings *SpaceStorageSettings

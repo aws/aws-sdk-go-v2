@@ -343,6 +343,9 @@ func ExampleTaskParameterValue_outputUsage() {
 	var union types.TaskParameterValue
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.TaskParameterValueMemberChunkInt:
+		_ = v.Value // Value is string
+
 	case *types.TaskParameterValueMemberFloat:
 		_ = v.Value // Value is string
 
@@ -364,6 +367,7 @@ func ExampleTaskParameterValue_outputUsage() {
 	}
 }
 
+var _ *string
 var _ *string
 var _ *string
 var _ *string

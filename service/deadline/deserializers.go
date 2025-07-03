@@ -8879,6 +8879,11 @@ func awsRestjson1_deserializeOpDocumentGetSessionActionOutput(v **GetSessionActi
 				sv.EndedAt = ptr.Time(t)
 			}
 
+		case "manifests":
+			if err := awsRestjson1_deserializeDocumentTaskRunManifestPropertiesListResponse(&sv.Manifests, value); err != nil {
+				return err
+			}
+
 		case "processExitCode":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -26193,6 +26198,11 @@ func awsRestjson1_deserializeDocumentSessionActionSummary(v **types.SessionActio
 				sv.EndedAt = ptr.Time(t)
 			}
 
+		case "manifests":
+			if err := awsRestjson1_deserializeDocumentTaskRunManifestPropertiesListResponse(&sv.Manifests, value); err != nil {
+				return err
+			}
+
 		case "progressPercent":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -28185,6 +28195,18 @@ loop:
 			continue
 		}
 		switch key {
+		case "chunkInt":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.TaskParameterValueMemberChunkInt{Value: mv}
+			break loop
+
 		case "float":
 			var mv string
 			if value != nil {
@@ -28240,6 +28262,89 @@ loop:
 		}
 	}
 	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTaskRunManifestPropertiesListResponse(v *[]types.TaskRunManifestPropertiesResponse, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.TaskRunManifestPropertiesResponse
+	if *v == nil {
+		cv = []types.TaskRunManifestPropertiesResponse{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.TaskRunManifestPropertiesResponse
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentTaskRunManifestPropertiesResponse(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTaskRunManifestPropertiesResponse(v **types.TaskRunManifestPropertiesResponse, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TaskRunManifestPropertiesResponse
+	if *v == nil {
+		sv = &types.TaskRunManifestPropertiesResponse{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "outputManifestHash":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.OutputManifestHash = ptr.String(jtv)
+			}
+
+		case "outputManifestPath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.OutputManifestPath = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -28319,6 +28424,11 @@ func awsRestjson1_deserializeDocumentTaskRunSessionActionDefinitionSummary(v **t
 
 	for key, value := range shape {
 		switch key {
+		case "parameters":
+			if err := awsRestjson1_deserializeDocumentTaskParameters(&sv.Parameters, value); err != nil {
+				return err
+			}
+
 		case "stepId":
 			if value != nil {
 				jtv, ok := value.(string)

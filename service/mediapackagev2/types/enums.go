@@ -86,6 +86,7 @@ type ContainerType string
 const (
 	ContainerTypeTs   ContainerType = "TS"
 	ContainerTypeCmaf ContainerType = "CMAF"
+	ContainerTypeIsm  ContainerType = "ISM"
 )
 
 // Values returns all known values for ContainerType. Note that this can be
@@ -96,6 +97,7 @@ func (ContainerType) Values() []ContainerType {
 	return []ContainerType{
 		"TS",
 		"CMAF",
+		"ISM",
 	}
 }
 
@@ -330,6 +332,42 @@ func (InputType) Values() []InputType {
 	}
 }
 
+type IsmEncryptionMethod string
+
+// Enum values for IsmEncryptionMethod
+const (
+	IsmEncryptionMethodCenc IsmEncryptionMethod = "CENC"
+)
+
+// Values returns all known values for IsmEncryptionMethod. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IsmEncryptionMethod) Values() []IsmEncryptionMethod {
+	return []IsmEncryptionMethod{
+		"CENC",
+	}
+}
+
+type MssManifestLayout string
+
+// Enum values for MssManifestLayout
+const (
+	MssManifestLayoutFull    MssManifestLayout = "FULL"
+	MssManifestLayoutCompact MssManifestLayout = "COMPACT"
+)
+
+// Values returns all known values for MssManifestLayout. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MssManifestLayout) Values() []MssManifestLayout {
+	return []MssManifestLayout{
+		"FULL",
+		"COMPACT",
+	}
+}
+
 type PresetSpeke20Audio string
 
 // Enum values for PresetSpeke20Audio
@@ -469,69 +507,78 @@ type ValidationExceptionType string
 
 // Enum values for ValidationExceptionType
 const (
-	ValidationExceptionTypeContainerTypeImmutable                                ValidationExceptionType = "CONTAINER_TYPE_IMMUTABLE"
-	ValidationExceptionTypeInvalidPaginationToken                                ValidationExceptionType = "INVALID_PAGINATION_TOKEN"
-	ValidationExceptionTypeInvalidPaginationMaxResults                           ValidationExceptionType = "INVALID_PAGINATION_MAX_RESULTS"
-	ValidationExceptionTypeInvalidPolicy                                         ValidationExceptionType = "INVALID_POLICY"
-	ValidationExceptionTypeInvalidRoleArn                                        ValidationExceptionType = "INVALID_ROLE_ARN"
-	ValidationExceptionTypeManifestNameCollision                                 ValidationExceptionType = "MANIFEST_NAME_COLLISION"
-	ValidationExceptionTypeEncryptionMethodContainerTypeMismatch                 ValidationExceptionType = "ENCRYPTION_METHOD_CONTAINER_TYPE_MISMATCH"
-	ValidationExceptionTypeCencIvIncompatible                                    ValidationExceptionType = "CENC_IV_INCOMPATIBLE"
-	ValidationExceptionTypeEncryptionContractWithoutAudioRenditionIncompatible   ValidationExceptionType = "ENCRYPTION_CONTRACT_WITHOUT_AUDIO_RENDITION_INCOMPATIBLE"
-	ValidationExceptionTypeEncryptionContractUnencrypted                         ValidationExceptionType = "ENCRYPTION_CONTRACT_UNENCRYPTED"
-	ValidationExceptionTypeEncryptionContractShared                              ValidationExceptionType = "ENCRYPTION_CONTRACT_SHARED"
-	ValidationExceptionTypeNumManifestsLow                                       ValidationExceptionType = "NUM_MANIFESTS_LOW"
-	ValidationExceptionTypeNumManifestsHigh                                      ValidationExceptionType = "NUM_MANIFESTS_HIGH"
-	ValidationExceptionTypeManifestDrmSystemsIncompatible                        ValidationExceptionType = "MANIFEST_DRM_SYSTEMS_INCOMPATIBLE"
-	ValidationExceptionTypeDrmSystemsEncryptionMethodIncompatible                ValidationExceptionType = "DRM_SYSTEMS_ENCRYPTION_METHOD_INCOMPATIBLE"
-	ValidationExceptionTypeRoleArnNotAssumable                                   ValidationExceptionType = "ROLE_ARN_NOT_ASSUMABLE"
-	ValidationExceptionTypeRoleArnLengthOutOfRange                               ValidationExceptionType = "ROLE_ARN_LENGTH_OUT_OF_RANGE"
-	ValidationExceptionTypeRoleArnInvalidFormat                                  ValidationExceptionType = "ROLE_ARN_INVALID_FORMAT"
-	ValidationExceptionTypeUrlInvalid                                            ValidationExceptionType = "URL_INVALID"
-	ValidationExceptionTypeUrlScheme                                             ValidationExceptionType = "URL_SCHEME"
-	ValidationExceptionTypeUrlUserInfo                                           ValidationExceptionType = "URL_USER_INFO"
-	ValidationExceptionTypeUrlPort                                               ValidationExceptionType = "URL_PORT"
-	ValidationExceptionTypeUrlUnknownHost                                        ValidationExceptionType = "URL_UNKNOWN_HOST"
-	ValidationExceptionTypeUrlLocalAddress                                       ValidationExceptionType = "URL_LOCAL_ADDRESS"
-	ValidationExceptionTypeUrlLoopbackAddress                                    ValidationExceptionType = "URL_LOOPBACK_ADDRESS"
-	ValidationExceptionTypeUrlLinkLocalAddress                                   ValidationExceptionType = "URL_LINK_LOCAL_ADDRESS"
-	ValidationExceptionTypeUrlMulticastAddress                                   ValidationExceptionType = "URL_MULTICAST_ADDRESS"
-	ValidationExceptionTypeMemberInvalid                                         ValidationExceptionType = "MEMBER_INVALID"
-	ValidationExceptionTypeMemberMissing                                         ValidationExceptionType = "MEMBER_MISSING"
-	ValidationExceptionTypeMemberMinValue                                        ValidationExceptionType = "MEMBER_MIN_VALUE"
-	ValidationExceptionTypeMemberMaxValue                                        ValidationExceptionType = "MEMBER_MAX_VALUE"
-	ValidationExceptionTypeMemberMinLength                                       ValidationExceptionType = "MEMBER_MIN_LENGTH"
-	ValidationExceptionTypeMemberMaxLength                                       ValidationExceptionType = "MEMBER_MAX_LENGTH"
-	ValidationExceptionTypeMemberInvalidEnumValue                                ValidationExceptionType = "MEMBER_INVALID_ENUM_VALUE"
-	ValidationExceptionTypeMemberDoesNotMatchPattern                             ValidationExceptionType = "MEMBER_DOES_NOT_MATCH_PATTERN"
-	ValidationExceptionTypeInvalidManifestFilter                                 ValidationExceptionType = "INVALID_MANIFEST_FILTER"
-	ValidationExceptionTypeInvalidTimeDelaySeconds                               ValidationExceptionType = "INVALID_TIME_DELAY_SECONDS"
-	ValidationExceptionTypeEndTimeEarlierThanStartTime                           ValidationExceptionType = "END_TIME_EARLIER_THAN_START_TIME"
-	ValidationExceptionTypeTsContainerTypeWithDashManifest                       ValidationExceptionType = "TS_CONTAINER_TYPE_WITH_DASH_MANIFEST"
-	ValidationExceptionTypeDirectModeWithTimingSource                            ValidationExceptionType = "DIRECT_MODE_WITH_TIMING_SOURCE"
-	ValidationExceptionTypeNoneModeWithTimingSource                              ValidationExceptionType = "NONE_MODE_WITH_TIMING_SOURCE"
-	ValidationExceptionTypeTimingSourceMissing                                   ValidationExceptionType = "TIMING_SOURCE_MISSING"
-	ValidationExceptionTypeUpdatePeriodSmallerThanSegmentDuration                ValidationExceptionType = "UPDATE_PERIOD_SMALLER_THAN_SEGMENT_DURATION"
-	ValidationExceptionTypePeriodTriggersNoneSpecifiedWithAdditionalValues       ValidationExceptionType = "PERIOD_TRIGGERS_NONE_SPECIFIED_WITH_ADDITIONAL_VALUES"
-	ValidationExceptionTypeDrmSignalingMismatchSegmentEncryptionStatus           ValidationExceptionType = "DRM_SIGNALING_MISMATCH_SEGMENT_ENCRYPTION_STATUS"
-	ValidationExceptionTypeOnlyCmafInputTypeAllowForceEndpointErrorConfiguration ValidationExceptionType = "ONLY_CMAF_INPUT_TYPE_ALLOW_FORCE_ENDPOINT_ERROR_CONFIGURATION"
-	ValidationExceptionTypeSourceDisruptionsEnabledIncorrectly                   ValidationExceptionType = "SOURCE_DISRUPTIONS_ENABLED_INCORRECTLY"
-	ValidationExceptionTypeHarvestedManifestHasStartEndFilterConfiguration       ValidationExceptionType = "HARVESTED_MANIFEST_HAS_START_END_FILTER_CONFIGURATION"
-	ValidationExceptionTypeHarvestedManifestNotFoundOnEndpoint                   ValidationExceptionType = "HARVESTED_MANIFEST_NOT_FOUND_ON_ENDPOINT"
-	ValidationExceptionTypeTooManyInProgressHarvestJobs                          ValidationExceptionType = "TOO_MANY_IN_PROGRESS_HARVEST_JOBS"
-	ValidationExceptionTypeHarvestJobIneligibleForCancellation                   ValidationExceptionType = "HARVEST_JOB_INELIGIBLE_FOR_CANCELLATION"
-	ValidationExceptionTypeInvalidHarvestJobDuration                             ValidationExceptionType = "INVALID_HARVEST_JOB_DURATION"
-	ValidationExceptionTypeHarvestJobS3DestinationMissingOrIncomplete            ValidationExceptionType = "HARVEST_JOB_S3_DESTINATION_MISSING_OR_INCOMPLETE"
-	ValidationExceptionTypeHarvestJobUnableToWriteToS3Destination                ValidationExceptionType = "HARVEST_JOB_UNABLE_TO_WRITE_TO_S3_DESTINATION"
-	ValidationExceptionTypeHarvestJobCustomerEndpointReadAccessDenied            ValidationExceptionType = "HARVEST_JOB_CUSTOMER_ENDPOINT_READ_ACCESS_DENIED"
-	ValidationExceptionTypeClipStartTimeWithStartOrEnd                           ValidationExceptionType = "CLIP_START_TIME_WITH_START_OR_END"
-	ValidationExceptionTypeStartTagTimeOffsetInvalid                             ValidationExceptionType = "START_TAG_TIME_OFFSET_INVALID"
-	ValidationExceptionTypeOnlyCmafInputTypeAllowMqcsInputSwitching              ValidationExceptionType = "ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_INPUT_SWITCHING"
-	ValidationExceptionTypeOnlyCmafInputTypeAllowMqcsOutputConfiguration         ValidationExceptionType = "ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_OUTPUT_CONFIGURATION"
-	ValidationExceptionTypeIncompatibleDashProfileDvbDashConfiguration           ValidationExceptionType = "INCOMPATIBLE_DASH_PROFILE_DVB_DASH_CONFIGURATION"
-	ValidationExceptionTypeDashDvbAttributesWithoutDvbDashProfile                ValidationExceptionType = "DASH_DVB_ATTRIBUTES_WITHOUT_DVB_DASH_PROFILE"
-	ValidationExceptionTypeIncompatibleDashCompactnessConfiguration              ValidationExceptionType = "INCOMPATIBLE_DASH_COMPACTNESS_CONFIGURATION"
-	ValidationExceptionTypeIncompatibleXmlEncoding                               ValidationExceptionType = "INCOMPATIBLE_XML_ENCODING"
+	ValidationExceptionTypeContainerTypeImmutable                                 ValidationExceptionType = "CONTAINER_TYPE_IMMUTABLE"
+	ValidationExceptionTypeInvalidPaginationToken                                 ValidationExceptionType = "INVALID_PAGINATION_TOKEN"
+	ValidationExceptionTypeInvalidPaginationMaxResults                            ValidationExceptionType = "INVALID_PAGINATION_MAX_RESULTS"
+	ValidationExceptionTypeInvalidPolicy                                          ValidationExceptionType = "INVALID_POLICY"
+	ValidationExceptionTypeInvalidRoleArn                                         ValidationExceptionType = "INVALID_ROLE_ARN"
+	ValidationExceptionTypeManifestNameCollision                                  ValidationExceptionType = "MANIFEST_NAME_COLLISION"
+	ValidationExceptionTypeEncryptionMethodContainerTypeMismatch                  ValidationExceptionType = "ENCRYPTION_METHOD_CONTAINER_TYPE_MISMATCH"
+	ValidationExceptionTypeCencIvIncompatible                                     ValidationExceptionType = "CENC_IV_INCOMPATIBLE"
+	ValidationExceptionTypeEncryptionContractWithoutAudioRenditionIncompatible    ValidationExceptionType = "ENCRYPTION_CONTRACT_WITHOUT_AUDIO_RENDITION_INCOMPATIBLE"
+	ValidationExceptionTypeEncryptionContractWithIsmContainerIncompatible         ValidationExceptionType = "ENCRYPTION_CONTRACT_WITH_ISM_CONTAINER_INCOMPATIBLE"
+	ValidationExceptionTypeEncryptionContractUnencrypted                          ValidationExceptionType = "ENCRYPTION_CONTRACT_UNENCRYPTED"
+	ValidationExceptionTypeEncryptionContractShared                               ValidationExceptionType = "ENCRYPTION_CONTRACT_SHARED"
+	ValidationExceptionTypeNumManifestsLow                                        ValidationExceptionType = "NUM_MANIFESTS_LOW"
+	ValidationExceptionTypeNumManifestsHigh                                       ValidationExceptionType = "NUM_MANIFESTS_HIGH"
+	ValidationExceptionTypeManifestDrmSystemsIncompatible                         ValidationExceptionType = "MANIFEST_DRM_SYSTEMS_INCOMPATIBLE"
+	ValidationExceptionTypeDrmSystemsEncryptionMethodIncompatible                 ValidationExceptionType = "DRM_SYSTEMS_ENCRYPTION_METHOD_INCOMPATIBLE"
+	ValidationExceptionTypeRoleArnNotAssumable                                    ValidationExceptionType = "ROLE_ARN_NOT_ASSUMABLE"
+	ValidationExceptionTypeRoleArnLengthOutOfRange                                ValidationExceptionType = "ROLE_ARN_LENGTH_OUT_OF_RANGE"
+	ValidationExceptionTypeRoleArnInvalidFormat                                   ValidationExceptionType = "ROLE_ARN_INVALID_FORMAT"
+	ValidationExceptionTypeUrlInvalid                                             ValidationExceptionType = "URL_INVALID"
+	ValidationExceptionTypeUrlScheme                                              ValidationExceptionType = "URL_SCHEME"
+	ValidationExceptionTypeUrlUserInfo                                            ValidationExceptionType = "URL_USER_INFO"
+	ValidationExceptionTypeUrlPort                                                ValidationExceptionType = "URL_PORT"
+	ValidationExceptionTypeUrlUnknownHost                                         ValidationExceptionType = "URL_UNKNOWN_HOST"
+	ValidationExceptionTypeUrlLocalAddress                                        ValidationExceptionType = "URL_LOCAL_ADDRESS"
+	ValidationExceptionTypeUrlLoopbackAddress                                     ValidationExceptionType = "URL_LOOPBACK_ADDRESS"
+	ValidationExceptionTypeUrlLinkLocalAddress                                    ValidationExceptionType = "URL_LINK_LOCAL_ADDRESS"
+	ValidationExceptionTypeUrlMulticastAddress                                    ValidationExceptionType = "URL_MULTICAST_ADDRESS"
+	ValidationExceptionTypeMemberInvalid                                          ValidationExceptionType = "MEMBER_INVALID"
+	ValidationExceptionTypeMemberMissing                                          ValidationExceptionType = "MEMBER_MISSING"
+	ValidationExceptionTypeMemberMinValue                                         ValidationExceptionType = "MEMBER_MIN_VALUE"
+	ValidationExceptionTypeMemberMaxValue                                         ValidationExceptionType = "MEMBER_MAX_VALUE"
+	ValidationExceptionTypeMemberMinLength                                        ValidationExceptionType = "MEMBER_MIN_LENGTH"
+	ValidationExceptionTypeMemberMaxLength                                        ValidationExceptionType = "MEMBER_MAX_LENGTH"
+	ValidationExceptionTypeMemberInvalidEnumValue                                 ValidationExceptionType = "MEMBER_INVALID_ENUM_VALUE"
+	ValidationExceptionTypeMemberDoesNotMatchPattern                              ValidationExceptionType = "MEMBER_DOES_NOT_MATCH_PATTERN"
+	ValidationExceptionTypeInvalidManifestFilter                                  ValidationExceptionType = "INVALID_MANIFEST_FILTER"
+	ValidationExceptionTypeInvalidTimeDelaySeconds                                ValidationExceptionType = "INVALID_TIME_DELAY_SECONDS"
+	ValidationExceptionTypeEndTimeEarlierThanStartTime                            ValidationExceptionType = "END_TIME_EARLIER_THAN_START_TIME"
+	ValidationExceptionTypeTsContainerTypeWithDashManifest                        ValidationExceptionType = "TS_CONTAINER_TYPE_WITH_DASH_MANIFEST"
+	ValidationExceptionTypeDirectModeWithTimingSource                             ValidationExceptionType = "DIRECT_MODE_WITH_TIMING_SOURCE"
+	ValidationExceptionTypeNoneModeWithTimingSource                               ValidationExceptionType = "NONE_MODE_WITH_TIMING_SOURCE"
+	ValidationExceptionTypeTimingSourceMissing                                    ValidationExceptionType = "TIMING_SOURCE_MISSING"
+	ValidationExceptionTypeUpdatePeriodSmallerThanSegmentDuration                 ValidationExceptionType = "UPDATE_PERIOD_SMALLER_THAN_SEGMENT_DURATION"
+	ValidationExceptionTypePeriodTriggersNoneSpecifiedWithAdditionalValues        ValidationExceptionType = "PERIOD_TRIGGERS_NONE_SPECIFIED_WITH_ADDITIONAL_VALUES"
+	ValidationExceptionTypeDrmSignalingMismatchSegmentEncryptionStatus            ValidationExceptionType = "DRM_SIGNALING_MISMATCH_SEGMENT_ENCRYPTION_STATUS"
+	ValidationExceptionTypeOnlyCmafInputTypeAllowForceEndpointErrorConfiguration  ValidationExceptionType = "ONLY_CMAF_INPUT_TYPE_ALLOW_FORCE_ENDPOINT_ERROR_CONFIGURATION"
+	ValidationExceptionTypeSourceDisruptionsEnabledIncorrectly                    ValidationExceptionType = "SOURCE_DISRUPTIONS_ENABLED_INCORRECTLY"
+	ValidationExceptionTypeHarvestedManifestHasStartEndFilterConfiguration        ValidationExceptionType = "HARVESTED_MANIFEST_HAS_START_END_FILTER_CONFIGURATION"
+	ValidationExceptionTypeHarvestedManifestNotFoundOnEndpoint                    ValidationExceptionType = "HARVESTED_MANIFEST_NOT_FOUND_ON_ENDPOINT"
+	ValidationExceptionTypeTooManyInProgressHarvestJobs                           ValidationExceptionType = "TOO_MANY_IN_PROGRESS_HARVEST_JOBS"
+	ValidationExceptionTypeHarvestJobIneligibleForCancellation                    ValidationExceptionType = "HARVEST_JOB_INELIGIBLE_FOR_CANCELLATION"
+	ValidationExceptionTypeInvalidHarvestJobDuration                              ValidationExceptionType = "INVALID_HARVEST_JOB_DURATION"
+	ValidationExceptionTypeHarvestJobS3DestinationMissingOrIncomplete             ValidationExceptionType = "HARVEST_JOB_S3_DESTINATION_MISSING_OR_INCOMPLETE"
+	ValidationExceptionTypeHarvestJobUnableToWriteToS3Destination                 ValidationExceptionType = "HARVEST_JOB_UNABLE_TO_WRITE_TO_S3_DESTINATION"
+	ValidationExceptionTypeHarvestJobCustomerEndpointReadAccessDenied             ValidationExceptionType = "HARVEST_JOB_CUSTOMER_ENDPOINT_READ_ACCESS_DENIED"
+	ValidationExceptionTypeClipStartTimeWithStartOrEnd                            ValidationExceptionType = "CLIP_START_TIME_WITH_START_OR_END"
+	ValidationExceptionTypeStartTagTimeOffsetInvalid                              ValidationExceptionType = "START_TAG_TIME_OFFSET_INVALID"
+	ValidationExceptionTypeIncompatibleDashProfileDvbDashConfiguration            ValidationExceptionType = "INCOMPATIBLE_DASH_PROFILE_DVB_DASH_CONFIGURATION"
+	ValidationExceptionTypeDashDvbAttributesWithoutDvbDashProfile                 ValidationExceptionType = "DASH_DVB_ATTRIBUTES_WITHOUT_DVB_DASH_PROFILE"
+	ValidationExceptionTypeIncompatibleDashCompactnessConfiguration               ValidationExceptionType = "INCOMPATIBLE_DASH_COMPACTNESS_CONFIGURATION"
+	ValidationExceptionTypeIncompatibleXmlEncoding                                ValidationExceptionType = "INCOMPATIBLE_XML_ENCODING"
+	ValidationExceptionTypeCmafExcludeSegmentDrmMetadataIncompatibleContainerType ValidationExceptionType = "CMAF_EXCLUDE_SEGMENT_DRM_METADATA_INCOMPATIBLE_CONTAINER_TYPE"
+	ValidationExceptionTypeOnlyCmafInputTypeAllowMqcsInputSwitching               ValidationExceptionType = "ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_INPUT_SWITCHING"
+	ValidationExceptionTypeOnlyCmafInputTypeAllowMqcsOutputConfiguration          ValidationExceptionType = "ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_OUTPUT_CONFIGURATION"
+	ValidationExceptionTypeTsContainerTypeWithMssManifest                         ValidationExceptionType = "TS_CONTAINER_TYPE_WITH_MSS_MANIFEST"
+	ValidationExceptionTypeCmafContainerTypeWithMssManifest                       ValidationExceptionType = "CMAF_CONTAINER_TYPE_WITH_MSS_MANIFEST"
+	ValidationExceptionTypeIsmContainerTypeWithHlsManifest                        ValidationExceptionType = "ISM_CONTAINER_TYPE_WITH_HLS_MANIFEST"
+	ValidationExceptionTypeIsmContainerTypeWithLlHlsManifest                      ValidationExceptionType = "ISM_CONTAINER_TYPE_WITH_LL_HLS_MANIFEST"
+	ValidationExceptionTypeIsmContainerTypeWithDashManifest                       ValidationExceptionType = "ISM_CONTAINER_TYPE_WITH_DASH_MANIFEST"
+	ValidationExceptionTypeIsmContainerTypeWithScte                               ValidationExceptionType = "ISM_CONTAINER_TYPE_WITH_SCTE"
+	ValidationExceptionTypeIsmContainerWithKeyRotation                            ValidationExceptionType = "ISM_CONTAINER_WITH_KEY_ROTATION"
 )
 
 // Values returns all known values for ValidationExceptionType. Note that this can
@@ -549,6 +596,7 @@ func (ValidationExceptionType) Values() []ValidationExceptionType {
 		"ENCRYPTION_METHOD_CONTAINER_TYPE_MISMATCH",
 		"CENC_IV_INCOMPATIBLE",
 		"ENCRYPTION_CONTRACT_WITHOUT_AUDIO_RENDITION_INCOMPATIBLE",
+		"ENCRYPTION_CONTRACT_WITH_ISM_CONTAINER_INCOMPATIBLE",
 		"ENCRYPTION_CONTRACT_UNENCRYPTED",
 		"ENCRYPTION_CONTRACT_SHARED",
 		"NUM_MANIFESTS_LOW",
@@ -597,11 +645,19 @@ func (ValidationExceptionType) Values() []ValidationExceptionType {
 		"HARVEST_JOB_CUSTOMER_ENDPOINT_READ_ACCESS_DENIED",
 		"CLIP_START_TIME_WITH_START_OR_END",
 		"START_TAG_TIME_OFFSET_INVALID",
-		"ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_INPUT_SWITCHING",
-		"ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_OUTPUT_CONFIGURATION",
 		"INCOMPATIBLE_DASH_PROFILE_DVB_DASH_CONFIGURATION",
 		"DASH_DVB_ATTRIBUTES_WITHOUT_DVB_DASH_PROFILE",
 		"INCOMPATIBLE_DASH_COMPACTNESS_CONFIGURATION",
 		"INCOMPATIBLE_XML_ENCODING",
+		"CMAF_EXCLUDE_SEGMENT_DRM_METADATA_INCOMPATIBLE_CONTAINER_TYPE",
+		"ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_INPUT_SWITCHING",
+		"ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_OUTPUT_CONFIGURATION",
+		"TS_CONTAINER_TYPE_WITH_MSS_MANIFEST",
+		"CMAF_CONTAINER_TYPE_WITH_MSS_MANIFEST",
+		"ISM_CONTAINER_TYPE_WITH_HLS_MANIFEST",
+		"ISM_CONTAINER_TYPE_WITH_LL_HLS_MANIFEST",
+		"ISM_CONTAINER_TYPE_WITH_DASH_MANIFEST",
+		"ISM_CONTAINER_TYPE_WITH_SCTE",
+		"ISM_CONTAINER_WITH_KEY_ROTATION",
 	}
 }

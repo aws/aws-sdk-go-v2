@@ -122,6 +122,10 @@ type GetOriginEndpointOutput struct {
 	// A low-latency HLS manifest configuration.
 	LowLatencyHlsManifests []types.GetLowLatencyHlsManifestConfiguration
 
+	// The Microsoft Smooth Streaming (MSS) manifest configurations associated with
+	// this origin endpoint.
+	MssManifests []types.GetMssManifestConfiguration
+
 	// The time that the origin endpoint was last reset.
 	ResetAt *time.Time
 

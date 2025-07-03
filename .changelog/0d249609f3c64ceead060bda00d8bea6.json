@@ -1,0 +1,8 @@
+{
+    "id": "0d249609-f3c6-4cee-ad06-0bda00d8bea6",
+    "type": "feature",
+    "description": "Added fields for output manifest reporting and task chunking parameters",
+    "modules": [
+        "service/deadline"
+    ]
+}

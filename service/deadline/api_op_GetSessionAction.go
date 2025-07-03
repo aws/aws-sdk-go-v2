@@ -82,6 +82,9 @@ type GetSessionActionOutput struct {
 	// The date and time the resource ended running.
 	EndedAt *time.Time
 
+	// The list of manifest properties that describe file attachments for the task run.
+	Manifests []types.TaskRunManifestPropertiesResponse
+
 	// The process exit code. The default Deadline Cloud worker agent converts
 	// unsigned 32-bit exit codes to signed 32-bit exit codes.
 	ProcessExitCode *int32

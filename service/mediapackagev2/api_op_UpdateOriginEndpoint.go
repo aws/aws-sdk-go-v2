@@ -83,6 +83,10 @@ type UpdateOriginEndpointInput struct {
 	// A low-latency HLS manifest configuration.
 	LowLatencyHlsManifests []types.CreateLowLatencyHlsManifestConfiguration
 
+	// A list of Microsoft Smooth Streaming (MSS) manifest configurations to update
+	// for the origin endpoint. This replaces the existing MSS manifest configurations.
+	MssManifests []types.CreateMssManifestConfiguration
+
 	// The segment configuration, including the segment name, duration, and other
 	// configuration values.
 	Segment *types.Segment
@@ -162,6 +166,10 @@ type UpdateOriginEndpointOutput struct {
 
 	// A low-latency HLS manifest configuration.
 	LowLatencyHlsManifests []types.GetLowLatencyHlsManifestConfiguration
+
+	// The updated Microsoft Smooth Streaming (MSS) manifest configurations for this
+	// origin endpoint.
+	MssManifests []types.GetMssManifestConfiguration
 
 	// The size of the window (in seconds) to create a window of the live stream
 	// that's available for on-demand viewing. Viewers can start-over or catch-up on

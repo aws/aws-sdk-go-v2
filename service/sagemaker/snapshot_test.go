@@ -422,6 +422,18 @@ func TestCheckSnapshot_CreateHub(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateHubContentPresignedUrls(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateHubContentPresignedUrls(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateHubContentPresignedUrls")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateHubContentReference(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateHubContentReference(context.Background(), nil, func(o *Options) {
@@ -3650,6 +3662,18 @@ func TestCheckSnapshot_StartPipelineExecution(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StopAutoMLJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StopAutoMLJob(context.Background(), nil, func(o *Options) {
@@ -4710,6 +4734,18 @@ func TestUpdateSnapshot_CreateHub(t *testing.T) {
 	_, err := svc.CreateHub(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateHub")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateHubContentPresignedUrls(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateHubContentPresignedUrls(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateHubContentPresignedUrls")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -7938,6 +7974,18 @@ func TestUpdateSnapshot_StartPipelineExecution(t *testing.T) {
 	_, err := svc.StartPipelineExecution(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartPipelineExecution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartSession")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

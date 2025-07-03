@@ -827,6 +827,38 @@ func validateCreateLowLatencyHlsManifests(v []types.CreateLowLatencyHlsManifestC
 	}
 }
 
+func validateCreateMssManifestConfiguration(v *types.CreateMssManifestConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateMssManifestConfiguration"}
+	if v.ManifestName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ManifestName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreateMssManifests(v []types.CreateMssManifestConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateMssManifests"}
+	for i := range v {
+		if err := validateCreateMssManifestConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDashBaseUrl(v *types.DashBaseUrl) error {
 	if v == nil {
 		return nil
@@ -1357,6 +1389,11 @@ func validateOpCreateOriginEndpointInput(v *CreateOriginEndpointInput) error {
 			invalidParams.AddNested("DashManifests", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.MssManifests != nil {
+		if err := validateCreateMssManifests(v.MssManifests); err != nil {
+			invalidParams.AddNested("MssManifests", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1825,6 +1862,11 @@ func validateOpUpdateOriginEndpointInput(v *UpdateOriginEndpointInput) error {
 	if v.DashManifests != nil {
 		if err := validateCreateDashManifests(v.DashManifests); err != nil {
 			invalidParams.AddNested("DashManifests", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MssManifests != nil {
+		if err := validateCreateMssManifests(v.MssManifests); err != nil {
+			invalidParams.AddNested("MssManifests", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

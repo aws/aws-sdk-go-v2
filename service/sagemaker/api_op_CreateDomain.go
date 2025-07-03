@@ -92,17 +92,6 @@ type CreateDomainInput struct {
 	// This member is required.
 	DomainName *string
 
-	// The VPC subnets that the domain uses for communication.
-	//
-	// This member is required.
-	SubnetIds []string
-
-	// The ID of the Amazon Virtual Private Cloud (VPC) that the domain uses for
-	// communication.
-	//
-	// This member is required.
-	VpcId *string
-
 	// Specifies the VPC used for non-EFS traffic. The default value is
 	// PublicInternetOnly .
 	//
@@ -136,6 +125,9 @@ type CreateDomainInput struct {
 	// more control, specify a customer managed key.
 	KmsKeyId *string
 
+	// The VPC subnets that the domain uses for communication.
+	SubnetIds []string
+
 	// Indicates whether custom tag propagation is supported for the domain. Defaults
 	// to DISABLED .
 	TagPropagation types.TagPropagation
@@ -147,6 +139,10 @@ type CreateDomainInput struct {
 	// Tags that you specify for the Domain are also added to all Apps that the Domain
 	// launches.
 	Tags []types.Tag
+
+	// The ID of the Amazon Virtual Private Cloud (VPC) that the domain uses for
+	// communication.
+	VpcId *string
 
 	noSmithyDocumentSerde
 }
