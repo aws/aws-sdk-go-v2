@@ -55,7 +55,7 @@ type DescribeNodeAssociationStatusInput struct {
 
 type DescribeNodeAssociationStatusOutput struct {
 
-	// Attributes specific to the node association. In Puppet, the attibute
+	// Attributes specific to the node association. In Puppet, the attribute
 	// PUPPET_NODE_CERT contains the signed certificate (the result of the CSR).
 	EngineAttributes []types.EngineAttribute
 

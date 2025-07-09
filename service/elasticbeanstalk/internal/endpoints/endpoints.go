@@ -331,6 +331,9 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "elasticbeanstalk.il-central-1.api.aws",
 			},
 			endpoints.EndpointKey{
+				Region: "me-central-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
 				Region: "me-south-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{

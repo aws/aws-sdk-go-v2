@@ -2,6 +2,86 @@
 
 package types
 
+type AccountPlanStatus string
+
+// Enum values for AccountPlanStatus
+const (
+	AccountPlanStatusNotStarted AccountPlanStatus = "NOT_STARTED"
+	AccountPlanStatusActive     AccountPlanStatus = "ACTIVE"
+	AccountPlanStatusExpired    AccountPlanStatus = "EXPIRED"
+)
+
+// Values returns all known values for AccountPlanStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AccountPlanStatus) Values() []AccountPlanStatus {
+	return []AccountPlanStatus{
+		"NOT_STARTED",
+		"ACTIVE",
+		"EXPIRED",
+	}
+}
+
+type AccountPlanType string
+
+// Enum values for AccountPlanType
+const (
+	AccountPlanTypeFree AccountPlanType = "FREE"
+	AccountPlanTypePaid AccountPlanType = "PAID"
+)
+
+// Values returns all known values for AccountPlanType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AccountPlanType) Values() []AccountPlanType {
+	return []AccountPlanType{
+		"FREE",
+		"PAID",
+	}
+}
+
+type ActivityStatus string
+
+// Enum values for ActivityStatus
+const (
+	ActivityStatusNotStarted ActivityStatus = "NOT_STARTED"
+	ActivityStatusInProgress ActivityStatus = "IN_PROGRESS"
+	ActivityStatusCompleted  ActivityStatus = "COMPLETED"
+	ActivityStatusExpiring   ActivityStatus = "EXPIRING"
+)
+
+// Values returns all known values for ActivityStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ActivityStatus) Values() []ActivityStatus {
+	return []ActivityStatus{
+		"NOT_STARTED",
+		"IN_PROGRESS",
+		"COMPLETED",
+		"EXPIRING",
+	}
+}
+
+type CurrencyCode string
+
+// Enum values for CurrencyCode
+const (
+	CurrencyCodeUsd CurrencyCode = "USD"
+)
+
+// Values returns all known values for CurrencyCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CurrencyCode) Values() []CurrencyCode {
+	return []CurrencyCode{
+		"USD",
+	}
+}
+
 type Dimension string
 
 // Enum values for Dimension
@@ -28,6 +108,47 @@ func (Dimension) Values() []Dimension {
 		"FREE_TIER_TYPE",
 		"DESCRIPTION",
 		"USAGE_PERCENTAGE",
+	}
+}
+
+type LanguageCode string
+
+// Enum values for LanguageCode
+const (
+	LanguageCodeEnUs LanguageCode = "en-US"
+	LanguageCodeEnGb LanguageCode = "en-GB"
+	LanguageCodeIdId LanguageCode = "id-ID"
+	LanguageCodeDeDe LanguageCode = "de-DE"
+	LanguageCodeEsEs LanguageCode = "es-ES"
+	LanguageCodeFrFr LanguageCode = "fr-FR"
+	LanguageCodeJaJp LanguageCode = "ja-JP"
+	LanguageCodeItIt LanguageCode = "it-IT"
+	LanguageCodePtPt LanguageCode = "pt-PT"
+	LanguageCodeKoKr LanguageCode = "ko-KR"
+	LanguageCodeZhCn LanguageCode = "zh-CN"
+	LanguageCodeZhTw LanguageCode = "zh-TW"
+	LanguageCodeTrTr LanguageCode = "tr-TR"
+)
+
+// Values returns all known values for LanguageCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LanguageCode) Values() []LanguageCode {
+	return []LanguageCode{
+		"en-US",
+		"en-GB",
+		"id-ID",
+		"de-DE",
+		"es-ES",
+		"fr-FR",
+		"ja-JP",
+		"it-IT",
+		"pt-PT",
+		"ko-KR",
+		"zh-CN",
+		"zh-TW",
+		"tr-TR",
 	}
 }
 

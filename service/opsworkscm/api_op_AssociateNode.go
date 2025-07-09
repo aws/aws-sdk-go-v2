@@ -20,7 +20,7 @@ import (
 // Example (Chef): aws opsworks-cm associate-node --server-name MyServer
 // --node-name MyManagedNode --engine-attributes
 // "Name=CHEF_ORGANIZATION,Value=default"
-// "Name=CHEF_NODE_PUBLIC_KEY,Value=public-key-pem"
+// "Name=CHEF_AUTOMATE_NODE_PUBLIC_KEY,Value=public-key-pem"
 //
 // On a Puppet server, this command is an alternative to the puppet cert sign
 // command that signs a Puppet node CSR.
@@ -33,8 +33,8 @@ import (
 // Otherwise, an InvalidStateException is thrown. A ResourceNotFoundException is
 // thrown when the server does not exist. A ValidationException is raised when
 // parameters of the request are not valid. The AssociateNode API call can be
-// integrated into Auto Scaling configurations, AWS Cloudformation templates, or
-// the user data of a server's instance.
+// integrated into Auto Scaling configurations, CloudFormation templates, or the
+// user data of a server's instance.
 func (c *Client) AssociateNode(ctx context.Context, params *AssociateNodeInput, optFns ...func(*Options)) (*AssociateNodeOutput, error) {
 	if params == nil {
 		params = &AssociateNodeInput{}
@@ -59,8 +59,8 @@ type AssociateNodeInput struct {
 	//   - CHEF_ORGANIZATION : The Chef organization with which the node is associated.
 	//   By default only one organization named default can exist.
 	//
-	//   - CHEF_NODE_PUBLIC_KEY : A PEM-formatted public key. This key is required for
-	//   the chef-client agent to access the Chef API.
+	//   - CHEF_AUTOMATE_NODE_PUBLIC_KEY : A PEM-formatted public key. This key is
+	//   required for the chef-client agent to access the Chef API.
 	//
 	// Attributes accepted in a AssociateNode request for Puppet
 	//

@@ -51,8 +51,8 @@ type CreateBackupInput struct {
 	//  A user-defined description of the backup.
 	Description *string
 
-	// A map that contains tag keys and tag values to attach to an AWS OpsWorks-CM
-	// server backup.
+	// A map that contains tag keys and tag values to attach to an OpsWorks CM server
+	// backup.
 	//
 	//   - The key cannot be empty.
 	//
@@ -66,8 +66,8 @@ type CreateBackupInput struct {
 	//
 	//   - Leading and trailing white spaces are trimmed from both the key and value.
 	//
-	//   - A maximum of 50 user-applied tags is allowed for tag-supported AWS
-	//   OpsWorks-CM resources.
+	//   - A maximum of 50 user-applied tags is allowed for tag-supported OpsWorks CM
+	//   resources.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

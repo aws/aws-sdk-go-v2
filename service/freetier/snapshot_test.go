@@ -62,6 +62,30 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_GetAccountActivity(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAccountActivity(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAccountActivity")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetAccountPlanState(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAccountPlanState(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAccountPlanState")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetFreeTierUsage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetFreeTierUsage(context.Background(), nil, func(o *Options) {
@@ -73,11 +97,83 @@ func TestCheckSnapshot_GetFreeTierUsage(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_ListAccountActivities(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAccountActivities(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAccountActivities")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpgradeAccountPlan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpgradeAccountPlan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpgradeAccountPlan")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+func TestUpdateSnapshot_GetAccountActivity(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAccountActivity(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAccountActivity")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAccountPlanState(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAccountPlanState(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAccountPlanState")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetFreeTierUsage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetFreeTierUsage(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetFreeTierUsage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAccountActivities(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAccountActivities(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAccountActivities")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpgradeAccountPlan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpgradeAccountPlan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpgradeAccountPlan")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

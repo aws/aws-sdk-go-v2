@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Applies tags to an AWS OpsWorks for Chef Automate or AWS OpsWorks for Puppet
-// Enterprise server, or to server backups.
+// Applies tags to an OpsWorks for Chef Automate or OpsWorks for Puppet Enterprise
+// server, or to server backups.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -38,8 +38,8 @@ type TagResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// A map that contains tag keys and tag values to attach to AWS OpsWorks-CM
-	// servers or backups.
+	// A map that contains tag keys and tag values to attach to OpsWorks CM servers or
+	// backups.
 	//
 	//   - The key cannot be empty.
 	//
@@ -53,8 +53,8 @@ type TagResourceInput struct {
 	//
 	//   - Leading and trailing white spaces are trimmed from both the key and value.
 	//
-	//   - A maximum of 50 user-applied tags is allowed for any AWS OpsWorks-CM server
-	//   or backup.
+	//   - A maximum of 50 user-applied tags is allowed for any OpsWorks CM server or
+	//   backup.
 	//
 	// This member is required.
 	Tags []types.Tag

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of tags that are applied to the specified AWS OpsWorks for Chef
-// Automate or AWS OpsWorks for Puppet Enterprise servers or backups.
+// Returns a list of tags that are applied to the specified OpsWorks for Chef
+// Automate or OpsWorks for Puppet Enterprise servers or backups.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -30,9 +30,9 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The Amazon Resource Number (ARN) of an AWS OpsWorks for Chef Automate or AWS
-	// OpsWorks for Puppet Enterprise server for which you want to show applied tags.
-	// For example,
+	// The Amazon Resource Number (ARN) of an OpsWorks for Chef Automate or OpsWorks
+	// for Puppet Enterprise server for which you want to show applied tags. For
+	// example,
 	// arn:aws:opsworks-cm:us-west-2:123456789012:server/test-owcm-server/EXAMPLE-66b0-4196-8274-d1a2bEXAMPLE
 	// .
 	//

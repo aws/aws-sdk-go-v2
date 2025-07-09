@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	Disassociates a node from an AWS OpsWorks CM server, and removes the node from
+//	Disassociates a node from an OpsWorks CM server, and removes the node from the
 //
-// the server's managed nodes. After a node is disassociated, the node key pair is
-// no longer valid for accessing the configuration manager's API. For more
-// information about how to associate a node, see AssociateNode.
+// server's managed nodes. After a node is disassociated, the node key pair is no
+// longer valid for accessing the configuration manager's API. For more information
+// about how to associate a node, see AssociateNode.
 //
 // A node can can only be disassociated from a server that is in a HEALTHY state.
 // Otherwise, an InvalidStateException is thrown. A ResourceNotFoundException is

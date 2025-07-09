@@ -8,7 +8,11 @@
     "files": [
         "api_client.go",
         "api_client_test.go",
+        "api_op_GetAccountActivity.go",
+        "api_op_GetAccountPlanState.go",
         "api_op_GetFreeTierUsage.go",
+        "api_op_ListAccountActivities.go",
+        "api_op_UpgradeAccountPlan.go",
         "auth.go",
         "deserializers.go",
         "doc.go",
@@ -26,6 +30,7 @@
         "types/enums.go",
         "types/errors.go",
         "types/types.go",
+        "types/types_exported_test.go",
         "validators.go"
     ],
     "go": "1.22",

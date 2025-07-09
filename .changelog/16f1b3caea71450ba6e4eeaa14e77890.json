@@ -1,0 +1,8 @@
+{
+    "id": "16f1b3ca-ea71-450b-a6e4-eeaa14e77890",
+    "type": "feature",
+    "description": "Adds support to Capacity Blocks for ML for purchasing EC2 P6e-GB200 UltraServers. Customers can now purchase u-p6e-gb200x72 and u-p6e-gb200x36 UltraServers. Adds new DescribeCapacityBlocks andDescribeCapacityBlockStatus APIs. Adds support for CapacityBlockId to DescribeInstanceTopology.",
+    "modules": [
+        "service/ec2"
+    ]
+}

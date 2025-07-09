@@ -25,14 +25,14 @@ import (
 // valid.
 //
 // If you do not specify a security group by adding the SecurityGroupIds
-// parameter, AWS OpsWorks creates a new security group.
+// parameter, OpsWorks creates a new security group.
 //
 // Chef Automate: The default security group opens the Chef server to the world on
-// TCP port 443. If a KeyName is present, AWS OpsWorks enables SSH access. SSH is
-// also open to the world on TCP port 22.
+// TCP port 443. If a KeyName is present, OpsWorks enables SSH access. SSH is also
+// open to the world on TCP port 22.
 //
 // Puppet Enterprise: The default security group opens TCP ports 22, 443, 4433,
-// 8140, 8142, 8143, and 8170. If a KeyName is present, AWS OpsWorks enables SSH
+// 8140, 8142, 8143, and 8170. If a KeyName is present, OpsWorks enables SSH
 // access. SSH is also open to the world on TCP port 22.
 //
 // By default, your server is accessible from any IP address. We recommend that
@@ -66,13 +66,8 @@ type CreateServerInput struct {
 	// This member is required.
 	Engine *string
 
-	//  The ARN of the instance profile that your Amazon EC2 instances use. Although
-	// the AWS OpsWorks console typically creates the instance profile for you, if you
-	// are using API commands instead, run the service-role-creation.yaml AWS
-	// CloudFormation template, located at
-	// https://s3.amazonaws.com/opsworks-cm-us-east-1-prod-default-assets/misc/opsworks-cm-roles.yaml.
-	// This template creates a CloudFormation stack that includes the instance profile
-	// you need.
+	//  The ARN of the instance profile that your Amazon EC2 instances use. The
+	// OpsWorks console typically creates the instance profile for you
 	//
 	// This member is required.
 	InstanceProfileArn *string
@@ -82,20 +77,16 @@ type CreateServerInput struct {
 	// This member is required.
 	InstanceType *string
 
-	//  The name of the server. The server name must be unique within your AWS
-	// account, within each region. Server names must start with a letter; then
-	// letters, numbers, or hyphens (-) are allowed, up to a maximum of 40 characters.
+	//  The name of the server. The server name must be unique within your Amazon Web
+	// Services account, within each region. Server names must start with a letter;
+	// then letters, numbers, or hyphens (-) are allowed, up to a maximum of 40
+	// characters.
 	//
 	// This member is required.
 	ServerName *string
 
-	//  The service role that the AWS OpsWorks CM service backend uses to work with
-	// your account. Although the AWS OpsWorks management console typically creates the
-	// service role for you, if you are using the AWS CLI or API commands, run the
-	// service-role-creation.yaml AWS CloudFormation template, located at
-	// https://s3.amazonaws.com/opsworks-cm-us-east-1-prod-default-assets/misc/opsworks-cm-roles.yaml.
-	// This template creates a CloudFormation stack that includes the service role and
-	// instance profile that you need.
+	//  The service role that the OpsWorks CM service backend uses to work with your
+	// account.
 	//
 	// This member is required.
 	ServiceRoleArn *string
@@ -104,13 +95,13 @@ type CreateServerInput struct {
 	// values are true or false . The default value is true .
 	AssociatePublicIpAddress *bool
 
-	//  If you specify this field, AWS OpsWorks CM creates the server by using the
-	// backup represented by BackupId.
+	//  If you specify this field, OpsWorks CM creates the server by using the backup
+	// represented by BackupId.
 	BackupId *string
 
 	//  The number of automated backups that you want to keep. Whenever a new backup
-	// is created, AWS OpsWorks CM deletes the oldest backups if this number is
-	// exceeded. The default value is 1 .
+	// is created, OpsWorks CM deletes the oldest backups if this number is exceeded.
+	// The default value is 1 .
 	BackupRetentionCount *int32
 
 	// A PEM-formatted HTTPS certificate. The value can be be a single, self-signed
@@ -197,7 +188,7 @@ type CreateServerInput struct {
 	// SSH.
 	KeyPair *string
 
-	//  The start time for a one-hour period during which AWS OpsWorks CM backs up
+	//  The start time for a one-hour period during which OpsWorks CM backs up
 	// application-level data on your server if automated backups are enabled. Valid
 	// values must be specified in one of the following formats:
 	//
@@ -214,7 +205,7 @@ type CreateServerInput struct {
 	// (8:00 a.m.)
 	PreferredBackupWindow *string
 
-	//  The start time for a one-hour period each week during which AWS OpsWorks CM
+	//  The start time for a one-hour period each week during which OpsWorks CM
 	// performs maintenance on the instance. Valid values must be specified in the
 	// following format: DDD:HH:MM . MM must be specified as 00 . The specified time is
 	// in coordinated universal time (UTC). The default value is a random one-hour
@@ -229,7 +220,7 @@ type CreateServerInput struct {
 	// this parameter, the specified security groups must be within the VPC that is
 	// specified by SubnetIds .
 	//
-	// If you do not specify this parameter, AWS OpsWorks CM creates one new security
+	// If you do not specify this parameter, OpsWorks CM creates one new security
 	// group that uses TCP ports 22 and 443, open to 0.0.0.0/0 (everyone).
 	SecurityGroupIds []string
 
@@ -248,8 +239,8 @@ type CreateServerInput struct {
 	// [Supported Platforms]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
 	SubnetIds []string
 
-	// A map that contains tag keys and tag values to attach to an AWS OpsWorks for
-	// Chef Automate or AWS OpsWorks for Puppet Enterprise server.
+	// A map that contains tag keys and tag values to attach to an OpsWorks for Chef
+	// Automate or OpsWorks for Puppet Enterprise server.
 	//
 	//   - The key cannot be empty.
 	//
@@ -261,9 +252,9 @@ type CreateServerInput struct {
 	//   letters, numbers, or separators, or the following special characters: + - = .
 	//   _ : / @
 	//
-	//   - Leading and trailing white spaces are trimmed from both the key and value.
+	//   - Leading and trailing spaces are trimmed from both the key and value.
 	//
-	//   - A maximum of 50 user-applied tags is allowed for any AWS OpsWorks-CM server.
+	//   - A maximum of 50 user-applied tags is allowed for any OpsWorks CM server.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

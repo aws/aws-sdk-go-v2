@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpGetAccountActivity struct {
+}
+
+func (*validateOpGetAccountActivity) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAccountActivity) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAccountActivityInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAccountActivityInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetFreeTierUsage struct {
 }
 
@@ -30,8 +50,36 @@ func (m *validateOpGetFreeTierUsage) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpgradeAccountPlan struct {
+}
+
+func (*validateOpUpgradeAccountPlan) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpgradeAccountPlan) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpgradeAccountPlanInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpgradeAccountPlanInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+func addOpGetAccountActivityValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAccountActivity{}, middleware.After)
+}
+
 func addOpGetFreeTierUsageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetFreeTierUsage{}, middleware.After)
+}
+
+func addOpUpgradeAccountPlanValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpgradeAccountPlan{}, middleware.After)
 }
 
 func validateDimensionValues(v *types.DimensionValues) error {
@@ -104,6 +152,21 @@ func validateExpressions(v []types.Expression) error {
 	}
 }
 
+func validateOpGetAccountActivityInput(v *GetAccountActivityInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAccountActivityInput"}
+	if v.ActivityId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActivityId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetFreeTierUsageInput(v *GetFreeTierUsageInput) error {
 	if v == nil {
 		return nil
@@ -113,6 +176,21 @@ func validateOpGetFreeTierUsageInput(v *GetFreeTierUsageInput) error {
 		if err := validateExpression(v.Filter); err != nil {
 			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpgradeAccountPlanInput(v *UpgradeAccountPlanInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpgradeAccountPlanInput"}
+	if len(v.AccountPlanType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountPlanType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

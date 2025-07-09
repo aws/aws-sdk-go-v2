@@ -3098,6 +3098,30 @@ func TestCheckSnapshot_DescribeCapacityBlockOfferings(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeCapacityBlocks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCapacityBlocks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeCapacityBlocks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeCapacityBlockStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCapacityBlockStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeCapacityBlockStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeCapacityReservationBillingRequests(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeCapacityReservationBillingRequests(context.Background(), nil, func(o *Options) {
@@ -11322,6 +11346,30 @@ func TestUpdateSnapshot_DescribeCapacityBlockOfferings(t *testing.T) {
 	_, err := svc.DescribeCapacityBlockOfferings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeCapacityBlockOfferings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeCapacityBlocks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCapacityBlocks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeCapacityBlocks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeCapacityBlockStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCapacityBlockStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeCapacityBlockStatus")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

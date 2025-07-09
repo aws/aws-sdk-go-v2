@@ -1,0 +1,8 @@
+{
+    "id": "085228ef-9999-4904-ae1e-579179b661e6",
+    "type": "documentation",
+    "description": "Removing content that refers to an S3 bucket that is no longer in use.",
+    "modules": [
+        "service/opsworkscm"
+    ]
+}

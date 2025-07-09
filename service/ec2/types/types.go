@@ -1293,6 +1293,54 @@ type CapacityAllocation struct {
 	noSmithyDocumentSerde
 }
 
+// Reserve powerful GPU instances on a future date to support your short duration
+// machine learning (ML) workloads. Instances that run inside a Capacity Block are
+// automatically placed close together inside [Amazon EC2 UltraClusters], for low-latency, petabit-scale,
+// non-blocking networking.
+//
+// You can also reserve Amazon EC2 UltraServers. UltraServers connect multiple EC2
+// instances using a low-latency, high-bandwidth accelerator interconnect
+// (NeuronLink). They are built to tackle very large-scale AI/ML workloads that
+// require significant processing power. For more information, see Amazon EC2
+// UltraServers.
+//
+// [Amazon EC2 UltraClusters]: http://aws.amazon.com/ec2/ultraclusters/
+type CapacityBlock struct {
+
+	// The Availability Zone of the Capacity Block.
+	AvailabilityZone *string
+
+	// The Availability Zone ID of the Capacity Block.
+	AvailabilityZoneId *string
+
+	// The ID of the Capacity Block.
+	CapacityBlockId *string
+
+	// The ID of the Capacity Reservation.
+	CapacityReservationIds []string
+
+	// The date and time at which the Capacity Block was created.
+	CreateDate *time.Time
+
+	// The date and time at which the Capacity Block expires. When a Capacity Block
+	// expires, all instances in the Capacity Block are terminated.
+	EndDate *time.Time
+
+	// The date and time at which the Capacity Block was started.
+	StartDate *time.Time
+
+	// The state of the Capacity Block.
+	State CapacityBlockResourceState
+
+	// The tags assigned to the Capacity Block.
+	Tags []Tag
+
+	// The EC2 UltraServer type of the Capacity Block.
+	UltraserverType *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a Capacity Block extension. With an extension, you can extend the
 // duration of time for an existing Capacity Block.
 type CapacityBlockExtension struct {
@@ -1442,8 +1490,48 @@ type CapacityBlockOffering struct {
 	// The tenancy of the Capacity Block.
 	Tenancy CapacityReservationTenancy
 
+	// The number of EC2 UltraServers in the offering.
+	UltraserverCount *int32
+
+	// The EC2 UltraServer type of the Capacity Block offering.
+	UltraserverType *string
+
 	// The total price to be paid up front.
 	UpfrontFee *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the availability of capacity for a Capacity Block.
+type CapacityBlockStatus struct {
+
+	// The ID of the Capacity Block.
+	CapacityBlockId *string
+
+	// The availability of capacity for the Capacity Block reservations.
+	CapacityReservationStatuses []CapacityReservationStatus
+
+	// The status of the high-bandwidth accelerator interconnect. Possible states
+	// include:
+	//
+	//   - ok the accelerator interconnect is healthy.
+	//
+	//   - impaired - accelerator interconnect communication is impaired.
+	//
+	//   - insufficient-data - insufficient data to determine accelerator interconnect
+	//   status.
+	InterconnectStatus CapacityBlockInterconnectStatus
+
+	// The remaining capacity. Indicates the number of resources that can be launched
+	// into the Capacity Block.
+	TotalAvailableCapacity *int32
+
+	// The combined amount of Available and Unavailable capacity in the Capacity Block.
+	TotalCapacity *int32
+
+	// The unavailable capacity. Indicates the instance capacity that is unavailable
+	// for use due to a system status check failure.
+	TotalUnavailableCapacity *int32
 
 	noSmithyDocumentSerde
 }
@@ -1463,6 +1551,9 @@ type CapacityReservation struct {
 
 	// Information about instance capacity usage.
 	CapacityAllocations []CapacityAllocation
+
+	// The ID of the Capacity Block.
+	CapacityBlockId *string
 
 	// The Amazon Resource Name (ARN) of the Capacity Reservation.
 	CapacityReservationArn *string
@@ -1924,6 +2015,27 @@ type CapacityReservationSpecificationResponse struct {
 	// Information about the targeted Capacity Reservation or Capacity Reservation
 	// group.
 	CapacityReservationTarget *CapacityReservationTargetResponse
+
+	noSmithyDocumentSerde
+}
+
+// Describes the availability of capacity for a Capacity Reservation.
+type CapacityReservationStatus struct {
+
+	// The ID of the Capacity Reservation.
+	CapacityReservationId *string
+
+	// The remaining capacity. Indicates the amount of resources that can be launched
+	// into the Capacity Reservation.
+	TotalAvailableCapacity *int32
+
+	// The combined amount of Available and Unavailable capacity in the Capacity
+	// Reservation.
+	TotalCapacity *int32
+
+	// The used capacity. Indicates that the capacity is in use by resources that are
+	// running in the Capacity Reservation.
+	TotalUnavailableCapacity *int32
 
 	noSmithyDocumentSerde
 }
@@ -3972,8 +4084,10 @@ type EbsBlockDevice struct {
 	// If neither is specified, Amazon EC2 automatically selects an Availability Zone
 	// within the Region.
 	//
-	// This parameter is not supported when using [CreateImage].
+	// This parameter is not supported when using [CreateImage], [DescribeImages], and [RunInstances].
 	//
+	// [DescribeImages]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html
+	// [RunInstances]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
 	// [CreateImage]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html
 	AvailabilityZone *string
 
@@ -3984,8 +4098,10 @@ type EbsBlockDevice struct {
 	// If neither is specified, Amazon EC2 automatically selects an Availability Zone
 	// within the Region.
 	//
-	// This parameter is not supported when using [CreateImage].
+	// This parameter is not supported when using [CreateImage], [DescribeImages], and [RunInstances].
 	//
+	// [DescribeImages]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html
+	// [RunInstances]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
 	// [CreateImage]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html
 	AvailabilityZoneId *string
 
@@ -4199,7 +4315,8 @@ type EbsInfo struct {
 // Describes a parameter used to set up an EBS volume in a block device mapping.
 type EbsInstanceBlockDevice struct {
 
-	// The ARN of the Amazon ECS or Fargate task to which the volume is attached.
+	// The ARN of the Amazon Web Services-managed resource to which the volume is
+	// attached.
 	AssociatedResource *string
 
 	// The time stamp when the attachment initiated.
@@ -4219,7 +4336,8 @@ type EbsInstanceBlockDevice struct {
 
 	// The ID of the Amazon Web Services account that owns the volume.
 	//
-	// This parameter is returned only for volumes that are attached to Fargate tasks.
+	// This parameter is returned only for volumes that are attached to Amazon Web
+	// Services-managed resources.
 	VolumeOwnerId *string
 
 	noSmithyDocumentSerde
@@ -7272,6 +7390,12 @@ type Instance struct {
 	// [Boot modes]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html
 	BootMode BootModeValues
 
+	// The ID of the Capacity Block.
+	//
+	// For P5 instances, a Capacity Block ID refers to a group of instances. For Trn2u
+	// instances, a capacity block ID refers to an EC2 UltraServer.
+	CapacityBlockId *string
+
 	// The ID of the Capacity Reservation.
 	CapacityReservationId *string
 
@@ -9341,6 +9465,10 @@ type InstanceTopology struct {
 
 	// The name of the Availability Zone or Local Zone that the instance is in.
 	AvailabilityZone *string
+
+	// The ID of the Capacity Block. This parameter is only supported for Ultraserver
+	// instances and identifies instances within the Ultraserver domain.
+	CapacityBlockId *string
 
 	// The name of the placement group that the instance is in.
 	GroupName *string
@@ -22097,7 +22225,8 @@ type Volume struct {
 // Describes volume attachment details.
 type VolumeAttachment struct {
 
-	// The ARN of the Amazon ECS or Fargate task to which the volume is attached.
+	// The ARN of the Amazon Web Services-managed resource to which the volume is
+	// attached.
 	AssociatedResource *string
 
 	// The time stamp when the attachment initiated.
@@ -22108,18 +22237,21 @@ type VolumeAttachment struct {
 
 	// The device name.
 	//
-	// If the volume is attached to a Fargate task, this parameter returns null .
+	// If the volume is attached to an Amazon Web Services-managed resource, this
+	// parameter returns null .
 	Device *string
 
 	// The ID of the instance.
 	//
-	// If the volume is attached to a Fargate task, this parameter returns null .
+	// If the volume is attached to an Amazon Web Services-managed resource, this
+	// parameter returns null .
 	InstanceId *string
 
-	// The service principal of Amazon Web Services service that owns the underlying
-	// instance to which the volume is attached.
+	// The service principal of the Amazon Web Services service that owns the
+	// underlying resource to which the volume is attached.
 	//
-	// This parameter is returned only for volumes that are attached to Fargate tasks.
+	// This parameter is returned only for volumes that are attached to Amazon Web
+	// Services-managed resources.
 	InstanceOwningService *string
 
 	// The attachment state of the volume.

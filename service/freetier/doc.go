@@ -14,8 +14,6 @@
 //
 // The Free Tier API provides the following endpoint:
 //
-//   - https://freetier.us-east-1.api.aws
-//
 // For more information, see [Using the Amazon Web Services Free Tier] in the Billing User Guide.
 //
 // [Using the Amazon Web Services Free Tier]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-free-tier.html

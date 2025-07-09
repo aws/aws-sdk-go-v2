@@ -51,9 +51,9 @@ type StartMaintenanceInput struct {
 	//   - CHEF_MAJOR_UPGRADE : If a Chef Automate server is eligible for upgrade to
 	//   Chef Automate 2, add this engine attribute to a StartMaintenance request and
 	//   set the value to true to upgrade the server to Chef Automate 2. For more
-	//   information, see [Upgrade an AWS OpsWorks for Chef Automate Server to Chef Automate 2].
+	//   information, see [Upgrade an OpsWorks for Chef Automate Server to Chef Automate 2].
 	//
-	// [Upgrade an AWS OpsWorks for Chef Automate Server to Chef Automate 2]: https://docs.aws.amazon.com/opsworks/latest/userguide/opscm-a2upgrade.html
+	// [Upgrade an OpsWorks for Chef Automate Server to Chef Automate 2]: https://docs.aws.amazon.com/opsworks/latest/userguide/opscm-a2upgrade.html
 	EngineAttributes []types.EngineAttribute
 
 	noSmithyDocumentSerde

@@ -6,6 +6,50 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
+//	The summary of the rewards granted as a result of activities completed.
+//
+// The following types satisfy this interface:
+//
+//	ActivityRewardMemberCredit
+type ActivityReward interface {
+	isActivityReward()
+}
+
+// The credits gained by activity rewards.
+type ActivityRewardMemberCredit struct {
+	Value MonetaryAmount
+
+	noSmithyDocumentSerde
+}
+
+func (*ActivityRewardMemberCredit) isActivityReward() {}
+
+// The summary of activities.
+type ActivitySummary struct {
+
+	//  A unique identifier that identifies the activity.
+	//
+	// This member is required.
+	ActivityId *string
+
+	//  The reward for the activity.
+	//
+	// This member is required.
+	Reward ActivityReward
+
+	//  The current status of the activity.
+	//
+	// This member is required.
+	Status ActivityStatus
+
+	//  The title of the activity.
+	//
+	// This member is required.
+	Title *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains the specifications for the filters to use for your request.
 type DimensionValues struct {
 
@@ -107,16 +151,16 @@ type FreeTierUsage struct {
 	// Describes the maximum usage allowed in Free Tier.
 	Limit float64
 
-	// Describes usageType more granularly with the specific Amazon Web Service API
-	// operation. For example, this can be the RunInstances API operation for Amazon
-	// Elastic Compute Cloud.
+	// Describes usageType more granularly with the specific Amazon Web Services
+	// service API operation. For example, this can be the RunInstances API operation
+	// for Amazon Elastic Compute Cloud.
 	Operation *string
 
 	// Describes the Amazon Web Services Region for which this offer is applicable
 	Region *string
 
-	// The name of the Amazon Web Service providing the Free Tier offer. For example,
-	// this can be Amazon Elastic Compute Cloud.
+	// The name of the Amazon Web Services service providing the Free Tier offer. For
+	// example, this can be Amazon Elastic Compute Cloud.
 	Service *string
 
 	// Describes the unit of the usageType , such as Hrs .
@@ -129,4 +173,31 @@ type FreeTierUsage struct {
 	noSmithyDocumentSerde
 }
 
+// The monetary amount of the credit.
+type MonetaryAmount struct {
+
+	//  The aggregated monetary amount of credits earned.
+	//
+	// This member is required.
+	Amount float64
+
+	//  The unit that the monetary amount is given in.
+	//
+	// This member is required.
+	Unit CurrencyCode
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isActivityReward() {}
