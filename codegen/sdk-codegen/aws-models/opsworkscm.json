@@ -41,7 +41,7 @@
                 "Name": {
                     "target": "com.amazonaws.opsworkscm#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The attribute name. The following are supported attribute names.\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <i>ServerLimit:</i> The number of current servers/maximum number of servers allowed. By default, you can have a maximum of 10 servers.\n      </p>\n            </li>\n            <li>\n               <p>\n                  <i>ManualBackupLimit:</i> The number of current manual backups/maximum number of backups allowed. By default, you can have a maximum \n        of 50 manual backups saved.\n      </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n      The attribute name. The following are supported attribute names.\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <i>ServerLimit:</i> The number of current servers/maximum number of servers allowed. By default, you can have a \n        maximum of 10 servers.\n      </p>\n            </li>\n            <li>\n               <p>\n                  <i>ManualBackupLimit:</i> The number of current manual backups/maximum number of backups allowed. By default, \n        you can have a maximum \n        of 50 manual backups saved.\n      </p>\n            </li>\n         </ul>"
                     }
                 },
                 "Maximum": {
@@ -90,7 +90,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Associates a new node with the server. For more information about how to disassociate a node, see <a>DisassociateNode</a>.</p>\n         <p>\n      On a Chef server: This command is an alternative to  <code>knife bootstrap</code>.</p>\n         <p>\n        Example (Chef): <code>aws opsworks-cm associate-node --server-name <i>MyServer</i> --node-name <i>MyManagedNode</i> --engine-attributes \"Name=<i>CHEF_ORGANIZATION</i>,Value=default\" \"Name=<i>CHEF_NODE_PUBLIC_KEY</i>,Value=<i>public-key-pem</i>\"</code>\n         </p>\n         <p>\n      On a Puppet server, this command is an alternative to the <code>puppet cert sign</code> command that signs a Puppet node CSR.\n    </p>\n         <p>\n        Example (Puppet): <code>aws opsworks-cm associate-node --server-name <i>MyServer</i> --node-name <i>MyManagedNode</i> --engine-attributes \"Name=<i>PUPPET_NODE_CSR</i>,Value=<i>csr-pem</i>\"</code>\n         </p>\n         <p>\n      A node can can only be associated with servers that are in a <code>HEALTHY</code> state. Otherwise, an <code>InvalidStateException</code> is thrown.\n      A <code>ResourceNotFoundException</code> is thrown when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are not valid.\n      The AssociateNode API call can be integrated into Auto Scaling configurations, AWS Cloudformation templates, or the user data of a server's instance.\n    </p>"
+                "smithy.api#documentation": "<p> Associates a new node with the server. For more information about how to disassociate a node, see <a>DisassociateNode</a>.</p>\n         <p>\n      On a Chef server: This command is an alternative to  <code>knife bootstrap</code>.</p>\n         <p>\n        Example (Chef): <code>aws opsworks-cm associate-node --server-name <i>MyServer</i> --node-name <i>MyManagedNode</i> --engine-attributes \"Name=<i>CHEF_ORGANIZATION</i>,Value=default\" \"Name=<i>CHEF_AUTOMATE_NODE_PUBLIC_KEY</i>,Value=<i>public-key-pem</i>\"</code>\n         </p>\n         <p>\n      On a Puppet server, this command is an alternative to the <code>puppet cert sign</code> command that signs a Puppet node CSR.\n    </p>\n         <p>\n        Example (Puppet): <code>aws opsworks-cm associate-node --server-name <i>MyServer</i> --node-name <i>MyManagedNode</i> --engine-attributes \"Name=<i>PUPPET_NODE_CSR</i>,Value=<i>csr-pem</i>\"</code>\n         </p>\n         <p>\n      A node can can only be associated with servers that are in a <code>HEALTHY</code> state. Otherwise, an <code>InvalidStateException</code> is thrown.\n      A <code>ResourceNotFoundException</code> is thrown when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are not valid.\n      The AssociateNode API call can be integrated into Auto Scaling configurations, CloudFormation templates, or the user data \n      of a server's instance.\n    </p>"
             }
         },
         "com.amazonaws.opsworkscm#AssociateNodeRequest": {
@@ -113,7 +113,7 @@
                 "EngineAttributes": {
                     "target": "com.amazonaws.opsworkscm#EngineAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Engine attributes used for associating the node.\n    </p>\n         <p class=\"title\">\n            <b>Attributes accepted in a AssociateNode request for Chef</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>CHEF_ORGANIZATION</code>: The Chef organization\n          with which the node is associated. By default only one organization\n          named <code>default</code> can exist.\n      </p>\n            </li>\n            <li>\n               <p>\n                  <code>CHEF_NODE_PUBLIC_KEY</code>: A PEM-formatted public key. This key is required for the <code>chef-client</code> agent to access the Chef API.\n    </p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Attributes accepted in a AssociateNode request for Puppet</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>PUPPET_NODE_CSR</code>: A PEM-formatted certificate-signing request (CSR) that is created by the node.\n    </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Engine attributes used for associating the node.\n    </p>\n         <p class=\"title\">\n            <b>Attributes accepted in a AssociateNode request for Chef</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>CHEF_ORGANIZATION</code>: The Chef organization\n          with which the node is associated. By default only one organization\n          named <code>default</code> can exist.\n      </p>\n            </li>\n            <li>\n               <p>\n                  <code>CHEF_AUTOMATE_NODE_PUBLIC_KEY</code>: A PEM-formatted public key. This key is required for the <code>chef-client</code> agent to access the Chef API.\n    </p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Attributes accepted in a AssociateNode request for Puppet</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>PUPPET_NODE_CSR</code>: A PEM-formatted certificate-signing request (CSR) that is created by the node.\n    </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -296,13 +296,13 @@
                 "ToolsVersion": {
                     "target": "com.amazonaws.opsworkscm#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The version of AWS OpsWorks CM-specific tools that is obtained from the server when the backup is created.\n    </p>"
+                        "smithy.api#documentation": "<p>\n      The version of OpsWorks CM-specific tools that is obtained from the server when the backup is created.\n    </p>"
                     }
                 },
                 "UserArn": {
                     "target": "com.amazonaws.opsworkscm#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The IAM user ARN of the requester for manual backups. This field is empty for automated backups.\n    </p>"
+                        "smithy.api#documentation": "<p>\n      The user ARN of the requester for manual backups. This field is empty for automated backups.\n    </p>"
                     }
                 }
             },
@@ -406,7 +406,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n      Creates an application-level backup of a server. While the\n      server is in the <code>BACKING_UP</code> state, the server cannot be\n      changed, and no additional backup can be created.\n    </p>\n         <p>\n      Backups can be created for servers in <code>RUNNING</code>, <code>HEALTHY</code>, and <code>UNHEALTHY</code> states. By default, you can create a maximum of 50\n      manual backups.\n    </p>\n         <p>\n      This operation is asynchronous.\n    </p>\n         <p>\n      A <code>LimitExceededException</code> is thrown when the maximum number of manual backups is reached.\n      An <code>InvalidStateException</code> is thrown when the server is not in any of the following states: RUNNING, HEALTHY, or UNHEALTHY.\n      A <code>ResourceNotFoundException</code> is thrown when the server is not found.\n      A <code>ValidationException</code> is thrown when parameters of the request are not valid.\n    </p>"
+                "smithy.api#documentation": "<p>\n      Creates an application-level backup of a server. While the\n      server is in the <code>BACKING_UP</code> state, the server cannot be\n      changed, and no additional backup can be created.\n    </p>\n         <p>\n      Backups can be created for servers in <code>RUNNING</code>, <code>HEALTHY</code>, and <code>UNHEALTHY</code> states. \n      By default, you can create a maximum of 50\n      manual backups.\n    </p>\n         <p>\n      This operation is asynchronous.\n    </p>\n         <p>\n      A <code>LimitExceededException</code> is thrown when the maximum number of manual backups is reached.\n      An <code>InvalidStateException</code> is thrown when the server is not in any of the following states: RUNNING, HEALTHY, or UNHEALTHY.\n      A <code>ResourceNotFoundException</code> is thrown when the server is not found.\n      A <code>ValidationException</code> is thrown when parameters of the request are not valid.\n    </p>"
             }
         },
         "com.amazonaws.opsworkscm#CreateBackupRequest": {
@@ -428,7 +428,7 @@
                 "Tags": {
                     "target": "com.amazonaws.opsworkscm#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map that contains tag keys and tag values to attach to an AWS OpsWorks-CM server backup.</p>\n         <ul>\n            <li>\n               <p>The key cannot be empty.</p>\n            </li>\n            <li>\n               <p>The key can be a maximum of 127 characters, and can contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : /</code>\n               </p>\n            </li>\n            <li>\n               <p>The value can be a maximum 255 characters, and contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : /</code>\n               </p>\n            </li>\n            <li>\n               <p>Leading and trailing white spaces are trimmed from both the key and value.</p>\n            </li>\n            <li>\n               <p>A maximum of 50 user-applied tags is allowed for tag-supported AWS OpsWorks-CM resources.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A map that contains tag keys and tag values to attach to an OpsWorks CM server backup.</p>\n         <ul>\n            <li>\n               <p>The key cannot be empty.</p>\n            </li>\n            <li>\n               <p>The key can be a maximum of 127 characters, and can contain only Unicode letters, numbers, or separators, or the \n        following special characters: <code>+ - = . _ : /</code>\n               </p>\n            </li>\n            <li>\n               <p>The value can be a maximum 255 characters, and contain only Unicode letters, numbers, or separators, or the \n        following special characters: <code>+ - = . _ : /</code>\n               </p>\n            </li>\n            <li>\n               <p>Leading and trailing white spaces are trimmed from both the key and value.</p>\n            </li>\n            <li>\n               <p>A maximum of 50 user-applied tags is allowed for tag-supported OpsWorks CM resources.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -473,7 +473,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n      Creates and immedately starts a new server. The server is ready to use when it is in the <code>HEALTHY</code> state. By default, you can create a maximum of 10 servers.\n    </p>\n         <p>\n      This operation is asynchronous.\n    </p>\n         <p>\n      A <code>LimitExceededException</code> is thrown when you have created the maximum number of servers (10). A <code>ResourceAlreadyExistsException</code>\n      is thrown when a server with the same name already exists in the account. A <code>ResourceNotFoundException</code> is thrown when you\n      specify a backup ID that is not valid or is for a backup that does not exist. A <code>ValidationException</code> is thrown when parameters\n      of the request are not valid.\n    </p>\n         <p>\n      If you do not specify a security group by adding the <code>SecurityGroupIds</code> parameter, AWS OpsWorks creates a new security group.\n    </p>\n         <p>\n            <i>Chef Automate:</i> The default security group opens the Chef server to the world on TCP port 443. If a KeyName is present, AWS OpsWorks enables SSH access. SSH is also open to the world on TCP port 22.\n    </p>\n         <p>\n            <i>Puppet Enterprise:</i> The default security group opens TCP ports 22, 443, 4433, 8140, 8142, 8143, and 8170. If a KeyName is present, AWS OpsWorks enables SSH access. SSH is also open to the world on TCP port 22.\n    </p>\n         <p>By default, your server is accessible from any IP address. We\n      recommend that you update your security group rules to allow\n      access from known IP addresses and address ranges only. To edit security group rules, open Security Groups\n      in the navigation pane of the EC2 management console.\n    </p>\n         <p>To specify your own domain for a server, and provide your own self-signed or CA-signed certificate and private key, specify values for <code>CustomDomain</code>, \n      <code>CustomCertificate</code>, and <code>CustomPrivateKey</code>.</p>"
+                "smithy.api#documentation": "<p>\n      Creates and immedately starts a new server. The server is ready to use when it is in the <code>HEALTHY</code> state. By \n      default, you can create a maximum of 10 servers.\n    </p>\n         <p>\n      This operation is asynchronous.\n    </p>\n         <p>\n      A <code>LimitExceededException</code> is thrown when you have created the maximum number of servers (10). A \n      <code>ResourceAlreadyExistsException</code>\n      is thrown when a server with the same name already exists in the account. A <code>ResourceNotFoundException</code> is thrown when \n      you\n      specify a backup ID that is not valid or is for a backup that does not exist. A <code>ValidationException</code> is thrown when \n      parameters\n      of the request are not valid.\n    </p>\n         <p>\n      If you do not specify a security group by adding the <code>SecurityGroupIds</code> parameter, OpsWorks creates a new \n      security group.\n    </p>\n         <p>\n            <i>Chef Automate:</i> The default security group opens the Chef server to the world on TCP port 443. If \n      a KeyName is present, OpsWorks enables SSH access. SSH is also open to the world on TCP port 22.\n    </p>\n         <p>\n            <i>Puppet Enterprise:</i> The default security group opens TCP ports 22, 443, 4433, 8140, 8142, 8143, and 8170. If a KeyName is present, OpsWorks enables SSH access. SSH is also open to the world on TCP port 22.\n    </p>\n         <p>By default, your server is accessible from any IP address. We\n      recommend that you update your security group rules to allow\n      access from known IP addresses and address ranges only. To edit security group rules, open Security Groups\n      in the navigation pane of the EC2 management console.\n    </p>\n         <p>To specify your own domain for a server, and provide your own self-signed or CA-signed certificate and private key, \n      specify values for <code>CustomDomain</code>, \n      <code>CustomCertificate</code>, and <code>CustomPrivateKey</code>.</p>"
             }
         },
         "com.amazonaws.opsworkscm#CreateServerRequest": {
@@ -537,20 +537,20 @@
                 "BackupRetentionCount": {
                     "target": "com.amazonaws.opsworkscm#BackupRetentionCountDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The number of automated backups that you want to keep. Whenever a new backup is created, AWS OpsWorks CM deletes the oldest backups if this number is exceeded.\n        The default value is <code>1</code>.\n      </p>"
+                        "smithy.api#documentation": "<p>\n        The number of automated backups that you want to keep. Whenever a new backup is created, OpsWorks CM deletes the oldest backups if this number is exceeded.\n        The default value is <code>1</code>.\n      </p>"
                     }
                 },
                 "ServerName": {
                     "target": "com.amazonaws.opsworkscm#ServerName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The name of the server. The server name must be unique within your AWS account, within each region.\n        Server names must start with a letter; then letters, numbers, or hyphens (-) are allowed, up to a maximum of 40 characters.\n      </p>",
+                        "smithy.api#documentation": "<p>\n        The name of the server. The server name must be unique within your Amazon Web Services account, within each region.\n        Server names must start with a letter; then letters, numbers, or hyphens (-) are allowed, up to a maximum of 40 characters.\n      </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "InstanceProfileArn": {
                     "target": "com.amazonaws.opsworkscm#InstanceProfileArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The ARN of the instance profile that your Amazon EC2\n        instances use. Although the AWS OpsWorks console typically creates\n        the instance profile for you, if you are using API commands instead, run the service-role-creation.yaml\n        AWS CloudFormation template, located at https://s3.amazonaws.com/opsworks-cm-us-east-1-prod-default-assets/misc/opsworks-cm-roles.yaml.\n        This template creates a CloudFormation stack that includes the instance profile you need.\n        \n      </p>",
+                        "smithy.api#documentation": "<p>\n        The ARN of the instance profile that your Amazon EC2\n        instances use. The OpsWorks console typically creates\n        the instance profile for you</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -570,44 +570,44 @@
                 "PreferredMaintenanceWindow": {
                     "target": "com.amazonaws.opsworkscm#TimeWindowDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The start time for a one-hour period each week during which AWS OpsWorks CM performs maintenance on the instance.\n      Valid values must be specified in the following format: <code>DDD:HH:MM</code>. <code>MM</code> must be specified as <code>00</code>. The specified time is in coordinated universal time (UTC).\n      The default value is a random one-hour period on Tuesday, Wednesday, or Friday. See <code>TimeWindowDefinition</code> for more information.\n    </p>\n         <p>\n            <b>Example:</b>\n            <code>Mon:08:00</code>,\n      which represents a start time of every Monday at 08:00 UTC. (8:00 a.m.)\n    </p>"
+                        "smithy.api#documentation": "<p>\n      The start time for a one-hour period each week during which OpsWorks CM performs maintenance on the instance.\n      Valid values must be specified in the following format: <code>DDD:HH:MM</code>. <code>MM</code> must be specified as <code>00</code>. The specified time is in coordinated universal time (UTC).\n      The default value is a random one-hour period on Tuesday, Wednesday, or Friday. See <code>TimeWindowDefinition</code> for more information.\n    </p>\n         <p>\n            <b>Example:</b>\n            <code>Mon:08:00</code>,\n      which represents a start time of every Monday at 08:00 UTC. (8:00 a.m.)\n    </p>"
                     }
                 },
                 "PreferredBackupWindow": {
                     "target": "com.amazonaws.opsworkscm#TimeWindowDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The start time for a one-hour period during which AWS OpsWorks CM backs up application-level data on your server\n      if automated backups are enabled. Valid values must be specified in one of the following formats:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>HH:MM</code> for daily backups</p>\n            </li>\n            <li>\n               <p>\n                  <code>DDD:HH:MM</code> for weekly backups</p>\n            </li>\n         </ul>\n         <p>\n            <code>MM</code> must be specified as <code>00</code>. The specified time is in coordinated universal time (UTC). The default value is a random, daily start time.</p>\n         <p>\n            <b>Example:</b> \n            <code>08:00</code>, which represents a daily start time of 08:00 UTC.</p>\n         <p>\n            <b>Example:</b> \n            <code>Mon:08:00</code>, which represents a start time of every Monday at 08:00 UTC. (8:00 a.m.)</p>"
+                        "smithy.api#documentation": "<p>\n      The start time for a one-hour period during which OpsWorks CM backs up application-level data on your server\n      if automated backups are enabled. Valid values must be specified in one of the following formats:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>HH:MM</code> for daily backups</p>\n            </li>\n            <li>\n               <p>\n                  <code>DDD:HH:MM</code> for weekly backups</p>\n            </li>\n         </ul>\n         <p>\n            <code>MM</code> must be specified as <code>00</code>. The specified time is in coordinated universal time (UTC). The default value is a random, daily start time.</p>\n         <p>\n            <b>Example:</b>\n            <code>08:00</code>, which represents a daily start time of 08:00 UTC.</p>\n         <p>\n            <b>Example:</b>\n            <code>Mon:08:00</code>, which represents a start time of every Monday at 08:00 UTC. (8:00 a.m.)</p>"
                     }
                 },
                 "SecurityGroupIds": {
                     "target": "com.amazonaws.opsworkscm#Strings",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      A list of security group IDs to attach to the Amazon EC2 instance. If you add this parameter, the specified security groups\n      must be within the VPC that is specified by <code>SubnetIds</code>.\n    </p>\n         <p>\n      If you do not specify this parameter, AWS OpsWorks CM creates one new security group that uses TCP ports 22 and 443, open to\n      0.0.0.0/0 (everyone).\n    </p>"
+                        "smithy.api#documentation": "<p>\n      A list of security group IDs to attach to the Amazon EC2 instance. If you add this parameter, the specified security groups\n      must be within the VPC that is specified by <code>SubnetIds</code>.\n    </p>\n         <p>\n      If you do not specify this parameter, OpsWorks CM creates one new security group that uses TCP ports 22 and 443, open to\n      0.0.0.0/0 (everyone).\n    </p>"
                     }
                 },
                 "ServiceRoleArn": {
                     "target": "com.amazonaws.opsworkscm#ServiceRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The service role that the AWS OpsWorks CM service backend uses to work with your account. Although the AWS OpsWorks management console typically creates\n      the service role for you, if you are using the AWS CLI or API commands,\n      run the service-role-creation.yaml AWS CloudFormation template, located at https://s3.amazonaws.com/opsworks-cm-us-east-1-prod-default-assets/misc/opsworks-cm-roles.yaml.\n      This template creates a CloudFormation stack that includes the service role and instance profile that you need.\n    </p>",
+                        "smithy.api#documentation": "<p>\n      The service role that the OpsWorks CM service backend uses to work with your account.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SubnetIds": {
                     "target": "com.amazonaws.opsworkscm#Strings",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The IDs of subnets in which to launch the server EC2 instance.\n    </p>\n         <p>\n      Amazon EC2-Classic customers: This field is required. All servers must run within a VPC. The VPC must have \"Auto Assign Public IP\" enabled.\n    </p>\n         <p>\n      EC2-VPC customers: This field is optional. If you do not specify subnet IDs, your EC2 instances are created in a default subnet that is selected by Amazon EC2. If you specify subnet IDs, the VPC must have \"Auto Assign Public IP\" enabled.\n    </p>\n         <p>For more information about supported Amazon EC2 platforms, see\n      <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html\">Supported Platforms</a>.</p>"
+                        "smithy.api#documentation": "<p>\n      The IDs of subnets in which to launch the server EC2 instance.\n    </p>\n         <p>\n      Amazon EC2-Classic customers: This field is required. All servers must run within a VPC. The VPC must have \"Auto Assign Public IP\" enabled.\n    </p>\n         <p>\n      EC2-VPC customers: This field is optional. If you do not specify subnet IDs, your EC2 instances are created in a default subnet that \n      is selected by Amazon EC2. If you specify subnet IDs, the VPC must have \"Auto Assign Public IP\" enabled.\n    </p>\n         <p>For more information about supported Amazon EC2 platforms, see\n      <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html\">Supported Platforms</a>.</p>"
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.opsworkscm#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map that contains tag keys and tag values to attach to an AWS OpsWorks for Chef Automate or AWS OpsWorks for Puppet Enterprise server.</p>\n         <ul>\n            <li>\n               <p>The key cannot be empty.</p>\n            </li>\n            <li>\n               <p>The key can be a maximum of 127 characters, and can contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : / @</code>\n               </p>\n            </li>\n            <li>\n               <p>The value can be a maximum 255 characters, and contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : / @</code>\n               </p>\n            </li>\n            <li>\n               <p>Leading and trailing white spaces are trimmed from both the key and value.</p>\n            </li>\n            <li>\n               <p>A maximum of 50 user-applied tags is allowed for any AWS OpsWorks-CM server.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A map that contains tag keys and tag values to attach to an OpsWorks for Chef Automate or OpsWorks for Puppet Enterprise server.</p>\n         <ul>\n            <li>\n               <p>The key cannot be empty.</p>\n            </li>\n            <li>\n               <p>The key can be a maximum of 127 characters, and can contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : / @</code>\n               </p>\n            </li>\n            <li>\n               <p>The value can be a maximum 255 characters, and contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : / @</code>\n               </p>\n            </li>\n            <li>\n               <p>Leading and trailing spaces are trimmed from both the key and value.</p>\n            </li>\n            <li>\n               <p>A maximum of 50 user-applied tags is allowed for any OpsWorks CM server.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "BackupId": {
                     "target": "com.amazonaws.opsworkscm#BackupId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      If you specify this field, AWS OpsWorks CM creates the server by using the backup represented by BackupId.\n    </p>"
+                        "smithy.api#documentation": "<p>\n      If you specify this field, OpsWorks CM creates the server by using the backup represented by BackupId.\n    </p>"
                     }
                 }
             },
@@ -725,7 +725,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n      Deletes the server and the underlying AWS CloudFormation stacks\n      (including the server's EC2 instance). When you run this command, the server state is updated\n      to <code>DELETING</code>. After the server is deleted, it is no longer returned by\n      <code>DescribeServer</code> requests. If the AWS CloudFormation stack cannot be deleted, the server cannot be deleted.\n    </p>\n         <p>\n      This operation is asynchronous.\n    </p>\n         <p>\n      An <code>InvalidStateException</code> is thrown when a server deletion is already in progress.\n      A <code>ResourceNotFoundException</code> is thrown when the server does not exist.\n      A <code>ValidationException</code> is raised when parameters of the request are not valid.\n    </p>\n         <p>\n    </p>"
+                "smithy.api#documentation": "<p>\n      Deletes the server and the underlying CloudFormation stacks\n      (including the server's EC2 instance). When you run this command, the server state is updated\n      to <code>DELETING</code>. After the server is deleted, it is no longer returned by\n      <code>DescribeServer</code> requests. If the CloudFormation stack cannot be deleted, the server cannot be deleted.\n    </p>\n         <p>\n      This operation is asynchronous.\n    </p>\n         <p>\n      An <code>InvalidStateException</code> is thrown when a server deletion is already in progress.\n      A <code>ResourceNotFoundException</code> is thrown when the server does not exist.\n      A <code>ValidationException</code> is raised when parameters of the request are not valid.\n    </p>\n         <p>\n    </p>"
             }
         },
         "com.amazonaws.opsworkscm#DeleteServerRequest": {
@@ -759,7 +759,7 @@
                 "target": "com.amazonaws.opsworkscm#DescribeAccountAttributesResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      Describes your OpsWorks-CM account attributes.\n    </p>\n         <p>\n      This operation is synchronous.\n    </p>"
+                "smithy.api#documentation": "<p>\n      Describes your OpsWorks CM account attributes.\n    </p>\n         <p>\n      This operation is synchronous.\n    </p>"
             }
         },
         "com.amazonaws.opsworkscm#DescribeAccountAttributesRequest": {
@@ -1022,7 +1022,7 @@
                 "EngineAttributes": {
                     "target": "com.amazonaws.opsworkscm#EngineAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Attributes specific to the node association. \n      In Puppet, the attibute PUPPET_NODE_CERT contains the signed certificate (the result of the CSR).\n    </p>"
+                        "smithy.api#documentation": "<p>Attributes specific to the node association. \n      In Puppet, the attribute PUPPET_NODE_CERT contains the signed certificate (the result of the CSR).\n    </p>"
                     }
                 }
             },
@@ -1050,7 +1050,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n      Lists all configuration management servers that are identified with your account.\n      Only the stored results from Amazon DynamoDB\n      are returned. AWS OpsWorks CM does not query other services.\n    </p>\n         <p>\n      This operation is synchronous.\n    </p>\n         <p>\n      A <code>ResourceNotFoundException</code> is thrown when the server does not exist.\n      A <code>ValidationException</code> is raised when parameters of the request are not valid.\n    </p>",
+                "smithy.api#documentation": "<p>\n      Lists all configuration management servers that are identified with your account.\n      Only the stored results from Amazon DynamoDB\n      are returned. OpsWorks CM does not query other services.\n    </p>\n         <p>\n      This operation is synchronous.\n    </p>\n         <p>\n      A <code>ResourceNotFoundException</code> is thrown when the server does not exist.\n      A <code>ValidationException</code> is raised when parameters of the request are not valid.\n    </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1091,7 +1091,7 @@
                 "Servers": {
                     "target": "com.amazonaws.opsworkscm#Servers",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the response to a <code>DescribeServers</code> request.</p>\n         <p>\n            <i>For Chef Automate servers:</i>  If <code>DescribeServersResponse$Servers$EngineAttributes</code> includes \n      CHEF_MAJOR_UPGRADE_AVAILABLE, you can upgrade the Chef Automate server to Chef Automate 2. To be eligible for upgrade, a server running \n      Chef Automate 1 must have had at least one successful maintenance run after November 1, 2019.</p>\n         <p>\n            <i>For Puppet servers:</i>  \n            <code>DescribeServersResponse$Servers$EngineAttributes</code> contains\n      the following two responses:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PUPPET_API_CA_CERT</code>, the PEM-encoded CA certificate that is used by the Puppet API over TCP port number 8140. \n        The CA certificate is also used to sign node certificates.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PUPPET_API_CRL</code>, a certificate revocation list. The certificate revocation list is for internal \n        maintenance purposes only. For more information about the Puppet certificate revocation list, see \n        <a href=\"https://puppet.com/docs/puppet/5.5/man/certificate_revocation_list.html\">Man Page: puppet certificate_revocation_list</a> in the Puppet documentation.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Contains the response to a <code>DescribeServers</code> request.</p>\n         <p>\n            <i>For Chef Automate servers:</i>  If <code>DescribeServersResponse$Servers$EngineAttributes</code> includes \n      CHEF_MAJOR_UPGRADE_AVAILABLE, you can upgrade the Chef Automate server to Chef Automate 2. To be eligible for upgrade, a server running \n      Chef Automate 1 must have had at least one successful maintenance run after November 1, 2019.</p>\n         <p>\n            <i>For Puppet servers:</i>\n            <code>DescribeServersResponse$Servers$EngineAttributes</code> contains\n      the following two responses:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PUPPET_API_CA_CERT</code>, the PEM-encoded CA certificate that is used by the Puppet API over TCP port number 8140. \n        The CA certificate is also used to sign node certificates.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PUPPET_API_CRL</code>, a certificate revocation list. The certificate revocation list is for internal \n        maintenance purposes only. For more information about the Puppet certificate revocation list, see \n        <a href=\"https://puppet.com/docs/puppet/5.5/man/certificate_revocation_list.html\">Man Page: puppet certificate_revocation_list</a> in the Puppet documentation.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "NextToken": {
@@ -1125,7 +1125,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n      Disassociates a node from an AWS OpsWorks CM server, and removes the node from the server's managed nodes. After a node is disassociated,\n      the node key pair is no longer valid for accessing the configuration manager's API. For more information about how to associate a node, see <a>AssociateNode</a>.\n    </p>\n         <p>A node can can only be disassociated from a server that is in a <code>HEALTHY</code> state. Otherwise, an <code>InvalidStateException</code> is thrown.\n      A <code>ResourceNotFoundException</code> is thrown when the server does not exist.\n      A <code>ValidationException</code> is raised when parameters of the request are not valid.\n    </p>"
+                "smithy.api#documentation": "<p>\n      Disassociates a node from an OpsWorks CM server, and removes the node from the server's managed nodes. After a node is disassociated,\n      the node key pair is no longer valid for accessing the configuration manager's API. For more information about how to associate a node, see <a>AssociateNode</a>.\n    </p>\n         <p>A node can can only be disassociated from a server that is in a <code>HEALTHY</code> state. Otherwise, an <code>InvalidStateException</code> is thrown.\n      A <code>ResourceNotFoundException</code> is thrown when the server does not exist.\n      A <code>ValidationException</code> is raised when parameters of the request are not valid.\n    </p>"
             }
         },
         "com.amazonaws.opsworkscm#DisassociateNodeRequest": {
@@ -1237,7 +1237,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n      Exports a specified server engine attribute as a base64-encoded string. For example, you can export user data that you can use in EC2 to associate nodes with a server.\n    </p>\n         <p>\n      This operation is synchronous.\n    </p>\n         <p>\n      A <code>ValidationException</code> is raised when parameters of the request are not valid.\n      A <code>ResourceNotFoundException</code> is thrown when the server does not exist.\n      An <code>InvalidStateException</code> is thrown when the server is in any of the following states: CREATING, TERMINATED,\n      FAILED or DELETING.\n    </p>"
+                "smithy.api#documentation": "<p>\n      Exports a specified server engine attribute as a base64-encoded string. For example, you can export user data that you can \n      use in EC2 to associate nodes with a server.\n    </p>\n         <p>\n      This operation is synchronous.\n    </p>\n         <p>\n      A <code>ValidationException</code> is raised when parameters of the request are not valid.\n      A <code>ResourceNotFoundException</code> is thrown when the server does not exist.\n      An <code>InvalidStateException</code> is thrown when the server is in any of the following states: CREATING, TERMINATED,\n      FAILED or DELETING.\n    </p>"
             }
         },
         "com.amazonaws.opsworkscm#ExportServerEngineAttributeRequest": {
@@ -1260,7 +1260,7 @@
                 "InputAttributes": {
                     "target": "com.amazonaws.opsworkscm#EngineAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of engine attributes. The list type is <code>EngineAttribute</code>. An <code>EngineAttribute</code> list item \n      is a pair that includes an attribute name and its value. For the <code>Userdata</code> ExportAttributeName, the following are \n      supported engine attribute names.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>RunList</b> In Chef, a list of roles or recipes that are run in the specified order. \n        In Puppet, this parameter is ignored.</p>\n            </li>\n            <li>\n               <p>\n                  <b>OrganizationName</b> In Chef, an organization name. AWS OpsWorks for Chef Automate \n        always creates the organization <code>default</code>. In Puppet, this parameter is ignored.</p>\n            </li>\n            <li>\n               <p>\n                  <b>NodeEnvironment</b> In Chef, a node environment (for example, development, staging, or one-box). \n        In Puppet, this parameter is ignored.</p>\n            </li>\n            <li>\n               <p>\n                  <b>NodeClientVersion</b> In Chef, the version of the Chef engine (three numbers separated \n        by dots, such as 13.8.5). If this attribute is empty, OpsWorks for Chef Automate uses the most current version. In Puppet, \n        this parameter is ignored.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The list of engine attributes. The list type is <code>EngineAttribute</code>. An <code>EngineAttribute</code> list item \n      is a pair that includes an attribute name and its value. For the <code>Userdata</code> ExportAttributeName, the following are \n      supported engine attribute names.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>RunList</b> In Chef, a list of roles or recipes that are run in the specified order. \n        In Puppet, this parameter is ignored.</p>\n            </li>\n            <li>\n               <p>\n                  <b>OrganizationName</b> In Chef, an organization name. OpsWorks for Chef Automate \n        always creates the organization <code>default</code>. In Puppet, this parameter is ignored.</p>\n            </li>\n            <li>\n               <p>\n                  <b>NodeEnvironment</b> In Chef, a node environment (for example, development, staging, or one-box). \n        In Puppet, this parameter is ignored.</p>\n            </li>\n            <li>\n               <p>\n                  <b>NodeClientVersion</b> In Chef, the version of the Chef engine (three numbers separated \n        by dots, such as 13.8.5). If this attribute is empty, OpsWorks for Chef Automate uses the most current version. In Puppet, \n        this parameter is ignored.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -1373,7 +1373,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of tags that are applied to the specified AWS OpsWorks for Chef Automate or\n      AWS OpsWorks for Puppet Enterprise servers or backups.</p>",
+                "smithy.api#documentation": "<p>Returns a list of tags that are applied to the specified OpsWorks for Chef Automate or\n      OpsWorks for Puppet Enterprise servers or backups.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1388,7 +1388,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.opsworkscm#AWSOpsWorksCMResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of an AWS OpsWorks for Chef Automate or AWS OpsWorks for Puppet Enterprise server for which you want to show applied tags. For example, \n        <code>arn:aws:opsworks-cm:us-west-2:123456789012:server/test-owcm-server/EXAMPLE-66b0-4196-8274-d1a2bEXAMPLE</code>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of an OpsWorks for Chef Automate or OpsWorks for Puppet Enterprise server for which you want to show applied tags. For example, \n        <code>arn:aws:opsworks-cm:us-west-2:123456789012:server/test-owcm-server/EXAMPLE-66b0-4196-8274-d1a2bEXAMPLE</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1585,7 +1585,7 @@
                     "name": "opsworks-cm"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>AWS OpsWorks CM</fullname>\n         <p>AWS OpsWorks for configuration management (CM) is a service that runs and manages\n      configuration management servers. You can use AWS OpsWorks CM to create and manage AWS\n      OpsWorks for Chef Automate and AWS OpsWorks for Puppet Enterprise servers, and add or remove\n      nodes for the servers to manage.</p>\n         <p>\n            <b>Glossary of terms</b>\n         </p>\n         <ul>\n            <li>\n               <p> \n                  <b>Server</b>: A configuration management server that can be \n        highly-available. The configuration management server runs on\n      an Amazon Elastic Compute Cloud (EC2) instance, and may use various other AWS services, such as Amazon Relational\n      Database Service (RDS) and Elastic Load Balancing. A server is a generic abstraction over the configuration\n      manager that you want to use, much like Amazon RDS. In AWS OpsWorks CM, you do not start\n      or stop servers. After you create servers, they continue to run until they are deleted.</p>\n            </li>\n            <li>\n               <p> \n                  <b>Engine</b>: The engine is the specific configuration manager \n        that you want to use. Valid values in this release include <code>ChefAutomate</code> and <code>Puppet</code>.</p>\n            </li>\n            <li>\n               <p> \n                  <b>Backup</b>: This\n      is an application-level backup of the data that the configuration manager\n      stores. AWS OpsWorks CM\n      creates an S3 bucket for backups when you launch the first\n      server. A backup maintains a snapshot of a server's configuration-related\n      attributes at the time the backup starts.</p>\n            </li>\n            <li>\n               <p> \n                  <b>Events</b>:\n      Events are always related to a server. Events are written\n      during server creation, when health checks run, when backups\n      are created, when system maintenance is performed, etc. When you delete a server, the server's events are\n      also deleted.</p>\n            </li>\n            <li>\n               <p> \n                  <b>Account attributes</b>:\n      Every account has attributes that are assigned in the AWS OpsWorks CM\n      database. These attributes store information about configuration limits (servers,\n      backups, etc.) and your customer account.\n      </p>\n            </li>\n         </ul>\n         <p>\n            <b>Endpoints</b>\n         </p>\n         <p>AWS OpsWorks CM supports the following endpoints, all HTTPS. You must connect to one of the following endpoints. Your servers\n      can only be accessed or managed within the endpoint in which they are created.</p>\n         <ul>\n            <li>\n               <p>opsworks-cm.us-east-1.amazonaws.com</p>\n            </li>\n            <li>\n               <p>opsworks-cm.us-east-2.amazonaws.com</p>\n            </li>\n            <li>\n               <p>opsworks-cm.us-west-1.amazonaws.com</p>\n            </li>\n            <li>\n               <p>opsworks-cm.us-west-2.amazonaws.com</p>\n            </li>\n            <li>\n               <p>opsworks-cm.ap-northeast-1.amazonaws.com</p>\n            </li>\n            <li>\n               <p>opsworks-cm.ap-southeast-1.amazonaws.com</p>\n            </li>\n            <li>\n               <p>opsworks-cm.ap-southeast-2.amazonaws.com</p>\n            </li>\n            <li>\n               <p>opsworks-cm.eu-central-1.amazonaws.com</p>\n            </li>\n            <li>\n               <p>opsworks-cm.eu-west-1.amazonaws.com</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/opsworks-service.html\">AWS OpsWorks endpoints and quotas</a> in the AWS General Reference.</p>\n         <p>\n            <b>Throttling limits</b>\n         </p>\n         <p>All API operations allow for five requests per second with a burst of 10 requests per second.</p>",
+                "smithy.api#documentation": "<fullname>OpsWorks CM</fullname>\n         <important>\n            <p>The OpsWorks services have reached end of life and have been disabled for both new and existing customers. \n        We strongly recommend customers migrate their workloads to other solutions as soon as possible. If you have questions about migration, reach out to the Amazon Web ServicesSupport Team on <a href=\"https://repost.aws/\">Amazon Web Services re:Post</a> or through <a href=\"https://aws.amazon.com/support\">Amazon Web Services Premium Support</a>.</p>\n         </important>\n         <p>OpsWorks CM is a service that runs and manages\n      configuration management servers. You can use OpsWorks CM to create and manage OpsWorks for Chef Automate and \n      OpsWorks for Puppet Enterprise servers, and add or remove\n      nodes for the servers to manage.</p>\n         <p>\n            <b>Glossary of terms</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <b>Server</b>: A configuration management server that can be \n        highly-available. The configuration management server runs on\n        an Amazon Elastic Compute Cloud (EC2) instance, and may use various other Amazon Web Services services, such as Amazon Relational Database Service \n        (RDS) and Elastic Load Balancing. A server is a generic abstraction over the configuration\n        manager that you want to use, much like Amazon RDS. In OpsWorks CM, you do not start\n      or stop servers. After you create servers, they continue to run until they are deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Engine</b>: The engine is the specific configuration manager \n        that you want to use. Valid values in this release include <code>ChefAutomate</code> and <code>Puppet</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Backup</b>: This\n      is an application-level backup of the data that the configuration manager\n      stores. OpsWorks CM\n      creates an S3 bucket for backups when you launch the first\n      server. A backup maintains a snapshot of a server's configuration-related\n      attributes at the time the backup starts.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Events</b>:\n      Events are always related to a server. Events are written\n      during server creation, when health checks run, when backups\n      are created, when system maintenance is performed, etc. When you delete a server, the server's events are\n      also deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Account attributes</b>:\n        Every account has attributes that are assigned in the OpsWorks CM\n      database. These attributes store information about configuration limits (servers,\n      backups, etc.) and your customer account.\n      </p>\n            </li>\n         </ul>\n         <p>\n            <b>Endpoints</b>\n         </p>\n         <p>OpsWorks CM supports the following endpoints, all HTTPS. You must connect to one of the following endpoints. \n      Your servers\n      can only be accessed or managed within the endpoint in which they are created.</p>\n         <ul>\n            <li>\n               <p>opsworks-cm.us-east-1.amazonaws.com</p>\n            </li>\n            <li>\n               <p>opsworks-cm.us-east-2.amazonaws.com</p>\n            </li>\n            <li>\n               <p>opsworks-cm.us-west-1.amazonaws.com</p>\n            </li>\n            <li>\n               <p>opsworks-cm.us-west-2.amazonaws.com</p>\n            </li>\n            <li>\n               <p>opsworks-cm.ap-northeast-1.amazonaws.com</p>\n            </li>\n            <li>\n               <p>opsworks-cm.ap-southeast-1.amazonaws.com</p>\n            </li>\n            <li>\n               <p>opsworks-cm.ap-southeast-2.amazonaws.com</p>\n            </li>\n            <li>\n               <p>opsworks-cm.eu-central-1.amazonaws.com</p>\n            </li>\n            <li>\n               <p>opsworks-cm.eu-west-1.amazonaws.com</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/opsworks-service.html\">OpsWorks endpoints and quotas</a> in the Amazon Web Services General Reference.</p>\n         <p>\n            <b>Throttling limits</b>\n         </p>\n         <p>All API operations allow for five requests per second with a burst of 10 requests per second.</p>",
                 "smithy.api#title": "AWS OpsWorks CM",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://opsworks-cm.amazonaws.com/doc/2016-11-01/"
@@ -1632,7 +1632,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -1675,7 +1674,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -1688,7 +1688,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -1702,7 +1701,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -1725,7 +1723,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -1760,7 +1757,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -1771,14 +1767,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -1792,14 +1790,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -1808,11 +1804,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -1823,14 +1819,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -1844,7 +1842,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -1864,7 +1861,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -1875,14 +1871,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -1893,9 +1891,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -2374,7 +2374,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n      Restores a backup to a server that is in a <code>CONNECTION_LOST</code>, <code>HEALTHY</code>, <code>RUNNING</code>, <code>UNHEALTHY</code>, or <code>TERMINATED</code> state.\n      When you run RestoreServer, the server's EC2 instance is deleted, and a new EC2 instance is configured. RestoreServer maintains\n      the existing server endpoint, so configuration management of the server's client devices (nodes) should continue to work.\n    </p>\n         <p>Restoring from a backup is performed by creating a new EC2 instance. If restoration is successful, and the server is in a <code>HEALTHY</code> state, \n      AWS OpsWorks CM switches traffic over to the new instance. After restoration is finished, the old EC2 instance is maintained in a \n      <code>Running</code> or <code>Stopped</code> state, but is eventually terminated.</p>\n         <p>\n      This operation is asynchronous.\n    </p>\n         <p>\n      An <code>InvalidStateException</code> is thrown when the server is not in a valid state. A <code>ResourceNotFoundException</code> is thrown\n      when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are not valid.\n    </p>"
+                "smithy.api#documentation": "<p>\n      Restores a backup to a server that is in a <code>CONNECTION_LOST</code>, <code>HEALTHY</code>, <code>RUNNING</code>, <code>UNHEALTHY</code>, or <code>TERMINATED</code> state.\n      When you run RestoreServer, the server's EC2 instance is deleted, and a new EC2 instance is configured. RestoreServer maintains\n      the existing server endpoint, so configuration management of the server's client devices (nodes) should continue to work.\n    </p>\n         <p>Restoring from a backup is performed by creating a new EC2 instance. If restoration is successful, and the server is in a <code>HEALTHY</code> state, \n      OpsWorks CM switches traffic over to the new instance. After restoration is finished, the old EC2 instance is maintained in a \n      <code>Running</code> or <code>Stopped</code> state, but is eventually terminated.</p>\n         <p>\n      This operation is asynchronous.\n    </p>\n         <p>\n      An <code>InvalidStateException</code> is thrown when the server is not in a valid state. A <code>ResourceNotFoundException</code> is thrown\n      when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are not valid.\n    </p>"
             }
         },
         "com.amazonaws.opsworkscm#RestoreServerRequest": {
@@ -2488,7 +2488,7 @@
                 "EngineAttributes": {
                     "target": "com.amazonaws.opsworkscm#EngineAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The response of a createServer() request returns the master\n    credential to access the server in EngineAttributes. These\n    credentials are not stored by AWS OpsWorks CM; they are returned only as part of the result of createServer().\n    </p>\n         <p class=\"title\">\n            <b>Attributes returned in a createServer response for Chef</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>CHEF_AUTOMATE_PIVOTAL_KEY</code>: A base64-encoded RSA private key that is\n      generated by AWS OpsWorks for Chef Automate. This private key is required to access\n      the Chef API.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CHEF_STARTER_KIT</code>: A base64-encoded ZIP file.\n      The ZIP file contains a Chef starter kit, which includes a README, a\n      configuration file, and the required RSA private key. Save this file, unzip it,\n      and then change to the directory where you've unzipped the file contents.\n      From this directory, you can run Knife commands.</p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Attributes returned in a createServer response for Puppet</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>PUPPET_STARTER_KIT</code>: A base64-encoded ZIP file.\n        The ZIP file contains a Puppet starter kit, including a README and a\n        required private key. Save this file, unzip it,\n        and then change to the directory where you've unzipped the file contents.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PUPPET_ADMIN_PASSWORD</code>: An administrator password that you can use to sign in to the Puppet Enterprise console after the server is online.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The response of a createServer() request returns the master\n    credential to access the server in EngineAttributes. These\n    credentials are not stored by OpsWorks CM; they are returned only as part of the result of createServer().\n    </p>\n         <p class=\"title\">\n            <b>Attributes returned in a createServer response for Chef</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>CHEF_AUTOMATE_PIVOTAL_KEY</code>: A base64-encoded RSA private key that is\n        generated by OpsWorks for Chef Automate. This private key is required to access\n      the Chef API.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CHEF_STARTER_KIT</code>: A base64-encoded ZIP file.\n      The ZIP file contains a Chef starter kit, which includes a README, a\n      configuration file, and the required RSA private key. Save this file, unzip it,\n      and then change to the directory where you've unzipped the file contents.\n      From this directory, you can run Knife commands.</p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Attributes returned in a createServer response for Puppet</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>PUPPET_STARTER_KIT</code>: A base64-encoded ZIP file.\n        The ZIP file contains a Puppet starter kit, including a README and a\n        required private key. Save this file, unzip it,\n        and then change to the directory where you've unzipped the file contents.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PUPPET_ADMIN_PASSWORD</code>: An administrator password that you can use to sign in to the \n        Puppet Enterprise console after the server is online.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "EngineVersion": {
@@ -2506,7 +2506,7 @@
                 "InstanceType": {
                     "target": "com.amazonaws.opsworkscm#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The instance type for the server, as specified in the CloudFormation stack. This might not be the same instance type that is shown in the EC2 console.\n    </p>"
+                        "smithy.api#documentation": "<p>\n      The instance type for the server, as specified in the CloudFormation stack. This might not be the same instance type \n      that is shown in the EC2 console.\n    </p>"
                     }
                 },
                 "KeyPair": {
@@ -2757,7 +2757,7 @@
                 "EngineAttributes": {
                     "target": "com.amazonaws.opsworkscm#EngineAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Engine attributes that are specific to the server on which you want to run maintenance.</p>\n         <p class=\"title\">\n            <b>Attributes accepted in a StartMaintenance request for Chef</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>CHEF_MAJOR_UPGRADE</code>: If a Chef Automate server is eligible for upgrade to Chef Automate 2, \n        add this engine attribute to a <code>StartMaintenance</code> request and set the value to <code>true</code> to upgrade the server to Chef Automate 2. For more information, see \n        <a href=\"https://docs.aws.amazon.com/opsworks/latest/userguide/opscm-a2upgrade.html\">Upgrade an AWS OpsWorks for Chef Automate Server to Chef Automate 2</a>.\n      </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Engine attributes that are specific to the server on which you want to run maintenance.</p>\n         <p class=\"title\">\n            <b>Attributes accepted in a StartMaintenance request for Chef</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>CHEF_MAJOR_UPGRADE</code>: If a Chef Automate server is eligible for upgrade to Chef Automate 2, \n        add this engine attribute to a <code>StartMaintenance</code> request and set the value to <code>true</code> to upgrade the server to Chef Automate 2. For more information, see \n        <a href=\"https://docs.aws.amazon.com/opsworks/latest/userguide/opscm-a2upgrade.html\">Upgrade an OpsWorks for Chef Automate Server to Chef Automate 2</a>.\n      </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -2814,7 +2814,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A map that contains tag keys and tag values to attach to an AWS OpsWorks for Chef Automate \n      or AWS OpsWorks for Puppet Enterprise server. Leading and trailing white spaces are trimmed from both the key and value. \n      A maximum of 50 user-applied tags is allowed for tag-supported AWS OpsWorks-CM resources.</p>"
+                "smithy.api#documentation": "<p>A map that contains tag keys and tag values to attach to an OpsWorks for Chef Automate \n      or OpsWorks for Puppet Enterprise server. Leading and trailing spaces are trimmed from both the key and value. \n      A maximum of 50 user-applied tags is allowed for tag-supported OpsWorks CM resources.</p>"
             }
         },
         "com.amazonaws.opsworkscm#TagKey": {
@@ -2871,7 +2871,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Applies tags to an AWS OpsWorks for Chef Automate or AWS OpsWorks for Puppet Enterprise server, or to server backups.</p>"
+                "smithy.api#documentation": "<p>Applies tags to an OpsWorks for Chef Automate or OpsWorks for Puppet Enterprise server, or to server backups.</p>"
             }
         },
         "com.amazonaws.opsworkscm#TagResourceRequest": {
@@ -2887,7 +2887,7 @@
                 "Tags": {
                     "target": "com.amazonaws.opsworkscm#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map that contains tag keys and tag values to attach to AWS OpsWorks-CM servers or backups.</p>\n         <ul>\n            <li>\n               <p>The key cannot be empty.</p>\n            </li>\n            <li>\n               <p>The key can be a maximum of 127 characters, and can contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : /</code>\n               </p>\n            </li>\n            <li>\n               <p>The value can be a maximum 255 characters, and contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : /</code>\n               </p>\n            </li>\n            <li>\n               <p>Leading and trailing white spaces are trimmed from both the key and value.</p>\n            </li>\n            <li>\n               <p>A maximum of 50 user-applied tags is allowed for any AWS OpsWorks-CM server or backup.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>A map that contains tag keys and tag values to attach to OpsWorks CM servers or backups.</p>\n         <ul>\n            <li>\n               <p>The key cannot be empty.</p>\n            </li>\n            <li>\n               <p>The key can be a maximum of 127 characters, and can contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : /</code>\n               </p>\n            </li>\n            <li>\n               <p>The value can be a maximum 255 characters, and contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : /</code>\n               </p>\n            </li>\n            <li>\n               <p>Leading and trailing white spaces are trimmed from both the key and value.</p>\n            </li>\n            <li>\n               <p>A maximum of 50 user-applied tags is allowed for any OpsWorks CM server or backup.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2947,7 +2947,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes specified tags from an AWS OpsWorks-CM server or backup.</p>"
+                "smithy.api#documentation": "<p>Removes specified tags from an OpsWorks CM server or backup.</p>"
             }
         },
         "com.amazonaws.opsworkscm#UntagResourceRequest": {
@@ -3022,7 +3022,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n      Updates engine-specific attributes on a specified server. The server\n      enters the <code>MODIFYING</code> state when this operation\n      is in progress. Only one update can occur at a time.\n      You can use this command to reset a Chef server's public key (<code>CHEF_PIVOTAL_KEY</code>) or a Puppet server's \n      admin password (<code>PUPPET_ADMIN_PASSWORD</code>).\n    </p>\n         <p>\n      This operation is asynchronous.\n    </p>\n         <p>\n      This operation can only be called for servers in <code>HEALTHY</code> or <code>UNHEALTHY</code> states. Otherwise, an <code>InvalidStateException</code> is raised.\n      A <code>ResourceNotFoundException</code> is thrown when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are not valid.\n    </p>"
+                "smithy.api#documentation": "<p>\n      Updates engine-specific attributes on a specified server. The server\n      enters the <code>MODIFYING</code> state when this operation\n      is in progress. Only one update can occur at a time.\n      You can use this command to reset a Chef server's public key (<code>CHEF_PIVOTAL_KEY</code>) or a Puppet server's \n      admin password (<code>PUPPET_ADMIN_PASSWORD</code>).\n    </p>\n         <p>\n      This operation is asynchronous.\n    </p>\n         <p>\n      This operation can only be called for servers in <code>HEALTHY</code> or <code>UNHEALTHY</code> states. \n      Otherwise, an <code>InvalidStateException</code> is raised.\n      A <code>ResourceNotFoundException</code> is thrown when the server does not exist. A <code>ValidationException</code> is \n      raised when parameters of the request are not valid.\n    </p>"
             }
         },
         "com.amazonaws.opsworkscm#UpdateServerEngineAttributesRequest": {
@@ -3073,7 +3073,7 @@
                 "DisableAutomatedBackup": {
                     "target": "com.amazonaws.opsworkscm#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Setting DisableAutomatedBackup to <code>true</code> disables automated or scheduled backups. Automated backups are enabled by default.\n    </p>"
+                        "smithy.api#documentation": "<p>Setting DisableAutomatedBackup to <code>true</code> disables automated or scheduled backups. \n      Automated backups are enabled by default.\n    </p>"
                     }
                 },
                 "BackupRetentionCount": {

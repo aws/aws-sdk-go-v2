@@ -6,7 +6,19 @@
             "version": "2023-09-07",
             "operations": [
                 {
+                    "target": "com.amazonaws.freetier#GetAccountActivity"
+                },
+                {
+                    "target": "com.amazonaws.freetier#GetAccountPlanState"
+                },
+                {
                     "target": "com.amazonaws.freetier#GetFreeTierUsage"
+                },
+                {
+                    "target": "com.amazonaws.freetier#ListAccountActivities"
+                },
+                {
+                    "target": "com.amazonaws.freetier#UpgradeAccountPlan"
                 }
             ],
             "traits": {
@@ -18,7 +30,7 @@
                     "name": "freetier"
                 },
                 "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<p>You can use the Amazon Web Services Free Tier API to query programmatically your Free Tier usage data.</p>\n         <p>Free Tier tracks your monthly usage data for all free tier offers that are associated with your\n      Amazon Web Services account. You can use the Free Tier API to filter and show only the data that you want.</p>\n         <p>Service endpoint</p>\n         <p>The Free Tier API provides the following endpoint:</p>\n         <ul>\n            <li>\n               <p>https://freetier.us-east-1.api.aws</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-free-tier.html\">Using the Amazon Web Services Free Tier</a> in the <i>Billing User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>You can use the Amazon Web Services Free Tier API to query programmatically your Free Tier usage data.</p> <p>Free Tier tracks your monthly usage data for all free tier offers that are associated with your Amazon Web Services account. You can use the Free Tier API to filter and show only the data that you want.</p> <p>Service endpoint</p> <p>The Free Tier API provides the following endpoint:</p> <ul/> <p>For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-free-tier.html\">Using the Amazon Web Services Free Tier</a> in the <i>Billing User Guide</i>.</p>",
                 "smithy.api#title": "AWS Free Tier",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -584,6 +596,174 @@
                 }
             }
         },
+        "com.amazonaws.freetier#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.freetier#GenericString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> You don't have sufficient access to perform this action. </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.freetier#AccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9]{12}$"
+            }
+        },
+        "com.amazonaws.freetier#AccountPlanStatus": {
+            "type": "enum",
+            "members": {
+                "NOT_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_STARTED"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPIRED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.freetier#AccountPlanType": {
+            "type": "enum",
+            "members": {
+                "FREE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FREE"
+                    }
+                },
+                "PAID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PAID"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.freetier#Activities": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.freetier#ActivitySummary"
+            }
+        },
+        "com.amazonaws.freetier#ActivityId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 32,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]+$"
+            }
+        },
+        "com.amazonaws.freetier#ActivityReward": {
+            "type": "union",
+            "members": {
+                "credit": {
+                    "target": "com.amazonaws.freetier#MonetaryAmount",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The credits gained by activity rewards. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The summary of the rewards granted as a result of activities completed. </p>"
+            }
+        },
+        "com.amazonaws.freetier#ActivityStatus": {
+            "type": "enum",
+            "members": {
+                "NOT_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_STARTED"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "EXPIRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPIRING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.freetier#ActivitySummary": {
+            "type": "structure",
+            "members": {
+                "activityId": {
+                    "target": "com.amazonaws.freetier#ActivityId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A unique identifier that identifies the activity. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "title": {
+                    "target": "com.amazonaws.freetier#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The title of the activity. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "reward": {
+                    "target": "com.amazonaws.freetier#ActivityReward",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The reward for the activity. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.freetier#ActivityStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The current status of the activity. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The summary of activities. </p>"
+            }
+        },
+        "com.amazonaws.freetier#CurrencyCode": {
+            "type": "enum",
+            "members": {
+                "USD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USD"
+                    }
+                }
+            }
+        },
         "com.amazonaws.freetier#Dimension": {
             "type": "enum",
             "members": {
@@ -644,14 +824,14 @@
                 "Values": {
                     "target": "com.amazonaws.freetier#Values",
                     "traits": {
-                        "smithy.api#documentation": "<p>The metadata values you can specify to filter upon, so that the results all match at least\n      one of the specified values.</p>",
+                        "smithy.api#documentation": "<p>The metadata values you can specify to filter upon, so that the results all match at least one of the specified values.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "MatchOptions": {
                     "target": "com.amazonaws.freetier#MatchOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The match options that you can use to filter your results. You can specify only one of\n      these values in the array.</p>",
+                        "smithy.api#documentation": "<p>The match options that you can use to filter your results. You can specify only one of these values in the array.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -666,13 +846,13 @@
                 "Or": {
                     "target": "com.amazonaws.freetier#Expressions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Return results that match any of the <code>Expressions</code>  that you specified. in the\n      array.</p>"
+                        "smithy.api#documentation": "<p>Return results that match any of the <code>Expressions</code> that you specified. in the array.</p>"
                     }
                 },
                 "And": {
                     "target": "com.amazonaws.freetier#Expressions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Return results that match all <code>Expressions</code>  that you specified in the\n      array.</p>"
+                        "smithy.api#documentation": "<p>Return results that match all <code>Expressions</code> that you specified in the array.</p>"
                     }
                 },
                 "Not": {
@@ -689,7 +869,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Use <code>Expression</code> to filter in the <code>GetFreeTierUsage</code> API operation.</p>\n         <p>You can use the following patterns:</p>\n         <ul>\n            <li>\n               <p>Simple dimension values (<code>Dimensions</code> root operator)</p>\n            </li>\n            <li>\n               <p>Complex expressions with logical operators (<code>AND</code>, <code>NOT</code>, and\n            <code>OR</code> root operators).</p>\n            </li>\n         </ul>\n         <p>For <i>simple dimension values</i>, you can set the dimension name, values,\n      and match type for the filters that you plan to use.</p>\n         <p>\n            <b>Example for simple dimension values</b>\n         </p>\n         <p>You can filter to match exactly for <code>REGION==us-east-1 OR\n      REGION==us-west-1</code>.</p>\n         <p>The corresponding <code>Expression</code> appears like the following: <code>{ \"Dimensions\": { \"Key\": \"REGION\", \"Values\": [ \"us-east-1\", \"us-west-1\" ], \"MatchOptions\": [\"EQUALS\"] } }</code>\n         </p>\n         <p>As shown in the previous example, lists of dimension values are combined with <code>OR</code> when\n      you apply the filter.</p>\n         <p>For <i>complex expressions with logical operators</i>, you can have nested\n      expressions to use the logical operators and specify advanced filtering.</p>\n         <p>\n            <b>Example for complex expressions with logical operators</b>\n         </p>\n         <p>You can filter by <code>((REGION == us-east-1 OR REGION == us-west-1) OR (SERVICE CONTAINS\n        AWSLambda)) AND (USAGE_TYPE !CONTAINS DataTransfer)</code>.</p>\n         <p>The corresponding <code>Expression</code> appears like the following: <code>{ \"And\": [\n          {\"Or\": [ {\"Dimensions\": { \"Key\": \"REGION\", \"Values\": [ \"us-east-1\", \"us-west-1\" ],\n          \"MatchOptions\": [\"EQUALS\"] }}, {\"Dimensions\": { \"Key\": \"SERVICE\", \"Values\": [\"AWSLambda\"], \"MatchOptions\": [\"CONTAINS\"] } } ]}, {\"Not\": {\"Dimensions\": { \"Key\": \"USAGE_TYPE\", \"Values\": [\"DataTransfer\"], \"MatchOptions\": [\"CONTAINS\"] }}} ] }</code>\n         </p>\n         <p>In the following <b>Contents</b>, you must specify exactly one of the\n      following root operators.</p>"
+                "smithy.api#documentation": "<p>Use <code>Expression</code> to filter in the <code>GetFreeTierUsage</code> API operation.</p> <p>You can use the following patterns:</p> <ul> <li> <p>Simple dimension values (<code>Dimensions</code> root operator)</p> </li> <li> <p>Complex expressions with logical operators (<code>AND</code>, <code>NOT</code>, and <code>OR</code> root operators).</p> </li> </ul> <p>For <i>simple dimension values</i>, you can set the dimension name, values, and match type for the filters that you plan to use.</p> <p> <b>Example for simple dimension values</b> </p> <p>You can filter to match exactly for <code>REGION==us-east-1 OR REGION==us-west-1</code>.</p> <p>The corresponding <code>Expression</code> appears like the following: <code>{ \"Dimensions\": { \"Key\": \"REGION\", \"Values\": [ \"us-east-1\", \"us-west-1\" ], \"MatchOptions\": [\"EQUALS\"] } }</code> </p> <p>As shown in the previous example, lists of dimension values are combined with <code>OR</code> when you apply the filter.</p> <p>For <i>complex expressions with logical operators</i>, you can have nested expressions to use the logical operators and specify advanced filtering.</p> <p> <b>Example for complex expressions with logical operators</b> </p> <p>You can filter by <code>((REGION == us-east-1 OR REGION == us-west-1) OR (SERVICE CONTAINS AWSLambda)) AND (USAGE_TYPE !CONTAINS DataTransfer)</code>.</p> <p>The corresponding <code>Expression</code> appears like the following: <code>{ \"And\": [ {\"Or\": [ {\"Dimensions\": { \"Key\": \"REGION\", \"Values\": [ \"us-east-1\", \"us-west-1\" ], \"MatchOptions\": [\"EQUALS\"] }}, {\"Dimensions\": { \"Key\": \"SERVICE\", \"Values\": [\"AWSLambda\"], \"MatchOptions\": [\"CONTAINS\"] } } ]}, {\"Not\": {\"Dimensions\": { \"Key\": \"USAGE_TYPE\", \"Values\": [\"DataTransfer\"], \"MatchOptions\": [\"CONTAINS\"] }}} ] }</code> </p> <p>In the following <b>Contents</b>, you must specify exactly one of the following root operators.</p>"
             }
         },
         "com.amazonaws.freetier#Expressions": {
@@ -698,25 +878,31 @@
                 "target": "com.amazonaws.freetier#Expression"
             }
         },
+        "com.amazonaws.freetier#FilterActivityStatuses": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.freetier#ActivityStatus"
+            }
+        },
         "com.amazonaws.freetier#FreeTierUsage": {
             "type": "structure",
             "members": {
                 "service": {
                     "target": "com.amazonaws.freetier#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Amazon Web Service providing the Free Tier offer. For example, this can be\n      Amazon Elastic Compute Cloud.</p>"
+                        "smithy.api#documentation": "<p>The name of the Amazon Web Services service providing the Free Tier offer. For example, this can be Amazon Elastic Compute Cloud.</p>"
                     }
                 },
                 "operation": {
                     "target": "com.amazonaws.freetier#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes <code>usageType</code> more granularly with the specific Amazon Web Service API\n      operation. For example, this can be the <code>RunInstances</code> API operation for\n      Amazon Elastic Compute Cloud.</p>"
+                        "smithy.api#documentation": "<p>Describes <code>usageType</code> more granularly with the specific Amazon Web Services service API operation. For example, this can be the <code>RunInstances</code> API operation for Amazon Elastic Compute Cloud.</p>"
                     }
                 },
                 "usageType": {
                     "target": "com.amazonaws.freetier#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the usage details of the offer. For example, this might be\n        <code>Global-BoxUsage:freetrial</code>.</p>"
+                        "smithy.api#documentation": "<p>Describes the usage details of the offer. For example, this might be <code>Global-BoxUsage:freetrial</code>.</p>"
                     }
                 },
                 "region": {
@@ -761,7 +947,7 @@
                 "freeTierType": {
                     "target": "com.amazonaws.freetier#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the type of the Free Tier offer. For example, the offer can be <code>\"12 Months\n        Free\"</code>,  <code>\"Always Free\"</code>, and <code>\"Free Trial\"</code>.</p>"
+                        "smithy.api#documentation": "<p>Describes the type of the Free Tier offer. For example, the offer can be <code>\"12 Months Free\"</code>, <code>\"Always Free\"</code>, and <code>\"Free Trial\"</code>.</p>"
                     }
                 }
             },
@@ -789,6 +975,308 @@
                     "max": 1024
                 },
                 "smithy.api#pattern": "^[\\S\\s]*$"
+            }
+        },
+        "com.amazonaws.freetier#GetAccountActivity": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.freetier#GetAccountActivityRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.freetier#GetAccountActivityResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.freetier#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.freetier#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.freetier#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.freetier#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Returns a specific activity record that is available to the customer. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Fetching an Account activity by id",
+                        "input": {
+                            "activityId": "d622f48bf4014286a2686ab10cacfb2e",
+                            "languageCode": "en-US"
+                        },
+                        "output": {
+                            "activityId": "d622f48bf4014286a2686ab10cacfb2e",
+                            "title": "Configure Your Access in the AWS Identity and Access Management (IAM) center",
+                            "description": "Set up three notifications: one for your costs reach ...",
+                            "status": "COMPLETED",
+                            "instructionsUrl": "https://catalog.us-east-1.prod.workshops.aws/workshops/2a5fc82d-2b5f-4105-83c2-91a1b4d7abfe/en-US/2-foundation/lab1-create",
+                            "reward": {
+                                "credit": {
+                                    "amount": 20.0,
+                                    "unit": "USD"
+                                }
+                            },
+                            "estimatedTimeToCompleteInMinutes": 15,
+                            "expiresAt": "1985-10-12T23:20:50.520Z",
+                            "startedAt": "1985-04-12T23:20:50.520Z",
+                            "completedAt": "1985-06-12T23:20:50.520Z"
+                        }
+                    }
+                ],
+                "smithy.api#readonly": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetAccountActivitySuccess",
+                        "params": {
+                            "activityId": "d622f48bf4014286a2686ab10cacfb2e",
+                            "languageCode": "en-US"
+                        },
+                        "expect": {
+                            "success": {}
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.freetier#GetAccountActivityRequest": {
+            "type": "structure",
+            "members": {
+                "activityId": {
+                    "target": "com.amazonaws.freetier#ActivityId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A unique identifier that identifies the activity. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "languageCode": {
+                    "target": "com.amazonaws.freetier#LanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The language code used to return translated title and description fields. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.freetier#GetAccountActivityResponse": {
+            "type": "structure",
+            "members": {
+                "activityId": {
+                    "target": "com.amazonaws.freetier#ActivityId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A unique identifier that identifies the activity. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "title": {
+                    "target": "com.amazonaws.freetier#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A short activity title. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.freetier#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Provides detailed information about the activity and its expected outcomes. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.freetier#ActivityStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The current activity status. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "instructionsUrl": {
+                    "target": "com.amazonaws.freetier#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The URL resource that provides guidance on activity requirements and completion. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "reward": {
+                    "target": "com.amazonaws.freetier#ActivityReward",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A reward granted upon activity completion. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "estimatedTimeToCompleteInMinutes": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The estimated time to complete the activity. This is the duration in minutes. </p>"
+                    }
+                },
+                "expiresAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The time by which the activity must be completed to receive a reward. </p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "startedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The timestamp when the activity started. This field appears only for activities in the <code>IN_PROGRESS</code> or <code>COMPLETED</code> states. </p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "completedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The timestamp when the activity is completed. This field appears only for activities in the <code>COMPLETED</code> state. </p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.freetier#GetAccountPlanState": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.freetier#GetAccountPlanStateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.freetier#GetAccountPlanStateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.freetier#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.freetier#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.freetier#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.freetier#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.freetier#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> This returns all of the information related to the state of the account plan related to Free Tier. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Fetching account plan state by id",
+                        "input": {},
+                        "output": {
+                            "accountId": "111122223333",
+                            "accountPlanType": "FREE",
+                            "accountPlanStatus": "ACTIVE",
+                            "accountPlanExpirationDate": "2025-06-30T23:59:59Z",
+                            "accountPlanRemainingCredits": {
+                                "amount": 25.0,
+                                "unit": "USD"
+                            }
+                        }
+                    },
+                    {
+                        "title": "Attempt to fetch account plan state by id with insufficient permissions",
+                        "input": {},
+                        "error": {
+                            "shapeId": "com.amazonaws.freetier#AccessDeniedException",
+                            "content": {
+                                "message": "Access denied"
+                            }
+                        }
+                    },
+                    {
+                        "title": "Internal service error",
+                        "input": {},
+                        "error": {
+                            "shapeId": "com.amazonaws.freetier#InternalServerException",
+                            "content": {
+                                "message": "An internal error occurred while processing your request"
+                            }
+                        }
+                    },
+                    {
+                        "title": "Attempt to fetch plan state by id for an account without account plan",
+                        "input": {},
+                        "error": {
+                            "shapeId": "com.amazonaws.freetier#ResourceNotFoundException",
+                            "content": {
+                                "message": "Account plan state could not be found"
+                            }
+                        }
+                    },
+                    {
+                        "title": "Request rate exceeds limits",
+                        "input": {},
+                        "error": {
+                            "shapeId": "com.amazonaws.freetier#ThrottlingException",
+                            "content": {
+                                "message": "Request rate limit exceeded"
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.freetier#GetAccountPlanStateRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.freetier#GetAccountPlanStateResponse": {
+            "type": "structure",
+            "members": {
+                "accountId": {
+                    "target": "com.amazonaws.freetier#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A unique identifier that identifies the account. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "accountPlanType": {
+                    "target": "com.amazonaws.freetier#AccountPlanType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The plan type for the account. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "accountPlanStatus": {
+                    "target": "com.amazonaws.freetier#AccountPlanStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The current status for the account plan. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "accountPlanRemainingCredits": {
+                    "target": "com.amazonaws.freetier#MonetaryAmount",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The amount of credits remaining for the account. </p>"
+                    }
+                },
+                "accountPlanExpirationDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The timestamp for when the current account plan expires. </p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.freetier#GetFreeTierUsage": {
@@ -826,14 +1314,14 @@
                 "filter": {
                     "target": "com.amazonaws.freetier#Expression",
                     "traits": {
-                        "smithy.api#documentation": "<p>An expression that specifies the conditions that you want each <code>FreeTierUsage</code> object\n    to meet.</p>"
+                        "smithy.api#documentation": "<p>An expression that specifies the conditions that you want each <code>FreeTierUsage</code> object to meet.</p>"
                     }
                 },
                 "maxResults": {
                     "target": "com.amazonaws.freetier#MaxResults",
                     "traits": {
                         "smithy.api#default": 10,
-                        "smithy.api#documentation": "<p>The maximum number of results to return in the response. <code>MaxResults</code> means\n      that there can be up to the specified number of values, but there might be fewer results based\n      on your filters.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response. <code>MaxResults</code> means that there can be up to the specified number of values, but there might be fewer results based on your filters.</p>"
                     }
                 },
                 "nextToken": {
@@ -882,6 +1370,216 @@
                 "smithy.api#documentation": "<p>An unexpected error occurred during the processing of your request.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.freetier#LanguageCode": {
+            "type": "enum",
+            "members": {
+                "EN_US": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en-US"
+                    }
+                },
+                "EN_GB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en-GB"
+                    }
+                },
+                "ID_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "id-ID"
+                    }
+                },
+                "DE_DE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "de-DE"
+                    }
+                },
+                "ES_ES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "es-ES"
+                    }
+                },
+                "FR_FR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fr-FR"
+                    }
+                },
+                "JA_JP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ja-JP"
+                    }
+                },
+                "IT_IT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "it-IT"
+                    }
+                },
+                "PT_PT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pt-PT"
+                    }
+                },
+                "KO_KR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ko-KR"
+                    }
+                },
+                "ZH_CN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "zh-CN"
+                    }
+                },
+                "ZH_TW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "zh-TW"
+                    }
+                },
+                "TR_TR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "tr-TR"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.freetier#ListAccountActivities": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.freetier#ListAccountActivitiesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.freetier#ListAccountActivitiesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.freetier#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.freetier#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.freetier#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Returns a list of activities that are available. This operation supports pagination and filtering by status. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Fetching a page of completed activities",
+                        "input": {
+                            "filterActivityStatuses": [
+                                "COMPLETED"
+                            ],
+                            "maxResults": 1,
+                            "languageCode": "en-US"
+                        },
+                        "output": {
+                            "activities": [
+                                {
+                                    "activityId": "d622f48bf4014286a2686ab10cacfb2e",
+                                    "title": "Configure Your Access in the AWS Identity and Access Management (IAM) center",
+                                    "status": "COMPLETED",
+                                    "reward": {
+                                        "credit": {
+                                            "amount": 20.0,
+                                            "unit": "USD"
+                                        }
+                                    }
+                                }
+                            ],
+                            "nextToken": "a95f3d9e7710c6ca8ba4f640b40bbc40"
+                        }
+                    }
+                ],
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "activities"
+                },
+                "smithy.api#readonly": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListAccountActivitiesSuccess",
+                        "params": {
+                            "languageCode": "en-US"
+                        },
+                        "expect": {
+                            "success": {}
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.freetier#ListAccountActivitiesRequest": {
+            "type": "structure",
+            "members": {
+                "filterActivityStatuses": {
+                    "target": "com.amazonaws.freetier#FilterActivityStatuses",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The activity status filter. This field can be used to filter the response by activities status. </p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.freetier#NextPageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A token from a previous paginated response. If this is specified, the response includes records beginning from this token (inclusive), up to the number specified by <code>maxResults</code>. </p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.freetier#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 10,
+                        "smithy.api#documentation": "<p> The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. </p>"
+                    }
+                },
+                "languageCode": {
+                    "target": "com.amazonaws.freetier#LanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The language code used to return translated titles. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.freetier#ListAccountActivitiesResponse": {
+            "type": "structure",
+            "members": {
+                "activities": {
+                    "target": "com.amazonaws.freetier#Activities",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A brief information about the activities. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.freetier#NextPageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The token to include in another request to get the next page of items. This value is <code>null</code> when there are no more items to return. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.freetier#MatchOption": {
@@ -935,6 +1633,29 @@
                 }
             }
         },
+        "com.amazonaws.freetier#MonetaryAmount": {
+            "type": "structure",
+            "members": {
+                "amount": {
+                    "target": "com.amazonaws.freetier#GenericDouble",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p> The aggregated monetary amount of credits earned. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "unit": {
+                    "target": "com.amazonaws.freetier#CurrencyCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unit that the monetary amount is given in. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The monetary amount of the credit. </p>"
+            }
+        },
         "com.amazonaws.freetier#NextPageToken": {
             "type": "string",
             "traits": {
@@ -943,6 +1664,22 @@
                     "max": 8192
                 },
                 "smithy.api#pattern": "^[\\S\\s]*$"
+            }
+        },
+        "com.amazonaws.freetier#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.freetier#GenericString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> This exception is thrown when the requested resource cannot be found. </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
             }
         },
         "com.amazonaws.freetier#ThrottlingException": {
@@ -961,6 +1698,152 @@
                 "smithy.api#httpError": 429
             }
         },
+        "com.amazonaws.freetier#UpgradeAccountPlan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.freetier#UpgradeAccountPlanRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.freetier#UpgradeAccountPlanResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.freetier#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.freetier#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.freetier#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.freetier#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.freetier#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> The account plan type for the Amazon Web Services account. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Upgrading an account plan to PAID",
+                        "input": {
+                            "accountPlanType": "PAID"
+                        },
+                        "output": {
+                            "accountId": "111122223333",
+                            "accountPlanType": "PAID",
+                            "accountPlanStatus": "NOT_STARTED"
+                        }
+                    },
+                    {
+                        "title": "Attempt to upgrade an account with insufficient permissions",
+                        "input": {
+                            "accountPlanType": "PAID"
+                        },
+                        "error": {
+                            "shapeId": "com.amazonaws.freetier#AccessDeniedException",
+                            "content": {
+                                "message": "Access denied"
+                            }
+                        }
+                    },
+                    {
+                        "title": "Attempt to downgrade an account from PAID to FREE",
+                        "input": {
+                            "accountPlanType": "FREE"
+                        },
+                        "error": {
+                            "shapeId": "com.amazonaws.freetier#ValidationException",
+                            "content": {
+                                "message": "The Account Plan can not be updated from to PAID to FREE"
+                            }
+                        }
+                    },
+                    {
+                        "title": "Internal service error",
+                        "input": {
+                            "accountPlanType": "PAID"
+                        },
+                        "error": {
+                            "shapeId": "com.amazonaws.freetier#InternalServerException",
+                            "content": {
+                                "message": "An internal error occurred while processing your request"
+                            }
+                        }
+                    },
+                    {
+                        "title": "Attempt to upgrade a non-existent account plan",
+                        "input": {
+                            "accountPlanType": "PAID"
+                        },
+                        "error": {
+                            "shapeId": "com.amazonaws.freetier#ResourceNotFoundException",
+                            "content": {
+                                "message": "Unable to upgrade account plan: account plan state could not be found"
+                            }
+                        }
+                    },
+                    {
+                        "title": "Request rate exceeds limits",
+                        "input": {
+                            "accountPlanType": "PAID"
+                        },
+                        "error": {
+                            "shapeId": "com.amazonaws.freetier#ThrottlingException",
+                            "content": {
+                                "message": "Request rate limit exceeded"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.freetier#UpgradeAccountPlanRequest": {
+            "type": "structure",
+            "members": {
+                "accountPlanType": {
+                    "target": "com.amazonaws.freetier#AccountPlanType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The target account plan type. This makes it explicit about the change and latest value of the <code>accountPlanType</code>. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.freetier#UpgradeAccountPlanResponse": {
+            "type": "structure",
+            "members": {
+                "accountId": {
+                    "target": "com.amazonaws.freetier#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A unique identifier that identifies the account. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "accountPlanType": {
+                    "target": "com.amazonaws.freetier#AccountPlanType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The type of plan for the account. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "accountPlanStatus": {
+                    "target": "com.amazonaws.freetier#AccountPlanStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p> This indicates the latest state of the account plan within its lifecycle. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.freetier#ValidationException": {
             "type": "structure",
             "members": {
@@ -972,7 +1855,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an Amazon Web Service.</p>",
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
