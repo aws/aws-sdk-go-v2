@@ -1,3 +1,7 @@
+# v1.28.5 (2025-07-09)
+
+* **Documentation**: Removing content that refers to an S3 bucket that is no longer in use.
+
 # v1.28.4 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

@@ -1,3 +1,7 @@
+# v1.200.1 (2025-07-09)
+
+* No change notes available for this release.
+
 # v1.200.0 (2025-07-03)
 
 * **Feature**: Changes include new StartSession API for SageMaker Studio spaces and CreateHubContentPresignedUrls API for SageMaker JumpStart.

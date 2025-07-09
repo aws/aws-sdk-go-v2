@@ -1,3 +1,13 @@
+# Release (2025-07-09)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.231.0](service/ec2/CHANGELOG.md#v12310-2025-07-09)
+  * **Feature**: Adds support to Capacity Blocks for ML for purchasing EC2 P6e-GB200 UltraServers. Customers can now purchase u-p6e-gb200x72 and u-p6e-gb200x36 UltraServers. Adds new DescribeCapacityBlocks andDescribeCapacityBlockStatus APIs. Adds support for CapacityBlockId to DescribeInstanceTopology.
+* `github.com/aws/aws-sdk-go-v2/service/freetier`: [v1.9.0](service/freetier/CHANGELOG.md#v190-2025-07-09)
+  * **Feature**: This release introduces four new APIs: GetAccountPlanState and UpgradeAccountPlan for AWS account plan management; ListAccountActivities and GetAccountActivity that provide activity tracking capabilities.
+* `github.com/aws/aws-sdk-go-v2/service/opsworkscm`: [v1.28.5](service/opsworkscm/CHANGELOG.md#v1285-2025-07-09)
+  * **Documentation**: Removing content that refers to an S3 bucket that is no longer in use.
+
 # Release (2025-07-03)
 
 ## Module Highlights

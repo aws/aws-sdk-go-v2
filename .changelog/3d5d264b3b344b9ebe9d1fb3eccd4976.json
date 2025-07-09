@@ -1,8 +1,0 @@
-{
-    "id": "3d5d264b-3b34-4b9e-be9d-1fb3eccd4976",
-    "type": "feature",
-    "description": "This release introduces four new APIs: GetAccountPlanState and UpgradeAccountPlan for AWS account plan management; ListAccountActivities and GetAccountActivity that provide activity tracking capabilities.",
-    "modules": [
-        "service/freetier"
-    ]
-}

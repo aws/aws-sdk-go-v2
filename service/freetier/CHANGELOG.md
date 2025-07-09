@@ -1,3 +1,7 @@
+# v1.9.0 (2025-07-09)
+
+* **Feature**: This release introduces four new APIs: GetAccountPlanState and UpgradeAccountPlan for AWS account plan management; ListAccountActivities and GetAccountActivity that provide activity tracking capabilities.
+
 # v1.8.4 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.
