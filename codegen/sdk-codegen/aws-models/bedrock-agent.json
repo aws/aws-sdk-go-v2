@@ -176,7 +176,7 @@
                 "actionGroupState": {
                     "target": "com.amazonaws.bedrockagent#ActionGroupState",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the action group is available for the agent to invoke or not when\n      sending an <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html\">InvokeAgent</a>\n      request.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether the action group is available for the agent to invoke or not when sending an <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html\">InvokeAgent</a> request.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -253,7 +253,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.bedrockagent#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request,\n      Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>"
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>"
                     }
                 },
                 "instruction": {
@@ -265,7 +265,7 @@
                 "agentStatus": {
                     "target": "com.amazonaws.bedrockagent#AgentStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the agent and whether it is ready for use. The following statuses are possible:</p>\n         <ul>\n            <li>\n               <p>CREATING – The agent is being created.</p>\n            </li>\n            <li>\n               <p>PREPARING – The agent is being prepared.</p>\n            </li>\n            <li>\n               <p>PREPARED – The agent is prepared and ready to be invoked.</p>\n            </li>\n            <li>\n               <p>NOT_PREPARED – The agent has been created but not yet prepared.</p>\n            </li>\n            <li>\n               <p>FAILED – The agent API operation failed.</p>\n            </li>\n            <li>\n               <p>UPDATING – The agent is being updated.</p>\n            </li>\n            <li>\n               <p>DELETING – The agent is being deleted.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The status of the agent and whether it is ready for use. The following statuses are possible:</p> <ul> <li> <p>CREATING – The agent is being created.</p> </li> <li> <p>PREPARING – The agent is being prepared.</p> </li> <li> <p>PREPARED – The agent is prepared and ready to be invoked.</p> </li> <li> <p>NOT_PREPARED – The agent has been created but not yet prepared.</p> </li> <li> <p>FAILED – The agent API operation failed.</p> </li> <li> <p>UPDATING – The agent is being updated.</p> </li> <li> <p>DELETING – The agent is being deleted.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -284,19 +284,19 @@
                 "orchestrationType": {
                     "target": "com.amazonaws.bedrockagent#OrchestrationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Specifies the orchestration strategy for the agent.\n    </p>"
+                        "smithy.api#documentation": "<p> Specifies the orchestration strategy for the agent. </p>"
                     }
                 },
                 "customOrchestration": {
                     "target": "com.amazonaws.bedrockagent#CustomOrchestration",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Contains custom orchestration configurations for the agent.\n    </p>"
+                        "smithy.api#documentation": "<p> Contains custom orchestration configurations for the agent. </p>"
                     }
                 },
                 "idleSessionTTLInSeconds": {
                     "target": "com.amazonaws.bedrockagent#SessionTTL",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of seconds for which Amazon Bedrock keeps information about a user's conversation with the agent.</p>\n         <p>A user interaction remains active for the amount of time specified. If no conversation occurs during this time, the session expires and Amazon Bedrock deletes any data provided before the timeout.</p>",
+                        "smithy.api#documentation": "<p>The number of seconds for which Amazon Bedrock keeps information about a user's conversation with the agent.</p> <p>A user interaction remains active for the amount of time specified. If no conversation occurs during this time, the session expires and Amazon Bedrock deletes any data provided before the timeout.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -408,7 +408,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.bedrockagent#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request,\n      Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>"
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>"
                     }
                 },
                 "description": {
@@ -434,13 +434,13 @@
                 "parentActionSignature": {
                     "target": "com.amazonaws.bedrockagent#ActionGroupSignature",
                     "traits": {
-                        "smithy.api#documentation": "<p>If this field is set as <code>AMAZON.UserInput</code>, the agent can request the user for additional information when trying to complete a task. The <code>description</code>, <code>apiSchema</code>, and <code>actionGroupExecutor</code> fields must be blank for this action group.</p>\n         <p>During orchestration, if the agent determines that it needs to invoke an API in an action group, but doesn't have enough information to complete the API request, it will invoke this action group instead and return an <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html\">Observation</a> reprompting the user for more information.</p>"
+                        "smithy.api#documentation": "<p>If this field is set as <code>AMAZON.UserInput</code>, the agent can request the user for additional information when trying to complete a task. The <code>description</code>, <code>apiSchema</code>, and <code>actionGroupExecutor</code> fields must be blank for this action group.</p> <p>During orchestration, if the agent determines that it needs to invoke an API in an action group, but doesn't have enough information to complete the API request, it will invoke this action group instead and return an <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html\">Observation</a> reprompting the user for more information.</p>"
                     }
                 },
                 "parentActionGroupSignatureParams": {
                     "target": "com.amazonaws.bedrockagent#ActionGroupSignatureParams",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration settings for a computer use action.</p>\n         <important>\n            <p>\n        Computer use is a new Anthropic Claude model capability (in beta) available with Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html\">Configure an Amazon Bedrock Agent to complete tasks with computer use tools</a>.\n      </p>\n         </important>"
+                        "smithy.api#documentation": "<p>The configuration settings for a computer use action.</p> <important> <p> Computer use is a new Anthropic Claude model capability (in beta) available with Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html\">Configure an Amazon Bedrock Agent to complete tasks with computer use tools</a>. </p> </important>"
                     }
                 },
                 "actionGroupExecutor": {
@@ -507,7 +507,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.bedrockagent#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request,\n      Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>"
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>"
                     }
                 },
                 "description": {
@@ -546,7 +546,7 @@
                 "agentAliasStatus": {
                     "target": "com.amazonaws.bedrockagent#AgentAliasStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the alias of the agent and whether it is ready for use. The following statuses are possible:</p>\n         <ul>\n            <li>\n               <p>CREATING – The agent alias is being created.</p>\n            </li>\n            <li>\n               <p>PREPARED – The agent alias is finished being created or updated and is ready to be invoked.</p>\n            </li>\n            <li>\n               <p>FAILED – The agent alias API operation failed.</p>\n            </li>\n            <li>\n               <p>UPDATING – The agent alias is being updated.</p>\n            </li>\n            <li>\n               <p>DELETING – The agent alias is being deleted.</p>\n            </li>\n            <li>\n               <p>DISSOCIATED - The agent alias has no version associated with it.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The status of the alias of the agent and whether it is ready for use. The following statuses are possible:</p> <ul> <li> <p>CREATING – The agent alias is being created.</p> </li> <li> <p>PREPARED – The agent alias is finished being created or updated and is ready to be invoked.</p> </li> <li> <p>FAILED – The agent alias API operation failed.</p> </li> <li> <p>UPDATING – The agent alias is being updated.</p> </li> <li> <p>DELETING – The agent alias is being deleted.</p> </li> <li> <p>DISSOCIATED - The agent alias has no version associated with it.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -559,7 +559,7 @@
                 "aliasInvocationState": {
                     "target": "com.amazonaws.bedrockagent#AliasInvocationState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The invocation state for the agent alias. If the agent alias is running,\n      the value is <code>ACCEPT_INVOCATIONS</code>. If the agent alias is paused,\n      the value is <code>REJECT_INVOCATIONS</code>. Use the <code>UpdateAgentAlias</code> operation\n      to change the invocation state.</p>"
+                        "smithy.api#documentation": "<p>The invocation state for the agent alias. If the agent alias is running, the value is <code>ACCEPT_INVOCATIONS</code>. If the agent alias is paused, the value is <code>REJECT_INVOCATIONS</code>. Use the <code>UpdateAgentAlias</code> operation to change the invocation state.</p>"
                     }
                 }
             },
@@ -759,7 +759,7 @@
                 "aliasInvocationState": {
                     "target": "com.amazonaws.bedrockagent#AliasInvocationState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The invocation state for the agent alias. If the agent alias is running,\n      the value is <code>ACCEPT_INVOCATIONS</code>. If the agent alias is paused,\n      the value is <code>REJECT_INVOCATIONS</code>. Use the <code>UpdateAgentAlias</code> operation\n    to change the invocation state.</p>"
+                        "smithy.api#documentation": "<p>The invocation state for the agent alias. If the agent alias is running, the value is <code>ACCEPT_INVOCATIONS</code>. If the agent alias is paused, the value is <code>REJECT_INVOCATIONS</code>. Use the <code>UpdateAgentAlias</code> operation to change the invocation state.</p>"
                     }
                 }
             },
@@ -1318,7 +1318,7 @@
                 "idleSessionTTLInSeconds": {
                     "target": "com.amazonaws.bedrockagent#SessionTTL",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of seconds for which Amazon Bedrock keeps information about a user's conversation with the agent.</p>\n         <p>A user interaction remains active for the amount of time specified. If no conversation occurs during this time, the session expires and Amazon Bedrock deletes any data provided before the timeout.</p>",
+                        "smithy.api#documentation": "<p>The number of seconds for which Amazon Bedrock keeps information about a user's conversation with the agent.</p> <p>A user interaction remains active for the amount of time specified. If no conversation occurs during this time, the session expires and Amazon Bedrock deletes any data provided before the timeout.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1376,7 +1376,7 @@
                 "memoryConfiguration": {
                     "target": "com.amazonaws.bedrockagent#MemoryConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        Contains details of the memory configuration on the version of the agent. \n      </p>"
+                        "smithy.api#documentation": "<p> Contains details of the memory configuration on the version of the agent. </p>"
                     }
                 },
                 "agentCollaboration": {
@@ -2541,7 +2541,7 @@
                 "embeddingDataType": {
                     "target": "com.amazonaws.bedrockagent#EmbeddingDataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data type for the vectors when using a model to convert text into vector \n      embeddings. The model must support the specified data type for vector embeddings. \n      Floating-point (float32) is the default data type, and is supported by most models \n      for vector embeddings. See <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-supported.html\">Supported embeddings \n        models</a> for information on the available models and their vector data types.</p>"
+                        "smithy.api#documentation": "<p>The data type for the vectors when using a model to convert text into vector embeddings. The model must support the specified data type for vector embeddings. Floating-point (float32) is the default data type, and is supported by most models for vector embeddings. See <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-supported.html\">Supported embeddings models</a> for information on the available models and their vector data types.</p>"
                     }
                 }
             },
@@ -2582,7 +2582,7 @@
                 "enrichmentStrategyConfiguration": {
                     "target": "com.amazonaws.bedrockagent#EnrichmentStrategyConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The enrichment stategy used to provide additional context. For example, Neptune GraphRAG uses\n      Amazon Bedrock foundation models to perform chunk entity extraction.</p>",
+                        "smithy.api#documentation": "<p>The enrichment stategy used to provide additional context. For example, Neptune GraphRAG uses Amazon Bedrock foundation models to perform chunk entity extraction.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2595,7 +2595,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Context enrichment configuration is used to provide additional context to the RAG application\n      using Amazon Bedrock foundation models.</p>"
+                "smithy.api#documentation": "<p>Context enrichment configuration is used to provide additional context to the RAG application using Amazon Bedrock foundation models.</p>"
             }
         },
         "com.amazonaws.bedrockagent#BedrockModelArn": {
@@ -2644,7 +2644,7 @@
                 "mimeType": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The MIME type of the content. For a list of MIME types, see <a href=\"https://www.iana.org/assignments/media-types/media-types.xhtml\">Media Types</a>. The following MIME types are supported:</p>\n         <ul>\n            <li>\n               <p>text/plain</p>\n            </li>\n            <li>\n               <p>text/html</p>\n            </li>\n            <li>\n               <p>text/csv</p>\n            </li>\n            <li>\n               <p>text/vtt</p>\n            </li>\n            <li>\n               <p>message/rfc822</p>\n            </li>\n            <li>\n               <p>application/xhtml+xml</p>\n            </li>\n            <li>\n               <p>application/pdf</p>\n            </li>\n            <li>\n               <p>application/msword</p>\n            </li>\n            <li>\n               <p>application/vnd.ms-word.document.macroenabled.12</p>\n            </li>\n            <li>\n               <p>application/vnd.ms-word.template.macroenabled.12</p>\n            </li>\n            <li>\n               <p>application/vnd.ms-excel</p>\n            </li>\n            <li>\n               <p>application/vnd.ms-excel.addin.macroenabled.12</p>\n            </li>\n            <li>\n               <p>application/vnd.ms-excel.sheet.macroenabled.12</p>\n            </li>\n            <li>\n               <p>application/vnd.ms-excel.template.macroenabled.12</p>\n            </li>\n            <li>\n               <p>application/vnd.ms-excel.sheet.binary.macroenabled.12</p>\n            </li>\n            <li>\n               <p>application/vnd.ms-spreadsheetml</p>\n            </li>\n            <li>\n               <p>application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</p>\n            </li>\n            <li>\n               <p>application/vnd.openxmlformats-officedocument.spreadsheetml.template</p>\n            </li>\n            <li>\n               <p>application/vnd.openxmlformats-officedocument.wordprocessingml.document</p>\n            </li>\n            <li>\n               <p>application/vnd.openxmlformats-officedocument.wordprocessingml.template</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The MIME type of the content. For a list of MIME types, see <a href=\"https://www.iana.org/assignments/media-types/media-types.xhtml\">Media Types</a>. The following MIME types are supported:</p> <ul> <li> <p>text/plain</p> </li> <li> <p>text/html</p> </li> <li> <p>text/csv</p> </li> <li> <p>text/vtt</p> </li> <li> <p>message/rfc822</p> </li> <li> <p>application/xhtml+xml</p> </li> <li> <p>application/pdf</p> </li> <li> <p>application/msword</p> </li> <li> <p>application/vnd.ms-word.document.macroenabled.12</p> </li> <li> <p>application/vnd.ms-word.template.macroenabled.12</p> </li> <li> <p>application/vnd.ms-excel</p> </li> <li> <p>application/vnd.ms-excel.addin.macroenabled.12</p> </li> <li> <p>application/vnd.ms-excel.sheet.macroenabled.12</p> </li> <li> <p>application/vnd.ms-excel.template.macroenabled.12</p> </li> <li> <p>application/vnd.ms-excel.sheet.binary.macroenabled.12</p> </li> <li> <p>application/vnd.ms-spreadsheetml</p> </li> <li> <p>application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</p> </li> <li> <p>application/vnd.openxmlformats-officedocument.spreadsheetml.template</p> </li> <li> <p>application/vnd.openxmlformats-officedocument.wordprocessingml.document</p> </li> <li> <p>application/vnd.openxmlformats-officedocument.wordprocessingml.template</p> </li> </ul>",
                         "smithy.api#pattern": "[a-z]{1,20}/.{1,20}",
                         "smithy.api#required": {}
                     }
@@ -2727,7 +2727,7 @@
                 "chunkingStrategy": {
                     "target": "com.amazonaws.bedrockagent#ChunkingStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Knowledge base can split your source data into chunks. A <i>chunk</i> refers to an excerpt from a data source that is returned when the knowledge base that it belongs to is queried. You have the following options for chunking your data. If you opt for <code>NONE</code>, then you may want to pre-process your files by splitting them up such that each file corresponds to a chunk.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>FIXED_SIZE</code> – Amazon Bedrock splits your source data into chunks of the approximate size that you set in the <code>fixedSizeChunkingConfiguration</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HIERARCHICAL</code> – Split documents into layers of chunks where the first layer contains large chunks, and the second layer contains smaller chunks derived from the first layer.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SEMANTIC</code> – Split documents into chunks based on groups of similar content derived with natural language processing.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code> – Amazon Bedrock treats each file as one chunk. If you choose this option, you may want to pre-process your documents by splitting them into separate files.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Knowledge base can split your source data into chunks. A <i>chunk</i> refers to an excerpt from a data source that is returned when the knowledge base that it belongs to is queried. You have the following options for chunking your data. If you opt for <code>NONE</code>, then you may want to pre-process your files by splitting them up such that each file corresponds to a chunk.</p> <ul> <li> <p> <code>FIXED_SIZE</code> – Amazon Bedrock splits your source data into chunks of the approximate size that you set in the <code>fixedSizeChunkingConfiguration</code>.</p> </li> <li> <p> <code>HIERARCHICAL</code> – Split documents into layers of chunks where the first layer contains large chunks, and the second layer contains smaller chunks derived from the first layer.</p> </li> <li> <p> <code>SEMANTIC</code> – Split documents into chunks based on groups of similar content derived with natural language processing.</p> </li> <li> <p> <code>NONE</code> – Amazon Bedrock treats each file as one chunk. If you choose this option, you may want to pre-process your documents by splitting them into separate files.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2740,13 +2740,13 @@
                 "hierarchicalChunkingConfiguration": {
                     "target": "com.amazonaws.bedrockagent#HierarchicalChunkingConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Settings for hierarchical document chunking for a data source. Hierarchical chunking splits documents\n    into layers of chunks where the first layer contains large chunks, and the second layer contains smaller\n    chunks derived from the first layer.</p>"
+                        "smithy.api#documentation": "<p>Settings for hierarchical document chunking for a data source. Hierarchical chunking splits documents into layers of chunks where the first layer contains large chunks, and the second layer contains smaller chunks derived from the first layer.</p>"
                     }
                 },
                 "semanticChunkingConfiguration": {
                     "target": "com.amazonaws.bedrockagent#SemanticChunkingConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Settings for semantic document chunking for a data source. Semantic chunking splits\n    a document into into smaller documents based on groups of similar content derived from the text\n    with natural language processing.</p>"
+                        "smithy.api#documentation": "<p>Settings for semantic document chunking for a data source. Semantic chunking splits a document into into smaller documents based on groups of similar content derived from the text with natural language processing.</p>"
                     }
                 }
             },
@@ -2887,12 +2887,12 @@
                 "filterConfiguration": {
                     "target": "com.amazonaws.bedrockagent#CrawlFilterConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration of filtering the Confluence content. For example, configuring \n            regular expression patterns to include or exclude certain content.</p>"
+                        "smithy.api#documentation": "<p>The configuration of filtering the Confluence content. For example, configuring regular expression patterns to include or exclude certain content.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration of the Confluence content. For example, configuring specific \n            types of Confluence content.</p>"
+                "smithy.api#documentation": "<p>The configuration of the Confluence content. For example, configuring specific types of Confluence content.</p>"
             }
         },
         "com.amazonaws.bedrockagent#ConfluenceDataSourceConfiguration": {
@@ -2908,7 +2908,7 @@
                 "crawlerConfiguration": {
                     "target": "com.amazonaws.bedrockagent#ConfluenceCrawlerConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration of the Confluence content. For example, configuring \n            specific types of Confluence content.</p>"
+                        "smithy.api#documentation": "<p>The configuration of the Confluence content. For example, configuring specific types of Confluence content.</p>"
                     }
                 }
             },
@@ -2947,14 +2947,14 @@
                 "authType": {
                     "target": "com.amazonaws.bedrockagent#ConfluenceAuthType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The supported authentication type to authenticate and connect to your \n            Confluence instance.</p>",
+                        "smithy.api#documentation": "<p>The supported authentication type to authenticate and connect to your Confluence instance.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "credentialsSecretArn": {
                     "target": "com.amazonaws.bedrockagent#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name of an Secrets Manager secret that \n            stores your authentication credentials for your Confluence instance URL. \n            For more information on the key-value pairs that must be included in \n            your secret, depending on your authentication type, see \n            <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/confluence-data-source-connector.html#configuration-confluence-connector\">Confluence connection configuration</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name of an Secrets Manager secret that stores your authentication credentials for your Confluence instance URL. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/confluence-data-source-connector.html#configuration-confluence-connector\">Confluence connection configuration</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3062,7 +3062,7 @@
                 "type": {
                     "target": "com.amazonaws.bedrockagent#CrawlFilterConfigurationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of filtering that you want to apply to certain objects or content of the \n            data source. For example, the <code>PATTERN</code> type is regular expression patterns \n            you can apply to filter your content.</p>",
+                        "smithy.api#documentation": "<p>The type of filtering that you want to apply to certain objects or content of the data source. For example, the <code>PATTERN</code> type is regular expression patterns you can apply to filter your content.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3074,7 +3074,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration of filtering the data source content. For example, \n            configuring regular expression patterns to include or exclude certain content.</p>"
+                "smithy.api#documentation": "<p>The configuration of filtering the data source content. For example, configuring regular expression patterns to include or exclude certain content.</p>"
             }
         },
         "com.amazonaws.bedrockagent#CrawlFilterConfigurationType": {
@@ -3117,7 +3117,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an agent that orchestrates interactions between foundation models, data sources, software applications, user conversations, and APIs to carry out tasks to help customers.</p>\n         <ul>\n            <li>\n               <p>Specify the following fields for security purposes.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>agentResourceRoleArn</code> – The Amazon Resource Name (ARN) of the role with permissions to invoke API operations on an agent.</p>\n                  </li>\n                  <li>\n                     <p>(Optional) <code>customerEncryptionKeyArn</code> – The Amazon Resource Name (ARN) of a KMS key to encrypt the creation of the agent.</p>\n                  </li>\n                  <li>\n                     <p>(Optional) <code>idleSessionTTLinSeconds</code> – Specify the number of seconds for which the agent should maintain session information. After this time expires, the subsequent <code>InvokeAgent</code> request begins a new session.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>To enable your agent to retain conversational context across multiple sessions, include a <code>memoryConfiguration</code> object. \n          For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-configure-memory.html\">Configure memory</a>.</p>\n            </li>\n            <li>\n               <p>To override the default prompt behavior for agent orchestration and to use advanced prompts, include a <code>promptOverrideConfiguration</code> object. \n          For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html\">Advanced prompts</a>.</p>\n            </li>\n            <li>\n               <p>If your agent fails to be created, the response returns a list of <code>failureReasons</code> alongside a list of <code>recommendedActions</code> for you to troubleshoot.</p>\n            </li>\n            <li>\n               <p>The agent instructions will not be honored if your agent has only one knowledge base, uses default prompts, has no action group, and user input is disabled.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates an agent that orchestrates interactions between foundation models, data sources, software applications, user conversations, and APIs to carry out tasks to help customers.</p> <ul> <li> <p>Specify the following fields for security purposes.</p> <ul> <li> <p> <code>agentResourceRoleArn</code> – The Amazon Resource Name (ARN) of the role with permissions to invoke API operations on an agent.</p> </li> <li> <p>(Optional) <code>customerEncryptionKeyArn</code> – The Amazon Resource Name (ARN) of a KMS key to encrypt the creation of the agent.</p> </li> <li> <p>(Optional) <code>idleSessionTTLinSeconds</code> – Specify the number of seconds for which the agent should maintain session information. After this time expires, the subsequent <code>InvokeAgent</code> request begins a new session.</p> </li> </ul> </li> <li> <p>To enable your agent to retain conversational context across multiple sessions, include a <code>memoryConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-configure-memory.html\">Configure memory</a>.</p> </li> <li> <p>To override the default prompt behavior for agent orchestration and to use advanced prompts, include a <code>promptOverrideConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html\">Advanced prompts</a>.</p> </li> <li> <p>If your agent fails to be created, the response returns a list of <code>failureReasons</code> alongside a list of <code>recommendedActions</code> for you to troubleshoot.</p> </li> <li> <p>The agent instructions will not be honored if your agent has only one knowledge base, uses default prompts, has no action group, and user input is disabled.</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 202,
                     "method": "PUT",
@@ -3161,7 +3161,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an action group for an agent. An action group represents the actions that an agent can carry out for the customer by defining the APIs that an agent can call and the logic for calling them.</p>\n         <p>To allow your agent to request the user for additional information when trying to complete a task, \n      add an action group with the <code>parentActionGroupSignature</code> field set to <code>AMAZON.UserInput</code>. </p>\n         <p>To allow your agent to generate, run, and troubleshoot code when trying to complete a task, \n      add an action group with the <code>parentActionGroupSignature</code> field set to <code>AMAZON.CodeInterpreter</code>. </p>\n         <p>You must leave the <code>description</code>, <code>apiSchema</code>, and <code>actionGroupExecutor</code> fields blank for this action group. During orchestration, if your agent determines that it needs to invoke an API in an action group, but doesn't have enough information to complete the API request, it will invoke this action group instead and return an <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html\">Observation</a> reprompting the user for more information.</p>",
+                "smithy.api#documentation": "<p>Creates an action group for an agent. An action group represents the actions that an agent can carry out for the customer by defining the APIs that an agent can call and the logic for calling them.</p> <p>To allow your agent to request the user for additional information when trying to complete a task, add an action group with the <code>parentActionGroupSignature</code> field set to <code>AMAZON.UserInput</code>. </p> <p>To allow your agent to generate, run, and troubleshoot code when trying to complete a task, add an action group with the <code>parentActionGroupSignature</code> field set to <code>AMAZON.CodeInterpreter</code>. </p> <p>You must leave the <code>description</code>, <code>apiSchema</code>, and <code>actionGroupExecutor</code> fields blank for this action group. During orchestration, if your agent determines that it needs to invoke an API in an action group, but doesn't have enough information to complete the API request, it will invoke this action group instead and return an <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html\">Observation</a> reprompting the user for more information.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "PUT",
@@ -3202,7 +3202,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.bedrockagent#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request,\n      Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -3215,13 +3215,13 @@
                 "parentActionGroupSignature": {
                     "target": "com.amazonaws.bedrockagent#ActionGroupSignature",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify a built-in or computer use action for this action group. If you specify a value, you must leave the <code>description</code>, <code>apiSchema</code>, and <code>actionGroupExecutor</code> fields empty for this action group. </p>\n         <ul>\n            <li>\n               <p>To allow your agent to request the user for additional information when trying to complete a task, set this field to <code>AMAZON.UserInput</code>. </p>\n            </li>\n            <li>\n               <p>To allow your agent to generate, run, and troubleshoot code when trying to complete a task, set this field to <code>AMAZON.CodeInterpreter</code>.</p>\n            </li>\n            <li>\n               <p>To allow your agent to use an Anthropic computer use tool, specify one of the following values. </p>\n               <important>\n                  <p>\n            Computer use is a new Anthropic Claude model capability (in beta) available with Anthropic Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only.          \n            When operating computer use functionality, we recommend taking additional security precautions,\n            such as executing computer actions in virtual environments with restricted data access and limited internet connectivity. \n             For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html\">Configure an Amazon Bedrock Agent to complete tasks with computer use tools</a>.\n          </p>\n               </important>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ANTHROPIC.Computer</code> - Gives the agent permission to use the mouse and keyboard and\n              take screenshots.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ANTHROPIC.TextEditor</code> - Gives the agent permission to view, create and edit files.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ANTHROPIC.Bash</code> - Gives the agent permission to run commands in a bash shell.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specify a built-in or computer use action for this action group. If you specify a value, you must leave the <code>description</code>, <code>apiSchema</code>, and <code>actionGroupExecutor</code> fields empty for this action group. </p> <ul> <li> <p>To allow your agent to request the user for additional information when trying to complete a task, set this field to <code>AMAZON.UserInput</code>. </p> </li> <li> <p>To allow your agent to generate, run, and troubleshoot code when trying to complete a task, set this field to <code>AMAZON.CodeInterpreter</code>.</p> </li> <li> <p>To allow your agent to use an Anthropic computer use tool, specify one of the following values. </p> <important> <p> Computer use is a new Anthropic Claude model capability (in beta) available with Anthropic Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only. When operating computer use functionality, we recommend taking additional security precautions, such as executing computer actions in virtual environments with restricted data access and limited internet connectivity. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html\">Configure an Amazon Bedrock Agent to complete tasks with computer use tools</a>. </p> </important> <ul> <li> <p> <code>ANTHROPIC.Computer</code> - Gives the agent permission to use the mouse and keyboard and take screenshots.</p> </li> <li> <p> <code>ANTHROPIC.TextEditor</code> - Gives the agent permission to view, create and edit files.</p> </li> <li> <p> <code>ANTHROPIC.Bash</code> - Gives the agent permission to run commands in a bash shell.</p> </li> </ul> </li> </ul>"
                     }
                 },
                 "parentActionGroupSignatureParams": {
                     "target": "com.amazonaws.bedrockagent#ActionGroupSignatureParams",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration settings for a computer use action.</p>\n         <important>\n            <p>\n        Computer use is a new Anthropic Claude model capability (in beta) available with Anthropic Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html\">Configure an Amazon Bedrock Agent to complete tasks with computer use tools</a>.\n      </p>\n         </important>"
+                        "smithy.api#documentation": "<p>The configuration settings for a computer use action.</p> <important> <p> Computer use is a new Anthropic Claude model capability (in beta) available with Anthropic Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html\">Configure an Amazon Bedrock Agent to complete tasks with computer use tools</a>. </p> </important>"
                     }
                 },
                 "actionGroupExecutor": {
@@ -3333,7 +3333,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.bedrockagent#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request,\n      Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -3388,7 +3388,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.bedrockagent#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request,\n      Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -3401,7 +3401,7 @@
                 "foundationModel": {
                     "target": "com.amazonaws.bedrockagent#ModelIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the model that you want to be used for orchestration by the agent you create.</p>\n         <p>The <code>modelId</code> to provide depends on the type of model or throughput that you use:</p>\n         <ul>\n            <li>\n               <p>If you use a base model, specify the model ID or its ARN. For a list of model IDs for base models, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns\">Amazon Bedrock base model IDs (on-demand throughput)</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use an inference profile, specify the inference profile ID or its ARN. For a list of inference profile IDs, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html\">Supported Regions and models for cross-region inference</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a provisioned model, specify the ARN of the Provisioned Throughput. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html\">Run inference using a Provisioned Throughput</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a custom model, first purchase Provisioned Throughput for it. Then specify the ARN of the resulting provisioned model. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html\">Use a custom model in Amazon Bedrock</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use an <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html\">imported model</a>, specify the ARN of the imported model. You can get the model ARN from a successful call to <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateModelImportJob.html\">CreateModelImportJob</a> or from the Imported models page in the Amazon Bedrock console.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The identifier for the model that you want to be used for orchestration by the agent you create.</p> <p>The <code>modelId</code> to provide depends on the type of model or throughput that you use:</p> <ul> <li> <p>If you use a base model, specify the model ID or its ARN. For a list of model IDs for base models, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns\">Amazon Bedrock base model IDs (on-demand throughput)</a> in the Amazon Bedrock User Guide.</p> </li> <li> <p>If you use an inference profile, specify the inference profile ID or its ARN. For a list of inference profile IDs, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html\">Supported Regions and models for cross-region inference</a> in the Amazon Bedrock User Guide.</p> </li> <li> <p>If you use a provisioned model, specify the ARN of the Provisioned Throughput. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html\">Run inference using a Provisioned Throughput</a> in the Amazon Bedrock User Guide.</p> </li> <li> <p>If you use a custom model, first purchase Provisioned Throughput for it. Then specify the ARN of the resulting provisioned model. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html\">Use a custom model in Amazon Bedrock</a> in the Amazon Bedrock User Guide.</p> </li> <li> <p>If you use an <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html\">imported model</a>, specify the ARN of the imported model. You can get the model ARN from a successful call to <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateModelImportJob.html\">CreateModelImportJob</a> or from the Imported models page in the Amazon Bedrock console.</p> </li> </ul>"
                     }
                 },
                 "description": {
@@ -3413,19 +3413,19 @@
                 "orchestrationType": {
                     "target": "com.amazonaws.bedrockagent#OrchestrationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Specifies the type of orchestration strategy for the agent. This is set to <code>DEFAULT</code> orchestration type, by default.\n    </p>"
+                        "smithy.api#documentation": "<p> Specifies the type of orchestration strategy for the agent. This is set to <code>DEFAULT</code> orchestration type, by default. </p>"
                     }
                 },
                 "customOrchestration": {
                     "target": "com.amazonaws.bedrockagent#CustomOrchestration",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Contains details of the custom orchestration configured for the agent.\n    </p>"
+                        "smithy.api#documentation": "<p> Contains details of the custom orchestration configured for the agent. </p>"
                     }
                 },
                 "idleSessionTTLInSeconds": {
                     "target": "com.amazonaws.bedrockagent#SessionTTL",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of seconds for which Amazon Bedrock keeps information about a user's conversation with the agent.</p>\n         <p>A user interaction remains active for the amount of time specified. If no conversation occurs during this time, the session expires and Amazon Bedrock deletes any data provided before the timeout.</p>"
+                        "smithy.api#documentation": "<p>The number of seconds for which Amazon Bedrock keeps information about a user's conversation with the agent.</p> <p>A user interaction remains active for the amount of time specified. If no conversation occurs during this time, the session expires and Amazon Bedrock deletes any data provided before the timeout.</p>"
                     }
                 },
                 "agentResourceRoleArn": {
@@ -3522,7 +3522,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Connects a knowledge base to a data source. You specify the configuration for the specific data source service in the <code>dataSourceConfiguration</code> field.</p>\n         <important>\n            <p>You can't change the <code>chunkingConfiguration</code> after you create the data source connector.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Connects a knowledge base to a data source. You specify the configuration for the specific data source service in the <code>dataSourceConfiguration</code> field.</p> <important> <p>You can't change the <code>chunkingConfiguration</code> after you create the data source connector.</p> </important>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "PUT",
@@ -3548,7 +3548,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.bedrockagent#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request,\n      Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -3575,7 +3575,7 @@
                 "dataDeletionPolicy": {
                     "target": "com.amazonaws.bedrockagent#DataDeletionPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data deletion policy for the data source.</p>\n         <p>You can set the data deletion policy to:</p>\n         <ul>\n            <li>\n               <p>DELETE: Deletes all data from your data source that’s converted \n          into vector embeddings upon deletion of a knowledge base or data source resource. \n          Note that the <b>vector store itself is not deleted</b>, \n          only the data. This flag is ignored if an Amazon Web Services account is deleted.</p>\n            </li>\n            <li>\n               <p>RETAIN: Retains all data from your data source that’s converted \n          into vector embeddings upon deletion of a knowledge base or data source resource. \n          Note that the <b>vector store itself is not deleted</b> \n          if you delete a knowledge base or data source resource.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The data deletion policy for the data source.</p> <p>You can set the data deletion policy to:</p> <ul> <li> <p>DELETE: Deletes all data from your data source that’s converted into vector embeddings upon deletion of a knowledge base or data source resource. Note that the <b>vector store itself is not deleted</b>, only the data. This flag is ignored if an Amazon Web Services account is deleted.</p> </li> <li> <p>RETAIN: Retains all data from your data source that’s converted into vector embeddings upon deletion of a knowledge base or data source resource. Note that the <b>vector store itself is not deleted</b> if you delete a knowledge base or data source resource.</p> </li> </ul>"
                     }
                 },
                 "serverSideEncryptionConfiguration": {
@@ -3735,7 +3735,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.bedrockagent#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request,\n      Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -3858,7 +3858,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.bedrockagent#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request,\n      Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -4020,7 +4020,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.bedrockagent#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request,\n      Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -4133,7 +4133,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a knowledge base. A knowledge base contains your data sources so that Large Language Models (LLMs) can use your data. To create a knowledge base, you must first set up your data sources and configure a supported vector store. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowlege-base-prereq.html\">Set up a knowledge base</a>.</p>\n         <note>\n            <p>If you prefer to let Amazon Bedrock create and manage a vector store for you in Amazon OpenSearch Service, use the console. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-create\">Create a knowledge base</a>.</p>\n         </note>\n         <ul>\n            <li>\n               <p>Provide the <code>name</code> and an optional <code>description</code>.</p>\n            </li>\n            <li>\n               <p>Provide the Amazon Resource Name (ARN) with permissions to create a knowledge base in the <code>roleArn</code> field.</p>\n            </li>\n            <li>\n               <p>Provide the embedding model to use in the <code>embeddingModelArn</code> field in the <code>knowledgeBaseConfiguration</code> object.</p>\n            </li>\n            <li>\n               <p>Provide the configuration for your vector store in the <code>storageConfiguration</code> object.</p>\n               <ul>\n                  <li>\n                     <p>For an Amazon OpenSearch Service database, use the <code>opensearchServerlessConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-oss.html\">Create a vector store in Amazon OpenSearch Service</a>.</p>\n                  </li>\n                  <li>\n                     <p>For an Amazon Aurora database, use the <code>RdsConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-rds.html\">Create a vector store in Amazon Aurora</a>.</p>\n                  </li>\n                  <li>\n                     <p>For a Pinecone database, use the <code>pineconeConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-pinecone.html\">Create a vector store in Pinecone</a>.</p>\n                  </li>\n                  <li>\n                     <p>For a Redis Enterprise Cloud database, use the <code>redisEnterpriseCloudConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-redis.html\">Create a vector store in Redis Enterprise Cloud</a>.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates a knowledge base. A knowledge base contains your data sources so that Large Language Models (LLMs) can use your data. To create a knowledge base, you must first set up your data sources and configure a supported vector store. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowlege-base-prereq.html\">Set up a knowledge base</a>.</p> <note> <p>If you prefer to let Amazon Bedrock create and manage a vector store for you in Amazon OpenSearch Service, use the console. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-create\">Create a knowledge base</a>.</p> </note> <ul> <li> <p>Provide the <code>name</code> and an optional <code>description</code>.</p> </li> <li> <p>Provide the Amazon Resource Name (ARN) with permissions to create a knowledge base in the <code>roleArn</code> field.</p> </li> <li> <p>Provide the embedding model to use in the <code>embeddingModelArn</code> field in the <code>knowledgeBaseConfiguration</code> object.</p> </li> <li> <p>Provide the configuration for your vector store in the <code>storageConfiguration</code> object.</p> <ul> <li> <p>For an Amazon OpenSearch Service database, use the <code>opensearchServerlessConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-oss.html\">Create a vector store in Amazon OpenSearch Service</a>.</p> </li> <li> <p>For an Amazon Aurora database, use the <code>RdsConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-rds.html\">Create a vector store in Amazon Aurora</a>.</p> </li> <li> <p>For a Pinecone database, use the <code>pineconeConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-pinecone.html\">Create a vector store in Pinecone</a>.</p> </li> <li> <p>For a Redis Enterprise Cloud database, use the <code>redisEnterpriseCloudConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-redis.html\">Create a vector store in Redis Enterprise Cloud</a>.</p> </li> </ul> </li> </ul>",
                 "smithy.api#http": {
                     "code": 202,
                     "method": "PUT",
@@ -4151,7 +4151,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.bedrockagent#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request,\n      Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -4292,7 +4292,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.bedrockagent#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request,\n      Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -4446,7 +4446,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.bedrockagent#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request,\n      Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -4656,12 +4656,12 @@
                 "executor": {
                     "target": "com.amazonaws.bedrockagent#OrchestrationExecutor",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The structure of the executor invoking the actions in custom orchestration. \n    </p>"
+                        "smithy.api#documentation": "<p> The structure of the executor invoking the actions in custom orchestration. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n     Details of custom orchestration.\n    </p>"
+                "smithy.api#documentation": "<p> Details of custom orchestration. </p>"
             }
         },
         "com.amazonaws.bedrockagent#CustomS3Location": {
@@ -4721,7 +4721,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Settings for customizing steps in the data source content ingestion pipeline.</p>\n         <p>You can configure the data source to process documents with a Lambda function after\n    they are parsed and converted into chunks. When you add a post-chunking transformation,\n    the service stores chunked documents in an S3 bucket and invokes a Lambda function to process\n    them.</p>\n         <p>To process chunked documents with a Lambda function, define an S3 bucket path for input\n    and output objects, and a transformation that specifies the Lambda function to invoke. You can\n    use the Lambda function to customize how chunks are split, and the metadata for each chunk.\n    </p>"
+                "smithy.api#documentation": "<p>Settings for customizing steps in the data source content ingestion pipeline.</p> <p>You can configure the data source to process documents with a Lambda function after they are parsed and converted into chunks. When you add a post-chunking transformation, the service stores chunked documents in an S3 bucket and invokes a Lambda function to process them.</p> <p>To process chunked documents with a Lambda function, define an S3 bucket path for input and output objects, and a transformation that specifies the Lambda function to invoke. You can use the Lambda function to customize how chunks are split, and the metadata for each chunk. </p>"
             }
         },
         "com.amazonaws.bedrockagent#CyclicConnectionFlowValidationDetails": {
@@ -4793,7 +4793,7 @@
                 "status": {
                     "target": "com.amazonaws.bedrockagent#DataSourceStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the data source. The following statuses are possible:</p>\n         <ul>\n            <li>\n               <p>Available – The data source has been created and is ready for ingestion into the knowledge base.</p>\n            </li>\n            <li>\n               <p>Deleting – The data source is being deleted.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The status of the data source. The following statuses are possible:</p> <ul> <li> <p>Available – The data source has been created and is ready for ingestion into the knowledge base.</p> </li> <li> <p>Deleting – The data source is being deleted.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4872,25 +4872,25 @@
                 "webConfiguration": {
                     "target": "com.amazonaws.bedrockagent#WebDataSourceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration of web URLs to crawl for your data source. \n            You should be authorized to crawl the URLs.</p>\n         <note>\n            <p>Crawling web URLs as your data source is in preview release \n                and is subject to change.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The configuration of web URLs to crawl for your data source. You should be authorized to crawl the URLs.</p> <note> <p>Crawling web URLs as your data source is in preview release and is subject to change.</p> </note>"
                     }
                 },
                 "confluenceConfiguration": {
                     "target": "com.amazonaws.bedrockagent#ConfluenceDataSourceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration information to connect to Confluence as your data source.</p>\n         <note>\n            <p>Confluence data source connector is in preview release and is subject to change.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The configuration information to connect to Confluence as your data source.</p> <note> <p>Confluence data source connector is in preview release and is subject to change.</p> </note>"
                     }
                 },
                 "salesforceConfiguration": {
                     "target": "com.amazonaws.bedrockagent#SalesforceDataSourceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration information to connect to Salesforce as your data source.</p>\n         <note>\n            <p>Salesforce data source connector is in preview release and is subject to change.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The configuration information to connect to Salesforce as your data source.</p> <note> <p>Salesforce data source connector is in preview release and is subject to change.</p> </note>"
                     }
                 },
                 "sharePointConfiguration": {
                     "target": "com.amazonaws.bedrockagent#SharePointDataSourceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration information to connect to SharePoint as your data source.</p>\n         <note>\n            <p>SharePoint data source connector is in preview release and is subject to change.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The configuration information to connect to SharePoint as your data source.</p> <note> <p>SharePoint data source connector is in preview release and is subject to change.</p> </note>"
                     }
                 }
             },
@@ -5877,7 +5877,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.bedrockagent#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request,\n      Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -6659,7 +6659,7 @@
                 "type": {
                     "target": "com.amazonaws.bedrockagent#ConcurrencyType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of concurrency to use for parallel node execution. Specify one of the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Automatic</code> - Amazon Bedrock determines which nodes can be executed in parallel based on the flow definition and its dependencies.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Manual</code> - You specify which nodes can be executed in parallel.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The type of concurrency to use for parallel node execution. Specify one of the following options:</p> <ul> <li> <p> <code>Automatic</code> - Amazon Bedrock determines which nodes can be executed in parallel based on the flow definition and its dependencies.</p> </li> <li> <p> <code>Manual</code> - You specify which nodes can be executed in parallel.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6827,7 +6827,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about an alias of a flow.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListFlowAliases.html#API_agent_ListFlowAliases_ResponseSyntax\">ListFlowAliases response</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Contains information about an alias of a flow.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListFlowAliases.html#API_agent_ListFlowAliases_ResponseSyntax\">ListFlowAliases response</a> </p> </li> </ul>"
             }
         },
         "com.amazonaws.bedrockagent#FlowArn": {
@@ -7181,7 +7181,7 @@
                 "iterator": {
                     "target": "com.amazonaws.bedrockagent#IteratorFlowNodeConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains configurations for an iterator node in your flow. Takes an input that is an array and iteratively sends each item of the array as an output to the following node. The size of the array is also returned in the output.</p>\n         <p>The output flow node at the end of the flow iteration will return a response for each member of the array. To return only one response, you can include a collector node downstream from the iterator node.</p>"
+                        "smithy.api#documentation": "<p>Contains configurations for an iterator node in your flow. Takes an input that is an array and iteratively sends each item of the array as an output to the following node. The size of the array is also returned in the output.</p> <p>The output flow node at the end of the flow iteration will return a response for each member of the array. To return only one response, you can include a collector node downstream from the iterator node.</p>"
                     }
                 },
                 "collector": {
@@ -7267,7 +7267,7 @@
                 "type": {
                     "target": "com.amazonaws.bedrockagent#FlowNodeIODataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the data type of the input. If the input doesn't match this type at runtime,\n            a validation error will be thrown.</p>",
+                        "smithy.api#documentation": "<p>Specifies the data type of the input. If the input doesn't match this type at runtime, a validation error will be thrown.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7281,7 +7281,7 @@
                 "category": {
                     "target": "com.amazonaws.bedrockagent#FlowNodeInputCategory",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies how input data flows between iterations in a DoWhile\n                loop.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LoopCondition</code> - Controls whether the loop continues by evaluating condition expressions against the input data. Use this category to define\n                    the condition that determines if the loop should continue. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ReturnValueToLoopStart</code> - Defines data to pass back to the start\n                    of the loop's next iteration. Use this category for variables that you\n                    want to update for each loop iteration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ExitLoop</code> - Defines the value that's available once the loop ends.\n                    Use this category to expose loop results to nodes outside the loop.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies how input data flows between iterations in a DoWhile loop.</p> <ul> <li> <p> <code>LoopCondition</code> - Controls whether the loop continues by evaluating condition expressions against the input data. Use this category to define the condition that determines if the loop should continue. </p> </li> <li> <p> <code>ReturnValueToLoopStart</code> - Defines data to pass back to the start of the loop's next iteration. Use this category for variables that you want to update for each loop iteration.</p> </li> <li> <p> <code>ExitLoop</code> - Defines the value that's available once the loop ends. Use this category to expose loop results to nodes outside the loop.</p> </li> </ul>"
                     }
                 }
             },
@@ -7610,7 +7610,7 @@
                 "status": {
                     "target": "com.amazonaws.bedrockagent#FlowStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the flow. The following statuses are possible:</p>\n         <ul>\n            <li>\n               <p>NotPrepared – The flow has been created or updated, but hasn't been prepared. If you just created the flow, you can't test it. If you updated the flow, the <code>DRAFT</code> version won't contain the latest changes for testing. Send a <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PrepareFlow.html\">PrepareFlow</a> request to package the latest changes into the <code>DRAFT</code> version.</p>\n            </li>\n            <li>\n               <p>Preparing – The flow is being prepared so that the <code>DRAFT</code> version contains the latest changes for testing.</p>\n            </li>\n            <li>\n               <p>Prepared – The flow is prepared and the <code>DRAFT</code> version contains the latest changes for testing.</p>\n            </li>\n            <li>\n               <p>Failed – The last API operation that you invoked on the flow failed. Send a <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetFlow.html\">GetFlow</a> request and check the error message in the <code>validations</code> field.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The status of the flow. The following statuses are possible:</p> <ul> <li> <p>NotPrepared – The flow has been created or updated, but hasn't been prepared. If you just created the flow, you can't test it. If you updated the flow, the <code>DRAFT</code> version won't contain the latest changes for testing. Send a <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PrepareFlow.html\">PrepareFlow</a> request to package the latest changes into the <code>DRAFT</code> version.</p> </li> <li> <p>Preparing – The flow is being prepared so that the <code>DRAFT</code> version contains the latest changes for testing.</p> </li> <li> <p>Prepared – The flow is prepared and the <code>DRAFT</code> version contains the latest changes for testing.</p> </li> <li> <p>Failed – The last API operation that you invoked on the flow failed. Send a <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetFlow.html\">GetFlow</a> request and check the error message in the <code>validations</code> field.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7671,7 +7671,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about validation of the flow.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetFlow.html#API_agent_GetFlow_ResponseSyntax\">GetFlow response</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetFlowVersion.html#API_agent_GetFlowVersion_ResponseSyntax\">GetFlowVersion response</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Contains information about validation of the flow.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetFlow.html#API_agent_GetFlow_ResponseSyntax\">GetFlow response</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetFlowVersion.html#API_agent_GetFlowVersion_ResponseSyntax\">GetFlowVersion response</a> </p> </li> </ul>"
             }
         },
         "com.amazonaws.bedrockagent#FlowValidationDetails": {
@@ -8190,7 +8190,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about a version of a flow.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListFlowVersions.html#API_agent_ListFlowVersions_ResponseSyntax\">ListFlowVersions response</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Contains information about a version of a flow.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListFlowVersions.html#API_agent_ListFlowVersions_ResponseSyntax\">ListFlowVersions response</a> </p> </li> </ul>"
             }
         },
         "com.amazonaws.bedrockagent#Function": {
@@ -8223,7 +8223,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines parameters that the agent needs to invoke from the user to complete the function. Corresponds to an action in an action group.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax\">CreateAgentActionGroup request</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax\">CreateAgentActionGroup response</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax\">UpdateAgentActionGroup request</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax\">UpdateAgentActionGroup response</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax\">GetAgentActionGroup response</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Defines parameters that the agent needs to invoke from the user to complete the function. Corresponds to an action in an action group.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax\">CreateAgentActionGroup request</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax\">CreateAgentActionGroup response</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax\">UpdateAgentActionGroup request</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax\">UpdateAgentActionGroup response</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax\">GetAgentActionGroup response</a> </p> </li> </ul>"
             }
         },
         "com.amazonaws.bedrockagent#FunctionDescription": {
@@ -8246,7 +8246,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines functions that each define parameters that the agent needs to invoke from the user. Each function represents an action in an action group.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax\">CreateAgentActionGroup request</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax\">CreateAgentActionGroup response</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax\">UpdateAgentActionGroup request</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax\">UpdateAgentActionGroup response</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax\">GetAgentActionGroup response</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Defines functions that each define parameters that the agent needs to invoke from the user. Each function represents an action in an action group.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax\">CreateAgentActionGroup request</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax\">CreateAgentActionGroup response</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax\">UpdateAgentActionGroup request</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax\">UpdateAgentActionGroup response</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax\">GetAgentActionGroup response</a> </p> </li> </ul>"
             }
         },
         "com.amazonaws.bedrockagent#Functions": {
@@ -9015,7 +9015,7 @@
                 "executionRoleArn": {
                     "target": "com.amazonaws.bedrockagent#FlowExecutionRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service role with permissions to create a flow.  For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-permissions.html\">Create a service row for flows</a> in the Amazon Bedrock User Guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service role with permissions to create a flow. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-permissions.html\">Create a service row for flows</a> in the Amazon Bedrock User Guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9042,7 +9042,7 @@
                 "status": {
                     "target": "com.amazonaws.bedrockagent#FlowStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the flow. The following statuses are possible:</p>\n         <ul>\n            <li>\n               <p>NotPrepared – The flow has been created or updated, but hasn't been prepared. If you just created the flow, you can't test it. If you updated the flow, the <code>DRAFT</code> version won't contain the latest changes for testing. Send a <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PrepareFlow.html\">PrepareFlow</a> request to package the latest changes into the <code>DRAFT</code> version.</p>\n            </li>\n            <li>\n               <p>Preparing – The flow is being prepared so that the <code>DRAFT</code> version contains the latest changes for testing.</p>\n            </li>\n            <li>\n               <p>Prepared – The flow is prepared and the <code>DRAFT</code> version contains the latest changes for testing.</p>\n            </li>\n            <li>\n               <p>Failed – The last API operation that you invoked on the flow failed. Send a <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetFlow.html\">GetFlow</a> request and check the error message in the <code>validations</code> field.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The status of the flow. The following statuses are possible:</p> <ul> <li> <p>NotPrepared – The flow has been created or updated, but hasn't been prepared. If you just created the flow, you can't test it. If you updated the flow, the <code>DRAFT</code> version won't contain the latest changes for testing. Send a <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PrepareFlow.html\">PrepareFlow</a> request to package the latest changes into the <code>DRAFT</code> version.</p> </li> <li> <p>Preparing – The flow is being prepared so that the <code>DRAFT</code> version contains the latest changes for testing.</p> </li> <li> <p>Prepared – The flow is prepared and the <code>DRAFT</code> version contains the latest changes for testing.</p> </li> <li> <p>Failed – The last API operation that you invoked on the flow failed. Send a <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetFlow.html\">GetFlow</a> request and check the error message in the <code>validations</code> field.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9665,7 +9665,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Settings for hierarchical document chunking for a data source. Hierarchical chunking splits documents\n    into layers of chunks where the first layer contains large chunks, and the second layer contains smaller\n    chunks derived from the first layer.</p>\n         <p>You configure the number of tokens to overlap, or repeat across adjacent chunks. For example,\n    if you set overlap tokens to 60, the last 60 tokens in the first chunk are also included at the beginning of\n    the second chunk. For each layer, you must also configure the maximum number of tokens in a chunk.</p>"
+                "smithy.api#documentation": "<p>Settings for hierarchical document chunking for a data source. Hierarchical chunking splits documents into layers of chunks where the first layer contains large chunks, and the second layer contains smaller chunks derived from the first layer.</p> <p>You configure the number of tokens to overlap, or repeat across adjacent chunks. For example, if you set overlap tokens to 60, the last 60 tokens in the first chunk are also included at the beginning of the second chunk. For each layer, you must also configure the maximum number of tokens in a chunk.</p>"
             }
         },
         "com.amazonaws.bedrockagent#HierarchicalChunkingLevelConfiguration": {
@@ -9772,6 +9772,23 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagent#IndexArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {},
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagent#IndexName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 63
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.bedrockagent#InferenceConfiguration": {
             "type": "structure",
             "members": {
@@ -9873,7 +9890,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.bedrockagent#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request,\n      Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -9955,20 +9972,20 @@
                 "startedAt": {
                     "target": "com.amazonaws.bedrockagent#DateTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time the data ingestion job started.</p>\n         <p>If you stop a data ingestion job, the <code>startedAt</code> time is the time the job was started before the job was stopped.</p>",
+                        "smithy.api#documentation": "<p>The time the data ingestion job started.</p> <p>If you stop a data ingestion job, the <code>startedAt</code> time is the time the job was started before the job was stopped.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "updatedAt": {
                     "target": "com.amazonaws.bedrockagent#DateTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time the data ingestion job was last updated.</p>\n         <p>If you stop a data ingestion job, the <code>updatedAt</code> time is the time the job was stopped.</p>",
+                        "smithy.api#documentation": "<p>The time the data ingestion job was last updated.</p> <p>If you stop a data ingestion job, the <code>updatedAt</code> time is the time the job was stopped.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains details about a data ingestion job. Data sources are ingested into a knowledge base so that Large Language Models (LLMs) can use your data.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_StartIngestionJob.html#API_agent_StartIngestionJob_ResponseSyntax\">StartIngestionJob response</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetIngestionJob.html#API_agent_GetIngestionJob_ResponseSyntax\">GetIngestionJob response</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListIngestionJobs.html#API_agent_ListIngestionJobs_ResponseSyntax\">ListIngestionJob response</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Contains details about a data ingestion job. Data sources are ingested into a knowledge base so that Large Language Models (LLMs) can use your data.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_StartIngestionJob.html#API_agent_StartIngestionJob_ResponseSyntax\">StartIngestionJob response</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetIngestionJob.html#API_agent_GetIngestionJob_ResponseSyntax\">GetIngestionJob response</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListIngestionJobs.html#API_agent_ListIngestionJobs_ResponseSyntax\">ListIngestionJob response</a> </p> </li> </ul>"
             }
         },
         "com.amazonaws.bedrockagent#IngestionJobFilter": {
@@ -10294,14 +10311,14 @@
                 "code": {
                     "target": "com.amazonaws.bedrockagent#InlineCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The code that's executed in your inline code node. The code can access input data from previous nodes in the flow, perform operations on that data, and produce output that can be used by other nodes in your flow.</p>\n         <p>The code must be valid in the programming <code>language</code> that you specify.</p>",
+                        "smithy.api#documentation": "<p>The code that's executed in your inline code node. The code can access input data from previous nodes in the flow, perform operations on that data, and produce output that can be used by other nodes in your flow.</p> <p>The code must be valid in the programming <code>language</code> that you specify.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "language": {
                     "target": "com.amazonaws.bedrockagent#SupportedLanguages",
                     "traits": {
-                        "smithy.api#documentation": "<p>The programming language used by your inline code node.</p>\n         <p>The code must be valid in the programming <code>language</code> that you specify. Currently, only Python 3 (<code>Python_3</code>) is supported.</p>",
+                        "smithy.api#documentation": "<p>The programming language used by your inline code node.</p> <p>The code must be valid in the programming <code>language</code> that you specify. Currently, only Python 3 (<code>Python_3</code>) is supported.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -10383,7 +10400,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A location for storing content from data sources temporarily as it is processed by\n    custom components in the ingestion pipeline.</p>"
+                "smithy.api#documentation": "<p>A location for storing content from data sources temporarily as it is processed by custom components in the ingestion pipeline.</p>"
             }
         },
         "com.amazonaws.bedrockagent#InternalServerException": {
@@ -10432,7 +10449,7 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Contains configurations for an iterator node in a flow. Takes an input that is an array and iteratively sends each item of the array as an output to the following node. The size of the array is also returned in the output.</p>\n         <p>The output flow node at the end of the flow iteration will return a response for each member of the array. To return only one response, you can include a collector node downstream from the iterator node.</p>"
+                "smithy.api#documentation": "<p>Contains configurations for an iterator node in a flow. Takes an input that is an array and iteratively sends each item of the array as an output to the following node. The size of the array is also returned in the output.</p> <p>The output flow node at the end of the flow iteration will return a response for each member of the array. To return only one response, you can include a collector node downstream from the iterator node.</p>"
             }
         },
         "com.amazonaws.bedrockagent#KendraIndexArn": {
@@ -10529,7 +10546,7 @@
                 "status": {
                     "target": "com.amazonaws.bedrockagent#KnowledgeBaseStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the knowledge base. The following statuses are possible:</p>\n         <ul>\n            <li>\n               <p>CREATING – The knowledge base is being created.</p>\n            </li>\n            <li>\n               <p>ACTIVE – The knowledge base is ready to be queried.</p>\n            </li>\n            <li>\n               <p>DELETING – The knowledge base is being deleted.</p>\n            </li>\n            <li>\n               <p>UPDATING – The knowledge base is being updated.</p>\n            </li>\n            <li>\n               <p>FAILED – The knowledge base API operation failed.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The status of the knowledge base. The following statuses are possible:</p> <ul> <li> <p>CREATING – The knowledge base is being created.</p> </li> <li> <p>ACTIVE – The knowledge base is ready to be queried.</p> </li> <li> <p>DELETING – The knowledge base is being deleted.</p> </li> <li> <p>UPDATING – The knowledge base is being updated.</p> </li> <li> <p>FAILED – The knowledge base API operation failed.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10641,7 +10658,7 @@
                 "status": {
                     "target": "com.amazonaws.bedrockagent#DocumentStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ingestion status of the document. The following statuses are possible:</p>\n         <ul>\n            <li>\n               <p>STARTED – You submitted the ingestion job containing the document.</p>\n            </li>\n            <li>\n               <p>PENDING – The document is waiting to be ingested.</p>\n            </li>\n            <li>\n               <p>IN_PROGRESS – The document is being ingested.</p>\n            </li>\n            <li>\n               <p>INDEXED – The document was successfully indexed.</p>\n            </li>\n            <li>\n               <p>PARTIALLY_INDEXED – The document was partially indexed.</p>\n            </li>\n            <li>\n               <p>METADATA_PARTIALLY_INDEXED – You submitted metadata for an existing document and it was partially indexed.</p>\n            </li>\n            <li>\n               <p>METADATA_UPDATE_FAILED – You submitted a metadata update for an existing document but it failed.</p>\n            </li>\n            <li>\n               <p>FAILED – The document failed to be ingested.</p>\n            </li>\n            <li>\n               <p>NOT_FOUND – The document wasn't found.</p>\n            </li>\n            <li>\n               <p>IGNORED – The document was ignored during ingestion.</p>\n            </li>\n            <li>\n               <p>DELETING – You submitted the delete job containing the document.</p>\n            </li>\n            <li>\n               <p>DELETE_IN_PROGRESS – The document is being deleted.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The ingestion status of the document. The following statuses are possible:</p> <ul> <li> <p>STARTED – You submitted the ingestion job containing the document.</p> </li> <li> <p>PENDING – The document is waiting to be ingested.</p> </li> <li> <p>IN_PROGRESS – The document is being ingested.</p> </li> <li> <p>INDEXED – The document was successfully indexed.</p> </li> <li> <p>PARTIALLY_INDEXED – The document was partially indexed.</p> </li> <li> <p>METADATA_PARTIALLY_INDEXED – You submitted metadata for an existing document and it was partially indexed.</p> </li> <li> <p>METADATA_UPDATE_FAILED – You submitted a metadata update for an existing document but it failed.</p> </li> <li> <p>FAILED – The document failed to be ingested.</p> </li> <li> <p>NOT_FOUND – The document wasn't found.</p> </li> <li> <p>IGNORED – The document was ignored during ingestion.</p> </li> <li> <p>DELETING – You submitted the delete job containing the document.</p> </li> <li> <p>DELETE_IN_PROGRESS – The document is being deleted.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10975,6 +10992,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "OPENSEARCH_MANAGED_CLUSTER"
+                    }
+                },
+                "S3_VECTORS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S3_VECTORS"
                     }
                 }
             }
@@ -12526,7 +12549,7 @@
                 "continueCondition": {
                     "target": "com.amazonaws.bedrockagent#FlowCondition",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the condition that determines when the flow exits the DoWhile loop. The loop\n            executes until this condition evaluates to true.</p>",
+                        "smithy.api#documentation": "<p>Specifies the condition that determines when the flow exits the DoWhile loop. The loop executes until this condition evaluates to true.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12534,7 +12557,7 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#default": 10,
-                        "smithy.api#documentation": "<p>Specifies the maximum number of times the DoWhile loop can iterate before the flow\n            exits the loop.</p>",
+                        "smithy.api#documentation": "<p>Specifies the maximum number of times the DoWhile loop can iterate before the flow exits the loop.</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 1000
@@ -12558,7 +12581,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains configurations for the nodes of a DoWhile loop in your flow.</p>\n         <p>A DoWhile loop is made up of the following nodes:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Loop</code> - The container node that holds the loop's flow definition. This node encompasses the entire loop structure.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LoopInput</code> - The entry point node for the loop. This node receives inputs from nodes outside the loop and from previous loop iterations.</p>\n            </li>\n            <li>\n               <p>Body nodes - The processing nodes that execute within each loop iteration.\n                    These can be nodes for handling data in your flow, such as a prompt or Lambda\n                    function nodes. Some node types aren't supported inside a DoWhile loop body. For\n                    more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_LoopIncompatibleNodeTypeFlowValidationDetails.html\">LoopIncompatibleNodeTypeFlowValidationDetails</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LoopController</code> - The node that evaluates whether the loop should continue or exit based on a condition.</p>\n            </li>\n         </ul>\n         <p>These nodes work together to create a loop that runs at least once and continues until a specified condition is met or a maximum number of iterations is reached.</p>"
+                "smithy.api#documentation": "<p>Contains configurations for the nodes of a DoWhile loop in your flow.</p> <p>A DoWhile loop is made up of the following nodes:</p> <ul> <li> <p> <code>Loop</code> - The container node that holds the loop's flow definition. This node encompasses the entire loop structure.</p> </li> <li> <p> <code>LoopInput</code> - The entry point node for the loop. This node receives inputs from nodes outside the loop and from previous loop iterations.</p> </li> <li> <p>Body nodes - The processing nodes that execute within each loop iteration. These can be nodes for handling data in your flow, such as a prompt or Lambda function nodes. Some node types aren't supported inside a DoWhile loop body. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_LoopIncompatibleNodeTypeFlowValidationDetails.html\">LoopIncompatibleNodeTypeFlowValidationDetails</a>.</p> </li> <li> <p> <code>LoopController</code> - The node that evaluates whether the loop should continue or exit based on a condition.</p> </li> </ul> <p>These nodes work together to create a loop that runs at least once and continues until a specified condition is met or a maximum number of iterations is reached.</p>"
             }
         },
         "com.amazonaws.bedrockagent#LoopIncompatibleNodeTypeFlowValidationDetails": {
@@ -13159,7 +13182,7 @@
                 "textIndexName": {
                     "target": "com.amazonaws.bedrockagent#MongoDbAtlasIndexName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the text search index in the MongoDB collection. This is required for using the hybrid search\n      feature.</p>"
+                        "smithy.api#documentation": "<p>The name of the text search index in the MongoDB collection. This is required for using the hybrid search feature.</p>"
                     }
                 }
             },
@@ -13319,7 +13342,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains details about the storage configuration of the knowledge base in \n      Amazon Neptune Analytics. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-neptune.html\">Create a vector index \n      in Amazon Neptune Analytics</a>.</p>"
+                "smithy.api#documentation": "<p>Contains details about the storage configuration of the knowledge base in Amazon Neptune Analytics. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-neptune.html\">Create a vector index in Amazon Neptune Analytics</a>.</p>"
             }
         },
         "com.amazonaws.bedrockagent#NeptuneAnalyticsFieldMapping": {
@@ -13328,7 +13351,7 @@
                 "textField": {
                     "target": "com.amazonaws.bedrockagent#FieldName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the field in which Amazon Bedrock stores the raw text from your data. The text\n     is split according to the chunking strategy you choose.</p>",
+                        "smithy.api#documentation": "<p>The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -13413,7 +13436,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains details about the Managed Cluster configuration of the knowledge base in Amazon OpenSearch Service. For more information, \n    see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-osm.html\">Create a vector index in OpenSearch Managed Cluster</a>.</p>"
+                "smithy.api#documentation": "<p>Contains details about the Managed Cluster configuration of the knowledge base in Amazon OpenSearch Service. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-osm.html\">Create a vector index in OpenSearch Managed Cluster</a>.</p>"
             }
         },
         "com.amazonaws.bedrockagent#OpenSearchManagedClusterDomainArn": {
@@ -13447,7 +13470,7 @@
                 "textField": {
                     "target": "com.amazonaws.bedrockagent#FieldName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the field in which Amazon Bedrock stores the raw text from your data. The text\n    is split according to the chunking strategy you choose.</p>",
+                        "smithy.api#documentation": "<p>The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -13556,12 +13579,12 @@
                 "lambda": {
                     "target": "com.amazonaws.bedrockagent#LambdaArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The Amazon Resource Name (ARN) of the Lambda function containing the business logic that is carried out upon invoking the action.\n    </p>"
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the Lambda function containing the business logic that is carried out upon invoking the action. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      Contains details about the Lambda function containing the orchestration logic carried out upon invoking the custom orchestration.\n    </p>"
+                "smithy.api#documentation": "<p> Contains details about the Lambda function containing the orchestration logic carried out upon invoking the custom orchestration. </p>"
             }
         },
         "com.amazonaws.bedrockagent#OrchestrationType": {
@@ -13621,7 +13644,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains details about a parameter in a function for an action group.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax\">CreateAgentActionGroup request</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax\">CreateAgentActionGroup response</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax\">UpdateAgentActionGroup request</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax\">UpdateAgentActionGroup response</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax\">GetAgentActionGroup response</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Contains details about a parameter in a function for an action group.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax\">CreateAgentActionGroup request</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax\">CreateAgentActionGroup response</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax\">UpdateAgentActionGroup request</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax\">UpdateAgentActionGroup response</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax\">GetAgentActionGroup response</a> </p> </li> </ul>"
             }
         },
         "com.amazonaws.bedrockagent#ParameterMap": {
@@ -13657,7 +13680,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Settings for parsing document contents. If you exclude this field, the default parser converts the contents of each\n      document into text before splitting it into chunks. Specify the parsing strategy to use in the <code>parsingStrategy</code> field and include the relevant configuration, or omit it to use the Amazon Bedrock default parser. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-advanced-parsing.html\">Parsing options for your data source</a>.</p>\n         <note>\n            <p>If you specify <code>BEDROCK_DATA_AUTOMATION</code> or <code>BEDROCK_FOUNDATION_MODEL</code> and it fails to parse a file, the Amazon Bedrock default parser will be used instead.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Settings for parsing document contents. If you exclude this field, the default parser converts the contents of each document into text before splitting it into chunks. Specify the parsing strategy to use in the <code>parsingStrategy</code> field and include the relevant configuration, or omit it to use the Amazon Bedrock default parser. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-advanced-parsing.html\">Parsing options for your data source</a>.</p> <note> <p>If you specify <code>BEDROCK_DATA_AUTOMATION</code> or <code>BEDROCK_FOUNDATION_MODEL</code> and it fails to parse a file, the Amazon Bedrock default parser will be used instead.</p> </note>"
             }
         },
         "com.amazonaws.bedrockagent#ParsingModality": {
@@ -13725,18 +13748,18 @@
                 "inclusionFilters": {
                     "target": "com.amazonaws.bedrockagent#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of one or more inclusion regular expression patterns to include certain \n            object types that adhere to the pattern. If you specify an inclusion and exclusion \n            filter/pattern and both match a document, the exclusion filter takes precedence \n            and the document isn’t crawled.</p>"
+                        "smithy.api#documentation": "<p>A list of one or more inclusion regular expression patterns to include certain object types that adhere to the pattern. If you specify an inclusion and exclusion filter/pattern and both match a document, the exclusion filter takes precedence and the document isn’t crawled.</p>"
                     }
                 },
                 "exclusionFilters": {
                     "target": "com.amazonaws.bedrockagent#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of one or more exclusion regular expression patterns to exclude certain \n            object types that adhere to the pattern. If you specify an inclusion and exclusion \n            filter/pattern and both match a document, the exclusion filter takes precedence \n            and the document isn’t crawled.</p>"
+                        "smithy.api#documentation": "<p>A list of one or more exclusion regular expression patterns to exclude certain object types that adhere to the pattern. If you specify an inclusion and exclusion filter/pattern and both match a document, the exclusion filter takes precedence and the document isn’t crawled.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The specific filters applied to your data source content. You can filter out or \n            include certain content.</p>"
+                "smithy.api#documentation": "<p>The specific filters applied to your data source content. You can filter out or include certain content.</p>"
             }
         },
         "com.amazonaws.bedrockagent#PatternObjectFilterConfiguration": {
@@ -13745,7 +13768,7 @@
                 "filters": {
                     "target": "com.amazonaws.bedrockagent#PatternObjectFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration of specific filters applied to your data source content. You can \n            filter out or include certain content.</p>",
+                        "smithy.api#documentation": "<p>The configuration of specific filters applied to your data source content. You can filter out or include certain content.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -14096,7 +14119,7 @@
                 "promptState": {
                     "target": "com.amazonaws.bedrockagent#PromptState",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to allow the agent to carry out the step specified in the <code>promptType</code>. If you set this value to <code>DISABLED</code>, the agent skips that step. The default state for each <code>promptType</code> is as follows.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PRE_PROCESSING</code> – <code>DISABLED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ORCHESTRATION</code> – <code>ENABLED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>KNOWLEDGE_BASE_RESPONSE_GENERATION</code> – <code>ENABLED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>POST_PROCESSING</code> – <code>DISABLED</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies whether to allow the agent to carry out the step specified in the <code>promptType</code>. If you set this value to <code>DISABLED</code>, the agent skips that step. The default state for each <code>promptType</code> is as follows.</p> <ul> <li> <p> <code>PRE_PROCESSING</code> – <code>DISABLED</code> </p> </li> <li> <p> <code>ORCHESTRATION</code> – <code>ENABLED</code> </p> </li> <li> <p> <code>KNOWLEDGE_BASE_RESPONSE_GENERATION</code> – <code>ENABLED</code> </p> </li> <li> <p> <code>POST_PROCESSING</code> – <code>DISABLED</code> </p> </li> </ul>"
                     }
                 },
                 "basePromptTemplate": {
@@ -14126,7 +14149,7 @@
                 "additionalModelRequestFields": {
                     "target": "smithy.api#Document",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the Converse or ConverseStream operations support the model,\n                <code>additionalModelRequestFields</code> contains additional inference parameters,\n            beyond the base set of inference parameters in the <code>inferenceConfiguration</code>\n            field. </p>\n         <p>For more information, see <i>Inference request parameters and\n                response fields for foundation models</i> in the Amazon Bedrock user\n            guide.</p>"
+                        "smithy.api#documentation": "<p>If the Converse or ConverseStream operations support the model, <code>additionalModelRequestFields</code> contains additional inference parameters, beyond the base set of inference parameters in the <code>inferenceConfiguration</code> field. </p> <p>For more information, see <i>Inference request parameters and response fields for foundation models</i> in the Amazon Bedrock user guide.</p>"
                     }
                 }
             },
@@ -14565,7 +14588,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about a prompt in your Prompt management tool.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListPrompts.html#API_agent_ListPrompts_ResponseSyntax\">ListPrompts response</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Contains information about a prompt in your Prompt management tool.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListPrompts.html#API_agent_ListPrompts_ResponseSyntax\">ListPrompts response</a> </p> </li> </ul>"
             }
         },
         "com.amazonaws.bedrockagent#PromptTemplateConfiguration": {
@@ -14972,7 +14995,7 @@
                 "customMetadataField": {
                     "target": "com.amazonaws.bedrockagent#ColumnName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provide a name for the universal metadata field where Amazon Bedrock will store any custom metadata from \n      your data source.</p>"
+                        "smithy.api#documentation": "<p>Provide a name for the universal metadata field where Amazon Bedrock will store any custom metadata from your data source.</p>"
                     }
                 }
             },
@@ -15588,7 +15611,7 @@
                 "inclusionPrefixes": {
                     "target": "com.amazonaws.bedrockagent#S3Prefixes",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of S3 prefixes to include certain files or content. For more information, \n            see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html\">Organizing objects using prefixes</a>.</p>"
+                        "smithy.api#documentation": "<p>A list of S3 prefixes to include certain files or content. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html\">Organizing objects using prefixes</a>.</p>"
                     }
                 },
                 "bucketOwnerAccountId": {
@@ -15679,6 +15702,32 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagent#S3VectorsConfiguration": {
+            "type": "structure",
+            "members": {
+                "vectorBucketArn": {
+                    "target": "com.amazonaws.bedrockagent#VectorBucketArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the S3 bucket where vector embeddings are stored. This bucket contains the vector data used by the knowledge base.</p>"
+                    }
+                },
+                "indexArn": {
+                    "target": "com.amazonaws.bedrockagent#IndexArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the vector index used for the knowledge base. This ARN identifies the specific vector index resource within Amazon Bedrock.</p>"
+                    }
+                },
+                "indexName": {
+                    "target": "com.amazonaws.bedrockagent#IndexName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector index used for the knowledge base. This name identifies the vector index within the Amazon Bedrock service.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the storage configuration of the knowledge base for S3 vectors.</p>"
+            }
+        },
         "com.amazonaws.bedrockagent#SalesforceAuthType": {
             "type": "enum",
             "members": {
@@ -15696,12 +15745,12 @@
                 "filterConfiguration": {
                     "target": "com.amazonaws.bedrockagent#CrawlFilterConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration of filtering the Salesforce content. For example, \n            configuring regular expression patterns to include or exclude certain \n            content.</p>"
+                        "smithy.api#documentation": "<p>The configuration of filtering the Salesforce content. For example, configuring regular expression patterns to include or exclude certain content.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration of the Salesforce content. For example, configuring \n            specific types of Salesforce content.</p>"
+                "smithy.api#documentation": "<p>The configuration of the Salesforce content. For example, configuring specific types of Salesforce content.</p>"
             }
         },
         "com.amazonaws.bedrockagent#SalesforceDataSourceConfiguration": {
@@ -15717,7 +15766,7 @@
                 "crawlerConfiguration": {
                     "target": "com.amazonaws.bedrockagent#SalesforceCrawlerConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration of the Salesforce content. For example, configuring \n            specific types of Salesforce content.</p>"
+                        "smithy.api#documentation": "<p>The configuration of the Salesforce content. For example, configuring specific types of Salesforce content.</p>"
                     }
                 }
             },
@@ -15738,14 +15787,14 @@
                 "authType": {
                     "target": "com.amazonaws.bedrockagent#SalesforceAuthType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The supported authentication type to authenticate and connect to your \n            Salesforce instance.</p>",
+                        "smithy.api#documentation": "<p>The supported authentication type to authenticate and connect to your Salesforce instance.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "credentialsSecretArn": {
                     "target": "com.amazonaws.bedrockagent#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name of an Secrets Manager secret that \n            stores your authentication credentials for your Salesforce instance URL. \n            For more information on the key-value pairs that must be included in \n            your secret, depending on your authentication type, see \n            <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/salesforce-data-source-connector.html#configuration-salesforce-connector\">Salesforce connection configuration</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name of an Secrets Manager secret that stores your authentication credentials for your Salesforce instance URL. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/salesforce-data-source-connector.html#configuration-salesforce-connector\">Salesforce connection configuration</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -15771,7 +15820,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The seed or starting point URL. \n            You should be authorized to crawl the URL.</p>"
+                "smithy.api#documentation": "<p>The seed or starting point URL. You should be authorized to crawl the URL.</p>"
             }
         },
         "com.amazonaws.bedrockagent#SeedUrls": {
@@ -15823,7 +15872,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Settings for semantic document chunking for a data source. Semantic chunking splits\n    a document into into smaller documents based on groups of similar content derived from the text\n    with natural language processing.</p>\n         <p>With semantic chunking, each sentence is compared to the next to determine how similar they are.\n    You specify a threshold in the form of a percentile, where adjacent sentences that are less similar than\n    that percentage of sentence pairs are divided into separate chunks. For example, if you set the threshold to \n    90, then the 10 percent of sentence pairs that are least similar are split. So if you have 101 sentences,\n    100 sentence pairs are compared, and the 10 with the least similarity are split, creating 11 chunks. These\n    chunks are further split if they exceed the max token size.</p>\n         <p>You must also specify a buffer size, which determines whether sentences are compared in isolation, or\n    within a moving context window that includes the previous and following sentence. For example, if you set\n    the buffer size to <code>1</code>, the embedding for sentence 10 is derived from sentences 9, 10, and 11\n    combined.</p>"
+                "smithy.api#documentation": "<p>Settings for semantic document chunking for a data source. Semantic chunking splits a document into into smaller documents based on groups of similar content derived from the text with natural language processing.</p> <p>With semantic chunking, each sentence is compared to the next to determine how similar they are. You specify a threshold in the form of a percentile, where adjacent sentences that are less similar than that percentage of sentence pairs are divided into separate chunks. For example, if you set the threshold to 90, then the 10 percent of sentence pairs that are least similar are split. So if you have 101 sentences, 100 sentence pairs are compared, and the 10 with the least similarity are split, creating 11 chunks. These chunks are further split if they exceed the max token size.</p> <p>You must also specify a buffer size, which determines whether sentences are compared in isolation, or within a moving context window that includes the previous and following sentence. For example, if you set the buffer size to <code>1</code>, the embedding for sentence 10 is derived from sentences 9, 10, and 11 combined.</p>"
             }
         },
         "com.amazonaws.bedrockagent#ServerSideEncryptionConfiguration": {
@@ -15900,12 +15949,12 @@
                 "filterConfiguration": {
                     "target": "com.amazonaws.bedrockagent#CrawlFilterConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration of filtering the SharePoint content. For example, \n            configuring regular expression patterns to include or exclude certain content.</p>"
+                        "smithy.api#documentation": "<p>The configuration of filtering the SharePoint content. For example, configuring regular expression patterns to include or exclude certain content.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration of the SharePoint content. For example, configuring \n            specific types of SharePoint content.</p>"
+                "smithy.api#documentation": "<p>The configuration of the SharePoint content. For example, configuring specific types of SharePoint content.</p>"
             }
         },
         "com.amazonaws.bedrockagent#SharePointDataSourceConfiguration": {
@@ -15921,7 +15970,7 @@
                 "crawlerConfiguration": {
                     "target": "com.amazonaws.bedrockagent#SharePointCrawlerConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration of the SharePoint content. For example, configuring \n            specific types of SharePoint content.</p>"
+                        "smithy.api#documentation": "<p>The configuration of the SharePoint content. For example, configuring specific types of SharePoint content.</p>"
                     }
                 }
             },
@@ -15994,14 +16043,14 @@
                 "authType": {
                     "target": "com.amazonaws.bedrockagent#SharePointAuthType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The supported authentication type to authenticate and connect \n            to your SharePoint site/sites.</p>",
+                        "smithy.api#documentation": "<p>The supported authentication type to authenticate and connect to your SharePoint site/sites.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "credentialsSecretArn": {
                     "target": "com.amazonaws.bedrockagent#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name of an Secrets Manager secret that \n            stores your authentication credentials for your SharePoint site/sites. \n            For more information on the key-value pairs that must be included in \n            your secret, depending on your authentication type, see \n            <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/sharepoint-data-source-connector.html#configuration-sharepoint-connector\">SharePoint connection configuration</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name of an Secrets Manager secret that stores your authentication credentials for your SharePoint site/sites. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/sharepoint-data-source-connector.html#configuration-sharepoint-connector\">SharePoint connection configuration</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -16138,7 +16187,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.bedrockagent#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request,\n      Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -16298,7 +16347,7 @@
                 "opensearchManagedClusterConfiguration": {
                     "target": "com.amazonaws.bedrockagent#OpenSearchManagedClusterConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains details about the storage configuration of the knowledge base in OpenSearch Managed\n    Cluster. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-osm.html\">Create \n    a vector index in Amazon OpenSearch Service</a>.</p>"
+                        "smithy.api#documentation": "<p>Contains details about the storage configuration of the knowledge base in OpenSearch Managed Cluster. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-osm.html\">Create a vector index in Amazon OpenSearch Service</a>.</p>"
                     }
                 },
                 "pineconeConfiguration": {
@@ -16328,7 +16377,13 @@
                 "neptuneAnalyticsConfiguration": {
                     "target": "com.amazonaws.bedrockagent#NeptuneAnalyticsConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains details about the Neptune Analytics configuration of the knowledge base in Amazon Neptune. For more information, \n    see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-neptune.html\">Create a\n    vector index in Amazon Neptune Analytics.</a>.</p>"
+                        "smithy.api#documentation": "<p>Contains details about the Neptune Analytics configuration of the knowledge base in Amazon Neptune. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-neptune.html\">Create a vector index in Amazon Neptune Analytics.</a>.</p>"
+                    }
+                },
+                "s3VectorsConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#S3VectorsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings for storing knowledge base data using S3 vectors. This includes vector index information and S3 bucket details for vector storage.</p>"
                     }
                 }
             },
@@ -16554,7 +16609,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associate tags with a resource. For more information, see  <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html\">Tagging resources</a> in the Amazon Bedrock User Guide.</p>",
+                "smithy.api#documentation": "<p>Associate tags with a resource. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html\">Tagging resources</a> in the Amazon Bedrock User Guide.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -16878,7 +16933,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A custom processing step for documents moving through a data source ingestion pipeline. To\n    process documents after they have been converted into chunks, set the step to apply to\n    <code>POST_CHUNKING</code>.</p>"
+                "smithy.api#documentation": "<p>A custom processing step for documents moving through a data source ingestion pipeline. To process documents after they have been converted into chunks, set the step to apply to <code>POST_CHUNKING</code>.</p>"
             }
         },
         "com.amazonaws.bedrockagent#TransformationFunction": {
@@ -17333,13 +17388,13 @@
                 "parentActionGroupSignature": {
                     "target": "com.amazonaws.bedrockagent#ActionGroupSignature",
                     "traits": {
-                        "smithy.api#documentation": "<p>Update the built-in or computer use action for this action group. If you specify a value, you must leave the <code>description</code>, <code>apiSchema</code>, and <code>actionGroupExecutor</code> fields empty for this action group. </p>\n         <ul>\n            <li>\n               <p>To allow your agent to request the user for additional information when trying to complete a task, set this field to <code>AMAZON.UserInput</code>. </p>\n            </li>\n            <li>\n               <p>To allow your agent to generate, run, and troubleshoot code when trying to complete a task, set this field to <code>AMAZON.CodeInterpreter</code>.</p>\n            </li>\n            <li>\n               <p>To allow your agent to use an Anthropic computer use tool, specify one of the following values. </p>\n               <important>\n                  <p>\n            Computer use is a new Anthropic Claude model capability (in beta) available with Anthropic Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only.          \n            When operating computer use functionality, we recommend taking additional security precautions,\n            such as executing computer actions in virtual environments with restricted data access and limited internet connectivity. \n             For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html\">Configure an Amazon Bedrock Agent to complete tasks with computer use tools</a>.\n          </p>\n               </important>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ANTHROPIC.Computer</code> - Gives the agent permission to use the mouse and keyboard and\n              take screenshots.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ANTHROPIC.TextEditor</code> - Gives the agent permission to view, create and edit files.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ANTHROPIC.Bash</code> - Gives the agent permission to run commands in a bash shell.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>During orchestration, if your agent determines that it needs to invoke an API in an action group, but doesn't have enough information to complete the API request, it will invoke this action group instead and return an <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html\">Observation</a> reprompting the user for more information.</p>"
+                        "smithy.api#documentation": "<p>Update the built-in or computer use action for this action group. If you specify a value, you must leave the <code>description</code>, <code>apiSchema</code>, and <code>actionGroupExecutor</code> fields empty for this action group. </p> <ul> <li> <p>To allow your agent to request the user for additional information when trying to complete a task, set this field to <code>AMAZON.UserInput</code>. </p> </li> <li> <p>To allow your agent to generate, run, and troubleshoot code when trying to complete a task, set this field to <code>AMAZON.CodeInterpreter</code>.</p> </li> <li> <p>To allow your agent to use an Anthropic computer use tool, specify one of the following values. </p> <important> <p> Computer use is a new Anthropic Claude model capability (in beta) available with Anthropic Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only. When operating computer use functionality, we recommend taking additional security precautions, such as executing computer actions in virtual environments with restricted data access and limited internet connectivity. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html\">Configure an Amazon Bedrock Agent to complete tasks with computer use tools</a>. </p> </important> <ul> <li> <p> <code>ANTHROPIC.Computer</code> - Gives the agent permission to use the mouse and keyboard and take screenshots.</p> </li> <li> <p> <code>ANTHROPIC.TextEditor</code> - Gives the agent permission to view, create and edit files.</p> </li> <li> <p> <code>ANTHROPIC.Bash</code> - Gives the agent permission to run commands in a bash shell.</p> </li> </ul> </li> </ul> <p>During orchestration, if your agent determines that it needs to invoke an API in an action group, but doesn't have enough information to complete the API request, it will invoke this action group instead and return an <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html\">Observation</a> reprompting the user for more information.</p>"
                     }
                 },
                 "parentActionGroupSignatureParams": {
                     "target": "com.amazonaws.bedrockagent#ActionGroupSignatureParams",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration settings for a computer use action.</p>\n         <important>\n            <p>\n        Computer use is a new Anthropic Claude model capability (in beta) available with Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html\">Configure an Amazon Bedrock Agent to complete tasks with computer use tools</a>.\n      </p>\n         </important>"
+                        "smithy.api#documentation": "<p>The configuration settings for a computer use action.</p> <important> <p> Computer use is a new Anthropic Claude model capability (in beta) available with Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html\">Configure an Amazon Bedrock Agent to complete tasks with computer use tools</a>. </p> </important>"
                     }
                 },
                 "actionGroupExecutor": {
@@ -17471,7 +17526,7 @@
                 "aliasInvocationState": {
                     "target": "com.amazonaws.bedrockagent#AliasInvocationState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The invocation state for the agent alias. To pause the agent alias, set the value to\n        <code>REJECT_INVOCATIONS</code>. To start the agent alias running again, set the value to\n        <code>ACCEPT_INVOCATIONS</code>. Use the <code>GetAgentAlias</code>, or\n        <code>ListAgentAliases</code>, operation to get the invocation state of an agent\n      alias.</p>"
+                        "smithy.api#documentation": "<p>The invocation state for the agent alias. To pause the agent alias, set the value to <code>REJECT_INVOCATIONS</code>. To start the agent alias running again, set the value to <code>ACCEPT_INVOCATIONS</code>. Use the <code>GetAgentAlias</code>, or <code>ListAgentAliases</code>, operation to get the invocation state of an agent alias.</p>"
                     }
                 }
             },
@@ -17740,7 +17795,7 @@
                     "target": "com.amazonaws.bedrockagent#ModelIdentifier",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The identifier for the model that you want to be used for orchestration by the agent you create.</p>\n         <p>The <code>modelId</code> to provide depends on the type of model or throughput that you use:</p>\n         <ul>\n            <li>\n               <p>If you use a base model, specify the model ID or its ARN. For a list of model IDs for base models, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns\">Amazon Bedrock base model IDs (on-demand throughput)</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use an inference profile, specify the inference profile ID or its ARN. For a list of inference profile IDs, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html\">Supported Regions and models for cross-region inference</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a provisioned model, specify the ARN of the Provisioned Throughput. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html\">Run inference using a Provisioned Throughput</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a custom model, first purchase Provisioned Throughput for it. Then specify the ARN of the resulting provisioned model. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html\">Use a custom model in Amazon Bedrock</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use an <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html\">imported model</a>, specify the ARN of the imported model. You can get the model ARN from a successful call to <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateModelImportJob.html\">CreateModelImportJob</a> or from the Imported models page in the Amazon Bedrock console.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The identifier for the model that you want to be used for orchestration by the agent you create.</p> <p>The <code>modelId</code> to provide depends on the type of model or throughput that you use:</p> <ul> <li> <p>If you use a base model, specify the model ID or its ARN. For a list of model IDs for base models, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns\">Amazon Bedrock base model IDs (on-demand throughput)</a> in the Amazon Bedrock User Guide.</p> </li> <li> <p>If you use an inference profile, specify the inference profile ID or its ARN. For a list of inference profile IDs, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html\">Supported Regions and models for cross-region inference</a> in the Amazon Bedrock User Guide.</p> </li> <li> <p>If you use a provisioned model, specify the ARN of the Provisioned Throughput. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html\">Run inference using a Provisioned Throughput</a> in the Amazon Bedrock User Guide.</p> </li> <li> <p>If you use a custom model, first purchase Provisioned Throughput for it. Then specify the ARN of the resulting provisioned model. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html\">Use a custom model in Amazon Bedrock</a> in the Amazon Bedrock User Guide.</p> </li> <li> <p>If you use an <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html\">imported model</a>, specify the ARN of the imported model. You can get the model ARN from a successful call to <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateModelImportJob.html\">CreateModelImportJob</a> or from the Imported models page in the Amazon Bedrock console.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -17753,19 +17808,19 @@
                 "orchestrationType": {
                     "target": "com.amazonaws.bedrockagent#OrchestrationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Specifies the type of orchestration strategy for the agent. This is set to <code>DEFAULT</code> orchestration type, by default.\n    </p>"
+                        "smithy.api#documentation": "<p> Specifies the type of orchestration strategy for the agent. This is set to <code>DEFAULT</code> orchestration type, by default. </p>"
                     }
                 },
                 "customOrchestration": {
                     "target": "com.amazonaws.bedrockagent#CustomOrchestration",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Contains details of the custom orchestration configured for the agent.\n    </p>"
+                        "smithy.api#documentation": "<p> Contains details of the custom orchestration configured for the agent. </p>"
                     }
                 },
                 "idleSessionTTLInSeconds": {
                     "target": "com.amazonaws.bedrockagent#SessionTTL",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of seconds for which Amazon Bedrock keeps information about a user's conversation with the agent.</p>\n         <p>A user interaction remains active for the amount of time specified. If no conversation occurs during this time, the session expires and Amazon Bedrock deletes any data provided before the timeout.</p>"
+                        "smithy.api#documentation": "<p>The number of seconds for which Amazon Bedrock keeps information about a user's conversation with the agent.</p> <p>A user interaction remains active for the amount of time specified. If no conversation occurs during this time, the session expires and Amazon Bedrock deletes any data provided before the timeout.</p>"
                     }
                 },
                 "agentResourceRoleArn": {
@@ -17854,7 +17909,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the configurations for a data source connector.</p>\n         <important>\n            <p>You can't change the <code>chunkingConfiguration</code> after you create the data source connector. Specify the existing <code>chunkingConfiguration</code>.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Updates the configurations for a data source connector.</p> <important> <p>You can't change the <code>chunkingConfiguration</code> after you create the data source connector. Specify the existing <code>chunkingConfiguration</code>.</p> </important>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "PUT",
@@ -18309,7 +18364,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the configuration of a knowledge base with the fields that you specify. Because all fields will be overwritten, you must include the same values for fields that you want to keep the same.</p>\n         <p>You can change the following fields:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>description</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>roleArn</code>\n               </p>\n            </li>\n         </ul>\n         <p>You can't change the <code>knowledgeBaseConfiguration</code> or <code>storageConfiguration</code> fields, so you must specify the same configurations as when you created the knowledge base. You can send a <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetKnowledgeBase.html\">GetKnowledgeBase</a> request and copy the same configurations.</p>",
+                "smithy.api#documentation": "<p>Updates the configuration of a knowledge base with the fields that you specify. Because all fields will be overwritten, you must include the same values for fields that you want to keep the same.</p> <p>You can change the following fields:</p> <ul> <li> <p> <code>name</code> </p> </li> <li> <p> <code>description</code> </p> </li> <li> <p> <code>roleArn</code> </p> </li> </ul> <p>You can't change the <code>knowledgeBaseConfiguration</code> or <code>storageConfiguration</code> fields, so you must specify the same configurations as when you created the knowledge base. You can send a <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetKnowledgeBase.html\">GetKnowledgeBase</a> request and copy the same configurations.</p>",
                 "smithy.api#http": {
                     "code": 202,
                     "method": "PUT",
@@ -18567,7 +18622,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration of web URLs that you want to crawl. \n            You should be authorized to crawl the URLs.</p>"
+                "smithy.api#documentation": "<p>The configuration of web URLs that you want to crawl. You should be authorized to crawl the URLs.</p>"
             }
         },
         "com.amazonaws.bedrockagent#UserAgent": {
@@ -18702,6 +18757,13 @@
                 "target": "com.amazonaws.bedrockagent#ValidationExceptionField"
             }
         },
+        "com.amazonaws.bedrockagent#VectorBucketArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {},
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.bedrockagent#VectorIngestionConfiguration": {
             "type": "structure",
             "members": {
@@ -18726,7 +18788,7 @@
                 "contextEnrichmentConfiguration": {
                     "target": "com.amazonaws.bedrockagent#ContextEnrichmentConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The context enrichment configuration used for ingestion of the data into the vector\n      store.</p>"
+                        "smithy.api#documentation": "<p>The context enrichment configuration used for ingestion of the data into the vector store.</p>"
                     }
                 }
             },
@@ -18881,19 +18943,19 @@
                 "inclusionFilters": {
                     "target": "com.amazonaws.bedrockagent#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of one or more inclusion regular expression patterns to include \n            certain URLs. If you specify an inclusion and exclusion filter/pattern \n            and both match a URL, the exclusion filter takes precedence and the web \n            content of the URL isn’t crawled.</p>"
+                        "smithy.api#documentation": "<p>A list of one or more inclusion regular expression patterns to include certain URLs. If you specify an inclusion and exclusion filter/pattern and both match a URL, the exclusion filter takes precedence and the web content of the URL isn’t crawled.</p>"
                     }
                 },
                 "exclusionFilters": {
                     "target": "com.amazonaws.bedrockagent#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of one or more exclusion regular expression patterns to exclude \n            certain URLs. If you specify an inclusion and exclusion filter/pattern \n            and both match a URL, the exclusion filter takes precedence and the web \n            content of the URL isn’t crawled.</p>"
+                        "smithy.api#documentation": "<p>A list of one or more exclusion regular expression patterns to exclude certain URLs. If you specify an inclusion and exclusion filter/pattern and both match a URL, the exclusion filter takes precedence and the web content of the URL isn’t crawled.</p>"
                     }
                 },
                 "scope": {
                     "target": "com.amazonaws.bedrockagent#WebScopeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The scope of what is crawled for your URLs.</p>\n         <p>You can choose to crawl only web pages that belong to the same host or primary \n            domain. For example, only web pages that contain the seed URL \n            \"https://docs.aws.amazon.com/bedrock/latest/userguide/\" and no other domains. \n            You can choose to include sub domains in addition to the host or primary domain. \n            For example, web pages that contain \"aws.amazon.com\" can also include sub domain \n            \"docs.aws.amazon.com\".</p>"
+                        "smithy.api#documentation": "<p>The scope of what is crawled for your URLs.</p> <p>You can choose to crawl only web pages that belong to the same host or primary domain. For example, only web pages that contain the seed URL \"https://docs.aws.amazon.com/bedrock/latest/userguide/\" and no other domains. You can choose to include sub domains in addition to the host or primary domain. For example, web pages that contain \"aws.amazon.com\" can also include sub domain \"docs.aws.amazon.com\".</p>"
                     }
                 },
                 "userAgent": {
@@ -18905,12 +18967,12 @@
                 "userAgentHeader": {
                     "target": "com.amazonaws.bedrockagent#UserAgentHeader",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string used for identifying the crawler or bot when it accesses a web server. The user agent header value\n        consists of the <code>bedrockbot</code>, UUID, and a user agent suffix for your crawler (if one is provided).\n        By default, it is set to <code>bedrockbot_UUID</code>. You can optionally append a custom \n        suffix to <code>bedrockbot_UUID</code> to allowlist a specific user agent permitted to access your source URLs. </p>"
+                        "smithy.api#documentation": "<p>A string used for identifying the crawler or bot when it accesses a web server. The user agent header value consists of the <code>bedrockbot</code>, UUID, and a user agent suffix for your crawler (if one is provided). By default, it is set to <code>bedrockbot_UUID</code>. You can optionally append a custom suffix to <code>bedrockbot_UUID</code> to allowlist a specific user agent permitted to access your source URLs. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration of web URLs that you want to crawl. \n            You should be authorized to crawl the URLs.</p>"
+                "smithy.api#documentation": "<p>The configuration of web URLs that you want to crawl. You should be authorized to crawl the URLs.</p>"
             }
         },
         "com.amazonaws.bedrockagent#WebCrawlerLimits": {
@@ -18929,7 +18991,7 @@
                 "maxPages": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The max number of web pages crawled from your source URLs, up to 25,000 pages.  If \n            the web pages exceed this limit, the data source sync will fail and no web pages will be ingested.\n        </p>",
+                        "smithy.api#documentation": "<p> The max number of web pages crawled from your source URLs, up to 25,000 pages. If the web pages exceed this limit, the data source sync will fail and no web pages will be ingested. </p>",
                         "smithy.api#range": {
                             "min": 1
                         }
@@ -18937,7 +18999,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The rate limits for the URLs that you want to crawl. \n            You should be authorized to crawl the URLs.</p>"
+                "smithy.api#documentation": "<p>The rate limits for the URLs that you want to crawl. You should be authorized to crawl the URLs.</p>"
             }
         },
         "com.amazonaws.bedrockagent#WebDataSourceConfiguration": {
@@ -18990,7 +19052,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration of the URL/URLs for the web content that you want \n            to crawl. You should be authorized to crawl the URLs.</p>"
+                "smithy.api#documentation": "<p>The configuration of the URL/URLs for the web content that you want to crawl. You should be authorized to crawl the URLs.</p>"
             }
         },
         "com.amazonaws.bedrockagent#WorkgroupArn": {

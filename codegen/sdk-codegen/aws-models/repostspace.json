@@ -34,6 +34,18 @@
         "com.amazonaws.repostspace#AdminId": {
             "type": "string"
         },
+        "com.amazonaws.repostspace#AllowedDomainsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.repostspace#EmailDomain"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.repostspace#Arn": {
             "type": "string",
             "traits": {
@@ -41,6 +53,120 @@
                     "min": 20,
                     "max": 2048
                 }
+            }
+        },
+        "com.amazonaws.repostspace#BatchAddChannelRoleToAccessors": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.repostspace#BatchAddChannelRoleToAccessorsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.repostspace#BatchAddChannelRoleToAccessorsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.repostspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Add role to multiple users or groups in a private re:Post channel.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "BatchAddChannelRoleToAccessors",
+                        "input": {
+                            "spaceId": "SP1234567890abcdefghijkl",
+                            "channelId": "WS1234567890abcdefghijkl",
+                            "accessorIds": [
+                                "12345678-1234-1234-1234-1234567890ab"
+                            ],
+                            "channelRole": "MODERATOR"
+                        },
+                        "output": {
+                            "addedAccessorIds": [
+                                "12345678-1234-1234-1234-1234567890ab"
+                            ],
+                            "errors": []
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/spaces/{spaceId}/channels/{channelId}/roles",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.repostspace#BatchAddChannelRoleToAccessorsInput": {
+            "type": "structure",
+            "members": {
+                "spaceId": {
+                    "target": "com.amazonaws.repostspace#SpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the private re:Post.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "channelId": {
+                    "target": "com.amazonaws.repostspace#ChannelId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the private re:Post channel.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "accessorIds": {
+                    "target": "com.amazonaws.repostspace#AccessorIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user or group identifiers to add the role to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "channelRole": {
+                    "target": "com.amazonaws.repostspace#ChannelRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel role to add to the users or groups.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.repostspace#BatchAddChannelRoleToAccessorsOutput": {
+            "type": "structure",
+            "members": {
+                "addedAccessorIds": {
+                    "target": "com.amazonaws.repostspace#AccessorIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of successfully updated identifiers.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errors": {
+                    "target": "com.amazonaws.repostspace#BatchErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of errors that occurred when roles were added.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.repostspace#BatchAddRole": {
@@ -69,7 +195,25 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Add role to multiple users or groups in a private re:Post.</p>",
+                "smithy.api#documentation": "<p>Add a role to multiple users or groups in a private re:Post.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "BatchAddRole",
+                        "input": {
+                            "spaceId": "SP1234567890abcdefghijkl",
+                            "accessorIds": [
+                                "12345678-1234-1234-1234-1234567890ab"
+                            ],
+                            "role": "EXPERT"
+                        },
+                        "output": {
+                            "addedAccessorIds": [
+                                "12345678-1234-1234-1234-1234567890ab"
+                            ],
+                            "errors": []
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/spaces/{spaceId}/roles",
@@ -165,6 +309,120 @@
                 "target": "com.amazonaws.repostspace#BatchError"
             }
         },
+        "com.amazonaws.repostspace#BatchRemoveChannelRoleFromAccessors": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.repostspace#BatchRemoveChannelRoleFromAccessorsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.repostspace#BatchRemoveChannelRoleFromAccessorsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.repostspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Remove a role from multiple users or groups in a private re:Post channel.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "BatchRemoveChannelRoleFromAccessors",
+                        "input": {
+                            "spaceId": "SP1234567890abcdefghijkl",
+                            "channelId": "WS1234567890abcdefghijkl",
+                            "accessorIds": [
+                                "12345678-1234-1234-1234-1234567890ab"
+                            ],
+                            "channelRole": "MODERATOR"
+                        },
+                        "output": {
+                            "removedAccessorIds": [
+                                "12345678-1234-1234-1234-1234567890ab"
+                            ],
+                            "errors": []
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/spaces/{spaceId}/channels/{channelId}/roles",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.repostspace#BatchRemoveChannelRoleFromAccessorsInput": {
+            "type": "structure",
+            "members": {
+                "spaceId": {
+                    "target": "com.amazonaws.repostspace#SpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the private re:Post.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "channelId": {
+                    "target": "com.amazonaws.repostspace#ChannelId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the private re:Post channel.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "accessorIds": {
+                    "target": "com.amazonaws.repostspace#AccessorIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The users or groups identifiers to remove the role from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "channelRole": {
+                    "target": "com.amazonaws.repostspace#ChannelRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel role to remove from the users or groups.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.repostspace#BatchRemoveChannelRoleFromAccessorsOutput": {
+            "type": "structure",
+            "members": {
+                "removedAccessorIds": {
+                    "target": "com.amazonaws.repostspace#AccessorIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of successfully updated identifiers.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errors": {
+                    "target": "com.amazonaws.repostspace#BatchErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of errors that occurred when roles were removed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.repostspace#BatchRemoveRole": {
             "type": "operation",
             "input": {
@@ -191,7 +449,25 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Remove role from multiple users or groups in a private re:Post.</p>",
+                "smithy.api#documentation": "<p>Remove a role from multiple users or groups in a private re:Post.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "BatchRemoveRole",
+                        "input": {
+                            "spaceId": "SP1234567890abcdefghijkl",
+                            "accessorIds": [
+                                "12345678-1234-1234-1234-1234567890ab"
+                            ],
+                            "role": "EXPERT"
+                        },
+                        "output": {
+                            "removedAccessorIds": [
+                                "12345678-1234-1234-1234-1234567890ab"
+                            ],
+                            "errors": []
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/spaces/{spaceId}/roles",
@@ -252,6 +528,197 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.repostspace#ChannelData": {
+            "type": "structure",
+            "members": {
+                "spaceId": {
+                    "target": "com.amazonaws.repostspace#SpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the private re:Post.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "channelId": {
+                    "target": "com.amazonaws.repostspace#ChannelId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the private re:Post channel.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "channelName": {
+                    "target": "com.amazonaws.repostspace#ChannelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the channel. This must be unique per private re:Post.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "channelDescription": {
+                    "target": "com.amazonaws.repostspace#ChannelDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description for the channel. This is used only to help you identify this channel.</p>"
+                    }
+                },
+                "createDateTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when the channel was created.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "deleteDateTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when the channel was deleted.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "channelStatus": {
+                    "target": "com.amazonaws.repostspace#ChannelStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status pf the channel.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "userCount": {
+                    "target": "com.amazonaws.repostspace#UserCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of users that are part of the channel.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "groupCount": {
+                    "target": "com.amazonaws.repostspace#GroupCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of groups that are part of the channel.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains some information about a channel in a private re:Post.</p>"
+            }
+        },
+        "com.amazonaws.repostspace#ChannelDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.repostspace#ChannelId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 24,
+                    "max": 24
+                }
+            }
+        },
+        "com.amazonaws.repostspace#ChannelName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.repostspace#ChannelRole": {
+            "type": "enum",
+            "members": {
+                "ASKER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASKER"
+                    }
+                },
+                "EXPERT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPERT"
+                    }
+                },
+                "MODERATOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MODERATOR"
+                    }
+                },
+                "SUPPORTREQUESTOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUPPORTREQUESTOR"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.repostspace#ChannelRoleList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.repostspace#ChannelRole"
+            }
+        },
+        "com.amazonaws.repostspace#ChannelRoles": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.repostspace#AccessorId"
+            },
+            "value": {
+                "target": "com.amazonaws.repostspace#ChannelRoleList"
+            }
+        },
+        "com.amazonaws.repostspace#ChannelStatus": {
+            "type": "enum",
+            "members": {
+                "CREATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATED"
+                    }
+                },
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "CREATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_FAILED"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "DELETE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.repostspace#ChannelsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.repostspace#ChannelData"
+            }
+        },
         "com.amazonaws.repostspace#ClientId": {
             "type": "string"
         },
@@ -304,6 +771,104 @@
         },
         "com.amazonaws.repostspace#ContentSize": {
             "type": "long"
+        },
+        "com.amazonaws.repostspace#CreateChannel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.repostspace#CreateChannelInput"
+            },
+            "output": {
+                "target": "com.amazonaws.repostspace#CreateChannelOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.repostspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a channel in an AWS re:Post Private private re:Post.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "CreateChannel",
+                        "input": {
+                            "spaceId": "SP1234567890abcdefghijkl",
+                            "channelName": "My First Channel",
+                            "channelDescription": "Useful channel description"
+                        },
+                        "output": {
+                            "channelId": "WS1234567890abcdefghijkl"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/spaces/{spaceId}/channels",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.repostspace#CreateChannelInput": {
+            "type": "structure",
+            "members": {
+                "spaceId": {
+                    "target": "com.amazonaws.repostspace#SpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the private re:Post.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "channelName": {
+                    "target": "com.amazonaws.repostspace#ChannelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the channel. This must be unique per private re:Post.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "channelDescription": {
+                    "target": "com.amazonaws.repostspace#ChannelDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description for the channel. This is used only to help you identify this channel.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.repostspace#CreateChannelOutput": {
+            "type": "structure",
+            "members": {
+                "channelId": {
+                    "target": "com.amazonaws.repostspace#ChannelId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the private re:Post channel.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.repostspace#CreateSpace": {
             "type": "operation",
@@ -392,6 +957,12 @@
                     "target": "com.amazonaws.repostspace#Arn",
                     "traits": {
                         "smithy.api#documentation": "<p>The IAM role that grants permissions to the private re:Post to convert unanswered questions into AWS support tickets.</p>"
+                    }
+                },
+                "supportedEmailDomains": {
+                    "target": "com.amazonaws.repostspace#SupportedEmailDomainsParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
                     }
                 }
             },
@@ -524,11 +1095,281 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.repostspace#EmailDomain": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.repostspace#ErrorCode": {
             "type": "integer"
         },
         "com.amazonaws.repostspace#ErrorMessage": {
             "type": "string"
+        },
+        "com.amazonaws.repostspace#FeatureEnableParameter": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.repostspace#FeatureEnableStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "NOT_ALLOWED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_ALLOWED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.repostspace#GetChannel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.repostspace#GetChannelInput"
+            },
+            "output": {
+                "target": "com.amazonaws.repostspace#GetChannelOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.repostspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Displays information about a channel in a private re:Post.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "GetChannel",
+                        "input": {
+                            "spaceId": "SP1234567890abcdefghijkl",
+                            "channelId": "WS1234567890abcdefghijkl"
+                        },
+                        "output": {
+                            "spaceId": "SP1234567890abcdefghijkl",
+                            "channelId": "WS1234567890abcdefghijkl",
+                            "channelName": "My First Channel",
+                            "channelDescription": "Useful channel description",
+                            "createDateTime": "2025-02-13T18:49:13.713Z",
+                            "channelRoles": {
+                                "12345678-1234-1234-1234-1234567890ab": [
+                                    "ASKER"
+                                ]
+                            },
+                            "channelStatus": "CREATED"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/spaces/{spaceId}/channels/{channelId}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {},
+                "smithy.waiters#waitable": {
+                    "ChannelCreated": {
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "channelStatus",
+                                        "expected": "CREATED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "channelStatus",
+                                        "expected": "CREATE_FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "output": {
+                                        "path": "channelStatus",
+                                        "expected": "CREATING",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "ChannelDeleted": {
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "errorType": "ResourceNotFoundException"
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "channelStatus",
+                                        "expected": "DELETED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "channelStatus",
+                                        "expected": "DELETE_FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "output": {
+                                        "path": "channelStatus",
+                                        "expected": "DELETING",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "com.amazonaws.repostspace#GetChannelInput": {
+            "type": "structure",
+            "members": {
+                "spaceId": {
+                    "target": "com.amazonaws.repostspace#SpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the private re:Post.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "channelId": {
+                    "target": "com.amazonaws.repostspace#ChannelId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the private re:Post channel.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.repostspace#GetChannelOutput": {
+            "type": "structure",
+            "members": {
+                "spaceId": {
+                    "target": "com.amazonaws.repostspace#SpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the private re:Post.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "channelId": {
+                    "target": "com.amazonaws.repostspace#ChannelId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the private re:Post channel.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "channelName": {
+                    "target": "com.amazonaws.repostspace#ChannelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the channel. This must be unique per private re:Post.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "channelDescription": {
+                    "target": "com.amazonaws.repostspace#ChannelDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description for the channel. This is used only to help you identify this channel.</p>"
+                    }
+                },
+                "createDateTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when the channel was created.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "deleteDateTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when the channel was deleted.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "channelRoles": {
+                    "target": "com.amazonaws.repostspace#ChannelRoles",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel roles associated to the users and groups of the channel.</p>"
+                    }
+                },
+                "channelStatus": {
+                    "target": "com.amazonaws.repostspace#ChannelStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status pf the channel.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.repostspace#GetSpace": {
             "type": "operation",
@@ -562,7 +1403,87 @@
                     "uri": "/spaces/{spaceId}",
                     "code": 200
                 },
-                "smithy.api#readonly": {}
+                "smithy.api#readonly": {},
+                "smithy.waiters#waitable": {
+                    "SpaceCreated": {
+                        "minDelay": 300,
+                        "maxDelay": 7200,
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "CREATED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "CREATE_FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "CREATING",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "SpaceDeleted": {
+                        "minDelay": 300,
+                        "maxDelay": 7200,
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "errorType": "ResourceNotFoundException"
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "DELETED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "DELETE_FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "DELETING",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
             }
         },
         "com.amazonaws.repostspace#GetSpaceInput": {
@@ -624,6 +1545,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Identity Center identifier for the Application Instance.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "identityStoreId": {
+                    "target": "com.amazonaws.repostspace#IdentityStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "applicationArn": {
+                    "target": "com.amazonaws.repostspace#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
                     }
                 },
                 "description": {
@@ -729,6 +1662,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The content size of the private re:Post.</p>"
                     }
+                },
+                "supportedEmailDomains": {
+                    "target": "com.amazonaws.repostspace#SupportedEmailDomainsStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
                 }
             },
             "traits": {
@@ -740,6 +1679,12 @@
             "member": {
                 "target": "com.amazonaws.repostspace#AdminId"
             }
+        },
+        "com.amazonaws.repostspace#GroupCount": {
+            "type": "integer"
+        },
+        "com.amazonaws.repostspace#IdentityStoreId": {
+            "type": "string"
         },
         "com.amazonaws.repostspace#InternalServerException": {
             "type": "structure",
@@ -787,6 +1732,138 @@
         },
         "com.amazonaws.repostspace#KMSKey": {
             "type": "string"
+        },
+        "com.amazonaws.repostspace#ListChannels": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.repostspace#ListChannelsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.repostspace#ListChannelsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.repostspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the list of channel within a private re:Post with some information about each channel.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "ListChannels",
+                        "input": {
+                            "spaceId": "SP1234567890abcdefghijkl"
+                        },
+                        "output": {
+                            "channels": [
+                                {
+                                    "spaceId": "SP1234567890abcdefghijkl",
+                                    "channelId": "WS1234567890abcdefghijkl",
+                                    "channelName": "My First Channel",
+                                    "channelDescription": "Useful channel description",
+                                    "createDateTime": "2020-02-20T20:20:20.420Z",
+                                    "channelStatus": "CREATED",
+                                    "userCount": 5,
+                                    "groupCount": 1
+                                },
+                                {
+                                    "spaceId": "SP1234567890abcdefghijkl",
+                                    "channelId": "WSabcdefghijkl1234567890",
+                                    "channelName": "Better Channel",
+                                    "channelDescription": "Better channel description",
+                                    "createDateTime": "2025-06-20T14:43:34.201Z",
+                                    "channelStatus": "CREATED",
+                                    "userCount": 1,
+                                    "groupCount": 0
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/spaces/{spaceId}/channels",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "channels"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.repostspace#ListChannelsInput": {
+            "type": "structure",
+            "members": {
+                "spaceId": {
+                    "target": "com.amazonaws.repostspace#SpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the private re:Post.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of channel to return. You receive this token from a previous ListChannels operation.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.repostspace#ListChannelsLimit",
+                    "traits": {
+                        "smithy.api#default": 10,
+                        "smithy.api#documentation": "<p>The maximum number of channels to include in the results.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.repostspace#ListChannelsLimit": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 10,
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.repostspace#ListChannelsOutput": {
+            "type": "structure",
+            "members": {
+                "channels": {
+                    "target": "com.amazonaws.repostspace#ChannelsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of structures that contain some information about the channels in the private re:Post.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that you use when you request the next set of channels.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.repostspace#ListSpaces": {
             "type": "operation",
@@ -1017,10 +2094,19 @@
             "version": "2022-05-13",
             "operations": [
                 {
+                    "target": "com.amazonaws.repostspace#BatchAddChannelRoleToAccessors"
+                },
+                {
                     "target": "com.amazonaws.repostspace#BatchAddRole"
                 },
                 {
+                    "target": "com.amazonaws.repostspace#BatchRemoveChannelRoleFromAccessors"
+                },
+                {
                     "target": "com.amazonaws.repostspace#BatchRemoveRole"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#CreateChannel"
                 },
                 {
                     "target": "com.amazonaws.repostspace#CreateSpace"
@@ -1032,7 +2118,13 @@
                     "target": "com.amazonaws.repostspace#DeregisterAdmin"
                 },
                 {
+                    "target": "com.amazonaws.repostspace#GetChannel"
+                },
+                {
                     "target": "com.amazonaws.repostspace#GetSpace"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ListChannels"
                 },
                 {
                     "target": "com.amazonaws.repostspace#ListSpaces"
@@ -1051,6 +2143,9 @@
                 },
                 {
                     "target": "com.amazonaws.repostspace#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#UpdateChannel"
                 },
                 {
                     "target": "com.amazonaws.repostspace#UpdateSpace"
@@ -2055,6 +3150,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The content size of the private re:Post.</p>"
                     }
+                },
+                "supportedEmailDomains": {
+                    "target": "com.amazonaws.repostspace#SupportedEmailDomainsStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
                 }
             },
             "traits": {
@@ -2101,6 +3202,46 @@
         },
         "com.amazonaws.repostspace#StorageLimit": {
             "type": "long"
+        },
+        "com.amazonaws.repostspace#SupportedEmailDomainsParameters": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "com.amazonaws.repostspace#FeatureEnableParameter",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "allowedDomains": {
+                    "target": "com.amazonaws.repostspace#AllowedDomainsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>"
+            }
+        },
+        "com.amazonaws.repostspace#SupportedEmailDomainsStatus": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "com.amazonaws.repostspace#FeatureEnableStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "allowedDomains": {
+                    "target": "com.amazonaws.repostspace#AllowedDomainsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>"
+            }
         },
         "com.amazonaws.repostspace#TagKey": {
             "type": "string",
@@ -2150,7 +3291,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates tags with an AWS re:Post Private resource. Currently, the only resource that can be tagged is the private re:Post.  If you specify a new tag key for the resource, the tag is appended to the list of tags that are associated with the resource. If you specify a tag key that’s already associated with the resource, the new tag value that you specify replaces the previous value for that tag.</p>",
+                "smithy.api#documentation": "<p>Associates tags with an AWS re:Post Private resource. Currently, the only resource that can be tagged is the private re:Post. If you specify a new tag key for the resource, the tag is appended to the list of tags that are associated with the resource. If you specify a tag key that’s already associated with the resource, the new tag value that you specify replaces the previous value for that tag.</p>",
                 "smithy.api#http": {
                     "uri": "/tags/{resourceArn}",
                     "method": "POST"
@@ -2330,6 +3471,99 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.repostspace#UpdateChannel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.repostspace#UpdateChannelInput"
+            },
+            "output": {
+                "target": "com.amazonaws.repostspace#UpdateChannelOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.repostspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies an existing channel.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "UpdateChannel",
+                        "input": {
+                            "spaceId": "SP1234567890abcdefghijkl",
+                            "channelId": "WS1234567890abcdefghijkl",
+                            "channelName": "Better Channel",
+                            "channelDescription": "Better channel description"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/spaces/{spaceId}/channels/{channelId}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.repostspace#UpdateChannelInput": {
+            "type": "structure",
+            "members": {
+                "spaceId": {
+                    "target": "com.amazonaws.repostspace#SpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the private re:Post.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "channelId": {
+                    "target": "com.amazonaws.repostspace#ChannelId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the private re:Post channel.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "channelName": {
+                    "target": "com.amazonaws.repostspace#ChannelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the channel. This must be unique per private re:Post.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "channelDescription": {
+                    "target": "com.amazonaws.repostspace#ChannelDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description for the channel. This is used only to help you identify this channel.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.repostspace#UpdateChannelOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.repostspace#UpdateSpace": {
             "type": "operation",
             "input": {
@@ -2395,6 +3629,12 @@
                     "target": "com.amazonaws.repostspace#Arn",
                     "traits": {
                         "smithy.api#documentation": "<p>The IAM role that grants permissions to the private re:Post to convert unanswered questions into AWS support tickets.</p>"
+                    }
+                },
+                "supportedEmailDomains": {
+                    "target": "com.amazonaws.repostspace#SupportedEmailDomainsParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
                     }
                 }
             },

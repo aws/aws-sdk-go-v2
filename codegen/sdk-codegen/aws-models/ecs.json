@@ -44,6 +44,38 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.ecs#AdvancedConfiguration": {
+            "type": "structure",
+            "members": {
+                "alternateTargetGroupArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the alternate target group for Amazon ECS blue/green deployments. </p>"
+                    }
+                },
+                "productionListenerRule": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the production listener rule for routing production traffic.</p>"
+                    }
+                },
+                "testListenerRule": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the test listener rule or listener for routing test traffic.</p>"
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that grants Amazon ECS permission to call the Elastic Load Balancing APIs for you.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The advanced settings for a load balancer used in blue/green deployments. Specify the\n         alternate target group, listener rules, and IAM role required for traffic shifting during\n         blue/green deployments. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/blue-green-deployment-implementation.html\">Required resources for Amazon ECS\n            blue/green deployments</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+            }
+        },
         "com.amazonaws.ecs#AgentUpdateStatus": {
             "type": "enum",
             "members": {
@@ -3239,7 +3271,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Runs and maintains your desired number of tasks from a specified task definition. If\n\t\t\tthe number of tasks running in a service drops below the <code>desiredCount</code>,\n\t\t\tAmazon ECS runs another copy of the task in the specified cluster. To update an existing\n\t\t\tservice, use <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html\">UpdateService</a>.</p>\n         <note>\n            <p>On March 21, 2024, a change was made to resolve the task definition revision before authorization. When a task definition revision is not specified, authorization will occur using the latest revision of a task definition.</p>\n         </note>\n         <note>\n            <p>Amazon Elastic Inference (EI) is no longer available to customers.</p>\n         </note>\n         <p>In addition to maintaining the desired count of tasks in your service, you can\n\t\t\toptionally run your service behind one or more load balancers. The load balancers\n\t\t\tdistribute traffic across the tasks that are associated with the service. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html\">Service load balancing</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>You can attach Amazon EBS volumes to Amazon ECS tasks by configuring the volume when creating or\n\t\t\tupdating a service. <code>volumeConfigurations</code> is only supported for REPLICA\n\t\t\tservice and not DAEMON service. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types\">Amazon EBS volumes</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>Tasks for services that don't use a load balancer are considered healthy if they're in\n\t\t\tthe <code>RUNNING</code> state. Tasks for services that use a load balancer are\n\t\t\tconsidered healthy if they're in the <code>RUNNING</code> state and are reported as\n\t\t\thealthy by the load balancer.</p>\n         <p>There are two service scheduler strategies available:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>REPLICA</code> - The replica scheduling strategy places and\n\t\t\t\t\tmaintains your desired number of tasks across your cluster. By default, the\n\t\t\t\t\tservice scheduler spreads tasks across Availability Zones. You can use task\n\t\t\t\t\tplacement strategies and constraints to customize task placement decisions. For\n\t\t\t\t\tmore information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html\">Service scheduler concepts</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DAEMON</code> - The daemon scheduling strategy deploys exactly one\n\t\t\t\t\ttask on each active container instance that meets all of the task placement\n\t\t\t\t\tconstraints that you specify in your cluster. The service scheduler also\n\t\t\t\t\tevaluates the task placement constraints for running tasks. It also stops tasks\n\t\t\t\t\tthat don't meet the placement constraints. When using this strategy, you don't\n\t\t\t\t\tneed to specify a desired number of tasks, a task placement strategy, or use\n\t\t\t\t\tService Auto Scaling policies. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html\">Service scheduler concepts</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n            </li>\n         </ul>\n         <p>You can optionally specify a deployment configuration for your service. The deployment\n\t\t\tis initiated by changing properties. For example, the deployment might be initiated by\n\t\t\tthe task definition or by your desired count of a service. You can use <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html\">UpdateService</a>. The default value for a replica service for\n\t\t\t\t<code>minimumHealthyPercent</code> is 100%. The default value for a daemon service\n\t\t\tfor <code>minimumHealthyPercent</code> is 0%.</p>\n         <p>If a service uses the <code>ECS</code> deployment controller, the minimum healthy\n\t\t\tpercent represents a lower limit on the number of tasks in a service that must remain in\n\t\t\tthe <code>RUNNING</code> state during a deployment. Specifically, it represents it as a\n\t\t\tpercentage of your desired number of tasks (rounded up to the nearest integer). This\n\t\t\thappens when any of your container instances are in the <code>DRAINING</code> state if\n\t\t\tthe service contains tasks using the EC2 launch type. Using this\n\t\t\tparameter, you can deploy without using additional cluster capacity. For example, if you\n\t\t\tset your service to have desired number of four tasks and a minimum healthy percent of\n\t\t\t50%, the scheduler might stop two existing tasks to free up cluster capacity before\n\t\t\tstarting two new tasks. If they're in the <code>RUNNING</code> state, tasks for services\n\t\t\tthat don't use a load balancer are considered healthy . If they're in the\n\t\t\t\t<code>RUNNING</code> state and reported as healthy by the load balancer, tasks for\n\t\t\tservices that <i>do</i> use a load balancer are considered healthy . The\n\t\t\tdefault value for minimum healthy percent is 100%.</p>\n         <p>If a service uses the <code>ECS</code> deployment controller, the <b>maximum percent</b> parameter represents an upper limit on the\n\t\t\tnumber of tasks in a service that are allowed in the <code>RUNNING</code> or\n\t\t\t\t<code>PENDING</code> state during a deployment. Specifically, it represents it as a\n\t\t\tpercentage of the desired number of tasks (rounded down to the nearest integer). This\n\t\t\thappens when any of your container instances are in the <code>DRAINING</code> state if\n\t\t\tthe service contains tasks using the EC2 launch type. Using this\n\t\t\tparameter, you can define the deployment batch size. For example, if your service has a\n\t\t\tdesired number of four tasks and a maximum percent value of 200%, the scheduler may\n\t\t\tstart four new tasks before stopping the four older tasks (provided that the cluster\n\t\t\tresources required to do this are available). The default value for maximum percent is\n\t\t\t200%.</p>\n         <p>If a service uses either the <code>CODE_DEPLOY</code> or <code>EXTERNAL</code>\n\t\t\tdeployment controller types and tasks that use the EC2 launch type, the\n\t\t\t\t<b>minimum healthy percent</b> and <b>maximum percent</b> values are used only to define the lower and upper limit\n\t\t\ton the number of the tasks in the service that remain in the <code>RUNNING</code> state.\n\t\t\tThis is while the container instances are in the <code>DRAINING</code> state. If the\n\t\t\ttasks in the service use the Fargate launch type, the minimum healthy\n\t\t\tpercent and maximum percent values aren't used. This is the case even if they're\n\t\t\tcurrently visible when describing your service.</p>\n         <p>When creating a service that uses the <code>EXTERNAL</code> deployment controller, you\n\t\t\tcan specify only parameters that aren't controlled at the task set level. The only\n\t\t\trequired parameter is the service name. You control your services using the <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateTaskSet.html\">CreateTaskSet</a>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html\">Amazon ECS deployment types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>When the service scheduler launches new tasks, it determines task placement. For\n\t\t\tinformation about task placement and task placement strategies, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement.html\">Amazon ECS\n\t\t\t\ttask placement</a> in the <i>Amazon Elastic Container Service Developer Guide</i>\n         </p>",
+                "smithy.api#documentation": "<p>Runs and maintains your desired number of tasks from a specified task definition. If\n\t\t\tthe number of tasks running in a service drops below the <code>desiredCount</code>,\n\t\t\tAmazon ECS runs another copy of the task in the specified cluster. To update an existing\n\t\t\tservice, use <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html\">UpdateService</a>.</p>\n         <note>\n            <p>On March 21, 2024, a change was made to resolve the task definition revision before authorization. When a task definition revision is not specified, authorization will occur using the latest revision of a task definition.</p>\n         </note>\n         <note>\n            <p>Amazon Elastic Inference (EI) is no longer available to customers.</p>\n         </note>\n         <p>In addition to maintaining the desired count of tasks in your service, you can\n\t\t\toptionally run your service behind one or more load balancers. The load balancers\n\t\t\tdistribute traffic across the tasks that are associated with the service. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html\">Service load balancing</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>You can attach Amazon EBS volumes to Amazon ECS tasks by configuring the volume when creating or\n\t\t\tupdating a service. <code>volumeConfigurations</code> is only supported for REPLICA\n\t\t\tservice and not DAEMON service. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types\">Amazon EBS volumes</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>Tasks for services that don't use a load balancer are considered healthy if they're in\n\t\t\tthe <code>RUNNING</code> state. Tasks for services that use a load balancer are\n\t\t\tconsidered healthy if they're in the <code>RUNNING</code> state and are reported as\n\t\t\thealthy by the load balancer.</p>\n         <p>There are two service scheduler strategies available:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>REPLICA</code> - The replica scheduling strategy places and\n\t\t\t\t\tmaintains your desired number of tasks across your cluster. By default, the\n\t\t\t\t\tservice scheduler spreads tasks across Availability Zones. You can use task\n\t\t\t\t\tplacement strategies and constraints to customize task placement decisions. For\n\t\t\t\t\tmore information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html\">Service scheduler concepts</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DAEMON</code> - The daemon scheduling strategy deploys exactly one\n\t\t\t\t\ttask on each active container instance that meets all of the task placement\n\t\t\t\t\tconstraints that you specify in your cluster. The service scheduler also\n\t\t\t\t\tevaluates the task placement constraints for running tasks. It also stops tasks\n\t\t\t\t\tthat don't meet the placement constraints. When using this strategy, you don't\n\t\t\t\t\tneed to specify a desired number of tasks, a task placement strategy, or use\n\t\t\t\t\tService Auto Scaling policies. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html\">Amazon ECS services</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n            </li>\n         </ul>\n         <p>The deployment controller is the mechanism that determines how tasks are deployed for\n\t\t\tyour service. The valid options are:</p>\n         <ul>\n            <li>\n               <p>ECS</p>\n               <p>When you create a service which uses the <code>ECS</code> deployment controller, you can choose between the following deployment strategies:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ROLLING</code>: When you create a service which uses the <i>rolling update</i>\n\t\t\t\t\t\t\t(<code>ROLLING</code>) deployment strategy, the Amazon ECS service scheduler replaces the\n\t\t\t\t\t\t\tcurrently running tasks with new tasks. The number of tasks that Amazon ECS adds or\n\t\t\t\t\t\t\tremoves from the service during a rolling update is controlled by the service\n\t\t\t\t\t\t\tdeployment configuration. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html\">Deploy Amazon ECS services by replacing tasks</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n                     <p>Rolling update deployments are best suited for the following scenarios:</p>\n                     <ul>\n                        <li>\n                           <p>Gradual service updates: You need to\n\t\t\t\t\t\t\t\t\tupdate your service incrementally without taking the entire service\n\t\t\t\t\t\t\t\t\toffline at once.</p>\n                        </li>\n                        <li>\n                           <p>Limited resource requirements: You\n\t\t\t\t\t\t\t\t\twant to avoid the additional resource costs of running two complete\n\t\t\t\t\t\t\t\t\tenvironments simultaneously (as required by blue/green\n\t\t\t\t\t\t\t\t\tdeployments).</p>\n                        </li>\n                        <li>\n                           <p>Acceptable deployment time: Your\n\t\t\t\t\t\t\t\t\tapplication can tolerate a longer deployment process, as rolling updates\n\t\t\t\t\t\t\t\t\treplace tasks one by one.</p>\n                        </li>\n                        <li>\n                           <p>No need for instant roll back: Your\n\t\t\t\t\t\t\t\t\tservice can tolerate a rollback process that takes minutes rather than\n\t\t\t\t\t\t\t\t\tseconds.</p>\n                        </li>\n                        <li>\n                           <p>Simple deployment process: You prefer\n\t\t\t\t\t\t\t\t\ta straightforward deployment approach without the complexity of managing\n\t\t\t\t\t\t\t\t\tmultiple environments, target groups, and listeners.</p>\n                        </li>\n                        <li>\n                           <p>No load balancer requirement: Your\n\t\t\t\t\t\t\t\t\tservice doesn't use or require a load balancer, Application Load Balancer, Network Load Balancer, or Service Connect (which are required\n\t\t\t\t\t\t\t\t\tfor blue/green deployments).</p>\n                        </li>\n                        <li>\n                           <p>Stateful applications: Your\n\t\t\t\t\t\t\t\t\tapplication maintains state that makes it difficult to run two parallel\n\t\t\t\t\t\t\t\t\tenvironments.</p>\n                        </li>\n                        <li>\n                           <p>Cost sensitivity: You want to\n\t\t\t\t\t\t\t\t\tminimize deployment costs by not running duplicate environments during\n\t\t\t\t\t\t\t\t\tdeployment.</p>\n                        </li>\n                     </ul>\n                     <p>Rolling updates are the default deployment strategy for services and provide a\n\t\t\t\t\t\t\tbalance between deployment safety and resource efficiency for many common\n\t\t\t\t\t\t\tapplication scenarios.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>BLUE_GREEN</code>: A <i>blue/green</i> deployment strategy (<code>BLUE_GREEN</code>) is a release methodology that reduces downtime and\n\t\t\t\t\t\t\trisk by running two identical production environments called blue and green.\n\t\t\t\t\t\t\tWith Amazon ECS blue/green deployments, you can validate new service revisions before\n\t\t\t\t\t\t\tdirecting production traffic to them. This approach provides a safer way to\n\t\t\t\t\t\t\tdeploy changes with the ability to quickly roll back if needed. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-blue-green.html\">Amazon ECS blue/green deployments</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n                     <p>Amazon ECS blue/green deployments are best suited for the following scenarios:</p>\n                     <ul>\n                        <li>\n                           <p>Service validation: When you need to\n\t\t\t\t\t\t\t\t\tvalidate new service revisions before directing production traffic to\n\t\t\t\t\t\t\t\t\tthem</p>\n                        </li>\n                        <li>\n                           <p>Zero downtime: When your service\n\t\t\t\t\t\t\t\t\trequires zero-downtime deployments</p>\n                        </li>\n                        <li>\n                           <p>Instant roll back: When you\n\t\t\t\t\t\t\t\t\tneed the ability to quickly roll back if issues are detected</p>\n                        </li>\n                        <li>\n                           <p>Load balancer requirement: When your\n\t\t\t\t\t\t\t\t\tservice uses Application Load Balancer, Network Load Balancer, or Service Connect</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>External</p>\n               <p>Use a third-party deployment controller.</p>\n            </li>\n            <li>\n               <p>Blue/green deployment (powered by CodeDeploy)</p>\n               <p>CodeDeploy installs an updated version of the application as a new replacement task\n\t\t\t\t\tset and reroutes production traffic from the original application task set to\n\t\t\t\t\tthe replacement task set. The original task set is terminated after a successful\n\t\t\t\t\tdeployment. Use this deployment controller to verify a new deployment of a service\n\t\t\t\t\tbefore sending production traffic to it.</p>\n            </li>\n         </ul>\n         <p>When creating a service that uses the <code>EXTERNAL</code> deployment controller, you\n\t\t\tcan specify only parameters that aren't controlled at the task set level. The only\n\t\t\trequired parameter is the service name. You control your services using the <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateTaskSet.html\">CreateTaskSet</a>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html\">Amazon ECS deployment types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>When the service scheduler launches new tasks, it determines task placement. For\n\t\t\tinformation about task placement and task placement strategies, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement.html\">Amazon ECS\n\t\t\t\ttask placement</a> in the <i>Amazon Elastic Container Service Developer Guide</i>\n         </p>",
                 "smithy.api#examples": [
                     {
                         "title": "To create a new service",
@@ -3477,7 +3509,7 @@
                     "target": "com.amazonaws.ecs#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Specifies whether to turn on Amazon ECS managed tags for the tasks within the service. For\n\t\t\tmore information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html\">Tagging your Amazon ECS\n\t\t\t\tresources</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>When you use Amazon ECS managed tags, you need to set the <code>propagateTags</code>\n\t\t\trequest parameter.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether to turn on Amazon ECS managed tags for the tasks within the service. For\n\t\t\tmore information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html\">Tagging your Amazon ECS\n\t\t\t\tresources</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>When you use Amazon ECS managed tags, you must set the <code>propagateTags</code>\n\t\t\trequest parameter.</p>"
                     }
                 },
                 "propagateTags": {
@@ -4629,6 +4661,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the CloudWatch alarms.</p>"
                     }
+                },
+                "strategy": {
+                    "target": "com.amazonaws.ecs#DeploymentStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment strategy for the service. Choose from these valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ROLLING</code> - When you create a service which uses the rolling update\n                  (<code>ROLLING</code>) deployment strategy, the Amazon ECS service scheduler replaces\n               the currently running tasks with new tasks. The number of tasks that Amazon ECS adds or\n               removes from the service during a rolling update is controlled by the service\n               deployment configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BLUE_GREEN</code> - A blue/green deployment strategy\n                  (<code>BLUE_GREEN</code>) is a release methodology that reduces downtime and risk\n               by running two identical production environments called blue and green. With Amazon ECS\n               blue/green deployments, you can validate new service revisions before directing\n               production traffic to them. This approach provides a safer way to deploy changes with\n               the ability to quickly roll back if needed.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "bakeTimeInMinutes": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The duration when both blue and green service revisions are running simultaneously after the production traffic has shifted.</p>\n         <p>You must provide this parameter when you use the <code>BLUE_GREEN</code> deployment\n         strategy.</p>"
+                    }
+                },
+                "lifecycleHooks": {
+                    "target": "com.amazonaws.ecs#DeploymentLifecycleHookList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of deployment lifecycle hook objects to run custom logic at specific stages of the deployment lifecycle. These hooks allow you to run custom logic at key points during the deployment process.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4641,7 +4691,7 @@
                 "type": {
                     "target": "com.amazonaws.ecs#DeploymentControllerType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The deployment controller type to use.</p>\n         <p>There are three deployment controller types available:</p>\n         <dl>\n            <dt>ECS</dt>\n            <dd>\n               <p>The rolling update (<code>ECS</code>) deployment type involves replacing\n\t\t\t\t\t\tthe current running version of the container with the latest version. The\n\t\t\t\t\t\tnumber of containers Amazon ECS adds or removes from the service during a rolling\n\t\t\t\t\t\tupdate is controlled by adjusting the minimum and maximum number of healthy\n\t\t\t\t\t\ttasks allowed during a service deployment, as specified in the <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeploymentConfiguration.html\">DeploymentConfiguration</a>.</p>\n               <p>For more information about rolling deployments, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html\">Deploy\n\t\t\t\t\t\t\tAmazon ECS services by replacing tasks</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n            </dd>\n            <dt>CODE_DEPLOY</dt>\n            <dd>\n               <p>The blue/green (<code>CODE_DEPLOY</code>) deployment type uses the\n\t\t\t\t\t\tblue/green deployment model powered by CodeDeploy, which allows you to verify a\n\t\t\t\t\t\tnew deployment of a service before sending production traffic to it.</p>\n               <p>For more information about blue/green deployments, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-bluegreen.html\">Validate the state of an Amazon ECS service before deployment </a> in\n\t\t\t\t\t\tthe <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n            </dd>\n            <dt>EXTERNAL</dt>\n            <dd>\n               <p>The external (<code>EXTERNAL</code>) deployment type enables you to use\n\t\t\t\t\t\tany third-party deployment controller for full control over the deployment\n\t\t\t\t\t\tprocess for an Amazon ECS service.</p>\n               <p>For more information about external deployments, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-external.html\">Deploy Amazon ECS services using a third-party controller </a> in the\n\t\t\t\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>.</p>\n            </dd>\n         </dl>",
+                        "smithy.api#documentation": "<p>The deployment controller type to use.</p>\n         <p>The deployment controller is the mechanism that determines how tasks are deployed for\n\t\t\tyour service. The valid options are:</p>\n         <ul>\n            <li>\n               <p>ECS</p>\n               <p>When you create a service which uses the <code>ECS</code> deployment controller, you can choose between the following deployment strategies:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ROLLING</code>: When you create a service which uses the <i>rolling update</i>\n\t\t\t\t\t\t\t(<code>ROLLING</code>) deployment strategy, the Amazon ECS service scheduler replaces the\n\t\t\t\t\t\t\tcurrently running tasks with new tasks. The number of tasks that Amazon ECS adds or\n\t\t\t\t\t\t\tremoves from the service during a rolling update is controlled by the service\n\t\t\t\t\t\t\tdeployment configuration. </p>\n                     <p>Rolling update deployments are best suited for the following scenarios:</p>\n                     <ul>\n                        <li>\n                           <p>Gradual service updates: You need to\n\t\t\t\t\t\t\t\t\tupdate your service incrementally without taking the entire service\n\t\t\t\t\t\t\t\t\toffline at once.</p>\n                        </li>\n                        <li>\n                           <p>Limited resource requirements: You\n\t\t\t\t\t\t\t\t\twant to avoid the additional resource costs of running two complete\n\t\t\t\t\t\t\t\t\tenvironments simultaneously (as required by blue/green\n\t\t\t\t\t\t\t\t\tdeployments).</p>\n                        </li>\n                        <li>\n                           <p>Acceptable deployment time: Your\n\t\t\t\t\t\t\t\t\tapplication can tolerate a longer deployment process, as rolling updates\n\t\t\t\t\t\t\t\t\treplace tasks one by one.</p>\n                        </li>\n                        <li>\n                           <p>No need for instant roll back: Your\n\t\t\t\t\t\t\t\t\tservice can tolerate a rollback process that takes minutes rather than\n\t\t\t\t\t\t\t\t\tseconds.</p>\n                        </li>\n                        <li>\n                           <p>Simple deployment process: You prefer\n\t\t\t\t\t\t\t\t\ta straightforward deployment approach without the complexity of managing\n\t\t\t\t\t\t\t\t\tmultiple environments, target groups, and listeners.</p>\n                        </li>\n                        <li>\n                           <p>No load balancer requirement: Your\n\t\t\t\t\t\t\t\t\tservice doesn't use or require a load balancer, Application Load Balancer, Network Load Balancer, or Service Connect (which are required\n\t\t\t\t\t\t\t\t\tfor blue/green deployments).</p>\n                        </li>\n                        <li>\n                           <p>Stateful applications: Your\n\t\t\t\t\t\t\t\t\tapplication maintains state that makes it difficult to run two parallel\n\t\t\t\t\t\t\t\t\tenvironments.</p>\n                        </li>\n                        <li>\n                           <p>Cost sensitivity: You want to\n\t\t\t\t\t\t\t\t\tminimize deployment costs by not running duplicate environments during\n\t\t\t\t\t\t\t\t\tdeployment.</p>\n                        </li>\n                     </ul>\n                     <p>Rolling updates are the default deployment strategy for services and provide a\n\t\t\t\t\t\t\tbalance between deployment safety and resource efficiency for many common\n\t\t\t\t\t\t\tapplication scenarios.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>BLUE_GREEN</code>: A <i>blue/green</i> deployment strategy (<code>BLUE_GREEN</code>) is a release methodology that reduces downtime and\n\t\t\t\t\t\t\trisk by running two identical production environments called blue and green.\n\t\t\t\t\t\t\tWith Amazon ECS blue/green deployments, you can validate new service revisions before\n\t\t\t\t\t\t\tdirecting production traffic to them. This approach provides a safer way to\n\t\t\t\t\t\t\tdeploy changes with the ability to quickly roll back if needed.</p>\n                     <p>Amazon ECS blue/green deployments are best suited for the following scenarios:</p>\n                     <ul>\n                        <li>\n                           <p>Service validation: When you need to\n\t\t\t\t\t\t\t\t\tvalidate new service revisions before directing production traffic to\n\t\t\t\t\t\t\t\t\tthem</p>\n                        </li>\n                        <li>\n                           <p>Zero downtime: When your service\n\t\t\t\t\t\t\t\t\trequires zero-downtime deployments</p>\n                        </li>\n                        <li>\n                           <p>Instant roll back: When you\n\t\t\t\t\t\t\t\t\tneed the ability to quickly roll back if issues are detected</p>\n                        </li>\n                        <li>\n                           <p>Load balancer requirement: When your\n\t\t\t\t\t\t\t\t\tservice uses Application Load Balancer, Network Load Balancer, or Service Connect</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>External</p>\n               <p>Use a third-party deployment controller.</p>\n            </li>\n            <li>\n               <p>Blue/green deployment (powered by CodeDeploy)</p>\n               <p>CodeDeploy installs an updated version of the application as a new replacement task\n\t\t\t\t\tset and reroutes production traffic from the original application task set to\n\t\t\t\t\tthe replacement task set. The original task set is terminated after a successful\n\t\t\t\t\tdeployment. Use this deployment controller to verify a new deployment of a service\n\t\t\t\t\tbefore sending production traffic to it.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4687,6 +4737,97 @@
                 "smithy.api#documentation": "<p>The amount of ephemeral storage to allocate for the deployment.</p>"
             }
         },
+        "com.amazonaws.ecs#DeploymentLifecycleHook": {
+            "type": "structure",
+            "members": {
+                "hookTargetArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the hook target. Currently, only Lambda function ARNs are supported.</p>\n         <p>You must provide this parameter when configuring a deployment lifecycle hook.</p>"
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.ecs#IAMRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that grants Amazon ECS permission to call Lambda functions on your behalf.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/blue-green-permissions.html\">Permissions required\n            for Lambda functions in Amazon ECS blue/green deployments</a> in the<i>\n            Amazon Elastic Container Service Developer Guide</i>.</p>"
+                    }
+                },
+                "lifecycleStages": {
+                    "target": "com.amazonaws.ecs#DeploymentLifecycleHookStageList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle stages at which to run the hook. Choose from these valid values:</p>\n         <ul>\n            <li>\n               <p>RECONCILE_SERVICE</p>\n               <p>This stage only happens when you start a new service deployment with more than 1 service revision in an ACTIVE state.</p>\n               <p>You can use a lifecycle hook for this stage.</p>\n            </li>\n            <li>\n               <p>PRE_SCALE_UP</p>\n               <p>The green service revision has not started. The blue service revision is handling 100% of the production traffic. There is no test traffic.</p>\n               <p>You can use a lifecycle hook for this stage.</p>\n            </li>\n            <li>\n               <p>SCALE_UP</p>\n               <p>The time when the green service revision scales up to 100% and launches new tasks. The green service revision is not serving any traffic at this point.</p>\n               <p>You can't use a lifecycle hook for this stage.</p>\n            </li>\n            <li>\n               <p>POST_SCALE_UP</p>\n               <p>The green service revision has started. The blue service revision is handling 100% of the production traffic. There is no test traffic.</p>\n               <p>You can use a lifecycle hook for this stage.</p>\n            </li>\n            <li>\n               <p>TEST_TRAFFIC_SHIFT</p>\n               <p>The blue and green service revisions are running. The blue service revision handles 100% of the production traffic. The green service revision is migrating from 0% to 100% of test traffic.</p>\n               <p>You can use a lifecycle hook for this stage.</p>\n            </li>\n            <li>\n               <p>POST_TEST_TRAFFIC_SHIFT</p>\n               <p>The test traffic shift is complete. The green service revision handles 100% of the test traffic.</p>\n               <p>You can use a lifecycle hook for this stage.</p>\n            </li>\n            <li>\n               <p>PRODUCTION_TRAFFIC_SHIFT</p>\n               <p>Production traffic is shifting to the green service revision. The green service revision is migrating from 0% to 100% of production traffic.</p>\n               <p>You can use a lifecycle hook for this stage.</p>\n            </li>\n            <li>\n               <p>POST_PRODUCTION_TRAFFIC_SHIFT</p>\n               <p>The production traffic shift is complete.</p>\n               <p>Yes</p>\n            </li>\n            <li>\n               <p>BAKE_TIME</p>\n               <p>The duration when both blue and green service revisions are running simultaneously.</p>\n               <p>You can't use a lifecycle hook for this stage.</p>\n            </li>\n            <li>\n               <p>CLEAN_UP</p>\n               <p>The blue service revision has completely scaled down to 0 running tasks. The green service revision is now the production service revision after this stage.</p>\n               <p>You can't use a lifecycle hook for this stage.</p>\n            </li>\n         </ul>\n         <p>You must provide this parameter when configuring a deployment lifecycle hook.</p>"
+                    }
+                },
+                "hookDetails": {
+                    "target": "com.amazonaws.ecs#HookDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optionally provide details about the hook. Use this field to pass custom parameters to your hook target (such as a Lambda function).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A deployment lifecycle hook runs custom logic at specific stages of the deployment process. Currently, you can use Lambda functions as hook targets.</p>"
+            }
+        },
+        "com.amazonaws.ecs#DeploymentLifecycleHookList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#DeploymentLifecycleHook"
+            }
+        },
+        "com.amazonaws.ecs#DeploymentLifecycleHookStage": {
+            "type": "enum",
+            "members": {
+                "RECONCILE_SERVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RECONCILE_SERVICE"
+                    }
+                },
+                "PRE_SCALE_UP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRE_SCALE_UP"
+                    }
+                },
+                "POST_SCALE_UP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POST_SCALE_UP"
+                    }
+                },
+                "TEST_TRAFFIC_SHIFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEST_TRAFFIC_SHIFT"
+                    }
+                },
+                "POST_TEST_TRAFFIC_SHIFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POST_TEST_TRAFFIC_SHIFT"
+                    }
+                },
+                "PRODUCTION_TRAFFIC_SHIFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRODUCTION_TRAFFIC_SHIFT"
+                    }
+                },
+                "POST_PRODUCTION_TRAFFIC_SHIFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POST_PRODUCTION_TRAFFIC_SHIFT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecs#DeploymentLifecycleHookStageList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#DeploymentLifecycleHookStage"
+            }
+        },
         "com.amazonaws.ecs#DeploymentRolloutState": {
             "type": "enum",
             "members": {
@@ -4706,6 +4847,23 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecs#DeploymentStrategy": {
+            "type": "enum",
+            "members": {
+                "ROLLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROLLING"
+                    }
+                },
+                "BLUE_GREEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BLUE_GREEN"
                     }
                 }
             }
@@ -6003,7 +6161,7 @@
                 "cluster": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the task or tasks to\n\t\t\tdescribe. If you do not specify a cluster, the default cluster is assumed. This parameter is required. If you do not specify a\n\t\t\tvalue, the <code>default</code> cluster is used.</p>"
+                        "smithy.api#documentation": "<p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the task or tasks to\n\t\t\tdescribe. If you do not specify a cluster, the default cluster is assumed. If you do not specify a\n\t\t\tvalue, the <code>default</code> cluster is used.</p>"
                     }
                 },
                 "tasks": {
@@ -6995,6 +7153,9 @@
                     }
                 }
             }
+        },
+        "com.amazonaws.ecs#HookDetails": {
+            "type": "document"
         },
         "com.amazonaws.ecs#HostEntry": {
             "type": "structure",
@@ -8581,6 +8742,12 @@
                     "target": "com.amazonaws.ecs#BoxedInteger",
                     "traits": {
                         "smithy.api#documentation": "<p>The port on the container to associate with the load balancer. This port must\n\t\t\tcorrespond to a <code>containerPort</code> in the task definition the tasks in the\n\t\t\tservice are using. For tasks that use the EC2 launch type, the container\n\t\t\tinstance they're launched on must allow ingress traffic on the <code>hostPort</code> of\n\t\t\tthe port mapping.</p>"
+                    }
+                },
+                "advancedConfiguration": {
+                    "target": "com.amazonaws.ecs#AdvancedConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The advanced settings for the load balancer used in blue/green deployments. Specify the alternate target group, listener rules, and IAM role required for traffic shifting during blue/green deployments.</p>"
                     }
                 }
             },
@@ -10417,6 +10584,20 @@
                 "target": "com.amazonaws.ecs#Attribute"
             }
         },
+        "com.amazonaws.ecs#ResolvedConfiguration": {
+            "type": "structure",
+            "members": {
+                "loadBalancers": {
+                    "target": "com.amazonaws.ecs#ServiceRevisionLoadBalancers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resolved load balancer configuration for the service revision. This includes information about which target groups serve traffic and which listener rules direct traffic to them.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The resolved configuration for a service revision, which contains the actual resources your service revision uses, such as which target groups serve traffic.</p>"
+            }
+        },
         "com.amazonaws.ecs#Resource": {
             "type": "structure",
             "members": {
@@ -11158,6 +11339,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The <code>dnsName</code> is the name that you use in the applications of client tasks\n\t\t\tto connect to this service. The name must be a valid DNS name but doesn't need to be\n\t\t\tfully-qualified. The name can include up to 127 characters. The name can include\n\t\t\tlowercase letters, numbers, underscores (_), hyphens (-), and periods (.). The name\n\t\t\tcan't start with a hyphen.</p>\n         <p>If this parameter isn't specified, the default value of <code>discoveryName.namespace</code> is used. If the <code>discoveryName</code> isn't specified, the port mapping name from the task definition is used in <code>portName.namespace</code>.</p>\n         <p>To avoid changing your applications in client Amazon ECS services, set this to the same\n\t\t\tname that the client application uses by default. For example, a few common names are\n\t\t\t\t<code>database</code>, <code>db</code>, or the lowercase name of a database, such as\n\t\t\t\t<code>mysql</code> or <code>redis</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html\">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
                     }
+                },
+                "testTrafficRules": {
+                    "target": "com.amazonaws.ecs#ServiceConnectTestTrafficRules",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for test traffic routing rules used during blue/green deployments with Amazon ECS Service Connect. This allows you to route a portion of traffic to the new service revision of your service for testing before shifting all production traffic.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11264,7 +11451,7 @@
                 "discoveryArn": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the namespace in Cloud Map that matches the discovery name for this\n\t\t\tService Connect resource. You can use this ARN in other integrations with Cloud Map.\n\t\t\tHowever, Service Connect can't ensure connectivity outside of Amazon ECS.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the service in Cloud Map that matches the discovery name for this\n\t\t\tService Connect resource. You can use this ARN in other integrations with Cloud Map.\n\t\t\tHowever, Service Connect can't ensure connectivity outside of Amazon ECS.</p>"
                     }
                 }
             },
@@ -11276,6 +11463,57 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.ecs#ServiceConnectServiceResource"
+            }
+        },
+        "com.amazonaws.ecs#ServiceConnectTestTrafficHeaderMatchRules": {
+            "type": "structure",
+            "members": {
+                "exact": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exact value that the HTTP header must match for the test traffic routing rule to apply. This provides precise control over which requests are routed to the new service revision during blue/green deployments.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The header matching rules for test traffic routing in Amazon ECS blue/green deployments.\n         These rules determine how incoming requests are matched based on HTTP headers to route test\n         traffic to the new service revision.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ServiceConnectTestTrafficHeaderRules": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the HTTP header to examine for test traffic routing. Common examples include custom headers like <code>X-Test-Version</code> or <code>X-Canary-Request</code> that can be used to identify test traffic.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.ecs#ServiceConnectTestTrafficHeaderMatchRules",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The header value matching configuration that determines how the HTTP header value is evaluated for test traffic routing decisions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The HTTP header rules used to identify and route test traffic during Amazon ECS blue/green\n         deployments. These rules specify which HTTP headers to examine and what values to match for\n         routing decisions.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ServiceConnectTestTrafficRules": {
+            "type": "structure",
+            "members": {
+                "header": {
+                    "target": "com.amazonaws.ecs#ServiceConnectTestTrafficHeaderRules",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP header-based routing rules that determine which requests should be routed to the new service version during blue/green deployment testing. These rules provide fine-grained control over test traffic routing based on request headers.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The test traffic routing configuration for Amazon ECS blue/green deployments. This\n         configuration allows you to define rules for routing specific traffic to the new service\n         revision during the deployment process, allowing for safe testing before full production\n         traffic shift.</p>"
             }
         },
         "com.amazonaws.ecs#ServiceConnectTlsCertificateAuthority": {
@@ -11392,6 +11630,12 @@
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about why the service deployment is in the current status. For example,\n\t\t\tthe circuit breaker detected a failure.</p>"
+                    }
+                },
+                "lifecycleStage": {
+                    "target": "com.amazonaws.ecs#ServiceDeploymentLifecycleStage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current lifecycle stage of the deployment. Possible values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SCALE_UP_IN_PROGRESS</code> - Creating the new (green) tasks</p>\n            </li>\n            <li>\n               <p>\n                  <code>TEST_TRAFFIC_SHIFT_IN_PROGRESS</code> - Shifting test traffic to the new (green) tasks</p>\n            </li>\n            <li>\n               <p>\n                  <code>PRODUCTION_TRAFFIC_SHIFT_IN_PROGRESS</code> - Shifting production traffic to the new (green) tasks</p>\n            </li>\n            <li>\n               <p>\n                  <code>BAKE_TIME_IN_PROGRESS</code> - The duration when both blue and green service revisions are running simultaneously after the production traffic has shifted</p>\n            </li>\n            <li>\n               <p>\n                  <code>CLEAN_UP_IN_PROGRESS</code> - Stopping the old (blue) tasks</p>\n            </li>\n         </ul>"
                     }
                 },
                 "deploymentConfiguration": {
@@ -11534,6 +11778,71 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about the circuit breaker used to determine when a service deployment has\n\t\t\tfailed.</p>\n         <p>The deployment circuit breaker is the rolling update mechanism that determines if the\n\t\t\ttasks reach a steady state. The deployment circuit breaker has an option that will\n\t\t\tautomatically roll back a failed deployment to the last cpompleted service revision. For\n\t\t\tmore information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-circuit-breaker.html\">How the Amazon\n\t\t\t\tECS deployment circuit breaker detects failures</a> in the<i> Amazon ECS\n\t\t\t\tDeveloper Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ServiceDeploymentLifecycleStage": {
+            "type": "enum",
+            "members": {
+                "RECONCILE_SERVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RECONCILE_SERVICE"
+                    }
+                },
+                "PRE_SCALE_UP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRE_SCALE_UP"
+                    }
+                },
+                "SCALE_UP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCALE_UP"
+                    }
+                },
+                "POST_SCALE_UP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POST_SCALE_UP"
+                    }
+                },
+                "TEST_TRAFFIC_SHIFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEST_TRAFFIC_SHIFT"
+                    }
+                },
+                "POST_TEST_TRAFFIC_SHIFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POST_TEST_TRAFFIC_SHIFT"
+                    }
+                },
+                "PRODUCTION_TRAFFIC_SHIFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRODUCTION_TRAFFIC_SHIFT"
+                    }
+                },
+                "POST_PRODUCTION_TRAFFIC_SHIFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POST_PRODUCTION_TRAFFIC_SHIFT"
+                    }
+                },
+                "BAKE_TIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BAKE_TIME"
+                    }
+                },
+                "CLEAN_UP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLEAN_UP"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#ServiceDeploymentNotFoundException": {
@@ -11951,10 +12260,42 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The VPC Lattice configuration for the service revision.</p>"
                     }
+                },
+                "resolvedConfiguration": {
+                    "target": "com.amazonaws.ecs#ResolvedConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resolved configuration for the service revision which contains the actual resources your service revision uses, such as which target groups serve traffic.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about the service revision.</p>\n         <p>A service revision contains a record of the workload configuration Amazon ECS is attempting\n\t\t\tto deploy. Whenever you create or deploy a service, Amazon ECS automatically creates and\n\t\t\tcaptures the configuration that you're trying to deploy in the service revision. For\n\t\t\tinformation about service revisions, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-revision.html\">Amazon ECS service\n\t\t\t\trevisions</a> in the <i>\n               <i>Amazon Elastic Container Service Developer Guide</i>\n            </i>.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ServiceRevisionLoadBalancer": {
+            "type": "structure",
+            "members": {
+                "targetGroupArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target group associated with the service revision.</p>"
+                    }
+                },
+                "productionListenerRule": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the production listener rule or listener that directs traffic to the target group associated with the service revision.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The resolved load balancer configuration for a service revision. This includes information about which target groups serve traffic and which listener rules direct traffic to them.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ServiceRevisionLoadBalancers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#ServiceRevisionLoadBalancer"
             }
         },
         "com.amazonaws.ecs#ServiceRevisionSummary": {
@@ -15466,6 +15807,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The period of time, in seconds, that the Amazon ECS service scheduler ignores unhealthy\n\t\t\tElastic Load Balancing, VPC Lattice, and container health checks after a task has first started. If you don't\n\t\t\tspecify a health check grace period value, the default value of <code>0</code> is used.\n\t\t\tIf you don't use any of the health checks, then\n\t\t\t\t<code>healthCheckGracePeriodSeconds</code> is unused.</p>\n         <p>If your service's tasks take a while to start and respond to health checks, you can\n\t\t\tspecify a health check grace period of up to 2,147,483,647 seconds (about 69 years).\n\t\t\tDuring that time, the Amazon ECS service scheduler ignores health check status. This grace\n\t\t\tperiod can prevent the service scheduler from marking tasks as unhealthy and stopping\n\t\t\tthem before they have time to come up.</p>"
                     }
+                },
+                "deploymentController": {
+                    "target": "com.amazonaws.ecs#DeploymentController"
                 },
                 "enableExecuteCommand": {
                     "target": "com.amazonaws.ecs#BoxedBoolean",

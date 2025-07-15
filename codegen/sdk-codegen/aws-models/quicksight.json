@@ -11296,6 +11296,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Folder ARN of the folder that you want the topic to reside in.</p>"
                     }
+                },
+                "CustomInstructions": {
+                    "target": "com.amazonaws.quicksight#CustomInstructions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Custom instructions for the topic.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11986,6 +11992,31 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A list of custom filter values.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#CustomInstructions": {
+            "type": "structure",
+            "members": {
+                "CustomInstructionsString": {
+                    "target": "com.amazonaws.quicksight#CustomInstructionsString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A text field for providing additional guidance or context for response generation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Instructions that provide additional guidance and context for response generation.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#CustomInstructionsString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5000
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.quicksight#CustomLabel": {
@@ -24143,6 +24174,12 @@
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
+                },
+                "CustomInstructions": {
+                    "target": "com.amazonaws.quicksight#CustomInstructions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Custom instructions for the topic.</p>"
+                    }
                 }
             },
             "traits": {
@@ -35829,7 +35866,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the history of SPICE ingestions for a dataset.</p>",
+                "smithy.api#documentation": "<p>Lists the history of SPICE ingestions for a dataset. Limited to 5 TPS per user and 25 TPS per account.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/accounts/{AwsAccountId}/data-sets/{DataSetId}/ingestions",
@@ -61545,6 +61582,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The definition of the topic that you want to update.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "CustomInstructions": {
+                    "target": "com.amazonaws.quicksight#CustomInstructions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Custom instructions for the topic.</p>"
                     }
                 }
             },

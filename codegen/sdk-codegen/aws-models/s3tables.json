@@ -1257,6 +1257,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the table bucket.</p>"
                     }
+                },
+                "type": {
+                    "target": "com.amazonaws.s3tables#TableBucketType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the table bucket.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2254,6 +2260,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of table buckets to return in the list.</p>",
                         "smithy.api#httpQuery": "maxBuckets"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.s3tables#TableBucketType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of table buckets to filter by in the list.</p>",
+                        "smithy.api#httpQuery": "type"
                     }
                 }
             },
@@ -3972,6 +3985,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The system-assigned unique identifier for the table bucket.</p>"
                     }
+                },
+                "type": {
+                    "target": "com.amazonaws.s3tables#TableBucketType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the table bucket.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3982,6 +4001,23 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.s3tables#TableBucketSummary"
+            }
+        },
+        "com.amazonaws.s3tables#TableBucketType": {
+            "type": "enum",
+            "members": {
+                "CUSTOMER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "customer"
+                    }
+                },
+                "AWS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "aws"
+                    }
+                }
             }
         },
         "com.amazonaws.s3tables#TableEncryptionResource": {

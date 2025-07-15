@@ -2461,6 +2461,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Spark Amazon Web Services Glue properties of a connection.</p>"
                     }
+                },
+                "s3Properties": {
+                    "target": "com.amazonaws.datazone#S3PropertiesInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 properties of a connection.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2511,6 +2517,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Spark Amazon Web Services Glue properties of a connection.</p>"
                     }
+                },
+                "s3Properties": {
+                    "target": "com.amazonaws.datazone#S3PropertiesOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 properties of a connection.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2548,6 +2560,12 @@
                     "target": "com.amazonaws.datazone#SparkEmrPropertiesPatch",
                     "traits": {
                         "smithy.api#documentation": "<p>The Spark EMR properties of a connection properties patch.</p>"
+                    }
+                },
+                "s3Properties": {
+                    "target": "com.amazonaws.datazone#S3PropertiesPatch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 properties of a connection properties patch.</p>"
                     }
                 }
             },
@@ -2755,6 +2773,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "REDSHIFT"
+                    }
+                },
+                "S3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S3"
                     }
                 },
                 "SAPHANA": {
@@ -5061,8 +5085,7 @@
                 "environmentProfileIdentifier": {
                     "target": "com.amazonaws.datazone#EnvironmentProfileId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the environment profile that is used to create this Amazon DataZone\n         environment.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The identifier of the environment profile that is used to create this Amazon DataZone\n         environment.</p>"
                     }
                 },
                 "userParameters": {
@@ -28739,6 +28762,15 @@
                 "smithy.api#documentation": "<p>The asset statistics from the data source run.</p>"
             }
         },
+        "com.amazonaws.datazone#S3AccessGrantLocationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\-]+$"
+            }
+        },
         "com.amazonaws.datazone#S3Location": {
             "type": "string",
             "traits": {
@@ -28759,6 +28791,90 @@
                     "min": 0,
                     "max": 20
                 }
+            }
+        },
+        "com.amazonaws.datazone#S3PropertiesInput": {
+            "type": "structure",
+            "members": {
+                "s3Uri": {
+                    "target": "com.amazonaws.datazone#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 URI that's part of the Amazon S3 properties of a connection.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "s3AccessGrantLocationId": {
+                    "target": "com.amazonaws.datazone#S3AccessGrantLocationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties of a connection.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon S3 properties of a connection.</p>"
+            }
+        },
+        "com.amazonaws.datazone#S3PropertiesOutput": {
+            "type": "structure",
+            "members": {
+                "s3Uri": {
+                    "target": "com.amazonaws.datazone#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 URI that's part of the Amazon S3 properties of a connection.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "s3AccessGrantLocationId": {
+                    "target": "com.amazonaws.datazone#S3AccessGrantLocationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties of a connection.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.datazone#ConnectionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the Amazon S3 connection.</p>"
+                    }
+                },
+                "errorMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message that gets displayed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon S3 properties of a connection.</p>"
+            }
+        },
+        "com.amazonaws.datazone#S3PropertiesPatch": {
+            "type": "structure",
+            "members": {
+                "s3Uri": {
+                    "target": "com.amazonaws.datazone#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 URI that's part of the Amazon S3 properties patch of a connection.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "s3AccessGrantLocationId": {
+                    "target": "com.amazonaws.datazone#S3AccessGrantLocationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties patch of a connection.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon S3 properties patch of a connection.</p>"
+            }
+        },
+        "com.amazonaws.datazone#S3Uri": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^s3://.+$"
             }
         },
         "com.amazonaws.datazone#SageMakerAssetType": {

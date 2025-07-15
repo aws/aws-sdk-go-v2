@@ -35,7 +35,13 @@
                 "NaturalLanguageQueryGenerationOptions": {
                     "target": "com.amazonaws.opensearch#NaturalLanguageQueryGenerationOptionsInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>Container for parameters required for natural language query generation on the specified domain.</p>"
+                        "smithy.api#documentation": "<p>Container for parameters required for natural language query generation on the specified\n   domain.</p>"
+                    }
+                },
+                "S3VectorsEngine": {
+                    "target": "com.amazonaws.opensearch#S3VectorsEngine",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container for parameters required to enable S3 vectors engine features on the specified domain.</p>"
                     }
                 }
             },
@@ -49,12 +55,18 @@
                 "NaturalLanguageQueryGenerationOptions": {
                     "target": "com.amazonaws.opensearch#NaturalLanguageQueryGenerationOptionsOutput",
                     "traits": {
-                        "smithy.api#documentation": "<p>Container for parameters required for natural language query generation on the specified domain.</p>"
+                        "smithy.api#documentation": "<p>Container for parameters required for natural language query generation on the specified\n   domain.</p>"
+                    }
+                },
+                "S3VectorsEngine": {
+                    "target": "com.amazonaws.opensearch#S3VectorsEngine",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container for parameters representing the state of S3 vectors engine features on the specified domain.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Container for parameters representing the state of machine learning features on the specified domain.</p>"
+                "smithy.api#documentation": "<p>Container for parameters representing the state of machine learning features on the\n   specified domain.</p>"
             }
         },
         "com.amazonaws.opensearch#AIMLOptionsStatus": {
@@ -77,7 +89,7 @@
         "com.amazonaws.opensearch#ARN": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the domain. See <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/index.html\">Identifiers for IAM Entities\n  </a> in <i>Using Amazon Web Services Identity and Access Management</i> for more information.\n  </p>",
+                "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the domain. See <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/index.html\">Identifiers for IAM Entities </a> in <i>Using\n     Amazon Web Services Identity and Access Management</i> for more information. </p>",
                 "smithy.api#length": {
                     "min": 20,
                     "max": 2048
@@ -346,7 +358,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new direct-query data source to the specified domain. For more information, see\n   <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3-creating.html\">Creating Amazon OpenSearch Service data source integrations with Amazon S3</a>.</p>",
+                "smithy.api#documentation": "<p>Creates a new direct-query data source to the specified domain. For more information, see\n    <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3-creating.html\">Creating Amazon\n    OpenSearch Service data source integrations with Amazon S3</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2021-01-01/opensearch/domain/{DomainName}/dataSource",
@@ -387,7 +399,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Container for the parameters to the <code>AddDataSource</code>\n   operation.</p>",
+                "smithy.api#documentation": "<p>Container for the parameters to the <code>AddDataSource</code> operation.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -435,7 +447,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n   Adds a new data source in Amazon OpenSearch Service \n   so that you can perform direct queries on external data.\n  </p>",
+                "smithy.api#documentation": "<p> Adds a new data source in Amazon OpenSearch Service so that you can perform direct queries\n   on external data. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2021-01-01/opensearch/directQueryDataSource",
@@ -449,27 +461,27 @@
                 "DataSourceName": {
                     "target": "com.amazonaws.opensearch#DirectQueryDataSourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   A unique, user-defined label to identify the data source \n   within your OpenSearch Service environment.\n  </p>",
+                        "smithy.api#documentation": "<p> A unique, user-defined label to identify the data source within your OpenSearch Service\n   environment. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DataSourceType": {
                     "target": "com.amazonaws.opensearch#DirectQueryDataSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The supported Amazon Web Services service that you want to use as the source for direct queries in OpenSearch Service.\n  </p>",
+                        "smithy.api#documentation": "<p> The supported Amazon Web Services service that you want to use as the source for direct\n   queries in OpenSearch Service. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Description": {
                     "target": "com.amazonaws.opensearch#DirectQueryDataSourceDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   An optional text field for providing additional context and details about the data source.\n  </p>"
+                        "smithy.api#documentation": "<p> An optional text field for providing additional context and details about the data source.\n  </p>"
                     }
                 },
                 "OpenSearchArns": {
                     "target": "com.amazonaws.opensearch#DirectQueryOpenSearchARNList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   A list of Amazon Resource Names (ARNs) for the OpenSearch \n   collections that are associated with the direct query data source.\n  </p>",
+                        "smithy.api#documentation": "<p> A list of Amazon Resource Names (ARNs) for the OpenSearch collections that are associated\n   with the direct query data source. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -487,7 +499,7 @@
                 "DataSourceArn": {
                     "target": "com.amazonaws.opensearch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The unique, system-generated identifier that represents the data source.\n  </p>"
+                        "smithy.api#documentation": "<p> The unique, system-generated identifier that represents the data source. </p>"
                     }
                 }
             },
@@ -606,7 +618,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Status of the advanced options for the specified domain. The following options are\n   available: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>\"rest.action.multi.allow_explicit_index\": \"true\" | \"false\"</code> - Note the use of\n     a string rather than a boolean. Specifies whether explicit references to indexes are allowed\n     inside the body of HTTP requests. If you want to configure access policies for domain\n     sub-resources, such as specific indexes and domain APIs, you must disable this property.\n     Default is true.</p>\n            </li>\n            <li>\n               <p>\n                  <code>\"indices.fielddata.cache.size\": \"80\" </code> - Note the use of a string rather than\n     a boolean. Specifies the percentage of heap space allocated to field data. Default is\n     unbounded.</p>\n            </li>\n            <li>\n               <p>\n                  <code>\"indices.query.bool.max_clause_count\": \"1024\"</code> - Note the use of a string\n     rather than a boolean. Specifies the maximum number of clauses allowed in a Lucene boolean\n     query. Default is 1,024. Queries with more than the permitted number of clauses result in a\n     <code>TooManyClauses</code> error.</p>\n            </li>\n            <li>\n               <p>\n                  <code>\"override_main_response_version\": \"true\" | \"false\"</code> - Note the use of a string\n     rather than a boolean. Specifies whether the domain reports its version as 7.10 to allow\n     Elasticsearch OSS clients and plugins to continue working with it. Default is false when\n     creating a domain and true when upgrading a domain.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options\">Advanced cluster parameters</a>.</p>"
+                "smithy.api#documentation": "<p>Status of the advanced options for the specified domain. The following options are\n   available: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>\"rest.action.multi.allow_explicit_index\": \"true\" | \"false\"</code> - Note the use of\n     a string rather than a boolean. Specifies whether explicit references to indexes are allowed\n     inside the body of HTTP requests. If you want to configure access policies for domain\n     sub-resources, such as specific indexes and domain APIs, you must disable this property.\n     Default is true.</p>\n            </li>\n            <li>\n               <p>\n                  <code>\"indices.fielddata.cache.size\": \"80\" </code> - Note the use of a string rather than\n     a boolean. Specifies the percentage of heap space allocated to field data. Default is\n     unbounded.</p>\n            </li>\n            <li>\n               <p>\n                  <code>\"indices.query.bool.max_clause_count\": \"1024\"</code> - Note the use of a string\n     rather than a boolean. Specifies the maximum number of clauses allowed in a Lucene boolean\n     query. Default is 1,024. Queries with more than the permitted number of clauses result in a\n      <code>TooManyClauses</code> error.</p>\n            </li>\n            <li>\n               <p>\n                  <code>\"override_main_response_version\": \"true\" | \"false\"</code> - Note the use of a string\n     rather than a boolean. Specifies whether the domain reports its version as 7.10 to allow\n     Elasticsearch OSS clients and plugins to continue working with it. Default is false when\n     creating a domain and true when upgrading a domain.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options\">Advanced cluster parameters</a>.</p>"
             }
         },
         "com.amazonaws.opensearch#AdvancedSecurityOptions": {
@@ -633,7 +645,7 @@
                 "JWTOptions": {
                     "target": "com.amazonaws.opensearch#JWTOptionsOutput",
                     "traits": {
-                        "smithy.api#documentation": "<p>Container for information about the JWT configuration of the Amazon OpenSearch Service.</p>"
+                        "smithy.api#documentation": "<p>Container for information about the JWT configuration of the Amazon OpenSearch\n   Service.</p>"
                     }
                 },
                 "AnonymousAuthDisableDate": {
@@ -683,7 +695,7 @@
                 "JWTOptions": {
                     "target": "com.amazonaws.opensearch#JWTOptionsInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>Container for information about the JWT configuration of the Amazon OpenSearch Service. </p>"
+                        "smithy.api#documentation": "<p>Container for information about the JWT configuration of the Amazon OpenSearch Service.\n  </p>"
                     }
                 },
                 "AnonymousAuthEnabled": {
@@ -2055,7 +2067,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration settings for an OpenSearch application. For more information, see \n   see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/application.html\">Using the OpenSearch user interface in Amazon OpenSearch Service</a>.</p>"
+                "smithy.api#documentation": "<p>Configuration settings for an OpenSearch application. For more information, see see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/application.html\">Using the\n    OpenSearch user interface in Amazon OpenSearch Service</a>.</p>"
             }
         },
         "com.amazonaws.opensearch#AppConfigType": {
@@ -2180,7 +2192,7 @@
                 "status": {
                     "target": "com.amazonaws.opensearch#ApplicationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of an OpenSearch application. Possible values: <code>CREATING</code>, <code>UPDATING</code>, <code>DELETING</code>, <code>FAILED</code>, <code>ACTIVE</code>, and <code>DELETED</code>.</p>"
+                        "smithy.api#documentation": "<p>The current status of an OpenSearch application. Possible values: <code>CREATING</code>,\n    <code>UPDATING</code>, <code>DELETING</code>, <code>FAILED</code>, <code>ACTIVE</code>, and\n    <code>DELETED</code>.</p>"
                     }
                 },
                 "createdAt": {
@@ -2229,7 +2241,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates a package with an Amazon OpenSearch Service domain. For more information, see\n    <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html\">Custom packages\n    for Amazon OpenSearch Service</a>.</p>",
+                "smithy.api#documentation": "<p>Associates a package with an Amazon OpenSearch Service domain. For more information, see\n    <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html\">Custom packages for Amazon OpenSearch Service</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2021-01-01/packages/associate/{PackageID}/{DomainName}",
@@ -2243,7 +2255,7 @@
                 "PackageID": {
                     "target": "com.amazonaws.opensearch#PackageID",
                     "traits": {
-                        "smithy.api#documentation": "<p>Internal ID of the package to associate with a domain. Use <code>DescribePackages</code> to find this value.\n  </p>",
+                        "smithy.api#documentation": "<p>Internal ID of the package to associate with a domain. Use <code>DescribePackages</code> to\n   find this value. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2259,7 +2271,7 @@
                 "PrerequisitePackageIDList": {
                     "target": "com.amazonaws.opensearch#PackageIDList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of package IDs that must be associated with the domain before the package specified in the request can be associated.</p>"
+                        "smithy.api#documentation": "<p>A list of package IDs that must be associated with the domain before the package specified\n   in the request can be associated.</p>"
                     }
                 },
                 "AssociationConfiguration": {
@@ -2318,7 +2330,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Operation in the Amazon OpenSearch Service API for associating  multiple packages with a domain simultaneously.</p>",
+                "smithy.api#documentation": "<p>Operation in the Amazon OpenSearch Service API for associating multiple packages with a\n   domain simultaneously.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2021-01-01/packages/associateMultiple",
@@ -2453,7 +2465,7 @@
                 "Principal": {
                     "target": "com.amazonaws.opensearch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html\">IAM principal</a> that is allowed access to the domain.</p>"
+                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html\">IAM principal</a> that\n   is allowed access to the domain.</p>"
                     }
                 }
             },
@@ -2556,7 +2568,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This object is deprecated. Use the domain's <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/off-peak.html\">off-peak window</a> to\n    schedule Auto-Tune optimizations. For migration instructions, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/off-peak.html#off-peak-migrate\">Migrating from Auto-Tune\n     maintenance windows</a>.</p>\n         </note>\n         <p>The Auto-Tune maintenance schedule.\n   For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html\">Auto-Tune for Amazon OpenSearch\n    Service</a>.</p>"
+                "smithy.api#documentation": "<note>\n            <p>This object is deprecated. Use the domain's <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/off-peak.html\">off-peak window</a> to\n    schedule Auto-Tune optimizations. For migration instructions, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/off-peak.html#off-peak-migrate\">Migrating from\n     Auto-Tune maintenance windows</a>.</p>\n         </note>\n         <p>The Auto-Tune maintenance schedule. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html\">Auto-Tune for Amazon OpenSearch\n    Service</a>.</p>"
             }
         },
         "com.amazonaws.opensearch#AutoTuneMaintenanceScheduleList": {
@@ -2615,13 +2627,13 @@
                 "MaintenanceSchedules": {
                     "target": "com.amazonaws.opensearch#AutoTuneMaintenanceScheduleList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of maintenance schedules during which Auto-Tune can deploy changes. Maintenance windows are deprecated and have been replaced with <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/off-peak.html\">off-peak windows</a>.</p>"
+                        "smithy.api#documentation": "<p>A list of maintenance schedules during which Auto-Tune can deploy changes. Maintenance\n   windows are deprecated and have been replaced with <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/off-peak.html\">off-peak windows</a>.</p>"
                     }
                 },
                 "UseOffPeakWindow": {
                     "target": "com.amazonaws.opensearch#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to schedule Auto-Tune optimizations that require blue/green deployments during the domain's configured daily off-peak window.</p>"
+                        "smithy.api#documentation": "<p>Whether to schedule Auto-Tune optimizations that require blue/green deployments during the\n   domain's configured daily off-peak window.</p>"
                     }
                 }
             },
@@ -2647,7 +2659,7 @@
                 "UseOffPeakWindow": {
                     "target": "com.amazonaws.opensearch#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether the domain's off-peak window will be used to deploy Auto-Tune changes rather\n   than a maintenance schedule.</p>"
+                        "smithy.api#documentation": "<p>Whether the domain's off-peak window will be used to deploy Auto-Tune changes rather than a\n   maintenance schedule.</p>"
                     }
                 }
             },
@@ -2734,7 +2746,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Auto-Tune state for the domain. For valid states see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html\">Auto-Tune for Amazon OpenSearch Service</a>.\n  </p>"
+                "smithy.api#documentation": "<p>The Auto-Tune state for the domain. For valid states see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html\">Auto-Tune for Amazon OpenSearch\n    Service</a>. </p>"
             }
         },
         "com.amazonaws.opensearch#AutoTuneStatus": {
@@ -2820,7 +2832,7 @@
                 "ZoneStatus": {
                     "target": "com.amazonaws.opensearch#ZoneStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current state of the Availability Zone. Current options are <code>Active</code> and <code>StandBy</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Active</code> - Data nodes in the Availability Zone are in use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>StandBy</code> - Data nodes in the Availability Zone are in a standby state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NotAvailable</code> - Unable to retrieve information.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The current state of the Availability Zone. Current options are <code>Active</code> and\n    <code>StandBy</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Active</code> - Data nodes in the Availability Zone are in use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>StandBy</code> - Data nodes in the Availability Zone are in a standby state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NotAvailable</code> - Unable to retrieve information.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ConfiguredDataNodeCount": {
@@ -2844,7 +2856,7 @@
                 "TotalUnAssignedShards": {
                     "target": "com.amazonaws.opensearch#NumberOfShards",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total number of primary and replica shards that aren't allocated to any of the nodes in the Availability Zone.</p>"
+                        "smithy.api#documentation": "<p>The total number of primary and replica shards that aren't allocated to any of the nodes in\n   the Availability Zone.</p>"
                     }
                 }
             },
@@ -2938,7 +2950,7 @@
                 "DryRun": {
                     "target": "com.amazonaws.opensearch#DryRun",
                     "traits": {
-                        "smithy.api#documentation": "<p>When set to <code>True</code>, returns the list of change IDs and properties that will be cancelled without actually cancelling the change.</p>"
+                        "smithy.api#documentation": "<p>When set to <code>True</code>, returns the list of change IDs and properties that will be\n   cancelled without actually cancelling the change.</p>"
                     }
                 }
             },
@@ -2964,7 +2976,7 @@
                 "DryRun": {
                     "target": "com.amazonaws.opensearch#DryRun",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether or not the request was a dry run. If <code>True</code>, the changes were not actually cancelled. </p>"
+                        "smithy.api#documentation": "<p>Whether or not the request was a dry run. If <code>True</code>, the changes were not\n   actually cancelled. </p>"
                     }
                 }
             },
@@ -3046,7 +3058,7 @@
                 "CancelledValue": {
                     "target": "com.amazonaws.opensearch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pending value of the property that was cancelled. This would have been the eventual value of the property if the chance had not been cancelled.</p>"
+                        "smithy.api#documentation": "<p>The pending value of the property that was cancelled. This would have been the eventual\n   value of the property if the chance had not been cancelled.</p>"
                     }
                 },
                 "ActiveValue": {
@@ -3096,7 +3108,7 @@
                 "StartTime": {
                     "target": "com.amazonaws.opensearch#UpdateTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time that the configuration change was initiated, in Universal Coordinated Time (UTC).</p>"
+                        "smithy.api#documentation": "<p>The time that the configuration change was initiated, in Universal Coordinated Time\n   (UTC).</p>"
                     }
                 },
                 "LastUpdatedTime": {
@@ -3212,7 +3224,7 @@
                 "ChangeProgressStages": {
                     "target": "com.amazonaws.opensearch#ChangeProgressStageList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The specific stages that the domain is going through to perform the configuration change.</p>"
+                        "smithy.api#documentation": "<p>The specific stages that the domain is going through to perform the configuration\n   change.</p>"
                     }
                 },
                 "LastUpdatedTime": {
@@ -3253,13 +3265,13 @@
                 "RoleArn": {
                     "target": "com.amazonaws.opensearch#DirectQueryDataSourceRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The unique identifier of the IAM role that grants \n   OpenSearch Service permission to access the specified data source.\n  </p>",
+                        "smithy.api#documentation": "<p> The unique identifier of the IAM role that grants OpenSearch Service permission to access\n   the specified data source. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n   Configuration details for a CloudWatch Logs data source \n   that can be used for direct queries.\n  </p>"
+                "smithy.api#documentation": "<p> Configuration details for a CloudWatch Logs data source that can be used for direct\n   queries. </p>"
             }
         },
         "com.amazonaws.opensearch#CloudWatchLogsLogGroupArn": {
@@ -3315,7 +3327,7 @@
                 "DedicatedMasterCount": {
                     "target": "com.amazonaws.opensearch#IntegerClass",
                     "traits": {
-                        "smithy.api#documentation": "<p>Number of dedicated master nodes in the cluster. This number must be greater than 2 and not 4,\n   otherwise you receive a validation exception.</p>"
+                        "smithy.api#documentation": "<p>Number of dedicated master nodes in the cluster. This number must be greater than 2 and not\n   4, otherwise you receive a validation exception.</p>"
                     }
                 },
                 "WarmEnabled": {
@@ -3345,7 +3357,7 @@
                 "MultiAZWithStandbyEnabled": {
                     "target": "com.amazonaws.opensearch#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A boolean that indicates whether a multi-AZ domain is turned on with a standby AZ. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-multiaz.html\">Configuring a multi-AZ domain in Amazon OpenSearch Service</a>. </p>"
+                        "smithy.api#documentation": "<p>A boolean that indicates whether a multi-AZ domain is turned on with a standby AZ. For more\n   information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-multiaz.html\">Configuring a multi-AZ\n    domain in Amazon OpenSearch Service</a>. </p>"
                     }
                 },
                 "NodeOptions": {
@@ -3356,7 +3368,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Container for the cluster configuration of an OpenSearch Service domain. For more\n   information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html\">Creating and managing Amazon OpenSearch Service domains</a>.</p>"
+                "smithy.api#documentation": "<p>Container for the cluster configuration of an OpenSearch Service domain. For more\n   information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html\">Creating and managing\n    Amazon OpenSearch Service domains</a>.</p>"
             }
         },
         "com.amazonaws.opensearch#ClusterConfigStatus": {
@@ -3441,7 +3453,7 @@
                 "Enabled": {
                     "target": "com.amazonaws.opensearch#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to enable or disable cold storage on the domain. You must enable UltraWarm storage to enable cold storage.</p>",
+                        "smithy.api#documentation": "<p>Whether to enable or disable cold storage on the domain. You must enable UltraWarm storage\n   to enable cold storage.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3591,7 +3603,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The connection mode for the cross-cluster connection.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>DIRECT</b> - Used for cross-cluster search or cross-cluster replication.</p>\n            </li>\n            <li>\n               <p>\n                  <b>VPC_ENDPOINT</b> - Used for remote reindex\n     between Amazon OpenSearch Service VPC domains.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>The connection mode for the cross-cluster connection.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>DIRECT</b> - Used for cross-cluster search or cross-cluster\n     replication.</p>\n            </li>\n            <li>\n               <p>\n                  <b>VPC_ENDPOINT</b> - Used for remote reindex between Amazon\n     OpenSearch Service VPC domains.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.opensearch#ConnectionProperties": {
@@ -3646,7 +3658,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an OpenSearch UI application. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/application.html\">Using the OpenSearch user interface in Amazon OpenSearch Service</a>.</p>",
+                "smithy.api#documentation": "<p>Creates an OpenSearch UI application. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/application.html\">Using the OpenSearch user\n    interface in Amazon OpenSearch Service</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2021-01-01/opensearch/application",
@@ -3680,13 +3692,13 @@
                 "iamIdentityCenterOptions": {
                     "target": "com.amazonaws.opensearch#IamIdentityCenterOptionsInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration settings for integrating Amazon Web Services IAM Identity Center with the OpenSearch application.</p>"
+                        "smithy.api#documentation": "<p>Configuration settings for integrating Amazon Web Services IAM Identity Center with the\n   OpenSearch application.</p>"
                     }
                 },
                 "appConfigs": {
                     "target": "com.amazonaws.opensearch#AppConfigs",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration settings for the OpenSearch application, including administrative options.</p>"
+                        "smithy.api#documentation": "<p>Configuration settings for the OpenSearch application, including administrative\n   options.</p>"
                     }
                 },
                 "tagList": {
@@ -3730,7 +3742,7 @@
                 "appConfigs": {
                     "target": "com.amazonaws.opensearch#AppConfigs",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration settings for the OpenSearch application, including administrative options.</p>"
+                        "smithy.api#documentation": "<p>Configuration settings for the OpenSearch application, including administrative\n   options.</p>"
                     }
                 },
                 "tagList": {
@@ -3824,7 +3836,7 @@
                 "IPAddressType": {
                     "target": "com.amazonaws.opensearch#IPAddressType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify either dual stack or IPv4 as your IP address type. Dual stack allows you to share\n   domain resources across IPv4 and IPv6 address types, and is the recommended option. \n   If you set your IP address type to dual stack, you can't change your address type later.</p>"
+                        "smithy.api#documentation": "<p>Specify either dual stack or IPv4 as your IP address type. Dual stack allows you to share\n   domain resources across IPv4 and IPv6 address types, and is the recommended option. If you set\n   your IP address type to dual stack, you can't change your address type later.</p>"
                     }
                 },
                 "SnapshotOptions": {
@@ -3884,7 +3896,7 @@
                 "IdentityCenterOptions": {
                     "target": "com.amazonaws.opensearch#IdentityCenterOptionsInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration options for enabling and managing IAM Identity Center integration within a domain.</p>"
+                        "smithy.api#documentation": "<p>Configuration options for enabling and managing IAM Identity Center integration within a\n   domain.</p>"
                     }
                 },
                 "TagList": {
@@ -4140,13 +4152,13 @@
                 "EngineVersion": {
                     "target": "com.amazonaws.opensearch#EngineVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the Amazon OpenSearch Service engine for which is compatible with the package. This can only be specified for package type <code>ZIP-PLUGIN</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The version of the Amazon OpenSearch Service engine for which is compatible with the\n   package. This can only be specified for package type <code>ZIP-PLUGIN</code>\n         </p>"
                     }
                 },
                 "PackageVendingOptions": {
                     "target": "com.amazonaws.opensearch#PackageVendingOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p> The vending options for the package being created. They determine if the package can be vended to other users.</p>"
+                        "smithy.api#documentation": "<p> The vending options for the package being created. They determine if the package can be\n   vended to other users.</p>"
                     }
                 },
                 "PackageEncryptionOptions": {
@@ -4287,7 +4299,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Data sources that are associated with an OpenSearch Application. </p>"
+                "smithy.api#documentation": "<p>Data sources that are associated with an OpenSearch application. </p>"
             }
         },
         "com.amazonaws.opensearch#DataSourceDescription": {
@@ -4477,7 +4489,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a direct-query data source. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3-delete.html\">Deleting an Amazon OpenSearch Service data source with Amazon S3</a>.</p>",
+                "smithy.api#documentation": "<p>Deletes a direct-query data source. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3-delete.html\">Deleting an Amazon\n    OpenSearch Service data source with Amazon S3</a>.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/2021-01-01/opensearch/domain/{DomainName}/dataSource/{Name}",
@@ -4506,7 +4518,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Container for the parameters to the <code>DeleteDataSource</code>\n   operation.</p>",
+                "smithy.api#documentation": "<p>Container for the parameters to the <code>DeleteDataSource</code> operation.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -4551,7 +4563,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n   Deletes a previously configured direct query data \n   source from Amazon OpenSearch Service.\n  </p>",
+                "smithy.api#documentation": "<p> Deletes a previously configured direct query data source from Amazon OpenSearch Service.\n  </p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/2021-01-01/opensearch/directQueryDataSource/{DataSourceName}",
@@ -4565,7 +4577,7 @@
                 "DataSourceName": {
                     "target": "com.amazonaws.opensearch#DirectQueryDataSourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   A unique, user-defined label to identify the data source \n   within your OpenSearch Service environment.\n  </p>",
+                        "smithy.api#documentation": "<p> A unique, user-defined label to identify the data source within your OpenSearch Service\n   environment. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4634,7 +4646,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The results of a <code>DeleteDomain</code> request. Contains the status of the pending\n   deletion, or a \"domain not found\" error if the domain and all of its resources have been deleted.</p>",
+                "smithy.api#documentation": "<p>The results of a <code>DeleteDomain</code> request. Contains the status of the pending\n   deletion, or a \"domain not found\" error if the domain and all of its resources have been\n   deleted.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -4795,7 +4807,7 @@
                 "PackageID": {
                     "target": "com.amazonaws.opensearch#PackageID",
                     "traits": {
-                        "smithy.api#documentation": "<p>The internal ID of the package you want to delete. Use <code>DescribePackages</code> to find this value.</p>",
+                        "smithy.api#documentation": "<p>The internal ID of the package you want to delete. Use <code>DescribePackages</code> to find\n   this value.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5055,7 +5067,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.opensearch#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Send the request again using the\n   returned token to retrieve the next page.</p>"
+                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Send the request again using\n   the returned token to retrieve the next page.</p>"
                     }
                 }
             },
@@ -5087,7 +5099,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about the current blue/green deployment happening on an Amazon\n   OpenSearch Service domain. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-configuration-changes.html\">Making configuration changes in Amazon OpenSearch Service</a>.</p>",
+                "smithy.api#documentation": "<p>Returns information about the current blue/green deployment happening on an Amazon\n   OpenSearch Service domain. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-configuration-changes.html\">Making\n    configuration changes in Amazon OpenSearch Service</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2021-01-01/opensearch/domain/{DomainName}/progress",
@@ -5125,7 +5137,7 @@
                 "ChangeProgressStatus": {
                     "target": "com.amazonaws.opensearch#ChangeProgressStatusDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Container for information about the stages of a configuration change happening on a domain.</p>"
+                        "smithy.api#documentation": "<p>Container for information about the stages of a configuration change happening on a\n   domain.</p>"
                     }
                 }
             },
@@ -5224,7 +5236,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about domain and node health, the standby Availability Zone, number of nodes per Availability Zone, and shard count per node.</p>",
+                "smithy.api#documentation": "<p>Returns information about domain and node health, the standby Availability Zone, number of\n   nodes per Availability Zone, and shard count per node.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2021-01-01/opensearch/domain/{DomainName}/health",
@@ -5255,31 +5267,31 @@
                 "DomainState": {
                     "target": "com.amazonaws.opensearch#DomainState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current state of the domain.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Processing</code> - The domain has updates in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Active</code> - Requested changes have been processed and deployed to the domain.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The current state of the domain.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Processing</code> - The domain has updates in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Active</code> - Requested changes have been processed and deployed to the\n     domain.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "AvailabilityZoneCount": {
                     "target": "com.amazonaws.opensearch#NumberOfAZs",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of Availability Zones configured for the domain. If the service is unable to fetch this information, it will return <code>NotAvailable</code>.</p>"
+                        "smithy.api#documentation": "<p>The number of Availability Zones configured for the domain. If the service is unable to\n   fetch this information, it will return <code>NotAvailable</code>.</p>"
                     }
                 },
                 "ActiveAvailabilityZoneCount": {
                     "target": "com.amazonaws.opensearch#NumberOfAZs",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of active Availability Zones configured for the domain. If the service is unable to fetch this information, it will return <code>NotAvailable</code>.</p>"
+                        "smithy.api#documentation": "<p>The number of active Availability Zones configured for the domain. If the service is unable\n   to fetch this information, it will return <code>NotAvailable</code>.</p>"
                     }
                 },
                 "StandByAvailabilityZoneCount": {
                     "target": "com.amazonaws.opensearch#NumberOfAZs",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of standby Availability Zones configured for the domain. If the service is unable to fetch this information, it will return <code>NotAvailable</code>.</p>"
+                        "smithy.api#documentation": "<p>The number of standby Availability Zones configured for the domain. If the service is unable\n   to fetch this information, it will return <code>NotAvailable</code>.</p>"
                     }
                 },
                 "DataNodeCount": {
                     "target": "com.amazonaws.opensearch#NumberOfNodes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of data nodes configured for the domain. If the service is unable to fetch this information, it will return <code>NotAvailable</code>.</p>"
+                        "smithy.api#documentation": "<p>The number of data nodes configured for the domain. If the service is unable to fetch this\n   information, it will return <code>NotAvailable</code>.</p>"
                     }
                 },
                 "DedicatedMaster": {
@@ -5291,7 +5303,7 @@
                 "MasterEligibleNodeCount": {
                     "target": "com.amazonaws.opensearch#NumberOfNodes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of nodes that can be elected as a master node. If dedicated master nodes is turned on, this value is the number of dedicated master nodes configured for the domain.\n   If the service is unable to fetch this information, it will return <code>NotAvailable</code>.</p>"
+                        "smithy.api#documentation": "<p>The number of nodes that can be elected as a master node. If dedicated master nodes is\n   turned on, this value is the number of dedicated master nodes configured for the domain. If the\n   service is unable to fetch this information, it will return <code>NotAvailable</code>.</p>"
                     }
                 },
                 "WarmNodeCount": {
@@ -5303,13 +5315,13 @@
                 "MasterNode": {
                     "target": "com.amazonaws.opensearch#MasterNodeStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the domain has an elected master node.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Available</b> - The domain has an elected master node.</p>\n            </li>\n            <li>\n               <p>\n                  <b>UnAvailable</b> - The master node hasn't yet been elected, and a quorum to elect a new master node hasn't been reached.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Indicates whether the domain has an elected master node.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Available</b> - The domain has an elected master node.</p>\n            </li>\n            <li>\n               <p>\n                  <b>UnAvailable</b> - The master node hasn't yet been elected,\n     and a quorum to elect a new master node hasn't been reached.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ClusterHealth": {
                     "target": "com.amazonaws.opensearch#DomainHealth",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current health status of your cluster.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Red</code> - At least one primary shard is not allocated to any node.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Yellow</code> - All primary shards are allocated to nodes, but some replicas aren’t.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Green</code> - All primary shards and their replicas are allocated to nodes.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NotAvailable</code> - Unable to retrieve cluster health.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The current health status of your cluster.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Red</code> - At least one primary shard is not allocated to any node.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Yellow</code> - All primary shards are allocated to nodes, but some replicas\n     aren’t.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Green</code> - All primary shards and their replicas are allocated to nodes.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NotAvailable</code> - Unable to retrieve cluster health.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "TotalShards": {
@@ -5321,7 +5333,7 @@
                 "TotalUnAssignedShards": {
                     "target": "com.amazonaws.opensearch#NumberOfShards",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total number of primary and replica shards not allocated to any of the nodes for the cluster.</p>"
+                        "smithy.api#documentation": "<p>The total number of primary and replica shards not allocated to any of the nodes for the\n   cluster.</p>"
                     }
                 },
                 "EnvironmentInformation": {
@@ -5332,7 +5344,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The result of a <code>DescribeDomainHealth</code> request. Contains health information for the requested domain.</p>",
+                "smithy.api#documentation": "<p>The result of a <code>DescribeDomainHealth</code> request. Contains health information for\n   the requested domain.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -5386,7 +5398,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Container for the parameters to the <code>DescribeDomainNodes</code>\n   operation.</p>",
+                "smithy.api#documentation": "<p>Container for the parameters to the <code>DescribeDomainNodes</code> operation.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -5396,12 +5408,12 @@
                 "DomainNodesStatusList": {
                     "target": "com.amazonaws.opensearch#DomainNodesStatusList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains nodes information list <code>DomainNodesStatusList</code> with\n   details about the all nodes on the requested domain.</p>"
+                        "smithy.api#documentation": "<p>Contains nodes information list <code>DomainNodesStatusList</code> with details about the\n   all nodes on the requested domain.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The result of a <code>DescribeDomainNodes</code> request. Contains information about the nodes on the requested domain. </p>",
+                "smithy.api#documentation": "<p>The result of a <code>DescribeDomainNodes</code> request. Contains information about the\n   nodes on the requested domain. </p>",
                 "smithy.api#output": {}
             }
         },
@@ -5524,7 +5536,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the progress of a pre-update dry run analysis on an Amazon OpenSearch\n   Service domain. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-configuration-changes#dryrun\">Determining whether a change will cause a blue/green deployment</a>.</p>",
+                "smithy.api#documentation": "<p>Describes the progress of a pre-update dry run analysis on an Amazon OpenSearch Service\n   domain. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-configuration-changes#dryrun\">Determining whether a change will cause a blue/green deployment</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2021-01-01/opensearch/domain/{DomainName}/dryRun",
@@ -5642,7 +5654,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Container for the parameters to the <code>DescribeInboundConnections</code> operation.</p>",
+                "smithy.api#documentation": "<p>Container for the parameters to the <code>DescribeInboundConnections</code>\n   operation.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -5658,7 +5670,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.opensearch#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Send the request again using the\n   returned token to retrieve the next page.</p>"
+                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Send the request again using\n   the returned token to retrieve the next page.</p>"
                     }
                 }
             },
@@ -5732,7 +5744,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Container for the parameters to the <code>DescribeInstanceTypeLimits</code> operation.</p>",
+                "smithy.api#documentation": "<p>Container for the parameters to the <code>DescribeInstanceTypeLimits</code>\n   operation.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -5742,7 +5754,7 @@
                 "LimitsByRole": {
                     "target": "com.amazonaws.opensearch#LimitsByRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>Map that contains all applicable instance type limits.<code>data</code> refers to data\n   nodes.<code>master</code> refers to dedicated master nodes.</p>"
+                        "smithy.api#documentation": "<p>Map that contains all applicable instance type limits.<code>data</code> refers to data\n    nodes.<code>master</code> refers to dedicated master nodes.</p>"
                     }
                 }
             },
@@ -5805,7 +5817,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Container for the parameters to the <code>DescribeOutboundConnections</code> operation.</p>",
+                "smithy.api#documentation": "<p>Container for the parameters to the <code>DescribeOutboundConnections</code>\n   operation.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -5821,7 +5833,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.opensearch#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Send the request again using the\n   returned token to retrieve the next page.</p>"
+                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Send the request again using\n   the returned token to retrieve the next page.</p>"
                     }
                 }
             },
@@ -5895,7 +5907,7 @@
                 "target": "com.amazonaws.opensearch#DescribePackagesFilter"
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of <code>DescribePackagesFilter</code> to filter the packages included in a <code>DescribePackages</code>\n   response.</p>"
+                "smithy.api#documentation": "<p>A list of <code>DescribePackagesFilter</code> to filter the packages included in a\n    <code>DescribePackages</code> response.</p>"
             }
         },
         "com.amazonaws.opensearch#DescribePackagesFilterName": {
@@ -5969,13 +5981,13 @@
                     "target": "com.amazonaws.opensearch#MaxResults",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return. You can use\n   <code>nextToken</code> to get the next page of results.</p>"
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return. You can use\n    <code>nextToken</code> to get the next page of results.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.opensearch#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If your initial <code>DescribePackageFilters</code> operation returns a\n   <code>nextToken</code>, you can include the returned <code>nextToken</code> in subsequent\n   <code>DescribePackageFilters</code> operations, which returns results in the next page.</p>"
+                        "smithy.api#documentation": "<p>If your initial <code>DescribePackageFilters</code> operation returns a\n    <code>nextToken</code>, you can include the returned <code>nextToken</code> in subsequent\n    <code>DescribePackageFilters</code> operations, which returns results in the next page.</p>"
                     }
                 }
             },
@@ -5996,7 +6008,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.opensearch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n   <code>nextToken</code> is a unique pagination token for each page. Send the request again using the\n   returned token to retrieve the next page.</p>"
+                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Send the request again using\n   the returned token to retrieve the next page.</p>"
                     }
                 }
             },
@@ -6028,7 +6040,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the available Amazon OpenSearch Service Reserved Instance offerings for a given\n   Region. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ri.html\">Reserved Instances in Amazon OpenSearch Service</a>.</p>",
+                "smithy.api#documentation": "<p>Describes the available Amazon OpenSearch Service Reserved Instance offerings for a given\n   Region. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ri.html\">Reserved Instances in Amazon OpenSearch\n    Service</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2021-01-01/opensearch/reservedInstanceOfferings",
@@ -6078,7 +6090,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.opensearch#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Send the request again using the\n   returned token to retrieve the next page.</p>"
+                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Send the request again using\n   the returned token to retrieve the next page.</p>"
                     }
                 },
                 "ReservedInstanceOfferings": {
@@ -6135,7 +6147,7 @@
                 "ReservedInstanceId": {
                     "target": "com.amazonaws.opensearch#GUID",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reserved instance identifier filter value. Use this parameter to show only the reservation that matches the\n   specified reserved OpenSearch instance ID.</p>",
+                        "smithy.api#documentation": "<p>The reserved instance identifier filter value. Use this parameter to show only the\n   reservation that matches the specified reserved OpenSearch instance ID.</p>",
                         "smithy.api#httpQuery": "reservationId"
                     }
                 },
@@ -6166,7 +6178,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.opensearch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Send the request again using the\n   returned token to retrieve the next page.</p>"
+                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Send the request again using\n   the returned token to retrieve the next page.</p>"
                     }
                 },
                 "ReservedInstances": {
@@ -6258,42 +6270,42 @@
                 "DataSourceName": {
                     "target": "com.amazonaws.opensearch#DirectQueryDataSourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   A unique, user-defined label to identify the data source \n   within your OpenSearch Service environment.\n  </p>"
+                        "smithy.api#documentation": "<p> A unique, user-defined label to identify the data source within your OpenSearch Service\n   environment. </p>"
                     }
                 },
                 "DataSourceType": {
                     "target": "com.amazonaws.opensearch#DirectQueryDataSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The supported Amazon Web Services service that is used as the source for direct queries in OpenSearch Service. \n  </p>"
+                        "smithy.api#documentation": "<p> The supported Amazon Web Services service that is used as the source for direct queries in\n   OpenSearch Service. </p>"
                     }
                 },
                 "Description": {
                     "target": "com.amazonaws.opensearch#DirectQueryDataSourceDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   A description that provides additional context and details about the data source.</p>"
+                        "smithy.api#documentation": "<p> A description that provides additional context and details about the data source.</p>"
                     }
                 },
                 "OpenSearchArns": {
                     "target": "com.amazonaws.opensearch#DirectQueryOpenSearchARNList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   A list of Amazon Resource Names (ARNs) for the OpenSearch \n   collections that are associated with the direct query data source.\n  </p>"
+                        "smithy.api#documentation": "<p> A list of Amazon Resource Names (ARNs) for the OpenSearch collections that are associated\n   with the direct query data source. </p>"
                     }
                 },
                 "DataSourceArn": {
                     "target": "com.amazonaws.opensearch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The unique, system-generated identifier that represents the data source.</p>"
+                        "smithy.api#documentation": "<p> The unique, system-generated identifier that represents the data source.</p>"
                     }
                 },
                 "TagList": {
                     "target": "com.amazonaws.opensearch#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   A list of tags attached to a direct query data source.</p>"
+                        "smithy.api#documentation": "<p> A list of tags attached to a direct query data source.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n   The configuration details for a data source that can be directly queried.\n  </p>"
+                "smithy.api#documentation": "<p> The configuration details for a data source that can be directly queried. </p>"
             }
         },
         "com.amazonaws.opensearch#DirectQueryDataSourceDescription": {
@@ -6338,18 +6350,18 @@
                 "CloudWatchLog": {
                     "target": "com.amazonaws.opensearch#CloudWatchDirectQueryDataSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   Specifies CloudWatch Logs as a type of data source for direct queries.\n  </p>"
+                        "smithy.api#documentation": "<p> Specifies CloudWatch Logs as a type of data source for direct queries. </p>"
                     }
                 },
                 "SecurityLake": {
                     "target": "com.amazonaws.opensearch#SecurityLakeDirectQueryDataSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   Specifies Security Lake as a type of data source for direct queries.\n  </p>"
+                        "smithy.api#documentation": "<p> Specifies Security Lake as a type of data source for direct queries. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n   The type of data source that is used for direct queries. \n   This is a supported Amazon Web Services service, such as CloudWatch Logs or Security Lake.\n  </p>"
+                "smithy.api#documentation": "<p> The type of data source that is used for direct queries. This is a supported Amazon Web Services service, such as CloudWatch Logs or Security Lake. </p>"
             }
         },
         "com.amazonaws.opensearch#DirectQueryOpenSearchARNList": {
@@ -6566,7 +6578,7 @@
                 "IPAddressType": {
                     "target": "com.amazonaws.opensearch#IPAddressTypeStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Choose either dual stack or IPv4 as your IP address type. \n   Dual stack allows you to share domain resources across IPv4 and IPv6 address types, and is the recommended option. \n   If you set your IP address type to dual stack, you can't change your address type later.</p>"
+                        "smithy.api#documentation": "<p>Choose either dual stack or IPv4 as your IP address type. Dual stack allows you to share\n   domain resources across IPv4 and IPv6 address types, and is the recommended option. If you set\n   your IP address type to dual stack, you can't change your address type later.</p>"
                     }
                 },
                 "SnapshotOptions": {
@@ -6626,7 +6638,7 @@
                 "IdentityCenterOptions": {
                     "target": "com.amazonaws.opensearch#IdentityCenterOptionsStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration options for enabling and managing IAM Identity Center integration within a domain.</p>"
+                        "smithy.api#documentation": "<p>Configuration options for enabling and managing IAM Identity Center integration within a\n   domain.</p>"
                     }
                 },
                 "AutoTuneOptions": {
@@ -6966,7 +6978,7 @@
                 "target": "com.amazonaws.opensearch#DomainNodesStatus"
             },
             "traits": {
-                "smithy.api#documentation": "<p>List of <code>DomainNodesStatus</code> with details about nodes on\n   the requested domain.</p>"
+                "smithy.api#documentation": "<p>List of <code>DomainNodesStatus</code> with details about nodes on the requested\n   domain.</p>"
             }
         },
         "com.amazonaws.opensearch#DomainPackageDetails": {
@@ -7017,13 +7029,13 @@
                 "PrerequisitePackageIDList": {
                     "target": "com.amazonaws.opensearch#PackageIDList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of package IDs that must be associated with the domain before or with the package can be associated.</p>"
+                        "smithy.api#documentation": "<p>A list of package IDs that must be associated with the domain before or with the package can\n   be associated.</p>"
                     }
                 },
                 "ReferencePath": {
                     "target": "com.amazonaws.opensearch#ReferencePath",
                     "traits": {
-                        "smithy.api#documentation": "<p>The relative path of the package on the OpenSearch Service cluster nodes. This is <code>synonym_path</code>\n   when the package is for synonym files.</p>"
+                        "smithy.api#documentation": "<p>The relative path of the package on the OpenSearch Service cluster nodes. This is\n    <code>synonym_path</code> when the package is for synonym files.</p>"
                     }
                 },
                 "ErrorDetails": {
@@ -7199,13 +7211,13 @@
                 "EndpointV2": {
                     "target": "com.amazonaws.opensearch#ServiceUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>IPAddressType</code> to set to <code>dualstack</code>, a version 2 domain endpoint is provisioned.\n   This endpoint functions like a normal endpoint, except that it works with both IPv4 and IPv6 IP addresses.\n   Normal endpoints work only with IPv4 IP addresses.\n  </p>"
+                        "smithy.api#documentation": "<p>If <code>IPAddressType</code> to set to <code>dualstack</code>, a version 2 domain endpoint\n   is provisioned. This endpoint functions like a normal endpoint, except that it works with both\n   IPv4 and IPv6 IP addresses. Normal endpoints work only with IPv4 IP addresses. </p>"
                     }
                 },
                 "Endpoints": {
                     "target": "com.amazonaws.opensearch#EndpointsMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key-value pair that exists if the OpenSearch Service domain uses VPC endpoints. For example:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>IPv4 IP addresses</b> -\n      <code>'vpc','vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com'</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>Dual stack IP addresses</b> -\n      <code>'vpcv2':'vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.aos.us-east-1.on.aws'</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The key-value pair that exists if the OpenSearch Service domain uses VPC endpoints. For\n   example:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>IPv4 IP addresses</b> -\n      <code>'vpc','vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com'</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>Dual stack IP addresses</b> -\n      <code>'vpcv2':'vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.aos.us-east-1.on.aws'</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "DomainEndpointV2HostedZoneId": {
@@ -7320,7 +7332,7 @@
                 "IdentityCenterOptions": {
                     "target": "com.amazonaws.opensearch#IdentityCenterOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration options for controlling IAM Identity Center integration within a domain.</p>"
+                        "smithy.api#documentation": "<p>Configuration options for controlling IAM Identity Center integration within a\n   domain.</p>"
                     }
                 },
                 "AutoTuneOptions": {
@@ -7571,7 +7583,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies whether the domain should encrypt data at rest, and if so, the Key Management\n   Service (KMS) key to use. Can only be used when creating a new domain or enabling encryption at rest\n   for the first time on an existing domain. You can't modify this parameter after it's already been\n   specified.</p>"
+                "smithy.api#documentation": "<p>Specifies whether the domain should encrypt data at rest, and if so, the Key Management\n   Service (KMS) key to use. Can only be used when creating a new domain or enabling encryption at\n   rest for the first time on an existing domain. You can't modify this parameter after it's already\n   been specified.</p>"
             }
         },
         "com.amazonaws.opensearch#EncryptionAtRestOptionsStatus": {
@@ -7802,7 +7814,7 @@
                 "status": {
                     "target": "com.amazonaws.opensearch#ApplicationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the OpenSearch application. Possible values: <code>CREATING</code>, <code>UPDATING</code>, <code>DELETING</code>, <code>FAILED</code>, <code>ACTIVE</code>, and <code>DELETED</code>.</p>"
+                        "smithy.api#documentation": "<p>The current status of the OpenSearch application. Possible values: <code>CREATING</code>,\n    <code>UPDATING</code>, <code>DELETING</code>, <code>FAILED</code>, <code>ACTIVE</code>, and\n    <code>DELETED</code>.</p>"
                     }
                 },
                 "iamIdentityCenterOptions": {
@@ -7901,7 +7913,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Container for the response returned by the <code>GetCompatibleVersions</code> operation.</p>",
+                "smithy.api#documentation": "<p>Container for the response returned by the <code>GetCompatibleVersions</code>\n   operation.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -7963,7 +7975,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Container for the parameters to the <code>GetDataSource</code>\n   operation.</p>",
+                "smithy.api#documentation": "<p>Container for the parameters to the <code>GetDataSource</code> operation.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -8026,7 +8038,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n   Returns detailed configuration information for \n   a specific direct query data source in Amazon OpenSearch Service.\n  </p>",
+                "smithy.api#documentation": "<p> Returns detailed configuration information for a specific direct query data source in\n   Amazon OpenSearch Service. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2021-01-01/opensearch/directQueryDataSource/{DataSourceName}",
@@ -8040,7 +8052,7 @@
                 "DataSourceName": {
                     "target": "com.amazonaws.opensearch#DirectQueryDataSourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   A unique, user-defined label that identifies the data source within \n   your OpenSearch Service environment.\n  </p>",
+                        "smithy.api#documentation": "<p> A unique, user-defined label that identifies the data source within your OpenSearch Service\n   environment. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -8056,31 +8068,31 @@
                 "DataSourceName": {
                     "target": "com.amazonaws.opensearch#DirectQueryDataSourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   A unique, user-defined label to identify the data source \n   within your OpenSearch Service environment.\n  </p>"
+                        "smithy.api#documentation": "<p> A unique, user-defined label to identify the data source within your OpenSearch Service\n   environment. </p>"
                     }
                 },
                 "DataSourceType": {
                     "target": "com.amazonaws.opensearch#DirectQueryDataSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The supported Amazon Web Services service that is used as the source for \n   direct queries in OpenSearch Service. \n  </p>"
+                        "smithy.api#documentation": "<p> The supported Amazon Web Services service that is used as the source for direct queries in\n   OpenSearch Service. </p>"
                     }
                 },
                 "Description": {
                     "target": "com.amazonaws.opensearch#DirectQueryDataSourceDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   A description that provides additional context and details about the data source.\n  </p>"
+                        "smithy.api#documentation": "<p> A description that provides additional context and details about the data source. </p>"
                     }
                 },
                 "OpenSearchArns": {
                     "target": "com.amazonaws.opensearch#DirectQueryOpenSearchARNList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   A list of Amazon Resource Names (ARNs) for the OpenSearch \n   collections that are associated with the direct query data source.\n  </p>"
+                        "smithy.api#documentation": "<p> A list of Amazon Resource Names (ARNs) for the OpenSearch collections that are associated\n   with the direct query data source. </p>"
                     }
                 },
                 "DataSourceArn": {
                     "target": "com.amazonaws.opensearch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The unique, system-generated identifier that represents the data source.\n  </p>"
+                        "smithy.api#documentation": "<p> The unique, system-generated identifier that represents the data source. </p>"
                     }
                 }
             },
@@ -8188,7 +8200,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The result of a <code>GetDomainMaintenanceStatus</code> request that information about the requested action.</p>",
+                "smithy.api#documentation": "<p>The result of a <code>GetDomainMaintenanceStatus</code> request that information about the\n   requested action.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -8218,7 +8230,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of Amazon OpenSearch Service package versions, along with their creation time, commit message, and plugin properties (if the \n   package is a zip plugin package). For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html\">Custom packages for Amazon\n    OpenSearch Service</a>.</p>",
+                "smithy.api#documentation": "<p>Returns a list of Amazon OpenSearch Service package versions, along with their creation\n   time, commit message, and plugin properties (if the package is a zip plugin package). For more\n   information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html\">Custom packages for Amazon\n    OpenSearch Service</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2021-01-01/packages/{PackageID}/history",
@@ -8259,7 +8271,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Container for the request parameters to the <code>GetPackageVersionHistory</code> operation.</p>",
+                "smithy.api#documentation": "<p>Container for the request parameters to the <code>GetPackageVersionHistory</code>\n   operation.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -8281,12 +8293,12 @@
                 "NextToken": {
                     "target": "com.amazonaws.opensearch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Send the request again using the\n   returned token to retrieve the next page.</p>"
+                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Send the request again using\n   the returned token to retrieve the next page.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Container for response returned by <code>GetPackageVersionHistory</code>  operation.</p>",
+                "smithy.api#documentation": "<p>Container for response returned by <code>GetPackageVersionHistory</code> operation.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -8373,7 +8385,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.opensearch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Send the request again using the\n   returned token to retrieve the next page.</p>"
+                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Send the request again using\n   the returned token to retrieve the next page.</p>"
                     }
                 }
             },
@@ -8507,7 +8519,7 @@
                 "enabled": {
                     "target": "com.amazonaws.opensearch#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether IAM Identity Center is enabled for the OpenSearch Application.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether IAM Identity Center is enabled for the OpenSearch application.</p>"
                     }
                 },
                 "iamIdentityCenterInstanceArn": {
@@ -8516,7 +8528,7 @@
                 "iamRoleForIdentityCenterApplicationArn": {
                     "target": "com.amazonaws.opensearch#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role assigned to the IAM Identity Center application for the OpenSearch Application.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role assigned to the IAM Identity Center\n   application for the OpenSearch application.</p>"
                     }
                 },
                 "iamIdentityCenterApplicationArn": {
@@ -8524,7 +8536,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration settings for IAM Identity Center in an OpenSearch Application.</p>"
+                "smithy.api#documentation": "<p>Configuration settings for IAM Identity Center in an OpenSearch application.</p>"
             }
         },
         "com.amazonaws.opensearch#IamIdentityCenterOptionsInput": {
@@ -8594,19 +8606,19 @@
                 "SubjectKey": {
                     "target": "com.amazonaws.opensearch#SubjectKeyIdCOption",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the attribute that contains the subject identifier (such as username, user ID, or email) in IAM Identity Center.</p>"
+                        "smithy.api#documentation": "<p>Specifies the attribute that contains the subject identifier (such as username, user ID, or\n   email) in IAM Identity Center.</p>"
                     }
                 },
                 "RolesKey": {
                     "target": "com.amazonaws.opensearch#RolesKeyIdCOption",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the attribute that contains the backend role identifier (such as group name or group ID) in IAM Identity Center.</p>"
+                        "smithy.api#documentation": "<p>Specifies the attribute that contains the backend role identifier (such as group name or\n   group ID) in IAM Identity Center.</p>"
                     }
                 },
                 "IdentityCenterApplicationARN": {
                     "target": "com.amazonaws.opensearch#IdentityCenterApplicationARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center application that integrates with Amazon OpenSearch Service.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center application that integrates with Amazon OpenSearch\n   Service.</p>"
                     }
                 },
                 "IdentityStoreId": {
@@ -8617,7 +8629,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Settings container for integrating IAM Identity Center with OpenSearch UI applications, \n   which enables enabling secure user authentication and access control across multiple data sources.\n   This setup supports single sign-on (SSO) through IAM Identity Center, allowing centralized user management.</p>"
+                "smithy.api#documentation": "<p>Settings container for integrating IAM Identity Center with OpenSearch UI applications,\n   which enables enabling secure user authentication and access control across multiple data\n   sources. This setup supports single sign-on (SSO) through IAM Identity Center, allowing\n   centralized user management.</p>"
             }
         },
         "com.amazonaws.opensearch#IdentityCenterOptionsInput": {
@@ -8626,25 +8638,25 @@
                 "EnabledAPIAccess": {
                     "target": "com.amazonaws.opensearch#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether IAM Identity Center is enabled for API access in Amazon OpenSearch Service.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether IAM Identity Center is enabled for API access in Amazon OpenSearch\n   Service.</p>"
                     }
                 },
                 "IdentityCenterInstanceARN": {
                     "target": "com.amazonaws.opensearch#IdentityCenterInstanceARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance used to create an OpenSearch UI application that uses IAM Identity Center for authentication.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance used to create an OpenSearch UI application that\n   uses IAM Identity Center for authentication.</p>"
                     }
                 },
                 "SubjectKey": {
                     "target": "com.amazonaws.opensearch#SubjectKeyIdCOption",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the attribute that contains the subject identifier (such as username, user ID, or email) in IAM Identity Center.</p>"
+                        "smithy.api#documentation": "<p>Specifies the attribute that contains the subject identifier (such as username, user ID, or\n   email) in IAM Identity Center.</p>"
                     }
                 },
                 "RolesKey": {
                     "target": "com.amazonaws.opensearch#RolesKeyIdCOption",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the attribute that contains the backend role identifier (such as group name or group ID) in IAM Identity Center.</p>"
+                        "smithy.api#documentation": "<p>Specifies the attribute that contains the backend role identifier (such as group name or\n   group ID) in IAM Identity Center.</p>"
                     }
                 }
             },
@@ -9049,7 +9061,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The JWT authentication and authorization configuration for an Amazon OpenSearch Service domain.</p>"
+                "smithy.api#documentation": "<p>The JWT authentication and authorization configuration for an Amazon OpenSearch Service\n   domain.</p>"
             }
         },
         "com.amazonaws.opensearch#JWTOptionsOutput": {
@@ -9102,7 +9114,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration parameters to enable access to the key store required by the package.</p>"
+                "smithy.api#documentation": "<p>The configuration parameters to enable access to the key store required by the\n   package.</p>"
             }
         },
         "com.amazonaws.opensearch#KmsKeyId": {
@@ -9191,7 +9203,7 @@
                 "target": "com.amazonaws.opensearch#Limits"
             },
             "traits": {
-                "smithy.api#documentation": "<p> The role of a given instance and all applicable limits. The role performed by a given OpenSearch instance can\n   be one of the following: </p>\n         <ul>\n            <li>\n               <p>\n                  <b>data</b> - A data node.</p>\n            </li>\n            <li>\n               <p>\n                  <b>master</b> - A dedicated master node.</p>\n            </li>\n            <li>\n               <p>\n                  <b>ultra_warm</b> - An UltraWarm node.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p> The role of a given instance and all applicable limits. The role performed by a given\n   OpenSearch instance can be one of the following: </p>\n         <ul>\n            <li>\n               <p>\n                  <b>data</b> - A data node.</p>\n            </li>\n            <li>\n               <p>\n                  <b>master</b> - A dedicated master node.</p>\n            </li>\n            <li>\n               <p>\n                  <b>ultra_warm</b> - An UltraWarm node.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.opensearch#ListApplications": {
@@ -9249,7 +9261,7 @@
                 "statuses": {
                     "target": "com.amazonaws.opensearch#ApplicationStatuses",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters the list of OpenSearch applications by status. Possible values: <code>CREATING</code>, <code>UPDATING</code>, <code>DELETING</code>, <code>FAILED</code>, <code>ACTIVE</code>, and <code>DELETED</code>.</p>",
+                        "smithy.api#documentation": "<p>Filters the list of OpenSearch applications by status. Possible values:\n    <code>CREATING</code>, <code>UPDATING</code>, <code>DELETING</code>, <code>FAILED</code>,\n    <code>ACTIVE</code>, and <code>DELETED</code>.</p>",
                         "smithy.api#httpQuery": "statuses"
                     }
                 },
@@ -9271,7 +9283,7 @@
                 "ApplicationSummaries": {
                     "target": "com.amazonaws.opensearch#ApplicationSummaries",
                     "traits": {
-                        "smithy.api#documentation": "<p>Summarizes OpenSearch applications, including ID, ARN, name, endpoint, status, creation time, and last update time.</p>"
+                        "smithy.api#documentation": "<p>Summarizes OpenSearch applications, including ID, ARN, name, endpoint, status, creation\n   time, and last update time.</p>"
                     }
                 },
                 "nextToken": {
@@ -9311,7 +9323,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists direct-query data sources for a specific domain. For more information, see \n   For more information, see\n   <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3.html\">Working with Amazon OpenSearch Service direct queries with Amazon S3</a>.</p>",
+                "smithy.api#documentation": "<p>Lists direct-query data sources for a specific domain. For more information, see For more\n   information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3.html\">Working with Amazon\n    OpenSearch Service direct queries with Amazon S3</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2021-01-01/opensearch/domain/{DomainName}/dataSource",
@@ -9332,7 +9344,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Container for the parameters to the <code>ListDataSources</code>\n   operation.</p>",
+                "smithy.api#documentation": "<p>Container for the parameters to the <code>ListDataSources</code> operation.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -9377,7 +9389,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n   Lists an inventory of all the direct query data sources that you\n   have configured within Amazon OpenSearch Service.\n  </p>",
+                "smithy.api#documentation": "<p> Lists an inventory of all the direct query data sources that you have configured within\n   Amazon OpenSearch Service. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2021-01-01/opensearch/directQueryDataSource",
@@ -9408,7 +9420,7 @@
                 "DirectQueryDataSources": {
                     "target": "com.amazonaws.opensearch#DirectQueryDataSourceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   A list of the direct query data sources that are returned by \n   the <code>ListDirectQueryDataSources</code> API operation.\n  </p>"
+                        "smithy.api#documentation": "<p> A list of the direct query data sources that are returned by the\n    <code>ListDirectQueryDataSources</code> API operation. </p>"
                     }
                 }
             },
@@ -9484,20 +9496,20 @@
                     "target": "com.amazonaws.opensearch#MaxResults",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return. You can use\n   <code>nextToken</code> to get the next page of results.</p>",
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return. You can use\n    <code>nextToken</code> to get the next page of results.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.opensearch#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If your initial <code>ListDomainMaintenances</code> operation returns a\n   <code>nextToken</code>, include the returned <code>nextToken</code> in subsequent\n   <code>ListDomainMaintenances</code> operations, which returns results in the next page.</p>",
+                        "smithy.api#documentation": "<p>If your initial <code>ListDomainMaintenances</code> operation returns a\n    <code>nextToken</code>, include the returned <code>nextToken</code> in subsequent\n    <code>ListDomainMaintenances</code> operations, which returns results in the next page.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Container for the parameters to the <code>ListDomainMaintenances</code>\n   operation.</p>",
+                "smithy.api#documentation": "<p>Container for the parameters to the <code>ListDomainMaintenances</code> operation.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -9513,12 +9525,12 @@
                 "NextToken": {
                     "target": "com.amazonaws.opensearch#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n   <code>nextToken</code> is a unique pagination token for each page. Send the request again using the\n   returned token to retrieve the next page.</p>"
+                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Send the request again using\n   the returned token to retrieve the next page.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The result of a <code>ListDomainMaintenances</code> request that contains information about the requested actions. </p>",
+                "smithy.api#documentation": "<p>The result of a <code>ListDomainMaintenances</code> request that contains information about\n   the requested actions. </p>",
                 "smithy.api#output": {}
             }
         },
@@ -9645,7 +9657,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Container for the request parameters to the <code>ListDomainsForPackage</code> operation.</p>",
+                "smithy.api#documentation": "<p>Container for the request parameters to the <code>ListDomainsForPackage</code>\n   operation.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -9661,12 +9673,12 @@
                 "NextToken": {
                     "target": "com.amazonaws.opensearch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Send the request again using the\n   returned token to retrieve the next page.</p>"
+                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Send the request again using\n   the returned token to retrieve the next page.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Container for the response parameters to the <code>ListDomainsForPackage</code> operation.</p>",
+                "smithy.api#documentation": "<p>Container for the response parameters to the <code>ListDomainsForPackage</code>\n   operation.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -9712,7 +9724,7 @@
                 "EngineVersion": {
                     "target": "com.amazonaws.opensearch#VersionString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of OpenSearch or Elasticsearch, in the format Elasticsearch_X.Y or OpenSearch_X.Y.\n   Defaults to the latest version of OpenSearch.</p>",
+                        "smithy.api#documentation": "<p>The version of OpenSearch or Elasticsearch, in the format Elasticsearch_X.Y or\n   OpenSearch_X.Y. Defaults to the latest version of OpenSearch.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -9770,7 +9782,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.opensearch#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Send the request again using the\n   returned token to retrieve the next page.</p>"
+                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Send the request again using\n   the returned token to retrieve the next page.</p>"
                     }
                 }
             },
@@ -9845,7 +9857,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Container for the request parameters to the <code>ListPackagesForDomain</code> operation.</p>",
+                "smithy.api#documentation": "<p>Container for the request parameters to the <code>ListPackagesForDomain</code>\n   operation.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -9861,12 +9873,12 @@
                 "NextToken": {
                     "target": "com.amazonaws.opensearch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Send the request again using the\n   returned token to retrieve the next page.</p>"
+                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Send the request again using\n   the returned token to retrieve the next page.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Container for the response parameters to the <code>ListPackagesForDomain</code> operation.</p>",
+                "smithy.api#documentation": "<p>Container for the response parameters to the <code>ListPackagesForDomain</code>\n   operation.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -9896,7 +9908,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of configuration changes that are scheduled for a domain. These changes can\n   be <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html\">service software\n    updates</a> or <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html#auto-tune-types\">blue/green\n     Auto-Tune enhancements</a>.</p>",
+                "smithy.api#documentation": "<p>Retrieves a list of configuration changes that are scheduled for a domain. These changes can\n   be <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html\">service software\n    updates</a> or <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html#auto-tune-types\">blue/green\n    Auto-Tune enhancements</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2021-01-01/opensearch/domain/{DomainName}/scheduledActions",
@@ -9924,14 +9936,14 @@
                     "target": "com.amazonaws.opensearch#MaxResults",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return. You can use\n   <code>nextToken</code> to get the next page of results.</p>",
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return. You can use\n    <code>nextToken</code> to get the next page of results.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.opensearch#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If your initial <code>ListScheduledActions</code> operation returns a <code>nextToken</code>, you\n   can include the returned <code>nextToken</code> in subsequent <code>ListScheduledActions</code>\n   operations, which returns results in the next page.</p>",
+                        "smithy.api#documentation": "<p>If your initial <code>ListScheduledActions</code> operation returns a\n   <code>nextToken</code>, you can include the returned <code>nextToken</code> in subsequent\n    <code>ListScheduledActions</code> operations, which returns results in the next page.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
@@ -9952,7 +9964,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.opensearch#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n   <code>nextToken</code> is a unique pagination token for each page. Send the request again using the\n   returned token to retrieve the next page.</p>"
+                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Send the request again using\n   the returned token to retrieve the next page.</p>"
                     }
                 }
             },
@@ -10095,7 +10107,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.opensearch#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Send the request again using the\n   returned token to retrieve the next page.</p>"
+                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Send the request again using\n   the returned token to retrieve the next page.</p>"
                     }
                 }
             },
@@ -10171,7 +10183,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.opensearch#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Send the request again using the\n   returned token to retrieve the next page.</p>",
+                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Send the request again using\n   the returned token to retrieve the next page.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -10275,7 +10287,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.opensearch#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Send the request again using the\n   returned token to retrieve the next page.</p>",
+                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Send the request again using\n   the returned token to retrieve the next page.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -10312,7 +10324,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.opensearch#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Send the request again using the\n   returned token to retrieve the next page.</p>",
+                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Send the request again using\n   the returned token to retrieve the next page.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -10338,7 +10350,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies whether the Amazon OpenSearch Service domain publishes the OpenSearch application\n   and slow logs to Amazon CloudWatch. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createdomain-configure-slow-logs.html\">Monitoring OpenSearch logs with Amazon CloudWatch Logs</a>.</p>\n         <note>\n            <p>After you enable log publishing, you still have to enable the collection of slow logs using\n    the OpenSearch REST API.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Specifies whether the Amazon OpenSearch Service domain publishes the OpenSearch application\n   and slow logs to Amazon CloudWatch. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createdomain-configure-slow-logs.html\">Monitoring\n    OpenSearch logs with Amazon CloudWatch Logs</a>.</p>\n         <note>\n            <p>After you enable log publishing, you still have to enable the collection of slow logs using\n    the OpenSearch REST API.</p>\n         </note>"
             }
         },
         "com.amazonaws.opensearch#LogPublishingOptions": {
@@ -10573,7 +10585,7 @@
                 "ValueType": {
                     "target": "com.amazonaws.opensearch#PropertyValueType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of value that is currently being modified. Properties can have two types:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PLAIN_TEXT</code>: Contain direct values such as \"1\", \"True\", or \"c5.large.search\".</p>\n            </li>\n            <li>\n               <p>\n                  <code>STRINGIFIED_JSON</code>: Contain content in JSON format, such as {\"Enabled\":\"True\"}\".</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of value that is currently being modified. Properties can have two types:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PLAIN_TEXT</code>: Contain direct values such as \"1\", \"True\", or\n     \"c5.large.search\".</p>\n            </li>\n            <li>\n               <p>\n                  <code>STRINGIFIED_JSON</code>: Contain content in JSON format, such as\n     {\"Enabled\":\"True\"}\".</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -10657,12 +10669,12 @@
                 "DesiredState": {
                     "target": "com.amazonaws.opensearch#NaturalLanguageQueryGenerationDesiredState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The desired state of the natural language query generation feature. Valid values are ENABLED and DISABLED.</p>"
+                        "smithy.api#documentation": "<p>The desired state of the natural language query generation feature. Valid values are ENABLED\n   and DISABLED.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Container for parameters required to enable the natural language query generation feature.</p>"
+                "smithy.api#documentation": "<p>Container for parameters required to enable the natural language query generation\n   feature.</p>"
             }
         },
         "com.amazonaws.opensearch#NaturalLanguageQueryGenerationOptionsOutput": {
@@ -10671,24 +10683,24 @@
                 "DesiredState": {
                     "target": "com.amazonaws.opensearch#NaturalLanguageQueryGenerationDesiredState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The desired state of the natural language query generation feature. Valid values are ENABLED and DISABLED.</p>"
+                        "smithy.api#documentation": "<p>The desired state of the natural language query generation feature. Valid values are ENABLED\n   and DISABLED.</p>"
                     }
                 },
                 "CurrentState": {
                     "target": "com.amazonaws.opensearch#NaturalLanguageQueryGenerationCurrentState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current state of the natural language query generation feature, indicating completion, in progress, or failure.</p>"
+                        "smithy.api#documentation": "<p>The current state of the natural language query generation feature, indicating completion,\n   in progress, or failure.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Container for parameters representing the state of the natural language query generation feature on the specified domain.</p>"
+                "smithy.api#documentation": "<p>Container for parameters representing the state of the natural language query generation\n   feature on the specified domain.</p>"
             }
         },
         "com.amazonaws.opensearch#NextToken": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Send the request again using the\n   returned token to retrieve the next page.</p>"
+                "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Send the request again using\n   the returned token to retrieve the next page.</p>"
             }
         },
         "com.amazonaws.opensearch#NodeConfig": {
@@ -10797,7 +10809,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Enables or disables node-to-node encryption. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ntn.html\">Node-to-node encryption for Amazon OpenSearch Service</a>.</p>"
+                "smithy.api#documentation": "<p>Enables or disables node-to-node encryption. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ntn.html\">Node-to-node\n    encryption for Amazon OpenSearch Service</a>.</p>"
             }
         },
         "com.amazonaws.opensearch#NodeToNodeEncryptionOptionsStatus": {
@@ -10884,7 +10896,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A custom 10-hour, low-traffic window during which OpenSearch Service can perform mandatory\n   configuration changes on the domain. These actions can include scheduled service software updates\n   and blue/green Auto-Tune enhancements. OpenSearch Service will schedule these\n   actions during the window that you specify.</p>\n         <p>If you don't specify a window start time, it defaults to 10:00 P.M. local time.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/off-peak.html\">Defining off-peak maintenance\n    windows for Amazon OpenSearch Service</a>.</p>"
+                "smithy.api#documentation": "<p>A custom 10-hour, low-traffic window during which OpenSearch Service can perform mandatory\n   configuration changes on the domain. These actions can include scheduled service software updates\n   and blue/green Auto-Tune enhancements. OpenSearch Service will schedule these actions during the\n   window that you specify.</p>\n         <p>If you don't specify a window start time, it defaults to 10:00 P.M. local time.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/off-peak.html\">Defining off-peak maintenance\n    windows for Amazon OpenSearch Service</a>.</p>"
             }
         },
         "com.amazonaws.opensearch#OffPeakWindowOptions": {
@@ -11697,7 +11709,7 @@
                 "StatusCode": {
                     "target": "com.amazonaws.opensearch#OutboundConnectionStatusCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status code for the outbound connection. Can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>VALIDATING</b> - The outbound connection request is being\n     validated.</p>\n            </li>\n            <li>\n               <p>\n                  <b>VALIDATION_FAILED</b> - Validation failed for the connection\n     request.</p>\n            </li>\n            <li>\n               <p>\n                  <b>PENDING_ACCEPTANCE</b>: Outbound connection request is validated and is\n     not yet accepted by the remote domain owner.</p>\n            </li>\n            <li>\n               <p>\n                  <b>APPROVED</b> - Outbound connection has been approved by the remote domain\n     owner for getting provisioned.</p>\n            </li>\n            <li>\n               <p>\n                  <b>PROVISIONING</b> - Outbound connection request is in process.</p>\n            </li>\n            <li>\n               <p>\n                  <b>ACTIVE</b> - Outbound connection is active and ready to use.</p>\n            </li>\n            <li>\n               <p>\n                  <b>REJECTING</b> - Outbound connection rejection by remote domain owner is in\n     progress.</p>\n            </li>\n            <li>\n               <p>\n                  <b>REJECTED</b> - Outbound connection request is rejected by remote domain\n     owner.</p>\n            </li>\n            <li>\n               <p>\n                  <b>DELETING</b> - Outbound connection deletion is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <b>DELETED</b> - Outbound connection is deleted and can no longer be\n     used.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status code for the outbound connection. Can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>VALIDATING</b> - The outbound connection request is being\n     validated.</p>\n            </li>\n            <li>\n               <p>\n                  <b>VALIDATION_FAILED</b> - Validation failed for the connection\n     request.</p>\n            </li>\n            <li>\n               <p>\n                  <b>PENDING_ACCEPTANCE</b>: Outbound connection request is\n     validated and is not yet accepted by the remote domain owner.</p>\n            </li>\n            <li>\n               <p>\n                  <b>APPROVED</b> - Outbound connection has been approved by the\n     remote domain owner for getting provisioned.</p>\n            </li>\n            <li>\n               <p>\n                  <b>PROVISIONING</b> - Outbound connection request is in\n     process.</p>\n            </li>\n            <li>\n               <p>\n                  <b>ACTIVE</b> - Outbound connection is active and ready to\n     use.</p>\n            </li>\n            <li>\n               <p>\n                  <b>REJECTING</b> - Outbound connection rejection by remote\n     domain owner is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <b>REJECTED</b> - Outbound connection request is rejected by\n     remote domain owner.</p>\n            </li>\n            <li>\n               <p>\n                  <b>DELETING</b> - Outbound connection deletion is in\n     progress.</p>\n            </li>\n            <li>\n               <p>\n                  <b>DELETED</b> - Outbound connection is deleted and can no\n     longer be used.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Message": {
@@ -11830,7 +11842,7 @@
                 "KeyStoreAccessOption": {
                     "target": "com.amazonaws.opensearch#KeyStoreAccessOption",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration parameters to enable accessing the key store required by the package.</p>"
+                        "smithy.api#documentation": "<p>The configuration parameters to enable accessing the key store required by the\n   package.</p>"
                     }
                 }
             },
@@ -11864,7 +11876,7 @@
                 "RequiresRestartForConfigurationUpdate": {
                     "target": "com.amazonaws.opensearch#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>This indicates whether a B/G deployment is required for updating the configuration that the plugin is prerequisite for.</p>"
+                        "smithy.api#documentation": "<p>This indicates whether a B/G deployment is required for updating the configuration that the\n   plugin is prerequisite for.</p>"
                     }
                 }
             },
@@ -11911,7 +11923,7 @@
                 "PackageStatus": {
                     "target": "com.amazonaws.opensearch#PackageStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the package. The available options are <code>AVAILABLE</code>, <code>COPYING</code>, <code>COPY_FAILED</code>, <code>VALIDATNG</code>, <code>VALIDATION_FAILED</code>, <code>DELETING</code>, and <code>DELETE_FAILED</code>.</p>"
+                        "smithy.api#documentation": "<p>The current status of the package. The available options are <code>AVAILABLE</code>,\n    <code>COPYING</code>, <code>COPY_FAILED</code>, <code>VALIDATNG</code>,\n    <code>VALIDATION_FAILED</code>, <code>DELETING</code>, and <code>DELETE_FAILED</code>.</p>"
                     }
                 },
                 "CreatedAt": {
@@ -11947,7 +11959,7 @@
                 "AvailablePluginProperties": {
                     "target": "com.amazonaws.opensearch#PluginProperties",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the package is a <code>ZIP-PLUGIN</code> package, additional information about plugin properties.</p>"
+                        "smithy.api#documentation": "<p>If the package is a <code>ZIP-PLUGIN</code> package, additional information about plugin\n   properties.</p>"
                     }
                 },
                 "AvailablePackageConfiguration": {
@@ -11959,13 +11971,13 @@
                 "AllowListedUserList": {
                     "target": "com.amazonaws.opensearch#PackageUserList",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of users who are allowed to view and associate the package. This field is only visible to the owner of a package.</p>"
+                        "smithy.api#documentation": "<p> A list of users who are allowed to view and associate the package. This field is only\n   visible to the owner of a package.</p>"
                     }
                 },
                 "PackageOwner": {
                     "target": "com.amazonaws.opensearch#PackageOwner",
                     "traits": {
-                        "smithy.api#documentation": "<p>The owner of the package who is allowed to create and update a package and add users to the package scope.</p>"
+                        "smithy.api#documentation": "<p>The owner of the package who is allowed to create and update a package and add users to the\n   package scope.</p>"
                     }
                 },
                 "PackageVendingOptions": {
@@ -11998,7 +12010,7 @@
                 "PrerequisitePackageIDList": {
                     "target": "com.amazonaws.opensearch#PackageIDList",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of package IDs that must be linked to the domain before or simultaneously with the package association.</p>"
+                        "smithy.api#documentation": "<p>List of package IDs that must be linked to the domain before or simultaneously with the\n   package association.</p>"
                     }
                 },
                 "AssociationConfiguration": {
@@ -12223,13 +12235,13 @@
                 "VendingEnabled": {
                     "target": "com.amazonaws.opensearch#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the package vending feature is enabled, allowing the package to be used by other users.</p>",
+                        "smithy.api#documentation": "<p>Indicates whether the package vending feature is enabled, allowing the package to be used by\n   other users.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration options for determining whether a package can be made available for use by other users.</p>"
+                "smithy.api#documentation": "<p>Configuration options for determining whether a package can be made available for use by\n   other users.</p>"
             }
         },
         "com.amazonaws.opensearch#PackageVersion": {
@@ -12259,7 +12271,7 @@
                 "PluginProperties": {
                     "target": "com.amazonaws.opensearch#PluginProperties",
                     "traits": {
-                        "smithy.api#documentation": "<p>Additional information about plugin properties if the package is a <code>ZIP-PLUGIN</code> package.</p>"
+                        "smithy.api#documentation": "<p>Additional information about plugin properties if the package is a <code>ZIP-PLUGIN</code>\n   package.</p>"
                     }
                 },
                 "PackageConfiguration": {
@@ -12576,7 +12588,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Container for the request parameters to the <code>RejectInboundConnection</code> operation.</p>",
+                "smithy.api#documentation": "<p>Container for the request parameters to the <code>RejectInboundConnection</code>\n   operation.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -12808,7 +12820,7 @@
                     "target": "com.amazonaws.opensearch#Integer",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The duration, in seconds, for which the offering will reserve the OpenSearch instance.</p>"
+                        "smithy.api#documentation": "<p>The duration, in seconds, for which the offering will reserve the OpenSearch\n   instance.</p>"
                     }
                 },
                 "FixedPrice": {
@@ -13067,6 +13079,20 @@
                 }
             }
         },
+        "com.amazonaws.opensearch#S3VectorsEngine": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.opensearch#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables S3 vectors engine features.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Options for enabling S3 vectors engine features on the specified domain.</p>"
+            }
+        },
         "com.amazonaws.opensearch#SAMLEntityId": {
             "type": "string",
             "traits": {
@@ -13149,7 +13175,7 @@
                 "SessionTimeoutMinutes": {
                     "target": "com.amazonaws.opensearch#IntegerClass",
                     "traits": {
-                        "smithy.api#documentation": "<p>The duration, in minutes, after which a user session becomes inactive. Acceptable values are between 1 and 1440,\n   and the default value is 60.</p>"
+                        "smithy.api#documentation": "<p>The duration, in minutes, after which a user session becomes inactive. Acceptable values are\n   between 1 and 1440, and the default value is 60.</p>"
                     }
                 }
             },
@@ -13258,7 +13284,7 @@
                 "ScheduledBy": {
                     "target": "com.amazonaws.opensearch#ScheduledBy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether the action was scheduled manually (<code>CUSTOMER</code>, or by OpenSearch Service automatically (<code>SYSTEM</code>).</p>"
+                        "smithy.api#documentation": "<p>Whether the action was scheduled manually (<code>CUSTOMER</code>, or by OpenSearch Service\n   automatically (<code>SYSTEM</code>).</p>"
                     }
                 },
                 "Status": {
@@ -13397,13 +13423,13 @@
                 "RoleArn": {
                     "target": "com.amazonaws.opensearch#DirectQueryDataSourceRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The unique identifier of the IAM role that grants OpenSearch \n   Service permission to access the specified data source.\n  </p>",
+                        "smithy.api#documentation": "<p> The unique identifier of the IAM role that grants OpenSearch Service permission to access\n   the specified data source. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n   Configuration details for a Security Lake data source \n   that can be used for direct queries.\n  </p>"
+                "smithy.api#documentation": "<p> Configuration details for a Security Lake data source that can be used for direct queries.\n  </p>"
             }
         },
         "com.amazonaws.opensearch#ServiceSoftwareOptions": {
@@ -13448,7 +13474,7 @@
                 "AutomatedUpdateDate": {
                     "target": "com.amazonaws.opensearch#DeploymentCloseDateTimeStamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp, in Epoch time, until which you can manually request a service software update. After this date,\n   we automatically update your service software.</p>"
+                        "smithy.api#documentation": "<p>The timestamp, in Epoch time, until which you can manually request a service software\n   update. After this date, we automatically update your service software.</p>"
                     }
                 },
                 "OptionalDeployment": {
@@ -13485,7 +13511,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The status of <code>SkipUnavailable</code> setting for the outbound connection.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>ENABLED</b> - The <code>SkipUnavailable</code> setting is enabled\n     for the connection.</p>\n            </li>\n            <li>\n               <p>\n                  <b>DISABLED</b> - The <code>SkipUnavailable</code> setting is disabled\n     for the connection.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>The status of <code>SkipUnavailable</code> setting for the outbound connection.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>ENABLED</b> - The <code>SkipUnavailable</code> setting is\n     enabled for the connection.</p>\n            </li>\n            <li>\n               <p>\n                  <b>DISABLED</b> - The <code>SkipUnavailable</code> setting is\n     disabled for the connection.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.opensearch#SlotList": {
@@ -13578,7 +13604,7 @@
                 "Status": {
                     "target": "com.amazonaws.opensearch#OptionStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of service software update options, including creation date and last updated date.</p>"
+                        "smithy.api#documentation": "<p>The status of service software update options, including creation date and last updated\n   date.</p>"
                     }
                 }
             },
@@ -13615,7 +13641,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts the node maintenance process on the data node. These processes can include a node reboot, an Opensearch or Elasticsearch process restart,\n   or a Dashboard or Kibana restart.</p>",
+                "smithy.api#documentation": "<p>Starts the node maintenance process on the data node. These processes can include a node\n   reboot, an Opensearch or Elasticsearch process restart, or a Dashboard or Kibana restart.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2021-01-01/opensearch/domain/{DomainName}/domainMaintenance",
@@ -13649,7 +13675,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Container for the parameters to the <code>StartDomainMaintenance</code>\n   operation.</p>",
+                "smithy.api#documentation": "<p>Container for the parameters to the <code>StartDomainMaintenance</code> operation.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -13664,7 +13690,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The result of a <code>StartDomainMaintenance</code> request that information about the requested action. </p>",
+                "smithy.api#documentation": "<p>The result of a <code>StartDomainMaintenance</code> request that information about the\n   requested action. </p>",
                 "smithy.api#output": {}
             }
         },
@@ -13803,7 +13829,7 @@
                 "LimitName": {
                     "target": "com.amazonaws.opensearch#LimitName",
                     "traits": {
-                        "smithy.api#documentation": "<p> Name of storage limits that are applicable for the given storage type. If\n    <code>StorageType</code> is <code>ebs</code>, the following options are available:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>MinimumVolumeSize</b> - Minimum volume size that is available for the\n     given storage type. Can be empty if not applicable.</p>\n            </li>\n            <li>\n               <p>\n                  <b>MaximumVolumeSize</b> - Maximum volume size that is available for the\n     given storage type. Can be empty if not applicable.</p>\n            </li>\n            <li>\n               <p>\n                  <b>MaximumIops</b> - Maximum amount of IOPS that is available for the given\n     the storage type. Can be empty if not applicable.</p>\n            </li>\n            <li>\n               <p>\n                  <b>MinimumIops</b> - Minimum amount of IOPS that is available for the given\n     the storage type. Can be empty if not applicable.</p>\n            </li>\n            <li>\n               <p>\n                  <b>MaximumThroughput</b> - Maximum amount of throughput that is\n     available for the given the storage type. Can be empty if not applicable.</p>\n            </li>\n            <li>\n               <p>\n                  <b>MinimumThroughput</b> - Minimum amount of throughput that is\n     available for the given the storage type. Can be empty if not applicable.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p> Name of storage limits that are applicable for the given storage type. If\n    <code>StorageType</code> is <code>ebs</code>, the following options are available:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>MinimumVolumeSize</b> - Minimum volume size that is available\n     for the given storage type. Can be empty if not applicable.</p>\n            </li>\n            <li>\n               <p>\n                  <b>MaximumVolumeSize</b> - Maximum volume size that is available\n     for the given storage type. Can be empty if not applicable.</p>\n            </li>\n            <li>\n               <p>\n                  <b>MaximumIops</b> - Maximum amount of IOPS that is available\n     for the given the storage type. Can be empty if not applicable.</p>\n            </li>\n            <li>\n               <p>\n                  <b>MinimumIops</b> - Minimum amount of IOPS that is available\n     for the given the storage type. Can be empty if not applicable.</p>\n            </li>\n            <li>\n               <p>\n                  <b>MaximumThroughput</b> - Maximum amount of throughput that is\n     available for the given the storage type. Can be empty if not applicable.</p>\n            </li>\n            <li>\n               <p>\n                  <b>MinimumThroughput</b> - Minimum amount of throughput that is\n     available for the given the storage type. Can be empty if not applicable.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "LimitValues": {
@@ -14137,7 +14163,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a direct-query data source. For more information, see\n   <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3-creating.html\">Working with Amazon OpenSearch Service data source integrations with Amazon S3</a>.</p>",
+                "smithy.api#documentation": "<p>Updates a direct-query data source. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3-creating.html\">Working with Amazon\n    OpenSearch Service data source integrations with Amazon S3</a>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/2021-01-01/opensearch/domain/{DomainName}/dataSource/{Name}",
@@ -14185,7 +14211,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Container for the parameters to the <code>UpdateDataSource</code>\n   operation.</p>",
+                "smithy.api#documentation": "<p>Container for the parameters to the <code>UpdateDataSource</code> operation.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -14230,7 +14256,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n   Updates the configuration or properties of an existing\n   direct query data source in Amazon OpenSearch Service.\n  </p>",
+                "smithy.api#documentation": "<p> Updates the configuration or properties of an existing direct query data source in Amazon\n   OpenSearch Service. </p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/2021-01-01/opensearch/directQueryDataSource/{DataSourceName}",
@@ -14244,7 +14270,7 @@
                 "DataSourceName": {
                     "target": "com.amazonaws.opensearch#DirectQueryDataSourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   A unique, user-defined label to identify the data \n   source within your OpenSearch Service environment.\n  </p>",
+                        "smithy.api#documentation": "<p> A unique, user-defined label to identify the data source within your OpenSearch Service\n   environment. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -14252,20 +14278,20 @@
                 "DataSourceType": {
                     "target": "com.amazonaws.opensearch#DirectQueryDataSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The supported Amazon Web Services service that you want to use as the source for \n   direct queries in OpenSearch Service. \n  </p>",
+                        "smithy.api#documentation": "<p> The supported Amazon Web Services service that you want to use as the source for direct\n   queries in OpenSearch Service. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Description": {
                     "target": "com.amazonaws.opensearch#DirectQueryDataSourceDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   An optional text field for providing additional context and \n   details about the data source.\n  </p>"
+                        "smithy.api#documentation": "<p> An optional text field for providing additional context and details about the data source.\n  </p>"
                     }
                 },
                 "OpenSearchArns": {
                     "target": "com.amazonaws.opensearch#DirectQueryOpenSearchARNList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   A list of Amazon Resource Names (ARNs) for the OpenSearch \n   collections that are associated with the direct query data source.\n  </p>",
+                        "smithy.api#documentation": "<p> A list of Amazon Resource Names (ARNs) for the OpenSearch collections that are associated\n   with the direct query data source. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -14280,7 +14306,7 @@
                 "DataSourceArn": {
                     "target": "com.amazonaws.opensearch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The unique, system-generated identifier that represents the data source.\n  </p>"
+                        "smithy.api#documentation": "<p> The unique, system-generated identifier that represents the data source. </p>"
                     }
                 }
             },
@@ -14317,7 +14343,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies the cluster configuration of the specified Amazon OpenSearch Service\n   domain.</p>",
+                "smithy.api#documentation": "<p>Modifies the cluster configuration of the specified Amazon OpenSearch Service domain.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2021-01-01/opensearch/domain/{DomainName}/config",
@@ -14351,7 +14377,7 @@
                 "SnapshotOptions": {
                     "target": "com.amazonaws.opensearch#SnapshotOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Option to set the time, in UTC format, for the daily automated snapshot. Default value is <code>0</code> hours.\n  </p>"
+                        "smithy.api#documentation": "<p>Option to set the time, in UTC format, for the daily automated snapshot. Default value is\n    <code>0</code> hours. </p>"
                     }
                 },
                 "VPCOptions": {
@@ -14369,7 +14395,7 @@
                 "AdvancedOptions": {
                     "target": "com.amazonaws.opensearch#AdvancedOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Key-value pairs to specify advanced configuration options. The following key-value pairs are\n   supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>\"rest.action.multi.allow_explicit_index\": \"true\" | \"false\"</code> - Note the use of\n     a string rather than a boolean. Specifies whether explicit references to indexes are allowed\n     inside the body of HTTP requests. If you want to configure access policies for domain\n     sub-resources, such as specific indexes and domain APIs, you must disable this property.\n     Default is true.</p>\n            </li>\n            <li>\n               <p>\n                  <code>\"indices.fielddata.cache.size\": \"80\" </code> - Note the use of a string rather than\n     a boolean. Specifies the percentage of heap space allocated to field data. Default is\n     unbounded.</p>\n            </li>\n            <li>\n               <p>\n                  <code>\"indices.query.bool.max_clause_count\": \"1024\"</code> - Note the use of a string\n     rather than a boolean. Specifies the maximum number of clauses allowed in a Lucene boolean\n     query. Default is 1,024. Queries with more than the permitted number of clauses result in a\n     <code>TooManyClauses</code> error.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options\">Advanced cluster parameters</a>.</p>"
+                        "smithy.api#documentation": "<p>Key-value pairs to specify advanced configuration options. The following key-value pairs are\n   supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>\"rest.action.multi.allow_explicit_index\": \"true\" | \"false\"</code> - Note the use of\n     a string rather than a boolean. Specifies whether explicit references to indexes are allowed\n     inside the body of HTTP requests. If you want to configure access policies for domain\n     sub-resources, such as specific indexes and domain APIs, you must disable this property.\n     Default is true.</p>\n            </li>\n            <li>\n               <p>\n                  <code>\"indices.fielddata.cache.size\": \"80\" </code> - Note the use of a string rather than\n     a boolean. Specifies the percentage of heap space allocated to field data. Default is\n     unbounded.</p>\n            </li>\n            <li>\n               <p>\n                  <code>\"indices.query.bool.max_clause_count\": \"1024\"</code> - Note the use of a string\n     rather than a boolean. Specifies the maximum number of clauses allowed in a Lucene boolean\n     query. Default is 1,024. Queries with more than the permitted number of clauses result in a\n      <code>TooManyClauses</code> error.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options\">Advanced cluster parameters</a>.</p>"
                     }
                 },
                 "AccessPolicies": {
@@ -14381,7 +14407,7 @@
                 "IPAddressType": {
                     "target": "com.amazonaws.opensearch#IPAddressType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify either dual stack or IPv4 as your IP address type. Dual stack allows you to share domain resources across\n   IPv4 and IPv6 address types, and is the recommended option. \n   If your IP address type is currently set to dual stack, you can't change it.\n  </p>"
+                        "smithy.api#documentation": "<p>Specify either dual stack or IPv4 as your IP address type. Dual stack allows you to share\n   domain resources across IPv4 and IPv6 address types, and is the recommended option. If your IP\n   address type is currently set to dual stack, you can't change it. </p>"
                     }
                 },
                 "LogPublishingOptions": {
@@ -14432,7 +14458,7 @@
                 "DryRunMode": {
                     "target": "com.amazonaws.opensearch#DryRunMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of dry run to perform.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Basic</code> only returns the type of deployment (blue/green or dynamic) that the update\n     will cause.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Verbose</code> runs an additional check to validate the changes you're making. For\n     more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-configuration-changes#validation-check\">Validating a domain update</a>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of dry run to perform.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Basic</code> only returns the type of deployment (blue/green or dynamic) that the\n     update will cause.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Verbose</code> runs an additional check to validate the changes you're making. For\n     more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-configuration-changes#validation-check\">Validating a domain update</a>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "OffPeakWindowOptions": {
@@ -14612,7 +14638,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the scope of a package. Scope of the package defines users who can view and associate a package.</p>",
+                "smithy.api#documentation": "<p>Updates the scope of a package. Scope of the package defines users who can view and\n   associate a package.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2021-01-01/packages/updateScope",
@@ -14707,7 +14733,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Reschedules a planned domain configuration change for a later time. This change can be a\n   scheduled <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html\">service software\n    update</a> or a <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html#auto-tune-types\">blue/green\n     Auto-Tune enhancement</a>.</p>",
+                "smithy.api#documentation": "<p>Reschedules a planned domain configuration change for a later time. This change can be a\n   scheduled <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html\">service software\n    update</a> or a <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html#auto-tune-types\">blue/green\n    Auto-Tune enhancement</a>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/2021-01-01/opensearch/domain/{DomainName}/scheduledAction/update",
@@ -14736,7 +14762,7 @@
                 "ActionType": {
                     "target": "com.amazonaws.opensearch#ActionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of action to reschedule. Can be one of <code>SERVICE_SOFTWARE_UPDATE</code>,\n   <code>JVM_HEAP_SIZE_TUNING</code>, or <code>JVM_YOUNG_GEN_TUNING</code>. To retrieve this value, send a <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_ListScheduledActions.html\">ListScheduledActions</a> request.</p>",
+                        "smithy.api#documentation": "<p>The type of action to reschedule. Can be one of <code>SERVICE_SOFTWARE_UPDATE</code>,\n    <code>JVM_HEAP_SIZE_TUNING</code>, or <code>JVM_YOUNG_GEN_TUNING</code>. To retrieve this value,\n   send a <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_ListScheduledActions.html\">ListScheduledActions</a> request.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -14990,7 +15016,7 @@
                 "StepsList": {
                     "target": "com.amazonaws.opensearch#UpgradeStepsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of each step performed as part of a specific upgrade or upgrade eligibility check.</p>"
+                        "smithy.api#documentation": "<p>A list of each step performed as part of a specific upgrade or upgrade eligibility\n   check.</p>"
                     }
                 }
             },
@@ -15077,7 +15103,7 @@
                 "Issues": {
                     "target": "com.amazonaws.opensearch#Issues",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of strings containing detailed information about the errors encountered in a particular step.</p>"
+                        "smithy.api#documentation": "<p>A list of strings containing detailed information about the errors encountered in a\n   particular step.</p>"
                     }
                 },
                 "ProgressPercent": {
@@ -15184,7 +15210,7 @@
                 "SecurityGroupIds": {
                     "target": "com.amazonaws.opensearch#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of security group IDs associated with the VPC endpoints for the domain. If you do\n   not provide a security group ID, OpenSearch Service uses the default security group for the VPC.</p>"
+                        "smithy.api#documentation": "<p>The list of security group IDs associated with the VPC endpoints for the domain. If you do\n   not provide a security group ID, OpenSearch Service uses the default security group for the\n   VPC.</p>"
                     }
                 }
             },
@@ -15528,7 +15554,7 @@
                     "target": "com.amazonaws.opensearch#StartTimeHours",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The start hour of the window in Coordinated Universal Time (UTC), using 24-hour time. For example, <code>17</code> refers to\n   5:00 P.M. UTC.</p>",
+                        "smithy.api#documentation": "<p>The start hour of the window in Coordinated Universal Time (UTC), using 24-hour time. For\n   example, <code>17</code> refers to 5:00 P.M. UTC.</p>",
                         "smithy.api#required": {}
                     }
                 },

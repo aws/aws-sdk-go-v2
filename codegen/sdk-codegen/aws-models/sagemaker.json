@@ -4802,7 +4802,7 @@
                     }
                 },
                 "Message": {
-                    "target": "com.amazonaws.sagemaker#String",
+                    "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A message describing the error encountered when deleting a node.</p>",
@@ -4872,8 +4872,7 @@
                     "target": "com.amazonaws.sagemaker#ClusterNodeIds",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>A list of node IDs to be deleted from the specified cluster.</p> <note> <ul> <li> <p>For SageMaker HyperPod clusters using the Slurm workload manager, you cannot remove instances that are configured as Slurm controller nodes.</p> </li> <li> <p>If you need to delete more than 99 instances, contact <a href=\"http://aws.amazon.com/contact-us/\">Support</a> for assistance.</p> </li> </ul> </note>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>A list of node IDs to be deleted from the specified cluster.</p> <note> <ul> <li> <p>For SageMaker HyperPod clusters using the Slurm workload manager, you cannot remove instances that are configured as Slurm controller nodes.</p> </li> <li> <p>If you need to delete more than 99 instances, contact <a href=\"http://aws.amazon.com/contact-us/\">Support</a> for assistance.</p> </li> </ul> </note>"
                     }
                 }
             },
@@ -7548,7 +7547,7 @@
                     }
                 },
                 "Message": {
-                    "target": "com.amazonaws.sagemaker#String",
+                    "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The message from an instance in a SageMaker HyperPod cluster.</p>"
                     }
@@ -8325,7 +8324,7 @@
                     }
                 },
                 "InstanceId": {
-                    "target": "com.amazonaws.sagemaker#String",
+                    "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the instance.</p>"
                     }
@@ -8464,7 +8463,7 @@
                     }
                 },
                 "InstanceId": {
-                    "target": "com.amazonaws.sagemaker#String",
+                    "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the instance.</p>",
@@ -8560,6 +8559,188 @@
         },
         "com.amazonaws.sagemaker#ClusterPrivatePrimaryIpv6": {
             "type": "string"
+        },
+        "com.amazonaws.sagemaker#ClusterRestrictedInstanceGroupDetails": {
+            "type": "structure",
+            "members": {
+                "CurrentCount": {
+                    "target": "com.amazonaws.sagemaker#ClusterNonNegativeInstanceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of instances that are currently in the restricted instance group of a SageMaker HyperPod cluster.</p>"
+                    }
+                },
+                "TargetCount": {
+                    "target": "com.amazonaws.sagemaker#ClusterInstanceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of instances you specified to add to the restricted instance group of a SageMaker HyperPod cluster.</p>"
+                    }
+                },
+                "InstanceGroupName": {
+                    "target": "com.amazonaws.sagemaker#ClusterInstanceGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the restricted instance group of a SageMaker HyperPod cluster.</p>"
+                    }
+                },
+                "InstanceType": {
+                    "target": "com.amazonaws.sagemaker#ClusterInstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance type of the restricted instance group of a SageMaker HyperPod cluster.</p>"
+                    }
+                },
+                "ExecutionRole": {
+                    "target": "com.amazonaws.sagemaker#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The execution role for the restricted instance group to assume.</p>"
+                    }
+                },
+                "ThreadsPerCore": {
+                    "target": "com.amazonaws.sagemaker#ClusterThreadsPerCore",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number you specified to <code>TreadsPerCore</code> in <code>CreateCluster</code> for enabling or disabling multithreading. For instance types that support multithreading, you can specify 1 for disabling multithreading and 2 for enabling multithreading. For more information, see the reference table of <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cpu-options-supported-instances-values.html\">CPU cores and threads per CPU core per instance type</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+                    }
+                },
+                "InstanceStorageConfigs": {
+                    "target": "com.amazonaws.sagemaker#ClusterInstanceStorageConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The additional storage configurations for the instances in the SageMaker HyperPod cluster restricted instance group.</p>"
+                    }
+                },
+                "OnStartDeepHealthChecks": {
+                    "target": "com.amazonaws.sagemaker#OnStartDeepHealthChecks",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A flag indicating whether deep health checks should be performed when the cluster's restricted instance group is created or updated.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#InstanceGroupStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the cluster's restricted instance group.</p> <ul> <li> <p> <code>InService</code>: The restricted instance group is active and healthy.</p> </li> <li> <p> <code>Creating</code>: The restricted instance group is being provisioned.</p> </li> <li> <p> <code>Updating</code>: The restricted instance group is being updated.</p> </li> <li> <p> <code>Failed</code>: The restricted instance group has failed to provision or is no longer healthy.</p> </li> <li> <p> <code>Degraded</code>: The restricted instance group is degraded, meaning that some instances have failed to provision or are no longer healthy.</p> </li> <li> <p> <code>Deleting</code>: The restricted instance group is being deleted.</p> </li> </ul>"
+                    }
+                },
+                "TrainingPlanArn": {
+                    "target": "com.amazonaws.sagemaker#TrainingPlanArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the training plan to filter clusters by. For more information about reserving GPU capacity for your SageMaker HyperPod clusters using Amazon SageMaker Training Plan, see <code> <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html\">CreateTrainingPlan</a> </code>.</p>"
+                    }
+                },
+                "TrainingPlanStatus": {
+                    "target": "com.amazonaws.sagemaker#InstanceGroupTrainingPlanStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the training plan associated with this cluster restricted instance group.</p>"
+                    }
+                },
+                "OverrideVpcConfig": {
+                    "target": "com.amazonaws.sagemaker#VpcConfig"
+                },
+                "ScheduledUpdateConfig": {
+                    "target": "com.amazonaws.sagemaker#ScheduledUpdateConfig"
+                },
+                "EnvironmentConfig": {
+                    "target": "com.amazonaws.sagemaker#EnvironmentConfigDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the restricted instance groups (RIG) environment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The instance group details of the restricted instance group (RIG).</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterRestrictedInstanceGroupDetailsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#ClusterRestrictedInstanceGroupDetails"
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterRestrictedInstanceGroupSpecification": {
+            "type": "structure",
+            "members": {
+                "InstanceCount": {
+                    "target": "com.amazonaws.sagemaker#ClusterInstanceCount",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Specifies the number of instances to add to the restricted instance group of a SageMaker HyperPod cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceGroupName": {
+                    "target": "com.amazonaws.sagemaker#ClusterInstanceGroupName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Specifies the name of the restricted instance group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceType": {
+                    "target": "com.amazonaws.sagemaker#ClusterInstanceType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Specifies the instance type of the restricted instance group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExecutionRole": {
+                    "target": "com.amazonaws.sagemaker#RoleArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Specifies an IAM execution role to be assumed by the restricted instance group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ThreadsPerCore": {
+                    "target": "com.amazonaws.sagemaker#ClusterThreadsPerCore",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number you specified to <code>TreadsPerCore</code> in <code>CreateCluster</code> for enabling or disabling multithreading. For instance types that support multithreading, you can specify 1 for disabling multithreading and 2 for enabling multithreading. For more information, see the reference table of <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cpu-options-supported-instances-values.html\">CPU cores and threads per CPU core per instance type</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+                    }
+                },
+                "InstanceStorageConfigs": {
+                    "target": "com.amazonaws.sagemaker#ClusterInstanceStorageConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the additional storage configurations for the instances in the SageMaker HyperPod cluster restricted instance group.</p>"
+                    }
+                },
+                "OnStartDeepHealthChecks": {
+                    "target": "com.amazonaws.sagemaker#OnStartDeepHealthChecks",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A flag indicating whether deep health checks should be performed when the cluster restricted instance group is created or updated.</p>"
+                    }
+                },
+                "TrainingPlanArn": {
+                    "target": "com.amazonaws.sagemaker#TrainingPlanArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the training plan to filter clusters by. For more information about reserving GPU capacity for your SageMaker HyperPod clusters using Amazon SageMaker Training Plan, see <code> <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html\">CreateTrainingPlan</a> </code>.</p>"
+                    }
+                },
+                "OverrideVpcConfig": {
+                    "target": "com.amazonaws.sagemaker#VpcConfig"
+                },
+                "ScheduledUpdateConfig": {
+                    "target": "com.amazonaws.sagemaker#ScheduledUpdateConfig"
+                },
+                "EnvironmentConfig": {
+                    "target": "com.amazonaws.sagemaker#EnvironmentConfig",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The configuration for the restricted instance groups (RIG) environment.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specifications of a restricted instance group that you need to define.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterRestrictedInstanceGroupSpecifications": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#ClusterRestrictedInstanceGroupSpecification"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
         },
         "com.amazonaws.sagemaker#ClusterSchedulerConfigArn": {
             "type": "string",
@@ -10771,6 +10952,12 @@
                     "traits": {
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The instance groups to be created in the SageMaker HyperPod cluster.</p>"
+                    }
+                },
+                "RestrictedInstanceGroups": {
+                    "target": "com.amazonaws.sagemaker#ClusterRestrictedInstanceGroupSpecifications",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specialized instance groups for training models like Amazon Nova to be created in the SageMaker HyperPod cluster.</p>"
                     }
                 },
                 "VpcConfig": {
@@ -20568,8 +20755,7 @@
                     "target": "com.amazonaws.sagemaker#ClusterNodeId",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The ID of the SageMaker HyperPod cluster node.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The ID of the SageMaker HyperPod cluster node.</p>"
                     }
                 }
             },
@@ -20652,6 +20838,12 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The instance groups of the SageMaker HyperPod cluster.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "RestrictedInstanceGroups": {
+                    "target": "com.amazonaws.sagemaker#ClusterRestrictedInstanceGroupDetailsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specialized instance groups for training models like Amazon Nova to be created in the SageMaker HyperPod cluster.</p>"
                     }
                 },
                 "VpcConfig": {
@@ -26521,6 +26713,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The selective execution configuration applied to the pipeline run.</p>"
                     }
+                },
+                "PipelineVersionId": {
+                    "target": "com.amazonaws.sagemaker#PipelineVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the pipeline version.</p>"
+                    }
                 }
             },
             "traits": {
@@ -26536,6 +26734,12 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the pipeline to describe.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "PipelineVersionId": {
+                    "target": "com.amazonaws.sagemaker#PipelineVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the pipeline version to describe.</p>"
                     }
                 }
             },
@@ -26616,6 +26820,18 @@
                     "target": "com.amazonaws.sagemaker#ParallelismConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Lists the parallelism configuration applied to the pipeline.</p>"
+                    }
+                },
+                "PipelineVersionDisplayName": {
+                    "target": "com.amazonaws.sagemaker#PipelineVersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the pipeline version.</p>"
+                    }
+                },
+                "PipelineVersionDescription": {
+                    "target": "com.amazonaws.sagemaker#PipelineVersionDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the pipeline version.</p>"
                     }
                 }
             },
@@ -30994,6 +31210,40 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"
             }
         },
+        "com.amazonaws.sagemaker#EnvironmentConfig": {
+            "type": "structure",
+            "members": {
+                "FSxLustreConfig": {
+                    "target": "com.amazonaws.sagemaker#FSxLustreConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration settings for an Amazon FSx for Lustre file system to be used with the cluster.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for the restricted instance groups (RIG) environment.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#EnvironmentConfigDetails": {
+            "type": "structure",
+            "members": {
+                "FSxLustreConfig": {
+                    "target": "com.amazonaws.sagemaker#FSxLustreConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration settings for an Amazon FSx for Lustre file system to be used with the cluster.</p>"
+                    }
+                },
+                "S3OutputPath": {
+                    "target": "com.amazonaws.sagemaker#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 path where output data from the restricted instance group (RIG) environment will be stored.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration details for the restricted instance groups (RIG) environment.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#EnvironmentKey": {
             "type": "string",
             "traits": {
@@ -31460,6 +31710,30 @@
                 "smithy.api#documentation": "<p>A parameter to activate explainers.</p>"
             }
         },
+        "com.amazonaws.sagemaker#FSxLustreConfig": {
+            "type": "structure",
+            "members": {
+                "SizeInGiB": {
+                    "target": "com.amazonaws.sagemaker#FSxLustreSizeInGiB",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The storage capacity of the Amazon FSx for Lustre file system, specified in gibibytes (GiB).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PerUnitStorageThroughput": {
+                    "target": "com.amazonaws.sagemaker#FSxLustrePerUnitStorageThroughput",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The throughput capacity of the Amazon FSx for Lustre file system, measured in MB/s per TiB of storage.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration settings for an Amazon FSx for Lustre file system to be used with the cluster.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#FSxLustreFileSystem": {
             "type": "structure",
             "members": {
@@ -31496,6 +31770,24 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The settings for assigning a custom Amazon FSx for Lustre file system to a user profile or space for an Amazon SageMaker Domain.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#FSxLustrePerUnitStorageThroughput": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 125,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#FSxLustreSizeInGiB": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1200,
+                    "max": 100800
+                }
             }
         },
         "com.amazonaws.sagemaker#FailStepMetadata": {
@@ -45995,6 +46287,95 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sagemaker#ListPipelineVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#ListPipelineVersionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#ListPipelineVersionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets a list of all versions of the pipeline.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "PipelineVersionSummaries",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ListPipelineVersionsRequest": {
+            "type": "structure",
+            "members": {
+                "PipelineName": {
+                    "target": "com.amazonaws.sagemaker#PipelineNameOrArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the pipeline.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAfter": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that returns the pipeline versions that were created after a specified time.</p>"
+                    }
+                },
+                "CreatedBefore": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that returns the pipeline versions that were created before a specified time.</p>"
+                    }
+                },
+                "SortOrder": {
+                    "target": "com.amazonaws.sagemaker#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort order for the results.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the result of the previous <code>ListPipelineVersions</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of pipeline versions, use this token in your next request.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.sagemaker#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of pipeline versions to return in the response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#ListPipelineVersionsResponse": {
+            "type": "structure",
+            "members": {
+                "PipelineVersionSummaries": {
+                    "target": "com.amazonaws.sagemaker#PipelineVersionSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains a sorted list of pipeline version summary objects matching the specified filters. Each version summary includes the pipeline version ID, the creation date, and the last pipeline execution created from that version. This list can be empty.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the result of the previous <code>ListPipelineVersions</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of pipeline versions, use this token in your next request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sagemaker#ListPipelines": {
             "type": "operation",
             "input": {
@@ -55047,6 +55428,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains a list of pipeline parameters. This list can be empty. </p>"
                     }
+                },
+                "PipelineVersionId": {
+                    "target": "com.amazonaws.sagemaker#PipelineVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the pipeline version that started this execution.</p>"
+                    }
+                },
+                "PipelineVersionDisplayName": {
+                    "target": "com.amazonaws.sagemaker#PipelineVersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the pipeline version that started this execution.</p>"
+                    }
                 }
             },
             "traits": {
@@ -55501,6 +55894,158 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.sagemaker#PipelineSummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#PipelineVersion": {
+            "type": "structure",
+            "members": {
+                "PipelineArn": {
+                    "target": "com.amazonaws.sagemaker#PipelineArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the pipeline.</p>"
+                    }
+                },
+                "PipelineVersionId": {
+                    "target": "com.amazonaws.sagemaker#PipelineVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the pipeline version.</p>"
+                    }
+                },
+                "PipelineVersionDisplayName": {
+                    "target": "com.amazonaws.sagemaker#PipelineVersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the pipeline version.</p>"
+                    }
+                },
+                "PipelineVersionDescription": {
+                    "target": "com.amazonaws.sagemaker#PipelineVersionDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the pipeline version.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation time of the pipeline version.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the pipeline version was last modified.</p>"
+                    }
+                },
+                "CreatedBy": {
+                    "target": "com.amazonaws.sagemaker#UserContext"
+                },
+                "LastModifiedBy": {
+                    "target": "com.amazonaws.sagemaker#UserContext"
+                },
+                "LastExecutedPipelineExecutionArn": {
+                    "target": "com.amazonaws.sagemaker#PipelineExecutionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the most recent pipeline execution created from this pipeline version.</p>"
+                    }
+                },
+                "LastExecutedPipelineExecutionDisplayName": {
+                    "target": "com.amazonaws.sagemaker#PipelineExecutionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the most recent pipeline execution created from this pipeline version.</p>"
+                    }
+                },
+                "LastExecutedPipelineExecutionStatus": {
+                    "target": "com.amazonaws.sagemaker#PipelineExecutionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the most recent pipeline execution created from this pipeline version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The version of the pipeline.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#PipelineVersionDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3072
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.sagemaker#PipelineVersionId": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#PipelineVersionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 82
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,81}$"
+            }
+        },
+        "com.amazonaws.sagemaker#PipelineVersionSummary": {
+            "type": "structure",
+            "members": {
+                "PipelineArn": {
+                    "target": "com.amazonaws.sagemaker#PipelineArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the pipeline.</p>"
+                    }
+                },
+                "PipelineVersionId": {
+                    "target": "com.amazonaws.sagemaker#PipelineVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the pipeline version.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation time of the pipeline version.</p>"
+                    }
+                },
+                "PipelineVersionDescription": {
+                    "target": "com.amazonaws.sagemaker#PipelineVersionDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the pipeline version.</p>"
+                    }
+                },
+                "PipelineVersionDisplayName": {
+                    "target": "com.amazonaws.sagemaker#PipelineVersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the pipeline version.</p>"
+                    }
+                },
+                "LastExecutionPipelineExecutionArn": {
+                    "target": "com.amazonaws.sagemaker#PipelineExecutionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the most recent pipeline execution created from this pipeline version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of the pipeline version.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#PipelineVersionSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#PipelineVersionSummary"
             },
             "traits": {
                 "smithy.api#length": {
@@ -62269,6 +62814,12 @@
                     "traits": {
                         "smithy.api#enumValue": "ModelCard"
                     }
+                },
+                "PIPELINE_VERSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PipelineVersion"
+                    }
                 }
             }
         },
@@ -63628,6 +64179,9 @@
                     "target": "com.amazonaws.sagemaker#ListPipelines"
                 },
                 {
+                    "target": "com.amazonaws.sagemaker#ListPipelineVersions"
+                },
+                {
                     "target": "com.amazonaws.sagemaker#ListProcessingJobs"
                 },
                 {
@@ -63878,6 +64432,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#UpdatePipelineExecution"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#UpdatePipelineVersion"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#UpdateProject"
@@ -65398,6 +65955,12 @@
                 },
                 "PipelineExecution": {
                     "target": "com.amazonaws.sagemaker#PipelineExecution"
+                },
+                "PipelineVersion": {
+                    "target": "com.amazonaws.sagemaker#PipelineVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the pipeline.</p>"
+                    }
                 },
                 "FeatureGroup": {
                     "target": "com.amazonaws.sagemaker#FeatureGroup"
@@ -67476,6 +68039,12 @@
                     "target": "com.amazonaws.sagemaker#SelectiveExecutionConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The selective execution configuration applied to the pipeline run.</p>"
+                    }
+                },
+                "PipelineVersionId": {
+                    "target": "com.amazonaws.sagemaker#PipelineVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the pipeline version to start execution from.</p>"
                     }
                 }
             },
@@ -74541,6 +75110,12 @@
                         "smithy.api#documentation": "<p>Specify the instance groups to update.</p>"
                     }
                 },
+                "RestrictedInstanceGroups": {
+                    "target": "com.amazonaws.sagemaker#ClusterRestrictedInstanceGroupSpecifications",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specialized instance groups for training models like Amazon Nova to be created in the SageMaker HyperPod cluster.</p>"
+                    }
+                },
                 "NodeRecovery": {
                     "target": "com.amazonaws.sagemaker#ClusterNodeRecovery",
                     "traits": {
@@ -76942,6 +77517,88 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the updated pipeline.</p>"
                     }
+                },
+                "PipelineVersionId": {
+                    "target": "com.amazonaws.sagemaker#PipelineVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the pipeline version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemaker#UpdatePipelineVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#UpdatePipelineVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#UpdatePipelineVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a pipeline version.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#UpdatePipelineVersionRequest": {
+            "type": "structure",
+            "members": {
+                "PipelineArn": {
+                    "target": "com.amazonaws.sagemaker#PipelineArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the pipeline.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PipelineVersionId": {
+                    "target": "com.amazonaws.sagemaker#PipelineVersionId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The pipeline version ID to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PipelineVersionDisplayName": {
+                    "target": "com.amazonaws.sagemaker#PipelineVersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the pipeline version.</p>"
+                    }
+                },
+                "PipelineVersionDescription": {
+                    "target": "com.amazonaws.sagemaker#PipelineVersionDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the pipeline version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#UpdatePipelineVersionResponse": {
+            "type": "structure",
+            "members": {
+                "PipelineArn": {
+                    "target": "com.amazonaws.sagemaker#PipelineArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the pipeline.</p>"
+                    }
+                },
+                "PipelineVersionId": {
+                    "target": "com.amazonaws.sagemaker#PipelineVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the pipeline version.</p>"
+                    }
                 }
             },
             "traits": {
@@ -77608,7 +78265,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the user who created or modified an experiment, trial, trial component, lineage group, project, or model card.</p>"
+                "smithy.api#documentation": "<p>Information about the user who created or modified a SageMaker resource.</p>"
             }
         },
         "com.amazonaws.sagemaker#UserProfileArn": {

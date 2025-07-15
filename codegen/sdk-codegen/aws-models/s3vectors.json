@@ -1,0 +1,2522 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.s3vectors#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.s3vectors#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Access denied.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.s3vectors#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.s3vectors#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request failed because a vector bucket name or a vector index name already exists. Vector bucket names must be unique within your Amazon Web Services account for each Amazon Web Services Region. Vector index names must be unique within your vector bucket. Choose a different vector bucket name or vector index name, and try again.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.s3vectors#CreateIndex": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3vectors#CreateIndexInput"
+            },
+            "output": {
+                "target": "com.amazonaws.s3vectors#CreateIndexOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3vectors#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Creates a vector index within a vector bucket. To specify the vector bucket, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN).</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:CreateIndex</code> permission to use this operation. </p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/CreateIndex",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.s3vectors#CreateIndexInput": {
+            "type": "structure",
+            "members": {
+                "vectorBucketName": {
+                    "target": "com.amazonaws.s3vectors#VectorBucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector bucket to create the vector index in. </p>"
+                    }
+                },
+                "vectorBucketArn": {
+                    "target": "com.amazonaws.s3vectors#VectorBucketArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the vector bucket to create the vector index in.</p>"
+                    }
+                },
+                "indexName": {
+                    "target": "com.amazonaws.s3vectors#IndexName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector index to create. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dataType": {
+                    "target": "com.amazonaws.s3vectors#DataType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type of the vectors to be inserted into the vector index. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dimension": {
+                    "target": "com.amazonaws.s3vectors#Dimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dimensions of the vectors to be inserted into the vector index. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "distanceMetric": {
+                    "target": "com.amazonaws.s3vectors#DistanceMetric",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The distance metric to be used for similarity search. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "metadataConfiguration": {
+                    "target": "com.amazonaws.s3vectors#MetadataConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata configuration for the vector index. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3vectors#CreateIndexOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3vectors#CreateVectorBucket": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3vectors#CreateVectorBucketInput"
+            },
+            "output": {
+                "target": "com.amazonaws.s3vectors#CreateVectorBucketOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3vectors#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Creates a vector bucket in the Amazon Web Services Region that you want your bucket to be in. </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:CreateVectorBucket</code> permission to use this operation. </p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/CreateVectorBucket",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.s3vectors#CreateVectorBucketInput": {
+            "type": "structure",
+            "members": {
+                "vectorBucketName": {
+                    "target": "com.amazonaws.s3vectors#VectorBucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector bucket to create. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "encryptionConfiguration": {
+                    "target": "com.amazonaws.s3vectors#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption configuration for the vector bucket. By default, if you don't specify, all new vectors in Amazon S3 vector buckets use server-side encryption with Amazon S3 managed keys (SSE-S3), specifically <code>AES256</code>. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3vectors#CreateVectorBucketOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3vectors#DataType": {
+            "type": "enum",
+            "members": {
+                "FLOAT32": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "float32"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3vectors#DeleteIndex": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3vectors#DeleteIndexInput"
+            },
+            "output": {
+                "target": "com.amazonaws.s3vectors#DeleteIndexOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3vectors#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Deletes a vector index. To specify the vector index, you can either use both the vector bucket name and vector index name, or use the vector index Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:DeleteIndex</code> permission to use this operation. </p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/DeleteIndex",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.s3vectors#DeleteIndexInput": {
+            "type": "structure",
+            "members": {
+                "vectorBucketName": {
+                    "target": "com.amazonaws.s3vectors#VectorBucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector bucket that contains the vector index. </p>"
+                    }
+                },
+                "indexName": {
+                    "target": "com.amazonaws.s3vectors#IndexName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector index to delete. </p>"
+                    }
+                },
+                "indexArn": {
+                    "target": "com.amazonaws.s3vectors#IndexArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the vector index to delete.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3vectors#DeleteIndexOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3vectors#DeleteVectorBucket": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3vectors#DeleteVectorBucketInput"
+            },
+            "output": {
+                "target": "com.amazonaws.s3vectors#DeleteVectorBucketOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3vectors#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Deletes a vector bucket. All vector indexes in the vector bucket must be deleted before the vector bucket can be deleted. To perform this operation, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:DeleteVectorBucket</code> permission to use this operation. </p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/DeleteVectorBucket",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.s3vectors#DeleteVectorBucketInput": {
+            "type": "structure",
+            "members": {
+                "vectorBucketName": {
+                    "target": "com.amazonaws.s3vectors#VectorBucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector bucket to delete.</p>"
+                    }
+                },
+                "vectorBucketArn": {
+                    "target": "com.amazonaws.s3vectors#VectorBucketArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the vector bucket to delete.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3vectors#DeleteVectorBucketOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3vectors#DeleteVectorBucketPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3vectors#DeleteVectorBucketPolicyInput"
+            },
+            "output": {
+                "target": "com.amazonaws.s3vectors#DeleteVectorBucketPolicyOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3vectors#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Deletes a vector bucket policy. To specify the bucket, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN).</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:DeleteVectorBucketPolicy</code> permission to use this operation. </p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/DeleteVectorBucketPolicy",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.s3vectors#DeleteVectorBucketPolicyInput": {
+            "type": "structure",
+            "members": {
+                "vectorBucketName": {
+                    "target": "com.amazonaws.s3vectors#VectorBucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector bucket to delete the policy from.</p>"
+                    }
+                },
+                "vectorBucketArn": {
+                    "target": "com.amazonaws.s3vectors#VectorBucketArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the vector bucket to delete the policy from.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3vectors#DeleteVectorBucketPolicyOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3vectors#DeleteVectors": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3vectors#DeleteVectorsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.s3vectors#DeleteVectorsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3vectors#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#KmsDisabledException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#KmsInvalidKeyUsageException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#KmsInvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#KmsNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Deletes one or more vectors in a vector index. To specify the vector index, you can either use both the vector bucket name and vector index name, or use the vector index Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:DeleteVectors</code> permission to use this operation. </p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/DeleteVectors",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.s3vectors#DeleteVectorsInput": {
+            "type": "structure",
+            "members": {
+                "vectorBucketName": {
+                    "target": "com.amazonaws.s3vectors#VectorBucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector bucket that contains the vector index. </p>"
+                    }
+                },
+                "indexName": {
+                    "target": "com.amazonaws.s3vectors#IndexName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector index that contains a vector you want to delete.</p>"
+                    }
+                },
+                "indexArn": {
+                    "target": "com.amazonaws.s3vectors#IndexArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the vector index that contains a vector you want to delete.</p>"
+                    }
+                },
+                "keys": {
+                    "target": "com.amazonaws.s3vectors#DeleteVectorsInputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The keys of the vectors to delete. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3vectors#DeleteVectorsInputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3vectors#VectorKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.s3vectors#DeleteVectorsOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3vectors#Dimension": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 4096
+                }
+            }
+        },
+        "com.amazonaws.s3vectors#DistanceMetric": {
+            "type": "enum",
+            "members": {
+                "EUCLIDEAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "euclidean"
+                    }
+                },
+                "COSINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cosine"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3vectors#EncryptionConfiguration": {
+            "type": "structure",
+            "members": {
+                "sseType": {
+                    "target": "com.amazonaws.s3vectors#SseType",
+                    "traits": {
+                        "smithy.api#default": "AES256",
+                        "smithy.api#documentation": "<p>The server-side encryption type to use for the encryption configuration of the vector bucket. By default, if you don't specify, all new vectors in Amazon S3 vector buckets use server-side encryption with Amazon S3 managed keys (SSE-S3), specifically <code>AES256</code>.</p>"
+                    }
+                },
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.s3vectors#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Web Services Key Management Service (KMS) customer managed key ID to use for the encryption configuration. This parameter is allowed if and only if <code>sseType</code> is set to <code>aws:kms</code>.</p> <p>To specify the KMS key, you must use the format of the KMS key Amazon Resource Name (ARN).</p> <p>For example, specify Key ARN in the following format: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The encryption configuration for a vector bucket. By default, if you don't specify, all new vectors in Amazon S3 vector buckets use server-side encryption with Amazon S3 managed keys (SSE-S3), specifically <code>AES256</code>.</p>"
+            }
+        },
+        "com.amazonaws.s3vectors#ExceptionMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.s3vectors#Float32VectorData": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#Float"
+            }
+        },
+        "com.amazonaws.s3vectors#GetIndex": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3vectors#GetIndexInput"
+            },
+            "output": {
+                "target": "com.amazonaws.s3vectors#GetIndexOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3vectors#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Returns vector index attributes. To specify the vector index, you can either use both the vector bucket name and the vector index name, or use the vector index Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:GetIndex</code> permission to use this operation. </p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/GetIndex",
+                    "method": "POST"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.s3vectors#GetIndexInput": {
+            "type": "structure",
+            "members": {
+                "vectorBucketName": {
+                    "target": "com.amazonaws.s3vectors#VectorBucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector bucket that contains the vector index. </p>"
+                    }
+                },
+                "indexName": {
+                    "target": "com.amazonaws.s3vectors#IndexName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector index.</p>"
+                    }
+                },
+                "indexArn": {
+                    "target": "com.amazonaws.s3vectors#IndexArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the vector index.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3vectors#GetIndexOutput": {
+            "type": "structure",
+            "members": {
+                "index": {
+                    "target": "com.amazonaws.s3vectors#Index",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attributes of the vector index.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3vectors#GetOutputVector": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.s3vectors#VectorKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "data": {
+                    "target": "com.amazonaws.s3vectors#VectorData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The vector data of the vector. </p>"
+                    }
+                },
+                "metadata": {
+                    "target": "com.amazonaws.s3vectors#VectorMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata about the vector. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The attributes of a vector returned by the <code>GetVectors</code> operation.</p>"
+            }
+        },
+        "com.amazonaws.s3vectors#GetVectorBucket": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3vectors#GetVectorBucketInput"
+            },
+            "output": {
+                "target": "com.amazonaws.s3vectors#GetVectorBucketOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3vectors#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Returns vector bucket attributes. To specify the bucket, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:GetVectorBucket</code> permission to use this operation. </p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/GetVectorBucket",
+                    "method": "POST"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.s3vectors#GetVectorBucketInput": {
+            "type": "structure",
+            "members": {
+                "vectorBucketName": {
+                    "target": "com.amazonaws.s3vectors#VectorBucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector bucket to retrieve information about.</p>"
+                    }
+                },
+                "vectorBucketArn": {
+                    "target": "com.amazonaws.s3vectors#VectorBucketArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the vector bucket to retrieve information about.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3vectors#GetVectorBucketOutput": {
+            "type": "structure",
+            "members": {
+                "vectorBucket": {
+                    "target": "com.amazonaws.s3vectors#VectorBucket",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attributes of the vector bucket.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3vectors#GetVectorBucketPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3vectors#GetVectorBucketPolicyInput"
+            },
+            "output": {
+                "target": "com.amazonaws.s3vectors#GetVectorBucketPolicyOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3vectors#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Gets details about a vector bucket policy. To specify the bucket, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:GetVectorBucketPolicy</code> permission to use this operation. </p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/GetVectorBucketPolicy",
+                    "method": "POST"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.s3vectors#GetVectorBucketPolicyInput": {
+            "type": "structure",
+            "members": {
+                "vectorBucketName": {
+                    "target": "com.amazonaws.s3vectors#VectorBucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector bucket.</p>"
+                    }
+                },
+                "vectorBucketArn": {
+                    "target": "com.amazonaws.s3vectors#VectorBucketArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the vector bucket.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3vectors#GetVectorBucketPolicyOutput": {
+            "type": "structure",
+            "members": {
+                "policy": {
+                    "target": "com.amazonaws.s3vectors#VectorBucketPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>JSON</code> that defines the policy.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3vectors#GetVectors": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3vectors#GetVectorsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.s3vectors#GetVectorsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3vectors#KmsDisabledException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#KmsInvalidKeyUsageException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#KmsInvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#KmsNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Returns vector attributes. To specify the vector index, you can either use both the vector bucket name and the vector index name, or use the vector index Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:GetVectors</code> permission to use this operation. </p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/GetVectors",
+                    "method": "POST"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.s3vectors#GetVectorsInput": {
+            "type": "structure",
+            "members": {
+                "vectorBucketName": {
+                    "target": "com.amazonaws.s3vectors#VectorBucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector bucket that contains the vector index. </p>"
+                    }
+                },
+                "indexName": {
+                    "target": "com.amazonaws.s3vectors#IndexName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector index.</p>"
+                    }
+                },
+                "indexArn": {
+                    "target": "com.amazonaws.s3vectors#IndexArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the vector index.</p>"
+                    }
+                },
+                "keys": {
+                    "target": "com.amazonaws.s3vectors#GetVectorsInputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names of the vectors you want to return attributes for. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "returnData": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether to include the vector data in the response. The default value is <code>false</code>.</p>"
+                    }
+                },
+                "returnMetadata": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether to include metadata in the response. The default value is <code>false</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3vectors#GetVectorsInputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3vectors#VectorKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.s3vectors#GetVectorsOutput": {
+            "type": "structure",
+            "members": {
+                "vectors": {
+                    "target": "com.amazonaws.s3vectors#GetVectorsOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attributes of the vectors.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3vectors#GetVectorsOutputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3vectors#GetOutputVector"
+            }
+        },
+        "com.amazonaws.s3vectors#Index": {
+            "type": "structure",
+            "members": {
+                "vectorBucketName": {
+                    "target": "com.amazonaws.s3vectors#VectorBucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector bucket that contains the vector index. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "indexName": {
+                    "target": "com.amazonaws.s3vectors#IndexName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector index.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "indexArn": {
+                    "target": "com.amazonaws.s3vectors#IndexArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the vector index.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "creationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Date and time when the vector index was created. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dataType": {
+                    "target": "com.amazonaws.s3vectors#DataType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type of the vectors inserted into the vector index. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dimension": {
+                    "target": "com.amazonaws.s3vectors#Dimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of values in the vectors that are inserted into the vector index. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "distanceMetric": {
+                    "target": "com.amazonaws.s3vectors#DistanceMetric",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The distance metric to be used for similarity search. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "metadataConfiguration": {
+                    "target": "com.amazonaws.s3vectors#MetadataConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata configuration for the vector index. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The attributes of a vector index.</p>"
+            }
+        },
+        "com.amazonaws.s3vectors#IndexArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {}
+            }
+        },
+        "com.amazonaws.s3vectors#IndexName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 63
+                }
+            }
+        },
+        "com.amazonaws.s3vectors#IndexResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.s3vectors#CreateIndex"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#DeleteIndex"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#GetIndex"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#ListIndexes"
+                }
+            ],
+            "resources": [
+                {
+                    "target": "com.amazonaws.s3vectors#VectorResource"
+                }
+            ]
+        },
+        "com.amazonaws.s3vectors#IndexSummary": {
+            "type": "structure",
+            "members": {
+                "vectorBucketName": {
+                    "target": "com.amazonaws.s3vectors#VectorBucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector bucket that contains the vector index. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "indexName": {
+                    "target": "com.amazonaws.s3vectors#IndexName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector index.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "indexArn": {
+                    "target": "com.amazonaws.s3vectors#IndexArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the vector index.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "creationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Date and time when the vector index was created. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Summary information about a vector index.</p>"
+            }
+        },
+        "com.amazonaws.s3vectors#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.s3vectors#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request failed due to an internal server error.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.s3vectors#KmsDisabledException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.s3vectors#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified Amazon Web Services KMS key isn't enabled.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.s3vectors#KmsInvalidKeyUsageException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.s3vectors#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was rejected for one of the following reasons: </p> <ul> <li> <p>The <code>KeyUsage</code> value of the KMS key is incompatible with the API operation.</p> </li> <li> <p>The encryption algorithm or signing algorithm specified for the operation is incompatible with the type of key material in the KMS key (<code>KeySpec</code>).</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html#API_Encrypt_Errors\">InvalidKeyUsageException</a> in the <i>Amazon Web Services Key Management Service API Reference</i>.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.s3vectors#KmsInvalidStateException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.s3vectors#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The key state of the KMS key isn't compatible with the operation.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html#API_Encrypt_Errors\">KMSInvalidStateException</a> in the <i>Amazon Web Services Key Management Service API Reference</i>.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.s3vectors#KmsKeyArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^(arn:aws[-a-z0-9]*:kms:[-a-z0-9]*:[0-9]{12}:key/.+)$"
+            }
+        },
+        "com.amazonaws.s3vectors#KmsNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.s3vectors#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The KMS key can't be found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.s3vectors#ListIndexes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3vectors#ListIndexesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.s3vectors#ListIndexesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3vectors#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Returns a list of all the vector indexes within the specified vector bucket. To specify the bucket, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:ListIndexes</code> permission to use this operation. </p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/ListIndexes",
+                    "method": "POST"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "indexes",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.s3vectors#ListIndexesInput": {
+            "type": "structure",
+            "members": {
+                "vectorBucketName": {
+                    "target": "com.amazonaws.s3vectors#VectorBucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector bucket that contains the vector indexes. </p>"
+                    }
+                },
+                "vectorBucketArn": {
+                    "target": "com.amazonaws.s3vectors#VectorBucketArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the vector bucket that contains the vector indexes.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.s3vectors#ListIndexesMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to be returned in the response. </p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.s3vectors#ListIndexesNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The previous pagination token. </p>"
+                    }
+                },
+                "prefix": {
+                    "target": "com.amazonaws.s3vectors#ListIndexesPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Limits the response to vector indexes that begin with the specified prefix.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3vectors#ListIndexesMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.s3vectors#ListIndexesNextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                }
+            }
+        },
+        "com.amazonaws.s3vectors#ListIndexesOutput": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.s3vectors#ListIndexesNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next pagination token.</p>"
+                    }
+                },
+                "indexes": {
+                    "target": "com.amazonaws.s3vectors#ListIndexesOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attributes of the vector indexes</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3vectors#ListIndexesOutputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3vectors#IndexSummary"
+            }
+        },
+        "com.amazonaws.s3vectors#ListIndexesPrefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                }
+            }
+        },
+        "com.amazonaws.s3vectors#ListOutputVector": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.s3vectors#VectorKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "data": {
+                    "target": "com.amazonaws.s3vectors#VectorData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The vector data of the vector. </p>"
+                    }
+                },
+                "metadata": {
+                    "target": "com.amazonaws.s3vectors#VectorMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata about the vector. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The attributes of a vector returned by the <code>ListVectors</code> operation.</p>"
+            }
+        },
+        "com.amazonaws.s3vectors#ListVectorBuckets": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3vectors#ListVectorBucketsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.s3vectors#ListVectorBucketsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3vectors#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Returns a list of all the vector buckets that are owned by the authenticated sender of the request.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:ListVectorBuckets</code> permission to use this operation. </p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/ListVectorBuckets",
+                    "method": "POST"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "vectorBuckets",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.s3vectors#ListVectorBucketsInput": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.s3vectors#ListVectorBucketsMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of vector buckets to be returned in the response. </p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.s3vectors#ListVectorBucketsNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The previous pagination token. </p>"
+                    }
+                },
+                "prefix": {
+                    "target": "com.amazonaws.s3vectors#ListVectorBucketsPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Limits the response to vector buckets that begin with the specified prefix.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3vectors#ListVectorBucketsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.s3vectors#ListVectorBucketsNextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                }
+            }
+        },
+        "com.amazonaws.s3vectors#ListVectorBucketsOutput": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.s3vectors#ListVectorBucketsNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The element is included in the response when there are more buckets to be listed with pagination. </p>"
+                    }
+                },
+                "vectorBuckets": {
+                    "target": "com.amazonaws.s3vectors#ListVectorBucketsOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of vector buckets owned by the requester. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3vectors#ListVectorBucketsOutputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3vectors#VectorBucketSummary"
+            }
+        },
+        "com.amazonaws.s3vectors#ListVectorBucketsPrefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                }
+            }
+        },
+        "com.amazonaws.s3vectors#ListVectors": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3vectors#ListVectorsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.s3vectors#ListVectorsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3vectors#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>List vectors in the specified vector index. To specify the vector index, you can either use both the vector bucket name and the vector index name, or use the vector index Amazon Resource Name (ARN). </p> <p> <code>ListVectors</code> operations proceed sequentially; however, for faster performance on a large number of vectors in a vector index, applications can request a parallel <code>ListVectors</code> operation by providing the <code>segmentCount</code> and <code>segmentIndex</code> parameters.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:ListVectors</code> permission to use this operation. Additional permissions are required based on the request parameters you specify:</p> <ul> <li> <p>With only <code>s3vectors:ListVectors</code> permission, you can list vector keys when <code>returnData</code> and <code>returnMetadata</code> are both set to false or not specified..</p> </li> <li> <p>If you set <code>returnData</code> or <code>returnMetadata</code> to true, you must have both <code>s3vectors:ListVectors</code> and <code>s3vectors:GetVectors</code> permissions. The request fails with a <code>403 Forbidden</code> error if you request vector data or metadata without the <code>s3vectors:GetVectors</code> permission.</p> </li> </ul> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/ListVectors",
+                    "method": "POST"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "vectors",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.s3vectors#ListVectorsInput": {
+            "type": "structure",
+            "members": {
+                "vectorBucketName": {
+                    "target": "com.amazonaws.s3vectors#VectorBucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector bucket. </p>"
+                    }
+                },
+                "indexName": {
+                    "target": "com.amazonaws.s3vectors#IndexName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector index.</p>"
+                    }
+                },
+                "indexArn": {
+                    "target": "com.amazonaws.s3vectors#IndexArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon resource Name (ARN) of the vector index.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.s3vectors#ListVectorsMaxResults",
+                    "traits": {
+                        "smithy.api#default": 500,
+                        "smithy.api#documentation": "<p>The maximum number of vectors to return on a page.</p> <p>If you don't specify <code>maxResults</code>, the <code>ListVectors</code> operation uses a default value of 500.</p> <p>If the processed dataset size exceeds 1 MB before reaching the <code>maxResults</code> value, the operation stops and returns the vectors that are retrieved up to that point, along with a <code>nextToken</code> that you can use in a subsequent request to retrieve the next set of results.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.s3vectors#ListVectorsNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pagination token from a previous request. The value of this field is empty for an initial request.</p>"
+                    }
+                },
+                "segmentCount": {
+                    "target": "com.amazonaws.s3vectors#ListVectorsSegmentCount",
+                    "traits": {
+                        "smithy.api#default": 1,
+                        "smithy.api#documentation": "<p>For a parallel <code>ListVectors</code> request, <code>segmentCount</code> represents the total number of vector segments into which the <code>ListVectors</code> operation will be divided. The value of <code>segmentCount</code> corresponds to the number of application workers that will perform the parallel <code>ListVectors</code> operation. For example, if you want to use four application threads to list vectors in a vector index, specify a <code>segmentCount</code> value of 4. </p> <p>If you specify a <code>segmentCount</code> value of 1, the <code>ListVectors</code> operation will be sequential rather than parallel.</p> <p>If you specify <code>segmentCount</code>, you must also specify <code>segmentIndex</code>.</p>"
+                    }
+                },
+                "segmentIndex": {
+                    "target": "com.amazonaws.s3vectors#ListVectorsSegmentIndex",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>For a parallel <code>ListVectors</code> request, <code>segmentIndex</code> is the index of the segment from which to list vectors in the current request. It identifies an individual segment to be listed by an application worker. </p> <p>Segment IDs are zero-based, so the first segment is always 0. For example, if you want to use four application threads to list vectors in a vector index, then the first thread specifies a <code>segmentIndex</code> value of 0, the second thread specifies 1, and so on. </p> <p>The value of <code>segmentIndex</code> must be less than the value provided for <code>segmentCount</code>. </p> <p>If you provide <code>segmentIndex</code>, you must also provide <code>segmentCount</code>.</p>"
+                    }
+                },
+                "returnData": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>If true, the vector data of each vector will be included in the response. The default value is <code>false</code>.</p>"
+                    }
+                },
+                "returnMetadata": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>If true, the metadata associated with each vector will be included in the response. The default value is <code>false</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3vectors#ListVectorsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.s3vectors#ListVectorsNextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.s3vectors#ListVectorsOutput": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.s3vectors#ListVectorsNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pagination token to be used in the subsequent request. The field is empty if no further pagination is required.</p>"
+                    }
+                },
+                "vectors": {
+                    "target": "com.amazonaws.s3vectors#ListVectorsOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Vectors in the current segment.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3vectors#ListVectorsOutputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3vectors#ListOutputVector"
+            }
+        },
+        "com.amazonaws.s3vectors#ListVectorsSegmentCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 16
+                }
+            }
+        },
+        "com.amazonaws.s3vectors#ListVectorsSegmentIndex": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 15
+                }
+            }
+        },
+        "com.amazonaws.s3vectors#MetadataConfiguration": {
+            "type": "structure",
+            "members": {
+                "nonFilterableMetadataKeys": {
+                    "target": "com.amazonaws.s3vectors#NonFilterableMetadataKeys",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Non-filterable metadata keys allow you to enrich vectors with additional context during storage and retrieval. Unlike default metadata keys, these keys can’t be used as query filters. Non-filterable metadata keys can be retrieved but can’t be searched, queried, or filtered. You can access non-filterable metadata keys of your vectors after finding the vectors. For more information about non-filterable metadata keys, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors-vectors.html\">Vectors</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors-limitations.html\">Limitations and restrictions</a> in the <i>Amazon S3 User Guide</i>. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The metadata configuration for a vector index.</p>"
+            }
+        },
+        "com.amazonaws.s3vectors#MetadataKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                }
+            }
+        },
+        "com.amazonaws.s3vectors#NonFilterableMetadataKeys": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3vectors#MetadataKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.s3vectors#NotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.s3vectors#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was rejected because the specified resource can't be found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.s3vectors#PutInputVector": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.s3vectors#VectorKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector. The key uniquely identifies the vector in a vector index. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "data": {
+                    "target": "com.amazonaws.s3vectors#VectorData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The vector data of the vector. </p> <p>Vector dimensions must match the dimension count that's configured for the vector index.</p> <ul> <li> <p>For the <code>cosine</code> distance metric, zero vectors (vectors containing all zeros) aren't allowed.</p> </li> <li> <p>For both <code>cosine</code> and <code>euclidean</code> distance metrics, vector data must contain only valid floating-point values. Invalid values such as NaN (Not a Number) or Infinity aren't allowed.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "metadata": {
+                    "target": "com.amazonaws.s3vectors#VectorMetadata",
+                    "traits": {
+                        "smithy.api#default": {},
+                        "smithy.api#documentation": "<p>Metadata about the vector. All metadata entries undergo validation to ensure they meet the format requirements for size and data types.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The attributes of a vector to add to a vector index.</p>"
+            }
+        },
+        "com.amazonaws.s3vectors#PutVectorBucketPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3vectors#PutVectorBucketPolicyInput"
+            },
+            "output": {
+                "target": "com.amazonaws.s3vectors#PutVectorBucketPolicyOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3vectors#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Creates a bucket policy for a vector bucket. To specify the bucket, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:PutVectorBucketPolicy</code> permission to use this operation. </p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/PutVectorBucketPolicy",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.s3vectors#PutVectorBucketPolicyInput": {
+            "type": "structure",
+            "members": {
+                "vectorBucketName": {
+                    "target": "com.amazonaws.s3vectors#VectorBucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector bucket.</p>"
+                    }
+                },
+                "vectorBucketArn": {
+                    "target": "com.amazonaws.s3vectors#VectorBucketArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the vector bucket.</p>"
+                    }
+                },
+                "policy": {
+                    "target": "com.amazonaws.s3vectors#VectorBucketPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>JSON</code> that defines the policy. For more information about bucket policies for S3 Vectors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors-bucket-policy.html\">Managing vector bucket policies</a> in the <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3vectors#PutVectorBucketPolicyOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3vectors#PutVectors": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3vectors#PutVectorsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.s3vectors#PutVectorsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3vectors#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#KmsDisabledException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#KmsInvalidKeyUsageException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#KmsInvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#KmsNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Adds one or more vectors to a vector index. To specify the vector index, you can either use both the vector bucket name and the vector index name, or use the vector index Amazon Resource Name (ARN). </p> <p>For more information about limits, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors-limitations.html\">Limitations and restrictions</a> in the <i>Amazon S3 User Guide</i>.</p> <note> <p>When inserting vector data into your vector index, you must provide the vector data as <code>float32</code> (32-bit floating point) values. If you pass higher-precision values to an Amazon Web Services SDK, S3 Vectors converts the values to 32-bit floating point before storing them, and <code>GetVectors</code>, <code>ListVectors</code>, and <code>QueryVectors</code> operations return the float32 values. Different Amazon Web Services SDKs may have different default numeric types, so ensure your vectors are properly formatted as <code>float32</code> values regardless of which SDK you're using. For example, in Python, use <code>numpy.float32</code> or explicitly cast your values.</p> </note> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:PutVectors</code> permission to use this operation. </p> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/PutVectors",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.s3vectors#PutVectorsInput": {
+            "type": "structure",
+            "members": {
+                "vectorBucketName": {
+                    "target": "com.amazonaws.s3vectors#VectorBucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector bucket that contains the vector index. </p>"
+                    }
+                },
+                "indexName": {
+                    "target": "com.amazonaws.s3vectors#IndexName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector index where you want to write vectors. </p>"
+                    }
+                },
+                "indexArn": {
+                    "target": "com.amazonaws.s3vectors#IndexArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the vector index where you want to write vectors.</p>"
+                    }
+                },
+                "vectors": {
+                    "target": "com.amazonaws.s3vectors#PutVectorsInputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The vectors to add to a vector index. The number of vectors in a single request must not exceed the resource capacity, otherwise the request will be rejected with the error <code>ServiceUnavailableException</code> with the error message \"Currently unable to handle the request\".</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3vectors#PutVectorsInputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3vectors#PutInputVector"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.s3vectors#PutVectorsOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3vectors#QueryOutputVector": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.s3vectors#VectorKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key of the vector in the approximate nearest neighbor search.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "data": {
+                    "target": "com.amazonaws.s3vectors#VectorData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The vector data associated with the vector, if requested. </p>"
+                    }
+                },
+                "metadata": {
+                    "target": "com.amazonaws.s3vectors#VectorMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata associated with the vector, if requested.</p>"
+                    }
+                },
+                "distance": {
+                    "target": "smithy.api#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The measure of similarity between the vector in the response and the query vector.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The attributes of a vector in the approximate nearest neighbor search.</p>"
+            }
+        },
+        "com.amazonaws.s3vectors#QueryVectors": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3vectors#QueryVectorsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.s3vectors#QueryVectorsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3vectors#KmsDisabledException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#KmsInvalidKeyUsageException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#KmsInvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#KmsNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Performs an approximate nearest neighbor search query in a vector index using a query vector. By default, it returns the keys of approximate nearest neighbors. You can optionally include the computed distance (between the query vector and each vector in the response), the vector data, and metadata of each vector in the response. </p> <p>To specify the vector index, you can either use both the vector bucket name and the vector index name, or use the vector index Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:QueryVectors</code> permission to use this operation. Additional permissions are required based on the request parameters you specify:</p> <ul> <li> <p>With only <code>s3vectors:QueryVectors</code> permission, you can retrieve vector keys of approximate nearest neighbors and computed distances between these vectors. This permission is sufficient only when you don't set any metadata filters and don't request vector data or metadata (by keeping the <code>returnMetadata</code> parameter set to <code>false</code> or not specified).</p> </li> <li> <p>If you specify a metadata filter or set <code>returnMetadata</code> to true, you must have both <code>s3vectors:QueryVectors</code> and <code>s3vectors:GetVectors</code> permissions. The request fails with a <code>403 Forbidden error</code> if you request metadata filtering, vector data, or metadata without the <code>s3vectors:GetVectors</code> permission.</p> </li> </ul> </dd> </dl>",
+                "smithy.api#http": {
+                    "uri": "/QueryVectors",
+                    "method": "POST"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.s3vectors#QueryVectorsInput": {
+            "type": "structure",
+            "members": {
+                "vectorBucketName": {
+                    "target": "com.amazonaws.s3vectors#VectorBucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector bucket that contains the vector index. </p>"
+                    }
+                },
+                "indexName": {
+                    "target": "com.amazonaws.s3vectors#IndexName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector index that you want to query. </p>"
+                    }
+                },
+                "indexArn": {
+                    "target": "com.amazonaws.s3vectors#IndexArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the vector index that you want to query.</p>"
+                    }
+                },
+                "topK": {
+                    "target": "com.amazonaws.s3vectors#TopK",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of results to return for each query.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "queryVector": {
+                    "target": "com.amazonaws.s3vectors#VectorData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The query vector. Ensure that the query vector has the same dimension as the dimension of the vector index that's being queried. For example, if your vector index contains vectors with 384 dimensions, your query vector must also have 384 dimensions. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "filter": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata filter to apply during the query. For more information about metadata keys, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors-metadata-filtering.html\">Metadata filtering</a> in the <i>Amazon S3 User Guide</i>. </p>"
+                    }
+                },
+                "returnMetadata": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether to include metadata in the response. The default value is <code>false</code>.</p>"
+                    }
+                },
+                "returnDistance": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether to include the computed distance in the response. The default value is <code>false</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3vectors#QueryVectorsOutput": {
+            "type": "structure",
+            "members": {
+                "vectors": {
+                    "target": "com.amazonaws.s3vectors#QueryVectorsOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The vectors in the approximate nearest neighbor search.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.s3vectors#QueryVectorsOutputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3vectors#QueryOutputVector"
+            }
+        },
+        "com.amazonaws.s3vectors#S3Vectors": {
+            "type": "service",
+            "version": "2025-07-15",
+            "resources": [
+                {
+                    "target": "com.amazonaws.s3vectors#VectorBucketResource"
+                }
+            ],
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3vectors#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "S3Vectors",
+                    "arnNamespace": "s3vectors",
+                    "endpointPrefix": "s3vectors"
+                },
+                "aws.auth#sigv4": {
+                    "name": "s3vectors"
+                },
+                "aws.endpoints#dualStackOnlyEndpoints": {},
+                "aws.endpoints#standardRegionalEndpoints": {},
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>Amazon S3 vector buckets are a bucket type to store and search vectors with sub-second search times. They are designed to provide dedicated API operations for you to interact with vectors to do similarity search. Within a vector bucket, you use a vector index to organize and logically group your vector data. When you make a write or read request, you direct it to a single vector index. You store your vector data as vectors. A vector contains a key (a name that you assign), a multi-dimensional vector, and, optionally, metadata that describes a vector. The key uniquely identifies the vector in a vector index.</p>",
+                "smithy.api#title": "Amazon S3 Vectors",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        },
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://s3vectors-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://s3vectors.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://s3vectors-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://s3vectors.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://s3vectors-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://s3vectors.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://s3vectors-fips.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://s3vectors.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://s3vectors-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://s3vectors.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://s3vectors-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://s3vectors.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-isoe-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://s3vectors-fips.eu-isoe-west-1.cloud.adc-e.uk"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-isoe-west-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-isoe-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://s3vectors.eu-isoe-west-1.cloud.adc-e.uk"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-isoe-west-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isof-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://s3vectors-fips.us-isof-south-1.csp.hci.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isof-south-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isof-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://s3vectors.us-isof-south-1.csp.hci.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isof-south-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.s3vectors#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.s3vectors#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Your request exceeds a service quota. </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.s3vectors#ServiceUnavailableException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.s3vectors#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The service is unavailable. Wait briefly and retry your request. If it continues to fail, increase your waiting time between retries.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 503,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.s3vectors#SseType": {
+            "type": "enum",
+            "members": {
+                "AES256": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AES256"
+                    }
+                },
+                "AWS_KMS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "aws:kms"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3vectors#TooManyRequestsException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.s3vectors#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429,
+                "smithy.api#retryable": {
+                    "throttling": true
+                }
+            }
+        },
+        "com.amazonaws.s3vectors#TopK": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.s3vectors#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "fieldList": {
+                    "target": "com.amazonaws.s3vectors#ValidationExceptionFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of specific validation failures that are encountered during input processing. Each entry in the list contains a path to the field that failed validation and a detailed message that explains why the validation failed. To satisfy multiple constraints, a field can appear multiple times in this list if it failed. You can use the information to identify and fix the specific validation issues in your request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The requested action isn't valid.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.s3vectors#ValidationExceptionField": {
+            "type": "structure",
+            "members": {
+                "path": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A path about the validation exception.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message about the validation exception.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a validation exception.</p>"
+            }
+        },
+        "com.amazonaws.s3vectors#ValidationExceptionFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3vectors#ValidationExceptionField"
+            }
+        },
+        "com.amazonaws.s3vectors#VectorBucket": {
+            "type": "structure",
+            "members": {
+                "vectorBucketName": {
+                    "target": "com.amazonaws.s3vectors#VectorBucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector bucket. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "vectorBucketArn": {
+                    "target": "com.amazonaws.s3vectors#VectorBucketArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the vector bucket. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "creationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Date and time when the vector bucket was created. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "encryptionConfiguration": {
+                    "target": "com.amazonaws.s3vectors#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption configuration for the vector bucket.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The attributes of a vector bucket. </p>"
+            }
+        },
+        "com.amazonaws.s3vectors#VectorBucketArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {}
+            }
+        },
+        "com.amazonaws.s3vectors#VectorBucketName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 63
+                }
+            }
+        },
+        "com.amazonaws.s3vectors#VectorBucketPolicy": {
+            "type": "string"
+        },
+        "com.amazonaws.s3vectors#VectorBucketResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.s3vectors#CreateVectorBucket"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#DeleteVectorBucket"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#DeleteVectorBucketPolicy"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#GetVectorBucket"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#GetVectorBucketPolicy"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#ListVectorBuckets"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#PutVectorBucketPolicy"
+                }
+            ],
+            "resources": [
+                {
+                    "target": "com.amazonaws.s3vectors#IndexResource"
+                }
+            ]
+        },
+        "com.amazonaws.s3vectors#VectorBucketSummary": {
+            "type": "structure",
+            "members": {
+                "vectorBucketName": {
+                    "target": "com.amazonaws.s3vectors#VectorBucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vector bucket. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "vectorBucketArn": {
+                    "target": "com.amazonaws.s3vectors#VectorBucketArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the vector bucket. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "creationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Date and time when the vector bucket was created. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Summary information about a vector bucket.</p>"
+            }
+        },
+        "com.amazonaws.s3vectors#VectorData": {
+            "type": "union",
+            "members": {
+                "float32": {
+                    "target": "com.amazonaws.s3vectors#Float32VectorData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The vector data as 32-bit floating point numbers. The number of elements in this array must exactly match the dimension of the vector index where the operation is being performed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The vector data in different formats.</p>"
+            }
+        },
+        "com.amazonaws.s3vectors#VectorKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.s3vectors#VectorMetadata": {
+            "type": "document"
+        },
+        "com.amazonaws.s3vectors#VectorResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.s3vectors#DeleteVectors"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#GetVectors"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#ListVectors"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#PutVectors"
+                },
+                {
+                    "target": "com.amazonaws.s3vectors#QueryVectors"
+                }
+            ]
+        }
+    }
+}
