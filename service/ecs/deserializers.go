@@ -8,6 +8,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/ecs/internal/document"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 	smithy "github.com/aws/smithy-go"
 	smithyio "github.com/aws/smithy-go/io"
@@ -8389,6 +8391,73 @@ func awsAwsjson11_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAdvancedConfiguration(v **types.AdvancedConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AdvancedConfiguration
+	if *v == nil {
+		sv = &types.AdvancedConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "alternateTargetGroupArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AlternateTargetGroupArn = ptr.String(jtv)
+			}
+
+		case "productionListenerRule":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ProductionListenerRule = ptr.String(jtv)
+			}
+
+		case "roleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
+		case "testListenerRule":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.TestListenerRule = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentAttachment(v **types.Attachment, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11222,8 +11291,26 @@ func awsAwsjson11_deserializeDocumentDeploymentConfiguration(v **types.Deploymen
 				return err
 			}
 
+		case "bakeTimeInMinutes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoxedInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.BakeTimeInMinutes = ptr.Int32(int32(i64))
+			}
+
 		case "deploymentCircuitBreaker":
 			if err := awsAwsjson11_deserializeDocumentDeploymentCircuitBreaker(&sv.DeploymentCircuitBreaker, value); err != nil {
+				return err
+			}
+
+		case "lifecycleHooks":
+			if err := awsAwsjson11_deserializeDocumentDeploymentLifecycleHookList(&sv.LifecycleHooks, value); err != nil {
 				return err
 			}
 
@@ -11251,6 +11338,15 @@ func awsAwsjson11_deserializeDocumentDeploymentConfiguration(v **types.Deploymen
 					return err
 				}
 				sv.MinimumHealthyPercent = ptr.Int32(int32(i64))
+			}
+
+		case "strategy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeploymentStrategy to be of type string, got %T instead", value)
+				}
+				sv.Strategy = types.DeploymentStrategy(jtv)
 			}
 
 		default:
@@ -11339,6 +11435,135 @@ func awsAwsjson11_deserializeDocumentDeploymentEphemeralStorage(v **types.Deploy
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDeploymentLifecycleHook(v **types.DeploymentLifecycleHook, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DeploymentLifecycleHook
+	if *v == nil {
+		sv = &types.DeploymentLifecycleHook{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "hookDetails":
+			if err := awsAwsjson11_deserializeDocumentHookDetails(&sv.HookDetails, value); err != nil {
+				return err
+			}
+
+		case "hookTargetArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.HookTargetArn = ptr.String(jtv)
+			}
+
+		case "lifecycleStages":
+			if err := awsAwsjson11_deserializeDocumentDeploymentLifecycleHookStageList(&sv.LifecycleStages, value); err != nil {
+				return err
+			}
+
+		case "roleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IAMRoleArn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDeploymentLifecycleHookList(v *[]types.DeploymentLifecycleHook, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.DeploymentLifecycleHook
+	if *v == nil {
+		cv = []types.DeploymentLifecycleHook{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.DeploymentLifecycleHook
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentDeploymentLifecycleHook(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDeploymentLifecycleHookStageList(v *[]types.DeploymentLifecycleHookStage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.DeploymentLifecycleHookStage
+	if *v == nil {
+		cv = []types.DeploymentLifecycleHookStage{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.DeploymentLifecycleHookStage
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected DeploymentLifecycleHookStage to be of type string, got %T instead", value)
+			}
+			col = types.DeploymentLifecycleHookStage(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -12508,6 +12733,14 @@ func awsAwsjson11_deserializeDocumentHealthCheck(v **types.HealthCheck, value in
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentHookDetails(v *document.Interface, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	*v = internaldocument.NewDocumentUnmarshaler(value)
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentHostEntry(v **types.HostEntry, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13238,6 +13471,11 @@ func awsAwsjson11_deserializeDocumentLoadBalancer(v **types.LoadBalancer, value 
 
 	for key, value := range shape {
 		switch key {
+		case "advancedConfiguration":
+			if err := awsAwsjson11_deserializeDocumentAdvancedConfiguration(&sv.AdvancedConfiguration, value); err != nil {
+				return err
+			}
+
 		case "containerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14757,6 +14995,42 @@ func awsAwsjson11_deserializeDocumentRequiresAttributes(v *[]types.Attribute, va
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentResolvedConfiguration(v **types.ResolvedConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ResolvedConfiguration
+	if *v == nil {
+		sv = &types.ResolvedConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "loadBalancers":
+			if err := awsAwsjson11_deserializeDocumentServiceRevisionLoadBalancers(&sv.LoadBalancers, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentResource(v **types.Resource, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -15753,6 +16027,11 @@ func awsAwsjson11_deserializeDocumentServiceConnectClientAlias(v **types.Service
 				sv.Port = ptr.Int32(int32(i64))
 			}
 
+		case "testTrafficRules":
+			if err := awsAwsjson11_deserializeDocumentServiceConnectTestTrafficRules(&sv.TestTrafficRules, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -16049,6 +16328,127 @@ func awsAwsjson11_deserializeDocumentServiceConnectServiceResourceList(v *[]type
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentServiceConnectTestTrafficHeaderMatchRules(v **types.ServiceConnectTestTrafficHeaderMatchRules, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServiceConnectTestTrafficHeaderMatchRules
+	if *v == nil {
+		sv = &types.ServiceConnectTestTrafficHeaderMatchRules{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "exact":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Exact = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentServiceConnectTestTrafficHeaderRules(v **types.ServiceConnectTestTrafficHeaderRules, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServiceConnectTestTrafficHeaderRules
+	if *v == nil {
+		sv = &types.ServiceConnectTestTrafficHeaderRules{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "value":
+			if err := awsAwsjson11_deserializeDocumentServiceConnectTestTrafficHeaderMatchRules(&sv.Value, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentServiceConnectTestTrafficRules(v **types.ServiceConnectTestTrafficRules, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServiceConnectTestTrafficRules
+	if *v == nil {
+		sv = &types.ServiceConnectTestTrafficRules{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "header":
+			if err := awsAwsjson11_deserializeDocumentServiceConnectTestTrafficHeaderRules(&sv.Header, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentServiceConnectTlsCertificateAuthority(v **types.ServiceConnectTlsCertificateAuthority, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -16219,6 +16619,15 @@ func awsAwsjson11_deserializeDocumentServiceDeployment(v **types.ServiceDeployme
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "lifecycleStage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ServiceDeploymentLifecycleStage to be of type string, got %T instead", value)
+				}
+				sv.LifecycleStage = types.ServiceDeploymentLifecycleStage(jtv)
 			}
 
 		case "rollback":
@@ -17224,6 +17633,11 @@ func awsAwsjson11_deserializeDocumentServiceRevision(v **types.ServiceRevision, 
 				sv.PlatformVersion = ptr.String(jtv)
 			}
 
+		case "resolvedConfiguration":
+			if err := awsAwsjson11_deserializeDocumentResolvedConfiguration(&sv.ResolvedConfiguration, value); err != nil {
+				return err
+			}
+
 		case "serviceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17277,6 +17691,89 @@ func awsAwsjson11_deserializeDocumentServiceRevision(v **types.ServiceRevision, 
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentServiceRevisionLoadBalancer(v **types.ServiceRevisionLoadBalancer, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServiceRevisionLoadBalancer
+	if *v == nil {
+		sv = &types.ServiceRevisionLoadBalancer{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "productionListenerRule":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ProductionListenerRule = ptr.String(jtv)
+			}
+
+		case "targetGroupArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.TargetGroupArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentServiceRevisionLoadBalancers(v *[]types.ServiceRevisionLoadBalancer, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ServiceRevisionLoadBalancer
+	if *v == nil {
+		cv = []types.ServiceRevisionLoadBalancer{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ServiceRevisionLoadBalancer
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentServiceRevisionLoadBalancer(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

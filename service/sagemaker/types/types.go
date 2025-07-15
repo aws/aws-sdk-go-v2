@@ -1370,8 +1370,7 @@ type AssociationSummary struct {
 	// The type of the association.
 	AssociationType AssociationEdgeType
 
-	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, project, or model card.
+	// Information about the user who created or modified a SageMaker resource.
 	CreatedBy *UserContext
 
 	// When the association was created.
@@ -3802,6 +3801,156 @@ type ClusterOrchestratorEksConfig struct {
 	//
 	// This member is required.
 	ClusterArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The instance group details of the restricted instance group (RIG).
+type ClusterRestrictedInstanceGroupDetails struct {
+
+	// The number of instances that are currently in the restricted instance group of
+	// a SageMaker HyperPod cluster.
+	CurrentCount *int32
+
+	// The configuration for the restricted instance groups (RIG) environment.
+	EnvironmentConfig *EnvironmentConfigDetails
+
+	// The execution role for the restricted instance group to assume.
+	ExecutionRole *string
+
+	// The name of the restricted instance group of a SageMaker HyperPod cluster.
+	InstanceGroupName *string
+
+	// The additional storage configurations for the instances in the SageMaker
+	// HyperPod cluster restricted instance group.
+	InstanceStorageConfigs []ClusterInstanceStorageConfig
+
+	// The instance type of the restricted instance group of a SageMaker HyperPod
+	// cluster.
+	InstanceType ClusterInstanceType
+
+	// A flag indicating whether deep health checks should be performed when the
+	// cluster's restricted instance group is created or updated.
+	OnStartDeepHealthChecks []DeepHealthCheckType
+
+	// Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs,
+	// hosted models, and compute resources have access to. You can control access to
+	// and from your resources by configuring a VPC. For more information, see [Give SageMaker Access to Resources in your Amazon VPC].
+	//
+	// [Give SageMaker Access to Resources in your Amazon VPC]: https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html
+	OverrideVpcConfig *VpcConfig
+
+	// The configuration object of the schedule that SageMaker follows when updating
+	// the AMI.
+	ScheduledUpdateConfig *ScheduledUpdateConfig
+
+	// The current status of the cluster's restricted instance group.
+	//
+	//   - InService : The restricted instance group is active and healthy.
+	//
+	//   - Creating : The restricted instance group is being provisioned.
+	//
+	//   - Updating : The restricted instance group is being updated.
+	//
+	//   - Failed : The restricted instance group has failed to provision or is no
+	//   longer healthy.
+	//
+	//   - Degraded : The restricted instance group is degraded, meaning that some
+	//   instances have failed to provision or are no longer healthy.
+	//
+	//   - Deleting : The restricted instance group is being deleted.
+	Status InstanceGroupStatus
+
+	// The number of instances you specified to add to the restricted instance group
+	// of a SageMaker HyperPod cluster.
+	TargetCount *int32
+
+	// The number you specified to TreadsPerCore in CreateCluster for enabling or
+	// disabling multithreading. For instance types that support multithreading, you
+	// can specify 1 for disabling multithreading and 2 for enabling multithreading.
+	// For more information, see the reference table of [CPU cores and threads per CPU core per instance type]in the Amazon Elastic Compute
+	// Cloud User Guide.
+	//
+	// [CPU cores and threads per CPU core per instance type]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cpu-options-supported-instances-values.html
+	ThreadsPerCore *int32
+
+	// The Amazon Resource Name (ARN) of the training plan to filter clusters by. For
+	// more information about reserving GPU capacity for your SageMaker HyperPod
+	// clusters using Amazon SageMaker Training Plan, see [CreateTrainingPlan].
+	//
+	// [CreateTrainingPlan]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html
+	TrainingPlanArn *string
+
+	// The current status of the training plan associated with this cluster restricted
+	// instance group.
+	TrainingPlanStatus *string
+
+	noSmithyDocumentSerde
+}
+
+// The specifications of a restricted instance group that you need to define.
+type ClusterRestrictedInstanceGroupSpecification struct {
+
+	// The configuration for the restricted instance groups (RIG) environment.
+	//
+	// This member is required.
+	EnvironmentConfig *EnvironmentConfig
+
+	// Specifies an IAM execution role to be assumed by the restricted instance group.
+	//
+	// This member is required.
+	ExecutionRole *string
+
+	// Specifies the number of instances to add to the restricted instance group of a
+	// SageMaker HyperPod cluster.
+	//
+	// This member is required.
+	InstanceCount *int32
+
+	// Specifies the name of the restricted instance group.
+	//
+	// This member is required.
+	InstanceGroupName *string
+
+	// Specifies the instance type of the restricted instance group.
+	//
+	// This member is required.
+	InstanceType ClusterInstanceType
+
+	// Specifies the additional storage configurations for the instances in the
+	// SageMaker HyperPod cluster restricted instance group.
+	InstanceStorageConfigs []ClusterInstanceStorageConfig
+
+	// A flag indicating whether deep health checks should be performed when the
+	// cluster restricted instance group is created or updated.
+	OnStartDeepHealthChecks []DeepHealthCheckType
+
+	// Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs,
+	// hosted models, and compute resources have access to. You can control access to
+	// and from your resources by configuring a VPC. For more information, see [Give SageMaker Access to Resources in your Amazon VPC].
+	//
+	// [Give SageMaker Access to Resources in your Amazon VPC]: https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html
+	OverrideVpcConfig *VpcConfig
+
+	// The configuration object of the schedule that SageMaker follows when updating
+	// the AMI.
+	ScheduledUpdateConfig *ScheduledUpdateConfig
+
+	// The number you specified to TreadsPerCore in CreateCluster for enabling or
+	// disabling multithreading. For instance types that support multithreading, you
+	// can specify 1 for disabling multithreading and 2 for enabling multithreading.
+	// For more information, see the reference table of [CPU cores and threads per CPU core per instance type]in the Amazon Elastic Compute
+	// Cloud User Guide.
+	//
+	// [CPU cores and threads per CPU core per instance type]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cpu-options-supported-instances-values.html
+	ThreadsPerCore *int32
+
+	// The Amazon Resource Name (ARN) of the training plan to filter clusters by. For
+	// more information about reserving GPU capacity for your SageMaker HyperPod
+	// clusters using Amazon SageMaker Training Plan, see [CreateTrainingPlan].
+	//
+	// [CreateTrainingPlan]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html
+	TrainingPlanArn *string
 
 	noSmithyDocumentSerde
 }
@@ -6306,6 +6455,30 @@ type EndpointSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for the restricted instance groups (RIG) environment.
+type EnvironmentConfig struct {
+
+	// Configuration settings for an Amazon FSx for Lustre file system to be used with
+	// the cluster.
+	FSxLustreConfig *FSxLustreConfig
+
+	noSmithyDocumentSerde
+}
+
+// The configuration details for the restricted instance groups (RIG) environment.
+type EnvironmentConfigDetails struct {
+
+	// Configuration settings for an Amazon FSx for Lustre file system to be used with
+	// the cluster.
+	FSxLustreConfig *FSxLustreConfig
+
+	// The Amazon S3 path where output data from the restricted instance group (RIG)
+	// environment will be stored.
+	S3OutputPath *string
+
+	noSmithyDocumentSerde
+}
+
 // A list of environment parameters suggested by the Amazon SageMaker Inference
 // Recommender.
 type EnvironmentParameter struct {
@@ -6376,8 +6549,7 @@ type Experiment struct {
 	// The name of the experiment.
 	ExperimentName *string
 
-	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, project, or model card.
+	// Information about the user who created or modified a SageMaker resource.
 	LastModifiedBy *UserContext
 
 	// When the experiment was last modified.
@@ -6976,6 +7148,25 @@ type FlowDefinitionSummary struct {
 	// The reason why the flow definition creation failed. A failure reason is
 	// returned only when the flow definition status is Failed .
 	FailureReason *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings for an Amazon FSx for Lustre file system to be used with
+// the cluster.
+type FSxLustreConfig struct {
+
+	// The throughput capacity of the Amazon FSx for Lustre file system, measured in
+	// MB/s per TiB of storage.
+	//
+	// This member is required.
+	PerUnitStorageThroughput *int32
+
+	// The storage capacity of the Amazon FSx for Lustre file system, specified in
+	// gibibytes (GiB).
+	//
+	// This member is required.
+	SizeInGiB *int32
 
 	noSmithyDocumentSerde
 }
@@ -11186,15 +11377,13 @@ type ModelCard struct {
 	// [model card JSON schema]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards.html#model-cards-json-schema
 	Content *string
 
-	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, project, or model card.
+	// Information about the user who created or modified a SageMaker resource.
 	CreatedBy *UserContext
 
 	// The date and time that the model card was created.
 	CreationTime *time.Time
 
-	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, project, or model card.
+	// Information about the user who created or modified a SageMaker resource.
 	LastModifiedBy *UserContext
 
 	// The date and time that the model card was last modified.
@@ -11515,15 +11704,13 @@ type ModelDashboardModel struct {
 // The model card for a model displayed in the Amazon SageMaker Model Dashboard.
 type ModelDashboardModelCard struct {
 
-	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, project, or model card.
+	// Information about the user who created or modified a SageMaker resource.
 	CreatedBy *UserContext
 
 	// A timestamp that indicates when the model card was created.
 	CreationTime *time.Time
 
-	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, project, or model card.
+	// Information about the user who created or modified a SageMaker resource.
 	LastModifiedBy *UserContext
 
 	// A timestamp that indicates when the model card was last updated.
@@ -12074,8 +12261,7 @@ type ModelPackageContainerDefinition struct {
 // A group of versioned models in the Model Registry.
 type ModelPackageGroup struct {
 
-	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, project, or model card.
+	// Information about the user who created or modified a SageMaker resource.
 	CreatedBy *UserContext
 
 	// The time that the model group was created.
@@ -14264,15 +14450,13 @@ type Phase struct {
 // A SageMaker Model Building Pipeline instance.
 type Pipeline struct {
 
-	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, project, or model card.
+	// Information about the user who created or modified a SageMaker resource.
 	CreatedBy *UserContext
 
 	// The creation time of the pipeline.
 	CreationTime *time.Time
 
-	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, project, or model card.
+	// Information about the user who created or modified a SageMaker resource.
 	LastModifiedBy *UserContext
 
 	// The time that the pipeline was last modified.
@@ -14331,8 +14515,7 @@ type PipelineDefinitionS3Location struct {
 // An execution of a pipeline.
 type PipelineExecution struct {
 
-	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, project, or model card.
+	// Information about the user who created or modified a SageMaker resource.
 	CreatedBy *UserContext
 
 	// The creation time of the pipeline execution.
@@ -14341,8 +14524,7 @@ type PipelineExecution struct {
 	// If the execution failed, a message describing why.
 	FailureReason *string
 
-	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, project, or model card.
+	// Information about the user who created or modified a SageMaker resource.
 	LastModifiedBy *UserContext
 
 	// The time that the pipeline execution was last modified.
@@ -14371,6 +14553,12 @@ type PipelineExecution struct {
 
 	// Contains a list of pipeline parameters. This list can be empty.
 	PipelineParameters []Parameter
+
+	// The display name of the pipeline version that started this execution.
+	PipelineVersionDisplayName *string
+
+	// The ID of the pipeline version that started this execution.
+	PipelineVersionId *int64
 
 	// The selective execution configuration applied to the pipeline run.
 	SelectiveExecutionConfig *SelectiveExecutionConfig
@@ -14586,6 +14774,73 @@ type PipelineSummary struct {
 
 	// The Amazon Resource Name (ARN) that the pipeline used to execute.
 	RoleArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The version of the pipeline.
+type PipelineVersion struct {
+
+	// Information about the user who created or modified a SageMaker resource.
+	CreatedBy *UserContext
+
+	// The creation time of the pipeline version.
+	CreationTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the most recent pipeline execution created
+	// from this pipeline version.
+	LastExecutedPipelineExecutionArn *string
+
+	// The display name of the most recent pipeline execution created from this
+	// pipeline version.
+	LastExecutedPipelineExecutionDisplayName *string
+
+	// The status of the most recent pipeline execution created from this pipeline
+	// version.
+	LastExecutedPipelineExecutionStatus PipelineExecutionStatus
+
+	// Information about the user who created or modified a SageMaker resource.
+	LastModifiedBy *UserContext
+
+	// The time when the pipeline version was last modified.
+	LastModifiedTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the pipeline.
+	PipelineArn *string
+
+	// The description of the pipeline version.
+	PipelineVersionDescription *string
+
+	// The display name of the pipeline version.
+	PipelineVersionDisplayName *string
+
+	// The ID of the pipeline version.
+	PipelineVersionId *int64
+
+	noSmithyDocumentSerde
+}
+
+// The summary of the pipeline version.
+type PipelineVersionSummary struct {
+
+	// The creation time of the pipeline version.
+	CreationTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the most recent pipeline execution created
+	// from this pipeline version.
+	LastExecutionPipelineExecutionArn *string
+
+	// The Amazon Resource Name (ARN) of the pipeline.
+	PipelineArn *string
+
+	// The description of the pipeline version.
+	PipelineVersionDescription *string
+
+	// The display name of the pipeline version.
+	PipelineVersionDisplayName *string
+
+	// The ID of the pipeline version.
+	PipelineVersionId *int64
 
 	noSmithyDocumentSerde
 }
@@ -15520,8 +15775,7 @@ type Project struct {
 	// A timestamp specifying when the project was created.
 	CreationTime *time.Time
 
-	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, project, or model card.
+	// Information about the user who created or modified a SageMaker resource.
 	LastModifiedBy *UserContext
 
 	// A timestamp container for when the project was last modified.
@@ -17414,6 +17668,9 @@ type SearchRecord struct {
 
 	// An execution of a pipeline.
 	PipelineExecution *PipelineExecution
+
+	// The version of the pipeline.
+	PipelineVersion *PipelineVersion
 
 	// The properties of a project.
 	Project *Project
@@ -20017,8 +20274,7 @@ type Trial struct {
 	// The name of the experiment the trial is part of.
 	ExperimentName *string
 
-	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, project, or model card.
+	// Information about the user who created or modified a SageMaker resource.
 	LastModifiedBy *UserContext
 
 	// Who last modified the trial.
@@ -20070,8 +20326,7 @@ type TrialComponent struct {
 	// The input artifacts of the component.
 	InputArtifacts map[string]TrialComponentArtifact
 
-	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, project, or model card.
+	// Information about the user who created or modified a SageMaker resource.
 	LastModifiedBy *UserContext
 
 	// When the component was last modified.
@@ -20223,8 +20478,7 @@ func (*TrialComponentParameterValueMemberStringValue) isTrialComponentParameterV
 // A short summary of a trial component.
 type TrialComponentSimpleSummary struct {
 
-	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, project, or model card.
+	// Information about the user who created or modified a SageMaker resource.
 	CreatedBy *UserContext
 
 	// When the component was created.
@@ -20603,8 +20857,7 @@ type USD struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the user who created or modified an experiment, trial, trial
-// component, lineage group, project, or model card.
+// Information about the user who created or modified a SageMaker resource.
 type UserContext struct {
 
 	// The domain associated with the user.

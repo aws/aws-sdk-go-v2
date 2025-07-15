@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Remove role from multiple users or groups in a private re:Post.
+// Remove a role from multiple users or groups in a private re:Post.
 func (c *Client) BatchRemoveRole(ctx context.Context, params *BatchRemoveRoleInput, optFns ...func(*Options)) (*BatchRemoveRoleOutput, error) {
 	if params == nil {
 		params = &BatchRemoveRoleInput{}

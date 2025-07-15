@@ -208,6 +208,9 @@ type TableBucketSummary struct {
 	// The system-assigned unique identifier for the table bucket.
 	TableBucketId *string
 
+	// The type of the table bucket.
+	Type TableBucketType
+
 	noSmithyDocumentSerde
 }
 

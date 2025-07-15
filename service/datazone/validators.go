@@ -3930,6 +3930,11 @@ func validateConnectionPropertiesInput(v types.ConnectionPropertiesInput) error 
 			invalidParams.AddNested("[redshiftProperties]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.ConnectionPropertiesInputMemberS3Properties:
+		if err := validateS3PropertiesInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[s3Properties]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3947,6 +3952,11 @@ func validateConnectionPropertiesPatch(v types.ConnectionPropertiesPatch) error 
 	case *types.ConnectionPropertiesPatchMemberRedshiftProperties:
 		if err := validateRedshiftPropertiesPatch(&uv.Value); err != nil {
 			invalidParams.AddNested("[redshiftProperties]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ConnectionPropertiesPatchMemberS3Properties:
+		if err := validateS3PropertiesPatch(&uv.Value); err != nil {
+			invalidParams.AddNested("[s3Properties]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -5259,6 +5269,36 @@ func validateRuleTarget(v types.RuleTarget) error {
 	}
 }
 
+func validateS3PropertiesInput(v *types.S3PropertiesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3PropertiesInput"}
+	if v.S3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3PropertiesPatch(v *types.S3PropertiesPatch) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3PropertiesPatch"}
+	if v.S3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSageMakerRunConfigurationInput(v *types.SageMakerRunConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -5918,9 +5958,6 @@ func validateOpCreateEnvironmentInput(v *CreateEnvironmentInput) error {
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.EnvironmentProfileIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentProfileIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

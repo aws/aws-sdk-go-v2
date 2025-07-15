@@ -53,6 +53,10 @@ type CreateClusterInput struct {
 	// Service (EKS) cluster as the orchestrator.
 	Orchestrator *types.ClusterOrchestrator
 
+	// The specialized instance groups for training models like Amazon Nova to be
+	// created in the SageMaker HyperPod cluster.
+	RestrictedInstanceGroups []types.ClusterRestrictedInstanceGroupSpecification
+
 	// Custom tags for managing the SageMaker HyperPod cluster as an Amazon Web
 	// Services resource. You can add tags to your cluster in the same way you add them
 	// in other Amazon Web Services services that support tagging. To learn more about

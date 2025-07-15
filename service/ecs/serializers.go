@@ -6,6 +6,8 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/ecs/internal/document"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/encoding/httpbinding"
@@ -3677,6 +3679,33 @@ func (m *awsAwsjson11_serializeOpUpdateTaskSet) HandleSerialize(ctx context.Cont
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson11_serializeDocumentAdvancedConfiguration(v *types.AdvancedConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AlternateTargetGroupArn != nil {
+		ok := object.Key("alternateTargetGroupArn")
+		ok.String(*v.AlternateTargetGroupArn)
+	}
+
+	if v.ProductionListenerRule != nil {
+		ok := object.Key("productionListenerRule")
+		ok.String(*v.ProductionListenerRule)
+	}
+
+	if v.RoleArn != nil {
+		ok := object.Key("roleArn")
+		ok.String(*v.RoleArn)
+	}
+
+	if v.TestListenerRule != nil {
+		ok := object.Key("testListenerRule")
+		ok.String(*v.TestListenerRule)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAttachmentStateChange(v *types.AttachmentStateChange, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4496,9 +4525,21 @@ func awsAwsjson11_serializeDocumentDeploymentConfiguration(v *types.DeploymentCo
 		}
 	}
 
+	if v.BakeTimeInMinutes != nil {
+		ok := object.Key("bakeTimeInMinutes")
+		ok.Integer(*v.BakeTimeInMinutes)
+	}
+
 	if v.DeploymentCircuitBreaker != nil {
 		ok := object.Key("deploymentCircuitBreaker")
 		if err := awsAwsjson11_serializeDocumentDeploymentCircuitBreaker(v.DeploymentCircuitBreaker, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LifecycleHooks != nil {
+		ok := object.Key("lifecycleHooks")
+		if err := awsAwsjson11_serializeDocumentDeploymentLifecycleHookList(v.LifecycleHooks, ok); err != nil {
 			return err
 		}
 	}
@@ -4513,6 +4554,11 @@ func awsAwsjson11_serializeDocumentDeploymentConfiguration(v *types.DeploymentCo
 		ok.Integer(*v.MinimumHealthyPercent)
 	}
 
+	if len(v.Strategy) > 0 {
+		ok := object.Key("strategy")
+		ok.String(string(v.Strategy))
+	}
+
 	return nil
 }
 
@@ -4525,6 +4571,61 @@ func awsAwsjson11_serializeDocumentDeploymentController(v *types.DeploymentContr
 		ok.String(string(v.Type))
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDeploymentLifecycleHook(v *types.DeploymentLifecycleHook, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HookDetails != nil {
+		ok := object.Key("hookDetails")
+		if err := awsAwsjson11_serializeDocumentHookDetails(v.HookDetails, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.HookTargetArn != nil {
+		ok := object.Key("hookTargetArn")
+		ok.String(*v.HookTargetArn)
+	}
+
+	if v.LifecycleStages != nil {
+		ok := object.Key("lifecycleStages")
+		if err := awsAwsjson11_serializeDocumentDeploymentLifecycleHookStageList(v.LifecycleStages, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RoleArn != nil {
+		ok := object.Key("roleArn")
+		ok.String(*v.RoleArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDeploymentLifecycleHookList(v []types.DeploymentLifecycleHook, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentDeploymentLifecycleHook(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDeploymentLifecycleHookStageList(v []types.DeploymentLifecycleHookStage, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 
@@ -4927,6 +5028,21 @@ func awsAwsjson11_serializeDocumentHealthCheck(v *types.HealthCheck, value smith
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentHookDetails(v document.Interface, value smithyjson.Value) error {
+	if v == nil {
+		return nil
+	}
+	if !internaldocument.IsInterface(v) {
+		return fmt.Errorf("%T is not a compatible document type", v)
+	}
+	db, err := v.MarshalSmithyDocument()
+	if err != nil {
+		return err
+	}
+	value.Write(db)
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentHostEntry(v *types.HostEntry, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5129,6 +5245,13 @@ func awsAwsjson11_serializeDocumentLinuxParameters(v *types.LinuxParameters, val
 func awsAwsjson11_serializeDocumentLoadBalancer(v *types.LoadBalancer, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AdvancedConfiguration != nil {
+		ok := object.Key("advancedConfiguration")
+		if err := awsAwsjson11_serializeDocumentAdvancedConfiguration(v.AdvancedConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.ContainerName != nil {
 		ok := object.Key("containerName")
@@ -5766,6 +5889,13 @@ func awsAwsjson11_serializeDocumentServiceConnectClientAlias(v *types.ServiceCon
 		ok.Integer(*v.Port)
 	}
 
+	if v.TestTrafficRules != nil {
+		ok := object.Key("testTrafficRules")
+		if err := awsAwsjson11_serializeDocumentServiceConnectTestTrafficRules(v.TestTrafficRules, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -5866,6 +5996,51 @@ func awsAwsjson11_serializeDocumentServiceConnectServiceList(v []types.ServiceCo
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentServiceConnectTestTrafficHeaderMatchRules(v *types.ServiceConnectTestTrafficHeaderMatchRules, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Exact != nil {
+		ok := object.Key("exact")
+		ok.String(*v.Exact)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentServiceConnectTestTrafficHeaderRules(v *types.ServiceConnectTestTrafficHeaderRules, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("value")
+		if err := awsAwsjson11_serializeDocumentServiceConnectTestTrafficHeaderMatchRules(v.Value, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentServiceConnectTestTrafficRules(v *types.ServiceConnectTestTrafficRules, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Header != nil {
+		ok := object.Key("header")
+		if err := awsAwsjson11_serializeDocumentServiceConnectTestTrafficHeaderRules(v.Header, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -8518,6 +8693,13 @@ func awsAwsjson11_serializeOpDocumentUpdateServiceInput(v *UpdateServiceInput, v
 	if v.DeploymentConfiguration != nil {
 		ok := object.Key("deploymentConfiguration")
 		if err := awsAwsjson11_serializeDocumentDeploymentConfiguration(v.DeploymentConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DeploymentController != nil {
+		ok := object.Key("deploymentController")
+		if err := awsAwsjson11_serializeDocumentDeploymentController(v.DeploymentController, ok); err != nil {
 			return err
 		}
 	}

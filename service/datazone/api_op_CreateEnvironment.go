@@ -36,12 +36,6 @@ type CreateEnvironmentInput struct {
 	// This member is required.
 	DomainIdentifier *string
 
-	// The identifier of the environment profile that is used to create this Amazon
-	// DataZone environment.
-	//
-	// This member is required.
-	EnvironmentProfileIdentifier *string
-
 	// The name of the Amazon DataZone environment.
 	//
 	// This member is required.
@@ -70,6 +64,10 @@ type CreateEnvironmentInput struct {
 
 	// The configuration ID of the environment.
 	EnvironmentConfigurationId *string
+
+	// The identifier of the environment profile that is used to create this Amazon
+	// DataZone environment.
+	EnvironmentProfileIdentifier *string
 
 	// The glossary terms that can be used in this Amazon DataZone environment.
 	GlossaryTerms []string

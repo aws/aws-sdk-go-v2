@@ -172,6 +172,10 @@ type AIMLOptionsInput struct {
 	// specified domain.
 	NaturalLanguageQueryGenerationOptions *NaturalLanguageQueryGenerationOptionsInput
 
+	// Container for parameters required to enable S3 vectors engine features on the
+	// specified domain.
+	S3VectorsEngine *S3VectorsEngine
+
 	noSmithyDocumentSerde
 }
 
@@ -182,6 +186,10 @@ type AIMLOptionsOutput struct {
 	// Container for parameters required for natural language query generation on the
 	// specified domain.
 	NaturalLanguageQueryGenerationOptions *NaturalLanguageQueryGenerationOptionsOutput
+
+	// Container for parameters representing the state of S3 vectors engine features
+	// on the specified domain.
+	S3VectorsEngine *S3VectorsEngine
 
 	noSmithyDocumentSerde
 }
@@ -753,7 +761,7 @@ type CrossClusterSearchConnectionProperties struct {
 	noSmithyDocumentSerde
 }
 
-// Data sources that are associated with an OpenSearch Application.
+// Data sources that are associated with an OpenSearch application.
 type DataSource struct {
 
 	// The Amazon Resource Name (ARN) of the domain. See [Identifiers for IAM Entities] in Using Amazon Web Services
@@ -1449,10 +1457,10 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration settings for IAM Identity Center in an OpenSearch Application.
+// Configuration settings for IAM Identity Center in an OpenSearch application.
 type IamIdentityCenterOptions struct {
 
-	// Indicates whether IAM Identity Center is enabled for the OpenSearch Application.
+	// Indicates whether IAM Identity Center is enabled for the OpenSearch application.
 	Enabled *bool
 
 	// The Amazon Resource Name (ARN) of the domain. See [Identifiers for IAM Entities] in Using Amazon Web Services
@@ -1468,7 +1476,7 @@ type IamIdentityCenterOptions struct {
 	IamIdentityCenterInstanceArn *string
 
 	// The Amazon Resource Name (ARN) of the IAM role assigned to the IAM Identity
-	// Center application for the OpenSearch Application.
+	// Center application for the OpenSearch application.
 	IamRoleForIdentityCenterApplicationArn *string
 
 	noSmithyDocumentSerde
@@ -2347,6 +2355,15 @@ type S3GlueDataCatalog struct {
 
 	// >The Amazon Resource Name (ARN) for the S3 Glue Data Catalog.
 	RoleArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Options for enabling S3 vectors engine features on the specified domain.
+type S3VectorsEngine struct {
+
+	// Enables S3 vectors engine features.
+	Enabled *bool
 
 	noSmithyDocumentSerde
 }

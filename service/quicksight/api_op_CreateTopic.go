@@ -45,6 +45,9 @@ type CreateTopicInput struct {
 	// This member is required.
 	TopicId *string
 
+	// Custom instructions for the topic.
+	CustomInstructions *types.CustomInstructions
+
 	// The Folder ARN of the folder that you want the topic to reside in.
 	FolderArns []string
 

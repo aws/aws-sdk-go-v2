@@ -2081,6 +2081,11 @@ func validateServiceConnectClientAlias(v *types.ServiceConnectClientAlias) error
 	if v.Port == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Port"))
 	}
+	if v.TestTrafficRules != nil {
+		if err := validateServiceConnectTestTrafficRules(v.TestTrafficRules); err != nil {
+			invalidParams.AddNested("TestTrafficRules", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2160,6 +2165,60 @@ func validateServiceConnectServiceList(v []types.ServiceConnectService) error {
 	for i := range v {
 		if err := validateServiceConnectService(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateServiceConnectTestTrafficHeaderMatchRules(v *types.ServiceConnectTestTrafficHeaderMatchRules) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ServiceConnectTestTrafficHeaderMatchRules"}
+	if v.Exact == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Exact"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateServiceConnectTestTrafficHeaderRules(v *types.ServiceConnectTestTrafficHeaderRules) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ServiceConnectTestTrafficHeaderRules"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value != nil {
+		if err := validateServiceConnectTestTrafficHeaderMatchRules(v.Value); err != nil {
+			invalidParams.AddNested("Value", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateServiceConnectTestTrafficRules(v *types.ServiceConnectTestTrafficRules) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ServiceConnectTestTrafficRules"}
+	if v.Header == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Header"))
+	} else if v.Header != nil {
+		if err := validateServiceConnectTestTrafficHeaderRules(v.Header); err != nil {
+			invalidParams.AddNested("Header", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3381,6 +3440,11 @@ func validateOpUpdateServiceInput(v *UpdateServiceInput) error {
 	if v.NetworkConfiguration != nil {
 		if err := validateNetworkConfiguration(v.NetworkConfiguration); err != nil {
 			invalidParams.AddNested("NetworkConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DeploymentController != nil {
+		if err := validateDeploymentController(v.DeploymentController); err != nil {
+			invalidParams.AddNested("DeploymentController", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.ServiceConnectConfiguration != nil {

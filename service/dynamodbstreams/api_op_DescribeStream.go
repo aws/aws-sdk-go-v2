@@ -52,6 +52,9 @@ type DescribeStreamInput struct {
 	// The maximum number of shard objects to return. The upper limit is 100.
 	Limit *int32
 
+	// This optional field contains the filter definition for the DescribeStream API.
+	ShardFilter *types.ShardFilter
+
 	noSmithyDocumentSerde
 }
 

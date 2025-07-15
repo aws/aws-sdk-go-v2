@@ -199,6 +199,9 @@ type UpdateServiceInput struct {
 	// deployment and the ordering of stopping and starting tasks.
 	DeploymentConfiguration *types.DeploymentConfiguration
 
+	// The deployment controller to use for the service.
+	DeploymentController *types.DeploymentController
+
 	// The number of instantiations of the task to place and keep running in your
 	// service.
 	DesiredCount *int32

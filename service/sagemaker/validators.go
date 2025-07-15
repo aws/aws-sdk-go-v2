@@ -4310,6 +4310,26 @@ func (m *validateOpListPipelineParametersForExecution) HandleInitialize(ctx cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListPipelineVersions struct {
+}
+
+func (*validateOpListPipelineVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListPipelineVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListPipelineVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListPipelineVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListStageDevices struct {
 }
 
@@ -5710,6 +5730,26 @@ func (m *validateOpUpdatePipeline) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdatePipelineVersion struct {
+}
+
+func (*validateOpUpdatePipelineVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdatePipelineVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdatePipelineVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdatePipelineVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateProject struct {
 }
 
@@ -6730,6 +6770,10 @@ func addOpListPipelineParametersForExecutionValidationMiddleware(stack *middlewa
 	return stack.Initialize.Add(&validateOpListPipelineParametersForExecution{}, middleware.After)
 }
 
+func addOpListPipelineVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListPipelineVersions{}, middleware.After)
+}
+
 func addOpListStageDevicesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListStageDevices{}, middleware.After)
 }
@@ -7008,6 +7052,10 @@ func addOpUpdatePipelineExecutionValidationMiddleware(stack *middleware.Stack) e
 
 func addOpUpdatePipelineValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdatePipeline{}, middleware.After)
+}
+
+func addOpUpdatePipelineVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdatePipelineVersion{}, middleware.After)
 }
 
 func addOpUpdateProjectValidationMiddleware(stack *middleware.Stack) error {
@@ -8395,6 +8443,69 @@ func validateClusterOrchestratorEksConfig(v *types.ClusterOrchestratorEksConfig)
 	}
 }
 
+func validateClusterRestrictedInstanceGroupSpecification(v *types.ClusterRestrictedInstanceGroupSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClusterRestrictedInstanceGroupSpecification"}
+	if v.InstanceCount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceCount"))
+	}
+	if v.InstanceGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceGroupName"))
+	}
+	if len(v.InstanceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
+	}
+	if v.ExecutionRole == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRole"))
+	}
+	if v.InstanceStorageConfigs != nil {
+		if err := validateClusterInstanceStorageConfigs(v.InstanceStorageConfigs); err != nil {
+			invalidParams.AddNested("InstanceStorageConfigs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OverrideVpcConfig != nil {
+		if err := validateVpcConfig(v.OverrideVpcConfig); err != nil {
+			invalidParams.AddNested("OverrideVpcConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ScheduledUpdateConfig != nil {
+		if err := validateScheduledUpdateConfig(v.ScheduledUpdateConfig); err != nil {
+			invalidParams.AddNested("ScheduledUpdateConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EnvironmentConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentConfig"))
+	} else if v.EnvironmentConfig != nil {
+		if err := validateEnvironmentConfig(v.EnvironmentConfig); err != nil {
+			invalidParams.AddNested("EnvironmentConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateClusterRestrictedInstanceGroupSpecifications(v []types.ClusterRestrictedInstanceGroupSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClusterRestrictedInstanceGroupSpecifications"}
+	for i := range v {
+		if err := validateClusterRestrictedInstanceGroupSpecification(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCodeEditorAppSettings(v *types.CodeEditorAppSettings) error {
 	if v == nil {
 		return nil
@@ -9620,6 +9731,23 @@ func validateEndpointInputConfigurations(v []types.EndpointInputConfiguration) e
 	}
 }
 
+func validateEnvironmentConfig(v *types.EnvironmentConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EnvironmentConfig"}
+	if v.FSxLustreConfig != nil {
+		if err := validateFSxLustreConfig(v.FSxLustreConfig); err != nil {
+			invalidParams.AddNested("FSxLustreConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEnvironmentParameterRanges(v *types.EnvironmentParameterRanges) error {
 	if v == nil {
 		return nil
@@ -9806,6 +9934,24 @@ func validateFlowDefinitionOutputConfig(v *types.FlowDefinitionOutputConfig) err
 	invalidParams := smithy.InvalidParamsError{Context: "FlowDefinitionOutputConfig"}
 	if v.S3OutputPath == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3OutputPath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFSxLustreConfig(v *types.FSxLustreConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FSxLustreConfig"}
+	if v.SizeInGiB == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SizeInGiB"))
+	}
+	if v.PerUnitStorageThroughput == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PerUnitStorageThroughput"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -14110,9 +14256,6 @@ func validateOpBatchDeleteClusterNodesInput(v *BatchDeleteClusterNodesInput) err
 	if v.ClusterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
 	}
-	if v.NodeIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NodeIds"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -14397,6 +14540,11 @@ func validateOpCreateClusterInput(v *CreateClusterInput) error {
 	if v.InstanceGroups != nil {
 		if err := validateClusterInstanceGroupSpecifications(v.InstanceGroups); err != nil {
 			invalidParams.AddNested("InstanceGroups", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RestrictedInstanceGroups != nil {
+		if err := validateClusterRestrictedInstanceGroupSpecifications(v.RestrictedInstanceGroups); err != nil {
+			invalidParams.AddNested("RestrictedInstanceGroups", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.VpcConfig != nil {
@@ -17464,9 +17612,6 @@ func validateOpDescribeClusterNodeInput(v *DescribeClusterNodeInput) error {
 	if v.ClusterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
 	}
-	if v.NodeId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NodeId"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -18713,6 +18858,21 @@ func validateOpListPipelineParametersForExecutionInput(v *ListPipelineParameters
 	}
 }
 
+func validateOpListPipelineVersionsInput(v *ListPipelineVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListPipelineVersionsInput"}
+	if v.PipelineName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PipelineName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListStageDevicesInput(v *ListStageDevicesInput) error {
 	if v == nil {
 		return nil
@@ -19389,6 +19549,11 @@ func validateOpUpdateClusterInput(v *UpdateClusterInput) error {
 			invalidParams.AddNested("InstanceGroups", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.RestrictedInstanceGroups != nil {
+		if err := validateClusterRestrictedInstanceGroupSpecifications(v.RestrictedInstanceGroups); err != nil {
+			invalidParams.AddNested("RestrictedInstanceGroups", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -20049,6 +20214,24 @@ func validateOpUpdatePipelineInput(v *UpdatePipelineInput) error {
 		if err := validateParallelismConfiguration(v.ParallelismConfiguration); err != nil {
 			invalidParams.AddNested("ParallelismConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdatePipelineVersionInput(v *UpdatePipelineVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatePipelineVersionInput"}
+	if v.PipelineArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PipelineArn"))
+	}
+	if v.PipelineVersionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PipelineVersionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

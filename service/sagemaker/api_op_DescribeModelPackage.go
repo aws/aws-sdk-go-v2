@@ -90,8 +90,7 @@ type DescribeModelPackageOutput struct {
 	// Marketplace.
 	CertifyForMarketplace *bool
 
-	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, project, or model card.
+	// Information about the user who created or modified a SageMaker resource.
 	CreatedBy *types.UserContext
 
 	// The metadata properties associated with the model package versions.
@@ -112,8 +111,7 @@ type DescribeModelPackageOutput struct {
 	// package.
 	InferenceSpecification *types.InferenceSpecification
 
-	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, project, or model card.
+	// Information about the user who created or modified a SageMaker resource.
 	LastModifiedBy *types.UserContext
 
 	// The last time that the model package was modified.

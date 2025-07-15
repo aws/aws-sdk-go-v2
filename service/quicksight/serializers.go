@@ -3092,6 +3092,13 @@ func awsRestjson1_serializeOpDocumentCreateTopicInput(v *CreateTopicInput, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.CustomInstructions != nil {
+		ok := object.Key("CustomInstructions")
+		if err := awsRestjson1_serializeDocumentCustomInstructions(v.CustomInstructions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.FolderArns != nil {
 		ok := object.Key("FolderArns")
 		if err := awsRestjson1_serializeDocumentFolderArnList(v.FolderArns, ok); err != nil {
@@ -19728,6 +19735,13 @@ func awsRestjson1_serializeOpDocumentUpdateTopicInput(v *UpdateTopicInput, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.CustomInstructions != nil {
+		ok := object.Key("CustomInstructions")
+		if err := awsRestjson1_serializeDocumentCustomInstructions(v.CustomInstructions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Topic != nil {
 		ok := object.Key("Topic")
 		if err := awsRestjson1_serializeDocumentTopicDetails(v.Topic, ok); err != nil {
@@ -26161,6 +26175,18 @@ func awsRestjson1_serializeDocumentCustomFilterListConfiguration(v *types.Custom
 	if len(v.SelectAllOptions) > 0 {
 		ok := object.Key("SelectAllOptions")
 		ok.String(string(v.SelectAllOptions))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCustomInstructions(v *types.CustomInstructions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CustomInstructionsString != nil {
+		ok := object.Key("CustomInstructionsString")
+		ok.String(*v.CustomInstructionsString)
 	}
 
 	return nil

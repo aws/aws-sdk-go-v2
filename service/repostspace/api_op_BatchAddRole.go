@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Add role to multiple users or groups in a private re:Post.
+// Add a role to multiple users or groups in a private re:Post.
 func (c *Client) BatchAddRole(ctx context.Context, params *BatchAddRoleInput, optFns ...func(*Options)) (*BatchAddRoleOutput, error) {
 	if params == nil {
 		params = &BatchAddRoleInput{}

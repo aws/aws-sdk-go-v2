@@ -48,6 +48,9 @@ type DescribeTopicOutput struct {
 	// The Amazon Resource Name (ARN) of the topic.
 	Arn *string
 
+	// Custom instructions for the topic.
+	CustomInstructions *types.CustomInstructions
+
 	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 

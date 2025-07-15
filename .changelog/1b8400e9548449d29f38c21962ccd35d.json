@@ -1,0 +1,8 @@
+{
+    "id": "1b8400e9-5484-49d2-9f38-c21962ccd35d",
+    "type": "feature",
+    "description": "Adds table bucket type to ListTableBucket and GetTableBucket API operations",
+    "modules": [
+        "service/s3tables"
+    ]
+}

@@ -6887,6 +6887,7 @@ const (
 	ResourceTypeProject                  ResourceType = "Project"
 	ResourceTypeHyperParameterTuningJob  ResourceType = "HyperParameterTuningJob"
 	ResourceTypeModelCard                ResourceType = "ModelCard"
+	ResourceTypePipelineVersion          ResourceType = "PipelineVersion"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -6912,6 +6913,7 @@ func (ResourceType) Values() []ResourceType {
 		"Project",
 		"HyperParameterTuningJob",
 		"ModelCard",
+		"PipelineVersion",
 	}
 }
 

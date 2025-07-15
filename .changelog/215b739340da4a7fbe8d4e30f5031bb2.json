@@ -1,0 +1,8 @@
+{
+    "id": "215b7393-40da-4a7f-be8d-4e30f5031bb2",
+    "type": "feature",
+    "description": "This release adds support for volume initialization status, which enables you to monitor when the initialization process for an EBS volume is completed. This release also adds IPv6 support to EC2 Instance Connect Endpoints, allowing you to connect to your EC2 Instance via a private IPv6 address.",
+    "modules": [
+        "service/ec2"
+    ]
+}

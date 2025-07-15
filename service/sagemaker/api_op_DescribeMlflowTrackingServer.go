@@ -48,8 +48,7 @@ type DescribeMlflowTrackingServerOutput struct {
 	// Registry is enabled.
 	AutomaticModelRegistration *bool
 
-	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, project, or model card.
+	// Information about the user who created or modified a SageMaker resource.
 	CreatedBy *types.UserContext
 
 	// The timestamp of when the described MLflow Tracking Server was created.
@@ -58,8 +57,7 @@ type DescribeMlflowTrackingServerOutput struct {
 	// Whether the described MLflow Tracking Server is currently active.
 	IsActive types.IsTrackingServerActive
 
-	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, project, or model card.
+	// Information about the user who created or modified a SageMaker resource.
 	LastModifiedBy *types.UserContext
 
 	// The timestamp of when the described MLflow Tracking Server was last modified.

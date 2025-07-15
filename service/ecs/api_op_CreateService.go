@@ -52,50 +52,92 @@ import (
 //     placement constraints for running tasks. It also stops tasks that don't meet the
 //     placement constraints. When using this strategy, you don't need to specify a
 //     desired number of tasks, a task placement strategy, or use Service Auto Scaling
-//     policies. For more information, see [Service scheduler concepts]in the Amazon Elastic Container Service
+//     policies. For more information, see [Amazon ECS services]in the Amazon Elastic Container Service
 //     Developer Guide.
 //
-// You can optionally specify a deployment configuration for your service. The
-// deployment is initiated by changing properties. For example, the deployment
-// might be initiated by the task definition or by your desired count of a service.
-// You can use [UpdateService]. The default value for a replica service for minimumHealthyPercent
-// is 100%. The default value for a daemon service for minimumHealthyPercent is 0%.
+// The deployment controller is the mechanism that determines how tasks are
+// deployed for your service. The valid options are:
 //
-// If a service uses the ECS deployment controller, the minimum healthy percent
-// represents a lower limit on the number of tasks in a service that must remain in
-// the RUNNING state during a deployment. Specifically, it represents it as a
-// percentage of your desired number of tasks (rounded up to the nearest integer).
-// This happens when any of your container instances are in the DRAINING state if
-// the service contains tasks using the EC2 launch type. Using this parameter, you
-// can deploy without using additional cluster capacity. For example, if you set
-// your service to have desired number of four tasks and a minimum healthy percent
-// of 50%, the scheduler might stop two existing tasks to free up cluster capacity
-// before starting two new tasks. If they're in the RUNNING state, tasks for
-// services that don't use a load balancer are considered healthy . If they're in
-// the RUNNING state and reported as healthy by the load balancer, tasks for
-// services that do use a load balancer are considered healthy . The default value
-// for minimum healthy percent is 100%.
+//   - ECS
 //
-// If a service uses the ECS deployment controller, the maximum percent parameter
-// represents an upper limit on the number of tasks in a service that are allowed
-// in the RUNNING or PENDING state during a deployment. Specifically, it
-// represents it as a percentage of the desired number of tasks (rounded down to
-// the nearest integer). This happens when any of your container instances are in
-// the DRAINING state if the service contains tasks using the EC2 launch type.
-// Using this parameter, you can define the deployment batch size. For example, if
-// your service has a desired number of four tasks and a maximum percent value of
-// 200%, the scheduler may start four new tasks before stopping the four older
-// tasks (provided that the cluster resources required to do this are available).
-// The default value for maximum percent is 200%.
+// When you create a service which uses the ECS deployment controller, you can
 //
-// If a service uses either the CODE_DEPLOY or EXTERNAL deployment controller
-// types and tasks that use the EC2 launch type, the minimum healthy percent and
-// maximum percent values are used only to define the lower and upper limit on the
-// number of the tasks in the service that remain in the RUNNING state. This is
-// while the container instances are in the DRAINING state. If the tasks in the
-// service use the Fargate launch type, the minimum healthy percent and maximum
-// percent values aren't used. This is the case even if they're currently visible
-// when describing your service.
+//	choose between the following deployment strategies:
+//
+//	- ROLLING : When you create a service which uses the rolling update ( ROLLING
+//	) deployment strategy, the Amazon ECS service scheduler replaces the currently
+//	running tasks with new tasks. The number of tasks that Amazon ECS adds or
+//	removes from the service during a rolling update is controlled by the service
+//	deployment configuration. For more information, see [Deploy Amazon ECS services by replacing tasks]in the Amazon Elastic
+//	Container Service Developer Guide.
+//
+// Rolling update deployments are best suited for the following scenarios:
+//
+//   - Gradual service updates: You need to update your service incrementally
+//     without taking the entire service offline at once.
+//
+//   - Limited resource requirements: You want to avoid the additional resource
+//     costs of running two complete environments simultaneously (as required by
+//     blue/green deployments).
+//
+//   - Acceptable deployment time: Your application can tolerate a longer
+//     deployment process, as rolling updates replace tasks one by one.
+//
+//   - No need for instant roll back: Your service can tolerate a rollback process
+//     that takes minutes rather than seconds.
+//
+//   - Simple deployment process: You prefer a straightforward deployment approach
+//     without the complexity of managing multiple environments, target groups, and
+//     listeners.
+//
+//   - No load balancer requirement: Your service doesn't use or require a load
+//     balancer, Application Load Balancer, Network Load Balancer, or Service Connect
+//     (which are required for blue/green deployments).
+//
+//   - Stateful applications: Your application maintains state that makes it
+//     difficult to run two parallel environments.
+//
+//   - Cost sensitivity: You want to minimize deployment costs by not running
+//     duplicate environments during deployment.
+//
+// Rolling updates are the default deployment strategy for services and provide a
+//
+//	balance between deployment safety and resource efficiency for many common
+//	application scenarios.
+//
+//	- BLUE_GREEN : A blue/green deployment strategy ( BLUE_GREEN ) is a release
+//	methodology that reduces downtime and risk by running two identical production
+//	environments called blue and green. With Amazon ECS blue/green deployments, you
+//	can validate new service revisions before directing production traffic to them.
+//	This approach provides a safer way to deploy changes with the ability to quickly
+//	roll back if needed. For more information, see [Amazon ECS blue/green deployments]in the Amazon Elastic
+//	Container Service Developer Guide.
+//
+// Amazon ECS blue/green deployments are best suited for the following scenarios:
+//
+//   - Service validation: When you need to validate new service revisions before
+//     directing production traffic to them
+//
+//   - Zero downtime: When your service requires zero-downtime deployments
+//
+//   - Instant roll back: When you need the ability to quickly roll back if issues
+//     are detected
+//
+//   - Load balancer requirement: When your service uses Application Load
+//     Balancer, Network Load Balancer, or Service Connect
+//
+//   - External
+//
+// Use a third-party deployment controller.
+//
+//   - Blue/green deployment (powered by CodeDeploy)
+//
+// CodeDeploy installs an updated version of the application as a new replacement
+//
+//	task set and reroutes production traffic from the original application task set
+//	to the replacement task set. The original task set is terminated after a
+//	successful deployment. Use this deployment controller to verify a new deployment
+//	of a service before sending production traffic to it.
 //
 // When creating a service that uses the EXTERNAL deployment controller, you can
 // specify only parameters that aren't controlled at the task set level. The only
@@ -112,8 +154,12 @@ import (
 // [Amazon ECS deployment types]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
 // [UpdateService]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html
 // [CreateTaskSet]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateTaskSet.html
+// [Amazon ECS services]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html
 // [Service load balancing]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html
 // [Amazon EBS volumes]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types
+//
+// [Amazon ECS blue/green deployments]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-blue-green.html
+// [Deploy Amazon ECS services by replacing tasks]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html
 func (c *Client) CreateService(ctx context.Context, params *CreateServiceInput, optFns ...func(*Options)) (*CreateServiceOutput, error) {
 	if params == nil {
 		params = &CreateServiceInput{}
@@ -185,7 +231,7 @@ type CreateServiceInput struct {
 	// service. For more information, see [Tagging your Amazon ECS resources]in the Amazon Elastic Container Service
 	// Developer Guide.
 	//
-	// When you use Amazon ECS managed tags, you need to set the propagateTags request
+	// When you use Amazon ECS managed tags, you must set the propagateTags request
 	// parameter.
 	//
 	// [Tagging your Amazon ECS resources]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html

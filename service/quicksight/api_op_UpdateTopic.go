@@ -46,6 +46,9 @@ type UpdateTopicInput struct {
 	// This member is required.
 	TopicId *string
 
+	// Custom instructions for the topic.
+	CustomInstructions *types.CustomInstructions
+
 	noSmithyDocumentSerde
 }
 

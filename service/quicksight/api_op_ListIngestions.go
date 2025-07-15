@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the history of SPICE ingestions for a dataset.
+// Lists the history of SPICE ingestions for a dataset. Limited to 5 TPS per user
+// and 25 TPS per account.
 func (c *Client) ListIngestions(ctx context.Context, params *ListIngestionsInput, optFns ...func(*Options)) (*ListIngestionsOutput, error) {
 	if params == nil {
 		params = &ListIngestionsInput{}

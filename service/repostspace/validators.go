@@ -9,6 +9,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpBatchAddChannelRoleToAccessors struct {
+}
+
+func (*validateOpBatchAddChannelRoleToAccessors) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchAddChannelRoleToAccessors) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchAddChannelRoleToAccessorsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchAddChannelRoleToAccessorsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchAddRole struct {
 }
 
@@ -29,6 +49,26 @@ func (m *validateOpBatchAddRole) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchRemoveChannelRoleFromAccessors struct {
+}
+
+func (*validateOpBatchRemoveChannelRoleFromAccessors) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchRemoveChannelRoleFromAccessors) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchRemoveChannelRoleFromAccessorsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchRemoveChannelRoleFromAccessorsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchRemoveRole struct {
 }
 
@@ -44,6 +84,26 @@ func (m *validateOpBatchRemoveRole) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpBatchRemoveRoleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateChannel struct {
+}
+
+func (*validateOpCreateChannel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateChannel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateChannelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateChannelInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -109,6 +169,26 @@ func (m *validateOpDeregisterAdmin) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetChannel struct {
+}
+
+func (*validateOpGetChannel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetChannel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetChannelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetSpace struct {
 }
 
@@ -124,6 +204,26 @@ func (m *validateOpGetSpace) HandleInitialize(ctx context.Context, in middleware
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetSpaceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListChannels struct {
+}
+
+func (*validateOpListChannels) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListChannels) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListChannelsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListChannelsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -229,6 +329,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateChannel struct {
+}
+
+func (*validateOpUpdateChannel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateChannel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateChannelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateSpace struct {
 }
 
@@ -249,12 +369,24 @@ func (m *validateOpUpdateSpace) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpBatchAddChannelRoleToAccessorsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchAddChannelRoleToAccessors{}, middleware.After)
+}
+
 func addOpBatchAddRoleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchAddRole{}, middleware.After)
 }
 
+func addOpBatchRemoveChannelRoleFromAccessorsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchRemoveChannelRoleFromAccessors{}, middleware.After)
+}
+
 func addOpBatchRemoveRoleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchRemoveRole{}, middleware.After)
+}
+
+func addOpCreateChannelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateChannel{}, middleware.After)
 }
 
 func addOpCreateSpaceValidationMiddleware(stack *middleware.Stack) error {
@@ -269,8 +401,16 @@ func addOpDeregisterAdminValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeregisterAdmin{}, middleware.After)
 }
 
+func addOpGetChannelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetChannel{}, middleware.After)
+}
+
 func addOpGetSpaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSpace{}, middleware.After)
+}
+
+func addOpListChannelsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListChannels{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -293,8 +433,36 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func addOpUpdateChannelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateChannel{}, middleware.After)
+}
+
 func addOpUpdateSpaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateSpace{}, middleware.After)
+}
+
+func validateOpBatchAddChannelRoleToAccessorsInput(v *BatchAddChannelRoleToAccessorsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchAddChannelRoleToAccessorsInput"}
+	if v.SpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpaceId"))
+	}
+	if v.ChannelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelId"))
+	}
+	if v.AccessorIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessorIds"))
+	}
+	if len(v.ChannelRole) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelRole"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateOpBatchAddRoleInput(v *BatchAddRoleInput) error {
@@ -318,6 +486,30 @@ func validateOpBatchAddRoleInput(v *BatchAddRoleInput) error {
 	}
 }
 
+func validateOpBatchRemoveChannelRoleFromAccessorsInput(v *BatchRemoveChannelRoleFromAccessorsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchRemoveChannelRoleFromAccessorsInput"}
+	if v.SpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpaceId"))
+	}
+	if v.ChannelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelId"))
+	}
+	if v.AccessorIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessorIds"))
+	}
+	if len(v.ChannelRole) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelRole"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchRemoveRoleInput(v *BatchRemoveRoleInput) error {
 	if v == nil {
 		return nil
@@ -331,6 +523,24 @@ func validateOpBatchRemoveRoleInput(v *BatchRemoveRoleInput) error {
 	}
 	if len(v.Role) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Role"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateChannelInput(v *CreateChannelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateChannelInput"}
+	if v.SpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpaceId"))
+	}
+	if v.ChannelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -393,11 +603,44 @@ func validateOpDeregisterAdminInput(v *DeregisterAdminInput) error {
 	}
 }
 
+func validateOpGetChannelInput(v *GetChannelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetChannelInput"}
+	if v.SpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpaceId"))
+	}
+	if v.ChannelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetSpaceInput(v *GetSpaceInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetSpaceInput"}
+	if v.SpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListChannelsInput(v *ListChannelsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListChannelsInput"}
 	if v.SpaceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SpaceId"))
 	}
@@ -493,6 +736,27 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateChannelInput(v *UpdateChannelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateChannelInput"}
+	if v.SpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpaceId"))
+	}
+	if v.ChannelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelId"))
+	}
+	if v.ChannelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

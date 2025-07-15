@@ -13847,6 +13847,11 @@ func awsRestjson1_deserializeDocumentAIMLOptionsOutput(v **types.AIMLOptionsOutp
 				return err
 			}
 
+		case "S3VectorsEngine":
+			if err := awsRestjson1_deserializeDocumentS3VectorsEngine(&sv.S3VectorsEngine, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -21385,6 +21390,46 @@ func awsRestjson1_deserializeDocumentS3GlueDataCatalog(v **types.S3GlueDataCatal
 					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
 				}
 				sv.RoleArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentS3VectorsEngine(v **types.S3VectorsEngine, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3VectorsEngine
+	if *v == nil {
+		sv = &types.S3VectorsEngine{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		default:

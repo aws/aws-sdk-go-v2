@@ -3861,6 +3861,19 @@ type CustomFilterListConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Instructions that provide additional guidance and context for response
+// generation.
+type CustomInstructions struct {
+
+	// A text field for providing additional guidance or context for response
+	// generation.
+	//
+	// This member is required.
+	CustomInstructionsString *string
+
+	noSmithyDocumentSerde
+}
+
 // The custom narrative options.
 type CustomNarrativeOptions struct {
 

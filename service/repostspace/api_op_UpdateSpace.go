@@ -42,6 +42,9 @@ type UpdateSpaceInput struct {
 	// unanswered questions into AWS support tickets.
 	RoleArn *string
 
+	//
+	SupportedEmailDomains *types.SupportedEmailDomainsParameters
+
 	// The pricing tier of this private re:Post.
 	Tier types.TierLevel
 

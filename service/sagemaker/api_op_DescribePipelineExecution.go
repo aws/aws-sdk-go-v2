@@ -40,8 +40,7 @@ type DescribePipelineExecutionInput struct {
 
 type DescribePipelineExecutionOutput struct {
 
-	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, project, or model card.
+	// Information about the user who created or modified a SageMaker resource.
 	CreatedBy *types.UserContext
 
 	// The time when the pipeline execution was created.
@@ -50,8 +49,7 @@ type DescribePipelineExecutionOutput struct {
 	// If the execution failed, a message describing why.
 	FailureReason *string
 
-	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, project, or model card.
+	// Information about the user who created or modified a SageMaker resource.
 	LastModifiedBy *types.UserContext
 
 	// The time when the pipeline execution was modified last.
@@ -77,6 +75,9 @@ type DescribePipelineExecutionOutput struct {
 
 	// Specifies the names of the experiment and trial created by a pipeline.
 	PipelineExperimentConfig *types.PipelineExperimentConfig
+
+	// The ID of the pipeline version.
+	PipelineVersionId *int64
 
 	// The selective execution configuration applied to the pipeline run.
 	SelectiveExecutionConfig *types.SelectiveExecutionConfig

@@ -36275,6 +36275,16 @@ loop:
 			uv = &types.ConnectionPropertiesOutputMemberRedshiftProperties{Value: mv}
 			break loop
 
+		case "s3Properties":
+			var mv types.S3PropertiesOutput
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentS3PropertiesOutput(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ConnectionPropertiesOutputMemberS3Properties{Value: mv}
+			break loop
+
 		case "sparkEmrProperties":
 			var mv types.SparkEmrPropertiesOutput
 			destAddr := &mv
@@ -48665,6 +48675,73 @@ func awsRestjson1_deserializeDocumentS3LocationList(v *[]string, value interface
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentS3PropertiesOutput(v **types.S3PropertiesOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3PropertiesOutput
+	if *v == nil {
+		sv = &types.S3PropertiesOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "errorMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ErrorMessage = ptr.String(jtv)
+			}
+
+		case "s3AccessGrantLocationId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3AccessGrantLocationId to be of type string, got %T instead", value)
+				}
+				sv.S3AccessGrantLocationId = ptr.String(jtv)
+			}
+
+		case "s3Uri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3Uri to be of type string, got %T instead", value)
+				}
+				sv.S3Uri = ptr.String(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectionStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.ConnectionStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

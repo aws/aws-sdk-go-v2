@@ -6763,6 +6763,13 @@ func awsRestjson1_serializeDocumentAIMLOptionsInput(v *types.AIMLOptionsInput, v
 		}
 	}
 
+	if v.S3VectorsEngine != nil {
+		ok := object.Key("S3VectorsEngine")
+		if err := awsRestjson1_serializeDocumentS3VectorsEngine(v.S3VectorsEngine, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -7761,6 +7768,18 @@ func awsRestjson1_serializeDocumentS3GlueDataCatalog(v *types.S3GlueDataCatalog,
 	if v.RoleArn != nil {
 		ok := object.Key("RoleArn")
 		ok.String(*v.RoleArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentS3VectorsEngine(v *types.S3VectorsEngine, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled != nil {
+		ok := object.Key("Enabled")
+		ok.Boolean(*v.Enabled)
 	}
 
 	return nil

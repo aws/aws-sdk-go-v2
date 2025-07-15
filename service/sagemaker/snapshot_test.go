@@ -3278,6 +3278,18 @@ func TestCheckSnapshot_ListPipelines(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListPipelineVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPipelineVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPipelineVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListProcessingJobs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListProcessingJobs(context.Background(), nil, func(o *Options) {
@@ -4279,6 +4291,18 @@ func TestCheckSnapshot_UpdatePipelineExecution(t *testing.T) {
 	_, err := svc.UpdatePipelineExecution(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdatePipelineExecution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdatePipelineVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePipelineVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdatePipelineVersion")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -7597,6 +7621,18 @@ func TestUpdateSnapshot_ListPipelines(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListPipelineVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPipelineVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPipelineVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListProcessingJobs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListProcessingJobs(context.Background(), nil, func(o *Options) {
@@ -8598,6 +8634,18 @@ func TestUpdateSnapshot_UpdatePipelineExecution(t *testing.T) {
 	_, err := svc.UpdatePipelineExecution(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdatePipelineExecution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdatePipelineVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePipelineVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdatePipelineVersion")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

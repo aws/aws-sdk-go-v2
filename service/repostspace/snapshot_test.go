@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_BatchAddChannelRoleToAccessors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchAddChannelRoleToAccessors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchAddChannelRoleToAccessors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchAddRole(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchAddRole(context.Background(), nil, func(o *Options) {
@@ -74,11 +86,35 @@ func TestCheckSnapshot_BatchAddRole(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_BatchRemoveChannelRoleFromAccessors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchRemoveChannelRoleFromAccessors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchRemoveChannelRoleFromAccessors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchRemoveRole(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchRemoveRole(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "BatchRemoveRole")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateChannel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateChannel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateChannel")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -122,11 +158,35 @@ func TestCheckSnapshot_DeregisterAdmin(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetChannel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetChannel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetChannel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetSpace(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetSpace(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetSpace")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListChannels(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListChannels(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListChannels")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -206,6 +266,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateChannel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateChannel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateChannel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateSpace(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateSpace(context.Background(), nil, func(o *Options) {
@@ -217,6 +289,18 @@ func TestCheckSnapshot_UpdateSpace(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_BatchAddChannelRoleToAccessors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchAddChannelRoleToAccessors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchAddChannelRoleToAccessors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_BatchAddRole(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchAddRole(context.Background(), nil, func(o *Options) {
@@ -229,11 +313,35 @@ func TestUpdateSnapshot_BatchAddRole(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_BatchRemoveChannelRoleFromAccessors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchRemoveChannelRoleFromAccessors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchRemoveChannelRoleFromAccessors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_BatchRemoveRole(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchRemoveRole(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "BatchRemoveRole")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateChannel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateChannel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateChannel")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -277,11 +385,35 @@ func TestUpdateSnapshot_DeregisterAdmin(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetChannel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetChannel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetChannel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetSpace(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetSpace(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetSpace")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListChannels(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListChannels(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListChannels")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -354,6 +486,18 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateChannel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateChannel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateChannel")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -57,8 +57,6 @@ type BatchDeleteClusterNodesInput struct {
 	//   - If you need to delete more than 99 instances, contact [Support]for assistance.
 	//
 	// [Support]: http://aws.amazon.com/contact-us/
-	//
-	// This member is required.
 	NodeIds []string
 
 	noSmithyDocumentSerde

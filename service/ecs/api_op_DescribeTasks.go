@@ -45,8 +45,7 @@ type DescribeTasksInput struct {
 
 	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
 	// task or tasks to describe. If you do not specify a cluster, the default cluster
-	// is assumed. This parameter is required. If you do not specify a value, the
-	// default cluster is used.
+	// is assumed. If you do not specify a value, the default cluster is used.
 	Cluster *string
 
 	// Specifies whether you want to see the resource tags for the task. If TAGS is

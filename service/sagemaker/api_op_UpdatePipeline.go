@@ -61,6 +61,9 @@ type UpdatePipelineOutput struct {
 	// The Amazon Resource Name (ARN) of the updated pipeline.
 	PipelineArn *string
 
+	// The ID of the pipeline version.
+	PipelineVersionId *int64
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

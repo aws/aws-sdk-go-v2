@@ -37,8 +37,6 @@ type DescribeClusterNodeInput struct {
 	ClusterName *string
 
 	// The ID of the SageMaker HyperPod cluster node.
-	//
-	// This member is required.
 	NodeId *string
 
 	noSmithyDocumentSerde

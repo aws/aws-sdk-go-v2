@@ -1948,6 +1948,15 @@ func awsRestjson1_deserializeOpDocumentGetTableBucketOutput(v **GetTableBucketOu
 				sv.TableBucketId = ptr.String(jtv)
 			}
 
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TableBucketType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.TableBucketType(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -5793,6 +5802,15 @@ func awsRestjson1_deserializeDocumentTableBucketSummary(v **types.TableBucketSum
 					return fmt.Errorf("expected TableBucketId to be of type string, got %T instead", value)
 				}
 				sv.TableBucketId = ptr.String(jtv)
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TableBucketType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.TableBucketType(jtv)
 			}
 
 		default:

@@ -1,0 +1,8 @@
+{
+    "id": "032d4ec1-5dfa-4517-869b-aa944cd081ae",
+    "type": "feature",
+    "description": "This release adds support for new filter types in GetProducts API, including EQUALS, CONTAINS, ANY_OF, and NONE_OF.",
+    "modules": [
+        "service/pricing"
+    ]
+}

@@ -1837,6 +1837,10 @@ func awsRestjson1_serializeOpHttpBindingsListTableBucketsInput(v *ListTableBucke
 		encoder.SetQuery("prefix").String(*v.Prefix)
 	}
 
+	if len(v.Type) > 0 {
+		encoder.SetQuery("type").String(string(v.Type))
+	}
+
 	return nil
 }
 

@@ -53,6 +53,9 @@ type StartPipelineExecutionInput struct {
 	// Contains a list of pipeline parameters. This list can be empty.
 	PipelineParameters []types.Parameter
 
+	// The ID of the pipeline version to start execution from.
+	PipelineVersionId *int64
+
 	// The selective execution configuration applied to the pipeline run.
 	SelectiveExecutionConfig *types.SelectiveExecutionConfig
 

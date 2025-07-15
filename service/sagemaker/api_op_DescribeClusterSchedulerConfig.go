@@ -78,8 +78,7 @@ type DescribeClusterSchedulerConfigOutput struct {
 	// ARN of the cluster where the cluster policy is applied.
 	ClusterArn *string
 
-	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, project, or model card.
+	// Information about the user who created or modified a SageMaker resource.
 	CreatedBy *types.UserContext
 
 	// Description of the cluster policy.
@@ -88,8 +87,7 @@ type DescribeClusterSchedulerConfigOutput struct {
 	// Failure reason of the cluster policy.
 	FailureReason *string
 
-	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, project, or model card.
+	// Information about the user who created or modified a SageMaker resource.
 	LastModifiedBy *types.UserContext
 
 	// Last modified time of the cluster policy.

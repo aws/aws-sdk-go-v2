@@ -28,6 +28,54 @@ type BatchError struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that contains some information about a channel in a private re:Post.
+type ChannelData struct {
+
+	// The unique ID of the private re:Post channel.
+	//
+	// This member is required.
+	ChannelId *string
+
+	// The name for the channel. This must be unique per private re:Post.
+	//
+	// This member is required.
+	ChannelName *string
+
+	// The status pf the channel.
+	//
+	// This member is required.
+	ChannelStatus ChannelStatus
+
+	// The date when the channel was created.
+	//
+	// This member is required.
+	CreateDateTime *time.Time
+
+	// The number of groups that are part of the channel.
+	//
+	// This member is required.
+	GroupCount *int32
+
+	// The unique ID of the private re:Post.
+	//
+	// This member is required.
+	SpaceId *string
+
+	// The number of users that are part of the channel.
+	//
+	// This member is required.
+	UserCount *int32
+
+	// A description for the channel. This is used only to help you identify this
+	// channel.
+	ChannelDescription *string
+
+	// The date when the channel was deleted.
+	DeleteDateTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // A structure that contains some information about a private re:Post in the
 // account.
 type SpaceData struct {
@@ -98,11 +146,36 @@ type SpaceData struct {
 	// this private re:Post.
 	Description *string
 
+	//
+	SupportedEmailDomains *SupportedEmailDomainsStatus
+
 	// The number of onboarded users to the private re:Post.
 	UserCount *int32
 
 	// The custom AWS KMS key ARN that’s used for the AWS KMS encryption.
 	UserKMSKey *string
+
+	noSmithyDocumentSerde
+}
+
+type SupportedEmailDomainsParameters struct {
+
+	//
+	AllowedDomains []string
+
+	//
+	Enabled FeatureEnableParameter
+
+	noSmithyDocumentSerde
+}
+
+type SupportedEmailDomainsStatus struct {
+
+	//
+	AllowedDomains []string
+
+	//
+	Enabled FeatureEnableStatus
 
 	noSmithyDocumentSerde
 }

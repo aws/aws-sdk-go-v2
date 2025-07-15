@@ -16450,6 +16450,12 @@ func awsRestjson1_serializeDocumentConnectionPropertiesInput(v types.ConnectionP
 			return err
 		}
 
+	case *types.ConnectionPropertiesInputMemberS3Properties:
+		av := object.Key("s3Properties")
+		if err := awsRestjson1_serializeDocumentS3PropertiesInput(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.ConnectionPropertiesInputMemberSparkEmrProperties:
 		av := object.Key("sparkEmrProperties")
 		if err := awsRestjson1_serializeDocumentSparkEmrPropertiesInput(&uv.Value, av); err != nil {
@@ -16495,6 +16501,12 @@ func awsRestjson1_serializeDocumentConnectionPropertiesPatch(v types.ConnectionP
 	case *types.ConnectionPropertiesPatchMemberRedshiftProperties:
 		av := object.Key("redshiftProperties")
 		if err := awsRestjson1_serializeDocumentRedshiftPropertiesPatch(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ConnectionPropertiesPatchMemberS3Properties:
+		av := object.Key("s3Properties")
+		if err := awsRestjson1_serializeDocumentS3PropertiesPatch(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -18950,6 +18962,40 @@ func awsRestjson1_serializeDocumentS3LocationList(v []string, value smithyjson.V
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentS3PropertiesInput(v *types.S3PropertiesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3AccessGrantLocationId != nil {
+		ok := object.Key("s3AccessGrantLocationId")
+		ok.String(*v.S3AccessGrantLocationId)
+	}
+
+	if v.S3Uri != nil {
+		ok := object.Key("s3Uri")
+		ok.String(*v.S3Uri)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentS3PropertiesPatch(v *types.S3PropertiesPatch, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3AccessGrantLocationId != nil {
+		ok := object.Key("s3AccessGrantLocationId")
+		ok.String(*v.S3AccessGrantLocationId)
+	}
+
+	if v.S3Uri != nil {
+		ok := object.Key("s3Uri")
+		ok.String(*v.S3Uri)
+	}
+
 	return nil
 }
 

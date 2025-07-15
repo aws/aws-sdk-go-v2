@@ -1,0 +1,8 @@
+{
+    "id": "78dd58fa-1e41-48fe-b648-96d74957d112",
+    "type": "feature",
+    "description": "AWS Opensearch adds support for enabling s3 vector engine options. After enabling this option, customers will be able to create indices with s3 vector engine.",
+    "modules": [
+        "service/opensearch"
+    ]
+}

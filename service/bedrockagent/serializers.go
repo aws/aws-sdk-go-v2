@@ -10528,6 +10528,28 @@ func awsRestjson1_serializeDocumentS3Prefixes(v []string, value smithyjson.Value
 	return nil
 }
 
+func awsRestjson1_serializeDocumentS3VectorsConfiguration(v *types.S3VectorsConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IndexArn != nil {
+		ok := object.Key("indexArn")
+		ok.String(*v.IndexArn)
+	}
+
+	if v.IndexName != nil {
+		ok := object.Key("indexName")
+		ok.String(*v.IndexName)
+	}
+
+	if v.VectorBucketArn != nil {
+		ok := object.Key("vectorBucketArn")
+		ok.String(*v.VectorBucketArn)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSalesforceCrawlerConfiguration(v *types.SalesforceCrawlerConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -10832,6 +10854,13 @@ func awsRestjson1_serializeDocumentStorageConfiguration(v *types.StorageConfigur
 	if v.RedisEnterpriseCloudConfiguration != nil {
 		ok := object.Key("redisEnterpriseCloudConfiguration")
 		if err := awsRestjson1_serializeDocumentRedisEnterpriseCloudConfiguration(v.RedisEnterpriseCloudConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.S3VectorsConfiguration != nil {
+		ok := object.Key("s3VectorsConfiguration")
+		if err := awsRestjson1_serializeDocumentS3VectorsConfiguration(v.S3VectorsConfiguration, ok); err != nil {
 			return err
 		}
 	}

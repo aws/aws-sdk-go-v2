@@ -742,6 +742,7 @@ type ConnectionCredentials struct {
 //	ConnectionPropertiesInputMemberHyperPodProperties
 //	ConnectionPropertiesInputMemberIamProperties
 //	ConnectionPropertiesInputMemberRedshiftProperties
+//	ConnectionPropertiesInputMemberS3Properties
 //	ConnectionPropertiesInputMemberSparkEmrProperties
 //	ConnectionPropertiesInputMemberSparkGlueProperties
 type ConnectionPropertiesInput interface {
@@ -793,6 +794,15 @@ type ConnectionPropertiesInputMemberRedshiftProperties struct {
 
 func (*ConnectionPropertiesInputMemberRedshiftProperties) isConnectionPropertiesInput() {}
 
+// The Amazon S3 properties of a connection.
+type ConnectionPropertiesInputMemberS3Properties struct {
+	Value S3PropertiesInput
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesInputMemberS3Properties) isConnectionPropertiesInput() {}
+
 // The Spark EMR properties of a connection.
 type ConnectionPropertiesInputMemberSparkEmrProperties struct {
 	Value SparkEmrPropertiesInput
@@ -820,6 +830,7 @@ func (*ConnectionPropertiesInputMemberSparkGlueProperties) isConnectionPropertie
 //	ConnectionPropertiesOutputMemberHyperPodProperties
 //	ConnectionPropertiesOutputMemberIamProperties
 //	ConnectionPropertiesOutputMemberRedshiftProperties
+//	ConnectionPropertiesOutputMemberS3Properties
 //	ConnectionPropertiesOutputMemberSparkEmrProperties
 //	ConnectionPropertiesOutputMemberSparkGlueProperties
 type ConnectionPropertiesOutput interface {
@@ -871,6 +882,15 @@ type ConnectionPropertiesOutputMemberRedshiftProperties struct {
 
 func (*ConnectionPropertiesOutputMemberRedshiftProperties) isConnectionPropertiesOutput() {}
 
+// The Amazon S3 properties of a connection.
+type ConnectionPropertiesOutputMemberS3Properties struct {
+	Value S3PropertiesOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesOutputMemberS3Properties) isConnectionPropertiesOutput() {}
+
 // The Spark EMR properties of a connection.
 type ConnectionPropertiesOutputMemberSparkEmrProperties struct {
 	Value SparkEmrPropertiesOutput
@@ -897,6 +917,7 @@ func (*ConnectionPropertiesOutputMemberSparkGlueProperties) isConnectionProperti
 //	ConnectionPropertiesPatchMemberGlueProperties
 //	ConnectionPropertiesPatchMemberIamProperties
 //	ConnectionPropertiesPatchMemberRedshiftProperties
+//	ConnectionPropertiesPatchMemberS3Properties
 //	ConnectionPropertiesPatchMemberSparkEmrProperties
 type ConnectionPropertiesPatch interface {
 	isConnectionPropertiesPatch()
@@ -937,6 +958,15 @@ type ConnectionPropertiesPatchMemberRedshiftProperties struct {
 }
 
 func (*ConnectionPropertiesPatchMemberRedshiftProperties) isConnectionPropertiesPatch() {}
+
+// The Amazon S3 properties of a connection properties patch.
+type ConnectionPropertiesPatchMemberS3Properties struct {
+	Value S3PropertiesPatch
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesPatchMemberS3Properties) isConnectionPropertiesPatch() {}
 
 // The Spark EMR properties of a connection properties patch.
 type ConnectionPropertiesPatchMemberSparkEmrProperties struct {
@@ -4966,6 +4996,57 @@ type RunStatisticsForAssets struct {
 
 	// The updated statistic for the data source run.
 	Updated *int32
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon S3 properties of a connection.
+type S3PropertiesInput struct {
+
+	// The Amazon S3 URI that's part of the Amazon S3 properties of a connection.
+	//
+	// This member is required.
+	S3Uri *string
+
+	// The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties
+	// of a connection.
+	S3AccessGrantLocationId *string
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon S3 properties of a connection.
+type S3PropertiesOutput struct {
+
+	// The Amazon S3 URI that's part of the Amazon S3 properties of a connection.
+	//
+	// This member is required.
+	S3Uri *string
+
+	// The error message that gets displayed.
+	ErrorMessage *string
+
+	// The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties
+	// of a connection.
+	S3AccessGrantLocationId *string
+
+	// The status of the Amazon S3 connection.
+	Status ConnectionStatus
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon S3 properties patch of a connection.
+type S3PropertiesPatch struct {
+
+	// The Amazon S3 URI that's part of the Amazon S3 properties patch of a connection.
+	//
+	// This member is required.
+	S3Uri *string
+
+	// The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties
+	// patch of a connection.
+	S3AccessGrantLocationId *string
 
 	noSmithyDocumentSerde
 }

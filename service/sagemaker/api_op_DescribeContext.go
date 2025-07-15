@@ -49,8 +49,7 @@ type DescribeContextOutput struct {
 	// The type of the context.
 	ContextType *string
 
-	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, project, or model card.
+	// Information about the user who created or modified a SageMaker resource.
 	CreatedBy *types.UserContext
 
 	// When the context was created.
@@ -59,8 +58,7 @@ type DescribeContextOutput struct {
 	// The description of the context.
 	Description *string
 
-	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, project, or model card.
+	// Information about the user who created or modified a SageMaker resource.
 	LastModifiedBy *types.UserContext
 
 	// When the context was last modified.

@@ -55,6 +55,9 @@ type CreateSpaceInput struct {
 	// unanswered questions into AWS support tickets.
 	RoleArn *string
 
+	//
+	SupportedEmailDomains *types.SupportedEmailDomainsParameters
+
 	// The list of tags associated with the private re:Post.
 	Tags map[string]string
 

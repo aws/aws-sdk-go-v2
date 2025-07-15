@@ -120,6 +120,25 @@ func (TableBucketMaintenanceType) Values() []TableBucketMaintenanceType {
 	}
 }
 
+type TableBucketType string
+
+// Enum values for TableBucketType
+const (
+	TableBucketTypeCustomer TableBucketType = "customer"
+	TableBucketTypeAws      TableBucketType = "aws"
+)
+
+// Values returns all known values for TableBucketType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TableBucketType) Values() []TableBucketType {
+	return []TableBucketType{
+		"customer",
+		"aws",
+	}
+}
+
 type TableMaintenanceJobType string
 
 // Enum values for TableMaintenanceJobType

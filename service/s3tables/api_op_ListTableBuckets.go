@@ -46,6 +46,9 @@ type ListTableBucketsInput struct {
 	// The prefix of the table buckets.
 	Prefix *string
 
+	// The type of table buckets to filter by in the list.
+	Type types.TableBucketType
+
 	noSmithyDocumentSerde
 }
 

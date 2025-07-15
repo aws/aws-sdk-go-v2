@@ -71,6 +71,10 @@ type DescribeClusterOutput struct {
 	// The type of orchestrator used for the SageMaker HyperPod cluster.
 	Orchestrator *types.ClusterOrchestrator
 
+	// The specialized instance groups for training models like Amazon Nova to be
+	// created in the SageMaker HyperPod cluster.
+	RestrictedInstanceGroups []types.ClusterRestrictedInstanceGroupDetails
+
 	// Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs,
 	// hosted models, and compute resources have access to. You can control access to
 	// and from your resources by configuring a VPC. For more information, see [Give SageMaker Access to Resources in your Amazon VPC].

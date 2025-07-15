@@ -168,6 +168,7 @@ const (
 	ConnectionTypeOracle        ConnectionType = "ORACLE"
 	ConnectionTypePostgresql    ConnectionType = "POSTGRESQL"
 	ConnectionTypeRedshift      ConnectionType = "REDSHIFT"
+	ConnectionTypeS3            ConnectionType = "S3"
 	ConnectionTypeSaphana       ConnectionType = "SAPHANA"
 	ConnectionTypeSnowflake     ConnectionType = "SNOWFLAKE"
 	ConnectionTypeSpark         ConnectionType = "SPARK"
@@ -195,6 +196,7 @@ func (ConnectionType) Values() []ConnectionType {
 		"ORACLE",
 		"POSTGRESQL",
 		"REDSHIFT",
+		"S3",
 		"SAPHANA",
 		"SNOWFLAKE",
 		"SPARK",

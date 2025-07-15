@@ -79,6 +79,13 @@ type DescribeEventBusOutput struct {
 	// The time the event bus was last modified.
 	LastModifiedTime *time.Time
 
+	// The logging configuration settings for the event bus.
+	//
+	// For more information, see [Configuring logs for event buses] in the EventBridge User Guide.
+	//
+	// [Configuring logs for event buses]: https://docs.aws.amazon.com/eb-event-bus-logs.html
+	LogConfig *types.LogConfig
+
 	// The name of the event bus. Currently, this is always default .
 	Name *string
 

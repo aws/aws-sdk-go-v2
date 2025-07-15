@@ -40,8 +40,7 @@ type DescribeModelPackageGroupInput struct {
 
 type DescribeModelPackageGroupOutput struct {
 
-	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, project, or model card.
+	// Information about the user who created or modified a SageMaker resource.
 	//
 	// This member is required.
 	CreatedBy *types.UserContext

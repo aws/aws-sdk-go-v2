@@ -8760,6 +8760,21 @@ func validateCustomFilterListConfiguration(v *types.CustomFilterListConfiguratio
 	}
 }
 
+func validateCustomInstructions(v *types.CustomInstructions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomInstructions"}
+	if v.CustomInstructionsString == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomInstructionsString"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCustomNarrativeOptions(v *types.CustomNarrativeOptions) error {
 	if v == nil {
 		return nil
@@ -21834,6 +21849,11 @@ func validateOpCreateTopicInput(v *CreateTopicInput) error {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.CustomInstructions != nil {
+		if err := validateCustomInstructions(v.CustomInstructions); err != nil {
+			invalidParams.AddNested("CustomInstructions", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -25470,6 +25490,11 @@ func validateOpUpdateTopicInput(v *UpdateTopicInput) error {
 	} else if v.Topic != nil {
 		if err := validateTopicDetails(v.Topic); err != nil {
 			invalidParams.AddNested("Topic", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomInstructions != nil {
+		if err := validateCustomInstructions(v.CustomInstructions); err != nil {
+			invalidParams.AddNested("CustomInstructions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

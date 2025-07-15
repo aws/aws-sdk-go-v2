@@ -1,0 +1,8 @@
+{
+    "id": "7efcf918-29f3-4298-991b-423e8a0a6d79",
+    "type": "feature",
+    "description": "This release introduces Channels functionality with CreateChannel, GetChannel, ListChannels, and UpdateChannel operations. Channels provide dedicated collaboration spaces where teams can organize discussions and knowledge by projects, business units, or areas of responsibility.",
+    "modules": [
+        "service/repostspace"
+    ]
+}

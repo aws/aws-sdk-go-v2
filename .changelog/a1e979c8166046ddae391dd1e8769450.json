@@ -1,0 +1,8 @@
+{
+    "id": "a1e979c8-1660-46dd-ae39-1dd1e8769450",
+    "type": "feature",
+    "description": "Amazon ECS supports native blue/green deployments, allowing you to validate new service revisions before directing production traffic to them.",
+    "modules": [
+        "service/ecs"
+    ]
+}

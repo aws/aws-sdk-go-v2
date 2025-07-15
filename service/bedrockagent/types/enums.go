@@ -946,6 +946,7 @@ const (
 	KnowledgeBaseStorageTypeMongoDbAtlas             KnowledgeBaseStorageType = "MONGO_DB_ATLAS"
 	KnowledgeBaseStorageTypeNeptuneAnalytics         KnowledgeBaseStorageType = "NEPTUNE_ANALYTICS"
 	KnowledgeBaseStorageTypeOpensearchManagedCluster KnowledgeBaseStorageType = "OPENSEARCH_MANAGED_CLUSTER"
+	KnowledgeBaseStorageTypeS3Vectors                KnowledgeBaseStorageType = "S3_VECTORS"
 )
 
 // Values returns all known values for KnowledgeBaseStorageType. Note that this
@@ -961,6 +962,7 @@ func (KnowledgeBaseStorageType) Values() []KnowledgeBaseStorageType {
 		"MONGO_DB_ATLAS",
 		"NEPTUNE_ANALYTICS",
 		"OPENSEARCH_MANAGED_CLUSTER",
+		"S3_VECTORS",
 	}
 }
 

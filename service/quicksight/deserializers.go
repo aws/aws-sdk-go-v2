@@ -21269,6 +21269,11 @@ func awsRestjson1_deserializeOpDocumentDescribeTopicOutput(v **DescribeTopicOutp
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "CustomInstructions":
+			if err := awsRestjson1_deserializeDocumentCustomInstructions(&sv.CustomInstructions, value); err != nil {
+				return err
+			}
+
 		case "RequestId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -56525,6 +56530,46 @@ func awsRestjson1_deserializeDocumentCustomFilterListConfiguration(v **types.Cus
 					return fmt.Errorf("expected CategoryFilterSelectAllOptions to be of type string, got %T instead", value)
 				}
 				sv.SelectAllOptions = types.CategoryFilterSelectAllOptions(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCustomInstructions(v **types.CustomInstructions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomInstructions
+	if *v == nil {
+		sv = &types.CustomInstructions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CustomInstructionsString":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomInstructionsString to be of type string, got %T instead", value)
+				}
+				sv.CustomInstructionsString = ptr.String(jtv)
 			}
 
 		default:

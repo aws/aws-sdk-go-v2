@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -67,6 +68,9 @@ type GetTableBucketOutput struct {
 
 	// The unique identifier of the table bucket.
 	TableBucketId *string
+
+	// The type of the table bucket.
+	Type types.TableBucketType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

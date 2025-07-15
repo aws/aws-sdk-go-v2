@@ -50,8 +50,7 @@ type DescribeModelCardOutput struct {
 	// This member is required.
 	Content *string
 
-	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, project, or model card.
+	// Information about the user who created or modified a SageMaker resource.
 	//
 	// This member is required.
 	CreatedBy *types.UserContext
@@ -91,8 +90,7 @@ type DescribeModelCardOutput struct {
 	// This member is required.
 	ModelCardVersion *int32
 
-	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, project, or model card.
+	// Information about the user who created or modified a SageMaker resource.
 	LastModifiedBy *types.UserContext
 
 	// The date and time the model card was last modified.

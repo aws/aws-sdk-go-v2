@@ -88,6 +88,9 @@ func ExampleConnectionPropertiesInput_outputUsage() {
 	case *types.ConnectionPropertiesInputMemberRedshiftProperties:
 		_ = v.Value // Value is types.RedshiftPropertiesInput
 
+	case *types.ConnectionPropertiesInputMemberS3Properties:
+		_ = v.Value // Value is types.S3PropertiesInput
+
 	case *types.ConnectionPropertiesInputMemberSparkEmrProperties:
 		_ = v.Value // Value is types.SparkEmrPropertiesInput
 
@@ -105,6 +108,7 @@ func ExampleConnectionPropertiesInput_outputUsage() {
 
 var _ *types.SparkEmrPropertiesInput
 var _ *types.GluePropertiesInput
+var _ *types.S3PropertiesInput
 var _ *types.AthenaPropertiesInput
 var _ *types.IamPropertiesInput
 var _ *types.SparkGluePropertiesInput
@@ -130,6 +134,9 @@ func ExampleConnectionPropertiesOutput_outputUsage() {
 	case *types.ConnectionPropertiesOutputMemberRedshiftProperties:
 		_ = v.Value // Value is types.RedshiftPropertiesOutput
 
+	case *types.ConnectionPropertiesOutputMemberS3Properties:
+		_ = v.Value // Value is types.S3PropertiesOutput
+
 	case *types.ConnectionPropertiesOutputMemberSparkEmrProperties:
 		_ = v.Value // Value is types.SparkEmrPropertiesOutput
 
@@ -145,6 +152,7 @@ func ExampleConnectionPropertiesOutput_outputUsage() {
 	}
 }
 
+var _ *types.S3PropertiesOutput
 var _ *types.AthenaPropertiesOutput
 var _ *types.SparkGluePropertiesOutput
 var _ *types.IamPropertiesOutput
@@ -169,6 +177,9 @@ func ExampleConnectionPropertiesPatch_outputUsage() {
 	case *types.ConnectionPropertiesPatchMemberRedshiftProperties:
 		_ = v.Value // Value is types.RedshiftPropertiesPatch
 
+	case *types.ConnectionPropertiesPatchMemberS3Properties:
+		_ = v.Value // Value is types.S3PropertiesPatch
+
 	case *types.ConnectionPropertiesPatchMemberSparkEmrProperties:
 		_ = v.Value // Value is types.SparkEmrPropertiesPatch
 
@@ -186,6 +197,7 @@ var _ *types.IamPropertiesPatch
 var _ *types.RedshiftPropertiesPatch
 var _ *types.AthenaPropertiesPatch
 var _ *types.GluePropertiesPatch
+var _ *types.S3PropertiesPatch
 
 func ExampleDataSourceConfigurationInput_outputUsage() {
 	var union types.DataSourceConfigurationInput

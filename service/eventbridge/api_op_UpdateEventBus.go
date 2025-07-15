@@ -75,6 +75,13 @@ type UpdateEventBusInput struct {
 	// [CreateDiscoverer]: https://docs.aws.amazon.com/eventbridge/latest/schema-reference/v1-discoverers.html#CreateDiscoverer
 	KmsKeyIdentifier *string
 
+	// The logging configuration settings for the event bus.
+	//
+	// For more information, see [Configuring logs for event buses] in the EventBridge User Guide.
+	//
+	// [Configuring logs for event buses]: https://docs.aws.amazon.com/eb-event-bus-logs.html
+	LogConfig *types.LogConfig
+
 	// The name of the event bus.
 	Name *string
 
@@ -104,6 +111,13 @@ type UpdateEventBusOutput struct {
 	//
 	// [Data encryption in EventBridge]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-encryption.html
 	KmsKeyIdentifier *string
+
+	// The logging configuration settings for the event bus.
+	//
+	// For more information, see [Configuring logs for event buses] in the EventBridge User Guide.
+	//
+	// [Configuring logs for event buses]: https://docs.aws.amazon.com/eb-event-bus-logs.html
+	LogConfig *types.LogConfig
 
 	// The event bus name.
 	Name *string
