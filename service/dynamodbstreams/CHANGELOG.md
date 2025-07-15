@@ -1,3 +1,7 @@
+# v1.26.0 (2025-07-15)
+
+* **Feature**: Added support for optional shard filter parameter in DescribeStream api that allows customers to fetch child shards of a read_only parent shard.
+
 # v1.25.6 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

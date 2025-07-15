@@ -1,3 +1,39 @@
+# Release (2025-07-15)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.45.0](service/bedrockagent/CHANGELOG.md#v1450-2025-07-15)
+  * **Feature**: Add support for S3 Vectors as a vector store.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.32.0](service/datazone/CHANGELOG.md#v1320-2025-07-15)
+  * **Feature**: Removing restriction of environment profile identifier as required field, S3 feature release
+* `github.com/aws/aws-sdk-go-v2/service/dynamodbstreams`: [v1.26.0](service/dynamodbstreams/CHANGELOG.md#v1260-2025-07-15)
+  * **Feature**: Added support for optional shard filter parameter in DescribeStream api that allows customers to fetch child shards of a read_only parent shard.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.232.0](service/ec2/CHANGELOG.md#v12320-2025-07-15)
+  * **Feature**: This release adds support for volume initialization status, which enables you to monitor when the initialization process for an EBS volume is completed. This release also adds IPv6 support to EC2 Instance Connect Endpoints, allowing you to connect to your EC2 Instance via a private IPv6 address.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.59.0](service/ecs/CHANGELOG.md#v1590-2025-07-15)
+  * **Feature**: Amazon ECS supports native blue/green deployments, allowing you to validate new service revisions before directing production traffic to them.
+* `github.com/aws/aws-sdk-go-v2/service/eventbridge`: [v1.41.0](service/eventbridge/CHANGELOG.md#v1410-2025-07-15)
+  * **Feature**: Add customer-facing logging for the EventBridge Event Bus, enabling customers to better observe their events and extract insights about their EventBridge usage.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.47.0](service/opensearch/CHANGELOG.md#v1470-2025-07-15)
+  * **Feature**: AWS Opensearch adds support for enabling s3 vector engine options. After enabling this option, customers will be able to create indices with s3 vector engine.
+* `github.com/aws/aws-sdk-go-v2/service/pricing`: [v1.35.0](service/pricing/CHANGELOG.md#v1350-2025-07-15)
+  * **Feature**: This release adds support for new filter types in GetProducts API, including EQUALS, CONTAINS, ANY_OF, and NONE_OF.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.88.0](service/quicksight/CHANGELOG.md#v1880-2025-07-15)
+  * **Feature**: Introduced custom instructions for topics.
+* `github.com/aws/aws-sdk-go-v2/service/repostspace`: [v1.10.0](service/repostspace/CHANGELOG.md#v1100-2025-07-15)
+  * **Feature**: This release introduces Channels functionality with CreateChannel, GetChannel, ListChannels, and UpdateChannel operations. Channels provide dedicated collaboration spaces where teams can organize discussions and knowledge by projects, business units, or areas of responsibility.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.84.0](service/s3/CHANGELOG.md#v1840-2025-07-15)
+  * **Feature**: Amazon S3 Metadata live inventory tables provide a queryable inventory of all the objects in your general purpose bucket so that you can determine the latest state of your data. To help minimize your storage costs, use journal table record expiration to set a retention period for your records.
+* `github.com/aws/aws-sdk-go-v2/service/s3tables`: [v1.6.0](service/s3tables/CHANGELOG.md#v160-2025-07-15)
+  * **Feature**: Adds table bucket type to ListTableBucket and GetTableBucket API operations
+* `github.com/aws/aws-sdk-go-v2/service/s3vectors`: [v1.0.0](service/s3vectors/CHANGELOG.md#v100-2025-07-15)
+  * **Release**: New AWS service client module
+  * **Feature**: Amazon S3 Vectors provides cost-effective, elastic, and durable vector storage for queries based on semantic meaning and similarity.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.201.0](service/sagemaker/CHANGELOG.md#v12010-2025-07-15)
+  * **Feature**: This release adds support for a new Restricted instance group type to enable a specialized environment for running Nova customization jobs on SageMaker HyperPod clusters. This release also adds support for SageMaker pipeline versioning.
+
 # Release (2025-07-09)
 
 ## Module Highlights

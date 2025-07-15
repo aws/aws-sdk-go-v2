@@ -1,8 +1,0 @@
-{
-    "id": "54df4239-6e21-4996-9fb8-e934b9fd1893",
-    "type": "feature",
-    "description": "Introduced custom instructions for topics.",
-    "modules": [
-        "service/quicksight"
-    ]
-}

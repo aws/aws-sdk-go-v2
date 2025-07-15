@@ -1,3 +1,7 @@
+# v1.10.0 (2025-07-15)
+
+* **Feature**: This release introduces Channels functionality with CreateChannel, GetChannel, ListChannels, and UpdateChannel operations. Channels provide dedicated collaboration spaces where teams can organize discussions and knowledge by projects, business units, or areas of responsibility.
+
 # v1.9.4 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

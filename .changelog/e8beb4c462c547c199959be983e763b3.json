@@ -1,8 +1,0 @@
-{
-    "id": "e8beb4c4-62c5-47c1-9995-9be983e763b3",
-    "type": "feature",
-    "description": "Added support for optional shard filter parameter in DescribeStream api that allows customers to fetch child shards of a read_only parent shard.",
-    "modules": [
-        "service/dynamodbstreams"
-    ]
-}

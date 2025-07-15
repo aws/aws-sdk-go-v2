@@ -1,3 +1,7 @@
+# v1.88.0 (2025-07-15)
+
+* **Feature**: Introduced custom instructions for topics.
+
 # v1.87.0 (2025-06-30)
 
 * **Feature**: Introduced custom permission capabilities for reporting content. Added menu option in exploration to preserve configuration data when textbox menu option is used. Added support for Athena trusted identity propagation.

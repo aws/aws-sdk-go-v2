@@ -1,3 +1,7 @@
+# v1.47.0 (2025-07-15)
+
+* **Feature**: AWS Opensearch adds support for enabling s3 vector engine options. After enabling this option, customers will be able to create indices with s3 vector engine.
+
 # v1.46.6 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

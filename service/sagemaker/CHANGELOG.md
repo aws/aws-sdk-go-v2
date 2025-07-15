@@ -1,3 +1,7 @@
+# v1.201.0 (2025-07-15)
+
+* **Feature**: This release adds support for a new Restricted instance group type to enable a specialized environment for running Nova customization jobs on SageMaker HyperPod clusters. This release also adds support for SageMaker pipeline versioning.
+
 # v1.200.1 (2025-07-09)
 
 * No change notes available for this release.

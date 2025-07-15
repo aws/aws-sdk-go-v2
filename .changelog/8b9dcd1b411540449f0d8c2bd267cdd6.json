@@ -1,8 +1,0 @@
-{
-    "id": "8b9dcd1b-4115-4044-9f0d-8c2bd267cdd6",
-    "type": "feature",
-    "description": "This release adds support for a new Restricted instance group type to enable a specialized environment for running Nova customization jobs on SageMaker HyperPod clusters. This release also adds support for SageMaker pipeline versioning.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

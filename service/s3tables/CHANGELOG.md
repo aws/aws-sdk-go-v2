@@ -1,3 +1,7 @@
+# v1.6.0 (2025-07-15)
+
+* **Feature**: Adds table bucket type to ListTableBucket and GetTableBucket API operations
+
 # v1.5.0 (2025-06-23)
 
 * **Feature**: S3 Tables now supports sort and z-order compaction strategies for Iceberg tables in addition to binpack.

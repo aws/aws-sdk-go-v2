@@ -1,3 +1,7 @@
+# v1.59.0 (2025-07-15)
+
+* **Feature**: Amazon ECS supports native blue/green deployments, allowing you to validate new service revisions before directing production traffic to them.
+
 # v1.58.1 (2025-06-25)
 
 * **Documentation**: Updates for change to Amazon ECS default log driver mode from blocking to non-blocking

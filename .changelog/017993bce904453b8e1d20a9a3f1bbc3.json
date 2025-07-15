@@ -1,8 +1,0 @@
-{
-    "id": "017993bc-e904-453b-8e1d-20a9a3f1bbc3",
-    "type": "feature",
-    "description": "Add customer-facing logging for the EventBridge Event Bus, enabling customers to better observe their events and extract insights about their EventBridge usage.",
-    "modules": [
-        "service/eventbridge"
-    ]
-}

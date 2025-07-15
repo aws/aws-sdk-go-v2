@@ -1,3 +1,7 @@
+# v1.41.0 (2025-07-15)
+
+* **Feature**: Add customer-facing logging for the EventBridge Event Bus, enabling customers to better observe their events and extract insights about their EventBridge usage.
+
 # v1.40.0 (2025-06-30)
 
 * **Feature**: Added support for EventBridge Dualstack endpoints in AWS GovCloud (US) regions (us-gov-east-1 and us-gov-west-1). The dualstack endpoints are identical for both FIPS and non-FIPS configurations, following the format: events.{region}.api.aws

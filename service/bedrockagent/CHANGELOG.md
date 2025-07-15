@@ -1,3 +1,7 @@
+# v1.45.0 (2025-07-15)
+
+* **Feature**: Add support for S3 Vectors as a vector store.
+
 # v1.44.2 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

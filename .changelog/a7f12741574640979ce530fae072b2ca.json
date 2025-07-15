@@ -1,8 +1,0 @@
-{
-    "id": "a7f12741-5746-4097-9ce5-30fae072b2ca",
-    "type": "feature",
-    "description": "Add support for S3 Vectors as a vector store.",
-    "modules": [
-        "service/bedrockagent"
-    ]
-}

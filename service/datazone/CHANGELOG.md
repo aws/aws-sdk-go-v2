@@ -1,3 +1,7 @@
+# v1.32.0 (2025-07-15)
+
+* **Feature**: Removing restriction of environment profile identifier as required field, S3 feature release
+
 # v1.31.0 (2025-07-01)
 
 * **Feature**: Add support for the new optional domain-unit-id parameter in the UpdateProject API.
