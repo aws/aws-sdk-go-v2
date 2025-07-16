@@ -474,7 +474,7 @@ type Delivery struct {
 	DeliveryDestinationArn *string
 
 	// Displays whether the delivery destination associated with this delivery is
-	// CloudWatch Logs, Amazon S3, or Firehose.
+	// CloudWatch Logs, Amazon S3, Firehose, or X-Ray.
 	DeliveryDestinationType DeliveryDestinationType
 
 	// The name of the delivery source that is associated with this delivery.
@@ -503,7 +503,7 @@ type Delivery struct {
 // This structure contains information about one delivery destination in your
 // account. A delivery destination is an Amazon Web Services resource that
 // represents an Amazon Web Services service that logs can be sent to. CloudWatch
-// Logs, Amazon S3, are supported as Firehose delivery destinations.
+// Logs, Amazon S3, Firehose, and X-Ray are supported as delivery destinations.
 //
 // To configure logs delivery between a supported Amazon Web Services service and
 // a destination, you must do the following:
@@ -539,8 +539,8 @@ type DeliveryDestination struct {
 	// receive the logs.
 	DeliveryDestinationConfiguration *DeliveryDestinationConfiguration
 
-	// Displays whether this delivery destination is CloudWatch Logs, Amazon S3, or
-	// Firehose.
+	// Displays whether this delivery destination is CloudWatch Logs, Amazon S3,
+	// Firehose, or X-Ray.
 	DeliveryDestinationType DeliveryDestinationType
 
 	// The name of this delivery destination.
@@ -2008,8 +2008,7 @@ type Processor struct {
 	// [parseRoute53]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-parseRoute53
 	ParseRoute53 *ParseRoute53
 
-	// Use this processor to convert logs into Open Cybersecurity Schema Framework
-	// (OCSF) format
+	// Use this parameter to convert logs into Open Cybersecurity Schema (OCSF) format.
 	ParseToOCSF *ParseToOCSF
 
 	// Use this parameter to include the [parseVPC] processor in your transformer.
@@ -2306,6 +2305,17 @@ type ResourcePolicy struct {
 
 	// The name of the resource policy.
 	PolicyName *string
+
+	// Specifies scope of the resource policy. Valid values are ACCOUNT or RESOURCE.
+	PolicyScope PolicyScope
+
+	// The ARN of the CloudWatch Logs resource to which the resource policy is
+	// attached. Only populated for resource-scoped policies.
+	ResourceArn *string
+
+	// The revision ID of the resource policy. Only populated for resource-scoped
+	// policies.
+	RevisionId *string
 
 	noSmithyDocumentSerde
 }

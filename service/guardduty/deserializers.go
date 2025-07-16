@@ -730,6 +730,9 @@ func awsRestjson1_deserializeOpErrorCreateIPSet(response *smithyhttp.Response, m
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("BadRequestException", errorCode):
 		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
 
@@ -1459,6 +1462,9 @@ func awsRestjson1_deserializeOpErrorCreateThreatIntelSet(response *smithyhttp.Re
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("BadRequestException", errorCode):
 		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
 
@@ -4955,6 +4961,15 @@ func awsRestjson1_deserializeOpDocumentGetIPSetOutput(v **GetIPSetOutput, value 
 
 	for key, value := range shape {
 		switch key {
+		case "expectedBucketOwner":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.ExpectedBucketOwner = ptr.String(jtv)
+			}
+
 		case "format":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6319,6 +6334,15 @@ func awsRestjson1_deserializeOpDocumentGetThreatIntelSetOutput(v **GetThreatInte
 
 	for key, value := range shape {
 		switch key {
+		case "expectedBucketOwner":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.ExpectedBucketOwner = ptr.String(jtv)
+			}
+
 		case "format":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9820,6 +9844,9 @@ func awsRestjson1_deserializeOpErrorUpdateIPSet(response *smithyhttp.Response, m
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("BadRequestException", errorCode):
 		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
 
@@ -10442,6 +10469,9 @@ func awsRestjson1_deserializeOpErrorUpdateThreatIntelSet(response *smithyhttp.Re
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("BadRequestException", errorCode):
 		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
 

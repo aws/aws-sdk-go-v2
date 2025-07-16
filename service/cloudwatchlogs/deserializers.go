@@ -2341,6 +2341,9 @@ func awsAwsjson11_deserializeOpErrorDeleteResourcePolicy(response *smithyhttp.Re
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
 
+	case strings.EqualFold("OperationAbortedException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationAbortedException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -8532,6 +8535,12 @@ func awsAwsjson11_deserializeOpErrorPutResourcePolicy(response *smithyhttp.Respo
 
 	case strings.EqualFold("LimitExceededException", errorCode):
 		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
+
+	case strings.EqualFold("OperationAbortedException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationAbortedException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsAwsjson11_deserializeErrorServiceUnavailableException(response, errorBody)
@@ -18534,6 +18543,33 @@ func awsAwsjson11_deserializeDocumentResourcePolicy(v **types.ResourcePolicy, va
 				sv.PolicyName = ptr.String(jtv)
 			}
 
+		case "policyScope":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PolicyScope to be of type string, got %T instead", value)
+				}
+				sv.PolicyScope = types.PolicyScope(jtv)
+			}
+
+		case "resourceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.ResourceArn = ptr.String(jtv)
+			}
+
+		case "revisionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExpectedRevisionId to be of type string, got %T instead", value)
+				}
+				sv.RevisionId = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -22162,6 +22198,15 @@ func awsAwsjson11_deserializeOpDocumentPutResourcePolicyOutput(v **PutResourcePo
 		case "resourcePolicy":
 			if err := awsAwsjson11_deserializeDocumentResourcePolicy(&sv.ResourcePolicy, value); err != nil {
 				return err
+			}
+
+		case "revisionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExpectedRevisionId to be of type string, got %T instead", value)
+				}
+				sv.RevisionId = ptr.String(jtv)
 			}
 
 		default:

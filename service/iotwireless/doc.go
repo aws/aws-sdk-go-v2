@@ -4,10 +4,10 @@
 // for AWS IoT Wireless.
 //
 // AWS IoT Wireless provides bi-directional communication between
-// internet-connected wireless devices and the AWS Cloud. To onboard both LoRaWAN
-// and Sidewalk devices to AWS IoT, use the IoT Wireless API. These wireless
-// devices use the Low Power Wide Area Networking (LPWAN) communication protocol to
-// communicate with AWS IoT.
+// internet-connected wireless devices and the AWS Cloud. To onboard both [LoRaWAN]and [Sidewalk]
+// devices to AWS IoT, use the IoT Wireless API. These wireless devices use the Low
+// Power Wide Area Networking (LPWAN) communication protocol to communicate with
+// AWS IoT.
 //
 // Using the API, you can perform create, read, update, and delete operations for
 // your wireless devices, gateways, destinations, and profiles. After onboarding
@@ -25,6 +25,8 @@
 // endpoints and send requests to the AWS IoT Wireless service. For more
 // information, see [Using IPv6 with AWS IoT Wireless].
 //
+// [LoRaWAN]: https://docs.aws.amazon.com/iot-wireless/latest/developerguide/iot-lorawan.html
 // [IoT Wireless Service endpoints]: https://docs.aws.amazon.com/general/latest/gr/iot-lorawan.html#iot-wireless_region
 // [Using IPv6 with AWS IoT Wireless]: https://docs.aws.amazon.com/iot-wireless/latest/developerguide/wireless-ipv6-access.html
+// [Sidewalk]: https://docs.aws.amazon.com/iot-wireless/latest/developerguide/iot-sidewalk.html
 package iotwireless

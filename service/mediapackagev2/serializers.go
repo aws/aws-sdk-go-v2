@@ -2196,6 +2196,13 @@ func awsRestjson1_serializeOpDocumentPutOriginEndpointPolicyInput(v *PutOriginEn
 	object := value.Object()
 	defer object.Close()
 
+	if v.CdnAuthConfiguration != nil {
+		ok := object.Key("CdnAuthConfiguration")
+		if err := awsRestjson1_serializeDocumentCdnAuthConfiguration(v.CdnAuthConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Policy != nil {
 		ok := object.Key("Policy")
 		ok.String(*v.Policy)
@@ -2933,6 +2940,36 @@ func awsRestjson1_serializeOpDocumentUpdateOriginEndpointInput(v *UpdateOriginEn
 		ok.Integer(*v.StartoverWindowSeconds)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCdnAuthConfiguration(v *types.CdnAuthConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CdnIdentifierSecretArns != nil {
+		ok := object.Key("CdnIdentifierSecretArns")
+		if err := awsRestjson1_serializeDocumentCdnIdentifierSecretArns(v.CdnIdentifierSecretArns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SecretsRoleArn != nil {
+		ok := object.Key("SecretsRoleArn")
+		ok.String(*v.SecretsRoleArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCdnIdentifierSecretArns(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 

@@ -48,6 +48,10 @@ type UpdateThreatIntelSetInput struct {
 	// or not.
 	Activate *bool
 
+	// The Amazon Web Services account ID that owns the Amazon S3 bucket specified in
+	// the location parameter.
+	ExpectedBucketOwner *string
+
 	// The updated URI of the file that contains the ThreateIntelSet.
 	Location *string
 

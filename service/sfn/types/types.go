@@ -44,7 +44,11 @@ type ActivityListItem struct {
 	//
 	//   - special characters " # % \ ^ | ~ ` $ & , ; : /
 	//
-	//   - control characters ( U+0000-001F , U+007F-009F )
+	//   - control characters ( U+0000-001F , U+007F-009F , U+FFFE-FFFF )
+	//
+	//   - surrogates ( U+D800-DFFF )
+	//
+	//   - invalid characters ( U+10FFFF )
 	//
 	// To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z,
 	// a-z, - and _.
@@ -274,7 +278,11 @@ type ExecutionListItem struct {
 	//
 	//   - special characters " # % \ ^ | ~ ` $ & , ; : /
 	//
-	//   - control characters ( U+0000-001F , U+007F-009F )
+	//   - control characters ( U+0000-001F , U+007F-009F , U+FFFE-FFFF )
+	//
+	//   - surrogates ( U+D800-DFFF )
+	//
+	//   - invalid characters ( U+10FFFF )
 	//
 	// To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z,
 	// a-z, - and _.
@@ -1051,7 +1059,11 @@ type StateExitedEventDetails struct {
 	//
 	//   - special characters " # % \ ^ | ~ ` $ & , ; : /
 	//
-	//   - control characters ( U+0000-001F , U+007F-009F )
+	//   - control characters ( U+0000-001F , U+007F-009F , U+FFFE-FFFF )
+	//
+	//   - surrogates ( U+D800-DFFF )
+	//
+	//   - invalid characters ( U+10FFFF )
 	//
 	// To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z,
 	// a-z, - and _.
@@ -1113,7 +1125,11 @@ type StateMachineListItem struct {
 	//
 	//   - special characters " # % \ ^ | ~ ` $ & , ; : /
 	//
-	//   - control characters ( U+0000-001F , U+007F-009F )
+	//   - control characters ( U+0000-001F , U+007F-009F , U+FFFE-FFFF )
+	//
+	//   - surrogates ( U+D800-DFFF )
+	//
+	//   - invalid characters ( U+10FFFF )
 	//
 	// To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z,
 	// a-z, - and _.

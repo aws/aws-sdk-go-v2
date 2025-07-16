@@ -7,6 +7,24 @@ import (
 	"time"
 )
 
+// The settings to enable CDN authorization headers in MediaPackage.
+type CdnAuthConfiguration struct {
+
+	// The ARN for the secret in Secrets Manager that your CDN uses for authorization
+	// to access the endpoint.
+	//
+	// This member is required.
+	CdnIdentifierSecretArns []string
+
+	// The ARN for the IAM role that gives MediaPackage read access to Secrets Manager
+	// and KMS for CDN authorization.
+	//
+	// This member is required.
+	SecretsRoleArn *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration of the channel group.
 type ChannelGroupListConfiguration struct {
 

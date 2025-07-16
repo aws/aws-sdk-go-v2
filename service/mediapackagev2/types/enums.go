@@ -579,6 +579,21 @@ const (
 	ValidationExceptionTypeIsmContainerTypeWithDashManifest                       ValidationExceptionType = "ISM_CONTAINER_TYPE_WITH_DASH_MANIFEST"
 	ValidationExceptionTypeIsmContainerTypeWithScte                               ValidationExceptionType = "ISM_CONTAINER_TYPE_WITH_SCTE"
 	ValidationExceptionTypeIsmContainerWithKeyRotation                            ValidationExceptionType = "ISM_CONTAINER_WITH_KEY_ROTATION"
+	ValidationExceptionTypeBatchGetSecretValueDenied                              ValidationExceptionType = "BATCH_GET_SECRET_VALUE_DENIED"
+	ValidationExceptionTypeGetSecretValueDenied                                   ValidationExceptionType = "GET_SECRET_VALUE_DENIED"
+	ValidationExceptionTypeDescribeSecretDenied                                   ValidationExceptionType = "DESCRIBE_SECRET_DENIED"
+	ValidationExceptionTypeInvalidSecretFormat                                    ValidationExceptionType = "INVALID_SECRET_FORMAT"
+	ValidationExceptionTypeSecretIsNotOneKeyValuePair                             ValidationExceptionType = "SECRET_IS_NOT_ONE_KEY_VALUE_PAIR"
+	ValidationExceptionTypeInvalidSecretKey                                       ValidationExceptionType = "INVALID_SECRET_KEY"
+	ValidationExceptionTypeInvalidSecretValue                                     ValidationExceptionType = "INVALID_SECRET_VALUE"
+	ValidationExceptionTypeSecretArnResourceNotFound                              ValidationExceptionType = "SECRET_ARN_RESOURCE_NOT_FOUND"
+	ValidationExceptionTypeDecryptSecretFailed                                    ValidationExceptionType = "DECRYPT_SECRET_FAILED"
+	ValidationExceptionTypeTooManySecrets                                         ValidationExceptionType = "TOO_MANY_SECRETS"
+	ValidationExceptionTypeDuplicatedSecret                                       ValidationExceptionType = "DUPLICATED_SECRET"
+	ValidationExceptionTypeMalformedSecretArn                                     ValidationExceptionType = "MALFORMED_SECRET_ARN"
+	ValidationExceptionTypeSecretFromDifferentAccount                             ValidationExceptionType = "SECRET_FROM_DIFFERENT_ACCOUNT"
+	ValidationExceptionTypeSecretFromDifferentRegion                              ValidationExceptionType = "SECRET_FROM_DIFFERENT_REGION"
+	ValidationExceptionTypeInvalidSecret                                          ValidationExceptionType = "INVALID_SECRET"
 )
 
 // Values returns all known values for ValidationExceptionType. Note that this can
@@ -659,5 +674,20 @@ func (ValidationExceptionType) Values() []ValidationExceptionType {
 		"ISM_CONTAINER_TYPE_WITH_DASH_MANIFEST",
 		"ISM_CONTAINER_TYPE_WITH_SCTE",
 		"ISM_CONTAINER_WITH_KEY_ROTATION",
+		"BATCH_GET_SECRET_VALUE_DENIED",
+		"GET_SECRET_VALUE_DENIED",
+		"DESCRIBE_SECRET_DENIED",
+		"INVALID_SECRET_FORMAT",
+		"SECRET_IS_NOT_ONE_KEY_VALUE_PAIR",
+		"INVALID_SECRET_KEY",
+		"INVALID_SECRET_VALUE",
+		"SECRET_ARN_RESOURCE_NOT_FOUND",
+		"DECRYPT_SECRET_FAILED",
+		"TOO_MANY_SECRETS",
+		"DUPLICATED_SECRET",
+		"MALFORMED_SECRET_ARN",
+		"SECRET_FROM_DIFFERENT_ACCOUNT",
+		"SECRET_FROM_DIFFERENT_REGION",
+		"INVALID_SECRET",
 	}
 }

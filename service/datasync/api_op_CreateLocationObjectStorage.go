@@ -43,7 +43,7 @@ type CreateLocationObjectStorageInput struct {
 	// This member is required.
 	BucketName *string
 
-	// Specifies the domain name or IP version 4 (IPv4) address of the object storage
+	// Specifies the domain name or IP address (IPv4 or IPv6) of the object storage
 	// server that your DataSync agent connects to.
 	//
 	// This member is required.
@@ -91,6 +91,11 @@ type CreateLocationObjectStorageInput struct {
 
 	// Specifies the secret key (for example, a password) if credentials are required
 	// to authenticate with the object storage server.
+	//
+	// If you provide a secret using SecretKey , but do not provide secret
+	// configuration details using CmkSecretConfig or CustomSecretConfig , then
+	// DataSync stores the token using your Amazon Web Services account's Secrets
+	// Manager secret.
 	SecretKey *string
 
 	// Specifies a certificate chain for DataSync to authenticate with your object
@@ -120,7 +125,8 @@ type CreateLocationObjectStorageInput struct {
 	// traffic on (for example, port 443).
 	ServerPort *int32
 
-	// Specifies the protocol that your object storage server uses to communicate.
+	// Specifies the protocol that your object storage server uses to communicate. If
+	// not specified, the default value is HTTPS .
 	ServerProtocol types.ObjectStorageServerProtocol
 
 	// Specifies the object prefix for your object storage server. If this is a source

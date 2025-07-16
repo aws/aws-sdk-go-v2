@@ -29,8 +29,16 @@ func (c *Client) DeleteResourcePolicy(ctx context.Context, params *DeleteResourc
 
 type DeleteResourcePolicyInput struct {
 
+	// The expected revision ID of the resource policy. Required when deleting a
+	// resource-scoped policy to prevent concurrent modifications.
+	ExpectedRevisionId *string
+
 	// The name of the policy to be revoked. This parameter is required.
 	PolicyName *string
+
+	// The ARN of the CloudWatch Logs resource for which the resource policy needs to
+	// be deleted
+	ResourceArn *string
 
 	noSmithyDocumentSerde
 }

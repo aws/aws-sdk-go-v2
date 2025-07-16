@@ -44,6 +44,8 @@ type CreateDeviceProfileInput struct {
 	LoRaWAN *types.LoRaWANDeviceProfile
 
 	// The name of the new resource.
+	//
+	// The following special characters aren't accepted: <>^#~$
 	Name *string
 
 	// The Sidewalk-related information for creating the Sidewalk device profile.

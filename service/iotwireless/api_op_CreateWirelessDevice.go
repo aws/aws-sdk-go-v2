@@ -57,6 +57,8 @@ type CreateWirelessDeviceInput struct {
 	LoRaWAN *types.LoRaWANDevice
 
 	// The name of the new resource.
+	//
+	// The following special characters aren't accepted: <>^#~$
 	Name *string
 
 	// FPort values for the GNSS, stream, and ClockSync functions of the positioning

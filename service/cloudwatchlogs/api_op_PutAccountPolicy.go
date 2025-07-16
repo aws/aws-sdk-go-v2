@@ -22,7 +22,7 @@ import (
 //     logs:PutDataProtectionPolicy and logs:PutAccountPolicy permissions.
 //
 //   - To create a subscription filter policy, you must have the
-//     logs:PutSubscriptionFilter and logs:PutccountPolicy permissions.
+//     logs:PutSubscriptionFilter and logs:PutAccountPolicy permissions.
 //
 //   - To create a transformer policy, you must have the logs:PutTransformer and
 //     logs:PutAccountPolicy permissions.

@@ -37,7 +37,7 @@ func (c *Client) DeleteDeliveryDestination(ctx context.Context, params *DeleteDe
 type DeleteDeliveryDestinationInput struct {
 
 	// The name of the delivery destination that you want to delete. You can find a
-	// list of delivery destionation names by using the [DescribeDeliveryDestinations]operation.
+	// list of delivery destination names by using the [DescribeDeliveryDestinations]operation.
 	//
 	// [DescribeDeliveryDestinations]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeDeliveryDestinations.html
 	//

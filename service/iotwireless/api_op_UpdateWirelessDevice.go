@@ -44,6 +44,8 @@ type UpdateWirelessDeviceInput struct {
 	LoRaWAN *types.LoRaWANUpdateDevice
 
 	// The new name of the resource.
+	//
+	// The following special characters aren't accepted: <>^#~$
 	Name *string
 
 	// FPort values for the GNSS, stream, and ClockSync functions of the positioning

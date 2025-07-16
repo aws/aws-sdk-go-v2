@@ -69,6 +69,11 @@ type GetIPSetOutput struct {
 	// This member is required.
 	Status types.IpSetStatus
 
+	// The Amazon Web Services account ID that owns the Amazon S3 bucket specified in
+	// the location parameter. This field appears in the response only if it was
+	// provided during IPSet creation or update.
+	ExpectedBucketOwner *string
+
 	// The tags of the IPSet resource.
 	Tags map[string]string
 

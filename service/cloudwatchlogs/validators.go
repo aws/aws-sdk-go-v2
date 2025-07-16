@@ -3115,9 +3115,7 @@ func validateOpPutDeliveryDestinationInput(v *PutDeliveryDestinationInput) error
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.DeliveryDestinationConfiguration == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DeliveryDestinationConfiguration"))
-	} else if v.DeliveryDestinationConfiguration != nil {
+	if v.DeliveryDestinationConfiguration != nil {
 		if err := validateDeliveryDestinationConfiguration(v.DeliveryDestinationConfiguration); err != nil {
 			invalidParams.AddNested("DeliveryDestinationConfiguration", err.(smithy.InvalidParamsError))
 		}

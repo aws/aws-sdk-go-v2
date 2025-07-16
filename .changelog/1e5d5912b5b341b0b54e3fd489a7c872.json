@@ -1,0 +1,8 @@
+{
+    "id": "1e5d5912-b5b3-41b0-b54e-3fd489a7c872",
+    "type": "feature",
+    "description": "This release adds support for on-demand custom model inference through CustomModelDeployment APIs for Amazon Bedrock.",
+    "modules": [
+        "service/bedrock"
+    ]
+}

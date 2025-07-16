@@ -36,6 +36,13 @@ type DescribeResourcePoliciesInput struct {
 	// The token for the next set of items to return. The token expires after 24 hours.
 	NextToken *string
 
+	// Specifies the scope of the resource policy. Valid values are ACCOUNT or RESOURCE
+	// . When not specified, defaults to ACCOUNT .
+	PolicyScope types.PolicyScope
+
+	// The ARN of the CloudWatch Logs resource for which to query the resource policy.
+	ResourceArn *string
+
 	noSmithyDocumentSerde
 }
 

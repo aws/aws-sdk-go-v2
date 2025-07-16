@@ -56,9 +56,10 @@ type DeliveryDestinationType string
 
 // Enum values for DeliveryDestinationType
 const (
-	DeliveryDestinationTypeS3  DeliveryDestinationType = "S3"
-	DeliveryDestinationTypeCwl DeliveryDestinationType = "CWL"
-	DeliveryDestinationTypeFh  DeliveryDestinationType = "FH"
+	DeliveryDestinationTypeS3   DeliveryDestinationType = "S3"
+	DeliveryDestinationTypeCwl  DeliveryDestinationType = "CWL"
+	DeliveryDestinationTypeFh   DeliveryDestinationType = "FH"
+	DeliveryDestinationTypeXray DeliveryDestinationType = "XRAY"
 )
 
 // Values returns all known values for DeliveryDestinationType. Note that this can
@@ -70,6 +71,7 @@ func (DeliveryDestinationType) Values() []DeliveryDestinationType {
 		"S3",
 		"CWL",
 		"FH",
+		"XRAY",
 	}
 }
 
@@ -394,6 +396,25 @@ func (OutputFormat) Values() []OutputFormat {
 		"w3c",
 		"raw",
 		"parquet",
+	}
+}
+
+type PolicyScope string
+
+// Enum values for PolicyScope
+const (
+	PolicyScopeAccount  PolicyScope = "ACCOUNT"
+	PolicyScopeResource PolicyScope = "RESOURCE"
+)
+
+// Values returns all known values for PolicyScope. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PolicyScope) Values() []PolicyScope {
+	return []PolicyScope{
+		"ACCOUNT",
+		"RESOURCE",
 	}
 }
 

@@ -31,6 +31,11 @@ func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolic
 
 type PutResourcePolicyInput struct {
 
+	// The expected revision ID of the resource policy. Required when resourceArn is
+	// provided to prevent concurrent modifications. Use null when creating a resource
+	// policy for the first time.
+	ExpectedRevisionId *string
+
 	// Details of the new policy, including the identity of the principal that is
 	// enabled to put logs to this account. This is formatted as a JSON string. This
 	// parameter is required.
@@ -59,6 +64,10 @@ type PutResourcePolicyInput struct {
 	// Name of the new policy. This parameter is required.
 	PolicyName *string
 
+	// The ARN of the CloudWatch Logs resource to which the resource policy needs to
+	// be added or attached. Currently only supports LogGroup ARN.
+	ResourceArn *string
+
 	noSmithyDocumentSerde
 }
 
@@ -66,6 +75,10 @@ type PutResourcePolicyOutput struct {
 
 	// The new policy.
 	ResourcePolicy *types.ResourcePolicy
+
+	// The revision ID of the created or updated resource policy. Only returned for
+	// resource-scoped policies.
+	RevisionId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

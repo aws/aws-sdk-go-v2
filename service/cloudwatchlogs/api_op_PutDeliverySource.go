@@ -13,7 +13,8 @@ import (
 
 // Creates or updates a logical delivery source. A delivery source represents an
 // Amazon Web Services resource that sends logs to an logs delivery destination.
-// The destination can be CloudWatch Logs, Amazon S3, or Firehose.
+// The destination can be CloudWatch Logs, Amazon S3, Firehose or X-Ray for sending
+// traces.
 //
 // To configure logs delivery between a delivery destination and an Amazon Web
 // Services service that is supported as a delivery source, you must do the
@@ -68,7 +69,7 @@ type PutDeliverySourceInput struct {
 
 	// Defines the type of log that the source is sending.
 	//
-	//   - For Amazon Bedrock, the valid value is APPLICATION_LOGS .
+	//   - For Amazon Bedrock, the valid value is APPLICATION_LOGS and TRACES .
 	//
 	//   - For CloudFront, the valid value is ACCESS_LOGS .
 	//
@@ -84,6 +85,8 @@ type PutDeliverySourceInput struct {
 	//
 	//   - For IAM Identity Center, the valid value is ERROR_LOGS .
 	//
+	//   - For PCS, the valid values are PCS_SCHEDULER_LOGS and PCS_JOBCOMP_LOGS .
+	//
 	//   - For Amazon Q, the valid value is EVENT_LOGS .
 	//
 	//   - For Amazon SES mail manager, the valid values are APPLICATION_LOG and
@@ -92,6 +95,8 @@ type PutDeliverySourceInput struct {
 	//   - For Amazon WorkMail, the valid values are ACCESS_CONTROL_LOGS ,
 	//   AUTHENTICATION_LOGS , WORKMAIL_AVAILABILITY_PROVIDER_LOGS ,
 	//   WORKMAIL_MAILBOX_ACCESS_LOGS , and WORKMAIL_PERSONAL_ACCESS_TOKEN_LOGS .
+	//
+	//   - For Amazon VPC Route Server, the valid value is EVENT_LOGS .
 	//
 	// This member is required.
 	LogType *string

@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,6 +54,14 @@ type PutOriginEndpointPolicyInput struct {
 	//
 	// This member is required.
 	Policy *string
+
+	// The settings for using authorization headers between the MediaPackage endpoint
+	// and your CDN.
+	//
+	// For information about CDN authorization, see [CDN authorization in Elemental MediaPackage] in the MediaPackage user guide.
+	//
+	// [CDN authorization in Elemental MediaPackage]: https://docs.aws.amazon.com/mediapackage/latest/userguide/cdn-auth.html
+	CdnAuthConfiguration *types.CdnAuthConfiguration
 
 	noSmithyDocumentSerde
 }

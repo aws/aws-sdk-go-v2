@@ -54,8 +54,8 @@ type DescribeLocationSmbOutput struct {
 	// The time that the SMB location was created.
 	CreationTime *time.Time
 
-	// The IPv4 addresses for the DNS servers that your SMB file server belongs to.
-	// This element applies only if AuthenticationType is set to KERBEROS .
+	// The IPv4 or IPv6 addresses for the DNS servers that your SMB file server
+	// belongs to. This element applies only if AuthenticationType is set to KERBEROS .
 	DnsIpAddresses []string
 
 	// The name of the Windows domain that the SMB file server belongs to. This

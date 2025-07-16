@@ -645,6 +645,11 @@ func awsRestjson1_serializeOpDocumentCreateIPSetInput(v *CreateIPSetInput, value
 		ok.String(*v.ClientToken)
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		ok := object.Key("expectedBucketOwner")
+		ok.String(*v.ExpectedBucketOwner)
+	}
+
 	if len(v.Format) > 0 {
 		ok := object.Key("format")
 		ok.String(string(v.Format))
@@ -1169,6 +1174,11 @@ func awsRestjson1_serializeOpDocumentCreateThreatIntelSetInput(v *CreateThreatIn
 	if v.ClientToken != nil {
 		ok := object.Key("clientToken")
 		ok.String(*v.ClientToken)
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		ok := object.Key("expectedBucketOwner")
+		ok.String(*v.ExpectedBucketOwner)
 	}
 
 	if len(v.Format) > 0 {
@@ -6090,6 +6100,11 @@ func awsRestjson1_serializeOpDocumentUpdateIPSetInput(v *UpdateIPSetInput, value
 		ok.Boolean(*v.Activate)
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		ok := object.Key("expectedBucketOwner")
+		ok.String(*v.ExpectedBucketOwner)
+	}
+
 	if v.Location != nil {
 		ok := object.Key("location")
 		ok.String(*v.Location)
@@ -6738,6 +6753,11 @@ func awsRestjson1_serializeOpDocumentUpdateThreatIntelSetInput(v *UpdateThreatIn
 	if v.Activate != nil {
 		ok := object.Key("activate")
 		ok.Boolean(*v.Activate)
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		ok := object.Key("expectedBucketOwner")
+		ok.String(*v.ExpectedBucketOwner)
 	}
 
 	if v.Location != nil {

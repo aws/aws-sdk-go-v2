@@ -30,6 +30,26 @@ func (m *validateOpBatchDeleteEvaluationJob) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateCustomModelDeployment struct {
+}
+
+func (*validateOpCreateCustomModelDeployment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCustomModelDeployment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCustomModelDeploymentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCustomModelDeploymentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateCustomModel struct {
 }
 
@@ -290,6 +310,26 @@ func (m *validateOpCreateProvisionedModelThroughput) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteCustomModelDeployment struct {
+}
+
+func (*validateOpDeleteCustomModelDeployment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCustomModelDeployment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCustomModelDeploymentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCustomModelDeploymentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteCustomModel struct {
 }
 
@@ -465,6 +505,26 @@ func (m *validateOpDeregisterMarketplaceModelEndpoint) HandleInitialize(ctx cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeregisterMarketplaceModelEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCustomModelDeployment struct {
+}
+
+func (*validateOpGetCustomModelDeployment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCustomModelDeployment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCustomModelDeploymentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCustomModelDeploymentInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1014,6 +1074,10 @@ func addOpBatchDeleteEvaluationJobValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpBatchDeleteEvaluationJob{}, middleware.After)
 }
 
+func addOpCreateCustomModelDeploymentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCustomModelDeployment{}, middleware.After)
+}
+
 func addOpCreateCustomModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCustomModel{}, middleware.After)
 }
@@ -1066,6 +1130,10 @@ func addOpCreateProvisionedModelThroughputValidationMiddleware(stack *middleware
 	return stack.Initialize.Add(&validateOpCreateProvisionedModelThroughput{}, middleware.After)
 }
 
+func addOpDeleteCustomModelDeploymentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCustomModelDeployment{}, middleware.After)
+}
+
 func addOpDeleteCustomModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCustomModel{}, middleware.After)
 }
@@ -1100,6 +1168,10 @@ func addOpDeleteProvisionedModelThroughputValidationMiddleware(stack *middleware
 
 func addOpDeregisterMarketplaceModelEndpointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeregisterMarketplaceModelEndpoint{}, middleware.After)
+}
+
+func addOpGetCustomModelDeploymentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCustomModelDeployment{}, middleware.After)
 }
 
 func addOpGetCustomModelValidationMiddleware(stack *middleware.Stack) error {
@@ -3353,6 +3425,29 @@ func validateOpBatchDeleteEvaluationJobInput(v *BatchDeleteEvaluationJobInput) e
 	}
 }
 
+func validateOpCreateCustomModelDeploymentInput(v *CreateCustomModelDeploymentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCustomModelDeploymentInput"}
+	if v.ModelDeploymentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelDeploymentName"))
+	}
+	if v.ModelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelArn"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateCustomModelInput(v *CreateCustomModelInput) error {
 	if v == nil {
 		return nil
@@ -3807,6 +3902,21 @@ func validateOpCreateProvisionedModelThroughputInput(v *CreateProvisionedModelTh
 	}
 }
 
+func validateOpDeleteCustomModelDeploymentInput(v *DeleteCustomModelDeploymentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCustomModelDeploymentInput"}
+	if v.CustomModelDeploymentIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomModelDeploymentIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteCustomModelInput(v *DeleteCustomModelInput) error {
 	if v == nil {
 		return nil
@@ -3934,6 +4044,21 @@ func validateOpDeregisterMarketplaceModelEndpointInput(v *DeregisterMarketplaceM
 	invalidParams := smithy.InvalidParamsError{Context: "DeregisterMarketplaceModelEndpointInput"}
 	if v.EndpointArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndpointArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCustomModelDeploymentInput(v *GetCustomModelDeploymentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCustomModelDeploymentInput"}
+	if v.CustomModelDeploymentIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomModelDeploymentIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

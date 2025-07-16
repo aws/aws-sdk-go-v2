@@ -64,6 +64,11 @@ type UpdateLocationObjectStorageInput struct {
 
 	// Specifies the secret key (for example, a password) if credentials are required
 	// to authenticate with the object storage server.
+	//
+	// If you provide a secret using SecretKey , but do not provide secret
+	// configuration details using CmkSecretConfig or CustomSecretConfig , then
+	// DataSync stores the token using your Amazon Web Services account's Secrets
+	// Manager secret.
 	SecretKey *string
 
 	// Specifies a certificate chain for DataSync to authenticate with your object
@@ -91,7 +96,7 @@ type UpdateLocationObjectStorageInput struct {
 	// Updating this parameter doesn't interfere with tasks that you have in progress.
 	ServerCertificate []byte
 
-	// Specifies the domain name or IP version 4 (IPv4) address of the object storage
+	// Specifies the domain name or IP address (IPv4 or IPv6) of the object storage
 	// server that your DataSync agent connects to.
 	ServerHostname *string
 

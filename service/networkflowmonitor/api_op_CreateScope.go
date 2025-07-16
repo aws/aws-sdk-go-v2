@@ -67,8 +67,12 @@ type CreateScopeOutput struct {
 	// This member is required.
 	ScopeId *string
 
-	// The status for a call to create a scope. The status can be one of the
-	// following: SUCCEEDED , IN_PROGRESS , or FAILED .
+	// The status for a scope. The status can be one of the following: SUCCEEDED ,
+	// IN_PROGRESS , FAILED , DEACTIVATING , or DEACTIVATED .
+	//
+	// A status of DEACTIVATING means that you've requested a scope to be deactivated
+	// and Network Flow Monitor is in the process of deactivating the scope. A status
+	// of DEACTIVATED means that the deactivating process is complete.
 	//
 	// This member is required.
 	Status types.ScopeStatus

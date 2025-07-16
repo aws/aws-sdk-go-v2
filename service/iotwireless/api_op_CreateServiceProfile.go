@@ -44,6 +44,8 @@ type CreateServiceProfileInput struct {
 	LoRaWAN *types.LoRaWANServiceProfile
 
 	// The name of the new resource.
+	//
+	// The following special characters aren't accepted: <>^#~$
 	Name *string
 
 	// The tags to attach to the new service profile. Tags are metadata that you can

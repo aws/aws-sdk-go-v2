@@ -7258,9 +7258,19 @@ func awsAwsjson11_serializeOpDocumentDeleteResourcePolicyInput(v *DeleteResource
 	object := value.Object()
 	defer object.Close()
 
+	if v.ExpectedRevisionId != nil {
+		ok := object.Key("expectedRevisionId")
+		ok.String(*v.ExpectedRevisionId)
+	}
+
 	if v.PolicyName != nil {
 		ok := object.Key("policyName")
 		ok.String(*v.PolicyName)
+	}
+
+	if v.ResourceArn != nil {
+		ok := object.Key("resourceArn")
+		ok.String(*v.ResourceArn)
 	}
 
 	return nil
@@ -7718,6 +7728,16 @@ func awsAwsjson11_serializeOpDocumentDescribeResourcePoliciesInput(v *DescribeRe
 	if v.NextToken != nil {
 		ok := object.Key("nextToken")
 		ok.String(*v.NextToken)
+	}
+
+	if len(v.PolicyScope) > 0 {
+		ok := object.Key("policyScope")
+		ok.String(string(v.PolicyScope))
+	}
+
+	if v.ResourceArn != nil {
+		ok := object.Key("resourceArn")
+		ok.String(*v.ResourceArn)
 	}
 
 	return nil
@@ -8246,6 +8266,11 @@ func awsAwsjson11_serializeOpDocumentPutDeliveryDestinationInput(v *PutDeliveryD
 		}
 	}
 
+	if len(v.DeliveryDestinationType) > 0 {
+		ok := object.Key("deliveryDestinationType")
+		ok.String(string(v.DeliveryDestinationType))
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -8517,6 +8542,11 @@ func awsAwsjson11_serializeOpDocumentPutResourcePolicyInput(v *PutResourcePolicy
 	object := value.Object()
 	defer object.Close()
 
+	if v.ExpectedRevisionId != nil {
+		ok := object.Key("expectedRevisionId")
+		ok.String(*v.ExpectedRevisionId)
+	}
+
 	if v.PolicyDocument != nil {
 		ok := object.Key("policyDocument")
 		ok.String(*v.PolicyDocument)
@@ -8525,6 +8555,11 @@ func awsAwsjson11_serializeOpDocumentPutResourcePolicyInput(v *PutResourcePolicy
 	if v.PolicyName != nil {
 		ok := object.Key("policyName")
 		ok.String(*v.PolicyName)
+	}
+
+	if v.ResourceArn != nil {
+		ok := object.Key("resourceArn")
+		ok.String(*v.ResourceArn)
 	}
 
 	return nil

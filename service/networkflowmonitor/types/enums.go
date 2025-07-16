@@ -219,9 +219,11 @@ type ScopeStatus string
 
 // Enum values for ScopeStatus
 const (
-	ScopeStatusSucceeded  ScopeStatus = "SUCCEEDED"
-	ScopeStatusInProgress ScopeStatus = "IN_PROGRESS"
-	ScopeStatusFailed     ScopeStatus = "FAILED"
+	ScopeStatusSucceeded    ScopeStatus = "SUCCEEDED"
+	ScopeStatusInProgress   ScopeStatus = "IN_PROGRESS"
+	ScopeStatusFailed       ScopeStatus = "FAILED"
+	ScopeStatusDeactivating ScopeStatus = "DEACTIVATING"
+	ScopeStatusDeactivated  ScopeStatus = "DEACTIVATED"
 )
 
 // Values returns all known values for ScopeStatus. Note that this can be expanded
@@ -233,6 +235,8 @@ func (ScopeStatus) Values() []ScopeStatus {
 		"SUCCEEDED",
 		"IN_PROGRESS",
 		"FAILED",
+		"DEACTIVATING",
+		"DEACTIVATED",
 	}
 }
 

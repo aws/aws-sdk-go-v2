@@ -339,8 +339,8 @@ type LocationListEntry struct {
 	//
 	// GLOBAL_ID is the globally unique identifier of the resource that backs the
 	// location. An example for EFS is us-east-2.fs-abcd1234 . An example for Amazon S3
-	// is the bucket name, such as myBucket . An example for NFS is a valid IPv4
-	// address or a hostname that is compliant with Domain Name Service (DNS).
+	// is the bucket name, such as myBucket . An example for NFS is a valid IPv4 or
+	// IPv6 address or a hostname that is compliant with DNS.
 	//
 	// SUBDIR is a valid file system path, delimited by forward slashes as is the *nix
 	// convention. For NFS and Amazon EFS, it's the export path to mount the location.

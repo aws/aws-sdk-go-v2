@@ -61,9 +61,7 @@ type PutQueryDefinitionInput struct {
 	QueryString *string
 
 	// Used as an idempotency token, to avoid returning an exception if the service
-	// receives the same request twice because of a network
-	//
-	// error.
+	// receives the same request twice because of a network error.
 	ClientToken *string
 
 	// Use this parameter to include specific log groups as part of your query

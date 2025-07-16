@@ -706,6 +706,24 @@ func addOpUpdateOriginEndpointValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpUpdateOriginEndpoint{}, middleware.After)
 }
 
+func validateCdnAuthConfiguration(v *types.CdnAuthConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CdnAuthConfiguration"}
+	if v.CdnIdentifierSecretArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CdnIdentifierSecretArns"))
+	}
+	if v.SecretsRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretsRoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCreateDashManifestConfiguration(v *types.CreateDashManifestConfiguration) error {
 	if v == nil {
 		return nil
@@ -1711,6 +1729,11 @@ func validateOpPutOriginEndpointPolicyInput(v *PutOriginEndpointPolicyInput) err
 	}
 	if v.Policy == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
+	}
+	if v.CdnAuthConfiguration != nil {
+		if err := validateCdnAuthConfiguration(v.CdnAuthConfiguration); err != nil {
+			invalidParams.AddNested("CdnAuthConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

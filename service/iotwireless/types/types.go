@@ -1064,6 +1064,10 @@ type LoRaWANMulticastSession struct {
 	SessionStartTime *time.Time
 
 	// How long before a multicast group session is to timeout.
+	//
+	// We recommend that you provide a timeout value that is a power-of-two (such as
+	// 64, 128, 256). If a non-power-of-two value is provided, it will automatically be
+	// rounded up to the next supported power-of-two within the allowed range.
 	SessionTimeout *int32
 
 	noSmithyDocumentSerde

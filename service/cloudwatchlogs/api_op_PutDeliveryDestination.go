@@ -14,7 +14,7 @@ import (
 // Creates or updates a logical delivery destination. A delivery destination is an
 // Amazon Web Services resource that represents an Amazon Web Services service that
 // logs can be sent to. CloudWatch Logs, Amazon S3, and Firehose are supported as
-// logs delivery destinations.
+// logs delivery destinations and X-Ray as the trace delivery destination.
 //
 // To configure logs delivery between a supported Amazon Web Services service and
 // a destination, you must do the following:
@@ -66,17 +66,36 @@ func (c *Client) PutDeliveryDestination(ctx context.Context, params *PutDelivery
 
 type PutDeliveryDestinationInput struct {
 
-	// A structure that contains the ARN of the Amazon Web Services resource that will
-	// receive the logs.
-	//
-	// This member is required.
-	DeliveryDestinationConfiguration *types.DeliveryDestinationConfiguration
-
 	// A name for this delivery destination. This name must be unique for all delivery
 	// destinations in your account.
 	//
 	// This member is required.
 	Name *string
+
+	// A structure that contains the ARN of the Amazon Web Services resource that will
+	// receive the logs.
+	//
+	// deliveryDestinationConfiguration is required for CloudWatch Logs, Amazon S3,
+	// Firehose log delivery destinations and not required for X-Ray trace delivery
+	// destinations. deliveryDestinationType is needed for X-Ray trace delivery
+	// destinations but not required for other logs delivery destinations.
+	DeliveryDestinationConfiguration *types.DeliveryDestinationConfiguration
+
+	// The type of delivery destination. This parameter specifies the target service
+	// where log data will be delivered. Valid values include:
+	//
+	//   - S3 - Amazon S3 for long-term storage and analytics
+	//
+	//   - CWL - CloudWatch Logs for centralized log management
+	//
+	//   - FH - Amazon Kinesis Data Firehose for real-time data streaming
+	//
+	//   - XRAY - Amazon Web Services X-Ray for distributed tracing and application
+	//   monitoring
+	//
+	// The delivery destination type determines the format and configuration options
+	// available for log delivery.
+	DeliveryDestinationType types.DeliveryDestinationType
 
 	// The format for the logs that this delivery destination will receive.
 	OutputFormat types.OutputFormat

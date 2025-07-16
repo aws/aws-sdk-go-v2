@@ -43,6 +43,8 @@ type UpdateWirelessGatewayInput struct {
 	MaxEirp *float32
 
 	// The new name of the resource.
+	//
+	// The following special characters aren't accepted: <>^#~$
 	Name *string
 
 	// A list of NetId values that are used by LoRa gateways to filter the uplink

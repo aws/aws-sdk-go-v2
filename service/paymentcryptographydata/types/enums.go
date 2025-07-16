@@ -143,6 +143,7 @@ const (
 	KeyCheckValueAlgorithmCmac     KeyCheckValueAlgorithm = "CMAC"
 	KeyCheckValueAlgorithmAnsiX924 KeyCheckValueAlgorithm = "ANSI_X9_24"
 	KeyCheckValueAlgorithmHmac     KeyCheckValueAlgorithm = "HMAC"
+	KeyCheckValueAlgorithmSha1     KeyCheckValueAlgorithm = "SHA_1"
 )
 
 // Values returns all known values for KeyCheckValueAlgorithm. Note that this can
@@ -154,6 +155,7 @@ func (KeyCheckValueAlgorithm) Values() []KeyCheckValueAlgorithm {
 		"CMAC",
 		"ANSI_X9_24",
 		"HMAC",
+		"SHA_1",
 	}
 }
 
@@ -204,6 +206,7 @@ const (
 	MacAlgorithmIso9797Algorithm1 MacAlgorithm = "ISO9797_ALGORITHM1"
 	MacAlgorithmIso9797Algorithm3 MacAlgorithm = "ISO9797_ALGORITHM3"
 	MacAlgorithmCmac              MacAlgorithm = "CMAC"
+	MacAlgorithmHmac              MacAlgorithm = "HMAC"
 	MacAlgorithmHmacSha224        MacAlgorithm = "HMAC_SHA224"
 	MacAlgorithmHmacSha256        MacAlgorithm = "HMAC_SHA256"
 	MacAlgorithmHmacSha384        MacAlgorithm = "HMAC_SHA384"
@@ -219,6 +222,7 @@ func (MacAlgorithm) Values() []MacAlgorithm {
 		"ISO9797_ALGORITHM1",
 		"ISO9797_ALGORITHM3",
 		"CMAC",
+		"HMAC",
 		"HMAC_SHA224",
 		"HMAC_SHA256",
 		"HMAC_SHA384",

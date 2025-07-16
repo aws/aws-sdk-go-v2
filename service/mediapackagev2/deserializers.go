@@ -3223,6 +3223,11 @@ func awsRestjson1_deserializeOpDocumentGetOriginEndpointPolicyOutput(v **GetOrig
 
 	for key, value := range shape {
 		switch key {
+		case "CdnAuthConfiguration":
+			if err := awsRestjson1_deserializeDocumentCdnAuthConfiguration(&sv.CdnAuthConfiguration, value); err != nil {
+				return err
+			}
+
 		case "ChannelGroupName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6031,6 +6036,87 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCdnAuthConfiguration(v **types.CdnAuthConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CdnAuthConfiguration
+	if *v == nil {
+		sv = &types.CdnAuthConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CdnIdentifierSecretArns":
+			if err := awsRestjson1_deserializeDocumentCdnIdentifierSecretArns(&sv.CdnIdentifierSecretArns, value); err != nil {
+				return err
+			}
+
+		case "SecretsRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SecretsRoleArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCdnIdentifierSecretArns(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected CdnIdentifierSecretArn to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

@@ -10183,9 +10183,7 @@ func validateOpCreateTableInput(v *CreateTableInput) error {
 	if v.DatabaseName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
 	}
-	if v.TableInput == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TableInput"))
-	} else if v.TableInput != nil {
+	if v.TableInput != nil {
 		if err := validateTableInput(v.TableInput); err != nil {
 			invalidParams.AddNested("TableInput", err.(smithy.InvalidParamsError))
 		}

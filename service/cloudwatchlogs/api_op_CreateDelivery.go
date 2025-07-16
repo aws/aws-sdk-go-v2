@@ -19,7 +19,7 @@ import (
 // Permissions] in the table at [Enabling logging from Amazon Web Services services.]
 //
 // A delivery destination can represent a log group in CloudWatch Logs, an Amazon
-// S3 bucket, or a delivery stream in Firehose.
+// S3 bucket, a delivery stream in Firehose, or X-Ray.
 //
 // To configure logs delivery between a supported Amazon Web Services service and
 // a destination, you must do the following:

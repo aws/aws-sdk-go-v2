@@ -50,11 +50,9 @@ type ListLogGroupsInput struct {
 	// If you are using a monitoring account, set this to true to have the operation
 	// return log groups in the accounts listed in accountIdentifiers .
 	//
-	// If this parameter is set to true and accountIdentifiers
-	//
-	// contains a null value, the operation returns all log groups in the monitoring
-	// account and all log groups in all source accounts that are linked to the
-	// monitoring account.
+	// If this parameter is set to true and accountIdentifiers contains a null value,
+	// the operation returns all log groups in the monitoring account and all log
+	// groups in all source accounts that are linked to the monitoring account.
 	//
 	// The default for this parameter is false .
 	IncludeLinkedAccounts *bool

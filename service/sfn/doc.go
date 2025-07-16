@@ -5,27 +5,23 @@
 //
 // # Step Functions
 //
-// Step Functions coordinates the components of distributed applications and
-// microservices using visual workflows.
+// With Step Functions, you can create workflows, also called state machines, to
+// build distributed applications, automate processes, orchestrate microservices,
+// and create data and machine learning pipelines.
 //
-// You can use Step Functions to build applications from individual components,
-// each of which performs a discrete function, or task, allowing you to scale and
-// change applications quickly. Step Functions provides a console that helps
-// visualize the components of your application as a series of steps. Step
-// Functions automatically triggers and tracks each step, and retries steps when
-// there are errors, so your application executes predictably and in the right
-// order every time. Step Functions logs the state of each step, so you can quickly
-// diagnose and debug any issues.
+// Through the Step Functions API, you can create, list, update, and delete state
+// machines, activities, and other data types. You can start, stop, and redrive
+// your state machines. Your activity workers can send task success, heartbeat, and
+// failure responses.
 //
-// Step Functions manages operations and underlying infrastructure to ensure your
-// application is available at any scale. You can run tasks on Amazon Web Services,
-// your own servers, or any system that has access to Amazon Web Services. You can
-// access and use Step Functions using the console, the Amazon Web Services SDKs,
-// or an HTTP API. For more information about Step Functions, see the [Step Functions Developer Guide].
+// With API calls, you can also manage other aspects of your workflow, such as
+// tags, versions, and aliases.
+//
+// For more information about developing solutions with Step Functions, see the [Step Functions Developer Guide] .
 //
 // If you use the Step Functions API actions using Amazon Web Services SDK
 // integrations, make sure the API actions are in camel case and parameter names
-// are in Pascal case. For example, you could use Step Functions API action
+// are in Pascal case. For example, you might use Step Functions API action
 // startSyncExecution and specify its parameter as StateMachineArn .
 //
 // [Step Functions Developer Guide]: https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html

@@ -228,7 +228,6 @@ type EventNotificationResourceType string
 
 // Enum values for EventNotificationResourceType
 const (
-	EventNotificationResourceTypeFuotaTask       EventNotificationResourceType = "FuotaTask"
 	EventNotificationResourceTypeSidewalkAccount EventNotificationResourceType = "SidewalkAccount"
 	EventNotificationResourceTypeWirelessDevice  EventNotificationResourceType = "WirelessDevice"
 	EventNotificationResourceTypeWirelessGateway EventNotificationResourceType = "WirelessGateway"
@@ -241,7 +240,6 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (EventNotificationResourceType) Values() []EventNotificationResourceType {
 	return []EventNotificationResourceType{
-		"FuotaTask",
 		"SidewalkAccount",
 		"WirelessDevice",
 		"WirelessGateway",
@@ -391,7 +389,6 @@ type IdentifierType string
 const (
 	IdentifierTypePartnerAccountId  IdentifierType = "PartnerAccountId"
 	IdentifierTypeDevEui            IdentifierType = "DevEui"
-	IdentifierTypeFuotaTaskId       IdentifierType = "FuotaTaskId"
 	IdentifierTypeGatewayEui        IdentifierType = "GatewayEui"
 	IdentifierTypeWirelessDeviceId  IdentifierType = "WirelessDeviceId"
 	IdentifierTypeWirelessGatewayId IdentifierType = "WirelessGatewayId"
@@ -405,7 +402,6 @@ func (IdentifierType) Values() []IdentifierType {
 	return []IdentifierType{
 		"PartnerAccountId",
 		"DevEui",
-		"FuotaTaskId",
 		"GatewayEui",
 		"WirelessDeviceId",
 		"WirelessGatewayId",

@@ -50,7 +50,7 @@ import (
 // [All Task types]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-task-state.html#task-types
 // [Choice]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-choice-state.html
 // [Activity tasks]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-activities.html
-// [HTTP Task]: https://docs.aws.amazon.com/step-functions/latest/dg/connect-third-party-apis.html
+// [HTTP Task]: https://docs.aws.amazon.com/step-functions/latest/dg/call-https-apis.html
 // [input and output processing]: https://docs.aws.amazon.com/step-functions/latest/dg/test-state-isolation.html#test-state-input-output-dataflow
 // [Activity]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-activities.html
 // [Parallel]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-parallel-state.html
@@ -147,7 +147,7 @@ type TestStateOutput struct {
 	InspectionData *types.InspectionData
 
 	// The name of the next state to transition to. If you haven't defined a next
-	// state in your definition or if the execution of the state fails, this ﬁeld
+	// state in your definition or if the execution of the state fails, this field
 	// doesn't contain a value.
 	NextState *string
 

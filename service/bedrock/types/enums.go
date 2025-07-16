@@ -128,6 +128,27 @@ func (CustomizationType) Values() []CustomizationType {
 	}
 }
 
+type CustomModelDeploymentStatus string
+
+// Enum values for CustomModelDeploymentStatus
+const (
+	CustomModelDeploymentStatusCreating CustomModelDeploymentStatus = "Creating"
+	CustomModelDeploymentStatusActive   CustomModelDeploymentStatus = "Active"
+	CustomModelDeploymentStatusFailed   CustomModelDeploymentStatus = "Failed"
+)
+
+// Values returns all known values for CustomModelDeploymentStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CustomModelDeploymentStatus) Values() []CustomModelDeploymentStatus {
+	return []CustomModelDeploymentStatus{
+		"Creating",
+		"Active",
+		"Failed",
+	}
+}
+
 type EntitlementAvailability string
 
 // Enum values for EntitlementAvailability

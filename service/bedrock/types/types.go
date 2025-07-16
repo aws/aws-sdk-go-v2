@@ -261,6 +261,47 @@ type CustomMetricEvaluatorModelConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Contains summary information about a custom model deployment, including its
+// ARN, name, status, and associated custom model.
+type CustomModelDeploymentSummary struct {
+
+	// The date and time when the custom model deployment was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the custom model deployment.
+	//
+	// This member is required.
+	CustomModelDeploymentArn *string
+
+	// The name of the custom model deployment.
+	//
+	// This member is required.
+	CustomModelDeploymentName *string
+
+	// The Amazon Resource Name (ARN) of the custom model associated with this
+	// deployment.
+	//
+	// This member is required.
+	ModelArn *string
+
+	// The status of the custom model deployment. Possible values are CREATING , ACTIVE
+	// , and FAILED .
+	//
+	// This member is required.
+	Status CustomModelDeploymentStatus
+
+	// If the deployment status is FAILED , this field contains a message describing
+	// the failure reason.
+	FailureMessage *string
+
+	// The date and time when the custom model deployment was last modified.
+	LastUpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Summary information for a custom model.
 type CustomModelSummary struct {
 

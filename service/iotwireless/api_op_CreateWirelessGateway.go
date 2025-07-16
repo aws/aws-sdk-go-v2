@@ -60,6 +60,8 @@ type CreateWirelessGatewayInput struct {
 	Description *string
 
 	// The name of the new resource.
+	//
+	// The following special characters aren't accepted: <>^#~$
 	Name *string
 
 	// The tags to attach to the new wireless gateway. Tags are metadata that you can

@@ -52,10 +52,10 @@ type StartSyncExecutionInput struct {
 
 	// The string that contains the JSON input data for the execution, for example:
 	//
-	//     "input": "{\"first_name\" : \"test\"}"
+	//     "{\"first_name\" : \"Tim\"}"
 	//
 	// If you don't include any JSON input data, you still must include the two
-	// braces, for example: "input": "{}"
+	// braces, for example: "{}"
 	//
 	// Length constraints apply to the payload size, and are expressed as bytes in
 	// UTF-8 encoding.
@@ -66,6 +66,13 @@ type StartSyncExecutionInput struct {
 
 	// Passes the X-Ray trace header. The trace header can also be passed in the
 	// request payload.
+	//
+	// For X-Ray traces, all Amazon Web Services services use the X-Amzn-Trace-Id
+	// header from the HTTP request. Using the header is the preferred mechanism to
+	// identify a trace. StartExecution and StartSyncExecution API operations can also
+	// use traceHeader from the body of the request payload. If both sources are
+	// provided, Step Functions will use the header value (preferred) over the value in
+	// the request body.
 	TraceHeader *string
 
 	noSmithyDocumentSerde
@@ -128,6 +135,13 @@ type StartSyncExecutionOutput struct {
 	StateMachineArn *string
 
 	// The X-Ray trace header that was passed to the execution.
+	//
+	// For X-Ray traces, all Amazon Web Services services use the X-Amzn-Trace-Id
+	// header from the HTTP request. Using the header is the preferred mechanism to
+	// identify a trace. StartExecution and StartSyncExecution API operations can also
+	// use traceHeader from the body of the request payload. If both sources are
+	// provided, Step Functions will use the header value (preferred) over the value in
+	// the request body.
 	TraceHeader *string
 
 	// Metadata pertaining to the operation's result.

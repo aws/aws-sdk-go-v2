@@ -51,11 +51,9 @@ type DescribeLogGroupsInput struct {
 	// If you are using a monitoring account, set this to true to have the operation
 	// return log groups in the accounts listed in accountIdentifiers .
 	//
-	// If this parameter is set to true and accountIdentifiers
-	//
-	// contains a null value, the operation returns all log groups in the monitoring
-	// account and all log groups in all source accounts that are linked to the
-	// monitoring account.
+	// If this parameter is set to true and accountIdentifiers contains a null value,
+	// the operation returns all log groups in the monitoring account and all log
+	// groups in all source accounts that are linked to the monitoring account.
 	//
 	// The default for this parameter is false .
 	IncludeLinkedAccounts *bool
@@ -98,8 +96,9 @@ type DescribeLogGroupsInput struct {
 
 	// If you specify a string for this parameter, the operation returns only log
 	// groups that have names that match the string based on a case-sensitive substring
-	// search. For example, if you specify Foo , log groups named FooBar , aws/Foo ,
-	// and GroupFoo would match, but foo , F/o/o and Froo would not match.
+	// search. For example, if you specify DataLogs , log groups named DataLogs ,
+	// aws/DataLogs , and GroupDataLogs would match, but datalogs , Data/log/s and
+	// Groupdata would not match.
 	//
 	// If you specify logGroupNamePattern in your request, then only arn , creationTime
 	// , and logGroupName are included in the response.

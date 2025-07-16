@@ -86,6 +86,18 @@ func TestCheckSnapshot_CreateCustomModel(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateCustomModelDeployment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCustomModelDeployment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateCustomModelDeployment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateEvaluationJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateEvaluationJob(context.Background(), nil, func(o *Options) {
@@ -242,6 +254,18 @@ func TestCheckSnapshot_DeleteCustomModel(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteCustomModelDeployment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCustomModelDeployment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteCustomModelDeployment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteFoundationModelAgreement(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteFoundationModelAgreement(context.Background(), nil, func(o *Options) {
@@ -355,6 +379,18 @@ func TestCheckSnapshot_GetCustomModel(t *testing.T) {
 	_, err := svc.GetCustomModel(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetCustomModel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetCustomModelDeployment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCustomModelDeployment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCustomModelDeployment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -535,6 +571,18 @@ func TestCheckSnapshot_GetUseCaseForModelAccess(t *testing.T) {
 	_, err := svc.GetUseCaseForModelAccess(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetUseCaseForModelAccess")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListCustomModelDeployments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCustomModelDeployments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCustomModelDeployments")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -877,6 +925,18 @@ func TestUpdateSnapshot_CreateCustomModel(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateCustomModelDeployment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCustomModelDeployment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateCustomModelDeployment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateEvaluationJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateEvaluationJob(context.Background(), nil, func(o *Options) {
@@ -1033,6 +1093,18 @@ func TestUpdateSnapshot_DeleteCustomModel(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteCustomModelDeployment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCustomModelDeployment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteCustomModelDeployment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteFoundationModelAgreement(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteFoundationModelAgreement(context.Background(), nil, func(o *Options) {
@@ -1146,6 +1218,18 @@ func TestUpdateSnapshot_GetCustomModel(t *testing.T) {
 	_, err := svc.GetCustomModel(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetCustomModel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetCustomModelDeployment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCustomModelDeployment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCustomModelDeployment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1326,6 +1410,18 @@ func TestUpdateSnapshot_GetUseCaseForModelAccess(t *testing.T) {
 	_, err := svc.GetUseCaseForModelAccess(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetUseCaseForModelAccess")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCustomModelDeployments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCustomModelDeployments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCustomModelDeployments")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

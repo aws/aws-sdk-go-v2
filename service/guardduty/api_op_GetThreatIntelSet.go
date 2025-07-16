@@ -71,6 +71,11 @@ type GetThreatIntelSetOutput struct {
 	// This member is required.
 	Status types.ThreatIntelSetStatus
 
+	// The Amazon Web Services account ID that owns the Amazon S3 bucket specified in
+	// the location parameter. This field appears in the response only if it was
+	// provided during ThreatIntelSet creation or update.
+	ExpectedBucketOwner *string
+
 	// The tags of the threat list resource.
 	Tags map[string]string
 

@@ -51,9 +51,9 @@ type UpdateLocationSmbInput struct {
 	// [Providing DataSync access to SMB file servers]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions
 	AuthenticationType types.SmbAuthenticationType
 
-	// Specifies the IPv4 addresses for the DNS servers that your SMB file server
-	// belongs to. This parameter applies only if AuthenticationType is set to KERBEROS
-	// .
+	// Specifies the IP addresses (IPv4 or IPv6) for the DNS servers that your SMB
+	// file server belongs to. This parameter applies only if AuthenticationType is
+	// set to KERBEROS .
 	//
 	// If you have multiple domains in your environment, configuring this parameter
 	// makes sure that DataSync connects to the right SMB file server.
@@ -101,14 +101,10 @@ type UpdateLocationSmbInput struct {
 	// parameter applies only if AuthenticationType is set to NTLM .
 	Password *string
 
-	// Specifies the domain name or IP address of the SMB file server that your
-	// DataSync agent connects to.
+	// Specifies the domain name or IP address (IPv4 or IPv6) of the SMB file server
+	// that your DataSync agent connects to.
 	//
-	// Remember the following when configuring this parameter:
-	//
-	//   - You can't specify an IP version 6 (IPv6) address.
-	//
-	//   - If you're using Kerberos authentication, you must specify a domain name.
+	// If you're using Kerberos authentication, you must specify a domain name.
 	ServerHostname *string
 
 	// Specifies the name of the share exported by your SMB file server where DataSync

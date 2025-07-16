@@ -89,7 +89,7 @@ type DescribeStateMachineForExecutionOutput struct {
 	EncryptionConfiguration *types.EncryptionConfiguration
 
 	// A user-defined or an auto-generated string that identifies a Map state. This
-	// ﬁeld is returned only if the executionArn is a child workflow execution that
+	// field is returned only if the executionArn is a child workflow execution that
 	// was started by a Distributed Map state.
 	Label *string
 

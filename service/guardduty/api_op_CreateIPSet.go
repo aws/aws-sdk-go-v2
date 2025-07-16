@@ -70,6 +70,10 @@ type CreateIPSetInput struct {
 	// The idempotency token for the create request.
 	ClientToken *string
 
+	// The Amazon Web Services account ID that owns the Amazon S3 bucket specified in
+	// the location parameter.
+	ExpectedBucketOwner *string
+
 	// The tags to be added to a new IP set resource.
 	Tags map[string]string
 

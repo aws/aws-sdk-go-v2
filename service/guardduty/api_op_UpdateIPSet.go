@@ -47,6 +47,10 @@ type UpdateIPSetInput struct {
 	// The updated Boolean value that specifies whether the IPSet is active or not.
 	Activate *bool
 
+	// The Amazon Web Services account ID that owns the Amazon S3 bucket specified in
+	// the location parameter.
+	ExpectedBucketOwner *string
+
 	// The updated URI of the file that contains the IPSet.
 	Location *string
 
