@@ -3,7 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/ecs/document"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -20,16 +19,18 @@ type AdvancedConfiguration struct {
 	// blue/green deployments.
 	AlternateTargetGroupArn *string
 
-	// The Amazon Resource Name (ARN) that identifies the production listener rule for
-	// routing production traffic.
+	// The Amazon Resource Name (ARN) that that identifies the production listener
+	// rule (in the case of an Application Load Balancer) or listener (in the case for
+	// an Network Load Balancer) for routing production traffic.
 	ProductionListenerRule *string
 
 	// The Amazon Resource Name (ARN) of the IAM role that grants Amazon ECS
 	// permission to call the Elastic Load Balancing APIs for you.
 	RoleArn *string
 
-	// The Amazon Resource Name (ARN) that identifies the test listener rule or
-	// listener for routing test traffic.
+	// The Amazon Resource Name (ARN) that identifies ) that identifies the test
+	// listener rule (in the case of an Application Load Balancer) or listener (in the
+	// case for an Network Load Balancer) for routing test traffic.
 	TestListenerRule *string
 
 	noSmithyDocumentSerde
@@ -1811,7 +1812,7 @@ type Deployment struct {
 // to the last completed deployment after a failure.
 //
 // You can only use the DeploymentAlarms method to detect failures when the
-// DeploymentController is set to ECS (rolling update).
+// DeploymentController is set to ECS .
 //
 // For more information, see [Rolling update] in the Amazon Elastic Container Service Developer
 // Guide .
@@ -1879,7 +1880,7 @@ type DeploymentConfiguration struct {
 	// Information about the CloudWatch alarms.
 	Alarms *DeploymentAlarms
 
-	// The duration when both blue and green service revisions are running
+	// The time period when both blue and green service revisions are running
 	// simultaneously after the production traffic has shifted.
 	//
 	// You must provide this parameter when you use the BLUE_GREEN deployment strategy.
@@ -1900,8 +1901,7 @@ type DeploymentConfiguration struct {
 	DeploymentCircuitBreaker *DeploymentCircuitBreaker
 
 	// An array of deployment lifecycle hook objects to run custom logic at specific
-	// stages of the deployment lifecycle. These hooks allow you to run custom logic at
-	// key points during the deployment process.
+	// stages of the deployment lifecycle.
 	LifecycleHooks []DeploymentLifecycleHook
 
 	// If a service is using the rolling update ( ECS ) deployment type, the
@@ -2130,11 +2130,12 @@ type DeploymentEphemeralStorage struct {
 
 // A deployment lifecycle hook runs custom logic at specific stages of the
 // deployment process. Currently, you can use Lambda functions as hook targets.
+//
+// For more information, see [Lifecycle hooks for Amazon ECS service deployments] in the Amazon Elastic Container Service Developer
+// Guide.
+//
+// [Lifecycle hooks for Amazon ECS service deployments]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-lifecycle-hooks.html
 type DeploymentLifecycleHook struct {
-
-	// Optionally provide details about the hook. Use this field to pass custom
-	// parameters to your hook target (such as a Lambda function).
-	HookDetails document.Interface
 
 	// The Amazon Resource Name (ARN) of the hook target. Currently, only Lambda
 	// function ARNs are supported.
@@ -2146,8 +2147,8 @@ type DeploymentLifecycleHook struct {
 	//
 	//   - RECONCILE_SERVICE
 	//
-	// This stage only happens when you start a new service deployment with more than
-	//   1 service revision in an ACTIVE state.
+	// The reconciliation stage that only happens when you start a new service
+	//   deployment with more than 1 service revision in an ACTIVE state.
 	//
 	// You can use a lifecycle hook for this stage.
 	//
@@ -2157,13 +2158,6 @@ type DeploymentLifecycleHook struct {
 	//   handling 100% of the production traffic. There is no test traffic.
 	//
 	// You can use a lifecycle hook for this stage.
-	//
-	//   - SCALE_UP
-	//
-	// The time when the green service revision scales up to 100% and launches new
-	//   tasks. The green service revision is not serving any traffic at this point.
-	//
-	// You can't use a lifecycle hook for this stage.
 	//
 	//   - POST_SCALE_UP
 	//
@@ -2198,21 +2192,7 @@ type DeploymentLifecycleHook struct {
 	//
 	// The production traffic shift is complete.
 	//
-	// Yes
-	//
-	//   - BAKE_TIME
-	//
-	// The duration when both blue and green service revisions are running
-	//   simultaneously.
-	//
-	// You can't use a lifecycle hook for this stage.
-	//
-	//   - CLEAN_UP
-	//
-	// The blue service revision has completely scaled down to 0 running tasks. The
-	//   green service revision is now the production service revision after this stage.
-	//
-	// You can't use a lifecycle hook for this stage.
+	// You can use a lifecycle hook for this stage.
 	//
 	// You must provide this parameter when configuring a deployment lifecycle hook.
 	LifecycleStages []DeploymentLifecycleHookStage
@@ -4552,6 +4532,11 @@ type ServiceConnectTestTrafficHeaderMatchRules struct {
 // The HTTP header rules used to identify and route test traffic during Amazon ECS
 // blue/green deployments. These rules specify which HTTP headers to examine and
 // what values to match for routing decisions.
+//
+// For more information, see [Service Connect for Amazon ECS blue/green deployments] in the Amazon Elastic Container Service Developer
+// Guide.
+//
+// [Service Connect for Amazon ECS blue/green deployments]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect-blue-green.html
 type ServiceConnectTestTrafficHeaderRules struct {
 
 	// The name of the HTTP header to examine for test traffic routing. Common
@@ -4572,6 +4557,11 @@ type ServiceConnectTestTrafficHeaderRules struct {
 // This configuration allows you to define rules for routing specific traffic to
 // the new service revision during the deployment process, allowing for safe
 // testing before full production traffic shift.
+//
+// For more information, see [Service Connect for Amazon ECS blue/green deployments] in the Amazon Elastic Container Service Developer
+// Guide.
+//
+// [Service Connect for Amazon ECS blue/green deployments]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect-blue-green.html
 type ServiceConnectTestTrafficRules struct {
 
 	// The HTTP header-based routing rules that determine which requests should be
@@ -4644,18 +4634,56 @@ type ServiceDeployment struct {
 
 	// The current lifecycle stage of the deployment. Possible values include:
 	//
-	//   - SCALE_UP_IN_PROGRESS - Creating the new (green) tasks
+	//   - RECONCILE_SERVICE
 	//
-	//   - TEST_TRAFFIC_SHIFT_IN_PROGRESS - Shifting test traffic to the new (green)
-	//   tasks
+	// The reconciliation stage that only happens when you start a new service
+	//   deployment with more than 1 service revision in an ACTIVE state.
 	//
-	//   - PRODUCTION_TRAFFIC_SHIFT_IN_PROGRESS - Shifting production traffic to the
-	//   new (green) tasks
+	//   - PRE_SCALE_UP
 	//
-	//   - BAKE_TIME_IN_PROGRESS - The duration when both blue and green service
-	//   revisions are running simultaneously after the production traffic has shifted
+	// The green service revision has not started. The blue service revision is
+	//   handling 100% of the production traffic. There is no test traffic.
 	//
-	//   - CLEAN_UP_IN_PROGRESS - Stopping the old (blue) tasks
+	//   - SCALE_UP
+	//
+	// The stage when the green service revision scales up to 100% and launches new
+	//   tasks. The green service revision is not serving any traffic at this point.
+	//
+	//   - POST_SCALE_UP
+	//
+	// The green service revision has started. The blue service revision is handling
+	//   100% of the production traffic. There is no test traffic.
+	//
+	//   - TEST_TRAFFIC_SHIFT
+	//
+	// The blue and green service revisions are running. The blue service revision
+	//   handles 100% of the production traffic. The green service revision is migrating
+	//   from 0% to 100% of test traffic.
+	//
+	//   - POST_TEST_TRAFFIC_SHIFT
+	//
+	// The test traffic shift is complete. The green service revision handles 100% of
+	//   the test traffic.
+	//
+	//   - PRODUCTION_TRAFFIC_SHIFT
+	//
+	// Production traffic is shifting to the green service revision. The green service
+	//   revision is migrating from 0% to 100% of production traffic.
+	//
+	//   - POST_PRODUCTION_TRAFFIC_SHIFT
+	//
+	// The production traffic shift is complete.
+	//
+	//   - BAKE_TIME
+	//
+	// The stage when both blue and green service revisions are running simultaneously
+	//   after the production traffic has shifted.
+	//
+	//   - CLEAN_UP
+	//
+	// The stage when the blue service revision has completely scaled down to 0
+	//   running tasks. The green service revision is now the production service revision
+	//   after this stage.
 	LifecycleStage ServiceDeploymentLifecycleStage
 
 	// The rollback options the service deployment uses when the deployment fails.

@@ -62,7 +62,8 @@ import (
 //
 // When you create a service which uses the ECS deployment controller, you can
 //
-//	choose between the following deployment strategies:
+//	choose between the following deployment strategies (which you can set in the “
+//	strategy ” field in “ deploymentConfiguration ”): :
 //
 //	- ROLLING : When you create a service which uses the rolling update ( ROLLING
 //	) deployment strategy, the Amazon ECS service scheduler replaces the currently
