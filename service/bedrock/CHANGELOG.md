@@ -1,3 +1,7 @@
+# v1.39.0 (2025-07-16.2)
+
+* **Feature**: This release adds support for on-demand custom model inference through CustomModelDeployment APIs for Amazon Bedrock.
+
 # v1.38.0 (2025-06-30)
 
 * **Feature**: Add support for API Keys, Re-Ranker, implicit filter for RAG / KB evaluation for Bedrock APIs.

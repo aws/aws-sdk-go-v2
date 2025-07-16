@@ -1,8 +1,0 @@
-{
-    "id": "2041cd03-0e28-4abd-8d8c-82eb32446579",
-    "type": "feature",
-    "description": "Add expectedBucketOwner parameter to ThreatIntel and IPSet APIs.",
-    "modules": [
-        "service/guardduty"
-    ]
-}

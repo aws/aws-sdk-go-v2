@@ -43,7 +43,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.37.7
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.42.1
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.27.5
-	github.com/aws/aws-sdk-go-v2/service/glue v1.117.0
+	github.com/aws/aws-sdk-go-v2/service/glue v1.118.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.30.4
 	github.com/aws/aws-sdk-go-v2/service/iam v1.43.0
 	github.com/aws/aws-sdk-go-v2/service/iot v1.64.4
@@ -66,7 +66,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.35.7
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.34.2
 	github.com/aws/aws-sdk-go-v2/service/ses v1.30.5
-	github.com/aws/aws-sdk-go-v2/service/sfn v1.35.7
+	github.com/aws/aws-sdk-go-v2/service/sfn v1.35.8
 	github.com/aws/aws-sdk-go-v2/service/shield v1.30.4
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.31.5
 	github.com/aws/aws-sdk-go-v2/service/sns v1.34.7

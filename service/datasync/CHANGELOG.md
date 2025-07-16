@@ -1,3 +1,7 @@
+# v1.50.0 (2025-07-16.2)
+
+* **Feature**: AWS DataSync now supports IPv6 address inputs and outputs in create, update, and describe operations for NFS, SMB, and Object Storage locations
+
 # v1.49.3 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

@@ -1,8 +1,0 @@
-{
-    "id": "b657d1aa-4fe5-48ad-83c6-0102a10ad1ed",
-    "type": "feature",
-    "description": "This release adds support for CDN Authentication using Static Headers in MediaPackage v2.",
-    "modules": [
-        "service/mediapackagev2"
-    ]
-}

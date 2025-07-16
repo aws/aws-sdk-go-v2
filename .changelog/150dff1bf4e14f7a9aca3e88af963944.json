@@ -1,8 +1,0 @@
-{
-    "id": "150dff1b-f4e1-4f7a-9aca-3e88af963944",
-    "type": "feature",
-    "description": "AWS DataSync now supports IPv6 address inputs and outputs in create, update, and describe operations for NFS, SMB, and Object Storage locations",
-    "modules": [
-        "service/datasync"
-    ]
-}

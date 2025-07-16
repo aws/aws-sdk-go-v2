@@ -1,8 +1,0 @@
-{
-    "id": "772e4177-a15e-495b-b6c8-883a6ba819f7",
-    "type": "feature",
-    "description": "CloudWatch Logs updates: Added X-Ray tracing for Amazon Bedrock Agent resources. Logs introduced Log Group level resource policies (managed through Put/Delete/Describe Resource Policy APIs). For more information, see CloudWatch Logs API documentation.",
-    "modules": [
-        "service/cloudwatchlogs"
-    ]
-}

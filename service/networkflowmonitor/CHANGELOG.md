@@ -1,3 +1,7 @@
+# v1.4.0 (2025-07-16.2)
+
+* **Feature**: Introducing 2 new scope status types - DEACTIVATING and DEACTIVATED.
+
 # v1.3.0 (2025-06-30)
 
 * **Feature**: Add ConflictExceptions to UpdateScope and DeleteScope operations for scopes being mutated.

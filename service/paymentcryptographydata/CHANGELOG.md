@@ -1,3 +1,7 @@
+# v1.19.0 (2025-07-16.2)
+
+* **Feature**: Expand length of message data field for Mac generation and validation to 8192 characters.
+
 # v1.18.0 (2025-06-19)
 
 * **Feature**: Additional support for managing HMAC keys that adheres to changes documented in X9.143-2021 and provides better interoperability for key import/export

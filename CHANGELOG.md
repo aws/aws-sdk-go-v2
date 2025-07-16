@@ -1,3 +1,33 @@
+# Release (2025-07-16.2)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.39.0](service/bedrock/CHANGELOG.md#v1390-2025-07-162)
+  * **Feature**: This release adds support for on-demand custom model inference through CustomModelDeployment APIs for Amazon Bedrock.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.0.0](service/bedrockagentcore/CHANGELOG.md#v100-2025-07-162)
+  * **Release**: New AWS service client module
+  * **Feature**: Initial release of Amazon Bedrock AgentCore SDK including Runtime, Built-In Tools, Memory, Gateway and Identity.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.0.0](service/bedrockagentcorecontrol/CHANGELOG.md#v100-2025-07-162)
+  * **Release**: New AWS service client module
+  * **Feature**: Initial release of Amazon Bedrock AgentCore SDK including Runtime, Built-In Tools, Memory, Gateway and Identity.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.52.0](service/cloudwatchlogs/CHANGELOG.md#v1520-2025-07-162)
+  * **Feature**: CloudWatch Logs updates: Added X-Ray tracing for Amazon Bedrock Agent resources. Logs introduced Log Group level resource policies (managed through Put/Delete/Describe Resource Policy APIs). For more information, see CloudWatch Logs API documentation.
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.50.0](service/datasync/CHANGELOG.md#v1500-2025-07-162)
+  * **Feature**: AWS DataSync now supports IPv6 address inputs and outputs in create, update, and describe operations for NFS, SMB, and Object Storage locations
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.118.0](service/glue/CHANGELOG.md#v11180-2025-07-162)
+  * **Feature**: AWS Glue now supports schema, partition and sort management of Apache Iceberg tables using Glue SDK
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.57.0](service/guardduty/CHANGELOG.md#v1570-2025-07-162)
+  * **Feature**: Add expectedBucketOwner parameter to ThreatIntel and IPSet APIs.
+* `github.com/aws/aws-sdk-go-v2/service/iotwireless`: [v1.48.0](service/iotwireless/CHANGELOG.md#v1480-2025-07-162)
+  * **Feature**: FuotaTaskId is not a valid IdentifierType for EventConfiguration and is being removed from possible IdentifierType values.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.25.0](service/mediapackagev2/CHANGELOG.md#v1250-2025-07-162)
+  * **Feature**: This release adds support for CDN Authentication using Static Headers in MediaPackage v2.
+* `github.com/aws/aws-sdk-go-v2/service/networkflowmonitor`: [v1.4.0](service/networkflowmonitor/CHANGELOG.md#v140-2025-07-162)
+  * **Feature**: Introducing 2 new scope status types - DEACTIVATING and DEACTIVATED.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata`: [v1.19.0](service/paymentcryptographydata/CHANGELOG.md#v1190-2025-07-162)
+  * **Feature**: Expand length of message data field for Mac generation and validation to 8192 characters.
+* `github.com/aws/aws-sdk-go-v2/service/sfn`: [v1.35.8](service/sfn/CHANGELOG.md#v1358-2025-07-162)
+  * **Documentation**: Doc-only update to introduction, and edits to clarify input parameter and the set of control characters.
+
 # Release (2025-07-16)
 
 ## Module Highlights

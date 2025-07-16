@@ -1,8 +1,0 @@
-{
-    "id": "82b7f7fe-0892-4ae2-a00d-f21cd76cc07f",
-    "type": "feature",
-    "description": "FuotaTaskId is not a valid IdentifierType for EventConfiguration and is being removed from possible IdentifierType values.",
-    "modules": [
-        "service/iotwireless"
-    ]
-}

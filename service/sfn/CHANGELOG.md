@@ -1,3 +1,7 @@
+# v1.35.8 (2025-07-16.2)
+
+* **Documentation**: Doc-only update to introduction, and edits to clarify input parameter and the set of control characters.
+
 # v1.35.7 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

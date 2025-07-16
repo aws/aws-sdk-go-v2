@@ -1,8 +1,0 @@
-{
-    "id": "755af763-4b1c-42fb-8715-ce38afc38e65",
-    "type": "feature",
-    "description": "Expand length of message data field for Mac generation and validation to 8192 characters.",
-    "modules": [
-        "service/paymentcryptographydata"
-    ]
-}

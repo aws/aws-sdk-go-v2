@@ -1,8 +1,0 @@
-{
-    "id": "9811e352-eec5-4fac-8810-0271f72c49a0",
-    "type": "feature",
-    "description": "Introducing 2 new scope status types - DEACTIVATING and DEACTIVATED.",
-    "modules": [
-        "service/networkflowmonitor"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "ab61b033-1602-45c1-b10e-59d73e2f354a",
-    "type": "feature",
-    "description": "document update to support on demand custom model.",
-    "modules": [
-        "service/bedrockruntime"
-    ]
-}

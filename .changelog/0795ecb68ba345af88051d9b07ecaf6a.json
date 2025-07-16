@@ -1,8 +1,0 @@
-{
-    "id": "0795ecb6-8ba3-45af-8805-1d9b07ecaf6a",
-    "type": "feature",
-    "description": "Initial release of Amazon Bedrock AgentCore SDK including Runtime, Built-In Tools, Memory, Gateway and Identity.",
-    "modules": [
-        "service/bedrockagentcore"
-    ]
-}

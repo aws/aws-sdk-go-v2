@@ -1,3 +1,7 @@
+# v1.48.0 (2025-07-16.2)
+
+* **Feature**: FuotaTaskId is not a valid IdentifierType for EventConfiguration and is being removed from possible IdentifierType values.
+
 # v1.47.3 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

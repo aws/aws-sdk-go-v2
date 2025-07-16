@@ -1,8 +1,0 @@
-{
-    "id": "7ad9fa0b-421b-4e3a-b319-ed58e3a5c479",
-    "type": "documentation",
-    "description": "Doc-only update to introduction, and edits to clarify input parameter and the set of control characters.",
-    "modules": [
-        "service/sfn"
-    ]
-}

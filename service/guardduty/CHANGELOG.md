@@ -1,3 +1,7 @@
+# v1.57.0 (2025-07-16.2)
+
+* **Feature**: Add expectedBucketOwner parameter to ThreatIntel and IPSet APIs.
+
 # v1.56.0 (2025-06-27)
 
 * **Feature**: Update JSON target for Kubernetes workload resource type.
