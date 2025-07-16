@@ -1,8 +1,0 @@
-{
-    "id": "a9a0b52d-e40c-487b-a967-a150dd38d0a0",
-    "type": "feature",
-    "description": "This release removes hookDetails for the Amazon ECS native blue/green deployments.",
-    "modules": [
-        "service/ecs"
-    ]
-}

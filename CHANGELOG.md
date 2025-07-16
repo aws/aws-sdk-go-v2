@@ -1,3 +1,9 @@
+# Release (2025-07-16)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.60.0](service/ecs/CHANGELOG.md#v1600-2025-07-16)
+  * **Feature**: This release removes hookDetails for the Amazon ECS native blue/green deployments.
+
 # Release (2025-07-15)
 
 ## General Highlights
