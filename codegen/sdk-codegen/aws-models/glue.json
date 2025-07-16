@@ -12063,8 +12063,7 @@
                 "TableInput": {
                     "target": "com.amazonaws.glue#TableInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>TableInput</code> object that defines the metadata table\n      to create in the catalog.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The <code>TableInput</code> object that defines the metadata table\n      to create in the catalog.</p>"
                     }
                 },
                 "PartitionIndexes": {

@@ -1479,7 +1479,7 @@
                 "Name": {
                     "target": "com.amazonaws.iotwireless#DeviceProfileName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the new resource.</p>"
+                        "smithy.api#documentation": "<p>The name of the new resource.</p>\n         <note>\n            <p>The following special characters aren't accepted: <code><>^#~$</code>\n            </p>\n         </note>"
                     }
                 },
                 "LoRaWAN": {
@@ -1858,7 +1858,7 @@
                 "Name": {
                     "target": "com.amazonaws.iotwireless#ServiceProfileName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the new resource.</p>"
+                        "smithy.api#documentation": "<p>The name of the new resource.</p>\n         <note>\n            <p>The following special characters aren't accepted: <code><>^#~$</code>\n            </p>\n         </note>"
                     }
                 },
                 "LoRaWAN": {
@@ -1955,7 +1955,7 @@
                 "Name": {
                     "target": "com.amazonaws.iotwireless#WirelessDeviceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the new resource.</p>"
+                        "smithy.api#documentation": "<p>The name of the new resource.</p>\n         <note>\n            <p>The following special characters aren't accepted: <code><>^#~$</code>\n            </p>\n         </note>"
                     }
                 },
                 "Description": {
@@ -2067,7 +2067,7 @@
                 "Name": {
                     "target": "com.amazonaws.iotwireless#WirelessGatewayName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the new resource.</p>"
+                        "smithy.api#documentation": "<p>The name of the new resource.</p>\n         <note>\n            <p>The following special characters aren't accepted: <code><>^#~$</code>\n            </p>\n         </note>"
                     }
                 },
                 "Description": {
@@ -4232,12 +4232,6 @@
         "com.amazonaws.iotwireless#EventNotificationResourceType": {
             "type": "enum",
             "members": {
-                "FuotaTask": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "FuotaTask"
-                    }
-                },
                 "SidewalkAccount": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -7403,12 +7397,6 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DevEui"
-                    }
-                },
-                "FuotaTaskId": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "FuotaTaskId"
                     }
                 },
                 "GatewayEui": {
@@ -12238,7 +12226,7 @@
         "com.amazonaws.iotwireless#SessionTimeout": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "<p>How long before a multicast group session is to timeout.</p>",
+                "smithy.api#documentation": "<p>How long before a multicast group session is to timeout.</p>\n         <note>\n            <p>We recommend that you provide a timeout value that is a power-of-two (such as 64,\n                128, 256). If a non-power-of-two value is provided, it will automatically be rounded\n                up to the next supported power-of-two within the allowed range.</p>\n         </note>",
                 "smithy.api#range": {
                     "min": 60,
                     "max": 172800
@@ -15013,7 +15001,7 @@
                 "Name": {
                     "target": "com.amazonaws.iotwireless#WirelessDeviceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new name of the resource.</p>"
+                        "smithy.api#documentation": "<p>The new name of the resource.</p>\n         <note>\n            <p>The following special characters aren't accepted: <code><>^#~$</code>\n            </p>\n         </note>"
                     }
                 },
                 "Description": {
@@ -15094,7 +15082,7 @@
                 "Name": {
                     "target": "com.amazonaws.iotwireless#WirelessGatewayName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new name of the resource.</p>"
+                        "smithy.api#documentation": "<p>The new name of the resource.</p>\n         <note>\n            <p>The following special characters aren't accepted: <code><>^#~$</code>\n            </p>\n         </note>"
                     }
                 },
                 "Description": {
@@ -16438,7 +16426,7 @@
                     "name": "iotwireless"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>AWS IoT Wireless provides bi-directional communication between internet-connected\n            wireless devices and the AWS Cloud. To onboard both LoRaWAN and Sidewalk devices to AWS\n            IoT, use the IoT Wireless API. These wireless devices use the Low Power Wide Area\n            Networking (LPWAN) communication protocol to communicate with AWS IoT. </p>\n         <p>Using the API, you can perform create, read, update, and delete operations for your\n            wireless devices, gateways, destinations, and profiles. After onboarding your devices,\n            you can use the API operations to set log levels and monitor your devices with\n            CloudWatch.</p>\n         <p>You can also use the API operations to create multicast groups and schedule a\n            multicast session for sending a downlink message to devices in the group. By using\n            Firmware Updates Over-The-Air (FUOTA) API operations, you can create a FUOTA task and\n            schedule a session to update the firmware of individual devices or an entire group of\n            devices in a multicast group.</p>\n         <p>To connect to the AWS IoT Wireless Service, use the Service endpoints as described in\n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/iot-lorawan.html#iot-wireless_region\">IoT \n            Wireless Service endpoints</a>. You can use both IPv4 and IPv6 protocols to connect\n            to the endpoints and send requests to the AWS IoT Wireless service. For more information,\n            see <a href=\"https://docs.aws.amazon.com/iot-wireless/latest/developerguide/wireless-ipv6-access.html\">Using\n\t\t\tIPv6 with AWS IoT Wireless</a>.</p>",
+                "smithy.api#documentation": "<p>AWS IoT Wireless provides bi-directional communication between internet-connected\n            wireless devices and the AWS Cloud. To onboard both <a href=\"https://docs.aws.amazon.com/iot-wireless/latest/developerguide/iot-lorawan.html\">LoRaWAN</a> and <a href=\"https://docs.aws.amazon.com/iot-wireless/latest/developerguide/iot-sidewalk.html\">Sidewalk</a> devices to AWS IoT, use the IoT Wireless API. These wireless\n            devices use the Low Power Wide Area Networking (LPWAN) communication protocol to\n            communicate with AWS IoT. </p>\n         <p>Using the API, you can perform create, read, update, and delete operations for your\n            wireless devices, gateways, destinations, and profiles. After onboarding your devices,\n            you can use the API operations to set log levels and monitor your devices with\n            CloudWatch.</p>\n         <p>You can also use the API operations to create multicast groups and schedule a\n            multicast session for sending a downlink message to devices in the group. By using\n            Firmware Updates Over-The-Air (FUOTA) API operations, you can create a FUOTA task and\n            schedule a session to update the firmware of individual devices or an entire group of\n            devices in a multicast group.</p>\n         <p>To connect to the AWS IoT Wireless Service, use the Service endpoints as described in\n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/iot-lorawan.html#iot-wireless_region\">IoT \n            Wireless Service endpoints</a>. You can use both IPv4 and IPv6 protocols to connect\n            to the endpoints and send requests to the AWS IoT Wireless service. For more information,\n            see <a href=\"https://docs.aws.amazon.com/iot-wireless/latest/developerguide/wireless-ipv6-access.html\">Using\n\t\t\tIPv6 with AWS IoT Wireless</a>.</p>",
                 "smithy.api#title": "AWS IoT Wireless",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",

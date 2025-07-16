@@ -128,6 +128,9 @@
                     "target": "com.amazonaws.bedrock#BedrockMarketplaceResource"
                 },
                 {
+                    "target": "com.amazonaws.bedrock#CustomModelDeploymentResource"
+                },
+                {
                     "target": "com.amazonaws.bedrock#CustomModelResource"
                 },
                 {
@@ -1447,10 +1450,108 @@
                     }
                 ],
                 "smithy.api#http": {
-                    "code": 200,
+                    "code": 202,
                     "method": "POST",
                     "uri": "/custom-models/create-custom-model"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrock#CreateCustomModelDeployment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#CreateCustomModelDeploymentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#CreateCustomModelDeploymentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#TooManyTagsException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
                 }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deploys a custom model for on-demand inference in Amazon Bedrock. After you deploy your custom model, you use the deployment's Amazon Resource Name (ARN) as the <code>modelId</code> parameter when you submit prompts and generate responses with model inference.</p> <p> For more information about setting up on-demand inference for custom models, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html\">Set up inference for a custom model</a>. </p> <p>The following actions are related to the <code>CreateCustomModelDeployment</code> operation:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetCustomModelDeployment.html\">GetCustomModelDeployment</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListCustomModelDeployments.html\">ListCustomModelDeployments</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_DeleteCustomModelDeployment.html\">DeleteCustomModelDeployment</a> </p> </li> </ul>",
+                "smithy.api#http": {
+                    "code": 202,
+                    "method": "POST",
+                    "uri": "/model-customization/custom-model-deployments"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrock#CreateCustomModelDeploymentRequest": {
+            "type": "structure",
+            "members": {
+                "modelDeploymentName": {
+                    "target": "com.amazonaws.bedrock#ModelDeploymentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the custom model deployment. The name must be unique within your Amazon Web Services account and Region.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "modelArn": {
+                    "target": "com.amazonaws.bedrock#CustomModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the custom model to deploy for on-demand inference. The custom model must be in the <code>Active</code> state.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrock#CustomModelDeploymentDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description for the custom model deployment to help you identify its purpose.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.bedrock#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags to assign to the custom model deployment. You can use tags to organize and track your Amazon Web Services resources for cost allocation and management purposes.</p>"
+                    }
+                },
+                "clientRequestToken": {
+                    "target": "com.amazonaws.bedrock#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#CreateCustomModelDeploymentResponse": {
+            "type": "structure",
+            "members": {
+                "customModelDeploymentArn": {
+                    "target": "com.amazonaws.bedrock#CustomModelDeploymentArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the custom model deployment. Use this ARN as the <code>modelId</code> parameter when invoking the model with the <code>InvokeModel</code> or <code>Converse</code> operations.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.bedrock#CreateCustomModelRequest": {
@@ -2997,6 +3098,136 @@
                 "smithy.api#pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:custom-model/(imported|[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2})/[a-z0-9]{12}$"
             }
         },
+        "com.amazonaws.bedrock#CustomModelDeploymentArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 1011
+                },
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:custom-model-deployment/[a-z0-9]{12}$"
+            }
+        },
+        "com.amazonaws.bedrock#CustomModelDeploymentDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^.*$"
+            }
+        },
+        "com.amazonaws.bedrock#CustomModelDeploymentIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 93
+                },
+                "smithy.api#pattern": "^(arn:aws(|-us-gov|-cn|-iso|-iso-b):bedrock:[a-z0-9-]{1,20}:[0-9]{12}:custom-model-deployment/[a-z0-9]{12})|^([0-9a-zA-Z][_-]?){1,63}$"
+            }
+        },
+        "com.amazonaws.bedrock#CustomModelDeploymentResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.bedrock#CreateCustomModelDeployment"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#DeleteCustomModelDeployment"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#GetCustomModelDeployment"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ListCustomModelDeployments"
+                }
+            ]
+        },
+        "com.amazonaws.bedrock#CustomModelDeploymentStatus": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Creating"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Active"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrock#CustomModelDeploymentSummary": {
+            "type": "structure",
+            "members": {
+                "customModelDeploymentArn": {
+                    "target": "com.amazonaws.bedrock#CustomModelDeploymentArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the custom model deployment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "customModelDeploymentName": {
+                    "target": "com.amazonaws.bedrock#ModelDeploymentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the custom model deployment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "modelArn": {
+                    "target": "com.amazonaws.bedrock#ModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the custom model associated with this deployment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the custom model deployment was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrock#CustomModelDeploymentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the custom model deployment. Possible values are <code>CREATING</code>, <code>ACTIVE</code>, and <code>FAILED</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastUpdatedAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the custom model deployment was last modified.</p>"
+                    }
+                },
+                "failureMessage": {
+                    "target": "com.amazonaws.bedrock#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the deployment status is <code>FAILED</code>, this field contains a message describing the failure reason.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains summary information about a custom model deployment, including its ARN, name, status, and associated custom model.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#CustomModelDeploymentSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#CustomModelDeploymentSummary"
+            }
+        },
         "com.amazonaws.bedrock#CustomModelName": {
             "type": "string",
             "traits": {
@@ -3222,6 +3453,67 @@
                     "uri": "/custom-models/{modelIdentifier}"
                 },
                 "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrock#DeleteCustomModelDeployment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#DeleteCustomModelDeploymentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#DeleteCustomModelDeploymentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a custom model deployment. This operation stops the deployment and removes it from your account. After deletion, the deployment ARN can no longer be used for inference requests.</p> <p>The following actions are related to the <code>DeleteCustomModelDeployment</code> operation:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateCustomModelDeployment.html\">CreateCustomModelDeployment</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetCustomModelDeployment.html\">GetCustomModelDeployment</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListCustomModelDeployments.html\">ListCustomModelDeployments</a> </p> </li> </ul>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/model-customization/custom-model-deployments/{customModelDeploymentIdentifier}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrock#DeleteCustomModelDeploymentRequest": {
+            "type": "structure",
+            "members": {
+                "customModelDeploymentIdentifier": {
+                    "target": "com.amazonaws.bedrock#CustomModelDeploymentIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) or name of the custom model deployment to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#DeleteCustomModelDeploymentResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.bedrock#DeleteCustomModelRequest": {
@@ -5136,6 +5428,118 @@
                     "uri": "/custom-models/{modelIdentifier}"
                 },
                 "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetCustomModelDeployment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#GetCustomModelDeploymentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#GetCustomModelDeploymentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information about a custom model deployment, including its status, configuration, and metadata. Use this operation to monitor the deployment status and retrieve details needed for inference requests.</p> <p>The following actions are related to the <code>GetCustomModelDeployment</code> operation:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateCustomModelDeployment.html\">CreateCustomModelDeployment</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListCustomModelDeployments.html\">ListCustomModelDeployments</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_DeleteCustomModelDeployment.html\">DeleteCustomModelDeployment</a> </p> </li> </ul>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/model-customization/custom-model-deployments/{customModelDeploymentIdentifier}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetCustomModelDeploymentRequest": {
+            "type": "structure",
+            "members": {
+                "customModelDeploymentIdentifier": {
+                    "target": "com.amazonaws.bedrock#CustomModelDeploymentIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) or name of the custom model deployment to retrieve information about.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetCustomModelDeploymentResponse": {
+            "type": "structure",
+            "members": {
+                "customModelDeploymentArn": {
+                    "target": "com.amazonaws.bedrock#CustomModelDeploymentArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the custom model deployment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "modelDeploymentName": {
+                    "target": "com.amazonaws.bedrock#ModelDeploymentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the custom model deployment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "modelArn": {
+                    "target": "com.amazonaws.bedrock#CustomModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the custom model associated with this deployment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the custom model deployment was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrock#CustomModelDeploymentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the custom model deployment. Possible values are:</p> <ul> <li> <p> <code>CREATING</code> - The deployment is being set up and prepared for inference.</p> </li> <li> <p> <code>ACTIVE</code> - The deployment is ready and available for inference requests.</p> </li> <li> <p> <code>FAILED</code> - The deployment failed to be created or became unavailable.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrock#CustomModelDeploymentDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the custom model deployment.</p>"
+                    }
+                },
+                "failureMessage": {
+                    "target": "com.amazonaws.bedrock#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the deployment status is <code>FAILED</code>, this field contains a message describing the failure reason.</p>"
+                    }
+                },
+                "lastUpdatedAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the custom model deployment was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.bedrock#GetCustomModelRequest": {
@@ -9863,6 +10267,135 @@
                 "smithy.api#documentation": "<p>The legal term of the agreement.</p>"
             }
         },
+        "com.amazonaws.bedrock#ListCustomModelDeployments": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#ListCustomModelDeploymentsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#ListCustomModelDeploymentsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists custom model deployments in your account. You can filter the results by creation time, name, status, and associated model. Use this operation to manage and monitor your custom model deployments.</p> <p>We recommend using pagination to ensure that the operation returns quickly and successfully.</p> <p>The following actions are related to the <code>ListCustomModelDeployments</code> operation:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateCustomModelDeployment.html\">CreateCustomModelDeployment</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetCustomModelDeployment.html\">GetCustomModelDeployment</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_DeleteCustomModelDeployment.html\">DeleteCustomModelDeployment</a> </p> </li> </ul>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/model-customization/custom-model-deployments"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "modelDeploymentSummaries"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrock#ListCustomModelDeploymentsRequest": {
+            "type": "structure",
+            "members": {
+                "createdBefore": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters deployments created before the specified date and time.</p>",
+                        "smithy.api#httpQuery": "createdBefore"
+                    }
+                },
+                "createdAfter": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters deployments created after the specified date and time.</p>",
+                        "smithy.api#httpQuery": "createdAfter"
+                    }
+                },
+                "nameContains": {
+                    "target": "com.amazonaws.bedrock#ModelDeploymentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters deployments whose names contain the specified string. </p>",
+                        "smithy.api#httpQuery": "nameContains"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.bedrock#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrock#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use this token to retrieve additional results when the response is truncated.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "sortBy": {
+                    "target": "com.amazonaws.bedrock#SortModelsBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field to sort the results by. The only supported value is <code>CreationTime</code>.</p>",
+                        "smithy.api#httpQuery": "sortBy"
+                    }
+                },
+                "sortOrder": {
+                    "target": "com.amazonaws.bedrock#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort order for the results. Valid values are <code>Ascending</code> and <code>Descending</code>. Default is <code>Descending</code>.</p>",
+                        "smithy.api#httpQuery": "sortOrder"
+                    }
+                },
+                "statusEquals": {
+                    "target": "com.amazonaws.bedrock#CustomModelDeploymentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters deployments by status. Valid values are <code>CREATING</code>, <code>ACTIVE</code>, and <code>FAILED</code>.</p>",
+                        "smithy.api#httpQuery": "statusEquals"
+                    }
+                },
+                "modelArnEquals": {
+                    "target": "com.amazonaws.bedrock#CustomModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters deployments by the Amazon Resource Name (ARN) of the associated custom model.</p>",
+                        "smithy.api#httpQuery": "modelArnEquals"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#ListCustomModelDeploymentsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.bedrock#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. This value is null when there are no more results to return.</p>"
+                    }
+                },
+                "modelDeploymentSummaries": {
+                    "target": "com.amazonaws.bedrock#CustomModelDeploymentSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of custom model deployment summaries.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrock#ListCustomModels": {
             "type": "operation",
             "input": {
@@ -12106,6 +12639,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The data source of the model to import.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#ModelDeploymentName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^([0-9a-zA-Z][_-]?){1,63}$"
             }
         },
         "com.amazonaws.bedrock#ModelId": {
@@ -14534,7 +15077,7 @@
                     "min": 20,
                     "max": 1011
                 },
-                "smithy.api#pattern": "(^[a-zA-Z0-9][a-zA-Z0-9\\-]*$)|(^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:custom-model/([a-z0-9-]{1,63}[.][a-z0-9-]{1,63}(([:][a-z0-9-]{1,63}){0,2})?|imported)/[a-z0-9]{12}$)|(^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:([0-9]{12}|)((:(fine-tuning-job|model-customization-job)/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2}(/[a-z0-9]{12})$)|(:guardrail/[a-z0-9]+$)|(:automated-reasoning-policy/[a-zA-Z0-9]+(:[a-zA-Z0-9]+)?$)|(:(inference-profile|application-inference-profile)/[a-zA-Z0-9-:.]+$)|(:(provisioned-model|model-invocation-job|model-evaluation-job|evaluation-job|model-import-job|imported-model|async-invoke|provisioned-model-v2|provisioned-model-reservation|prompt-router|custom-model-deployment)/[a-z0-9]{12}$)))"
+                "smithy.api#pattern": "(^[a-zA-Z0-9][a-zA-Z0-9\\-]*$)|(^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:custom-model/(imported)/[a-z0-9]{12}$)|(^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:([0-9]{12}|)((:(fine-tuning-job|model-customization-job|custom-model)/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2}(/[a-z0-9]{12})$)|(:guardrail/[a-z0-9]+$)|(:automated-reasoning-policy/[a-zA-Z0-9]+(:[a-zA-Z0-9]+)?$)|(:(inference-profile|application-inference-profile)/[a-zA-Z0-9-:.]+$)|(:(provisioned-model|model-invocation-job|model-evaluation-job|evaluation-job|model-import-job|imported-model|async-invoke|provisioned-model-v2|provisioned-model-reservation|prompt-router|custom-model-deployment)/[a-z0-9]{12}$)))"
             }
         },
         "com.amazonaws.bedrock#TaggingResource": {

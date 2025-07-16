@@ -2095,6 +2095,10 @@
                     {
                         "value": "HMAC",
                         "name": "HMAC"
+                    },
+                    {
+                        "value": "SHA_1",
+                        "name": "SHA_1"
                     }
                 ]
             }
@@ -2158,6 +2162,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "CMAC"
+                    }
+                },
+                "HMAC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HMAC"
                     }
                 },
                 "HMAC_SHA224": {
@@ -2375,7 +2385,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 2,
-                    "max": 4096
+                    "max": 8192
                 },
                 "smithy.api#pattern": "^(?:[0-9a-fA-F][0-9a-fA-F])+$",
                 "smithy.api#sensitive": {}

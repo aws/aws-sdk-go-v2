@@ -2277,6 +2277,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.guardduty#AccessDeniedException"
+                },
+                {
                     "target": "com.amazonaws.guardduty#BadRequestException"
                 },
                 {
@@ -2353,6 +2356,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags to be added to a new IP set resource.</p>",
                         "smithy.api#jsonName": "tags"
+                    }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.guardduty#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b> parameter.</p>",
+                        "smithy.api#jsonName": "expectedBucketOwner"
                     }
                 }
             },
@@ -2727,6 +2737,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.guardduty#AccessDeniedException"
+                },
+                {
                     "target": "com.amazonaws.guardduty#BadRequestException"
                 },
                 {
@@ -2803,6 +2816,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags to be added to a new threat list resource.</p>",
                         "smithy.api#jsonName": "tags"
+                    }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.guardduty#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b> parameter.</p>",
+                        "smithy.api#jsonName": "expectedBucketOwner"
                     }
                 }
             },
@@ -6683,6 +6703,13 @@
                         "smithy.api#documentation": "<p>The tags of the IPSet resource.</p>",
                         "smithy.api#jsonName": "tags"
                     }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.guardduty#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b> parameter. This field appears \n      in the response only if it was provided during IPSet creation or update.</p>",
+                        "smithy.api#jsonName": "expectedBucketOwner"
+                    }
                 }
             },
             "traits": {
@@ -7340,6 +7367,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags of the threat list resource.</p>",
                         "smithy.api#jsonName": "tags"
+                    }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.guardduty#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b> parameter. \n      This field appears in the response only if it was provided during ThreatIntelSet creation or update.</p>",
+                        "smithy.api#jsonName": "expectedBucketOwner"
                     }
                 }
             },
@@ -16482,6 +16516,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.guardduty#AccessDeniedException"
+                },
+                {
                     "target": "com.amazonaws.guardduty#BadRequestException"
                 },
                 {
@@ -16537,6 +16574,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The updated Boolean value that specifies whether the IPSet is active or not.</p>",
                         "smithy.api#jsonName": "activate"
+                    }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.guardduty#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b> parameter.</p>",
+                        "smithy.api#jsonName": "expectedBucketOwner"
                     }
                 }
             },
@@ -16956,6 +17000,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.guardduty#AccessDeniedException"
+                },
+                {
                     "target": "com.amazonaws.guardduty#BadRequestException"
                 },
                 {
@@ -17011,6 +17058,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The updated Boolean value that specifies whether the ThreateIntelSet is active or\n      not.</p>",
                         "smithy.api#jsonName": "activate"
+                    }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.guardduty#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b> parameter.</p>",
+                        "smithy.api#jsonName": "expectedBucketOwner"
                     }
                 }
             },
