@@ -369,6 +369,12 @@
                         "smithy.api#documentation": "<p>The entry point to use for the source code when running the canary. For canaries that use the \n         <code>syn-python-selenium-1.0</code> runtime\n         or a <code>syn-nodejs.puppeteer</code> runtime earlier than <code>syn-nodejs.puppeteer-3.4</code>, \n         the handler must be specified as <code>\n               <i>fileName</i>.handler</code>. For \n         <code>syn-python-selenium-1.1</code>, <code>syn-nodejs.puppeteer-3.4</code>, and later runtimes, the handler can be specified as \n            <code>\n               <i>fileName</i>.<i>functionName</i>\n            </code>, or\n            you can specify a folder where canary scripts reside as \n<code>\n               <i>folder</i>/<i>fileName</i>.<i>functionName</i>\n            </code>.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "Dependencies": {
+                    "target": "com.amazonaws.synthetics#Dependencies",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of dependencies that should be used for running this canary. Specify the dependencies as a key-value pair, where the key is the type of dependency and the value is the dependency reference.</p>"
+                    }
                 }
             },
             "traits": {
@@ -388,6 +394,12 @@
                     "target": "com.amazonaws.synthetics#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The entry point to use for the source code when running the canary.</p>"
+                    }
+                },
+                "Dependencies": {
+                    "target": "com.amazonaws.synthetics#Dependencies",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of dependencies that are used for running this canary. The dependencies are specified as a key-value pair, where the key is the type of dependency and the value is the dependency reference.</p>"
                     }
                 }
             },
@@ -1282,6 +1294,50 @@
             "members": {},
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.synthetics#Dependencies": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.synthetics#Dependency"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.synthetics#Dependency": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.synthetics#DependencyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of dependency. Valid value is <code>LambdaLayer</code>.</p>"
+                    }
+                },
+                "Reference": {
+                    "target": "com.amazonaws.synthetics#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dependency reference. For Lambda layers, this is the ARN of the Lambda layer. For more information \n         about Lambda ARN format, see <a href=\"https://docs.aws.amazon.com/lambda/latest/api/API_Layer.html\">Lambda</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains information about a dependency for a canary.</p>"
+            }
+        },
+        "com.amazonaws.synthetics#DependencyType": {
+            "type": "enum",
+            "members": {
+                "LambdaLayer": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LambdaLayer"
+                    }
+                }
             }
         },
         "com.amazonaws.synthetics#DescribeCanaries": {

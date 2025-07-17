@@ -69,6 +69,12 @@
                     "traits": {
                         "smithy.api#enumValue": "HEV2"
                     }
+                },
+                "XHE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "XHE"
+                    }
                 }
             },
             "traits": {
@@ -111,6 +117,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "The Coding mode that you specify determines the number of audio channels and the audio channel layout metadata in your AAC output. Valid coding modes depend on the Rate control mode and Profile that you select. The following list shows the number of audio channels and channel layout for each coding mode. * 1.0 Audio Description (Receiver Mix): One channel, C. Includes audio description data from your stereo input. For more information see ETSI TS 101 154 Annex E. * 1.0 Mono: One channel, C. * 2.0 Stereo: Two channels, L, R. * 5.1 Surround: Six channels, C, L, R, Ls, Rs, LFE."
+            }
+        },
+        "com.amazonaws.mediaconvert#AacLoudnessMeasurementMode": {
+            "type": "enum",
+            "members": {
+                "PROGRAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROGRAM"
+                    }
+                },
+                "ANCHOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANCHOR"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Choose the loudness measurement mode for your audio content. For music or advertisements: We recommend that you keep the default value, Program. For speech or other content: We recommend that you choose Anchor. When you do, MediaConvert optimizes the loudness of your output for clarify by applying speech gates."
             }
         },
         "com.amazonaws.mediaconvert#AacRateControlMode": {
@@ -184,6 +210,20 @@
                         "smithy.api#jsonName": "codingMode"
                     }
                 },
+                "LoudnessMeasurementMode": {
+                    "target": "com.amazonaws.mediaconvert#AacLoudnessMeasurementMode",
+                    "traits": {
+                        "smithy.api#documentation": "Choose the loudness measurement mode for your audio content. For music or advertisements: We recommend that you keep the default value, Program. For speech or other content: We recommend that you choose Anchor. When you do, MediaConvert optimizes the loudness of your output for clarify by applying speech gates.",
+                        "smithy.api#jsonName": "loudnessMeasurementMode"
+                    }
+                },
+                "RapInterval": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin2000Max30000",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the RAP (Random Access Point) interval for your xHE-AAC audio output. A RAP allows a decoder to decode audio data mid-stream, without the need to reference previous audio frames, and perform adaptive audio bitrate switching. To specify the RAP interval: Enter an integer from 2000 to 30000, in milliseconds. Smaller values allow for better seeking and more frequent stream switching, while large values improve compression efficiency. To have MediaConvert automatically determine the RAP interval: Leave blank.",
+                        "smithy.api#jsonName": "rapInterval"
+                    }
+                },
                 "RateControlMode": {
                     "target": "com.amazonaws.mediaconvert#AacRateControlMode",
                     "traits": {
@@ -210,6 +250,13 @@
                     "traits": {
                         "smithy.api#documentation": "Use MPEG-2 AAC instead of MPEG-4 AAC audio for raw or MPEG-2 Transport Stream containers.",
                         "smithy.api#jsonName": "specification"
+                    }
+                },
+                "TargetLoudnessRange": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin6Max16",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the xHE-AAC loudness target. Enter an integer from 6 to 16, representing \"loudness units\". For more information, see the following specification: Supplementary information for R 128 EBU Tech 3342-2023.",
+                        "smithy.api#jsonName": "targetLoudnessRange"
                     }
                 },
                 "VbrQuality": {
@@ -5035,6 +5082,12 @@
                         "smithy.api#enumValue": "HEVC"
                     }
                 },
+                "JPEG2000": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JPEG2000"
+                    }
+                },
                 "MJPEG": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -5524,7 +5577,7 @@
                 "Format": {
                     "target": "com.amazonaws.mediaconvert#Format",
                     "traits": {
-                        "smithy.api#documentation": "The format of your media file. For example: MP4, QuickTime (MOV), Matroska (MKV), or WebM. Note that this will be blank if your media file has a format that the MediaConvert Probe operation does not recognize.",
+                        "smithy.api#documentation": "The format of your media file. For example: MP4, QuickTime (MOV), Matroska (MKV), WebM or MXF. Note that this will be blank if your media file has a format that the MediaConvert Probe operation does not recognize.",
                         "smithy.api#jsonName": "format"
                     }
                 },
@@ -9598,7 +9651,7 @@
                     }
                 },
                 "SampleRate": {
-                    "target": "com.amazonaws.mediaconvert#__integerMin22050Max48000",
+                    "target": "com.amazonaws.mediaconvert#__integerMin22050Max192000",
                     "traits": {
                         "smithy.api#documentation": "Sample rate in Hz.",
                         "smithy.api#jsonName": "sampleRate"
@@ -9698,6 +9751,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "webm"
+                    }
+                },
+                "mxf": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mxf"
                     }
                 }
             }
@@ -25583,7 +25642,7 @@
                 "Codec": {
                     "target": "com.amazonaws.mediaconvert#VideoCodec",
                     "traits": {
-                        "smithy.api#documentation": "Specifies the video codec. This must be equal to one of the enum values defined by the object VideoCodec. To passthrough the video stream of your input JPEG2000, VC-3, AVC-INTRA or Apple ProRes video without any video encoding: Choose Passthrough. If you have multiple input videos, note that they must have identical encoding attributes. When you choose Passthrough, your output container must be MXF or QuickTime MOV.",
+                        "smithy.api#documentation": "Specifies the video codec. This must be equal to one of the enum values defined by the object VideoCodec. To passthrough the video stream of your input without any video encoding: Choose Passthrough. More information about passthrough codec support and job settings requirements, see: https://docs.aws.amazon.com/mediaconvert/latest/ug/video-passthrough-feature-restrictions.html",
                         "smithy.api#jsonName": "codec"
                     }
                 },
@@ -28434,6 +28493,24 @@
                 }
             }
         },
+        "com.amazonaws.mediaconvert#__integerMin2000Max30000": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 2000,
+                    "max": 30000
+                }
+            }
+        },
+        "com.amazonaws.mediaconvert#__integerMin22050Max192000": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 22050,
+                    "max": 192000
+                }
+            }
+        },
         "com.amazonaws.mediaconvert#__integerMin22050Max48000": {
             "type": "integer",
             "traits": {
@@ -28602,6 +28679,15 @@
                 "smithy.api#range": {
                     "min": 64000,
                     "max": 640000
+                }
+            }
+        },
+        "com.amazonaws.mediaconvert#__integerMin6Max16": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 6,
+                    "max": 16
                 }
             }
         },

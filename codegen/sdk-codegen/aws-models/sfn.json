@@ -6125,7 +6125,7 @@
                 "input": {
                     "target": "com.amazonaws.sfn#SensitiveData",
                     "traits": {
-                        "smithy.api#documentation": "<p>The string that contains the JSON input data for the execution, for example:</p>\n         <p>\n            <code>\"{\\\"first_name\\\" : \\\"Tim\\\"}\"</code>\n         </p>\n         <note>\n            <p>If you don't include any JSON input data, you still must include the two braces, for\n        example: <code>\"{}\"</code>\n            </p>\n         </note>\n         <p>Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p>"
+                        "smithy.api#documentation": "<p>The string that contains the JSON input data for the execution, for example:</p>\n         <p>\n            <code>\"{\\\"first_name\\\" : \\\"Alejandro\\\"}\"</code>\n         </p>\n         <note>\n            <p>If you don't include any JSON input data, you still must include the two braces, for\n        example: <code>\"{}\"</code>\n            </p>\n         </note>\n         <p>Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p>"
                     }
                 },
                 "traceHeader": {
@@ -6224,7 +6224,7 @@
                 "input": {
                     "target": "com.amazonaws.sfn#SensitiveData",
                     "traits": {
-                        "smithy.api#documentation": "<p>The string that contains the JSON input data for the execution, for example:</p>\n         <p>\n            <code>\"{\\\"first_name\\\" : \\\"Tim\\\"}\"</code>\n         </p>\n         <note>\n            <p>If you don't include any JSON input data, you still must include the two braces, for\n        example: <code>\"{}\"</code>\n            </p>\n         </note>\n         <p>Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p>"
+                        "smithy.api#documentation": "<p>The string that contains the JSON input data for the execution, for example:</p>\n         <p>\n            <code>\"{\\\"first_name\\\" : \\\"Alejandro\\\"}\"</code>\n         </p>\n         <note>\n            <p>If you don't include any JSON input data, you still must include the two braces, for\n        example: <code>\"{}\"</code>\n            </p>\n         </note>\n         <p>Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p>"
                     }
                 },
                 "traceHeader": {

@@ -9688,6 +9688,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Provides configuration information for the workers that will perform the protected query.</p>"
                     }
+                },
+                "resultFormat": {
+                    "target": "com.amazonaws.cleanroomsml#ResultFormat",
+                    "traits": {
+                        "smithy.api#default": "CSV",
+                        "smithy.api#documentation": "<p>The format in which the query results should be returned. If not specified, defaults to <code>CSV</code>. </p>"
+                    }
                 }
             },
             "traits": {
@@ -9961,6 +9968,26 @@
                     "min": 1,
                     "max": 20480
                 }
+            }
+        },
+        "com.amazonaws.cleanroomsml#ResultFormat": {
+            "type": "enum",
+            "members": {
+                "CSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CSV"
+                    }
+                },
+                "PARQUET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARQUET"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "File format of the returned data.\n"
             }
         },
         "com.amazonaws.cleanroomsml#S3ConfigMap": {
