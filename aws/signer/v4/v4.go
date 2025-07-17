@@ -434,7 +434,7 @@ func (s *httpSigner) buildCanonicalHeaders(host string, rule v4Internal.Rule, he
 		if !rule.IsValid(k) {
 			continue // ignored header
 		}
-		if strings.EqualFold(k, contentLengthHeader) {
+		if strings.EqualFold(k, contentLengthHeader) && length > 0 {
 			// prevent signing already handled content-length header.
 			continue
 		}
