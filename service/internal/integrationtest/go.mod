@@ -12,7 +12,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/athena v1.51.3
 	github.com/aws/aws-sdk-go-v2/service/batch v1.53.0
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.61.0
-	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.46.3
+	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.46.4
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.30.5
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.49.3
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.45.3
@@ -29,7 +29,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.31.7
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.41.6
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.44.0
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.232.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.233.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.45.1
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.60.0
 	github.com/aws/aws-sdk-go-v2/service/efs v1.36.2
@@ -66,7 +66,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.35.7
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.34.2
 	github.com/aws/aws-sdk-go-v2/service/ses v1.30.5
-	github.com/aws/aws-sdk-go-v2/service/sfn v1.35.8
+	github.com/aws/aws-sdk-go-v2/service/sfn v1.35.9
 	github.com/aws/aws-sdk-go-v2/service/shield v1.30.4
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.31.5
 	github.com/aws/aws-sdk-go-v2/service/sns v1.34.7

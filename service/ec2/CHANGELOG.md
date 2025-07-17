@@ -1,3 +1,7 @@
+# v1.233.0 (2025-07-17)
+
+* **Feature**: AWS Free Tier Version2 Support
+
 # v1.232.0 (2025-07-15)
 
 * **Feature**: This release adds support for volume initialization status, which enables you to monitor when the initialization process for an EBS volume is completed. This release also adds IPv6 support to EC2 Instance Connect Endpoints, allowing you to connect to your EC2 Instance via a private IPv6 address.

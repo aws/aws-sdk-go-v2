@@ -1,3 +1,21 @@
+# Release (2025-07-17)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cleanroomsml`: [v1.14.0](service/cleanroomsml/CHANGELOG.md#v1140-2025-07-17)
+  * **Feature**: This release introduces Parquet result format support for ML Input Channel models in AWS Clean Rooms ML.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.46.4](service/cloudfront/CHANGELOG.md#v1464-2025-07-17)
+  * **Documentation**: Doc only update for CloudFront that fixes some customer-reported issues
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.233.0](service/ec2/CHANGELOG.md#v12330-2025-07-17)
+  * **Feature**: AWS Free Tier Version2 Support
+* `github.com/aws/aws-sdk-go-v2/service/keyspacesstreams`: [v1.0.1](service/keyspacesstreams/CHANGELOG.md#v101-2025-07-17)
+  * **Documentation**: Doc only update for the Amazon Keyspaces Streams API.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.76.0](service/mediaconvert/CHANGELOG.md#v1760-2025-07-17)
+  * **Feature**: This release expands the range of supported audio outputs to include xHE, 192khz FLAC and the deprecation of dual mono for AC3.
+* `github.com/aws/aws-sdk-go-v2/service/sfn`: [v1.35.9](service/sfn/CHANGELOG.md#v1359-2025-07-17)
+  * **Documentation**: Align input with style guidelines.
+* `github.com/aws/aws-sdk-go-v2/service/synthetics`: [v1.36.0](service/synthetics/CHANGELOG.md#v1360-2025-07-17)
+  * **Feature**: This feature allows AWS Synthetics customers to provide code dependencies using lambda layer while creating a canary
+
 # Release (2025-07-16.2)
 
 ## Module Highlights

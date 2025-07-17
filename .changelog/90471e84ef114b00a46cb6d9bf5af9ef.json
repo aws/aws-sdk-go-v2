@@ -1,8 +1,0 @@
-{
-    "id": "90471e84-ef11-4b00-a46c-b6d9bf5af9ef",
-    "type": "feature",
-    "description": "This release expands the range of supported audio outputs to include xHE, 192khz FLAC and the deprecation of dual mono for AC3.",
-    "modules": [
-        "service/mediaconvert"
-    ]
-}

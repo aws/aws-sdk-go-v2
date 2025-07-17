@@ -1,8 +1,0 @@
-{
-    "id": "88065d7e-30c4-43da-9e44-de4a879b238d",
-    "type": "feature",
-    "description": "AWS Free Tier Version2 Support",
-    "modules": [
-        "service/ec2"
-    ]
-}

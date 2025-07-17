@@ -1,3 +1,7 @@
+# v1.76.0 (2025-07-17)
+
+* **Feature**: This release expands the range of supported audio outputs to include xHE, 192khz FLAC and the deprecation of dual mono for AC3.
+
 # v1.75.0 (2025-06-20)
 
 * **Feature**: This release adds a new SPECIFIED_OPTIMAL option for handling DDS when using DVB-Sub with high resolution video.

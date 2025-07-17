@@ -1,3 +1,7 @@
+# v1.35.9 (2025-07-17)
+
+* **Documentation**: Align input with style guidelines.
+
 # v1.35.8 (2025-07-16.2)
 
 * **Documentation**: Doc-only update to introduction, and edits to clarify input parameter and the set of control characters.

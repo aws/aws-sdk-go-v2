@@ -1,3 +1,7 @@
+# v1.36.0 (2025-07-17)
+
+* **Feature**: This feature allows AWS Synthetics customers to provide code dependencies using lambda layer while creating a canary
+
 # v1.35.3 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

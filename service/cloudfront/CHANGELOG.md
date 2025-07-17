@@ -1,3 +1,7 @@
+# v1.46.4 (2025-07-17)
+
+* **Documentation**: Doc only update for CloudFront that fixes some customer-reported issues
+
 # v1.46.3 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.
