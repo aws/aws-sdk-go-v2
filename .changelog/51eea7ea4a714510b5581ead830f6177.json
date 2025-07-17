@@ -1,0 +1,8 @@
+{
+    "id": "51eea7ea-4a71-4510-b558-1ead830f6177",
+    "type": "feature",
+    "description": "Allow underscores in the local part of the input of the \"Email recipients rewrite\" action in rule sets.",
+    "modules": [
+        "service/mailmanager"
+    ]
+}

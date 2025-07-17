@@ -1189,6 +1189,10 @@ type ProtectedQueryInputParameters struct {
 	// protected query.
 	ComputeConfiguration ComputeConfiguration
 
+	// The format in which the query results should be returned. If not specified,
+	// defaults to CSV .
+	ResultFormat ResultFormat
+
 	noSmithyDocumentSerde
 }
 

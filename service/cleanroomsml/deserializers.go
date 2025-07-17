@@ -14611,6 +14611,15 @@ func awsRestjson1_deserializeDocumentProtectedQueryInputParameters(v **types.Pro
 				return err
 			}
 
+		case "resultFormat":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResultFormat to be of type string, got %T instead", value)
+				}
+				sv.ResultFormat = types.ResultFormat(jtv)
+			}
+
 		case "sqlParameters":
 			if err := awsRestjson1_deserializeDocumentProtectedQuerySQLParameters(&sv.SqlParameters, value); err != nil {
 				return err

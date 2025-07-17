@@ -185,6 +185,11 @@ type CanaryCodeInput struct {
 	// This member is required.
 	Handler *string
 
+	// A list of dependencies that should be used for running this canary. Specify the
+	// dependencies as a key-value pair, where the key is the type of dependency and
+	// the value is the dependency reference.
+	Dependencies []Dependency
+
 	// If your canary script is located in Amazon S3, specify the bucket name here. Do
 	// not include s3:// as the start of the bucket name.
 	S3Bucket *string
@@ -212,6 +217,11 @@ type CanaryCodeInput struct {
 // This structure contains information about the canary's Lambda handler and where
 // its code is stored by CloudWatch Synthetics.
 type CanaryCodeOutput struct {
+
+	// A list of dependencies that are used for running this canary. The dependencies
+	// are specified as a key-value pair, where the key is the type of dependency and
+	// the value is the dependency reference.
+	Dependencies []Dependency
 
 	// The entry point to use for the source code when running the canary.
 	Handler *string
@@ -502,6 +512,23 @@ type CanaryTimeline struct {
 
 	// The date and time that the canary's most recent run ended.
 	LastStopped *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains information about a dependency for a canary.
+type Dependency struct {
+
+	// The dependency reference. For Lambda layers, this is the ARN of the Lambda
+	// layer. For more information about Lambda ARN format, see [Lambda].
+	//
+	// [Lambda]: https://docs.aws.amazon.com/lambda/latest/api/API_Layer.html
+	//
+	// This member is required.
+	Reference *string
+
+	// The type of dependency. Valid value is LambdaLayer .
+	Type DependencyType
 
 	noSmithyDocumentSerde
 }

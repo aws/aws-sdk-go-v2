@@ -74,7 +74,7 @@ type GetShardIteratorOutput struct {
 
 	//  The unique identifier for the shard iterator. This value is used in the
 	// GetRecords operation to retrieve data records from the specified shard. Each
-	// shard iterator expires 5 minutes after it is returned to the requester.
+	// shard iterator expires 15 minutes after it is returned to the requester.
 	ShardIterator *string
 
 	// Metadata pertaining to the operation's result.

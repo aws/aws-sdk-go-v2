@@ -7011,6 +7011,28 @@ func awsRestjson1_deserializeDocumentAacSettings(v **types.AacSettings, value in
 				sv.CodingMode = types.AacCodingMode(jtv)
 			}
 
+		case "loudnessMeasurementMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AacLoudnessMeasurementMode to be of type string, got %T instead", value)
+				}
+				sv.LoudnessMeasurementMode = types.AacLoudnessMeasurementMode(jtv)
+			}
+
+		case "rapInterval":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin2000Max30000 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RapInterval = ptr.Int32(int32(i64))
+			}
+
 		case "rateControlMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7049,6 +7071,19 @@ func awsRestjson1_deserializeDocumentAacSettings(v **types.AacSettings, value in
 					return fmt.Errorf("expected AacSpecification to be of type string, got %T instead", value)
 				}
 				sv.Specification = types.AacSpecification(jtv)
+			}
+
+		case "targetLoudnessRange":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin6Max16 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TargetLoudnessRange = ptr.Int32(int32(i64))
 			}
 
 		case "vbrQuality":
@@ -13575,7 +13610,7 @@ func awsRestjson1_deserializeDocumentFlacSettings(v **types.FlacSettings, value 
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected __integerMin22050Max48000 to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected __integerMin22050Max192000 to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {

@@ -1,0 +1,8 @@
+{
+    "id": "45f4e5d1-0dc2-4480-afb4-f30e31677a65",
+    "type": "feature",
+    "description": "This feature allows AWS Synthetics customers to provide code dependencies using lambda layer while creating a canary",
+    "modules": [
+        "service/synthetics"
+    ]
+}

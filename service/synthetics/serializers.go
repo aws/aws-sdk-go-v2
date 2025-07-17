@@ -2175,6 +2175,13 @@ func awsRestjson1_serializeDocumentCanaryCodeInput(v *types.CanaryCodeInput, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.Dependencies != nil {
+		ok := object.Key("Dependencies")
+		if err := awsRestjson1_serializeDocumentDependencies(v.Dependencies, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Handler != nil {
 		ok := object.Key("Handler")
 		ok.String(*v.Handler)
@@ -2256,6 +2263,36 @@ func awsRestjson1_serializeDocumentCanaryScheduleInput(v *types.CanaryScheduleIn
 		if err := awsRestjson1_serializeDocumentRetryConfigInput(v.RetryConfig, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDependencies(v []types.Dependency, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentDependency(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDependency(v *types.Dependency, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Reference != nil {
+		ok := object.Key("Reference")
+		ok.String(*v.Reference)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
 	}
 
 	return nil

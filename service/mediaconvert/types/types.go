@@ -52,6 +52,22 @@ type AacSettings struct {
 	// channels, C, L, R, Ls, Rs, LFE.
 	CodingMode AacCodingMode
 
+	// Choose the loudness measurement mode for your audio content. For music or
+	// advertisements: We recommend that you keep the default value, Program. For
+	// speech or other content: We recommend that you choose Anchor. When you do,
+	// MediaConvert optimizes the loudness of your output for clarify by applying
+	// speech gates.
+	LoudnessMeasurementMode AacLoudnessMeasurementMode
+
+	// Specify the RAP (Random Access Point) interval for your xHE-AAC audio output. A
+	// RAP allows a decoder to decode audio data mid-stream, without the need to
+	// reference previous audio frames, and perform adaptive audio bitrate switching.
+	// To specify the RAP interval: Enter an integer from 2000 to 30000, in
+	// milliseconds. Smaller values allow for better seeking and more frequent stream
+	// switching, while large values improve compression efficiency. To have
+	// MediaConvert automatically determine the RAP interval: Leave blank.
+	RapInterval *int32
+
 	// Specify the AAC rate control mode. For a constant bitrate: Choose CBR. Your AAC
 	// output bitrate will be equal to the value that you choose for Bitrate. For a
 	// variable bitrate: Choose VBR. Your AAC output bitrate will vary according to
@@ -71,6 +87,11 @@ type AacSettings struct {
 	// Use MPEG-2 AAC instead of MPEG-4 AAC audio for raw or MPEG-2 Transport Stream
 	// containers.
 	Specification AacSpecification
+
+	// Specify the xHE-AAC loudness target. Enter an integer from 6 to 16,
+	// representing "loudness units". For more information, see the following
+	// specification: Supplementary information for R 128 EBU Tech 3342-2023.
+	TargetLoudnessRange *int32
 
 	// Specify the quality of your variable bitrate (VBR) AAC audio. For a list of
 	// approximate VBR bitrates, see:
@@ -2099,7 +2120,7 @@ type Container struct {
 	Duration *float64
 
 	// The format of your media file. For example: MP4, QuickTime (MOV), Matroska
-	// (MKV), or WebM. Note that this will be blank if your media file has a format
+	// (MKV), WebM or MXF. Note that this will be blank if your media file has a format
 	// that the MediaConvert Probe operation does not recognize.
 	Format Format
 
@@ -8561,11 +8582,10 @@ type VideoCodecSettings struct {
 	AvcIntraSettings *AvcIntraSettings
 
 	// Specifies the video codec. This must be equal to one of the enum values defined
-	// by the object VideoCodec. To passthrough the video stream of your input
-	// JPEG2000, VC-3, AVC-INTRA or Apple ProRes video without any video encoding:
-	// Choose Passthrough. If you have multiple input videos, note that they must have
-	// identical encoding attributes. When you choose Passthrough, your output
-	// container must be MXF or QuickTime MOV.
+	// by the object VideoCodec. To passthrough the video stream of your input without
+	// any video encoding: Choose Passthrough. More information about passthrough codec
+	// support and job settings requirements, see:
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/video-passthrough-feature-restrictions.html
 	Codec VideoCodec
 
 	// Required when you set Codec to the value FRAME_CAPTURE.

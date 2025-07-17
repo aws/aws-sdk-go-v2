@@ -1,0 +1,8 @@
+{
+    "id": "1aceb4d8-4707-4bff-bbd2-2f0c9ee31469",
+    "type": "documentation",
+    "description": "Align input with style guidelines.",
+    "modules": [
+        "service/sfn"
+    ]
+}

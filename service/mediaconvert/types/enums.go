@@ -29,6 +29,7 @@ const (
 	AacCodecProfileLc   AacCodecProfile = "LC"
 	AacCodecProfileHev1 AacCodecProfile = "HEV1"
 	AacCodecProfileHev2 AacCodecProfile = "HEV2"
+	AacCodecProfileXhe  AacCodecProfile = "XHE"
 )
 
 // Values returns all known values for AacCodecProfile. Note that this can be
@@ -40,6 +41,7 @@ func (AacCodecProfile) Values() []AacCodecProfile {
 		"LC",
 		"HEV1",
 		"HEV2",
+		"XHE",
 	}
 }
 
@@ -65,6 +67,25 @@ func (AacCodingMode) Values() []AacCodingMode {
 		"CODING_MODE_1_1",
 		"CODING_MODE_2_0",
 		"CODING_MODE_5_1",
+	}
+}
+
+type AacLoudnessMeasurementMode string
+
+// Enum values for AacLoudnessMeasurementMode
+const (
+	AacLoudnessMeasurementModeProgram AacLoudnessMeasurementMode = "PROGRAM"
+	AacLoudnessMeasurementModeAnchor  AacLoudnessMeasurementMode = "ANCHOR"
+)
+
+// Values returns all known values for AacLoudnessMeasurementMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AacLoudnessMeasurementMode) Values() []AacLoudnessMeasurementMode {
+	return []AacLoudnessMeasurementMode{
+		"PROGRAM",
+		"ANCHOR",
 	}
 }
 
@@ -2172,28 +2193,29 @@ type Codec string
 
 // Enum values for Codec
 const (
-	CodecUnknown Codec = "UNKNOWN"
-	CodecAac     Codec = "AAC"
-	CodecAc3     Codec = "AC3"
-	CodecEac3    Codec = "EAC3"
-	CodecFlac    Codec = "FLAC"
-	CodecMp3     Codec = "MP3"
-	CodecOpus    Codec = "OPUS"
-	CodecPcm     Codec = "PCM"
-	CodecVorbis  Codec = "VORBIS"
-	CodecAv1     Codec = "AV1"
-	CodecAvc     Codec = "AVC"
-	CodecHevc    Codec = "HEVC"
-	CodecMjpeg   Codec = "MJPEG"
-	CodecMp4v    Codec = "MP4V"
-	CodecMpeg2   Codec = "MPEG2"
-	CodecProres  Codec = "PRORES"
-	CodecTheora  Codec = "THEORA"
-	CodecVp8     Codec = "VP8"
-	CodecVp9     Codec = "VP9"
-	CodecC608    Codec = "C608"
-	CodecC708    Codec = "C708"
-	CodecWebvtt  Codec = "WEBVTT"
+	CodecUnknown  Codec = "UNKNOWN"
+	CodecAac      Codec = "AAC"
+	CodecAc3      Codec = "AC3"
+	CodecEac3     Codec = "EAC3"
+	CodecFlac     Codec = "FLAC"
+	CodecMp3      Codec = "MP3"
+	CodecOpus     Codec = "OPUS"
+	CodecPcm      Codec = "PCM"
+	CodecVorbis   Codec = "VORBIS"
+	CodecAv1      Codec = "AV1"
+	CodecAvc      Codec = "AVC"
+	CodecHevc     Codec = "HEVC"
+	CodecJpeg2000 Codec = "JPEG2000"
+	CodecMjpeg    Codec = "MJPEG"
+	CodecMp4v     Codec = "MP4V"
+	CodecMpeg2    Codec = "MPEG2"
+	CodecProres   Codec = "PRORES"
+	CodecTheora   Codec = "THEORA"
+	CodecVp8      Codec = "VP8"
+	CodecVp9      Codec = "VP9"
+	CodecC608     Codec = "C608"
+	CodecC708     Codec = "C708"
+	CodecWebvtt   Codec = "WEBVTT"
 )
 
 // Values returns all known values for Codec. Note that this can be expanded in
@@ -2214,6 +2236,7 @@ func (Codec) Values() []Codec {
 		"AV1",
 		"AVC",
 		"HEVC",
+		"JPEG2000",
 		"MJPEG",
 		"MP4V",
 		"MPEG2",
@@ -3836,6 +3859,7 @@ const (
 	FormatQuicktime Format = "quicktime"
 	FormatMatroska  Format = "matroska"
 	FormatWebm      Format = "webm"
+	FormatMxf       Format = "mxf"
 )
 
 // Values returns all known values for Format. Note that this can be expanded in
@@ -3848,6 +3872,7 @@ func (Format) Values() []Format {
 		"quicktime",
 		"matroska",
 		"webm",
+		"mxf",
 	}
 }
 

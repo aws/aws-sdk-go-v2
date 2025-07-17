@@ -3278,6 +3278,16 @@ func awsRestjson1_serializeDocumentAacSettings(v *types.AacSettings, value smith
 		ok.String(string(v.CodingMode))
 	}
 
+	if len(v.LoudnessMeasurementMode) > 0 {
+		ok := object.Key("loudnessMeasurementMode")
+		ok.String(string(v.LoudnessMeasurementMode))
+	}
+
+	if v.RapInterval != nil {
+		ok := object.Key("rapInterval")
+		ok.Integer(*v.RapInterval)
+	}
+
 	if len(v.RateControlMode) > 0 {
 		ok := object.Key("rateControlMode")
 		ok.String(string(v.RateControlMode))
@@ -3296,6 +3306,11 @@ func awsRestjson1_serializeDocumentAacSettings(v *types.AacSettings, value smith
 	if len(v.Specification) > 0 {
 		ok := object.Key("specification")
 		ok.String(string(v.Specification))
+	}
+
+	if v.TargetLoudnessRange != nil {
+		ok := object.Key("targetLoudnessRange")
+		ok.Integer(*v.TargetLoudnessRange)
 	}
 
 	if len(v.VbrQuality) > 0 {

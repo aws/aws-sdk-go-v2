@@ -135,6 +135,23 @@ func (CanaryStateReasonCode) Values() []CanaryStateReasonCode {
 	}
 }
 
+type DependencyType string
+
+// Enum values for DependencyType
+const (
+	DependencyTypeLambdaLayer DependencyType = "LambdaLayer"
+)
+
+// Values returns all known values for DependencyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DependencyType) Values() []DependencyType {
+	return []DependencyType{
+		"LambdaLayer",
+	}
+}
+
 type EncryptionMode string
 
 // Enum values for EncryptionMode

@@ -1,0 +1,8 @@
+{
+    "id": "d817796a-46c1-4004-ae98-e4eef033b104",
+    "type": "documentation",
+    "description": "Doc only update for the Amazon Keyspaces Streams API.",
+    "modules": [
+        "service/keyspacesstreams"
+    ]
+}

@@ -669,6 +669,25 @@ func (PolicyExistenceCondition) Values() []PolicyExistenceCondition {
 	}
 }
 
+type ResultFormat string
+
+// Enum values for ResultFormat
+const (
+	ResultFormatCsv     ResultFormat = "CSV"
+	ResultFormatParquet ResultFormat = "PARQUET"
+)
+
+// Values returns all known values for ResultFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResultFormat) Values() []ResultFormat {
+	return []ResultFormat{
+		"CSV",
+		"PARQUET",
+	}
+}
+
 type S3DataDistributionType string
 
 // Enum values for S3DataDistributionType

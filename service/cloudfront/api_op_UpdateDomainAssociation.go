@@ -11,8 +11,24 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Moves a domain from its current distribution or distribution tenant to another
-// one.
+// We recommend that you use the UpdateDomainAssociation API operation to move a
+// domain association, as it supports both standard distributions and distribution
+// tenants. [AssociateAlias]performs similar checks but only supports standard distributions.
+//
+// Moves a domain from its current standard distribution or distribution tenant to
+// another one.
+//
+// You must first disable the source distribution (standard distribution or
+// distribution tenant) and then separately call this operation to move the domain
+// to another target distribution (standard distribution or distribution tenant).
+//
+// To use this operation, specify the domain and the ID of the target resource
+// (standard distribution or distribution tenant). For more information, including
+// how to set up the target resource, prerequisites that you must complete, and
+// other restrictions, see [Moving an alternate domain name to a different standard distribution or distribution tenant]in the Amazon CloudFront Developer Guide.
+//
+// [AssociateAlias]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_AssociateAlias.html
+// [Moving an alternate domain name to a different standard distribution or distribution tenant]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html#alternate-domain-names-move
 func (c *Client) UpdateDomainAssociation(ctx context.Context, params *UpdateDomainAssociationInput, optFns ...func(*Options)) (*UpdateDomainAssociationOutput, error) {
 	if params == nil {
 		params = &UpdateDomainAssociationInput{}
@@ -35,14 +51,15 @@ type UpdateDomainAssociationInput struct {
 	// This member is required.
 	Domain *string
 
-	// The target distribution resource for the domain. You can specify either
-	// DistributionId or DistributionTenantId , but not both.
+	// The target standard distribution or distribution tenant resource for the
+	// domain. You can specify either DistributionId or DistributionTenantId , but not
+	// both.
 	//
 	// This member is required.
 	TargetResource *types.DistributionResourceId
 
-	// The value of the ETag identifier for the distribution or distribution tenant
-	// that will be associated with the domain.
+	// The value of the ETag identifier for the standard distribution or distribution
+	// tenant that will be associated with the domain.
 	IfMatch *string
 
 	noSmithyDocumentSerde
@@ -53,8 +70,8 @@ type UpdateDomainAssociationOutput struct {
 	// The domain that you're moving.
 	Domain *string
 
-	// The current version of the target distribution or distribution tenant that was
-	// associated with the domain.
+	// The current version of the target standard distribution or distribution tenant
+	// that was associated with the domain.
 	ETag *string
 
 	// The intended destination for the domain.

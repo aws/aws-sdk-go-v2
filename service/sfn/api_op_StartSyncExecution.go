@@ -52,7 +52,7 @@ type StartSyncExecutionInput struct {
 
 	// The string that contains the JSON input data for the execution, for example:
 	//
-	//     "{\"first_name\" : \"Tim\"}"
+	//     "{\"first_name\" : \"Alejandro\"}"
 	//
 	// If you don't include any JSON input data, you still must include the two
 	// braces, for example: "{}"

@@ -11,25 +11,32 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of aliases (also called CNAMEs or alternate domain names) that
-// conflict or overlap with the provided alias, and the associated CloudFront
-// distributions and Amazon Web Services accounts for each conflicting alias. In
-// the returned list, the distribution and account IDs are partially hidden, which
-// allows you to identify the distributions and accounts that you own, but helps to
-// protect the information of ones that you don't own.
+// The ListConflictingAliases API operation only supports standard distributions.
+// To list domain conflicts for both standard distributions and distribution
+// tenants, we recommend that you use the [ListDomainConflicts]API operation instead.
+//
+// Gets a list of aliases that conflict or overlap with the provided alias, and
+// the associated CloudFront standard distribution and Amazon Web Services accounts
+// for each conflicting alias. An alias is commonly known as a custom domain or
+// vanity domain. It can also be called a CNAME or alternate domain name.
+//
+// In the returned list, the standard distribution and account IDs are partially
+// hidden, which allows you to identify the standard distribution and accounts that
+// you own, and helps to protect the information of ones that you don't own.
 //
 // Use this operation to find aliases that are in use in CloudFront that conflict
 // or overlap with the provided alias. For example, if you provide www.example.com
 // as input, the returned list can include www.example.com and the overlapping
-// wildcard alternate domain name ( *.example.com ), if they exist. If you provide
-// *.example.com as input, the returned list can include *.example.com and any
+// wildcard alternate domain name ( .example.com ), if they exist. If you provide
+// .example.com as input, the returned list can include *.example.com and any
 // alternate domain names covered by that wildcard (for example, www.example.com ,
 // test.example.com , dev.example.com , and so on), if they exist.
 //
-// To list conflicting aliases, you provide the alias to search and the ID of a
-// distribution in your account that has an attached SSL/TLS certificate that
+// To list conflicting aliases, specify the alias to search and the ID of a
+// standard distribution in your account that has an attached TLS certificate that
 // includes the provided alias. For more information, including how to set up the
-// distribution and certificate, see [Moving an alternate domain name to a different distribution]in the Amazon CloudFront Developer Guide.
+// standard distribution and certificate, see [Moving an alternate domain name to a different standard distribution or distribution tenant]in the Amazon CloudFront Developer
+// Guide.
 //
 // You can optionally specify the maximum number of items to receive in the
 // response. If the total number of items in the list exceeds the maximum that you
@@ -37,7 +44,8 @@ import (
 // of items, send a subsequent request that specifies the NextMarker value from
 // the current response as the Marker value in the subsequent request.
 //
-// [Moving an alternate domain name to a different distribution]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html#alternate-domain-names-move
+// [Moving an alternate domain name to a different standard distribution or distribution tenant]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html#alternate-domain-names-move
+// [ListDomainConflicts]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDomainConflicts.html
 func (c *Client) ListConflictingAliases(ctx context.Context, params *ListConflictingAliasesInput, optFns ...func(*Options)) (*ListConflictingAliasesOutput, error) {
 	if params == nil {
 		params = &ListConflictingAliasesInput{}
@@ -60,7 +68,7 @@ type ListConflictingAliasesInput struct {
 	// This member is required.
 	Alias *string
 
-	// The ID of a distribution in your account that has an attached SSL/TLS
+	// The ID of a standard distribution in your account that has an attached TLS
 	// certificate that includes the provided alias.
 	//
 	// This member is required.

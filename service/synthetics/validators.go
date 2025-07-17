@@ -482,6 +482,11 @@ func validateCanaryCodeInput(v *types.CanaryCodeInput) error {
 	if v.Handler == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Handler"))
 	}
+	if v.Dependencies != nil {
+		if err := validateDependencies(v.Dependencies); err != nil {
+			invalidParams.AddNested("Dependencies", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -501,6 +506,38 @@ func validateCanaryScheduleInput(v *types.CanaryScheduleInput) error {
 		if err := validateRetryConfigInput(v.RetryConfig); err != nil {
 			invalidParams.AddNested("RetryConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDependencies(v []types.Dependency) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Dependencies"}
+	for i := range v {
+		if err := validateDependency(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDependency(v *types.Dependency) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Dependency"}
+	if v.Reference == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Reference"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -6812,6 +6812,14 @@ type Image struct {
 	// Specifies whether enhanced networking with ENA is enabled.
 	EnaSupport *bool
 
+	// Indicates whether the image is eligible for Amazon Web Services Free Tier.
+	//
+	//   - If true , the AMI is eligible for Free Tier and can be used to launch
+	//   instances under the Free Tier limits.
+	//
+	//   - If false , the AMI is not eligible for Free Tier.
+	FreeTierEligible *bool
+
 	// The hypervisor type of the image. Only xen is supported. ovm is not supported.
 	Hypervisor HypervisorType
 

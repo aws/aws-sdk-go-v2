@@ -39,7 +39,7 @@ type ListStreamsInput struct {
 	KeyspaceName *string
 
 	//  The maximum number of streams to return in a single ListStreams request.
-	// Default value is 100. The minimum value is 1 and the maximum value is 1000.
+	// Default value is 100. The minimum value is 1 and the maximum value is 100.
 	MaxResults *int32
 
 	//  An optional pagination token provided by a previous ListStreams operation. If
@@ -176,7 +176,7 @@ func (c *Client) addOperationListStreamsMiddlewares(stack *middleware.Stack, opt
 // ListStreamsPaginatorOptions is the paginator options for ListStreams
 type ListStreamsPaginatorOptions struct {
 	//  The maximum number of streams to return in a single ListStreams request.
-	// Default value is 100. The minimum value is 1 and the maximum value is 1000.
+	// Default value is 100. The minimum value is 1 and the maximum value is 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

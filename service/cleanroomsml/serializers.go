@@ -5948,6 +5948,11 @@ func awsRestjson1_serializeDocumentProtectedQueryInputParameters(v *types.Protec
 		}
 	}
 
+	if len(v.ResultFormat) > 0 {
+		ok := object.Key("resultFormat")
+		ok.String(string(v.ResultFormat))
+	}
+
 	if v.SqlParameters != nil {
 		ok := object.Key("sqlParameters")
 		if err := awsRestjson1_serializeDocumentProtectedQuerySQLParameters(v.SqlParameters, ok); err != nil {

@@ -175,7 +175,13 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "ap-southeast-4",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region: "ap-southeast-5",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
 				Region: "ca-central-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "ca-west-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "eu-central-1",
