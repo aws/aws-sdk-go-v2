@@ -260,6 +260,12 @@ public class AddAwsConfigFields implements GoIntegration {
                     .type(SdkGoTypes.Aws.ResponseChecksumValidation)
                     .documentation("Indicates how user opt-in/out response checksum validation")
                     .servicePredicate(AwsHttpChecksumGenerator::hasOutputChecksumTrait)
+                    .build(),
+            AwsConfigField.builder()
+                    .name("Interceptors")
+                    .type(SmithyGoDependency.SMITHY_HTTP_TRANSPORT.struct("InterceptorRegistry"))
+                    .generatedOnClient(false)
+                    .awsResolveFunction(buildPackageSymbol("resolveInterceptors"))
                     .build()
     );
 
@@ -324,6 +330,15 @@ public class AddAwsConfigFields implements GoIntegration {
         writeRetryerResolvers(writer);
         writeRetryMaxAttemptsFinalizers(writer);
         writeAwsConfigEndpointResolver(writer);
+        writeInterceptorResolver(writer);
+    }
+
+    private void writeInterceptorResolver(GoWriter writer) {
+        writer.write("""
+                func resolveInterceptors(cfg aws.Config, o *Options) {
+                    o.Interceptors = cfg.Interceptors.Copy()
+                }
+                """);
     }
 
     private void writerAwsDefaultResolversTests(GoWriter writer) {
