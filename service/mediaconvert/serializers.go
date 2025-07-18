@@ -7533,6 +7533,13 @@ func awsRestjson1_serializeDocumentInput(v *types.Input, value smithyjson.Value)
 		}
 	}
 
+	if v.TamsSettings != nil {
+		ok := object.Key("tamsSettings")
+		if err := awsRestjson1_serializeDocumentInputTamsSettings(v.TamsSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.TimecodeSource) > 0 {
 		ok := object.Key("timecodeSource")
 		ok.String(string(v.TimecodeSource))
@@ -7606,6 +7613,33 @@ func awsRestjson1_serializeDocumentInputDecryptionSettings(v *types.InputDecrypt
 	if v.KmsKeyRegion != nil {
 		ok := object.Key("kmsKeyRegion")
 		ok.String(*v.KmsKeyRegion)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInputTamsSettings(v *types.InputTamsSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AuthConnectionArn != nil {
+		ok := object.Key("authConnectionArn")
+		ok.String(*v.AuthConnectionArn)
+	}
+
+	if len(v.GapHandling) > 0 {
+		ok := object.Key("gapHandling")
+		ok.String(string(v.GapHandling))
+	}
+
+	if v.SourceId != nil {
+		ok := object.Key("sourceId")
+		ok.String(*v.SourceId)
+	}
+
+	if v.Timerange != nil {
+		ok := object.Key("timerange")
+		ok.String(*v.Timerange)
 	}
 
 	return nil

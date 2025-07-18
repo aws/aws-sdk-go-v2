@@ -1,0 +1,8 @@
+{
+    "id": "f3556f2a-01c5-4fb9-a649-3a0dec6fb153",
+    "type": "documentation",
+    "description": "July 2025 doc-only updates for Systems Manager.",
+    "modules": [
+        "service/ssm"
+    ]
+}

@@ -770,6 +770,19 @@ type FieldIndex struct {
 	noSmithyDocumentSerde
 }
 
+// A structure containing the extracted fields from a log event. These fields are
+// extracted based on the log format and can be used for structured querying and
+// analysis.
+type FieldsData struct {
+
+	// The actual log data content returned in the streaming response. This contains
+	// the fields and values of the log event in a structured format that can be parsed
+	// and processed by the client.
+	Data []byte
+
+	noSmithyDocumentSerde
+}
+
 // Represents a matched event.
 type FilteredLogEvent struct {
 
@@ -792,6 +805,27 @@ type FilteredLogEvent struct {
 
 	noSmithyDocumentSerde
 }
+
+// A stream of structured log data returned by the GetLogObject operation. This
+// stream contains log events with their associated metadata and extracted fields.
+//
+// The following types satisfy this interface:
+//
+//	GetLogObjectResponseStreamMemberFields
+type GetLogObjectResponseStream interface {
+	isGetLogObjectResponseStream()
+}
+
+// A structure containing the extracted fields from a log event. These fields are
+// extracted based on the log format and can be used for structured querying and
+// analysis.
+type GetLogObjectResponseStreamMemberFields struct {
+	Value FieldsData
+
+	noSmithyDocumentSerde
+}
+
+func (*GetLogObjectResponseStreamMemberFields) isGetLogObjectResponseStream() {}
 
 // This processor uses pattern matching to parse and structure unstructured data.
 // This processor can also extract fields from log messages.
@@ -2636,6 +2670,7 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isGetLogObjectResponseStream()  {}
 func (*UnknownUnionMember) isIntegrationDetails()          {}
 func (*UnknownUnionMember) isResourceConfig()              {}
 func (*UnknownUnionMember) isStartLiveTailResponseStream() {}

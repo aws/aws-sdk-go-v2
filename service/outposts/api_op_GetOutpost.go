@@ -29,7 +29,7 @@ func (c *Client) GetOutpost(ctx context.Context, params *GetOutpostInput, optFns
 
 type GetOutpostInput struct {
 
-	//  The ID or ARN of the Outpost.
+	// The ID or ARN of the Outpost.
 	//
 	// This member is required.
 	OutpostId *string

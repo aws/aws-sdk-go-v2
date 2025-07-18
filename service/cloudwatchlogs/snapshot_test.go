@@ -686,6 +686,18 @@ func TestCheckSnapshot_GetLogGroupFields(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetLogObject(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetLogObject(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetLogObject")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetLogRecord(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetLogRecord(context.Background(), nil, func(o *Options) {
@@ -1758,6 +1770,18 @@ func TestUpdateSnapshot_GetLogGroupFields(t *testing.T) {
 	_, err := svc.GetLogGroupFields(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetLogGroupFields")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetLogObject(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetLogObject(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetLogObject")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

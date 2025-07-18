@@ -545,6 +545,48 @@ func (ShipmentCarrier) Values() []ShipmentCarrier {
 	}
 }
 
+type SubscriptionStatus string
+
+// Enum values for SubscriptionStatus
+const (
+	SubscriptionStatusActive    SubscriptionStatus = "ACTIVE"
+	SubscriptionStatusInactive  SubscriptionStatus = "INACTIVE"
+	SubscriptionStatusCancelled SubscriptionStatus = "CANCELLED"
+)
+
+// Values returns all known values for SubscriptionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SubscriptionStatus) Values() []SubscriptionStatus {
+	return []SubscriptionStatus{
+		"ACTIVE",
+		"INACTIVE",
+		"CANCELLED",
+	}
+}
+
+type SubscriptionType string
+
+// Enum values for SubscriptionType
+const (
+	SubscriptionTypeOriginal         SubscriptionType = "ORIGINAL"
+	SubscriptionTypeRenewal          SubscriptionType = "RENEWAL"
+	SubscriptionTypeCapacityIncrease SubscriptionType = "CAPACITY_INCREASE"
+)
+
+// Values returns all known values for SubscriptionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SubscriptionType) Values() []SubscriptionType {
+	return []SubscriptionType{
+		"ORIGINAL",
+		"RENEWAL",
+		"CAPACITY_INCREASE",
+	}
+}
+
 type SupportedHardwareType string
 
 // Enum values for SupportedHardwareType

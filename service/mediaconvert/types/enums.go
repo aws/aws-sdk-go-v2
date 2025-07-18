@@ -8623,6 +8623,27 @@ func (StatusUpdateInterval) Values() []StatusUpdateInterval {
 	}
 }
 
+type TamsGapHandling string
+
+// Enum values for TamsGapHandling
+const (
+	TamsGapHandlingSkipGaps      TamsGapHandling = "SKIP_GAPS"
+	TamsGapHandlingFillWithBlack TamsGapHandling = "FILL_WITH_BLACK"
+	TamsGapHandlingHoldLastFrame TamsGapHandling = "HOLD_LAST_FRAME"
+)
+
+// Values returns all known values for TamsGapHandling. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TamsGapHandling) Values() []TamsGapHandling {
+	return []TamsGapHandling{
+		"SKIP_GAPS",
+		"FILL_WITH_BLACK",
+		"HOLD_LAST_FRAME",
+	}
+}
+
 type TeletextPageType string
 
 // Enum values for TeletextPageType

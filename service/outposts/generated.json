@@ -20,6 +20,7 @@
         "api_op_GetConnection.go",
         "api_op_GetOrder.go",
         "api_op_GetOutpost.go",
+        "api_op_GetOutpostBillingInformation.go",
         "api_op_GetOutpostInstanceTypes.go",
         "api_op_GetOutpostSupportedInstanceTypes.go",
         "api_op_GetSite.go",

@@ -5001,11 +5001,17 @@ type Input struct {
 
 	// Specify the source file for your transcoding job. You can use multiple inputs
 	// in a single job. The service concatenates these inputs, in the order that you
-	// specify them in the job, to create the outputs. If your input format is IMF,
-	// specify your input by providing the path to your CPL. For example,
-	// "s3://bucket/vf/cpl.xml". If the CPL is in an incomplete IMP, make sure to use
-	// Supplemental IMPs to specify any supplemental IMPs that contain assets
-	// referenced by the CPL.
+	// specify them in the job, to create the outputs. For standard inputs, provide the
+	// path to your S3, HTTP, or HTTPS source file. For example,
+	// s3://amzn-s3-demo-bucket/input.mp4 for an Amazon S3 input or
+	// https://example.com/input.mp4 for an HTTPS input. For TAMS inputs, specify the
+	// HTTPS endpoint of your TAMS server. For example, https://tams-server.example.com
+	// . When you do, also specify Source ID, Timerange, GAP handling, and the
+	// Authorization connection ARN under TAMS settings. (Don't include these
+	// parameters in the Input file URL.) For IMF inputs, specify your input by
+	// providing the path to your CPL. For example, s3://amzn-s3-demo-bucket/vf/cpl.xml
+	// . If the CPL is in an incomplete IMP, make sure to use Supplemental IMPsto
+	// specify any supplemental IMPs that contain assets referenced by the CPL.
 	FileInput *string
 
 	// Specify whether to apply input filtering to improve the video quality of your
@@ -5074,6 +5080,18 @@ type Input struct {
 	// "s3://bucket/vf2/ASSETMAP.xml"]. You don't need to specify the IMP that contains
 	// your input CPL, because the service automatically detects it.
 	SupplementalImps []string
+
+	// Specify a Time Addressable Media Store (TAMS) server as an input source. TAMS
+	// is an open-source API specification that provides access to time-segmented media
+	// content. Use TAMS to retrieve specific time ranges from live or archived media
+	// streams. When you specify TAMS settings, MediaConvert connects to your TAMS
+	// server, retrieves the media segments for your specified time range, and
+	// processes them as a single input. This enables workflows like extracting clips
+	// from live streams or processing specific portions of archived content. To use
+	// TAMS, you must: 1. Have access to a TAMS-compliant server 2. Specify the server
+	// URL in the Input file URL field 3. Provide the required SourceId and Timerange
+	// parameters 4. Configure authentication, if your TAMS server requires it
+	TamsSettings *InputTamsSettings
 
 	// Use this Timecode source setting, located under the input settings, to specify
 	// how the service counts input video frames. This input frame count affects only
@@ -5166,6 +5184,59 @@ type InputDecryptionSettings struct {
 	// encrypt your data key, if that Region is different from the one you are using
 	// for AWS Elemental MediaConvert.
 	KmsKeyRegion *string
+
+	noSmithyDocumentSerde
+}
+
+// Specify a Time Addressable Media Store (TAMS) server as an input source. TAMS
+// is an open-source API specification that provides access to time-segmented media
+// content. Use TAMS to retrieve specific time ranges from live or archived media
+// streams. When you specify TAMS settings, MediaConvert connects to your TAMS
+// server, retrieves the media segments for your specified time range, and
+// processes them as a single input. This enables workflows like extracting clips
+// from live streams or processing specific portions of archived content. To use
+// TAMS, you must: 1. Have access to a TAMS-compliant server 2. Specify the server
+// URL in the Input file URL field 3. Provide the required SourceId and Timerange
+// parameters 4. Configure authentication, if your TAMS server requires it
+type InputTamsSettings struct {
+
+	// Specify the ARN (Amazon Resource Name) of an EventBridge Connection to
+	// authenticate with your TAMS server. The EventBridge Connection stores your
+	// authentication credentials securely. MediaConvert assumes your job's IAM role to
+	// access this connection, so ensure the role has the
+	// events:RetrieveConnectionCredentials, secretsmanager:DescribeSecret, and
+	// secretsmanager:GetSecretValue permissions. Format:
+	// arn:aws:events:region:account-id:connection/connection-name/unique-id
+	AuthConnectionArn *string
+
+	// Specify how MediaConvert handles gaps between media segments in your TAMS
+	// source. Gaps can occur in live streams due to network issues or other
+	// interruptions. Choose from the following options: * Skip gaps - Default. Skip
+	// over gaps and join segments together. This creates a continuous output with no
+	// blank frames, but may cause timeline discontinuities. * Fill with black - Insert
+	// black frames to fill gaps between segments. This maintains timeline continuity
+	// but adds black frames where content is missing. * Hold last frame - Repeat the
+	// last frame before a gap until the next segment begins. This maintains visual
+	// continuity during gaps.
+	GapHandling TamsGapHandling
+
+	// Specify the unique identifier for the media source in your TAMS server.
+	// MediaConvert uses this source ID to locate the appropriate flows containing the
+	// media segments you want to process. The source ID corresponds to a specific
+	// media source registered in your TAMS server. This source must be of type
+	// urn:x-nmos:format:multi, and can can reference multiple flows for audio, video,
+	// or combined audio/video content. MediaConvert automatically selects the highest
+	// quality flows available for your job. This setting is required when include TAMS
+	// settings in your job.
+	SourceId *string
+
+	// Specify the time range of media segments to retrieve from your TAMS server.
+	// MediaConvert fetches only the segments that fall within this range. Use the
+	// format specified by your TAMS server implementation. This must be two timestamp
+	// values with the format {sign?}{seconds}:{nanoseconds}, separated by an
+	// underscore, surrounded by either parentheses or square brackets. Example:
+	// [15:0_35:0) This setting is required when include TAMS settings in your job.
+	Timerange *string
 
 	noSmithyDocumentSerde
 }
@@ -8820,9 +8891,9 @@ type VideoOverlayCrop struct {
 	// height as your overlay input video: Keep blank, or enter 0. To specify a
 	// different height for the cropping rectangle: Enter an integer representing the
 	// Unit type that you choose, either Pixels or Percentage. For example, when you
-	// enter 100 and choose Pixels, the cropping rectangle will 100 pixels high. When
-	// you enter 10, choose Percentage, and your overlay input video is 1920x1080, the
-	// cropping rectangle will be 108 pixels high.
+	// enter 100 and choose Pixels, the cropping rectangle will be 100 pixels high.
+	// When you enter 10, choose Percentage, and your overlay input video is 1920x1080,
+	// the cropping rectangle will be 108 pixels high.
 	Height *int32
 
 	// Specify the Unit type to use when you enter a value for X position, Y position,
@@ -8834,9 +8905,9 @@ type VideoOverlayCrop struct {
 	// width as your overlay input video: Keep blank, or enter 0. To specify a
 	// different width for the cropping rectangle: Enter an integer representing the
 	// Unit type that you choose, either Pixels or Percentage. For example, when you
-	// enter 100 and choose Pixels, the cropping rectangle will 100 pixels wide. When
-	// you enter 10, choose Percentage, and your overlay input video is 1920x1080, the
-	// cropping rectangle will be 192 pixels wide.
+	// enter 100 and choose Pixels, the cropping rectangle will be 100 pixels wide.
+	// When you enter 10, choose Percentage, and your overlay input video is 1920x1080,
+	// the cropping rectangle will be 192 pixels wide.
 	Width *int32
 
 	// Specify the distance between the cropping rectangle and the left edge of your

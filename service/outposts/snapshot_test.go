@@ -206,6 +206,18 @@ func TestCheckSnapshot_GetOutpost(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetOutpostBillingInformation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetOutpostBillingInformation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetOutpostBillingInformation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetOutpostInstanceTypes(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetOutpostInstanceTypes(context.Background(), nil, func(o *Options) {
@@ -594,6 +606,18 @@ func TestUpdateSnapshot_GetOutpost(t *testing.T) {
 	_, err := svc.GetOutpost(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetOutpost")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetOutpostBillingInformation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetOutpostBillingInformation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetOutpostBillingInformation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

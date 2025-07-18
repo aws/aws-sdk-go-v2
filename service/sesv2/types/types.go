@@ -573,8 +573,14 @@ type DedicatedIp struct {
 	// This member is required.
 	Ip *string
 
-	// Indicates how complete the dedicated IP warm-up process is. When this value
-	// equals 1, the address has completed the warm-up process and is ready for use.
+	// Indicates the progress of your dedicated IP warm-up:
+	//
+	//   - 0-100 – For standard dedicated IP addresses, this shows the warm-up
+	//   completion percentage. A value of 100 means the IP address is fully warmed up
+	//   and ready for use.
+	//
+	//   - -1 – Appears for IP addresses in managed dedicated pools where Amazon SES
+	//   automatically handles the warm-up process, making the percentage not applicable.
 	//
 	// This member is required.
 	WarmupPercentage *int32
@@ -587,6 +593,10 @@ type DedicatedIp struct {
 	//
 	//   - DONE – The dedicated IP warm-up process is complete, and the IP address is
 	//   ready to use.
+	//
+	//   - NOT_APPLICABLE – The warm-up status doesn't apply to this IP address. This
+	//   status is used for IP addresses in managed dedicated IP pools, where Amazon SES
+	//   automatically handles the warm-up process.
 	//
 	// This member is required.
 	WarmupStatus WarmupStatus

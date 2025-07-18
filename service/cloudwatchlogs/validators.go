@@ -730,6 +730,26 @@ func (m *validateOpGetLogEvents) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetLogObject struct {
+}
+
+func (*validateOpGetLogObject) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetLogObject) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetLogObjectInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetLogObjectInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetLogRecord struct {
 }
 
@@ -1532,6 +1552,10 @@ func addOpGetLogAnomalyDetectorValidationMiddleware(stack *middleware.Stack) err
 
 func addOpGetLogEventsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetLogEvents{}, middleware.After)
+}
+
+func addOpGetLogObjectValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetLogObject{}, middleware.After)
 }
 
 func addOpGetLogRecordValidationMiddleware(stack *middleware.Stack) error {
@@ -2970,6 +2994,21 @@ func validateOpGetLogEventsInput(v *GetLogEventsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetLogEventsInput"}
 	if v.LogStreamName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LogStreamName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetLogObjectInput(v *GetLogObjectInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetLogObjectInput"}
+	if v.LogObjectPointer == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LogObjectPointer"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -16601,6 +16601,11 @@ func awsRestjson1_deserializeDocumentInput(v **types.Input, value interface{}) e
 				return err
 			}
 
+		case "tamsSettings":
+			if err := awsRestjson1_deserializeDocumentInputTamsSettings(&sv.TamsSettings, value); err != nil {
+				return err
+			}
+
 		case "timecodeSource":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16748,6 +16753,73 @@ func awsRestjson1_deserializeDocumentInputDecryptionSettings(v **types.InputDecr
 					return fmt.Errorf("expected __stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912 to be of type string, got %T instead", value)
 				}
 				sv.KmsKeyRegion = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentInputTamsSettings(v **types.InputTamsSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InputTamsSettings
+	if *v == nil {
+		sv = &types.InputTamsSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "authConnectionArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringPatternArnAwsAZ09EventsAZ090912ConnectionAZAZ09AF0936 to be of type string, got %T instead", value)
+				}
+				sv.AuthConnectionArn = ptr.String(jtv)
+			}
+
+		case "gapHandling":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TamsGapHandling to be of type string, got %T instead", value)
+				}
+				sv.GapHandling = types.TamsGapHandling(jtv)
+			}
+
+		case "sourceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.SourceId = ptr.String(jtv)
+			}
+
+		case "timerange":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringPattern019090190908019090190908 to be of type string, got %T instead", value)
+				}
+				sv.Timerange = ptr.String(jtv)
 			}
 
 		default:

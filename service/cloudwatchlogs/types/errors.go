@@ -91,6 +91,34 @@ func (e *DataAlreadyAcceptedException) ErrorCode() string {
 }
 func (e *DataAlreadyAcceptedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// An internal error occurred during the streaming of log data. This exception is
+// thrown when there's an issue with the internal streaming mechanism used by the
+// GetLogObject operation.
+type InternalStreamingException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InternalStreamingException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InternalStreamingException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InternalStreamingException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InternalStreamingException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InternalStreamingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The operation is not valid on the specified resource.
 type InvalidOperationException struct {
 	Message *string

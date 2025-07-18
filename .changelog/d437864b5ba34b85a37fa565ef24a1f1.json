@@ -1,0 +1,8 @@
+{
+    "id": "d437864b-5ba3-4b85-a37f-a565ef24a1f1",
+    "type": "feature",
+    "description": "CloudWatchLogs launches GetLogObject API with streaming support for efficient log data retrieval. Logs added support for new AccountPolicy type METRIC_EXTRACTION_POLICY. For more information, see CloudWatch Logs API documentation",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

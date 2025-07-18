@@ -1009,8 +1009,9 @@ type WarmupStatus string
 
 // Enum values for WarmupStatus
 const (
-	WarmupStatusInProgress WarmupStatus = "IN_PROGRESS"
-	WarmupStatusDone       WarmupStatus = "DONE"
+	WarmupStatusInProgress    WarmupStatus = "IN_PROGRESS"
+	WarmupStatusDone          WarmupStatus = "DONE"
+	WarmupStatusNotApplicable WarmupStatus = "NOT_APPLICABLE"
 )
 
 // Values returns all known values for WarmupStatus. Note that this can be
@@ -1021,5 +1022,6 @@ func (WarmupStatus) Values() []WarmupStatus {
 	return []WarmupStatus{
 		"IN_PROGRESS",
 		"DONE",
+		"NOT_APPLICABLE",
 	}
 }

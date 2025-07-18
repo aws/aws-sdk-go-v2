@@ -7,6 +7,24 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 )
 
+func ExampleGetLogObjectResponseStream_outputUsage() {
+	var union types.GetLogObjectResponseStream
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.GetLogObjectResponseStreamMemberFields:
+		_ = v.Value // Value is types.FieldsData
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.FieldsData
+
 func ExampleIntegrationDetails_outputUsage() {
 	var union types.IntegrationDetails
 	// type switches can be used to check the union value

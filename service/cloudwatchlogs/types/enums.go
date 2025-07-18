@@ -426,6 +426,7 @@ const (
 	PolicyTypeSubscriptionFilterPolicy PolicyType = "SUBSCRIPTION_FILTER_POLICY"
 	PolicyTypeFieldIndexPolicy         PolicyType = "FIELD_INDEX_POLICY"
 	PolicyTypeTransformerPolicy        PolicyType = "TRANSFORMER_POLICY"
+	PolicyTypeMetricExtractionPolicy   PolicyType = "METRIC_EXTRACTION_POLICY"
 )
 
 // Values returns all known values for PolicyType. Note that this can be expanded
@@ -438,6 +439,7 @@ func (PolicyType) Values() []PolicyType {
 		"SUBSCRIPTION_FILTER_POLICY",
 		"FIELD_INDEX_POLICY",
 		"TRANSFORMER_POLICY",
+		"METRIC_EXTRACTION_POLICY",
 	}
 }
 

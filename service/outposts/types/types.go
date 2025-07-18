@@ -621,4 +621,48 @@ type Site struct {
 	noSmithyDocumentSerde
 }
 
+// Provides information about your Amazon Web Services Outposts subscriptions.
+type Subscription struct {
+
+	// The date your subscription starts.
+	BeginDate *time.Time
+
+	// The date your subscription ends.
+	EndDate *time.Time
+
+	// The amount you are billed each month in the subscription period.
+	MonthlyRecurringPrice *float64
+
+	// The order ID for your subscription.
+	OrderIds []string
+
+	// The ID of the subscription that appears on the Amazon Web Services Billing
+	// Center console.
+	SubscriptionId *string
+
+	// The status of subscription which can be one of the following:
+	//
+	//   - INACTIVE - Subscription requests that are inactive.
+	//
+	//   - ACTIVE - Subscription requests that are in progress and have an end date in
+	//   the future.
+	//
+	//   - CANCELLED - Subscription requests that are cancelled.
+	SubscriptionStatus SubscriptionStatus
+
+	// The type of subscription which can be one of the following:
+	//
+	//   - ORIGINAL - The first order on the Amazon Web Services Outposts.
+	//
+	//   - RENEWAL - Renewal requests, both month to month and longer term.
+	//
+	//   - CAPACITY_INCREASE - Capacity scaling orders.
+	SubscriptionType SubscriptionType
+
+	// The amount billed when the subscription is created. This is a one-time charge.
+	UpfrontPrice *float64
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde

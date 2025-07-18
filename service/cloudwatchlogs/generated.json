@@ -61,6 +61,7 @@
         "api_op_GetLogAnomalyDetector.go",
         "api_op_GetLogEvents.go",
         "api_op_GetLogGroupFields.go",
+        "api_op_GetLogObject.go",
         "api_op_GetLogRecord.go",
         "api_op_GetQueryResults.go",
         "api_op_GetTransformer.go",

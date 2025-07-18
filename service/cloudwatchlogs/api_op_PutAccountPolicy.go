@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an account-level data protection policy, subscription filter policy, or
-// field index policy that applies to all log groups or a subset of log groups in
-// the account.
+// Creates an account-level data protection policy, subscription filter policy,
+// field index policy, transformer policy, or metric extraction policy that applies
+// to all log groups or a subset of log groups in the account.
 //
 // To use this operation, you must be signed on with the correct permissions
 // depending on the type of policy that you are creating.
@@ -29,6 +29,9 @@ import (
 //
 //   - To create a field index policy, you must have the logs:PutIndexPolicy and
 //     logs:PutAccountPolicy permissions.
+//
+//   - To create a metric extraction policy, you must have the
+//     logs:PutMetricExtractionPolicy and logs:PutAccountPolicy permissions.
 //
 // # Data protection policy
 //
@@ -180,6 +183,60 @@ import (
 // log-group level policy, and will ignore the account-level policy that you create
 // with [PutAccountPolicy].
 //
+// # Metric extraction policy
+//
+// A metric extraction policy controls whether CloudWatch Metrics can be created
+// through the Embedded Metrics Format (EMF) for log groups in your account. By
+// default, EMF metric creation is enabled for all log groups. You can use metric
+// extraction policies to disable EMF metric creation for your entire account or
+// specific log groups.
+//
+// When a policy disables EMF metric creation for a log group, log events in the
+// EMF format are still ingested, but no CloudWatch Metrics are created from them.
+//
+// Creating a policy disables metrics for AWS features that use EMF to create
+// metrics, such as CloudWatch Container Insights and CloudWatch Application
+// Signals. To prevent turning off those features by accident, we recommend that
+// you exclude the underlying log-groups through a selection-criteria such as
+// LogGroupNamePrefix NOT IN ["/aws/containerinsights",
+// "/aws/ecs/containerinsights", "/aws/application-signals/data"] .
+//
+// Each account can have either one account-level metric extraction policy that
+// applies to all log groups, or up to 5 policies that are each scoped to a subset
+// of log groups with the selectionCriteria parameter. The selection criteria
+// supports filtering by LogGroupName and LogGroupNamePrefix using the operators IN
+// and NOT IN . You can specify up to 50 values in each IN or NOT IN list.
+//
+// The selection criteria can be specified in these formats:
+//
+//	LogGroupName IN ["log-group-1", "log-group-2"]
+//
+//	LogGroupNamePrefix NOT IN ["/aws/prefix1", "/aws/prefix2"]
+//
+// If you have multiple account-level metric extraction policies with selection
+// criteria, no two of them can have overlapping criteria. For example, if you have
+// one policy with selection criteria LogGroupNamePrefix IN ["my-log"] , you can't
+// have another metric extraction policy with selection criteria
+// LogGroupNamePrefix IN ["/my-log-prod"] or LogGroupNamePrefix IN ["/my-logging"]
+// , as the set of log groups matching these prefixes would be a subset of the log
+// groups matching the first policy's prefix, creating an overlap.
+//
+// When using NOT IN , only one policy with this operator is allowed per account.
+//
+// When combining policies with IN and NOT IN operators, the overlap check ensures
+// that policies don't have conflicting effects. Two policies with IN and NOT IN
+// operators do not overlap if and only if every value in the IN policy is
+// completely contained within some value in the NOT IN policy. For example:
+//
+//   - If you have a NOT IN policy for prefix "/aws/lambda" , you can create an IN
+//     policy for the exact log group name "/aws/lambda/function1" because the set of
+//     log groups matching "/aws/lambda/function1" is a subset of the log groups
+//     matching "/aws/lambda" .
+//
+//   - If you have a NOT IN policy for prefix "/aws/lambda" , you cannot create an
+//     IN policy for prefix "/aws" because the set of log groups matching "/aws" is
+//     not a subset of the log groups matching "/aws/lambda" .
+//
 // [PutDestination]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDestination.html
 // [PutTransformer]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutTransformer.html
 // [PutIndexPolicy]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutIndexPolicy.html
@@ -322,7 +379,7 @@ type PutAccountPolicyInput struct {
 	// Use this parameter to apply the new policy to a subset of log groups in the
 	// account.
 	//
-	// Specifing selectionCriteria is valid only when you specify
+	// Specifying selectionCriteria is valid only when you specify
 	// SUBSCRIPTION_FILTER_POLICY , FIELD_INDEX_POLICY or TRANSFORMER_POLICY for
 	// policyType .
 	//

@@ -230,6 +230,26 @@ func (m *validateOpGetOrder) HandleInitialize(ctx context.Context, in middleware
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetOutpostBillingInformation struct {
+}
+
+func (*validateOpGetOutpostBillingInformation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetOutpostBillingInformation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetOutpostBillingInformationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetOutpostBillingInformationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetOutpost struct {
 }
 
@@ -614,6 +634,10 @@ func addOpGetOrderValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetOrder{}, middleware.After)
 }
 
+func addOpGetOutpostBillingInformationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetOutpostBillingInformation{}, middleware.After)
+}
+
 func addOpGetOutpostValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetOutpost{}, middleware.After)
 }
@@ -929,6 +953,21 @@ func validateOpGetOrderInput(v *GetOrderInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetOrderInput"}
 	if v.OrderId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrderId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetOutpostBillingInformationInput(v *GetOutpostBillingInformationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetOutpostBillingInformationInput"}
+	if v.OutpostIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutpostIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
