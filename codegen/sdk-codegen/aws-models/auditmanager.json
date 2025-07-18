@@ -7896,6 +7896,9 @@
                     "target": "com.amazonaws.auditmanager#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.auditmanager#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.auditmanager#ValidationException"
                 }
             ],

@@ -2284,14 +2284,14 @@
                 "WarmupStatus": {
                     "target": "com.amazonaws.sesv2#WarmupStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The warm-up status of a dedicated IP address. The status can have one of the following\n            values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code> – The IP address isn't ready to use because the\n                    dedicated IP warm-up process is ongoing.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DONE</code> – The dedicated IP warm-up process is complete, and\n                    the IP address is ready to use.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The warm-up status of a dedicated IP address. The status can have one of the following\n            values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code> – The IP address isn't ready to use because the\n                    dedicated IP warm-up process is ongoing.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DONE</code> – The dedicated IP warm-up process is complete, and\n                    the IP address is ready to use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOT_APPLICABLE</code> – The warm-up status doesn't apply to this IP address.\n                    This status is used for IP addresses in managed dedicated IP pools, where Amazon SES automatically\n                    handles the warm-up process.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "WarmupPercentage": {
                     "target": "com.amazonaws.sesv2#Percentage100Wrapper",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates how complete the dedicated IP warm-up process is. When this value equals 1,\n            the address has completed the warm-up process and is ready for use.</p>",
+                        "smithy.api#documentation": "<p>Indicates the progress of your dedicated IP warm-up:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>0-100</code> – For standard dedicated IP addresses, this shows the warm-up completion percentage. A value of 100 means the IP address is fully warmed up and ready for use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>-1</code> – Appears for IP addresses in managed dedicated pools where Amazon SES automatically handles the warm-up process, making the percentage not applicable.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -14069,6 +14069,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DONE"
+                    }
+                },
+                "NOT_APPLICABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_APPLICABLE"
                     }
                 }
             },
