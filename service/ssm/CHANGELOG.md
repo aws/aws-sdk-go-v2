@@ -1,3 +1,7 @@
+# v1.60.1 (2025-07-18)
+
+* **Documentation**: July 2025 doc-only updates for Systems Manager.
+
 # v1.60.0 (2025-06-30)
 
 * **Feature**: Introduces AccessType, a new filter value for the DescribeSessions API.

@@ -1,3 +1,7 @@
+# v1.77.0 (2025-07-18)
+
+* **Feature**: This release adds support for TAMS server integration with MediaConvert inputs.
+
 # v1.76.0 (2025-07-17)
 
 * **Feature**: This release expands the range of supported audio outputs to include xHE, 192khz FLAC and the deprecation of dual mono for AC3.

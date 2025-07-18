@@ -1,3 +1,7 @@
+# v1.58.1 (2025-07-18)
+
+* No change notes available for this release.
+
 # v1.58.0 (2025-06-17)
 
 * **Feature**: Adds operations, structures, and exceptions required for public preview release of Security Hub V2.

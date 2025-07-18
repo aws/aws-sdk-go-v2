@@ -1,8 +1,0 @@
-{
-    "id": "51ba3c99-13d7-444a-a379-3c820d3950fe",
-    "type": "feature",
-    "description": "Updated error handling for RegisterOrganizationAdminAccount API to properly translate TooManyExceptions to HTTP 429 status code. This enhancement improves error handling consistency and provides clearer feedback when request limits are exceeded.",
-    "modules": [
-        "service/auditmanager"
-    ]
-}

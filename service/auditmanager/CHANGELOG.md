@@ -1,3 +1,7 @@
+# v1.40.0 (2025-07-18)
+
+* **Feature**: Updated error handling for RegisterOrganizationAdminAccount API to properly translate TooManyExceptions to HTTP 429 status code. This enhancement improves error handling consistency and provides clearer feedback when request limits are exceeded.
+
 # v1.39.2 (2025-06-17)
 
 * **Dependency Update**: Update to smithy-go v1.22.4.

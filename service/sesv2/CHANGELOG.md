@@ -1,3 +1,7 @@
+# v1.47.0 (2025-07-18)
+
+* **Feature**: Added IP Visibility support for managed dedicated pools. Enhanced GetDedicatedIp and GetDedicatedIps APIs to return managed IP addresses.
+
 # v1.46.0 (2025-06-27)
 
 * **Feature**: Added support for new SES regions

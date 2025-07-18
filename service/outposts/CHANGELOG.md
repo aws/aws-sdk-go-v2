@@ -1,3 +1,7 @@
+# v1.52.0 (2025-07-18)
+
+* **Feature**: Add AWS Outposts API to surface customer billing information
+
 # v1.51.0 (2025-06-30)
 
 * **Feature**: Make ContactName and ContactPhoneNumber required fields when creating and updating Outpost Site Addresses.

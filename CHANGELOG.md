@@ -1,3 +1,19 @@
+# Release (2025-07-18)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/auditmanager`: [v1.40.0](service/auditmanager/CHANGELOG.md#v1400-2025-07-18)
+  * **Feature**: Updated error handling for RegisterOrganizationAdminAccount API to properly translate TooManyExceptions to HTTP 429 status code. This enhancement improves error handling consistency and provides clearer feedback when request limits are exceeded.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.53.0](service/cloudwatchlogs/CHANGELOG.md#v1530-2025-07-18)
+  * **Feature**: CloudWatchLogs launches GetLogObject API with streaming support for efficient log data retrieval. Logs added support for new AccountPolicy type METRIC_EXTRACTION_POLICY. For more information, see CloudWatch Logs API documentation
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.77.0](service/mediaconvert/CHANGELOG.md#v1770-2025-07-18)
+  * **Feature**: This release adds support for TAMS server integration with MediaConvert inputs.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.52.0](service/outposts/CHANGELOG.md#v1520-2025-07-18)
+  * **Feature**: Add AWS Outposts API to surface customer billing information
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.47.0](service/sesv2/CHANGELOG.md#v1470-2025-07-18)
+  * **Feature**: Added IP Visibility support for managed dedicated pools. Enhanced GetDedicatedIp and GetDedicatedIps APIs to return managed IP addresses.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.60.1](service/ssm/CHANGELOG.md#v1601-2025-07-18)
+  * **Documentation**: July 2025 doc-only updates for Systems Manager.
+
 # Release (2025-07-17)
 
 ## Module Highlights

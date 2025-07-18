@@ -1,8 +1,0 @@
-{
-    "id": "c4181079-c866-46c1-a9d1-f44316d83433",
-    "type": "feature",
-    "description": "Added IP Visibility support for managed dedicated pools. Enhanced GetDedicatedIp and GetDedicatedIps APIs to return managed IP addresses.",
-    "modules": [
-        "service/sesv2"
-    ]
-}

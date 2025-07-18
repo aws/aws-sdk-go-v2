@@ -1,8 +1,0 @@
-{
-    "id": "f91247ad-69db-439d-89f3-5ec21f102128",
-    "type": "feature",
-    "description": "This release adds support for TAMS server integration with MediaConvert inputs.",
-    "modules": [
-        "service/mediaconvert"
-    ]
-}
