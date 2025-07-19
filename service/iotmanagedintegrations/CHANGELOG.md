@@ -1,3 +1,7 @@
+# v1.1.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.1.0 (2025-06-26)
 
 * **Feature**: Adding managed integrations APIs for IoT Device Management to onboard and control devices across different manufacturers, connectivity protocols and third party vendor clouds. APIs include managed thing operations, provisioning profile management, and cloud connector operations.

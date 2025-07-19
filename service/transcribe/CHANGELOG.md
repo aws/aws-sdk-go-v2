@@ -1,3 +1,7 @@
+# v1.47.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.47.0 (2025-06-24)
 
 * **Feature**: This Feature Adds Support for the "et-EE" Locale for Batch Operations

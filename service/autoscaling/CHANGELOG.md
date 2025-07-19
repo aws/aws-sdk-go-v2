@@ -1,3 +1,7 @@
+# v1.54.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.54.0 (2025-06-18)
 
 * **Feature**: Add IncludeInstances parameter to DescribeAutoScalingGroups API

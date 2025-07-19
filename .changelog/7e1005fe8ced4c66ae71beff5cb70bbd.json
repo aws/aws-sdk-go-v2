@@ -1,8 +1,0 @@
-{
-    "id": "7e1005fe-8ced-4c66-ae71-beff5cb70bbd",
-    "type": "bugfix",
-    "description": "Add partition support for aws-eusc.",
-    "modules": [
-        "."
-    ]
-}

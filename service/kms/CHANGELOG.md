@@ -1,3 +1,7 @@
+# v1.41.3 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.41.2 (2025-06-26)
 
 * **Documentation**: This release updates AWS CLI examples for KMS APIs.

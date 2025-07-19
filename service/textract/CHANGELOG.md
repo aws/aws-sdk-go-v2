@@ -1,3 +1,7 @@
+# v1.36.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.36.0 (2025-06-25)
 
 * **Feature**: Add RotationAngle field to Geometry of WORD blocks for Textract AnalyzeDocument API

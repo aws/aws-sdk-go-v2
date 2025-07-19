@@ -1,3 +1,7 @@
+# v1.16.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.0 (2025-06-30)
 
 * **Feature**: Added new fields to support the concept of primary image sets within the storage hierarchy.

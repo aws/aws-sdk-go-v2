@@ -1,3 +1,7 @@
+# v1.118.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.118.0 (2025-07-16.2)
 
 * **Feature**: AWS Glue now supports schema, partition and sort management of Apache Iceberg tables using Glue SDK

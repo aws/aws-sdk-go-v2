@@ -1,3 +1,7 @@
+# v1.18.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.0 (2025-06-27)
 
 * **Feature**: Adding UnauthorizedException to public SDK

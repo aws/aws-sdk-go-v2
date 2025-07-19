@@ -1,3 +1,7 @@
+# v1.14.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.14.0 (2025-07-17)
 
 * **Feature**: This release introduces Parquet result format support for ML Input Channel models in AWS Clean Rooms ML.

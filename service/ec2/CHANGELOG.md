@@ -1,3 +1,7 @@
+# v1.233.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.233.0 (2025-07-17)
 
 * **Feature**: AWS Free Tier Version2 Support

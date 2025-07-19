@@ -1,3 +1,7 @@
+# v1.19.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2025-07-16.2)
 
 * **Feature**: Expand length of message data field for Mac generation and validation to 8192 characters.

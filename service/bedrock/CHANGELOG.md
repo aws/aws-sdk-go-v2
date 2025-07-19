@@ -1,3 +1,7 @@
+# v1.39.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.39.0 (2025-07-16.2)
 
 * **Feature**: This release adds support for on-demand custom model inference through CustomModelDeployment APIs for Amazon Bedrock.

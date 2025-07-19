@@ -1,3 +1,7 @@
+# v1.35.10 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.35.9 (2025-07-17)
 
 * **Documentation**: Align input with style guidelines.

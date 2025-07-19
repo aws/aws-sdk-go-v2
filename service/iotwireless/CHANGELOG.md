@@ -1,3 +1,7 @@
+# v1.48.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.48.0 (2025-07-16.2)
 
 * **Feature**: FuotaTaskId is not a valid IdentifierType for EventConfiguration and is being removed from possible IdentifierType values.

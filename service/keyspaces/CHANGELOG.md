@@ -1,3 +1,7 @@
+# v1.19.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2025-06-26)
 
 * **Feature**: This release provides change data capture (CDC) streams support through updates to the Amazon Keyspaces API.

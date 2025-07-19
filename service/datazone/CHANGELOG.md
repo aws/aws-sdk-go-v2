@@ -1,3 +1,7 @@
+# v1.32.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.32.0 (2025-07-15)
 
 * **Feature**: Removing restriction of environment profile identifier as required field, S3 feature release

@@ -1,3 +1,7 @@
+# v1.51.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.51.0 (2025-06-17)
 
 * **Feature**: Release of Active Threat Defense in Network Firewall

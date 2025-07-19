@@ -1,3 +1,7 @@
+# v1.77.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.77.0 (2025-07-18)
 
 * **Feature**: This release adds support for TAMS server integration with MediaConvert inputs.

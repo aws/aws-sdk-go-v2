@@ -1,3 +1,7 @@
+# v1.19.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2025-06-19)
 
 * **Feature**: Additional support for managing HMAC keys that adheres to changes documented in X9.143-2021 and provides better interoperability for key import/export

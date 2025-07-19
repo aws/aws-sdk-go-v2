@@ -1,3 +1,7 @@
+# v1.47.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.47.0 (2025-07-03)
 
 * **Feature**: This release introduces capability of create Segments via importing a CSV file directly. This consumes the CSV file and creates/updates corresponding profiles for the particular domain.

@@ -1,3 +1,7 @@
+# v1.45.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.45.0 (2025-07-15)
 
 * **Feature**: Add support for S3 Vectors as a vector store.

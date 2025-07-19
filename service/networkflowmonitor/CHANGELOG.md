@@ -1,3 +1,7 @@
+# v1.4.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.4.0 (2025-07-16.2)
 
 * **Feature**: Introducing 2 new scope status types - DEACTIVATING and DEACTIVATED.

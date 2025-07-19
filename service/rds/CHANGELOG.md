@@ -1,3 +1,7 @@
+# v1.99.2 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.99.1 (2025-07-01)
 
 * **Documentation**: Amazon RDS Custom for Oracle now supports multi-AZ database instances.

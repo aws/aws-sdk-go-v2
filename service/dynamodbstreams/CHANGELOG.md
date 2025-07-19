@@ -1,3 +1,7 @@
+# v1.26.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.26.0 (2025-07-15)
 
 * **Feature**: Added support for optional shard filter parameter in DescribeStream api that allows customers to fetch child shards of a read_only parent shard.

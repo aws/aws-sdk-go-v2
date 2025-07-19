@@ -1,3 +1,7 @@
+# v1.57.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.57.0 (2025-07-16.2)
 
 * **Feature**: Add expectedBucketOwner parameter to ThreatIntel and IPSet APIs.

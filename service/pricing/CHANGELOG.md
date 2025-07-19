@@ -1,3 +1,7 @@
+# v1.35.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.35.0 (2025-07-15)
 
 * **Feature**: This release adds support for new filter types in GetProducts API, including EQUALS, CONTAINS, ANY_OF, and NONE_OF.

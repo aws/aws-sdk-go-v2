@@ -1,3 +1,7 @@
+# v1.15.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2025-07-03)
 
 * **Feature**: Added fields for output manifest reporting and task chunking parameters

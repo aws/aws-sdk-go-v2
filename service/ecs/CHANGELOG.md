@@ -1,3 +1,7 @@
+# v1.60.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.60.0 (2025-07-16)
 
 * **Feature**: This release removes hookDetails for the Amazon ECS native blue/green deployments.

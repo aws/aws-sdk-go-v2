@@ -1,3 +1,7 @@
+# v1.36.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.36.0 (2025-07-17)
 
 * **Feature**: This feature allows AWS Synthetics customers to provide code dependencies using lambda layer while creating a canary

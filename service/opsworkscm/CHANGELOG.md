@@ -1,3 +1,7 @@
+# v1.28.6 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.5 (2025-07-09)
 
 * **Documentation**: Removing content that refers to an S3 bucket that is no longer in use.

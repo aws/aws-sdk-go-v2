@@ -1,3 +1,7 @@
+# v1.18.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.0 (2025-06-30)
 
 * **Feature**: Added support for on-demand practice runs and balanced capacity checks in ARC autoshift practice.

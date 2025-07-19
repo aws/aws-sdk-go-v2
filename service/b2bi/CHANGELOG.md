@@ -1,3 +1,7 @@
+# v1.0.0-preview.71 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.0.0-preview.70 (2025-06-30)
 
 * **Feature**: Updated APIs to support inbound EDI split capabilities and additional Partnership-level configurations of generated EDI files' contents and format.

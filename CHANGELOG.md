@@ -1,3 +1,12 @@
+# Release (2025-07-19)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.36.6
+  * **Bug Fix**: Add partition support for aws-eusc.
+
 # Release (2025-07-18)
 
 ## Module Highlights

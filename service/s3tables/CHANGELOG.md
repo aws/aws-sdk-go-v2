@@ -1,3 +1,7 @@
+# v1.6.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.6.0 (2025-07-15)
 
 * **Feature**: Adds table bucket type to ListTableBucket and GetTableBucket API operations

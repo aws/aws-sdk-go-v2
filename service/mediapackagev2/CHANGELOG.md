@@ -1,3 +1,7 @@
+# v1.25.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.25.0 (2025-07-16.2)
 
 * **Feature**: This release adds support for CDN Authentication using Static Headers in MediaPackage v2.

@@ -1,3 +1,7 @@
+# v1.39.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.39.0 (2025-06-17)
 
 * **Feature**: Add support for policy operations on the SECURITYHUB_POLICY policy type.

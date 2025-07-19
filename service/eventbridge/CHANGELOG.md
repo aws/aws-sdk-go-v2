@@ -1,3 +1,7 @@
+# v1.41.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.41.0 (2025-07-15)
 
 * **Feature**: Add customer-facing logging for the EventBridge Event Bus, enabling customers to better observe their events and extract insights about their EventBridge usage.

@@ -1,3 +1,7 @@
+# v1.53.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.53.0 (2025-07-03)
 
 * **Feature**: Amazon Route 53 now supports the iso-e regions for private DNS Amazon VPCs and cloudwatch healthchecks.

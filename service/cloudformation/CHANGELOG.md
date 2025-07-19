@@ -1,3 +1,7 @@
+# v1.61.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.61.0 (2025-06-30)
 
 * **Feature**: Added support for UNKNOWN drift status.

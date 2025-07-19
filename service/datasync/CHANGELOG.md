@@ -1,3 +1,7 @@
+# v1.50.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.50.0 (2025-07-16.2)
 
 * **Feature**: AWS DataSync now supports IPv6 address inputs and outputs in create, update, and describe operations for NFS, SMB, and Object Storage locations

@@ -1,3 +1,7 @@
+# v1.58.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.58.0 (2025-06-26)
 
 * **Feature**: Updated modifyStreamingProperties to support PrivateLink VPC endpoints for directories

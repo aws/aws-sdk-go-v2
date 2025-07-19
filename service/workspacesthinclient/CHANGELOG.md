@@ -1,3 +1,7 @@
+# v1.15.1 (2025-07-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2025-06-25)
 
 * **Feature**: Remove Tags field from Get API responses
