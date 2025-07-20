@@ -192,6 +192,74 @@ type Config struct {
 	// This variable is sourced from environment variable AWS_RESPONSE_CHECKSUM_VALIDATION or
 	// the shared config profile attribute "response_checksum_validation".
 	ResponseChecksumValidation ResponseChecksumValidation
+
+	// ServiceOptions provides service-specific configuration options that will be applied
+	// when constructing clients for specific services. The key is the service ID (e.g., "DynamoDB"),
+	// and the value is a slice of callback functions that will be applied to the service's Options struct.
+	//
+	// Example usage:
+	//   cfg := aws.Config{
+	//     ServiceOptions: map[string][]func(any){
+	//       "DynamoDB": {
+	//         func(opts any) {
+	//           if ddbOpts, ok := opts.(*dynamodb.Options); ok {
+	//             ddbOpts.DisableValidateResponseChecksum = true
+	//           }
+	//         },
+	//       },
+	//     },
+	//   }
+	ServiceOptions map[string][]func(any)
+}
+
+// ApplyServiceOptions applies service-specific options from the config to the given options struct.
+// This function is intended to be used by service clients in their NewFromConfig functions.
+//
+// Example usage in a service's NewFromConfig:
+//
+//	opts := Options{...}
+//	cfg.ApplyServiceOptions("DynamoDB", &opts)
+//	return New(opts, optFns...)
+func (c Config) ApplyServiceOptions(serviceID string, options any) {
+	if c.ServiceOptions == nil {
+		return
+	}
+
+	callbacks, exists := c.ServiceOptions[serviceID]
+	if !exists {
+		return
+	}
+
+	for _, callback := range callbacks {
+		callback(options)
+	}
+}
+
+// WithServiceOptions adds service-specific options to the config.
+// This function can be chained with other config builder methods.
+//
+// Example usage:
+//
+//	cfg := aws.NewConfig().
+//	  WithRegion("us-west-2").
+//	  WithServiceOptions("DynamoDB", func(opts any) {
+//	    if ddbOpts, ok := opts.(*dynamodb.Options); ok {
+//	      ddbOpts.DisableValidateResponseChecksum = true
+//	    }
+//	  })
+func (c *Config) WithServiceOptions(serviceID string, callbacks ...func(any)) *Config {
+	if c.ServiceOptions == nil {
+		c.ServiceOptions = make(map[string][]func(any))
+	}
+	c.ServiceOptions[serviceID] = append(c.ServiceOptions[serviceID], callbacks...)
+	return c
+}
+
+// WithRegion sets the region for the config.
+// This function can be chained with other config builder methods.
+func (c *Config) WithRegion(region string) *Config {
+	c.Region = region
+	return c
 }
 
 // NewConfig returns a new Config pointer that can be chained with builder
