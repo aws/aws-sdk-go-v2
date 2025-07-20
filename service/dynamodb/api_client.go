@@ -7,11 +7,18 @@ import (
 	cryptorand "crypto/rand"
 	"errors"
 	"fmt"
+	"net"
+	"net/http"
+	"net/url"
+	"strings"
+	"sync/atomic"
+	"time"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
 	internalauthsmithy "github.com/aws/aws-sdk-go-v2/internal/auth/smithy"
@@ -29,12 +36,6 @@ import (
 	smithyrand "github.com/aws/smithy-go/rand"
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"net"
-	"net/http"
-	"net/url"
-	"strings"
-	"sync/atomic"
-	"time"
 )
 
 const ServiceID = "DynamoDB"
@@ -454,9 +455,6 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 	resolveUseDualStackEndpoint(cfg, &opts)
 	resolveUseFIPSEndpoint(cfg, &opts)
 	resolveBaseEndpoint(cfg, &opts)
-	
-	cfg.ApplyServiceOptions(ServiceID, &opts)
-	
 	return New(opts, optFns...)
 }
 
