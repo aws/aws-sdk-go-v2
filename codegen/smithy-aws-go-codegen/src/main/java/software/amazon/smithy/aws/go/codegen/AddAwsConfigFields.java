@@ -728,6 +728,7 @@ public class AddAwsConfigFields implements GoIntegration {
                         writer.write("$L(cfg, &opts)", awsResolverFunction.get());
                     }
 
+                    writer.write("cfg.ApplyServiceOptions(ServiceID, &opts)");
                     writer.write("return New(opts, optFns...)");
                 });
         writer.write("");
