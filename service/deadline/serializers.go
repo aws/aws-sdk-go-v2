@@ -12418,6 +12418,13 @@ func awsRestjson1_serializeDocumentServiceManagedEc2FleetConfiguration(v *types.
 		ok.String(*v.StorageProfileId)
 	}
 
+	if v.VpcConfiguration != nil {
+		ok := object.Key("vpcConfiguration")
+		if err := awsRestjson1_serializeDocumentVpcConfiguration(v.VpcConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -12761,6 +12768,31 @@ func awsRestjson1_serializeDocumentVCpuCountRange(v *types.VCpuCountRange, value
 		ok.Integer(*v.Min)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVpcConfiguration(v *types.VpcConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ResourceConfigurationArns != nil {
+		ok := object.Key("resourceConfigurationArns")
+		if err := awsRestjson1_serializeDocumentVpcResourceConfigurationArns(v.ResourceConfigurationArns, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVpcResourceConfigurationArns(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 

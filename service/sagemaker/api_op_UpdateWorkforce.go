@@ -70,6 +70,10 @@ type UpdateWorkforceInput struct {
 	// This member is required.
 	WorkforceName *string
 
+	// Use this parameter to specify whether you want IPv4 only or dualstack ( IPv4
+	// and IPv6 ) to support your labeling workforce.
+	IpAddressType types.WorkforceIpAddressType
+
 	// Use this parameter to update your OIDC Identity Provider (IdP) configuration
 	// for a workforce made using your own IdP.
 	OidcConfig *types.OidcConfig

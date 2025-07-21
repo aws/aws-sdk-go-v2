@@ -1203,6 +1203,33 @@ type AnnotationConsolidationConfig struct {
 	//   -
 	//   arn:aws:lambda:ca-central-1:918755190332:function:ACS-Adjustment3DPointCloudSemanticSegmentation
 	//
+	// Generative AI/Custom - Direct passthrough of output data without any
+	// transformation.
+	//
+	//   - arn:aws:lambda:us-east-1:432418664414:function:ACS-PassThrough
+	//
+	//   - arn:aws:lambda:us-east-2:266458841044:function:ACS-PassThrough
+	//
+	//   - arn:aws:lambda:us-west-2:081040173940:function:ACS-PassThrough
+	//
+	//   - arn:aws:lambda:eu-west-1:568282634449:function:ACS-PassThrough
+	//
+	//   - arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-PassThrough
+	//
+	//   - arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-PassThrough
+	//
+	//   - arn:aws:lambda:ap-south-1:565803892007:function:ACS-PassThrough
+	//
+	//   - arn:aws:lambda:eu-central-1:203001061592:function:ACS-PassThrough
+	//
+	//   - arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-PassThrough
+	//
+	//   - arn:aws:lambda:eu-west-2:487402164563:function:ACS-PassThrough
+	//
+	//   - arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-PassThrough
+	//
+	//   - arn:aws:lambda:ca-central-1:918755190332:function:ACS-PassThrough
+	//
 	// [built-in task types]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html
 	// [annotation consolidation]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-annotation-consolidation.html
 	// [Post-annotation Lambda]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates-step3.html#sms-custom-templates-step3-postlambda
@@ -3430,8 +3457,6 @@ type ClusterEbsVolumeConfig struct {
 	// instances in the SageMaker HyperPod cluster instance group. The additional EBS
 	// volume is attached to each instance within the SageMaker HyperPod cluster
 	// instance group and mounted to /opt/sagemaker .
-	//
-	// This member is required.
 	VolumeSizeInGB *int32
 
 	noSmithyDocumentSerde
@@ -4282,16 +4307,14 @@ type ComputeQuotaConfig struct {
 // Configuration of the resources used for the compute allocation definition.
 type ComputeQuotaResourceConfig struct {
 
-	// The number of instances to add to the instance group of a SageMaker HyperPod
-	// cluster.
-	//
-	// This member is required.
-	Count *int32
-
 	// The instance type of the instance group for the cluster.
 	//
 	// This member is required.
 	InstanceType ClusterInstanceType
+
+	// The number of instances to add to the instance group of a SageMaker HyperPod
+	// cluster.
+	Count *int32
 
 	noSmithyDocumentSerde
 }
@@ -4632,6 +4655,7 @@ type CreateTemplateProvider struct {
 //
 //	CustomFileSystemMemberEFSFileSystem
 //	CustomFileSystemMemberFSxLustreFileSystem
+//	CustomFileSystemMemberS3FileSystem
 type CustomFileSystem interface {
 	isCustomFileSystem()
 }
@@ -4654,6 +4678,16 @@ type CustomFileSystemMemberFSxLustreFileSystem struct {
 
 func (*CustomFileSystemMemberFSxLustreFileSystem) isCustomFileSystem() {}
 
+// A custom file system in Amazon S3. This is only supported in Amazon SageMaker
+// Unified Studio.
+type CustomFileSystemMemberS3FileSystem struct {
+	Value S3FileSystem
+
+	noSmithyDocumentSerde
+}
+
+func (*CustomFileSystemMemberS3FileSystem) isCustomFileSystem() {}
+
 // The settings for assigning a custom file system to a user profile or space for
 // an Amazon SageMaker AI Domain. Permitted users can access this file system in
 // Amazon SageMaker AI Studio.
@@ -4662,6 +4696,7 @@ func (*CustomFileSystemMemberFSxLustreFileSystem) isCustomFileSystem() {}
 //
 //	CustomFileSystemConfigMemberEFSFileSystemConfig
 //	CustomFileSystemConfigMemberFSxLustreFileSystemConfig
+//	CustomFileSystemConfigMemberS3FileSystemConfig
 type CustomFileSystemConfig interface {
 	isCustomFileSystemConfig()
 }
@@ -4683,6 +4718,15 @@ type CustomFileSystemConfigMemberFSxLustreFileSystemConfig struct {
 }
 
 func (*CustomFileSystemConfigMemberFSxLustreFileSystemConfig) isCustomFileSystemConfig() {}
+
+// Configuration settings for a custom Amazon S3 file system.
+type CustomFileSystemConfigMemberS3FileSystemConfig struct {
+	Value S3FileSystemConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*CustomFileSystemConfigMemberS3FileSystemConfig) isCustomFileSystemConfig() {}
 
 // A custom SageMaker AI image. For more information, see [Bring your own SageMaker AI image].
 //
@@ -8574,6 +8618,33 @@ type HumanTaskConfig struct {
 	//
 	//   -
 	//   arn:aws:lambda:ca-central-1:918755190332:function:PRE-Adjustment3DPointCloudSemanticSegmentation
+	//
+	// Generative AI/Custom - Direct passthrough of input data without any
+	// transformation.
+	//
+	//   - arn:aws:lambda:us-east-1:432418664414:function:PRE-PassThrough
+	//
+	//   - arn:aws:lambda:us-east-2:266458841044:function:PRE-PassThrough
+	//
+	//   - arn:aws:lambda:us-west-2:081040173940:function:PRE-PassThrough
+	//
+	//   - arn:aws:lambda:ca-central-1:918755190332:function:PRE-PassThrough
+	//
+	//   - arn:aws:lambda:eu-west-1:568282634449:function:PRE-PassThrough
+	//
+	//   - arn:aws:lambda:eu-west-2:487402164563:function:PRE-PassThrough
+	//
+	//   - arn:aws:lambda:eu-central-1:203001061592:function:PRE-PassThrough
+	//
+	//   - arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-PassThrough
+	//
+	//   - arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-PassThrough
+	//
+	//   - arn:aws:lambda:ap-south-1:565803892007:function:PRE-PassThrough
+	//
+	//   - arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-PassThrough
+	//
+	//   - arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-PassThrough
 	//
 	// [built-in task types]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html
 	// [3D Point Cloud Task types]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud-task-types.html
@@ -17269,6 +17340,31 @@ type S3DataSource struct {
 	noSmithyDocumentSerde
 }
 
+// A custom file system in Amazon S3. This is only supported in Amazon SageMaker
+// Unified Studio.
+type S3FileSystem struct {
+
+	// The Amazon S3 URI that specifies the location in S3 where files are stored,
+	// which is mounted within the Studio environment. For example:
+	// s3://<bucket-name>/<prefix>/ .
+	S3Uri *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for the custom Amazon S3 file system.
+type S3FileSystemConfig struct {
+
+	// The file system path where the Amazon S3 storage location will be mounted
+	// within the Amazon SageMaker Studio environment.
+	MountPath *string
+
+	// The Amazon S3 URI of the S3 file system configuration.
+	S3Uri *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the S3 location of ML model data to deploy.
 type S3ModelDataSource struct {
 
@@ -21185,6 +21281,10 @@ type Workforce struct {
 
 	// The reason your workforce failed.
 	FailureReason *string
+
+	// The IP address type you specify - either IPv4 only or dualstack ( IPv4 and IPv6
+	// ) - to support your labeling workforce.
+	IpAddressType WorkforceIpAddressType
 
 	// The most recent date that [UpdateWorkforce] was used to successfully add one or more IP address
 	// ranges ([CIDRs] ) to a private workforce's allow list.

@@ -62,6 +62,10 @@ type CreateWorkforceInput struct {
 	// [Amazon Cognito user pool]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html
 	CognitoConfig *types.CognitoConfig
 
+	// Use this parameter to specify whether you want IPv4 only or dualstack ( IPv4
+	// and IPv6 ) to support your labeling workforce.
+	IpAddressType types.WorkforceIpAddressType
+
 	// Use this parameter to configure a private workforce using your own OIDC
 	// Identity Provider.
 	//

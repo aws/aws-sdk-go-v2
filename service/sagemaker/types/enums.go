@@ -6765,6 +6765,7 @@ const (
 	ReservedCapacityInstanceTypeMlTrn132xlarge   ReservedCapacityInstanceType = "ml.trn1.32xlarge"
 	ReservedCapacityInstanceTypeMlTrn248xlarge   ReservedCapacityInstanceType = "ml.trn2.48xlarge"
 	ReservedCapacityInstanceTypeMlP6B20048xlarge ReservedCapacityInstanceType = "ml.p6-b200.48xlarge"
+	ReservedCapacityInstanceTypeMlP4de24xlarge   ReservedCapacityInstanceType = "ml.p4de.24xlarge"
 )
 
 // Values returns all known values for ReservedCapacityInstanceType. Note that
@@ -6781,6 +6782,7 @@ func (ReservedCapacityInstanceType) Values() []ReservedCapacityInstanceType {
 		"ml.trn1.32xlarge",
 		"ml.trn2.48xlarge",
 		"ml.p6-b200.48xlarge",
+		"ml.p4de.24xlarge",
 	}
 }
 
@@ -9136,6 +9138,25 @@ func (WarmPoolResourceStatus) Values() []WarmPoolResourceStatus {
 		"Terminated",
 		"Reused",
 		"InUse",
+	}
+}
+
+type WorkforceIpAddressType string
+
+// Enum values for WorkforceIpAddressType
+const (
+	WorkforceIpAddressTypeIpv4      WorkforceIpAddressType = "ipv4"
+	WorkforceIpAddressTypeDualstack WorkforceIpAddressType = "dualstack"
+)
+
+// Values returns all known values for WorkforceIpAddressType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WorkforceIpAddressType) Values() []WorkforceIpAddressType {
+	return []WorkforceIpAddressType{
+		"ipv4",
+		"dualstack",
 	}
 }
 

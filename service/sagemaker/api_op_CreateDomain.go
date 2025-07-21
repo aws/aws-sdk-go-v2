@@ -126,6 +126,9 @@ type CreateDomainInput struct {
 	KmsKeyId *string
 
 	// The VPC subnets that the domain uses for communication.
+	//
+	// The field is optional when the AppNetworkAccessType parameter is set to
+	// PublicInternetOnly for domains created from Amazon SageMaker Unified Studio.
 	SubnetIds []string
 
 	// Indicates whether custom tag propagation is supported for the domain. Defaults
@@ -142,6 +145,9 @@ type CreateDomainInput struct {
 
 	// The ID of the Amazon Virtual Private Cloud (VPC) that the domain uses for
 	// communication.
+	//
+	// The field is optional when the AppNetworkAccessType parameter is set to
+	// PublicInternetOnly for domains created from Amazon SageMaker Unified Studio.
 	VpcId *string
 
 	noSmithyDocumentSerde

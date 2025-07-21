@@ -403,6 +403,9 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "cognito-identity.me-south-1.amazonaws.com",
 			},
 			endpoints.EndpointKey{
+				Region: "mx-central-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
 				Region: "sa-east-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{

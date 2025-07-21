@@ -1,0 +1,8 @@
+{
+    "id": "2073798c-0eeb-456a-84ec-ea41ab8cad24",
+    "type": "feature",
+    "description": "This release adds support for C8gn, F2 and P6e-GB200 Instance types",
+    "modules": [
+        "service/ec2"
+    ]
+}

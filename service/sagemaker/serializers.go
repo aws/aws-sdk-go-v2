@@ -24905,6 +24905,12 @@ func awsAwsjson11_serializeDocumentCustomFileSystem(v types.CustomFileSystem, va
 			return err
 		}
 
+	case *types.CustomFileSystemMemberS3FileSystem:
+		av := object.Key("S3FileSystem")
+		if err := awsAwsjson11_serializeDocumentS3FileSystem(&uv.Value, av); err != nil {
+			return err
+		}
+
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
@@ -24926,6 +24932,12 @@ func awsAwsjson11_serializeDocumentCustomFileSystemConfig(v types.CustomFileSyst
 	case *types.CustomFileSystemConfigMemberFSxLustreFileSystemConfig:
 		av := object.Key("FSxLustreFileSystemConfig")
 		if err := awsAwsjson11_serializeDocumentFSxLustreFileSystemConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.CustomFileSystemConfigMemberS3FileSystemConfig:
+		av := object.Key("S3FileSystemConfig")
+		if err := awsAwsjson11_serializeDocumentS3FileSystemConfig(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -32373,6 +32385,35 @@ func awsAwsjson11_serializeDocumentS3DataSource(v *types.S3DataSource, value smi
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentS3FileSystem(v *types.S3FileSystem, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3Uri != nil {
+		ok := object.Key("S3Uri")
+		ok.String(*v.S3Uri)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentS3FileSystemConfig(v *types.S3FileSystemConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MountPath != nil {
+		ok := object.Key("MountPath")
+		ok.String(*v.MountPath)
+	}
+
+	if v.S3Uri != nil {
+		ok := object.Key("S3Uri")
+		ok.String(*v.S3Uri)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentS3ModelDataSource(v *types.S3ModelDataSource, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -38122,6 +38163,11 @@ func awsAwsjson11_serializeOpDocumentCreateWorkforceInput(v *CreateWorkforceInpu
 		if err := awsAwsjson11_serializeDocumentCognitoConfig(v.CognitoConfig, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.IpAddressType) > 0 {
+		ok := object.Key("IpAddressType")
+		ok.String(string(v.IpAddressType))
 	}
 
 	if v.OidcConfig != nil {
@@ -46081,6 +46127,11 @@ func awsAwsjson11_serializeOpDocumentUpdateUserProfileInput(v *UpdateUserProfile
 func awsAwsjson11_serializeOpDocumentUpdateWorkforceInput(v *UpdateWorkforceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.IpAddressType) > 0 {
+		ok := object.Key("IpAddressType")
+		ok.String(string(v.IpAddressType))
+	}
 
 	if v.OidcConfig != nil {
 		ok := object.Key("OidcConfig")
