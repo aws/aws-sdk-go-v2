@@ -1,8 +1,0 @@
-{
-    "id": "43b5c0b0-5e17-4781-a53b-9cccaba33669",
-    "type": "feature",
-    "description": "This release adds 1/ Support for S3FileSystem in CustomFileSystems 2/ The ability for a customer to select their preferred IpAddressType for use with private Workforces 3/ Support for p4de instance type in SageMaker Training Plans",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

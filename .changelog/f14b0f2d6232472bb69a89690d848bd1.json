@@ -1,8 +1,0 @@
-{
-    "id": "f14b0f2d-6232-472b-b69a-89690d848bd1",
-    "type": "feature",
-    "description": "Add dualstack endpoint support",
-    "modules": [
-        "service/cloudfront"
-    ]
-}

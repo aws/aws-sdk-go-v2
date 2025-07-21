@@ -1,3 +1,7 @@
+# v1.16.0 (2025-07-21)
+
+* **Feature**: Add support for VPC resource endpoints in Service Managed Fleets
+
 # v1.15.1 (2025-07-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

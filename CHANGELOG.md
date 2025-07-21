@@ -1,3 +1,17 @@
+# Release (2025-07-21)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.47.0](service/cloudfront/CHANGELOG.md#v1470-2025-07-21)
+  * **Feature**: Add dualstack endpoint support
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.16.0](service/deadline/CHANGELOG.md#v1160-2025-07-21)
+  * **Feature**: Add support for VPC resource endpoints in Service Managed Fleets
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.234.0](service/ec2/CHANGELOG.md#v12340-2025-07-21)
+  * **Feature**: This release adds support for C8gn, F2 and P6e-GB200 Instance types
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.202.0](service/sagemaker/CHANGELOG.md#v12020-2025-07-21)
+  * **Feature**: This release adds 1/ Support for S3FileSystem in CustomFileSystems 2/ The ability for a customer to select their preferred IpAddressType for use with private Workforces 3/ Support for p4de instance type in SageMaker Training Plans
+* `github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb`: [v1.11.0](service/timestreaminfluxdb/CHANGELOG.md#v1110-2025-07-21)
+  * **Feature**: Timestream for InfluxDB adds support for db.influx.24xlarge instance type. This enhancement enables higher compute capacity for demanding workloads through CreateDbInstance, CreateDbCluster, UpdateDbInstance, and UpdateDbCluster APIs.
+
 # Release (2025-07-19)
 
 ## General Highlights

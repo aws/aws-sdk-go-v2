@@ -1,8 +1,0 @@
-{
-    "id": "375167c5-091e-4720-bc81-49ba52a26f56",
-    "type": "feature",
-    "description": "Add support for VPC resource endpoints in Service Managed Fleets",
-    "modules": [
-        "service/deadline"
-    ]
-}
