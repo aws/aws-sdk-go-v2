@@ -1,3 +1,7 @@
+# v1.73.0 (2025-07-22)
+
+* **Feature**: This release migrated the model to Smithy keeping all features unchanged.
+
 # v1.72.1 (2025-07-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

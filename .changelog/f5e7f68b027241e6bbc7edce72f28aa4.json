@@ -1,8 +1,0 @@
-{
-    "id": "f5e7f68b-0272-41e6-bbc7-edce72f28aa4",
-    "type": "feature",
-    "description": "This release updates the supported regions for Neptune API to include current AWS regions.",
-    "modules": [
-        "service/neptunedata"
-    ]
-}

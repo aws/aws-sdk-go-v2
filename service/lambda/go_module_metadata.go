@@ -3,4 +3,4 @@
 package lambda
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.72.1"
+const goModuleVersion = "1.73.0"

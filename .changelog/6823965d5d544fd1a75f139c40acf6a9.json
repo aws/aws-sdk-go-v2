@@ -1,8 +1,0 @@
-{
-    "id": "6823965d-5d54-4fd1-a75f-139c40acf6a9",
-    "type": "feature",
-    "description": "This release migrated the model to Smithy keeping all features unchanged.",
-    "modules": [
-        "service/lambda"
-    ]
-}

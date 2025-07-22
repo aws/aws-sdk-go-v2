@@ -1,3 +1,15 @@
+# Release (2025-07-22)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.46.0](service/ecr/CHANGELOG.md#v1460-2025-07-22)
+  * **Feature**: Add support for Image Tag Mutability Exception feature, allowing repositories to define wildcard-based patterns that override the default image tag mutability settings.
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.50.0](service/emr/CHANGELOG.md#v1500-2025-07-22)
+  * **Feature**: This release adds new parameter 'ExtendedSupport' in AWS EMR RunJobFlow, ModifyCluster and DescribeCluster API.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.73.0](service/lambda/CHANGELOG.md#v1730-2025-07-22)
+  * **Feature**: This release migrated the model to Smithy keeping all features unchanged.
+* `github.com/aws/aws-sdk-go-v2/service/neptunedata`: [v1.11.0](service/neptunedata/CHANGELOG.md#v1110-2025-07-22)
+  * **Feature**: This release updates the supported regions for Neptune API to include current AWS regions.
+
 # Release (2025-07-21)
 
 ## Module Highlights

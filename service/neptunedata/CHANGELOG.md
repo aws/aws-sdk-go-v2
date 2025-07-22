@@ -1,3 +1,7 @@
+# v1.11.0 (2025-07-22)
+
+* **Feature**: This release updates the supported regions for Neptune API to include current AWS regions.
+
 # v1.10.5 (2025-07-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions
