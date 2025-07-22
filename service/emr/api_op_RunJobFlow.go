@@ -129,6 +129,9 @@ type RunJobFlowInput struct {
 	// 6.15.0 and later.
 	EbsRootVolumeThroughput *int32
 
+	// Reserved.
+	ExtendedSupport *bool
+
 	// Also called instance profile and Amazon EC2 role. An IAM role for an Amazon EMR
 	// cluster. The Amazon EC2 instances of the cluster assume this role. The default
 	// role is EMR_EC2_DefaultRole . In order to use the default role, you must have

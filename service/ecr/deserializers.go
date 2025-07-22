@@ -9525,6 +9525,89 @@ func awsAwsjson11_deserializeDocumentImageTagList(v *[]string, value interface{}
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentImageTagMutabilityExclusionFilter(v **types.ImageTagMutabilityExclusionFilter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ImageTagMutabilityExclusionFilter
+	if *v == nil {
+		sv = &types.ImageTagMutabilityExclusionFilter{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "filter":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImageTagMutabilityExclusionFilterValue to be of type string, got %T instead", value)
+				}
+				sv.Filter = ptr.String(jtv)
+			}
+
+		case "filterType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImageTagMutabilityExclusionFilterType to be of type string, got %T instead", value)
+				}
+				sv.FilterType = types.ImageTagMutabilityExclusionFilterType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentImageTagMutabilityExclusionFilters(v *[]types.ImageTagMutabilityExclusionFilter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ImageTagMutabilityExclusionFilter
+	if *v == nil {
+		cv = []types.ImageTagMutabilityExclusionFilter{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ImageTagMutabilityExclusionFilter
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentImageTagMutabilityExclusionFilter(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentImageTagsList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11531,6 +11614,11 @@ func awsAwsjson11_deserializeDocumentRepository(v **types.Repository, value inte
 				sv.ImageTagMutability = types.ImageTagMutability(jtv)
 			}
 
+		case "imageTagMutabilityExclusionFilters":
+			if err := awsAwsjson11_deserializeDocumentImageTagMutabilityExclusionFilters(&sv.ImageTagMutabilityExclusionFilters, value); err != nil {
+				return err
+			}
+
 		case "registryId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11689,6 +11777,11 @@ func awsAwsjson11_deserializeDocumentRepositoryCreationTemplate(v **types.Reposi
 					return fmt.Errorf("expected ImageTagMutability to be of type string, got %T instead", value)
 				}
 				sv.ImageTagMutability = types.ImageTagMutability(jtv)
+			}
+
+		case "imageTagMutabilityExclusionFilters":
+			if err := awsAwsjson11_deserializeDocumentImageTagMutabilityExclusionFilters(&sv.ImageTagMutabilityExclusionFilters, value); err != nil {
+				return err
 			}
 
 		case "lifecyclePolicy":
@@ -15184,6 +15277,11 @@ func awsAwsjson11_deserializeOpDocumentPutImageTagMutabilityOutput(v **PutImageT
 					return fmt.Errorf("expected ImageTagMutability to be of type string, got %T instead", value)
 				}
 				sv.ImageTagMutability = types.ImageTagMutability(jtv)
+			}
+
+		case "imageTagMutabilityExclusionFilters":
+			if err := awsAwsjson11_deserializeDocumentImageTagMutabilityExclusionFilters(&sv.ImageTagMutabilityExclusionFilters, value); err != nil {
+				return err
 			}
 
 		case "registryId":

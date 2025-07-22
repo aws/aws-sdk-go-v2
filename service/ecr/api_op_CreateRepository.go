@@ -57,6 +57,10 @@ type CreateRepositoryInput struct {
 	// will be immutable which will prevent them from being overwritten.
 	ImageTagMutability types.ImageTagMutability
 
+	// Creates a repository with a list of filters that define which image tags can
+	// override the default image tag mutability setting.
+	ImageTagMutabilityExclusionFilters []types.ImageTagMutabilityExclusionFilter
+
 	// The Amazon Web Services account ID associated with the registry to create the
 	// repository. If you do not specify a registry, the default registry is assumed.
 	RegistryId *string

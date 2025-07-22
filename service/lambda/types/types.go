@@ -1183,9 +1183,9 @@ type LoggingConfig struct {
 	LogFormat LogFormat
 
 	// The name of the Amazon CloudWatch log group the function sends logs to. By
-	// default, Lambda functions send logs to a default log group named /aws/lambda/ .
-	// To use a different log group, enter an existing log group or enter a new log
-	// group name.
+	// default, Lambda functions send logs to a default log group named
+	// /aws/lambda/<function name> . To use a different log group, enter an existing
+	// log group or enter a new log group name.
 	LogGroup *string
 
 	// Set this property to filter the system logs for your function that Lambda sends

@@ -491,6 +491,25 @@ type ImageScanStatus struct {
 	noSmithyDocumentSerde
 }
 
+// Overrides the default image tag mutability setting of the repository for image
+// tags that match the specified filters.
+type ImageTagMutabilityExclusionFilter struct {
+
+	// The value to use when filtering image tags. Must be either a regular expression
+	// pattern or a tag prefix value based on the specified filter type.
+	//
+	// This member is required.
+	Filter *string
+
+	// Specifies the type of filter to use for excluding image tags from the
+	// repository's mutability setting.
+	//
+	// This member is required.
+	FilterType ImageTagMutabilityExclusionFilterType
+
+	noSmithyDocumentSerde
+}
+
 // An object representing an Amazon ECR image layer.
 type Layer struct {
 
@@ -777,6 +796,11 @@ type Repository struct {
 	// The tag mutability setting for the repository.
 	ImageTagMutability ImageTagMutability
 
+	// The image tag mutability exclusion filters associated with the repository.
+	// These filters specify which image tags can override the repository's default
+	// image tag mutability setting.
+	ImageTagMutabilityExclusionFilters []ImageTagMutabilityExclusionFilter
+
 	// The Amazon Web Services account ID associated with the registry that contains
 	// the repository.
 	RegistryId *string
@@ -827,6 +851,11 @@ type RepositoryCreationTemplate struct {
 	// overwritten. If IMMUTABLE is specified, all image tags within the repository
 	// will be immutable which will prevent them from being overwritten.
 	ImageTagMutability ImageTagMutability
+
+	// Defines the image tag mutability exclusion filters to apply when creating
+	// repositories from this template. These filters specify which image tags can
+	// override the repository's default image tag mutability setting.
+	ImageTagMutabilityExclusionFilters []ImageTagMutabilityExclusionFilter
 
 	// The lifecycle policy to use for repositories created using the template.
 	LifecyclePolicy *string

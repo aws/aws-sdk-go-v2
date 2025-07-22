@@ -1,0 +1,8 @@
+{
+    "id": "40b55097-0602-42ca-b5b1-1519fb278c87",
+    "type": "feature",
+    "description": "This release adds new parameter 'ExtendedSupport' in AWS EMR RunJobFlow, ModifyCluster and DescribeCluster API.",
+    "modules": [
+        "service/emr"
+    ]
+}

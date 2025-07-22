@@ -199,6 +199,19 @@ const (
 	S3BucketRegionCnNorthwest1 S3BucketRegion = "cn-northwest-1"
 	S3BucketRegionUsGovWest1   S3BucketRegion = "us-gov-west-1"
 	S3BucketRegionUsGovEast1   S3BucketRegion = "us-gov-east-1"
+	S3BucketRegionCaWest1      S3BucketRegion = "ca-west-1"
+	S3BucketRegionEuSouth2     S3BucketRegion = "eu-south-2"
+	S3BucketRegionIlCentral1   S3BucketRegion = "il-central-1"
+	S3BucketRegionMeCentral1   S3BucketRegion = "me-central-1"
+	S3BucketRegionApNortheast3 S3BucketRegion = "ap-northeast-3"
+	S3BucketRegionApSoutheast3 S3BucketRegion = "ap-southeast-3"
+	S3BucketRegionApSoutheast4 S3BucketRegion = "ap-southeast-4"
+	S3BucketRegionApSoutheast5 S3BucketRegion = "ap-southeast-5"
+	S3BucketRegionApSoutheast7 S3BucketRegion = "ap-southeast-7"
+	S3BucketRegionMxCentral1   S3BucketRegion = "mx-central-1"
+	S3BucketRegionApEast2      S3BucketRegion = "ap-east-2"
+	S3BucketRegionApSouth2     S3BucketRegion = "ap-south-2"
+	S3BucketRegionEuCentral2   S3BucketRegion = "eu-central-2"
 )
 
 // Values returns all known values for S3BucketRegion. Note that this can be
@@ -230,6 +243,19 @@ func (S3BucketRegion) Values() []S3BucketRegion {
 		"cn-northwest-1",
 		"us-gov-west-1",
 		"us-gov-east-1",
+		"ca-west-1",
+		"eu-south-2",
+		"il-central-1",
+		"me-central-1",
+		"ap-northeast-3",
+		"ap-southeast-3",
+		"ap-southeast-4",
+		"ap-southeast-5",
+		"ap-southeast-7",
+		"mx-central-1",
+		"ap-east-2",
+		"ap-south-2",
+		"eu-central-2",
 	}
 }
 

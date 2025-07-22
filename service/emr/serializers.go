@@ -6296,6 +6296,11 @@ func awsAwsjson11_serializeOpDocumentModifyClusterInput(v *ModifyClusterInput, v
 		ok.String(*v.ClusterId)
 	}
 
+	if v.ExtendedSupport != nil {
+		ok := object.Key("ExtendedSupport")
+		ok.Boolean(*v.ExtendedSupport)
+	}
+
 	if v.StepConcurrencyLevel != nil {
 		ok := object.Key("StepConcurrencyLevel")
 		ok.Integer(*v.StepConcurrencyLevel)
@@ -6543,6 +6548,11 @@ func awsAwsjson11_serializeOpDocumentRunJobFlowInput(v *RunJobFlowInput, value s
 	if v.EbsRootVolumeThroughput != nil {
 		ok := object.Key("EbsRootVolumeThroughput")
 		ok.Integer(*v.EbsRootVolumeThroughput)
+	}
+
+	if v.ExtendedSupport != nil {
+		ok := object.Key("ExtendedSupport")
+		ok.Boolean(*v.ExtendedSupport)
 	}
 
 	if v.Instances != nil {

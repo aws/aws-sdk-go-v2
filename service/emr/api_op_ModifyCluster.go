@@ -34,6 +34,9 @@ type ModifyClusterInput struct {
 	// This member is required.
 	ClusterId *string
 
+	// Reserved.
+	ExtendedSupport *bool
+
 	// The number of steps that can be executed concurrently. You can specify a
 	// minimum of 1 step and a maximum of 256 steps. We recommend that you do not
 	// change this parameter while steps are running or the ActionOnFailure setting
@@ -44,6 +47,9 @@ type ModifyClusterInput struct {
 }
 
 type ModifyClusterOutput struct {
+
+	// Reserved.
+	ExtendedSupport *bool
 
 	// The number of steps that can be executed concurrently.
 	StepConcurrencyLevel *int32

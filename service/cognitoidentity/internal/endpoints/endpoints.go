@@ -250,6 +250,9 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "cognito-identity.ap-southeast-5.amazonaws.com",
 			},
 			endpoints.EndpointKey{
+				Region: "ap-southeast-7",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
 				Region: "ca-central-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{

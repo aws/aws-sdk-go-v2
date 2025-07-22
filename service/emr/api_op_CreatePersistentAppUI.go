@@ -37,8 +37,7 @@ type CreatePersistentAppUIInput struct {
 	// The EMR containers configuration.
 	EMRContainersConfig *types.EMRContainersConfig
 
-	// The profiler type for the persistent application user interface. Valid values
-	// are SHS, TEZUI, or YTS.
+	// The profiler type for the persistent application user interface.
 	ProfilerType types.ProfilerType
 
 	// Tags for the persistent application user interface.
