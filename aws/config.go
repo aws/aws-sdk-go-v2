@@ -202,10 +202,6 @@ type Config struct {
 // ApplyServiceOptions applies service specific options from the config to the given options struct.
 // This function is intended to be used by service clients in their NewFromConfig functions.
 func (c Config) ApplyServiceOptions(serviceID string, options any) {
-	if c.ServiceOptions == nil {
-		return
-	}
-
 	for _, callback := range c.ServiceOptions {
 		callback(serviceID, options)
 	}
@@ -214,9 +210,6 @@ func (c Config) ApplyServiceOptions(serviceID string, options any) {
 // WithServiceOptions adds service specific options to the config.
 // This function can be chained with other config builder methods.
 func (c *Config) WithServiceOptions(callbacks ...func(string, any)) *Config {
-	if c.ServiceOptions == nil {
-		c.ServiceOptions = make([]func(string, any), 0)
-	}
 	c.ServiceOptions = append(c.ServiceOptions, callbacks...)
 	return c
 }
