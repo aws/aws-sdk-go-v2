@@ -194,9 +194,9 @@ type Config struct {
 	ResponseChecksumValidation ResponseChecksumValidation
 
 	// ServiceOptions provides service specific configuration options that will be applied
-	// when constructing clients for specific services. The key is the service ID (e.g., "DynamoDB"),
-	// and the value is a slice of callback functions that will be applied to the service's Options struct.
-	ServiceOptions map[string][]func(any)
+	// when constructing clients for specific services. Each callback function receives the service ID
+	// and the service's Options struct, allowing for dynamic configuration based on the service.
+	ServiceOptions []func(string, any)
 }
 
 // ApplyServiceOptions applies service specific options from the config to the given options struct.
@@ -206,23 +206,18 @@ func (c Config) ApplyServiceOptions(serviceID string, options any) {
 		return
 	}
 
-	callbacks, exists := c.ServiceOptions[serviceID]
-	if !exists {
-		return
-	}
-
-	for _, callback := range callbacks {
-		callback(options)
+	for _, callback := range c.ServiceOptions {
+		callback(serviceID, options)
 	}
 }
 
 // WithServiceOptions adds service specific options to the config.
 // This function can be chained with other config builder methods.
-func (c *Config) WithServiceOptions(serviceID string, callbacks ...func(any)) *Config {
+func (c *Config) WithServiceOptions(callbacks ...func(string, any)) *Config {
 	if c.ServiceOptions == nil {
-		c.ServiceOptions = make(map[string][]func(any))
+		c.ServiceOptions = make([]func(string, any), 0)
 	}
-	c.ServiceOptions[serviceID] = append(c.ServiceOptions[serviceID], callbacks...)
+	c.ServiceOptions = append(c.ServiceOptions, callbacks...)
 	return c
 }
 

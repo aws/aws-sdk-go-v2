@@ -14,10 +14,12 @@ type MockServiceOptions struct {
 func TestWithServiceOptions(t *testing.T) {
 	cfg := NewConfig()
 
-	cfg = cfg.WithServiceOptions("TestService", func(opts any) {
-		if mockOpts, ok := opts.(*MockServiceOptions); ok {
-			mockOpts.Field1 = true
-			mockOpts.Field2 = "test"
+	cfg = cfg.WithServiceOptions(func(serviceID string, opts any) {
+		if serviceID == "TestService" {
+			if mockOpts, ok := opts.(*MockServiceOptions); ok {
+				mockOpts.Field1 = true
+				mockOpts.Field2 = "test"
+			}
 		}
 	})
 
@@ -25,13 +27,8 @@ func TestWithServiceOptions(t *testing.T) {
 		t.Fatal("ServiceOptions should not be nil")
 	}
 
-	callbacks, exists := cfg.ServiceOptions["TestService"]
-	if !exists {
-		t.Fatal("TestService should exist in ServiceOptions")
-	}
-
-	if len(callbacks) != 1 {
-		t.Fatalf("Expected 1 callback, got %d", len(callbacks))
+	if len(cfg.ServiceOptions) != 1 {
+		t.Fatalf("Expected 1 callback, got %d", len(cfg.ServiceOptions))
 	}
 
 	mockOpts := &MockServiceOptions{}
@@ -49,37 +46,109 @@ func TestWithServiceOptions(t *testing.T) {
 func TestWithServiceOptionsMultiple(t *testing.T) {
 	cfg := NewConfig()
 
-	cfg = cfg.WithServiceOptions("TestService",
-		func(opts any) {
-			if mockOpts, ok := opts.(*MockServiceOptions); ok {
-				mockOpts.Field1 = true
+	cfg = cfg.WithServiceOptions(
+		func(serviceID string, opts any) {
+			if serviceID == "Service1" {
+				if mockOpts, ok := opts.(*MockServiceOptions); ok {
+					mockOpts.Field1 = true
+				}
 			}
 		},
-		func(opts any) {
-			if mockOpts, ok := opts.(*MockServiceOptions); ok {
-				mockOpts.Field2 = "test"
+		func(serviceID string, opts any) {
+			if serviceID == "Service2" {
+				if mockOpts, ok := opts.(*MockServiceOptions); ok {
+					mockOpts.Field2 = "test"
+				}
 			}
 		},
 	)
 
-	callbacks, exists := cfg.ServiceOptions["TestService"]
-	if !exists {
-		t.Fatal("TestService should exist in ServiceOptions")
+	if len(cfg.ServiceOptions) != 2 {
+		t.Fatalf("Expected 2 callbacks, got %d", len(cfg.ServiceOptions))
 	}
 
-	if len(callbacks) != 2 {
-		t.Fatalf("Expected 2 callbacks, got %d", len(callbacks))
+	mockOpts1 := &MockServiceOptions{}
+	cfg.ApplyServiceOptions("Service1", mockOpts1)
+
+	if !mockOpts1.Field1 {
+		t.Error("Service1 Field1 should be true")
 	}
 
-	mockOpts := &MockServiceOptions{}
-	cfg.ApplyServiceOptions("TestService", mockOpts)
-
-	if !mockOpts.Field1 {
-		t.Error("Field1 should be true")
+	if mockOpts1.Field2 != "" {
+		t.Errorf("Service1 Field2 should be empty, got '%s'", mockOpts1.Field2)
 	}
 
-	if mockOpts.Field2 != "test" {
-		t.Errorf("Field2 should be 'test', got '%s'", mockOpts.Field2)
+	mockOpts2 := &MockServiceOptions{}
+	cfg.ApplyServiceOptions("Service2", mockOpts2)
+
+	if mockOpts2.Field1 {
+		t.Error("Service2 Field1 should be false")
+	}
+
+	if mockOpts2.Field2 != "test" {
+		t.Errorf("Service2 Field2 should be 'test', got '%s'", mockOpts2.Field2)
+	}
+}
+
+func TestWithServiceOptionsMultipleServiceIDs(t *testing.T) {
+	cfg := NewConfig()
+
+	cfg = cfg.WithServiceOptions(func(serviceID string, opts any) {
+		if mockOpts, ok := opts.(*MockServiceOptions); ok {
+			switch serviceID {
+			case "Service1":
+				mockOpts.Field1 = true
+				mockOpts.Field2 = "service1"
+			case "Service2":
+				mockOpts.Field1 = false
+				mockOpts.Field2 = "service2"
+			case "Service3":
+				mockOpts.Field3 = 42
+			}
+		}
+	})
+
+	if len(cfg.ServiceOptions) != 1 {
+		t.Fatalf("Expected 1 callback, got %d", len(cfg.ServiceOptions))
+	}
+
+	mockOpts1 := &MockServiceOptions{}
+	cfg.ApplyServiceOptions("Service1", mockOpts1)
+
+	if !mockOpts1.Field1 {
+		t.Error("Service1 Field1 should be true")
+	}
+	if mockOpts1.Field2 != "service1" {
+		t.Errorf("Service1 Field2 should be 'service1', got '%s'", mockOpts1.Field2)
+	}
+	if mockOpts1.Field3 != 0 {
+		t.Errorf("Service1 Field3 should be 0, got %d", mockOpts1.Field3)
+	}
+
+	mockOpts2 := &MockServiceOptions{}
+	cfg.ApplyServiceOptions("Service2", mockOpts2)
+
+	if mockOpts2.Field1 {
+		t.Error("Service2 Field1 should be false")
+	}
+	if mockOpts2.Field2 != "service2" {
+		t.Errorf("Service2 Field2 should be 'service2', got '%s'", mockOpts2.Field2)
+	}
+	if mockOpts2.Field3 != 0 {
+		t.Errorf("Service2 Field3 should be 0, got %d", mockOpts2.Field3)
+	}
+
+	mockOpts3 := &MockServiceOptions{}
+	cfg.ApplyServiceOptions("Service3", mockOpts3)
+
+	if mockOpts3.Field1 {
+		t.Error("Service3 Field1 should be false")
+	}
+	if mockOpts3.Field2 != "" {
+		t.Errorf("Service3 Field2 should be empty, got '%s'", mockOpts3.Field2)
+	}
+	if mockOpts3.Field3 != 42 {
+		t.Errorf("Service3 Field3 should be 42, got %d", mockOpts3.Field3)
 	}
 }
 
@@ -98,9 +167,11 @@ func TestApplyServiceOptionsNonExistent(t *testing.T) {
 func TestTypeAssertionFailure(t *testing.T) {
 	cfg := NewConfig()
 
-	cfg = cfg.WithServiceOptions("TestService", func(opts any) {
-		if mockOpts, ok := opts.(*MockServiceOptions); ok {
-			mockOpts.Field1 = true
+	cfg = cfg.WithServiceOptions(func(serviceID string, opts any) {
+		if serviceID == "TestService" {
+			if mockOpts, ok := opts.(*MockServiceOptions); ok {
+				mockOpts.Field1 = true
+			}
 		}
 	})
 
@@ -116,23 +187,29 @@ func TestChaining(t *testing.T) {
 	cfg := NewConfig()
 
 	cfg = cfg.WithRegion("us-west-2").
-		WithServiceOptions("Service1", func(opts any) {
-			if mockOpts, ok := opts.(*MockServiceOptions); ok {
-				mockOpts.Field1 = true
-			}
-		}).
-		WithServiceOptions("Service2", func(opts any) {
-			if mockOpts, ok := opts.(*MockServiceOptions); ok {
-				mockOpts.Field2 = "chained"
-			}
-		})
+		WithServiceOptions(
+			func(serviceID string, opts any) {
+				if serviceID == "Service1" {
+					if mockOpts, ok := opts.(*MockServiceOptions); ok {
+						mockOpts.Field1 = true
+					}
+				}
+			},
+			func(serviceID string, opts any) {
+				if serviceID == "Service2" {
+					if mockOpts, ok := opts.(*MockServiceOptions); ok {
+						mockOpts.Field2 = "chained"
+					}
+				}
+			},
+		)
 
 	if cfg.Region != "us-west-2" {
 		t.Errorf("Expected region 'us-west-2', got '%s'", cfg.Region)
 	}
 
 	if len(cfg.ServiceOptions) != 2 {
-		t.Fatalf("Expected 2 services, got %d", len(cfg.ServiceOptions))
+		t.Fatalf("Expected 2 callbacks, got %d", len(cfg.ServiceOptions))
 	}
 
 	mockOpts1 := &MockServiceOptions{}
