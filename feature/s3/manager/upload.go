@@ -341,18 +341,6 @@ type uploader struct {
 	totalSize int64 // set to -1 if the size is not known
 }
 
-// getRequestChecksumCalculation extracts the RequestChecksumCalculation setting
-// from the uploader's ClientOptions configuration.
-func (u *uploader) getRequestChecksumCalculation() aws.RequestChecksumCalculation {
-	opts := &s3.Options{}
-
-	for _, opt := range u.cfg.ClientOptions {
-		opt(opts)
-	}
-
-	return opts.RequestChecksumCalculation
-}
-
 // internal logic for deciding whether to upload a single part or use a
 // multipart upload.
 func (u *uploader) upload() (*UploadOutput, error) {
@@ -788,11 +776,7 @@ func (u *multiuploader) initChecksumAlgorithm() {
 	case u.in.ChecksumSHA256 != nil:
 		u.in.ChecksumAlgorithm = types.ChecksumAlgorithmSha256
 	default:
-		checksumCalc := u.getRequestChecksumCalculation()
-
-		if checksumCalc != aws.RequestChecksumCalculationWhenRequired {
-			u.in.ChecksumAlgorithm = types.ChecksumAlgorithmCrc32
-		}
+		u.in.ChecksumAlgorithm = types.ChecksumAlgorithmCrc32
 	}
 }
 
