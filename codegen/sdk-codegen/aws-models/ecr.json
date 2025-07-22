@@ -2866,6 +2866,12 @@
                         "smithy.api#documentation": "<p>The tag mutability setting for the repository. If this parameter is omitted, the\n            default setting of <code>MUTABLE</code> will be used which will allow image tags to be\n            overwritten. If <code>IMMUTABLE</code> is specified, all image tags within the\n            repository will be immutable which will prevent them from being overwritten.</p>"
                     }
                 },
+                "imageTagMutabilityExclusionFilters": {
+                    "target": "com.amazonaws.ecr#ImageTagMutabilityExclusionFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Creates a repository creation template with a list of filters that define which image tags can override the default image tag mutability setting.</p>"
+                    }
+                },
                 "repositoryPolicy": {
                     "target": "com.amazonaws.ecr#RepositoryPolicyText",
                     "traits": {
@@ -2942,6 +2948,12 @@
                     "target": "com.amazonaws.ecr#ImageTagMutability",
                     "traits": {
                         "smithy.api#documentation": "<p>The tag mutability setting for the repository. If this parameter is omitted, the\n            default setting of <code>MUTABLE</code> will be used which will allow image tags to be\n            overwritten. If <code>IMMUTABLE</code> is specified, all image tags within the\n            repository will be immutable which will prevent them from being overwritten.</p>"
+                    }
+                },
+                "imageTagMutabilityExclusionFilters": {
+                    "target": "com.amazonaws.ecr#ImageTagMutabilityExclusionFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Creates a repository with a list of filters that define which image tags can override the default image tag mutability setting.</p>"
                     }
                 },
                 "imageScanningConfiguration": {
@@ -5704,6 +5716,73 @@
                     "traits": {
                         "smithy.api#enumValue": "IMMUTABLE"
                     }
+                },
+                "IMMUTABLE_WITH_EXCLUSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMMUTABLE_WITH_EXCLUSION"
+                    }
+                },
+                "MUTABLE_WITH_EXCLUSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MUTABLE_WITH_EXCLUSION"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecr#ImageTagMutabilityExclusionFilter": {
+            "type": "structure",
+            "members": {
+                "filterType": {
+                    "target": "com.amazonaws.ecr#ImageTagMutabilityExclusionFilterType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the type of filter to use for excluding image tags from the repository's mutability setting.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "filter": {
+                    "target": "com.amazonaws.ecr#ImageTagMutabilityExclusionFilterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value to use when filtering image tags. Must be either a regular expression pattern or a tag prefix value based on the specified filter type.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Overrides the default image tag mutability setting of the repository for image tags that match the specified filters.</p>"
+            }
+        },
+        "com.amazonaws.ecr#ImageTagMutabilityExclusionFilterType": {
+            "type": "enum",
+            "members": {
+                "WILDCARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WILDCARD"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecr#ImageTagMutabilityExclusionFilterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z._*-]{1,128}$"
+            }
+        },
+        "com.amazonaws.ecr#ImageTagMutabilityExclusionFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecr#ImageTagMutabilityExclusionFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
                 }
             }
         },
@@ -7047,6 +7126,12 @@
                         "smithy.api#documentation": "<p>The tag mutability setting for the repository. If <code>MUTABLE</code> is specified,\n            image tags can be overwritten. If <code>IMMUTABLE</code> is specified, all image tags\n            within the repository will be immutable which will prevent them from being\n            overwritten.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "imageTagMutabilityExclusionFilters": {
+                    "target": "com.amazonaws.ecr#ImageTagMutabilityExclusionFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Creates or updates a repository with filters that define which image tags can override the default image tag mutability setting.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7072,6 +7157,12 @@
                     "target": "com.amazonaws.ecr#ImageTagMutability",
                     "traits": {
                         "smithy.api#documentation": "<p>The image tag mutability setting for the repository.</p>"
+                    }
+                },
+                "imageTagMutabilityExclusionFilters": {
+                    "target": "com.amazonaws.ecr#ImageTagMutabilityExclusionFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a list of filters that were defined for a repository. These filters determine which image tags can override the default image tag mutability setting of the repository.</p>"
                     }
                 }
             },
@@ -7660,6 +7751,12 @@
                         "smithy.api#documentation": "<p>The tag mutability setting for the repository.</p>"
                     }
                 },
+                "imageTagMutabilityExclusionFilters": {
+                    "target": "com.amazonaws.ecr#ImageTagMutabilityExclusionFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image tag mutability exclusion filters associated with the repository. These filters specify which image tags can override the repository's default image tag mutability setting.</p>"
+                    }
+                },
                 "imageScanningConfiguration": {
                     "target": "com.amazonaws.ecr#ImageScanningConfiguration"
                 },
@@ -7720,6 +7817,12 @@
                     "target": "com.amazonaws.ecr#ImageTagMutability",
                     "traits": {
                         "smithy.api#documentation": "<p>The tag mutability setting for the repository. If this parameter is omitted, the\n            default setting of <code>MUTABLE</code> will be used which will allow image tags to be overwritten.\n            If <code>IMMUTABLE</code> is specified, all image tags within the repository will be immutable which\n            will prevent them from being overwritten.</p>"
+                    }
+                },
+                "imageTagMutabilityExclusionFilters": {
+                    "target": "com.amazonaws.ecr#ImageTagMutabilityExclusionFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the image tag mutability exclusion filters to apply when creating repositories from this template. These filters specify which image tags can override the repository's default image tag mutability setting.</p>"
                     }
                 },
                 "repositoryPolicy": {
@@ -9056,6 +9159,12 @@
                     "target": "com.amazonaws.ecr#ImageTagMutability",
                     "traits": {
                         "smithy.api#documentation": "<p>Updates the tag mutability setting for the repository. If this parameter is omitted,\n            the default setting of <code>MUTABLE</code> will be used which will allow image tags to\n            be overwritten. If <code>IMMUTABLE</code> is specified, all image tags within the\n            repository will be immutable which will prevent them from being overwritten.</p>"
+                    }
+                },
+                "imageTagMutabilityExclusionFilters": {
+                    "target": "com.amazonaws.ecr#ImageTagMutabilityExclusionFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates a repository with filters that define which image tags can override the default image tag mutability setting.</p>"
                     }
                 },
                 "repositoryPolicy": {
