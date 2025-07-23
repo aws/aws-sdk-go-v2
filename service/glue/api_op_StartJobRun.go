@@ -82,6 +82,11 @@ type StartJobRunInput struct {
 	// available for Spark jobs.
 	ExecutionClass types.ExecutionClass
 
+	// This inline session policy to the StartJobRun API allows you to dynamically
+	// restrict the permissions of the specified execution role for the scope of the
+	// job, without requiring the creation of additional IAM roles.
+	ExecutionRoleSessionPolicy *string
+
 	// The ID of a previous JobRun to retry.
 	JobRunId *string
 

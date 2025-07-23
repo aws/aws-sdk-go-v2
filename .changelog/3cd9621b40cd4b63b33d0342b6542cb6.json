@@ -1,0 +1,8 @@
+{
+    "id": "3cd9621b-40cd-4b63-b33d-0342b6542cb6",
+    "type": "feature",
+    "description": "Added support for skip-os-shutdown option for the EC2 instance stop and terminate operations. This feature enables customers to bypass the graceful OS shutdown, supporting faster state transitions when instance data preservation isn't critical.",
+    "modules": [
+        "service/ec2"
+    ]
+}

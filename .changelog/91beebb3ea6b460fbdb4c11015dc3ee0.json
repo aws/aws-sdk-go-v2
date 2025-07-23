@@ -1,0 +1,8 @@
+{
+    "id": "91beebb3-ea6b-460f-bdb4-c11015dc3ee0",
+    "type": "feature",
+    "description": "AWS Glue now supports dynamic session policies for job executions. This feature allows you to specify custom, fine-grained permissions for each job run without creating multiple IAM roles.",
+    "modules": [
+        "service/glue"
+    ]
+}

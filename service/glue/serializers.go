@@ -31514,6 +31514,11 @@ func awsAwsjson11_serializeOpDocumentStartJobRunInput(v *StartJobRunInput, value
 		ok.String(string(v.ExecutionClass))
 	}
 
+	if v.ExecutionRoleSessionPolicy != nil {
+		ok := object.Key("ExecutionRoleSessionPolicy")
+		ok.String(*v.ExecutionRoleSessionPolicy)
+	}
+
 	if v.JobName != nil {
 		ok := object.Key("JobName")
 		ok.String(*v.JobName)

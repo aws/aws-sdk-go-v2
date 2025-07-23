@@ -51495,6 +51495,15 @@ func awsAwsjson11_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 				sv.ExecutionClass = types.ExecutionClass(jtv)
 			}
 
+		case "ExecutionRoleSessionPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OrchestrationPolicyJsonString to be of type string, got %T instead", value)
+				}
+				sv.ExecutionRoleSessionPolicy = ptr.String(jtv)
+			}
+
 		case "ExecutionTime":
 			if value != nil {
 				jtv, ok := value.(json.Number)

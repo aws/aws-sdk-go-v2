@@ -1,0 +1,8 @@
+{
+    "id": "2de0789d-44ba-43cc-9c2c-0623b87de623",
+    "type": "feature",
+    "description": "Added the lastUserId parameter to the ListDevices and GetDevice API.",
+    "modules": [
+        "service/workspacesthinclient"
+    ]
+}

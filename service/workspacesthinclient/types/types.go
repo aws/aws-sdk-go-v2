@@ -41,6 +41,9 @@ type Device struct {
 	// The timestamp of the most recent check-in of the device.
 	LastPostureAt *time.Time
 
+	// The user ID of the most recent session on the device.
+	LastUserId *string
+
 	// The model number of the device.
 	Model *string
 
@@ -102,6 +105,9 @@ type DeviceSummary struct {
 
 	// The timestamp of the most recent check-in of the device.
 	LastPostureAt *time.Time
+
+	// The user ID of the most recent session on the device.
+	LastUserId *string
 
 	// The model number of the device.
 	Model *string
