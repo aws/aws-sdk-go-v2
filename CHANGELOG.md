@@ -1,3 +1,13 @@
+# Release (2025-07-23)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.235.0](service/ec2/CHANGELOG.md#v12350-2025-07-23)
+  * **Feature**: Added support for skip-os-shutdown option for the EC2 instance stop and terminate operations. This feature enables customers to bypass the graceful OS shutdown, supporting faster state transitions when instance data preservation isn't critical.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.119.0](service/glue/CHANGELOG.md#v11190-2025-07-23)
+  * **Feature**: AWS Glue now supports dynamic session policies for job executions. This feature allows you to specify custom, fine-grained permissions for each job run without creating multiple IAM roles.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesthinclient`: [v1.16.0](service/workspacesthinclient/CHANGELOG.md#v1160-2025-07-23)
+  * **Feature**: Added the lastUserId parameter to the ListDevices and GetDevice API.
+
 # Release (2025-07-22)
 
 ## Module Highlights

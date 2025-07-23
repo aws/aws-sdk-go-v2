@@ -3,4 +3,4 @@
 package glue
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.118.1"
+const goModuleVersion = "1.119.0"

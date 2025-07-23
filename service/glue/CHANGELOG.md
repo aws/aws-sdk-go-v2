@@ -1,3 +1,7 @@
+# v1.119.0 (2025-07-23)
+
+* **Feature**: AWS Glue now supports dynamic session policies for job executions. This feature allows you to specify custom, fine-grained permissions for each job run without creating multiple IAM roles.
+
 # v1.118.1 (2025-07-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

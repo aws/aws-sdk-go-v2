@@ -1,3 +1,7 @@
+# v1.16.0 (2025-07-23)
+
+* **Feature**: Added the lastUserId parameter to the ListDevices and GetDevice API.
+
 # v1.15.1 (2025-07-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions
