@@ -1,3 +1,7 @@
+# v1.33.0 (2025-07-24)
+
+* **Feature**: This release adds support for 1) highlighting relevant text in returned results for Search and SearchListings APIs and 2) returning aggregated counts of values for specified attributes for SearchListings API.
+
 # v1.32.1 (2025-07-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

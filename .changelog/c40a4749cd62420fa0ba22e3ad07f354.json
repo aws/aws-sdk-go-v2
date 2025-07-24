@@ -1,8 +1,0 @@
-{
-    "id": "c40a4749-cd62-420f-a0ba-22e3ad07f354",
-    "type": "feature",
-    "description": "This release adds support for 1) highlighting relevant text in returned results for Search and SearchListings APIs and 2) returning aggregated counts of values for specified attributes for SearchListings API.",
-    "modules": [
-        "service/datazone"
-    ]
-}

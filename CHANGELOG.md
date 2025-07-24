@@ -1,3 +1,11 @@
+# Release (2025-07-24)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.33.0](service/datazone/CHANGELOG.md#v1330-2025-07-24)
+  * **Feature**: This release adds support for 1) highlighting relevant text in returned results for Search and SearchListings APIs and 2) returning aggregated counts of values for specified attributes for SearchListings API.
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.31.0](service/omics/CHANGELOG.md#v1310-2025-07-24)
+  * **Feature**: Add Git integration and README support for HealthOmics workflows
+
 # Release (2025-07-23)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.31.0 (2025-07-24)
+
+* **Feature**: Add Git integration and README support for HealthOmics workflows
+
 # v1.30.3 (2025-07-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions
