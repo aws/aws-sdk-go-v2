@@ -11,7 +11,7 @@ import (
 	"time"
 )
 
-// Gets information about a workflow run group.
+// Gets information about a run group and returns its metadata.
 func (c *Client) GetRunGroup(ctx context.Context, params *GetRunGroupInput, optFns ...func(*Options)) (*GetRunGroupOutput, error) {
 	if params == nil {
 		params = &GetRunGroupInput{}

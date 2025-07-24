@@ -10,7 +10,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a workflow.
+// Deletes a workflow by specifying its ID. No response is returned if the
+// deletion is successful.
+//
+// To verify that the workflow is deleted:
+//
+//   - Use ListWorkflows to confirm the workflow no longer appears in the list.
+//
+//   - Use GetWorkflow to verify the workflow cannot be found.
 func (c *Client) DeleteWorkflow(ctx context.Context, params *DeleteWorkflowInput, optFns ...func(*Options)) (*DeleteWorkflowOutput, error) {
 	if params == nil {
 		params = &DeleteWorkflowInput{}

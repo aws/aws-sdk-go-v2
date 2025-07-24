@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list of your run caches.
+// Retrieves a list of your run caches and the metadata for each cache.
 func (c *Client) ListRunCaches(ctx context.Context, params *ListRunCachesInput, optFns ...func(*Options)) (*ListRunCachesOutput, error) {
 	if params == nil {
 		params = &ListRunCachesInput{}

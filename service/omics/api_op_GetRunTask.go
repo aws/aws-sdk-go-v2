@@ -14,7 +14,7 @@ import (
 	"time"
 )
 
-// Gets information about a workflow run task.
+// Gets detailed information about a run task using its ID.
 func (c *Client) GetRunTask(ctx context.Context, params *GetRunTaskInput, optFns ...func(*Options)) (*GetRunTaskOutput, error) {
 	if params == nil {
 		params = &GetRunTaskInput{}

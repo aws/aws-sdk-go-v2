@@ -296,6 +296,57 @@ type CompleteReadSetUploadPartListItem struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about a source code repository that hosts the workflow
+// definition files.
+type DefinitionRepository struct {
+
+	// The Amazon Resource Name (ARN) of the connection to the source code repository.
+	//
+	// This member is required.
+	ConnectionArn *string
+
+	// The full repository identifier, including the repository owner and name. For
+	// example, 'repository-owner/repository-name'.
+	//
+	// This member is required.
+	FullRepositoryId *string
+
+	// A list of file patterns to exclude when retrieving the workflow definition from
+	// the repository.
+	ExcludeFilePatterns []string
+
+	// The source reference for the repository, such as a branch name, tag, or commit
+	// ID.
+	SourceReference *SourceReference
+
+	noSmithyDocumentSerde
+}
+
+// Contains detailed information about the source code repository that hosts the
+// workflow definition files.
+type DefinitionRepositoryDetails struct {
+
+	// The Amazon Resource Name (ARN) of the connection to the source code repository.
+	ConnectionArn *string
+
+	// The full repository identifier, including the repository owner and name. For
+	// example, 'repository-owner/repository-name'.
+	FullRepositoryId *string
+
+	// The endpoint URL of the source code repository provider.
+	ProviderEndpoint *string
+
+	// The provider type of the source code repository, such as Bitbucket, GitHub,
+	// GitHubEnterpriseServer, GitLab, and GitLabSelfManaged.
+	ProviderType *string
+
+	// The source reference for the repository, such as a branch name, tag, or commit
+	// ID.
+	SourceReference *SourceReference
+
+	noSmithyDocumentSerde
+}
+
 // The entity tag (ETag) is a hash of the object representing its semantic content.
 type ETag struct {
 
@@ -1373,6 +1424,24 @@ type SourceFiles struct {
 
 	// The location of the second file in Amazon S3.
 	Source2 *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the source reference in a code repository, such as a
+// branch, tag, or commit.
+type SourceReference struct {
+
+	// The type of source reference, such as branch, tag, or commit.
+	//
+	// This member is required.
+	Type SourceReferenceType
+
+	// The value of the source reference, such as the branch name, tag name, or commit
+	// ID.
+	//
+	// This member is required.
+	Value *string
 
 	noSmithyDocumentSerde
 }

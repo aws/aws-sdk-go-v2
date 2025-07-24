@@ -12,19 +12,59 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts a new run or duplicates an existing run.
+// Starts a new run and returns details about the run, or duplicates an existing
+// run. A run is a single invocation of a workflow. If you provide request IDs,
+// Amazon Web Services HealthOmics identifies duplicate requests and starts the run
+// only once. Monitor the progress of the run by calling the GetRun API operation.
 //
-// For a new run, specify a unique requestId , the workflowId , and a role ARN. If
-// you're using static run storage (the default), specify the required
-// storageCapacity .
+// To start a new run, the following inputs are required:
 //
-// You duplicate a run by specifing a unique requestId , the runID of the run to
-// duplicate, and a role ARN.
+//   - A service role ARN ( roleArn ).
 //
-// For more information about the optional parameters in the StartRun request, see [Starting a run]
-// in the Amazon Web Services HealthOmics User Guide.
+//   - The run's workflow ID ( workflowId , not the uuid or runId ).
+//
+//   - An Amazon S3 location ( outputUri ) where the run outputs will be saved.
+//
+//   - All required workflow parameters ( parameter ), which can include optional
+//     parameters from the parameter template. The run cannot include any parameters
+//     that are not defined in the parameter template. To see all possible parameters,
+//     use the GetRun API operation.
+//
+//   - For runs with a STATIC (default) storage type, specify the required storage
+//     capacity (in gibibytes). A storage capacity value is not required for runs that
+//     use DYNAMIC storage.
+//
+// StartRun can also duplicate an existing run using the run's default values. You
+// can modify these default values and/or add other optional inputs. To duplicate a
+// run, the following inputs are required:
+//
+//   - A service role ARN ( roleArn ).
+//
+//   - The ID of the run to duplicate ( runId ).
+//
+//   - An Amazon S3 location where the run outputs will be saved ( outputUri ).
+//
+// To learn more about the optional parameters for StartRun , see [Starting a run] in the Amazon
+// Web Services HealthOmics User Guide.
+//
+// Use the retentionMode input to control how long the metadata for each run is
+// stored in CloudWatch. There are two retention modes:
+//
+//   - Specify REMOVE to automatically remove the oldest runs when you reach the
+//     maximum service retention limit for runs. It is recommended that you use the
+//     REMOVE mode to initiate major run requests so that your runs do not fail when
+//     you reach the limit.
+//
+//   - The retentionMode is set to the RETAIN mode by default, which allows you to
+//     manually remove runs after reaching the maximum service retention limit. Under
+//     this setting, you cannot create additional runs until you remove the excess
+//     runs.
+//
+// To learn more about the retention modes, see [Run retention mode] in the Amazon Web Services
+// HealthOmics User Guide.
 //
 // [Starting a run]: https://docs.aws.amazon.com/omics/latest/dev/starting-a-run.html
+// [Run retention mode]: https://docs.aws.amazon.com/omics/latest/dev/run-retention.html
 func (c *Client) StartRun(ctx context.Context, params *StartRunInput, optFns ...func(*Options)) (*StartRunOutput, error) {
 	if params == nil {
 		params = &StartRunInput{}
@@ -42,13 +82,17 @@ func (c *Client) StartRun(ctx context.Context, params *StartRunInput, optFns ...
 
 type StartRunInput struct {
 
-	// To ensure that requests don't run multiple times, specify a unique ID for each
-	// request.
+	// An idempotency token used to dedupe retry requests so that duplicate runs are
+	// not created.
 	//
 	// This member is required.
 	RequestId *string
 
-	// A service role for the run.
+	// A service role for the run. The roleArn requires access to Amazon Web Services
+	// HealthOmics, S3, Cloudwatch logs, and EC2. An example roleArn is
+	// arn:aws:iam::123456789012:role/omics-service-role-serviceRole-W8O1XMPL7QZ . In
+	// this example, the AWS account ID is 123456789012 and the role name is
+	// omics-service-role-serviceRole-W8O1XMPL7QZ .
 	//
 	// This member is required.
 	RoleArn *string
@@ -68,25 +112,37 @@ type StartRunInput struct {
 	// A log level for the run.
 	LogLevel types.RunLogLevel
 
-	// A name for the run.
+	// A name for the run. This is recommended to view and organize runs in the Amazon
+	// Web Services HealthOmics console and CloudWatch logs.
 	Name *string
 
-	// An output URI for the run.
+	// An output S3 URI for the run. The S3 bucket must be in the same region as the
+	// workflow. The role ARN must have permission to write to this S3 bucket.
 	OutputUri *string
 
-	// Parameters for the run.
+	// Parameters for the run. The run needs all required parameters and can include
+	// optional parameters. The run cannot include any parameters that are not defined
+	// in the parameter template. To retrieve parameters from the run, use the GetRun
+	// API operation.
 	Parameters document.Interface
 
-	// A priority for the run.
+	// Use the run priority (highest: 1) to establish the order of runs in a run group
+	// when you start a run. If multiple runs share the same priority, the run that was
+	// initiated first will have the higher priority. Runs that do not belong to a run
+	// group can be assigned a priority. The priorities of these runs are ranked among
+	// other runs that are not in a run group. For more information, see [Run priority]in the Amazon
+	// Web Services HealthOmics User Guide.
+	//
+	// [Run priority]: https://docs.aws.amazon.com/omics/latest/dev/creating-run-groups.html#run-priority
 	Priority *int32
 
-	// The retention mode for the run. The default value is RETAIN.
+	// The retention mode for the run. The default value is RETAIN .
 	//
 	// Amazon Web Services HealthOmics stores a fixed number of runs that are
-	// available to the console and API. In the default mode (RETAIN), you need to
+	// available to the console and API. In the default mode ( RETAIN ), you need to
 	// remove runs manually when the number of run exceeds the maximum. If you set the
 	// retention mode to REMOVE , Amazon Web Services HealthOmics automatically removes
-	// runs (that have mode set to REMOVE) when the number of run exceeds the maximum.
+	// runs (that have mode set to REMOVE ) when the number of run exceeds the maximum.
 	// All run logs are available in CloudWatch logs, if you need information about a
 	// run that is no longer available to the API.
 	//
@@ -96,39 +152,55 @@ type StartRunInput struct {
 	// [Specifying run retention mode]: https://docs.aws.amazon.com/omics/latest/dev/starting-a-run.html
 	RetentionMode types.RunRetentionMode
 
-	// The run's group ID.
+	// The run's group ID. Use a run group to cap the compute resources (and number of
+	// concurrent runs) for the runs that you add to the run group.
 	RunGroupId *string
 
 	// The ID of a run to duplicate.
 	RunId *string
 
-	// The static storage capacity (in gibibytes) for this run. This field is not
-	// required if the storage type is dynamic (the system ignores any value that you
-	// enter).
+	// The STATIC storage capacity (in gibibytes, GiB) for this run. The default run
+	// storage capacity is 1200 GiB. If your requested storage capacity is unavailable,
+	// the system rounds up the value to the nearest 1200 GiB multiple. If the
+	// requested storage capacity is still unavailable, the system rounds up the value
+	// to the nearest 2400 GiB multiple. This field is not required if the storage type
+	// is DYNAMIC (the system ignores any value that you enter).
 	StorageCapacity *int32
 
-	// The storage type for the run. By default, the run uses STATIC storage type,
-	// which allocates a fixed amount of storage. If you set the storage type to
-	// DYNAMIC, Amazon Web Services HealthOmics dynamically scales the storage up or
-	// down, based on file system utilization. For more information about static and
-	// dynamic storage, see [Running workflows]in the Amazon Web Services HealthOmics User Guide.
+	// The storage type for the run. If you set the storage type to DYNAMIC , Amazon
+	// Web Services HealthOmics dynamically scales the storage up or down, based on
+	// file system utilization. By default, the run uses STATIC storage type, which
+	// allocates a fixed amount of storage. For more information about DYNAMIC and
+	// STATIC storage, see [Run storage types] in the Amazon Web Services HealthOmics User Guide.
 	//
-	// [Running workflows]: https://docs.aws.amazon.com/omics/latest/dev/Using-workflows.html
+	// [Run storage types]: https://docs.aws.amazon.com/omics/latest/dev/workflows-run-types.html
 	StorageType types.StorageType
 
-	// Tags for the run.
+	// Tags for the run. You can add up to 50 tags per run. For more information, see [Adding a tag]
+	// in the Amazon Web Services HealthOmics User Guide.
+	//
+	// [Adding a tag]: https://docs.aws.amazon.com/omics/latest/dev/add-a-tag.html
 	Tags map[string]string
 
-	// The run's workflow ID.
+	// The run's workflow ID. The workflowId is not the UUID.
 	WorkflowId *string
 
-	// The ID of the workflow owner.
+	// The 12-digit account ID of the workflow owner that is used for running a shared
+	// workflow. The workflow owner ID can be retrieved using the GetShare API
+	// operation. If you are the workflow owner, you do not need to include this ID.
 	WorkflowOwnerId *string
 
-	// The run's workflow type.
+	// The run's workflow type. The workflowType must be specified if you are running
+	// a READY2RUN workflow. If you are running a PRIVATE workflow (default), you do
+	// not need to include the workflow type.
 	WorkflowType types.WorkflowType
 
-	// The name of the workflow version.
+	// The name of the workflow version. Use workflow versions to track and organize
+	// changes to the workflow. If your workflow has multiple versions, the run uses
+	// the default version unless you specify a version name. To learn more, see [Workflow versioning]in
+	// the Amazon Web Services HealthOmics User Guide.
+	//
+	// [Workflow versioning]: https://docs.aws.amazon.com/omics/latest/dev/workflow-versions.html
 	WorkflowVersionName *string
 
 	noSmithyDocumentSerde

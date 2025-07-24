@@ -37,6 +37,10 @@ type SearchListingsInput struct {
 	// Specifies additional attributes for the search.
 	AdditionalAttributes []types.SearchOutputAdditionalAttribute
 
+	// Enables you to specify one or more attributes to compute and return counts
+	// grouped by field values.
+	Aggregations []types.AggregationListItem
+
 	// Specifies the filters for the search of listings.
 	Filters types.FilterClause
 
@@ -66,6 +70,10 @@ type SearchListingsInput struct {
 }
 
 type SearchListingsOutput struct {
+
+	// Contains computed counts grouped by field values based on the requested
+	// aggregation attributes for the matching listings.
+	Aggregates []types.AggregationOutput
 
 	// The results of the SearchListings action.
 	Items []types.SearchResultItem

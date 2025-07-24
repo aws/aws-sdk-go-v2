@@ -11,14 +11,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// You can create a run cache to save the task outputs from completed tasks in a
-// run for a private workflow. Subsequent runs use the task outputs from the cache,
-// rather than computing the task outputs again. You specify an Amazon S3 location
-// where Amazon Web Services HealthOmics saves the cached data. This data must be
-// immediately accessible (not in an archived state).
+// Creates a run cache to store and reference task outputs from completed private
+// runs. Specify an Amazon S3 location where Amazon Web Services HealthOmics saves
+// the cached data. This data must be immediately accessible and not in an archived
+// state. You can save intermediate task files to a run cache if they are declared
+// as task outputs in the workflow definition file.
 //
-// For more information, see [Creating a run cache] in the Amazon Web Services HealthOmics User Guide.
+// For more information, see [Call caching] and [Creating a run cache] in the Amazon Web Services HealthOmics User
+// Guide.
 //
+// [Call caching]: https://docs.aws.amazon.com/omics/latest/dev/workflows-call-caching.html
 // [Creating a run cache]: https://docs.aws.amazon.com/omics/latest/dev/workflow-cache-create.html
 func (c *Client) CreateRunCache(ctx context.Context, params *CreateRunCacheInput, optFns ...func(*Options)) (*CreateRunCacheOutput, error) {
 	if params == nil {

@@ -10,10 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete a run cache. This action removes the cache metadata stored in the
-// service account, but doesn't delete the data in Amazon S3. You can access the
-// cache data in Amazon S3, for inspection or to troubleshoot issues. You can
-// remove old cache data using standard S3 Delete operations.
+// Deletes a run cache and returns a response with no body if the operation is
+// successful. This action removes the cache metadata stored in the service
+// account, but does not delete the data in Amazon S3. You can access the cache
+// data in Amazon S3, for inspection or to troubleshoot issues. You can remove old
+// cache data using standard S3 Delete operations.
 //
 // For more information, see [Deleting a run cache] in the Amazon Web Services HealthOmics User Guide.
 //

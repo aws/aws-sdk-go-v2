@@ -1400,6 +1400,7 @@ type SearchOutputAdditionalAttribute string
 const (
 	SearchOutputAdditionalAttributeForms                    SearchOutputAdditionalAttribute = "FORMS"
 	SearchOutputAdditionalAttributeTimeSeriesDataPointForms SearchOutputAdditionalAttribute = "TIME_SERIES_DATA_POINT_FORMS"
+	SearchOutputAdditionalAttributeTextMatchRationale       SearchOutputAdditionalAttribute = "TEXT_MATCH_RATIONALE"
 )
 
 // Values returns all known values for SearchOutputAdditionalAttribute. Note that
@@ -1411,6 +1412,7 @@ func (SearchOutputAdditionalAttribute) Values() []SearchOutputAdditionalAttribut
 	return []SearchOutputAdditionalAttribute{
 		"FORMS",
 		"TIME_SERIES_DATA_POINT_FORMS",
+		"TEXT_MATCH_RATIONALE",
 	}
 }
 

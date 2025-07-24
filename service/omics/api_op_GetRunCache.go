@@ -12,11 +12,11 @@ import (
 	"time"
 )
 
-// Retrieve the details for the specified run cache.
+// Retrieves detailed information about the specified run cache using its ID.
 //
 // For more information, see [Call caching for Amazon Web Services HealthOmics runs] in the Amazon Web Services HealthOmics User Guide.
 //
-// [Call caching for Amazon Web Services HealthOmics runs]: https://docs.aws.amazon.com/omics/latest/dev/workflow-call-caching.html
+// [Call caching for Amazon Web Services HealthOmics runs]: https://docs.aws.amazon.com/omics/latest/dev/workflows-call-caching.html
 func (c *Client) GetRunCache(ctx context.Context, params *GetRunCacheInput, optFns ...func(*Options)) (*GetRunCacheOutput, error) {
 	if params == nil {
 		params = &GetRunCacheInput{}

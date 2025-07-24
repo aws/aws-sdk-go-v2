@@ -11,7 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list of workflows.
+// Retrieves a list of existing workflows. You can filter for specific workflows
+// by their name and type. Using the type parameter, specify PRIVATE to retrieve a
+// list of private workflows or specify READY2RUN for a list of all Ready2Run
+// workflows. If you do not specify the type of workflow, this operation returns a
+// list of existing workflows.
 func (c *Client) ListWorkflows(ctx context.Context, params *ListWorkflowsInput, optFns ...func(*Options)) (*ListWorkflowsOutput, error) {
 	if params == nil {
 		params = &ListWorkflowsInput{}

@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list of tasks for a run.
+// Returns a list of tasks and status information within their specified run. Use
+// this operation to monitor runs and to identify which specific tasks have failed.
 func (c *Client) ListRunTasks(ctx context.Context, params *ListRunTasksInput, optFns ...func(*Options)) (*ListRunTasksOutput, error) {
 	if params == nil {
 		params = &ListRunTasksInput{}

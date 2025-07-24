@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list of run groups.
+// Retrieves a list of all run groups and returns the metadata for each run group.
 func (c *Client) ListRunGroups(ctx context.Context, params *ListRunGroupsInput, optFns ...func(*Options)) (*ListRunGroupsOutput, error) {
 	if params == nil {
 		params = &ListRunGroupsInput{}

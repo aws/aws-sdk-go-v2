@@ -45,6 +45,12 @@ type UpdateWorkflowVersionInput struct {
 	// Description of the workflow version.
 	Description *string
 
+	// The markdown content for the workflow version's README file. This provides
+	// documentation and usage information for users of this specific workflow version.
+	//
+	// This value conforms to the media type: text/markdown
+	ReadmeMarkdown *string
+
 	// The default static storage capacity (in gibibytes) for runs that use this
 	// workflow or workflow version.
 	StorageCapacity *int32

@@ -58,6 +58,9 @@ type CreateAssetInput struct {
 	Description *string
 
 	// The external identifier of the asset.
+	//
+	// If the value for the externalIdentifier parameter is specified, it must be a
+	// unique value.
 	ExternalIdentifier *string
 
 	// Metadata forms attached to the asset.

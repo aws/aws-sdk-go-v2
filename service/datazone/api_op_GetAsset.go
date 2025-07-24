@@ -37,6 +37,10 @@ type GetAssetInput struct {
 
 	// The ID of the Amazon DataZone asset.
 	//
+	// This parameter supports either the value of assetId or externalIdentifier as
+	// input. If you are passing the value of externalIdentifier , you must prefix this
+	// value with externalIdentifer%2F .
+	//
 	// This member is required.
 	Identifier *string
 

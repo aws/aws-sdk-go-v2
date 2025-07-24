@@ -1,0 +1,8 @@
+{
+    "id": "9dd807f1-b340-4329-91d4-1fa6d679ca4b",
+    "type": "feature",
+    "description": "Add Git integration and README support for HealthOmics workflows",
+    "modules": [
+        "service/omics"
+    ]
+}

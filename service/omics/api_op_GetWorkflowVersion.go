@@ -71,6 +71,10 @@ type GetWorkflowVersionOutput struct {
 	// Definition of the workflow version.
 	Definition *string
 
+	// Details about the source code repository that hosts the workflow version
+	// definition files.
+	DefinitionRepositoryDetails *types.DefinitionRepositoryDetails
+
 	// Description of the workflow version.
 	Description *string
 
@@ -88,6 +92,16 @@ type GetWorkflowVersionOutput struct {
 
 	// The parameter template for the workflow version.
 	ParameterTemplate map[string]types.WorkflowParameter
+
+	// The README content for the workflow version, providing documentation and usage
+	// information specific to this version.
+	Readme *string
+
+	// The path to the workflow version README markdown file within the repository.
+	// This file provides documentation and usage information for the workflow. If not
+	// specified, the README.md file from the root directory of the repository will be
+	// used.
+	ReadmePath *string
 
 	// The workflow version status
 	Status types.WorkflowStatus

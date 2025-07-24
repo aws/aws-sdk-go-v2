@@ -3845,6 +3845,38 @@ func validateAcceptedAssetScopes(v []types.AcceptedAssetScope) error {
 	}
 }
 
+func validateAggregationList(v []types.AggregationListItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AggregationList"}
+	for i := range v {
+		if err := validateAggregationListItem(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAggregationListItem(v *types.AggregationListItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AggregationListItem"}
+	if v.Attribute == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Attribute"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAssetFilterConfiguration(v types.AssetFilterConfiguration) error {
 	if v == nil {
 		return nil
@@ -8195,6 +8227,11 @@ func validateOpSearchListingsInput(v *SearchListingsInput) error {
 	if v.Filters != nil {
 		if err := validateFilterClause(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Aggregations != nil {
+		if err := validateAggregationList(v.Aggregations); err != nil {
+			invalidParams.AddNested("Aggregations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Sort != nil {
