@@ -1,8 +1,0 @@
-{
-    "id": "780f4e74-d7cb-4d58-be54-ee6c57d4f541",
-    "type": "documentation",
-    "description": "Documentation improvements have been made to the EvaluationModel and DescribeConfigurationRecorders APIs.",
-    "modules": [
-        "service/configservice"
-    ]
-}

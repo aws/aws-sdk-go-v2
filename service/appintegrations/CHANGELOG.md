@@ -1,3 +1,7 @@
+# v1.32.0 (2025-07-25)
+
+* **Feature**: Amazon AppIntegrations introduces new configuration capabilities to enable customers to manage iframe permissions, control application refresh behavior (per contact or per browser/cross-contact), and run background applications (service).
+
 # v1.31.5 (2025-07-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "5bead747-8b81-47ab-8b4e-747035a94595",
-    "type": "documentation",
-    "description": "Documentation updates for Amazon SQS fair queues feature.",
-    "modules": [
-        "service/sqs"
-    ]
-}

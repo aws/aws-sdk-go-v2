@@ -1,8 +1,0 @@
-{
-    "id": "7ad787ce-1363-43c6-81f0-280429b4bbf2",
-    "type": "documentation",
-    "description": "Doc only update: fixed grammatical errors.",
-    "modules": [
-        "service/kms"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.26.0 (2025-07-25)
+
+* **Feature**: This release adds support for specifying a preferred input for channels using CMAF ingest.
+
 # v1.25.1 (2025-07-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

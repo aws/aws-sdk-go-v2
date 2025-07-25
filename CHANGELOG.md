@@ -1,3 +1,23 @@
+# Release (2025-07-25)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appintegrations`: [v1.32.0](service/appintegrations/CHANGELOG.md#v1320-2025-07-25)
+  * **Feature**: Amazon AppIntegrations introduces new configuration capabilities to enable customers to manage iframe permissions, control application refresh behavior (per contact or per browser/cross-contact), and run background applications (service).
+* `github.com/aws/aws-sdk-go-v2/service/budgets`: [v1.32.0](service/budgets/CHANGELOG.md#v1320-2025-07-25)
+  * **Feature**: Adds IPv6 and PrivateLink support for AWS Budgets in IAD.
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.53.2](service/configservice/CHANGELOG.md#v1532-2025-07-25)
+  * **Documentation**: Documentation improvements have been made to the EvaluationModel and DescribeConfigurationRecorders APIs.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.236.0](service/ec2/CHANGELOG.md#v12360-2025-07-25)
+  * **Feature**: Transit Gateway native integration with AWS Network Firewall. Adding new enum value for the new Transit Gateway Attachment type.
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.41.4](service/kms/CHANGELOG.md#v1414-2025-07-25)
+  * **Documentation**: Doc only update: fixed grammatical errors.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.26.0](service/mediapackagev2/CHANGELOG.md#v1260-2025-07-25)
+  * **Feature**: This release adds support for specifying a preferred input for channels using CMAF ingest.
+* `github.com/aws/aws-sdk-go-v2/service/socialmessaging`: [v1.3.0](service/socialmessaging/CHANGELOG.md#v130-2025-07-25)
+  * **Feature**: This release introduces new WhatsApp template management APIs that enable customers to programmatically create and submit templates for approval, monitor approval status, and manage the complete template lifecycle
+* `github.com/aws/aws-sdk-go-v2/service/sqs`: [v1.38.10](service/sqs/CHANGELOG.md#v13810-2025-07-25)
+  * **Documentation**: Documentation updates for Amazon SQS fair queues feature.
+
 # Release (2025-07-24)
 
 ## Module Highlights

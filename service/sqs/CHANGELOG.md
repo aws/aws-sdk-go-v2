@@ -1,3 +1,7 @@
+# v1.38.10 (2025-07-25)
+
+* **Documentation**: Documentation updates for Amazon SQS fair queues feature.
+
 # v1.38.9 (2025-07-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

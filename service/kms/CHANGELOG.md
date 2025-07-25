@@ -1,3 +1,7 @@
+# v1.41.4 (2025-07-25)
+
+* **Documentation**: Doc only update: fixed grammatical errors.
+
 # v1.41.3 (2025-07-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

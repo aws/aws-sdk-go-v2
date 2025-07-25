@@ -1,3 +1,7 @@
+# v1.53.2 (2025-07-25)
+
+* **Documentation**: Documentation improvements have been made to the EvaluationModel and DescribeConfigurationRecorders APIs.
+
 # v1.53.1 (2025-07-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

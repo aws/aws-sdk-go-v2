@@ -1,3 +1,7 @@
+# v1.3.0 (2025-07-25)
+
+* **Feature**: This release introduces new WhatsApp template management APIs that enable customers to programmatically create and submit templates for approval, monitor approval status, and manage the complete template lifecycle
+
 # v1.2.5 (2025-07-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions
