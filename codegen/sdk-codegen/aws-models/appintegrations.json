@@ -927,6 +927,20 @@
                 }
             }
         },
+        "com.amazonaws.appintegrations#ApplicationConfig": {
+            "type": "structure",
+            "members": {
+                "ContactHandling": {
+                    "target": "com.amazonaws.appintegrations#ContactHandling",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contact handling configuration for the application.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration settings for the application.</p>"
+            }
+        },
         "com.amazonaws.appintegrations#ApplicationName": {
             "type": "string",
             "traits": {
@@ -999,6 +1013,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time when the application was last modified.</p>"
                     }
+                },
+                "IsService": {
+                    "target": "com.amazonaws.appintegrations#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether the application is a service.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1047,6 +1068,12 @@
                 "smithy.api#pattern": "^(arn:aws:[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}|[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})(:[\\w\\$]+)?$"
             }
         },
+        "com.amazonaws.appintegrations#Boolean": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
+        },
         "com.amazonaws.appintegrations#ClientAssociationMetadata": {
             "type": "map",
             "key": {
@@ -1064,6 +1091,37 @@
                     "max": 255
                 },
                 "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.appintegrations#ContactHandling": {
+            "type": "structure",
+            "members": {
+                "Scope": {
+                    "target": "com.amazonaws.appintegrations#ContactHandlingScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the application refreshes for each contact or refreshes only with each new browser session.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The contact handling configuration for the application.</p>"
+            }
+        },
+        "com.amazonaws.appintegrations#ContactHandlingScope": {
+            "type": "enum",
+            "members": {
+                "CROSS_CONTACTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CROSS_CONTACTS"
+                    }
+                },
+                "PER_CONTACT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PER_CONTACT"
+                    }
+                }
             }
         },
         "com.amazonaws.appintegrations#CreateApplication": {
@@ -1191,6 +1249,31 @@
                     "target": "com.amazonaws.appintegrations#PermissionList",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration of events or requests that the application has access to.</p>"
+                    }
+                },
+                "IsService": {
+                    "target": "com.amazonaws.appintegrations#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether the application is a service.</p>"
+                    }
+                },
+                "InitializationTimeout": {
+                    "target": "com.amazonaws.appintegrations#InitializationTimeout",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum time in milliseconds allowed to establish a connection with the workspace.</p>"
+                    }
+                },
+                "ApplicationConfig": {
+                    "target": "com.amazonaws.appintegrations#ApplicationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings for the application.</p>"
+                    }
+                },
+                "IframeConfig": {
+                    "target": "com.amazonaws.appintegrations#IframeConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The iframe configuration for the application.</p>"
                     }
                 }
             },
@@ -2367,6 +2450,31 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration of events or requests that the application has access to.</p>"
                     }
+                },
+                "IsService": {
+                    "target": "com.amazonaws.appintegrations#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether the application is a service.</p>"
+                    }
+                },
+                "InitializationTimeout": {
+                    "target": "com.amazonaws.appintegrations#InitializationTimeout",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum time in milliseconds allowed to establish a connection with the workspace.</p>"
+                    }
+                },
+                "ApplicationConfig": {
+                    "target": "com.amazonaws.appintegrations#ApplicationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings for the application.</p>"
+                    }
+                },
+                "IframeConfig": {
+                    "target": "com.amazonaws.appintegrations#IframeConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The iframe configuration for the application.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2603,6 +2711,59 @@
                     "max": 255
                 },
                 "smithy.api#pattern": "\\S"
+            }
+        },
+        "com.amazonaws.appintegrations#IframeConfig": {
+            "type": "structure",
+            "members": {
+                "Allow": {
+                    "target": "com.amazonaws.appintegrations#IframePermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of features that are allowed in the iframe.</p>"
+                    }
+                },
+                "Sandbox": {
+                    "target": "com.amazonaws.appintegrations#IframePermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of sandbox attributes for the iframe.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The iframe configuration for the application.</p>"
+            }
+        },
+        "com.amazonaws.appintegrations#IframePermission": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>A permission for the iframe.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[a-z-]+$"
+            }
+        },
+        "com.amazonaws.appintegrations#IframePermissionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appintegrations#IframePermission"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of permissions for the iframe.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#InitializationTimeout": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 600000
+                }
             }
         },
         "com.amazonaws.appintegrations#InternalServiceError": {
@@ -3835,6 +3996,31 @@
                     "target": "com.amazonaws.appintegrations#PermissionList",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration of events or requests that the application has access to.</p>"
+                    }
+                },
+                "IsService": {
+                    "target": "com.amazonaws.appintegrations#Boolean",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>Indicates whether the application is a service.</p>"
+                    }
+                },
+                "InitializationTimeout": {
+                    "target": "com.amazonaws.appintegrations#InitializationTimeout",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum time in milliseconds allowed to establish a connection with the workspace.</p>"
+                    }
+                },
+                "ApplicationConfig": {
+                    "target": "com.amazonaws.appintegrations#ApplicationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings for the application.</p>"
+                    }
+                },
+                "IframeConfig": {
+                    "target": "com.amazonaws.appintegrations#IframeConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The iframe configuration for the application.</p>"
                     }
                 }
             },

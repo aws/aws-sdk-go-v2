@@ -27,6 +27,18 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.socialmessaging#AddContactNumber": {
+            "type": "boolean"
+        },
+        "com.amazonaws.socialmessaging#AddLearnMoreLink": {
+            "type": "boolean"
+        },
+        "com.amazonaws.socialmessaging#AddSecurityRecommendation": {
+            "type": "boolean"
+        },
+        "com.amazonaws.socialmessaging#AddTrackPackageLink": {
+            "type": "boolean"
+        },
         "com.amazonaws.socialmessaging#Arn": {
             "type": "string",
             "traits": {
@@ -59,6 +71,9 @@
                 },
                 {
                     "target": "com.amazonaws.socialmessaging#InvalidParametersException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#LimitExceededException"
                 },
                 {
                     "target": "com.amazonaws.socialmessaging#ThrottledRequestException"
@@ -117,6 +132,251 @@
             "traits": {
                 "smithy.api#output": {}
             }
+        },
+        "com.amazonaws.socialmessaging#ButtonType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#CodeExpirationMinutes": {
+            "type": "integer"
+        },
+        "com.amazonaws.socialmessaging#CreateWhatsAppMessageTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.socialmessaging#CreateWhatsAppMessageTemplateInput"
+            },
+            "output": {
+                "target": "com.amazonaws.socialmessaging#CreateWhatsAppMessageTemplateOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.socialmessaging#DependencyException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InvalidParametersException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ThrottledRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new WhatsApp message template from a custom definition.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/whatsapp/template/put",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#CreateWhatsAppMessageTemplateFromLibrary": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.socialmessaging#CreateWhatsAppMessageTemplateFromLibraryInput"
+            },
+            "output": {
+                "target": "com.amazonaws.socialmessaging#CreateWhatsAppMessageTemplateFromLibraryOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.socialmessaging#DependencyException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InvalidParametersException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ThrottledRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new WhatsApp message template using a template from Meta's template library.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/whatsapp/template/create",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#CreateWhatsAppMessageTemplateFromLibraryInput": {
+            "type": "structure",
+            "members": {
+                "metaLibraryTemplate": {
+                    "target": "com.amazonaws.socialmessaging#MetaLibraryTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The template configuration from Meta's library, including customizations for buttons and body text.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the WhatsApp Business Account to associate with this template.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#CreateWhatsAppMessageTemplateFromLibraryOutput": {
+            "type": "structure",
+            "members": {
+                "metaTemplateId": {
+                    "target": "com.amazonaws.socialmessaging#MetaTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The numeric ID assigned to the template by Meta.</p>"
+                    }
+                },
+                "templateStatus": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the created template (for example, PENDING or APPROVED).</p>"
+                    }
+                },
+                "category": {
+                    "target": "com.amazonaws.socialmessaging#MetaTemplateCategory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category of the template (for example, UTILITY or MARKETING).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#CreateWhatsAppMessageTemplateInput": {
+            "type": "structure",
+            "members": {
+                "templateDefinition": {
+                    "target": "com.amazonaws.socialmessaging#MetaTemplateDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The complete template definition as a JSON blob.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the WhatsApp Business Account to associate with this template.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#CreateWhatsAppMessageTemplateMedia": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.socialmessaging#CreateWhatsAppMessageTemplateMediaInput"
+            },
+            "output": {
+                "target": "com.amazonaws.socialmessaging#CreateWhatsAppMessageTemplateMediaOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.socialmessaging#DependencyException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InvalidParametersException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ThrottledRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Uploads media for use in a WhatsApp message template.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/whatsapp/template/media",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#CreateWhatsAppMessageTemplateMediaInput": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the WhatsApp Business Account associated with this media upload.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sourceS3File": {
+                    "target": "com.amazonaws.socialmessaging#S3File"
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#CreateWhatsAppMessageTemplateMediaOutput": {
+            "type": "structure",
+            "members": {
+                "metaHeaderHandle": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The handle assigned to the uploaded media by Meta, used to reference the media in templates.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#CreateWhatsAppMessageTemplateOutput": {
+            "type": "structure",
+            "members": {
+                "metaTemplateId": {
+                    "target": "com.amazonaws.socialmessaging#MetaTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The numeric ID assigned to the template by Meta.</p>"
+                    }
+                },
+                "templateStatus": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the created template, such as PENDING or APPROVED..</p>"
+                    }
+                },
+                "category": {
+                    "target": "com.amazonaws.socialmessaging#MetaTemplateCategory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category of the template, such as UTILITY or MARKETING.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#DeleteAllLanguages": {
+            "type": "boolean"
         },
         "com.amazonaws.socialmessaging#DeleteWhatsAppMessageMedia": {
             "type": "operation",
@@ -191,6 +451,86 @@
                     }
                 }
             },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#DeleteWhatsAppMessageTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.socialmessaging#DeleteWhatsAppMessageTemplateInput"
+            },
+            "output": {
+                "target": "com.amazonaws.socialmessaging#DeleteWhatsAppMessageTemplateOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.socialmessaging#DependencyException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InvalidParametersException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ThrottledRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a WhatsApp message template.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v1/whatsapp/template",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#DeleteWhatsAppMessageTemplateInput": {
+            "type": "structure",
+            "members": {
+                "metaTemplateId": {
+                    "target": "com.amazonaws.socialmessaging#MetaTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The numeric ID of the template assigned by Meta.</p>",
+                        "smithy.api#httpQuery": "metaTemplateId"
+                    }
+                },
+                "deleteAllLanguages": {
+                    "target": "com.amazonaws.socialmessaging#DeleteAllLanguages",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If true, deletes all language versions of the template.</p>",
+                        "smithy.api#httpQuery": "deleteAllTemplates"
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the WhatsApp Business Account associated with this template.</p>",
+                        "smithy.api#httpQuery": "id",
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateName": {
+                    "target": "com.amazonaws.socialmessaging#MetaTemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the template to delete.</p>",
+                        "smithy.api#httpQuery": "templateName",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#DeleteWhatsAppMessageTemplateOutput": {
+            "type": "structure",
+            "members": {},
             "traits": {
                 "smithy.api#output": {}
             }
@@ -275,6 +615,33 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^arn:.*:[a-z-]+([/:](.*))?$"
+            }
+        },
+        "com.amazonaws.socialmessaging#Filter": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "min": 1,
+                        "max": 100
+                    }
+                }
+            },
+            "value": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "min": 1,
+                        "max": 100
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.socialmessaging#GetLinkedWhatsAppBusinessAccount": {
@@ -510,6 +877,79 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.socialmessaging#GetWhatsAppMessageTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.socialmessaging#GetWhatsAppMessageTemplateInput"
+            },
+            "output": {
+                "target": "com.amazonaws.socialmessaging#GetWhatsAppMessageTemplateOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.socialmessaging#DependencyException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InvalidParametersException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ThrottledRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a specific WhatsApp message template.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/whatsapp/template",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#GetWhatsAppMessageTemplateInput": {
+            "type": "structure",
+            "members": {
+                "metaTemplateId": {
+                    "target": "com.amazonaws.socialmessaging#MetaTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The numeric ID of the template assigned by Meta.</p>",
+                        "smithy.api#httpQuery": "metaTemplateId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the WhatsApp Business Account associated with this template.</p>",
+                        "smithy.api#httpQuery": "id",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#GetWhatsAppMessageTemplateOutput": {
+            "type": "structure",
+            "members": {
+                "template": {
+                    "target": "com.amazonaws.socialmessaging#MetaTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The complete template definition as a JSON string (maximum 6000 characters).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.socialmessaging#Headers": {
             "type": "map",
             "key": {
@@ -550,6 +990,151 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^[A-Z]{2}$"
+            }
+        },
+        "com.amazonaws.socialmessaging#LibraryTemplateBodyInputs": {
+            "type": "structure",
+            "members": {
+                "addContactNumber": {
+                    "target": "com.amazonaws.socialmessaging#AddContactNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When true, includes a contact number in the template body.</p>"
+                    }
+                },
+                "addLearnMoreLink": {
+                    "target": "com.amazonaws.socialmessaging#AddLearnMoreLink",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When true, includes a \"learn more\" link in the template body.</p>"
+                    }
+                },
+                "addSecurityRecommendation": {
+                    "target": "com.amazonaws.socialmessaging#AddSecurityRecommendation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When true, includes security recommendations in the template body.</p>"
+                    }
+                },
+                "addTrackPackageLink": {
+                    "target": "com.amazonaws.socialmessaging#AddTrackPackageLink",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When true, includes a package tracking link in the template body.</p>"
+                    }
+                },
+                "codeExpirationMinutes": {
+                    "target": "com.amazonaws.socialmessaging#CodeExpirationMinutes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of minutes until a verification code or OTP expires.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration options for customizing the body content of a template from Meta's library.</p>"
+            }
+        },
+        "com.amazonaws.socialmessaging#LibraryTemplateButtonInput": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.socialmessaging#ButtonType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of button (for example, QUICK_REPLY, CALL, or URL).</p>"
+                    }
+                },
+                "phoneNumber": {
+                    "target": "com.amazonaws.socialmessaging#PhoneNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The phone number in E.164 format for CALL-type buttons.</p>"
+                    }
+                },
+                "url": {
+                    "target": "com.amazonaws.socialmessaging#MetaUrlWithSuffixExample",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL with dynamic parameters for URL-type buttons.</p>"
+                    }
+                },
+                "otpType": {
+                    "target": "com.amazonaws.socialmessaging#OtpType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of one-time password for OTP buttons.</p>"
+                    }
+                },
+                "zeroTapTermsAccepted": {
+                    "target": "com.amazonaws.socialmessaging#ZeroTapTermsAccepted",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When true, indicates acceptance of zero-tap terms for the button.</p>"
+                    }
+                },
+                "supportedApps": {
+                    "target": "com.amazonaws.socialmessaging#SupportedApps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of supported applications for this button type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration options for customizing buttons in a template from Meta's library.</p>"
+            }
+        },
+        "com.amazonaws.socialmessaging#LibraryTemplateButtonList": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.socialmessaging#ButtonType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of button (for example, QUICK_REPLY, CALL, or URL).</p>"
+                    }
+                },
+                "text": {
+                    "target": "com.amazonaws.socialmessaging#MetaText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text displayed on the button (maximum 40 characters).</p>"
+                    }
+                },
+                "phoneNumber": {
+                    "target": "com.amazonaws.socialmessaging#PhoneNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The phone number in E.164 format for CALL-type buttons.</p>"
+                    }
+                },
+                "url": {
+                    "target": "com.amazonaws.socialmessaging#MetaUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL for URL-type buttons.</p>"
+                    }
+                },
+                "otpType": {
+                    "target": "com.amazonaws.socialmessaging#OtpType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of one-time password for OTP buttons.</p>"
+                    }
+                },
+                "zeroTapTermsAccepted": {
+                    "target": "com.amazonaws.socialmessaging#ZeroTapTermsAccepted",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When true, indicates acceptance of zero-tap terms for the button.</p>"
+                    }
+                },
+                "supportedApps": {
+                    "target": "com.amazonaws.socialmessaging#SupportedApps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of supported applications for this button type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a button in a template from Meta's library.</p>"
+            }
+        },
+        "com.amazonaws.socialmessaging#LimitExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.socialmessaging#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied because it would exceed one or more service quotas or limits.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
             }
         },
         "com.amazonaws.socialmessaging#LinkedAccountWithIncompleteSetup": {
@@ -979,6 +1564,186 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.socialmessaging#ListWhatsAppMessageTemplates": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.socialmessaging#ListWhatsAppMessageTemplatesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.socialmessaging#ListWhatsAppMessageTemplatesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.socialmessaging#DependencyException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InvalidParametersException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ThrottledRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists WhatsApp message templates for a specific WhatsApp Business Account.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/whatsapp/template/list",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "items": "templates"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#ListWhatsAppMessageTemplatesInput": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the WhatsApp Business Account to list templates for.</p>",
+                        "smithy.api#httpQuery": "id",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.socialmessaging#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.socialmessaging#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page (1-100).</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#ListWhatsAppMessageTemplatesOutput": {
+            "type": "structure",
+            "members": {
+                "templates": {
+                    "target": "com.amazonaws.socialmessaging#TemplateSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of template summaries.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.socialmessaging#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to retrieve the next page of results, if any.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#ListWhatsAppTemplateLibrary": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.socialmessaging#ListWhatsAppTemplateLibraryInput"
+            },
+            "output": {
+                "target": "com.amazonaws.socialmessaging#ListWhatsAppTemplateLibraryOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.socialmessaging#DependencyException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InvalidParametersException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ThrottledRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists templates available in Meta's template library for WhatsApp messaging.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/whatsapp/template/library",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "items": "metaLibraryTemplates"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#ListWhatsAppTemplateLibraryInput": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.socialmessaging#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.socialmessaging#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page (1-100).</p>"
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the WhatsApp Business Account to list library templates for.</p>",
+                        "smithy.api#httpQuery": "id",
+                        "smithy.api#required": {}
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.socialmessaging#Filter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Map of filters to apply (searchKey, topic, usecase, industry, language).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#ListWhatsAppTemplateLibraryOutput": {
+            "type": "structure",
+            "members": {
+                "metaLibraryTemplates": {
+                    "target": "com.amazonaws.socialmessaging#MetaLibraryTemplatesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of templates from Meta's library.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.socialmessaging#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to retrieve the next page of results, if any.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.socialmessaging#MaxResults": {
             "type": "integer",
             "traits": {
@@ -988,12 +1753,333 @@
                 }
             }
         },
+        "com.amazonaws.socialmessaging#MetaIndustries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.socialmessaging#MetaIndustry"
+            }
+        },
+        "com.amazonaws.socialmessaging#MetaIndustry": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#MetaLibraryTemplate": {
+            "type": "structure",
+            "members": {
+                "templateName": {
+                    "target": "com.amazonaws.socialmessaging#MetaTemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name to assign to the template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "libraryTemplateName": {
+                    "target": "com.amazonaws.socialmessaging#MetaTemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the template in Meta's library.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateCategory": {
+                    "target": "com.amazonaws.socialmessaging#MetaTemplateCategory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category of the template (for example, UTILITY or MARKETING).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateLanguage": {
+                    "target": "com.amazonaws.socialmessaging#MetaTemplateLanguage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language code for the template (for example, en_US).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "libraryTemplateButtonInputs": {
+                    "target": "com.amazonaws.socialmessaging#MetaLibraryTemplateButtonInputs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Button customizations for the template.</p>"
+                    }
+                },
+                "libraryTemplateBodyInputs": {
+                    "target": "com.amazonaws.socialmessaging#LibraryTemplateBodyInputs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Body text customizations for the template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a template from Meta's library with customization options.</p>"
+            }
+        },
+        "com.amazonaws.socialmessaging#MetaLibraryTemplateButtonInputs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.socialmessaging#LibraryTemplateButtonInput"
+            }
+        },
+        "com.amazonaws.socialmessaging#MetaLibraryTemplateButtonList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.socialmessaging#LibraryTemplateButtonList"
+            }
+        },
+        "com.amazonaws.socialmessaging#MetaLibraryTemplateDefinition": {
+            "type": "structure",
+            "members": {
+                "templateName": {
+                    "target": "com.amazonaws.socialmessaging#MetaTemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the template.</p>"
+                    }
+                },
+                "templateLanguage": {
+                    "target": "com.amazonaws.socialmessaging#MetaTemplateLanguage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language code for the template (for example, en_US).</p>"
+                    }
+                },
+                "templateCategory": {
+                    "target": "com.amazonaws.socialmessaging#MetaTemplateCategory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category of the template (for example, UTILITY or MARKETING).</p>"
+                    }
+                },
+                "templateTopic": {
+                    "target": "com.amazonaws.socialmessaging#MetaTemplateTopic",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The topic or subject matter of the template.</p>"
+                    }
+                },
+                "templateUseCase": {
+                    "target": "com.amazonaws.socialmessaging#MetaTemplateUseCase",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The intended use case for the template.</p>"
+                    }
+                },
+                "templateIndustry": {
+                    "target": "com.amazonaws.socialmessaging#MetaIndustries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The industries the template is designed for.</p>"
+                    }
+                },
+                "templateHeader": {
+                    "target": "com.amazonaws.socialmessaging#MetaTemplateHeader",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The header text of the template.</p>"
+                    }
+                },
+                "templateBody": {
+                    "target": "com.amazonaws.socialmessaging#MetaTemplateBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The body text of the template.</p>"
+                    }
+                },
+                "templateButtons": {
+                    "target": "com.amazonaws.socialmessaging#MetaLibraryTemplateButtonList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The buttons included in the template.</p>"
+                    }
+                },
+                "templateId": {
+                    "target": "com.amazonaws.socialmessaging#MetaTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the template in Meta's library.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the complete structure and content of a template in Meta's library.</p>"
+            }
+        },
+        "com.amazonaws.socialmessaging#MetaLibraryTemplatesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.socialmessaging#MetaLibraryTemplateDefinition"
+            }
+        },
+        "com.amazonaws.socialmessaging#MetaTemplate": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 6000
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#MetaTemplateBody": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2000
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#MetaTemplateCategory": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#MetaTemplateComponents": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 3000
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#MetaTemplateDefinition": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 6000
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#MetaTemplateHeader": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#MetaTemplateId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[0-9]+$"
+            }
+        },
+        "com.amazonaws.socialmessaging#MetaTemplateLanguage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 6
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#MetaTemplateName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#MetaTemplateQualityScore": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#MetaTemplateStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#MetaTemplateTopic": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#MetaTemplateUseCase": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 30
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#MetaText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 40
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#MetaUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 400
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#MetaUrlWithSuffixExample": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "min": 1,
+                        "max": 30
+                    }
+                }
+            },
+            "value": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "min": 1,
+                        "max": 400
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.socialmessaging#NextToken": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
                     "max": 600
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#OtpType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
                 }
             }
         },
@@ -1328,13 +2414,37 @@
             "version": "2024-01-01",
             "operations": [
                 {
+                    "target": "com.amazonaws.socialmessaging#CreateWhatsAppMessageTemplate"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#CreateWhatsAppMessageTemplateFromLibrary"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#CreateWhatsAppMessageTemplateMedia"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#DeleteWhatsAppMessageTemplate"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#GetWhatsAppMessageTemplate"
+                },
+                {
                     "target": "com.amazonaws.socialmessaging#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ListWhatsAppMessageTemplates"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ListWhatsAppTemplateLibrary"
                 },
                 {
                     "target": "com.amazonaws.socialmessaging#TagResource"
                 },
                 {
                     "target": "com.amazonaws.socialmessaging#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#UpdateWhatsAppMessageTemplate"
                 }
             ],
             "resources": [
@@ -2091,6 +3201,39 @@
                 "target": "smithy.api#String"
             }
         },
+        "com.amazonaws.socialmessaging#SupportedApp": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "min": 1,
+                        "max": 30
+                    }
+                }
+            },
+            "value": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "min": 1,
+                        "max": 100
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#SupportedApps": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.socialmessaging#SupportedApp"
+            }
+        },
         "com.amazonaws.socialmessaging#Tag": {
             "type": "structure",
             "members": {
@@ -2209,6 +3352,56 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.socialmessaging#TemplateSummary": {
+            "type": "structure",
+            "members": {
+                "templateName": {
+                    "target": "com.amazonaws.socialmessaging#MetaTemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the template.</p>"
+                    }
+                },
+                "metaTemplateId": {
+                    "target": "com.amazonaws.socialmessaging#MetaTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The numeric ID assigned to the template by Meta.</p>"
+                    }
+                },
+                "templateStatus": {
+                    "target": "com.amazonaws.socialmessaging#MetaTemplateStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the template (for example, APPROVED, PENDING, or REJECTED).</p>"
+                    }
+                },
+                "templateQualityScore": {
+                    "target": "com.amazonaws.socialmessaging#MetaTemplateQualityScore",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quality score assigned to the template by Meta.</p>"
+                    }
+                },
+                "templateLanguage": {
+                    "target": "com.amazonaws.socialmessaging#MetaTemplateLanguage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language code of the template (for example, en_US).</p>"
+                    }
+                },
+                "templateCategory": {
+                    "target": "com.amazonaws.socialmessaging#MetaTemplateCategory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category of the template (for example, UTILITY or MARKETING).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a summary of a WhatsApp message template's key attributes.</p>"
+            }
+        },
+        "com.amazonaws.socialmessaging#TemplateSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.socialmessaging#TemplateSummary"
+            }
+        },
         "com.amazonaws.socialmessaging#ThrottledRequestException": {
             "type": "structure",
             "members": {
@@ -2312,6 +3505,81 @@
                     }
                 }
             },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#UpdateWhatsAppMessageTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.socialmessaging#UpdateWhatsAppMessageTemplateInput"
+            },
+            "output": {
+                "target": "com.amazonaws.socialmessaging#UpdateWhatsAppMessageTemplateOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.socialmessaging#DependencyException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InvalidParametersException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ThrottledRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an existing WhatsApp message template.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/whatsapp/template",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#UpdateWhatsAppMessageTemplateInput": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the WhatsApp Business Account associated with this template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "metaTemplateId": {
+                    "target": "com.amazonaws.socialmessaging#MetaTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The numeric ID of the template assigned by Meta.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateCategory": {
+                    "target": "com.amazonaws.socialmessaging#MetaTemplateCategory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new category for the template (for example, UTILITY or MARKETING).</p>"
+                    }
+                },
+                "templateComponents": {
+                    "target": "com.amazonaws.socialmessaging#MetaTemplateComponents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated components of the template as a JSON blob (maximum 3000 characters).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#UpdateWhatsAppMessageTemplateOutput": {
+            "type": "structure",
+            "members": {},
             "traits": {
                 "smithy.api#output": {}
             }
@@ -2535,6 +3803,12 @@
                         "smithy.api#documentation": "<p>The quality rating of the phone number.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "dataLocalizationRegion": {
+                    "target": "com.amazonaws.socialmessaging#IsoCountryCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The geographic region where the WhatsApp phone number's data is stored and processed.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2624,6 +3898,12 @@
                         "smithy.api#documentation": "<p>The quality rating of the phone number. This is from Meta.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "dataLocalizationRegion": {
+                    "target": "com.amazonaws.socialmessaging#IsoCountryCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The geographic region where the WhatsApp phone number's data is stored and processed.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2682,6 +3962,15 @@
                         },
                         "smithy.api#required": {}
                     }
+                },
+                "callbackUrl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL where WhatsApp will send callback notifications for this account.</p>",
+                        "smithy.api#length": {
+                            "max": 100
+                        }
+                    }
                 }
             },
             "traits": {
@@ -2707,6 +3996,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Contains the results of WhatsAppSignupCallback.</p>"
             }
+        },
+        "com.amazonaws.socialmessaging#ZeroTapTermsAccepted": {
+            "type": "boolean"
         }
     }
 }
