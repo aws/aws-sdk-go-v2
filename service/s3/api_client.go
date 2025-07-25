@@ -475,6 +475,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 	resolveUseDualStackEndpoint(cfg, &opts)
 	resolveUseFIPSEndpoint(cfg, &opts)
 	resolveBaseEndpoint(cfg, &opts)
+	cfg.ApplyServiceOptions(ServiceID, &opts)
 	return New(opts, optFns...)
 }
 
