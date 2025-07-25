@@ -4,13 +4,16 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds/internal/config"
 	"io/ioutil"
 	"net/http"
 	"os"
 	"strings"
 	"testing"
+	"time"
+
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
+	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds/internal/config"
 
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -250,6 +253,83 @@ func TestNewFromConfig(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestClientRetryerBackoff(t *testing.T) {
+	cases := map[string]struct {
+		Retryer                  aws.Retryer
+		DisableDefaultMaxBackoff bool
+		ExpectErr                string
+		ExpectRetryDelay         time.Duration
+	}{
+		"default 1-second backoff": {
+			ExpectRetryDelay: 1 * time.Second,
+		},
+		"disable default backoff and use standard retryer backoff": {
+			DisableDefaultMaxBackoff: true,
+			ExpectRetryDelay:         20 * time.Second,
+		},
+		"disable default backoff and use customize retryer": {
+			Retryer: retry.NewStandard(func(o *retry.StandardOptions) {
+				o.Backoff = &mockDelayer{
+					delay: 1000 * time.Second,
+				}
+			}),
+			DisableDefaultMaxBackoff: true,
+			ExpectRetryDelay:         1000 * time.Second,
+		},
+		"disable default backoff and use customize retryer returning error": {
+			Retryer: retry.NewStandard(func(o *retry.StandardOptions) {
+				o.Backoff = &mockDelayer{
+					delay: 1 * time.Second,
+					err:   "retryBackoffError",
+				}
+			}),
+			DisableDefaultMaxBackoff: true,
+			ExpectErr:                "retryBackoffError",
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			client := New(Options{
+				Retryer:                  c.Retryer,
+				DisableDefaultMaxBackoff: c.DisableDefaultMaxBackoff,
+			})
+
+			delay, err := client.options.Retryer.RetryDelay(10, nil)
+			if err != nil {
+				if c.ExpectErr == "" {
+					t.Fatalf("expect no error, got %v", err)
+				} else if e, a := c.ExpectErr, err.Error(); !strings.Contains(a, e) {
+					t.Fatalf("expect %s to be in %v", e, a)
+				}
+			} else if c.ExpectErr != "" {
+				t.Fatalf("expect error returned, but got none")
+			}
+
+			if c.ExpectErr != "" {
+				return
+			}
+
+			if e, a := c.ExpectRetryDelay/time.Second, delay/time.Second; e != a {
+				t.Fatalf("expect retry delay to be %d seconds, got %d", e, a)
+			}
+		})
+	}
+}
+
+type mockDelayer struct {
+	delay time.Duration
+	err   string
+}
+
+// BackoffDelay implements retry.BackoffDelayer.BackoffDelay()
+func (d *mockDelayer) BackoffDelay(attempt int, err error) (time.Duration, error) {
+	if d.err != "" {
+		return 0, fmt.Errorf(d.err)
+	}
+	return d.delay, nil
 }
 
 func newMockResponse() *http.Response {
