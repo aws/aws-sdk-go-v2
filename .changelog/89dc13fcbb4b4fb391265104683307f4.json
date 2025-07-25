@@ -1,0 +1,8 @@
+{
+    "id": "89dc13fc-bb4b-4fb3-9126-5104683307f4",
+    "type": "feature",
+    "description": "Add config switch `DisableDefaultMaxBackoff` that allows you to disable the default operation backoff (1 second) for IMDS calls retry attempt",
+    "modules": [
+        "feature/ec2/imds"
+    ]
+}
