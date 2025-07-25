@@ -1,6 +1,7 @@
 GetKxChangeset
 	Initialize stack step
 		spanInitializeStart
+		InterceptExecution
 		RegisterServiceMetadata
 		legacyEndpointContextSetter
 		SetLogger
@@ -10,7 +11,9 @@ GetKxChangeset
 		spanBuildRequestStart
 		setOperationInput
 		ResolveEndpoint
+		InterceptBeforeSerialization
 		OperationSerializer
+		InterceptAfterSerialization
 		customizeRestJsonContentType
 	Build stack step
 		ClientRequestID
@@ -22,7 +25,9 @@ GetKxChangeset
 		spanBuildRequestEnd
 	Finalize stack step
 		spanRetryLoop
+		InterceptBeforeRetryLoop
 		Retry
+		InterceptAttempt
 		RetryMetricsHeader
 		ResolveAuthScheme
 		GetIdentity
@@ -30,14 +35,19 @@ GetKxChangeset
 		disableHTTPS
 		ComputePayloadHash
 		setLegacyContextSigningOptions
+		InterceptBeforeSigning
 		Signing
+		InterceptAfterSigning
 	Deserialize stack step
 		AddRawResponseToMetadata
 		ErrorCloseResponseBody
 		CloseResponseBody
 		ResponseErrorWrapper
 		RequestIDRetriever
+		InterceptAfterDeserialization
 		OperationDeserializer
+		InterceptBeforeDeserialization
 		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger
+		InterceptTransmit

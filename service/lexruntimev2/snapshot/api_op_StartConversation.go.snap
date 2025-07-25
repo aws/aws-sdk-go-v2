@@ -1,6 +1,7 @@
 StartConversation
 	Initialize stack step
 		spanInitializeStart
+		InterceptExecution
 		RegisterServiceMetadata
 		legacyEndpointContextSetter
 		SetLogger
@@ -10,7 +11,9 @@ StartConversation
 		spanBuildRequestStart
 		setOperationInput
 		ResolveEndpoint
+		InterceptBeforeSerialization
 		OperationSerializer
+		InterceptAfterSerialization
 	Build stack step
 		ClientRequestID
 		SetCredentialSourceMiddleware
@@ -22,14 +25,18 @@ StartConversation
 		ComputePayloadHash
 		SigV4ContentSHA256Header
 		spanRetryLoop
+		InterceptBeforeRetryLoop
 		Retry
+		InterceptAttempt
 		RetryMetricsHeader
 		ResolveAuthScheme
 		GetIdentity
 		ResolveEndpointV2
 		disableHTTPS
 		setLegacyContextSigningOptions
+		InterceptBeforeSigning
 		Signing
+		InterceptAfterSigning
 		InitializeStreamWriter
 	Deserialize stack step
 		AddRawResponseToMetadata
@@ -37,7 +44,10 @@ StartConversation
 		RequireMinimumProtocol
 		ResponseErrorWrapper
 		RequestIDRetriever
+		InterceptAfterDeserialization
 		OperationDeserializer
+		InterceptBeforeDeserialization
 		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger
+		InterceptTransmit

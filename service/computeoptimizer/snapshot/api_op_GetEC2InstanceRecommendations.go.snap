@@ -1,6 +1,7 @@
 GetEC2InstanceRecommendations
 	Initialize stack step
 		spanInitializeStart
+		InterceptExecution
 		RegisterServiceMetadata
 		legacyEndpointContextSetter
 		SetLogger
@@ -9,7 +10,9 @@ GetEC2InstanceRecommendations
 		spanBuildRequestStart
 		setOperationInput
 		ResolveEndpoint
+		InterceptBeforeSerialization
 		OperationSerializer
+		InterceptAfterSerialization
 	Build stack step
 		ClientRequestID
 		ComputeContentLength
@@ -20,7 +23,9 @@ GetEC2InstanceRecommendations
 		spanBuildRequestEnd
 	Finalize stack step
 		spanRetryLoop
+		InterceptBeforeRetryLoop
 		Retry
+		InterceptAttempt
 		RetryMetricsHeader
 		ResolveAuthScheme
 		GetIdentity
@@ -28,14 +33,19 @@ GetEC2InstanceRecommendations
 		disableHTTPS
 		ComputePayloadHash
 		setLegacyContextSigningOptions
+		InterceptBeforeSigning
 		Signing
+		InterceptAfterSigning
 	Deserialize stack step
 		AddRawResponseToMetadata
 		ErrorCloseResponseBody
 		CloseResponseBody
 		ResponseErrorWrapper
 		RequestIDRetriever
+		InterceptAfterDeserialization
 		OperationDeserializer
+		InterceptBeforeDeserialization
 		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger
+		InterceptTransmit

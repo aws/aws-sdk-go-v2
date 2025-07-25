@@ -1,6 +1,7 @@
 CreateEnvironmentAction
 	Initialize stack step
 		spanInitializeStart
+		InterceptExecution
 		RegisterServiceMetadata
 		legacyEndpointContextSetter
 		SetLogger
@@ -10,7 +11,9 @@ CreateEnvironmentAction
 		spanBuildRequestStart
 		setOperationInput
 		ResolveEndpoint
+		InterceptBeforeSerialization
 		OperationSerializer
+		InterceptAfterSerialization
 	Build stack step
 		ClientRequestID
 		ComputeContentLength
@@ -21,7 +24,9 @@ CreateEnvironmentAction
 		spanBuildRequestEnd
 	Finalize stack step
 		spanRetryLoop
+		InterceptBeforeRetryLoop
 		Retry
+		InterceptAttempt
 		RetryMetricsHeader
 		ResolveAuthScheme
 		GetIdentity
@@ -29,14 +34,19 @@ CreateEnvironmentAction
 		disableHTTPS
 		ComputePayloadHash
 		setLegacyContextSigningOptions
+		InterceptBeforeSigning
 		Signing
+		InterceptAfterSigning
 	Deserialize stack step
 		AddRawResponseToMetadata
 		ErrorCloseResponseBody
 		CloseResponseBody
 		ResponseErrorWrapper
 		RequestIDRetriever
+		InterceptAfterDeserialization
 		OperationDeserializer
+		InterceptBeforeDeserialization
 		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger
+		InterceptTransmit

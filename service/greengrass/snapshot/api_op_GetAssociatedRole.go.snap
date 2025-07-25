@@ -1,6 +1,7 @@
 GetAssociatedRole
 	Initialize stack step
 		spanInitializeStart
+		InterceptExecution
 		RegisterServiceMetadata
 		legacyEndpointContextSetter
 		SetLogger
@@ -10,7 +11,9 @@ GetAssociatedRole
 		spanBuildRequestStart
 		setOperationInput
 		ResolveEndpoint
+		InterceptBeforeSerialization
 		OperationSerializer
+		InterceptAfterSerialization
 	Build stack step
 		ClientRequestID
 		ComputeContentLength
@@ -21,7 +24,9 @@ GetAssociatedRole
 		spanBuildRequestEnd
 	Finalize stack step
 		spanRetryLoop
+		InterceptBeforeRetryLoop
 		Retry
+		InterceptAttempt
 		RetryMetricsHeader
 		ResolveAuthScheme
 		GetIdentity
@@ -29,14 +34,19 @@ GetAssociatedRole
 		disableHTTPS
 		ComputePayloadHash
 		setLegacyContextSigningOptions
+		InterceptBeforeSigning
 		Signing
+		InterceptAfterSigning
 	Deserialize stack step
 		AddRawResponseToMetadata
 		ErrorCloseResponseBody
 		CloseResponseBody
 		ResponseErrorWrapper
 		RequestIDRetriever
+		InterceptAfterDeserialization
 		OperationDeserializer
+		InterceptBeforeDeserialization
 		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger
+		InterceptTransmit

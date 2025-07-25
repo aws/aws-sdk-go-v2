@@ -1,6 +1,7 @@
 ListParticipantEvents
 	Initialize stack step
 		spanInitializeStart
+		InterceptExecution
 		RegisterServiceMetadata
 		legacyEndpointContextSetter
 		SetLogger
@@ -10,7 +11,9 @@ ListParticipantEvents
 		spanBuildRequestStart
 		setOperationInput
 		ResolveEndpoint
+		InterceptBeforeSerialization
 		OperationSerializer
+		InterceptAfterSerialization
 	Build stack step
 		ClientRequestID
 		ComputeContentLength
@@ -21,7 +24,9 @@ ListParticipantEvents
 		spanBuildRequestEnd
 	Finalize stack step
 		spanRetryLoop
+		InterceptBeforeRetryLoop
 		Retry
+		InterceptAttempt
 		RetryMetricsHeader
 		ResolveAuthScheme
 		GetIdentity
@@ -29,14 +34,19 @@ ListParticipantEvents
 		disableHTTPS
 		ComputePayloadHash
 		setLegacyContextSigningOptions
+		InterceptBeforeSigning
 		Signing
+		InterceptAfterSigning
 	Deserialize stack step
 		AddRawResponseToMetadata
 		ErrorCloseResponseBody
 		CloseResponseBody
 		ResponseErrorWrapper
 		RequestIDRetriever
+		InterceptAfterDeserialization
 		OperationDeserializer
+		InterceptBeforeDeserialization
 		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger
+		InterceptTransmit

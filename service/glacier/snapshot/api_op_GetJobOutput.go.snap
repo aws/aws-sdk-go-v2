@@ -1,6 +1,7 @@
 GetJobOutput
 	Initialize stack step
 		spanInitializeStart
+		InterceptExecution
 		Glacier:DefaultAccountID
 		RegisterServiceMetadata
 		legacyEndpointContextSetter
@@ -12,7 +13,9 @@ GetJobOutput
 		Glacier:APIVersion
 		setOperationInput
 		ResolveEndpoint
+		InterceptBeforeSerialization
 		OperationSerializer
+		InterceptAfterSerialization
 	Build stack step
 		ClientRequestID
 		ComputeContentLength
@@ -24,7 +27,9 @@ GetJobOutput
 	Finalize stack step
 		Glacier:TreeHash
 		spanRetryLoop
+		InterceptBeforeRetryLoop
 		Retry
+		InterceptAttempt
 		RetryMetricsHeader
 		ResolveAuthScheme
 		GetIdentity
@@ -32,13 +37,18 @@ GetJobOutput
 		disableHTTPS
 		ComputePayloadHash
 		setLegacyContextSigningOptions
+		InterceptBeforeSigning
 		Signing
+		InterceptAfterSigning
 	Deserialize stack step
 		AddRawResponseToMetadata
 		ErrorCloseResponseBody
 		ResponseErrorWrapper
 		RequestIDRetriever
+		InterceptAfterDeserialization
 		OperationDeserializer
+		InterceptBeforeDeserialization
 		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger
+		InterceptTransmit

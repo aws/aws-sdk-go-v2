@@ -1,6 +1,7 @@
 DeleteMultiRegionAccessPoint
 	Initialize stack step
 		spanInitializeStart
+		InterceptExecution
 		S3Shared:ARNLookup
 		S3Control:BackfillInput
 		RegisterServiceMetadata
@@ -16,7 +17,9 @@ DeleteMultiRegionAccessPoint
 		setArnFieldName
 		S3Control:ProcessOutpostIDMiddleware
 		S3Control:ProcessARNResourceMiddleware
+		InterceptBeforeSerialization
 		OperationSerializer
+		InterceptAfterSerialization
 	Build stack step
 		stashOperationInput
 		ContentChecksum
@@ -29,7 +32,9 @@ DeleteMultiRegionAccessPoint
 		spanBuildRequestEnd
 	Finalize stack step
 		spanRetryLoop
+		InterceptBeforeRetryLoop
 		Retry
+		InterceptAttempt
 		RetryMetricsHeader
 		ResolveAuthScheme
 		GetIdentity
@@ -40,14 +45,19 @@ DeleteMultiRegionAccessPoint
 		ComputePayloadHash
 		SigV4ContentSHA256Header
 		setLegacyContextSigningOptions
+		InterceptBeforeSigning
 		Signing
+		InterceptAfterSigning
 	Deserialize stack step
 		AddRawResponseToMetadata
 		ErrorCloseResponseBody
 		CloseResponseBody
 		ResponseErrorWrapper
 		S3MetadataRetriever
+		InterceptAfterDeserialization
 		OperationDeserializer
+		InterceptBeforeDeserialization
 		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger
+		InterceptTransmit
