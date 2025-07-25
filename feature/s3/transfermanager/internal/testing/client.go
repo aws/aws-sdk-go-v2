@@ -243,6 +243,11 @@ func (c *TransferManagerLoggingClient) HeadObject(ctx context.Context, params *s
 	}, nil
 }
 
+// ListObjectsV2 is the S3 ListObjectsV2 API
+func (c *TransferManagerLoggingClient) ListObjectsV2(ctx context.Context, params *s3.ListObjectsV2Input, optFns ...func(*s3.Options)) (*s3.ListObjectsV2Output, error) {
+	return nil, nil
+}
+
 // NewUploadLoggingClient returns a new TransferManagerLoggingClient for upload testing.
 func NewUploadLoggingClient(ignoredOps []string) (*TransferManagerLoggingClient, *[]string, *[]interface{}) {
 	c := &TransferManagerLoggingClient{
