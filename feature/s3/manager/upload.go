@@ -8,6 +8,7 @@ import (
 	"io"
 	"net/http"
 	"sort"
+	"strings"
 	"sync"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -245,6 +246,21 @@ type Uploader struct {
 	// Defines the buffer strategy used when uploading a part
 	BufferProvider ReadSeekerWriteToProvider
 
+	// RequestChecksumCalculation determines when request checksum calculation is performed
+	// for multipart uploads.
+	//
+	// There are two possible values for this setting:
+	//
+	// 1. RequestChecksumCalculationWhenSupported (default): The checksum is always calculated
+	//    if the operation supports it, regardless of whether the user sets an algorithm in the request.
+	//
+	// 2. RequestChecksumCalculationWhenRequired: The checksum is only calculated if the user
+	//    explicitly sets a checksum algorithm in the request. This preserves backwards compatibility
+	//    for applications that don't want automatic checksum calculation.
+	//
+	// Note: S3 Express buckets always require CRC32 checksums regardless of this setting.
+	RequestChecksumCalculation aws.RequestChecksumCalculation
+
 	// partPool allows for the re-usage of streaming payload part buffers between upload calls
 	partPool byteSlicePool
 }
@@ -274,12 +290,13 @@ type Uploader struct {
 //	})
 func NewUploader(client UploadAPIClient, options ...func(*Uploader)) *Uploader {
 	u := &Uploader{
-		S3:                client,
-		PartSize:          DefaultUploadPartSize,
-		Concurrency:       DefaultUploadConcurrency,
-		LeavePartsOnError: false,
-		MaxUploadParts:    MaxUploadParts,
-		BufferProvider:    defaultUploadBufferProvider(),
+		S3:                         client,
+		PartSize:                   DefaultUploadPartSize,
+		Concurrency:                DefaultUploadConcurrency,
+		LeavePartsOnError:          false,
+		MaxUploadParts:             MaxUploadParts,
+		RequestChecksumCalculation: aws.RequestChecksumCalculationWhenSupported,
+		BufferProvider:             defaultUploadBufferProvider(),
 	}
 
 	for _, option := range options {
@@ -776,8 +793,21 @@ func (u *multiuploader) initChecksumAlgorithm() {
 	case u.in.ChecksumSHA256 != nil:
 		u.in.ChecksumAlgorithm = types.ChecksumAlgorithmSha256
 	default:
-		u.in.ChecksumAlgorithm = types.ChecksumAlgorithmCrc32
+		if u.isS3ExpressBucket() {
+			u.in.ChecksumAlgorithm = types.ChecksumAlgorithmCrc32
+			return
+		}
+
+		if u.cfg.RequestChecksumCalculation != aws.RequestChecksumCalculationWhenRequired {
+			u.in.ChecksumAlgorithm = types.ChecksumAlgorithmCrc32
+		}
 	}
+}
+
+// isS3ExpressBucket returns true if the bucket has the S3 Express suffix.
+func (u *multiuploader) isS3ExpressBucket() bool {
+	bucketName := aws.ToString(u.in.Bucket)
+	return strings.HasSuffix(bucketName, "--x-s3")
 }
 
 // geterr is a thread-safe getter for the error object
