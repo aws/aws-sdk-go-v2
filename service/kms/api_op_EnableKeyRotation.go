@@ -73,11 +73,11 @@ import (
 // [imported key material]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
 // [Key states of KMS keys]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
 // [HMAC KMS keys]: https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html
-// [Amazon Web Services managed KMS keys]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk
-// [customer managed KMS key]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk
+// [Amazon Web Services managed KMS keys]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-key
+// [customer managed KMS key]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-mgn-key
 // [automatic rotation of the key material]: https://docs.aws.amazon.com/kms/latest/developerguide/rotating-keys-enable-disable.html
 // [asymmetric KMS keys]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
-// [Amazon Web Services owned KMS keys]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk
+// [Amazon Web Services owned KMS keys]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-key
 // [multi-Region keys]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html#multi-region-rotate
 // [KMS eventual consistency]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
 // [custom key store]: https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html

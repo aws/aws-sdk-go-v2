@@ -1,0 +1,8 @@
+{
+    "id": "36348a33-9688-46ea-a360-9b2a13a6c831",
+    "type": "feature",
+    "description": "This release adds support for specifying a preferred input for channels using CMAF ingest.",
+    "modules": [
+        "service/mediapackagev2"
+    ]
+}

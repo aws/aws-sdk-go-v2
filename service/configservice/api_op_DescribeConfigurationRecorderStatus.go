@@ -46,7 +46,7 @@ type DescribeConfigurationRecorderStatusInput struct {
 	Arn *string
 
 	// The name of the configuration recorder. If the name is not specified, the
-	// opertation returns the status for the customer managed configuration recorder
+	// operation returns the status for the customer managed configuration recorder
 	// configured for the account, if applicable.
 	//
 	// When making a request to this operation, you can only specify one configuration

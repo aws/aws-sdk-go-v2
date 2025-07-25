@@ -23,9 +23,9 @@ import (
 // Use the parameters of CreateKey to specify the type of KMS key, the source of
 // its key material, its key policy, description, tags, and other properties.
 //
-// KMS has replaced the term customer master key (CMK) with KMS key and KMS key.
-// The concept has not changed. To prevent breaking changes, KMS is keeping some
-// variations of this term.
+// KMS has replaced the term customer master key (CMK) with Key Management Service
+// key and KMS key. The concept has not changed. To prevent breaking changes, KMS
+// is keeping some variations of this term.
 //
 // To create different types of KMS keys, use the following guidance:
 //

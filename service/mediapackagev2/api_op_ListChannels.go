@@ -12,8 +12,7 @@ import (
 )
 
 // Retrieves all channels in a specific channel group that are configured in AWS
-// Elemental MediaPackage, including the origin endpoints that are associated with
-// it.
+// Elemental MediaPackage.
 func (c *Client) ListChannels(ctx context.Context, params *ListChannelsInput, optFns ...func(*Options)) (*ListChannelsOutput, error) {
 	if params == nil {
 		params = &ListChannelsInput{}

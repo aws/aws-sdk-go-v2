@@ -572,6 +572,7 @@ const (
 	ValidationExceptionTypeCmafExcludeSegmentDrmMetadataIncompatibleContainerType ValidationExceptionType = "CMAF_EXCLUDE_SEGMENT_DRM_METADATA_INCOMPATIBLE_CONTAINER_TYPE"
 	ValidationExceptionTypeOnlyCmafInputTypeAllowMqcsInputSwitching               ValidationExceptionType = "ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_INPUT_SWITCHING"
 	ValidationExceptionTypeOnlyCmafInputTypeAllowMqcsOutputConfiguration          ValidationExceptionType = "ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_OUTPUT_CONFIGURATION"
+	ValidationExceptionTypeOnlyCmafInputTypeAllowPreferredInputConfiguration      ValidationExceptionType = "ONLY_CMAF_INPUT_TYPE_ALLOW_PREFERRED_INPUT_CONFIGURATION"
 	ValidationExceptionTypeTsContainerTypeWithMssManifest                         ValidationExceptionType = "TS_CONTAINER_TYPE_WITH_MSS_MANIFEST"
 	ValidationExceptionTypeCmafContainerTypeWithMssManifest                       ValidationExceptionType = "CMAF_CONTAINER_TYPE_WITH_MSS_MANIFEST"
 	ValidationExceptionTypeIsmContainerTypeWithHlsManifest                        ValidationExceptionType = "ISM_CONTAINER_TYPE_WITH_HLS_MANIFEST"
@@ -667,6 +668,7 @@ func (ValidationExceptionType) Values() []ValidationExceptionType {
 		"CMAF_EXCLUDE_SEGMENT_DRM_METADATA_INCOMPATIBLE_CONTAINER_TYPE",
 		"ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_INPUT_SWITCHING",
 		"ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_OUTPUT_CONFIGURATION",
+		"ONLY_CMAF_INPUT_TYPE_ALLOW_PREFERRED_INPUT_CONFIGURATION",
 		"TS_CONTAINER_TYPE_WITH_MSS_MANIFEST",
 		"CMAF_CONTAINER_TYPE_WITH_MSS_MANIFEST",
 		"ISM_CONTAINER_TYPE_WITH_HLS_MANIFEST",

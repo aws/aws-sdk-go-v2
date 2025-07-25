@@ -138,6 +138,33 @@ func (e *InvalidParametersException) ErrorCode() string {
 }
 func (e *InvalidParametersException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request was denied because it would exceed one or more service quotas or
+// limits.
+type LimitExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *LimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *LimitExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *LimitExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "LimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The resource was not found.
 type ResourceNotFoundException struct {
 	Message *string

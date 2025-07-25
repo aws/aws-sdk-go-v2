@@ -8666,6 +8666,19 @@ func awsRestjson1_deserializeDocumentInputSwitchConfiguration(v **types.InputSwi
 				sv.MQCSInputSwitching = ptr.Bool(jtv)
 			}
 
+		case "PreferredInput":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PreferredInput = ptr.Int32(int32(i64))
+			}
+
 		default:
 			_, _ = key, value
 

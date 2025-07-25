@@ -42,6 +42,9 @@ type DescribeConfigurationRecordersInput struct {
 	Arn *string
 
 	// A list of names of the configuration recorders that you want to specify.
+	//
+	// When making a request to this operation, you can only specify one configuration
+	// recorder.
 	ConfigurationRecorderNames []string
 
 	// For service-linked configuration recorders, you can use the service principal

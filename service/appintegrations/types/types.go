@@ -23,6 +23,15 @@ type ApplicationAssociationSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration settings for the application.
+type ApplicationConfig struct {
+
+	// The contact handling configuration for the application.
+	ContactHandling *ContactHandling
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for where the application should be loaded from.
 type ApplicationSourceConfig struct {
 
@@ -44,6 +53,9 @@ type ApplicationSummary struct {
 	// A unique identifier for the Application.
 	Id *string
 
+	// Indicates whether the application is a service.
+	IsService bool
+
 	// The time when the application was last modified.
 	LastModifiedTime *time.Time
 
@@ -52,6 +64,16 @@ type ApplicationSummary struct {
 
 	// The namespace of the application.
 	Namespace *string
+
+	noSmithyDocumentSerde
+}
+
+// The contact handling configuration for the application.
+type ContactHandling struct {
+
+	// Indicates whether the application refreshes for each contact or refreshes only
+	// with each new browser session.
+	Scope ContactHandlingScope
 
 	noSmithyDocumentSerde
 }
@@ -197,6 +219,18 @@ type FileConfiguration struct {
 
 	// Restrictions for what files should be pulled from the source.
 	Filters map[string][]string
+
+	noSmithyDocumentSerde
+}
+
+// The iframe configuration for the application.
+type IframeConfig struct {
+
+	// The list of features that are allowed in the iframe.
+	Allow []string
+
+	// The list of sandbox attributes for the iframe.
+	Sandbox []string
 
 	noSmithyDocumentSerde
 }

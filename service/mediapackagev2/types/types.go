@@ -1092,6 +1092,12 @@ type InputSwitchConfiguration struct {
 	// MQCS. Default is true. This setting is valid only when InputType is CMAF .
 	MQCSInputSwitching *bool
 
+	// For CMAF inputs, indicates which input MediaPackage should prefer when both
+	// inputs have equal MQCS scores. Select 1 to prefer the first ingest endpoint, or
+	// 2 to prefer the second ingest endpoint. If you don't specify a preferred input,
+	// MediaPackage uses its default switching behavior when MQCS scores are equal.
+	PreferredInput *int32
+
 	noSmithyDocumentSerde
 }
 

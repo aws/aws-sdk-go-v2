@@ -46,8 +46,9 @@ func (c *Client) StartResourceEvaluation(ctx context.Context, params *StartResou
 
 type StartResourceEvaluationInput struct {
 
-	// The mode of an evaluation. The valid values for this API are DETECTIVE and
-	// PROACTIVE .
+	// The mode of an evaluation.
+	//
+	// The only valid value for this API is PROACTIVE .
 	//
 	// This member is required.
 	EvaluationMode types.EvaluationMode

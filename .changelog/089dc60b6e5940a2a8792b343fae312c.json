@@ -1,0 +1,8 @@
+{
+    "id": "089dc60b-6e59-40a2-a879-2b343fae312c",
+    "type": "feature",
+    "description": "Amazon AppIntegrations introduces new configuration capabilities to enable customers to manage iframe permissions, control application refresh behavior (per contact or per browser/cross-contact), and run background applications (service).",
+    "modules": [
+        "service/appintegrations"
+    ]
+}

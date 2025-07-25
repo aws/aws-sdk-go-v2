@@ -1,0 +1,8 @@
+{
+    "id": "e653d8d3-0f59-4d2c-9247-9580f6ab31c8",
+    "type": "feature",
+    "description": "This release introduces new WhatsApp template management APIs that enable customers to programmatically create and submit templates for approval, monitor approval status, and manage the complete template lifecycle",
+    "modules": [
+        "service/socialmessaging"
+    ]
+}

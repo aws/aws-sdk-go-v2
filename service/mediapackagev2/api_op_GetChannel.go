@@ -12,8 +12,7 @@ import (
 	"time"
 )
 
-// Retrieves the specified channel that's configured in AWS Elemental
-// MediaPackage, including the origin endpoints that are associated with it.
+// Retrieves the specified channel that's configured in AWS Elemental MediaPackage.
 func (c *Client) GetChannel(ctx context.Context, params *GetChannelInput, optFns ...func(*Options)) (*GetChannelOutput, error) {
 	if params == nil {
 		params = &GetChannelInput{}

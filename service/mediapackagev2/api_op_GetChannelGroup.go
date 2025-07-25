@@ -12,8 +12,7 @@ import (
 )
 
 // Retrieves the specified channel group that's configured in AWS Elemental
-// MediaPackage, including the channels and origin endpoints that are associated
-// with it.
+// MediaPackage.
 func (c *Client) GetChannelGroup(ctx context.Context, params *GetChannelGroupInput, optFns ...func(*Options)) (*GetChannelGroupOutput, error) {
 	if params == nil {
 		params = &GetChannelGroupInput{}

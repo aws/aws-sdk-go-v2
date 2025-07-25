@@ -354,7 +354,9 @@ type BaseConfigurationItem struct {
 	// The region where the resource resides.
 	AwsRegion *string
 
-	// The description of the resource configuration.
+	// A JSON-encoded string that contains the contents for the resource
+	// configuration. This string needs to be deserialized using json.loads() before
+	// you can access the contents.
 	Configuration *string
 
 	// The time when the recording of configuration changes was initiated for the
@@ -395,6 +397,13 @@ type BaseConfigurationItem struct {
 
 	// The recording frequency that Config uses to record configuration changes for
 	// the resource.
+	//
+	// This field only appears in the API response when DAILY recording is enabled for
+	// a resource type. If this field is not present, CONTINUOUS recording is enabled
+	// for that resource type. For more information on daily recording and continuous
+	// recording, see [Recording Frequency]in the Config Developer Guide.
+	//
+	// [Recording Frequency]: https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html#select-resources-recording-frequency
 	RecordingFrequency RecordingFrequency
 
 	// The time stamp when the resource was created.
@@ -409,8 +418,12 @@ type BaseConfigurationItem struct {
 	// The type of Amazon Web Services resource.
 	ResourceType ResourceType
 
-	// Configuration attributes that Config returns for certain resource types to
-	// supplement the information returned for the configuration parameter.
+	// A string to string map that contains additional contents for the resource
+	// configuration.Config returns this field for certain resource types to supplement
+	// the information returned for the configuration field.
+	//
+	// This string needs to be deserialized using json.loads() before you can access
+	// the contents.
 	SupplementaryConfiguration map[string]string
 
 	// The version number of the resource configuration.
@@ -652,8 +665,6 @@ type ConfigRule struct {
 	// constrain the resources that can trigger an evaluation for the rule. If you do
 	// not specify a scope, evaluations are triggered when any resource in the
 	// recording group changes.
-	//
-	// The scope can be empty.
 	Scope *Scope
 
 	noSmithyDocumentSerde
@@ -879,7 +890,9 @@ type ConfigurationItem struct {
 	// The region where the resource resides.
 	AwsRegion *string
 
-	// The description of the resource configuration.
+	// A JSON-encoded string that contains the contents for the resource
+	// configuration. This string needs to be deserialized using json.loads() before
+	// you can access the contents.
 	Configuration *string
 
 	// The time when the recording of configuration changes was initiated for the
@@ -891,9 +904,10 @@ type ConfigurationItem struct {
 	// This field is optional and is not guaranteed to be present in a configuration
 	// item (CI). If you are using daily recording, this field will be populated.
 	// However, if you are using continuous recording, this field will be omitted since
-	// the delivery time is instantaneous as the CI is available right away. For more
-	// information on daily recording and continuous recording, see [Recording Frequency]in the Config
-	// Developer Guide.
+	// the delivery time is instantaneous as the CI is available right away.
+	//
+	// For more information on daily recording and continuous recording, see [Recording Frequency] in the
+	// Config Developer Guide.
 	//
 	// [Recording Frequency]: https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html#select-resources-recording-frequency
 	ConfigurationItemDeliveryTime *time.Time
@@ -925,6 +939,13 @@ type ConfigurationItem struct {
 
 	// The recording frequency that Config uses to record configuration changes for
 	// the resource.
+	//
+	// This field only appears in the API response when DAILY recording is enabled for
+	// a resource type. If this field is not present, CONTINUOUS recording is enabled
+	// for that resource type. For more information on daily recording and continuous
+	// recording, see [Recording Frequency]in the Config Developer Guide.
+	//
+	// [Recording Frequency]: https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html#select-resources-recording-frequency
 	RecordingFrequency RecordingFrequency
 
 	// A list of CloudTrail event IDs.
@@ -956,8 +977,12 @@ type ConfigurationItem struct {
 	// The type of Amazon Web Services resource.
 	ResourceType ResourceType
 
-	// Configuration attributes that Config returns for certain resource types to
-	// supplement the information returned for the configuration parameter.
+	// A string to string map that contains additional contents for the resource
+	// configuration.Config returns this field for certain resource types to supplement
+	// the information returned for the configuration field.
+	//
+	// This string to string map needs to be deserialized using json.loads() before
+	// you can accessing the contents.
 	SupplementaryConfiguration map[string]string
 
 	// A mapping of key value tags associated with the resource.
@@ -987,7 +1012,8 @@ type ConfigurationRecorder struct {
 	// name at creation time.
 	//
 	// For service-linked configuration recorders, Config automatically assigns a name
-	// that has the prefix " AWS " to a new service-linked configuration recorder.
+	// that has the prefix " AWSConfigurationRecorderFor " to a new service-linked
+	// configuration recorder.
 	//
 	// Changing the name of a configuration recorder
 	//

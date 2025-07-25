@@ -115,8 +115,8 @@ type UpdateAliasInput struct {
 	//
 	// To verify that the alias is mapped to the correct KMS key, use ListAliases.
 	//
-	// [customer managed key]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk
-	// [Amazon Web Services managed key]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk
+	// [customer managed key]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-mgn-key
+	// [Amazon Web Services managed key]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-key
 	//
 	// This member is required.
 	TargetKeyId *string

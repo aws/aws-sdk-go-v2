@@ -34,11 +34,24 @@ type UpdateApplicationInput struct {
 	// This member is required.
 	Arn *string
 
+	// The configuration settings for the application.
+	ApplicationConfig *types.ApplicationConfig
+
 	// The configuration for where the application should be loaded from.
 	ApplicationSourceConfig *types.ApplicationSourceConfig
 
 	// The description of the application.
 	Description *string
+
+	// The iframe configuration for the application.
+	IframeConfig *types.IframeConfig
+
+	// The maximum time in milliseconds allowed to establish a connection with the
+	// workspace.
+	InitializationTimeout *int32
+
+	// Indicates whether the application is a service.
+	IsService *bool
 
 	// The name of the application.
 	Name *string
