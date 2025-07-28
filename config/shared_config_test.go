@@ -806,6 +806,14 @@ func TestNewSharedConfig(t *testing.T) {
 			},
 			Err: fmt.Errorf("invalid value for shared config profile field, response_checksum_validation=blabla, must be when_supported/when_required"),
 		},
+		"auth scheme preference": {
+			ConfigFilenames: []string{testConfigFilename},
+			Profile:         "auth_scheme_preference",
+			Expected: SharedConfig{
+				Profile:              "auth_scheme_preference",
+				AuthSchemePreference: []string{"sigv4a", "sigv4"},
+			},
+		},
 	}
 
 	for name, c := range cases {

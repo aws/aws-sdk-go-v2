@@ -232,6 +232,9 @@ type LoadOptions struct {
 
 	// Registry of operation interceptors.
 	Interceptors smithyhttp.InterceptorRegistry
+
+	// Priority list of preferred auth scheme IDs.
+	AuthSchemePreference []string
 }
 
 func (o LoadOptions) getDefaultsMode(ctx context.Context) (aws.DefaultsMode, bool, error) {
@@ -1314,4 +1317,19 @@ func WithAfterExecution(i smithyhttp.AfterExecutionInterceptor) LoadOptionsFunc 
 		o.Interceptors.AfterExecution = append(o.Interceptors.AfterExecution, i)
 		return nil
 	}
+}
+
+// WithAuthSchemePreference sets the priority order of auth schemes on config.
+func WithAuthSchemePreference(schemeIDs ...string) LoadOptionsFunc {
+	return func(o *LoadOptions) error {
+		o.AuthSchemePreference = schemeIDs
+		return nil
+	}
+}
+
+func (o LoadOptions) getAuthSchemePreference() ([]string, bool) {
+	if len(o.AuthSchemePreference) > 0 {
+		return o.AuthSchemePreference, true
+	}
+	return nil, false
 }

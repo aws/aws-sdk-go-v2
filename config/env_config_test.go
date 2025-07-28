@@ -568,6 +568,14 @@ func TestNewEnvConfig(t *testing.T) {
 			Config:  EnvConfig{},
 			WantErr: true,
 		},
+		54: {
+			Env: map[string]string{
+				"AWS_AUTH_SCHEME_PREFERENCE": "  \tsigv4a\t  ,sigv4 ",
+			},
+			Config: EnvConfig{
+				AuthSchemePreference: []string{"sigv4a", "sigv4"},
+			},
+		},
 	}
 
 	for i, c := range cases {

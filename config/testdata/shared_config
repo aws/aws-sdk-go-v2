@@ -347,3 +347,5 @@ response_checksum_validation = when_required
 [profile response_checksum_validation_error]
 response_checksum_validation = blabla
 
+[profile auth_scheme_preference]
+auth_scheme_preference=sigv4a  ,  sigv4
