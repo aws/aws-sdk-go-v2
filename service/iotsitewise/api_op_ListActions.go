@@ -45,6 +45,12 @@ type ListActionsInput struct {
 	// The token to be used for the next set of paginated results.
 	NextToken *string
 
+	// The ID of the resolved resource.
+	ResolveToResourceId *string
+
+	// The type of the resolved resource.
+	ResolveToResourceType types.ResolveToResourceType
+
 	noSmithyDocumentSerde
 }
 

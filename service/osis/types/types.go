@@ -142,6 +142,10 @@ type Pipeline struct {
 	// The name of the pipeline.
 	PipelineName *string
 
+	// The Amazon Resource Name (ARN) of the IAM role that provides the required
+	// permissions for a pipeline to read from the source and write to the sink.
+	PipelineRoleArn *string
+
 	// A list of VPC endpoints that OpenSearch Ingestion has created to other Amazon
 	// Web Services services.
 	ServiceVpcEndpoints []ServiceVpcEndpoint

@@ -65,6 +65,13 @@ type CreatePipelineInput struct {
 	// Key-value pairs to configure log publishing.
 	LogPublishingOptions *types.LogPublishingOptions
 
+	// The Amazon Resource Name (ARN) of an IAM role that provides the required
+	// permissions for a pipeline to read from the source and write to the sink. For
+	// more information, see [Setting up roles and users in Amazon OpenSearch Ingestion].
+	//
+	// [Setting up roles and users in Amazon OpenSearch Ingestion]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/pipeline-security-overview.html
+	PipelineRoleArn *string
+
 	// List of tags to add to the pipeline upon creation.
 	Tags []types.Tag
 

@@ -270,6 +270,26 @@ func (m *validateOpCreateBulkImportJob) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateComputationModel struct {
+}
+
+func (*validateOpCreateComputationModel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateComputationModel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateComputationModelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateComputationModelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDashboard struct {
 }
 
@@ -445,6 +465,26 @@ func (m *validateOpDeleteAssetModel) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteAssetModelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteComputationModel struct {
+}
+
+func (*validateOpDeleteComputationModel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteComputationModel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteComputationModelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteComputationModelInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -710,6 +750,46 @@ func (m *validateOpDescribeBulkImportJob) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeComputationModelExecutionSummary struct {
+}
+
+func (*validateOpDescribeComputationModelExecutionSummary) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeComputationModelExecutionSummary) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeComputationModelExecutionSummaryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeComputationModelExecutionSummaryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeComputationModel struct {
+}
+
+func (*validateOpDescribeComputationModel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeComputationModel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeComputationModelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeComputationModelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeDashboard struct {
 }
 
@@ -745,6 +825,26 @@ func (m *validateOpDescribeDataset) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeDatasetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeExecution struct {
+}
+
+func (*validateOpDescribeExecution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeExecutionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1110,6 +1210,46 @@ func (m *validateOpListCompositionRelationships) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListComputationModelDataBindingUsages struct {
+}
+
+func (*validateOpListComputationModelDataBindingUsages) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListComputationModelDataBindingUsages) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListComputationModelDataBindingUsagesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListComputationModelDataBindingUsagesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListComputationModelResolveToResources struct {
+}
+
+func (*validateOpListComputationModelResolveToResources) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListComputationModelResolveToResources) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListComputationModelResolveToResourcesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListComputationModelResolveToResourcesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListDashboards struct {
 }
 
@@ -1145,6 +1285,26 @@ func (m *validateOpListDatasets) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListDatasetsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListExecutions struct {
+}
+
+func (*validateOpListExecutions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListExecutions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListExecutionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListExecutionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1410,6 +1570,26 @@ func (m *validateOpUpdateAssetProperty) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateComputationModel struct {
+}
+
+func (*validateOpUpdateComputationModel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateComputationModel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateComputationModelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateComputationModelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateDashboard struct {
 }
 
@@ -1582,6 +1762,10 @@ func addOpCreateBulkImportJobValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpCreateBulkImportJob{}, middleware.After)
 }
 
+func addOpCreateComputationModelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateComputationModel{}, middleware.After)
+}
+
 func addOpCreateDashboardValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDashboard{}, middleware.After)
 }
@@ -1616,6 +1800,10 @@ func addOpDeleteAssetModelCompositeModelValidationMiddleware(stack *middleware.S
 
 func addOpDeleteAssetModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAssetModel{}, middleware.After)
+}
+
+func addOpDeleteComputationModelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteComputationModel{}, middleware.After)
 }
 
 func addOpDeleteDashboardValidationMiddleware(stack *middleware.Stack) error {
@@ -1670,12 +1858,24 @@ func addOpDescribeBulkImportJobValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpDescribeBulkImportJob{}, middleware.After)
 }
 
+func addOpDescribeComputationModelExecutionSummaryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeComputationModelExecutionSummary{}, middleware.After)
+}
+
+func addOpDescribeComputationModelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeComputationModel{}, middleware.After)
+}
+
 func addOpDescribeDashboardValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeDashboard{}, middleware.After)
 }
 
 func addOpDescribeDatasetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeDataset{}, middleware.After)
+}
+
+func addOpDescribeExecutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeExecution{}, middleware.After)
 }
 
 func addOpDescribeGatewayCapabilityConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -1750,12 +1950,24 @@ func addOpListCompositionRelationshipsValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpListCompositionRelationships{}, middleware.After)
 }
 
+func addOpListComputationModelDataBindingUsagesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListComputationModelDataBindingUsages{}, middleware.After)
+}
+
+func addOpListComputationModelResolveToResourcesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListComputationModelResolveToResources{}, middleware.After)
+}
+
 func addOpListDashboardsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDashboards{}, middleware.After)
 }
 
 func addOpListDatasetsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDatasets{}, middleware.After)
+}
+
+func addOpListExecutionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListExecutions{}, middleware.After)
 }
 
 func addOpListProjectAssetsValidationMiddleware(stack *middleware.Stack) error {
@@ -1810,6 +2022,10 @@ func addOpUpdateAssetPropertyValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpUpdateAssetProperty{}, middleware.After)
 }
 
+func addOpUpdateComputationModelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateComputationModel{}, middleware.After)
+}
+
 func addOpUpdateDashboardValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDashboard{}, middleware.After)
 }
@@ -1856,6 +2072,36 @@ func validateAlarms(v *types.Alarms) error {
 	invalidParams := smithy.InvalidParamsError{Context: "Alarms"}
 	if v.AlarmRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AlarmRoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBindingValueFilter(v *types.AssetBindingValueFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBindingValueFilter"}
+	if v.AssetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetModelBindingValueFilter(v *types.AssetModelBindingValueFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetModelBindingValueFilter"}
+	if v.AssetModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetModelId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2056,6 +2302,42 @@ func validateAssetModelProperty(v *types.AssetModelProperty) error {
 	}
 }
 
+func validateAssetModelPropertyBindingValue(v *types.AssetModelPropertyBindingValue) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetModelPropertyBindingValue"}
+	if v.AssetModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetModelId"))
+	}
+	if v.PropertyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PropertyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetModelPropertyBindingValueFilter(v *types.AssetModelPropertyBindingValueFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetModelPropertyBindingValueFilter"}
+	if v.AssetModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetModelId"))
+	}
+	if v.PropertyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PropertyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAssetModelPropertyDefinition(v *types.AssetModelPropertyDefinition) error {
 	if v == nil {
 		return nil
@@ -2090,6 +2372,42 @@ func validateAssetModelPropertyDefinitions(v []types.AssetModelPropertyDefinitio
 		if err := validateAssetModelPropertyDefinition(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetPropertyBindingValue(v *types.AssetPropertyBindingValue) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetPropertyBindingValue"}
+	if v.AssetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetId"))
+	}
+	if v.PropertyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PropertyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetPropertyBindingValueFilter(v *types.AssetPropertyBindingValueFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetPropertyBindingValueFilter"}
+	if v.AssetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetId"))
+	}
+	if v.PropertyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PropertyId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2249,6 +2567,103 @@ func validateBatchGetAssetPropertyValueHistoryEntry(v *types.BatchGetAssetProper
 	}
 }
 
+func validateBindingValueList(v []types.ComputationModelDataBindingValue) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BindingValueList"}
+	for i := range v {
+		if err := validateComputationModelDataBindingValue(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateComputationModelAnomalyDetectionConfiguration(v *types.ComputationModelAnomalyDetectionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ComputationModelAnomalyDetectionConfiguration"}
+	if v.InputProperties == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputProperties"))
+	}
+	if v.ResultProperty == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResultProperty"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateComputationModelConfiguration(v *types.ComputationModelConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ComputationModelConfiguration"}
+	if v.AnomalyDetection != nil {
+		if err := validateComputationModelAnomalyDetectionConfiguration(v.AnomalyDetection); err != nil {
+			invalidParams.AddNested("AnomalyDetection", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateComputationModelDataBinding(v map[string]types.ComputationModelDataBindingValue) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ComputationModelDataBinding"}
+	for key := range v {
+		value := v[key]
+		if err := validateComputationModelDataBindingValue(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateComputationModelDataBindingValue(v *types.ComputationModelDataBindingValue) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ComputationModelDataBindingValue"}
+	if v.AssetModelProperty != nil {
+		if err := validateAssetModelPropertyBindingValue(v.AssetModelProperty); err != nil {
+			invalidParams.AddNested("AssetModelProperty", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AssetProperty != nil {
+		if err := validateAssetPropertyBindingValue(v.AssetProperty); err != nil {
+			invalidParams.AddNested("AssetProperty", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.List != nil {
+		if err := validateBindingValueList(v.List); err != nil {
+			invalidParams.AddNested("List", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCsv(v *types.Csv) error {
 	if v == nil {
 		return nil
@@ -2274,6 +2689,38 @@ func validateCustomerManagedS3Storage(v *types.CustomerManagedS3Storage) error {
 	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataBindingValueFilter(v *types.DataBindingValueFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataBindingValueFilter"}
+	if v.Asset != nil {
+		if err := validateAssetBindingValueFilter(v.Asset); err != nil {
+			invalidParams.AddNested("Asset", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AssetModel != nil {
+		if err := validateAssetModelBindingValueFilter(v.AssetModel); err != nil {
+			invalidParams.AddNested("AssetModel", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AssetProperty != nil {
+		if err := validateAssetPropertyBindingValueFilter(v.AssetProperty); err != nil {
+			invalidParams.AddNested("AssetProperty", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AssetModelProperty != nil {
+		if err := validateAssetModelPropertyBindingValueFilter(v.AssetModelProperty); err != nil {
+			invalidParams.AddNested("AssetModelProperty", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2878,6 +3325,21 @@ func validatePutAssetPropertyValueEntry(v *types.PutAssetPropertyValueEntry) err
 	}
 }
 
+func validateResolveTo(v *types.ResolveTo) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResolveTo"}
+	if v.AssetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateResource(v *types.Resource) error {
 	if v == nil {
 		return nil
@@ -2924,21 +3386,6 @@ func validateSourceDetail(v *types.SourceDetail) error {
 		if err := validateKendraSourceDetail(v.Kendra); err != nil {
 			invalidParams.AddNested("Kendra", err.(smithy.InvalidParamsError))
 		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateTargetResource(v *types.TargetResource) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "TargetResource"}
-	if v.AssetId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AssetId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3352,6 +3799,35 @@ func validateOpCreateBulkImportJobInput(v *CreateBulkImportJobInput) error {
 	}
 }
 
+func validateOpCreateComputationModelInput(v *CreateComputationModelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateComputationModelInput"}
+	if v.ComputationModelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComputationModelName"))
+	}
+	if v.ComputationModelConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComputationModelConfiguration"))
+	} else if v.ComputationModelConfiguration != nil {
+		if err := validateComputationModelConfiguration(v.ComputationModelConfiguration); err != nil {
+			invalidParams.AddNested("ComputationModelConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ComputationModelDataBinding == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComputationModelDataBinding"))
+	} else if v.ComputationModelDataBinding != nil {
+		if err := validateComputationModelDataBinding(v.ComputationModelDataBinding); err != nil {
+			invalidParams.AddNested("ComputationModelDataBinding", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateDashboardInput(v *CreateDashboardInput) error {
 	if v == nil {
 		return nil
@@ -3521,6 +3997,21 @@ func validateOpDeleteAssetModelInput(v *DeleteAssetModelInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteAssetModelInput"}
 	if v.AssetModelId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssetModelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteComputationModelInput(v *DeleteComputationModelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteComputationModelInput"}
+	if v.ComputationModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComputationModelId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3733,6 +4224,36 @@ func validateOpDescribeBulkImportJobInput(v *DescribeBulkImportJobInput) error {
 	}
 }
 
+func validateOpDescribeComputationModelExecutionSummaryInput(v *DescribeComputationModelExecutionSummaryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeComputationModelExecutionSummaryInput"}
+	if v.ComputationModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComputationModelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeComputationModelInput(v *DescribeComputationModelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeComputationModelInput"}
+	if v.ComputationModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComputationModelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeDashboardInput(v *DescribeDashboardInput) error {
 	if v == nil {
 		return nil
@@ -3755,6 +4276,21 @@ func validateOpDescribeDatasetInput(v *DescribeDatasetInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeDatasetInput"}
 	if v.DatasetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatasetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeExecutionInput(v *DescribeExecutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeExecutionInput"}
+	if v.ExecutionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3875,10 +4411,6 @@ func validateOpExecuteActionInput(v *ExecuteActionInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ExecuteActionInput"}
 	if v.TargetResource == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetResource"))
-	} else if v.TargetResource != nil {
-		if err := validateTargetResource(v.TargetResource); err != nil {
-			invalidParams.AddNested("TargetResource", err.(smithy.InvalidParamsError))
-		}
 	}
 	if v.ActionDefinitionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActionDefinitionId"))
@@ -3888,6 +4420,11 @@ func validateOpExecuteActionInput(v *ExecuteActionInput) error {
 	} else if v.ActionPayload != nil {
 		if err := validateActionPayload(v.ActionPayload); err != nil {
 			invalidParams.AddNested("ActionPayload", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ResolveTo != nil {
+		if err := validateResolveTo(v.ResolveTo); err != nil {
+			invalidParams.AddNested("ResolveTo", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -4089,6 +4626,40 @@ func validateOpListCompositionRelationshipsInput(v *ListCompositionRelationships
 	}
 }
 
+func validateOpListComputationModelDataBindingUsagesInput(v *ListComputationModelDataBindingUsagesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListComputationModelDataBindingUsagesInput"}
+	if v.DataBindingValueFilter == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataBindingValueFilter"))
+	} else if v.DataBindingValueFilter != nil {
+		if err := validateDataBindingValueFilter(v.DataBindingValueFilter); err != nil {
+			invalidParams.AddNested("DataBindingValueFilter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListComputationModelResolveToResourcesInput(v *ListComputationModelResolveToResourcesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListComputationModelResolveToResourcesInput"}
+	if v.ComputationModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComputationModelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListDashboardsInput(v *ListDashboardsInput) error {
 	if v == nil {
 		return nil
@@ -4111,6 +4682,24 @@ func validateOpListDatasetsInput(v *ListDatasetsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListDatasetsInput"}
 	if len(v.SourceType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListExecutionsInput(v *ListExecutionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListExecutionsInput"}
+	if len(v.TargetResourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetResourceType"))
+	}
+	if v.TargetResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetResourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4373,6 +4962,38 @@ func validateOpUpdateAssetPropertyInput(v *UpdateAssetPropertyInput) error {
 	}
 	if v.PropertyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PropertyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateComputationModelInput(v *UpdateComputationModelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateComputationModelInput"}
+	if v.ComputationModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComputationModelId"))
+	}
+	if v.ComputationModelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComputationModelName"))
+	}
+	if v.ComputationModelConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComputationModelConfiguration"))
+	} else if v.ComputationModelConfiguration != nil {
+		if err := validateComputationModelConfiguration(v.ComputationModelConfiguration); err != nil {
+			invalidParams.AddNested("ComputationModelConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ComputationModelDataBinding == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComputationModelDataBinding"))
+	} else if v.ComputationModelDataBinding != nil {
+		if err := validateComputationModelDataBinding(v.ComputationModelDataBinding); err != nil {
+			invalidParams.AddNested("ComputationModelDataBinding", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

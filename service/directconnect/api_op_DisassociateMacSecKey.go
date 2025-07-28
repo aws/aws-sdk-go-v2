@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the association between a MAC Security (MACsec) security key and an
-// Direct Connect dedicated connection.
+// Removes the association between a MAC Security (MACsec) security key and a
+// Direct Connect connection.
 func (c *Client) DisassociateMacSecKey(ctx context.Context, params *DisassociateMacSecKeyInput, optFns ...func(*Options)) (*DisassociateMacSecKeyOutput, error) {
 	if params == nil {
 		params = &DisassociateMacSecKeyInput{}
@@ -30,10 +30,10 @@ func (c *Client) DisassociateMacSecKey(ctx context.Context, params *Disassociate
 
 type DisassociateMacSecKeyInput struct {
 
-	// The ID of the dedicated connection (dxcon-xxxx), or the ID of the LAG
-	// (dxlag-xxxx).
+	// The ID of the dedicated connection (dxcon-xxxx), interconnect (dxcon-xxxx), or
+	// LAG (dxlag-xxxx).
 	//
-	// You can use DescribeConnections or DescribeLags to retrieve connection ID.
+	// You can use DescribeConnections, DescribeInterconnects, or DescribeLags to retrieve connection ID.
 	//
 	// This member is required.
 	ConnectionId *string
@@ -50,11 +50,11 @@ type DisassociateMacSecKeyInput struct {
 
 type DisassociateMacSecKeyOutput struct {
 
-	// The ID of the dedicated connection (dxcon-xxxx), or the ID of the LAG
-	// (dxlag-xxxx).
+	// The ID of the dedicated connection (dxcon-xxxx), interconnect (dxcon-xxxx), or
+	// LAG (dxlag-xxxx).
 	ConnectionId *string
 
-	// The MAC Security (MACsec) security keys no longer associated with the dedicated
+	// The MAC Security (MACsec) security keys no longer associated with the
 	// connection.
 	MacSecKeys []types.MacSecKey
 

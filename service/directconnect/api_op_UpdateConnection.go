@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Updates the Direct Connect dedicated connection configuration.
+// Updates the Direct Connect connection configuration.
 //
 // You can update the following parameters for a connection:
 //
@@ -36,7 +36,7 @@ func (c *Client) UpdateConnection(ctx context.Context, params *UpdateConnectionI
 
 type UpdateConnectionInput struct {
 
-	// The ID of the dedicated connection.
+	// The ID of the connection.
 	//
 	// You can use DescribeConnections to retrieve the connection ID.
 	//
@@ -133,6 +133,10 @@ type UpdateConnectionOutput struct {
 
 	// The ID of the Amazon Web Services account that owns the connection.
 	OwnerAccount *string
+
+	// Indicates whether the interconnect hosting this connection supports MAC
+	// Security (MACsec).
+	PartnerInterconnectMacSecCapable *bool
 
 	// The name of the Direct Connect service provider associated with the connection.
 	PartnerName *string

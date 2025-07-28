@@ -12,7 +12,7 @@ import (
 )
 
 // Associates a MAC Security (MACsec) Connection Key Name (CKN)/ Connectivity
-// Association Key (CAK) pair with an Direct Connect dedicated connection.
+// Association Key (CAK) pair with a Direct Connect connection.
 //
 // You must supply either the secretARN, or the CKN/CAK ( ckn and cak ) pair in the
 // request.
@@ -38,15 +38,15 @@ func (c *Client) AssociateMacSecKey(ctx context.Context, params *AssociateMacSec
 
 type AssociateMacSecKeyInput struct {
 
-	// The ID of the dedicated connection (dxcon-xxxx), or the ID of the LAG
-	// (dxlag-xxxx).
+	// The ID of the dedicated connection (dxcon-xxxx), interconnect (dxcon-xxxx), or
+	// LAG (dxlag-xxxx).
 	//
-	// You can use DescribeConnections or DescribeLags to retrieve connection ID.
+	// You can use DescribeConnections, DescribeInterconnects, or DescribeLags to retrieve connection ID.
 	//
 	// This member is required.
 	ConnectionId *string
 
-	// The MAC Security (MACsec) CAK to associate with the dedicated connection.
+	// The MAC Security (MACsec) CAK to associate with the connection.
 	//
 	// You can create the CKN/CAK pair using an industry standard tool.
 	//
@@ -56,7 +56,7 @@ type AssociateMacSecKeyInput struct {
 	// not use the secretARN request parameter.
 	Cak *string
 
-	// The MAC Security (MACsec) CKN to associate with the dedicated connection.
+	// The MAC Security (MACsec) CKN to associate with the connection.
 	//
 	// You can create the CKN/CAK pair using an industry standard tool.
 	//
@@ -67,7 +67,7 @@ type AssociateMacSecKeyInput struct {
 	Ckn *string
 
 	// The Amazon Resource Name (ARN) of the MAC Security (MACsec) secret key to
-	// associate with the dedicated connection.
+	// associate with the connection.
 	//
 	// You can use DescribeConnections or DescribeLags to retrieve the MAC Security (MACsec) secret key.
 	//
@@ -80,12 +80,11 @@ type AssociateMacSecKeyInput struct {
 
 type AssociateMacSecKeyOutput struct {
 
-	// The ID of the dedicated connection (dxcon-xxxx), or the ID of the LAG
-	// (dxlag-xxxx).
+	// The ID of the dedicated connection (dxcon-xxxx), interconnect (dxcon-xxxx), or
+	// LAG (dxlag-xxxx).
 	ConnectionId *string
 
-	// The MAC Security (MACsec) security keys associated with the dedicated
-	// connection.
+	// The MAC Security (MACsec) security keys associated with the connection.
 	MacSecKeys []types.MacSecKey
 
 	// Metadata pertaining to the operation's result.

@@ -65,6 +65,9 @@ type DescribeActionOutput struct {
 	// This member is required.
 	TargetResource *types.TargetResource
 
+	// The detailed resource this action resolves to.
+	ResolveTo *types.ResolveTo
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

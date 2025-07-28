@@ -116,7 +116,7 @@ func (e *InvalidRequestException) ErrorCode() string {
 }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You've reached the limit for a resource. For example, this can occur if you're
+// You've reached the quota for a resource. For example, this can occur if you're
 // trying to associate more than the allowed number of child assets or attempting
 // to create more than the allowed number of properties for an asset model.
 //
@@ -316,7 +316,7 @@ func (e *ThrottlingException) ErrorCode() string {
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You've reached the limit for the number of tags allowed for a resource. For
+// You've reached the quota for the number of tags allowed for a resource. For
 // more information, see [Tag naming limits and requirements]in the Amazon Web Services General Reference.
 //
 // [Tag naming limits and requirements]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html#tag-conventions

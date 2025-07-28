@@ -122,6 +122,10 @@ type DeleteConnectionOutput struct {
 	// The ID of the Amazon Web Services account that owns the connection.
 	OwnerAccount *string
 
+	// Indicates whether the interconnect hosting this connection supports MAC
+	// Security (MACsec).
+	PartnerInterconnectMacSecCapable *bool
+
 	// The name of the Direct Connect service provider associated with the connection.
 	PartnerName *string
 

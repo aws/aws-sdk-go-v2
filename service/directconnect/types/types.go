@@ -182,6 +182,10 @@ type Connection struct {
 	// The ID of the Amazon Web Services account that owns the connection.
 	OwnerAccount *string
 
+	// Indicates whether the interconnect hosting this connection supports MAC
+	// Security (MACsec).
+	PartnerInterconnectMacSecCapable *bool
+
 	// The name of the Direct Connect service provider associated with the connection.
 	PartnerName *string
 
@@ -408,6 +412,11 @@ type Interconnect struct {
 	// The bandwidth of the connection.
 	Bandwidth *string
 
+	// The MAC Security (MACsec) encryption mode.
+	//
+	// The valid values are no_encrypt , should_encrypt , and must_encrypt .
+	EncryptionMode *string
+
 	// Indicates whether the interconnect supports a secondary BGP in the same address
 	// family (IPv4/IPv6).
 	HasLogicalRedundancy HasLogicalRedundancy
@@ -448,6 +457,18 @@ type Interconnect struct {
 
 	// The location of the connection.
 	Location *string
+
+	// Indicates whether the interconnect supports MAC Security (MACsec).
+	MacSecCapable *bool
+
+	// The MAC Security (MACsec) security keys.
+	MacSecKeys []MacSecKey
+
+	// The MAC Security (MACsec) port link status.
+	//
+	// The valid values are Encryption Up , which means that there is an active
+	// Connection Key Name, or Encryption Down .
+	PortEncryptionStatus *string
 
 	// The name of the service provider associated with the interconnect.
 	ProviderName *string

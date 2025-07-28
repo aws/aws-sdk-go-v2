@@ -11,14 +11,26 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about a gateway capability configuration. Each gateway
-// capability defines data sources for a gateway. A capability configuration can
-// contain multiple data source configurations. If you define OPC-UA sources for a
-// gateway in the IoT SiteWise console, all of your OPC-UA sources are stored in
-// one capability configuration. To list all capability configurations for a
-// gateway, use [DescribeGateway].
+// Each gateway capability defines data sources for a gateway. This is the
+// namespace of the gateway capability.
 //
-// [DescribeGateway]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeGateway.html
+// . The namespace follows the format service:capability:version , where:
+//
+//   - service - The service providing the capability, or iotsitewise .
+//
+//   - capability - The specific capability type. Options include: opcuacollector
+//     for the OPC UA data source collector, or publisher for data publisher
+//     capability.
+//
+//   - version - The version number of the capability. Option include 2 for Classic
+//     streams, V2 gateways, and 3 for MQTT-enabled, V3 gateways.
+//
+// After updating a capability configuration, the sync status becomes OUT_OF_SYNC
+// until the gateway processes the configuration.Use
+// DescribeGatewayCapabilityConfiguration to check the sync status and verify the
+// configuration was applied.
+//
+// A gateway can have multiple capability configurations with different namespaces.
 func (c *Client) DescribeGatewayCapabilityConfiguration(ctx context.Context, params *DescribeGatewayCapabilityConfigurationInput, optFns ...func(*Options)) (*DescribeGatewayCapabilityConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeGatewayCapabilityConfigurationInput{}
@@ -37,9 +49,8 @@ func (c *Client) DescribeGatewayCapabilityConfiguration(ctx context.Context, par
 type DescribeGatewayCapabilityConfigurationInput struct {
 
 	// The namespace of the capability configuration. For example, if you configure
-	// OPC-UA sources from the IoT SiteWise console, your OPC-UA capability
-	// configuration has the namespace iotsitewise:opcuacollector:version , where
-	// version is a number such as 1 .
+	// OPC UA sources for an MQTT-enabled gateway, your OPC-UA capability configuration
+	// has the namespace iotsitewise:opcuacollector:3 .
 	//
 	// This member is required.
 	CapabilityNamespace *string
@@ -67,21 +78,20 @@ type DescribeGatewayCapabilityConfigurationOutput struct {
 	// This member is required.
 	CapabilityNamespace *string
 
-	// The synchronization status of the capability configuration. The sync status can
-	// be one of the following:
+	// The synchronization status of the gateway capability configuration. The sync
+	// status can be one of the following:
 	//
-	//   - IN_SYNC – The gateway is running the capability configuration.
+	//   - IN_SYNC - The gateway is running with the latest configuration.
 	//
-	//   - NOT_APPLICABLE – Synchronization is not required for this capability
-	//   configuration. This is most common when integrating partner data sources,
-	//   because the data integration is handled externally by the partner.
+	//   - OUT_OF_SYNC - The gateway hasn't received the latest configuration.
 	//
-	//   - OUT_OF_SYNC – The gateway hasn't received the capability configuration.
+	//   - SYNC_FAILED - The gateway rejected the latest configuration.
 	//
-	//   - SYNC_FAILED – The gateway rejected the capability configuration.
+	//   - UNKNOWN - The gateway hasn't reported its sync status.
 	//
-	//   - UNKNOWN – The synchronization status is currently unknown due to an
-	//   undetermined or temporary error.
+	//   - NOT_APPLICABLE - The gateway doesn't support this capability. This is most
+	//   common when integrating partner data sources, because the data integration is
+	//   handled externally by the partner.
 	//
 	// This member is required.
 	CapabilitySyncStatus types.CapabilitySyncStatus

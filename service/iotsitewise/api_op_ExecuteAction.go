@@ -49,6 +49,9 @@ type ExecuteActionInput struct {
 	// request is required.
 	ClientToken *string
 
+	// The detailed resource this action resolves to.
+	ResolveTo *types.ResolveTo
+
 	noSmithyDocumentSerde
 }
 

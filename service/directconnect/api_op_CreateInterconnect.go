@@ -72,6 +72,9 @@ type CreateInterconnectInput struct {
 	// The name of the service provider associated with the interconnect.
 	ProviderName *string
 
+	// Indicates whether you want the interconnect to support MAC Security (MACsec).
+	RequestMACSec *bool
+
 	// The tags to associate with the interconnect.
 	Tags []types.Tag
 
@@ -95,6 +98,11 @@ type CreateInterconnectOutput struct {
 
 	// The bandwidth of the connection.
 	Bandwidth *string
+
+	// The MAC Security (MACsec) encryption mode.
+	//
+	// The valid values are no_encrypt , should_encrypt , and must_encrypt .
+	EncryptionMode *string
 
 	// Indicates whether the interconnect supports a secondary BGP in the same address
 	// family (IPv4/IPv6).
@@ -136,6 +144,18 @@ type CreateInterconnectOutput struct {
 
 	// The location of the connection.
 	Location *string
+
+	// Indicates whether the interconnect supports MAC Security (MACsec).
+	MacSecCapable *bool
+
+	// The MAC Security (MACsec) security keys.
+	MacSecKeys []types.MacSecKey
+
+	// The MAC Security (MACsec) port link status.
+	//
+	// The valid values are Encryption Up , which means that there is an active
+	// Connection Key Name, or Encryption Down .
+	PortEncryptionStatus *string
 
 	// The name of the service provider associated with the interconnect.
 	ProviderName *string

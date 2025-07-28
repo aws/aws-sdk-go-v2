@@ -40,7 +40,13 @@ type ExecuteQueryInput struct {
 	// request is required.
 	ClientToken *string
 
-	// The maximum number of results to return at one time. The default is 25.
+	// The maximum number of results to return at one time.
+	//
+	//   - Minimum is 1
+	//
+	//   - Maximum is 20000
+	//
+	//   - Default is 250
 	MaxResults *int32
 
 	// The string that specifies the next page of results.
@@ -207,7 +213,13 @@ func (c *Client) addOperationExecuteQueryMiddlewares(stack *middleware.Stack, op
 
 // ExecuteQueryPaginatorOptions is the paginator options for ExecuteQuery
 type ExecuteQueryPaginatorOptions struct {
-	// The maximum number of results to return at one time. The default is 25.
+	// The maximum number of results to return at one time.
+	//
+	//   - Minimum is 1
+	//
+	//   - Maximum is 20000
+	//
+	//   - Default is 250
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

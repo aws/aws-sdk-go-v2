@@ -8013,6 +8013,15 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				sv.OwnerAccount = ptr.String(jtv)
 			}
 
+		case "partnerInterconnectMacSecCapable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected PartnerInterconnectMacSecCapable to be of type *bool, got %T instead", value)
+				}
+				sv.PartnerInterconnectMacSecCapable = ptr.Bool(jtv)
+			}
+
 		case "partnerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8861,6 +8870,15 @@ func awsAwsjson11_deserializeDocumentInterconnect(v **types.Interconnect, value 
 				sv.Bandwidth = ptr.String(jtv)
 			}
 
+		case "encryptionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncryptionMode to be of type string, got %T instead", value)
+				}
+				sv.EncryptionMode = ptr.String(jtv)
+			}
+
 		case "hasLogicalRedundancy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8938,6 +8956,29 @@ func awsAwsjson11_deserializeDocumentInterconnect(v **types.Interconnect, value 
 					return fmt.Errorf("expected LocationCode to be of type string, got %T instead", value)
 				}
 				sv.Location = ptr.String(jtv)
+			}
+
+		case "macSecCapable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected MacSecCapable to be of type *bool, got %T instead", value)
+				}
+				sv.MacSecCapable = ptr.Bool(jtv)
+			}
+
+		case "macSecKeys":
+			if err := awsAwsjson11_deserializeDocumentMacSecKeyList(&sv.MacSecKeys, value); err != nil {
+				return err
+			}
+
+		case "portEncryptionStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PortEncryptionStatus to be of type string, got %T instead", value)
+				}
+				sv.PortEncryptionStatus = ptr.String(jtv)
 			}
 
 		case "providerName":
@@ -10656,6 +10697,15 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				sv.OwnerAccount = ptr.String(jtv)
 			}
 
+		case "partnerInterconnectMacSecCapable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected PartnerInterconnectMacSecCapable to be of type *bool, got %T instead", value)
+				}
+				sv.PartnerInterconnectMacSecCapable = ptr.Bool(jtv)
+			}
+
 		case "partnerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10886,6 +10936,15 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
 				sv.OwnerAccount = ptr.String(jtv)
+			}
+
+		case "partnerInterconnectMacSecCapable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected PartnerInterconnectMacSecCapable to be of type *bool, got %T instead", value)
+				}
+				sv.PartnerInterconnectMacSecCapable = ptr.Bool(jtv)
 			}
 
 		case "partnerName":
@@ -11694,6 +11753,15 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				sv.OwnerAccount = ptr.String(jtv)
 			}
 
+		case "partnerInterconnectMacSecCapable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected PartnerInterconnectMacSecCapable to be of type *bool, got %T instead", value)
+				}
+				sv.PartnerInterconnectMacSecCapable = ptr.Bool(jtv)
+			}
+
 		case "partnerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11924,6 +11992,15 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
 				sv.OwnerAccount = ptr.String(jtv)
+			}
+
+		case "partnerInterconnectMacSecCapable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected PartnerInterconnectMacSecCapable to be of type *bool, got %T instead", value)
+				}
+				sv.PartnerInterconnectMacSecCapable = ptr.Bool(jtv)
 			}
 
 		case "partnerName":
@@ -12708,6 +12785,15 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				sv.OwnerAccount = ptr.String(jtv)
 			}
 
+		case "partnerInterconnectMacSecCapable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected PartnerInterconnectMacSecCapable to be of type *bool, got %T instead", value)
+				}
+				sv.PartnerInterconnectMacSecCapable = ptr.Bool(jtv)
+			}
+
 		case "partnerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12937,6 +13023,15 @@ func awsAwsjson11_deserializeOpDocumentCreateInterconnectOutput(v **CreateInterc
 				sv.Bandwidth = ptr.String(jtv)
 			}
 
+		case "encryptionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncryptionMode to be of type string, got %T instead", value)
+				}
+				sv.EncryptionMode = ptr.String(jtv)
+			}
+
 		case "hasLogicalRedundancy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13014,6 +13109,29 @@ func awsAwsjson11_deserializeOpDocumentCreateInterconnectOutput(v **CreateInterc
 					return fmt.Errorf("expected LocationCode to be of type string, got %T instead", value)
 				}
 				sv.Location = ptr.String(jtv)
+			}
+
+		case "macSecCapable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected MacSecCapable to be of type *bool, got %T instead", value)
+				}
+				sv.MacSecCapable = ptr.Bool(jtv)
+			}
+
+		case "macSecKeys":
+			if err := awsAwsjson11_deserializeDocumentMacSecKeyList(&sv.MacSecKeys, value); err != nil {
+				return err
+			}
+
+		case "portEncryptionStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PortEncryptionStatus to be of type string, got %T instead", value)
+				}
+				sv.PortEncryptionStatus = ptr.String(jtv)
 			}
 
 		case "providerName":
@@ -14041,6 +14159,15 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
 				sv.OwnerAccount = ptr.String(jtv)
+			}
+
+		case "partnerInterconnectMacSecCapable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected PartnerInterconnectMacSecCapable to be of type *bool, got %T instead", value)
+				}
+				sv.PartnerInterconnectMacSecCapable = ptr.Bool(jtv)
 			}
 
 		case "partnerName":
@@ -15416,6 +15543,15 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				sv.OwnerAccount = ptr.String(jtv)
 			}
 
+		case "partnerInterconnectMacSecCapable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected PartnerInterconnectMacSecCapable to be of type *bool, got %T instead", value)
+				}
+				sv.PartnerInterconnectMacSecCapable = ptr.Bool(jtv)
+			}
+
 		case "partnerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15870,6 +16006,15 @@ func awsAwsjson11_deserializeOpDocumentUpdateConnectionOutput(v **UpdateConnecti
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
 				sv.OwnerAccount = ptr.String(jtv)
+			}
+
+		case "partnerInterconnectMacSecCapable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected PartnerInterconnectMacSecCapable to be of type *bool, got %T instead", value)
+				}
+				sv.PartnerInterconnectMacSecCapable = ptr.Bool(jtv)
 			}
 
 		case "partnerName":
