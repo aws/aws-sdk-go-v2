@@ -1,3 +1,9 @@
+# v1.33.0 (2025-07-28)
+
+* **Feature**: Add support for HTTP interceptors.
+* **Feature**: Enable MACSec support and features on Interconnects.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.32.6 (2025-07-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

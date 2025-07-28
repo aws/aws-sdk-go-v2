@@ -1,3 +1,8 @@
+# v1.12.0 (2025-07-28)
+
+* **Feature**: Add support for HTTP interceptors.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.11.0 (2025-07-22)
 
 * **Feature**: This release updates the supported regions for Neptune API to include current AWS regions.

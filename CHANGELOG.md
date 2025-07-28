@@ -1,3 +1,17 @@
+# Release (2025-07-28)
+
+## General Highlights
+* **Feature**: Add support for HTTP interceptors.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/directconnect`: [v1.33.0](service/directconnect/CHANGELOG.md#v1330-2025-07-28)
+  * **Feature**: Enable MACSec support and features on Interconnects.
+* `github.com/aws/aws-sdk-go-v2/service/iotsitewise`: [v1.48.0](service/iotsitewise/CHANGELOG.md#v1480-2025-07-28)
+  * **Feature**: Add support for native anomaly detection in IoT SiteWise using new Computation Model APIs
+* `github.com/aws/aws-sdk-go-v2/service/osis`: [v1.16.0](service/osis/CHANGELOG.md#v1160-2025-07-28)
+  * **Feature**: Add Pipeline Role Arn as an optional parameter to the create / update pipeline APIs as an alternative to passing in the pipeline configuration body
+
 # Release (2025-07-25)
 
 ## Module Highlights

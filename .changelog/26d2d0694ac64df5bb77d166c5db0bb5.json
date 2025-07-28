@@ -1,8 +1,0 @@
-{
-    "id": "26d2d069-4ac6-4df5-bb77-d166c5db0bb5",
-    "type": "feature",
-    "description": "Enable MACSec support and features on Interconnects.",
-    "modules": [
-        "service/directconnect"
-    ]
-}

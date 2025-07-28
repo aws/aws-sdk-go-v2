@@ -1,3 +1,8 @@
+# v1.237.0 (2025-07-28)
+
+* **Feature**: Add support for HTTP interceptors.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.236.0 (2025-07-25)
 
 * **Feature**: Transit Gateway native integration with AWS Network Firewall. Adding new enum value for the new Transit Gateway Attachment type.

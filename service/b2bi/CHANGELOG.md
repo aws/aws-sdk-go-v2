@@ -1,3 +1,8 @@
+# v1.0.0-preview.72 (2025-07-28)
+
+* **Feature**: Add support for HTTP interceptors.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.0.0-preview.71 (2025-07-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,8 @@
+# v1.39.0 (2025-07-28)
+
+* **Feature**: Add support for HTTP interceptors.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.38.10 (2025-07-25)
 
 * **Documentation**: Documentation updates for Amazon SQS fair queues feature.

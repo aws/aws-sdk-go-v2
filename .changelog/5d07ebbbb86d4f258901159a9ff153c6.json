@@ -1,8 +1,0 @@
-{
-    "id": "5d07ebbb-b86d-4f25-8901-159a9ff153c6",
-    "type": "feature",
-    "description": "Add Pipeline Role Arn as an optional parameter to the create / update pipeline APIs as an alternative to passing in the pipeline configuration body",
-    "modules": [
-        "service/osis"
-    ]
-}
