@@ -108,7 +108,7 @@
                 "type": {
                     "target": "com.amazonaws.opensearchserverless#AccessPolicyType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of access policy. Currently, the only available type is <code>data</code>.</p>"
+                        "smithy.api#documentation": "<p>The type of access policy. Currently, the only available type is\n            <code>data</code>.</p>"
                     }
                 },
                 "name": {
@@ -211,7 +211,7 @@
                 "names": {
                     "target": "com.amazonaws.opensearchserverless#CollectionNames",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of collection names. You can't provide names and IDs in the same request.</p>"
+                        "smithy.api#documentation": "<p>A list of collection names. You can't provide names and IDs in the same\n            request.</p>"
                     }
                 }
             }
@@ -250,7 +250,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of successful and failed retrievals for the OpenSearch Serverless indexes. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html#serverless-lifecycle-list\">Viewing data lifecycle policies</a>.</p>",
+                "smithy.api#documentation": "<p>Returns a list of successful and failed retrievals for the OpenSearch Serverless indexes. For more\n            information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html#serverless-lifecycle-list\">Viewing data lifecycle policies</a>.</p>",
                 "smithy.api#readonly": {}
             }
         },
@@ -306,7 +306,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns one or more configured OpenSearch Serverless lifecycle policies. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html#serverless-lifecycle-list\">Viewing data lifecycle policies</a>.</p>",
+                "smithy.api#documentation": "<p>Returns one or more configured OpenSearch Serverless lifecycle policies. For more information, see\n                <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html#serverless-lifecycle-list\">Viewing data lifecycle policies</a>.</p>",
                 "smithy.api#readonly": {}
             }
         },
@@ -362,7 +362,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns attributes for one or more VPC endpoints associated with the current account.\n            For more information, see\n            <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html\">Access Amazon OpenSearch Serverless using an interface endpoint</a>.</p>",
+                "smithy.api#documentation": "<p>Returns attributes for one or more VPC endpoints associated with the current account.\n            For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html\">Access\n                Amazon OpenSearch Serverless using an interface endpoint</a>.</p>",
                 "smithy.api#readonly": {}
             }
         },
@@ -766,7 +766,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>When creating a resource, thrown when a resource with the same name already exists\n            or is being created. When deleting a resource, thrown when the resource is not in\n            the ACTIVE or FAILED state.</p>",
+                "smithy.api#documentation": "<p>When creating a resource, thrown when a resource with the same name already exists or\n            is being created. When deleting a resource, thrown when the resource is not in the\n            ACTIVE or FAILED state.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -794,7 +794,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a data access policy for OpenSearch Serverless. Access policies limit access to collections\n            and the resources within them, and allow a user to access that data irrespective of the\n            access mechanism or network source. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-data-access.html\">Data access\n                control for Amazon OpenSearch Serverless</a>.</p>",
+                "smithy.api#documentation": "<p>Creates a data access policy for OpenSearch Serverless. Access policies limit access to collections\n            and the resources within them, and allow a user to access that data irrespective of the\n            access mechanism or network source. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-data-access.html\">Data\n                access control for Amazon OpenSearch Serverless</a>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -921,7 +921,7 @@
                 "kmsKeyArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key with which to encrypt the collection.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key with which to encrypt the\n            collection.</p>"
                     }
                 },
                 "standbyReplicas": {
@@ -975,7 +975,7 @@
                 "tags": {
                     "target": "com.amazonaws.opensearchserverless#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>An arbitrary set of tags (key–value pairs) to associate with the OpenSearch Serverless collection.</p>"
+                        "smithy.api#documentation": "<p>An arbitrary set of tags (key–value pairs) to associate with the OpenSearch Serverless\n            collection.</p>"
                     }
                 },
                 "standbyReplicas": {
@@ -1011,25 +1011,25 @@
                 "instanceArn": {
                     "target": "com.amazonaws.opensearchserverless#IamIdentityCenterInstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance used to integrate with OpenSearch Serverless.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance used to integrate with OpenSearch\n            Serverless.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "userAttribute": {
                     "target": "com.amazonaws.opensearchserverless#IamIdentityCenterUserAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user attribute for this IAM Identity Center integration. Defaults to <code>UserId</code>.</p>"
+                        "smithy.api#documentation": "<p>The user attribute for this IAM Identity Center integration. Defaults to\n                <code>UserId</code>.</p>"
                     }
                 },
                 "groupAttribute": {
                     "target": "com.amazonaws.opensearchserverless#IamIdentityCenterGroupAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>The group attribute for this IAM Identity Center integration. Defaults to <code>GroupId</code>.</p>"
+                        "smithy.api#documentation": "<p>The group attribute for this IAM Identity Center integration. Defaults to\n                <code>GroupId</code>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes IAM Identity Center options for creating an OpenSearch Serverless security configuration in the form of a key-value map.</p>"
+                "smithy.api#documentation": "<p>Describes IAM Identity Center options for creating an OpenSearch Serverless security\n            configuration in the form of a key-value map.</p>"
             }
         },
         "com.amazonaws.opensearchserverless#CreateLifecyclePolicy": {
@@ -1055,7 +1055,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a lifecyle policy to be applied to OpenSearch Serverless indexes. Lifecycle policies define\n            the number of days or hours to retain the data on an OpenSearch Serverless index. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html#serverless-lifecycle-create\">Creating data lifecycle policies</a>.</p>",
+                "smithy.api#documentation": "<p>Creates a lifecyle policy to be applied to OpenSearch Serverless indexes. Lifecycle policies define\n            the number of days or hours to retain the data on an OpenSearch Serverless index. For more information,\n            see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html#serverless-lifecycle-create\">Creating data lifecycle policies</a>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1139,7 +1139,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Specifies a security configuration for OpenSearch Serverless. For more information, see\n            <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html\">SAML\n                authentication for Amazon OpenSearch Serverless</a>. </p>",
+                "smithy.api#documentation": "<p>Specifies a security configuration for OpenSearch Serverless. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html\">SAML\n                authentication for Amazon OpenSearch Serverless</a>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1169,13 +1169,19 @@
                 "samlOptions": {
                     "target": "com.amazonaws.opensearchserverless#SamlConfigOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes SAML options in in the form of a key-value map. This field is required if\n            you specify <code>saml</code> for the <code>type</code> parameter.</p>"
+                        "smithy.api#documentation": "<p>Describes SAML options in in the form of a key-value map. This field is required if\n            you specify <code>SAML</code> for the <code>type</code> parameter.</p>"
                     }
                 },
                 "iamIdentityCenterOptions": {
                     "target": "com.amazonaws.opensearchserverless#CreateIamIdentityCenterConfigOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes IAM Identity Center options in the form of a key-value map. This field is required if you specify iamidentitycenter for the type parameter.</p>"
+                        "smithy.api#documentation": "<p>Describes IAM Identity Center options in the form of a key-value map. This field is\n            required if you specify iamidentitycenter for the type parameter.</p>"
+                    }
+                },
+                "iamFederationOptions": {
+                    "target": "com.amazonaws.opensearchserverless#IamFederationConfigOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes IAM federation options in the form of a key-value map. This field is\n            required if you specify <code>iamFederation</code> for the <code>type</code>\n            parameter.</p>"
                     }
                 },
                 "clientToken": {
@@ -1194,7 +1200,7 @@
                 "securityConfigDetail": {
                     "target": "com.amazonaws.opensearchserverless#SecurityConfigDetail",
                     "traits": {
-                        "smithy.api#documentation": "<p>Details about the created security configuration. </p>"
+                        "smithy.api#documentation": "<p>Details about the created security configuration.</p>"
                     }
                 }
             }
@@ -1222,7 +1228,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a security policy to be used by one or more OpenSearch Serverless collections. Security\n            policies provide access to a collection and its OpenSearch Dashboards endpoint from\n            public networks or specific VPC endpoints. They also allow you to secure a collection\n            with a KMS encryption key. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-network.html\">Network access\n                for Amazon OpenSearch Serverless</a> and <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-encryption.html\">Encryption at\n                rest for Amazon OpenSearch Serverless</a>.</p>",
+                "smithy.api#documentation": "<p>Creates a security policy to be used by one or more OpenSearch Serverless collections. Security\n            policies provide access to a collection and its OpenSearch Dashboards endpoint from\n            public networks or specific VPC endpoints. They also allow you to secure a collection\n            with a KMS encryption key. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-network.html\">Network\n                access for Amazon OpenSearch Serverless</a> and <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-encryption.html\">Encryption\n                at rest for Amazon OpenSearch Serverless</a>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1327,7 +1333,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creation details for an OpenSearch Serverless-managed interface endpoint. For more information, see\n            <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html\">Access Amazon OpenSearch Serverless using an interface endpoint</a>.</p>"
+                "smithy.api#documentation": "<p>Creation details for an OpenSearch Serverless-managed interface endpoint. For more information, see\n                <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html\">Access\n                Amazon OpenSearch Serverless using an interface endpoint</a>.</p>"
             }
         },
         "com.amazonaws.opensearchserverless#CreateVpcEndpointRequest": {
@@ -1609,7 +1615,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a security configuration for OpenSearch Serverless. For more information, see\n            <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html\">SAML\n                authentication for Amazon OpenSearch Serverless</a>.</p>",
+                "smithy.api#documentation": "<p>Deletes a security configuration for OpenSearch Serverless. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html\">SAML\n                authentication for Amazon OpenSearch Serverless</a>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1718,7 +1724,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an OpenSearch Serverless-managed interface endpoint. For more information, see\n            <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html\">Access Amazon OpenSearch Serverless using an interface endpoint</a>.</p>",
+                "smithy.api#documentation": "<p>Deletes an OpenSearch Serverless-managed interface endpoint. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html\">Access\n                Amazon OpenSearch Serverless using an interface endpoint</a>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1803,19 +1809,19 @@
                 "resourceType": {
                     "target": "com.amazonaws.opensearchserverless#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of OpenSearch Serverless resource. Currently, the only supported resource is <code>index</code>.</p>"
+                        "smithy.api#documentation": "<p>The type of OpenSearch Serverless resource. Currently, the only supported resource is\n                <code>index</code>.</p>"
                     }
                 },
                 "retentionPeriod": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minimum number of index retention in days or hours. This is an optional parameter that will return only if it’s set.</p>"
+                        "smithy.api#documentation": "<p>The minimum number of index retention in days or hours. This is an optional parameter\n            that will return only if it’s set.</p>"
                     }
                 },
                 "noMinRetentionPeriod": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minimum number of index retention days set. That is an optional param that will return as <code>true</code> if the minimum number of days or \n            hours is not set to a index resource.</p>"
+                        "smithy.api#documentation": "<p>The minimum number of index retention days set. That is an optional param that will\n            return as <code>true</code> if the minimum number of days or hours is not set to a index\n            resource.</p>"
                     }
                 }
             },
@@ -1847,7 +1853,7 @@
                 "errorMessage": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description of the error. For example, <code>The specified Index resource is not found</code>.</p>"
+                        "smithy.api#documentation": "<p>A description of the error. For example, <code>The specified Index resource is not\n                found</code>.</p>"
                     }
                 },
                 "errorCode": {
@@ -1887,7 +1893,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns an OpenSearch Serverless access policy. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-data-access.html\">Data\n            access control for Amazon OpenSearch Serverless</a>.</p>",
+                "smithy.api#documentation": "<p>Returns an OpenSearch Serverless access policy. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-data-access.html\">Data\n                access control for Amazon OpenSearch Serverless</a>.</p>",
                 "smithy.api#readonly": {}
             }
         },
@@ -2081,7 +2087,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about a configured OpenSearch Serverless security policy. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-network.html\">Network access\n            for Amazon OpenSearch Serverless</a> and <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-encryption.html\">Encryption at\n                rest for Amazon OpenSearch Serverless</a>.</p>",
+                "smithy.api#documentation": "<p>Returns information about a configured OpenSearch Serverless security policy. For more information,\n            see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-network.html\">Network\n                access for Amazon OpenSearch Serverless</a> and <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-encryption.html\">Encryption\n                at rest for Amazon OpenSearch Serverless</a>.</p>",
                 "smithy.api#readonly": {}
             }
         },
@@ -2115,6 +2121,26 @@
                 }
             }
         },
+        "com.amazonaws.opensearchserverless#IamFederationConfigOptions": {
+            "type": "structure",
+            "members": {
+                "groupAttribute": {
+                    "target": "com.amazonaws.opensearchserverless#iamFederationGroupAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The group attribute for this IAM federation integration. This attribute is used to map\n            identity provider groups to OpenSearch Serverless permissions.</p>"
+                    }
+                },
+                "userAttribute": {
+                    "target": "com.amazonaws.opensearchserverless#iamFederationUserAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user attribute for this IAM federation integration. This attribute is used to\n            identify users in the federated authentication process.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes IAM federation options for an OpenSearch Serverless security configuration\n            in the form of a key-value map. These options define how OpenSearch Serverless\n            integrates with external identity providers using federation.</p>"
+            }
+        },
         "com.amazonaws.opensearchserverless#IamIdentityCenterApplicationArn": {
             "type": "string",
             "traits": {
@@ -2131,42 +2157,42 @@
                 "instanceArn": {
                     "target": "com.amazonaws.opensearchserverless#IamIdentityCenterInstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance used to integrate with OpenSearch Serverless.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance used to integrate with OpenSearch\n            Serverless.</p>"
                     }
                 },
                 "applicationArn": {
                     "target": "com.amazonaws.opensearchserverless#IamIdentityCenterApplicationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center application used to integrate with OpenSearch Serverless.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center application used to integrate with OpenSearch\n            Serverless.</p>"
                     }
                 },
                 "applicationName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the IAM Identity Center application used to integrate with OpenSearch Serverless.</p>"
+                        "smithy.api#documentation": "<p>The name of the IAM Identity Center application used to integrate with OpenSearch\n            Serverless.</p>"
                     }
                 },
                 "applicationDescription": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description of the IAM Identity Center application used to integrate with OpenSearch Serverless.</p>"
+                        "smithy.api#documentation": "<p>The description of the IAM Identity Center application used to integrate with\n            OpenSearch Serverless.</p>"
                     }
                 },
                 "userAttribute": {
                     "target": "com.amazonaws.opensearchserverless#IamIdentityCenterUserAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user attribute for this IAM Identity Center integration. Defaults to <code>UserId</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The user attribute for this IAM Identity Center integration. Defaults to\n                <code>UserId</code>\n         </p>"
                     }
                 },
                 "groupAttribute": {
                     "target": "com.amazonaws.opensearchserverless#IamIdentityCenterGroupAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>The group attribute for this IAM Identity Center integration. Defaults to <code>GroupId</code>.</p>"
+                        "smithy.api#documentation": "<p>The group attribute for this IAM Identity Center integration. Defaults to\n                <code>GroupId</code>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes IAM Identity Center options for an OpenSearch Serverless security configuration in the form of a key-value map.</p>"
+                "smithy.api#documentation": "<p>Describes IAM Identity Center options for an OpenSearch Serverless security\n            configuration in the form of a key-value map.</p>"
             }
         },
         "com.amazonaws.opensearchserverless#IamIdentityCenterGroupAttribute": {
@@ -2338,7 +2364,7 @@
                 "errorMessage": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description of the error. For example, <code>The specified Lifecycle Policy is not found</code>.</p>"
+                        "smithy.api#documentation": "<p>A description of the error. For example, <code>The specified Lifecycle Policy is not\n                found</code>.</p>"
                     }
                 },
                 "errorCode": {
@@ -2560,7 +2586,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If your initial <code>ListAccessPolicies</code> operation returns a\n                <code>nextToken</code>, you can include the returned <code>nextToken</code> in\n            subsequent <code>ListAccessPolicies</code> operations, which returns results in the next\n            page. </p>"
+                        "smithy.api#documentation": "<p>If your initial <code>ListAccessPolicies</code> operation returns a\n                <code>nextToken</code>, you can include the returned <code>nextToken</code> in\n            subsequent <code>ListAccessPolicies</code> operations, which returns results in the next\n            page.</p>"
                     }
                 },
                 "maxResults": {
@@ -2624,13 +2650,13 @@
                 "collectionFilters": {
                     "target": "com.amazonaws.opensearchserverless#CollectionFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of filter names and values that you can use for requests.</p>"
+                        "smithy.api#documentation": "<p>A list of filter names and values that you can use for requests.</p>"
                     }
                 },
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If your initial <code>ListCollections</code> operation returns a <code>nextToken</code>,\n            you can include the returned <code>nextToken</code> in subsequent <code>ListCollections</code> operations,\n            which returns results in the next page.</p>"
+                        "smithy.api#documentation": "<p>If your initial <code>ListCollections</code> operation returns a\n                <code>nextToken</code>, you can include the returned <code>nextToken</code> in\n            subsequent <code>ListCollections</code> operations, which returns results in the next\n            page.</p>"
                     }
                 },
                 "maxResults": {
@@ -2657,7 +2683,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. \n            The value of <code>nextToken</code> is a unique pagination token for each page. \n            Make the call again using the returned token to retrieve the next page.</p>"
+                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value\n            of <code>nextToken</code> is a unique pagination token for each page. Make the call\n            again using the returned token to retrieve the next page.</p>"
                     }
                 }
             }
@@ -2701,7 +2727,7 @@
                 "resources": {
                     "target": "com.amazonaws.opensearchserverless#LifecycleResourceFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>Resource filters that policies can apply to. Currently, the only supported resource type is <code>index</code>.</p>",
+                        "smithy.api#documentation": "<p>Resource filters that policies can apply to. Currently, the only supported resource\n            type is <code>index</code>.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 1000
@@ -2711,13 +2737,13 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If your initial <code>ListLifecyclePolicies</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in subsequent <code>ListLifecyclePolicies</code> operations, which returns results in the next page.</p>"
+                        "smithy.api#documentation": "<p>If your initial <code>ListLifecyclePolicies</code> operation returns a\n                <code>nextToken</code>, you can include the returned <code>nextToken</code> in\n            subsequent <code>ListLifecyclePolicies</code> operations, which returns results in the\n            next page.</p>"
                     }
                 },
                 "maxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return. You can use use <code>nextToken</code> to get the next page of results. The default is 10.</p>",
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return. You can\n            use use <code>nextToken</code> to get the next page of results. The default is\n            10.</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 100
@@ -2741,7 +2767,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>"
+                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value\n            of <code>nextToken</code> is a unique pagination token for each page. Make the call\n            again using the returned token to retrieve the next page.</p>"
                     }
                 }
             },
@@ -2766,7 +2792,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about configured OpenSearch Serverless security configurations. For more information, see\n            <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html\">SAML\n                authentication for Amazon OpenSearch Serverless</a>.</p>",
+                "smithy.api#documentation": "<p>Returns information about configured OpenSearch Serverless security configurations. For more\n            information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html\">SAML\n                authentication for Amazon OpenSearch Serverless</a>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -2788,7 +2814,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If your initial <code>ListSecurityConfigs</code> operation returns a\n                <code>nextToken</code>, you can include the returned <code>nextToken</code> in\n            subsequent <code>ListSecurityConfigs</code> operations, which returns results in the\n            next page. </p>"
+                        "smithy.api#documentation": "<p>If your initial <code>ListSecurityConfigs</code> operation returns a\n                <code>nextToken</code>, you can include the returned <code>nextToken</code> in\n            subsequent <code>ListSecurityConfigs</code> operations, which returns results in the\n            next page.</p>"
                     }
                 },
                 "maxResults": {
@@ -2859,7 +2885,7 @@
                 "resource": {
                     "target": "com.amazonaws.opensearchserverless#ResourceFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>Resource filters (can be collection or indexes) that policies can apply to. </p>",
+                        "smithy.api#documentation": "<p>Resource filters (can be collection or indexes) that policies can apply to.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 1000
@@ -2869,7 +2895,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If your initial <code>ListSecurityPolicies</code> operation returns a\n                <code>nextToken</code>, you can include the returned <code>nextToken</code> in\n            subsequent <code>ListSecurityPolicies</code> operations, which returns results in the\n            next page. </p>"
+                        "smithy.api#documentation": "<p>If your initial <code>ListSecurityPolicies</code> operation returns a\n                <code>nextToken</code>, you can include the returned <code>nextToken</code> in\n            subsequent <code>ListSecurityPolicies</code> operations, which returns results in the\n            next page.</p>"
                     }
                 },
                 "maxResults": {
@@ -2921,7 +2947,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the tags for an OpenSearch Serverless resource. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-collection.html\">Tagging Amazon OpenSearch Serverless collections</a>.</p>"
+                "smithy.api#documentation": "<p>Returns the tags for an OpenSearch Serverless resource. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-collection.html\">Tagging\n                Amazon OpenSearch Serverless collections</a>.</p>"
             }
         },
         "com.amazonaws.opensearchserverless#ListTagsForResourceRequest": {
@@ -2964,7 +2990,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the OpenSearch Serverless-managed interface VPC endpoints associated with the current\n            account. For more information, see\n            <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html\">Access Amazon OpenSearch Serverless using an interface endpoint</a>.</p>",
+                "smithy.api#documentation": "<p>Returns the OpenSearch Serverless-managed interface VPC endpoints associated with the current\n            account. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html\">Access\n                Amazon OpenSearch Serverless using an interface endpoint</a>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -2985,7 +3011,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If your initial <code>ListVpcEndpoints</code> operation returns a\n                <code>nextToken</code>, you can include the returned <code>nextToken</code> in\n            subsequent <code>ListVpcEndpoints</code> operations, which returns results in the next\n            page. </p>"
+                        "smithy.api#documentation": "<p>If your initial <code>ListVpcEndpoints</code> operation returns a\n                <code>nextToken</code>, you can include the returned <code>nextToken</code> in\n            subsequent <code>ListVpcEndpoints</code> operations, which returns results in the next\n            page.</p>"
                     }
                 },
                 "maxResults": {
@@ -3029,7 +3055,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Thrown when the collection you're attempting to create results in a number of search or indexing OCUs that exceeds the account limit. </p>",
+                "smithy.api#documentation": "<p>Thrown when the collection you're attempting to create results in a number of search\n            or indexing OCUs that exceeds the account limit.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
             }
@@ -3108,7 +3134,7 @@
                 },
                 "aws.protocols#awsJson1_0": {},
                 "smithy.api#cors": {},
-                "smithy.api#documentation": "<p>Use the Amazon OpenSearch Serverless API to create, configure, and manage OpenSearch Serverless collections and\n            security policies.</p>\n         <p>OpenSearch Serverless is an on-demand, pre-provisioned serverless configuration for\n            Amazon OpenSearch Service. OpenSearch Serverless removes the operational complexities of provisioning,\n            configuring, and tuning your OpenSearch clusters. It enables you to easily search and\n            analyze petabytes of data without having to worry about the underlying infrastructure\n            and data management.</p>\n         <p> To learn more about OpenSearch Serverless, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-overview.html\">What is\n                Amazon OpenSearch Serverless?</a>\n         </p>",
+                "smithy.api#documentation": "<p>Use the Amazon OpenSearch Serverless API to create, configure, and manage OpenSearch Serverless collections and\n            security policies.</p>\n         <p>OpenSearch Serverless is an on-demand, pre-provisioned serverless configuration for\n            Amazon OpenSearch Service. OpenSearch Serverless removes the operational complexities of provisioning,\n            configuring, and tuning your OpenSearch clusters. It enables you to easily search and\n            analyze petabytes of data without having to worry about the underlying infrastructure\n            and data management.</p>\n         <p>To learn more about OpenSearch Serverless, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-overview.html\">What is\n                Amazon OpenSearch Serverless?</a>\n         </p>",
                 "smithy.api#title": "OpenSearch Service Serverless",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -3880,7 +3906,7 @@
                 "openSearchServerlessEntityId": {
                     "target": "com.amazonaws.opensearchserverless#openSearchServerlessEntityId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Custom entity id attribute to override default entity id for this saml integration.</p>"
+                        "smithy.api#documentation": "<p>Custom entity ID attribute to override the default entity ID for this SAML\n            integration.</p>"
                     }
                 },
                 "sessionTimeout": {
@@ -3973,6 +3999,12 @@
                         "smithy.api#documentation": "<p>Describes IAM Identity Center options in the form of a key-value map.</p>"
                     }
                 },
+                "iamFederationOptions": {
+                    "target": "com.amazonaws.opensearchserverless#IamFederationConfigOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes IAM federation options in the form of a key-value map. Contains\n            configuration details about how OpenSearch Serverless integrates with external identity\n            providers through federation.</p>"
+                    }
+                },
                 "createdDate": {
                     "target": "smithy.api#Long",
                     "traits": {
@@ -3987,7 +4019,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about a security configuration for OpenSearch Serverless. </p>"
+                "smithy.api#documentation": "<p>Details about a security configuration for OpenSearch Serverless.</p>"
             }
         },
         "com.amazonaws.opensearchserverless#SecurityConfigId": {
@@ -4076,6 +4108,11 @@
                         "name": "iamidentitycenter",
                         "value": "iamidentitycenter",
                         "documentation": "iam identity center"
+                    },
+                    {
+                        "name": "iamfederation",
+                        "value": "iamfederation",
+                        "documentation": "iam federation"
                     }
                 ]
             }
@@ -4304,7 +4341,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Thrown when you attempt to create more resources than the service allows based on service quotas.</p>",
+                "smithy.api#documentation": "<p>Thrown when you attempt to create more resources than the service allows based on\n            service quotas.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
             }
@@ -4417,7 +4454,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates tags with an OpenSearch Serverless resource. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-collection.html\">Tagging Amazon OpenSearch Serverless collections</a>.</p>"
+                "smithy.api#documentation": "<p>Associates tags with an OpenSearch Serverless resource. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-collection.html\">Tagging\n                Amazon OpenSearch Serverless collections</a>.</p>"
             }
         },
         "com.amazonaws.opensearchserverless#TagResourceRequest": {
@@ -4487,7 +4524,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes a tag or set of tags from an OpenSearch Serverless resource. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-collection.html\">Tagging Amazon OpenSearch Serverless collections</a>.</p>"
+                "smithy.api#documentation": "<p>Removes a tag or set of tags from an OpenSearch Serverless resource. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-collection.html\">Tagging\n                Amazon OpenSearch Serverless collections</a>.</p>"
             }
         },
         "com.amazonaws.opensearchserverless#UntagResourceRequest": {
@@ -4536,7 +4573,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an OpenSearch Serverless access policy. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-data-access.html\">Data\n            access control for Amazon OpenSearch Serverless</a>.</p>",
+                "smithy.api#documentation": "<p>Updates an OpenSearch Serverless access policy. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-data-access.html\">Data\n                access control for Amazon OpenSearch Serverless</a>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -4614,7 +4651,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Update the OpenSearch Serverless settings for the current Amazon Web Services account. For more\n            information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html\">Managing capacity limits for Amazon OpenSearch Serverless</a>.</p>"
+                "smithy.api#documentation": "<p>Update the OpenSearch Serverless settings for the current Amazon Web Services account. For more\n            information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html\">Managing\n                capacity limits for Amazon OpenSearch Serverless</a>.</p>"
             }
         },
         "com.amazonaws.opensearchserverless#UpdateAccountSettingsRequest": {
@@ -4631,7 +4668,7 @@
                 "accountSettingsDetail": {
                     "target": "com.amazonaws.opensearchserverless#AccountSettingsDetail",
                     "traits": {
-                        "smithy.api#documentation": "<p>OpenSearch Serverless-related settings for the current Amazon Web Services account. </p>"
+                        "smithy.api#documentation": "<p>OpenSearch Serverless-related settings for the current Amazon Web Services account.</p>"
                     }
                 }
             }
@@ -4762,18 +4799,18 @@
                 "userAttribute": {
                     "target": "com.amazonaws.opensearchserverless#IamIdentityCenterUserAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user attribute for this IAM Identity Center integration. Defaults to <code>UserId</code>.</p>"
+                        "smithy.api#documentation": "<p>The user attribute for this IAM Identity Center integration. Defaults to\n                <code>UserId</code>.</p>"
                     }
                 },
                 "groupAttribute": {
                     "target": "com.amazonaws.opensearchserverless#IamIdentityCenterGroupAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>The group attribute for this IAM Identity Center integration. Defaults to <code>GroupId</code>.</p>"
+                        "smithy.api#documentation": "<p>The group attribute for this IAM Identity Center integration. Defaults to\n                <code>GroupId</code>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes IAM Identity Center options for updating an OpenSearch Serverless security configuration in the form of a key-value map.</p>"
+                "smithy.api#documentation": "<p>Describes IAM Identity Center options for updating an OpenSearch Serverless security\n            configuration in the form of a key-value map.</p>"
             }
         },
         "com.amazonaws.opensearchserverless#UpdateLifecyclePolicy": {
@@ -4812,7 +4849,7 @@
                 "type": {
                     "target": "com.amazonaws.opensearchserverless#LifecyclePolicyType",
                     "traits": {
-                        "smithy.api#documentation": "<p> The type of lifecycle policy.</p>",
+                        "smithy.api#documentation": "<p>The type of lifecycle policy.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4892,7 +4929,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a security configuration for OpenSearch Serverless. For more information, see\n            <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html\">SAML\n                authentication for Amazon OpenSearch Serverless</a>.</p>",
+                "smithy.api#documentation": "<p>Updates a security configuration for OpenSearch Serverless. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html\">SAML\n                authentication for Amazon OpenSearch Serverless</a>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -4931,6 +4968,12 @@
                         "smithy.api#documentation": "<p>Describes IAM Identity Center options in the form of a key-value map.</p>"
                     }
                 },
+                "iamFederationOptions": {
+                    "target": "com.amazonaws.opensearchserverless#IamFederationConfigOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes IAM federation options in the form of a key-value map for updating an\n            existing security configuration. Use this field to modify IAM federation settings for\n            the security configuration.</p>"
+                    }
+                },
                 "clientToken": {
                     "target": "com.amazonaws.opensearchserverless#ClientToken",
                     "traits": {
@@ -4947,7 +4990,7 @@
                 "securityConfigDetail": {
                     "target": "com.amazonaws.opensearchserverless#SecurityConfigDetail",
                     "traits": {
-                        "smithy.api#documentation": "<p>Details about the updated security configuration. </p>"
+                        "smithy.api#documentation": "<p>Details about the updated security configuration.</p>"
                     }
                 }
             }
@@ -4978,7 +5021,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an OpenSearch Serverless security policy. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-network.html\">Network access\n            for Amazon OpenSearch Serverless</a> and <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-encryption.html\">Encryption at\n                rest for Amazon OpenSearch Serverless</a>.</p>",
+                "smithy.api#documentation": "<p>Updates an OpenSearch Serverless security policy. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-network.html\">Network\n                access for Amazon OpenSearch Serverless</a> and <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-encryption.html\">Encryption\n                at rest for Amazon OpenSearch Serverless</a>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -5059,7 +5102,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an OpenSearch Serverless-managed interface endpoint. For more information, see\n            <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html\">Access Amazon OpenSearch Serverless using an interface endpoint</a>.</p>",
+                "smithy.api#documentation": "<p>Updates an OpenSearch Serverless-managed interface endpoint. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html\">Access\n                Amazon OpenSearch Serverless using an interface endpoint</a>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -5410,6 +5453,26 @@
                     "max": 255
                 },
                 "smithy.api#pattern": "^vpc-[0-9a-z]*$"
+            }
+        },
+        "com.amazonaws.opensearchserverless#iamFederationGroupAttribute": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[A-Za-z][A-Za-z0-9_.:/=+\\-@]*$"
+            }
+        },
+        "com.amazonaws.opensearchserverless#iamFederationUserAttribute": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[A-Za-z][A-Za-z0-9_.:/=+\\-@]*$"
             }
         },
         "com.amazonaws.opensearchserverless#openSearchServerlessEntityId": {

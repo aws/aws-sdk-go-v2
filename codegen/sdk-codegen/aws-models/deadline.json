@@ -3090,6 +3090,12 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that the monitor uses to connect to Deadline Cloud. Every user that signs in to the monitor using IAM Identity Center uses this role to access Deadline Cloud resources.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "tags": {
+                    "target": "com.amazonaws.deadline#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to add to your monitor. Each tag consists of a tag key and a tag value. Tag keys and values are both required, but tag values can be empty strings.</p>"
+                    }
                 }
             },
             "traits": {
