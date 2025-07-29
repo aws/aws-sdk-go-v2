@@ -1,3 +1,22 @@
+# Release (2025-07-29)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/ec2/imds`: [v1.18.0](feature/ec2/imds/CHANGELOG.md#v1180-2025-07-29)
+  * **Feature**: Add config switch `DisableDefaultMaxBackoff` that allows you to disable the default maximum backoff (1 second) for IMDS calls retry attempt
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.55.0](service/batch/CHANGELOG.md#v1550-2025-07-29)
+  * **Feature**: AWS Batch for SageMaker Training jobs feature support.  Includes new APIs for service job submission (e.g., SubmitServiceJob) and managing service environments (e.g., CreateServiceEnvironment) that enable queueing SageMaker Training jobs.
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.27.0](service/cleanrooms/CHANGELOG.md#v1270-2025-07-29)
+  * **Feature**: This feature provides the ability to update the table reference and allowed columns on an existing configured table.
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.18.0](service/deadline/CHANGELOG.md#v1180-2025-07-29)
+  * **Feature**: Adds support for tag management on monitors.
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.46.0](service/location/CHANGELOG.md#v1460-2025-07-29)
+  * **Feature**: This release 1) adds support for multi-polygon geofences with disconnected territories, and 2) enables polygon exclusion zones within geofences for more accurate representation of real-world boundaries.
+* `github.com/aws/aws-sdk-go-v2/service/opensearchserverless`: [v1.21.0](service/opensearchserverless/CHANGELOG.md#v1210-2025-07-29)
+  * **Feature**: This is to support Granular access control support for SAML with IAMFedraton in AOSS
+
 # Release (2025-07-28)
 
 ## General Highlights

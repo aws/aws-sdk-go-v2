@@ -1,3 +1,7 @@
+# v1.21.0 (2025-07-29)
+
+* **Feature**: This is to support Granular access control support for SAML with IAMFedraton in AOSS
+
 # v1.20.0 (2025-07-28)
 
 * **Feature**: Add support for HTTP interceptors.

@@ -1,8 +1,0 @@
-{
-    "id": "46f6ec5c-59c9-4a01-9e5a-4bf900a939e2",
-    "type": "feature",
-    "description": "This is to support Granular access control support for SAML with IAMFedraton in AOSS",
-    "modules": [
-        "service/opensearchserverless"
-    ]
-}

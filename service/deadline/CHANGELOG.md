@@ -1,3 +1,7 @@
+# v1.18.0 (2025-07-29)
+
+* **Feature**: Adds support for tag management on monitors.
+
 # v1.17.0 (2025-07-28)
 
 * **Feature**: Add support for HTTP interceptors.

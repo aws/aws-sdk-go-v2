@@ -1,3 +1,7 @@
+# v1.18.0 (2025-07-29)
+
+* **Feature**: Add config switch `DisableDefaultMaxBackoff` that allows you to disable the default maximum backoff (1 second) for IMDS calls retry attempt
+
 # v1.17.0 (2025-07-28)
 
 * **Feature**: Add support for HTTP interceptors.

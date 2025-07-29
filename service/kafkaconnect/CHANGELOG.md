@@ -1,3 +1,7 @@
+# v1.24.1 (2025-07-29)
+
+* No change notes available for this release.
+
 # v1.24.0 (2025-07-28)
 
 * **Feature**: Add support for HTTP interceptors.

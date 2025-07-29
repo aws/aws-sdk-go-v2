@@ -1,8 +1,0 @@
-{
-    "id": "fb963572-3a93-40c3-b100-a627379d4e80",
-    "type": "feature",
-    "description": "This feature provides the ability to update the table reference and allowed columns on an existing configured table.",
-    "modules": [
-        "service/cleanrooms"
-    ]
-}

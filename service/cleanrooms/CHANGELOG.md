@@ -1,3 +1,7 @@
+# v1.27.0 (2025-07-29)
+
+* **Feature**: This feature provides the ability to update the table reference and allowed columns on an existing configured table.
+
 # v1.26.0 (2025-07-28)
 
 * **Feature**: Add support for HTTP interceptors.
