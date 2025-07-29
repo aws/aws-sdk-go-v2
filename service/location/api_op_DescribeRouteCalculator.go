@@ -75,7 +75,7 @@ type DescribeRouteCalculatorOutput struct {
 	//
 	// For more information about data providers, see [Amazon Location Service data providers].
 	//
-	// [Amazon Location Service data providers]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
+	// [Amazon Location Service data providers]: https://docs.aws.amazon.com/location/previous/developerguide/what-is-data-provider.html
 	//
 	// This member is required.
 	DataSource *string

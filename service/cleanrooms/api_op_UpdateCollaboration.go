@@ -36,6 +36,8 @@ type UpdateCollaborationInput struct {
 	CollaborationIdentifier *string
 
 	// The analytics engine.
+	//
+	// After July 16, 2025, the CLEAN_ROOMS_SQL parameter will no longer be available.
 	AnalyticsEngine types.AnalyticsEngine
 
 	// A description of the collaboration.

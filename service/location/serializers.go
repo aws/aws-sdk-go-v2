@@ -6180,6 +6180,13 @@ func awsRestjson1_serializeDocumentGeofenceGeometry(v *types.GeofenceGeometry, v
 		ok.Base64EncodeBytes(v.Geobuf)
 	}
 
+	if v.MultiPolygon != nil {
+		ok := object.Key("MultiPolygon")
+		if err := awsRestjson1_serializeDocumentMultiLinearRings(v.MultiPolygon, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Polygon != nil {
 		ok := object.Key("Polygon")
 		if err := awsRestjson1_serializeDocumentLinearRings(v.Polygon, ok); err != nil {
@@ -6435,6 +6442,22 @@ func awsRestjson1_serializeDocumentMapConfigurationUpdate(v *types.MapConfigurat
 		ok.String(*v.PoliticalView)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMultiLinearRings(v [][][][]float64, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentLinearRings(v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

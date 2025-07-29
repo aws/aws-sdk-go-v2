@@ -48,12 +48,16 @@ type CreateSecurityConfigInput struct {
 	// A description of the security configuration.
 	Description *string
 
+	// Describes IAM federation options in the form of a key-value map. This field is
+	// required if you specify iamFederation for the type parameter.
+	IamFederationOptions *types.IamFederationConfigOptions
+
 	// Describes IAM Identity Center options in the form of a key-value map. This
 	// field is required if you specify iamidentitycenter for the type parameter.
 	IamIdentityCenterOptions *types.CreateIamIdentityCenterConfigOptions
 
 	// Describes SAML options in in the form of a key-value map. This field is
-	// required if you specify saml for the type parameter.
+	// required if you specify SAML for the type parameter.
 	SamlOptions *types.SamlConfigOptions
 
 	noSmithyDocumentSerde

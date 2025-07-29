@@ -49,7 +49,7 @@ type SearchPlaceIndexForPositionInput struct {
 
 	// The optional [API key] to authorize the request.
 	//
-	// [API key]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+	// [API key]: https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html
 	Key *string
 
 	// The preferred language used to return results. The value must be a valid [BCP 47]

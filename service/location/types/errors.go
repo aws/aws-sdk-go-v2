@@ -116,7 +116,7 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // The operation was denied because the request would exceed the maximum [quota] set for
 // Amazon Location Service.
 //
-// [quota]: https://docs.aws.amazon.com/location/latest/developerguide/location-quotas.html
+// [quota]: https://docs.aws.amazon.com/location/previous/developerguide/location-quotas.html
 type ServiceQuotaExceededException struct {
 	Message *string
 

@@ -1,0 +1,8 @@
+{
+    "id": "66a17a0f-f787-42f7-b66a-44e20c5d3a24",
+    "type": "feature",
+    "description": "Adds support for tag management on monitors.",
+    "modules": [
+        "service/deadline"
+    ]
+}

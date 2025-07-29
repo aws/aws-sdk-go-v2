@@ -6614,6 +6614,13 @@ func awsRestjson1_serializeOpDocumentUpdateConfiguredTableInput(v *UpdateConfigu
 	object := value.Object()
 	defer object.Close()
 
+	if v.AllowedColumns != nil {
+		ok := object.Key("allowedColumns")
+		if err := awsRestjson1_serializeDocumentAllowedColumnList(v.AllowedColumns, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.AnalysisMethod) > 0 {
 		ok := object.Key("analysisMethod")
 		ok.String(string(v.AnalysisMethod))
@@ -6632,6 +6639,13 @@ func awsRestjson1_serializeOpDocumentUpdateConfiguredTableInput(v *UpdateConfigu
 	if v.SelectedAnalysisMethods != nil {
 		ok := object.Key("selectedAnalysisMethods")
 		if err := awsRestjson1_serializeDocumentSelectedAnalysisMethods(v.SelectedAnalysisMethods, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TableReference != nil {
+		ok := object.Key("tableReference")
+		if err := awsRestjson1_serializeDocumentTableReference(v.TableReference, ok); err != nil {
 			return err
 		}
 	}

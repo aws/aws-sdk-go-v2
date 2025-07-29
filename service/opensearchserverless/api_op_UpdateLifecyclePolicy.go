@@ -41,7 +41,7 @@ type UpdateLifecyclePolicyInput struct {
 	// This member is required.
 	PolicyVersion *string
 
-	//  The type of lifecycle policy.
+	// The type of lifecycle policy.
 	//
 	// This member is required.
 	Type types.LifecyclePolicyType

@@ -110,6 +110,26 @@ func (m *validateOpCreateSchedulingPolicy) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateServiceEnvironment struct {
+}
+
+func (*validateOpCreateServiceEnvironment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateServiceEnvironment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateServiceEnvironmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateServiceEnvironmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteComputeEnvironment struct {
 }
 
@@ -190,6 +210,26 @@ func (m *validateOpDeleteSchedulingPolicy) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteServiceEnvironment struct {
+}
+
+func (*validateOpDeleteServiceEnvironment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteServiceEnvironment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteServiceEnvironmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteServiceEnvironmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeregisterJobDefinition struct {
 }
 
@@ -265,6 +305,26 @@ func (m *validateOpDescribeSchedulingPolicies) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeSchedulingPoliciesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeServiceJob struct {
+}
+
+func (*validateOpDescribeServiceJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeServiceJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeServiceJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeServiceJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -370,6 +430,26 @@ func (m *validateOpSubmitJob) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSubmitServiceJob struct {
+}
+
+func (*validateOpSubmitServiceJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSubmitServiceJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SubmitServiceJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSubmitServiceJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -405,6 +485,26 @@ func (m *validateOpTerminateJob) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpTerminateJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpTerminateServiceJob struct {
+}
+
+func (*validateOpTerminateServiceJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTerminateServiceJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TerminateServiceJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTerminateServiceJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -510,6 +610,26 @@ func (m *validateOpUpdateSchedulingPolicy) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateServiceEnvironment struct {
+}
+
+func (*validateOpUpdateServiceEnvironment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateServiceEnvironment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateServiceEnvironmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateServiceEnvironmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCancelJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelJob{}, middleware.After)
 }
@@ -530,6 +650,10 @@ func addOpCreateSchedulingPolicyValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpCreateSchedulingPolicy{}, middleware.After)
 }
 
+func addOpCreateServiceEnvironmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateServiceEnvironment{}, middleware.After)
+}
+
 func addOpDeleteComputeEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteComputeEnvironment{}, middleware.After)
 }
@@ -546,6 +670,10 @@ func addOpDeleteSchedulingPolicyValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpDeleteSchedulingPolicy{}, middleware.After)
 }
 
+func addOpDeleteServiceEnvironmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteServiceEnvironment{}, middleware.After)
+}
+
 func addOpDeregisterJobDefinitionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeregisterJobDefinition{}, middleware.After)
 }
@@ -560,6 +688,10 @@ func addOpDescribeJobsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeSchedulingPoliciesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeSchedulingPolicies{}, middleware.After)
+}
+
+func addOpDescribeServiceJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeServiceJob{}, middleware.After)
 }
 
 func addOpGetJobQueueSnapshotValidationMiddleware(stack *middleware.Stack) error {
@@ -582,12 +714,20 @@ func addOpSubmitJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSubmitJob{}, middleware.After)
 }
 
+func addOpSubmitServiceJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSubmitServiceJob{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
 
 func addOpTerminateJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTerminateJob{}, middleware.After)
+}
+
+func addOpTerminateServiceJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTerminateServiceJob{}, middleware.After)
 }
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -608,6 +748,10 @@ func addOpUpdateJobQueueValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateSchedulingPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateSchedulingPolicy{}, middleware.After)
+}
+
+func addOpUpdateServiceEnvironmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateServiceEnvironment{}, middleware.After)
 }
 
 func validateComputeEnvironmentOrder(v *types.ComputeEnvironmentOrder) error {
@@ -1682,6 +1826,56 @@ func validateSecretList(v []types.Secret) error {
 	}
 }
 
+func validateServiceEnvironmentOrder(v *types.ServiceEnvironmentOrder) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ServiceEnvironmentOrder"}
+	if v.Order == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Order"))
+	}
+	if v.ServiceEnvironment == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceEnvironment"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateServiceEnvironmentOrders(v []types.ServiceEnvironmentOrder) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ServiceEnvironmentOrders"}
+	for i := range v {
+		if err := validateServiceEnvironmentOrder(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateServiceJobRetryStrategy(v *types.ServiceJobRetryStrategy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ServiceJobRetryStrategy"}
+	if v.Attempts == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Attempts"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateShareAttributes(v *types.ShareAttributes) error {
 	if v == nil {
 		return nil
@@ -1977,11 +2171,14 @@ func validateOpCreateJobQueueInput(v *CreateJobQueueInput) error {
 	if v.Priority == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Priority"))
 	}
-	if v.ComputeEnvironmentOrder == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ComputeEnvironmentOrder"))
-	} else if v.ComputeEnvironmentOrder != nil {
+	if v.ComputeEnvironmentOrder != nil {
 		if err := validateComputeEnvironmentOrders(v.ComputeEnvironmentOrder); err != nil {
 			invalidParams.AddNested("ComputeEnvironmentOrder", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ServiceEnvironmentOrder != nil {
+		if err := validateServiceEnvironmentOrders(v.ServiceEnvironmentOrder); err != nil {
+			invalidParams.AddNested("ServiceEnvironmentOrder", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.JobStateTimeLimitActions != nil {
@@ -2008,6 +2205,27 @@ func validateOpCreateSchedulingPolicyInput(v *CreateSchedulingPolicyInput) error
 		if err := validateFairsharePolicy(v.FairsharePolicy); err != nil {
 			invalidParams.AddNested("FairsharePolicy", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateServiceEnvironmentInput(v *CreateServiceEnvironmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateServiceEnvironmentInput"}
+	if v.ServiceEnvironmentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceEnvironmentName"))
+	}
+	if len(v.ServiceEnvironmentType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceEnvironmentType"))
+	}
+	if v.CapacityLimits == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapacityLimits"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2076,6 +2294,21 @@ func validateOpDeleteSchedulingPolicyInput(v *DeleteSchedulingPolicyInput) error
 	}
 }
 
+func validateOpDeleteServiceEnvironmentInput(v *DeleteServiceEnvironmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteServiceEnvironmentInput"}
+	if v.ServiceEnvironment == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceEnvironment"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeregisterJobDefinitionInput(v *DeregisterJobDefinitionInput) error {
 	if v == nil {
 		return nil
@@ -2128,6 +2361,21 @@ func validateOpDescribeSchedulingPoliciesInput(v *DescribeSchedulingPoliciesInpu
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeSchedulingPoliciesInput"}
 	if v.Arns == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeServiceJobInput(v *DescribeServiceJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeServiceJobInput"}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2270,6 +2518,35 @@ func validateOpSubmitJobInput(v *SubmitJobInput) error {
 	}
 }
 
+func validateOpSubmitServiceJobInput(v *SubmitServiceJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SubmitServiceJobInput"}
+	if v.JobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobName"))
+	}
+	if v.JobQueue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobQueue"))
+	}
+	if v.RetryStrategy != nil {
+		if err := validateServiceJobRetryStrategy(v.RetryStrategy); err != nil {
+			invalidParams.AddNested("RetryStrategy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ServiceRequestPayload == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceRequestPayload"))
+	}
+	if len(v.ServiceJobType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceJobType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpTagResourceInput(v *TagResourceInput) error {
 	if v == nil {
 		return nil
@@ -2293,6 +2570,24 @@ func validateOpTerminateJobInput(v *TerminateJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TerminateJobInput"}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if v.Reason == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Reason"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTerminateServiceJobInput(v *TerminateServiceJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TerminateServiceJobInput"}
 	if v.JobId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
@@ -2372,6 +2667,11 @@ func validateOpUpdateJobQueueInput(v *UpdateJobQueueInput) error {
 			invalidParams.AddNested("ComputeEnvironmentOrder", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ServiceEnvironmentOrder != nil {
+		if err := validateServiceEnvironmentOrders(v.ServiceEnvironmentOrder); err != nil {
+			invalidParams.AddNested("ServiceEnvironmentOrder", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.JobStateTimeLimitActions != nil {
 		if err := validateJobStateTimeLimitActions(v.JobStateTimeLimitActions); err != nil {
 			invalidParams.AddNested("JobStateTimeLimitActions", err.(smithy.InvalidParamsError))
@@ -2396,6 +2696,21 @@ func validateOpUpdateSchedulingPolicyInput(v *UpdateSchedulingPolicyInput) error
 		if err := validateFairsharePolicy(v.FairsharePolicy); err != nil {
 			invalidParams.AddNested("FairsharePolicy", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateServiceEnvironmentInput(v *UpdateServiceEnvironmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateServiceEnvironmentInput"}
+	if v.ServiceEnvironment == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceEnvironment"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

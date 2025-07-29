@@ -69,6 +69,11 @@ type UpdateJobQueueInput struct {
 	// aws:aws:batch:us-west-2:123456789012:scheduling-policy/MySchedulingPolicy .
 	SchedulingPolicyArn *string
 
+	// The order of the service environment associated with the job queue. Job queues
+	// with a higher priority are evaluated first when associated with the same service
+	// environment.
+	ServiceEnvironmentOrder []types.ServiceEnvironmentOrder
+
 	// Describes the queue's ability to accept new jobs. If the job queue state is
 	// ENABLED , it can accept jobs. If the job queue state is DISABLED , new jobs
 	// can't be added to the queue, but jobs already in the queue can finish.

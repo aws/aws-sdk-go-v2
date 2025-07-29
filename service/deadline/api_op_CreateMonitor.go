@@ -63,6 +63,11 @@ type CreateMonitorInput struct {
 	// The unique token which the server uses to recognize retries of the same request.
 	ClientToken *string
 
+	// The tags to add to your monitor. Each tag consists of a tag key and a tag
+	// value. Tag keys and values are both required, but tag values can be empty
+	// strings.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a privacy budget template for a specified membership.
+// Deletes a privacy budget template for a specified collaboration.
 func (c *Client) DeletePrivacyBudgetTemplate(ctx context.Context, params *DeletePrivacyBudgetTemplateInput, optFns ...func(*Options)) (*DeletePrivacyBudgetTemplateOutput, error) {
 	if params == nil {
 		params = &DeletePrivacyBudgetTemplateInput{}

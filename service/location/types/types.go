@@ -31,6 +31,12 @@ type ApiKeyRestrictions struct {
 	//
 	//   - geo:GetMap* - Allows all actions needed for map rendering.
 	//
+	//   - geo-maps:GetTile - Allows retrieving map tiles.
+	//
+	//   - geo-maps:GetStaticMap - Allows retrieving static map images.
+	//
+	//   - geo-maps:* - Allows all actions related to map functionalities.
+	//
 	//   - Place actions
 	//
 	//   - geo:SearchPlaceIndexForText - Allows geocoding.
@@ -41,11 +47,45 @@ type ApiKeyRestrictions struct {
 	//
 	//   - GetPlace - Allows finding a place by place ID.
 	//
+	//   - geo-places:Geocode - Allows geocoding using place information.
+	//
+	//   - geo-places:ReverseGeocode - Allows reverse geocoding from location
+	//   coordinates.
+	//
+	//   - geo-places:SearchNearby - Allows searching for places near a location.
+	//
+	//   - geo-places:SearchText - Allows searching for places based on text input.
+	//
+	//   - geo-places:Autocomplete - Allows auto-completion of place names based on
+	//   text input.
+	//
+	//   - geo-places:Suggest - Allows generating suggestions for places based on
+	//   partial input.
+	//
+	//   - geo-places:GetPlace - Allows finding a place by its ID.
+	//
+	//   - geo-places:* - Allows all actions related to place services.
+	//
 	//   - Route actions
 	//
 	//   - geo:CalculateRoute - Allows point to point routing.
 	//
 	//   - geo:CalculateRouteMatrix - Allows calculating a matrix of routes.
+	//
+	//   - geo-routes:CalculateRoutes - Allows calculating multiple routes between
+	//   points.
+	//
+	//   - geo-routes:CalculateRouteMatrix - Allows calculating a matrix of routes
+	//   between points.
+	//
+	//   - geo-routes:CalculateIsolines - Allows calculating isolines for a given area.
+	//
+	//   - geo-routes:OptimizeWaypoints - Allows optimizing the order of waypoints in a
+	//   route.
+	//
+	//   - geo-routes:SnapToRoads - Allows snapping a route to the nearest roads.
+	//
+	//   - geo-routes:* - Allows all actions related to routing functionalities.
 	//
 	// You must use these strings exactly. For example, to provide access to map
 	// rendering, the only valid action is geo:GetMap* as an input to the list.
@@ -215,15 +255,14 @@ type BatchPutGeofenceRequestEntry struct {
 	// This member is required.
 	GeofenceId *string
 
-	// Contains the details to specify the position of the geofence. Can be a polygon,
-	// a circle or a polygon encoded in Geobuf format. Including multiple selections
-	// will return a validation error.
+	// Contains the details to specify the position of the geofence. Can be a circle,
+	// a polygon, or a multipolygon. Polygon and MultiPolygon geometries can be
+	// defined using their respective parameters, or encoded in Geobuf format using the
+	// Geobuf parameter. Including multiple geometry types in the same request will
+	// return a validation error.
 	//
-	// The [geofence polygon] format supports a maximum of 1,000 vertices. The [Geofence geobuf] format supports a
-	// maximum of 100,000 vertices.
-	//
-	// [Geofence geobuf]: https://docs.aws.amazon.com/location-geofences/latest/APIReference/API_GeofenceGeometry.html
-	// [geofence polygon]: https://docs.aws.amazon.com/location-geofences/latest/APIReference/API_GeofenceGeometry.html
+	// The geofence Polygon and MultiPolygon formats support a maximum of 1,000 total
+	// vertices. The Geobuf format supports a maximum of 100,000 vertices.
 	//
 	// This member is required.
 	Geometry *GeofenceGeometry
@@ -326,7 +365,7 @@ type CalculateRouteMatrixSummary struct {
 	//
 	// For more information about data providers, see [Amazon Location Service data providers].
 	//
-	// [Amazon Location Service data providers]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
+	// [Amazon Location Service data providers]: https://docs.aws.amazon.com/location/previous/developerguide/what-is-data-provider.html
 	//
 	// This member is required.
 	DataSource *string
@@ -365,7 +404,7 @@ type CalculateRouteSummary struct {
 	//
 	// For more information about data providers, see [Amazon Location Service data providers].
 	//
-	// [Amazon Location Service data providers]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
+	// [Amazon Location Service data providers]: https://docs.aws.amazon.com/location/previous/developerguide/what-is-data-provider.html
 	//
 	// This member is required.
 	DataSource *string
@@ -666,7 +705,7 @@ type ForecastedEvent struct {
 	noSmithyDocumentSerde
 }
 
-// The device's position, IP address, and WiFi access points.
+// The device's position and speed.
 type ForecastGeofenceEventsDeviceState struct {
 
 	// The device's position.
@@ -682,12 +721,12 @@ type ForecastGeofenceEventsDeviceState struct {
 
 // Contains the geofence geometry details.
 //
-// A geofence geometry is made up of either a polygon or a circle. Can be a
-// polygon, a circle or a polygon encoded in Geobuf format. Including multiple
-// selections will return a validation error.
+// A geofence geometry can be a circle, a polygon, or a multipolygon. Polygon and
+// MultiPolygon geometries can be defined using their respective parameters, or
+// encoded in Geobuf format using the Geobuf parameter. Including multiple
+// geometry types in the same request will return a validation error.
 //
-// Amazon Location doesn't currently support polygons with holes, multipolygons,
-// polygons that are wound clockwise, or that cross the antimeridian.
+// Amazon Location doesn't currently support polygons that cross the antimeridian.
 type GeofenceGeometry struct {
 
 	// A circle on the earth, as defined by a center point and a radius.
@@ -696,26 +735,84 @@ type GeofenceGeometry struct {
 	// Geobuf is a compact binary encoding for geographic data that provides lossless
 	// compression of GeoJSON polygons. The Geobuf must be Base64-encoded.
 	//
-	// A polygon in Geobuf format can have up to 100,000 vertices.
+	// This parameter can contain a Geobuf-encoded GeoJSON geometry object of type
+	// Polygon OR MultiPolygon . For more information and specific configuration
+	// requirements for these object types, see [Polygon]and [MultiPolygon].
+	//
+	// The following limitations apply specifically to geometries defined using the
+	// Geobuf parameter, and supercede the corresponding limitations of the Polygon
+	// and MultiPolygon parameters:
+	//
+	//   - A Polygon in Geobuf format can have up to 25,000 rings and up to 100,000
+	//   total vertices, including all vertices from all component rings.
+	//
+	//   - A MultiPolygon in Geobuf format can contain up to 10,000 Polygons and up to
+	//   100,000 total vertices, including all vertices from all component Polygons .
+	//
+	// [MultiPolygon]: https://docs.aws.amazon.com/location/latest/APIReference/API_WaypointGeofencing_GeofenceGeometry.html#location-Type-WaypointGeofencing_GeofenceGeometry-MultiPolygon
+	// [Polygon]: https://docs.aws.amazon.com/location/latest/APIReference/API_WaypointGeofencing_GeofenceGeometry.html#location-Type-WaypointGeofencing_GeofenceGeometry-Polygon
 	Geobuf []byte
 
-	// A polygon is a list of linear rings which are each made up of a list of
-	// vertices.
+	// A MultiPolygon is a list of up to 250 Polygon elements which represent the
+	// shape of a geofence. The Polygon components of a MultiPolygon geometry can
+	// define separate geographical areas that are considered part of the same
+	// geofence, perimeters of larger exterior areas with smaller interior spaces that
+	// are excluded from the geofence, or some combination of these use cases to form
+	// complex geofence boundaries.
 	//
-	// Each vertex is a 2-dimensional point of the form: [longitude, latitude] . This
-	// is represented as an array of doubles of length 2 (so [double, double] ).
+	// For more information and specific configuration requirements for the Polygon
+	// components that form a MultiPolygon , see [Polygon].
 	//
-	// An array of 4 or more vertices, where the first and last vertex are the same
-	// (to form a closed boundary), is called a linear ring. The linear ring vertices
-	// must be listed in counter-clockwise order around the ring’s interior. The linear
-	// ring is represented as an array of vertices, or an array of arrays of doubles (
-	// [[double, double], ...] ).
+	// The following additional requirements and limitations apply to geometries
+	// defined using the MultiPolygon parameter:
 	//
-	// A geofence consists of a single linear ring. To allow for future expansion, the
-	// Polygon parameter takes an array of linear rings, which is represented as an
-	// array of arrays of arrays of doubles ( [[[double, double], ...], ...] ).
+	//   - The entire MultiPolygon must consist of no more than 1,000 vertices,
+	//   including all vertices from all component Polygons .
 	//
-	// A linear ring for use in geofences can consist of between 4 and 1,000 vertices.
+	//   - Each edge of a component Polygon must intersect no more than 5 edges from
+	//   other Polygons . Parallel edges that are shared but do not cross are not
+	//   counted toward this limit.
+	//
+	//   - The total number of intersecting edges of component Polygons must be no more
+	//   than 100,000. Parallel edges that are shared but do not cross are not counted
+	//   toward this limit.
+	//
+	// [Polygon]: https://docs.aws.amazon.com/location/latest/APIReference/API_WaypointGeofencing_GeofenceGeometry.html#location-Type-WaypointGeofencing_GeofenceGeometry-Polygon
+	MultiPolygon [][][][]float64
+
+	// A Polygon is a list of up to 250 linear rings which represent the shape of a
+	// geofence. This list must include 1 exterior ring (representing the outer
+	// perimeter of the geofence), and can optionally include up to 249 interior rings
+	// (representing polygonal spaces within the perimeter, which are excluded from the
+	// geofence area).
+	//
+	// A linear ring is an array of 4 or more vertices, where the first and last
+	// vertex are the same (to form a closed boundary). Each vertex is a 2-dimensional
+	// point represented as an array of doubles of length 2: [longitude, latitude] .
+	//
+	// Each linear ring is represented as an array of arrays of doubles ( [[longitude,
+	// latitude], [longitude, latitude], ...] ). The vertices for the exterior ring
+	// must be listed in counter-clockwise sequence. Vertices for all interior rings
+	// must be listed in clockwise sequence.
+	//
+	// The list of linear rings that describe the entire Polygon is represented as an
+	// array of arrays of arrays of doubles ( [[[longitude, latitude], [longitude,
+	// latitude], ...], [[longitude, latitude], [longitude, latitude], ...], ...] ).
+	// The exterior ring must be listed first, before any interior rings.
+	//
+	// The following additional requirements and limitations apply to geometries
+	// defined using the Polygon parameter:
+	//
+	//   - The entire Polygon must consist of no more than 1,000 vertices, including
+	//   all vertices from the exterior ring and all interior rings.
+	//
+	//   - Rings must not touch or cross each other.
+	//
+	//   - All interior rings must be fully contained within the exterior ring.
+	//
+	//   - Interior rings must not contain other interior rings.
+	//
+	//   - No ring is permitted to intersect itself.
 	Polygon [][][]float64
 
 	noSmithyDocumentSerde
@@ -764,7 +861,7 @@ type InferredState struct {
 //   - Leg 2: The StartPosition is the waypoint position. The EndPosition is the
 //     destination position.
 //
-// [snapped to a nearby road]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
+// [snapped to a nearby road]: https://docs.aws.amazon.com/location/previous/developerguide/snap-to-nearby-road.html
 type Leg struct {
 
 	// The distance between the leg's StartPosition and EndPosition along a calculated
@@ -787,7 +884,7 @@ type Leg struct {
 	//
 	// If the EndPosition isn't located on a road, it's [snapped to a nearby road].
 	//
-	// [snapped to a nearby road]: https://docs.aws.amazon.com/location/latest/developerguide/nap-to-nearby-road.html
+	// [snapped to a nearby road]: https://docs.aws.amazon.com/location/previous/developerguide/nap-to-nearby-road.html
 	//
 	// This member is required.
 	EndPosition []float64
@@ -796,7 +893,7 @@ type Leg struct {
 	//
 	// If the StartPosition isn't located on a road, it's [snapped to a nearby road].
 	//
-	// [snapped to a nearby road]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
+	// [snapped to a nearby road]: https://docs.aws.amazon.com/location/previous/developerguide/snap-to-nearby-road.html
 	//
 	// This member is required.
 	StartPosition []float64
@@ -924,7 +1021,8 @@ type ListGeofenceResponseEntry struct {
 	// This member is required.
 	GeofenceId *string
 
-	// Contains the geofence geometry details describing a polygon or a circle.
+	// Contains the geofence geometry details describing the position of the geofence.
+	// Can be a circle, a polygon, or a multipolygon.
 	//
 	// This member is required.
 	Geometry *GeofenceGeometry
@@ -1070,7 +1168,7 @@ type ListPlaceIndexesResponseEntry struct {
 	//
 	// For more information about data providers, see [Amazon Location Service data providers].
 	//
-	// [Amazon Location Service data providers]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
+	// [Amazon Location Service data providers]: https://docs.aws.amazon.com/location/previous/developerguide/what-is-data-provider.html
 	//
 	// This member is required.
 	DataSource *string
@@ -1130,7 +1228,7 @@ type ListRouteCalculatorsResponseEntry struct {
 	//
 	// For more information about data providers, see [Amazon Location Service data providers].
 	//
-	// [Amazon Location Service data providers]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
+	// [Amazon Location Service data providers]: https://docs.aws.amazon.com/location/previous/developerguide/what-is-data-provider.html
 	//
 	// This member is required.
 	DataSource *string
@@ -1386,11 +1484,11 @@ type MapConfiguration struct {
 	//   is a dark-themed style with muted colors and fewer features that aids in
 	//   understanding overlaid data.
 	//
-	// [GrabMaps map styles]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html
-	// [GrabMaps countries and area covered]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html#grab-coverage-area
-	// [Open Data map styles]: https://docs.aws.amazon.com/location/latest/developerguide/open-data.html
-	// [Esri map styles]: https://docs.aws.amazon.com/location/latest/developerguide/esri.html
-	// [HERE Technologies map styles]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
+	// [GrabMaps map styles]: https://docs.aws.amazon.com/location/previous/developerguide/grab.html
+	// [GrabMaps countries and area covered]: https://docs.aws.amazon.com/location/previous/developerguide/grab.html#grab-coverage-area
+	// [Open Data map styles]: https://docs.aws.amazon.com/location/previous/developerguide/open-data.html
+	// [Esri map styles]: https://docs.aws.amazon.com/location/previous/developerguide/esri.html
+	// [HERE Technologies map styles]: https://docs.aws.amazon.com/location/previous/developerguide/HERE.html
 	//
 	// This member is required.
 	Style *string
@@ -1412,7 +1510,7 @@ type MapConfiguration struct {
 	// Not all map resources or styles support political view styles. See [Political views] for more
 	// information.
 	//
-	// [Political views]: https://docs.aws.amazon.com/location/latest/developerguide/map-concepts.html#political-views
+	// [Political views]: https://docs.aws.amazon.com/location/previous/developerguide/map-concepts.html#political-views
 	PoliticalView *string
 
 	noSmithyDocumentSerde
@@ -1436,7 +1534,7 @@ type MapConfigurationUpdate struct {
 	// Not all map resources or styles support political view styles. See [Political views] for more
 	// information.
 	//
-	// [Political views]: https://docs.aws.amazon.com/location/latest/developerguide/map-concepts.html#political-views
+	// [Political views]: https://docs.aws.amazon.com/location/previous/developerguide/map-concepts.html#political-views
 	PoliticalView *string
 
 	noSmithyDocumentSerde
@@ -1460,9 +1558,9 @@ type Place struct {
 	// The Amazon Location categories that describe this Place.
 	//
 	// For more information about using categories, including a list of Amazon
-	// Location categories, see [Categories and filtering], in the Amazon Location Service Developer Guide.
+	// Location categories, see [Categories and filtering], in the Amazon Location Service developer guide.
 	//
-	// [Categories and filtering]: https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html
+	// [Categories and filtering]: https://docs.aws.amazon.com/location/previous/developerguide/category-filtering.html
 	Categories []string
 
 	// A country/region specified using [ISO 3166] 3-digit country/region code. For example, CAN .
@@ -1655,9 +1753,9 @@ type SearchForSuggestionsResult struct {
 	// The Amazon Location categories that describe the Place.
 	//
 	// For more information about using categories, including a list of Amazon
-	// Location categories, see [Categories and filtering], in the Amazon Location Service Developer Guide.
+	// Location categories, see [Categories and filtering], in the Amazon Location Service developer guide.
 	//
-	// [Categories and filtering]: https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html
+	// [Categories and filtering]: https://docs.aws.amazon.com/location/previous/developerguide/category-filtering.html
 	Categories []string
 
 	// The unique identifier of the Place. You can use this with the GetPlace
@@ -1727,7 +1825,7 @@ type SearchPlaceIndexForPositionSummary struct {
 	//
 	// For more information about data providers, see [Amazon Location Service data providers].
 	//
-	// [Amazon Location Service data providers]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
+	// [Amazon Location Service data providers]: https://docs.aws.amazon.com/location/previous/developerguide/what-is-data-provider.html
 	//
 	// This member is required.
 	DataSource *string
@@ -1765,7 +1863,7 @@ type SearchPlaceIndexForSuggestionsSummary struct {
 	//
 	// For more information about data providers, see [Amazon Location Service data providers].
 	//
-	// [Amazon Location Service data providers]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
+	// [Amazon Location Service data providers]: https://docs.aws.amazon.com/location/previous/developerguide/what-is-data-provider.html
 	//
 	// This member is required.
 	DataSource *string
@@ -1821,7 +1919,7 @@ type SearchPlaceIndexForTextSummary struct {
 	//
 	// For more information about data providers, see [Amazon Location Service data providers].
 	//
-	// [Amazon Location Service data providers]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
+	// [Amazon Location Service data providers]: https://docs.aws.amazon.com/location/previous/developerguide/what-is-data-provider.html
 	//
 	// This member is required.
 	DataSource *string

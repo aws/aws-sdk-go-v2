@@ -65,6 +65,8 @@ type CreateCollaborationInput struct {
 	QueryLogStatus types.CollaborationQueryLogStatus
 
 	//  The analytics engine.
+	//
+	// After July 16, 2025, the CLEAN_ROOMS_SQL parameter will no longer be available.
 	AnalyticsEngine types.AnalyticsEngine
 
 	// The ML abilities granted to the collaboration creator.

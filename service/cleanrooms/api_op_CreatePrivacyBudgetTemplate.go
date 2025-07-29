@@ -11,10 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a privacy budget template for a specified membership. Each membership
-// can have only one privacy budget template, but it can be deleted and recreated.
-// If you need to change the privacy budget template for a membership, use the UpdatePrivacyBudgetTemplate
-// operation.
+// Creates a privacy budget template for a specified collaboration. Each
+// collaboration can have only one privacy budget template. If you need to change
+// the privacy budget template, use the UpdatePrivacyBudgetTemplateoperation.
 func (c *Client) CreatePrivacyBudgetTemplate(ctx context.Context, params *CreatePrivacyBudgetTemplateInput, optFns ...func(*Options)) (*CreatePrivacyBudgetTemplateOutput, error) {
 	if params == nil {
 		params = &CreatePrivacyBudgetTemplateInput{}

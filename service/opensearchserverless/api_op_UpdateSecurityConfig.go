@@ -50,6 +50,11 @@ type UpdateSecurityConfigInput struct {
 	// A description of the security configuration.
 	Description *string
 
+	// Describes IAM federation options in the form of a key-value map for updating an
+	// existing security configuration. Use this field to modify IAM federation
+	// settings for the security configuration.
+	IamFederationOptions *types.IamFederationConfigOptions
+
 	// Describes IAM Identity Center options in the form of a key-value map.
 	IamIdentityCenterOptionsUpdates *types.UpdateIamIdentityCenterConfigOptions
 

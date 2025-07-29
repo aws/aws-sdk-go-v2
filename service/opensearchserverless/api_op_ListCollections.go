@@ -34,7 +34,7 @@ func (c *Client) ListCollections(ctx context.Context, params *ListCollectionsInp
 
 type ListCollectionsInput struct {
 
-	//  A list of filter names and values that you can use for requests.
+	// A list of filter names and values that you can use for requests.
 	CollectionFilters *types.CollectionFilters
 
 	// The maximum number of results to return. Default is 20. You can use nextToken

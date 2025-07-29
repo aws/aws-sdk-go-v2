@@ -17,7 +17,7 @@ import (
 //
 // For more information, see [Using API keys].
 //
-// [Using API keys]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+// [Using API keys]: https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html
 func (c *Client) CreateKey(ctx context.Context, params *CreateKeyInput, optFns ...func(*Options)) (*CreateKeyOutput, error) {
 	if params == nil {
 		params = &CreateKeyInput{}
@@ -104,7 +104,7 @@ type CreateKeyOutput struct {
 	// The key value/string of an API key. This value is used when making API calls to
 	// authorize the call. For example, see [GetMapGlyphs].
 	//
-	// [GetMapGlyphs]: https://docs.aws.amazon.com/location/latest/APIReference/API_GetMapGlyphs.html
+	// [GetMapGlyphs]: https://docs.aws.amazon.com/location/previous/APIReference/API_GetMapGlyphs.html
 	//
 	// This member is required.
 	Key *string

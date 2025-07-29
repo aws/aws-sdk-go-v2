@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the privacy budget template for the specified membership.
+// Updates the privacy budget template for the specified collaboration.
 func (c *Client) UpdatePrivacyBudgetTemplate(ctx context.Context, params *UpdatePrivacyBudgetTemplateInput, optFns ...func(*Options)) (*UpdatePrivacyBudgetTemplateOutput, error) {
 	if params == nil {
 		params = &UpdatePrivacyBudgetTemplateInput{}

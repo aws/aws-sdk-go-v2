@@ -2034,6 +2034,13 @@ func awsRestjson1_serializeOpDocumentCreateMonitorInput(v *CreateMonitorInput, v
 		ok.String(*v.Subdomain)
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTags(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

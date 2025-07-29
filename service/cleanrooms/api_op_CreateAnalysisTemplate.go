@@ -44,8 +44,7 @@ type CreateAnalysisTemplateInput struct {
 	// This member is required.
 	Name *string
 
-	// The information in the analysis template. Currently supports text , the query
-	// text for the analysis template.
+	// The information in the analysis template.
 	//
 	// This member is required.
 	Source types.AnalysisSource
