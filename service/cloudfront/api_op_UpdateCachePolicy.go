@@ -24,6 +24,11 @@ import (
 //
 //   - Call UpdateCachePolicy by providing the entire cache policy configuration,
 //     including the fields that you modified and those that you didn't.
+//
+// If your minimum TTL is greater than 0, CloudFront will cache content for at
+// least the duration specified in the cache policy's minimum TTL, even if the
+// Cache-Control: no-cache , no-store , or private directives are present in the
+// origin headers.
 func (c *Client) UpdateCachePolicy(ctx context.Context, params *UpdateCachePolicyInput, optFns ...func(*Options)) (*UpdateCachePolicyOutput, error) {
 	if params == nil {
 		params = &UpdateCachePolicyInput{}

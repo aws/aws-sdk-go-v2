@@ -45717,6 +45717,23 @@ func awsRestxml_deserializeDocumentOrigin(v **types.Origin, decoder smithyxml.No
 				return err
 			}
 
+		case strings.EqualFold("ResponseCompletionTimeout", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.ResponseCompletionTimeout = ptr.Int32(int32(i64))
+			}
+
 		case strings.EqualFold("S3OriginConfig", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsRestxml_deserializeDocumentS3OriginConfig(&sv.S3OriginConfig, nodeDecoder); err != nil {
@@ -51944,6 +51961,23 @@ func awsRestxml_deserializeDocumentS3OriginConfig(v **types.S3OriginConfig, deco
 			{
 				xtv := string(val)
 				sv.OriginAccessIdentity = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("OriginReadTimeout", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.OriginReadTimeout = ptr.Int32(int32(i64))
 			}
 
 		default:

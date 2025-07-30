@@ -15677,6 +15677,17 @@ func awsRestxml_serializeDocumentOrigin(v *types.Origin, value smithyxml.Value) 
 			return err
 		}
 	}
+	if v.ResponseCompletionTimeout != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ResponseCompletionTimeout",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Integer(*v.ResponseCompletionTimeout)
+	}
 	if v.S3OriginConfig != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
@@ -17602,6 +17613,17 @@ func awsRestxml_serializeDocumentS3OriginConfig(v *types.S3OriginConfig, value s
 		}
 		el := value.MemberElement(root)
 		el.String(*v.OriginAccessIdentity)
+	}
+	if v.OriginReadTimeout != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "OriginReadTimeout",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Integer(*v.OriginReadTimeout)
 	}
 	return nil
 }

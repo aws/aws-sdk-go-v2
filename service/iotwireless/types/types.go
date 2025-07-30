@@ -941,6 +941,16 @@ type LoRaWANGetServiceProfileInfo struct {
 	// The MinGwDiversity value.
 	MinGwDiversity *int32
 
+	// The maximum number of transmissions.
+	//
+	// Default: 3
+	NbTransMax *int32
+
+	// The minimum number of transmissions.
+	//
+	// Default: 0
+	NbTransMin *int32
+
 	// The NwkGeoLoc value.
 	NwkGeoLoc bool
 
@@ -958,6 +968,16 @@ type LoRaWANGetServiceProfileInfo struct {
 
 	// The TargetPER value.
 	TargetPer int32
+
+	// The Transmit Power Index maximum value.
+	//
+	// Default: 15
+	TxPowerIndexMax *int32
+
+	// The Transmit Power Index minimum value.
+	//
+	// Default: 0
+	TxPowerIndexMin *int32
 
 	// The ULBucketSize value.
 	UlBucketSize *int32
@@ -1122,11 +1142,31 @@ type LoRaWANServiceProfile struct {
 	// The DrMin value.
 	DrMin *int32
 
+	// The maximum number of transmissions.
+	//
+	// Default: 3
+	NbTransMax *int32
+
+	// The minimum number of transmissions.
+	//
+	// Default: 0
+	NbTransMin *int32
+
 	// The PRAllowed value that describes whether passive roaming is allowed.
 	PrAllowed bool
 
 	// The RAAllowed value that describes whether roaming activation is allowed.
 	RaAllowed bool
+
+	// The Transmit Power Index maximum.
+	//
+	// Default: 15
+	TxPowerIndexMax *int32
+
+	// The Transmit Power Index minimum.
+	//
+	// Default: 0
+	TxPowerIndexMin *int32
 
 	noSmithyDocumentSerde
 }

@@ -182,6 +182,18 @@ func TestCheckSnapshot_CreateDirectory(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateHybridAD(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateHybridAD(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateHybridAD")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateLogSubscription(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateLogSubscription(context.Background(), nil, func(o *Options) {
@@ -223,6 +235,18 @@ func TestCheckSnapshot_CreateTrust(t *testing.T) {
 	_, err := svc.CreateTrust(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateTrust")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteADAssessment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteADAssessment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteADAssessment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -314,6 +338,18 @@ func TestCheckSnapshot_DeregisterEventTopic(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeADAssessment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeADAssessment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeADAssessment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeCertificate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeCertificate(context.Background(), nil, func(o *Options) {
@@ -391,6 +427,18 @@ func TestCheckSnapshot_DescribeEventTopics(t *testing.T) {
 	_, err := svc.DescribeEventTopics(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeEventTopics")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeHybridADUpdate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeHybridADUpdate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeHybridADUpdate")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -626,6 +674,18 @@ func TestCheckSnapshot_GetSnapshotLimits(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListADAssessments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListADAssessments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListADAssessments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListCertificates(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListCertificates(context.Background(), nil, func(o *Options) {
@@ -794,6 +854,18 @@ func TestCheckSnapshot_ShareDirectory(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartADAssessment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartADAssessment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartADAssessment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartSchemaExtension(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartSchemaExtension(context.Background(), nil, func(o *Options) {
@@ -835,6 +907,18 @@ func TestCheckSnapshot_UpdateDirectorySetup(t *testing.T) {
 	_, err := svc.UpdateDirectorySetup(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateDirectorySetup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateHybridAD(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateHybridAD(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateHybridAD")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1021,6 +1105,18 @@ func TestUpdateSnapshot_CreateDirectory(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateHybridAD(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateHybridAD(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateHybridAD")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateLogSubscription(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateLogSubscription(context.Background(), nil, func(o *Options) {
@@ -1062,6 +1158,18 @@ func TestUpdateSnapshot_CreateTrust(t *testing.T) {
 	_, err := svc.CreateTrust(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateTrust")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteADAssessment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteADAssessment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteADAssessment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1153,6 +1261,18 @@ func TestUpdateSnapshot_DeregisterEventTopic(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeADAssessment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeADAssessment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeADAssessment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeCertificate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeCertificate(context.Background(), nil, func(o *Options) {
@@ -1230,6 +1350,18 @@ func TestUpdateSnapshot_DescribeEventTopics(t *testing.T) {
 	_, err := svc.DescribeEventTopics(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeEventTopics")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeHybridADUpdate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeHybridADUpdate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeHybridADUpdate")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1465,6 +1597,18 @@ func TestUpdateSnapshot_GetSnapshotLimits(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListADAssessments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListADAssessments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListADAssessments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListCertificates(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListCertificates(context.Background(), nil, func(o *Options) {
@@ -1633,6 +1777,18 @@ func TestUpdateSnapshot_ShareDirectory(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartADAssessment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartADAssessment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartADAssessment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartSchemaExtension(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartSchemaExtension(context.Background(), nil, func(o *Options) {
@@ -1674,6 +1830,18 @@ func TestUpdateSnapshot_UpdateDirectorySetup(t *testing.T) {
 	_, err := svc.UpdateDirectorySetup(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateDirectorySetup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateHybridAD(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateHybridAD(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateHybridAD")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

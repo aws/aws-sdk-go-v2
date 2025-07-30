@@ -30,8 +30,8 @@ func (c *Client) ListDistributionsByConnectionMode(ctx context.Context, params *
 type ListDistributionsByConnectionModeInput struct {
 
 	// This field specifies whether the connection mode is through a standard
-	// distribution (direct) or a multi-tenant distribution with distribution
-	// tenants(tenant-only).
+	// distribution (direct) or a multi-tenant distribution with distribution tenants
+	// (tenant-only).
 	//
 	// This member is required.
 	ConnectionMode types.ConnectionMode

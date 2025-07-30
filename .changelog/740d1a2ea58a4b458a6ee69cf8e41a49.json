@@ -1,0 +1,8 @@
+{
+    "id": "740d1a2e-a58a-4b45-8a6e-e69cf8e41a49",
+    "type": "feature",
+    "description": "Release to show the next hop IP address for routes propagated by VPC Route Server into VPC route tables.",
+    "modules": [
+        "service/ec2"
+    ]
+}

@@ -210,6 +210,26 @@ func (m *validateOpCreateDirectory) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateHybridAD struct {
+}
+
+func (*validateOpCreateHybridAD) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateHybridAD) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateHybridADInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateHybridADInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateLogSubscription struct {
 }
 
@@ -285,6 +305,26 @@ func (m *validateOpCreateTrust) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateTrustInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteADAssessment struct {
+}
+
+func (*validateOpDeleteADAssessment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteADAssessment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteADAssessmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteADAssessmentInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -430,6 +470,26 @@ func (m *validateOpDeregisterEventTopic) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeADAssessment struct {
+}
+
+func (*validateOpDescribeADAssessment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeADAssessment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeADAssessmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeADAssessmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeCertificate struct {
 }
 
@@ -525,6 +585,26 @@ func (m *validateOpDescribeDomainControllers) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeDomainControllersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeHybridADUpdate struct {
+}
+
+func (*validateOpDescribeHybridADUpdate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeHybridADUpdate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeHybridADUpdateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeHybridADUpdateInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1110,6 +1190,26 @@ func (m *validateOpShareDirectory) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartADAssessment struct {
+}
+
+func (*validateOpStartADAssessment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartADAssessment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartADAssessmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartADAssessmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartSchemaExtension struct {
 }
 
@@ -1185,6 +1285,26 @@ func (m *validateOpUpdateDirectorySetup) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateDirectorySetupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateHybridAD struct {
+}
+
+func (*validateOpUpdateHybridAD) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateHybridAD) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateHybridADInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateHybridADInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1330,6 +1450,10 @@ func addOpCreateDirectoryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDirectory{}, middleware.After)
 }
 
+func addOpCreateHybridADValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateHybridAD{}, middleware.After)
+}
+
 func addOpCreateLogSubscriptionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateLogSubscription{}, middleware.After)
 }
@@ -1344,6 +1468,10 @@ func addOpCreateSnapshotValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateTrustValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateTrust{}, middleware.After)
+}
+
+func addOpDeleteADAssessmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteADAssessment{}, middleware.After)
 }
 
 func addOpDeleteConditionalForwarderValidationMiddleware(stack *middleware.Stack) error {
@@ -1374,6 +1502,10 @@ func addOpDeregisterEventTopicValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpDeregisterEventTopic{}, middleware.After)
 }
 
+func addOpDescribeADAssessmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeADAssessment{}, middleware.After)
+}
+
 func addOpDescribeCertificateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeCertificate{}, middleware.After)
 }
@@ -1392,6 +1524,10 @@ func addOpDescribeDirectoryDataAccessValidationMiddleware(stack *middleware.Stac
 
 func addOpDescribeDomainControllersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeDomainControllers{}, middleware.After)
+}
+
+func addOpDescribeHybridADUpdateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeHybridADUpdate{}, middleware.After)
 }
 
 func addOpDescribeLDAPSSettingsValidationMiddleware(stack *middleware.Stack) error {
@@ -1510,6 +1646,10 @@ func addOpShareDirectoryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpShareDirectory{}, middleware.After)
 }
 
+func addOpStartADAssessmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartADAssessment{}, middleware.After)
+}
+
 func addOpStartSchemaExtensionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartSchemaExtension{}, middleware.After)
 }
@@ -1524,6 +1664,10 @@ func addOpUpdateConditionalForwarderValidationMiddleware(stack *middleware.Stack
 
 func addOpUpdateDirectorySetupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDirectorySetup{}, middleware.After)
+}
+
+func addOpUpdateHybridADValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateHybridAD{}, middleware.After)
 }
 
 func addOpUpdateNumberOfDomainControllersValidationMiddleware(stack *middleware.Stack) error {
@@ -1544,6 +1688,34 @@ func addOpUpdateTrustValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpVerifyTrustValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpVerifyTrust{}, middleware.After)
+}
+
+func validateAssessmentConfiguration(v *types.AssessmentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssessmentConfiguration"}
+	if v.CustomerDnsIps == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomerDnsIps"))
+	}
+	if v.DnsName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DnsName"))
+	}
+	if v.VpcSettings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcSettings"))
+	} else if v.VpcSettings != nil {
+		if err := validateDirectoryVpcSettings(v.VpcSettings); err != nil {
+			invalidParams.AddNested("VpcSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InstanceIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateDirectoryConnectSettings(v *types.DirectoryConnectSettings) error {
@@ -1580,6 +1752,39 @@ func validateDirectoryVpcSettings(v *types.DirectoryVpcSettings) error {
 	}
 	if v.SubnetIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHybridAdministratorAccountUpdate(v *types.HybridAdministratorAccountUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HybridAdministratorAccountUpdate"}
+	if v.SecretArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHybridCustomerInstancesSettings(v *types.HybridCustomerInstancesSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HybridCustomerInstancesSettings"}
+	if v.CustomerDnsIps == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomerDnsIps"))
+	}
+	if v.InstanceIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1916,6 +2121,29 @@ func validateOpCreateDirectoryInput(v *CreateDirectoryInput) error {
 	}
 }
 
+func validateOpCreateHybridADInput(v *CreateHybridADInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateHybridADInput"}
+	if v.SecretArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretArn"))
+	}
+	if v.AssessmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssessmentId"))
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateLogSubscriptionInput(v *CreateLogSubscriptionInput) error {
 	if v == nil {
 		return nil
@@ -1995,6 +2223,21 @@ func validateOpCreateTrustInput(v *CreateTrustInput) error {
 	}
 	if len(v.TrustDirection) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("TrustDirection"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteADAssessmentInput(v *DeleteADAssessmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteADAssessmentInput"}
+	if v.AssessmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssessmentId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2117,6 +2360,21 @@ func validateOpDeregisterEventTopicInput(v *DeregisterEventTopicInput) error {
 	}
 }
 
+func validateOpDescribeADAssessmentInput(v *DescribeADAssessmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeADAssessmentInput"}
+	if v.AssessmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssessmentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeCertificateInput(v *DescribeCertificateInput) error {
 	if v == nil {
 		return nil
@@ -2185,6 +2443,21 @@ func validateOpDescribeDomainControllersInput(v *DescribeDomainControllersInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeDomainControllersInput"}
+	if v.DirectoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeHybridADUpdateInput(v *DescribeHybridADUpdateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeHybridADUpdateInput"}
 	if v.DirectoryId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
 	}
@@ -2676,6 +2949,23 @@ func validateOpShareDirectoryInput(v *ShareDirectoryInput) error {
 	}
 }
 
+func validateOpStartADAssessmentInput(v *StartADAssessmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartADAssessmentInput"}
+	if v.AssessmentConfiguration != nil {
+		if err := validateAssessmentConfiguration(v.AssessmentConfiguration); err != nil {
+			invalidParams.AddNested("AssessmentConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartSchemaExtensionInput(v *StartSchemaExtensionInput) error {
 	if v == nil {
 		return nil
@@ -2750,6 +3040,31 @@ func validateOpUpdateDirectorySetupInput(v *UpdateDirectorySetupInput) error {
 	}
 	if len(v.UpdateType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("UpdateType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateHybridADInput(v *UpdateHybridADInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateHybridADInput"}
+	if v.DirectoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
+	}
+	if v.HybridAdministratorAccountUpdate != nil {
+		if err := validateHybridAdministratorAccountUpdate(v.HybridAdministratorAccountUpdate); err != nil {
+			invalidParams.AddNested("HybridAdministratorAccountUpdate", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SelfManagedInstancesSettings != nil {
+		if err := validateHybridCustomerInstancesSettings(v.SelfManagedInstancesSettings); err != nil {
+			invalidParams.AddNested("SelfManagedInstancesSettings", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

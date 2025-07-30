@@ -35,6 +35,46 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// A directory assessment is automatically created when you create a hybrid
+// directory. There are two types of assessments: CUSTOMER and SYSTEM . Your Amazon
+// Web Services account has a limit of 100 CUSTOMER directory assessments.
+//
+// If you attempt to create a hybrid directory; and you already have 100 CUSTOMER
+// directory assessments;, you will encounter an error. Delete assessments to free
+// up capacity before trying again.
+//
+// You can request an increase to your CUSTOMER directory assessment quota by
+// contacting customer support or delete existing CUSTOMER directory assessments;
+// to free up capacity.
+type ADAssessmentLimitExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	RequestId *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ADAssessmentLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ADAssessmentLimitExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ADAssessmentLimitExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ADAssessmentLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ADAssessmentLimitExceededException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // An authentication error occurred.
 type AuthenticationFailedException struct {
 	Message *string

@@ -1,0 +1,8 @@
+{
+    "id": "def9c811-343e-4b65-924b-e1fa4e804ac9",
+    "type": "feature",
+    "description": "Added TxPowerIndexMin, TxPowerIndexMax, NbTransMin and NbTransMax params to ServiceProfile.",
+    "modules": [
+        "service/iotwireless"
+    ]
+}

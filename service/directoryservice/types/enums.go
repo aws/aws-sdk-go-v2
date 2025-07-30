@@ -268,6 +268,25 @@ func (DomainControllerStatus) Values() []DomainControllerStatus {
 	}
 }
 
+type HybridUpdateType string
+
+// Enum values for HybridUpdateType
+const (
+	HybridUpdateTypeSelfManagedInstances       HybridUpdateType = "SelfManagedInstances"
+	HybridUpdateTypeHybridAdministratorAccount HybridUpdateType = "HybridAdministratorAccount"
+)
+
+// Values returns all known values for HybridUpdateType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HybridUpdateType) Values() []HybridUpdateType {
+	return []HybridUpdateType{
+		"SelfManagedInstances",
+		"HybridAdministratorAccount",
+	}
+}
+
 type IpRouteStatusMsg string
 
 // Enum values for IpRouteStatusMsg

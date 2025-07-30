@@ -138,6 +138,9 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// as a full copy of the source DB cluster.
 	RestoreType *string
 
+	// Contains the scaling configuration of an Amazon DocumentDB Serverless cluster.
+	ServerlessV2ScalingConfiguration *types.ServerlessV2ScalingConfiguration
+
 	// The storage type to associate with the DB cluster.
 	//
 	// For information on storage types for Amazon DocumentDB clusters, see Cluster

@@ -19932,6 +19932,32 @@ func awsRestjson1_deserializeDocumentLoRaWANGetServiceProfileInfo(v **types.LoRa
 				sv.MinGwDiversity = ptr.Int32(int32(i64))
 			}
 
+		case "NbTransMax":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NbTransMax to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.NbTransMax = ptr.Int32(int32(i64))
+			}
+
+		case "NbTransMin":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NbTransMin to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.NbTransMin = ptr.Int32(int32(i64))
+			}
+
 		case "NwkGeoLoc":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -19988,6 +20014,32 @@ func awsRestjson1_deserializeDocumentLoRaWANGetServiceProfileInfo(v **types.LoRa
 					return err
 				}
 				sv.TargetPer = int32(i64)
+			}
+
+		case "TxPowerIndexMax":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TxPowerIndexMax to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TxPowerIndexMax = ptr.Int32(int32(i64))
+			}
+
+		case "TxPowerIndexMin":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TxPowerIndexMin to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TxPowerIndexMin = ptr.Int32(int32(i64))
 			}
 
 		case "UlBucketSize":

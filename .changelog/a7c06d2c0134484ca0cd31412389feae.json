@@ -1,0 +1,8 @@
+{
+    "id": "a7c06d2c-0134-484c-a0cd-31412389feae",
+    "type": "feature",
+    "description": "Add support for setting Serverless Scaling Configuration on clusters.",
+    "modules": [
+        "service/docdb"
+    ]
+}

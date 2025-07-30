@@ -40,7 +40,7 @@ type AddRegionInput struct {
 	// This member is required.
 	RegionName *string
 
-	// Contains VPC information for the CreateDirectory or CreateMicrosoftAD operation.
+	// Contains VPC information for the CreateDirectory, CreateMicrosoftAD, or CreateHybridAD operation.
 	//
 	// This member is required.
 	VPCSettings *types.DirectoryVpcSettings

@@ -57,8 +57,6 @@ import (
 // If you are describing a long list of snapshots, we recommend that you paginate
 // the output to make the list more manageable. For more information, see [Pagination].
 //
-// To get the state of fast snapshot restores for a snapshot, use DescribeFastSnapshotRestores.
-//
 // For more information about EBS snapshots, see [Amazon EBS snapshots] in the Amazon EBS User Guide.
 //
 // We strongly recommend using only paginated requests. Unpaginated requests are
