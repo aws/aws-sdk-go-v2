@@ -1,8 +1,0 @@
-{
-    "id": "9c4ca8c5-937f-4f63-8c19-4b5e2e9f2b64",
-    "type": "feature",
-    "description": "This release adds new origin timeout options: 1) ResponseCompletionTimeout and 2) OriginReadTimeout (for S3 origins)",
-    "modules": [
-        "service/cloudfront"
-    ]
-}

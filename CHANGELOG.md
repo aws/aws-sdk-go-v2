@@ -1,3 +1,22 @@
+# Release (2025-07-30)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.37.1
+  * **Bug Fix**: Include underlying error when retry token bucket is exhausted.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.49.0](service/cloudfront/CHANGELOG.md#v1490-2025-07-30)
+  * **Feature**: This release adds new origin timeout options: 1) ResponseCompletionTimeout and 2) OriginReadTimeout (for S3 origins)
+* `github.com/aws/aws-sdk-go-v2/service/directoryservice`: [v1.33.0](service/directoryservice/CHANGELOG.md#v1330-2025-07-30)
+  * **Feature**: This release adds support for AWS Managed Microsoft AD Hybrid Edition, introducing new operations: StartADAssessment, DescribeADAssessment, ListADAssessments, DeleteADAssessment, CreateHybridAD, UpdateHybridAD, and DescribeHybridADUpdate; and updated existing operation: DescribeDirectories.
+* `github.com/aws/aws-sdk-go-v2/service/docdb`: [v1.43.0](service/docdb/CHANGELOG.md#v1430-2025-07-30)
+  * **Feature**: Add support for setting Serverless Scaling Configuration on clusters.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.238.0](service/ec2/CHANGELOG.md#v12380-2025-07-30)
+  * **Feature**: Release to show the next hop IP address for routes propagated by VPC Route Server into VPC route tables.
+* `github.com/aws/aws-sdk-go-v2/service/iotwireless`: [v1.50.0](service/iotwireless/CHANGELOG.md#v1500-2025-07-30)
+  * **Feature**: Added TxPowerIndexMin, TxPowerIndexMax, NbTransMin and NbTransMax params to ServiceProfile.
+
 # Release (2025-07-29)
 
 ## General Highlights

@@ -1,3 +1,7 @@
+# v1.18.1 (2025-07-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.0 (2025-07-29)
 
 * **Feature**: Adds support for tag management on monitors.

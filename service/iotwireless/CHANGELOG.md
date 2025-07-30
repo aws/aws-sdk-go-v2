@@ -1,3 +1,8 @@
+# v1.50.0 (2025-07-30)
+
+* **Feature**: Added TxPowerIndexMin, TxPowerIndexMax, NbTransMin and NbTransMax params to ServiceProfile.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.49.0 (2025-07-28)
 
 * **Feature**: Add support for HTTP interceptors.

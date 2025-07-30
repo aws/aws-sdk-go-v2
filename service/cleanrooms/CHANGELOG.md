@@ -1,3 +1,7 @@
+# v1.27.1 (2025-07-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.27.0 (2025-07-29)
 
 * **Feature**: This feature provides the ability to update the table reference and allowed columns on an existing configured table.

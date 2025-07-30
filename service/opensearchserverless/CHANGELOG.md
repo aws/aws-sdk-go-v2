@@ -1,3 +1,7 @@
+# v1.21.1 (2025-07-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2025-07-29)
 
 * **Feature**: This is to support Granular access control support for SAML with IAMFedraton in AOSS
