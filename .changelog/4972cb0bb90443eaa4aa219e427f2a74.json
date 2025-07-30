@@ -1,0 +1,8 @@
+{
+    "id": "4972cb0b-b904-43ea-a4aa-219e427f2a74",
+    "type": "bugfix",
+    "description": "Include underlying error when retry token bucket is exhausted.",
+    "modules": [
+        "."
+    ]
+}

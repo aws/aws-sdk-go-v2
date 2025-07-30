@@ -1,9 +1,0 @@
-{
-    "id": "3723ba75-d027-4e70-93f3-6202b10d6edd",
-    "type": "bugfix",
-    "description": "Include original error when retry token unavailable",
-    "collapse": false,
-    "modules": [
-        "aws"
-    ]
-}
