@@ -127,7 +127,12 @@
             }
         },
         "com.amazonaws.sesv2#AmazonResourceName": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
         },
         "com.amazonaws.sesv2#ArchiveArn": {
             "type": "string",
@@ -2138,6 +2143,166 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sesv2#CreateTenant": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#CreateTenantRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#CreateTenantResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Create a tenant.</p>\n         <p>\n            <i>Tenants</i> are logical containers that group related SES resources together.\n            Each tenant can have its own set of resources like email identities, configuration sets,\n            and templates, along with reputation metrics and sending status. This helps isolate and manage\n            email sending for different customers or business units within your Amazon SES API v2 account.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v2/email/tenants",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sesv2#CreateTenantRequest": {
+            "type": "structure",
+            "members": {
+                "TenantName": {
+                    "target": "com.amazonaws.sesv2#TenantName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the tenant to create. The name can contain up to 64 alphanumeric\n            characters, including letters, numbers, hyphens (-) and underscores (_) only.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.sesv2#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that define the tags (keys and values) to associate with the tenant</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a request to create a tenant.</p>\n         <p>\n            <i>Tenants</i> are logical containers that group related SES resources together.\n            Each tenant can have its own set of resources like email identities, configuration sets, and templates,\n            along with reputation metrics and sending status. This helps isolate and manage email sending\n            for different customers or business units within your Amazon SES API v2 account.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sesv2#CreateTenantResourceAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#CreateTenantResourceAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#CreateTenantResourceAssociationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associate a resource with a tenant.</p>\n         <p>\n            <i>Resources</i> can be email identities, configuration sets, or email templates.\n            When you associate a resource with a tenant, you can use that resource when sending emails\n            on behalf of that tenant.</p>\n         <p>A single resource can be associated with multiple tenants, allowing for resource sharing\n            across different tenants while maintaining isolation in email sending operations.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v2/email/tenants/resources",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sesv2#CreateTenantResourceAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "TenantName": {
+                    "target": "com.amazonaws.sesv2#TenantName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the tenant to associate the resource with.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.sesv2#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to associate with the tenant.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a request to associate a resource with a tenant.</p>\n         <p>Resources can be email identities, configuration sets, or email templates.\n            When you associate a resource with a tenant, you can use that resource when sending\n            emails on behalf of that tenant.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sesv2#CreateTenantResourceAssociationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>If the action is successful, the service sends back an HTTP 200 response with an empty\n            HTTP body.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sesv2#CreateTenantResponse": {
+            "type": "structure",
+            "members": {
+                "TenantName": {
+                    "target": "com.amazonaws.sesv2#TenantName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the tenant.</p>"
+                    }
+                },
+                "TenantId": {
+                    "target": "com.amazonaws.sesv2#TenantId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the tenant.</p>"
+                    }
+                },
+                "TenantArn": {
+                    "target": "com.amazonaws.sesv2#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the tenant.</p>"
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "com.amazonaws.sesv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the tenant was created.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.sesv2#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that define the tags (keys and values) associated with the tenant.</p>"
+                    }
+                },
+                "SendingStatus": {
+                    "target": "com.amazonaws.sesv2#SendingStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of email sending capability for the tenant.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a newly created tenant.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sesv2#CustomRedirectDomain": {
             "type": "string",
             "traits": {
@@ -2965,6 +3130,117 @@
             "members": {},
             "traits": {
                 "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sesv2#DeleteTenant": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#DeleteTenantRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#DeleteTenantResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete an existing tenant.</p>\n         <p>When you delete a tenant, its associations with resources\n            are removed, but the resources themselves are not deleted.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v2/email/tenants/delete",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sesv2#DeleteTenantRequest": {
+            "type": "structure",
+            "members": {
+                "TenantName": {
+                    "target": "com.amazonaws.sesv2#TenantName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the tenant to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a request to delete a tenant.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sesv2#DeleteTenantResourceAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#DeleteTenantResourceAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#DeleteTenantResourceAssociationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete an association between a tenant and a resource.</p>\n         <p>When you delete a tenant-resource association, the resource itself is not deleted,\n            only its association with the specific tenant is removed. After removal, the resource\n            will no longer be available for use with that tenant's email sending operations.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v2/email/tenants/resources/delete",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sesv2#DeleteTenantResourceAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "TenantName": {
+                    "target": "com.amazonaws.sesv2#TenantName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the tenant to remove the resource association from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.sesv2#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to remove from the tenant association.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a request to delete an association between a tenant and a resource.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sesv2#DeleteTenantResourceAssociationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>If the action is successful, the service sends back an HTTP 200 response with an empty\n            HTTP body.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sesv2#DeleteTenantResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>If the action is successful, the service sends back an HTTP 200 response with an empty\n            HTTP body.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -6205,6 +6481,74 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sesv2#GetReputationEntity": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#GetReputationEntityRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#GetReputationEntityResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieve information about a specific reputation entity, including its reputation \n            management policy, customer-managed status, Amazon Web Services Amazon SES-managed status, and aggregate \n            sending status.</p>\n         <p>\n            <i>Reputation entities</i> represent resources in your Amazon SES account that have reputation \n            tracking and management capabilities. The reputation impact reflects the highest \n            impact reputation finding for the entity. Reputation findings can be retrieved \n            using the <code>ListRecommendations</code> operation.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v2/email/reputation/entities/{ReputationEntityType}/{ReputationEntityReference}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sesv2#GetReputationEntityRequest": {
+            "type": "structure",
+            "members": {
+                "ReputationEntityReference": {
+                    "target": "com.amazonaws.sesv2#ReputationEntityReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the reputation entity. For resource-type entities, \n            this is the Amazon Resource Name (ARN) of the resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ReputationEntityType": {
+                    "target": "com.amazonaws.sesv2#ReputationEntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of reputation entity. Currently, only <code>RESOURCE</code> type entities are supported.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a request to retrieve information about a specific reputation entity.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sesv2#GetReputationEntityResponse": {
+            "type": "structure",
+            "members": {
+                "ReputationEntity": {
+                    "target": "com.amazonaws.sesv2#ReputationEntity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reputation entity information, including status records, policy configuration, \n            and reputation impact.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the requested reputation entity.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sesv2#GetSuppressedDestination": {
             "type": "operation",
             "input": {
@@ -6263,6 +6607,65 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about the suppressed email address.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sesv2#GetTenant": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#GetTenantRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#GetTenantResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get information about a specific tenant, including the tenant's name, ID, ARN,\n            creation timestamp, tags, and sending status.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v2/email/tenants/get",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sesv2#GetTenantRequest": {
+            "type": "structure",
+            "members": {
+                "TenantName": {
+                    "target": "com.amazonaws.sesv2#TenantName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the tenant to retrieve information about.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a request to get information about a specific tenant.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sesv2#GetTenantResponse": {
+            "type": "structure",
+            "members": {
+                "Tenant": {
+                    "target": "com.amazonaws.sesv2#Tenant",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains details about the tenant.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a specific tenant.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -7911,6 +8314,168 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sesv2#ListReputationEntities": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#ListReputationEntitiesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#ListReputationEntitiesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List reputation entities in your Amazon SES account in the current Amazon Web Services Region. \n            You can filter the results by entity type, reputation impact, sending status, \n            or entity reference prefix.</p>\n         <p>\n            <i>Reputation entities</i> represent resources in your account that have reputation \n            tracking and management capabilities. Use this operation to get an overview of \n            all entities and their current reputation status.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v2/email/reputation/entities",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ReputationEntities",
+                    "pageSize": "PageSize"
+                }
+            }
+        },
+        "com.amazonaws.sesv2#ListReputationEntitiesRequest": {
+            "type": "structure",
+            "members": {
+                "Filter": {
+                    "target": "com.amazonaws.sesv2#ReputationEntityFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains filters to apply when listing reputation entities. \n            You can filter by entity type, reputation impact, sending status, or entity \n            reference prefix.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sesv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token returned from a previous call to <code>ListReputationEntities</code> to indicate \n            the position in the list of reputation entities.</p>"
+                    }
+                },
+                "PageSize": {
+                    "target": "com.amazonaws.sesv2#MaxItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of results to show in a single call to <code>ListReputationEntities</code>. \n            If the number of results is larger than the number you specified in this parameter, \n            then the response includes a <code>NextToken</code> element, which you can use to obtain \n            additional results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a request to list reputation entities with optional filtering.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sesv2#ListReputationEntitiesResponse": {
+            "type": "structure",
+            "members": {
+                "ReputationEntities": {
+                    "target": "com.amazonaws.sesv2#ReputationEntitiesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array that contains information about the reputation entities in your account.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sesv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that indicates that there are additional reputation entities to list. \n            To view additional reputation entities, issue another request to <code>ListReputationEntities</code>, \n            and pass this token in the <code>NextToken</code> parameter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of reputation entities in your account.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sesv2#ListResourceTenants": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#ListResourceTenantsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#ListResourceTenantsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List all tenants associated with a specific resource.</p>\n         <p>This operation returns a list of tenants that are associated with the specified\n            resource. This is useful for understanding which tenants are currently using a particular\n            resource such as an email identity, configuration set, or email template.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v2/email/resources/tenants/list",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ResourceTenants",
+                    "pageSize": "PageSize"
+                }
+            }
+        },
+        "com.amazonaws.sesv2#ListResourceTenantsRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.sesv2#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to list associated tenants for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PageSize": {
+                    "target": "com.amazonaws.sesv2#MaxItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of results to show in a single call to <code>ListResourceTenants</code>.\n            If the number of results is larger than the number you specified in this parameter,\n            then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sesv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token returned from a previous call to <code>ListResourceTenants</code> to indicate the position in the list of resource tenants.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a request to list tenants associated with a specific resource.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sesv2#ListResourceTenantsResponse": {
+            "type": "structure",
+            "members": {
+                "ResourceTenants": {
+                    "target": "com.amazonaws.sesv2#ResourceTenantMetadataList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array that contains information about each tenant associated with the resource.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sesv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that indicates that there are additional tenants to list. To view additional tenants,\n            issue another request to <code>ListResourceTenants</code>, and pass this token in the <code>NextToken</code> parameter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about tenants associated with a specific resource.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sesv2#ListSuppressedDestinations": {
             "type": "operation",
             "input": {
@@ -8065,6 +8630,204 @@
                 }
             },
             "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sesv2#ListTenantResources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#ListTenantResourcesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#ListTenantResourcesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List all resources associated with a specific tenant.</p>\n         <p>This operation returns a list of resources (email identities, configuration sets,\n            or email templates) that are associated with the specified tenant. You can optionally\n            filter the results by resource type.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v2/email/tenants/resources/list",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "TenantResources",
+                    "pageSize": "PageSize"
+                }
+            }
+        },
+        "com.amazonaws.sesv2#ListTenantResourcesFilter": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.sesv2#ListTenantResourcesFilterKey"
+            },
+            "value": {
+                "target": "com.amazonaws.sesv2#ListTenantResourcesFilterValue"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains mapping between <code>ListTenantResourcesFilterKey</code>\n            and <code>ListTenantResourcesFilterValue</code> to filter by.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#ListTenantResourcesFilterKey": {
+            "type": "enum",
+            "members": {
+                "RESOURCE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE_TYPE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The key used to filter tenant resources. Currently, the only supported filter key is <code>RESOURCE_TYPE</code>.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#ListTenantResourcesFilterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The value used to filter tenant resources. When filtering by <code>RESOURCE_TYPE</code>,\n            valid values are <code>EMAIL_IDENTITY</code>, <code>CONFIGURATION_SET</code>, or <code>EMAIL_TEMPLATE</code>.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                }
+            }
+        },
+        "com.amazonaws.sesv2#ListTenantResourcesRequest": {
+            "type": "structure",
+            "members": {
+                "TenantName": {
+                    "target": "com.amazonaws.sesv2#TenantName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the tenant to list resources for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Filter": {
+                    "target": "com.amazonaws.sesv2#ListTenantResourcesFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of filter keys and values for filtering the list of tenant resources. Currently,\n            the only supported filter key is <code>RESOURCE_TYPE</code>.</p>"
+                    }
+                },
+                "PageSize": {
+                    "target": "com.amazonaws.sesv2#MaxItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of results to show in a single call to <code>ListTenantResources</code>.\n            If the number of results is larger than the number you specified in this parameter,\n            then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sesv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token returned from a previous call to <code>ListTenantResources</code> to indicate the position in the list of tenant resources.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a request to list resources associated with a specific tenant.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sesv2#ListTenantResourcesResponse": {
+            "type": "structure",
+            "members": {
+                "TenantResources": {
+                    "target": "com.amazonaws.sesv2#TenantResourceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array that contains information about each resource associated with the tenant.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sesv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that indicates that there are additional resources to list. To view additional resources,\n            issue another request to <code>ListTenantResources</code>, and pass this token in the <code>NextToken</code> parameter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about resources associated with a specific tenant.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sesv2#ListTenants": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#ListTenantsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#ListTenantsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List all tenants associated with your account in the current Amazon Web Services Region.</p>\n         <p>This operation returns basic information about each tenant,\n            such as tenant name, ID, ARN, and creation timestamp.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v2/email/tenants/list",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Tenants",
+                    "pageSize": "PageSize"
+                }
+            }
+        },
+        "com.amazonaws.sesv2#ListTenantsRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.sesv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token returned from a previous call to <code>ListTenants</code> to indicate the position in the list of tenants.</p>"
+                    }
+                },
+                "PageSize": {
+                    "target": "com.amazonaws.sesv2#MaxItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of results to show in a single call to <code>ListTenants</code>.\n            If the number of results is larger than the number you specified in this parameter,\n            then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a request to list all tenants associated with your account in the current Amazon Web Services Region.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sesv2#ListTenantsResponse": {
+            "type": "structure",
+            "members": {
+                "Tenants": {
+                    "target": "com.amazonaws.sesv2#TenantInfoList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array that contains basic information about each tenant.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sesv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that indicates that there are additional tenants to list. To view additional tenants,\n            issue another request to <code>ListTenants</code>, and pass this token in the <code>NextToken</code> parameter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about tenants associated with your account.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -10447,6 +11210,24 @@
                     "traits": {
                         "smithy.api#enumValue": "COMPLAINT"
                     }
+                },
+                "BOUNCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BOUNCE"
+                    }
+                },
+                "FEEDBACK_3P": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FEEDBACK_3P"
+                    }
+                },
+                "IP_LISTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IP_LISTING"
+                    }
                 }
             }
         },
@@ -10514,6 +11295,142 @@
                 "smithy.api#documentation": "<p>A name that helps you identify a report generated by the Deliverability dashboard.</p>"
             }
         },
+        "com.amazonaws.sesv2#ReputationEntitiesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sesv2#ReputationEntity"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of reputation entities.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#ReputationEntity": {
+            "type": "structure",
+            "members": {
+                "ReputationEntityReference": {
+                    "target": "com.amazonaws.sesv2#ReputationEntityReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the reputation entity. For resource-type entities, \n            this is the Amazon Resource Name (ARN) of the resource.</p>"
+                    }
+                },
+                "ReputationEntityType": {
+                    "target": "com.amazonaws.sesv2#ReputationEntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of reputation entity. Currently, only <code>RESOURCE</code> type entities are supported.</p>"
+                    }
+                },
+                "ReputationManagementPolicy": {
+                    "target": "com.amazonaws.sesv2#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the reputation management policy applied to \n            this entity. This is an Amazon Web Services Amazon SES-managed policy.</p>"
+                    }
+                },
+                "CustomerManagedStatus": {
+                    "target": "com.amazonaws.sesv2#StatusRecord",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-managed status record for this reputation entity, including the \n            current status, cause description, and last updated timestamp.</p>"
+                    }
+                },
+                "AwsSesManagedStatus": {
+                    "target": "com.amazonaws.sesv2#StatusRecord",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Amazon SES-managed status record for this reputation entity, including the \n            current status, cause description, and last updated timestamp.</p>"
+                    }
+                },
+                "SendingStatusAggregate": {
+                    "target": "com.amazonaws.sesv2#SendingStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The aggregate sending status that determines whether the entity is allowed to\n            send emails. This status is derived from both the customer-managed and Amazon Web Services Amazon SES-managed\n            statuses. If either the customer-managed status or the Amazon Web Services Amazon SES-managed status is\n            <code>DISABLED</code>, the aggregate status will be <code>DISABLED</code> and the entity\n            will not be allowed to send emails. When the customer-managed status is set to\n            <code>REINSTATED</code>, the entity can continue sending even if there are active\n            reputation findings, provided the Amazon Web Services Amazon SES-managed status also permits sending.\n            The entity can only send emails when both statuses permit sending.</p>"
+                    }
+                },
+                "ReputationImpact": {
+                    "target": "com.amazonaws.sesv2#RecommendationImpact",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reputation impact level for this entity, representing the highest impact \n            reputation finding currently active. Reputation findings can be retrieved using \n            the <code>ListRecommendations</code> operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains information about a reputation entity, including its \n            reference, type, policy, status records, and reputation impact.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#ReputationEntityFilter": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.sesv2#ReputationEntityFilterKey"
+            },
+            "value": {
+                "target": "com.amazonaws.sesv2#ReputationEntityFilterValue"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains filters to apply when listing reputation entities.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#ReputationEntityFilterKey": {
+            "type": "enum",
+            "members": {
+                "ENTITY_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENTITY_TYPE"
+                    }
+                },
+                "REPUTATION_IMPACT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REPUTATION_IMPACT"
+                    }
+                },
+                "STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SENDING_STATUS"
+                    }
+                },
+                "ENTITY_REFERENCE_PREFIX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENTITY_REFERENCE_PREFIX"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filter key to use when listing reputation entities. This can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENTITY_TYPE</code> – Filter by entity type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REPUTATION_IMPACT</code> – Filter by reputation impact level.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SENDING_STATUS</code> – Filter by aggregate sending status.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ENTITY_REFERENCE_PREFIX</code> – Filter by entity reference prefix.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.sesv2#ReputationEntityFilterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The filter value to match against the specified filter key.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                }
+            }
+        },
+        "com.amazonaws.sesv2#ReputationEntityReference": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The unique identifier for a reputation entity. For resource-type entities, \n            this is the Amazon Resource Name (ARN) of the resource.</p>",
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.sesv2#ReputationEntityType": {
+            "type": "enum",
+            "members": {
+                "RESOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of reputation entity. Currently, only <code>RESOURCE</code> type entities are supported, \n            which represent resources in your Amazon SES account that have reputation tracking capabilities.</p>"
+            }
+        },
         "com.amazonaws.sesv2#ReputationOptions": {
             "type": "structure",
             "members": {
@@ -10533,6 +11450,73 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Enable or disable collection of reputation metrics for emails that you send using this\n            configuration set in the current Amazon Web Services Region. </p>"
+            }
+        },
+        "com.amazonaws.sesv2#ResourceTenantMetadata": {
+            "type": "structure",
+            "members": {
+                "TenantName": {
+                    "target": "com.amazonaws.sesv2#TenantName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the tenant associated with the resource.</p>"
+                    }
+                },
+                "TenantId": {
+                    "target": "com.amazonaws.sesv2#TenantId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the tenant associated with the resource.</p>"
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.sesv2#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>"
+                    }
+                },
+                "AssociatedTimestamp": {
+                    "target": "com.amazonaws.sesv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the resource was associated with the tenant.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains information about a tenant associated with a resource.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#ResourceTenantMetadataList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sesv2#ResourceTenantMetadata"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of tenant metadata objects associated with a resource.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#ResourceType": {
+            "type": "enum",
+            "members": {
+                "EMAIL_IDENTITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EMAIL_IDENTITY"
+                    }
+                },
+                "CONFIGURATION_SET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONFIGURATION_SET"
+                    }
+                },
+                "EMAIL_TEMPLATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EMAIL_TEMPLATE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of resource that can be associated with a tenant. Can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EMAIL_IDENTITY</code> - An email address or domain that you use to send email.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CONFIGURATION_SET</code> - A set of rules that you can apply to emails you send.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EMAIL_TEMPLATE</code> - A template that defines the content of an email message.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.sesv2#ReviewDetails": {
@@ -10803,6 +11787,12 @@
                             "name": "EndpointId"
                         }
                     }
+                },
+                "TenantName": {
+                    "target": "com.amazonaws.sesv2#TenantName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the tenant through which this bulk email will be sent.</p>\n         <note>\n            <p>\n                The email sending operation will only succeed if all referenced resources\n                (identities, configuration sets, and templates) are associated with this tenant.\n            </p>\n         </note>"
+                    }
                 }
             },
             "traits": {
@@ -11020,6 +12010,12 @@
                         }
                     }
                 },
+                "TenantName": {
+                    "target": "com.amazonaws.sesv2#TenantName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the tenant through which this email will be sent.</p>\n         <note>\n            <p>The email sending operation will only succeed if all referenced resources\n                (identities, configuration sets, and templates) are associated with this tenant.\n            </p>\n         </note>"
+                    }
+                },
                 "ListManagementOptions": {
                     "target": "com.amazonaws.sesv2#ListManagementOptions",
                     "traits": {
@@ -11110,6 +12106,32 @@
                 "smithy.api#documentation": "<p>The name of the dedicated IP pool to associate with the configuration set.</p>"
             }
         },
+        "com.amazonaws.sesv2#SendingStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "REINSTATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REINSTATED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The sending status for a reputation entity. This can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED</code> – Sending is allowed for this entity.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> – Sending is prevented for this entity.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REINSTATED</code> – Sending is allowed even if there are active reputation findings.</p>\n            </li>\n         </ul>"
+            }
+        },
         "com.amazonaws.sesv2#SentLast24Hours": {
             "type": "double",
             "traits": {
@@ -11172,6 +12194,12 @@
                     "target": "com.amazonaws.sesv2#CreateMultiRegionEndpoint"
                 },
                 {
+                    "target": "com.amazonaws.sesv2#CreateTenant"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#CreateTenantResourceAssociation"
+                },
+                {
                     "target": "com.amazonaws.sesv2#DeleteConfigurationSet"
                 },
                 {
@@ -11203,6 +12231,12 @@
                 },
                 {
                     "target": "com.amazonaws.sesv2#DeleteSuppressedDestination"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#DeleteTenant"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#DeleteTenantResourceAssociation"
                 },
                 {
                     "target": "com.amazonaws.sesv2#GetAccount"
@@ -11268,7 +12302,13 @@
                     "target": "com.amazonaws.sesv2#GetMultiRegionEndpoint"
                 },
                 {
+                    "target": "com.amazonaws.sesv2#GetReputationEntity"
+                },
+                {
                     "target": "com.amazonaws.sesv2#GetSuppressedDestination"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#GetTenant"
                 },
                 {
                     "target": "com.amazonaws.sesv2#ListConfigurationSets"
@@ -11310,10 +12350,22 @@
                     "target": "com.amazonaws.sesv2#ListRecommendations"
                 },
                 {
+                    "target": "com.amazonaws.sesv2#ListReputationEntities"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#ListResourceTenants"
+                },
+                {
                     "target": "com.amazonaws.sesv2#ListSuppressedDestinations"
                 },
                 {
                     "target": "com.amazonaws.sesv2#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#ListTenantResources"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#ListTenants"
                 },
                 {
                     "target": "com.amazonaws.sesv2#PutAccountDedicatedIpWarmupAttributes"
@@ -11416,6 +12468,12 @@
                 },
                 {
                     "target": "com.amazonaws.sesv2#UpdateEmailTemplate"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#UpdateReputationEntityCustomerManagedStatus"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#UpdateReputationEntityPolicy"
                 }
             ],
             "traits": {
@@ -12742,6 +13800,42 @@
                 "smithy.api#documentation": "<p>The status of the multi-region endpoint (global-endpoint).</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> – The resource is being provisioned.</p>\n            </li>\n            <li>\n               <p>\n                  <code>READY</code> – The resource is ready to use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> – The resource failed to be provisioned.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> – The resource is being deleted as requested.</p>\n            </li>\n         </ul>"
             }
         },
+        "com.amazonaws.sesv2#StatusCause": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>A description of the reason for a status change, such as automated actions \n            taken due to reputation findings or manual status updates.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                }
+            }
+        },
+        "com.amazonaws.sesv2#StatusRecord": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.sesv2#SendingStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current sending status. This can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED</code> – Sending is allowed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> – Sending is prevented.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REINSTATED</code> – Sending is allowed even with active reputation findings.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Cause": {
+                    "target": "com.amazonaws.sesv2#StatusCause",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the reason for the current status, or null if no specific \n            cause is available.</p>"
+                    }
+                },
+                "LastUpdatedTimestamp": {
+                    "target": "com.amazonaws.sesv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when this status was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains status information for a reputation entity, including \n            the current status, cause description, and timestamp.</p>"
+            }
+        },
         "com.amazonaws.sesv2#Subject": {
             "type": "string"
         },
@@ -13095,6 +14189,132 @@
             "type": "string",
             "traits": {
                 "smithy.api#documentation": "<p>The content of the custom verification email template.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#Tenant": {
+            "type": "structure",
+            "members": {
+                "TenantName": {
+                    "target": "com.amazonaws.sesv2#TenantName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the tenant.</p>"
+                    }
+                },
+                "TenantId": {
+                    "target": "com.amazonaws.sesv2#TenantId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the tenant.</p>"
+                    }
+                },
+                "TenantArn": {
+                    "target": "com.amazonaws.sesv2#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the tenant.</p>"
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "com.amazonaws.sesv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the tenant was created.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.sesv2#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that define the tags (keys and values) associated with the tenant.</p>"
+                    }
+                },
+                "SendingStatus": {
+                    "target": "com.amazonaws.sesv2#SendingStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of sending capability for the tenant.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains details about a tenant.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#TenantId": {
+            "type": "string"
+        },
+        "com.amazonaws.sesv2#TenantInfo": {
+            "type": "structure",
+            "members": {
+                "TenantName": {
+                    "target": "com.amazonaws.sesv2#TenantName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the tenant.</p>"
+                    }
+                },
+                "TenantId": {
+                    "target": "com.amazonaws.sesv2#TenantId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the tenant.</p>"
+                    }
+                },
+                "TenantArn": {
+                    "target": "com.amazonaws.sesv2#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the tenant.</p>"
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "com.amazonaws.sesv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the tenant was created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains basic information about a tenant.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#TenantInfoList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sesv2#TenantInfo"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of tenant information objects.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#TenantName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The name of a tenant. The name can contain up to 64 alphanumeric characters, including\n            letters, numbers, hyphens (-) and underscores (_) only.</p>",
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.sesv2#TenantResource": {
+            "type": "structure",
+            "members": {
+                "ResourceType": {
+                    "target": "com.amazonaws.sesv2#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of resource associated with the tenant. Valid values are <code>EMAIL_IDENTITY</code>,\n            <code>CONFIGURATION_SET</code>, or <code>EMAIL_TEMPLATE</code>.</p>"
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.sesv2#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource associated with the tenant.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains information about a resource associated with a tenant.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#TenantResourceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sesv2#TenantResource"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of resources associated with a tenant.</p>"
             }
         },
         "com.amazonaws.sesv2#TestRenderEmailTemplate": {
@@ -13817,6 +15037,142 @@
             "members": {},
             "traits": {
                 "smithy.api#documentation": "<p>If the action is successful, the service sends back an HTTP 200 response with an empty\n            HTTP body.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sesv2#UpdateReputationEntityCustomerManagedStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#UpdateReputationEntityCustomerManagedStatusRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#UpdateReputationEntityCustomerManagedStatusResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update the customer-managed sending status for a reputation entity. This allows \n            you to enable, disable, or reinstate sending for the entity.</p>\n         <p>The customer-managed status works in conjunction with the Amazon Web Services Amazon SES-managed status\n        to determine the overall sending capability. When you update the customer-managed status,\n        the Amazon Web Services Amazon SES-managed status remains unchanged. If Amazon Web Services Amazon SES has disabled the entity,\n        it will not be allowed to send regardless of the customer-managed status setting. When you\n        reinstate an entity through the customer-managed status, it can continue sending only if\n        the Amazon Web Services Amazon SES-managed status also permits sending, even if there are active reputation\n        findings, until the findings are resolved or new violations occur.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/v2/email/reputation/entities/{ReputationEntityType}/{ReputationEntityReference}/customer-managed-status",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sesv2#UpdateReputationEntityCustomerManagedStatusRequest": {
+            "type": "structure",
+            "members": {
+                "ReputationEntityType": {
+                    "target": "com.amazonaws.sesv2#ReputationEntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of reputation entity. Currently, only <code>RESOURCE</code> type entities are supported.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ReputationEntityReference": {
+                    "target": "com.amazonaws.sesv2#ReputationEntityReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the reputation entity. For resource-type entities, \n            this is the Amazon Resource Name (ARN) of the resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SendingStatus": {
+                    "target": "com.amazonaws.sesv2#SendingStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new customer-managed sending status for the reputation entity. This can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED</code> – Allow sending for this entity.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> – Prevent sending for this entity.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REINSTATED</code> – Allow sending even if there are active reputation findings.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a request to update the customer-managed sending status for a reputation entity.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sesv2#UpdateReputationEntityCustomerManagedStatusResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sesv2#UpdateReputationEntityPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#UpdateReputationEntityPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#UpdateReputationEntityPolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update the reputation management policy for a reputation entity. The policy \n            determines how the entity responds to reputation findings, such as automatically \n            pausing sending when certain thresholds are exceeded.</p>\n         <p>Reputation management policies are Amazon Web Services Amazon SES-managed (predefined policies).\n        You can select from none, standard, and strict policies.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/v2/email/reputation/entities/{ReputationEntityType}/{ReputationEntityReference}/policy",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sesv2#UpdateReputationEntityPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ReputationEntityType": {
+                    "target": "com.amazonaws.sesv2#ReputationEntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of reputation entity. Currently, only <code>RESOURCE</code> type entities are supported.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ReputationEntityReference": {
+                    "target": "com.amazonaws.sesv2#ReputationEntityReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the reputation entity. For resource-type entities, \n            this is the Amazon Resource Name (ARN) of the resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ReputationEntityPolicy": {
+                    "target": "com.amazonaws.sesv2#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the reputation management policy to apply \n            to this entity. This is an Amazon Web Services Amazon SES-managed policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a request to update the reputation management policy for a reputation entity.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sesv2#UpdateReputationEntityPolicyResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.</p>",
                 "smithy.api#output": {}
             }
         },

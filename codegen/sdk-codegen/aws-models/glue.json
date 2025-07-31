@@ -1893,6 +1893,12 @@
                     "traits": {
                         "smithy.api#enumValue": "observations.scope"
                     }
+                },
+                "CompositeOption": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "compositeRuleEvaluation.method"
+                    }
                 }
             }
         },
@@ -2770,6 +2776,27 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The set of properties required for the the OAuth2 <code>AUTHORIZATION_CODE</code> grant type workflow.</p>"
+            }
+        },
+        "com.amazonaws.glue#AutoDataQuality": {
+            "type": "structure",
+            "members": {
+                "IsEnabled": {
+                    "target": "com.amazonaws.glue#BooleanValue",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether automatic data quality evaluation is enabled. When set to <code>true</code>, data quality checks are performed automatically.</p>"
+                    }
+                },
+                "EvaluationContext": {
+                    "target": "com.amazonaws.glue#EnclosedInStringProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The evaluation context for the automatic data quality checks. This defines the scope and parameters for the data quality evaluation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies configuration options for automatic data quality evaluation in Glue jobs. This structure enables automated data quality \n      checks and monitoring during ETL operations, helping to ensure data integrity and reliability without manual intervention.</p>"
             }
         },
         "com.amazonaws.glue#BackfillError": {
@@ -5330,6 +5357,47 @@
                 "smithy.api#documentation": "<p>Specifies a Hudi data source that is registered in the Glue Data Catalog.</p>"
             }
         },
+        "com.amazonaws.glue#CatalogIcebergSource": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Iceberg data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Database": {
+                    "target": "com.amazonaws.glue#EnclosedInStringProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database to read from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Table": {
+                    "target": "com.amazonaws.glue#EnclosedInStringProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table in the database to read from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AdditionalIcebergOptions": {
+                    "target": "com.amazonaws.glue#AdditionalOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies additional connection options for the Iceberg data source.</p>"
+                    }
+                },
+                "OutputSchemas": {
+                    "target": "com.amazonaws.glue#GlueSchemas",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the data schema for the Iceberg source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies an Apache Iceberg data source that is registered in the Glue Data Catalog.</p>"
+            }
+        },
         "com.amazonaws.glue#CatalogIdString": {
             "type": "string",
             "traits": {
@@ -5628,6 +5696,18 @@
                         "smithy.api#documentation": "<p>The name of the table in the database to read from.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "PartitionPredicate": {
+                    "target": "com.amazonaws.glue#EnclosedInStringProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Partitions satisfying this predicate are deleted. Files within the retention period in these partitions are not deleted. \n    </p>"
+                    }
+                },
+                "OutputSchemas": {
+                    "target": "com.amazonaws.glue#GlueSchemas",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the data schema for the catalog source.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5895,12 +5975,6 @@
                         "smithy.api#documentation": "<p>Specifies a command-separated value (CSV) data store stored in Amazon S3.</p>"
                     }
                 },
-                "S3ExcelSource": {
-                    "target": "com.amazonaws.glue#S3ExcelSource",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Defines configuration parameters for reading Excel files from Amazon S3.</p>"
-                    }
-                },
                 "S3JsonSource": {
                     "target": "com.amazonaws.glue#S3JsonSource",
                     "traits": {
@@ -5961,22 +6035,10 @@
                         "smithy.api#documentation": "<p>Specifies a data target that writes to Amazon S3 in Apache Parquet columnar storage.</p>"
                     }
                 },
-                "S3HyperDirectTarget": {
-                    "target": "com.amazonaws.glue#S3HyperDirectTarget",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Defines configuration parameters for writing data to Amazon S3 using HyperDirect optimization.</p>"
-                    }
-                },
                 "S3DirectTarget": {
                     "target": "com.amazonaws.glue#S3DirectTarget",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies a data target that writes to Amazon S3.</p>"
-                    }
-                },
-                "S3IcebergDirectTarget": {
-                    "target": "com.amazonaws.glue#S3IcebergDirectTarget",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Defines configuration parameters for writing data to Amazon S3 as an Apache Iceberg table.</p>"
                     }
                 },
                 "ApplyMapping": {
@@ -6171,6 +6233,12 @@
                         "smithy.api#documentation": "<p>Specifies a target that uses Postgres SQL.</p>"
                     }
                 },
+                "Route": {
+                    "target": "com.amazonaws.glue#Route",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a route node that directs data to different output paths based on defined filtering conditions.</p>"
+                    }
+                },
                 "DynamicTransform": {
                     "target": "com.amazonaws.glue#DynamicTransform",
                     "traits": {
@@ -6292,6 +6360,48 @@
                     "target": "com.amazonaws.glue#ConnectorDataTarget",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies a target generated with standard connection options.</p>"
+                    }
+                },
+                "S3CatalogIcebergSource": {
+                    "target": "com.amazonaws.glue#S3CatalogIcebergSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies an Apache Iceberg data source that is registered in the Glue Data Catalog. The Iceberg data source must be stored in Amazon S3.</p>"
+                    }
+                },
+                "CatalogIcebergSource": {
+                    "target": "com.amazonaws.glue#CatalogIcebergSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies an Apache Iceberg data source that is registered in the Glue Data Catalog.</p>"
+                    }
+                },
+                "S3IcebergCatalogTarget": {
+                    "target": "com.amazonaws.glue#S3IcebergCatalogTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies an Apache Iceberg catalog target that writes data to Amazon S3 and registers the table in the Glue Data Catalog.</p>"
+                    }
+                },
+                "S3IcebergDirectTarget": {
+                    "target": "com.amazonaws.glue#S3IcebergDirectTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines configuration parameters for writing data to Amazon S3 as an Apache Iceberg table.</p>"
+                    }
+                },
+                "S3ExcelSource": {
+                    "target": "com.amazonaws.glue#S3ExcelSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines configuration parameters for reading Excel files from Amazon S3.</p>"
+                    }
+                },
+                "S3HyperDirectTarget": {
+                    "target": "com.amazonaws.glue#S3HyperDirectTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines configuration parameters for writing data to Amazon S3 using HyperDirect optimization.</p>"
+                    }
+                },
+                "DynamoDBELTConnectorSource": {
+                    "target": "com.amazonaws.glue#DynamoDBELTConnectorSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a DynamoDB ELT connector source for extracting data from DynamoDB tables.</p>"
                     }
                 }
             },
@@ -10981,7 +11091,7 @@
                 "WorkerType": {
                     "target": "com.amazonaws.glue#WorkerType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of predefined worker that is allocated when a job runs. Accepts a value of\n      G.1X, G.2X, G.4X, G.8X or G.025X for Spark jobs. Accepts the value Z.2X for Ray jobs.</p>\n         <ul>\n            <li>\n               <p>For the <code>G.1X</code> worker type, each worker maps to 1 DPU (4 vCPUs, 16 GB of memory) with 94GB disk, and provides 1 executor per worker. We recommend this worker type for workloads such as data transforms, joins, and queries, to offers a scalable and cost effective way to run most jobs.</p>\n            </li>\n            <li>\n               <p>For the <code>G.2X</code> worker type, each worker maps to 2 DPU (8 vCPUs, 32 GB of memory) with 138GB disk, and provides 1 executor per worker. We recommend this worker type for workloads such as data transforms, joins, and queries, to offers a scalable and cost effective way to run most jobs.</p>\n            </li>\n            <li>\n               <p>For the <code>G.4X</code> worker type, each worker maps to 4 DPU (16 vCPUs, 64 GB of memory) with 256GB disk, and provides 1 executor per worker. We recommend this worker type for jobs whose workloads contain your most demanding transforms, aggregations, joins, and queries. This worker type is available only for Glue version 3.0 or later Spark ETL jobs in the following Amazon Web Services Regions: US East (Ohio), US East (N. Virginia), US West (Oregon), Asia Pacific (Singapore), Asia Pacific (Sydney), Asia Pacific (Tokyo), Canada (Central), Europe (Frankfurt), Europe (Ireland), and Europe (Stockholm).</p>\n            </li>\n            <li>\n               <p>For the <code>G.8X</code> worker type, each worker maps to 8 DPU (32 vCPUs, 128 GB of memory) with 512GB disk, and provides 1 executor per worker. We recommend this worker type for jobs whose workloads contain your most demanding transforms, aggregations, joins, and queries. This worker type is available only for Glue version 3.0 or later Spark ETL jobs, in the same Amazon Web Services Regions as supported for the <code>G.4X</code> worker type.</p>\n            </li>\n            <li>\n               <p>For the <code>G.025X</code> worker type, each worker maps to 0.25 DPU (2 vCPUs, 4 GB of memory) with 84GB disk, and provides 1 executor per worker. We recommend this worker type for low volume streaming jobs. This worker type is only available for Glue version 3.0 or later streaming jobs.</p>\n            </li>\n            <li>\n               <p>For the <code>Z.2X</code> worker type, each worker maps to 2 M-DPU (8vCPUs, 64 GB of memory) with 128 GB disk, and provides up to 8 Ray workers based on the autoscaler.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of predefined worker that is allocated when a job runs. Accepts a value of\n      G.1X, G.2X, G.4X, G.8X or G.025X for Spark jobs. Accepts the value Z.2X for Ray jobs.</p>\n         <ul>\n            <li>\n               <p>For the <code>G.1X</code> worker type, each worker maps to 1 DPU (4 vCPUs, 16 GB of memory) with 94GB disk, and provides 1 executor per worker. We recommend this worker type for workloads such as data transforms, joins, and queries, to offers a scalable and cost effective way to run most jobs.</p>\n            </li>\n            <li>\n               <p>For the <code>G.2X</code> worker type, each worker maps to 2 DPU (8 vCPUs, 32 GB of memory) with 138GB disk, and provides 1 executor per worker. We recommend this worker type for workloads such as data transforms, joins, and queries, to offers a scalable and cost effective way to run most jobs.</p>\n            </li>\n            <li>\n               <p>For the <code>G.4X</code> worker type, each worker maps to 4 DPU (16 vCPUs, 64 GB of memory) with 256GB disk, and provides 1 executor per worker. We recommend this worker type for jobs whose workloads contain your most demanding transforms, aggregations, joins, and queries. This worker type is available only for Glue version 3.0 or later Spark ETL jobs in the following Amazon Web Services Regions: US East (Ohio), US East (N. Virginia), US West (N. California), US West (Oregon), Asia Pacific (Mumbai), Asia Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney), Asia Pacific (Tokyo), Canada (Central), Europe (Frankfurt), Europe (Ireland), Europe (London), Europe (Spain), Europe (Stockholm), and South America (São Paulo).</p>\n            </li>\n            <li>\n               <p>For the <code>G.8X</code> worker type, each worker maps to 8 DPU (32 vCPUs, 128 GB of memory) with 512GB disk, and provides 1 executor per worker. We recommend this worker type for jobs whose workloads contain your most demanding transforms, aggregations, joins, and queries. This worker type is available only for Glue version 3.0 or later Spark ETL jobs, in the same Amazon Web Services Regions as supported for the <code>G.4X</code> worker type.</p>\n            </li>\n            <li>\n               <p>For the <code>G.025X</code> worker type, each worker maps to 0.25 DPU (2 vCPUs, 4 GB of memory) with 84GB disk, and provides 1 executor per worker. We recommend this worker type for low volume streaming jobs. This worker type is only available for Glue version 3.0 or later streaming jobs.</p>\n            </li>\n            <li>\n               <p>For the <code>Z.2X</code> worker type, each worker maps to 2 M-DPU (8vCPUs, 64 GB of memory) with 128 GB disk, and provides up to 8 Ray workers based on the autoscaler.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "CodeGenConfigurationNodes": {
@@ -12792,6 +12902,79 @@
                 "target": "smithy.api#String"
             }
         },
+        "com.amazonaws.glue#DDBELTCatalogAdditionalOptions": {
+            "type": "structure",
+            "members": {
+                "DynamodbExport": {
+                    "target": "com.amazonaws.glue#EnclosedInStringProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the DynamoDB export configuration for the ELT operation.</p>"
+                    }
+                },
+                "DynamodbUnnestDDBJson": {
+                    "target": "com.amazonaws.glue#BooleanValue",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether to unnest DynamoDB JSON format. When set to <code>true</code>, nested JSON structures in DynamoDB items are flattened.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies additional options for DynamoDB ELT catalog operations.</p>"
+            }
+        },
+        "com.amazonaws.glue#DDBELTConnectionOptions": {
+            "type": "structure",
+            "members": {
+                "DynamodbExport": {
+                    "target": "com.amazonaws.glue#DdbExportType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the export type for DynamoDB data extraction. This parameter determines how data is exported from the DynamoDB table during the ELT process.</p>"
+                    }
+                },
+                "DynamodbUnnestDDBJson": {
+                    "target": "com.amazonaws.glue#BooleanValue",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A boolean value that specifies whether to unnest DynamoDB JSON format during data extraction. When set to <code>true</code>, the connector will \n      flatten nested JSON structures from DynamoDB items. When set to <code>false</code>, the original DynamoDB JSON structure is preserved.</p>"
+                    }
+                },
+                "DynamodbTableArn": {
+                    "target": "com.amazonaws.glue#EnclosedInStringProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the DynamoDB table to extract data from. This parameter specifies the source table for the ELT operation. \n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DynamodbS3Bucket": {
+                    "target": "com.amazonaws.glue#EnclosedInStringProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon S3 bucket used for intermediate storage during the DynamoDB ELT process. This bucket is used to temporarily store exported \n      DynamoDB data before it is processed by the ELT job.</p>"
+                    }
+                },
+                "DynamodbS3Prefix": {
+                    "target": "com.amazonaws.glue#EnclosedInStringProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 object key prefix for files stored in the intermediate S3 bucket during the DynamoDB ELT process. This prefix helps organize and identify the \n      temporary files created during data extraction.</p>"
+                    }
+                },
+                "DynamodbS3BucketOwner": {
+                    "target": "com.amazonaws.glue#EnclosedInStringProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the owner of the S3 bucket specified in <code>DynamodbS3Bucket</code>. This parameter is required when the S3 bucket is owned by \n      a different Amazon Web Services account than the one running the ELT job, enabling cross-account access to the intermediate storage bucket.</p>"
+                    }
+                },
+                "DynamodbStsRoleArn": {
+                    "target": "com.amazonaws.glue#EnclosedInStringProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Security Token Service (STS) role to assume for accessing DynamoDB and S3 resources during \n      the ELT operation. \n      This role must have the necessary permissions to read from the DynamoDB table and write to the intermediate S3 bucket. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies connection options for DynamoDB ELT (Extract, Load, Transform) operations. This structure contains configuration parameters for connecting \n      to and extracting data from DynamoDB tables using the ELT connector.</p>"
+            }
+        },
         "com.amazonaws.glue#DQAdditionalOptions": {
             "type": "map",
             "key": {
@@ -14227,6 +14410,23 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Defines column statistics supported for timestamp data columns.</p>"
+            }
+        },
+        "com.amazonaws.glue#DdbExportType": {
+            "type": "enum",
+            "members": {
+                "ddb": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ddb"
+                    }
+                },
+                "s3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "s3"
+                    }
+                }
             }
         },
         "com.amazonaws.glue#DecimalColumnStatisticsData": {
@@ -16983,6 +17183,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The temp directory of the JDBC Redshift source.</p>"
                     }
+                },
+                "OutputSchemas": {
+                    "target": "com.amazonaws.glue#GlueSchemas",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the data schema for the direct JDBC source.</p>"
+                    }
                 }
             },
             "traits": {
@@ -17333,10 +17539,49 @@
                         "smithy.api#documentation": "<p>The name of the table in the database to read from.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "PitrEnabled": {
+                    "target": "com.amazonaws.glue#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether Point-in-Time Recovery (PITR) is enabled for the DynamoDB table. When set to <code>true</code>, \n      allows reading from a specific point in time. The default value is <code>false</code>.</p>"
+                    }
+                },
+                "AdditionalOptions": {
+                    "target": "com.amazonaws.glue#DDBELTCatalogAdditionalOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies additional connection options for the DynamoDB data source.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies a DynamoDB data source in the Glue Data Catalog.</p>"
+            }
+        },
+        "com.amazonaws.glue#DynamoDBELTConnectorSource": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the DynamoDB ELT connector source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConnectionOptions": {
+                    "target": "com.amazonaws.glue#DDBELTConnectionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection options for the DynamoDB ELT connector source.</p>"
+                    }
+                },
+                "OutputSchemas": {
+                    "target": "com.amazonaws.glue#GlueSchemas",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the data schema for the DynamoDB ELT connector source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a DynamoDB ELT connector source for extracting data from DynamoDB tables.</p>"
             }
         },
         "com.amazonaws.glue#DynamoDBTarget": {
@@ -25597,6 +25842,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The hive type for this column in the Glue Studio schema.</p>"
                     }
+                },
+                "GlueStudioType": {
+                    "target": "com.amazonaws.glue#ColumnTypeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type of the column as defined in Glue Studio.</p>"
+                    }
                 }
             },
             "traits": {
@@ -25837,6 +26088,41 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\t]*$"
+            }
+        },
+        "com.amazonaws.glue#GroupFilters": {
+            "type": "structure",
+            "members": {
+                "GroupName": {
+                    "target": "com.amazonaws.glue#GenericLimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the filter group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.glue#FilterExpressions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of filter expressions that define the conditions for this group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LogicalOperator": {
+                    "target": "com.amazonaws.glue#FilterLogicalOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The logical operator used to combine the filters in this group. Determines whether all filters must match (AND) or any filter can match (OR).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a group of filters with a logical operator that determines how the filters are combined to evaluate routing conditions.</p>"
+            }
+        },
+        "com.amazonaws.glue#GroupFiltersList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#GroupFilters"
             }
         },
         "com.amazonaws.glue#HashString": {
@@ -27851,7 +28137,7 @@
                 "WorkerType": {
                     "target": "com.amazonaws.glue#WorkerType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of predefined worker that is allocated when a job runs. Accepts a value of\n      G.1X, G.2X, G.4X, G.8X or G.025X for Spark jobs. Accepts the value Z.2X for Ray jobs.</p>\n         <ul>\n            <li>\n               <p>For the <code>G.1X</code> worker type, each worker maps to 1 DPU (4 vCPUs, 16 GB of memory) with 94GB disk, and provides 1 executor per worker. We recommend this worker type for workloads such as data transforms, joins, and queries, to offers a scalable and cost effective way to run most jobs.</p>\n            </li>\n            <li>\n               <p>For the <code>G.2X</code> worker type, each worker maps to 2 DPU (8 vCPUs, 32 GB of memory) with 138GB disk, and provides 1 executor per worker. We recommend this worker type for workloads such as data transforms, joins, and queries, to offers a scalable and cost effective way to run most jobs.</p>\n            </li>\n            <li>\n               <p>For the <code>G.4X</code> worker type, each worker maps to 4 DPU (16 vCPUs, 64 GB of memory) with 256GB disk, and provides 1 executor per worker. We recommend this worker type for jobs whose workloads contain your most demanding transforms, aggregations, joins, and queries. This worker type is available only for Glue version 3.0 or later Spark ETL jobs in the following Amazon Web Services Regions: US East (Ohio), US East (N. Virginia), US West (Oregon), Asia Pacific (Singapore), Asia Pacific (Sydney), Asia Pacific (Tokyo), Canada (Central), Europe (Frankfurt), Europe (Ireland), and Europe (Stockholm).</p>\n            </li>\n            <li>\n               <p>For the <code>G.8X</code> worker type, each worker maps to 8 DPU (32 vCPUs, 128 GB of memory) with 512GB disk, and provides 1 executor per worker. We recommend this worker type for jobs whose workloads contain your most demanding transforms, aggregations, joins, and queries. This worker type is available only for Glue version 3.0 or later Spark ETL jobs, in the same Amazon Web Services Regions as supported for the <code>G.4X</code> worker type.</p>\n            </li>\n            <li>\n               <p>For the <code>G.025X</code> worker type, each worker maps to 0.25 DPU (2 vCPUs, 4 GB of memory) with 84GB disk, and provides 1 executor per worker. We recommend this worker type for low volume streaming jobs. This worker type is only available for Glue version 3.0 or later streaming jobs.</p>\n            </li>\n            <li>\n               <p>For the <code>Z.2X</code> worker type, each worker maps to 2 M-DPU (8vCPUs, 64 GB of memory) with 128 GB disk, and provides up to 8 Ray workers based on the autoscaler.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of predefined worker that is allocated when a job runs.</p>\n         <p>Glue provides multiple worker types to accommodate different workload requirements:</p>\n         <p>G Worker Types (General-purpose compute workers):</p>\n         <ul>\n            <li>\n               <p>G.1X: 1 DPU (4 vCPUs, 16 GB memory, 94GB disk)</p>\n            </li>\n            <li>\n               <p>G.2X: 2 DPU (8 vCPUs, 32 GB memory, 138GB disk)</p>\n            </li>\n            <li>\n               <p>G.4X: 4 DPU (16 vCPUs, 64 GB memory, 256GB disk)</p>\n            </li>\n            <li>\n               <p>G.8X: 8 DPU (32 vCPUs, 128 GB memory, 512GB disk)</p>\n            </li>\n            <li>\n               <p>G.12X: 12 DPU (48 vCPUs, 192 GB memory, 768GB disk)</p>\n            </li>\n            <li>\n               <p>G.16X: 16 DPU (64 vCPUs, 256 GB memory, 1024GB disk)</p>\n            </li>\n         </ul>\n         <p>R Worker Types (Memory-optimized workers):</p>\n         <ul>\n            <li>\n               <p>R.1X: 1 M-DPU (4 vCPUs, 32 GB memory)</p>\n            </li>\n            <li>\n               <p>R.2X: 2 M-DPU (8 vCPUs, 64 GB memory)</p>\n            </li>\n            <li>\n               <p>R.4X: 4 M-DPU (16 vCPUs, 128 GB memory)</p>\n            </li>\n            <li>\n               <p>R.8X: 8 M-DPU (32 vCPUs, 256 GB memory)</p>\n            </li>\n         </ul>"
                     }
                 },
                 "NumberOfWorkers": {
@@ -28991,6 +29277,12 @@
                     "target": "com.amazonaws.glue#Iso8601DateTime",
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp of the record in the Kinesis data stream to start reading data from. The possible values are a timestamp string in UTC format of the pattern <code>yyyy-mm-ddTHH:MM:SSZ</code> (where Z represents a UTC timezone offset with a +/-. For example: \"2023-04-04T08:00:00+08:00\"). </p>"
+                    }
+                },
+                "FanoutConsumerARN": {
+                    "target": "com.amazonaws.glue#EnclosedInStringProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Kinesis Data Streams enhanced fan-out consumer. When specified, enables enhanced fan-out for \n      dedicated throughput and lower latency data consumption.</p>"
                     }
                 }
             },
@@ -33087,6 +33379,48 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates the value that will replace the detected entity. </p>"
                     }
+                },
+                "RedactText": {
+                    "target": "com.amazonaws.glue#EnclosedInStringProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to redact the detected PII text. When set to <code>true</code>, PII content is replaced with redaction characters.</p>"
+                    }
+                },
+                "RedactChar": {
+                    "target": "com.amazonaws.glue#EnclosedInStringProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The character used to replace detected PII content when redaction is enabled. The default redaction character is <code>*</code>.</p>"
+                    }
+                },
+                "MatchPattern": {
+                    "target": "com.amazonaws.glue#EnclosedInStringProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A regular expression pattern used to identify additional PII content beyond the standard detection algorithms.</p>"
+                    }
+                },
+                "NumLeftCharsToExclude": {
+                    "target": "com.amazonaws.glue#BoxedPositiveInt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of characters to exclude from redaction on the left side of detected PII content. This allows preserving context around the sensitive data.</p>"
+                    }
+                },
+                "NumRightCharsToExclude": {
+                    "target": "com.amazonaws.glue#BoxedPositiveInt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of characters to exclude from redaction on the right side of detected PII content. This allows preserving context around the sensitive data.</p>"
+                    }
+                },
+                "DetectionParameters": {
+                    "target": "com.amazonaws.glue#EnclosedInStringProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional parameters for configuring PII detection behavior and sensitivity settings.</p>"
+                    }
+                },
+                "DetectionSensitivity": {
+                    "target": "com.amazonaws.glue#EnclosedInStringProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sensitivity level for PII detection. Higher sensitivity levels detect more potential PII but may result in more false positives.</p>"
+                    }
                 }
             },
             "traits": {
@@ -33684,16 +34018,34 @@
                         "smithy.api#enumValue": "RowAudit"
                     }
                 },
+                "RowHashing": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RowHashing"
+                    }
+                },
                 "RowMasking": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "RowMasking"
                     }
                 },
+                "RowPartialMasking": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RowPartialMasking"
+                    }
+                },
                 "ColumnAudit": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ColumnAudit"
+                    }
+                },
+                "ColumnHashing": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ColumnHashing"
                     }
                 },
                 "ColumnMasking": {
@@ -35695,6 +36047,35 @@
         "com.amazonaws.glue#RoleString": {
             "type": "string"
         },
+        "com.amazonaws.glue#Route": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the route node.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Inputs": {
+                    "target": "com.amazonaws.glue#OneInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input connection for the route node.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "GroupFiltersList": {
+                    "target": "com.amazonaws.glue#GroupFiltersList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of group filters that define the routing conditions and criteria for directing data to different output paths.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a route node that directs data to different output paths based on defined filtering conditions.</p>"
+            }
+        },
         "com.amazonaws.glue#RowTag": {
             "type": "string"
         },
@@ -35950,6 +36331,47 @@
                 "smithy.api#documentation": "<p>Specifies a Hudi data source that is registered in the Glue Data Catalog. The Hudi data source must be stored in Amazon S3.</p>"
             }
         },
+        "com.amazonaws.glue#S3CatalogIcebergSource": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Iceberg data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Database": {
+                    "target": "com.amazonaws.glue#EnclosedInStringProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database to read from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Table": {
+                    "target": "com.amazonaws.glue#EnclosedInStringProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table in the database to read from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AdditionalIcebergOptions": {
+                    "target": "com.amazonaws.glue#AdditionalOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies additional connection options for the Iceberg data source.</p>"
+                    }
+                },
+                "OutputSchemas": {
+                    "target": "com.amazonaws.glue#GlueSchemas",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the data schema for the Iceberg source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies an Apache Iceberg data source that is registered in the Glue Data Catalog. The Iceberg data source must be stored in Amazon S3.</p>"
+            }
+        },
         "com.amazonaws.glue#S3CatalogSource": {
             "type": "structure",
             "members": {
@@ -36032,6 +36454,12 @@
                     "target": "com.amazonaws.glue#CatalogSchemaChangePolicy",
                     "traits": {
                         "smithy.api#documentation": "<p>A policy that specifies update behavior for the crawler.</p>"
+                    }
+                },
+                "AutoDataQuality": {
+                    "target": "com.amazonaws.glue#AutoDataQuality",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to automatically enable data quality evaluation for the S3 catalog target. \n      When set to <code>true</code>, data quality checks are performed automatically during the write operation.</p>"
                     }
                 }
             },
@@ -36214,6 +36642,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A policy that specifies update behavior for the crawler.</p>"
                     }
+                },
+                "AutoDataQuality": {
+                    "target": "com.amazonaws.glue#AutoDataQuality",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to automatically enable data quality evaluation for the S3 Delta catalog target. When set to <code>true</code>, \n      data quality checks are performed automatically during the write operation.</p>"
+                    }
+                },
+                "OutputSchemas": {
+                    "target": "com.amazonaws.glue#GlueSchemas",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the data schema for the S3 Delta catalog target.</p>"
+                    }
                 }
             },
             "traits": {
@@ -36280,6 +36720,12 @@
                     "target": "com.amazonaws.glue#DirectSchemaChangePolicy",
                     "traits": {
                         "smithy.api#documentation": "<p>A policy that specifies update behavior for the crawler.</p>"
+                    }
+                },
+                "AutoDataQuality": {
+                    "target": "com.amazonaws.glue#AutoDataQuality",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to automatically enable data quality evaluation for the S3 Delta direct target. When set to <code>true</code>, \n      data quality checks are performed automatically during the write operation.</p>"
                     }
                 }
             },
@@ -36412,6 +36858,18 @@
                     "target": "com.amazonaws.glue#DirectSchemaChangePolicy",
                     "traits": {
                         "smithy.api#documentation": "<p>A policy that specifies update behavior for the crawler.</p>"
+                    }
+                },
+                "AutoDataQuality": {
+                    "target": "com.amazonaws.glue#AutoDataQuality",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to automatically enable data quality evaluation for the S3 direct target. When set to <code>true</code>, \n      data quality checks are performed automatically during the write operation.</p>"
+                    }
+                },
+                "OutputSchemas": {
+                    "target": "com.amazonaws.glue#GlueSchemas",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the data schema for the S3 direct target.</p>"
                     }
                 }
             },
@@ -36548,7 +37006,7 @@
                 "OutputSchemas": {
                     "target": "com.amazonaws.glue#GlueSchemas",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Glue schemas to apply to the processed data.</p>"
+                        "smithy.api#documentation": "<p>The Glue schemas to apply to the processed data.</p>"
                     }
                 }
             },
@@ -36595,13 +37053,19 @@
                 "NumberTargetPartitions": {
                     "target": "com.amazonaws.glue#NumberTargetPartitionsString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the number of target partitions for Parquet files when writing to Amazon S3 using AWS Glue.</p>"
+                        "smithy.api#documentation": "<p>Specifies the number of target partitions for Parquet files when writing to Amazon S3 using Glue.</p>"
                     }
                 },
                 "SchemaChangePolicy": {
                     "target": "com.amazonaws.glue#DirectSchemaChangePolicy",
                     "traits": {
                         "smithy.api#documentation": "<p>A policy that specifies update behavior for the crawler.</p>"
+                    }
+                },
+                "AutoDataQuality": {
+                    "target": "com.amazonaws.glue#AutoDataQuality",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to automatically enable data quality evaluation for the S3 Glue Parquet target. When set to <code>true</code>, \n      data quality checks are performed automatically during the write operation.</p>"
                     }
                 }
             },
@@ -36657,6 +37121,18 @@
                     "target": "com.amazonaws.glue#CatalogSchemaChangePolicy",
                     "traits": {
                         "smithy.api#documentation": "<p>A policy that specifies update behavior for the crawler.</p>"
+                    }
+                },
+                "AutoDataQuality": {
+                    "target": "com.amazonaws.glue#AutoDataQuality",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to automatically enable data quality evaluation for the S3 Hudi catalog target. When set to <code>true</code>, \n      data quality checks are performed automatically during the write operation.</p>"
+                    }
+                },
+                "OutputSchemas": {
+                    "target": "com.amazonaws.glue#GlueSchemas",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the data schema for the S3 Hudi catalog target.</p>"
                     }
                 }
             },
@@ -36726,6 +37202,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A policy that specifies update behavior for the crawler.</p>"
                     }
+                },
+                "AutoDataQuality": {
+                    "target": "com.amazonaws.glue#AutoDataQuality",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to automatically enable data quality evaluation for the S3 Hudi direct target. When set to <code>true</code>, \n      data quality checks are performed automatically during the write operation.</p>"
+                    }
                 }
             },
             "traits": {
@@ -36789,6 +37271,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "Format": {
+                    "target": "com.amazonaws.glue#TargetFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the data output format for the HyperDirect target.</p>"
+                    }
+                },
                 "PartitionKeys": {
                     "target": "com.amazonaws.glue#GlueStudioPathList",
                     "traits": {
@@ -36813,10 +37301,82 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Defines how schema changes are handled during write operations.</p>"
                     }
+                },
+                "AutoDataQuality": {
+                    "target": "com.amazonaws.glue#AutoDataQuality",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to automatically enable data quality evaluation for the S3 Hyper direct target. When set to <code>true</code>, data quality checks are performed automatically during the write operation.</p>"
+                    }
+                },
+                "OutputSchemas": {
+                    "target": "com.amazonaws.glue#GlueSchemas",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the data schema for the S3 Hyper direct target.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies a HyperDirect data target that writes to Amazon S3.</p>"
+            }
+        },
+        "com.amazonaws.glue#S3IcebergCatalogTarget": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Iceberg catalog target.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Inputs": {
+                    "target": "com.amazonaws.glue#OneInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input connection for the Iceberg catalog target.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PartitionKeys": {
+                    "target": "com.amazonaws.glue#GlueStudioPathList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of partition keys for the Iceberg table.</p>"
+                    }
+                },
+                "Table": {
+                    "target": "com.amazonaws.glue#EnclosedInStringProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table to write to in the catalog.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Database": {
+                    "target": "com.amazonaws.glue#EnclosedInStringProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database to write to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AdditionalOptions": {
+                    "target": "com.amazonaws.glue#AdditionalOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies additional connection options for the Iceberg catalog target.</p>"
+                    }
+                },
+                "SchemaChangePolicy": {
+                    "target": "com.amazonaws.glue#CatalogSchemaChangePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The policy for handling schema changes in the catalog target.</p>"
+                    }
+                },
+                "AutoDataQuality": {
+                    "target": "com.amazonaws.glue#AutoDataQuality",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to automatically enable data quality evaluation for the S3 Iceberg catalog target. When set to <code>true</code>, data quality checks are performed automatically during the write operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies an Apache Iceberg catalog target that writes data to Amazon S3 and registers the table in the Glue Data Catalog.</p>"
             }
         },
         "com.amazonaws.glue#S3IcebergDirectTarget": {
@@ -36868,6 +37428,9 @@
                         "smithy.api#documentation": "<p>Defines how schema changes are handled when writing data to the Iceberg table.</p>"
                     }
                 },
+                "AutoDataQuality": {
+                    "target": "com.amazonaws.glue#AutoDataQuality"
+                },
                 "Compression": {
                     "target": "com.amazonaws.glue#IcebergTargetCompressionType",
                     "traits": {
@@ -36879,6 +37442,12 @@
                     "target": "com.amazonaws.glue#NumberTargetPartitionsString",
                     "traits": {
                         "smithy.api#documentation": "<p>Sets the number of target partitions for distributing Iceberg table files across S3.</p>"
+                    }
+                },
+                "OutputSchemas": {
+                    "target": "com.amazonaws.glue#GlueSchemas",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the data schema for the S3 Iceberg direct target.</p>"
                     }
                 }
             },

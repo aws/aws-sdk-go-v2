@@ -14405,6 +14405,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The parameters that are required to connect to a Google BigQuery data source.</p>"
                     }
+                },
+                "ImpalaParameters": {
+                    "target": "com.amazonaws.quicksight#ImpalaParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters for Impala.</p>"
+                    }
                 }
             },
             "traits": {
@@ -31338,6 +31344,41 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A static file that contains an image.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#ImpalaParameters": {
+            "type": "structure",
+            "members": {
+                "Host": {
+                    "target": "com.amazonaws.quicksight#Host",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The host name of the Impala data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Port": {
+                    "target": "com.amazonaws.quicksight#Port",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port of the Impala data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Database": {
+                    "target": "com.amazonaws.quicksight#Database",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database of the Impala data source.</p>"
+                    }
+                },
+                "SqlEndpointPath": {
+                    "target": "com.amazonaws.quicksight#SqlEndpointPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP path of the Impala data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The parameters that are required to connect to a Impala data source.</p>"
             }
         },
         "com.amazonaws.quicksight#IncludeFolderMembers": {

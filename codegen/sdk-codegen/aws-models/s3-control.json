@@ -10529,6 +10529,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>For directory buckets, you can filter access control to specific prefixes, API\n         operations, or a combination of both. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-directory-buckets.html\">Managing access to shared datasets in directory buckets with\n            access points</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <note>\n            <p>Scope is only supported for access points attached to directory buckets.</p>\n         </note>"
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.s3control#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of tags that you can apply to an access point. Tags are key-value pairs of metadata used to control access to your access points. For more information about tags, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html\">Using tags with Amazon S3</a>. For information about tagging access points, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html#using-tags-for-abac\">Using tags for attribute-based access control (ABAC)</a>.</p>"
+                    }
                 }
             },
             "traits": {
