@@ -17415,6 +17415,73 @@ func awsRestjson1_deserializeDocumentConsolidation(v **types.Consolidation, valu
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentContactPreference(v **types.ContactPreference, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ContactPreference
+	if *v == nil {
+		sv = &types.ContactPreference{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ContactType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ContactType to be of type string, got %T instead", value)
+				}
+				sv.ContactType = types.ContactType(jtv)
+			}
+
+		case "KeyName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected name to be of type string, got %T instead", value)
+				}
+				sv.KeyName = ptr.String(jtv)
+			}
+
+		case "KeyValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string1To255 to be of type string, got %T instead", value)
+				}
+				sv.KeyValue = ptr.String(jtv)
+			}
+
+		case "ProfileId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected uuid to be of type string, got %T instead", value)
+				}
+				sv.ProfileId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCustomAttributes(v *map[string]types.AttributeDimension, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17910,6 +17977,81 @@ func awsRestjson1_deserializeDocumentEmailList(v *[]string, value interface{}) e
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEmailPreferenceList(v *[]types.ContactPreference, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ContactPreference
+	if *v == nil {
+		cv = []types.ContactPreference{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ContactPreference
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentContactPreference(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEngagementPreferences(v **types.EngagementPreferences, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EngagementPreferences
+	if *v == nil {
+		sv = &types.EngagementPreferences{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Email":
+			if err := awsRestjson1_deserializeDocumentEmailPreferenceList(&sv.Email, value); err != nil {
+				return err
+			}
+
+		case "Phone":
+			if err := awsRestjson1_deserializeDocumentPhonePreferenceList(&sv.Phone, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -21276,6 +21418,40 @@ func awsRestjson1_deserializeDocumentPhoneNumberList(v *[]string, value interfac
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentPhonePreferenceList(v *[]types.ContactPreference, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ContactPreference
+	if *v == nil {
+		cv = []types.ContactPreference{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ContactPreference
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentContactPreference(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentProfile(v **types.Profile, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -21374,6 +21550,11 @@ func awsRestjson1_deserializeDocumentProfile(v **types.Profile, value interface{
 					return fmt.Errorf("expected sensitiveString1To255 to be of type string, got %T instead", value)
 				}
 				sv.EmailAddress = ptr.String(jtv)
+			}
+
+		case "EngagementPreferences":
+			if err := awsRestjson1_deserializeDocumentEngagementPreferences(&sv.EngagementPreferences, value); err != nil {
+				return err
 			}
 
 		case "FirstName":
@@ -21492,6 +21673,15 @@ func awsRestjson1_deserializeDocumentProfile(v **types.Profile, value interface{
 					return fmt.Errorf("expected uuid to be of type string, got %T instead", value)
 				}
 				sv.ProfileId = ptr.String(jtv)
+			}
+
+		case "ProfileType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProfileType to be of type string, got %T instead", value)
+				}
+				sv.ProfileType = types.ProfileType(jtv)
 			}
 
 		case "ShippingAddress":
@@ -21627,6 +21817,11 @@ func awsRestjson1_deserializeDocumentProfileAttributes(v **types.ProfileAttribut
 
 		case "PhoneNumber":
 			if err := awsRestjson1_deserializeDocumentProfileDimension(&sv.PhoneNumber, value); err != nil {
+				return err
+			}
+
+		case "ProfileType":
+			if err := awsRestjson1_deserializeDocumentProfileTypeDimension(&sv.ProfileType, value); err != nil {
 				return err
 			}
 
@@ -22004,6 +22199,87 @@ func awsRestjson1_deserializeDocumentProfiles(v *[]types.ProfileQueryResult, val
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentProfileTypeDimension(v **types.ProfileTypeDimension, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ProfileTypeDimension
+	if *v == nil {
+		sv = &types.ProfileTypeDimension{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DimensionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProfileTypeDimensionType to be of type string, got %T instead", value)
+				}
+				sv.DimensionType = types.ProfileTypeDimensionType(jtv)
+			}
+
+		case "Values":
+			if err := awsRestjson1_deserializeDocumentProfileTypeValues(&sv.Values, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentProfileTypeValues(v *[]types.ProfileType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ProfileType
+	if *v == nil {
+		cv = []types.ProfileType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ProfileType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ProfileType to be of type string, got %T instead", value)
+			}
+			col = types.ProfileType(jtv)
+		}
 		cv = append(cv, col)
 
 	}

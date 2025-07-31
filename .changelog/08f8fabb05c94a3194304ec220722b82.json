@@ -1,0 +1,8 @@
+{
+    "id": "08f8fabb-05c9-4a31-9430-4ec220722b82",
+    "type": "documentation",
+    "description": "This release enables secondary IP addresses for Network Load Balancers.",
+    "modules": [
+        "service/elasticloadbalancingv2"
+    ]
+}

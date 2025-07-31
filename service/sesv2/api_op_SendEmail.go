@@ -119,6 +119,12 @@ type SendEmailInput struct {
 	// the message, each Reply-to address receives the reply.
 	ReplyToAddresses []string
 
+	// The name of the tenant through which this email will be sent.
+	//
+	// The email sending operation will only succeed if all referenced resources
+	// (identities, configuration sets, and templates) are associated with this tenant.
+	TenantName *string
+
 	noSmithyDocumentSerde
 }
 

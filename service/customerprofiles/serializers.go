@@ -1236,6 +1236,13 @@ func awsRestjson1_serializeOpDocumentCreateProfileInput(v *CreateProfileInput, v
 		ok.String(*v.EmailAddress)
 	}
 
+	if v.EngagementPreferences != nil {
+		ok := object.Key("EngagementPreferences")
+		if err := awsRestjson1_serializeDocumentEngagementPreferences(v.EngagementPreferences, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.FirstName != nil {
 		ok := object.Key("FirstName")
 		ok.String(*v.FirstName)
@@ -1296,6 +1303,11 @@ func awsRestjson1_serializeOpDocumentCreateProfileInput(v *CreateProfileInput, v
 	if v.PhoneNumber != nil {
 		ok := object.Key("PhoneNumber")
 		ok.String(*v.PhoneNumber)
+	}
+
+	if len(v.ProfileType) > 0 {
+		ok := object.Key("ProfileType")
+		ok.String(string(v.ProfileType))
 	}
 
 	if v.ShippingAddress != nil {
@@ -7847,6 +7859,13 @@ func awsRestjson1_serializeOpDocumentUpdateProfileInput(v *UpdateProfileInput, v
 		ok.String(*v.EmailAddress)
 	}
 
+	if v.EngagementPreferences != nil {
+		ok := object.Key("EngagementPreferences")
+		if err := awsRestjson1_serializeDocumentEngagementPreferences(v.EngagementPreferences, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.FirstName != nil {
 		ok := object.Key("FirstName")
 		ok.String(*v.FirstName)
@@ -7912,6 +7931,11 @@ func awsRestjson1_serializeOpDocumentUpdateProfileInput(v *UpdateProfileInput, v
 	if v.ProfileId != nil {
 		ok := object.Key("ProfileId")
 		ok.String(*v.ProfileId)
+	}
+
+	if len(v.ProfileType) > 0 {
+		ok := object.Key("ProfileType")
+		ok.String(string(v.ProfileType))
 	}
 
 	if v.ShippingAddress != nil {
@@ -8465,6 +8489,33 @@ func awsRestjson1_serializeDocumentConsolidation(v *types.Consolidation, value s
 	return nil
 }
 
+func awsRestjson1_serializeDocumentContactPreference(v *types.ContactPreference, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ContactType) > 0 {
+		ok := object.Key("ContactType")
+		ok.String(string(v.ContactType))
+	}
+
+	if v.KeyName != nil {
+		ok := object.Key("KeyName")
+		ok.String(*v.KeyName)
+	}
+
+	if v.KeyValue != nil {
+		ok := object.Key("KeyValue")
+		ok.String(*v.KeyValue)
+	}
+
+	if v.ProfileId != nil {
+		ok := object.Key("ProfileId")
+		ok.String(*v.ProfileId)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCustomAttributes(v map[string]types.AttributeDimension, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8557,6 +8608,40 @@ func awsRestjson1_serializeDocumentEmailList(v []string, value smithyjson.Value)
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEmailPreferenceList(v []types.ContactPreference, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentContactPreference(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEngagementPreferences(v *types.EngagementPreferences, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Email != nil {
+		ok := object.Key("Email")
+		if err := awsRestjson1_serializeDocumentEmailPreferenceList(v.Email, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Phone != nil {
+		ok := object.Key("Phone")
+		if err := awsRestjson1_serializeDocumentPhonePreferenceList(v.Phone, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -8785,6 +8870,11 @@ func awsRestjson1_serializeDocumentFieldSourceProfileIds(v *types.FieldSourcePro
 		ok.String(*v.EmailAddress)
 	}
 
+	if v.EngagementPreferences != nil {
+		ok := object.Key("EngagementPreferences")
+		ok.String(*v.EngagementPreferences)
+	}
+
 	if v.FirstName != nil {
 		ok := object.Key("FirstName")
 		ok.String(*v.FirstName)
@@ -8833,6 +8923,11 @@ func awsRestjson1_serializeDocumentFieldSourceProfileIds(v *types.FieldSourcePro
 	if v.PhoneNumber != nil {
 		ok := object.Key("PhoneNumber")
 		ok.String(*v.PhoneNumber)
+	}
+
+	if v.ProfileType != nil {
+		ok := object.Key("ProfileType")
+		ok.String(*v.ProfileType)
 	}
 
 	if v.ShippingAddress != nil {
@@ -9373,6 +9468,19 @@ func awsRestjson1_serializeDocumentPhoneNumberList(v []string, value smithyjson.
 	return nil
 }
 
+func awsRestjson1_serializeDocumentPhonePreferenceList(v []types.ContactPreference, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentContactPreference(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentProfileAttributes(v *types.ProfileAttributes, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -9517,6 +9625,13 @@ func awsRestjson1_serializeDocumentProfileAttributes(v *types.ProfileAttributes,
 		}
 	}
 
+	if v.ProfileType != nil {
+		ok := object.Key("ProfileType")
+		if err := awsRestjson1_serializeDocumentProfileTypeDimension(v.ProfileType, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ShippingAddress != nil {
 		ok := object.Key("ShippingAddress")
 		if err := awsRestjson1_serializeDocumentAddressDimension(v.ShippingAddress, ok); err != nil {
@@ -9564,6 +9679,36 @@ func awsRestjson1_serializeDocumentProfileIdToBeMergedList(v []string, value smi
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentProfileTypeDimension(v *types.ProfileTypeDimension, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DimensionType) > 0 {
+		ok := object.Key("DimensionType")
+		ok.String(string(v.DimensionType))
+	}
+
+	if v.Values != nil {
+		ok := object.Key("Values")
+		if err := awsRestjson1_serializeDocumentProfileTypeValues(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentProfileTypeValues(v []types.ProfileType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
 	}
 	return nil
 }

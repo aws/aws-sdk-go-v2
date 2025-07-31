@@ -1,0 +1,8 @@
+{
+    "id": "bb51bd76-7d24-4471-beb5-684a5812df50",
+    "type": "feature",
+    "description": "Granular access control support for NEO-SAML with IAMFederation for AOS data source",
+    "modules": [
+        "service/opensearch"
+    ]
+}

@@ -10799,6 +10799,11 @@ func awsRestjson1_deserializeDocumentResolutionTechniques(v **types.ResolutionTe
 				return err
 			}
 
+		case "ruleConditionProperties":
+			if err := awsRestjson1_deserializeDocumentRuleConditionProperties(&sv.RuleConditionProperties, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -10935,6 +10940,125 @@ func awsRestjson1_deserializeDocumentRuleBasedProperties(v **types.RuleBasedProp
 
 		case "rules":
 			if err := awsRestjson1_deserializeDocumentRuleList(&sv.Rules, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRuleCondition(v **types.RuleCondition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RuleCondition
+	if *v == nil {
+		sv = &types.RuleCondition{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "condition":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Condition = ptr.String(jtv)
+			}
+
+		case "ruleName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RuleName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRuleConditionList(v *[]types.RuleCondition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RuleCondition
+	if *v == nil {
+		cv = []types.RuleCondition{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RuleCondition
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRuleCondition(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRuleConditionProperties(v **types.RuleConditionProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RuleConditionProperties
+	if *v == nil {
+		sv = &types.RuleConditionProperties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "rules":
+			if err := awsRestjson1_deserializeDocumentRuleConditionList(&sv.Rules, value); err != nil {
 				return err
 			}
 

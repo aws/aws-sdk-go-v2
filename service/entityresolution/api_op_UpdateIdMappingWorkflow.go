@@ -12,7 +12,7 @@ import (
 )
 
 // Updates an existing IdMappingWorkflow . This method is identical to
-// CreateIdMappingWorkflow , except it uses an HTTP PUT request instead of a POST
+// CreateIdMappingWorkflow, except it uses an HTTP PUT request instead of a POST
 // request, and the IdMappingWorkflow must already exist for the method to succeed.
 func (c *Client) UpdateIdMappingWorkflow(ctx context.Context, params *UpdateIdMappingWorkflowInput, optFns ...func(*Options)) (*UpdateIdMappingWorkflowOutput, error) {
 	if params == nil {
@@ -51,7 +51,7 @@ type UpdateIdMappingWorkflowInput struct {
 	// A description of the workflow.
 	Description *string
 
-	// A list of OutputSource objects, each of which contains fields OutputS3Path and
+	// A list of OutputSource objects, each of which contains fields outputS3Path and
 	// KMSArn .
 	OutputSourceConfig []types.IdMappingWorkflowOutputSource
 
@@ -90,7 +90,7 @@ type UpdateIdMappingWorkflowOutput struct {
 	// A description of the workflow.
 	Description *string
 
-	// A list of OutputSource objects, each of which contains fields OutputS3Path and
+	// A list of OutputSource objects, each of which contains fields outputS3Path and
 	// KMSArn .
 	OutputSourceConfig []types.IdMappingWorkflowOutputSource
 

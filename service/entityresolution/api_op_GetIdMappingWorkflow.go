@@ -76,7 +76,7 @@ type GetIdMappingWorkflowOutput struct {
 	// A description of the workflow.
 	Description *string
 
-	// A list of OutputSource objects, each of which contains fields OutputS3Path and
+	// A list of OutputSource objects, each of which contains fields outputS3Path and
 	// KMSArn .
 	OutputSourceConfig []types.IdMappingWorkflowOutputSource
 

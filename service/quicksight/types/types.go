@@ -5066,6 +5066,7 @@ type DataSourceErrorInfo struct {
 //	DataSourceParametersMemberBigQueryParameters
 //	DataSourceParametersMemberDatabricksParameters
 //	DataSourceParametersMemberExasolParameters
+//	DataSourceParametersMemberImpalaParameters
 //	DataSourceParametersMemberJiraParameters
 //	DataSourceParametersMemberMariaDbParameters
 //	DataSourceParametersMemberMySqlParameters
@@ -5167,6 +5168,15 @@ type DataSourceParametersMemberExasolParameters struct {
 }
 
 func (*DataSourceParametersMemberExasolParameters) isDataSourceParameters() {}
+
+// The parameters for Impala.
+type DataSourceParametersMemberImpalaParameters struct {
+	Value ImpalaParameters
+
+	noSmithyDocumentSerde
+}
+
+func (*DataSourceParametersMemberImpalaParameters) isDataSourceParameters() {}
 
 // The parameters for Jira.
 type DataSourceParametersMemberJiraParameters struct {
@@ -9108,6 +9118,30 @@ type ImageStaticFile struct {
 
 	// The source of the image static file.
 	Source *StaticFileSource
+
+	noSmithyDocumentSerde
+}
+
+// The parameters that are required to connect to a Impala data source.
+type ImpalaParameters struct {
+
+	// The host name of the Impala data source.
+	//
+	// This member is required.
+	Host *string
+
+	// The port of the Impala data source.
+	//
+	// This member is required.
+	Port *int32
+
+	// The HTTP path of the Impala data source.
+	//
+	// This member is required.
+	SqlEndpointPath *string
+
+	// The database of the Impala data source.
+	Database *string
 
 	noSmithyDocumentSerde
 }

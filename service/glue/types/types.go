@@ -436,6 +436,23 @@ type AuthorizationCodeProperties struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies configuration options for automatic data quality evaluation in Glue
+// jobs. This structure enables automated data quality checks and monitoring during
+// ETL operations, helping to ensure data integrity and reliability without manual
+// intervention.
+type AutoDataQuality struct {
+
+	// The evaluation context for the automatic data quality checks. This defines the
+	// scope and parameters for the data quality evaluation.
+	EvaluationContext *string
+
+	// Specifies whether automatic data quality evaluation is enabled. When set to true
+	// , data quality checks are performed automatically.
+	IsEnabled bool
+
+	noSmithyDocumentSerde
+}
+
 // A list of errors that can occur when registering partition indexes for an
 // existing table.
 //
@@ -932,6 +949,34 @@ type CatalogHudiSource struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies an Apache Iceberg data source that is registered in the Glue Data
+// Catalog.
+type CatalogIcebergSource struct {
+
+	// The name of the database to read from.
+	//
+	// This member is required.
+	Database *string
+
+	// The name of the Iceberg data source.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the table in the database to read from.
+	//
+	// This member is required.
+	Table *string
+
+	// Specifies additional connection options for the Iceberg data source.
+	AdditionalIcebergOptions map[string]string
+
+	// Specifies the data schema for the Iceberg source.
+	OutputSchemas []GlueSchema
+
+	noSmithyDocumentSerde
+}
+
 // A structure containing migration status information.
 type CatalogImportStatus struct {
 
@@ -1114,6 +1159,13 @@ type CatalogSource struct {
 	// This member is required.
 	Table *string
 
+	// Specifies the data schema for the catalog source.
+	OutputSchemas []GlueSchema
+
+	//  Partitions satisfying this predicate are deleted. Files within the retention
+	// period in these partitions are not deleted.
+	PartitionPredicate *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1211,6 +1263,10 @@ type CodeGenConfigurationNode struct {
 	// Specifies a Hudi data source that is registered in the Glue Data Catalog.
 	CatalogHudiSource *CatalogHudiSource
 
+	// Specifies an Apache Iceberg data source that is registered in the Glue Data
+	// Catalog.
+	CatalogIcebergSource *CatalogIcebergSource
+
 	// Specifies an Apache Kafka data store in the Data Catalog.
 	CatalogKafkaSource *CatalogKafkaSource
 
@@ -1259,6 +1315,10 @@ type CodeGenConfigurationNode struct {
 
 	// Specifies a DynamoDBC Catalog data store in the Glue Data Catalog.
 	DynamoDBCatalogSource *DynamoDBCatalogSource
+
+	// Specifies a DynamoDB ELT connector source for extracting data from DynamoDB
+	// tables.
+	DynamoDBELTConnectorSource *DynamoDBELTConnectorSource
 
 	// Specifies your data quality evaluation criteria.
 	EvaluateDataQuality *EvaluateDataQuality
@@ -1342,6 +1402,10 @@ type CodeGenConfigurationNode struct {
 	// Specifies a transform that renames a single data property key.
 	RenameField *RenameField
 
+	// Specifies a route node that directs data to different output paths based on
+	// defined filtering conditions.
+	Route *Route
+
 	// Specifies a Delta Lake data source that is registered in the Glue Data Catalog.
 	// The data source must be stored in Amazon S3.
 	S3CatalogDeltaSource *S3CatalogDeltaSource
@@ -1349,6 +1413,10 @@ type CodeGenConfigurationNode struct {
 	// Specifies a Hudi data source that is registered in the Glue Data Catalog. The
 	// data source must be stored in Amazon S3.
 	S3CatalogHudiSource *S3CatalogHudiSource
+
+	// Specifies an Apache Iceberg data source that is registered in the Glue Data
+	// Catalog. The Iceberg data source must be stored in Amazon S3.
+	S3CatalogIcebergSource *S3CatalogIcebergSource
 
 	// Specifies an Amazon S3 data store in the Glue Data Catalog.
 	S3CatalogSource *S3CatalogSource
@@ -1391,6 +1459,10 @@ type CodeGenConfigurationNode struct {
 	// Defines configuration parameters for writing data to Amazon S3 using
 	// HyperDirect optimization.
 	S3HyperDirectTarget *S3HyperDirectTarget
+
+	// Specifies an Apache Iceberg catalog target that writes data to Amazon S3 and
+	// registers the table in the Glue Data Catalog.
+	S3IcebergCatalogTarget *S3IcebergCatalogTarget
 
 	// Defines configuration parameters for writing data to Amazon S3 as an Apache
 	// Iceberg table.
@@ -3608,6 +3680,65 @@ type DateColumnStatisticsData struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies additional options for DynamoDB ELT catalog operations.
+type DDBELTCatalogAdditionalOptions struct {
+
+	// Specifies the DynamoDB export configuration for the ELT operation.
+	DynamodbExport *string
+
+	// Specifies whether to unnest DynamoDB JSON format. When set to true , nested JSON
+	// structures in DynamoDB items are flattened.
+	DynamodbUnnestDDBJson bool
+
+	noSmithyDocumentSerde
+}
+
+// Specifies connection options for DynamoDB ELT (Extract, Load, Transform)
+// operations. This structure contains configuration parameters for connecting to
+// and extracting data from DynamoDB tables using the ELT connector.
+type DDBELTConnectionOptions struct {
+
+	// The Amazon Resource Name (ARN) of the DynamoDB table to extract data from. This
+	// parameter specifies the source table for the ELT operation.
+	//
+	// This member is required.
+	DynamodbTableArn *string
+
+	// Specifies the export type for DynamoDB data extraction. This parameter
+	// determines how data is exported from the DynamoDB table during the ELT process.
+	DynamodbExport DdbExportType
+
+	// The name of the Amazon S3 bucket used for intermediate storage during the
+	// DynamoDB ELT process. This bucket is used to temporarily store exported DynamoDB
+	// data before it is processed by the ELT job.
+	DynamodbS3Bucket *string
+
+	// The Amazon Web Services account ID of the owner of the S3 bucket specified in
+	// DynamodbS3Bucket . This parameter is required when the S3 bucket is owned by a
+	// different Amazon Web Services account than the one running the ELT job, enabling
+	// cross-account access to the intermediate storage bucket.
+	DynamodbS3BucketOwner *string
+
+	// The S3 object key prefix for files stored in the intermediate S3 bucket during
+	// the DynamoDB ELT process. This prefix helps organize and identify the temporary
+	// files created during data extraction.
+	DynamodbS3Prefix *string
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Security Token
+	// Service (STS) role to assume for accessing DynamoDB and S3 resources during the
+	// ELT operation. This role must have the necessary permissions to read from the
+	// DynamoDB table and write to the intermediate S3 bucket.
+	DynamodbStsRoleArn *string
+
+	// A boolean value that specifies whether to unnest DynamoDB JSON format during
+	// data extraction. When set to true , the connector will flatten nested JSON
+	// structures from DynamoDB items. When set to false , the original DynamoDB JSON
+	// structure is preserved.
+	DynamodbUnnestDDBJson bool
+
+	noSmithyDocumentSerde
+}
+
 // Defines column statistics supported for fixed-point number data columns.
 type DecimalColumnStatisticsData struct {
 
@@ -3864,6 +3995,9 @@ type DirectJDBCSource struct {
 	// This member is required.
 	Table *string
 
+	// Specifies the data schema for the direct JDBC source.
+	OutputSchemas []GlueSchema
+
 	// The temp directory of the JDBC Redshift source.
 	RedshiftTmpDir *string
 
@@ -4115,6 +4249,32 @@ type DynamoDBCatalogSource struct {
 	//
 	// This member is required.
 	Table *string
+
+	// Specifies additional connection options for the DynamoDB data source.
+	AdditionalOptions *DDBELTCatalogAdditionalOptions
+
+	// Specifies whether Point-in-Time Recovery (PITR) is enabled for the DynamoDB
+	// table. When set to true , allows reading from a specific point in time. The
+	// default value is false .
+	PitrEnabled *bool
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a DynamoDB ELT connector source for extracting data from DynamoDB
+// tables.
+type DynamoDBELTConnectorSource struct {
+
+	// The name of the DynamoDB ELT connector source.
+	//
+	// This member is required.
+	Name *string
+
+	// The connection options for the DynamoDB ELT connector source.
+	ConnectionOptions *DDBELTConnectionOptions
+
+	// Specifies the data schema for the DynamoDB ELT connector source.
+	OutputSchemas []GlueSchema
 
 	noSmithyDocumentSerde
 }
@@ -4763,6 +4923,9 @@ type GlueStudioSchemaColumn struct {
 	// This member is required.
 	Name *string
 
+	// The data type of the column as defined in Glue Studio.
+	GlueStudioType *string
+
 	// The hive type for this column in the Glue Studio schema.
 	Type *string
 
@@ -4897,6 +5060,29 @@ type GrokClassifier struct {
 
 	// The version of this classifier.
 	Version int64
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a group of filters with a logical operator that determines how the
+// filters are combined to evaluate routing conditions.
+type GroupFilters struct {
+
+	// A list of filter expressions that define the conditions for this group.
+	//
+	// This member is required.
+	Filters []FilterExpression
+
+	// The name of the filter group.
+	//
+	// This member is required.
+	GroupName *string
+
+	// The logical operator used to combine the filters in this group. Determines
+	// whether all filters must match (AND) or any filter can match (OR).
+	//
+	// This member is required.
+	LogicalOperator FilterLogicalOperator
 
 	noSmithyDocumentSerde
 }
@@ -5860,44 +6046,34 @@ type Job struct {
 	// restarted during the maintenance window after 7 days.
 	Timeout *int32
 
-	// The type of predefined worker that is allocated when a job runs. Accepts a
-	// value of G.1X, G.2X, G.4X, G.8X or G.025X for Spark jobs. Accepts the value Z.2X
-	// for Ray jobs.
+	// The type of predefined worker that is allocated when a job runs.
 	//
-	//   - For the G.1X worker type, each worker maps to 1 DPU (4 vCPUs, 16 GB of
-	//   memory) with 94GB disk, and provides 1 executor per worker. We recommend this
-	//   worker type for workloads such as data transforms, joins, and queries, to offers
-	//   a scalable and cost effective way to run most jobs.
+	// Glue provides multiple worker types to accommodate different workload
+	// requirements:
 	//
-	//   - For the G.2X worker type, each worker maps to 2 DPU (8 vCPUs, 32 GB of
-	//   memory) with 138GB disk, and provides 1 executor per worker. We recommend this
-	//   worker type for workloads such as data transforms, joins, and queries, to offers
-	//   a scalable and cost effective way to run most jobs.
+	// G Worker Types (General-purpose compute workers):
 	//
-	//   - For the G.4X worker type, each worker maps to 4 DPU (16 vCPUs, 64 GB of
-	//   memory) with 256GB disk, and provides 1 executor per worker. We recommend this
-	//   worker type for jobs whose workloads contain your most demanding transforms,
-	//   aggregations, joins, and queries. This worker type is available only for Glue
-	//   version 3.0 or later Spark ETL jobs in the following Amazon Web Services
-	//   Regions: US East (Ohio), US East (N. Virginia), US West (Oregon), Asia Pacific
-	//   (Singapore), Asia Pacific (Sydney), Asia Pacific (Tokyo), Canada (Central),
-	//   Europe (Frankfurt), Europe (Ireland), and Europe (Stockholm).
+	//   - G.1X: 1 DPU (4 vCPUs, 16 GB memory, 94GB disk)
 	//
-	//   - For the G.8X worker type, each worker maps to 8 DPU (32 vCPUs, 128 GB of
-	//   memory) with 512GB disk, and provides 1 executor per worker. We recommend this
-	//   worker type for jobs whose workloads contain your most demanding transforms,
-	//   aggregations, joins, and queries. This worker type is available only for Glue
-	//   version 3.0 or later Spark ETL jobs, in the same Amazon Web Services Regions as
-	//   supported for the G.4X worker type.
+	//   - G.2X: 2 DPU (8 vCPUs, 32 GB memory, 138GB disk)
 	//
-	//   - For the G.025X worker type, each worker maps to 0.25 DPU (2 vCPUs, 4 GB of
-	//   memory) with 84GB disk, and provides 1 executor per worker. We recommend this
-	//   worker type for low volume streaming jobs. This worker type is only available
-	//   for Glue version 3.0 or later streaming jobs.
+	//   - G.4X: 4 DPU (16 vCPUs, 64 GB memory, 256GB disk)
 	//
-	//   - For the Z.2X worker type, each worker maps to 2 M-DPU (8vCPUs, 64 GB of
-	//   memory) with 128 GB disk, and provides up to 8 Ray workers based on the
-	//   autoscaler.
+	//   - G.8X: 8 DPU (32 vCPUs, 128 GB memory, 512GB disk)
+	//
+	//   - G.12X: 12 DPU (48 vCPUs, 192 GB memory, 768GB disk)
+	//
+	//   - G.16X: 16 DPU (64 vCPUs, 256 GB memory, 1024GB disk)
+	//
+	// R Worker Types (Memory-optimized workers):
+	//
+	//   - R.1X: 1 M-DPU (4 vCPUs, 32 GB memory)
+	//
+	//   - R.2X: 2 M-DPU (8 vCPUs, 64 GB memory)
+	//
+	//   - R.4X: 4 M-DPU (16 vCPUs, 128 GB memory)
+	//
+	//   - R.8X: 8 M-DPU (32 vCPUs, 256 GB memory)
 	WorkerType WorkerType
 
 	noSmithyDocumentSerde
@@ -6654,6 +6830,11 @@ type KinesisStreamingSourceOptions struct {
 
 	// The URL of the Kinesis endpoint.
 	EndpointUrl *string
+
+	// The Amazon Resource Name (ARN) of the Kinesis Data Streams enhanced fan-out
+	// consumer. When specified, enables enhanced fan-out for dedicated throughput and
+	// lower latency data consumption.
+	FanoutConsumerARN *string
 
 	// The minimum time delay between two consecutive getRecords operations, specified
 	// in ms. The default value is 1000 . This option is only configurable for Glue
@@ -7708,12 +7889,40 @@ type PIIDetection struct {
 	// This member is required.
 	PiiType PiiType
 
+	// Additional parameters for configuring PII detection behavior and sensitivity
+	// settings.
+	DetectionParameters *string
+
+	// The sensitivity level for PII detection. Higher sensitivity levels detect more
+	// potential PII but may result in more false positives.
+	DetectionSensitivity *string
+
 	// Indicates the value that will replace the detected entity.
 	MaskValue *string
+
+	// A regular expression pattern used to identify additional PII content beyond the
+	// standard detection algorithms.
+	MatchPattern *string
+
+	// The number of characters to exclude from redaction on the left side of detected
+	// PII content. This allows preserving context around the sensitive data.
+	NumLeftCharsToExclude *int32
+
+	// The number of characters to exclude from redaction on the right side of
+	// detected PII content. This allows preserving context around the sensitive data.
+	NumRightCharsToExclude *int32
 
 	// Indicates the output column name that will contain any entity type detected in
 	// that row.
 	OutputColumnName *string
+
+	// The character used to replace detected PII content when redaction is enabled.
+	// The default redaction character is * .
+	RedactChar *string
+
+	// Specifies whether to redact the detected PII text. When set to true , PII
+	// content is replaced with redaction characters.
+	RedactText *string
 
 	// Indicates the fraction of the data to sample when scanning for PII entities.
 	SampleFraction *float64
@@ -8167,6 +8376,29 @@ type RetentionMetrics struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies a route node that directs data to different output paths based on
+// defined filtering conditions.
+type Route struct {
+
+	// A list of group filters that define the routing conditions and criteria for
+	// directing data to different output paths.
+	//
+	// This member is required.
+	GroupFiltersList []GroupFilters
+
+	// The input connection for the route node.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of the route node.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // A run identifier.
 type RunIdentifier struct {
 
@@ -8256,6 +8488,34 @@ type S3CatalogHudiSource struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies an Apache Iceberg data source that is registered in the Glue Data
+// Catalog. The Iceberg data source must be stored in Amazon S3.
+type S3CatalogIcebergSource struct {
+
+	// The name of the database to read from.
+	//
+	// This member is required.
+	Database *string
+
+	// The name of the Iceberg data source.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the table in the database to read from.
+	//
+	// This member is required.
+	Table *string
+
+	// Specifies additional connection options for the Iceberg data source.
+	AdditionalIcebergOptions map[string]string
+
+	// Specifies the data schema for the Iceberg source.
+	OutputSchemas []GlueSchema
+
+	noSmithyDocumentSerde
+}
+
 // Specifies an Amazon S3 data store in the Glue Data Catalog.
 type S3CatalogSource struct {
 
@@ -8306,6 +8566,11 @@ type S3CatalogTarget struct {
 	//
 	// This member is required.
 	Table *string
+
+	// Specifies whether to automatically enable data quality evaluation for the S3
+	// catalog target. When set to true , data quality checks are performed
+	// automatically during the write operation.
+	AutoDataQuality *AutoDataQuality
 
 	// Specifies native partitioning using a sequence of keys.
 	PartitionKeys [][]string
@@ -8441,6 +8706,14 @@ type S3DeltaCatalogTarget struct {
 	// Specifies additional connection options for the connector.
 	AdditionalOptions map[string]string
 
+	// Specifies whether to automatically enable data quality evaluation for the S3
+	// Delta catalog target. When set to true , data quality checks are performed
+	// automatically during the write operation.
+	AutoDataQuality *AutoDataQuality
+
+	// Specifies the data schema for the S3 Delta catalog target.
+	OutputSchemas []GlueSchema
+
 	// Specifies native partitioning using a sequence of keys.
 	PartitionKeys [][]string
 
@@ -8481,6 +8754,11 @@ type S3DeltaDirectTarget struct {
 
 	// Specifies additional connection options for the connector.
 	AdditionalOptions map[string]string
+
+	// Specifies whether to automatically enable data quality evaluation for the S3
+	// Delta direct target. When set to true , data quality checks are performed
+	// automatically during the write operation.
+	AutoDataQuality *AutoDataQuality
 
 	// Specifies the number of target partitions for distributing Delta Lake dataset
 	// files across Amazon S3.
@@ -8562,6 +8840,11 @@ type S3DirectTarget struct {
 	// This member is required.
 	Path *string
 
+	// Specifies whether to automatically enable data quality evaluation for the S3
+	// direct target. When set to true , data quality checks are performed
+	// automatically during the write operation.
+	AutoDataQuality *AutoDataQuality
+
 	// Specifies how the data is compressed. This is generally not necessary if the
 	// data has a standard file extension. Possible values are "gzip" and "bzip" ).
 	Compression *string
@@ -8569,6 +8852,9 @@ type S3DirectTarget struct {
 	// Specifies the number of target partitions when writing data directly to Amazon
 	// S3.
 	NumberTargetPartitions *string
+
+	// Specifies the data schema for the S3 direct target.
+	OutputSchemas []GlueSchema
 
 	// Specifies native partitioning using a sequence of keys.
 	PartitionKeys [][]string
@@ -8629,7 +8915,7 @@ type S3ExcelSource struct {
 	// The number of rows to process from each Excel file.
 	NumberRows *int64
 
-	// The AWS Glue schemas to apply to the processed data.
+	// The Glue schemas to apply to the processed data.
 	OutputSchemas []GlueSchema
 
 	// Indicates whether to recursively process subdirectories.
@@ -8660,12 +8946,17 @@ type S3GlueParquetTarget struct {
 	// This member is required.
 	Path *string
 
+	// Specifies whether to automatically enable data quality evaluation for the S3
+	// Glue Parquet target. When set to true , data quality checks are performed
+	// automatically during the write operation.
+	AutoDataQuality *AutoDataQuality
+
 	// Specifies how the data is compressed. This is generally not necessary if the
 	// data has a standard file extension. Possible values are "gzip" and "bzip" ).
 	Compression ParquetCompressionType
 
 	// Specifies the number of target partitions for Parquet files when writing to
-	// Amazon S3 using AWS Glue.
+	// Amazon S3 using Glue.
 	NumberTargetPartitions *string
 
 	// Specifies native partitioning using a sequence of keys.
@@ -8704,6 +8995,14 @@ type S3HudiCatalogTarget struct {
 	//
 	// This member is required.
 	Table *string
+
+	// Specifies whether to automatically enable data quality evaluation for the S3
+	// Hudi catalog target. When set to true , data quality checks are performed
+	// automatically during the write operation.
+	AutoDataQuality *AutoDataQuality
+
+	// Specifies the data schema for the S3 Hudi catalog target.
+	OutputSchemas []GlueSchema
 
 	// Specifies native partitioning using a sequence of keys.
 	PartitionKeys [][]string
@@ -8747,6 +9046,11 @@ type S3HudiDirectTarget struct {
 	//
 	// This member is required.
 	Path *string
+
+	// Specifies whether to automatically enable data quality evaluation for the S3
+	// Hudi direct target. When set to true , data quality checks are performed
+	// automatically during the write operation.
+	AutoDataQuality *AutoDataQuality
 
 	// Specifies the number of target partitions for distributing Hudi dataset files
 	// across Amazon S3.
@@ -8804,14 +9108,66 @@ type S3HyperDirectTarget struct {
 	// This member is required.
 	Path *string
 
+	// Specifies whether to automatically enable data quality evaluation for the S3
+	// Hyper direct target. When set to true , data quality checks are performed
+	// automatically during the write operation.
+	AutoDataQuality *AutoDataQuality
+
 	// The compression type to apply to the output data.
 	Compression HyperTargetCompressionType
+
+	// Specifies the data output format for the HyperDirect target.
+	Format TargetFormat
+
+	// Specifies the data schema for the S3 Hyper direct target.
+	OutputSchemas []GlueSchema
 
 	// Defines the partitioning strategy for the output data.
 	PartitionKeys [][]string
 
 	// Defines how schema changes are handled during write operations.
 	SchemaChangePolicy *DirectSchemaChangePolicy
+
+	noSmithyDocumentSerde
+}
+
+// Specifies an Apache Iceberg catalog target that writes data to Amazon S3 and
+// registers the table in the Glue Data Catalog.
+type S3IcebergCatalogTarget struct {
+
+	// The name of the database to write to.
+	//
+	// This member is required.
+	Database *string
+
+	// The input connection for the Iceberg catalog target.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of the Iceberg catalog target.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the table to write to in the catalog.
+	//
+	// This member is required.
+	Table *string
+
+	// Specifies additional connection options for the Iceberg catalog target.
+	AdditionalOptions map[string]string
+
+	// Specifies whether to automatically enable data quality evaluation for the S3
+	// Iceberg catalog target. When set to true , data quality checks are performed
+	// automatically during the write operation.
+	AutoDataQuality *AutoDataQuality
+
+	// A list of partition keys for the Iceberg table.
+	PartitionKeys [][]string
+
+	// The policy for handling schema changes in the catalog target.
+	SchemaChangePolicy *CatalogSchemaChangePolicy
 
 	noSmithyDocumentSerde
 }
@@ -8850,9 +9206,18 @@ type S3IcebergDirectTarget struct {
 	// behavior.
 	AdditionalOptions map[string]string
 
+	// Specifies configuration options for automatic data quality evaluation in Glue
+	// jobs. This structure enables automated data quality checks and monitoring during
+	// ETL operations, helping to ensure data integrity and reliability without manual
+	// intervention.
+	AutoDataQuality *AutoDataQuality
+
 	// Sets the number of target partitions for distributing Iceberg table files
 	// across S3.
 	NumberTargetPartitions *string
+
+	// Specifies the data schema for the S3 Iceberg direct target.
+	OutputSchemas []GlueSchema
 
 	// Specifies the columns used to partition the Iceberg table data in S3.
 	PartitionKeys [][]string

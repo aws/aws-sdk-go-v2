@@ -53,7 +53,7 @@ type CreateIdMappingWorkflowInput struct {
 	Description *string
 
 	// A list of IdMappingWorkflowOutputSource objects, each of which contains fields
-	// OutputS3Path and Output .
+	// outputS3Path and KMSArn .
 	OutputSourceConfig []types.IdMappingWorkflowOutputSource
 
 	// The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this
@@ -95,7 +95,7 @@ type CreateIdMappingWorkflowOutput struct {
 	Description *string
 
 	// A list of IdMappingWorkflowOutputSource objects, each of which contains fields
-	// OutputS3Path and Output .
+	// outputS3Path and KMSArn .
 	OutputSourceConfig []types.IdMappingWorkflowOutputSource
 
 	// The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this

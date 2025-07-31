@@ -33970,6 +33970,55 @@ func awsAwsjson11_deserializeDocumentAuthenticationTypes(v *[]types.Authenticati
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAutoDataQuality(v **types.AutoDataQuality, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutoDataQuality
+	if *v == nil {
+		sv = &types.AutoDataQuality{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EvaluationContext":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.EvaluationContext = ptr.String(jtv)
+			}
+
+		case "IsEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanValue to be of type *bool, got %T instead", value)
+				}
+				sv.IsEnabled = jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentBackfillError(v **types.BackfillError, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -35570,6 +35619,74 @@ func awsAwsjson11_deserializeDocumentCatalogHudiSource(v **types.CatalogHudiSour
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentCatalogIcebergSource(v **types.CatalogIcebergSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CatalogIcebergSource
+	if *v == nil {
+		sv = &types.CatalogIcebergSource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AdditionalIcebergOptions":
+			if err := awsAwsjson11_deserializeDocumentAdditionalOptions(&sv.AdditionalIcebergOptions, value); err != nil {
+				return err
+			}
+
+		case "Database":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.Database = ptr.String(jtv)
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "OutputSchemas":
+			if err := awsAwsjson11_deserializeDocumentGlueSchemas(&sv.OutputSchemas, value); err != nil {
+				return err
+			}
+
+		case "Table":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.Table = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentCatalogImportStatus(v **types.CatalogImportStatus, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -35979,6 +36096,20 @@ func awsAwsjson11_deserializeDocumentCatalogSource(v **types.CatalogSource, valu
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "OutputSchemas":
+			if err := awsAwsjson11_deserializeDocumentGlueSchemas(&sv.OutputSchemas, value); err != nil {
+				return err
+			}
+
+		case "PartitionPredicate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.PartitionPredicate = ptr.String(jtv)
+			}
+
 		case "Table":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -36366,6 +36497,11 @@ func awsAwsjson11_deserializeDocumentCodeGenConfigurationNode(v **types.CodeGenC
 				return err
 			}
 
+		case "CatalogIcebergSource":
+			if err := awsAwsjson11_deserializeDocumentCatalogIcebergSource(&sv.CatalogIcebergSource, value); err != nil {
+				return err
+			}
+
 		case "CatalogKafkaSource":
 			if err := awsAwsjson11_deserializeDocumentCatalogKafkaSource(&sv.CatalogKafkaSource, value); err != nil {
 				return err
@@ -36438,6 +36574,11 @@ func awsAwsjson11_deserializeDocumentCodeGenConfigurationNode(v **types.CodeGenC
 
 		case "DynamoDBCatalogSource":
 			if err := awsAwsjson11_deserializeDocumentDynamoDBCatalogSource(&sv.DynamoDBCatalogSource, value); err != nil {
+				return err
+			}
+
+		case "DynamoDBELTConnectorSource":
+			if err := awsAwsjson11_deserializeDocumentDynamoDBELTConnectorSource(&sv.DynamoDBELTConnectorSource, value); err != nil {
 				return err
 			}
 
@@ -36561,6 +36702,11 @@ func awsAwsjson11_deserializeDocumentCodeGenConfigurationNode(v **types.CodeGenC
 				return err
 			}
 
+		case "Route":
+			if err := awsAwsjson11_deserializeDocumentRoute(&sv.Route, value); err != nil {
+				return err
+			}
+
 		case "S3CatalogDeltaSource":
 			if err := awsAwsjson11_deserializeDocumentS3CatalogDeltaSource(&sv.S3CatalogDeltaSource, value); err != nil {
 				return err
@@ -36568,6 +36714,11 @@ func awsAwsjson11_deserializeDocumentCodeGenConfigurationNode(v **types.CodeGenC
 
 		case "S3CatalogHudiSource":
 			if err := awsAwsjson11_deserializeDocumentS3CatalogHudiSource(&sv.S3CatalogHudiSource, value); err != nil {
+				return err
+			}
+
+		case "S3CatalogIcebergSource":
+			if err := awsAwsjson11_deserializeDocumentS3CatalogIcebergSource(&sv.S3CatalogIcebergSource, value); err != nil {
 				return err
 			}
 
@@ -36633,6 +36784,11 @@ func awsAwsjson11_deserializeDocumentCodeGenConfigurationNode(v **types.CodeGenC
 
 		case "S3HyperDirectTarget":
 			if err := awsAwsjson11_deserializeDocumentS3HyperDirectTarget(&sv.S3HyperDirectTarget, value); err != nil {
+				return err
+			}
+
+		case "S3IcebergCatalogTarget":
+			if err := awsAwsjson11_deserializeDocumentS3IcebergCatalogTarget(&sv.S3IcebergCatalogTarget, value); err != nil {
 				return err
 			}
 
@@ -43691,6 +43847,149 @@ func awsAwsjson11_deserializeDocumentDateColumnStatisticsData(v **types.DateColu
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentDDBELTCatalogAdditionalOptions(v **types.DDBELTCatalogAdditionalOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DDBELTCatalogAdditionalOptions
+	if *v == nil {
+		sv = &types.DDBELTCatalogAdditionalOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DynamodbExport":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.DynamodbExport = ptr.String(jtv)
+			}
+
+		case "DynamodbUnnestDDBJson":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanValue to be of type *bool, got %T instead", value)
+				}
+				sv.DynamodbUnnestDDBJson = jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDDBELTConnectionOptions(v **types.DDBELTConnectionOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DDBELTConnectionOptions
+	if *v == nil {
+		sv = &types.DDBELTConnectionOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DynamodbExport":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DdbExportType to be of type string, got %T instead", value)
+				}
+				sv.DynamodbExport = types.DdbExportType(jtv)
+			}
+
+		case "DynamodbS3Bucket":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.DynamodbS3Bucket = ptr.String(jtv)
+			}
+
+		case "DynamodbS3BucketOwner":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.DynamodbS3BucketOwner = ptr.String(jtv)
+			}
+
+		case "DynamodbS3Prefix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.DynamodbS3Prefix = ptr.String(jtv)
+			}
+
+		case "DynamodbStsRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.DynamodbStsRoleArn = ptr.String(jtv)
+			}
+
+		case "DynamodbTableArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.DynamodbTableArn = ptr.String(jtv)
+			}
+
+		case "DynamodbUnnestDDBJson":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanValue to be of type *bool, got %T instead", value)
+				}
+				sv.DynamodbUnnestDDBJson = jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentDecimalColumnStatisticsData(v **types.DecimalColumnStatisticsData, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -44344,6 +44643,11 @@ func awsAwsjson11_deserializeDocumentDirectJDBCSource(v **types.DirectJDBCSource
 					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "OutputSchemas":
+			if err := awsAwsjson11_deserializeDocumentGlueSchemas(&sv.OutputSchemas, value); err != nil {
+				return err
 			}
 
 		case "RedshiftTmpDir":
@@ -45156,6 +45460,11 @@ func awsAwsjson11_deserializeDocumentDynamoDBCatalogSource(v **types.DynamoDBCat
 
 	for key, value := range shape {
 		switch key {
+		case "AdditionalOptions":
+			if err := awsAwsjson11_deserializeDocumentDDBELTCatalogAdditionalOptions(&sv.AdditionalOptions, value); err != nil {
+				return err
+			}
+
 		case "Database":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -45174,6 +45483,15 @@ func awsAwsjson11_deserializeDocumentDynamoDBCatalogSource(v **types.DynamoDBCat
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "PitrEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.PitrEnabled = ptr.Bool(jtv)
+			}
+
 		case "Table":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -45181,6 +45499,56 @@ func awsAwsjson11_deserializeDocumentDynamoDBCatalogSource(v **types.DynamoDBCat
 					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
 				}
 				sv.Table = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDynamoDBELTConnectorSource(v **types.DynamoDBELTConnectorSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DynamoDBELTConnectorSource
+	if *v == nil {
+		sv = &types.DynamoDBELTConnectorSource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ConnectionOptions":
+			if err := awsAwsjson11_deserializeDocumentDDBELTConnectionOptions(&sv.ConnectionOptions, value); err != nil {
+				return err
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "OutputSchemas":
+			if err := awsAwsjson11_deserializeDocumentGlueSchemas(&sv.OutputSchemas, value); err != nil {
+				return err
 			}
 
 		default:
@@ -47936,6 +48304,15 @@ func awsAwsjson11_deserializeDocumentGlueStudioSchemaColumn(v **types.GlueStudio
 
 	for key, value := range shape {
 		switch key {
+		case "GlueStudioType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ColumnTypeString to be of type string, got %T instead", value)
+				}
+				sv.GlueStudioType = ptr.String(jtv)
+			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -48393,6 +48770,94 @@ func awsAwsjson11_deserializeDocumentGrokClassifier(v **types.GrokClassifier, va
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentGroupFilters(v **types.GroupFilters, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GroupFilters
+	if *v == nil {
+		sv = &types.GroupFilters{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Filters":
+			if err := awsAwsjson11_deserializeDocumentFilterExpressions(&sv.Filters, value); err != nil {
+				return err
+			}
+
+		case "GroupName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericLimitedString to be of type string, got %T instead", value)
+				}
+				sv.GroupName = ptr.String(jtv)
+			}
+
+		case "LogicalOperator":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FilterLogicalOperator to be of type string, got %T instead", value)
+				}
+				sv.LogicalOperator = types.FilterLogicalOperator(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentGroupFiltersList(v *[]types.GroupFilters, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.GroupFilters
+	if *v == nil {
+		cv = []types.GroupFilters{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.GroupFilters
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentGroupFilters(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -52427,6 +52892,15 @@ func awsAwsjson11_deserializeDocumentKinesisStreamingSourceOptions(v **types.Kin
 				sv.EndpointUrl = ptr.String(jtv)
 			}
 
+		case "FanoutConsumerARN":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.FanoutConsumerARN = ptr.String(jtv)
+			}
+
 		case "IdleTimeBetweenReadsInMs":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -56199,6 +56673,24 @@ func awsAwsjson11_deserializeDocumentPIIDetection(v **types.PIIDetection, value 
 
 	for key, value := range shape {
 		switch key {
+		case "DetectionParameters":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.DetectionParameters = ptr.String(jtv)
+			}
+
+		case "DetectionSensitivity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.DetectionSensitivity = ptr.String(jtv)
+			}
+
 		case "EntityTypesToDetect":
 			if err := awsAwsjson11_deserializeDocumentEnclosedInStringProperties(&sv.EntityTypesToDetect, value); err != nil {
 				return err
@@ -56218,6 +56710,15 @@ func awsAwsjson11_deserializeDocumentPIIDetection(v **types.PIIDetection, value 
 				sv.MaskValue = ptr.String(jtv)
 			}
 
+		case "MatchPattern":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.MatchPattern = ptr.String(jtv)
+			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -56225,6 +56726,32 @@ func awsAwsjson11_deserializeDocumentPIIDetection(v **types.PIIDetection, value 
 					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "NumLeftCharsToExclude":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoxedPositiveInt to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.NumLeftCharsToExclude = ptr.Int32(int32(i64))
+			}
+
+		case "NumRightCharsToExclude":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoxedPositiveInt to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.NumRightCharsToExclude = ptr.Int32(int32(i64))
 			}
 
 		case "OutputColumnName":
@@ -56243,6 +56770,24 @@ func awsAwsjson11_deserializeDocumentPIIDetection(v **types.PIIDetection, value 
 					return fmt.Errorf("expected PiiType to be of type string, got %T instead", value)
 				}
 				sv.PiiType = types.PiiType(jtv)
+			}
+
+		case "RedactChar":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.RedactChar = ptr.String(jtv)
+			}
+
+		case "RedactText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.RedactText = ptr.String(jtv)
 			}
 
 		case "SampleFraction":
@@ -57993,6 +58538,56 @@ func awsAwsjson11_deserializeDocumentRetentionMetrics(v **types.RetentionMetrics
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentRoute(v **types.Route, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Route
+	if *v == nil {
+		sv = &types.Route{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "GroupFiltersList":
+			if err := awsAwsjson11_deserializeDocumentGroupFiltersList(&sv.GroupFiltersList, value); err != nil {
+				return err
+			}
+
+		case "Inputs":
+			if err := awsAwsjson11_deserializeDocumentOneInput(&sv.Inputs, value); err != nil {
+				return err
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentRuleMetricsMap(v *map[string]float64, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -58342,6 +58937,74 @@ func awsAwsjson11_deserializeDocumentS3CatalogHudiSource(v **types.S3CatalogHudi
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentS3CatalogIcebergSource(v **types.S3CatalogIcebergSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3CatalogIcebergSource
+	if *v == nil {
+		sv = &types.S3CatalogIcebergSource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AdditionalIcebergOptions":
+			if err := awsAwsjson11_deserializeDocumentAdditionalOptions(&sv.AdditionalIcebergOptions, value); err != nil {
+				return err
+			}
+
+		case "Database":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.Database = ptr.String(jtv)
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "OutputSchemas":
+			if err := awsAwsjson11_deserializeDocumentGlueSchemas(&sv.OutputSchemas, value); err != nil {
+				return err
+			}
+
+		case "Table":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.Table = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentS3CatalogSource(v **types.S3CatalogSource, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -58436,6 +59099,11 @@ func awsAwsjson11_deserializeDocumentS3CatalogTarget(v **types.S3CatalogTarget, 
 
 	for key, value := range shape {
 		switch key {
+		case "AutoDataQuality":
+			if err := awsAwsjson11_deserializeDocumentAutoDataQuality(&sv.AutoDataQuality, value); err != nil {
+				return err
+			}
+
 		case "Database":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -58708,6 +59376,11 @@ func awsAwsjson11_deserializeDocumentS3DeltaCatalogTarget(v **types.S3DeltaCatal
 				return err
 			}
 
+		case "AutoDataQuality":
+			if err := awsAwsjson11_deserializeDocumentAutoDataQuality(&sv.AutoDataQuality, value); err != nil {
+				return err
+			}
+
 		case "Database":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -58729,6 +59402,11 @@ func awsAwsjson11_deserializeDocumentS3DeltaCatalogTarget(v **types.S3DeltaCatal
 					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "OutputSchemas":
+			if err := awsAwsjson11_deserializeDocumentGlueSchemas(&sv.OutputSchemas, value); err != nil {
+				return err
 			}
 
 		case "PartitionKeys":
@@ -58783,6 +59461,11 @@ func awsAwsjson11_deserializeDocumentS3DeltaDirectTarget(v **types.S3DeltaDirect
 		switch key {
 		case "AdditionalOptions":
 			if err := awsAwsjson11_deserializeDocumentAdditionalOptions(&sv.AdditionalOptions, value); err != nil {
+				return err
+			}
+
+		case "AutoDataQuality":
+			if err := awsAwsjson11_deserializeDocumentAutoDataQuality(&sv.AutoDataQuality, value); err != nil {
 				return err
 			}
 
@@ -59012,6 +59695,11 @@ func awsAwsjson11_deserializeDocumentS3DirectTarget(v **types.S3DirectTarget, va
 
 	for key, value := range shape {
 		switch key {
+		case "AutoDataQuality":
+			if err := awsAwsjson11_deserializeDocumentAutoDataQuality(&sv.AutoDataQuality, value); err != nil {
+				return err
+			}
+
 		case "Compression":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -59051,6 +59739,11 @@ func awsAwsjson11_deserializeDocumentS3DirectTarget(v **types.S3DirectTarget, va
 					return fmt.Errorf("expected NumberTargetPartitionsString to be of type string, got %T instead", value)
 				}
 				sv.NumberTargetPartitions = ptr.String(jtv)
+			}
+
+		case "OutputSchemas":
+			if err := awsAwsjson11_deserializeDocumentGlueSchemas(&sv.OutputSchemas, value); err != nil {
+				return err
 			}
 
 		case "PartitionKeys":
@@ -59334,6 +60027,11 @@ func awsAwsjson11_deserializeDocumentS3GlueParquetTarget(v **types.S3GlueParquet
 
 	for key, value := range shape {
 		switch key {
+		case "AutoDataQuality":
+			if err := awsAwsjson11_deserializeDocumentAutoDataQuality(&sv.AutoDataQuality, value); err != nil {
+				return err
+			}
+
 		case "Compression":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -59421,6 +60119,11 @@ func awsAwsjson11_deserializeDocumentS3HudiCatalogTarget(v **types.S3HudiCatalog
 				return err
 			}
 
+		case "AutoDataQuality":
+			if err := awsAwsjson11_deserializeDocumentAutoDataQuality(&sv.AutoDataQuality, value); err != nil {
+				return err
+			}
+
 		case "Database":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -59442,6 +60145,11 @@ func awsAwsjson11_deserializeDocumentS3HudiCatalogTarget(v **types.S3HudiCatalog
 					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "OutputSchemas":
+			if err := awsAwsjson11_deserializeDocumentGlueSchemas(&sv.OutputSchemas, value); err != nil {
+				return err
 			}
 
 		case "PartitionKeys":
@@ -59496,6 +60204,11 @@ func awsAwsjson11_deserializeDocumentS3HudiDirectTarget(v **types.S3HudiDirectTa
 		switch key {
 		case "AdditionalOptions":
 			if err := awsAwsjson11_deserializeDocumentAdditionalOptions(&sv.AdditionalOptions, value); err != nil {
+				return err
+			}
+
+		case "AutoDataQuality":
+			if err := awsAwsjson11_deserializeDocumentAutoDataQuality(&sv.AutoDataQuality, value); err != nil {
 				return err
 			}
 
@@ -59650,6 +60363,11 @@ func awsAwsjson11_deserializeDocumentS3HyperDirectTarget(v **types.S3HyperDirect
 
 	for key, value := range shape {
 		switch key {
+		case "AutoDataQuality":
+			if err := awsAwsjson11_deserializeDocumentAutoDataQuality(&sv.AutoDataQuality, value); err != nil {
+				return err
+			}
+
 		case "Compression":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -59657,6 +60375,103 @@ func awsAwsjson11_deserializeDocumentS3HyperDirectTarget(v **types.S3HyperDirect
 					return fmt.Errorf("expected HyperTargetCompressionType to be of type string, got %T instead", value)
 				}
 				sv.Compression = types.HyperTargetCompressionType(jtv)
+			}
+
+		case "Format":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TargetFormat to be of type string, got %T instead", value)
+				}
+				sv.Format = types.TargetFormat(jtv)
+			}
+
+		case "Inputs":
+			if err := awsAwsjson11_deserializeDocumentOneInput(&sv.Inputs, value); err != nil {
+				return err
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "OutputSchemas":
+			if err := awsAwsjson11_deserializeDocumentGlueSchemas(&sv.OutputSchemas, value); err != nil {
+				return err
+			}
+
+		case "PartitionKeys":
+			if err := awsAwsjson11_deserializeDocumentGlueStudioPathList(&sv.PartitionKeys, value); err != nil {
+				return err
+			}
+
+		case "Path":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.Path = ptr.String(jtv)
+			}
+
+		case "SchemaChangePolicy":
+			if err := awsAwsjson11_deserializeDocumentDirectSchemaChangePolicy(&sv.SchemaChangePolicy, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentS3IcebergCatalogTarget(v **types.S3IcebergCatalogTarget, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3IcebergCatalogTarget
+	if *v == nil {
+		sv = &types.S3IcebergCatalogTarget{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AdditionalOptions":
+			if err := awsAwsjson11_deserializeDocumentAdditionalOptions(&sv.AdditionalOptions, value); err != nil {
+				return err
+			}
+
+		case "AutoDataQuality":
+			if err := awsAwsjson11_deserializeDocumentAutoDataQuality(&sv.AutoDataQuality, value); err != nil {
+				return err
+			}
+
+		case "Database":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.Database = ptr.String(jtv)
 			}
 
 		case "Inputs":
@@ -59678,18 +60493,18 @@ func awsAwsjson11_deserializeDocumentS3HyperDirectTarget(v **types.S3HyperDirect
 				return err
 			}
 
-		case "Path":
+		case "SchemaChangePolicy":
+			if err := awsAwsjson11_deserializeDocumentCatalogSchemaChangePolicy(&sv.SchemaChangePolicy, value); err != nil {
+				return err
+			}
+
+		case "Table":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
 					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
 				}
-				sv.Path = ptr.String(jtv)
-			}
-
-		case "SchemaChangePolicy":
-			if err := awsAwsjson11_deserializeDocumentDirectSchemaChangePolicy(&sv.SchemaChangePolicy, value); err != nil {
-				return err
+				sv.Table = ptr.String(jtv)
 			}
 
 		default:
@@ -59725,6 +60540,11 @@ func awsAwsjson11_deserializeDocumentS3IcebergDirectTarget(v **types.S3IcebergDi
 		switch key {
 		case "AdditionalOptions":
 			if err := awsAwsjson11_deserializeDocumentAdditionalOptions(&sv.AdditionalOptions, value); err != nil {
+				return err
+			}
+
+		case "AutoDataQuality":
+			if err := awsAwsjson11_deserializeDocumentAutoDataQuality(&sv.AutoDataQuality, value); err != nil {
 				return err
 			}
 
@@ -59767,6 +60587,11 @@ func awsAwsjson11_deserializeDocumentS3IcebergDirectTarget(v **types.S3IcebergDi
 					return fmt.Errorf("expected NumberTargetPartitionsString to be of type string, got %T instead", value)
 				}
 				sv.NumberTargetPartitions = ptr.String(jtv)
+			}
+
+		case "OutputSchemas":
+			if err := awsAwsjson11_deserializeDocumentGlueSchemas(&sv.OutputSchemas, value); err != nil {
+				return err
 			}
 
 		case "PartitionKeys":

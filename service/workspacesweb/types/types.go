@@ -207,6 +207,36 @@ type DataProtectionSettingsSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The filter that specifies the events to monitor.
+//
+// The following types satisfy this interface:
+//
+//	EventFilterMemberAll
+//	EventFilterMemberInclude
+type EventFilter interface {
+	isEventFilter()
+}
+
+// The filter that monitors all of the available events, including any new events
+// emitted in the future.
+type EventFilterMemberAll struct {
+	Value Unit
+
+	noSmithyDocumentSerde
+}
+
+func (*EventFilterMemberAll) isEventFilter() {}
+
+// The filter that monitors only the listed set of events. New events are not
+// auto-monitored.
+type EventFilterMemberInclude struct {
+	Value []Event
+
+	noSmithyDocumentSerde
+}
+
+func (*EventFilterMemberInclude) isEventFilter() {}
+
 // The identity provider.
 type IdentityProvider struct {
 
@@ -446,6 +476,15 @@ type IpRule struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration of the log.
+type LogConfiguration struct {
+
+	// The configuration for delivering the logs to S3.
+	S3 *S3LogConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // A network settings resource that can be associated with a web portal. Once
 // associated with a web portal, network settings define how streaming instances
 // will connect with your specified VPC.
@@ -553,6 +592,9 @@ type Portal struct {
 	// The renderer that is used in streaming sessions.
 	RendererType RendererType
 
+	// The ARN of the session logger that is assocaited with the portal.
+	SessionLoggerArn *string
+
 	// A message that explains why the web portal is in its current status.
 	StatusReason *string
 
@@ -628,6 +670,9 @@ type PortalSummary struct {
 	// The renderer that is used in streaming sessions.
 	RendererType RendererType
 
+	// The ARN of the session logger that is assocaited with the portal.
+	SessionLoggerArn *string
+
 	// The ARN of the trust that is associated with this web portal.
 	TrustStoreArn *string
 
@@ -656,6 +701,35 @@ type RedactionPlaceHolder struct {
 	noSmithyDocumentSerde
 }
 
+// The S3 log configuration.
+type S3LogConfiguration struct {
+
+	// The S3 bucket name where logs are delivered.
+	//
+	// This member is required.
+	Bucket *string
+
+	// The folder structure that defines the organizational structure for log files in
+	// S3.
+	//
+	// This member is required.
+	FolderStructure FolderStructure
+
+	// The format of the LogFile that is written to S3.
+	//
+	// This member is required.
+	LogFileFormat LogFileFormat
+
+	// The expected bucket owner of the target S3 bucket. The caller must have
+	// permissions to write to the target bucket.
+	BucketOwner *string
+
+	// The S3 path prefix that determines where log files are stored.
+	KeyPrefix *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about a secure browser session.
 type Session struct {
 
@@ -679,6 +753,58 @@ type Session struct {
 
 	// The username of the session.
 	Username *string
+
+	noSmithyDocumentSerde
+}
+
+// The session logger resource.
+type SessionLogger struct {
+
+	// The ARN of the session logger resource.
+	//
+	// This member is required.
+	SessionLoggerArn *string
+
+	// The additional encryption context of the session logger.
+	AdditionalEncryptionContext map[string]string
+
+	// The associated portal ARN.
+	AssociatedPortalArns []string
+
+	// The date the session logger resource was created.
+	CreationDate *time.Time
+
+	// The custom managed key of the session logger.
+	CustomerManagedKey *string
+
+	// The human-readable display name.
+	DisplayName *string
+
+	// The filter that specifies which events to monitor.
+	EventFilter EventFilter
+
+	// The configuration that specifies where logs are fowarded.
+	LogConfiguration *LogConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The summary of the session logger resource.
+type SessionLoggerSummary struct {
+
+	// The ARN of the session logger resource.
+	//
+	// This member is required.
+	SessionLoggerArn *string
+
+	// The date the session logger resource was created.
+	CreationDate *time.Time
+
+	// The human-readable display name.
+	DisplayName *string
+
+	// The configuration that specifies where the logs are fowarded.
+	LogConfiguration *LogConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -942,4 +1068,19 @@ type ValidationExceptionField struct {
 	noSmithyDocumentSerde
 }
 
+type Unit struct {
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isEventFilter() {}

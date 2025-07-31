@@ -107,6 +107,12 @@ type TerminateInstancesInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
+	// Forces the instances to terminate. The instance will first attempt a graceful
+	// shutdown, which includes flushing file system caches and metadata. If the
+	// graceful shutdown fails to complete within the timeout period, the instance
+	// shuts down forcibly without flushing the file system caches and metadata.
+	Force *bool
+
 	// Specifies whether to bypass the graceful OS shutdown process when the instance
 	// is terminated.
 	//

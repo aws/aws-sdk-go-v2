@@ -27410,6 +27410,12 @@ func awsRestjson1_serializeDocumentDataSourceParameters(v types.DataSourceParame
 			return err
 		}
 
+	case *types.DataSourceParametersMemberImpalaParameters:
+		av := object.Key("ImpalaParameters")
+		if err := awsRestjson1_serializeDocumentImpalaParameters(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.DataSourceParametersMemberJiraParameters:
 		av := object.Key("JiraParameters")
 		if err := awsRestjson1_serializeDocumentJiraParameters(&uv.Value, av); err != nil {
@@ -33287,6 +33293,33 @@ func awsRestjson1_serializeDocumentImageStaticFile(v *types.ImageStaticFile, val
 	if v.StaticFileId != nil {
 		ok := object.Key("StaticFileId")
 		ok.String(*v.StaticFileId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentImpalaParameters(v *types.ImpalaParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Database != nil {
+		ok := object.Key("Database")
+		ok.String(*v.Database)
+	}
+
+	if v.Host != nil {
+		ok := object.Key("Host")
+		ok.String(*v.Host)
+	}
+
+	if v.Port != nil {
+		ok := object.Key("Port")
+		ok.Integer(*v.Port)
+	}
+
+	if v.SqlEndpointPath != nil {
+		ok := object.Key("SqlEndpointPath")
+		ok.String(*v.SqlEndpointPath)
 	}
 
 	return nil

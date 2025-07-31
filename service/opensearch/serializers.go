@@ -6723,6 +6723,13 @@ func awsRestjson1_serializeDocumentAdvancedSecurityOptionsInput(v *types.Advance
 		ok.Boolean(*v.Enabled)
 	}
 
+	if v.IAMFederationOptions != nil {
+		ok := object.Key("IAMFederationOptions")
+		if err := awsRestjson1_serializeDocumentIAMFederationOptionsInput(v.IAMFederationOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.InternalUserDatabaseEnabled != nil {
 		ok := object.Key("InternalUserDatabaseEnabled")
 		ok.Boolean(*v.InternalUserDatabaseEnabled)
@@ -7353,6 +7360,28 @@ func awsRestjson1_serializeDocumentFilterList(v []types.Filter, value smithyjson
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIAMFederationOptionsInput(v *types.IAMFederationOptionsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled != nil {
+		ok := object.Key("Enabled")
+		ok.Boolean(*v.Enabled)
+	}
+
+	if v.RolesKey != nil {
+		ok := object.Key("RolesKey")
+		ok.String(*v.RolesKey)
+	}
+
+	if v.SubjectKey != nil {
+		ok := object.Key("SubjectKey")
+		ok.String(*v.SubjectKey)
+	}
+
 	return nil
 }
 

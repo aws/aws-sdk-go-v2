@@ -110,6 +110,18 @@ func TestCheckSnapshot_AssociateNetworkSettings(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AssociateSessionLogger(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateSessionLogger(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateSessionLogger")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AssociateTrustStore(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateTrustStore(context.Background(), nil, func(o *Options) {
@@ -211,6 +223,18 @@ func TestCheckSnapshot_CreatePortal(t *testing.T) {
 	_, err := svc.CreatePortal(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreatePortal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateSessionLogger(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateSessionLogger(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateSessionLogger")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -326,6 +350,18 @@ func TestCheckSnapshot_DeletePortal(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteSessionLogger(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSessionLogger(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteSessionLogger")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteTrustStore(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteTrustStore(context.Background(), nil, func(o *Options) {
@@ -403,6 +439,18 @@ func TestCheckSnapshot_DisassociateNetworkSettings(t *testing.T) {
 	_, err := svc.DisassociateNetworkSettings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DisassociateNetworkSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DisassociateSessionLogger(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateSessionLogger(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateSessionLogger")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -554,6 +602,18 @@ func TestCheckSnapshot_GetSession(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetSessionLogger(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSessionLogger(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetSessionLogger")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetTrustStore(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTrustStore(context.Background(), nil, func(o *Options) {
@@ -667,6 +727,18 @@ func TestCheckSnapshot_ListPortals(t *testing.T) {
 	_, err := svc.ListPortals(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListPortals")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListSessionLoggers(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSessionLoggers(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListSessionLoggers")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -842,6 +914,18 @@ func TestCheckSnapshot_UpdatePortal(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateSessionLogger(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateSessionLogger(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateSessionLogger")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateTrustStore(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateTrustStore(context.Background(), nil, func(o *Options) {
@@ -918,6 +1002,18 @@ func TestUpdateSnapshot_AssociateNetworkSettings(t *testing.T) {
 	_, err := svc.AssociateNetworkSettings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AssociateNetworkSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AssociateSessionLogger(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateSessionLogger(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateSessionLogger")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1033,6 +1129,18 @@ func TestUpdateSnapshot_CreatePortal(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateSessionLogger(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateSessionLogger(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateSessionLogger")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateTrustStore(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateTrustStore(context.Background(), nil, func(o *Options) {
@@ -1141,6 +1249,18 @@ func TestUpdateSnapshot_DeletePortal(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteSessionLogger(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSessionLogger(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteSessionLogger")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteTrustStore(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteTrustStore(context.Background(), nil, func(o *Options) {
@@ -1218,6 +1338,18 @@ func TestUpdateSnapshot_DisassociateNetworkSettings(t *testing.T) {
 	_, err := svc.DisassociateNetworkSettings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DisassociateNetworkSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DisassociateSessionLogger(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateSessionLogger(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateSessionLogger")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1369,6 +1501,18 @@ func TestUpdateSnapshot_GetSession(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetSessionLogger(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSessionLogger(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetSessionLogger")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetTrustStore(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTrustStore(context.Background(), nil, func(o *Options) {
@@ -1482,6 +1626,18 @@ func TestUpdateSnapshot_ListPortals(t *testing.T) {
 	_, err := svc.ListPortals(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListPortals")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListSessionLoggers(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSessionLoggers(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListSessionLoggers")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1650,6 +1806,18 @@ func TestUpdateSnapshot_UpdatePortal(t *testing.T) {
 	_, err := svc.UpdatePortal(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdatePortal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateSessionLogger(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateSessionLogger(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateSessionLogger")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -3888,6 +3888,13 @@ func awsRestjson1_serializeDocumentResolutionTechniques(v *types.ResolutionTechn
 		}
 	}
 
+	if v.RuleConditionProperties != nil {
+		ok := object.Key("ruleConditionProperties")
+		if err := awsRestjson1_serializeDocumentRuleConditionProperties(v.RuleConditionProperties, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3927,6 +3934,50 @@ func awsRestjson1_serializeDocumentRuleBasedProperties(v *types.RuleBasedPropert
 	if v.Rules != nil {
 		ok := object.Key("rules")
 		if err := awsRestjson1_serializeDocumentRuleList(v.Rules, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuleCondition(v *types.RuleCondition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Condition != nil {
+		ok := object.Key("condition")
+		ok.String(*v.Condition)
+	}
+
+	if v.RuleName != nil {
+		ok := object.Key("ruleName")
+		ok.String(*v.RuleName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuleConditionList(v []types.RuleCondition, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentRuleCondition(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuleConditionProperties(v *types.RuleConditionProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Rules != nil {
+		ok := object.Key("rules")
+		if err := awsRestjson1_serializeDocumentRuleConditionList(v.Rules, ok); err != nil {
 			return err
 		}
 	}

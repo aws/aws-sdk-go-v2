@@ -38,6 +38,9 @@ func ExampleDataSourceParameters_outputUsage() {
 	case *types.DataSourceParametersMemberExasolParameters:
 		_ = v.Value // Value is types.ExasolParameters
 
+	case *types.DataSourceParametersMemberImpalaParameters:
+		_ = v.Value // Value is types.ImpalaParameters
+
 	case *types.DataSourceParametersMemberJiraParameters:
 		_ = v.Value // Value is types.JiraParameters
 
@@ -101,6 +104,7 @@ func ExampleDataSourceParameters_outputUsage() {
 var _ *types.RedshiftParameters
 var _ *types.DatabricksParameters
 var _ *types.JiraParameters
+var _ *types.ImpalaParameters
 var _ *types.MySqlParameters
 var _ *types.SnowflakeParameters
 var _ *types.BigQueryParameters

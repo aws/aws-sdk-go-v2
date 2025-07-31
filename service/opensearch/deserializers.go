@@ -13751,6 +13751,11 @@ func awsRestjson1_deserializeDocumentAdvancedSecurityOptions(v **types.AdvancedS
 				sv.Enabled = ptr.Bool(jtv)
 			}
 
+		case "IAMFederationOptions":
+			if err := awsRestjson1_deserializeDocumentIAMFederationOptionsOutput(&sv.IAMFederationOptions, value); err != nil {
+				return err
+			}
+
 		case "InternalUserDatabaseEnabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -18129,6 +18134,64 @@ func awsRestjson1_deserializeDocumentGUIDList(v *[]string, value interface{}) er
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentIAMFederationOptionsOutput(v **types.IAMFederationOptionsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IAMFederationOptionsOutput
+	if *v == nil {
+		sv = &types.IAMFederationOptionsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = ptr.Bool(jtv)
+			}
+
+		case "RolesKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IAMFederationRolesKey to be of type string, got %T instead", value)
+				}
+				sv.RolesKey = ptr.String(jtv)
+			}
+
+		case "SubjectKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IAMFederationSubjectKey to be of type string, got %T instead", value)
+				}
+				sv.SubjectKey = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

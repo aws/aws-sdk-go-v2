@@ -1,0 +1,8 @@
+{
+    "id": "145698a7-08f2-4766-b2fa-a3ee3863129d",
+    "type": "feature",
+    "description": "Added ability to log session activity on a portal to an S3 bucket.",
+    "modules": [
+        "service/workspacesweb"
+    ]
+}

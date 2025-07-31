@@ -45,7 +45,7 @@ type ListMatchingWorkflowsOutput struct {
 	NextToken *string
 
 	// A list of MatchingWorkflowSummary objects, each of which contain the fields
-	// WorkflowName , WorkflowArn , CreatedAt , and UpdatedAt .
+	// workflowName , workflowArn , resolutionType , createdAt , and updatedAt .
 	WorkflowSummaries []types.MatchingWorkflowSummary
 
 	// Metadata pertaining to the operation's result.

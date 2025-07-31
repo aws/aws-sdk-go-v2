@@ -1,0 +1,8 @@
+{
+    "id": "fc7875ed-3236-4a2b-803a-e283853f381f",
+    "type": "feature",
+    "description": "Added Impala connector support",
+    "modules": [
+        "service/quicksight"
+    ]
+}

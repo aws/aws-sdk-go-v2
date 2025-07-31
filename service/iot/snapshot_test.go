@@ -1274,6 +1274,18 @@ func TestCheckSnapshot_DescribeDomainConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeEncryptionConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeEncryptionConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeEncryptionConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeEndpoint(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeEndpoint(context.Background(), nil, func(o *Options) {
@@ -3074,6 +3086,18 @@ func TestCheckSnapshot_UpdateDynamicThingGroup(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateEncryptionConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateEncryptionConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateEncryptionConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateEventConfigurations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateEventConfigurations(context.Background(), nil, func(o *Options) {
@@ -4506,6 +4530,18 @@ func TestUpdateSnapshot_DescribeDomainConfiguration(t *testing.T) {
 	_, err := svc.DescribeDomainConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeDomainConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeEncryptionConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeEncryptionConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeEncryptionConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6306,6 +6342,18 @@ func TestUpdateSnapshot_UpdateDynamicThingGroup(t *testing.T) {
 	_, err := svc.UpdateDynamicThingGroup(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateDynamicThingGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateEncryptionConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateEncryptionConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateEncryptionConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

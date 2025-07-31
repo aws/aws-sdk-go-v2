@@ -69,6 +69,9 @@ type CreateProfileInput struct {
 	// business address.
 	EmailAddress *string
 
+	// Object that defines the preferred methods of engagement, per channel.
+	EngagementPreferences *types.EngagementPreferences
+
 	// The customer’s first name.
 	FirstName *string
 
@@ -109,6 +112,9 @@ type CreateProfileInput struct {
 	// The customer’s phone number, which has not been specified as a mobile, home, or
 	// business number.
 	PhoneNumber *string
+
+	// The type of the profile.
+	ProfileType types.ProfileType
 
 	// The customer’s shipping address.
 	ShippingAddress *types.Address

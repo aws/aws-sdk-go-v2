@@ -51,8 +51,8 @@ type GetMatchingWorkflowOutput struct {
 	// This member is required.
 	InputSourceConfig []types.InputSource
 
-	// A list of OutputSource objects, each of which contains fields OutputS3Path ,
-	// ApplyNormalization , and Output .
+	// A list of OutputSource objects, each of which contains fields outputS3Path ,
+	// applyNormalization , KMSArn , and output .
 	//
 	// This member is required.
 	OutputSourceConfig []types.OutputSource

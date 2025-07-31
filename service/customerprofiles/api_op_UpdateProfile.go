@@ -76,6 +76,9 @@ type UpdateProfileInput struct {
 	// business address.
 	EmailAddress *string
 
+	// Object that defines users preferred methods of engagement.
+	EngagementPreferences *types.EngagementPreferences
+
 	// The customer’s first name.
 	FirstName *string
 
@@ -116,6 +119,9 @@ type UpdateProfileInput struct {
 	// The customer’s phone number, which has not been specified as a mobile, home, or
 	// business number.
 	PhoneNumber *string
+
+	// Determines the type of the profile.
+	ProfileType types.ProfileType
 
 	// The customer’s shipping address.
 	ShippingAddress *types.UpdateAddress

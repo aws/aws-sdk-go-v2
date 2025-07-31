@@ -163,6 +163,9 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "ap-southeast-2",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region: "ap-southeast-4",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
 				Region: "bedrock-ap-northeast-1",
 			}: endpoints.Endpoint{
 				Hostname: "bedrock.ap-northeast-1.amazonaws.com",

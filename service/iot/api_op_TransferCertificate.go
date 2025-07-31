@@ -17,7 +17,7 @@ import (
 //
 // You can cancel the transfer until it is acknowledged by the recipient.
 //
-// No notification is sent to the transfer destination's account. It is up to the
+// No notification is sent to the transfer destination's account. It's up to the
 // caller to notify the transfer target.
 //
 // The certificate being transferred must not be in the ACTIVE state. You can use
@@ -25,6 +25,26 @@ import (
 //
 // The certificate must not have any policies attached to it. You can use the DetachPolicy
 // action to detach them.
+//
+// Customer managed key behavior: When you use a customer managed key to secure
+// your data and then transfer the key to a customer in a different account using
+// the TransferCertificateoperation, the certificates will no longer be protected by their customer
+// managed key configuration. During the transfer process, certificates are
+// encrypted using IoT owned keys.
+//
+// While a certificate is in the PENDING_TRANSFER state, it's always protected by
+// IoT owned keys, regardless of the customer managed key configuration of either
+// the source or destination account.
+//
+// Once the transfer is completed through AcceptCertificateTransfer, RejectCertificateTransfer, or CancelCertificateTransfer, the certificate will be
+// protected by the customer managed key configuration of the account that owns the
+// certificate after the transfer operation:
+//
+//   - If the transfer is accepted: The certificate is protected by the
+//     destination account's customer managed key configuration.
+//
+//   - If the transfer is rejected or cancelled: The certificate is protected by
+//     the source account's customer managed key configuration.
 //
 // [TransferCertificate]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) TransferCertificate(ctx context.Context, params *TransferCertificateInput, optFns ...func(*Options)) (*TransferCertificateOutput, error) {

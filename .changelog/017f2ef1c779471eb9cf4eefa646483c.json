@@ -1,0 +1,8 @@
+{
+    "id": "017f2ef1-c779-471e-b9cf-4eefa646483c",
+    "type": "feature",
+    "description": "Add support for creating advanced rule-based matching workflows in AWS Entity Resolution.",
+    "modules": [
+        "service/entityresolution"
+    ]
+}

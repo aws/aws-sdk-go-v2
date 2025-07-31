@@ -9390,6 +9390,11 @@ func validateDataSourceParameters(v types.DataSourceParameters) error {
 			invalidParams.AddNested("[ExasolParameters]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.DataSourceParametersMemberImpalaParameters:
+		if err := validateImpalaParameters(&uv.Value); err != nil {
+			invalidParams.AddNested("[ImpalaParameters]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.DataSourceParametersMemberJiraParameters:
 		if err := validateJiraParameters(&uv.Value); err != nil {
 			invalidParams.AddNested("[JiraParameters]", err.(smithy.InvalidParamsError))
@@ -13176,6 +13181,27 @@ func validateImageStaticFile(v *types.ImageStaticFile) error {
 		if err := validateStaticFileSource(v.Source); err != nil {
 			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateImpalaParameters(v *types.ImpalaParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImpalaParameters"}
+	if v.Host == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Host"))
+	}
+	if v.Port == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Port"))
+	}
+	if v.SqlEndpointPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SqlEndpointPath"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

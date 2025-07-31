@@ -8,6 +8,7 @@ type AdditionalOptionKeys string
 const (
 	AdditionalOptionKeysCacheOption        AdditionalOptionKeys = "performanceTuning.caching"
 	AdditionalOptionKeysObservationsOption AdditionalOptionKeys = "observations.scope"
+	AdditionalOptionKeysCompositeOption    AdditionalOptionKeys = "compositeRuleEvaluation.method"
 )
 
 // Values returns all known values for AdditionalOptionKeys. Note that this can be
@@ -18,6 +19,7 @@ func (AdditionalOptionKeys) Values() []AdditionalOptionKeys {
 	return []AdditionalOptionKeys{
 		"performanceTuning.caching",
 		"observations.scope",
+		"compositeRuleEvaluation.method",
 	}
 }
 
@@ -864,6 +866,25 @@ func (DataQualityRuleResultStatus) Values() []DataQualityRuleResultStatus {
 		"PASS",
 		"FAIL",
 		"ERROR",
+	}
+}
+
+type DdbExportType string
+
+// Enum values for DdbExportType
+const (
+	DdbExportTypeDdb DdbExportType = "ddb"
+	DdbExportTypeS3  DdbExportType = "s3"
+)
+
+// Values returns all known values for DdbExportType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DdbExportType) Values() []DdbExportType {
+	return []DdbExportType{
+		"ddb",
+		"s3",
 	}
 }
 
@@ -2014,10 +2035,13 @@ type PiiType string
 
 // Enum values for PiiType
 const (
-	PiiTypeRowAudit      PiiType = "RowAudit"
-	PiiTypeRowMasking    PiiType = "RowMasking"
-	PiiTypeColumnAudit   PiiType = "ColumnAudit"
-	PiiTypeColumnMasking PiiType = "ColumnMasking"
+	PiiTypeRowAudit          PiiType = "RowAudit"
+	PiiTypeRowHashing        PiiType = "RowHashing"
+	PiiTypeRowMasking        PiiType = "RowMasking"
+	PiiTypeRowPartialMasking PiiType = "RowPartialMasking"
+	PiiTypeColumnAudit       PiiType = "ColumnAudit"
+	PiiTypeColumnHashing     PiiType = "ColumnHashing"
+	PiiTypeColumnMasking     PiiType = "ColumnMasking"
 )
 
 // Values returns all known values for PiiType. Note that this can be expanded in
@@ -2027,8 +2051,11 @@ const (
 func (PiiType) Values() []PiiType {
 	return []PiiType{
 		"RowAudit",
+		"RowHashing",
 		"RowMasking",
+		"RowPartialMasking",
 		"ColumnAudit",
+		"ColumnHashing",
 		"ColumnMasking",
 	}
 }
