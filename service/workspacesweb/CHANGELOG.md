@@ -1,3 +1,7 @@
+# v1.29.0 (2025-07-31)
+
+* **Feature**: Added ability to log session activity on a portal to an S3 bucket.
+
 # v1.28.1 (2025-07-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

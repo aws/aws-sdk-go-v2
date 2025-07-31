@@ -1,3 +1,7 @@
+# v1.121.0 (2025-07-31)
+
+* **Feature**: Added support for Route node, S3 Iceberg sources/targets, catalog Iceberg sources, DynamoDB ELT connector, AutoDataQuality evaluation, enhanced PII detection with redaction, Kinesis fan-out support, and new R-series worker types.
+
 # v1.120.1 (2025-07-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

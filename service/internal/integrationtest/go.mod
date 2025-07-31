@@ -5,10 +5,10 @@ require (
 	github.com/aws/aws-sdk-go-v2/config v1.30.2
 	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.18.2
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.45.1
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.238.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.239.0
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.74.1
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.85.1
-	github.com/aws/aws-sdk-go-v2/service/s3control v1.61.1
+	github.com/aws/aws-sdk-go-v2/service/s3control v1.62.0
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.39.1
 	github.com/aws/aws-sdk-go-v2/service/sts v1.35.1
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.27.1

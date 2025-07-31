@@ -1,8 +1,0 @@
-{
-    "id": "1a49de01-b691-41f1-a971-d1fbecaa4712",
-    "type": "feature",
-    "description": "This release allows AWS IoT Core users to use their own AWS KMS keys for data protection",
-    "modules": [
-        "service/iot"
-    ]
-}

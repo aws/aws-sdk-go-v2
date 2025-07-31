@@ -1,8 +1,0 @@
-{
-    "id": "2b07e1eb-3165-4299-992a-73f713495452",
-    "type": "feature",
-    "description": "Add Tags field to CreateAccessPoint",
-    "modules": [
-        "service/s3control"
-    ]
-}

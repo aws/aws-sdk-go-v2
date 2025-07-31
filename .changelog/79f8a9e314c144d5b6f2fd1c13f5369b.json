@@ -1,8 +1,0 @@
-{
-    "id": "79f8a9e3-14c1-44d5-b6f2-fd1c13f5369b",
-    "type": "feature",
-    "description": "This release introduces support for Multi-tenant management",
-    "modules": [
-        "service/sesv2"
-    ]
-}

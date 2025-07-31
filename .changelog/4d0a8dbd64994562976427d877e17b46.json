@@ -1,8 +1,0 @@
-{
-    "id": "4d0a8dbd-6499-4562-9764-27d877e17b46",
-    "type": "feature",
-    "description": "Extend usage to include agentless hours and add CODE_REPOSITORY to aggregation resource type",
-    "modules": [
-        "service/inspector2"
-    ]
-}

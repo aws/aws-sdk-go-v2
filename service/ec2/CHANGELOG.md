@@ -1,3 +1,7 @@
+# v1.239.0 (2025-07-31)
+
+* **Feature**: Added support for the force option for the EC2 instance terminate command. This feature enables customers to recover resources associated with an instance stuck in the shutting-down state as a result of rare issues caused by a frozen operating system or an underlying hardware problem.
+
 # v1.238.0 (2025-07-30)
 
 * **Feature**: Release to show the next hop IP address for routes propagated by VPC Route Server into VPC route tables.

@@ -1,3 +1,7 @@
+# v1.40.0 (2025-07-31)
+
+* **Feature**: Extend usage to include agentless hours and add CODE_REPOSITORY to aggregation resource type
+
 # v1.39.1 (2025-07-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

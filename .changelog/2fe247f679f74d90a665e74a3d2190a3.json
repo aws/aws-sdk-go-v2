@@ -1,8 +1,0 @@
-{
-    "id": "2fe247f6-79f7-4d90-a665-e74a3d2190a3",
-    "type": "feature",
-    "description": "The release updates standard profile with 2 new fields that supports account-level engagement. Updated APIs include CreateProfile, UpdateProfile, MergeProfiles, SearchProfiles, BatchGetProfile, GetSegmentMembership, CreateSegmentDefinition, CreateSegmentEstimate.",
-    "modules": [
-        "service/customerprofiles"
-    ]
-}

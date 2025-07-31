@@ -1,8 +1,0 @@
-{
-    "id": "4df9d0c4-efb3-401b-a923-24b4fe2ba384",
-    "type": "feature",
-    "description": "Added support for the force option for the EC2 instance terminate command. This feature enables customers to recover resources associated with an instance stuck in the shutting-down state as a result of rare issues caused by a frozen operating system or an underlying hardware problem.",
-    "modules": [
-        "service/ec2"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "005c9c34-52ff-44f8-b90f-f2f895e958ee",
-    "type": "feature",
-    "description": "Added support for Route node, S3 Iceberg sources/targets, catalog Iceberg sources, DynamoDB ELT connector, AutoDataQuality evaluation, enhanced PII detection with redaction, Kinesis fan-out support, and new R-series worker types.",
-    "modules": [
-        "service/glue"
-    ]
-}

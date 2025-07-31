@@ -1,3 +1,31 @@
+# Release (2025-07-31)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.49.0](service/customerprofiles/CHANGELOG.md#v1490-2025-07-31)
+  * **Feature**: The release updates standard profile with 2 new fields that supports account-level engagement. Updated APIs include CreateProfile, UpdateProfile, MergeProfiles, SearchProfiles, BatchGetProfile, GetSegmentMembership, CreateSegmentDefinition, CreateSegmentEstimate.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.239.0](service/ec2/CHANGELOG.md#v12390-2025-07-31)
+  * **Feature**: Added support for the force option for the EC2 instance terminate command. This feature enables customers to recover resources associated with an instance stuck in the shutting-down state as a result of rare issues caused by a frozen operating system or an underlying hardware problem.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.47.2](service/elasticloadbalancingv2/CHANGELOG.md#v1472-2025-07-31)
+  * **Documentation**: This release enables secondary IP addresses for Network Load Balancers.
+* `github.com/aws/aws-sdk-go-v2/service/entityresolution`: [v1.21.0](service/entityresolution/CHANGELOG.md#v1210-2025-07-31)
+  * **Feature**: Add support for creating advanced rule-based matching workflows in AWS Entity Resolution.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.121.0](service/glue/CHANGELOG.md#v11210-2025-07-31)
+  * **Feature**: Added support for Route node, S3 Iceberg sources/targets, catalog Iceberg sources, DynamoDB ELT connector, AutoDataQuality evaluation, enhanced PII detection with redaction, Kinesis fan-out support, and new R-series worker types.
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.40.0](service/inspector2/CHANGELOG.md#v1400-2025-07-31)
+  * **Feature**: Extend usage to include agentless hours and add CODE_REPOSITORY to aggregation resource type
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.66.0](service/iot/CHANGELOG.md#v1660-2025-07-31)
+  * **Feature**: This release allows AWS IoT Core users to use their own AWS KMS keys for data protection
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.49.0](service/opensearch/CHANGELOG.md#v1490-2025-07-31)
+  * **Feature**: Granular access control support for NEO-SAML with IAMFederation for AOS data source
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.90.0](service/quicksight/CHANGELOG.md#v1900-2025-07-31)
+  * **Feature**: Added Impala connector support
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.62.0](service/s3control/CHANGELOG.md#v1620-2025-07-31)
+  * **Feature**: Add Tags field to CreateAccessPoint
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.49.0](service/sesv2/CHANGELOG.md#v1490-2025-07-31)
+  * **Feature**: This release introduces support for Multi-tenant management
+* `github.com/aws/aws-sdk-go-v2/service/workspacesweb`: [v1.29.0](service/workspacesweb/CHANGELOG.md#v1290-2025-07-31)
+  * **Feature**: Added ability to log session activity on a portal to an S3 bucket.
+
 # Release (2025-07-30)
 
 ## General Highlights

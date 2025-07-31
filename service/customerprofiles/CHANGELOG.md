@@ -1,3 +1,7 @@
+# v1.49.0 (2025-07-31)
+
+* **Feature**: The release updates standard profile with 2 new fields that supports account-level engagement. Updated APIs include CreateProfile, UpdateProfile, MergeProfiles, SearchProfiles, BatchGetProfile, GetSegmentMembership, CreateSegmentDefinition, CreateSegmentEstimate.
+
 # v1.48.1 (2025-07-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

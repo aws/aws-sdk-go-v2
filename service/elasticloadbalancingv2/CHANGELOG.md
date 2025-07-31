@@ -1,3 +1,7 @@
+# v1.47.2 (2025-07-31)
+
+* **Documentation**: This release enables secondary IP addresses for Network Load Balancers.
+
 # v1.47.1 (2025-07-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

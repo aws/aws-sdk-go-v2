@@ -1,3 +1,7 @@
+# v1.62.0 (2025-07-31)
+
+* **Feature**: Add Tags field to CreateAccessPoint
+
 # v1.61.1 (2025-07-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions
