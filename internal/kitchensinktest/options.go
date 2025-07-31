@@ -129,7 +129,7 @@ type Options struct {
 	// The list of auth schemes supported by the client.
 	AuthSchemes []smithyhttp.AuthScheme
 
-	// Priority list of preferred auth scheme IDs.
+	// Priority list of preferred auth scheme names (e.g. sigv4a).
 	AuthSchemePreference []string
 }
 

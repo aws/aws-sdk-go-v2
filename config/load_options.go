@@ -233,7 +233,7 @@ type LoadOptions struct {
 	// Registry of operation interceptors.
 	Interceptors smithyhttp.InterceptorRegistry
 
-	// Priority list of preferred auth scheme IDs.
+	// Priority list of preferred auth scheme names (e.g. sigv4a).
 	AuthSchemePreference []string
 }
 
@@ -1320,6 +1320,8 @@ func WithAfterExecution(i smithyhttp.AfterExecutionInterceptor) LoadOptionsFunc 
 }
 
 // WithAuthSchemePreference sets the priority order of auth schemes on config.
+//
+// Schemes are expressed as names e.g. sigv4a or sigv4.
 func WithAuthSchemePreference(schemeIDs ...string) LoadOptionsFunc {
 	return func(o *LoadOptions) error {
 		o.AuthSchemePreference = schemeIDs

@@ -307,7 +307,7 @@ type EnvConfig struct {
 	// Indicates whether response checksum should be validated
 	ResponseChecksumValidation aws.ResponseChecksumValidation
 
-	// Priority list of preferred auth scheme IDs.
+	// Priority list of preferred auth scheme names (e.g. sigv4a).
 	AuthSchemePreference []string
 }
 
