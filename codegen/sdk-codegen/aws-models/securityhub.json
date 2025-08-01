@@ -22680,6 +22680,32 @@
                 "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) and other details of the Amazon CloudWatch Logs log group that Amazon Route 53 is \npublishing logs to.</p>"
             }
         },
+        "com.amazonaws.securityhub#CodeRepositoryDetails": {
+            "type": "structure",
+            "members": {
+                "ProviderType": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The type of repository provider.\n      </p>"
+                    }
+                },
+                "ProjectName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The name of the project in the code repository.\n      </p>"
+                    }
+                },
+                "CodeSecurityIntegrationArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the code security integration associated with the repository.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Details about an external code repository with which you can connect your Amazon Web Services resources. \n         The connection is established through Amazon Inspector.\n      </p>"
+            }
+        },
         "com.amazonaws.securityhub#CodeVulnerabilitiesFilePath": {
             "type": "structure",
             "members": {
@@ -28399,7 +28425,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         Returns the history of a Security Hub finding for the past 90 days. The history includes changes made to any fields in \n         the Amazon Web Services Security Finding Format (ASFF) except top-level timestamp fields, such as the <code>CreatedAt</code> and \n         <code>UpdatedAt</code> fields.\n      </p>\n         <p>This operation might return fewer results than the maximum number of results (<code>MaxResults</code>) specified in a request, even \n         when more results are available. If this occurs, the response includes a <code>NextToken</code> value, which you should use to retrieve \n         the next set of results in the response. The presence of a <code>NextToken</code> value in a response doesn't necessarily indicate \n         that the results are incomplete. However, you should continue to specify a <code>NextToken</code> value until you receive a \n         response that doesn't include this value.</p>",
+                "smithy.api#documentation": "<p>\n         Returns the history of a Security Hub finding. The history includes changes made to any fields in \n         the Amazon Web Services Security Finding Format (ASFF) except top-level timestamp fields, such as the <code>CreatedAt</code> and \n         <code>UpdatedAt</code> fields.\n      </p>\n         <p>This operation might return fewer results than the maximum number of results (<code>MaxResults</code>) specified in a request, even \n         when more results are available. If this occurs, the response includes a <code>NextToken</code> value, which you should use to retrieve \n         the next set of results in the response. The presence of a <code>NextToken</code> value in a response doesn't necessarily indicate \n         that the results are incomplete. However, you should continue to specify a <code>NextToken</code> value until you receive a \n         response that doesn't include this value.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/findingHistory/get",
@@ -28426,13 +28452,13 @@
                 "StartTime": {
                     "target": "com.amazonaws.securityhub#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>A timestamp that indicates the start time of the requested finding history.</p>\n         <p>If you provide values for both <code>StartTime</code> and <code>EndTime</code>,\n                Security Hub returns finding history for the specified time period. If you\n            provide a value for <code>StartTime</code> but not for <code>EndTime</code>, Security Hub returns finding history from the <code>StartTime</code> to the time at\n            which the API is called. If you provide a value for <code>EndTime</code> but not for\n                <code>StartTime</code>, Security Hub returns finding history from the <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt\">CreatedAt</a> timestamp of the finding to the <code>EndTime</code>. If you\n            provide neither <code>StartTime</code> nor <code>EndTime</code>, Security Hub\n            returns finding history from the CreatedAt timestamp of the finding to the time at which\n            the API is called. In all of these scenarios, the response is limited to 100 results, and the maximum time period is \n            limited to 90 days.</p>\n         <p>For more information about the validation and formatting of timestamp fields in Security Hub, see <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps\">Timestamps</a>.</p>"
+                        "smithy.api#documentation": "<p>A timestamp that indicates the start time of the requested finding history.</p>\n         <p>If you provide values for both <code>StartTime</code> and <code>EndTime</code>,\n                Security Hub returns finding history for the specified time period. If you\n            provide a value for <code>StartTime</code> but not for <code>EndTime</code>, Security Hub returns finding history from the <code>StartTime</code> to the time at\n            which the API is called. If you provide a value for <code>EndTime</code> but not for\n                <code>StartTime</code>, Security Hub returns finding history from the <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt\">CreatedAt</a> timestamp of the finding to the <code>EndTime</code>. If you\n            provide neither <code>StartTime</code> nor <code>EndTime</code>, Security Hub\n            returns finding history from the <code>CreatedAt</code> timestamp of the finding to the time at which\n            the API is called. In all of these scenarios, the response is limited to 100 results.</p>\n         <p>For more information about the validation and formatting of timestamp fields in Security Hub, see <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps\">Timestamps</a>.</p>"
                     }
                 },
                 "EndTime": {
                     "target": "com.amazonaws.securityhub#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         An ISO 8601-formatted timestamp that indicates the end time of the requested finding history.</p>\n         <p>If you provide values for both <code>StartTime</code> and <code>EndTime</code>,\n                Security Hub returns finding history for the specified time period. If you\n            provide a value for <code>StartTime</code> but not for <code>EndTime</code>, Security Hub returns finding history from the <code>StartTime</code> to the time at\n            which the API is called. If you provide a value for <code>EndTime</code> but not for\n                <code>StartTime</code>, Security Hub returns finding history from the <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt\">CreatedAt</a> timestamp of the finding to the <code>EndTime</code>. If you\n            provide neither <code>StartTime</code> nor <code>EndTime</code>, Security Hub\n            returns finding history from the CreatedAt timestamp of the finding to the time at which\n            the API is called. In all of these scenarios, the response is limited to 100 results, and the maximum time period is \n            limited to 90 days.</p>\n         <p>For more information about the validation and formatting of timestamp fields in Security Hub, see <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps\">Timestamps</a>.</p>"
+                        "smithy.api#documentation": "<p>\n         An ISO 8601-formatted timestamp that indicates the end time of the requested finding history.</p>\n         <p>If you provide values for both <code>StartTime</code> and <code>EndTime</code>,\n                Security Hub returns finding history for the specified time period. If you\n            provide a value for <code>StartTime</code> but not for <code>EndTime</code>, Security Hub returns finding history from the <code>StartTime</code> to the time at\n            which the API is called. If you provide a value for <code>EndTime</code> but not for\n                <code>StartTime</code>, Security Hub returns finding history from the <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt\">CreatedAt</a> timestamp of the finding to the <code>EndTime</code>. If you\n            provide neither <code>StartTime</code> nor <code>EndTime</code>, Security Hub\n            returns finding history from the <code>CreatedAt</code> timestamp of the finding to the time at which\n            the API is called. In all of these scenarios, the response is limited to 100 results.</p>\n         <p>For more information about the validation and formatting of timestamp fields in Security Hub, see <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps\">Timestamps</a>.</p>"
                     }
                 },
                 "NextToken": {
@@ -34719,6 +34745,12 @@
                     "target": "com.amazonaws.securityhub#AwsEc2ClientVpnEndpointDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>\n            Provides details about an Client VPN endpoint. A Client VPN endpoint is the resource that you \n            create and configure to enable and manage client VPN sessions. It's the termination point for all client VPN sessions.\n        </p>"
+                    }
+                },
+                "CodeRepository": {
+                    "target": "com.amazonaws.securityhub#CodeRepositoryDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Details about an external code repository with which you can connect your Amazon Web Services resources. \n         The connection is established through Amazon Inspector.\n      </p>"
                     }
                 }
             },
