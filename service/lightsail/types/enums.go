@@ -1873,6 +1873,7 @@ const (
 	RegionNameApNortheast1 RegionName = "ap-northeast-1"
 	RegionNameApNortheast2 RegionName = "ap-northeast-2"
 	RegionNameEuNorth1     RegionName = "eu-north-1"
+	RegionNameApSoutheast3 RegionName = "ap-southeast-3"
 )
 
 // Values returns all known values for RegionName. Note that this can be expanded
@@ -1896,6 +1897,7 @@ func (RegionName) Values() []RegionName {
 		"ap-northeast-1",
 		"ap-northeast-2",
 		"eu-north-1",
+		"ap-southeast-3",
 	}
 }
 

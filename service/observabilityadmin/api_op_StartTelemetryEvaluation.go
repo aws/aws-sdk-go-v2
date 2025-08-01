@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	This action begins onboarding onboarding the caller AWS account to the
+//	This action begins onboarding the caller Amazon Web Services account to the
 //
 // telemetry config feature.
 func (c *Client) StartTelemetryEvaluation(ctx context.Context, params *StartTelemetryEvaluationInput, optFns ...func(*Options)) (*StartTelemetryEvaluationOutput, error) {

@@ -56,8 +56,8 @@ type SubscribeInput struct {
 	//
 	//   - lambda – delivery of JSON-encoded message to an Lambda function
 	//
-	//   - firehose – delivery of JSON-encoded message to an Amazon Kinesis Data
-	//   Firehose delivery stream.
+	//   - firehose – delivery of JSON-encoded message to an Amazon Data Firehose
+	//   delivery stream.
 	//
 	// This member is required.
 	Protocol *string
@@ -156,7 +156,7 @@ type SubscribeInput struct {
 	//
 	//   - For the lambda protocol, the endpoint is the ARN of an Lambda function.
 	//
-	//   - For the firehose protocol, the endpoint is the ARN of an Amazon Kinesis Data
+	//   - For the firehose protocol, the endpoint is the ARN of an Amazon Data
 	//   Firehose delivery stream.
 	Endpoint *string
 

@@ -30,12 +30,11 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 type ListTagsForResourceInput struct {
 
 	// The ARN of the CloudWatch investigations resource that you want to view tags
-	// for. You can use the [ListInvestigationGroups]operation to find the ARNs of investigation groups.
+	// for. You can use the ListInvestigationGroups operation to find the ARNs of
+	// investigation groups.
 	//
 	// The ARN format for an investigation group is
 	// arn:aws:aiops:Region:account-id:investigation-group:investigation-group-id .
-	//
-	// [ListInvestigationGroups]: https://docs.aws.amazon.com/operationalinvestigations/latest/AmazonQDeveloperOperationalInvestigationsAPIReference/API_ListInvestigationGroups.html
 	//
 	// This member is required.
 	ResourceArn *string

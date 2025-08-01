@@ -33,6 +33,15 @@ import (
 // [DescribeCertificateAuthority]action returns the time remaining in the restoration window of a private CA in
 // the DELETED state. To restore an eligible CA, call the [RestoreCertificateAuthority] action.
 //
+// A private CA can be deleted if it is in the PENDING_CERTIFICATE , CREATING ,
+// EXPIRED , DISABLED , or FAILED state. To delete a CA in the ACTIVE state, you
+// must first disable it, or else the delete request results in an exception. If
+// you are deleting a private CA in the PENDING_CERTIFICATE or DISABLED state, you
+// can set the length of its restoration period to 7-30 days. The default is 30.
+// During this time, the status is set to DELETED and the CA can be restored. A
+// private CA deleted in the CREATING or FAILED state has no assigned restoration
+// period and cannot be restored.
+//
 // [ListCertificateAuthorities]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html
 // [RestoreCertificateAuthority]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_RestoreCertificateAuthority.html
 // [UpdateCertificateAuthority]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_UpdateCertificateAuthority.html

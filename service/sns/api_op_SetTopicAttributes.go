@@ -38,9 +38,6 @@ type SetTopicAttributesInput struct {
 	// The following lists the names, descriptions, and values of the special request
 	// parameters that the SetTopicAttributes action uses:
 	//
-	//   - ApplicationSuccessFeedbackRoleArn – Indicates failed message delivery status
-	//   for an Amazon SNS topic that is subscribed to a platform application endpoint.
-	//
 	//   - DeliveryPolicy – The policy that defines how Amazon SNS retries failed
 	//   deliveries to HTTP/S endpoints.
 	//
@@ -67,19 +64,18 @@ type SetTopicAttributesInput struct {
 	//   - HTTPFailureFeedbackRoleArn – Indicates failed message delivery status for an
 	//   Amazon SNS topic that is subscribed to an HTTP endpoint.
 	//
-	//   - Amazon Kinesis Data Firehose
+	//   - Amazon Data Firehose
 	//
 	//   - FirehoseSuccessFeedbackRoleArn – Indicates successful message delivery
-	//   status for an Amazon SNS topic that is subscribed to an Amazon Kinesis Data
-	//   Firehose endpoint.
+	//   status for an Amazon SNS topic that is subscribed to an Amazon Data Firehose
+	//   endpoint.
 	//
 	//   - FirehoseSuccessFeedbackSampleRate – Indicates percentage of successful
-	//   messages to sample for an Amazon SNS topic that is subscribed to an Amazon
-	//   Kinesis Data Firehose endpoint.
+	//   messages to sample for an Amazon SNS topic that is subscribed to an Amazon Data
+	//   Firehose endpoint.
 	//
 	//   - FirehoseFailureFeedbackRoleArn – Indicates failed message delivery status
-	//   for an Amazon SNS topic that is subscribed to an Amazon Kinesis Data Firehose
-	//   endpoint.
+	//   for an Amazon SNS topic that is subscribed to an Amazon Data Firehose endpoint.
 	//
 	//   - Lambda
 	//
@@ -96,16 +92,15 @@ type SetTopicAttributesInput struct {
 	//   - Platform application endpoint
 	//
 	//   - ApplicationSuccessFeedbackRoleArn – Indicates successful message delivery
-	//   status for an Amazon SNS topic that is subscribed to an Amazon Web Services
-	//   application endpoint.
+	//   status for an Amazon SNS topic that is subscribed to an platform application
+	//   endpoint.
 	//
 	//   - ApplicationSuccessFeedbackSampleRate – Indicates percentage of successful
-	//   messages to sample for an Amazon SNS topic that is subscribed to an Amazon Web
-	//   Services application endpoint.
+	//   messages to sample for an Amazon SNS topic that is subscribed to an platform
+	//   application endpoint.
 	//
 	//   - ApplicationFailureFeedbackRoleArn – Indicates failed message delivery status
-	//   for an Amazon SNS topic that is subscribed to an Amazon Web Services application
-	//   endpoint.
+	//   for an Amazon SNS topic that is subscribed to an platform application endpoint.
 	//
 	// In addition to being able to configure topic attributes for message delivery
 	//   status of notification messages sent to Amazon SNS application endpoints, you

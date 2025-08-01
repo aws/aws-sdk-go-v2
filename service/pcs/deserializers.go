@@ -3402,6 +3402,15 @@ func awsAwsjson10_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 
 	for key, value := range shape {
 		switch key {
+		case "ipv6Address":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Ipv6Address = ptr.String(jtv)
+			}
+
 		case "port":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3700,6 +3709,15 @@ func awsAwsjson10_deserializeDocumentNetworking(v **types.Networking, value inte
 
 	for key, value := range shape {
 		switch key {
+		case "networkType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkType to be of type string, got %T instead", value)
+				}
+				sv.NetworkType = types.NetworkType(jtv)
+			}
+
 		case "securityGroupIds":
 			if err := awsAwsjson10_deserializeDocumentSecurityGroupIdList(&sv.SecurityGroupIds, value); err != nil {
 				return err

@@ -30,19 +30,19 @@ import (
 // Region
 //
 // To create an investigation group and set up CloudWatch investigations, you must
-// be signed in to an IAM principal that has the either the AIOpsConsoleAdminPolicy
-// or the AdministratorAccess IAM policy attached, or to an account that has
-// similar permissions.
+// be signed in to an IAM principal that has either the AIOpsConsoleAdminPolicy or
+// the AdministratorAccess IAM policy attached, or to an account that has similar
+// permissions.
 //
 // You can configure CloudWatch alarms to start investigations and add events to
 // investigations. If you create your investigation group with
-// CreateInvestigationGroup and you want to enable alarms to do this, you must use [PutInvestigationGroupPolicy]
-// to create a resource policy that grants this permission to CloudWatch alarms.
+// CreateInvestigationGroup and you want to enable alarms to do this, you must use
+// PutInvestigationGroupPolicy to create a resource policy that grants this
+// permission to CloudWatch alarms.
 //
-// For more information about configuring CloudWatch alarms to work with
-// CloudWatch investigations, see
+// For more information about configuring CloudWatch alarms, see [Using Amazon CloudWatch alarms]
 //
-// [PutInvestigationGroupPolicy]: https://docs.aws.amazon.com/operationalinvestigations/latest/AmazonQDeveloperOperationalInvestigationsAPIReference/API_PutInvestigationGroupPolicy.html
+// [Using Amazon CloudWatch alarms]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html
 func (c *Client) CreateInvestigationGroup(ctx context.Context, params *CreateInvestigationGroupInput, optFns ...func(*Options)) (*CreateInvestigationGroupOutput, error) {
 	if params == nil {
 		params = &CreateInvestigationGroupInput{}
@@ -70,26 +70,24 @@ type CreateInvestigationGroupInput struct {
 	// resources that CloudWatch investigations will have access to during
 	// investigations.
 	//
-	// For more information, see [How to control what data Amazon Q has access to during investigations].
+	// For more information, see [How to control what data CloudWatch investigations has access to during investigations].
 	//
-	// [How to control what data Amazon Q has access to during investigations]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Investigations-Security.html#Investigations-Security-Data
+	// [How to control what data CloudWatch investigations has access to during investigations]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Investigations-Security.html#Investigations-Security-Data
 	//
 	// This member is required.
 	RoleArn *string
 
-	// Use this structure to integrate CloudWatch investigations with Amazon Q in chat
+	// Use this structure to integrate CloudWatch investigations with chat
 	// applications. This structure is a string array. For the first string, specify
 	// the ARN of an Amazon SNS topic. For the array of strings, specify the ARNs of
-	// one or more Amazon Q in chat applications configurations that you want to
-	// associate with that topic. For more information about these configuration ARNs,
-	// see [Getting started with Amazon Q in chat applications]and [Resource type defined by Amazon Web Services Chatbot].
+	// one or more chat applications configurations that you want to associate with
+	// that topic. For more information about these configuration ARNs, see [Getting started with Amazon Q in chat applications]and [Resource type defined by Amazon Web Services Chatbot].
 	//
 	// [Resource type defined by Amazon Web Services Chatbot]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awschatbot.html#awschatbot-resources-for-iam-policies
 	// [Getting started with Amazon Q in chat applications]: https://docs.aws.amazon.com/chatbot/latest/adminguide/getting-started.html
 	ChatbotNotificationChannel map[string][]string
 
-	// Number of sourceAccountId values that have been configured for cross-account
-	// access.
+	// List of sourceRoleArn values that have been configured for cross-account access.
 	CrossAccountConfigurations []types.CrossAccountConfiguration
 
 	// Use this structure if you want to use a customer managed KMS key to encrypt
@@ -112,16 +110,17 @@ type CreateInvestigationGroupInput struct {
 	RetentionInDays *int64
 
 	// Enter the existing custom tag keys for custom applications in your system.
-	// Resource tags help Amazon Q narrow the search space when it is unable to
-	// discover definite relationships between resources. For example, to discover that
-	// an Amazon ECS service depends on an Amazon RDS database, Amazon Q can discover
-	// this relationship using data sources such as X-Ray and CloudWatch Application
-	// Signals. However, if you haven't deployed these features, Amazon Q will attempt
-	// to identify possible relationships. Tag boundaries can be used to narrow the
-	// resources that will be discovered by Amazon Q in these cases.
+	// Resource tags help CloudWatch investigations narrow the search space when it is
+	// unable to discover definite relationships between resources. For example, to
+	// discover that an Amazon ECS service depends on an Amazon RDS database,
+	// CloudWatch investigations can discover this relationship using data sources such
+	// as X-Ray and CloudWatch Application Signals. However, if you haven't deployed
+	// these features, CloudWatch investigations will attempt to identify possible
+	// relationships. Tag boundaries can be used to narrow the resources that will be
+	// discovered by CloudWatch investigations in these cases.
 	//
 	// You don't need to enter tags created by myApplications or CloudFormation,
-	// because Amazon Q can automatically detect those tags.
+	// because CloudWatch investigations can automatically detect those tags.
 	TagKeyBoundaries []string
 
 	// A list of key-value pairs to associate with the investigation group. You can

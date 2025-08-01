@@ -38,9 +38,8 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 type TagResourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the resource that you want to apply the tags
-	// to. You can use the [ListInvestigationGroups]operation to find the ARNs of investigation groups.
-	//
-	// [ListInvestigationGroups]: https://docs.aws.amazon.com/operationalinvestigations/latest/AmazonQDeveloperOperationalInvestigationsAPIReference/API_ListInvestigationGroups.html
+	// to. You can use the ListInvestigationGroups operation to find the ARNs of
+	// investigation groups.
 	//
 	// This member is required.
 	ResourceArn *string

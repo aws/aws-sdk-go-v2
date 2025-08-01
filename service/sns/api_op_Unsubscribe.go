@@ -18,10 +18,6 @@ import (
 // so that the endpoint owner can easily resubscribe to the topic if the
 // Unsubscribe request was unintended.
 //
-// Amazon SQS queue subscriptions require authentication for deletion. Only the
-// owner of the subscription, or the owner of the topic can unsubscribe using the
-// required Amazon Web Services signature.
-//
 // This action is throttled at 100 transactions per second (TPS).
 func (c *Client) Unsubscribe(ctx context.Context, params *UnsubscribeInput, optFns ...func(*Options)) (*UnsubscribeOutput, error) {
 	if params == nil {

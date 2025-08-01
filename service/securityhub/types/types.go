@@ -14337,6 +14337,25 @@ type CloudWatchLogsLogGroupArnConfigDetails struct {
 	noSmithyDocumentSerde
 }
 
+//	Details about an external code repository with which you can connect your
+//
+// Amazon Web Services resources. The connection is established through Amazon
+// Inspector.
+type CodeRepositoryDetails struct {
+
+	//  The Amazon Resource Name (ARN) of the code security integration associated
+	// with the repository.
+	CodeSecurityIntegrationArn *string
+
+	//  The name of the project in the code repository.
+	ProjectName *string
+
+	//  The type of repository provider.
+	ProviderType *string
+
+	noSmithyDocumentSerde
+}
+
 //	Provides details about where a code vulnerability is located in your Lambda
 //
 // function.
@@ -17207,6 +17226,11 @@ type ResourceDetails struct {
 
 	// Information about the encryption configuration for X-Ray.
 	AwsXrayEncryptionConfig *AwsXrayEncryptionConfigDetails
+
+	//  Details about an external code repository with which you can connect your
+	// Amazon Web Services resources. The connection is established through Amazon
+	// Inspector.
+	CodeRepository *CodeRepositoryDetails
 
 	// Details about a container resource related to a finding.
 	Container *ContainerDetails

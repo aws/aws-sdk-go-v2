@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/aiops/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"time"
 )
 
 // Returns the configuration information for the specified investigation group.
@@ -31,7 +30,7 @@ func (c *Client) GetInvestigationGroup(ctx context.Context, params *GetInvestiga
 type GetInvestigationGroupInput struct {
 
 	// Specify either the name or the ARN of the investigation group that you want to
-	// view.
+	// view. This is used to set the name of the investigation group.
 	//
 	// This member is required.
 	Identifier *string
@@ -45,16 +44,16 @@ type GetInvestigationGroupOutput struct {
 	Arn *string
 
 	// This structure is a string array. The first string is the ARN of a Amazon SNS
-	// topic. The array of strings display the ARNs of Amazon Q in chat applications
-	// configurations that are associated with that topic. For more information about
-	// these configuration ARNs, see [Getting started with Amazon Q in chat applications]and [Resource type defined by Amazon Web Services Chatbot].
+	// topic. The array of strings display the ARNs of chat applications configurations
+	// that are associated with that topic. For more information about these
+	// configuration ARNs, see [Getting started with Amazon Q in chat applications]and [Resource type defined by Amazon Web Services Chatbot].
 	//
 	// [Resource type defined by Amazon Web Services Chatbot]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awschatbot.html#awschatbot-resources-for-iam-policies
 	// [Getting started with Amazon Q in chat applications]: https://docs.aws.amazon.com/chatbot/latest/adminguide/getting-started.html
 	ChatbotNotificationChannel map[string][]string
 
 	// The date and time that the investigation group was created.
-	CreatedAt *time.Time
+	CreatedAt *int64
 
 	// The name of the user who created the investigation group.
 	CreatedBy *string
@@ -73,7 +72,7 @@ type GetInvestigationGroupOutput struct {
 	IsCloudTrailEventHistoryEnabled *bool
 
 	// The date and time that the investigation group was most recently modified.
-	LastModifiedAt *time.Time
+	LastModifiedAt *int64
 
 	// The name of the user who created the investigation group.
 	LastModifiedBy *string
@@ -89,9 +88,9 @@ type GetInvestigationGroupOutput struct {
 	RoleArn *string
 
 	// Displays the custom tag keys for custom applications in your system that you
-	// have specified in the investigation group. Resource tags help Amazon Q narrow
-	// the search space when it is unable to discover definite relationships between
-	// resources.
+	// have specified in the investigation group. Resource tags help CloudWatch
+	// investigations narrow the search space when it is unable to discover definite
+	// relationships between resources.
 	TagKeyBoundaries []string
 
 	// Metadata pertaining to the operation's result.

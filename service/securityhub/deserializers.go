@@ -60890,6 +60890,64 @@ func awsRestjson1_deserializeDocumentCloudWatchLogsLogGroupArnConfigDetails(v **
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCodeRepositoryDetails(v **types.CodeRepositoryDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CodeRepositoryDetails
+	if *v == nil {
+		sv = &types.CodeRepositoryDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CodeSecurityIntegrationArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.CodeSecurityIntegrationArn = ptr.String(jtv)
+			}
+
+		case "ProjectName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ProjectName = ptr.String(jtv)
+			}
+
+		case "ProviderType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ProviderType = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCodeVulnerabilitiesFilePath(v **types.CodeVulnerabilitiesFilePath, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -70252,6 +70310,11 @@ func awsRestjson1_deserializeDocumentResourceDetails(v **types.ResourceDetails, 
 
 		case "AwsXrayEncryptionConfig":
 			if err := awsRestjson1_deserializeDocumentAwsXrayEncryptionConfigDetails(&sv.AwsXrayEncryptionConfig, value); err != nil {
+				return err
+			}
+
+		case "CodeRepository":
+			if err := awsRestjson1_deserializeDocumentCodeRepositoryDetails(&sv.CodeRepository, value); err != nil {
 				return err
 			}
 

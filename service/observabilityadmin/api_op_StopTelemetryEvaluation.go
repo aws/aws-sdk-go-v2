@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	This action begins offboarding the caller AWS account from the telemetry
+//	This action begins offboarding the caller Amazon Web Services account from the
 //
-// config feature.
+// telemetry config feature.
 func (c *Client) StopTelemetryEvaluation(ctx context.Context, params *StopTelemetryEvaluationInput, optFns ...func(*Options)) (*StopTelemetryEvaluationOutput, error) {
 	if params == nil {
 		params = &StopTelemetryEvaluationInput{}

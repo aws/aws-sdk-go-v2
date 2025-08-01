@@ -1241,6 +1241,11 @@ func awsAwsjson10_serializeDocumentNetworkingRequest(v *types.NetworkingRequest,
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.NetworkType) > 0 {
+		ok := object.Key("networkType")
+		ok.String(string(v.NetworkType))
+	}
+
 	if v.SecurityGroupIds != nil {
 		ok := object.Key("securityGroupIds")
 		if err := awsAwsjson10_serializeDocumentSecurityGroupIdList(v.SecurityGroupIds, ok); err != nil {

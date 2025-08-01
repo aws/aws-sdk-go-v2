@@ -26,7 +26,7 @@ type EncryptionConfiguration struct {
 	KmsKeyId *string
 
 	// Displays whether investigation data is encrypted by a customer managed key or
-	// an Amazon Web Services owned kay.
+	// an Amazon Web Services owned key.
 	Type EncryptionConfigurationType
 
 	noSmithyDocumentSerde

@@ -40,6 +40,9 @@ type GetAssessmentFrameworkInput struct {
 type GetAssessmentFrameworkOutput struct {
 
 	//  The framework that the GetAssessmentFramework API returned.
+	//
+	// The Controls object returns a partial response when called through Framework
+	// APIs. For a complete Controls object, use GetControl .
 	Framework *types.Framework
 
 	// Metadata pertaining to the operation's result.

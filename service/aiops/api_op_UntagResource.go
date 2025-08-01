@@ -29,9 +29,8 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 type UntagResourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the resource that you want to remove the tags
-	// from. You can use the [ListInvestigationGroups]operation to find the ARNs of investigation groups.
-	//
-	// [ListInvestigationGroups]: https://docs.aws.amazon.com/operationalinvestigations/latest/AmazonQDeveloperOperationalInvestigationsAPIReference/API_ListInvestigationGroups.html
+	// from. You can use the ListInvestigationGroups operation to find the ARNs of
+	// investigation groups.
 	//
 	// This member is required.
 	ResourceArn *string

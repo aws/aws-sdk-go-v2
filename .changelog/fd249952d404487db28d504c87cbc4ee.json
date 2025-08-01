@@ -1,0 +1,8 @@
+{
+    "id": "fd249952-d404-487d-b28d-504c87cbc4ee",
+    "type": "feature",
+    "description": "This release adds support for the Asia Pacific (Jakarta) (ap-southeast-3) Region.",
+    "modules": [
+        "service/lightsail"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "920bc33a-6313-4a4b-bb16-ef7ba91dc8f7",
+    "type": "feature",
+    "description": "Release new resource detail type CodeRepository",
+    "modules": [
+        "service/securityhub"
+    ]
+}

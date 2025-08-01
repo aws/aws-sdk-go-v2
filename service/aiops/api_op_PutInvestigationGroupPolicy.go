@@ -18,12 +18,12 @@ import (
 // investigations, you must use this operation to create a policy similar to this
 // example.
 //
-//	{ "Version": "2008-10-17", "Statement": [{ "Effect": "Allow", "Principal": {
-//	"Service": "aiops.alarms.cloudwatch.amazonaws.com" }, "Action":
-//	["aiops:CreateInvestigation", "aiops:CreateInvestigationEvent"], "Resource":
+//	{ "Version": "2008-10-17", "Statement": [ { "Effect": "Allow", "Principal": {
+//	"Service": "aiops.alarms.cloudwatch.amazonaws.com" }, "Action": [
+//	"aiops:CreateInvestigation", "aiops:CreateInvestigationEvent" ], "Resource":
 //	"*", "Condition": { "StringEquals": { "aws:SourceAccount": "account-id" },
 //	"ArnLike": { "aws:SourceArn": "arn:aws:cloudwatch:region:account-id:alarm:*" } }
-//	}] }
+//	} ] }
 func (c *Client) PutInvestigationGroupPolicy(ctx context.Context, params *PutInvestigationGroupPolicyInput, optFns ...func(*Options)) (*PutInvestigationGroupPolicyOutput, error) {
 	if params == nil {
 		params = &PutInvestigationGroupPolicyInput{}

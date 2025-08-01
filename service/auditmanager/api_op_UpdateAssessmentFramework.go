@@ -31,6 +31,9 @@ type UpdateAssessmentFrameworkInput struct {
 
 	//  The control sets that are associated with the framework.
 	//
+	// The Controls object returns a partial response when called through Framework
+	// APIs. For a complete Controls object, use GetControl .
+	//
 	// This member is required.
 	ControlSets []types.UpdateAssessmentFrameworkControlSet
 
@@ -56,7 +59,7 @@ type UpdateAssessmentFrameworkInput struct {
 
 type UpdateAssessmentFrameworkOutput struct {
 
-	//  The name of the framework.
+	//  The framework object.
 	Framework *types.Framework
 
 	// Metadata pertaining to the operation's result.

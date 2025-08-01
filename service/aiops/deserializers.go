@@ -597,18 +597,15 @@ func awsRestjson1_deserializeOpDocumentGetInvestigationGroupOutput(v **GetInvest
 
 		case "createdAt":
 			if value != nil {
-				switch jtv := value.(type) {
-				case json.Number:
-					f64, err := jtv.Float64()
-					if err != nil {
-						return err
-					}
-					sv.CreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
-
-				default:
-					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
-
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
 				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.CreatedAt = ptr.Int64(i64)
 			}
 
 		case "createdBy":
@@ -641,18 +638,15 @@ func awsRestjson1_deserializeOpDocumentGetInvestigationGroupOutput(v **GetInvest
 
 		case "lastModifiedAt":
 			if value != nil {
-				switch jtv := value.(type) {
-				case json.Number:
-					f64, err := jtv.Float64()
-					if err != nil {
-						return err
-					}
-					sv.LastModifiedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
-
-				default:
-					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
-
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
 				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.LastModifiedAt = ptr.Int64(i64)
 			}
 
 		case "lastModifiedBy":
