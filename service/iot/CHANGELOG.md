@@ -1,3 +1,7 @@
+# v1.66.1 (2025-08-01)
+
+* No change notes available for this release.
+
 # v1.66.0 (2025-07-31)
 
 * **Feature**: This release allows AWS IoT Core users to use their own AWS KMS keys for data protection

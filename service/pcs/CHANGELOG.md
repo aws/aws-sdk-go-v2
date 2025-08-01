@@ -1,3 +1,7 @@
+# v1.8.0 (2025-08-01)
+
+* **Feature**: Add support for IPv6 Networking for Clusters.
+
 # v1.7.1 (2025-07-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

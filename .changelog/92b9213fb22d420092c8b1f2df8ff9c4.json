@@ -1,8 +1,0 @@
-{
-    "id": "92b9213f-b22d-4200-92c8-b1f2df8ff9c4",
-    "type": "feature",
-    "description": "CloudWatch Observability Admin adds the ability to enable telemetry on AWS resources such as Amazon VPCs (Flow Logs) in customers AWS Accounts and Organizations. The release introduces new APIs to manage telemetry rules, which define telemetry settings to be applied on AWS resources.",
-    "modules": [
-        "service/observabilityadmin"
-    ]
-}

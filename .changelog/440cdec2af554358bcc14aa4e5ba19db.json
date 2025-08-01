@@ -1,8 +1,0 @@
-{
-    "id": "440cdec2-af55-4358-bcc1-4aa4e5ba19db",
-    "type": "documentation",
-    "description": "Amazon SNS support for Amazon SQS fair queues",
-    "modules": [
-        "service/sns"
-    ]
-}

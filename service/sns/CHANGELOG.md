@@ -1,3 +1,7 @@
+# v1.35.2 (2025-08-01)
+
+* **Documentation**: Amazon SNS support for Amazon SQS fair queues
+
 # v1.35.1 (2025-07-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

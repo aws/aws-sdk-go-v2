@@ -1,3 +1,7 @@
+# v1.42.0 (2025-08-01)
+
+* **Feature**: Added a note to Framework APIs (CreateAssessmentFramework, GetAssessmentFramework, UpdateAssessmentFramework) clarifying that the Controls object returns a partial response when called through Framework APIs. Added documentation that the Framework's controlSources parameter is no longer supported.
+
 # v1.41.1 (2025-07-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "f3704e33-4ded-4d67-86c6-c09eb1888291",
-    "type": "feature",
-    "description": "This is the initial SDK release for Region switch",
-    "modules": [
-        "service/arcregionswitch"
-    ]
-}

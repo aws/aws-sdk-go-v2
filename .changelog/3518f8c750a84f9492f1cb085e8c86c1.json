@@ -1,8 +1,0 @@
-{
-    "id": "3518f8c7-50a8-4f94-92f1-cb085e8c86c1",
-    "type": "documentation",
-    "description": "Doc-only update to add more information to GetCertificate action.",
-    "modules": [
-        "service/acmpca"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.60.0 (2025-08-01)
+
+* **Feature**: Release new resource detail type CodeRepository
+
 # v1.59.1 (2025-07-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

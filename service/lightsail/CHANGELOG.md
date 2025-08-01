@@ -1,3 +1,7 @@
+# v1.45.0 (2025-08-01)
+
+* **Feature**: This release adds support for the Asia Pacific (Jakarta) (ap-southeast-3) Region.
+
 # v1.44.1 (2025-07-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

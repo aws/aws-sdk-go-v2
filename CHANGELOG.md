@@ -1,3 +1,26 @@
+# Release (2025-08-01)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acmpca`: [v1.41.2](service/acmpca/CHANGELOG.md#v1412-2025-08-01)
+  * **Documentation**: Doc-only update to add more information to GetCertificate action.
+* `github.com/aws/aws-sdk-go-v2/service/aiops`: [v1.3.0](service/aiops/CHANGELOG.md#v130-2025-08-01)
+  * **Feature**: This release includes fix for InvestigationGroup timestamp conversion issue.
+* `github.com/aws/aws-sdk-go-v2/service/arcregionswitch`: [v1.0.0](service/arcregionswitch/CHANGELOG.md#v100-2025-08-01)
+  * **Release**: New AWS service client module
+  * **Feature**: This is the initial SDK release for Region switch
+* `github.com/aws/aws-sdk-go-v2/service/auditmanager`: [v1.42.0](service/auditmanager/CHANGELOG.md#v1420-2025-08-01)
+  * **Feature**: Added a note to Framework APIs (CreateAssessmentFramework, GetAssessmentFramework, UpdateAssessmentFramework) clarifying that the Controls object returns a partial response when called through Framework APIs. Added documentation that the Framework's controlSources parameter is no longer supported.
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.45.0](service/lightsail/CHANGELOG.md#v1450-2025-08-01)
+  * **Feature**: This release adds support for the Asia Pacific (Jakarta) (ap-southeast-3) Region.
+* `github.com/aws/aws-sdk-go-v2/service/observabilityadmin`: [v1.3.0](service/observabilityadmin/CHANGELOG.md#v130-2025-08-01)
+  * **Feature**: CloudWatch Observability Admin adds the ability to enable telemetry on AWS resources such as Amazon VPCs (Flow Logs) in customers AWS Accounts and Organizations. The release introduces new APIs to manage telemetry rules, which define telemetry settings to be applied on AWS resources.
+* `github.com/aws/aws-sdk-go-v2/service/pcs`: [v1.8.0](service/pcs/CHANGELOG.md#v180-2025-08-01)
+  * **Feature**: Add support for IPv6 Networking for Clusters.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.60.0](service/securityhub/CHANGELOG.md#v1600-2025-08-01)
+  * **Feature**: Release new resource detail type CodeRepository
+* `github.com/aws/aws-sdk-go-v2/service/sns`: [v1.35.2](service/sns/CHANGELOG.md#v1352-2025-08-01)
+  * **Documentation**: Amazon SNS support for Amazon SQS fair queues
+
 # Release (2025-07-31)
 
 ## Module Highlights

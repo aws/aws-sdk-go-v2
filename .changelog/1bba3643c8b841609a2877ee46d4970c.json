@@ -1,8 +1,0 @@
-{
-    "id": "1bba3643-c8b8-4160-9a28-77ee46d4970c",
-    "type": "feature",
-    "description": "Add support for IPv6 Networking for Clusters.",
-    "modules": [
-        "service/pcs"
-    ]
-}

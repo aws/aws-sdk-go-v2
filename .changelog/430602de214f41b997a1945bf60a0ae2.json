@@ -1,8 +1,0 @@
-{
-    "id": "430602de-214f-41b9-97a1-945bf60a0ae2",
-    "type": "feature",
-    "description": "This release includes fix for InvestigationGroup timestamp conversion issue.",
-    "modules": [
-        "service/aiops"
-    ]
-}
