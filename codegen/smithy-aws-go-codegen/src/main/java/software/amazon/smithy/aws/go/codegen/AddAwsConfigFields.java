@@ -30,6 +30,7 @@ import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
+import software.amazon.smithy.go.codegen.GoUniverseTypes;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SmithyGoTypes;
@@ -45,6 +46,7 @@ import software.amazon.smithy.model.traits.HttpBearerAuthTrait;
 import software.amazon.smithy.utils.ListUtils;
 
 import static software.amazon.smithy.go.codegen.SymbolUtils.buildPackageSymbol;
+import static software.amazon.smithy.go.codegen.SymbolUtils.sliceOf;
 
 /**
  * Registers additional AWS specific client configuration fields
@@ -266,6 +268,11 @@ public class AddAwsConfigFields implements GoIntegration {
                     .type(SmithyGoDependency.SMITHY_HTTP_TRANSPORT.struct("InterceptorRegistry"))
                     .generatedOnClient(false)
                     .awsResolveFunction(buildPackageSymbol("resolveInterceptors"))
+                    .build(),
+            AwsConfigField.builder()
+                    .name("AuthSchemePreference")
+                    .type(sliceOf(GoUniverseTypes.String))
+                    .generatedOnClient(false)
                     .build()
     );
 
