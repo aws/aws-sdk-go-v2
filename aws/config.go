@@ -199,28 +199,6 @@ type Config struct {
 	ServiceOptions []func(string, any)
 }
 
-// ApplyServiceOptions applies service specific options from the config to the given options struct.
-// This function is intended to be used by service clients in their NewFromConfig functions.
-func (c Config) ApplyServiceOptions(serviceID string, options any) {
-	for _, callback := range c.ServiceOptions {
-		callback(serviceID, options)
-	}
-}
-
-// WithServiceOptions adds service specific options to the config.
-// This function can be chained with other config builder methods.
-func (c *Config) WithServiceOptions(callbacks ...func(string, any)) *Config {
-	c.ServiceOptions = append(c.ServiceOptions, callbacks...)
-	return c
-}
-
-// WithRegion sets the region for the config.
-// This function can be chained with other config builder methods.
-func (c *Config) WithRegion(region string) *Config {
-	c.Region = region
-	return c
-}
-
 // NewConfig returns a new Config pointer that can be chained with builder
 // methods to set multiple configuration values inline without using pointers.
 func NewConfig() *Config {
