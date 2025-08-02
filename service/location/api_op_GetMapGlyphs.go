@@ -76,10 +76,10 @@ type GetMapGlyphsInput struct {
 	// The fonts used by the Open Data map styles are combined fonts that use Amazon
 	// Ember for most glyphs but Noto Sans for glyphs unsupported by Amazon Ember .
 	//
-	// [Esri]: https://docs.aws.amazon.com/location/latest/developerguide/esri.html
-	// [HERE Technologies]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
-	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html
-	// [Open Data]: https://docs.aws.amazon.com/location/latest/developerguide/open-data.html
+	// [Esri]: https://docs.aws.amazon.com/location/previous/developerguide/esri.html
+	// [HERE Technologies]: https://docs.aws.amazon.com/location/previous/developerguide/HERE.html
+	// [GrabMaps]: https://docs.aws.amazon.com/location/previous/developerguide/grab.html
+	// [Open Data]: https://docs.aws.amazon.com/location/previous/developerguide/open-data.html
 	//
 	// This member is required.
 	FontStack *string
@@ -98,7 +98,7 @@ type GetMapGlyphsInput struct {
 
 	// The optional [API key] to authorize the request.
 	//
-	// [API key]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+	// [API key]: https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html
 	Key *string
 
 	noSmithyDocumentSerde
@@ -210,6 +210,36 @@ func (c *Client) addOperationGetMapGlyphsMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

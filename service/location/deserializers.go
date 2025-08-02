@@ -11704,7 +11704,7 @@ func awsRestjson1_deserializeDocumentCircle(v **types.Circle, value interface{})
 					sv.Radius = ptr.Float64(f64)
 
 				default:
-					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+					return fmt.Errorf("expected SensitiveDouble to be a JSON Number, got %T instead", value)
 
 				}
 			}
@@ -12248,6 +12248,11 @@ func awsRestjson1_deserializeDocumentGeofenceGeometry(v **types.GeofenceGeometry
 					return fmt.Errorf("failed to base64 decode Base64EncodedGeobuf, %w", err)
 				}
 				sv.Geobuf = dv
+			}
+
+		case "MultiPolygon":
+			if err := awsRestjson1_deserializeDocumentMultiLinearRings(&sv.MultiPolygon, value); err != nil {
+				return err
 			}
 
 		case "Polygon":
@@ -13710,6 +13715,38 @@ func awsRestjson1_deserializeDocumentMapConfiguration(v **types.MapConfiguration
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentMultiLinearRings(v *[][][][]float64, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv [][][][]float64
+	if *v == nil {
+		cv = [][][][]float64{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col [][][]float64
+		if err := awsRestjson1_deserializeDocumentLinearRings(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentPlace(v **types.Place, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14098,7 +14135,7 @@ func awsRestjson1_deserializeDocumentPositionalAccuracy(v **types.PositionalAccu
 					sv.Horizontal = ptr.Float64(f64)
 
 				default:
-					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+					return fmt.Errorf("expected SensitiveDouble to be a JSON Number, got %T instead", value)
 
 				}
 			}

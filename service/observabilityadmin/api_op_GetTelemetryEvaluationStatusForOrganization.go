@@ -13,9 +13,9 @@ import (
 
 //	This returns the onboarding status of the telemetry configuration feature for
 //
-// the organization. It can only be called by a Management Account of an AWS
-// Organization or an assigned Delegated Admin Account of AWS CloudWatch telemetry
-// config.
+// the organization. It can only be called by a Management Account of an Amazon Web
+// Services Organization or an assigned Delegated Admin Account of Amazon
+// CloudWatch telemetry config.
 func (c *Client) GetTelemetryEvaluationStatusForOrganization(ctx context.Context, params *GetTelemetryEvaluationStatusForOrganizationInput, optFns ...func(*Options)) (*GetTelemetryEvaluationStatusForOrganizationOutput, error) {
 	if params == nil {
 		params = &GetTelemetryEvaluationStatusForOrganizationInput{}
@@ -133,6 +133,36 @@ func (c *Client) addOperationGetTelemetryEvaluationStatusForOrganizationMiddlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

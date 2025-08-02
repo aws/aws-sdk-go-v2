@@ -74,11 +74,59 @@ func TestCheckSnapshot_AssociateWhatsAppBusinessAccount(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateWhatsAppMessageTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateWhatsAppMessageTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateWhatsAppMessageTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateWhatsAppMessageTemplateFromLibrary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateWhatsAppMessageTemplateFromLibrary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateWhatsAppMessageTemplateFromLibrary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateWhatsAppMessageTemplateMedia(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateWhatsAppMessageTemplateMedia(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateWhatsAppMessageTemplateMedia")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteWhatsAppMessageMedia(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteWhatsAppMessageMedia(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteWhatsAppMessageMedia")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteWhatsAppMessageTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteWhatsAppMessageTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteWhatsAppMessageTemplate")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -134,6 +182,18 @@ func TestCheckSnapshot_GetWhatsAppMessageMedia(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetWhatsAppMessageTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetWhatsAppMessageTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetWhatsAppMessageTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListLinkedWhatsAppBusinessAccounts(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListLinkedWhatsAppBusinessAccounts(context.Background(), nil, func(o *Options) {
@@ -151,6 +211,30 @@ func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListWhatsAppMessageTemplates(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListWhatsAppMessageTemplates(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListWhatsAppMessageTemplates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListWhatsAppTemplateLibrary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListWhatsAppTemplateLibrary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListWhatsAppTemplateLibrary")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -217,6 +301,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_UpdateWhatsAppMessageTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateWhatsAppMessageTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateWhatsAppMessageTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_AssociateWhatsAppBusinessAccount(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateWhatsAppBusinessAccount(context.Background(), nil, func(o *Options) {
@@ -229,11 +325,59 @@ func TestUpdateSnapshot_AssociateWhatsAppBusinessAccount(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateWhatsAppMessageTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateWhatsAppMessageTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateWhatsAppMessageTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateWhatsAppMessageTemplateFromLibrary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateWhatsAppMessageTemplateFromLibrary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateWhatsAppMessageTemplateFromLibrary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateWhatsAppMessageTemplateMedia(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateWhatsAppMessageTemplateMedia(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateWhatsAppMessageTemplateMedia")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteWhatsAppMessageMedia(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteWhatsAppMessageMedia(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteWhatsAppMessageMedia")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteWhatsAppMessageTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteWhatsAppMessageTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteWhatsAppMessageTemplate")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -289,6 +433,18 @@ func TestUpdateSnapshot_GetWhatsAppMessageMedia(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetWhatsAppMessageTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetWhatsAppMessageTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetWhatsAppMessageTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListLinkedWhatsAppBusinessAccounts(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListLinkedWhatsAppBusinessAccounts(context.Background(), nil, func(o *Options) {
@@ -306,6 +462,30 @@ func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListWhatsAppMessageTemplates(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListWhatsAppMessageTemplates(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListWhatsAppMessageTemplates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListWhatsAppTemplateLibrary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListWhatsAppTemplateLibrary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListWhatsAppTemplateLibrary")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -366,6 +546,18 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateWhatsAppMessageTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateWhatsAppMessageTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateWhatsAppMessageTemplate")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

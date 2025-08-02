@@ -88,6 +88,13 @@ func awsRestjson1_serializeOpDocumentCreateApplicationInput(v *CreateApplication
 	object := value.Object()
 	defer object.Close()
 
+	if v.ApplicationConfig != nil {
+		ok := object.Key("ApplicationConfig")
+		if err := awsRestjson1_serializeDocumentApplicationConfig(v.ApplicationConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ApplicationSourceConfig != nil {
 		ok := object.Key("ApplicationSourceConfig")
 		if err := awsRestjson1_serializeDocumentApplicationSourceConfig(v.ApplicationSourceConfig, ok); err != nil {
@@ -103,6 +110,23 @@ func awsRestjson1_serializeOpDocumentCreateApplicationInput(v *CreateApplication
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
+	}
+
+	if v.IframeConfig != nil {
+		ok := object.Key("IframeConfig")
+		if err := awsRestjson1_serializeDocumentIframeConfig(v.IframeConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InitializationTimeout != nil {
+		ok := object.Key("InitializationTimeout")
+		ok.Integer(*v.InitializationTimeout)
+	}
+
+	if v.IsService {
+		ok := object.Key("IsService")
+		ok.Boolean(v.IsService)
 	}
 
 	if v.Name != nil {
@@ -1713,6 +1737,13 @@ func awsRestjson1_serializeOpDocumentUpdateApplicationInput(v *UpdateApplication
 	object := value.Object()
 	defer object.Close()
 
+	if v.ApplicationConfig != nil {
+		ok := object.Key("ApplicationConfig")
+		if err := awsRestjson1_serializeDocumentApplicationConfig(v.ApplicationConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ApplicationSourceConfig != nil {
 		ok := object.Key("ApplicationSourceConfig")
 		if err := awsRestjson1_serializeDocumentApplicationSourceConfig(v.ApplicationSourceConfig, ok); err != nil {
@@ -1723,6 +1754,23 @@ func awsRestjson1_serializeOpDocumentUpdateApplicationInput(v *UpdateApplication
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
+	}
+
+	if v.IframeConfig != nil {
+		ok := object.Key("IframeConfig")
+		if err := awsRestjson1_serializeDocumentIframeConfig(v.IframeConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InitializationTimeout != nil {
+		ok := object.Key("InitializationTimeout")
+		ok.Integer(*v.InitializationTimeout)
+	}
+
+	if v.IsService != nil {
+		ok := object.Key("IsService")
+		ok.Boolean(*v.IsService)
 	}
 
 	if v.Name != nil {
@@ -2063,6 +2111,20 @@ func awsRestjson1_serializeDocumentApplicationApprovedOrigins(v []string, value 
 	return nil
 }
 
+func awsRestjson1_serializeDocumentApplicationConfig(v *types.ApplicationConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ContactHandling != nil {
+		ok := object.Key("ContactHandling")
+		if err := awsRestjson1_serializeDocumentContactHandling(v.ContactHandling, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentApplicationSourceConfig(v *types.ApplicationSourceConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2085,6 +2147,18 @@ func awsRestjson1_serializeDocumentClientAssociationMetadata(v map[string]string
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentContactHandling(v *types.ContactHandling, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Scope) > 0 {
+		ok := object.Key("Scope")
+		ok.String(string(v.Scope))
+	}
+
 	return nil
 }
 
@@ -2194,6 +2268,38 @@ func awsRestjson1_serializeDocumentFileConfiguration(v *types.FileConfiguration,
 }
 
 func awsRestjson1_serializeDocumentFolderList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIframeConfig(v *types.IframeConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Allow != nil {
+		ok := object.Key("Allow")
+		if err := awsRestjson1_serializeDocumentIframePermissionList(v.Allow, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Sandbox != nil {
+		ok := object.Key("Sandbox")
+		if err := awsRestjson1_serializeDocumentIframePermissionList(v.Sandbox, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIframePermissionList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 

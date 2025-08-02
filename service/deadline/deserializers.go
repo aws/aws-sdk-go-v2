@@ -23356,6 +23356,28 @@ func awsRestjson1_deserializeDocumentJobSearchSummary(v **types.JobSearchSummary
 				return err
 			}
 
+		case "updatedAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UpdatedAt to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.UpdatedAt = ptr.Time(t)
+			}
+
+		case "updatedBy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UpdatedBy to be of type string, got %T instead", value)
+				}
+				sv.UpdatedBy = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -25720,6 +25742,11 @@ func awsRestjson1_deserializeDocumentServiceManagedEc2FleetConfiguration(v **typ
 				sv.StorageProfileId = ptr.String(jtv)
 			}
 
+		case "vpcConfiguration":
+			if err := awsRestjson1_deserializeDocumentVpcConfiguration(&sv.VpcConfiguration, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -27555,6 +27582,15 @@ func awsRestjson1_deserializeDocumentStepSearchSummary(v **types.StepSearchSumma
 				sv.CreatedAt = ptr.Time(t)
 			}
 
+		case "createdBy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CreatedBy to be of type string, got %T instead", value)
+				}
+				sv.CreatedBy = ptr.String(jtv)
+			}
+
 		case "endedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -27674,6 +27710,28 @@ func awsRestjson1_deserializeDocumentStepSearchSummary(v **types.StepSearchSumma
 		case "taskRunStatusCounts":
 			if err := awsRestjson1_deserializeDocumentTaskRunStatusCounts(&sv.TaskRunStatusCounts, value); err != nil {
 				return err
+			}
+
+		case "updatedAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UpdatedAt to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.UpdatedAt = ptr.Time(t)
+			}
+
+		case "updatedBy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UpdatedBy to be of type string, got %T instead", value)
+				}
+				sv.UpdatedBy = ptr.String(jtv)
 			}
 
 		default:
@@ -28650,6 +28708,28 @@ func awsRestjson1_deserializeDocumentTaskSearchSummary(v **types.TaskSearchSumma
 				sv.TaskId = ptr.String(jtv)
 			}
 
+		case "updatedAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UpdatedAt to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.UpdatedAt = ptr.Time(t)
+			}
+
+		case "updatedBy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UpdatedBy to be of type string, got %T instead", value)
+				}
+				sv.UpdatedBy = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -29162,6 +29242,78 @@ func awsRestjson1_deserializeDocumentVCpuCountRange(v **types.VCpuCountRange, va
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVpcConfiguration(v **types.VpcConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VpcConfiguration
+	if *v == nil {
+		sv = &types.VpcConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "resourceConfigurationArns":
+			if err := awsRestjson1_deserializeDocumentVpcResourceConfigurationArns(&sv.ResourceConfigurationArns, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVpcResourceConfigurationArns(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected VpcResourceConfigurationArn to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

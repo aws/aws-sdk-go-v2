@@ -23,9 +23,9 @@ import (
 // Use the parameters of CreateKey to specify the type of KMS key, the source of
 // its key material, its key policy, description, tags, and other properties.
 //
-// KMS has replaced the term customer master key (CMK) with KMS key and KMS key.
-// The concept has not changed. To prevent breaking changes, KMS is keeping some
-// variations of this term.
+// KMS has replaced the term customer master key (CMK) with Key Management Service
+// key and KMS key. The concept has not changed. To prevent breaking changes, KMS
+// is keeping some variations of this term.
 //
 // To create different types of KMS keys, use the following guidance:
 //
@@ -597,6 +597,36 @@ func (c *Client) addOperationCreateKeyMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

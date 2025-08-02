@@ -1,3 +1,16 @@
+# v1.49.0 (2025-07-31)
+
+* **Feature**: This release introduces support for Multi-tenant management
+
+# v1.48.1 (2025-07-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.48.0 (2025-07-28)
+
+* **Feature**: Add support for HTTP interceptors.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.47.1 (2025-07-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

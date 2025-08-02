@@ -49,7 +49,7 @@ type SearchPlaceIndexForPositionInput struct {
 
 	// The optional [API key] to authorize the request.
 	//
-	// [API key]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+	// [API key]: https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html
 	Key *string
 
 	// The preferred language used to return results. The value must be a valid [BCP 47]
@@ -189,6 +189,36 @@ func (c *Client) addOperationSearchPlaceIndexForPositionMiddlewares(stack *middl
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

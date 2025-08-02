@@ -15,17 +15,15 @@ import (
 	"time"
 )
 
-// Gets information about a workflow run.
+// Gets detailed information about a specific run using its ID.
 //
-// If a workflow is shared with you, you cannot export information about the run.
+// Amazon Web Services HealthOmics stores a configurable number of runs, as
+// determined by service limits, that are available to the console and API. If
+// GetRun does not return the requested run, you can find all run logs in the
+// CloudWatch logs. For more information about viewing the run logs, see [CloudWatch logs]in the
+// Amazon Web Services HealthOmics User Guide.
 //
-// Amazon Web Services HealthOmics stores a fixed number of runs that are
-// available to the console and API. If GetRun doesn't return the requested run,
-// you can find run logs for all runs in the CloudWatch logs. For more information
-// about viewing the run logs, see [CloudWatch logs]in the in the Amazon Web Services HealthOmics
-// User Guide.
-//
-// [CloudWatch logs]: https://docs.aws.amazon.com/omics/latest/dev/cloudwatch-logs.html
+// [CloudWatch logs]: https://docs.aws.amazon.com/omics/latest/dev/monitoring-cloudwatch-logs.html
 func (c *Client) GetRun(ctx context.Context, params *GetRunInput, optFns ...func(*Options)) (*GetRunOutput, error) {
 	if params == nil {
 		params = &GetRunInput{}
@@ -262,6 +260,36 @@ func (c *Client) addOperationGetRunMiddlewares(stack *middleware.Stack, options 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

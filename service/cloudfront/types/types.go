@@ -304,6 +304,11 @@ type AnycastIpListSummary struct {
 // configuration and specify all of the cache behaviors that you want to include in
 // the updated distribution.
 //
+// If your minimum TTL is greater than 0, CloudFront will cache content for at
+// least the duration specified in the cache policy's minimum TTL, even if the
+// Cache-Control: no-cache , no-store , or private directives are present in the
+// origin headers.
+//
 // For more information about cache behaviors, see [Cache Behavior Settings] in the Amazon CloudFront
 // Developer Guide.
 //
@@ -676,6 +681,12 @@ type CachePolicy struct {
 //
 //   - The default, minimum, and maximum time to live (TTL) values that you want
 //     objects to stay in the CloudFront cache.
+//
+// If your minimum TTL is greater than 0, CloudFront will cache content for at
+//
+//	least the duration specified in the cache policy's minimum TTL, even if the
+//	Cache-Control: no-cache , no-store , or private directives are present in the
+//	origin headers.
 //
 // The headers, cookies, and query strings that are included in the cache key are
 // also included in requests that CloudFront sends to the origin. CloudFront sends
@@ -1606,9 +1617,9 @@ type CustomOriginConfig struct {
 	// is 1 second, the maximum is 120 seconds, and the default (if you don't specify
 	// otherwise) is 30 seconds.
 	//
-	// For more information, see [Response timeout (custom origins only)] in the Amazon CloudFront Developer Guide.
+	// For more information, see [Response timeout] in the Amazon CloudFront Developer Guide.
 	//
-	// [Response timeout (custom origins only)]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginResponseTimeout
+	// [Response timeout]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginResponseTimeout
 	OriginReadTimeout *int32
 
 	// Specifies the minimum SSL/TLS protocol that CloudFront uses when connecting to
@@ -1627,6 +1638,11 @@ type CustomOriginConfig struct {
 // CacheBehavior element or if request URLs don't match any of the values of
 // PathPattern in CacheBehavior elements. You must create exactly one default
 // cache behavior.
+//
+// If your minimum TTL is greater than 0, CloudFront will cache content for at
+// least the duration specified in the cache policy's minimum TTL, even if the
+// Cache-Control: no-cache , no-store , or private directives are present in the
+// origin headers.
 type DefaultCacheBehavior struct {
 
 	// The value of ID for the origin that you want CloudFront to route requests to
@@ -2009,8 +2025,8 @@ type DistributionConfig struct {
 	CacheBehaviors *CacheBehaviors
 
 	// This field specifies whether the connection mode is through a standard
-	// distribution (direct) or a multi-tenant distribution with distribution
-	// tenants(tenant-only).
+	// distribution (direct) or a multi-tenant distribution with distribution tenants
+	// (tenant-only).
 	ConnectionMode ConnectionMode
 
 	// This field only supports standard distributions. You can't specify this field
@@ -2444,8 +2460,8 @@ type DistributionSummary struct {
 	AnycastIpListId *string
 
 	// This field specifies whether the connection mode is through a standard
-	// distribution (direct) or a multi-tenant distribution with distribution
-	// tenants(tenant-only).
+	// distribution (direct) or a multi-tenant distribution with distribution tenants
+	// (tenant-only).
 	ConnectionMode ConnectionMode
 
 	// The current version of the distribution.
@@ -3978,6 +3994,19 @@ type Origin struct {
 	//
 	// [Using Origin Shield]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/origin-shield.html
 	OriginShield *OriginShield
+
+	// The time (in seconds) that a request from CloudFront to the origin can stay
+	// open and wait for a response. If the complete response isn't received from the
+	// origin by this time, CloudFront ends the connection.
+	//
+	// The value for ResponseCompletionTimeout must be equal to or greater than the
+	// value for OriginReadTimeout . If you don't set a value for
+	// ResponseCompletionTimeout , CloudFront doesn't enforce a maximum value.
+	//
+	// For more information, see [Response completion timeout] in the Amazon CloudFront Developer Guide.
+	//
+	// [Response completion timeout]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#response-completion-timeout
+	ResponseCompletionTimeout *int32
 
 	// Use this type to specify an origin that is an Amazon S3 bucket that is not
 	// configured with static website hosting. To specify any other type of origin,
@@ -5759,6 +5788,16 @@ type S3OriginConfig struct {
 	// This member is required.
 	OriginAccessIdentity *string
 
+	// Specifies how long, in seconds, CloudFront waits for a response from the
+	// origin. This is also known as the origin response timeout. The minimum timeout
+	// is 1 second, the maximum is 120 seconds, and the default (if you don't specify
+	// otherwise) is 30 seconds.
+	//
+	// For more information, see [Response timeout] in the Amazon CloudFront Developer Guide.
+	//
+	// [Response timeout]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginResponseTimeout
+	OriginReadTimeout *int32
+
 	noSmithyDocumentSerde
 }
 
@@ -6513,9 +6552,9 @@ type VpcOriginConfig struct {
 	// is 1 second, the maximum is 120 seconds, and the default (if you don't specify
 	// otherwise) is 30 seconds.
 	//
-	// For more information, see [Response timeout (custom origins only)] in the Amazon CloudFront Developer Guide.
+	// For more information, see [Response timeout] in the Amazon CloudFront Developer Guide.
 	//
-	// [Response timeout (custom origins only)]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginResponseTimeout
+	// [Response timeout]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginResponseTimeout
 	OriginReadTimeout *int32
 
 	noSmithyDocumentSerde

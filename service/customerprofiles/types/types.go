@@ -532,6 +532,25 @@ type Consolidation struct {
 	noSmithyDocumentSerde
 }
 
+// Object that defines users contact preference.
+type ContactPreference struct {
+
+	// The contact type used for engagement. For example: HomePhoneNumber,
+	// PersonalEmailAddress.
+	ContactType ContactType
+
+	// A searchable, unique identifier of a customer profile.
+	KeyName *string
+
+	// The key value used to look up profile based off the keyName.
+	KeyValue *string
+
+	// The unique identifier of a customer profile.
+	ProfileId *string
+
+	noSmithyDocumentSerde
+}
+
 // Object that segments on various Customer Profile's date fields.
 type DateDimension struct {
 
@@ -628,6 +647,18 @@ type DomainStats struct {
 
 	// The total size, in bytes, of all objects in the domain.
 	TotalSize int64
+
+	noSmithyDocumentSerde
+}
+
+// Object that defines users preferred methods of engagement.
+type EngagementPreferences struct {
+
+	// A list of email-related contact preferences
+	Email []ContactPreference
+
+	// A list of phone-related contact preferences
+	Phone []ContactPreference
 
 	noSmithyDocumentSerde
 }
@@ -834,6 +865,9 @@ type FieldSourceProfileIds struct {
 	// A unique identifier for the email address field to be merged.
 	EmailAddress *string
 
+	// A unique identifier for the engagement preferences field to be merged.
+	EngagementPreferences *string
+
 	// A unique identifier for the first name field to be merged.
 	FirstName *string
 
@@ -863,6 +897,9 @@ type FieldSourceProfileIds struct {
 
 	// A unique identifier for the phone number field to be merged.
 	PhoneNumber *string
+
+	// A unique identifier for the profile type field to be merged.
+	ProfileType *string
 
 	// A unique identifier for the shipping address field to be merged.
 	ShippingAddress *string
@@ -1663,6 +1700,9 @@ type Profile struct {
 	// business address.
 	EmailAddress *string
 
+	// The customer or account’s engagement preferences.
+	EngagementPreferences *EngagementPreferences
+
 	// The customer’s first name.
 	FirstName *string
 
@@ -1728,6 +1768,9 @@ type Profile struct {
 
 	// The unique identifier of a customer profile.
 	ProfileId *string
+
+	// The type of the profile.
+	ProfileType ProfileType
 
 	// The customer’s shipping address.
 	ShippingAddress *Address
@@ -1798,6 +1841,9 @@ type ProfileAttributes struct {
 	// A field to describe values to segment on within phone number.
 	PhoneNumber *ProfileDimension
 
+	// A field to describe values to segment on within profile type.
+	ProfileType *ProfileTypeDimension
+
 	// A field to describe values to segment on within shipping address.
 	ShippingAddress *AddressDimension
 
@@ -1854,6 +1900,22 @@ type ProfileQueryResult struct {
 
 	// The standard profile of a customer.
 	Profile *Profile
+
+	noSmithyDocumentSerde
+}
+
+// Object to hold the dimension of a profile type field to segment on.
+type ProfileTypeDimension struct {
+
+	// The action to segment on.
+	//
+	// This member is required.
+	DimensionType ProfileTypeDimensionType
+
+	// The values to apply the DimensionType on.
+	//
+	// This member is required.
+	Values []ProfileType
 
 	noSmithyDocumentSerde
 }

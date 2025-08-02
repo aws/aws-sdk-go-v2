@@ -40,7 +40,13 @@ type ExecuteQueryInput struct {
 	// request is required.
 	ClientToken *string
 
-	// The maximum number of results to return at one time. The default is 25.
+	// The maximum number of results to return at one time.
+	//
+	//   - Minimum is 1
+	//
+	//   - Maximum is 20000
+	//
+	//   - Default is 250
 	MaxResults *int32
 
 	// The string that specifies the next page of results.
@@ -160,6 +166,36 @@ func (c *Client) addOperationExecuteQueryMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
+		return err
+	}
 	if err = addSpanInitializeStart(stack); err != nil {
 		return err
 	}
@@ -177,7 +213,13 @@ func (c *Client) addOperationExecuteQueryMiddlewares(stack *middleware.Stack, op
 
 // ExecuteQueryPaginatorOptions is the paginator options for ExecuteQuery
 type ExecuteQueryPaginatorOptions struct {
-	// The maximum number of results to return at one time. The default is 25.
+	// The maximum number of results to return at one time.
+	//
+	//   - Minimum is 1
+	//
+	//   - Maximum is 20000
+	//
+	//   - Default is 250
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -26,12 +26,102 @@ type TelemetryConfiguration struct {
 	// Environment: "Development" } .
 	ResourceTags map[string]string
 
-	//  The type of resource, for example AWS::EC2::Instance .
+	//  The type of resource, for example Amazon Web Services::EC2::Instance .
 	ResourceType ResourceType
 
 	//  The configuration state for the resource, for example { Logs: NotApplicable;
 	// Metrics: Enabled; Traces: NotApplicable; } .
 	TelemetryConfigurationState map[string]TelemetryState
+
+	noSmithyDocumentSerde
+}
+
+//	Configuration specifying where and how telemetry data should be delivered for
+//
+// Amazon Web Services resources.
+type TelemetryDestinationConfiguration struct {
+
+	//  The pattern used to generate the destination path or name, supporting macros
+	// like <resourceId> and <accountId>.
+	DestinationPattern *string
+
+	//  The type of destination for the telemetry data (e.g., "Amazon CloudWatch
+	// Logs", "S3").
+	DestinationType DestinationType
+
+	//  The number of days to retain the telemetry data in the destination.
+	RetentionInDays *int32
+
+	//  Configuration parameters specific to VPC Flow Logs when VPC is the resource
+	// type.
+	VPCFlowLogParameters *VPCFlowLogParameters
+
+	noSmithyDocumentSerde
+}
+
+//	Defines how telemetry should be configured for specific Amazon Web Services
+//
+// resources.
+type TelemetryRule struct {
+
+	//  The type of telemetry to collect (Logs, Metrics, or Traces).
+	//
+	// This member is required.
+	TelemetryType TelemetryType
+
+	//  Configuration specifying where and how the telemetry data should be delivered.
+	DestinationConfiguration *TelemetryDestinationConfiguration
+
+	//  The type of Amazon Web Services resource to configure telemetry for (e.g.,
+	// "AWS::EC2::VPC").
+	ResourceType ResourceType
+
+	//  The organizational scope to which the rule applies, specified using accounts
+	// or organizational units.
+	Scope *string
+
+	//  Criteria for selecting which resources the rule applies to, such as resource
+	// tags.
+	SelectionCriteria *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of a telemetry rule's key properties.
+type TelemetryRuleSummary struct {
+
+	//  The timestamp when the telemetry rule was created.
+	CreatedTimeStamp *int64
+
+	//  The timestamp when the telemetry rule was last modified.
+	LastUpdateTimeStamp *int64
+
+	//  The type of Amazon Web Services resource the rule applies to.
+	ResourceType ResourceType
+
+	//  The Amazon Resource Name (ARN) of the telemetry rule.
+	RuleArn *string
+
+	//  The name of the telemetry rule.
+	RuleName *string
+
+	//  The type of telemetry (Logs, Metrics, or Traces) the rule configures.
+	TelemetryType TelemetryType
+
+	noSmithyDocumentSerde
+}
+
+// Configuration parameters specific to VPC Flow Logs.
+type VPCFlowLogParameters struct {
+
+	//  The format in which VPC Flow Log entries should be logged.
+	LogFormat *string
+
+	//  The maximum interval in seconds between the capture of flow log records.
+	MaxAggregationInterval *int32
+
+	//  The type of traffic to log (ACCEPT, REJECT, or ALL).
+	TrafficType *string
 
 	noSmithyDocumentSerde
 }

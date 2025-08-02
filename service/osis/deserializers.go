@@ -3291,6 +3291,15 @@ func awsRestjson1_deserializeDocumentPipeline(v **types.Pipeline, value interfac
 				sv.PipelineName = ptr.String(jtv)
 			}
 
+		case "PipelineRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PipelineRoleArn to be of type string, got %T instead", value)
+				}
+				sv.PipelineRoleArn = ptr.String(jtv)
+			}
+
 		case "ServiceVpcEndpoints":
 			if err := awsRestjson1_deserializeDocumentServiceVpcEndpointsList(&sv.ServiceVpcEndpoints, value); err != nil {
 				return err

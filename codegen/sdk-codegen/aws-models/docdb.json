@@ -2025,6 +2025,12 @@
                         "smithy.api#documentation": "<p>The storage type to associate with the DB cluster.</p>\n         <p>For information on storage types for Amazon DocumentDB clusters, see \n            Cluster storage configurations in the <i>Amazon DocumentDB Developer Guide</i>.</p>\n         <p>Valid values for storage type - <code>standard | iopt1</code>\n         </p>\n         <p>Default value is <code>standard </code>\n         </p>\n         <note>\n            <p>When you create a DocumentDB DB cluster with the storage type set to <code>iopt1</code>, the storage type is returned\n                    in the response. The storage type isn't returned when you set it to <code>standard</code>.</p>\n         </note>"
                     }
                 },
+                "ServerlessV2ScalingConfiguration": {
+                    "target": "com.amazonaws.docdb#ServerlessV2ScalingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the scaling configuration of an Amazon DocumentDB Serverless cluster.</p>"
+                    }
+                },
                 "ManageMasterUserPassword": {
                     "target": "com.amazonaws.docdb#BooleanOptional",
                     "traits": {
@@ -2828,7 +2834,13 @@
                 "StorageType": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Storage type associated with your cluster</p>\n         <p>Storage type associated with your cluster</p>\n         <p>For information on storage types for Amazon DocumentDB clusters, see \n            Cluster storage configurations in the <i>Amazon DocumentDB Developer Guide</i>.</p>\n         <p>Valid values for storage type - <code>standard | iopt1</code>\n         </p>\n         <p>Default value is <code>standard </code>\n         </p>"
+                        "smithy.api#documentation": "<p>Storage type associated with your cluster</p>\n         <p>For information on storage types for Amazon DocumentDB clusters, see \n            Cluster storage configurations in the <i>Amazon DocumentDB Developer Guide</i>.</p>\n         <p>Valid values for storage type - <code>standard | iopt1</code>\n         </p>\n         <p>Default value is <code>standard </code>\n         </p>"
+                    }
+                },
+                "ServerlessV2ScalingConfiguration": {
+                    "target": "com.amazonaws.docdb#ServerlessV2ScalingConfigurationInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scaling configuration of an Amazon DocumentDB Serverless cluster.</p>"
                     }
                 },
                 "MasterUserSecret": {
@@ -3224,7 +3236,7 @@
                 "StorageType": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Storage type associated with your cluster snapshot </p>\n         <p>For information on storage types for Amazon DocumentDB clusters, see \n            Cluster storage configurations in the <i>Amazon DocumentDB Developer Guide</i>.</p>\n         <p>Valid values for storage type - <code>standard | iopt1</code>\n         </p>\n         <p>Default value is <code>standard </code>\n         </p>"
+                        "smithy.api#documentation": "<p>Storage type associated with your cluster snapshot</p>\n         <p>For information on storage types for Amazon DocumentDB clusters, see \n            Cluster storage configurations in the <i>Amazon DocumentDB Developer Guide</i>.</p>\n         <p>Valid values for storage type - <code>standard | iopt1</code>\n         </p>\n         <p>Default value is <code>standard </code>\n         </p>"
                     }
                 }
             },
@@ -3406,6 +3418,12 @@
                     "target": "com.amazonaws.docdb#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the engine version supports rotating the server certificate without \n            rebooting the DB instance.</p>"
+                    }
+                },
+                "ServerlessV2FeaturesSupport": {
+                    "target": "com.amazonaws.docdb#ServerlessV2FeaturesSupport",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies any Amazon DocumentDB Serverless properties or limits that differ between Amazon DocumentDB engine versions. \n            You can test the values of this attribute when deciding which Amazon DocumentDB version to use in a new or upgraded cluster. \n            You can also retrieve the version of an existing cluster and check whether that version supports certain Amazon DocumentDB Serverless features before you attempt to use those features.</p>"
                     }
                 }
             },
@@ -5485,6 +5503,9 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.docdb#DoubleOptional": {
+            "type": "double"
+        },
         "com.amazonaws.docdb#Endpoint": {
             "type": "structure",
             "members": {
@@ -5964,7 +5985,7 @@
                 "GlobalClusterResourceId": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Region-unique, immutable identifier for the global database cluster. This identifier is found in CloudTrail log entries whenever the KMS customer master key (CMK) for the cluster is accessed. </p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services RegionRegion-unique, immutable identifier for the global database cluster. \n            This identifier is found in CloudTrail log entries whenever the KMS customer master key (CMK) for the cluster is accessed. </p>"
                     }
                 },
                 "GlobalClusterArn": {
@@ -6068,7 +6089,7 @@
                 "Readers": {
                     "target": "com.amazonaws.docdb#ReadersArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for each read-only secondary cluster associated with the Aurora global cluster.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for each read-only secondary cluster associated with the Amazon DocumentDB global cluster.</p>"
                     }
                 },
                 "IsWriter": {
@@ -6655,6 +6676,12 @@
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The storage type to associate with the DB cluster.</p>\n         <p>For information on storage types for Amazon DocumentDB clusters, see \n            Cluster storage configurations in the <i>Amazon DocumentDB Developer Guide</i>.</p>\n         <p>Valid values for storage type - <code>standard | iopt1</code>\n         </p>\n         <p>Default value is <code>standard </code>\n         </p>"
+                    }
+                },
+                "ServerlessV2ScalingConfiguration": {
+                    "target": "com.amazonaws.docdb#ServerlessV2ScalingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the scaling configuration of an Amazon DocumentDB Serverless cluster.</p>"
                     }
                 },
                 "ManageMasterUserPassword": {
@@ -7983,6 +8010,12 @@
                         "smithy.api#documentation": "<p>The name of the DB cluster parameter group to associate with this DB cluster.</p>\n         <p>\n            <i>Type:</i> String.         <i>Required:</i> No.</p>\n         <p>If this argument is omitted, the default DB cluster parameter group is used.\n        If supplied, must match the name of an existing default DB cluster parameter group.\n        The string must consist of from 1 to 255 letters, numbers or hyphens. Its first\n        character must be a letter, and it cannot end with a hyphen or contain two consecutive\n        hyphens.</p>"
                     }
                 },
+                "ServerlessV2ScalingConfiguration": {
+                    "target": "com.amazonaws.docdb#ServerlessV2ScalingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the scaling configuration of an Amazon DocumentDB Serverless cluster.</p>"
+                    }
+                },
                 "StorageType": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
@@ -8144,6 +8177,12 @@
                         "smithy.api#documentation": "<p>Specifies whether this cluster can be deleted. If <code>DeletionProtection</code> is enabled, the cluster cannot be deleted unless it is modified and <code>DeletionProtection</code> is disabled. <code>DeletionProtection</code> protects clusters from being accidentally deleted.</p>"
                     }
                 },
+                "ServerlessV2ScalingConfiguration": {
+                    "target": "com.amazonaws.docdb#ServerlessV2ScalingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the scaling configuration of an Amazon DocumentDB Serverless cluster.</p>"
+                    }
+                },
                 "StorageType": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
@@ -8216,6 +8255,66 @@
                 "smithy.api#documentation": "<p>The SNS topic Amazon Resource Name (ARN) does not exist. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.docdb#ServerlessV2FeaturesSupport": {
+            "type": "structure",
+            "members": {
+                "MinCapacity": {
+                    "target": "com.amazonaws.docdb#DoubleOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum number of Amazon DocumentDB capacity units (DCUs) for an instance in an Amazon DocumentDB Serverless cluster. \n            You can specify DCU values in half-step increments, such as 8, 8.5, 9, and so on.</p>"
+                    }
+                },
+                "MaxCapacity": {
+                    "target": "com.amazonaws.docdb#DoubleOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of Amazon DocumentDB capacity units (DCUs) for an instance in an Amazon DocumentDB Serverless cluster.\n            You can specify DCU values in half-step increments, such as 32, 32.5, 33, and so on.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies any Amazon DocumentDB Serverless properties or limits that differ between Amazon DocumentDB engine versions. \n            You can test the values of this attribute when deciding which Amazon DocumentDB version to use in a new or upgraded cluster. \n            You can also retrieve the version of an existing cluster and check whether that version supports certain Amazon DocumentDB Serverless features before you attempt to use those features.</p>"
+            }
+        },
+        "com.amazonaws.docdb#ServerlessV2ScalingConfiguration": {
+            "type": "structure",
+            "members": {
+                "MinCapacity": {
+                    "target": "com.amazonaws.docdb#DoubleOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum number of Amazon DocumentDB capacity units (DCUs) for an instance in an Amazon DocumentDB Serverless cluster. \n            You can specify DCU values in half-step increments, such as 8, 8.5, 9, and so on.</p>"
+                    }
+                },
+                "MaxCapacity": {
+                    "target": "com.amazonaws.docdb#DoubleOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of Amazon DocumentDB capacity units (DCUs) for an instance in an Amazon DocumentDB Serverless cluster.\n            You can specify DCU values in half-step increments, such as 32, 32.5, 33, and so on.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Sets the scaling configuration of an Amazon DocumentDB Serverless cluster.</p>"
+            }
+        },
+        "com.amazonaws.docdb#ServerlessV2ScalingConfigurationInfo": {
+            "type": "structure",
+            "members": {
+                "MinCapacity": {
+                    "target": "com.amazonaws.docdb#DoubleOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum number of Amazon DocumentDB capacity units (DCUs) for an instance in an Amazon DocumentDB Serverless cluster. \n            You can specify DCU values in half-step increments, such as 8, 8.5, 9, and so on.</p>"
+                    }
+                },
+                "MaxCapacity": {
+                    "target": "com.amazonaws.docdb#DoubleOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of Amazon DocumentDB capacity units (DCUs) for an instance in an Amazon DocumentDB Serverless cluster. \n            You can specify DCU values in half-step increments, such as 32, 32.5, 33, and so on. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the scaling configuration for an Amazon DocumentDB Serverless cluster.</p>"
             }
         },
         "com.amazonaws.docdb#SharedSnapshotQuotaExceededFault": {

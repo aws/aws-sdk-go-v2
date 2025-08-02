@@ -269,11 +269,35 @@ func (JobDefinitionType) Values() []JobDefinitionType {
 	}
 }
 
+type JobQueueType string
+
+// Enum values for JobQueueType
+const (
+	JobQueueTypeEks               JobQueueType = "EKS"
+	JobQueueTypeEcs               JobQueueType = "ECS"
+	JobQueueTypeEcsFargate        JobQueueType = "ECS_FARGATE"
+	JobQueueTypeSagemakerTraining JobQueueType = "SAGEMAKER_TRAINING"
+)
+
+// Values returns all known values for JobQueueType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (JobQueueType) Values() []JobQueueType {
+	return []JobQueueType{
+		"EKS",
+		"ECS",
+		"ECS_FARGATE",
+		"SAGEMAKER_TRAINING",
+	}
+}
+
 type JobStateTimeLimitActionsAction string
 
 // Enum values for JobStateTimeLimitActionsAction
 const (
-	JobStateTimeLimitActionsActionCancel JobStateTimeLimitActionsAction = "CANCEL"
+	JobStateTimeLimitActionsActionCancel    JobStateTimeLimitActionsAction = "CANCEL"
+	JobStateTimeLimitActionsActionTerminate JobStateTimeLimitActionsAction = "TERMINATE"
 )
 
 // Values returns all known values for JobStateTimeLimitActionsAction. Note that
@@ -284,6 +308,7 @@ const (
 func (JobStateTimeLimitActionsAction) Values() []JobStateTimeLimitActionsAction {
 	return []JobStateTimeLimitActionsAction{
 		"CANCEL",
+		"TERMINATE",
 	}
 }
 
@@ -486,6 +511,153 @@ func (RetryAction) Values() []RetryAction {
 	return []RetryAction{
 		"RETRY",
 		"EXIT",
+	}
+}
+
+type ServiceEnvironmentState string
+
+// Enum values for ServiceEnvironmentState
+const (
+	ServiceEnvironmentStateEnabled  ServiceEnvironmentState = "ENABLED"
+	ServiceEnvironmentStateDisabled ServiceEnvironmentState = "DISABLED"
+)
+
+// Values returns all known values for ServiceEnvironmentState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceEnvironmentState) Values() []ServiceEnvironmentState {
+	return []ServiceEnvironmentState{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type ServiceEnvironmentStatus string
+
+// Enum values for ServiceEnvironmentStatus
+const (
+	ServiceEnvironmentStatusCreating ServiceEnvironmentStatus = "CREATING"
+	ServiceEnvironmentStatusUpdating ServiceEnvironmentStatus = "UPDATING"
+	ServiceEnvironmentStatusDeleting ServiceEnvironmentStatus = "DELETING"
+	ServiceEnvironmentStatusDeleted  ServiceEnvironmentStatus = "DELETED"
+	ServiceEnvironmentStatusValid    ServiceEnvironmentStatus = "VALID"
+	ServiceEnvironmentStatusInvalid  ServiceEnvironmentStatus = "INVALID"
+)
+
+// Values returns all known values for ServiceEnvironmentStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceEnvironmentStatus) Values() []ServiceEnvironmentStatus {
+	return []ServiceEnvironmentStatus{
+		"CREATING",
+		"UPDATING",
+		"DELETING",
+		"DELETED",
+		"VALID",
+		"INVALID",
+	}
+}
+
+type ServiceEnvironmentType string
+
+// Enum values for ServiceEnvironmentType
+const (
+	ServiceEnvironmentTypeSagemakerTraining ServiceEnvironmentType = "SAGEMAKER_TRAINING"
+)
+
+// Values returns all known values for ServiceEnvironmentType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceEnvironmentType) Values() []ServiceEnvironmentType {
+	return []ServiceEnvironmentType{
+		"SAGEMAKER_TRAINING",
+	}
+}
+
+type ServiceJobRetryAction string
+
+// Enum values for ServiceJobRetryAction
+const (
+	ServiceJobRetryActionRetry ServiceJobRetryAction = "RETRY"
+	ServiceJobRetryActionExit  ServiceJobRetryAction = "EXIT"
+)
+
+// Values returns all known values for ServiceJobRetryAction. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceJobRetryAction) Values() []ServiceJobRetryAction {
+	return []ServiceJobRetryAction{
+		"RETRY",
+		"EXIT",
+	}
+}
+
+type ServiceJobStatus string
+
+// Enum values for ServiceJobStatus
+const (
+	ServiceJobStatusSubmitted ServiceJobStatus = "SUBMITTED"
+	ServiceJobStatusPending   ServiceJobStatus = "PENDING"
+	ServiceJobStatusRunnable  ServiceJobStatus = "RUNNABLE"
+	ServiceJobStatusScheduled ServiceJobStatus = "SCHEDULED"
+	ServiceJobStatusStarting  ServiceJobStatus = "STARTING"
+	ServiceJobStatusRunning   ServiceJobStatus = "RUNNING"
+	ServiceJobStatusSucceeded ServiceJobStatus = "SUCCEEDED"
+	ServiceJobStatusFailed    ServiceJobStatus = "FAILED"
+)
+
+// Values returns all known values for ServiceJobStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceJobStatus) Values() []ServiceJobStatus {
+	return []ServiceJobStatus{
+		"SUBMITTED",
+		"PENDING",
+		"RUNNABLE",
+		"SCHEDULED",
+		"STARTING",
+		"RUNNING",
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
+type ServiceJobType string
+
+// Enum values for ServiceJobType
+const (
+	ServiceJobTypeSagemakerTraining ServiceJobType = "SAGEMAKER_TRAINING"
+)
+
+// Values returns all known values for ServiceJobType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceJobType) Values() []ServiceJobType {
+	return []ServiceJobType{
+		"SAGEMAKER_TRAINING",
+	}
+}
+
+type ServiceResourceIdName string
+
+// Enum values for ServiceResourceIdName
+const (
+	ServiceResourceIdNameSagemakerTrainingJobArn ServiceResourceIdName = "TrainingJobArn"
+)
+
+// Values returns all known values for ServiceResourceIdName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceResourceIdName) Values() []ServiceResourceIdName {
+	return []ServiceResourceIdName{
+		"TrainingJobArn",
 	}
 }
 

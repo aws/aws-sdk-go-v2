@@ -62,6 +62,10 @@ type CreateWorkforceInput struct {
 	// [Amazon Cognito user pool]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html
 	CognitoConfig *types.CognitoConfig
 
+	// Use this parameter to specify whether you want IPv4 only or dualstack ( IPv4
+	// and IPv6 ) to support your labeling workforce.
+	IpAddressType types.WorkforceIpAddressType
+
 	// Use this parameter to configure a private workforce using your own OIDC
 	// Identity Provider.
 	//
@@ -186,6 +190,36 @@ func (c *Client) addOperationCreateWorkforceMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

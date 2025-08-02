@@ -7469,6 +7469,15 @@ func awsAwsjson11_deserializeDocumentCluster(v **types.Cluster, value interface{
 				return err
 			}
 
+		case "ExtendedSupport":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanObject to be of type *bool, got %T instead", value)
+				}
+				sv.ExtendedSupport = ptr.Bool(jtv)
+			}
+
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16719,6 +16728,15 @@ func awsAwsjson11_deserializeOpDocumentModifyClusterOutput(v **ModifyClusterOutp
 
 	for key, value := range shape {
 		switch key {
+		case "ExtendedSupport":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanObject to be of type *bool, got %T instead", value)
+				}
+				sv.ExtendedSupport = ptr.Bool(jtv)
+			}
+
 		case "StepConcurrencyLevel":
 			if value != nil {
 				jtv, ok := value.(json.Number)

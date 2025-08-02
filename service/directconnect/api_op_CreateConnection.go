@@ -66,11 +66,10 @@ type CreateConnectionInput struct {
 
 	// Indicates whether you want the connection to support MAC Security (MACsec).
 	//
-	// MAC Security (MACsec) is only available on dedicated connections. For
-	// information about MAC Security (MACsec) prerequisties, see [MACsec prerequisties]in the Direct
-	// Connect User Guide.
+	// MAC Security (MACsec) is unavailable on hosted connections. For information
+	// about MAC Security (MACsec) prerequisites, see [MAC Security in Direct Connect]in the Direct Connect User Guide.
 	//
-	// [MACsec prerequisties]: https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-prerequisites
+	// [MAC Security in Direct Connect]: https://docs.aws.amazon.com/directconnect/latest/UserGuide/MACSec.html
 	RequestMACSec *bool
 
 	// The tags to associate with the lag.
@@ -158,6 +157,10 @@ type CreateConnectionOutput struct {
 
 	// The ID of the Amazon Web Services account that owns the connection.
 	OwnerAccount *string
+
+	// Indicates whether the interconnect hosting this connection supports MAC
+	// Security (MACsec).
+	PartnerInterconnectMacSecCapable *bool
 
 	// The name of the Direct Connect service provider associated with the connection.
 	PartnerName *string
@@ -272,6 +275,36 @@ func (c *Client) addOperationCreateConnectionMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

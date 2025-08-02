@@ -9599,6 +9599,30 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The MinGwDiversity value.</p>"
                     }
+                },
+                "TxPowerIndexMin": {
+                    "target": "com.amazonaws.iotwireless#TxPowerIndexMin",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Transmit Power Index minimum value.</p>\n         <p>Default: <code>0</code>\n         </p>"
+                    }
+                },
+                "TxPowerIndexMax": {
+                    "target": "com.amazonaws.iotwireless#TxPowerIndexMax",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Transmit Power Index maximum value.</p>\n         <p>Default: <code>15</code>\n         </p>"
+                    }
+                },
+                "NbTransMin": {
+                    "target": "com.amazonaws.iotwireless#NbTransMin",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum number of transmissions.</p>\n         <p>Default: <code>0</code>\n         </p>"
+                    }
+                },
+                "NbTransMax": {
+                    "target": "com.amazonaws.iotwireless#NbTransMax",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of transmissions.</p>\n         <p>Default: <code>3</code>\n         </p>"
+                    }
                 }
             },
             "traits": {
@@ -9822,6 +9846,30 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>The RAAllowed value that describes whether roaming activation is allowed.</p>"
+                    }
+                },
+                "TxPowerIndexMin": {
+                    "target": "com.amazonaws.iotwireless#TxPowerIndexMin",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Transmit Power Index minimum.</p>\n         <p>Default: <code>0</code>\n         </p>"
+                    }
+                },
+                "TxPowerIndexMax": {
+                    "target": "com.amazonaws.iotwireless#TxPowerIndexMax",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Transmit Power Index maximum.</p>\n         <p>Default: <code>15</code>\n         </p>"
+                    }
+                },
+                "NbTransMin": {
+                    "target": "com.amazonaws.iotwireless#NbTransMin",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum number of transmissions.</p>\n         <p>Default: <code>0</code>\n         </p>"
+                    }
+                },
+                "NbTransMax": {
+                    "target": "com.amazonaws.iotwireless#NbTransMax",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of transmissions.</p>\n         <p>Default: <code>3</code>\n         </p>"
                     }
                 }
             },
@@ -10752,6 +10800,24 @@
             "type": "boolean",
             "traits": {
                 "smithy.api#default": false
+            }
+        },
+        "com.amazonaws.iotwireless#NbTransMax": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 15
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#NbTransMin": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 15
+                }
             }
         },
         "com.amazonaws.iotwireless#NetId": {
@@ -13842,6 +13908,24 @@
                 "smithy.api#range": {
                     "min": 0,
                     "max": 1
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#TxPowerIndexMax": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 15
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#TxPowerIndexMin": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 15
                 }
             }
         },

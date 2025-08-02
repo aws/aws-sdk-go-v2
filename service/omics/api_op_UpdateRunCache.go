@@ -11,7 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update a run cache.
+// Updates a run cache using its ID and returns a response with no body if the
+// operation is successful. You can update the run cache description, name, or the
+// default run cache behavior with CACHE_ON_FAILURE or CACHE_ALWAYS . To confirm
+// that your run cache settings have been properly updated, use the GetRunCache
+// API operation.
+//
+// For more information, see [How call caching works] in the Amazon Web Services HealthOmics User Guide.
+//
+// [How call caching works]: https://docs.aws.amazon.com/omics/latest/dev/how-run-cache.html
 func (c *Client) UpdateRunCache(ctx context.Context, params *UpdateRunCacheInput, optFns ...func(*Options)) (*UpdateRunCacheOutput, error) {
 	if params == nil {
 		params = &UpdateRunCacheInput{}
@@ -142,6 +150,36 @@ func (c *Client) addOperationUpdateRunCacheMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

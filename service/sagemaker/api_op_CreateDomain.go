@@ -126,6 +126,9 @@ type CreateDomainInput struct {
 	KmsKeyId *string
 
 	// The VPC subnets that the domain uses for communication.
+	//
+	// The field is optional when the AppNetworkAccessType parameter is set to
+	// PublicInternetOnly for domains created from Amazon SageMaker Unified Studio.
 	SubnetIds []string
 
 	// Indicates whether custom tag propagation is supported for the domain. Defaults
@@ -142,6 +145,9 @@ type CreateDomainInput struct {
 
 	// The ID of the Amazon Virtual Private Cloud (VPC) that the domain uses for
 	// communication.
+	//
+	// The field is optional when the AppNetworkAccessType parameter is set to
+	// PublicInternetOnly for domains created from Amazon SageMaker Unified Studio.
 	VpcId *string
 
 	noSmithyDocumentSerde
@@ -250,6 +256,36 @@ func (c *Client) addOperationCreateDomainMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

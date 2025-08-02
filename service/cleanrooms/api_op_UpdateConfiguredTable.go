@@ -35,6 +35,10 @@ type UpdateConfiguredTableInput struct {
 	// This member is required.
 	ConfiguredTableIdentifier *string
 
+	// The columns of the underlying table that can be used by collaborations or
+	// analysis rules.
+	AllowedColumns []string
+
 	//  The analysis method for the configured table.
 	//
 	// DIRECT_QUERY allows SQL queries to be run directly on this table.
@@ -53,6 +57,9 @@ type UpdateConfiguredTableInput struct {
 
 	//  The selected analysis methods for the table configuration update.
 	SelectedAnalysisMethods []types.SelectedAnalysisMethod
+
+	// A pointer to the dataset that underlies this table.
+	TableReference types.TableReference
 
 	noSmithyDocumentSerde
 }
@@ -156,6 +163,36 @@ func (c *Client) addOperationUpdateConfiguredTableMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

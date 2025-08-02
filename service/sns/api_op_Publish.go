@@ -148,14 +148,21 @@ type PublishInput struct {
 	//   the message is delivered.
 	MessageDeduplicationId *string
 
-	// This parameter applies only to FIFO (first-in-first-out) topics. The
-	// MessageGroupId can contain up to 128 alphanumeric characters (a-z, A-Z, 0-9)
+	// The MessageGroupId can contain up to 128 alphanumeric characters (a-z, A-Z, 0-9)
 	// and punctuation (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~) .
 	//
-	// The MessageGroupId is a tag that specifies that a message belongs to a specific
-	// message group. Messages that belong to the same message group are processed in a
-	// FIFO manner (however, messages in different message groups might be processed
-	// out of order). Every message must include a MessageGroupId .
+	// For FIFO topics: The MessageGroupId is a tag that specifies that a message
+	// belongs to a specific message group. Messages that belong to the same message
+	// group are processed in a FIFO manner (however, messages in different message
+	// groups might be processed out of order). Every message must include a
+	// MessageGroupId .
+	//
+	// For standard topics: The MessageGroupId is optional and is forwarded only to
+	// Amazon SQS standard subscriptions to activate [fair queues]. The MessageGroupId is not used
+	// for, or sent to, any other endpoint types. When provided, the same validation
+	// rules apply as for FIFO topics.
+	//
+	// [fair queues]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-fair-queues.html
 	MessageGroupId *string
 
 	// Set MessageStructure to json if you want to send a different message for each
@@ -308,6 +315,36 @@ func (c *Client) addOperationPublishMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

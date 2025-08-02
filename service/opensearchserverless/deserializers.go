@@ -5920,6 +5920,55 @@ func awsAwsjson10_deserializeDocumentEffectiveLifecyclePolicyErrorDetails(v *[]t
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentIamFederationConfigOptions(v **types.IamFederationConfigOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IamFederationConfigOptions
+	if *v == nil {
+		sv = &types.IamFederationConfigOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "groupAttribute":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected iamFederationGroupAttribute to be of type string, got %T instead", value)
+				}
+				sv.GroupAttribute = ptr.String(jtv)
+			}
+
+		case "userAttribute":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected iamFederationUserAttribute to be of type string, got %T instead", value)
+				}
+				sv.UserAttribute = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentIamIdentityCenterConfigOptions(v **types.IamIdentityCenterConfigOptions, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6660,6 +6709,11 @@ func awsAwsjson10_deserializeDocumentSecurityConfigDetail(v **types.SecurityConf
 					return fmt.Errorf("expected ConfigDescription to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "iamFederationOptions":
+			if err := awsAwsjson10_deserializeDocumentIamFederationConfigOptions(&sv.IamFederationOptions, value); err != nil {
+				return err
 			}
 
 		case "iamIdentityCenterOptions":

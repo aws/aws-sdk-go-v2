@@ -206,6 +206,9 @@ type ModifyDBClusterInput struct {
 	// password.
 	RotateMasterUserPassword *bool
 
+	// Contains the scaling configuration of an Amazon DocumentDB Serverless cluster.
+	ServerlessV2ScalingConfiguration *types.ServerlessV2ScalingConfiguration
+
 	// The storage type to associate with the DB cluster.
 	//
 	// For information on storage types for Amazon DocumentDB clusters, see Cluster
@@ -320,6 +323,36 @@ func (c *Client) addOperationModifyDBClusterMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

@@ -1,3 +1,20 @@
+# v1.121.0 (2025-07-31)
+
+* **Feature**: Added support for Route node, S3 Iceberg sources/targets, catalog Iceberg sources, DynamoDB ELT connector, AutoDataQuality evaluation, enhanced PII detection with redaction, Kinesis fan-out support, and new R-series worker types.
+
+# v1.120.1 (2025-07-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.120.0 (2025-07-28)
+
+* **Feature**: Add support for HTTP interceptors.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.119.0 (2025-07-23)
+
+* **Feature**: AWS Glue now supports dynamic session policies for job executions. This feature allows you to specify custom, fine-grained permissions for each job run without creating multiple IAM roles.
+
 # v1.118.1 (2025-07-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -82,6 +82,11 @@ type StartJobRunInput struct {
 	// available for Spark jobs.
 	ExecutionClass types.ExecutionClass
 
+	// This inline session policy to the StartJobRun API allows you to dynamically
+	// restrict the permissions of the specified execution role for the scope of the
+	// job, without requiring the creation of additional IAM roles.
+	ExecutionRoleSessionPolicy *string
+
 	// The ID of a previous JobRun to retry.
 	JobRunId *string
 
@@ -283,6 +288,36 @@ func (c *Client) addOperationStartJobRunMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

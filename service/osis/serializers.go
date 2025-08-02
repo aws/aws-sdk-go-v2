@@ -129,6 +129,11 @@ func awsRestjson1_serializeOpDocumentCreatePipelineInput(v *CreatePipelineInput,
 		ok.String(*v.PipelineName)
 	}
 
+	if v.PipelineRoleArn != nil {
+		ok := object.Key("PipelineRoleArn")
+		ok.String(*v.PipelineRoleArn)
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsRestjson1_serializeDocumentTagList(v.Tags, ok); err != nil {
@@ -1072,6 +1077,11 @@ func awsRestjson1_serializeOpDocumentUpdatePipelineInput(v *UpdatePipelineInput,
 	if v.PipelineConfigurationBody != nil {
 		ok := object.Key("PipelineConfigurationBody")
 		ok.String(*v.PipelineConfigurationBody)
+	}
+
+	if v.PipelineRoleArn != nil {
+		ok := object.Key("PipelineRoleArn")
+		ok.String(*v.PipelineRoleArn)
 	}
 
 	return nil

@@ -1,3 +1,16 @@
+# v1.12.1 (2025-07-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.12.0 (2025-07-28)
+
+* **Feature**: Add support for HTTP interceptors.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.11.0 (2025-07-21)
+
+* **Feature**: Timestream for InfluxDB adds support for db.influx.24xlarge instance type. This enhancement enables higher compute capacity for demanding workloads through CreateDbInstance, CreateDbCluster, UpdateDbInstance, and UpdateDbCluster APIs.
+
 # v1.10.6 (2025-07-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

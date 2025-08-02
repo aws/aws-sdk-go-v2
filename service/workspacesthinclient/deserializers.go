@@ -2871,6 +2871,15 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 				}
 			}
 
+		case "lastUserId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UserId to be of type string, got %T instead", value)
+				}
+				sv.LastUserId = ptr.String(jtv)
+			}
+
 		case "model":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3160,6 +3169,15 @@ func awsRestjson1_deserializeDocumentDeviceSummary(v **types.DeviceSummary, valu
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "lastUserId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UserId to be of type string, got %T instead", value)
+				}
+				sv.LastUserId = ptr.String(jtv)
 			}
 
 		case "model":

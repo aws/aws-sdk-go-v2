@@ -5446,6 +5446,32 @@ func validateCatalogHudiSource(v *types.CatalogHudiSource) error {
 	}
 }
 
+func validateCatalogIcebergSource(v *types.CatalogIcebergSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CatalogIcebergSource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if v.Table == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Table"))
+	}
+	if v.OutputSchemas != nil {
+		if err := validateGlueSchemas(v.OutputSchemas); err != nil {
+			invalidParams.AddNested("OutputSchemas", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCatalogInput(v *types.CatalogInput) error {
 	if v == nil {
 		return nil
@@ -5518,6 +5544,11 @@ func validateCatalogSource(v *types.CatalogSource) error {
 	}
 	if v.Table == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Table"))
+	}
+	if v.OutputSchemas != nil {
+		if err := validateGlueSchemas(v.OutputSchemas); err != nil {
+			invalidParams.AddNested("OutputSchemas", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5601,11 +5632,6 @@ func validateCodeGenConfigurationNode(v *types.CodeGenConfigurationNode) error {
 			invalidParams.AddNested("S3CsvSource", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.S3ExcelSource != nil {
-		if err := validateS3ExcelSource(v.S3ExcelSource); err != nil {
-			invalidParams.AddNested("S3ExcelSource", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.S3JsonSource != nil {
 		if err := validateS3JsonSource(v.S3JsonSource); err != nil {
 			invalidParams.AddNested("S3JsonSource", err.(smithy.InvalidParamsError))
@@ -5656,19 +5682,9 @@ func validateCodeGenConfigurationNode(v *types.CodeGenConfigurationNode) error {
 			invalidParams.AddNested("S3GlueParquetTarget", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.S3HyperDirectTarget != nil {
-		if err := validateS3HyperDirectTarget(v.S3HyperDirectTarget); err != nil {
-			invalidParams.AddNested("S3HyperDirectTarget", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.S3DirectTarget != nil {
 		if err := validateS3DirectTarget(v.S3DirectTarget); err != nil {
 			invalidParams.AddNested("S3DirectTarget", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.S3IcebergDirectTarget != nil {
-		if err := validateS3IcebergDirectTarget(v.S3IcebergDirectTarget); err != nil {
-			invalidParams.AddNested("S3IcebergDirectTarget", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.ApplyMapping != nil {
@@ -5831,6 +5847,11 @@ func validateCodeGenConfigurationNode(v *types.CodeGenConfigurationNode) error {
 			invalidParams.AddNested("PostgreSQLCatalogTarget", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Route != nil {
+		if err := validateRoute(v.Route); err != nil {
+			invalidParams.AddNested("Route", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.DynamicTransform != nil {
 		if err := validateDynamicTransform(v.DynamicTransform); err != nil {
 			invalidParams.AddNested("DynamicTransform", err.(smithy.InvalidParamsError))
@@ -5924,6 +5945,41 @@ func validateCodeGenConfigurationNode(v *types.CodeGenConfigurationNode) error {
 	if v.ConnectorDataTarget != nil {
 		if err := validateConnectorDataTarget(v.ConnectorDataTarget); err != nil {
 			invalidParams.AddNested("ConnectorDataTarget", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3CatalogIcebergSource != nil {
+		if err := validateS3CatalogIcebergSource(v.S3CatalogIcebergSource); err != nil {
+			invalidParams.AddNested("S3CatalogIcebergSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CatalogIcebergSource != nil {
+		if err := validateCatalogIcebergSource(v.CatalogIcebergSource); err != nil {
+			invalidParams.AddNested("CatalogIcebergSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3IcebergCatalogTarget != nil {
+		if err := validateS3IcebergCatalogTarget(v.S3IcebergCatalogTarget); err != nil {
+			invalidParams.AddNested("S3IcebergCatalogTarget", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3IcebergDirectTarget != nil {
+		if err := validateS3IcebergDirectTarget(v.S3IcebergDirectTarget); err != nil {
+			invalidParams.AddNested("S3IcebergDirectTarget", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3ExcelSource != nil {
+		if err := validateS3ExcelSource(v.S3ExcelSource); err != nil {
+			invalidParams.AddNested("S3ExcelSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3HyperDirectTarget != nil {
+		if err := validateS3HyperDirectTarget(v.S3HyperDirectTarget); err != nil {
+			invalidParams.AddNested("S3HyperDirectTarget", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DynamoDBELTConnectorSource != nil {
+		if err := validateDynamoDBELTConnectorSource(v.DynamoDBELTConnectorSource); err != nil {
+			invalidParams.AddNested("DynamoDBELTConnectorSource", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -6632,6 +6688,21 @@ func validateDateColumnStatisticsData(v *types.DateColumnStatisticsData) error {
 	}
 }
 
+func validateDDBELTConnectionOptions(v *types.DDBELTConnectionOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DDBELTConnectionOptions"}
+	if v.DynamodbTableArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DynamodbTableArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDecimalColumnStatisticsData(v *types.DecimalColumnStatisticsData) error {
 	if v == nil {
 		return nil
@@ -6688,6 +6759,11 @@ func validateDirectJDBCSource(v *types.DirectJDBCSource) error {
 	}
 	if len(v.ConnectionType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ConnectionType"))
+	}
+	if v.OutputSchemas != nil {
+		if err := validateGlueSchemas(v.OutputSchemas); err != nil {
+			invalidParams.AddNested("OutputSchemas", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6850,6 +6926,31 @@ func validateDynamoDBCatalogSource(v *types.DynamoDBCatalogSource) error {
 	}
 	if v.Table == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Table"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDynamoDBELTConnectorSource(v *types.DynamoDBELTConnectorSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DynamoDBELTConnectorSource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ConnectionOptions != nil {
+		if err := validateDDBELTConnectionOptions(v.ConnectionOptions); err != nil {
+			invalidParams.AddNested("ConnectionOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OutputSchemas != nil {
+		if err := validateGlueSchemas(v.OutputSchemas); err != nil {
+			invalidParams.AddNested("OutputSchemas", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7191,6 +7292,48 @@ func validateGovernedCatalogTarget(v *types.GovernedCatalogTarget) error {
 	}
 	if v.Database == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGroupFilters(v *types.GroupFilters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GroupFilters"}
+	if v.GroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupName"))
+	}
+	if v.Filters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
+	} else if v.Filters != nil {
+		if err := validateFilterExpressions(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.LogicalOperator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LogicalOperator"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGroupFiltersList(v []types.GroupFilters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GroupFiltersList"}
+	for i := range v {
+		if err := validateGroupFilters(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -8223,6 +8366,31 @@ func validateRenameField(v *types.RenameField) error {
 	}
 }
 
+func validateRoute(v *types.Route) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Route"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.GroupFiltersList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupFiltersList"))
+	} else if v.GroupFiltersList != nil {
+		if err := validateGroupFiltersList(v.GroupFiltersList); err != nil {
+			invalidParams.AddNested("GroupFiltersList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateS3CatalogDeltaSource(v *types.S3CatalogDeltaSource) error {
 	if v == nil {
 		return nil
@@ -8254,6 +8422,32 @@ func validateS3CatalogHudiSource(v *types.S3CatalogHudiSource) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "S3CatalogHudiSource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if v.Table == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Table"))
+	}
+	if v.OutputSchemas != nil {
+		if err := validateGlueSchemas(v.OutputSchemas); err != nil {
+			invalidParams.AddNested("OutputSchemas", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3CatalogIcebergSource(v *types.S3CatalogIcebergSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3CatalogIcebergSource"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
@@ -8366,6 +8560,11 @@ func validateS3DeltaCatalogTarget(v *types.S3DeltaCatalogTarget) error {
 	if v.Database == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Database"))
 	}
+	if v.OutputSchemas != nil {
+		if err := validateGlueSchemas(v.OutputSchemas); err != nil {
+			invalidParams.AddNested("OutputSchemas", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -8440,6 +8639,11 @@ func validateS3DirectTarget(v *types.S3DirectTarget) error {
 	if len(v.Format) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Format"))
 	}
+	if v.OutputSchemas != nil {
+		if err := validateGlueSchemas(v.OutputSchemas); err != nil {
+			invalidParams.AddNested("OutputSchemas", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -8510,6 +8714,11 @@ func validateS3HudiCatalogTarget(v *types.S3HudiCatalogTarget) error {
 	}
 	if v.AdditionalOptions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AdditionalOptions"))
+	}
+	if v.OutputSchemas != nil {
+		if err := validateGlueSchemas(v.OutputSchemas); err != nil {
+			invalidParams.AddNested("OutputSchemas", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -8585,6 +8794,35 @@ func validateS3HyperDirectTarget(v *types.S3HyperDirectTarget) error {
 	if v.Path == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Path"))
 	}
+	if v.OutputSchemas != nil {
+		if err := validateGlueSchemas(v.OutputSchemas); err != nil {
+			invalidParams.AddNested("OutputSchemas", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3IcebergCatalogTarget(v *types.S3IcebergCatalogTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3IcebergCatalogTarget"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.Table == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Table"))
+	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -8611,6 +8849,11 @@ func validateS3IcebergDirectTarget(v *types.S3IcebergDirectTarget) error {
 	}
 	if len(v.Compression) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Compression"))
+	}
+	if v.OutputSchemas != nil {
+		if err := validateGlueSchemas(v.OutputSchemas); err != nil {
+			invalidParams.AddNested("OutputSchemas", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

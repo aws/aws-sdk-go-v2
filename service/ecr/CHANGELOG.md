@@ -1,3 +1,16 @@
+# v1.47.1 (2025-07-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.47.0 (2025-07-28)
+
+* **Feature**: Add support for HTTP interceptors.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.46.0 (2025-07-22)
+
+* **Feature**: Add support for Image Tag Mutability Exception feature, allowing repositories to define wildcard-based patterns that override the default image tag mutability settings.
+
 # v1.45.2 (2025-07-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

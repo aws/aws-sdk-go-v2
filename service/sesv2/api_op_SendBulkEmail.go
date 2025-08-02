@@ -99,6 +99,12 @@ type SendBulkEmailInput struct {
 	// the message, each Reply-to address receives the reply.
 	ReplyToAddresses []string
 
+	// The name of the tenant through which this bulk email will be sent.
+	//
+	// The email sending operation will only succeed if all referenced resources
+	// (identities, configuration sets, and templates) are associated with this tenant.
+	TenantName *string
+
 	noSmithyDocumentSerde
 }
 
@@ -209,6 +215,36 @@ func (c *Client) addOperationSendBulkEmailMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

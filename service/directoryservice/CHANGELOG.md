@@ -1,3 +1,13 @@
+# v1.33.0 (2025-07-30)
+
+* **Feature**: This release adds support for AWS Managed Microsoft AD Hybrid Edition, introducing new operations: StartADAssessment, DescribeADAssessment, ListADAssessments, DeleteADAssessment, CreateHybridAD, UpdateHybridAD, and DescribeHybridADUpdate; and updated existing operation: DescribeDirectories.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.32.0 (2025-07-28)
+
+* **Feature**: Add support for HTTP interceptors.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.31.8 (2025-07-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -4689,6 +4689,11 @@ func validateOpUpdateConfiguredTableInput(v *UpdateConfiguredTableInput) error {
 	if v.ConfiguredTableIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfiguredTableIdentifier"))
 	}
+	if v.TableReference != nil {
+		if err := validateTableReference(v.TableReference); err != nil {
+			invalidParams.AddNested("TableReference", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

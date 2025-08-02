@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	Returns a list of telemetry configurations for AWS resources supported by
+//	Returns a list of telemetry configurations for Amazon Web Services resources
 //
-// telemetry config in the organization.
+// supported by telemetry config in the organization.
 func (c *Client) ListResourceTelemetryForOrganization(ctx context.Context, params *ListResourceTelemetryForOrganizationInput, optFns ...func(*Options)) (*ListResourceTelemetryForOrganizationOutput, error) {
 	if params == nil {
 		params = &ListResourceTelemetryForOrganizationInput{}
@@ -31,8 +31,8 @@ func (c *Client) ListResourceTelemetryForOrganization(ctx context.Context, param
 
 type ListResourceTelemetryForOrganizationInput struct {
 
-	//  A list of AWS account IDs used to filter the resources to those associated
-	// with the specified accounts.
+	//  A list of Amazon Web Services accounts used to filter the resources to those
+	// associated with the specified accounts.
 	AccountIdentifiers []string
 
 	//  A number field used to limit the number of results within the returned list.
@@ -71,8 +71,8 @@ type ListResourceTelemetryForOrganizationOutput struct {
 	// token.
 	NextToken *string
 
-	//  A list of telemetry configurations for AWS resources supported by telemetry
-	// config in the organization.
+	//  A list of telemetry configurations for Amazon Web Services resources supported
+	// by telemetry config in the organization.
 	TelemetryConfigurations []types.TelemetryConfiguration
 
 	// Metadata pertaining to the operation's result.
@@ -164,6 +164,36 @@ func (c *Client) addOperationListResourceTelemetryForOrganizationMiddlewares(sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

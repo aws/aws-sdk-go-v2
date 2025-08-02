@@ -1,3 +1,16 @@
+# v1.27.1 (2025-07-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.27.0 (2025-07-28)
+
+* **Feature**: Add support for HTTP interceptors.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.26.0 (2025-07-25)
+
+* **Feature**: This release adds support for specifying a preferred input for channels using CMAF ingest.
+
 # v1.25.1 (2025-07-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

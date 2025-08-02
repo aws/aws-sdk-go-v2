@@ -1258,6 +1258,11 @@ func awsRestjson1_deserializeOpDocumentGetApplicationOutput(v **GetApplicationOu
 
 	for key, value := range shape {
 		switch key {
+		case "ApplicationConfig":
+			if err := awsRestjson1_deserializeDocumentApplicationConfig(&sv.ApplicationConfig, value); err != nil {
+				return err
+			}
+
 		case "ApplicationSourceConfig":
 			if err := awsRestjson1_deserializeDocumentApplicationSourceConfig(&sv.ApplicationSourceConfig, value); err != nil {
 				return err
@@ -1304,6 +1309,33 @@ func awsRestjson1_deserializeOpDocumentGetApplicationOutput(v **GetApplicationOu
 					return fmt.Errorf("expected UUID to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
+			}
+
+		case "IframeConfig":
+			if err := awsRestjson1_deserializeDocumentIframeConfig(&sv.IframeConfig, value); err != nil {
+				return err
+			}
+
+		case "InitializationTimeout":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected InitializationTimeout to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.InitializationTimeout = ptr.Int32(int32(i64))
+			}
+
+		case "IsService":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsService = jtv
 			}
 
 		case "LastModifiedTime":
@@ -4050,6 +4082,42 @@ func awsRestjson1_deserializeDocumentApplicationAssociationSummary(v **types.App
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentApplicationConfig(v **types.ApplicationConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ApplicationConfig
+	if *v == nil {
+		sv = &types.ApplicationConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ContactHandling":
+			if err := awsRestjson1_deserializeDocumentContactHandling(&sv.ContactHandling, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentApplicationsList(v *[]types.ApplicationSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4176,6 +4244,15 @@ func awsRestjson1_deserializeDocumentApplicationSummary(v **types.ApplicationSum
 				sv.Id = ptr.String(jtv)
 			}
 
+		case "IsService":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsService = jtv
+			}
+
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4252,6 +4329,46 @@ func awsRestjson1_deserializeDocumentClientAssociationMetadata(v *map[string]str
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentContactHandling(v **types.ContactHandling, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ContactHandling
+	if *v == nil {
+		sv = &types.ContactHandling{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Scope":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ContactHandlingScope to be of type string, got %T instead", value)
+				}
+				sv.Scope = types.ContactHandlingScope(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -4996,6 +5113,83 @@ func awsRestjson1_deserializeDocumentFolderList(v *[]string, value interface{}) 
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected NonBlankLongString to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentIframeConfig(v **types.IframeConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IframeConfig
+	if *v == nil {
+		sv = &types.IframeConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Allow":
+			if err := awsRestjson1_deserializeDocumentIframePermissionList(&sv.Allow, value); err != nil {
+				return err
+			}
+
+		case "Sandbox":
+			if err := awsRestjson1_deserializeDocumentIframePermissionList(&sv.Sandbox, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentIframePermissionList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected IframePermission to be of type string, got %T instead", value)
 			}
 			col = jtv
 		}

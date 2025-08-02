@@ -38,21 +38,6 @@ func (c *Client) CreateJobQueue(ctx context.Context, params *CreateJobQueueInput
 // Contains the parameters for CreateJobQueue .
 type CreateJobQueueInput struct {
 
-	// The set of compute environments mapped to a job queue and their order relative
-	// to each other. The job scheduler uses this parameter to determine which compute
-	// environment runs a specific job. Compute environments must be in the VALID
-	// state before you can associate them with a job queue. You can associate up to
-	// three compute environments with a job queue. All of the compute environments
-	// must be either EC2 ( EC2 or SPOT ) or Fargate ( FARGATE or FARGATE_SPOT ); EC2
-	// and Fargate compute environments can't be mixed.
-	//
-	// All compute environments that are associated with a job queue must share the
-	// same architecture. Batch doesn't support mixing compute environment architecture
-	// types in a single job queue.
-	//
-	// This member is required.
-	ComputeEnvironmentOrder []types.ComputeEnvironmentOrder
-
 	// The name of the job queue. It can be up to 128 letters long. It can contain
 	// uppercase and lowercase letters, numbers, hyphens (-), and underscores (_).
 	//
@@ -69,6 +54,24 @@ type CreateJobQueueInput struct {
 	//
 	// This member is required.
 	Priority *int32
+
+	// The set of compute environments mapped to a job queue and their order relative
+	// to each other. The job scheduler uses this parameter to determine which compute
+	// environment runs a specific job. Compute environments must be in the VALID
+	// state before you can associate them with a job queue. You can associate up to
+	// three compute environments with a job queue. All of the compute environments
+	// must be either EC2 ( EC2 or SPOT ) or Fargate ( FARGATE or FARGATE_SPOT ); EC2
+	// and Fargate compute environments can't be mixed.
+	//
+	// All compute environments that are associated with a job queue must share the
+	// same architecture. Batch doesn't support mixing compute environment architecture
+	// types in a single job queue.
+	ComputeEnvironmentOrder []types.ComputeEnvironmentOrder
+
+	// The type of job queue. For service jobs that run on SageMaker Training, this
+	// value is SAGEMAKER_TRAINING . For regular container jobs, this value is EKS ,
+	// ECS , or ECS_FARGATE depending on the compute environment.
+	JobQueueType types.JobQueueType
 
 	// The set of actions that Batch performs on jobs that remain at the head of the
 	// job queue in the specified state longer than specified times. Batch will perform
@@ -92,6 +95,11 @@ type CreateJobQueueInput struct {
 	// When the limit has been reached, submissions of any jobs that add a new share
 	// identifier fail.
 	SchedulingPolicyArn *string
+
+	// A list of service environments that this job queue can use to allocate jobs.
+	// All serviceEnvironments must have the same type. A job queue can't have both a
+	// serviceEnvironmentOrder and a computeEnvironmentOrder field.
+	ServiceEnvironmentOrder []types.ServiceEnvironmentOrder
 
 	// The state of the job queue. If the job queue state is ENABLED , it is able to
 	// accept jobs. If the job queue state is DISABLED , new jobs can't be added to the
@@ -212,6 +220,36 @@ func (c *Client) addOperationCreateJobQueueMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

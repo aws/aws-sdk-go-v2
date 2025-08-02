@@ -1,3 +1,20 @@
+# v1.55.2 (2025-07-31)
+
+* No change notes available for this release.
+
+# v1.55.1 (2025-07-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.55.0 (2025-07-29)
+
+* **Feature**: AWS Batch for SageMaker Training jobs feature support.  Includes new APIs for service job submission (e.g., SubmitServiceJob) and managing service environments (e.g., CreateServiceEnvironment) that enable queueing SageMaker Training jobs.
+
+# v1.54.0 (2025-07-28)
+
+* **Feature**: Add support for HTTP interceptors.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.53.1 (2025-07-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -122,6 +122,10 @@ type DeleteConnectionOutput struct {
 	// The ID of the Amazon Web Services account that owns the connection.
 	OwnerAccount *string
 
+	// Indicates whether the interconnect hosting this connection supports MAC
+	// Security (MACsec).
+	PartnerInterconnectMacSecCapable *bool
+
 	// The name of the Direct Connect service provider associated with the connection.
 	PartnerName *string
 
@@ -235,6 +239,36 @@ func (c *Client) addOperationDeleteConnectionMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

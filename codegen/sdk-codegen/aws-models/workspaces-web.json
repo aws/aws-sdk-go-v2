@@ -54,6 +54,9 @@
                     "target": "com.amazonaws.workspacesweb#PortalResource"
                 },
                 {
+                    "target": "com.amazonaws.workspacesweb#SessionLoggerResource"
+                },
+                {
                     "target": "com.amazonaws.workspacesweb#TrustStoreResource"
                 },
                 {
@@ -1093,6 +1096,121 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.workspacesweb#AssociateSessionLogger": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspacesweb#AssociateSessionLoggerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspacesweb#AssociateSessionLoggerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspacesweb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates a session logger with a portal.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Associate Session Logger with Portal",
+                        "documentation": "Associates a session logger with a portal",
+                        "input": {
+                            "portalArn": "arn:aws:workspaces-web:us-west-2:123456789012:portal/12345678-1234-1234-1234-123456789012",
+                            "sessionLoggerArn": "arn:aws:workspaces-web:us-west-2:123456789012:sessionLogger/11111111-1111-1111-1111-111111111111"
+                        },
+                        "output": {
+                            "portalArn": "arn:aws:workspaces-web:us-west-2:123456789012:portal/12345678-1234-1234-1234-123456789012",
+                            "sessionLoggerArn": "arn:aws:workspaces-web:us-west-2:123456789012:sessionLogger/11111111-1111-1111-1111-111111111111"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/portals/{portalArn+}/sessionLogger",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.workspacesweb#AssociateSessionLoggerRequest": {
+            "type": "structure",
+            "members": {
+                "portalArn": {
+                    "target": "com.amazonaws.workspacesweb#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the portal to associate to the session logger ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionLoggerArn": {
+                    "target": "com.amazonaws.workspacesweb#ARN",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "full",
+                        "smithy.api#documentation": "<p>The ARN of the session logger to associate to the portal ARN.</p>",
+                        "smithy.api#httpQuery": "sessionLoggerArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.workspacesweb#PortalResource"
+                    },
+                    {
+                        "resource": "com.amazonaws.workspacesweb#SessionLoggerResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.workspacesweb#AssociateSessionLoggerResponse": {
+            "type": "structure",
+            "members": {
+                "portalArn": {
+                    "target": "com.amazonaws.workspacesweb#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the portal.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionLoggerArn": {
+                    "target": "com.amazonaws.workspacesweb#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the session logger.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.workspacesweb#PortalResource"
+                    },
+                    {
+                        "resource": "com.amazonaws.workspacesweb#SessionLoggerResource"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.workspacesweb#AssociateTrustStore": {
             "type": "operation",
             "input": {
@@ -1370,7 +1488,7 @@
                     "min": 2,
                     "max": 131072
                 },
-                "smithy.api#pattern": "\\{[\\S\\s]*\\}\\s*",
+                "smithy.api#pattern": "^\\{[\\S\\s]*\\}\\s*$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -1555,7 +1673,13 @@
             }
         },
         "com.amazonaws.workspacesweb#CertificateAuthorityBody": {
-            "type": "blob"
+            "type": "blob",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32768
+                }
+            }
         },
         "com.amazonaws.workspacesweb#CertificateList": {
             "type": "list",
@@ -2394,6 +2518,181 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspacesweb#CreateSessionLogger": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspacesweb#CreateSessionLoggerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspacesweb#CreateSessionLoggerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspacesweb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a session logger.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Create Session Logger with All Events",
+                        "documentation": "Creates a session logger that captures all events and stores them in S3 with JSON format and flat folder structure",
+                        "input": {
+                            "eventFilter": {
+                                "all": {}
+                            },
+                            "logConfiguration": {
+                                "s3": {
+                                    "bucket": "my-session-logs-bucket",
+                                    "keyPrefix": "session-logs/all/events",
+                                    "bucketOwner": "123456789012",
+                                    "logFileFormat": "Json",
+                                    "folderStructure": "Flat"
+                                }
+                            },
+                            "displayName": "Session Logger with All Events"
+                        },
+                        "output": {
+                            "sessionLoggerArn": "arn:aws:workspaces-web:us-west-2:123456789012:sessionLogger/12345678-1234-1234-1234-123456789012"
+                        }
+                    },
+                    {
+                        "title": "Create Session Logger with Specific Events",
+                        "documentation": "Creates a session logger that captures only specific events with JSONLines format and nested folder structure",
+                        "input": {
+                            "eventFilter": {
+                                "include": [
+                                    "SessionStart",
+                                    "SessionEnd",
+                                    "UrlLoad",
+                                    "WebsiteInteract"
+                                ]
+                            },
+                            "logConfiguration": {
+                                "s3": {
+                                    "bucket": "my-session-logs-bucket",
+                                    "keyPrefix": "session-logs/each/event",
+                                    "bucketOwner": "123456789012",
+                                    "logFileFormat": "JSONLines",
+                                    "folderStructure": "NestedByDate"
+                                }
+                            },
+                            "displayName": "Session Logger with Each Events",
+                            "customerManagedKey": "arn:aws:kms:us-west-2:123456789012:key/12345678-1234-1234-1234-123456789012",
+                            "additionalEncryptionContext": {
+                                "EncryptionContextKey": "EncryptionContextValue"
+                            },
+                            "tags": [
+                                {
+                                    "Key": "KEY-1",
+                                    "Value": "VALUE-1"
+                                },
+                                {
+                                    "Key": "KEY-2",
+                                    "Value": "VALUE-2"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "sessionLoggerArn": "arn:aws:workspaces-web:us-west-2:123456789012:sessionLogger/87654321-4321-4321-4321-210987654321"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/sessionLoggers",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.workspacesweb#CreateSessionLoggerRequest": {
+            "type": "structure",
+            "members": {
+                "eventFilter": {
+                    "target": "com.amazonaws.workspacesweb#EventFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter that specifies the events to monitor.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "logConfiguration": {
+                    "target": "com.amazonaws.workspacesweb#LogConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that specifies where logs are delivered.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "displayName": {
+                    "target": "com.amazonaws.workspacesweb#DisplayNameSafe",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The human-readable display name for the session logger resource.</p>"
+                    }
+                },
+                "customerManagedKey": {
+                    "target": "com.amazonaws.workspacesweb#keyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom managed key of the session logger.</p>"
+                    }
+                },
+                "additionalEncryptionContext": {
+                    "target": "com.amazonaws.workspacesweb#EncryptionContextMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The additional encryption context of the session logger.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.workspacesweb#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to add to the session logger.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.workspacesweb#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, subsequent retries with the same client token returns the result from the original successful request. If you do not specify a client token, one is automatically generated by the AWS SDK.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspacesweb#CreateSessionLoggerResponse": {
+            "type": "structure",
+            "members": {
+                "sessionLoggerArn": {
+                    "target": "com.amazonaws.workspacesweb#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the session logger.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.workspacesweb#SessionLoggerResource"
+                    }
+                ]
             }
         },
         "com.amazonaws.workspacesweb#CreateTrustStore": {
@@ -3252,6 +3551,79 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.workspacesweb#DeleteSessionLogger": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspacesweb#DeleteSessionLoggerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspacesweb#DeleteSessionLoggerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspacesweb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a session logger resource.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Delete Session Logger",
+                        "documentation": "Deletes a session logger resource",
+                        "input": {
+                            "sessionLoggerArn": "arn:aws:workspaces-web:us-west-2:123456789012:sessionLogger/12345678-1234-1234-1234-123456789012"
+                        },
+                        "output": {}
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/sessionLoggers/{sessionLoggerArn+}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.workspacesweb#DeleteSessionLoggerRequest": {
+            "type": "structure",
+            "members": {
+                "sessionLoggerArn": {
+                    "target": "com.amazonaws.workspacesweb#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the session logger.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.workspacesweb#SessionLoggerResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.workspacesweb#DeleteSessionLoggerResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.workspacesweb#DeleteTrustStore": {
             "type": "operation",
             "input": {
@@ -3692,6 +4064,79 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.workspacesweb#DisassociateSessionLogger": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspacesweb#DisassociateSessionLoggerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspacesweb#DisassociateSessionLoggerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspacesweb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disassociates a session logger from a portal.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Disassociate Session Logger from Portal",
+                        "documentation": "Removes the association between a session logger and a portal",
+                        "input": {
+                            "portalArn": "arn:aws:workspaces-web:us-west-2:123456789012:portal/12345678-1234-1234-1234-123456789012"
+                        },
+                        "output": {}
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/portals/{portalArn+}/sessionLogger",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.workspacesweb#DisassociateSessionLoggerRequest": {
+            "type": "structure",
+            "members": {
+                "portalArn": {
+                    "target": "com.amazonaws.workspacesweb#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the portal to disassociate from the a session logger.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.workspacesweb#PortalResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.workspacesweb#DisassociateSessionLoggerResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.workspacesweb#DisassociateTrustStore": {
             "type": "operation",
             "input": {
@@ -3930,6 +4375,140 @@
                 "target": "com.amazonaws.workspacesweb#StringType"
             }
         },
+        "com.amazonaws.workspacesweb#Event": {
+            "type": "enum",
+            "members": {
+                "WEBSITE_INTERACT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WebsiteInteract"
+                    }
+                },
+                "FILE_DOWNLOAD_FROM_SECURE_BROWSER_TO_REMOTE_DISK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FileDownloadFromSecureBrowserToRemoteDisk"
+                    }
+                },
+                "FILE_TRANSFER_FROM_REMOTE_TO_LOCAL_DISK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FileTransferFromRemoteToLocalDisk"
+                    }
+                },
+                "FILE_TRANSFER_FROM_LOCAL_TO_REMOTE_DISK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FileTransferFromLocalToRemoteDisk"
+                    }
+                },
+                "FILE_UPLOAD_FROM_REMOTE_DISK_TO_SECURE_BROWSER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FileUploadFromRemoteDiskToSecureBrowser"
+                    }
+                },
+                "CONTENT_PASTE_TO_WEBSITE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ContentPasteToWebsite"
+                    }
+                },
+                "CONTENT_TRANSFER_FROM_LOCAL_TO_REMOTE_CLIPBOARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ContentTransferFromLocalToRemoteClipboard"
+                    }
+                },
+                "CONTENT_COPY_FROM_WEBSITE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ContentCopyFromWebsite"
+                    }
+                },
+                "URL_LOAD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UrlLoad"
+                    }
+                },
+                "TAB_OPEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TabOpen"
+                    }
+                },
+                "TAB_CLOSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TabClose"
+                    }
+                },
+                "PRINT_JOB_SUBMIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PrintJobSubmit"
+                    }
+                },
+                "SESSION_CONNECT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SessionConnect"
+                    }
+                },
+                "SESSION_START": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SessionStart"
+                    }
+                },
+                "SESSION_DISCONNECT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SessionDisconnect"
+                    }
+                },
+                "SESSION_END": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SessionEnd"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspacesweb#EventFilter": {
+            "type": "union",
+            "members": {
+                "all": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter that monitors all of the available events, including any new events emitted in the future.</p>"
+                    }
+                },
+                "include": {
+                    "target": "com.amazonaws.workspacesweb#Events",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter that monitors only the listed set of events. New events are not auto-monitored.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filter that specifies the events to monitor.</p>"
+            }
+        },
+        "com.amazonaws.workspacesweb#Events": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspacesweb#Event"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
         "com.amazonaws.workspacesweb#ExceptionMessage": {
             "type": "string"
         },
@@ -4001,6 +4580,23 @@
         },
         "com.amazonaws.workspacesweb#FieldName": {
             "type": "string"
+        },
+        "com.amazonaws.workspacesweb#FolderStructure": {
+            "type": "enum",
+            "members": {
+                "FLAT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Flat"
+                    }
+                },
+                "NESTED_BY_DATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NestedByDate"
+                    }
+                }
+            }
         },
         "com.amazonaws.workspacesweb#GetBrowserSettings": {
             "type": "operation",
@@ -4504,6 +5100,143 @@
                     "code": 200
                 },
                 "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.workspacesweb#GetSessionLogger": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspacesweb#GetSessionLoggerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspacesweb#GetSessionLoggerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspacesweb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets details about a specific session logger resource.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Get Session Logger with All Events",
+                        "documentation": "Retrieves a session logger configured for all events",
+                        "input": {
+                            "sessionLoggerArn": "arn:aws:workspaces-web:us-west-2:123456789012:sessionLogger/12345678-1234-1234-1234-123456789012"
+                        },
+                        "output": {
+                            "sessionLogger": {
+                                "sessionLoggerArn": "arn:aws:workspaces-web:us-west-2:123456789012:sessionLogger/12345678-1234-1234-1234-123456789012",
+                                "eventFilter": {
+                                    "all": {}
+                                },
+                                "logConfiguration": {
+                                    "s3": {
+                                        "bucket": "my-session-logs-bucket-1",
+                                        "keyPrefix": "session-logs/all/events",
+                                        "bucketOwner": "123456789012",
+                                        "logFileFormat": "Json",
+                                        "folderStructure": "Flat"
+                                    }
+                                },
+                                "displayName": "Session Logger with All Events",
+                                "creationDate": "2024-01-15T10:30:00Z",
+                                "associatedPortalArns": [
+                                    "arn:aws:workspaces-web:us-west-2:123456789012:portal/87654321-4321-4321-4321-210987654321"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "title": "Get Session Logger with Specific Events",
+                        "documentation": "Retrieves a session logger configured for specific events",
+                        "input": {
+                            "sessionLoggerArn": "arn:aws:workspaces-web:us-west-2:123456789012:sessionLogger/87654321-4321-4321-4321-210987654321"
+                        },
+                        "output": {
+                            "sessionLogger": {
+                                "sessionLoggerArn": "arn:aws:workspaces-web:us-west-2:123456789012:sessionLogger/87654321-4321-4321-4321-210987654321",
+                                "eventFilter": {
+                                    "include": [
+                                        "SessionStart",
+                                        "SessionEnd",
+                                        "UrlLoad",
+                                        "WebsiteInteract"
+                                    ]
+                                },
+                                "logConfiguration": {
+                                    "s3": {
+                                        "bucket": "my-session-logs-bucket-2",
+                                        "keyPrefix": "session-logs/each/event",
+                                        "bucketOwner": "123456789012",
+                                        "logFileFormat": "JSONLines",
+                                        "folderStructure": "NestedByDate"
+                                    }
+                                },
+                                "displayName": "Session Logger with Each Events",
+                                "customerManagedKey": "arn:aws:kms:us-west-2:123456789012:key/12345678-1234-1234-1234-123456789012",
+                                "additionalEncryptionContext": {
+                                    "EncryptionContextKey": "EncryptionContextValue"
+                                },
+                                "creationDate": "2024-01-15T14:45:00Z"
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/sessionLoggers/{sessionLoggerArn+}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.workspacesweb#GetSessionLoggerRequest": {
+            "type": "structure",
+            "members": {
+                "sessionLoggerArn": {
+                    "target": "com.amazonaws.workspacesweb#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the session logger.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.workspacesweb#SessionLoggerResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.workspacesweb#GetSessionLoggerResponse": {
+            "type": "structure",
+            "members": {
+                "sessionLogger": {
+                    "target": "com.amazonaws.workspacesweb#SessionLogger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The session logger details.</p>",
+                        "smithy.api#nestedProperties": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspacesweb#GetSessionRequest": {
@@ -5409,7 +6142,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:[\\w+=/,.@-]+:kinesis:[a-zA-Z0-9\\-]*:[a-zA-Z0-9]{1,12}:stream/.+"
+                "smithy.api#pattern": "^arn:[\\w+=/,.@-]+:kinesis:[a-zA-Z0-9\\-]*:[a-zA-Z0-9]{1,12}:stream/.+$"
             }
         },
         "com.amazonaws.workspacesweb#ListBrowserSettings": {
@@ -5888,6 +6621,152 @@
                     "target": "com.amazonaws.workspacesweb#PaginationToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The pagination token used to retrieve the next page of results for this operation.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspacesweb#ListSessionLoggers": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspacesweb#ListSessionLoggersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspacesweb#ListSessionLoggersResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspacesweb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all available session logger resources.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "List All Session Loggers",
+                        "documentation": "Lists all session loggers in the account without pagination",
+                        "input": {},
+                        "output": {
+                            "sessionLoggers": [
+                                {
+                                    "sessionLoggerArn": "arn:aws:workspaces-web:us-west-2:123456789012:sessionLogger/12345678-1234-1234-1234-123456789012",
+                                    "logConfiguration": {
+                                        "s3": {
+                                            "bucket": "my-session-logs-bucket-1",
+                                            "keyPrefix": "session-logs/all/events",
+                                            "bucketOwner": "123456789012",
+                                            "logFileFormat": "Json",
+                                            "folderStructure": "Flat"
+                                        }
+                                    },
+                                    "displayName": "Session Logger with All Events",
+                                    "creationDate": "2024-01-15T10:30:00Z"
+                                },
+                                {
+                                    "sessionLoggerArn": "arn:aws:workspaces-web:us-west-2:123456789012:sessionLogger/87654321-4321-4321-4321-210987654321",
+                                    "logConfiguration": {
+                                        "s3": {
+                                            "bucket": "my-session-logs-bucket-2",
+                                            "keyPrefix": "session-logs/each/event",
+                                            "bucketOwner": "123456789012",
+                                            "logFileFormat": "JSONLines",
+                                            "folderStructure": "NestedByDate"
+                                        }
+                                    },
+                                    "displayName": "Session Logger with Each Events",
+                                    "creationDate": "2024-01-15T14:45:00Z"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "List Session Loggers with Pagination",
+                        "documentation": "Lists session loggers with pagination parameters",
+                        "input": {
+                            "maxResults": 1,
+                            "nextToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
+                        },
+                        "output": {
+                            "sessionLoggers": [
+                                {
+                                    "sessionLoggerArn": "arn:aws:workspaces-web:us-west-2:123456789012:sessionLogger/11111111-1111-1111-1111-111111111111",
+                                    "logConfiguration": {
+                                        "s3": {
+                                            "bucket": "my-session-logs-bucket-3",
+                                            "keyPrefix": "session-logs/pagination/example",
+                                            "bucketOwner": "123456789012",
+                                            "logFileFormat": "JSONLines",
+                                            "folderStructure": "Flat"
+                                        }
+                                    },
+                                    "displayName": "Session Logger Example with Pagination",
+                                    "creationDate": "2024-03-15T12:45:00Z"
+                                }
+                            ],
+                            "nextToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/sessionLoggers",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "sessionLoggers"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.workspacesweb#ListSessionLoggersRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.workspacesweb#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token used to retrieve the next page of results for this operation.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.workspacesweb#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to be included in the next page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspacesweb#ListSessionLoggersResponse": {
+            "type": "structure",
+            "members": {
+                "sessionLoggers": {
+                    "target": "com.amazonaws.workspacesweb#SessionLoggerList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of session loggers, including summaries of their details.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.workspacesweb#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token used to retrieve the next page of results for this operation.</p>"
                     }
                 }
             },
@@ -6422,6 +7301,37 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.workspacesweb#LogConfiguration": {
+            "type": "structure",
+            "members": {
+                "s3": {
+                    "target": "com.amazonaws.workspacesweb#S3LogConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for delivering the logs to S3.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of the log.</p>"
+            }
+        },
+        "com.amazonaws.workspacesweb#LogFileFormat": {
+            "type": "enum",
+            "members": {
+                "JSON_LINES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JSONLines"
+                    }
+                },
+                "JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Json"
+                    }
+                }
+            }
+        },
         "com.amazonaws.workspacesweb#MaxConcurrentSessions": {
             "type": "integer",
             "traits": {
@@ -6690,6 +7600,12 @@
                         "smithy.api#documentation": "<p>The ARN of the network settings that is associated with the web portal.</p>"
                     }
                 },
+                "sessionLoggerArn": {
+                    "target": "com.amazonaws.workspacesweb#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the session logger that is assocaited with the portal.</p>"
+                    }
+                },
                 "trustStoreArn": {
                     "target": "com.amazonaws.workspacesweb#ARN",
                     "traits": {
@@ -6746,7 +7662,12 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The web portal.</p>"
+                "smithy.api#documentation": "<p>The web portal.</p>",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.workspacesweb#SessionLoggerResource"
+                    }
+                ]
             }
         },
         "com.amazonaws.workspacesweb#PortalEndpoint": {
@@ -6813,6 +7734,9 @@
                 "networkSettingsArn": {
                     "target": "com.amazonaws.workspacesweb#ARN"
                 },
+                "sessionLoggerArn": {
+                    "target": "com.amazonaws.workspacesweb#ARN"
+                },
                 "trustStoreArn": {
                     "target": "com.amazonaws.workspacesweb#ARN"
                 },
@@ -6876,6 +7800,9 @@
                     "target": "com.amazonaws.workspacesweb#AssociateNetworkSettings"
                 },
                 {
+                    "target": "com.amazonaws.workspacesweb#AssociateSessionLogger"
+                },
+                {
                     "target": "com.amazonaws.workspacesweb#AssociateTrustStore"
                 },
                 {
@@ -6895,6 +7822,9 @@
                 },
                 {
                     "target": "com.amazonaws.workspacesweb#DisassociateNetworkSettings"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#DisassociateSessionLogger"
                 },
                 {
                     "target": "com.amazonaws.workspacesweb#DisassociateTrustStore"
@@ -6926,6 +7856,7 @@
                         "com.amazonaws.workspacesweb#AssociateUserSettingsRequest",
                         "com.amazonaws.workspacesweb#AssociateUserAccessLoggingSettingsRequest",
                         "com.amazonaws.workspacesweb#AssociateIpAccessSettingsRequest",
+                        "com.amazonaws.workspacesweb#AssociateSessionLoggerRequest",
                         "com.amazonaws.workspacesweb#AssociateTrustStoreRequest",
                         "com.amazonaws.workspacesweb#GetPortalServiceProviderMetadataRequest",
                         "com.amazonaws.workspacesweb#GetPortalServiceProviderMetadataResponse"
@@ -7023,6 +7954,12 @@
                         "smithy.api#documentation": "<p>The ARN of the network settings that is associated with the web portal.</p>"
                     }
                 },
+                "sessionLoggerArn": {
+                    "target": "com.amazonaws.workspacesweb#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the session logger that is assocaited with the portal.</p>"
+                    }
+                },
                 "trustStoreArn": {
                     "target": "com.amazonaws.workspacesweb#ARN",
                     "traits": {
@@ -7061,7 +7998,12 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The summary of the portal.</p>"
+                "smithy.api#documentation": "<p>The summary of the portal.</p>",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.workspacesweb#SessionLoggerResource"
+                    }
+                ]
             }
         },
         "com.amazonaws.workspacesweb#QuotaCode": {
@@ -7167,6 +8109,75 @@
             "type": "integer",
             "traits": {
                 "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.workspacesweb#S3Bucket": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.workspacesweb#S3BucketOwner": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9]{12}$"
+            }
+        },
+        "com.amazonaws.workspacesweb#S3KeyPrefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[\\d\\w\\-_/!().*']+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.workspacesweb#S3LogConfiguration": {
+            "type": "structure",
+            "members": {
+                "bucket": {
+                    "target": "com.amazonaws.workspacesweb#S3Bucket",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 bucket name where logs are delivered.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "keyPrefix": {
+                    "target": "com.amazonaws.workspacesweb#S3KeyPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 path prefix that determines where log files are stored.</p>"
+                    }
+                },
+                "bucketOwner": {
+                    "target": "com.amazonaws.workspacesweb#S3BucketOwner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expected bucket owner of the target S3 bucket. The caller must have permissions to write to the target bucket.</p>"
+                    }
+                },
+                "logFileFormat": {
+                    "target": "com.amazonaws.workspacesweb#LogFileFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the LogFile that is written to S3.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "folderStructure": {
+                    "target": "com.amazonaws.workspacesweb#FolderStructure",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The folder structure that defines the organizational structure for log files in S3.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The S3 log configuration.</p>"
             }
         },
         "com.amazonaws.workspacesweb#SamlMetadata": {
@@ -7301,6 +8312,165 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9\\-]+$"
             }
         },
+        "com.amazonaws.workspacesweb#SessionLogger": {
+            "type": "structure",
+            "members": {
+                "sessionLoggerArn": {
+                    "target": "com.amazonaws.workspacesweb#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the session logger resource.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "sessionLoggerArn"
+                    }
+                },
+                "eventFilter": {
+                    "target": "com.amazonaws.workspacesweb#EventFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter that specifies which events to monitor.</p>"
+                    }
+                },
+                "logConfiguration": {
+                    "target": "com.amazonaws.workspacesweb#LogConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that specifies where logs are fowarded.</p>"
+                    }
+                },
+                "customerManagedKey": {
+                    "target": "com.amazonaws.workspacesweb#keyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom managed key of the session logger.</p>"
+                    }
+                },
+                "additionalEncryptionContext": {
+                    "target": "com.amazonaws.workspacesweb#EncryptionContextMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The additional encryption context of the session logger.</p>"
+                    }
+                },
+                "associatedPortalArns": {
+                    "target": "com.amazonaws.workspacesweb#ArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The associated portal ARN.</p>"
+                    }
+                },
+                "displayName": {
+                    "target": "com.amazonaws.workspacesweb#DisplayNameSafe",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The human-readable display name.</p>"
+                    }
+                },
+                "creationDate": {
+                    "target": "com.amazonaws.workspacesweb#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date the session logger resource was created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The session logger resource.</p>"
+            }
+        },
+        "com.amazonaws.workspacesweb#SessionLoggerList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspacesweb#SessionLoggerSummary"
+            }
+        },
+        "com.amazonaws.workspacesweb#SessionLoggerResource": {
+            "type": "resource",
+            "identifiers": {
+                "sessionLoggerArn": {
+                    "target": "com.amazonaws.workspacesweb#ARN"
+                }
+            },
+            "properties": {
+                "eventFilter": {
+                    "target": "com.amazonaws.workspacesweb#EventFilter"
+                },
+                "logConfiguration": {
+                    "target": "com.amazonaws.workspacesweb#LogConfiguration"
+                },
+                "customerManagedKey": {
+                    "target": "com.amazonaws.workspacesweb#keyArn"
+                },
+                "additionalEncryptionContext": {
+                    "target": "com.amazonaws.workspacesweb#EncryptionContextMap"
+                },
+                "associatedPortalArns": {
+                    "target": "com.amazonaws.workspacesweb#ArnList"
+                },
+                "displayName": {
+                    "target": "com.amazonaws.workspacesweb#DisplayNameSafe"
+                },
+                "creationDate": {
+                    "target": "com.amazonaws.workspacesweb#Timestamp"
+                },
+                "tags": {
+                    "target": "com.amazonaws.workspacesweb#TagList"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.workspacesweb#CreateSessionLogger"
+            },
+            "read": {
+                "target": "com.amazonaws.workspacesweb#GetSessionLogger"
+            },
+            "update": {
+                "target": "com.amazonaws.workspacesweb#UpdateSessionLogger"
+            },
+            "delete": {
+                "target": "com.amazonaws.workspacesweb#DeleteSessionLogger"
+            },
+            "list": {
+                "target": "com.amazonaws.workspacesweb#ListSessionLoggers"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "{sessionLoggerArn}",
+                    "absolute": true
+                },
+                "aws.api#taggable": {
+                    "property": "tags"
+                },
+                "aws.cloudformation#cfnResource": {
+                    "name": "SessionLogger"
+                }
+            }
+        },
+        "com.amazonaws.workspacesweb#SessionLoggerSummary": {
+            "type": "structure",
+            "members": {
+                "sessionLoggerArn": {
+                    "target": "com.amazonaws.workspacesweb#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the session logger resource.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "sessionLoggerArn"
+                    }
+                },
+                "logConfiguration": {
+                    "target": "com.amazonaws.workspacesweb#LogConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that specifies where the logs are fowarded.</p>"
+                    }
+                },
+                "displayName": {
+                    "target": "com.amazonaws.workspacesweb#DisplayNameSafe",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The human-readable display name.</p>"
+                    }
+                },
+                "creationDate": {
+                    "target": "com.amazonaws.workspacesweb#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date the session logger resource was created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of the session logger resource.</p>"
+            }
+        },
         "com.amazonaws.workspacesweb#SessionSortBy": {
             "type": "enum",
             "members": {
@@ -7392,7 +8562,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": ".*"
+                "smithy.api#pattern": "^.*$"
             }
         },
         "com.amazonaws.workspacesweb#StringType": {
@@ -8409,6 +9579,175 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The web portal.</p>",
                         "smithy.api#nestedProperties": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspacesweb#UpdateSessionLogger": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspacesweb#UpdateSessionLoggerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspacesweb#UpdateSessionLoggerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspacesweb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the details of a session logger.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Update Session Logger Event Filter",
+                        "documentation": "Updates a session logger to capture specific events instead of all events",
+                        "input": {
+                            "sessionLoggerArn": "arn:aws:workspaces-web:us-west-2:123456789012:sessionLogger/12345678-1234-1234-1234-123456789012",
+                            "eventFilter": {
+                                "include": [
+                                    "SessionStart",
+                                    "SessionEnd",
+                                    "UrlLoad",
+                                    "WebsiteInteract"
+                                ]
+                            }
+                        },
+                        "output": {
+                            "sessionLogger": {
+                                "sessionLoggerArn": "arn:aws:workspaces-web:us-west-2:123456789012:sessionLogger/12345678-1234-1234-1234-123456789012",
+                                "eventFilter": {
+                                    "include": [
+                                        "SessionStart",
+                                        "SessionEnd",
+                                        "UrlLoad",
+                                        "WebsiteInteract"
+                                    ]
+                                },
+                                "logConfiguration": {
+                                    "s3": {
+                                        "bucket": "my-session-logs-bucket",
+                                        "keyPrefix": "updated/session-logs/each/event",
+                                        "bucketOwner": "123456789012",
+                                        "logFileFormat": "Json",
+                                        "folderStructure": "Flat"
+                                    }
+                                },
+                                "displayName": "Updated Session Logger with Specific Events",
+                                "creationDate": "2024-01-15T10:30:00Z"
+                            }
+                        }
+                    },
+                    {
+                        "title": "Update Session Logger Configuration",
+                        "documentation": "Updates the log configuration of a session logger",
+                        "input": {
+                            "sessionLoggerArn": "arn:aws:workspaces-web:us-west-2:123456789012:sessionLogger/87654321-4321-4321-4321-210987654321",
+                            "logConfiguration": {
+                                "s3": {
+                                    "bucket": "updated-my-session-logs-bucket-2",
+                                    "keyPrefix": "updated/key/prefix",
+                                    "bucketOwner": "123456789012",
+                                    "logFileFormat": "Json",
+                                    "folderStructure": "Flat"
+                                }
+                            }
+                        },
+                        "output": {
+                            "sessionLogger": {
+                                "sessionLoggerArn": "arn:aws:workspaces-web:us-west-2:123456789012:sessionLogger/87654321-4321-4321-4321-210987654321",
+                                "eventFilter": {
+                                    "all": {}
+                                },
+                                "logConfiguration": {
+                                    "s3": {
+                                        "bucket": "updated-my-session-logs-bucket-2",
+                                        "keyPrefix": "updated/key/prefix",
+                                        "bucketOwner": "123456789012",
+                                        "logFileFormat": "Json",
+                                        "folderStructure": "Flat"
+                                    }
+                                },
+                                "displayName": "Updated Session Logger with Log Config",
+                                "customerManagedKey": "arn:aws:kms:us-west-2:123456789012:key/12345678-1234-1234-1234-123456789012",
+                                "additionalEncryptionContext": {
+                                    "EncryptionContextKey": "EncryptionContextValue"
+                                },
+                                "creationDate": "2024-01-15T14:45:00Z"
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/sessionLoggers/{sessionLoggerArn+}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.workspacesweb#UpdateSessionLoggerRequest": {
+            "type": "structure",
+            "members": {
+                "sessionLoggerArn": {
+                    "target": "com.amazonaws.workspacesweb#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the session logger to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventFilter": {
+                    "target": "com.amazonaws.workspacesweb#EventFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated eventFilter.</p>"
+                    }
+                },
+                "logConfiguration": {
+                    "target": "com.amazonaws.workspacesweb#LogConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated logConfiguration.</p>"
+                    }
+                },
+                "displayName": {
+                    "target": "com.amazonaws.workspacesweb#DisplayNameSafe",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated display name.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.workspacesweb#SessionLoggerResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.workspacesweb#UpdateSessionLoggerResponse": {
+            "type": "structure",
+            "members": {
+                "sessionLogger": {
+                    "target": "com.amazonaws.workspacesweb#SessionLogger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated details of the session logger.</p>",
+                        "smithy.api#nestedProperties": {},
+                        "smithy.api#required": {}
                     }
                 }
             },

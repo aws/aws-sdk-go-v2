@@ -22,6 +22,12 @@ import (
 //   - Amazon Web Services Region
 //
 //   - Data provider specified in the place index resource
+//
+// If your Place index resource is configured with Grab as your geolocation
+// provider and Storage as Intended use, the GetPlace operation is unavailable. For
+// more information, see [AWS service terms].
+//
+// [AWS service terms]: http://aws.amazon.com/service-terms
 func (c *Client) GetPlace(ctx context.Context, params *GetPlaceInput, optFns ...func(*Options)) (*GetPlaceOutput, error) {
 	if params == nil {
 		params = &GetPlaceInput{}
@@ -51,7 +57,7 @@ type GetPlaceInput struct {
 
 	// The optional [API key] to authorize the request.
 	//
-	// [API key]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+	// [API key]: https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html
 	Key *string
 
 	// The preferred language used to return results. The value must be a valid [BCP 47]
@@ -179,6 +185,36 @@ func (c *Client) addOperationGetPlaceMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

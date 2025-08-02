@@ -1,3 +1,20 @@
+# v1.66.1 (2025-08-01)
+
+* No change notes available for this release.
+
+# v1.66.0 (2025-07-31)
+
+* **Feature**: This release allows AWS IoT Core users to use their own AWS KMS keys for data protection
+
+# v1.65.1 (2025-07-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.65.0 (2025-07-28)
+
+* **Feature**: Add support for HTTP interceptors.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.64.5 (2025-07-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

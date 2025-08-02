@@ -1,3 +1,16 @@
+# v1.41.2 (2025-08-01)
+
+* **Documentation**: Doc-only update to add more information to GetCertificate action.
+
+# v1.41.1 (2025-07-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.41.0 (2025-07-28)
+
+* **Feature**: Add support for HTTP interceptors.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.40.6 (2025-07-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

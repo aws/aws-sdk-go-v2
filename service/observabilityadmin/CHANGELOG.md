@@ -1,3 +1,16 @@
+# v1.3.0 (2025-08-01)
+
+* **Feature**: CloudWatch Observability Admin adds the ability to enable telemetry on AWS resources such as Amazon VPCs (Flow Logs) in customers AWS Accounts and Organizations. The release introduces new APIs to manage telemetry rules, which define telemetry settings to be applied on AWS resources.
+
+# v1.2.1 (2025-07-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.2.0 (2025-07-28)
+
+* **Feature**: Add support for HTTP interceptors.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.1.5 (2025-07-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

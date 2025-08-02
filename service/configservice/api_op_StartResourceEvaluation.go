@@ -46,8 +46,9 @@ func (c *Client) StartResourceEvaluation(ctx context.Context, params *StartResou
 
 type StartResourceEvaluationInput struct {
 
-	// The mode of an evaluation. The valid values for this API are DETECTIVE and
-	// PROACTIVE .
+	// The mode of an evaluation.
+	//
+	// The only valid value for this API is PROACTIVE .
 	//
 	// This member is required.
 	EvaluationMode types.EvaluationMode
@@ -176,6 +177,36 @@ func (c *Client) addOperationStartResourceEvaluationMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

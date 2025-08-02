@@ -2227,6 +2227,50 @@ type ReplacementTemplate struct {
 	noSmithyDocumentSerde
 }
 
+// An object that contains information about a reputation entity, including its
+// reference, type, policy, status records, and reputation impact.
+type ReputationEntity struct {
+
+	// The Amazon Web Services Amazon SES-managed status record for this reputation
+	// entity, including the current status, cause description, and last updated
+	// timestamp.
+	AwsSesManagedStatus *StatusRecord
+
+	// The customer-managed status record for this reputation entity, including the
+	// current status, cause description, and last updated timestamp.
+	CustomerManagedStatus *StatusRecord
+
+	// The unique identifier for the reputation entity. For resource-type entities,
+	// this is the Amazon Resource Name (ARN) of the resource.
+	ReputationEntityReference *string
+
+	// The type of reputation entity. Currently, only RESOURCE type entities are
+	// supported.
+	ReputationEntityType ReputationEntityType
+
+	// The reputation impact level for this entity, representing the highest impact
+	// reputation finding currently active. Reputation findings can be retrieved using
+	// the ListRecommendations operation.
+	ReputationImpact RecommendationImpact
+
+	// The Amazon Resource Name (ARN) of the reputation management policy applied to
+	// this entity. This is an Amazon Web Services Amazon SES-managed policy.
+	ReputationManagementPolicy *string
+
+	// The aggregate sending status that determines whether the entity is allowed to
+	// send emails. This status is derived from both the customer-managed and Amazon
+	// Web Services Amazon SES-managed statuses. If either the customer-managed status
+	// or the Amazon Web Services Amazon SES-managed status is DISABLED , the aggregate
+	// status will be DISABLED and the entity will not be allowed to send emails. When
+	// the customer-managed status is set to REINSTATED , the entity can continue
+	// sending even if there are active reputation findings, provided the Amazon Web
+	// Services Amazon SES-managed status also permits sending. The entity can only
+	// send emails when both statuses permit sending.
+	SendingStatusAggregate SendingStatus
+
+	noSmithyDocumentSerde
+}
+
 // Enable or disable collection of reputation metrics for emails that you send
 // using this configuration set in the current Amazon Web Services Region.
 type ReputationOptions struct {
@@ -2239,6 +2283,24 @@ type ReputationOptions struct {
 	// If true , tracking of reputation metrics is enabled for the configuration set.
 	// If false , tracking of reputation metrics is disabled for the configuration set.
 	ReputationMetricsEnabled bool
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains information about a tenant associated with a resource.
+type ResourceTenantMetadata struct {
+
+	// The date and time when the resource was associated with the tenant.
+	AssociatedTimestamp *time.Time
+
+	// The Amazon Resource Name (ARN) of the resource.
+	ResourceArn *string
+
+	// A unique identifier for the tenant associated with the resource.
+	TenantId *string
+
+	// The name of the tenant associated with the resource.
+	TenantName *string
 
 	noSmithyDocumentSerde
 }
@@ -2350,6 +2412,29 @@ type SOARecord struct {
 
 	// Serial number from the SOA record.
 	SerialNumber int64
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains status information for a reputation entity, including
+// the current status, cause description, and timestamp.
+type StatusRecord struct {
+
+	// A description of the reason for the current status, or null if no specific
+	// cause is available.
+	Cause *string
+
+	// The timestamp when this status was last updated.
+	LastUpdatedTimestamp *time.Time
+
+	// The current sending status. This can be one of the following:
+	//
+	//   - ENABLED – Sending is allowed.
+	//
+	//   - DISABLED – Sending is prevented.
+	//
+	//   - REINSTATED – Sending is allowed even with active reputation findings.
+	Status SendingStatus
 
 	noSmithyDocumentSerde
 }
@@ -2552,6 +2637,62 @@ type Template struct {
 	// The name of the template. You will refer to this name when you send email using
 	// the SendEmail or SendBulkEmail operations.
 	TemplateName *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains details about a tenant.
+type Tenant struct {
+
+	// The date and time when the tenant was created.
+	CreatedTimestamp *time.Time
+
+	// The status of sending capability for the tenant.
+	SendingStatus SendingStatus
+
+	// An array of objects that define the tags (keys and values) associated with the
+	// tenant.
+	Tags []Tag
+
+	// The Amazon Resource Name (ARN) of the tenant.
+	TenantArn *string
+
+	// A unique identifier for the tenant.
+	TenantId *string
+
+	// The name of the tenant.
+	TenantName *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains basic information about a tenant.
+type TenantInfo struct {
+
+	// The date and time when the tenant was created.
+	CreatedTimestamp *time.Time
+
+	// The Amazon Resource Name (ARN) of the tenant.
+	TenantArn *string
+
+	// A unique identifier for the tenant.
+	TenantId *string
+
+	// The name of the tenant.
+	TenantName *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains information about a resource associated with a tenant.
+type TenantResource struct {
+
+	// The Amazon Resource Name (ARN) of the resource associated with the tenant.
+	ResourceArn *string
+
+	// The type of resource associated with the tenant. Valid values are EMAIL_IDENTITY
+	// , CONFIGURATION_SET , or EMAIL_TEMPLATE .
+	ResourceType ResourceType
 
 	noSmithyDocumentSerde
 }

@@ -1120,7 +1120,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an <code>IdMappingWorkflow</code> object which stores the configuration of the data processing job to be run. Each <code>IdMappingWorkflow</code> must have a unique workflow name. To modify an existing workflow, use the <code>UpdateIdMappingWorkflow</code> API.</p>",
+                "smithy.api#documentation": "<p>Creates an <code>IdMappingWorkflow</code> object which stores the configuration of the data processing job to be run. Each <code>IdMappingWorkflow</code> must have a unique workflow name. To modify an existing workflow, use the UpdateIdMappingWorkflow API.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1154,7 +1154,7 @@
                 "outputSourceConfig": {
                     "target": "com.amazonaws.entityresolution#IdMappingWorkflowOutputSourceConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>IdMappingWorkflowOutputSource</code> objects, each of which contains fields <code>OutputS3Path</code> and <code>Output</code>.</p>"
+                        "smithy.api#documentation": "<p>A list of <code>IdMappingWorkflowOutputSource</code> objects, each of which contains fields <code>outputS3Path</code> and <code>KMSArn</code>.</p>"
                     }
                 },
                 "idMappingTechniques": {
@@ -1216,7 +1216,7 @@
                 "outputSourceConfig": {
                     "target": "com.amazonaws.entityresolution#IdMappingWorkflowOutputSourceConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>IdMappingWorkflowOutputSource</code> objects, each of which contains fields <code>OutputS3Path</code> and <code>Output</code>.</p>"
+                        "smithy.api#documentation": "<p>A list of <code>IdMappingWorkflowOutputSource</code> objects, each of which contains fields <code>outputS3Path</code> and <code>KMSArn</code>.</p>"
                     }
                 },
                 "idMappingTechniques": {
@@ -1268,7 +1268,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an ID namespace object which will help customers provide metadata explaining their dataset and how to use it. Each ID namespace must have a unique name. To modify an existing ID namespace, use the <code>UpdateIdNamespace</code> API.</p>",
+                "smithy.api#documentation": "<p>Creates an ID namespace object which will help customers provide metadata explaining their dataset and how to use it. Each ID namespace must have a unique name. To modify an existing ID namespace, use the UpdateIdNamespace API.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1430,7 +1430,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a <code>MatchingWorkflow</code> object which stores the configuration of the data processing job to be run. It is important to note that there should not be a pre-existing <code>MatchingWorkflow</code> with the same name. To modify an existing workflow, utilize the <code>UpdateMatchingWorkflow</code> API.</p>",
+                "smithy.api#documentation": "<p>Creates a matching workflow that defines the configuration for a data processing job. The workflow name must be unique. To modify an existing workflow, use <code>UpdateMatchingWorkflow</code>. </p> <important> <p>For workflows where <code>resolutionType</code> is ML_MATCHING, incremental processing is not supported. </p> </important>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1464,7 +1464,7 @@
                 "outputSourceConfig": {
                     "target": "com.amazonaws.entityresolution#OutputSourceConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>OutputSource</code> objects, each of which contains fields <code>OutputS3Path</code>, <code>ApplyNormalization</code>, and <code>Output</code>.</p>",
+                        "smithy.api#documentation": "<p>A list of <code>OutputSource</code> objects, each of which contains fields <code>outputS3Path</code>, <code>applyNormalization</code>, <code>KMSArn</code>, and <code>output</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1478,7 +1478,7 @@
                 "incrementalRunConfig": {
                     "target": "com.amazonaws.entityresolution#IncrementalRunConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object which defines an incremental run type and has only <code>incrementalRunType</code> as a field.</p>"
+                        "smithy.api#documentation": "<p>Optional. An object that defines the incremental run type. This object contains only the <code>incrementalRunType</code> field, which appears as \"Automatic\" in the console. </p> <important> <p>For workflows where <code>resolutionType</code> is <code>ML_MATCHING</code>, incremental processing is not supported. </p> </important>"
                     }
                 },
                 "roleArn": {
@@ -1532,7 +1532,7 @@
                 "outputSourceConfig": {
                     "target": "com.amazonaws.entityresolution#OutputSourceConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>OutputSource</code> objects, each of which contains fields <code>OutputS3Path</code>, <code>ApplyNormalization</code>, and <code>Output</code>.</p>",
+                        "smithy.api#documentation": "<p>A list of <code>OutputSource</code> objects, each of which contains fields <code>outputS3Path</code>, <code>applyNormalization</code>, <code>KMSArn</code>, and <code>output</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2504,7 +2504,7 @@
                 "outputSourceConfig": {
                     "target": "com.amazonaws.entityresolution#IdMappingWorkflowOutputSourceConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>OutputSource</code> objects, each of which contains fields <code>OutputS3Path</code> and <code>KMSArn</code>.</p>"
+                        "smithy.api#documentation": "<p>A list of <code>OutputSource</code> objects, each of which contains fields <code>outputS3Path</code> and <code>KMSArn</code>.</p>"
                     }
                 },
                 "idMappingTechniques": {
@@ -2952,7 +2952,7 @@
                 "outputSourceConfig": {
                     "target": "com.amazonaws.entityresolution#OutputSourceConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>OutputSource</code> objects, each of which contains fields <code>OutputS3Path</code>, <code>ApplyNormalization</code>, and <code>Output</code>.</p>",
+                        "smithy.api#documentation": "<p>A list of <code>OutputSource</code> objects, each of which contains fields <code>outputS3Path</code>, <code>applyNormalization</code>, <code>KMSArn</code>, and <code>output</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3431,7 +3431,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object containing <code>KMSArn</code>, <code>OutputS3Path</code>, and <code>RoleARN</code>.</p>"
+                "smithy.api#documentation": "<p>An object containing <code>KMSArn</code>, <code>outputS3Path</code>, and <code>roleARN</code>.</p>"
             }
         },
         "com.amazonaws.entityresolution#IdMappingJobOutputSourceConfig": {
@@ -3479,7 +3479,7 @@
                 "attributeMatchingModel": {
                     "target": "com.amazonaws.entityresolution#AttributeMatchingModel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The comparison type. You can either choose <code>ONE_TO_ONE</code> or <code>MANY_TO_MANY</code> as the <code>attributeMatchingModel</code>. </p> <p>If you choose <code>MANY_TO_MANY</code>, the system can match attributes across the sub-types of an attribute type. For example, if the value of the <code>Email</code> field of Profile A matches the value of the <code>BusinessEmail</code> field of Profile B, the two profiles are matched on the <code>Email</code> attribute type. </p> <p>If you choose <code>ONE_TO_ONE</code>, the system can only match attributes if the sub-types are an exact match. For example, for the <code>Email</code> attribute type, the system will only consider it a match if the value of the <code>Email</code> field of Profile A matches the value of the <code>Email</code> field of Profile B.</p>",
+                        "smithy.api#documentation": "<p>The comparison type. You can either choose <code>ONE_TO_ONE</code> or <code>MANY_TO_MANY</code> as the <code>attributeMatchingModel</code>. </p> <p>If you choose <code>ONE_TO_ONE</code>, the system can only match attributes if the sub-types are an exact match. For example, for the <code>Email</code> attribute type, the system will only consider it a match if the value of the <code>Email</code> field of Profile A matches the value of the <code>Email</code> field of Profile B.</p> <p>If you choose <code>MANY_TO_MANY</code>, the system can match attributes across the sub-types of an attribute type. For example, if the value of the <code>Email</code> field of Profile A matches the value of the <code>BusinessEmail</code> field of Profile B, the two profiles are matched on the <code>Email</code> attribute type. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3570,7 +3570,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object containing <code>InputSourceARN</code>, <code>SchemaName</code>, and <code>Type</code>.</p>"
+                "smithy.api#documentation": "<p>An object containing <code>inputSourceARN</code>, <code>schemaName</code>, and <code>type</code>.</p>"
             }
         },
         "com.amazonaws.entityresolution#IdMappingWorkflowInputSourceConfig": {
@@ -3740,7 +3740,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object containing <code>IdMappingType</code>, <code>ProviderProperties</code>, and <code>RuleBasedProperties</code>.</p>"
+                "smithy.api#documentation": "<p>An object containing <code>idMappingType</code>, <code>providerProperties</code>, and <code>ruleBasedProperties</code>.</p>"
             }
         },
         "com.amazonaws.entityresolution#IdNamespaceIdMappingWorkflowPropertiesList": {
@@ -3774,7 +3774,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object containing <code>InputSourceARN</code> and <code>SchemaName</code>.</p>"
+                "smithy.api#documentation": "<p>An object containing <code>inputSourceARN</code> and <code>schemaName</code>.</p>"
             }
         },
         "com.amazonaws.entityresolution#IdNamespaceInputSourceConfig": {
@@ -3873,12 +3873,12 @@
                 "incrementalRunType": {
                     "target": "com.amazonaws.entityresolution#IncrementalRunType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of incremental run. It takes only one value: <code>IMMEDIATE</code>.</p>"
+                        "smithy.api#documentation": "<p>The type of incremental run. The only valid value is <code>IMMEDIATE</code>. This appears as \"Automatic\" in the console.</p> <important> <p>For workflows where <code>resolutionType</code> is <code>ML_MATCHING</code>, incremental processing is not supported. </p> </important>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object which defines an incremental run type and has only <code>incrementalRunType</code> as a field.</p>"
+                "smithy.api#documentation": "<p>Optional. An object that defines the incremental run type. This object contains only the <code>incrementalRunType</code> field, which appears as \"Automatic\" in the console. </p> <important> <p>For workflows where <code>resolutionType</code> is <code>ML_MATCHING</code>, incremental processing is not supported. </p> </important>"
             }
         },
         "com.amazonaws.entityresolution#IncrementalRunType": {
@@ -3918,7 +3918,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object containing <code>InputSourceARN</code>, <code>SchemaName</code>, and <code>ApplyNormalization</code>.</p>"
+                "smithy.api#documentation": "<p>An object containing <code>inputSourceARN</code>, <code>schemaName</code>, and <code>applyNormalization</code>.</p>"
             }
         },
         "com.amazonaws.entityresolution#InputSourceConfig": {
@@ -4003,7 +4003,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object containing <code>InputRecords</code>, <code>TotalRecordsProcessed</code>, <code>MatchIDs</code>, and <code>RecordsNotProcessed</code>.</p>"
+                "smithy.api#documentation": "<p>An object containing <code>inputRecords</code>, <code>totalRecordsProcessed</code>, <code>matchIDs</code>, and <code>recordsNotProcessed</code>.</p>"
             }
         },
         "com.amazonaws.entityresolution#JobOutputSource": {
@@ -4031,7 +4031,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object containing <code>KMSArn</code>, <code>OutputS3Path</code>, and <code>RoleArn</code>.</p>"
+                "smithy.api#documentation": "<p>An object containing <code>KMSArn</code>, <code>outputS3Path</code>, and <code>roleArn</code>.</p>"
             }
         },
         "com.amazonaws.entityresolution#JobOutputSourceConfig": {
@@ -4107,7 +4107,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object containing the <code>JobId</code>, <code>Status</code>, <code>StartTime</code>, and <code>EndTime</code> of a job.</p>"
+                "smithy.api#documentation": "<p>An object containing the <code>jobId</code>, <code>status</code>, <code>startTime</code>, and <code>endTime</code> of a job.</p>"
             }
         },
         "com.amazonaws.entityresolution#KMSArn": {
@@ -4541,7 +4541,7 @@
                 "workflowSummaries": {
                     "target": "com.amazonaws.entityresolution#MatchingWorkflowList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>MatchingWorkflowSummary</code> objects, each of which contain the fields <code>WorkflowName</code>, <code>WorkflowArn</code>, <code>CreatedAt</code>, and <code>UpdatedAt</code>.</p>"
+                        "smithy.api#documentation": "<p>A list of <code>MatchingWorkflowSummary</code> objects, each of which contain the fields <code>workflowName</code>, <code>workflowArn</code>, <code>resolutionType</code>, <code>createdAt</code>, and <code>updatedAt</code>.</p>"
                     }
                 },
                 "nextToken": {
@@ -4927,7 +4927,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of <code>MatchingWorkflowSummary</code> objects, each of which contain the fields <code>WorkflowName</code>, <code>WorkflowArn</code>, <code>CreatedAt</code>, <code>UpdatedAt</code>.</p>"
+                "smithy.api#documentation": "<p>A list of <code>MatchingWorkflowSummary</code> objects, each of which contain the fields <code>workflowName</code>, <code>workflowArn</code>, <code>resolutionType</code>, <code>createdAt</code>, <code>updatedAt</code>.</p>"
             }
         },
         "com.amazonaws.entityresolution#NamespaceProviderProperties": {
@@ -4948,7 +4948,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object containing <code>ProviderConfiguration</code> and <code>ProviderServiceArn</code>.</p>"
+                "smithy.api#documentation": "<p>An object containing <code>providerConfiguration</code> and <code>providerServiceArn</code>.</p>"
             }
         },
         "com.amazonaws.entityresolution#NamespaceRuleBasedProperties": {
@@ -4973,7 +4973,7 @@
                 "attributeMatchingModel": {
                     "target": "com.amazonaws.entityresolution#AttributeMatchingModel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The comparison type. You can either choose <code>ONE_TO_ONE</code> or <code>MANY_TO_MANY</code> as the <code>attributeMatchingModel</code>. </p> <p>If you choose <code>MANY_TO_MANY</code>, the system can match attributes across the sub-types of an attribute type. For example, if the value of the <code>Email</code> field of Profile A matches the value of <code>BusinessEmail</code> field of Profile B, the two profiles are matched on the <code>Email</code> attribute type. </p> <p>If you choose <code>ONE_TO_ONE</code>, the system can only match attributes if the sub-types are an exact match. For example, for the <code>Email</code> attribute type, the system will only consider it a match if the value of the <code>Email</code> field of Profile A matches the value of the <code>Email</code> field of Profile B.</p>"
+                        "smithy.api#documentation": "<p>The comparison type. You can either choose <code>ONE_TO_ONE</code> or <code>MANY_TO_MANY</code> as the <code>attributeMatchingModel</code>. </p> <p>If you choose <code>ONE_TO_ONE</code>, the system can only match attributes if the sub-types are an exact match. For example, for the <code>Email</code> attribute type, the system will only consider it a match if the value of the <code>Email</code> field of Profile A matches the value of the <code>Email</code> field of Profile B.</p> <p>If you choose <code>MANY_TO_MANY</code>, the system can match attributes across the sub-types of an attribute type. For example, if the value of the <code>Email</code> field of Profile A matches the value of <code>BusinessEmail</code> field of Profile B, the two profiles are matched on the <code>Email</code> attribute type. </p>"
                     }
                 },
                 "recordMatchingModels": {
@@ -5584,7 +5584,13 @@
                 "ruleBasedProperties": {
                     "target": "com.amazonaws.entityresolution#RuleBasedProperties",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object which defines the list of matching rules to run and has a field <code>Rules</code>, which is a list of rule objects.</p>"
+                        "smithy.api#documentation": "<p>An object which defines the list of matching rules to run and has a field <code>rules</code>, which is a list of rule objects.</p>"
+                    }
+                },
+                "ruleConditionProperties": {
+                    "target": "com.amazonaws.entityresolution#RuleConditionProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object containing the <code>rules</code> for a matching workflow.</p>"
                     }
                 },
                 "providerProperties": {
@@ -5670,7 +5676,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object containing <code>RuleName</code>, and <code>MatchingKeys</code>.</p>"
+                "smithy.api#documentation": "<p>An object containing the <code>ruleName</code> and <code>matchingKeys</code>.</p>"
             }
         },
         "com.amazonaws.entityresolution#RuleBasedProperties": {
@@ -5690,7 +5696,7 @@
                 "attributeMatchingModel": {
                     "target": "com.amazonaws.entityresolution#AttributeMatchingModel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The comparison type. You can either choose <code>ONE_TO_ONE</code> or <code>MANY_TO_MANY</code> as the <code>attributeMatchingModel</code>. </p> <p>If you choose <code>MANY_TO_MANY</code>, the system can match attributes across the sub-types of an attribute type. For example, if the value of the <code>Email</code> field of Profile A and the value of <code>BusinessEmail</code> field of Profile B matches, the two profiles are matched on the <code>Email</code> attribute type. </p> <p>If you choose <code>ONE_TO_ONE</code>, the system can only match attributes if the sub-types are an exact match. For example, for the <code>Email</code> attribute type, the system will only consider it a match if the value of the <code>Email</code> field of Profile A matches the value of the <code>Email</code> field of Profile B.</p>",
+                        "smithy.api#documentation": "<p>The comparison type. You can choose <code>ONE_TO_ONE</code> or <code>MANY_TO_MANY</code> as the <code>attributeMatchingModel</code>. </p> <p>If you choose <code>ONE_TO_ONE</code>, the system can only match attributes if the sub-types are an exact match. For example, for the <code>Email</code> attribute type, the system will only consider it a match if the value of the <code>Email</code> field of Profile A matches the value of the <code>Email</code> field of Profile B.</p> <p>If you choose <code>MANY_TO_MANY</code>, the system can match attributes across the sub-types of an attribute type. For example, if the value of the <code>Email</code> field of Profile A and the value of <code>BusinessEmail</code> field of Profile B matches, the two profiles are matched on the <code>Email</code> attribute type. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5702,7 +5708,61 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object which defines the list of matching rules to run in a matching workflow. RuleBasedProperties contain a <code>Rules</code> field, which is a list of rule objects.</p>"
+                "smithy.api#documentation": "<p>An object which defines the list of matching rules to run in a matching workflow. </p>"
+            }
+        },
+        "com.amazonaws.entityresolution#RuleCondition": {
+            "type": "structure",
+            "members": {
+                "ruleName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the matching rule.</p> <p>For example: <code>Rule1</code> </p>",
+                        "smithy.api#length": {
+                            "max": 255
+                        },
+                        "smithy.api#pattern": "^[a-zA-Z_0-9- ]*$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "condition": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A statement that specifies the conditions for a matching rule.</p> <p>If your data is accurate, use an Exact matching function: <code>Exact</code> or <code>ExactManyToMany</code>. </p> <p>If your data has variations in spelling or pronunciation, use a Fuzzy matching function: <code>Cosine</code>, <code>Levenshtein</code>, or <code>Soundex</code>. </p> <p>Use operators if you want to combine (<code>AND</code>), separate (<code>OR</code>), or group matching functions <code>(...)</code>.</p> <p>For example: <code>(Cosine(a, 10) AND Exact(b, true)) OR ExactManyToMany(c, d)</code> </p>",
+                        "smithy.api#length": {
+                            "max": 2048
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that defines the <code>ruleCondition</code> and the <code>ruleName</code> to use in a matching workflow.</p>"
+            }
+        },
+        "com.amazonaws.entityresolution#RuleConditionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.entityresolution#RuleCondition"
+            }
+        },
+        "com.amazonaws.entityresolution#RuleConditionProperties": {
+            "type": "structure",
+            "members": {
+                "rules": {
+                    "target": "com.amazonaws.entityresolution#RuleConditionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A list of rule objects, each of which have fields <code>ruleName</code> and <code>condition</code>. </p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 25
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The properties of a rule condition that provides the ability to use more complex syntax.</p>"
             }
         },
         "com.amazonaws.entityresolution#RuleList": {
@@ -5980,7 +6040,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object containing <code>SchemaName</code>, <code>SchemaArn</code>, <code>CreatedAt</code>, and<code>UpdatedAt</code>.</p>"
+                "smithy.api#documentation": "<p>An object containing <code>schemaName</code>, <code>schemaArn</code>, <code>createdAt</code>, <code>updatedAt</code>, and <code>hasWorkflows</code>.</p>"
             }
         },
         "com.amazonaws.entityresolution#Schemas": {
@@ -6454,7 +6514,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an existing <code>IdMappingWorkflow</code>. This method is identical to <code>CreateIdMappingWorkflow</code>, except it uses an HTTP <code>PUT</code> request instead of a <code>POST</code> request, and the <code>IdMappingWorkflow</code> must already exist for the method to succeed.</p>",
+                "smithy.api#documentation": "<p>Updates an existing <code>IdMappingWorkflow</code>. This method is identical to CreateIdMappingWorkflow, except it uses an HTTP <code>PUT</code> request instead of a <code>POST</code> request, and the <code>IdMappingWorkflow</code> must already exist for the method to succeed.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "PUT",
@@ -6490,7 +6550,7 @@
                 "outputSourceConfig": {
                     "target": "com.amazonaws.entityresolution#IdMappingWorkflowOutputSourceConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>OutputSource</code> objects, each of which contains fields <code>OutputS3Path</code> and <code>KMSArn</code>.</p>"
+                        "smithy.api#documentation": "<p>A list of <code>OutputSource</code> objects, each of which contains fields <code>outputS3Path</code> and <code>KMSArn</code>.</p>"
                     }
                 },
                 "idMappingTechniques": {
@@ -6546,7 +6606,7 @@
                 "outputSourceConfig": {
                     "target": "com.amazonaws.entityresolution#IdMappingWorkflowOutputSourceConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>OutputSource</code> objects, each of which contains fields <code>OutputS3Path</code> and <code>KMSArn</code>.</p>"
+                        "smithy.api#documentation": "<p>A list of <code>OutputSource</code> objects, each of which contains fields <code>outputS3Path</code> and <code>KMSArn</code>.</p>"
                     }
                 },
                 "idMappingTechniques": {
@@ -6737,7 +6797,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an existing <code>MatchingWorkflow</code>. This method is identical to <code>CreateMatchingWorkflow</code>, except it uses an HTTP <code>PUT</code> request instead of a <code>POST</code> request, and the <code>MatchingWorkflow</code> must already exist for the method to succeed.</p>",
+                "smithy.api#documentation": "<p>Updates an existing matching workflow. The workflow must already exist for this operation to succeed.</p> <important> <p>For workflows where <code>resolutionType</code> is ML_MATCHING, incremental processing is not supported. </p> </important>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "PUT",
@@ -6773,7 +6833,7 @@
                 "outputSourceConfig": {
                     "target": "com.amazonaws.entityresolution#OutputSourceConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>OutputSource</code> objects, each of which contains fields <code>OutputS3Path</code>, <code>ApplyNormalization</code>, and <code>Output</code>.</p>",
+                        "smithy.api#documentation": "<p>A list of <code>OutputSource</code> objects, each of which contains fields <code>outputS3Path</code>, <code>applyNormalization</code>, <code>KMSArn</code>, and <code>output</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6787,7 +6847,7 @@
                 "incrementalRunConfig": {
                     "target": "com.amazonaws.entityresolution#IncrementalRunConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object which defines an incremental run type and has only <code>incrementalRunType</code> as a field.</p>"
+                        "smithy.api#documentation": "<p>Optional. An object that defines the incremental run type. This object contains only the <code>incrementalRunType</code> field, which appears as \"Automatic\" in the console. </p> <important> <p>For workflows where <code>resolutionType</code> is <code>ML_MATCHING</code>, incremental processing is not supported. </p> </important>"
                     }
                 },
                 "roleArn": {
@@ -6828,7 +6888,7 @@
                 "outputSourceConfig": {
                     "target": "com.amazonaws.entityresolution#OutputSourceConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>OutputSource</code> objects, each of which contains fields <code>OutputS3Path</code>, <code>ApplyNormalization</code>, and <code>Output</code>.</p>",
+                        "smithy.api#documentation": "<p>A list of <code>OutputSource</code> objects, each of which contains fields <code>outputS3Path</code>, <code>applyNormalization</code>, <code>KMSArn</code>, and <code>output</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },

@@ -10825,6 +10825,16 @@ func awsRestjson1_serializeDocumentLoRaWANServiceProfile(v *types.LoRaWANService
 		ok.Integer(*v.DrMin)
 	}
 
+	if v.NbTransMax != nil {
+		ok := object.Key("NbTransMax")
+		ok.Integer(*v.NbTransMax)
+	}
+
+	if v.NbTransMin != nil {
+		ok := object.Key("NbTransMin")
+		ok.Integer(*v.NbTransMin)
+	}
+
 	if v.PrAllowed {
 		ok := object.Key("PrAllowed")
 		ok.Boolean(v.PrAllowed)
@@ -10833,6 +10843,16 @@ func awsRestjson1_serializeDocumentLoRaWANServiceProfile(v *types.LoRaWANService
 	if v.RaAllowed {
 		ok := object.Key("RaAllowed")
 		ok.Boolean(v.RaAllowed)
+	}
+
+	if v.TxPowerIndexMax != nil {
+		ok := object.Key("TxPowerIndexMax")
+		ok.Integer(*v.TxPowerIndexMax)
+	}
+
+	if v.TxPowerIndexMin != nil {
+		ok := object.Key("TxPowerIndexMin")
+		ok.Integer(*v.TxPowerIndexMin)
 	}
 
 	return nil

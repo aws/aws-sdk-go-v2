@@ -10,7 +10,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a workflow run.
+// Deletes a run and returns a response with no body if the operation is
+// successful. You can only delete a run that has reached a COMPLETED , FAILED , or
+// CANCELLED stage. A completed run has delivered an output, or was cancelled and
+// resulted in no output. When you delete a run, only the metadata associated with
+// the run is deleted. The run outputs remain in Amazon S3 and logs remain in
+// CloudWatch.
+//
+// To verify that the workflow is deleted:
+//
+//   - Use ListRuns to confirm the workflow no longer appears in the list.
+//
+//   - Use GetRun to verify the workflow cannot be found.
 func (c *Client) DeleteRun(ctx context.Context, params *DeleteRunInput, optFns ...func(*Options)) (*DeleteRunOutput, error) {
 	if params == nil {
 		params = &DeleteRunInput{}
@@ -132,6 +143,36 @@ func (c *Client) addOperationDeleteRunMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

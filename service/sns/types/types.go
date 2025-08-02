@@ -194,26 +194,26 @@ type PublishBatchRequestEntry struct {
 	// the message is received and deleted.
 	MessageDeduplicationId *string
 
-	// This parameter applies only to FIFO (first-in-first-out) topics.
+	// FIFO topics: The tag that specifies that a message belongs to a specific
+	// message group. Messages that belong to the same message group are processed in a
+	// FIFO manner (however, messages in different message groups might be processed
+	// out of order). To interleave multiple ordered streams within a single topic, use
+	// MessageGroupId values (for example, session data for multiple users). In this
+	// scenario, multiple consumers can process the topic, but the session data of each
+	// user is processed in a FIFO fashion. You must associate a non-empty
+	// MessageGroupId with a message. If you do not provide a MessageGroupId , the
+	// action fails.
 	//
-	// The tag that specifies that a message belongs to a specific message group.
-	// Messages that belong to the same message group are processed in a FIFO manner
-	// (however, messages in different message groups might be processed out of order).
-	// To interleave multiple ordered streams within a single topic, use MessageGroupId
-	// values (for example, session data for multiple users). In this scenario,
-	// multiple consumers can process the topic, but the session data of each user is
-	// processed in a FIFO fashion.
-	//
-	// You must associate a non-empty MessageGroupId with a message. If you don't
-	// provide a MessageGroupId , the action fails.
+	// Standard topics: The MessageGroupId is optional and is forwarded only to Amazon
+	// SQS standard subscriptions to activate [fair queues]. The MessageGroupId is not used for, or
+	// sent to, any other endpoint types.
 	//
 	// The length of MessageGroupId is 128 characters.
 	//
 	// MessageGroupId can contain alphanumeric characters (a-z, A-Z, 0-9) and
 	// punctuation (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~) .
 	//
-	// MessageGroupId is required for FIFO topics. You can't use it for standard
-	// topics.
+	// [fair queues]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-fair-queues.html
 	MessageGroupId *string
 
 	// Set MessageStructure to json if you want to send a different message for each
@@ -227,7 +227,7 @@ type PublishBatchRequestEntry struct {
 	//   string.
 	//
 	// You can define other top-level keys that define the message you want to send to
-	// a specific transport protocol (e.g. http).
+	// a specific transport protocol (for example, http).
 	MessageStructure *string
 
 	// The subject of the batch message.

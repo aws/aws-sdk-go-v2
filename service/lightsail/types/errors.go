@@ -164,6 +164,37 @@ func (e *OperationFailureException) ErrorCode() string {
 }
 func (e *OperationFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Lightsail throws this exception when an operation is performed on resources in
+// an opt-in Region that is currently being set up.
+type RegionSetupInProgressException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Code *string
+	Docs *string
+	Tip  *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *RegionSetupInProgressException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *RegionSetupInProgressException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *RegionSetupInProgressException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "RegionSetupInProgressException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *RegionSetupInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // A general service exception.
 type ServiceException struct {
 	Message *string

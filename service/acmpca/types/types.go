@@ -172,17 +172,19 @@ type CertificateAuthority struct {
 	// Reason the request to create your private CA failed.
 	FailureReason FailureReason
 
-	// Defines a cryptographic key management compliance standard used for handling CA
-	// keys.
+	// Defines a cryptographic key management compliance standard for handling and
+	// protecting CA keys.
 	//
 	// Default: FIPS_140_2_LEVEL_3_OR_HIGHER
 	//
-	// Note: Amazon Web Services Region ap-northeast-3 supports only
-	// FIPS_140_2_LEVEL_2_OR_HIGHER. You must explicitly specify this parameter and
-	// value when creating a CA in that Region. Specifying a different value (or no
-	// value) results in an InvalidArgsException with the message "A certificate
-	// authority cannot be created in this region with the specified security
-	// standard."
+	// Starting January 26, 2023, Amazon Web Services Private CA protects all CA
+	// private keys in non-China regions using hardware security modules (HSMs) that
+	// comply with FIPS PUB 140-2 Level 3.
+	//
+	// For information about security standard support in different Amazon Web
+	// Services Regions, see [Storage and security compliance of Amazon Web Services Private CA private keys].
+	//
+	// [Storage and security compliance of Amazon Web Services Private CA private keys]: https://docs.aws.amazon.com/privateca/latest/userguide/data-protection.html#private-keys
 	KeyStorageSecurityStandard KeyStorageSecurityStandard
 
 	// Date and time at which your private CA was last updated.

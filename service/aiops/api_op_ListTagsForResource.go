@@ -30,12 +30,11 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 type ListTagsForResourceInput struct {
 
 	// The ARN of the CloudWatch investigations resource that you want to view tags
-	// for. You can use the [ListInvestigationGroups]operation to find the ARNs of investigation groups.
+	// for. You can use the ListInvestigationGroups operation to find the ARNs of
+	// investigation groups.
 	//
 	// The ARN format for an investigation group is
 	// arn:aws:aiops:Region:account-id:investigation-group:investigation-group-id .
-	//
-	// [ListInvestigationGroups]: https://docs.aws.amazon.com/operationalinvestigations/latest/AmazonQDeveloperOperationalInvestigationsAPIReference/API_ListInvestigationGroups.html
 	//
 	// This member is required.
 	ResourceArn *string
@@ -140,6 +139,36 @@ func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

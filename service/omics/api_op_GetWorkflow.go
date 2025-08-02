@@ -14,9 +14,14 @@ import (
 	"time"
 )
 
-// Gets information about a workflow.
+// Gets all information about a workflow using its ID.
 //
 // If a workflow is shared with you, you cannot export the workflow.
+//
+// For more information about your workflow status, see [Verify the workflow status] in the Amazon Web
+// Services HealthOmics User Guide.
+//
+// [Verify the workflow status]: https://docs.aws.amazon.com/omics/latest/dev/using-get-workflow.html
 func (c *Client) GetWorkflow(ctx context.Context, params *GetWorkflowInput, optFns ...func(*Options)) (*GetWorkflowOutput, error) {
 	if params == nil {
 		params = &GetWorkflowInput{}
@@ -65,6 +70,10 @@ type GetWorkflowOutput struct {
 	// The workflow's definition.
 	Definition *string
 
+	// Details about the source code repository that hosts the workflow definition
+	// files.
+	DefinitionRepositoryDetails *types.DefinitionRepositoryDetails
+
 	// The workflow's description.
 	Description *string
 
@@ -88,6 +97,15 @@ type GetWorkflowOutput struct {
 
 	// The workflow's parameter template.
 	ParameterTemplate map[string]types.WorkflowParameter
+
+	// The README content for the workflow, providing documentation and usage
+	// information.
+	Readme *string
+
+	// The path to the workflow README markdown file within the repository. This file
+	// provides documentation and usage information for the workflow. If not specified,
+	// the README.md file from the root directory of the repository will be used.
+	ReadmePath *string
 
 	// The workflow's status.
 	Status types.WorkflowStatus
@@ -206,6 +224,36 @@ func (c *Client) addOperationGetWorkflowMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

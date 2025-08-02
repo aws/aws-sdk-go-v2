@@ -1,3 +1,13 @@
+# v1.16.1 (2025-07-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.16.0 (2025-07-28)
+
+* **Feature**: Add Pipeline Role Arn as an optional parameter to the create / update pipeline APIs as an alternative to passing in the pipeline configuration body
+* **Feature**: Add support for HTTP interceptors.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.6 (2025-07-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

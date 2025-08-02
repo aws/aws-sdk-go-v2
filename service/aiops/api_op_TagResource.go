@@ -38,9 +38,8 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 type TagResourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the resource that you want to apply the tags
-	// to. You can use the [ListInvestigationGroups]operation to find the ARNs of investigation groups.
-	//
-	// [ListInvestigationGroups]: https://docs.aws.amazon.com/operationalinvestigations/latest/AmazonQDeveloperOperationalInvestigationsAPIReference/API_ListInvestigationGroups.html
+	// to. You can use the ListInvestigationGroups operation to find the ARNs of
+	// investigation groups.
 	//
 	// This member is required.
 	ResourceArn *string
@@ -146,6 +145,36 @@ func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

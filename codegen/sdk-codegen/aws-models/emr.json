@@ -1079,6 +1079,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The throughput, in MiB/s, of the Amazon EBS root device volume of the Linux AMI that is\n         used for each Amazon EC2 instance. Available in Amazon EMR releases 6.15.0 and\n         later.</p>"
                     }
+                },
+                "ExtendedSupport": {
+                    "target": "com.amazonaws.emr#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1534,7 +1540,7 @@
                 "ProfilerType": {
                     "target": "com.amazonaws.emr#ProfilerType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The profiler type for the persistent application user interface. Valid values are SHS, TEZUI, or YTS.</p>"
+                        "smithy.api#documentation": "<p>The profiler type for the persistent application user interface.</p>"
                     }
                 }
             },
@@ -7724,6 +7730,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The number of steps that can be executed concurrently. You can specify a minimum of 1\n         step and a maximum of 256 steps. We recommend that you do not change this parameter while\n         steps are running or the <code>ActionOnFailure</code> setting may not behave as expected.\n         For more information see <a>Step$ActionOnFailure</a>.</p>"
                     }
+                },
+                "ExtendedSupport": {
+                    "target": "com.amazonaws.emr#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7737,6 +7749,12 @@
                     "target": "com.amazonaws.emr#Integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of steps that can be executed concurrently.</p>"
+                    }
+                },
+                "ExtendedSupport": {
+                    "target": "com.amazonaws.emr#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved.</p>"
                     }
                 }
             },
@@ -9207,6 +9225,12 @@
                     "target": "com.amazonaws.emr#Integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The throughput, in MiB/s, of the Amazon EBS root device volume of the Linux AMI that is\n            used for each Amazon EC2 instance. Available in Amazon EMR releases 6.15.0 and\n            later.</p>"
+                    }
+                },
+                "ExtendedSupport": {
+                    "target": "com.amazonaws.emr#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved.</p>"
                     }
                 }
             },

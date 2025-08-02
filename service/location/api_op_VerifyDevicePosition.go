@@ -15,6 +15,12 @@ import (
 // Verifies the integrity of the device's position by determining if it was
 // reported behind a proxy, and by comparing it to an inferred position estimated
 // based on the device's state.
+//
+// The Location Integrity SDK provides enhanced features related to device
+// verification, and it is available for use by request. To get access to the SDK,
+// contact [Sales Support].
+//
+// [Sales Support]: https://aws.amazon.com/contact-us/sales-support/?pg=locationprice&cta=herobtn
 func (c *Client) VerifyDevicePosition(ctx context.Context, params *VerifyDevicePositionInput, optFns ...func(*Options)) (*VerifyDevicePositionOutput, error) {
 	if params == nil {
 		params = &VerifyDevicePositionInput{}
@@ -180,6 +186,36 @@ func (c *Client) addOperationVerifyDevicePositionMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

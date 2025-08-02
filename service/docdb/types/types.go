@@ -242,14 +242,15 @@ type DBCluster struct {
 	// cluster.
 	ReplicationSourceIdentifier *string
 
+	// The scaling configuration of an Amazon DocumentDB Serverless cluster.
+	ServerlessV2ScalingConfiguration *ServerlessV2ScalingConfigurationInfo
+
 	// Specifies the current state of this cluster.
 	Status *string
 
 	// Specifies whether the cluster is encrypted.
 	StorageEncrypted *bool
 
-	// Storage type associated with your cluster
-	//
 	// Storage type associated with your cluster
 	//
 	// For information on storage types for Amazon DocumentDB clusters, see Cluster
@@ -464,6 +465,14 @@ type DBEngineVersion struct {
 	// The types of logs that the database engine has available for export to Amazon
 	// CloudWatch Logs.
 	ExportableLogTypes []string
+
+	// Specifies any Amazon DocumentDB Serverless properties or limits that differ
+	// between Amazon DocumentDB engine versions. You can test the values of this
+	// attribute when deciding which Amazon DocumentDB version to use in a new or
+	// upgraded cluster. You can also retrieve the version of an existing cluster and
+	// check whether that version supports certain Amazon DocumentDB Serverless
+	// features before you attempt to use those features.
+	ServerlessV2FeaturesSupport *ServerlessV2FeaturesSupport
 
 	// A list of the supported CA certificate identifiers.
 	//
@@ -814,9 +823,9 @@ type GlobalCluster struct {
 	// Currently limited to one item.
 	GlobalClusterMembers []GlobalClusterMember
 
-	// The Amazon Web Services Region-unique, immutable identifier for the global
-	// database cluster. This identifier is found in CloudTrail log entries whenever
-	// the KMS customer master key (CMK) for the cluster is accessed.
+	// The Amazon Web Services RegionRegion-unique, immutable identifier for the
+	// global database cluster. This identifier is found in CloudTrail log entries
+	// whenever the KMS customer master key (CMK) for the cluster is accessed.
 	GlobalClusterResourceId *string
 
 	// Specifies the current state of this global cluster.
@@ -841,7 +850,7 @@ type GlobalClusterMember struct {
 	IsWriter *bool
 
 	// The Amazon Resource Name (ARN) for each read-only secondary cluster associated
-	// with the Aurora global cluster.
+	// with the Amazon DocumentDB global cluster.
 	Readers []string
 
 	noSmithyDocumentSerde
@@ -1027,6 +1036,59 @@ type ResourcePendingMaintenanceActions struct {
 	// The Amazon Resource Name (ARN) of the resource that has pending maintenance
 	// actions.
 	ResourceIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies any Amazon DocumentDB Serverless properties or limits that differ
+// between Amazon DocumentDB engine versions. You can test the values of this
+// attribute when deciding which Amazon DocumentDB version to use in a new or
+// upgraded cluster. You can also retrieve the version of an existing cluster and
+// check whether that version supports certain Amazon DocumentDB Serverless
+// features before you attempt to use those features.
+type ServerlessV2FeaturesSupport struct {
+
+	// The maximum number of Amazon DocumentDB capacity units (DCUs) for an instance
+	// in an Amazon DocumentDB Serverless cluster. You can specify DCU values in
+	// half-step increments, such as 32, 32.5, 33, and so on.
+	MaxCapacity *float64
+
+	// The minimum number of Amazon DocumentDB capacity units (DCUs) for an instance
+	// in an Amazon DocumentDB Serverless cluster. You can specify DCU values in
+	// half-step increments, such as 8, 8.5, 9, and so on.
+	MinCapacity *float64
+
+	noSmithyDocumentSerde
+}
+
+// Sets the scaling configuration of an Amazon DocumentDB Serverless cluster.
+type ServerlessV2ScalingConfiguration struct {
+
+	// The maximum number of Amazon DocumentDB capacity units (DCUs) for an instance
+	// in an Amazon DocumentDB Serverless cluster. You can specify DCU values in
+	// half-step increments, such as 32, 32.5, 33, and so on.
+	MaxCapacity *float64
+
+	// The minimum number of Amazon DocumentDB capacity units (DCUs) for an instance
+	// in an Amazon DocumentDB Serverless cluster. You can specify DCU values in
+	// half-step increments, such as 8, 8.5, 9, and so on.
+	MinCapacity *float64
+
+	noSmithyDocumentSerde
+}
+
+// Retrieves the scaling configuration for an Amazon DocumentDB Serverless cluster.
+type ServerlessV2ScalingConfigurationInfo struct {
+
+	// The maximum number of Amazon DocumentDB capacity units (DCUs) for an instance
+	// in an Amazon DocumentDB Serverless cluster. You can specify DCU values in
+	// half-step increments, such as 32, 32.5, 33, and so on.
+	MaxCapacity *float64
+
+	// The minimum number of Amazon DocumentDB capacity units (DCUs) for an instance
+	// in an Amazon DocumentDB Serverless cluster. You can specify DCU values in
+	// half-step increments, such as 8, 8.5, 9, and so on.
+	MinCapacity *float64
 
 	noSmithyDocumentSerde
 }

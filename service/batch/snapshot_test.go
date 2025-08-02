@@ -122,6 +122,18 @@ func TestCheckSnapshot_CreateSchedulingPolicy(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateServiceEnvironment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateServiceEnvironment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateServiceEnvironment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteComputeEnvironment(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteComputeEnvironment(context.Background(), nil, func(o *Options) {
@@ -163,6 +175,18 @@ func TestCheckSnapshot_DeleteSchedulingPolicy(t *testing.T) {
 	_, err := svc.DeleteSchedulingPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteSchedulingPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteServiceEnvironment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteServiceEnvironment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteServiceEnvironment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -254,6 +278,30 @@ func TestCheckSnapshot_DescribeSchedulingPolicies(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeServiceEnvironments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeServiceEnvironments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeServiceEnvironments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeServiceJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeServiceJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeServiceJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetJobQueueSnapshot(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetJobQueueSnapshot(context.Background(), nil, func(o *Options) {
@@ -314,6 +362,18 @@ func TestCheckSnapshot_ListSchedulingPolicies(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListServiceJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListServiceJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListServiceJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
@@ -350,6 +410,18 @@ func TestCheckSnapshot_SubmitJob(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_SubmitServiceJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SubmitServiceJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SubmitServiceJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -367,6 +439,18 @@ func TestCheckSnapshot_TerminateJob(t *testing.T) {
 	_, err := svc.TerminateJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "TerminateJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_TerminateServiceJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TerminateServiceJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "TerminateServiceJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -433,6 +517,18 @@ func TestCheckSnapshot_UpdateSchedulingPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_UpdateServiceEnvironment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateServiceEnvironment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateServiceEnvironment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_CancelJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CancelJob(context.Background(), nil, func(o *Options) {
@@ -493,6 +589,18 @@ func TestUpdateSnapshot_CreateSchedulingPolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateServiceEnvironment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateServiceEnvironment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateServiceEnvironment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteComputeEnvironment(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteComputeEnvironment(context.Background(), nil, func(o *Options) {
@@ -534,6 +642,18 @@ func TestUpdateSnapshot_DeleteSchedulingPolicy(t *testing.T) {
 	_, err := svc.DeleteSchedulingPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteSchedulingPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteServiceEnvironment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteServiceEnvironment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteServiceEnvironment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -625,6 +745,30 @@ func TestUpdateSnapshot_DescribeSchedulingPolicies(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeServiceEnvironments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeServiceEnvironments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeServiceEnvironments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeServiceJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeServiceJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeServiceJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetJobQueueSnapshot(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetJobQueueSnapshot(context.Background(), nil, func(o *Options) {
@@ -685,6 +829,18 @@ func TestUpdateSnapshot_ListSchedulingPolicies(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListServiceJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListServiceJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListServiceJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
@@ -721,6 +877,18 @@ func TestUpdateSnapshot_SubmitJob(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_SubmitServiceJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SubmitServiceJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SubmitServiceJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -738,6 +906,18 @@ func TestUpdateSnapshot_TerminateJob(t *testing.T) {
 	_, err := svc.TerminateJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "TerminateJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_TerminateServiceJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TerminateServiceJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "TerminateServiceJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -798,6 +978,18 @@ func TestUpdateSnapshot_UpdateSchedulingPolicy(t *testing.T) {
 	_, err := svc.UpdateSchedulingPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateSchedulingPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateServiceEnvironment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateServiceEnvironment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateServiceEnvironment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

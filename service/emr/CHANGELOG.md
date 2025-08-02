@@ -1,3 +1,16 @@
+# v1.51.1 (2025-07-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.51.0 (2025-07-28)
+
+* **Feature**: Add support for HTTP interceptors.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.50.0 (2025-07-22)
+
+* **Feature**: This release adds new parameter 'ExtendedSupport' in AWS EMR RunJobFlow, ModifyCluster and DescribeCluster API.
+
 # v1.49.4 (2025-07-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

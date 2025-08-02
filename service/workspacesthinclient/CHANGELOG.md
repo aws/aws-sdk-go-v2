@@ -1,3 +1,16 @@
+# v1.17.1 (2025-07-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.17.0 (2025-07-28)
+
+* **Feature**: Add support for HTTP interceptors.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.16.0 (2025-07-23)
+
+* **Feature**: Added the lastUserId parameter to the ListDevices and GetDevice API.
+
 # v1.15.1 (2025-07-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

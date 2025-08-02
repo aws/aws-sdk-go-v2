@@ -103,6 +103,10 @@ type AdvancedSecurityOptions struct {
 	// True if fine-grained access control is enabled.
 	Enabled *bool
 
+	// Container for information about the IAM federation configuration for an
+	// OpenSearch UI application.
+	IAMFederationOptions *IAMFederationOptionsOutput
+
 	// True if the internal user database is enabled.
 	InternalUserDatabaseEnabled *bool
 
@@ -131,6 +135,10 @@ type AdvancedSecurityOptionsInput struct {
 
 	// True to enable fine-grained access control.
 	Enabled *bool
+
+	// Container for information about the IAM federation configuration for an
+	// OpenSearch UI application.
+	IAMFederationOptions *IAMFederationOptionsInput
 
 	// True to enable the internal user database.
 	InternalUserDatabaseEnabled *bool
@@ -1453,6 +1461,39 @@ type Filter struct {
 
 	// One or more values for the filter.
 	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// The IAM federation authentication configuration for an Amazon OpenSearch
+// Service domain.
+type IAMFederationOptionsInput struct {
+
+	// True to enable IAM federation authentication for a domain.
+	Enabled *bool
+
+	// Element of the IAM federation assertion to use for backend roles. Default is
+	// roles .
+	RolesKey *string
+
+	// Element of the IAM federation assertion to use for the user name. Default is sub
+	// .
+	SubjectKey *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the IAM federation options configured for the domain.
+type IAMFederationOptionsOutput struct {
+
+	// True if IAM federation is enabled.
+	Enabled *bool
+
+	// The key used for matching the IAM federation roles attribute.
+	RolesKey *string
+
+	// The key used for matching the IAM federation subject attribute.
+	SubjectKey *string
 
 	noSmithyDocumentSerde
 }

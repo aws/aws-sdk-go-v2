@@ -28918,6 +28918,28 @@ func awsRestjson1_serializeDocumentCloudWatchLogsLogGroupArnConfigDetails(v *typ
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCodeRepositoryDetails(v *types.CodeRepositoryDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CodeSecurityIntegrationArn != nil {
+		ok := object.Key("CodeSecurityIntegrationArn")
+		ok.String(*v.CodeSecurityIntegrationArn)
+	}
+
+	if v.ProjectName != nil {
+		ok := object.Key("ProjectName")
+		ok.String(*v.ProjectName)
+	}
+
+	if v.ProviderType != nil {
+		ok := object.Key("ProviderType")
+		ok.String(*v.ProviderType)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCodeVulnerabilitiesFilePath(v *types.CodeVulnerabilitiesFilePath, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -32163,6 +32185,13 @@ func awsRestjson1_serializeDocumentResourceDetails(v *types.ResourceDetails, val
 	if v.AwsXrayEncryptionConfig != nil {
 		ok := object.Key("AwsXrayEncryptionConfig")
 		if err := awsRestjson1_serializeDocumentAwsXrayEncryptionConfigDetails(v.AwsXrayEncryptionConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CodeRepository != nil {
+		ok := object.Key("CodeRepository")
+		if err := awsRestjson1_serializeDocumentCodeRepositoryDetails(v.CodeRepository, ok); err != nil {
 			return err
 		}
 	}

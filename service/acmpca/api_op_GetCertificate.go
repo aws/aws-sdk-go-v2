@@ -20,9 +20,9 @@ import (
 // you. The ARN of the certificate is returned when you call the [IssueCertificate]action. You must
 // specify both the ARN of your private CA and the ARN of the issued certificate
 // when calling the GetCertificate action. You can retrieve the certificate if it
-// is in the ISSUED state. You can call the [CreateCertificateAuthorityAuditReport]action to create a report that
-// contains information about all of the certificates issued and revoked by your
-// private CA.
+// is in the ISSUED, EXPIRED, or REVOKED state. You can call the [CreateCertificateAuthorityAuditReport]action to create
+// a report that contains information about all of the certificates issued and
+// revoked by your private CA.
 //
 // [IssueCertificate]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_IssueCertificate.html
 // [CreateCertificateAuthorityAuditReport]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html
@@ -166,6 +166,36 @@ func (c *Client) addOperationGetCertificateMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

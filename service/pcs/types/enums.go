@@ -108,6 +108,25 @@ func (EndpointType) Values() []EndpointType {
 	}
 }
 
+type NetworkType string
+
+// Enum values for NetworkType
+const (
+	NetworkTypeIpv4 NetworkType = "IPV4"
+	NetworkTypeIpv6 NetworkType = "IPV6"
+)
+
+// Values returns all known values for NetworkType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NetworkType) Values() []NetworkType {
+	return []NetworkType{
+		"IPV4",
+		"IPV6",
+	}
+}
+
 type PurchaseOption string
 
 // Enum values for PurchaseOption

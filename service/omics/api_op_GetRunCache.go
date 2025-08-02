@@ -12,11 +12,11 @@ import (
 	"time"
 )
 
-// Retrieve the details for the specified run cache.
+// Retrieves detailed information about the specified run cache using its ID.
 //
 // For more information, see [Call caching for Amazon Web Services HealthOmics runs] in the Amazon Web Services HealthOmics User Guide.
 //
-// [Call caching for Amazon Web Services HealthOmics runs]: https://docs.aws.amazon.com/omics/latest/dev/workflow-call-caching.html
+// [Call caching for Amazon Web Services HealthOmics runs]: https://docs.aws.amazon.com/omics/latest/dev/workflows-call-caching.html
 func (c *Client) GetRunCache(ctx context.Context, params *GetRunCacheInput, optFns ...func(*Options)) (*GetRunCacheOutput, error) {
 	if params == nil {
 		params = &GetRunCacheInput{}
@@ -169,6 +169,36 @@ func (c *Client) addOperationGetRunCacheMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

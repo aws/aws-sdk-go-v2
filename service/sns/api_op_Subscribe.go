@@ -56,8 +56,8 @@ type SubscribeInput struct {
 	//
 	//   - lambda – delivery of JSON-encoded message to an Lambda function
 	//
-	//   - firehose – delivery of JSON-encoded message to an Amazon Kinesis Data
-	//   Firehose delivery stream.
+	//   - firehose – delivery of JSON-encoded message to an Amazon Data Firehose
+	//   delivery stream.
 	//
 	// This member is required.
 	Protocol *string
@@ -156,7 +156,7 @@ type SubscribeInput struct {
 	//
 	//   - For the lambda protocol, the endpoint is the ARN of an Lambda function.
 	//
-	//   - For the firehose protocol, the endpoint is the ARN of an Amazon Kinesis Data
+	//   - For the firehose protocol, the endpoint is the ARN of an Amazon Data
 	//   Firehose delivery stream.
 	Endpoint *string
 
@@ -277,6 +277,36 @@ func (c *Client) addOperationSubscribeMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

@@ -10,7 +10,24 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a run group.
+// Updates the settings of a run group and returns a response with no body if the
+// operation is successful.
+//
+// You can update the following settings with UpdateRunGroup :
+//
+//   - Maximum number of CPUs
+//
+//   - Run time (measured in minutes)
+//
+//   - Number of GPUs
+//
+//   - Number of concurrent runs
+//
+//   - Group name
+//
+// To confirm that the settings have been successfully updated, use the
+// ListRunGroups or GetRunGroup API operations to verify that the desired changes
+// have been made.
 func (c *Client) UpdateRunGroup(ctx context.Context, params *UpdateRunGroupInput, optFns ...func(*Options)) (*UpdateRunGroupOutput, error) {
 	if params == nil {
 		params = &UpdateRunGroupInput{}
@@ -147,6 +164,36 @@ func (c *Client) addOperationUpdateRunGroupMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

@@ -8277,21 +8277,6 @@ func validateClarifyTextConfig(v *types.ClarifyTextConfig) error {
 	}
 }
 
-func validateClusterEbsVolumeConfig(v *types.ClusterEbsVolumeConfig) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "ClusterEbsVolumeConfig"}
-	if v.VolumeSizeInGB == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VolumeSizeInGB"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateClusterInstanceGroupSpecification(v *types.ClusterInstanceGroupSpecification) error {
 	if v == nil {
 		return nil
@@ -8315,11 +8300,6 @@ func validateClusterInstanceGroupSpecification(v *types.ClusterInstanceGroupSpec
 	}
 	if v.ExecutionRole == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRole"))
-	}
-	if v.InstanceStorageConfigs != nil {
-		if err := validateClusterInstanceStorageConfigs(v.InstanceStorageConfigs); err != nil {
-			invalidParams.AddNested("InstanceStorageConfigs", err.(smithy.InvalidParamsError))
-		}
 	}
 	if v.OverrideVpcConfig != nil {
 		if err := validateVpcConfig(v.OverrideVpcConfig); err != nil {
@@ -8345,42 +8325,6 @@ func validateClusterInstanceGroupSpecifications(v []types.ClusterInstanceGroupSp
 	invalidParams := smithy.InvalidParamsError{Context: "ClusterInstanceGroupSpecifications"}
 	for i := range v {
 		if err := validateClusterInstanceGroupSpecification(&v[i]); err != nil {
-			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateClusterInstanceStorageConfig(v types.ClusterInstanceStorageConfig) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "ClusterInstanceStorageConfig"}
-	switch uv := v.(type) {
-	case *types.ClusterInstanceStorageConfigMemberEbsVolumeConfig:
-		if err := validateClusterEbsVolumeConfig(&uv.Value); err != nil {
-			invalidParams.AddNested("[EbsVolumeConfig]", err.(smithy.InvalidParamsError))
-		}
-
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateClusterInstanceStorageConfigs(v []types.ClusterInstanceStorageConfig) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "ClusterInstanceStorageConfigs"}
-	for i := range v {
-		if err := validateClusterInstanceStorageConfig(v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -8459,11 +8403,6 @@ func validateClusterRestrictedInstanceGroupSpecification(v *types.ClusterRestric
 	}
 	if v.ExecutionRole == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRole"))
-	}
-	if v.InstanceStorageConfigs != nil {
-		if err := validateClusterInstanceStorageConfigs(v.InstanceStorageConfigs); err != nil {
-			invalidParams.AddNested("InstanceStorageConfigs", err.(smithy.InvalidParamsError))
-		}
 	}
 	if v.OverrideVpcConfig != nil {
 		if err := validateVpcConfig(v.OverrideVpcConfig); err != nil {
@@ -8642,9 +8581,6 @@ func validateComputeQuotaResourceConfig(v *types.ComputeQuotaResourceConfig) err
 	invalidParams := smithy.InvalidParamsError{Context: "ComputeQuotaResourceConfig"}
 	if len(v.InstanceType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
-	}
-	if v.Count == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Count"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

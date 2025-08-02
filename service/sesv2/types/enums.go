@@ -588,6 +588,24 @@ func (ListRecommendationsFilterKey) Values() []ListRecommendationsFilterKey {
 	}
 }
 
+type ListTenantResourcesFilterKey string
+
+// Enum values for ListTenantResourcesFilterKey
+const (
+	ListTenantResourcesFilterKeyResourceType ListTenantResourcesFilterKey = "RESOURCE_TYPE"
+)
+
+// Values returns all known values for ListTenantResourcesFilterKey. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ListTenantResourcesFilterKey) Values() []ListTenantResourcesFilterKey {
+	return []ListTenantResourcesFilterKey{
+		"RESOURCE_TYPE",
+	}
+}
+
 type MailFromDomainStatus string
 
 // Enum values for MailFromDomainStatus
@@ -783,11 +801,14 @@ type RecommendationType string
 
 // Enum values for RecommendationType
 const (
-	RecommendationTypeDkim      RecommendationType = "DKIM"
-	RecommendationTypeDmarc     RecommendationType = "DMARC"
-	RecommendationTypeSpf       RecommendationType = "SPF"
-	RecommendationTypeBimi      RecommendationType = "BIMI"
-	RecommendationTypeComplaint RecommendationType = "COMPLAINT"
+	RecommendationTypeDkim       RecommendationType = "DKIM"
+	RecommendationTypeDmarc      RecommendationType = "DMARC"
+	RecommendationTypeSpf        RecommendationType = "SPF"
+	RecommendationTypeBimi       RecommendationType = "BIMI"
+	RecommendationTypeComplaint  RecommendationType = "COMPLAINT"
+	RecommendationTypeBounce     RecommendationType = "BOUNCE"
+	RecommendationTypeFeedback3p RecommendationType = "FEEDBACK_3P"
+	RecommendationTypeIpListing  RecommendationType = "IP_LISTING"
 )
 
 // Values returns all known values for RecommendationType. Note that this can be
@@ -801,6 +822,70 @@ func (RecommendationType) Values() []RecommendationType {
 		"SPF",
 		"BIMI",
 		"COMPLAINT",
+		"BOUNCE",
+		"FEEDBACK_3P",
+		"IP_LISTING",
+	}
+}
+
+type ReputationEntityFilterKey string
+
+// Enum values for ReputationEntityFilterKey
+const (
+	ReputationEntityFilterKeyEntityType            ReputationEntityFilterKey = "ENTITY_TYPE"
+	ReputationEntityFilterKeyReputationImpact      ReputationEntityFilterKey = "REPUTATION_IMPACT"
+	ReputationEntityFilterKeyStatus                ReputationEntityFilterKey = "SENDING_STATUS"
+	ReputationEntityFilterKeyEntityReferencePrefix ReputationEntityFilterKey = "ENTITY_REFERENCE_PREFIX"
+)
+
+// Values returns all known values for ReputationEntityFilterKey. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReputationEntityFilterKey) Values() []ReputationEntityFilterKey {
+	return []ReputationEntityFilterKey{
+		"ENTITY_TYPE",
+		"REPUTATION_IMPACT",
+		"SENDING_STATUS",
+		"ENTITY_REFERENCE_PREFIX",
+	}
+}
+
+type ReputationEntityType string
+
+// Enum values for ReputationEntityType
+const (
+	ReputationEntityTypeResource ReputationEntityType = "RESOURCE"
+)
+
+// Values returns all known values for ReputationEntityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReputationEntityType) Values() []ReputationEntityType {
+	return []ReputationEntityType{
+		"RESOURCE",
+	}
+}
+
+type ResourceType string
+
+// Enum values for ResourceType
+const (
+	ResourceTypeEmailIdentity    ResourceType = "EMAIL_IDENTITY"
+	ResourceTypeConfigurationSet ResourceType = "CONFIGURATION_SET"
+	ResourceTypeEmailTemplate    ResourceType = "EMAIL_TEMPLATE"
+)
+
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceType) Values() []ResourceType {
+	return []ResourceType{
+		"EMAIL_IDENTITY",
+		"CONFIGURATION_SET",
+		"EMAIL_TEMPLATE",
 	}
 }
 
@@ -843,6 +928,27 @@ func (ScalingMode) Values() []ScalingMode {
 	return []ScalingMode{
 		"STANDARD",
 		"MANAGED",
+	}
+}
+
+type SendingStatus string
+
+// Enum values for SendingStatus
+const (
+	SendingStatusEnabled    SendingStatus = "ENABLED"
+	SendingStatusReinstated SendingStatus = "REINSTATED"
+	SendingStatusDisabled   SendingStatus = "DISABLED"
+)
+
+// Values returns all known values for SendingStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SendingStatus) Values() []SendingStatus {
+	return []SendingStatus{
+		"ENABLED",
+		"REINSTATED",
+		"DISABLED",
 	}
 }
 

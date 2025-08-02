@@ -109,6 +109,10 @@ Please be aware of the following notes prior to opening a pull request:
    directly on these models. If you discover an issue with the models please
    create a [GitHub issue][issues] describing the issue.
 
+### Changelog
+
+DO NOT add a .changelog entry, we will do that for you.
+
 ### Testing
 
 To run the tests locally, running the `make unit` command will `go get` the

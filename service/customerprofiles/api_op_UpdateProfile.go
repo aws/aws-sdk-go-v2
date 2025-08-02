@@ -76,6 +76,9 @@ type UpdateProfileInput struct {
 	// business address.
 	EmailAddress *string
 
+	// Object that defines users preferred methods of engagement.
+	EngagementPreferences *types.EngagementPreferences
+
 	// The customer’s first name.
 	FirstName *string
 
@@ -116,6 +119,9 @@ type UpdateProfileInput struct {
 	// The customer’s phone number, which has not been specified as a mobile, home, or
 	// business number.
 	PhoneNumber *string
+
+	// Determines the type of the profile.
+	ProfileType types.ProfileType
 
 	// The customer’s shipping address.
 	ShippingAddress *types.UpdateAddress
@@ -222,6 +228,36 @@ func (c *Client) addOperationUpdateProfileMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

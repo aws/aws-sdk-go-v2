@@ -11,8 +11,22 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates information about a workflow. For more information, see [Update a private workflow] in the Amazon
-// Web Services HealthOmics User Guide.
+// Updates information about a workflow.
+//
+// You can update the following workflow information:
+//
+//   - Name
+//
+//   - Description
+//
+//   - Default storage type
+//
+//   - Default storage capacity (with workflow ID)
+//
+// This operation returns a response with no body if the operation is successful.
+// You can check the workflow updates by calling the GetWorkflow API operation.
+//
+// For more information, see [Update a private workflow] in the Amazon Web Services HealthOmics User Guide.
 //
 // [Update a private workflow]: https://docs.aws.amazon.com/omics/latest/dev/update-private-workflow.html
 func (c *Client) UpdateWorkflow(ctx context.Context, params *UpdateWorkflowInput, optFns ...func(*Options)) (*UpdateWorkflowOutput, error) {
@@ -42,6 +56,12 @@ type UpdateWorkflowInput struct {
 
 	// A name for the workflow.
 	Name *string
+
+	// The markdown content for the workflow's README file. This provides
+	// documentation and usage information for users of the workflow.
+	//
+	// This value conforms to the media type: text/markdown
+	ReadmeMarkdown *string
 
 	// The default static storage capacity (in gibibytes) for runs that use this
 	// workflow or workflow version.
@@ -155,6 +175,36 @@ func (c *Client) addOperationUpdateWorkflowMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

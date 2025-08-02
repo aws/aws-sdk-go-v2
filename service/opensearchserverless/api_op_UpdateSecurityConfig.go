@@ -50,6 +50,11 @@ type UpdateSecurityConfigInput struct {
 	// A description of the security configuration.
 	Description *string
 
+	// Describes IAM federation options in the form of a key-value map for updating an
+	// existing security configuration. Use this field to modify IAM federation
+	// settings for the security configuration.
+	IamFederationOptions *types.IamFederationConfigOptions
+
 	// Describes IAM Identity Center options in the form of a key-value map.
 	IamIdentityCenterOptionsUpdates *types.UpdateIamIdentityCenterConfigOptions
 
@@ -159,6 +164,36 @@ func (c *Client) addOperationUpdateSecurityConfigMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

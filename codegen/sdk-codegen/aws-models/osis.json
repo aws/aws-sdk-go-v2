@@ -1065,6 +1065,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>List of tags to add to the pipeline upon creation.</p>"
                     }
+                },
+                "PipelineRoleArn": {
+                    "target": "com.amazonaws.osis#PipelineRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that provides\n   the required permissions for a pipeline to read from the source and write to the sink.\n   For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/pipeline-security-overview.html\">Setting up roles and users in Amazon OpenSearch Ingestion</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1796,6 +1802,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of tags associated with the given pipeline.</p>"
                     }
+                },
+                "PipelineRoleArn": {
+                    "target": "com.amazonaws.osis#PipelineRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that provides\n   the required permissions for a pipeline to read from the source and write to the sink.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1943,6 +1955,16 @@
                     "max": 28
                 },
                 "smithy.api#pattern": "^[a-z][a-z0-9\\-]+$"
+            }
+        },
+        "com.amazonaws.osis#PipelineRoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:(aws|aws\\-cn|aws\\-us\\-gov|aws\\-iso|aws\\-iso\\-b|aws\\-iso\\-e|aws\\-iso\\-f):iam::[0-9]+:role\\/.*$"
             }
         },
         "com.amazonaws.osis#PipelineStatus": {
@@ -2600,6 +2622,12 @@
                     "target": "com.amazonaws.osis#EncryptionAtRestOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>Key-value pairs to configure encryption for data that is written to a persistent buffer.</p>"
+                    }
+                },
+                "PipelineRoleArn": {
+                    "target": "com.amazonaws.osis#PipelineRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that provides\n   the required permissions for a pipeline to read from the source and write to the sink.\n   For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/pipeline-security-overview.html\">Setting up roles and users in Amazon OpenSearch Ingestion</a>.</p>"
                     }
                 }
             },

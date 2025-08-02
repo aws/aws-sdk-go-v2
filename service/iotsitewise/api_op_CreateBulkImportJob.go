@@ -18,8 +18,14 @@ import (
 // IoT SiteWise cold tier. For more information about how to configure storage
 // settings, see [PutStorageConfiguration].
 //
-// Bulk import is designed to store historical data to IoT SiteWise. It does not
-// trigger computations or notifications on IoT SiteWise warm or cold tier storage.
+// Bulk import is designed to store historical data to IoT SiteWise.
+//
+//   - Newly ingested data in the hot tier triggers notifications and computations.
+//
+//   - After data moves from the hot tier to the warm or cold tier based on
+//     retention settings, it does not trigger computations or notifications.
+//
+//   - Data older than 7 days does not trigger computations or notifications.
 //
 // [Create a bulk import job (CLI)]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/CreateBulkImportJob.html
 // [PutStorageConfiguration]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_PutStorageConfiguration.html
@@ -211,6 +217,36 @@ func (c *Client) addOperationCreateBulkImportJobMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

@@ -51,6 +51,7 @@ const (
 	AggregationResourceTypeAwsEc2Instance       AggregationResourceType = "AWS_EC2_INSTANCE"
 	AggregationResourceTypeAwsEcrContainerImage AggregationResourceType = "AWS_ECR_CONTAINER_IMAGE"
 	AggregationResourceTypeAwsLambdaFunction    AggregationResourceType = "AWS_LAMBDA_FUNCTION"
+	AggregationResourceTypeCodeRepository       AggregationResourceType = "CODE_REPOSITORY"
 )
 
 // Values returns all known values for AggregationResourceType. Note that this can
@@ -62,6 +63,7 @@ func (AggregationResourceType) Values() []AggregationResourceType {
 		"AWS_EC2_INSTANCE",
 		"AWS_ECR_CONTAINER_IMAGE",
 		"AWS_LAMBDA_FUNCTION",
+		"CODE_REPOSITORY",
 	}
 }
 
@@ -2375,14 +2377,15 @@ type UsageType string
 
 // Enum values for UsageType
 const (
-	UsageTypeEc2InstanceHours        UsageType = "EC2_INSTANCE_HOURS"
-	UsageTypeEcrInitialScan          UsageType = "ECR_INITIAL_SCAN"
-	UsageTypeEcrRescan               UsageType = "ECR_RESCAN"
-	UsageTypeLambdaFunctionHours     UsageType = "LAMBDA_FUNCTION_HOURS"
-	UsageTypeLambdaFunctionCodeHours UsageType = "LAMBDA_FUNCTION_CODE_HOURS"
-	UsageTypeCodeRepositorySast      UsageType = "CODE_REPOSITORY_SAST"
-	UsageTypeCodeRepositoryIac       UsageType = "CODE_REPOSITORY_IAC"
-	UsageTypeCodeRepositorySca       UsageType = "CODE_REPOSITORY_SCA"
+	UsageTypeEc2InstanceHours          UsageType = "EC2_INSTANCE_HOURS"
+	UsageTypeEcrInitialScan            UsageType = "ECR_INITIAL_SCAN"
+	UsageTypeEcrRescan                 UsageType = "ECR_RESCAN"
+	UsageTypeLambdaFunctionHours       UsageType = "LAMBDA_FUNCTION_HOURS"
+	UsageTypeLambdaFunctionCodeHours   UsageType = "LAMBDA_FUNCTION_CODE_HOURS"
+	UsageTypeCodeRepositorySast        UsageType = "CODE_REPOSITORY_SAST"
+	UsageTypeCodeRepositoryIac         UsageType = "CODE_REPOSITORY_IAC"
+	UsageTypeCodeRepositorySca         UsageType = "CODE_REPOSITORY_SCA"
+	UsageTypeEc2AgentlessInstanceHours UsageType = "EC2_AGENTLESS_INSTANCE_HOURS"
 )
 
 // Values returns all known values for UsageType. Note that this can be expanded
@@ -2399,6 +2402,7 @@ func (UsageType) Values() []UsageType {
 		"CODE_REPOSITORY_SAST",
 		"CODE_REPOSITORY_IAC",
 		"CODE_REPOSITORY_SCA",
+		"EC2_AGENTLESS_INSTANCE_HOURS",
 	}
 }
 

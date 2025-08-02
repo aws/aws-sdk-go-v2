@@ -83,6 +83,53 @@ type AddToProjectMemberPoolPolicyGrantDetail struct {
 	noSmithyDocumentSerde
 }
 
+// An aggregation list item.
+type AggregationListItem struct {
+
+	// An attribute on which to compute aggregations.
+	//
+	// This member is required.
+	Attribute *string
+
+	// The display value of the aggregation list item. Supported values include value
+	// and glossaryTerm.name .
+	DisplayValue *string
+
+	noSmithyDocumentSerde
+}
+
+// The aggregation for an attribute.
+type AggregationOutput struct {
+
+	// The attribute for this aggregation.
+	Attribute *string
+
+	// The display value of the aggregation output item.
+	DisplayValue *string
+
+	// A list of aggregation output items.
+	Items []AggregationOutputItem
+
+	noSmithyDocumentSerde
+}
+
+// An aggregation output item.
+type AggregationOutputItem struct {
+
+	// The count of the aggregation output item.
+	Count *int32
+
+	// The display value of the aggregation. If the attribute being aggregated
+	// corresponds to the id of a public resource, the service automatically resolves
+	// the id to the provided display value.
+	DisplayValue *string
+
+	// The attribute value of the aggregation output item.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // The grant filter for all domain units.
 type AllDomainUnitsGrantFilter struct {
 	noSmithyDocumentSerde
@@ -252,6 +299,9 @@ type AssetItemAdditionalAttributes struct {
 	// of an asset.
 	LatestTimeSeriesDataPointFormsOutput []TimeSeriesDataPointSummaryFormOutput
 
+	// List of rationales indicating why this item was matched by search.
+	MatchRationale []MatchRationaleItem
+
 	// The read-only forms included in the additional attributes of an inventory asset.
 	ReadOnlyFormsOutput []FormOutput
 
@@ -364,6 +414,9 @@ type AssetListingItemAdditionalAttributes struct {
 	// The latest time series data points forms included in the additional attributes
 	// of an asset.
 	LatestTimeSeriesDataPointForms []TimeSeriesDataPointSummaryFormOutput
+
+	// List of rationales indicating why this item was matched by search.
+	MatchRationale []MatchRationaleItem
 
 	noSmithyDocumentSerde
 }
@@ -1140,6 +1193,15 @@ type DataProductItem struct {
 	noSmithyDocumentSerde
 }
 
+// The additional attributes of an Amazon DataZone data product.
+type DataProductItemAdditionalAttributes struct {
+
+	// List of rationales indicating why this item was matched by search.
+	MatchRationale []MatchRationaleItem
+
+	noSmithyDocumentSerde
+}
+
 // The data product listing.
 type DataProductListing struct {
 
@@ -1218,6 +1280,9 @@ type DataProductListingItemAdditionalAttributes struct {
 	// The metadata forms of the asset of the data product.
 	Forms *string
 
+	// List of rationales indicating why this item was matched by search.
+	MatchRationale []MatchRationaleItem
+
 	noSmithyDocumentSerde
 }
 
@@ -1243,6 +1308,9 @@ type DataProductResultItem struct {
 	//
 	// This member is required.
 	OwningProjectId *string
+
+	// The additional attributes of an Amazon DataZone data product.
+	AdditionalAttributes *DataProductItemAdditionalAttributes
 
 	// The timestamp at which the data product was created.
 	CreatedAt *time.Time
@@ -2408,6 +2476,9 @@ type GlossaryItem struct {
 	// This member is required.
 	Status GlossaryStatus
 
+	// The additional attributes of an Amazon DataZone glossary.
+	AdditionalAttributes *GlossaryItemAdditionalAttributes
+
 	// The timestamp of when the glossary was created.
 	CreatedAt *time.Time
 
@@ -2422,6 +2493,15 @@ type GlossaryItem struct {
 
 	// The Amazon DataZone user who updated the business glossary.
 	UpdatedBy *string
+
+	noSmithyDocumentSerde
+}
+
+// The additional attributes of an Amazon DataZone glossary.
+type GlossaryItemAdditionalAttributes struct {
+
+	// List of rationales indicating why this item was matched by search.
+	MatchRationale []MatchRationaleItem
 
 	noSmithyDocumentSerde
 }
@@ -2455,6 +2535,9 @@ type GlossaryTermItem struct {
 	// This member is required.
 	Status GlossaryTermStatus
 
+	// The additional attributes of an Amazon DataZone glossary term.
+	AdditionalAttributes *GlossaryTermItemAdditionalAttributes
+
 	// The timestamp of when a business glossary term was created.
 	CreatedAt *time.Time
 
@@ -2475,6 +2558,15 @@ type GlossaryTermItem struct {
 
 	// The Amazon DataZone user who updated the business glossary term.
 	UpdatedBy *string
+
+	noSmithyDocumentSerde
+}
+
+// The additional attributes of an Amazon DataZone glossary term.
+type GlossaryTermItemAdditionalAttributes struct {
+
+	// List of rationales indicating why this item was matched by search.
+	MatchRationale []MatchRationaleItem
 
 	noSmithyDocumentSerde
 }
@@ -3355,6 +3447,37 @@ type ListingSummaryItem struct {
 
 	noSmithyDocumentSerde
 }
+
+// The offset of a matched term.
+type MatchOffset struct {
+
+	// The 0-indexed number indicating the end position (exclusive) of a matched term.
+	EndOffset *int32
+
+	// The 0-indexed number indicating the start position (inclusive) of a matched
+	// term.
+	StartOffset *int32
+
+	noSmithyDocumentSerde
+}
+
+// A rationale indicating why this item was matched by search.
+//
+// The following types satisfy this interface:
+//
+//	MatchRationaleItemMemberTextMatches
+type MatchRationaleItem interface {
+	isMatchRationaleItem()
+}
+
+// A list of TextMatchItems.
+type MatchRationaleItemMemberTextMatches struct {
+	Value []TextMatchItem
+
+	noSmithyDocumentSerde
+}
+
+func (*MatchRationaleItemMemberTextMatches) isMatchRationaleItem() {}
 
 // The details about a project member.
 //
@@ -5987,6 +6110,21 @@ type TermRelations struct {
 	noSmithyDocumentSerde
 }
 
+// A structure indicating matched terms for an attribute.
+type TextMatchItem struct {
+
+	// The name of the attribute.
+	Attribute *string
+
+	// List of offsets indicating matching terms in the TextMatchItem text.
+	MatchOffsets []MatchOffset
+
+	// Snippet of attribute text containing highlighted content.
+	Text *string
+
+	noSmithyDocumentSerde
+}
+
 // The time series data points form.
 type TimeSeriesDataPointFormInput struct {
 
@@ -6242,6 +6380,7 @@ func (*UnknownUnionMember) isGrantedEntityInput()            {}
 func (*UnknownUnionMember) isGroupPolicyGrantPrincipal()     {}
 func (*UnknownUnionMember) isJobRunDetails()                 {}
 func (*UnknownUnionMember) isListingItem()                   {}
+func (*UnknownUnionMember) isMatchRationaleItem()            {}
 func (*UnknownUnionMember) isMember()                        {}
 func (*UnknownUnionMember) isMemberDetails()                 {}
 func (*UnknownUnionMember) isModel()                         {}

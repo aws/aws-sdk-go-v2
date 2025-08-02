@@ -130,6 +130,35 @@ func (ConflictResolvingModel) Values() []ConflictResolvingModel {
 	}
 }
 
+type ContactType string
+
+// Enum values for ContactType
+const (
+	ContactTypePhoneNumber          ContactType = "PhoneNumber"
+	ContactTypeMobilePhoneNumber    ContactType = "MobilePhoneNumber"
+	ContactTypeHomePhoneNumber      ContactType = "HomePhoneNumber"
+	ContactTypeBusinessPhoneNumber  ContactType = "BusinessPhoneNumber"
+	ContactTypeEmailAddress         ContactType = "EmailAddress"
+	ContactTypePersonalEmailAddress ContactType = "PersonalEmailAddress"
+	ContactTypeBusinessEmailAddress ContactType = "BusinessEmailAddress"
+)
+
+// Values returns all known values for ContactType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContactType) Values() []ContactType {
+	return []ContactType{
+		"PhoneNumber",
+		"MobilePhoneNumber",
+		"HomePhoneNumber",
+		"BusinessPhoneNumber",
+		"EmailAddress",
+		"PersonalEmailAddress",
+		"BusinessEmailAddress",
+	}
+}
+
 type DataFormat string
 
 // Enum values for DataFormat
@@ -676,6 +705,44 @@ func (PeriodUnit) Values() []PeriodUnit {
 		"DAYS",
 		"WEEKS",
 		"MONTHS",
+	}
+}
+
+type ProfileType string
+
+// Enum values for ProfileType
+const (
+	ProfileTypeAccountProfile ProfileType = "ACCOUNT_PROFILE"
+	ProfileTypeProfile        ProfileType = "PROFILE"
+)
+
+// Values returns all known values for ProfileType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProfileType) Values() []ProfileType {
+	return []ProfileType{
+		"ACCOUNT_PROFILE",
+		"PROFILE",
+	}
+}
+
+type ProfileTypeDimensionType string
+
+// Enum values for ProfileTypeDimensionType
+const (
+	ProfileTypeDimensionTypeInclusive ProfileTypeDimensionType = "INCLUSIVE"
+	ProfileTypeDimensionTypeExclusive ProfileTypeDimensionType = "EXCLUSIVE"
+)
+
+// Values returns all known values for ProfileTypeDimensionType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProfileTypeDimensionType) Values() []ProfileTypeDimensionType {
+	return []ProfileTypeDimensionType{
+		"INCLUSIVE",
+		"EXCLUSIVE",
 	}
 }
 

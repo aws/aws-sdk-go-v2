@@ -71,6 +71,10 @@ type GetWorkflowVersionOutput struct {
 	// Definition of the workflow version.
 	Definition *string
 
+	// Details about the source code repository that hosts the workflow version
+	// definition files.
+	DefinitionRepositoryDetails *types.DefinitionRepositoryDetails
+
 	// Description of the workflow version.
 	Description *string
 
@@ -88,6 +92,16 @@ type GetWorkflowVersionOutput struct {
 
 	// The parameter template for the workflow version.
 	ParameterTemplate map[string]types.WorkflowParameter
+
+	// The README content for the workflow version, providing documentation and usage
+	// information specific to this version.
+	Readme *string
+
+	// The path to the workflow version README markdown file within the repository.
+	// This file provides documentation and usage information for the workflow. If not
+	// specified, the README.md file from the root directory of the repository will be
+	// used.
+	ReadmePath *string
 
 	// The workflow version status
 	Status types.WorkflowStatus
@@ -214,6 +228,36 @@ func (c *Client) addOperationGetWorkflowVersionMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

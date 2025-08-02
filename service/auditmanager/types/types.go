@@ -1226,9 +1226,16 @@ type Framework struct {
 	ComplianceType *string
 
 	//  The control sets that are associated with the framework.
+	//
+	// The Controls object returns a partial response when called through Framework
+	// APIs. For a complete Controls object, use GetControl .
 	ControlSets []ControlSet
 
 	//  The control data sources where Audit Manager collects evidence from.
+	//
+	// This API parameter is no longer supported.
+	//
+	// Deprecated: Use controlSources from the Control
 	ControlSources *string
 
 	//  The time when the framework was created.

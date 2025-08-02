@@ -1,3 +1,16 @@
+# v1.21.0 (2025-07-31)
+
+* **Feature**: Add support for creating advanced rule-based matching workflows in AWS Entity Resolution.
+
+# v1.20.1 (2025-07-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.0 (2025-07-28)
+
+* **Feature**: Add support for HTTP interceptors.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.3 (2025-07-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

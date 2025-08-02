@@ -18,7 +18,8 @@ import (
 // recordingScope is set by the service that is linked to the configuration
 // recorder.
 //
-// For more information, see [Working with the Configuration Recorder] in the Config Developer Guide.
+// For more information and a list of supported services/service principals, see [Working with the Configuration Recorder]
+// in the Config Developer Guide.
 //
 // This API creates a service-linked role AWSServiceRoleForConfig in your account.
 // The service-linked role is created only when the role does not exist in your
@@ -76,7 +77,8 @@ type PutServiceLinkedConfigurationRecorderOutput struct {
 	// The name of the specified configuration recorder.
 	//
 	// For service-linked configuration recorders, Config automatically assigns a name
-	// that has the prefix " AWS " to the new service-linked configuration recorder.
+	// that has the prefix " AWSConfigurationRecorderFor " to the new service-linked
+	// configuration recorder.
 	Name *string
 
 	// Metadata pertaining to the operation's result.
@@ -171,6 +173,36 @@ func (c *Client) addOperationPutServiceLinkedConfigurationRecorderMiddlewares(st
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

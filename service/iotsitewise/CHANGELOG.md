@@ -1,3 +1,13 @@
+# v1.48.1 (2025-07-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.48.0 (2025-07-28)
+
+* **Feature**: Add support for HTTP interceptors.
+* **Feature**: Add support for native anomaly detection in IoT SiteWise using new Computation Model APIs
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.47.4 (2025-07-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

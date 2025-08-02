@@ -660,6 +660,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Management Service key used to encrypt the device.</p>"
                     }
+                },
+                "lastUserId": {
+                    "target": "com.amazonaws.workspacesthinclient#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user ID of the most recent session on the device.</p>"
+                    }
                 }
             },
             "traits": {
@@ -867,6 +873,12 @@
                     "target": "com.amazonaws.workspacesthinclient#Arn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the device.</p>"
+                    }
+                },
+                "lastUserId": {
+                    "target": "com.amazonaws.workspacesthinclient#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user ID of the most recent session on the device.</p>"
                     }
                 }
             },
@@ -3301,6 +3313,12 @@
             "members": {},
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspacesthinclient#UserId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.workspacesthinclient#ValidationException": {

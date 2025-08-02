@@ -1405,6 +1405,85 @@
                 "smithy.api#documentation": "<p>The matching criteria to be used during the auto-merging process. </p>"
             }
         },
+        "com.amazonaws.customerprofiles#ContactPreference": {
+            "type": "structure",
+            "members": {
+                "KeyName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A searchable, unique identifier of a customer profile.</p>"
+                    }
+                },
+                "KeyValue": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key value used to look up profile based off the keyName.</p>"
+                    }
+                },
+                "ProfileId": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of a customer profile.</p>"
+                    }
+                },
+                "ContactType": {
+                    "target": "com.amazonaws.customerprofiles#ContactType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contact type used for engagement. For example: HomePhoneNumber,\n         PersonalEmailAddress.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that defines users contact preference.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#ContactType": {
+            "type": "enum",
+            "members": {
+                "PHONE_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PhoneNumber"
+                    }
+                },
+                "MOBILE_PHONE_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MobilePhoneNumber"
+                    }
+                },
+                "HOME_PHONE_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HomePhoneNumber"
+                    }
+                },
+                "BUSINESS_PHONE_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BusinessPhoneNumber"
+                    }
+                },
+                "EMAIL_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EmailAddress"
+                    }
+                },
+                "PERSONAL_EMAIL_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PersonalEmailAddress"
+                    }
+                },
+                "BUSINESS_EMAIL_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BusinessEmailAddress"
+                    }
+                }
+            }
+        },
         "com.amazonaws.customerprofiles#CreateCalculatedAttributeDefinition": {
             "type": "operation",
             "input": {
@@ -2464,6 +2543,18 @@
                     "target": "com.amazonaws.customerprofiles#sensitiveString1To255",
                     "traits": {
                         "smithy.api#documentation": "<p>An alternative to <code>Gender</code> which accepts any string as input.</p>"
+                    }
+                },
+                "ProfileType": {
+                    "target": "com.amazonaws.customerprofiles#ProfileType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the profile.</p>"
+                    }
+                },
+                "EngagementPreferences": {
+                    "target": "com.amazonaws.customerprofiles#EngagementPreferences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Object that defines the preferred methods of engagement, per channel.</p>"
                     }
                 }
             },
@@ -5142,10 +5233,37 @@
                 }
             }
         },
+        "com.amazonaws.customerprofiles#EmailPreferenceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#ContactPreference"
+            }
+        },
         "com.amazonaws.customerprofiles#End": {
             "type": "integer",
             "traits": {
                 "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.customerprofiles#EngagementPreferences": {
+            "type": "structure",
+            "members": {
+                "Phone": {
+                    "target": "com.amazonaws.customerprofiles#PhonePreferenceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of phone-related contact preferences</p>"
+                    }
+                },
+                "Email": {
+                    "target": "com.amazonaws.customerprofiles#EmailPreferenceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of email-related contact preferences</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that defines users preferred methods of engagement.</p>",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.customerprofiles#EstimateStatus": {
@@ -5731,6 +5849,18 @@
                     "target": "com.amazonaws.customerprofiles#AttributeSourceIdMap",
                     "traits": {
                         "smithy.api#documentation": "<p>A unique identifier for the attributes field to be merged.</p>"
+                    }
+                },
+                "ProfileType": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the profile type field to be merged.</p>"
+                    }
+                },
+                "EngagementPreferences": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the engagement preferences field to be merged.</p>"
                     }
                 }
             },
@@ -11795,6 +11925,12 @@
                 }
             }
         },
+        "com.amazonaws.customerprofiles#PhonePreferenceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#ContactPreference"
+            }
+        },
         "com.amazonaws.customerprofiles#Profile": {
             "type": "structure",
             "members": {
@@ -11946,6 +12082,18 @@
                     "target": "com.amazonaws.customerprofiles#sensitiveString1To255",
                     "traits": {
                         "smithy.api#documentation": "<p>An alternative to Gender which accepts any string as input.</p>"
+                    }
+                },
+                "ProfileType": {
+                    "target": "com.amazonaws.customerprofiles#ProfileType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the profile.</p>"
+                    }
+                },
+                "EngagementPreferences": {
+                    "target": "com.amazonaws.customerprofiles#EngagementPreferences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer or account’s engagement preferences.</p>"
                     }
                 }
             },
@@ -12160,6 +12308,13 @@
                         "smithy.api#documentation": "<p>A field to describe values to segment on within attributes.</p>",
                         "smithy.api#jsonName": "Attributes"
                     }
+                },
+                "ProfileType": {
+                    "target": "com.amazonaws.customerprofiles#ProfileTypeDimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A field to describe values to segment on within profile type.</p>",
+                        "smithy.api#jsonName": "ProfileType"
+                    }
                 }
             },
             "traits": {
@@ -12310,6 +12465,79 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Object that holds the results for membership.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#ProfileType": {
+            "type": "enum",
+            "members": {
+                "ACCOUNT_PROFILE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCOUNT_PROFILE"
+                    }
+                },
+                "PROFILE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROFILE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#ProfileTypeDimension": {
+            "type": "structure",
+            "members": {
+                "DimensionType": {
+                    "target": "com.amazonaws.customerprofiles#ProfileTypeDimensionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to segment on.</p>",
+                        "smithy.api#jsonName": "DimensionType",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.customerprofiles#ProfileTypeValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values to apply the DimensionType on.</p>",
+                        "smithy.api#jsonName": "Values",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object to hold the dimension of a profile type field to segment on.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#ProfileTypeDimensionType": {
+            "type": "enum",
+            "members": {
+                "INCLUSIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCLUSIVE"
+                    }
+                },
+                "EXCLUSIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXCLUSIVE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ProfileTypeValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#ProfileType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.customerprofiles#Profiles": {
@@ -15775,6 +16003,18 @@
                     "target": "com.amazonaws.customerprofiles#sensitiveString0To255",
                     "traits": {
                         "smithy.api#documentation": "<p>An alternative to <code>Gender</code> which accepts any string as input.</p>"
+                    }
+                },
+                "ProfileType": {
+                    "target": "com.amazonaws.customerprofiles#ProfileType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines the type of the profile.</p>"
+                    }
+                },
+                "EngagementPreferences": {
+                    "target": "com.amazonaws.customerprofiles#EngagementPreferences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Object that defines users preferred methods of engagement.</p>"
                     }
                 }
             },

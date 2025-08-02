@@ -29,6 +29,21 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.directoryservice#ADAssessmentLimitExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.directoryservice#ExceptionMessage"
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.directoryservice#RequestId"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A directory assessment is automatically created when you create a hybrid directory.\n            There are two types of assessments: <code>CUSTOMER</code> and <code>SYSTEM</code>. Your\n            Amazon Web Services account has a limit of 100 <code>CUSTOMER</code> directory assessments.</p>\n         <p>If you attempt to create a hybrid directory; and you already have 100\n                <code>CUSTOMER</code> directory assessments;, you will encounter an error. Delete\n            assessments to free up capacity before trying again.</p>\n         <p>You can request an increase to your <code>CUSTOMER</code> directory assessment quota\n            by contacting customer support or delete existing CUSTOMER directory assessments; to\n            free up capacity.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.directoryservice#AcceptSharedDirectory": {
             "type": "operation",
             "input": {
@@ -368,6 +383,358 @@
                     "max": 62
                 },
                 "smithy.api#pattern": "^(?!D-|d-)([\\da-zA-Z]+)([-]*[\\da-zA-Z])*$"
+            }
+        },
+        "com.amazonaws.directoryservice#Assessment": {
+            "type": "structure",
+            "members": {
+                "AssessmentId": {
+                    "target": "com.amazonaws.directoryservice#AssessmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the directory assessment.</p>"
+                    }
+                },
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservice#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the directory associated with this assessment.</p>"
+                    }
+                },
+                "DnsName": {
+                    "target": "com.amazonaws.directoryservice#DirectoryName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fully qualified domain name (FQDN) of the Active Directory domain being\n            assessed.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.directoryservice#AssessmentStartTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the assessment was initiated.</p>"
+                    }
+                },
+                "LastUpdateDateTime": {
+                    "target": "com.amazonaws.directoryservice#LastUpdateDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the assessment status was last updated.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.directoryservice#AssessmentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the assessment. Valid values include <code>SUCCESS</code>,\n                <code>FAILED</code>, <code>PENDING</code>, and <code>IN_PROGRESS</code>.</p>"
+                    }
+                },
+                "StatusCode": {
+                    "target": "com.amazonaws.directoryservice#AssessmentStatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A detailed status code providing additional information about the assessment\n            state.</p>"
+                    }
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.directoryservice#AssessmentStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable description of the current assessment status, including any error\n            details or progress information.</p>"
+                    }
+                },
+                "CustomerDnsIps": {
+                    "target": "com.amazonaws.directoryservice#CustomerDnsIps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP addresses of the DNS servers or domain controllers in your self-managed AD\n            environment.</p>"
+                    }
+                },
+                "VpcId": {
+                    "target": "com.amazonaws.directoryservice#VpcId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains Amazon VPC information for the <code>StartADAssessment</code> operation. </p>"
+                    }
+                },
+                "SubnetIds": {
+                    "target": "com.amazonaws.directoryservice#SubnetIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of subnet identifiers in the Amazon VPC in which the hybrid directory is\n            created.</p>"
+                    }
+                },
+                "SecurityGroupIds": {
+                    "target": "com.amazonaws.directoryservice#SecurityGroupIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The security groups identifiers attached to the network interfaces.</p>"
+                    }
+                },
+                "SelfManagedInstanceIds": {
+                    "target": "com.amazonaws.directoryservice#AssessmentInstanceIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifiers of the self-managed AD instances used to perform the\n            assessment.</p>"
+                    }
+                },
+                "ReportType": {
+                    "target": "com.amazonaws.directoryservice#AssessmentReportType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of assessment report generated. Valid values are <code>CUSTOMER</code> and\n                <code>SYSTEM</code>.</p>"
+                    }
+                },
+                "Version": {
+                    "target": "com.amazonaws.directoryservice#AssessmentVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the assessment framework used to evaluate your self-managed AD\n            environment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains detailed information about a directory assessment, including configuration\n            parameters, status, and validation results.</p>"
+            }
+        },
+        "com.amazonaws.directoryservice#AssessmentConfiguration": {
+            "type": "structure",
+            "members": {
+                "CustomerDnsIps": {
+                    "target": "com.amazonaws.directoryservice#CustomerDnsIps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of IP addresses for the DNS servers or domain controllers in your self-managed\n            AD that are tested during the assessment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DnsName": {
+                    "target": "com.amazonaws.directoryservice#DirectoryName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fully qualified domain name (FQDN) of the self-managed AD domain to assess.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VpcSettings": {
+                    "target": "com.amazonaws.directoryservice#DirectoryVpcSettings",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceIds": {
+                    "target": "com.amazonaws.directoryservice#AssessmentInstanceIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifiers of the self-managed instances with SSM that are used to perform\n            connectivity and validation tests.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SecurityGroupIds": {
+                    "target": "com.amazonaws.directoryservice#SecurityGroupIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>By default, the service attaches a security group to allow network access to the\n            self-managed nodes in your Amazon VPC. You can optionally supply your own security group that\n            allows network traffic to and from your self-managed domain controllers outside of your\n            Amazon VPC. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configuration parameters required to perform a directory assessment.</p>"
+            }
+        },
+        "com.amazonaws.directoryservice#AssessmentId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^da-[0-9a-f]{18}$"
+            }
+        },
+        "com.amazonaws.directoryservice#AssessmentInstanceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(i-[0-9a-f]{8}|i-[0-9a-f]{17}|mi-[0-9a-f]{8}|mi-[0-9a-f]{17})$"
+            }
+        },
+        "com.amazonaws.directoryservice#AssessmentInstanceIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.directoryservice#AssessmentInstanceId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.directoryservice#AssessmentLimit": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.directoryservice#AssessmentReport": {
+            "type": "structure",
+            "members": {
+                "DomainControllerIp": {
+                    "target": "com.amazonaws.directoryservice#IpAddr",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address of the domain controller that was tested during the assessment.</p>"
+                    }
+                },
+                "Validations": {
+                    "target": "com.amazonaws.directoryservice#AssessmentValidations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of validation results for different test categories performed against this\n            domain controller.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the results of validation tests performed against a specific domain\n            controller during a directory assessment.</p>"
+            }
+        },
+        "com.amazonaws.directoryservice#AssessmentReportType": {
+            "type": "string"
+        },
+        "com.amazonaws.directoryservice#AssessmentReports": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.directoryservice#AssessmentReport"
+            }
+        },
+        "com.amazonaws.directoryservice#AssessmentStartTime": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.directoryservice#AssessmentStatus": {
+            "type": "string"
+        },
+        "com.amazonaws.directoryservice#AssessmentStatusCode": {
+            "type": "string"
+        },
+        "com.amazonaws.directoryservice#AssessmentStatusReason": {
+            "type": "string"
+        },
+        "com.amazonaws.directoryservice#AssessmentSummary": {
+            "type": "structure",
+            "members": {
+                "AssessmentId": {
+                    "target": "com.amazonaws.directoryservice#AssessmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the directory assessment.</p>"
+                    }
+                },
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservice#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the directory associated with this assessment.</p>"
+                    }
+                },
+                "DnsName": {
+                    "target": "com.amazonaws.directoryservice#DirectoryName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fully qualified domain name (FQDN) of the Active Directory domain being\n            assessed.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.directoryservice#AssessmentStartTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the assessment was initiated.</p>"
+                    }
+                },
+                "LastUpdateDateTime": {
+                    "target": "com.amazonaws.directoryservice#LastUpdateDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the assessment status was last updated.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.directoryservice#AssessmentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the assessment. Valid values include <code>SUCCESS</code>,\n                <code>FAILED</code>, <code>PENDING</code>, and <code>IN_PROGRESS</code>.</p>"
+                    }
+                },
+                "CustomerDnsIps": {
+                    "target": "com.amazonaws.directoryservice#CustomerDnsIps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP addresses of the DNS servers or domain controllers in your self-managed AD\n            environment.</p>"
+                    }
+                },
+                "ReportType": {
+                    "target": "com.amazonaws.directoryservice#AssessmentReportType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of assessment report generated. Valid values include <code>CUSTOMER</code>\n            and <code>SYSTEM</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains summary information about a directory assessment, providing a high-level\n            overview without detailed validation results.</p>"
+            }
+        },
+        "com.amazonaws.directoryservice#AssessmentValidation": {
+            "type": "structure",
+            "members": {
+                "Category": {
+                    "target": "com.amazonaws.directoryservice#AssessmentValidationCategory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category of the validation test.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.directoryservice#AssessmentValidationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the specific validation test performed within the category.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.directoryservice#AssessmentValidationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The result status of the validation test. Valid values include <code>SUCCESS</code>,\n                <code>FAILED</code>, <code>PENDING</code>, and <code>IN_PROGRESS</code>.</p>"
+                    }
+                },
+                "StatusCode": {
+                    "target": "com.amazonaws.directoryservice#AssessmentValidationStatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A detailed status code providing additional information about the validation\n            result.</p>"
+                    }
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.directoryservice#AssessmentValidationStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable description of the validation result, including any error details or\n            recommendations.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.directoryservice#AssessmentValidationTimeStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the validation test was started.</p>"
+                    }
+                },
+                "LastUpdateDateTime": {
+                    "target": "com.amazonaws.directoryservice#AssessmentValidationTimeStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the validation test was completed or last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a specific validation test performed during a directory\n            assessment.</p>"
+            }
+        },
+        "com.amazonaws.directoryservice#AssessmentValidationCategory": {
+            "type": "string"
+        },
+        "com.amazonaws.directoryservice#AssessmentValidationName": {
+            "type": "string"
+        },
+        "com.amazonaws.directoryservice#AssessmentValidationStatus": {
+            "type": "string"
+        },
+        "com.amazonaws.directoryservice#AssessmentValidationStatusCode": {
+            "type": "string"
+        },
+        "com.amazonaws.directoryservice#AssessmentValidationStatusReason": {
+            "type": "string"
+        },
+        "com.amazonaws.directoryservice#AssessmentValidationTimeStamp": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.directoryservice#AssessmentValidations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.directoryservice#AssessmentValidation"
+            }
+        },
+        "com.amazonaws.directoryservice#AssessmentVersion": {
+            "type": "string"
+        },
+        "com.amazonaws.directoryservice#Assessments": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.directoryservice#AssessmentSummary"
             }
         },
         "com.amazonaws.directoryservice#Attribute": {
@@ -1496,6 +1863,83 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.directoryservice#CreateHybridAD": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directoryservice#CreateHybridADRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directoryservice#CreateHybridADResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directoryservice#ADAssessmentLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#DirectoryLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#EntityDoesNotExistException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a hybrid directory that connects your self-managed Active Directory (AD)\n            infrastructure and Amazon Web Services.</p>\n         <p>You must have a successful directory assessment using <a>StartADAssessment</a> to validate your environment compatibility before you\n            use this operation.</p>\n         <p>Updates are applied asynchronously. Use <a>DescribeDirectories</a> to\n            monitor the progress of directory creation.</p>"
+            }
+        },
+        "com.amazonaws.directoryservice#CreateHybridADRequest": {
+            "type": "structure",
+            "members": {
+                "SecretArn": {
+                    "target": "com.amazonaws.directoryservice#SecretArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that contains the\n            credentials for the service account used to join hybrid domain controllers to your\n            self-managed AD domain. This secret is used once and not stored.</p>\n         <p>The secret must contain key-value pairs with keys matching\n                <code>customerAdAdminDomainUsername</code> and\n                <code>customerAdAdminDomainPassword</code>. For example:\n                <code>{\"customerAdAdminDomainUsername\":\"carlos_salazar\",\"customerAdAdminDomainPassword\":\"ExamplePassword123!\"}</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AssessmentId": {
+                    "target": "com.amazonaws.directoryservice#AssessmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the successful directory assessment that validates your\n            self-managed AD environment. You must have a successful directory assessment before you\n            create a hybrid directory.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.directoryservice#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to be assigned to the directory. Each tag consists of a key and value pair.\n            You can specify multiple tags as a list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directoryservice#CreateHybridADResult": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservice#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the newly created hybrid directory.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.directoryservice#CreateLogSubscription": {
             "type": "operation",
             "input": {
@@ -1892,6 +2336,18 @@
         "com.amazonaws.directoryservice#CreatedDateTime": {
             "type": "timestamp"
         },
+        "com.amazonaws.directoryservice#CustomerDnsIps": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.directoryservice#IpAddr"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 2
+                }
+            }
+        },
         "com.amazonaws.directoryservice#CustomerId": {
             "type": "string",
             "traits": {
@@ -1941,6 +2397,64 @@
                         "smithy.api#enumValue": "Failed"
                     }
                 }
+            }
+        },
+        "com.amazonaws.directoryservice#DeleteADAssessment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directoryservice#DeleteADAssessmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directoryservice#DeleteADAssessmentResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directoryservice#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#EntityDoesNotExistException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a directory assessment and all associated data. This operation permanently\n            removes the assessment results, validation reports, and configuration\n            information.</p>\n         <p>You cannot delete system-initiated assessments. You can delete customer-created\n            assessments even if they are in progress.</p>"
+            }
+        },
+        "com.amazonaws.directoryservice#DeleteADAssessmentRequest": {
+            "type": "structure",
+            "members": {
+                "AssessmentId": {
+                    "target": "com.amazonaws.directoryservice#AssessmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the directory assessment to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directoryservice#DeleteADAssessmentResult": {
+            "type": "structure",
+            "members": {
+                "AssessmentId": {
+                    "target": "com.amazonaws.directoryservice#AssessmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the deleted directory assessment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#DeleteAssociatedConditionalForwarder": {
@@ -2418,6 +2932,70 @@
             "members": {},
             "traits": {
                 "smithy.api#documentation": "<p>The result of a DeregisterEventTopic request.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.directoryservice#DescribeADAssessment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directoryservice#DescribeADAssessmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directoryservice#DescribeADAssessmentResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directoryservice#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#EntityDoesNotExistException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves detailed information about a directory assessment, including its current\n            status, validation results, and configuration details. Use this operation to monitor\n            assessment progress and review results.</p>"
+            }
+        },
+        "com.amazonaws.directoryservice#DescribeADAssessmentRequest": {
+            "type": "structure",
+            "members": {
+                "AssessmentId": {
+                    "target": "com.amazonaws.directoryservice#AssessmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the directory assessment to describe.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directoryservice#DescribeADAssessmentResult": {
+            "type": "structure",
+            "members": {
+                "Assessment": {
+                    "target": "com.amazonaws.directoryservice#Assessment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Detailed information about the self-managed instance settings (IDs and DNS\n            IPs).</p>"
+                    }
+                },
+                "AssessmentReports": {
+                    "target": "com.amazonaws.directoryservice#AssessmentReports",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of assessment reports containing validation results for each domain controller\n            and test category. Each report includes specific validation details and outcomes.</p>"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },
@@ -3032,6 +3610,112 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The result of a DescribeEventTopic request.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.directoryservice#DescribeHybridADUpdate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directoryservice#DescribeHybridADUpdateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directoryservice#DescribeHybridADUpdateResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directoryservice#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#DirectoryDoesNotExistException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information about update activities for a hybrid directory. This operation\n            provides details about configuration changes, administrator account updates, and\n            self-managed instance settings (IDs and DNS IPs).</p>",
+                "smithy.waiters#waitable": {
+                    "HybridADUpdated": {
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "UpdateActivities.SelfManagedInstances[].Status",
+                                        "expected": "Updated",
+                                        "comparator": "allStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "UpdateActivities.SelfManagedInstances[].Status",
+                                        "expected": "UpdateFailed",
+                                        "comparator": "anyStringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 120
+                    }
+                }
+            }
+        },
+        "com.amazonaws.directoryservice#DescribeHybridADUpdateRequest": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservice#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the hybrid directory for which to retrieve update\n            information.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UpdateType": {
+                    "target": "com.amazonaws.directoryservice#HybridUpdateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of update activities to retrieve. Valid values include\n                <code>SelfManagedInstances</code> and\n            <code>HybridAdministratorAccount</code>.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.directoryservice#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from a previous request to <a>DescribeHybridADUpdate</a>. Pass null if this is the first request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directoryservice#DescribeHybridADUpdateResult": {
+            "type": "structure",
+            "members": {
+                "UpdateActivities": {
+                    "target": "com.amazonaws.directoryservice#HybridUpdateActivities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about update activities for the hybrid directory, organized by update\n            type.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.directoryservice#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If not null, more results are available. Pass this value for the\n                <code>NextToken</code> parameter in a subsequent request to retrieve the next set of\n            items.</p>"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },
@@ -4083,6 +4767,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The operating system (OS) version of the directory.</p>"
                     }
+                },
+                "HybridSettings": {
+                    "target": "com.amazonaws.directoryservice#HybridSettingsDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the hybrid directory configuration for the directory,\n            including Amazon Web Services System Manager managed node identifiers and DNS IPs.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4296,6 +4986,9 @@
                     "target": "com.amazonaws.directoryservice#CreateDirectory"
                 },
                 {
+                    "target": "com.amazonaws.directoryservice#CreateHybridAD"
+                },
+                {
                     "target": "com.amazonaws.directoryservice#CreateLogSubscription"
                 },
                 {
@@ -4306,6 +4999,9 @@
                 },
                 {
                     "target": "com.amazonaws.directoryservice#CreateTrust"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#DeleteADAssessment"
                 },
                 {
                     "target": "com.amazonaws.directoryservice#DeleteConditionalForwarder"
@@ -4329,6 +5025,9 @@
                     "target": "com.amazonaws.directoryservice#DeregisterEventTopic"
                 },
                 {
+                    "target": "com.amazonaws.directoryservice#DescribeADAssessment"
+                },
+                {
                     "target": "com.amazonaws.directoryservice#DescribeCertificate"
                 },
                 {
@@ -4348,6 +5047,9 @@
                 },
                 {
                     "target": "com.amazonaws.directoryservice#DescribeEventTopics"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#DescribeHybridADUpdate"
                 },
                 {
                     "target": "com.amazonaws.directoryservice#DescribeLDAPSSettings"
@@ -4407,6 +5109,9 @@
                     "target": "com.amazonaws.directoryservice#GetSnapshotLimits"
                 },
                 {
+                    "target": "com.amazonaws.directoryservice#ListADAssessments"
+                },
+                {
                     "target": "com.amazonaws.directoryservice#ListCertificates"
                 },
                 {
@@ -4449,6 +5154,9 @@
                     "target": "com.amazonaws.directoryservice#ShareDirectory"
                 },
                 {
+                    "target": "com.amazonaws.directoryservice#StartADAssessment"
+                },
+                {
                     "target": "com.amazonaws.directoryservice#StartSchemaExtension"
                 },
                 {
@@ -4459,6 +5167,9 @@
                 },
                 {
                     "target": "com.amazonaws.directoryservice#UpdateDirectorySetup"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#UpdateHybridAD"
                 },
                 {
                     "target": "com.amazonaws.directoryservice#UpdateNumberOfDomainControllers"
@@ -5638,7 +6349,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains VPC information for the <a>CreateDirectory</a> or <a>CreateMicrosoftAD</a> operation.</p>"
+                "smithy.api#documentation": "<p>Contains VPC information for the <a>CreateDirectory</a>, <a>CreateMicrosoftAD</a>, or <a>CreateHybridAD</a> operation.</p>"
             }
         },
         "com.amazonaws.directoryservice#DirectoryVpcSettingsDescription": {
@@ -6717,6 +7428,182 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.directoryservice#HybridAdministratorAccountUpdate": {
+            "type": "structure",
+            "members": {
+                "SecretArn": {
+                    "target": "com.amazonaws.directoryservice#SecretArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that contains the\n            credentials for the AD administrator user, and enables hybrid domain controllers to\n            join the managed AD domain. For example:</p>\n         <p>\n            <code>\n                {\"customerAdAdminDomainUsername\":\"carlos_salazar\",\"customerAdAdminDomainPassword\":\"ExamplePassword123!\"}.\n            </code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Use to recover to the hybrid directory administrator account credentials.</p>"
+            }
+        },
+        "com.amazonaws.directoryservice#HybridCustomerInstancesSettings": {
+            "type": "structure",
+            "members": {
+                "CustomerDnsIps": {
+                    "target": "com.amazonaws.directoryservice#CustomerDnsIps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP addresses of the DNS servers or domain controllers in your self-managed AD\n            environment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceIds": {
+                    "target": "com.amazonaws.directoryservice#AssessmentInstanceIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifiers of the self-managed instances with SSM used in hybrid\n            directory.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configuration settings for self-managed instances with SSM used in hybrid\n            directory operations.</p>"
+            }
+        },
+        "com.amazonaws.directoryservice#HybridSettingsDescription": {
+            "type": "structure",
+            "members": {
+                "SelfManagedDnsIpAddrs": {
+                    "target": "com.amazonaws.directoryservice#IpAddrs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP addresses of the DNS servers in your self-managed AD environment.</p>"
+                    }
+                },
+                "SelfManagedInstanceIds": {
+                    "target": "com.amazonaws.directoryservice#AssessmentInstanceIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifiers of the self-managed instances with SSM used for hybrid directory\n            operations.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the current hybrid directory configuration settings for a directory.</p>"
+            }
+        },
+        "com.amazonaws.directoryservice#HybridUpdateActivities": {
+            "type": "structure",
+            "members": {
+                "SelfManagedInstances": {
+                    "target": "com.amazonaws.directoryservice#HybridUpdateInfoEntries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of update activities related to the self-managed instances with SSM in the\n            self-managed instances with SSM hybrid directory configuration.</p>"
+                    }
+                },
+                "HybridAdministratorAccount": {
+                    "target": "com.amazonaws.directoryservice#HybridUpdateInfoEntries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of update activities related to hybrid directory administrator account\n            changes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about update activities for different components of a hybrid\n            directory.</p>"
+            }
+        },
+        "com.amazonaws.directoryservice#HybridUpdateInfoEntries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.directoryservice#HybridUpdateInfoEntry"
+            }
+        },
+        "com.amazonaws.directoryservice#HybridUpdateInfoEntry": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.directoryservice#UpdateStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the update activity. Valid values include <code>UPDATED</code>,\n                <code>UPDATING</code>, and <code>UPDATE_FAILED</code>.</p>"
+                    }
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.directoryservice#UpdateStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable description of the update status, including any error details or\n            progress information.</p>"
+                    }
+                },
+                "InitiatedBy": {
+                    "target": "com.amazonaws.directoryservice#InitiatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies if the update was initiated by the customer or Amazon Web Services.</p>"
+                    }
+                },
+                "NewValue": {
+                    "target": "com.amazonaws.directoryservice#HybridUpdateValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new configuration values being applied in this update.</p>"
+                    }
+                },
+                "PreviousValue": {
+                    "target": "com.amazonaws.directoryservice#HybridUpdateValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The previous configuration values before this update was applied.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.directoryservice#StartDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the update activity was initiated.</p>"
+                    }
+                },
+                "LastUpdatedDateTime": {
+                    "target": "com.amazonaws.directoryservice#LastUpdatedDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the update activity status was last updated.</p>"
+                    }
+                },
+                "AssessmentId": {
+                    "target": "com.amazonaws.directoryservice#AssessmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the assessment performed to validate this update\n            configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains detailed information about a specific update activity for a hybrid directory\n            component.</p>"
+            }
+        },
+        "com.amazonaws.directoryservice#HybridUpdateType": {
+            "type": "enum",
+            "members": {
+                "SELF_MANAGED_INSTANCES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SelfManagedInstances"
+                    }
+                },
+                "HYBRID_ADMINISTRATOR_ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HybridAdministratorAccount"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.directoryservice#HybridUpdateValue": {
+            "type": "structure",
+            "members": {
+                "InstanceIds": {
+                    "target": "com.amazonaws.directoryservice#AssessmentInstanceIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifiers of the self-managed instances with SSM in the hybrid directory\n            configuration.</p>"
+                    }
+                },
+                "DnsIps": {
+                    "target": "com.amazonaws.directoryservice#CustomerDnsIps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP addresses of the DNS servers or domain controllers in the hybrid directory\n            configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the configuration values for a hybrid directory update, including Amazon Web Services\n            System Manager managed node and DNS information.</p>"
+            }
+        },
         "com.amazonaws.directoryservice#IncompatibleSettingsException": {
             "type": "structure",
             "members": {
@@ -7077,6 +7964,9 @@
                 }
             }
         },
+        "com.amazonaws.directoryservice#LastUpdateDateTime": {
+            "type": "timestamp"
+        },
         "com.amazonaws.directoryservice#LastUpdatedDateTime": {
             "type": "timestamp"
         },
@@ -7098,6 +7988,87 @@
                 "smithy.api#range": {
                     "min": 0
                 }
+            }
+        },
+        "com.amazonaws.directoryservice#ListADAssessments": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directoryservice#ListADAssessmentsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directoryservice#ListADAssessmentsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directoryservice#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#DirectoryDoesNotExistException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list of directory assessments for the specified directory or all\n            assessments in your account. Use this operation to monitor assessment status and manage\n            multiple assessments.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Assessments",
+                    "pageSize": "Limit"
+                }
+            }
+        },
+        "com.amazonaws.directoryservice#ListADAssessmentsRequest": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservice#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the directory for which to list assessments. If not specified, all\n            assessments in your account are returned.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.directoryservice#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from a previous request to <a>ListADAssessments</a>.\n            Pass null if this is the first request.</p>"
+                    }
+                },
+                "Limit": {
+                    "target": "com.amazonaws.directoryservice#AssessmentLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of assessment summaries to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directoryservice#ListADAssessmentsResult": {
+            "type": "structure",
+            "members": {
+                "Assessments": {
+                    "target": "com.amazonaws.directoryservice#Assessments",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of assessment summaries containing basic information about each directory\n            assessment.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.directoryservice#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If not null, more results are available. Pass this value for the\n                <code>NextToken</code> parameter in a subsequent request to retrieve the next set of\n            items.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#ListCertificates": {
@@ -8766,10 +9737,28 @@
                 "target": "com.amazonaws.directoryservice#SchemaExtensionInfo"
             }
         },
+        "com.amazonaws.directoryservice#SecretArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws:secretsmanager:[a-z0-9-]+:\\d{12}:secret:[a-zA-Z0-9/_+=.@-]+-[a-zA-Z0-9]{6}$"
+            }
+        },
         "com.amazonaws.directoryservice#SecurityGroupId": {
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^(sg-[0-9a-f]{8}|sg-[0-9a-f]{17})$"
+            }
+        },
+        "com.amazonaws.directoryservice#SecurityGroupIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.directoryservice#SecurityGroupId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.directoryservice#SelectiveAuth": {
@@ -9369,6 +10358,72 @@
         },
         "com.amazonaws.directoryservice#StageReason": {
             "type": "string"
+        },
+        "com.amazonaws.directoryservice#StartADAssessment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directoryservice#StartADAssessmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directoryservice#StartADAssessmentResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directoryservice#ADAssessmentLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#DirectoryDoesNotExistException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Initiates a directory assessment to validate your self-managed AD environment for\n            hybrid domain join. The assessment checks compatibility and connectivity of the\n            self-managed AD environment.</p>\n         <p>A directory assessment is automatically created when you create a hybrid directory.\n            There are two types of assessments: <code>CUSTOMER</code> and <code>SYSTEM</code>. Your\n            Amazon Web Services account has a limit of 100 <code>CUSTOMER</code> directory assessments.</p>\n         <p>The assessment process typically takes 30 minutes or more to complete. The assessment\n            process is asynchronous and you can monitor it with\n            <code>DescribeADAssessment</code>.</p>\n         <p>The <code>InstanceIds</code> must have a one-to-one correspondence with\n                <code>CustomerDnsIps</code>, meaning that if the IP address for instance i-10243410\n            is 10.24.34.100 and the IP address for instance i-10243420 is 10.24.34.200, then the\n            input arrays must maintain the same order relationship, either [10.24.34.100,\n            10.24.34.200] paired with [i-10243410, i-10243420] or [10.24.34.200, 10.24.34.100]\n            paired with [i-10243420, i-10243410].</p>\n         <p>Note: You must provide exactly one <code>DirectoryId</code> or\n                <code>AssessmentConfiguration</code>.</p>"
+            }
+        },
+        "com.amazonaws.directoryservice#StartADAssessmentRequest": {
+            "type": "structure",
+            "members": {
+                "AssessmentConfiguration": {
+                    "target": "com.amazonaws.directoryservice#AssessmentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration parameters for the directory assessment, including DNS server\n            information, domain name, Amazon VPC subnet, and Amazon Web Services System Manager managed node\n            details.</p>"
+                    }
+                },
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservice#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the directory for which to perform the assessment. This should be an\n            existing directory. If the assessment is not for an existing directory, this parameter\n            should be omitted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directoryservice#StartADAssessmentResult": {
+            "type": "structure",
+            "members": {
+                "AssessmentId": {
+                    "target": "com.amazonaws.directoryservice#AssessmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the newly started directory assessment. Use this identifier\n            to monitor assessment progress and retrieve results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.directoryservice#StartDateTime": {
             "type": "timestamp"
@@ -10132,6 +11187,85 @@
         "com.amazonaws.directoryservice#UpdateDirectorySetupResult": {
             "type": "structure",
             "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.directoryservice#UpdateHybridAD": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directoryservice#UpdateHybridADRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directoryservice#UpdateHybridADResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directoryservice#ADAssessmentLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#DirectoryDoesNotExistException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the configuration of an existing hybrid directory. You can recover hybrid\n            directory administrator account or modify self-managed instance settings.</p>\n         <p>Updates are applied asynchronously. Use <a>DescribeHybridADUpdate</a> to\n            monitor the progress of configuration changes.</p>\n         <p>The <code>InstanceIds</code> must have a one-to-one correspondence with\n                <code>CustomerDnsIps</code>, meaning that if the IP address for instance i-10243410\n            is 10.24.34.100 and the IP address for instance i-10243420 is 10.24.34.200, then the\n            input arrays must maintain the same order relationship, either [10.24.34.100,\n            10.24.34.200] paired with [i-10243410, i-10243420] or [10.24.34.200, 10.24.34.100]\n            paired with [i-10243420, i-10243410].</p>\n         <note>\n            <p>You must provide at least one update to <a>UpdateHybridADRequest$HybridAdministratorAccountUpdate</a> or <a>UpdateHybridADRequest$SelfManagedInstancesSettings</a>.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.directoryservice#UpdateHybridADRequest": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservice#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the hybrid directory to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HybridAdministratorAccountUpdate": {
+                    "target": "com.amazonaws.directoryservice#HybridAdministratorAccountUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>We create a hybrid directory administrator account when we create a hybrid directory.\n            Use <code>HybridAdministratorAccountUpdate</code> to recover the hybrid directory\n            administrator account if you have deleted it.</p>\n         <p>To recover your hybrid directory administrator account, we need temporary access to a\n            user in your self-managed AD with administrator permissions in the form of a secret from\n            Amazon Web Services Secrets Manager. We use these credentials once during recovery and don't store them.</p>\n         <p>If your hybrid directory administrator account exists, then you don’t need to use\n                <code>HybridAdministratorAccountUpdate</code>, even if you have updated your\n            self-managed AD administrator user.</p>"
+                    }
+                },
+                "SelfManagedInstancesSettings": {
+                    "target": "com.amazonaws.directoryservice#HybridCustomerInstancesSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates to the self-managed AD configuration, including DNS server IP addresses and\n            Amazon Web Services System Manager managed node identifiers.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directoryservice#UpdateHybridADResult": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservice#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the updated hybrid directory.</p>"
+                    }
+                },
+                "AssessmentId": {
+                    "target": "com.amazonaws.directoryservice#AssessmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the assessment performed to validate the update configuration. This\n            assessment ensures the updated settings are compatible with your environment.</p>"
+                    }
+                }
+            },
             "traits": {
                 "smithy.api#output": {}
             }

@@ -57,18 +57,18 @@ type CreatePlaceIndexInput struct {
 	//   interest, see [HERE details on goecoding coverage].
 	//
 	// If you specify HERE Technologies ( Here ) as the data provider, you may not [store results]for
-	//   locations in Japan. For more information, see the [Amazon Web Services Service Terms]for Amazon Location Service.
+	//   locations in Japan. For more information, see the [Amazon Web Services service terms]for Amazon Location Service.
 	//
-	// For additional information , see [Data providers] on the Amazon Location Service Developer
-	// Guide.
+	// For additional information , see [Data providers] on the Amazon Location Service developer
+	// guide.
 	//
-	// [Amazon Web Services Service Terms]: http://aws.amazon.com/service-terms/
-	// [Esri]: https://docs.aws.amazon.com/location/latest/developerguide/esri.html
+	// [Esri]: https://docs.aws.amazon.com/location/previous/developerguide/esri.html
 	// [Esri details on geocoding coverage]: https://developers.arcgis.com/rest/geocode/api-reference/geocode-coverage.htm
-	// [HERE Technologies]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
-	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html
-	// [Data providers]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
-	// [GrabMaps countries and areas covered]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html#grab-coverage-area
+	// [Amazon Web Services service terms]: http://aws.amazon.com/service-terms/
+	// [HERE Technologies]: https://docs.aws.amazon.com/location/previous/developerguide/HERE.html
+	// [GrabMaps]: https://docs.aws.amazon.com/location/previous/developerguide/grab.html
+	// [Data providers]: https://docs.aws.amazon.com/location/previous/developerguide/what-is-data-provider.html
+	// [GrabMaps countries and areas covered]: https://docs.aws.amazon.com/location/previous/developerguide/grab.html#grab-coverage-area
 	// [store results]: https://docs.aws.amazon.com/location-places/latest/APIReference/API_DataSourceConfiguration.html
 	// [HERE details on goecoding coverage]: https://developer.here.com/documentation/geocoder/dev_guide/topics/coverage-geocoder.html
 	//
@@ -243,6 +243,36 @@ func (c *Client) addOperationCreatePlaceIndexMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

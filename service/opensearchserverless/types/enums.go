@@ -162,6 +162,8 @@ const (
 	SecurityConfigTypeSaml SecurityConfigType = "saml"
 	// iam identity center
 	SecurityConfigTypeIamidentitycenter SecurityConfigType = "iamidentitycenter"
+	// iam federation
+	SecurityConfigTypeIamfederation SecurityConfigType = "iamfederation"
 )
 
 // Values returns all known values for SecurityConfigType. Note that this can be
@@ -172,6 +174,7 @@ func (SecurityConfigType) Values() []SecurityConfigType {
 	return []SecurityConfigType{
 		"saml",
 		"iamidentitycenter",
+		"iamfederation",
 	}
 }
 

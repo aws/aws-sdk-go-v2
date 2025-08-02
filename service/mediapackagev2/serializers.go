@@ -3766,6 +3766,11 @@ func awsRestjson1_serializeDocumentInputSwitchConfiguration(v *types.InputSwitch
 		ok.Boolean(*v.MQCSInputSwitching)
 	}
 
+	if v.PreferredInput != nil {
+		ok := object.Key("PreferredInput")
+		ok.Integer(*v.PreferredInput)
+	}
+
 	return nil
 }
 

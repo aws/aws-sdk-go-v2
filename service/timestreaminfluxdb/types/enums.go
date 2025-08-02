@@ -58,6 +58,7 @@ const (
 	DbInstanceTypeDbInflux8xlarge  DbInstanceType = "db.influx.8xlarge"
 	DbInstanceTypeDbInflux12xlarge DbInstanceType = "db.influx.12xlarge"
 	DbInstanceTypeDbInflux16xlarge DbInstanceType = "db.influx.16xlarge"
+	DbInstanceTypeDbInflux24xlarge DbInstanceType = "db.influx.24xlarge"
 )
 
 // Values returns all known values for DbInstanceType. Note that this can be
@@ -74,6 +75,7 @@ func (DbInstanceType) Values() []DbInstanceType {
 		"db.influx.8xlarge",
 		"db.influx.12xlarge",
 		"db.influx.16xlarge",
+		"db.influx.24xlarge",
 	}
 }
 

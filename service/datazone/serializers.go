@@ -13055,6 +13055,13 @@ func awsRestjson1_serializeOpDocumentSearchListingsInput(v *SearchListingsInput,
 		}
 	}
 
+	if v.Aggregations != nil {
+		ok := object.Key("aggregations")
+		if err := awsRestjson1_serializeDocumentAggregationList(v.Aggregations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Filters != nil {
 		ok := object.Key("filters")
 		if err := awsRestjson1_serializeDocumentFilterClause(v.Filters, ok); err != nil {
@@ -16063,6 +16070,36 @@ func awsRestjson1_serializeDocumentAddToProjectMemberPoolPolicyGrantDetail(v *ty
 	if v.IncludeChildDomainUnits != nil {
 		ok := object.Key("includeChildDomainUnits")
 		ok.Boolean(*v.IncludeChildDomainUnits)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAggregationList(v []types.AggregationListItem, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAggregationListItem(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAggregationListItem(v *types.AggregationListItem, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Attribute != nil {
+		ok := object.Key("attribute")
+		ok.String(*v.Attribute)
+	}
+
+	if v.DisplayValue != nil {
+		ok := object.Key("displayValue")
+		ok.String(*v.DisplayValue)
 	}
 
 	return nil

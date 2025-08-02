@@ -57,6 +57,72 @@ func (EnabledType) Values() []EnabledType {
 	}
 }
 
+type Event string
+
+// Enum values for Event
+const (
+	EventWebsiteInteract                           Event = "WebsiteInteract"
+	EventFileDownloadFromSecureBrowserToRemoteDisk Event = "FileDownloadFromSecureBrowserToRemoteDisk"
+	EventFileTransferFromRemoteToLocalDisk         Event = "FileTransferFromRemoteToLocalDisk"
+	EventFileTransferFromLocalToRemoteDisk         Event = "FileTransferFromLocalToRemoteDisk"
+	EventFileUploadFromRemoteDiskToSecureBrowser   Event = "FileUploadFromRemoteDiskToSecureBrowser"
+	EventContentPasteToWebsite                     Event = "ContentPasteToWebsite"
+	EventContentTransferFromLocalToRemoteClipboard Event = "ContentTransferFromLocalToRemoteClipboard"
+	EventContentCopyFromWebsite                    Event = "ContentCopyFromWebsite"
+	EventUrlLoad                                   Event = "UrlLoad"
+	EventTabOpen                                   Event = "TabOpen"
+	EventTabClose                                  Event = "TabClose"
+	EventPrintJobSubmit                            Event = "PrintJobSubmit"
+	EventSessionConnect                            Event = "SessionConnect"
+	EventSessionStart                              Event = "SessionStart"
+	EventSessionDisconnect                         Event = "SessionDisconnect"
+	EventSessionEnd                                Event = "SessionEnd"
+)
+
+// Values returns all known values for Event. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Event) Values() []Event {
+	return []Event{
+		"WebsiteInteract",
+		"FileDownloadFromSecureBrowserToRemoteDisk",
+		"FileTransferFromRemoteToLocalDisk",
+		"FileTransferFromLocalToRemoteDisk",
+		"FileUploadFromRemoteDiskToSecureBrowser",
+		"ContentPasteToWebsite",
+		"ContentTransferFromLocalToRemoteClipboard",
+		"ContentCopyFromWebsite",
+		"UrlLoad",
+		"TabOpen",
+		"TabClose",
+		"PrintJobSubmit",
+		"SessionConnect",
+		"SessionStart",
+		"SessionDisconnect",
+		"SessionEnd",
+	}
+}
+
+type FolderStructure string
+
+// Enum values for FolderStructure
+const (
+	FolderStructureFlat         FolderStructure = "Flat"
+	FolderStructureNestedByDate FolderStructure = "NestedByDate"
+)
+
+// Values returns all known values for FolderStructure. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FolderStructure) Values() []FolderStructure {
+	return []FolderStructure{
+		"Flat",
+		"NestedByDate",
+	}
+}
+
 type IdentityProviderType string
 
 // Enum values for IdentityProviderType
@@ -102,6 +168,25 @@ func (InstanceType) Values() []InstanceType {
 		"standard.regular",
 		"standard.large",
 		"standard.xlarge",
+	}
+}
+
+type LogFileFormat string
+
+// Enum values for LogFileFormat
+const (
+	LogFileFormatJsonLines LogFileFormat = "JSONLines"
+	LogFileFormatJson      LogFileFormat = "Json"
+)
+
+// Values returns all known values for LogFileFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LogFileFormat) Values() []LogFileFormat {
+	return []LogFileFormat{
+		"JSONLines",
+		"Json",
 	}
 }
 

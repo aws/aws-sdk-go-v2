@@ -749,6 +749,8 @@ type Collaboration struct {
 	UpdateTime *time.Time
 
 	//  The analytics engine for the collaboration.
+	//
+	// After July 16, 2025, the CLEAN_ROOMS_SQL parameter will no longer be available.
 	AnalyticsEngine AnalyticsEngine
 
 	// The settings for client-side encryption for cryptographic computing.
@@ -1365,6 +1367,8 @@ type CollaborationSummary struct {
 	UpdateTime *time.Time
 
 	//  The analytics engine.
+	//
+	// After July 16, 2025, the CLEAN_ROOMS_SQL parameter will no longer be available.
 	AnalyticsEngine AnalyticsEngine
 
 	// The ARN of a member in a collaboration.

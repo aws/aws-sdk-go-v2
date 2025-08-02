@@ -316,6 +316,9 @@ type Cluster struct {
 	// category. For example, key name, subnet ID, IAM instance profile, and so on.
 	Ec2InstanceAttributes *Ec2InstanceAttributes
 
+	// Reserved.
+	ExtendedSupport *bool
+
 	// The unique identifier for the cluster.
 	Id *string
 

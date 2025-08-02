@@ -1,3 +1,29 @@
+# v1.239.0 (2025-07-31)
+
+* **Feature**: Added support for the force option for the EC2 instance terminate command. This feature enables customers to recover resources associated with an instance stuck in the shutting-down state as a result of rare issues caused by a frozen operating system or an underlying hardware problem.
+
+# v1.238.0 (2025-07-30)
+
+* **Feature**: Release to show the next hop IP address for routes propagated by VPC Route Server into VPC route tables.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.237.0 (2025-07-28)
+
+* **Feature**: Add support for HTTP interceptors.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.236.0 (2025-07-25)
+
+* **Feature**: Transit Gateway native integration with AWS Network Firewall. Adding new enum value for the new Transit Gateway Attachment type.
+
+# v1.235.0 (2025-07-23)
+
+* **Feature**: Added support for skip-os-shutdown option for the EC2 instance stop and terminate operations. This feature enables customers to bypass the graceful OS shutdown, supporting faster state transitions when instance data preservation isn't critical.
+
+# v1.234.0 (2025-07-21)
+
+* **Feature**: This release adds support for C8gn, F2 and P6e-GB200 Instance types
+
 # v1.233.1 (2025-07-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

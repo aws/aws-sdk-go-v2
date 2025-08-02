@@ -2,6 +2,25 @@
 
 package types
 
+type ContactHandlingScope string
+
+// Enum values for ContactHandlingScope
+const (
+	ContactHandlingScopeCrossContacts ContactHandlingScope = "CROSS_CONTACTS"
+	ContactHandlingScopePerContact    ContactHandlingScope = "PER_CONTACT"
+)
+
+// Values returns all known values for ContactHandlingScope. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContactHandlingScope) Values() []ContactHandlingScope {
+	return []ContactHandlingScope{
+		"CROSS_CONTACTS",
+		"PER_CONTACT",
+	}
+}
+
 type ExecutionMode string
 
 // Enum values for ExecutionMode

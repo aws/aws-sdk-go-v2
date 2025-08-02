@@ -143,6 +143,29 @@ type AttemptTaskContainerDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Defines the capacity limit for a service environment. This structure specifies
+// the maximum amount of resources that can be used by service jobs in the
+// environment.
+type CapacityLimit struct {
+
+	// The unit of measure for the capacity limit. This defines how the maxCapacity
+	// value should be interpreted. For SAGEMAKER_TRAINING jobs, use NUM_INSTANCES .
+	CapacityUnit *string
+
+	// The maximum capacity available for the service environment. This value
+	// represents the maximum amount of resources that can be allocated to service
+	// jobs.
+	//
+	// For example, maxCapacity=50 , capacityUnit=NUM_INSTANCES . This indicates that
+	// the maximum number of instances that can be run on this service environment is
+	// 50. You could then run 5 SageMaker Training jobs that each use 10 instances.
+	// However, if you submit another job that requires 10 instances, it will wait in
+	// the queue.
+	MaxCapacity *int32
+
+	noSmithyDocumentSerde
+}
+
 // An object that represents an Batch compute environment.
 type ComputeEnvironmentDetail struct {
 
@@ -3122,6 +3145,11 @@ type JobQueueDetail struct {
 	// This member is required.
 	State JQState
 
+	// The type of job queue. For service jobs that run on SageMaker Training, this
+	// value is SAGEMAKER_TRAINING . For regular container jobs, this value is EKS ,
+	// ECS , or ECS_FARGATE depending on the compute environment.
+	JobQueueType JobQueueType
+
 	// The set of actions that Batch perform on jobs that remain at the head of the
 	// job queue in the specified state longer than specified times. Batch will perform
 	// each action after maxTimeSeconds has passed.
@@ -3131,6 +3159,11 @@ type JobQueueDetail struct {
 	// aws:Partition:batch:Region:Account:scheduling-policy/Name . For example,
 	// aws:aws:batch:us-west-2:123456789012:scheduling-policy/MySchedulingPolicy .
 	SchedulingPolicyArn *string
+
+	// The order of the service environment associated with the job queue. Job queues
+	// with a higher priority are evaluated first when associated with the same service
+	// environment.
+	ServiceEnvironmentOrder []ServiceEnvironmentOrder
 
 	// The status of the job queue (for example, CREATING or VALID ).
 	Status JQStatus
@@ -3278,6 +3311,17 @@ type KeyValuesPair struct {
 
 	// The filter values.
 	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the latest attempt of a service job. A Service job can
+// transition from SCHEDULED back to RUNNABLE state when they encounter capacity
+// constraints.
+type LatestServiceJobAttempt struct {
+
+	// The service resource identifier associated with the service job attempt.
+	ServiceResourceId *ServiceResourceId
 
 	noSmithyDocumentSerde
 }
@@ -4145,6 +4189,196 @@ type Secret struct {
 	//
 	// This member is required.
 	ValueFrom *string
+
+	noSmithyDocumentSerde
+}
+
+// Detailed information about a service environment, including its configuration,
+// state, and capacity limits.
+type ServiceEnvironmentDetail struct {
+
+	// The capacity limits for the service environment. This defines the maximum
+	// resources that can be used by service jobs in this environment.
+	//
+	// This member is required.
+	CapacityLimits []CapacityLimit
+
+	// The Amazon Resource Name (ARN) of the service environment.
+	//
+	// This member is required.
+	ServiceEnvironmentArn *string
+
+	// The name of the service environment.
+	//
+	// This member is required.
+	ServiceEnvironmentName *string
+
+	// The type of service environment. For SageMaker Training jobs, this value is
+	// SAGEMAKER_TRAINING .
+	//
+	// This member is required.
+	ServiceEnvironmentType ServiceEnvironmentType
+
+	// The state of the service environment. Valid values are ENABLED and DISABLED .
+	State ServiceEnvironmentState
+
+	// The current status of the service environment.
+	Status ServiceEnvironmentStatus
+
+	// The tags associated with the service environment. Each tag consists of a key
+	// and an optional value. For more information, see [Tagging your Batch resources].
+	//
+	// [Tagging your Batch resources]: https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the order of a service environment for a job queue. This determines
+// the priority order when multiple service environments are associated with the
+// same job queue.
+type ServiceEnvironmentOrder struct {
+
+	// The order of the service environment. Job queues with a higher priority are
+	// evaluated first when associated with the same service environment.
+	//
+	// This member is required.
+	Order *int32
+
+	// The name or ARN of the service environment.
+	//
+	// This member is required.
+	ServiceEnvironment *string
+
+	noSmithyDocumentSerde
+}
+
+// Detailed information about an attempt to run a service job.
+type ServiceJobAttemptDetail struct {
+
+	// The service resource identifier associated with the service job attempt.
+	ServiceResourceId *ServiceResourceId
+
+	// The Unix timestamp (in milliseconds) for when the service job attempt was
+	// started.
+	StartedAt *int64
+
+	// A string that provides additional details for the current status of the service
+	// job attempt.
+	StatusReason *string
+
+	// The Unix timestamp (in milliseconds) for when the service job attempt stopped
+	// running.
+	StoppedAt *int64
+
+	noSmithyDocumentSerde
+}
+
+// Specifies conditions for when to exit or retry a service job based on the exit
+// status or status reason.
+type ServiceJobEvaluateOnExit struct {
+
+	// The action to take if the service job exits with the specified condition. Valid
+	// values are RETRY and EXIT .
+	Action ServiceJobRetryAction
+
+	// Contains a glob pattern to match against the StatusReason returned for a job.
+	// The pattern can contain up to 512 characters and can contain all printable
+	// characters. It can optionally end with an asterisk (*) so that only the start of
+	// the string needs to be an exact match.
+	OnStatusReason *string
+
+	noSmithyDocumentSerde
+}
+
+// The retry strategy for service jobs. This defines how many times to retry a
+// failed service job and under what conditions. For more information, see [Service job retry strategies]in the
+// Batch User Guide.
+//
+// [Service job retry strategies]: https://docs.aws.amazon.com/batch/latest/userguide/service-job-retries.html
+type ServiceJobRetryStrategy struct {
+
+	// The number of times to move a service job to RUNNABLE status. You can specify
+	// between 1 and 10 attempts.
+	//
+	// This member is required.
+	Attempts *int32
+
+	// Array of ServiceJobEvaluateOnExit objects that specify conditions under which
+	// the service job should be retried or failed.
+	EvaluateOnExit []ServiceJobEvaluateOnExit
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a service job.
+type ServiceJobSummary struct {
+
+	// The job ID for the service job.
+	//
+	// This member is required.
+	JobId *string
+
+	// The name of the service job.
+	//
+	// This member is required.
+	JobName *string
+
+	// The type of service job. For SageMaker Training jobs, this value is
+	// SAGEMAKER_TRAINING .
+	//
+	// This member is required.
+	ServiceJobType ServiceJobType
+
+	// The Unix timestamp (in milliseconds) for when the service job was created.
+	CreatedAt *int64
+
+	// The Amazon Resource Name (ARN) of the service job.
+	JobArn *string
+
+	// Information about the latest attempt for the service job.
+	LatestAttempt *LatestServiceJobAttempt
+
+	// The share identifier for the job.
+	ShareIdentifier *string
+
+	// The Unix timestamp (in milliseconds) for when the service job was started.
+	StartedAt *int64
+
+	// The current status of the service job.
+	Status ServiceJobStatus
+
+	// A short string to provide more details on the current status of the service job.
+	StatusReason *string
+
+	// The Unix timestamp (in milliseconds) for when the service job stopped running.
+	StoppedAt *int64
+
+	noSmithyDocumentSerde
+}
+
+// The timeout configuration for service jobs.
+type ServiceJobTimeout struct {
+
+	// The maximum duration in seconds that a service job attempt can run. After this
+	// time is reached, Batch terminates the service job attempt.
+	AttemptDurationSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
+// The Batch unique identifier.
+type ServiceResourceId struct {
+
+	// The name of the resource identifier.
+	//
+	// This member is required.
+	Name ServiceResourceIdName
+
+	// The value of the resource identifier.
+	//
+	// This member is required.
+	Value *string
 
 	noSmithyDocumentSerde
 }

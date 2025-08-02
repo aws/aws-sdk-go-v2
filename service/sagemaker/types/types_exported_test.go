@@ -109,6 +109,9 @@ func ExampleCustomFileSystem_outputUsage() {
 	case *types.CustomFileSystemMemberFSxLustreFileSystem:
 		_ = v.Value // Value is types.FSxLustreFileSystem
 
+	case *types.CustomFileSystemMemberS3FileSystem:
+		_ = v.Value // Value is types.S3FileSystem
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -120,6 +123,7 @@ func ExampleCustomFileSystem_outputUsage() {
 
 var _ *types.FSxLustreFileSystem
 var _ *types.EFSFileSystem
+var _ *types.S3FileSystem
 
 func ExampleCustomFileSystemConfig_outputUsage() {
 	var union types.CustomFileSystemConfig
@@ -131,6 +135,9 @@ func ExampleCustomFileSystemConfig_outputUsage() {
 	case *types.CustomFileSystemConfigMemberFSxLustreFileSystemConfig:
 		_ = v.Value // Value is types.FSxLustreFileSystemConfig
 
+	case *types.CustomFileSystemConfigMemberS3FileSystemConfig:
+		_ = v.Value // Value is types.S3FileSystemConfig
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -141,6 +148,7 @@ func ExampleCustomFileSystemConfig_outputUsage() {
 }
 
 var _ *types.FSxLustreFileSystemConfig
+var _ *types.S3FileSystemConfig
 var _ *types.EFSFileSystemConfig
 
 func ExampleMetricSpecification_outputUsage() {

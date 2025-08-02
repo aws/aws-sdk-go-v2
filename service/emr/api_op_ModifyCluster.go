@@ -34,6 +34,9 @@ type ModifyClusterInput struct {
 	// This member is required.
 	ClusterId *string
 
+	// Reserved.
+	ExtendedSupport *bool
+
 	// The number of steps that can be executed concurrently. You can specify a
 	// minimum of 1 step and a maximum of 256 steps. We recommend that you do not
 	// change this parameter while steps are running or the ActionOnFailure setting
@@ -44,6 +47,9 @@ type ModifyClusterInput struct {
 }
 
 type ModifyClusterOutput struct {
+
+	// Reserved.
+	ExtendedSupport *bool
 
 	// The number of steps that can be executed concurrently.
 	StepConcurrencyLevel *int32
@@ -140,6 +146,36 @@ func (c *Client) addOperationModifyClusterMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

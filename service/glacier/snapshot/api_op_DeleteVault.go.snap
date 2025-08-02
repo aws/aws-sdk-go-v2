@@ -1,6 +1,7 @@
 DeleteVault
 	Initialize stack step
 		spanInitializeStart
+		InterceptExecution
 		Glacier:DefaultAccountID
 		RegisterServiceMetadata
 		legacyEndpointContextSetter
@@ -12,7 +13,9 @@ DeleteVault
 		Glacier:APIVersion
 		setOperationInput
 		ResolveEndpoint
+		InterceptBeforeSerialization
 		OperationSerializer
+		InterceptAfterSerialization
 	Build stack step
 		ClientRequestID
 		ComputeContentLength
@@ -24,7 +27,9 @@ DeleteVault
 	Finalize stack step
 		Glacier:TreeHash
 		spanRetryLoop
+		InterceptBeforeRetryLoop
 		Retry
+		InterceptAttempt
 		RetryMetricsHeader
 		ResolveAuthScheme
 		GetIdentity
@@ -32,14 +37,19 @@ DeleteVault
 		disableHTTPS
 		ComputePayloadHash
 		setLegacyContextSigningOptions
+		InterceptBeforeSigning
 		Signing
+		InterceptAfterSigning
 	Deserialize stack step
 		AddRawResponseToMetadata
 		ErrorCloseResponseBody
 		CloseResponseBody
 		ResponseErrorWrapper
 		RequestIDRetriever
+		InterceptAfterDeserialization
 		OperationDeserializer
+		InterceptBeforeDeserialization
 		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger
+		InterceptTransmit

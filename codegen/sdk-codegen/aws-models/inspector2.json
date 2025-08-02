@@ -331,6 +331,10 @@
                     {
                         "value": "AWS_LAMBDA_FUNCTION",
                         "name": "AWS_LAMBDA_FUNCTION"
+                    },
+                    {
+                        "value": "CODE_REPOSITORY",
+                        "name": "CODE_REPOSITORY"
                     }
                 ]
             }
@@ -18199,6 +18203,10 @@
                     {
                         "name": "CODE_REPOSITORY_SCA",
                         "value": "CODE_REPOSITORY_SCA"
+                    },
+                    {
+                        "name": "EC2_AGENTLESS_INSTANCE_HOURS",
+                        "value": "EC2_AGENTLESS_INSTANCE_HOURS"
                     }
                 ]
             }

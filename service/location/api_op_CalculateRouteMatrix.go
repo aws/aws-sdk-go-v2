@@ -43,9 +43,9 @@ import (
 //     This also lets you specify additional route preferences in CarModeOptions if
 //     traveling by Car , or TruckModeOptions if traveling by Truck .
 //
-// [Specifying a departure time]: https://docs.aws.amazon.com/location/latest/developerguide/departure-time.html
-// [Specifying a travel mode]: https://docs.aws.amazon.com/location/latest/developerguide/travel-mode.html
-// [Calculates a route matrix]: https://docs.aws.amazon.com/location/latest/developerguide/calculate-route-matrix.html
+// [Specifying a departure time]: https://docs.aws.amazon.com/location/previous/developerguide/departure-time.html
+// [Specifying a travel mode]: https://docs.aws.amazon.com/location/previous/developerguide/travel-mode.html
+// [Calculates a route matrix]: https://docs.aws.amazon.com/location/previous/developerguide/calculate-route-matrix.html
 // [create a route calculator resource]: https://docs.aws.amazon.com/location-routes/latest/APIReference/API_CreateRouteCalculator.html
 func (c *Client) CalculateRouteMatrix(ctx context.Context, params *CalculateRouteMatrixInput, optFns ...func(*Options)) (*CalculateRouteMatrixOutput, error) {
 	if params == nil {
@@ -84,9 +84,9 @@ type CalculateRouteMatrixInput struct {
 	//
 	// Valid Values: [-180 to 180,-90 to 90]
 	//
-	// [moves the position to the nearest road]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
+	// [moves the position to the nearest road]: https://docs.aws.amazon.com/location/previous/developerguide/snap-to-nearby-road.html
 	// [WGS 84]: https://earth-info.nga.mil/GandG/wgs84/index.html
-	// [Position restrictions]: https://docs.aws.amazon.com/location/latest/developerguide/calculate-route-matrix.html#matrix-routing-position-limits
+	// [Position restrictions]: https://docs.aws.amazon.com/location/previous/developerguide/calculate-route-matrix.html#matrix-routing-position-limits
 	//
 	// This member is required.
 	DeparturePositions [][]float64
@@ -105,9 +105,9 @@ type CalculateRouteMatrixInput struct {
 	//
 	// Valid Values: [-180 to 180,-90 to 90]
 	//
-	// [moves the position to the nearest road]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
+	// [moves the position to the nearest road]: https://docs.aws.amazon.com/location/previous/developerguide/snap-to-nearby-road.html
 	// [WGS 84]: https://earth-info.nga.mil/GandG/wgs84/index.html
-	// [Position restrictions]: https://docs.aws.amazon.com/location/latest/developerguide/calculate-route-matrix.html#matrix-routing-position-limits
+	// [Position restrictions]: https://docs.aws.amazon.com/location/previous/developerguide/calculate-route-matrix.html#matrix-routing-position-limits
 	//
 	// This member is required.
 	DestinationPositions [][]float64
@@ -148,7 +148,7 @@ type CalculateRouteMatrixInput struct {
 
 	// The optional [API key] to authorize the request.
 	//
-	// [API key]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+	// [API key]: https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html
 	Key *string
 
 	// Specifies the mode of transport when calculating a route. Used in estimating
@@ -170,7 +170,7 @@ type CalculateRouteMatrixInput struct {
 	//
 	// Default Value: Car
 	//
-	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html
+	// [GrabMaps]: https://docs.aws.amazon.com/location/previous/developerguide/grab.html
 	TravelMode types.TravelMode
 
 	// Specifies route preferences when traveling by Truck , such as avoiding routes
@@ -305,6 +305,36 @@ func (c *Client) addOperationCalculateRouteMatrixMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

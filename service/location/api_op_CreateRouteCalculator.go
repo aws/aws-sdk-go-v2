@@ -77,13 +77,13 @@ type CreateRouteCalculatorInput struct {
 	// Guide.
 	//
 	// [HERE car routing coverage]: https://developer.here.com/documentation/routing-api/dev_guide/topics/coverage/car-routing.html
-	// [Esri]: https://docs.aws.amazon.com/location/latest/developerguide/esri.html
+	// [Esri]: https://docs.aws.amazon.com/location/previous/developerguide/esri.html
 	// [HERE truck routing coverage]: https://developer.here.com/documentation/routing-api/dev_guide/topics/coverage/truck-routing.html
-	// [HERE Technologies]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
-	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html
+	// [HERE Technologies]: https://docs.aws.amazon.com/location/previous/developerguide/HERE.html
+	// [GrabMaps]: https://docs.aws.amazon.com/location/previous/developerguide/grab.html
 	// [Esri details on street networks and traffic coverage]: https://doc.arcgis.com/en/arcgis-online/reference/network-coverage.htm
-	// [Data providers]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
-	// [GrabMaps countries and areas covered]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html#grab-coverage-area
+	// [Data providers]: https://docs.aws.amazon.com/location/previous/developerguide/what-is-data-provider.html
+	// [GrabMaps countries and areas covered]: https://docs.aws.amazon.com/location/previous/developerguide/grab.html#grab-coverage-area
 	//
 	// This member is required.
 	DataSource *string
@@ -247,6 +247,36 @@ func (c *Client) addOperationCreateRouteCalculatorMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

@@ -49366,6 +49366,16 @@ loop:
 			uv = &types.CustomFileSystemMemberFSxLustreFileSystem{Value: mv}
 			break loop
 
+		case "S3FileSystem":
+			var mv types.S3FileSystem
+			destAddr := &mv
+			if err := awsAwsjson11_deserializeDocumentS3FileSystem(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.CustomFileSystemMemberS3FileSystem{Value: mv}
+			break loop
+
 		default:
 			uv = &types.UnknownUnionMember{Tag: key}
 			break loop
@@ -49414,6 +49424,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.CustomFileSystemConfigMemberFSxLustreFileSystemConfig{Value: mv}
+			break loop
+
+		case "S3FileSystemConfig":
+			var mv types.S3FileSystemConfig
+			destAddr := &mv
+			if err := awsAwsjson11_deserializeDocumentS3FileSystemConfig(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.CustomFileSystemConfigMemberS3FileSystemConfig{Value: mv}
 			break loop
 
 		default:
@@ -81361,6 +81381,95 @@ func awsAwsjson11_deserializeDocumentS3DataSource(v **types.S3DataSource, value 
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentS3FileSystem(v **types.S3FileSystem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3FileSystem
+	if *v == nil {
+		sv = &types.S3FileSystem{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "S3Uri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3SchemaUri to be of type string, got %T instead", value)
+				}
+				sv.S3Uri = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentS3FileSystemConfig(v **types.S3FileSystemConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3FileSystemConfig
+	if *v == nil {
+		sv = &types.S3FileSystemConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MountPath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String1024 to be of type string, got %T instead", value)
+				}
+				sv.MountPath = ptr.String(jtv)
+			}
+
+		case "S3Uri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3SchemaUri to be of type string, got %T instead", value)
+				}
+				sv.S3Uri = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentS3ModelDataSource(v **types.S3ModelDataSource, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -90242,6 +90351,15 @@ func awsAwsjson11_deserializeDocumentWorkforce(v **types.Workforce, value interf
 					return fmt.Errorf("expected WorkforceFailureReason to be of type string, got %T instead", value)
 				}
 				sv.FailureReason = ptr.String(jtv)
+			}
+
+		case "IpAddressType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WorkforceIpAddressType to be of type string, got %T instead", value)
+				}
+				sv.IpAddressType = types.WorkforceIpAddressType(jtv)
 			}
 
 		case "LastUpdatedDate":

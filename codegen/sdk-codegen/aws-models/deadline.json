@@ -2467,7 +2467,10 @@
                         "deadline:TagResource",
                         "iam:PassRole",
                         "identitystore:ListGroupMembershipsForMember",
-                        "logs:CreateLogGroup"
+                        "logs:CreateLogGroup",
+                        "vpc-lattice:GetResourceConfiguration",
+                        "vpc-lattice:GetResourceGateway",
+                        "ec2:CreateVpcEndpoint"
                     ]
                 },
                 "smithy.api#documentation": "<p>Creates a fleet. Fleets gather information relating to compute, or capacity, for renders within your farms. You can choose to manage your own capacity or opt to have fleets fully managed by Deadline Cloud.</p>",
@@ -3028,6 +3031,7 @@
                     "name": "CreateMonitor",
                     "documentation": "Grants permission to create a monitor",
                     "requiredActions": [
+                        "deadline:TagResource",
                         "sso:CreateApplication",
                         "sso:PutApplicationAssignmentConfiguration",
                         "sso:PutApplicationAuthenticationMethod",
@@ -3085,6 +3089,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that the monitor uses to connect to Deadline Cloud. Every user that signs in to the monitor using IAM Identity Center uses this role to access Deadline Cloud resources.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.deadline#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to add to your monitor. Each tag consists of a tag key and a tag value. Tag keys and values are both required, but tag values can be empty strings.</p>"
                     }
                 }
             },
@@ -11595,6 +11605,18 @@
                         "smithy.api#documentation": "<p>The date and time the resource started running.</p>"
                     }
                 },
+                "updatedAt": {
+                    "target": "com.amazonaws.deadline#UpdatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the resource was updated.</p>"
+                    }
+                },
+                "updatedBy": {
+                    "target": "com.amazonaws.deadline#UpdatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user or system that updated this resource.</p>"
+                    }
+                },
                 "jobParameters": {
                     "target": "com.amazonaws.deadline#JobParameters",
                     "traits": {
@@ -17645,6 +17667,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "vpcConfiguration": {
+                    "target": "com.amazonaws.deadline#VpcConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC configuration details for a service managed Amazon EC2 fleet.</p>"
+                    }
+                },
                 "storageProfileId": {
                     "target": "com.amazonaws.deadline#StorageProfileId",
                     "traits": {
@@ -19020,6 +19048,12 @@
                         "smithy.api#documentation": "<p>The date and time the resource was created.</p>"
                     }
                 },
+                "createdBy": {
+                    "target": "com.amazonaws.deadline#CreatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user or system that created this resource.</p>"
+                    }
+                },
                 "startedAt": {
                     "target": "com.amazonaws.deadline#StartedAt",
                     "traits": {
@@ -19030,6 +19064,18 @@
                     "target": "com.amazonaws.deadline#EndedAt",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time the resource ended running.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.deadline#UpdatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the resource was updated.</p>"
+                    }
+                },
+                "updatedBy": {
+                    "target": "com.amazonaws.deadline#UpdatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user or system that updated this resource.</p>"
                     }
                 },
                 "parameterSpace": {
@@ -19869,6 +19915,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time the resource ended running.</p>"
                     }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.deadline#UpdatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the resource was updated.</p>"
+                    }
+                },
+                "updatedBy": {
+                    "target": "com.amazonaws.deadline#UpdatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user or system that updated this resource.</p>"
+                    }
                 }
             },
             "traits": {
@@ -20456,7 +20514,10 @@
                     "documentation": "Grants permission to update a fleet",
                     "requiredActions": [
                         "identitystore:ListGroupMembershipsForMember",
-                        "iam:PassRole"
+                        "iam:PassRole",
+                        "vpc-lattice:GetResourceConfiguration",
+                        "vpc-lattice:GetResourceGateway",
+                        "ec2:CreateVpcEndpoint"
                     ]
                 },
                 "smithy.api#documentation": "<p>Updates a fleet.</p>",
@@ -22458,6 +22519,20 @@
                 }
             }
         },
+        "com.amazonaws.deadline#VpcConfiguration": {
+            "type": "structure",
+            "members": {
+                "resourceConfigurationArns": {
+                    "target": "com.amazonaws.deadline#VpcResourceConfigurationArns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARNs of the VPC Lattice resource configurations attached to the fleet.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration options for a service managed fleet's VPC.</p>"
+            }
+        },
         "com.amazonaws.deadline#VpcId": {
             "type": "string",
             "traits": {
@@ -22466,6 +22541,21 @@
                     "max": 32
                 },
                 "smithy.api#pattern": "^vpc-[\\w]{1,120}$"
+            }
+        },
+        "com.amazonaws.deadline#VpcResourceConfigurationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.deadline#VpcResourceConfigurationArns": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.deadline#VpcResourceConfigurationArn"
             }
         },
         "com.amazonaws.deadline#WindowsUser": {

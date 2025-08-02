@@ -1919,6 +1919,12 @@
                     "traits": {
                         "smithy.api#enumValue": "db.influx.16xlarge"
                     }
+                },
+                "DB_INFLUX_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "db.influx.24xlarge"
+                    }
                 }
             }
         },

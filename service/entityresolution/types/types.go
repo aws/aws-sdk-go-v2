@@ -99,7 +99,7 @@ type IdMappingJobMetrics struct {
 	noSmithyDocumentSerde
 }
 
-// An object containing KMSArn , OutputS3Path , and RoleARN .
+// An object containing KMSArn , outputS3Path , and roleARN .
 type IdMappingJobOutputSource struct {
 
 	// The S3 path to which Entity Resolution will write the output table.
@@ -129,15 +129,15 @@ type IdMappingRuleBasedProperties struct {
 	// The comparison type. You can either choose ONE_TO_ONE or MANY_TO_MANY as the
 	// attributeMatchingModel .
 	//
-	// If you choose MANY_TO_MANY , the system can match attributes across the
-	// sub-types of an attribute type. For example, if the value of the Email field of
-	// Profile A matches the value of the BusinessEmail field of Profile B, the two
-	// profiles are matched on the Email attribute type.
-	//
 	// If you choose ONE_TO_ONE , the system can only match attributes if the sub-types
 	// are an exact match. For example, for the Email attribute type, the system will
 	// only consider it a match if the value of the Email field of Profile A matches
 	// the value of the Email field of Profile B.
+	//
+	// If you choose MANY_TO_MANY , the system can match attributes across the
+	// sub-types of an attribute type. For example, if the value of the Email field of
+	// Profile A matches the value of the BusinessEmail field of Profile B, the two
+	// profiles are matched on the Email attribute type.
 	//
 	// This member is required.
 	AttributeMatchingModel AttributeMatchingModel
@@ -186,7 +186,7 @@ type IdMappingTechniques struct {
 	noSmithyDocumentSerde
 }
 
-// An object containing InputSourceARN , SchemaName , and Type .
+// An object containing inputSourceARN , schemaName , and type .
 type IdMappingWorkflowInputSource struct {
 
 	// An Glue table Amazon Resource Name (ARN) or a matching workflow ARN for the
@@ -264,8 +264,8 @@ type IdNamespaceIdMappingWorkflowMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// An object containing IdMappingType , ProviderProperties , and
-// RuleBasedProperties .
+// An object containing idMappingType , providerProperties , and
+// ruleBasedProperties .
 type IdNamespaceIdMappingWorkflowProperties struct {
 
 	// The type of ID mapping.
@@ -284,7 +284,7 @@ type IdNamespaceIdMappingWorkflowProperties struct {
 	noSmithyDocumentSerde
 }
 
-// An object containing InputSourceARN and SchemaName .
+// An object containing inputSourceARN and schemaName .
 type IdNamespaceInputSource struct {
 
 	// An Glue table Amazon Resource Name (ARN) or a matching workflow ARN for the
@@ -343,17 +343,24 @@ type IdNamespaceSummary struct {
 	noSmithyDocumentSerde
 }
 
-// An object which defines an incremental run type and has only incrementalRunType
-// as a field.
+// Optional. An object that defines the incremental run type. This object contains
+// only the incrementalRunType field, which appears as "Automatic" in the console.
+//
+// For workflows where resolutionType is ML_MATCHING , incremental processing is
+// not supported.
 type IncrementalRunConfig struct {
 
-	// The type of incremental run. It takes only one value: IMMEDIATE .
+	// The type of incremental run. The only valid value is IMMEDIATE . This appears as
+	// "Automatic" in the console.
+	//
+	// For workflows where resolutionType is ML_MATCHING , incremental processing is
+	// not supported.
 	IncrementalRunType IncrementalRunType
 
 	noSmithyDocumentSerde
 }
 
-// An object containing InputSourceARN , SchemaName , and ApplyNormalization .
+// An object containing inputSourceARN , schemaName , and applyNormalization .
 type InputSource struct {
 
 	// An Glue table Amazon Resource Name (ARN) for the input source table.
@@ -388,8 +395,8 @@ type IntermediateSourceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// An object containing InputRecords , TotalRecordsProcessed , MatchIDs , and
-// RecordsNotProcessed .
+// An object containing inputRecords , totalRecordsProcessed , matchIDs , and
+// recordsNotProcessed .
 type JobMetrics struct {
 
 	// The total number of input records.
@@ -407,7 +414,7 @@ type JobMetrics struct {
 	noSmithyDocumentSerde
 }
 
-// An object containing KMSArn , OutputS3Path , and RoleArn .
+// An object containing KMSArn , outputS3Path , and roleArn .
 type JobOutputSource struct {
 
 	// The S3 path to which Entity Resolution will write the output table.
@@ -429,7 +436,7 @@ type JobOutputSource struct {
 	noSmithyDocumentSerde
 }
 
-// An object containing the JobId , Status , StartTime , and EndTime of a job.
+// An object containing the jobId , status , startTime , and endTime of a job.
 type JobSummary struct {
 
 	// The ID of the job.
@@ -491,7 +498,7 @@ type MatchGroup struct {
 }
 
 // A list of MatchingWorkflowSummary objects, each of which contain the fields
-// WorkflowName , WorkflowArn , CreatedAt , UpdatedAt .
+// workflowName , workflowArn , resolutionType , createdAt , updatedAt .
 type MatchingWorkflowSummary struct {
 
 	// The timestamp of when the workflow was created.
@@ -524,7 +531,7 @@ type MatchingWorkflowSummary struct {
 	noSmithyDocumentSerde
 }
 
-// An object containing ProviderConfiguration and ProviderServiceArn .
+// An object containing providerConfiguration and providerServiceArn .
 type NamespaceProviderProperties struct {
 
 	// The Amazon Resource Name (ARN) of the provider service.
@@ -547,15 +554,15 @@ type NamespaceRuleBasedProperties struct {
 	// The comparison type. You can either choose ONE_TO_ONE or MANY_TO_MANY as the
 	// attributeMatchingModel .
 	//
-	// If you choose MANY_TO_MANY , the system can match attributes across the
-	// sub-types of an attribute type. For example, if the value of the Email field of
-	// Profile A matches the value of BusinessEmail field of Profile B, the two
-	// profiles are matched on the Email attribute type.
-	//
 	// If you choose ONE_TO_ONE , the system can only match attributes if the sub-types
 	// are an exact match. For example, for the Email attribute type, the system will
 	// only consider it a match if the value of the Email field of Profile A matches
 	// the value of the Email field of Profile B.
+	//
+	// If you choose MANY_TO_MANY , the system can match attributes across the
+	// sub-types of an attribute type. For example, if the value of the Email field of
+	// Profile A matches the value of BusinessEmail field of Profile B, the two
+	// profiles are matched on the Email attribute type.
 	AttributeMatchingModel AttributeMatchingModel
 
 	//  The type of matching record that is allowed to be used in an ID mapping
@@ -829,14 +836,17 @@ type ResolutionTechniques struct {
 	// The properties of the provider service.
 	ProviderProperties *ProviderProperties
 
-	// An object which defines the list of matching rules to run and has a field Rules
+	// An object which defines the list of matching rules to run and has a field rules
 	// , which is a list of rule objects.
 	RuleBasedProperties *RuleBasedProperties
+
+	// An object containing the rules for a matching workflow.
+	RuleConditionProperties *RuleConditionProperties
 
 	noSmithyDocumentSerde
 }
 
-// An object containing RuleName , and MatchingKeys .
+// An object containing the ruleName and matchingKeys .
 type Rule struct {
 
 	// A list of MatchingKeys . The MatchingKeys must have been defined in the
@@ -855,22 +865,21 @@ type Rule struct {
 }
 
 // An object which defines the list of matching rules to run in a matching
-// workflow. RuleBasedProperties contain a Rules field, which is a list of rule
-// objects.
+// workflow.
 type RuleBasedProperties struct {
 
-	// The comparison type. You can either choose ONE_TO_ONE or MANY_TO_MANY as the
+	// The comparison type. You can choose ONE_TO_ONE or MANY_TO_MANY as the
 	// attributeMatchingModel .
-	//
-	// If you choose MANY_TO_MANY , the system can match attributes across the
-	// sub-types of an attribute type. For example, if the value of the Email field of
-	// Profile A and the value of BusinessEmail field of Profile B matches, the two
-	// profiles are matched on the Email attribute type.
 	//
 	// If you choose ONE_TO_ONE , the system can only match attributes if the sub-types
 	// are an exact match. For example, for the Email attribute type, the system will
 	// only consider it a match if the value of the Email field of Profile A matches
 	// the value of the Email field of Profile B.
+	//
+	// If you choose MANY_TO_MANY , the system can match attributes across the
+	// sub-types of an attribute type. For example, if the value of the Email field of
+	// Profile A and the value of BusinessEmail field of Profile B matches, the two
+	// profiles are matched on the Email attribute type.
 	//
 	// This member is required.
 	AttributeMatchingModel AttributeMatchingModel
@@ -887,6 +896,48 @@ type RuleBasedProperties struct {
 	//
 	// If you choose INDEXING , the process indexes the data without generating IDs.
 	MatchPurpose MatchPurpose
+
+	noSmithyDocumentSerde
+}
+
+// An object that defines the ruleCondition and the ruleName to use in a matching
+// workflow.
+type RuleCondition struct {
+
+	// A statement that specifies the conditions for a matching rule.
+	//
+	// If your data is accurate, use an Exact matching function: Exact or
+	// ExactManyToMany .
+	//
+	// If your data has variations in spelling or pronunciation, use a Fuzzy matching
+	// function: Cosine , Levenshtein , or Soundex .
+	//
+	// Use operators if you want to combine ( AND ), separate ( OR ), or group matching
+	// functions (...) .
+	//
+	// For example: (Cosine(a, 10) AND Exact(b, true)) OR ExactManyToMany(c, d)
+	//
+	// This member is required.
+	Condition *string
+
+	// A name for the matching rule.
+	//
+	// For example: Rule1
+	//
+	// This member is required.
+	RuleName *string
+
+	noSmithyDocumentSerde
+}
+
+// The properties of a rule condition that provides the ability to use more
+// complex syntax.
+type RuleConditionProperties struct {
+
+	//  A list of rule objects, each of which have fields ruleName and condition .
+	//
+	// This member is required.
+	Rules []RuleCondition
 
 	noSmithyDocumentSerde
 }
@@ -962,7 +1013,8 @@ type SchemaInputAttribute struct {
 	noSmithyDocumentSerde
 }
 
-// An object containing SchemaName , SchemaArn , CreatedAt , and UpdatedAt .
+// An object containing schemaName , schemaArn , createdAt , updatedAt , and
+// hasWorkflows .
 type SchemaMappingSummary struct {
 
 	// The timestamp of when the SchemaMapping was created.

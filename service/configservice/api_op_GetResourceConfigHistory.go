@@ -13,13 +13,20 @@ import (
 )
 
 // For accurate reporting on the compliance status, you must record the
-// AWS::Config::ResourceCompliance resource type. For more information, see [Selecting Which Resources Config Records].
+// AWS::Config::ResourceCompliance resource type.
 //
-// Returns a list of ConfigurationItems for the specified resource. The list
-// contains details about each state of the resource during the specified time
-// interval. If you specified a retention period to retain your ConfigurationItems
-// between a minimum of 30 days and a maximum of 7 years (2557 days), Config
-// returns the ConfigurationItems for the specified retention period.
+// For more information, see [Recording Amazon Web Services Resources] in the Config Resources Developer Guide.
+//
+// Returns a list of configurations items (CIs) for the specified resource.
+//
+// # Contents
+//
+// The list contains details about each state of the resource during the specified
+// time interval. If you specified a retention period to retain your CIs between a
+// minimum of 30 days and a maximum of 7 years (2557 days), Config returns the CIs
+// for the specified retention period.
+//
+// # Pagination
 //
 // The response is paginated. By default, Config returns a limit of 10
 // configuration items per page. You can customize this number with the limit
@@ -31,7 +38,7 @@ import (
 // that the number of records returned is smaller than the specified limit . In
 // such cases, you can make another call, using the nextToken .
 //
-// [Selecting Which Resources Config Records]: https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html
+// [Recording Amazon Web Services Resources]: https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html
 func (c *Client) GetResourceConfigHistory(ctx context.Context, params *GetResourceConfigHistoryInput, optFns ...func(*Options)) (*GetResourceConfigHistoryOutput, error) {
 	if params == nil {
 		params = &GetResourceConfigHistoryInput{}
@@ -88,7 +95,8 @@ type GetResourceConfigHistoryInput struct {
 // The output for the GetResourceConfigHistory action.
 type GetResourceConfigHistoryOutput struct {
 
-	// A list that contains the configuration history of one or more resources.
+	// An array of ConfigurationItems Objects. Contatins the configuration history for
+	// one or more resources.
 	ConfigurationItems []types.ConfigurationItem
 
 	// The string that you use in a subsequent request to get the next page of results
@@ -187,6 +195,36 @@ func (c *Client) addOperationGetResourceConfigHistoryMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

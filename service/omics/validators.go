@@ -2144,6 +2144,29 @@ func validateCompleteReadSetUploadPartListItem(v *types.CompleteReadSetUploadPar
 	}
 }
 
+func validateDefinitionRepository(v *types.DefinitionRepository) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DefinitionRepository"}
+	if v.ConnectionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionArn"))
+	}
+	if v.FullRepositoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FullRepositoryId"))
+	}
+	if v.SourceReference != nil {
+		if err := validateSourceReference(v.SourceReference); err != nil {
+			invalidParams.AddNested("SourceReference", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateExportReadSet(v *types.ExportReadSet) error {
 	if v == nil {
 		return nil
@@ -2183,6 +2206,24 @@ func validateSourceFiles(v *types.SourceFiles) error {
 	invalidParams := smithy.InvalidParamsError{Context: "SourceFiles"}
 	if v.Source1 == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Source1"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSourceReference(v *types.SourceReference) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SourceReference"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2655,6 +2696,11 @@ func validateOpCreateWorkflowInput(v *CreateWorkflowInput) error {
 	if v.RequestId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RequestId"))
 	}
+	if v.DefinitionRepository != nil {
+		if err := validateDefinitionRepository(v.DefinitionRepository); err != nil {
+			invalidParams.AddNested("DefinitionRepository", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2675,6 +2721,11 @@ func validateOpCreateWorkflowVersionInput(v *CreateWorkflowVersionInput) error {
 	}
 	if v.RequestId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RequestId"))
+	}
+	if v.DefinitionRepository != nil {
+		if err := validateDefinitionRepository(v.DefinitionRepository); err != nil {
+			invalidParams.AddNested("DefinitionRepository", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -546,6 +546,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -705,6 +708,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -794,6 +800,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -870,6 +879,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -944,6 +956,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -2056,6 +2071,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -3215,6 +3233,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -3332,6 +3353,9 @@
                     "target": "com.amazonaws.lightsail#InvalidInputException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -3364,6 +3388,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -3489,6 +3516,9 @@
                     "target": "com.amazonaws.lightsail#NotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -3583,6 +3613,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -3647,6 +3680,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -3719,6 +3755,9 @@
                     "target": "com.amazonaws.lightsail#NotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -3751,6 +3790,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -3827,6 +3869,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -3957,6 +4002,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -3995,6 +4043,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -4169,6 +4220,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -4387,6 +4441,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -4425,6 +4482,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -4532,6 +4592,9 @@
                     "target": "com.amazonaws.lightsail#NotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -4625,6 +4688,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -4707,6 +4773,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -4745,6 +4814,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -4977,6 +5049,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -5068,6 +5143,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -5189,6 +5267,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -5284,6 +5365,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -5322,6 +5406,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -5534,6 +5621,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -5624,6 +5714,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -5688,6 +5781,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -5760,6 +5856,9 @@
                     "target": "com.amazonaws.lightsail#NotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -5792,6 +5891,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -5899,6 +6001,9 @@
                     "target": "com.amazonaws.lightsail#NotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -5965,6 +6070,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -6026,6 +6134,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -6093,6 +6204,9 @@
                     "target": "com.amazonaws.lightsail#NotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -6154,6 +6268,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -6229,6 +6346,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -6365,6 +6485,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -6403,6 +6526,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -6510,6 +6636,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -6585,6 +6714,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -6652,6 +6784,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -6729,6 +6864,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -6798,6 +6936,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -6865,6 +7006,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -6949,6 +7093,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -7028,6 +7175,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -7185,6 +7335,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -7252,6 +7405,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -7330,6 +7486,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -7394,6 +7553,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -8157,6 +8319,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -8239,6 +8404,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -8396,6 +8564,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -8625,6 +8796,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -8707,6 +8881,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -8792,6 +8969,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -8871,6 +9051,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -8953,6 +9136,9 @@
                     "target": "com.amazonaws.lightsail#NotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -9011,6 +9197,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -9073,6 +9262,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -9186,6 +9378,9 @@
                     "target": "com.amazonaws.lightsail#NotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -9278,6 +9473,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -9356,6 +9554,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -9451,6 +9652,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -9522,6 +9726,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -9578,6 +9785,9 @@
                     "target": "com.amazonaws.lightsail#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -9631,6 +9841,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -9695,6 +9908,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -9803,6 +10019,9 @@
                     "target": "com.amazonaws.lightsail#NotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -9865,6 +10084,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -9977,6 +10199,9 @@
                     "target": "com.amazonaws.lightsail#NotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -10032,6 +10257,9 @@
                     "target": "com.amazonaws.lightsail#NotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -10079,6 +10307,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -10164,6 +10395,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -10233,6 +10467,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -10300,6 +10537,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -10374,6 +10614,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -10770,6 +11013,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -10837,6 +11083,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -10913,6 +11162,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -10987,6 +11239,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -11025,6 +11280,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -11100,6 +11358,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -11219,6 +11480,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -11317,6 +11581,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -11384,6 +11651,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -11460,6 +11730,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -11527,6 +11800,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -11603,6 +11879,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -11670,6 +11949,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -11752,6 +12034,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -11790,6 +12075,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -11938,6 +12226,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -11999,6 +12290,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -12075,6 +12369,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -12149,6 +12446,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -12218,6 +12518,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -12256,6 +12559,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -12380,6 +12686,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -12454,6 +12763,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -12492,6 +12804,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -12566,6 +12881,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -12646,6 +12964,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -12733,6 +13054,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -12847,6 +13171,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -12914,6 +13241,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -12995,6 +13325,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -13114,6 +13447,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -13224,6 +13560,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -13291,6 +13630,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -13367,6 +13709,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -13433,6 +13778,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -13516,6 +13864,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -13583,6 +13934,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -13896,6 +14250,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -15006,6 +15363,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -15747,7 +16107,7 @@
                     "name": "lightsail"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Amazon Lightsail is the easiest way to get started with Amazon Web Services (Amazon Web Services) for developers who need to build websites or web applications. It includes\n      everything you need to launch your project quickly - instances (virtual private servers),\n      container services, storage buckets, managed databases, SSD-based block storage, static IP\n      addresses, load balancers, content delivery network (CDN) distributions, DNS management of\n      registered domains, and resource snapshots (backups) - for a low, predictable monthly\n      price.</p>\n         <p>You can manage your Lightsail resources using the Lightsail console, Lightsail API,\n        Command Line Interface (CLI), or SDKs. For more information about Lightsail\n      concepts and tasks, see the <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/lightsail-how-to-set-up-access-keys-to-use-sdk-api-cli\">Amazon Lightsail Developer Guide</a>.</p>\n         <p>This API Reference provides detailed information about the actions, data types,\n      parameters, and errors of the Lightsail service. For more information about the supported\n        Amazon Web Services Regions, endpoints, and service quotas of the Lightsail service, see\n        <a href=\"https://docs.aws.amazon.com/general/latest/gr/lightsail.html\">Amazon Lightsail Endpoints\n        and Quotas</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                "smithy.api#documentation": "<p>Amazon Lightsail is the easiest way to get started with Amazon Web Services (Amazon Web Services) for developers who need to build websites or web applications. It includes\n      everything you need to launch your project quickly - instances (virtual private servers),\n      container services, storage buckets, managed databases, SSD-based block storage, static IP\n      addresses, load balancers, content delivery network (CDN) distributions, DNS management of\n      registered domains, and resource snapshots (backups) - for a low, predictable monthly\n      price.</p>\n         <p>You can manage your Lightsail resources using the Lightsail console, Lightsail API,\n        Command Line Interface (CLI), or SDKs. For more information about Lightsail\n      concepts and tasks, see the <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/lightsail-how-to-set-up-and-configure-aws-cli\">Amazon Lightsail Developer Guide</a>.</p>\n         <p>This API Reference provides detailed information about the actions, data types,\n      parameters, and errors of the Lightsail service. For more information about the supported\n        Amazon Web Services Regions, endpoints, and service quotas of the Lightsail service, see\n        <a href=\"https://docs.aws.amazon.com/general/latest/gr/lightsail.html\">Amazon Lightsail Endpoints\n        and Quotas</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                 "smithy.api#title": "Amazon Lightsail",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -18064,6 +18424,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -18873,6 +19236,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -19192,6 +19558,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -19324,6 +19693,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -19471,6 +19843,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -19538,6 +19913,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -19749,7 +20127,41 @@
                     "traits": {
                         "smithy.api#enumValue": "eu-north-1"
                     }
+                },
+                "AP_SOUTHEAST_3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-southeast-3"
+                    }
                 }
+            }
+        },
+        "com.amazonaws.lightsail#RegionSetupInProgressException": {
+            "type": "structure",
+            "members": {
+                "code": {
+                    "target": "com.amazonaws.lightsail#string"
+                },
+                "docs": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-regions-and-availability-zones-in-amazon-lightsail.html\">Regions\n      and Availability Zones for Lightsail</a>\n         </p>"
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.lightsail#string"
+                },
+                "tip": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Opt-in Regions typically take a few minutes to finish setting up before you can work with them. Wait a few minutes and try again.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Lightsail throws this exception when an operation is performed on resources in an opt-in\n      Region that is currently being set up.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 428
             }
         },
         "com.amazonaws.lightsail#RegisterContainerImage": {
@@ -19769,6 +20181,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -20488,6 +20903,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -20971,6 +21389,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -21110,6 +21531,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -21191,6 +21615,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -21431,6 +21858,9 @@
                     "target": "com.amazonaws.lightsail#NotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -21564,6 +21994,9 @@
                     "target": "com.amazonaws.lightsail#NotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -21633,6 +22066,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -21700,6 +22136,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -21915,6 +22354,9 @@
                     "target": "com.amazonaws.lightsail#NotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -21982,6 +22424,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -22077,6 +22522,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -22210,6 +22658,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -22290,6 +22741,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -22445,6 +22899,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -22504,6 +22961,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -22582,6 +23042,9 @@
                     "target": "com.amazonaws.lightsail#NotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -22614,6 +23077,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -22743,6 +23209,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -23030,6 +23499,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -23104,6 +23576,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"
@@ -23199,6 +23674,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -23282,6 +23760,9 @@
                     "target": "com.amazonaws.lightsail#OperationFailureException"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
+                },
+                {
                     "target": "com.amazonaws.lightsail#ServiceException"
                 },
                 {
@@ -23320,6 +23801,9 @@
                 },
                 {
                     "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#RegionSetupInProgressException"
                 },
                 {
                     "target": "com.amazonaws.lightsail#ServiceException"

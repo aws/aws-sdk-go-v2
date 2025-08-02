@@ -31,6 +31,9 @@ type UpdateAssessmentFrameworkInput struct {
 
 	//  The control sets that are associated with the framework.
 	//
+	// The Controls object returns a partial response when called through Framework
+	// APIs. For a complete Controls object, use GetControl .
+	//
 	// This member is required.
 	ControlSets []types.UpdateAssessmentFrameworkControlSet
 
@@ -56,7 +59,7 @@ type UpdateAssessmentFrameworkInput struct {
 
 type UpdateAssessmentFrameworkOutput struct {
 
-	//  The name of the framework.
+	//  The framework object.
 	Framework *types.Framework
 
 	// Metadata pertaining to the operation's result.
@@ -151,6 +154,36 @@ func (c *Client) addOperationUpdateAssessmentFrameworkMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

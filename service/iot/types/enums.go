@@ -686,6 +686,25 @@ func (ConfigName) Values() []ConfigName {
 	}
 }
 
+type ConfigurationStatus string
+
+// Enum values for ConfigurationStatus
+const (
+	ConfigurationStatusHealthy   ConfigurationStatus = "HEALTHY"
+	ConfigurationStatusUnhealthy ConfigurationStatus = "UNHEALTHY"
+)
+
+// Values returns all known values for ConfigurationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConfigurationStatus) Values() []ConfigurationStatus {
+	return []ConfigurationStatus{
+		"HEALTHY",
+		"UNHEALTHY",
+	}
+}
+
 type CustomMetricType string
 
 // Enum values for CustomMetricType
@@ -979,6 +998,25 @@ func (DynamoKeyType) Values() []DynamoKeyType {
 	return []DynamoKeyType{
 		"STRING",
 		"NUMBER",
+	}
+}
+
+type EncryptionType string
+
+// Enum values for EncryptionType
+const (
+	EncryptionTypeCustomerManagedKmsKey EncryptionType = "CUSTOMER_MANAGED_KMS_KEY"
+	EncryptionTypeAwsOwnedKmsKey        EncryptionType = "AWS_OWNED_KMS_KEY"
+)
+
+// Values returns all known values for EncryptionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionType) Values() []EncryptionType {
+	return []EncryptionType{
+		"CUSTOMER_MANAGED_KMS_KEY",
+		"AWS_OWNED_KMS_KEY",
 	}
 }
 

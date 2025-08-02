@@ -46,7 +46,7 @@ type DescribeConfigurationRecorderStatusInput struct {
 	Arn *string
 
 	// The name of the configuration recorder. If the name is not specified, the
-	// opertation returns the status for the customer managed configuration recorder
+	// operation returns the status for the customer managed configuration recorder
 	// configured for the account, if applicable.
 	//
 	// When making a request to this operation, you can only specify one configuration
@@ -155,6 +155,36 @@ func (c *Client) addOperationDescribeConfigurationRecorderStatusMiddlewares(stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

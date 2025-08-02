@@ -7,6 +7,179 @@ import (
 	"time"
 )
 
+// Contains detailed information about a directory assessment, including
+// configuration parameters, status, and validation results.
+type Assessment struct {
+
+	// The unique identifier of the directory assessment.
+	AssessmentId *string
+
+	// The IP addresses of the DNS servers or domain controllers in your self-managed
+	// AD environment.
+	CustomerDnsIps []string
+
+	// The identifier of the directory associated with this assessment.
+	DirectoryId *string
+
+	// The fully qualified domain name (FQDN) of the Active Directory domain being
+	// assessed.
+	DnsName *string
+
+	// The date and time when the assessment status was last updated.
+	LastUpdateDateTime *time.Time
+
+	// The type of assessment report generated. Valid values are CUSTOMER and SYSTEM .
+	ReportType *string
+
+	// The security groups identifiers attached to the network interfaces.
+	SecurityGroupIds []string
+
+	// The identifiers of the self-managed AD instances used to perform the assessment.
+	SelfManagedInstanceIds []string
+
+	// The date and time when the assessment was initiated.
+	StartTime *time.Time
+
+	// The current status of the assessment. Valid values include SUCCESS , FAILED ,
+	// PENDING , and IN_PROGRESS .
+	Status *string
+
+	// A detailed status code providing additional information about the assessment
+	// state.
+	StatusCode *string
+
+	// A human-readable description of the current assessment status, including any
+	// error details or progress information.
+	StatusReason *string
+
+	// A list of subnet identifiers in the Amazon VPC in which the hybrid directory is
+	// created.
+	SubnetIds []string
+
+	// The version of the assessment framework used to evaluate your self-managed AD
+	// environment.
+	Version *string
+
+	// Contains Amazon VPC information for the StartADAssessment operation.
+	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains configuration parameters required to perform a directory assessment.
+type AssessmentConfiguration struct {
+
+	// A list of IP addresses for the DNS servers or domain controllers in your
+	// self-managed AD that are tested during the assessment.
+	//
+	// This member is required.
+	CustomerDnsIps []string
+
+	// The fully qualified domain name (FQDN) of the self-managed AD domain to assess.
+	//
+	// This member is required.
+	DnsName *string
+
+	// The identifiers of the self-managed instances with SSM that are used to perform
+	// connectivity and validation tests.
+	//
+	// This member is required.
+	InstanceIds []string
+
+	// Contains VPC information for the CreateDirectory, CreateMicrosoftAD, or CreateHybridAD operation.
+	//
+	// This member is required.
+	VpcSettings *DirectoryVpcSettings
+
+	// By default, the service attaches a security group to allow network access to
+	// the self-managed nodes in your Amazon VPC. You can optionally supply your own
+	// security group that allows network traffic to and from your self-managed domain
+	// controllers outside of your Amazon VPC.
+	SecurityGroupIds []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the results of validation tests performed against a specific domain
+// controller during a directory assessment.
+type AssessmentReport struct {
+
+	// The IP address of the domain controller that was tested during the assessment.
+	DomainControllerIp *string
+
+	// A list of validation results for different test categories performed against
+	// this domain controller.
+	Validations []AssessmentValidation
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a directory assessment, providing a
+// high-level overview without detailed validation results.
+type AssessmentSummary struct {
+
+	// The unique identifier of the directory assessment.
+	AssessmentId *string
+
+	// The IP addresses of the DNS servers or domain controllers in your self-managed
+	// AD environment.
+	CustomerDnsIps []string
+
+	// The identifier of the directory associated with this assessment.
+	DirectoryId *string
+
+	// The fully qualified domain name (FQDN) of the Active Directory domain being
+	// assessed.
+	DnsName *string
+
+	// The date and time when the assessment status was last updated.
+	LastUpdateDateTime *time.Time
+
+	// The type of assessment report generated. Valid values include CUSTOMER and
+	// SYSTEM .
+	ReportType *string
+
+	// The date and time when the assessment was initiated.
+	StartTime *time.Time
+
+	// The current status of the assessment. Valid values include SUCCESS , FAILED ,
+	// PENDING , and IN_PROGRESS .
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a specific validation test performed during a
+// directory assessment.
+type AssessmentValidation struct {
+
+	// The category of the validation test.
+	Category *string
+
+	// The date and time when the validation test was completed or last updated.
+	LastUpdateDateTime *time.Time
+
+	// The name of the specific validation test performed within the category.
+	Name *string
+
+	// The date and time when the validation test was started.
+	StartTime *time.Time
+
+	// The result status of the validation test. Valid values include SUCCESS , FAILED
+	// , PENDING , and IN_PROGRESS .
+	Status *string
+
+	// A detailed status code providing additional information about the validation
+	// result.
+	StatusCode *string
+
+	// A human-readable description of the validation result, including any error
+	// details or recommendations.
+	StatusReason *string
+
+	noSmithyDocumentSerde
+}
+
 // Represents a named directory attribute.
 type Attribute struct {
 
@@ -237,6 +410,11 @@ type DirectoryDescription struct {
 	// The edition associated with this directory.
 	Edition DirectoryEdition
 
+	// Contains information about the hybrid directory configuration for the
+	// directory, including Amazon Web Services System Manager managed node identifiers
+	// and DNS IPs.
+	HybridSettings *HybridSettingsDescription
+
 	// Specifies when the directory was created.
 	LaunchTime *time.Time
 
@@ -336,7 +514,7 @@ type DirectoryLimits struct {
 	noSmithyDocumentSerde
 }
 
-// Contains VPC information for the CreateDirectory or CreateMicrosoftAD operation.
+// Contains VPC information for the CreateDirectory, CreateMicrosoftAD, or CreateHybridAD operation.
 type DirectoryVpcSettings struct {
 
 	// The identifiers of the subnets for the directory servers. The two subnets must
@@ -427,6 +605,116 @@ type EventTopic struct {
 
 	// The name of an Amazon SNS topic the receives status messages from the directory.
 	TopicName *string
+
+	noSmithyDocumentSerde
+}
+
+// Use to recover to the hybrid directory administrator account credentials.
+type HybridAdministratorAccountUpdate struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager
+	// secret that contains the credentials for the AD administrator user, and enables
+	// hybrid domain controllers to join the managed AD domain. For example:
+	//
+	//     {"customerAdAdminDomainUsername":"carlos_salazar","customerAdAdminDomainPassword":"ExamplePassword123!"}.
+	//
+	// This member is required.
+	SecretArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains configuration settings for self-managed instances with SSM used in
+// hybrid directory operations.
+type HybridCustomerInstancesSettings struct {
+
+	// The IP addresses of the DNS servers or domain controllers in your self-managed
+	// AD environment.
+	//
+	// This member is required.
+	CustomerDnsIps []string
+
+	// The identifiers of the self-managed instances with SSM used in hybrid directory.
+	//
+	// This member is required.
+	InstanceIds []string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the current hybrid directory configuration settings for a directory.
+type HybridSettingsDescription struct {
+
+	// The IP addresses of the DNS servers in your self-managed AD environment.
+	SelfManagedDnsIpAddrs []string
+
+	// The identifiers of the self-managed instances with SSM used for hybrid
+	// directory operations.
+	SelfManagedInstanceIds []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about update activities for different components of a
+// hybrid directory.
+type HybridUpdateActivities struct {
+
+	// A list of update activities related to hybrid directory administrator account
+	// changes.
+	HybridAdministratorAccount []HybridUpdateInfoEntry
+
+	// A list of update activities related to the self-managed instances with SSM in
+	// the self-managed instances with SSM hybrid directory configuration.
+	SelfManagedInstances []HybridUpdateInfoEntry
+
+	noSmithyDocumentSerde
+}
+
+// Contains detailed information about a specific update activity for a hybrid
+// directory component.
+type HybridUpdateInfoEntry struct {
+
+	// The identifier of the assessment performed to validate this update
+	// configuration.
+	AssessmentId *string
+
+	// Specifies if the update was initiated by the customer or Amazon Web Services.
+	InitiatedBy *string
+
+	// The date and time when the update activity status was last updated.
+	LastUpdatedDateTime *time.Time
+
+	// The new configuration values being applied in this update.
+	NewValue *HybridUpdateValue
+
+	// The previous configuration values before this update was applied.
+	PreviousValue *HybridUpdateValue
+
+	// The date and time when the update activity was initiated.
+	StartTime *time.Time
+
+	// The current status of the update activity. Valid values include UPDATED ,
+	// UPDATING , and UPDATE_FAILED .
+	Status UpdateStatus
+
+	// A human-readable description of the update status, including any error details
+	// or progress information.
+	StatusReason *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the configuration values for a hybrid directory update, including
+// Amazon Web Services System Manager managed node and DNS information.
+type HybridUpdateValue struct {
+
+	// The IP addresses of the DNS servers or domain controllers in the hybrid
+	// directory configuration.
+	DnsIps []string
+
+	// The identifiers of the self-managed instances with SSM in the hybrid directory
+	// configuration.
+	InstanceIds []string
 
 	noSmithyDocumentSerde
 }
@@ -600,7 +888,7 @@ type RegionDescription struct {
 	// The date and time that the Region status was last updated.
 	StatusLastUpdatedDateTime *time.Time
 
-	// Contains VPC information for the CreateDirectory or CreateMicrosoftAD operation.
+	// Contains VPC information for the CreateDirectory, CreateMicrosoftAD, or CreateHybridAD operation.
 	VpcSettings *DirectoryVpcSettings
 
 	noSmithyDocumentSerde

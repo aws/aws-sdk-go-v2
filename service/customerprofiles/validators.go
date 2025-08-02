@@ -2967,6 +2967,11 @@ func validateProfileAttributes(v *types.ProfileAttributes) error {
 			invalidParams.AddNested("Attributes", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ProfileType != nil {
+		if err := validateProfileTypeDimension(v.ProfileType); err != nil {
+			invalidParams.AddNested("ProfileType", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2979,6 +2984,24 @@ func validateProfileDimension(v *types.ProfileDimension) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ProfileDimension"}
+	if len(v.DimensionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DimensionType"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProfileTypeDimension(v *types.ProfileTypeDimension) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProfileTypeDimension"}
 	if len(v.DimensionType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("DimensionType"))
 	}

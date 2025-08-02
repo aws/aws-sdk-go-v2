@@ -4823,6 +4823,11 @@ func awsAwsjson11_serializeOpDocumentCreateInterconnectInput(v *CreateInterconne
 		ok.String(*v.ProviderName)
 	}
 
+	if v.RequestMACSec != nil {
+		ok := object.Key("requestMACSec")
+		ok.Boolean(*v.RequestMACSec)
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {

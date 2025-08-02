@@ -1,6 +1,7 @@
 GetObject
 	Initialize stack step
 		spanInitializeStart
+		InterceptExecution
 		AWSChecksum:SetupOutputContext
 		RegisterServiceMetadata
 		legacyEndpointContextSetter
@@ -16,7 +17,9 @@ GetObject
 		S3:ProcessARNResource
 		S3:ObjectLambdaEndpoint
 		serializeImmutableHostnameBucket
+		InterceptBeforeSerialization
 		OperationSerializer
+		InterceptAfterSerialization
 		S3:UpdateEndpoint
 		S3:RemoveBucketFromPathMiddleware
 		isExpressUserAgent
@@ -32,7 +35,9 @@ GetObject
 	Finalize stack step
 		DisableAcceptEncodingGzip
 		spanRetryLoop
+		InterceptBeforeRetryLoop
 		Retry
+		InterceptAttempt
 		RetryMetricsHeader
 		ResolveAuthScheme
 		GetIdentity
@@ -41,14 +46,19 @@ GetObject
 		ComputePayloadHash
 		SigV4ContentSHA256Header
 		setLegacyContextSigningOptions
+		InterceptBeforeSigning
 		Signing
+		InterceptAfterSigning
 	Deserialize stack step
 		AddRawResponseToMetadata
 		ErrorCloseResponseBody
 		ResponseErrorWrapper
 		S3MetadataRetriever
+		InterceptAfterDeserialization
 		OperationDeserializer
+		InterceptBeforeDeserialization
 		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		AWSChecksum:ValidateOutputPayloadChecksum
 		RequestResponseLogger
+		InterceptTransmit

@@ -30,6 +30,7 @@ import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
+import software.amazon.smithy.go.codegen.GoUniverseTypes;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SmithyGoTypes;
@@ -45,6 +46,7 @@ import software.amazon.smithy.model.traits.HttpBearerAuthTrait;
 import software.amazon.smithy.utils.ListUtils;
 
 import static software.amazon.smithy.go.codegen.SymbolUtils.buildPackageSymbol;
+import static software.amazon.smithy.go.codegen.SymbolUtils.sliceOf;
 
 /**
  * Registers additional AWS specific client configuration fields
@@ -260,6 +262,17 @@ public class AddAwsConfigFields implements GoIntegration {
                     .type(SdkGoTypes.Aws.ResponseChecksumValidation)
                     .documentation("Indicates how user opt-in/out response checksum validation")
                     .servicePredicate(AwsHttpChecksumGenerator::hasOutputChecksumTrait)
+                    .build(),
+            AwsConfigField.builder()
+                    .name("Interceptors")
+                    .type(SmithyGoDependency.SMITHY_HTTP_TRANSPORT.struct("InterceptorRegistry"))
+                    .generatedOnClient(false)
+                    .awsResolveFunction(buildPackageSymbol("resolveInterceptors"))
+                    .build(),
+            AwsConfigField.builder()
+                    .name("AuthSchemePreference")
+                    .type(sliceOf(GoUniverseTypes.String))
+                    .generatedOnClient(false)
                     .build()
     );
 
@@ -324,6 +337,15 @@ public class AddAwsConfigFields implements GoIntegration {
         writeRetryerResolvers(writer);
         writeRetryMaxAttemptsFinalizers(writer);
         writeAwsConfigEndpointResolver(writer);
+        writeInterceptorResolver(writer);
+    }
+
+    private void writeInterceptorResolver(GoWriter writer) {
+        writer.write("""
+                func resolveInterceptors(cfg aws.Config, o *Options) {
+                    o.Interceptors = cfg.Interceptors.Copy()
+                }
+                """);
     }
 
     private void writerAwsDefaultResolversTests(GoWriter writer) {

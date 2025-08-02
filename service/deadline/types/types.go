@@ -1539,6 +1539,12 @@ type JobSearchSummary struct {
 	// The number of tasks running on the job.
 	TaskRunStatusCounts map[string]int32
 
+	// The date and time the resource was updated.
+	UpdatedAt *time.Time
+
+	// The user or system that updated this resource.
+	UpdatedBy *string
+
 	noSmithyDocumentSerde
 }
 
@@ -2363,6 +2369,9 @@ type ServiceManagedEc2FleetConfiguration struct {
 	// The storage profile ID.
 	StorageProfileId *string
 
+	// The VPC configuration details for a service managed Amazon EC2 fleet.
+	VpcConfiguration *VpcConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -2881,6 +2890,9 @@ type StepSearchSummary struct {
 	// The date and time the resource was created.
 	CreatedAt *time.Time
 
+	// The user or system that created this resource.
+	CreatedBy *string
+
 	// The date and time the resource ended running.
 	EndedAt *time.Time
 
@@ -2939,6 +2951,12 @@ type StepSearchSummary struct {
 
 	// The number of tasks running on the job.
 	TaskRunStatusCounts map[string]int32
+
+	// The date and time the resource was updated.
+	UpdatedAt *time.Time
+
+	// The user or system that updated this resource.
+	UpdatedBy *string
 
 	noSmithyDocumentSerde
 }
@@ -3246,6 +3264,12 @@ type TaskSearchSummary struct {
 	// The task ID.
 	TaskId *string
 
+	// The date and time the resource was updated.
+	UpdatedAt *time.Time
+
+	// The user or system that updated this resource.
+	UpdatedBy *string
+
 	noSmithyDocumentSerde
 }
 
@@ -3387,6 +3411,15 @@ type VCpuCountRange struct {
 
 	// The maximum amount of vCPU.
 	Max *int32
+
+	noSmithyDocumentSerde
+}
+
+// The configuration options for a service managed fleet's VPC.
+type VpcConfiguration struct {
+
+	// The ARNs of the VPC Lattice resource configurations attached to the fleet.
+	ResourceConfigurationArns []string
 
 	noSmithyDocumentSerde
 }

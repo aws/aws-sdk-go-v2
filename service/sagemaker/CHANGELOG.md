@@ -1,3 +1,16 @@
+# v1.203.1 (2025-07-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.203.0 (2025-07-28)
+
+* **Feature**: Add support for HTTP interceptors.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.202.0 (2025-07-21)
+
+* **Feature**: This release adds 1/ Support for S3FileSystem in CustomFileSystems 2/ The ability for a customer to select their preferred IpAddressType for use with private Workforces 3/ Support for p4de instance type in SageMaker Training Plans
+
 # v1.201.1 (2025-07-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

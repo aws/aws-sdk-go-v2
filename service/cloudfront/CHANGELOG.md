@@ -1,3 +1,17 @@
+# v1.49.0 (2025-07-30)
+
+* **Feature**: This release adds new origin timeout options: 1) ResponseCompletionTimeout and 2) OriginReadTimeout (for S3 origins)
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.48.0 (2025-07-28)
+
+* **Feature**: Add support for HTTP interceptors.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.47.0 (2025-07-21)
+
+* **Feature**: Add dualstack endpoint support
+
 # v1.46.5 (2025-07-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

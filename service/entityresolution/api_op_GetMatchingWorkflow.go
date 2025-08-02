@@ -51,8 +51,8 @@ type GetMatchingWorkflowOutput struct {
 	// This member is required.
 	InputSourceConfig []types.InputSource
 
-	// A list of OutputSource objects, each of which contains fields OutputS3Path ,
-	// ApplyNormalization , and Output .
+	// A list of OutputSource objects, each of which contains fields outputS3Path ,
+	// applyNormalization , KMSArn , and output .
 	//
 	// This member is required.
 	OutputSourceConfig []types.OutputSource
@@ -186,6 +186,36 @@ func (c *Client) addOperationGetMatchingWorkflowMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

@@ -11,10 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a MatchingWorkflow object which stores the configuration of the data
-// processing job to be run. It is important to note that there should not be a
-// pre-existing MatchingWorkflow with the same name. To modify an existing
-// workflow, utilize the UpdateMatchingWorkflow API.
+// Creates a matching workflow that defines the configuration for a data
+// processing job. The workflow name must be unique. To modify an existing
+// workflow, use UpdateMatchingWorkflow .
+//
+// For workflows where resolutionType is ML_MATCHING, incremental processing is
+// not supported.
 func (c *Client) CreateMatchingWorkflow(ctx context.Context, params *CreateMatchingWorkflowInput, optFns ...func(*Options)) (*CreateMatchingWorkflowOutput, error) {
 	if params == nil {
 		params = &CreateMatchingWorkflowInput{}
@@ -38,8 +40,8 @@ type CreateMatchingWorkflowInput struct {
 	// This member is required.
 	InputSourceConfig []types.InputSource
 
-	// A list of OutputSource objects, each of which contains fields OutputS3Path ,
-	// ApplyNormalization , and Output .
+	// A list of OutputSource objects, each of which contains fields outputS3Path ,
+	// applyNormalization , KMSArn , and output .
 	//
 	// This member is required.
 	OutputSourceConfig []types.OutputSource
@@ -64,8 +66,11 @@ type CreateMatchingWorkflowInput struct {
 	// A description of the workflow.
 	Description *string
 
-	// An object which defines an incremental run type and has only incrementalRunType
-	// as a field.
+	// Optional. An object that defines the incremental run type. This object contains
+	// only the incrementalRunType field, which appears as "Automatic" in the console.
+	//
+	// For workflows where resolutionType is ML_MATCHING , incremental processing is
+	// not supported.
 	IncrementalRunConfig *types.IncrementalRunConfig
 
 	// The tags used to organize, track, or control access for this resource.
@@ -82,8 +87,8 @@ type CreateMatchingWorkflowOutput struct {
 	// This member is required.
 	InputSourceConfig []types.InputSource
 
-	// A list of OutputSource objects, each of which contains fields OutputS3Path ,
-	// ApplyNormalization , and Output .
+	// A list of OutputSource objects, each of which contains fields outputS3Path ,
+	// applyNormalization , KMSArn , and output .
 	//
 	// This member is required.
 	OutputSourceConfig []types.OutputSource
@@ -209,6 +214,36 @@ func (c *Client) addOperationCreateMatchingWorkflowMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

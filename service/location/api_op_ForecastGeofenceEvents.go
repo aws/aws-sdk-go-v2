@@ -11,17 +11,24 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Evaluates device positions against geofence geometries from a given geofence
-// collection. The event forecasts three states for which a device can be in
-// relative to a geofence:
+// This action forecasts future geofence events that are likely to occur within a
+// specified time horizon if a device continues moving at its current speed. Each
+// forecasted event is associated with a geofence from a provided geofence
+// collection. A forecast event can have one of the following states:
 //
-// ENTER : If a device is outside of a geofence, but would breach the fence if the
-// device is moving at its current speed within time horizon window.
+// ENTER : The device position is outside the referenced geofence, but the device
+// may cross into the geofence during the forecasting time horizon if it maintains
+// its current speed.
 //
-// EXIT : If a device is inside of a geofence, but would breach the fence if the
-// device is moving at its current speed within time horizon window.
+// EXIT : The device position is inside the referenced geofence, but the device may
+// leave the geofence during the forecasted time horizon if the device maintains
+// it's current speed.
 //
-// IDLE : If a device is inside of a geofence, and the device is not moving.
+// IDLE :The device is inside the geofence, and it will remain inside the geofence
+// through the end of the time horizon if the device maintains it's current speed.
+//
+// Heading direction is not considered in the current version. The API takes a
+// conservative approach and includes events that can occur for any heading.
 func (c *Client) ForecastGeofenceEvents(ctx context.Context, params *ForecastGeofenceEventsInput, optFns ...func(*Options)) (*ForecastGeofenceEventsOutput, error) {
 	if params == nil {
 		params = &ForecastGeofenceEventsInput{}
@@ -44,7 +51,10 @@ type ForecastGeofenceEventsInput struct {
 	// This member is required.
 	CollectionName *string
 
-	// The device's state, including current position and speed.
+	// Represents the device's state, including its current position and speed. When
+	// speed is omitted, this API performs a containment check. The containment check
+	// operation returns IDLE events for geofences where the device is currently
+	// inside of, but no other events.
 	//
 	// This member is required.
 	DeviceState *types.ForecastGeofenceEventsDeviceState
@@ -75,7 +85,11 @@ type ForecastGeofenceEventsInput struct {
 	// Default Value: KilometersPerHour .
 	SpeedUnit types.SpeedUnit
 
-	// Specifies the time horizon in minutes for the forecasted events.
+	// The forward-looking time window for forecasting, specified in minutes. The API
+	// only returns events that are predicted to occur within this time horizon. When
+	// no value is specified, this API performs a containment check. The containment
+	// check operation returns IDLE events for geofences where the device is currently
+	// inside of, but no other events.
 	TimeHorizonMinutes *float64
 
 	noSmithyDocumentSerde
@@ -197,6 +211,36 @@ func (c *Client) addOperationForecastGeofenceEventsMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

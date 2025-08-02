@@ -70,6 +70,10 @@ type CreateWorkflowVersionInput struct {
 	// The computational accelerator for this workflow version.
 	Accelerators types.Accelerators
 
+	// The repository information for the workflow version definition. This allows you
+	// to source your workflow version definition directly from a code repository.
+	DefinitionRepository *types.DefinitionRepository
+
 	// The URI specifies the location of the workflow definition for this workflow
 	// version.
 	DefinitionUri *string
@@ -89,6 +93,35 @@ type CreateWorkflowVersionInput struct {
 	// The parameter template defines the input parameters for runs that use this
 	// workflow version.
 	ParameterTemplate map[string]types.WorkflowParameter
+
+	// The path to the workflow version parameter template JSON file within the
+	// repository. This file defines the input parameters for runs that use this
+	// workflow version. If not specified, the workflow version will be created without
+	// a parameter template.
+	ParameterTemplatePath *string
+
+	// The markdown content for the workflow version's README file. This provides
+	// documentation and usage information for users of this specific workflow version.
+	//
+	// This value conforms to the media type: text/markdown
+	ReadmeMarkdown *string
+
+	// The path to the workflow version README markdown file within the repository.
+	// This file provides documentation and usage information for the workflow. If not
+	// specified, the README.md file from the root directory of the repository will be
+	// used.
+	ReadmePath *string
+
+	// The S3 URI of the README file for the workflow version. This file provides
+	// documentation and usage information for the workflow version. Requirements
+	// include:
+	//
+	//   - The S3 URI must begin with s3://USER-OWNED-BUCKET/
+	//
+	//   - The requester must have access to the S3 bucket and object.
+	//
+	//   - The max README content length is 500 KiB.
+	ReadmeUri *string
 
 	// The default static storage capacity (in gibibytes) for runs that use this
 	// workflow or workflow version.
@@ -232,6 +265,36 @@ func (c *Client) addOperationCreateWorkflowVersionMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

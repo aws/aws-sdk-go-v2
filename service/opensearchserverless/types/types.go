@@ -349,6 +349,23 @@ type EffectiveLifecyclePolicyErrorDetail struct {
 	noSmithyDocumentSerde
 }
 
+// Describes IAM federation options for an OpenSearch Serverless security
+// configuration in the form of a key-value map. These options define how
+// OpenSearch Serverless integrates with external identity providers using
+// federation.
+type IamFederationConfigOptions struct {
+
+	// The group attribute for this IAM federation integration. This attribute is used
+	// to map identity provider groups to OpenSearch Serverless permissions.
+	GroupAttribute *string
+
+	// The user attribute for this IAM federation integration. This attribute is used
+	// to identify users in the federated authentication process.
+	UserAttribute *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes IAM Identity Center options for an OpenSearch Serverless security
 // configuration in the form of a key-value map.
 type IamIdentityCenterConfigOptions struct {
@@ -502,7 +519,7 @@ type SamlConfigOptions struct {
 	// The group attribute for this SAML integration.
 	GroupAttribute *string
 
-	// Custom entity id attribute to override default entity id for this saml
+	// Custom entity ID attribute to override the default entity ID for this SAML
 	// integration.
 	OpenSearchServerlessEntityId *string
 
@@ -526,6 +543,11 @@ type SecurityConfigDetail struct {
 
 	// The description of the security configuration.
 	Description *string
+
+	// Describes IAM federation options in the form of a key-value map. Contains
+	// configuration details about how OpenSearch Serverless integrates with external
+	// identity providers through federation.
+	IamFederationOptions *IamFederationConfigOptions
 
 	// Describes IAM Identity Center options in the form of a key-value map.
 	IamIdentityCenterOptions *IamIdentityCenterConfigOptions

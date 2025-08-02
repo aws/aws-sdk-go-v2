@@ -12,11 +12,10 @@ import (
 	"time"
 )
 
-//	Returns the history of a Security Hub finding for the past 90 days. The
+//	Returns the history of a Security Hub finding. The history includes changes
 //
-// history includes changes made to any fields in the Amazon Web Services Security
-// Finding Format (ASFF) except top-level timestamp fields, such as the CreatedAt
-// and UpdatedAt fields.
+// made to any fields in the Amazon Web Services Security Finding Format (ASFF)
+// except top-level timestamp fields, such as the CreatedAt and UpdatedAt fields.
 //
 // This operation might return fewer results than the maximum number of results (
 // MaxResults ) specified in a request, even when more results are available. If
@@ -58,8 +57,7 @@ type GetFindingHistoryInput struct {
 	// timestamp of the finding to the EndTime . If you provide neither StartTime nor
 	// EndTime , Security Hub returns finding history from the CreatedAt timestamp of
 	// the finding to the time at which the API is called. In all of these scenarios,
-	// the response is limited to 100 results, and the maximum time period is limited
-	// to 90 days.
+	// the response is limited to 100 results.
 	//
 	// For more information about the validation and formatting of timestamp fields in
 	// Security Hub, see [Timestamps].
@@ -88,8 +86,7 @@ type GetFindingHistoryInput struct {
 	// timestamp of the finding to the EndTime . If you provide neither StartTime nor
 	// EndTime , Security Hub returns finding history from the CreatedAt timestamp of
 	// the finding to the time at which the API is called. In all of these scenarios,
-	// the response is limited to 100 results, and the maximum time period is limited
-	// to 90 days.
+	// the response is limited to 100 results.
 	//
 	// For more information about the validation and formatting of timestamp fields in
 	// Security Hub, see [Timestamps].
@@ -204,6 +201,36 @@ func (c *Client) addOperationGetFindingHistoryMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

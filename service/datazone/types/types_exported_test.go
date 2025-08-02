@@ -428,6 +428,24 @@ func ExampleListingItem_outputUsage() {
 var _ *types.AssetListing
 var _ *types.DataProductListing
 
+func ExampleMatchRationaleItem_outputUsage() {
+	var union types.MatchRationaleItem
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.MatchRationaleItemMemberTextMatches:
+		_ = v.Value // Value is []types.TextMatchItem
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.TextMatchItem
+
 func ExampleMember_outputUsage() {
 	var union types.Member
 	// type switches can be used to check the union value

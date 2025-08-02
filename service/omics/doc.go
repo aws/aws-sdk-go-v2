@@ -3,8 +3,14 @@
 // Package omics provides the API client, operations, and parameter types for
 // Amazon Omics.
 //
-// This is the AWS HealthOmics API Reference. For an introduction to the service,
-// see [What is AWS HealthOmics?]in the AWS HealthOmics User Guide.
+// Amazon Web Services HealthOmics is a service that helps users such as
+// bioinformaticians, researchers, and scientists to store, query, analyze, and
+// generate insights from genomics and other biological data. It simplifies and
+// accelerates the process of storing and analyzing genomic information for Amazon
+// Web Services.
 //
-// [What is AWS HealthOmics?]: https://docs.aws.amazon.com/omics/latest/dev/
+// For an introduction to the service, see [What is Amazon Web Services HealthOmics?] in the Amazon Web Services HealthOmics
+// User Guide.
+//
+// [What is Amazon Web Services HealthOmics?]: https://docs.aws.amazon.com/omics/latest/dev/what-is-healthomics.html
 package omics

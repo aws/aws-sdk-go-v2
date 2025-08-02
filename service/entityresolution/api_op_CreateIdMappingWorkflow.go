@@ -53,7 +53,7 @@ type CreateIdMappingWorkflowInput struct {
 	Description *string
 
 	// A list of IdMappingWorkflowOutputSource objects, each of which contains fields
-	// OutputS3Path and Output .
+	// outputS3Path and KMSArn .
 	OutputSourceConfig []types.IdMappingWorkflowOutputSource
 
 	// The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this
@@ -95,7 +95,7 @@ type CreateIdMappingWorkflowOutput struct {
 	Description *string
 
 	// A list of IdMappingWorkflowOutputSource objects, each of which contains fields
-	// OutputS3Path and Output .
+	// outputS3Path and KMSArn .
 	OutputSourceConfig []types.IdMappingWorkflowOutputSource
 
 	// The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this
@@ -194,6 +194,36 @@ func (c *Client) addOperationCreateIdMappingWorkflowMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

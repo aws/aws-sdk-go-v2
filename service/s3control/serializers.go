@@ -674,6 +674,19 @@ func awsRestxml_serializeOpDocumentCreateAccessPointInput(v *CreateAccessPointIn
 			return err
 		}
 	}
+	if v.Tags != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Tags",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentTagList(v.Tags, el); err != nil {
+			return err
+		}
+	}
 	if v.VpcConfiguration != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{

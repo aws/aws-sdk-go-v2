@@ -347,6 +347,48 @@ func (ColumnName) Values() []ColumnName {
 	}
 }
 
+type ComputationModelState string
+
+// Enum values for ComputationModelState
+const (
+	ComputationModelStateCreating ComputationModelState = "CREATING"
+	ComputationModelStateActive   ComputationModelState = "ACTIVE"
+	ComputationModelStateUpdating ComputationModelState = "UPDATING"
+	ComputationModelStateDeleting ComputationModelState = "DELETING"
+	ComputationModelStateFailed   ComputationModelState = "FAILED"
+)
+
+// Values returns all known values for ComputationModelState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ComputationModelState) Values() []ComputationModelState {
+	return []ComputationModelState{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"DELETING",
+		"FAILED",
+	}
+}
+
+type ComputationModelType string
+
+// Enum values for ComputationModelType
+const (
+	ComputationModelTypeAnomalyDetection ComputationModelType = "ANOMALY_DETECTION"
+)
+
+// Values returns all known values for ComputationModelType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ComputationModelType) Values() []ComputationModelType {
+	return []ComputationModelType{
+		"ANOMALY_DETECTION",
+	}
+}
+
 type ComputeLocation string
 
 // Enum values for ComputeLocation
@@ -541,6 +583,27 @@ func (ErrorCode) Values() []ErrorCode {
 	return []ErrorCode{
 		"VALIDATION_ERROR",
 		"INTERNAL_FAILURE",
+	}
+}
+
+type ExecutionState string
+
+// Enum values for ExecutionState
+const (
+	ExecutionStateRunning   ExecutionState = "RUNNING"
+	ExecutionStateCompleted ExecutionState = "COMPLETED"
+	ExecutionStateFailed    ExecutionState = "FAILED"
+)
+
+// Values returns all known values for ExecutionState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExecutionState) Values() []ExecutionState {
+	return []ExecutionState{
+		"RUNNING",
+		"COMPLETED",
+		"FAILED",
 	}
 }
 
@@ -931,6 +994,23 @@ func (RawValueType) Values() []RawValueType {
 	}
 }
 
+type ResolveToResourceType string
+
+// Enum values for ResolveToResourceType
+const (
+	ResolveToResourceTypeAsset ResolveToResourceType = "ASSET"
+)
+
+// Values returns all known values for ResolveToResourceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResolveToResourceType) Values() []ResolveToResourceType {
+	return []ResolveToResourceType{
+		"ASSET",
+	}
+}
+
 type ResourceType string
 
 // Enum values for ResourceType
@@ -998,7 +1078,8 @@ type TargetResourceType string
 
 // Enum values for TargetResourceType
 const (
-	TargetResourceTypeAsset TargetResourceType = "ASSET"
+	TargetResourceTypeAsset            TargetResourceType = "ASSET"
+	TargetResourceTypeComputationModel TargetResourceType = "COMPUTATION_MODEL"
 )
 
 // Values returns all known values for TargetResourceType. Note that this can be
@@ -1008,6 +1089,7 @@ const (
 func (TargetResourceType) Values() []TargetResourceType {
 	return []TargetResourceType{
 		"ASSET",
+		"COMPUTATION_MODEL",
 	}
 }
 

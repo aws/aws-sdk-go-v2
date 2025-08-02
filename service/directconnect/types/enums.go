@@ -360,6 +360,7 @@ const (
 	VirtualInterfaceStatePending    VirtualInterfaceState = "pending"
 	VirtualInterfaceStateAvailable  VirtualInterfaceState = "available"
 	VirtualInterfaceStateDown       VirtualInterfaceState = "down"
+	VirtualInterfaceStateTesting    VirtualInterfaceState = "testing"
 	VirtualInterfaceStateDeleting   VirtualInterfaceState = "deleting"
 	VirtualInterfaceStateDeleted    VirtualInterfaceState = "deleted"
 	VirtualInterfaceStateRejected   VirtualInterfaceState = "rejected"
@@ -377,6 +378,7 @@ func (VirtualInterfaceState) Values() []VirtualInterfaceState {
 		"pending",
 		"available",
 		"down",
+		"testing",
 		"deleting",
 		"deleted",
 		"rejected",

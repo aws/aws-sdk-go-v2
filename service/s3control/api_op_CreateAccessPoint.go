@@ -125,6 +125,14 @@ type CreateAccessPointInput struct {
 	// [Managing access to shared datasets in directory buckets with access points]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-directory-buckets.html
 	Scope *types.Scope
 
+	// An array of tags that you can apply to an access point. Tags are key-value
+	// pairs of metadata used to control access to your access points. For more
+	// information about tags, see [Using tags with Amazon S3]. For information about tagging access points, see [Using tags for attribute-based access control (ABAC)].
+	//
+	// [Using tags with Amazon S3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html
+	// [Using tags for attribute-based access control (ABAC)]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html#using-tags-for-abac
+	Tags []types.Tag
+
 	// If you include this field, Amazon S3 restricts access to this access point to
 	// requests from the specified virtual private cloud (VPC).
 	//
@@ -262,6 +270,36 @@ func (c *Client) addOperationCreateAccessPointMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = s3controlcust.AddDisableHostPrefixMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

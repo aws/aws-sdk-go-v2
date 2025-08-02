@@ -1250,6 +1250,11 @@ func validateResolutionTechniques(v *types.ResolutionTechniques) error {
 			invalidParams.AddNested("RuleBasedProperties", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.RuleConditionProperties != nil {
+		if err := validateRuleConditionProperties(v.RuleConditionProperties); err != nil {
+			invalidParams.AddNested("RuleConditionProperties", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.ProviderProperties != nil {
 		if err := validateProviderProperties(v.ProviderProperties); err != nil {
 			invalidParams.AddNested("ProviderProperties", err.(smithy.InvalidParamsError))
@@ -1294,6 +1299,60 @@ func validateRuleBasedProperties(v *types.RuleBasedProperties) error {
 	}
 	if len(v.AttributeMatchingModel) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("AttributeMatchingModel"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRuleCondition(v *types.RuleCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RuleCondition"}
+	if v.RuleName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleName"))
+	}
+	if v.Condition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Condition"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRuleConditionList(v []types.RuleCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RuleConditionList"}
+	for i := range v {
+		if err := validateRuleCondition(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRuleConditionProperties(v *types.RuleConditionProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RuleConditionProperties"}
+	if v.Rules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Rules"))
+	} else if v.Rules != nil {
+		if err := validateRuleConditionList(v.Rules); err != nil {
+			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

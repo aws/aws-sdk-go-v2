@@ -18,12 +18,12 @@ import (
 // investigations, you must use this operation to create a policy similar to this
 // example.
 //
-//	{ "Version": "2008-10-17", "Statement": [{ "Effect": "Allow", "Principal": {
-//	"Service": "aiops.alarms.cloudwatch.amazonaws.com" }, "Action":
-//	["aiops:CreateInvestigation", "aiops:CreateInvestigationEvent"], "Resource":
+//	{ "Version": "2008-10-17", "Statement": [ { "Effect": "Allow", "Principal": {
+//	"Service": "aiops.alarms.cloudwatch.amazonaws.com" }, "Action": [
+//	"aiops:CreateInvestigation", "aiops:CreateInvestigationEvent" ], "Resource":
 //	"*", "Condition": { "StringEquals": { "aws:SourceAccount": "account-id" },
 //	"ArnLike": { "aws:SourceArn": "arn:aws:cloudwatch:region:account-id:alarm:*" } }
-//	}] }
+//	} ] }
 func (c *Client) PutInvestigationGroupPolicy(ctx context.Context, params *PutInvestigationGroupPolicyInput, optFns ...func(*Options)) (*PutInvestigationGroupPolicyOutput, error) {
 	if params == nil {
 		params = &PutInvestigationGroupPolicyInput{}
@@ -152,6 +152,36 @@ func (c *Client) addOperationPutInvestigationGroupPolicyMiddlewares(stack *middl
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

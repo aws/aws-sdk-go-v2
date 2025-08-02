@@ -33,6 +33,15 @@ import (
 // [DescribeCertificateAuthority]action returns the time remaining in the restoration window of a private CA in
 // the DELETED state. To restore an eligible CA, call the [RestoreCertificateAuthority] action.
 //
+// A private CA can be deleted if it is in the PENDING_CERTIFICATE , CREATING ,
+// EXPIRED , DISABLED , or FAILED state. To delete a CA in the ACTIVE state, you
+// must first disable it, or else the delete request results in an exception. If
+// you are deleting a private CA in the PENDING_CERTIFICATE or DISABLED state, you
+// can set the length of its restoration period to 7-30 days. The default is 30.
+// During this time, the status is set to DELETED and the CA can be restored. A
+// private CA deleted in the CREATING or FAILED state has no assigned restoration
+// period and cannot be restored.
+//
 // [ListCertificateAuthorities]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html
 // [RestoreCertificateAuthority]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_RestoreCertificateAuthority.html
 // [UpdateCertificateAuthority]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_UpdateCertificateAuthority.html
@@ -166,6 +175,36 @@ func (c *Client) addOperationDeleteCertificateAuthorityMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

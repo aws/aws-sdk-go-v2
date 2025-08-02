@@ -2350,6 +2350,23 @@ func awsAwsjson10_serializeDocumentCreateIamIdentityCenterConfigOptions(v *types
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentIamFederationConfigOptions(v *types.IamFederationConfigOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GroupAttribute != nil {
+		ok := object.Key("groupAttribute")
+		ok.String(*v.GroupAttribute)
+	}
+
+	if v.UserAttribute != nil {
+		ok := object.Key("userAttribute")
+		ok.String(*v.UserAttribute)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentLifecyclePolicyIdentifier(v *types.LifecyclePolicyIdentifier, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2745,6 +2762,13 @@ func awsAwsjson10_serializeOpDocumentCreateSecurityConfigInput(v *CreateSecurity
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
+	}
+
+	if v.IamFederationOptions != nil {
+		ok := object.Key("iamFederationOptions")
+		if err := awsAwsjson10_serializeDocumentIamFederationConfigOptions(v.IamFederationOptions, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.IamIdentityCenterOptions != nil {
@@ -3353,6 +3377,13 @@ func awsAwsjson10_serializeOpDocumentUpdateSecurityConfigInput(v *UpdateSecurity
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
+	}
+
+	if v.IamFederationOptions != nil {
+		ok := object.Key("iamFederationOptions")
+		if err := awsAwsjson10_serializeDocumentIamFederationConfigOptions(v.IamFederationOptions, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.IamIdentityCenterOptionsUpdates != nil {

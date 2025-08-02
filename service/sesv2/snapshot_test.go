@@ -242,6 +242,30 @@ func TestCheckSnapshot_CreateMultiRegionEndpoint(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateTenant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateTenant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateTenant")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateTenantResourceAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateTenantResourceAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateTenantResourceAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteConfigurationSet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteConfigurationSet(context.Background(), nil, func(o *Options) {
@@ -367,6 +391,30 @@ func TestCheckSnapshot_DeleteSuppressedDestination(t *testing.T) {
 	_, err := svc.DeleteSuppressedDestination(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteSuppressedDestination")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteTenant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTenant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteTenant")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteTenantResourceAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTenantResourceAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteTenantResourceAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -626,11 +674,35 @@ func TestCheckSnapshot_GetMultiRegionEndpoint(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetReputationEntity(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetReputationEntity(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetReputationEntity")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetSuppressedDestination(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetSuppressedDestination(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetSuppressedDestination")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetTenant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTenant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetTenant")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -794,6 +866,30 @@ func TestCheckSnapshot_ListRecommendations(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListReputationEntities(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListReputationEntities(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListReputationEntities")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListResourceTenants(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListResourceTenants(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListResourceTenants")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListSuppressedDestinations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListSuppressedDestinations(context.Background(), nil, func(o *Options) {
@@ -811,6 +907,30 @@ func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListTenantResources(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTenantResources(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListTenantResources")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListTenants(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTenants(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListTenants")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1225,6 +1345,30 @@ func TestCheckSnapshot_UpdateEmailTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_UpdateReputationEntityCustomerManagedStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateReputationEntityCustomerManagedStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateReputationEntityCustomerManagedStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateReputationEntityPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateReputationEntityPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateReputationEntityPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_BatchGetMetricData(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchGetMetricData(context.Background(), nil, func(o *Options) {
@@ -1405,6 +1549,30 @@ func TestUpdateSnapshot_CreateMultiRegionEndpoint(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateTenant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateTenant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateTenant")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateTenantResourceAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateTenantResourceAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateTenantResourceAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteConfigurationSet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteConfigurationSet(context.Background(), nil, func(o *Options) {
@@ -1530,6 +1698,30 @@ func TestUpdateSnapshot_DeleteSuppressedDestination(t *testing.T) {
 	_, err := svc.DeleteSuppressedDestination(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteSuppressedDestination")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteTenant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTenant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteTenant")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteTenantResourceAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTenantResourceAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteTenantResourceAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1789,11 +1981,35 @@ func TestUpdateSnapshot_GetMultiRegionEndpoint(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetReputationEntity(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetReputationEntity(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetReputationEntity")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetSuppressedDestination(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetSuppressedDestination(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetSuppressedDestination")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetTenant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTenant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetTenant")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1957,6 +2173,30 @@ func TestUpdateSnapshot_ListRecommendations(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListReputationEntities(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListReputationEntities(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListReputationEntities")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListResourceTenants(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListResourceTenants(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListResourceTenants")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListSuppressedDestinations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListSuppressedDestinations(context.Background(), nil, func(o *Options) {
@@ -1974,6 +2214,30 @@ func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListTenantResources(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTenantResources(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListTenantResources")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListTenants(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTenants(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListTenants")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2382,6 +2646,30 @@ func TestUpdateSnapshot_UpdateEmailTemplate(t *testing.T) {
 	_, err := svc.UpdateEmailTemplate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateEmailTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateReputationEntityCustomerManagedStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateReputationEntityCustomerManagedStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateReputationEntityCustomerManagedStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateReputationEntityPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateReputationEntityPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateReputationEntityPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

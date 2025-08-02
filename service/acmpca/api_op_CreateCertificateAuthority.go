@@ -72,18 +72,19 @@ type CreateCertificateAuthorityInput struct {
 	// you are requesting multiple certificate authorities.
 	IdempotencyToken *string
 
-	// Specifies a cryptographic key management compliance standard used for handling
-	// CA keys.
+	// Specifies a cryptographic key management compliance standard for handling and
+	// protecting CA keys.
 	//
 	// Default: FIPS_140_2_LEVEL_3_OR_HIGHER
 	//
-	// Some Amazon Web Services Regions do not support the default. When creating a CA
-	// in these Regions, you must provide FIPS_140_2_LEVEL_2_OR_HIGHER as the argument
-	// for KeyStorageSecurityStandard . Failure to do this results in an
-	// InvalidArgsException with the message, "A certificate authority cannot be
+	// Some Amazon Web Services Regions don't support the default value. When you
+	// create a CA in these Regions, you must use CCPC_LEVEL_1_OR_HIGHER for the
+	// KeyStorageSecurityStandard parameter. If you don't, the operation returns an
+	// InvalidArgsException with this message: "A certificate authority cannot be
 	// created in this region with the specified security standard."
 	//
-	// For information about security standard support in various Regions, see [Storage and security compliance of Amazon Web Services Private CA private keys].
+	// For information about security standard support in different Amazon Web
+	// Services Regions, see [Storage and security compliance of Amazon Web Services Private CA private keys].
 	//
 	// [Storage and security compliance of Amazon Web Services Private CA private keys]: https://docs.aws.amazon.com/privateca/latest/userguide/data-protection.html#private-keys
 	KeyStorageSecurityStandard types.KeyStorageSecurityStandard
@@ -234,6 +235,36 @@ func (c *Client) addOperationCreateCertificateAuthorityMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

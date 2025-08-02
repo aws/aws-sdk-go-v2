@@ -86,9 +86,9 @@ type SearchPlaceIndexForSuggestionsInput struct {
 	// match any of the categories listed.
 	//
 	// For more information about using categories, including a list of Amazon
-	// Location categories, see [Categories and filtering], in the Amazon Location Service Developer Guide.
+	// Location categories, see [Categories and filtering], in the Amazon Location Service developer guide.
 	//
-	// [Categories and filtering]: https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html
+	// [Categories and filtering]: https://docs.aws.amazon.com/location/previous/developerguide/category-filtering.html
 	FilterCategories []string
 
 	// An optional parameter that limits the search results by returning only
@@ -102,7 +102,7 @@ type SearchPlaceIndexForSuggestionsInput struct {
 
 	// The optional [API key] to authorize the request.
 	//
-	// [API key]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+	// [API key]: https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html
 	Key *string
 
 	// The preferred language used to return results. The value must be a valid [BCP 47]
@@ -242,6 +242,36 @@ func (c *Client) addOperationSearchPlaceIndexForSuggestionsMiddlewares(stack *mi
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

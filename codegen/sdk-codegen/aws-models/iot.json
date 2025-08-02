@@ -337,6 +337,9 @@
                     "target": "com.amazonaws.iot#DescribeDomainConfiguration"
                 },
                 {
+                    "target": "com.amazonaws.iot#DescribeEncryptionConfiguration"
+                },
+                {
                     "target": "com.amazonaws.iot#DescribeEndpoint"
                 },
                 {
@@ -785,6 +788,9 @@
                 },
                 {
                     "target": "com.amazonaws.iot#UpdateDynamicThingGroup"
+                },
+                {
+                    "target": "com.amazonaws.iot#UpdateEncryptionConfiguration"
                 },
                 {
                     "target": "com.amazonaws.iot#UpdateEventConfigurations"
@@ -6823,6 +6829,49 @@
                 "smithy.api#documentation": "<p>Configuration.</p>"
             }
         },
+        "com.amazonaws.iot#ConfigurationDetails": {
+            "type": "structure",
+            "members": {
+                "configurationStatus": {
+                    "target": "com.amazonaws.iot#ConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The health status of KMS key and KMS access role. If either KMS key or KMS access role\n         is <code>UNHEALTHY</code>, the return value will be <code>UNHEALTHY</code>. To use a\n         customer-managed KMS key, the value of <code>configurationStatus</code> must be\n            <code>HEALTHY</code>. </p>"
+                    }
+                },
+                "errorCode": {
+                    "target": "com.amazonaws.iot#ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code that indicates either the KMS key or the KMS access role is <code>UNHEALTHY</code>. \n         Valid values: <code>KMS_KEY_VALIDATION_ERROR</code> and <code>ROLE_VALIDATION_ERROR</code>.\n      </p>"
+                    }
+                },
+                "errorMessage": {
+                    "target": "com.amazonaws.iot#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The detailed error message that corresponds to the <code>errorCode</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The encryption configuration details that include the status information of the Amazon Web Services Key Management Service (KMS) key and the KMS access role.</p>"
+            }
+        },
+        "com.amazonaws.iot#ConfigurationStatus": {
+            "type": "enum",
+            "members": {
+                "HEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HEALTHY"
+                    }
+                },
+                "UNHEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNHEALTHY"
+                    }
+                }
+            }
+        },
         "com.amazonaws.iot#ConfirmTopicRuleDestination": {
             "type": "operation",
             "input": {
@@ -10353,6 +10402,9 @@
                 },
                 {
                     "target": "com.amazonaws.iot#SqlParseException"
+                },
+                {
+                    "target": "com.amazonaws.iot#UnauthorizedException"
                 }
             ],
             "traits": {
@@ -10387,6 +10439,9 @@
                 },
                 {
                     "target": "com.amazonaws.iot#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iot#UnauthorizedException"
                 }
             ],
             "traits": {
@@ -14206,6 +14261,85 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.iot#DescribeEncryptionConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#DescribeEncryptionConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#DescribeEncryptionConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iot#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the encryption configuration for resources and data of your Amazon Web Services account in\n         Amazon Web Services IoT Core. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/key-management.html\">Key management in IoT</a> from\n         the <i>Amazon Web Services IoT Core Developer Guide</i>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/encryption-configuration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot#DescribeEncryptionConfigurationRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iot#DescribeEncryptionConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "encryptionType": {
+                    "target": "com.amazonaws.iot#EncryptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the Amazon Web Services Key Management Service (KMS) key.</p>"
+                    }
+                },
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.iot#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role assumed by Amazon Web Services IoT Core to call KMS on\n         behalf of the customer.</p>"
+                    }
+                },
+                "kmsAccessRoleArn": {
+                    "target": "com.amazonaws.iot#KmsAccessRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the customer-managed KMS key.</p>"
+                    }
+                },
+                "configurationDetails": {
+                    "target": "com.amazonaws.iot#ConfigurationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption configuration details that include the status information of the KMS key\n         and the KMS access role.</p>"
+                    }
+                },
+                "lastModifiedDate": {
+                    "target": "com.amazonaws.iot#DateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when encryption configuration is last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.iot#DescribeEndpoint": {
             "type": "operation",
             "input": {
@@ -17428,6 +17562,23 @@
         },
         "com.amazonaws.iot#EnabledBoolean": {
             "type": "boolean"
+        },
+        "com.amazonaws.iot#EncryptionType": {
+            "type": "enum",
+            "members": {
+                "CUSTOMER_MANAGED_KMS_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER_MANAGED_KMS_KEY"
+                    }
+                },
+                "AWS_OWNED_KMS_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_OWNED_KMS_KEY"
+                    }
+                }
+            }
         },
         "com.amazonaws.iot#EndpointAddress": {
             "type": "string"
@@ -21588,6 +21739,24 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes an action to write data to an Amazon Kinesis stream.</p>"
+            }
+        },
+        "com.amazonaws.iot#KmsAccessRoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.iot#KmsKeyArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                }
             }
         },
         "com.amazonaws.iot#LambdaAction": {
@@ -27469,6 +27638,9 @@
                 },
                 {
                     "target": "com.amazonaws.iot#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iot#UnauthorizedException"
                 }
             ],
             "traits": {
@@ -35519,7 +35691,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Transfers the specified certificate to the specified Amazon Web Services account.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">TransferCertificate</a> action.</p>\n         <p>You can cancel the transfer until it is acknowledged by the recipient.</p>\n         <p>No notification is sent to the transfer destination's account. It is up to the caller\n         to notify the transfer target.</p>\n         <p>The certificate being transferred must not be in the ACTIVE state. You can use the\n         <a>UpdateCertificate</a> action to deactivate it.</p>\n         <p>The certificate must not have any policies attached to it. You can use the\n         <a>DetachPolicy</a> action to detach them.</p>",
+                "smithy.api#documentation": "<p>Transfers the specified certificate to the specified Amazon Web Services account.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">TransferCertificate</a> action.</p>\n         <p>You can cancel the transfer until it is acknowledged by the recipient.</p>\n         <p>No notification is sent to the transfer destination's account. It's up to the caller\n         to notify the transfer target.</p>\n         <p>The certificate being transferred must not be in the <code>ACTIVE</code> state. You can use the\n         <a>UpdateCertificate</a> action to deactivate it.</p>\n         <p>The certificate must not have any policies attached to it. You can use the\n         <a>DetachPolicy</a> action to detach them.</p>\n         <p>\n            <b>Customer managed key behavior:</b> When you use a customer managed key to secure your data and then transfer\n         the key to a customer in a different account using the <a>TransferCertificate</a> operation, the certificates will no longer be protected by their \n         customer managed key configuration. During the transfer process, certificates are encrypted using IoT owned keys.</p>\n         <p>While a certificate is in the <b>PENDING_TRANSFER</b> state, it's always protected by IoT owned keys, regardless of the customer managed key configuration of either the source or destination account. </p>\n         <p>Once the transfer is completed through <a>AcceptCertificateTransfer</a>, <a>RejectCertificateTransfer</a>, or\n         <a>CancelCertificateTransfer</a>, the certificate will be protected by the customer managed key configuration of the account that owns\n         the certificate after the transfer operation:</p>\n         <ul>\n            <li>\n               <p>If the transfer is accepted: The certificate is protected by the destination account's customer managed key configuration.</p>\n            </li>\n            <li>\n               <p>If the transfer is rejected or cancelled: The certificate is protected by the source account's customer managed key configuration.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/transfer-certificate/{certificateId}",
@@ -36834,6 +37006,85 @@
                     }
                 }
             },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.iot#UpdateEncryptionConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#UpdateEncryptionConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#UpdateEncryptionConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iot#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the encryption configuration. By default, all Amazon Web Services IoT Core data at rest is\n         encrypted using Amazon Web Services owned keys. Amazon Web Services IoT Core also supports symmetric customer managed keys\n         from Amazon Web Services Key Management Service (KMS). With customer managed keys, you create, own, and\n         manage the KMS keys in your Amazon Web Services account. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/data-encryption.html\">Data\n            encryption</a> in the <i>Amazon Web Services IoT Core Developer Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "UpdateEncryptionConfiguration example",
+                        "documentation": "This operation updates the encryption configuration. ",
+                        "input": {
+                            "encryptionType": "CUSTOMER_MANAGED_KMS_KEY",
+                            "kmsKeyArn": "arn:aws:iam:us-west-2:111122223333:role/myrole",
+                            "kmsAccessRoleArn": "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/encryption-configuration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot#UpdateEncryptionConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "encryptionType": {
+                    "target": "com.amazonaws.iot#EncryptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the Amazon Web Services Key Management Service (KMS) key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.iot#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the customer-managed KMS key.</p>"
+                    }
+                },
+                "kmsAccessRoleArn": {
+                    "target": "com.amazonaws.iot#KmsAccessRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role assumed by Amazon Web Services IoT Core to call KMS on\n         behalf of the customer.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iot#UpdateEncryptionConfigurationResponse": {
+            "type": "structure",
+            "members": {},
             "traits": {
                 "smithy.api#output": {}
             }

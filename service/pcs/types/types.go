@@ -445,9 +445,11 @@ type Endpoint struct {
 	// This member is required.
 	Port *string
 
-	// The endpoint's private IP address.
+	// For clusters that use IPv4, this is the endpoint's private IP address.
 	//
-	// Example: 2.2.2.2
+	// Example: 10.1.2.3
+	//
+	// For clusters configured to use IPv6, this is an empty string.
 	//
 	// This member is required.
 	PrivateIpAddress *string
@@ -457,9 +459,14 @@ type Endpoint struct {
 	// This member is required.
 	Type EndpointType
 
+	// The endpoint's IPv6 address.
+	//
+	// Example: 2001:db8::1
+	Ipv6Address *string
+
 	// The endpoint's public IP address.
 	//
-	// Example: 1.1.1.1
+	// Example: 192.0.2.1
 	PublicIpAddress *string
 
 	noSmithyDocumentSerde
@@ -493,6 +500,9 @@ type InstanceConfig struct {
 // The networking configuration for the cluster's control plane.
 type Networking struct {
 
+	// The IP address version the cluster uses. The default is IPV4 .
+	NetworkType NetworkType
+
 	// The list of security group IDs associated with the Elastic Network Interface
 	// (ENI) created in subnets.
 	//
@@ -512,7 +522,7 @@ type Networking struct {
 	//
 	//   - Ports: All
 	//
-	//   - Destination: 0.0.0.0/0 (IPv4)
+	//   - Destination: 0.0.0.0/0 (IPv4) or ::/0 (IPv6)
 	//
 	//   - Outbound rule 2
 	//
@@ -536,6 +546,9 @@ type Networking struct {
 
 // The networking configuration for the cluster's control plane.
 type NetworkingRequest struct {
+
+	// The IP address version the cluster uses. The default is IPV4 .
+	NetworkType NetworkType
 
 	// A list of security group IDs associated with the Elastic Network Interface
 	// (ENI) created in subnets.

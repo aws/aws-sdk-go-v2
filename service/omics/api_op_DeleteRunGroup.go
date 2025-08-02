@@ -10,7 +10,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a workflow run group.
+// Deletes a run group and returns a response with no body if the operation is
+// successful.
+//
+// To verify that the run group is deleted:
+//
+//   - Use ListRunGroups to confirm the workflow no longer appears in the list.
+//
+//   - Use GetRunGroup to verify the workflow cannot be found.
 func (c *Client) DeleteRunGroup(ctx context.Context, params *DeleteRunGroupInput, optFns ...func(*Options)) (*DeleteRunGroupOutput, error) {
 	if params == nil {
 		params = &DeleteRunGroupInput{}
@@ -132,6 +139,36 @@ func (c *Client) addOperationDeleteRunGroupMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

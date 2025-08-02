@@ -69,6 +69,11 @@ type UpdateJobQueueInput struct {
 	// aws:aws:batch:us-west-2:123456789012:scheduling-policy/MySchedulingPolicy .
 	SchedulingPolicyArn *string
 
+	// The order of the service environment associated with the job queue. Job queues
+	// with a higher priority are evaluated first when associated with the same service
+	// environment.
+	ServiceEnvironmentOrder []types.ServiceEnvironmentOrder
+
 	// Describes the queue's ability to accept new jobs. If the job queue state is
 	// ENABLED , it can accept jobs. If the job queue state is DISABLED , new jobs
 	// can't be added to the queue, but jobs already in the queue can finish.
@@ -177,6 +182,36 @@ func (c *Client) addOperationUpdateJobQueueMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

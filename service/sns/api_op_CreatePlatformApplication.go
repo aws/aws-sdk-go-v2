@@ -35,10 +35,10 @@ import (
 //
 //   - For GCM (Firebase Cloud Messaging) using token credentials, there is no
 //     PlatformPrincipal . The PlatformCredential is a JSON formatted private key
-//     file. When using the Amazon Web Services CLI, the file must be in string format
-//     and special characters must be ignored. To format the file correctly, Amazon SNS
-//     recommends using the following command: SERVICE_JSON=`jq @json <<< cat
-//     service.json` .
+//     file. When using the Amazon Web Services CLI or Amazon Web Services SDKs, the
+//     file must be in string format and special characters must be ignored. To format
+//     the file correctly, Amazon SNS recommends using the following command:
+//     SERVICE_JSON=$(jq @json < service.json) .
 //
 //   - For MPNS, PlatformPrincipal is TLS certificate and PlatformCredential is
 //     private key .
@@ -188,6 +188,36 @@ func (c *Client) addOperationCreatePlatformApplicationMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {

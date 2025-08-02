@@ -37,6 +37,10 @@ type SearchListingsInput struct {
 	// Specifies additional attributes for the search.
 	AdditionalAttributes []types.SearchOutputAdditionalAttribute
 
+	// Enables you to specify one or more attributes to compute and return counts
+	// grouped by field values.
+	Aggregations []types.AggregationListItem
+
 	// Specifies the filters for the search of listings.
 	Filters types.FilterClause
 
@@ -66,6 +70,10 @@ type SearchListingsInput struct {
 }
 
 type SearchListingsOutput struct {
+
+	// Contains computed counts grouped by field values based on the requested
+	// aggregation attributes for the matching listings.
+	Aggregates []types.AggregationOutput
 
 	// The results of the SearchListings action.
 	Items []types.SearchResultItem
@@ -172,6 +180,36 @@ func (c *Client) addOperationSearchListingsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptExecution(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSerialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterSigning(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptTransmit(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptBeforeDeserialization(stack, options); err != nil {
+		return err
+	}
+	if err = addInterceptAfterDeserialization(stack, options); err != nil {
 		return err
 	}
 	if err = addSpanInitializeStart(stack); err != nil {
