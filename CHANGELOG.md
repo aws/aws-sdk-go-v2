@@ -1,3 +1,21 @@
+# Release (2025-08-04)
+
+## General Highlights
+* **Feature**: Support configurable auth scheme preferences in service clients via AWS_AUTH_SCHEME_PREFERENCE in the environment, auth_scheme_preference in the config file, and through in-code settings on LoadDefaultConfig and client constructor methods.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.2.0](service/bedrockagentcore/CHANGELOG.md#v120-2025-08-04)
+  * **Feature**: Remove superfluous field from API
+* `github.com/aws/aws-sdk-go-v2/service/codeconnections`: [v1.8.0](service/codeconnections/CHANGELOG.md#v180-2025-08-04)
+  * **Feature**: New integration with Azure DevOps provider type.
+* `github.com/aws/aws-sdk-go-v2/service/evs`: [v1.2.0](service/evs/CHANGELOG.md#v120-2025-08-04)
+  * **Feature**: TagResource API now throws ServiceQuotaExceededException when the number of tags on the Amazon EVS resource exceeds the maximum allowed. TooManyTagsException is deprecated.
+* `github.com/aws/aws-sdk-go-v2/service/iotsitewise`: [v1.49.0](service/iotsitewise/CHANGELOG.md#v1490-2025-08-04)
+  * **Feature**: Support Interface for IoT SiteWise Asset Modeling
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.204.0](service/sagemaker/CHANGELOG.md#v12040-2025-08-04)
+  * **Feature**: This release adds the ability for customers to attach and detach their EBS volumes to EKS-orchestrated HyperPod cluster nodes.
+
 # Release (2025-08-01)
 
 ## Module Highlights

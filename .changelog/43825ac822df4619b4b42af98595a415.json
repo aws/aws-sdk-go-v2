@@ -1,8 +1,0 @@
-{
-    "id": "43825ac8-22df-4619-b4b4-2af98595a415",
-    "type": "feature",
-    "description": "TagResource API now throws ServiceQuotaExceededException when the number of tags on the Amazon EVS resource exceeds the maximum allowed. TooManyTagsException is deprecated.",
-    "modules": [
-        "service/evs"
-    ]
-}

@@ -1,3 +1,8 @@
+# v1.9.0 (2025-08-04)
+
+* **Feature**: Support configurable auth scheme preferences in service clients via AWS_AUTH_SCHEME_PREFERENCE in the environment, auth_scheme_preference in the config file, and through in-code settings on LoadDefaultConfig and client constructor methods.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.8.0 (2025-08-01)
 
 * **Feature**: Add support for IPv6 Networking for Clusters.

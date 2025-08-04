@@ -1,8 +1,0 @@
-{
-    "id": "9092e5fc-0c40-4db8-bf20-0e443800b288",
-    "type": "feature",
-    "description": "This release adds the ability for customers to attach and detach their EBS volumes to EKS-orchestrated HyperPod cluster nodes.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "0d3a29cd-e57b-4fb1-af76-3f37e6aa5ba5",
-    "type": "feature",
-    "description": "New integration with Azure DevOps provider type.",
-    "modules": [
-        "service/codeconnections"
-    ]
-}
