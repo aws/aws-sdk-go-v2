@@ -3,6 +3,8 @@
 // Package evs provides the API client, operations, and parameter types for Amazon
 // Elastic VMware Service.
 //
+// Amazon EVS is in public preview release and is subject to change.
+//
 // Amazon Elastic VMware Service (Amazon EVS) is a service that you can use to
 // deploy a VMware Cloud Foundation (VCF) software environment directly on EC2 bare
 // metal instances within an Amazon Virtual Private Cloud (VPC).

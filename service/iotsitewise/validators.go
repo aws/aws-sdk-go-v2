@@ -470,6 +470,26 @@ func (m *validateOpDeleteAssetModel) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteAssetModelInterfaceRelationship struct {
+}
+
+func (*validateOpDeleteAssetModelInterfaceRelationship) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAssetModelInterfaceRelationship) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAssetModelInterfaceRelationshipInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAssetModelInterfaceRelationshipInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteComputationModel struct {
 }
 
@@ -705,6 +725,26 @@ func (m *validateOpDescribeAssetModel) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeAssetModelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeAssetModelInterfaceRelationship struct {
+}
+
+func (*validateOpDescribeAssetModelInterfaceRelationship) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAssetModelInterfaceRelationship) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAssetModelInterfaceRelationshipInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAssetModelInterfaceRelationshipInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1310,6 +1350,26 @@ func (m *validateOpListExecutions) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListInterfaceRelationships struct {
+}
+
+func (*validateOpListInterfaceRelationships) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListInterfaceRelationships) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListInterfaceRelationshipsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListInterfaceRelationshipsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListProjectAssets struct {
 }
 
@@ -1365,6 +1425,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutAssetModelInterfaceRelationship struct {
+}
+
+func (*validateOpPutAssetModelInterfaceRelationship) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutAssetModelInterfaceRelationship) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutAssetModelInterfaceRelationshipInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutAssetModelInterfaceRelationshipInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1802,6 +1882,10 @@ func addOpDeleteAssetModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAssetModel{}, middleware.After)
 }
 
+func addOpDeleteAssetModelInterfaceRelationshipValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAssetModelInterfaceRelationship{}, middleware.After)
+}
+
 func addOpDeleteComputationModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteComputationModel{}, middleware.After)
 }
@@ -1848,6 +1932,10 @@ func addOpDescribeAssetModelCompositeModelValidationMiddleware(stack *middleware
 
 func addOpDescribeAssetModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeAssetModel{}, middleware.After)
+}
+
+func addOpDescribeAssetModelInterfaceRelationshipValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAssetModelInterfaceRelationship{}, middleware.After)
 }
 
 func addOpDescribeAssetPropertyValidationMiddleware(stack *middleware.Stack) error {
@@ -1970,6 +2058,10 @@ func addOpListExecutionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListExecutions{}, middleware.After)
 }
 
+func addOpListInterfaceRelationshipsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListInterfaceRelationships{}, middleware.After)
+}
+
 func addOpListProjectAssetsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListProjectAssets{}, middleware.After)
 }
@@ -1980,6 +2072,10 @@ func addOpListProjectsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpPutAssetModelInterfaceRelationshipValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutAssetModelInterfaceRelationship{}, middleware.After)
 }
 
 func addOpPutDefaultEncryptionConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -3134,12 +3230,7 @@ func validateMetric(v *types.Metric) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Metric"}
-	if v.Expression == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Expression"))
-	}
-	if v.Variables == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Variables"))
-	} else if v.Variables != nil {
+	if v.Variables != nil {
 		if err := validateExpressionVariables(v.Variables); err != nil {
 			invalidParams.AddNested("Variables", err.(smithy.InvalidParamsError))
 		}
@@ -3236,6 +3327,58 @@ func validateProjectResource(v *types.ProjectResource) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ProjectResource"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePropertyMapping(v *types.PropertyMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PropertyMapping"}
+	if v.AssetModelPropertyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetModelPropertyId"))
+	}
+	if v.InterfaceAssetModelPropertyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InterfaceAssetModelPropertyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePropertyMappingConfiguration(v *types.PropertyMappingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PropertyMappingConfiguration"}
+	if v.Overrides != nil {
+		if err := validatePropertyMappings(v.Overrides); err != nil {
+			invalidParams.AddNested("Overrides", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePropertyMappings(v []types.PropertyMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PropertyMappings"}
+	for i := range v {
+		if err := validatePropertyMapping(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4005,6 +4148,24 @@ func validateOpDeleteAssetModelInput(v *DeleteAssetModelInput) error {
 	}
 }
 
+func validateOpDeleteAssetModelInterfaceRelationshipInput(v *DeleteAssetModelInterfaceRelationshipInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAssetModelInterfaceRelationshipInput"}
+	if v.AssetModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetModelId"))
+	}
+	if v.InterfaceAssetModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InterfaceAssetModelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteComputationModelInput(v *DeleteComputationModelInput) error {
 	if v == nil {
 		return nil
@@ -4183,6 +4344,24 @@ func validateOpDescribeAssetModelInput(v *DescribeAssetModelInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeAssetModelInput"}
 	if v.AssetModelId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssetModelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeAssetModelInterfaceRelationshipInput(v *DescribeAssetModelInterfaceRelationshipInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAssetModelInterfaceRelationshipInput"}
+	if v.AssetModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetModelId"))
+	}
+	if v.InterfaceAssetModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InterfaceAssetModelId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4708,6 +4887,21 @@ func validateOpListExecutionsInput(v *ListExecutionsInput) error {
 	}
 }
 
+func validateOpListInterfaceRelationshipsInput(v *ListInterfaceRelationshipsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListInterfaceRelationshipsInput"}
+	if v.InterfaceAssetModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InterfaceAssetModelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListProjectAssetsInput(v *ListProjectAssetsInput) error {
 	if v == nil {
 		return nil
@@ -4745,6 +4939,31 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutAssetModelInterfaceRelationshipInput(v *PutAssetModelInterfaceRelationshipInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutAssetModelInterfaceRelationshipInput"}
+	if v.AssetModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetModelId"))
+	}
+	if v.InterfaceAssetModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InterfaceAssetModelId"))
+	}
+	if v.PropertyMappingConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PropertyMappingConfiguration"))
+	} else if v.PropertyMappingConfiguration != nil {
+		if err := validatePropertyMappingConfiguration(v.PropertyMappingConfiguration); err != nil {
+			invalidParams.AddNested("PropertyMappingConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -840,11 +840,6 @@ func awsRestjson1_serializeOpDocumentGetResourceOauth2TokenInput(v *GetResourceO
 		}
 	}
 
-	if v.UserId != nil {
-		ok := object.Key("userId")
-		ok.String(*v.UserId)
-	}
-
 	if v.WorkloadIdentityToken != nil {
 		ok := object.Key("workloadIdentityToken")
 		ok.String(*v.WorkloadIdentityToken)

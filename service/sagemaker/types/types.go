@@ -20894,8 +20894,8 @@ type UnifiedStudioSettings struct {
 	// artifacts for the project that corresponds to the domain.
 	ProjectS3Path *string
 
-	// The ARN of the application managed by SageMaker AI and SageMaker Unified Studio
-	// in the Amazon Web Services IAM Identity Center.
+	// The ARN of the Amazon DataZone application managed by Amazon SageMaker Unified
+	// Studio in the Amazon Web Services IAM Identity Center.
 	SingleSignOnApplicationArn *string
 
 	// Sets whether you can access the domain in Amazon SageMaker Studio:

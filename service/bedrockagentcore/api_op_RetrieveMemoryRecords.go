@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches for and retrieves memory records from a memory store based on
-// specified search criteria. We recommend using pagination to ensure that the
-// operation returns quickly and successfully.
+// Searches for and retrieves memory records from an AgentCore Memory resource
+// based on specified search criteria. We recommend using pagination to ensure that
+// the operation returns quickly and successfully.
 //
-// To use this operation, you must have the genesismemory:RetrieveMemoryRecords
+// To use this operation, you must have the bedrock-agentcore:RetrieveMemoryRecords
 // permission.
 func (c *Client) RetrieveMemoryRecords(ctx context.Context, params *RetrieveMemoryRecordsInput, optFns ...func(*Options)) (*RetrieveMemoryRecordsOutput, error) {
 	if params == nil {
@@ -34,7 +34,8 @@ func (c *Client) RetrieveMemoryRecords(ctx context.Context, params *RetrieveMemo
 
 type RetrieveMemoryRecordsInput struct {
 
-	// The identifier of the memory store from which to retrieve memory records.
+	// The identifier of the AgentCore Memory resource from which to retrieve memory
+	// records.
 	//
 	// This member is required.
 	MemoryId *string

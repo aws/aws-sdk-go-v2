@@ -16,8 +16,8 @@ import (
 type Connection struct {
 
 	// The Amazon Resource Name (ARN) of the connection. The ARN is used as the
-	// connection reference when the connection is shared between Amazon Web
-	// Servicesservices.
+	// connection reference when the connection is shared between Amazon Web Services
+	// services.
 	//
 	// The ARN is never reused if the connection is deleted.
 	ConnectionArn *string

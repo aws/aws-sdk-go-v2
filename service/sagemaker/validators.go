@@ -70,6 +70,26 @@ func (m *validateOpAssociateTrialComponent) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAttachClusterNodeVolume struct {
+}
+
+func (*validateOpAttachClusterNodeVolume) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAttachClusterNodeVolume) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AttachClusterNodeVolumeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAttachClusterNodeVolumeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchDeleteClusterNodes struct {
 }
 
@@ -3890,6 +3910,26 @@ func (m *validateOpDescribeWorkteam) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDetachClusterNodeVolume struct {
+}
+
+func (*validateOpDetachClusterNodeVolume) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDetachClusterNodeVolume) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DetachClusterNodeVolumeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDetachClusterNodeVolumeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisassociateTrialComponent struct {
 }
 
@@ -5922,6 +5962,10 @@ func addOpAssociateTrialComponentValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpAssociateTrialComponent{}, middleware.After)
 }
 
+func addOpAttachClusterNodeVolumeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAttachClusterNodeVolume{}, middleware.After)
+}
+
 func addOpBatchDeleteClusterNodesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchDeleteClusterNodes{}, middleware.After)
 }
@@ -6684,6 +6728,10 @@ func addOpDescribeWorkforceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeWorkteamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeWorkteam{}, middleware.After)
+}
+
+func addOpDetachClusterNodeVolumeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDetachClusterNodeVolume{}, middleware.After)
 }
 
 func addOpDisassociateTrialComponentValidationMiddleware(stack *middleware.Stack) error {
@@ -14184,6 +14232,27 @@ func validateOpAssociateTrialComponentInput(v *AssociateTrialComponentInput) err
 	}
 }
 
+func validateOpAttachClusterNodeVolumeInput(v *AttachClusterNodeVolumeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AttachClusterNodeVolumeInput"}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if v.NodeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NodeId"))
+	}
+	if v.VolumeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VolumeId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchDeleteClusterNodesInput(v *BatchDeleteClusterNodesInput) error {
 	if v == nil {
 		return nil
@@ -18435,6 +18504,27 @@ func validateOpDescribeWorkteamInput(v *DescribeWorkteamInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeWorkteamInput"}
 	if v.WorkteamName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkteamName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDetachClusterNodeVolumeInput(v *DetachClusterNodeVolumeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DetachClusterNodeVolumeInput"}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if v.NodeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NodeId"))
+	}
+	if v.VolumeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VolumeId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -17,7 +17,8 @@ import (
 // model inherits the asset model's property and hierarchy definitions. For more
 // information, see [Defining asset models]in the IoT SiteWise User Guide.
 //
-// You can create two types of asset models, ASSET_MODEL or COMPONENT_MODEL .
+// You can create three types of asset models, ASSET_MODEL , COMPONENT_MODEL , or
+// an INTERFACE .
 //
 //   - ASSET_MODEL – (default) An asset model that you can use to create assets.
 //     Can't be included as a component in another asset model.
@@ -25,6 +26,9 @@ import (
 //   - COMPONENT_MODEL – A reusable component that you can include in the
 //     composite models of other asset models. You can't create assets directly from
 //     this type of asset model.
+//
+//   - INTERFACE – An interface is a type of model that defines a standard
+//     structure that can be applied to different asset models.
 //
 // [Defining asset models]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/define-models.html
 func (c *Client) CreateAssetModel(ctx context.Context, params *CreateAssetModelInput, optFns ...func(*Options)) (*CreateAssetModelOutput, error) {

@@ -10,10 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an event from a memory store. When you delete an event, it is
-// permanently removed.
+// Deletes an event from an AgentCore Memory resource. When you delete an event,
+// it is permanently removed.
 //
-// To use this operation, you must have the genesismemory:DeleteEvent permission.
+// To use this operation, you must have the bedrock-agentcore:DeleteEvent
+// permission.
 func (c *Client) DeleteEvent(ctx context.Context, params *DeleteEventInput, optFns ...func(*Options)) (*DeleteEventOutput, error) {
 	if params == nil {
 		params = &DeleteEventInput{}
@@ -41,7 +42,7 @@ type DeleteEventInput struct {
 	// This member is required.
 	EventId *string
 
-	// The identifier of the memory store from which to delete the event.
+	// The identifier of the AgentCore Memory resource from which to delete the event.
 	//
 	// This member is required.
 	MemoryId *string

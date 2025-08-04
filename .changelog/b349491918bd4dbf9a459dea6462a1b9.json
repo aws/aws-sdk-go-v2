@@ -1,0 +1,8 @@
+{
+    "id": "b3494919-18bd-4dbf-9a45-9dea6462a1b9",
+    "type": "feature",
+    "description": "Support Interface for IoT SiteWise Asset Modeling",
+    "modules": [
+        "service/iotsitewise"
+    ]
+}

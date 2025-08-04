@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-// Contains summary information about an actor in a memory store.
+// Contains summary information about an actor in an AgentCore Memory resource.
 type ActorSummary struct {
 
 	// The unique identifier of the actor.
@@ -51,8 +51,8 @@ type AutomationStreamUpdate struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about a branch in a memory store. Branches allow for
-// organizing events into different conversation threads or paths.
+// Contains information about a branch in an AgentCore Memory resource. Branches
+// allow for organizing events into different conversation threads or paths.
 type Branch struct {
 
 	// The name of the branch.
@@ -304,7 +304,7 @@ type Conversational struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about an event in a memory store.
+// Contains information about an event in an AgentCore Memory resource.
 type Event struct {
 
 	// The identifier of the actor associated with the event.
@@ -322,7 +322,7 @@ type Event struct {
 	// This member is required.
 	EventTimestamp *time.Time
 
-	// The identifier of the memory store containing the event.
+	// The identifier of the AgentCore Memory resource containing the event.
 	//
 	// This member is required.
 	MemoryId *string
@@ -400,7 +400,7 @@ type MemoryContentMemberText struct {
 
 func (*MemoryContentMemberText) isMemoryContent() {}
 
-// Contains information about a memory record in a memory store.
+// Contains information about a memory record in an AgentCore Memory resource.
 type MemoryRecord struct {
 
 	// The content of the memory record.
@@ -536,7 +536,7 @@ type SearchCriteria struct {
 	noSmithyDocumentSerde
 }
 
-// Contains summary information about a session in a memory store.
+// Contains summary information about a session in an AgentCore Memory resource.
 type SessionSummary struct {
 
 	// The identifier of the actor associated with the session.

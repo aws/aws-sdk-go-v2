@@ -79,6 +79,7 @@ type AssetModelType string
 const (
 	AssetModelTypeAssetModel     AssetModelType = "ASSET_MODEL"
 	AssetModelTypeComponentModel AssetModelType = "COMPONENT_MODEL"
+	AssetModelTypeInterface      AssetModelType = "INTERFACE"
 )
 
 // Values returns all known values for AssetModelType. Note that this can be
@@ -89,6 +90,7 @@ func (AssetModelType) Values() []AssetModelType {
 	return []AssetModelType{
 		"ASSET_MODEL",
 		"COMPONENT_MODEL",
+		"INTERFACE",
 	}
 }
 

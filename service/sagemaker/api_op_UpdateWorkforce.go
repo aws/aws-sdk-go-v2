@@ -24,8 +24,12 @@ import (
 // IP address outside the specified range are denied and get a Not Found error
 // message on the worker portal.
 //
-// To restrict access to all the workers in public internet, add the SourceIpConfig
-// CIDR value as "10.0.0.0/16".
+// To restrict public internet access for all workers, configure the SourceIpConfig
+// CIDR value. For example, when using SourceIpConfig with an IpAddressType of IPv4
+// , you can restrict access to the IPv4 CIDR block "10.0.0.0/16". When using an
+// IpAddressType of dualstack , you can specify both the IPv4 and IPv6 CIDR blocks,
+// such as "10.0.0.0/16" for IPv4 only, "2001:db8:1234:1a00::/56" for IPv6 only, or
+// "10.0.0.0/16" and "2001:db8:1234:1a00::/56" for dual stack.
 //
 // Amazon SageMaker does not support Source Ip restriction for worker portals in
 // VPC.

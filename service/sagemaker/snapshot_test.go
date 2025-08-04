@@ -98,6 +98,18 @@ func TestCheckSnapshot_AssociateTrialComponent(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AttachClusterNodeVolume(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AttachClusterNodeVolume(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AttachClusterNodeVolume")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchDeleteClusterNodes(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchDeleteClusterNodes(context.Background(), nil, func(o *Options) {
@@ -2390,6 +2402,18 @@ func TestCheckSnapshot_DescribeWorkteam(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DetachClusterNodeVolume(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DetachClusterNodeVolume(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DetachClusterNodeVolume")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DisableSagemakerServicecatalogPortfolio(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisableSagemakerServicecatalogPortfolio(context.Background(), nil, func(o *Options) {
@@ -4434,6 +4458,18 @@ func TestUpdateSnapshot_AssociateTrialComponent(t *testing.T) {
 	_, err := svc.AssociateTrialComponent(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AssociateTrialComponent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AttachClusterNodeVolume(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AttachClusterNodeVolume(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AttachClusterNodeVolume")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6726,6 +6762,18 @@ func TestUpdateSnapshot_DescribeWorkteam(t *testing.T) {
 	_, err := svc.DescribeWorkteam(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeWorkteam")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DetachClusterNodeVolume(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DetachClusterNodeVolume(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DetachClusterNodeVolume")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

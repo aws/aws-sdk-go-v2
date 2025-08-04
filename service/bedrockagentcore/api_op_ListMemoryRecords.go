@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists memory records in a memory store based on specified criteria. We
-// recommend using pagination to ensure that the operation returns quickly and
-// successfully.
+// Lists memory records in an AgentCore Memory resource based on specified
+// criteria. We recommend using pagination to ensure that the operation returns
+// quickly and successfully.
 //
-// To use this operation, you must have the genesismemory:ListMemoryRecords
+// To use this operation, you must have the bedrock-agentcore:ListMemoryRecords
 // permission.
 func (c *Client) ListMemoryRecords(ctx context.Context, params *ListMemoryRecordsInput, optFns ...func(*Options)) (*ListMemoryRecordsOutput, error) {
 	if params == nil {
@@ -34,7 +34,8 @@ func (c *Client) ListMemoryRecords(ctx context.Context, params *ListMemoryRecord
 
 type ListMemoryRecordsInput struct {
 
-	// The identifier of the memory store for which to list memory records.
+	// The identifier of the AgentCore Memory resource for which to list memory
+	// records.
 	//
 	// This member is required.
 	MemoryId *string

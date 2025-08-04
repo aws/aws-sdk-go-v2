@@ -11,10 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists events in a memory store based on specified criteria. We recommend using
-// pagination to ensure that the operation returns quickly and successfully.
+// Lists events in an AgentCore Memory resource based on specified criteria. We
+// recommend using pagination to ensure that the operation returns quickly and
+// successfully.
 //
-// To use this operation, you must have the genesismemory:ListEvents permission.
+// To use this operation, you must have the bedrock-agentcore:ListEvents
+// permission.
 func (c *Client) ListEvents(ctx context.Context, params *ListEventsInput, optFns ...func(*Options)) (*ListEventsOutput, error) {
 	if params == nil {
 		params = &ListEventsInput{}
@@ -38,7 +40,7 @@ type ListEventsInput struct {
 	// This member is required.
 	ActorId *string
 
-	// The identifier of the memory store for which to list events.
+	// The identifier of the AgentCore Memory resource for which to list events.
 	//
 	// This member is required.
 	MemoryId *string

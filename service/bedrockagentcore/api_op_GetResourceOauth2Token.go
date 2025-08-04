@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Reaturns the Oauth2Token of the provided resource
+// Returns the OAuth 2.0 token of the provided resource
 func (c *Client) GetResourceOauth2Token(ctx context.Context, params *GetResourceOauth2TokenInput, optFns ...func(*Options)) (*GetResourceOauth2TokenOutput, error) {
 	if params == nil {
 		params = &GetResourceOauth2TokenInput{}
@@ -60,9 +60,6 @@ type GetResourceOauth2TokenInput struct {
 	// Callback url to redirect after token retrieval completes. Should be one of the
 	// provideded urls during WorkloadIdentity creation
 	ResourceOauth2ReturnUrl *string
-
-	// The user ID of the user you're retrieving the token on behalf of.
-	UserId *string
 
 	noSmithyDocumentSerde
 }

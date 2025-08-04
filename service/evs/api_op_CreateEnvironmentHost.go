@@ -11,12 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Amazon EVS is in public preview release and is subject to change.
+//
 // Creates an ESXi host and adds it to an Amazon EVS environment. Amazon EVS
 // supports 4-16 hosts per environment.
 //
 // This action can only be used after the Amazon EVS environment is deployed. All
 // Amazon EVS hosts are created with the latest AMI release version for the
-// respective VCF version of the environment.
+// respective VCF version of the environment. Amazon EVS hosts are commissioned in
+// the SDDC Manager inventory as unassigned hosts.
 //
 // You can use the dedicatedHostId parameter to specify an Amazon EC2 Dedicated
 // Host for ESXi host creation.
@@ -27,9 +30,6 @@ import (
 // You cannot use the dedicatedHostId and placementGroupId parameters together in
 // the same CreateEnvironmentHost action. This results in a ValidationException
 // response.
-//
-// EC2 instances created through Amazon EVS do not support associating an IAM
-// instance profile.
 func (c *Client) CreateEnvironmentHost(ctx context.Context, params *CreateEnvironmentHostInput, optFns ...func(*Options)) (*CreateEnvironmentHostOutput, error) {
 	if params == nil {
 		params = &CreateEnvironmentHostInput{}

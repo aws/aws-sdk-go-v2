@@ -9118,6 +9118,31 @@ func (VendorGuidance) Values() []VendorGuidance {
 	}
 }
 
+type VolumeAttachmentStatus string
+
+// Enum values for VolumeAttachmentStatus
+const (
+	VolumeAttachmentStatusAttaching VolumeAttachmentStatus = "attaching"
+	VolumeAttachmentStatusAttached  VolumeAttachmentStatus = "attached"
+	VolumeAttachmentStatusDetaching VolumeAttachmentStatus = "detaching"
+	VolumeAttachmentStatusDetached  VolumeAttachmentStatus = "detached"
+	VolumeAttachmentStatusBusy      VolumeAttachmentStatus = "busy"
+)
+
+// Values returns all known values for VolumeAttachmentStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VolumeAttachmentStatus) Values() []VolumeAttachmentStatus {
+	return []VolumeAttachmentStatus{
+		"attaching",
+		"attached",
+		"detaching",
+		"detached",
+		"busy",
+	}
+}
+
 type WarmPoolResourceStatus string
 
 // Enum values for WarmPoolResourceStatus

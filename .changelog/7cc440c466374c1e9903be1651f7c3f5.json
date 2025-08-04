@@ -1,0 +1,8 @@
+{
+    "id": "7cc440c4-6637-4c1e-9903-be1651f7c3f5",
+    "type": "feature",
+    "description": "Remove superfluous field from API",
+    "modules": [
+        "service/bedrockagentcore"
+    ]
+}

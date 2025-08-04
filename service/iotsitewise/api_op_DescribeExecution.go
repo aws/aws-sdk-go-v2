@@ -55,7 +55,8 @@ type DescribeExecutionOutput struct {
 	// This member is required.
 	ExecutionStatus *types.ExecutionStatus
 
-	// The resource the action will be taken on.
+	// The resource the action will be taken on. This can include asset-based
+	// resources and computation model resources.
 	//
 	// This member is required.
 	TargetResource *types.TargetResource

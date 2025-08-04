@@ -38,6 +38,9 @@ type ListAssetModelsInput struct {
 	//   - COMPONENT_MODEL – A reusable component that you can include in the
 	//   composite models of other asset models. You can't create assets directly from
 	//   this type of asset model.
+	//
+	//   - INTERFACE – An interface is a type of model that defines a standard
+	//   structure that can be applied to different asset models.
 	AssetModelTypes []types.AssetModelType
 
 	// The version alias that specifies the latest or active version of the asset

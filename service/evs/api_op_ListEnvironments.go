@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Amazon EVS is in public preview release and is subject to change.
+//
 // Lists the Amazon EVS environments in your Amazon Web Services account in the
 // specified Amazon Web Services Region.
 func (c *Client) ListEnvironments(ctx context.Context, params *ListEnvironmentsInput, optFns ...func(*Options)) (*ListEnvironmentsOutput, error) {
