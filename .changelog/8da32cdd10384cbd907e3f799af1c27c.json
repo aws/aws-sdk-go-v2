@@ -1,8 +1,0 @@
-{
-    "id": "8da32cdd-1038-4cbd-907e-3f799af1c27c",
-    "type": "feature",
-    "description": "This release adds support for Automated Reasoning checks output models for the Amazon Bedrock Guardrails ApplyGuardrail API.",
-    "modules": [
-        "service/bedrockruntime"
-    ]
-}

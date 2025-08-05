@@ -1,3 +1,7 @@
+# v1.17.1 (2025-08-05)
+
+* No change notes available for this release.
+
 # v1.17.0 (2025-08-04)
 
 * **Feature**: Support configurable auth scheme preferences in service clients via AWS_AUTH_SCHEME_PREFERENCE in the environment, auth_scheme_preference in the config file, and through in-code settings on LoadDefaultConfig and client constructor methods.

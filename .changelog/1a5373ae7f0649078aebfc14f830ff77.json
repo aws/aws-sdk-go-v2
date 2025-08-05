@@ -1,8 +1,0 @@
-{
-    "id": "1a5373ae-7f06-4907-8aeb-fc14f830ff77",
-    "type": "feature",
-    "description": "Add support for SageMaker Hyperpod continuous scaling and custom AMI; Introduce new APIs: ListClusterEvents, DescribeClusterEvent, BatchAddClusterNodes",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

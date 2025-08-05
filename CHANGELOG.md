@@ -1,3 +1,17 @@
+# Release (2025-08-05)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.42.0](service/bedrock/CHANGELOG.md#v1420-2025-08-05)
+  * **Feature**: This release introduces Automated Reasoning checks for Amazon Bedrock Guardrails. The feature adds new APIs for policy building, refinement, version management, and testing. Guardrail APIs now support Automated Reasoning policy configuration and validation output.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.34.0](service/bedrockruntime/CHANGELOG.md#v1340-2025-08-05)
+  * **Feature**: This release adds support for Automated Reasoning checks output models for the Amazon Bedrock Guardrails ApplyGuardrail API.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.69.0](service/eks/CHANGELOG.md#v1690-2025-08-05)
+  * **Feature**: Add support for deletion protection on EKS clusters
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.102.0](service/rds/CHANGELOG.md#v11020-2025-08-05)
+  * **Feature**: Adds a new Aurora Serverless v2 attribute to the DBCluster resource to expose the platform version. Also updates the attribute to be part of both the engine version and platform version descriptions.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.205.0](service/sagemaker/CHANGELOG.md#v12050-2025-08-05)
+  * **Feature**: Add support for SageMaker Hyperpod continuous scaling and custom AMI; Introduce new APIs: ListClusterEvents, DescribeClusterEvent, BatchAddClusterNodes
+
 # Release (2025-08-04)
 
 ## General Highlights
