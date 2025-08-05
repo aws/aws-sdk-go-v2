@@ -246,6 +246,44 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sagemaker#AddClusterNodeSpecification": {
+            "type": "structure",
+            "members": {
+                "InstanceGroupName": {
+                    "target": "com.amazonaws.sagemaker#ClusterInstanceGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the instance group to which you want to add nodes.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IncrementTargetCountBy": {
+                    "target": "com.amazonaws.sagemaker#BatchAddIncrementCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of nodes to add to the specified instance group. The total number of nodes across all instance groups in a single request cannot exceed 50.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 50
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies an instance group and the number of nodes to add to it.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#AddClusterNodeSpecificationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#AddClusterNodeSpecification"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.sagemaker#AddTags": {
             "type": "operation",
             "input": {
@@ -306,6 +344,20 @@
                     "min": 0,
                     "max": 3
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#AdditionalEnis": {
+            "type": "structure",
+            "members": {
+                "EfaEnis": {
+                    "target": "com.amazonaws.sagemaker#EfaEnis",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Elastic Fabric Adapter (EFA) ENIs associated with the instance.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about additional Elastic Network Interfaces (ENIs) associated with an instance.</p>"
             }
         },
         "com.amazonaws.sagemaker#AdditionalInferenceSpecificationDefinition": {
@@ -4850,6 +4902,158 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
             }
         },
+        "com.amazonaws.sagemaker#BatchAddClusterNodes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#BatchAddClusterNodesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#BatchAddClusterNodesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceLimitExceeded"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds nodes to a HyperPod cluster by incrementing the target count for one or more instance groups. This operation returns a unique <code>NodeLogicalId</code> for each node being added, which can be used to track the provisioning status of the node. This API provides a safer alternative to <code>UpdateCluster</code> for scaling operations by avoiding unintended configuration changes.</p> <note> <p>This API is only supported for clusters using <code>Continuous</code> as the <code>NodeProvisioningMode</code>.</p> </note>"
+            }
+        },
+        "com.amazonaws.sagemaker#BatchAddClusterNodesError": {
+            "type": "structure",
+            "members": {
+                "InstanceGroupName": {
+                    "target": "com.amazonaws.sagemaker#InstanceGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the instance group for which the error occurred.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ErrorCode": {
+                    "target": "com.amazonaws.sagemaker#BatchAddClusterNodesErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code associated with the failure. Possible values include <code>InstanceGroupNotFound</code> and <code>InvalidInstanceGroupState</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FailedCount": {
+                    "target": "com.amazonaws.sagemaker#BatchAddFailureCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of nodes that failed to be added to the specified instance group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A descriptive message providing additional details about the error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an error that occurred during the node addition operation.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#BatchAddClusterNodesErrorCode": {
+            "type": "enum",
+            "members": {
+                "INSTANCE_GROUP_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InstanceGroupNotFound"
+                    }
+                },
+                "INVALID_INSTANCE_GROUP_STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InvalidInstanceGroupStatus"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#BatchAddClusterNodesErrorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#BatchAddClusterNodesError"
+            }
+        },
+        "com.amazonaws.sagemaker#BatchAddClusterNodesRequest": {
+            "type": "structure",
+            "members": {
+                "ClusterName": {
+                    "target": "com.amazonaws.sagemaker#ClusterNameOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the HyperPod cluster to which you want to add nodes.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This token is valid for 8 hours. If you retry the request with the same client token within this timeframe and the same parameters, the API returns the same set of <code>NodeLogicalIds</code> with their latest status.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#length": {
+                            "max": 64
+                        },
+                        "smithy.api#pattern": "^[\\x21-\\x7E]+$"
+                    }
+                },
+                "NodesToAdd": {
+                    "target": "com.amazonaws.sagemaker#AddClusterNodeSpecificationList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A list of instance groups and the number of nodes to add to each. You can specify up to 5 instance groups in a single request, with a maximum of 50 nodes total across all instance groups.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#BatchAddClusterNodesResponse": {
+            "type": "structure",
+            "members": {
+                "Successful": {
+                    "target": "com.amazonaws.sagemaker#NodeAdditionResultList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>NodeLogicalIDs</code> that were successfully added to the cluster. The <code>NodeLogicalID</code> is unique per cluster and does not change between instance replacements. Each entry includes a <code>NodeLogicalId</code> that can be used to track the node's provisioning status (with <code>DescribeClusterNode</code>), the instance group name, and the current status of the node.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Failed": {
+                    "target": "com.amazonaws.sagemaker#BatchAddClusterNodesErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of errors that occurred during the node addition operation. Each entry includes the instance group name, error code, number of failed additions, and an error message.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemaker#BatchAddFailureCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#BatchAddIncrementCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.sagemaker#BatchDataCaptureConfig": {
             "type": "structure",
             "members": {
@@ -4876,6 +5080,50 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Configuration to control how SageMaker captures inference data for batch transform jobs.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#BatchDeleteClusterNodeLogicalIdsError": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.sagemaker#BatchDeleteClusterNodesErrorCode",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The error code associated with the failure. Possible values include <code>NodeLogicalIdNotFound</code>, <code>InvalidNodeStatus</code>, and <code>InternalError</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A descriptive message providing additional details about the error.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NodeLogicalId": {
+                    "target": "com.amazonaws.sagemaker#ClusterNodeLogicalId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The <code>NodeLogicalId</code> of the node that could not be deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an error that occurred when attempting to delete a node identified by its <code>NodeLogicalId</code>.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#BatchDeleteClusterNodeLogicalIdsErrorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#BatchDeleteClusterNodeLogicalIdsError"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 99
+                }
             }
         },
         "com.amazonaws.sagemaker#BatchDeleteClusterNodes": {
@@ -4979,6 +5227,13 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of node IDs to be deleted from the specified cluster.</p> <note> <ul> <li> <p>For SageMaker HyperPod clusters using the Slurm workload manager, you cannot remove instances that are configured as Slurm controller nodes.</p> </li> <li> <p>If you need to delete more than 99 instances, contact <a href=\"http://aws.amazon.com/contact-us/\">Support</a> for assistance.</p> </li> </ul> </note>"
                     }
+                },
+                "NodeLogicalIds": {
+                    "target": "com.amazonaws.sagemaker#ClusterNodeLogicalIdList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A list of <code>NodeLogicalIds</code> identifying the nodes to be deleted. You can specify up to 50 <code>NodeLogicalIds</code>. You must specify either <code>NodeLogicalIds</code>, <code>InstanceIds</code>, or both, with a combined maximum of 50 identifiers.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4998,6 +5253,18 @@
                     "target": "com.amazonaws.sagemaker#ClusterNodeIds",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of node IDs that were successfully deleted from the specified cluster.</p>"
+                    }
+                },
+                "FailedNodeLogicalIds": {
+                    "target": "com.amazonaws.sagemaker#BatchDeleteClusterNodeLogicalIdsErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>NodeLogicalIds</code> that could not be deleted, along with error information explaining why the deletion failed.</p>"
+                    }
+                },
+                "SuccessfulNodeLogicalIds": {
+                    "target": "com.amazonaws.sagemaker#ClusterNodeLogicalIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>NodeLogicalIds</code> that were successfully deleted from the cluster.</p>"
                     }
                 }
             },
@@ -5679,6 +5946,26 @@
                 "smithy.api#documentation": "<p>The SageMaker Canvas application settings.</p>"
             }
         },
+        "com.amazonaws.sagemaker#CapacityReservation": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Capacity Reservation.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of Capacity Reservation. Valid values are <code>ODCR</code> (On-Demand Capacity Reservation) or <code>CRG</code> (Capacity Reservation Group).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the Capacity Reservation used by an instance or instance group.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#CapacityReservationPreference": {
             "type": "enum",
             "members": {
@@ -5686,6 +5973,23 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "capacity-reservations-only"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationType": {
+            "type": "enum",
+            "members": {
+                "ODCR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ODCR"
+                    }
+                },
+                "CRG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CRG"
                     }
                 }
             }
@@ -7353,6 +7657,188 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#ClusterEventDetail": {
+            "type": "structure",
+            "members": {
+                "EventId": {
+                    "target": "com.amazonaws.sagemaker#EventId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier (UUID) of the event.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClusterArn": {
+                    "target": "com.amazonaws.sagemaker#ClusterArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster associated with the event.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClusterName": {
+                    "target": "com.amazonaws.sagemaker#ClusterName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the SageMaker HyperPod cluster associated with the event.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceGroupName": {
+                    "target": "com.amazonaws.sagemaker#ClusterInstanceGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the instance group associated with the event, if applicable.</p>"
+                    }
+                },
+                "InstanceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The EC2 instance ID associated with the event, if applicable.</p>"
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.sagemaker#ClusterEventResourceType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The type of resource associated with the event. Valid values are \"Cluster\", \"InstanceGroup\", or \"Instance\".</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EventTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The timestamp when the event occurred.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EventDetails": {
+                    "target": "com.amazonaws.sagemaker#EventDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional details about the event, including event-specific metadata.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable description of the event.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Detailed information about a specific event in a HyperPod cluster.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterEventMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterEventResourceType": {
+            "type": "enum",
+            "members": {
+                "CLUSTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Cluster"
+                    }
+                },
+                "INSTANCE_GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InstanceGroup"
+                    }
+                },
+                "INSTANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Instance"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterEventSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#ClusterEventSummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterEventSummary": {
+            "type": "structure",
+            "members": {
+                "EventId": {
+                    "target": "com.amazonaws.sagemaker#EventId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier (UUID) of the event.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClusterArn": {
+                    "target": "com.amazonaws.sagemaker#ClusterArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster associated with the event.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClusterName": {
+                    "target": "com.amazonaws.sagemaker#ClusterName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the SageMaker HyperPod cluster associated with the event.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceGroupName": {
+                    "target": "com.amazonaws.sagemaker#ClusterInstanceGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the instance group associated with the event, if applicable.</p>"
+                    }
+                },
+                "InstanceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The EC2 instance ID associated with the event, if applicable.</p>"
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.sagemaker#ClusterEventResourceType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The type of resource associated with the event. Valid values are \"Cluster\", \"InstanceGroup\", or \"Instance\".</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EventTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The timestamp when the event occurred.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A brief, human-readable description of the event.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of an event in a SageMaker HyperPod cluster.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#ClusterInstanceCount": {
             "type": "integer",
             "traits": {
@@ -7447,6 +7933,18 @@
                     "target": "com.amazonaws.sagemaker#ScheduledUpdateConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration object of the schedule that SageMaker follows when updating the AMI.</p>"
+                    }
+                },
+                "CurrentImageId": {
+                    "target": "com.amazonaws.sagemaker#ImageId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Machine Image (AMI) currently in use by the instance group.</p>"
+                    }
+                },
+                "DesiredImageId": {
+                    "target": "com.amazonaws.sagemaker#ImageId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Machine Image (AMI) desired for the instance group.</p>"
                     }
                 }
             },
@@ -7548,6 +8046,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration object of the schedule that SageMaker uses to update the AMI.</p>"
                     }
+                },
+                "ImageId": {
+                    "target": "com.amazonaws.sagemaker#ImageId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When configuring your HyperPod cluster, you can specify an image ID using one of the following options:</p> <ul> <li> <p> <code>HyperPodPublicAmiId</code>: Use a HyperPod public AMI</p> </li> <li> <p> <code>CustomAmiId</code>: Use your custom AMI</p> </li> <li> <p> <code>default</code>: Use the default latest system image</p> </li> </ul> <p>f you choose to use a custom AMI (<code>CustomAmiId</code>), ensure it meets the following requirements:</p> <ul> <li> <p>Encryption: The custom AMI must be unencrypted.</p> </li> <li> <p>Ownership: The custom AMI must be owned by the same Amazon Web Services account that is creating the HyperPod cluster.</p> </li> <li> <p>Volume support: Only the primary AMI snapshot volume is supported; additional AMI volumes are not supported.</p> </li> </ul> <p>When updating the instance group's AMI through the <code>UpdateClusterSoftware</code> operation, if an instance group uses a custom AMI, you must provide an <code>ImageId</code> or use the default as input.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7635,6 +8139,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DeepHealthCheckInProgress"
+                    }
+                },
+                "NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotFound"
                     }
                 }
             }
@@ -8398,6 +8908,32 @@
                 "smithy.api#pattern": "^[\\S\\s]+$"
             }
         },
+        "com.amazonaws.sagemaker#ClusterMetadata": {
+            "type": "structure",
+            "members": {
+                "FailureMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error message describing why the cluster level operation (such as creating, updating, or deleting) failed.</p>"
+                    }
+                },
+                "EksRoleAccessEntries": {
+                    "target": "com.amazonaws.sagemaker#EksRoleAccessEntries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Amazon EKS IAM role ARNs associated with the cluster. This is created by SageMaker HyperPod on your behalf and only applies for EKS-orchestrated clusters.</p>"
+                    }
+                },
+                "SlrAccessEntry": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Service-Linked Role (SLR) associated with the cluster. This is created by SageMaker HyperPod on your behalf and only applies for EKS-orchestrated clusters.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata information about a SageMaker HyperPod cluster showing information about the cluster level operations, such as creating, updating, and deleting.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#ClusterName": {
             "type": "string",
             "traits": {
@@ -8431,6 +8967,12 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the instance.</p>"
+                    }
+                },
+                "NodeLogicalId": {
+                    "target": "com.amazonaws.sagemaker#ClusterNodeLogicalId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the node that persists throughout its lifecycle, from provisioning request to termination. This identifier can be used to track the node even before it has an assigned <code>InstanceId</code>.</p>"
                     }
                 },
                 "InstanceStatus": {
@@ -8504,6 +9046,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The placement details of the SageMaker HyperPod cluster node.</p>"
                     }
+                },
+                "CurrentImageId": {
+                    "target": "com.amazonaws.sagemaker#ImageId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Machine Image (AMI) currently in use by the node.</p>"
+                    }
+                },
+                "DesiredImageId": {
+                    "target": "com.amazonaws.sagemaker#ImageId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Machine Image (AMI) desired for the node.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8529,6 +9083,39 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 3000
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterNodeLogicalId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9]$"
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterNodeLogicalIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#ClusterNodeLogicalId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 99
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterNodeProvisioningMode": {
+            "type": "enum",
+            "members": {
+                "CONTINUOUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Continuous"
+                    }
                 }
             }
         },
@@ -8572,6 +9159,13 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the instance.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "NodeLogicalId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A unique identifier for the node that persists throughout its lifecycle, from provisioning request to termination. This identifier can be used to track the node even before it has an assigned <code>InstanceId</code>. This field is only included when <code>IncludeNodeLogicalIds</code> is set to <code>True</code> in the <code>ListClusterNodes</code> request.</p>"
                     }
                 },
                 "InstanceType": {
@@ -11084,6 +11678,12 @@
                     "target": "com.amazonaws.sagemaker#ClusterNodeRecovery",
                     "traits": {
                         "smithy.api#documentation": "<p>The node recovery mode for the SageMaker HyperPod cluster. When set to <code>Automatic</code>, SageMaker HyperPod will automatically reboot or replace faulty nodes when issues are detected. When set to <code>None</code>, cluster administrators will need to manually manage any faulty cluster instances.</p>"
+                    }
+                },
+                "NodeProvisioningMode": {
+                    "target": "com.amazonaws.sagemaker#ClusterNodeProvisioningMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mode for provisioning nodes in the cluster. You can specify the following modes:</p> <ul> <li> <p> <b>Continuous</b>: Scaling behavior that enables 1) concurrent operation execution within instance groups, 2) continuous retry mechanisms for failed operations, 3) enhanced customer visibility into cluster events through detailed event streams, 4) partial provisioning capabilities. Your clusters and instance groups remain <code>InService</code> while scaling. This mode is only supported for EKS orchestrated clusters.</p> </li> </ul>"
                     }
                 }
             },
@@ -20843,6 +21443,61 @@
                 "smithy.api#documentation": "<p>Retrieves information of a SageMaker HyperPod cluster.</p>"
             }
         },
+        "com.amazonaws.sagemaker#DescribeClusterEvent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#DescribeClusterEventRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#DescribeClusterEventResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves detailed information about a specific event for a given HyperPod cluster. This functionality is only supported when the <code>NodeProvisioningMode</code> is set to <code>Continuous</code>.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#DescribeClusterEventRequest": {
+            "type": "structure",
+            "members": {
+                "EventId": {
+                    "target": "com.amazonaws.sagemaker#EventId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier (UUID) of the event to describe. This ID can be obtained from the <code>ListClusterEvents</code> operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClusterName": {
+                    "target": "com.amazonaws.sagemaker#ClusterNameOrArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the HyperPod cluster associated with the event.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#DescribeClusterEventResponse": {
+            "type": "structure",
+            "members": {
+                "EventDetails": {
+                    "target": "com.amazonaws.sagemaker#ClusterEventDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Detailed information about the requested cluster event, including event metadata for various resource types such as <code>Cluster</code>, <code>InstanceGroup</code>, <code>Instance</code>, and their associated attributes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sagemaker#DescribeClusterNode": {
             "type": "operation",
             "input": {
@@ -20876,6 +21531,13 @@
                     "traits": {
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the SageMaker HyperPod cluster node.</p>"
+                    }
+                },
+                "NodeLogicalId": {
+                    "target": "com.amazonaws.sagemaker#ClusterNodeLogicalId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The logical identifier of the node to describe. You can specify either <code>NodeLogicalId</code> or <code>InstanceId</code>, but not both. <code>NodeLogicalId</code> can be used to describe nodes that are still being provisioned and don't yet have an <code>InstanceId</code> assigned.</p>"
                     }
                 }
             },
@@ -20979,6 +21641,12 @@
                     "target": "com.amazonaws.sagemaker#ClusterNodeRecovery",
                     "traits": {
                         "smithy.api#documentation": "<p>The node recovery mode configured for the SageMaker HyperPod cluster.</p>"
+                    }
+                },
+                "NodeProvisioningMode": {
+                    "target": "com.amazonaws.sagemaker#ClusterNodeProvisioningMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mode used for provisioning nodes in the cluster.</p>"
                     }
                 }
             },
@@ -30660,6 +31328,12 @@
                 "target": "com.amazonaws.sagemaker#Edge"
             }
         },
+        "com.amazonaws.sagemaker#EfaEnis": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
         "com.amazonaws.sagemaker#EfsUid": {
             "type": "string",
             "traits": {
@@ -30678,6 +31352,12 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^arn:aws[a-z\\-]*:eks:[a-z0-9\\-]*:[0-9]{12}:cluster\\/[0-9A-Za-z][A-Za-z0-9\\-_]{0,99}$"
+            }
+        },
+        "com.amazonaws.sagemaker#EksRoleAccessEntries": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
             }
         },
         "com.amazonaws.sagemaker#EmrServerlessComputeConfig": {
@@ -31580,6 +32260,69 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>This is an error field object that contains the error code and the reason for an operation failure.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#EventDetails": {
+            "type": "structure",
+            "members": {
+                "EventMetadata": {
+                    "target": "com.amazonaws.sagemaker#EventMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata specific to the event, which may include information about the cluster, instance group, or instance involved.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Detailed information about a specific event, including event metadata.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#EventId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+            }
+        },
+        "com.amazonaws.sagemaker#EventMetadata": {
+            "type": "union",
+            "members": {
+                "Cluster": {
+                    "target": "com.amazonaws.sagemaker#ClusterMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata specific to cluster-level events.</p>"
+                    }
+                },
+                "InstanceGroup": {
+                    "target": "com.amazonaws.sagemaker#InstanceGroupMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata specific to instance group-level events.</p>"
+                    }
+                },
+                "InstanceGroupScaling": {
+                    "target": "com.amazonaws.sagemaker#InstanceGroupScalingMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata related to instance group scaling events.</p>"
+                    }
+                },
+                "Instance": {
+                    "target": "com.amazonaws.sagemaker#InstanceMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata specific to instance-level events.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata associated with a cluster event, which may include details about various resource types.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#EventSortBy": {
+            "type": "enum",
+            "members": {
+                "EVENT_TIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EventTime"
+                    }
+                }
             }
         },
         "com.amazonaws.sagemaker#ExcludeFeaturesAttribute": {
@@ -36139,6 +36882,16 @@
                 "smithy.api#pattern": "^\\S(.*\\S)?$"
             }
         },
+        "com.amazonaws.sagemaker#ImageId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 7,
+                    "max": 21
+                },
+                "smithy.api#pattern": "^ami-[0-9a-fA-F]{8,17}|default$"
+            }
+        },
         "com.amazonaws.sagemaker#ImageName": {
             "type": "string",
             "traits": {
@@ -36587,6 +37340,9 @@
                     "min": 0
                 }
             }
+        },
+        "com.amazonaws.sagemaker#IncludeNodeLogicalIdsBoolean": {
+            "type": "boolean"
         },
         "com.amazonaws.sagemaker#InferenceComponentArn": {
             "type": "string",
@@ -37819,6 +38575,50 @@
                 "smithy.api#documentation": "<p>Defines an instance group for heterogeneous cluster training. When requesting a training job using the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html\">CreateTrainingJob</a> API, you can configure multiple instance groups .</p>"
             }
         },
+        "com.amazonaws.sagemaker#InstanceGroupMetadata": {
+            "type": "structure",
+            "members": {
+                "FailureMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error message describing why the instance group level operation (such as creating, scaling, or deleting) failed.</p>"
+                    }
+                },
+                "AvailabilityZoneId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Availability Zone where the instance group is located.</p>"
+                    }
+                },
+                "CapacityReservation": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the Capacity Reservation used by the instance group.</p>"
+                    }
+                },
+                "SubnetId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the subnet where the instance group is located.</p>"
+                    }
+                },
+                "SecurityGroupIds": {
+                    "target": "com.amazonaws.sagemaker#SecurityGroupIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of security group IDs associated with the instance group.</p>"
+                    }
+                },
+                "AmiOverride": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you use a custom Amazon Machine Image (AMI) for the instance group, this field shows the ID of the custom AMI.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata information about an instance group in a SageMaker HyperPod cluster.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#InstanceGroupName": {
             "type": "string",
             "traits": {
@@ -37839,6 +38639,32 @@
                     "min": 0,
                     "max": 5
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#InstanceGroupScalingMetadata": {
+            "type": "structure",
+            "members": {
+                "InstanceCount": {
+                    "target": "com.amazonaws.sagemaker#InstanceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current number of instances in the group.</p>"
+                    }
+                },
+                "TargetCount": {
+                    "target": "com.amazonaws.sagemaker#TargetCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The desired number of instances for the group after scaling.</p>"
+                    }
+                },
+                "FailureMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error message describing why the scaling operation failed, if applicable.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata information about scaling operations for an instance group.</p>"
             }
         },
         "com.amazonaws.sagemaker#InstanceGroupStatus": {
@@ -37907,6 +38733,50 @@
                     "min": 0,
                     "max": 5
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#InstanceMetadata": {
+            "type": "structure",
+            "members": {
+                "CustomerEni": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the customer-managed Elastic Network Interface (ENI) associated with the instance.</p>"
+                    }
+                },
+                "AdditionalEnis": {
+                    "target": "com.amazonaws.sagemaker#AdditionalEnis",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about additional Elastic Network Interfaces (ENIs) associated with the instance.</p>"
+                    }
+                },
+                "CapacityReservation": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the Capacity Reservation used by the instance.</p>"
+                    }
+                },
+                "FailureMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error message describing why the instance creation or update failed, if applicable.</p>"
+                    }
+                },
+                "LcsExecutionState": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The execution state of the Lifecycle Script (LCS) for the instance.</p>"
+                    }
+                },
+                "NodeLogicalId": {
+                    "target": "com.amazonaws.sagemaker#ClusterNodeLogicalId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique logical identifier of the node within the cluster. The ID used here is the same object as in the <code>BatchAddClusterNodes</code> API.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata information about an instance in a HyperPod cluster.</p>"
             }
         },
         "com.amazonaws.sagemaker#InstanceMetadataServiceConfiguration": {
@@ -41035,6 +41905,119 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sagemaker#ListClusterEvents": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#ListClusterEventsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#ListClusterEventsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list of event summaries for a specified HyperPod cluster. The operation supports filtering, sorting, and pagination of results. This functionality is only supported when the <code>NodeProvisioningMode</code> is set to <code>Continuous</code>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Events",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ListClusterEventsRequest": {
+            "type": "structure",
+            "members": {
+                "ClusterName": {
+                    "target": "com.amazonaws.sagemaker#ClusterNameOrArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the HyperPod cluster for which to list events.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceGroupName": {
+                    "target": "com.amazonaws.sagemaker#ClusterInstanceGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the instance group to filter events. If specified, only events related to this instance group are returned.</p>"
+                    }
+                },
+                "NodeId": {
+                    "target": "com.amazonaws.sagemaker#ClusterNodeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The EC2 instance ID to filter events. If specified, only events related to this instance are returned.</p>"
+                    }
+                },
+                "EventTimeAfter": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start of the time range for filtering events. Only events that occurred after this time are included in the results.</p>"
+                    }
+                },
+                "EventTimeBefore": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end of the time range for filtering events. Only events that occurred before this time are included in the results.</p>"
+                    }
+                },
+                "SortBy": {
+                    "target": "com.amazonaws.sagemaker#EventSortBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field to use for sorting the event list. Currently, the only supported value is <code>EventTime</code>.</p>"
+                    }
+                },
+                "SortOrder": {
+                    "target": "com.amazonaws.sagemaker#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The order in which to sort the results. Valid values are <code>Ascending</code> or <code>Descending</code> (the default is <code>Descending</code>).</p>"
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.sagemaker#ClusterEventResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of resource for which to filter events. Valid values are <code>Cluster</code>, <code>InstanceGroup</code>, or <code>Instance</code>.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.sagemaker#ClusterEventMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of events to return in the response. Valid range is 1 to 100.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to retrieve the next set of results. This token is obtained from the output of a previous <code>ListClusterEvents</code> call.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#ListClusterEventsResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to retrieve the next set of results. Include this token in subsequent <code>ListClusterEvents</code> calls to fetch more events.</p>"
+                    }
+                },
+                "Events": {
+                    "target": "com.amazonaws.sagemaker#ClusterEventSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of event summaries matching the specified criteria.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sagemaker#ListClusterNodes": {
             "type": "operation",
             "input": {
@@ -41109,6 +42092,12 @@
                     "target": "com.amazonaws.sagemaker#SortOrder",
                     "traits": {
                         "smithy.api#documentation": "<p>The sort order for results. The default value is <code>Ascending</code>.</p>"
+                    }
+                },
+                "IncludeNodeLogicalIds": {
+                    "target": "com.amazonaws.sagemaker#IncludeNodeLogicalIdsBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to include nodes that are still being provisioned in the response. When set to true, the response includes all nodes regardless of their provisioning status. When set to <code>False</code> (default), only nodes with assigned <code>InstanceIds</code> are returned.</p>"
                     }
                 }
             },
@@ -53092,6 +54081,41 @@
                 "smithy.api#pattern": ".*"
             }
         },
+        "com.amazonaws.sagemaker#NodeAdditionResult": {
+            "type": "structure",
+            "members": {
+                "NodeLogicalId": {
+                    "target": "com.amazonaws.sagemaker#ClusterNodeLogicalId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier assigned to the node that can be used to track its provisioning status through the <code>DescribeClusterNode</code> operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceGroupName": {
+                    "target": "com.amazonaws.sagemaker#ClusterInstanceGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the instance group to which the node was added.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#ClusterInstanceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the node. Possible values include <code>Pending</code>, <code>Running</code>, <code>Failed</code>, <code>ShuttingDown</code>, <code>SystemUpdating</code>, <code>DeepHealthCheckInProgress</code>, and <code>NotFound</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a node that was successfully added to the cluster.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#NodeAdditionResultList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#NodeAdditionResult"
+            }
+        },
         "com.amazonaws.sagemaker#NodeUnavailabilityType": {
             "type": "enum",
             "members": {
@@ -63662,6 +64686,9 @@
                     "target": "com.amazonaws.sagemaker#AttachClusterNodeVolume"
                 },
                 {
+                    "target": "com.amazonaws.sagemaker#BatchAddClusterNodes"
+                },
+                {
                     "target": "com.amazonaws.sagemaker#BatchDeleteClusterNodes"
                 },
                 {
@@ -64058,6 +65085,9 @@
                     "target": "com.amazonaws.sagemaker#DescribeCluster"
                 },
                 {
+                    "target": "com.amazonaws.sagemaker#DescribeClusterEvent"
+                },
+                {
                     "target": "com.amazonaws.sagemaker#DescribeClusterNode"
                 },
                 {
@@ -64293,6 +65323,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#ListCandidatesForAutoMLJob"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ListClusterEvents"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#ListClusterNodes"
@@ -69730,6 +70763,14 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#TargetCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
                 }
             }
         },
@@ -75582,6 +76623,12 @@
                     "target": "com.amazonaws.sagemaker#DeploymentConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration to use when updating the AMI versions.</p>"
+                    }
+                },
+                "ImageId": {
+                    "target": "com.amazonaws.sagemaker#ImageId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When configuring your HyperPod cluster, you can specify an image ID using one of the following options:</p> <ul> <li> <p> <code>HyperPodPublicAmiId</code>: Use a HyperPod public AMI</p> </li> <li> <p> <code>CustomAmiId</code>: Use your custom AMI</p> </li> <li> <p> <code>default</code>: Use the default latest system image</p> </li> </ul> <p>f you choose to use a custom AMI (<code>CustomAmiId</code>), ensure it meets the following requirements:</p> <ul> <li> <p>Encryption: The custom AMI must be unencrypted.</p> </li> <li> <p>Ownership: The custom AMI must be owned by the same Amazon Web Services account that is creating the HyperPod cluster.</p> </li> <li> <p>Volume support: Only the primary AMI snapshot volume is supported; additional AMI volumes are not supported.</p> </li> </ul> <p>When updating the instance group's AMI through the <code>UpdateClusterSoftware</code> operation, if an instance group uses a custom AMI, you must provide an <code>ImageId</code> or use the default as input.</p>"
                     }
                 }
             },

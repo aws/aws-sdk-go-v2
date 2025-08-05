@@ -5079,7 +5079,7 @@
                 "MultiAZ": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the DB instance is a Multi-AZ deployment. You can't set \n          the <code>AvailabilityZone</code> parameter if the DB instance is a Multi-AZ deployment.</p>\n         <p>This setting doesn't apply to Amazon Aurora because the DB instance Availability Zones (AZs)\n          are managed by the DB cluster.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the DB instance is a Multi-AZ deployment. You can't set \n          the <code>AvailabilityZone</code> parameter if the DB instance is a Multi-AZ deployment.</p>\n         <p>This setting doesn't apply to the following DB instances:</p>\n         <ul>\n            <li>\n               <p>Amazon Aurora (DB instance Availability Zones (AZs) are managed by the DB cluster.)</p>\n            </li>\n            <li>\n               <p>RDS Custom</p>\n            </li>\n         </ul>"
                     }
                 },
                 "EngineVersion": {
@@ -7610,6 +7610,12 @@
                 "ServerlessV2ScalingConfiguration": {
                     "target": "com.amazonaws.rds#ServerlessV2ScalingConfigurationInfo"
                 },
+                "ServerlessV2PlatformVersion": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the Aurora Serverless V2 platform used by the DB cluster. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html\">Using Aurora Serverless v2</a> in the <i>Amazon Aurora User Guide</i>.</p>"
+                    }
+                },
                 "NetworkType": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
@@ -7675,7 +7681,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster.</p>\n         <p>For an Amazon Aurora DB cluster, this data type is used as a response element in the operations \n          <code>CreateDBCluster</code>, <code>DeleteDBCluster</code>, <code>DescribeDBClusters</code>, \n          <code>FailoverDBCluster</code>, <code>ModifyDBCluster</code>, <code>PromoteReadReplicaDBCluster</code>, \n          <code>RestoreDBClusterFromS3</code>, <code>RestoreDBClusterFromSnapshot</code>, \n          <code>RestoreDBClusterToPointInTime</code>, <code>StartDBCluster</code>, and <code>StopDBCluster</code>.</p>\n         <p>For a Multi-AZ DB cluster, this data type is used as a response element in the operations \n          <code>CreateDBCluster</code>, <code>DeleteDBCluster</code>, <code>DescribeDBClusters</code>, \n          <code>FailoverDBCluster</code>, <code>ModifyDBCluster</code>, <code>RebootDBCluster</code>, \n          <code>RestoreDBClusterFromSnapshot</code>, and <code>RestoreDBClusterToPointInTime</code>.</p>\n         <p>For more information on Amazon Aurora DB clusters, see  \n          <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html\">\n              What is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i>\n         </p>\n         <p>For more information on Multi-AZ DB clusters, see \n          <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html\">\n              Multi-AZ deployments with two readable standby DB instances</a> in the <i>Amazon RDS User Guide.</i>\n         </p>"
+                "smithy.api#documentation": "<p>Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster. </p>\n         <p>For an Amazon Aurora DB cluster, this data type is used as a response element in the operations \n          <code>CreateDBCluster</code>, <code>DeleteDBCluster</code>, <code>DescribeDBClusters</code>, \n          <code>FailoverDBCluster</code>, <code>ModifyDBCluster</code>, <code>PromoteReadReplicaDBCluster</code>, \n          <code>RestoreDBClusterFromS3</code>, <code>RestoreDBClusterFromSnapshot</code>, \n          <code>RestoreDBClusterToPointInTime</code>, <code>StartDBCluster</code>, and <code>StopDBCluster</code>.</p>\n         <p>For a Multi-AZ DB cluster, this data type is used as a response element in the operations \n          <code>CreateDBCluster</code>, <code>DeleteDBCluster</code>, <code>DescribeDBClusters</code>, \n          <code>FailoverDBCluster</code>, <code>ModifyDBCluster</code>, <code>RebootDBCluster</code>, \n          <code>RestoreDBClusterFromSnapshot</code>, and <code>RestoreDBClusterToPointInTime</code>.</p>\n         <p>For more information on Amazon Aurora DB clusters, see  \n          <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html\">\n              What is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i>\n         </p>\n         <p>For more information on Multi-AZ DB clusters, see \n          <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html\">\n              Multi-AZ deployments with two readable standby DB instances</a> in the <i>Amazon RDS User Guide.</i>\n         </p>"
             }
         },
         "com.amazonaws.rds#DBClusterAlreadyExistsFault": {
@@ -29721,18 +29727,18 @@
                 "MinCapacity": {
                     "target": "com.amazonaws.rds#DoubleOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the minimum capacity is 0 ACUs, the engine version supports the automatic pause/resume\n         feature of Aurora Serverless v2.</p>"
+                        "smithy.api#documentation": "<p>If the minimum capacity is 0 ACUs, the engine version or platform version supports the automatic pause/resume\n         feature of Aurora Serverless v2.</p>"
                     }
                 },
                 "MaxCapacity": {
                     "target": "com.amazonaws.rds#DoubleOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Specifies the upper Aurora Serverless v2 capacity limit for a particular engine version.\n         Depending on the engine version, the maximum capacity for an Aurora Serverless v2 cluster might be\n         <code>256</code> or <code>128</code>.\n         </p>"
+                        "smithy.api#documentation": "<p>\n         Specifies the upper Aurora Serverless v2 capacity limit for a particular engine version or platform version.\n         Depending on the engine version, the maximum capacity for an Aurora Serverless v2 cluster might be\n         <code>256</code> or <code>128</code>.\n         </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies any Aurora Serverless v2 properties or limits that differ between Aurora engine versions.\n        You can test the values of this attribute when deciding which Aurora version to use in a new or upgraded\n        DB cluster. You can also retrieve the version of an existing DB cluster and check whether that version\n        supports certain Aurora Serverless v2 features before you attempt to use those features.\n      </p>"
+                "smithy.api#documentation": "<p>Specifies any Aurora Serverless v2 properties or limits that differ between Aurora engine versions and platform versions.\n        You can test the values of this attribute when deciding which Aurora version to use in a new or upgraded\n        DB cluster. You can also retrieve the version of an existing DB cluster and check whether that version\n        supports certain Aurora Serverless v2 features before you attempt to use those features.\n      </p>"
             }
         },
         "com.amazonaws.rds#ServerlessV2ScalingConfiguration": {
@@ -29747,7 +29753,7 @@
                 "MaxCapacity": {
                     "target": "com.amazonaws.rds#DoubleOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster.\n            You can specify ACU values in half-step increments, such as 32, 32.5, 33, and so on. The largest value\n            that you can use is 256 for recent Aurora versions, or 128 for older versions.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster.\n            You can specify ACU values in half-step increments, such as 32, 32.5, 33, and so on. The largest value\n            that you can use is 256 for recent Aurora versions, or 128 for older versions. You can check the attributes of your engine version or platform version to determine the specific maximum capacity supported.</p>"
                     }
                 },
                 "SecondsUntilAutoPause": {
@@ -29773,7 +29779,7 @@
                 "MaxCapacity": {
                     "target": "com.amazonaws.rds#DoubleOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster.\n            You can specify ACU values in half-step increments, such as 32, 32.5, 33, and so on. The largest value\n            that you can use is 256 for recent Aurora versions, or 128 for older versions.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster.\n            You can specify ACU values in half-step increments, such as 32, 32.5, 33, and so on. The largest value\n            that you can use is 256 for recent Aurora versions, or 128 for older versions. You can check the attributes of your engine version or platform version to determine the specific maximum capacity supported.</p>"
                     }
                 },
                 "SecondsUntilAutoPause": {

@@ -2674,6 +2674,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates the current configuration of the block storage capability on your EKS Auto\n            Mode cluster. For example, if the capability is enabled or disabled. If the block\n            storage capability is enabled, EKS Auto Mode will create and delete EBS volumes in your\n            Amazon Web Services account. For more information, see EKS Auto Mode block storage capability in the\n            <i>Amazon EKS User Guide</i>.</p>"
                     }
+                },
+                "deletionProtection": {
+                    "target": "com.amazonaws.eks#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current deletion protection setting for the cluster. When <code>true</code>, \n            deletion protection is enabled and the cluster cannot be deleted until protection is \n            disabled. When <code>false</code>, the cluster can be deleted normally. This setting \n            only applies to clusters in an active state.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3632,6 +3638,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Enable or disable the block storage capability of EKS Auto Mode when creating your EKS\n            Auto Mode cluster. If the block storage capability is enabled, EKS Auto Mode will create\n            and delete EBS volumes in your Amazon Web Services account.</p>"
                     }
+                },
+                "deletionProtection": {
+                    "target": "com.amazonaws.eks#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to enable deletion protection for the cluster. When enabled, the cluster \n            cannot be deleted unless deletion protection is first disabled. This helps prevent \n            accidental cluster deletion. Default value is <code>false</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4303,6 +4315,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.eks#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.eks#InvalidRequestException"
                 },
                 {
                     "target": "com.amazonaws.eks#ResourceInUseException"
@@ -10789,6 +10804,12 @@
                 },
                 "remoteNetworkConfig": {
                     "target": "com.amazonaws.eks#RemoteNetworkConfigRequest"
+                },
+                "deletionProtection": {
+                    "target": "com.amazonaws.eks#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable or disable deletion protection for the cluster. When \n            enabled (<code>true</code>), the cluster cannot be deleted until deletion protection is \n            explicitly disabled. When disabled (<code>false</code>), the cluster can be deleted \n            normally.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11450,6 +11471,12 @@
                     "traits": {
                         "smithy.api#enumValue": "RemoteNetworkConfig"
                     }
+                },
+                "DELETION_PROTECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DeletionProtection"
+                    }
                 }
             }
         },
@@ -11687,6 +11714,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "RemoteNetworkConfigUpdate"
+                    }
+                },
+                "DELETION_PROTECTION_UPDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DeletionProtectionUpdate"
                     }
                 }
             }
