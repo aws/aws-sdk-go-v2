@@ -387,6 +387,12 @@ type Cluster struct {
 	// The Unix epoch timestamp at object creation.
 	CreatedAt *time.Time
 
+	// The current deletion protection setting for the cluster. When true , deletion
+	// protection is enabled and the cluster cannot be deleted until protection is
+	// disabled. When false , the cluster can be deleted normally. This setting only
+	// applies to clusters in an active state.
+	DeletionProtection *bool
+
 	// The encryption configuration for the cluster.
 	EncryptionConfig []EncryptionConfig
 

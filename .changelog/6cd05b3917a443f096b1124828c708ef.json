@@ -1,0 +1,8 @@
+{
+    "id": "6cd05b39-17a4-43f0-96b1-124828c708ef",
+    "type": "feature",
+    "description": "This release introduces Automated Reasoning checks for Amazon Bedrock Guardrails. The feature adds new APIs for policy building, refinement, version management, and testing. Guardrail APIs now support Automated Reasoning policy configuration and validation output.",
+    "modules": [
+        "service/bedrock"
+    ]
+}

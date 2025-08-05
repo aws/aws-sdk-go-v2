@@ -25,6 +25,286 @@ func ExampleAutomatedEvaluationCustomMetricSource_outputUsage() {
 
 var _ *types.CustomMetricDefinition
 
+func ExampleAutomatedReasoningCheckFinding_outputUsage() {
+	var union types.AutomatedReasoningCheckFinding
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AutomatedReasoningCheckFindingMemberImpossible:
+		_ = v.Value // Value is types.AutomatedReasoningCheckImpossibleFinding
+
+	case *types.AutomatedReasoningCheckFindingMemberInvalid:
+		_ = v.Value // Value is types.AutomatedReasoningCheckInvalidFinding
+
+	case *types.AutomatedReasoningCheckFindingMemberNoTranslations:
+		_ = v.Value // Value is types.AutomatedReasoningCheckNoTranslationsFinding
+
+	case *types.AutomatedReasoningCheckFindingMemberSatisfiable:
+		_ = v.Value // Value is types.AutomatedReasoningCheckSatisfiableFinding
+
+	case *types.AutomatedReasoningCheckFindingMemberTooComplex:
+		_ = v.Value // Value is types.AutomatedReasoningCheckTooComplexFinding
+
+	case *types.AutomatedReasoningCheckFindingMemberTranslationAmbiguous:
+		_ = v.Value // Value is types.AutomatedReasoningCheckTranslationAmbiguousFinding
+
+	case *types.AutomatedReasoningCheckFindingMemberValid:
+		_ = v.Value // Value is types.AutomatedReasoningCheckValidFinding
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AutomatedReasoningCheckImpossibleFinding
+var _ *types.AutomatedReasoningCheckNoTranslationsFinding
+var _ *types.AutomatedReasoningCheckTooComplexFinding
+var _ *types.AutomatedReasoningCheckValidFinding
+var _ *types.AutomatedReasoningCheckInvalidFinding
+var _ *types.AutomatedReasoningCheckTranslationAmbiguousFinding
+var _ *types.AutomatedReasoningCheckSatisfiableFinding
+
+func ExampleAutomatedReasoningPolicyAnnotation_outputUsage() {
+	var union types.AutomatedReasoningPolicyAnnotation
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AutomatedReasoningPolicyAnnotationMemberAddRule:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyAddRuleAnnotation
+
+	case *types.AutomatedReasoningPolicyAnnotationMemberAddRuleFromNaturalLanguage:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyAddRuleFromNaturalLanguageAnnotation
+
+	case *types.AutomatedReasoningPolicyAnnotationMemberAddType:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyAddTypeAnnotation
+
+	case *types.AutomatedReasoningPolicyAnnotationMemberAddVariable:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyAddVariableAnnotation
+
+	case *types.AutomatedReasoningPolicyAnnotationMemberDeleteRule:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyDeleteRuleAnnotation
+
+	case *types.AutomatedReasoningPolicyAnnotationMemberDeleteType:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyDeleteTypeAnnotation
+
+	case *types.AutomatedReasoningPolicyAnnotationMemberDeleteVariable:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyDeleteVariableAnnotation
+
+	case *types.AutomatedReasoningPolicyAnnotationMemberIngestContent:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyIngestContentAnnotation
+
+	case *types.AutomatedReasoningPolicyAnnotationMemberUpdateFromRulesFeedback:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyUpdateFromRuleFeedbackAnnotation
+
+	case *types.AutomatedReasoningPolicyAnnotationMemberUpdateFromScenarioFeedback:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyUpdateFromScenarioFeedbackAnnotation
+
+	case *types.AutomatedReasoningPolicyAnnotationMemberUpdateRule:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyUpdateRuleAnnotation
+
+	case *types.AutomatedReasoningPolicyAnnotationMemberUpdateType:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyUpdateTypeAnnotation
+
+	case *types.AutomatedReasoningPolicyAnnotationMemberUpdateVariable:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyUpdateVariableAnnotation
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AutomatedReasoningPolicyUpdateFromScenarioFeedbackAnnotation
+var _ *types.AutomatedReasoningPolicyDeleteRuleAnnotation
+var _ *types.AutomatedReasoningPolicyAddRuleFromNaturalLanguageAnnotation
+var _ *types.AutomatedReasoningPolicyDeleteTypeAnnotation
+var _ *types.AutomatedReasoningPolicyUpdateTypeAnnotation
+var _ *types.AutomatedReasoningPolicyAddRuleAnnotation
+var _ *types.AutomatedReasoningPolicyUpdateVariableAnnotation
+var _ *types.AutomatedReasoningPolicyUpdateFromRuleFeedbackAnnotation
+var _ *types.AutomatedReasoningPolicyAddTypeAnnotation
+var _ *types.AutomatedReasoningPolicyAddVariableAnnotation
+var _ *types.AutomatedReasoningPolicyIngestContentAnnotation
+var _ *types.AutomatedReasoningPolicyDeleteVariableAnnotation
+var _ *types.AutomatedReasoningPolicyUpdateRuleAnnotation
+
+func ExampleAutomatedReasoningPolicyBuildResultAssets_outputUsage() {
+	var union types.AutomatedReasoningPolicyBuildResultAssets
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AutomatedReasoningPolicyBuildResultAssetsMemberBuildLog:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyBuildLog
+
+	case *types.AutomatedReasoningPolicyBuildResultAssetsMemberPolicyDefinition:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyDefinition
+
+	case *types.AutomatedReasoningPolicyBuildResultAssetsMemberQualityReport:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyDefinitionQualityReport
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AutomatedReasoningPolicyBuildLog
+var _ *types.AutomatedReasoningPolicyDefinitionQualityReport
+var _ *types.AutomatedReasoningPolicyDefinition
+
+func ExampleAutomatedReasoningPolicyBuildStepContext_outputUsage() {
+	var union types.AutomatedReasoningPolicyBuildStepContext
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AutomatedReasoningPolicyBuildStepContextMemberMutation:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyMutation
+
+	case *types.AutomatedReasoningPolicyBuildStepContextMemberPlanning:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyPlanning
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AutomatedReasoningPolicyPlanning
+var _ types.AutomatedReasoningPolicyMutation
+
+func ExampleAutomatedReasoningPolicyDefinitionElement_outputUsage() {
+	var union types.AutomatedReasoningPolicyDefinitionElement
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AutomatedReasoningPolicyDefinitionElementMemberPolicyDefinitionRule:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyDefinitionRule
+
+	case *types.AutomatedReasoningPolicyDefinitionElementMemberPolicyDefinitionType:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyDefinitionType
+
+	case *types.AutomatedReasoningPolicyDefinitionElementMemberPolicyDefinitionVariable:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyDefinitionVariable
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AutomatedReasoningPolicyDefinitionRule
+var _ *types.AutomatedReasoningPolicyDefinitionType
+var _ *types.AutomatedReasoningPolicyDefinitionVariable
+
+func ExampleAutomatedReasoningPolicyMutation_outputUsage() {
+	var union types.AutomatedReasoningPolicyMutation
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AutomatedReasoningPolicyMutationMemberAddRule:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyAddRuleMutation
+
+	case *types.AutomatedReasoningPolicyMutationMemberAddType:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyAddTypeMutation
+
+	case *types.AutomatedReasoningPolicyMutationMemberAddVariable:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyAddVariableMutation
+
+	case *types.AutomatedReasoningPolicyMutationMemberDeleteRule:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyDeleteRuleMutation
+
+	case *types.AutomatedReasoningPolicyMutationMemberDeleteType:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyDeleteTypeMutation
+
+	case *types.AutomatedReasoningPolicyMutationMemberDeleteVariable:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyDeleteVariableMutation
+
+	case *types.AutomatedReasoningPolicyMutationMemberUpdateRule:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyUpdateRuleMutation
+
+	case *types.AutomatedReasoningPolicyMutationMemberUpdateType:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyUpdateTypeMutation
+
+	case *types.AutomatedReasoningPolicyMutationMemberUpdateVariable:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyUpdateVariableMutation
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AutomatedReasoningPolicyDeleteRuleMutation
+var _ *types.AutomatedReasoningPolicyUpdateTypeMutation
+var _ *types.AutomatedReasoningPolicyUpdateRuleMutation
+var _ *types.AutomatedReasoningPolicyAddVariableMutation
+var _ *types.AutomatedReasoningPolicyAddTypeMutation
+var _ *types.AutomatedReasoningPolicyUpdateVariableMutation
+var _ *types.AutomatedReasoningPolicyDeleteVariableMutation
+var _ *types.AutomatedReasoningPolicyAddRuleMutation
+var _ *types.AutomatedReasoningPolicyDeleteTypeMutation
+
+func ExampleAutomatedReasoningPolicyTypeValueAnnotation_outputUsage() {
+	var union types.AutomatedReasoningPolicyTypeValueAnnotation
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AutomatedReasoningPolicyTypeValueAnnotationMemberAddTypeValue:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyAddTypeValue
+
+	case *types.AutomatedReasoningPolicyTypeValueAnnotationMemberDeleteTypeValue:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyDeleteTypeValue
+
+	case *types.AutomatedReasoningPolicyTypeValueAnnotationMemberUpdateTypeValue:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyUpdateTypeValue
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AutomatedReasoningPolicyAddTypeValue
+var _ *types.AutomatedReasoningPolicyUpdateTypeValue
+var _ *types.AutomatedReasoningPolicyDeleteTypeValue
+
+func ExampleAutomatedReasoningPolicyWorkflowTypeContent_outputUsage() {
+	var union types.AutomatedReasoningPolicyWorkflowTypeContent
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AutomatedReasoningPolicyWorkflowTypeContentMemberDocuments:
+		_ = v.Value // Value is []types.AutomatedReasoningPolicyBuildWorkflowDocument
+
+	case *types.AutomatedReasoningPolicyWorkflowTypeContentMemberPolicyRepairAssets:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyBuildWorkflowRepairContent
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AutomatedReasoningPolicyBuildWorkflowRepairContent
+var _ []types.AutomatedReasoningPolicyBuildWorkflowDocument
+
 func ExampleCustomizationConfig_outputUsage() {
 	var union types.CustomizationConfig
 	// type switches can be used to check the union value

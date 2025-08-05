@@ -42,6 +42,17 @@ type CreateClusterInput struct {
 	// The instance groups to be created in the SageMaker HyperPod cluster.
 	InstanceGroups []types.ClusterInstanceGroupSpecification
 
+	// The mode for provisioning nodes in the cluster. You can specify the following
+	// modes:
+	//
+	//   - Continuous: Scaling behavior that enables 1) concurrent operation execution
+	//   within instance groups, 2) continuous retry mechanisms for failed operations, 3)
+	//   enhanced customer visibility into cluster events through detailed event streams,
+	//   4) partial provisioning capabilities. Your clusters and instance groups remain
+	//   InService while scaling. This mode is only supported for EKS orchestrated
+	//   clusters.
+	NodeProvisioningMode types.ClusterNodeProvisioningMode
+
 	// The node recovery mode for the SageMaker HyperPod cluster. When set to Automatic
 	// , SageMaker HyperPod will automatically reboot or replace faulty nodes when
 	// issues are detected. When set to None , cluster administrators will need to

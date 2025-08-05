@@ -977,6 +977,12 @@ type DBCluster struct {
 	// [Using Amazon Aurora Serverless v1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html
 	ScalingConfigurationInfo *ScalingConfigurationInfo
 
+	// The version of the Aurora Serverless V2 platform used by the DB cluster. For
+	// more information, see [Using Aurora Serverless v2]in the Amazon Aurora User Guide.
+	//
+	// [Using Aurora Serverless v2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
+	ServerlessV2PlatformVersion *string
+
 	// The scaling configuration for an Aurora Serverless v2 DB cluster.
 	//
 	// For more information, see [Using Amazon Aurora Serverless v2] in the Amazon Aurora User Guide.
@@ -4972,20 +4978,20 @@ type ScalingConfigurationInfo struct {
 }
 
 // Specifies any Aurora Serverless v2 properties or limits that differ between
-// Aurora engine versions. You can test the values of this attribute when deciding
-// which Aurora version to use in a new or upgraded DB cluster. You can also
-// retrieve the version of an existing DB cluster and check whether that version
-// supports certain Aurora Serverless v2 features before you attempt to use those
-// features.
+// Aurora engine versions and platform versions. You can test the values of this
+// attribute when deciding which Aurora version to use in a new or upgraded DB
+// cluster. You can also retrieve the version of an existing DB cluster and check
+// whether that version supports certain Aurora Serverless v2 features before you
+// attempt to use those features.
 type ServerlessV2FeaturesSupport struct {
 
 	//  Specifies the upper Aurora Serverless v2 capacity limit for a particular
-	// engine version. Depending on the engine version, the maximum capacity for an
-	// Aurora Serverless v2 cluster might be 256 or 128 .
+	// engine version or platform version. Depending on the engine version, the maximum
+	// capacity for an Aurora Serverless v2 cluster might be 256 or 128 .
 	MaxCapacity *float64
 
-	// If the minimum capacity is 0 ACUs, the engine version supports the automatic
-	// pause/resume feature of Aurora Serverless v2.
+	// If the minimum capacity is 0 ACUs, the engine version or platform version
+	// supports the automatic pause/resume feature of Aurora Serverless v2.
 	MinCapacity *float64
 
 	noSmithyDocumentSerde
@@ -5001,7 +5007,9 @@ type ServerlessV2ScalingConfiguration struct {
 	// The maximum number of Aurora capacity units (ACUs) for a DB instance in an
 	// Aurora Serverless v2 cluster. You can specify ACU values in half-step
 	// increments, such as 32, 32.5, 33, and so on. The largest value that you can use
-	// is 256 for recent Aurora versions, or 128 for older versions.
+	// is 256 for recent Aurora versions, or 128 for older versions. You can check the
+	// attributes of your engine version or platform version to determine the specific
+	// maximum capacity supported.
 	MaxCapacity *float64
 
 	// The minimum number of Aurora capacity units (ACUs) for a DB instance in an
@@ -5032,7 +5040,9 @@ type ServerlessV2ScalingConfigurationInfo struct {
 	// The maximum number of Aurora capacity units (ACUs) for a DB instance in an
 	// Aurora Serverless v2 cluster. You can specify ACU values in half-step
 	// increments, such as 32, 32.5, 33, and so on. The largest value that you can use
-	// is 256 for recent Aurora versions, or 128 for older versions.
+	// is 256 for recent Aurora versions, or 128 for older versions. You can check the
+	// attributes of your engine version or platform version to determine the specific
+	// maximum capacity supported.
 	MaxCapacity *float64
 
 	// The minimum number of Aurora capacity units (ACUs) for a DB instance in an

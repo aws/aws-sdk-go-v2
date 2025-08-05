@@ -39,6 +39,12 @@ type DescribeClusterNodeInput struct {
 	// The ID of the SageMaker HyperPod cluster node.
 	NodeId *string
 
+	// The logical identifier of the node to describe. You can specify either
+	// NodeLogicalId or InstanceId , but not both. NodeLogicalId can be used to
+	// describe nodes that are still being provisioned and don't yet have an InstanceId
+	// assigned.
+	NodeLogicalId *string
+
 	noSmithyDocumentSerde
 }
 

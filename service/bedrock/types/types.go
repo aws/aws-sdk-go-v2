@@ -87,6 +87,1679 @@ type AutomatedEvaluationCustomMetricSourceMemberCustomMetricDefinition struct {
 func (*AutomatedEvaluationCustomMetricSourceMemberCustomMetricDefinition) isAutomatedEvaluationCustomMetricSource() {
 }
 
+// Represents the result of an Automated Reasoning validation check, indicating
+// whether the content is logically valid, invalid, or falls into other categories
+// based on the policy rules.
+//
+// The following types satisfy this interface:
+//
+//	AutomatedReasoningCheckFindingMemberImpossible
+//	AutomatedReasoningCheckFindingMemberInvalid
+//	AutomatedReasoningCheckFindingMemberNoTranslations
+//	AutomatedReasoningCheckFindingMemberSatisfiable
+//	AutomatedReasoningCheckFindingMemberTooComplex
+//	AutomatedReasoningCheckFindingMemberTranslationAmbiguous
+//	AutomatedReasoningCheckFindingMemberValid
+type AutomatedReasoningCheckFinding interface {
+	isAutomatedReasoningCheckFinding()
+}
+
+// Indicates that Automated Reasoning cannot make a statement about the claims.
+// This can happen if the premises are logically incorrect, or if there is a
+// conflict within the Automated Reasoning policy itself.
+type AutomatedReasoningCheckFindingMemberImpossible struct {
+	Value AutomatedReasoningCheckImpossibleFinding
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningCheckFindingMemberImpossible) isAutomatedReasoningCheckFinding() {}
+
+// Indicates that the claims are false. The claims are not implied by the premises
+// and Automated Reasoning policy. Furthermore, there exist different claims that
+// are consistent with the premises and Automated Reasoning policy.
+type AutomatedReasoningCheckFindingMemberInvalid struct {
+	Value AutomatedReasoningCheckInvalidFinding
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningCheckFindingMemberInvalid) isAutomatedReasoningCheckFinding() {}
+
+// Identifies that some or all of the input prompt wasn't translated into logic.
+// This can happen if the input isn't relevant to the Automated Reasoning policy,
+// or if the policy doesn't have variables to model relevant input.
+type AutomatedReasoningCheckFindingMemberNoTranslations struct {
+	Value AutomatedReasoningCheckNoTranslationsFinding
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningCheckFindingMemberNoTranslations) isAutomatedReasoningCheckFinding() {}
+
+// Indicates that the claims can be true or false. It depends on what assumptions
+// are made for the claim to be implied from the premises and Automated Reasoning
+// policy rules. In this situation, different assumptions can make input claims
+// false and alternative claims true.
+type AutomatedReasoningCheckFindingMemberSatisfiable struct {
+	Value AutomatedReasoningCheckSatisfiableFinding
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningCheckFindingMemberSatisfiable) isAutomatedReasoningCheckFinding() {}
+
+// Indicates that the input contains too much information for Automated Reasoning
+// to process within its latency limits.
+type AutomatedReasoningCheckFindingMemberTooComplex struct {
+	Value AutomatedReasoningCheckTooComplexFinding
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningCheckFindingMemberTooComplex) isAutomatedReasoningCheckFinding() {}
+
+// Indicates that an ambiguity was detected in the translation, making it unsound
+// to continue with validity checking. Additional context or follow-up questions
+// might be needed to get translation to succeed.
+type AutomatedReasoningCheckFindingMemberTranslationAmbiguous struct {
+	Value AutomatedReasoningCheckTranslationAmbiguousFinding
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningCheckFindingMemberTranslationAmbiguous) isAutomatedReasoningCheckFinding() {}
+
+// Indicates that the claims are true. The claims are implied by the premises and
+// the Automated Reasoning policy. Given the Automated Reasoning policy and
+// premises, it is not possible for these claims to be false.
+type AutomatedReasoningCheckFindingMemberValid struct {
+	Value AutomatedReasoningCheckValidFinding
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningCheckFindingMemberValid) isAutomatedReasoningCheckFinding() {}
+
+// Indicates that no valid claims can be made due to logical contradictions in the
+// premises or rules.
+type AutomatedReasoningCheckImpossibleFinding struct {
+
+	// The automated reasoning policy rules that contradict the claims and/or premises
+	// in the input.
+	ContradictingRules []AutomatedReasoningCheckRule
+
+	// Indication of a logic issue with the translation without needing to consider
+	// the automated reasoning policy rules.
+	LogicWarning *AutomatedReasoningCheckLogicWarning
+
+	// The logical translation of the input that this finding evaluates.
+	Translation *AutomatedReasoningCheckTranslation
+
+	noSmithyDocumentSerde
+}
+
+// References a portion of the original input text that corresponds to logical
+// elements.
+type AutomatedReasoningCheckInputTextReference struct {
+
+	// The specific text from the original input that this reference points to.
+	Text *string
+
+	noSmithyDocumentSerde
+}
+
+// Indicates that the claims are logically false and contradictory to the
+// established rules or premises.
+type AutomatedReasoningCheckInvalidFinding struct {
+
+	// The automated reasoning policy rules that contradict the claims in the input.
+	ContradictingRules []AutomatedReasoningCheckRule
+
+	// Indication of a logic issue with the translation without needing to consider
+	// the automated reasoning policy rules.
+	LogicWarning *AutomatedReasoningCheckLogicWarning
+
+	// The logical translation of the input that this finding invalidates.
+	Translation *AutomatedReasoningCheckTranslation
+
+	noSmithyDocumentSerde
+}
+
+// Identifies logical issues in the translated statements that exist independent
+// of any policy rules, such as statements that are always true or always false.
+type AutomatedReasoningCheckLogicWarning struct {
+
+	// The logical statements that are validated while assuming the policy and
+	// premises.
+	Claims []AutomatedReasoningLogicStatement
+
+	// The logical statements that serve as premises under which the claims are
+	// validated.
+	Premises []AutomatedReasoningLogicStatement
+
+	// The category of the detected logical issue, such as statements that are always
+	// true or always false.
+	Type AutomatedReasoningCheckLogicWarningType
+
+	noSmithyDocumentSerde
+}
+
+// Indicates that no relevant logical information could be extracted from the
+// input for validation.
+type AutomatedReasoningCheckNoTranslationsFinding struct {
+	noSmithyDocumentSerde
+}
+
+// References a specific automated reasoning policy rule that was applied during
+// evaluation.
+type AutomatedReasoningCheckRule struct {
+
+	// The unique identifier of the automated reasoning rule.
+	Id *string
+
+	// The ARN of the automated reasoning policy version that contains this rule.
+	PolicyVersionArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Indicates that the claims could be either true or false depending on additional
+// assumptions not provided in the input.
+type AutomatedReasoningCheckSatisfiableFinding struct {
+
+	// An example scenario demonstrating how the claims could be logically false.
+	ClaimsFalseScenario *AutomatedReasoningCheckScenario
+
+	// An example scenario demonstrating how the claims could be logically true.
+	ClaimsTrueScenario *AutomatedReasoningCheckScenario
+
+	// Indication of a logic issue with the translation without needing to consider
+	// the automated reasoning policy rules.
+	LogicWarning *AutomatedReasoningCheckLogicWarning
+
+	// The logical translation of the input that this finding evaluates.
+	Translation *AutomatedReasoningCheckTranslation
+
+	noSmithyDocumentSerde
+}
+
+// Represents a logical scenario where claims can be evaluated as true or false,
+// containing specific logical assignments.
+type AutomatedReasoningCheckScenario struct {
+
+	// List of logical assignments and statements that define this scenario.
+	Statements []AutomatedReasoningLogicStatement
+
+	noSmithyDocumentSerde
+}
+
+// Indicates that the input exceeds the processing capacity due to the volume or
+// complexity of the logical information.
+type AutomatedReasoningCheckTooComplexFinding struct {
+	noSmithyDocumentSerde
+}
+
+// Contains the logical translation of natural language input into formal logical
+// statements, including premises, claims, and confidence scores.
+type AutomatedReasoningCheckTranslation struct {
+
+	// The logical statements that are being validated against the premises and policy
+	// rules.
+	//
+	// This member is required.
+	Claims []AutomatedReasoningLogicStatement
+
+	// A confidence score between 0 and 1 indicating how certain the system is about
+	// the logical translation.
+	//
+	// This member is required.
+	Confidence *float64
+
+	// The logical statements that serve as the foundation or assumptions for the
+	// claims.
+	Premises []AutomatedReasoningLogicStatement
+
+	// References to portions of the original input text that correspond to the claims
+	// but could not be fully translated.
+	UntranslatedClaims []AutomatedReasoningCheckInputTextReference
+
+	// References to portions of the original input text that correspond to the
+	// premises but could not be fully translated.
+	UntranslatedPremises []AutomatedReasoningCheckInputTextReference
+
+	noSmithyDocumentSerde
+}
+
+// Indicates that the input has multiple valid logical interpretations, requiring
+// additional context or clarification.
+type AutomatedReasoningCheckTranslationAmbiguousFinding struct {
+
+	// Scenarios showing how the different translation options differ in meaning.
+	DifferenceScenarios []AutomatedReasoningCheckScenario
+
+	// Different logical interpretations that were detected during translation of the
+	// input.
+	Options []AutomatedReasoningCheckTranslationOption
+
+	noSmithyDocumentSerde
+}
+
+// Represents one possible logical interpretation of ambiguous input content.
+type AutomatedReasoningCheckTranslationOption struct {
+
+	// Different logical interpretations that were detected during translation of the
+	// input.
+	Translations []AutomatedReasoningCheckTranslation
+
+	noSmithyDocumentSerde
+}
+
+// Indicates that the claims are definitively true and logically implied by the
+// premises, with no possible alternative interpretations.
+type AutomatedReasoningCheckValidFinding struct {
+
+	// An example scenario demonstrating how the claims are logically true.
+	ClaimsTrueScenario *AutomatedReasoningCheckScenario
+
+	// Indication of a logic issue with the translation without needing to consider
+	// the automated reasoning policy rules.
+	LogicWarning *AutomatedReasoningCheckLogicWarning
+
+	// The automated reasoning policy rules that support why this result is considered
+	// valid.
+	SupportingRules []AutomatedReasoningCheckRule
+
+	// The logical translation of the input that this finding validates.
+	Translation *AutomatedReasoningCheckTranslation
+
+	noSmithyDocumentSerde
+}
+
+// Represents a logical statement that can be expressed both in formal logic
+// notation and natural language, providing dual representations for better
+// understanding and validation.
+type AutomatedReasoningLogicStatement struct {
+
+	// The formal logic representation of the statement using mathematical notation
+	// and logical operators.
+	//
+	// This member is required.
+	Logic *string
+
+	// The natural language representation of the logical statement, providing a
+	// human-readable interpretation of the formal logic.
+	NaturalLanguage *string
+
+	noSmithyDocumentSerde
+}
+
+// An annotation for adding a new rule to an Automated Reasoning policy using a
+// formal logical expression.
+type AutomatedReasoningPolicyAddRuleAnnotation struct {
+
+	// The formal logical expression that defines the rule, using mathematical
+	// notation and referencing policy variables and types.
+	//
+	// This member is required.
+	Expression *string
+
+	noSmithyDocumentSerde
+}
+
+// An annotation for adding a new rule to the policy by converting a natural
+// language description into a formal logical expression.
+type AutomatedReasoningPolicyAddRuleFromNaturalLanguageAnnotation struct {
+
+	// The natural language description of the rule that should be converted into a
+	// formal logical expression.
+	//
+	// This member is required.
+	NaturalLanguage *string
+
+	noSmithyDocumentSerde
+}
+
+// A mutation operation that adds a new rule to the policy definition during the
+// build process.
+type AutomatedReasoningPolicyAddRuleMutation struct {
+
+	// Represents a formal logic rule in an Automated Reasoning policy. For example,
+	// rules can be expressed as if-then statements that define logical constraints.
+	//
+	// This member is required.
+	Rule *AutomatedReasoningPolicyDefinitionRule
+
+	noSmithyDocumentSerde
+}
+
+// An annotation for adding a new custom type to an Automated Reasoning policy,
+// defining a set of possible values for variables.
+type AutomatedReasoningPolicyAddTypeAnnotation struct {
+
+	// A description of what the custom type represents and how it should be used in
+	// the policy.
+	//
+	// This member is required.
+	Description *string
+
+	// The name of the new custom type. This name will be used to reference the type
+	// in variable definitions and rules.
+	//
+	// This member is required.
+	Name *string
+
+	// The list of possible values that variables of this type can take, each with its
+	// own description and identifier.
+	//
+	// This member is required.
+	Values []AutomatedReasoningPolicyDefinitionTypeValue
+
+	noSmithyDocumentSerde
+}
+
+// A mutation operation that adds a new custom type to the policy definition
+// during the build process.
+type AutomatedReasoningPolicyAddTypeMutation struct {
+
+	// Represents a custom user-defined viarble type in an Automated Reasoning policy.
+	// Types are enum-based and provide additional context beyond predefined variable
+	// types.
+	//
+	// This member is required.
+	Type *AutomatedReasoningPolicyDefinitionType
+
+	noSmithyDocumentSerde
+}
+
+// Represents a single value that can be added to an existing custom type in the
+// policy.
+type AutomatedReasoningPolicyAddTypeValue struct {
+
+	// The identifier or name of the new value to add to the type.
+	//
+	// This member is required.
+	Value *string
+
+	// A description of what this new type value represents and when it should be used.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// An annotation for adding a new variable to an Automated Reasoning policy, which
+// can be used in rule expressions.
+type AutomatedReasoningPolicyAddVariableAnnotation struct {
+
+	// A description of what the variable represents and how it should be used in
+	// rules.
+	//
+	// This member is required.
+	Description *string
+
+	// The name of the new variable. This name will be used to reference the variable
+	// in rule expressions.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of the variable, which can be a built-in type (like string or number)
+	// or a custom type defined in the policy.
+	//
+	// This member is required.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// A mutation operation that adds a new variable to the policy definition during
+// the build process.
+type AutomatedReasoningPolicyAddVariableMutation struct {
+
+	// Represents a variable in an Automated Reasoning policy. Variables represent
+	// concepts that can have values assigned during natural language translation.
+	//
+	// This member is required.
+	Variable *AutomatedReasoningPolicyDefinitionVariable
+
+	noSmithyDocumentSerde
+}
+
+// Contains the various operations that can be performed on an Automated Reasoning
+// policy, including adding, updating, and deleting rules, variables, and types.
+//
+// The following types satisfy this interface:
+//
+//	AutomatedReasoningPolicyAnnotationMemberAddRule
+//	AutomatedReasoningPolicyAnnotationMemberAddRuleFromNaturalLanguage
+//	AutomatedReasoningPolicyAnnotationMemberAddType
+//	AutomatedReasoningPolicyAnnotationMemberAddVariable
+//	AutomatedReasoningPolicyAnnotationMemberDeleteRule
+//	AutomatedReasoningPolicyAnnotationMemberDeleteType
+//	AutomatedReasoningPolicyAnnotationMemberDeleteVariable
+//	AutomatedReasoningPolicyAnnotationMemberIngestContent
+//	AutomatedReasoningPolicyAnnotationMemberUpdateFromRulesFeedback
+//	AutomatedReasoningPolicyAnnotationMemberUpdateFromScenarioFeedback
+//	AutomatedReasoningPolicyAnnotationMemberUpdateRule
+//	AutomatedReasoningPolicyAnnotationMemberUpdateType
+//	AutomatedReasoningPolicyAnnotationMemberUpdateVariable
+type AutomatedReasoningPolicyAnnotation interface {
+	isAutomatedReasoningPolicyAnnotation()
+}
+
+// An operation to add a new logical rule to the policy using formal mathematical
+// expressions.
+type AutomatedReasoningPolicyAnnotationMemberAddRule struct {
+	Value AutomatedReasoningPolicyAddRuleAnnotation
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyAnnotationMemberAddRule) isAutomatedReasoningPolicyAnnotation() {}
+
+// An operation to add a new rule by converting natural language descriptions into
+// formal logical expressions.
+type AutomatedReasoningPolicyAnnotationMemberAddRuleFromNaturalLanguage struct {
+	Value AutomatedReasoningPolicyAddRuleFromNaturalLanguageAnnotation
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyAnnotationMemberAddRuleFromNaturalLanguage) isAutomatedReasoningPolicyAnnotation() {
+}
+
+// An operation to add a new custom type to the policy, defining a set of possible
+// values for policy variables.
+type AutomatedReasoningPolicyAnnotationMemberAddType struct {
+	Value AutomatedReasoningPolicyAddTypeAnnotation
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyAnnotationMemberAddType) isAutomatedReasoningPolicyAnnotation() {}
+
+// An operation to add a new variable to the policy, which can be used in rule
+// expressions to represent dynamic values.
+type AutomatedReasoningPolicyAnnotationMemberAddVariable struct {
+	Value AutomatedReasoningPolicyAddVariableAnnotation
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyAnnotationMemberAddVariable) isAutomatedReasoningPolicyAnnotation() {}
+
+// An operation to remove a rule from the policy.
+type AutomatedReasoningPolicyAnnotationMemberDeleteRule struct {
+	Value AutomatedReasoningPolicyDeleteRuleAnnotation
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyAnnotationMemberDeleteRule) isAutomatedReasoningPolicyAnnotation() {}
+
+// An operation to remove a custom type from the policy. The type must not be
+// referenced by any variables or rules.
+type AutomatedReasoningPolicyAnnotationMemberDeleteType struct {
+	Value AutomatedReasoningPolicyDeleteTypeAnnotation
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyAnnotationMemberDeleteType) isAutomatedReasoningPolicyAnnotation() {}
+
+// An operation to remove a variable from the policy. The variable must not be
+// referenced by any rules.
+type AutomatedReasoningPolicyAnnotationMemberDeleteVariable struct {
+	Value AutomatedReasoningPolicyDeleteVariableAnnotation
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyAnnotationMemberDeleteVariable) isAutomatedReasoningPolicyAnnotation() {
+}
+
+// An operation to process and incorporate new content into the policy, extracting
+// additional rules and concepts.
+type AutomatedReasoningPolicyAnnotationMemberIngestContent struct {
+	Value AutomatedReasoningPolicyIngestContentAnnotation
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyAnnotationMemberIngestContent) isAutomatedReasoningPolicyAnnotation() {
+}
+
+// An operation to update the policy based on feedback about how specific rules
+// performed during testing or validation.
+type AutomatedReasoningPolicyAnnotationMemberUpdateFromRulesFeedback struct {
+	Value AutomatedReasoningPolicyUpdateFromRuleFeedbackAnnotation
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyAnnotationMemberUpdateFromRulesFeedback) isAutomatedReasoningPolicyAnnotation() {
+}
+
+// An operation to update the policy based on feedback about how it performed on
+// specific test scenarios.
+type AutomatedReasoningPolicyAnnotationMemberUpdateFromScenarioFeedback struct {
+	Value AutomatedReasoningPolicyUpdateFromScenarioFeedbackAnnotation
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyAnnotationMemberUpdateFromScenarioFeedback) isAutomatedReasoningPolicyAnnotation() {
+}
+
+// An operation to modify an existing rule in the policy, such as changing its
+// logical expression or conditions.
+type AutomatedReasoningPolicyAnnotationMemberUpdateRule struct {
+	Value AutomatedReasoningPolicyUpdateRuleAnnotation
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyAnnotationMemberUpdateRule) isAutomatedReasoningPolicyAnnotation() {}
+
+// An operation to modify an existing custom type in the policy, such as changing
+// its name, description, or allowed values.
+type AutomatedReasoningPolicyAnnotationMemberUpdateType struct {
+	Value AutomatedReasoningPolicyUpdateTypeAnnotation
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyAnnotationMemberUpdateType) isAutomatedReasoningPolicyAnnotation() {}
+
+// An operation to modify an existing variable in the policy, such as changing its
+// name, type, or description.
+type AutomatedReasoningPolicyAnnotationMemberUpdateVariable struct {
+	Value AutomatedReasoningPolicyUpdateVariableAnnotation
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyAnnotationMemberUpdateVariable) isAutomatedReasoningPolicyAnnotation() {
+}
+
+// Contains detailed logging information about the policy build process, including
+// steps taken, decisions made, and any issues encountered.
+type AutomatedReasoningPolicyBuildLog struct {
+
+	// A list of log entries documenting each step in the policy build process,
+	// including timestamps, status, and detailed messages.
+	//
+	// This member is required.
+	Entries []AutomatedReasoningPolicyBuildLogEntry
+
+	noSmithyDocumentSerde
+}
+
+// Represents a single entry in the policy build log, containing information about
+// a specific step or event in the build process.
+type AutomatedReasoningPolicyBuildLogEntry struct {
+
+	// The annotation or operation that was being processed when this log entry was
+	// created.
+	//
+	// This member is required.
+	Annotation AutomatedReasoningPolicyAnnotation
+
+	// Detailed information about the specific build steps that were executed,
+	// including any sub-operations or transformations.
+	//
+	// This member is required.
+	BuildSteps []AutomatedReasoningPolicyBuildStep
+
+	// The status of the build step (e.g., SUCCESS, FAILED, IN_PROGRESS).
+	//
+	// This member is required.
+	Status AutomatedReasoningPolicyAnnotationStatus
+
+	noSmithyDocumentSerde
+}
+
+// Contains the various assets generated during a policy build workflow, including
+// logs, quality reports, and the final policy definition.
+//
+// The following types satisfy this interface:
+//
+//	AutomatedReasoningPolicyBuildResultAssetsMemberBuildLog
+//	AutomatedReasoningPolicyBuildResultAssetsMemberPolicyDefinition
+//	AutomatedReasoningPolicyBuildResultAssetsMemberQualityReport
+type AutomatedReasoningPolicyBuildResultAssets interface {
+	isAutomatedReasoningPolicyBuildResultAssets()
+}
+
+// The complete build log containing detailed information about each step in the
+// policy generation process.
+type AutomatedReasoningPolicyBuildResultAssetsMemberBuildLog struct {
+	Value AutomatedReasoningPolicyBuildLog
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyBuildResultAssetsMemberBuildLog) isAutomatedReasoningPolicyBuildResultAssets() {
+}
+
+// Contains the formal logic rules, variables, and custom variable types that
+// define an Automated Reasoning policy. The policy definition specifies the
+// constraints used to validate foundation model responses for accuracy and logical
+// consistency.
+type AutomatedReasoningPolicyBuildResultAssetsMemberPolicyDefinition struct {
+	Value AutomatedReasoningPolicyDefinition
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyBuildResultAssetsMemberPolicyDefinition) isAutomatedReasoningPolicyBuildResultAssets() {
+}
+
+// A comprehensive report analyzing the quality of the generated policy, including
+// metrics about rule coverage, potential conflicts, and unused elements.
+type AutomatedReasoningPolicyBuildResultAssetsMemberQualityReport struct {
+	Value AutomatedReasoningPolicyDefinitionQualityReport
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyBuildResultAssetsMemberQualityReport) isAutomatedReasoningPolicyBuildResultAssets() {
+}
+
+// Represents a single step in the policy build process, containing context about
+// what was being processed and any messages or results.
+type AutomatedReasoningPolicyBuildStep struct {
+
+	// Contextual information about what was being processed during this build step,
+	// such as the type of operation or the source material being analyzed.
+	//
+	// This member is required.
+	Context AutomatedReasoningPolicyBuildStepContext
+
+	// A list of messages generated during this build step, including informational
+	// messages, warnings, and error details.
+	//
+	// This member is required.
+	Messages []AutomatedReasoningPolicyBuildStepMessage
+
+	// Reference to the previous element or step in the build process, helping to
+	// trace the sequence of operations.
+	PriorElement AutomatedReasoningPolicyDefinitionElement
+
+	noSmithyDocumentSerde
+}
+
+// Provides context about what type of operation was being performed during a
+// build step.
+//
+// The following types satisfy this interface:
+//
+//	AutomatedReasoningPolicyBuildStepContextMemberMutation
+//	AutomatedReasoningPolicyBuildStepContextMemberPlanning
+type AutomatedReasoningPolicyBuildStepContext interface {
+	isAutomatedReasoningPolicyBuildStepContext()
+}
+
+// Indicates that this build step involved modifying the policy structure, such as
+// adding or updating rules, variables, or types.
+type AutomatedReasoningPolicyBuildStepContextMemberMutation struct {
+	Value AutomatedReasoningPolicyMutation
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyBuildStepContextMemberMutation) isAutomatedReasoningPolicyBuildStepContext() {
+}
+
+// Indicates that this build step was part of the planning phase, where the system
+// determines what operations to perform.
+type AutomatedReasoningPolicyBuildStepContextMemberPlanning struct {
+	Value AutomatedReasoningPolicyPlanning
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyBuildStepContextMemberPlanning) isAutomatedReasoningPolicyBuildStepContext() {
+}
+
+// Represents a message generated during a build step, providing information about
+// what happened or any issues encountered.
+type AutomatedReasoningPolicyBuildStepMessage struct {
+
+	// The content of the message, describing what occurred during the build step.
+	//
+	// This member is required.
+	Message *string
+
+	// The type of message (e.g., INFO, WARNING, ERROR) indicating its severity and
+	// purpose.
+	//
+	// This member is required.
+	MessageType AutomatedReasoningPolicyBuildMessageType
+
+	noSmithyDocumentSerde
+}
+
+// Represents a source document used in the policy build workflow, containing the
+// content and metadata needed for policy generation.
+type AutomatedReasoningPolicyBuildWorkflowDocument struct {
+
+	// The actual content of the source document that will be analyzed to extract
+	// policy rules and concepts.
+	//
+	// This member is required.
+	Document []byte
+
+	// The MIME type of the document content (e.g., text/plain, application/pdf,
+	// text/markdown).
+	//
+	// This member is required.
+	DocumentContentType AutomatedReasoningPolicyBuildDocumentContentType
+
+	// A descriptive name for the document that helps identify its purpose and content.
+	//
+	// This member is required.
+	DocumentName *string
+
+	// A detailed description of the document's content and how it should be used in
+	// the policy generation process.
+	DocumentDescription *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains content and instructions for repairing or improving an existing
+// Automated Reasoning policy.
+type AutomatedReasoningPolicyBuildWorkflowRepairContent struct {
+
+	// Specific annotations or modifications to apply during the policy repair
+	// process, such as rule corrections or variable updates.
+	//
+	// This member is required.
+	Annotations []AutomatedReasoningPolicyAnnotation
+
+	noSmithyDocumentSerde
+}
+
+// Defines the source content for a policy build workflow, which can include
+// documents, repair instructions, or other input materials.
+type AutomatedReasoningPolicyBuildWorkflowSource struct {
+
+	// Contains the formal logic rules, variables, and custom variable types that
+	// define an Automated Reasoning policy. The policy definition specifies the
+	// constraints used to validate foundation model responses for accuracy and logical
+	// consistency.
+	PolicyDefinition *AutomatedReasoningPolicyDefinition
+
+	// The actual content to be processed in the build workflow, such as documents to
+	// analyze or repair instructions to apply.
+	WorkflowContent AutomatedReasoningPolicyWorkflowTypeContent
+
+	noSmithyDocumentSerde
+}
+
+// Provides a summary of a policy build workflow, including its current status,
+// timing information, and key identifiers.
+type AutomatedReasoningPolicyBuildWorkflowSummary struct {
+
+	// The unique identifier of the build workflow.
+	//
+	// This member is required.
+	BuildWorkflowId *string
+
+	// The type of build workflow (e.g., DOCUMENT_INGESTION, POLICY_REPAIR).
+	//
+	// This member is required.
+	BuildWorkflowType AutomatedReasoningPolicyBuildWorkflowType
+
+	// The timestamp when the build workflow was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the Automated Reasoning policy associated
+	// with this build workflow.
+	//
+	// This member is required.
+	PolicyArn *string
+
+	// The current status of the build workflow (e.g., RUNNING, COMPLETED, FAILED,
+	// CANCELLED).
+	//
+	// This member is required.
+	Status AutomatedReasoningPolicyBuildWorkflowStatus
+
+	// The timestamp when the build workflow was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains the formal logic rules, variables, and custom variable types that
+// define an Automated Reasoning policy. The policy definition specifies the
+// constraints used to validate foundation model responses for accuracy and logical
+// consistency.
+type AutomatedReasoningPolicyDefinition struct {
+
+	// The formal logic rules extracted from the source document. Rules define the
+	// logical constraints that determine whether model responses are valid, invalid,
+	// or satisfiable.
+	Rules []AutomatedReasoningPolicyDefinitionRule
+
+	// The custom user-defined vairable types used in the policy. Types are enum-based
+	// variable types that provide additional context beyond the predefined variable
+	// types.
+	Types []AutomatedReasoningPolicyDefinitionType
+
+	// The variables that represent concepts in the policy. Variables can have values
+	// assigned when translating natural language into formal logic. Their descriptions
+	// are crucial for accurate translation.
+	Variables []AutomatedReasoningPolicyDefinitionVariable
+
+	// The version of the policy definition format.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a single element in an Automated Reasoning policy definition, such
+// as a rule, variable, or type definition.
+//
+// The following types satisfy this interface:
+//
+//	AutomatedReasoningPolicyDefinitionElementMemberPolicyDefinitionRule
+//	AutomatedReasoningPolicyDefinitionElementMemberPolicyDefinitionType
+//	AutomatedReasoningPolicyDefinitionElementMemberPolicyDefinitionVariable
+type AutomatedReasoningPolicyDefinitionElement interface {
+	isAutomatedReasoningPolicyDefinitionElement()
+}
+
+// Represents a formal logic rule in an Automated Reasoning policy. For example,
+// rules can be expressed as if-then statements that define logical constraints.
+type AutomatedReasoningPolicyDefinitionElementMemberPolicyDefinitionRule struct {
+	Value AutomatedReasoningPolicyDefinitionRule
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyDefinitionElementMemberPolicyDefinitionRule) isAutomatedReasoningPolicyDefinitionElement() {
+}
+
+// Represents a custom user-defined viarble type in an Automated Reasoning policy.
+// Types are enum-based and provide additional context beyond predefined variable
+// types.
+type AutomatedReasoningPolicyDefinitionElementMemberPolicyDefinitionType struct {
+	Value AutomatedReasoningPolicyDefinitionType
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyDefinitionElementMemberPolicyDefinitionType) isAutomatedReasoningPolicyDefinitionElement() {
+}
+
+// Represents a variable in an Automated Reasoning policy. Variables represent
+// concepts that can have values assigned during natural language translation.
+type AutomatedReasoningPolicyDefinitionElementMemberPolicyDefinitionVariable struct {
+	Value AutomatedReasoningPolicyDefinitionVariable
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyDefinitionElementMemberPolicyDefinitionVariable) isAutomatedReasoningPolicyDefinitionElement() {
+}
+
+// Provides a comprehensive analysis of the quality and completeness of an
+// Automated Reasoning policy definition, highlighting potential issues and
+// optimization opportunities.
+type AutomatedReasoningPolicyDefinitionQualityReport struct {
+
+	// A list of rules that may conflict with each other, potentially leading to
+	// inconsistent policy behavior.
+	//
+	// This member is required.
+	ConflictingRules []string
+
+	// Groups of rules that operate on completely separate sets of variables,
+	// indicating the policy may be addressing multiple unrelated concerns.
+	//
+	// This member is required.
+	DisjointRuleSets []AutomatedReasoningPolicyDisjointRuleSet
+
+	// The total number of rules defined in the policy.
+	//
+	// This member is required.
+	RuleCount *int32
+
+	// The total number of custom types defined in the policy.
+	//
+	// This member is required.
+	TypeCount *int32
+
+	// A list of type values that are defined but never used in any rules, indicating
+	// potential cleanup opportunities.
+	//
+	// This member is required.
+	UnusedTypeValues []AutomatedReasoningPolicyDefinitionTypeValuePair
+
+	// A list of custom types that are defined but not referenced by any variables or
+	// rules, suggesting they may be unnecessary.
+	//
+	// This member is required.
+	UnusedTypes []string
+
+	// A list of variables that are defined but not referenced by any rules,
+	// suggesting they may be unnecessary.
+	//
+	// This member is required.
+	UnusedVariables []string
+
+	// The total number of variables defined in the policy.
+	//
+	// This member is required.
+	VariableCount *int32
+
+	noSmithyDocumentSerde
+}
+
+// Represents a formal logic rule in an Automated Reasoning policy. For example,
+// rules can be expressed as if-then statements that define logical constraints.
+type AutomatedReasoningPolicyDefinitionRule struct {
+
+	// The formal logic expression of the rule.
+	//
+	// This member is required.
+	Expression *string
+
+	// The unique identifier of the rule within the policy.
+	//
+	// This member is required.
+	Id *string
+
+	// The human-readable form of the rule expression, often in natural language or
+	// simplified notation.
+	AlternateExpression *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a custom user-defined viarble type in an Automated Reasoning policy.
+// Types are enum-based and provide additional context beyond predefined variable
+// types.
+type AutomatedReasoningPolicyDefinitionType struct {
+
+	// The name of the custom type.
+	//
+	// This member is required.
+	Name *string
+
+	// The possible values for this enum-based type, each with its own description.
+	//
+	// This member is required.
+	Values []AutomatedReasoningPolicyDefinitionTypeValue
+
+	// The description of what the custom type represents.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a single value within a custom type definition, including its
+// identifier and description.
+type AutomatedReasoningPolicyDefinitionTypeValue struct {
+
+	// The actual value or identifier for this type value.
+	//
+	// This member is required.
+	Value *string
+
+	// A human-readable description explaining what this type value represents and
+	// when it should be used.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// Associates a type name with a specific value name, used for referencing type
+// values in rules and other policy elements.
+type AutomatedReasoningPolicyDefinitionTypeValuePair struct {
+
+	// The name of the custom type that contains the referenced value.
+	//
+	// This member is required.
+	TypeName *string
+
+	// The name of the specific value within the type.
+	//
+	// This member is required.
+	ValueName *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a variable in an Automated Reasoning policy. Variables represent
+// concepts that can have values assigned during natural language translation.
+type AutomatedReasoningPolicyDefinitionVariable struct {
+
+	// The description of the variable that explains what it represents and how users
+	// might refer to it. Clear and comprehensive descriptions are essential for
+	// accurate natural language translation.
+	//
+	// This member is required.
+	Description *string
+
+	// The name of the variable. Use descriptive names that clearly indicate the
+	// concept being represented.
+	//
+	// This member is required.
+	Name *string
+
+	// The data type of the variable. Valid types include bool, int, real, enum, and
+	// custom types that you can provide.
+	//
+	// This member is required.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// An annotation for removing a rule from an Automated Reasoning policy.
+type AutomatedReasoningPolicyDeleteRuleAnnotation struct {
+
+	// The unique identifier of the rule to delete from the policy.
+	//
+	// This member is required.
+	RuleId *string
+
+	noSmithyDocumentSerde
+}
+
+// A mutation operation that removes a rule from the policy definition during the
+// build process.
+type AutomatedReasoningPolicyDeleteRuleMutation struct {
+
+	// The unique identifier of the rule to delete.
+	//
+	// This member is required.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
+// An annotation for removing a custom type from an Automated Reasoning policy.
+type AutomatedReasoningPolicyDeleteTypeAnnotation struct {
+
+	// The name of the custom type to delete from the policy. The type must not be
+	// referenced by any variables or rules.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// A mutation operation that removes a custom type from the policy definition
+// during the build process.
+type AutomatedReasoningPolicyDeleteTypeMutation struct {
+
+	// The name of the custom type to delete.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a value to be removed from an existing custom type in the policy.
+type AutomatedReasoningPolicyDeleteTypeValue struct {
+
+	// The identifier or name of the value to remove from the type.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// An annotation for removing a variable from an Automated Reasoning policy.
+type AutomatedReasoningPolicyDeleteVariableAnnotation struct {
+
+	// The name of the variable to delete from the policy. The variable must not be
+	// referenced by any rules.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// A mutation operation that removes a variable from the policy definition during
+// the build process.
+type AutomatedReasoningPolicyDeleteVariableMutation struct {
+
+	// The name of the variable to delete.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a set of rules that operate on completely separate variables,
+// indicating they address different concerns or domains within the policy.
+type AutomatedReasoningPolicyDisjointRuleSet struct {
+
+	// The list of rules that form this disjoint set, all operating on the same set of
+	// variables.
+	//
+	// This member is required.
+	Rules []string
+
+	// The set of variables that are used by the rules in this disjoint set.
+	//
+	// This member is required.
+	Variables []string
+
+	noSmithyDocumentSerde
+}
+
+// An annotation for processing and incorporating new content into an Automated
+// Reasoning policy.
+type AutomatedReasoningPolicyIngestContentAnnotation struct {
+
+	// The new content to be analyzed and incorporated into the policy, such as
+	// additional documents or rule descriptions.
+	//
+	// This member is required.
+	Content *string
+
+	noSmithyDocumentSerde
+}
+
+// A container for various mutation operations that can be applied to an Automated
+// Reasoning policy, including adding, updating, and deleting policy elements.
+//
+// The following types satisfy this interface:
+//
+//	AutomatedReasoningPolicyMutationMemberAddRule
+//	AutomatedReasoningPolicyMutationMemberAddType
+//	AutomatedReasoningPolicyMutationMemberAddVariable
+//	AutomatedReasoningPolicyMutationMemberDeleteRule
+//	AutomatedReasoningPolicyMutationMemberDeleteType
+//	AutomatedReasoningPolicyMutationMemberDeleteVariable
+//	AutomatedReasoningPolicyMutationMemberUpdateRule
+//	AutomatedReasoningPolicyMutationMemberUpdateType
+//	AutomatedReasoningPolicyMutationMemberUpdateVariable
+type AutomatedReasoningPolicyMutation interface {
+	isAutomatedReasoningPolicyMutation()
+}
+
+// A mutation to add a new rule to the policy.
+type AutomatedReasoningPolicyMutationMemberAddRule struct {
+	Value AutomatedReasoningPolicyAddRuleMutation
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyMutationMemberAddRule) isAutomatedReasoningPolicyMutation() {}
+
+// A mutation to add a new custom type to the policy.
+type AutomatedReasoningPolicyMutationMemberAddType struct {
+	Value AutomatedReasoningPolicyAddTypeMutation
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyMutationMemberAddType) isAutomatedReasoningPolicyMutation() {}
+
+// A mutation to add a new variable to the policy.
+type AutomatedReasoningPolicyMutationMemberAddVariable struct {
+	Value AutomatedReasoningPolicyAddVariableMutation
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyMutationMemberAddVariable) isAutomatedReasoningPolicyMutation() {}
+
+// A mutation to remove a rule from the policy.
+type AutomatedReasoningPolicyMutationMemberDeleteRule struct {
+	Value AutomatedReasoningPolicyDeleteRuleMutation
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyMutationMemberDeleteRule) isAutomatedReasoningPolicyMutation() {}
+
+// A mutation to remove a custom type from the policy.
+type AutomatedReasoningPolicyMutationMemberDeleteType struct {
+	Value AutomatedReasoningPolicyDeleteTypeMutation
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyMutationMemberDeleteType) isAutomatedReasoningPolicyMutation() {}
+
+// A mutation to remove a variable from the policy.
+type AutomatedReasoningPolicyMutationMemberDeleteVariable struct {
+	Value AutomatedReasoningPolicyDeleteVariableMutation
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyMutationMemberDeleteVariable) isAutomatedReasoningPolicyMutation() {}
+
+// A mutation to modify an existing rule in the policy.
+type AutomatedReasoningPolicyMutationMemberUpdateRule struct {
+	Value AutomatedReasoningPolicyUpdateRuleMutation
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyMutationMemberUpdateRule) isAutomatedReasoningPolicyMutation() {}
+
+// A mutation to modify an existing custom type in the policy.
+type AutomatedReasoningPolicyMutationMemberUpdateType struct {
+	Value AutomatedReasoningPolicyUpdateTypeMutation
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyMutationMemberUpdateType) isAutomatedReasoningPolicyMutation() {}
+
+// A mutation to modify an existing variable in the policy.
+type AutomatedReasoningPolicyMutationMemberUpdateVariable struct {
+	Value AutomatedReasoningPolicyUpdateVariableMutation
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyMutationMemberUpdateVariable) isAutomatedReasoningPolicyMutation() {}
+
+// Represents the planning phase of policy build workflow, where the system
+// analyzes source content and determines what operations to perform.
+type AutomatedReasoningPolicyPlanning struct {
+	noSmithyDocumentSerde
+}
+
+// Represents a test scenario used to validate an Automated Reasoning policy,
+// including the test conditions and expected outcomes.
+type AutomatedReasoningPolicyScenario struct {
+
+	// An alternative way to express the same test scenario, used for validation and
+	// comparison purposes.
+	//
+	// This member is required.
+	AlternateExpression *string
+
+	// The expected outcome when this scenario is evaluated against the policy (e.g.,
+	// PASS, FAIL, VIOLATION).
+	//
+	// This member is required.
+	ExpectedResult AutomatedReasoningCheckResult
+
+	// The logical expression or condition that defines this test scenario.
+	//
+	// This member is required.
+	Expression *string
+
+	// The list of rule identifiers that are expected to be triggered or evaluated by
+	// this test scenario.
+	//
+	// This member is required.
+	RuleIds []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about an Automated Reasoning policy, including
+// metadata and timestamps.
+type AutomatedReasoningPolicySummary struct {
+
+	// The timestamp when the policy was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The name of the policy.
+	//
+	// This member is required.
+	Name *string
+
+	// The Amazon Resource Name (ARN) of the policy.
+	//
+	// This member is required.
+	PolicyArn *string
+
+	// The unique identifier of the policy.
+	//
+	// This member is required.
+	PolicyId *string
+
+	// The timestamp when the policy was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The version of the policy.
+	//
+	// This member is required.
+	Version *string
+
+	// The description of the policy.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a test for validating an Automated Reasoning policy. tests contain
+// sample inputs and expected outcomes to verify policy behavior.
+type AutomatedReasoningPolicyTestCase struct {
+
+	// The timestamp when the test was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The output content to be validated by the policy, typically representing a
+	// foundation model response.
+	//
+	// This member is required.
+	GuardContent *string
+
+	// The unique identifier of the test.
+	//
+	// This member is required.
+	TestCaseId *string
+
+	// The timestamp when the test was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The minimum confidence level for logic validation. Content meeting this
+	// threshold is considered high-confidence and can be validated.
+	ConfidenceThreshold *float64
+
+	// The expected result of the Automated Reasoning check for this test.
+	ExpectedAggregatedFindingsResult AutomatedReasoningCheckResult
+
+	// The input query or prompt that generated the content. This provides context for
+	// the validation.
+	QueryContent *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the results of testing an Automated Reasoning policy against various
+// scenarios and validation checks.
+type AutomatedReasoningPolicyTestResult struct {
+
+	// The Amazon Resource Name (ARN) of the Automated Reasoning policy that was
+	// tested.
+	//
+	// This member is required.
+	PolicyArn *string
+
+	// Represents a test for validating an Automated Reasoning policy. tests contain
+	// sample inputs and expected outcomes to verify policy behavior.
+	//
+	// This member is required.
+	TestCase *AutomatedReasoningPolicyTestCase
+
+	// The overall status of the test run (e.g., COMPLETED, FAILED, IN_PROGRESS).
+	//
+	// This member is required.
+	TestRunStatus AutomatedReasoningPolicyTestRunStatus
+
+	// The timestamp when the test results were last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// A summary of all test findings, aggregated to provide an overall assessment of
+	// policy quality and correctness.
+	AggregatedTestFindingsResult AutomatedReasoningCheckResult
+
+	// Detailed findings from the test run, including any issues, violations, or
+	// unexpected behaviors discovered.
+	TestFindings []AutomatedReasoningCheckFinding
+
+	// The overall result of the test run, indicating whether the policy passed or
+	// failed validation.
+	TestRunResult AutomatedReasoningPolicyTestRunResult
+
+	noSmithyDocumentSerde
+}
+
+// An annotation for managing values within custom types, including adding,
+// updating, or removing specific type values.
+//
+// The following types satisfy this interface:
+//
+//	AutomatedReasoningPolicyTypeValueAnnotationMemberAddTypeValue
+//	AutomatedReasoningPolicyTypeValueAnnotationMemberDeleteTypeValue
+//	AutomatedReasoningPolicyTypeValueAnnotationMemberUpdateTypeValue
+type AutomatedReasoningPolicyTypeValueAnnotation interface {
+	isAutomatedReasoningPolicyTypeValueAnnotation()
+}
+
+// An operation to add a new value to an existing custom type.
+type AutomatedReasoningPolicyTypeValueAnnotationMemberAddTypeValue struct {
+	Value AutomatedReasoningPolicyAddTypeValue
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyTypeValueAnnotationMemberAddTypeValue) isAutomatedReasoningPolicyTypeValueAnnotation() {
+}
+
+// An operation to remove a value from an existing custom type.
+type AutomatedReasoningPolicyTypeValueAnnotationMemberDeleteTypeValue struct {
+	Value AutomatedReasoningPolicyDeleteTypeValue
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyTypeValueAnnotationMemberDeleteTypeValue) isAutomatedReasoningPolicyTypeValueAnnotation() {
+}
+
+// An operation to modify an existing value within a custom type.
+type AutomatedReasoningPolicyTypeValueAnnotationMemberUpdateTypeValue struct {
+	Value AutomatedReasoningPolicyUpdateTypeValue
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyTypeValueAnnotationMemberUpdateTypeValue) isAutomatedReasoningPolicyTypeValueAnnotation() {
+}
+
+// An annotation for updating the policy based on feedback about how specific
+// rules performed during testing or real-world usage.
+type AutomatedReasoningPolicyUpdateFromRuleFeedbackAnnotation struct {
+
+	// The feedback information about rule performance, including suggestions for
+	// improvements or corrections.
+	//
+	// This member is required.
+	Feedback *string
+
+	// The list of rule identifiers that the feedback applies to.
+	RuleIds []string
+
+	noSmithyDocumentSerde
+}
+
+// An annotation for updating the policy based on feedback about how it performed
+// on specific test scenarios.
+type AutomatedReasoningPolicyUpdateFromScenarioFeedbackAnnotation struct {
+
+	// The logical expression that defines the test scenario that generated this
+	// feedback.
+	//
+	// This member is required.
+	ScenarioExpression *string
+
+	// The feedback information about scenario performance, including any issues or
+	// improvements identified.
+	Feedback *string
+
+	// The list of rule identifiers that were involved in the scenario being evaluated.
+	RuleIds []string
+
+	noSmithyDocumentSerde
+}
+
+// An annotation for modifying an existing rule in an Automated Reasoning policy.
+type AutomatedReasoningPolicyUpdateRuleAnnotation struct {
+
+	// The new formal logical expression for the rule, replacing the previous
+	// expression.
+	//
+	// This member is required.
+	Expression *string
+
+	// The unique identifier of the rule to update.
+	//
+	// This member is required.
+	RuleId *string
+
+	noSmithyDocumentSerde
+}
+
+// A mutation operation that modifies an existing rule in the policy definition
+// during the build process.
+type AutomatedReasoningPolicyUpdateRuleMutation struct {
+
+	// Represents a formal logic rule in an Automated Reasoning policy. For example,
+	// rules can be expressed as if-then statements that define logical constraints.
+	//
+	// This member is required.
+	Rule *AutomatedReasoningPolicyDefinitionRule
+
+	noSmithyDocumentSerde
+}
+
+// An annotation for modifying an existing custom type in an Automated Reasoning
+// policy.
+type AutomatedReasoningPolicyUpdateTypeAnnotation struct {
+
+	// The current name of the custom type to update.
+	//
+	// This member is required.
+	Name *string
+
+	// The updated list of values for the custom type, which can include additions,
+	// modifications, or removals.
+	//
+	// This member is required.
+	Values []AutomatedReasoningPolicyTypeValueAnnotation
+
+	// The new description for the custom type, replacing the previous description.
+	Description *string
+
+	// The new name for the custom type, if you want to rename it. If not provided,
+	// the name remains unchanged.
+	NewName *string
+
+	noSmithyDocumentSerde
+}
+
+// A mutation operation that modifies an existing custom type in the policy
+// definition during the build process.
+type AutomatedReasoningPolicyUpdateTypeMutation struct {
+
+	// Represents a custom user-defined viarble type in an Automated Reasoning policy.
+	// Types are enum-based and provide additional context beyond predefined variable
+	// types.
+	//
+	// This member is required.
+	Type *AutomatedReasoningPolicyDefinitionType
+
+	noSmithyDocumentSerde
+}
+
+// Represents a modification to a value within an existing custom type.
+type AutomatedReasoningPolicyUpdateTypeValue struct {
+
+	// The current identifier or name of the type value to update.
+	//
+	// This member is required.
+	Value *string
+
+	// The new description for the type value, replacing the previous description.
+	Description *string
+
+	// The new identifier or name for the type value, if you want to rename it.
+	NewValue *string
+
+	noSmithyDocumentSerde
+}
+
+// An annotation for modifying an existing variable in an Automated Reasoning
+// policy.
+type AutomatedReasoningPolicyUpdateVariableAnnotation struct {
+
+	// The current name of the variable to update.
+	//
+	// This member is required.
+	Name *string
+
+	// The new description for the variable, replacing the previous description.
+	Description *string
+
+	// The new name for the variable, if you want to rename it. If not provided, the
+	// name remains unchanged.
+	NewName *string
+
+	noSmithyDocumentSerde
+}
+
+// A mutation operation that modifies an existing variable in the policy
+// definition during the build process.
+type AutomatedReasoningPolicyUpdateVariableMutation struct {
+
+	// Represents a variable in an Automated Reasoning policy. Variables represent
+	// concepts that can have values assigned during natural language translation.
+	//
+	// This member is required.
+	Variable *AutomatedReasoningPolicyDefinitionVariable
+
+	noSmithyDocumentSerde
+}
+
+// Defines the content and configuration for different types of policy build
+// workflows.
+//
+// The following types satisfy this interface:
+//
+//	AutomatedReasoningPolicyWorkflowTypeContentMemberDocuments
+//	AutomatedReasoningPolicyWorkflowTypeContentMemberPolicyRepairAssets
+type AutomatedReasoningPolicyWorkflowTypeContent interface {
+	isAutomatedReasoningPolicyWorkflowTypeContent()
+}
+
+// The list of documents to be processed in a document ingestion workflow.
+type AutomatedReasoningPolicyWorkflowTypeContentMemberDocuments struct {
+	Value []AutomatedReasoningPolicyBuildWorkflowDocument
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyWorkflowTypeContentMemberDocuments) isAutomatedReasoningPolicyWorkflowTypeContent() {
+}
+
+// The assets and instructions needed for a policy repair workflow, including
+// repair annotations and guidance.
+type AutomatedReasoningPolicyWorkflowTypeContentMemberPolicyRepairAssets struct {
+	Value AutomatedReasoningPolicyBuildWorkflowRepairContent
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyWorkflowTypeContentMemberPolicyRepairAssets) isAutomatedReasoningPolicyWorkflowTypeContent() {
+}
+
 // A JSON array that provides the status of the evaluation jobs being deleted.
 type BatchDeleteEvaluationJobError struct {
 
@@ -1066,6 +2739,40 @@ type GenerationConfiguration struct {
 	// Contains the template for the prompt that's sent to the model for response
 	// generation.
 	PromptTemplate *PromptTemplate
+
+	noSmithyDocumentSerde
+}
+
+// Represents the configuration of Automated Reasoning policies within a Amazon
+// Bedrock Guardrail, including the policies to apply and confidence thresholds.
+type GuardrailAutomatedReasoningPolicy struct {
+
+	// The list of Automated Reasoning policy ARNs that should be applied as part of
+	// this guardrail configuration.
+	//
+	// This member is required.
+	Policies []string
+
+	// The minimum confidence level required for Automated Reasoning policy violations
+	// to trigger guardrail actions. Values range from 0.0 to 1.0.
+	ConfidenceThreshold *float64
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings for integrating Automated Reasoning policies with Amazon
+// Bedrock Guardrails.
+type GuardrailAutomatedReasoningPolicyConfig struct {
+
+	// The list of Automated Reasoning policy ARNs to include in the guardrail
+	// configuration.
+	//
+	// This member is required.
+	Policies []string
+
+	// The confidence threshold for triggering guardrail actions based on Automated
+	// Reasoning policy violations.
+	ConfidenceThreshold *float64
 
 	noSmithyDocumentSerde
 }
@@ -4215,6 +5922,14 @@ type UnknownUnionMember struct {
 }
 
 func (*UnknownUnionMember) isAutomatedEvaluationCustomMetricSource()       {}
+func (*UnknownUnionMember) isAutomatedReasoningCheckFinding()              {}
+func (*UnknownUnionMember) isAutomatedReasoningPolicyAnnotation()          {}
+func (*UnknownUnionMember) isAutomatedReasoningPolicyBuildResultAssets()   {}
+func (*UnknownUnionMember) isAutomatedReasoningPolicyBuildStepContext()    {}
+func (*UnknownUnionMember) isAutomatedReasoningPolicyDefinitionElement()   {}
+func (*UnknownUnionMember) isAutomatedReasoningPolicyMutation()            {}
+func (*UnknownUnionMember) isAutomatedReasoningPolicyTypeValueAnnotation() {}
+func (*UnknownUnionMember) isAutomatedReasoningPolicyWorkflowTypeContent() {}
 func (*UnknownUnionMember) isCustomizationConfig()                         {}
 func (*UnknownUnionMember) isEndpointConfig()                              {}
 func (*UnknownUnionMember) isEvaluationConfig()                            {}

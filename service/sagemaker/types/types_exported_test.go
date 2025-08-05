@@ -151,6 +151,36 @@ var _ *types.FSxLustreFileSystemConfig
 var _ *types.S3FileSystemConfig
 var _ *types.EFSFileSystemConfig
 
+func ExampleEventMetadata_outputUsage() {
+	var union types.EventMetadata
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.EventMetadataMemberCluster:
+		_ = v.Value // Value is types.ClusterMetadata
+
+	case *types.EventMetadataMemberInstance:
+		_ = v.Value // Value is types.InstanceMetadata
+
+	case *types.EventMetadataMemberInstanceGroup:
+		_ = v.Value // Value is types.InstanceGroupMetadata
+
+	case *types.EventMetadataMemberInstanceGroupScaling:
+		_ = v.Value // Value is types.InstanceGroupScalingMetadata
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ClusterMetadata
+var _ *types.InstanceGroupMetadata
+var _ *types.InstanceMetadata
+var _ *types.InstanceGroupScalingMetadata
+
 func ExampleMetricSpecification_outputUsage() {
 	var union types.MetricSpecification
 	// type switches can be used to check the union value

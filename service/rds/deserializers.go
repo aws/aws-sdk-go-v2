@@ -29269,6 +29269,19 @@ func awsAwsquery_deserializeDocumentDBCluster(v **types.DBCluster, decoder smith
 				return err
 			}
 
+		case strings.EqualFold("ServerlessV2PlatformVersion", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ServerlessV2PlatformVersion = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("ServerlessV2ScalingConfiguration", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentServerlessV2ScalingConfigurationInfo(&sv.ServerlessV2ScalingConfiguration, nodeDecoder); err != nil {

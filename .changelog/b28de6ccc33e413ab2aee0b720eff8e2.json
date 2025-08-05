@@ -1,0 +1,8 @@
+{
+    "id": "b28de6cc-c33e-413a-b2ae-e0b720eff8e2",
+    "type": "feature",
+    "description": "Add support for deletion protection on EKS clusters",
+    "modules": [
+        "service/eks"
+    ]
+}

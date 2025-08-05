@@ -91,6 +91,12 @@ type UpdateClusterConfigInput struct {
 	// cluster. For example, enable the capability.
 	ComputeConfig *types.ComputeConfigRequest
 
+	// Specifies whether to enable or disable deletion protection for the cluster.
+	// When enabled ( true ), the cluster cannot be deleted until deletion protection
+	// is explicitly disabled. When disabled ( false ), the cluster can be deleted
+	// normally.
+	DeletionProtection *bool
+
 	// The Kubernetes network configuration for the cluster.
 	KubernetesNetworkConfig *types.KubernetesNetworkConfigRequest
 

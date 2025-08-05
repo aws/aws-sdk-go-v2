@@ -86,6 +86,240 @@ func (AuthorizationStatus) Values() []AuthorizationStatus {
 	}
 }
 
+type AutomatedReasoningCheckLogicWarningType string
+
+// Enum values for AutomatedReasoningCheckLogicWarningType
+const (
+	AutomatedReasoningCheckLogicWarningTypeAlwaysTrue  AutomatedReasoningCheckLogicWarningType = "ALWAYS_TRUE"
+	AutomatedReasoningCheckLogicWarningTypeAlwaysFalse AutomatedReasoningCheckLogicWarningType = "ALWAYS_FALSE"
+)
+
+// Values returns all known values for AutomatedReasoningCheckLogicWarningType.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutomatedReasoningCheckLogicWarningType) Values() []AutomatedReasoningCheckLogicWarningType {
+	return []AutomatedReasoningCheckLogicWarningType{
+		"ALWAYS_TRUE",
+		"ALWAYS_FALSE",
+	}
+}
+
+type AutomatedReasoningCheckResult string
+
+// Enum values for AutomatedReasoningCheckResult
+const (
+	AutomatedReasoningCheckResultValid                AutomatedReasoningCheckResult = "VALID"
+	AutomatedReasoningCheckResultInvalid              AutomatedReasoningCheckResult = "INVALID"
+	AutomatedReasoningCheckResultSatisfiable          AutomatedReasoningCheckResult = "SATISFIABLE"
+	AutomatedReasoningCheckResultImpossible           AutomatedReasoningCheckResult = "IMPOSSIBLE"
+	AutomatedReasoningCheckResultTranslationAmbiguous AutomatedReasoningCheckResult = "TRANSLATION_AMBIGUOUS"
+	AutomatedReasoningCheckResultTooComplex           AutomatedReasoningCheckResult = "TOO_COMPLEX"
+	AutomatedReasoningCheckResultNoTranslation        AutomatedReasoningCheckResult = "NO_TRANSLATION"
+)
+
+// Values returns all known values for AutomatedReasoningCheckResult. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutomatedReasoningCheckResult) Values() []AutomatedReasoningCheckResult {
+	return []AutomatedReasoningCheckResult{
+		"VALID",
+		"INVALID",
+		"SATISFIABLE",
+		"IMPOSSIBLE",
+		"TRANSLATION_AMBIGUOUS",
+		"TOO_COMPLEX",
+		"NO_TRANSLATION",
+	}
+}
+
+type AutomatedReasoningPolicyAnnotationStatus string
+
+// Enum values for AutomatedReasoningPolicyAnnotationStatus
+const (
+	AutomatedReasoningPolicyAnnotationStatusApplied AutomatedReasoningPolicyAnnotationStatus = "APPLIED"
+	AutomatedReasoningPolicyAnnotationStatusFailed  AutomatedReasoningPolicyAnnotationStatus = "FAILED"
+)
+
+// Values returns all known values for AutomatedReasoningPolicyAnnotationStatus.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutomatedReasoningPolicyAnnotationStatus) Values() []AutomatedReasoningPolicyAnnotationStatus {
+	return []AutomatedReasoningPolicyAnnotationStatus{
+		"APPLIED",
+		"FAILED",
+	}
+}
+
+type AutomatedReasoningPolicyBuildDocumentContentType string
+
+// Enum values for AutomatedReasoningPolicyBuildDocumentContentType
+const (
+	AutomatedReasoningPolicyBuildDocumentContentTypePdf  AutomatedReasoningPolicyBuildDocumentContentType = "pdf"
+	AutomatedReasoningPolicyBuildDocumentContentTypeText AutomatedReasoningPolicyBuildDocumentContentType = "txt"
+)
+
+// Values returns all known values for
+// AutomatedReasoningPolicyBuildDocumentContentType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutomatedReasoningPolicyBuildDocumentContentType) Values() []AutomatedReasoningPolicyBuildDocumentContentType {
+	return []AutomatedReasoningPolicyBuildDocumentContentType{
+		"pdf",
+		"txt",
+	}
+}
+
+type AutomatedReasoningPolicyBuildMessageType string
+
+// Enum values for AutomatedReasoningPolicyBuildMessageType
+const (
+	AutomatedReasoningPolicyBuildMessageTypeInfo    AutomatedReasoningPolicyBuildMessageType = "INFO"
+	AutomatedReasoningPolicyBuildMessageTypeWarning AutomatedReasoningPolicyBuildMessageType = "WARNING"
+	AutomatedReasoningPolicyBuildMessageTypeError   AutomatedReasoningPolicyBuildMessageType = "ERROR"
+)
+
+// Values returns all known values for AutomatedReasoningPolicyBuildMessageType.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutomatedReasoningPolicyBuildMessageType) Values() []AutomatedReasoningPolicyBuildMessageType {
+	return []AutomatedReasoningPolicyBuildMessageType{
+		"INFO",
+		"WARNING",
+		"ERROR",
+	}
+}
+
+type AutomatedReasoningPolicyBuildResultAssetType string
+
+// Enum values for AutomatedReasoningPolicyBuildResultAssetType
+const (
+	AutomatedReasoningPolicyBuildResultAssetTypeBuildLog         AutomatedReasoningPolicyBuildResultAssetType = "BUILD_LOG"
+	AutomatedReasoningPolicyBuildResultAssetTypeQualityReport    AutomatedReasoningPolicyBuildResultAssetType = "QUALITY_REPORT"
+	AutomatedReasoningPolicyBuildResultAssetTypePolicyDefinition AutomatedReasoningPolicyBuildResultAssetType = "POLICY_DEFINITION"
+)
+
+// Values returns all known values for
+// AutomatedReasoningPolicyBuildResultAssetType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutomatedReasoningPolicyBuildResultAssetType) Values() []AutomatedReasoningPolicyBuildResultAssetType {
+	return []AutomatedReasoningPolicyBuildResultAssetType{
+		"BUILD_LOG",
+		"QUALITY_REPORT",
+		"POLICY_DEFINITION",
+	}
+}
+
+type AutomatedReasoningPolicyBuildWorkflowStatus string
+
+// Enum values for AutomatedReasoningPolicyBuildWorkflowStatus
+const (
+	AutomatedReasoningPolicyBuildWorkflowStatusScheduled       AutomatedReasoningPolicyBuildWorkflowStatus = "SCHEDULED"
+	AutomatedReasoningPolicyBuildWorkflowStatusCancelRequested AutomatedReasoningPolicyBuildWorkflowStatus = "CANCEL_REQUESTED"
+	AutomatedReasoningPolicyBuildWorkflowStatusPreprocessing   AutomatedReasoningPolicyBuildWorkflowStatus = "PREPROCESSING"
+	AutomatedReasoningPolicyBuildWorkflowStatusBuilding        AutomatedReasoningPolicyBuildWorkflowStatus = "BUILDING"
+	AutomatedReasoningPolicyBuildWorkflowStatusTesting         AutomatedReasoningPolicyBuildWorkflowStatus = "TESTING"
+	AutomatedReasoningPolicyBuildWorkflowStatusCompleted       AutomatedReasoningPolicyBuildWorkflowStatus = "COMPLETED"
+	AutomatedReasoningPolicyBuildWorkflowStatusFailed          AutomatedReasoningPolicyBuildWorkflowStatus = "FAILED"
+	AutomatedReasoningPolicyBuildWorkflowStatusCancelled       AutomatedReasoningPolicyBuildWorkflowStatus = "CANCELLED"
+)
+
+// Values returns all known values for
+// AutomatedReasoningPolicyBuildWorkflowStatus. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutomatedReasoningPolicyBuildWorkflowStatus) Values() []AutomatedReasoningPolicyBuildWorkflowStatus {
+	return []AutomatedReasoningPolicyBuildWorkflowStatus{
+		"SCHEDULED",
+		"CANCEL_REQUESTED",
+		"PREPROCESSING",
+		"BUILDING",
+		"TESTING",
+		"COMPLETED",
+		"FAILED",
+		"CANCELLED",
+	}
+}
+
+type AutomatedReasoningPolicyBuildWorkflowType string
+
+// Enum values for AutomatedReasoningPolicyBuildWorkflowType
+const (
+	AutomatedReasoningPolicyBuildWorkflowTypeIngestContent AutomatedReasoningPolicyBuildWorkflowType = "INGEST_CONTENT"
+	AutomatedReasoningPolicyBuildWorkflowTypeRefinePolicy  AutomatedReasoningPolicyBuildWorkflowType = "REFINE_POLICY"
+	AutomatedReasoningPolicyBuildWorkflowTypeImportPolicy  AutomatedReasoningPolicyBuildWorkflowType = "IMPORT_POLICY"
+)
+
+// Values returns all known values for AutomatedReasoningPolicyBuildWorkflowType.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutomatedReasoningPolicyBuildWorkflowType) Values() []AutomatedReasoningPolicyBuildWorkflowType {
+	return []AutomatedReasoningPolicyBuildWorkflowType{
+		"INGEST_CONTENT",
+		"REFINE_POLICY",
+		"IMPORT_POLICY",
+	}
+}
+
+type AutomatedReasoningPolicyTestRunResult string
+
+// Enum values for AutomatedReasoningPolicyTestRunResult
+const (
+	AutomatedReasoningPolicyTestRunResultPassed AutomatedReasoningPolicyTestRunResult = "PASSED"
+	AutomatedReasoningPolicyTestRunResultFailed AutomatedReasoningPolicyTestRunResult = "FAILED"
+)
+
+// Values returns all known values for AutomatedReasoningPolicyTestRunResult. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutomatedReasoningPolicyTestRunResult) Values() []AutomatedReasoningPolicyTestRunResult {
+	return []AutomatedReasoningPolicyTestRunResult{
+		"PASSED",
+		"FAILED",
+	}
+}
+
+type AutomatedReasoningPolicyTestRunStatus string
+
+// Enum values for AutomatedReasoningPolicyTestRunStatus
+const (
+	AutomatedReasoningPolicyTestRunStatusNotStarted AutomatedReasoningPolicyTestRunStatus = "NOT_STARTED"
+	AutomatedReasoningPolicyTestRunStatusScheduled  AutomatedReasoningPolicyTestRunStatus = "SCHEDULED"
+	AutomatedReasoningPolicyTestRunStatusInProgress AutomatedReasoningPolicyTestRunStatus = "IN_PROGRESS"
+	AutomatedReasoningPolicyTestRunStatusCompleted  AutomatedReasoningPolicyTestRunStatus = "COMPLETED"
+	AutomatedReasoningPolicyTestRunStatusFailed     AutomatedReasoningPolicyTestRunStatus = "FAILED"
+)
+
+// Values returns all known values for AutomatedReasoningPolicyTestRunStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutomatedReasoningPolicyTestRunStatus) Values() []AutomatedReasoningPolicyTestRunStatus {
+	return []AutomatedReasoningPolicyTestRunStatus{
+		"NOT_STARTED",
+		"SCHEDULED",
+		"IN_PROGRESS",
+		"COMPLETED",
+		"FAILED",
+	}
+}
+
 type CommitmentDuration string
 
 // Enum values for CommitmentDuration

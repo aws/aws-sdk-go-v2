@@ -1223,6 +1223,26 @@ func (AwsManagedHumanLoopRequestSource) Values() []AwsManagedHumanLoopRequestSou
 	}
 }
 
+type BatchAddClusterNodesErrorCode string
+
+// Enum values for BatchAddClusterNodesErrorCode
+const (
+	BatchAddClusterNodesErrorCodeInstanceGroupNotFound      BatchAddClusterNodesErrorCode = "InstanceGroupNotFound"
+	BatchAddClusterNodesErrorCodeInvalidInstanceGroupStatus BatchAddClusterNodesErrorCode = "InvalidInstanceGroupStatus"
+)
+
+// Values returns all known values for BatchAddClusterNodesErrorCode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BatchAddClusterNodesErrorCode) Values() []BatchAddClusterNodesErrorCode {
+	return []BatchAddClusterNodesErrorCode{
+		"InstanceGroupNotFound",
+		"InvalidInstanceGroupStatus",
+	}
+}
+
 type BatchDeleteClusterNodesErrorCode string
 
 // Enum values for BatchDeleteClusterNodesErrorCode
@@ -1365,6 +1385,25 @@ const (
 func (CapacityReservationPreference) Values() []CapacityReservationPreference {
 	return []CapacityReservationPreference{
 		"capacity-reservations-only",
+	}
+}
+
+type CapacityReservationType string
+
+// Enum values for CapacityReservationType
+const (
+	CapacityReservationTypeOdcr CapacityReservationType = "ODCR"
+	CapacityReservationTypeCrg  CapacityReservationType = "CRG"
+)
+
+// Values returns all known values for CapacityReservationType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapacityReservationType) Values() []CapacityReservationType {
+	return []CapacityReservationType{
+		"ODCR",
+		"CRG",
 	}
 }
 
@@ -1604,6 +1643,27 @@ func (ClarifyTextLanguage) Values() []ClarifyTextLanguage {
 	}
 }
 
+type ClusterEventResourceType string
+
+// Enum values for ClusterEventResourceType
+const (
+	ClusterEventResourceTypeCluster       ClusterEventResourceType = "Cluster"
+	ClusterEventResourceTypeInstanceGroup ClusterEventResourceType = "InstanceGroup"
+	ClusterEventResourceTypeInstance      ClusterEventResourceType = "Instance"
+)
+
+// Values returns all known values for ClusterEventResourceType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterEventResourceType) Values() []ClusterEventResourceType {
+	return []ClusterEventResourceType{
+		"Cluster",
+		"InstanceGroup",
+		"Instance",
+	}
+}
+
 type ClusterInstanceStatus string
 
 // Enum values for ClusterInstanceStatus
@@ -1614,6 +1674,7 @@ const (
 	ClusterInstanceStatusShuttingDown              ClusterInstanceStatus = "ShuttingDown"
 	ClusterInstanceStatusSystemUpdating            ClusterInstanceStatus = "SystemUpdating"
 	ClusterInstanceStatusDeepHealthCheckInProgress ClusterInstanceStatus = "DeepHealthCheckInProgress"
+	ClusterInstanceStatusNotFound                  ClusterInstanceStatus = "NotFound"
 )
 
 // Values returns all known values for ClusterInstanceStatus. Note that this can
@@ -1628,6 +1689,7 @@ func (ClusterInstanceStatus) Values() []ClusterInstanceStatus {
 		"ShuttingDown",
 		"SystemUpdating",
 		"DeepHealthCheckInProgress",
+		"NotFound",
 	}
 }
 
@@ -1867,6 +1929,23 @@ func (ClusterInstanceType) Values() []ClusterInstanceType {
 		"ml.r7i.16xlarge",
 		"ml.r7i.24xlarge",
 		"ml.r7i.48xlarge",
+	}
+}
+
+type ClusterNodeProvisioningMode string
+
+// Enum values for ClusterNodeProvisioningMode
+const (
+	ClusterNodeProvisioningModeContinuous ClusterNodeProvisioningMode = "Continuous"
+)
+
+// Values returns all known values for ClusterNodeProvisioningMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterNodeProvisioningMode) Values() []ClusterNodeProvisioningMode {
+	return []ClusterNodeProvisioningMode{
+		"Continuous",
 	}
 }
 
@@ -2511,6 +2590,23 @@ func (EndpointStatus) Values() []EndpointStatus {
 		"Deleting",
 		"Failed",
 		"UpdateRollbackFailed",
+	}
+}
+
+type EventSortBy string
+
+// Enum values for EventSortBy
+const (
+	EventSortByEventTime EventSortBy = "EventTime"
+)
+
+// Values returns all known values for EventSortBy. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EventSortBy) Values() []EventSortBy {
+	return []EventSortBy{
+		"EventTime",
 	}
 }
 

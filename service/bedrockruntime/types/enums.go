@@ -111,6 +111,26 @@ func (GuardrailAction) Values() []GuardrailAction {
 	}
 }
 
+type GuardrailAutomatedReasoningLogicWarningType string
+
+// Enum values for GuardrailAutomatedReasoningLogicWarningType
+const (
+	GuardrailAutomatedReasoningLogicWarningTypeAlwaysFalse GuardrailAutomatedReasoningLogicWarningType = "ALWAYS_FALSE"
+	GuardrailAutomatedReasoningLogicWarningTypeAlwaysTrue  GuardrailAutomatedReasoningLogicWarningType = "ALWAYS_TRUE"
+)
+
+// Values returns all known values for
+// GuardrailAutomatedReasoningLogicWarningType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailAutomatedReasoningLogicWarningType) Values() []GuardrailAutomatedReasoningLogicWarningType {
+	return []GuardrailAutomatedReasoningLogicWarningType{
+		"ALWAYS_FALSE",
+		"ALWAYS_TRUE",
+	}
+}
+
 type GuardrailContentFilterConfidence string
 
 // Enum values for GuardrailContentFilterConfidence

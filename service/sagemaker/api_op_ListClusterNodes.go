@@ -67,6 +67,12 @@ type ListClusterNodesInput struct {
 	// [Timestamp]: https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp
 	CreationTimeBefore *time.Time
 
+	// Specifies whether to include nodes that are still being provisioned in the
+	// response. When set to true, the response includes all nodes regardless of their
+	// provisioning status. When set to False (default), only nodes with assigned
+	// InstanceIds are returned.
+	IncludeNodeLogicalIds *bool
+
 	// A filter that returns the instance groups whose name contain a specified string.
 	InstanceGroupNameContains *string
 

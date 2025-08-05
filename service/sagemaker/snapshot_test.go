@@ -110,6 +110,18 @@ func TestCheckSnapshot_AttachClusterNodeVolume(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_BatchAddClusterNodes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchAddClusterNodes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchAddClusterNodes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchDeleteClusterNodes(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchDeleteClusterNodes(context.Background(), nil, func(o *Options) {
@@ -1694,6 +1706,18 @@ func TestCheckSnapshot_DescribeCluster(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeClusterEvent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeClusterEvent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeClusterEvent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeClusterNode(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeClusterNode(context.Background(), nil, func(o *Options) {
@@ -2635,6 +2659,18 @@ func TestCheckSnapshot_ListCandidatesForAutoMLJob(t *testing.T) {
 	_, err := svc.ListCandidatesForAutoMLJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListCandidatesForAutoMLJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListClusterEvents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListClusterEvents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListClusterEvents")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4477,6 +4513,18 @@ func TestUpdateSnapshot_AttachClusterNodeVolume(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_BatchAddClusterNodes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchAddClusterNodes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchAddClusterNodes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_BatchDeleteClusterNodes(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchDeleteClusterNodes(context.Background(), nil, func(o *Options) {
@@ -6061,6 +6109,18 @@ func TestUpdateSnapshot_DescribeCluster(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeClusterEvent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeClusterEvent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeClusterEvent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeClusterNode(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeClusterNode(context.Background(), nil, func(o *Options) {
@@ -7002,6 +7062,18 @@ func TestUpdateSnapshot_ListCandidatesForAutoMLJob(t *testing.T) {
 	_, err := svc.ListCandidatesForAutoMLJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListCandidatesForAutoMLJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListClusterEvents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListClusterEvents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListClusterEvents")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -833,6 +833,10 @@ func (*DocumentSourceMemberText) isDocumentSource() {}
 // API.
 type GuardrailAssessment struct {
 
+	// The automated reasoning policy assessment results, including logical validation
+	// findings for the input content.
+	AutomatedReasoningPolicy *GuardrailAutomatedReasoningPolicyAssessment
+
 	// The content policy.
 	ContentPolicy *GuardrailContentPolicyAssessment
 
@@ -850,6 +854,309 @@ type GuardrailAssessment struct {
 
 	// The word policy.
 	WordPolicy *GuardrailWordPolicyAssessment
+
+	noSmithyDocumentSerde
+}
+
+// Represents a logical validation result from automated reasoning policy
+// evaluation. The finding indicates whether claims in the input are logically
+// valid, invalid, satisfiable, impossible, or have other logical issues.
+//
+// The following types satisfy this interface:
+//
+//	GuardrailAutomatedReasoningFindingMemberImpossible
+//	GuardrailAutomatedReasoningFindingMemberInvalid
+//	GuardrailAutomatedReasoningFindingMemberNoTranslations
+//	GuardrailAutomatedReasoningFindingMemberSatisfiable
+//	GuardrailAutomatedReasoningFindingMemberTooComplex
+//	GuardrailAutomatedReasoningFindingMemberTranslationAmbiguous
+//	GuardrailAutomatedReasoningFindingMemberValid
+type GuardrailAutomatedReasoningFinding interface {
+	isGuardrailAutomatedReasoningFinding()
+}
+
+// Indicates that no valid claims can be made due to logical contradictions in the
+// premises or rules.
+type GuardrailAutomatedReasoningFindingMemberImpossible struct {
+	Value GuardrailAutomatedReasoningImpossibleFinding
+
+	noSmithyDocumentSerde
+}
+
+func (*GuardrailAutomatedReasoningFindingMemberImpossible) isGuardrailAutomatedReasoningFinding() {}
+
+// Indicates that the claims are logically false and contradictory to the
+// established rules or premises.
+type GuardrailAutomatedReasoningFindingMemberInvalid struct {
+	Value GuardrailAutomatedReasoningInvalidFinding
+
+	noSmithyDocumentSerde
+}
+
+func (*GuardrailAutomatedReasoningFindingMemberInvalid) isGuardrailAutomatedReasoningFinding() {}
+
+// Indicates that no relevant logical information could be extracted from the
+// input for validation.
+type GuardrailAutomatedReasoningFindingMemberNoTranslations struct {
+	Value GuardrailAutomatedReasoningNoTranslationsFinding
+
+	noSmithyDocumentSerde
+}
+
+func (*GuardrailAutomatedReasoningFindingMemberNoTranslations) isGuardrailAutomatedReasoningFinding() {
+}
+
+// Indicates that the claims could be either true or false depending on additional
+// assumptions not provided in the input.
+type GuardrailAutomatedReasoningFindingMemberSatisfiable struct {
+	Value GuardrailAutomatedReasoningSatisfiableFinding
+
+	noSmithyDocumentSerde
+}
+
+func (*GuardrailAutomatedReasoningFindingMemberSatisfiable) isGuardrailAutomatedReasoningFinding() {}
+
+// Indicates that the input exceeds the processing capacity due to the volume or
+// complexity of the logical information.
+type GuardrailAutomatedReasoningFindingMemberTooComplex struct {
+	Value GuardrailAutomatedReasoningTooComplexFinding
+
+	noSmithyDocumentSerde
+}
+
+func (*GuardrailAutomatedReasoningFindingMemberTooComplex) isGuardrailAutomatedReasoningFinding() {}
+
+// Indicates that the input has multiple valid logical interpretations, requiring
+// additional context or clarification.
+type GuardrailAutomatedReasoningFindingMemberTranslationAmbiguous struct {
+	Value GuardrailAutomatedReasoningTranslationAmbiguousFinding
+
+	noSmithyDocumentSerde
+}
+
+func (*GuardrailAutomatedReasoningFindingMemberTranslationAmbiguous) isGuardrailAutomatedReasoningFinding() {
+}
+
+// Indicates that the claims are definitively true and logically implied by the
+// premises, with no possible alternative interpretations.
+type GuardrailAutomatedReasoningFindingMemberValid struct {
+	Value GuardrailAutomatedReasoningValidFinding
+
+	noSmithyDocumentSerde
+}
+
+func (*GuardrailAutomatedReasoningFindingMemberValid) isGuardrailAutomatedReasoningFinding() {}
+
+// Indicates that no valid claims can be made due to logical contradictions in the
+// premises or rules.
+type GuardrailAutomatedReasoningImpossibleFinding struct {
+
+	// The automated reasoning policy rules that contradict the claims and/or premises
+	// in the input.
+	ContradictingRules []GuardrailAutomatedReasoningRule
+
+	// Indication of a logic issue with the translation without needing to consider
+	// the automated reasoning policy rules.
+	LogicWarning *GuardrailAutomatedReasoningLogicWarning
+
+	// The logical translation of the input that this finding evaluates.
+	Translation *GuardrailAutomatedReasoningTranslation
+
+	noSmithyDocumentSerde
+}
+
+// References a portion of the original input text that corresponds to logical
+// elements.
+type GuardrailAutomatedReasoningInputTextReference struct {
+
+	// The specific text from the original input that this reference points to.
+	Text *string
+
+	noSmithyDocumentSerde
+}
+
+// Indicates that the claims are logically false and contradictory to the
+// established rules or premises.
+type GuardrailAutomatedReasoningInvalidFinding struct {
+
+	// The automated reasoning policy rules that contradict the claims in the input.
+	ContradictingRules []GuardrailAutomatedReasoningRule
+
+	// Indication of a logic issue with the translation without needing to consider
+	// the automated reasoning policy rules.
+	LogicWarning *GuardrailAutomatedReasoningLogicWarning
+
+	// The logical translation of the input that this finding invalidates.
+	Translation *GuardrailAutomatedReasoningTranslation
+
+	noSmithyDocumentSerde
+}
+
+// Identifies logical issues in the translated statements that exist independent
+// of any policy rules, such as statements that are always true or always false.
+type GuardrailAutomatedReasoningLogicWarning struct {
+
+	// The logical statements that are validated while assuming the policy and
+	// premises.
+	Claims []GuardrailAutomatedReasoningStatement
+
+	// The logical statements that serve as premises under which the claims are
+	// validated.
+	Premises []GuardrailAutomatedReasoningStatement
+
+	// The category of the detected logical issue, such as statements that are always
+	// true or always false.
+	Type GuardrailAutomatedReasoningLogicWarningType
+
+	noSmithyDocumentSerde
+}
+
+// Indicates that no relevant logical information could be extracted from the
+// input for validation.
+type GuardrailAutomatedReasoningNoTranslationsFinding struct {
+	noSmithyDocumentSerde
+}
+
+// Contains the results of automated reasoning policy evaluation, including
+// logical findings about the validity of claims made in the input content.
+type GuardrailAutomatedReasoningPolicyAssessment struct {
+
+	// List of logical validation results produced by evaluating the input content
+	// against automated reasoning policies.
+	Findings []GuardrailAutomatedReasoningFinding
+
+	noSmithyDocumentSerde
+}
+
+// References a specific automated reasoning policy rule that was applied during
+// evaluation.
+type GuardrailAutomatedReasoningRule struct {
+
+	// The unique identifier of the automated reasoning rule.
+	Identifier *string
+
+	// The ARN of the automated reasoning policy version that contains this rule.
+	PolicyVersionArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Indicates that the claims could be either true or false depending on additional
+// assumptions not provided in the input.
+type GuardrailAutomatedReasoningSatisfiableFinding struct {
+
+	// An example scenario demonstrating how the claims could be logically false.
+	ClaimsFalseScenario *GuardrailAutomatedReasoningScenario
+
+	// An example scenario demonstrating how the claims could be logically true.
+	ClaimsTrueScenario *GuardrailAutomatedReasoningScenario
+
+	// Indication of a logic issue with the translation without needing to consider
+	// the automated reasoning policy rules.
+	LogicWarning *GuardrailAutomatedReasoningLogicWarning
+
+	// The logical translation of the input that this finding evaluates.
+	Translation *GuardrailAutomatedReasoningTranslation
+
+	noSmithyDocumentSerde
+}
+
+// Represents a logical scenario where claims can be evaluated as true or false,
+// containing specific logical assignments.
+type GuardrailAutomatedReasoningScenario struct {
+
+	// List of logical assignments and statements that define this scenario.
+	Statements []GuardrailAutomatedReasoningStatement
+
+	noSmithyDocumentSerde
+}
+
+// A logical statement that includes both formal logic representation and natural
+// language explanation.
+type GuardrailAutomatedReasoningStatement struct {
+
+	// The formal logical representation of the statement.
+	Logic *string
+
+	// The natural language explanation of the logical statement.
+	NaturalLanguage *string
+
+	noSmithyDocumentSerde
+}
+
+// Indicates that the input exceeds the processing capacity due to the volume or
+// complexity of the logical information.
+type GuardrailAutomatedReasoningTooComplexFinding struct {
+	noSmithyDocumentSerde
+}
+
+// Contains the logical translation of natural language input into formal logical
+// statements, including premises, claims, and confidence scores.
+type GuardrailAutomatedReasoningTranslation struct {
+
+	// The logical statements that are being validated against the premises and policy
+	// rules.
+	Claims []GuardrailAutomatedReasoningStatement
+
+	// A confidence score between 0 and 1 indicating how certain the system is about
+	// the logical translation.
+	Confidence *float64
+
+	// The logical statements that serve as the foundation or assumptions for the
+	// claims.
+	Premises []GuardrailAutomatedReasoningStatement
+
+	// References to portions of the original input text that correspond to the claims
+	// but could not be fully translated.
+	UntranslatedClaims []GuardrailAutomatedReasoningInputTextReference
+
+	// References to portions of the original input text that correspond to the
+	// premises but could not be fully translated.
+	UntranslatedPremises []GuardrailAutomatedReasoningInputTextReference
+
+	noSmithyDocumentSerde
+}
+
+// Indicates that the input has multiple valid logical interpretations, requiring
+// additional context or clarification.
+type GuardrailAutomatedReasoningTranslationAmbiguousFinding struct {
+
+	// Scenarios showing how the different translation options differ in meaning.
+	DifferenceScenarios []GuardrailAutomatedReasoningScenario
+
+	// Different logical interpretations that were detected during translation of the
+	// input.
+	Options []GuardrailAutomatedReasoningTranslationOption
+
+	noSmithyDocumentSerde
+}
+
+// Represents one possible logical interpretation of ambiguous input content.
+type GuardrailAutomatedReasoningTranslationOption struct {
+
+	// Example translations that provide this possible interpretation of the input.
+	Translations []GuardrailAutomatedReasoningTranslation
+
+	noSmithyDocumentSerde
+}
+
+// Indicates that the claims are definitively true and logically implied by the
+// premises, with no possible alternative interpretations.
+type GuardrailAutomatedReasoningValidFinding struct {
+
+	// An example scenario demonstrating how the claims are logically true.
+	ClaimsTrueScenario *GuardrailAutomatedReasoningScenario
+
+	// Indication of a logic issue with the translation without needing to consider
+	// the automated reasoning policy rules.
+	LogicWarning *GuardrailAutomatedReasoningLogicWarning
+
+	// The automated reasoning policy rules that support why this result is considered
+	// valid.
+	SupportingRules []GuardrailAutomatedReasoningRule
+
+	// The logical translation of the input that this finding validates.
+	Translation *GuardrailAutomatedReasoningTranslation
 
 	noSmithyDocumentSerde
 }
@@ -1396,6 +1703,13 @@ type GuardrailUsage struct {
 	//
 	// This member is required.
 	WordPolicyUnits *int32
+
+	// The number of automated reasoning policies that were processed during the
+	// guardrail evaluation.
+	AutomatedReasoningPolicies *int32
+
+	// The number of text units processed by the automated reasoning policy.
+	AutomatedReasoningPolicyUnits *int32
 
 	// The content policy image units processed by the guardrail.
 	ContentPolicyImageUnits *int32
@@ -2166,29 +2480,30 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isAsyncInvokeOutputDataConfig()   {}
-func (*UnknownUnionMember) isCitationGeneratedContent()      {}
-func (*UnknownUnionMember) isCitationLocation()              {}
-func (*UnknownUnionMember) isCitationSourceContent()         {}
-func (*UnknownUnionMember) isContentBlock()                  {}
-func (*UnknownUnionMember) isContentBlockDelta()             {}
-func (*UnknownUnionMember) isContentBlockStart()             {}
-func (*UnknownUnionMember) isConverseOutput()                {}
-func (*UnknownUnionMember) isConverseStreamOutput()          {}
-func (*UnknownUnionMember) isDocumentContentBlock()          {}
-func (*UnknownUnionMember) isDocumentSource()                {}
-func (*UnknownUnionMember) isGuardrailContentBlock()         {}
-func (*UnknownUnionMember) isGuardrailConverseContentBlock() {}
-func (*UnknownUnionMember) isGuardrailConverseImageSource()  {}
-func (*UnknownUnionMember) isGuardrailImageSource()          {}
-func (*UnknownUnionMember) isImageSource()                   {}
-func (*UnknownUnionMember) isPromptVariableValues()          {}
-func (*UnknownUnionMember) isReasoningContentBlock()         {}
-func (*UnknownUnionMember) isReasoningContentBlockDelta()    {}
-func (*UnknownUnionMember) isResponseStream()                {}
-func (*UnknownUnionMember) isSystemContentBlock()            {}
-func (*UnknownUnionMember) isTool()                          {}
-func (*UnknownUnionMember) isToolChoice()                    {}
-func (*UnknownUnionMember) isToolInputSchema()               {}
-func (*UnknownUnionMember) isToolResultContentBlock()        {}
-func (*UnknownUnionMember) isVideoSource()                   {}
+func (*UnknownUnionMember) isAsyncInvokeOutputDataConfig()        {}
+func (*UnknownUnionMember) isCitationGeneratedContent()           {}
+func (*UnknownUnionMember) isCitationLocation()                   {}
+func (*UnknownUnionMember) isCitationSourceContent()              {}
+func (*UnknownUnionMember) isContentBlock()                       {}
+func (*UnknownUnionMember) isContentBlockDelta()                  {}
+func (*UnknownUnionMember) isContentBlockStart()                  {}
+func (*UnknownUnionMember) isConverseOutput()                     {}
+func (*UnknownUnionMember) isConverseStreamOutput()               {}
+func (*UnknownUnionMember) isDocumentContentBlock()               {}
+func (*UnknownUnionMember) isDocumentSource()                     {}
+func (*UnknownUnionMember) isGuardrailAutomatedReasoningFinding() {}
+func (*UnknownUnionMember) isGuardrailContentBlock()              {}
+func (*UnknownUnionMember) isGuardrailConverseContentBlock()      {}
+func (*UnknownUnionMember) isGuardrailConverseImageSource()       {}
+func (*UnknownUnionMember) isGuardrailImageSource()               {}
+func (*UnknownUnionMember) isImageSource()                        {}
+func (*UnknownUnionMember) isPromptVariableValues()               {}
+func (*UnknownUnionMember) isReasoningContentBlock()              {}
+func (*UnknownUnionMember) isReasoningContentBlockDelta()         {}
+func (*UnknownUnionMember) isResponseStream()                     {}
+func (*UnknownUnionMember) isSystemContentBlock()                 {}
+func (*UnknownUnionMember) isTool()                               {}
+func (*UnknownUnionMember) isToolChoice()                         {}
+func (*UnknownUnionMember) isToolInputSchema()                    {}
+func (*UnknownUnionMember) isToolResultContentBlock()             {}
+func (*UnknownUnionMember) isVideoSource()                        {}

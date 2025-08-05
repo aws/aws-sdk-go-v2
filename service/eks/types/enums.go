@@ -820,6 +820,7 @@ const (
 	UpdateParamTypeStorageConfig            UpdateParamType = "StorageConfig"
 	UpdateParamTypeKubernetesNetworkConfig  UpdateParamType = "KubernetesNetworkConfig"
 	UpdateParamTypeRemoteNetworkConfig      UpdateParamType = "RemoteNetworkConfig"
+	UpdateParamTypeDeletionProtection       UpdateParamType = "DeletionProtection"
 )
 
 // Values returns all known values for UpdateParamType. Note that this can be
@@ -864,6 +865,7 @@ func (UpdateParamType) Values() []UpdateParamType {
 		"StorageConfig",
 		"KubernetesNetworkConfig",
 		"RemoteNetworkConfig",
+		"DeletionProtection",
 	}
 }
 
@@ -908,6 +910,7 @@ const (
 	UpdateTypeZonalShiftConfigUpdate             UpdateType = "ZonalShiftConfigUpdate"
 	UpdateTypeAutoModeUpdate                     UpdateType = "AutoModeUpdate"
 	UpdateTypeRemoteNetworkConfigUpdate          UpdateType = "RemoteNetworkConfigUpdate"
+	UpdateTypeDeletionProtectionUpdate           UpdateType = "DeletionProtectionUpdate"
 )
 
 // Values returns all known values for UpdateType. Note that this can be expanded
@@ -930,6 +933,7 @@ func (UpdateType) Values() []UpdateType {
 		"ZonalShiftConfigUpdate",
 		"AutoModeUpdate",
 		"RemoteNetworkConfigUpdate",
+		"DeletionProtectionUpdate",
 	}
 }
 

@@ -294,6 +294,48 @@ var _ *types.S3Location
 var _ []types.DocumentContentBlock
 var _ []byte
 
+func ExampleGuardrailAutomatedReasoningFinding_outputUsage() {
+	var union types.GuardrailAutomatedReasoningFinding
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.GuardrailAutomatedReasoningFindingMemberImpossible:
+		_ = v.Value // Value is types.GuardrailAutomatedReasoningImpossibleFinding
+
+	case *types.GuardrailAutomatedReasoningFindingMemberInvalid:
+		_ = v.Value // Value is types.GuardrailAutomatedReasoningInvalidFinding
+
+	case *types.GuardrailAutomatedReasoningFindingMemberNoTranslations:
+		_ = v.Value // Value is types.GuardrailAutomatedReasoningNoTranslationsFinding
+
+	case *types.GuardrailAutomatedReasoningFindingMemberSatisfiable:
+		_ = v.Value // Value is types.GuardrailAutomatedReasoningSatisfiableFinding
+
+	case *types.GuardrailAutomatedReasoningFindingMemberTooComplex:
+		_ = v.Value // Value is types.GuardrailAutomatedReasoningTooComplexFinding
+
+	case *types.GuardrailAutomatedReasoningFindingMemberTranslationAmbiguous:
+		_ = v.Value // Value is types.GuardrailAutomatedReasoningTranslationAmbiguousFinding
+
+	case *types.GuardrailAutomatedReasoningFindingMemberValid:
+		_ = v.Value // Value is types.GuardrailAutomatedReasoningValidFinding
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.GuardrailAutomatedReasoningSatisfiableFinding
+var _ *types.GuardrailAutomatedReasoningInvalidFinding
+var _ *types.GuardrailAutomatedReasoningImpossibleFinding
+var _ *types.GuardrailAutomatedReasoningTooComplexFinding
+var _ *types.GuardrailAutomatedReasoningTranslationAmbiguousFinding
+var _ *types.GuardrailAutomatedReasoningValidFinding
+var _ *types.GuardrailAutomatedReasoningNoTranslationsFinding
+
 func ExampleGuardrailContentBlock_outputUsage() {
 	var union types.GuardrailContentBlock
 	// type switches can be used to check the union value

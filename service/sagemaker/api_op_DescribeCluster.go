@@ -65,6 +65,9 @@ type DescribeClusterOutput struct {
 	// The failure message of the SageMaker HyperPod cluster.
 	FailureMessage *string
 
+	// The mode used for provisioning nodes in the cluster.
+	NodeProvisioningMode types.ClusterNodeProvisioningMode
+
 	// The node recovery mode configured for the SageMaker HyperPod cluster.
 	NodeRecovery types.ClusterNodeRecovery
 
