@@ -2,6 +2,7 @@ package software.amazon.smithy.aws.go.codegen.customization.service.s3;
 
 import software.amazon.smithy.aws.go.codegen.SdkGoTypes;
 import software.amazon.smithy.aws.traits.HttpChecksumTrait;
+import software.amazon.smithy.aws.traits.ServiceTrait;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
@@ -10,6 +11,7 @@ import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
+import software.amazon.smithy.model.shapes.ShapeId;
 import software.amazon.smithy.utils.ListUtils;
 
 import java.util.List;
@@ -30,12 +32,13 @@ public class ExpressDefaultChecksum implements GoIntegration {
             .build();
 
     private static boolean hasRequiredChecksum(Model model, ServiceShape service, OperationShape operation) {
-        return operation.hasTrait(HttpChecksumTrait.class)
+        return S3ModelUtils.isServiceS3(model, service)
+                && operation.hasTrait(HttpChecksumTrait.class)
                 && operation.expectTrait(HttpChecksumTrait.class).isRequestChecksumRequired();
     }
 
     private static boolean isCreateMultipartUpload(Model model, ServiceShape service, OperationShape operation) {
-        return operation.getId().getName().equals("CreateMultipartUpload");
+        return operation.getId().equals(ShapeId.from("com.amazonaws.s3#CreateMultipartUpload"));
     }
 
     @Override
@@ -47,12 +50,10 @@ public class ExpressDefaultChecksum implements GoIntegration {
     public List<RuntimeClientPlugin> getClientPlugins() {
         return ListUtils.of(
                 RuntimeClientPlugin.builder()
-                        .servicePredicate(S3ModelUtils::isServiceS3)
                         .operationPredicate(ExpressDefaultChecksum::hasRequiredChecksum)
                         .registerMiddleware(SET_ALGORITHM_MIDDLEWARE)
                         .build(),
                 RuntimeClientPlugin.builder()
-                        .servicePredicate(S3ModelUtils::isServiceS3)
                         .operationPredicate(ExpressDefaultChecksum::isCreateMultipartUpload)
                         .registerMiddleware(SET_MPU_ALGORITHM_MIDDLEWARE)
                         .build()
