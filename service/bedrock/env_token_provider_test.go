@@ -54,7 +54,7 @@ func TestEnvTokenProviderSEP1(t *testing.T) {
 
 // Token configured with auth scheme preference also set in env. The Bedrock
 // token is more specific which is why it takes precedence
-func TestEnvTokenProviderSEP3(t *testing.T) {
+func TestEnvTokenProviderSEP2(t *testing.T) {
 	defer patchEnv("AWS_BEARER_TOKEN_BEDROCK", "bedrock-token")()
 
 	cfg := aws.Config{
@@ -79,7 +79,7 @@ func TestEnvTokenProviderSEP3(t *testing.T) {
 }
 
 // Explicit service config takes precedence
-func TestEnvTokenProviderSEP4(t *testing.T) {
+func TestEnvTokenProviderSEP3(t *testing.T) {
 	defer patchEnv("AWS_BEARER_TOKEN_BEDROCK", "bedrock-token")()
 
 	expectToken := "explicit-code-token"
