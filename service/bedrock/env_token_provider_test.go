@@ -2,7 +2,6 @@ package bedrock
 
 import (
 	"context"
-	"os"
 	"reflect"
 	"testing"
 
@@ -10,16 +9,9 @@ import (
 	"github.com/aws/smithy-go/auth/bearer"
 )
 
-func patchEnv(k, v string) func() {
-	os.Setenv(k, v)
-	return func() {
-		os.Unsetenv(k)
-	}
-}
-
 // Valid service-specific token configured
 func TestEnvTokenProviderSEP0(t *testing.T) {
-	defer patchEnv("AWS_BEARER_TOKEN_BEDROCK", "bedrock-token")()
+	t.Setenv("AWS_BEARER_TOKEN_BEDROCK", "bedrock-token")
 
 	svc := New(Options{})
 	token, err := svc.Options().BearerAuthTokenProvider.RetrieveBearerToken(context.Background())
@@ -39,7 +31,7 @@ func TestEnvTokenProviderSEP0(t *testing.T) {
 
 // Token configured for a different service
 func TestEnvTokenProviderSEP1(t *testing.T) {
-	defer patchEnv("AWS_BEARER_TOKEN_FOO", "foo-token")()
+	t.Setenv("AWS_BEARER_TOKEN_FOO", "foo-token")
 
 	svc := New(Options{})
 	if actual := svc.Options().BearerAuthTokenProvider; actual != nil {
@@ -55,7 +47,7 @@ func TestEnvTokenProviderSEP1(t *testing.T) {
 // Token configured with auth scheme preference also set in env. The Bedrock
 // token is more specific which is why it takes precedence
 func TestEnvTokenProviderSEP2(t *testing.T) {
-	defer patchEnv("AWS_BEARER_TOKEN_BEDROCK", "bedrock-token")()
+	t.Setenv("AWS_BEARER_TOKEN_BEDROCK", "bedrock-token")
 
 	cfg := aws.Config{
 		// simulate loaded from env/shared config
@@ -80,7 +72,7 @@ func TestEnvTokenProviderSEP2(t *testing.T) {
 
 // Explicit service config takes precedence
 func TestEnvTokenProviderSEP3(t *testing.T) {
-	defer patchEnv("AWS_BEARER_TOKEN_BEDROCK", "bedrock-token")()
+	t.Setenv("AWS_BEARER_TOKEN_BEDROCK", "bedrock-token")
 
 	expectToken := "explicit-code-token"
 	svc := New(Options{}, func(o *Options) {
