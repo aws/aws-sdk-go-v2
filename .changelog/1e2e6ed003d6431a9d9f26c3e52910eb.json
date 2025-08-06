@@ -1,0 +1,8 @@
+{
+    "id": "1e2e6ed0-03d6-431a-9d9f-26c3e52910eb",
+    "type": "feature",
+    "description": "Adds support for billing views. Billing views let you control access to cost and usage data through an AWS resource, streamlining the process of sharing cost and usage data across account boundaries. With this release, you can now create and view budgets based on billing views.",
+    "modules": [
+        "service/budgets"
+    ]
+}

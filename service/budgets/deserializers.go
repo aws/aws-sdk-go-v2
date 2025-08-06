@@ -143,6 +143,9 @@ func awsAwsjson11_deserializeOpErrorCreateBudget(response *smithyhttp.Response, 
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
 
+	case strings.EqualFold("NotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorNotFoundException(response, errorBody)
+
 	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
 		return awsAwsjson11_deserializeErrorServiceQuotaExceededException(response, errorBody)
 
@@ -4188,6 +4191,15 @@ func awsAwsjson11_deserializeDocumentBudget(v **types.Budget, value interface{})
 				return err
 			}
 
+		case "BillingViewArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BillingViewArn to be of type string, got %T instead", value)
+				}
+				sv.BillingViewArn = ptr.String(jtv)
+			}
+
 		case "BudgetLimit":
 			if err := awsAwsjson11_deserializeDocumentSpend(&sv.BudgetLimit, value); err != nil {
 				return err
@@ -4228,6 +4240,11 @@ func awsAwsjson11_deserializeDocumentBudget(v **types.Budget, value interface{})
 
 		case "FilterExpression":
 			if err := awsAwsjson11_deserializeDocumentExpression(&sv.FilterExpression, value); err != nil {
+				return err
+			}
+
+		case "HealthStatus":
+			if err := awsAwsjson11_deserializeDocumentHealthStatus(&sv.HealthStatus, value); err != nil {
 				return err
 			}
 
@@ -4461,6 +4478,15 @@ func awsAwsjson11_deserializeDocumentBudgetPerformanceHistory(v **types.BudgetPe
 
 	for key, value := range shape {
 		switch key {
+		case "BillingViewArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BillingViewArn to be of type string, got %T instead", value)
+				}
+				sv.BillingViewArn = ptr.String(jtv)
+			}
+
 		case "BudgetedAndActualAmountsList":
 			if err := awsAwsjson11_deserializeDocumentBudgetedAndActualAmountsList(&sv.BudgetedAndActualAmountsList, value); err != nil {
 				return err
@@ -5181,6 +5207,71 @@ func awsAwsjson11_deserializeDocumentGroups(v *[]string, value interface{}) erro
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentHealthStatus(v **types.HealthStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HealthStatus
+	if *v == nil {
+		sv = &types.HealthStatus{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "LastUpdatedTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastUpdatedTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected GenericTimestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HealthStatusValue to be of type string, got %T instead", value)
+				}
+				sv.Status = types.HealthStatusValue(jtv)
+			}
+
+		case "StatusReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HealthStatusReason to be of type string, got %T instead", value)
+				}
+				sv.StatusReason = types.HealthStatusReason(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

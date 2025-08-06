@@ -46,6 +46,7 @@
         "api_op_GetChatResponseConfiguration.go",
         "api_op_GetDataAccessor.go",
         "api_op_GetDataSource.go",
+        "api_op_GetDocumentContent.go",
         "api_op_GetGroup.go",
         "api_op_GetIndex.go",
         "api_op_GetMedia.go",

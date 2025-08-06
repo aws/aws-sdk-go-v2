@@ -1,0 +1,8 @@
+{
+    "id": "d74d3398-0ec1-4b4b-9cc8-40af6555afe5",
+    "type": "feature",
+    "description": "Features: add Index APIs in OpenSearchServerless to support managed semantic enrichment",
+    "modules": [
+        "service/opensearchserverless"
+    ]
+}

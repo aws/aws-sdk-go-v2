@@ -1,0 +1,8 @@
+{
+    "id": "714ce849-d362-4f8d-9d7d-a8a8a2921fad",
+    "type": "feature",
+    "description": "Amazon Q Business now supports the GetDocumentContent() API that enables customers to securely access the source documents through clickable citation links at query time",
+    "modules": [
+        "service/qbusiness"
+    ]
+}

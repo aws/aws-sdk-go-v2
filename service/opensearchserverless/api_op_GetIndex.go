@@ -6,62 +6,50 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/document"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an OpenSearch Serverless access policy. For more information, see [Updating data lifecycle policies].
+// Retrieves information about an index in an OpenSearch Serverless collection,
+// including its schema definition. The index might be configured to conduct
+// automatic semantic enrichment ingestion and search. For more information, see [About automatic semantic enrichment].
 //
-// [Updating data lifecycle policies]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html#serverless-lifecycle-update
-func (c *Client) UpdateLifecyclePolicy(ctx context.Context, params *UpdateLifecyclePolicyInput, optFns ...func(*Options)) (*UpdateLifecyclePolicyOutput, error) {
+// [About automatic semantic enrichment]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html#serverless-semantic-enrichment
+func (c *Client) GetIndex(ctx context.Context, params *GetIndexInput, optFns ...func(*Options)) (*GetIndexOutput, error) {
 	if params == nil {
-		params = &UpdateLifecyclePolicyInput{}
+		params = &GetIndexInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateLifecyclePolicy", params, optFns, c.addOperationUpdateLifecyclePolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetIndex", params, optFns, c.addOperationGetIndexMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*UpdateLifecyclePolicyOutput)
+	out := result.(*GetIndexOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type UpdateLifecyclePolicyInput struct {
+type GetIndexInput struct {
 
-	// The name of the policy.
+	// The unique identifier of the collection containing the index.
 	//
 	// This member is required.
-	Name *string
+	Id *string
 
-	// The version of the policy being updated.
+	// The name of the index to retrieve information about.
 	//
 	// This member is required.
-	PolicyVersion *string
-
-	//  The type of lifecycle policy.
-	//
-	// This member is required.
-	Type types.LifecyclePolicyType
-
-	// A unique, case-sensitive identifier to ensure idempotency of the request.
-	ClientToken *string
-
-	// A description of the lifecycle policy.
-	Description *string
-
-	// The JSON policy document to use as the content for the lifecycle policy.
-	Policy *string
+	IndexName *string
 
 	noSmithyDocumentSerde
 }
 
-type UpdateLifecyclePolicyOutput struct {
+type GetIndexOutput struct {
 
-	// Details about the updated lifecycle policy.
-	LifecyclePolicyDetail *types.LifecyclePolicyDetail
+	// The JSON schema definition for the index, including field mappings and settings.
+	IndexSchema document.Interface
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -69,19 +57,19 @@ type UpdateLifecyclePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationUpdateLifecyclePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateLifecyclePolicy{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetIndex{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateLifecyclePolicy{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetIndex{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateLifecyclePolicy"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "GetIndex"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -136,13 +124,10 @@ func (c *Client) addOperationUpdateLifecyclePolicyMiddlewares(stack *middleware.
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
-	if err = addIdempotencyToken_opUpdateLifecyclePolicyMiddleware(stack, options); err != nil {
+	if err = addOpGetIndexValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpUpdateLifecyclePolicyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateLifecyclePolicy(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetIndex(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -205,43 +190,10 @@ func (c *Client) addOperationUpdateLifecyclePolicyMiddlewares(stack *middleware.
 	return nil
 }
 
-type idempotencyToken_initializeOpUpdateLifecyclePolicy struct {
-	tokenProvider IdempotencyTokenProvider
-}
-
-func (*idempotencyToken_initializeOpUpdateLifecyclePolicy) ID() string {
-	return "OperationIdempotencyTokenAutoFill"
-}
-
-func (m *idempotencyToken_initializeOpUpdateLifecyclePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	if m.tokenProvider == nil {
-		return next.HandleInitialize(ctx, in)
-	}
-
-	input, ok := in.Parameters.(*UpdateLifecyclePolicyInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("expected middleware input to be of type *UpdateLifecyclePolicyInput ")
-	}
-
-	if input.ClientToken == nil {
-		t, err := m.tokenProvider.GetIdempotencyToken()
-		if err != nil {
-			return out, metadata, err
-		}
-		input.ClientToken = &t
-	}
-	return next.HandleInitialize(ctx, in)
-}
-func addIdempotencyToken_opUpdateLifecyclePolicyMiddleware(stack *middleware.Stack, cfg Options) error {
-	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateLifecyclePolicy{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateLifecyclePolicy(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opGetIndex(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "UpdateLifecyclePolicy",
+		OperationName: "GetIndex",
 	}
 }

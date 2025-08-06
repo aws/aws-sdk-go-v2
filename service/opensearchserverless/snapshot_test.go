@@ -134,6 +134,18 @@ func TestCheckSnapshot_CreateCollection(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateIndex(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateIndex(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateIndex")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateLifecyclePolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateLifecyclePolicy(context.Background(), nil, func(o *Options) {
@@ -206,6 +218,18 @@ func TestCheckSnapshot_DeleteCollection(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteIndex(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteIndex(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteIndex")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteLifecyclePolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteLifecyclePolicy(context.Background(), nil, func(o *Options) {
@@ -271,6 +295,18 @@ func TestCheckSnapshot_GetAccountSettings(t *testing.T) {
 	_, err := svc.GetAccountSettings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetAccountSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetIndex(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIndex(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetIndex")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -458,6 +494,18 @@ func TestCheckSnapshot_UpdateCollection(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateIndex(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateIndex(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateIndex")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateLifecyclePolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateLifecyclePolicy(context.Background(), nil, func(o *Options) {
@@ -577,6 +625,18 @@ func TestUpdateSnapshot_CreateCollection(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateIndex(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateIndex(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateIndex")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateLifecyclePolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateLifecyclePolicy(context.Background(), nil, func(o *Options) {
@@ -649,6 +709,18 @@ func TestUpdateSnapshot_DeleteCollection(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteIndex(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteIndex(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteIndex")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteLifecyclePolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteLifecyclePolicy(context.Background(), nil, func(o *Options) {
@@ -714,6 +786,18 @@ func TestUpdateSnapshot_GetAccountSettings(t *testing.T) {
 	_, err := svc.GetAccountSettings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetAccountSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetIndex(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIndex(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetIndex")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -894,6 +978,18 @@ func TestUpdateSnapshot_UpdateCollection(t *testing.T) {
 	_, err := svc.UpdateCollection(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateCollection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateIndex(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateIndex(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateIndex")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
