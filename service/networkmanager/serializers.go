@@ -8242,24 +8242,24 @@ func awsRestjson1_serializeDocumentVpcOptions(v *types.VpcOptions, value smithyj
 	object := value.Object()
 	defer object.Close()
 
-	if v.ApplianceModeSupport {
+	if v.ApplianceModeSupport != nil {
 		ok := object.Key("ApplianceModeSupport")
-		ok.Boolean(v.ApplianceModeSupport)
+		ok.Boolean(*v.ApplianceModeSupport)
 	}
 
-	if v.DnsSupport {
+	if v.DnsSupport != nil {
 		ok := object.Key("DnsSupport")
-		ok.Boolean(v.DnsSupport)
+		ok.Boolean(*v.DnsSupport)
 	}
 
-	if v.Ipv6Support {
+	if v.Ipv6Support != nil {
 		ok := object.Key("Ipv6Support")
-		ok.Boolean(v.Ipv6Support)
+		ok.Boolean(*v.Ipv6Support)
 	}
 
-	if v.SecurityGroupReferencingSupport {
+	if v.SecurityGroupReferencingSupport != nil {
 		ok := object.Key("SecurityGroupReferencingSupport")
-		ok.Boolean(v.SecurityGroupReferencingSupport)
+		ok.Boolean(*v.SecurityGroupReferencingSupport)
 	}
 
 	return nil

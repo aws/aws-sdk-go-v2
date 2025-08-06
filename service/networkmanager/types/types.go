@@ -1612,18 +1612,18 @@ type VpcOptions struct {
 	// Indicates whether appliance mode is supported. If enabled, traffic flow between
 	// a source and destination use the same Availability Zone for the VPC attachment
 	// for the lifetime of that flow. The default value is false .
-	ApplianceModeSupport bool
+	ApplianceModeSupport *bool
 
 	// Indicates whether DNS is supported.
-	DnsSupport bool
+	DnsSupport *bool
 
 	// Indicates whether IPv6 is supported.
-	Ipv6Support bool
+	Ipv6Support *bool
 
 	// Indicates whether security group referencing is enabled for this VPC
 	// attachment. The default is true . However, at the core network policy-level the
 	// default is set to false .
-	SecurityGroupReferencingSupport bool
+	SecurityGroupReferencingSupport *bool
 
 	noSmithyDocumentSerde
 }

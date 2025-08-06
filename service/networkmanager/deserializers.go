@@ -21917,7 +21917,7 @@ func awsRestjson1_deserializeDocumentVpcOptions(v **types.VpcOptions, value inte
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ApplianceModeSupport = jtv
+				sv.ApplianceModeSupport = ptr.Bool(jtv)
 			}
 
 		case "DnsSupport":
@@ -21926,7 +21926,7 @@ func awsRestjson1_deserializeDocumentVpcOptions(v **types.VpcOptions, value inte
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.DnsSupport = jtv
+				sv.DnsSupport = ptr.Bool(jtv)
 			}
 
 		case "Ipv6Support":
@@ -21935,7 +21935,7 @@ func awsRestjson1_deserializeDocumentVpcOptions(v **types.VpcOptions, value inte
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Ipv6Support = jtv
+				sv.Ipv6Support = ptr.Bool(jtv)
 			}
 
 		case "SecurityGroupReferencingSupport":
@@ -21944,7 +21944,7 @@ func awsRestjson1_deserializeDocumentVpcOptions(v **types.VpcOptions, value inte
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.SecurityGroupReferencingSupport = jtv
+				sv.SecurityGroupReferencingSupport = ptr.Bool(jtv)
 			}
 
 		default:
