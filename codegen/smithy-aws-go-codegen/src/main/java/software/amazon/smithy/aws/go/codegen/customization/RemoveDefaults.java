@@ -40,7 +40,13 @@ public class RemoveDefaults implements GoIntegration {
         serviceToShapeIds("com.amazonaws.dataexchange#DataExchange",
                     // https://github.com/aws/aws-sdk-go-v2/issues/3066
                     // we need to target synthetic shapes since we generate synthetic input shapes
-                    "smithy.go.synthetic#UpdateRevisionInput$Finalized")
+                    "smithy.go.synthetic#UpdateRevisionInput$Finalized"),
+        serviceToShapeIds("com.amazonaws.networkmanager#NetworkManager",
+                    // https://github.com/aws/aws-sdk-go-v2/issues/3158
+                    "com.amazonaws.networkmanager#VpcOptions$Ipv6Support",
+                    "com.amazonaws.networkmanager#VpcOptions$ApplianceModeSupport",
+                    "com.amazonaws.networkmanager#VpcOptions$DnsSupport",
+                    "com.amazonaws.networkmanager#VpcOptions$SecurityGroupReferencingSupport")
     );
 
     private boolean mustPreprocess(ShapeId service) {
