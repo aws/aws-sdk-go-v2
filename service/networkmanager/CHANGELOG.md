@@ -1,3 +1,7 @@
+# v1.37.1 (2025-08-06)
+
+* **Bug Fix**: **BREAKING CHANGE**: The fields on VpcOptions have been changed from `bool` to `*bool`. Before this change, the fields were incorrectly marked as having default values of false by the service, which made it functionally impossible for users to set them false in an API call.
+
 # v1.37.0 (2025-08-04)
 
 * **Feature**: Support configurable auth scheme preferences in service clients via AWS_AUTH_SCHEME_PREFERENCE in the environment, auth_scheme_preference in the config file, and through in-code settings on LoadDefaultConfig and client constructor methods.

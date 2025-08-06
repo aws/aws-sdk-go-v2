@@ -1,8 +1,0 @@
-{
-    "id": "1799713b-0689-4171-a70b-e4463e25fe52",
-    "type": "feature",
-    "description": "Mark Elastic Inference Accelerators and Elastic Graphics Processor parameters as deprecated on the RunInstances and LaunchTemplate APIs.",
-    "modules": [
-        "service/ec2"
-    ]
-}

@@ -1,3 +1,19 @@
+# Release (2025-08-06)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.47.1](service/appstream/CHANGELOG.md#v1471-2025-08-06)
+  * **Documentation**: Added support for G6 instances
+* `github.com/aws/aws-sdk-go-v2/service/budgets`: [v1.35.0](service/budgets/CHANGELOG.md#v1350-2025-08-06)
+  * **Feature**: Adds support for billing views. Billing views let you control access to cost and usage data through an AWS resource, streamlining the process of sharing cost and usage data across account boundaries. With this release, you can now create and view budgets based on billing views.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.241.0](service/ec2/CHANGELOG.md#v12410-2025-08-06)
+  * **Feature**: Mark Elastic Inference Accelerators and Elastic Graphics Processor parameters as deprecated on the RunInstances and LaunchTemplate APIs.
+* `github.com/aws/aws-sdk-go-v2/service/networkmanager`: [v1.37.1](service/networkmanager/CHANGELOG.md#v1371-2025-08-06)
+  * **Bug Fix**: **BREAKING CHANGE**: The fields on VpcOptions have been changed from `bool` to `*bool`. Before this change, the fields were incorrectly marked as having default values of false by the service, which made it functionally impossible for users to set them false in an API call.
+* `github.com/aws/aws-sdk-go-v2/service/opensearchserverless`: [v1.23.0](service/opensearchserverless/CHANGELOG.md#v1230-2025-08-06)
+  * **Feature**: Features: add Index APIs in OpenSearchServerless to support managed semantic enrichment
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.31.0](service/qbusiness/CHANGELOG.md#v1310-2025-08-06)
+  * **Feature**: Amazon Q Business now supports the GetDocumentContent() API that enables customers to securely access the source documents through clickable citation links at query time
+
 # Release (2025-08-05)
 
 ## Module Highlights
