@@ -1032,6 +1032,68 @@
                 "smithy.api#documentation": "<p>Describes IAM Identity Center options for creating an OpenSearch Serverless security\n            configuration in the form of a key-value map.</p>"
             }
         },
+        "com.amazonaws.opensearchserverless#CreateIndex": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.opensearchserverless#CreateIndexRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.opensearchserverless#CreateIndexResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.opensearchserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.opensearchserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.opensearchserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.opensearchserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an index within an OpenSearch Serverless collection. Unlike other OpenSearch indexes, indexes\n            created by this API are automatically configured to conduct automatic semantic\n            enrichment ingestion and search. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html#serverless-semantic-enrichment\">About automatic semantic enrichment</a> in the <i>OpenSearch User\n                Guide</i>.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.opensearchserverless#CreateIndexRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the collection in which to create the index.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "indexName": {
+                    "target": "com.amazonaws.opensearchserverless#IndexName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the index to create. Index names must be lowercase and can't begin with\n            underscores (_) or hyphens (-).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "indexSchema": {
+                    "target": "com.amazonaws.opensearchserverless#IndexSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON schema definition for the index, including field mappings and\n            settings.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.opensearchserverless#CreateIndexResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.opensearchserverless#CreateLifecyclePolicy": {
             "type": "operation",
             "input": {
@@ -1528,6 +1590,59 @@
                 }
             }
         },
+        "com.amazonaws.opensearchserverless#DeleteIndex": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.opensearchserverless#DeleteIndexRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.opensearchserverless#DeleteIndexResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.opensearchserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.opensearchserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.opensearchserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an index from an OpenSearch Serverless collection. Be aware that the index might be\n            configured to conduct automatic semantic enrichment ingestion and search. For more\n            information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html#serverless-semantic-enrichment\">About automatic semantic enrichment</a>.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.opensearchserverless#DeleteIndexRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the collection containing the index to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "indexName": {
+                    "target": "com.amazonaws.opensearchserverless#IndexName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the index to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.opensearchserverless#DeleteIndexResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.opensearchserverless#DeleteLifecyclePolicy": {
             "type": "operation",
             "input": {
@@ -1963,6 +2078,66 @@
                 }
             }
         },
+        "com.amazonaws.opensearchserverless#GetIndex": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.opensearchserverless#GetIndexRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.opensearchserverless#GetIndexResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.opensearchserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.opensearchserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.opensearchserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information about an index in an OpenSearch Serverless collection, including its schema\n            definition. The index might be configured to conduct automatic semantic enrichment\n            ingestion and search. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html#serverless-semantic-enrichment\">About automatic semantic enrichment</a>.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.opensearchserverless#GetIndexRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the collection containing the index.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "indexName": {
+                    "target": "com.amazonaws.opensearchserverless#IndexName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the index to retrieve information about.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.opensearchserverless#GetIndexResponse": {
+            "type": "structure",
+            "members": {
+                "indexSchema": {
+                    "target": "com.amazonaws.opensearchserverless#IndexSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON schema definition for the index, including field mappings and\n            settings.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.opensearchserverless#GetPoliciesStats": {
             "type": "operation",
             "input": {
@@ -2243,6 +2418,40 @@
                     }
                 ]
             }
+        },
+        "com.amazonaws.opensearchserverless#Index": {
+            "type": "resource",
+            "identifiers": {
+                "id": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionId"
+                },
+                "indexName": {
+                    "target": "com.amazonaws.opensearchserverless#IndexName"
+                }
+            },
+            "put": {
+                "target": "com.amazonaws.opensearchserverless#CreateIndex"
+            },
+            "read": {
+                "target": "com.amazonaws.opensearchserverless#GetIndex"
+            },
+            "update": {
+                "target": "com.amazonaws.opensearchserverless#UpdateIndex"
+            },
+            "delete": {
+                "target": "com.amazonaws.opensearchserverless#DeleteIndex"
+            },
+            "traits": {
+                "aws.cloudformation#cfnResource": {
+                    "name": "Index"
+                }
+            }
+        },
+        "com.amazonaws.opensearchserverless#IndexName": {
+            "type": "string"
+        },
+        "com.amazonaws.opensearchserverless#IndexSchema": {
+            "type": "document"
         },
         "com.amazonaws.opensearchserverless#IndexingCapacityValue": {
             "type": "integer",
@@ -2650,7 +2859,7 @@
                 "collectionFilters": {
                     "target": "com.amazonaws.opensearchserverless#CollectionFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of filter names and values that you can use for requests.</p>"
+                        "smithy.api#documentation": "<p> A list of filter names and values that you can use for requests.</p>"
                     }
                 },
                 "nextToken": {
@@ -2885,7 +3094,7 @@
                 "resource": {
                     "target": "com.amazonaws.opensearchserverless#ResourceFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>Resource filters (can be collection or indexes) that policies can apply to.</p>",
+                        "smithy.api#documentation": "<p>Resource filters (can be collection or indexes) that policies can apply to. </p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 1000
@@ -3011,7 +3220,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If your initial <code>ListVpcEndpoints</code> operation returns a\n                <code>nextToken</code>, you can include the returned <code>nextToken</code> in\n            subsequent <code>ListVpcEndpoints</code> operations, which returns results in the next\n            page.</p>"
+                        "smithy.api#documentation": "<p>If your initial <code>ListVpcEndpoints</code> operation returns a\n                <code>nextToken</code>, you can include the returned <code>nextToken</code> in\n            subsequent <code>ListVpcEndpoints</code> operations, which returns results in the next\n            page. </p>"
                     }
                 },
                 "maxResults": {
@@ -3055,7 +3264,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Thrown when the collection you're attempting to create results in a number of search\n            or indexing OCUs that exceeds the account limit.</p>",
+                "smithy.api#documentation": "<p>Thrown when the collection you're attempting to create results in a number of search\n            or indexing OCUs that exceeds the account limit. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
             }
@@ -3110,6 +3319,9 @@
                 },
                 {
                     "target": "com.amazonaws.opensearchserverless#Collection"
+                },
+                {
+                    "target": "com.amazonaws.opensearchserverless#Index"
                 },
                 {
                     "target": "com.amazonaws.opensearchserverless#LifecyclePolicy"
@@ -4813,6 +5025,65 @@
                 "smithy.api#documentation": "<p>Describes IAM Identity Center options for updating an OpenSearch Serverless security\n            configuration in the form of a key-value map.</p>"
             }
         },
+        "com.amazonaws.opensearchserverless#UpdateIndex": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.opensearchserverless#UpdateIndexRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.opensearchserverless#UpdateIndexResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.opensearchserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.opensearchserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.opensearchserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an existing index in an OpenSearch Serverless collection. This operation allows you to modify\n            the index schema, including adding new fields or changing field mappings. You can also\n            enable automatic semantic enrichment ingestion and search. For more information, see\n                <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html#serverless-semantic-enrichment\">About automatic semantic enrichment</a>.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.opensearchserverless#UpdateIndexRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.opensearchserverless#CollectionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the collection containing the index to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "indexName": {
+                    "target": "com.amazonaws.opensearchserverless#IndexName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the index to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "indexSchema": {
+                    "target": "com.amazonaws.opensearchserverless#IndexSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated JSON schema definition for the index, including field mappings and\n            settings. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.opensearchserverless#UpdateIndexResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.opensearchserverless#UpdateLifecyclePolicy": {
             "type": "operation",
             "input": {
@@ -4849,7 +5120,7 @@
                 "type": {
                     "target": "com.amazonaws.opensearchserverless#LifecyclePolicyType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of lifecycle policy.</p>",
+                        "smithy.api#documentation": "<p> The type of lifecycle policy.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4990,7 +5261,7 @@
                 "securityConfigDetail": {
                     "target": "com.amazonaws.opensearchserverless#SecurityConfigDetail",
                     "traits": {
-                        "smithy.api#documentation": "<p>Details about the updated security configuration.</p>"
+                        "smithy.api#documentation": "<p>Details about the updated security configuration. </p>"
                     }
                 }
             }

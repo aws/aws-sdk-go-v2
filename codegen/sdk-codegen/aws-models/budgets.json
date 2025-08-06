@@ -1646,6 +1646,16 @@
                 }
             }
         },
+        "com.amazonaws.budgets#BillingViewArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws[a-z-]*:(billing)::[0-9]{12}:billingview/[a-zA-Z0-9/:_+=.\\-@]{0,75}[a-zA-Z0-9]$"
+            }
+        },
         "com.amazonaws.budgets#Budget": {
             "type": "structure",
             "members": {
@@ -1737,6 +1747,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The definition for how the budget data is aggregated.</p>"
                     }
+                },
+                "BillingViewArn": {
+                    "target": "com.amazonaws.budgets#BillingViewArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies a specific billing view. The ARN is\n\t\t\tused to specify which particular billing view you want to interact with or retrieve\n\t\t\tinformation from when making API calls related to Amazon Web Services Billing and Cost\n\t\t\tManagement features. The BillingViewArn can be retrieved by calling the ListBillingViews\n\t\t\tAPI.</p>"
+                    }
+                },
+                "HealthStatus": {
+                    "target": "com.amazonaws.budgets#HealthStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current operational state of a Billing View derived resource.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1803,6 +1825,12 @@
                 },
                 "TimeUnit": {
                     "target": "com.amazonaws.budgets#TimeUnit"
+                },
+                "BillingViewArn": {
+                    "target": "com.amazonaws.budgets#BillingViewArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies a specific billing view. The ARN is\n\t\t\tused to specify which particular billing view you want to interact with or retrieve\n\t\t\tinformation from when making API calls related to Amazon Web Services Billing and Cost\n\t\t\tManagement features. The BillingViewArn can be retrieved by calling the ListBillingViews\n\t\t\tAPI.</p>"
+                    }
                 },
                 "BudgetedAndActualAmountsList": {
                     "target": "com.amazonaws.budgets#BudgetedAndActualAmountsList",
@@ -2085,6 +2113,9 @@
                 },
                 {
                     "target": "com.amazonaws.budgets#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#NotFoundException"
                 },
                 {
                     "target": "com.amazonaws.budgets#ServiceQuotaExceededException"
@@ -4154,6 +4185,69 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 100
+                }
+            }
+        },
+        "com.amazonaws.budgets#HealthStatus": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.budgets#HealthStatusValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the billing view resource.</p>"
+                    }
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.budgets#HealthStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the current status.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BILLING_VIEW_NO_ACCESS</code>: The billing view resource does not grant\n\t\t\t\t\t\t<code>billing:GetBillingViewData</code> permission to this account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BILLING_VIEW_UNHEALTHY</code>:  The billing view associated with the\n\t\t\t\t\tbudget is unhealthy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FILTER_INVALID</code>: The filter contains reference to an account you\n\t\t\t\t\tdo not have access to.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.budgets#GenericTimestamp"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about the current operational state of a billing view resource,\n\t\t\tincluding its ability to access and update based on its associated billing view.</p>"
+            }
+        },
+        "com.amazonaws.budgets#HealthStatusReason": {
+            "type": "enum",
+            "members": {
+                "BILLING_VIEW_NO_ACCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BILLING_VIEW_NO_ACCESS"
+                    }
+                },
+                "BILLING_VIEW_UNHEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BILLING_VIEW_UNHEALTHY"
+                    }
+                },
+                "FILTER_INVALID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FILTER_INVALID"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.budgets#HealthStatusValue": {
+            "type": "enum",
+            "members": {
+                "HEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HEALTHY"
+                    }
+                },
+                "UNHEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNHEALTHY"
+                    }
                 }
             }
         },
