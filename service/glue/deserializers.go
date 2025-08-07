@@ -35998,6 +35998,11 @@ func awsAwsjson11_deserializeDocumentCatalogPropertiesOutput(v **types.CatalogPr
 				return err
 			}
 
+		case "IcebergOptimizationProperties":
+			if err := awsAwsjson11_deserializeDocumentIcebergOptimizationPropertiesOutput(&sv.IcebergOptimizationProperties, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -48980,6 +48985,32 @@ func awsAwsjson11_deserializeDocumentIcebergCompactionConfiguration(v **types.Ic
 
 	for key, value := range shape {
 		switch key {
+		case "deleteFileThreshold":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NullableInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DeleteFileThreshold = ptr.Int32(int32(i64))
+			}
+
+		case "minInputFiles":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NullableInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MinInputFiles = ptr.Int32(int32(i64))
+			}
+
 		case "strategy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -49136,6 +49167,77 @@ func awsAwsjson11_deserializeDocumentIcebergCompactionMetrics(v **types.IcebergC
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentIcebergOptimizationPropertiesOutput(v **types.IcebergOptimizationPropertiesOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IcebergOptimizationPropertiesOutput
+	if *v == nil {
+		sv = &types.IcebergOptimizationPropertiesOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Compaction":
+			if err := awsAwsjson11_deserializeDocumentParametersMap(&sv.Compaction, value); err != nil {
+				return err
+			}
+
+		case "LastUpdatedTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastUpdatedTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "OrphanFileDeletion":
+			if err := awsAwsjson11_deserializeDocumentParametersMap(&sv.OrphanFileDeletion, value); err != nil {
+				return err
+			}
+
+		case "Retention":
+			if err := awsAwsjson11_deserializeDocumentParametersMap(&sv.Retention, value); err != nil {
+				return err
+			}
+
+		case "RoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IAMRoleArn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentIcebergOrphanFileDeletionConfiguration(v **types.IcebergOrphanFileDeletionConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -49178,6 +49280,19 @@ func awsAwsjson11_deserializeDocumentIcebergOrphanFileDeletionConfiguration(v **
 					return err
 				}
 				sv.OrphanFileRetentionPeriodInDays = ptr.Int32(int32(i64))
+			}
+
+		case "runRateInHours":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NullableInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RunRateInHours = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -49356,6 +49471,19 @@ func awsAwsjson11_deserializeDocumentIcebergRetentionConfiguration(v **types.Ice
 					return err
 				}
 				sv.NumberOfSnapshotsToRetain = ptr.Int32(int32(i64))
+			}
+
+		case "runRateInHours":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NullableInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RunRateInHours = ptr.Int32(int32(i64))
 			}
 
 		case "snapshotRetentionPeriodInDays":
@@ -65212,6 +65340,15 @@ func awsAwsjson11_deserializeDocumentTableOptimizer(v **types.TableOptimizer, va
 		case "configuration":
 			if err := awsAwsjson11_deserializeDocumentTableOptimizerConfiguration(&sv.Configuration, value); err != nil {
 				return err
+			}
+
+		case "configurationSource":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConfigurationSource to be of type string, got %T instead", value)
+				}
+				sv.ConfigurationSource = types.ConfigurationSource(jtv)
 			}
 
 		case "lastRun":

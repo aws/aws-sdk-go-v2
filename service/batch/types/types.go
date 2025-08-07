@@ -4083,16 +4083,15 @@ type RetryStrategy struct {
 // on Fargate.
 type RuntimePlatform struct {
 
-	//  The vCPU architecture. The default value is X86_64 . Valid values are X86_64
+	// The vCPU architecture. The default value is X86_64 . Valid values are X86_64
 	// and ARM64 .
 	//
 	// This parameter must be set to X86_64 for Windows containers.
 	//
-	// Fargate Spot is not supported for ARM64 and Windows-based containers on
-	// Fargate. A job queue will be blocked if a Fargate ARM64 or Windows job is
-	// submitted to a job queue with only Fargate Spot compute environments. However,
-	// you can attach both FARGATE and FARGATE_SPOT compute environments to the same
-	// job queue.
+	// Fargate Spot is not supported on Windows-based containers on Fargate. A job
+	// queue will be blocked if a Windows job is submitted to a job queue with only
+	// Fargate Spot compute environments. However, you can attach both FARGATE and
+	// FARGATE_SPOT compute environments to the same job queue.
 	CpuArchitecture *string
 
 	// The operating system for the compute environment. Valid values are: LINUX
@@ -4110,11 +4109,10 @@ type RuntimePlatform struct {
 	// is skipped and the next compute environment is checked until a Windows-based
 	// compute environment is found.
 	//
-	// Fargate Spot is not supported for ARM64 and Windows-based containers on
-	// Fargate. A job queue will be blocked if a Fargate ARM64 or Windows job is
-	// submitted to a job queue with only Fargate Spot compute environments. However,
-	// you can attach both FARGATE and FARGATE_SPOT compute environments to the same
-	// job queue.
+	// Fargate Spot is not supported on Windows-based containers on Fargate. A job
+	// queue will be blocked if a Windows job is submitted to a job queue with only
+	// Fargate Spot compute environments. However, you can attach both FARGATE and
+	// FARGATE_SPOT compute environments to the same job queue.
 	OperatingSystemFamily *string
 
 	noSmithyDocumentSerde

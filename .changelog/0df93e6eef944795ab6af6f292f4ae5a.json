@@ -1,0 +1,8 @@
+{
+    "id": "0df93e6e-ef94-4795-ab6a-f6f292f4ae5a",
+    "type": "documentation",
+    "description": "Adds Proton 9.0-2 to the list of runtime environment options available when creating an Amazon GameLift Streams application",
+    "modules": [
+        "service/gameliftstreams"
+    ]
+}

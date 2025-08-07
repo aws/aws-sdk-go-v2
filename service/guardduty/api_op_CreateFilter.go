@@ -151,6 +151,8 @@ type CreateFilterInput struct {
 	//
 	//   - service.action.dnsRequestAction.domainWithSuffix
 	//
+	//   - service.action.dnsRequestAction.vpcOwnerAccountId
+	//
 	//   - service.action.networkConnectionAction.blocked
 	//
 	//   - service.action.networkConnectionAction.connectionDirection

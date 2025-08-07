@@ -1,0 +1,8 @@
+{
+    "id": "a24d2f17-fd81-480b-863b-c0e75f04a052",
+    "type": "feature",
+    "description": "Added new viewer security policy, TLSv1.3_2025, for CloudFront.",
+    "modules": [
+        "service/cloudfront"
+    ]
+}

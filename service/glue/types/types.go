@@ -1110,6 +1110,11 @@ type CatalogProperties struct {
 	// lake access for your catalog resource in the Glue Data Catalog.
 	DataLakeAccessProperties *DataLakeAccessProperties
 
+	// A structure that specifies Iceberg table optimization properties for the
+	// catalog. This includes configuration for compaction, retention, and orphan file
+	// deletion operations that can be applied to Iceberg tables in this catalog.
+	IcebergOptimizationProperties *IcebergOptimizationProperties
+
 	noSmithyDocumentSerde
 }
 
@@ -1124,6 +1129,11 @@ type CatalogPropertiesOutput struct {
 	// A DataLakeAccessProperties object with input properties to configure data lake
 	// access for your catalog resource in the Glue Data Catalog.
 	DataLakeAccessProperties *DataLakeAccessPropertiesOutput
+
+	// An IcebergOptimizationPropertiesOutput object that specifies Iceberg table
+	// optimization settings for the catalog, including configurations for compaction,
+	// retention, and orphan file deletion operations.
+	IcebergOptimizationProperties *IcebergOptimizationPropertiesOutput
 
 	noSmithyDocumentSerde
 }
@@ -5120,6 +5130,20 @@ type HudiTarget struct {
 // defines parameters for optimizing the layout of data files in Iceberg tables.
 type IcebergCompactionConfiguration struct {
 
+	// The minimum number of deletes that must be present in a data file to make it
+	// eligible for compaction. This parameter helps optimize compaction by focusing on
+	// files that contain a significant number of delete operations, which can improve
+	// query performance by removing deleted records. If an input is not provided, the
+	// default value 1 will be used.
+	DeleteFileThreshold *int32
+
+	// The minimum number of data files that must be present in a partition before
+	// compaction will actually compact files. This parameter helps control when
+	// compaction is triggered, preventing unnecessary compaction operations on
+	// partitions with few files. If an input is not provided, the default value 100
+	// will be used.
+	MinInputFiles *int32
+
 	// The strategy to use for compaction. Valid values are:
 	//
 	//   - binpack : Combines small files into larger files, typically targeting sizes
@@ -5185,6 +5209,62 @@ type IcebergInput struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that specifies Iceberg table optimization properties for the
+// catalog, including configurations for compaction, retention, and orphan file
+// deletion operations.
+type IcebergOptimizationProperties struct {
+
+	// A map of key-value pairs that specify configuration parameters for Iceberg
+	// table compaction operations, which optimize the layout of data files to improve
+	// query performance.
+	Compaction map[string]string
+
+	// A map of key-value pairs that specify configuration parameters for Iceberg
+	// orphan file deletion operations, which identify and remove files that are no
+	// longer referenced by the table metadata.
+	OrphanFileDeletion map[string]string
+
+	// A map of key-value pairs that specify configuration parameters for Iceberg
+	// table retention operations, which manage the lifecycle of table snapshots to
+	// control storage costs.
+	Retention map[string]string
+
+	// The Amazon Resource Name (ARN) of the IAM role that will be assumed to perform
+	// Iceberg table optimization operations.
+	RoleArn *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains the output properties of Iceberg table optimization
+// configuration for your catalog resource in the Glue Data Catalog.
+type IcebergOptimizationPropertiesOutput struct {
+
+	// A map of key-value pairs that specify configuration parameters for Iceberg
+	// table compaction operations, which optimize the layout of data files to improve
+	// query performance.
+	Compaction map[string]string
+
+	// The timestamp when the Iceberg optimization properties were last updated.
+	LastUpdatedTime *time.Time
+
+	// A map of key-value pairs that specify configuration parameters for Iceberg
+	// orphan file deletion operations, which identify and remove files that are no
+	// longer referenced by the table metadata.
+	OrphanFileDeletion map[string]string
+
+	// A map of key-value pairs that specify configuration parameters for Iceberg
+	// table retention operations, which manage the lifecycle of table snapshots to
+	// control storage costs.
+	Retention map[string]string
+
+	// The Amazon Resource Name (ARN) of the IAM role that is used to perform Iceberg
+	// table optimization operations.
+	RoleArn *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for an Iceberg orphan file deletion optimizer.
 type IcebergOrphanFileDeletionConfiguration struct {
 
@@ -5196,6 +5276,12 @@ type IcebergOrphanFileDeletionConfiguration struct {
 	// The number of days that orphan files should be retained before file deletion.
 	// If an input is not provided, the default value 3 will be used.
 	OrphanFileRetentionPeriodInDays *int32
+
+	// The interval in hours between orphan file deletion job runs. This parameter
+	// controls how frequently the orphan file deletion optimizer will run to clean up
+	// orphan files. The value must be between 3 and 168 hours (7 days). If an input is
+	// not provided, the default value 24 will be used.
+	RunRateInHours *int32
 
 	noSmithyDocumentSerde
 }
@@ -5276,6 +5362,12 @@ type IcebergRetentionConfiguration struct {
 	// input is not provided, the corresponding Iceberg table configuration field will
 	// be used or if not present, the default value 1 will be used.
 	NumberOfSnapshotsToRetain *int32
+
+	// The interval in hours between retention job runs. This parameter controls how
+	// frequently the retention optimizer will run to clean up expired snapshots. The
+	// value must be between 3 and 168 hours (7 days). If an input is not provided, the
+	// default value 24 will be used.
+	RunRateInHours *int32
 
 	// The number of days to retain the Iceberg snapshots. If an input is not
 	// provided, the corresponding Iceberg table configuration field will be used or if
@@ -10599,6 +10691,11 @@ type TableOptimizer struct {
 	// updating a table optimizer.
 	Configuration *TableOptimizerConfiguration
 
+	//  Specifies the source of the optimizer configuration. This indicates how the
+	// table optimizer was configured and which entity or service initiated the
+	// configuration.
+	ConfigurationSource ConfigurationSource
+
 	// A TableOptimizerRun object representing the last run of the table optimizer.
 	LastRun *TableOptimizerRun
 
@@ -11346,8 +11443,8 @@ type UpdateIcebergInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the update operations to be applied to an existing Iceberg table in
-// AWS Glue Data Catalog, defining the new state of the table metadata.
+// Contains the update operations to be applied to an existing Iceberg table
+// inGlue Data Catalog, defining the new state of the table metadata.
 type UpdateIcebergTableInput struct {
 
 	// The list of table update operations that specify the changes to be made to the

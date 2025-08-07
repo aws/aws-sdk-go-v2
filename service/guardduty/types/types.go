@@ -1079,6 +1079,10 @@ type DnsRequestAction struct {
 	// GuardDuty to generate the finding.
 	Protocol *string
 
+	// The Amazon Web Services account ID that owns the VPC through which the DNS
+	// request was made.
+	VpcOwnerAccountId *string
+
 	noSmithyDocumentSerde
 }
 

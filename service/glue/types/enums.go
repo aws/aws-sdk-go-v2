@@ -412,6 +412,25 @@ func (ComputeEnvironment) Values() []ComputeEnvironment {
 	}
 }
 
+type ConfigurationSource string
+
+// Enum values for ConfigurationSource
+const (
+	ConfigurationSourceCatalog ConfigurationSource = "catalog"
+	ConfigurationSourceTable   ConfigurationSource = "table"
+)
+
+// Values returns all known values for ConfigurationSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConfigurationSource) Values() []ConfigurationSource {
+	return []ConfigurationSource{
+		"catalog",
+		"table",
+	}
+}
+
 type ConnectionPropertyKey string
 
 // Enum values for ConnectionPropertyKey

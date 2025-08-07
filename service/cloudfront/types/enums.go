@@ -514,6 +514,7 @@ const (
 	MinimumProtocolVersionTLSv122018 MinimumProtocolVersion = "TLSv1.2_2018"
 	MinimumProtocolVersionTLSv122019 MinimumProtocolVersion = "TLSv1.2_2019"
 	MinimumProtocolVersionTLSv122021 MinimumProtocolVersion = "TLSv1.2_2021"
+	MinimumProtocolVersionTLSv132025 MinimumProtocolVersion = "TLSv1.3_2025"
 )
 
 // Values returns all known values for MinimumProtocolVersion. Note that this can
@@ -529,6 +530,7 @@ func (MinimumProtocolVersion) Values() []MinimumProtocolVersion {
 		"TLSv1.2_2018",
 		"TLSv1.2_2019",
 		"TLSv1.2_2021",
+		"TLSv1.3_2025",
 	}
 }
 

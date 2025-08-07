@@ -1,0 +1,8 @@
+{
+    "id": "7fab4b24-c21f-43c9-be40-f345bde7d1a0",
+    "type": "feature",
+    "description": "AWS Glue Data Catalog now supports Iceberg Optimization settings at the Catalog level, and supports new options to control the optimization job run rate.",
+    "modules": [
+        "service/glue"
+    ]
+}

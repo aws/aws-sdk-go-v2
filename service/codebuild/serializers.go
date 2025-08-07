@@ -4387,6 +4387,36 @@ func awsAwsjson11_serializeDocumentProxyConfiguration(v *types.ProxyConfiguratio
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentPullRequestBuildApproverRoles(v []types.PullRequestBuildApproverRole, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPullRequestBuildPolicy(v *types.PullRequestBuildPolicy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ApproverRoles != nil {
+		ok := object.Key("approverRoles")
+		if err := awsAwsjson11_serializeDocumentPullRequestBuildApproverRoles(v.ApproverRoles, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.RequiresCommentApproval) > 0 {
+		ok := object.Key("requiresCommentApproval")
+		ok.String(string(v.RequiresCommentApproval))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentRegistryCredential(v *types.RegistryCredential, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5164,6 +5194,13 @@ func awsAwsjson11_serializeOpDocumentCreateWebhookInput(v *CreateWebhookInput, v
 	if v.ProjectName != nil {
 		ok := object.Key("projectName")
 		ok.String(*v.ProjectName)
+	}
+
+	if v.PullRequestBuildPolicy != nil {
+		ok := object.Key("pullRequestBuildPolicy")
+		if err := awsAwsjson11_serializeDocumentPullRequestBuildPolicy(v.PullRequestBuildPolicy, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ScopeConfiguration != nil {
@@ -6650,6 +6687,13 @@ func awsAwsjson11_serializeOpDocumentUpdateWebhookInput(v *UpdateWebhookInput, v
 	if v.ProjectName != nil {
 		ok := object.Key("projectName")
 		ok.String(*v.ProjectName)
+	}
+
+	if v.PullRequestBuildPolicy != nil {
+		ok := object.Key("pullRequestBuildPolicy")
+		if err := awsAwsjson11_serializeDocumentPullRequestBuildPolicy(v.PullRequestBuildPolicy, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.RotateSecret {

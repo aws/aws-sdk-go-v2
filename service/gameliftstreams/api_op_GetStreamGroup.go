@@ -129,12 +129,11 @@ type GetStreamGroupOutput struct {
 	//  A short description of the reason that the stream group is in ERROR status.
 	// The possible reasons can be one of the following:
 	//
-	//   - internalError : The request can't process right now bcause of an issue with
-	//   the server. Try again later. Reach out to the Amazon GameLift Streams team for
-	//   more help.
+	//   - internalError : The request can't process right now because of an issue with
+	//   the server. Try again later.
 	//
 	//   - noAvailableInstances : Amazon GameLift Streams does not currently have
-	//   enough available On-Demand capacity to fulfill your request. Wait a few minutes
+	//   enough available on-demand capacity to fulfill your request. Wait a few minutes
 	//   and retry the request as capacity can shift frequently. You can also try to make
 	//   the request using a different stream class or in another region.
 	StatusReason types.StreamGroupStatusReason

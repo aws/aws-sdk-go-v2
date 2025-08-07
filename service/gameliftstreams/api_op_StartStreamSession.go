@@ -137,10 +137,10 @@ type StartStreamSessionInput struct {
 	ClientToken *string
 
 	// Length of time (in seconds) that Amazon GameLift Streams should wait for a
-	// client to connect to the stream session. This time span starts when the stream
-	// session reaches ACTIVE status. If no client connects before the timeout, Amazon
-	// GameLift Streams stops the stream session with status of TERMINATED . Default
-	// value is 120.
+	// client to connect or reconnect to the stream session. This time span starts when
+	// the stream session reaches ACTIVE status. If no client connects before the
+	// timeout, Amazon GameLift Streams stops the stream session with status of
+	// TERMINATED . Default value is 120.
 	ConnectionTimeoutSeconds *int32
 
 	// A human-readable label for the stream session. You can update this value later.

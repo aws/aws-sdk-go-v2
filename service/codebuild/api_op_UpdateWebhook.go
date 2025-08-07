@@ -57,6 +57,12 @@ type UpdateWebhookInput struct {
 	// WebhookFilter .
 	FilterGroups [][]types.WebhookFilter
 
+	// A PullRequestBuildPolicy object that defines comment-based approval
+	// requirements for triggering builds on pull requests. This policy helps control
+	// when automated builds are executed based on contributor permissions and approval
+	// workflows.
+	PullRequestBuildPolicy *types.PullRequestBuildPolicy
+
 	//  A boolean value that specifies whether the associated GitHub repository's
 	// secret token should be updated. If you use Bitbucket for your repository,
 	// rotateSecret is ignored.

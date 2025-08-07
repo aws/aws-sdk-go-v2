@@ -726,6 +726,72 @@ func (ProjectVisibilityType) Values() []ProjectVisibilityType {
 	}
 }
 
+type PullRequestBuildApproverRole string
+
+// Enum values for PullRequestBuildApproverRole
+const (
+	PullRequestBuildApproverRoleGithubRead       PullRequestBuildApproverRole = "GITHUB_READ"
+	PullRequestBuildApproverRoleGithubTriage     PullRequestBuildApproverRole = "GITHUB_TRIAGE"
+	PullRequestBuildApproverRoleGithubWrite      PullRequestBuildApproverRole = "GITHUB_WRITE"
+	PullRequestBuildApproverRoleGithubMaintain   PullRequestBuildApproverRole = "GITHUB_MAINTAIN"
+	PullRequestBuildApproverRoleGithubAdmin      PullRequestBuildApproverRole = "GITHUB_ADMIN"
+	PullRequestBuildApproverRoleGitlabGuest      PullRequestBuildApproverRole = "GITLAB_GUEST"
+	PullRequestBuildApproverRoleGitlabPlanner    PullRequestBuildApproverRole = "GITLAB_PLANNER"
+	PullRequestBuildApproverRoleGitlabReporter   PullRequestBuildApproverRole = "GITLAB_REPORTER"
+	PullRequestBuildApproverRoleGitlabDeveloper  PullRequestBuildApproverRole = "GITLAB_DEVELOPER"
+	PullRequestBuildApproverRoleGitlabMaintainer PullRequestBuildApproverRole = "GITLAB_MAINTAINER"
+	PullRequestBuildApproverRoleGitlabOwner      PullRequestBuildApproverRole = "GITLAB_OWNER"
+	PullRequestBuildApproverRoleBitbucketRead    PullRequestBuildApproverRole = "BITBUCKET_READ"
+	PullRequestBuildApproverRoleBitbucketWrite   PullRequestBuildApproverRole = "BITBUCKET_WRITE"
+	PullRequestBuildApproverRoleBitbucketAdmin   PullRequestBuildApproverRole = "BITBUCKET_ADMIN"
+)
+
+// Values returns all known values for PullRequestBuildApproverRole. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PullRequestBuildApproverRole) Values() []PullRequestBuildApproverRole {
+	return []PullRequestBuildApproverRole{
+		"GITHUB_READ",
+		"GITHUB_TRIAGE",
+		"GITHUB_WRITE",
+		"GITHUB_MAINTAIN",
+		"GITHUB_ADMIN",
+		"GITLAB_GUEST",
+		"GITLAB_PLANNER",
+		"GITLAB_REPORTER",
+		"GITLAB_DEVELOPER",
+		"GITLAB_MAINTAINER",
+		"GITLAB_OWNER",
+		"BITBUCKET_READ",
+		"BITBUCKET_WRITE",
+		"BITBUCKET_ADMIN",
+	}
+}
+
+type PullRequestBuildCommentApproval string
+
+// Enum values for PullRequestBuildCommentApproval
+const (
+	PullRequestBuildCommentApprovalDisabled         PullRequestBuildCommentApproval = "DISABLED"
+	PullRequestBuildCommentApprovalAllPullRequests  PullRequestBuildCommentApproval = "ALL_PULL_REQUESTS"
+	PullRequestBuildCommentApprovalForkPullRequests PullRequestBuildCommentApproval = "FORK_PULL_REQUESTS"
+)
+
+// Values returns all known values for PullRequestBuildCommentApproval. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PullRequestBuildCommentApproval) Values() []PullRequestBuildCommentApproval {
+	return []PullRequestBuildCommentApproval{
+		"DISABLED",
+		"ALL_PULL_REQUESTS",
+		"FORK_PULL_REQUESTS",
+	}
+}
+
 type ReportCodeCoverageSortByType string
 
 // Enum values for ReportCodeCoverageSortByType

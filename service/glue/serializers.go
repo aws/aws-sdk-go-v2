@@ -16599,6 +16599,13 @@ func awsAwsjson11_serializeDocumentCatalogProperties(v *types.CatalogProperties,
 		}
 	}
 
+	if v.IcebergOptimizationProperties != nil {
+		ok := object.Key("IcebergOptimizationProperties")
+		if err := awsAwsjson11_serializeDocumentIcebergOptimizationProperties(v.IcebergOptimizationProperties, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -20224,6 +20231,16 @@ func awsAwsjson11_serializeDocumentIcebergCompactionConfiguration(v *types.Icebe
 	object := value.Object()
 	defer object.Close()
 
+	if v.DeleteFileThreshold != nil {
+		ok := object.Key("deleteFileThreshold")
+		ok.Integer(*v.DeleteFileThreshold)
+	}
+
+	if v.MinInputFiles != nil {
+		ok := object.Key("minInputFiles")
+		ok.Integer(*v.MinInputFiles)
+	}
+
 	if len(v.Strategy) > 0 {
 		ok := object.Key("strategy")
 		ok.String(string(v.Strategy))
@@ -20271,6 +20288,39 @@ func awsAwsjson11_serializeDocumentIcebergInput(v *types.IcebergInput, value smi
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentIcebergOptimizationProperties(v *types.IcebergOptimizationProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Compaction != nil {
+		ok := object.Key("Compaction")
+		if err := awsAwsjson11_serializeDocumentParametersMap(v.Compaction, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OrphanFileDeletion != nil {
+		ok := object.Key("OrphanFileDeletion")
+		if err := awsAwsjson11_serializeDocumentParametersMap(v.OrphanFileDeletion, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Retention != nil {
+		ok := object.Key("Retention")
+		if err := awsAwsjson11_serializeDocumentParametersMap(v.Retention, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RoleArn != nil {
+		ok := object.Key("RoleArn")
+		ok.String(*v.RoleArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentIcebergOrphanFileDeletionConfiguration(v *types.IcebergOrphanFileDeletionConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -20283,6 +20333,11 @@ func awsAwsjson11_serializeDocumentIcebergOrphanFileDeletionConfiguration(v *typ
 	if v.OrphanFileRetentionPeriodInDays != nil {
 		ok := object.Key("orphanFileRetentionPeriodInDays")
 		ok.Integer(*v.OrphanFileRetentionPeriodInDays)
+	}
+
+	if v.RunRateInHours != nil {
+		ok := object.Key("runRateInHours")
+		ok.Integer(*v.RunRateInHours)
 	}
 
 	return nil
@@ -20359,6 +20414,11 @@ func awsAwsjson11_serializeDocumentIcebergRetentionConfiguration(v *types.Iceber
 	if v.NumberOfSnapshotsToRetain != nil {
 		ok := object.Key("numberOfSnapshotsToRetain")
 		ok.Integer(*v.NumberOfSnapshotsToRetain)
+	}
+
+	if v.RunRateInHours != nil {
+		ok := object.Key("runRateInHours")
+		ok.Integer(*v.RunRateInHours)
 	}
 
 	if v.SnapshotRetentionPeriodInDays != nil {
