@@ -1,3 +1,7 @@
+# v1.60.0 (2025-08-07)
+
+* **Feature**: Added support for VPC owner account ID associated with DNS request in the GuardDuty finding.
+
 # v1.59.0 (2025-08-04)
 
 * **Feature**: Support configurable auth scheme preferences in service clients via AWS_AUTH_SCHEME_PREFERENCE in the environment, auth_scheme_preference in the config file, and through in-code settings on LoadDefaultConfig and client constructor methods.

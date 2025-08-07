@@ -1,9 +1,0 @@
-{
-    "id": "125bc0d1-74d3-43ed-b06a-a57c231f55b0",
-    "type": "feature",
-    "description": "Support configurable bearer token through the environment via AWS_BEARER_TOKEN_BEDROCK.",
-    "modules": [
-        "service/bedrock",
-        "service/bedrockruntime"
-    ]
-}

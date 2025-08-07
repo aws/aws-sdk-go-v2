@@ -1,3 +1,23 @@
+# Release (2025-08-07)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.56.1](service/batch/CHANGELOG.md#v1561-2025-08-07)
+  * **Documentation**: This feature allows customers to use AWS Batch with Linux with ARM64 CPU Architecture with Fargate Spot compute support.
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.43.0](service/bedrock/CHANGELOG.md#v1430-2025-08-07)
+  * **Feature**: Support configurable bearer token through the environment via AWS_BEARER_TOKEN_BEDROCK.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.35.0](service/bedrockruntime/CHANGELOG.md#v1350-2025-08-07)
+  * **Feature**: Support configurable bearer token through the environment via AWS_BEARER_TOKEN_BEDROCK.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.51.0](service/cloudfront/CHANGELOG.md#v1510-2025-08-07)
+  * **Feature**: Added new viewer security policy, TLSv1.3_2025, for CloudFront.
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.64.0](service/codebuild/CHANGELOG.md#v1640-2025-08-07)
+  * **Feature**: AWS CodeBuild now supports comment-based pull request control.
+* `github.com/aws/aws-sdk-go-v2/service/gameliftstreams`: [v1.3.1](service/gameliftstreams/CHANGELOG.md#v131-2025-08-07)
+  * **Documentation**: Adds Proton 9.0-2 to the list of runtime environment options available when creating an Amazon GameLift Streams application
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.123.0](service/glue/CHANGELOG.md#v11230-2025-08-07)
+  * **Feature**: AWS Glue Data Catalog now supports Iceberg Optimization settings at the Catalog level, and supports new options to control the optimization job run rate.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.60.0](service/guardduty/CHANGELOG.md#v1600-2025-08-07)
+  * **Feature**: Added support for VPC owner account ID associated with DNS request in the GuardDuty finding.
+
 # Release (2025-08-06)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.35.0 (2025-08-07)
+
+* **Feature**: Support configurable bearer token through the environment via AWS_BEARER_TOKEN_BEDROCK.
+
 # v1.34.0 (2025-08-05)
 
 * **Feature**: This release adds support for Automated Reasoning checks output models for the Amazon Bedrock Guardrails ApplyGuardrail API.

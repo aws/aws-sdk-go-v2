@@ -1,8 +1,0 @@
-{
-    "id": "5951f910-63a1-4904-a73a-8b5964b53478",
-    "type": "feature",
-    "description": "Added support for VPC owner account ID associated with DNS request in the GuardDuty finding.",
-    "modules": [
-        "service/guardduty"
-    ]
-}

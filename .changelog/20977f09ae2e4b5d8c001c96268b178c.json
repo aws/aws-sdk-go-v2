@@ -1,8 +1,0 @@
-{
-    "id": "20977f09-ae2e-4b5d-8c00-1c96268b178c",
-    "type": "feature",
-    "description": "AWS CodeBuild now supports comment-based pull request control.",
-    "modules": [
-        "service/codebuild"
-    ]
-}

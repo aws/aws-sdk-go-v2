@@ -1,8 +1,0 @@
-{
-    "id": "3b7860e9-eaaa-4248-ac1a-4fde72c0732e",
-    "type": "documentation",
-    "description": "This feature allows customers to use AWS Batch with Linux with ARM64 CPU Architecture with Fargate Spot compute support.",
-    "modules": [
-        "service/batch"
-    ]
-}
