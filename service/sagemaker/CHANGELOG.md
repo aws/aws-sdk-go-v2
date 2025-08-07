@@ -1,3 +1,13 @@
+# v1.205.0 (2025-08-05)
+
+* **Feature**: Add support for SageMaker Hyperpod continuous scaling and custom AMI; Introduce new APIs: ListClusterEvents, DescribeClusterEvent, BatchAddClusterNodes
+
+# v1.204.0 (2025-08-04)
+
+* **Feature**: Support configurable auth scheme preferences in service clients via AWS_AUTH_SCHEME_PREFERENCE in the environment, auth_scheme_preference in the config file, and through in-code settings on LoadDefaultConfig and client constructor methods.
+* **Feature**: This release adds the ability for customers to attach and detach their EBS volumes to EKS-orchestrated HyperPod cluster nodes.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.203.1 (2025-07-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

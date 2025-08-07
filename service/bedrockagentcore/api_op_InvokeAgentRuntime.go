@@ -11,17 +11,28 @@ import (
 	"io"
 )
 
-// Sends a request to an agent runtime in Amazon Bedrock and receives responses in
-// real-time. The agent processes the request using the configured foundation model
-// and any associated knowledge bases or action groups.
+// Sends a request to an agent or tool hosted in an Amazon Bedrock AgentCore
+// Runtime and receives responses in real-time.
 //
-// To invoke an agent runtime, you must specify the agent runtime ARN and provide
-// a payload containing your request. You can optionally specify a qualifier to
-// target a specific version or alias of the agent.
+// To invoke an agent you must specify the AgentCore Runtime ARN and provide a
+// payload containing your request. You can optionally specify a qualifier to
+// target a specific version or endpoint of the agent.
 //
 // This operation supports streaming responses, allowing you to receive partial
 // responses as they become available. We recommend using pagination to ensure that
 // the operation returns quickly and successfully when processing large responses.
+//
+// For example code, see [Invoke an AgentCore Runtime agent].
+//
+// If you're integrating your agent with OAuth, you can't use the Amazon Web
+// Services SDK to call InvokeAgentRuntime . Instead, make a HTTPS request to
+// InvokeAgentRuntime . For an example, see [Authenticate and authorize with Inbound Auth and Outbound Auth].
+//
+// To use this operation, you must have the bedrock-agentcore:InvokeAgentRuntime
+// permission.
+//
+// [Invoke an AgentCore Runtime agent]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/runtime-invoke-agent.html
+// [Authenticate and authorize with Inbound Auth and Outbound Auth]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/runtime-oauth.html
 func (c *Client) InvokeAgentRuntime(ctx context.Context, params *InvokeAgentRuntimeInput, optFns ...func(*Options)) (*InvokeAgentRuntimeOutput, error) {
 	if params == nil {
 		params = &InvokeAgentRuntimeInput{}
@@ -72,8 +83,8 @@ type InvokeAgentRuntimeInput struct {
 	McpSessionId *string
 
 	// The qualifier to use for the agent runtime. This can be a version number or an
-	// alias name that points to a specific version. If not specified, Amazon Bedrock
-	// uses the default version of the agent runtime.
+	// endpoint name that points to a specific version. If not specified, Amazon
+	// Bedrock uses the default version of the agent runtime.
 	Qualifier *string
 
 	// The identifier of the runtime session.

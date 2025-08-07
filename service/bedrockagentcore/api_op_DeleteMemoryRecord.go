@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a memory record from a memory store. When you delete a memory record,
-// it is permanently removed.
+// Deletes a memory record from an AgentCore Memory resource. When you delete a
+// memory record, it is permanently removed.
 //
-// To use this operation, you must have the genesismemory:DeleteMemoryRecord
+// To use this operation, you must have the bedrock-agentcore:DeleteMemoryRecord
 // permission.
 func (c *Client) DeleteMemoryRecord(ctx context.Context, params *DeleteMemoryRecordInput, optFns ...func(*Options)) (*DeleteMemoryRecordOutput, error) {
 	if params == nil {
@@ -32,7 +32,8 @@ func (c *Client) DeleteMemoryRecord(ctx context.Context, params *DeleteMemoryRec
 
 type DeleteMemoryRecordInput struct {
 
-	// The identifier of the memory store from which to delete the memory record.
+	// The identifier of the AgentCore Memory resource from which to delete the memory
+	// record.
 	//
 	// This member is required.
 	MemoryId *string

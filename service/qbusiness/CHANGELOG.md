@@ -1,3 +1,12 @@
+# v1.31.0 (2025-08-06)
+
+* **Feature**: Amazon Q Business now supports the GetDocumentContent() API that enables customers to securely access the source documents through clickable citation links at query time
+
+# v1.30.0 (2025-08-04)
+
+* **Feature**: Support configurable auth scheme preferences in service clients via AWS_AUTH_SCHEME_PREFERENCE in the environment, auth_scheme_preference in the config file, and through in-code settings on LoadDefaultConfig and client constructor methods.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.29.1 (2025-07-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

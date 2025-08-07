@@ -687,6 +687,11 @@ func awsRestjson1_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 		}
 	}
 
+	if v.DeletionProtection != nil {
+		ok := object.Key("deletionProtection")
+		ok.Boolean(*v.DeletionProtection)
+	}
+
 	if v.EncryptionConfig != nil {
 		ok := object.Key("encryptionConfig")
 		if err := awsRestjson1_serializeDocumentEncryptionConfigList(v.EncryptionConfig, ok); err != nil {
@@ -4896,6 +4901,11 @@ func awsRestjson1_serializeOpDocumentUpdateClusterConfigInput(v *UpdateClusterCo
 		if err := awsRestjson1_serializeDocumentComputeConfigRequest(v.ComputeConfig, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.DeletionProtection != nil {
+		ok := object.Key("deletionProtection")
+		ok.Boolean(*v.DeletionProtection)
 	}
 
 	if v.KubernetesNetworkConfig != nil {

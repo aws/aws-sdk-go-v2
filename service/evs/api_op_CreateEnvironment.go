@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Amazon EVS is in public preview release and is subject to change.
+//
 // Creates an Amazon EVS environment that runs VCF software, such as SDDC Manager,
 // NSX Manager, and vCenter Server.
 //
@@ -18,14 +20,12 @@ import (
 // provisions VLAN subnets and hosts, and deploys the supplied version of VCF.
 //
 // It can take several hours to create an environment. After the deployment
-// completes, you can configure VCF according to your unique requirements.
+// completes, you can configure VCF in the vSphere user interface according to your
+// needs.
 //
 // You cannot use the dedicatedHostId and placementGroupId parameters together in
 // the same CreateEnvironment action. This results in a ValidationException
 // response.
-//
-// EC2 instances created through Amazon EVS do not support associating an IAM
-// instance profile.
 func (c *Client) CreateEnvironment(ctx context.Context, params *CreateEnvironmentInput, optFns ...func(*Options)) (*CreateEnvironmentOutput, error) {
 	if params == nil {
 		params = &CreateEnvironmentInput{}
@@ -45,8 +45,8 @@ type CreateEnvironmentInput struct {
 
 	//  The connectivity configuration for the environment. Amazon EVS requires that
 	// you specify two route server peer IDs. During environment creation, the route
-	// server endpoints peer with the NSX edges over the NSX, providing BGP dynamic
-	// routing for overlay networks.
+	// server endpoints peer with the NSX edges over the NSX uplink subnet, providing
+	// BGP-based dynamic routing for overlay networks.
 	//
 	// This member is required.
 	ConnectivityInfo *types.ConnectivityInfo
@@ -54,23 +54,26 @@ type CreateEnvironmentInput struct {
 	// The ESXi hosts to add to the environment. Amazon EVS requires that you provide
 	// details for a minimum of 4 hosts during environment creation.
 	//
-	// For each host, you must provide the desired hostname, EC2 SSH key, and EC2
-	// instance type. Optionally, you can also provide a partition or cluster placement
-	// group to use, or use Amazon EC2 Dedicated Hosts.
+	// For each host, you must provide the desired hostname, EC2 SSH keypair name, and
+	// EC2 instance type. Optionally, you can also provide a partition or cluster
+	// placement group to use, or use Amazon EC2 Dedicated Hosts.
 	//
 	// This member is required.
 	Hosts []types.HostInfoForCreate
 
-	// The initial VLAN subnets for the environment. You must specify a
-	// non-overlapping CIDR block for each VLAN subnet.
+	// The initial VLAN subnets for the Amazon EVS environment.
+	//
+	// For each Amazon EVS VLAN subnet, you must specify a non-overlapping CIDR block.
+	// Amazon EVS VLAN subnets have a minimum CIDR block size of /28 and a maximum size
+	// of /24.
 	//
 	// This member is required.
 	InitialVlans *types.InitialVlans
 
 	// The license information that Amazon EVS requires to create an environment.
 	// Amazon EVS requires two license keys: a VCF solution key and a vSAN license key.
-	// VCF licenses must have sufficient core entitlements to cover vCPU core and vSAN
-	// storage capacity needs.
+	// The VCF solution key must cover a minimum of 256 cores. The vSAN license key
+	// must provide at least 110 TiB of vSAN capacity.
 	//
 	// VCF licenses can be used for only one Amazon EVS environment. Amazon EVS does
 	// not support reuse of VCF licenses for multiple environments.
@@ -96,9 +99,12 @@ type CreateEnvironmentInput struct {
 	// This member is required.
 	SiteId *string
 
-	// Customer confirmation that the customer has purchased and maintains sufficient
-	// VCF software licenses to cover all physical processor cores in the environment,
-	// in compliance with VMware's licensing requirements and terms of use.
+	// Customer confirmation that the customer has purchased and will continue to
+	// maintain the required number of VCF software licenses to cover all physical
+	// processor cores in the Amazon EVS environment. Information about your VCF
+	// software in Amazon EVS will be shared with Broadcom to verify license
+	// compliance. Amazon EVS does not validate license keys. To validate license keys,
+	// visit the Broadcom support portal.
 	//
 	// This member is required.
 	TermsAccepted *bool
@@ -116,24 +122,24 @@ type CreateEnvironmentInput struct {
 	// This member is required.
 	VcfVersion types.VcfVersion
 
-	// A unique ID for the VPC that connects to the environment control plane for
-	// service access.
+	// A unique ID for the VPC that the environment is deployed inside.
 	//
 	// Amazon EVS requires that all VPC subnets exist in a single Availability Zone in
 	// a Region where the service is available.
 	//
-	// The VPC that you select must have a valid DHCP option set with domain name, at
+	// The VPC that you specify must have a valid DHCP option set with domain name, at
 	// least two DNS servers, and an NTP server. These settings are used to configure
-	// your VCF appliances and hosts.
-	//
-	// If you plan to use HCX over the internet, choose a VPC that has a primary CIDR
-	// block and a /28 secondary CIDR block from an IPAM pool. Make sure that your VPC
-	// also has an attached internet gateway.
+	// your VCF appliances and hosts. The VPC cannot be used with any other deployed
+	// Amazon EVS environment. Amazon EVS does not provide multi-VPC support for
+	// environments at this time.
 	//
 	// Amazon EVS does not support the following Amazon Web Services networking
 	// options for NSX overlay connectivity: cross-Region VPC peering, Amazon S3
 	// gateway endpoints, or Amazon Web Services Direct Connect virtual private gateway
 	// associations.
+	//
+	// Ensure that you specify a VPC that is adequately sized to accommodate the
+	// {evws} subnets.
 	//
 	// This member is required.
 	VpcId *string

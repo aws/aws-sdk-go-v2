@@ -338,6 +338,18 @@ func TestCheckSnapshot_DeleteAssetModelCompositeModel(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteAssetModelInterfaceRelationship(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAssetModelInterfaceRelationship(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAssetModelInterfaceRelationship")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteComputationModel(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteComputationModel(context.Background(), nil, func(o *Options) {
@@ -487,6 +499,18 @@ func TestCheckSnapshot_DescribeAssetModelCompositeModel(t *testing.T) {
 	_, err := svc.DescribeAssetModelCompositeModel(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeAssetModelCompositeModel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeAssetModelInterfaceRelationship(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAssetModelInterfaceRelationship(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeAssetModelInterfaceRelationship")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -998,6 +1022,18 @@ func TestCheckSnapshot_ListGateways(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListInterfaceRelationships(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListInterfaceRelationships(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListInterfaceRelationships")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListPortals(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListPortals(context.Background(), nil, func(o *Options) {
@@ -1051,6 +1087,18 @@ func TestCheckSnapshot_ListTimeSeries(t *testing.T) {
 	_, err := svc.ListTimeSeries(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListTimeSeries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutAssetModelInterfaceRelationship(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAssetModelInterfaceRelationship(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutAssetModelInterfaceRelationship")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1537,6 +1585,18 @@ func TestUpdateSnapshot_DeleteAssetModelCompositeModel(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteAssetModelInterfaceRelationship(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAssetModelInterfaceRelationship(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAssetModelInterfaceRelationship")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteComputationModel(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteComputationModel(context.Background(), nil, func(o *Options) {
@@ -1686,6 +1746,18 @@ func TestUpdateSnapshot_DescribeAssetModelCompositeModel(t *testing.T) {
 	_, err := svc.DescribeAssetModelCompositeModel(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeAssetModelCompositeModel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeAssetModelInterfaceRelationship(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAssetModelInterfaceRelationship(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeAssetModelInterfaceRelationship")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2197,6 +2269,18 @@ func TestUpdateSnapshot_ListGateways(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListInterfaceRelationships(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListInterfaceRelationships(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListInterfaceRelationships")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListPortals(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListPortals(context.Background(), nil, func(o *Options) {
@@ -2250,6 +2334,18 @@ func TestUpdateSnapshot_ListTimeSeries(t *testing.T) {
 	_, err := svc.ListTimeSeries(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTimeSeries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutAssetModelInterfaceRelationship(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAssetModelInterfaceRelationship(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutAssetModelInterfaceRelationship")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

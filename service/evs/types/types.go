@@ -7,6 +7,8 @@ import (
 	"time"
 )
 
+// Amazon EVS is in public preview release and is subject to change.
+//
 // A check on the environment to identify environment health and validate VMware
 // VCF licensing compliance.
 type Check struct {
@@ -41,6 +43,8 @@ type Check struct {
 	noSmithyDocumentSerde
 }
 
+// Amazon EVS is in public preview release and is subject to change.
+//
 // The connectivity configuration for the environment. Amazon EVS requires that
 // you specify two route server peer IDs. During environment creation, the route
 // server endpoints peer with the NSX uplink VLAN for connectivity to the NSX
@@ -55,6 +59,8 @@ type ConnectivityInfo struct {
 	noSmithyDocumentSerde
 }
 
+// Amazon EVS is in public preview release and is subject to change.
+//
 // An object that represents an Amazon EVS environment.
 type Environment struct {
 
@@ -105,6 +111,8 @@ type Environment struct {
 
 	//  The license information that Amazon EVS requires to create an environment.
 	// Amazon EVS requires two license keys: a VCF solution key and a vSAN license key.
+	// The VCF solution key must cover a minimum of 256 cores. The vSAN license key
+	// must provide at least 110 TiB of vSAN capacity.
 	LicenseInfo []LicenseInfo
 
 	//  The date and time that the environment was modified.
@@ -128,9 +136,12 @@ type Environment struct {
 	// A detailed description of the environmentState of an environment.
 	StateDetails *string
 
-	// Customer confirmation that the customer has purchased and maintains sufficient
-	// VCF software licenses to cover all physical processor cores in the environment,
-	// in compliance with VMware's licensing requirements and terms of use.
+	// Customer confirmation that the customer has purchased and will continue to
+	// maintain the required number of VCF software licenses to cover all physical
+	// processor cores in the Amazon EVS environment. Information about your VCF
+	// software in Amazon EVS will be shared with Broadcom to verify license
+	// compliance. Amazon EVS does not validate license keys. To validate license keys,
+	// visit the Broadcom support portal.
 	TermsAccepted *bool
 
 	// The DNS hostnames to be used by the VCF management appliances in your
@@ -151,6 +162,8 @@ type Environment struct {
 	noSmithyDocumentSerde
 }
 
+// Amazon EVS is in public preview release and is subject to change.
+//
 // A list of environments with summarized environment details.
 type EnvironmentSummary struct {
 
@@ -182,6 +195,8 @@ type EnvironmentSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Amazon EVS is in public preview release and is subject to change.
+//
 // An ESXi host that runs on an Amazon EC2 bare metal instance. Four hosts are
 // created in an Amazon EVS environment during environment creation. You can add
 // hosts to an environment using the CreateEnvironmentHost operation. Amazon EVS
@@ -231,6 +246,8 @@ type Host struct {
 	noSmithyDocumentSerde
 }
 
+// Amazon EVS is in public preview release and is subject to change.
+//
 // An object that represents a host.
 //
 // You cannot use dedicatedHostId and placementGroupId together in the same
@@ -262,16 +279,23 @@ type HostInfoForCreate struct {
 	noSmithyDocumentSerde
 }
 
-// An object that represents an initial VLAN subnet for the environment. Amazon
-// EVS creates initial VLAN subnets when you first create the environment. You must
-// specify a non-overlapping CIDR block for each VLAN subnet. Amazon EVS creates
-// the following 10 VLAN subnets: host management VLAN, vMotion VLAN, vSAN VLAN,
-// VTEP VLAN, Edge VTEP VLAN, Management VM VLAN, HCX uplink VLAN, NSX uplink VLAN,
-// expansion VLAN 1, expansion VLAN 2.
+// Amazon EVS is in public preview release and is subject to change.
+//
+// An object that represents an initial VLAN subnet for the Amazon EVS
+// environment. Amazon EVS creates initial VLAN subnets when you first create the
+// environment. Amazon EVS creates the following 10 VLAN subnets: host management
+// VLAN, vMotion VLAN, vSAN VLAN, VTEP VLAN, Edge VTEP VLAN, Management VM VLAN,
+// HCX uplink VLAN, NSX uplink VLAN, expansion VLAN 1, expansion VLAN 2.
+//
+// For each Amazon EVS VLAN subnet, you must specify a non-overlapping CIDR block.
+// Amazon EVS VLAN subnets have a minimum CIDR block size of /28 and a maximum size
+// of /24.
 type InitialVlanInfo struct {
 
-	//  The CIDR block that you provide to create a VLAN subnet. VLAN CIDR blocks must
-	// not overlap with other subnets in the VPC.
+	//  The CIDR block that you provide to create an Amazon EVS VLAN subnet. Amazon
+	// EVS VLAN subnets have a minimum CIDR block size of /28 and a maximum size of
+	// /24. Amazon EVS VLAN subnet CIDR blocks must not overlap with other subnets in
+	// the VPC.
 	//
 	// This member is required.
 	Cidr *string
@@ -279,8 +303,11 @@ type InitialVlanInfo struct {
 	noSmithyDocumentSerde
 }
 
-// The initial VLAN subnets for the environment. You must specify a
-// non-overlapping CIDR block for each VLAN subnet.
+// Amazon EVS is in public preview release and is subject to change.
+//
+// The initial VLAN subnets for the environment. Amazon EVS VLAN subnets have a
+// minimum CIDR block size of /28 and a maximum size of /24. Amazon EVS VLAN subnet
+// CIDR blocks must not overlap with other subnets in the VPC.
 type InitialVlans struct {
 
 	// The edge VTEP VLAN subnet. This VLAN subnet manages traffic flowing between the
@@ -342,7 +369,7 @@ type InitialVlans struct {
 	// This member is required.
 	VmManagement *InitialVlanInfo
 
-	//  The VMkernel management VLAN subnet. This VLAN subnet carries traffic for
+	//  The host VMkernel management VLAN subnet. This VLAN subnet carries traffic for
 	// managing ESXi hosts and communicating with VMware vCenter Server.
 	//
 	// This member is required.
@@ -351,18 +378,21 @@ type InitialVlans struct {
 	noSmithyDocumentSerde
 }
 
-//	The license information that Amazon EVS requires to create an environment.
+// Amazon EVS is in public preview release and is subject to change.
 //
+// The license information that Amazon EVS requires to create an environment.
 // Amazon EVS requires two license keys: a VCF solution key and a vSAN license key.
 type LicenseInfo struct {
 
 	//  The VCF solution key. This license unlocks VMware VCF product features,
-	// including vSphere, NSX, SDDC Manager, and vCenter Server.
+	// including vSphere, NSX, SDDC Manager, and vCenter Server. The VCF solution key
+	// must cover a minimum of 256 cores.
 	//
 	// This member is required.
 	SolutionKey *string
 
-	//  The VSAN license key. This license unlocks vSAN features.
+	//  The VSAN license key. This license unlocks vSAN features. The vSAN license key
+	// must provide at least 110 TiB of vSAN capacity.
 	//
 	// This member is required.
 	VsanKey *string
@@ -370,6 +400,8 @@ type LicenseInfo struct {
 	noSmithyDocumentSerde
 }
 
+// Amazon EVS is in public preview release and is subject to change.
+//
 // An elastic network interface (ENI) that connects hosts to the VLAN subnets.
 // Amazon EVS provisions two identically configured ENIs in the VMkernel management
 // subnet during host creation. One ENI is active, and the other is in standby mode
@@ -382,6 +414,8 @@ type NetworkInterface struct {
 	noSmithyDocumentSerde
 }
 
+// Amazon EVS is in public preview release and is subject to change.
+//
 // A managed secret that contains the credentials for installing vCenter Server,
 // NSX, and SDDC Manager. During environment creation, the Amazon EVS control plane
 // uses Amazon Web Services Secrets Manager to create, encrypt, validate, and store
@@ -397,6 +431,8 @@ type Secret struct {
 	noSmithyDocumentSerde
 }
 
+// Amazon EVS is in public preview release and is subject to change.
+//
 // The security groups that allow traffic between the Amazon EVS control plane and
 // your VPC for Amazon EVS service access. If a security group is not specified,
 // Amazon EVS uses the default security group in your account for service access.
@@ -408,6 +444,8 @@ type ServiceAccessSecurityGroups struct {
 	noSmithyDocumentSerde
 }
 
+// Amazon EVS is in public preview release and is subject to change.
+//
 // Stores information about a field passed inside a request that resulted in an
 // exception.
 type ValidationExceptionField struct {
@@ -425,6 +463,8 @@ type ValidationExceptionField struct {
 	noSmithyDocumentSerde
 }
 
+// Amazon EVS is in public preview release and is subject to change.
+//
 // The DNS hostnames that Amazon EVS uses to install VMware vCenter Server, NSX,
 // SDDC Manager, and Cloud Builder. Each hostname must be unique, and resolve to a
 // domain name that you've registered in your DNS service of choice. Hostnames
@@ -482,13 +522,16 @@ type VcfHostnames struct {
 	noSmithyDocumentSerde
 }
 
+// Amazon EVS is in public preview release and is subject to change.
+//
 // The VLANs that Amazon EVS creates during environment creation.
 type Vlan struct {
 
 	// The availability zone of the VLAN.
 	AvailabilityZone *string
 
-	//  The CIDR block of the VLAN.
+	// The CIDR block of the VLAN. Amazon EVS VLAN subnets have a minimum CIDR block
+	// size of /28 and a maximum size of /24.
 	Cidr *string
 
 	// The date and time that the VLAN was created.

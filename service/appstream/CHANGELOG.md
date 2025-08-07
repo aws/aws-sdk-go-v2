@@ -1,3 +1,12 @@
+# v1.47.1 (2025-08-06)
+
+* **Documentation**: Added support for G6 instances
+
+# v1.47.0 (2025-08-04)
+
+* **Feature**: Support configurable auth scheme preferences in service clients via AWS_AUTH_SCHEME_PREFERENCE in the environment, auth_scheme_preference in the config file, and through in-code settings on LoadDefaultConfig and client constructor methods.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.46.1 (2025-07-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

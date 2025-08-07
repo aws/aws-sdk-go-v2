@@ -82,6 +82,10 @@ type UpdateGuardrailInput struct {
 	// This member is required.
 	Name *string
 
+	// Updated configuration for Automated Reasoning policies associated with the
+	// guardrail.
+	AutomatedReasoningPolicyConfig *types.GuardrailAutomatedReasoningPolicyConfig
+
 	// The content policy to configure for the guardrail.
 	ContentPolicyConfig *types.GuardrailContentPolicyConfig
 

@@ -30,6 +30,86 @@ func (m *validateOpBatchDeleteEvaluationJob) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelAutomatedReasoningPolicyBuildWorkflow struct {
+}
+
+func (*validateOpCancelAutomatedReasoningPolicyBuildWorkflow) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelAutomatedReasoningPolicyBuildWorkflow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelAutomatedReasoningPolicyBuildWorkflowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelAutomatedReasoningPolicyBuildWorkflowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateAutomatedReasoningPolicy struct {
+}
+
+func (*validateOpCreateAutomatedReasoningPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAutomatedReasoningPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAutomatedReasoningPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAutomatedReasoningPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateAutomatedReasoningPolicyTestCase struct {
+}
+
+func (*validateOpCreateAutomatedReasoningPolicyTestCase) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAutomatedReasoningPolicyTestCase) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAutomatedReasoningPolicyTestCaseInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAutomatedReasoningPolicyTestCaseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateAutomatedReasoningPolicyVersion struct {
+}
+
+func (*validateOpCreateAutomatedReasoningPolicyVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAutomatedReasoningPolicyVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAutomatedReasoningPolicyVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAutomatedReasoningPolicyVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateCustomModelDeployment struct {
 }
 
@@ -310,6 +390,66 @@ func (m *validateOpCreateProvisionedModelThroughput) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteAutomatedReasoningPolicyBuildWorkflow struct {
+}
+
+func (*validateOpDeleteAutomatedReasoningPolicyBuildWorkflow) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAutomatedReasoningPolicyBuildWorkflow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAutomatedReasoningPolicyBuildWorkflowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAutomatedReasoningPolicyBuildWorkflowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAutomatedReasoningPolicy struct {
+}
+
+func (*validateOpDeleteAutomatedReasoningPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAutomatedReasoningPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAutomatedReasoningPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAutomatedReasoningPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAutomatedReasoningPolicyTestCase struct {
+}
+
+func (*validateOpDeleteAutomatedReasoningPolicyTestCase) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAutomatedReasoningPolicyTestCase) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAutomatedReasoningPolicyTestCaseInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAutomatedReasoningPolicyTestCaseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteCustomModelDeployment struct {
 }
 
@@ -505,6 +645,166 @@ func (m *validateOpDeregisterMarketplaceModelEndpoint) HandleInitialize(ctx cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeregisterMarketplaceModelEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpExportAutomatedReasoningPolicyVersion struct {
+}
+
+func (*validateOpExportAutomatedReasoningPolicyVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpExportAutomatedReasoningPolicyVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ExportAutomatedReasoningPolicyVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpExportAutomatedReasoningPolicyVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAutomatedReasoningPolicyAnnotations struct {
+}
+
+func (*validateOpGetAutomatedReasoningPolicyAnnotations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAutomatedReasoningPolicyAnnotations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAutomatedReasoningPolicyAnnotationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAutomatedReasoningPolicyAnnotationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAutomatedReasoningPolicyBuildWorkflow struct {
+}
+
+func (*validateOpGetAutomatedReasoningPolicyBuildWorkflow) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAutomatedReasoningPolicyBuildWorkflow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAutomatedReasoningPolicyBuildWorkflowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAutomatedReasoningPolicyBuildWorkflowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAutomatedReasoningPolicyBuildWorkflowResultAssets struct {
+}
+
+func (*validateOpGetAutomatedReasoningPolicyBuildWorkflowResultAssets) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAutomatedReasoningPolicyBuildWorkflowResultAssets) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAutomatedReasoningPolicyBuildWorkflowResultAssetsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAutomatedReasoningPolicyBuildWorkflowResultAssetsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAutomatedReasoningPolicy struct {
+}
+
+func (*validateOpGetAutomatedReasoningPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAutomatedReasoningPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAutomatedReasoningPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAutomatedReasoningPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAutomatedReasoningPolicyNextScenario struct {
+}
+
+func (*validateOpGetAutomatedReasoningPolicyNextScenario) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAutomatedReasoningPolicyNextScenario) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAutomatedReasoningPolicyNextScenarioInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAutomatedReasoningPolicyNextScenarioInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAutomatedReasoningPolicyTestCase struct {
+}
+
+func (*validateOpGetAutomatedReasoningPolicyTestCase) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAutomatedReasoningPolicyTestCase) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAutomatedReasoningPolicyTestCaseInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAutomatedReasoningPolicyTestCaseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAutomatedReasoningPolicyTestResult struct {
+}
+
+func (*validateOpGetAutomatedReasoningPolicyTestResult) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAutomatedReasoningPolicyTestResult) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAutomatedReasoningPolicyTestResultInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAutomatedReasoningPolicyTestResultInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -810,6 +1110,66 @@ func (m *validateOpGetProvisionedModelThroughput) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAutomatedReasoningPolicyBuildWorkflows struct {
+}
+
+func (*validateOpListAutomatedReasoningPolicyBuildWorkflows) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAutomatedReasoningPolicyBuildWorkflows) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAutomatedReasoningPolicyBuildWorkflowsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAutomatedReasoningPolicyBuildWorkflowsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAutomatedReasoningPolicyTestCases struct {
+}
+
+func (*validateOpListAutomatedReasoningPolicyTestCases) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAutomatedReasoningPolicyTestCases) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAutomatedReasoningPolicyTestCasesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAutomatedReasoningPolicyTestCasesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAutomatedReasoningPolicyTestResults struct {
+}
+
+func (*validateOpListAutomatedReasoningPolicyTestResults) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAutomatedReasoningPolicyTestResults) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAutomatedReasoningPolicyTestResultsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAutomatedReasoningPolicyTestResultsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListFoundationModelAgreementOffers struct {
 }
 
@@ -905,6 +1265,46 @@ func (m *validateOpRegisterMarketplaceModelEndpoint) HandleInitialize(ctx contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpRegisterMarketplaceModelEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartAutomatedReasoningPolicyBuildWorkflow struct {
+}
+
+func (*validateOpStartAutomatedReasoningPolicyBuildWorkflow) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartAutomatedReasoningPolicyBuildWorkflow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartAutomatedReasoningPolicyBuildWorkflowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartAutomatedReasoningPolicyBuildWorkflowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartAutomatedReasoningPolicyTestWorkflow struct {
+}
+
+func (*validateOpStartAutomatedReasoningPolicyTestWorkflow) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartAutomatedReasoningPolicyTestWorkflow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartAutomatedReasoningPolicyTestWorkflowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartAutomatedReasoningPolicyTestWorkflowInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1010,6 +1410,66 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateAutomatedReasoningPolicyAnnotations struct {
+}
+
+func (*validateOpUpdateAutomatedReasoningPolicyAnnotations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAutomatedReasoningPolicyAnnotations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAutomatedReasoningPolicyAnnotationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAutomatedReasoningPolicyAnnotationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateAutomatedReasoningPolicy struct {
+}
+
+func (*validateOpUpdateAutomatedReasoningPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAutomatedReasoningPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAutomatedReasoningPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAutomatedReasoningPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateAutomatedReasoningPolicyTestCase struct {
+}
+
+func (*validateOpUpdateAutomatedReasoningPolicyTestCase) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAutomatedReasoningPolicyTestCase) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAutomatedReasoningPolicyTestCaseInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAutomatedReasoningPolicyTestCaseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateGuardrail struct {
 }
 
@@ -1074,6 +1534,22 @@ func addOpBatchDeleteEvaluationJobValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpBatchDeleteEvaluationJob{}, middleware.After)
 }
 
+func addOpCancelAutomatedReasoningPolicyBuildWorkflowValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelAutomatedReasoningPolicyBuildWorkflow{}, middleware.After)
+}
+
+func addOpCreateAutomatedReasoningPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAutomatedReasoningPolicy{}, middleware.After)
+}
+
+func addOpCreateAutomatedReasoningPolicyTestCaseValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAutomatedReasoningPolicyTestCase{}, middleware.After)
+}
+
+func addOpCreateAutomatedReasoningPolicyVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAutomatedReasoningPolicyVersion{}, middleware.After)
+}
+
 func addOpCreateCustomModelDeploymentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCustomModelDeployment{}, middleware.After)
 }
@@ -1130,6 +1606,18 @@ func addOpCreateProvisionedModelThroughputValidationMiddleware(stack *middleware
 	return stack.Initialize.Add(&validateOpCreateProvisionedModelThroughput{}, middleware.After)
 }
 
+func addOpDeleteAutomatedReasoningPolicyBuildWorkflowValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAutomatedReasoningPolicyBuildWorkflow{}, middleware.After)
+}
+
+func addOpDeleteAutomatedReasoningPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAutomatedReasoningPolicy{}, middleware.After)
+}
+
+func addOpDeleteAutomatedReasoningPolicyTestCaseValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAutomatedReasoningPolicyTestCase{}, middleware.After)
+}
+
 func addOpDeleteCustomModelDeploymentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCustomModelDeployment{}, middleware.After)
 }
@@ -1168,6 +1656,38 @@ func addOpDeleteProvisionedModelThroughputValidationMiddleware(stack *middleware
 
 func addOpDeregisterMarketplaceModelEndpointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeregisterMarketplaceModelEndpoint{}, middleware.After)
+}
+
+func addOpExportAutomatedReasoningPolicyVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpExportAutomatedReasoningPolicyVersion{}, middleware.After)
+}
+
+func addOpGetAutomatedReasoningPolicyAnnotationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAutomatedReasoningPolicyAnnotations{}, middleware.After)
+}
+
+func addOpGetAutomatedReasoningPolicyBuildWorkflowValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAutomatedReasoningPolicyBuildWorkflow{}, middleware.After)
+}
+
+func addOpGetAutomatedReasoningPolicyBuildWorkflowResultAssetsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAutomatedReasoningPolicyBuildWorkflowResultAssets{}, middleware.After)
+}
+
+func addOpGetAutomatedReasoningPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAutomatedReasoningPolicy{}, middleware.After)
+}
+
+func addOpGetAutomatedReasoningPolicyNextScenarioValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAutomatedReasoningPolicyNextScenario{}, middleware.After)
+}
+
+func addOpGetAutomatedReasoningPolicyTestCaseValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAutomatedReasoningPolicyTestCase{}, middleware.After)
+}
+
+func addOpGetAutomatedReasoningPolicyTestResultValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAutomatedReasoningPolicyTestResult{}, middleware.After)
 }
 
 func addOpGetCustomModelDeploymentValidationMiddleware(stack *middleware.Stack) error {
@@ -1230,6 +1750,18 @@ func addOpGetProvisionedModelThroughputValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpGetProvisionedModelThroughput{}, middleware.After)
 }
 
+func addOpListAutomatedReasoningPolicyBuildWorkflowsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAutomatedReasoningPolicyBuildWorkflows{}, middleware.After)
+}
+
+func addOpListAutomatedReasoningPolicyTestCasesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAutomatedReasoningPolicyTestCases{}, middleware.After)
+}
+
+func addOpListAutomatedReasoningPolicyTestResultsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAutomatedReasoningPolicyTestResults{}, middleware.After)
+}
+
 func addOpListFoundationModelAgreementOffersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListFoundationModelAgreementOffers{}, middleware.After)
 }
@@ -1250,6 +1782,14 @@ func addOpRegisterMarketplaceModelEndpointValidationMiddleware(stack *middleware
 	return stack.Initialize.Add(&validateOpRegisterMarketplaceModelEndpoint{}, middleware.After)
 }
 
+func addOpStartAutomatedReasoningPolicyBuildWorkflowValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartAutomatedReasoningPolicyBuildWorkflow{}, middleware.After)
+}
+
+func addOpStartAutomatedReasoningPolicyTestWorkflowValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartAutomatedReasoningPolicyTestWorkflow{}, middleware.After)
+}
+
 func addOpStopEvaluationJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopEvaluationJob{}, middleware.After)
 }
@@ -1268,6 +1808,18 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateAutomatedReasoningPolicyAnnotationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAutomatedReasoningPolicyAnnotations{}, middleware.After)
+}
+
+func addOpUpdateAutomatedReasoningPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAutomatedReasoningPolicy{}, middleware.After)
+}
+
+func addOpUpdateAutomatedReasoningPolicyTestCaseValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAutomatedReasoningPolicyTestCase{}, middleware.After)
 }
 
 func addOpUpdateGuardrailValidationMiddleware(stack *middleware.Stack) error {
@@ -1363,6 +1915,688 @@ func validateAutomatedEvaluationCustomMetricSource(v types.AutomatedEvaluationCu
 	case *types.AutomatedEvaluationCustomMetricSourceMemberCustomMetricDefinition:
 		if err := validateCustomMetricDefinition(&uv.Value); err != nil {
 			invalidParams.AddNested("[customMetricDefinition]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyAddRuleAnnotation(v *types.AutomatedReasoningPolicyAddRuleAnnotation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyAddRuleAnnotation"}
+	if v.Expression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Expression"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyAddRuleFromNaturalLanguageAnnotation(v *types.AutomatedReasoningPolicyAddRuleFromNaturalLanguageAnnotation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyAddRuleFromNaturalLanguageAnnotation"}
+	if v.NaturalLanguage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NaturalLanguage"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyAddTypeAnnotation(v *types.AutomatedReasoningPolicyAddTypeAnnotation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyAddTypeAnnotation"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	} else if v.Values != nil {
+		if err := validateAutomatedReasoningPolicyDefinitionTypeValueList(v.Values); err != nil {
+			invalidParams.AddNested("Values", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyAddTypeValue(v *types.AutomatedReasoningPolicyAddTypeValue) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyAddTypeValue"}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyAddVariableAnnotation(v *types.AutomatedReasoningPolicyAddVariableAnnotation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyAddVariableAnnotation"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Type == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyAnnotation(v types.AutomatedReasoningPolicyAnnotation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyAnnotation"}
+	switch uv := v.(type) {
+	case *types.AutomatedReasoningPolicyAnnotationMemberAddRule:
+		if err := validateAutomatedReasoningPolicyAddRuleAnnotation(&uv.Value); err != nil {
+			invalidParams.AddNested("[addRule]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.AutomatedReasoningPolicyAnnotationMemberAddRuleFromNaturalLanguage:
+		if err := validateAutomatedReasoningPolicyAddRuleFromNaturalLanguageAnnotation(&uv.Value); err != nil {
+			invalidParams.AddNested("[addRuleFromNaturalLanguage]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.AutomatedReasoningPolicyAnnotationMemberAddType:
+		if err := validateAutomatedReasoningPolicyAddTypeAnnotation(&uv.Value); err != nil {
+			invalidParams.AddNested("[addType]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.AutomatedReasoningPolicyAnnotationMemberAddVariable:
+		if err := validateAutomatedReasoningPolicyAddVariableAnnotation(&uv.Value); err != nil {
+			invalidParams.AddNested("[addVariable]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.AutomatedReasoningPolicyAnnotationMemberDeleteRule:
+		if err := validateAutomatedReasoningPolicyDeleteRuleAnnotation(&uv.Value); err != nil {
+			invalidParams.AddNested("[deleteRule]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.AutomatedReasoningPolicyAnnotationMemberDeleteType:
+		if err := validateAutomatedReasoningPolicyDeleteTypeAnnotation(&uv.Value); err != nil {
+			invalidParams.AddNested("[deleteType]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.AutomatedReasoningPolicyAnnotationMemberDeleteVariable:
+		if err := validateAutomatedReasoningPolicyDeleteVariableAnnotation(&uv.Value); err != nil {
+			invalidParams.AddNested("[deleteVariable]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.AutomatedReasoningPolicyAnnotationMemberIngestContent:
+		if err := validateAutomatedReasoningPolicyIngestContentAnnotation(&uv.Value); err != nil {
+			invalidParams.AddNested("[ingestContent]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.AutomatedReasoningPolicyAnnotationMemberUpdateFromRulesFeedback:
+		if err := validateAutomatedReasoningPolicyUpdateFromRuleFeedbackAnnotation(&uv.Value); err != nil {
+			invalidParams.AddNested("[updateFromRulesFeedback]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.AutomatedReasoningPolicyAnnotationMemberUpdateFromScenarioFeedback:
+		if err := validateAutomatedReasoningPolicyUpdateFromScenarioFeedbackAnnotation(&uv.Value); err != nil {
+			invalidParams.AddNested("[updateFromScenarioFeedback]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.AutomatedReasoningPolicyAnnotationMemberUpdateRule:
+		if err := validateAutomatedReasoningPolicyUpdateRuleAnnotation(&uv.Value); err != nil {
+			invalidParams.AddNested("[updateRule]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.AutomatedReasoningPolicyAnnotationMemberUpdateType:
+		if err := validateAutomatedReasoningPolicyUpdateTypeAnnotation(&uv.Value); err != nil {
+			invalidParams.AddNested("[updateType]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.AutomatedReasoningPolicyAnnotationMemberUpdateVariable:
+		if err := validateAutomatedReasoningPolicyUpdateVariableAnnotation(&uv.Value); err != nil {
+			invalidParams.AddNested("[updateVariable]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyAnnotationList(v []types.AutomatedReasoningPolicyAnnotation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyAnnotationList"}
+	for i := range v {
+		if err := validateAutomatedReasoningPolicyAnnotation(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyBuildWorkflowDocument(v *types.AutomatedReasoningPolicyBuildWorkflowDocument) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyBuildWorkflowDocument"}
+	if v.Document == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Document"))
+	}
+	if len(v.DocumentContentType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DocumentContentType"))
+	}
+	if v.DocumentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DocumentName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyBuildWorkflowDocumentList(v []types.AutomatedReasoningPolicyBuildWorkflowDocument) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyBuildWorkflowDocumentList"}
+	for i := range v {
+		if err := validateAutomatedReasoningPolicyBuildWorkflowDocument(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyBuildWorkflowRepairContent(v *types.AutomatedReasoningPolicyBuildWorkflowRepairContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyBuildWorkflowRepairContent"}
+	if v.Annotations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Annotations"))
+	} else if v.Annotations != nil {
+		if err := validateAutomatedReasoningPolicyAnnotationList(v.Annotations); err != nil {
+			invalidParams.AddNested("Annotations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyBuildWorkflowSource(v *types.AutomatedReasoningPolicyBuildWorkflowSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyBuildWorkflowSource"}
+	if v.PolicyDefinition != nil {
+		if err := validateAutomatedReasoningPolicyDefinition(v.PolicyDefinition); err != nil {
+			invalidParams.AddNested("PolicyDefinition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.WorkflowContent != nil {
+		if err := validateAutomatedReasoningPolicyWorkflowTypeContent(v.WorkflowContent); err != nil {
+			invalidParams.AddNested("WorkflowContent", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyDefinition(v *types.AutomatedReasoningPolicyDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyDefinition"}
+	if v.Types != nil {
+		if err := validateAutomatedReasoningPolicyDefinitionTypeList(v.Types); err != nil {
+			invalidParams.AddNested("Types", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Rules != nil {
+		if err := validateAutomatedReasoningPolicyDefinitionRuleList(v.Rules); err != nil {
+			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Variables != nil {
+		if err := validateAutomatedReasoningPolicyDefinitionVariableList(v.Variables); err != nil {
+			invalidParams.AddNested("Variables", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyDefinitionRule(v *types.AutomatedReasoningPolicyDefinitionRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyDefinitionRule"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.Expression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Expression"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyDefinitionRuleList(v []types.AutomatedReasoningPolicyDefinitionRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyDefinitionRuleList"}
+	for i := range v {
+		if err := validateAutomatedReasoningPolicyDefinitionRule(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyDefinitionType(v *types.AutomatedReasoningPolicyDefinitionType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyDefinitionType"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	} else if v.Values != nil {
+		if err := validateAutomatedReasoningPolicyDefinitionTypeValueList(v.Values); err != nil {
+			invalidParams.AddNested("Values", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyDefinitionTypeList(v []types.AutomatedReasoningPolicyDefinitionType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyDefinitionTypeList"}
+	for i := range v {
+		if err := validateAutomatedReasoningPolicyDefinitionType(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyDefinitionTypeValue(v *types.AutomatedReasoningPolicyDefinitionTypeValue) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyDefinitionTypeValue"}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyDefinitionTypeValueList(v []types.AutomatedReasoningPolicyDefinitionTypeValue) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyDefinitionTypeValueList"}
+	for i := range v {
+		if err := validateAutomatedReasoningPolicyDefinitionTypeValue(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyDefinitionVariable(v *types.AutomatedReasoningPolicyDefinitionVariable) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyDefinitionVariable"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Type == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyDefinitionVariableList(v []types.AutomatedReasoningPolicyDefinitionVariable) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyDefinitionVariableList"}
+	for i := range v {
+		if err := validateAutomatedReasoningPolicyDefinitionVariable(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyDeleteRuleAnnotation(v *types.AutomatedReasoningPolicyDeleteRuleAnnotation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyDeleteRuleAnnotation"}
+	if v.RuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyDeleteTypeAnnotation(v *types.AutomatedReasoningPolicyDeleteTypeAnnotation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyDeleteTypeAnnotation"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyDeleteTypeValue(v *types.AutomatedReasoningPolicyDeleteTypeValue) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyDeleteTypeValue"}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyDeleteVariableAnnotation(v *types.AutomatedReasoningPolicyDeleteVariableAnnotation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyDeleteVariableAnnotation"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyIngestContentAnnotation(v *types.AutomatedReasoningPolicyIngestContentAnnotation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyIngestContentAnnotation"}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyTypeValueAnnotation(v types.AutomatedReasoningPolicyTypeValueAnnotation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyTypeValueAnnotation"}
+	switch uv := v.(type) {
+	case *types.AutomatedReasoningPolicyTypeValueAnnotationMemberAddTypeValue:
+		if err := validateAutomatedReasoningPolicyAddTypeValue(&uv.Value); err != nil {
+			invalidParams.AddNested("[addTypeValue]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.AutomatedReasoningPolicyTypeValueAnnotationMemberDeleteTypeValue:
+		if err := validateAutomatedReasoningPolicyDeleteTypeValue(&uv.Value); err != nil {
+			invalidParams.AddNested("[deleteTypeValue]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.AutomatedReasoningPolicyTypeValueAnnotationMemberUpdateTypeValue:
+		if err := validateAutomatedReasoningPolicyUpdateTypeValue(&uv.Value); err != nil {
+			invalidParams.AddNested("[updateTypeValue]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyTypeValueAnnotationList(v []types.AutomatedReasoningPolicyTypeValueAnnotation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyTypeValueAnnotationList"}
+	for i := range v {
+		if err := validateAutomatedReasoningPolicyTypeValueAnnotation(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyUpdateFromRuleFeedbackAnnotation(v *types.AutomatedReasoningPolicyUpdateFromRuleFeedbackAnnotation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyUpdateFromRuleFeedbackAnnotation"}
+	if v.Feedback == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Feedback"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyUpdateFromScenarioFeedbackAnnotation(v *types.AutomatedReasoningPolicyUpdateFromScenarioFeedbackAnnotation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyUpdateFromScenarioFeedbackAnnotation"}
+	if v.ScenarioExpression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScenarioExpression"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyUpdateRuleAnnotation(v *types.AutomatedReasoningPolicyUpdateRuleAnnotation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyUpdateRuleAnnotation"}
+	if v.RuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleId"))
+	}
+	if v.Expression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Expression"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyUpdateTypeAnnotation(v *types.AutomatedReasoningPolicyUpdateTypeAnnotation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyUpdateTypeAnnotation"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	} else if v.Values != nil {
+		if err := validateAutomatedReasoningPolicyTypeValueAnnotationList(v.Values); err != nil {
+			invalidParams.AddNested("Values", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyUpdateTypeValue(v *types.AutomatedReasoningPolicyUpdateTypeValue) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyUpdateTypeValue"}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyUpdateVariableAnnotation(v *types.AutomatedReasoningPolicyUpdateVariableAnnotation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyUpdateVariableAnnotation"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyWorkflowTypeContent(v types.AutomatedReasoningPolicyWorkflowTypeContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyWorkflowTypeContent"}
+	switch uv := v.(type) {
+	case *types.AutomatedReasoningPolicyWorkflowTypeContentMemberDocuments:
+		if err := validateAutomatedReasoningPolicyBuildWorkflowDocumentList(uv.Value); err != nil {
+			invalidParams.AddNested("[documents]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.AutomatedReasoningPolicyWorkflowTypeContentMemberPolicyRepairAssets:
+		if err := validateAutomatedReasoningPolicyBuildWorkflowRepairContent(&uv.Value); err != nil {
+			invalidParams.AddNested("[policyRepairAssets]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -1989,6 +3223,21 @@ func validateGenerationConfiguration(v *types.GenerationConfiguration) error {
 		if err := validateGuardrailConfiguration(v.GuardrailConfiguration); err != nil {
 			invalidParams.AddNested("GuardrailConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGuardrailAutomatedReasoningPolicyConfig(v *types.GuardrailAutomatedReasoningPolicyConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GuardrailAutomatedReasoningPolicyConfig"}
+	if v.Policies == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Policies"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3425,6 +4674,93 @@ func validateOpBatchDeleteEvaluationJobInput(v *BatchDeleteEvaluationJobInput) e
 	}
 }
 
+func validateOpCancelAutomatedReasoningPolicyBuildWorkflowInput(v *CancelAutomatedReasoningPolicyBuildWorkflowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelAutomatedReasoningPolicyBuildWorkflowInput"}
+	if v.PolicyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyArn"))
+	}
+	if v.BuildWorkflowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BuildWorkflowId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAutomatedReasoningPolicyInput(v *CreateAutomatedReasoningPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAutomatedReasoningPolicyInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.PolicyDefinition != nil {
+		if err := validateAutomatedReasoningPolicyDefinition(v.PolicyDefinition); err != nil {
+			invalidParams.AddNested("PolicyDefinition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAutomatedReasoningPolicyTestCaseInput(v *CreateAutomatedReasoningPolicyTestCaseInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAutomatedReasoningPolicyTestCaseInput"}
+	if v.PolicyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyArn"))
+	}
+	if v.GuardContent == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GuardContent"))
+	}
+	if len(v.ExpectedAggregatedFindingsResult) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ExpectedAggregatedFindingsResult"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAutomatedReasoningPolicyVersionInput(v *CreateAutomatedReasoningPolicyVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAutomatedReasoningPolicyVersionInput"}
+	if v.PolicyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyArn"))
+	}
+	if v.LastUpdatedDefinitionHash == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LastUpdatedDefinitionHash"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateCustomModelDeploymentInput(v *CreateCustomModelDeploymentInput) error {
 	if v == nil {
 		return nil
@@ -3568,6 +4904,11 @@ func validateOpCreateGuardrailInput(v *CreateGuardrailInput) error {
 	if v.ContextualGroundingPolicyConfig != nil {
 		if err := validateGuardrailContextualGroundingPolicyConfig(v.ContextualGroundingPolicyConfig); err != nil {
 			invalidParams.AddNested("ContextualGroundingPolicyConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AutomatedReasoningPolicyConfig != nil {
+		if err := validateGuardrailAutomatedReasoningPolicyConfig(v.AutomatedReasoningPolicyConfig); err != nil {
+			invalidParams.AddNested("AutomatedReasoningPolicyConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.CrossRegionConfig != nil {
@@ -3902,6 +5243,63 @@ func validateOpCreateProvisionedModelThroughputInput(v *CreateProvisionedModelTh
 	}
 }
 
+func validateOpDeleteAutomatedReasoningPolicyBuildWorkflowInput(v *DeleteAutomatedReasoningPolicyBuildWorkflowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAutomatedReasoningPolicyBuildWorkflowInput"}
+	if v.PolicyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyArn"))
+	}
+	if v.BuildWorkflowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BuildWorkflowId"))
+	}
+	if v.LastUpdatedAt == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LastUpdatedAt"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAutomatedReasoningPolicyInput(v *DeleteAutomatedReasoningPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAutomatedReasoningPolicyInput"}
+	if v.PolicyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAutomatedReasoningPolicyTestCaseInput(v *DeleteAutomatedReasoningPolicyTestCaseInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAutomatedReasoningPolicyTestCaseInput"}
+	if v.PolicyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyArn"))
+	}
+	if v.TestCaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TestCaseId"))
+	}
+	if v.LastUpdatedAt == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LastUpdatedAt"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteCustomModelDeploymentInput(v *DeleteCustomModelDeploymentInput) error {
 	if v == nil {
 		return nil
@@ -4044,6 +5442,150 @@ func validateOpDeregisterMarketplaceModelEndpointInput(v *DeregisterMarketplaceM
 	invalidParams := smithy.InvalidParamsError{Context: "DeregisterMarketplaceModelEndpointInput"}
 	if v.EndpointArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndpointArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpExportAutomatedReasoningPolicyVersionInput(v *ExportAutomatedReasoningPolicyVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExportAutomatedReasoningPolicyVersionInput"}
+	if v.PolicyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAutomatedReasoningPolicyAnnotationsInput(v *GetAutomatedReasoningPolicyAnnotationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAutomatedReasoningPolicyAnnotationsInput"}
+	if v.PolicyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyArn"))
+	}
+	if v.BuildWorkflowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BuildWorkflowId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAutomatedReasoningPolicyBuildWorkflowInput(v *GetAutomatedReasoningPolicyBuildWorkflowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAutomatedReasoningPolicyBuildWorkflowInput"}
+	if v.PolicyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyArn"))
+	}
+	if v.BuildWorkflowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BuildWorkflowId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAutomatedReasoningPolicyBuildWorkflowResultAssetsInput(v *GetAutomatedReasoningPolicyBuildWorkflowResultAssetsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAutomatedReasoningPolicyBuildWorkflowResultAssetsInput"}
+	if v.PolicyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyArn"))
+	}
+	if v.BuildWorkflowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BuildWorkflowId"))
+	}
+	if len(v.AssetType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAutomatedReasoningPolicyInput(v *GetAutomatedReasoningPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAutomatedReasoningPolicyInput"}
+	if v.PolicyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAutomatedReasoningPolicyNextScenarioInput(v *GetAutomatedReasoningPolicyNextScenarioInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAutomatedReasoningPolicyNextScenarioInput"}
+	if v.PolicyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyArn"))
+	}
+	if v.BuildWorkflowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BuildWorkflowId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAutomatedReasoningPolicyTestCaseInput(v *GetAutomatedReasoningPolicyTestCaseInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAutomatedReasoningPolicyTestCaseInput"}
+	if v.PolicyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyArn"))
+	}
+	if v.TestCaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TestCaseId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAutomatedReasoningPolicyTestResultInput(v *GetAutomatedReasoningPolicyTestResultInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAutomatedReasoningPolicyTestResultInput"}
+	if v.PolicyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyArn"))
+	}
+	if v.BuildWorkflowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BuildWorkflowId"))
+	}
+	if v.TestCaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TestCaseId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4277,6 +5819,54 @@ func validateOpGetProvisionedModelThroughputInput(v *GetProvisionedModelThroughp
 	}
 }
 
+func validateOpListAutomatedReasoningPolicyBuildWorkflowsInput(v *ListAutomatedReasoningPolicyBuildWorkflowsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAutomatedReasoningPolicyBuildWorkflowsInput"}
+	if v.PolicyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAutomatedReasoningPolicyTestCasesInput(v *ListAutomatedReasoningPolicyTestCasesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAutomatedReasoningPolicyTestCasesInput"}
+	if v.PolicyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAutomatedReasoningPolicyTestResultsInput(v *ListAutomatedReasoningPolicyTestResultsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAutomatedReasoningPolicyTestResultsInput"}
+	if v.PolicyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyArn"))
+	}
+	if v.BuildWorkflowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BuildWorkflowId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListFoundationModelAgreementOffersInput(v *ListFoundationModelAgreementOffersInput) error {
 	if v == nil {
 		return nil
@@ -4351,6 +5941,49 @@ func validateOpRegisterMarketplaceModelEndpointInput(v *RegisterMarketplaceModel
 	}
 	if v.ModelSourceIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ModelSourceIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartAutomatedReasoningPolicyBuildWorkflowInput(v *StartAutomatedReasoningPolicyBuildWorkflowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartAutomatedReasoningPolicyBuildWorkflowInput"}
+	if v.PolicyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyArn"))
+	}
+	if len(v.BuildWorkflowType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("BuildWorkflowType"))
+	}
+	if v.SourceContent == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceContent"))
+	} else if v.SourceContent != nil {
+		if err := validateAutomatedReasoningPolicyBuildWorkflowSource(v.SourceContent); err != nil {
+			invalidParams.AddNested("SourceContent", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartAutomatedReasoningPolicyTestWorkflowInput(v *StartAutomatedReasoningPolicyTestWorkflowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartAutomatedReasoningPolicyTestWorkflowInput"}
+	if v.PolicyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyArn"))
+	}
+	if v.BuildWorkflowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BuildWorkflowId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4444,6 +6077,83 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 }
 
+func validateOpUpdateAutomatedReasoningPolicyAnnotationsInput(v *UpdateAutomatedReasoningPolicyAnnotationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAutomatedReasoningPolicyAnnotationsInput"}
+	if v.PolicyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyArn"))
+	}
+	if v.BuildWorkflowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BuildWorkflowId"))
+	}
+	if v.Annotations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Annotations"))
+	} else if v.Annotations != nil {
+		if err := validateAutomatedReasoningPolicyAnnotationList(v.Annotations); err != nil {
+			invalidParams.AddNested("Annotations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LastUpdatedAnnotationSetHash == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LastUpdatedAnnotationSetHash"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAutomatedReasoningPolicyInput(v *UpdateAutomatedReasoningPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAutomatedReasoningPolicyInput"}
+	if v.PolicyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyArn"))
+	}
+	if v.PolicyDefinition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyDefinition"))
+	} else if v.PolicyDefinition != nil {
+		if err := validateAutomatedReasoningPolicyDefinition(v.PolicyDefinition); err != nil {
+			invalidParams.AddNested("PolicyDefinition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAutomatedReasoningPolicyTestCaseInput(v *UpdateAutomatedReasoningPolicyTestCaseInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAutomatedReasoningPolicyTestCaseInput"}
+	if v.PolicyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyArn"))
+	}
+	if v.TestCaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TestCaseId"))
+	}
+	if v.GuardContent == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GuardContent"))
+	}
+	if v.LastUpdatedAt == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LastUpdatedAt"))
+	}
+	if len(v.ExpectedAggregatedFindingsResult) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ExpectedAggregatedFindingsResult"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateGuardrailInput(v *UpdateGuardrailInput) error {
 	if v == nil {
 		return nil
@@ -4478,6 +6188,11 @@ func validateOpUpdateGuardrailInput(v *UpdateGuardrailInput) error {
 	if v.ContextualGroundingPolicyConfig != nil {
 		if err := validateGuardrailContextualGroundingPolicyConfig(v.ContextualGroundingPolicyConfig); err != nil {
 			invalidParams.AddNested("ContextualGroundingPolicyConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AutomatedReasoningPolicyConfig != nil {
+		if err := validateGuardrailAutomatedReasoningPolicyConfig(v.AutomatedReasoningPolicyConfig); err != nil {
+			invalidParams.AddNested("AutomatedReasoningPolicyConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.CrossRegionConfig != nil {

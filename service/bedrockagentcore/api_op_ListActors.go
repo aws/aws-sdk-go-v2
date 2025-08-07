@@ -11,10 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all actors in a memory store. We recommend using pagination to ensure
-// that the operation returns quickly and successfully.
+// Lists all actors in an AgentCore Memory resource. We recommend using pagination
+// to ensure that the operation returns quickly and successfully.
 //
-// To use this operation, you must have the genesismemory:ListActors permission.
+// To use this operation, you must have the bedrock-agentcore:ListActors
+// permission.
 func (c *Client) ListActors(ctx context.Context, params *ListActorsInput, optFns ...func(*Options)) (*ListActorsOutput, error) {
 	if params == nil {
 		params = &ListActorsInput{}
@@ -32,7 +33,7 @@ func (c *Client) ListActors(ctx context.Context, params *ListActorsInput, optFns
 
 type ListActorsInput struct {
 
-	// The identifier of the memory store for which to list actors.
+	// The identifier of the AgentCore Memory resource for which to list actors.
 	//
 	// This member is required.
 	MemoryId *string

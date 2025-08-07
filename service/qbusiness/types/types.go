@@ -1770,10 +1770,16 @@ func (*DocumentAttributeValueMemberStringValue) isDocumentAttributeValue() {}
 
 // The contents of a document.
 //
+// Documents have size limitations. The maximum file size for a document is 50 MB.
+// The maximum amount of text that can be extracted from a single document is 5 MB.
+// For more information, see [Supported document formats in Amazon Q Business].
+//
 // The following types satisfy this interface:
 //
 //	DocumentContentMemberBlob
 //	DocumentContentMemberS3
+//
+// [Supported document formats in Amazon Q Business]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/doc-types.html
 type DocumentContent interface {
 	isDocumentContent()
 }
@@ -3044,6 +3050,25 @@ type SourceAttribution struct {
 
 	// The number attached to a citation in an Amazon Q Business generated response.
 	CitationNumber *int32
+
+	// The identifier of the data source from which the document was ingested. This
+	// field is not present if the document is ingested by directly calling the
+	// BatchPutDocument API (similar to checkDocumentAccess). If the document is from a
+	// file-upload data source, the datasource will be
+	// "uploaded-docs-file-stat-datasourceid".
+	DatasourceId *string
+
+	// The unique identifier of the source document used in the citation, obtained
+	// from the Amazon Q Business index during chat response generation. This ID is
+	// used as input to the GetDocumentContent API to retrieve the actual document
+	// content for user verification.
+	DocumentId *string
+
+	// The identifier of the index containing the source document's metadata and
+	// access control information. This links the citation back to the specific Amazon
+	// Q Business index where the document's searchable content and permissions are
+	// stored.
+	IndexId *string
 
 	// The content extract from the document on which the generated response is based.
 	Snippet *string

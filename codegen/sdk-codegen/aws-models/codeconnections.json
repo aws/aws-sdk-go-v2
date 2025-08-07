@@ -917,7 +917,7 @@
                 "ConnectionArn": {
                     "target": "com.amazonaws.codeconnections#ConnectionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the connection. The ARN is used as the connection\n      reference when the connection is shared between Amazon Web Servicesservices.</p>\n         <note>\n            <p>The ARN is never reused if the connection is deleted.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the connection. The ARN is used as the connection\n      reference when the connection is shared between Amazon Web Services services.</p>\n         <note>\n            <p>The ARN is never reused if the connection is deleted.</p>\n         </note>"
                     }
                 },
                 "ProviderType": {
@@ -2702,6 +2702,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "GitLabSelfManaged"
+                    }
+                },
+                "AZURE_DEV_OPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AzureDevOps"
                     }
                 }
             }

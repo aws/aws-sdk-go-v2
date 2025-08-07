@@ -70,6 +70,46 @@ func (m *validateOpAssociateTrialComponent) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAttachClusterNodeVolume struct {
+}
+
+func (*validateOpAttachClusterNodeVolume) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAttachClusterNodeVolume) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AttachClusterNodeVolumeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAttachClusterNodeVolumeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchAddClusterNodes struct {
+}
+
+func (*validateOpBatchAddClusterNodes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchAddClusterNodes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchAddClusterNodesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchAddClusterNodesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchDeleteClusterNodes struct {
 }
 
@@ -2690,6 +2730,26 @@ func (m *validateOpDescribeAutoMLJobV2) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeClusterEvent struct {
+}
+
+func (*validateOpDescribeClusterEvent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeClusterEvent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeClusterEventInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeClusterEventInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeCluster struct {
 }
 
@@ -3890,6 +3950,26 @@ func (m *validateOpDescribeWorkteam) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDetachClusterNodeVolume struct {
+}
+
+func (*validateOpDetachClusterNodeVolume) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDetachClusterNodeVolume) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DetachClusterNodeVolumeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDetachClusterNodeVolumeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisassociateTrialComponent struct {
 }
 
@@ -4065,6 +4145,26 @@ func (m *validateOpListCandidatesForAutoMLJob) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListCandidatesForAutoMLJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListClusterEvents struct {
+}
+
+func (*validateOpListClusterEvents) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListClusterEvents) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListClusterEventsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListClusterEventsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -5922,6 +6022,14 @@ func addOpAssociateTrialComponentValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpAssociateTrialComponent{}, middleware.After)
 }
 
+func addOpAttachClusterNodeVolumeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAttachClusterNodeVolume{}, middleware.After)
+}
+
+func addOpBatchAddClusterNodesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchAddClusterNodes{}, middleware.After)
+}
+
 func addOpBatchDeleteClusterNodesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchDeleteClusterNodes{}, middleware.After)
 }
@@ -6446,6 +6554,10 @@ func addOpDescribeAutoMLJobV2ValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpDescribeAutoMLJobV2{}, middleware.After)
 }
 
+func addOpDescribeClusterEventValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeClusterEvent{}, middleware.After)
+}
+
 func addOpDescribeClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeCluster{}, middleware.After)
 }
@@ -6686,6 +6798,10 @@ func addOpDescribeWorkteamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeWorkteam{}, middleware.After)
 }
 
+func addOpDetachClusterNodeVolumeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDetachClusterNodeVolume{}, middleware.After)
+}
+
 func addOpDisassociateTrialComponentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateTrialComponent{}, middleware.After)
 }
@@ -6720,6 +6836,10 @@ func addOpListAliasesValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListCandidatesForAutoMLJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListCandidatesForAutoMLJob{}, middleware.After)
+}
+
+func addOpListClusterEventsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListClusterEvents{}, middleware.After)
 }
 
 func addOpListClusterNodesValidationMiddleware(stack *middleware.Stack) error {
@@ -7097,6 +7217,41 @@ func validateActionSource(v *types.ActionSource) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ActionSource"}
 	if v.SourceUri == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceUri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAddClusterNodeSpecification(v *types.AddClusterNodeSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddClusterNodeSpecification"}
+	if v.InstanceGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceGroupName"))
+	}
+	if v.IncrementTargetCountBy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IncrementTargetCountBy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAddClusterNodeSpecificationList(v []types.AddClusterNodeSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddClusterNodeSpecificationList"}
+	for i := range v {
+		if err := validateAddClusterNodeSpecification(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -14184,6 +14339,49 @@ func validateOpAssociateTrialComponentInput(v *AssociateTrialComponentInput) err
 	}
 }
 
+func validateOpAttachClusterNodeVolumeInput(v *AttachClusterNodeVolumeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AttachClusterNodeVolumeInput"}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if v.NodeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NodeId"))
+	}
+	if v.VolumeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VolumeId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchAddClusterNodesInput(v *BatchAddClusterNodesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchAddClusterNodesInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.NodesToAdd == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NodesToAdd"))
+	} else if v.NodesToAdd != nil {
+		if err := validateAddClusterNodeSpecificationList(v.NodesToAdd); err != nil {
+			invalidParams.AddNested("NodesToAdd", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchDeleteClusterNodesInput(v *BatchDeleteClusterNodesInput) error {
 	if v == nil {
 		return nil
@@ -17525,6 +17723,24 @@ func validateOpDescribeAutoMLJobV2Input(v *DescribeAutoMLJobV2Input) error {
 	}
 }
 
+func validateOpDescribeClusterEventInput(v *DescribeClusterEventInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeClusterEventInput"}
+	if v.EventId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventId"))
+	}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeClusterInput(v *DescribeClusterInput) error {
 	if v == nil {
 		return nil
@@ -18443,6 +18659,27 @@ func validateOpDescribeWorkteamInput(v *DescribeWorkteamInput) error {
 	}
 }
 
+func validateOpDetachClusterNodeVolumeInput(v *DetachClusterNodeVolumeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DetachClusterNodeVolumeInput"}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if v.NodeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NodeId"))
+	}
+	if v.VolumeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VolumeId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisassociateTrialComponentInput(v *DisassociateTrialComponentInput) error {
 	if v == nil {
 		return nil
@@ -18595,6 +18832,21 @@ func validateOpListCandidatesForAutoMLJobInput(v *ListCandidatesForAutoMLJobInpu
 	invalidParams := smithy.InvalidParamsError{Context: "ListCandidatesForAutoMLJobInput"}
 	if v.AutoMLJobName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AutoMLJobName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListClusterEventsInput(v *ListClusterEventsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListClusterEventsInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

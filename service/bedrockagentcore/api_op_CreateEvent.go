@@ -12,10 +12,12 @@ import (
 	"time"
 )
 
-// Creates an event in a memory store. Events represent interactions or activities
-// that occur within a session and are associated with specific actors.
+// Creates an event in an AgentCore Memory resource. Events represent interactions
+// or activities that occur within a session and are associated with specific
+// actors.
 //
-// To use this operation, you must have the genesismemory:CreateEvent permission.
+// To use this operation, you must have the bedrock-agentcore:CreateEvent
+// permission.
 //
 // This operation is subject to request rate limiting.
 func (c *Client) CreateEvent(ctx context.Context, params *CreateEventInput, optFns ...func(*Options)) (*CreateEventOutput, error) {
@@ -47,7 +49,7 @@ type CreateEventInput struct {
 	// This member is required.
 	EventTimestamp *time.Time
 
-	// The identifier of the memory store in which to create the event.
+	// The identifier of the AgentCore Memory resource in which to create the event.
 	//
 	// This member is required.
 	MemoryId *string

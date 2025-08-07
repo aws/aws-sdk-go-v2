@@ -1,3 +1,12 @@
+# v1.34.0 (2025-08-05)
+
+* **Feature**: This release adds support for Automated Reasoning checks output models for the Amazon Bedrock Guardrails ApplyGuardrail API.
+
+# v1.33.0 (2025-08-04)
+
+* **Feature**: Support configurable auth scheme preferences in service clients via AWS_AUTH_SCHEME_PREFERENCE in the environment, auth_scheme_preference in the config file, and through in-code settings on LoadDefaultConfig and client constructor methods.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.32.1 (2025-07-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

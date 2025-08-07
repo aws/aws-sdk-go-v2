@@ -1668,6 +1668,11 @@ func awsAwsjson11_serializeDocumentBudget(v *types.Budget, value smithyjson.Valu
 		}
 	}
 
+	if v.BillingViewArn != nil {
+		ok := object.Key("BillingViewArn")
+		ok.String(*v.BillingViewArn)
+	}
+
 	if v.BudgetLimit != nil {
 		ok := object.Key("BudgetLimit")
 		if err := awsAwsjson11_serializeDocumentSpend(v.BudgetLimit, ok); err != nil {
@@ -1709,6 +1714,13 @@ func awsAwsjson11_serializeDocumentBudget(v *types.Budget, value smithyjson.Valu
 	if v.FilterExpression != nil {
 		ok := object.Key("FilterExpression")
 		if err := awsAwsjson11_serializeDocumentExpression(v.FilterExpression, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.HealthStatus != nil {
+		ok := object.Key("HealthStatus")
+		if err := awsAwsjson11_serializeDocumentHealthStatus(v.HealthStatus, ok); err != nil {
 			return err
 		}
 	}
@@ -2007,6 +2019,28 @@ func awsAwsjson11_serializeDocumentGroups(v []string, value smithyjson.Value) er
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentHealthStatus(v *types.HealthStatus, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LastUpdatedTime != nil {
+		ok := object.Key("LastUpdatedTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.LastUpdatedTime))
+	}
+
+	if len(v.Status) > 0 {
+		ok := object.Key("Status")
+		ok.String(string(v.Status))
+	}
+
+	if len(v.StatusReason) > 0 {
+		ok := object.Key("StatusReason")
+		ok.String(string(v.StatusReason))
+	}
+
 	return nil
 }
 

@@ -5,5 +5,7 @@
 //
 // Amazon Bedrock AgentCore is in preview release and is subject to change.
 //
-// Data plane operations for Amazon Bedrock AgentCore.
+// Welcome to the Amazon Bedrock AgentCore Data Plane API reference. Data Plane
+// actions process and handle data or workloads within Amazon Web Services
+// services.
 package bedrockagentcore

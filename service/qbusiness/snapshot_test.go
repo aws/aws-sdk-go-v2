@@ -506,6 +506,18 @@ func TestCheckSnapshot_GetDataSource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetDocumentContent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDocumentContent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDocumentContent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetGroup(context.Background(), nil, func(o *Options) {
@@ -1482,6 +1494,18 @@ func TestUpdateSnapshot_GetDataSource(t *testing.T) {
 	_, err := svc.GetDataSource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetDataSource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetDocumentContent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDocumentContent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDocumentContent")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about a specific event in a memory store.
+// Retrieves information about a specific event in an AgentCore Memory resource.
 //
-// To use this operation, you must have the genesismemory:GetEvent permission.
+// To use this operation, you must have the bedrock-agentcore:GetEvent permission.
 func (c *Client) GetEvent(ctx context.Context, params *GetEventInput, optFns ...func(*Options)) (*GetEventOutput, error) {
 	if params == nil {
 		params = &GetEventInput{}
@@ -41,7 +41,7 @@ type GetEventInput struct {
 	// This member is required.
 	EventId *string
 
-	// The identifier of the memory store containing the event.
+	// The identifier of the AgentCore Memory resource containing the event.
 	//
 	// This member is required.
 	MemoryId *string

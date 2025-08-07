@@ -122,6 +122,11 @@ type CreateClusterInput struct {
 	// create and delete EC2 Managed Instances in your Amazon Web Services account
 	ComputeConfig *types.ComputeConfigRequest
 
+	// Indicates whether to enable deletion protection for the cluster. When enabled,
+	// the cluster cannot be deleted unless deletion protection is first disabled. This
+	// helps prevent accidental cluster deletion. Default value is false .
+	DeletionProtection *bool
+
 	// The encryption configuration for the cluster.
 	EncryptionConfig []types.EncryptionConfig
 

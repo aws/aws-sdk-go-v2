@@ -37,8 +37,44 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The number of one or more Amazon EVS resources exceeds the maximum allowed. For
+// a list of Amazon EVS quotas, see [Amazon EVS endpoints and quotas]in the Amazon EVS User Guide. Delete some
+// resources or request an increase in your service quota. To request an increase,
+// see [Amazon Web Services Service Quotas]in the Amazon Web Services General Reference Guide.
+//
+// [Amazon Web Services Service Quotas]: https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html
+// [Amazon EVS endpoints and quotas]: https://docs.aws.amazon.com/evs/latest/userguide/service-quotas-evs.html
+type ServiceQuotaExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServiceQuotaExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServiceQuotaExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServiceQuotaExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ServiceQuotaExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// TagPolicyException is deprecated. See [ValidationException]ValidationException instead.
+//
 // The request doesn't comply with IAM tag policy. Correct your request and then
 // retry it.
+//
+// [ValidationException]: https://docs.aws.amazon.com/evs/latest/APIReference/API_ValidationException.html
 type TagPolicyException struct {
 	Message *string
 
@@ -94,7 +130,11 @@ func (e *ThrottlingException) ErrorCode() string {
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// TooManyTagsException is deprecated. See [ServiceQuotaExceededException]ServiceQuotaExceededException instead.
+//
 // A service resource associated with the request has more than 200 tags.
+//
+// [ServiceQuotaExceededException]: https://docs.aws.amazon.com/evs/latest/APIReference/API_ServiceQuotaExceededException.html
 type TooManyTagsException struct {
 	Message *string
 

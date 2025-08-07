@@ -1,3 +1,51 @@
+# Release (2025-08-06)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.47.1](service/appstream/CHANGELOG.md#v1471-2025-08-06)
+  * **Documentation**: Added support for G6 instances
+* `github.com/aws/aws-sdk-go-v2/service/budgets`: [v1.35.0](service/budgets/CHANGELOG.md#v1350-2025-08-06)
+  * **Feature**: Adds support for billing views. Billing views let you control access to cost and usage data through an AWS resource, streamlining the process of sharing cost and usage data across account boundaries. With this release, you can now create and view budgets based on billing views.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.241.0](service/ec2/CHANGELOG.md#v12410-2025-08-06)
+  * **Feature**: Mark Elastic Inference Accelerators and Elastic Graphics Processor parameters as deprecated on the RunInstances and LaunchTemplate APIs.
+* `github.com/aws/aws-sdk-go-v2/service/networkmanager`: [v1.37.1](service/networkmanager/CHANGELOG.md#v1371-2025-08-06)
+  * **Bug Fix**: **BREAKING CHANGE**: The fields on VpcOptions have been changed from `bool` to `*bool`. Before this change, the fields were incorrectly marked as having default values of false by the service, which made it functionally impossible for users to set them false in an API call.
+* `github.com/aws/aws-sdk-go-v2/service/opensearchserverless`: [v1.23.0](service/opensearchserverless/CHANGELOG.md#v1230-2025-08-06)
+  * **Feature**: Features: add Index APIs in OpenSearchServerless to support managed semantic enrichment
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.31.0](service/qbusiness/CHANGELOG.md#v1310-2025-08-06)
+  * **Feature**: Amazon Q Business now supports the GetDocumentContent() API that enables customers to securely access the source documents through clickable citation links at query time
+
+# Release (2025-08-05)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.42.0](service/bedrock/CHANGELOG.md#v1420-2025-08-05)
+  * **Feature**: This release introduces Automated Reasoning checks for Amazon Bedrock Guardrails. The feature adds new APIs for policy building, refinement, version management, and testing. Guardrail APIs now support Automated Reasoning policy configuration and validation output.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.34.0](service/bedrockruntime/CHANGELOG.md#v1340-2025-08-05)
+  * **Feature**: This release adds support for Automated Reasoning checks output models for the Amazon Bedrock Guardrails ApplyGuardrail API.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.69.0](service/eks/CHANGELOG.md#v1690-2025-08-05)
+  * **Feature**: Add support for deletion protection on EKS clusters
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.102.0](service/rds/CHANGELOG.md#v11020-2025-08-05)
+  * **Feature**: Adds a new Aurora Serverless v2 attribute to the DBCluster resource to expose the platform version. Also updates the attribute to be part of both the engine version and platform version descriptions.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.205.0](service/sagemaker/CHANGELOG.md#v12050-2025-08-05)
+  * **Feature**: Add support for SageMaker Hyperpod continuous scaling and custom AMI; Introduce new APIs: ListClusterEvents, DescribeClusterEvent, BatchAddClusterNodes
+
+# Release (2025-08-04)
+
+## General Highlights
+* **Feature**: Support configurable auth scheme preferences in service clients via AWS_AUTH_SCHEME_PREFERENCE in the environment, auth_scheme_preference in the config file, and through in-code settings on LoadDefaultConfig and client constructor methods.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.2.0](service/bedrockagentcore/CHANGELOG.md#v120-2025-08-04)
+  * **Feature**: Remove superfluous field from API
+* `github.com/aws/aws-sdk-go-v2/service/codeconnections`: [v1.8.0](service/codeconnections/CHANGELOG.md#v180-2025-08-04)
+  * **Feature**: New integration with Azure DevOps provider type.
+* `github.com/aws/aws-sdk-go-v2/service/evs`: [v1.2.0](service/evs/CHANGELOG.md#v120-2025-08-04)
+  * **Feature**: TagResource API now throws ServiceQuotaExceededException when the number of tags on the Amazon EVS resource exceeds the maximum allowed. TooManyTagsException is deprecated.
+* `github.com/aws/aws-sdk-go-v2/service/iotsitewise`: [v1.49.0](service/iotsitewise/CHANGELOG.md#v1490-2025-08-04)
+  * **Feature**: Support Interface for IoT SiteWise Asset Modeling
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.204.0](service/sagemaker/CHANGELOG.md#v12040-2025-08-04)
+  * **Feature**: This release adds the ability for customers to attach and detach their EBS volumes to EKS-orchestrated HyperPod cluster nodes.
+
 # Release (2025-08-01)
 
 ## Module Highlights

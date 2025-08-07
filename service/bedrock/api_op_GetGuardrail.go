@@ -91,6 +91,10 @@ type GetGuardrailOutput struct {
 	// This member is required.
 	Version *string
 
+	// The current Automated Reasoning policy configuration for the guardrail, if any
+	// is configured.
+	AutomatedReasoningPolicy *types.GuardrailAutomatedReasoningPolicy
+
 	// The content policy that was configured for the guardrail.
 	ContentPolicy *types.GuardrailContentPolicy
 

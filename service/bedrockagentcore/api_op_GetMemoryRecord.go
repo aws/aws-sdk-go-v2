@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a specific memory record from a memory store.
+// Retrieves a specific memory record from an AgentCore Memory resource.
 //
-// To use this operation, you must have the genesismemory:GetMemoryRecord
+// To use this operation, you must have the bedrock-agentcore:GetMemoryRecord
 // permission.
 func (c *Client) GetMemoryRecord(ctx context.Context, params *GetMemoryRecordInput, optFns ...func(*Options)) (*GetMemoryRecordOutput, error) {
 	if params == nil {
@@ -32,7 +32,7 @@ func (c *Client) GetMemoryRecord(ctx context.Context, params *GetMemoryRecordInp
 
 type GetMemoryRecordInput struct {
 
-	// The identifier of the memory store containing the memory record.
+	// The identifier of the AgentCore Memory resource containing the memory record.
 	//
 	// This member is required.
 	MemoryId *string

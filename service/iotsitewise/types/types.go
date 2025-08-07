@@ -74,7 +74,8 @@ type ActionPayload struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the summary of the actions.
+// Contains the summary of the actions, including information about where the
+// action resolves to.
 type ActionSummary struct {
 
 	// The ID of the action definition.
@@ -711,7 +712,8 @@ type AssetModelPropertyPathSegment struct {
 	noSmithyDocumentSerde
 }
 
-// Contains a summary of a property associated with a model.
+// Contains a summary of a property associated with a model. This includes
+// information about which interfaces the property belongs to, if any.
 type AssetModelPropertySummary struct {
 
 	// The data type of the property.
@@ -745,6 +747,11 @@ type AssetModelPropertySummary struct {
 
 	// The ID of the property.
 	Id *string
+
+	// A list of interface summaries that describe which interfaces this property
+	// belongs to, including the interface asset model ID and the corresponding
+	// property ID in the interface.
+	InterfaceSummaries []InterfaceSummary
 
 	// The structured path to the property from the root of the asset model.
 	Path []AssetModelPropertyPathSegment
@@ -2196,7 +2203,8 @@ type ExecutionSummary struct {
 	// This member is required.
 	ExecutionStatus *ExecutionStatus
 
-	// The resource the action will be taken on.
+	// The resource the action will be taken on. This can include asset-based
+	// resources and computation model resources.
 	//
 	// This member is required.
 	TargetResource *TargetResource
@@ -2444,6 +2452,23 @@ type GroupIdentity struct {
 	noSmithyDocumentSerde
 }
 
+// Maps a hierarchy from an interface asset model to a hierarchy in the asset
+// model where the interface is applied.
+type HierarchyMapping struct {
+
+	// The ID of the hierarchy in the asset model where the interface is applied.
+	//
+	// This member is required.
+	AssetModelHierarchyId *string
+
+	// The ID of the hierarchy in the interface asset model.
+	//
+	// This member is required.
+	InterfaceAssetModelHierarchyId *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about an Identity and Access Management role. For more
 // information, see [IAM roles]in the IAM User Guide.
 //
@@ -2547,6 +2572,48 @@ type ImageLocation struct {
 	//
 	// This member is required.
 	Url *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the relationship between an asset model and an
+// interface asset model that is applied to it.
+type InterfaceRelationship struct {
+
+	// The ID of the asset model that has the interface applied to it.
+	//
+	// This member is required.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about an interface relationship, which defines how
+// an interface is applied to an asset model. This summary provides the essential
+// identifiers needed to retrieve detailed information about the relationship.
+type InterfaceRelationshipSummary struct {
+
+	// The ID of the asset model that has the interface applied to it.
+	//
+	// This member is required.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about an interface that a property belongs to.
+type InterfaceSummary struct {
+
+	// The ID of the interface asset model that contains this property.
+	//
+	// This member is required.
+	InterfaceAssetModelId *string
+
+	// The ID of the property in the interface asset model that corresponds to this
+	// property.
+	//
+	// This member is required.
+	InterfaceAssetModelPropertyId *string
 
 	noSmithyDocumentSerde
 }
@@ -2719,6 +2786,12 @@ type MeasurementProcessingConfig struct {
 // [Metrics]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#metrics
 type Metric struct {
 
+	// The window (time interval) over which IoT SiteWise computes the metric's
+	// aggregation expression. IoT SiteWise computes one data point per window .
+	//
+	// This member is required.
+	Window *MetricWindow
+
 	// The mathematical expression that defines the metric aggregation function. You
 	// can specify up to 10 variables per expression. You can specify up to 10
 	// functions per expression.
@@ -2726,25 +2799,15 @@ type Metric struct {
 	// For more information, see [Quotas] in the IoT SiteWise User Guide.
 	//
 	// [Quotas]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html
-	//
-	// This member is required.
 	Expression *string
-
-	// The list of variables used in the expression.
-	//
-	// This member is required.
-	Variables []ExpressionVariable
-
-	// The window (time interval) over which IoT SiteWise computes the metric's
-	// aggregation expression. IoT SiteWise computes one data point per window .
-	//
-	// This member is required.
-	Window *MetricWindow
 
 	// The processing configuration for the given metric property. You can configure
 	// metrics to be computed at the edge or in the Amazon Web Services Cloud. By
 	// default, metrics are forwarded to the cloud.
 	ProcessingConfig *MetricProcessingConfig
+
+	// The list of variables used in the expression.
+	Variables []ExpressionVariable
 
 	noSmithyDocumentSerde
 }
@@ -2971,6 +3034,42 @@ type Property struct {
 	noSmithyDocumentSerde
 }
 
+// Maps a property from an interface asset model to a property in the asset model
+// where the interface is applied.
+type PropertyMapping struct {
+
+	// The ID of the property in the asset model where the interface is applied.
+	//
+	// This member is required.
+	AssetModelPropertyId *string
+
+	// The ID of the property in the interface asset model.
+	//
+	// This member is required.
+	InterfaceAssetModelPropertyId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains configuration options for mapping properties from an interface asset
+// model to an asset model where the interface is applied.
+type PropertyMappingConfiguration struct {
+
+	// If true, missing properties from the interface asset model are automatically
+	// created in the asset model where the interface is applied.
+	CreateMissingProperty bool
+
+	// If true, properties are matched by name between the interface asset model and
+	// the asset model where the interface is applied.
+	MatchByPropertyName bool
+
+	// A list of specific property mappings that override the automatic mapping by
+	// name when an interface is applied to an asset model.
+	Overrides []PropertyMapping
+
+	noSmithyDocumentSerde
+}
+
 // Contains asset property value notification information. When the notification
 // state is enabled, IoT SiteWise publishes property value updates to a unique MQTT
 // topic. For more information, see [Interacting with other services]in the IoT SiteWise User Guide.
@@ -3193,7 +3292,8 @@ type SourceDetail struct {
 	noSmithyDocumentSerde
 }
 
-// The resource the action will be taken on.
+// The resource the action will be taken on. This can include asset-based
+// resources and computation model resources.
 type TargetResource struct {
 
 	// The ID of the asset, in UUID format.

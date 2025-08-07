@@ -72,6 +72,10 @@ type CreateGuardrailInput struct {
 	// This member is required.
 	Name *string
 
+	// Optional configuration for integrating Automated Reasoning policies with the
+	// new guardrail.
+	AutomatedReasoningPolicyConfig *types.GuardrailAutomatedReasoningPolicyConfig
+
 	// A unique, case-sensitive identifier to ensure that the API request completes no
 	// more than once. If this token matches a previous request, Amazon Bedrock ignores
 	// the request, but does not return an error. For more information, see [Ensuring idempotency]in the

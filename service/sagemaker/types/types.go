@@ -53,6 +53,33 @@ type ActionSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies an instance group and the number of nodes to add to it.
+type AddClusterNodeSpecification struct {
+
+	// The number of nodes to add to the specified instance group. The total number of
+	// nodes across all instance groups in a single request cannot exceed 50.
+	//
+	// This member is required.
+	IncrementTargetCountBy *int32
+
+	// The name of the instance group to which you want to add nodes.
+	//
+	// This member is required.
+	InstanceGroupName *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about additional Elastic Network Interfaces (ENIs) associated with
+// an instance.
+type AdditionalEnis struct {
+
+	// A list of Elastic Fabric Adapter (EFA) ENIs associated with the instance.
+	EfaEnis []string
+
+	noSmithyDocumentSerde
+}
+
 // A structure of additional Inference Specification. Additional Inference
 // Specification specifies details about inference jobs that can be run with models
 // based on this model package
@@ -2438,6 +2465,31 @@ type Autotune struct {
 	noSmithyDocumentSerde
 }
 
+// Information about an error that occurred during the node addition operation.
+type BatchAddClusterNodesError struct {
+
+	// The error code associated with the failure. Possible values include
+	// InstanceGroupNotFound and InvalidInstanceGroupState .
+	//
+	// This member is required.
+	ErrorCode BatchAddClusterNodesErrorCode
+
+	// The number of nodes that failed to be added to the specified instance group.
+	//
+	// This member is required.
+	FailedCount *int32
+
+	// The name of the instance group for which the error occurred.
+	//
+	// This member is required.
+	InstanceGroupName *string
+
+	// A descriptive message providing additional details about the error.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
 // Configuration to control how SageMaker captures inference data for batch
 // transform jobs.
 type BatchDataCaptureConfig struct {
@@ -2465,6 +2517,29 @@ type BatchDataCaptureConfig struct {
 	//
 	//   - Alias name ARN: arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias
 	KmsKeyId *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about an error that occurred when attempting to delete a node
+// identified by its NodeLogicalId .
+type BatchDeleteClusterNodeLogicalIdsError struct {
+
+	// The error code associated with the failure. Possible values include
+	// NodeLogicalIdNotFound , InvalidNodeStatus , and InternalError .
+	//
+	// This member is required.
+	Code BatchDeleteClusterNodesErrorCode
+
+	// A descriptive message providing additional details about the error.
+	//
+	// This member is required.
+	Message *string
+
+	// The NodeLogicalId of the node that could not be deleted.
+	//
+	// This member is required.
+	NodeLogicalId *string
 
 	noSmithyDocumentSerde
 }
@@ -2806,6 +2881,20 @@ type CanvasAppSettings struct {
 
 	// The workspace settings for the SageMaker Canvas application.
 	WorkspaceSettings *WorkspaceSettings
+
+	noSmithyDocumentSerde
+}
+
+// Information about the Capacity Reservation used by an instance or instance
+// group.
+type CapacityReservation struct {
+
+	// The Amazon Resource Name (ARN) of the Capacity Reservation.
+	Arn *string
+
+	// The type of Capacity Reservation. Valid values are ODCR (On-Demand Capacity
+	// Reservation) or CRG (Capacity Reservation Group).
+	Type CapacityReservationType
 
 	noSmithyDocumentSerde
 }
@@ -3462,12 +3551,105 @@ type ClusterEbsVolumeConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Detailed information about a specific event in a HyperPod cluster.
+type ClusterEventDetail struct {
+
+	// The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster associated
+	// with the event.
+	//
+	// This member is required.
+	ClusterArn *string
+
+	// The name of the SageMaker HyperPod cluster associated with the event.
+	//
+	// This member is required.
+	ClusterName *string
+
+	// The unique identifier (UUID) of the event.
+	//
+	// This member is required.
+	EventId *string
+
+	// The timestamp when the event occurred.
+	//
+	// This member is required.
+	EventTime *time.Time
+
+	// The type of resource associated with the event. Valid values are "Cluster",
+	// "InstanceGroup", or "Instance".
+	//
+	// This member is required.
+	ResourceType ClusterEventResourceType
+
+	// A human-readable description of the event.
+	Description *string
+
+	// Additional details about the event, including event-specific metadata.
+	EventDetails *EventDetails
+
+	// The name of the instance group associated with the event, if applicable.
+	InstanceGroupName *string
+
+	// The EC2 instance ID associated with the event, if applicable.
+	InstanceId *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of an event in a SageMaker HyperPod cluster.
+type ClusterEventSummary struct {
+
+	// The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster associated
+	// with the event.
+	//
+	// This member is required.
+	ClusterArn *string
+
+	// The name of the SageMaker HyperPod cluster associated with the event.
+	//
+	// This member is required.
+	ClusterName *string
+
+	// The unique identifier (UUID) of the event.
+	//
+	// This member is required.
+	EventId *string
+
+	// The timestamp when the event occurred.
+	//
+	// This member is required.
+	EventTime *time.Time
+
+	// The type of resource associated with the event. Valid values are "Cluster",
+	// "InstanceGroup", or "Instance".
+	//
+	// This member is required.
+	ResourceType ClusterEventResourceType
+
+	// A brief, human-readable description of the event.
+	Description *string
+
+	// The name of the instance group associated with the event, if applicable.
+	InstanceGroupName *string
+
+	// The EC2 instance ID associated with the event, if applicable.
+	InstanceId *string
+
+	noSmithyDocumentSerde
+}
+
 // Details of an instance group in a SageMaker HyperPod cluster.
 type ClusterInstanceGroupDetails struct {
 
 	// The number of instances that are currently in the instance group of a SageMaker
 	// HyperPod cluster.
 	CurrentCount *int32
+
+	// The ID of the Amazon Machine Image (AMI) currently in use by the instance group.
+	CurrentImageId *string
+
+	// The ID of the Amazon Machine Image (AMI) desired for the instance group.
+	DesiredImageId *string
 
 	// The execution role for the instance group to assume.
 	ExecutionRole *string
@@ -3571,6 +3753,31 @@ type ClusterInstanceGroupSpecification struct {
 	//
 	// This member is required.
 	LifeCycleConfig *ClusterLifeCycleConfig
+
+	// When configuring your HyperPod cluster, you can specify an image ID using one
+	// of the following options:
+	//
+	//   - HyperPodPublicAmiId : Use a HyperPod public AMI
+	//
+	//   - CustomAmiId : Use your custom AMI
+	//
+	//   - default : Use the default latest system image
+	//
+	// f you choose to use a custom AMI ( CustomAmiId ), ensure it meets the following
+	// requirements:
+	//
+	//   - Encryption: The custom AMI must be unencrypted.
+	//
+	//   - Ownership: The custom AMI must be owned by the same Amazon Web Services
+	//   account that is creating the HyperPod cluster.
+	//
+	//   - Volume support: Only the primary AMI snapshot volume is supported;
+	//   additional AMI volumes are not supported.
+	//
+	// When updating the instance group's AMI through the UpdateClusterSoftware
+	// operation, if an instance group uses a custom AMI, you must provide an ImageId
+	// or use the default as input.
+	ImageId *string
 
 	// Specifies the additional storage configurations for the instances in the
 	// SageMaker HyperPod cluster instance group.
@@ -3714,9 +3921,36 @@ type ClusterLifeCycleConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Metadata information about a SageMaker HyperPod cluster showing information
+// about the cluster level operations, such as creating, updating, and deleting.
+type ClusterMetadata struct {
+
+	// A list of Amazon EKS IAM role ARNs associated with the cluster. This is created
+	// by SageMaker HyperPod on your behalf and only applies for EKS-orchestrated
+	// clusters.
+	EksRoleAccessEntries []string
+
+	// An error message describing why the cluster level operation (such as creating,
+	// updating, or deleting) failed.
+	FailureMessage *string
+
+	// The Service-Linked Role (SLR) associated with the cluster. This is created by
+	// SageMaker HyperPod on your behalf and only applies for EKS-orchestrated
+	// clusters.
+	SlrAccessEntry *string
+
+	noSmithyDocumentSerde
+}
+
 // Details of an instance (also called a node interchangeably) in a SageMaker
 // HyperPod cluster.
 type ClusterNodeDetails struct {
+
+	// The ID of the Amazon Machine Image (AMI) currently in use by the node.
+	CurrentImageId *string
+
+	// The ID of the Amazon Machine Image (AMI) desired for the node.
+	DesiredImageId *string
 
 	// The instance group name in which the instance is.
 	InstanceGroupName *string
@@ -3742,6 +3976,11 @@ type ClusterNodeDetails struct {
 
 	// The LifeCycle configuration applied to the instance.
 	LifeCycleConfig *ClusterLifeCycleConfig
+
+	// A unique identifier for the node that persists throughout its lifecycle, from
+	// provisioning request to termination. This identifier can be used to track the
+	// node even before it has an assigned InstanceId .
+	NodeLogicalId *string
 
 	// The customized Amazon VPC configuration at the instance group level that
 	// overrides the default Amazon VPC configuration of the SageMaker HyperPod
@@ -3801,6 +4040,12 @@ type ClusterNodeSummary struct {
 	// The time when SageMaker last updated the software of the instances in the
 	// cluster.
 	LastSoftwareUpdateTime *time.Time
+
+	// A unique identifier for the node that persists throughout its lifecycle, from
+	// provisioning request to termination. This identifier can be used to track the
+	// node even before it has an assigned InstanceId . This field is only included
+	// when IncludeNodeLogicalIds is set to True in the ListClusterNodes request.
+	NodeLogicalId *string
 
 	noSmithyDocumentSerde
 }
@@ -6566,6 +6811,65 @@ type ErrorInfo struct {
 
 	noSmithyDocumentSerde
 }
+
+// Detailed information about a specific event, including event metadata.
+type EventDetails struct {
+
+	// Metadata specific to the event, which may include information about the
+	// cluster, instance group, or instance involved.
+	EventMetadata EventMetadata
+
+	noSmithyDocumentSerde
+}
+
+// Metadata associated with a cluster event, which may include details about
+// various resource types.
+//
+// The following types satisfy this interface:
+//
+//	EventMetadataMemberCluster
+//	EventMetadataMemberInstance
+//	EventMetadataMemberInstanceGroup
+//	EventMetadataMemberInstanceGroupScaling
+type EventMetadata interface {
+	isEventMetadata()
+}
+
+// Metadata specific to cluster-level events.
+type EventMetadataMemberCluster struct {
+	Value ClusterMetadata
+
+	noSmithyDocumentSerde
+}
+
+func (*EventMetadataMemberCluster) isEventMetadata() {}
+
+// Metadata specific to instance-level events.
+type EventMetadataMemberInstance struct {
+	Value InstanceMetadata
+
+	noSmithyDocumentSerde
+}
+
+func (*EventMetadataMemberInstance) isEventMetadata() {}
+
+// Metadata specific to instance group-level events.
+type EventMetadataMemberInstanceGroup struct {
+	Value InstanceGroupMetadata
+
+	noSmithyDocumentSerde
+}
+
+func (*EventMetadataMemberInstanceGroup) isEventMetadata() {}
+
+// Metadata related to instance group scaling events.
+type EventMetadataMemberInstanceGroupScaling struct {
+	Value InstanceGroupScalingMetadata
+
+	noSmithyDocumentSerde
+}
+
+func (*EventMetadataMemberInstanceGroupScaling) isEventMetadata() {}
 
 // The properties of an experiment as returned by the [Search] API. For information about
 // experiments, see the [CreateExperiment]API.
@@ -10505,6 +10809,75 @@ type InstanceGroup struct {
 	noSmithyDocumentSerde
 }
 
+// Metadata information about an instance group in a SageMaker HyperPod cluster.
+type InstanceGroupMetadata struct {
+
+	// If you use a custom Amazon Machine Image (AMI) for the instance group, this
+	// field shows the ID of the custom AMI.
+	AmiOverride *string
+
+	// The ID of the Availability Zone where the instance group is located.
+	AvailabilityZoneId *string
+
+	// Information about the Capacity Reservation used by the instance group.
+	CapacityReservation *CapacityReservation
+
+	// An error message describing why the instance group level operation (such as
+	// creating, scaling, or deleting) failed.
+	FailureMessage *string
+
+	// A list of security group IDs associated with the instance group.
+	SecurityGroupIds []string
+
+	// The ID of the subnet where the instance group is located.
+	SubnetId *string
+
+	noSmithyDocumentSerde
+}
+
+// Metadata information about scaling operations for an instance group.
+type InstanceGroupScalingMetadata struct {
+
+	// An error message describing why the scaling operation failed, if applicable.
+	FailureMessage *string
+
+	// The current number of instances in the group.
+	InstanceCount *int32
+
+	// The desired number of instances for the group after scaling.
+	TargetCount *int32
+
+	noSmithyDocumentSerde
+}
+
+// Metadata information about an instance in a HyperPod cluster.
+type InstanceMetadata struct {
+
+	// Information about additional Elastic Network Interfaces (ENIs) associated with
+	// the instance.
+	AdditionalEnis *AdditionalEnis
+
+	// Information about the Capacity Reservation used by the instance.
+	CapacityReservation *CapacityReservation
+
+	// The ID of the customer-managed Elastic Network Interface (ENI) associated with
+	// the instance.
+	CustomerEni *string
+
+	// An error message describing why the instance creation or update failed, if
+	// applicable.
+	FailureMessage *string
+
+	// The execution state of the Lifecycle Script (LCS) for the instance.
+	LcsExecutionState *string
+
+	// The unique logical identifier of the node within the cluster. The ID used here
+	// is the same object as in the BatchAddClusterNodes API.
+	NodeLogicalId *string
+
+	noSmithyDocumentSerde
+}
+
 // Information on the IMDS configuration of the notebook instance
 type InstanceMetadataServiceConfiguration struct {
 
@@ -13429,6 +13802,30 @@ type NetworkConfig struct {
 	//
 	// [Give SageMaker Access to Resources in your Amazon VPC]: https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html
 	VpcConfig *VpcConfig
+
+	noSmithyDocumentSerde
+}
+
+// Information about a node that was successfully added to the cluster.
+type NodeAdditionResult struct {
+
+	// The name of the instance group to which the node was added.
+	//
+	// This member is required.
+	InstanceGroupName *string
+
+	// A unique identifier assigned to the node that can be used to track its
+	// provisioning status through the DescribeClusterNode operation.
+	//
+	// This member is required.
+	NodeLogicalId *string
+
+	// The current status of the node. Possible values include Pending , Running ,
+	// Failed , ShuttingDown , SystemUpdating , DeepHealthCheckInProgress , and
+	// NotFound .
+	//
+	// This member is required.
+	Status ClusterInstanceStatus
 
 	noSmithyDocumentSerde
 }
@@ -20894,8 +21291,8 @@ type UnifiedStudioSettings struct {
 	// artifacts for the project that corresponds to the domain.
 	ProjectS3Path *string
 
-	// The ARN of the application managed by SageMaker AI and SageMaker Unified Studio
-	// in the Amazon Web Services IAM Identity Center.
+	// The ARN of the Amazon DataZone application managed by Amazon SageMaker Unified
+	// Studio in the Amazon Web Services IAM Identity Center.
 	SingleSignOnApplicationArn *string
 
 	// Sets whether you can access the domain in Amazon SageMaker Studio:
@@ -21444,6 +21841,7 @@ func (*UnknownUnionMember) isClusterInstanceStorageConfig()        {}
 func (*UnknownUnionMember) isCollectionConfig()                    {}
 func (*UnknownUnionMember) isCustomFileSystem()                    {}
 func (*UnknownUnionMember) isCustomFileSystemConfig()              {}
+func (*UnknownUnionMember) isEventMetadata()                       {}
 func (*UnknownUnionMember) isMetricSpecification()                 {}
 func (*UnknownUnionMember) isOptimizationConfig()                  {}
 func (*UnknownUnionMember) isScalingPolicy()                       {}

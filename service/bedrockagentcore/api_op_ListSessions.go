@@ -11,10 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists sessions in a memory store based on specified criteria. We recommend
-// using pagination to ensure that the operation returns quickly and successfully.
+// Lists sessions in an AgentCore Memory resource based on specified criteria. We
+// recommend using pagination to ensure that the operation returns quickly and
+// successfully.
 //
-// To use this operation, you must have the genesismemory:ListSessions permission.
+// To use this operation, you must have the bedrock-agentcore:ListSessions
+// permission.
 func (c *Client) ListSessions(ctx context.Context, params *ListSessionsInput, optFns ...func(*Options)) (*ListSessionsOutput, error) {
 	if params == nil {
 		params = &ListSessionsInput{}
@@ -38,7 +40,7 @@ type ListSessionsInput struct {
 	// This member is required.
 	ActorId *string
 
-	// The identifier of the memory store for which to list sessions.
+	// The identifier of the AgentCore Memory resource for which to list sessions.
 	//
 	// This member is required.
 	MemoryId *string

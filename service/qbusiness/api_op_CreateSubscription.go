@@ -18,7 +18,11 @@ import (
 // Subscription tier determines feature access for the user. For more information
 // on subscriptions and pricing tiers, see [Amazon Q Business pricing].
 //
+// For an example IAM role policy for assigning subscriptions, see [Set up required permissions] in the Amazon
+// Q Business User Guide.
+//
 // [Amazon Q Business pricing]: https://aws.amazon.com/q/business/pricing/
+// [Set up required permissions]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/setting-up.html#permissions
 func (c *Client) CreateSubscription(ctx context.Context, params *CreateSubscriptionInput, optFns ...func(*Options)) (*CreateSubscriptionOutput, error) {
 	if params == nil {
 		params = &CreateSubscriptionInput{}

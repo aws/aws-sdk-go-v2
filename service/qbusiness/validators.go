@@ -750,6 +750,26 @@ func (m *validateOpGetDataSource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDocumentContent struct {
+}
+
+func (*validateOpGetDocumentContent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDocumentContent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDocumentContentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDocumentContentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetGroup struct {
 }
 
@@ -1756,6 +1776,10 @@ func addOpGetDataAccessorValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetDataSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDataSource{}, middleware.After)
+}
+
+func addOpGetDocumentContentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDocumentContent{}, middleware.After)
 }
 
 func addOpGetGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -4598,6 +4622,27 @@ func validateOpGetDataSourceInput(v *GetDataSourceInput) error {
 	}
 	if v.DataSourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataSourceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDocumentContentInput(v *GetDocumentContentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDocumentContentInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if v.DocumentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DocumentId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

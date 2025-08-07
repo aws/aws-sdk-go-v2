@@ -45,6 +45,31 @@ type UpdateClusterSoftwareInput struct {
 	// The configuration to use when updating the AMI versions.
 	DeploymentConfig *types.DeploymentConfiguration
 
+	// When configuring your HyperPod cluster, you can specify an image ID using one
+	// of the following options:
+	//
+	//   - HyperPodPublicAmiId : Use a HyperPod public AMI
+	//
+	//   - CustomAmiId : Use your custom AMI
+	//
+	//   - default : Use the default latest system image
+	//
+	// f you choose to use a custom AMI ( CustomAmiId ), ensure it meets the following
+	// requirements:
+	//
+	//   - Encryption: The custom AMI must be unencrypted.
+	//
+	//   - Ownership: The custom AMI must be owned by the same Amazon Web Services
+	//   account that is creating the HyperPod cluster.
+	//
+	//   - Volume support: Only the primary AMI snapshot volume is supported;
+	//   additional AMI volumes are not supported.
+	//
+	// When updating the instance group's AMI through the UpdateClusterSoftware
+	// operation, if an instance group uses a custom AMI, you must provide an ImageId
+	// or use the default as input.
+	ImageId *string
+
 	// The array of instance groups for which to update AMI versions.
 	InstanceGroups []types.UpdateClusterSoftwareInstanceGroupSpecification
 
