@@ -93,3 +93,4 @@ software.amazon.smithy.aws.go.codegen.CredentialSourceFeatureTrackerGenerator
 software.amazon.smithy.aws.go.codegen.customization.SraOperationOrderTest
 software.amazon.smithy.aws.go.codegen.customization.service.bedrockruntime.RemoveOperations
 software.amazon.smithy.aws.go.codegen.customization.RetryInterceptors
+software.amazon.smithy.aws.go.codegen.customization.service.BearerTokenEnvProvider

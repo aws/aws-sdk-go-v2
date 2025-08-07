@@ -29,6 +29,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"net"
 	"net/http"
+	"os"
 	"sync/atomic"
 	"time"
 )
@@ -193,6 +194,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 	resolveEndpointResolverV2(&options)
 
 	resolveBearerAuthSigner(&options)
+
+	resolveEnvBearerToken(&options)
 
 	resolveTracerProvider(&options)
 
@@ -825,6 +828,18 @@ func addCredentialSource(stack *middleware.Stack, options Options) error {
 
 	mw := setCredentialSourceMiddleware{ua: ua, options: options}
 	return stack.Build.Insert(&mw, "UserAgent", middleware.Before)
+}
+
+func resolveEnvBearerToken(options *Options) {
+	token := os.Getenv("AWS_BEARER_TOKEN_BEDROCK")
+	if len(token) == 0 {
+		return
+	}
+
+	options.BearerAuthTokenProvider = bearer.TokenProviderFunc(func(ctx context.Context) (bearer.Token, error) {
+		return bearer.Token{Value: token}, nil
+	})
+	options.AuthSchemePreference = []string{"httpBearerAuth"}
 }
 
 func resolveTracerProvider(options *Options) {
