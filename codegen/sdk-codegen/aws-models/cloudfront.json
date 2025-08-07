@@ -16642,6 +16642,12 @@
                     "traits": {
                         "smithy.api#enumValue": "TLSv1.2_2021"
                     }
+                },
+                "TLSv1_3_2025": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TLSv1.3_2025"
+                    }
                 }
             }
         },

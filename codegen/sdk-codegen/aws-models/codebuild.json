@@ -3632,6 +3632,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The scope configuration for global or organization webhooks.</p>\n         <note>\n            <p>Global or organization webhooks are only available for GitHub and Github Enterprise webhooks.</p>\n         </note>"
                     }
+                },
+                "pullRequestBuildPolicy": {
+                    "target": "com.amazonaws.codebuild#PullRequestBuildPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A PullRequestBuildPolicy object that defines comment-based approval requirements for triggering builds on pull requests. This policy helps control when automated builds are executed based on contributor permissions and approval workflows.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7421,6 +7427,145 @@
                 "smithy.api#documentation": "<p>Information about the proxy configurations that apply network access control to your reserved capacity instances.</p>"
             }
         },
+        "com.amazonaws.codebuild#PullRequestBuildApproverRole": {
+            "type": "enum",
+            "members": {
+                "GITHUB_READ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GITHUB_READ"
+                    }
+                },
+                "GITHUB_TRIAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GITHUB_TRIAGE"
+                    }
+                },
+                "GITHUB_WRITE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GITHUB_WRITE"
+                    }
+                },
+                "GITHUB_MAINTAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GITHUB_MAINTAIN"
+                    }
+                },
+                "GITHUB_ADMIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GITHUB_ADMIN"
+                    }
+                },
+                "GITLAB_GUEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GITLAB_GUEST"
+                    }
+                },
+                "GITLAB_PLANNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GITLAB_PLANNER"
+                    }
+                },
+                "GITLAB_REPORTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GITLAB_REPORTER"
+                    }
+                },
+                "GITLAB_DEVELOPER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GITLAB_DEVELOPER"
+                    }
+                },
+                "GITLAB_MAINTAINER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GITLAB_MAINTAINER"
+                    }
+                },
+                "GITLAB_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GITLAB_OWNER"
+                    }
+                },
+                "BITBUCKET_READ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BITBUCKET_READ"
+                    }
+                },
+                "BITBUCKET_WRITE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BITBUCKET_WRITE"
+                    }
+                },
+                "BITBUCKET_ADMIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BITBUCKET_ADMIN"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.codebuild#PullRequestBuildApproverRoles": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codebuild#PullRequestBuildApproverRole"
+            }
+        },
+        "com.amazonaws.codebuild#PullRequestBuildCommentApproval": {
+            "type": "enum",
+            "members": {
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "ALL_PULL_REQUESTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL_PULL_REQUESTS"
+                    }
+                },
+                "FORK_PULL_REQUESTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FORK_PULL_REQUESTS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.codebuild#PullRequestBuildPolicy": {
+            "type": "structure",
+            "members": {
+                "requiresCommentApproval": {
+                    "target": "com.amazonaws.codebuild#PullRequestBuildCommentApproval",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies when comment-based approval is required before triggering a build on pull requests. This setting determines whether builds run automatically or require explicit approval through comments.</p>\n         <ul>\n            <li>\n               <p>\n                  <i>DISABLED</i>: Builds trigger automatically without requiring comment approval</p>\n            </li>\n            <li>\n               <p>\n                  <i>ALL_PULL_REQUESTS</i>: All pull requests require comment approval before builds execute (unless contributor is one of the approver roles)</p>\n            </li>\n            <li>\n               <p>\n                  <i>FORK_PULL_REQUESTS</i>: Only pull requests from forked repositories require comment approval (unless contributor is one of the approver roles)</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "approverRoles": {
+                    "target": "com.amazonaws.codebuild#PullRequestBuildApproverRoles",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of repository roles that have approval privileges for pull request builds when comment approval is required. Only users with these roles can provide valid comment approvals. If a pull request contributor is one of these roles, their pull request builds will trigger automatically. This field is only applicable when <code>requiresCommentApproval</code> is not <i>DISABLED</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration policy that defines comment-based approval requirements for triggering builds on pull requests. This policy helps control when automated builds are executed based on contributor permissions and approval workflows.</p>"
+            }
+        },
         "com.amazonaws.codebuild#PutResourcePolicy": {
             "type": "operation",
             "input": {
@@ -9161,7 +9306,7 @@
                 "buildspecOverride": {
                     "target": "com.amazonaws.codebuild#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A buildspec file declaration that overrides the latest one defined \n            in the build project, for this build only. The buildspec defined on the project is not changed.</p>\n         <p>If this value is set, it can be either an inline buildspec definition, the path to an\n            alternate buildspec file relative to the value of the built-in\n                <code>CODEBUILD_SRC_DIR</code> environment variable, or the path to an S3 bucket.\n            The bucket must be in the same Amazon Web Services Region as the build project. Specify the buildspec\n            file using its ARN (for example,\n                <code>arn:aws:s3:::my-codebuild-sample2/buildspec.yml</code>). If this value is not\n            provided or is set to an empty string, the source code must contain a buildspec file in\n            its root directory. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec-ref-name-storage\">Buildspec File Name and Storage Location</a>.</p>\n         <note>\n            <p>Since this property allows you to change the build commands that will run in the container, \n            you should note that an IAM principal with the ability to call this API and set this parameter \n            can override the default settings. Moreover, we encourage that you use a trustworthy buildspec location \n            like a file in your source repository or a Amazon S3 bucket.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A buildspec file declaration that overrides the latest one defined \n            in the build project, for this build only. The buildspec defined on the project is not changed.</p>\n         <p>If this value is set, it can be either an inline buildspec definition, the path to an\n            alternate buildspec file relative to the value of the built-in\n                <code>CODEBUILD_SRC_DIR</code> environment variable, or the path to an S3 bucket.\n            The bucket must be in the same Amazon Web Services Region as the build project. Specify the buildspec\n            file using its ARN (for example,\n                <code>arn:aws:s3:::my-codebuild-sample2/buildspec.yml</code>). If this value is not\n            provided or is set to an empty string, the source code must contain a buildspec file in\n            its root directory. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec-ref-name-storage\">Buildspec File Name and Storage Location</a>.</p>\n         <note>\n            <p>Since this property allows you to change the build commands that will run in the container, \n            you should note that an IAM principal with the ability to call this API and set this parameter \n            can override the default settings. Moreover, we encourage that you use a trustworthy buildspec location \n            like a file in your source repository or a Amazon S3 bucket. Alternatively, you can restrict overrides \n            to the buildspec by using a condition key: <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/action-context-keys.html#action-context-keys-example-overridebuildspec.html\">Prevent unauthorized modifications to project buildspec</a>.</p>\n         </note>"
                     }
                 },
                 "insecureSslOverride": {
@@ -10332,6 +10477,12 @@
                     "target": "com.amazonaws.codebuild#WebhookBuildType",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the type of build this webhook will trigger.</p>\n         <note>\n            <p>\n               <code>RUNNER_BUILDKITE_BUILD</code> is only available for <code>NO_SOURCE</code> source type projects \n        configured for Buildkite runner builds. For more information about CodeBuild-hosted Buildkite runner builds, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-runner-buildkite.html\">Tutorial: Configure a CodeBuild-hosted Buildkite runner</a> in the <i>CodeBuild\n        user guide</i>.</p>\n         </note>"
+                    }
+                },
+                "pullRequestBuildPolicy": {
+                    "target": "com.amazonaws.codebuild#PullRequestBuildPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A PullRequestBuildPolicy object that defines comment-based approval requirements for triggering builds on pull requests. This policy helps control when automated builds are executed based on contributor permissions and approval workflows.</p>"
                     }
                 }
             },

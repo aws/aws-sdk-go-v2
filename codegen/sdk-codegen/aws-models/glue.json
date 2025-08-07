@@ -5622,6 +5622,12 @@
                         "smithy.api#documentation": "<p>A <code>DataLakeAccessProperties</code> object that specifies properties to configure data lake access for your catalog resource in the Glue Data Catalog.</p>"
                     }
                 },
+                "IcebergOptimizationProperties": {
+                    "target": "com.amazonaws.glue#IcebergOptimizationProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that specifies Iceberg table optimization properties for the catalog. This includes configuration for compaction, retention, and \n      orphan file deletion operations that can be applied to Iceberg tables in this catalog.</p>"
+                    }
+                },
                 "CustomProperties": {
                     "target": "com.amazonaws.glue#ParametersMap",
                     "traits": {
@@ -5640,6 +5646,12 @@
                     "target": "com.amazonaws.glue#DataLakeAccessPropertiesOutput",
                     "traits": {
                         "smithy.api#documentation": "<p>A <code>DataLakeAccessProperties</code> object with input properties to configure data lake access for your catalog resource in the Glue Data Catalog.</p>"
+                    }
+                },
+                "IcebergOptimizationProperties": {
+                    "target": "com.amazonaws.glue#IcebergOptimizationPropertiesOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An <code>IcebergOptimizationPropertiesOutput</code> object that specifies Iceberg table optimization settings for the catalog, including \n      configurations for compaction, retention, and orphan file deletion operations.</p>"
                     }
                 },
                 "CustomProperties": {
@@ -7671,6 +7683,23 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies the values that an admin sets for each job or session parameter configured in a Glue usage profile.</p>"
+            }
+        },
+        "com.amazonaws.glue#ConfigurationSource": {
+            "type": "enum",
+            "members": {
+                "CATALOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "catalog"
+                    }
+                },
+                "TABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "table"
+                    }
+                }
             }
         },
         "com.amazonaws.glue#ConflictException": {
@@ -26227,6 +26256,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The strategy to use for compaction. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>binpack</code>: Combines small files into larger files, typically targeting sizes over 100MB, while applying any pending deletes. \n          This is the recommended compaction strategy for most use cases.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>sort</code>: Organizes data based on specified columns which are sorted hierarchically during compaction, improving query \n        performance for filtered operations. This strategy is recommended when your queries frequently filter on specific columns. To use this strategy, \n        you must first define a sort order in your Iceberg table properties using the <code>sort_order</code> table property.</p>\n            </li>\n            <li>\n               <p>\n                  <code>z-order</code>: Optimizes data organization by blending multiple attributes into a single scalar value that can be used for sorting, \n          allowing efficient querying across multiple dimensions. This strategy is recommended when you need to query data across multiple dimensions \n          simultaneously. To use this strategy, you must first define a sort order in your Iceberg table properties using the \n          <code>sort_order</code> table property.\n        </p>\n            </li>\n         </ul>\n         <p>If an input is not provided, the default value 'binpack' will be used.</p>"
                     }
+                },
+                "minInputFiles": {
+                    "target": "com.amazonaws.glue#NullableInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum number of data files that must be present in a partition before compaction will actually compact files. This parameter helps control when compaction is triggered, preventing unnecessary compaction operations on partitions with few files. If an input is not provided, the default value 100 will be used.</p>"
+                    }
+                },
+                "deleteFileThreshold": {
+                    "target": "com.amazonaws.glue#NullableInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum number of deletes that must be present in a data file to make it eligible for compaction. This parameter helps optimize compaction by focusing on files that contain a significant number of delete operations, which can improve query performance by removing deleted records. If an input is not provided, the default value 1 will be used.</p>"
+                    }
                 }
             },
             "traits": {
@@ -26323,6 +26364,76 @@
                 }
             }
         },
+        "com.amazonaws.glue#IcebergOptimizationProperties": {
+            "type": "structure",
+            "members": {
+                "RoleArn": {
+                    "target": "com.amazonaws.glue#IAMRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that will be assumed to perform Iceberg table optimization operations.</p>"
+                    }
+                },
+                "Compaction": {
+                    "target": "com.amazonaws.glue#ParametersMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of key-value pairs that specify configuration parameters for Iceberg table compaction operations, which optimize the layout of data files to improve query performance.</p>"
+                    }
+                },
+                "Retention": {
+                    "target": "com.amazonaws.glue#ParametersMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of key-value pairs that specify configuration parameters for Iceberg table retention operations, which manage the lifecycle of table snapshots to control storage costs.</p>"
+                    }
+                },
+                "OrphanFileDeletion": {
+                    "target": "com.amazonaws.glue#ParametersMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of key-value pairs that specify configuration parameters for Iceberg orphan file deletion operations, which identify and remove files that are no longer referenced by the table metadata.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that specifies Iceberg table optimization properties for the catalog, including configurations for compaction, retention, and orphan file deletion operations.</p>"
+            }
+        },
+        "com.amazonaws.glue#IcebergOptimizationPropertiesOutput": {
+            "type": "structure",
+            "members": {
+                "RoleArn": {
+                    "target": "com.amazonaws.glue#IAMRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that is used to perform Iceberg table optimization operations.</p>"
+                    }
+                },
+                "Compaction": {
+                    "target": "com.amazonaws.glue#ParametersMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of key-value pairs that specify configuration parameters for Iceberg table compaction operations, which optimize the layout of data files to improve query performance.</p>"
+                    }
+                },
+                "Retention": {
+                    "target": "com.amazonaws.glue#ParametersMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of key-value pairs that specify configuration parameters for Iceberg table retention operations, which manage the lifecycle of table snapshots to control storage costs.</p>"
+                    }
+                },
+                "OrphanFileDeletion": {
+                    "target": "com.amazonaws.glue#ParametersMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of key-value pairs that specify configuration parameters for Iceberg orphan file deletion operations, which identify and remove files that are no longer referenced by the table metadata.</p>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.glue#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the Iceberg optimization properties were last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains the output properties of Iceberg table optimization configuration for your catalog resource in the Glue \n      Data Catalog.</p>"
+            }
+        },
         "com.amazonaws.glue#IcebergOrphanFileDeletionConfiguration": {
             "type": "structure",
             "members": {
@@ -26336,6 +26447,12 @@
                     "target": "com.amazonaws.glue#MessageString",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies a directory in which to look for files (defaults to the table's location). You may choose a sub-directory rather than the top-level table location.</p>"
+                    }
+                },
+                "runRateInHours": {
+                    "target": "com.amazonaws.glue#NullableInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The interval in hours between orphan file deletion job runs. This parameter controls how frequently the orphan file deletion optimizer will run to clean up orphan files. The value must be between 3 and 168 hours (7 days). If an input is not provided, the default value 24 will be used.</p>"
                     }
                 }
             },
@@ -26463,6 +26580,12 @@
                     "target": "com.amazonaws.glue#NullableBoolean",
                     "traits": {
                         "smithy.api#documentation": "<p>If set to false, snapshots are only deleted from table metadata, and the underlying data and metadata files are not deleted.</p>"
+                    }
+                },
+                "runRateInHours": {
+                    "target": "com.amazonaws.glue#NullableInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The interval in hours between retention job runs. This parameter controls how frequently the retention optimizer will run to clean up expired snapshots. The value must be between 3 and 168 hours (7 days). If an input is not provided, the default value 24 will be used.</p>"
                     }
                 }
             },
@@ -41840,6 +41963,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A <code>TableOptimizerRun</code> object representing the last run of the table optimizer.</p>"
                     }
+                },
+                "configurationSource": {
+                    "target": "com.amazonaws.glue#ConfigurationSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Specifies the source of the optimizer configuration. This indicates how the table optimizer was configured and which entity or service \n      initiated the configuration. \n    </p>"
+                    }
                 }
             },
             "traits": {
@@ -44779,7 +44908,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the update operations to be applied to an existing Iceberg table in AWS Glue Data Catalog, defining the new state of the table metadata.\n    </p>"
+                "smithy.api#documentation": "<p>Contains the update operations to be applied to an existing Iceberg table inGlue Data Catalog, defining the new state of the table metadata.\n    </p>"
             }
         },
         "com.amazonaws.glue#UpdateIntegrationResourceProperty": {
