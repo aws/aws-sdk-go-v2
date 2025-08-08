@@ -16,6 +16,7 @@ import (
 	s3types "github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
+// DownloadDirectoryInput represents a request to the DownloadDirectory() call
 type DownloadDirectoryInput struct {
 	// Bucket where objects are downloaded from
 	Bucket string
@@ -66,6 +67,13 @@ type objectEntry struct {
 	path string
 }
 
+// DownloadDirectory traverses a s3 bucket and intelligently downloads all valid objects
+// to local directory in parallel across multiple goroutines. You can configure the concurrency,
+// valid object filtering and hierarchical file naming through the Options and input parameters.
+//
+// Additional functional options can be provided to configure the individual directory
+// download. These options are copies of the original Options instance, the client of which DownloadDirectory is called from.
+// Modifying the options will not impact the original Client and Options instance.
 func (c *Client) DownloadDirectory(ctx context.Context, input *DownloadDirectoryInput, opts ...func(*Options)) (*DownloadDirectoryOutput, error) {
 	fileInfo, err := os.Stat(input.Destination)
 	if err != nil {
@@ -126,7 +134,7 @@ func (d *directoryDownloader) downloadDirectory(ctx context.Context) (*DownloadD
 
 		for _, o := range listOutput.Contents {
 			key := aws.ToString(o.Key)
-			if strings.HasSuffix(key, "/") {
+			if strings.HasSuffix(key, "/") || strings.HasSuffix(key, d.in.S3Delimiter) {
 				continue // skip folder object
 			}
 			if d.in.Filter != nil && !d.in.Filter.FilterObject(o) {
@@ -163,7 +171,11 @@ func (d *directoryDownloader) init() {
 }
 
 func (d *directoryDownloader) getLocalPath(key string) (string, error) {
-	path := filepath.Join(d.in.Destination, strings.ReplaceAll(strings.TrimPrefix(key, d.in.KeyPrefix), d.in.S3Delimiter, string(os.PathSeparator)))
+	keyprefix := d.in.KeyPrefix
+	if keyprefix != "" && !strings.HasSuffix(keyprefix, d.in.S3Delimiter) {
+		keyprefix = keyprefix + d.in.S3Delimiter
+	}
+	path := filepath.Join(d.in.Destination, strings.ReplaceAll(strings.TrimPrefix(key, keyprefix), d.in.S3Delimiter, string(os.PathSeparator)))
 	relPath, err := filepath.Rel(d.in.Destination, path)
 	if err != nil {
 		return "", err

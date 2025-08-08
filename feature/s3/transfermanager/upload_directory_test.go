@@ -409,10 +409,9 @@ func TestUploadDirectory(t *testing.T) {
 				} else if e, a := c.expectErr, err.Error(); !strings.Contains(a, e) {
 					t.Fatalf("expect %s error message to be in %s", e, a)
 				}
-			} else {
-				if c.expectErr != "" {
-					t.Fatalf("expect error %s, got none", c.expectErr)
-				}
+			} else if c.expectErr != "" {
+				t.Fatalf("expect error %s, got none", c.expectErr)
+
 			}
 
 			if err != nil {

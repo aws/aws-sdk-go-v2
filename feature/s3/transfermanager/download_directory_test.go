@@ -1,0 +1,511 @@
+package transfermanager
+
+import (
+	"bytes"
+	"context"
+	"fmt"
+	"io/ioutil"
+	"os"
+	"path/filepath"
+	"reflect"
+	"runtime"
+	"sort"
+	"strings"
+	"testing"
+
+	"github.com/aws/aws-sdk-go-v2/aws"
+	s3testing "github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/internal/testing"
+	"github.com/aws/aws-sdk-go-v2/service/s3"
+	s3types "github.com/aws/aws-sdk-go-v2/service/s3/types"
+)
+
+type objectkeyFilter struct {
+	keyword string
+}
+
+func (of *objectkeyFilter) FilterObject(object s3types.Object) bool {
+	if strings.Contains(aws.ToString(object.Key), of.keyword) {
+		return false
+	}
+	return true
+}
+
+type objectkeyCallback struct {
+	keyword string
+}
+
+func (oc *objectkeyCallback) UpdateRequest(in *GetObjectInput) {
+	if in.Key == oc.keyword {
+		in.Key = in.Key + "gotyou"
+	}
+}
+
+func TestDownloadDirectory(t *testing.T) {
+	_, filename, _, _ := runtime.Caller(0)
+	root := filepath.Join(filepath.Dir(filename), "testdata")
+
+	cases := map[string]struct {
+		destination             string
+		keyPrefix               string
+		objectsLists            [][]s3types.Object
+		continuationTokens      []string
+		filter                  ObjectFilter
+		s3Delimiter             string
+		callback                GetRequestCallback
+		getobjectFn             func(*s3testing.TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error)
+		expectTokens            []string
+		expectKeys              []string
+		expectFiles             []string
+		expectErr               string
+		expectObjectsDownloaded int
+	}{
+		"single object": {
+			destination: "single-object",
+			objectsLists: [][]s3types.Object{
+				{
+					{
+						Key: aws.String("foo/bar"),
+					},
+				},
+			},
+			expectTokens:            []string{""},
+			expectKeys:              []string{"foo/bar"},
+			expectFiles:             []string{"foo/bar"},
+			expectObjectsDownloaded: 1,
+		},
+		"multiple objects": {
+			destination: "multiple-objects",
+			objectsLists: [][]s3types.Object{
+				{
+					{
+						Key: aws.String("foo/bar"),
+					},
+					{
+						Key: aws.String("baz"),
+					},
+					{
+						Key: aws.String("foo/zoo/bar"),
+					},
+					{
+						Key: aws.String("foo/zoo/oii/bababoii"),
+					},
+				},
+			},
+			expectTokens:            []string{""},
+			expectKeys:              []string{"foo/bar", "baz", "foo/zoo/bar", "foo/zoo/oii/bababoii"},
+			expectFiles:             []string{"foo/bar", "baz", "foo/zoo/bar", "foo/zoo/oii/bababoii"},
+			expectObjectsDownloaded: 4,
+		},
+		"multiple objects paginated": {
+			destination: "multiple-objects-paginated",
+			objectsLists: [][]s3types.Object{
+				{
+					{
+						Key: aws.String("foo/bar"),
+					},
+					{
+						Key: aws.String("baz"),
+					},
+				},
+				{
+					{
+						Key: aws.String("foo/zoo/bar"),
+					},
+					{
+						Key: aws.String("foo/zoo/oii/bababoii"),
+					},
+				},
+				{
+					{
+						Key: aws.String("foo/zoo/baz"),
+					},
+					{
+						Key: aws.String("foo/zoo/oii/yee"),
+					},
+				},
+			},
+			continuationTokens:      []string{"token1", "token2"},
+			expectTokens:            []string{"", "token1", "token2"},
+			expectKeys:              []string{"foo/bar", "baz", "foo/zoo/bar", "foo/zoo/oii/bababoii", "foo/zoo/baz", "foo/zoo/oii/yee"},
+			expectObjectsDownloaded: 6,
+		},
+		"multiple objects containing folder object": {
+			destination: "multiple-objects-with-folder-object",
+			objectsLists: [][]s3types.Object{
+				{
+					{
+						Key: aws.String("foo/bar"),
+					},
+					{
+						Key: aws.String("baz"),
+					},
+					{
+						Key: aws.String("foo/zoo/"),
+					},
+				},
+			},
+			expectTokens:            []string{""},
+			expectKeys:              []string{"foo/bar", "baz"},
+			expectFiles:             []string{"foo/bar", "baz"},
+			expectObjectsDownloaded: 2,
+		},
+		"single object named with keyprefix": {
+			destination: "single-object-named-with-keyprefix",
+			objectsLists: [][]s3types.Object{
+				{
+					{
+						Key: aws.String("a"),
+					},
+				},
+			},
+			keyPrefix:               "a",
+			expectTokens:            []string{""},
+			expectKeys:              []string{"a"},
+			expectFiles:             []string{"a"},
+			expectObjectsDownloaded: 1,
+		},
+		"multiple objects with keyprefix without delimiter suffix": {
+			destination: "multiple-objects-with-keyprefix-no-delimiter",
+			objectsLists: [][]s3types.Object{
+				{
+					{
+						Key: aws.String("a/"),
+					},
+					{
+						Key: aws.String("a/b"),
+					},
+					{
+						Key: aws.String("ad"),
+					},
+					{
+						Key: aws.String("ab/c"),
+					},
+					{
+						Key: aws.String("ae"),
+					},
+				},
+			},
+			keyPrefix:               "a",
+			expectTokens:            []string{""},
+			expectKeys:              []string{"a/b", "ad", "ab/c", "ae"},
+			expectFiles:             []string{"b", "ad", "ab/c", "ae"},
+			expectObjectsDownloaded: 4,
+		},
+		"multiple objects with keyprefix with default delimiter suffix": {
+			destination: "multiple-objects-with-keyprefix-default-delimiter",
+			objectsLists: [][]s3types.Object{
+				{
+					{
+						Key: aws.String("a/"),
+					},
+					{
+						Key: aws.String("a/b"),
+					},
+					{
+						Key: aws.String("a/c"),
+					},
+					{
+						Key: aws.String("ad"),
+					},
+					{
+						Key: aws.String("ab/c/d"),
+					},
+					{
+						Key: aws.String("ab/c/e"),
+					},
+				},
+			},
+			keyPrefix:               "a/",
+			expectTokens:            []string{""},
+			expectKeys:              []string{"a/b", "a/c", "ad", "ab/c/d", "ab/c/e"},
+			expectFiles:             []string{"b", "c", "ad", "ab/c/d", "ab/c/e"},
+			expectObjectsDownloaded: 5,
+		},
+		"multiple objects with keyprefix with customized delimiter suffix": {
+			destination: "multiple-objects-with-keyprefix-customized-delimiter",
+			objectsLists: [][]s3types.Object{
+				{
+					{
+						Key: aws.String("ab/c*d"),
+					},
+					{
+						Key: aws.String("ab/c/e"),
+					},
+					{
+						Key: aws.String("ab/c*f*g"),
+					},
+				},
+			},
+			keyPrefix:               "ab/c",
+			s3Delimiter:             "*",
+			expectTokens:            []string{""},
+			expectKeys:              []string{"ab/c*d", "ab/c/e", "ab/c*f*g"},
+			expectFiles:             []string{"d", "ab/c/e", "f*g"},
+			expectObjectsDownloaded: 3,
+		},
+		"error when path resolved from objects key out of destination scope": {
+			destination: "error-bucket",
+			objectsLists: [][]s3types.Object{
+				{
+					{
+						Key: aws.String("a/"),
+					},
+					{
+						Key: aws.String("a/b"),
+					},
+					{
+						Key: aws.String("a/c"),
+					},
+					{
+						Key: aws.String(filepath.Join("a", "..", "..", "d")),
+					},
+				},
+			},
+			expectErr: "outside of destination",
+		},
+		"multiple objects with filter applied": {
+			destination: "multiple-objects-with-filter-applied",
+			objectsLists: [][]s3types.Object{
+				{
+					{
+						Key: aws.String("foo/bar"),
+					},
+					{
+						Key: aws.String("baz"),
+					},
+					{
+						Key: aws.String("foo/zoo/bar"),
+					},
+					{
+						Key: aws.String("foo/zoo/oii/bababoii"),
+					},
+				},
+			},
+			filter:                  &objectkeyFilter{"bababoii"},
+			expectTokens:            []string{""},
+			expectKeys:              []string{"foo/bar", "baz", "foo/zoo/bar"},
+			expectFiles:             []string{"foo/bar", "baz", "foo/zoo/bar"},
+			expectObjectsDownloaded: 3,
+		},
+		"multiple objects with keyprefix and filter": {
+			destination: "multiple-objects-with-keyprefix-and-filter",
+			objectsLists: [][]s3types.Object{
+				{
+					{
+						Key: aws.String("a/"),
+					},
+					{
+						Key: aws.String("a/b"),
+					},
+					{
+						Key: aws.String("ad"),
+					},
+					{
+						Key: aws.String("ab/c"),
+					},
+					{
+						Key: aws.String("ae"),
+					},
+				},
+			},
+			keyPrefix:               "a",
+			filter:                  &objectkeyFilter{"e"},
+			expectTokens:            []string{""},
+			expectKeys:              []string{"a/b", "ad", "ab/c"},
+			expectFiles:             []string{"b", "ad", "ab/c"},
+			expectObjectsDownloaded: 3,
+		},
+		"multiple objects with keyprefix and request callback": {
+			destination: "multiple-objects-with-keyprefix-and-callback",
+			objectsLists: [][]s3types.Object{
+				{
+					{
+						Key: aws.String("a/"),
+					},
+					{
+						Key: aws.String("a/b"),
+					},
+					{
+						Key: aws.String("ad"),
+					},
+					{
+						Key: aws.String("ab/c"),
+					},
+					{
+						Key: aws.String("ae"),
+					},
+				},
+			},
+			keyPrefix:               "a",
+			callback:                &objectkeyCallback{"ad"},
+			expectTokens:            []string{""},
+			expectKeys:              []string{"a/b", "adgotyou", "ab/c", "ae"},
+			expectFiles:             []string{"b", "ad", "ab/c", "ae"},
+			expectObjectsDownloaded: 4,
+		},
+		"multiple objects paginated with keyprefix, delimiter, filter and callback": {
+			destination: "multiple-objects-with-keyprefix-delimiter-filter-callback",
+			objectsLists: [][]s3types.Object{
+				{
+					{
+						Key: aws.String("a&"),
+					},
+					{
+						Key: aws.String("a&b"),
+					},
+					{
+						Key: aws.String("a@b"),
+					},
+				},
+				{
+					{
+						Key: aws.String("a&foo&bar"),
+					},
+					{
+						Key: aws.String("ac"),
+					},
+					{
+						Key: aws.String("ac@d&e"),
+					},
+				},
+				{
+					{
+						Key: aws.String("ac/d/unwanted"),
+					},
+					{
+						Key: aws.String("a&k.b"),
+					},
+				},
+			},
+			continuationTokens:      []string{"token1", "token2"},
+			s3Delimiter:             "&",
+			keyPrefix:               "a",
+			filter:                  &objectkeyFilter{"unwanted"},
+			callback:                &objectkeyCallback{"a&k.b"},
+			expectTokens:            []string{"", "token1", "token2"},
+			expectKeys:              []string{"a&b", "a@b", "a&foo&bar", "ac", "ac@d&e", "a&k.bgotyou"},
+			expectFiles:             []string{"b", "a@b", "foo&bar", "ac", "ac@d&e", "k.b"},
+			expectObjectsDownloaded: 6,
+		},
+		"error when getting object": {
+			destination: "error-bucket",
+			objectsLists: [][]s3types.Object{
+				{
+					{
+						Key: aws.String("foo/bar"),
+					},
+					{
+						Key: aws.String("baz"),
+					},
+				},
+				{
+					{
+						Key: aws.String("foo/zoo/bar"),
+					},
+					{
+						Key: aws.String("foo/zoo/oii/bababoii"),
+					},
+				},
+				{
+					{
+						Key: aws.String("foo/zoo/baz"),
+					},
+					{
+						Key: aws.String("foo/zoo/oii/yee"),
+					},
+				},
+			},
+			continuationTokens: []string{"token1", "token2"},
+			getobjectFn: func(c *s3testing.TransferManagerLoggingClient, in *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+				if aws.ToString(in.Key) == "foo/zoo/bar" {
+					return nil, fmt.Errorf("mocking error")
+				}
+				return &s3.GetObjectOutput{
+					Body:          ioutil.NopCloser(bytes.NewReader(c.Data)),
+					ContentLength: aws.Int64(int64(len(c.Data))),
+					PartsCount:    aws.Int32(c.PartsCount),
+					ETag:          aws.String(etag),
+				}, nil
+			},
+			expectErr: "mocking error",
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			s3Client, params := s3testing.NewDownloadDirectoryClient()
+			s3Client.ListObjectsData = c.objectsLists
+			s3Client.ContinuationTokens = c.continuationTokens
+			if c.getobjectFn == nil {
+				s3Client.GetObjectFn = s3testing.PartGetObjectFn
+			} else {
+				s3Client.GetObjectFn = c.getobjectFn
+			}
+			s3Client.Data = make([]byte, 0)
+			s3Client.PartsCount = 1
+			mgr := New(s3Client, Options{})
+
+			dstPath := filepath.Join(root, c.destination)
+			defer os.RemoveAll(dstPath)
+			resp, err := mgr.DownloadDirectory(context.Background(), &DownloadDirectoryInput{
+				Bucket:      "mock-bucket",
+				Destination: dstPath,
+				KeyPrefix:   c.keyPrefix,
+				S3Delimiter: c.s3Delimiter,
+				Filter:      c.filter,
+				Callback:    c.callback,
+			})
+
+			if err != nil {
+				if c.expectErr == "" {
+					t.Fatalf("expect not error, got %v", err)
+				} else if e, a := c.expectErr, err.Error(); !strings.Contains(a, e) {
+					t.Fatalf("expect %s error message to be in %s", e, a)
+				}
+			} else if c.expectErr != "" {
+				t.Fatalf("expect error %s, got none", c.expectErr)
+			}
+			if c.expectErr != "" {
+				return
+			}
+
+			if e, a := c.expectObjectsDownloaded, resp.ObjectsDownloaded; e != a {
+				t.Errorf("expect %d objects downloaded, got %d", e, a)
+			}
+
+			var actualTokens []string
+			var actualKeys []string
+			for _, param := range *params {
+				if input, ok := param.(*s3.ListObjectsV2Input); ok {
+					actualTokens = append(actualTokens, aws.ToString(input.ContinuationToken))
+				} else if input, ok := param.(*s3.GetObjectInput); ok {
+					actualKeys = append(actualKeys, aws.ToString(input.Key))
+				} else {
+					t.Fatalf("error when casting captured inputs")
+				}
+			}
+
+			if e, a := c.expectTokens, actualTokens; !reflect.DeepEqual(e, a) {
+				t.Errorf("expect continuation tokens to be %v, got %v", e, a)
+			}
+
+			sort.Strings(actualKeys)
+			sort.Strings(c.expectKeys)
+			if e, a := c.expectKeys, actualKeys; !reflect.DeepEqual(e, a) {
+				t.Errorf("expect downloaded keys to be %v, got %v", e, a)
+			}
+
+			delimiter := c.s3Delimiter
+			if delimiter == "" {
+				delimiter = "/"
+			}
+			for _, file := range c.expectFiles {
+				path := filepath.Join(dstPath, strings.ReplaceAll(file, delimiter, string(os.PathSeparator)))
+				_, err := os.Stat(path)
+				if os.IsNotExist(err) {
+					t.Errorf("expect %s to be downloaded, got none", path)
+				}
+			}
+		})
+	}
+}
