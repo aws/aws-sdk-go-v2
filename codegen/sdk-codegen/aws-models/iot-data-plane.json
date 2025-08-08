@@ -29,6 +29,22 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.iotdataplane#CleanSession": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
+        },
+        "com.amazonaws.iotdataplane#ClientId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[^$]"
+            }
+        },
         "com.amazonaws.iotdataplane#ConflictException": {
             "type": "structure",
             "members": {
@@ -50,6 +66,72 @@
         },
         "com.amazonaws.iotdataplane#CorrelationData": {
             "type": "string"
+        },
+        "com.amazonaws.iotdataplane#DeleteConnection": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotdataplane#DeleteConnectionRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotdataplane#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disconnects a connected MQTT client from Amazon Web Services IoT Core. When you disconnect a client, Amazon Web Services IoT Core closes the client's network connection and optionally cleans the session state.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/connections/{clientId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotdataplane#DeleteConnectionRequest": {
+            "type": "structure",
+            "members": {
+                "clientId": {
+                    "target": "com.amazonaws.iotdataplane#ClientId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the MQTT client to disconnect. The client ID can't start with a dollar sign ($).</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "cleanSession": {
+                    "target": "com.amazonaws.iotdataplane#CleanSession",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether to remove the client's session state when disconnecting. Set to <code>TRUE</code> to delete all session information, including subscriptions and queued messages. Set to <code>FALSE</code> to preserve the session state. By default, this is set to <code>FALSE</code> (preserves the session state).</p>",
+                        "smithy.api#httpQuery": "cleanSession"
+                    }
+                },
+                "preventWillMessage": {
+                    "target": "com.amazonaws.iotdataplane#PreventWillMessage",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Controls if Amazon Web Services IoT Core publishes the client's Last Will and Testament (LWT) message upon disconnection. Set to <code>TRUE</code> to prevent publishing the LWT message. Set to <code>FALSE</code> to allow publishing. By default, this is set to <code>FALSE</code> (allows publishing the LWT message).</p>",
+                        "smithy.api#httpQuery": "preventWillMessage"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.iotdataplane#DeleteThingShadow": {
             "type": "operation",
@@ -135,6 +217,19 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.iotdataplane#ForbiddenException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.iotdataplane#errorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The caller isn't authorized to make the request.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
         "com.amazonaws.iotdataplane#GetRetainedMessage": {
             "type": "operation",
             "input": {
@@ -167,7 +262,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the details of a single retained message for the specified topic.</p>\n         <p>This action returns the message payload of the retained message, which can \n      incur messaging costs. To list only the topic names of the retained messages, call\n      <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_iotdata_ListRetainedMessages.html\">ListRetainedMessages</a>.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiotfleethubfordevicemanagement.html#awsiotfleethubfordevicemanagement-actions-as-permissions\">GetRetainedMessage</a> action.</p>\n         <p>For more information about messaging costs, see <a href=\"http://aws.amazon.com/iot-core/pricing/#Messaging\">Amazon Web Services IoT Core\n      pricing - Messaging</a>.</p>",
+                "smithy.api#documentation": "<p>Gets the details of a single retained message for the specified topic.</p>\n         <p>This action returns the message payload of the retained message, which can \n      incur messaging costs. To list only the topic names of the retained messages, call\n      <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_iotdata_ListRetainedMessages.html\">ListRetainedMessages</a>.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html\">GetRetainedMessage</a> action.</p>\n         <p>For more information about messaging costs, see <a href=\"http://aws.amazon.com/iot-core/pricing/#Messaging\">Amazon Web Services IoT Core\n      pricing - Messaging</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/retainedMessage/{topic}",
@@ -368,6 +463,9 @@
             "type": "service",
             "version": "2015-05-28",
             "operations": [
+                {
+                    "target": "com.amazonaws.iotdataplane#DeleteConnection"
+                },
                 {
                     "target": "com.amazonaws.iotdataplane#DeleteThingShadow"
                 },
@@ -1703,7 +1801,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists summary information about the retained messages stored for the account.</p>\n         <p>This action returns only the topic names of the retained messages. It doesn't \n      return any message payloads. Although this action doesn't return a message payload,\n      it can still incur messaging costs.</p>\n         <p>To get the message payload of a retained message, call\n      <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_iotdata_GetRetainedMessage.html\">GetRetainedMessage</a>\n      with the topic name of the retained message.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiotfleethubfordevicemanagement.html#awsiotfleethubfordevicemanagement-actions-as-permissions\">ListRetainedMessages</a> action.</p>\n         <p>For more information about messaging costs, see <a href=\"http://aws.amazon.com/iot-core/pricing/#Messaging\">Amazon Web Services IoT Core\n      pricing - Messaging</a>.</p>",
+                "smithy.api#documentation": "<p>Lists summary information about the retained messages stored for the account.</p>\n         <p>This action returns only the topic names of the retained messages. It doesn't \n      return any message payloads. Although this action doesn't return a message payload,\n      it can still incur messaging costs.</p>\n         <p>To get the message payload of a retained message, call\n      <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_iotdata_GetRetainedMessage.html\">GetRetainedMessage</a>\n      with the topic name of the retained message.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html\">ListRetainedMessages</a> action.</p>\n         <p>For more information about messaging costs, see <a href=\"http://aws.amazon.com/iot-core/pricing/#Messaging\">Amazon Web Services IoT Core\n      pricing - Messaging</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/retainedMessage",
@@ -1832,6 +1930,12 @@
             "type": "long",
             "traits": {
                 "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.iotdataplane#PreventWillMessage": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
             }
         },
         "com.amazonaws.iotdataplane#Publish": {
