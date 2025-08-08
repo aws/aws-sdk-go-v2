@@ -47,6 +47,7 @@
         "service/appstream",
         "service/appsync",
         "service/apptest",
+        "service/arcregionswitch",
         "service/arczonalshift",
         "service/artifact",
         "service/athena",
