@@ -1,8 +1,0 @@
-{
-    "id": "29bce66d-981b-4450-897f-8e59d6784356",
-    "type": "feature",
-    "description": "Removed incorrect endpoint tests",
-    "modules": [
-        "service/networkflowmonitor"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "2a62a70d-1aa8-4ece-9563-8e2e42cb9c21",
-    "type": "feature",
-    "description": "Removed incorrect endpoint tests",
-    "modules": [
-        "service/iotmanagedintegrations"
-    ]
-}

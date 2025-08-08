@@ -1,8 +1,0 @@
-{
-    "id": "97f1ec8a-1b72-4e07-9fb0-21e8700ff008",
-    "type": "feature",
-    "description": "Adds support for GB200 UltraServers in Amazon SageMaker training jobs, training plans, and HyperPod clusters",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

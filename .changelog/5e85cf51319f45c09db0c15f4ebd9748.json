@@ -1,8 +1,0 @@
-{
-    "id": "5e85cf51-319f-45c0-9db0-c15f4ebd9748",
-    "type": "feature",
-    "description": "Removed incorrect endpoint tests",
-    "modules": [
-        "service/backupsearch"
-    ]
-}

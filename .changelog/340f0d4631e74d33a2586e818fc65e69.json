@@ -1,8 +1,0 @@
-{
-    "id": "340f0d46-31e7-4d33-a258-6e818fc65e69",
-    "type": "feature",
-    "description": "Add CVSSV4 to Vulnerability Search API and update enable/disable account id list length to 5",
-    "modules": [
-        "service/inspector2"
-    ]
-}

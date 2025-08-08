@@ -1,8 +1,0 @@
-{
-    "id": "654a7524-ab27-485f-ad4a-d2545199b9d5",
-    "type": "feature",
-    "description": "Removed incorrect endpoint tests",
-    "modules": [
-        "service/notifications"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "d4f9eb87-e20a-4f2f-8e9e-284b81a678f1",
-    "type": "feature",
-    "description": "Removed incorrect endpoint tests",
-    "modules": [
-        "service/securityir"
-    ]
-}

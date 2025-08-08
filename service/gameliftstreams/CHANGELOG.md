@@ -1,3 +1,7 @@
+# v1.4.0 (2025-08-08)
+
+* **Feature**: Removed incorrect endpoint tests
+
 # v1.3.1 (2025-08-07)
 
 * **Documentation**: Adds Proton 9.0-2 to the list of runtime environment options available when creating an Amazon GameLift Streams application

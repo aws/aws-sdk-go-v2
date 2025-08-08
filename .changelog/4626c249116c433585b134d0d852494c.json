@@ -1,8 +1,0 @@
-{
-    "id": "4626c249-116c-4335-85b1-34d0d852494c",
-    "type": "documentation",
-    "description": "Update documentation to use key ARN only in OutputEncryptionKMSKeyId request parameter",
-    "modules": [
-        "service/transcribe"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.42.0 (2025-08-08)
+
+* **Feature**: Add CVSSV4 to Vulnerability Search API and update enable/disable account id list length to 5
+
 # v1.41.0 (2025-08-04)
 
 * **Feature**: Support configurable auth scheme preferences in service clients via AWS_AUTH_SCHEME_PREFERENCE in the environment, auth_scheme_preference in the config file, and through in-code settings on LoadDefaultConfig and client constructor methods.

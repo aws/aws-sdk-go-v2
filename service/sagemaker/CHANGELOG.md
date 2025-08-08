@@ -1,3 +1,7 @@
+# v1.206.0 (2025-08-08)
+
+* **Feature**: Adds support for GB200 UltraServers in Amazon SageMaker training jobs, training plans, and HyperPod clusters
+
 # v1.205.0 (2025-08-05)
 
 * **Feature**: Add support for SageMaker Hyperpod continuous scaling and custom AMI; Introduce new APIs: ListClusterEvents, DescribeClusterEvent, BatchAddClusterNodes

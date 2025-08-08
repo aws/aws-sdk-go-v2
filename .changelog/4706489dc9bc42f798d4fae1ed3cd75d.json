@@ -1,8 +1,0 @@
-{
-    "id": "4706489d-c9bc-42f7-98d4-fae1ed3cd75d",
-    "type": "feature",
-    "description": "Removed incorrect endpoint tests",
-    "modules": [
-        "service/partnercentralselling"
-    ]
-}

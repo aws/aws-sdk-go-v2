@@ -1,3 +1,51 @@
+# Release (2025-08-08)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationsignals`: [v1.14.0](service/applicationsignals/CHANGELOG.md#v1140-2025-08-08)
+  * **Feature**: Removed incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/backupsearch`: [v1.4.0](service/backupsearch/CHANGELOG.md#v140-2025-08-08)
+  * **Feature**: Removed incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator`: [v1.8.0](service/bcmpricingcalculator/CHANGELOG.md#v180-2025-08-08)
+  * **Feature**: Removed incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/billing`: [v1.5.0](service/billing/CHANGELOG.md#v150-2025-08-08)
+  * **Feature**: Removed incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.134.0](service/connect/CHANGELOG.md#v11340-2025-08-08)
+  * **Feature**: This release adds a new API GetContactMetrics for Amazon Connect.
+* `github.com/aws/aws-sdk-go-v2/service/dsql`: [v1.8.0](service/dsql/CHANGELOG.md#v180-2025-08-08)
+  * **Feature**: Removed incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/gameliftstreams`: [v1.4.0](service/gameliftstreams/CHANGELOG.md#v140-2025-08-08)
+  * **Feature**: Removed incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.42.0](service/inspector2/CHANGELOG.md#v1420-2025-08-08)
+  * **Feature**: Add CVSSV4 to Vulnerability Search API and update enable/disable account id list length to 5
+* `github.com/aws/aws-sdk-go-v2/service/invoicing`: [v1.5.0](service/invoicing/CHANGELOG.md#v150-2025-08-08)
+  * **Feature**: Removed incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/iotdataplane`: [v1.30.0](service/iotdataplane/CHANGELOG.md#v1300-2025-08-08)
+  * **Feature**: Adding DeleteConnection API to IoT Data Plane
+* `github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations`: [v1.4.0](service/iotmanagedintegrations/CHANGELOG.md#v140-2025-08-08)
+  * **Feature**: Removed incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/keyspacesstreams`: [v1.3.0](service/keyspacesstreams/CHANGELOG.md#v130-2025-08-08)
+  * **Feature**: Removed incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/mpa`: [v1.3.0](service/mpa/CHANGELOG.md#v130-2025-08-08)
+  * **Feature**: Removed incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/networkflowmonitor`: [v1.7.0](service/networkflowmonitor/CHANGELOG.md#v170-2025-08-08)
+  * **Feature**: Removed incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/notifications`: [v1.5.0](service/notifications/CHANGELOG.md#v150-2025-08-08)
+  * **Feature**: Removed incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/notificationscontacts`: [v1.4.0](service/notificationscontacts/CHANGELOG.md#v140-2025-08-08)
+  * **Feature**: Removed incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralselling`: [v1.8.0](service/partnercentralselling/CHANGELOG.md#v180-2025-08-08)
+  * **Feature**: Removed incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/s3vectors`: [v1.3.0](service/s3vectors/CHANGELOG.md#v130-2025-08-08)
+  * **Feature**: Removed incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.206.0](service/sagemaker/CHANGELOG.md#v12060-2025-08-08)
+  * **Feature**: Adds support for GB200 UltraServers in Amazon SageMaker training jobs, training plans, and HyperPod clusters
+* `github.com/aws/aws-sdk-go-v2/service/securityir`: [v1.6.0](service/securityir/CHANGELOG.md#v160-2025-08-08)
+  * **Feature**: Removed incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.49.1](service/transcribe/CHANGELOG.md#v1491-2025-08-08)
+  * **Documentation**: Update documentation to use key ARN only in OutputEncryptionKMSKeyId request parameter
+* `github.com/aws/aws-sdk-go-v2/service/workspacesinstances`: [v1.3.0](service/workspacesinstances/CHANGELOG.md#v130-2025-08-08)
+  * **Feature**: Removed incorrect endpoint tests
+
 # Release (2025-08-07)
 
 ## Module Highlights
