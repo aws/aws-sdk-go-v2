@@ -977,6 +977,9 @@ type ClaimedPhoneNumberSummary struct {
 // A list of conditions which would be applied together with an AND condition.
 type CommonAttributeAndCondition struct {
 
+	// A leaf node condition which can be used to specify a hierarchy group condition.
+	HierarchyGroupCondition *HierarchyGroupCondition
+
 	// A leaf node condition which can be used to specify a tag condition.
 	TagConditions []TagCondition
 
@@ -1517,6 +1520,51 @@ type ContactFlowVersionSummary struct {
 
 	noSmithyDocumentSerde
 }
+
+// The object that contains information about metric being requested.
+type ContactMetricInfo struct {
+
+	// The name of the metric being retrieved in type String.
+	//
+	// This member is required.
+	Name ContactMetricName
+
+	noSmithyDocumentSerde
+}
+
+// Object containing information about metric requested for the contact.
+type ContactMetricResult struct {
+
+	// The name of the metric being retrieved in type String.
+	//
+	// This member is required.
+	Name ContactMetricName
+
+	// Object result associated with the metric received.
+	//
+	// This member is required.
+	Value ContactMetricValue
+
+	noSmithyDocumentSerde
+}
+
+// Object which contains the number.
+//
+// The following types satisfy this interface:
+//
+//	ContactMetricValueMemberNumber
+type ContactMetricValue interface {
+	isContactMetricValue()
+}
+
+// The number of type Double. This number is the contact's position in queue.
+type ContactMetricValueMemberNumber struct {
+	Value float64
+
+	noSmithyDocumentSerde
+}
+
+func (*ContactMetricValueMemberNumber) isContactMetricValue() {}
 
 // Information of returned contact.
 type ContactSearchSummary struct {
@@ -2102,17 +2150,9 @@ type EmailMessageReference struct {
 type EmailRecipient struct {
 
 	// Address of the email recipient.
-	//
-	// Type: String
-	//
-	// Length Constraints: Minimum length of 1. Maximum length of 256.
 	Address *string
 
 	// Display name of the email recipient.
-	//
-	// Type: String
-	//
-	// Length Constraints: Minimum length of 1. Maximum length of 256.
 	DisplayName *string
 
 	noSmithyDocumentSerde
@@ -3277,13 +3317,192 @@ type HierarchyStructureUpdate struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about a historical metric. For a description of each
-// metric, see [Metrics definitions]in the Amazon Connect Administrator Guide.
-//
-// [Metrics definitions]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html
+// Contains information about a historical metric.
 type HistoricalMetric struct {
 
-	// The name of the metric.
+	// The name of the metric. Following is a list of each supported metric mapped to
+	// the UI name, linked to a detailed description in the Amazon Connect
+	// Administrator Guide.
+	//
+	// ABANDON_TIME Unit: SECONDS
+	//
+	// Statistic: AVG
+	//
+	// UI name: [Average queue abandon time]
+	//
+	// AFTER_CONTACT_WORK_TIME Unit: SECONDS
+	//
+	// Statistic: AVG
+	//
+	// UI name: [After contact work time]
+	//
+	// API_CONTACTS_HANDLED Unit: COUNT
+	//
+	// Statistic: SUM
+	//
+	// UI name: [API contacts handled]
+	//
+	// AVG_HOLD_TIME Unit: SECONDS
+	//
+	// Statistic: AVG
+	//
+	// UI name: [Average customer hold time]
+	//
+	// CALLBACK_CONTACTS_HANDLED Unit: COUNT
+	//
+	// Statistic: SUM
+	//
+	// UI name: [Callback contacts handled]
+	//
+	// CONTACTS_ABANDONED Unit: COUNT
+	//
+	// Statistic: SUM
+	//
+	// UI name: [Contacts abandoned]
+	//
+	// CONTACTS_AGENT_HUNG_UP_FIRST Unit: COUNT
+	//
+	// Statistic: SUM
+	//
+	// UI name: [Contacts agent hung up first]
+	//
+	// CONTACTS_CONSULTED Unit: COUNT
+	//
+	// Statistic: SUM
+	//
+	// UI name: [Contacts consulted]
+	//
+	// CONTACTS_HANDLED Unit: COUNT
+	//
+	// Statistic: SUM
+	//
+	// UI name: [Contacts handled]
+	//
+	// CONTACTS_HANDLED_INCOMING Unit: COUNT
+	//
+	// Statistic: SUM
+	//
+	// UI name: [Contacts handled incoming]
+	//
+	// CONTACTS_HANDLED_OUTBOUND Unit: COUNT
+	//
+	// Statistic: SUM
+	//
+	// UI name: [Contacts handled outbound]
+	//
+	// CONTACTS_HOLD_ABANDONS Unit: COUNT
+	//
+	// Statistic: SUM
+	//
+	// UI name: [Contacts hold disconnect]
+	//
+	// CONTACTS_MISSED Unit: COUNT
+	//
+	// Statistic: SUM
+	//
+	// UI name: [AGENT_NON_RESPONSE]
+	//
+	// CONTACTS_QUEUED Unit: COUNT
+	//
+	// Statistic: SUM
+	//
+	// UI name: [Contacts queued]
+	//
+	// CONTACTS_TRANSFERRED_IN Unit: COUNT
+	//
+	// Statistic: SUM
+	//
+	// UI name: [Contacts transferred in]
+	//
+	// CONTACTS_TRANSFERRED_IN_FROM_QUEUE Unit: COUNT
+	//
+	// Statistic: SUM
+	//
+	// UI name: [Contacts transferred out queue]
+	//
+	// CONTACTS_TRANSFERRED_OUT Unit: COUNT
+	//
+	// Statistic: SUM
+	//
+	// UI name: [Contacts transferred out]
+	//
+	// CONTACTS_TRANSFERRED_OUT_FROM_QUEUE Unit: COUNT
+	//
+	// Statistic: SUM
+	//
+	// UI name: [Contacts transferred out queue]
+	//
+	// HANDLE_TIME Unit: SECONDS
+	//
+	// Statistic: AVG
+	//
+	// UI name: [Average handle time]
+	//
+	// INTERACTION_AND_HOLD_TIME Unit: SECONDS
+	//
+	// Statistic: AVG
+	//
+	// UI name: [Average agent interaction and customer hold time]
+	//
+	// INTERACTION_TIME Unit: SECONDS
+	//
+	// Statistic: AVG
+	//
+	// UI name: [Average agent interaction time]
+	//
+	// OCCUPANCY Unit: PERCENT
+	//
+	// Statistic: AVG
+	//
+	// UI name: [Occupancy]
+	//
+	// QUEUE_ANSWER_TIME Unit: SECONDS
+	//
+	// Statistic: AVG
+	//
+	// UI name: [Average queue answer time]
+	//
+	// QUEUED_TIME Unit: SECONDS
+	//
+	// Statistic: MAX
+	//
+	// UI name: [Minimum flow time]
+	//
+	// SERVICE_LEVEL You can include up to 20 SERVICE_LEVEL metrics in a request.
+	//
+	// Unit: PERCENT
+	//
+	// Statistic: AVG
+	//
+	// Threshold: For ThresholdValue , enter any whole number from 1 to 604800
+	// (inclusive), in seconds. For Comparison , you must enter LT (for "Less than").
+	//
+	// UI name: [Service level X]
+	//
+	// [AGENT_NON_RESPONSE]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-non-response
+	// [Contacts agent hung up first]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-agent-hung-up-first
+	// [Contacts hold disconnect]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-hold-disconnect
+	// [Average queue abandon time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-queue-abandon-time
+	// [Contacts consulted]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-consulted
+	// [API contacts handled]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#api-contacts-handled
+	// [Contacts transferred out]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out
+	// [Average queue answer time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html##average-queue-answer-time
+	// [Average agent interaction and customer hold time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-interaction-and-customer-hold-time
+	// [Contacts handled outbound]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-handled-outbound
+	// [Average handle time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-handle-time
+	// [Average customer hold time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-hold-time
+	// [Callback contacts handled]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#callback-contacts-handled
+	// [Service level X]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#service-level
+	// [Contacts transferred in]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-in
+	// [Contacts abandoned]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-abandoned
+	// [After contact work time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#after-contact-work-time
+	// [Contacts queued]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-queued
+	// [Occupancy]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#occupancy
+	// [Contacts handled incoming]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-handled-incoming
+	// [Minimum flow time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#minimum-flow-time
+	// [Contacts transferred out queue]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out-queue
+	// [Contacts handled]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-handled
+	// [Average agent interaction time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#aaverage-agent-interaction-time
 	Name HistoricalMetricName
 
 	// The statistic for the metric.
@@ -7244,6 +7463,9 @@ type UserHierarchyGroupSearchCriteria struct {
 	// A list of conditions which would be applied together with an AND condition.
 	AndConditions []UserHierarchyGroupSearchCriteria
 
+	// A leaf node condition which can be used to specify a hierarchy group condition.
+	HierarchyGroupCondition *HierarchyGroupCondition
+
 	// A list of conditions which would be applied together with an OR condition.
 	OrConditions []UserHierarchyGroupSearchCriteria
 
@@ -7807,6 +8029,7 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isContactMetricValue()                                 {}
 func (*UnknownUnionMember) isCreatedByInfo()                                      {}
 func (*UnknownUnionMember) isEvaluationAnswerData()                               {}
 func (*UnknownUnionMember) isEvaluationFormItem()                                 {}

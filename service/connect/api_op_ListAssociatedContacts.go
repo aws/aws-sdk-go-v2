@@ -44,11 +44,6 @@ type ListAssociatedContactsInput struct {
 	InstanceId *string
 
 	// The maximum number of results to return per page.
-	//
-	// The maximum number of results to return per page. The default MaxResult size is
-	// 25.
-	//
-	// Valid Range: Minimum value of 1. Maximum value of 100.
 	MaxResults *int32
 
 	// The token for the next set of results. Use the value returned in the previous

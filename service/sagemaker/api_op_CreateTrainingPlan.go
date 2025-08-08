@@ -84,6 +84,10 @@ type CreateTrainingPlanInput struct {
 	// This member is required.
 	TrainingPlanOfferingId *string
 
+	// Number of spare instances to reserve per UltraServer for enhanced resiliency.
+	// Default is 1.
+	SpareInstanceCountPerUltraServer *int32
+
 	// An array of key-value pairs to apply to this training plan.
 	Tags []types.Tag
 

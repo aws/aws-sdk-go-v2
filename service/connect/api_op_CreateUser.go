@@ -13,9 +13,9 @@ import (
 
 // Creates a user account for the specified Amazon Connect instance.
 //
-// Certain [UserIdentityInfo] parameters are required in some situations. For example, Email is
-// required if you are using SAML for identity management. FirstName and LastName
-// are required if you are using Amazon Connect or SAML for identity management.
+// Certain [UserIdentityInfo] parameters are required in some situations. For example, Email ,
+// FirstName and LastName are required if you are using Amazon Connect or SAML for
+// identity management.
 //
 // For information about how to create users using the Amazon Connect admin
 // website, see [Add Users]in the Amazon Connect Administrator Guide.

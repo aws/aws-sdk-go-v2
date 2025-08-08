@@ -1,0 +1,8 @@
+{
+    "id": "15c4f9a8-b308-4c85-a11f-ef3a1a53e099",
+    "type": "feature",
+    "description": "Removed incorrect endpoint tests",
+    "modules": [
+        "service/gameliftstreams"
+    ]
+}

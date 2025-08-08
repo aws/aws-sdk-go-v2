@@ -1,0 +1,8 @@
+{
+    "id": "78845333-b674-41c5-ac21-af19dec4218f",
+    "type": "feature",
+    "description": "Removed incorrect endpoint tests",
+    "modules": [
+        "service/workspacesinstances"
+    ]
+}

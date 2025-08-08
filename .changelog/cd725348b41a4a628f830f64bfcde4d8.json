@@ -1,0 +1,8 @@
+{
+    "id": "cd725348-b41a-4a62-8f83-0f64bfcde4d8",
+    "type": "feature",
+    "description": "Removed incorrect endpoint tests",
+    "modules": [
+        "service/invoicing"
+    ]
+}

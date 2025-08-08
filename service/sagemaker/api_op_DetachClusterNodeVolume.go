@@ -14,7 +14,7 @@ import (
 
 //	Detaches your Amazon Elastic Block Store (Amazon EBS) volume from a node in
 //
-// your EKS-orchestrated SageMaker HyperPod cluster.
+// your EKS orchestrated SageMaker HyperPod cluster.
 //
 // This API works with the Amazon Elastic Block Store (Amazon EBS) Container
 // Storage Interface (CSI) driver to manage the lifecycle of persistent storage in

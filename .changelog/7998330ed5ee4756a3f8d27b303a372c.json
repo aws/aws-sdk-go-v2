@@ -1,0 +1,8 @@
+{
+    "id": "7998330e-d5ee-4756-a3f8-d27b303a372c",
+    "type": "feature",
+    "description": "Removed incorrect endpoint tests",
+    "modules": [
+        "service/dsql"
+    ]
+}

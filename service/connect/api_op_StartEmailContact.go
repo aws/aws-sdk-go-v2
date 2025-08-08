@@ -54,7 +54,7 @@ type StartEmailContactInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The addtional recipients address of the email.
+	// The additional recipients address of the email.
 	AdditionalRecipients *types.InboundAdditionalRecipients
 
 	// List of S3 presigned URLs of email attachments and their file name.

@@ -11,8 +11,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change.
-//
 // Describes the specified queue.
 func (c *Client) DescribeQueue(ctx context.Context, params *DescribeQueueInput, optFns ...func(*Options)) (*DescribeQueueOutput, error) {
 	if params == nil {

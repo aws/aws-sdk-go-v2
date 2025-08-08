@@ -1,0 +1,8 @@
+{
+    "id": "a455ba33-ea67-4b2d-9eb7-293f830fe683",
+    "type": "feature",
+    "description": "Adding DeleteConnection API to IoT Data Plane",
+    "modules": [
+        "service/iotdataplane"
+    ]
+}

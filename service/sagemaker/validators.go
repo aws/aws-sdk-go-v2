@@ -3730,6 +3730,26 @@ func (m *validateOpDescribeProject) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeReservedCapacity struct {
+}
+
+func (*validateOpDescribeReservedCapacity) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeReservedCapacity) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeReservedCapacityInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeReservedCapacityInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeSpace struct {
 }
 
@@ -4505,6 +4525,26 @@ func (m *validateOpListTrainingPlans) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTrainingPlansInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListUltraServersByReservedCapacity struct {
+}
+
+func (*validateOpListUltraServersByReservedCapacity) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListUltraServersByReservedCapacity) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListUltraServersByReservedCapacityInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListUltraServersByReservedCapacityInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -6754,6 +6794,10 @@ func addOpDescribeProjectValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeProject{}, middleware.After)
 }
 
+func addOpDescribeReservedCapacityValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeReservedCapacity{}, middleware.After)
+}
+
 func addOpDescribeSpaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeSpace{}, middleware.After)
 }
@@ -6908,6 +6952,10 @@ func addOpListTrainingJobsForHyperParameterTuningJobValidationMiddleware(stack *
 
 func addOpListTrainingPlansValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTrainingPlans{}, middleware.After)
+}
+
+func addOpListUltraServersByReservedCapacityValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListUltraServersByReservedCapacity{}, middleware.After)
 }
 
 func addOpPutModelPackageGroupPolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -10794,6 +10842,23 @@ func validateInstanceMetadataServiceConfiguration(v *types.InstanceMetadataServi
 	}
 }
 
+func validateInstancePlacementConfig(v *types.InstancePlacementConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InstancePlacementConfig"}
+	if v.PlacementSpecifications != nil {
+		if err := validatePlacementSpecifications(v.PlacementSpecifications); err != nil {
+			invalidParams.AddNested("PlacementSpecifications", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateIntegerParameterRange(v *types.IntegerParameterRange) error {
 	if v == nil {
 		return nil
@@ -12387,6 +12452,38 @@ func validatePipelineDefinitionS3Location(v *types.PipelineDefinitionS3Location)
 	}
 }
 
+func validatePlacementSpecification(v *types.PlacementSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PlacementSpecification"}
+	if v.InstanceCount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceCount"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePlacementSpecifications(v []types.PlacementSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PlacementSpecifications"}
+	for i := range v {
+		if err := validatePlacementSpecification(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePriorityClass(v *types.PriorityClass) error {
 	if v == nil {
 		return nil
@@ -12908,6 +13005,11 @@ func validateResourceConfig(v *types.ResourceConfig) error {
 	if v.InstanceGroups != nil {
 		if err := validateInstanceGroups(v.InstanceGroups); err != nil {
 			invalidParams.AddNested("InstanceGroups", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InstancePlacementConfig != nil {
+		if err := validateInstancePlacementConfig(v.InstancePlacementConfig); err != nil {
+			invalidParams.AddNested("InstancePlacementConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -18488,6 +18590,21 @@ func validateOpDescribeProjectInput(v *DescribeProjectInput) error {
 	}
 }
 
+func validateOpDescribeReservedCapacityInput(v *DescribeReservedCapacityInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeReservedCapacityInput"}
+	if v.ReservedCapacityArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReservedCapacityArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeSpaceInput(v *DescribeSpaceInput) error {
 	if v == nil {
 		return nil
@@ -19118,6 +19235,21 @@ func validateOpListTrainingPlansInput(v *ListTrainingPlansInput) error {
 		if err := validateTrainingPlanFilters(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListUltraServersByReservedCapacityInput(v *ListUltraServersByReservedCapacityInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListUltraServersByReservedCapacityInput"}
+	if v.ReservedCapacityArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReservedCapacityArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

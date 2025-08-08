@@ -11,8 +11,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change.
-//
 // Describes an agent status.
 func (c *Client) DescribeAgentStatus(ctx context.Context, params *DescribeAgentStatusInput, optFns ...func(*Options)) (*DescribeAgentStatusOutput, error) {
 	if params == nil {

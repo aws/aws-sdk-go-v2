@@ -1,0 +1,8 @@
+{
+    "id": "bc9fd3f0-9a5b-4de8-9aaa-013209de8373",
+    "type": "feature",
+    "description": "Removed incorrect endpoint tests",
+    "modules": [
+        "service/s3vectors"
+    ]
+}

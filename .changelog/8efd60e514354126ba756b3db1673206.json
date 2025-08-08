@@ -1,0 +1,8 @@
+{
+    "id": "8efd60e5-1435-4126-ba75-6b3db1673206",
+    "type": "feature",
+    "description": "Removed incorrect endpoint tests",
+    "modules": [
+        "service/notificationscontacts"
+    ]
+}

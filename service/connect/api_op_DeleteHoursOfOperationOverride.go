@@ -11,7 +11,7 @@ import (
 )
 
 // Deletes an hours of operation override in an Amazon Connect hours of operation
-// resource
+// resource.
 func (c *Client) DeleteHoursOfOperationOverride(ctx context.Context, params *DeleteHoursOfOperationOverrideInput, optFns ...func(*Options)) (*DeleteHoursOfOperationOverrideOutput, error) {
 	if params == nil {
 		params = &DeleteHoursOfOperationOverrideInput{}

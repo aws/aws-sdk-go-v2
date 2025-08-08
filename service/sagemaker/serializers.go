@@ -11364,6 +11364,67 @@ func (m *awsAwsjson11_serializeOpDescribeProject) HandleSerialize(ctx context.Co
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpDescribeReservedCapacity struct {
+}
+
+func (*awsAwsjson11_serializeOpDescribeReservedCapacity) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDescribeReservedCapacity) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeReservedCapacityInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("SageMaker.DescribeReservedCapacity")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribeReservedCapacityInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpDescribeSpace struct {
 }
 
@@ -17569,6 +17630,67 @@ func (m *awsAwsjson11_serializeOpListTrials) HandleSerialize(ctx context.Context
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentListTrialsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpListUltraServersByReservedCapacity struct {
+}
+
+func (*awsAwsjson11_serializeOpListUltraServersByReservedCapacity) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListUltraServersByReservedCapacity) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListUltraServersByReservedCapacityInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("SageMaker.ListUltraServersByReservedCapacity")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListUltraServersByReservedCapacityInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -28439,6 +28561,25 @@ func awsAwsjson11_serializeDocumentInstanceMetadataServiceConfiguration(v *types
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentInstancePlacementConfig(v *types.InstancePlacementConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EnableMultipleJobs != nil {
+		ok := object.Key("EnableMultipleJobs")
+		ok.Boolean(*v.EnableMultipleJobs)
+	}
+
+	if v.PlacementSpecifications != nil {
+		ok := object.Key("PlacementSpecifications")
+		if err := awsAwsjson11_serializeDocumentPlacementSpecifications(v.PlacementSpecifications, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentIntegerParameterRange(v *types.IntegerParameterRange, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -31145,6 +31286,36 @@ func awsAwsjson11_serializeDocumentPipelineDefinitionS3Location(v *types.Pipelin
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentPlacementSpecification(v *types.PlacementSpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InstanceCount != nil {
+		ok := object.Key("InstanceCount")
+		ok.Integer(*v.InstanceCount)
+	}
+
+	if v.UltraServerId != nil {
+		ok := object.Key("UltraServerId")
+		ok.String(*v.UltraServerId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPlacementSpecifications(v []types.PlacementSpecification, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentPlacementSpecification(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentPresignedUrlAccessConfig(v *types.PresignedUrlAccessConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -32377,6 +32548,13 @@ func awsAwsjson11_serializeDocumentResourceConfig(v *types.ResourceConfig, value
 	if v.InstanceGroups != nil {
 		ok := object.Key("InstanceGroups")
 		if err := awsAwsjson11_serializeDocumentInstanceGroups(v.InstanceGroups, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InstancePlacementConfig != nil {
+		ok := object.Key("InstancePlacementConfig")
+		if err := awsAwsjson11_serializeDocumentInstancePlacementConfig(v.InstancePlacementConfig, ok); err != nil {
 			return err
 		}
 	}
@@ -38302,6 +38480,11 @@ func awsAwsjson11_serializeOpDocumentCreateTrainingPlanInput(v *CreateTrainingPl
 	object := value.Object()
 	defer object.Close()
 
+	if v.SpareInstanceCountPerUltraServer != nil {
+		ok := object.Key("SpareInstanceCountPerUltraServer")
+		ok.Integer(*v.SpareInstanceCountPerUltraServer)
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
@@ -40239,6 +40422,18 @@ func awsAwsjson11_serializeOpDocumentDescribeProjectInput(v *DescribeProjectInpu
 	if v.ProjectName != nil {
 		ok := object.Key("ProjectName")
 		ok.String(*v.ProjectName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDescribeReservedCapacityInput(v *DescribeReservedCapacityInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ReservedCapacityArn != nil {
+		ok := object.Key("ReservedCapacityArn")
+		ok.String(*v.ReservedCapacityArn)
 	}
 
 	return nil
@@ -44390,6 +44585,28 @@ func awsAwsjson11_serializeOpDocumentListTrialsInput(v *ListTrialsInput, value s
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentListUltraServersByReservedCapacityInput(v *ListUltraServersByReservedCapacityInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.ReservedCapacityArn != nil {
+		ok := object.Key("ReservedCapacityArn")
+		ok.String(*v.ReservedCapacityArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentListUserProfilesInput(v *ListUserProfilesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -44720,6 +44937,16 @@ func awsAwsjson11_serializeOpDocumentSearchTrainingPlanOfferingsInput(v *SearchT
 		if err := awsAwsjson11_serializeDocumentSageMakerResourceNames(v.TargetResources, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.UltraServerCount != nil {
+		ok := object.Key("UltraServerCount")
+		ok.Integer(*v.UltraServerCount)
+	}
+
+	if v.UltraServerType != nil {
+		ok := object.Key("UltraServerType")
+		ok.String(*v.UltraServerType)
 	}
 
 	return nil

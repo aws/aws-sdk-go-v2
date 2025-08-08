@@ -33,6 +33,32 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The caller isn't authorized to make the request.
+type ForbiddenException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ForbiddenException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ForbiddenException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ForbiddenException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ForbiddenException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // An unexpected error has occurred.
 type InternalFailureException struct {
 	Message *string

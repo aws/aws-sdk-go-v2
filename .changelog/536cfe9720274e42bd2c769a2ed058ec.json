@@ -1,0 +1,8 @@
+{
+    "id": "536cfe97-2027-4e42-bd2c-769a2ed058ec",
+    "type": "feature",
+    "description": "Removed incorrect endpoint tests",
+    "modules": [
+        "service/keyspacesstreams"
+    ]
+}

@@ -14,7 +14,7 @@ import (
 
 //	Attaches your Amazon Elastic Block Store (Amazon EBS) volume to a node in your
 //
-// EKS-orchestrated HyperPod cluster.
+// EKS orchestrated HyperPod cluster.
 //
 // This API works with the Amazon Elastic Block Store (Amazon EBS) Container
 // Storage Interface (CSI) driver to manage the lifecycle of persistent storage in

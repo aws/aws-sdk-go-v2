@@ -30,7 +30,7 @@ func (c *Client) ListHoursOfOperationOverrides(ctx context.Context, params *List
 
 type ListHoursOfOperationOverridesInput struct {
 
-	// The identifier for the hours of operation
+	// The identifier for the hours of operation.
 	//
 	// This member is required.
 	HoursOfOperationId *string
@@ -40,8 +40,7 @@ type ListHoursOfOperationOverridesInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The maximum number of results to return per page. The default MaxResult size is
-	// 100. Valid Range: Minimum value of 1. Maximum value of 1000.
+	// The maximum number of results to return per page.
 	MaxResults *int32
 
 	// The token for the next set of results. Use the value returned in the previous
@@ -56,7 +55,7 @@ type ListHoursOfOperationOverridesOutput struct {
 	// Information about the hours of operation override.
 	HoursOfOperationOverrideList []types.HoursOfOperationOverride
 
-	// The AWS Region where this resource was last modified.
+	// The Amazon Web Services Region where this resource was last modified.
 	LastModifiedRegion *string
 
 	// The timestamp when this resource was last modified.
@@ -208,8 +207,7 @@ func (c *Client) addOperationListHoursOfOperationOverridesMiddlewares(stack *mid
 // ListHoursOfOperationOverridesPaginatorOptions is the paginator options for
 // ListHoursOfOperationOverrides
 type ListHoursOfOperationOverridesPaginatorOptions struct {
-	// The maximum number of results to return per page. The default MaxResult size is
-	// 100. Valid Range: Minimum value of 1. Maximum value of 1000.
+	// The maximum number of results to return per page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

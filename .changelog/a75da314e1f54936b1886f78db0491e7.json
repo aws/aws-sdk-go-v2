@@ -1,0 +1,8 @@
+{
+    "id": "a75da314-e1f5-4936-b188-6f78db0491e7",
+    "type": "feature",
+    "description": "Removed incorrect endpoint tests",
+    "modules": [
+        "service/bcmpricingcalculator"
+    ]
+}

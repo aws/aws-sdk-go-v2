@@ -83,6 +83,12 @@ type SearchTrainingPlanOfferingsInput struct {
 	// specified date.
 	StartTimeAfter *time.Time
 
+	// The number of UltraServers to search for.
+	UltraServerCount *int32
+
+	// The type of UltraServer to search for, such as ml.u-p6e-gb200x72.
+	UltraServerType *string
+
 	noSmithyDocumentSerde
 }
 

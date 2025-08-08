@@ -62,6 +62,9 @@ type DescribeTrainingPlanOutput struct {
 	// The number of instances currently available for use in this training plan.
 	AvailableInstanceCount *int32
 
+	// The number of available spare instances in the training plan.
+	AvailableSpareInstanceCount *int32
+
 	// The currency code for the upfront fee (e.g., USD).
 	CurrencyCode *string
 
@@ -103,6 +106,13 @@ type DescribeTrainingPlanOutput struct {
 
 	// The total number of instances reserved in this training plan.
 	TotalInstanceCount *int32
+
+	// The total number of UltraServers reserved to this training plan.
+	TotalUltraServerCount *int32
+
+	// The number of instances in the training plan that are currently in an unhealthy
+	// state.
+	UnhealthyInstanceCount *int32
 
 	// The upfront fee for the training plan.
 	UpfrontFee *string

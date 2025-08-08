@@ -97,8 +97,8 @@ type GetTaskTemplateOutput struct {
 	// The timestamp when the task template was last modified.
 	LastModifiedTime *time.Time
 
-	// ContactFlowId for the flow that will be run if this template is used to create
-	// a self-assigned task
+	// The ContactFlowId for the flow that will be run if this template is used to
+	// create a self-assigned task.
 	SelfAssignFlowId *string
 
 	// Marks a template as ACTIVE or INACTIVE for a task to refer to it. Tasks can

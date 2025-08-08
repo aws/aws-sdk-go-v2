@@ -2450,6 +2450,26 @@ func (m *validateOpGetContactAttributes) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetContactMetrics struct {
+}
+
+func (*validateOpGetContactMetrics) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetContactMetrics) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetContactMetricsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetContactMetricsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetCurrentMetricData struct {
 }
 
@@ -6078,6 +6098,10 @@ func addOpGetContactAttributesValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpGetContactAttributes{}, middleware.After)
 }
 
+func addOpGetContactMetricsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetContactMetrics{}, middleware.After)
+}
+
 func addOpGetCurrentMetricDataValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetCurrentMetricData{}, middleware.After)
 }
@@ -6857,6 +6881,38 @@ func validateContactConfiguration(v *types.ContactConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ContactConfiguration"}
 	if v.ContactId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContactMetricInfo(v *types.ContactMetricInfo) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContactMetricInfo"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContactMetrics(v []types.ContactMetricInfo) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContactMetrics"}
+	for i := range v {
+		if err := validateContactMetricInfo(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -11231,6 +11287,31 @@ func validateOpGetContactAttributesInput(v *GetContactAttributesInput) error {
 	}
 	if v.InitialContactId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InitialContactId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetContactMetricsInput(v *GetContactMetricsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetContactMetricsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
+	}
+	if v.Metrics == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Metrics"))
+	} else if v.Metrics != nil {
+		if err := validateContactMetrics(v.Metrics); err != nil {
+			invalidParams.AddNested("Metrics", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

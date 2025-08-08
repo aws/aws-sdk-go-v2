@@ -3554,13 +3554,13 @@ type ClusterEbsVolumeConfig struct {
 // Detailed information about a specific event in a HyperPod cluster.
 type ClusterEventDetail struct {
 
-	// The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster associated
-	// with the event.
+	// The Amazon Resource Name (ARN) of the HyperPod cluster associated with the
+	// event.
 	//
 	// This member is required.
 	ClusterArn *string
 
-	// The name of the SageMaker HyperPod cluster associated with the event.
+	// The name of the HyperPod cluster associated with the event.
 	//
 	// This member is required.
 	ClusterName *string
@@ -3575,8 +3575,8 @@ type ClusterEventDetail struct {
 	// This member is required.
 	EventTime *time.Time
 
-	// The type of resource associated with the event. Valid values are "Cluster",
-	// "InstanceGroup", or "Instance".
+	// The type of resource associated with the event. Valid values are Cluster ,
+	// InstanceGroup , or Instance .
 	//
 	// This member is required.
 	ResourceType ClusterEventResourceType
@@ -3596,16 +3596,16 @@ type ClusterEventDetail struct {
 	noSmithyDocumentSerde
 }
 
-// A summary of an event in a SageMaker HyperPod cluster.
+// A summary of an event in a HyperPod cluster.
 type ClusterEventSummary struct {
 
-	// The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster associated
-	// with the event.
+	// The Amazon Resource Name (ARN) of the HyperPod cluster associated with the
+	// event.
 	//
 	// This member is required.
 	ClusterArn *string
 
-	// The name of the SageMaker HyperPod cluster associated with the event.
+	// The name of the HyperPod cluster associated with the event.
 	//
 	// This member is required.
 	ClusterName *string
@@ -3620,8 +3620,8 @@ type ClusterEventSummary struct {
 	// This member is required.
 	EventTime *time.Time
 
-	// The type of resource associated with the event. Valid values are "Cluster",
-	// "InstanceGroup", or "Instance".
+	// The type of resource associated with the event. Valid values are Cluster ,
+	// InstanceGroup , or Instance .
 	//
 	// This member is required.
 	ResourceType ClusterEventResourceType
@@ -3632,7 +3632,8 @@ type ClusterEventSummary struct {
 	// The name of the instance group associated with the event, if applicable.
 	InstanceGroupName *string
 
-	// The EC2 instance ID associated with the event, if applicable.
+	// The Amazon Elastic Compute Cloud (EC2) instance ID associated with the event,
+	// if applicable.
 	InstanceId *string
 
 	noSmithyDocumentSerde
@@ -3921,13 +3922,12 @@ type ClusterLifeCycleConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Metadata information about a SageMaker HyperPod cluster showing information
-// about the cluster level operations, such as creating, updating, and deleting.
+// Metadata information about a HyperPod cluster showing information about the
+// cluster level operations, such as creating, updating, and deleting.
 type ClusterMetadata struct {
 
 	// A list of Amazon EKS IAM role ARNs associated with the cluster. This is created
-	// by SageMaker HyperPod on your behalf and only applies for EKS-orchestrated
-	// clusters.
+	// by HyperPod on your behalf and only applies for EKS orchestrated clusters.
 	EksRoleAccessEntries []string
 
 	// An error message describing why the cluster level operation (such as creating,
@@ -3935,8 +3935,7 @@ type ClusterMetadata struct {
 	FailureMessage *string
 
 	// The Service-Linked Role (SLR) associated with the cluster. This is created by
-	// SageMaker HyperPod on your behalf and only applies for EKS-orchestrated
-	// clusters.
+	// HyperPod on your behalf and only applies for EKS orchestrated clusters.
 	SlrAccessEntry *string
 
 	noSmithyDocumentSerde
@@ -4005,6 +4004,9 @@ type ClusterNodeDetails struct {
 	// The number of threads per CPU core you specified under CreateCluster .
 	ThreadsPerCore *int32
 
+	// Contains information about the UltraServer.
+	UltraServerInfo *UltraServerInfo
+
 	noSmithyDocumentSerde
 }
 
@@ -4046,6 +4048,9 @@ type ClusterNodeSummary struct {
 	// node even before it has an assigned InstanceId . This field is only included
 	// when IncludeNodeLogicalIds is set to True in the ListClusterNodes request.
 	NodeLogicalId *string
+
+	// Contains information about the UltraServer.
+	UltraServerInfo *UltraServerInfo
 
 	noSmithyDocumentSerde
 }
@@ -10809,7 +10814,7 @@ type InstanceGroup struct {
 	noSmithyDocumentSerde
 }
 
-// Metadata information about an instance group in a SageMaker HyperPod cluster.
+// Metadata information about an instance group in a HyperPod cluster.
 type InstanceGroupMetadata struct {
 
 	// If you use a custom Amazon Machine Image (AMI) for the instance group, this
@@ -10888,6 +10893,22 @@ type InstanceMetadataServiceConfiguration struct {
 	//
 	// This member is required.
 	MinimumInstanceMetadataServiceVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for how instances are placed and allocated within UltraServers.
+// This is only applicable for UltraServer capacity.
+type InstancePlacementConfig struct {
+
+	// If set to true, allows multiple jobs to share the same UltraServer instances.
+	// If set to false, ensures this job's instances are placed on an UltraServer
+	// exclusively, with no other jobs sharing the same UltraServer. Default is false.
+	EnableMultipleJobs *bool
+
+	// A list of specifications for how instances should be placed on specific
+	// UltraServers. Maximum of 10 items is supported.
+	PlacementSpecifications []PlacementSpecification
 
 	noSmithyDocumentSerde
 }
@@ -15313,6 +15334,21 @@ type PipelineVersionSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies how instances should be placed on a specific UltraServer.
+type PlacementSpecification struct {
+
+	// The number of ML compute instances required to be placed together on the same
+	// UltraServer. Minimum value of 1.
+	//
+	// This member is required.
+	InstanceCount *int32
+
+	// The unique identifier of the UltraServer where instances should be placed.
+	UltraServerId *string
+
+	noSmithyDocumentSerde
+}
+
 // A specification for a predefined metric.
 type PredefinedMetricSpecification struct {
 
@@ -17175,8 +17211,18 @@ type ReservedCapacityOffering struct {
 	// The end time of the reserved capacity offering.
 	EndTime *time.Time
 
+	// The type of reserved capacity offering.
+	ReservedCapacityType ReservedCapacityType
+
 	// The start time of the reserved capacity offering.
 	StartTime *time.Time
+
+	// The number of UltraServers included in this reserved capacity offering.
+	UltraServerCount *int32
+
+	// The type of UltraServer included in this reserved capacity offering, such as
+	// ml.u-p6e-gb200x72.
+	UltraServerType *string
 
 	noSmithyDocumentSerde
 }
@@ -17222,8 +17268,18 @@ type ReservedCapacitySummary struct {
 	// The end time of the reserved capacity.
 	EndTime *time.Time
 
+	// The type of reserved capacity.
+	ReservedCapacityType ReservedCapacityType
+
 	// The start time of the reserved capacity.
 	StartTime *time.Time
+
+	// The number of UltraServers included in this reserved capacity.
+	UltraServerCount *int32
+
+	// The type of UltraServer included in this reserved capacity, such as
+	// ml.u-p6e-gb200x72.
+	UltraServerType *string
 
 	noSmithyDocumentSerde
 }
@@ -17317,6 +17373,10 @@ type ResourceConfig struct {
 
 	// The configuration of a heterogeneous cluster in JSON format.
 	InstanceGroups []InstanceGroup
+
+	// Configuration for how training job instances are placed and allocated within
+	// UltraServers. Only applicable for UltraServer capacity.
+	InstancePlacementConfig *InstancePlacementConfig
 
 	// The ML compute instance type.
 	InstanceType TrainingInstanceType
@@ -20212,6 +20272,9 @@ type TrainingPlanSummary struct {
 	// The total number of instances reserved in this training plan.
 	TotalInstanceCount *int32
 
+	// The total number of UltraServers allocated to this training plan.
+	TotalUltraServerCount *int32
+
 	// The upfront fee for the training plan.
 	UpfrontFee *string
 
@@ -21257,6 +21320,94 @@ type UiTemplateInfo struct {
 
 	// The URL for the user interface template.
 	Url *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a high-performance compute server used for distributed training in
+// SageMaker AI. An UltraServer consists of multiple instances within a shared
+// NVLink interconnect domain.
+type UltraServer struct {
+
+	// The name of the Availability Zone where the UltraServer is provisioned.
+	//
+	// This member is required.
+	AvailabilityZone *string
+
+	// The Amazon EC2 instance type used in the UltraServer.
+	//
+	// This member is required.
+	InstanceType ReservedCapacityInstanceType
+
+	// The total number of instances in this UltraServer.
+	//
+	// This member is required.
+	TotalInstanceCount *int32
+
+	// The unique identifier for the UltraServer.
+	//
+	// This member is required.
+	UltraServerId *string
+
+	// The type of UltraServer, such as ml.u-p6e-gb200x72.
+	//
+	// This member is required.
+	UltraServerType *string
+
+	// The number of instances currently available for use in this UltraServer.
+	AvailableInstanceCount *int32
+
+	// The number of available spare instances in the UltraServer.
+	AvailableSpareInstanceCount *int32
+
+	// The number of spare instances configured for this UltraServer to provide
+	// enhanced resiliency.
+	ConfiguredSpareInstanceCount *int32
+
+	// The overall health status of the UltraServer.
+	HealthStatus UltraServerHealthStatus
+
+	// The number of instances currently in use in this UltraServer.
+	InUseInstanceCount *int32
+
+	// The number of instances in this UltraServer that are currently in an unhealthy
+	// state.
+	UnhealthyInstanceCount *int32
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the UltraServer object.
+type UltraServerInfo struct {
+
+	// The unique identifier of the UltraServer.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of UltraServer resources and their current status.
+type UltraServerSummary struct {
+
+	// The Amazon EC2 instance type used in the UltraServer.
+	//
+	// This member is required.
+	InstanceType ReservedCapacityInstanceType
+
+	// The type of UltraServer, such as ml.u-p6e-gb200x72.
+	//
+	// This member is required.
+	UltraServerType *string
+
+	// The number of available spare instances in the UltraServers.
+	AvailableSpareInstanceCount *int32
+
+	// The number of UltraServers of this type.
+	UltraServerCount *int32
+
+	// The total number of instances across all UltraServers of this type that are
+	// currently in an unhealthy state.
+	UnhealthyInstanceCount *int32
 
 	noSmithyDocumentSerde
 }

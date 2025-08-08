@@ -1,0 +1,8 @@
+{
+    "id": "adf0378c-7200-47b4-8d40-2f3ee2954d78",
+    "type": "feature",
+    "description": "Removed incorrect endpoint tests",
+    "modules": [
+        "service/mpa"
+    ]
+}

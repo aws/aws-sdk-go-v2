@@ -1,0 +1,8 @@
+{
+    "id": "4b5fe33c-8da5-40b8-9c5b-bce9a1e9562c",
+    "type": "feature",
+    "description": "Removed incorrect endpoint tests",
+    "modules": [
+        "service/applicationsignals"
+    ]
+}

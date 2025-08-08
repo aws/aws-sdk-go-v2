@@ -61,7 +61,7 @@ type CreateClusterInput struct {
 
 	// The type of orchestrator to use for the SageMaker HyperPod cluster. Currently,
 	// the only supported value is "eks" , which is to use an Amazon Elastic Kubernetes
-	// Service (EKS) cluster as the orchestrator.
+	// Service cluster as the orchestrator.
 	Orchestrator *types.ClusterOrchestrator
 
 	// The specialized instance groups for training models like Amazon Nova to be

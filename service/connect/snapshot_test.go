@@ -1526,6 +1526,18 @@ func TestCheckSnapshot_GetContactAttributes(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetContactMetrics(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetContactMetrics(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetContactMetrics")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetCurrentMetricData(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCurrentMetricData(context.Background(), nil, func(o *Options) {
@@ -4902,6 +4914,18 @@ func TestUpdateSnapshot_GetContactAttributes(t *testing.T) {
 	_, err := svc.GetContactAttributes(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetContactAttributes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetContactMetrics(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetContactMetrics(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetContactMetrics")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

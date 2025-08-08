@@ -12,8 +12,6 @@ import (
 	"time"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change.
-//
 // Lists the quick connects associated with a queue.
 func (c *Client) ListQueueQuickConnects(ctx context.Context, params *ListQueueQuickConnectsInput, optFns ...func(*Options)) (*ListQueueQuickConnectsOutput, error) {
 	if params == nil {

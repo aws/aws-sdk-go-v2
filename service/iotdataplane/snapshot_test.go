@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_DeleteConnection(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConnection(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteThingShadow(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteThingShadow(context.Background(), nil, func(o *Options) {
@@ -145,6 +157,18 @@ func TestCheckSnapshot_UpdateThingShadow(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_DeleteConnection(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConnection(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteThingShadow(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteThingShadow(context.Background(), nil, func(o *Options) {
