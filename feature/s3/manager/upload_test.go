@@ -1013,6 +1013,94 @@ func TestUploaderValidARN(t *testing.T) {
 	}
 }
 
+// TestUploadRequestChecksumCalculation tests that checksum behavior respects
+// the RequestChecksumCalculation setting for backwards compatibility.
+func TestUploadRequestChecksumCalculation(t *testing.T) {
+	testCases := []struct {
+		name                       string
+		requestChecksumCalculation aws.RequestChecksumCalculation
+		inputChecksumAlgorithm     types.ChecksumAlgorithm
+		expectedChecksumAlgorithm  types.ChecksumAlgorithm
+		description                string
+	}{
+		{
+			name:                       "WhenRequired_NoDefault",
+			requestChecksumCalculation: aws.RequestChecksumCalculationWhenRequired,
+			inputChecksumAlgorithm:     "",
+			expectedChecksumAlgorithm:  "",
+			description:                "When RequestChecksumCalculationWhenRequired is set, no default checksum should be applied (backwards compatibility)",
+		},
+		{
+			name:                       "WhenSupported_HasDefault",
+			requestChecksumCalculation: aws.RequestChecksumCalculationWhenSupported,
+			inputChecksumAlgorithm:     "",
+			expectedChecksumAlgorithm:  types.ChecksumAlgorithmCrc32,
+			description:                "When RequestChecksumCalculationWhenSupported is set, default CRC32 checksum should be applied",
+		},
+		{
+			name:                       "WhenRequired_ExplicitPreserved",
+			requestChecksumCalculation: aws.RequestChecksumCalculationWhenRequired,
+			inputChecksumAlgorithm:     types.ChecksumAlgorithmSha256,
+			expectedChecksumAlgorithm:  types.ChecksumAlgorithmSha256,
+			description:                "Explicit checksums should always be preserved regardless of RequestChecksumCalculation setting",
+		},
+		{
+			name:                       "WhenSupported_ExplicitPreserved",
+			requestChecksumCalculation: aws.RequestChecksumCalculationWhenSupported,
+			inputChecksumAlgorithm:     types.ChecksumAlgorithmSha1,
+			expectedChecksumAlgorithm:  types.ChecksumAlgorithmSha1,
+			description:                "Explicit checksums should override defaults even with WhenSupported",
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			c, invocations, args := s3testing.NewUploadLoggingClient(nil)
+
+			mgr := manager.NewUploader(c, func(u *manager.Uploader) {
+				u.RequestChecksumCalculation = tc.requestChecksumCalculation
+			})
+
+			input := &s3.PutObjectInput{
+				Bucket: aws.String("Bucket"),
+				Key:    aws.String("Key"),
+				Body:   bytes.NewReader(buf12MB),
+			}
+			if tc.inputChecksumAlgorithm != "" {
+				input.ChecksumAlgorithm = tc.inputChecksumAlgorithm
+			}
+
+			resp, err := mgr.Upload(context.Background(), input)
+			if err != nil {
+				t.Errorf("Expected no error but received %v", err)
+			}
+
+			expectedOps := []string{"CreateMultipartUpload", "UploadPart", "UploadPart", "UploadPart", "CompleteMultipartUpload"}
+			if diff := cmpDiff(expectedOps, *invocations); len(diff) > 0 {
+				t.Error(diff)
+			}
+
+			if resp.UploadID != "UPLOAD-ID" {
+				t.Errorf("expect %q, got %q", "UPLOAD-ID", resp.UploadID)
+			}
+
+			cmu := (*args)[0].(*s3.CreateMultipartUploadInput)
+			if cmu.ChecksumAlgorithm != tc.expectedChecksumAlgorithm {
+				t.Errorf("%s: Expected checksum algorithm %v in CreateMultipartUpload, but got %v",
+					tc.description, tc.expectedChecksumAlgorithm, cmu.ChecksumAlgorithm)
+			}
+
+			for i := 1; i <= 3; i++ {
+				uploadPart := (*args)[i].(*s3.UploadPartInput)
+				if uploadPart.ChecksumAlgorithm != tc.expectedChecksumAlgorithm {
+					t.Errorf("%s: Expected checksum algorithm %v in UploadPart %d, but got %v",
+						tc.description, tc.expectedChecksumAlgorithm, i, uploadPart.ChecksumAlgorithm)
+				}
+			}
+		})
+	}
+}
+
 type mockS3UploadServer struct {
 	*http.ServeMux
 
