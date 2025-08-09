@@ -180,7 +180,7 @@ func (d *directoryDownloader) getLocalPath(key string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	if relPath == "." || strings.Contains(relPath, "../") {
+	if relPath == "." || strings.Contains(relPath, "..") {
 		return "", fmt.Errorf("resolved local path %s is outside of destination %s", path, d.in.Destination)
 	}
 
