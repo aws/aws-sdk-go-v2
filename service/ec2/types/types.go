@@ -6908,9 +6908,22 @@ type Image struct {
 	RootDeviceType DeviceType
 
 	// The ID of the source AMI from which the AMI was created.
+	//
+	// The ID only appears if the AMI was created using CreateImage, CopyImage, or CreateRestoreImageTask. The ID does not
+	// appear if the AMI was created using any other API. For some older AMIs, the ID
+	// might not be available. For more information, see [Identify the source AMI used to create a new Amazon EC2 AMI]in the Amazon EC2 User Guide.
+	//
+	// [Identify the source AMI used to create a new Amazon EC2 AMI]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/identify-source-ami-used-to-create-new-ami.html
 	SourceImageId *string
 
 	// The Region of the source AMI.
+	//
+	// The Region only appears if the AMI was created using CreateImage, CopyImage, or CreateRestoreImageTask. The Region does
+	// not appear if the AMI was created using any other API. For some older AMIs, the
+	// Region might not be available. For more information, see [Identify the source AMI used to create a new Amazon EC2 AMI]in the Amazon EC2 User
+	// Guide.
+	//
+	// [Identify the source AMI used to create a new Amazon EC2 AMI]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/identify-source-ami-used-to-create-new-ami.html
 	SourceImageRegion *string
 
 	// The ID of the instance that the AMI was created from if the AMI was created
@@ -7264,6 +7277,9 @@ type ImportInstanceVolumeDetailItem struct {
 	// The Availability Zone where the resulting instance will reside.
 	AvailabilityZone *string
 
+	// The ID of the Availability Zone where the resulting instance will reside.
+	AvailabilityZoneId *string
+
 	// The number of bytes converted so far.
 	BytesConverted *int64
 
@@ -7308,6 +7324,9 @@ type ImportVolumeTaskDetails struct {
 
 	// The Availability Zone where the resulting volume will reside.
 	AvailabilityZone *string
+
+	// The ID of the Availability Zone where the resulting volume will reside.
+	AvailabilityZoneId *string
 
 	// The number of bytes converted so far.
 	BytesConverted *int64
@@ -9376,6 +9395,9 @@ type InstanceStatus struct {
 
 	// The Availability Zone of the instance.
 	AvailabilityZone *string
+
+	// The ID of the Availability Zone of the instance.
+	AvailabilityZoneId *string
 
 	// Any scheduled events associated with the instance.
 	Events []InstanceStatusEvent
@@ -12039,6 +12061,9 @@ type LaunchTemplatePlacement struct {
 	// The Availability Zone of the instance.
 	AvailabilityZone *string
 
+	// The ID of the Availability Zone of the instance.
+	AvailabilityZoneId *string
+
 	// The Group ID of the placement group. You must specify the Placement Group Group
 	// ID to launch an instance in a shared placement group.
 	GroupId *string
@@ -12073,7 +12098,14 @@ type LaunchTemplatePlacementRequest struct {
 	Affinity *string
 
 	// The Availability Zone for the instance.
+	//
+	// Either AvailabilityZone or AvailabilityZoneId can be specified, but not both
 	AvailabilityZone *string
+
+	// The ID of the Availability Zone for the instance.
+	//
+	// Either AvailabilityZone or AvailabilityZoneId can be specified, but not both
+	AvailabilityZoneId *string
 
 	// The Group Id of a placement group. You must specify the Placement Group Group
 	// Id to launch an instance in a shared placement group.
@@ -14994,13 +15026,25 @@ type Placement struct {
 
 	// The Availability Zone of the instance.
 	//
-	// If not specified, an Availability Zone will be automatically chosen for you
+	// Either AvailabilityZone or AvailabilityZoneId can be specified, but not both.
+	// If neither is specified, Amazon EC2 automatically selects an Availability Zone
 	// based on the load balancing criteria for the Region.
 	//
 	// This parameter is not supported for [CreateFleet].
 	//
 	// [CreateFleet]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet
 	AvailabilityZone *string
+
+	// The ID of the Availability Zone of the instance.
+	//
+	// Either AvailabilityZone or AvailabilityZoneId can be specified, but not both.
+	// If neither is specified, Amazon EC2 automatically selects an Availability Zone
+	// based on the load balancing criteria for the Region.
+	//
+	// This parameter is not supported for [CreateFleet].
+	//
+	// [CreateFleet]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet
+	AvailabilityZoneId *string
 
 	// The ID of the placement group that the instance is in. If you specify GroupId ,
 	// you can't specify GroupName .
@@ -17933,7 +17977,14 @@ type ServiceConfiguration struct {
 	// endpoint to the service must first be accepted.
 	AcceptanceRequired *bool
 
+	// The IDs of the Availability Zones in which the service is available.
+	//
+	// Either AvailabilityZone or AvailabilityZoneId can be specified, but not both
+	AvailabilityZoneIds []string
+
 	// The Availability Zones in which the service is available.
+	//
+	// Either AvailabilityZone or AvailabilityZoneId can be specified, but not both
 	AvailabilityZones []string
 
 	// The DNS names for the service.
@@ -17993,7 +18044,14 @@ type ServiceDetail struct {
 	// accepted by the service owner.
 	AcceptanceRequired *bool
 
+	// The IDs of the Availability Zones in which the service is available.
+	//
+	// Either AvailabilityZone or AvailabilityZoneId can be specified, but not both
+	AvailabilityZoneIds []string
+
 	// The Availability Zones in which the service is available.
+	//
+	// Either AvailabilityZone or AvailabilityZoneId can be specified, but not both
 	AvailabilityZones []string
 
 	// The DNS names for the service.
@@ -18968,7 +19026,16 @@ type SpotInstanceRequest struct {
 	LaunchSpecification *LaunchSpecification
 
 	// The Availability Zone in which the request is launched.
+	//
+	// Either launchedAvailabilityZone or launchedAvailabilityZoneId can be specified,
+	// but not both
 	LaunchedAvailabilityZone *string
+
+	// The ID of the Availability Zone in which the request is launched.
+	//
+	// Either launchedAvailabilityZone or launchedAvailabilityZoneId can be specified,
+	// but not both
+	LaunchedAvailabilityZoneId *string
 
 	// The product description associated with the Spot Instance.
 	ProductDescription RIProductDescription
@@ -19398,6 +19465,9 @@ type SpotPrice struct {
 
 	// The Availability Zone.
 	AvailabilityZone *string
+
+	// The ID of the Availability Zone.
+	AvailabilityZoneId *string
 
 	// The instance type.
 	InstanceType InstanceType
@@ -22201,6 +22271,9 @@ type Volume struct {
 
 	// The Availability Zone for the volume.
 	AvailabilityZone *string
+
+	// The ID of the Availability Zone for the volume.
+	AvailabilityZoneId *string
 
 	// The time stamp when volume creation was initiated.
 	CreateTime *time.Time

@@ -1,0 +1,8 @@
+{
+    "id": "f3b1f5c2-1e15-46f7-94d4-01132769d56b",
+    "type": "documentation",
+    "description": "Update for general availability of Amazon Elastic VMware Service (EVS).",
+    "modules": [
+        "service/evs"
+    ]
+}

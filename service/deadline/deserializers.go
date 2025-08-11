@@ -6231,6 +6231,15 @@ func awsRestjson1_deserializeOpDocumentGetFleetOutput(v **GetFleetOutput, value 
 				sv.Status = types.FleetStatus(jtv)
 			}
 
+		case "statusMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StatusMessage = ptr.String(jtv)
+			}
+
 		case "targetWorkerCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -21961,6 +21970,15 @@ func awsRestjson1_deserializeDocumentFleetSummary(v **types.FleetSummary, value 
 					return fmt.Errorf("expected FleetStatus to be of type string, got %T instead", value)
 				}
 				sv.Status = types.FleetStatus(jtv)
+			}
+
+		case "statusMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StatusMessage = ptr.String(jtv)
 			}
 
 		case "targetWorkerCount":

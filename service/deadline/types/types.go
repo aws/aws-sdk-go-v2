@@ -976,6 +976,9 @@ type FleetSummary struct {
 	// The Auto Scaling status of a fleet.
 	AutoScalingStatus AutoScalingStatus
 
+	// A message that communicates a suspended status of the fleet.
+	StatusMessage *string
+
 	// The target number of workers in a fleet.
 	TargetWorkerCount *int32
 
@@ -2279,8 +2282,9 @@ type SearchFilterExpressionMemberStringFilter struct {
 func (*SearchFilterExpressionMemberStringFilter) isSearchFilterExpression() {}
 
 // The filter expression, AND or OR , to use when searching among a group of search
-// strings in a resource. You can use two groupings per search each within
-// parenthesis () .
+// strings in a resource.
+//
+// You can use two groupings per search each within parenthesis () .
 type SearchGroupedFilterExpressions struct {
 
 	// The filters to use for the search.

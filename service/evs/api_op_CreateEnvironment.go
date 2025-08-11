@@ -11,8 +11,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Amazon EVS is in public preview release and is subject to change.
-//
 // Creates an Amazon EVS environment that runs VCF software, such as SDDC Manager,
 // NSX Manager, and vCenter Server.
 //

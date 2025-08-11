@@ -1270,26 +1270,6 @@ func (m *validateOpCreateCustomerGateway) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpCreateDefaultSubnet struct {
-}
-
-func (*validateOpCreateDefaultSubnet) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpCreateDefaultSubnet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*CreateDefaultSubnetInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpCreateDefaultSubnetInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpCreateDelegateMacVolumeOwnershipTask struct {
 }
 
@@ -2505,26 +2485,6 @@ func (m *validateOpCreateVerifiedAccessTrustProvider) HandleInitialize(ctx conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateVerifiedAccessTrustProviderInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpCreateVolume struct {
-}
-
-func (*validateOpCreateVolume) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpCreateVolume) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*CreateVolumeInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpCreateVolumeInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -9922,10 +9882,6 @@ func addOpCreateCustomerGatewayValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpCreateCustomerGateway{}, middleware.After)
 }
 
-func addOpCreateDefaultSubnetValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpCreateDefaultSubnet{}, middleware.After)
-}
-
 func addOpCreateDelegateMacVolumeOwnershipTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDelegateMacVolumeOwnershipTask{}, middleware.After)
 }
@@ -10168,10 +10124,6 @@ func addOpCreateVerifiedAccessGroupValidationMiddleware(stack *middleware.Stack)
 
 func addOpCreateVerifiedAccessTrustProviderValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateVerifiedAccessTrustProvider{}, middleware.After)
-}
-
-func addOpCreateVolumeValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpCreateVolume{}, middleware.After)
 }
 
 func addOpCreateVpcBlockPublicAccessExclusionValidationMiddleware(stack *middleware.Stack) error {
@@ -13594,21 +13546,6 @@ func validateOpCreateCustomerGatewayInput(v *CreateCustomerGatewayInput) error {
 	}
 }
 
-func validateOpCreateDefaultSubnetInput(v *CreateDefaultSubnetInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "CreateDefaultSubnetInput"}
-	if v.AvailabilityZone == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZone"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateOpCreateDelegateMacVolumeOwnershipTaskInput(v *CreateDelegateMacVolumeOwnershipTaskInput) error {
 	if v == nil {
 		return nil
@@ -14723,21 +14660,6 @@ func validateOpCreateVerifiedAccessTrustProviderInput(v *CreateVerifiedAccessTru
 	}
 	if v.PolicyReferenceName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyReferenceName"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpCreateVolumeInput(v *CreateVolumeInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "CreateVolumeInput"}
-	if v.AvailabilityZone == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZone"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -18255,9 +18177,6 @@ func validateOpImportVolumeInput(v *ImportVolumeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ImportVolumeInput"}
-	if v.AvailabilityZone == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZone"))
-	}
 	if v.Image == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Image"))
 	} else if v.Image != nil {

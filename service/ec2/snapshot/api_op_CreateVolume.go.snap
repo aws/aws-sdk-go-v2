@@ -6,7 +6,6 @@ CreateVolume
 		OperationIdempotencyTokenAutoFill
 		legacyEndpointContextSetter
 		SetLogger
-		OperationInputValidation
 		spanInitializeEnd
 	Serialize stack step
 		spanBuildRequestStart

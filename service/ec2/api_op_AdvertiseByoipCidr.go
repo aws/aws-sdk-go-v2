@@ -25,6 +25,8 @@ import (
 //
 // It can take a few minutes before traffic to the specified addresses starts
 // routing to Amazon Web Services because of BGP propagation delays.
+//
+// To stop advertising the BYOIP CIDR, use WithdrawByoipCidr.
 func (c *Client) AdvertiseByoipCidr(ctx context.Context, params *AdvertiseByoipCidrInput, optFns ...func(*Options)) (*AdvertiseByoipCidrOutput, error) {
 	if params == nil {
 		params = &AdvertiseByoipCidrInput{}

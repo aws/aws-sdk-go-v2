@@ -11,8 +11,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Amazon EVS is in public preview release and is subject to change.
-//
 // List the hosts within an environment.
 func (c *Client) ListEnvironmentHosts(ctx context.Context, params *ListEnvironmentHostsInput, optFns ...func(*Options)) (*ListEnvironmentHostsOutput, error) {
 	if params == nil {

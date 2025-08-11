@@ -8700,6 +8700,9 @@ type HeatMapConfiguration struct {
 	// The color options (gradient color, point of divergence) in a heat map.
 	ColorScale *ColorScale
 
+	// The options that determine the presentation of the row axis label.
+	ColumnAxisDisplayOptions *AxisDisplayOptions
+
 	// The label options of the column that is displayed in a heat map.
 	ColumnLabelOptions *ChartAxisLabelOptions
 
@@ -8714,6 +8717,9 @@ type HeatMapConfiguration struct {
 
 	// The legend display setup of the visual.
 	Legend *LegendOptions
+
+	// The options that determine the presentation of the row axis label.
+	RowAxisDisplayOptions *AxisDisplayOptions
 
 	// The label options of the row that is displayed in a heat map .
 	RowLabelOptions *ChartAxisLabelOptions
@@ -12159,6 +12165,9 @@ type PluginVisual struct {
 	//
 	// This member is required.
 	VisualId *string
+
+	// The list of custom actions that are configured for a visual.
+	Actions []VisualCustomAction
 
 	//  A description of the plugin field wells and their persisted properties.
 	ChartConfiguration *PluginVisualConfiguration

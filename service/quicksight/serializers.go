@@ -32680,6 +32680,13 @@ func awsRestjson1_serializeDocumentHeatMapConfiguration(v *types.HeatMapConfigur
 		}
 	}
 
+	if v.ColumnAxisDisplayOptions != nil {
+		ok := object.Key("ColumnAxisDisplayOptions")
+		if err := awsRestjson1_serializeDocumentAxisDisplayOptions(v.ColumnAxisDisplayOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ColumnLabelOptions != nil {
 		ok := object.Key("ColumnLabelOptions")
 		if err := awsRestjson1_serializeDocumentChartAxisLabelOptions(v.ColumnLabelOptions, ok); err != nil {
@@ -32711,6 +32718,13 @@ func awsRestjson1_serializeDocumentHeatMapConfiguration(v *types.HeatMapConfigur
 	if v.Legend != nil {
 		ok := object.Key("Legend")
 		if err := awsRestjson1_serializeDocumentLegendOptions(v.Legend, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RowAxisDisplayOptions != nil {
+		ok := object.Key("RowAxisDisplayOptions")
+		if err := awsRestjson1_serializeDocumentAxisDisplayOptions(v.RowAxisDisplayOptions, ok); err != nil {
 			return err
 		}
 	}
@@ -37822,6 +37836,13 @@ func awsRestjson1_serializeDocumentPivotTotalOptions(v *types.PivotTotalOptions,
 func awsRestjson1_serializeDocumentPluginVisual(v *types.PluginVisual, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Actions != nil {
+		ok := object.Key("Actions")
+		if err := awsRestjson1_serializeDocumentVisualCustomActionList(v.Actions, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.ChartConfiguration != nil {
 		ok := object.Key("ChartConfiguration")

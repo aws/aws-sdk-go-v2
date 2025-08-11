@@ -506,6 +506,18 @@ func TestCheckSnapshot_GetApplicationGrant(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetApplicationSessionConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetApplicationSessionConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetApplicationSessionConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetInlinePolicyForPermissionSet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetInlinePolicyForPermissionSet(context.Background(), nil, func(o *Options) {
@@ -823,6 +835,18 @@ func TestCheckSnapshot_PutApplicationGrant(t *testing.T) {
 	_, err := svc.PutApplicationGrant(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PutApplicationGrant")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutApplicationSessionConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutApplicationSessionConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutApplicationSessionConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1381,6 +1405,18 @@ func TestUpdateSnapshot_GetApplicationGrant(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetApplicationSessionConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetApplicationSessionConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetApplicationSessionConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetInlinePolicyForPermissionSet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetInlinePolicyForPermissionSet(context.Background(), nil, func(o *Options) {
@@ -1698,6 +1734,18 @@ func TestUpdateSnapshot_PutApplicationGrant(t *testing.T) {
 	_, err := svc.PutApplicationGrant(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutApplicationGrant")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutApplicationSessionConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutApplicationSessionConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutApplicationSessionConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

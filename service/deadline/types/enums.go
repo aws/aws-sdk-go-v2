@@ -340,8 +340,9 @@ type Ec2MarketType string
 
 // Enum values for Ec2MarketType
 const (
-	Ec2MarketTypeOnDemand Ec2MarketType = "on-demand"
-	Ec2MarketTypeSpot     Ec2MarketType = "spot"
+	Ec2MarketTypeOnDemand    Ec2MarketType = "on-demand"
+	Ec2MarketTypeSpot        Ec2MarketType = "spot"
+	Ec2MarketTypeWaitAndSave Ec2MarketType = "wait-and-save"
 )
 
 // Values returns all known values for Ec2MarketType. Note that this can be
@@ -352,6 +353,7 @@ func (Ec2MarketType) Values() []Ec2MarketType {
 	return []Ec2MarketType{
 		"on-demand",
 		"spot",
+		"wait-and-save",
 	}
 }
 
@@ -402,6 +404,7 @@ const (
 	FleetStatusUpdateInProgress FleetStatus = "UPDATE_IN_PROGRESS"
 	FleetStatusCreateFailed     FleetStatus = "CREATE_FAILED"
 	FleetStatusUpdateFailed     FleetStatus = "UPDATE_FAILED"
+	FleetStatusSuspended        FleetStatus = "SUSPENDED"
 )
 
 // Values returns all known values for FleetStatus. Note that this can be expanded
@@ -415,6 +418,7 @@ func (FleetStatus) Values() []FleetStatus {
 		"UPDATE_IN_PROGRESS",
 		"CREATE_FAILED",
 		"UPDATE_FAILED",
+		"SUSPENDED",
 	}
 }
 

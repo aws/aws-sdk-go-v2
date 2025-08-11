@@ -32,7 +32,6 @@ GetTokensFromRefreshToken
 		GetIdentity
 		ResolveEndpointV2
 		disableHTTPS
-		ComputePayloadHash
 		setLegacyContextSigningOptions
 		InterceptBeforeSigning
 		Signing

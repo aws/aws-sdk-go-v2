@@ -14,7 +14,7 @@ import (
 // enabled, the AMI can't be deregistered.
 //
 // To allow the AMI to be deregistered, you must first disable deregistration
-// protection.
+// protection using DisableImageDeregistrationProtection.
 //
 // For more information, see [Protect an Amazon EC2 AMI from deregistration] in the Amazon EC2 User Guide.
 //

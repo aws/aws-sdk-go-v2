@@ -28354,13 +28354,6 @@ func awsRestjson1_serializeDocumentCommonAttributeAndCondition(v *types.CommonAt
 	object := value.Object()
 	defer object.Close()
 
-	if v.HierarchyGroupCondition != nil {
-		ok := object.Key("HierarchyGroupCondition")
-		if err := awsRestjson1_serializeDocumentHierarchyGroupCondition(v.HierarchyGroupCondition, ok); err != nil {
-			return err
-		}
-	}
-
 	if v.TagConditions != nil {
 		ok := object.Key("TagConditions")
 		if err := awsRestjson1_serializeDocumentTagAndConditionList(v.TagConditions, ok); err != nil {
@@ -32952,13 +32945,6 @@ func awsRestjson1_serializeDocumentUserHierarchyGroupSearchCriteria(v *types.Use
 	if v.AndConditions != nil {
 		ok := object.Key("AndConditions")
 		if err := awsRestjson1_serializeDocumentUserHierarchyGroupSearchConditionList(v.AndConditions, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.HierarchyGroupCondition != nil {
-		ok := object.Key("HierarchyGroupCondition")
-		if err := awsRestjson1_serializeDocumentHierarchyGroupCondition(v.HierarchyGroupCondition, ok); err != nil {
 			return err
 		}
 	}

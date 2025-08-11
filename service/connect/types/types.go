@@ -977,9 +977,6 @@ type ClaimedPhoneNumberSummary struct {
 // A list of conditions which would be applied together with an AND condition.
 type CommonAttributeAndCondition struct {
 
-	// A leaf node condition which can be used to specify a hierarchy group condition.
-	HierarchyGroupCondition *HierarchyGroupCondition
-
 	// A leaf node condition which can be used to specify a tag condition.
 	TagConditions []TagCondition
 
@@ -7462,9 +7459,6 @@ type UserHierarchyGroupSearchCriteria struct {
 
 	// A list of conditions which would be applied together with an AND condition.
 	AndConditions []UserHierarchyGroupSearchCriteria
-
-	// A leaf node condition which can be used to specify a hierarchy group condition.
-	HierarchyGroupCondition *HierarchyGroupCondition
 
 	// A list of conditions which would be applied together with an OR condition.
 	OrConditions []UserHierarchyGroupSearchCriteria

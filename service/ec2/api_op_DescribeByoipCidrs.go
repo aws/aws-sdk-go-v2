@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the IP address ranges that were provisioned for use with Amazon Web
-// Services resources through through bring your own IP addresses (BYOIP).
+// Describes the IP address ranges that were specified in calls to ProvisionByoipCidr.
+//
+// To describe the address pools that were created when you provisioned the
+// address ranges, use DescribePublicIpv4Poolsor DescribeIpv6Pools.
 func (c *Client) DescribeByoipCidrs(ctx context.Context, params *DescribeByoipCidrsInput, optFns ...func(*Options)) (*DescribeByoipCidrsOutput, error) {
 	if params == nil {
 		params = &DescribeByoipCidrsInput{}

@@ -1,0 +1,8 @@
+{
+    "id": "5986cbfe-5843-4ab5-aff9-a08fbe5eb904",
+    "type": "feature",
+    "description": "Adds support for Wait and Save feature in service-managed fleets",
+    "modules": [
+        "service/deadline"
+    ]
+}
