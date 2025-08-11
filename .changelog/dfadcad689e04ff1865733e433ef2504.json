@@ -1,8 +1,0 @@
-{
-    "id": "dfadcad6-89e0-4ff1-8657-33e433ef2504",
-    "type": "feature",
-    "description": "Added support for managing user background session for applications",
-    "modules": [
-        "service/ssoadmin"
-    ]
-}

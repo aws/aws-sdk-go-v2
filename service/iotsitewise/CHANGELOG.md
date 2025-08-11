@@ -1,3 +1,8 @@
+# v1.50.0 (2025-08-11)
+
+* **Feature**: Add support for configuring per-service Options via callback on global config.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.49.0 (2025-08-04)
 
 * **Feature**: Support Interface for IoT SiteWise Asset Modeling

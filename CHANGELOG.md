@@ -1,3 +1,29 @@
+# Release (2025-08-11)
+
+## General Highlights
+* **Feature**: Add support for configuring per-service Options via callback on global config.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.44.0](service/bedrock/CHANGELOG.md#v1440-2025-08-11)
+  * **Feature**: This release includes model updates and enhanced SDK documentation for union fields in automated reasoning policy components. Added docs cover policy definitions, mutations (add/update for rules/types/variables), build assets, workflow sources, test results, and tag exception handling.
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.56.0](service/cognitoidentityprovider/CHANGELOG.md#v1560-2025-08-11)
+  * **Feature**: Remove SigV4 auth requirement for GetTokensFromRefreshToken
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.135.0](service/connect/CHANGELOG.md#v11350-2025-08-11)
+  * **Feature**: Updating SearchUserHierarchyGroups API
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.20.0](service/deadline/CHANGELOG.md#v1200-2025-08-11)
+  * **Feature**: Adds support for Wait and Save feature in service-managed fleets
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.242.0](service/ec2/CHANGELOG.md#v12420-2025-08-11)
+  * **Feature**: This release adds AvailabilityZoneId support for CreateVolume, DescribeVolume, LaunchTemplates, RunInstances, DescribeInstances, CreateDefaultSubnet, SpotInstances, and CreateDefaultSubnet APIs.
+* `github.com/aws/aws-sdk-go-v2/service/evs`: [v1.3.0](service/evs/CHANGELOG.md#v130-2025-08-11)
+  * **Documentation**: Update for general availability of Amazon Elastic VMware Service (EVS).
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.76.0](service/lambda/CHANGELOG.md#v1760-2025-08-11)
+  * **Documentation**: Doc-only update for Lambda that updates the maximum payload size for response streaming invocations to 200 MB.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.92.0](service/quicksight/CHANGELOG.md#v1920-2025-08-11)
+  * **Feature**: Add RowAxisDisplayOptions and ColumnAxisDisplayOptions to HeatMapConfiguration, add Actions to PluginVisual, increase limit for CalculatedFields list
+* `github.com/aws/aws-sdk-go-v2/service/ssoadmin`: [v1.34.0](service/ssoadmin/CHANGELOG.md#v1340-2025-08-11)
+  * **Feature**: Added support for managing user background session for applications
+
 # Release (2025-08-08)
 
 ## Module Highlights

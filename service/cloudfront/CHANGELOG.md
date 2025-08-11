@@ -1,3 +1,8 @@
+# v1.52.0 (2025-08-11)
+
+* **Feature**: Add support for configuring per-service Options via callback on global config.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.51.0 (2025-08-07)
 
 * **Feature**: Added new viewer security policy, TLSv1.3_2025, for CloudFront.

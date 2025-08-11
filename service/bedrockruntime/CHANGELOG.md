@@ -1,3 +1,8 @@
+# v1.36.0 (2025-08-11)
+
+* **Feature**: Add support for configuring per-service Options via callback on global config.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.35.0 (2025-08-07)
 
 * **Feature**: Support configurable bearer token through the environment via AWS_BEARER_TOKEN_BEDROCK.

@@ -1,3 +1,8 @@
+# v1.207.0 (2025-08-11)
+
+* **Feature**: Add support for configuring per-service Options via callback on global config.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.206.0 (2025-08-08)
 
 * **Feature**: Adds support for GB200 UltraServers in Amazon SageMaker training jobs, training plans, and HyperPod clusters

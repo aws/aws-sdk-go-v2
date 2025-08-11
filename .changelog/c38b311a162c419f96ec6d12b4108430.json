@@ -1,8 +1,0 @@
-{
-    "id": "c38b311a-162c-419f-96ec-6d12b4108430",
-    "type": "feature",
-    "description": "Updating SearchUserHierarchyGroups API",
-    "modules": [
-        "service/connect"
-    ]
-}

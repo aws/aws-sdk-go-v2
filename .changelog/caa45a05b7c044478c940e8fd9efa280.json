@@ -1,8 +1,0 @@
-{
-    "id": "caa45a05-b7c0-4447-8c94-0e8fd9efa280",
-    "type": "documentation",
-    "description": "Doc-only update for Lambda that updates the maximum payload size for response streaming invocations to 200 MB.",
-    "modules": [
-        "service/lambda"
-    ]
-}

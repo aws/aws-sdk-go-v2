@@ -1,8 +1,0 @@
-{
-    "id": "6b963365-6101-4e0c-9c3f-68fbf6f53bd2",
-    "type": "feature",
-    "description": "This release adds AvailabilityZoneId support for CreateVolume, DescribeVolume, LaunchTemplates, RunInstances, DescribeInstances, CreateDefaultSubnet, SpotInstances, and CreateDefaultSubnet APIs.",
-    "modules": [
-        "service/ec2"
-    ]
-}

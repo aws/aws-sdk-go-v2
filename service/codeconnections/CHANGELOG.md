@@ -1,3 +1,8 @@
+# v1.9.0 (2025-08-11)
+
+* **Feature**: Add support for configuring per-service Options via callback on global config.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.8.0 (2025-08-04)
 
 * **Feature**: New integration with Azure DevOps provider type.

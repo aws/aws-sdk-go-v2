@@ -1,8 +1,0 @@
-{
-    "id": "4b247bb7-54b8-4cab-9fc1-9ec27efbfd54",
-    "type": "feature",
-    "description": "Remove SigV4 auth requirement for GetTokensFromRefreshToken",
-    "modules": [
-        "service/cognitoidentityprovider"
-    ]
-}

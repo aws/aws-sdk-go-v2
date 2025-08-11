@@ -1,8 +1,0 @@
-{
-    "id": "d2299594-8144-41ab-ab3c-676baa5f61fb",
-    "type": "feature",
-    "description": "This release includes model updates and enhanced SDK documentation for union fields in automated reasoning policy components. Added docs cover policy definitions, mutations (add/update for rules/types/variables), build assets, workflow sources, test results, and tag exception handling.",
-    "modules": [
-        "service/bedrock"
-    ]
-}

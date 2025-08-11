@@ -1,3 +1,8 @@
+# v1.61.0 (2025-08-11)
+
+* **Feature**: Add support for configuring per-service Options via callback on global config.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.60.0 (2025-08-07)
 
 * **Feature**: Added support for VPC owner account ID associated with DNS request in the GuardDuty finding.

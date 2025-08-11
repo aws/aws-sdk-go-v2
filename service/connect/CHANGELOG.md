@@ -1,3 +1,9 @@
+# v1.135.0 (2025-08-11)
+
+* **Feature**: Add support for configuring per-service Options via callback on global config.
+* **Feature**: Updating SearchUserHierarchyGroups API
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.134.0 (2025-08-08)
 
 * **Feature**: This release adds a new API GetContactMetrics for Amazon Connect.
