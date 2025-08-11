@@ -80,10 +80,9 @@ func (c *Client) DownloadDirectory(ctx context.Context, input *DownloadDirectory
 		if !errors.Is(err, fs.ErrNotExist) {
 			return nil, fmt.Errorf("error when getting destination folder info: %v", err)
 		}
-	} else {
-		if !fileInfo.IsDir() {
-			return nil, fmt.Errorf("the destination path %s doesn't point to a valid directory", input.Destination)
-		}
+	} else if !fileInfo.IsDir() {
+		return nil, fmt.Errorf("the destination path %s doesn't point to a valid directory", input.Destination)
+
 	}
 
 	i := directoryDownloader{c: c, in: input, options: c.options.Copy()}
