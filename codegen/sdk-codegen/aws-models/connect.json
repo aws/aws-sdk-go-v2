@@ -5622,9 +5622,6 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a tag condition.</p>"
                     }
-                },
-                "HierarchyGroupCondition": {
-                    "target": "com.amazonaws.connect#HierarchyGroupCondition"
                 }
             },
             "traits": {
@@ -46056,9 +46053,6 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a string condition.</p>\n         <note>\n            <p>The currently supported values for <code>FieldName</code> are <code>name</code>,\u2028\u2028\n     <code>parentId</code>, <code>levelId</code>, and <code>resourceID</code>.</p>\n         </note>"
                     }
-                },
-                "HierarchyGroupCondition": {
-                    "target": "com.amazonaws.connect#HierarchyGroupCondition"
                 }
             },
             "traits": {

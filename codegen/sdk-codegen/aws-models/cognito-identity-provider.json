@@ -10330,7 +10330,9 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Given a refresh token, issues new ID, access, and optionally refresh tokens for the\n            user who owns the submitted token. This operation issues a new refresh token and\n            invalidates the original refresh token after an optional grace period when refresh token\n            rotation is enabled. If refresh token rotation is disabled, issues new ID and access\n            tokens only.</p>"
+                "smithy.api#auth": [],
+                "smithy.api#documentation": "<p>Given a refresh token, issues new ID, access, and optionally refresh tokens for the\n            user who owns the submitted token. This operation issues a new refresh token and\n            invalidates the original refresh token after an optional grace period when refresh token\n            rotation is enabled. If refresh token rotation is disabled, issues new ID and access\n            tokens only.</p>",
+                "smithy.api#optionalAuth": {}
             }
         },
         "com.amazonaws.cognitoidentityprovider#GetTokensFromRefreshTokenRequest": {

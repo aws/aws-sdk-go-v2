@@ -5773,7 +5773,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 500
+                    "max": 2000
                 }
             }
         },
@@ -30303,10 +30303,22 @@
                         "smithy.api#documentation": "<p>The sort configuration of a heat map.</p>"
                     }
                 },
+                "RowAxisDisplayOptions": {
+                    "target": "com.amazonaws.quicksight#AxisDisplayOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The options that determine the presentation of the row axis label.</p>"
+                    }
+                },
                 "RowLabelOptions": {
                     "target": "com.amazonaws.quicksight#ChartAxisLabelOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>The label options of the row that is displayed in a <code>heat map</code>.</p>"
+                    }
+                },
+                "ColumnAxisDisplayOptions": {
+                    "target": "com.amazonaws.quicksight#AxisDisplayOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The options that determine the presentation of the row axis label.</p>"
                     }
                 },
                 "ColumnLabelOptions": {
@@ -42067,6 +42079,12 @@
                     "target": "com.amazonaws.quicksight#PluginVisualConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>\n       A description of the plugin field wells and their persisted properties.\n      </p>"
+                    }
+                },
+                "Actions": {
+                    "target": "com.amazonaws.quicksight#VisualCustomActionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of custom actions that are configured for a visual.</p>"
                     }
                 },
                 "VisualContentAltText": {
