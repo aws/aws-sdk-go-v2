@@ -1,3 +1,7 @@
+# v1.208.0 (2025-08-12)
+
+* **Feature**: IAM Identity Center trusted identity propagation is now supported in SageMaker Studio.
+
 # v1.207.0 (2025-08-11)
 
 * **Feature**: Add support for configuring per-service Options via callback on global config.

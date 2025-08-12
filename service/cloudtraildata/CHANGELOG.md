@@ -1,3 +1,7 @@
+# v1.15.1 (2025-08-12)
+
+* No change notes available for this release.
+
 # v1.15.0 (2025-08-11)
 
 * **Feature**: Add support for configuring per-service Options via callback on global config.

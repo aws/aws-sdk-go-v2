@@ -1,3 +1,7 @@
+# v1.6.0 (2025-08-12)
+
+* **Feature**: Using recommended smithy trait to generate regional endpoints for Backup Search
+
 # v1.5.0 (2025-08-11)
 
 * **Feature**: Add support for configuring per-service Options via callback on global config.

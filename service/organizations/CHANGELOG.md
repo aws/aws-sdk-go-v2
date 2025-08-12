@@ -1,3 +1,7 @@
+# v1.43.0 (2025-08-12)
+
+* **Feature**: This release introduces 2 new APIs in Organizations: 1. ListAccountsWithInvalidEffectivePolicy 2. ListEffectivePolicyValidationErrors
+
 # v1.42.0 (2025-08-11)
 
 * **Feature**: Add support for configuring per-service Options via callback on global config.

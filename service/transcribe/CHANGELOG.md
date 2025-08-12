@@ -1,3 +1,7 @@
+# v1.51.0 (2025-08-12)
+
+* **Feature**: AWS HealthScribe now supports specifying preferred patient pronouns through the MedicalScribeContext parameter for use in the generated clinical notes.
+
 # v1.50.0 (2025-08-11)
 
 * **Feature**: Add support for configuring per-service Options via callback on global config.

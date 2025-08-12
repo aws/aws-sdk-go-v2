@@ -1,3 +1,7 @@
+# v1.243.0 (2025-08-12)
+
+* **Feature**: Release to allow route table association with a PublicIpv4Pool.
+
 # v1.242.0 (2025-08-11)
 
 * **Feature**: Add support for configuring per-service Options via callback on global config.

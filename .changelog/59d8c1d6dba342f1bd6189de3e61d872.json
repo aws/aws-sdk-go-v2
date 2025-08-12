@@ -1,8 +1,0 @@
-{
-    "id": "59d8c1d6-dba3-42f1-bd61-89de3e61d872",
-    "type": "feature",
-    "description": "AWS CodeBuild now supports PullRequestBuildPolicy in webhook object.",
-    "modules": [
-        "service/codebuild"
-    ]
-}

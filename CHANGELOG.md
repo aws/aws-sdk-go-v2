@@ -1,3 +1,21 @@
+# Release (2025-08-12)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/backupsearch`: [v1.6.0](service/backupsearch/CHANGELOG.md#v160-2025-08-12)
+  * **Feature**: Using recommended smithy trait to generate regional endpoints for Backup Search
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.66.0](service/codebuild/CHANGELOG.md#v1660-2025-08-12)
+  * **Feature**: AWS CodeBuild now supports PullRequestBuildPolicy in webhook object.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.243.0](service/ec2/CHANGELOG.md#v12430-2025-08-12)
+  * **Feature**: Release to allow route table association with a PublicIpv4Pool.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.43.0](service/organizations/CHANGELOG.md#v1430-2025-08-12)
+  * **Feature**: This release introduces 2 new APIs in Organizations: 1. ListAccountsWithInvalidEffectivePolicy 2. ListEffectivePolicyValidationErrors
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.208.0](service/sagemaker/CHANGELOG.md#v12080-2025-08-12)
+  * **Feature**: IAM Identity Center trusted identity propagation is now supported in SageMaker Studio.
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.51.0](service/transcribe/CHANGELOG.md#v1510-2025-08-12)
+  * **Feature**: AWS HealthScribe now supports specifying preferred patient pronouns through the MedicalScribeContext parameter for use in the generated clinical notes.
+* `github.com/aws/aws-sdk-go-v2/service/transcribestreaming`: [v1.30.0](service/transcribestreaming/CHANGELOG.md#v1300-2025-08-12)
+  * **Feature**: AWS HealthScribe now supports specifying preferred patient pronouns through the MedicalScribeContext parameter for use in the generated clinical notes.
+
 # Release (2025-08-11)
 
 ## General Highlights
