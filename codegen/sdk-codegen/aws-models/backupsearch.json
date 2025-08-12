@@ -24,18 +24,18 @@
                 "CreatedAfter": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>This timestamp includes recovery points only \n      created after the specified time.</p>"
+                        "smithy.api#documentation": "<p>This timestamp includes recovery points only created after the specified time.</p>"
                     }
                 },
                 "CreatedBefore": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>This timestamp includes recovery points only \n      created before the specified time.</p>"
+                        "smithy.api#documentation": "<p>This timestamp includes recovery points only created before the specified time.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This filters by recovery points within the CreatedAfter \n     and CreatedBefore timestamps.</p>"
+                "smithy.api#documentation": "<p>This filters by recovery points within the CreatedAfter and CreatedBefore timestamps.</p>"
             }
         },
         "com.amazonaws.backupsearch#ConflictException": {
@@ -64,7 +64,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This exception occurs when a conflict with a previous successful\n            operation is detected. This generally occurs when the previous \n            operation did not have time to propagate to the host serving the \n            current request.</p>\n         <p>A retry (with appropriate backoff logic) is the recommended \n            response to this exception.</p>",
+                "smithy.api#documentation": "<p>This exception occurs when a conflict with a previous successful operation is detected. This generally occurs when the previous operation did not have time to propagate to the host serving the current request.</p> <p>A retry (with appropriate backoff logic) is the recommended response to this exception.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -122,9 +122,7 @@
                     "name": "backup-search"
                 },
                 "aws.endpoints#dualStackOnlyEndpoints": {},
-                "aws.endpoints#standardPartitionalEndpoints": {
-                    "endpointPatternType": "service_region_dnsSuffix"
-                },
+                "aws.endpoints#standardRegionalEndpoints": {},
                 "aws.protocols#restJson1": {},
                 "smithy.api#cors": {
                     "additionalAllowedHeaders": [
@@ -150,7 +148,7 @@
                         "date"
                     ]
                 },
-                "smithy.api#documentation": "<fullname>Backup Search</fullname>\n         <p>Backup Search is the recovery point and item level search for Backup.</p>\n         <p>For additional information, see:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/api-reference.html\">Backup API Reference</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html\">Backup \n            Developer Guide</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<fullname>Backup Search</fullname> <p>Backup Search is the recovery point and item level search for Backup.</p> <p>For additional information, see:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/api-reference.html\">Backup API Reference</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html\">Backup Developer Guide</a> </p> </li> </ul>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -263,15 +261,8 @@
                                                         }
                                                     ],
                                                     "endpoint": {
-                                                        "url": "https://backup-search-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {
-                                                            "authSchemes": [
-                                                                {
-                                                                    "name": "sigv4",
-                                                                    "signingRegion": "{PartitionResult#implicitGlobalRegion}"
-                                                                }
-                                                            ]
-                                                        },
+                                                        "url": "https://backup-search-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
                                                         "headers": {}
                                                     },
                                                     "type": "endpoint"
@@ -279,15 +270,8 @@
                                                 {
                                                     "conditions": [],
                                                     "endpoint": {
-                                                        "url": "https://backup-search.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}",
-                                                        "properties": {
-                                                            "authSchemes": [
-                                                                {
-                                                                    "name": "sigv4",
-                                                                    "signingRegion": "{PartitionResult#implicitGlobalRegion}"
-                                                                }
-                                                            ]
-                                                        },
+                                                        "url": "https://backup-search.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
                                                         "headers": {}
                                                     },
                                                     "type": "endpoint"
@@ -336,14 +320,6 @@
                             "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "properties": {
-                                        "authSchemes": [
-                                            {
-                                                "name": "sigv4",
-                                                "signingRegion": "us-east-1"
-                                            }
-                                        ]
-                                    },
                                     "url": "https://backup-search-fips.us-east-1.api.aws"
                                 }
                             },
@@ -356,14 +332,6 @@
                             "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "properties": {
-                                        "authSchemes": [
-                                            {
-                                                "name": "sigv4",
-                                                "signingRegion": "us-east-1"
-                                            }
-                                        ]
-                                    },
                                     "url": "https://backup-search.us-east-1.api.aws"
                                 }
                             },
@@ -376,14 +344,6 @@
                             "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "properties": {
-                                        "authSchemes": [
-                                            {
-                                                "name": "sigv4",
-                                                "signingRegion": "cn-northwest-1"
-                                            }
-                                        ]
-                                    },
                                     "url": "https://backup-search-fips.cn-northwest-1.api.amazonwebservices.com.cn"
                                 }
                             },
@@ -396,14 +356,6 @@
                             "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "properties": {
-                                        "authSchemes": [
-                                            {
-                                                "name": "sigv4",
-                                                "signingRegion": "cn-northwest-1"
-                                            }
-                                        ]
-                                    },
                                     "url": "https://backup-search.cn-northwest-1.api.amazonwebservices.com.cn"
                                 }
                             },
@@ -416,14 +368,6 @@
                             "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "properties": {
-                                        "authSchemes": [
-                                            {
-                                                "name": "sigv4",
-                                                "signingRegion": "us-gov-west-1"
-                                            }
-                                        ]
-                                    },
                                     "url": "https://backup-search-fips.us-gov-west-1.api.aws"
                                 }
                             },
@@ -436,14 +380,6 @@
                             "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "properties": {
-                                        "authSchemes": [
-                                            {
-                                                "name": "sigv4",
-                                                "signingRegion": "us-gov-west-1"
-                                            }
-                                        ]
-                                    },
                                     "url": "https://backup-search.us-gov-west-1.api.aws"
                                 }
                             },
@@ -469,24 +405,24 @@
                 "RecoveryPointsScannedCount": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>This number is the sum of all backups that \n      have been scanned so far during a search job.</p>"
+                        "smithy.api#documentation": "<p>This number is the sum of all backups that have been scanned so far during a search job.</p>"
                     }
                 },
                 "ItemsScannedCount": {
                     "target": "smithy.api#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>This number is the sum of all items that \n      have been scanned so far during a search job.</p>"
+                        "smithy.api#documentation": "<p>This number is the sum of all items that have been scanned so far during a search job.</p>"
                     }
                 },
                 "ItemsMatchedCount": {
                     "target": "smithy.api#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>This number is the sum of all items that match \n      the item filters in a search job in progress.</p>"
+                        "smithy.api#documentation": "<p>This number is the sum of all items that match the item filters in a search job in progress.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This contains information results retrieved from \n      a search job that may not have completed.</p>"
+                "smithy.api#documentation": "<p>This contains information results retrieved from a search job that may not have completed.</p>"
             }
         },
         "com.amazonaws.backupsearch#EBSItemFilter": {
@@ -495,30 +431,30 @@
                 "FilePaths": {
                     "target": "com.amazonaws.backupsearch#StringConditionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>You can include 1 to 10 values.</p>\n         <p>If one file path is included, the results will \n      return only items that match the file path.</p>\n         <p>If more than one file path is included, the \n      results will return all items that match any of the \n      file paths.</p>"
+                        "smithy.api#documentation": "<p>You can include 1 to 10 values.</p> <p>If one file path is included, the results will return only items that match the file path.</p> <p>If more than one file path is included, the results will return all items that match any of the file paths.</p>"
                     }
                 },
                 "Sizes": {
                     "target": "com.amazonaws.backupsearch#LongConditionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>You can include 1 to 10 values.</p>\n         <p>If one is included, the results will \n      return only items that match.</p>\n         <p>If more than one is included, the \n      results will return all items that match any of \n      the included values.</p>"
+                        "smithy.api#documentation": "<p>You can include 1 to 10 values.</p> <p>If one is included, the results will return only items that match.</p> <p>If more than one is included, the results will return all items that match any of the included values.</p>"
                     }
                 },
                 "CreationTimes": {
                     "target": "com.amazonaws.backupsearch#TimeConditionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>You can include 1 to 10 values.</p>\n         <p>If one is included, the results will \n      return only items that match.</p>\n         <p>If more than one is included, the \n      results will return all items that match any of \n      the included values.</p>"
+                        "smithy.api#documentation": "<p>You can include 1 to 10 values.</p> <p>If one is included, the results will return only items that match.</p> <p>If more than one is included, the results will return all items that match any of the included values.</p>"
                     }
                 },
                 "LastModificationTimes": {
                     "target": "com.amazonaws.backupsearch#TimeConditionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>You can include 1 to 10 values.</p>\n         <p>If one is included, the results will \n      return only items that match.</p>\n         <p>If more than one is included, the \n      results will return all items that match any of \n      the included values.</p>"
+                        "smithy.api#documentation": "<p>You can include 1 to 10 values.</p> <p>If one is included, the results will return only items that match.</p> <p>If more than one is included, the results will return all items that match any of the included values.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This contains arrays of objects, which may include \n      CreationTimes time condition objects, FilePaths \n      string objects, LastModificationTimes time \n      condition objects, </p>"
+                "smithy.api#documentation": "<p>This contains arrays of objects, which may include CreationTimes time condition objects, FilePaths string objects, LastModificationTimes time condition objects, </p>"
             }
         },
         "com.amazonaws.backupsearch#EBSItemFilters": {
@@ -539,13 +475,13 @@
                 "BackupResourceArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>These are one or more items in the  \n      results that match values for the Amazon Resource \n      Name (ARN) of recovery points returned in a search \n      of Amazon EBS backup metadata.</p>"
+                        "smithy.api#documentation": "<p>These are one or more items in the results that match values for the Amazon Resource Name (ARN) of recovery points returned in a search of Amazon EBS backup metadata.</p>"
                     }
                 },
                 "SourceResourceArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>These are one or more items in the  \n      results that match values for the Amazon Resource \n      Name (ARN) of source resources returned in a search \n      of Amazon EBS backup metadata.</p>"
+                        "smithy.api#documentation": "<p>These are one or more items in the results that match values for the Amazon Resource Name (ARN) of source resources returned in a search of Amazon EBS backup metadata.</p>"
                     }
                 },
                 "BackupVaultName": {
@@ -557,36 +493,36 @@
                 "FileSystemIdentifier": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>These are one or more items in the  \n      results that match values for file systems returned \n      in a search of Amazon EBS backup metadata.</p>"
+                        "smithy.api#documentation": "<p>These are one or more items in the results that match values for file systems returned in a search of Amazon EBS backup metadata.</p>"
                     }
                 },
                 "FilePath": {
                     "target": "com.amazonaws.backupsearch#FilePath",
                     "traits": {
-                        "smithy.api#documentation": "<p>These are one or more items in the  \n      results that match values for file paths returned \n      in a search of Amazon EBS backup metadata.</p>"
+                        "smithy.api#documentation": "<p>These are one or more items in the results that match values for file paths returned in a search of Amazon EBS backup metadata.</p>"
                     }
                 },
                 "FileSize": {
                     "target": "smithy.api#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>These are one or more items in the  \n      results that match values for file sizes returned \n      in a search of Amazon EBS backup metadata.</p>"
+                        "smithy.api#documentation": "<p>These are one or more items in the results that match values for file sizes returned in a search of Amazon EBS backup metadata.</p>"
                     }
                 },
                 "CreationTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>These are one or more items in the  \n      results that match values for creation times returned \n      in a search of Amazon EBS backup metadata.</p>"
+                        "smithy.api#documentation": "<p>These are one or more items in the results that match values for creation times returned in a search of Amazon EBS backup metadata.</p>"
                     }
                 },
                 "LastModifiedTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>These are one or more items in the  \n      results that match values for Last Modified Time returned \n      in a search of Amazon EBS backup metadata.</p>"
+                        "smithy.api#documentation": "<p>These are one or more items in the results that match values for Last Modified Time returned in a search of Amazon EBS backup metadata.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>These are the items returned in the results of \n      a search of Amazon EBS backup metadata.</p>"
+                "smithy.api#documentation": "<p>These are the items returned in the results of a search of Amazon EBS backup metadata.</p>"
             }
         },
         "com.amazonaws.backupsearch#EncryptionKeyArn": {
@@ -640,44 +576,44 @@
                 "ExportJobIdentifier": {
                     "target": "com.amazonaws.backupsearch#GenericId",
                     "traits": {
-                        "smithy.api#documentation": "<p>This is the unique string that identifies a \n      specific export job.</p>",
+                        "smithy.api#documentation": "<p>This is the unique string that identifies a specific export job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ExportJobArn": {
                     "target": "com.amazonaws.backupsearch#ExportJobArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>This is the unique ARN (Amazon Resource Name) that \n      belongs to the new export job.</p>"
+                        "smithy.api#documentation": "<p>This is the unique ARN (Amazon Resource Name) that belongs to the new export job.</p>"
                     }
                 },
                 "Status": {
                     "target": "com.amazonaws.backupsearch#ExportJobStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the export job is one of the \n      following:</p>\n         <p>\n            <code>CREATED</code>; <code>RUNNING</code>; \n      <code>FAILED</code>; or <code>COMPLETED</code>.</p>"
+                        "smithy.api#documentation": "<p>The status of the export job is one of the following:</p> <p> <code>CREATED</code>; <code>RUNNING</code>; <code>FAILED</code>; or <code>COMPLETED</code>.</p>"
                     }
                 },
                 "CreationTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>This is a timestamp of the time the export job \n      was created.</p>"
+                        "smithy.api#documentation": "<p>This is a timestamp of the time the export job was created.</p>"
                     }
                 },
                 "CompletionTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>This is a timestamp of the time the export job \n      compeleted.</p>"
+                        "smithy.api#documentation": "<p>This is a timestamp of the time the export job compeleted.</p>"
                     }
                 },
                 "StatusMessage": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A status message is a string that is returned for an export\n       job.</p>\n         <p>A status message is included for any status other \n      than <code>COMPLETED</code> without issues.</p>"
+                        "smithy.api#documentation": "<p>A status message is a string that is returned for an export job.</p> <p>A status message is included for any status other than <code>COMPLETED</code> without issues.</p>"
                     }
                 },
                 "SearchJobArn": {
                     "target": "com.amazonaws.backupsearch#SearchJobArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique string that identifies the Amazon Resource \n      Name (ARN) of the specified search job.</p>"
+                        "smithy.api#documentation": "<p>The unique string that identifies the Amazon Resource Name (ARN) of the specified search job.</p>"
                     }
                 }
             },
@@ -691,7 +627,7 @@
                 "s3ExportSpecification": {
                     "target": "com.amazonaws.backupsearch#S3ExportSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>This specifies the destination Amazon S3 \n      bucket for the export job. And, if included, it also \n      specifies the destination prefix.</p>"
+                        "smithy.api#documentation": "<p>This specifies the destination Amazon S3 bucket for the export job. And, if included, it also specifies the destination prefix.</p>"
                     }
                 }
             },
@@ -722,7 +658,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation retrieves metadata of a search job, \n      including its progress.</p>",
+                "smithy.api#documentation": "<p>This operation retrieves metadata of a search job, including its progress.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -737,7 +673,7 @@
                 "SearchJobIdentifier": {
                     "target": "com.amazonaws.backupsearch#GenericId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Required unique string that specifies the \n      search job.</p>",
+                        "smithy.api#documentation": "<p>Required unique string that specifies the search job.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -759,58 +695,58 @@
                 "SearchScopeSummary": {
                     "target": "com.amazonaws.backupsearch#SearchScopeSummary",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returned summary of the specified search job scope, \n      including:\n      </p>\n         <ul>\n            <li>\n               <p>TotalBackupsToScanCount, the number of \n           recovery points returned by the search.</p>\n            </li>\n            <li>\n               <p>TotalItemsToScanCount, the number of \n           items returned by the search.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Returned summary of the specified search job scope, including: </p> <ul> <li> <p>TotalBackupsToScanCount, the number of recovery points returned by the search.</p> </li> <li> <p>TotalItemsToScanCount, the number of items returned by the search.</p> </li> </ul>"
                     }
                 },
                 "CurrentSearchProgress": {
                     "target": "com.amazonaws.backupsearch#CurrentSearchProgress",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns numbers representing BackupsScannedCount, \n      ItemsScanned, and ItemsMatched.</p>"
+                        "smithy.api#documentation": "<p>Returns numbers representing BackupsScannedCount, ItemsScanned, and ItemsMatched.</p>"
                     }
                 },
                 "StatusMessage": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A status message will be returned for either a \n      earch job with a status of <code>ERRORED</code> or a status of \n      <code>COMPLETED</code> jobs with issues.</p>\n         <p>For example, a message may say that a search \n      contained recovery points unable to be scanned because \n      of a permissions issue.</p>"
+                        "smithy.api#documentation": "<p>A status message will be returned for either a earch job with a status of <code>ERRORED</code> or a status of <code>COMPLETED</code> jobs with issues.</p> <p>For example, a message may say that a search contained recovery points unable to be scanned because of a permissions issue.</p>"
                     }
                 },
                 "EncryptionKeyArn": {
                     "target": "com.amazonaws.backupsearch#EncryptionKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The encryption key for the specified \n      search job.</p>\n         <p>Example: <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>"
+                        "smithy.api#documentation": "<p>The encryption key for the specified search job.</p> <p>Example: <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>"
                     }
                 },
                 "CompletionTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time that a search job completed, in Unix format and Coordinated\n         Universal Time (UTC). The value of <code>CompletionTime</code> is accurate to milliseconds.\n         For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087\n         AM.</p>"
+                        "smithy.api#documentation": "<p>The date and time that a search job completed, in Unix format and Coordinated Universal Time (UTC). The value of <code>CompletionTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.</p>"
                     }
                 },
                 "Status": {
                     "target": "com.amazonaws.backupsearch#SearchJobState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the specified search job.</p>\n         <p>A search job may have one of the following statuses: \n      <code>RUNNING</code>; <code>COMPLETED</code>; <code>STOPPED</code>; \n      <code>FAILED</code>; <code>TIMED_OUT</code>; or <code>EXPIRED</code>\n      .</p>",
+                        "smithy.api#documentation": "<p>The current status of the specified search job.</p> <p>A search job may have one of the following statuses: <code>RUNNING</code>; <code>COMPLETED</code>; <code>STOPPED</code>; <code>FAILED</code>; <code>TIMED_OUT</code>; or <code>EXPIRED</code> .</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SearchScope": {
                     "target": "com.amazonaws.backupsearch#SearchScope",
                     "traits": {
-                        "smithy.api#documentation": "<p>The search scope is all backup \n      properties input into a search.</p>",
+                        "smithy.api#documentation": "<p>The search scope is all backup properties input into a search.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ItemFilters": {
                     "target": "com.amazonaws.backupsearch#ItemFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>Item Filters represent all input item  \n      properties specified when the search was \n      created.</p>",
+                        "smithy.api#documentation": "<p>Item Filters represent all input item properties specified when the search was created.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "CreationTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time that a search job was created, in Unix format and Coordinated\n         Universal Time (UTC). The value of <code>CompletionTime</code> is accurate to milliseconds.\n         For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087\n         AM.</p>",
+                        "smithy.api#documentation": "<p>The date and time that a search job was created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CompletionTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -824,7 +760,7 @@
                 "SearchJobArn": {
                     "target": "com.amazonaws.backupsearch#SearchJobArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique string that identifies the Amazon Resource \n      Name (ARN) of the specified search job.</p>",
+                        "smithy.api#documentation": "<p>The unique string that identifies the Amazon Resource Name (ARN) of the specified search job.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -847,7 +783,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation retrieves the metadata of an export job.</p>\n         <p>An export job is an operation that transmits the results \n      of a search job to a specified S3 bucket in a \n      .csv file.</p>\n         <p>An export job allows you to retain results of a search \n      beyond the search job's scheduled retention of 7 days.</p>",
+                "smithy.api#documentation": "<p>This operation retrieves the metadata of an export job.</p> <p>An export job is an operation that transmits the results of a search job to a specified S3 bucket in a .csv file.</p> <p>An export job allows you to retain results of a search beyond the search job's scheduled retention of 7 days.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -862,7 +798,7 @@
                 "ExportJobIdentifier": {
                     "target": "com.amazonaws.backupsearch#GenericId",
                     "traits": {
-                        "smithy.api#documentation": "<p>This is the unique string that identifies a \n      specific export job.</p>\n         <p>Required for this operation.</p>",
+                        "smithy.api#documentation": "<p>This is the unique string that identifies a specific export job.</p> <p>Required for this operation.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -878,14 +814,14 @@
                 "ExportJobIdentifier": {
                     "target": "com.amazonaws.backupsearch#GenericId",
                     "traits": {
-                        "smithy.api#documentation": "<p>This is the unique string that identifies the   \n      specified export job.</p>",
+                        "smithy.api#documentation": "<p>This is the unique string that identifies the specified export job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ExportJobArn": {
                     "target": "com.amazonaws.backupsearch#ExportJobArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique Amazon Resource Name (ARN) that uniquely identifies \n      the export job.</p>"
+                        "smithy.api#documentation": "<p>The unique Amazon Resource Name (ARN) that uniquely identifies the export job.</p>"
                     }
                 },
                 "Status": {
@@ -897,31 +833,31 @@
                 "CreationTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time that an export job was created, in Unix format and Coordinated Universal\n         Time (UTC). The value of <code>CreationTime</code> is accurate to milliseconds. For\n         example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087\n         AM.</p>"
+                        "smithy.api#documentation": "<p>The date and time that an export job was created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.</p>"
                     }
                 },
                 "CompletionTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time that an export job completed, in Unix format and Coordinated Universal\n         Time (UTC). The value of <code>CreationTime</code> is accurate to milliseconds. For\n         example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087\n         AM.</p>"
+                        "smithy.api#documentation": "<p>The date and time that an export job completed, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.</p>"
                     }
                 },
                 "StatusMessage": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A status message is a string that is returned for search job \n      with a status of <code>FAILED</code>, along with steps to remedy \n      and retry the operation.</p>"
+                        "smithy.api#documentation": "<p>A status message is a string that is returned for search job with a status of <code>FAILED</code>, along with steps to remedy and retry the operation.</p>"
                     }
                 },
                 "ExportSpecification": {
                     "target": "com.amazonaws.backupsearch#ExportSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>The export specification consists of the destination \n      S3 bucket to which the search results were exported, along \n      with the destination prefix.</p>"
+                        "smithy.api#documentation": "<p>The export specification consists of the destination S3 bucket to which the search results were exported, along with the destination prefix.</p>"
                     }
                 },
                 "SearchJobArn": {
                     "target": "com.amazonaws.backupsearch#SearchJobArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique string that identifies the Amazon Resource \n      Name (ARN) of the specified search job.</p>"
+                        "smithy.api#documentation": "<p>The unique string that identifies the Amazon Resource Name (ARN) of the specified search job.</p>"
                     }
                 }
             },
@@ -970,18 +906,18 @@
                 "S3ItemFilters": {
                     "target": "com.amazonaws.backupsearch#S3ItemFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>This array can contain CreationTimes, ETags, \n      ObjectKeys, Sizes, or VersionIds objects.</p>"
+                        "smithy.api#documentation": "<p>This array can contain CreationTimes, ETags, ObjectKeys, Sizes, or VersionIds objects.</p>"
                     }
                 },
                 "EBSItemFilters": {
                     "target": "com.amazonaws.backupsearch#EBSItemFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>This array can contain CreationTimes, \n      FilePaths, LastModificationTimes, or Sizes objects.</p>"
+                        "smithy.api#documentation": "<p>This array can contain CreationTimes, FilePaths, LastModificationTimes, or Sizes objects.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Item Filters represent all input item  \n      properties specified when the search was \n      created.</p>\n         <p>Contains either EBSItemFilters or \n      S3ItemFilters</p>"
+                "smithy.api#documentation": "<p>Item Filters represent all input item properties specified when the search was created.</p> <p>Contains either EBSItemFilters or S3ItemFilters</p>"
             }
         },
         "com.amazonaws.backupsearch#ListSearchJobBackups": {
@@ -998,7 +934,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation returns a list of all backups (recovery \n      points) in a paginated format that were included in \n      the search job.</p>\n         <p>If a search does not display an expected backup in \n      the results, you can call this operation to display each \n      backup included in the search. Any backups that were not \n      included because they have a <code>FAILED</code> status \n      from a permissions issue will be displayed, along with a \n      status message.</p>\n         <p>Only recovery points with a backup index that has \n      a status of <code>ACTIVE</code> will be included in search results. \n      If the index has any other status, its status will be \n      displayed along with a status message.</p>",
+                "smithy.api#documentation": "<p>This operation returns a list of all backups (recovery points) in a paginated format that were included in the search job.</p> <p>If a search does not display an expected backup in the results, you can call this operation to display each backup included in the search. Any backups that were not included because they have a <code>FAILED</code> status from a permissions issue will be displayed, along with a status message.</p> <p>Only recovery points with a backup index that has a status of <code>ACTIVE</code> will be included in search results. If the index has any other status, its status will be displayed along with a status message.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -1027,7 +963,7 @@
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned backups \n      included in a search job.</p>\n         <p>For example, if a request\n         is made to return <code>MaxResults</code> number of backups, <code>NextToken</code>\n         allows you to return more items in your list starting at the location pointed to by the\n         next token.</p>",
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned backups included in a search job.</p> <p>For example, if a request is made to return <code>MaxResults</code> number of backups, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -1054,14 +990,14 @@
                 "Results": {
                     "target": "com.amazonaws.backupsearch#SearchJobBackupsResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The recovery points returned the results of a \n      search job</p>",
+                        "smithy.api#documentation": "<p>The recovery points returned the results of a search job</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned backups \n      included in a search job.</p>\n         <p>For example, if a request\n         is made to return <code>MaxResults</code> number of backups, <code>NextToken</code>\n         allows you to return more items in your list starting at the location pointed to by the\n         next token.</p>"
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned backups included in a search job.</p> <p>For example, if a request is made to return <code>MaxResults</code> number of backups, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.</p>"
                     }
                 }
             },
@@ -1110,7 +1046,7 @@
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned \n      search job results.</p>\n         <p>For example, if a request\n         is made to return <code>MaxResults</code> number of \n         search job results, <code>NextToken</code>\n         allows you to return more items in your list starting at the location pointed to by the\n         next token.</p>",
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned search job results.</p> <p>For example, if a request is made to return <code>MaxResults</code> number of search job results, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -1144,7 +1080,7 @@
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of \n      search job results.</p>\n         <p>For example, if a request\n         is made to return <code>MaxResults</code> number of backups, <code>NextToken</code>\n         allows you to return more items in your list starting at the location pointed to by the\n         next token.</p>"
+                        "smithy.api#documentation": "<p>The next item following a partial list of search job results.</p> <p>For example, if a request is made to return <code>MaxResults</code> number of backups, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.</p>"
                     }
                 }
             },
@@ -1161,7 +1097,7 @@
                 "target": "com.amazonaws.backupsearch#ListSearchJobsOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>This operation returns a list of search jobs belonging \n      to an account.</p>",
+                "smithy.api#documentation": "<p>This operation returns a list of search jobs belonging to an account.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -1192,7 +1128,7 @@
                 "ByStatus": {
                     "target": "com.amazonaws.backupsearch#SearchJobState",
                     "traits": {
-                        "smithy.api#documentation": "<p>Include this parameter to filter list by search \n      job status.</p>",
+                        "smithy.api#documentation": "<p>Include this parameter to filter list by search job status.</p>",
                         "smithy.api#httpQuery": "Status",
                         "smithy.api#notProperty": {}
                     }
@@ -1200,7 +1136,7 @@
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned \n      search jobs.</p>\n         <p>For example, if a request\n         is made to return <code>MaxResults</code> number of backups, <code>NextToken</code>\n         allows you to return more items in your list starting at the location pointed to by the\n         next token.</p>",
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned search jobs.</p> <p>For example, if a request is made to return <code>MaxResults</code> number of backups, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.</p>",
                         "smithy.api#httpQuery": "NextToken",
                         "smithy.api#notProperty": {}
                     }
@@ -1229,7 +1165,7 @@
                 "SearchJobs": {
                     "target": "com.amazonaws.backupsearch#SearchJobs",
                     "traits": {
-                        "smithy.api#documentation": "<p>The search jobs among the list, with details of \n      the returned search jobs.</p>",
+                        "smithy.api#documentation": "<p>The search jobs among the list, with details of the returned search jobs.</p>",
                         "smithy.api#notProperty": {},
                         "smithy.api#required": {}
                     }
@@ -1237,7 +1173,7 @@
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned backups \n      included in a search job.</p>\n         <p>For example, if a request\n         is made to return <code>MaxResults</code> number of backups, <code>NextToken</code>\n         allows you to return more items in your list starting at the location pointed to by the\n         next token.</p>",
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned backups included in a search job.</p> <p>For example, if a request is made to return <code>MaxResults</code> number of backups, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.</p>",
                         "smithy.api#notProperty": {}
                     }
                 }
@@ -1263,7 +1199,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation exports search results of a search job \n      to a specified destination S3 bucket.</p>",
+                "smithy.api#documentation": "<p>This operation exports search results of a search job to a specified destination S3 bucket.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -1281,7 +1217,7 @@
                 "Status": {
                     "target": "com.amazonaws.backupsearch#ExportJobStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The search jobs to be included in the export job \n      can be filtered by including this parameter.</p>",
+                        "smithy.api#documentation": "<p>The search jobs to be included in the export job can be filtered by including this parameter.</p>",
                         "smithy.api#httpQuery": "Status",
                         "smithy.api#notProperty": {}
                     }
@@ -1297,7 +1233,7 @@
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned backups \n      included in a search job.</p>\n         <p>For example, if a request\n         is made to return <code>MaxResults</code> number of backups, <code>NextToken</code>\n         allows you to return more items in your list starting at the location pointed to by the\n         next token.</p>",
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned backups included in a search job.</p> <p>For example, if a request is made to return <code>MaxResults</code> number of backups, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.</p>",
                         "smithy.api#httpQuery": "NextToken",
                         "smithy.api#notProperty": {}
                     }
@@ -1334,7 +1270,7 @@
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned backups \n      included in a search job.</p>\n         <p>For example, if a request\n         is made to return <code>MaxResults</code> number of backups, <code>NextToken</code>\n         allows you to return more items in your list starting at the location pointed to by the\n         next token.</p>",
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned backups included in a search job.</p> <p>For example, if a request is made to return <code>MaxResults</code> number of backups, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.</p>",
                         "smithy.api#notProperty": {}
                     }
                 }
@@ -1371,7 +1307,7 @@
                 "ResourceArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies \n      the resource.&gt;</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the resource.&gt;</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1401,7 +1337,7 @@
                 "Value": {
                     "target": "smithy.api#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value of an item included in one of the search \n      item filters.</p>",
+                        "smithy.api#documentation": "<p>The value of an item included in one of the search item filters.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1409,12 +1345,12 @@
                     "target": "com.amazonaws.backupsearch#LongConditionOperator",
                     "traits": {
                         "smithy.api#default": "EQUALS_TO",
-                        "smithy.api#documentation": "<p>A string that defines what values will be \n      returned.</p>\n         <p>If this is included, avoid combinations of \n      operators that will return all possible values. \n      For example, including both <code>EQUALS_TO</code> \n      and <code>NOT_EQUALS_TO</code> with a value of <code>4</code> \n      will return all values.</p>"
+                        "smithy.api#documentation": "<p>A string that defines what values will be returned.</p> <p>If this is included, avoid combinations of operators that will return all possible values. For example, including both <code>EQUALS_TO</code> and <code>NOT_EQUALS_TO</code> with a value of <code>4</code> will return all values.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The long condition contains a <code>Value</code> \n      and can optionally contain an <code>Operator</code>.</p>"
+                "smithy.api#documentation": "<p>The long condition contains a <code>Value</code> and can optionally contain an <code>Operator</code>.</p>"
             }
         },
         "com.amazonaws.backupsearch#LongConditionList": {
@@ -1522,7 +1458,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The resource was not found for this request.</p>\n         <p>Confirm the resource information, such as the ARN or type is correct \n            and exists, then retry the request.</p>",
+                "smithy.api#documentation": "<p>The resource was not found for this request.</p> <p>Confirm the resource information, such as the ARN or type is correct and exists, then retry the request.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -1562,18 +1498,18 @@
                 "S3ResultItem": {
                     "target": "com.amazonaws.backupsearch#S3ResultItem",
                     "traits": {
-                        "smithy.api#documentation": "<p>These are items returned in the search results \n      of an Amazon S3 search.</p>"
+                        "smithy.api#documentation": "<p>These are items returned in the search results of an Amazon S3 search.</p>"
                     }
                 },
                 "EBSResultItem": {
                     "target": "com.amazonaws.backupsearch#EBSResultItem",
                     "traits": {
-                        "smithy.api#documentation": "<p>These are items returned in the search results \n      of an Amazon EBS search.</p>"
+                        "smithy.api#documentation": "<p>These are items returned in the search results of an Amazon EBS search.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This is an object representing the item \n      returned in the results of a search for a specific \n      resource type.</p>"
+                "smithy.api#documentation": "<p>This is an object representing the item returned in the results of a search for a specific resource type.</p>"
             }
         },
         "com.amazonaws.backupsearch#Results": {
@@ -1588,19 +1524,19 @@
                 "DestinationBucket": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>This specifies the destination Amazon S3 \n      bucket for the export job.</p>",
+                        "smithy.api#documentation": "<p>This specifies the destination Amazon S3 bucket for the export job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DestinationPrefix": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>This specifies the prefix for the destination \n      Amazon S3 bucket for the export job.</p>"
+                        "smithy.api#documentation": "<p>This specifies the prefix for the destination Amazon S3 bucket for the export job.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This specification contains a required string of the \n      destination bucket; optionally, you can include the \n      destination prefix.</p>"
+                "smithy.api#documentation": "<p>This specification contains a required string of the destination bucket; optionally, you can include the destination prefix.</p>"
             }
         },
         "com.amazonaws.backupsearch#S3ItemFilter": {
@@ -1609,36 +1545,36 @@
                 "ObjectKeys": {
                     "target": "com.amazonaws.backupsearch#StringConditionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>You can include 1 to 10 values.</p>\n         <p>If one value is included, the results will \n      return only items that match the value.</p>\n         <p>If more than one value is included, the \n      results will return all items that match any of the \n      values.</p>"
+                        "smithy.api#documentation": "<p>You can include 1 to 10 values.</p> <p>If one value is included, the results will return only items that match the value.</p> <p>If more than one value is included, the results will return all items that match any of the values.</p>"
                     }
                 },
                 "Sizes": {
                     "target": "com.amazonaws.backupsearch#LongConditionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>You can include 1 to 10 values.</p>\n         <p>If one value is included, the results will \n      return only items that match the value.</p>\n         <p>If more than one value is included, the \n      results will return all items that match any of the \n      values.</p>"
+                        "smithy.api#documentation": "<p>You can include 1 to 10 values.</p> <p>If one value is included, the results will return only items that match the value.</p> <p>If more than one value is included, the results will return all items that match any of the values.</p>"
                     }
                 },
                 "CreationTimes": {
                     "target": "com.amazonaws.backupsearch#TimeConditionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>You can include 1 to 10 values.</p>\n         <p>If one value is included, the results will \n      return only items that match the value.</p>\n         <p>If more than one value is included, the \n      results will return all items that match any of the \n      values.</p>"
+                        "smithy.api#documentation": "<p>You can include 1 to 10 values.</p> <p>If one value is included, the results will return only items that match the value.</p> <p>If more than one value is included, the results will return all items that match any of the values.</p>"
                     }
                 },
                 "VersionIds": {
                     "target": "com.amazonaws.backupsearch#StringConditionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>You can include 1 to 10 values.</p>\n         <p>If one value is included, the results will \n      return only items that match the value.</p>\n         <p>If more than one value is included, the \n      results will return all items that match any of the \n      values.</p>"
+                        "smithy.api#documentation": "<p>You can include 1 to 10 values.</p> <p>If one value is included, the results will return only items that match the value.</p> <p>If more than one value is included, the results will return all items that match any of the values.</p>"
                     }
                 },
                 "ETags": {
                     "target": "com.amazonaws.backupsearch#StringConditionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>You can include 1 to 10 values.</p>\n         <p>If one value is included, the results will \n      return only items that match the value.</p>\n         <p>If more than one value is included, the \n      results will return all items that match any of the \n      values.</p>"
+                        "smithy.api#documentation": "<p>You can include 1 to 10 values.</p> <p>If one value is included, the results will return only items that match the value.</p> <p>If more than one value is included, the results will return all items that match any of the values.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This contains arrays of objects, which may include \n      ObjectKeys, Sizes, CreationTimes, VersionIds, and/or \n      Etags.</p>"
+                "smithy.api#documentation": "<p>This contains arrays of objects, which may include ObjectKeys, Sizes, CreationTimes, VersionIds, and/or Etags.</p>"
             }
         },
         "com.amazonaws.backupsearch#S3ItemFilters": {
@@ -1659,13 +1595,13 @@
                 "BackupResourceArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>These are items in the returned results that match \n      recovery point Amazon Resource Names (ARN) input during \n      a search of Amazon S3 backup metadata.</p>"
+                        "smithy.api#documentation": "<p>These are items in the returned results that match recovery point Amazon Resource Names (ARN) input during a search of Amazon S3 backup metadata.</p>"
                     }
                 },
                 "SourceResourceArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>These are items in the returned results that match \n      source Amazon Resource Names (ARN) input during \n      a search of Amazon S3 backup metadata.</p>"
+                        "smithy.api#documentation": "<p>These are items in the returned results that match source Amazon Resource Names (ARN) input during a search of Amazon S3 backup metadata.</p>"
                     }
                 },
                 "BackupVaultName": {
@@ -1677,36 +1613,36 @@
                 "ObjectKey": {
                     "target": "com.amazonaws.backupsearch#ObjectKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>This is one or more items    \n      returned in the results of a search of Amazon S3 \n      backup metadata that match the values input for \n      object key.</p>"
+                        "smithy.api#documentation": "<p>This is one or more items returned in the results of a search of Amazon S3 backup metadata that match the values input for object key.</p>"
                     }
                 },
                 "ObjectSize": {
                     "target": "smithy.api#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>These are items in the returned results that match \n      values for object size(s) input during a search of \n      Amazon S3 backup metadata.</p>"
+                        "smithy.api#documentation": "<p>These are items in the returned results that match values for object size(s) input during a search of Amazon S3 backup metadata.</p>"
                     }
                 },
                 "CreationTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>These are one or more items in the returned results \n      that match values for item creation time input during \n      a search of Amazon S3 backup metadata.</p>"
+                        "smithy.api#documentation": "<p>These are one or more items in the returned results that match values for item creation time input during a search of Amazon S3 backup metadata.</p>"
                     }
                 },
                 "ETag": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>These are one or more items in the returned results \n      that match values for ETags input during \n      a search of Amazon S3 backup metadata.</p>"
+                        "smithy.api#documentation": "<p>These are one or more items in the returned results that match values for ETags input during a search of Amazon S3 backup metadata.</p>"
                     }
                 },
                 "VersionId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>These are one or more items in the returned results \n      that match values for version IDs input during \n      a search of Amazon S3 backup metadata.</p>"
+                        "smithy.api#documentation": "<p>These are one or more items in the returned results that match values for version IDs input during a search of Amazon S3 backup metadata.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>These are the items returned in the results of \n      a search of Amazon S3 backup metadata.</p>"
+                "smithy.api#documentation": "<p>These are the items returned in the results of a search of Amazon S3 backup metadata.</p>"
             }
         },
         "com.amazonaws.backupsearch#SearchJob": {
@@ -1802,13 +1738,13 @@
                 "BackupResourceArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies \n      the backup resources.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the backup resources.</p>"
                     }
                 },
                 "SourceResourceArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies \n      the source resources.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the source resources.</p>"
                     }
                 },
                 "IndexCreationTime": {
@@ -1825,7 +1761,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This contains the information about recovery \n      points returned in results of a search job.</p>"
+                "smithy.api#documentation": "<p>This contains the information about recovery points returned in results of a search job.</p>"
             }
         },
         "com.amazonaws.backupsearch#SearchJobBackupsResults": {
@@ -1881,7 +1817,7 @@
                 "SearchJobArn": {
                     "target": "com.amazonaws.backupsearch#SearchJobArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique string that identifies the Amazon Resource \n      Name (ARN) of the specified search job.</p>"
+                        "smithy.api#documentation": "<p>The unique string that identifies the Amazon Resource Name (ARN) of the specified search job.</p>"
                     }
                 },
                 "Name": {
@@ -1911,13 +1847,13 @@
                 "SearchScopeSummary": {
                     "target": "com.amazonaws.backupsearch#SearchScopeSummary",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returned summary of the specified search job scope, \n      including:\n      </p>\n         <ul>\n            <li>\n               <p>TotalBackupsToScanCount, the number of \n           recovery points returned by the search.</p>\n            </li>\n            <li>\n               <p>TotalItemsToScanCount, the number of \n           items returned by the search.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Returned summary of the specified search job scope, including: </p> <ul> <li> <p>TotalBackupsToScanCount, the number of recovery points returned by the search.</p> </li> <li> <p>TotalItemsToScanCount, the number of items returned by the search.</p> </li> </ul>"
                     }
                 },
                 "StatusMessage": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A status message will be returned for either a \n      earch job with a status of <code>ERRORED</code> or a status of \n      <code>COMPLETED</code> jobs with issues.</p>\n         <p>For example, a message may say that a search \n      contained recovery points unable to be scanned because \n      of a permissions issue.</p>"
+                        "smithy.api#documentation": "<p>A status message will be returned for either a earch job with a status of <code>ERRORED</code> or a status of <code>COMPLETED</code> jobs with issues.</p> <p>For example, a message may say that a search contained recovery points unable to be scanned because of a permissions issue.</p>"
                     }
                 }
             },
@@ -1989,7 +1925,7 @@
                 "BackupResourceTypes": {
                     "target": "com.amazonaws.backupsearch#ResourceTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource types included in a search.</p>\n         <p>Eligible resource types include S3 and EBS.</p>",
+                        "smithy.api#documentation": "<p>The resource types included in a search.</p> <p>Eligible resource types include S3 and EBS.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2002,24 +1938,24 @@
                 "SourceResourceArns": {
                     "target": "com.amazonaws.backupsearch#ResourceArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies \n      the source resources.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the source resources.</p>"
                     }
                 },
                 "BackupResourceArns": {
                     "target": "com.amazonaws.backupsearch#RecoveryPointArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies \n      the backup resources.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the backup resources.</p>"
                     }
                 },
                 "BackupResourceTags": {
                     "target": "com.amazonaws.backupsearch#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>These are one or more tags on the backup (recovery \n      point).</p>"
+                        "smithy.api#documentation": "<p>These are one or more tags on the backup (recovery point).</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The search scope is all backup \n      properties input into a search.</p>"
+                "smithy.api#documentation": "<p>The search scope is all backup properties input into a search.</p>"
             }
         },
         "com.amazonaws.backupsearch#SearchScopeSummary": {
@@ -2028,18 +1964,18 @@
                 "TotalRecoveryPointsToScanCount": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>This is the count of the total number of backups \n      that will be scanned in a search.</p>"
+                        "smithy.api#documentation": "<p>This is the count of the total number of backups that will be scanned in a search.</p>"
                     }
                 },
                 "TotalItemsToScanCount": {
                     "target": "smithy.api#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>This is the count of the total number of items  \n      that will be scanned in a search.</p>"
+                        "smithy.api#documentation": "<p>This is the count of the total number of items that will be scanned in a search.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The summary of the specified search job scope, \n      including:\n      </p>\n         <ul>\n            <li>\n               <p>TotalBackupsToScanCount, the number of \n           recovery points returned by the search.</p>\n            </li>\n            <li>\n               <p>TotalItemsToScanCount, the number of \n           items returned by the search.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>The summary of the specified search job scope, including: </p> <ul> <li> <p>TotalBackupsToScanCount, the number of recovery points returned by the search.</p> </li> <li> <p>TotalItemsToScanCount, the number of items returned by the search.</p> </li> </ul>"
             }
         },
         "com.amazonaws.backupsearch#ServiceQuotaExceededException": {
@@ -2100,11 +2036,14 @@
                     "target": "com.amazonaws.backupsearch#ConflictException"
                 },
                 {
+                    "target": "com.amazonaws.backupsearch#ResourceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.backupsearch#ServiceQuotaExceededException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation creates a search job which returns \n      recovery points filtered by SearchScope and items \n      filtered by ItemFilters.</p>\n         <p>You can optionally include ClientToken, \n      EncryptionKeyArn, Name, and/or Tags.</p>",
+                "smithy.api#documentation": "<p>This operation creates a search job which returns recovery points filtered by SearchScope and items filtered by ItemFilters.</p> <p>You can optionally include ClientToken, EncryptionKeyArn, Name, and/or Tags.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "PUT",
@@ -2125,7 +2064,7 @@
                 "Name": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Include alphanumeric characters to create a \n      name for this search job.</p>",
+                        "smithy.api#documentation": "<p>Include alphanumeric characters to create a name for this search job.</p>",
                         "smithy.api#length": {
                             "max": 500
                         }
@@ -2134,26 +2073,26 @@
                 "EncryptionKeyArn": {
                     "target": "com.amazonaws.backupsearch#EncryptionKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The encryption key for the specified \n      search job.</p>"
+                        "smithy.api#documentation": "<p>The encryption key for the specified search job.</p>"
                     }
                 },
                 "ClientToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Include this parameter to allow multiple identical \n      calls for idempotency.</p>\n         <p>A client token is valid for 8 hours after the first \n      request that uses it is completed. After this time,\n      any request with the same token is treated as a \n      new request.</p>"
+                        "smithy.api#documentation": "<p>Include this parameter to allow multiple identical calls for idempotency.</p> <p>A client token is valid for 8 hours after the first request that uses it is completed. After this time, any request with the same token is treated as a new request.</p>"
                     }
                 },
                 "SearchScope": {
                     "target": "com.amazonaws.backupsearch#SearchScope",
                     "traits": {
-                        "smithy.api#documentation": "<p>This object can contain BackupResourceTypes, \n      BackupResourceArns, BackupResourceCreationTime, \n      BackupResourceTags, and SourceResourceArns to \n      filter the recovery points returned by the search \n      job.</p>",
+                        "smithy.api#documentation": "<p>This object can contain BackupResourceTypes, BackupResourceArns, BackupResourceCreationTime, BackupResourceTags, and SourceResourceArns to filter the recovery points returned by the search job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ItemFilters": {
                     "target": "com.amazonaws.backupsearch#ItemFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>Item Filters represent all input item  \n      properties specified when the search was \n      created.</p>\n         <p>Contains either EBSItemFilters or \n      S3ItemFilters</p>"
+                        "smithy.api#documentation": "<p>Item Filters represent all input item properties specified when the search was created.</p> <p>Contains either EBSItemFilters or S3ItemFilters</p>"
                     }
                 }
             },
@@ -2167,13 +2106,13 @@
                 "SearchJobArn": {
                     "target": "com.amazonaws.backupsearch#SearchJobArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique string that identifies the Amazon Resource \n      Name (ARN) of the specified search job.</p>"
+                        "smithy.api#documentation": "<p>The unique string that identifies the Amazon Resource Name (ARN) of the specified search job.</p>"
                     }
                 },
                 "CreationTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time that a job was created, in Unix format and Coordinated\n         Universal Time (UTC). The value of <code>CompletionTime</code> is accurate to milliseconds.\n         For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087\n         AM.</p>"
+                        "smithy.api#documentation": "<p>The date and time that a job was created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CompletionTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.</p>"
                     }
                 },
                 "SearchJobIdentifier": {
@@ -2208,7 +2147,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operations starts a job to export the results \n      of search job to a designated S3 bucket.</p>",
+                "smithy.api#documentation": "<p>This operations starts a job to export the results of search job to a designated S3 bucket.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "PUT",
@@ -2230,26 +2169,26 @@
                 "ExportSpecification": {
                     "target": "com.amazonaws.backupsearch#ExportSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>This specification contains a required string of the \n      destination bucket; optionally, you can include the \n      destination prefix.</p>",
+                        "smithy.api#documentation": "<p>This specification contains a required string of the destination bucket; optionally, you can include the destination prefix.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ClientToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Include this parameter to allow multiple identical \n      calls for idempotency.</p>\n         <p>A client token is valid for 8 hours after the first \n      request that uses it is completed. After this time,\n      any request with the same token is treated as a \n      new request.</p>"
+                        "smithy.api#documentation": "<p>Include this parameter to allow multiple identical calls for idempotency.</p> <p>A client token is valid for 8 hours after the first request that uses it is completed. After this time, any request with the same token is treated as a new request.</p>"
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.backupsearch#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional tags to include. A tag is a key-value pair you can use to manage, \n         filter, and search for your resources. Allowed characters include UTF-8 letters, \n         numbers, spaces, and the following characters: + - = . _ : /. </p>"
+                        "smithy.api#documentation": "<p>Optional tags to include. A tag is a key-value pair you can use to manage, filter, and search for your resources. Allowed characters include UTF-8 letters, numbers, spaces, and the following characters: + - = . _ : /. </p>"
                     }
                 },
                 "RoleArn": {
                     "target": "com.amazonaws.backupsearch#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>This parameter specifies the role ARN used to start \n      the search results export jobs.</p>"
+                        "smithy.api#documentation": "<p>This parameter specifies the role ARN used to start the search results export jobs.</p>"
                     }
                 }
             },
@@ -2263,13 +2202,13 @@
                 "ExportJobArn": {
                     "target": "com.amazonaws.backupsearch#ExportJobArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>This is the unique ARN (Amazon Resource Name) that \n      belongs to the new export job.</p>"
+                        "smithy.api#documentation": "<p>This is the unique ARN (Amazon Resource Name) that belongs to the new export job.</p>"
                     }
                 },
                 "ExportJobIdentifier": {
                     "target": "com.amazonaws.backupsearch#GenericId",
                     "traits": {
-                        "smithy.api#documentation": "<p>This is the unique identifier that \n      specifies the new export job.</p>",
+                        "smithy.api#documentation": "<p>This is the unique identifier that specifies the new export job.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2295,7 +2234,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operations ends a search job.</p>\n         <p>Only a search job with a status of <code>RUNNING</code> \n      can be stopped.</p>",
+                "smithy.api#documentation": "<p>This operations ends a search job.</p> <p>Only a search job with a status of <code>RUNNING</code> can be stopped.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "PUT",
@@ -2341,12 +2280,12 @@
                     "target": "com.amazonaws.backupsearch#StringConditionOperator",
                     "traits": {
                         "smithy.api#default": "EQUALS_TO",
-                        "smithy.api#documentation": "<p>A string that defines what values will be \n      returned.</p>\n         <p>If this is included, avoid combinations of \n      operators that will return all possible values. \n      For example, including both <code>EQUALS_TO</code> \n      and <code>NOT_EQUALS_TO</code> with a value of <code>4</code> \n      will return all values.</p>"
+                        "smithy.api#documentation": "<p>A string that defines what values will be returned.</p> <p>If this is included, avoid combinations of operators that will return all possible values. For example, including both <code>EQUALS_TO</code> and <code>NOT_EQUALS_TO</code> with a value of <code>4</code> will return all values.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This contains the value of the string and can contain \n      one or more operators.</p>"
+                "smithy.api#documentation": "<p>This contains the value of the string and can contain one or more operators.</p>"
             }
         },
         "com.amazonaws.backupsearch#StringConditionList": {
@@ -2460,7 +2399,7 @@
                 "ResourceArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies \n      the resource.</p>\n         <p>This is the resource that will have the indicated tags.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the resource.</p> <p>This is the resource that will have the indicated tags.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2468,7 +2407,7 @@
                 "Tags": {
                     "target": "com.amazonaws.backupsearch#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Required tags to include. A tag is a key-value pair you can use to manage, \n         filter, and search for your resources. Allowed characters include UTF-8 letters, \n         numbers, spaces, and the following characters: + - = . _ : /. </p>",
+                        "smithy.api#documentation": "<p>Required tags to include. A tag is a key-value pair you can use to manage, filter, and search for your resources. Allowed characters include UTF-8 letters, numbers, spaces, and the following characters: + - = . _ : /. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2537,12 +2476,12 @@
                     "target": "com.amazonaws.backupsearch#TimeConditionOperator",
                     "traits": {
                         "smithy.api#default": "EQUALS_TO",
-                        "smithy.api#documentation": "<p>A string that defines what values will be \n      returned.</p>\n         <p>If this is included, avoid combinations of \n      operators that will return all possible values. \n      For example, including both <code>EQUALS_TO</code> \n      and <code>NOT_EQUALS_TO</code> with a value of <code>4</code> \n      will return all values.</p>"
+                        "smithy.api#documentation": "<p>A string that defines what values will be returned.</p> <p>If this is included, avoid combinations of operators that will return all possible values. For example, including both <code>EQUALS_TO</code> and <code>NOT_EQUALS_TO</code> with a value of <code>4</code> will return all values.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A time condition denotes a creation time, last modification time, \n      or other time.</p>"
+                "smithy.api#documentation": "<p>A time condition denotes a creation time, last modification time, or other time.</p>"
             }
         },
         "com.amazonaws.backupsearch#TimeConditionList": {
@@ -2614,7 +2553,7 @@
                 "ResourceArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies \n      the resource where you want to remove tags.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the resource where you want to remove tags.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2622,7 +2561,7 @@
                 "TagKeys": {
                     "target": "com.amazonaws.backupsearch#TagKeys",
                     "traits": {
-                        "smithy.api#documentation": "<p>This required parameter contains the tag keys you \n      want to remove from the source.</p>",
+                        "smithy.api#documentation": "<p>This required parameter contains the tag keys you want to remove from the source.</p>",
                         "smithy.api#httpQuery": "tagKeys",
                         "smithy.api#required": {}
                     }

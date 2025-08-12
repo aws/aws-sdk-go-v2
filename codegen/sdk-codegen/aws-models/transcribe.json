@@ -4208,6 +4208,20 @@
                 }
             }
         },
+        "com.amazonaws.transcribe#MedicalScribeContext": {
+            "type": "structure",
+            "members": {
+                "PatientContext": {
+                    "target": "com.amazonaws.transcribe#MedicalScribePatientContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains patient-specific information.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The <code>MedicalScribeContext</code> object that contains contextual information used to generate\n            customized clinical notes.</p>"
+            }
+        },
         "com.amazonaws.transcribe#MedicalScribeJob": {
             "type": "structure",
             "members": {
@@ -4280,10 +4294,16 @@
                         "smithy.api#documentation": "<p>Makes it possible to specify which speaker is on which channel. For example, if the clinician\n            is the first participant to speak, you would set <code>ChannelId</code> of the first <code>ChannelDefinition</code> \n            in the list to <code>0</code> (to indicate the first channel) and <code>ParticipantRole</code> to\n            <code>CLINICIAN</code> (to indicate that it's the clinician speaking).\n            Then you would set the <code>ChannelId</code> of the second <code>ChannelDefinition</code> in the list to\n            <code>1</code> (to indicate the second channel) and <code>ParticipantRole</code> to\n            <code>PATIENT</code> (to indicate that it's the patient speaking).\n        </p>"
                     }
                 },
+                "MedicalScribeContextProvided": {
+                    "target": "com.amazonaws.transcribe#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the <code>MedicalScribeContext</code> object was provided when the Medical Scribe job was started.</p>"
+                    }
+                },
                 "Tags": {
                     "target": "com.amazonaws.transcribe#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Adds one or more custom tags, each in the form of a key:value pair, to the Medica Scribe job.</p>\n         <p>To learn more about using tags with Amazon Transcribe, refer to <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html\">Tagging\n                resources</a>.</p>"
+                        "smithy.api#documentation": "<p>Adds one or more custom tags, each in the form of a key:value pair, to the Medical Scribe job.</p>\n         <p>To learn more about using tags with Amazon Transcribe, refer to <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html\">Tagging\n                resources</a>.</p>"
                     }
                 }
             },
@@ -4471,6 +4491,20 @@
                         "smithy.api#enumValue": "CLINICIAN"
                     }
                 }
+            }
+        },
+        "com.amazonaws.transcribe#MedicalScribePatientContext": {
+            "type": "structure",
+            "members": {
+                "Pronouns": {
+                    "target": "com.amazonaws.transcribe#Pronouns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The patient's preferred pronouns that the user wants to provide as a context for clinical note generation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains patient-specific information used to customize the clinical note generation.</p>"
             }
         },
         "com.amazonaws.transcribe#MedicalScribeSettings": {
@@ -5048,6 +5082,32 @@
                 }
             }
         },
+        "com.amazonaws.transcribe#Pronouns": {
+            "type": "enum",
+            "members": {
+                "HE_HIM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HE_HIM"
+                    }
+                },
+                "SHE_HER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHE_HER"
+                    }
+                },
+                "THEY_THEM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THEY_THEM"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.transcribe#RedactionOutput": {
             "type": "enum",
             "members": {
@@ -5357,7 +5417,7 @@
                 "OutputEncryptionKMSKeyId": {
                     "target": "com.amazonaws.transcribe#KMSKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a KMS key that you want to use to\n            encrypt your Call Analytics output.</p>\n         <p>KMS key ARNs have the format <code>arn:partition:kms:region:account:key/key-id</code>. For example:\n    \t<code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.\n            For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN\">\n                KMS key ARNs</a>.</p>\n         <p>If you do not specify an encryption key, your output is encrypted with the default\n            Amazon S3 key (SSE-S3).</p>\n         <p>Note that the role making the  request and the role specified in \n\t\tthe <code>DataAccessRoleArn</code> request parameter (if present) must have permission to use the \n\t\tspecified KMS key.</p>"
+                        "smithy.api#documentation": "<p>The KMS key you want to use to encrypt your Call Analytics\n            output.</p>\n         <p>If using a key located in the <b>current</b>\n            Amazon Web Services account, you can specify your KMS key in one of four\n            ways:</p>\n         <ol>\n            <li>\n               <p>Use the KMS key ID itself. For example,\n                        <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>Use an alias for the KMS key ID. For example,\n                        <code>alias/ExampleAlias</code>.</p>\n            </li>\n            <li>\n               <p>Use the Amazon Resource Name (ARN) for the KMS key ID. For\n                    example,\n                        <code>arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>Use the ARN for the KMS key alias. For example,\n                        <code>arn:aws:kms:region:account-ID:alias/ExampleAlias</code>.</p>\n            </li>\n         </ol>\n         <p>If using a key located in a <b>different</b>\n            Amazon Web Services account than the current Amazon Web Services account, you can specify\n            your KMS key in one of two ways:</p>\n         <ol>\n            <li>\n               <p>Use the ARN for the KMS key ID. For example,\n                        <code>arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>Use the ARN for the KMS key alias. For example,\n                        <code>arn:aws:kms:region:account-ID:alias/ExampleAlias</code>.</p>\n            </li>\n         </ol>\n         <p>If you do not specify an encryption key, your output is encrypted with the default\n                Amazon S3 key (SSE-S3).</p>\n         <p>If you specify a KMS key to encrypt your output, you must also specify\n            an output location using the <code>OutputLocation</code> parameter.</p>\n         <p>Note that the role making the  request must\n            have permission to use the specified KMS key.</p>"
                     }
                 },
                 "DataAccessRoleArn": {
@@ -5426,7 +5486,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Transcribes patient-clinician conversations and generates clinical notes. </p>\n         <p>Amazon Web Services HealthScribe automatically provides rich conversation transcripts, identifies speaker roles, \n            classifies dialogues, extracts medical terms, and generates preliminary clinical notes.\n            To learn more about these features, refer to <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/health-scribe.html\">Amazon Web Services HealthScribe</a>.</p>\n         <p>To make a <code>StartMedicalScribeJob</code> request, you must first upload\n            your media file into an Amazon S3 bucket; you can then specify the Amazon S3 location\n            of the file using the <code>Media</code> parameter.</p>\n         <p>You must include the following parameters in your\n                <code>StartMedicalTranscriptionJob</code> request:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DataAccessRoleArn</code>: The ARN of an IAM role with the these minimum permissions: read permission on input file Amazon S3 bucket specified in <code>Media</code>,\n                write permission on the Amazon S3 bucket specified in <code>OutputBucketName</code>, and full permissions on the KMS key specified in <code>OutputEncryptionKMSKeyId</code> (if set).\n                The role should also allow <code>transcribe.amazonaws.com</code> to assume it.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>Media</code> (<code>MediaFileUri</code>): The Amazon S3 location\n                    of your media file.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MedicalScribeJobName</code>: A custom name you create for your\n                    MedicalScribe job that is unique within your Amazon Web Services account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OutputBucketName</code>: The Amazon S3 bucket where you want\n                    your output files stored.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Settings</code>: A <code>MedicalScribeSettings</code> obect \n                that must set exactly one of <code>ShowSpeakerLabels</code> or <code>ChannelIdentification</code> to true.\n                If <code>ShowSpeakerLabels</code> is true, <code>MaxSpeakerLabels</code> must also be set.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>ChannelDefinitions</code>: A <code>MedicalScribeChannelDefinitions</code> array should be set if and only if the <code>ChannelIdentification</code>\n                value of <code>Settings</code> is set to true. \n                </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Transcribes patient-clinician conversations and generates clinical notes. </p>\n         <p>Amazon Web Services HealthScribe automatically provides rich conversation transcripts, identifies speaker roles, \n            classifies dialogues, extracts medical terms, and generates preliminary clinical notes.\n            To learn more about these features, refer to <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/health-scribe.html\">Amazon Web Services HealthScribe</a>.</p>\n         <p>To make a <code>StartMedicalScribeJob</code> request, you must first upload\n            your media file into an Amazon S3 bucket; you can then specify the Amazon S3 location\n            of the file using the <code>Media</code> parameter.</p>\n         <p>You must include the following parameters in your\n                <code>StartMedicalTranscriptionJob</code> request:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DataAccessRoleArn</code>: The ARN of an IAM role with the these minimum permissions: read permission on input file Amazon S3 bucket specified in <code>Media</code>,\n                write permission on the Amazon S3 bucket specified in <code>OutputBucketName</code>, and full permissions on the KMS key specified in <code>OutputEncryptionKMSKeyId</code> (if set).\n                The role should also allow <code>transcribe.amazonaws.com</code> to assume it.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>Media</code> (<code>MediaFileUri</code>): The Amazon S3 location\n                    of your media file.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MedicalScribeJobName</code>: A custom name you create for your\n                    MedicalScribe job that is unique within your Amazon Web Services account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OutputBucketName</code>: The Amazon S3 bucket where you want\n                    your output files stored.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Settings</code>: A <code>MedicalScribeSettings</code> object\n                that must set exactly one of <code>ShowSpeakerLabels</code> or <code>ChannelIdentification</code> to true.\n                If <code>ShowSpeakerLabels</code> is true, <code>MaxSpeakerLabels</code> must also be set.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>ChannelDefinitions</code>: A <code>MedicalScribeChannelDefinitions</code> array should be set if and only if the <code>ChannelIdentification</code>\n                value of <code>Settings</code> is set to true. \n                </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/medicalscribejobs/{MedicalScribeJobName}",
@@ -5461,7 +5521,7 @@
                 "OutputEncryptionKMSKeyId": {
                     "target": "com.amazonaws.transcribe#KMSKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a KMS key that you want to use to\n            encrypt your Medical Scribe output.</p>\n         <p>KMS key ARNs have the format <code>arn:partition:kms:region:account:key/key-id</code>. For example:\n\t\t<code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.\n            \tFor more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN\">\n                KMS key ARNs</a>.</p>\n         <p>If you do not specify an encryption key, your output is encrypted with the default\n                Amazon S3 key (SSE-S3).</p>\n         <p>Note that the role making the  request and the role specified in \n\t\tthe <code>DataAccessRoleArn</code> request parameter (if present) \n\t\tmust have permission to use the specified KMS key.</p>"
+                        "smithy.api#documentation": "<p>The KMS key you want to use to encrypt your Medical Scribe\n            output.</p>\n         <p>If using a key located in the <b>current</b>\n            Amazon Web Services account, you can specify your KMS key in one of four\n            ways:</p>\n         <ol>\n            <li>\n               <p>Use the KMS key ID itself. For example,\n                        <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>Use an alias for the KMS key ID. For example,\n                        <code>alias/ExampleAlias</code>.</p>\n            </li>\n            <li>\n               <p>Use the Amazon Resource Name (ARN) for the KMS key ID. For\n                    example,\n                        <code>arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>Use the ARN for the KMS key alias. For example,\n                        <code>arn:aws:kms:region:account-ID:alias/ExampleAlias</code>.</p>\n            </li>\n         </ol>\n         <p>If using a key located in a <b>different</b>\n            Amazon Web Services account than the current Amazon Web Services account, you can specify\n            your KMS key in one of two ways:</p>\n         <ol>\n            <li>\n               <p>Use the ARN for the KMS key ID. For example,\n                        <code>arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>Use the ARN for the KMS key alias. For example,\n                        <code>arn:aws:kms:region:account-ID:alias/ExampleAlias</code>.</p>\n            </li>\n         </ol>\n         <p>If you do not specify an encryption key, your output is encrypted with the default\n                Amazon S3 key (SSE-S3).</p>\n         <p>Note that the role specified in the <code>DataAccessRoleArn</code> request parameter \n            must have permission to use the specified KMS key.</p>"
                     }
                 },
                 "KMSEncryptionContext": {
@@ -5493,7 +5553,13 @@
                 "Tags": {
                     "target": "com.amazonaws.transcribe#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Adds one or more custom tags, each in the form of a key:value pair, to the Medica Scribe job.</p>\n         <p>To learn more about using tags with Amazon Transcribe, refer to <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html\">Tagging\n                resources</a>.</p>"
+                        "smithy.api#documentation": "<p>Adds one or more custom tags, each in the form of a key:value pair, to the Medical Scribe job.</p>\n         <p>To learn more about using tags with Amazon Transcribe, refer to <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html\">Tagging\n                resources</a>.</p>"
+                    }
+                },
+                "MedicalScribeContext": {
+                    "target": "com.amazonaws.transcribe#MedicalScribeContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>MedicalScribeContext</code> object that contains contextual information which is used during\n            clinical note generation to add relevant context to the note.</p>"
                     }
                 }
             },
@@ -5598,7 +5664,7 @@
                 "OutputEncryptionKMSKeyId": {
                     "target": "com.amazonaws.transcribe#KMSKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a KMS key that you want to use to\n            encrypt your medical transcription output.</p>\n         <p>KMS key ARNs have the format <code>arn:partition:kms:region:account:key/key-id</code>. For example:\n    \t<code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.\n            For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN\">\n                KMS key ARNs</a>.</p>\n         <p>If you do not specify an encryption key, your output is encrypted with the default\n            Amazon S3 key (SSE-S3).</p>\n         <p>Note that the role making the  request and the role specified \n    \t\tin the <code>DataAccessRoleArn</code> request parameter (if present) must have permission to use the \n\t\tspecified KMS key.</p>"
+                        "smithy.api#documentation": "<p>The KMS key you want to use to encrypt your medical transcription\n            output.</p>\n         <p>If using a key located in the <b>current</b>\n            Amazon Web Services account, you can specify your KMS key in one of four\n            ways:</p>\n         <ol>\n            <li>\n               <p>Use the KMS key ID itself. For example,\n                        <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>Use an alias for the KMS key ID. For example,\n                        <code>alias/ExampleAlias</code>.</p>\n            </li>\n            <li>\n               <p>Use the Amazon Resource Name (ARN) for the KMS key ID. For\n                    example,\n                        <code>arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>Use the ARN for the KMS key alias. For example,\n                        <code>arn:aws:kms:region:account-ID:alias/ExampleAlias</code>.</p>\n            </li>\n         </ol>\n         <p>If using a key located in a <b>different</b>\n            Amazon Web Services account than the current Amazon Web Services account, you can specify\n            your KMS key in one of two ways:</p>\n         <ol>\n            <li>\n               <p>Use the ARN for the KMS key ID. For example,\n                        <code>arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>Use the ARN for the KMS key alias. For example,\n                        <code>arn:aws:kms:region:account-ID:alias/ExampleAlias</code>.</p>\n            </li>\n         </ol>\n         <p>If you do not specify an encryption key, your output is encrypted with the default\n                Amazon S3 key (SSE-S3).</p>\n         <p>If you specify a KMS key to encrypt your output, you must also specify\n            an output location using the <code>OutputLocation</code> parameter.</p>\n         <p>Note that the role making the  request must\n            have permission to use the specified KMS key.</p>"
                     }
                 },
                 "KMSEncryptionContext": {
@@ -5740,7 +5806,7 @@
                 "OutputEncryptionKMSKeyId": {
                     "target": "com.amazonaws.transcribe#KMSKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a KMS key that you want to use to\n            encrypt your transcription output.</p>\n         <p>KMS key ARNs have the format <code>arn:partition:kms:region:account:key/key-id</code>. For example:\n    \t<code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.\n            For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN\">\n                KMS key ARNs</a>.</p>\n         <p>If you do not specify an encryption key, your output is encrypted with the default\n            Amazon S3 key (SSE-S3).</p>\n         <p>Note that the role making the  request and the role specified in the \n\t\t<code>DataAccessRoleArn</code> request parameter (if present) must have permission to use the specified \n\t\tKMS key.</p>"
+                        "smithy.api#documentation": "<p>The KMS key you want to use to encrypt your transcription\n            output.</p>\n         <p>If using a key located in the <b>current</b>\n            Amazon Web Services account, you can specify your KMS key in one of four\n            ways:</p>\n         <ol>\n            <li>\n               <p>Use the KMS key ID itself. For example,\n                        <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>Use an alias for the KMS key ID. For example,\n                        <code>alias/ExampleAlias</code>.</p>\n            </li>\n            <li>\n               <p>Use the Amazon Resource Name (ARN) for the KMS key ID. For\n                    example,\n                        <code>arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>Use the ARN for the KMS key alias. For example,\n                        <code>arn:aws:kms:region:account-ID:alias/ExampleAlias</code>.</p>\n            </li>\n         </ol>\n         <p>If using a key located in a <b>different</b>\n            Amazon Web Services account than the current Amazon Web Services account, you can specify\n            your KMS key in one of two ways:</p>\n         <ol>\n            <li>\n               <p>Use the ARN for the KMS key ID. For example,\n                        <code>arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>Use the ARN for the KMS key alias. For example,\n                        <code>arn:aws:kms:region:account-ID:alias/ExampleAlias</code>.</p>\n            </li>\n         </ol>\n         <p>If you do not specify an encryption key, your output is encrypted with the default\n                Amazon S3 key (SSE-S3).</p>\n         <p>If you specify a KMS key to encrypt your output, you must also specify\n            an output location using the <code>OutputLocation</code> parameter.</p>\n         <p>Note that the role making the  request must\n            have permission to use the specified KMS key.</p>"
                     }
                 },
                 "KMSEncryptionContext": {
