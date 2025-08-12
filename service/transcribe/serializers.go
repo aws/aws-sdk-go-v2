@@ -2966,6 +2966,32 @@ func awsAwsjson11_serializeDocumentMedicalScribeChannelDefinitions(v []types.Med
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentMedicalScribeContext(v *types.MedicalScribeContext, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PatientContext != nil {
+		ok := object.Key("PatientContext")
+		if err := awsAwsjson11_serializeDocumentMedicalScribePatientContext(v.PatientContext, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentMedicalScribePatientContext(v *types.MedicalScribePatientContext, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Pronouns) > 0 {
+		ok := object.Key("Pronouns")
+		ok.String(string(v.Pronouns))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentMedicalScribeSettings(v *types.MedicalScribeSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4188,6 +4214,13 @@ func awsAwsjson11_serializeOpDocumentStartMedicalScribeJobInput(v *StartMedicalS
 	if v.Media != nil {
 		ok := object.Key("Media")
 		if err := awsAwsjson11_serializeDocumentMedia(v.Media, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MedicalScribeContext != nil {
+		ok := object.Key("MedicalScribeContext")
+		if err := awsAwsjson11_serializeDocumentMedicalScribeContext(v.MedicalScribeContext, ok); err != nil {
 			return err
 		}
 	}

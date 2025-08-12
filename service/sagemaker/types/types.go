@@ -5841,6 +5841,11 @@ type DomainSettings struct {
 	// for communication between Domain-level apps and user apps.
 	SecurityGroupIds []string
 
+	// The Trusted Identity Propagation (TIP) settings for the SageMaker domain. These
+	// settings determine how user identities from IAM Identity Center are propagated
+	// through the domain to TIP enabled Amazon Web Services services.
+	TrustedIdentityPropagationSettings *TrustedIdentityPropagationSettings
+
 	// The settings that apply to an SageMaker AI domain when you use it in Amazon
 	// SageMaker Unified Studio.
 	UnifiedStudioSettings *UnifiedStudioSettings
@@ -5872,6 +5877,11 @@ type DomainSettingsForUpdate struct {
 	// The security groups for the Amazon Virtual Private Cloud that the Domain uses
 	// for communication between Domain-level apps and user apps.
 	SecurityGroupIds []string
+
+	// The Trusted Identity Propagation (TIP) settings for the SageMaker domain. These
+	// settings determine how user identities from IAM Identity Center are propagated
+	// through the domain to TIP enabled Amazon Web Services services.
+	TrustedIdentityPropagationSettings *TrustedIdentityPropagationSettings
 
 	// The settings that apply to an SageMaker AI domain when you use it in Amazon
 	// SageMaker Unified Studio.
@@ -21184,6 +21194,29 @@ type TrialSummary struct {
 
 	// The source of the trial.
 	TrialSource *TrialSource
+
+	noSmithyDocumentSerde
+}
+
+// The Trusted Identity Propagation (TIP) settings for the SageMaker domain. These
+// settings determine how user identities from IAM Identity Center are propagated
+// through the domain to TIP enabled Amazon Web Services services.
+type TrustedIdentityPropagationSettings struct {
+
+	// The status of Trusted Identity Propagation (TIP) at the SageMaker domain level.
+	//
+	// When disabled, standard IAM role-based access is used.
+	//
+	// When enabled:
+	//
+	//   - User identities from IAM Identity Center are propagated through the
+	//   application to TIP enabled Amazon Web Services services.
+	//
+	//   - New applications or existing applications that are automatically patched,
+	//   will use the domain level configuration.
+	//
+	// This member is required.
+	Status FeatureStatus
 
 	noSmithyDocumentSerde
 }

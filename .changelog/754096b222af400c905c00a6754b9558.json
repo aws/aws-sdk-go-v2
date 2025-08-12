@@ -1,0 +1,8 @@
+{
+    "id": "754096b2-22af-400c-905c-00a6754b9558",
+    "type": "feature",
+    "description": "Using recommended smithy trait to generate regional endpoints for Backup Search",
+    "modules": [
+        "service/backupsearch"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "dcb197a3-972c-4566-86c0-30cb2bbbcd2b",
+    "type": "feature",
+    "description": "IAM Identity Center trusted identity propagation is now supported in SageMaker Studio.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

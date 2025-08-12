@@ -26252,6 +26252,13 @@ func awsAwsjson11_serializeDocumentDomainSettings(v *types.DomainSettings, value
 		}
 	}
 
+	if v.TrustedIdentityPropagationSettings != nil {
+		ok := object.Key("TrustedIdentityPropagationSettings")
+		if err := awsAwsjson11_serializeDocumentTrustedIdentityPropagationSettings(v.TrustedIdentityPropagationSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.UnifiedStudioSettings != nil {
 		ok := object.Key("UnifiedStudioSettings")
 		if err := awsAwsjson11_serializeDocumentUnifiedStudioSettings(v.UnifiedStudioSettings, ok); err != nil {
@@ -26295,6 +26302,13 @@ func awsAwsjson11_serializeDocumentDomainSettingsForUpdate(v *types.DomainSettin
 	if v.SecurityGroupIds != nil {
 		ok := object.Key("SecurityGroupIds")
 		if err := awsAwsjson11_serializeDocumentDomainSecurityGroupIds(v.SecurityGroupIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TrustedIdentityPropagationSettings != nil {
+		ok := object.Key("TrustedIdentityPropagationSettings")
+		if err := awsAwsjson11_serializeDocumentTrustedIdentityPropagationSettings(v.TrustedIdentityPropagationSettings, ok); err != nil {
 			return err
 		}
 	}
@@ -34662,6 +34676,18 @@ func awsAwsjson11_serializeDocumentTrialComponentStatus(v *types.TrialComponentS
 	if len(v.PrimaryStatus) > 0 {
 		ok := object.Key("PrimaryStatus")
 		ok.String(string(v.PrimaryStatus))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTrustedIdentityPropagationSettings(v *types.TrustedIdentityPropagationSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Status) > 0 {
+		ok := object.Key("Status")
+		ok.String(string(v.Status))
 	}
 
 	return nil

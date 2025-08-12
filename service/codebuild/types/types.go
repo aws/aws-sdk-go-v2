@@ -2227,9 +2227,10 @@ type ProxyConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration policy that defines comment-based approval requirements for
-// triggering builds on pull requests. This policy helps control when automated
-// builds are executed based on contributor permissions and approval workflows.
+// A PullRequestBuildPolicy object that defines comment-based approval
+// requirements for triggering builds on pull requests. This policy helps control
+// when automated builds are executed based on contributor permissions and approval
+// workflows.
 type PullRequestBuildPolicy struct {
 
 	// Specifies when comment-based approval is required before triggering a build on
@@ -2972,6 +2973,12 @@ type Webhook struct {
 
 	// The CodeBuild endpoint where webhook events are sent.
 	PayloadUrl *string
+
+	// A PullRequestBuildPolicy object that defines comment-based approval
+	// requirements for triggering builds on pull requests. This policy helps control
+	// when automated builds are executed based on contributor permissions and approval
+	// workflows.
+	PullRequestBuildPolicy *PullRequestBuildPolicy
 
 	// The scope configuration for global or organization webhooks.
 	//

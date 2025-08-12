@@ -5226,6 +5226,15 @@ func awsRestjson1_deserializeDocumentMedicalScribeStreamDetails(v **types.Medica
 				sv.MediaSampleRateHertz = ptr.Int32(int32(i64))
 			}
 
+		case "MedicalScribeContextProvided":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.MedicalScribeContextProvided = ptr.Bool(jtv)
+			}
+
 		case "PostStreamAnalyticsResult":
 			if err := awsRestjson1_deserializeDocumentMedicalScribePostStreamAnalyticsResult(&sv.PostStreamAnalyticsResult, value); err != nil {
 				return err

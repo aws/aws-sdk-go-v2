@@ -39,7 +39,7 @@ type DescribeImageAttributeInput struct {
 	//
 	// Note: The blockDeviceMapping attribute is deprecated. Using this attribute
 	// returns the Client.AuthFailure error. To get information about the block device
-	// mappings for an AMI, use the DescribeImagesaction.
+	// mappings for an AMI, describe the image instead.
 	//
 	// This member is required.
 	Attribute types.ImageAttributeName

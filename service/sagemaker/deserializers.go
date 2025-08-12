@@ -53615,6 +53615,11 @@ func awsAwsjson11_deserializeDocumentDomainSettings(v **types.DomainSettings, va
 				return err
 			}
 
+		case "TrustedIdentityPropagationSettings":
+			if err := awsAwsjson11_deserializeDocumentTrustedIdentityPropagationSettings(&sv.TrustedIdentityPropagationSettings, value); err != nil {
+				return err
+			}
+
 		case "UnifiedStudioSettings":
 			if err := awsAwsjson11_deserializeDocumentUnifiedStudioSettings(&sv.UnifiedStudioSettings, value); err != nil {
 				return err
@@ -91332,6 +91337,46 @@ func awsAwsjson11_deserializeDocumentTrialSummary(v **types.TrialSummary, value 
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentTrustedIdentityPropagationSettings(v **types.TrustedIdentityPropagationSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TrustedIdentityPropagationSettings
+	if *v == nil {
+		sv = &types.TrustedIdentityPropagationSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FeatureStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.FeatureStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentTtlDuration(v **types.TtlDuration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -97400,6 +97445,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeAppOutput(v **DescribeAppOutput, 
 					return fmt.Errorf("expected DomainId to be of type string, got %T instead", value)
 				}
 				sv.DomainId = ptr.String(jtv)
+			}
+
+		case "EffectiveTrustedIdentityPropagationStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FeatureStatus to be of type string, got %T instead", value)
+				}
+				sv.EffectiveTrustedIdentityPropagationStatus = types.FeatureStatus(jtv)
 			}
 
 		case "FailureReason":

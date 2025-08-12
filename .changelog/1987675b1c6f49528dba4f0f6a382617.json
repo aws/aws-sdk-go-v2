@@ -1,0 +1,8 @@
+{
+    "id": "1987675b-1c6f-4952-8dba-4f0f6a382617",
+    "type": "feature",
+    "description": "AWS HealthScribe now supports specifying preferred patient pronouns through the MedicalScribeContext parameter for use in the generated clinical notes.",
+    "modules": [
+        "service/transcribe"
+    ]
+}

@@ -107,9 +107,8 @@ type CreateLabelingJobInput struct {
 	//   "-ref". If the task type you are using is not listed below, the attribute name
 	//   must not end with "-ref".
 	//
-	//   - Image semantic segmentation ( SemanticSegmentation) , and adjustment (
-	//   AdjustmentSemanticSegmentation ) and verification (
-	//   VerificationSemanticSegmentation ) labeling jobs for this task type.
+	//   - Verification ( VerificationSemanticSegmentation ) labeling jobs for this
+	//   task type.
 	//
 	//   - Video frame object detection ( VideoObjectDetection ), and adjustment and
 	//   verification ( AdjustmentVideoObjectDetection ) labeling jobs for this task

@@ -5,10 +5,8 @@ package backupsearch
 import (
 	"context"
 	smithy "github.com/aws/smithy-go"
-	smithyauth "github.com/aws/smithy-go/auth"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/ptr"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"net/http"
 	"net/url"
 	"reflect"
@@ -89,22 +87,9 @@ func TestEndpointCase2(t *testing.T) {
 	uri, _ := url.Parse("https://backup-search-fips.us-east-1.api.aws")
 
 	expectEndpoint := smithyendpoints.Endpoint{
-		URI:     *uri,
-		Headers: http.Header{},
-		Properties: func() smithy.Properties {
-			var out smithy.Properties
-			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
-				{
-					SchemeID: "aws.auth#sigv4",
-					SignerProperties: func() smithy.Properties {
-						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-						return sp
-					}(),
-				},
-			})
-			return out
-		}(),
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
 	}
 
 	if e, a := expectEndpoint.URI, result.URI; e != a {
@@ -138,22 +123,9 @@ func TestEndpointCase3(t *testing.T) {
 	uri, _ := url.Parse("https://backup-search.us-east-1.api.aws")
 
 	expectEndpoint := smithyendpoints.Endpoint{
-		URI:     *uri,
-		Headers: http.Header{},
-		Properties: func() smithy.Properties {
-			var out smithy.Properties
-			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
-				{
-					SchemeID: "aws.auth#sigv4",
-					SignerProperties: func() smithy.Properties {
-						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-						return sp
-					}(),
-				},
-			})
-			return out
-		}(),
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
 	}
 
 	if e, a := expectEndpoint.URI, result.URI; e != a {
@@ -187,22 +159,9 @@ func TestEndpointCase4(t *testing.T) {
 	uri, _ := url.Parse("https://backup-search-fips.cn-northwest-1.api.amazonwebservices.com.cn")
 
 	expectEndpoint := smithyendpoints.Endpoint{
-		URI:     *uri,
-		Headers: http.Header{},
-		Properties: func() smithy.Properties {
-			var out smithy.Properties
-			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
-				{
-					SchemeID: "aws.auth#sigv4",
-					SignerProperties: func() smithy.Properties {
-						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "cn-northwest-1")
-						return sp
-					}(),
-				},
-			})
-			return out
-		}(),
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
 	}
 
 	if e, a := expectEndpoint.URI, result.URI; e != a {
@@ -236,22 +195,9 @@ func TestEndpointCase5(t *testing.T) {
 	uri, _ := url.Parse("https://backup-search.cn-northwest-1.api.amazonwebservices.com.cn")
 
 	expectEndpoint := smithyendpoints.Endpoint{
-		URI:     *uri,
-		Headers: http.Header{},
-		Properties: func() smithy.Properties {
-			var out smithy.Properties
-			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
-				{
-					SchemeID: "aws.auth#sigv4",
-					SignerProperties: func() smithy.Properties {
-						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "cn-northwest-1")
-						return sp
-					}(),
-				},
-			})
-			return out
-		}(),
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
 	}
 
 	if e, a := expectEndpoint.URI, result.URI; e != a {
@@ -285,22 +231,9 @@ func TestEndpointCase6(t *testing.T) {
 	uri, _ := url.Parse("https://backup-search-fips.us-gov-west-1.api.aws")
 
 	expectEndpoint := smithyendpoints.Endpoint{
-		URI:     *uri,
-		Headers: http.Header{},
-		Properties: func() smithy.Properties {
-			var out smithy.Properties
-			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
-				{
-					SchemeID: "aws.auth#sigv4",
-					SignerProperties: func() smithy.Properties {
-						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-gov-west-1")
-						return sp
-					}(),
-				},
-			})
-			return out
-		}(),
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
 	}
 
 	if e, a := expectEndpoint.URI, result.URI; e != a {
@@ -334,22 +267,9 @@ func TestEndpointCase7(t *testing.T) {
 	uri, _ := url.Parse("https://backup-search.us-gov-west-1.api.aws")
 
 	expectEndpoint := smithyendpoints.Endpoint{
-		URI:     *uri,
-		Headers: http.Header{},
-		Properties: func() smithy.Properties {
-			var out smithy.Properties
-			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
-				{
-					SchemeID: "aws.auth#sigv4",
-					SignerProperties: func() smithy.Properties {
-						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-gov-west-1")
-						return sp
-					}(),
-				},
-			})
-			return out
-		}(),
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
 	}
 
 	if e, a := expectEndpoint.URI, result.URI; e != a {

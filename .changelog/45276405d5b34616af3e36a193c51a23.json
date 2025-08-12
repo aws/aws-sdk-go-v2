@@ -1,0 +1,8 @@
+{
+    "id": "45276405-d5b3-4616-af3e-36a193c51a23",
+    "type": "feature",
+    "description": "Release to allow route table association with a PublicIpv4Pool.",
+    "modules": [
+        "service/ec2"
+    ]
+}

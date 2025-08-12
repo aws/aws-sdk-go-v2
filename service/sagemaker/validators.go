@@ -9539,6 +9539,11 @@ func validateDomainSettings(v *types.DomainSettings) error {
 			invalidParams.AddNested("RStudioServerProDomainSettings", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.TrustedIdentityPropagationSettings != nil {
+		if err := validateTrustedIdentityPropagationSettings(v.TrustedIdentityPropagationSettings); err != nil {
+			invalidParams.AddNested("TrustedIdentityPropagationSettings", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -9554,6 +9559,11 @@ func validateDomainSettingsForUpdate(v *types.DomainSettingsForUpdate) error {
 	if v.RStudioServerProDomainSettingsForUpdate != nil {
 		if err := validateRStudioServerProDomainSettingsForUpdate(v.RStudioServerProDomainSettingsForUpdate); err != nil {
 			invalidParams.AddNested("RStudioServerProDomainSettingsForUpdate", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TrustedIdentityPropagationSettings != nil {
+		if err := validateTrustedIdentityPropagationSettings(v.TrustedIdentityPropagationSettings); err != nil {
+			invalidParams.AddNested("TrustedIdentityPropagationSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -14177,6 +14187,21 @@ func validateTrialComponentArtifacts(v map[string]types.TrialComponentArtifact) 
 		if err := validateTrialComponentArtifact(&value); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTrustedIdentityPropagationSettings(v *types.TrustedIdentityPropagationSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrustedIdentityPropagationSettings"}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
