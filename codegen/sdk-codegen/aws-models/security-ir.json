@@ -29,6 +29,7 @@
                 "message": {
                     "target": "smithy.api#String",
                     "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resource which lead to the access denial.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -68,6 +69,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ap-east-1"
+                    }
+                },
+                "AP_EAST_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-east-2"
                     }
                 },
                 "AP_NORTHEAST_1": {
@@ -268,7 +275,7 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 3,
+                    "min": 2,
                     "max": 50
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9 -.():]+$"
@@ -287,7 +294,7 @@
                     "name": "BatchGetMemberAccountDetails",
                     "documentation": "Grants permission to get member account details in batch"
                 },
-                "smithy.api#documentation": "<p>Grants permission to view an existing membership.</p>",
+                "smithy.api#documentation": "<p>Provides information on whether the supplied account IDs are associated with a membership.</p> <note> <p> AWS account ID's may appear less than 12 characters and need to be zero-prepended. An example would be <code>123123123</code> which is nine digits, and with zero-prepend would be <code>000123123123</code>. Not zero-prepending to 12 digits could result in errors. </p> </note>",
                 "smithy.api#examples": [
                     {
                         "title": "Invoke BatchGetMemberAccountDetails",
@@ -336,7 +343,7 @@
                 "accountIds": {
                     "target": "com.amazonaws.securityir#AWSAccountIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional element to query the membership relationship status to a provided list of account IDs.</p>",
+                        "smithy.api#documentation": "<p>Optional element to query the membership relationship status to a provided list of account IDs.</p> <note> <p> AWS account ID's may appear less than 12 characters and need to be zero-prepended. An example would be <code>123123123</code> which is nine digits, and with zero-prepend would be <code>000123123123</code>. Not zero-prepending to 12 digits could result in errors. </p> </note>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_BatchGetMemberAccountDetails.html#securityir-BatchGetMemberAccountDetails-request-accountIds"
                         },
@@ -368,7 +375,7 @@
                 "errors": {
                     "target": "com.amazonaws.securityir#GetMembershipAccountDetailErrors",
                     "traits": {
-                        "smithy.api#documentation": "<p>The response element providing errors messages for requests to GetMembershipAccountDetails.</p>",
+                        "smithy.api#documentation": "<p>The response element providing error messages for requests to GetMembershipAccountDetails.</p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_BatchGetMemberAccountDetails.html#securityir-BatchGetMemberAccountDetails-response-errors"
                         },
@@ -396,7 +403,7 @@
                     "name": "CancelMembership",
                     "documentation": "Grants permission to cancel a membership"
                 },
-                "smithy.api#documentation": "<p>Grants permissions to cancel an existing membership.</p>",
+                "smithy.api#documentation": "<p>Cancels an existing membership.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Invoke CancelMembership",
@@ -791,7 +798,7 @@
                     "name": "CloseCase",
                     "documentation": "Grants permission to close a case"
                 },
-                "smithy.api#documentation": "<p>Grants permission to close an existing case.</p>",
+                "smithy.api#documentation": "<p>Closes an existing case.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Invoke CloseCase",
@@ -839,7 +846,7 @@
                 "caseStatus": {
                     "target": "com.amazonaws.securityir#CaseStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>A response element providing responses for requests to CloseCase. This element responds with the case status following the action. </p>",
+                        "smithy.api#documentation": "<p>A response element providing responses for requests to CloseCase. This element responds <code>Closed </code> if successful. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CloseCase.html#securityir-CloseCase-response-caseStatus"
                         }
@@ -848,7 +855,7 @@
                 "closedDate": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>A response element providing responses for requests to CloseCase. This element responds with the case closure date following the action. </p>",
+                        "smithy.api#documentation": "<p>A response element providing responses for requests to CloseCase. This element responds with the ISO-8601 formatted timestamp of the moment when the case was closed. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CloseCase.html#securityir-CloseCase-response-closedDate"
                         }
@@ -914,20 +921,21 @@
                 "message": {
                     "target": "smithy.api#String",
                     "traits": {
+                        "smithy.api#documentation": "<p>The exception message.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "resourceId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "Element providing the ID of the resource affected.",
+                        "smithy.api#documentation": "<p>The ID of the conflicting resource.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "resourceType": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "Element providing the type of the resource affected.",
+                        "smithy.api#documentation": "<p>The type of the conflicting resource.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -964,7 +972,7 @@
                     "name": "CreateCase",
                     "documentation": "Grants permission to create a case"
                 },
-                "smithy.api#documentation": "<p>Grants permission to create a new case.</p>",
+                "smithy.api#documentation": "<p>Creates a new case.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Invoke CreateCase",
@@ -1032,7 +1040,7 @@
                     "name": "CreateCaseComment",
                     "documentation": "Grants permission to create a case comment"
                 },
-                "smithy.api#documentation": "<p>Grants permission to add a comment to an existing case.</p>",
+                "smithy.api#documentation": "<p>Adds a comment to an existing case.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Invoke CreateCaseComment",
@@ -1074,7 +1082,7 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>An optional element used in combination with CreateCaseComment.</p>",
+                        "smithy.api#documentation": "<note> <p>The <code>clientToken</code> field is an idempotency key used to ensure that repeated attempts for a single action will be ignored by the server during retries. A caller supplied unique ID (typically a UUID) should be provided. </p> </note>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CreateCaseComment.html#securityir-CreateCaseComment-request-clientToken"
                         },
@@ -1125,7 +1133,7 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Required element used in combination with CreateCase.</p>",
+                        "smithy.api#documentation": "<note> <p>The <code>clientToken</code> field is an idempotency key used to ensure that repeated attempts for a single action will be ignored by the server during retries. A caller supplied unique ID (typically a UUID) should be provided. </p> </note>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CreateCase.html#securityir-CreateCase-request-clientToken"
                         },
@@ -1139,7 +1147,7 @@
                 "resolverType": {
                     "target": "com.amazonaws.securityir#ResolverType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Required element used in combination with CreateCase to identify the resolver type. Available resolvers include self-supported | aws-supported. </p>",
+                        "smithy.api#documentation": "<p>Required element used in combination with CreateCase to identify the resolver type.</p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CreateCase.html#securityir-CreateCase-request-resolverType"
                         },
@@ -1159,7 +1167,7 @@
                 "description": {
                     "target": "com.amazonaws.securityir#CaseDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>Required element used in combination with CreateCase to provide a description for the new case.</p>",
+                        "smithy.api#documentation": "<p>Required element used in combination with CreateCase</p> <p>to provide a description for the new case.</p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CreateCase.html#securityir-CreateCase-request-description"
                         },
@@ -1189,7 +1197,7 @@
                 "impactedAccounts": {
                     "target": "com.amazonaws.securityir#ImpactedAccounts",
                     "traits": {
-                        "smithy.api#documentation": "<p>Required element used in combination with CreateCase to provide a list of impacted accounts.</p>",
+                        "smithy.api#documentation": "<p>Required element used in combination with CreateCase to provide a list of impacted accounts.</p> <note> <p> AWS account ID's may appear less than 12 characters and need to be zero-prepended. An example would be <code>123123123</code> which is nine digits, and with zero-prepend would be <code>000123123123</code>. Not zero-prepending to 12 digits could result in errors. </p> </note>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CreateCase.html#securityir-CreateCase-request-impactedAccounts"
                         },
@@ -1296,7 +1304,7 @@
                         "organizations:DescribeOrganization"
                     ]
                 },
-                "smithy.api#documentation": "<p>Grants permissions to create a new membership.</p>",
+                "smithy.api#documentation": "<p>Creates a new membership.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Invoke CreateMembership",
@@ -1344,7 +1352,7 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>An optional element used in combination with CreateMembership.</p>",
+                        "smithy.api#documentation": "<note> <p>The <code>clientToken</code> field is an idempotency key used to ensure that repeated attempts for a single action will be ignored by the server during retries. A caller supplied unique ID (typically a UUID) should be provided. </p> </note>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CreateMembership.html#securityir-CreateMembership-request-clientToken"
                         },
@@ -1358,7 +1366,7 @@
                 "membershipName": {
                     "target": "com.amazonaws.securityir#MembershipName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Required element use in combination with CreateMembership to create a name for the membership.</p>",
+                        "smithy.api#documentation": "<p>Required element used in combination with CreateMembership to create a name for the membership.</p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CreateMembership.html#securityir-CreateMembership-request-membershipName"
                         },
@@ -1368,7 +1376,7 @@
                 "incidentResponseTeam": {
                     "target": "com.amazonaws.securityir#IncidentResponseTeam",
                     "traits": {
-                        "smithy.api#documentation": "<p>Required element use in combination with CreateMembership to add customer incident response team members and trusted partners to the membership. </p>",
+                        "smithy.api#documentation": "<p>Required element used in combination with CreateMembership to add customer incident response team members and trusted partners to the membership. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CreateMembership.html#securityir-CreateMembership-request-incidentResponseTeam"
                         },
@@ -1390,6 +1398,16 @@
                         "smithy.api#documentation": "<p>Optional element for customer configured tags.</p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CreateMembership.html#securityir-CreateMembership-request-tags"
+                        }
+                    }
+                },
+                "coverEntireOrganization": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#default": true,
+                        "smithy.api#documentation": "<p>The <code>coverEntireOrganization</code> parameter is a boolean flag that determines whether the membership should be applied to the entire Amazon Web Services Organization. When set to true, the membership will be created for all accounts within the organization. When set to false, the membership will only be created for specified accounts. </p> <p>This parameter is optional. If not specified, the default value is false.</p> <ul> <li> <p>If set to <i>true</i>: The membership will automatically include all existing and future accounts in the Amazon Web Services Organization. </p> </li> <li> <p>If set to <i>false</i>: The membership will only apply to explicitly specified accounts. </p> </li> </ul>",
+                        "smithy.api#externalDocumentation": {
+                            "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CreateMembership.html#securityir-CreateMembership-request-coverEntireOrganization"
                         }
                     }
                 }
@@ -1485,7 +1503,7 @@
                     "name": "GetCase",
                     "documentation": "Grants permission to get a case"
                 },
-                "smithy.api#documentation": "<p>Grant permission to view a designated case.</p>",
+                "smithy.api#documentation": "<p>Returns the attributes of a case.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Invoke GetCase",
@@ -1562,7 +1580,7 @@
                     "name": "GetCaseAttachmentDownloadUrl",
                     "documentation": "Grants permission to get a case attachment download URL"
                 },
-                "smithy.api#documentation": "<p>Grants permission to obtain an Amazon S3 presigned URL to download an attachment.</p>",
+                "smithy.api#documentation": "<p>Returns a Pre-Signed URL for uploading attachments into a case.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Invoke GetCaseAttachmentDownloadUrl",
@@ -1647,7 +1665,7 @@
                     "name": "GetCaseAttachmentUploadUrl",
                     "documentation": "Grants permission to get a case attachment upload URL"
                 },
-                "smithy.api#documentation": "<p>Grants permission to upload an attachment to a case.</p>",
+                "smithy.api#documentation": "<p>Uploads an attachment to a case.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Invoke GetCaseAttachmentUploadUrl",
@@ -1678,7 +1696,7 @@
                 "caseId": {
                     "target": "com.amazonaws.securityir#CaseId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Required element for GetCaseAttachmentUploadUrl to identify the case ID for uploading an attachment to. </p>",
+                        "smithy.api#documentation": "<p>Required element for GetCaseAttachmentUploadUrl to identify the case ID for uploading an attachment. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetCaseAttachmentUploadUrl.html#securityir-GetCaseAttachmentUploadUrl-request-uri-caseId"
                         },
@@ -1699,7 +1717,7 @@
                 "contentLength": {
                     "target": "com.amazonaws.securityir#ContentLength",
                     "traits": {
-                        "smithy.api#documentation": "<p>Required element for GetCaseAttachmentUploadUrl to identify the size od the file attachment.</p>",
+                        "smithy.api#documentation": "<p>Required element for GetCaseAttachmentUploadUrl to identify the size of the file attachment.</p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetCaseAttachmentUploadUrl.html#securityir-GetCaseAttachmentUploadUrl-request-fileName"
                         },
@@ -1710,7 +1728,7 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Optional element for customer provided token.</p>",
+                        "smithy.api#documentation": "<note> <p>The <code>clientToken</code> field is an idempotency key used to ensure that repeated attempts for a single action will be ignored by the server during retries. A caller supplied unique ID (typically a UUID) should be provided. </p> </note>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetCaseAttachmentUploadUrl.html#securityir-GetCaseAttachmentUploadUrl-request-clientToken"
                         },
@@ -1732,7 +1750,7 @@
                 "attachmentPresignedUrl": {
                     "target": "com.amazonaws.securityir#Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>Response element providing the Amazon S3 presigned UTL to upload the attachment.</p>",
+                        "smithy.api#documentation": "<p>Response element providing the Amazon S3 presigned URL to upload the attachment.</p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetCaseAttachmentUploadUrl.html#securityir-GetCaseAttachmentUploadUrl-response-attachmentPresignedUrl"
                         },
@@ -1850,7 +1868,7 @@
                 "pendingAction": {
                     "target": "com.amazonaws.securityir#PendingAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>Response element for GetCase that provides identifies the case is waiting on customer input.</p>",
+                        "smithy.api#documentation": "<p>Response element for GetCase that identifies the case is waiting on customer input.</p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetCase.html#securityir-GetCase-response-pendingAction"
                         }
@@ -1904,7 +1922,7 @@
                 "resolverType": {
                     "target": "com.amazonaws.securityir#ResolverType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Response element for GetCase that provides the current resolver types. Options include <code> self-supported | AWS-supported</code>. </p>",
+                        "smithy.api#documentation": "<p>Response element for GetCase that provides the current resolver types.</p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetCase.html#securityir-GetCase-response-resolverType"
                         }
@@ -1955,7 +1973,7 @@
                     "name": "GetMembership",
                     "documentation": "Grants permission to get a membership"
                 },
-                "smithy.api#documentation": "<p>Grants permission to get details of a designated service membership.</p>",
+                "smithy.api#documentation": "<p>Returns the attributes of a membership.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Invoke GetMembership",
@@ -2157,7 +2175,7 @@
                 "accountId": {
                     "target": "com.amazonaws.securityir#AWSAccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Response element for GetMembership that provides the configured account for managing the membership. </p>",
+                        "smithy.api#documentation": "<p>Response element for GetMembership that provides the account configured to manage the membership.</p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetMembership.html#securityir-GetMembership-response-accountId"
                         }
@@ -2166,7 +2184,7 @@
                 "region": {
                     "target": "com.amazonaws.securityir#AwsRegion",
                     "traits": {
-                        "smithy.api#documentation": "<p>Response element for GetMembership that provides the configured region for managing the membership.</p>",
+                        "smithy.api#documentation": "<p>Response element for GetMembership that provides the region configured to manage the membership.</p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetMembership.html#securityir-GetMembership-response-region"
                         }
@@ -2250,6 +2268,15 @@
                         "smithy.api#documentation": "<p>Response element for GetMembership that provides the if opt-in features have been enabled.</p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetMembership.html#securityir-GetMembership-response-optInFeatures"
+                        }
+                    }
+                },
+                "membershipAccountsConfigurations": {
+                    "target": "com.amazonaws.securityir#MembershipAccountsConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>membershipAccountsConfigurations</code> field contains the configuration details for member accounts within the Amazon Web Services Organizations membership structure. </p> <p>This field returns a structure containing information about:</p> <ul> <li> <p>Account configurations for member accounts</p> </li> <li> <p>Membership settings and preferences</p> </li> <li> <p>Account-level permissions and roles</p> </li> </ul>",
+                        "smithy.api#externalDocumentation": {
+                            "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetMembership.html#securityir-GetMembership-response-membershipAccountsConfigurations"
                         }
                     }
                 }
@@ -2377,13 +2404,14 @@
                 "message": {
                     "target": "smithy.api#String",
                     "traits": {
+                        "smithy.api#documentation": "<p>The exception message.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "retryAfterSeconds": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "Element providing advice to clients on when the call can be safely retried.",
+                        "smithy.api#documentation": "<p>The number of seconds after which to retry the request.</p>",
                         "smithy.api#httpHeader": "Retry-After"
                     }
                 }
@@ -2401,6 +2429,7 @@
                 "message": {
                     "target": "smithy.api#String",
                     "traits": {
+                        "smithy.api#documentation": "<p>The exception message.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2435,7 +2464,7 @@
                     "name": "ListCaseEdits",
                     "documentation": "Grants permission to list case edits"
                 },
-                "smithy.api#documentation": "<p>Grants permissions to view the aidt log for edits made to a designated case.</p>",
+                "smithy.api#documentation": "<p>Views the case history for edits made to a designated case.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Invoke ListCaseEdits",
@@ -2479,7 +2508,7 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Optional element for a customer provided token.</p>",
+                        "smithy.api#documentation": "<p>An optional string that, if supplied, must be copied from the output of a previous call to ListCaseEdits. When provided in this manner, the API fetches the next page of results. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Response": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListCaseEdits.html#securityir-ListCaseEdits-request-nextToken"
                         },
@@ -2525,7 +2554,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional element.</p>",
+                        "smithy.api#documentation": "<p>An optional string that, if supplied on subsequent calls to ListCaseEdits, allows the API to fetch the next page of results. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Response": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListCaseEdits.html#securityir-ListCaseEdits-response-nextToken"
                         }
@@ -2534,7 +2563,7 @@
                 "items": {
                     "target": "com.amazonaws.securityir#CaseEditItems",
                     "traits": {
-                        "smithy.api#documentation": "<p>Response element for ListCaseEdits that includes the action, eventtimestamp, message, and principal for the response. </p>",
+                        "smithy.api#documentation": "<p>Response element for ListCaseEdits that includes the action, event timestamp, message, and principal for the response. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListCaseEdits.html#securityir-ListCaseEdits-response-items"
                         }
@@ -2567,7 +2596,7 @@
                     "name": "ListCases",
                     "documentation": "Grants permission to list cases"
                 },
-                "smithy.api#documentation": "<p>Grants permission to list all cases the requester has access to.</p>",
+                "smithy.api#documentation": "<p>Lists all cases the requester has access to.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Invoke ListCases",
@@ -2718,7 +2747,7 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Optional element.</p>",
+                        "smithy.api#documentation": "<p>An optional string that, if supplied, must be copied from the output of a previous call to ListCases. When provided in this manner, the API fetches the next page of results. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Response": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListCases.html#securityir-ListCases-request-nextToken"
                         },
@@ -2753,7 +2782,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional element.</p>",
+                        "smithy.api#documentation": "<p>An optional string that, if supplied on subsequent calls to ListCases, allows the API to fetch the next page of results. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Response": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListCaseEdits.html#securityir-ListCaseEdits-response-nextToken"
                         }
@@ -2795,7 +2824,7 @@
                     "name": "ListComments",
                     "documentation": "Grants permission to list case comments"
                 },
-                "smithy.api#documentation": "<p>Grants permissions to list and view comments for a designated case.</p>",
+                "smithy.api#documentation": "<p>Returns comments for a designated case.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Invoke ListComments",
@@ -2897,7 +2926,7 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Optional element.</p>",
+                        "smithy.api#documentation": "<p>An optional string that, if supplied, must be copied from the output of a previous call to ListComments. When provided in this manner, the API fetches the next page of results. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListComments.html#securityir-ListComments-request-nextToken"
                         },
@@ -2943,7 +2972,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional request elements.</p>",
+                        "smithy.api#documentation": "<p>An optional string that, if supplied on subsequent calls to ListComments, allows the API to fetch the next page of results. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListComments.html#securityir-ListComments-response-nextToken"
                         }
@@ -3048,7 +3077,7 @@
                     "name": "ListMemberships",
                     "documentation": "Grants permission to list memberships"
                 },
-                "smithy.api#documentation": "<p>Grants permission to query the memberships a principal has access to.</p>",
+                "smithy.api#documentation": "<p>Returns the memberships that the calling principal can access.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Invoke ListMemberships",
@@ -3092,7 +3121,7 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Optional element.</p>",
+                        "smithy.api#documentation": "<p>An optional string that, if supplied, must be copied from the output of a previous call to ListMemberships. When provided in this manner, the API fetches the next page of results. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListMemberships.html#securityir-ListMemberships-request-nextToken"
                         },
@@ -3127,7 +3156,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional element.</p>",
+                        "smithy.api#documentation": "<p>An optional string that, if supplied on subsequent calls to ListMemberships, allows the API to fetch the next page of results. </p>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListMemberships.html#securityir-ListMemberships-response-nextToken"
                         }
@@ -3175,7 +3204,7 @@
                     "name": "ListTagsForResource",
                     "documentation": "Grants permission to list the tags attached to the specified resource"
                 },
-                "smithy.api#documentation": "<p>Grants permission to view currently configured tags on a resource.</p>",
+                "smithy.api#documentation": "<p>Returns currently configured tags on a resource.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Invoke ListTagsForResource",
@@ -3308,6 +3337,12 @@
                     "traits": {
                         "smithy.api#enumValue": "Disassociated"
                     }
+                },
+                "UNASSOCIATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Unassociated"
+                    }
                 }
             }
         },
@@ -3319,7 +3354,67 @@
                     "traits": {
                         "smithy.api#enumValue": "Organization"
                     }
+                },
+                "UNRELATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Unrelated"
+                    }
                 }
+            }
+        },
+        "com.amazonaws.securityir#MembershipAccountsConfigurations": {
+            "type": "structure",
+            "members": {
+                "coverEntireOrganization": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>coverEntireOrganization</code> field is a boolean value that determines whether the membership configuration applies to all accounts within an Amazon Web Services Organization. </p> <p>When set to <code>true</code>, the configuration will be applied across all accounts in the organization. When set to <code>false</code>, the configuration will only apply to specifically designated accounts under the AWS Organizational Units specificied. </p>"
+                    }
+                },
+                "organizationalUnits": {
+                    "target": "com.amazonaws.securityir#OrganizationalUnits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of organizational unit IDs that follow the pattern <code>ou-[0-9a-z]{4,32}-[a-z0-9]{8,32}</code>. These IDs represent the organizational units within an Amazon Web Services Organizations structure that are covered by the membership. </p> <p>Each organizational unit ID in the list must:</p> <ul> <li> <p>Begin with the prefix 'ou-'</p> </li> <li> <p>Contain between 4 and 32 alphanumeric characters in the first segment</p> </li> <li> <p>Contain between 8 and 32 alphanumeric characters in the second segment</p> </li> </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The <code>MembershipAccountsConfigurations</code> structure defines the configuration settings for managing membership accounts withinAmazon Web Services. </p> <p>This structure contains settings that determine how member accounts are configured and managed within your organization, including: </p> <ul> <li> <p>Account configuration preferences</p> </li> <li> <p>Membership validation rules</p> </li> <li> <p>Account access settings</p> </li> </ul> <p>You can use this structure to define and maintain standardized configurations across multiple member accounts in your organization. </p>"
+            }
+        },
+        "com.amazonaws.securityir#MembershipAccountsConfigurationsUpdate": {
+            "type": "structure",
+            "members": {
+                "coverEntireOrganization": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>coverEntireOrganization</code> field is a boolean value that determines whether the membership configuration should be applied across the entire Amazon Web Services Organization. </p> <p>When set to <code>true</code>, the configuration will be applied to all accounts within the organization. When set to <code>false</code>, the configuration will only apply to specifically designated accounts. </p>"
+                    }
+                },
+                "organizationalUnitsToAdd": {
+                    "target": "com.amazonaws.securityir#OrganizationalUnits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of organizational unit IDs to add to the membership configuration. Each organizational unit ID must match the pattern <code>ou-[0-9a-z]{4,32}-[a-z0-9]{8,32}</code>. </p> <p>The list must contain between 1 and 5 organizational unit IDs.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 5
+                        }
+                    }
+                },
+                "organizationalUnitsToRemove": {
+                    "target": "com.amazonaws.securityir#OrganizationalUnits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of organizational unit IDs to remove from the membership configuration. Each organizational unit ID must match the pattern <code>ou-[0-9a-z]{4,32}-[a-z0-9]{8,32}</code>. </p> <p>The list must contain between 1 and 5 organizational unit IDs per invocation of the API request.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 5
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The <code>MembershipAccountsConfigurationsUpdate</code>structure represents the configuration updates for member accounts within an Amazon Web Services organization. </p> <p>This structure is used to modify existing account configurations and settings for members in the organization. When applying updates, ensure all required fields are properly specified to maintain account consistency. </p> <p>Key considerations when using this structure:</p> <ul> <li> <p>All configuration changes are validated before being applied</p> </li> <li> <p>Updates are processed asynchronously in the background</p> </li> <li> <p>Configuration changes may take several minutes to propagate across all affected accounts</p> </li> </ul>"
             }
         },
         "com.amazonaws.securityir#MembershipArn": {
@@ -3421,6 +3516,21 @@
                 "smithy.api#uniqueItems": {}
             }
         },
+        "com.amazonaws.securityir#OrganizationalUnitId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^ou-[0-9a-z]{4,32}-[a-z0-9]{8,32}$"
+            }
+        },
+        "com.amazonaws.securityir#OrganizationalUnits": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityir#OrganizationalUnitId"
+            },
+            "traits": {
+                "smithy.api#uniqueItems": {}
+            }
+        },
         "com.amazonaws.securityir#PendingAction": {
             "type": "enum",
             "members": {
@@ -3477,6 +3587,7 @@
                 "message": {
                     "target": "smithy.api#String",
                     "traits": {
+                        "smithy.api#documentation": "<p>The exception message.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3575,7 +3686,7 @@
                 ],
                 "aws.protocols#restJson1": {},
                 "smithy.api#cors": {},
-                "smithy.api#documentation": "<p>This guide provides documents the action and response elements for customer use of the service.</p>",
+                "smithy.api#documentation": "<p>This guide documents the action and response elements for use of the service.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -3833,6 +3944,7 @@
                 "message": {
                     "target": "smithy.api#String",
                     "traits": {
+                        "smithy.api#documentation": "<p>The exception message.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3881,34 +3993,35 @@
                 "message": {
                     "target": "smithy.api#String",
                     "traits": {
+                        "smithy.api#documentation": "<p>The exception message.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "resourceId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "Element that provides the ID of the resource affected.",
+                        "smithy.api#documentation": "<p>The ID of the requested resource which lead to the service quota exception.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "resourceType": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "Element that provides the type of the resource affected.",
+                        "smithy.api#documentation": "<p>The type of the requested resource which lead to the service quota exception.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "serviceCode": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "Element that provides the originating service who made the call.",
+                        "smithy.api#documentation": "<p>The service code of the quota.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "quotaCode": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "Element that provides the quota that was exceeded.",
+                        "smithy.api#documentation": "<p>The code of the quota.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3977,7 +4090,7 @@
                     "name": "TagResource",
                     "documentation": "Grants permission to add tags to the specified resource"
                 },
-                "smithy.api#documentation": "<p>Grants permission to add a tag(s) to a designated resource.</p>",
+                "smithy.api#documentation": "<p>Adds a tag(s) to a designated resource.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Invoke TagResource",
@@ -4103,25 +4216,26 @@
                 "message": {
                     "target": "smithy.api#String",
                     "traits": {
+                        "smithy.api#documentation": "<p>The exception message.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "serviceCode": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "Element providing the service code of the originating service."
+                        "smithy.api#documentation": "<p>The service code of the exception.</p>"
                     }
                 },
                 "quotaCode": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "Element providing the quota of the originating service."
+                        "smithy.api#documentation": "<p>The quota code of the exception.</p>"
                     }
                 },
                 "retryAfterSeconds": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "Element providing advice to clients on when the call can be safely retried.",
+                        "smithy.api#documentation": "<p>The number of seconds after which to retry the request.</p>",
                         "smithy.api#httpHeader": "Retry-After"
                     }
                 }
@@ -4163,7 +4277,7 @@
                     "name": "UntagResource",
                     "documentation": "Grants permission to remove tags from the specified resource"
                 },
-                "smithy.api#documentation": "<p>Grants permission to remove a tag(s) from a designate resource.</p>",
+                "smithy.api#documentation": "<p>Removes a tag(s) from a designate resource.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Invoke UntagResource",
@@ -4254,7 +4368,7 @@
                     "name": "UpdateCase",
                     "documentation": "Grants permission to update a case"
                 },
-                "smithy.api#documentation": "<p>Grants permission to update an existing case.</p>",
+                "smithy.api#documentation": "<p>Updates an existing case.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Invoke UpdateCase",
@@ -4340,7 +4454,7 @@
                     "name": "UpdateCaseComment",
                     "documentation": "Grants permission to update a case comment"
                 },
-                "smithy.api#documentation": "<p>Grants permission to update an existing case comment.</p>",
+                "smithy.api#documentation": "<p>Updates an existing case comment.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Invoke UpdateCaseComment",
@@ -4567,7 +4681,7 @@
                 "impactedAccountsToAdd": {
                     "target": "com.amazonaws.securityir#ImpactedAccounts",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional element for UpdateCase to provide content to add accounts impacted.</p>",
+                        "smithy.api#documentation": "<p>Optional element for UpdateCase to provide content to add accounts impacted.</p> <note> <p> AWS account ID's may appear less than 12 characters and need to be zero-prepended. An example would be <code>123123123</code> which is nine digits, and with zero-prepend would be <code>000123123123</code>. Not zero-prepending to 12 digits could result in errors. </p> </note>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_UpdateCase.html#securityir-UpdateCase-request-impactedAccountsToAdd"
                         }
@@ -4576,7 +4690,7 @@
                 "impactedAccountsToDelete": {
                     "target": "com.amazonaws.securityir#ImpactedAccounts",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional element for UpdateCase to provide content to add accounts impacted.</p>",
+                        "smithy.api#documentation": "<p>Optional element for UpdateCase to provide content to add accounts impacted.</p> <note> <p> AWS account ID's may appear less than 12 characters and need to be zero-prepended. An example would be <code>123123123</code> which is nine digits, and with zero-prepend would be <code>000123123123</code>. Not zero-prepending to 12 digits could result in errors. </p> </note>",
                         "smithy.api#externalDocumentation": {
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_UpdateCase.html#securityir-UpdateCase-request-impactedAccountsToDelete"
                         }
@@ -4607,7 +4721,7 @@
                     "name": "UpdateCaseStatus",
                     "documentation": "Grants permission to update a case status"
                 },
-                "smithy.api#documentation": "<p>Grants permission to update the status for a designated cases. Options include <code>Submitted | Detection and Analysis | Eradication, Containment and Recovery | Post-Incident Activities | Closed</code>. </p>",
+                "smithy.api#documentation": "<p>Updates the state transitions for a designated cases.</p> <p> <b>Self-managed</b>: the following states are available for self-managed cases. </p> <ul> <li> <p>Submitted → Detection and Analysis</p> </li> <li> <p>Detection and Analysis → Containment, Eradication, and Recovery</p> </li> <li> <p>Detection and Analysis → Post-incident Activities</p> </li> <li> <p>Containment, Eradication, and Recovery → Detection and Analysis</p> </li> <li> <p>Containment, Eradication, and Recovery → Post-incident Activities</p> </li> <li> <p>Post-incident Activities → Containment, Eradication, and Recovery</p> </li> <li> <p>Post-incident Activities → Detection and Analysis</p> </li> <li> <p>Any → Closed</p> </li> </ul> <p> <b>AWS supported</b>: You must use the <code>CloseCase</code> API to close. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "Invoke UpdateCaseStatus",
@@ -4688,11 +4802,12 @@
                 "aws.iam#iamAction": {
                     "name": "UpdateMembership",
                     "requiredActions": [
-                        "iam:CreateServiceLinkedRole"
+                        "iam:CreateServiceLinkedRole",
+                        "organizations:DescribeOrganizationalUnit"
                     ],
                     "documentation": "Grants permission to update memberships"
                 },
-                "smithy.api#documentation": "<p>Grants access to UpdateMembership to change membership configuration.</p>",
+                "smithy.api#documentation": "<p>Updates membership configuration.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Invoke UpdateMembership",
@@ -4772,6 +4887,24 @@
                             "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_UpdateMembership.html#securityir-UpdateMembership-request-optInFeatures"
                         }
                     }
+                },
+                "membershipAccountsConfigurationsUpdate": {
+                    "target": "com.amazonaws.securityir#MembershipAccountsConfigurationsUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>membershipAccountsConfigurationsUpdate</code> field in the <code>UpdateMembershipRequest</code> structure allows you to update the configuration settings for accounts within a membership. </p> <p>This field is optional and contains a structure of type <code>MembershipAccountsConfigurationsUpdate </code> that specifies the updated account configurations for the membership. </p>",
+                        "smithy.api#externalDocumentation": {
+                            "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_UpdateMembership.html#securityir-UpdateMembership-request-membershipAccountsConfigurationsUpdate"
+                        }
+                    }
+                },
+                "undoMembershipCancellation": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>undoMembershipCancellation</code> parameter is a boolean flag that indicates whether to reverse a previously requested membership cancellation. When set to true, this will revoke the cancellation request and maintain the membership status. </p> <p>This parameter is optional and can be used in scenarios where you need to restore a membership that was marked for cancellation but hasn't been fully terminated yet. </p> <ul> <li> <p>If set to <code>true</code>, the cancellation request will be revoked </p> </li> <li> <p>If set to <code>false</code> the service will throw a ValidationException. </p> </li> </ul>",
+                        "smithy.api#externalDocumentation": {
+                            "API Reference": "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_UpdateMembership.html#securityir-UpdateMembership-request-undoMembershipCancellation"
+                        }
+                    }
                 }
             },
             "traits": {
@@ -4798,7 +4931,7 @@
                     "name": "UpdateResolverType",
                     "documentation": "Grants permission to update case resolver type"
                 },
-                "smithy.api#documentation": "<p>Grants permission to update the resolver type for a case.</p> <important> <p>This is a one-way action and cannot be reversed.</p> </important> <p>Options include self-supported &gt; AWS-supported.</p>",
+                "smithy.api#documentation": "<p>Updates the resolver type for a case.</p> <important> <p>This is a one-way action and cannot be reversed.</p> </important>",
                 "smithy.api#examples": [
                     {
                         "title": "Invoke UpdateResolverType",
@@ -4910,20 +5043,21 @@
                 "message": {
                     "target": "smithy.api#String",
                     "traits": {
+                        "smithy.api#documentation": "<p>The exception message.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "reason": {
                     "target": "com.amazonaws.securityir#ValidationExceptionReason",
                     "traits": {
-                        "smithy.api#documentation": "Element that provides the reason the request failed validation.",
+                        "smithy.api#documentation": "<p>The reason for the exception.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "fieldList": {
                     "target": "com.amazonaws.securityir#ValidationExceptionFieldList",
                     "traits": {
-                        "smithy.api#documentation": "Element that provides the list of field(s) that caused the error, if applicable."
+                        "smithy.api#documentation": "<p>The fields which lead to the exception.</p>"
                     }
                 }
             },

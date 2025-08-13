@@ -1,6 +1,15 @@
 {
     "smithy": "2.0",
     "shapes": {
+        "com.amazonaws.sagemaker#AcceleratorsAmount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 10000000
+                }
+            }
+        },
         "com.amazonaws.sagemaker#Accept": {
             "type": "string",
             "traits": {
@@ -10316,6 +10325,24 @@
                     "target": "com.amazonaws.sagemaker#InstanceCount",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of instances to add to the instance group of a SageMaker HyperPod cluster.</p>"
+                    }
+                },
+                "Accelerators": {
+                    "target": "com.amazonaws.sagemaker#AcceleratorsAmount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of accelerators to allocate. If you don't specify a value for vCPU and MemoryInGiB, SageMaker AI automatically allocates ratio-based values for those parameters based on the number of accelerators you provide. For example, if you allocate 16 out of 32 total accelerators, SageMaker AI uses the ratio of 0.5 and allocates values to vCPU and MemoryInGiB.</p>"
+                    }
+                },
+                "VCpu": {
+                    "target": "com.amazonaws.sagemaker#VCpuAmount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of vCPU to allocate. If you specify a value only for vCPU, SageMaker AI automatically allocates ratio-based values for MemoryInGiB based on this vCPU parameter. For example, if you allocate 20 out of 40 total vCPU, SageMaker AI uses the ratio of 0.5 and allocates values to MemoryInGiB. Accelerators are set to 0.</p>"
+                    }
+                },
+                "MemoryInGiB": {
+                    "target": "com.amazonaws.sagemaker#MemoryInGiBAmount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of memory in GiB to allocate. If you specify a value only for this parameter, SageMaker AI automatically allocates a ratio-based value for vCPU based on this memory that you provide. For example, if you allocate 200 out of 400 total memory in GiB, SageMaker AI uses the ratio of 0.5 and allocates values to vCPU. Accelerators are set to 0.</p>"
                     }
                 }
             },
@@ -49845,6 +49872,15 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#MemoryInGiBAmount": {
+            "type": "float",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 10000000
+                }
+            }
+        },
         "com.amazonaws.sagemaker#MemoryInMb": {
             "type": "integer",
             "traits": {
@@ -80513,6 +80549,15 @@
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#VCpuAmount": {
+            "type": "float",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 10000000
                 }
             }
         },

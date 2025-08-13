@@ -416,6 +416,151 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.datazone#AccountInfo": {
+            "type": "structure",
+            "members": {
+                "awsAccountId": {
+                    "target": "com.amazonaws.datazone#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "supportedRegions": {
+                    "target": "com.amazonaws.datazone#AwsRegionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The regions supported for an account within an account pool. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "awsAccountName": {
+                    "target": "com.amazonaws.datazone#AwsAccountName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account name.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The account information within an account pool.</p>"
+            }
+        },
+        "com.amazonaws.datazone#AccountInfoList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#AccountInfo"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.datazone#AccountPoolId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]{1,36}$"
+            }
+        },
+        "com.amazonaws.datazone#AccountPoolList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#AccountPoolId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.datazone#AccountPoolName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[\\w -]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.datazone#AccountPoolSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#AccountPoolSummary"
+            }
+        },
+        "com.amazonaws.datazone#AccountPoolSummary": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain.</p>"
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.datazone#AccountPoolId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the account pool.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#AccountPoolName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the account pool.</p>"
+                    }
+                },
+                "resolutionStrategy": {
+                    "target": "com.amazonaws.datazone#ResolutionStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mechanism used to resolve the account selection from the account pool.</p>"
+                    }
+                },
+                "domainUnitId": {
+                    "target": "com.amazonaws.datazone#DomainUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain unit.</p>"
+                    }
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.datazone#CreatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who created the account pool.</p>"
+                    }
+                },
+                "updatedBy": {
+                    "target": "com.amazonaws.datazone#UpdatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who updated the account pool.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of the account pool.</p>"
+            }
+        },
+        "com.amazonaws.datazone#AccountSource": {
+            "type": "union",
+            "members": {
+                "accounts": {
+                    "target": "com.amazonaws.datazone#AccountInfoList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The static list of accounts within an account pool.</p>"
+                    }
+                },
+                "customAccountPoolHandler": {
+                    "target": "com.amazonaws.datazone#CustomAccountPoolHandler",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom Amazon Web Services Lambda handler within an account pool.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The source of accounts for the account pool. In the current release, it's either a\n         static list of accounts provided by the customer or a custom Amazon Web Services Lambda\n         handler. </p>"
+            }
+        },
         "com.amazonaws.datazone#ActionLink": {
             "type": "string",
             "traits": {
@@ -1984,6 +2129,16 @@
                 "smithy.api#pattern": "^\\d{12}$"
             }
         },
+        "com.amazonaws.datazone#AwsAccountName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.datazone#AwsConsoleLinkParameters": {
             "type": "structure",
             "members": {
@@ -2035,6 +2190,18 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^[a-z]{2}-[a-z]{4,10}-\\d$"
+            }
+        },
+        "com.amazonaws.datazone#AwsRegionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#AwsRegion"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 3
+                }
             }
         },
         "com.amazonaws.datazone#BasicAuthenticationCredentials": {
@@ -2947,6 +3114,167 @@
                         "smithy.api#enumValue": "WORKFLOWS_MWAA"
                     }
                 }
+            }
+        },
+        "com.amazonaws.datazone#CreateAccountPool": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#CreateAccountPoolInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#CreateAccountPoolOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an account pool. </p>",
+                "smithy.api#http": {
+                    "code": 201,
+                    "method": "POST",
+                    "uri": "/v2/domains/{domainIdentifier}/account-pools"
+                }
+            }
+        },
+        "com.amazonaws.datazone#CreateAccountPoolInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain where the account pool is created.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#AccountPoolName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the account pool.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the account pool.</p>"
+                    }
+                },
+                "resolutionStrategy": {
+                    "target": "com.amazonaws.datazone#ResolutionStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mechanism used to resolve the account selection from the account pool.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "accountSource": {
+                    "target": "com.amazonaws.datazone#AccountSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of accounts for the account pool. In the current release, it's either a\n         static list of accounts provided by the customer or a custom Amazon Web Services Lambda\n         handler. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#CreateAccountPoolOutput": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain where the account pool is created.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#AccountPoolName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the account pool.</p>"
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.datazone#AccountPoolId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the account pool.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the account pool.</p>"
+                    }
+                },
+                "resolutionStrategy": {
+                    "target": "com.amazonaws.datazone#ResolutionStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mechanism used to resolve the account selection from the account pool.</p>"
+                    }
+                },
+                "accountSource": {
+                    "target": "com.amazonaws.datazone#AccountSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of accounts for the account pool. In the current release, it's either a\n         static list of accounts provided by the customer or a custom Amazon Web Services Lambda\n         handler. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.datazone#CreatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who created the account pool.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the account pool was created.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "lastUpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the account pool was last updated.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "updatedBy": {
+                    "target": "com.amazonaws.datazone#UpdatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who last updated the account pool.</p>"
+                    }
+                },
+                "domainUnitId": {
+                    "target": "com.amazonaws.datazone#DomainUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain where the account pool is created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.datazone#CreateAsset": {
@@ -7680,6 +8008,27 @@
                 "smithy.api#pattern": "cron\\((\\b[0-5]?[0-9]\\b) (\\b2[0-3]\\b|\\b[0-1]?[0-9]\\b) ([-?*,/\\dLW]){1,83} ([-*,/\\d]|[a-zA-Z]{3}){1,23} ([-?#*,/\\dL]|[a-zA-Z]{3}){1,13} ([^\\)]+)\\)"
             }
         },
+        "com.amazonaws.datazone#CustomAccountPoolHandler": {
+            "type": "structure",
+            "members": {
+                "lambdaFunctionArn": {
+                    "target": "com.amazonaws.datazone#LambdaFunctionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services Lambda function for the custom Amazon Web Services\n         Lambda handler.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lambdaExecutionRoleArn": {
+                    "target": "com.amazonaws.datazone#LambdaExecutionRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that enables Amazon SageMaker Unified Studio to invoke the\n            Amazon Web Services Lambda funtion if the account source is the custom account pool\n         handler.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The custom Amazon Web Services Lambda handler within an account pool.</p>"
+            }
+        },
         "com.amazonaws.datazone#CustomParameter": {
             "type": "structure",
             "members": {
@@ -9000,6 +9349,9 @@
                     "target": "com.amazonaws.datazone#CancelSubscription"
                 },
                 {
+                    "target": "com.amazonaws.datazone#CreateAccountPool"
+                },
+                {
                     "target": "com.amazonaws.datazone#CreateAssetFilter"
                 },
                 {
@@ -9042,6 +9394,9 @@
                     "target": "com.amazonaws.datazone#CreateUserProfile"
                 },
                 {
+                    "target": "com.amazonaws.datazone#DeleteAccountPool"
+                },
+                {
                     "target": "com.amazonaws.datazone#DeleteAssetFilter"
                 },
                 {
@@ -9079,6 +9434,9 @@
                 },
                 {
                     "target": "com.amazonaws.datazone#DisassociateEnvironmentRole"
+                },
+                {
+                    "target": "com.amazonaws.datazone#GetAccountPool"
                 },
                 {
                     "target": "com.amazonaws.datazone#GetAssetFilter"
@@ -9139,6 +9497,12 @@
                 },
                 {
                     "target": "com.amazonaws.datazone#GetUserProfile"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ListAccountPools"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ListAccountsInAccountPool"
                 },
                 {
                     "target": "com.amazonaws.datazone#ListAssetFilters"
@@ -9253,6 +9617,9 @@
                 },
                 {
                     "target": "com.amazonaws.datazone#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.datazone#UpdateAccountPool"
                 },
                 {
                     "target": "com.amazonaws.datazone#UpdateAssetFilter"
@@ -9784,6 +10151,72 @@
                     "max": 4096
                 },
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.datazone#DeleteAccountPool": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#DeleteAccountPoolInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#DeleteAccountPoolOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an account pool.</p>",
+                "smithy.api#http": {
+                    "code": 204,
+                    "method": "DELETE",
+                    "uri": "/v2/domains/{domainIdentifier}/account-pools/{identifier}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.datazone#DeleteAccountPoolInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain where the account pool is deleted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "identifier": {
+                    "target": "com.amazonaws.datazone#AccountPoolId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the account pool to be deleted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#DeleteAccountPoolOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.datazone#DeleteAsset": {
@@ -12887,15 +13320,19 @@
                 "awsAccount": {
                     "target": "com.amazonaws.datazone#AwsAccount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services account of the environment.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Amazon Web Services account of the environment.</p>"
+                    }
+                },
+                "accountPools": {
+                    "target": "com.amazonaws.datazone#AccountPoolList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account pools used by a custom project profile.</p>"
                     }
                 },
                 "awsRegion": {
                     "target": "com.amazonaws.datazone#Region",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Region of the environment.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region of the environment.</p>"
                     }
                 },
                 "deploymentOrder": {
@@ -12998,6 +13435,12 @@
                     "target": "com.amazonaws.datazone#EnvironmentId",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the environment.</p>"
+                    }
+                },
+                "environmentResolvedAccount": {
+                    "target": "com.amazonaws.datazone#EnvironmentResolvedAccount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the account/Region that is to be used during project creation for a particular\n         blueprint.</p>"
                     }
                 },
                 "environmentConfigurationName": {
@@ -13230,6 +13673,34 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The details of an environment profile.</p>"
+            }
+        },
+        "com.amazonaws.datazone#EnvironmentResolvedAccount": {
+            "type": "structure",
+            "members": {
+                "awsAccountId": {
+                    "target": "com.amazonaws.datazone#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resolved account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "regionName": {
+                    "target": "com.amazonaws.datazone#AwsRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resolved Region.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sourceAccountPoolId": {
+                    "target": "com.amazonaws.datazone#AccountPoolId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the account pool.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the account/Region that is to be used during project creation for a particular\n         blueprint.</p>"
             }
         },
         "com.amazonaws.datazone#EnvironmentStatus": {
@@ -14029,6 +14500,143 @@
                 }
             }
         },
+        "com.amazonaws.datazone#GetAccountPool": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#GetAccountPoolInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#GetAccountPoolOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the details of the account pool.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/v2/domains/{domainIdentifier}/account-pools/{identifier}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.datazone#GetAccountPoolInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain in which the account pool lives whose details are to be\n         displayed.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "identifier": {
+                    "target": "com.amazonaws.datazone#AccountPoolId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the account pool whose details are to be displayed.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#GetAccountPoolOutput": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain in which the account pool lives whose details are to be\n         displayed.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#AccountPoolName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the account pool.</p>"
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.datazone#AccountPoolId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the account pool.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the account pool.</p>"
+                    }
+                },
+                "resolutionStrategy": {
+                    "target": "com.amazonaws.datazone#ResolutionStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mechanism used to resolve the account selection from the account pool.</p>"
+                    }
+                },
+                "accountSource": {
+                    "target": "com.amazonaws.datazone#AccountSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of accounts for the account pool. In the current release, it's either a\n         static list of accounts provided by the customer or a custom Amazon Web Services Lambda\n         handler. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.datazone#CreatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who created the account pool.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the account pool was created.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "lastUpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the account pool was last updated.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "updatedBy": {
+                    "target": "com.amazonaws.datazone#UpdatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who last updated the account pool.</p>"
+                    }
+                },
+                "domainUnitId": {
+                    "target": "com.amazonaws.datazone#DomainUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain unit ID of the account pool.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.datazone#GetAsset": {
             "type": "operation",
             "input": {
@@ -14224,7 +14832,7 @@
                 "identifier": {
                     "target": "com.amazonaws.datazone#AssetIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Amazon DataZone asset.</p>\n         <p>This parameter supports either the value of <code>assetId</code> or <code>externalIdentifier</code>\n         as input. If you are passing the value of <code>externalIdentifier</code>, you must prefix this\n         value with <code>externalIdentifer%2F</code>.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon DataZone asset.</p>\n         <p>This parameter supports either the value of <code>assetId</code> or\n            <code>externalIdentifier</code> as input. If you are passing the value of\n            <code>externalIdentifier</code>, you must prefix this value with\n            <code>externalIdentifer%2F</code>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -20581,6 +21189,18 @@
                 "smithy.api#documentation": "<p>The Lake Formation configuration of the Data Lake blueprint.</p>"
             }
         },
+        "com.amazonaws.datazone#LambdaExecutionRoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]*$"
+            }
+        },
+        "com.amazonaws.datazone#LambdaFunctionArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:(?:aws|aws-cn|aws-us-gov):lambda:(?:[a-z]{2}(?:-gov)?-[a-z]+-\\d{1,}):(\\d{12}):function:[a-zA-Z0-9-_]+(?::[a-zA-Z0-9-_]+)?(?:\\$[\\w-]+)?$"
+            }
+        },
         "com.amazonaws.datazone#LastName": {
             "type": "string",
             "traits": {
@@ -21076,6 +21696,214 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The lineage sync schedule.</p>"
+            }
+        },
+        "com.amazonaws.datazone#ListAccountPools": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#ListAccountPoolsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#ListAccountPoolsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists existing account pools.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/v2/domains/{domainIdentifier}/account-pools"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.datazone#ListAccountPoolsInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain where exsting account pools are to be listed.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#AccountPoolName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the account pool to be listed.</p>",
+                        "smithy.api#httpQuery": "name"
+                    }
+                },
+                "sortBy": {
+                    "target": "com.amazonaws.datazone#SortFieldAccountPool",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort by mechanism in which the existing account pools are to be listed.</p>",
+                        "smithy.api#httpQuery": "sortBy"
+                    }
+                },
+                "sortOrder": {
+                    "target": "com.amazonaws.datazone#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort order in which the existing account pools are to be listed.</p>",
+                        "smithy.api#httpQuery": "sortOrder"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.datazone#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the number of account pools is greater than the default value for the MaxResults\n         parameter, or if you explicitly specify a value for MaxResults that is less than the number\n         of account pools, the response includes a pagination token named NextToken. You can specify\n         this NextToken value in a subsequent call to ListAccountPools to list the next set of\n         account pools.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.datazone#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of account pools to return in a single call to ListAccountPools. When\n         the number of account pools to be listed is greater than the value of MaxResults, the\n         response contains a NextToken value that you can use in a subsequent call to\n         ListAccountPools to list the next set of account pools.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#ListAccountPoolsOutput": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.datazone#AccountPoolSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The results of the ListAccountPools operation.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.datazone#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the number of account pools is greater than the default value for the MaxResults\n         parameter, or if you explicitly specify a value for MaxResults that is less than the number\n         of account pools, the response includes a pagination token named NextToken. You can specify\n         this NextToken value in a subsequent call to ListAccountPools to list the next set of\n         account pools.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.datazone#ListAccountsInAccountPool": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#ListAccountsInAccountPoolInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#ListAccountsInAccountPoolOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the accounts in the specified account pool.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/v2/domains/{domainIdentifier}/account-pools/{identifier}/accounts"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.datazone#ListAccountsInAccountPoolInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain in which the accounts in the specified account pool are to be\n         listed.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "identifier": {
+                    "target": "com.amazonaws.datazone#AccountPoolId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the account pool whose accounts are to be listed.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.datazone#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the number of accounts is greater than the default value for the MaxResults\n         parameter, or if you explicitly specify a value for MaxResults that is less than the number\n         of accounts, the response includes a pagination token named NextToken. You can specify this\n         NextToken value in a subsequent call to ListAccountsInAccountPool to list the next set of\n         accounts.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.datazone#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of accounts to return in a single call to ListAccountsInAccountPool.\n         When the number of accounts to be listed is greater than the value of MaxResults, the\n         response contains a NextToken value that you can use in a subsequent call to\n         ListAccountsInAccountPool to list the next set of accounts.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#ListAccountsInAccountPoolOutput": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.datazone#AccountInfoList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The results of the ListAccountsInAccountPool operation.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.datazone#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the number of accounts is greater than the default value for the MaxResults\n         parameter, or if you explicitly specify a value for MaxResults that is less than the number\n         of accounts, the response includes a pagination token named NextToken. You can specify this\n         NextToken value in a subsequent call to ListAccountsInAccountPool to list the next set of\n         accounts.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.datazone#ListAssetFilters": {
@@ -28299,6 +29127,17 @@
                 }
             }
         },
+        "com.amazonaws.datazone#ResolutionStrategy": {
+            "type": "enum",
+            "members": {
+                "MANUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANUAL"
+                    }
+                }
+            }
+        },
         "com.amazonaws.datazone#Resource": {
             "type": "structure",
             "members": {
@@ -30178,6 +31017,17 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 100000
+                }
+            }
+        },
+        "com.amazonaws.datazone#SortFieldAccountPool": {
+            "type": "enum",
+            "members": {
+                "NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NAME"
+                    }
                 }
             }
         },
@@ -32919,6 +33769,173 @@
         "com.amazonaws.datazone#UntagResourceResponse": {
             "type": "structure",
             "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.datazone#UpdateAccountPool": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#UpdateAccountPoolInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#UpdateAccountPoolOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the account pool.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PATCH",
+                    "uri": "/v2/domains/{domainIdentifier}/account-pools/{identifier}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.datazone#UpdateAccountPoolInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain ID where the account pool that is to be updated lives.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "identifier": {
+                    "target": "com.amazonaws.datazone#AccountPoolId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the account pool that is to be updated.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#AccountPoolName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the account pool that is to be updated.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the account pool that is to be udpated.</p>"
+                    }
+                },
+                "resolutionStrategy": {
+                    "target": "com.amazonaws.datazone#ResolutionStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mechanism used to resolve the account selection from the account pool.</p>"
+                    }
+                },
+                "accountSource": {
+                    "target": "com.amazonaws.datazone#AccountSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of accounts for the account pool. In the current release, it's either a\n         static list of accounts provided by the customer or a custom Amazon Web Services Lambda\n         handler. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#UpdateAccountPoolOutput": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain ID where the account pool that is to be updated lives.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#AccountPoolName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the account pool that is to be updated.</p>"
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.datazone#AccountPoolId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the account pool that is to be updated.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the account pool that is to be udpated.</p>"
+                    }
+                },
+                "resolutionStrategy": {
+                    "target": "com.amazonaws.datazone#ResolutionStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mechanism used to resolve the account selection from the account pool.</p>"
+                    }
+                },
+                "accountSource": {
+                    "target": "com.amazonaws.datazone#AccountSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of accounts for the account pool. In the current release, it's either a\n         static list of accounts provided by the customer or a custom Amazon Web Services Lambda\n         handler. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.datazone#CreatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who created the account pool.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the account pool was created.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "lastUpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the account pool was last updated.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "updatedBy": {
+                    "target": "com.amazonaws.datazone#UpdatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who last updated the account pool.</p>"
+                    }
+                },
+                "domainUnitId": {
+                    "target": "com.amazonaws.datazone#DomainUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain ID in which the account pool that is to be updated lives.</p>"
+                    }
+                }
+            },
             "traits": {
                 "smithy.api#output": {}
             }

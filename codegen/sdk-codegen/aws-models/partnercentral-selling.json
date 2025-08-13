@@ -641,6 +641,13 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.partnercentralselling#Amount": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(0|([1-9][0-9]{0,30}))(\\.[0-9]{0,2})?$",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.partnercentralselling#ApnPrograms": {
             "type": "list",
             "member": {
@@ -786,8 +793,8 @@
             ],
             "traits": {
                 "aws.iam#conditionKeys": [
-                    "partnercentral:RelatedEntityType",
-                    "partnercentral:Catalog"
+                    "partnercentral:Catalog",
+                    "partnercentral:RelatedEntityType"
                 ],
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to associate Opportunities on AWS Partner Central with other entities"
@@ -3682,7 +3689,9 @@
             ],
             "traits": {
                 "aws.iam#conditionKeys": [
-                    "partnercentral:Catalog"
+                    "partnercentral:Catalog",
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
                 ],
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to create new Opportunities on AWS Partner Central"
@@ -3784,6 +3793,12 @@
                     "target": "com.amazonaws.partnercentralselling#PartnerOpportunityTeamMembersList",
                     "traits": {
                         "smithy.api#documentation": "<p>Represents the internal team handling the opportunity. Specify collaborating members of this opportunity who are within the partner's organization.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.partnercentralselling#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of the key-value pairs of the tag or tags to assign.</p>"
                     }
                 }
             },
@@ -5170,9 +5185,7 @@
             ],
             "traits": {
                 "aws.iam#conditionKeys": [
-                    "partnercentral:Catalog",
-                    "aws:ResourceTag/${TagKey}",
-                    "aws:TagKeys"
+                    "partnercentral:Catalog"
                 ],
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to deleting resource snapshot jobs on AWS Partner Central"
@@ -5283,8 +5296,8 @@
             ],
             "traits": {
                 "aws.iam#conditionKeys": [
-                    "partnercentral:RelatedEntityType",
-                    "partnercentral:Catalog"
+                    "partnercentral:Catalog",
+                    "partnercentral:RelatedEntityType"
                 ],
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to disassociate Opportunities on AWS Partner Central from other entities"
@@ -6057,7 +6070,7 @@
             "type": "structure",
             "members": {
                 "Amount": {
-                    "target": "smithy.api#String",
+                    "target": "com.amazonaws.partnercentralselling#Amount",
                     "traits": {
                         "smithy.api#documentation": "<p>Represents the estimated monthly revenue that the partner expects to earn from the opportunity. This helps in forecasting financial returns.</p>",
                         "smithy.api#required": {}
@@ -6074,14 +6087,14 @@
                 "Frequency": {
                     "target": "com.amazonaws.partnercentralselling#PaymentFrequency",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates how frequently the customer is expected to spend the projected amount. This can include values such as <code>Monthly</code>, <code>Quarterly</code>, or <code>Annually</code>. The default value is <code>Monthly</code>, representing recurring monthly spend.</p>",
+                        "smithy.api#documentation": "<p>Indicates how frequently the customer is expected to spend the projected amount. Only the value <code>Monthly</code> is allowed for the <code>Frequency</code> field, representing recurring monthly spend.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "TargetCompany": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name of the partner company that is expected to generate revenue from the opportunity. This field helps track the partner’s involvement in the opportunity.</p>",
+                        "smithy.api#documentation": "<p>Specifies the name of the partner company that is expected to generate revenue from the opportunity. This field helps track the partner’s involvement in the opportunity. This field only accepts the value <code>AWS</code>. If any other value is provided, the system will automatically set it to <code>AWS</code>.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 80
@@ -6812,9 +6825,7 @@
             ],
             "traits": {
                 "aws.iam#conditionKeys": [
-                    "partnercentral:Catalog",
-                    "aws:ResourceTag/${TagKey}",
-                    "aws:TagKeys"
+                    "partnercentral:Catalog"
                 ],
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to retrieving resource snapshot job details in AWS Partner Central"
@@ -7488,13 +7499,13 @@
                 "ReviewComments": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates why an opportunity was sent back for further details. Partners must take corrective action based on the <code>ReviewComments</code>.</p>"
+                        "smithy.api#documentation": "<p>Contains detailed feedback from Amazon Web Services when requesting additional information from partners. Provides specific guidance on what partners need to provide or clarify for opportunity validation, complementing the <code>ReviewStatusReason</code> field.</p>"
                     }
                 },
                 "ReviewStatusReason": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the reason a decision was made during the opportunity review process. This field combines the reasons for both disqualified and action required statuses, and provide clarity for why an opportunity was disqualified or requires further action.</p>"
+                        "smithy.api#documentation": "<p>Code indicating the validation decision during the Amazon Web Services opportunity review. Applies when status is <code>Rejected</code> or <code>Action Required</code>. Used to document validation results for AWS Partner Referrals and indicate when additional information is needed from partners as part of the APN Customer Engagement (ACE) program.</p>"
                     }
                 },
                 "NextStepsHistory": {
@@ -8497,7 +8508,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to list Opportunities on AWS Partner Central"
                 },
-                "smithy.api#documentation": "<p>This request accepts a list of filters that retrieve opportunity subsets as well as sort options. This feature is available to partners from <a href=\"https://partnercentral.awspartner.com/\">Partner Central</a> using the <code>ListOpportunities</code> API action.</p> <p>To synchronize your system with Amazon Web Services, only list the opportunities that were newly created or updated. We recommend you rely on events emitted by the service into your Amazon Web Services account’s Amazon EventBridge default event bus, you can also use the <code>ListOpportunities</code> action.</p> <p>We recommend the following approach:</p> <ol> <li> <p>Find the latest <code>LastModifiedDate</code> that you stored, and only use the values that came from Amazon Web Services. Don’t use values generated by your system.</p> </li> <li> <p>When you send a <code>ListOpportunities</code> request, submit the date in ISO 8601 format in the <code>AfterLastModifiedDate</code> filter.</p> </li> <li> <p>Amazon Web Services only returns opportunities created or updated on or after that date and time. Use <code>NextToken</code> to iterate over all pages.</p> </li> </ol>",
+                "smithy.api#documentation": "<p>This request accepts a list of filters that retrieve opportunity subsets as well as sort options. This feature is available to partners from <a href=\"https://partnercentral.awspartner.com/\">Partner Central</a> using the <code>ListOpportunities</code> API action.</p> <p>To synchronize your system with Amazon Web Services, list only the opportunities that were newly created or updated. We recommend you rely on events emitted by the service into your Amazon Web Services account’s Amazon EventBridge default event bus. You can also use the <code>ListOpportunities</code> action.</p> <p>We recommend the following approach:</p> <ol> <li> <p>Find the latest <code>LastModifiedDate</code> that you stored, and only use the values that came from Amazon Web Services. Don’t use values generated by your system.</p> </li> <li> <p>When you send a <code>ListOpportunities</code> request, submit the date in ISO 8601 format in the <code>AfterLastModifiedDate</code> filter.</p> </li> <li> <p>Amazon Web Services only returns opportunities created or updated on or after that date and time. Use <code>NextToken</code> to iterate over all pages.</p> </li> </ol>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ListOpportunities",
@@ -9294,6 +9305,9 @@
                 "aws.api#arn": {
                     "template": "catalog/{Catalog}/opportunity/{Identifier}"
                 },
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
                 "aws.iam#disableConditionKeyInference": {},
                 "aws.iam#iamResource": {
                     "relativeDocumentation": "working-with-your-opportunities.html"
@@ -9630,7 +9644,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "max": 1
+                    "max": 2
                 }
             }
         },
@@ -10450,6 +10464,9 @@
                 "aws.api#arn": {
                     "template": "catalog/{Catalog}/resource-snapshot-job/{Identifier}"
                 },
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
                 "aws.iam#disableConditionKeyInference": {},
                 "aws.iam#iamResource": {
                     "relativeDocumentation": "working-with-multi-partner-opportunities.html",
@@ -11192,6 +11209,7 @@
                 "aws.iam#conditionKeys": [
                     "partnercentral:Catalog",
                     "aws:RequestTag/${TagKey}",
+                    "aws:ResourceTag/${TagKey}",
                     "aws:TagKeys"
                 ],
                 "aws.iam#iamAction": {
@@ -11349,6 +11367,7 @@
                 "aws.iam#conditionKeys": [
                     "partnercentral:Catalog",
                     "aws:RequestTag/${TagKey}",
+                    "aws:ResourceTag/${TagKey}",
                     "aws:TagKeys"
                 ],
                 "aws.iam#iamAction": {
@@ -11362,7 +11381,7 @@
                     ],
                     "documentation": "Grants permission to initiate tasks that start Engagements from Opportunities on AWS Partner Central"
                 },
-                "smithy.api#documentation": "<p>This action initiates the engagement process from an existing opportunity by accepting the engagement invitation and creating a corresponding opportunity in the partner’s system. Similar to <code>StartEngagementByAcceptingInvitationTask</code>, this action is asynchronous and performs multiple steps before completion.</p>",
+                "smithy.api#documentation": "<p>Similar to <code>StartEngagementByAcceptingInvitationTask</code>, this action is asynchronous and performs multiple steps before completion. This action orchestrates a comprehensive workflow that combines multiple API operations into a single task to create and initiate an engagement from an existing opportunity. It automatically executes a sequence of operations including <code>GetOpportunity</code>, <code>CreateEngagement</code> (if it doesn't exist), <code>CreateResourceSnapshot</code>, <code>CreateResourceSnapshotJob</code>, <code>CreateEngagementInvitation</code> (if not already invited/accepted), and <code>SubmitOpportunity</code>. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/StartEngagementFromOpportunityTask",
@@ -11507,9 +11526,7 @@
             ],
             "traits": {
                 "aws.iam#conditionKeys": [
-                    "partnercentral:Catalog",
-                    "aws:ResourceTag/${TagKey}",
-                    "aws:TagKeys"
+                    "partnercentral:Catalog"
                 ],
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to starting resource snapshot jobs in AWS Partner Central"
@@ -11570,9 +11587,7 @@
             ],
             "traits": {
                 "aws.iam#conditionKeys": [
-                    "partnercentral:Catalog",
-                    "aws:ResourceTag/${TagKey}",
-                    "aws:TagKeys"
+                    "partnercentral:Catalog"
                 ],
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to stopping resource snapshot jobs in AWS Partner Central"

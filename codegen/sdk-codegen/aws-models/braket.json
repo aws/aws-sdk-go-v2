@@ -9,9 +9,36 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>",
+                "smithy.api#documentation": "<p>You do not have sufficient permissions to perform this action.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.braket#ActionMetadata": {
+            "type": "structure",
+            "members": {
+                "actionType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of action associated with the quantum task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "programCount": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of programs in a program set. This is only available for a Program Set.</p>"
+                    }
+                },
+                "executableCount": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of executables in a program set. This is only available for a Program Set.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains metadata about the quantum task action, including the action type and program statistics.</p>"
             }
         },
         "com.amazonaws.braket#AlgorithmSpecification": {
@@ -26,12 +53,12 @@
                 "containerImage": {
                     "target": "com.amazonaws.braket#ContainerImage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The container image used to create an Amazon Braket job.</p>"
+                        "smithy.api#documentation": "<p>The container image used to create an Amazon Braket hybrid job.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines the Amazon Braket job to be created. Specifies the container image the job uses\n         and the paths to the Python scripts used for entry and training.</p>"
+                "smithy.api#documentation": "<p>Defines the Amazon Braket hybrid job to be created. Specifies the container image the job uses and the paths to the Python scripts used for entry and training.</p>"
             }
         },
         "com.amazonaws.braket#Association": {
@@ -126,7 +153,7 @@
                         "date"
                     ]
                 },
-                "smithy.api#documentation": "<p>The Amazon Braket API Reference provides information about the operations and structures\n         supported in Amazon Braket.</p>\n         <p>Additional Resources:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/braket/latest/developerguide/what-is-braket.html\">Amazon Braket Developer Guide</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>The Amazon Braket API Reference provides information about the operations and structures supported by Amazon Braket.</p> <p>To learn about the permissions required to call an Amazon Braket API action, see <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonbraket.html\">Actions, resources, and condition keys for Amazon Braket</a>. <a href=\"https://amazon-braket-sdk-python.readthedocs.io/en/latest/#\">Amazon Braket Python SDK</a> and the <a href=\"https://docs.aws.amazon.com/cli/latest/reference/braket/\">AWS Command Line Interface</a> can be used to make discovery and creation of API calls easier. For more information about Amazon Braket features, see <a href=\"https://docs.aws.amazon.com/braket/latest/developerguide/what-is-braket.html\">What is Amazon Braket?</a> and important <a href=\"https://docs.aws.amazon.com/braket/latest/developerguide/braket-terms.html\">terms and concepts</a> in the <i>Amazon Braket Developer Guide</i>.</p> <p> <b>In this guide:</b> </p> <ul> <li> <p/> </li> <li> <p/> </li> <li> <p> <a>CommonParameters</a> </p> </li> <li> <p> <a>CommonErrors</a> </p> </li> </ul> <p> <b>Available languages for AWS SDK:</b> </p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/sdkfornet/v3/apidocs/items/Braket/NBraket.html\">.NET</a> </p> </li> <li> <p> <a href=\"https://sdk.amazonaws.com/cpp/api/LATEST/root/html/index.html\">C++</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/sdk-for-go/api/service/braket/\">Go API reference</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/braket/package-summary.html\">Java</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Braket.html\">JavaScript</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.Braket.BraketClient.html\">PHP</a> </p> </li> <li> <p> <a href=\"https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/braket.html\">Python (Boto)</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Braket.html\">Ruby</a> </p> </li> </ul> <p> <b>Code examples from the Amazon Braket Tutorials GitHub repository:</b> </p> <ul> <li> <p> <a href=\"https://github.com/amazon-braket/amazon-braket-examples\">Amazon Braket Examples</a> </p> </li> </ul>",
                 "smithy.api#title": "Braket",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -832,7 +859,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels an Amazon Braket job.</p>",
+                "smithy.api#documentation": "<p>Cancels an Amazon Braket hybrid job.</p>",
                 "smithy.api#http": {
                     "uri": "/job/{jobArn}/cancel",
                     "method": "PUT"
@@ -846,7 +873,7 @@
                 "jobArn": {
                     "target": "com.amazonaws.braket#JobArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Braket job to cancel.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Braket hybrid job to cancel.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -866,7 +893,7 @@
                 "cancellationStatus": {
                     "target": "com.amazonaws.braket#CancellationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the job cancellation request.</p>",
+                        "smithy.api#documentation": "<p>The status of the hybrid job.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -915,7 +942,7 @@
                 "quantumTaskArn": {
                     "target": "com.amazonaws.braket#QuantumTaskArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the task to cancel.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the quantum task to cancel.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -923,7 +950,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.braket#String64",
                     "traits": {
-                        "smithy.api#documentation": "<p>The client token associated with the request.</p>",
+                        "smithy.api#documentation": "<p>The client token associated with the cancellation request.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
@@ -936,14 +963,14 @@
                 "quantumTaskArn": {
                     "target": "com.amazonaws.braket#QuantumTaskArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the task.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the quantum task.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "cancellationStatus": {
                     "target": "com.amazonaws.braket#CancellationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the cancellation request.</p>",
+                        "smithy.api#documentation": "<p>The status of the quantum task.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1004,7 +1031,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The container image used to create an Amazon Braket job.</p>"
+                "smithy.api#documentation": "<p>The container image used to create an Amazon Braket hybrid job.</p>"
             }
         },
         "com.amazonaws.braket#CreateJob": {
@@ -1042,7 +1069,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon Braket job.</p>",
+                "smithy.api#documentation": "<p>Creates an Amazon Braket hybrid job.</p>",
                 "smithy.api#http": {
                     "uri": "/job",
                     "method": "POST",
@@ -1056,7 +1083,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.braket#String64",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique token that guarantees that the call to this API is idempotent.</p>",
+                        "smithy.api#documentation": "<p>The client token associated with this request that guarantees that the request is idempotent.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
@@ -1064,14 +1091,14 @@
                 "algorithmSpecification": {
                     "target": "com.amazonaws.braket#AlgorithmSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>Definition of the Amazon Braket job to be created. Specifies the container image the job\n         uses and information about the Python scripts used for entry and training.</p>",
+                        "smithy.api#documentation": "<p>Definition of the Amazon Braket job to be created. Specifies the container image the job uses and information about the Python scripts used for entry and training.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "inputDataConfig": {
                     "target": "com.amazonaws.braket#InputConfigList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of parameters that specify the name and type of input data and where it is\n         located.</p>",
+                        "smithy.api#documentation": "<p>A list of parameters that specify the name and type of input data and where it is located.</p>",
                         "smithy.api#length": {
                             "min": 0,
                             "max": 20
@@ -1081,20 +1108,20 @@
                 "outputDataConfig": {
                     "target": "com.amazonaws.braket#JobOutputDataConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The path to the S3 location where you want to store job artifacts and the encryption key\n         used to store them.</p>",
+                        "smithy.api#documentation": "<p>The path to the S3 location where you want to store hybrid job artifacts and the encryption key used to store them.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "checkpointConfig": {
                     "target": "com.amazonaws.braket#JobCheckpointConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the output locations for job checkpoint data.</p>"
+                        "smithy.api#documentation": "<p>Information about the output locations for hybrid job checkpoint data.</p>"
                     }
                 },
                 "jobName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Amazon Braket job.</p>",
+                        "smithy.api#documentation": "<p>The name of the Amazon Braket hybrid job.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 50
@@ -1106,40 +1133,40 @@
                 "roleArn": {
                     "target": "com.amazonaws.braket#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that Amazon Braket can assume to perform\n         tasks on behalf of a user. It can access user resources, run an Amazon Braket job container\n         on behalf of user, and output resources to the users' s3 buckets.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that Amazon Braket can assume to perform tasks on behalf of a user. It can access user resources, run an Amazon Braket job container on behalf of user, and output results and hybrid job details to the users' s3 buckets.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "stoppingCondition": {
                     "target": "com.amazonaws.braket#JobStoppingCondition",
                     "traits": {
-                        "smithy.api#documentation": "<p> The user-defined criteria that specifies when a job stops running.</p>"
+                        "smithy.api#documentation": "<p> The user-defined criteria that specifies when a hybrid job stops running.</p>"
                     }
                 },
                 "instanceConfig": {
                     "target": "com.amazonaws.braket#InstanceConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration of the resource instances to use while running the hybrid job on Amazon\n         Braket.</p>",
+                        "smithy.api#documentation": "<p>Configuration of the resource instances to use while running the hybrid job on Amazon Braket.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "hyperParameters": {
                     "target": "com.amazonaws.braket#HyperParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>Algorithm-specific parameters used by an Amazon Braket job that influence the quality of\n         the training job. The values are set with a string of JSON key:value pairs, where the key\n         is the name of the hyperparameter and the value is the value of th hyperparameter.</p>"
+                        "smithy.api#documentation": "<p>Algorithm-specific parameters used by an Amazon Braket hybrid job that influence the quality of the training job. The values are set with a map of JSON key:value pairs, where the key is the name of the hyperparameter and the value is the value of the hyperparameter.</p> <important> <p>Do not include any security-sensitive information including account access IDs, secrets, or tokens in any hyperparameter fields. As part of the shared responsibility model, you are responsible for any potential exposure, unauthorized access, or compromise of your sensitive data if caused by security-sensitive information included in the request hyperparameter variable or plain text fields.</p> </important>"
                     }
                 },
                 "deviceConfig": {
                     "target": "com.amazonaws.braket#DeviceConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The quantum processing unit (QPU) or simulator used to create an Amazon Braket\n         job.</p>",
+                        "smithy.api#documentation": "<p>The quantum processing unit (QPU) or simulator used to create an Amazon Braket hybrid job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.braket#TagsMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A tag object that consists of a key and an optional value, used to manage metadata for\n         Amazon Braket resources.</p>"
+                        "smithy.api#documentation": "<p>Tags to be added to the hybrid job you're creating.</p>"
                     }
                 },
                 "associations": {
@@ -1160,7 +1187,7 @@
                 "jobArn": {
                     "target": "com.amazonaws.braket#JobArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Braket job created.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Braket hybrid job created.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1220,14 +1247,14 @@
                 "deviceArn": {
                     "target": "com.amazonaws.braket#DeviceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the device to run the task on.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the device to run the quantum task on.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "deviceParameters": {
                     "target": "com.amazonaws.braket#JsonValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameters for the device to run the task on.</p>",
+                        "smithy.api#documentation": "<p>The parameters for the device to run the quantum task on.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 48000
@@ -1237,7 +1264,7 @@
                 "shots": {
                     "target": "smithy.api#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of shots to use for the task.</p>",
+                        "smithy.api#documentation": "<p>The number of shots to use for the quantum task.</p>",
                         "smithy.api#range": {
                             "min": 0
                         },
@@ -1247,7 +1274,7 @@
                 "outputS3Bucket": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The S3 bucket to store task result files in.</p>",
+                        "smithy.api#documentation": "<p>The S3 bucket to store quantum task result files in.</p>",
                         "smithy.api#length": {
                             "min": 3,
                             "max": 63
@@ -1258,7 +1285,7 @@
                 "outputS3KeyPrefix": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key prefix for the location in the S3 bucket to store task results in.</p>",
+                        "smithy.api#documentation": "<p>The key prefix for the location in the S3 bucket to store quantum task results in.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 1024
@@ -1269,7 +1296,7 @@
                 "action": {
                     "target": "com.amazonaws.braket#JsonValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The action associated with the task.</p>",
+                        "smithy.api#documentation": "<p>The action associated with the quantum task.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1282,7 +1309,7 @@
                 "jobToken": {
                     "target": "com.amazonaws.braket#JobToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for an Amazon Braket job that associates it with the quantum task.</p>"
+                        "smithy.api#documentation": "<p>The token for an Amazon Braket hybrid job that associates it with the quantum task.</p>"
                     }
                 },
                 "associations": {
@@ -1303,7 +1330,7 @@
                 "quantumTaskArn": {
                     "target": "com.amazonaws.braket#QuantumTaskArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the task created by the request.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the quantum task created by the request.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1315,13 +1342,13 @@
                 "s3DataSource": {
                     "target": "com.amazonaws.braket#S3DataSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the data stored in Amazon S3 used by the Amazon Braket job.</p>",
+                        "smithy.api#documentation": "<p>Amazon S3 path of the input data used by the hybrid job.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the source of the data used by the Amazon Braket job.</p>"
+                "smithy.api#documentation": "<p>Information about the source of the input data used by the Amazon Braket hybrid job.</p>"
             }
         },
         "com.amazonaws.braket#DeviceArn": {
@@ -1343,13 +1370,13 @@
                 "device": {
                     "target": "com.amazonaws.braket#String256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The primary quantum processing unit (QPU) or simulator used to create and run an Amazon\n         Braket job.</p>",
+                        "smithy.api#documentation": "<p>The primary device ARN used to create and run an Amazon Braket hybrid job.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configures the quantum processing units (QPUs) or simulator used to create and run an\n         Amazon Braket job.</p>"
+                "smithy.api#documentation": "<p>Configures the primary device used to create and run an Amazon Braket hybrid job.</p>"
             }
         },
         "com.amazonaws.braket#DeviceOfflineException": {
@@ -1378,19 +1405,19 @@
                 "queueSize": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of jobs or tasks in the queue for a given device. </p>",
+                        "smithy.api#documentation": "<p>The number of hybrid jobs or quantum tasks in the queue for a given device. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "queuePriority": {
                     "target": "com.amazonaws.braket#QueuePriority",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional. Specifies the priority of the queue. Tasks in a priority queue\n         are processed before the tasks in a normal queue.</p>"
+                        "smithy.api#documentation": "<p>Optional. Specifies the priority of the queue. Quantum tasks in a priority queue are processed before the quantum tasks in a normal queue.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about tasks and jobs queued on a device.</p>"
+                "smithy.api#documentation": "<p>Information about quantum tasks and hybrid jobs queued on a device.</p>"
             }
         },
         "com.amazonaws.braket#DeviceQueueInfoList": {
@@ -1541,7 +1568,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the devices available in Amazon Braket.</p>\n         <note>\n            <p>For backwards compatibility with older versions of BraketSchemas, OpenQASM\n            information is omitted from GetDevice API calls. To get this information the user-agent\n            needs to present a recent version of the BraketSchemas (1.8.0 or later). The Braket SDK\n            automatically reports this for you. If you do not see OpenQASM results in the GetDevice\n            response when using a Braket SDK, you may need to set AWS_EXECUTION_ENV environment\n            variable to configure user-agent. See the code examples provided below for how to do\n            this for the AWS CLI, Boto3, and the Go, Java, and JavaScript/TypeScript SDKs.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Retrieves the devices available in Amazon Braket.</p> <note> <p>For backwards compatibility with older versions of BraketSchemas, OpenQASM information is omitted from GetDevice API calls. To get this information the user-agent needs to present a recent version of the BraketSchemas (1.8.0 or later). The Braket SDK automatically reports this for you. If you do not see OpenQASM results in the GetDevice response when using a Braket SDK, you may need to set AWS_EXECUTION_ENV environment variable to configure user-agent. See the code examples provided below for how to do this for the AWS CLI, Boto3, and the Go, Java, and JavaScript/TypeScript SDKs.</p> </note>",
                 "smithy.api#http": {
                     "uri": "/device/{deviceArn}",
                     "method": "GET"
@@ -1610,7 +1637,7 @@
                 "deviceQueueInfo": {
                     "target": "com.amazonaws.braket#DeviceQueueInfoList",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of information about tasks and jobs queued on a device.</p>"
+                        "smithy.api#documentation": "<p>The number of quantum tasks and hybrid jobs currently queued on the device.</p>"
                     }
                 }
             }
@@ -1641,7 +1668,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the specified Amazon Braket job.</p>",
+                "smithy.api#documentation": "<p>Retrieves the specified Amazon Braket hybrid job.</p>",
                 "smithy.api#http": {
                     "uri": "/job/{jobArn}",
                     "method": "GET"
@@ -1655,7 +1682,7 @@
                 "jobArn": {
                     "target": "com.amazonaws.braket#JobArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the job to retrieve.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the hybrid job to retrieve.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1663,7 +1690,7 @@
                 "additionalAttributeNames": {
                     "target": "com.amazonaws.braket#HybridJobAdditionalAttributeNamesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of attributes to return information for.</p>",
+                        "smithy.api#documentation": "<p>A list of attributes to return additional information for. Only the QueueInfo additional attribute name is currently supported. </p>",
                         "smithy.api#httpQuery": "additionalAttributeNames"
                     }
                 }
@@ -1675,34 +1702,34 @@
                 "status": {
                     "target": "com.amazonaws.braket#JobPrimaryStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the Amazon Braket job.</p>",
+                        "smithy.api#documentation": "<p>The status of the Amazon Braket hybrid job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "jobArn": {
                     "target": "com.amazonaws.braket#JobArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Braket job.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Braket hybrid job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "roleArn": {
                     "target": "com.amazonaws.braket#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that Amazon Braket can assume to perform\n         tasks on behalf of a user. It can access user resources, run an Amazon Braket job container\n         on behalf of user, and output resources to the s3 buckets of a user.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that Amazon Braket can assume to perform tasks on behalf of a user. It can access user resources, run an Amazon Braket job container on behalf of user, and output results and other hybrid job details to the s3 buckets of a user.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "failureReason": {
                     "target": "com.amazonaws.braket#String1024",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description of the reason why an Amazon Braket job failed, if it failed.</p>"
+                        "smithy.api#documentation": "<p>A description of the reason why an Amazon Braket hybrid job failed, if it failed.</p>"
                     }
                 },
                 "jobName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Amazon Braket job.</p>",
+                        "smithy.api#documentation": "<p>The name of the Amazon Braket hybrid job.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 50
@@ -1714,38 +1741,38 @@
                 "hyperParameters": {
                     "target": "com.amazonaws.braket#HyperParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>Algorithm-specific parameters used by an Amazon Braket job that influence the quality of\n         the traiing job. The values are set with a string of JSON key:value pairs, where the key is\n         the name of the hyperparameter and the value is the value of th hyperparameter.</p>"
+                        "smithy.api#documentation": "<p>Algorithm-specific parameters used by an Amazon Braket hybrid job that influence the quality of the traiing job. The values are set with a map of JSON key:value pairs, where the key is the name of the hyperparameter and the value is the value of th hyperparameter.</p>"
                     }
                 },
                 "inputDataConfig": {
                     "target": "com.amazonaws.braket#InputConfigList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of parameters that specify the name and type of input data and where it is\n         located.</p>"
+                        "smithy.api#documentation": "<p>A list of parameters that specify the name and type of input data and where it is located.</p>"
                     }
                 },
                 "outputDataConfig": {
                     "target": "com.amazonaws.braket#JobOutputDataConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The path to the S3 location where job artifacts are stored and the encryption key used\n         to store them there.</p>",
+                        "smithy.api#documentation": "<p>The path to the S3 location where hybrid job artifacts are stored and the encryption key used to store them there.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "stoppingCondition": {
                     "target": "com.amazonaws.braket#JobStoppingCondition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user-defined criteria that specifies when to stop a job running.</p>"
+                        "smithy.api#documentation": "<p>The user-defined criteria that specifies when to stop a running hybrid job.</p>"
                     }
                 },
                 "checkpointConfig": {
                     "target": "com.amazonaws.braket#JobCheckpointConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the output locations for job checkpoint data.</p>"
+                        "smithy.api#documentation": "<p>Information about the output locations for hybrid job checkpoint data.</p>"
                     }
                 },
                 "algorithmSpecification": {
                     "target": "com.amazonaws.braket#AlgorithmSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>Definition of the Amazon Braket job created. Specifies the container image the job uses,\n         information about the Python scripts used for entry and training, and the user-defined\n         metrics used to evaluation the job.</p>",
+                        "smithy.api#documentation": "<p>Definition of the Amazon Braket hybrid job created. Provides information about the container image used, and the Python scripts used for training.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1759,7 +1786,7 @@
                 "createdAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time that the Amazon Braket job was created.</p>",
+                        "smithy.api#documentation": "<p>The time at which the Amazon Braket hybrid job was created.</p>",
                         "smithy.api#required": {},
                         "smithy.api#timestampFormat": "date-time"
                     }
@@ -1767,45 +1794,45 @@
                 "startedAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time that the Amazon Braket job was started.</p>",
+                        "smithy.api#documentation": "<p>The time at which the Amazon Braket hybrid job was started.</p>",
                         "smithy.api#timestampFormat": "date-time"
                     }
                 },
                 "endedAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time that the Amazon Braket job ended.</p>",
+                        "smithy.api#documentation": "<p>The time at which the Amazon Braket hybrid job ended.</p>",
                         "smithy.api#timestampFormat": "date-time"
                     }
                 },
                 "billableDuration": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The billable time the Amazon Braket job used to complete.</p>"
+                        "smithy.api#documentation": "<p>The billable time for which the Amazon Braket hybrid job used to complete.</p>"
                     }
                 },
                 "deviceConfig": {
                     "target": "com.amazonaws.braket#DeviceConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The quantum processing unit (QPU) or simulator used to run the Amazon Braket job.</p>"
+                        "smithy.api#documentation": "<p>The primary device used by the Amazon Braket hybrid job.</p>"
                     }
                 },
                 "events": {
                     "target": "com.amazonaws.braket#JobEvents",
                     "traits": {
-                        "smithy.api#documentation": "<p>Details about the type and time events occurred related to the Amazon Braket job.</p>"
+                        "smithy.api#documentation": "<p>Details about the time and type of events occurred related to the Amazon Braket hybrid job.</p>"
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.braket#TagsMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A tag object that consists of a key and an optional value, used to manage metadata for\n         Amazon Braket resources.</p>"
+                        "smithy.api#documentation": "<p>The tags associated with this hybrid job.</p>"
                     }
                 },
                 "queueInfo": {
                     "target": "com.amazonaws.braket#HybridJobQueueInfo",
                     "traits": {
-                        "smithy.api#documentation": "<p>Queue information for the requested job. Only returned if \n         <code>QueueInfo</code> is specified in the <code>additionalAttributeNames\"</code>\n         field in the <code>GetJob</code> API request.</p>"
+                        "smithy.api#documentation": "<p>Queue information for the requested hybrid job. Only returned if <code>QueueInfo</code> is specified in the <code>additionalAttributeNames\"</code> field in the <code>GetJob</code> API request.</p>"
                     }
                 },
                 "associations": {
@@ -1856,7 +1883,7 @@
                 "quantumTaskArn": {
                     "target": "com.amazonaws.braket#QuantumTaskArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the task to retrieve.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the quantum task to retrieve.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1864,7 +1891,7 @@
                 "additionalAttributeNames": {
                     "target": "com.amazonaws.braket#QuantumTaskAdditionalAttributeNamesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of attributes to return information for.</p>",
+                        "smithy.api#documentation": "<p>A list of attributes to return additional information for. Only the QueueInfo additional attribute name is currently supported.</p>",
                         "smithy.api#httpQuery": "additionalAttributeNames"
                     }
                 }
@@ -1876,62 +1903,62 @@
                 "quantumTaskArn": {
                     "target": "com.amazonaws.braket#QuantumTaskArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the task.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the quantum task.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.braket#QuantumTaskStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the task.</p>",
+                        "smithy.api#documentation": "<p>The status of the quantum task.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "failureReason": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reason that a task failed.</p>"
+                        "smithy.api#documentation": "<p>The reason that a quantum task failed.</p>"
                     }
                 },
                 "deviceArn": {
                     "target": "com.amazonaws.braket#DeviceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the device the task was run on.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the device the quantum task was run on.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "deviceParameters": {
                     "target": "com.amazonaws.braket#JsonValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameters for the device on which the task ran.</p>",
+                        "smithy.api#documentation": "<p>The parameters for the device on which the quantum task ran.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "shots": {
                     "target": "smithy.api#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of shots used in the task.</p>",
+                        "smithy.api#documentation": "<p>The number of shots used in the quantum task.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "outputS3Bucket": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The S3 bucket where task results are stored.</p>",
+                        "smithy.api#documentation": "<p>The S3 bucket where quantum task results are stored.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "outputS3Directory": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The folder in the S3 bucket where task results are stored.</p>",
+                        "smithy.api#documentation": "<p>The folder in the S3 bucket where quantum task results are stored.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "createdAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time at which the task was created.</p>",
+                        "smithy.api#documentation": "<p>The time at which the quantum task was created.</p>",
                         "smithy.api#required": {},
                         "smithy.api#timestampFormat": "date-time"
                     }
@@ -1939,14 +1966,14 @@
                 "endedAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time at which the task ended.</p>",
+                        "smithy.api#documentation": "<p>The time at which the quantum task ended.</p>",
                         "smithy.api#timestampFormat": "date-time"
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.braket#TagsMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags that belong to this task.</p>"
+                        "smithy.api#documentation": "<p>The tags that belong to this quantum task.</p>"
                     }
                 },
                 "jobArn": {
@@ -1958,13 +1985,25 @@
                 "queueInfo": {
                     "target": "com.amazonaws.braket#QuantumTaskQueueInfo",
                     "traits": {
-                        "smithy.api#documentation": "<p>Queue information for the requested quantum task. Only returned if \n         <code>QueueInfo</code> is specified in the <code>additionalAttributeNames\"</code>\n         field in the <code>GetQuantumTask</code> API request.</p>"
+                        "smithy.api#documentation": "<p>Queue information for the requested quantum task. Only returned if <code>QueueInfo</code> is specified in the <code>additionalAttributeNames\"</code> field in the <code>GetQuantumTask</code> API request.</p>"
                     }
                 },
                 "associations": {
                     "target": "com.amazonaws.braket#Associations",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of Amazon Braket resources associated with the quantum task.</p>"
+                    }
+                },
+                "numSuccessfulShots": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of successful shots for the quantum task. This is available after a successfully completed quantum task.</p>"
+                    }
+                },
+                "actionMetadata": {
+                    "target": "com.amazonaws.braket#ActionMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata about the action performed by the quantum task, including information about the type of action and program counts.</p>"
                     }
                 }
             }
@@ -1999,19 +2038,19 @@
                 "position": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Current position of the job in the jobs queue.</p>",
+                        "smithy.api#documentation": "<p>Current position of the hybrid job in the jobs queue.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "message": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional. Provides more information about the queue position. For example,\n         if the job is complete and no longer in the queue, the message field contains\n         that information.</p>"
+                        "smithy.api#documentation": "<p>Optional. Provides more information about the queue position. For example, if the hybrid job is complete and no longer in the queue, the message field contains that information.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the queue for a specified job.</p>"
+                "smithy.api#documentation": "<p>Information about the queue for a specified hybrid job.</p>"
             }
         },
         "com.amazonaws.braket#HyperParameters": {
@@ -2048,7 +2087,7 @@
                 "channelName": {
                     "target": "com.amazonaws.braket#String64",
                     "traits": {
-                        "smithy.api#documentation": "<p>A named input source that an Amazon Braket job can consume.</p>",
+                        "smithy.api#documentation": "<p>A named input source that an Amazon Braket hybrid job can consume.</p>",
                         "smithy.api#pattern": "^[A-Za-z0-9\\.\\-_]+$",
                         "smithy.api#required": {}
                     }
@@ -2062,13 +2101,13 @@
                 "dataSource": {
                     "target": "com.amazonaws.braket#DataSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location of the channel data.</p>",
+                        "smithy.api#documentation": "<p>The location of the input data.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of parameters that specify the input channels, type of input data, and where it\n         is located.</p>"
+                "smithy.api#documentation": "<p>A list of parameters that specify the input channels, type of input data, and where it is located.</p>"
             }
         },
         "com.amazonaws.braket#InstanceConfig": {
@@ -2077,14 +2116,14 @@
                 "instanceType": {
                     "target": "com.amazonaws.braket#InstanceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configures the type resource instances to use while running an Amazon Braket hybrid\n         job.</p>",
+                        "smithy.api#documentation": "<p>Configures the type of resource instances to use while running an Amazon Braket hybrid job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "volumeSizeInGb": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the storage volume, in GB, that user wants to provision.</p>",
+                        "smithy.api#documentation": "<p>The size of the storage volume, in GB, to provision.</p>",
                         "smithy.api#range": {
                             "min": 1
                         },
@@ -2094,7 +2133,7 @@
                 "instanceCount": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configures the number of resource instances to use while running an Amazon Braket job on\n         Amazon Braket. The default value is 1.</p>",
+                        "smithy.api#documentation": "<p>Configures the number of resource instances to use while running an Amazon Braket hybrid job on Amazon Braket. The default value is 1.</p>",
                         "smithy.api#range": {
                             "min": 1
                         }
@@ -2102,7 +2141,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configures the resource instances to use while running the Amazon Braket hybrid job on\n         Amazon Braket.</p>"
+                "smithy.api#documentation": "<p>Configures the resource instances to use while running the Amazon Braket hybrid job on Amazon Braket.</p>"
             }
         },
         "com.amazonaws.braket#InstanceType": {
@@ -2276,7 +2315,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request processing has failed because of an unknown error, exception, or\n         failure.</p>",
+                "smithy.api#documentation": "<p>The request failed because of an unknown error.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
             }
@@ -2297,19 +2336,19 @@
                 "localPath": {
                     "target": "com.amazonaws.braket#String4096",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Optional) The local directory where checkpoints are written. The default directory is\n            <code>/opt/braket/checkpoints/</code>.</p>"
+                        "smithy.api#documentation": "<p>(Optional) The local directory where checkpoint data is stored. The default directory is <code>/opt/braket/checkpoints/</code>.</p>"
                     }
                 },
                 "s3Uri": {
                     "target": "com.amazonaws.braket#S3Path",
                     "traits": {
-                        "smithy.api#documentation": "<p>Identifies the S3 path where you want Amazon Braket to store checkpoints. For example,\n            <code>s3://bucket-name/key-name-prefix</code>.</p>",
+                        "smithy.api#documentation": "<p>Identifies the S3 path where you want Amazon Braket to store checkpoint data. For example, <code>s3://bucket-name/key-name-prefix</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about the output locations for job checkpoint data.</p>"
+                "smithy.api#documentation": "<p>Contains information about the output locations for hybrid job checkpoint data.</p>"
             }
         },
         "com.amazonaws.braket#JobEventDetails": {
@@ -2318,20 +2357,20 @@
                 "eventType": {
                     "target": "com.amazonaws.braket#JobEventType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of event that occurred related to the Amazon Braket job.</p>"
+                        "smithy.api#documentation": "<p>The type of event that occurred related to the Amazon Braket hybrid job.</p>"
                     }
                 },
                 "timeOfEvent": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of event that occurred related to the Amazon Braket job.</p>",
+                        "smithy.api#documentation": "<p>The time of the event that occurred related to the Amazon Braket hybrid job.</p>",
                         "smithy.api#timestampFormat": "date-time"
                     }
                 },
                 "message": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A message describing the event that occurred related to the Amazon Braket job.</p>",
+                        "smithy.api#documentation": "<p>A message describing the event that occurred related to the Amazon Braket hybrid job.</p>",
                         "smithy.api#length": {
                             "min": 0,
                             "max": 2500
@@ -2340,7 +2379,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about the type and time events occurred related to the Amazon Braket job.</p>"
+                "smithy.api#documentation": "<p>Details about the type and time events that occurred related to the Amazon Braket hybrid job.</p>"
             }
         },
         "com.amazonaws.braket#JobEventType": {
@@ -2412,19 +2451,19 @@
                 "kmsKeyId": {
                     "target": "com.amazonaws.braket#String2048",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Key Management Service (AWS KMS) key that Amazon Braket uses to encrypt the job\n         training artifacts at rest using Amazon S3 server-side encryption.</p>"
+                        "smithy.api#documentation": "<p>The AWS Key Management Service (AWS KMS) key that Amazon Braket uses to encrypt the hybrid job training artifacts at rest using Amazon S3 server-side encryption.</p>"
                     }
                 },
                 "s3Path": {
                     "target": "com.amazonaws.braket#S3Path",
                     "traits": {
-                        "smithy.api#documentation": "<p>Identifies the S3 path where you want Amazon Braket to store the job training artifacts.\n         For example, <code>s3://bucket-name/key-name-prefix</code>.</p>",
+                        "smithy.api#documentation": "<p>Identifies the S3 path where you want Amazon Braket to store the hybrid job training artifacts. For example, <code>s3://bucket-name/key-name-prefix</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the path to the S3 location where you want to store job artifacts and the\n         encryption key used to store them.</p>"
+                "smithy.api#documentation": "<p>Specifies the path to the S3 location where you want to store hybrid job artifacts and the encryption key used to store them.</p>"
             }
         },
         "com.amazonaws.braket#JobPrimaryStatus": {
@@ -2492,7 +2531,7 @@
                 "maxRuntimeInSeconds": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum length of time, in seconds, that an Amazon Braket job can run.</p>",
+                        "smithy.api#documentation": "<p>The maximum length of time, in seconds, that an Amazon Braket hybrid job can run.</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 432000
@@ -2501,7 +2540,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies limits for how long an Amazon Braket job can run. </p>"
+                "smithy.api#documentation": "<p>Specifies limits for how long an Amazon Braket hybrid job can run. </p>"
             }
         },
         "com.amazonaws.braket#JobSummary": {
@@ -2510,35 +2549,35 @@
                 "status": {
                     "target": "com.amazonaws.braket#JobPrimaryStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the Amazon Braket job.</p>",
+                        "smithy.api#documentation": "<p>The status of the Amazon Braket hybrid job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "jobArn": {
                     "target": "com.amazonaws.braket#JobArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Braket job.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Braket hybrid job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "jobName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Amazon Braket job.</p>",
+                        "smithy.api#documentation": "<p>The name of the Amazon Braket hybrid job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "device": {
                     "target": "com.amazonaws.braket#String256",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides summary information about the primary device used by an Amazon Braket\n         job.</p>",
+                        "smithy.api#documentation": "<p>The primary device used by an Amazon Braket hybrid job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "createdAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time that the Amazon Braket job was created.</p>",
+                        "smithy.api#documentation": "<p>The time at which the Amazon Braket hybrid job was created.</p>",
                         "smithy.api#required": {},
                         "smithy.api#timestampFormat": "date-time"
                     }
@@ -2546,26 +2585,26 @@
                 "startedAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time that the Amazon Braket job was started.</p>",
+                        "smithy.api#documentation": "<p>The time at which the Amazon Braket hybrid job was started.</p>",
                         "smithy.api#timestampFormat": "date-time"
                     }
                 },
                 "endedAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time that the Amazon Braket job ended.</p>",
+                        "smithy.api#documentation": "<p>The time at which the Amazon Braket hybrid job ended.</p>",
                         "smithy.api#timestampFormat": "date-time"
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.braket#TagsMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A tag object that consists of a key and an optional value, used to manage metadata for\n         Amazon Braket resources.</p>"
+                        "smithy.api#documentation": "<p>Displays the key, value pairs of tags associated with this hybrid job.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides summary information about an Amazon Braket job.</p>"
+                "smithy.api#documentation": "<p>Provides summary information about an Amazon Braket hybrid job.</p>"
             }
         },
         "com.amazonaws.braket#JobSummaryList": {
@@ -2641,6 +2680,45 @@
                 }
             }
         },
+        "com.amazonaws.braket#ProgramSetValidationFailure": {
+            "type": "structure",
+            "members": {
+                "programIndex": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The index of the program within the program set that failed validation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "inputsIndex": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The index of the input within the program set that failed validation.</p>"
+                    }
+                },
+                "errors": {
+                    "target": "com.amazonaws.braket#ProgramValidationFailuresList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of error messages describing the validation failures that occurred.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about validation failures that occurred during the processing of a program set in a quantum task.</p>"
+            }
+        },
+        "com.amazonaws.braket#ProgramSetValidationFailuresList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.braket#ProgramSetValidationFailure"
+            }
+        },
+        "com.amazonaws.braket#ProgramValidationFailuresList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
         "com.amazonaws.braket#QuantumTaskAdditionalAttributeName": {
             "type": "string",
             "traits": {
@@ -2684,25 +2762,25 @@
                 "position": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Current position of the task in the quantum tasks queue.</p>",
+                        "smithy.api#documentation": "<p>Current position of the quantum task in the quantum tasks queue.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "queuePriority": {
                     "target": "com.amazonaws.braket#QueuePriority",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional. Specifies the priority of the queue. Quantum tasks in a priority queue\n         are processed before the tasks in a normal queue.</p>"
+                        "smithy.api#documentation": "<p>Optional. Specifies the priority of the queue. Quantum tasks in a priority queue are processed before the quantum tasks in a normal queue.</p>"
                     }
                 },
                 "message": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional. Provides more information about the queue position. For example,\n         if the task is complete and no longer in the queue, the message field contains\n         that information.</p>"
+                        "smithy.api#documentation": "<p>Optional. Provides more information about the queue position. For example, if the quantum task is complete and no longer in the queue, the message field contains that information.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the queue for the specified quantum task.</p>"
+                "smithy.api#documentation": "<p>The queue information for the specified quantum task.</p>"
             }
         },
         "com.amazonaws.braket#QuantumTaskResource": {
@@ -2772,49 +2850,49 @@
                 "quantumTaskArn": {
                     "target": "com.amazonaws.braket#QuantumTaskArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the task.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the quantum task.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.braket#QuantumTaskStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the task.</p>",
+                        "smithy.api#documentation": "<p>The status of the quantum task.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "deviceArn": {
                     "target": "com.amazonaws.braket#DeviceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the device the task ran on.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the device the quantum task ran on.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "shots": {
                     "target": "smithy.api#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The shots used for the task.</p>",
+                        "smithy.api#documentation": "<p>The shots used for the quantum task.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "outputS3Bucket": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The S3 bucket where the task result file is stored..</p>",
+                        "smithy.api#documentation": "<p>The S3 bucket where the quantum task result file is stored.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "outputS3Directory": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The folder in the S3 bucket where the task result file is stored.</p>",
+                        "smithy.api#documentation": "<p>The folder in the S3 bucket where the quantum task result file is stored.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "createdAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time at which the task was created.</p>",
+                        "smithy.api#documentation": "<p>The time at which the quantum task was created.</p>",
                         "smithy.api#required": {},
                         "smithy.api#timestampFormat": "date-time"
                     }
@@ -2822,7 +2900,7 @@
                 "endedAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time at which the task finished.</p>",
+                        "smithy.api#documentation": "<p>The time at which the quantum task finished.</p>",
                         "smithy.api#timestampFormat": "date-time"
                     }
                 },
@@ -2898,13 +2976,13 @@
                 "s3Uri": {
                     "target": "com.amazonaws.braket#S3Path",
                     "traits": {
-                        "smithy.api#documentation": "<p>Depending on the value specified for the <code>S3DataType</code>, identifies either a\n         key name prefix or a manifest that locates the S3 data source.</p>",
+                        "smithy.api#documentation": "<p>Depending on the value specified for the <code>S3DataType</code>, identifies either a key name prefix or a manifest that locates the S3 data source.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the data stored in Amazon S3 used by the Amazon Braket job.</p>"
+                "smithy.api#documentation": "<p>Information about the Amazon S3 storage used by the Amazon Braket hybrid job.</p>"
             }
         },
         "com.amazonaws.braket#S3Path": {
@@ -2922,26 +3000,26 @@
                 "entryPoint": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The path to the Python script that serves as the entry point for an Amazon Braket\n         job.</p>",
+                        "smithy.api#documentation": "<p>The entry point in the algorithm scripts from where the execution begins in the hybrid job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "s3Uri": {
                     "target": "com.amazonaws.braket#S3Path",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URI that specifies the S3 path to the Python script module that contains the\n         training script used by an Amazon Braket job.</p>",
+                        "smithy.api#documentation": "<p>The URI that specifies the S3 path to the algorithm scripts used by an Amazon Braket hybrid job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "compressionType": {
                     "target": "com.amazonaws.braket#CompressionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of compression used by the Python scripts for an Amazon Braket job.</p>"
+                        "smithy.api#documentation": "<p>The type of compression used to store the algorithm scripts in Amazon S3 storage.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about the Python scripts used for entry and by an Amazon Braket\n         job.</p>"
+                "smithy.api#documentation": "<p>Contains information about algorithm scripts used for the Amazon Braket hybrid job.</p>"
             }
         },
         "com.amazonaws.braket#SearchDevices": {
@@ -2987,7 +3065,7 @@
                 "name": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name to use to filter results.</p>",
+                        "smithy.api#documentation": "<p>The name of the device parameter to filter based on. Only <code>deviceArn</code> filter name is currently supported.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 64
@@ -2998,7 +3076,7 @@
                 "values": {
                     "target": "com.amazonaws.braket#String256List",
                     "traits": {
-                        "smithy.api#documentation": "<p>The values to use to filter results.</p>",
+                        "smithy.api#documentation": "<p>The values used to filter devices based on the filter name.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 10
@@ -3008,7 +3086,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The filter to use for searching devices.</p>"
+                "smithy.api#documentation": "<p>The filter used to search for devices.</p>"
             }
         },
         "com.amazonaws.braket#SearchDevicesFilterList": {
@@ -3023,7 +3101,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token used for pagination of results returned in the response. Use the token returned\n         from the previous request continue results where the previous request ended.</p>"
+                        "smithy.api#documentation": "<p>A token used for pagination of results returned in the response. Use the token returned from the previous request to continue search where the previous request ended.</p>"
                     }
                 },
                 "maxResults": {
@@ -3039,7 +3117,7 @@
                 "filters": {
                     "target": "com.amazonaws.braket#SearchDevicesFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filter values to use to search for a device.</p>",
+                        "smithy.api#documentation": "<p>Array of SearchDevicesFilter objects to use when searching for devices.</p>",
                         "smithy.api#length": {
                             "min": 0,
                             "max": 10
@@ -3055,14 +3133,14 @@
                 "devices": {
                     "target": "com.amazonaws.braket#DeviceSummaryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of <code>DeviceSummary</code> objects for devices that match the specified\n         filter values.</p>",
+                        "smithy.api#documentation": "<p>An array of <code>DeviceSummary</code> objects for devices that match the specified filter values.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token used for pagination of results, or null if there are no additional results. Use\n         the token value in a subsequent request to continue results where the previous request\n         ended.</p>"
+                        "smithy.api#documentation": "<p>A token used for pagination of results, or null if there are no additional results. Use the token value in a subsequent request to continue search where the previous request ended.</p>"
                     }
                 }
             }
@@ -3090,7 +3168,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Searches for Amazon Braket jobs that match the specified filter values.</p>",
+                "smithy.api#documentation": "<p>Searches for Amazon Braket hybrid jobs that match the specified filter values.</p>",
                 "smithy.api#http": {
                     "uri": "/jobs",
                     "method": "POST"
@@ -3109,14 +3187,14 @@
                 "name": {
                     "target": "com.amazonaws.braket#String64",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name to use for the jobs filter.</p>",
+                        "smithy.api#documentation": "<p>The name of the hybrid job parameter to filter based on. Filter name can be either <code>jobArn</code> or <code>createdAt</code>. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "values": {
                     "target": "com.amazonaws.braket#String256List",
                     "traits": {
-                        "smithy.api#documentation": "<p>The values to use for the jobs filter.</p>",
+                        "smithy.api#documentation": "<p>The values used to filter hybrid jobs based on the filter name and operator.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 10
@@ -3127,13 +3205,13 @@
                 "operator": {
                     "target": "com.amazonaws.braket#SearchJobsFilterOperator",
                     "traits": {
-                        "smithy.api#documentation": "<p>An operator to use for the jobs filter.</p>",
+                        "smithy.api#documentation": "<p>An operator to use for the filter.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A filter used to search for Amazon Braket jobs.</p>"
+                "smithy.api#documentation": "<p>A filter used to search for Amazon Braket hybrid jobs.</p>"
             }
         },
         "com.amazonaws.braket#SearchJobsFilterList": {
@@ -3183,7 +3261,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token used for pagination of results returned in the response. Use the token returned\n         from the previous request to continue results where the previous request ended.</p>"
+                        "smithy.api#documentation": "<p>A token used for pagination of results returned in the response. Use the token returned from the previous request to continue search where the previous request ended.</p>"
                     }
                 },
                 "maxResults": {
@@ -3199,7 +3277,7 @@
                 "filters": {
                     "target": "com.amazonaws.braket#SearchJobsFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filter values to use when searching for a job.</p>",
+                        "smithy.api#documentation": "<p>Array of SearchJobsFilter objects to use when searching for hybrid jobs.</p>",
                         "smithy.api#length": {
                             "min": 0,
                             "max": 10
@@ -3215,14 +3293,14 @@
                 "jobs": {
                     "target": "com.amazonaws.braket#JobSummaryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of <code>JobSummary</code> objects for devices that match the specified filter\n         values.</p>",
+                        "smithy.api#documentation": "<p>An array of <code>JobSummary</code> objects for devices that match the specified filter values.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token used for pagination of results, or <code>null</code> if there are no additional\n         results. Use the token value in a subsequent request to continue results where the previous\n         request ended.</p>"
+                        "smithy.api#documentation": "<p>A token used for pagination of results, or <code>null</code> if there are no additional results. Use the token value in a subsequent request to continue search where the previous request ended.</p>"
                     }
                 }
             }
@@ -3270,14 +3348,14 @@
                 "name": {
                     "target": "com.amazonaws.braket#String64",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the device used for the task.</p>",
+                        "smithy.api#documentation": "<p>The name of the quantum task parameter to filter based on. Filter name can be either <code>quantumTaskArn</code>, <code>deviceArn</code>, <code>jobArn</code>, <code>status</code> or <code>createdAt</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "values": {
                     "target": "com.amazonaws.braket#String256List",
                     "traits": {
-                        "smithy.api#documentation": "<p>The values to use for the filter.</p>",
+                        "smithy.api#documentation": "<p>The values used to filter quantum tasks based on the filter name and operator.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 10
@@ -3288,13 +3366,13 @@
                 "operator": {
                     "target": "com.amazonaws.braket#SearchQuantumTasksFilterOperator",
                     "traits": {
-                        "smithy.api#documentation": "<p>An operator to use in the filter.</p>",
+                        "smithy.api#documentation": "<p>An operator to use for the filter.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A filter to use to search for tasks.</p>"
+                "smithy.api#documentation": "<p>A filter used to search for quantum tasks.</p>"
             }
         },
         "com.amazonaws.braket#SearchQuantumTasksFilterList": {
@@ -3340,7 +3418,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token used for pagination of results returned in the response. Use the token returned\n         from the previous request continue results where the previous request ended.</p>"
+                        "smithy.api#documentation": "<p>A token used for pagination of results returned in the response. Use the token returned from the previous request to continue search where the previous request ended.</p>"
                     }
                 },
                 "maxResults": {
@@ -3356,7 +3434,7 @@
                 "filters": {
                     "target": "com.amazonaws.braket#SearchQuantumTasksFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Array of <code>SearchQuantumTasksFilter</code> objects.</p>",
+                        "smithy.api#documentation": "<p>Array of <code>SearchQuantumTasksFilter</code> objects to use when searching for quantum tasks.</p>",
                         "smithy.api#length": {
                             "min": 0,
                             "max": 10
@@ -3372,14 +3450,14 @@
                 "quantumTasks": {
                     "target": "com.amazonaws.braket#QuantumTaskSummaryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of <code>QuantumTaskSummary</code> objects for tasks that match the specified\n         filters.</p>",
+                        "smithy.api#documentation": "<p>An array of <code>QuantumTaskSummary</code> objects for quantum tasks that match the specified filters.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token used for pagination of results, or null if there are no additional results. Use\n         the token value in a subsequent request to continue results where the previous request\n         ended.</p>"
+                        "smithy.api#documentation": "<p>A token used for pagination of results, or null if there are no additional results. Use the token value in a subsequent request to continue search where the previous request ended.</p>"
                     }
                 }
             }
@@ -3487,7 +3565,7 @@
                 "resourceArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the <code>resourceArn</code> of the resource to which a tag will be\n         added.</p>",
+                        "smithy.api#documentation": "<p>Specify the <code>resourceArn</code> of the resource to which a tag will be added.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3495,7 +3573,7 @@
                 "tags": {
                     "target": "com.amazonaws.braket#TagsMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the tags to add to the resource.</p>",
+                        "smithy.api#documentation": "<p>Specify the tags to add to the resource. Tags can be specified as a key-value map.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3522,7 +3600,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The throttling rate limit is met.</p>",
+                "smithy.api#documentation": "<p>The API throttling rate limit is exceeded.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
             }
@@ -3561,7 +3639,7 @@
                 "resourceArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the <code>resourceArn</code> for the resource from which to remove the\n         tags.</p>",
+                        "smithy.api#documentation": "<p>Specify the <code>resourceArn</code> for the resource from which to remove the tags.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3587,7 +3665,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "\\d{10,14}\\.dkr\\.ecr.[a-z0-9-]+\\.amazonaws\\.com\\/.+(@sha256)?:.+"
+                "smithy.api#pattern": "^\\d{10,14}\\.dkr\\.ecr.[a-z0-9-]+\\.amazonaws\\.com\\/.+(@sha256)?:.+$"
             }
         },
         "com.amazonaws.braket#ValidationException": {
@@ -3595,12 +3673,35 @@
             "members": {
                 "message": {
                     "target": "smithy.api#String"
+                },
+                "reason": {
+                    "target": "com.amazonaws.braket#ValidationExceptionReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for validation failure.</p>"
+                    }
+                },
+                "programSetValidationFailures": {
+                    "target": "com.amazonaws.braket#ProgramSetValidationFailuresList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The validation failures in the program set submitted in the request.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an AWS service.</p>",
+                "smithy.api#documentation": "<p>The input request failed to satisfy constraints expected by Amazon Braket.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.braket#ValidationExceptionReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ProgramSetValidationFailed",
+                        "name": "PROGRAM_SET_VALIDATION_FAILED"
+                    }
+                ]
             }
         }
     }
