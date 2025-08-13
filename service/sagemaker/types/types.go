@@ -4562,9 +4562,30 @@ type ComputeQuotaResourceConfig struct {
 	// This member is required.
 	InstanceType ClusterInstanceType
 
+	// The number of accelerators to allocate. If you don't specify a value for vCPU
+	// and MemoryInGiB, SageMaker AI automatically allocates ratio-based values for
+	// those parameters based on the number of accelerators you provide. For example,
+	// if you allocate 16 out of 32 total accelerators, SageMaker AI uses the ratio of
+	// 0.5 and allocates values to vCPU and MemoryInGiB.
+	Accelerators *int32
+
 	// The number of instances to add to the instance group of a SageMaker HyperPod
 	// cluster.
 	Count *int32
+
+	// The amount of memory in GiB to allocate. If you specify a value only for this
+	// parameter, SageMaker AI automatically allocates a ratio-based value for vCPU
+	// based on this memory that you provide. For example, if you allocate 200 out of
+	// 400 total memory in GiB, SageMaker AI uses the ratio of 0.5 and allocates values
+	// to vCPU. Accelerators are set to 0.
+	MemoryInGiB *float32
+
+	// The number of vCPU to allocate. If you specify a value only for vCPU, SageMaker
+	// AI automatically allocates ratio-based values for MemoryInGiB based on this vCPU
+	// parameter. For example, if you allocate 20 out of 40 total vCPU, SageMaker AI
+	// uses the ratio of 0.5 and allocates values to MemoryInGiB. Accelerators are set
+	// to 0.
+	VCpu *float32
 
 	noSmithyDocumentSerde
 }

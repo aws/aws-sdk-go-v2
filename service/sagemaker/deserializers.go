@@ -49646,6 +49646,19 @@ func awsAwsjson11_deserializeDocumentComputeQuotaResourceConfig(v **types.Comput
 
 	for key, value := range shape {
 		switch key {
+		case "Accelerators":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected AcceleratorsAmount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Accelerators = ptr.Int32(int32(i64))
+			}
+
 		case "Count":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -49666,6 +49679,74 @@ func awsAwsjson11_deserializeDocumentComputeQuotaResourceConfig(v **types.Comput
 					return fmt.Errorf("expected ClusterInstanceType to be of type string, got %T instead", value)
 				}
 				sv.InstanceType = types.ClusterInstanceType(jtv)
+			}
+
+		case "MemoryInGiB":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.MemoryInGiB = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.MemoryInGiB = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected MemoryInGiBAmount to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "VCpu":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.VCpu = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.VCpu = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected VCpuAmount to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		default:

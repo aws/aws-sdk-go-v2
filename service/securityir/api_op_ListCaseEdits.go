@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Grants permissions to view the aidt log for edits made to a designated case.
+// Views the case history for edits made to a designated case.
 func (c *Client) ListCaseEdits(ctx context.Context, params *ListCaseEditsInput, optFns ...func(*Options)) (*ListCaseEditsOutput, error) {
 	if params == nil {
 		params = &ListCaseEditsInput{}
@@ -38,7 +38,9 @@ type ListCaseEditsInput struct {
 	// value of 25.
 	MaxResults *int32
 
-	// Optional element for a customer provided token.
+	// An optional string that, if supplied, must be copied from the output of a
+	// previous call to ListCaseEdits. When provided in this manner, the API fetches
+	// the next page of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -46,11 +48,12 @@ type ListCaseEditsInput struct {
 
 type ListCaseEditsOutput struct {
 
-	// Response element for ListCaseEdits that includes the action, eventtimestamp,
+	// Response element for ListCaseEdits that includes the action, event timestamp,
 	// message, and principal for the response.
 	Items []types.CaseEditItem
 
-	// Optional element.
+	// An optional string that, if supplied on subsequent calls to ListCaseEdits,
+	// allows the API to fetch the next page of results.
 	NextToken *string
 
 	// Response element for ListCaseEdits that identifies the total number of edits.

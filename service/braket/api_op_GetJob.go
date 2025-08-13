@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Retrieves the specified Amazon Braket job.
+// Retrieves the specified Amazon Braket hybrid job.
 func (c *Client) GetJob(ctx context.Context, params *GetJobInput, optFns ...func(*Options)) (*GetJobOutput, error) {
 	if params == nil {
 		params = &GetJobInput{}
@@ -30,12 +30,13 @@ func (c *Client) GetJob(ctx context.Context, params *GetJobInput, optFns ...func
 
 type GetJobInput struct {
 
-	// The ARN of the job to retrieve.
+	// The ARN of the hybrid job to retrieve.
 	//
 	// This member is required.
 	JobArn *string
 
-	// A list of attributes to return information for.
+	// A list of attributes to return additional information for. Only the QueueInfo
+	// additional attribute name is currently supported.
 	AdditionalAttributeNames []types.HybridJobAdditionalAttributeName
 
 	noSmithyDocumentSerde
@@ -43,14 +44,13 @@ type GetJobInput struct {
 
 type GetJobOutput struct {
 
-	// Definition of the Amazon Braket job created. Specifies the container image the
-	// job uses, information about the Python scripts used for entry and training, and
-	// the user-defined metrics used to evaluation the job.
+	// Definition of the Amazon Braket hybrid job created. Provides information about
+	// the container image used, and the Python scripts used for training.
 	//
 	// This member is required.
 	AlgorithmSpecification *types.AlgorithmSpecification
 
-	// The date and time that the Amazon Braket job was created.
+	// The time at which the Amazon Braket hybrid job was created.
 	//
 	// This member is required.
 	CreatedAt *time.Time
@@ -60,31 +60,31 @@ type GetJobOutput struct {
 	// This member is required.
 	InstanceConfig *types.InstanceConfig
 
-	// The ARN of the Amazon Braket job.
+	// The ARN of the Amazon Braket hybrid job.
 	//
 	// This member is required.
 	JobArn *string
 
-	// The name of the Amazon Braket job.
+	// The name of the Amazon Braket hybrid job.
 	//
 	// This member is required.
 	JobName *string
 
-	// The path to the S3 location where job artifacts are stored and the encryption
-	// key used to store them there.
+	// The path to the S3 location where hybrid job artifacts are stored and the
+	// encryption key used to store them there.
 	//
 	// This member is required.
 	OutputDataConfig *types.JobOutputDataConfig
 
 	// The Amazon Resource Name (ARN) of an IAM role that Amazon Braket can assume to
 	// perform tasks on behalf of a user. It can access user resources, run an Amazon
-	// Braket job container on behalf of user, and output resources to the s3 buckets
-	// of a user.
+	// Braket job container on behalf of user, and output results and other hybrid job
+	// details to the s3 buckets of a user.
 	//
 	// This member is required.
 	RoleArn *string
 
-	// The status of the Amazon Braket job.
+	// The status of the Amazon Braket hybrid job.
 	//
 	// This member is required.
 	Status types.JobPrimaryStatus
@@ -92,48 +92,47 @@ type GetJobOutput struct {
 	// The list of Amazon Braket resources associated with the hybrid job.
 	Associations []types.Association
 
-	// The billable time the Amazon Braket job used to complete.
+	// The billable time for which the Amazon Braket hybrid job used to complete.
 	BillableDuration *int32
 
-	// Information about the output locations for job checkpoint data.
+	// Information about the output locations for hybrid job checkpoint data.
 	CheckpointConfig *types.JobCheckpointConfig
 
-	// The quantum processing unit (QPU) or simulator used to run the Amazon Braket
-	// job.
+	// The primary device used by the Amazon Braket hybrid job.
 	DeviceConfig *types.DeviceConfig
 
-	// The date and time that the Amazon Braket job ended.
+	// The time at which the Amazon Braket hybrid job ended.
 	EndedAt *time.Time
 
-	// Details about the type and time events occurred related to the Amazon Braket
-	// job.
+	// Details about the time and type of events occurred related to the Amazon Braket
+	// hybrid job.
 	Events []types.JobEventDetails
 
-	// A description of the reason why an Amazon Braket job failed, if it failed.
+	// A description of the reason why an Amazon Braket hybrid job failed, if it
+	// failed.
 	FailureReason *string
 
-	// Algorithm-specific parameters used by an Amazon Braket job that influence the
-	// quality of the traiing job. The values are set with a string of JSON key:value
-	// pairs, where the key is the name of the hyperparameter and the value is the
-	// value of th hyperparameter.
+	// Algorithm-specific parameters used by an Amazon Braket hybrid job that
+	// influence the quality of the traiing job. The values are set with a map of JSON
+	// key:value pairs, where the key is the name of the hyperparameter and the value
+	// is the value of th hyperparameter.
 	HyperParameters map[string]string
 
 	// A list of parameters that specify the name and type of input data and where it
 	// is located.
 	InputDataConfig []types.InputFileConfig
 
-	// Queue information for the requested job. Only returned if QueueInfo is
+	// Queue information for the requested hybrid job. Only returned if QueueInfo is
 	// specified in the additionalAttributeNames" field in the GetJob API request.
 	QueueInfo *types.HybridJobQueueInfo
 
-	// The date and time that the Amazon Braket job was started.
+	// The time at which the Amazon Braket hybrid job was started.
 	StartedAt *time.Time
 
-	// The user-defined criteria that specifies when to stop a job running.
+	// The user-defined criteria that specifies when to stop a running hybrid job.
 	StoppingCondition *types.JobStoppingCondition
 
-	// A tag object that consists of a key and an optional value, used to manage
-	// metadata for Amazon Braket resources.
+	// The tags associated with this hybrid job.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

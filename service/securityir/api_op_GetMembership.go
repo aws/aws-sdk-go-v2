@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Grants permission to get details of a designated service membership.
+// Returns the attributes of a membership.
 func (c *Client) GetMembership(ctx context.Context, params *GetMembershipInput, optFns ...func(*Options)) (*GetMembershipOutput, error) {
 	if params == nil {
 		params = &GetMembershipInput{}
@@ -45,8 +45,8 @@ type GetMembershipOutput struct {
 	// This member is required.
 	MembershipId *string
 
-	// Response element for GetMembership that provides the configured account for
-	// managing the membership.
+	// Response element for GetMembership that provides the account configured to
+	// manage the membership.
 	AccountId *string
 
 	// Response element for GetMembership that provides the configured membership
@@ -56,6 +56,19 @@ type GetMembershipOutput struct {
 	// Response element for GetMembership that provides the configured membership
 	// incident response team members.
 	IncidentResponseTeam []types.IncidentResponder
+
+	// The membershipAccountsConfigurations field contains the configuration details
+	// for member accounts within the Amazon Web Services Organizations membership
+	// structure.
+	//
+	// This field returns a structure containing information about:
+	//
+	//   - Account configurations for member accounts
+	//
+	//   - Membership settings and preferences
+	//
+	//   - Account-level permissions and roles
+	MembershipAccountsConfigurations *types.MembershipAccountsConfigurations
 
 	// Response element for GetMembership that provides the configured membership
 	// activation timestamp.
@@ -82,8 +95,8 @@ type GetMembershipOutput struct {
 	// been enabled.
 	OptInFeatures []types.OptInFeature
 
-	// Response element for GetMembership that provides the configured region for
-	// managing the membership.
+	// Response element for GetMembership that provides the region configured to
+	// manage the membership.
 	Region types.AwsRegion
 
 	// Metadata pertaining to the operation's result.

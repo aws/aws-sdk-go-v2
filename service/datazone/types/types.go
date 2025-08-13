@@ -56,6 +56,82 @@ type AcceptRule struct {
 	noSmithyDocumentSerde
 }
 
+// The account information within an account pool.
+type AccountInfo struct {
+
+	// The account ID.
+	//
+	// This member is required.
+	AwsAccountId *string
+
+	// The regions supported for an account within an account pool.
+	//
+	// This member is required.
+	SupportedRegions []string
+
+	// The account name.
+	AwsAccountName *string
+
+	noSmithyDocumentSerde
+}
+
+// The summary of the account pool.
+type AccountPoolSummary struct {
+
+	// The user who created the account pool.
+	CreatedBy *string
+
+	// The ID of the domain.
+	DomainId *string
+
+	// The ID of the domain unit.
+	DomainUnitId *string
+
+	// The ID of the account pool.
+	Id *string
+
+	// The name of the account pool.
+	Name *string
+
+	// The mechanism used to resolve the account selection from the account pool.
+	ResolutionStrategy ResolutionStrategy
+
+	// The user who updated the account pool.
+	UpdatedBy *string
+
+	noSmithyDocumentSerde
+}
+
+// The source of accounts for the account pool. In the current release, it's
+// either a static list of accounts provided by the customer or a custom Amazon Web
+// Services Lambda handler.
+//
+// The following types satisfy this interface:
+//
+//	AccountSourceMemberAccounts
+//	AccountSourceMemberCustomAccountPoolHandler
+type AccountSource interface {
+	isAccountSource()
+}
+
+// The static list of accounts within an account pool.
+type AccountSourceMemberAccounts struct {
+	Value []AccountInfo
+
+	noSmithyDocumentSerde
+}
+
+func (*AccountSourceMemberAccounts) isAccountSource() {}
+
+// The custom Amazon Web Services Lambda handler within an account pool.
+type AccountSourceMemberCustomAccountPoolHandler struct {
+	Value CustomAccountPoolHandler
+
+	noSmithyDocumentSerde
+}
+
+func (*AccountSourceMemberCustomAccountPoolHandler) isAccountSource() {}
+
 // The parameters of the environment action.
 //
 // The following types satisfy this interface:
@@ -1143,6 +1219,23 @@ type CreateProjectPolicyGrantDetail struct {
 	noSmithyDocumentSerde
 }
 
+// The custom Amazon Web Services Lambda handler within an account pool.
+type CustomAccountPoolHandler struct {
+
+	// The ARN of the Amazon Web Services Lambda function for the custom Amazon Web
+	// Services Lambda handler.
+	//
+	// This member is required.
+	LambdaFunctionArn *string
+
+	// The ARN of the IAM role that enables Amazon SageMaker Unified Studio to invoke
+	// the Amazon Web Services Lambda funtion if the account source is the custom
+	// account pool handler.
+	LambdaExecutionRoleArn *string
+
+	noSmithyDocumentSerde
+}
+
 // The details of user parameters of an environment blueprint.
 type CustomParameter struct {
 
@@ -1974,16 +2067,6 @@ type EnvironmentBlueprintSummary struct {
 // The configuration of an environment.
 type EnvironmentConfiguration struct {
 
-	// The Amazon Web Services account of the environment.
-	//
-	// This member is required.
-	AwsAccount AwsAccount
-
-	// The Amazon Web Services Region of the environment.
-	//
-	// This member is required.
-	AwsRegion Region
-
 	// The environment blueprint ID.
 	//
 	// This member is required.
@@ -1993,6 +2076,15 @@ type EnvironmentConfiguration struct {
 	//
 	// This member is required.
 	Name *string
+
+	// The account pools used by a custom project profile.
+	AccountPools []string
+
+	// The Amazon Web Services account of the environment.
+	AwsAccount AwsAccount
+
+	// The Amazon Web Services Region of the environment.
+	AwsRegion Region
 
 	// The configuration parameters of the environment.
 	ConfigurationParameters *EnvironmentConfigurationParametersDetails
@@ -2053,6 +2145,10 @@ type EnvironmentConfigurationUserParameter struct {
 
 	// The environment parameters.
 	EnvironmentParameters []EnvironmentParameter
+
+	// Specifies the account/Region that is to be used during project creation for a
+	// particular blueprint.
+	EnvironmentResolvedAccount *EnvironmentResolvedAccount
 
 	noSmithyDocumentSerde
 }
@@ -2142,6 +2238,26 @@ type EnvironmentProfileSummary struct {
 
 	// The timestamp of when the environment profile was updated.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the account/Region that is to be used during project creation for a
+// particular blueprint.
+type EnvironmentResolvedAccount struct {
+
+	// The ID of the resolved account.
+	//
+	// This member is required.
+	AwsAccountId *string
+
+	// The name of the resolved Region.
+	//
+	// This member is required.
+	RegionName *string
+
+	// The ID of the account pool.
+	SourceAccountPoolId *string
 
 	noSmithyDocumentSerde
 }
@@ -6363,6 +6479,7 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isAccountSource()                 {}
 func (*UnknownUnionMember) isActionParameters()              {}
 func (*UnknownUnionMember) isAssetFilterConfiguration()      {}
 func (*UnknownUnionMember) isAwsAccount()                    {}

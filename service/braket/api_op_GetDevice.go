@@ -80,7 +80,7 @@ type GetDeviceOutput struct {
 	// This member is required.
 	ProviderName *string
 
-	// List of information about tasks and jobs queued on a device.
+	// The number of quantum tasks and hybrid jobs currently queued on the device.
 	DeviceQueueInfo []types.DeviceQueueInfo
 
 	// Metadata pertaining to the operation's result.

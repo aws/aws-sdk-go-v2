@@ -33,7 +33,8 @@ type TagResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// Specify the tags to add to the resource.
+	// Specify the tags to add to the resource. Tags can be specified as a key-value
+	// map.
 	//
 	// This member is required.
 	Tags map[string]string

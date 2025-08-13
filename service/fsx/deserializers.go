@@ -10512,6 +10512,15 @@ func awsAwsjson11_deserializeDocumentFileSystem(v **types.FileSystem, value inte
 				return err
 			}
 
+		case "NetworkType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkType to be of type string, got %T instead", value)
+				}
+				sv.NetworkType = types.NetworkType(jtv)
+			}
+
 		case "OntapConfiguration":
 			if err := awsAwsjson11_deserializeDocumentOntapFileSystemConfiguration(&sv.OntapConfiguration, value); err != nil {
 				return err
@@ -12673,6 +12682,24 @@ func awsAwsjson11_deserializeDocumentOpenZFSFileSystemConfiguration(v **types.Op
 					return fmt.Errorf("expected IpAddressRange to be of type string, got %T instead", value)
 				}
 				sv.EndpointIpAddressRange = ptr.String(jtv)
+			}
+
+		case "EndpointIpv6Address":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IpAddress to be of type string, got %T instead", value)
+				}
+				sv.EndpointIpv6Address = ptr.String(jtv)
+			}
+
+		case "EndpointIpv6AddressRange":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Ipv6AddressRange to be of type string, got %T instead", value)
+				}
+				sv.EndpointIpv6AddressRange = ptr.String(jtv)
 			}
 
 		case "PreferredSubnetId":

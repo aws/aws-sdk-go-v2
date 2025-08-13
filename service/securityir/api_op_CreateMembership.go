@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Grants permissions to create a new membership.
+// Creates a new membership.
 func (c *Client) CreateMembership(ctx context.Context, params *CreateMembershipInput, optFns ...func(*Options)) (*CreateMembershipOutput, error) {
 	if params == nil {
 		params = &CreateMembershipInput{}
@@ -29,20 +29,37 @@ func (c *Client) CreateMembership(ctx context.Context, params *CreateMembershipI
 
 type CreateMembershipInput struct {
 
-	// Required element use in combination with CreateMembership to add customer
+	// Required element used in combination with CreateMembership to add customer
 	// incident response team members and trusted partners to the membership.
 	//
 	// This member is required.
 	IncidentResponseTeam []types.IncidentResponder
 
-	// Required element use in combination with CreateMembership to create a name for
+	// Required element used in combination with CreateMembership to create a name for
 	// the membership.
 	//
 	// This member is required.
 	MembershipName *string
 
-	// An optional element used in combination with CreateMembership.
+	// The clientToken field is an idempotency key used to ensure that repeated
+	// attempts for a single action will be ignored by the server during retries. A
+	// caller supplied unique ID (typically a UUID) should be provided.
 	ClientToken *string
+
+	// The coverEntireOrganization parameter is a boolean flag that determines whether
+	// the membership should be applied to the entire Amazon Web Services Organization.
+	// When set to true, the membership will be created for all accounts within the
+	// organization. When set to false, the membership will only be created for
+	// specified accounts.
+	//
+	// This parameter is optional. If not specified, the default value is false.
+	//
+	//   - If set to true: The membership will automatically include all existing and
+	//   future accounts in the Amazon Web Services Organization.
+	//
+	//   - If set to false: The membership will only apply to explicitly specified
+	//   accounts.
+	CoverEntireOrganization *bool
 
 	// Optional element to enable the monitoring and investigation opt-in features for
 	// the service.

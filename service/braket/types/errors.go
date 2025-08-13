@@ -7,7 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// You do not have sufficient access to perform this action.
+// You do not have sufficient permissions to perform this action.
 type AccessDeniedException struct {
 	Message *string
 
@@ -111,8 +111,7 @@ func (e *DeviceRetiredException) ErrorCode() string {
 }
 func (e *DeviceRetiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request processing has failed because of an unknown error, exception, or
-// failure.
+// The request failed because of an unknown error.
 type InternalServiceException struct {
 	Message *string
 
@@ -190,7 +189,7 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The throttling rate limit is met.
+// The API throttling rate limit is exceeded.
 type ThrottlingException struct {
 	Message *string
 
@@ -216,11 +215,14 @@ func (e *ThrottlingException) ErrorCode() string {
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The input fails to satisfy the constraints specified by an AWS service.
+// The input request failed to satisfy constraints expected by Amazon Braket.
 type ValidationException struct {
 	Message *string
 
 	ErrorCodeOverride *string
+
+	Reason                       ValidationExceptionReason
+	ProgramSetValidationFailures []ProgramSetValidationFailure
 
 	noSmithyDocumentSerde
 }

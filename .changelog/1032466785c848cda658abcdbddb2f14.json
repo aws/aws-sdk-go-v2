@@ -1,0 +1,8 @@
+{
+    "id": "10324667-85c8-48cd-a658-abcdbddb2f14",
+    "type": "feature",
+    "description": "Adds support for account pools and project profile account decoupling",
+    "modules": [
+        "service/datazone"
+    ]
+}

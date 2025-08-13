@@ -101,6 +101,8 @@ import (
 //
 //   - DiskIopsConfiguration
 //
+//   - EndpointIpv6AddressRange
+//
 //   - ReadCacheConfiguration
 //
 //   - RemoveRouteTableIds
@@ -146,6 +148,9 @@ type UpdateFileSystemInput struct {
 	// The configuration object for Amazon FSx for Lustre file systems used in the
 	// UpdateFileSystem operation.
 	LustreConfiguration *types.UpdateFileSystemLustreConfiguration
+
+	// Changes the network type of an FSx for OpenZFS file system.
+	NetworkType types.NetworkType
 
 	// The configuration updates for an Amazon FSx for NetApp ONTAP file system.
 	OntapConfiguration *types.UpdateFileSystemOntapConfiguration

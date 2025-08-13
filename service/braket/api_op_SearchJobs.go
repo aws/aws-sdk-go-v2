@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches for Amazon Braket jobs that match the specified filter values.
+// Searches for Amazon Braket hybrid jobs that match the specified filter values.
 func (c *Client) SearchJobs(ctx context.Context, params *SearchJobsInput, optFns ...func(*Options)) (*SearchJobsOutput, error) {
 	if params == nil {
 		params = &SearchJobsInput{}
@@ -29,7 +29,7 @@ func (c *Client) SearchJobs(ctx context.Context, params *SearchJobsInput, optFns
 
 type SearchJobsInput struct {
 
-	// The filter values to use when searching for a job.
+	// Array of SearchJobsFilter objects to use when searching for hybrid jobs.
 	//
 	// This member is required.
 	Filters []types.SearchJobsFilter
@@ -38,8 +38,8 @@ type SearchJobsInput struct {
 	MaxResults *int32
 
 	// A token used for pagination of results returned in the response. Use the token
-	// returned from the previous request to continue results where the previous
-	// request ended.
+	// returned from the previous request to continue search where the previous request
+	// ended.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -54,7 +54,7 @@ type SearchJobsOutput struct {
 	Jobs []types.JobSummary
 
 	// A token used for pagination of results, or null if there are no additional
-	// results. Use the token value in a subsequent request to continue results where
+	// results. Use the token value in a subsequent request to continue search where
 	// the previous request ended.
 	NextToken *string
 

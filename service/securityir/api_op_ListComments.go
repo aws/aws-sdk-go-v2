@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Grants permissions to list and view comments for a designated case.
+// Returns comments for a designated case.
 func (c *Client) ListComments(ctx context.Context, params *ListCommentsInput, optFns ...func(*Options)) (*ListCommentsOutput, error) {
 	if params == nil {
 		params = &ListCommentsInput{}
@@ -37,7 +37,9 @@ type ListCommentsInput struct {
 	// Optional element for ListComments to limit the number of responses.
 	MaxResults *int32
 
-	// Optional element.
+	// An optional string that, if supplied, must be copied from the output of a
+	// previous call to ListComments. When provided in this manner, the API fetches the
+	// next page of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -49,7 +51,8 @@ type ListCommentsOutput struct {
 	// creator, lastUpdatedBy and lastUpdatedDate for each response.
 	Items []types.ListCommentsItem
 
-	// Optional request elements.
+	// An optional string that, if supplied on subsequent calls to ListComments,
+	// allows the API to fetch the next page of results.
 	NextToken *string
 
 	// Response element for ListComments identifying the number of responses.

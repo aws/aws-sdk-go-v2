@@ -15,10 +15,10 @@ import (
 // well as sort options. This feature is available to partners from [Partner Central]using the
 // ListOpportunities API action.
 //
-// To synchronize your system with Amazon Web Services, only list the
+// To synchronize your system with Amazon Web Services, list only the
 // opportunities that were newly created or updated. We recommend you rely on
 // events emitted by the service into your Amazon Web Services account’s Amazon
-// EventBridge default event bus, you can also use the ListOpportunities action.
+// EventBridge default event bus. You can also use the ListOpportunities action.
 //
 // We recommend the following approach:
 //

@@ -7,6 +7,28 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
 )
 
+func ExampleAccountSource_outputUsage() {
+	var union types.AccountSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AccountSourceMemberAccounts:
+		_ = v.Value // Value is []types.AccountInfo
+
+	case *types.AccountSourceMemberCustomAccountPoolHandler:
+		_ = v.Value // Value is types.CustomAccountPoolHandler
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CustomAccountPoolHandler
+var _ []types.AccountInfo
+
 func ExampleActionParameters_outputUsage() {
 	var union types.ActionParameters
 	// type switches can be used to check the union value

@@ -6793,7 +6793,7 @@ func awsAwsjson10_deserializeDocumentExpectedCustomerSpend(v **types.ExpectedCus
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected Amount to be of type string, got %T instead", value)
 				}
 				sv.Amount = ptr.String(jtv)
 			}

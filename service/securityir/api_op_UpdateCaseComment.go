@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Grants permission to update an existing case comment.
+// Updates an existing case comment.
 func (c *Client) UpdateCaseComment(ctx context.Context, params *UpdateCaseCommentInput, optFns ...func(*Options)) (*UpdateCaseCommentOutput, error) {
 	if params == nil {
 		params = &UpdateCaseCommentInput{}

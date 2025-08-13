@@ -3,6 +3,5 @@
 // Package securityir provides the API client, operations, and parameter types for
 // Security Incident Response.
 //
-// This guide provides documents the action and response elements for customer use
-// of the service.
+// This guide documents the action and response elements for use of the service.
 package securityir

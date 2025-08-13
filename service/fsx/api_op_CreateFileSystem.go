@@ -152,6 +152,12 @@ type CreateFileSystemInput struct {
 	//   - ImportPath
 	LustreConfiguration *types.CreateFileSystemLustreConfiguration
 
+	// The network type of the Amazon FSx file system that you are creating. Valid
+	// values are IPV4 (which supports IPv4 only) and DUAL (for dual-stack mode, which
+	// supports both IPv4 and IPv6). The default is IPV4 . Supported only for Amazon
+	// FSx for OpenZFS file systems.
+	NetworkType types.NetworkType
+
 	// The ONTAP configuration properties of the FSx for ONTAP file system that you
 	// are creating.
 	OntapConfiguration *types.CreateFileSystemOntapConfiguration

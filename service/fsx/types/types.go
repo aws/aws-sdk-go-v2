@@ -1086,6 +1086,14 @@ type CreateFileSystemOpenZFSConfiguration struct {
 	// overlap with any subnet.
 	EndpointIpAddressRange *string
 
+	// (Multi-AZ only) Specifies the IP address range in which the endpoints to access
+	// your file system will be created. By default in the Amazon FSx API and Amazon
+	// FSx console, Amazon FSx selects an available /118 IP address range for you from
+	// one of the VPC's CIDR ranges. You can have overlapping endpoint IP addresses for
+	// file systems deployed in the same VPC/route tables, as long as they don't
+	// overlap with any subnet.
+	EndpointIpv6AddressRange *string
+
 	// Required when DeploymentType is set to MULTI_AZ_1 . This specifies the subnet in
 	// which you want the preferred file server to be located.
 	PreferredSubnetId *string
@@ -2620,6 +2628,9 @@ type FileSystem struct {
 	// [Elastic Network Interfaces]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html
 	NetworkInterfaceIds []string
 
+	// The network type of the file system.
+	NetworkType NetworkType
+
 	// The configuration for this Amazon FSx for NetApp ONTAP file system.
 	OntapConfiguration *OntapFileSystemConfiguration
 
@@ -3438,6 +3449,18 @@ type OpenZFSFileSystemConfiguration struct {
 	// one of the VPC's CIDR ranges. You can have overlapping endpoint IP addresses for
 	// file systems deployed in the same VPC/route tables.
 	EndpointIpAddressRange *string
+
+	// The IPv6 address of the endpoint that is used to access data or to manage the
+	// file system.
+	EndpointIpv6Address *string
+
+	// (Multi-AZ only) Specifies the IP address range in which the endpoints to access
+	// your file system will be created. By default in the Amazon FSx API and Amazon
+	// FSx console, Amazon FSx selects an available /118 IP address range for you from
+	// one of the VPC's CIDR ranges. You can have overlapping endpoint IP addresses for
+	// file systems deployed in the same VPC/route tables, as long as they don't
+	// overlap with any subnet.
+	EndpointIpv6AddressRange *string
 
 	// Required when DeploymentType is set to MULTI_AZ_1 . This specifies the subnet in
 	// which you want the preferred file server to be located.
@@ -4673,6 +4696,14 @@ type UpdateFileSystemOpenZFSConfiguration struct {
 	// configuration consists of the total number of provisioned SSD IOPS and how it is
 	// was provisioned, or the mode (by the customer or by Amazon FSx).
 	DiskIopsConfiguration *DiskIopsConfiguration
+
+	// (Multi-AZ only) Specifies the IP address range in which the endpoints to access
+	// your file system will be created. By default in the Amazon FSx API and Amazon
+	// FSx console, Amazon FSx selects an available /118 IP address range for you from
+	// one of the VPC's CIDR ranges. You can have overlapping endpoint IP addresses for
+	// file systems deployed in the same VPC/route tables, as long as they don't
+	// overlap with any subnet.
+	EndpointIpv6AddressRange *string
 
 	//  The configuration for the optional provisioned SSD read cache on file systems
 	// that use the Intelligent-Tiering storage class.

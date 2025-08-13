@@ -1,0 +1,8 @@
+{
+    "id": "5b74e279-e18a-4e2f-9f3d-9772cafda959",
+    "type": "feature",
+    "description": "Added support for Organizational Unit-level Membership configuration and the ability to resume a cancelled membership.",
+    "modules": [
+        "service/securityir"
+    ]
+}

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Grants access to UpdateMembership to change membership configuration.
+// Updates membership configuration.
 func (c *Client) UpdateMembership(ctx context.Context, params *UpdateMembershipInput, optFns ...func(*Options)) (*UpdateMembershipOutput, error) {
 	if params == nil {
 		params = &UpdateMembershipInput{}
@@ -37,12 +37,35 @@ type UpdateMembershipInput struct {
 	// Optional element for UpdateMembership to update the membership name.
 	IncidentResponseTeam []types.IncidentResponder
 
+	// The membershipAccountsConfigurationsUpdate field in the UpdateMembershipRequest
+	// structure allows you to update the configuration settings for accounts within a
+	// membership.
+	//
+	// This field is optional and contains a structure of type
+	// MembershipAccountsConfigurationsUpdate that specifies the updated account
+	// configurations for the membership.
+	MembershipAccountsConfigurationsUpdate *types.MembershipAccountsConfigurationsUpdate
+
 	// Optional element for UpdateMembership to update the membership name.
 	MembershipName *string
 
 	// Optional element for UpdateMembership to enable or disable opt-in features for
 	// the service.
 	OptInFeatures []types.OptInFeature
+
+	// The undoMembershipCancellation parameter is a boolean flag that indicates
+	// whether to reverse a previously requested membership cancellation. When set to
+	// true, this will revoke the cancellation request and maintain the membership
+	// status.
+	//
+	// This parameter is optional and can be used in scenarios where you need to
+	// restore a membership that was marked for cancellation but hasn't been fully
+	// terminated yet.
+	//
+	//   - If set to true , the cancellation request will be revoked
+	//
+	//   - If set to false the service will throw a ValidationException.
+	UndoMembershipCancellation *bool
 
 	noSmithyDocumentSerde
 }

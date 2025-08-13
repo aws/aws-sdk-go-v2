@@ -579,6 +579,11 @@ func awsRestjson1_serializeOpDocumentCreateMembershipInput(v *CreateMembershipIn
 		ok.String(*v.ClientToken)
 	}
 
+	if v.CoverEntireOrganization != nil {
+		ok := object.Key("coverEntireOrganization")
+		ok.Boolean(*v.CoverEntireOrganization)
+	}
+
 	if v.IncidentResponseTeam != nil {
 		ok := object.Key("incidentResponseTeam")
 		if err := awsRestjson1_serializeDocumentIncidentResponseTeam(v.IncidentResponseTeam, ok); err != nil {
@@ -2022,6 +2027,13 @@ func awsRestjson1_serializeOpDocumentUpdateMembershipInput(v *UpdateMembershipIn
 		}
 	}
 
+	if v.MembershipAccountsConfigurationsUpdate != nil {
+		ok := object.Key("membershipAccountsConfigurationsUpdate")
+		if err := awsRestjson1_serializeDocumentMembershipAccountsConfigurationsUpdate(v.MembershipAccountsConfigurationsUpdate, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MembershipName != nil {
 		ok := object.Key("membershipName")
 		ok.String(*v.MembershipName)
@@ -2032,6 +2044,11 @@ func awsRestjson1_serializeOpDocumentUpdateMembershipInput(v *UpdateMembershipIn
 		if err := awsRestjson1_serializeDocumentOptInFeatures(v.OptInFeatures, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.UndoMembershipCancellation != nil {
+		ok := object.Key("undoMembershipCancellation")
+		ok.Boolean(*v.UndoMembershipCancellation)
 	}
 
 	return nil
@@ -2224,6 +2241,32 @@ func awsRestjson1_serializeDocumentIncidentResponseTeam(v []types.IncidentRespon
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMembershipAccountsConfigurationsUpdate(v *types.MembershipAccountsConfigurationsUpdate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CoverEntireOrganization != nil {
+		ok := object.Key("coverEntireOrganization")
+		ok.Boolean(*v.CoverEntireOrganization)
+	}
+
+	if v.OrganizationalUnitsToAdd != nil {
+		ok := object.Key("organizationalUnitsToAdd")
+		if err := awsRestjson1_serializeDocumentOrganizationalUnits(v.OrganizationalUnitsToAdd, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OrganizationalUnitsToRemove != nil {
+		ok := object.Key("organizationalUnitsToRemove")
+		if err := awsRestjson1_serializeDocumentOrganizationalUnits(v.OrganizationalUnitsToRemove, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentOptInFeature(v *types.OptInFeature, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2250,6 +2293,17 @@ func awsRestjson1_serializeDocumentOptInFeatures(v []types.OptInFeature, value s
 		if err := awsRestjson1_serializeDocumentOptInFeature(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOrganizationalUnits(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }

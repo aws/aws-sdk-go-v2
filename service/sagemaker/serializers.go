@@ -25010,6 +25010,11 @@ func awsAwsjson11_serializeDocumentComputeQuotaResourceConfig(v *types.ComputeQu
 	object := value.Object()
 	defer object.Close()
 
+	if v.Accelerators != nil {
+		ok := object.Key("Accelerators")
+		ok.Integer(*v.Accelerators)
+	}
+
 	if v.Count != nil {
 		ok := object.Key("Count")
 		ok.Integer(*v.Count)
@@ -25018,6 +25023,42 @@ func awsAwsjson11_serializeDocumentComputeQuotaResourceConfig(v *types.ComputeQu
 	if len(v.InstanceType) > 0 {
 		ok := object.Key("InstanceType")
 		ok.String(string(v.InstanceType))
+	}
+
+	if v.MemoryInGiB != nil {
+		ok := object.Key("MemoryInGiB")
+		switch {
+		case math.IsNaN(float64(*v.MemoryInGiB)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.MemoryInGiB), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.MemoryInGiB), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.MemoryInGiB)
+
+		}
+	}
+
+	if v.VCpu != nil {
+		ok := object.Key("VCpu")
+		switch {
+		case math.IsNaN(float64(*v.VCpu)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.VCpu), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.VCpu), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.VCpu)
+
+		}
 	}
 
 	return nil

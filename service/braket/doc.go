@@ -4,11 +4,53 @@
 // Braket.
 //
 // The Amazon Braket API Reference provides information about the operations and
-// structures supported in Amazon Braket.
+// structures supported by Amazon Braket.
 //
-// Additional Resources:
+// To learn about the permissions required to call an Amazon Braket API action,
+// see [Actions, resources, and condition keys for Amazon Braket]. [Amazon Braket Python SDK] and the [AWS Command Line Interface] can be used to make discovery and creation of API calls easier.
+// For more information about Amazon Braket features, see [What is Amazon Braket?]and important [terms and concepts] in the
+// Amazon Braket Developer Guide.
 //
-// [Amazon Braket Developer Guide]
+// In this guide:
 //
-// [Amazon Braket Developer Guide]: https://docs.aws.amazon.com/braket/latest/developerguide/what-is-braket.html
+// # CommonParameters
+//
+// # CommonErrors
+//
+// Available languages for AWS SDK:
+//
+// [.NET]
+//
+// [C++]
+//
+// [Go API reference]
+//
+// [Java]
+//
+// [JavaScript]
+//
+// [PHP]
+//
+// [Python (Boto)]
+//
+// [Ruby]
+//
+// Code examples from the Amazon Braket Tutorials GitHub repository:
+//
+// [Amazon Braket Examples]
+//
+// [Java]: https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/braket/package-summary.html
+// [Amazon Braket Python SDK]: https://amazon-braket-sdk-python.readthedocs.io/en/latest/#
+// [C++]: https://sdk.amazonaws.com/cpp/api/LATEST/root/html/index.html
+// [What is Amazon Braket?]: https://docs.aws.amazon.com/braket/latest/developerguide/what-is-braket.html
+// [Actions, resources, and condition keys for Amazon Braket]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonbraket.html
+// [Python (Boto)]: https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/braket.html
+// [Amazon Braket Examples]: https://github.com/amazon-braket/amazon-braket-examples
+// [Go API reference]: https://docs.aws.amazon.com/sdk-for-go/api/service/braket/
+// [JavaScript]: https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Braket.html
+// [terms and concepts]: https://docs.aws.amazon.com/braket/latest/developerguide/braket-terms.html
+// [.NET]: https://docs.aws.amazon.com/sdkfornet/v3/apidocs/items/Braket/NBraket.html
+// [PHP]: https://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.Braket.BraketClient.html
+// [AWS Command Line Interface]: https://docs.aws.amazon.com/cli/latest/reference/braket/
+// [Ruby]: https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Braket.html
 package braket

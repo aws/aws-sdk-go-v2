@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Grants permission to upload an attachment to a case.
+// Uploads an attachment to a case.
 func (c *Client) GetCaseAttachmentUploadUrl(ctx context.Context, params *GetCaseAttachmentUploadUrlInput, optFns ...func(*Options)) (*GetCaseAttachmentUploadUrlOutput, error) {
 	if params == nil {
 		params = &GetCaseAttachmentUploadUrlInput{}
@@ -29,12 +29,12 @@ func (c *Client) GetCaseAttachmentUploadUrl(ctx context.Context, params *GetCase
 type GetCaseAttachmentUploadUrlInput struct {
 
 	// Required element for GetCaseAttachmentUploadUrl to identify the case ID for
-	// uploading an attachment to.
+	// uploading an attachment.
 	//
 	// This member is required.
 	CaseId *string
 
-	// Required element for GetCaseAttachmentUploadUrl to identify the size od the
+	// Required element for GetCaseAttachmentUploadUrl to identify the size of the
 	// file attachment.
 	//
 	// This member is required.
@@ -46,7 +46,9 @@ type GetCaseAttachmentUploadUrlInput struct {
 	// This member is required.
 	FileName *string
 
-	// Optional element for customer provided token.
+	// The clientToken field is an idempotency key used to ensure that repeated
+	// attempts for a single action will be ignored by the server during retries. A
+	// caller supplied unique ID (typically a UUID) should be provided.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -54,7 +56,7 @@ type GetCaseAttachmentUploadUrlInput struct {
 
 type GetCaseAttachmentUploadUrlOutput struct {
 
-	// Response element providing the Amazon S3 presigned UTL to upload the attachment.
+	// Response element providing the Amazon S3 presigned URL to upload the attachment.
 	//
 	// This member is required.
 	AttachmentPresignedUrl *string

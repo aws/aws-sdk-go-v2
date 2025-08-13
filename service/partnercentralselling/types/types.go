@@ -697,15 +697,16 @@ type ExpectedCustomerSpend struct {
 	CurrencyCode CurrencyCode
 
 	// Indicates how frequently the customer is expected to spend the projected
-	// amount. This can include values such as Monthly , Quarterly , or Annually . The
-	// default value is Monthly , representing recurring monthly spend.
+	// amount. Only the value Monthly is allowed for the Frequency field, representing
+	// recurring monthly spend.
 	//
 	// This member is required.
 	Frequency PaymentFrequency
 
 	// Specifies the name of the partner company that is expected to generate revenue
 	// from the opportunity. This field helps track the partner’s involvement in the
-	// opportunity.
+	// opportunity. This field only accepts the value AWS . If any other value is
+	// provided, the system will automatically set it to AWS .
 	//
 	// This member is required.
 	TargetCompany *string
@@ -821,8 +822,10 @@ type LifeCycle struct {
 	// for the current opportunity, along with the timestamp.
 	NextStepsHistory []NextStepsHistory
 
-	// Indicates why an opportunity was sent back for further details. Partners must
-	// take corrective action based on the ReviewComments .
+	// Contains detailed feedback from Amazon Web Services when requesting additional
+	// information from partners. Provides specific guidance on what partners need to
+	// provide or clarify for opportunity validation, complementing the
+	// ReviewStatusReason field.
 	ReviewComments *string
 
 	// Indicates the review status of an opportunity referred by a partner. This field
@@ -873,10 +876,11 @@ type LifeCycle struct {
 	//   - Rejected: Disqualified (read-only).
 	ReviewStatus ReviewStatus
 
-	// Indicates the reason a decision was made during the opportunity review process.
-	// This field combines the reasons for both disqualified and action required
-	// statuses, and provide clarity for why an opportunity was disqualified or
-	// requires further action.
+	// Code indicating the validation decision during the Amazon Web Services
+	// opportunity review. Applies when status is Rejected or Action Required . Used to
+	// document validation results for AWS Partner Referrals and indicate when
+	// additional information is needed from partners as part of the APN Customer
+	// Engagement (ACE) program.
 	ReviewStatusReason *string
 
 	// Specifies the current stage of the Opportunity 's lifecycle as it maps to Amazon

@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Grants permission to update an existing case.
+// Updates an existing case.
 func (c *Client) UpdateCase(ctx context.Context, params *UpdateCaseInput, optFns ...func(*Options)) (*UpdateCaseOutput, error) {
 	if params == nil {
 		params = &UpdateCaseInput{}
@@ -47,9 +47,19 @@ type UpdateCaseInput struct {
 	EngagementType types.EngagementType
 
 	// Optional element for UpdateCase to provide content to add accounts impacted.
+	//
+	// AWS account ID's may appear less than 12 characters and need to be
+	// zero-prepended. An example would be 123123123 which is nine digits, and with
+	// zero-prepend would be 000123123123 . Not zero-prepending to 12 digits could
+	// result in errors.
 	ImpactedAccountsToAdd []string
 
 	// Optional element for UpdateCase to provide content to add accounts impacted.
+	//
+	// AWS account ID's may appear less than 12 characters and need to be
+	// zero-prepended. An example would be 123123123 which is nine digits, and with
+	// zero-prepend would be 000123123123 . Not zero-prepending to 12 digits could
+	// result in errors.
 	ImpactedAccountsToDelete []string
 
 	// Optional element for UpdateCase to provide content to add regions impacted.

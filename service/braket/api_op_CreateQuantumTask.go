@@ -29,7 +29,7 @@ func (c *Client) CreateQuantumTask(ctx context.Context, params *CreateQuantumTas
 
 type CreateQuantumTaskInput struct {
 
-	// The action associated with the task.
+	// The action associated with the quantum task.
 	//
 	// This value conforms to the media type: application/json
 	//
@@ -41,22 +41,23 @@ type CreateQuantumTaskInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// The ARN of the device to run the task on.
+	// The ARN of the device to run the quantum task on.
 	//
 	// This member is required.
 	DeviceArn *string
 
-	// The S3 bucket to store task result files in.
+	// The S3 bucket to store quantum task result files in.
 	//
 	// This member is required.
 	OutputS3Bucket *string
 
-	// The key prefix for the location in the S3 bucket to store task results in.
+	// The key prefix for the location in the S3 bucket to store quantum task results
+	// in.
 	//
 	// This member is required.
 	OutputS3KeyPrefix *string
 
-	// The number of shots to use for the task.
+	// The number of shots to use for the quantum task.
 	//
 	// This member is required.
 	Shots *int64
@@ -64,12 +65,13 @@ type CreateQuantumTaskInput struct {
 	// The list of Amazon Braket resources associated with the quantum task.
 	Associations []types.Association
 
-	// The parameters for the device to run the task on.
+	// The parameters for the device to run the quantum task on.
 	//
 	// This value conforms to the media type: application/json
 	DeviceParameters *string
 
-	// The token for an Amazon Braket job that associates it with the quantum task.
+	// The token for an Amazon Braket hybrid job that associates it with the quantum
+	// task.
 	JobToken *string
 
 	// Tags to be added to the quantum task you're creating.
@@ -80,7 +82,7 @@ type CreateQuantumTaskInput struct {
 
 type CreateQuantumTaskOutput struct {
 
-	// The ARN of the task created by the request.
+	// The ARN of the quantum task created by the request.
 	//
 	// This member is required.
 	QuantumTaskArn *string
