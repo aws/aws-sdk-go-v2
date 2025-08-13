@@ -1,3 +1,7 @@
+# v1.59.0 (2025-08-13)
+
+* **Feature**: Add Dual-Stack support for Amazon FSx for OpenZFS file systems
+
 # v1.58.0 (2025-08-11)
 
 * **Feature**: Add support for configuring per-service Options via callback on global config.

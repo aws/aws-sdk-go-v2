@@ -1,8 +1,0 @@
-{
-    "id": "3af2dd5f-e20e-4014-a73d-b2969805845e",
-    "type": "feature",
-    "description": "This release introduces compute quota for GPU, Trainium accelerators, vCPU, and vCPU memory utilization across teams in HyperPod clusters",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

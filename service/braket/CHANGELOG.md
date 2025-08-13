@@ -1,3 +1,7 @@
+# v1.36.0 (2025-08-13)
+
+* **Feature**: Add support for Braket program sets.
+
 # v1.35.0 (2025-08-11)
 
 * **Feature**: Add support for configuring per-service Options via callback on global config.

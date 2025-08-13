@@ -1,8 +1,0 @@
-{
-    "id": "11dae990-291a-455f-bef8-2363436a92f0",
-    "type": "feature",
-    "description": "Add Tagging Support for Opportunity resources",
-    "modules": [
-        "service/partnercentralselling"
-    ]
-}

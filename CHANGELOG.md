@@ -1,3 +1,19 @@
+# Release (2025-08-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/braket`: [v1.36.0](service/braket/CHANGELOG.md#v1360-2025-08-13)
+  * **Feature**: Add support for Braket program sets.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.37.0](service/datazone/CHANGELOG.md#v1370-2025-08-13)
+  * **Feature**: Adds support for account pools and project profile account decoupling
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.59.0](service/fsx/CHANGELOG.md#v1590-2025-08-13)
+  * **Feature**: Add Dual-Stack support for Amazon FSx for OpenZFS file systems
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralselling`: [v1.10.0](service/partnercentralselling/CHANGELOG.md#v1100-2025-08-13)
+  * **Feature**: Add Tagging Support for Opportunity resources
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.209.0](service/sagemaker/CHANGELOG.md#v12090-2025-08-13)
+  * **Feature**: This release introduces compute quota for GPU, Trainium accelerators, vCPU, and vCPU memory utilization across teams in HyperPod clusters
+* `github.com/aws/aws-sdk-go-v2/service/securityir`: [v1.8.0](service/securityir/CHANGELOG.md#v180-2025-08-13)
+  * **Feature**: Added support for Organizational Unit-level Membership configuration and the ability to resume a cancelled membership.
+
 # Release (2025-08-12)
 
 ## Module Highlights

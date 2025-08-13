@@ -1,3 +1,7 @@
+# v1.37.0 (2025-08-13)
+
+* **Feature**: Adds support for account pools and project profile account decoupling
+
 # v1.36.0 (2025-08-11)
 
 * **Feature**: Add support for configuring per-service Options via callback on global config.

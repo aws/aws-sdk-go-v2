@@ -1,3 +1,7 @@
+# v1.8.0 (2025-08-13)
+
+* **Feature**: Added support for Organizational Unit-level Membership configuration and the ability to resume a cancelled membership.
+
 # v1.7.0 (2025-08-11)
 
 * **Feature**: Add support for configuring per-service Options via callback on global config.

@@ -1,8 +1,0 @@
-{
-    "id": "0b87ed58-e80b-4eba-a981-bd42609b33ca",
-    "type": "feature",
-    "description": "Add support for Braket program sets.",
-    "modules": [
-        "service/braket"
-    ]
-}

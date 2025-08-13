@@ -1,3 +1,7 @@
+# v1.10.0 (2025-08-13)
+
+* **Feature**: Add Tagging Support for Opportunity resources
+
 # v1.9.0 (2025-08-11)
 
 * **Feature**: Add support for configuring per-service Options via callback on global config.
