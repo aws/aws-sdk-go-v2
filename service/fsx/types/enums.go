@@ -1216,6 +1216,8 @@ const (
 	StatusCompleted         Status = "COMPLETED"
 	StatusUpdatedOptimizing Status = "UPDATED_OPTIMIZING"
 	StatusOptimizing        Status = "OPTIMIZING"
+	StatusPaused            Status = "PAUSED"
+	StatusCancelled         Status = "CANCELLED"
 )
 
 // Values returns all known values for Status. Note that this can be expanded in
@@ -1230,6 +1232,8 @@ func (Status) Values() []Status {
 		"COMPLETED",
 		"UPDATED_OPTIMIZING",
 		"OPTIMIZING",
+		"PAUSED",
+		"CANCELLED",
 	}
 }
 

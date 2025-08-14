@@ -1,0 +1,8 @@
+{
+    "id": "4200713c-0266-443a-b60a-dba663ff8af6",
+    "type": "feature",
+    "description": "Added support for cross account through Id parameter overloading with ARN and allow owner account for some APIs instead of ARN",
+    "modules": [
+        "service/servicediscovery"
+    ]
+}

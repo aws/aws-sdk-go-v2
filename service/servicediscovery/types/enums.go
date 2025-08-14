@@ -113,9 +113,10 @@ type NamespaceFilterName string
 
 // Enum values for NamespaceFilterName
 const (
-	NamespaceFilterNameType     NamespaceFilterName = "TYPE"
-	NamespaceFilterNameName     NamespaceFilterName = "NAME"
-	NamespaceFilterNameHttpName NamespaceFilterName = "HTTP_NAME"
+	NamespaceFilterNameType          NamespaceFilterName = "TYPE"
+	NamespaceFilterNameName          NamespaceFilterName = "NAME"
+	NamespaceFilterNameHttpName      NamespaceFilterName = "HTTP_NAME"
+	NamespaceFilterNameResourceOwner NamespaceFilterName = "RESOURCE_OWNER"
 )
 
 // Values returns all known values for NamespaceFilterName. Note that this can be
@@ -127,6 +128,7 @@ func (NamespaceFilterName) Values() []NamespaceFilterName {
 		"TYPE",
 		"NAME",
 		"HTTP_NAME",
+		"RESOURCE_OWNER",
 	}
 }
 
@@ -293,7 +295,8 @@ type ServiceFilterName string
 
 // Enum values for ServiceFilterName
 const (
-	ServiceFilterNameNamespaceId ServiceFilterName = "NAMESPACE_ID"
+	ServiceFilterNameNamespaceId   ServiceFilterName = "NAMESPACE_ID"
+	ServiceFilterNameResourceOwner ServiceFilterName = "RESOURCE_OWNER"
 )
 
 // Values returns all known values for ServiceFilterName. Note that this can be
@@ -303,6 +306,7 @@ const (
 func (ServiceFilterName) Values() []ServiceFilterName {
 	return []ServiceFilterName{
 		"NAMESPACE_ID",
+		"RESOURCE_OWNER",
 	}
 }
 

@@ -130,6 +130,9 @@ type AdministrativeAction struct {
 	// Provides information about a failed administrative action.
 	FailureDetails *AdministrativeActionFailureDetails
 
+	// A detailed error message.
+	Message *string
+
 	// The percentage-complete status of a STORAGE_OPTIMIZATION or
 	// DOWNLOAD_DATA_FROM_BACKUP administrative action. Does not apply to any other
 	// administrative action type.
@@ -4571,9 +4574,9 @@ type UpdateFileSystemOntapConfiguration struct {
 	// capacity, but you can provision additional IOPS per GB of storage. The
 	// configuration consists of an IOPS mode ( AUTOMATIC or USER_PROVISIONED ), and in
 	// the case of USER_PROVISIONED IOPS, the total number of SSD IOPS provisioned.
-	// For more information, see [Updating SSD storage capacity and IOPS].
+	// For more information, see [File system storage capacity and IOPS].
 	//
-	// [Updating SSD storage capacity and IOPS]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/increase-primary-storage.html
+	// [File system storage capacity and IOPS]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/storage-capacity-and-IOPS.html
 	DiskIopsConfiguration *DiskIopsConfiguration
 
 	// Update the password for the fsxadmin user by entering a new password. You use

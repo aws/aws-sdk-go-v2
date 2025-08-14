@@ -64,14 +64,33 @@ type CreatePrivateVirtualInterfaceOutput struct {
 	// The IP address assigned to the Amazon interface.
 	AmazonAddress *string
 
-	// The autonomous system number (ASN) for the Amazon side of the connection.
+	// The autonomous system number (AS) for the Amazon side of the connection.
 	AmazonSideAsn *int64
 
-	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
-	// configuration.
+	// The autonomous system number (ASN). The valid range is from 1 to 2147483646 for
+	// Border Gateway Protocol (BGP) configuration. If you provide a number greater
+	// than the maximum, an error is returned. Use asnLong instead.
 	//
-	// The valid values are 1-2147483647.
+	// You can use asnLong or asn , but not both. We recommend using asnLong as it
+	// supports a greater pool of numbers.
+	//
+	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//
+	//   - If you provide a value in the same API call for both asn and asnLong , the
+	//   API will only accept the value for asnLong .
 	Asn int32
+
+	// The long ASN for the virtual interface. The valid range is from 1 to 4294967294
+	// for BGP configuration.
+	//
+	// You can use asnLong or asn , but not both. We recommend using asnLong as it
+	// supports a greater pool of numbers.
+	//
+	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//
+	//   - If you provide a value in the same API call for both asn and asnLong , the
+	//   API will only accept the value for asnLong .
+	AsnLong *int64
 
 	// The authentication key for BGP configuration. This string has a minimum length
 	// of 6 characters and and a maximun lenth of 80 characters.

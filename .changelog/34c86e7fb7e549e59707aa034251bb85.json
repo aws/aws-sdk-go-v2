@@ -1,0 +1,8 @@
+{
+    "id": "34c86e7f-b7e5-49e5-9707-aa034251bb85",
+    "type": "feature",
+    "description": "New APIs introduced to import WorkSpaces BYOL image using a new process that leveraged EC2 Image Builder. WorkSpaces tests and fixes your image's compatibility issues and supports customized VM images.",
+    "modules": [
+        "service/workspaces"
+    ]
+}

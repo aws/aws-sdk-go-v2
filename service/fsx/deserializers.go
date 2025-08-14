@@ -7558,6 +7558,15 @@ func awsAwsjson11_deserializeDocumentAdministrativeAction(v **types.Administrati
 				return err
 			}
 
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
 		case "ProgressPercent":
 			if value != nil {
 				jtv, ok := value.(json.Number)

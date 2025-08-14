@@ -24767,6 +24767,40 @@ func awsRestjson1_deserializeDocument__listOf__stringMin7Max11PatternAws097(v *[
 	return nil
 }
 
+func awsRestjson1_deserializeDocument__listOfAdditionalDestinations(v *[]types.AdditionalDestinations, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AdditionalDestinations
+	if *v == nil {
+		cv = []types.AdditionalDestinations{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AdditionalDestinations
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAdditionalDestinations(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOfAudioChannelMapping(v *[]types.AudioChannelMapping, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -27557,6 +27591,42 @@ func awsRestjson1_deserializeDocumentAccountConfiguration(v **types.AccountConfi
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAdditionalDestinations(v **types.AdditionalDestinations, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AdditionalDestinations
+	if *v == nil {
+		sv = &types.AdditionalDestinations{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "destination":
+			if err := awsRestjson1_deserializeDocumentOutputLocationRef(&sv.Destination, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAncillarySourceSettings(v **types.AncillarySourceSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -28882,7 +28952,7 @@ func awsRestjson1_deserializeDocumentAv1Settings(v **types.Av1Settings, value in
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected __integerMin50000Max8000000 to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected __integerMin50000Max12000000 to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -28895,7 +28965,7 @@ func awsRestjson1_deserializeDocumentAv1Settings(v **types.Av1Settings, value in
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected __integerMin50000Max16000000 to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected __integerMin50000Max24000000 to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -29009,7 +29079,7 @@ func awsRestjson1_deserializeDocumentAv1Settings(v **types.Av1Settings, value in
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected __integerMin50000Max8000000 to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected __integerMin50000Max12000000 to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -31306,6 +31376,11 @@ func awsRestjson1_deserializeDocumentCmafIngestGroupSettings(v **types.CmafInges
 
 	for key, value := range shape {
 		switch key {
+		case "additionalDestinations":
+			if err := awsRestjson1_deserializeDocument__listOfAdditionalDestinations(&sv.AdditionalDestinations, value); err != nil {
+				return err
+			}
+
 		case "captionLanguageMappings":
 			if err := awsRestjson1_deserializeDocument__listOfCmafIngestCaptionLanguageMapping(&sv.CaptionLanguageMappings, value); err != nil {
 				return err

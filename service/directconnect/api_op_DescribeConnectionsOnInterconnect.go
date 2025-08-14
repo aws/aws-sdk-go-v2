@@ -48,6 +48,10 @@ type DescribeConnectionsOnInterconnectOutput struct {
 	// The connections.
 	Connections []types.Connection
 
+	// The token to use to retrieve the next page of results. This value is null when
+	// there are no more results to return.
+	NextToken *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

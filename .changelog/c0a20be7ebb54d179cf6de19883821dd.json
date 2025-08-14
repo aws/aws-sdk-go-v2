@@ -1,0 +1,8 @@
+{
+    "id": "c0a20be7-ebb5-4d17-9cf6-de19883821dd",
+    "type": "feature",
+    "description": "Initial SDK release for AWS Billing and Cost Management Recommended Actions.",
+    "modules": [
+        "service/bcmrecommendedactions"
+    ]
+}

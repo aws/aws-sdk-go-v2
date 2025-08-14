@@ -316,6 +316,7 @@ type ServiceAlreadyExists struct {
 
 	CreatorRequestId *string
 	ServiceId        *string
+	ServiceArn       *string
 
 	noSmithyDocumentSerde
 }

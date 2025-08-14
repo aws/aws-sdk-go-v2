@@ -4459,6 +4459,9 @@ type Ec2InstanceConnectEndpoint struct {
 	// Default: true
 	PreserveClientIp *bool
 
+	// The public DNS names of the endpoint.
+	PublicDnsNames *InstanceConnectEndpointPublicDnsNames
+
 	// The security groups associated with the endpoint. If you didn't specify a
 	// security group, the default security group for your VPC is associated with the
 	// endpoint.
@@ -7731,6 +7734,33 @@ type InstanceCapacity struct {
 	// The total number of instances that can be launched onto the Dedicated Host if
 	// there are no instances running on it.
 	TotalCapacity *int32
+
+	noSmithyDocumentSerde
+}
+
+// The DNS names of the endpoint.
+type InstanceConnectEndpointDnsNames struct {
+
+	// The DNS name of the EC2 Instance Connect Endpoint.
+	DnsName *string
+
+	// The Federal Information Processing Standards (FIPS) compliant DNS name of the
+	// EC2 Instance Connect Endpoint.
+	FipsDnsName *string
+
+	noSmithyDocumentSerde
+}
+
+// The public DNS names of the endpoint, including IPv4-only and dualstack DNS
+// names.
+type InstanceConnectEndpointPublicDnsNames struct {
+
+	// The dualstack DNS name of the EC2 Instance Connect Endpoint. A dualstack DNS
+	// name supports connections from both IPv4 and IPv6 clients.
+	Dualstack *InstanceConnectEndpointDnsNames
+
+	// The IPv4-only DNS name of the EC2 Instance Connect Endpoint.
+	Ipv4 *InstanceConnectEndpointDnsNames
 
 	noSmithyDocumentSerde
 }

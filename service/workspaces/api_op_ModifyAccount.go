@@ -44,6 +44,10 @@ type ModifyAccountInput struct {
 }
 
 type ModifyAccountOutput struct {
+
+	// The text message to describe the status of BYOL modification.
+	Message *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

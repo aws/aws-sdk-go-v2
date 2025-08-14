@@ -3874,6 +3874,11 @@ func awsAwsjson11_serializeDocumentNewBGPPeer(v *types.NewBGPPeer, value smithyj
 		ok.Integer(v.Asn)
 	}
 
+	if v.AsnLong != nil {
+		ok := object.Key("asnLong")
+		ok.Long(*v.AsnLong)
+	}
+
 	if v.AuthKey != nil {
 		ok := object.Key("authKey")
 		ok.String(*v.AuthKey)
@@ -3901,9 +3906,14 @@ func awsAwsjson11_serializeDocumentNewPrivateVirtualInterface(v *types.NewPrivat
 		ok.String(*v.AmazonAddress)
 	}
 
-	{
+	if v.Asn != 0 {
 		ok := object.Key("asn")
 		ok.Integer(v.Asn)
+	}
+
+	if v.AsnLong != nil {
+		ok := object.Key("asnLong")
+		ok.Long(*v.AsnLong)
 	}
 
 	if v.AuthKey != nil {
@@ -3970,9 +3980,14 @@ func awsAwsjson11_serializeDocumentNewPrivateVirtualInterfaceAllocation(v *types
 		ok.String(*v.AmazonAddress)
 	}
 
-	{
+	if v.Asn != 0 {
 		ok := object.Key("asn")
 		ok.Integer(v.Asn)
+	}
+
+	if v.AsnLong != nil {
+		ok := object.Key("asnLong")
+		ok.Long(*v.AsnLong)
 	}
 
 	if v.AuthKey != nil {
@@ -4024,9 +4039,14 @@ func awsAwsjson11_serializeDocumentNewPublicVirtualInterface(v *types.NewPublicV
 		ok.String(*v.AmazonAddress)
 	}
 
-	{
+	if v.Asn != 0 {
 		ok := object.Key("asn")
 		ok.Integer(v.Asn)
+	}
+
+	if v.AsnLong != nil {
+		ok := object.Key("asnLong")
+		ok.Long(*v.AsnLong)
 	}
 
 	if v.AuthKey != nil {
@@ -4080,9 +4100,14 @@ func awsAwsjson11_serializeDocumentNewPublicVirtualInterfaceAllocation(v *types.
 		ok.String(*v.AmazonAddress)
 	}
 
-	{
+	if v.Asn != 0 {
 		ok := object.Key("asn")
 		ok.Integer(v.Asn)
+	}
+
+	if v.AsnLong != nil {
+		ok := object.Key("asnLong")
+		ok.Long(*v.AsnLong)
 	}
 
 	if v.AuthKey != nil {
@@ -4139,6 +4164,11 @@ func awsAwsjson11_serializeDocumentNewTransitVirtualInterface(v *types.NewTransi
 	if v.Asn != 0 {
 		ok := object.Key("asn")
 		ok.Integer(v.Asn)
+	}
+
+	if v.AsnLong != nil {
+		ok := object.Key("asnLong")
+		ok.Long(*v.AsnLong)
 	}
 
 	if v.AuthKey != nil {
@@ -4203,6 +4233,11 @@ func awsAwsjson11_serializeDocumentNewTransitVirtualInterfaceAllocation(v *types
 	if v.Asn != 0 {
 		ok := object.Key("asn")
 		ok.Integer(v.Asn)
+	}
+
+	if v.AsnLong != nil {
+		ok := object.Key("asnLong")
+		ok.Long(*v.AsnLong)
 	}
 
 	if v.AuthKey != nil {
@@ -4960,6 +4995,11 @@ func awsAwsjson11_serializeOpDocumentDeleteBGPPeerInput(v *DeleteBGPPeerInput, v
 		ok.Integer(v.Asn)
 	}
 
+	if v.AsnLong != nil {
+		ok := object.Key("asnLong")
+		ok.Long(*v.AsnLong)
+	}
+
 	if v.BgpPeerId != nil {
 		ok := object.Key("bgpPeerId")
 		ok.String(*v.BgpPeerId)
@@ -5101,6 +5141,16 @@ func awsAwsjson11_serializeOpDocumentDescribeConnectionsInput(v *DescribeConnect
 	if v.ConnectionId != nil {
 		ok := object.Key("connectionId")
 		ok.String(*v.ConnectionId)
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
 	}
 
 	return nil
@@ -5245,6 +5295,16 @@ func awsAwsjson11_serializeOpDocumentDescribeHostedConnectionsInput(v *DescribeH
 		ok.String(*v.ConnectionId)
 	}
 
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
 	return nil
 }
 
@@ -5279,6 +5339,16 @@ func awsAwsjson11_serializeOpDocumentDescribeInterconnectsInput(v *DescribeInter
 		ok.String(*v.InterconnectId)
 	}
 
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
 	return nil
 }
 
@@ -5289,6 +5359,16 @@ func awsAwsjson11_serializeOpDocumentDescribeLagsInput(v *DescribeLagsInput, val
 	if v.LagId != nil {
 		ok := object.Key("lagId")
 		ok.String(*v.LagId)
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
 	}
 
 	return nil
@@ -5354,6 +5434,16 @@ func awsAwsjson11_serializeOpDocumentDescribeVirtualInterfacesInput(v *DescribeV
 	if v.ConnectionId != nil {
 		ok := object.Key("connectionId")
 		ok.String(*v.ConnectionId)
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
 	}
 
 	if v.VirtualInterfaceId != nil {

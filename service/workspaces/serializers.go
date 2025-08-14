@@ -2273,6 +2273,67 @@ func (m *awsAwsjson11_serializeOpDescribeConnectionAliasPermissions) HandleSeria
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpDescribeCustomWorkspaceImageImport struct {
+}
+
+func (*awsAwsjson11_serializeOpDescribeCustomWorkspaceImageImport) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDescribeCustomWorkspaceImageImport) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeCustomWorkspaceImageImportInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.DescribeCustomWorkspaceImageImport")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribeCustomWorkspaceImageImportInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpDescribeImageAssociations struct {
 }
 
@@ -3354,6 +3415,67 @@ func (m *awsAwsjson11_serializeOpImportClientBranding) HandleSerialize(ctx conte
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentImportClientBrandingInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpImportCustomWorkspaceImage struct {
+}
+
+func (*awsAwsjson11_serializeOpImportCustomWorkspaceImage) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpImportCustomWorkspaceImage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ImportCustomWorkspaceImageInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.ImportCustomWorkspaceImage")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentImportCustomWorkspaceImageInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -5884,6 +6006,30 @@ func awsAwsjson11_serializeDocumentImageAssociatedResourceTypeList(v []types.Ima
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentImageSourceIdentifier(v types.ImageSourceIdentifier, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.ImageSourceIdentifierMemberEc2ImageId:
+		av := object.Key("Ec2ImageId")
+		av.String(uv.Value)
+
+	case *types.ImageSourceIdentifierMemberEc2ImportTaskId:
+		av := object.Key("Ec2ImportTaskId")
+		av.String(uv.Value)
+
+	case *types.ImageSourceIdentifierMemberImageBuildVersionArn:
+		av := object.Key("ImageBuildVersionArn")
+		av.String(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentInternetFallbackProtocolList(v []types.InternetFallbackProtocol, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -7562,6 +7708,18 @@ func awsAwsjson11_serializeOpDocumentDescribeConnectionAliasPermissionsInput(v *
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentDescribeCustomWorkspaceImageImportInput(v *DescribeCustomWorkspaceImageImportInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ImageId != nil {
+		ok := object.Key("ImageId")
+		ok.String(*v.ImageId)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentDescribeImageAssociationsInput(v *DescribeImageAssociationsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7996,6 +8154,62 @@ func awsAwsjson11_serializeOpDocumentImportClientBrandingInput(v *ImportClientBr
 	if v.ResourceId != nil {
 		ok := object.Key("ResourceId")
 		ok.String(*v.ResourceId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentImportCustomWorkspaceImageInput(v *ImportCustomWorkspaceImageInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ComputeType) > 0 {
+		ok := object.Key("ComputeType")
+		ok.String(string(v.ComputeType))
+	}
+
+	if v.ImageDescription != nil {
+		ok := object.Key("ImageDescription")
+		ok.String(*v.ImageDescription)
+	}
+
+	if v.ImageName != nil {
+		ok := object.Key("ImageName")
+		ok.String(*v.ImageName)
+	}
+
+	if v.ImageSource != nil {
+		ok := object.Key("ImageSource")
+		if err := awsAwsjson11_serializeDocumentImageSourceIdentifier(v.ImageSource, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InfrastructureConfigurationArn != nil {
+		ok := object.Key("InfrastructureConfigurationArn")
+		ok.String(*v.InfrastructureConfigurationArn)
+	}
+
+	if len(v.OsVersion) > 0 {
+		ok := object.Key("OsVersion")
+		ok.String(string(v.OsVersion))
+	}
+
+	if len(v.Platform) > 0 {
+		ok := object.Key("Platform")
+		ok.String(string(v.Platform))
+	}
+
+	if len(v.Protocol) > 0 {
+		ok := object.Key("Protocol")
+		ok.String(string(v.Protocol))
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

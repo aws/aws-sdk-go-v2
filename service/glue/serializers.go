@@ -2033,6 +2033,67 @@ func (m *awsAwsjson11_serializeOpCreateDevEndpoint) HandleSerialize(ctx context.
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpCreateGlueIdentityCenterConfiguration struct {
+}
+
+func (*awsAwsjson11_serializeOpCreateGlueIdentityCenterConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCreateGlueIdentityCenterConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateGlueIdentityCenterConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.CreateGlueIdentityCenterConfiguration")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreateGlueIdentityCenterConfigurationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpCreateIntegration struct {
 }
 
@@ -3846,6 +3907,67 @@ func (m *awsAwsjson11_serializeOpDeleteDevEndpoint) HandleSerialize(ctx context.
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentDeleteDevEndpointInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDeleteGlueIdentityCenterConfiguration struct {
+}
+
+func (*awsAwsjson11_serializeOpDeleteGlueIdentityCenterConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDeleteGlueIdentityCenterConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteGlueIdentityCenterConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.DeleteGlueIdentityCenterConfiguration")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeleteGlueIdentityCenterConfigurationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -7201,6 +7323,67 @@ func (m *awsAwsjson11_serializeOpGetEntityRecords) HandleSerialize(ctx context.C
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentGetEntityRecordsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpGetGlueIdentityCenterConfiguration struct {
+}
+
+func (*awsAwsjson11_serializeOpGetGlueIdentityCenterConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetGlueIdentityCenterConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetGlueIdentityCenterConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetGlueIdentityCenterConfiguration")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetGlueIdentityCenterConfigurationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -14538,6 +14721,67 @@ func (m *awsAwsjson11_serializeOpUpdateDevEndpoint) HandleSerialize(ctx context.
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpUpdateGlueIdentityCenterConfiguration struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateGlueIdentityCenterConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateGlueIdentityCenterConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateGlueIdentityCenterConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.UpdateGlueIdentityCenterConfiguration")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateGlueIdentityCenterConfigurationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpUpdateIntegrationResourceProperty struct {
 }
 
@@ -20659,6 +20903,17 @@ func awsAwsjson11_serializeDocumentIcebergTargetList(v []types.IcebergTarget, va
 		if err := awsAwsjson11_serializeDocumentIcebergTarget(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentIdentityCenterScopesList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }
@@ -27451,6 +27706,25 @@ func awsAwsjson11_serializeOpDocumentCreateDevEndpointInput(v *CreateDevEndpoint
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentCreateGlueIdentityCenterConfigurationInput(v *CreateGlueIdentityCenterConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InstanceArn != nil {
+		ok := object.Key("InstanceArn")
+		ok.String(*v.InstanceArn)
+	}
+
+	if v.Scopes != nil {
+		ok := object.Key("Scopes")
+		if err := awsAwsjson11_serializeDocumentIdentityCenterScopesList(v.Scopes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentCreateIntegrationInput(v *CreateIntegrationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -28532,6 +28806,13 @@ func awsAwsjson11_serializeOpDocumentDeleteDevEndpointInput(v *DeleteDevEndpoint
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentDeleteGlueIdentityCenterConfigurationInput(v *DeleteGlueIdentityCenterConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentDeleteIntegrationInput(v *DeleteIntegrationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -29609,6 +29890,13 @@ func awsAwsjson11_serializeOpDocumentGetEntityRecordsInput(v *GetEntityRecordsIn
 			return err
 		}
 	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentGetGlueIdentityCenterConfigurationInput(v *GetGlueIdentityCenterConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
 
 	return nil
 }
@@ -32807,6 +33095,20 @@ func awsAwsjson11_serializeOpDocumentUpdateDevEndpointInput(v *UpdateDevEndpoint
 	if v.UpdateEtlLibraries {
 		ok := object.Key("UpdateEtlLibraries")
 		ok.Boolean(v.UpdateEtlLibraries)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdateGlueIdentityCenterConfigurationInput(v *UpdateGlueIdentityCenterConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Scopes != nil {
+		ok := object.Key("Scopes")
+		if err := awsAwsjson11_serializeDocumentIdentityCenterScopesList(v.Scopes, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

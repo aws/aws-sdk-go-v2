@@ -1,0 +1,8 @@
+{
+    "id": "1c7e193e-5eec-4137-a52e-2df5a3d4248a",
+    "type": "feature",
+    "description": "This release adds ModifyInstanceConnectEndpoint API to update configurations on existing EC2 Instance Connect Endpoints and improves IPv6 support through dualstack DNS names for EC2 Instance Connect Endpoints.",
+    "modules": [
+        "service/ec2"
+    ]
+}

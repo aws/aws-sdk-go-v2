@@ -29,7 +29,12 @@ func (c *Client) GetNamespace(ctx context.Context, params *GetNamespaceInput, op
 
 type GetNamespaceInput struct {
 
-	// The ID of the namespace that you want to get information about.
+	// The ID or Amazon Resource Name (ARN) of the namespace that you want to get
+	// information about. For namespaces shared with your Amazon Web Services account,
+	// specify the namespace ARN. For more information about shared namespaces, see [Cross-account Cloud Map namespace sharing]in
+	// the Cloud Map Developer Guide
+	//
+	// [Cross-account Cloud Map namespace sharing]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
 	//
 	// This member is required.
 	Id *string

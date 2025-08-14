@@ -458,6 +458,18 @@ func TestCheckSnapshot_CreateDevEndpoint(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateGlueIdentityCenterConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateGlueIdentityCenterConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateGlueIdentityCenterConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateIntegration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateIntegration(context.Background(), nil, func(o *Options) {
@@ -811,6 +823,18 @@ func TestCheckSnapshot_DeleteDevEndpoint(t *testing.T) {
 	_, err := svc.DeleteDevEndpoint(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteDevEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteGlueIdentityCenterConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteGlueIdentityCenterConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteGlueIdentityCenterConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1471,6 +1495,18 @@ func TestCheckSnapshot_GetEntityRecords(t *testing.T) {
 	_, err := svc.GetEntityRecords(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetEntityRecords")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetGlueIdentityCenterConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetGlueIdentityCenterConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetGlueIdentityCenterConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2918,6 +2954,18 @@ func TestCheckSnapshot_UpdateDevEndpoint(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateGlueIdentityCenterConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateGlueIdentityCenterConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateGlueIdentityCenterConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateIntegrationResourceProperty(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateIntegrationResourceProperty(context.Background(), nil, func(o *Options) {
@@ -3493,6 +3541,18 @@ func TestUpdateSnapshot_CreateDevEndpoint(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateGlueIdentityCenterConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateGlueIdentityCenterConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateGlueIdentityCenterConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateIntegration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateIntegration(context.Background(), nil, func(o *Options) {
@@ -3846,6 +3906,18 @@ func TestUpdateSnapshot_DeleteDevEndpoint(t *testing.T) {
 	_, err := svc.DeleteDevEndpoint(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteDevEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteGlueIdentityCenterConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteGlueIdentityCenterConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteGlueIdentityCenterConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4506,6 +4578,18 @@ func TestUpdateSnapshot_GetEntityRecords(t *testing.T) {
 	_, err := svc.GetEntityRecords(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetEntityRecords")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetGlueIdentityCenterConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetGlueIdentityCenterConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetGlueIdentityCenterConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5946,6 +6030,18 @@ func TestUpdateSnapshot_UpdateDevEndpoint(t *testing.T) {
 	_, err := svc.UpdateDevEndpoint(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateDevEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateGlueIdentityCenterConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateGlueIdentityCenterConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateGlueIdentityCenterConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -10705,6 +10705,19 @@ func awsRestjson1_serializeDocument__listOf__stringPatternS(v []string, value sm
 	return nil
 }
 
+func awsRestjson1_serializeDocument__listOfAdditionalDestinations(v []types.AdditionalDestinations, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAdditionalDestinations(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocument__listOfAudioChannelMapping(v []types.AudioChannelMapping, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -11477,6 +11490,20 @@ func awsRestjson1_serializeDocumentAccountConfiguration(v *types.AccountConfigur
 	if v.KmsKeyId != nil {
 		ok := object.Key("kmsKeyId")
 		ok.String(*v.KmsKeyId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAdditionalDestinations(v *types.AdditionalDestinations, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Destination != nil {
+		ok := object.Key("destination")
+		if err := awsRestjson1_serializeDocumentOutputLocationRef(v.Destination, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -12855,6 +12882,13 @@ func awsRestjson1_serializeDocumentCmafIngestCaptionLanguageMapping(v *types.Cma
 func awsRestjson1_serializeDocumentCmafIngestGroupSettings(v *types.CmafIngestGroupSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AdditionalDestinations != nil {
+		ok := object.Key("additionalDestinations")
+		if err := awsRestjson1_serializeDocument__listOfAdditionalDestinations(v.AdditionalDestinations, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.CaptionLanguageMappings != nil {
 		ok := object.Key("captionLanguageMappings")

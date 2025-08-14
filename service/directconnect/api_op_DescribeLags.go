@@ -32,6 +32,15 @@ type DescribeLagsInput struct {
 	// The ID of the LAG.
 	LagId *string
 
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	//
+	// If MaxResults is given a value larger than 100, only 100 results are returned.
+	MaxResults *int32
+
+	// The token for the next page of results.
+	NextToken *string
+
 	noSmithyDocumentSerde
 }
 
@@ -39,6 +48,10 @@ type DescribeLagsOutput struct {
 
 	// The LAGs.
 	Lags []types.Lag
+
+	// The token to use to retrieve the next page of results. This value is null when
+	// there are no more results to return.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -4523,6 +4523,120 @@ func awsAwsjson11_deserializeOpErrorDescribeConnectionAliasPermissions(response 
 	}
 }
 
+type awsAwsjson11_deserializeOpDescribeCustomWorkspaceImageImport struct {
+}
+
+func (*awsAwsjson11_deserializeOpDescribeCustomWorkspaceImageImport) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpDescribeCustomWorkspaceImageImport) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorDescribeCustomWorkspaceImageImport(response, &metadata)
+	}
+	output := &DescribeCustomWorkspaceImageImportOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentDescribeCustomWorkspaceImageImportOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorDescribeCustomWorkspaceImageImport(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpDescribeImageAssociations struct {
 }
 
@@ -6606,6 +6720,132 @@ func awsAwsjson11_deserializeOpErrorImportClientBranding(response *smithyhttp.Re
 
 	case strings.EqualFold("InvalidParameterValuesException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterValuesException(response, errorBody)
+
+	case strings.EqualFold("ResourceLimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceLimitExceededException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpImportCustomWorkspaceImage struct {
+}
+
+func (*awsAwsjson11_deserializeOpImportCustomWorkspaceImage) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpImportCustomWorkspaceImage) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorImportCustomWorkspaceImage(response, &metadata)
+	}
+	output := &ImportCustomWorkspaceImageOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentImportCustomWorkspaceImageOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorImportCustomWorkspaceImage(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterValuesException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterValuesException(response, errorBody)
+
+	case strings.EqualFold("OperationNotSupportedException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotSupportedException(response, errorBody)
+
+	case strings.EqualFold("ResourceAlreadyExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceAlreadyExistsException(response, errorBody)
 
 	case strings.EqualFold("ResourceLimitExceededException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceLimitExceededException(response, errorBody)
@@ -13215,6 +13455,89 @@ func awsAwsjson11_deserializeDocumentConnectionAliasPermissions(v *[]types.Conne
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentCustomWorkspaceImageImportErrorDetails(v **types.CustomWorkspaceImageImportErrorDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomWorkspaceImageImportErrorDetails
+	if *v == nil {
+		sv = &types.CustomWorkspaceImageImportErrorDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ErrorCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorCode to be of type string, got %T instead", value)
+				}
+				sv.ErrorCode = ptr.String(jtv)
+			}
+
+		case "ErrorMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImageErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.ErrorMessage = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCustomWorkspaceImageImportErrorDetailsList(v *[]types.CustomWorkspaceImageImportErrorDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.CustomWorkspaceImageImportErrorDetails
+	if *v == nil {
+		cv = []types.CustomWorkspaceImageImportErrorDetails{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.CustomWorkspaceImageImportErrorDetails
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentCustomWorkspaceImageImportErrorDetails(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentDataReplicationSettings(v **types.DataReplicationSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14377,6 +14700,72 @@ func awsAwsjson11_deserializeDocumentImageResourceAssociationList(v *[]types.Ima
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentImageSourceIdentifier(v *types.ImageSourceIdentifier, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.ImageSourceIdentifier
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "Ec2ImageId":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Ec2ImageId to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.ImageSourceIdentifierMemberEc2ImageId{Value: mv}
+			break loop
+
+		case "Ec2ImportTaskId":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Ec2ImportTaskId to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.ImageSourceIdentifierMemberEc2ImportTaskId{Value: mv}
+			break loop
+
+		case "ImageBuildVersionArn":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImageBuildVersionArn to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.ImageSourceIdentifierMemberImageBuildVersionArn{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 
@@ -20018,6 +20407,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeAccountOutput(v **DescribeAccount
 				sv.DedicatedTenancySupport = types.DedicatedTenancySupportResultEnum(jtv)
 			}
 
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -20383,6 +20781,115 @@ func awsAwsjson11_deserializeOpDocumentDescribeConnectionAliasPermissionsOutput(
 					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
 				}
 				sv.NextToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentDescribeCustomWorkspaceImageImportOutput(v **DescribeCustomWorkspaceImageImportOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *DescribeCustomWorkspaceImageImportOutput
+	if *v == nil {
+		sv = &DescribeCustomWorkspaceImageImportOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Created":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Created = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "ErrorDetails":
+			if err := awsAwsjson11_deserializeDocumentCustomWorkspaceImageImportErrorDetailsList(&sv.ErrorDetails, value); err != nil {
+				return err
+			}
+
+		case "ImageBuilderInstanceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ImageBuilderInstanceId = ptr.String(jtv)
+			}
+
+		case "ImageId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WorkspaceImageId to be of type string, got %T instead", value)
+				}
+				sv.ImageId = ptr.String(jtv)
+			}
+
+		case "ImageSource":
+			if err := awsAwsjson11_deserializeDocumentImageSourceIdentifier(&sv.ImageSource, value); err != nil {
+				return err
+			}
+
+		case "InfrastructureConfigurationArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InfrastructureConfigurationArn to be of type string, got %T instead", value)
+				}
+				sv.InfrastructureConfigurationArn = ptr.String(jtv)
+			}
+
+		case "LastUpdatedTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastUpdatedTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "State":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomWorkspaceImageImportState to be of type string, got %T instead", value)
+				}
+				sv.State = types.CustomWorkspaceImageImportState(jtv)
 			}
 
 		default:
@@ -21152,6 +21659,55 @@ func awsAwsjson11_deserializeOpDocumentImportClientBrandingOutput(v **ImportClie
 	return nil
 }
 
+func awsAwsjson11_deserializeOpDocumentImportCustomWorkspaceImageOutput(v **ImportCustomWorkspaceImageOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ImportCustomWorkspaceImageOutput
+	if *v == nil {
+		sv = &ImportCustomWorkspaceImageOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ImageId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WorkspaceImageId to be of type string, got %T instead", value)
+				}
+				sv.ImageId = ptr.String(jtv)
+			}
+
+		case "State":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomWorkspaceImageImportState to be of type string, got %T instead", value)
+				}
+				sv.State = types.CustomWorkspaceImageImportState(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeOpDocumentImportWorkspaceImageOutput(v **ImportWorkspaceImageOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -21353,6 +21909,15 @@ func awsAwsjson11_deserializeOpDocumentModifyAccountOutput(v **ModifyAccountOutp
 
 	for key, value := range shape {
 		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

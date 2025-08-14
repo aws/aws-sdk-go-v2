@@ -28,8 +28,8 @@ func (c *Client) DiscoverInstancesRevision(ctx context.Context, params *Discover
 
 type DiscoverInstancesRevisionInput struct {
 
-	// The HttpName name of the namespace. It's found in the HttpProperties member of
-	// the Properties member of the namespace.
+	// The HttpName name of the namespace. The HttpName is found in the HttpProperties
+	// member of the Properties member of the namespace.
 	//
 	// This member is required.
 	NamespaceName *string
@@ -38,6 +38,15 @@ type DiscoverInstancesRevisionInput struct {
 	//
 	// This member is required.
 	ServiceName *string
+
+	// The ID of the Amazon Web Services account that owns the namespace associated
+	// with the instance, as specified in the namespace ResourceOwner field. For
+	// instances associated with namespaces that are shared with your account, you must
+	// specify an OwnerAccount . For more information about shared namespaces, see [Cross-account Cloud Map namespace sharing] in
+	// the Cloud Map Developer Guide.
+	//
+	// [Cross-account Cloud Map namespace sharing]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
+	OwnerAccount *string
 
 	noSmithyDocumentSerde
 }

@@ -1,0 +1,8 @@
+{
+    "id": "e5c4776c-8821-42c4-a2a1-50827cc11bc5",
+    "type": "feature",
+    "description": "CMAF Ingest output groups in MediaLive can now accept one additional destination url for single pipeline channels and up to two additional destination urls for standard channels.",
+    "modules": [
+        "service/medialive"
+    ]
+}

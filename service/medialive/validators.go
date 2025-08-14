@@ -2266,6 +2266,23 @@ func addOpUpdateSdiSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateSdiSource{}, middleware.After)
 }
 
+func validate__listOfAdditionalDestinations(v []types.AdditionalDestinations) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfAdditionalDestinations"}
+	for i := range v {
+		if err := validateAdditionalDestinations(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validate__listOfAudioChannelMapping(v []types.AudioChannelMapping) error {
 	if v == nil {
 		return nil
@@ -2615,6 +2632,21 @@ func validate__listOfVideoDescription(v []types.VideoDescription) error {
 		if err := validateVideoDescription(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAdditionalDestinations(v *types.AdditionalDestinations) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AdditionalDestinations"}
+	if v.Destination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3250,6 +3282,11 @@ func validateCmafIngestGroupSettings(v *types.CmafIngestGroupSettings) error {
 	if v.CaptionLanguageMappings != nil {
 		if err := validate__listOfCmafIngestCaptionLanguageMapping(v.CaptionLanguageMappings); err != nil {
 			invalidParams.AddNested("CaptionLanguageMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AdditionalDestinations != nil {
+		if err := validate__listOfAdditionalDestinations(v.AdditionalDestinations); err != nil {
+			invalidParams.AddNested("AdditionalDestinations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

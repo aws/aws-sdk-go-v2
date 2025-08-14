@@ -49,6 +49,9 @@ type DescribeAccountOutput struct {
 	// The status of BYOL (whether BYOL is enabled or disabled).
 	DedicatedTenancySupport types.DedicatedTenancySupportResultEnum
 
+	// The text message to describe the status of BYOL.
+	Message *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

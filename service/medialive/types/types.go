@@ -100,6 +100,17 @@ type AccountConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Additional output destinations for a CMAF Ingest output group
+type AdditionalDestinations struct {
+
+	// The destination location
+	//
+	// This member is required.
+	Destination *OutputLocationRef
+
+	noSmithyDocumentSerde
+}
+
 // Ancillary Source Settings
 type AncillarySourceSettings struct {
 
@@ -1574,6 +1585,10 @@ type CmafIngestGroupSettings struct {
 	//
 	// This member is required.
 	Destination *OutputLocationRef
+
+	// Optional an array of additional destinational HTTP destinations for the
+	// OutputGroup outputs
+	AdditionalDestinations []AdditionalDestinations
 
 	// An array that identifies the languages in the four caption channels in the
 	// embedded captions.

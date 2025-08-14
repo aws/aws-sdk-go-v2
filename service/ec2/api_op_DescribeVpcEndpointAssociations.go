@@ -53,8 +53,6 @@ type DescribeVpcEndpointAssociationsInput struct {
 	//
 	//   - resource-configuration-group-arn - The Amazon Resource Name (ARN) of the
 	//   resource configuration of type GROUP.
-	//
-	//   - service-network-resource-association-id - The ID of the association.
 	Filters []types.Filter
 
 	// The maximum page size.

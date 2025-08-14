@@ -1155,6 +1155,62 @@ func (SignalType) Values() []SignalType {
 	}
 }
 
+type ThreatEntitySetFormat string
+
+// Enum values for ThreatEntitySetFormat
+const (
+	ThreatEntitySetFormatTxt        ThreatEntitySetFormat = "TXT"
+	ThreatEntitySetFormatStix       ThreatEntitySetFormat = "STIX"
+	ThreatEntitySetFormatOtxCsv     ThreatEntitySetFormat = "OTX_CSV"
+	ThreatEntitySetFormatAlienVault ThreatEntitySetFormat = "ALIEN_VAULT"
+	ThreatEntitySetFormatProofPoint ThreatEntitySetFormat = "PROOF_POINT"
+	ThreatEntitySetFormatFireEye    ThreatEntitySetFormat = "FIRE_EYE"
+)
+
+// Values returns all known values for ThreatEntitySetFormat. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ThreatEntitySetFormat) Values() []ThreatEntitySetFormat {
+	return []ThreatEntitySetFormat{
+		"TXT",
+		"STIX",
+		"OTX_CSV",
+		"ALIEN_VAULT",
+		"PROOF_POINT",
+		"FIRE_EYE",
+	}
+}
+
+type ThreatEntitySetStatus string
+
+// Enum values for ThreatEntitySetStatus
+const (
+	ThreatEntitySetStatusInactive      ThreatEntitySetStatus = "INACTIVE"
+	ThreatEntitySetStatusActivating    ThreatEntitySetStatus = "ACTIVATING"
+	ThreatEntitySetStatusActive        ThreatEntitySetStatus = "ACTIVE"
+	ThreatEntitySetStatusDeactivating  ThreatEntitySetStatus = "DEACTIVATING"
+	ThreatEntitySetStatusError         ThreatEntitySetStatus = "ERROR"
+	ThreatEntitySetStatusDeletePending ThreatEntitySetStatus = "DELETE_PENDING"
+	ThreatEntitySetStatusDeleted       ThreatEntitySetStatus = "DELETED"
+)
+
+// Values returns all known values for ThreatEntitySetStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ThreatEntitySetStatus) Values() []ThreatEntitySetStatus {
+	return []ThreatEntitySetStatus{
+		"INACTIVE",
+		"ACTIVATING",
+		"ACTIVE",
+		"DEACTIVATING",
+		"ERROR",
+		"DELETE_PENDING",
+		"DELETED",
+	}
+}
+
 type ThreatIntelSetFormat string
 
 // Enum values for ThreatIntelSetFormat
@@ -1201,6 +1257,62 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ThreatIntelSetStatus) Values() []ThreatIntelSetStatus {
 	return []ThreatIntelSetStatus{
+		"INACTIVE",
+		"ACTIVATING",
+		"ACTIVE",
+		"DEACTIVATING",
+		"ERROR",
+		"DELETE_PENDING",
+		"DELETED",
+	}
+}
+
+type TrustedEntitySetFormat string
+
+// Enum values for TrustedEntitySetFormat
+const (
+	TrustedEntitySetFormatTxt        TrustedEntitySetFormat = "TXT"
+	TrustedEntitySetFormatStix       TrustedEntitySetFormat = "STIX"
+	TrustedEntitySetFormatOtxCsv     TrustedEntitySetFormat = "OTX_CSV"
+	TrustedEntitySetFormatAlienVault TrustedEntitySetFormat = "ALIEN_VAULT"
+	TrustedEntitySetFormatProofPoint TrustedEntitySetFormat = "PROOF_POINT"
+	TrustedEntitySetFormatFireEye    TrustedEntitySetFormat = "FIRE_EYE"
+)
+
+// Values returns all known values for TrustedEntitySetFormat. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TrustedEntitySetFormat) Values() []TrustedEntitySetFormat {
+	return []TrustedEntitySetFormat{
+		"TXT",
+		"STIX",
+		"OTX_CSV",
+		"ALIEN_VAULT",
+		"PROOF_POINT",
+		"FIRE_EYE",
+	}
+}
+
+type TrustedEntitySetStatus string
+
+// Enum values for TrustedEntitySetStatus
+const (
+	TrustedEntitySetStatusInactive      TrustedEntitySetStatus = "INACTIVE"
+	TrustedEntitySetStatusActivating    TrustedEntitySetStatus = "ACTIVATING"
+	TrustedEntitySetStatusActive        TrustedEntitySetStatus = "ACTIVE"
+	TrustedEntitySetStatusDeactivating  TrustedEntitySetStatus = "DEACTIVATING"
+	TrustedEntitySetStatusError         TrustedEntitySetStatus = "ERROR"
+	TrustedEntitySetStatusDeletePending TrustedEntitySetStatus = "DELETE_PENDING"
+	TrustedEntitySetStatusDeleted       TrustedEntitySetStatus = "DELETED"
+)
+
+// Values returns all known values for TrustedEntitySetStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TrustedEntitySetStatus) Values() []TrustedEntitySetStatus {
+	return []TrustedEntitySetStatus{
 		"INACTIVE",
 		"ACTIVATING",
 		"ACTIVE",

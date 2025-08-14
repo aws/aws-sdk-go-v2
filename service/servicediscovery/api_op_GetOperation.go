@@ -39,6 +39,12 @@ type GetOperationInput struct {
 	// This member is required.
 	OperationId *string
 
+	// The ID of the Amazon Web Services account that owns the namespace associated
+	// with the operation, as specified in the namespace ResourceOwner field. For
+	// operations associated with namespaces that are shared with your account, you
+	// must specify an OwnerAccount .
+	OwnerAccount *string
+
 	noSmithyDocumentSerde
 }
 

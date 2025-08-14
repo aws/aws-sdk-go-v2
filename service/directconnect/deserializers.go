@@ -7702,6 +7702,19 @@ func awsAwsjson11_deserializeDocumentBGPPeer(v **types.BGPPeer, value interface{
 				sv.Asn = int32(i64)
 			}
 
+		case "asnLong":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected LongAsn to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AsnLong = ptr.Int64(i64)
+			}
+
 		case "authKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10104,6 +10117,19 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				sv.Asn = int32(i64)
 			}
 
+		case "asnLong":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected LongAsn to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AsnLong = ptr.Int64(i64)
+			}
+
 		case "authKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11076,6 +11102,19 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				sv.Asn = int32(i64)
 			}
 
+		case "asnLong":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected LongAsn to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AsnLong = ptr.Int64(i64)
+			}
+
 		case "authKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11343,6 +11382,19 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 					return err
 				}
 				sv.Asn = int32(i64)
+			}
+
+		case "asnLong":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected LongAsn to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AsnLong = ptr.Int64(i64)
 			}
 
 		case "authKey":
@@ -12175,6 +12227,19 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 					return err
 				}
 				sv.Asn = int32(i64)
+			}
+
+		case "asnLong":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected LongAsn to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AsnLong = ptr.Int64(i64)
 			}
 
 		case "authKey":
@@ -13448,6 +13513,19 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				sv.Asn = int32(i64)
 			}
 
+		case "asnLong":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected LongAsn to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AsnLong = ptr.Int64(i64)
+			}
+
 		case "authKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13715,6 +13793,19 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 					return err
 				}
 				sv.Asn = int32(i64)
+			}
+
+		case "asnLong":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected LongAsn to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AsnLong = ptr.Int64(i64)
 			}
 
 		case "authKey":
@@ -14700,6 +14791,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeConnectionsOnInterconnectOutput(v
 				return err
 			}
 
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -14734,6 +14834,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeConnectionsOutput(v **DescribeCon
 		case "connections":
 			if err := awsAwsjson11_deserializeDocumentConnectionList(&sv.Connections, value); err != nil {
 				return err
+			}
+
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -14997,6 +15106,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeHostedConnectionsOutput(v **Descr
 				return err
 			}
 
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -15069,6 +15187,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeInterconnectsOutput(v **DescribeI
 				return err
 			}
 
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -15103,6 +15230,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeLagsOutput(v **DescribeLagsOutput
 		case "lags":
 			if err := awsAwsjson11_deserializeDocumentLagList(&sv.Lags, value); err != nil {
 				return err
+			}
+
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -15360,6 +15496,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeVirtualInterfacesOutput(v **Descr
 
 	for key, value := range shape {
 		switch key {
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
 		case "virtualInterfaces":
 			if err := awsAwsjson11_deserializeDocumentVirtualInterfaceList(&sv.VirtualInterfaces, value); err != nil {
 				return err
@@ -16432,6 +16577,19 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 					return err
 				}
 				sv.Asn = int32(i64)
+			}
+
+		case "asnLong":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected LongAsn to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AsnLong = ptr.Int64(i64)
 			}
 
 		case "authKey":

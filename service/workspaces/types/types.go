@@ -387,6 +387,19 @@ type ConnectionAliasPermission struct {
 	noSmithyDocumentSerde
 }
 
+// Describes in-depth details about the error. These details include the possible
+// causes of the error and troubleshooting information.
+type CustomWorkspaceImageImportErrorDetails struct {
+
+	// The error code that is returned for the image import.
+	ErrorCode *string
+
+	// The text of the error message that is returned for the image import.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the data replication settings.
 type DataReplicationSettings struct {
 
@@ -712,6 +725,45 @@ type ImageResourceAssociation struct {
 
 	noSmithyDocumentSerde
 }
+
+// Describes the image import source.
+//
+// The following types satisfy this interface:
+//
+//	ImageSourceIdentifierMemberEc2ImageId
+//	ImageSourceIdentifierMemberEc2ImportTaskId
+//	ImageSourceIdentifierMemberImageBuildVersionArn
+type ImageSourceIdentifier interface {
+	isImageSourceIdentifier()
+}
+
+// The identifier of the EC2 image.
+type ImageSourceIdentifierMemberEc2ImageId struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*ImageSourceIdentifierMemberEc2ImageId) isImageSourceIdentifier() {}
+
+// The EC2 import task ID to import the image from the Amazon EC2 VM import
+// process.
+type ImageSourceIdentifierMemberEc2ImportTaskId struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*ImageSourceIdentifierMemberEc2ImportTaskId) isImageSourceIdentifier() {}
+
+// The ARN of the EC2 Image Builder image.
+type ImageSourceIdentifierMemberImageBuildVersionArn struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*ImageSourceIdentifierMemberImageBuildVersionArn) isImageSourceIdentifier() {}
 
 // The client branding attributes for iOS device types. These attributes are
 // displayed on the iOS client login screen only.
@@ -1982,3 +2034,14 @@ type WorkspacesPoolSession struct {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isImageSourceIdentifier() {}

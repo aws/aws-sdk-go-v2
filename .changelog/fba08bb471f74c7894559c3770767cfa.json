@@ -1,0 +1,8 @@
+{
+    "id": "fba08bb4-71f7-4c78-9455-9c3770767cfa",
+    "type": "feature",
+    "description": "Amazon FSx for NetApp ONTAP 2nd generation file systems now support decreasing SSD storage capacity.",
+    "modules": [
+        "service/fsx"
+    ]
+}

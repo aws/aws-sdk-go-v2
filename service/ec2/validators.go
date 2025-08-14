@@ -7190,6 +7190,26 @@ func (m *validateOpModifyInstanceCapacityReservationAttributes) HandleInitialize
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpModifyInstanceConnectEndpoint struct {
+}
+
+func (*validateOpModifyInstanceConnectEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyInstanceConnectEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyInstanceConnectEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyInstanceConnectEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpModifyInstanceCpuOptions struct {
 }
 
@@ -11064,6 +11084,10 @@ func addOpModifyInstanceAttributeValidationMiddleware(stack *middleware.Stack) e
 
 func addOpModifyInstanceCapacityReservationAttributesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyInstanceCapacityReservationAttributes{}, middleware.After)
+}
+
+func addOpModifyInstanceConnectEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyInstanceConnectEndpoint{}, middleware.After)
 }
 
 func addOpModifyInstanceCpuOptionsValidationMiddleware(stack *middleware.Stack) error {
@@ -18461,6 +18485,21 @@ func validateOpModifyInstanceCapacityReservationAttributesInput(v *ModifyInstanc
 	}
 	if v.CapacityReservationSpecification == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CapacityReservationSpecification"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpModifyInstanceConnectEndpointInput(v *ModifyInstanceConnectEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyInstanceConnectEndpointInput"}
+	if v.InstanceConnectEndpointId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceConnectEndpointId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

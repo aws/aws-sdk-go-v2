@@ -38,7 +38,7 @@ type CreateThreatIntelSetInput struct {
 	Activate *bool
 
 	// The unique ID of the detector of the GuardDuty account for which you want to
-	// create a ThreatIntelSet .
+	// create a threatIntelSet .
 	//
 	// To find the detectorId in the current Region, see the Settings page in the
 	// GuardDuty console, or run the [ListDetectors]API.
