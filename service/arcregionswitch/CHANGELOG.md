@@ -1,3 +1,7 @@
+# v1.2.0 (2025-08-14)
+
+* **Feature**: Endpoint rule test and documentation update.
+
 # v1.1.0 (2025-08-11)
 
 * **Feature**: Add support for configuring per-service Options via callback on global config.

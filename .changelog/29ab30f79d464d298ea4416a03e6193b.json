@@ -1,8 +1,0 @@
-{
-    "id": "29ab30f7-9d46-4d29-8ea4-416a03e6193b",
-    "type": "feature",
-    "description": "Endpoint rule test and documentation update.",
-    "modules": [
-        "service/arcregionswitch"
-    ]
-}

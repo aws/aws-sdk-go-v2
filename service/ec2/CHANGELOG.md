@@ -1,3 +1,7 @@
+# v1.244.0 (2025-08-14)
+
+* **Feature**: This release adds ModifyInstanceConnectEndpoint API to update configurations on existing EC2 Instance Connect Endpoints and improves IPv6 support through dualstack DNS names for EC2 Instance Connect Endpoints.
+
 # v1.243.0 (2025-08-12)
 
 * **Feature**: Release to allow route table association with a PublicIpv4Pool.

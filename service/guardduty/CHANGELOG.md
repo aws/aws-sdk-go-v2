@@ -1,3 +1,7 @@
+# v1.62.0 (2025-08-14)
+
+* **Feature**: Added support for entity lists.
+
 # v1.61.0 (2025-08-11)
 
 * **Feature**: Add support for configuring per-service Options via callback on global config.

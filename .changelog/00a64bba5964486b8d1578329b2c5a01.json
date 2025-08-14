@@ -1,8 +1,0 @@
-{
-    "id": "00a64bba-5964-486b-8d15-78329b2c5a01",
-    "type": "feature",
-    "description": "Added support for entity lists.",
-    "modules": [
-        "service/guardduty"
-    ]
-}

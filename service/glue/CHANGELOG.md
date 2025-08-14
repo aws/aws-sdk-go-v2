@@ -1,3 +1,7 @@
+# v1.125.0 (2025-08-14)
+
+* **Feature**: AWS Glue now supports Trusted Identity Propagation.
+
 # v1.124.0 (2025-08-11)
 
 * **Feature**: Add support for configuring per-service Options via callback on global config.

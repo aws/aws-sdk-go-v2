@@ -1,8 +1,0 @@
-{
-    "id": "2a49a0eb-ce40-4567-b3c0-25274fe4330e",
-    "type": "documentation",
-    "description": "Documentation update for Amazon Q Apps API Reference",
-    "modules": [
-        "service/qapps"
-    ]
-}

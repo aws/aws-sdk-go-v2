@@ -1,8 +1,0 @@
-{
-    "id": "a7a7ca00-87f7-4a40-afed-d5dc85ec00b4",
-    "type": "feature",
-    "description": "Added pagination support for DescribeHostedConnections, DescribeVirtualInterfaces, DescribeConnections, DescribeInterconnects, DescribeLags. Added asnLong support for BGP peer operations which supports a large range.",
-    "modules": [
-        "service/directconnect"
-    ]
-}

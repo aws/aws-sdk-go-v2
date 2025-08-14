@@ -1,3 +1,37 @@
+# Release (2025-08-14)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/arcregionswitch`: [v1.2.0](service/arcregionswitch/CHANGELOG.md#v120-2025-08-14)
+  * **Feature**: Endpoint rule test and documentation update.
+* `github.com/aws/aws-sdk-go-v2/service/bcmrecommendedactions`: [v1.0.0](service/bcmrecommendedactions/CHANGELOG.md#v100-2025-08-14)
+  * **Release**: New AWS service client module
+  * **Feature**: Initial SDK release for AWS Billing and Cost Management Recommended Actions.
+* `github.com/aws/aws-sdk-go-v2/service/directconnect`: [v1.36.0](service/directconnect/CHANGELOG.md#v1360-2025-08-14)
+  * **Feature**: Added pagination support for DescribeHostedConnections, DescribeVirtualInterfaces, DescribeConnections, DescribeInterconnects, DescribeLags. Added asnLong support for BGP peer operations which supports a large range.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.48.0](service/dynamodb/CHANGELOG.md#v1480-2025-08-14)
+  * **Feature**: This release 1/ Adds support for throttled keys mode for CloudWatch Contributor Insights, 2/ Adds throttling reasons to exceptions across dataplane APIs. 3/ Explicitly models ThrottlingException as a class in statically typed languages. Refer to the launch day blog post for more details.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.244.0](service/ec2/CHANGELOG.md#v12440-2025-08-14)
+  * **Feature**: This release adds ModifyInstanceConnectEndpoint API to update configurations on existing EC2 Instance Connect Endpoints and improves IPv6 support through dualstack DNS names for EC2 Instance Connect Endpoints.
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.60.0](service/fsx/CHANGELOG.md#v1600-2025-08-14)
+  * **Feature**: Amazon FSx for NetApp ONTAP 2nd generation file systems now support decreasing SSD storage capacity.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.125.0](service/glue/CHANGELOG.md#v11250-2025-08-14)
+  * **Feature**: AWS Glue now supports Trusted Identity Propagation.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.62.0](service/guardduty/CHANGELOG.md#v1620-2025-08-14)
+  * **Feature**: Added support for entity lists.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.80.0](service/medialive/CHANGELOG.md#v1800-2025-08-14)
+  * **Feature**: CMAF Ingest output groups in MediaLive can now accept one additional destination url for single pipeline channels and up to two additional destination urls for standard channels.
+* `github.com/aws/aws-sdk-go-v2/service/pcs`: [v1.11.0](service/pcs/CHANGELOG.md#v1110-2025-08-14)
+  * **Feature**: Updated the regex pattern and description of iamInstanceProfileArn in the CreateComputeNodeGroup and UpdateComputeNodeGroup API actions. Name and path requirements apply to the ARN of the IAM role associated with the instance profile and not the ARN of the instance profile.
+* `github.com/aws/aws-sdk-go-v2/service/qapps`: [v1.10.1](service/qapps/CHANGELOG.md#v1101-2025-08-14)
+  * **Documentation**: Documentation update for Amazon Q Apps API Reference
+* `github.com/aws/aws-sdk-go-v2/service/servicediscovery`: [v1.39.0](service/servicediscovery/CHANGELOG.md#v1390-2025-08-14)
+  * **Feature**: Added support for cross account through Id parameter overloading with ARN and allow owner account for some APIs instead of ARN
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.62.0](service/workspaces/CHANGELOG.md#v1620-2025-08-14)
+  * **Feature**: New APIs introduced to import WorkSpaces BYOL image using a new process that leveraged EC2 Image Builder. WorkSpaces tests and fixes your image's compatibility issues and supports customized VM images.
+
 # Release (2025-08-13)
 
 ## Module Highlights

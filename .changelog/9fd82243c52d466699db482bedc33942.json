@@ -1,8 +1,0 @@
-{
-    "id": "9fd82243-c52d-4666-99db-482bedc33942",
-    "type": "feature",
-    "description": "AWS Glue now supports Trusted Identity Propagation.",
-    "modules": [
-        "service/glue"
-    ]
-}

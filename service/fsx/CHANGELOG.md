@@ -1,3 +1,7 @@
+# v1.60.0 (2025-08-14)
+
+* **Feature**: Amazon FSx for NetApp ONTAP 2nd generation file systems now support decreasing SSD storage capacity.
+
 # v1.59.0 (2025-08-13)
 
 * **Feature**: Add Dual-Stack support for Amazon FSx for OpenZFS file systems

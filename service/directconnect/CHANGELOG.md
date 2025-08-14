@@ -1,3 +1,7 @@
+# v1.36.0 (2025-08-14)
+
+* **Feature**: Added pagination support for DescribeHostedConnections, DescribeVirtualInterfaces, DescribeConnections, DescribeInterconnects, DescribeLags. Added asnLong support for BGP peer operations which supports a large range.
+
 # v1.35.0 (2025-08-11)
 
 * **Feature**: Add support for configuring per-service Options via callback on global config.

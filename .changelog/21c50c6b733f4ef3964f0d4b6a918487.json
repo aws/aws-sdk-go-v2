@@ -1,8 +1,0 @@
-{
-    "id": "21c50c6b-733f-4ef3-964f-0d4b6a918487",
-    "type": "feature",
-    "description": "Updated the regex pattern and description of iamInstanceProfileArn in the CreateComputeNodeGroup and UpdateComputeNodeGroup API actions. Name and path requirements apply to the ARN of the IAM role associated with the instance profile and not the ARN of the instance profile.",
-    "modules": [
-        "service/pcs"
-    ]
-}

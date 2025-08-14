@@ -1,3 +1,7 @@
+# v1.39.0 (2025-08-14)
+
+* **Feature**: Added support for cross account through Id parameter overloading with ARN and allow owner account for some APIs instead of ARN
+
 # v1.38.0 (2025-08-11)
 
 * **Feature**: Add support for configuring per-service Options via callback on global config.
