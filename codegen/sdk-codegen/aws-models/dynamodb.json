@@ -475,6 +475,9 @@
                 "smithy.api#documentation": "<p>Represents the settings of a target tracking scaling policy that will be\n            modified.</p>"
             }
         },
+        "com.amazonaws.dynamodb#AvailabilityErrorMessage": {
+            "type": "string"
+        },
         "com.amazonaws.dynamodb#Backfilling": {
             "type": "boolean"
         },
@@ -785,6 +788,9 @@
                 },
                 {
                     "target": "com.amazonaws.dynamodb#RequestLimitExceeded"
+                },
+                {
+                    "target": "com.amazonaws.dynamodb#ThrottlingException"
                 }
             ],
             "traits": {
@@ -852,6 +858,9 @@
                 },
                 {
                     "target": "com.amazonaws.dynamodb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.dynamodb#ThrottlingException"
                 }
             ],
             "traits": {
@@ -1181,6 +1190,9 @@
                 },
                 {
                     "target": "com.amazonaws.dynamodb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.dynamodb#ThrottlingException"
                 }
             ],
             "traits": {
@@ -1798,6 +1810,23 @@
                 }
             }
         },
+        "com.amazonaws.dynamodb#ContributorInsightsMode": {
+            "type": "enum",
+            "members": {
+                "ACCESSED_AND_THROTTLED_KEYS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESSED_AND_THROTTLED_KEYS"
+                    }
+                },
+                "THROTTLED_KEYS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THROTTLED_KEYS"
+                    }
+                }
+            }
+        },
         "com.amazonaws.dynamodb#ContributorInsightsRule": {
             "type": "string",
             "traits": {
@@ -1870,6 +1899,12 @@
                     "target": "com.amazonaws.dynamodb#ContributorInsightsStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>Describes the current status for contributor insights for the given table and index,\n            if applicable.</p>"
+                    }
+                },
+                "ContributorInsightsMode": {
+                    "target": "com.amazonaws.dynamodb#ContributorInsightsMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the current mode of CloudWatch Contributor Insights, specifying whether it\n            tracks all access and throttled events or throttled events only for the DynamoDB\n            table or index.</p>"
                     }
                 }
             },
@@ -2525,6 +2560,9 @@
                     "target": "com.amazonaws.dynamodb#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.dynamodb#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.dynamodb#TransactionConflictException"
                 }
             ],
@@ -3068,6 +3106,12 @@
                     "target": "com.amazonaws.dynamodb#FailureException",
                     "traits": {
                         "smithy.api#documentation": "<p>Returns information about the last failure that was encountered.</p>\n         <p>The most common exceptions for a FAILED status are:</p>\n         <ul>\n            <li>\n               <p>LimitExceededException - Per-account Amazon CloudWatch Contributor Insights\n                    rule limit reached. Please disable Contributor Insights for other tables/indexes\n                    OR disable Contributor Insights rules before retrying.</p>\n            </li>\n            <li>\n               <p>AccessDeniedException - Amazon CloudWatch Contributor Insights rules cannot be\n                    modified due to insufficient permissions.</p>\n            </li>\n            <li>\n               <p>AccessDeniedException - Failed to create service-linked role for Contributor\n                    Insights due to insufficient permissions.</p>\n            </li>\n            <li>\n               <p>InternalServerError - Failed to create Amazon CloudWatch Contributor Insights\n                    rules. Please retry request.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "ContributorInsightsMode": {
+                    "target": "com.amazonaws.dynamodb#ContributorInsightsMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mode of CloudWatch Contributor Insights for DynamoDB that determines\n            which events are emitted. Can be set to track all access and throttled events or throttled\n            events only.</p>"
                     }
                 }
             },
@@ -7866,9 +7910,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -7902,9 +7946,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -7954,9 +7998,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -7982,9 +8026,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8010,9 +8054,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8038,9 +8082,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8066,9 +8110,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8094,9 +8138,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8169,9 +8213,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8207,9 +8251,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8245,9 +8289,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8283,9 +8327,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8352,9 +8396,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8402,9 +8446,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8429,9 +8473,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8491,9 +8535,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8527,9 +8571,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8579,9 +8623,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8607,9 +8651,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8635,9 +8679,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8663,9 +8707,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8691,9 +8735,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8719,9 +8763,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8794,9 +8838,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8832,9 +8876,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8870,9 +8914,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8908,9 +8952,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -8977,9 +9021,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9027,9 +9071,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9054,9 +9098,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9116,9 +9160,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9152,9 +9196,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9204,9 +9248,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9232,9 +9276,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9260,9 +9304,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9288,9 +9332,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9316,9 +9360,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9344,9 +9388,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9419,9 +9463,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9457,9 +9501,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9495,9 +9539,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9533,9 +9577,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9602,9 +9646,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9652,9 +9696,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -9679,9 +9723,9 @@
                                     "properties": {
                                         "authSchemes": [
                                             {
-                                                "name": "sigv4",
                                                 "signingRegion": "us-east-1",
-                                                "signingName": "dynamodb"
+                                                "signingName": "dynamodb",
+                                                "name": "sigv4"
                                             }
                                         ]
                                     },
@@ -13740,6 +13784,9 @@
                     "target": "com.amazonaws.dynamodb#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.dynamodb#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.dynamodb#TransactionConflictException"
                 }
             ],
@@ -13847,6 +13894,9 @@
                 },
                 {
                     "target": "com.amazonaws.dynamodb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.dynamodb#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.dynamodb#TransactionCanceledException"
@@ -14484,6 +14534,9 @@
                 },
                 {
                     "target": "com.amazonaws.dynamodb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.dynamodb#ThrottlingException"
                 }
             ],
             "traits": {
@@ -17229,10 +17282,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>You exceeded your maximum allowed provisioned throughput.</p>"
                     }
+                },
+                "ThrottlingReasons": {
+                    "target": "com.amazonaws.dynamodb#ThrottlingReasonList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ThrottlingReason.html\">ThrottlingReason</a> that\n     provide detailed diagnostic information about why the request was throttled.\n    </p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Your request rate is too high. The Amazon Web Services SDKs for DynamoDB\n            automatically retry requests that receive this exception. Your request is eventually\n            successful, unless your retry queue is too large to finish. Reduce the frequency of\n            requests and use exponential backoff. For more information, go to <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Programming.Errors.html#Programming.Errors.RetryAndBackoff\">Error Retries and Exponential Backoff</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p>The request was denied due to request throttling. For detailed information about\n            why the request was throttled and the ARN of the impacted resource, find the <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ThrottlingReason.html\">ThrottlingReason</a> field in the returned exception. The Amazon Web Services\n            SDKs for DynamoDB automatically retry requests that receive this exception.\n            Your request is eventually successful, unless your retry queue is too large to finish.\n            Reduce the frequency of requests and use exponential backoff. For more information, go\n            to <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Programming.Errors.html#Programming.Errors.RetryAndBackoff\">Error Retries and Exponential Backoff</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -17328,6 +17387,9 @@
                 },
                 {
                     "target": "com.amazonaws.dynamodb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.dynamodb#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.dynamodb#TransactionConflictException"
@@ -17606,6 +17668,9 @@
                 },
                 {
                     "target": "com.amazonaws.dynamodb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.dynamodb#ThrottlingException"
                 }
             ],
             "traits": {
@@ -17804,6 +17869,9 @@
                 "smithy.api#documentation": "<p>Represents the output of a <code>Query</code> operation.</p>",
                 "smithy.api#output": {}
             }
+        },
+        "com.amazonaws.dynamodb#Reason": {
+            "type": "string"
         },
         "com.amazonaws.dynamodb#RecoveryPeriodInDays": {
             "type": "integer",
@@ -18501,12 +18569,21 @@
             "members": {
                 "message": {
                     "target": "com.amazonaws.dynamodb#ErrorMessage"
+                },
+                "ThrottlingReasons": {
+                    "target": "com.amazonaws.dynamodb#ThrottlingReasonList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ThrottlingReason.html\">ThrottlingReason</a> that\n     provide detailed diagnostic information about why the request was throttled.\n    </p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Throughput exceeds the current throughput quota for your account. Please contact\n                <a href=\"https://aws.amazon.com/support\">Amazon Web ServicesSupport</a> to request a\n            quota increase.</p>",
+                "smithy.api#documentation": "<p>Throughput exceeds the current throughput quota for your account. For detailed\n            information about why the request was throttled and the ARN of the impacted resource,\n            find the <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ThrottlingReason.html\">ThrottlingReason</a> field in the returned exception. Contact <a href=\"https://aws.amazon.com/support\">Amazon Web ServicesSupport</a> to request a quota\n            increase.</p>",
                 "smithy.api#error": "client"
             }
+        },
+        "com.amazonaws.dynamodb#Resource": {
+            "type": "string"
         },
         "com.amazonaws.dynamodb#ResourceArnString": {
             "type": "string",
@@ -19159,6 +19236,9 @@
                 },
                 {
                     "target": "com.amazonaws.dynamodb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.dynamodb#ThrottlingException"
                 }
             ],
             "traits": {
@@ -20146,6 +20226,55 @@
                 }
             }
         },
+        "com.amazonaws.dynamodb#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.dynamodb#AvailabilityErrorMessage"
+                },
+                "throttlingReasons": {
+                    "target": "com.amazonaws.dynamodb#ThrottlingReasonList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ThrottlingReason.html\">ThrottlingReason</a> that\n     provide detailed diagnostic information about why the request was throttled.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "Throttling",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The request was denied due to request throttling. For detailed information about why\n            the request was throttled and the ARN of the impacted resource, find the <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ThrottlingReason.html\">ThrottlingReason</a> field in the returned exception.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.dynamodb#ThrottlingReason": {
+            "type": "structure",
+            "members": {
+                "reason": {
+                    "target": "com.amazonaws.dynamodb#Reason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for throttling. The throttling reason follows a specific format:\n                <code>ResourceType+OperationType+LimitType</code>:</p>\n         <ul>\n            <li>\n               <p>Resource Type (What is being throttled): Table or Index</p>\n            </li>\n            <li>\n               <p>Operation Type (What kind of operation): Read or Write</p>\n            </li>\n            <li>\n               <p>Limit Type (Why the throttling occurred):</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ProvisionedThroughputExceeded</code>: The request rate is\n                            exceeding the <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html\">provisioned throughput capacity</a> (read or write capacity\n                            units) configured for a table or a global secondary index (GSI) in\n                            provisioned capacity mode.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AccountLimitExceeded</code>: The request rate has caused a table\n                            or global secondary index (GSI) in on-demand mode to exceed the <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ServiceQuotas.html#default-limits-throughput\">per-table account-level service quotas</a> for read/write\n                            throughput in the current Amazon Web Services Region. </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>KeyRangeThroughputExceeded</code>: The request rate directed at\n                            a specific partition key value has exceeded the <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-partition-key-design.html\">internal partition-level throughput limits</a>, indicating\n                            uneven access patterns across the table's or GSI's key space.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>MaxOnDemandThroughputExceeded</code>: The request rate has\n                            exceeded the <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/on-demand-capacity-mode-max-throughput.html\">configured maximum throughput limits</a> set for a table or\n                            index in on-demand capacity mode.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>Examples of complete throttling reasons:</p>\n         <ul>\n            <li>\n               <p>TableReadProvisionedThroughputExceeded</p>\n            </li>\n            <li>\n               <p>IndexWriteAccountLimitExceeded</p>\n            </li>\n         </ul>\n         <p>This helps identify exactly what resource is being throttled, what type of operation\n            caused it, and why the throttling occurred.</p>"
+                    }
+                },
+                "resource": {
+                    "target": "com.amazonaws.dynamodb#Resource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the DynamoDB table or index that experienced the\n            throttling event.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the specific reason why a DynamoDB request was throttled and the\n            ARN of the impacted resource. This helps identify exactly what resource is being throttled, \n            what type of operation caused it, and why the throttling occurred.</p>"
+            }
+        },
+        "com.amazonaws.dynamodb#ThrottlingReasonList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.dynamodb#ThrottlingReason"
+            }
+        },
         "com.amazonaws.dynamodb#TimeRangeLowerBound": {
             "type": "timestamp"
         },
@@ -20287,6 +20416,9 @@
                     "target": "com.amazonaws.dynamodb#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.dynamodb#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.dynamodb#TransactionCanceledException"
                 }
             ],
@@ -20413,6 +20545,9 @@
                 },
                 {
                     "target": "com.amazonaws.dynamodb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.dynamodb#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.dynamodb#TransactionCanceledException"
@@ -20749,6 +20884,12 @@
                         "smithy.api#documentation": "<p>Represents the contributor insights action.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "ContributorInsightsMode": {
+                    "target": "com.amazonaws.dynamodb#ContributorInsightsMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to track all access and throttled events or throttled events only for\n            the DynamoDB table or index.</p>"
+                    }
                 }
             },
             "traits": {
@@ -20774,6 +20915,12 @@
                     "target": "com.amazonaws.dynamodb#ContributorInsightsStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The status of contributor insights</p>"
+                    }
+                },
+                "ContributorInsightsMode": {
+                    "target": "com.amazonaws.dynamodb#ContributorInsightsMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated mode of CloudWatch Contributor Insights that determines whether to monitor\n            all access and throttled events or to track throttled events exclusively.</p>"
                     }
                 }
             },
@@ -21029,6 +21176,9 @@
                 },
                 {
                     "target": "com.amazonaws.dynamodb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.dynamodb#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.dynamodb#TransactionConflictException"

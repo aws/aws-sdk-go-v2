@@ -1,0 +1,997 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.bcmrecommendedactions#AWSBillingAndCostManagementRecommendedActions": {
+            "type": "service",
+            "version": "2024-11-14",
+            "operations": [
+                {
+                    "target": "com.amazonaws.bcmrecommendedactions#ListRecommendedActions"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "BCM Recommended Actions",
+                    "arnNamespace": "bcm-recommended-actions",
+                    "endpointPrefix": "bcm-recommended-actions",
+                    "docId": "bcm-recommended-actions-2024-11-14"
+                },
+                "aws.auth#sigv4": {
+                    "name": "bcm-recommended-actions"
+                },
+                "aws.endpoints#dualStackOnlyEndpoints": {},
+                "aws.endpoints#standardPartitionalEndpoints": {
+                    "endpointPatternType": "service_region_dnsSuffix"
+                },
+                "aws.protocols#awsJson1_0": {},
+                "smithy.api#documentation": "<p>You can use the Billing and Cost Management Recommended Actions API to programmatically query your best practices and recommendations to optimize your costs.</p> <p>The Billing and Cost Management Recommended Actions API provides the following endpoint:</p> <ul> <li> <p> https://bcm-recommended-actions.us-east-1.api.aws</p> </li> </ul>",
+                "smithy.api#title": "AWS Billing and Cost Management Recommended Actions",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        },
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://bcm-recommended-actions-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingRegion": "{PartitionResult#implicitGlobalRegion}"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://bcm-recommended-actions.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingRegion": "{PartitionResult#implicitGlobalRegion}"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://bcm-recommended-actions-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://bcm-recommended-actions.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "cn-northwest-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://bcm-recommended-actions-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "cn-northwest-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://bcm-recommended-actions.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-gov-west-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://bcm-recommended-actions-fips.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-gov-west-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://bcm-recommended-actions.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.bcmrecommendedactions#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "BCMRecommendedActionsAccessDenied",
+                    "httpResponseCode": 403
+                },
+                "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.bcmrecommendedactions#AccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^[0-9]{12}$"
+            }
+        },
+        "com.amazonaws.bcmrecommendedactions#ActionFilter": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.bcmrecommendedactions#FilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category to filter on. Valid values are <code>FEATURE</code> for feature type, <code>SEVERITY</code> for severity level, and <code>TYPE</code> for recommendation type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "matchOption": {
+                    "target": "com.amazonaws.bcmrecommendedactions#MatchOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how to apply the filter. Use <code>EQUALS</code> to include matching results or <code>NOT_EQUALS</code> to exclude matching results.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.bcmrecommendedactions#FilterValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more values to match against the specified key.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a filter that returns a more specific list of recommended actions.</p>"
+            }
+        },
+        "com.amazonaws.bcmrecommendedactions#ActionFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bcmrecommendedactions#ActionFilter"
+            }
+        },
+        "com.amazonaws.bcmrecommendedactions#ActionType": {
+            "type": "enum",
+            "members": {
+                "ADD_ALTERNATE_BILLING_CONTACT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADD_ALTERNATE_BILLING_CONTACT"
+                    }
+                },
+                "CREATE_ANOMALY_MONITOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_ANOMALY_MONITOR"
+                    }
+                },
+                "CREATE_BUDGET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_BUDGET"
+                    }
+                },
+                "ENABLE_COST_OPTIMIZATION_HUB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLE_COST_OPTIMIZATION_HUB"
+                    }
+                },
+                "MIGRATE_TO_GRANULAR_PERMISSIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MIGRATE_TO_GRANULAR_PERMISSIONS"
+                    }
+                },
+                "PAYMENTS_DUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PAYMENTS_DUE"
+                    }
+                },
+                "PAYMENTS_PAST_DUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PAYMENTS_PAST_DUE"
+                    }
+                },
+                "REVIEW_ANOMALIES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REVIEW_ANOMALIES"
+                    }
+                },
+                "REVIEW_BUDGET_ALERTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REVIEW_BUDGET_ALERTS"
+                    }
+                },
+                "REVIEW_BUDGETS_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REVIEW_BUDGETS_EXCEEDED"
+                    }
+                },
+                "REVIEW_EXPIRING_RI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REVIEW_EXPIRING_RI"
+                    }
+                },
+                "REVIEW_EXPIRING_SP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REVIEW_EXPIRING_SP"
+                    }
+                },
+                "REVIEW_FREETIER_USAGE_ALERTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REVIEW_FREETIER_USAGE_ALERTS"
+                    }
+                },
+                "REVIEW_SAVINGS_OPPORTUNITY_RECOMMENDATIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REVIEW_SAVINGS_OPPORTUNITY_RECOMMENDATIONS"
+                    }
+                },
+                "UPDATE_EXPIRED_PAYMENT_METHOD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_EXPIRED_PAYMENT_METHOD"
+                    }
+                },
+                "UPDATE_INVALID_PAYMENT_METHOD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_INVALID_PAYMENT_METHOD"
+                    }
+                },
+                "UPDATE_TAX_EXEMPTION_CERTIFICATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_TAX_EXEMPTION_CERTIFICATE"
+                    }
+                },
+                "UPDATE_TAX_REGISTRATION_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_TAX_REGISTRATION_NUMBER"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bcmrecommendedactions#Context": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.bcmrecommendedactions#Feature": {
+            "type": "enum",
+            "members": {
+                "ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCOUNT"
+                    }
+                },
+                "BUDGETS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BUDGETS"
+                    }
+                },
+                "COST_ANOMALY_DETECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COST_ANOMALY_DETECTION"
+                    }
+                },
+                "COST_OPTIMIZATION_HUB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COST_OPTIMIZATION_HUB"
+                    }
+                },
+                "FREE_TIER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FREE_TIER"
+                    }
+                },
+                "IAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAM"
+                    }
+                },
+                "PAYMENTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PAYMENTS"
+                    }
+                },
+                "RESERVATIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESERVATIONS"
+                    }
+                },
+                "SAVINGS_PLANS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAVINGS_PLANS"
+                    }
+                },
+                "TAX_SETTINGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TAX_SETTINGS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bcmrecommendedactions#FilterName": {
+            "type": "enum",
+            "members": {
+                "FEATURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FEATURE"
+                    }
+                },
+                "SEVERITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SEVERITY"
+                    }
+                },
+                "TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TYPE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bcmrecommendedactions#FilterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "[\\S\\s]*"
+            }
+        },
+        "com.amazonaws.bcmrecommendedactions#FilterValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bcmrecommendedactions#FilterValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.bcmrecommendedactions#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "BCMRecommendedActionsInternalServer",
+                    "httpResponseCode": 500
+                },
+                "smithy.api#documentation": "<p>An unexpected error occurred during the processing of your request.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.bcmrecommendedactions#ListRecommendedActions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bcmrecommendedactions#ListRecommendedActionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bcmrecommendedactions#ListRecommendedActionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bcmrecommendedactions#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bcmrecommendedactions#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bcmrecommendedactions#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bcmrecommendedactions#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of recommended actions that match the filter criteria.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "recommendedActions"
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListRecommendedActionsSuccess",
+                        "params": {
+                            "maxResults": 10
+                        },
+                        "expect": {
+                            "failure": {}
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.bcmrecommendedactions#ListRecommendedActionsRequest": {
+            "type": "structure",
+            "members": {
+                "filter": {
+                    "target": "com.amazonaws.bcmrecommendedactions#RequestFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria that you want all returned recommended actions to match.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.bcmrecommendedactions#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bcmrecommendedactions#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that indicates the next set of results that you want to retrieve.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bcmrecommendedactions#ListRecommendedActionsResponse": {
+            "type": "structure",
+            "members": {
+                "recommendedActions": {
+                    "target": "com.amazonaws.bcmrecommendedactions#RecommendedActions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of recommended actions that satisfy the filter criteria.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bcmrecommendedactions#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that indicates the next set of results that you want to retrieve.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bcmrecommendedactions#MatchOption": {
+            "type": "enum",
+            "members": {
+                "EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUALS"
+                    }
+                },
+                "NOT_EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_EQUALS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bcmrecommendedactions#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.bcmrecommendedactions#NextStep": {
+            "type": "string"
+        },
+        "com.amazonaws.bcmrecommendedactions#NextSteps": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bcmrecommendedactions#NextStep"
+            }
+        },
+        "com.amazonaws.bcmrecommendedactions#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 8192
+                },
+                "smithy.api#pattern": "^[\\S\\s]*$"
+            }
+        },
+        "com.amazonaws.bcmrecommendedactions#RecommendedAction": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the recommended action.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.bcmrecommendedactions#ActionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of action you can take by adopting the recommended action.</p>"
+                    }
+                },
+                "accountId": {
+                    "target": "com.amazonaws.bcmrecommendedactions#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account that the recommended action is for.</p>"
+                    }
+                },
+                "severity": {
+                    "target": "com.amazonaws.bcmrecommendedactions#Severity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The severity associated with the recommended action.</p>"
+                    }
+                },
+                "feature": {
+                    "target": "com.amazonaws.bcmrecommendedactions#Feature",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The feature associated with the recommended action.</p>"
+                    }
+                },
+                "context": {
+                    "target": "com.amazonaws.bcmrecommendedactions#Context",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Context that applies to the recommended action.</p>"
+                    }
+                },
+                "nextSteps": {
+                    "target": "com.amazonaws.bcmrecommendedactions#NextSteps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The possible next steps to execute the recommended action.</p>"
+                    }
+                },
+                "lastUpdatedTimeStamp": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the recommended action status was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a specific recommended action.</p>"
+            }
+        },
+        "com.amazonaws.bcmrecommendedactions#RecommendedActions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bcmrecommendedactions#RecommendedAction"
+            }
+        },
+        "com.amazonaws.bcmrecommendedactions#RequestFilter": {
+            "type": "structure",
+            "members": {
+                "actions": {
+                    "target": "com.amazonaws.bcmrecommendedactions#ActionFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of action filters that define criteria for filtering results. Each filter specifies a key, match option, and corresponding values to filter on.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Enables filtering of results based on specified action criteria. You can define multiple action filters to refine results using combinations of feature type, severity level, and recommendation type.</p>"
+            }
+        },
+        "com.amazonaws.bcmrecommendedactions#Severity": {
+            "type": "enum",
+            "members": {
+                "INFO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INFO"
+                    }
+                },
+                "WARNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WARNING"
+                    }
+                },
+                "CRITICAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CRITICAL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bcmrecommendedactions#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "BCMRecommendedActionsThrottling",
+                    "httpResponseCode": 429
+                },
+                "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.bcmrecommendedactions#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.bcmrecommendedactions#ValidationExceptionReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides a single, overarching explanation for the validation failure.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fieldList": {
+                    "target": "com.amazonaws.bcmrecommendedactions#ValidationExceptionFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists each problematic field and why it failed validation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "BCMRecommendedActionsValidation",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.bcmrecommendedactions#ValidationExceptionField": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the name of the field that failed validation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides a message explaining why the field failed validation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides specific details about why a particular field failed validation.</p>"
+            }
+        },
+        "com.amazonaws.bcmrecommendedactions#ValidationExceptionFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bcmrecommendedactions#ValidationExceptionField"
+            }
+        },
+        "com.amazonaws.bcmrecommendedactions#ValidationExceptionReason": {
+            "type": "enum",
+            "members": {
+                "UNKNOWN_OPERATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "unknownOperation"
+                    }
+                },
+                "CANNOT_PARSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cannotParse"
+                    }
+                },
+                "FIELD_VALIDATION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fieldValidationFailed"
+                    }
+                },
+                "OTHER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "other"
+                    }
+                }
+            }
+        }
+    }
+}

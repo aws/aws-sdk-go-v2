@@ -133,6 +133,9 @@
                     "target": "com.amazonaws.glue#CreateDevEndpoint"
                 },
                 {
+                    "target": "com.amazonaws.glue#CreateGlueIdentityCenterConfiguration"
+                },
+                {
                     "target": "com.amazonaws.glue#CreateIntegration"
                 },
                 {
@@ -221,6 +224,9 @@
                 },
                 {
                     "target": "com.amazonaws.glue#DeleteDevEndpoint"
+                },
+                {
+                    "target": "com.amazonaws.glue#DeleteGlueIdentityCenterConfiguration"
                 },
                 {
                     "target": "com.amazonaws.glue#DeleteIntegration"
@@ -386,6 +392,9 @@
                 },
                 {
                     "target": "com.amazonaws.glue#GetEntityRecords"
+                },
+                {
+                    "target": "com.amazonaws.glue#GetGlueIdentityCenterConfiguration"
                 },
                 {
                     "target": "com.amazonaws.glue#GetIntegrationResourceProperty"
@@ -746,6 +755,9 @@
                 },
                 {
                     "target": "com.amazonaws.glue#UpdateDevEndpoint"
+                },
+                {
+                    "target": "com.amazonaws.glue#UpdateGlueIdentityCenterConfiguration"
                 },
                 {
                     "target": "com.amazonaws.glue#UpdateIntegrationResourceProperty"
@@ -2451,6 +2463,15 @@
                     "max": 256
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9.-]*$"
+            }
+        },
+        "com.amazonaws.glue#ApplicationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 1224
+                }
             }
         },
         "com.amazonaws.glue#ApplyMapping": {
@@ -10501,6 +10522,75 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.glue#CreateGlueIdentityCenterConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#CreateGlueIdentityCenterConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#CreateGlueIdentityCenterConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new Glue Identity Center configuration to enable integration between Glue and Amazon Web Services IAM \n      Identity Center for authentication and authorization.</p>"
+            }
+        },
+        "com.amazonaws.glue#CreateGlueIdentityCenterConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceArn": {
+                    "target": "com.amazonaws.glue#IdentityCenterInstanceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity Center instance to be associated with the Glue configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Scopes": {
+                    "target": "com.amazonaws.glue#IdentityCenterScopesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Identity Center scopes that define the permissions and access levels for the Glue configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request to create a new Glue Identity Center configuration.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#CreateGlueIdentityCenterConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "ApplicationArn": {
+                    "target": "com.amazonaws.glue#ApplicationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity Center application that was created for the Glue configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Response from creating a new Glue Identity Center configuration.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.glue#CreateGrokClassifierRequest": {
             "type": "structure",
             "members": {
@@ -15217,6 +15307,54 @@
             "type": "structure",
             "members": {},
             "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#DeleteGlueIdentityCenterConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#DeleteGlueIdentityCenterConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#DeleteGlueIdentityCenterConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the existing Glue Identity Center configuration, removing the integration between Glue and \n      Amazon Web Services IAM Identity Center.</p>"
+            }
+        },
+        "com.amazonaws.glue#DeleteGlueIdentityCenterConfigurationRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Request to delete the existing Glue Identity Center configuration.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#DeleteGlueIdentityCenterConfigurationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Response from deleting the Glue Identity Center configuration.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -21723,6 +21861,73 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.glue#GetGlueIdentityCenterConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#GetGlueIdentityCenterConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#GetGlueIdentityCenterConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the current Glue Identity Center configuration details, including the associated Identity Center instance and \n      application information.</p>"
+            }
+        },
+        "com.amazonaws.glue#GetGlueIdentityCenterConfigurationRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Request to retrieve the Glue Identity Center configuration.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#GetGlueIdentityCenterConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "ApplicationArn": {
+                    "target": "com.amazonaws.glue#ApplicationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity Center application associated with the Glue configuration.</p>"
+                    }
+                },
+                "InstanceArn": {
+                    "target": "com.amazonaws.glue#IdentityCenterInstanceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity Center instance associated with the Glue configuration.</p>"
+                    }
+                },
+                "Scopes": {
+                    "target": "com.amazonaws.glue#OrchestrationStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Identity Center scopes that define the permissions and access levels for the Glue configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Response containing the Glue Identity Center configuration details.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.glue#GetIntegrationResourceProperty": {
             "type": "operation",
             "input": {
@@ -26960,6 +27165,36 @@
             "traits": {
                 "smithy.api#documentation": "<p>The same unique identifier was associated with two different records.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.glue#IdentityCenterInstanceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 1224
+                }
+            }
+        },
+        "com.amazonaws.glue#IdentityCenterScope": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.glue#IdentityCenterScopesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#IdentityCenterScope"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
             }
         },
         "com.amazonaws.glue#IdleTimeout": {
@@ -44845,6 +45080,61 @@
             "type": "structure",
             "members": {},
             "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#UpdateGlueIdentityCenterConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#UpdateGlueIdentityCenterConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#UpdateGlueIdentityCenterConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the existing Glue Identity Center configuration, allowing modification of scopes and permissions for the integration.</p>"
+            }
+        },
+        "com.amazonaws.glue#UpdateGlueIdentityCenterConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "Scopes": {
+                    "target": "com.amazonaws.glue#IdentityCenterScopesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Identity Center scopes that define the updated permissions and access levels for the Glue configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request to update an existing Glue Identity Center configuration.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#UpdateGlueIdentityCenterConfigurationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Response from updating an existing Glue Identity Center configuration.</p>",
                 "smithy.api#output": {}
             }
         },

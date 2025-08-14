@@ -2727,6 +2727,123 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.guardduty#CreateThreatEntitySet": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#CreateThreatEntitySetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.guardduty#CreateThreatEntitySetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new threat entity set. In a threat entity set, you can provide known malicious \n        IP addresses and domains for your Amazon Web Services environment. \n        GuardDuty generates findings based on the entries in the threat entity sets. \n        Only users of the administrator account can manage entity sets, which automatically apply\n        to member accounts.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/detector/{DetectorId}/threatentityset",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.guardduty#CreateThreatEntitySetRequest": {
+            "type": "structure",
+            "members": {
+                "DetectorId": {
+                    "target": "com.amazonaws.guardduty#DetectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty account for which you want to create a threat entity set.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#jsonName": "detectorId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.guardduty#Name",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A user-friendly name to identify the threat entity set.</p>\n         <p>\n            <b>List naming constraints</b> - The name of your list can include \n                                lowercase letters, uppercase letters, numbers, dash (-), and underscore (_).</p>",
+                        "smithy.api#jsonName": "name",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Format": {
+                    "target": "com.amazonaws.guardduty#ThreatEntitySetFormat",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The format of the file that contains the threat entity set.</p>",
+                        "smithy.api#jsonName": "format",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Location": {
+                    "target": "com.amazonaws.guardduty#Location",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The URI of the file that contains the threat entity set.</p>",
+                        "smithy.api#jsonName": "location",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.guardduty#ExpectedBucketOwner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b> parameter.</p>",
+                        "smithy.api#jsonName": "expectedBucketOwner"
+                    }
+                },
+                "Activate": {
+                    "target": "com.amazonaws.guardduty#Boolean",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A boolean value that indicates whether GuardDuty should start using the uploaded threat entity set to\n        generate findings.</p>",
+                        "smithy.api#jsonName": "activate",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.guardduty#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The idempotency token for the create request.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#jsonName": "clientToken"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.guardduty#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to be added to a new threat entity set resource.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.guardduty#CreateThreatEntitySetResponse": {
+            "type": "structure",
+            "members": {
+                "ThreatEntitySetId": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID returned by GuardDuty after creation of the threat entity set resource.</p>",
+                        "smithy.api#jsonName": "threatEntitySetId",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.guardduty#CreateThreatIntelSet": {
             "type": "operation",
             "input": {
@@ -2761,7 +2878,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty account for which you want to create a\n      <code>ThreatIntelSet</code>.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty account for which you want to create a\n      <code>threatIntelSet</code>.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -2839,6 +2956,123 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ID of the ThreatIntelSet resource.</p>",
                         "smithy.api#jsonName": "threatIntelSetId",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.guardduty#CreateTrustedEntitySet": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#CreateTrustedEntitySetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.guardduty#CreateTrustedEntitySetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new trusted entity set. In the trusted entity set, you can provide IP addresses\n      and domains that you believe are secure for communication in your Amazon Web Services environment. GuardDuty \n      will not generate findings for the entries that are specified in a trusted entity set. At any\n      given time, you can have only one trusted entity set. </p>\n         <p>Only users of the administrator account can manage the entity sets, which automatically\n     apply to member accounts.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/detector/{DetectorId}/trustedentityset",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.guardduty#CreateTrustedEntitySetRequest": {
+            "type": "structure",
+            "members": {
+                "DetectorId": {
+                    "target": "com.amazonaws.guardduty#DetectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty account for which you want to create a trusted\n      entity set.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#jsonName": "detectorId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.guardduty#Name",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A user-friendly name to identify the trusted entity set.</p>\n         <p>\n            <b>List naming constraints</b> - The name of your list can include \n                                lowercase letters, uppercase letters, numbers, dash (-), and underscore (_).</p>",
+                        "smithy.api#jsonName": "name",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Format": {
+                    "target": "com.amazonaws.guardduty#TrustedEntitySetFormat",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The format of the file that contains the trusted entity set.</p>",
+                        "smithy.api#jsonName": "format",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Location": {
+                    "target": "com.amazonaws.guardduty#Location",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The URI of the file that contains the trusted entity set.</p>",
+                        "smithy.api#jsonName": "location",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.guardduty#ExpectedBucketOwner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b>\n      parameter.</p>",
+                        "smithy.api#jsonName": "expectedBucketOwner"
+                    }
+                },
+                "Activate": {
+                    "target": "com.amazonaws.guardduty#Boolean",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A boolean value that indicates whether GuardDuty is to start using the uploaded trusted entity set.</p>",
+                        "smithy.api#jsonName": "activate",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.guardduty#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The idempotency token for the create request.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#jsonName": "clientToken"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.guardduty#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to be added to a new trusted entity set resource.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.guardduty#CreateTrustedEntitySetResponse": {
+            "type": "structure",
+            "members": {
+                "TrustedEntitySetId": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID returned by GuardDuty after creation of the trusted entity set resource.</p>",
+                        "smithy.api#jsonName": "trustedEntitySetId",
                         "smithy.api#required": {}
                     }
                 }
@@ -3657,6 +3891,64 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.guardduty#DeleteThreatEntitySet": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#DeleteThreatEntitySetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.guardduty#DeleteThreatEntitySetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the threat entity set that is associated with the specified \n       <code>threatEntitySetId</code>.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/detector/{DetectorId}/threatentityset/{ThreatEntitySetId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.guardduty#DeleteThreatEntitySetRequest": {
+            "type": "structure",
+            "members": {
+                "DetectorId": {
+                    "target": "com.amazonaws.guardduty#DetectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the detector associated with the threat entity set resource.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#jsonName": "detectorId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ThreatEntitySetId": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID that helps GuardDuty identify which threat entity set needs to be deleted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#jsonName": "threatEntitySetId",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.guardduty#DeleteThreatEntitySetResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.guardduty#DeleteThreatIntelSet": {
             "type": "operation",
             "input": {
@@ -3709,6 +4001,64 @@
             }
         },
         "com.amazonaws.guardduty#DeleteThreatIntelSetResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.guardduty#DeleteTrustedEntitySet": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#DeleteTrustedEntitySetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.guardduty#DeleteTrustedEntitySetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the trusted entity set that is associated with the specified \n       <code>trustedEntitySetId</code>.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/detector/{DetectorId}/trustedentityset/{TrustedEntitySetId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.guardduty#DeleteTrustedEntitySetRequest": {
+            "type": "structure",
+            "members": {
+                "DetectorId": {
+                    "target": "com.amazonaws.guardduty#DetectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the detector associated with the trusted entity set resource.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#jsonName": "detectorId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TrustedEntitySetId": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID that helps GuardDuty identify which trusted entity set needs to be deleted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#jsonName": "trustedEntitySetId",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.guardduty#DeleteTrustedEntitySetResponse": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -5324,6 +5674,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about the reason that the finding was generated.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#ExpectedBucketOwner": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^[0-9]+$"
             }
         },
         "com.amazonaws.guardduty#FargateDetails": {
@@ -7279,6 +7639,136 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.guardduty#GetThreatEntitySet": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#GetThreatEntitySetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.guardduty#GetThreatEntitySetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the threat entity set associated with the specified <code>threatEntitySetId</code>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/detector/{DetectorId}/threatentityset/{ThreatEntitySetId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.guardduty#GetThreatEntitySetRequest": {
+            "type": "structure",
+            "members": {
+                "DetectorId": {
+                    "target": "com.amazonaws.guardduty#DetectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the detector associated with the threat entity set resource.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#jsonName": "detectorId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ThreatEntitySetId": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID that helps GuardDuty identify the threat entity set.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#jsonName": "threatEntitySetId",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.guardduty#GetThreatEntitySetResponse": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.guardduty#Name",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the threat entity set associated with the specified <code>threatEntitySetId</code>.</p>",
+                        "smithy.api#jsonName": "name",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Format": {
+                    "target": "com.amazonaws.guardduty#ThreatEntitySetFormat",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The format of the file that contains the threat entity set.</p>",
+                        "smithy.api#jsonName": "format",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Location": {
+                    "target": "com.amazonaws.guardduty#Location",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The URI of the file that contains the threat entity set.</p>",
+                        "smithy.api#jsonName": "location",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.guardduty#ExpectedBucketOwner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b>\n       parameter.</p>",
+                        "smithy.api#jsonName": "expectedBucketOwner"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.guardduty#ThreatEntitySetStatus",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The status of the associated threat entity set.</p>",
+                        "smithy.api#jsonName": "status",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.guardduty#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with the threat entity set resource.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the associated threat entity set was created.</p>",
+                        "smithy.api#jsonName": "createdAt"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the associated threat entity set was updated.</p>",
+                        "smithy.api#jsonName": "updatedAt"
+                    }
+                },
+                "ErrorDetails": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error details when the status is shown as <code>ERROR</code>.</p>",
+                        "smithy.api#jsonName": "errorDetails"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.guardduty#GetThreatIntelSet": {
             "type": "operation",
             "input": {
@@ -7381,6 +7871,136 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b> parameter. \n      This field appears in the response only if it was provided during ThreatIntelSet creation or update.</p>",
                         "smithy.api#jsonName": "expectedBucketOwner"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.guardduty#GetTrustedEntitySet": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#GetTrustedEntitySetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.guardduty#GetTrustedEntitySetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the trusted entity set associated with the specified <code>trustedEntitySetId</code>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/detector/{DetectorId}/trustedentityset/{TrustedEntitySetId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.guardduty#GetTrustedEntitySetRequest": {
+            "type": "structure",
+            "members": {
+                "DetectorId": {
+                    "target": "com.amazonaws.guardduty#DetectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the GuardDuty detector associated with this trusted entity set.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#jsonName": "detectorId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TrustedEntitySetId": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID that helps GuardDuty identify the trusted entity set.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#jsonName": "trustedEntitySetId",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.guardduty#GetTrustedEntitySetResponse": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.guardduty#Name",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the threat entity set associated with the specified <code>trustedEntitySetId</code>.</p>",
+                        "smithy.api#jsonName": "name",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Format": {
+                    "target": "com.amazonaws.guardduty#TrustedEntitySetFormat",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The format of the file that contains the trusted entity set.</p>",
+                        "smithy.api#jsonName": "format",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Location": {
+                    "target": "com.amazonaws.guardduty#Location",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The URI of the file that contains the trusted entity set.</p>",
+                        "smithy.api#jsonName": "location",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.guardduty#ExpectedBucketOwner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b>\n       parameter.</p>",
+                        "smithy.api#jsonName": "expectedBucketOwner"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.guardduty#TrustedEntitySetStatus",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The status of the associated trusted entity set.</p>",
+                        "smithy.api#jsonName": "status",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.guardduty#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with trusted entity set resource.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the associated trusted entity set was created.</p>",
+                        "smithy.api#jsonName": "createdAt"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the associated trusted entity set was updated.</p>",
+                        "smithy.api#jsonName": "updatedAt"
+                    }
+                },
+                "ErrorDetails": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error details when the status is shown as <code>ERROR</code>.</p>",
+                        "smithy.api#jsonName": "errorDetails"
                     }
                 }
             },
@@ -7602,7 +8222,13 @@
                     "target": "com.amazonaws.guardduty#CreateSampleFindings"
                 },
                 {
+                    "target": "com.amazonaws.guardduty#CreateThreatEntitySet"
+                },
+                {
                     "target": "com.amazonaws.guardduty#CreateThreatIntelSet"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#CreateTrustedEntitySet"
                 },
                 {
                     "target": "com.amazonaws.guardduty#DeclineInvitations"
@@ -7629,7 +8255,13 @@
                     "target": "com.amazonaws.guardduty#DeletePublishingDestination"
                 },
                 {
+                    "target": "com.amazonaws.guardduty#DeleteThreatEntitySet"
+                },
+                {
                     "target": "com.amazonaws.guardduty#DeleteThreatIntelSet"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#DeleteTrustedEntitySet"
                 },
                 {
                     "target": "com.amazonaws.guardduty#DescribeMalwareScans"
@@ -7701,7 +8333,13 @@
                     "target": "com.amazonaws.guardduty#GetRemainingFreeTrialDays"
                 },
                 {
+                    "target": "com.amazonaws.guardduty#GetThreatEntitySet"
+                },
+                {
                     "target": "com.amazonaws.guardduty#GetThreatIntelSet"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#GetTrustedEntitySet"
                 },
                 {
                     "target": "com.amazonaws.guardduty#GetUsageStatistics"
@@ -7743,7 +8381,13 @@
                     "target": "com.amazonaws.guardduty#ListTagsForResource"
                 },
                 {
+                    "target": "com.amazonaws.guardduty#ListThreatEntitySets"
+                },
+                {
                     "target": "com.amazonaws.guardduty#ListThreatIntelSets"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#ListTrustedEntitySets"
                 },
                 {
                     "target": "com.amazonaws.guardduty#StartMalwareScan"
@@ -7791,7 +8435,13 @@
                     "target": "com.amazonaws.guardduty#UpdatePublishingDestination"
                 },
                 {
+                    "target": "com.amazonaws.guardduty#UpdateThreatEntitySet"
+                },
+                {
                     "target": "com.amazonaws.guardduty#UpdateThreatIntelSet"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#UpdateTrustedEntitySet"
                 }
             ],
             "traits": {
@@ -11075,6 +11725,94 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.guardduty#ListThreatEntitySets": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#ListThreatEntitySetsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.guardduty#ListThreatEntitySetsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the threat entity sets associated with the specified GuardDuty detector ID. If you use this\n      operation from a member account, the threat entity sets that are returned as a response, belong to the \n      administrator account.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/detector/{DetectorId}/threatentityset",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ThreatEntitySetIds",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.guardduty#ListThreatEntitySetsRequest": {
+            "type": "structure",
+            "members": {
+                "DetectorId": {
+                    "target": "com.amazonaws.guardduty#DetectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the GuardDuty detector that is associated with this threat entity set.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#jsonName": "detectorId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.guardduty#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can use this parameter to indicate the maximum number of \n       items you want in the response. The default value is 50.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#jsonName": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can use this parameter when paginating results. Set the value \n       of this parameter to null on your first call to the list action. For\n       subsequent calls to the action, fill nextToken in the request \n       with the value of NextToken from the previous response to continue listing data.</p>",
+                        "smithy.api#httpQuery": "nextToken",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.guardduty#ListThreatEntitySetsResponse": {
+            "type": "structure",
+            "members": {
+                "ThreatEntitySetIds": {
+                    "target": "com.amazonaws.guardduty#ThreatEntitySetIds",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The IDs of the threat entity set resources.</p>",
+                        "smithy.api#jsonName": "threatEntitySetIds",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination parameter to be used on the next list operation to retrieve more items.</p>",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.guardduty#ListThreatIntelSets": {
             "type": "operation",
             "input": {
@@ -11155,6 +11893,94 @@
                     "target": "com.amazonaws.guardduty#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The pagination parameter to be used on the next list operation to retrieve more\n      items.</p>",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.guardduty#ListTrustedEntitySets": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#ListTrustedEntitySetsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.guardduty#ListTrustedEntitySetsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the trusted entity sets associated with the specified GuardDuty detector ID. If you use this\n       operation from a member account, the trusted entity sets that are returned as a response, belong to the \n       administrator account.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/detector/{DetectorId}/trustedentityset",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "TrustedEntitySetIds",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.guardduty#ListTrustedEntitySetsRequest": {
+            "type": "structure",
+            "members": {
+                "DetectorId": {
+                    "target": "com.amazonaws.guardduty#DetectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the GuardDuty detector that is associated with this threat entity set.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#jsonName": "detectorId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.guardduty#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can use this parameter to indicate the maximum number of \n       items you want in the response. The default value is 50.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#jsonName": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can use this parameter when paginating results. Set the value \n       of this parameter to null on your first call to the list action. For\n       subsequent calls to the action, fill nextToken in the request \n       with the value of NextToken from the previous response to continue listing data.</p>",
+                        "smithy.api#httpQuery": "nextToken",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.guardduty#ListTrustedEntitySetsResponse": {
+            "type": "structure",
+            "members": {
+                "TrustedEntitySetIds": {
+                    "target": "com.amazonaws.guardduty#TrustedEntitySetIds",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The IDs of the trusted entity set resources.</p>",
+                        "smithy.api#jsonName": "trustedEntitySetIds",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination parameter to be used on the next list operation to retrieve more items.</p>",
                         "smithy.api#jsonName": "nextToken"
                     }
                 }
@@ -15870,6 +16696,118 @@
                 "smithy.api#documentation": "<p>Contains details about identified threats organized by threat name.</p>"
             }
         },
+        "com.amazonaws.guardduty#ThreatEntitySetFormat": {
+            "type": "enum",
+            "members": {
+                "TXT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TXT"
+                    }
+                },
+                "STIX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STIX"
+                    }
+                },
+                "OTX_CSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OTX_CSV"
+                    }
+                },
+                "ALIEN_VAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALIEN_VAULT"
+                    }
+                },
+                "PROOF_POINT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROOF_POINT"
+                    }
+                },
+                "FIRE_EYE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIRE_EYE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 300
+                }
+            }
+        },
+        "com.amazonaws.guardduty#ThreatEntitySetIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#String"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.guardduty#ThreatEntitySetStatus": {
+            "type": "enum",
+            "members": {
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                },
+                "ACTIVATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVATING"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "DEACTIVATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEACTIVATING"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                },
+                "DELETE_PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_PENDING"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 300
+                }
+            }
+        },
         "com.amazonaws.guardduty#ThreatIntelSetFormat": {
             "type": "enum",
             "members": {
@@ -16089,6 +17027,118 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Represents the reason the scan was triggered.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#TrustedEntitySetFormat": {
+            "type": "enum",
+            "members": {
+                "TXT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TXT"
+                    }
+                },
+                "STIX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STIX"
+                    }
+                },
+                "OTX_CSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OTX_CSV"
+                    }
+                },
+                "ALIEN_VAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALIEN_VAULT"
+                    }
+                },
+                "PROOF_POINT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROOF_POINT"
+                    }
+                },
+                "FIRE_EYE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIRE_EYE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 300
+                }
+            }
+        },
+        "com.amazonaws.guardduty#TrustedEntitySetIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#String"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.guardduty#TrustedEntitySetStatus": {
+            "type": "enum",
+            "members": {
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                },
+                "ACTIVATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVATING"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "DEACTIVATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEACTIVATING"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                },
+                "DELETE_PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_PENDING"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 300
+                }
             }
         },
         "com.amazonaws.guardduty#UnarchiveFindings": {
@@ -16997,6 +18047,92 @@
                 "smithy.api#documentation": "<p>Information about the protected S3 bucket resource.</p>"
             }
         },
+        "com.amazonaws.guardduty#UpdateThreatEntitySet": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#UpdateThreatEntitySetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.guardduty#UpdateThreatEntitySetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the threat entity set associated with the specified <code>threatEntitySetId</code>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/detector/{DetectorId}/threatentityset/{ThreatEntitySetId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.guardduty#UpdateThreatEntitySetRequest": {
+            "type": "structure",
+            "members": {
+                "DetectorId": {
+                    "target": "com.amazonaws.guardduty#DetectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the GuardDuty detector associated with the threat entity set that you want to\n      update.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#jsonName": "detectorId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ThreatEntitySetId": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID returned by GuardDuty after updating the threat entity set resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#jsonName": "threatEntitySetId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.guardduty#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A user-friendly name to identify the trusted entity set.</p>\n         <p>\n            <b>List naming constraints</b> - The name of your list can include \n                                lowercase letters, uppercase letters, numbers, dash (-), and underscore (_).</p>",
+                        "smithy.api#jsonName": "name"
+                    }
+                },
+                "Location": {
+                    "target": "com.amazonaws.guardduty#Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URI of the file that contains the trusted entity set.</p>",
+                        "smithy.api#jsonName": "location"
+                    }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.guardduty#ExpectedBucketOwner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b>\n       parameter.</p>",
+                        "smithy.api#jsonName": "expectedBucketOwner"
+                    }
+                },
+                "Activate": {
+                    "target": "com.amazonaws.guardduty#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A boolean value that indicates whether GuardDuty is to start using this updated threat entity set. After you\n      update an entity set, you will need to activate it again. It might take up to 15 minutes for the updated\n      entity set to be effective.</p>",
+                        "smithy.api#jsonName": "activate"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.guardduty#UpdateThreatEntitySetResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.guardduty#UpdateThreatIntelSet": {
             "type": "operation",
             "input": {
@@ -17080,6 +18216,92 @@
             }
         },
         "com.amazonaws.guardduty#UpdateThreatIntelSetResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.guardduty#UpdateTrustedEntitySet": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#UpdateTrustedEntitySetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.guardduty#UpdateTrustedEntitySetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the trusted entity set associated with the specified <code>trustedEntitySetId</code>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/detector/{DetectorId}/trustedentityset/{TrustedEntitySetId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.guardduty#UpdateTrustedEntitySetRequest": {
+            "type": "structure",
+            "members": {
+                "DetectorId": {
+                    "target": "com.amazonaws.guardduty#DetectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the GuardDuty detector associated with the threat entity set that you want to\n         update.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#jsonName": "detectorId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TrustedEntitySetId": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID returned by GuardDuty after updating the trusted entity set resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#jsonName": "trustedEntitySetId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.guardduty#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A user-friendly name to identify the trusted entity set.</p>\n         <p>\n            <b>List naming constraints</b> - The name of your list can include \n                                lowercase letters, uppercase letters, numbers, dash (-), and underscore (_).</p>",
+                        "smithy.api#jsonName": "name"
+                    }
+                },
+                "Location": {
+                    "target": "com.amazonaws.guardduty#Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URI of the file that contains the trusted entity set.</p>",
+                        "smithy.api#jsonName": "location"
+                    }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.guardduty#ExpectedBucketOwner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b>\n       parameter.</p>",
+                        "smithy.api#jsonName": "expectedBucketOwner"
+                    }
+                },
+                "Activate": {
+                    "target": "com.amazonaws.guardduty#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A boolean value that indicates whether GuardDuty is to start using this updated trusted entity set. After you\n       update an entity set, you will need to activate it again. It might take up to 15 minutes for the updated\n       entity set to be effective.</p>",
+                        "smithy.api#jsonName": "activate"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.guardduty#UpdateTrustedEntitySetResponse": {
             "type": "structure",
             "members": {},
             "traits": {

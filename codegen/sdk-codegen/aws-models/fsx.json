@@ -1365,6 +1365,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The remaining bytes to transfer for the FSx for OpenZFS snapshot that you're\n            copying.</p>"
                     }
+                },
+                "Message": {
+                    "target": "com.amazonaws.fsx#ErrorMessage"
                 }
             },
             "traits": {
@@ -11298,6 +11301,18 @@
                     "traits": {
                         "smithy.api#enumValue": "OPTIMIZING"
                     }
+                },
+                "PAUSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PAUSED"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
                 }
             }
         },
@@ -12434,7 +12449,7 @@
                 "DiskIopsConfiguration": {
                     "target": "com.amazonaws.fsx#DiskIopsConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The SSD IOPS (input output operations per second) configuration for an Amazon FSx for NetApp ONTAP file system. The default is 3 IOPS per GB of storage capacity,\n            but you can provision additional IOPS per GB of storage. The configuration consists\n            of an IOPS mode (<code>AUTOMATIC</code> or <code>USER_PROVISIONED</code>), and in\n            the case of <code>USER_PROVISIONED</code> IOPS, the total number of SSD IOPS provisioned. \n            For more information, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/increase-primary-storage.html\">Updating SSD storage capacity and IOPS</a>.</p>"
+                        "smithy.api#documentation": "<p>The SSD IOPS (input output operations per second) configuration for an Amazon FSx for NetApp ONTAP file system. The default is 3 IOPS per GB of storage capacity,\n            but you can provision additional IOPS per GB of storage. The configuration consists\n            of an IOPS mode (<code>AUTOMATIC</code> or <code>USER_PROVISIONED</code>), and in\n            the case of <code>USER_PROVISIONED</code> IOPS, the total number of SSD IOPS provisioned. \n            For more information, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/storage-capacity-and-IOPS.html\">File system storage capacity and IOPS</a>.</p>"
                     }
                 },
                 "ThroughputCapacity": {
@@ -12555,7 +12570,7 @@
                 "StorageCapacity": {
                     "target": "com.amazonaws.fsx#StorageCapacity",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this parameter to increase the storage capacity of an FSx for Windows File Server,\n      FSx for Lustre, FSx for OpenZFS, or FSx for ONTAP file system.\n      Specifies the storage capacity target value, in GiB, to increase the storage capacity for\n      the file system that you're updating. </p>\n         <note>\n            <p>You can't make a storage capacity increase request if there is an existing storage\n        capacity increase request in progress.</p>\n         </note>\n         <p>For Lustre file systems, the storage capacity target value can be the following:</p>\n         <ul>\n            <li>\n               <p>For <code>SCRATCH_2</code>, <code>PERSISTENT_1</code>, and <code>PERSISTENT_2 SSD</code> deployment types, valid values\n        are in multiples of 2400 GiB. The value must be greater than the current storage capacity.</p>\n            </li>\n            <li>\n               <p>For <code>PERSISTENT HDD</code> file systems, valid values are multiples of 6000 GiB for\n        12-MBps throughput per TiB file systems and multiples of 1800 GiB for 40-MBps throughput\n        per TiB file systems. The values must be greater than the current storage capacity.</p>\n            </li>\n            <li>\n               <p>For <code>SCRATCH_1</code> file systems, you can't increase the storage capacity.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html\">Managing storage and throughput\n      capacity</a> in the <i>FSx for Lustre User Guide</i>.</p>\n         <p>For FSx for OpenZFS file systems, the storage capacity target value must be at least 10 percent\n      greater than the current storage capacity value. For more information, see\n      <a href=\"https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/managing-storage-capacity.html\">Managing storage capacity</a> in the <i>FSx for OpenZFS User\n          Guide</i>.</p>\n         <p>For Windows file systems, the storage capacity target value must be at least 10 percent\n      greater than the current storage capacity value. To increase storage capacity, the file system\n      must have at least 16 MBps of throughput capacity. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html\">Managing storage\n        capacity</a> in the <i>Amazon FSxfor Windows File Server User\n          Guide</i>.</p>\n         <p>For ONTAP file systems, the storage capacity target value must be at least 10 percent\n      greater than the current storage capacity value.  For more information, see\n      <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-storage-capacity.html\">Managing storage capacity and provisioned IOPS</a> in the <i>Amazon FSx for NetApp ONTAP User\n          Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Use this parameter to increase the storage capacity of an FSx for Windows File Server,\n      FSx for Lustre, FSx for OpenZFS, or FSx for ONTAP file system.\n      For second-generation FSx for ONTAP file systems, you can also decrease the storage capacity.\n      Specifies the storage capacity target value, in GiB, for the file system that you're updating. </p>\n         <note>\n            <p>You can't make a storage capacity increase request if there is an existing storage\n        capacity increase request in progress.</p>\n         </note>\n         <p>For Lustre file systems, the storage capacity target value can be the following:</p>\n         <ul>\n            <li>\n               <p>For <code>SCRATCH_2</code>, <code>PERSISTENT_1</code>, and <code>PERSISTENT_2 SSD</code> deployment types, valid values\n        are in multiples of 2400 GiB. The value must be greater than the current storage capacity.</p>\n            </li>\n            <li>\n               <p>For <code>PERSISTENT HDD</code> file systems, valid values are multiples of 6000 GiB for\n        12-MBps throughput per TiB file systems and multiples of 1800 GiB for 40-MBps throughput\n        per TiB file systems. The values must be greater than the current storage capacity.</p>\n            </li>\n            <li>\n               <p>For <code>SCRATCH_1</code> file systems, you can't increase the storage capacity.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html\">Managing storage and throughput\n      capacity</a> in the <i>FSx for Lustre User Guide</i>.</p>\n         <p>For FSx for OpenZFS file systems, the storage capacity target value must be at least 10 percent\n      greater than the current storage capacity value. For more information, see\n      <a href=\"https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/managing-storage-capacity.html\">Managing storage capacity</a> in the <i>FSx for OpenZFS User\n          Guide</i>.</p>\n         <p>For Windows file systems, the storage capacity target value must be at least 10 percent\n      greater than the current storage capacity value. To increase storage capacity, the file system\n      must have at least 16 MBps of throughput capacity. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html\">Managing storage\n        capacity</a> in the <i>Amazon FSxfor Windows File Server User\n          Guide</i>.</p>\n         <p>For ONTAP file systems, when increasing storage capacity, the storage capacity target value must be at least 10 percent\n      greater than the current storage capacity value. When decreasing storage capacity on second-generation file systems, the target value must be at least 9 percent smaller than the current SSD storage capacity. For more information, see\n      <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/storage-capacity-and-IOPS.html\">File system storage capacity and IOPS</a> in the Amazon FSx for NetApp ONTAP User\n          Guide.</p>"
                     }
                 },
                 "WindowsConfiguration": {
