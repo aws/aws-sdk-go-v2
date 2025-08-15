@@ -1847,6 +1847,75 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.amp#DeleteResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amp#DeleteResourcePolicyRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amp#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.amp#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the resource-based policy attached to an Amazon Managed Service for Prometheus workspace.</p>",
+                "smithy.api#http": {
+                    "code": 202,
+                    "method": "DELETE",
+                    "uri": "/workspaces/{workspaceId}/policy"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.amp#DeleteResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "workspaceId": {
+                    "target": "com.amazonaws.amp#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workspace from which to delete the resource-based policy.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.amp#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the request is safe to retry (idempotent).</p>",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "revisionId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision ID of the policy to delete. Use this parameter to ensure that you are deleting the correct version of the policy.</p>",
+                        "smithy.api#httpQuery": "revisionId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.amp#DeleteRuleGroupsNamespace": {
             "type": "operation",
             "input": {
@@ -2264,6 +2333,86 @@
                     "target": "com.amazonaws.amp#QueryLoggingConfigurationMetadata",
                     "traits": {
                         "smithy.api#documentation": "<p>The detailed information about the query logging configuration for the specified workspace.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.amp#DescribeResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amp#DescribeResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amp#DescribeResourcePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amp#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.amp#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about the resource-based policy attached to an Amazon Managed Service for Prometheus workspace.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/workspaces/{workspaceId}/policy"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.amp#DescribeResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "workspaceId": {
+                    "target": "com.amazonaws.amp#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workspace to describe the resource-based policy for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.amp#DescribeResourcePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "policyDocument": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON policy document for the resource-based policy attached to the workspace.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policyStatus": {
+                    "target": "com.amazonaws.amp#WorkspacePolicyStatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the resource-based policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "revisionId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision ID of the current resource-based policy.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3439,7 +3588,7 @@
                 "aws.api#arnReference": {
                     "type": "AWS::Logs::LogGroup"
                 },
-                "smithy.api#pattern": "^arn:aws[-a-z]*:logs:[-a-z0-9]+:[0-9]{12}:log-group:[A-Za-z0-9\\.\\-\\_\\#/]{1,512}\\:\\*$"
+                "smithy.api#pattern": "^arn:aws[a-z0-9-]*:logs:[a-z0-9-]+:[0-9]{12}:log-group:[A-Za-z0-9\\.\\-\\_\\#/]{1,512}\\:\\*$"
             }
         },
         "com.amazonaws.amp#LoggingConfiguration": {
@@ -3716,6 +3865,102 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Represents the output of a <code>PutAlertManagerDefinition</code> operation.</p>"
+            }
+        },
+        "com.amazonaws.amp#PutResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amp#PutResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amp#PutResourcePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amp#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.amp#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates or updates a resource-based policy for an Amazon Managed Service for Prometheus workspace. Use resource-based policies to grant permissions to other AWS accounts or services to access your workspace.</p> <p>Only Prometheus-compatible APIs can be used for workspace sharing. You can add non-Prometheus-compatible APIs to the policy, but they will be ignored. For more information, see <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-APIReference-Prometheus-Compatible-Apis.html\">Prometheus-compatible APIs</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p> <p>If your workspace uses customer-managed KMS keys for encryption, you must grant the principals in your resource-based policy access to those KMS keys. You can do this by creating KMS grants. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateGrant.html\">CreateGrant</a> in the <i>AWS Key Management Service API Reference</i> and <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/encryption-at-rest-Amazon-Service-Prometheus.html\">Encryption at rest</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p> <p>For more information about working with IAM, see <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/security_iam_service-with-iam.html\">Using Amazon Managed Service for Prometheus with IAM</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p>",
+                "smithy.api#http": {
+                    "code": 202,
+                    "method": "PUT",
+                    "uri": "/workspaces/{workspaceId}/policy"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.amp#PutResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "workspaceId": {
+                    "target": "com.amazonaws.amp#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workspace to attach the resource-based policy to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "policyDocument": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON policy document to use as the resource-based policy. This policy defines the permissions that other AWS accounts or services have to access your workspace.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.amp#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the request is safe to retry (idempotent).</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "revisionId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision ID of the policy to update. Use this parameter to ensure that you are updating the correct version of the policy. If you don't specify a revision ID, the policy is updated regardless of its current revision.</p> <p>For the first <b>PUT</b> request on a workspace that doesn't have an existing resource policy, you can specify <code>NO_POLICY</code> as the revision ID.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.amp#PutResourcePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "policyStatus": {
+                    "target": "com.amazonaws.amp#WorkspacePolicyStatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the resource-based policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "revisionId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision ID of the newly created or updated resource-based policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.amp#PutRuleGroupsNamespace": {
@@ -5523,6 +5768,9 @@
                 },
                 {
                     "target": "com.amazonaws.amp#WorkspaceConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.amp#WorkspaceResourcePolicy"
                 }
             ],
             "traits": {
@@ -5720,6 +5968,55 @@
                     "max": 64
                 },
                 "smithy.api#pattern": "[0-9A-Za-z][-.0-9A-Z_a-z]*"
+            }
+        },
+        "com.amazonaws.amp#WorkspacePolicyStatusCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "CREATING",
+                        "value": "CREATING",
+                        "documentation": "Resource-based Policy is being created. Update/Deletion is disallowed until Resource-based Policy is ACTIVE and Workspace is ACTIVE."
+                    },
+                    {
+                        "name": "ACTIVE",
+                        "value": "ACTIVE",
+                        "documentation": "Resource-based Policy has been created/updated. Update/Deletion is disallowed until Resource-based Policy is ACTIVE and Workspace is ACTIVE."
+                    },
+                    {
+                        "name": "UPDATING",
+                        "value": "UPDATING",
+                        "documentation": "Resource-based Policy is being updated. Update/Deletion is disallowed until Resource-based Policy is ACTIVE and Workspace is ACTIVE."
+                    },
+                    {
+                        "name": "DELETING",
+                        "value": "DELETING",
+                        "documentation": "Resource-based Policy is being deleting. Update/Deletion is disallowed until Resource-based Policy is ACTIVE and Workspace is ACTIVE."
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.amp#WorkspaceResourcePolicy": {
+            "type": "resource",
+            "identifiers": {
+                "workspaceId": {
+                    "target": "com.amazonaws.amp#WorkspaceId"
+                }
+            },
+            "put": {
+                "target": "com.amazonaws.amp#PutResourcePolicy"
+            },
+            "read": {
+                "target": "com.amazonaws.amp#DescribeResourcePolicy"
+            },
+            "delete": {
+                "target": "com.amazonaws.amp#DeleteResourcePolicy"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "workspace/{workspaceId}"
+                }
             }
         },
         "com.amazonaws.amp#WorkspaceStatus": {

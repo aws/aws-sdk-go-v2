@@ -8785,6 +8785,9 @@
                 }
             }
         },
+        "com.amazonaws.glue#ContinuousSync": {
+            "type": "boolean"
+        },
         "com.amazonaws.glue#Crawl": {
             "type": "structure",
             "members": {
@@ -27534,6 +27537,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n      A collection of key-value pairs that specify additional properties for the integration source. These properties provide configuration options that \n      can be used to customize the behavior of the ODB source during data integration operations.\n    </p>"
                     }
+                },
+                "ContinuousSync": {
+                    "target": "com.amazonaws.glue#ContinuousSync",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables continuous synchronization for on-demand data extractions from SaaS applications to Amazon Web Services data services like Amazon Redshift \n      and Amazon S3.</p>"
+                    }
                 }
             },
             "traits": {
@@ -27658,7 +27667,7 @@
                 "FunctionSpec": {
                     "target": "com.amazonaws.glue#String128",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the function used to partition data on the target. The only accepted value for this parameter is `'identity'` (string). \n      The `'identity'` function ensures that the data partitioning on the target follows the same scheme as the source. In other words, the partitioning \n      structure of the source data is preserved in the target destination.</p>"
+                        "smithy.api#documentation": "<p>Specifies the function used to partition data on the target. The accepted values for this parameter are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>identity</code> - Uses source values directly without transformation</p>\n            </li>\n            <li>\n               <p>\n                  <code>year</code> - Extracts the year from timestamp values (e.g., 2023)</p>\n            </li>\n            <li>\n               <p>\n                  <code>month</code> - Extracts the month from timestamp values (e.g., 2023-01)</p>\n            </li>\n            <li>\n               <p>\n                  <code>day</code> - Extracts the day from timestamp values (e.g., 2023-01-15)</p>\n            </li>\n            <li>\n               <p>\n                  <code>hour</code> - Extracts the hour from timestamp values (e.g., 2023-01-15-14)</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ConversionSpec": {
@@ -32676,6 +32685,9 @@
                         "smithy.api#documentation": "<p>Selects source tables for the integration using Maxwell filter syntax.</p>"
                     }
                 },
+                "IntegrationConfig": {
+                    "target": "com.amazonaws.glue#IntegrationConfig"
+                },
                 "IntegrationName": {
                     "target": "com.amazonaws.glue#String128",
                     "traits": {
@@ -32767,6 +32779,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Selects source tables for the integration using Maxwell filter syntax.</p>"
                     }
+                },
+                "IntegrationConfig": {
+                    "target": "com.amazonaws.glue#IntegrationConfig"
                 }
             },
             "traits": {
