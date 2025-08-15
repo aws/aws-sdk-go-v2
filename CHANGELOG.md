@@ -1,3 +1,13 @@
+# Release (2025-08-15)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/amp`: [v1.38.0](service/amp/CHANGELOG.md#v1380-2025-08-15)
+  * **Feature**: Add Resource-based Policy APIs for Amazon Prometheus
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.49.0](service/bedrockagent/CHANGELOG.md#v1490-2025-08-15)
+  * **Feature**: This release adds support for saving Bedrock Flows while node configuration is still in progress, even if the Flow is not yet able to be invoked
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.126.0](service/glue/CHANGELOG.md#v11260-2025-08-15)
+  * **Feature**: AWS Glue Zero ETL now supports On-demand snapshot load
+
 # Release (2025-08-14)
 
 ## General Highlights

@@ -1,3 +1,7 @@
+# v1.38.0 (2025-08-15)
+
+* **Feature**: Add Resource-based Policy APIs for Amazon Prometheus
+
 # v1.37.0 (2025-08-11)
 
 * **Feature**: Add support for configuring per-service Options via callback on global config.

@@ -1,3 +1,7 @@
+# v1.126.0 (2025-08-15)
+
+* **Feature**: AWS Glue Zero ETL now supports On-demand snapshot load
+
 # v1.125.0 (2025-08-14)
 
 * **Feature**: AWS Glue now supports Trusted Identity Propagation.
