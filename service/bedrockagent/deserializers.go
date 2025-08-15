@@ -14772,7 +14772,7 @@ func awsRestjson1_deserializeDocumentAgentFlowNodeConfiguration(v **types.AgentF
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected AgentAliasArn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected FlowAgentAliasArn to be of type string, got %T instead", value)
 				}
 				sv.AgentAliasArn = ptr.String(jtv)
 			}
@@ -20689,7 +20689,7 @@ func awsRestjson1_deserializeDocumentKnowledgeBaseFlowNodeConfiguration(v **type
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected KnowledgeBaseId to be of type string, got %T instead", value)
+					return fmt.Errorf("expected FlowKnowledgeBaseId to be of type string, got %T instead", value)
 				}
 				sv.KnowledgeBaseId = ptr.String(jtv)
 			}
@@ -20971,7 +20971,7 @@ func awsRestjson1_deserializeDocumentLambdaFunctionFlowNodeConfiguration(v **typ
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected LambdaArn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected FlowLambdaArn to be of type string, got %T instead", value)
 				}
 				sv.LambdaArn = ptr.String(jtv)
 			}
@@ -21011,7 +21011,7 @@ func awsRestjson1_deserializeDocumentLexFlowNodeConfiguration(v **types.LexFlowN
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected LexBotAliasArn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected FlowLexBotAliasArn to be of type string, got %T instead", value)
 				}
 				sv.BotAliasArn = ptr.String(jtv)
 			}
@@ -21020,7 +21020,7 @@ func awsRestjson1_deserializeDocumentLexFlowNodeConfiguration(v **types.LexFlowN
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected LexBotLocaleId to be of type string, got %T instead", value)
+					return fmt.Errorf("expected FlowLexBotLocaleId to be of type string, got %T instead", value)
 				}
 				sv.LocaleId = ptr.String(jtv)
 			}
@@ -23365,7 +23365,7 @@ func awsRestjson1_deserializeDocumentPromptFlowNodeInlineConfiguration(v **types
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected PromptModelIdentifier to be of type string, got %T instead", value)
+					return fmt.Errorf("expected FlowPromptModelIdentifier to be of type string, got %T instead", value)
 				}
 				sv.ModelId = ptr.String(jtv)
 			}
@@ -23419,7 +23419,7 @@ func awsRestjson1_deserializeDocumentPromptFlowNodeResourceConfiguration(v **typ
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected PromptArn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected FlowPromptArn to be of type string, got %T instead", value)
 				}
 				sv.PromptArn = ptr.String(jtv)
 			}
@@ -25370,7 +25370,7 @@ func awsRestjson1_deserializeDocumentRetrievalFlowNodeS3Configuration(v **types.
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected S3BucketName to be of type string, got %T instead", value)
+					return fmt.Errorf("expected FlowS3BucketName to be of type string, got %T instead", value)
 				}
 				sv.BucketName = ptr.String(jtv)
 			}
@@ -26521,7 +26521,7 @@ func awsRestjson1_deserializeDocumentStorageFlowNodeS3Configuration(v **types.St
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected S3BucketName to be of type string, got %T instead", value)
+					return fmt.Errorf("expected FlowS3BucketName to be of type string, got %T instead", value)
 				}
 				sv.BucketName = ptr.String(jtv)
 			}

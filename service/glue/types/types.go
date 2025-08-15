@@ -5705,6 +5705,11 @@ type Integration struct {
 // Properties associated with the integration.
 type IntegrationConfig struct {
 
+	// Enables continuous synchronization for on-demand data extractions from SaaS
+	// applications to Amazon Web Services data services like Amazon Redshift and
+	// Amazon S3.
+	ContinuousSync *bool
+
 	// Specifies the frequency at which CDC (Change Data Capture) pulls or incremental
 	// loads should occur. This parameter provides flexibility to align the refresh
 	// rate with your specific data update patterns, system load considerations, and
@@ -5780,11 +5785,18 @@ type IntegrationPartition struct {
 	// can lead to performance issues.
 	FieldName *string
 
-	// Specifies the function used to partition data on the target. The only accepted
-	// value for this parameter is `'identity'` (string). The `'identity'` function
-	// ensures that the data partitioning on the target follows the same scheme as the
-	// source. In other words, the partitioning structure of the source data is
-	// preserved in the target destination.
+	// Specifies the function used to partition data on the target. The accepted
+	// values for this parameter are:
+	//
+	//   - identity - Uses source values directly without transformation
+	//
+	//   - year - Extracts the year from timestamp values (e.g., 2023)
+	//
+	//   - month - Extracts the month from timestamp values (e.g., 2023-01)
+	//
+	//   - day - Extracts the day from timestamp values (e.g., 2023-01-15)
+	//
+	//   - hour - Extracts the hour from timestamp values (e.g., 2023-01-15-14)
 	FunctionSpec *string
 
 	noSmithyDocumentSerde

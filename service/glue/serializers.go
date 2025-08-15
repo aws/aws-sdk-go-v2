@@ -20957,6 +20957,11 @@ func awsAwsjson11_serializeDocumentIntegrationConfig(v *types.IntegrationConfig,
 	object := value.Object()
 	defer object.Close()
 
+	if v.ContinuousSync != nil {
+		ok := object.Key("ContinuousSync")
+		ok.Boolean(*v.ContinuousSync)
+	}
+
 	if v.RefreshInterval != nil {
 		ok := object.Key("RefreshInterval")
 		ok.String(*v.RefreshInterval)
@@ -31742,6 +31747,13 @@ func awsAwsjson11_serializeOpDocumentModifyIntegrationInput(v *ModifyIntegration
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
+	}
+
+	if v.IntegrationConfig != nil {
+		ok := object.Key("IntegrationConfig")
+		if err := awsAwsjson11_serializeDocumentIntegrationConfig(v.IntegrationConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.IntegrationIdentifier != nil {

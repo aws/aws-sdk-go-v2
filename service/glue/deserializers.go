@@ -50793,6 +50793,15 @@ func awsAwsjson11_deserializeDocumentIntegrationConfig(v **types.IntegrationConf
 
 	for key, value := range shape {
 		switch key {
+		case "ContinuousSync":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected ContinuousSync to be of type *bool, got %T instead", value)
+				}
+				sv.ContinuousSync = ptr.Bool(jtv)
+			}
+
 		case "RefreshInterval":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -78781,6 +78790,11 @@ func awsAwsjson11_deserializeOpDocumentModifyIntegrationOutput(v **ModifyIntegra
 					return fmt.Errorf("expected String128 to be of type string, got %T instead", value)
 				}
 				sv.IntegrationArn = ptr.String(jtv)
+			}
+
+		case "IntegrationConfig":
+			if err := awsAwsjson11_deserializeDocumentIntegrationConfig(&sv.IntegrationConfig, value); err != nil {
+				return err
 			}
 
 		case "IntegrationName":

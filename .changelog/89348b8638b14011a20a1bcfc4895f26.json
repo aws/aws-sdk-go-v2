@@ -1,0 +1,8 @@
+{
+    "id": "89348b86-38b1-4011-a20a-1bcfc4895f26",
+    "type": "feature",
+    "description": "Add Resource-based Policy APIs for Amazon Prometheus",
+    "modules": [
+        "service/amp"
+    ]
+}
