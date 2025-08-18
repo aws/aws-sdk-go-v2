@@ -8811,6 +8811,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.connect#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.connect#InternalServiceException"
                 },
                 {
@@ -8827,7 +8830,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds a new participant into an on-going chat contact. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat-customize-flow.html\">Customize chat\n    flow experiences by integrating custom participants</a>.</p>",
+                "smithy.api#documentation": "<p>Adds a new participant into an on-going chat contact or webRTC call. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat-customize-flow.html\">Customize chat\n   flow experiences by integrating custom participants</a> \n   or <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-multiuser-inapp.html\">Enable multi-user web, in-app, and video calling</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact/create-participant",
@@ -8848,7 +8851,7 @@
                 "ContactId": {
                     "target": "com.amazonaws.connect#ContactId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the contact in this instance of Amazon Connect.  Only contacts in the CHAT channel are supported.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the contact in this instance of Amazon Connect.  Supports contacts in the CHAT channel and VOICE (WebRTC) channels. \n   For WebRTC calls, this should be the initial contact ID that was generated when \n   the contact was first created (from the StartWebRTCContact API) in the VOICE channel</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8862,7 +8865,7 @@
                 "ParticipantDetails": {
                     "target": "com.amazonaws.connect#ParticipantDetailsToAdd",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information identifying the participant.</p>\n         <important>\n            <p>The only Valid value for <code>ParticipantRole</code> is <code>CUSTOM_BOT</code>. </p>\n            <p>\n               <code>DisplayName</code> is <b>Required</b>.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>Information identifying the participant.</p>\n         <important>\n            <p>The only valid value for <code>ParticipantRole</code> is <code>CUSTOM_BOT</code> \n    for chat contact and <code>CUSTOMER</code> for voice contact.</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 }
@@ -19139,7 +19142,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the real-time metric data from the specified Amazon Connect instance.</p>\n         <p>For a description of each metric, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html\">Metrics definitions</a> in the\n     <i>Amazon Connect Administrator Guide</i>.</p>\n         <note>\n            <p>When you make a successful API request, you can expect the following metric values in the response:</p>\n            <ol>\n               <li>\n                  <p>\n                     <b>Metric value is null</b>: The calculation cannot be performed due to divide by zero or insufficient data</p>\n               </li>\n               <li>\n                  <p>\n                     <b>Metric value is a number (including 0) of defined type</b>: The number provided is the calculation result</p>\n               </li>\n               <li>\n                  <p>\n                     <b>MetricResult list is empty</b>: The request cannot find any data in the system</p>\n               </li>\n            </ol>\n            <p>The following guidelines can help you work with the API:</p>\n            <ul>\n               <li>\n                  <p>Each dimension in the metric response must contain a value</p>\n               </li>\n               <li>\n                  <p>Each item in MetricResult must include all requested metrics</p>\n               </li>\n               <li>\n                  <p>If the response is slow due to large result sets, try these approaches:</p>\n                  <ul>\n                     <li>\n                        <p>Narrow the time range of your request</p>\n                     </li>\n                     <li>\n                        <p>Add filters to reduce the amount of data returned</p>\n                     </li>\n                  </ul>\n               </li>\n            </ul>\n         </note>",
+                "smithy.api#documentation": "<p>Gets the real-time metric data from the specified Amazon Connect instance.</p>\n         <p>For a description of each metric, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html\">Metrics definitions</a> in the\n     <i>Amazon Connect Administrator Guide</i>.</p>\n         <note>\n            <p>When you make a successful API request, you can expect the following metric values in the response:</p>\n            <ol>\n               <li>\n                  <p>\n                     <b>Metric value is null</b>: The calculation cannot be performed due to divide by zero or insufficient data</p>\n               </li>\n               <li>\n                  <p>\n                     <b>Metric value is a number (including 0) of defined type</b>: The number provided is the calculation result</p>\n               </li>\n               <li>\n                  <p>\n                     <b>MetricResult list is empty</b>: The request cannot find any data in the system</p>\n               </li>\n            </ol>\n            <p>The following guidelines can help you work with the API:</p>\n            <ul>\n               <li>\n                  <p>Each dimension in the metric response must contain a value</p>\n               </li>\n               <li>\n                  <p>Each item in MetricResult must include all requested metrics</p>\n               </li>\n               <li>\n                  <p>If the response is slow due to large result sets, try these approaches:</p>\n                  <ul>\n                     <li>\n                        <p>Add filters to reduce the amount of data returned</p>\n                     </li>\n                  </ul>\n               </li>\n            </ul>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/metrics/current/{InstanceId}",
@@ -28788,6 +28791,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The display name of the participant.</p>"
                     }
+                },
+                "ParticipantCapabilities": {
+                    "target": "com.amazonaws.connect#ParticipantCapabilities"
                 }
             },
             "traits": {
