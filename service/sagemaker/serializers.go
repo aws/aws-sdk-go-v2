@@ -24490,6 +24490,16 @@ func awsAwsjson11_serializeDocumentClusterEbsVolumeConfig(v *types.ClusterEbsVol
 	object := value.Object()
 	defer object.Close()
 
+	if v.RootVolume != nil {
+		ok := object.Key("RootVolume")
+		ok.Boolean(*v.RootVolume)
+	}
+
+	if v.VolumeKmsKeyId != nil {
+		ok := object.Key("VolumeKmsKeyId")
+		ok.String(*v.VolumeKmsKeyId)
+	}
+
 	if v.VolumeSizeInGB != nil {
 		ok := object.Key("VolumeSizeInGB")
 		ok.Integer(*v.VolumeSizeInGB)

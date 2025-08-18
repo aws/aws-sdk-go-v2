@@ -4594,6 +4594,13 @@ type ParticipantDetailsToAdd struct {
 	// The display name of the participant.
 	DisplayName *string
 
+	// The configuration for the allowed video and screen sharing capabilities for
+	// participants present over the call. For more information, see [Set up in-app, web, video calling, and screen sharing capabilities]in the Amazon
+	// Connect Administrator Guide.
+	//
+	// [Set up in-app, web, video calling, and screen sharing capabilities]: https://docs.aws.amazon.com/connect/latest/adminguide/inapp-calling.html
+	ParticipantCapabilities *ParticipantCapabilities
+
 	// The role of the participant being added.
 	ParticipantRole ParticipantRole
 

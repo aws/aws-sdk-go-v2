@@ -47105,6 +47105,24 @@ func awsAwsjson11_deserializeDocumentClusterEbsVolumeConfig(v **types.ClusterEbs
 
 	for key, value := range shape {
 		switch key {
+		case "RootVolume":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.RootVolume = ptr.Bool(jtv)
+			}
+
+		case "VolumeKmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyId to be of type string, got %T instead", value)
+				}
+				sv.VolumeKmsKeyId = ptr.String(jtv)
+			}
+
 		case "VolumeSizeInGB":
 			if value != nil {
 				jtv, ok := value.(json.Number)

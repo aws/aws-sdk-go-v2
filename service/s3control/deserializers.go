@@ -16882,6 +16882,12 @@ func awsRestxml_deserializeDocumentJobOperation(v **types.JobOperation, decoder 
 				return err
 			}
 
+		case strings.EqualFold("S3ComputeObjectChecksum", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentS3ComputeObjectChecksumOperation(&sv.S3ComputeObjectChecksum, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("S3DeleteObjectTagging", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsRestxml_deserializeDocumentS3DeleteObjectTaggingOperation(&sv.S3DeleteObjectTagging, nodeDecoder); err != nil {
@@ -17086,6 +17092,19 @@ func awsRestxml_deserializeDocumentJobReport(v **types.JobReport, decoder smithy
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
 				sv.Enabled = xtv
+			}
+
+		case strings.EqualFold("ExpectedBucketOwner", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ExpectedBucketOwner = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Format", t.Name.Local):
@@ -22124,6 +22143,68 @@ func awsRestxml_deserializeDocumentS3BucketDestination(v **types.S3BucketDestina
 			{
 				xtv := string(val)
 				sv.Prefix = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentS3ComputeObjectChecksumOperation(v **types.S3ComputeObjectChecksumOperation, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.S3ComputeObjectChecksumOperation
+	if *v == nil {
+		sv = &types.S3ComputeObjectChecksumOperation{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("ChecksumAlgorithm", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ChecksumAlgorithm = types.ComputeObjectChecksumAlgorithm(xtv)
+			}
+
+		case strings.EqualFold("ChecksumType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ChecksumType = types.ComputeObjectChecksumType(xtv)
 			}
 
 		default:

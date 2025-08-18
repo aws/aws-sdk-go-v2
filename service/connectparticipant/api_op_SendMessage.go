@@ -56,9 +56,18 @@ type SendMessageInput struct {
 	// This member is required.
 	Content *string
 
-	// The type of the content. Supported types are text/plain , text/markdown ,
+	// The type of the content. Possible types are text/plain , text/markdown ,
 	// application/json , and
 	// application/vnd.amazonaws.connect.message.interactive.response .
+	//
+	// Supported types on the contact are configured through
+	// SupportedMessagingContentTypes on [StartChatContact] and [StartOutboundChatContact].
+	//
+	// For Apple Messages for Business, SMS, and WhatsApp Business Messaging contacts,
+	// only text/plain is supported.
+	//
+	// [StartOutboundChatContact]: https://docs.aws.amazon.com/connect/latest/APIReference/API_StartOutboundChatContact.html
+	// [StartChatContact]: https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html
 	//
 	// This member is required.
 	ContentType *string

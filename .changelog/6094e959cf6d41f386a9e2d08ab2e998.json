@@ -1,0 +1,8 @@
+{
+    "id": "6094e959-cf6d-41f3-86a9-e2d08ab2e998",
+    "type": "documentation",
+    "description": "Added default_x86_64 and default_arm64 as values to the instanceTypes field.",
+    "modules": [
+        "service/batch"
+    ]
+}

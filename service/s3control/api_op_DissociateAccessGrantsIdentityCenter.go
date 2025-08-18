@@ -23,6 +23,10 @@ import (
 //
 // Additional Permissions You must have the sso:DeleteApplication permission to
 // use this operation.
+//
+// You must URL encode any signed header values that contain spaces. For example,
+// if your header value is my file.txt , containing two spaces after my , you must
+// URL encode this value to my%20%20file.txt .
 func (c *Client) DissociateAccessGrantsIdentityCenter(ctx context.Context, params *DissociateAccessGrantsIdentityCenterInput, optFns ...func(*Options)) (*DissociateAccessGrantsIdentityCenterOutput, error) {
 	if params == nil {
 		params = &DissociateAccessGrantsIdentityCenterInput{}

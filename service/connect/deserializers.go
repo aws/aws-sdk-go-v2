@@ -5200,6 +5200,9 @@ func awsRestjson1_deserializeOpErrorCreateParticipant(response *smithyhttp.Respo
 	}
 
 	switch {
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("InternalServiceException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServiceException(response, errorBody)
 

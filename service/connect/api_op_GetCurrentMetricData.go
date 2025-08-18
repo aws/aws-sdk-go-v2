@@ -36,8 +36,6 @@ import (
 //
 //   - If the response is slow due to large result sets, try these approaches:
 //
-//   - Narrow the time range of your request
-//
 //   - Add filters to reduce the amount of data returned
 //
 // [Metrics definitions]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html

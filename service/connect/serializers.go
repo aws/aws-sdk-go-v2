@@ -30888,6 +30888,13 @@ func awsRestjson1_serializeDocumentParticipantDetailsToAdd(v *types.ParticipantD
 		ok.String(*v.DisplayName)
 	}
 
+	if v.ParticipantCapabilities != nil {
+		ok := object.Key("ParticipantCapabilities")
+		if err := awsRestjson1_serializeDocumentParticipantCapabilities(v.ParticipantCapabilities, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.ParticipantRole) > 0 {
 		ok := object.Key("ParticipantRole")
 		ok.String(string(v.ParticipantRole))

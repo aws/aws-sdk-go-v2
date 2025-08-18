@@ -34,9 +34,9 @@ type UpdateConsumableResourceInput struct {
 	ConsumableResource *string
 
 	// If this parameter is specified and two update requests with identical payloads
-	// and clientToken s are received, these requests are considered the same request
-	// and the second request is rejected. A clientToken is valid for 8 hours or until
-	// one hour after the consumable resource is deleted, whichever is less.
+	// and clientToken s are received, these requests are considered the same request.
+	// Both requests will succeed, but the update will only happen once. A clientToken
+	// is valid for 8 hours.
 	ClientToken *string
 
 	// Indicates how the quantity of the consumable resource will be updated. Must be

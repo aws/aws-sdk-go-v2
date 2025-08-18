@@ -15,7 +15,11 @@ import (
 //
 // For security recommendations, see [Amazon Connect Chat security best practices].
 //
-// ConnectionToken is used for invoking this API instead of ParticipantToken .
+//   - The participant role CUSTOM_BOT is not permitted to access attachments
+//     customers may upload. An AccessDeniedException can indicate that the
+//     participant may be a CUSTOM_BOT, and it doesn't have access to attachments.
+//
+//   - ConnectionToken is used for invoking this API instead of ParticipantToken .
 //
 // The Amazon Connect Participant Service APIs do not use [Signature Version 4 authentication].
 //

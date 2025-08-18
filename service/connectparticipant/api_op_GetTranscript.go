@@ -21,9 +21,11 @@ import (
 // has ended, note that chat transcripts contain the following event content types
 // if the event has occurred during the chat session:
 //
-//   - application/vnd.amazonaws.connect.event.participant.left
+//   - application/vnd.amazonaws.connect.event.participant.invited
 //
 //   - application/vnd.amazonaws.connect.event.participant.joined
+//
+//   - application/vnd.amazonaws.connect.event.participant.left
 //
 //   - application/vnd.amazonaws.connect.event.chat.ended
 //

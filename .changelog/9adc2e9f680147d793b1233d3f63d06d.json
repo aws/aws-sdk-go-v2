@@ -1,0 +1,8 @@
+{
+    "id": "9adc2e9f-6801-47d7-93b1-233d3f63d06d",
+    "type": "feature",
+    "description": "Customer managed keys now available for volume encryption of SageMaker HyperPod clusters.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

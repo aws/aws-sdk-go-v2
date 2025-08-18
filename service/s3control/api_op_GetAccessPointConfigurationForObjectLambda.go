@@ -24,6 +24,10 @@ import (
 //
 // [PutAccessPointConfigurationForObjectLambda]
 //
+// You must URL encode any signed header values that contain spaces. For example,
+// if your header value is my file.txt , containing two spaces after my , you must
+// URL encode this value to my%20%20file.txt .
+//
 // [PutAccessPointConfigurationForObjectLambda]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointConfigurationForObjectLambda.html
 func (c *Client) GetAccessPointConfigurationForObjectLambda(ctx context.Context, params *GetAccessPointConfigurationForObjectLambdaInput, optFns ...func(*Options)) (*GetAccessPointConfigurationForObjectLambdaOutput, error) {
 	if params == nil {
