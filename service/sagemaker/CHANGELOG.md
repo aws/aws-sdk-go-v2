@@ -1,3 +1,7 @@
+# v1.210.0 (2025-08-18)
+
+* **Feature**: Customer managed keys now available for volume encryption of SageMaker HyperPod clusters.
+
 # v1.209.0 (2025-08-13)
 
 * **Feature**: This release introduces compute quota for GPU, Trainium accelerators, vCPU, and vCPU memory utilization across teams in HyperPod clusters

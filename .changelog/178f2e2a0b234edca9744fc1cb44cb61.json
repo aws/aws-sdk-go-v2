@@ -1,8 +1,0 @@
-{
-    "id": "178f2e2a-0b23-4edc-a974-4fc1cb44cb61",
-    "type": "feature",
-    "description": "Amazon Connect Service Feature: Add support to enable multi-user in-app, web, and video calling.",
-    "modules": [
-        "service/connect"
-    ]
-}

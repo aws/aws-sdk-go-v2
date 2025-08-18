@@ -1,3 +1,20 @@
+# Release (2025-08-18)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.57.1](service/batch/CHANGELOG.md#v1571-2025-08-18)
+  * **Documentation**: Added default_x86_64 and default_arm64 as values to the instanceTypes field.
+* `github.com/aws/aws-sdk-go-v2/service/bcmdashboards`: [v1.0.0](service/bcmdashboards/CHANGELOG.md#v100-2025-08-18)
+  * **Release**: New AWS service client module
+  * **Feature**: Billing and Cost Management Dashboards enables users to create dashboards that combine multiple visualizations of cost and usage data. Users can create, manage, and share dashboards. Tags are also available for dashboards.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.136.0](service/connect/CHANGELOG.md#v11360-2025-08-18)
+  * **Feature**: Amazon Connect Service Feature: Add support to enable multi-user in-app, web, and video calling.
+* `github.com/aws/aws-sdk-go-v2/service/connectparticipant`: [v1.33.0](service/connectparticipant/CHANGELOG.md#v1330-2025-08-18)
+  * **Feature**: Amazon Connect Service Feature: Add support to enable multi-user in-app, web, and video calling.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.65.0](service/s3control/CHANGELOG.md#v1650-2025-08-18)
+  * **Feature**: Adds support for Compute checksum functionality in Amazon S3 Batch Operations. You can now calculate checksums for a list of objects using supported algorithms in Amazon S3, without requiring a restore or download
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.210.0](service/sagemaker/CHANGELOG.md#v12100-2025-08-18)
+  * **Feature**: Customer managed keys now available for volume encryption of SageMaker HyperPod clusters.
+
 # Release (2025-08-15)
 
 ## Module Highlights

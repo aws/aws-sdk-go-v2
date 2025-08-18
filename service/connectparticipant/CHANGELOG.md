@@ -1,3 +1,7 @@
+# v1.33.0 (2025-08-18)
+
+* **Feature**: Amazon Connect Service Feature: Add support to enable multi-user in-app, web, and video calling.
+
 # v1.32.0 (2025-08-11)
 
 * **Feature**: Add support for configuring per-service Options via callback on global config.

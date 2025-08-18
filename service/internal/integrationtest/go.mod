@@ -8,7 +8,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.244.0
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.76.0
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.87.0
-	github.com/aws/aws-sdk-go-v2/service/s3control v1.64.0
+	github.com/aws/aws-sdk-go-v2/service/s3control v1.65.0
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.41.0
 	github.com/aws/aws-sdk-go-v2/service/sts v1.37.0
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.30.0

@@ -1,3 +1,7 @@
+# v1.57.1 (2025-08-18)
+
+* **Documentation**: Added default_x86_64 and default_arm64 as values to the instanceTypes field.
+
 # v1.57.0 (2025-08-11)
 
 * **Feature**: Add support for configuring per-service Options via callback on global config.

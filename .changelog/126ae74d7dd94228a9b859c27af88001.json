@@ -1,8 +1,0 @@
-{
-    "id": "126ae74d-7dd9-4228-a9b8-59c27af88001",
-    "type": "feature",
-    "description": "Adds support for Compute checksum functionality in Amazon S3 Batch Operations. You can now calculate checksums for a list of objects using supported algorithms in Amazon S3, without requiring a restore or download",
-    "modules": [
-        "service/s3control"
-    ]
-}

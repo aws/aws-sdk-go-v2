@@ -1,3 +1,7 @@
+# v1.65.0 (2025-08-18)
+
+* **Feature**: Adds support for Compute checksum functionality in Amazon S3 Batch Operations. You can now calculate checksums for a list of objects using supported algorithms in Amazon S3, without requiring a restore or download
+
 # v1.64.0 (2025-08-11)
 
 * **Feature**: Add support for configuring per-service Options via callback on global config.
