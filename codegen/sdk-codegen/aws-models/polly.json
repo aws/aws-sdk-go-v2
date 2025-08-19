@@ -1193,6 +1193,12 @@
                         "smithy.api#enumValue": "mp3"
                     }
                 },
+                "OGG_OPUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ogg_opus"
+                    }
+                },
                 "OGG_VORBIS": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -2726,7 +2732,7 @@
                 "Engine": {
                     "target": "com.amazonaws.polly#Engine",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the engine (<code>standard</code>, <code>neural</code>,\n      <code>long-form</code>, or <code>generative</code>) for Amazon Polly\n      to use when processing input text for speech synthesis. Provide an engine\n      that is supported by the voice you select. If you don't provide an engine,\n      the standard engine is selected by default. If a chosen voice isn't supported\n      by the standard engine, this will result in an error. For information on\n      Amazon Polly voices and which voices are available for each engine, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/voicelist.html\">Available Voices</a>.</p>\n         <p>Type: String</p>\n         <p>Valid Values: <code>standard</code> | <code>neural</code> |\n      <code>long-form</code> | <code>generative</code>\n         </p>\n         <p>Required: Yes</p>"
+                        "smithy.api#documentation": "<p>Specifies the engine (<code>standard</code>, <code>neural</code>,\n      <code>long-form</code>, or <code>generative</code>) for Amazon Polly\n      to use when processing input text for speech synthesis. Provide an engine\n      that is supported by the voice you select. If you don't provide an engine,\n      the standard engine is selected by default. If a chosen voice isn't supported\n      by the standard engine, this will result in an error. For information on\n      Amazon Polly voices and which voices are available for each engine, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/voicelist.html\">Available Voices</a>.</p>"
                     }
                 },
                 "LanguageCode": {
@@ -2751,7 +2757,7 @@
                 "SampleRate": {
                     "target": "com.amazonaws.polly#SampleRate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The audio frequency specified in Hz.</p>\n         <p>The valid values for mp3 and ogg_vorbis are \"8000\", \"16000\", \"22050\",\n      and \"24000\". The default value for standard voices is \"22050\". The default\n      value for neural voices is \"24000\". The default value for long-form voices\n      is \"24000\". The default value for generative voices is \"24000\".</p>\n         <p>Valid values for pcm are \"8000\" and \"16000\" The default value is\n      \"16000\". </p>"
+                        "smithy.api#documentation": "<p>The audio frequency specified in Hz.</p>\n         <p>The valid values for mp3 and ogg_vorbis are \"8000\", \"16000\", \"22050\", \"24000\", \"44100\" and \"48000\". The default value for standard voices is \"22050\". The default\n      value for neural voices is \"24000\". The default value for long-form voices\n      is \"24000\". The default value for generative voices is \"24000\".</p>\n         <p>Valid values for pcm are \"8000\" and \"16000\" The default value is\n      \"16000\". </p>"
                     }
                 },
                 "SpeechMarkTypes": {
