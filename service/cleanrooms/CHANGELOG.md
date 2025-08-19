@@ -1,3 +1,7 @@
+# v1.30.0 (2025-08-19)
+
+* **Feature**: Support error message configuration for analysis templates
+
 # v1.29.0 (2025-08-11)
 
 * **Feature**: Add support for configuring per-service Options via callback on global config.

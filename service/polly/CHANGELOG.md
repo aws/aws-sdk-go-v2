@@ -1,3 +1,7 @@
+# v1.52.0 (2025-08-19)
+
+* **Feature**: Added support for new output format - Opus.
+
 # v1.51.0 (2025-08-11)
 
 * **Feature**: Add support for configuring per-service Options via callback on global config.

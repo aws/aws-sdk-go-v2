@@ -1,3 +1,13 @@
+# Release (2025-08-19)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.30.0](service/cleanrooms/CHANGELOG.md#v1300-2025-08-19)
+  * **Feature**: Support error message configuration for analysis templates
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.245.0](service/ec2/CHANGELOG.md#v12450-2025-08-19)
+  * **Feature**: Add support for "warning" volume status.
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.52.0](service/polly/CHANGELOG.md#v1520-2025-08-19)
+  * **Feature**: Added support for new output format - Opus.
+
 # Release (2025-08-18)
 
 ## Module Highlights

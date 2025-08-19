@@ -1,8 +1,0 @@
-{
-    "id": "73ac4fc7-d04c-4961-9ba4-2b0ba40a378b",
-    "type": "feature",
-    "description": "Support error message configuration for analysis templates",
-    "modules": [
-        "service/cleanrooms"
-    ]
-}

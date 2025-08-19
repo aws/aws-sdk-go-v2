@@ -1,8 +1,0 @@
-{
-    "id": "43b35a8c-4e5c-4387-984c-e86f13f1d88e",
-    "type": "feature",
-    "description": "Added support for new output format - Opus.",
-    "modules": [
-        "service/polly"
-    ]
-}
