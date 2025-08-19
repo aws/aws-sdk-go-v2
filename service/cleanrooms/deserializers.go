@@ -14684,6 +14684,11 @@ func awsRestjson1_deserializeDocumentAnalysisTemplate(v **types.AnalysisTemplate
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "errorMessageConfiguration":
+			if err := awsRestjson1_deserializeDocumentErrorMessageConfiguration(&sv.ErrorMessageConfiguration, value); err != nil {
+				return err
+			}
+
 		case "format":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16010,6 +16015,11 @@ func awsRestjson1_deserializeDocumentCollaborationAnalysisTemplate(v **types.Col
 					return fmt.Errorf("expected ResourceDescription to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "errorMessageConfiguration":
+			if err := awsRestjson1_deserializeDocumentErrorMessageConfiguration(&sv.ErrorMessageConfiguration, value); err != nil {
+				return err
 			}
 
 		case "format":
@@ -20325,6 +20335,46 @@ func awsRestjson1_deserializeDocumentDirectAnalysisConfigurationDetails(v **type
 		case "receiverAccountIds":
 			if err := awsRestjson1_deserializeDocumentReceiverAccountIds(&sv.ReceiverAccountIds, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentErrorMessageConfiguration(v **types.ErrorMessageConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ErrorMessageConfiguration
+	if *v == nil {
+		sv = &types.ErrorMessageConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessageType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.ErrorMessageType(jtv)
 			}
 
 		default:

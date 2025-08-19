@@ -1,0 +1,8 @@
+{
+    "id": "b6bb04bd-38c7-4900-96aa-e77ac24da478",
+    "type": "feature",
+    "description": "Add support for \"warning\" volume status.",
+    "modules": [
+        "service/ec2"
+    ]
+}

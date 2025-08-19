@@ -2397,6 +2397,21 @@ func validateDifferentialPrivacyTemplateParametersInput(v *types.DifferentialPri
 	}
 }
 
+func validateErrorMessageConfiguration(v *types.ErrorMessageConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ErrorMessageConfiguration"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateGlueTableReference(v *types.GlueTableReference) error {
 	if v == nil {
 		return nil
@@ -3326,6 +3341,11 @@ func validateOpCreateAnalysisTemplateInput(v *CreateAnalysisTemplateInput) error
 	if v.AnalysisParameters != nil {
 		if err := validateAnalysisParameterList(v.AnalysisParameters); err != nil {
 			invalidParams.AddNested("AnalysisParameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ErrorMessageConfiguration != nil {
+		if err := validateErrorMessageConfiguration(v.ErrorMessageConfiguration); err != nil {
+			invalidParams.AddNested("ErrorMessageConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

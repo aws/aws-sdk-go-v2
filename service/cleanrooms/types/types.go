@@ -425,6 +425,13 @@ type AnalysisTemplate struct {
 	// The description of the analysis template.
 	Description *string
 
+	// The configuration that specifies the level of detail in error messages returned
+	// by analyses using this template. When set to DETAILED , error messages include
+	// more information to help troubleshoot issues with PySpark jobs. Detailed error
+	// messages may expose underlying data, including sensitive information.
+	// Recommended for faster troubleshooting in development and testing environments.
+	ErrorMessageConfiguration *ErrorMessageConfiguration
+
 	//  The source metadata for the analysis template.
 	SourceMetadata AnalysisSourceMetadata
 
@@ -836,6 +843,13 @@ type CollaborationAnalysisTemplate struct {
 
 	// The description of the analysis template.
 	Description *string
+
+	// The configuration that specifies the level of detail in error messages returned
+	// by analyses using this template. When set to DETAILED , error messages include
+	// more information to help troubleshoot issues with PySpark jobs. Detailed error
+	// messages may expose underlying data, including sensitive information.
+	// Recommended for faster troubleshooting in development and testing environments.
+	ErrorMessageConfiguration *ErrorMessageConfiguration
 
 	// The source of the analysis template within a collaboration.
 	Source AnalysisSource
@@ -2471,6 +2485,25 @@ type DirectAnalysisConfigurationDetails struct {
 
 	//  The account IDs for the member who received the results of a protected query.
 	ReceiverAccountIds []string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that defines the level of detail included in error messages
+// returned by PySpark jobs. This configuration allows you to control the verbosity
+// of error messages to help with troubleshooting PySpark jobs while maintaining
+// appropriate security controls.
+type ErrorMessageConfiguration struct {
+
+	// The level of detail for error messages returned by the PySpark job. When set to
+	// DETAILED, error messages include more information to help troubleshoot issues
+	// with your PySpark job.
+	//
+	// Because this setting may expose sensitive data, it is recommended for
+	// development and testing environments.
+	//
+	// This member is required.
+	Type ErrorMessageType
 
 	noSmithyDocumentSerde
 }

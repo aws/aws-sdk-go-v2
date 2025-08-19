@@ -149,6 +149,7 @@ type OutputFormat string
 const (
 	OutputFormatJson      OutputFormat = "json"
 	OutputFormatMp3       OutputFormat = "mp3"
+	OutputFormatOggOpus   OutputFormat = "ogg_opus"
 	OutputFormatOggVorbis OutputFormat = "ogg_vorbis"
 	OutputFormatPcm       OutputFormat = "pcm"
 )
@@ -161,6 +162,7 @@ func (OutputFormat) Values() []OutputFormat {
 	return []OutputFormat{
 		"json",
 		"mp3",
+		"ogg_opus",
 		"ogg_vorbis",
 		"pcm",
 	}

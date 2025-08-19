@@ -371,6 +371,23 @@ func (DifferentialPrivacyAggregationType) Values() []DifferentialPrivacyAggregat
 	}
 }
 
+type ErrorMessageType string
+
+// Enum values for ErrorMessageType
+const (
+	ErrorMessageTypeDetailed ErrorMessageType = "DETAILED"
+)
+
+// Values returns all known values for ErrorMessageType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ErrorMessageType) Values() []ErrorMessageType {
+	return []ErrorMessageType{
+		"DETAILED",
+	}
+}
+
 type FilterableMemberStatus string
 
 // Enum values for FilterableMemberStatus
