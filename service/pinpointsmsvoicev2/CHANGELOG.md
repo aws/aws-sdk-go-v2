@@ -1,3 +1,8 @@
+# v1.24.0 (2025-08-20)
+
+* **Feature**: This change added InternationalSendingEnbaled as part of describe/Update/Request phone number API response, and as part of update/Request phone number API request
+* **Bug Fix**: Remove unused deserialization code.
+
 # v1.23.0 (2025-08-11)
 
 * **Feature**: Add support for configuring per-service Options via callback on global config.

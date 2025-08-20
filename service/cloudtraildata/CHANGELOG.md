@@ -1,3 +1,7 @@
+# v1.15.2 (2025-08-20)
+
+* **Bug Fix**: Remove unused deserialization code.
+
 # v1.15.1 (2025-08-12)
 
 * No change notes available for this release.

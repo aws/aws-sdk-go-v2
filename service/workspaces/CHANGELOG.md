@@ -1,3 +1,7 @@
+# v1.62.1 (2025-08-20)
+
+* **Bug Fix**: Remove unused deserialization code.
+
 # v1.62.0 (2025-08-14)
 
 * **Feature**: New APIs introduced to import WorkSpaces BYOL image using a new process that leveraged EC2 Image Builder. WorkSpaces tests and fixes your image's compatibility issues and supports customized VM images.

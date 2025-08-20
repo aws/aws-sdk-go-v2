@@ -1,3 +1,7 @@
+# v1.126.1 (2025-08-20)
+
+* **Bug Fix**: Remove unused deserialization code.
+
 # v1.126.0 (2025-08-15)
 
 * **Feature**: AWS Glue Zero ETL now supports On-demand snapshot load

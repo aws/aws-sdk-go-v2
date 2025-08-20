@@ -1,3 +1,7 @@
+# v1.80.1 (2025-08-20)
+
+* **Bug Fix**: Remove unused deserialization code.
+
 # v1.80.0 (2025-08-14)
 
 * **Feature**: CMAF Ingest output groups in MediaLive can now accept one additional destination url for single pipeline channels and up to two additional destination urls for standard channels.

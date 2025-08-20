@@ -1,3 +1,8 @@
+# v1.36.0 (2025-08-20)
+
+* **Feature**: Adds Key Management Service (KMS) support allowing customer-managed key (CMK) encryption for Flink application data.
+* **Bug Fix**: Remove unused deserialization code.
+
 # v1.35.0 (2025-08-11)
 
 * **Feature**: Add support for configuring per-service Options via callback on global config.

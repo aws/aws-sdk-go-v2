@@ -1,3 +1,7 @@
+# v1.41.1 (2025-08-20)
+
+* **Bug Fix**: Remove unused deserialization code.
+
 # v1.41.0 (2025-08-11)
 
 * **Feature**: Add support for configuring per-service Options via callback on global config.

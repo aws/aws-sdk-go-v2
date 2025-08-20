@@ -1,8 +1,0 @@
-{
-    "id": "f810ea29-2b0f-44f0-abcc-2bd1c10cdc24",
-    "type": "feature",
-    "description": "Adds Key Management Service (KMS) support allowing customer-managed key (CMK) encryption for Flink application data.",
-    "modules": [
-        "service/kinesisanalyticsv2"
-    ]
-}

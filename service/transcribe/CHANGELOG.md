@@ -1,3 +1,7 @@
+# v1.51.1 (2025-08-20)
+
+* **Bug Fix**: Remove unused deserialization code.
+
 # v1.51.0 (2025-08-12)
 
 * **Feature**: AWS HealthScribe now supports specifying preferred patient pronouns through the MedicalScribeContext parameter for use in the generated clinical notes.

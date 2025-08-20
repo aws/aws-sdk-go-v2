@@ -1,3 +1,7 @@
+# v1.10.2 (2025-08-20)
+
+* **Bug Fix**: Remove unused deserialization code.
+
 # v1.10.1 (2025-08-14)
 
 * **Documentation**: Documentation update for Amazon Q Apps API Reference

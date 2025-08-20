@@ -1,3 +1,51 @@
+# Release (2025-08-20)
+
+## General Highlights
+* **Bug Fix**: Remove unused deserialization code.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.37.0](service/bedrockruntime/CHANGELOG.md#v1370-2025-08-20)
+  * **Feature**: Launch CountTokens API to allow token counting
+* `github.com/aws/aws-sdk-go-v2/service/billing`: [v1.7.0](service/billing/CHANGELOG.md#v170-2025-08-20)
+  * **Feature**: Clarify IPv4 and IPv6 endpoints
+* `github.com/aws/aws-sdk-go-v2/service/budgets`: [v1.37.0](service/budgets/CHANGELOG.md#v1370-2025-08-20)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.57.0](service/cognitoidentityprovider/CHANGELOG.md#v1570-2025-08-20)
+  * **Feature**: This release adds support for the new Terms APIs which allow displaying Terms of Use and Privacy Policy on the Managed Login user-registration page.
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.55.0](service/costexplorer/CHANGELOG.md#v1550-2025-08-20)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.38.0](service/datazone/CHANGELOG.md#v1380-2025-08-20)
+  * **Feature**: This release supports policy grant identifier for cloud formation integration
+* `github.com/aws/aws-sdk-go-v2/service/detective`: [v1.37.0](service/detective/CHANGELOG.md#v1370-2025-08-20)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.49.0](service/dynamodb/CHANGELOG.md#v1490-2025-08-20)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/efs`: [v1.40.0](service/efs/CHANGELOG.md#v1400-2025-08-20)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.71.0](service/eks/CHANGELOG.md#v1710-2025-08-20)
+  * **Feature**: EKS Add-ons Custom Namespace Support
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.47.0](service/iam/CHANGELOG.md#v1470-2025-08-20)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/kinesis`: [v1.39.0](service/kinesis/CHANGELOG.md#v1390-2025-08-20)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2`: [v1.36.0](service/kinesisanalyticsv2/CHANGELOG.md#v1360-2025-08-20)
+  * **Feature**: Adds Key Management Service (KMS) support allowing customer-managed key (CMK) encryption for Flink application data.
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice`: [v1.33.0](service/marketplaceentitlementservice/CHANGELOG.md#v1330-2025-08-20)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/marketplacemetering`: [v1.33.0](service/marketplacemetering/CHANGELOG.md#v1330-2025-08-20)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/networkmanager`: [v1.39.0](service/networkmanager/CHANGELOG.md#v1390-2025-08-20)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2`: [v1.24.0](service/pinpointsmsvoicev2/CHANGELOG.md#v1240-2025-08-20)
+  * **Feature**: This change added InternationalSendingEnbaled as part of describe/Update/Request phone number API response, and as part of update/Request phone number API request
+* `github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig`: [v1.31.0](service/route53recoverycontrolconfig/CHANGELOG.md#v1310-2025-08-20)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.211.0](service/sagemaker/CHANGELOG.md#v12110-2025-08-20)
+  * **Feature**: This release adds 1/ Launch ml.p5.4xlarge instance in Processing jobs, Training jobs and Training Plan 2/ Makes S3Uri to be required for S3FileSystem and S3FileSystemConfig.
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.52.0](service/sesv2/CHANGELOG.md#v1520-2025-08-20)
+  * **Feature**: Remove incorrect endpoint tests
+
 # Release (2025-08-19)
 
 ## Module Highlights

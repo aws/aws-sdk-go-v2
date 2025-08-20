@@ -1,3 +1,7 @@
+# v1.8.1 (2025-08-20)
+
+* **Bug Fix**: Remove unused deserialization code.
+
 # v1.8.0 (2025-08-13)
 
 * **Feature**: Added support for Organizational Unit-level Membership configuration and the ability to resume a cancelled membership.

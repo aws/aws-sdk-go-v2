@@ -1,3 +1,7 @@
+# v1.66.1 (2025-08-20)
+
+* **Bug Fix**: Remove unused deserialization code.
+
 # v1.66.0 (2025-08-12)
 
 * **Feature**: AWS CodeBuild now supports PullRequestBuildPolicy in webhook object.

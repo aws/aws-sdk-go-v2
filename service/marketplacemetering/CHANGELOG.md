@@ -1,3 +1,8 @@
+# v1.33.0 (2025-08-20)
+
+* **Feature**: Remove incorrect endpoint tests
+* **Bug Fix**: Remove unused deserialization code.
+
 # v1.32.0 (2025-08-11)
 
 * **Feature**: Add support for configuring per-service Options via callback on global config.

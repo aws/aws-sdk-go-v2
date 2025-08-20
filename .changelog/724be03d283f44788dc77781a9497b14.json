@@ -1,8 +1,0 @@
-{
-    "id": "724be03d-283f-4478-8dc7-7781a9497b14",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/networkmanager"
-    ]
-}

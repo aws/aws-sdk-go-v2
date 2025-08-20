@@ -1,3 +1,8 @@
+# v1.38.0 (2025-08-20)
+
+* **Feature**: This release supports policy grant identifier for cloud formation integration
+* **Bug Fix**: Remove unused deserialization code.
+
 # v1.37.0 (2025-08-13)
 
 * **Feature**: Adds support for account pools and project profile account decoupling

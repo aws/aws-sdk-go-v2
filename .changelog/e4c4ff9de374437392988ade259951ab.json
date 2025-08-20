@@ -1,8 +1,0 @@
-{
-    "id": "e4c4ff9d-e374-4373-9298-8ade259951ab",
-    "type": "feature",
-    "description": "This release supports policy grant identifier for cloud formation integration",
-    "modules": [
-        "service/datazone"
-    ]
-}

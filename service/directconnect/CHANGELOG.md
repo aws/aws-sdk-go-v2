@@ -1,3 +1,7 @@
+# v1.36.1 (2025-08-20)
+
+* **Bug Fix**: Remove unused deserialization code.
+
 # v1.36.0 (2025-08-14)
 
 * **Feature**: Added pagination support for DescribeHostedConnections, DescribeVirtualInterfaces, DescribeConnections, DescribeInterconnects, DescribeLags. Added asnLong support for BGP peer operations which supports a large range.

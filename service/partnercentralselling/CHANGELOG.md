@@ -1,3 +1,7 @@
+# v1.10.1 (2025-08-20)
+
+* **Bug Fix**: Remove unused deserialization code.
+
 # v1.10.0 (2025-08-13)
 
 * **Feature**: Add Tagging Support for Opportunity resources

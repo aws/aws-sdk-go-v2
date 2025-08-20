@@ -1,3 +1,7 @@
+# v1.49.1 (2025-08-20)
+
+* **Bug Fix**: Remove unused deserialization code.
+
 # v1.49.0 (2025-08-15)
 
 * **Feature**: This release adds support for saving Bedrock Flows while node configuration is still in progress, even if the Flow is not yet able to be invoked

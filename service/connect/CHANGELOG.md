@@ -1,3 +1,7 @@
+# v1.136.1 (2025-08-20)
+
+* **Bug Fix**: Remove unused deserialization code.
+
 # v1.136.0 (2025-08-18)
 
 * **Feature**: Amazon Connect Service Feature: Add support to enable multi-user in-app, web, and video calling.

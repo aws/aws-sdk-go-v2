@@ -1,3 +1,7 @@
+# v1.39.1 (2025-08-20)
+
+* **Bug Fix**: Remove unused deserialization code.
+
 # v1.39.0 (2025-08-14)
 
 * **Feature**: Added support for cross account through Id parameter overloading with ARN and allow owner account for some APIs instead of ARN

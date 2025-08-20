@@ -1,3 +1,7 @@
+# v1.38.1 (2025-08-20)
+
+* **Bug Fix**: Remove unused deserialization code.
+
 # v1.38.0 (2025-08-15)
 
 * **Feature**: Add Resource-based Policy APIs for Amazon Prometheus

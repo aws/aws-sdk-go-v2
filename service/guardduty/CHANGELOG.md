@@ -1,3 +1,7 @@
+# v1.62.1 (2025-08-20)
+
+* **Bug Fix**: Remove unused deserialization code.
+
 # v1.62.0 (2025-08-14)
 
 * **Feature**: Added support for entity lists.

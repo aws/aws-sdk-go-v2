@@ -1,8 +1,0 @@
-{
-    "id": "62c37aca-46bc-4558-b70b-9b20398095bf",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/marketplacemetering"
-    ]
-}

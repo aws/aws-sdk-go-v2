@@ -1,8 +1,0 @@
-{
-    "id": "00a581c4-3f1a-4e99-bbf4-5effa3be9cee",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/iam"
-    ]
-}

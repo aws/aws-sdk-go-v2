@@ -1,3 +1,7 @@
+# v1.57.2 (2025-08-20)
+
+* **Bug Fix**: Remove unused deserialization code.
+
 # v1.57.1 (2025-08-18)
 
 * **Documentation**: Added default_x86_64 and default_arm64 as values to the instanceTypes field.

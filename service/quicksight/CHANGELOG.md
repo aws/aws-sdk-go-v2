@@ -1,3 +1,7 @@
+# v1.92.1 (2025-08-20)
+
+* **Bug Fix**: Remove unused deserialization code.
+
 # v1.92.0 (2025-08-11)
 
 * **Feature**: Add RowAxisDisplayOptions and ColumnAxisDisplayOptions to HeatMapConfiguration, add Actions to PluginVisual, increase limit for CalculatedFields list

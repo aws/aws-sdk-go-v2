@@ -1,3 +1,7 @@
+# v1.43.1 (2025-08-20)
+
+* **Bug Fix**: Remove unused deserialization code.
+
 # v1.43.0 (2025-08-12)
 
 * **Feature**: This release introduces 2 new APIs in Organizations: 1. ListAccountsWithInvalidEffectivePolicy 2. ListEffectivePolicyValidationErrors

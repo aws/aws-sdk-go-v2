@@ -1,8 +1,0 @@
-{
-    "id": "bd28df34-5df7-4efa-8eba-6cbc03f7de0f",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/kinesis"
-    ]
-}

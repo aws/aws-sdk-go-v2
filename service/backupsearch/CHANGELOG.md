@@ -1,3 +1,7 @@
+# v1.6.1 (2025-08-20)
+
+* **Bug Fix**: Remove unused deserialization code.
+
 # v1.6.0 (2025-08-12)
 
 * **Feature**: Using recommended smithy trait to generate regional endpoints for Backup Search

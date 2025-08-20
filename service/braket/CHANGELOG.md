@@ -1,3 +1,7 @@
+# v1.36.1 (2025-08-20)
+
+* **Bug Fix**: Remove unused deserialization code.
+
 # v1.36.0 (2025-08-13)
 
 * **Feature**: Add support for Braket program sets.

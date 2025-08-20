@@ -1,3 +1,7 @@
+# v1.30.1 (2025-08-20)
+
+* **Bug Fix**: Remove unused deserialization code.
+
 # v1.30.0 (2025-08-19)
 
 * **Feature**: Support error message configuration for analysis templates

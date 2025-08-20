@@ -1,3 +1,8 @@
+# v1.7.0 (2025-08-20)
+
+* **Feature**: Clarify IPv4 and IPv6 endpoints
+* **Bug Fix**: Remove unused deserialization code.
+
 # v1.6.0 (2025-08-11)
 
 * **Feature**: Add support for configuring per-service Options via callback on global config.

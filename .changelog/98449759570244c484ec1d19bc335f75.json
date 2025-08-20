@@ -1,8 +1,0 @@
-{
-    "id": "98449759-5702-44c4-84ec-1d19bc335f75",
-    "type": "feature",
-    "description": "This release adds support for the new Terms APIs which allow displaying Terms of Use and Privacy Policy on the Managed Login user-registration page.",
-    "modules": [
-        "service/cognitoidentityprovider"
-    ]
-}
