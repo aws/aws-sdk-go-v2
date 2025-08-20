@@ -8,6 +8,7 @@
     "files": [
         "api_client.go",
         "api_client_test.go",
+        "api_op_DeleteConnection.go",
         "api_op_DeleteThingShadow.go",
         "api_op_GetRetainedMessage.go",
         "api_op_GetThingShadow.go",

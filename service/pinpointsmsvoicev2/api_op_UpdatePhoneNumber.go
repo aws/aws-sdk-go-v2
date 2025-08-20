@@ -48,6 +48,10 @@ type UpdatePhoneNumberInput struct {
 	// deleted.
 	DeletionProtectionEnabled *bool
 
+	// By default this is set to false. When set to true the international sending of
+	// phone number is Enabled.
+	InternationalSendingEnabled *bool
+
 	// The OptOutList to add the phone number to. Valid values for this field can be
 	// either the OutOutListName or OutOutListArn.
 	OptOutListName *string
@@ -83,6 +87,9 @@ type UpdatePhoneNumberOutput struct {
 
 	// When set to true the phone number can't be deleted.
 	DeletionProtectionEnabled bool
+
+	// When set to true the international sending of phone number is Enabled.
+	InternationalSendingEnabled bool
 
 	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
 	// region.

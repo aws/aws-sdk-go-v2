@@ -1,3 +1,20 @@
+# v1.60.1 (2025-08-20)
+
+* **Bug Fix**: Remove unused deserialization code.
+
+# v1.60.0 (2025-08-14)
+
+* **Feature**: Amazon FSx for NetApp ONTAP 2nd generation file systems now support decreasing SSD storage capacity.
+
+# v1.59.0 (2025-08-13)
+
+* **Feature**: Add Dual-Stack support for Amazon FSx for OpenZFS file systems
+
+# v1.58.0 (2025-08-11)
+
+* **Feature**: Add support for configuring per-service Options via callback on global config.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.57.0 (2025-08-04)
 
 * **Feature**: Support configurable auth scheme preferences in service clients via AWS_AUTH_SCHEME_PREFERENCE in the environment, auth_scheme_preference in the config file, and through in-code settings on LoadDefaultConfig and client constructor methods.

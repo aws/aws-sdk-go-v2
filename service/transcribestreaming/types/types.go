@@ -661,6 +661,10 @@ type MedicalScribeConfigurationEvent struct {
 	// Specify the encryption settings for your streaming session.
 	EncryptionSettings *MedicalScribeEncryptionSettings
 
+	// The MedicalScribeContext object that contains contextual information used to
+	// generate customized clinical notes.
+	MedicalScribeContext *MedicalScribeContext
+
 	// Specify how you want your custom vocabulary filter applied to the streaming
 	// session.
 	//
@@ -681,6 +685,17 @@ type MedicalScribeConfigurationEvent struct {
 	// Specify the name of the custom vocabulary you want to use for your streaming
 	// session. Custom vocabulary names are case-sensitive.
 	VocabularyName *string
+
+	noSmithyDocumentSerde
+}
+
+// The MedicalScribeContext object that contains contextual information which is
+// used during clinical note generation to add relevant context to the note.
+type MedicalScribeContext struct {
+
+	// Contains patient-specific information used to customize the clinical note
+	// generation.
+	PatientContext *MedicalScribePatientContext
 
 	noSmithyDocumentSerde
 }
@@ -792,6 +807,16 @@ type MedicalScribeInputStreamMemberSessionControlEvent struct {
 
 func (*MedicalScribeInputStreamMemberSessionControlEvent) isMedicalScribeInputStream() {}
 
+// Contains patient-specific information.
+type MedicalScribePatientContext struct {
+
+	// The patient's preferred pronouns that the user wants to provide as a context
+	// for clinical note generation .
+	Pronouns Pronouns
+
+	noSmithyDocumentSerde
+}
+
 // Contains details for the result of post-stream analytics.
 type MedicalScribePostStreamAnalyticsResult struct {
 
@@ -872,6 +897,10 @@ type MedicalScribeStreamDetails struct {
 
 	// The sample rate (in hertz) of the HealthScribe streaming session.
 	MediaSampleRateHertz *int32
+
+	// Indicates whether the MedicalScribeContext object was provided when the stream
+	// was started.
+	MedicalScribeContextProvided *bool
 
 	// The result of post-stream analytics for the HealthScribe streaming session.
 	PostStreamAnalyticsResult *MedicalScribePostStreamAnalyticsResult

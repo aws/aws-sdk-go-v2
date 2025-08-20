@@ -53,9 +53,30 @@ type BGPPeer struct {
 	// The IP address assigned to the Amazon interface.
 	AmazonAddress *string
 
-	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
-	// configuration.
+	// The autonomous system number (ASN). The valid range is from 1 to 2147483646 for
+	// Border Gateway Protocol (BGP) configuration. If you provide a number greater
+	// than the maximum, an error is returned. Use asnLong instead.
+	//
+	// You can use asnLong or asn , but not both. We recommend using asnLong as it
+	// supports a greater pool of numbers.
+	//
+	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//
+	//   - If you provide a value in the same API call for both asn and asnLong , the
+	//   API will only accept the value for asnLong .
 	Asn int32
+
+	// The long ASN for the BGP peer. The valid range is from 1 to 4294967294 for BGP
+	// configuration.
+	//
+	// You can use asnLong or asn , but not both. We recommend using asnLong as it
+	// supports a greater pool of numbers.
+	//
+	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//
+	//   - If you provide a value in the same API call for both asn and asnLong , the
+	//   API will only accept the value for asnLong .
+	AsnLong *int64
 
 	// The authentication key for BGP configuration. This string has a minimum length
 	// of 6 characters and and a maximun lenth of 80 characters.
@@ -226,7 +247,7 @@ type CustomerAgreement struct {
 // virtual interfaces and virtual private gateway or transit gateways.
 type DirectConnectGateway struct {
 
-	// The autonomous system number (ASN) for the Amazon side of the connection.
+	// The autonomous system number (AS) for the Amazon side of the connection.
 	AmazonSideAsn *int64
 
 	// The ID of the Direct Connect gateway.
@@ -657,9 +678,13 @@ type NewBGPPeer struct {
 	// The IP address assigned to the Amazon interface.
 	AmazonAddress *string
 
-	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
-	// configuration.
+	// The autonomous system number (ASN). The valid range is from 1 to 2147483646 for
+	// Border Gateway Protocol (BGP) configuration. If you provide a number greater
+	// than the maximum, an error is returned. Use asnLong instead.
 	Asn int32
+
+	// The long ASN for a new BGP peer. The valid range is from 1 to 4294967294.
+	AsnLong *int64
 
 	// The authentication key for BGP configuration. This string has a minimum length
 	// of 6 characters and and a maximun lenth of 80 characters.
@@ -673,14 +698,6 @@ type NewBGPPeer struct {
 
 // Information about a private virtual interface.
 type NewPrivateVirtualInterface struct {
-
-	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
-	// configuration.
-	//
-	// The valid values are 1-2147483647.
-	//
-	// This member is required.
-	Asn int32
 
 	// The name of the virtual interface assigned by the customer network. The name
 	// has a maximum of 100 characters. The following are valid characters: a-z, 0-9
@@ -699,6 +716,33 @@ type NewPrivateVirtualInterface struct {
 
 	// The IP address assigned to the Amazon interface.
 	AmazonAddress *string
+
+	// The autonomous system number (ASN). The valid range is from 1 to 2147483646 for
+	// Border Gateway Protocol (BGP) configuration. If you provide a number greater
+	// than the maximum, an error is returned. Use asnLong instead.
+	//
+	// You can use asnLong or asn , but not both. We recommend using asnLong as it
+	// supports a greater pool of numbers.
+	//
+	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//
+	//   - If you provide a value in the same API call for both asn and asnLong , the
+	//   API will only accept the value for asnLong .
+	//
+	// The valid values are 1-2147483646.
+	Asn int32
+
+	// The long ASN for a new private virtual interface. The valid range is from 1 to
+	// 4294967294 for BGP configuration.
+	//
+	// You can use asnLong or asn , but not both. We recommend using asnLong as it
+	// supports a greater pool of numbers.
+	//
+	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//
+	//   - If you provide a value in the same API call for both asn and asnLong , the
+	//   API will only accept the value for asnLong .
+	AsnLong *int64
 
 	// The authentication key for BGP configuration. This string has a minimum length
 	// of 6 characters and and a maximun lenth of 80 characters.
@@ -729,14 +773,6 @@ type NewPrivateVirtualInterface struct {
 // Information about a private virtual interface to be provisioned on a connection.
 type NewPrivateVirtualInterfaceAllocation struct {
 
-	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
-	// configuration.
-	//
-	// The valid values are 1-2147483647.
-	//
-	// This member is required.
-	Asn int32
-
 	// The name of the virtual interface assigned by the customer network. The name
 	// has a maximum of 100 characters. The following are valid characters: a-z, 0-9
 	// and a hyphen (-).
@@ -754,6 +790,33 @@ type NewPrivateVirtualInterfaceAllocation struct {
 
 	// The IP address assigned to the Amazon interface.
 	AmazonAddress *string
+
+	// The autonomous system number (ASN). The valid range is from 1 to 2147483646 for
+	// Border Gateway Protocol (BGP) configuration. If you provide a number greater
+	// than the maximum, an error is returned. Use asnLong instead.
+	//
+	// You can use asnLong or asn , but not both. We recommend using asnLong as it
+	// supports a greater pool of numbers.
+	//
+	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//
+	//   - If you provide a value in the same API call for both asn and asnLong , the
+	//   API will only accept the value for asnLong .
+	//
+	// The valid values are 1-2147483646.
+	Asn int32
+
+	// The ASN when allocating a new private virtual interface. The valid range is
+	// from 1 to 4294967294 for BGP configuration.
+	//
+	// You can use asnLong or asn , but not both. We recommend using asnLong as it
+	// supports a greater pool of numbers.
+	//
+	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//
+	//   - If you provide a value in the same API call for both asn and asnLong , the
+	//   API will only accept the value for asnLong .
+	AsnLong *int64
 
 	// The authentication key for BGP configuration. This string has a minimum length
 	// of 6 characters and and a maximun lenth of 80 characters.
@@ -775,14 +838,6 @@ type NewPrivateVirtualInterfaceAllocation struct {
 // Information about a public virtual interface.
 type NewPublicVirtualInterface struct {
 
-	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
-	// configuration.
-	//
-	// The valid values are 1-2147483647.
-	//
-	// This member is required.
-	Asn int32
-
 	// The name of the virtual interface assigned by the customer network. The name
 	// has a maximum of 100 characters. The following are valid characters: a-z, 0-9
 	// and a hyphen (-).
@@ -800,6 +855,31 @@ type NewPublicVirtualInterface struct {
 
 	// The IP address assigned to the Amazon interface.
 	AmazonAddress *string
+
+	// The autonomous system number (ASN). The valid range is from 1 to 2147483646 for
+	// Border Gateway Protocol (BGP) configuration. If you provide a number greater
+	// than the maximum, an error is returned. Use asnLong instead.
+	//
+	// You can use asnLong or asn , but not both. We recommend using asnLong as it
+	// supports a greater pool of numbers.
+	//
+	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//
+	//   - If you provide a value in the same API call for both asn and asnLong , the
+	//   API will only accept the value for asnLong .
+	Asn int32
+
+	// The long ASN for a new public virtual interface. The valid range is from 1 to
+	// 4294967294 for BGP configuration.
+	//
+	// You can use asnLong or asn , but not both. We recommend using asnLong as it
+	// supports a greater pool of numbers.
+	//
+	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//
+	//   - If you provide a value in the same API call for both asn and asnLong , the
+	//   API will only accept the value for asnLong .
+	AsnLong *int64
 
 	// The authentication key for BGP configuration. This string has a minimum length
 	// of 6 characters and and a maximun lenth of 80 characters.
@@ -821,14 +901,6 @@ type NewPublicVirtualInterface struct {
 // Information about a public virtual interface to be provisioned on a connection.
 type NewPublicVirtualInterfaceAllocation struct {
 
-	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
-	// configuration.
-	//
-	// The valid values are 1-2147483647.
-	//
-	// This member is required.
-	Asn int32
-
 	// The name of the virtual interface assigned by the customer network. The name
 	// has a maximum of 100 characters. The following are valid characters: a-z, 0-9
 	// and a hyphen (-).
@@ -846,6 +918,33 @@ type NewPublicVirtualInterfaceAllocation struct {
 
 	// The IP address assigned to the Amazon interface.
 	AmazonAddress *string
+
+	// The autonomous system number (ASN). The valid range is from 1 to 2147483646 for
+	// Border Gateway Protocol (BGP) configuration. If you provide a number greater
+	// than the maximum, an error is returned. Use asnLong instead.
+	//
+	// You can use asnLong or asn , but not both. We recommend using asnLong as it
+	// supports a greater pool of numbers.
+	//
+	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//
+	//   - If you provide a value in the same API call for both asn and asnLong , the
+	//   API will only accept the value for asnLong .
+	//
+	// The valid values are 1-2147483646.
+	Asn int32
+
+	// The ASN when allocating a new public virtual interface. The valid range is from
+	// 1 to 4294967294 for BGP configuration.
+	//
+	// You can use asnLong or asn , but not both. We recommend using asnLong as it
+	// supports a greater pool of numbers.
+	//
+	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//
+	//   - If you provide a value in the same API call for both asn and asnLong , the
+	//   API will only accept the value for asnLong .
+	AsnLong *int64
 
 	// The authentication key for BGP configuration. This string has a minimum length
 	// of 6 characters and and a maximun lenth of 80 characters.
@@ -873,11 +972,30 @@ type NewTransitVirtualInterface struct {
 	// The IP address assigned to the Amazon interface.
 	AmazonAddress *string
 
-	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
-	// configuration.
+	// The autonomous system number (ASN). The valid range is from 1 to 2147483646 for
+	// Border Gateway Protocol (BGP) configuration. If you provide a number greater
+	// than the maximum, an error is returned. Use asnLong instead.
 	//
-	// The valid values are 1-2147483647.
+	// You can use asnLong or asn , but not both. We recommend using asnLong as it
+	// supports a greater pool of numbers.
+	//
+	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//
+	//   - If you provide a value in the same API call for both asn and asnLong , the
+	//   API will only accept the value for asnLong .
 	Asn int32
+
+	// The long ASN for a new transit virtual interface.The valid range is from 1 to
+	// 4294967294 for BGP configuration.
+	//
+	// You can use asnLong or asn , but not both. We recommend using asnLong as it
+	// supports a greater pool of numbers.
+	//
+	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//
+	//   - If you provide a value in the same API call for both asn and asnLong , the
+	//   API will only accept the value for asnLong .
+	AsnLong *int64
 
 	// The authentication key for BGP configuration. This string has a minimum length
 	// of 6 characters and and a maximun lenth of 80 characters.
@@ -919,11 +1037,32 @@ type NewTransitVirtualInterfaceAllocation struct {
 	// The IP address assigned to the Amazon interface.
 	AmazonAddress *string
 
-	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
-	// configuration.
+	// The autonomous system number (ASN). The valid range is from 1 to 2147483646 for
+	// Border Gateway Protocol (BGP) configuration. If you provide a number greater
+	// than the maximum, an error is returned. Use asnLong instead.
 	//
-	// The valid values are 1-2147483647.
+	// You can use asnLong or asn , but not both. We recommend using asnLong as it
+	// supports a greater pool of numbers.
+	//
+	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//
+	//   - If you provide a value in the same API call for both asn and asnLong , the
+	//   API will only accept the value for asnLong .
+	//
+	// The valid values are 1-2147483646.
 	Asn int32
+
+	// The ASN when allocating a new transit virtual interface. The valid range is
+	// from 1 to 4294967294 for BGP configuration.
+	//
+	// You can use asnLong or asn , but not both. We recommend using asnLong as it
+	// supports a greater pool of numbers.
+	//
+	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//
+	//   - If you provide a value in the same API call for both asn and asnLong , the
+	//   API will only accept the value for asnLong .
+	AsnLong *int64
 
 	// The authentication key for BGP configuration. This string has a minimum length
 	// of 6 characters and and a maximun lenth of 80 characters.
@@ -1042,14 +1181,33 @@ type VirtualInterface struct {
 	// The IP address assigned to the Amazon interface.
 	AmazonAddress *string
 
-	// The autonomous system number (ASN) for the Amazon side of the connection.
+	// The autonomous system number (AS) for the Amazon side of the connection.
 	AmazonSideAsn *int64
 
-	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
-	// configuration.
+	// The autonomous system number (ASN). The valid range is from 1 to 2147483646 for
+	// Border Gateway Protocol (BGP) configuration. If you provide a number greater
+	// than the maximum, an error is returned. Use asnLong instead.
 	//
-	// The valid values are 1-2147483647.
+	// You can use asnLong or asn , but not both. We recommend using asnLong as it
+	// supports a greater pool of numbers.
+	//
+	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//
+	//   - If you provide a value in the same API call for both asn and asnLong , the
+	//   API will only accept the value for asnLong .
 	Asn int32
+
+	// The long ASN for the virtual interface. The valid range is from 1 to 4294967294
+	// for BGP configuration.
+	//
+	// You can use asnLong or asn , but not both. We recommend using asnLong as it
+	// supports a greater pool of numbers.
+	//
+	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//
+	//   - If you provide a value in the same API call for both asn and asnLong , the
+	//   API will only accept the value for asnLong .
+	AsnLong *int64
 
 	// The authentication key for BGP configuration. This string has a minimum length
 	// of 6 characters and and a maximun lenth of 80 characters.

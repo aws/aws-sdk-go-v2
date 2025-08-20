@@ -46,6 +46,10 @@ type UpdateContributorInsightsInput struct {
 	// This member is required.
 	TableName *string
 
+	// Specifies whether to track all access and throttled events or throttled events
+	// only for the DynamoDB table or index.
+	ContributorInsightsMode types.ContributorInsightsMode
+
 	// The global secondary index name, if applicable.
 	IndexName *string
 
@@ -59,6 +63,11 @@ func (in *UpdateContributorInsightsInput) bindEndpointParams(p *EndpointParamete
 }
 
 type UpdateContributorInsightsOutput struct {
+
+	// The updated mode of CloudWatch Contributor Insights that determines whether to
+	// monitor all access and throttled events or to track throttled events
+	// exclusively.
+	ContributorInsightsMode types.ContributorInsightsMode
 
 	// The status of contributor insights
 	ContributorInsightsStatus types.ContributorInsightsStatus

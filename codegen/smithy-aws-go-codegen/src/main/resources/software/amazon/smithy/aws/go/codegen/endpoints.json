@@ -10261,6 +10261,7 @@
           "ap-southeast-1" : { },
           "ap-southeast-2" : { },
           "ap-southeast-3" : { },
+          "ap-southeast-4" : { },
           "ca-central-1" : {
             "variants" : [ {
               "hostname" : "emr-serverless-fips.ca-central-1.amazonaws.com",
@@ -10269,6 +10270,7 @@
           },
           "ca-west-1" : { },
           "eu-central-1" : { },
+          "eu-central-2" : { },
           "eu-north-1" : { },
           "eu-south-1" : { },
           "eu-south-2" : { },
@@ -10310,6 +10312,7 @@
             "deprecated" : true,
             "hostname" : "emr-serverless-fips.us-west-2.amazonaws.com"
           },
+          "il-central-1" : { },
           "me-central-1" : { },
           "me-south-1" : { },
           "sa-east-1" : { },
@@ -27572,6 +27575,9 @@
       },
       "trustedadvisor" : {
         "endpoints" : {
+          "ap-northeast-2" : { },
+          "ap-southeast-2" : { },
+          "eu-west-1" : { },
           "fips-us-east-1" : {
             "credentialScope" : {
               "region" : "us-east-1"
@@ -27589,7 +27595,10 @@
               "region" : "us-west-2"
             },
             "hostname" : "trustedadvisor-fips.us-west-2.api.aws"
-          }
+          },
+          "us-east-1" : { },
+          "us-east-2" : { },
+          "us-west-2" : { }
         }
       },
       "verifiedpermissions" : {
@@ -37188,7 +37197,8 @@
               "hostname" : "fsx-fips.us-iso-east-1.c2s.ic.gov",
               "tags" : [ "fips" ]
             } ]
-          }
+          },
+          "us-iso-west-1" : { }
         }
       },
       "glacier" : {
@@ -37355,6 +37365,11 @@
         "endpoints" : {
           "us-iso-east-1" : { },
           "us-iso-west-1" : { }
+        }
+      },
+      "network-firewall" : {
+        "endpoints" : {
+          "us-iso-east-1" : { }
         }
       },
       "oam" : {
@@ -38412,6 +38427,11 @@
           "us-isob-east-1" : { }
         }
       },
+      "network-firewall" : {
+        "endpoints" : {
+          "us-isob-east-1" : { }
+        }
+      },
       "oam" : {
         "endpoints" : {
           "us-isob-east-1" : { }
@@ -38923,6 +38943,11 @@
           "eu-isoe-west-1" : { }
         }
       },
+      "cloudtrail-data" : {
+        "endpoints" : {
+          "eu-isoe-west-1" : { }
+        }
+      },
       "codedeploy" : {
         "endpoints" : {
           "eu-isoe-west-1" : { }
@@ -39315,6 +39340,11 @@
         }
       },
       "tagging" : {
+        "endpoints" : {
+          "eu-isoe-west-1" : { }
+        }
+      },
+      "trustedadvisor" : {
         "endpoints" : {
           "eu-isoe-west-1" : { }
         }
@@ -40154,6 +40184,11 @@
         },
         "endpoints" : {
           "us-isof-east-1" : { },
+          "us-isof-south-1" : { }
+        }
+      },
+      "trustedadvisor" : {
+        "endpoints" : {
           "us-isof-south-1" : { }
         }
       },

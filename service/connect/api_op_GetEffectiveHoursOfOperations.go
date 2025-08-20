@@ -29,7 +29,7 @@ func (c *Client) GetEffectiveHoursOfOperations(ctx context.Context, params *GetE
 
 type GetEffectiveHoursOfOperationsInput struct {
 
-	// The Date from when the hours of operation are listed.
+	// The date from when the hours of operation are listed.
 	//
 	// This member is required.
 	FromDate *string
@@ -44,7 +44,7 @@ type GetEffectiveHoursOfOperationsInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The Date until when the hours of operation are listed.
+	// The date until when the hours of operation are listed.
 	//
 	// This member is required.
 	ToDate *string
@@ -54,7 +54,7 @@ type GetEffectiveHoursOfOperationsInput struct {
 
 type GetEffectiveHoursOfOperationsOutput struct {
 
-	// Information about the effective hours of operations
+	// Information about the effective hours of operations.
 	EffectiveHoursOfOperationList []types.EffectiveHoursOfOperations
 
 	// The time zone for the hours of operation.

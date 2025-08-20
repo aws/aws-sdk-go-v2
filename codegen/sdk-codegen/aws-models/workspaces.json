@@ -2785,6 +2785,84 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.workspaces#CustomImageProtocol": {
+            "type": "enum",
+            "members": {
+                "PCOIP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PCOIP"
+                    }
+                },
+                "DCV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DCV"
+                    }
+                },
+                "BYOP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BYOP"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspaces#CustomWorkspaceImageImportErrorDetails": {
+            "type": "structure",
+            "members": {
+                "ErrorCode": {
+                    "target": "com.amazonaws.workspaces#ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code that is returned for the image import.</p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.workspaces#ImageErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text of the error message that is returned for the image import.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes in-depth details about the error. These details include the\n         possible causes of the error and troubleshooting information.</p>"
+            }
+        },
+        "com.amazonaws.workspaces#CustomWorkspaceImageImportErrorDetailsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspaces#CustomWorkspaceImageImportErrorDetails"
+            }
+        },
+        "com.amazonaws.workspaces#CustomWorkspaceImageImportState": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                }
+            }
+        },
         "com.amazonaws.workspaces#DataReplication": {
             "type": "enum",
             "members": {
@@ -3698,6 +3776,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The type of linked account.</p>"
                     }
+                },
+                "Message": {
+                    "target": "com.amazonaws.workspaces#Message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text message to describe the status of BYOL.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4303,6 +4387,97 @@
                     "target": "com.amazonaws.workspaces#PaginationToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are\n         no more results to return. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspaces#DescribeCustomWorkspaceImageImport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspaces#DescribeCustomWorkspaceImageImportRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspaces#DescribeCustomWorkspaceImageImportResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspaces#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information about a WorkSpace BYOL image being imported via ImportCustomWorkspaceImage.</p>"
+            }
+        },
+        "com.amazonaws.workspaces#DescribeCustomWorkspaceImageImportRequest": {
+            "type": "structure",
+            "members": {
+                "ImageId": {
+                    "target": "com.amazonaws.workspaces#WorkspaceImageId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the WorkSpace image.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspaces#DescribeCustomWorkspaceImageImportResult": {
+            "type": "structure",
+            "members": {
+                "ImageId": {
+                    "target": "com.amazonaws.workspaces#WorkspaceImageId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the WorkSpace image.</p>"
+                    }
+                },
+                "InfrastructureConfigurationArn": {
+                    "target": "com.amazonaws.workspaces#InfrastructureConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The infrastructure configuration ARN that specifies how the WorkSpace image is built.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.workspaces#CustomWorkspaceImageImportState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the WorkSpace image.</p>"
+                    }
+                },
+                "Created": {
+                    "target": "com.amazonaws.workspaces#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the WorkSpace image import was created.</p>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.workspaces#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the WorkSpace image import was last updated.</p>"
+                    }
+                },
+                "ImageSource": {
+                    "target": "com.amazonaws.workspaces#ImageSourceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the image import source.</p>"
+                    }
+                },
+                "ImageBuilderInstanceId": {
+                    "target": "com.amazonaws.workspaces#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image builder instance ID of the WorkSpace image.</p>"
+                    }
+                },
+                "ErrorDetails": {
+                    "target": "com.amazonaws.workspaces#CustomWorkspaceImageImportErrorDetailsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes in-depth details about the error. These details include the\n         possible causes of the error and troubleshooting information.</p>"
                     }
                 }
             },
@@ -5629,6 +5804,16 @@
                 "smithy.api#pattern": "^ami\\-([a-f0-9]{8}|[a-f0-9]{17})$"
             }
         },
+        "com.amazonaws.workspaces#Ec2ImportTaskId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 19,
+                    "max": 28
+                },
+                "smithy.api#pattern": "^import-ami\\-([a-zA-Z0-9]{8}|[a-zA-Z0-9]{17})$"
+            }
+        },
         "com.amazonaws.workspaces#EndpointEncryptionMode": {
             "type": "enum",
             "members": {
@@ -5643,6 +5828,15 @@
                     "traits": {
                         "smithy.api#enumValue": "FIPS_VALIDATED"
                     }
+                }
+            }
+        },
+        "com.amazonaws.workspaces#ErrorCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
                 }
             }
         },
@@ -5952,6 +6146,42 @@
                 "target": "com.amazonaws.workspaces#ImageAssociatedResourceType"
             }
         },
+        "com.amazonaws.workspaces#ImageBuildVersionArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws(?:-[a-z-]+)?):image/[a-z0-9-_]+/(?:(?:([0-9]+|x)\\.([0-9]+|x)\\.([0-9]+|x))|(?:[0-9]+\\.[0-9]+\\.[0-9]+/[0-9]+))$"
+            }
+        },
+        "com.amazonaws.workspaces#ImageComputeType": {
+            "type": "enum",
+            "members": {
+                "BASE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BASE"
+                    }
+                },
+                "GRAPHICS_G4DN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICS_G4DN"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspaces#ImageErrorMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
         "com.amazonaws.workspaces#ImagePermission": {
             "type": "structure",
             "members": {
@@ -6026,6 +6256,32 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.workspaces#ImageResourceAssociation"
+            }
+        },
+        "com.amazonaws.workspaces#ImageSourceIdentifier": {
+            "type": "union",
+            "members": {
+                "Ec2ImportTaskId": {
+                    "target": "com.amazonaws.workspaces#Ec2ImportTaskId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The EC2 import task ID to import the image from the Amazon EC2 VM import process.</p>"
+                    }
+                },
+                "ImageBuildVersionArn": {
+                    "target": "com.amazonaws.workspaces#ImageBuildVersionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the EC2 Image Builder image.</p>"
+                    }
+                },
+                "Ec2ImageId": {
+                    "target": "com.amazonaws.workspaces#Ec2ImageId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the EC2 image.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the image import source.</p>"
             }
         },
         "com.amazonaws.workspaces#ImageType": {
@@ -6166,6 +6422,128 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.workspaces#ImportCustomWorkspaceImage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspaces#ImportCustomWorkspaceImageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspaces#ImportCustomWorkspaceImageResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspaces#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#InvalidParameterValuesException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#OperationNotSupportedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Imports the specified Windows 10 or 11 Bring Your Own License (BYOL)\n         image into Amazon WorkSpaces using EC2 Image Builder. The image must be an already licensed image that is\n         in your Amazon Web Services account, and you must own the image. For more information about\n         creating BYOL images, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html\"> Bring Your Own Windows\n            Desktop Licenses</a>.\n      </p>"
+            }
+        },
+        "com.amazonaws.workspaces#ImportCustomWorkspaceImageRequest": {
+            "type": "structure",
+            "members": {
+                "ImageName": {
+                    "target": "com.amazonaws.workspaces#WorkspaceImageName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the WorkSpace image.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ImageDescription": {
+                    "target": "com.amazonaws.workspaces#WorkspaceImageDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the WorkSpace image.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ComputeType": {
+                    "target": "com.amazonaws.workspaces#ImageComputeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The supported compute type for the WorkSpace image.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Protocol": {
+                    "target": "com.amazonaws.workspaces#CustomImageProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The supported protocol for the WorkSpace image. Windows 11 does not support PCOIP protocol.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ImageSource": {
+                    "target": "com.amazonaws.workspaces#ImageSourceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The options for image import source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InfrastructureConfigurationArn": {
+                    "target": "com.amazonaws.workspaces#InfrastructureConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The infrastructure configuration ARN that specifies how the WorkSpace image is built.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Platform": {
+                    "target": "com.amazonaws.workspaces#Platform",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The platform for the WorkSpace image source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OsVersion": {
+                    "target": "com.amazonaws.workspaces#OSVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OS version for the WorkSpace image source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.workspaces#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource tags. Each WorkSpaces resource can have a maximum of 50 tags.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspaces#ImportCustomWorkspaceImageResult": {
+            "type": "structure",
+            "members": {
+                "ImageId": {
+                    "target": "com.amazonaws.workspaces#WorkspaceImageId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the WorkSpace image.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.workspaces#CustomWorkspaceImageImportState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the WorkSpace image.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.workspaces#ImportWorkspaceImage": {
             "type": "operation",
             "input": {
@@ -6266,6 +6644,16 @@
             "traits": {
                 "smithy.api#documentation": "<p>The specified application is not compatible with the resource.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.workspaces#InfrastructureConfigurationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):infrastructure-configuration/[a-z0-9-_]+$"
             }
         },
         "com.amazonaws.workspaces#InternalServerException": {
@@ -6755,6 +7143,9 @@
                 }
             }
         },
+        "com.amazonaws.workspaces#Message": {
+            "type": "string"
+        },
         "com.amazonaws.workspaces#MicrosoftEntraConfig": {
             "type": "structure",
             "members": {
@@ -6972,7 +7363,14 @@
         },
         "com.amazonaws.workspaces#ModifyAccountResult": {
             "type": "structure",
-            "members": {},
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.workspaces#Message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text message to describe the status of BYOL modification.</p>"
+                    }
+                }
+            },
             "traits": {
                 "smithy.api#output": {}
             }
@@ -7578,6 +7976,23 @@
                 }
             }
         },
+        "com.amazonaws.workspaces#OSVersion": {
+            "type": "enum",
+            "members": {
+                "Windows_10": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Windows_10"
+                    }
+                },
+                "Windows_11": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Windows_11"
+                    }
+                }
+            }
+        },
         "com.amazonaws.workspaces#OperatingSystem": {
             "type": "structure",
             "members": {
@@ -7784,6 +8199,17 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.workspaces#PendingCreateStandbyWorkspacesRequest"
+            }
+        },
+        "com.amazonaws.workspaces#Platform": {
+            "type": "enum",
+            "members": {
+                "WINDOWS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS"
+                    }
+                }
             }
         },
         "com.amazonaws.workspaces#PoolsRunningMode": {
@@ -12453,6 +12879,9 @@
                     "target": "com.amazonaws.workspaces#DescribeConnectionAliasPermissions"
                 },
                 {
+                    "target": "com.amazonaws.workspaces#DescribeCustomWorkspaceImageImport"
+                },
+                {
                     "target": "com.amazonaws.workspaces#DescribeImageAssociations"
                 },
                 {
@@ -12505,6 +12934,9 @@
                 },
                 {
                     "target": "com.amazonaws.workspaces#ImportClientBranding"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ImportCustomWorkspaceImage"
                 },
                 {
                     "target": "com.amazonaws.workspaces#ImportWorkspaceImage"

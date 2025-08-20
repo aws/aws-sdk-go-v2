@@ -8,6 +8,7 @@ type AwsRegion string
 const (
 	AwsRegionAfSouth1     AwsRegion = "af-south-1"
 	AwsRegionApEast1      AwsRegion = "ap-east-1"
+	AwsRegionApEast2      AwsRegion = "ap-east-2"
 	AwsRegionApNortheast1 AwsRegion = "ap-northeast-1"
 	AwsRegionApNortheast2 AwsRegion = "ap-northeast-2"
 	AwsRegionApNortheast3 AwsRegion = "ap-northeast-3"
@@ -50,6 +51,7 @@ func (AwsRegion) Values() []AwsRegion {
 	return []AwsRegion{
 		"af-south-1",
 		"ap-east-1",
+		"ap-east-2",
 		"ap-northeast-1",
 		"ap-northeast-2",
 		"ap-northeast-3",
@@ -202,6 +204,7 @@ type MembershipAccountRelationshipStatus string
 const (
 	MembershipAccountRelationshipStatusAssociated    MembershipAccountRelationshipStatus = "Associated"
 	MembershipAccountRelationshipStatusDisassociated MembershipAccountRelationshipStatus = "Disassociated"
+	MembershipAccountRelationshipStatusUnassociated  MembershipAccountRelationshipStatus = "Unassociated"
 )
 
 // Values returns all known values for MembershipAccountRelationshipStatus. Note
@@ -213,6 +216,7 @@ func (MembershipAccountRelationshipStatus) Values() []MembershipAccountRelations
 	return []MembershipAccountRelationshipStatus{
 		"Associated",
 		"Disassociated",
+		"Unassociated",
 	}
 }
 
@@ -221,6 +225,7 @@ type MembershipAccountRelationshipType string
 // Enum values for MembershipAccountRelationshipType
 const (
 	MembershipAccountRelationshipTypeOrganization MembershipAccountRelationshipType = "Organization"
+	MembershipAccountRelationshipTypeUnrelated    MembershipAccountRelationshipType = "Unrelated"
 )
 
 // Values returns all known values for MembershipAccountRelationshipType. Note
@@ -231,6 +236,7 @@ const (
 func (MembershipAccountRelationshipType) Values() []MembershipAccountRelationshipType {
 	return []MembershipAccountRelationshipType{
 		"Organization",
+		"Unrelated",
 	}
 }
 

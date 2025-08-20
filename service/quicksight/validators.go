@@ -15941,6 +15941,11 @@ func validatePluginVisual(v *types.PluginVisual) error {
 			invalidParams.AddNested("ChartConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Actions != nil {
+		if err := validateVisualCustomActionList(v.Actions); err != nil {
+			invalidParams.AddNested("Actions", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

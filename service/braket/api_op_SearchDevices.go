@@ -29,7 +29,7 @@ func (c *Client) SearchDevices(ctx context.Context, params *SearchDevicesInput, 
 
 type SearchDevicesInput struct {
 
-	// The filter values to use to search for a device.
+	// Array of SearchDevicesFilter objects to use when searching for devices.
 	//
 	// This member is required.
 	Filters []types.SearchDevicesFilter
@@ -38,7 +38,7 @@ type SearchDevicesInput struct {
 	MaxResults *int32
 
 	// A token used for pagination of results returned in the response. Use the token
-	// returned from the previous request continue results where the previous request
+	// returned from the previous request to continue search where the previous request
 	// ended.
 	NextToken *string
 
@@ -54,7 +54,7 @@ type SearchDevicesOutput struct {
 	Devices []types.DeviceSummary
 
 	// A token used for pagination of results, or null if there are no additional
-	// results. Use the token value in a subsequent request to continue results where
+	// results. Use the token value in a subsequent request to continue search where
 	// the previous request ended.
 	NextToken *string
 

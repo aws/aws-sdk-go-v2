@@ -1,3 +1,12 @@
+# v1.18.1 (2025-08-20)
+
+* **Bug Fix**: Remove unused deserialization code.
+
+# v1.18.0 (2025-08-11)
+
+* **Feature**: Add support for configuring per-service Options via callback on global config.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.1 (2025-08-05)
 
 * No change notes available for this release.

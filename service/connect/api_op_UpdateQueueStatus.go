@@ -11,8 +11,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change.
-//
 // Updates the status of the queue.
 func (c *Client) UpdateQueueStatus(ctx context.Context, params *UpdateQueueStatusInput, optFns ...func(*Options)) (*UpdateQueueStatusOutput, error) {
 	if params == nil {

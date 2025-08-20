@@ -19,6 +19,13 @@ import (
 //
 // A virtual interface (VLAN) transmits the traffic between the Direct Connect
 // location and the customer network.
+//
+//   - If you're using an asn , the response includes ASN value in both the asn and
+//     asnLong fields.
+//
+//   - If you're using asnLong , the response returns a value of 0 (zero) for the
+//     asn attribute because it exceeds the highest ASN value of 2,147,483,647 that
+//     it can support
 func (c *Client) DescribeVirtualInterfaces(ctx context.Context, params *DescribeVirtualInterfacesInput, optFns ...func(*Options)) (*DescribeVirtualInterfacesOutput, error) {
 	if params == nil {
 		params = &DescribeVirtualInterfacesInput{}
@@ -39,6 +46,15 @@ type DescribeVirtualInterfacesInput struct {
 	// The ID of the connection.
 	ConnectionId *string
 
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	//
+	// If MaxResults is given a value larger than 100, only 100 results are returned.
+	MaxResults *int32
+
+	// The token for the next page of results.
+	NextToken *string
+
 	// The ID of the virtual interface.
 	VirtualInterfaceId *string
 
@@ -46,6 +62,10 @@ type DescribeVirtualInterfacesInput struct {
 }
 
 type DescribeVirtualInterfacesOutput struct {
+
+	// The token to use to retrieve the next page of results. This value is null when
+	// there are no more results to return.
+	NextToken *string
 
 	// The virtual interfaces
 	VirtualInterfaces []types.VirtualInterface

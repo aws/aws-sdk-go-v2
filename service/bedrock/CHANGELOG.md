@@ -1,3 +1,13 @@
+# v1.44.1 (2025-08-20)
+
+* **Bug Fix**: Remove unused deserialization code.
+
+# v1.44.0 (2025-08-11)
+
+* **Feature**: Add support for configuring per-service Options via callback on global config.
+* **Feature**: This release includes model updates and enhanced SDK documentation for union fields in automated reasoning policy components. Added docs cover policy definitions, mutations (add/update for rules/types/variables), build assets, workflow sources, test results, and tag exception handling.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.43.0 (2025-08-07)
 
 * **Feature**: Support configurable bearer token through the environment via AWS_BEARER_TOKEN_BEDROCK.

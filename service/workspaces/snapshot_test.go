@@ -506,6 +506,18 @@ func TestCheckSnapshot_DescribeConnectionAliasPermissions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeCustomWorkspaceImageImport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCustomWorkspaceImageImport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeCustomWorkspaceImageImport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeImageAssociations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeImageAssociations(context.Background(), nil, func(o *Options) {
@@ -715,6 +727,18 @@ func TestCheckSnapshot_ImportClientBranding(t *testing.T) {
 	_, err := svc.ImportClientBranding(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ImportClientBranding")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ImportCustomWorkspaceImage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ImportCustomWorkspaceImage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ImportCustomWorkspaceImage")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1573,6 +1597,18 @@ func TestUpdateSnapshot_DescribeConnectionAliasPermissions(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeCustomWorkspaceImageImport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCustomWorkspaceImageImport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeCustomWorkspaceImageImport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeImageAssociations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeImageAssociations(context.Background(), nil, func(o *Options) {
@@ -1782,6 +1818,18 @@ func TestUpdateSnapshot_ImportClientBranding(t *testing.T) {
 	_, err := svc.ImportClientBranding(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ImportClientBranding")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ImportCustomWorkspaceImage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ImportCustomWorkspaceImage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ImportCustomWorkspaceImage")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

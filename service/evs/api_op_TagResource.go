@@ -10,8 +10,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Amazon EVS is in public preview release and is subject to change.
-//
 // Associates the specified tags to an Amazon EVS resource with the specified
 // resourceArn . If existing tags on a resource are not specified in the request
 // parameters, they aren't changed. When a resource is deleted, the tags associated

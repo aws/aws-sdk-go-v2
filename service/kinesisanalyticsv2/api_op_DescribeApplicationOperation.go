@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about a specific operation performed on a Managed Service
-// for Apache Flink application
+// Provides a detailed description of a specified application operation. To see a
+// list of all the operations of an application, invoke the ListApplicationOperationsoperation.
+//
+// This operation is supported only for Managed Service for Apache Flink.
 func (c *Client) DescribeApplicationOperation(ctx context.Context, params *DescribeApplicationOperationInput, optFns ...func(*Options)) (*DescribeApplicationOperationOutput, error) {
 	if params == nil {
 		params = &DescribeApplicationOperationInput{}
@@ -28,16 +30,16 @@ func (c *Client) DescribeApplicationOperation(ctx context.Context, params *Descr
 	return out, nil
 }
 
-// Request for information about a specific operation performed on a Managed
-// Service for Apache Flink application
+// A request for information about a specific operation that was performed on a
+// Managed Service for Apache Flink application.
 type DescribeApplicationOperationInput struct {
 
-	// The name of the application
+	// The name of the application.
 	//
 	// This member is required.
 	ApplicationName *string
 
-	// Identifier of the Operation
+	// The operation ID of the request.
 	//
 	// This member is required.
 	OperationId *string
@@ -45,11 +47,12 @@ type DescribeApplicationOperationInput struct {
 	noSmithyDocumentSerde
 }
 
-// Provides details of the operation corresponding to the operation-ID on a
-// Managed Service for Apache Flink application
+// Provides details of the operation that corresponds to the operation ID on a
+// Managed Service for Apache Flink application.
 type DescribeApplicationOperationOutput struct {
 
-	// Provides a description of the operation, such as the operation-type and status
+	// A description of the application operation that provides information about the
+	// updates that were made to the application.
 	ApplicationOperationInfoDetails *types.ApplicationOperationInfoDetails
 
 	// Metadata pertaining to the operation's result.

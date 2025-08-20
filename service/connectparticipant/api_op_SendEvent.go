@@ -11,8 +11,8 @@ import (
 )
 
 // The application/vnd.amazonaws.connect.event.connection.acknowledged ContentType
-// will no longer be supported starting December 31, 2024. This event has been
-// migrated to the [CreateParticipantConnection]API using the ConnectParticipant field.
+// is no longer maintained since December 31, 2024. This event has been migrated to
+// the [CreateParticipantConnection]API using the ConnectParticipant field.
 //
 // Sends an event. Message receipts are not supported when there are more than two
 // active participants in the chat. Using the SendEvent API for message receipts
@@ -53,8 +53,8 @@ type SendEventInput struct {
 	//
 	//   - application/vnd.amazonaws.connect.event.typing
 	//
-	//   - application/vnd.amazonaws.connect.event.connection.acknowledged (will be
-	//   deprecated on December 31, 2024)
+	//   - application/vnd.amazonaws.connect.event.connection.acknowledged (is no
+	//   longer maintained since December 31, 2024)
 	//
 	//   - application/vnd.amazonaws.connect.event.message.delivered
 	//

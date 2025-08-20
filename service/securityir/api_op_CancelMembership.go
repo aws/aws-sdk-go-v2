@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Grants permissions to cancel an existing membership.
+// Cancels an existing membership.
 func (c *Client) CancelMembership(ctx context.Context, params *CancelMembershipInput, optFns ...func(*Options)) (*CancelMembershipOutput, error) {
 	if params == nil {
 		params = &CancelMembershipInput{}

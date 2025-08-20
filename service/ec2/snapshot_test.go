@@ -6746,6 +6746,18 @@ func TestCheckSnapshot_ModifyInstanceCapacityReservationAttributes(t *testing.T)
 	}
 }
 
+func TestCheckSnapshot_ModifyInstanceConnectEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyInstanceConnectEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyInstanceConnectEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ModifyInstanceCpuOptions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ModifyInstanceCpuOptions(context.Background(), nil, func(o *Options) {
@@ -14994,6 +15006,18 @@ func TestUpdateSnapshot_ModifyInstanceCapacityReservationAttributes(t *testing.T
 	_, err := svc.ModifyInstanceCapacityReservationAttributes(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ModifyInstanceCapacityReservationAttributes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyInstanceConnectEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyInstanceConnectEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyInstanceConnectEndpoint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

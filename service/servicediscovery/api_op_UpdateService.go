@@ -27,6 +27,14 @@ import (
 //   - If you omit an existing HealthCheckCustomConfig configuration from an
 //     UpdateService request, the configuration isn't deleted from the service.
 //
+// You can't call UpdateService and update settings in the following scenarios:
+//
+//   - When the service is associated with an HTTP namespace
+//
+//   - When the service is associated with a shared namespace and contains
+//     instances that were registered by Amazon Web Services accounts other than the
+//     account making the UpdateService call
+//
 // When you update settings for a service, Cloud Map also updates the
 // corresponding settings in all the records and health checks that were created by
 // using the specified service.
@@ -47,7 +55,12 @@ func (c *Client) UpdateService(ctx context.Context, params *UpdateServiceInput, 
 
 type UpdateServiceInput struct {
 
-	// The ID of the service that you want to update.
+	// The ID or Amazon Resource Name (ARN) of the service that you want to update. If
+	// the namespace associated with the service is shared with your Amazon Web
+	// Services account, specify the service ARN. For more information about shared
+	// namespaces, see [Cross-account Cloud Map namespace sharing]in the Cloud Map Developer Guide
+	//
+	// [Cross-account Cloud Map namespace sharing]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
 	//
 	// This member is required.
 	Id *string

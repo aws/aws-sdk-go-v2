@@ -750,6 +750,26 @@ func (m *validateOpGetApplicationGrant) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetApplicationSessionConfiguration struct {
+}
+
+func (*validateOpGetApplicationSessionConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetApplicationSessionConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetApplicationSessionConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetApplicationSessionConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetInlinePolicyForPermissionSet struct {
 }
 
@@ -1250,6 +1270,26 @@ func (m *validateOpPutApplicationGrant) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutApplicationSessionConfiguration struct {
+}
+
+func (*validateOpPutApplicationSessionConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutApplicationSessionConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutApplicationSessionConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutApplicationSessionConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutInlinePolicyToPermissionSet struct {
 }
 
@@ -1578,6 +1618,10 @@ func addOpGetApplicationGrantValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpGetApplicationGrant{}, middleware.After)
 }
 
+func addOpGetApplicationSessionConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetApplicationSessionConfiguration{}, middleware.After)
+}
+
 func addOpGetInlinePolicyForPermissionSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetInlinePolicyForPermissionSet{}, middleware.After)
 }
@@ -1676,6 +1720,10 @@ func addOpPutApplicationAuthenticationMethodValidationMiddleware(stack *middlewa
 
 func addOpPutApplicationGrantValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutApplicationGrant{}, middleware.After)
+}
+
+func addOpPutApplicationSessionConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutApplicationSessionConfiguration{}, middleware.After)
 }
 
 func addOpPutInlinePolicyToPermissionSetValidationMiddleware(stack *middleware.Stack) error {
@@ -2705,6 +2753,21 @@ func validateOpGetApplicationGrantInput(v *GetApplicationGrantInput) error {
 	}
 }
 
+func validateOpGetApplicationSessionConfigurationInput(v *GetApplicationSessionConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetApplicationSessionConfigurationInput"}
+	if v.ApplicationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetInlinePolicyForPermissionSetInput(v *GetInlinePolicyForPermissionSetInput) error {
 	if v == nil {
 		return nil
@@ -3136,6 +3199,21 @@ func validateOpPutApplicationGrantInput(v *PutApplicationGrantInput) error {
 	}
 	if v.Grant == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Grant"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutApplicationSessionConfigurationInput(v *PutApplicationSessionConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutApplicationSessionConfigurationInput"}
+	if v.ApplicationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

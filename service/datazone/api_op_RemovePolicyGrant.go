@@ -58,6 +58,9 @@ type RemovePolicyGrantInput struct {
 	// of the request.
 	ClientToken *string
 
+	// The ID of the policy grant that is to be removed from a specified entity.
+	GrantIdentifier *string
+
 	noSmithyDocumentSerde
 }
 

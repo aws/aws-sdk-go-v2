@@ -119,9 +119,12 @@ type CreateServiceInput struct {
 	// an existing service.
 	HealthCheckCustomConfig *types.HealthCheckCustomConfig
 
-	// The ID of the namespace that you want to use to create the service. The
-	// namespace ID must be specified, but it can be specified either here or in the
-	// DnsConfig object.
+	// The ID or Amazon Resource Name (ARN) of the namespace that you want to use to
+	// create the service. For namespaces shared with your Amazon Web Services account,
+	// specify the namespace ARN. For more information about shared namespaces, see [Cross-account Cloud Map namespace sharing]in
+	// the Cloud Map Developer Guide.
+	//
+	// [Cross-account Cloud Map namespace sharing]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
 	NamespaceId *string
 
 	// The tags to add to the service. Each tag consists of a key and an optional

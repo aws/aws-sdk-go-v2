@@ -98,6 +98,18 @@ func TestCheckSnapshot_ConverseStream(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CountTokens(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CountTokens(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CountTokens")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetAsyncInvoke(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAsyncInvoke(context.Background(), nil, func(o *Options) {
@@ -186,6 +198,18 @@ func TestUpdateSnapshot_ConverseStream(t *testing.T) {
 	_, err := svc.ConverseStream(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ConverseStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CountTokens(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CountTokens(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CountTokens")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

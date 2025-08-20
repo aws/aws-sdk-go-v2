@@ -431,6 +431,23 @@ func (ContactInitiationMethod) Values() []ContactInitiationMethod {
 	}
 }
 
+type ContactMetricName string
+
+// Enum values for ContactMetricName
+const (
+	ContactMetricNamePositionInQueue ContactMetricName = "POSITION_IN_QUEUE"
+)
+
+// Values returns all known values for ContactMetricName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContactMetricName) Values() []ContactMetricName {
+	return []ContactMetricName{
+		"POSITION_IN_QUEUE",
+	}
+}
+
 type ContactRecordingType string
 
 // Enum values for ContactRecordingType

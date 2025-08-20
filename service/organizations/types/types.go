@@ -237,6 +237,32 @@ type EffectivePolicy struct {
 	noSmithyDocumentSerde
 }
 
+// Contains details about the validation errors that occurred when generating or
+// enforcing an [effective policy], such as which policies contributed to the error and location of
+// the error.
+//
+// [effective policy]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_effective.html
+type EffectivePolicyValidationError struct {
+
+	// The individual policies [inherited] and [attached] to the account which contributed to the
+	// validation error.
+	//
+	// [inherited]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inheritance_mgmt.html
+	// [attached]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_policies_attach.html
+	ContributingPolicies []string
+
+	// The error code for the validation error. For example, ELEMENTS_TOO_MANY .
+	ErrorCode *string
+
+	// The error message for the validation error.
+	ErrorMessage *string
+
+	// The path within the effective policy where the validation error occurred.
+	PathToError *string
+
+	noSmithyDocumentSerde
+}
+
 // A structure that contains details of a service principal that represents an
 // Amazon Web Services service that is enabled to integrate with Organizations.
 type EnabledServicePrincipal struct {

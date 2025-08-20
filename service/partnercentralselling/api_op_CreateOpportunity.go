@@ -163,6 +163,9 @@ type CreateOpportunityInput struct {
 	// partners in eligible programs.
 	SoftwareRevenue *types.SoftwareRevenue
 
+	// A map of the key-value pairs of the tag or tags to assign.
+	Tags []types.Tag
+
 	noSmithyDocumentSerde
 }
 

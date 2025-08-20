@@ -1056,6 +1056,7 @@ const (
 	ResourceTypeRegistrationAttachment    ResourceType = "registration-attachment"
 	ResourceTypeVerifiedDestinationNumber ResourceType = "verified-destination-number"
 	ResourceTypeProtectConfiguration      ResourceType = "protect-configuration"
+	ResourceTypeMessageTemplate           ResourceType = "message-template"
 	ResourceTypePolicy                    ResourceType = "policy"
 	ResourceTypeMessage                   ResourceType = "message"
 )
@@ -1079,6 +1080,7 @@ func (ResourceType) Values() []ResourceType {
 		"registration-attachment",
 		"verified-destination-number",
 		"protect-configuration",
+		"message-template",
 		"policy",
 		"message",
 	}
@@ -1202,6 +1204,7 @@ const (
 	ValidationExceptionReasonDestinationCountryBlocked                 ValidationExceptionReason = "DESTINATION_COUNTRY_BLOCKED"
 	ValidationExceptionReasonFieldValidationFailed                     ValidationExceptionReason = "FIELD_VALIDATION_FAILED"
 	ValidationExceptionReasonAttachmentTypeNotSupported                ValidationExceptionReason = "ATTACHMENT_TYPE_NOT_SUPPORTED"
+	ValidationExceptionReasonInternationalSendingNotSupported          ValidationExceptionReason = "INTERNATIONAL_SENDING_NOT_SUPPORTED"
 	ValidationExceptionReasonInvalidArn                                ValidationExceptionReason = "INVALID_ARN"
 	ValidationExceptionReasonInvalidFilterValues                       ValidationExceptionReason = "INVALID_FILTER_VALUES"
 	ValidationExceptionReasonInvalidIdentityForDestinationCountry      ValidationExceptionReason = "INVALID_IDENTITY_FOR_DESTINATION_COUNTRY"
@@ -1250,6 +1253,7 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"DESTINATION_COUNTRY_BLOCKED",
 		"FIELD_VALIDATION_FAILED",
 		"ATTACHMENT_TYPE_NOT_SUPPORTED",
+		"INTERNATIONAL_SENDING_NOT_SUPPORTED",
 		"INVALID_ARN",
 		"INVALID_FILTER_VALUES",
 		"INVALID_IDENTITY_FOR_DESTINATION_COUNTRY",

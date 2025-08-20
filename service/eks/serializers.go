@@ -563,6 +563,13 @@ func awsRestjson1_serializeOpDocumentCreateAddonInput(v *CreateAddonInput, value
 		ok.String(*v.ConfigurationValues)
 	}
 
+	if v.NamespaceConfig != nil {
+		ok := object.Key("namespaceConfig")
+		if err := awsRestjson1_serializeDocumentAddonNamespaceConfigRequest(v.NamespaceConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.PodIdentityAssociations != nil {
 		ok := object.Key("podIdentityAssociations")
 		if err := awsRestjson1_serializeDocumentAddonPodIdentityAssociationsList(v.PodIdentityAssociations, ok); err != nil {
@@ -5558,6 +5565,18 @@ func awsRestjson1_serializeDocumentAccessScope(v *types.AccessScope, value smith
 	if len(v.Type) > 0 {
 		ok := object.Key("type")
 		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAddonNamespaceConfigRequest(v *types.AddonNamespaceConfigRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Namespace != nil {
+		ok := object.Key("namespace")
+		ok.String(*v.Namespace)
 	}
 
 	return nil

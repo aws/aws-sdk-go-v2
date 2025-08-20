@@ -7,11 +7,32 @@ import (
 	"time"
 )
 
-// Defines the Amazon Braket job to be created. Specifies the container image the
-// job uses and the paths to the Python scripts used for entry and training.
+// Contains metadata about the quantum task action, including the action type and
+// program statistics.
+type ActionMetadata struct {
+
+	// The type of action associated with the quantum task.
+	//
+	// This member is required.
+	ActionType *string
+
+	// The number of executables in a program set. This is only available for a
+	// Program Set.
+	ExecutableCount *int64
+
+	// The number of programs in a program set. This is only available for a Program
+	// Set.
+	ProgramCount *int64
+
+	noSmithyDocumentSerde
+}
+
+// Defines the Amazon Braket hybrid job to be created. Specifies the container
+// image the job uses and the paths to the Python scripts used for entry and
+// training.
 type AlgorithmSpecification struct {
 
-	// The container image used to create an Amazon Braket job.
+	// The container image used to create an Amazon Braket hybrid job.
 	ContainerImage *ContainerImage
 
 	// Configures the paths to the Python scripts used for entry and training.
@@ -36,7 +57,7 @@ type Association struct {
 	noSmithyDocumentSerde
 }
 
-// The container image used to create an Amazon Braket job.
+// The container image used to create an Amazon Braket hybrid job.
 type ContainerImage struct {
 
 	// The URI locating the container image.
@@ -47,10 +68,11 @@ type ContainerImage struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the source of the data used by the Amazon Braket job.
+// Information about the source of the input data used by the Amazon Braket hybrid
+// job.
 type DataSource struct {
 
-	// Information about the data stored in Amazon S3 used by the Amazon Braket job.
+	// Amazon S3 path of the input data used by the hybrid job.
 	//
 	// This member is required.
 	S3DataSource *S3DataSource
@@ -58,12 +80,11 @@ type DataSource struct {
 	noSmithyDocumentSerde
 }
 
-// Configures the quantum processing units (QPUs) or simulator used to create and
-// run an Amazon Braket job.
+// Configures the primary device used to create and run an Amazon Braket hybrid
+// job.
 type DeviceConfig struct {
 
-	// The primary quantum processing unit (QPU) or simulator used to create and run
-	// an Amazon Braket job.
+	// The primary device ARN used to create and run an Amazon Braket hybrid job.
 	//
 	// This member is required.
 	Device *string
@@ -71,7 +92,7 @@ type DeviceConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Information about tasks and jobs queued on a device.
+// Information about quantum tasks and hybrid jobs queued on a device.
 type DeviceQueueInfo struct {
 
 	// The name of the queue.
@@ -79,13 +100,13 @@ type DeviceQueueInfo struct {
 	// This member is required.
 	Queue QueueName
 
-	// The number of jobs or tasks in the queue for a given device.
+	// The number of hybrid jobs or quantum tasks in the queue for a given device.
 	//
 	// This member is required.
 	QueueSize *string
 
-	// Optional. Specifies the priority of the queue. Tasks in a priority queue are
-	// processed before the tasks in a normal queue.
+	// Optional. Specifies the priority of the queue. Quantum tasks in a priority
+	// queue are processed before the quantum tasks in a normal queue.
 	QueuePriority QueuePriority
 
 	noSmithyDocumentSerde
@@ -122,10 +143,10 @@ type DeviceSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the queue for a specified job.
+// Information about the queue for a specified hybrid job.
 type HybridJobQueueInfo struct {
 
-	// Current position of the job in the jobs queue.
+	// Current position of the hybrid job in the jobs queue.
 	//
 	// This member is required.
 	Position *string
@@ -136,8 +157,8 @@ type HybridJobQueueInfo struct {
 	Queue QueueName
 
 	// Optional. Provides more information about the queue position. For example, if
-	// the job is complete and no longer in the queue, the message field contains that
-	// information.
+	// the hybrid job is complete and no longer in the queue, the message field
+	// contains that information.
 	Message *string
 
 	noSmithyDocumentSerde
@@ -147,12 +168,12 @@ type HybridJobQueueInfo struct {
 // where it is located.
 type InputFileConfig struct {
 
-	// A named input source that an Amazon Braket job can consume.
+	// A named input source that an Amazon Braket hybrid job can consume.
 	//
 	// This member is required.
 	ChannelName *string
 
-	// The location of the channel data.
+	// The location of the input data.
 	//
 	// This member is required.
 	DataSource *DataSource
@@ -167,128 +188,147 @@ type InputFileConfig struct {
 // job on Amazon Braket.
 type InstanceConfig struct {
 
-	// Configures the type resource instances to use while running an Amazon Braket
+	// Configures the type of resource instances to use while running an Amazon Braket
 	// hybrid job.
 	//
 	// This member is required.
 	InstanceType InstanceType
 
-	// The size of the storage volume, in GB, that user wants to provision.
+	// The size of the storage volume, in GB, to provision.
 	//
 	// This member is required.
 	VolumeSizeInGb *int32
 
 	// Configures the number of resource instances to use while running an Amazon
-	// Braket job on Amazon Braket. The default value is 1.
+	// Braket hybrid job on Amazon Braket. The default value is 1.
 	InstanceCount *int32
 
 	noSmithyDocumentSerde
 }
 
-// Contains information about the output locations for job checkpoint data.
+// Contains information about the output locations for hybrid job checkpoint data.
 type JobCheckpointConfig struct {
 
-	// Identifies the S3 path where you want Amazon Braket to store checkpoints. For
-	// example, s3://bucket-name/key-name-prefix .
+	// Identifies the S3 path where you want Amazon Braket to store checkpoint data.
+	// For example, s3://bucket-name/key-name-prefix .
 	//
 	// This member is required.
 	S3Uri *string
 
-	// (Optional) The local directory where checkpoints are written. The default
+	// (Optional) The local directory where checkpoint data is stored. The default
 	// directory is /opt/braket/checkpoints/ .
 	LocalPath *string
 
 	noSmithyDocumentSerde
 }
 
-// Details about the type and time events occurred related to the Amazon Braket
-// job.
+// Details about the type and time events that occurred related to the Amazon
+// Braket hybrid job.
 type JobEventDetails struct {
 
-	// The type of event that occurred related to the Amazon Braket job.
+	// The type of event that occurred related to the Amazon Braket hybrid job.
 	EventType JobEventType
 
-	// A message describing the event that occurred related to the Amazon Braket job.
+	// A message describing the event that occurred related to the Amazon Braket
+	// hybrid job.
 	Message *string
 
-	// The type of event that occurred related to the Amazon Braket job.
+	// The time of the event that occurred related to the Amazon Braket hybrid job.
 	TimeOfEvent *time.Time
 
 	noSmithyDocumentSerde
 }
 
-// Specifies the path to the S3 location where you want to store job artifacts and
-// the encryption key used to store them.
+// Specifies the path to the S3 location where you want to store hybrid job
+// artifacts and the encryption key used to store them.
 type JobOutputDataConfig struct {
 
-	// Identifies the S3 path where you want Amazon Braket to store the job training
-	// artifacts. For example, s3://bucket-name/key-name-prefix .
+	// Identifies the S3 path where you want Amazon Braket to store the hybrid job
+	// training artifacts. For example, s3://bucket-name/key-name-prefix .
 	//
 	// This member is required.
 	S3Path *string
 
 	// The AWS Key Management Service (AWS KMS) key that Amazon Braket uses to encrypt
-	// the job training artifacts at rest using Amazon S3 server-side encryption.
+	// the hybrid job training artifacts at rest using Amazon S3 server-side
+	// encryption.
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
 }
 
-// Specifies limits for how long an Amazon Braket job can run.
+// Specifies limits for how long an Amazon Braket hybrid job can run.
 type JobStoppingCondition struct {
 
-	// The maximum length of time, in seconds, that an Amazon Braket job can run.
+	// The maximum length of time, in seconds, that an Amazon Braket hybrid job can
+	// run.
 	MaxRuntimeInSeconds *int32
 
 	noSmithyDocumentSerde
 }
 
-// Provides summary information about an Amazon Braket job.
+// Provides summary information about an Amazon Braket hybrid job.
 type JobSummary struct {
 
-	// The date and time that the Amazon Braket job was created.
+	// The time at which the Amazon Braket hybrid job was created.
 	//
 	// This member is required.
 	CreatedAt *time.Time
 
-	// Provides summary information about the primary device used by an Amazon Braket
-	// job.
+	// The primary device used by an Amazon Braket hybrid job.
 	//
 	// This member is required.
 	Device *string
 
-	// The ARN of the Amazon Braket job.
+	// The ARN of the Amazon Braket hybrid job.
 	//
 	// This member is required.
 	JobArn *string
 
-	// The name of the Amazon Braket job.
+	// The name of the Amazon Braket hybrid job.
 	//
 	// This member is required.
 	JobName *string
 
-	// The status of the Amazon Braket job.
+	// The status of the Amazon Braket hybrid job.
 	//
 	// This member is required.
 	Status JobPrimaryStatus
 
-	// The date and time that the Amazon Braket job ended.
+	// The time at which the Amazon Braket hybrid job ended.
 	EndedAt *time.Time
 
-	// The date and time that the Amazon Braket job was started.
+	// The time at which the Amazon Braket hybrid job was started.
 	StartedAt *time.Time
 
-	// A tag object that consists of a key and an optional value, used to manage
-	// metadata for Amazon Braket resources.
+	// Displays the key, value pairs of tags associated with this hybrid job.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
 
-// Information about the queue for the specified quantum task.
+// Contains information about validation failures that occurred during the
+// processing of a program set in a quantum task.
+type ProgramSetValidationFailure struct {
+
+	// The index of the program within the program set that failed validation.
+	//
+	// This member is required.
+	ProgramIndex *int64
+
+	// A list of error messages describing the validation failures that occurred.
+	Errors []string
+
+	// The index of the input within the program set that failed validation.
+	InputsIndex *int64
+
+	noSmithyDocumentSerde
+}
+
+// The queue information for the specified quantum task.
 type QuantumTaskQueueInfo struct {
 
-	// Current position of the task in the quantum tasks queue.
+	// Current position of the quantum task in the quantum tasks queue.
 	//
 	// This member is required.
 	Position *string
@@ -299,12 +339,12 @@ type QuantumTaskQueueInfo struct {
 	Queue QueueName
 
 	// Optional. Provides more information about the queue position. For example, if
-	// the task is complete and no longer in the queue, the message field contains that
-	// information.
+	// the quantum task is complete and no longer in the queue, the message field
+	// contains that information.
 	Message *string
 
 	// Optional. Specifies the priority of the queue. Quantum tasks in a priority
-	// queue are processed before the tasks in a normal queue.
+	// queue are processed before the quantum tasks in a normal queue.
 	QueuePriority QueuePriority
 
 	noSmithyDocumentSerde
@@ -313,42 +353,42 @@ type QuantumTaskQueueInfo struct {
 // Includes information about a quantum task.
 type QuantumTaskSummary struct {
 
-	// The time at which the task was created.
+	// The time at which the quantum task was created.
 	//
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The ARN of the device the task ran on.
+	// The ARN of the device the quantum task ran on.
 	//
 	// This member is required.
 	DeviceArn *string
 
-	// The S3 bucket where the task result file is stored..
+	// The S3 bucket where the quantum task result file is stored.
 	//
 	// This member is required.
 	OutputS3Bucket *string
 
-	// The folder in the S3 bucket where the task result file is stored.
+	// The folder in the S3 bucket where the quantum task result file is stored.
 	//
 	// This member is required.
 	OutputS3Directory *string
 
-	// The ARN of the task.
+	// The ARN of the quantum task.
 	//
 	// This member is required.
 	QuantumTaskArn *string
 
-	// The shots used for the task.
+	// The shots used for the quantum task.
 	//
 	// This member is required.
 	Shots *int64
 
-	// The status of the task.
+	// The status of the quantum task.
 	//
 	// This member is required.
 	Status QuantumTaskStatus
 
-	// The time at which the task finished.
+	// The time at which the quantum task finished.
 	EndedAt *time.Time
 
 	// Displays the key, value pairs of tags associated with this quantum task.
@@ -357,7 +397,7 @@ type QuantumTaskSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the data stored in Amazon S3 used by the Amazon Braket job.
+// Information about the Amazon S3 storage used by the Amazon Braket hybrid job.
 type S3DataSource struct {
 
 	// Depending on the value specified for the S3DataType , identifies either a key
@@ -369,37 +409,39 @@ type S3DataSource struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about the Python scripts used for entry and by an Amazon
-// Braket job.
+// Contains information about algorithm scripts used for the Amazon Braket hybrid
+// job.
 type ScriptModeConfig struct {
 
-	// The path to the Python script that serves as the entry point for an Amazon
-	// Braket job.
+	// The entry point in the algorithm scripts from where the execution begins in the
+	// hybrid job.
 	//
 	// This member is required.
 	EntryPoint *string
 
-	// The URI that specifies the S3 path to the Python script module that contains
-	// the training script used by an Amazon Braket job.
+	// The URI that specifies the S3 path to the algorithm scripts used by an Amazon
+	// Braket hybrid job.
 	//
 	// This member is required.
 	S3Uri *string
 
-	// The type of compression used by the Python scripts for an Amazon Braket job.
+	// The type of compression used to store the algorithm scripts in Amazon S3
+	// storage.
 	CompressionType CompressionType
 
 	noSmithyDocumentSerde
 }
 
-// The filter to use for searching devices.
+// The filter used to search for devices.
 type SearchDevicesFilter struct {
 
-	// The name to use to filter results.
+	// The name of the device parameter to filter based on. Only deviceArn filter name
+	// is currently supported.
 	//
 	// This member is required.
 	Name *string
 
-	// The values to use to filter results.
+	// The values used to filter devices based on the filter name.
 	//
 	// This member is required.
 	Values []string
@@ -407,20 +449,21 @@ type SearchDevicesFilter struct {
 	noSmithyDocumentSerde
 }
 
-// A filter used to search for Amazon Braket jobs.
+// A filter used to search for Amazon Braket hybrid jobs.
 type SearchJobsFilter struct {
 
-	// The name to use for the jobs filter.
+	// The name of the hybrid job parameter to filter based on. Filter name can be
+	// either jobArn or createdAt .
 	//
 	// This member is required.
 	Name *string
 
-	// An operator to use for the jobs filter.
+	// An operator to use for the filter.
 	//
 	// This member is required.
 	Operator SearchJobsFilterOperator
 
-	// The values to use for the jobs filter.
+	// The values used to filter hybrid jobs based on the filter name and operator.
 	//
 	// This member is required.
 	Values []string
@@ -428,20 +471,21 @@ type SearchJobsFilter struct {
 	noSmithyDocumentSerde
 }
 
-// A filter to use to search for tasks.
+// A filter used to search for quantum tasks.
 type SearchQuantumTasksFilter struct {
 
-	// The name of the device used for the task.
+	// The name of the quantum task parameter to filter based on. Filter name can be
+	// either quantumTaskArn , deviceArn , jobArn , status or createdAt .
 	//
 	// This member is required.
 	Name *string
 
-	// An operator to use in the filter.
+	// An operator to use for the filter.
 	//
 	// This member is required.
 	Operator SearchQuantumTasksFilterOperator
 
-	// The values to use for the filter.
+	// The values used to filter quantum tasks based on the filter name and operator.
 	//
 	// This member is required.
 	Values []string

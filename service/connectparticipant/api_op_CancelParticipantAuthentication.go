@@ -15,6 +15,12 @@ import (
 //
 // The current supported channel is chat. This API is not supported for Apple
 // Messages for Business, WhatsApp, or SMS chats.
+//
+// ConnectionToken is used for invoking this API instead of ParticipantToken .
+//
+// The Amazon Connect Participant Service APIs do not use [Signature Version 4 authentication].
+//
+// [Signature Version 4 authentication]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 func (c *Client) CancelParticipantAuthentication(ctx context.Context, params *CancelParticipantAuthenticationInput, optFns ...func(*Options)) (*CancelParticipantAuthenticationOutput, error) {
 	if params == nil {
 		params = &CancelParticipantAuthenticationInput{}

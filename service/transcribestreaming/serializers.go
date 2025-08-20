@@ -735,6 +735,13 @@ func awsRestjson1_serializeDocumentMedicalScribeConfigurationEvent(v *types.Medi
 		}
 	}
 
+	if v.MedicalScribeContext != nil {
+		ok := object.Key("MedicalScribeContext")
+		if err := awsRestjson1_serializeDocumentMedicalScribeContext(v.MedicalScribeContext, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.PostStreamAnalyticsSettings != nil {
 		ok := object.Key("PostStreamAnalyticsSettings")
 		if err := awsRestjson1_serializeDocumentMedicalScribePostStreamAnalyticsSettings(v.PostStreamAnalyticsSettings, ok); err != nil {
@@ -765,6 +772,20 @@ func awsRestjson1_serializeDocumentMedicalScribeConfigurationEvent(v *types.Medi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMedicalScribeContext(v *types.MedicalScribeContext, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PatientContext != nil {
+		ok := object.Key("PatientContext")
+		if err := awsRestjson1_serializeDocumentMedicalScribePatientContext(v.PatientContext, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMedicalScribeEncryptionSettings(v *types.MedicalScribeEncryptionSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -779,6 +800,18 @@ func awsRestjson1_serializeDocumentMedicalScribeEncryptionSettings(v *types.Medi
 	if v.KmsKeyId != nil {
 		ok := object.Key("KmsKeyId")
 		ok.String(*v.KmsKeyId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMedicalScribePatientContext(v *types.MedicalScribePatientContext, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Pronouns) > 0 {
+		ok := object.Key("Pronouns")
+		ok.String(string(v.Pronouns))
 	}
 
 	return nil

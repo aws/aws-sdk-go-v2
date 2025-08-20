@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds a new participant into an on-going chat contact. For more information, see [Customize chat flow experiences by integrating custom participants]
-// .
+// Adds a new participant into an on-going chat contact or webRTC call. For more
+// information, see [Customize chat flow experiences by integrating custom participants]or [Enable multi-user web, in-app, and video calling].
 //
+// [Enable multi-user web, in-app, and video calling]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-multiuser-inapp.html
 // [Customize chat flow experiences by integrating custom participants]: https://docs.aws.amazon.com/connect/latest/adminguide/chat-customize-flow.html
 func (c *Client) CreateParticipant(ctx context.Context, params *CreateParticipantInput, optFns ...func(*Options)) (*CreateParticipantOutput, error) {
 	if params == nil {
@@ -32,8 +33,10 @@ func (c *Client) CreateParticipant(ctx context.Context, params *CreateParticipan
 
 type CreateParticipantInput struct {
 
-	// The identifier of the contact in this instance of Amazon Connect. Only contacts
-	// in the CHAT channel are supported.
+	// The identifier of the contact in this instance of Amazon Connect. Supports
+	// contacts in the CHAT channel and VOICE (WebRTC) channels. For WebRTC calls, this
+	// should be the initial contact ID that was generated when the contact was first
+	// created (from the StartWebRTCContact API) in the VOICE channel
 	//
 	// This member is required.
 	ContactId *string
@@ -48,9 +51,8 @@ type CreateParticipantInput struct {
 
 	// Information identifying the participant.
 	//
-	// The only Valid value for ParticipantRole is CUSTOM_BOT .
-	//
-	// DisplayName is Required.
+	// The only valid value for ParticipantRole is CUSTOM_BOT for chat contact and
+	// CUSTOMER for voice contact.
 	//
 	// This member is required.
 	ParticipantDetails *types.ParticipantDetailsToAdd

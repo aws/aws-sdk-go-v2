@@ -2618,6 +2618,11 @@ func awsAwsjson11_serializeOpDocumentDiscoverInstancesInput(v *DiscoverInstances
 		}
 	}
 
+	if v.OwnerAccount != nil {
+		ok := object.Key("OwnerAccount")
+		ok.String(*v.OwnerAccount)
+	}
+
 	if v.QueryParameters != nil {
 		ok := object.Key("QueryParameters")
 		if err := awsAwsjson11_serializeDocumentAttributes(v.QueryParameters, ok); err != nil {
@@ -2640,6 +2645,11 @@ func awsAwsjson11_serializeOpDocumentDiscoverInstancesRevisionInput(v *DiscoverI
 	if v.NamespaceName != nil {
 		ok := object.Key("NamespaceName")
 		ok.String(*v.NamespaceName)
+	}
+
+	if v.OwnerAccount != nil {
+		ok := object.Key("OwnerAccount")
+		ok.String(*v.OwnerAccount)
 	}
 
 	if v.ServiceName != nil {
@@ -2715,6 +2725,11 @@ func awsAwsjson11_serializeOpDocumentGetOperationInput(v *GetOperationInput, val
 	if v.OperationId != nil {
 		ok := object.Key("OperationId")
 		ok.String(*v.OperationId)
+	}
+
+	if v.OwnerAccount != nil {
+		ok := object.Key("OwnerAccount")
+		ok.String(*v.OwnerAccount)
 	}
 
 	return nil

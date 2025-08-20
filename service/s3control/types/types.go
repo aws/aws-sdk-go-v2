@@ -866,6 +866,10 @@ type JobOperation struct {
 	// manifest.
 	LambdaInvoke *LambdaInvokeOperation
 
+	// Directs the specified job to compute checksum values for every object in the
+	// manifest.
+	S3ComputeObjectChecksum *S3ComputeObjectChecksumOperation
+
 	// Directs the specified job to execute a DELETE Object tagging call on every
 	// object in the manifest.
 	//
@@ -956,6 +960,10 @@ type JobReport struct {
 	// Directory buckets - Directory buckets aren't supported as a location for Batch
 	// Operations to store job completion reports.
 	Bucket *string
+
+	// Lists the Amazon Web Services account ID that owns the target bucket, where the
+	// completion report is received.
+	ExpectedBucketOwner *string
 
 	// The format of the specified job-completion report.
 	Format JobReportFormat
@@ -2138,6 +2146,25 @@ type S3BucketDestination struct {
 
 	// The prefix of the destination bucket where the metrics export will be delivered.
 	Prefix *string
+
+	noSmithyDocumentSerde
+}
+
+// Directs the specified job to invoke the ComputeObjectChecksum operation on
+// every object listed in the job's manifest.
+type S3ComputeObjectChecksumOperation struct {
+
+	// Indicates the algorithm that you want Amazon S3 to use to create the checksum.
+	// For more information, see [Checking object integrity]in the Amazon S3 User Guide.
+	//
+	// [Checking object integrity]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
+	ChecksumAlgorithm ComputeObjectChecksumAlgorithm
+
+	// Indicates the checksum type that you want Amazon S3 to use to calculate the
+	// object’s checksum value. For more information, see [Checking object integrity]in the Amazon S3 User Guide.
+	//
+	// [Checking object integrity]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
+	ChecksumType ComputeObjectChecksumType
 
 	noSmithyDocumentSerde
 }

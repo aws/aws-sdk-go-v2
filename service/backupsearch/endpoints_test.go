@@ -5,10 +5,8 @@ package backupsearch
 import (
 	"context"
 	smithy "github.com/aws/smithy-go"
-	smithyauth "github.com/aws/smithy-go/auth"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/ptr"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"net/http"
 	"net/url"
 	"reflect"
@@ -89,22 +87,9 @@ func TestEndpointCase2(t *testing.T) {
 	uri, _ := url.Parse("https://backup-search-fips.us-east-1.api.aws")
 
 	expectEndpoint := smithyendpoints.Endpoint{
-		URI:     *uri,
-		Headers: http.Header{},
-		Properties: func() smithy.Properties {
-			var out smithy.Properties
-			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
-				{
-					SchemeID: "aws.auth#sigv4",
-					SignerProperties: func() smithy.Properties {
-						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-						return sp
-					}(),
-				},
-			})
-			return out
-		}(),
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
 	}
 
 	if e, a := expectEndpoint.URI, result.URI; e != a {
@@ -138,22 +123,9 @@ func TestEndpointCase3(t *testing.T) {
 	uri, _ := url.Parse("https://backup-search.us-east-1.api.aws")
 
 	expectEndpoint := smithyendpoints.Endpoint{
-		URI:     *uri,
-		Headers: http.Header{},
-		Properties: func() smithy.Properties {
-			var out smithy.Properties
-			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
-				{
-					SchemeID: "aws.auth#sigv4",
-					SignerProperties: func() smithy.Properties {
-						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-						return sp
-					}(),
-				},
-			})
-			return out
-		}(),
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
 	}
 
 	if e, a := expectEndpoint.URI, result.URI; e != a {
@@ -187,22 +159,9 @@ func TestEndpointCase4(t *testing.T) {
 	uri, _ := url.Parse("https://backup-search-fips.cn-northwest-1.api.amazonwebservices.com.cn")
 
 	expectEndpoint := smithyendpoints.Endpoint{
-		URI:     *uri,
-		Headers: http.Header{},
-		Properties: func() smithy.Properties {
-			var out smithy.Properties
-			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
-				{
-					SchemeID: "aws.auth#sigv4",
-					SignerProperties: func() smithy.Properties {
-						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "cn-northwest-1")
-						return sp
-					}(),
-				},
-			})
-			return out
-		}(),
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
 	}
 
 	if e, a := expectEndpoint.URI, result.URI; e != a {
@@ -236,22 +195,9 @@ func TestEndpointCase5(t *testing.T) {
 	uri, _ := url.Parse("https://backup-search.cn-northwest-1.api.amazonwebservices.com.cn")
 
 	expectEndpoint := smithyendpoints.Endpoint{
-		URI:     *uri,
-		Headers: http.Header{},
-		Properties: func() smithy.Properties {
-			var out smithy.Properties
-			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
-				{
-					SchemeID: "aws.auth#sigv4",
-					SignerProperties: func() smithy.Properties {
-						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "cn-northwest-1")
-						return sp
-					}(),
-				},
-			})
-			return out
-		}(),
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
 	}
 
 	if e, a := expectEndpoint.URI, result.URI; e != a {
@@ -285,22 +231,9 @@ func TestEndpointCase6(t *testing.T) {
 	uri, _ := url.Parse("https://backup-search-fips.us-gov-west-1.api.aws")
 
 	expectEndpoint := smithyendpoints.Endpoint{
-		URI:     *uri,
-		Headers: http.Header{},
-		Properties: func() smithy.Properties {
-			var out smithy.Properties
-			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
-				{
-					SchemeID: "aws.auth#sigv4",
-					SignerProperties: func() smithy.Properties {
-						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-gov-west-1")
-						return sp
-					}(),
-				},
-			})
-			return out
-		}(),
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
 	}
 
 	if e, a := expectEndpoint.URI, result.URI; e != a {
@@ -334,414 +267,9 @@ func TestEndpointCase7(t *testing.T) {
 	uri, _ := url.Parse("https://backup-search.us-gov-west-1.api.aws")
 
 	expectEndpoint := smithyendpoints.Endpoint{
-		URI:     *uri,
-		Headers: http.Header{},
-		Properties: func() smithy.Properties {
-			var out smithy.Properties
-			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
-				{
-					SchemeID: "aws.auth#sigv4",
-					SignerProperties: func() smithy.Properties {
-						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-gov-west-1")
-						return sp
-					}(),
-				},
-			})
-			return out
-		}(),
-	}
-
-	if e, a := expectEndpoint.URI, result.URI; e != a {
-		t.Errorf("expect %v URI, got %v", e, a)
-	}
-
-	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
-		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
-	}
-
-	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
-		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
-	}
-}
-
-// For region us-iso-east-1 with FIPS enabled and DualStack enabled
-func TestEndpointCase8(t *testing.T) {
-	var params = EndpointParameters{
-		Region:  ptr.String("us-iso-east-1"),
-		UseFIPS: ptr.Bool(true),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
-	}
-
-	uri, _ := url.Parse("https://backup-search-fips.us-iso-east-1.c2s.ic.gov")
-
-	expectEndpoint := smithyendpoints.Endpoint{
-		URI:     *uri,
-		Headers: http.Header{},
-		Properties: func() smithy.Properties {
-			var out smithy.Properties
-			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
-				{
-					SchemeID: "aws.auth#sigv4",
-					SignerProperties: func() smithy.Properties {
-						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-iso-east-1")
-						return sp
-					}(),
-				},
-			})
-			return out
-		}(),
-	}
-
-	if e, a := expectEndpoint.URI, result.URI; e != a {
-		t.Errorf("expect %v URI, got %v", e, a)
-	}
-
-	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
-		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
-	}
-
-	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
-		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
-	}
-}
-
-// For region us-iso-east-1 with FIPS disabled and DualStack enabled
-func TestEndpointCase9(t *testing.T) {
-	var params = EndpointParameters{
-		Region:  ptr.String("us-iso-east-1"),
-		UseFIPS: ptr.Bool(false),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
-	}
-
-	uri, _ := url.Parse("https://backup-search.us-iso-east-1.c2s.ic.gov")
-
-	expectEndpoint := smithyendpoints.Endpoint{
-		URI:     *uri,
-		Headers: http.Header{},
-		Properties: func() smithy.Properties {
-			var out smithy.Properties
-			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
-				{
-					SchemeID: "aws.auth#sigv4",
-					SignerProperties: func() smithy.Properties {
-						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-iso-east-1")
-						return sp
-					}(),
-				},
-			})
-			return out
-		}(),
-	}
-
-	if e, a := expectEndpoint.URI, result.URI; e != a {
-		t.Errorf("expect %v URI, got %v", e, a)
-	}
-
-	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
-		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
-	}
-
-	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
-		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
-	}
-}
-
-// For region us-isob-east-1 with FIPS enabled and DualStack enabled
-func TestEndpointCase10(t *testing.T) {
-	var params = EndpointParameters{
-		Region:  ptr.String("us-isob-east-1"),
-		UseFIPS: ptr.Bool(true),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
-	}
-
-	uri, _ := url.Parse("https://backup-search-fips.us-isob-east-1.sc2s.sgov.gov")
-
-	expectEndpoint := smithyendpoints.Endpoint{
-		URI:     *uri,
-		Headers: http.Header{},
-		Properties: func() smithy.Properties {
-			var out smithy.Properties
-			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
-				{
-					SchemeID: "aws.auth#sigv4",
-					SignerProperties: func() smithy.Properties {
-						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-isob-east-1")
-						return sp
-					}(),
-				},
-			})
-			return out
-		}(),
-	}
-
-	if e, a := expectEndpoint.URI, result.URI; e != a {
-		t.Errorf("expect %v URI, got %v", e, a)
-	}
-
-	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
-		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
-	}
-
-	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
-		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
-	}
-}
-
-// For region us-isob-east-1 with FIPS disabled and DualStack enabled
-func TestEndpointCase11(t *testing.T) {
-	var params = EndpointParameters{
-		Region:  ptr.String("us-isob-east-1"),
-		UseFIPS: ptr.Bool(false),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
-	}
-
-	uri, _ := url.Parse("https://backup-search.us-isob-east-1.sc2s.sgov.gov")
-
-	expectEndpoint := smithyendpoints.Endpoint{
-		URI:     *uri,
-		Headers: http.Header{},
-		Properties: func() smithy.Properties {
-			var out smithy.Properties
-			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
-				{
-					SchemeID: "aws.auth#sigv4",
-					SignerProperties: func() smithy.Properties {
-						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-isob-east-1")
-						return sp
-					}(),
-				},
-			})
-			return out
-		}(),
-	}
-
-	if e, a := expectEndpoint.URI, result.URI; e != a {
-		t.Errorf("expect %v URI, got %v", e, a)
-	}
-
-	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
-		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
-	}
-
-	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
-		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
-	}
-}
-
-// For region eu-isoe-west-1 with FIPS enabled and DualStack enabled
-func TestEndpointCase12(t *testing.T) {
-	var params = EndpointParameters{
-		Region:  ptr.String("eu-isoe-west-1"),
-		UseFIPS: ptr.Bool(true),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
-	}
-
-	uri, _ := url.Parse("https://backup-search-fips.eu-isoe-west-1.cloud.adc-e.uk")
-
-	expectEndpoint := smithyendpoints.Endpoint{
-		URI:     *uri,
-		Headers: http.Header{},
-		Properties: func() smithy.Properties {
-			var out smithy.Properties
-			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
-				{
-					SchemeID: "aws.auth#sigv4",
-					SignerProperties: func() smithy.Properties {
-						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "eu-isoe-west-1")
-						return sp
-					}(),
-				},
-			})
-			return out
-		}(),
-	}
-
-	if e, a := expectEndpoint.URI, result.URI; e != a {
-		t.Errorf("expect %v URI, got %v", e, a)
-	}
-
-	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
-		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
-	}
-
-	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
-		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
-	}
-}
-
-// For region eu-isoe-west-1 with FIPS disabled and DualStack enabled
-func TestEndpointCase13(t *testing.T) {
-	var params = EndpointParameters{
-		Region:  ptr.String("eu-isoe-west-1"),
-		UseFIPS: ptr.Bool(false),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
-	}
-
-	uri, _ := url.Parse("https://backup-search.eu-isoe-west-1.cloud.adc-e.uk")
-
-	expectEndpoint := smithyendpoints.Endpoint{
-		URI:     *uri,
-		Headers: http.Header{},
-		Properties: func() smithy.Properties {
-			var out smithy.Properties
-			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
-				{
-					SchemeID: "aws.auth#sigv4",
-					SignerProperties: func() smithy.Properties {
-						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "eu-isoe-west-1")
-						return sp
-					}(),
-				},
-			})
-			return out
-		}(),
-	}
-
-	if e, a := expectEndpoint.URI, result.URI; e != a {
-		t.Errorf("expect %v URI, got %v", e, a)
-	}
-
-	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
-		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
-	}
-
-	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
-		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
-	}
-}
-
-// For region us-isof-south-1 with FIPS enabled and DualStack enabled
-func TestEndpointCase14(t *testing.T) {
-	var params = EndpointParameters{
-		Region:  ptr.String("us-isof-south-1"),
-		UseFIPS: ptr.Bool(true),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
-	}
-
-	uri, _ := url.Parse("https://backup-search-fips.us-isof-south-1.csp.hci.ic.gov")
-
-	expectEndpoint := smithyendpoints.Endpoint{
-		URI:     *uri,
-		Headers: http.Header{},
-		Properties: func() smithy.Properties {
-			var out smithy.Properties
-			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
-				{
-					SchemeID: "aws.auth#sigv4",
-					SignerProperties: func() smithy.Properties {
-						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-isof-south-1")
-						return sp
-					}(),
-				},
-			})
-			return out
-		}(),
-	}
-
-	if e, a := expectEndpoint.URI, result.URI; e != a {
-		t.Errorf("expect %v URI, got %v", e, a)
-	}
-
-	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
-		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
-	}
-
-	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
-		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
-	}
-}
-
-// For region us-isof-south-1 with FIPS disabled and DualStack enabled
-func TestEndpointCase15(t *testing.T) {
-	var params = EndpointParameters{
-		Region:  ptr.String("us-isof-south-1"),
-		UseFIPS: ptr.Bool(false),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
-	}
-
-	uri, _ := url.Parse("https://backup-search.us-isof-south-1.csp.hci.ic.gov")
-
-	expectEndpoint := smithyendpoints.Endpoint{
-		URI:     *uri,
-		Headers: http.Header{},
-		Properties: func() smithy.Properties {
-			var out smithy.Properties
-			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
-				{
-					SchemeID: "aws.auth#sigv4",
-					SignerProperties: func() smithy.Properties {
-						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-isof-south-1")
-						return sp
-					}(),
-				},
-			})
-			return out
-		}(),
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
 	}
 
 	if e, a := expectEndpoint.URI, result.URI; e != a {
@@ -758,7 +286,7 @@ func TestEndpointCase15(t *testing.T) {
 }
 
 // Missing region
-func TestEndpointCase16(t *testing.T) {
+func TestEndpointCase8(t *testing.T) {
 	var params = EndpointParameters{}
 
 	resolver := NewDefaultEndpointResolverV2()

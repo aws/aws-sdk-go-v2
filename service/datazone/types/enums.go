@@ -1322,6 +1322,23 @@ func (RejectRuleBehavior) Values() []RejectRuleBehavior {
 	}
 }
 
+type ResolutionStrategy string
+
+// Enum values for ResolutionStrategy
+const (
+	ResolutionStrategyManual ResolutionStrategy = "MANUAL"
+)
+
+// Values returns all known values for ResolutionStrategy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResolutionStrategy) Values() []ResolutionStrategy {
+	return []ResolutionStrategy{
+		"MANUAL",
+	}
+}
+
 type RuleAction string
 
 // Enum values for RuleAction
@@ -1442,6 +1459,23 @@ func (SelfGrantStatus) Values() []SelfGrantStatus {
 		"GRANTED",
 		"GRANT_FAILED",
 		"REVOKE_FAILED",
+	}
+}
+
+type SortFieldAccountPool string
+
+// Enum values for SortFieldAccountPool
+const (
+	SortFieldAccountPoolName SortFieldAccountPool = "NAME"
+)
+
+// Values returns all known values for SortFieldAccountPool. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SortFieldAccountPool) Values() []SortFieldAccountPool {
+	return []SortFieldAccountPool{
+		"NAME",
 	}
 }
 

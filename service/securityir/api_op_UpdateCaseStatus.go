@@ -11,9 +11,27 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Grants permission to update the status for a designated cases. Options include
-// Submitted | Detection and Analysis | Eradication, Containment and Recovery |
-// Post-Incident Activities | Closed .
+// Updates the state transitions for a designated cases.
+//
+// Self-managed: the following states are available for self-managed cases.
+//
+//   - Submitted → Detection and Analysis
+//
+//   - Detection and Analysis → Containment, Eradication, and Recovery
+//
+//   - Detection and Analysis → Post-incident Activities
+//
+//   - Containment, Eradication, and Recovery → Detection and Analysis
+//
+//   - Containment, Eradication, and Recovery → Post-incident Activities
+//
+//   - Post-incident Activities → Containment, Eradication, and Recovery
+//
+//   - Post-incident Activities → Detection and Analysis
+//
+//   - Any → Closed
+//
+// AWS supported: You must use the CloseCase API to close.
 func (c *Client) UpdateCaseStatus(ctx context.Context, params *UpdateCaseStatusInput, optFns ...func(*Options)) (*UpdateCaseStatusOutput, error) {
 	if params == nil {
 		params = &UpdateCaseStatusInput{}

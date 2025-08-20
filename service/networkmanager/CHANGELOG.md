@@ -1,3 +1,13 @@
+# v1.39.0 (2025-08-20)
+
+* **Feature**: Remove incorrect endpoint tests
+* **Bug Fix**: Remove unused deserialization code.
+
+# v1.38.0 (2025-08-11)
+
+* **Feature**: Add support for configuring per-service Options via callback on global config.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.37.1 (2025-08-06)
 
 * **Bug Fix**: **BREAKING CHANGE**: The fields on VpcOptions have been changed from `bool` to `*bool`. Before this change, the fields were incorrectly marked as having default values of false by the service, which made it functionally impossible for users to set them false in an API call.

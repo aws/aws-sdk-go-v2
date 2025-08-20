@@ -34,13 +34,11 @@ type SearchHoursOfOperationOverridesInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The maximum number of results to return per page. Valid Range: Minimum value of
-	// 1. Maximum value of 100.
+	// The maximum number of results to return per page.
 	MaxResults *int32
 
 	// The token for the next set of results. Use the value returned in the previous
-	// response in the next request to retrieve the next set of results. Length
-	// Constraints: Minimum length of 1. Maximum length of 2500.
+	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
 	// The search criteria to be used to return hours of operations overrides.
@@ -61,8 +59,7 @@ type SearchHoursOfOperationOverridesOutput struct {
 	HoursOfOperationOverrides []types.HoursOfOperationOverride
 
 	// The token for the next set of results. Use the value returned in the previous
-	// response in the next request to retrieve the next set of results. Length
-	// Constraints: Minimum length of 1. Maximum length of 2500.
+	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -207,8 +204,7 @@ func (c *Client) addOperationSearchHoursOfOperationOverridesMiddlewares(stack *m
 // SearchHoursOfOperationOverridesPaginatorOptions is the paginator options for
 // SearchHoursOfOperationOverrides
 type SearchHoursOfOperationOverridesPaginatorOptions struct {
-	// The maximum number of results to return per page. Valid Range: Minimum value of
-	// 1. Maximum value of 100.
+	// The maximum number of results to return per page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

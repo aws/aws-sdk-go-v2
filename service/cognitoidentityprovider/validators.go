@@ -730,6 +730,26 @@ func (m *validateOpCreateResourceServer) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateTerms struct {
+}
+
+func (*validateOpCreateTerms) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateTerms) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateTermsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateTermsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateUserImportJob struct {
 }
 
@@ -885,6 +905,26 @@ func (m *validateOpDeleteResourceServer) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteResourceServerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteTerms struct {
+}
+
+func (*validateOpDeleteTerms) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteTerms) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteTermsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteTermsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1105,6 +1145,26 @@ func (m *validateOpDescribeRiskConfiguration) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeRiskConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeTerms struct {
+}
+
+func (*validateOpDescribeTerms) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeTerms) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeTermsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeTermsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1605,6 +1665,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListTerms struct {
+}
+
+func (*validateOpListTerms) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTerms) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTermsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTermsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2150,6 +2230,26 @@ func (m *validateOpUpdateResourceServer) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateTerms struct {
+}
+
+func (*validateOpUpdateTerms) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateTerms) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateTermsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateTermsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateUserAttributes struct {
 }
 
@@ -2414,6 +2514,10 @@ func addOpCreateResourceServerValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpCreateResourceServer{}, middleware.After)
 }
 
+func addOpCreateTermsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateTerms{}, middleware.After)
+}
+
 func addOpCreateUserImportJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateUserImportJob{}, middleware.After)
 }
@@ -2444,6 +2548,10 @@ func addOpDeleteManagedLoginBrandingValidationMiddleware(stack *middleware.Stack
 
 func addOpDeleteResourceServerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteResourceServer{}, middleware.After)
+}
+
+func addOpDeleteTermsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteTerms{}, middleware.After)
 }
 
 func addOpDeleteUserAttributesValidationMiddleware(stack *middleware.Stack) error {
@@ -2488,6 +2596,10 @@ func addOpDescribeResourceServerValidationMiddleware(stack *middleware.Stack) er
 
 func addOpDescribeRiskConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeRiskConfiguration{}, middleware.After)
+}
+
+func addOpDescribeTermsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeTerms{}, middleware.After)
 }
 
 func addOpDescribeUserImportJobValidationMiddleware(stack *middleware.Stack) error {
@@ -2588,6 +2700,10 @@ func addOpListResourceServersValidationMiddleware(stack *middleware.Stack) error
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpListTermsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTerms{}, middleware.After)
 }
 
 func addOpListUserImportJobsValidationMiddleware(stack *middleware.Stack) error {
@@ -2696,6 +2812,10 @@ func addOpUpdateManagedLoginBrandingValidationMiddleware(stack *middleware.Stack
 
 func addOpUpdateResourceServerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateResourceServer{}, middleware.After)
+}
+
+func addOpUpdateTermsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateTerms{}, middleware.After)
 }
 
 func addOpUpdateUserAttributesValidationMiddleware(stack *middleware.Stack) error {
@@ -3998,6 +4118,33 @@ func validateOpCreateResourceServerInput(v *CreateResourceServerInput) error {
 	}
 }
 
+func validateOpCreateTermsInput(v *CreateTermsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateTermsInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.ClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
+	if v.TermsName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TermsName"))
+	}
+	if len(v.TermsSource) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TermsSource"))
+	}
+	if len(v.Enforcement) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Enforcement"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateUserImportJobInput(v *CreateUserImportJobInput) error {
 	if v == nil {
 		return nil
@@ -4169,6 +4316,24 @@ func validateOpDeleteResourceServerInput(v *DeleteResourceServerInput) error {
 	}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteTermsInput(v *DeleteTermsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteTermsInput"}
+	if v.TermsId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TermsId"))
+	}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4356,6 +4521,24 @@ func validateOpDescribeRiskConfigurationInput(v *DescribeRiskConfigurationInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeRiskConfigurationInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeTermsInput(v *DescribeTermsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeTermsInput"}
+	if v.TermsId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TermsId"))
+	}
 	if v.UserPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
 	}
@@ -4757,6 +4940,21 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListTermsInput(v *ListTermsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTermsInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5261,6 +5459,24 @@ func validateOpUpdateResourceServerInput(v *UpdateResourceServerInput) error {
 		if err := validateResourceServerScopeListType(v.Scopes); err != nil {
 			invalidParams.AddNested("Scopes", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateTermsInput(v *UpdateTermsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateTermsInput"}
+	if v.TermsId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TermsId"))
+	}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

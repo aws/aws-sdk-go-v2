@@ -628,6 +628,23 @@
                 "smithy.api#documentation": "Placeholder documentation for AccountConfiguration"
             }
         },
+        "com.amazonaws.medialive#AdditionalDestinations": {
+            "type": "structure",
+            "members": {
+                "Destination": {
+                    "target": "com.amazonaws.medialive#OutputLocationRef",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The destination location",
+                        "smithy.api#jsonName": "destination",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Additional output destinations for a CMAF Ingest output group"
+            }
+        },
         "com.amazonaws.medialive#AfdSignaling": {
             "type": "enum",
             "members": {
@@ -1769,7 +1786,7 @@
                     }
                 },
                 "BufSize": {
-                    "target": "com.amazonaws.medialive#__integerMin50000Max16000000",
+                    "target": "com.amazonaws.medialive#__integerMin50000Max24000000",
                     "traits": {
                         "smithy.api#documentation": "The size of the buffer (HRD buffer model) in bits.",
                         "smithy.api#jsonName": "bufSize"
@@ -1836,7 +1853,7 @@
                     }
                 },
                 "MaxBitrate": {
-                    "target": "com.amazonaws.medialive#__integerMin50000Max8000000",
+                    "target": "com.amazonaws.medialive#__integerMin50000Max12000000",
                     "traits": {
                         "smithy.api#documentation": "The maximum bitrate to assign.\nFor recommendations, see the description for qvbrQualityLevel.",
                         "smithy.api#jsonName": "maxBitrate"
@@ -1885,7 +1902,7 @@
                     }
                 },
                 "Bitrate": {
-                    "target": "com.amazonaws.medialive#__integerMin50000Max8000000",
+                    "target": "com.amazonaws.medialive#__integerMin50000Max12000000",
                     "traits": {
                         "smithy.api#documentation": "Average bitrate in bits/second. Required when the rate control mode is CBR. Not used for QVBR.",
                         "smithy.api#jsonName": "bitrate"
@@ -4691,6 +4708,13 @@
                     "traits": {
                         "smithy.api#documentation": "Set to enabled to pass through ID3 metadata from the input sources.",
                         "smithy.api#jsonName": "timedMetadataPassthrough"
+                    }
+                },
+                "AdditionalDestinations": {
+                    "target": "com.amazonaws.medialive#__listOfAdditionalDestinations",
+                    "traits": {
+                        "smithy.api#documentation": "Optional an array of additional destinational HTTP destinations for the OutputGroup outputs",
+                        "smithy.api#jsonName": "additionalDestinations"
                     }
                 }
             },
@@ -38412,23 +38436,23 @@
                 }
             }
         },
-        "com.amazonaws.medialive#__integerMin50000Max16000000": {
+        "com.amazonaws.medialive#__integerMin50000Max12000000": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin50000Max16000000",
+                "smithy.api#documentation": "Placeholder documentation for __integerMin50000Max12000000",
                 "smithy.api#range": {
                     "min": 50000,
-                    "max": 16000000
+                    "max": 12000000
                 }
             }
         },
-        "com.amazonaws.medialive#__integerMin50000Max8000000": {
+        "com.amazonaws.medialive#__integerMin50000Max24000000": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for __integerMin50000Max8000000",
+                "smithy.api#documentation": "Placeholder documentation for __integerMin50000Max24000000",
                 "smithy.api#range": {
                     "min": 50000,
-                    "max": 8000000
+                    "max": 24000000
                 }
             }
         },
@@ -38510,6 +38534,15 @@
                     "min": -60,
                     "max": 60
                 }
+            }
+        },
+        "com.amazonaws.medialive#__listOfAdditionalDestinations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medialive#AdditionalDestinations"
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __listOfAdditionalDestinations"
             }
         },
         "com.amazonaws.medialive#__listOfAudioChannelMapping": {

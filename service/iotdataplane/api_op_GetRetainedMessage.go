@@ -20,7 +20,7 @@ import (
 //
 // For more information about messaging costs, see [Amazon Web Services IoT Core pricing - Messaging].
 //
-// [GetRetainedMessage]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiotfleethubfordevicemanagement.html#awsiotfleethubfordevicemanagement-actions-as-permissions
+// [GetRetainedMessage]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html
 // [Amazon Web Services IoT Core pricing - Messaging]: http://aws.amazon.com/iot-core/pricing/#Messaging
 // [ListRetainedMessages]: https://docs.aws.amazon.com/iot/latest/apireference/API_iotdata_ListRetainedMessages.html
 func (c *Client) GetRetainedMessage(ctx context.Context, params *GetRetainedMessageInput, optFns ...func(*Options)) (*GetRetainedMessageOutput, error) {

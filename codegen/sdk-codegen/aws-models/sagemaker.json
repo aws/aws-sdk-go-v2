@@ -1,6 +1,15 @@
 {
     "smithy": "2.0",
     "shapes": {
+        "com.amazonaws.sagemaker#AcceleratorsAmount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 10000000
+                }
+            }
+        },
         "com.amazonaws.sagemaker#Accept": {
             "type": "string",
             "traits": {
@@ -3030,7 +3039,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Attaches your Amazon Elastic Block Store (Amazon EBS) volume to a node in your EKS-orchestrated HyperPod cluster. </p> <p> This API works with the Amazon Elastic Block Store (Amazon EBS) Container Storage Interface (CSI) driver to manage the lifecycle of persistent storage in your HyperPod EKS clusters. </p>"
+                "smithy.api#documentation": "<p> Attaches your Amazon Elastic Block Store (Amazon EBS) volume to a node in your EKS orchestrated HyperPod cluster. </p> <p> This API works with the Amazon Elastic Block Store (Amazon EBS) Container Storage Interface (CSI) driver to manage the lifecycle of persistent storage in your HyperPod EKS clusters. </p>"
             }
         },
         "com.amazonaws.sagemaker#AttachClusterNodeVolumeRequest": {
@@ -4860,6 +4869,14 @@
             }
         },
         "com.amazonaws.sagemaker#AvailableInstanceCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#AvailableSpareInstanceCount": {
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
@@ -7642,6 +7659,20 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The size in gigabytes (GB) of the additional EBS volume to be attached to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each instance within the SageMaker HyperPod cluster instance group and mounted to <code>/opt/sagemaker</code>.</p>"
                     }
+                },
+                "VolumeKmsKeyId": {
+                    "target": "com.amazonaws.sagemaker#KmsKeyId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of a KMS key to encrypt the Amazon EBS volume.</p>"
+                    }
+                },
+                "RootVolume": {
+                    "target": "com.amazonaws.sagemaker#Boolean",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Specifies whether the configuration is for the cluster's root or secondary Amazon EBS volume. You can specify two <code>ClusterEbsVolumeConfig</code> fields to configure both the root and secondary volumes. Set the value to <code>True</code> if you'd like to provide your own customer managed Amazon Web Services KMS key to encrypt the root volume. When <code>True</code>:</p> <ul> <li> <p>The configuration is applied to the root volume.</p> </li> <li> <p>You can't specify the <code>VolumeSizeInGB</code> field. The size of the root volume is determined for you.</p> </li> <li> <p>You must specify a KMS key ID for <code>VolumeKmsKeyId</code> to encrypt the root volume with your own KMS key instead of an Amazon Web Services owned KMS key.</p> </li> </ul> <p>Otherwise, by default, the value is <code>False</code>, and the following applies:</p> <ul> <li> <p>The configuration is applied to the secondary volume, while the root volume is encrypted with an Amazon Web Services owned key.</p> </li> <li> <p>You must specify the <code>VolumeSizeInGB</code> field.</p> </li> <li> <p>You can optionally specify the <code>VolumeKmsKeyId</code> to encrypt the secondary volume with your own KMS key instead of an Amazon Web Services owned KMS key.</p> </li> </ul>"
+                    }
                 }
             },
             "traits": {
@@ -7672,7 +7703,7 @@
                     "target": "com.amazonaws.sagemaker#ClusterArn",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster associated with the event.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the HyperPod cluster associated with the event.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7680,7 +7711,7 @@
                     "target": "com.amazonaws.sagemaker#ClusterName",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The name of the SageMaker HyperPod cluster associated with the event.</p>",
+                        "smithy.api#documentation": "<p>The name of the HyperPod cluster associated with the event.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7700,7 +7731,7 @@
                     "target": "com.amazonaws.sagemaker#ClusterEventResourceType",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The type of resource associated with the event. Valid values are \"Cluster\", \"InstanceGroup\", or \"Instance\".</p>",
+                        "smithy.api#documentation": "<p>The type of resource associated with the event. Valid values are <code>Cluster</code>, <code>InstanceGroup</code>, or <code>Instance</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7788,7 +7819,7 @@
                     "target": "com.amazonaws.sagemaker#ClusterArn",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster associated with the event.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the HyperPod cluster associated with the event.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7796,7 +7827,7 @@
                     "target": "com.amazonaws.sagemaker#ClusterName",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The name of the SageMaker HyperPod cluster associated with the event.</p>",
+                        "smithy.api#documentation": "<p>The name of the HyperPod cluster associated with the event.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7809,14 +7840,14 @@
                 "InstanceId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The EC2 instance ID associated with the event, if applicable.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Elastic Compute Cloud (EC2) instance ID associated with the event, if applicable.</p>"
                     }
                 },
                 "ResourceType": {
                     "target": "com.amazonaws.sagemaker#ClusterEventResourceType",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The type of resource associated with the event. Valid values are \"Cluster\", \"InstanceGroup\", or \"Instance\".</p>",
+                        "smithy.api#documentation": "<p>The type of resource associated with the event. Valid values are <code>Cluster</code>, <code>InstanceGroup</code>, or <code>Instance</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7836,7 +7867,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A summary of an event in a SageMaker HyperPod cluster.</p>"
+                "smithy.api#documentation": "<p>A summary of an event in a HyperPod cluster.</p>"
             }
         },
         "com.amazonaws.sagemaker#ClusterInstanceCount": {
@@ -8216,6 +8247,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ml.p5.48xlarge"
+                    }
+                },
+                "ML_P6E_GB200_36XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.p6e-gb200.36xlarge"
                     }
                 },
                 "ML_TRN1_32XLARGE": {
@@ -8920,18 +8957,18 @@
                 "EksRoleAccessEntries": {
                     "target": "com.amazonaws.sagemaker#EksRoleAccessEntries",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of Amazon EKS IAM role ARNs associated with the cluster. This is created by SageMaker HyperPod on your behalf and only applies for EKS-orchestrated clusters.</p>"
+                        "smithy.api#documentation": "<p>A list of Amazon EKS IAM role ARNs associated with the cluster. This is created by HyperPod on your behalf and only applies for EKS orchestrated clusters.</p>"
                     }
                 },
                 "SlrAccessEntry": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Service-Linked Role (SLR) associated with the cluster. This is created by SageMaker HyperPod on your behalf and only applies for EKS-orchestrated clusters.</p>"
+                        "smithy.api#documentation": "<p>The Service-Linked Role (SLR) associated with the cluster. This is created by HyperPod on your behalf and only applies for EKS orchestrated clusters.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Metadata information about a SageMaker HyperPod cluster showing information about the cluster level operations, such as creating, updating, and deleting.</p>"
+                "smithy.api#documentation": "<p>Metadata information about a HyperPod cluster showing information about the cluster level operations, such as creating, updating, and deleting.</p>"
             }
         },
         "com.amazonaws.sagemaker#ClusterName": {
@@ -9057,6 +9094,13 @@
                     "target": "com.amazonaws.sagemaker#ImageId",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the Amazon Machine Image (AMI) desired for the node.</p>"
+                    }
+                },
+                "UltraServerInfo": {
+                    "target": "com.amazonaws.sagemaker#UltraServerInfo",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Contains information about the UltraServer.</p>"
                     }
                 }
             },
@@ -9196,6 +9240,13 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The status of the instance.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "UltraServerInfo": {
+                    "target": "com.amazonaws.sagemaker#UltraServerInfo",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Contains information about the UltraServer.</p>"
                     }
                 }
             },
@@ -10295,6 +10346,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The number of instances to add to the instance group of a SageMaker HyperPod cluster.</p>"
                     }
+                },
+                "Accelerators": {
+                    "target": "com.amazonaws.sagemaker#AcceleratorsAmount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of accelerators to allocate. If you don't specify a value for vCPU and MemoryInGiB, SageMaker AI automatically allocates ratio-based values for those parameters based on the number of accelerators you provide. For example, if you allocate 16 out of 32 total accelerators, SageMaker AI uses the ratio of 0.5 and allocates values to vCPU and MemoryInGiB.</p>"
+                    }
+                },
+                "VCpu": {
+                    "target": "com.amazonaws.sagemaker#VCpuAmount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of vCPU to allocate. If you specify a value only for vCPU, SageMaker AI automatically allocates ratio-based values for MemoryInGiB based on this vCPU parameter. For example, if you allocate 20 out of 40 total vCPU, SageMaker AI uses the ratio of 0.5 and allocates values to MemoryInGiB. Accelerators are set to 0.</p>"
+                    }
+                },
+                "MemoryInGiB": {
+                    "target": "com.amazonaws.sagemaker#MemoryInGiBAmount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of memory in GiB to allocate. If you specify a value only for this parameter, SageMaker AI automatically allocates a ratio-based value for vCPU based on this memory that you provide. For example, if you allocate 200 out of 400 total memory in GiB, SageMaker AI uses the ratio of 0.5 and allocates values to vCPU. Accelerators are set to 0.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10488,6 +10557,14 @@
                     "max": 256
                 },
                 "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.sagemaker#ConfiguredSpareInstanceCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
             }
         },
         "com.amazonaws.sagemaker#ConflictException": {
@@ -11671,7 +11748,7 @@
                 "Orchestrator": {
                     "target": "com.amazonaws.sagemaker#ClusterOrchestrator",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of orchestrator to use for the SageMaker HyperPod cluster. Currently, the only supported value is <code>\"eks\"</code>, which is to use an Amazon Elastic Kubernetes Service (EKS) cluster as the orchestrator.</p>"
+                        "smithy.api#documentation": "<p>The type of orchestrator to use for the SageMaker HyperPod cluster. Currently, the only supported value is <code>\"eks\"</code>, which is to use an Amazon Elastic Kubernetes Service cluster as the orchestrator.</p>"
                     }
                 },
                 "NodeRecovery": {
@@ -14056,7 +14133,7 @@
                     "target": "com.amazonaws.sagemaker#LabelAttributeName",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The attribute name to use for the label in the output manifest file. This is the key for the key/value pair formed with the label that a worker assigns to the object. The <code>LabelAttributeName</code> must meet the following requirements.</p> <ul> <li> <p>The name can't end with \"-metadata\". </p> </li> <li> <p>If you are using one of the following <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html\">built-in task types</a>, the attribute name <i>must</i> end with \"-ref\". If the task type you are using is not listed below, the attribute name <i>must not</i> end with \"-ref\".</p> <ul> <li> <p>Image semantic segmentation (<code>SemanticSegmentation)</code>, and adjustment (<code>AdjustmentSemanticSegmentation</code>) and verification (<code>VerificationSemanticSegmentation</code>) labeling jobs for this task type.</p> </li> <li> <p>Video frame object detection (<code>VideoObjectDetection</code>), and adjustment and verification (<code>AdjustmentVideoObjectDetection</code>) labeling jobs for this task type.</p> </li> <li> <p>Video frame object tracking (<code>VideoObjectTracking</code>), and adjustment and verification (<code>AdjustmentVideoObjectTracking</code>) labeling jobs for this task type.</p> </li> <li> <p>3D point cloud semantic segmentation (<code>3DPointCloudSemanticSegmentation</code>), and adjustment and verification (<code>Adjustment3DPointCloudSemanticSegmentation</code>) labeling jobs for this task type. </p> </li> <li> <p>3D point cloud object tracking (<code>3DPointCloudObjectTracking</code>), and adjustment and verification (<code>Adjustment3DPointCloudObjectTracking</code>) labeling jobs for this task type. </p> </li> </ul> </li> </ul> <p/> <important> <p>If you are creating an adjustment or verification labeling job, you must use a <i>different</i> <code>LabelAttributeName</code> than the one used in the original labeling job. The original labeling job is the Ground Truth labeling job that produced the labels that you want verified or adjusted. To learn more about adjustment and verification labeling jobs, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-verification-data.html\">Verify and Adjust Labels</a>.</p> </important>",
+                        "smithy.api#documentation": "<p>The attribute name to use for the label in the output manifest file. This is the key for the key/value pair formed with the label that a worker assigns to the object. The <code>LabelAttributeName</code> must meet the following requirements.</p> <ul> <li> <p>The name can't end with \"-metadata\". </p> </li> <li> <p>If you are using one of the following <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html\">built-in task types</a>, the attribute name <i>must</i> end with \"-ref\". If the task type you are using is not listed below, the attribute name <i>must not</i> end with \"-ref\".</p> <ul> <li> <p>Verification (<code>VerificationSemanticSegmentation</code>) labeling jobs for this task type.</p> </li> <li> <p>Video frame object detection (<code>VideoObjectDetection</code>), and adjustment and verification (<code>AdjustmentVideoObjectDetection</code>) labeling jobs for this task type.</p> </li> <li> <p>Video frame object tracking (<code>VideoObjectTracking</code>), and adjustment and verification (<code>AdjustmentVideoObjectTracking</code>) labeling jobs for this task type.</p> </li> <li> <p>3D point cloud semantic segmentation (<code>3DPointCloudSemanticSegmentation</code>), and adjustment and verification (<code>Adjustment3DPointCloudSemanticSegmentation</code>) labeling jobs for this task type. </p> </li> <li> <p>3D point cloud object tracking (<code>3DPointCloudObjectTracking</code>), and adjustment and verification (<code>Adjustment3DPointCloudObjectTracking</code>) labeling jobs for this task type. </p> </li> </ul> </li> </ul> <p/> <important> <p>If you are creating an adjustment or verification labeling job, you must use a <i>different</i> <code>LabelAttributeName</code> than the one used in the original labeling job. The original labeling job is the Ground Truth labeling job that produced the labels that you want verified or adjusted. To learn more about adjustment and verification labeling jobs, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-verification-data.html\">Verify and Adjust Labels</a>.</p> </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -16530,6 +16607,12 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The unique identifier of the training plan offering to use for creating this plan.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "SpareInstanceCountPerUltraServer": {
+                    "target": "com.amazonaws.sagemaker#SpareInstanceCountPerUltraServer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Number of spare instances to reserve per UltraServer for enhanced resiliency. Default is 1.</p>"
                     }
                 },
                 "Tags": {
@@ -20900,6 +20983,12 @@
                     "target": "com.amazonaws.sagemaker#AppStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The status.</p>"
+                    }
+                },
+                "EffectiveTrustedIdentityPropagationStatus": {
+                    "target": "com.amazonaws.sagemaker#FeatureStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The effective status of Trusted Identity Propagation (TIP) for this application. When enabled, user identities from IAM Identity Center are being propagated through the application to TIP enabled Amazon Web Services services. When disabled, standard IAM role-based access is used. </p>"
                     }
                 },
                 "RecoveryMode": {
@@ -27965,6 +28054,131 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sagemaker#DescribeReservedCapacity": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#DescribeReservedCapacityRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#DescribeReservedCapacityResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves details about a reserved capacity.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#DescribeReservedCapacityRequest": {
+            "type": "structure",
+            "members": {
+                "ReservedCapacityArn": {
+                    "target": "com.amazonaws.sagemaker#ReservedCapacityArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>ARN of the reserved capacity to describe.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#DescribeReservedCapacityResponse": {
+            "type": "structure",
+            "members": {
+                "ReservedCapacityArn": {
+                    "target": "com.amazonaws.sagemaker#ReservedCapacityArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>ARN of the reserved capacity.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ReservedCapacityType": {
+                    "target": "com.amazonaws.sagemaker#ReservedCapacityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of reserved capacity.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#ReservedCapacityStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the reserved capacity.</p>"
+                    }
+                },
+                "AvailabilityZone": {
+                    "target": "com.amazonaws.sagemaker#AvailabilityZone",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zone where the reserved capacity is provisioned.</p>"
+                    }
+                },
+                "DurationHours": {
+                    "target": "com.amazonaws.sagemaker#ReservedCapacityDurationHours",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total duration of the reserved capacity in hours.</p>"
+                    }
+                },
+                "DurationMinutes": {
+                    "target": "com.amazonaws.sagemaker#ReservedCapacityDurationMinutes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of minutes for the duration of the reserved capacity. For example, if a reserved capacity starts at 08:55 and ends at 11:30, the minutes field would be 35.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the reserved capacity becomes active.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the reserved capacity expires.</p>"
+                    }
+                },
+                "InstanceType": {
+                    "target": "com.amazonaws.sagemaker#ReservedCapacityInstanceType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon EC2 instance type used in the reserved capacity.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TotalInstanceCount": {
+                    "target": "com.amazonaws.sagemaker#TotalInstanceCount",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The total number of instances allocated to this reserved capacity.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AvailableInstanceCount": {
+                    "target": "com.amazonaws.sagemaker#AvailableInstanceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of instances currently available for use in this reserved capacity.</p>"
+                    }
+                },
+                "InUseInstanceCount": {
+                    "target": "com.amazonaws.sagemaker#InUseInstanceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of instances currently in use from this reserved capacity.</p>"
+                    }
+                },
+                "UltraServerSummary": {
+                    "target": "com.amazonaws.sagemaker#UltraServerSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of the UltraServer associated with this reserved capacity.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sagemaker#DescribeSpace": {
             "type": "operation",
             "input": {
@@ -28680,6 +28894,24 @@
                     "target": "com.amazonaws.sagemaker#InUseInstanceCount",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of instances currently in use from this training plan.</p>"
+                    }
+                },
+                "UnhealthyInstanceCount": {
+                    "target": "com.amazonaws.sagemaker#UnhealthyInstanceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of instances in the training plan that are currently in an unhealthy state.</p>"
+                    }
+                },
+                "AvailableSpareInstanceCount": {
+                    "target": "com.amazonaws.sagemaker#AvailableSpareInstanceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of available spare instances in the training plan.</p>"
+                    }
+                },
+                "TotalUltraServerCount": {
+                    "target": "com.amazonaws.sagemaker#UltraServerCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of UltraServers reserved to this training plan.</p>"
                     }
                 },
                 "TargetResources": {
@@ -29449,7 +29681,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Detaches your Amazon Elastic Block Store (Amazon EBS) volume from a node in your EKS-orchestrated SageMaker HyperPod cluster.</p> <p> This API works with the Amazon Elastic Block Store (Amazon EBS) Container Storage Interface (CSI) driver to manage the lifecycle of persistent storage in your HyperPod EKS clusters. </p>"
+                "smithy.api#documentation": "<p> Detaches your Amazon Elastic Block Store (Amazon EBS) volume from a node in your EKS orchestrated SageMaker HyperPod cluster.</p> <p> This API works with the Amazon Elastic Block Store (Amazon EBS) Container Storage Interface (CSI) driver to manage the lifecycle of persistent storage in your HyperPod EKS clusters. </p>"
             }
         },
         "com.amazonaws.sagemaker#DetachClusterNodeVolumeRequest": {
@@ -30343,6 +30575,12 @@
                         "smithy.api#documentation": "<p>The configuration for attaching a SageMaker AI user profile name to the execution role as a <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html\">sts:SourceIdentity key</a>.</p>"
                     }
                 },
+                "TrustedIdentityPropagationSettings": {
+                    "target": "com.amazonaws.sagemaker#TrustedIdentityPropagationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Trusted Identity Propagation (TIP) settings for the SageMaker domain. These settings determine how user identities from IAM Identity Center are propagated through the domain to TIP enabled Amazon Web Services services.</p>"
+                    }
+                },
                 "DockerSettings": {
                     "target": "com.amazonaws.sagemaker#DockerSettings",
                     "traits": {
@@ -30385,6 +30623,12 @@
                     "target": "com.amazonaws.sagemaker#DomainSecurityGroupIds",
                     "traits": {
                         "smithy.api#documentation": "<p>The security groups for the Amazon Virtual Private Cloud that the <code>Domain</code> uses for communication between Domain-level apps and user apps.</p>"
+                    }
+                },
+                "TrustedIdentityPropagationSettings": {
+                    "target": "com.amazonaws.sagemaker#TrustedIdentityPropagationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Trusted Identity Propagation (TIP) settings for the SageMaker domain. These settings determine how user identities from IAM Identity Center are propagated through the domain to TIP enabled Amazon Web Services services.</p>"
                     }
                 },
                 "DockerSettings": {
@@ -38616,7 +38860,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Metadata information about an instance group in a SageMaker HyperPod cluster.</p>"
+                "smithy.api#documentation": "<p>Metadata information about an instance group in a HyperPod cluster.</p>"
             }
         },
         "com.amazonaws.sagemaker#InstanceGroupName": {
@@ -38793,6 +39037,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information on the IMDS configuration of the notebook instance</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#InstancePlacementConfig": {
+            "type": "structure",
+            "members": {
+                "EnableMultipleJobs": {
+                    "target": "com.amazonaws.sagemaker#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If set to true, allows multiple jobs to share the same UltraServer instances. If set to false, ensures this job's instances are placed on an UltraServer exclusively, with no other jobs sharing the same UltraServer. Default is false.</p>"
+                    }
+                },
+                "PlacementSpecifications": {
+                    "target": "com.amazonaws.sagemaker#PlacementSpecifications",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of specifications for how instances should be placed on specific UltraServers. Maximum of 10 items is supported.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for how instances are placed and allocated within UltraServers. This is only applicable for UltraServer capacity.</p>"
             }
         },
         "com.amazonaws.sagemaker#InstanceType": {
@@ -48998,6 +49262,79 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sagemaker#ListUltraServersByReservedCapacity": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#ListUltraServersByReservedCapacityRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#ListUltraServersByReservedCapacityResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all UltraServers that are part of a specified reserved capacity.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "UltraServers",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ListUltraServersByReservedCapacityRequest": {
+            "type": "structure",
+            "members": {
+                "ReservedCapacityArn": {
+                    "target": "com.amazonaws.sagemaker#ReservedCapacityArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ARN of the reserved capacity to list UltraServers for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.sagemaker#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of UltraServers to return in the response. The default value is 10.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous response was truncated, you receive this token. Use it in your next request to receive the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#ListUltraServersByReservedCapacityResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response is truncated, SageMaker returns this token. Use it in the next request to retrieve the next set of UltraServers.</p>"
+                    }
+                },
+                "UltraServers": {
+                    "target": "com.amazonaws.sagemaker#UltraServers",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A list of UltraServers that are part of the specified reserved capacity.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sagemaker#ListUserProfiles": {
             "type": "operation",
             "input": {
@@ -49552,6 +49889,15 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 10
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#MemoryInGiBAmount": {
+            "type": "float",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 10000000
                 }
             }
         },
@@ -57304,6 +57650,40 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#PlacementSpecification": {
+            "type": "structure",
+            "members": {
+                "UltraServerId": {
+                    "target": "com.amazonaws.sagemaker#String256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the UltraServer where instances should be placed.</p>"
+                    }
+                },
+                "InstanceCount": {
+                    "target": "com.amazonaws.sagemaker#TrainingInstanceCount",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The number of ML compute instances required to be placed together on the same UltraServer. Minimum value of 1.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies how instances should be placed on a specific UltraServer.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#PlacementSpecifications": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#PlacementSpecification"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.sagemaker#PlatformIdentifier": {
             "type": "string",
             "traits": {
@@ -58314,6 +58694,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ml.r7i.48xlarge"
+                    }
+                },
+                "ML_P5_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.p5.4xlarge"
                     }
                 }
             }
@@ -63385,12 +63771,42 @@
                     "traits": {
                         "smithy.api#enumValue": "ml.p4de.24xlarge"
                     }
+                },
+                "ML_P6E_GB200_36XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.p6e-gb200.36xlarge"
+                    }
+                },
+                "ML_P5_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.p5.4xlarge"
+                    }
                 }
             }
         },
         "com.amazonaws.sagemaker#ReservedCapacityOffering": {
             "type": "structure",
             "members": {
+                "ReservedCapacityType": {
+                    "target": "com.amazonaws.sagemaker#ReservedCapacityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of reserved capacity offering.</p>"
+                    }
+                },
+                "UltraServerType": {
+                    "target": "com.amazonaws.sagemaker#UltraServerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of UltraServer included in this reserved capacity offering, such as ml.u-p6e-gb200x72.</p>"
+                    }
+                },
+                "UltraServerCount": {
+                    "target": "com.amazonaws.sagemaker#UltraServerCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of UltraServers included in this reserved capacity offering.</p>"
+                    }
+                },
                 "InstanceType": {
                     "target": "com.amazonaws.sagemaker#ReservedCapacityInstanceType",
                     "traits": {
@@ -63512,6 +63928,24 @@
                         "smithy.api#required": {}
                     }
                 },
+                "ReservedCapacityType": {
+                    "target": "com.amazonaws.sagemaker#ReservedCapacityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of reserved capacity.</p>"
+                    }
+                },
+                "UltraServerType": {
+                    "target": "com.amazonaws.sagemaker#UltraServerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of UltraServer included in this reserved capacity, such as ml.u-p6e-gb200x72.</p>"
+                    }
+                },
+                "UltraServerCount": {
+                    "target": "com.amazonaws.sagemaker#UltraServerCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of UltraServers included in this reserved capacity.</p>"
+                    }
+                },
                 "InstanceType": {
                     "target": "com.amazonaws.sagemaker#ReservedCapacityInstanceType",
                     "traits": {
@@ -63569,6 +64003,23 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Details of a reserved capacity for the training plan.</p> <p>For more information about how to reserve GPU capacity for your SageMaker HyperPod clusters using Amazon SageMaker Training Plan, see <code> <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html\">CreateTrainingPlan</a> </code>.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ReservedCapacityType": {
+            "type": "enum",
+            "members": {
+                "ULTRASERVER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UltraServer"
+                    }
+                },
+                "INSTANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Instance"
+                    }
+                }
             }
         },
         "com.amazonaws.sagemaker#ResolvedAttributes": {
@@ -63748,6 +64199,12 @@
                     "target": "com.amazonaws.sagemaker#TrainingPlanArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN); of the training plan to use for this resource configuration.</p>"
+                    }
+                },
+                "InstancePlacementConfig": {
+                    "target": "com.amazonaws.sagemaker#InstancePlacementConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for how training job instances are placed and allocated within UltraServers. Only applicable for UltraServer capacity.</p>"
                     }
                 }
             },
@@ -64481,7 +64938,9 @@
                 "S3Uri": {
                     "target": "com.amazonaws.sagemaker#S3SchemaUri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 URI that specifies the location in S3 where files are stored, which is mounted within the Studio environment. For example: <code>s3://&lt;bucket-name&gt;/&lt;prefix&gt;/</code>.</p>"
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon S3 URI that specifies the location in S3 where files are stored, which is mounted within the Studio environment. For example: <code>s3://&lt;bucket-name&gt;/&lt;prefix&gt;/</code>.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -64501,7 +64960,9 @@
                 "S3Uri": {
                     "target": "com.amazonaws.sagemaker#S3SchemaUri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 URI of the S3 file system configuration.</p>"
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon S3 URI of the S3 file system configuration.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -65232,6 +65693,9 @@
                     "target": "com.amazonaws.sagemaker#DescribeProject"
                 },
                 {
+                    "target": "com.amazonaws.sagemaker#DescribeReservedCapacity"
+                },
+                {
                     "target": "com.amazonaws.sagemaker#DescribeSpace"
                 },
                 {
@@ -65536,6 +66000,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#ListTrials"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ListUltraServersByReservedCapacity"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#ListUserProfiles"
@@ -66666,17 +67133,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -66690,28 +67146,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -66722,17 +67156,6 @@
                                 "Region": "us-isob-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         },
                         {
@@ -67448,6 +67871,18 @@
                     "target": "com.amazonaws.sagemaker#ReservedCapacityInstanceCount",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of instances you want to reserve in the training plan offerings. This allows you to specify the quantity of compute resources needed for your SageMaker training jobs or SageMaker HyperPod clusters, helping you find reserved capacity offerings that match your requirements.</p>"
+                    }
+                },
+                "UltraServerType": {
+                    "target": "com.amazonaws.sagemaker#UltraServerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of UltraServer to search for, such as ml.u-p6e-gb200x72.</p>"
+                    }
+                },
+                "UltraServerCount": {
+                    "target": "com.amazonaws.sagemaker#UltraServerCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of UltraServers to search for.</p>"
                     }
                 },
                 "StartTimeAfter": {
@@ -68950,6 +69385,14 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The storage settings for a space.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#SpareInstanceCountPerUltraServer": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
             }
         },
         "com.amazonaws.sagemaker#SpawnRate": {
@@ -73041,6 +73484,18 @@
                     "traits": {
                         "smithy.api#enumValue": "ml.r7i.48xlarge"
                     }
+                },
+                "ML_P6E_GB200_36XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.p6e-gb200.36xlarge"
+                    }
+                },
+                "ML_P5_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.p5.4xlarge"
+                    }
                 }
             }
         },
@@ -73923,6 +74378,12 @@
                     "target": "com.amazonaws.sagemaker#InUseInstanceCount",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of instances currently in use from this training plan.</p>"
+                    }
+                },
+                "TotalUltraServerCount": {
+                    "target": "com.amazonaws.sagemaker#UltraServerCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of UltraServers allocated to this training plan.</p>"
                     }
                 },
                 "TargetResources": {
@@ -75916,6 +76377,22 @@
                 "smithy.api#documentation": "<p>A summary of the properties of a trial. To get the complete set of properties, call the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeTrial.html\">DescribeTrial</a> API and provide the <code>TrialName</code>.</p>"
             }
         },
+        "com.amazonaws.sagemaker#TrustedIdentityPropagationSettings": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#FeatureStatus",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The status of Trusted Identity Propagation (TIP) at the SageMaker domain level. </p> <p>When disabled, standard IAM role-based access is used. </p> <p>When enabled:</p> <ul> <li> <p>User identities from IAM Identity Center are propagated through the application to TIP enabled Amazon Web Services services.</p> </li> <li> <p>New applications or existing applications that are automatically patched, will use the domain level configuration.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Trusted Identity Propagation (TIP) settings for the SageMaker domain. These settings determine how user identities from IAM Identity Center are propagated through the domain to TIP enabled Amazon Web Services services.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#TtlDuration": {
             "type": "structure",
             "members": {
@@ -76107,6 +76584,207 @@
                 "smithy.api#range": {
                     "min": 10000,
                     "max": 4000000
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#UltraServer": {
+            "type": "structure",
+            "members": {
+                "UltraServerId": {
+                    "target": "com.amazonaws.sagemaker#NonEmptyString256",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier for the UltraServer.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UltraServerType": {
+                    "target": "com.amazonaws.sagemaker#UltraServerType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The type of UltraServer, such as ml.u-p6e-gb200x72.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AvailabilityZone": {
+                    "target": "com.amazonaws.sagemaker#AvailabilityZone",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the Availability Zone where the UltraServer is provisioned.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceType": {
+                    "target": "com.amazonaws.sagemaker#ReservedCapacityInstanceType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon EC2 instance type used in the UltraServer.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TotalInstanceCount": {
+                    "target": "com.amazonaws.sagemaker#TotalInstanceCount",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The total number of instances in this UltraServer.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConfiguredSpareInstanceCount": {
+                    "target": "com.amazonaws.sagemaker#ConfiguredSpareInstanceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of spare instances configured for this UltraServer to provide enhanced resiliency.</p>"
+                    }
+                },
+                "AvailableInstanceCount": {
+                    "target": "com.amazonaws.sagemaker#AvailableInstanceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of instances currently available for use in this UltraServer.</p>"
+                    }
+                },
+                "InUseInstanceCount": {
+                    "target": "com.amazonaws.sagemaker#InUseInstanceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of instances currently in use in this UltraServer.</p>"
+                    }
+                },
+                "AvailableSpareInstanceCount": {
+                    "target": "com.amazonaws.sagemaker#AvailableSpareInstanceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of available spare instances in the UltraServer.</p>"
+                    }
+                },
+                "UnhealthyInstanceCount": {
+                    "target": "com.amazonaws.sagemaker#UnhealthyInstanceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of instances in this UltraServer that are currently in an unhealthy state.</p>"
+                    }
+                },
+                "HealthStatus": {
+                    "target": "com.amazonaws.sagemaker#UltraServerHealthStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The overall health status of the UltraServer.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a high-performance compute server used for distributed training in SageMaker AI. An UltraServer consists of multiple instances within a shared NVLink interconnect domain.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#UltraServerCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#UltraServerHealthStatus": {
+            "type": "enum",
+            "members": {
+                "OK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OK"
+                    }
+                },
+                "IMPAIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Impaired"
+                    }
+                },
+                "INSUFFICIENT_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Insufficient-Data"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#UltraServerInfo": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the UltraServer.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the UltraServer object.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#UltraServerSummary": {
+            "type": "structure",
+            "members": {
+                "UltraServerType": {
+                    "target": "com.amazonaws.sagemaker#UltraServerType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The type of UltraServer, such as ml.u-p6e-gb200x72.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceType": {
+                    "target": "com.amazonaws.sagemaker#ReservedCapacityInstanceType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon EC2 instance type used in the UltraServer.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UltraServerCount": {
+                    "target": "com.amazonaws.sagemaker#UltraServerCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of UltraServers of this type.</p>"
+                    }
+                },
+                "AvailableSpareInstanceCount": {
+                    "target": "com.amazonaws.sagemaker#AvailableSpareInstanceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of available spare instances in the UltraServers.</p>"
+                    }
+                },
+                "UnhealthyInstanceCount": {
+                    "target": "com.amazonaws.sagemaker#UnhealthyInstanceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of instances across all UltraServers of this type that are currently in an unhealthy state.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of UltraServer resources and their current status.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#UltraServerType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^ml.[a-z0-9\\-.]+$"
+            }
+        },
+        "com.amazonaws.sagemaker#UltraServers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#UltraServer"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#UnhealthyInstanceCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
                 }
             }
         },
@@ -79869,6 +80547,15 @@
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#VCpuAmount": {
+            "type": "float",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 10000000
                 }
             }
         },

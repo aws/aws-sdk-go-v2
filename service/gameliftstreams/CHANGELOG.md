@@ -1,3 +1,16 @@
+# v1.5.1 (2025-08-20)
+
+* **Bug Fix**: Remove unused deserialization code.
+
+# v1.5.0 (2025-08-11)
+
+* **Feature**: Add support for configuring per-service Options via callback on global config.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.4.0 (2025-08-08)
+
+* **Feature**: Removed incorrect endpoint tests
+
 # v1.3.1 (2025-08-07)
 
 * **Documentation**: Adds Proton 9.0-2 to the list of runtime environment options available when creating an Amazon GameLift Streams application

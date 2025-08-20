@@ -10,8 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Grants permission to obtain an Amazon S3 presigned URL to download an
-// attachment.
+// Returns a Pre-Signed URL for uploading attachments into a case.
 func (c *Client) GetCaseAttachmentDownloadUrl(ctx context.Context, params *GetCaseAttachmentDownloadUrlInput, optFns ...func(*Options)) (*GetCaseAttachmentDownloadUrlOutput, error) {
 	if params == nil {
 		params = &GetCaseAttachmentDownloadUrlInput{}

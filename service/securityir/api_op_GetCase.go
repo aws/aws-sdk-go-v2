@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Grant permission to view a designated case.
+// Returns the attributes of a case.
 func (c *Client) GetCase(ctx context.Context, params *GetCaseInput, optFns ...func(*Options)) (*GetCaseOutput, error) {
 	if params == nil {
 		params = &GetCaseInput{}
@@ -84,16 +84,15 @@ type GetCaseOutput struct {
 	// Response element for GetCase that provides the date a case was last modified.
 	LastUpdatedDate *time.Time
 
-	// Response element for GetCase that provides identifies the case is waiting on
-	// customer input.
+	// Response element for GetCase that identifies the case is waiting on customer
+	// input.
 	PendingAction types.PendingAction
 
 	// Response element for GetCase that provides the customer provided incident start
 	// date.
 	ReportedIncidentStartDate *time.Time
 
-	// Response element for GetCase that provides the current resolver types. Options
-	// include self-supported | AWS-supported .
+	// Response element for GetCase that provides the current resolver types.
 	ResolverType types.ResolverType
 
 	// Response element for GetCase that provides a list of suspicious IP addresses

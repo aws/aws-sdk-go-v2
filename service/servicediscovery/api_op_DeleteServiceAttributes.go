@@ -33,7 +33,12 @@ type DeleteServiceAttributesInput struct {
 	// This member is required.
 	Attributes []string
 
-	// The ID of the service from which the attributes will be deleted.
+	// The ID or Amazon Resource Name (ARN) of the service from which the attributes
+	// will be deleted. For services created in a namespace shared with your Amazon Web
+	// Services account, specify the service ARN. For more information about shared
+	// namespaces, see [Cross-account Cloud Map namespace sharing]in the Cloud Map Developer Guide.
+	//
+	// [Cross-account Cloud Map namespace sharing]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
 	//
 	// This member is required.
 	ServiceId *string

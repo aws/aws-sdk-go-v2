@@ -236,6 +236,37 @@ func (WorkspaceConfigurationStatusCode) Values() []WorkspaceConfigurationStatusC
 	}
 }
 
+type WorkspacePolicyStatusCode string
+
+// Enum values for WorkspacePolicyStatusCode
+const (
+	// Resource-based Policy is being created. Update/Deletion is disallowed until
+	// Resource-based Policy is ACTIVE and Workspace is ACTIVE.
+	WorkspacePolicyStatusCodeCreating WorkspacePolicyStatusCode = "CREATING"
+	// Resource-based Policy has been created/updated. Update/Deletion is disallowed
+	// until Resource-based Policy is ACTIVE and Workspace is ACTIVE.
+	WorkspacePolicyStatusCodeActive WorkspacePolicyStatusCode = "ACTIVE"
+	// Resource-based Policy is being updated. Update/Deletion is disallowed until
+	// Resource-based Policy is ACTIVE and Workspace is ACTIVE.
+	WorkspacePolicyStatusCodeUpdating WorkspacePolicyStatusCode = "UPDATING"
+	// Resource-based Policy is being deleting. Update/Deletion is disallowed until
+	// Resource-based Policy is ACTIVE and Workspace is ACTIVE.
+	WorkspacePolicyStatusCodeDeleting WorkspacePolicyStatusCode = "DELETING"
+)
+
+// Values returns all known values for WorkspacePolicyStatusCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WorkspacePolicyStatusCode) Values() []WorkspacePolicyStatusCode {
+	return []WorkspacePolicyStatusCode{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"DELETING",
+	}
+}
+
 type WorkspaceStatusCode string
 
 // Enum values for WorkspaceStatusCode

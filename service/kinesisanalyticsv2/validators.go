@@ -843,6 +843,11 @@ func validateApplicationConfiguration(v *types.ApplicationConfiguration) error {
 			invalidParams.AddNested("ZeppelinApplicationConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ApplicationEncryptionConfiguration != nil {
+		if err := validateApplicationEncryptionConfiguration(v.ApplicationEncryptionConfiguration); err != nil {
+			invalidParams.AddNested("ApplicationEncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -884,6 +889,41 @@ func validateApplicationConfigurationUpdate(v *types.ApplicationConfigurationUpd
 		if err := validateZeppelinApplicationConfigurationUpdate(v.ZeppelinApplicationConfigurationUpdate); err != nil {
 			invalidParams.AddNested("ZeppelinApplicationConfigurationUpdate", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.ApplicationEncryptionConfigurationUpdate != nil {
+		if err := validateApplicationEncryptionConfigurationUpdate(v.ApplicationEncryptionConfigurationUpdate); err != nil {
+			invalidParams.AddNested("ApplicationEncryptionConfigurationUpdate", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateApplicationEncryptionConfiguration(v *types.ApplicationEncryptionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ApplicationEncryptionConfiguration"}
+	if len(v.KeyType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateApplicationEncryptionConfigurationUpdate(v *types.ApplicationEncryptionConfigurationUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ApplicationEncryptionConfigurationUpdate"}
+	if len(v.KeyTypeUpdate) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyTypeUpdate"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

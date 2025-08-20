@@ -146,6 +146,9 @@
                     "target": "com.amazonaws.organizations#ListAccountsForParent"
                 },
                 {
+                    "target": "com.amazonaws.organizations#ListAccountsWithInvalidEffectivePolicy"
+                },
+                {
                     "target": "com.amazonaws.organizations#ListAWSServiceAccessForOrganization"
                 },
                 {
@@ -159,6 +162,9 @@
                 },
                 {
                     "target": "com.amazonaws.organizations#ListDelegatedServicesForAccount"
+                },
+                {
+                    "target": "com.amazonaws.organizations#ListEffectivePolicyValidationErrors"
                 },
                 {
                     "target": "com.amazonaws.organizations#ListHandshakesForAccount"
@@ -4663,6 +4669,44 @@
                 }
             }
         },
+        "com.amazonaws.organizations#EffectivePolicyValidationError": {
+            "type": "structure",
+            "members": {
+                "ErrorCode": {
+                    "target": "com.amazonaws.organizations#ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code for the validation error. For example, <code>ELEMENTS_TOO_MANY</code>.</p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.organizations#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message for the validation error.</p>"
+                    }
+                },
+                "PathToError": {
+                    "target": "com.amazonaws.organizations#PathToError",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path within the effective policy where the validation error occurred.</p>"
+                    }
+                },
+                "ContributingPolicies": {
+                    "target": "com.amazonaws.organizations#PolicyIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The individual policies <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inheritance_mgmt.html\">inherited</a>  and <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_policies_attach.html\">attached</a> to the account which contributed to the validation error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about the\n            validation errors that occurred when generating or enforcing an <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_effective.html\">effective policy</a>, such as which policies contributed to the error and location of the error.</p>"
+            }
+        },
+        "com.amazonaws.organizations#EffectivePolicyValidationErrors": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.organizations#EffectivePolicyValidationError"
+            }
+        },
         "com.amazonaws.organizations#Email": {
             "type": "string",
             "traits": {
@@ -4948,6 +4992,12 @@
             "member": {
                 "target": "com.amazonaws.organizations#EnabledServicePrincipal"
             }
+        },
+        "com.amazonaws.organizations#ErrorCode": {
+            "type": "string"
+        },
+        "com.amazonaws.organizations#ErrorMessage": {
+            "type": "string"
         },
         "com.amazonaws.organizations#ExceptionMessage": {
             "type": "string"
@@ -6076,6 +6126,136 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.organizations#ListAccountsWithInvalidEffectivePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.organizations#ListAccountsWithInvalidEffectivePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.organizations#ListAccountsWithInvalidEffectivePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.organizations#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.organizations#AWSOrganizationsNotInUseException"
+                },
+                {
+                    "target": "com.amazonaws.organizations#ConstraintViolationException"
+                },
+                {
+                    "target": "com.amazonaws.organizations#EffectivePolicyNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.organizations#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.organizations#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.organizations#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.organizations#UnsupportedAPIEndpointException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all the accounts in an organization that have invalid effective policies.\n            An <i>invalid effective policy</i> is an <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_effective.html\">effective policy</a> that fails validation checks, resulting in the effective policy not being fully enforced on all the intended accounts within an organization.</p>\n         <p>This operation can be called only from the organization's\nmanagement account or by a member account that is a delegated administrator.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list all accounts in an organization with invalid effective policy",
+                        "documentation": "The following example shows you how to request a list of the accounts in an organization having invalid effective policy for a policy type:",
+                        "input": {
+                            "PolicyType": "BACKUP_POLICY"
+                        },
+                        "output": {
+                            "Accounts": [
+                                {
+                                    "Id": "111111111111",
+                                    "Name": "Management Account",
+                                    "Email": "bill@example.com"
+                                },
+                                {
+                                    "Id": "222222222222",
+                                    "Name": "Developer Account",
+                                    "Email": "alice@example.com"
+                                },
+                                {
+                                    "Id": "333333333333",
+                                    "Name": "Test Account",
+                                    "Email": "juan@example.com"
+                                },
+                                {
+                                    "Id": "444444444444",
+                                    "Name": "Production Account",
+                                    "Email": "anika@example.com"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Accounts",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.organizations#ListAccountsWithInvalidEffectivePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "PolicyType": {
+                    "target": "com.amazonaws.organizations#EffectivePolicyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of policy that you want information about. You can specify one of the\n            following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html\">DECLARATIVE_POLICY_EC2</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html\">BACKUP_POLICY</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html\">TAG_POLICY</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html\">CHATBOT_POLICY</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html\">AISERVICES_OPT_OUT_POLICY</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html\">SECURITYHUB_POLICY</a>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.organizations#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameter for receiving additional results if you receive a \n    <code>NextToken</code> response in a previous request. A <code>NextToken</code> response \n    indicates that more output is available. Set this parameter to the value of the previous \n    call's <code>NextToken</code> response to indicate where the output should continue \n    from.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.organizations#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of results that you want included on each page of the \n    response. If you do not include this parameter, it defaults to a value that is specific to the \n    operation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> \n    response element is present and has a value (is not null). Include that value as the \n    <code>NextToken</code> request parameter in the next call to the operation to get the next part \n    of the results. Note that Organizations might return fewer results than the maximum even when there are \n    more results available. You should check <code>NextToken</code> after every operation to ensure \n    that you receive all of the results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.organizations#ListAccountsWithInvalidEffectivePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "Accounts": {
+                    "target": "com.amazonaws.organizations#Accounts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The accounts in the organization which have an invalid effective policy for the specified policy type.</p>"
+                    }
+                },
+                "PolicyType": {
+                    "target": "com.amazonaws.organizations#EffectivePolicyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specified policy type. One of the\n            following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html\">DECLARATIVE_POLICY_EC2</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html\">BACKUP_POLICY</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html\">TAG_POLICY</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html\">CHATBOT_POLICY</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html\">AISERVICES_OPT_OUT_POLICY</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html\">SECURITYHUB_POLICY</a>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.organizations#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If present, indicates that more output is available than is \n    included in the current response. Use this value in the <code>NextToken</code> request parameter \n    in a subsequent call to the operation to get the next part of the output. You should repeat this \n    until the <code>NextToken</code> response element comes back as <code>null</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.organizations#ListChildren": {
             "type": "operation",
             "input": {
@@ -6488,6 +6668,131 @@
                     "target": "com.amazonaws.organizations#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If present, indicates that more output is available than is \n    included in the current response. Use this value in the <code>NextToken</code> request parameter \n    in a subsequent call to the operation to get the next part of the output. You should repeat this \n    until the <code>NextToken</code> response element comes back as <code>null</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.organizations#ListEffectivePolicyValidationErrors": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.organizations#ListEffectivePolicyValidationErrorsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.organizations#ListEffectivePolicyValidationErrorsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.organizations#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.organizations#AccountNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.organizations#AWSOrganizationsNotInUseException"
+                },
+                {
+                    "target": "com.amazonaws.organizations#ConstraintViolationException"
+                },
+                {
+                    "target": "com.amazonaws.organizations#EffectivePolicyNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.organizations#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.organizations#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.organizations#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.organizations#UnsupportedAPIEndpointException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all the validation errors on an <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_effective.html\">effective policy</a> for a specified account and policy type.</p>\n         <p>This operation can be called only from the organization's\nmanagement account or by a member account that is a delegated administrator.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "EffectivePolicyValidationErrors",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.organizations#ListEffectivePolicyValidationErrorsRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.organizations#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the account that you want details about. Specifying an organization root or organizational unit (OU) as the target is not supported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PolicyType": {
+                    "target": "com.amazonaws.organizations#EffectivePolicyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of policy that you want information about. You can specify one of the\n            following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html\">DECLARATIVE_POLICY_EC2</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html\">BACKUP_POLICY</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html\">TAG_POLICY</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html\">CHATBOT_POLICY</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html\">AISERVICES_OPT_OUT_POLICY</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html\">SECURITYHUB_POLICY</a>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.organizations#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameter for receiving additional results if you receive a \n    <code>NextToken</code> response in a previous request. A <code>NextToken</code> response \n    indicates that more output is available. Set this parameter to the value of the previous \n    call's <code>NextToken</code> response to indicate where the output should continue \n    from.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.organizations#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of results that you want included on each page of the \n    response. If you do not include this parameter, it defaults to a value that is specific to the \n    operation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> \n    response element is present and has a value (is not null). Include that value as the \n    <code>NextToken</code> request parameter in the next call to the operation to get the next part \n    of the results. Note that Organizations might return fewer results than the maximum even when there are \n    more results available. You should check <code>NextToken</code> after every operation to ensure \n    that you receive all of the results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.organizations#ListEffectivePolicyValidationErrorsResponse": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.organizations#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the specified account.</p>"
+                    }
+                },
+                "PolicyType": {
+                    "target": "com.amazonaws.organizations#EffectivePolicyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specified policy type. One of the\n            following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html\">DECLARATIVE_POLICY_EC2</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html\">BACKUP_POLICY</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html\">TAG_POLICY</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html\">CHATBOT_POLICY</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html\">AISERVICES_OPT_OUT_POLICY</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html\">SECURITYHUB_POLICY</a>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Path": {
+                    "target": "com.amazonaws.organizations#Path",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path in the organization where the specified account exists.</p>"
+                    }
+                },
+                "EvaluationTimestamp": {
+                    "target": "com.amazonaws.organizations#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the latest effective policy was generated for the specified account.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.organizations#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If present, indicates that more output is available than is \n    included in the current response. Use this value in the <code>NextToken</code> request parameter \n    in a subsequent call to the operation to get the next part of the output. You should repeat this \n    until the <code>NextToken</code> response element comes back as <code>null</code>.</p>"
+                    }
+                },
+                "EffectivePolicyValidationErrors": {
+                    "target": "com.amazonaws.organizations#EffectivePolicyValidationErrors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>EffectivePolicyValidationError</code> object contains details about the\n            validation errors that occurred when generating or enforcing an effective policy, such as which policies contributed to the error and location of the error.</p>"
                     }
                 }
             },
@@ -7911,6 +8216,15 @@
                 "target": "com.amazonaws.organizations#Parent"
             }
         },
+        "com.amazonaws.organizations#Path": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(o-[a-z0-9]{10,32}\\/r-[0-9a-z]{4,32}(\\/ou\\-[0-9a-z]{4,32}-[a-z0-9]{8,32})*(\\/\\d{12})*)\\/$"
+            }
+        },
+        "com.amazonaws.organizations#PathToError": {
+            "type": "string"
+        },
         "com.amazonaws.organizations#Policies": {
             "type": "list",
             "member": {
@@ -7982,6 +8296,12 @@
                     "max": 130
                 },
                 "smithy.api#pattern": "^p-[0-9a-zA-Z_]{8,128}$"
+            }
+        },
+        "com.amazonaws.organizations#PolicyIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.organizations#PolicyId"
             }
         },
         "com.amazonaws.organizations#PolicyInUseException": {

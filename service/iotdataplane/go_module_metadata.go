@@ -3,4 +3,4 @@
 package iotdataplane
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.29.0"
+const goModuleVersion = "1.31.1"

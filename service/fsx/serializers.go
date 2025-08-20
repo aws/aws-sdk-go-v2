@@ -3381,6 +3381,11 @@ func awsAwsjson11_serializeDocumentCreateFileSystemOpenZFSConfiguration(v *types
 		ok.String(*v.EndpointIpAddressRange)
 	}
 
+	if v.EndpointIpv6AddressRange != nil {
+		ok := object.Key("EndpointIpv6AddressRange")
+		ok.String(*v.EndpointIpv6AddressRange)
+	}
+
 	if v.PreferredSubnetId != nil {
 		ok := object.Key("PreferredSubnetId")
 		ok.String(*v.PreferredSubnetId)
@@ -5033,6 +5038,11 @@ func awsAwsjson11_serializeDocumentUpdateFileSystemOpenZFSConfiguration(v *types
 		}
 	}
 
+	if v.EndpointIpv6AddressRange != nil {
+		ok := object.Key("EndpointIpv6AddressRange")
+		ok.String(*v.EndpointIpv6AddressRange)
+	}
+
 	if v.ReadCacheConfiguration != nil {
 		ok := object.Key("ReadCacheConfiguration")
 		if err := awsAwsjson11_serializeDocumentOpenZFSReadCacheConfiguration(v.ReadCacheConfiguration, ok); err != nil {
@@ -5735,6 +5745,11 @@ func awsAwsjson11_serializeOpDocumentCreateFileSystemFromBackupInput(v *CreateFi
 		}
 	}
 
+	if len(v.NetworkType) > 0 {
+		ok := object.Key("NetworkType")
+		ok.String(string(v.NetworkType))
+	}
+
 	if v.OpenZFSConfiguration != nil {
 		ok := object.Key("OpenZFSConfiguration")
 		if err := awsAwsjson11_serializeDocumentCreateFileSystemOpenZFSConfiguration(v.OpenZFSConfiguration, ok); err != nil {
@@ -5812,6 +5827,11 @@ func awsAwsjson11_serializeOpDocumentCreateFileSystemInput(v *CreateFileSystemIn
 		if err := awsAwsjson11_serializeDocumentCreateFileSystemLustreConfiguration(v.LustreConfiguration, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.NetworkType) > 0 {
+		ok := object.Key("NetworkType")
+		ok.String(string(v.NetworkType))
 	}
 
 	if v.OntapConfiguration != nil {
@@ -6727,6 +6747,11 @@ func awsAwsjson11_serializeOpDocumentUpdateFileSystemInput(v *UpdateFileSystemIn
 		if err := awsAwsjson11_serializeDocumentUpdateFileSystemLustreConfiguration(v.LustreConfiguration, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.NetworkType) > 0 {
+		ok := object.Key("NetworkType")
+		ok.String(string(v.NetworkType))
 	}
 
 	if v.OntapConfiguration != nil {

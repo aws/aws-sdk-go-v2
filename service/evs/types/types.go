@@ -7,8 +7,6 @@ import (
 	"time"
 )
 
-// Amazon EVS is in public preview release and is subject to change.
-//
 // A check on the environment to identify environment health and validate VMware
 // VCF licensing compliance.
 type Check struct {
@@ -43,8 +41,6 @@ type Check struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon EVS is in public preview release and is subject to change.
-//
 // The connectivity configuration for the environment. Amazon EVS requires that
 // you specify two route server peer IDs. During environment creation, the route
 // server endpoints peer with the NSX uplink VLAN for connectivity to the NSX
@@ -59,8 +55,6 @@ type ConnectivityInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon EVS is in public preview release and is subject to change.
-//
 // An object that represents an Amazon EVS environment.
 type Environment struct {
 
@@ -162,8 +156,6 @@ type Environment struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon EVS is in public preview release and is subject to change.
-//
 // A list of environments with summarized environment details.
 type EnvironmentSummary struct {
 
@@ -195,8 +187,6 @@ type EnvironmentSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon EVS is in public preview release and is subject to change.
-//
 // An ESXi host that runs on an Amazon EC2 bare metal instance. Four hosts are
 // created in an Amazon EVS environment during environment creation. You can add
 // hosts to an environment using the CreateEnvironmentHost operation. Amazon EVS
@@ -246,8 +236,6 @@ type Host struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon EVS is in public preview release and is subject to change.
-//
 // An object that represents a host.
 //
 // You cannot use dedicatedHostId and placementGroupId together in the same
@@ -279,8 +267,6 @@ type HostInfoForCreate struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon EVS is in public preview release and is subject to change.
-//
 // An object that represents an initial VLAN subnet for the Amazon EVS
 // environment. Amazon EVS creates initial VLAN subnets when you first create the
 // environment. Amazon EVS creates the following 10 VLAN subnets: host management
@@ -303,8 +289,6 @@ type InitialVlanInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon EVS is in public preview release and is subject to change.
-//
 // The initial VLAN subnets for the environment. Amazon EVS VLAN subnets have a
 // minimum CIDR block size of /28 and a maximum size of /24. Amazon EVS VLAN subnet
 // CIDR blocks must not overlap with other subnets in the VPC.
@@ -378,9 +362,8 @@ type InitialVlans struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon EVS is in public preview release and is subject to change.
+//	The license information that Amazon EVS requires to create an environment.
 //
-// The license information that Amazon EVS requires to create an environment.
 // Amazon EVS requires two license keys: a VCF solution key and a vSAN license key.
 type LicenseInfo struct {
 
@@ -400,8 +383,6 @@ type LicenseInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon EVS is in public preview release and is subject to change.
-//
 // An elastic network interface (ENI) that connects hosts to the VLAN subnets.
 // Amazon EVS provisions two identically configured ENIs in the VMkernel management
 // subnet during host creation. One ENI is active, and the other is in standby mode
@@ -414,8 +395,6 @@ type NetworkInterface struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon EVS is in public preview release and is subject to change.
-//
 // A managed secret that contains the credentials for installing vCenter Server,
 // NSX, and SDDC Manager. During environment creation, the Amazon EVS control plane
 // uses Amazon Web Services Secrets Manager to create, encrypt, validate, and store
@@ -431,8 +410,6 @@ type Secret struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon EVS is in public preview release and is subject to change.
-//
 // The security groups that allow traffic between the Amazon EVS control plane and
 // your VPC for Amazon EVS service access. If a security group is not specified,
 // Amazon EVS uses the default security group in your account for service access.
@@ -444,8 +421,6 @@ type ServiceAccessSecurityGroups struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon EVS is in public preview release and is subject to change.
-//
 // Stores information about a field passed inside a request that resulted in an
 // exception.
 type ValidationExceptionField struct {
@@ -463,8 +438,6 @@ type ValidationExceptionField struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon EVS is in public preview release and is subject to change.
-//
 // The DNS hostnames that Amazon EVS uses to install VMware vCenter Server, NSX,
 // SDDC Manager, and Cloud Builder. Each hostname must be unique, and resolve to a
 // domain name that you've registered in your DNS service of choice. Hostnames
@@ -522,8 +495,6 @@ type VcfHostnames struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon EVS is in public preview release and is subject to change.
-//
 // The VLANs that Amazon EVS creates during environment creation.
 type Vlan struct {
 

@@ -1,3 +1,20 @@
+# v1.51.1 (2025-08-20)
+
+* **Bug Fix**: Remove unused deserialization code.
+
+# v1.51.0 (2025-08-12)
+
+* **Feature**: AWS HealthScribe now supports specifying preferred patient pronouns through the MedicalScribeContext parameter for use in the generated clinical notes.
+
+# v1.50.0 (2025-08-11)
+
+* **Feature**: Add support for configuring per-service Options via callback on global config.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.49.1 (2025-08-08)
+
+* **Documentation**: Update documentation to use key ARN only in OutputEncryptionKMSKeyId request parameter
+
 # v1.49.0 (2025-08-04)
 
 * **Feature**: Support configurable auth scheme preferences in service clients via AWS_AUTH_SCHEME_PREFERENCE in the environment, auth_scheme_preference in the config file, and through in-code settings on LoadDefaultConfig and client constructor methods.

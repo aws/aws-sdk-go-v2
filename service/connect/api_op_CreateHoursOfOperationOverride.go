@@ -12,7 +12,7 @@ import (
 )
 
 // Creates an hours of operation override in an Amazon Connect hours of operation
-// resource
+// resource.
 func (c *Client) CreateHoursOfOperationOverride(ctx context.Context, params *CreateHoursOfOperationOverrideInput, optFns ...func(*Options)) (*CreateHoursOfOperationOverrideOutput, error) {
 	if params == nil {
 		params = &CreateHoursOfOperationOverrideInput{}
@@ -36,12 +36,12 @@ type CreateHoursOfOperationOverrideInput struct {
 	// This member is required.
 	Config []types.HoursOfOperationOverrideConfig
 
-	// The date from when the hours of operation override would be effective.
+	// The date from when the hours of operation override is effective.
 	//
 	// This member is required.
 	EffectiveFrom *string
 
-	// The date until when the hours of operation override would be effective.
+	// The date until when the hours of operation override is effective.
 	//
 	// This member is required.
 	EffectiveTill *string

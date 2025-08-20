@@ -29,7 +29,12 @@ func (c *Client) GetService(ctx context.Context, params *GetServiceInput, optFns
 
 type GetServiceInput struct {
 
-	// The ID of the service that you want to get settings for.
+	// The ID or Amazon Resource Name (ARN) of the service that you want to get
+	// settings for. For services created by consumers in a shared namespace, specify
+	// the service ARN. For more information about shared namespaces, see [Cross-account Cloud Map namespace sharing]in the Cloud
+	// Map Developer Guide.
+	//
+	// [Cross-account Cloud Map namespace sharing]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
 	//
 	// This member is required.
 	Id *string

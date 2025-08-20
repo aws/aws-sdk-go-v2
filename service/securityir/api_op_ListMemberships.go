@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Grants permission to query the memberships a principal has access to.
+// Returns the memberships that the calling principal can access.
 func (c *Client) ListMemberships(ctx context.Context, params *ListMembershipsInput, optFns ...func(*Options)) (*ListMembershipsOutput, error) {
 	if params == nil {
 		params = &ListMembershipsInput{}
@@ -32,7 +32,9 @@ type ListMembershipsInput struct {
 	// Request element for ListMemberships to limit the number of responses.
 	MaxResults *int32
 
-	// Optional element.
+	// An optional string that, if supplied, must be copied from the output of a
+	// previous call to ListMemberships. When provided in this manner, the API fetches
+	// the next page of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -44,7 +46,8 @@ type ListMembershipsOutput struct {
 	// membershipID, membershipStatus, and region for each response.
 	Items []types.ListMembershipItem
 
-	// Optional element.
+	// An optional string that, if supplied on subsequent calls to ListMemberships,
+	// allows the API to fetch the next page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

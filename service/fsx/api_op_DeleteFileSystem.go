@@ -52,12 +52,12 @@ import (
 // The data in a deleted file system is also deleted and can't be recovered by any
 // means.
 //
-// [Deleting an S3 access point attachment]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/delete-points-list
+// [Deleting an S3 access point attachment]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/delete-access-point.html
 // [unmount]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/unmounting-fs.html
 // [AgeOfOldestQueuedMessage]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/monitoring-cloudwatch.html#auto-import-export-metrics
 // [DescribeFileSystems]: https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileSystems.html
 // [export data repository task]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/export-data-repo-task-dra.html
-// [Listing S3 access point attachments]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/access-points-list
+// [Listing S3 access point attachments]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/access-points-list.html
 func (c *Client) DeleteFileSystem(ctx context.Context, params *DeleteFileSystemInput, optFns ...func(*Options)) (*DeleteFileSystemOutput, error) {
 	if params == nil {
 		params = &DeleteFileSystemInput{}

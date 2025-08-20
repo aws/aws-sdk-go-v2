@@ -26,7 +26,7 @@ import (
 //
 // [GetRetainedMessage]: https://docs.aws.amazon.com/iot/latest/apireference/API_iotdata_GetRetainedMessage.html
 // [Amazon Web Services IoT Core pricing - Messaging]: http://aws.amazon.com/iot-core/pricing/#Messaging
-// [ListRetainedMessages]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiotfleethubfordevicemanagement.html#awsiotfleethubfordevicemanagement-actions-as-permissions
+// [ListRetainedMessages]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html
 func (c *Client) ListRetainedMessages(ctx context.Context, params *ListRetainedMessagesInput, optFns ...func(*Options)) (*ListRetainedMessagesOutput, error) {
 	if params == nil {
 		params = &ListRetainedMessagesInput{}

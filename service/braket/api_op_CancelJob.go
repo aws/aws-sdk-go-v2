@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancels an Amazon Braket job.
+// Cancels an Amazon Braket hybrid job.
 func (c *Client) CancelJob(ctx context.Context, params *CancelJobInput, optFns ...func(*Options)) (*CancelJobOutput, error) {
 	if params == nil {
 		params = &CancelJobInput{}
@@ -29,7 +29,7 @@ func (c *Client) CancelJob(ctx context.Context, params *CancelJobInput, optFns .
 
 type CancelJobInput struct {
 
-	// The ARN of the Amazon Braket job to cancel.
+	// The ARN of the Amazon Braket hybrid job to cancel.
 	//
 	// This member is required.
 	JobArn *string
@@ -39,7 +39,7 @@ type CancelJobInput struct {
 
 type CancelJobOutput struct {
 
-	// The status of the job cancellation request.
+	// The status of the hybrid job.
 	//
 	// This member is required.
 	CancellationStatus types.CancellationStatus

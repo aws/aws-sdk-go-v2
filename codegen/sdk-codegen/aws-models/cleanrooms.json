@@ -1555,6 +1555,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the validations performed on the analysis template.</p>"
                     }
+                },
+                "errorMessageConfiguration": {
+                    "target": "com.amazonaws.cleanrooms#ErrorMessageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that specifies the level of detail in error messages returned by analyses using this template. When set to <code>DETAILED</code>, error messages include more information to help troubleshoot issues with PySpark jobs. Detailed error messages may expose underlying data, including sensitive information. Recommended for faster troubleshooting in development and testing environments.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2612,6 +2618,12 @@
                     "target": "com.amazonaws.cleanrooms#AnalysisTemplateValidationStatusDetailList",
                     "traits": {
                         "smithy.api#documentation": "<p>The validations that were performed.</p>"
+                    }
+                },
+                "errorMessageConfiguration": {
+                    "target": "com.amazonaws.cleanrooms#ErrorMessageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that specifies the level of detail in error messages returned by analyses using this template. When set to <code>DETAILED</code>, error messages include more information to help troubleshoot issues with PySpark jobs. Detailed error messages may expose underlying data, including sensitive information. Recommended for faster troubleshooting in development and testing environments.</p>"
                     }
                 }
             },
@@ -4982,6 +4994,12 @@
                 },
                 "schema": {
                     "target": "com.amazonaws.cleanrooms#AnalysisSchema"
+                },
+                "errorMessageConfiguration": {
+                    "target": "com.amazonaws.cleanrooms#ErrorMessageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that specifies the level of detail in error messages returned by analyses using this template. When set to <code>DETAILED</code>, error messages include more information to help troubleshoot issues with PySpark jobs. Detailed error messages may expose underlying data, including sensitive information. Recommended for faster troubleshooting in development and testing environments.</p>"
+                    }
                 }
             }
         },
@@ -7256,6 +7274,32 @@
                 "smithy.api#range": {
                     "min": 1,
                     "max": 20
+                }
+            }
+        },
+        "com.amazonaws.cleanrooms#ErrorMessageConfiguration": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.cleanrooms#ErrorMessageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The level of detail for error messages returned by the PySpark job. When set to DETAILED, error messages include more information to help troubleshoot issues with your PySpark job.</p> <p>Because this setting may expose sensitive data, it is recommended for development and testing environments.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that defines the level of detail included in error messages returned by PySpark jobs. This configuration allows you to control the verbosity of error messages to help with troubleshooting PySpark jobs while maintaining appropriate security controls.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#ErrorMessageType": {
+            "type": "enum",
+            "members": {
+                "DETAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DETAILED"
+                    }
                 }
             }
         },

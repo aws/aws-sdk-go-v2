@@ -33,7 +33,9 @@ type UpdateServiceAttributesInput struct {
 	// This member is required.
 	Attributes map[string]string
 
-	// The ID of the service that you want to update.
+	// The ID or Amazon Resource Name (ARN) of the service that you want to update.
+	// For services created in a namespace shared with your Amazon Web Services
+	// account, specify the service ARN.
 	//
 	// This member is required.
 	ServiceId *string

@@ -29,7 +29,7 @@ func (c *Client) UpdatePublicDnsNamespace(ctx context.Context, params *UpdatePub
 
 type UpdatePublicDnsNamespaceInput struct {
 
-	// The ID of the namespace being updated.
+	// The ID or Amazon Resource Name (ARN) of the namespace being updated.
 	//
 	// This member is required.
 	Id *string

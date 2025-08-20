@@ -39,7 +39,7 @@ import (
 //   - OutputBucketName : The Amazon S3 bucket where you want your output files
 //     stored.
 //
-//   - Settings : A MedicalScribeSettings obect that must set exactly one of
+//   - Settings : A MedicalScribeSettings object that must set exactly one of
 //     ShowSpeakerLabels or ChannelIdentification to true. If ShowSpeakerLabels is
 //     true, MaxSpeakerLabels must also be set.
 //
@@ -142,6 +142,10 @@ type StartMedicalScribeJobInput struct {
 	// [KMS encryption context]: https://docs.aws.amazon.com/transcribe/latest/dg/key-management.html#kms-context
 	KMSEncryptionContext map[string]string
 
+	// The MedicalScribeContext object that contains contextual information which is
+	// used during clinical note generation to add relevant context to the note.
+	MedicalScribeContext *types.MedicalScribeContext
+
 	// The KMS key you want to use to encrypt your Medical Scribe output.
 	//
 	// If using a key located in the current Amazon Web Services account, you can
@@ -176,7 +180,7 @@ type StartMedicalScribeJobInput struct {
 	OutputEncryptionKMSKeyId *string
 
 	// Adds one or more custom tags, each in the form of a key:value pair, to the
-	// Medica Scribe job.
+	// Medical Scribe job.
 	//
 	// To learn more about using tags with Amazon Transcribe, refer to [Tagging resources].
 	//

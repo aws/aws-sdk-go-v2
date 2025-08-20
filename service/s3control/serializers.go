@@ -9580,6 +9580,19 @@ func awsRestxml_serializeDocumentJobOperation(v *types.JobOperation, value smith
 			return err
 		}
 	}
+	if v.S3ComputeObjectChecksum != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "S3ComputeObjectChecksum",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentS3ComputeObjectChecksumOperation(v.S3ComputeObjectChecksum, el); err != nil {
+			return err
+		}
+	}
 	if v.S3DeleteObjectTagging != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
@@ -9710,6 +9723,17 @@ func awsRestxml_serializeDocumentJobReport(v *types.JobReport, value smithyxml.V
 		}
 		el := value.MemberElement(root)
 		el.Boolean(v.Enabled)
+	}
+	if v.ExpectedBucketOwner != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ExpectedBucketOwner",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.ExpectedBucketOwner)
 	}
 	if len(v.Format) > 0 {
 		rootAttr := []smithyxml.Attr{}
@@ -11254,6 +11278,33 @@ func awsRestxml_serializeDocumentS3BucketDestination(v *types.S3BucketDestinatio
 		}
 		el := value.MemberElement(root)
 		el.String(*v.Prefix)
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentS3ComputeObjectChecksumOperation(v *types.S3ComputeObjectChecksumOperation, value smithyxml.Value) error {
+	defer value.Close()
+	if len(v.ChecksumAlgorithm) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ChecksumAlgorithm",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.ChecksumAlgorithm))
+	}
+	if len(v.ChecksumType) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ChecksumType",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.ChecksumType))
 	}
 	return nil
 }

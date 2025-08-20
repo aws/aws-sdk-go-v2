@@ -70,6 +70,10 @@ type RequestPhoneNumberInput struct {
 	// deleted.
 	DeletionProtectionEnabled *bool
 
+	// By default this is set to false. When set to true the international sending of
+	// phone number is Enabled.
+	InternationalSendingEnabled *bool
+
 	// The name of the OptOutList to associate with the phone number. You can use the
 	// OptOutListName or OptOutListArn.
 	//
@@ -104,6 +108,10 @@ type RequestPhoneNumberOutput struct {
 	// By default this is set to false. When set to true the phone number can't be
 	// deleted.
 	DeletionProtectionEnabled bool
+
+	// By default this is set to false. When set to true the international sending of
+	// phone number is Enabled.
+	InternationalSendingEnabled bool
 
 	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
 	// region.

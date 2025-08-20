@@ -411,6 +411,9 @@ type PhoneNumberInformation struct {
 	// This member is required.
 	TwoWayEnabled bool
 
+	// When set to true the international sending of phone number is Enabled.
+	InternationalSendingEnabled bool
+
 	// The unique identifier for the phone number.
 	PhoneNumberId *string
 

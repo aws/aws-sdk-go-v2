@@ -22,14 +22,6 @@ import (
 	"time"
 )
 
-func deserializeS3Expires(v string) (*time.Time, error) {
-	t, err := smithytime.ParseHTTPDate(v)
-	if err != nil {
-		return nil, nil
-	}
-	return &t, nil
-}
-
 type awsRestjson1_deserializeOpBatchCreateTopicReviewedAnswer struct {
 }
 
@@ -71893,6 +71885,11 @@ func awsRestjson1_deserializeDocumentHeatMapConfiguration(v **types.HeatMapConfi
 				return err
 			}
 
+		case "ColumnAxisDisplayOptions":
+			if err := awsRestjson1_deserializeDocumentAxisDisplayOptions(&sv.ColumnAxisDisplayOptions, value); err != nil {
+				return err
+			}
+
 		case "ColumnLabelOptions":
 			if err := awsRestjson1_deserializeDocumentChartAxisLabelOptions(&sv.ColumnLabelOptions, value); err != nil {
 				return err
@@ -71915,6 +71912,11 @@ func awsRestjson1_deserializeDocumentHeatMapConfiguration(v **types.HeatMapConfi
 
 		case "Legend":
 			if err := awsRestjson1_deserializeDocumentLegendOptions(&sv.Legend, value); err != nil {
+				return err
+			}
+
+		case "RowAxisDisplayOptions":
+			if err := awsRestjson1_deserializeDocumentAxisDisplayOptions(&sv.RowAxisDisplayOptions, value); err != nil {
 				return err
 			}
 
@@ -83578,6 +83580,11 @@ func awsRestjson1_deserializeDocumentPluginVisual(v **types.PluginVisual, value 
 
 	for key, value := range shape {
 		switch key {
+		case "Actions":
+			if err := awsRestjson1_deserializeDocumentVisualCustomActionList(&sv.Actions, value); err != nil {
+				return err
+			}
+
 		case "ChartConfiguration":
 			if err := awsRestjson1_deserializeDocumentPluginVisualConfiguration(&sv.ChartConfiguration, value); err != nil {
 				return err

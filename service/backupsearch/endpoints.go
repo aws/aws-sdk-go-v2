@@ -12,7 +12,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/endpoints"
 	"github.com/aws/aws-sdk-go-v2/internal/endpoints/awsrulesfn"
 	internalendpoints "github.com/aws/aws-sdk-go-v2/service/backupsearch/internal/endpoints"
-	smithy "github.com/aws/smithy-go"
 	smithyauth "github.com/aws/smithy-go/auth"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -341,7 +340,7 @@ func (r *resolver) ResolveEndpoint(
 				uriString := func() string {
 					var out strings.Builder
 					out.WriteString("https://backup-search-fips.")
-					out.WriteString(_PartitionResult.ImplicitGlobalRegion)
+					out.WriteString(_Region)
 					out.WriteString(".")
 					out.WriteString(_PartitionResult.DualStackDnsSuffix)
 					return out.String()
@@ -355,26 +354,12 @@ func (r *resolver) ResolveEndpoint(
 				return smithyendpoints.Endpoint{
 					URI:     *uri,
 					Headers: http.Header{},
-					Properties: func() smithy.Properties {
-						var out smithy.Properties
-						smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
-							{
-								SchemeID: "aws.auth#sigv4",
-								SignerProperties: func() smithy.Properties {
-									var sp smithy.Properties
-									smithyhttp.SetSigV4SigningRegion(&sp, _PartitionResult.ImplicitGlobalRegion)
-									return sp
-								}(),
-							},
-						})
-						return out
-					}(),
 				}, nil
 			}
 			uriString := func() string {
 				var out strings.Builder
 				out.WriteString("https://backup-search.")
-				out.WriteString(_PartitionResult.ImplicitGlobalRegion)
+				out.WriteString(_Region)
 				out.WriteString(".")
 				out.WriteString(_PartitionResult.DualStackDnsSuffix)
 				return out.String()
@@ -388,20 +373,6 @@ func (r *resolver) ResolveEndpoint(
 			return smithyendpoints.Endpoint{
 				URI:     *uri,
 				Headers: http.Header{},
-				Properties: func() smithy.Properties {
-					var out smithy.Properties
-					smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
-						{
-							SchemeID: "aws.auth#sigv4",
-							SignerProperties: func() smithy.Properties {
-								var sp smithy.Properties
-								smithyhttp.SetSigV4SigningRegion(&sp, _PartitionResult.ImplicitGlobalRegion)
-								return sp
-							}(),
-						},
-					})
-					return out
-				}(),
 			}, nil
 		}
 		return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")

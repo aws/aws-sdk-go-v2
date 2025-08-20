@@ -30,7 +30,12 @@ func (c *Client) ListInstances(ctx context.Context, params *ListInstancesInput, 
 
 type ListInstancesInput struct {
 
-	// The ID of the service that you want to list instances for.
+	// The ID or Amazon Resource Name (ARN) of the service that you want to list
+	// instances for. For services created in a shared namespace, specify the service
+	// ARN. For more information about shared namespaces, see [Cross-account Cloud Map namespace sharing]in the Cloud Map
+	// Developer Guide.
+	//
+	// [Cross-account Cloud Map namespace sharing]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
 	//
 	// This member is required.
 	ServiceId *string
@@ -60,6 +65,11 @@ type ListInstancesOutput struct {
 	// another ListInstances request to get the next group of results. Specify the
 	// value of NextToken from the previous response in the next request.
 	NextToken *string
+
+	// The ID of the Amazon Web Services account that created the namespace that
+	// contains the specified service. If this isn't your account ID, it's the ID of
+	// the account that shared the namespace with your account.
+	ResourceOwner *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

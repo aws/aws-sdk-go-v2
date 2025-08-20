@@ -29,7 +29,7 @@ func (c *Client) DeleteNamespace(ctx context.Context, params *DeleteNamespaceInp
 
 type DeleteNamespaceInput struct {
 
-	// The ID of the namespace that you want to delete.
+	// The ID or Amazon Resource Name (ARN) of the namespace that you want to delete.
 	//
 	// This member is required.
 	Id *string

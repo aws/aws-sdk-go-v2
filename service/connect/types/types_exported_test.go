@@ -8,6 +8,24 @@ import (
 	"time"
 )
 
+func ExampleContactMetricValue_outputUsage() {
+	var union types.ContactMetricValue
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ContactMetricValueMemberNumber:
+		_ = v.Value // Value is float64
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *float64
+
 func ExampleCreatedByInfo_outputUsage() {
 	var union types.CreatedByInfo
 	// type switches can be used to check the union value

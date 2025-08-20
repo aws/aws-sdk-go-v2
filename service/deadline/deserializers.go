@@ -22,16 +22,7 @@ import (
 	"math"
 	"strconv"
 	"strings"
-	"time"
 )
-
-func deserializeS3Expires(v string) (*time.Time, error) {
-	t, err := smithytime.ParseHTTPDate(v)
-	if err != nil {
-		return nil, nil
-	}
-	return &t, nil
-}
 
 type awsRestjson1_deserializeOpAssociateMemberToFarm struct {
 }
@@ -6229,6 +6220,15 @@ func awsRestjson1_deserializeOpDocumentGetFleetOutput(v **GetFleetOutput, value 
 					return fmt.Errorf("expected FleetStatus to be of type string, got %T instead", value)
 				}
 				sv.Status = types.FleetStatus(jtv)
+			}
+
+		case "statusMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StatusMessage = ptr.String(jtv)
 			}
 
 		case "targetWorkerCount":
@@ -21961,6 +21961,15 @@ func awsRestjson1_deserializeDocumentFleetSummary(v **types.FleetSummary, value 
 					return fmt.Errorf("expected FleetStatus to be of type string, got %T instead", value)
 				}
 				sv.Status = types.FleetStatus(jtv)
+			}
+
+		case "statusMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StatusMessage = ptr.String(jtv)
 			}
 
 		case "targetWorkerCount":

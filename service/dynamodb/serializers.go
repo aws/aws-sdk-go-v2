@@ -7124,6 +7124,11 @@ func awsAwsjson10_serializeOpDocumentUpdateContributorInsightsInput(v *UpdateCon
 		ok.String(string(v.ContributorInsightsAction))
 	}
 
+	if len(v.ContributorInsightsMode) > 0 {
+		ok := object.Key("ContributorInsightsMode")
+		ok.String(string(v.ContributorInsightsMode))
+	}
+
 	if v.IndexName != nil {
 		ok := object.Key("IndexName")
 		ok.String(*v.IndexName)

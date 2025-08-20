@@ -127,6 +127,10 @@ type CreateFileSystemFromBackupInput struct {
 	//   - ImportPath
 	LustreConfiguration *types.CreateFileSystemLustreConfiguration
 
+	// Sets the network type for the Amazon FSx for OpenZFS file system that you're
+	// creating from a backup.
+	NetworkType types.NetworkType
+
 	// The OpenZFS configuration for the file system that's being created.
 	OpenZFSConfiguration *types.CreateFileSystemOpenZFSConfiguration
 

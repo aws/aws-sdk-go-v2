@@ -124,6 +124,9 @@ type GetFleetOutput struct {
 	// additional configuration for workers in your fleet.
 	HostConfiguration *types.HostConfiguration
 
+	// A message that communicates a suspended status of the fleet.
+	StatusMessage *string
+
 	// The number of target workers in the fleet.
 	TargetWorkerCount *int32
 

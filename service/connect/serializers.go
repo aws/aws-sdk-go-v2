@@ -11611,6 +11611,99 @@ func awsRestjson1_serializeOpHttpBindingsGetContactAttributesInput(v *GetContact
 	return nil
 }
 
+type awsRestjson1_serializeOpGetContactMetrics struct {
+}
+
+func (*awsRestjson1_serializeOpGetContactMetrics) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetContactMetrics) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetContactMetricsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/metrics/contact")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentGetContactMetricsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetContactMetricsInput(v *GetContactMetricsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentGetContactMetricsInput(v *GetContactMetricsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ContactId != nil {
+		ok := object.Key("ContactId")
+		ok.String(*v.ContactId)
+	}
+
+	if v.InstanceId != nil {
+		ok := object.Key("InstanceId")
+		ok.String(*v.InstanceId)
+	}
+
+	if v.Metrics != nil {
+		ok := object.Key("Metrics")
+		if err := awsRestjson1_serializeDocumentContactMetrics(v.Metrics, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetCurrentMetricData struct {
 }
 
@@ -28561,6 +28654,31 @@ func awsRestjson1_serializeDocumentContactFlowSearchFilter(v *types.ContactFlowS
 	return nil
 }
 
+func awsRestjson1_serializeDocumentContactMetricInfo(v *types.ContactMetricInfo, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Name) > 0 {
+		ok := object.Key("Name")
+		ok.String(string(v.Name))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentContactMetrics(v []types.ContactMetricInfo, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentContactMetricInfo(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentContactReferences(v map[string]types.Reference, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -30768,6 +30886,13 @@ func awsRestjson1_serializeDocumentParticipantDetailsToAdd(v *types.ParticipantD
 	if v.DisplayName != nil {
 		ok := object.Key("DisplayName")
 		ok.String(*v.DisplayName)
+	}
+
+	if v.ParticipantCapabilities != nil {
+		ok := object.Key("ParticipantCapabilities")
+		if err := awsRestjson1_serializeDocumentParticipantCapabilities(v.ParticipantCapabilities, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.ParticipantRole) > 0 {

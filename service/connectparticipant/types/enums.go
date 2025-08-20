@@ -68,6 +68,7 @@ type ConnectionType string
 const (
 	ConnectionTypeWebsocket             ConnectionType = "WEBSOCKET"
 	ConnectionTypeConnectionCredentials ConnectionType = "CONNECTION_CREDENTIALS"
+	ConnectionTypeWebrtcConnection      ConnectionType = "WEBRTC_CONNECTION"
 )
 
 // Values returns all known values for ConnectionType. Note that this can be
@@ -78,6 +79,26 @@ func (ConnectionType) Values() []ConnectionType {
 	return []ConnectionType{
 		"WEBSOCKET",
 		"CONNECTION_CREDENTIALS",
+		"WEBRTC_CONNECTION",
+	}
+}
+
+type MeetingFeatureStatus string
+
+// Enum values for MeetingFeatureStatus
+const (
+	MeetingFeatureStatusAvailable   MeetingFeatureStatus = "AVAILABLE"
+	MeetingFeatureStatusUnavailable MeetingFeatureStatus = "UNAVAILABLE"
+)
+
+// Values returns all known values for MeetingFeatureStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MeetingFeatureStatus) Values() []MeetingFeatureStatus {
+	return []MeetingFeatureStatus{
+		"AVAILABLE",
+		"UNAVAILABLE",
 	}
 }
 

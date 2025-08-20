@@ -194,6 +194,12 @@ var operationAuthOptions = map[string]func(*AuthResolverParameters) []*smithyaut
 		}
 	},
 
+	"GetTokensFromRefreshToken": func(params *AuthResolverParameters) []*smithyauth.Option {
+		return []*smithyauth.Option{
+			{SchemeID: smithyauth.SchemeIDAnonymous},
+		}
+	},
+
 	"GetUser": func(params *AuthResolverParameters) []*smithyauth.Option {
 		return []*smithyauth.Option{
 			{SchemeID: smithyauth.SchemeIDAnonymous},

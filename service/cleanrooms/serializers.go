@@ -401,6 +401,13 @@ func awsRestjson1_serializeOpDocumentCreateAnalysisTemplateInput(v *CreateAnalys
 		ok.String(*v.Description)
 	}
 
+	if v.ErrorMessageConfiguration != nil {
+		ok := object.Key("errorMessageConfiguration")
+		if err := awsRestjson1_serializeDocumentErrorMessageConfiguration(v.ErrorMessageConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.Format) > 0 {
 		ok := object.Key("format")
 		ok.String(string(v.Format))
@@ -8370,6 +8377,18 @@ func awsRestjson1_serializeDocumentDifferentialPrivacyTemplateUpdateParameters(v
 	if v.UsersNoisePerQuery != nil {
 		ok := object.Key("usersNoisePerQuery")
 		ok.Integer(*v.UsersNoisePerQuery)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentErrorMessageConfiguration(v *types.ErrorMessageConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
 	}
 
 	return nil

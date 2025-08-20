@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Amazon Braket job.
+// Creates an Amazon Braket hybrid job.
 func (c *Client) CreateJob(ctx context.Context, params *CreateJobInput, optFns ...func(*Options)) (*CreateJobOutput, error) {
 	if params == nil {
 		params = &CreateJobInput{}
@@ -36,13 +36,14 @@ type CreateJobInput struct {
 	// This member is required.
 	AlgorithmSpecification *types.AlgorithmSpecification
 
-	// A unique token that guarantees that the call to this API is idempotent.
+	// The client token associated with this request that guarantees that the request
+	// is idempotent.
 	//
 	// This member is required.
 	ClientToken *string
 
 	// The quantum processing unit (QPU) or simulator used to create an Amazon Braket
-	// job.
+	// hybrid job.
 	//
 	// This member is required.
 	DeviceConfig *types.DeviceConfig
@@ -53,21 +54,21 @@ type CreateJobInput struct {
 	// This member is required.
 	InstanceConfig *types.InstanceConfig
 
-	// The name of the Amazon Braket job.
+	// The name of the Amazon Braket hybrid job.
 	//
 	// This member is required.
 	JobName *string
 
-	// The path to the S3 location where you want to store job artifacts and the
-	// encryption key used to store them.
+	// The path to the S3 location where you want to store hybrid job artifacts and
+	// the encryption key used to store them.
 	//
 	// This member is required.
 	OutputDataConfig *types.JobOutputDataConfig
 
 	// The Amazon Resource Name (ARN) of an IAM role that Amazon Braket can assume to
 	// perform tasks on behalf of a user. It can access user resources, run an Amazon
-	// Braket job container on behalf of user, and output resources to the users' s3
-	// buckets.
+	// Braket job container on behalf of user, and output results and hybrid job
+	// details to the users' s3 buckets.
 	//
 	// This member is required.
 	RoleArn *string
@@ -75,24 +76,30 @@ type CreateJobInput struct {
 	// The list of Amazon Braket resources associated with the hybrid job.
 	Associations []types.Association
 
-	// Information about the output locations for job checkpoint data.
+	// Information about the output locations for hybrid job checkpoint data.
 	CheckpointConfig *types.JobCheckpointConfig
 
-	// Algorithm-specific parameters used by an Amazon Braket job that influence the
-	// quality of the training job. The values are set with a string of JSON key:value
-	// pairs, where the key is the name of the hyperparameter and the value is the
-	// value of th hyperparameter.
+	// Algorithm-specific parameters used by an Amazon Braket hybrid job that
+	// influence the quality of the training job. The values are set with a map of JSON
+	// key:value pairs, where the key is the name of the hyperparameter and the value
+	// is the value of the hyperparameter.
+	//
+	// Do not include any security-sensitive information including account access IDs,
+	// secrets, or tokens in any hyperparameter fields. As part of the shared
+	// responsibility model, you are responsible for any potential exposure,
+	// unauthorized access, or compromise of your sensitive data if caused by
+	// security-sensitive information included in the request hyperparameter variable
+	// or plain text fields.
 	HyperParameters map[string]string
 
 	// A list of parameters that specify the name and type of input data and where it
 	// is located.
 	InputDataConfig []types.InputFileConfig
 
-	//  The user-defined criteria that specifies when a job stops running.
+	//  The user-defined criteria that specifies when a hybrid job stops running.
 	StoppingCondition *types.JobStoppingCondition
 
-	// A tag object that consists of a key and an optional value, used to manage
-	// metadata for Amazon Braket resources.
+	// Tags to be added to the hybrid job you're creating.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -100,7 +107,7 @@ type CreateJobInput struct {
 
 type CreateJobOutput struct {
 
-	// The ARN of the Amazon Braket job created.
+	// The ARN of the Amazon Braket hybrid job created.
 	//
 	// This member is required.
 	JobArn *string

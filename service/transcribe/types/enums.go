@@ -590,6 +590,27 @@ func (PiiEntityType) Values() []PiiEntityType {
 	}
 }
 
+type Pronouns string
+
+// Enum values for Pronouns
+const (
+	PronounsHeHim    Pronouns = "HE_HIM"
+	PronounsSheHer   Pronouns = "SHE_HER"
+	PronounsTheyThem Pronouns = "THEY_THEM"
+)
+
+// Values returns all known values for Pronouns. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Pronouns) Values() []Pronouns {
+	return []Pronouns{
+		"HE_HIM",
+		"SHE_HER",
+		"THEY_THEM",
+	}
+}
+
 type RedactionOutput string
 
 // Enum values for RedactionOutput

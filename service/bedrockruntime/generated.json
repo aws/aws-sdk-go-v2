@@ -12,6 +12,7 @@
         "api_op_ApplyGuardrail.go",
         "api_op_Converse.go",
         "api_op_ConverseStream.go",
+        "api_op_CountTokens.go",
         "api_op_GetAsyncInvoke.go",
         "api_op_InvokeModel.go",
         "api_op_InvokeModelWithResponseStream.go",

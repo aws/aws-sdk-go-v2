@@ -23,14 +23,6 @@ import (
 	"time"
 )
 
-func deserializeS3Expires(v string) (*time.Time, error) {
-	t, err := smithytime.ParseHTTPDate(v)
-	if err != nil {
-		return nil, nil
-	}
-	return &t, nil
-}
-
 type awsRestjson1_deserializeOpAddFacetToObject struct {
 }
 

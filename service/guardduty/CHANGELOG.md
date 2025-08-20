@@ -1,3 +1,16 @@
+# v1.62.1 (2025-08-20)
+
+* **Bug Fix**: Remove unused deserialization code.
+
+# v1.62.0 (2025-08-14)
+
+* **Feature**: Added support for entity lists.
+
+# v1.61.0 (2025-08-11)
+
+* **Feature**: Add support for configuring per-service Options via callback on global config.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.60.0 (2025-08-07)
 
 * **Feature**: Added support for VPC owner account ID associated with DNS request in the GuardDuty finding.

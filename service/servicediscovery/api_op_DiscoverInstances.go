@@ -33,10 +33,10 @@ func (c *Client) DiscoverInstances(ctx context.Context, params *DiscoverInstance
 
 type DiscoverInstancesInput struct {
 
-	// The HttpName name of the namespace. It's found in the HttpProperties member of
-	// the Properties member of the namespace. In most cases, Name and HttpName match.
-	// However, if you reuse Name for namespace creation, a generated hash is added to
-	// HttpName to distinguish the two.
+	// The HttpName name of the namespace. The HttpName is found in the HttpProperties
+	// member of the Properties member of the namespace. In most cases, Name and
+	// HttpName match. However, if you reuse Name for namespace creation, a generated
+	// hash is added to HttpName to distinguish the two.
 	//
 	// This member is required.
 	NamespaceName *string
@@ -72,6 +72,12 @@ type DiscoverInstancesInput struct {
 	// the filters are ignored, and only instances that match the filters that are
 	// specified in the QueryParameters parameter are returned.
 	OptionalParameters map[string]string
+
+	// The ID of the Amazon Web Services account that owns the namespace associated
+	// with the instance, as specified in the namespace ResourceOwner field. For
+	// instances associated with namespaces that are shared with your account, you must
+	// specify an OwnerAccount .
+	OwnerAccount *string
 
 	// Filters to scope the results based on custom attributes for the instance (for
 	// example, {version=v1, az=1a} ). Only instances that match all the specified

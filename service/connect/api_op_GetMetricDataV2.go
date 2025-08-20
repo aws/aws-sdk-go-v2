@@ -24,6 +24,29 @@ import (
 // GetMetricDataV2 and GetMetricData , see [Metrics definitions] in the Amazon Connect Administrator
 // Guide.
 //
+// When you make a successful API request, you can expect the following metric
+// values in the response:
+//
+//   - Metric value is null: The calculation cannot be performed due to divide by
+//     zero or insufficient data
+//
+//   - Metric value is a number (including 0) of defined type: The number provided
+//     is the calculation result
+//
+//   - MetricResult list is empty: The request cannot find any data in the system
+//
+// The following guidelines can help you work with the API:
+//
+//   - Each dimension in the metric response must contain a value
+//
+//   - Each item in MetricResult must include all requested metrics
+//
+//   - If the response is slow due to large result sets, try these approaches:
+//
+//   - Narrow the time range of your request
+//
+//   - Add filters to reduce the amount of data returned
+//
 // [GetMetricData]: https://docs.aws.amazon.com/connect/latest/APIReference/API_GetMetricData.html
 // [Metrics definitions]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html
 func (c *Client) GetMetricDataV2(ctx context.Context, params *GetMetricDataV2Input, optFns ...func(*Options)) (*GetMetricDataV2Output, error) {
@@ -298,6 +321,22 @@ type GetMetricDataV2Input struct {
 	//
 	// Feature is a valid filter but not a valid grouping.
 	//
+	// AVG_CONTACT_FIRST_RESPONSE_TIME_AGENT Unit: Seconds
+	//
+	// Valid groupings and filters: Agent, Agent Hierarchy, Channel,
+	// contact/segmentAttributes/connect:Subtype, Disconnect Reason, Feature,
+	// RoutingStepExpression, Initiation method, Routing Profile, Queue, Q in Connect
+	//
+	// UI name: [Agent average contact first response wait time]
+	//
+	// AVG_CONVERSATION_CLOSE_TIME Unit: Seconds
+	//
+	// Valid groupings and filters: Agent, Agent Hierarchy, Channel,
+	// contact/segmentAttributes/connect:Subtype, Disconnect Reason, Feature,
+	// RoutingStepExpression, Initiation method, Routing Profile, Queue, Q in Connect
+	//
+	// UI name: [Average conversation close time]
+	//
 	// AVG_CONVERSATION_DURATION Unit: Seconds
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
@@ -321,6 +360,14 @@ type GetMetricDataV2Input struct {
 	// Version, Queue, Routing Profile
 	//
 	// UI name: [Average evaluation score]
+	//
+	// AVG_FIRST_RESPONSE_TIME_AGENT Unit: Seconds
+	//
+	// Valid groupings and filters: Agent, Agent Hierarchy, Channel,
+	// contact/segmentAttributes/connect:Subtype, Disconnect Reason, Feature,
+	// RoutingStepExpression, Initiation method, Routing Profile, Queue, Q in Connect
+	//
+	// UI name: [Average agent first response time]
 	//
 	// AVG_FLOW_TIME Unit: Seconds
 	//
@@ -414,6 +461,54 @@ type GetMetricDataV2Input struct {
 	//
 	// UI name: [Average agent interruption time]
 	//
+	// AVG_MESSAGE_LENGTH_AGENT Unit: Count
+	//
+	// Valid groupings and filters: Agent, Agent Hierarchy, Channel,
+	// contact/segmentAttributes/connect:Subtype, Disconnect Reason, Feature,
+	// RoutingStepExpression, Initiation method, Routing Profile, Queue, Q in Connect
+	//
+	// UI name: [Average agent message length]
+	//
+	// AVG_MESSAGE_LENGTH_CUSTOMER Unit: Count
+	//
+	// Valid groupings and filters: Agent, Agent Hierarchy, Channel,
+	// contact/segmentAttributes/connect:Subtype, Disconnect Reason, Feature,
+	// RoutingStepExpression, Initiation method, Routing Profile, Queue, Q in Connect
+	//
+	// UI name: [Average customer message length]
+	//
+	// AVG_MESSAGES Unit: Count
+	//
+	// Valid groupings and filters: Agent, Agent Hierarchy, Channel,
+	// contact/segmentAttributes/connect:Subtype, Disconnect Reason, Feature,
+	// RoutingStepExpression, Initiation method, Routing Profile, Queue, Q in Connect
+	//
+	// UI name: [Average messages]
+	//
+	// AVG_MESSAGES_AGENT Unit: Count
+	//
+	// Valid groupings and filters: Agent, Agent Hierarchy, Channel,
+	// contact/segmentAttributes/connect:Subtype, Disconnect Reason, Feature,
+	// RoutingStepExpression, Initiation method, Routing Profile, Queue, Q in Connect
+	//
+	// UI name: [Average agent messages]
+	//
+	// AVG_MESSAGES_BOT Unit: Count
+	//
+	// Valid groupings and filters: Agent, Agent Hierarchy, Channel,
+	// contact/segmentAttributes/connect:Subtype, Disconnect Reason, Feature,
+	// RoutingStepExpression, Initiation method, Routing Profile, Queue, Q in Connect
+	//
+	// UI name: [Average bot messages]
+	//
+	// AVG_MESSAGES_CUSTOMER Unit: Count
+	//
+	// Valid groupings and filters: Agent, Agent Hierarchy, Channel,
+	// contact/segmentAttributes/connect:Subtype, Disconnect Reason, Feature,
+	// RoutingStepExpression, Initiation method, Routing Profile, Queue, Q in Connect
+	//
+	// UI name: [Average customer messages]
+	//
 	// AVG_NON_TALK_TIME This metric is available only for contacts analyzed by
 	// Contact Lens conversational analytics.
 	//
@@ -432,6 +527,22 @@ type GetMetricDataV2Input struct {
 	// UI name: [Average queue answer time]
 	//
 	// Feature is a valid filter but not a valid grouping.
+	//
+	// AVG_RESPONSE_TIME_AGENT Unit: Seconds
+	//
+	// Valid groupings and filters: Agent, Agent Hierarchy, Channel,
+	// contact/segmentAttributes/connect:Subtype, Disconnect Reason, Feature,
+	// RoutingStepExpression, Initiation method, Routing Profile, Queue, Q in Connect
+	//
+	// UI name: [Average agent response time]
+	//
+	// AVG_RESPONSE_TIME_CUSTOMER Unit: Seconds
+	//
+	// Valid groupings and filters: Agent, Agent Hierarchy, Channel,
+	// contact/segmentAttributes/connect:Subtype, Disconnect Reason, Feature,
+	// RoutingStepExpression, Initiation method, Routing Profile, Queue, Q in Connect
+	//
+	// UI name: [Average customer response time]
 	//
 	// AVG_RESOLUTION_TIME Unit: Seconds
 	//
@@ -721,6 +832,14 @@ type GetMetricDataV2Input struct {
 	// Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS
 	//
 	// UI name: [Current cases]
+	//
+	// CONVERSATIONS_ABANDONED Unit: Count
+	//
+	// Valid groupings and filters: Agent, Agent Hierarchy, Channel,
+	// contact/segmentAttributes/connect:Subtype, Disconnect Reason, Feature,
+	// RoutingStepExpression, Initiation method, Routing Profile, Queue, Q in Connect
+	//
+	// UI name: [Conversations abandoned]
 	//
 	// DELIVERY_ATTEMPTS This metric is available only for outbound campaigns.
 	//
@@ -1141,6 +1260,7 @@ type GetMetricDataV2Input struct {
 	// [Percent bot intents outcome]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#percent-bot-intents-outcome
 	// [Contacts answered in X seconds]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-answered-in-x-seconds
 	// [Average case resolution time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-case-resolution-time
+	// [Average agent message length]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-message-length
 	// [Agent API connecting time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-api-connecting-time
 	// [Talk time percent]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#talk-time-percent
 	// [Campaign progress rate]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-progress-rate
@@ -1149,6 +1269,7 @@ type GetMetricDataV2Input struct {
 	// [Average agent interruption time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-interruption-time
 	// [Contacts transferred out]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out
 	// [Campaign send attempts]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-send-attempts
+	// [Average conversation close time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-conversation-close-time
 	// [Average bot conversation time]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#average-bot-conversation-time
 	// [Average flow time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-flow-time
 	// [Contacts hold disconnect]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-hold-disconnect
@@ -1159,10 +1280,13 @@ type GetMetricDataV2Input struct {
 	// [Service level X]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#service-level
 	// [Recipients interacted]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#recipients-interacted
 	// [Contact handle time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contact-handle-time
+	// [Average messages]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-messages
 	// [Agent idle time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-idle-time
+	// [Average customer message length]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-message-length
 	// [Adherent time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#adherent-time
 	// [Average talk time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-talk-time
 	// [Average after contact work time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#after-contact-work-time
+	// [Average customer response time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-time-agent
 	// [Cases created]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#cases-created
 	// [Average handle time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-handle-time
 	// [Average customer hold time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-hold-time
@@ -1174,6 +1298,7 @@ type GetMetricDataV2Input struct {
 	// [Contacts hold agent disconnect]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-hold-agent-disconnect
 	// [Contacts transferred out internal]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out-internal
 	// [Agent non-response]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-non-response
+	// [Average bot messages]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-bot-messages
 	// [Agent answer rate]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-answer-rate
 	// [Evaluations performed]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#evaluations-performed
 	// [Average agent pause time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-pause-time
@@ -1185,12 +1310,15 @@ type GetMetricDataV2Input struct {
 	// [Average contact duration]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-contact-duration
 	// [Non-adherent time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#non-adherent-time
 	// [Average agent interaction and customer hold time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-interaction-and-customer-hold-time
+	// [Average agent response time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-response-time-agent
 	// [After contact work time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#after-contact-work-time
 	// [Average customer talk time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-talk-time
 	// [Campaign contacts abandoned after X]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-contacts-abandoned-after-x
 	// [Error status time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#error-status-time
 	// [Maximum queued time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#maximum-queued-time
+	// [Average agent first response time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-first-response-time
 	// [Average active time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-active-time
+	// [Average customer messages]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-messages
 	// [Contacts transferred out queue]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out-queue
 	// [Cases reopened]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#cases-reopened
 	// [Contact flow time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contact-flow-time
@@ -1198,6 +1326,8 @@ type GetMetricDataV2Input struct {
 	// [Average agent interaction time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-interaction-time
 	// [Agent on contact time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-on-contact-time
 	// [Average non-talk time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-non-talk-time
+	// [Conversations abandoned]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#conversations-abandoned
+	// [Average agent messages]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-messages
 	// [Flows started]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#flows-started
 	// [Average contacts per case]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-contacts-per-case
 	// [Agent talk time percent]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-talk-time-percent
@@ -1206,6 +1336,7 @@ type GetMetricDataV2Input struct {
 	// [Flows outcome percentage]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#flows-outcome-percentage
 	// [Cases resolved]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#cases-resolved
 	// [Contacts queued (enqueue timestamp)]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-queued-by-enqueue
+	// [Agent average contact first response wait time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-average-contact-first-response-wait-time
 	// [Online time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#online-time
 	// [Agent interaction time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-interaction-time
 	// [Recipients targeted]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#recipients-targeted

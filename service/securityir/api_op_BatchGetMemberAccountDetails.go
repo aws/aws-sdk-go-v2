@@ -11,7 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Grants permission to view an existing membership.
+// Provides information on whether the supplied account IDs are associated with a
+// membership.
+//
+// AWS account ID's may appear less than 12 characters and need to be
+// zero-prepended. An example would be 123123123 which is nine digits, and with
+// zero-prepend would be 000123123123 . Not zero-prepending to 12 digits could
+// result in errors.
 func (c *Client) BatchGetMemberAccountDetails(ctx context.Context, params *BatchGetMemberAccountDetailsInput, optFns ...func(*Options)) (*BatchGetMemberAccountDetailsOutput, error) {
 	if params == nil {
 		params = &BatchGetMemberAccountDetailsInput{}
@@ -32,6 +38,11 @@ type BatchGetMemberAccountDetailsInput struct {
 	// Optional element to query the membership relationship status to a provided list
 	// of account IDs.
 	//
+	// AWS account ID's may appear less than 12 characters and need to be
+	// zero-prepended. An example would be 123123123 which is nine digits, and with
+	// zero-prepend would be 000123123123 . Not zero-prepending to 12 digits could
+	// result in errors.
+	//
 	// This member is required.
 	AccountIds []string
 
@@ -46,7 +57,7 @@ type BatchGetMemberAccountDetailsInput struct {
 
 type BatchGetMemberAccountDetailsOutput struct {
 
-	// The response element providing errors messages for requests to
+	// The response element providing error messages for requests to
 	// GetMembershipAccountDetails.
 	Errors []types.GetMembershipAccountDetailError
 

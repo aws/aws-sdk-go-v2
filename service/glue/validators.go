@@ -670,6 +670,26 @@ func (m *validateOpCreateDevEndpoint) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateGlueIdentityCenterConfiguration struct {
+}
+
+func (*validateOpCreateGlueIdentityCenterConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateGlueIdentityCenterConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateGlueIdentityCenterConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateGlueIdentityCenterConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateIntegration struct {
 }
 
@@ -4400,6 +4420,10 @@ func addOpCreateDataQualityRulesetValidationMiddleware(stack *middleware.Stack) 
 
 func addOpCreateDevEndpointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDevEndpoint{}, middleware.After)
+}
+
+func addOpCreateGlueIdentityCenterConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateGlueIdentityCenterConfiguration{}, middleware.After)
 }
 
 func addOpCreateIntegrationValidationMiddleware(stack *middleware.Stack) error {
@@ -10149,6 +10173,21 @@ func validateOpCreateDevEndpointInput(v *CreateDevEndpointInput) error {
 	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateGlueIdentityCenterConfigurationInput(v *CreateGlueIdentityCenterConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateGlueIdentityCenterConfigurationInput"}
+	if v.InstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

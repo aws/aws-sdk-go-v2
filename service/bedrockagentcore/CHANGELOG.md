@@ -1,3 +1,12 @@
+# v1.3.1 (2025-08-20)
+
+* **Bug Fix**: Remove unused deserialization code.
+
+# v1.3.0 (2025-08-11)
+
+* **Feature**: Add support for configuring per-service Options via callback on global config.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.2.0 (2025-08-04)
 
 * **Feature**: Remove superfluous field from API

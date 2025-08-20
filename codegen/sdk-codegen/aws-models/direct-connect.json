@@ -759,7 +759,13 @@
                     "target": "com.amazonaws.directconnect#ASN",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>"
+                        "smithy.api#documentation": "<p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>"
+                    }
+                },
+                "asnLong": {
+                    "target": "com.amazonaws.directconnect#LongAsn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The long ASN for the BGP peer. The valid range is from 1 to 4294967294 for BGP configuration. </p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "authKey": {
@@ -1394,6 +1400,12 @@
                     "target": "com.amazonaws.directconnect#ConnectionList",
                     "traits": {
                         "smithy.api#documentation": "<p>The connections.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.directconnect#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>"
                     }
                 }
             }
@@ -2146,7 +2158,13 @@
                     "target": "com.amazonaws.directconnect#ASN",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>"
+                        "smithy.api#documentation": "<p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>"
+                    }
+                },
+                "asnLong": {
+                    "target": "com.amazonaws.directconnect#LongAsn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The long ASN for the BGP peer to be deleted from a Direct Connect virtual interface. The valid range is from 1 to 4294967294 for BGP configuration. </p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "customerAddress": {
@@ -2658,6 +2676,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the connection.</p>"
                     }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.directconnect#MaxResultSetSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call.\n\tTo retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>\n         <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are\n      returned.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.directconnect#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3033,6 +3063,18 @@
                         "smithy.api#documentation": "<p>The ID of the interconnect or LAG.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.directconnect#MaxResultSetSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call.\n\tTo retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>\n         <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are\n      returned.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.directconnect#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3129,6 +3171,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the interconnect.</p>"
                     }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.directconnect#MaxResultSetSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call.\n\tTo retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>\n         <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are\n      returned.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.directconnect#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3162,6 +3216,18 @@
                     "target": "com.amazonaws.directconnect#LagId",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the LAG.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.directconnect#MaxResultSetSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call.\n\tTo retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>\n         <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are\n      returned.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.directconnect#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
                     }
                 }
             },
@@ -3396,7 +3462,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Displays all virtual interfaces for an Amazon Web Services account. Virtual interfaces deleted fewer\n      than 15 minutes before you make the request are also returned. If you specify a\n      connection ID, only the virtual interfaces associated with the connection are returned.\n      If you specify a virtual interface ID, then only a single virtual interface is returned.</p>\n         <p>A virtual interface (VLAN) transmits the traffic between the Direct Connect location and the customer network.</p>"
+                "smithy.api#documentation": "<p>Displays all virtual interfaces for an Amazon Web Services account. Virtual interfaces deleted fewer\n      than 15 minutes before you make the request are also returned. If you specify a\n      connection ID, only the virtual interfaces associated with the connection are returned.\n      If you specify a virtual interface ID, then only a single virtual interface is returned.</p>\n         <p>A virtual interface (VLAN) transmits the traffic between the Direct Connect location and the customer network.</p>\n         <ul>\n            <li>\n               <p>If you're using an <code>asn</code>, the response includes ASN value in both the <code>asn</code> and <code>asnLong</code> fields.</p>\n            </li>\n            <li>\n               <p>If you're using <code>asnLong</code>, the response returns a value of <code>0</code> (zero) for the <code>asn</code> attribute because it exceeds the highest ASN value of 2,147,483,647 that it can support</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.directconnect#DescribeVirtualInterfacesRequest": {
@@ -3412,6 +3478,18 @@
                     "target": "com.amazonaws.directconnect#VirtualInterfaceId",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the virtual interface.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.directconnect#MaxResultSetSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call.\n\tTo retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>\n         <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are\n      returned.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.directconnect#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
                     }
                 }
             },
@@ -3449,7 +3527,7 @@
                 "amazonSideAsn": {
                     "target": "com.amazonaws.directconnect#LongAsn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The autonomous system number (ASN) for the Amazon side of the connection.</p>"
+                        "smithy.api#documentation": "<p>The autonomous system number (AS) for the Amazon side of the connection.</p>"
                     }
                 },
                 "ownerAccount": {
@@ -4203,6 +4281,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The interconnects.</p>"
                     }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.directconnect#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>"
+                    }
                 }
             }
         },
@@ -4412,6 +4496,12 @@
                     "target": "com.amazonaws.directconnect#LagList",
                     "traits": {
                         "smithy.api#documentation": "<p>The LAGs.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.directconnect#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>"
                     }
                 }
             }
@@ -4661,7 +4751,13 @@
                     "target": "com.amazonaws.directconnect#ASN",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>"
+                        "smithy.api#documentation": "<p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>"
+                    }
+                },
+                "asnLong": {
+                    "target": "com.amazonaws.directconnect#LongAsn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The long ASN for a new BGP peer.  The valid range is  from 1 to 4294967294.</p>"
                     }
                 },
                 "authKey": {
@@ -4715,8 +4811,13 @@
                     "target": "com.amazonaws.directconnect#ASN",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>\n         <p>The valid values are 1-2147483647.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>\n         <p>The valid values are 1-2147483646.</p>"
+                    }
+                },
+                "asnLong": {
+                    "target": "com.amazonaws.directconnect#LongAsn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The long ASN for a new private virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "mtu": {
@@ -4800,8 +4901,13 @@
                     "target": "com.amazonaws.directconnect#ASN",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>\n         <p>The valid values are 1-2147483647.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>\n         <p>The valid values are 1-2147483646.</p>"
+                    }
+                },
+                "asnLong": {
+                    "target": "com.amazonaws.directconnect#LongAsn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ASN when allocating a new private virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "mtu": {
@@ -4867,8 +4973,13 @@
                     "target": "com.amazonaws.directconnect#ASN",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>\n         <p>The valid values are 1-2147483647.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>"
+                    }
+                },
+                "asnLong": {
+                    "target": "com.amazonaws.directconnect#LongAsn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The long ASN for a new public virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "authKey": {
@@ -4934,8 +5045,13 @@
                     "target": "com.amazonaws.directconnect#ASN",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>\n         <p>The valid values are 1-2147483647.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>\n         <p>The valid values are 1-2147483646.</p>"
+                    }
+                },
+                "asnLong": {
+                    "target": "com.amazonaws.directconnect#LongAsn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ASN when allocating a new public virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "authKey": {
@@ -4999,7 +5115,13 @@
                     "target": "com.amazonaws.directconnect#ASN",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>\n         <p>The valid values are 1-2147483647.</p>"
+                        "smithy.api#documentation": "<p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>"
+                    }
+                },
+                "asnLong": {
+                    "target": "com.amazonaws.directconnect#LongAsn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The long ASN for a new transit virtual interface.The valid range is from 1 to 4294967294 for BGP configuration.</p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "mtu": {
@@ -5075,7 +5197,13 @@
                     "target": "com.amazonaws.directconnect#ASN",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>\n         <p>The valid values are 1-2147483647.</p>"
+                        "smithy.api#documentation": "<p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>\n         <p>The valid values are 1-2147483646.</p>"
+                    }
+                },
+                "asnLong": {
+                    "target": "com.amazonaws.directconnect#LongAsn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ASN when allocating a new transit virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "mtu": {
@@ -7174,13 +7302,19 @@
                     "target": "com.amazonaws.directconnect#ASN",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>\n         <p>The valid values are 1-2147483647.</p>"
+                        "smithy.api#documentation": "<p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>"
+                    }
+                },
+                "asnLong": {
+                    "target": "com.amazonaws.directconnect#LongAsn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The long ASN for the virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "amazonSideAsn": {
                     "target": "com.amazonaws.directconnect#LongAsn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The autonomous system number (ASN) for the Amazon side of the connection.</p>"
+                        "smithy.api#documentation": "<p>The autonomous system number (AS) for the Amazon side of the connection.</p>"
                     }
                 },
                 "authKey": {
@@ -7442,6 +7576,12 @@
                     "target": "com.amazonaws.directconnect#VirtualInterfaceList",
                     "traits": {
                         "smithy.api#documentation": "<p>The virtual interfaces</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.directconnect#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>"
                     }
                 }
             }

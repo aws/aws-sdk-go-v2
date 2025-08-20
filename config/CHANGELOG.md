@@ -1,3 +1,12 @@
+# v1.31.1 (2025-08-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.31.0 (2025-08-11)
+
+* **Feature**: Add support for configuring per-service Options via callback on global config.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.30.3 (2025-08-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -458,6 +458,18 @@ func TestCheckSnapshot_ListAccountsForParent(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListAccountsWithInvalidEffectivePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAccountsWithInvalidEffectivePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAccountsWithInvalidEffectivePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListAWSServiceAccessForOrganization(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAWSServiceAccessForOrganization(context.Background(), nil, func(o *Options) {
@@ -511,6 +523,18 @@ func TestCheckSnapshot_ListDelegatedServicesForAccount(t *testing.T) {
 	_, err := svc.ListDelegatedServicesForAccount(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListDelegatedServicesForAccount")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListEffectivePolicyValidationErrors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEffectivePolicyValidationErrors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListEffectivePolicyValidationErrors")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1117,6 +1141,18 @@ func TestUpdateSnapshot_ListAccountsForParent(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListAccountsWithInvalidEffectivePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAccountsWithInvalidEffectivePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAccountsWithInvalidEffectivePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListAWSServiceAccessForOrganization(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAWSServiceAccessForOrganization(context.Background(), nil, func(o *Options) {
@@ -1170,6 +1206,18 @@ func TestUpdateSnapshot_ListDelegatedServicesForAccount(t *testing.T) {
 	_, err := svc.ListDelegatedServicesForAccount(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListDelegatedServicesForAccount")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListEffectivePolicyValidationErrors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEffectivePolicyValidationErrors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListEffectivePolicyValidationErrors")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

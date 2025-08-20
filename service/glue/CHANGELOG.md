@@ -1,3 +1,20 @@
+# v1.126.1 (2025-08-20)
+
+* **Bug Fix**: Remove unused deserialization code.
+
+# v1.126.0 (2025-08-15)
+
+* **Feature**: AWS Glue Zero ETL now supports On-demand snapshot load
+
+# v1.125.0 (2025-08-14)
+
+* **Feature**: AWS Glue now supports Trusted Identity Propagation.
+
+# v1.124.0 (2025-08-11)
+
+* **Feature**: Add support for configuring per-service Options via callback on global config.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.123.0 (2025-08-07)
 
 * **Feature**: AWS Glue Data Catalog now supports Iceberg Optimization settings at the Catalog level, and supports new options to control the optimization job run rate.

@@ -1,3 +1,16 @@
+# v1.57.2 (2025-08-20)
+
+* **Bug Fix**: Remove unused deserialization code.
+
+# v1.57.1 (2025-08-18)
+
+* **Documentation**: Added default_x86_64 and default_arm64 as values to the instanceTypes field.
+
+# v1.57.0 (2025-08-11)
+
+* **Feature**: Add support for configuring per-service Options via callback on global config.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.56.1 (2025-08-07)
 
 * **Documentation**: This feature allows customers to use AWS Batch with Linux with ARM64 CPU Architecture with Fargate Spot compute support.

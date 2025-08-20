@@ -22,16 +22,7 @@ import (
 	"math"
 	"strconv"
 	"strings"
-	"time"
 )
-
-func deserializeS3Expires(v string) (*time.Time, error) {
-	t, err := smithytime.ParseHTTPDate(v)
-	if err != nil {
-		return nil, nil
-	}
-	return &t, nil
-}
 
 type awsRestjson1_deserializeOpGetMedicalScribeStream struct {
 }
@@ -5224,6 +5215,15 @@ func awsRestjson1_deserializeDocumentMedicalScribeStreamDetails(v **types.Medica
 					return err
 				}
 				sv.MediaSampleRateHertz = ptr.Int32(int32(i64))
+			}
+
+		case "MedicalScribeContextProvided":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.MedicalScribeContextProvided = ptr.Bool(jtv)
 			}
 
 		case "PostStreamAnalyticsResult":

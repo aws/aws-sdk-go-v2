@@ -130,6 +130,7 @@
         "api_op_DismissUserContact.go",
         "api_op_GetAttachedFile.go",
         "api_op_GetContactAttributes.go",
+        "api_op_GetContactMetrics.go",
         "api_op_GetCurrentMetricData.go",
         "api_op_GetCurrentUserData.go",
         "api_op_GetEffectiveHoursOfOperations.go",

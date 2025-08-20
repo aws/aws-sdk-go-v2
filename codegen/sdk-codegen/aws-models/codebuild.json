@@ -7563,7 +7563,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration policy that defines comment-based approval requirements for triggering builds on pull requests. This policy helps control when automated builds are executed based on contributor permissions and approval workflows.</p>"
+                "smithy.api#documentation": "<p>A PullRequestBuildPolicy object that defines comment-based approval requirements for triggering builds on pull requests. This policy helps control when automated builds are executed based on contributor permissions and approval workflows.</p>"
             }
         },
         "com.amazonaws.codebuild#PutResourcePolicy": {
@@ -10608,6 +10608,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A message associated with the status of a webhook.</p>"
                     }
+                },
+                "pullRequestBuildPolicy": {
+                    "target": "com.amazonaws.codebuild#PullRequestBuildPolicy"
                 }
             },
             "traits": {

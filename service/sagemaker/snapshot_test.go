@@ -2294,6 +2294,18 @@ func TestCheckSnapshot_DescribeProject(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeReservedCapacity(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeReservedCapacity(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeReservedCapacity")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeSpace(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeSpace(context.Background(), nil, func(o *Options) {
@@ -3511,6 +3523,18 @@ func TestCheckSnapshot_ListTrials(t *testing.T) {
 	_, err := svc.ListTrials(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListTrials")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListUltraServersByReservedCapacity(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListUltraServersByReservedCapacity(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListUltraServersByReservedCapacity")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6697,6 +6721,18 @@ func TestUpdateSnapshot_DescribeProject(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeReservedCapacity(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeReservedCapacity(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeReservedCapacity")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeSpace(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeSpace(context.Background(), nil, func(o *Options) {
@@ -7914,6 +7950,18 @@ func TestUpdateSnapshot_ListTrials(t *testing.T) {
 	_, err := svc.ListTrials(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTrials")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListUltraServersByReservedCapacity(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListUltraServersByReservedCapacity(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListUltraServersByReservedCapacity")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

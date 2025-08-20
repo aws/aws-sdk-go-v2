@@ -102,6 +102,53 @@ func (BucketVersioningStatus) Values() []BucketVersioningStatus {
 	}
 }
 
+type ComputeObjectChecksumAlgorithm string
+
+// Enum values for ComputeObjectChecksumAlgorithm
+const (
+	ComputeObjectChecksumAlgorithmCrc32     ComputeObjectChecksumAlgorithm = "CRC32"
+	ComputeObjectChecksumAlgorithmCrc32c    ComputeObjectChecksumAlgorithm = "CRC32C"
+	ComputeObjectChecksumAlgorithmCrc64nvme ComputeObjectChecksumAlgorithm = "CRC64NVME"
+	ComputeObjectChecksumAlgorithmMd5       ComputeObjectChecksumAlgorithm = "MD5"
+	ComputeObjectChecksumAlgorithmSha1      ComputeObjectChecksumAlgorithm = "SHA1"
+	ComputeObjectChecksumAlgorithmSha256    ComputeObjectChecksumAlgorithm = "SHA256"
+)
+
+// Values returns all known values for ComputeObjectChecksumAlgorithm. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ComputeObjectChecksumAlgorithm) Values() []ComputeObjectChecksumAlgorithm {
+	return []ComputeObjectChecksumAlgorithm{
+		"CRC32",
+		"CRC32C",
+		"CRC64NVME",
+		"MD5",
+		"SHA1",
+		"SHA256",
+	}
+}
+
+type ComputeObjectChecksumType string
+
+// Enum values for ComputeObjectChecksumType
+const (
+	ComputeObjectChecksumTypeFullObject ComputeObjectChecksumType = "FULL_OBJECT"
+	ComputeObjectChecksumTypeComposite  ComputeObjectChecksumType = "COMPOSITE"
+)
+
+// Values returns all known values for ComputeObjectChecksumType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ComputeObjectChecksumType) Values() []ComputeObjectChecksumType {
+	return []ComputeObjectChecksumType{
+		"FULL_OBJECT",
+		"COMPOSITE",
+	}
+}
+
 type DeleteMarkerReplicationStatus string
 
 // Enum values for DeleteMarkerReplicationStatus
@@ -521,6 +568,7 @@ const (
 	OperationNameS3PutObjectLegalHold    OperationName = "S3PutObjectLegalHold"
 	OperationNameS3PutObjectRetention    OperationName = "S3PutObjectRetention"
 	OperationNameS3ReplicateObject       OperationName = "S3ReplicateObject"
+	OperationNameS3ComputeObjectChecksum OperationName = "S3ComputeObjectChecksum"
 )
 
 // Values returns all known values for OperationName. Note that this can be
@@ -538,6 +586,7 @@ func (OperationName) Values() []OperationName {
 		"S3PutObjectLegalHold",
 		"S3PutObjectRetention",
 		"S3ReplicateObject",
+		"S3ComputeObjectChecksum",
 	}
 }
 

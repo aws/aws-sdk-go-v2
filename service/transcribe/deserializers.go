@@ -20,16 +20,7 @@ import (
 	"io/ioutil"
 	"math"
 	"strings"
-	"time"
 )
-
-func deserializeS3Expires(v string) (*time.Time, error) {
-	t, err := smithytime.ParseHTTPDate(v)
-	if err != nil {
-		return nil, nil
-	}
-	return &t, nil
-}
 
 type awsAwsjson11_deserializeOpCreateCallAnalyticsCategory struct {
 }
@@ -7076,6 +7067,15 @@ func awsAwsjson11_deserializeDocumentMedicalScribeJob(v **types.MedicalScribeJob
 		case "Media":
 			if err := awsAwsjson11_deserializeDocumentMedia(&sv.Media, value); err != nil {
 				return err
+			}
+
+		case "MedicalScribeContextProvided":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.MedicalScribeContextProvided = ptr.Bool(jtv)
 			}
 
 		case "MedicalScribeJobName":

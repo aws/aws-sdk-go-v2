@@ -60,15 +60,11 @@ type UpdateComputeNodeGroupInput struct {
 
 	// The Amazon Resource Name (ARN) of the IAM instance profile used to pass an IAM
 	// role when launching EC2 instances. The role contained in your instance profile
-	// must have the pcs:RegisterComputeNodeGroupInstance permission. The resource
-	// identifier of the ARN must start with AWSPCS or it must have /aws-pcs/ in its
-	// path.
+	// must have the pcs:RegisterComputeNodeGroupInstance permission and the role name
+	// must start with AWSPCS or must have the path /aws-pcs/ . For more information,
+	// see [IAM instance profiles for PCS]in the PCS User Guide.
 	//
-	// Examples
-	//
-	//   - arn:aws:iam::111122223333:instance-profile/AWSPCS-example-role-1
-	//
-	//   - arn:aws:iam::111122223333:instance-profile/aws-pcs/example-role-2
+	// [IAM instance profiles for PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/security-instance-profiles.html
 	IamInstanceProfileArn *string
 
 	// Specifies how EC2 instances are purchased on your behalf. Amazon Web Services

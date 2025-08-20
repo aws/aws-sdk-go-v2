@@ -420,7 +420,7 @@
                     "FederatedUser"
                 ],
                 "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<p>Amazon Application Recovery Controller (ARC) Region switch helps you to quickly and reliably shift traffic away from an impaired Amazon Web Services Region to a healthy Region. With Region switch, you can create plans that define the steps to shift traffic for your application from one Amazon Web Services Region to another. You can test your plans in practice mode before using them in a real recovery scenario.</p> <p>Region switch provides a structured approach to multi-Region failover, helping you to meet your recovery time objectives (RTOs) and maintain business continuity during regional disruptions.</p>",
+                "smithy.api#documentation": "<p>Amazon Application Recovery Controller (ARC) Region switch helps you to quickly and reliably shift traffic away from an impaired Amazon Web Services Region to a healthy Region. With Region switch, you can create plans that define the steps to shift traffic for your application from one Amazon Web Services Region to another. You can test your plans in practice mode before using them in a real recovery scenario.</p> <p>Region switch provides a structured approach to multi-Region failover, helping you to meet your recovery time objectives (RTOs) and maintain business continuity during regional disruptions.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/region-switch.html\">Region switch in ARC</a> in the <i>Amazon Application Recovery Controller User Guide</i>.</p>",
                 "smithy.api#title": "ARC - Region switch",
                 "smithy.protocols#rpcv2Cbor": {},
                 "smithy.rules#endpointRuleSet": {
@@ -950,102 +950,6 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseFIPS": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://arc-region-switch-fips.us-iso-east-1.c2s.ic.gov"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://arc-region-switch.us-iso-east-1.c2s.ic.gov"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://arc-region-switch-fips.us-isob-east-1.sc2s.sgov.gov"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://arc-region-switch.us-isob-east-1.sc2s.sgov.gov"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-isoe-west-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://arc-region-switch-fips.eu-isoe-west-1.cloud.adc-e.uk"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-isoe-west-1",
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-isoe-west-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://arc-region-switch.eu-isoe-west-1.cloud.adc-e.uk"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-isoe-west-1",
-                                "UseFIPS": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isof-south-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://arc-region-switch-fips.us-isof-south-1.csp.hci.ic.gov"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-isof-south-1",
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isof-south-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://arc-region-switch.us-isof-south-1.csp.hci.ic.gov"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-isof-south-1",
                                 "UseFIPS": false
                             }
                         },

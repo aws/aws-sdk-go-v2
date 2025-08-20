@@ -19,16 +19,7 @@ import (
 	"io"
 	"io/ioutil"
 	"strings"
-	"time"
 )
-
-func deserializeS3Expires(v string) (*time.Time, error) {
-	t, err := smithytime.ParseHTTPDate(v)
-	if err != nil {
-		return nil, nil
-	}
-	return &t, nil
-}
 
 type awsAwsjson11_deserializeOpCreateHttpNamespace struct {
 }
@@ -4346,7 +4337,7 @@ func awsAwsjson11_deserializeDocumentDuplicateRequest(v **types.DuplicateRequest
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected ResourceId to be of type string, got %T instead", value)
+					return fmt.Errorf("expected OperationId to be of type string, got %T instead", value)
 				}
 				sv.DuplicateOperationId = ptr.String(jtv)
 			}
@@ -4648,6 +4639,15 @@ func awsAwsjson11_deserializeDocumentInstance(v **types.Instance, value interfac
 				return err
 			}
 
+		case "CreatedByAccount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AWSAccountId to be of type string, got %T instead", value)
+				}
+				sv.CreatedByAccount = ptr.String(jtv)
+			}
+
 		case "CreatorRequestId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4776,6 +4776,15 @@ func awsAwsjson11_deserializeDocumentInstanceSummary(v **types.InstanceSummary, 
 		case "Attributes":
 			if err := awsAwsjson11_deserializeDocumentAttributes(&sv.Attributes, value); err != nil {
 				return err
+			}
+
+		case "CreatedByAccount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AWSAccountId to be of type string, got %T instead", value)
+				}
+				sv.CreatedByAccount = ptr.String(jtv)
 			}
 
 		case "Id":
@@ -4956,6 +4965,15 @@ func awsAwsjson11_deserializeDocumentNamespace(v **types.Namespace, value interf
 		case "Properties":
 			if err := awsAwsjson11_deserializeDocumentNamespaceProperties(&sv.Properties, value); err != nil {
 				return err
+			}
+
+		case "ResourceOwner":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AWSAccountId to be of type string, got %T instead", value)
+				}
+				sv.ResourceOwner = ptr.String(jtv)
 			}
 
 		case "ServiceCount":
@@ -5241,6 +5259,15 @@ func awsAwsjson11_deserializeDocumentNamespaceSummary(v **types.NamespaceSummary
 				return err
 			}
 
+		case "ResourceOwner":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AWSAccountId to be of type string, got %T instead", value)
+				}
+				sv.ResourceOwner = ptr.String(jtv)
+			}
+
 		case "ServiceCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5335,6 +5362,15 @@ func awsAwsjson11_deserializeDocumentOperation(v **types.Operation, value interf
 					return fmt.Errorf("expected OperationId to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
+			}
+
+		case "OwnerAccount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AWSAccountId to be of type string, got %T instead", value)
+				}
+				sv.OwnerAccount = ptr.String(jtv)
 			}
 
 		case "Status":
@@ -5751,6 +5787,15 @@ func awsAwsjson11_deserializeDocumentService(v **types.Service, value interface{
 				}
 			}
 
+		case "CreatedByAccount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AWSAccountId to be of type string, got %T instead", value)
+				}
+				sv.CreatedByAccount = ptr.String(jtv)
+			}
+
 		case "CreatorRequestId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5824,6 +5869,15 @@ func awsAwsjson11_deserializeDocumentService(v **types.Service, value interface{
 				sv.NamespaceId = ptr.String(jtv)
 			}
 
+		case "ResourceOwner":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AWSAccountId to be of type string, got %T instead", value)
+				}
+				sv.ResourceOwner = ptr.String(jtv)
+			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5882,6 +5936,15 @@ func awsAwsjson11_deserializeDocumentServiceAlreadyExists(v **types.ServiceAlrea
 				sv.Message = ptr.String(jtv)
 			}
 
+		case "ServiceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.ServiceArn = ptr.String(jtv)
+			}
+
 		case "ServiceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5925,6 +5988,15 @@ func awsAwsjson11_deserializeDocumentServiceAttributes(v **types.ServiceAttribut
 		case "Attributes":
 			if err := awsAwsjson11_deserializeDocumentServiceAttributesMap(&sv.Attributes, value); err != nil {
 				return err
+			}
+
+		case "ResourceOwner":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AWSAccountId to be of type string, got %T instead", value)
+				}
+				sv.ResourceOwner = ptr.String(jtv)
 			}
 
 		case "ServiceArn":
@@ -6142,6 +6214,15 @@ func awsAwsjson11_deserializeDocumentServiceSummary(v **types.ServiceSummary, va
 				}
 			}
 
+		case "CreatedByAccount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AWSAccountId to be of type string, got %T instead", value)
+				}
+				sv.CreatedByAccount = ptr.String(jtv)
+			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6195,6 +6276,15 @@ func awsAwsjson11_deserializeDocumentServiceSummary(v **types.ServiceSummary, va
 					return fmt.Errorf("expected ServiceName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "ResourceOwner":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AWSAccountId to be of type string, got %T instead", value)
+				}
+				sv.ResourceOwner = ptr.String(jtv)
 			}
 
 		case "Type":
@@ -6809,6 +6899,15 @@ func awsAwsjson11_deserializeOpDocumentGetInstanceOutput(v **GetInstanceOutput, 
 				return err
 			}
 
+		case "ResourceOwner":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AWSAccountId to be of type string, got %T instead", value)
+				}
+				sv.ResourceOwner = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -7041,6 +7140,15 @@ func awsAwsjson11_deserializeOpDocumentListInstancesOutput(v **ListInstancesOutp
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
 				sv.NextToken = ptr.String(jtv)
+			}
+
+		case "ResourceOwner":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AWSAccountId to be of type string, got %T instead", value)
+				}
+				sv.ResourceOwner = ptr.String(jtv)
 			}
 
 		default:

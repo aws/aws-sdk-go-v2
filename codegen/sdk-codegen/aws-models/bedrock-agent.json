@@ -995,8 +995,10 @@
             "type": "structure",
             "members": {
                 "agentAliasArn": {
-                    "target": "com.amazonaws.bedrockagent#AgentAliasArn",
+                    "target": "com.amazonaws.bedrockagent#FlowAgentAliasArn",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the alias of the agent to invoke.</p>",
                         "smithy.api#required": {}
                     }
@@ -6647,6 +6649,15 @@
                 "smithy.api#documentation": "<p>Configurations for when you choose fixed-size chunking. If you set the <code>chunkingStrategy</code> as <code>NONE</code>, exclude this field.</p>"
             }
         },
+        "com.amazonaws.bedrockagent#FlowAgentAliasArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^$|^arn:aws(-cn|-us-gov|-eusc|-iso(-[b-f])?)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:agent-alias/[0-9a-zA-Z]{10}/[0-9a-zA-Z]{10}$"
+            }
+        },
         "com.amazonaws.bedrockagent#FlowAliasArn": {
             "type": "string",
             "traits": {
@@ -7067,6 +7078,42 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^(arn:aws:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:flow/[0-9a-zA-Z]{10})|([0-9a-zA-Z]{10})$"
+            }
+        },
+        "com.amazonaws.bedrockagent#FlowKnowledgeBaseId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 10
+                },
+                "smithy.api#pattern": "^$|^[0-9a-zA-Z]+$"
+            }
+        },
+        "com.amazonaws.bedrockagent#FlowLambdaArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^$|^arn:aws(-cn|-us-gov|-eusc|-iso(-[b-f])?)?:lambda:([a-z]{2,}-){2,}\\d:\\d{12}:function:[a-zA-Z0-9-_\\.]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"
+            }
+        },
+        "com.amazonaws.bedrockagent#FlowLexBotAliasArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 78
+                },
+                "smithy.api#pattern": "^$|^arn:aws(-cn|-us-gov|-eusc|-iso(-[b-f])?)?:lex:([a-z]{2,}-){2,}\\d:\\d{12}:bot-alias/[0-9a-zA-Z]+/[0-9a-zA-Z]+$"
+            }
+        },
+        "com.amazonaws.bedrockagent#FlowLexBotLocaleId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.bedrockagent#FlowName": {
@@ -7496,6 +7543,22 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagent#FlowPromptArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^$|^(arn:aws(-cn|-us-gov|-eusc|-iso(-[b-f])?)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:prompt/[0-9a-zA-Z]{10}(?::[0-9]{1,5})?)$"
+            }
+        },
+        "com.amazonaws.bedrockagent#FlowPromptModelIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^$|^(arn:aws(-cn|-us-gov|-eusc|-iso(-[b-f])?)?:(bedrock|sagemaker):[a-z0-9-]{1,20}:([0-9]{12})?:([a-z-]+/)?)?([a-zA-Z0-9.-]{1,63}){0,2}(([:][a-z0-9-]{1,63}){0,2})?(/[a-z0-9]{1,12})?$"
+            }
+        },
         "com.amazonaws.bedrockagent#FlowResource": {
             "type": "resource",
             "identifiers": {
@@ -7535,6 +7598,16 @@
                 "aws.cloudformation#cfnResource": {
                     "name": "Flow"
                 }
+            }
+        },
+        "com.amazonaws.bedrockagent#FlowS3BucketName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^$|^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"
             }
         },
         "com.amazonaws.bedrockagent#FlowStatus": {
@@ -10299,7 +10372,7 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 5000000
                 },
                 "smithy.api#sensitive": {}
@@ -10311,6 +10384,8 @@
                 "code": {
                     "target": "com.amazonaws.bedrockagent#InlineCode",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
                         "smithy.api#documentation": "<p>The code that's executed in your inline code node. The code can access input data from previous nodes in the flow, perform operations on that data, and produce output that can be used by other nodes in your flow.</p> <p>The code must be valid in the programming <code>language</code> that you specify.</p>",
                         "smithy.api#required": {}
                     }
@@ -10318,6 +10393,8 @@
                 "language": {
                     "target": "com.amazonaws.bedrockagent#SupportedLanguages",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "Python_3",
                         "smithy.api#documentation": "<p>The programming language used by your inline code node.</p> <p>The code must be valid in the programming <code>language</code> that you specify. Currently, only Python 3 (<code>Python_3</code>) is supported.</p>",
                         "smithy.api#required": {}
                     }
@@ -10725,8 +10802,10 @@
             "type": "structure",
             "members": {
                 "knowledgeBaseId": {
-                    "target": "com.amazonaws.bedrockagent#KnowledgeBaseId",
+                    "target": "com.amazonaws.bedrockagent#FlowKnowledgeBaseId",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
                         "smithy.api#documentation": "<p>The unique identifier of the knowledge base to query.</p>",
                         "smithy.api#required": {}
                     }
@@ -10780,15 +10859,6 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains configurations for a knowledge base node in a flow. This node takes a query as the input and returns, as the output, the retrieved responses directly (as an array) or a response generated based on the retrieved responses. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html\">Node types in a flow</a> in the Amazon Bedrock User Guide.</p>"
-            }
-        },
-        "com.amazonaws.bedrockagent#KnowledgeBaseId": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "max": 10
-                },
-                "smithy.api#pattern": "^[0-9a-zA-Z]+$"
             }
         },
         "com.amazonaws.bedrockagent#KnowledgeBaseModelIdentifier": {
@@ -11096,8 +11166,10 @@
             "type": "structure",
             "members": {
                 "lambdaArn": {
-                    "target": "com.amazonaws.bedrockagent#LambdaArn",
+                    "target": "com.amazonaws.bedrockagent#FlowLambdaArn",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Lambda function to invoke.</p>",
                         "smithy.api#required": {}
                     }
@@ -11107,37 +11179,23 @@
                 "smithy.api#documentation": "<p>Contains configurations for a Lambda function node in the flow. You specify the Lambda function to invoke and the inputs into the function. The output is the response that is defined in the Lambda function. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html\">Node types in a flow</a> in the Amazon Bedrock User Guide.</p>"
             }
         },
-        "com.amazonaws.bedrockagent#LexBotAliasArn": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "max": 78
-                },
-                "smithy.api#pattern": "^arn:aws(|-us-gov):lex:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:bot-alias/[0-9a-zA-Z]+/[0-9a-zA-Z]+$"
-            }
-        },
-        "com.amazonaws.bedrockagent#LexBotLocaleId": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 10
-                }
-            }
-        },
         "com.amazonaws.bedrockagent#LexFlowNodeConfiguration": {
             "type": "structure",
             "members": {
                 "botAliasArn": {
-                    "target": "com.amazonaws.bedrockagent#LexBotAliasArn",
+                    "target": "com.amazonaws.bedrockagent#FlowLexBotAliasArn",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Lex bot alias to invoke.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "localeId": {
-                    "target": "com.amazonaws.bedrockagent#LexBotLocaleId",
+                    "target": "com.amazonaws.bedrockagent#FlowLexBotLocaleId",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
                         "smithy.api#documentation": "<p>The Region to invoke the Amazon Lex bot in.</p>",
                         "smithy.api#required": {}
                     }
@@ -14204,6 +14262,8 @@
                 "templateType": {
                     "target": "com.amazonaws.bedrockagent#PromptTemplateType",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "TEXT",
                         "smithy.api#documentation": "<p>The type of prompt template.</p>",
                         "smithy.api#required": {}
                     }
@@ -14216,8 +14276,10 @@
                     }
                 },
                 "modelId": {
-                    "target": "com.amazonaws.bedrockagent#PromptModelIdentifier",
+                    "target": "com.amazonaws.bedrockagent#FlowPromptModelIdentifier",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
                         "smithy.api#documentation": "<p>The unique identifier of the model or <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html\">inference profile</a> to run inference with.</p>",
                         "smithy.api#required": {}
                     }
@@ -14243,8 +14305,10 @@
             "type": "structure",
             "members": {
                 "promptArn": {
-                    "target": "com.amazonaws.bedrockagent#PromptArn",
+                    "target": "com.amazonaws.bedrockagent#FlowPromptArn",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the prompt from Prompt management.</p>",
                         "smithy.api#required": {}
                     }
@@ -15528,8 +15592,10 @@
             "type": "structure",
             "members": {
                 "bucketName": {
-                    "target": "com.amazonaws.bedrockagent#S3BucketName",
+                    "target": "com.amazonaws.bedrockagent#FlowS3BucketName",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
                         "smithy.api#documentation": "<p>The name of the Amazon S3 bucket from which to retrieve data.</p>",
                         "smithy.api#required": {}
                     }
@@ -16420,8 +16486,10 @@
             "type": "structure",
             "members": {
                 "bucketName": {
-                    "target": "com.amazonaws.bedrockagent#S3BucketName",
+                    "target": "com.amazonaws.bedrockagent#FlowS3BucketName",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
                         "smithy.api#documentation": "<p>The name of the Amazon S3 bucket in which to store the input into the node.</p>",
                         "smithy.api#required": {}
                     }

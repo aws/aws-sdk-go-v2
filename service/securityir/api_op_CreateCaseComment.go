@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Grants permission to add a comment to an existing case.
+// Adds a comment to an existing case.
 func (c *Client) CreateCaseComment(ctx context.Context, params *CreateCaseCommentInput, optFns ...func(*Options)) (*CreateCaseCommentOutput, error) {
 	if params == nil {
 		params = &CreateCaseCommentInput{}
@@ -40,7 +40,9 @@ type CreateCaseCommentInput struct {
 	// This member is required.
 	CaseId *string
 
-	// An optional element used in combination with CreateCaseComment.
+	// The clientToken field is an idempotency key used to ensure that repeated
+	// attempts for a single action will be ignored by the server during retries. A
+	// caller supplied unique ID (typically a UUID) should be provided.
 	ClientToken *string
 
 	noSmithyDocumentSerde

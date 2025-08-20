@@ -18,16 +18,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
 	"strings"
-	"time"
 )
-
-func deserializeS3Expires(v string) (*time.Time, error) {
-	t, err := smithytime.ParseHTTPDate(v)
-	if err != nil {
-		return nil, nil
-	}
-	return &t, nil
-}
 
 type awsAwsjson10_deserializeOpAssociateOriginationIdentity struct {
 }
@@ -12704,6 +12695,15 @@ func awsAwsjson10_deserializeDocumentPhoneNumberInformation(v **types.PhoneNumbe
 				sv.DeletionProtectionEnabled = jtv
 			}
 
+		case "InternationalSendingEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected PrimitiveBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.InternationalSendingEnabled = jtv
+			}
+
 		case "IsoCountryCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20793,6 +20793,15 @@ func awsAwsjson10_deserializeOpDocumentRequestPhoneNumberOutput(v **RequestPhone
 				sv.DeletionProtectionEnabled = jtv
 			}
 
+		case "InternationalSendingEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected PrimitiveBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.InternationalSendingEnabled = jtv
+			}
+
 		case "IsoCountryCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -21794,6 +21803,15 @@ func awsAwsjson10_deserializeOpDocumentUpdatePhoneNumberOutput(v **UpdatePhoneNu
 					return fmt.Errorf("expected PrimitiveBoolean to be of type *bool, got %T instead", value)
 				}
 				sv.DeletionProtectionEnabled = jtv
+			}
+
+		case "InternationalSendingEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected PrimitiveBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.InternationalSendingEnabled = jtv
 			}
 
 		case "IsoCountryCode":

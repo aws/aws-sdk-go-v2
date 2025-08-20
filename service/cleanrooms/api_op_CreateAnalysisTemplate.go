@@ -55,6 +55,13 @@ type CreateAnalysisTemplateInput struct {
 	// The description of the analysis template.
 	Description *string
 
+	// The configuration that specifies the level of detail in error messages returned
+	// by analyses using this template. When set to DETAILED , error messages include
+	// more information to help troubleshoot issues with PySpark jobs. Detailed error
+	// messages may expose underlying data, including sensitive information.
+	// Recommended for faster troubleshooting in development and testing environments.
+	ErrorMessageConfiguration *types.ErrorMessageConfiguration
+
 	// A relation within an analysis.
 	Schema *types.AnalysisSchema
 

@@ -61,6 +61,10 @@ type CreateAddonInput struct {
 	// DescribeAddonConfiguration .
 	ConfigurationValues *string
 
+	// The namespace configuration for the addon. If specified, this will override the
+	// default namespace for the addon.
+	NamespaceConfig *types.AddonNamespaceConfigRequest
+
 	// An array of EKS Pod Identity associations to be created. Each association maps
 	// a Kubernetes service account to an IAM role.
 	//

@@ -13,7 +13,7 @@ import (
 
 // Creates an S3 access point and attaches it to an Amazon FSx volume. For FSx for
 // OpenZFS file systems, the volume must be hosted on a high-availability file
-// system, either Single-AZ or Multi-AZ. For more information, see Accessing your data using access pointsin the Amazon
+// system, either Single-AZ or Multi-AZ. For more information, see [Accessing your data using Amazon S3 access points]. in the Amazon
 // FSx for OpenZFS User Guide.
 //
 // The requester requires the following permissions to perform these actions:
@@ -32,7 +32,9 @@ import (
 //
 // # DescribeS3AccessPointAttachments
 //
-// DetachAndDeleteS3AccessPoint
+// # DetachAndDeleteS3AccessPoint
+//
+// [Accessing your data using Amazon S3 access points]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/s3accesspoints-for-FSx.html
 func (c *Client) CreateAndAttachS3AccessPoint(ctx context.Context, params *CreateAndAttachS3AccessPointInput, optFns ...func(*Options)) (*CreateAndAttachS3AccessPointOutput, error) {
 	if params == nil {
 		params = &CreateAndAttachS3AccessPointInput{}

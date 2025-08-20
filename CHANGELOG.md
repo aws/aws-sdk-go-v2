@@ -1,3 +1,230 @@
+# Release (2025-08-20)
+
+## General Highlights
+* **Bug Fix**: Remove unused deserialization code.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.37.0](service/bedrockruntime/CHANGELOG.md#v1370-2025-08-20)
+  * **Feature**: Launch CountTokens API to allow token counting
+* `github.com/aws/aws-sdk-go-v2/service/billing`: [v1.7.0](service/billing/CHANGELOG.md#v170-2025-08-20)
+  * **Feature**: Clarify IPv4 and IPv6 endpoints
+* `github.com/aws/aws-sdk-go-v2/service/budgets`: [v1.37.0](service/budgets/CHANGELOG.md#v1370-2025-08-20)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.57.0](service/cognitoidentityprovider/CHANGELOG.md#v1570-2025-08-20)
+  * **Feature**: This release adds support for the new Terms APIs which allow displaying Terms of Use and Privacy Policy on the Managed Login user-registration page.
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.55.0](service/costexplorer/CHANGELOG.md#v1550-2025-08-20)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.38.0](service/datazone/CHANGELOG.md#v1380-2025-08-20)
+  * **Feature**: This release supports policy grant identifier for cloud formation integration
+* `github.com/aws/aws-sdk-go-v2/service/detective`: [v1.37.0](service/detective/CHANGELOG.md#v1370-2025-08-20)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.49.0](service/dynamodb/CHANGELOG.md#v1490-2025-08-20)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/efs`: [v1.40.0](service/efs/CHANGELOG.md#v1400-2025-08-20)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.71.0](service/eks/CHANGELOG.md#v1710-2025-08-20)
+  * **Feature**: EKS Add-ons Custom Namespace Support
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.47.0](service/iam/CHANGELOG.md#v1470-2025-08-20)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/kinesis`: [v1.39.0](service/kinesis/CHANGELOG.md#v1390-2025-08-20)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2`: [v1.36.0](service/kinesisanalyticsv2/CHANGELOG.md#v1360-2025-08-20)
+  * **Feature**: Adds Key Management Service (KMS) support allowing customer-managed key (CMK) encryption for Flink application data.
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice`: [v1.33.0](service/marketplaceentitlementservice/CHANGELOG.md#v1330-2025-08-20)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/marketplacemetering`: [v1.33.0](service/marketplacemetering/CHANGELOG.md#v1330-2025-08-20)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/networkmanager`: [v1.39.0](service/networkmanager/CHANGELOG.md#v1390-2025-08-20)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2`: [v1.24.0](service/pinpointsmsvoicev2/CHANGELOG.md#v1240-2025-08-20)
+  * **Feature**: This change added InternationalSendingEnbaled as part of describe/Update/Request phone number API response, and as part of update/Request phone number API request
+* `github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig`: [v1.31.0](service/route53recoverycontrolconfig/CHANGELOG.md#v1310-2025-08-20)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.211.0](service/sagemaker/CHANGELOG.md#v12110-2025-08-20)
+  * **Feature**: This release adds 1/ Launch ml.p5.4xlarge instance in Processing jobs, Training jobs and Training Plan 2/ Makes S3Uri to be required for S3FileSystem and S3FileSystemConfig.
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.52.0](service/sesv2/CHANGELOG.md#v1520-2025-08-20)
+  * **Feature**: Remove incorrect endpoint tests
+
+# Release (2025-08-19)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.30.0](service/cleanrooms/CHANGELOG.md#v1300-2025-08-19)
+  * **Feature**: Support error message configuration for analysis templates
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.245.0](service/ec2/CHANGELOG.md#v12450-2025-08-19)
+  * **Feature**: Add support for "warning" volume status.
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.52.0](service/polly/CHANGELOG.md#v1520-2025-08-19)
+  * **Feature**: Added support for new output format - Opus.
+
+# Release (2025-08-18)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.57.1](service/batch/CHANGELOG.md#v1571-2025-08-18)
+  * **Documentation**: Added default_x86_64 and default_arm64 as values to the instanceTypes field.
+* `github.com/aws/aws-sdk-go-v2/service/bcmdashboards`: [v1.0.0](service/bcmdashboards/CHANGELOG.md#v100-2025-08-18)
+  * **Release**: New AWS service client module
+  * **Feature**: Billing and Cost Management Dashboards enables users to create dashboards that combine multiple visualizations of cost and usage data. Users can create, manage, and share dashboards. Tags are also available for dashboards.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.136.0](service/connect/CHANGELOG.md#v11360-2025-08-18)
+  * **Feature**: Amazon Connect Service Feature: Add support to enable multi-user in-app, web, and video calling.
+* `github.com/aws/aws-sdk-go-v2/service/connectparticipant`: [v1.33.0](service/connectparticipant/CHANGELOG.md#v1330-2025-08-18)
+  * **Feature**: Amazon Connect Service Feature: Add support to enable multi-user in-app, web, and video calling.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.65.0](service/s3control/CHANGELOG.md#v1650-2025-08-18)
+  * **Feature**: Adds support for Compute checksum functionality in Amazon S3 Batch Operations. You can now calculate checksums for a list of objects using supported algorithms in Amazon S3, without requiring a restore or download
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.210.0](service/sagemaker/CHANGELOG.md#v12100-2025-08-18)
+  * **Feature**: Customer managed keys now available for volume encryption of SageMaker HyperPod clusters.
+
+# Release (2025-08-15)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/amp`: [v1.38.0](service/amp/CHANGELOG.md#v1380-2025-08-15)
+  * **Feature**: Add Resource-based Policy APIs for Amazon Prometheus
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.49.0](service/bedrockagent/CHANGELOG.md#v1490-2025-08-15)
+  * **Feature**: This release adds support for saving Bedrock Flows while node configuration is still in progress, even if the Flow is not yet able to be invoked
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.126.0](service/glue/CHANGELOG.md#v11260-2025-08-15)
+  * **Feature**: AWS Glue Zero ETL now supports On-demand snapshot load
+
+# Release (2025-08-14)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/arcregionswitch`: [v1.2.0](service/arcregionswitch/CHANGELOG.md#v120-2025-08-14)
+  * **Feature**: Endpoint rule test and documentation update.
+* `github.com/aws/aws-sdk-go-v2/service/bcmrecommendedactions`: [v1.0.0](service/bcmrecommendedactions/CHANGELOG.md#v100-2025-08-14)
+  * **Release**: New AWS service client module
+  * **Feature**: Initial SDK release for AWS Billing and Cost Management Recommended Actions.
+* `github.com/aws/aws-sdk-go-v2/service/directconnect`: [v1.36.0](service/directconnect/CHANGELOG.md#v1360-2025-08-14)
+  * **Feature**: Added pagination support for DescribeHostedConnections, DescribeVirtualInterfaces, DescribeConnections, DescribeInterconnects, DescribeLags. Added asnLong support for BGP peer operations which supports a large range.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.48.0](service/dynamodb/CHANGELOG.md#v1480-2025-08-14)
+  * **Feature**: This release 1/ Adds support for throttled keys mode for CloudWatch Contributor Insights, 2/ Adds throttling reasons to exceptions across dataplane APIs. 3/ Explicitly models ThrottlingException as a class in statically typed languages. Refer to the launch day blog post for more details.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.244.0](service/ec2/CHANGELOG.md#v12440-2025-08-14)
+  * **Feature**: This release adds ModifyInstanceConnectEndpoint API to update configurations on existing EC2 Instance Connect Endpoints and improves IPv6 support through dualstack DNS names for EC2 Instance Connect Endpoints.
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.60.0](service/fsx/CHANGELOG.md#v1600-2025-08-14)
+  * **Feature**: Amazon FSx for NetApp ONTAP 2nd generation file systems now support decreasing SSD storage capacity.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.125.0](service/glue/CHANGELOG.md#v11250-2025-08-14)
+  * **Feature**: AWS Glue now supports Trusted Identity Propagation.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.62.0](service/guardduty/CHANGELOG.md#v1620-2025-08-14)
+  * **Feature**: Added support for entity lists.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.80.0](service/medialive/CHANGELOG.md#v1800-2025-08-14)
+  * **Feature**: CMAF Ingest output groups in MediaLive can now accept one additional destination url for single pipeline channels and up to two additional destination urls for standard channels.
+* `github.com/aws/aws-sdk-go-v2/service/pcs`: [v1.11.0](service/pcs/CHANGELOG.md#v1110-2025-08-14)
+  * **Feature**: Updated the regex pattern and description of iamInstanceProfileArn in the CreateComputeNodeGroup and UpdateComputeNodeGroup API actions. Name and path requirements apply to the ARN of the IAM role associated with the instance profile and not the ARN of the instance profile.
+* `github.com/aws/aws-sdk-go-v2/service/qapps`: [v1.10.1](service/qapps/CHANGELOG.md#v1101-2025-08-14)
+  * **Documentation**: Documentation update for Amazon Q Apps API Reference
+* `github.com/aws/aws-sdk-go-v2/service/servicediscovery`: [v1.39.0](service/servicediscovery/CHANGELOG.md#v1390-2025-08-14)
+  * **Feature**: Added support for cross account through Id parameter overloading with ARN and allow owner account for some APIs instead of ARN
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.62.0](service/workspaces/CHANGELOG.md#v1620-2025-08-14)
+  * **Feature**: New APIs introduced to import WorkSpaces BYOL image using a new process that leveraged EC2 Image Builder. WorkSpaces tests and fixes your image's compatibility issues and supports customized VM images.
+
+# Release (2025-08-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/braket`: [v1.36.0](service/braket/CHANGELOG.md#v1360-2025-08-13)
+  * **Feature**: Add support for Braket program sets.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.37.0](service/datazone/CHANGELOG.md#v1370-2025-08-13)
+  * **Feature**: Adds support for account pools and project profile account decoupling
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.59.0](service/fsx/CHANGELOG.md#v1590-2025-08-13)
+  * **Feature**: Add Dual-Stack support for Amazon FSx for OpenZFS file systems
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralselling`: [v1.10.0](service/partnercentralselling/CHANGELOG.md#v1100-2025-08-13)
+  * **Feature**: Add Tagging Support for Opportunity resources
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.209.0](service/sagemaker/CHANGELOG.md#v12090-2025-08-13)
+  * **Feature**: This release introduces compute quota for GPU, Trainium accelerators, vCPU, and vCPU memory utilization across teams in HyperPod clusters
+* `github.com/aws/aws-sdk-go-v2/service/securityir`: [v1.8.0](service/securityir/CHANGELOG.md#v180-2025-08-13)
+  * **Feature**: Added support for Organizational Unit-level Membership configuration and the ability to resume a cancelled membership.
+
+# Release (2025-08-12)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/backupsearch`: [v1.6.0](service/backupsearch/CHANGELOG.md#v160-2025-08-12)
+  * **Feature**: Using recommended smithy trait to generate regional endpoints for Backup Search
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.66.0](service/codebuild/CHANGELOG.md#v1660-2025-08-12)
+  * **Feature**: AWS CodeBuild now supports PullRequestBuildPolicy in webhook object.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.243.0](service/ec2/CHANGELOG.md#v12430-2025-08-12)
+  * **Feature**: Release to allow route table association with a PublicIpv4Pool.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.43.0](service/organizations/CHANGELOG.md#v1430-2025-08-12)
+  * **Feature**: This release introduces 2 new APIs in Organizations: 1. ListAccountsWithInvalidEffectivePolicy 2. ListEffectivePolicyValidationErrors
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.208.0](service/sagemaker/CHANGELOG.md#v12080-2025-08-12)
+  * **Feature**: IAM Identity Center trusted identity propagation is now supported in SageMaker Studio.
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.51.0](service/transcribe/CHANGELOG.md#v1510-2025-08-12)
+  * **Feature**: AWS HealthScribe now supports specifying preferred patient pronouns through the MedicalScribeContext parameter for use in the generated clinical notes.
+* `github.com/aws/aws-sdk-go-v2/service/transcribestreaming`: [v1.30.0](service/transcribestreaming/CHANGELOG.md#v1300-2025-08-12)
+  * **Feature**: AWS HealthScribe now supports specifying preferred patient pronouns through the MedicalScribeContext parameter for use in the generated clinical notes.
+
+# Release (2025-08-11)
+
+## General Highlights
+* **Feature**: Add support for configuring per-service Options via callback on global config.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.44.0](service/bedrock/CHANGELOG.md#v1440-2025-08-11)
+  * **Feature**: This release includes model updates and enhanced SDK documentation for union fields in automated reasoning policy components. Added docs cover policy definitions, mutations (add/update for rules/types/variables), build assets, workflow sources, test results, and tag exception handling.
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.56.0](service/cognitoidentityprovider/CHANGELOG.md#v1560-2025-08-11)
+  * **Feature**: Remove SigV4 auth requirement for GetTokensFromRefreshToken
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.135.0](service/connect/CHANGELOG.md#v11350-2025-08-11)
+  * **Feature**: Updating SearchUserHierarchyGroups API
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.20.0](service/deadline/CHANGELOG.md#v1200-2025-08-11)
+  * **Feature**: Adds support for Wait and Save feature in service-managed fleets
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.242.0](service/ec2/CHANGELOG.md#v12420-2025-08-11)
+  * **Feature**: This release adds AvailabilityZoneId support for CreateVolume, DescribeVolume, LaunchTemplates, RunInstances, DescribeInstances, CreateDefaultSubnet, SpotInstances, and CreateDefaultSubnet APIs.
+* `github.com/aws/aws-sdk-go-v2/service/evs`: [v1.3.0](service/evs/CHANGELOG.md#v130-2025-08-11)
+  * **Documentation**: Update for general availability of Amazon Elastic VMware Service (EVS).
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.76.0](service/lambda/CHANGELOG.md#v1760-2025-08-11)
+  * **Documentation**: Doc-only update for Lambda that updates the maximum payload size for response streaming invocations to 200 MB.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.92.0](service/quicksight/CHANGELOG.md#v1920-2025-08-11)
+  * **Feature**: Add RowAxisDisplayOptions and ColumnAxisDisplayOptions to HeatMapConfiguration, add Actions to PluginVisual, increase limit for CalculatedFields list
+* `github.com/aws/aws-sdk-go-v2/service/ssoadmin`: [v1.34.0](service/ssoadmin/CHANGELOG.md#v1340-2025-08-11)
+  * **Feature**: Added support for managing user background session for applications
+
+# Release (2025-08-08)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationsignals`: [v1.14.0](service/applicationsignals/CHANGELOG.md#v1140-2025-08-08)
+  * **Feature**: Removed incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/backupsearch`: [v1.4.0](service/backupsearch/CHANGELOG.md#v140-2025-08-08)
+  * **Feature**: Removed incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator`: [v1.8.0](service/bcmpricingcalculator/CHANGELOG.md#v180-2025-08-08)
+  * **Feature**: Removed incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/billing`: [v1.5.0](service/billing/CHANGELOG.md#v150-2025-08-08)
+  * **Feature**: Removed incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.134.0](service/connect/CHANGELOG.md#v11340-2025-08-08)
+  * **Feature**: This release adds a new API GetContactMetrics for Amazon Connect.
+* `github.com/aws/aws-sdk-go-v2/service/dsql`: [v1.8.0](service/dsql/CHANGELOG.md#v180-2025-08-08)
+  * **Feature**: Removed incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/gameliftstreams`: [v1.4.0](service/gameliftstreams/CHANGELOG.md#v140-2025-08-08)
+  * **Feature**: Removed incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.42.0](service/inspector2/CHANGELOG.md#v1420-2025-08-08)
+  * **Feature**: Add CVSSV4 to Vulnerability Search API and update enable/disable account id list length to 5
+* `github.com/aws/aws-sdk-go-v2/service/invoicing`: [v1.5.0](service/invoicing/CHANGELOG.md#v150-2025-08-08)
+  * **Feature**: Removed incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/iotdataplane`: [v1.30.0](service/iotdataplane/CHANGELOG.md#v1300-2025-08-08)
+  * **Feature**: Adding DeleteConnection API to IoT Data Plane
+* `github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations`: [v1.4.0](service/iotmanagedintegrations/CHANGELOG.md#v140-2025-08-08)
+  * **Feature**: Removed incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/keyspacesstreams`: [v1.3.0](service/keyspacesstreams/CHANGELOG.md#v130-2025-08-08)
+  * **Feature**: Removed incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/mpa`: [v1.3.0](service/mpa/CHANGELOG.md#v130-2025-08-08)
+  * **Feature**: Removed incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/networkflowmonitor`: [v1.7.0](service/networkflowmonitor/CHANGELOG.md#v170-2025-08-08)
+  * **Feature**: Removed incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/notifications`: [v1.5.0](service/notifications/CHANGELOG.md#v150-2025-08-08)
+  * **Feature**: Removed incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/notificationscontacts`: [v1.4.0](service/notificationscontacts/CHANGELOG.md#v140-2025-08-08)
+  * **Feature**: Removed incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralselling`: [v1.8.0](service/partnercentralselling/CHANGELOG.md#v180-2025-08-08)
+  * **Feature**: Removed incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/s3vectors`: [v1.3.0](service/s3vectors/CHANGELOG.md#v130-2025-08-08)
+  * **Feature**: Removed incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.206.0](service/sagemaker/CHANGELOG.md#v12060-2025-08-08)
+  * **Feature**: Adds support for GB200 UltraServers in Amazon SageMaker training jobs, training plans, and HyperPod clusters
+* `github.com/aws/aws-sdk-go-v2/service/securityir`: [v1.6.0](service/securityir/CHANGELOG.md#v160-2025-08-08)
+  * **Feature**: Removed incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.49.1](service/transcribe/CHANGELOG.md#v1491-2025-08-08)
+  * **Documentation**: Update documentation to use key ARN only in OutputEncryptionKMSKeyId request parameter
+* `github.com/aws/aws-sdk-go-v2/service/workspacesinstances`: [v1.3.0](service/workspacesinstances/CHANGELOG.md#v130-2025-08-08)
+  * **Feature**: Removed incorrect endpoint tests
+
 # Release (2025-08-07)
 
 ## Module Highlights

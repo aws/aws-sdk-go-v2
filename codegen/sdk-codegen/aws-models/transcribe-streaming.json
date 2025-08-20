@@ -1566,10 +1566,30 @@
                         "smithy.api#documentation": "<p>Specify settings for post-stream analytics.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "MedicalScribeContext": {
+                    "target": "com.amazonaws.transcribestreaming#MedicalScribeContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>MedicalScribeContext</code> object that contains contextual information used to generate\n            customized clinical notes.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specify details to configure the streaming session, including channel definitions, encryption settings, post-stream analytics\n      settings, resource access role ARN and vocabulary settings.\n    </p>\n         <p>Whether you are starting a new session or resuming an existing session, \n      your first event must be a <code>MedicalScribeConfigurationEvent</code>.\n      If you are resuming a session, then this event must have the same configurations that you provided to start the session.\n    </p>"
+            }
+        },
+        "com.amazonaws.transcribestreaming#MedicalScribeContext": {
+            "type": "structure",
+            "members": {
+                "PatientContext": {
+                    "target": "com.amazonaws.transcribestreaming#MedicalScribePatientContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains patient-specific information used to customize the clinical note generation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The <code>MedicalScribeContext</code> object that contains contextual information which is used during clinical note generation\n            to add relevant context to the note.</p>"
             }
         },
         "com.amazonaws.transcribestreaming#MedicalScribeEncryptionSettings": {
@@ -1722,6 +1742,20 @@
                         "smithy.api#enumValue": "CLINICIAN"
                     }
                 }
+            }
+        },
+        "com.amazonaws.transcribestreaming#MedicalScribePatientContext": {
+            "type": "structure",
+            "members": {
+                "Pronouns": {
+                    "target": "com.amazonaws.transcribestreaming#Pronouns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The patient's preferred pronouns that the user wants to provide as a context for clinical note generation .</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains patient-specific information. </p>"
             }
         },
         "com.amazonaws.transcribestreaming#MedicalScribePostStreamAnalyticsResult": {
@@ -1900,6 +1934,12 @@
                     "target": "com.amazonaws.transcribestreaming#MedicalScribePostStreamAnalyticsResult",
                     "traits": {
                         "smithy.api#documentation": "<p>The result of post-stream analytics for the HealthScribe streaming session.</p>"
+                    }
+                },
+                "MedicalScribeContextProvided": {
+                    "target": "com.amazonaws.transcribestreaming#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the <code>MedicalScribeContext</code> object was provided when the stream was started.</p>"
                     }
                 }
             },
@@ -2280,6 +2320,32 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Allows you to specify additional settings for your Call Analytics post-call request, \n      including output locations for your redacted transcript, which IAM role to use, \n      and which encryption key to use.</p>\n         <p>\n            <code>DataAccessRoleArn</code> and <code>OutputLocation</code> are required \n      fields.</p>\n         <p>\n            <code>PostCallAnalyticsSettings</code> provides you with the same insights as a \n      Call Analytics post-call transcription. Refer to <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/tca-post-call.html\">Post-call analytics</a> for more information \n      on this feature.</p>"
+            }
+        },
+        "com.amazonaws.transcribestreaming#Pronouns": {
+            "type": "enum",
+            "members": {
+                "HE_HIM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HE_HIM"
+                    }
+                },
+                "SHE_HER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHE_HER"
+                    }
+                },
+                "THEY_THEM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THEY_THEM"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.transcribestreaming#RequestId": {
@@ -2744,7 +2810,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a bidirectional HTTP/2 stream, where audio is streamed to\n      Amazon Web Services HealthScribe\n      and the transcription results are streamed to your application.</p>\n         <p>When you start a stream, you first specify the stream configuration in a <code>MedicalScribeConfigurationEvent</code>. \n      This event includes channel definitions, encryption settings, and post-stream analytics settings, such as the output configuration for aggregated transcript and clinical note generation. These are additional\n      streaming session configurations beyond those provided in your initial start request headers. Whether you are starting a new session or resuming an existing session, \n      your first event must be a <code>MedicalScribeConfigurationEvent</code>. </p>\n         <p>\n      After you send a <code>MedicalScribeConfigurationEvent</code>, you start <code>AudioEvents</code> and Amazon Web Services HealthScribe \n      responds with real-time transcription results. When you are finished, to start processing the results with the post-stream analytics, send a <code>MedicalScribeSessionControlEvent</code> with a <code>Type</code> of \n      <code>END_OF_SESSION</code> and Amazon Web Services HealthScribe starts the analytics.\n    </p>\n         <p>You can pause or resume streaming.\n     To pause streaming, complete the input stream without sending the\n      <code>MedicalScribeSessionControlEvent</code>.\n      To resume streaming, call the <code>StartMedicalScribeStream</code> and specify the same SessionId you used to start the stream.\n    </p>\n         <p>The following parameters are required:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>language-code</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>media-encoding</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>media-sample-rate-hertz</code>\n               </p>\n            </li>\n         </ul>\n         <p></p>\n         <p>For more information on streaming with\n      Amazon Web Services HealthScribe,\n      see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/health-scribe-streaming.html\">Amazon Web Services HealthScribe</a>.\n    </p>",
+                "smithy.api#documentation": "<p>Starts a bidirectional HTTP/2 stream, where audio is streamed to\n      Amazon Web Services HealthScribe\n      and the transcription results are streamed to your application.</p>\n         <p>When you start a stream, you first specify the stream configuration in a <code>MedicalScribeConfigurationEvent</code>. \n      This event includes channel definitions, encryption settings, medical scribe context, and post-stream analytics settings, such as the output configuration for aggregated transcript and clinical note generation. These are additional\n      streaming session configurations beyond those provided in your initial start request headers. Whether you are starting a new session or resuming an existing session, \n      your first event must be a <code>MedicalScribeConfigurationEvent</code>. </p>\n         <p>\n      After you send a <code>MedicalScribeConfigurationEvent</code>, you start <code>AudioEvents</code> and Amazon Web Services HealthScribe \n      responds with real-time transcription results. When you are finished, to start processing the results with the post-stream analytics, send a <code>MedicalScribeSessionControlEvent</code> with a <code>Type</code> of \n      <code>END_OF_SESSION</code> and Amazon Web Services HealthScribe starts the analytics.\n    </p>\n         <p>You can pause or resume streaming.\n     To pause streaming, complete the input stream without sending the\n      <code>MedicalScribeSessionControlEvent</code>.\n      To resume streaming, call the <code>StartMedicalScribeStream</code> and specify the same SessionId you used to start the stream.\n    </p>\n         <p>The following parameters are required:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>language-code</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>media-encoding</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>media-sample-rate-hertz</code>\n               </p>\n            </li>\n         </ul>\n         <p></p>\n         <p>For more information on streaming with\n      Amazon Web Services HealthScribe,\n      see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/health-scribe-streaming.html\">Amazon Web Services HealthScribe</a>.\n    </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/medical-scribe-stream",

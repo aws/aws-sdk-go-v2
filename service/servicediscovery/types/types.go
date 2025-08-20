@@ -531,6 +531,15 @@ type Instance struct {
 	// [AliasTarget->DNSName]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html#Route53-Type-AliasTarget-DNSName
 	Attributes map[string]string
 
+	// The ID of the Amazon Web Services account that registered the instance. If this
+	// isn't your account ID, it's the ID of the account that shared the namespace with
+	// your account or the ID of another account with which the namespace has been
+	// shared. For more information about shared namespaces, see [Cross-account Cloud Map namespace sharing]in the Cloud Map
+	// Developer Guide.
+	//
+	// [Cross-account Cloud Map namespace sharing]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
+	CreatedByAccount *string
+
 	// A unique string that identifies the request and that allows failed
 	// RegisterInstance requests to be retried without the risk of executing the
 	// operation twice. You must use a unique CreatorRequestId string every time you
@@ -581,6 +590,15 @@ type InstanceSummary struct {
 	// endpoint that Route 53 sends requests to.
 	Attributes map[string]string
 
+	// The ID of the Amazon Web Services account that registered the instance. If this
+	// isn't your account ID, it's the ID of the account that shared the namespace with
+	// your account or the ID of another account with which the namespace has been
+	// shared. For more information about shared namespaces, see [Cross-account Cloud Map namespace sharing]in the Cloud Map
+	// Developer Guide.
+	//
+	// [Cross-account Cloud Map namespace sharing]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
+	CreatedByAccount *string
+
 	// The ID for an instance that you created by using a specified service.
 	Id *string
 
@@ -617,6 +635,14 @@ type Namespace struct {
 	// namespace.
 	Properties *NamespaceProperties
 
+	// The ID of the Amazon Web Services account that created the namespace. If this
+	// isn't your account ID, it's the ID of the account that shared the namespace with
+	// your account. For more information about shared namespaces, see [Cross-account Cloud Map namespace sharing]in the Cloud
+	// Map Developer Guide.
+	//
+	// [Cross-account Cloud Map namespace sharing]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
+	ResourceOwner *string
+
 	// The number of services that are associated with the namespace.
 	ServiceCount *int32
 
@@ -648,6 +674,13 @@ type NamespaceFilter struct {
 	//
 	//   - HTTP_NAME : Gets the namespaces with the specified HTTP name.
 	//
+	//   - RESOURCE_OWNER : Gets the namespaces created by your Amazon Web Services
+	//   account or by other accounts. This can be used to filter for shared namespaces.
+	//   For more information about shared namespaces, see [Cross-account Cloud Map namespace sharing]in the Cloud Map Developer
+	//   Guide.
+	//
+	// [Cross-account Cloud Map namespace sharing]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
+	//
 	// This member is required.
 	Name NamespaceFilterName
 
@@ -660,6 +693,10 @@ type NamespaceFilter struct {
 	//   - HTTP_NAME : Specify the HTTP name of the namespace, which is found in
 	//   Namespace.Properties.HttpProperties.HttpName .
 	//
+	//   - RESOURCE_OWNER : Specify one of SELF or OTHER_ACCOUNTS . SELF can be used to
+	//   filter namespaces created by you and OTHER_ACCOUNTS can be used to filter
+	//   namespaces shared with you that were created by other accounts.
+	//
 	// This member is required.
 	Values []string
 
@@ -668,8 +705,8 @@ type NamespaceFilter struct {
 	// following.
 	//
 	//   - EQ : When you specify EQ for Condition , you can specify only one value. EQ
-	//   is supported for TYPE , NAME , and HTTP_NAME . EQ is the default condition and
-	//   can be omitted.
+	//   is supported for TYPE , NAME , RESOURCE_OWNER and HTTP_NAME . EQ is the
+	//   default condition and can be omitted.
 	//
 	//   - BEGINS_WITH : When you specify BEGINS_WITH for Condition , you can specify
 	//   only one value. BEGINS_WITH is supported for TYPE , NAME , and HTTP_NAME .
@@ -714,6 +751,14 @@ type NamespaceSummary struct {
 	// The properties of the namespace.
 	Properties *NamespaceProperties
 
+	// The ID of the Amazon Web Services account that created the namespace. If this
+	// isn't your account ID, it's the ID of the account that shared the namespace with
+	// your account. For more information about shared namespaces, see [Cross-account Cloud Map namespace sharing]in the Cloud
+	// Map Developer Guide.
+	//
+	// [Cross-account Cloud Map namespace sharing]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
+	ResourceOwner *string
+
 	// The number of services that were created using the namespace.
 	ServiceCount *int32
 
@@ -755,6 +800,10 @@ type Operation struct {
 
 	// The ID of the operation that you want to get information about.
 	Id *string
+
+	// The ID of the Amazon Web Services account that owns the namespace associated
+	// with the operation.
+	OwnerAccount *string
 
 	// The status of the operation. Values include the following:
 	//
@@ -999,6 +1048,14 @@ type Service struct {
 	// 12:11:30.087 AM.
 	CreateDate *time.Time
 
+	// The ID of the Amazon Web Services account that created the service. If this
+	// isn't your account ID, it is the ID of account of the namespace owner or of
+	// another account with which the namespace has been shared. For more information
+	// about shared namespaces, see [Cross-account Cloud Map namespace sharing]in the Cloud Map Developer Guide.
+	//
+	// [Cross-account Cloud Map namespace sharing]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
+	CreatedByAccount *string
+
 	// A unique string that identifies the request and that allows failed requests to
 	// be retried without the risk of running the operation twice. CreatorRequestId
 	// can be any unique string (for example, a date/timestamp).
@@ -1044,6 +1101,14 @@ type Service struct {
 	// The ID of the namespace that was used to create the service.
 	NamespaceId *string
 
+	// The ID of the Amazon Web Services account that created the namespace with which
+	// the service is associated. If this isn't your account ID, it is the ID of the
+	// account that shared the namespace with your account. For more information about
+	// shared namespaces, see [Cross-account Cloud Map namespace sharing]in the Cloud Map Developer Guide.
+	//
+	// [Cross-account Cloud Map namespace sharing]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
+	ResourceOwner *string
+
 	// Describes the systems that can be used to discover the service instances.
 	//
 	// DNS_HTTP The service instances can be discovered using either DNS queries or
@@ -1071,6 +1136,14 @@ type ServiceAttributes struct {
 	//
 	// You can specify a total of 30 attributes.
 	Attributes map[string]string
+
+	// The ID of the Amazon Web Services account that created the namespace with which
+	// the service is associated. If this isn't your account ID, it is the ID of the
+	// account that shared the namespace with your account. For more information about
+	// shared namespaces, see [Cross-account Cloud Map namespace sharing]in the Cloud Map Developer Guide.
+	//
+	// [Cross-account Cloud Map namespace sharing]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
+	ResourceOwner *string
 
 	// The ARN of the service that the attributes are associated with.
 	ServiceArn *string
@@ -1100,7 +1173,16 @@ type ServiceChange struct {
 // services for.
 type ServiceFilter struct {
 
-	// Specify NAMESPACE_ID .
+	// Specify the services that you want to get using one of the following.
+	//
+	//   - NAMESPACE_ID : Gets the services associated with the specified namespace.
+	//
+	//   - RESOURCE_OWNER : Gets the services associated with the namespaces created by
+	//   your Amazon Web Services account or by other accounts. This can be used to
+	//   filter for services created in a shared namespace. For more information about
+	//   shared namespaces, see [Cross-account Cloud Map namespace sharing]in the Cloud Map Developer Guide.
+	//
+	// [Cross-account Cloud Map namespace sharing]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
 	//
 	// This member is required.
 	Name ServiceFilterName
@@ -1108,14 +1190,22 @@ type ServiceFilter struct {
 	// The values that are applicable to the value that you specify for Condition to
 	// filter the list of services.
 	//
+	//   - NAMESPACE_ID: Specify one namespace ID or ARN. Specify the namespace ARN
+	//   for namespaces that are shared with your Amazon Web Services account.
+	//
+	//   - RESOURCE_OWNER: Specify one of SELF or OTHER_ACCOUNTS . SELF can be used to
+	//   filter services associated with namespaces created by you and OTHER_ACCOUNTS
+	//   can be used to filter services associated with namespaces that were shared with
+	//   you.
+	//
 	// This member is required.
 	Values []string
 
 	// The operator that you want to use to determine whether a service is returned by
 	// ListServices . Valid values for Condition include the following:
 	//
-	//   - EQ : When you specify EQ , specify one namespace ID for Values . EQ is the
-	//   default condition and can be omitted.
+	//   - EQ : When you specify EQ , specify one value. EQ is the default condition
+	//   and can be omitted.
 	Condition FilterCondition
 
 	noSmithyDocumentSerde
@@ -1130,6 +1220,14 @@ type ServiceSummary struct {
 
 	// The date and time that the service was created.
 	CreateDate *time.Time
+
+	// The ID of the Amazon Web Services account that created the service. If this
+	// isn't your account ID, it is the account ID of the namespace owner or of another
+	// account with which the namespace has been shared. For more information about
+	// shared namespaces, see [Cross-account Cloud Map namespace sharing]in the Cloud Map Developer Guide.
+	//
+	// [Cross-account Cloud Map namespace sharing]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
+	CreatedByAccount *string
 
 	// The description that you specify when you create the service.
 	Description *string
@@ -1170,6 +1268,14 @@ type ServiceSummary struct {
 
 	// The name of the service.
 	Name *string
+
+	// The ID of the Amazon Web Services account that created the namespace with which
+	// the service is associated. If this isn't your account ID, it is the ID of the
+	// account that shared the namespace with your account. For more information about
+	// shared namespaces, see [Cross-account Cloud Map namespace sharing]in the Cloud Map Developer Guide.
+	//
+	// [Cross-account Cloud Map namespace sharing]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
+	ResourceOwner *string
 
 	// Describes the systems that can be used to discover the service instances.
 	//

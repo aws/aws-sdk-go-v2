@@ -9,6 +9,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpDeleteConnection struct {
+}
+
+func (*validateOpDeleteConnection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteConnection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteConnectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteConnectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteThingShadow struct {
 }
 
@@ -129,6 +149,10 @@ func (m *validateOpUpdateThingShadow) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpDeleteConnectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteConnection{}, middleware.After)
+}
+
 func addOpDeleteThingShadowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteThingShadow{}, middleware.After)
 }
@@ -151,6 +175,21 @@ func addOpPublishValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateThingShadowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateThingShadow{}, middleware.After)
+}
+
+func validateOpDeleteConnectionInput(v *DeleteConnectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteConnectionInput"}
+	if v.ClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateOpDeleteThingShadowInput(v *DeleteThingShadowInput) error {

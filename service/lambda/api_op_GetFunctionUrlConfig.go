@@ -101,9 +101,7 @@ type GetFunctionUrlConfigOutput struct {
 	//
 	//   - RESPONSE_STREAM – Your function streams payload results as they become
 	//   available. Lambda invokes your function using the InvokeWithResponseStream API
-	//   operation. The maximum response payload size is 20 MB, however, you can [request a quota increase].
-	//
-	// [request a quota increase]: https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html
+	//   operation. The maximum response payload size is 200 MB.
 	InvokeMode types.InvokeMode
 
 	// Metadata pertaining to the operation's result.

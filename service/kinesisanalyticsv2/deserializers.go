@@ -18,16 +18,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
 	"strings"
-	"time"
 )
-
-func deserializeS3Expires(v string) (*time.Time, error) {
-	t, err := smithytime.ParseHTTPDate(v)
-	if err != nil {
-		return nil, nil
-	}
-	return &t, nil
-}
 
 type awsAwsjson11_deserializeOpAddApplicationCloudWatchLoggingOption struct {
 }
@@ -4594,6 +4585,11 @@ func awsAwsjson11_deserializeDocumentApplicationConfigurationDescription(v **typ
 				return err
 			}
 
+		case "ApplicationEncryptionConfigurationDescription":
+			if err := awsAwsjson11_deserializeDocumentApplicationEncryptionConfigurationDescription(&sv.ApplicationEncryptionConfigurationDescription, value); err != nil {
+				return err
+			}
+
 		case "ApplicationSnapshotConfigurationDescription":
 			if err := awsAwsjson11_deserializeDocumentApplicationSnapshotConfigurationDescription(&sv.ApplicationSnapshotConfigurationDescription, value); err != nil {
 				return err
@@ -4850,6 +4846,55 @@ func awsAwsjson11_deserializeDocumentApplicationDetail(v **types.ApplicationDeta
 					return fmt.Errorf("expected RoleARN to be of type string, got %T instead", value)
 				}
 				sv.ServiceExecutionRole = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentApplicationEncryptionConfigurationDescription(v **types.ApplicationEncryptionConfigurationDescription, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ApplicationEncryptionConfigurationDescription
+	if *v == nil {
+		sv = &types.ApplicationEncryptionConfigurationDescription{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "KeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KeyId to be of type string, got %T instead", value)
+				}
+				sv.KeyId = ptr.String(jtv)
+			}
+
+		case "KeyType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KeyType to be of type string, got %T instead", value)
+				}
+				sv.KeyType = types.KeyType(jtv)
 			}
 
 		default:
@@ -8419,6 +8464,11 @@ func awsAwsjson11_deserializeDocumentSnapshotDetails(v **types.SnapshotDetails, 
 
 	for key, value := range shape {
 		switch key {
+		case "ApplicationEncryptionConfigurationDescription":
+			if err := awsAwsjson11_deserializeDocumentApplicationEncryptionConfigurationDescription(&sv.ApplicationEncryptionConfigurationDescription, value); err != nil {
+				return err
+			}
+
 		case "ApplicationVersionId":
 			if value != nil {
 				jtv, ok := value.(json.Number)

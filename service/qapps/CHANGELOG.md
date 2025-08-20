@@ -1,3 +1,16 @@
+# v1.10.2 (2025-08-20)
+
+* **Bug Fix**: Remove unused deserialization code.
+
+# v1.10.1 (2025-08-14)
+
+* **Documentation**: Documentation update for Amazon Q Apps API Reference
+
+# v1.10.0 (2025-08-11)
+
+* **Feature**: Add support for configuring per-service Options via callback on global config.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.9.0 (2025-08-04)
 
 * **Feature**: Support configurable auth scheme preferences in service clients via AWS_AUTH_SCHEME_PREFERENCE in the environment, auth_scheme_preference in the config file, and through in-code settings on LoadDefaultConfig and client constructor methods.

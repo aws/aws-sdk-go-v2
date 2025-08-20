@@ -3738,6 +3738,13 @@ func awsAwsjson10_serializeOpDocumentCreateOpportunityInput(v *CreateOpportunity
 		}
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson10_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

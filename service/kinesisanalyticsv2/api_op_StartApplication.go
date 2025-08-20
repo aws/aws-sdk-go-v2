@@ -45,7 +45,7 @@ type StartApplicationInput struct {
 
 type StartApplicationOutput struct {
 
-	// Operation ID for tracking StartApplication request
+	// The operation ID that can be used to track the request.
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

@@ -650,6 +650,26 @@ func (m *validateOpDescribeConnectionAliasPermissions) HandleInitialize(ctx cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeCustomWorkspaceImageImport struct {
+}
+
+func (*validateOpDescribeCustomWorkspaceImageImport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeCustomWorkspaceImageImport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeCustomWorkspaceImageImportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeCustomWorkspaceImageImportInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeImageAssociations struct {
 }
 
@@ -885,6 +905,26 @@ func (m *validateOpImportClientBranding) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpImportClientBrandingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpImportCustomWorkspaceImage struct {
+}
+
+func (*validateOpImportCustomWorkspaceImage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpImportCustomWorkspaceImage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ImportCustomWorkspaceImageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpImportCustomWorkspaceImageInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1638,6 +1678,10 @@ func addOpDescribeConnectionAliasPermissionsValidationMiddleware(stack *middlewa
 	return stack.Initialize.Add(&validateOpDescribeConnectionAliasPermissions{}, middleware.After)
 }
 
+func addOpDescribeCustomWorkspaceImageImportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeCustomWorkspaceImageImport{}, middleware.After)
+}
+
 func addOpDescribeImageAssociationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeImageAssociations{}, middleware.After)
 }
@@ -1684,6 +1728,10 @@ func addOpDisassociateWorkspaceApplicationValidationMiddleware(stack *middleware
 
 func addOpImportClientBrandingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpImportClientBranding{}, middleware.After)
+}
+
+func addOpImportCustomWorkspaceImageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpImportCustomWorkspaceImage{}, middleware.After)
 }
 
 func addOpImportWorkspaceImageValidationMiddleware(stack *middleware.Stack) error {
@@ -2997,6 +3045,21 @@ func validateOpDescribeConnectionAliasPermissionsInput(v *DescribeConnectionAlia
 	}
 }
 
+func validateOpDescribeCustomWorkspaceImageImportInput(v *DescribeCustomWorkspaceImageImportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeCustomWorkspaceImageImportInput"}
+	if v.ImageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeImageAssociationsInput(v *DescribeImageAssociationsInput) error {
 	if v == nil {
 		return nil
@@ -3185,6 +3248,47 @@ func validateOpImportClientBrandingInput(v *ImportClientBrandingInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ImportClientBrandingInput"}
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpImportCustomWorkspaceImageInput(v *ImportCustomWorkspaceImageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImportCustomWorkspaceImageInput"}
+	if v.ImageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageName"))
+	}
+	if v.ImageDescription == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageDescription"))
+	}
+	if len(v.ComputeType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ComputeType"))
+	}
+	if len(v.Protocol) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
+	}
+	if v.ImageSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageSource"))
+	}
+	if v.InfrastructureConfigurationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InfrastructureConfigurationArn"))
+	}
+	if len(v.Platform) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Platform"))
+	}
+	if len(v.OsVersion) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("OsVersion"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -130,6 +130,9 @@ type AdministrativeAction struct {
 	// Provides information about a failed administrative action.
 	FailureDetails *AdministrativeActionFailureDetails
 
+	// A detailed error message.
+	Message *string
+
 	// The percentage-complete status of a STORAGE_OPTIMIZATION or
 	// DOWNLOAD_DATA_FROM_BACKUP administrative action. Does not apply to any other
 	// administrative action type.
@@ -1085,6 +1088,14 @@ type CreateFileSystemOpenZFSConfiguration struct {
 	// file systems deployed in the same VPC/route tables, as long as they don't
 	// overlap with any subnet.
 	EndpointIpAddressRange *string
+
+	// (Multi-AZ only) Specifies the IP address range in which the endpoints to access
+	// your file system will be created. By default in the Amazon FSx API and Amazon
+	// FSx console, Amazon FSx selects an available /118 IP address range for you from
+	// one of the VPC's CIDR ranges. You can have overlapping endpoint IP addresses for
+	// file systems deployed in the same VPC/route tables, as long as they don't
+	// overlap with any subnet.
+	EndpointIpv6AddressRange *string
 
 	// Required when DeploymentType is set to MULTI_AZ_1 . This specifies the subnet in
 	// which you want the preferred file server to be located.
@@ -2620,6 +2631,9 @@ type FileSystem struct {
 	// [Elastic Network Interfaces]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html
 	NetworkInterfaceIds []string
 
+	// The network type of the file system.
+	NetworkType NetworkType
+
 	// The configuration for this Amazon FSx for NetApp ONTAP file system.
 	OntapConfiguration *OntapFileSystemConfiguration
 
@@ -3438,6 +3452,18 @@ type OpenZFSFileSystemConfiguration struct {
 	// one of the VPC's CIDR ranges. You can have overlapping endpoint IP addresses for
 	// file systems deployed in the same VPC/route tables.
 	EndpointIpAddressRange *string
+
+	// The IPv6 address of the endpoint that is used to access data or to manage the
+	// file system.
+	EndpointIpv6Address *string
+
+	// (Multi-AZ only) Specifies the IP address range in which the endpoints to access
+	// your file system will be created. By default in the Amazon FSx API and Amazon
+	// FSx console, Amazon FSx selects an available /118 IP address range for you from
+	// one of the VPC's CIDR ranges. You can have overlapping endpoint IP addresses for
+	// file systems deployed in the same VPC/route tables, as long as they don't
+	// overlap with any subnet.
+	EndpointIpv6AddressRange *string
 
 	// Required when DeploymentType is set to MULTI_AZ_1 . This specifies the subnet in
 	// which you want the preferred file server to be located.
@@ -4548,9 +4574,9 @@ type UpdateFileSystemOntapConfiguration struct {
 	// capacity, but you can provision additional IOPS per GB of storage. The
 	// configuration consists of an IOPS mode ( AUTOMATIC or USER_PROVISIONED ), and in
 	// the case of USER_PROVISIONED IOPS, the total number of SSD IOPS provisioned.
-	// For more information, see [Updating SSD storage capacity and IOPS].
+	// For more information, see [File system storage capacity and IOPS].
 	//
-	// [Updating SSD storage capacity and IOPS]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/increase-primary-storage.html
+	// [File system storage capacity and IOPS]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/storage-capacity-and-IOPS.html
 	DiskIopsConfiguration *DiskIopsConfiguration
 
 	// Update the password for the fsxadmin user by entering a new password. You use
@@ -4673,6 +4699,14 @@ type UpdateFileSystemOpenZFSConfiguration struct {
 	// configuration consists of the total number of provisioned SSD IOPS and how it is
 	// was provisioned, or the mode (by the customer or by Amazon FSx).
 	DiskIopsConfiguration *DiskIopsConfiguration
+
+	// (Multi-AZ only) Specifies the IP address range in which the endpoints to access
+	// your file system will be created. By default in the Amazon FSx API and Amazon
+	// FSx console, Amazon FSx selects an available /118 IP address range for you from
+	// one of the VPC's CIDR ranges. You can have overlapping endpoint IP addresses for
+	// file systems deployed in the same VPC/route tables, as long as they don't
+	// overlap with any subnet.
+	EndpointIpv6AddressRange *string
 
 	//  The configuration for the optional provisioned SSD read cache on file systems
 	// that use the Intelligent-Tiering storage class.

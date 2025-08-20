@@ -20,16 +20,7 @@ import (
 	"math"
 	"strconv"
 	"strings"
-	"time"
 )
-
-func deserializeS3Expires(v string) (*time.Time, error) {
-	t, err := smithytime.ParseHTTPDate(v)
-	if err != nil {
-		return nil, nil
-	}
-	return &t, nil
-}
 
 type awsRestjson1_deserializeOpAssociateMember struct {
 }
@@ -16823,7 +16814,7 @@ func awsRestjson1_deserializeDocumentCvss2(v **types.Cvss2, value interface{}) e
 					sv.BaseScore = f64
 
 				default:
-					return fmt.Errorf("expected Cvss2BaseScore to be a JSON Number, got %T instead", value)
+					return fmt.Errorf("expected CvssBaseScore to be a JSON Number, got %T instead", value)
 
 				}
 			}
@@ -16832,7 +16823,7 @@ func awsRestjson1_deserializeDocumentCvss2(v **types.Cvss2, value interface{}) e
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Cvss2ScoringVector to be of type string, got %T instead", value)
+					return fmt.Errorf("expected CvssScoringVector to be of type string, got %T instead", value)
 				}
 				sv.ScoringVector = ptr.String(jtv)
 			}
@@ -16897,7 +16888,7 @@ func awsRestjson1_deserializeDocumentCvss3(v **types.Cvss3, value interface{}) e
 					sv.BaseScore = f64
 
 				default:
-					return fmt.Errorf("expected Cvss3BaseScore to be a JSON Number, got %T instead", value)
+					return fmt.Errorf("expected CvssBaseScore to be a JSON Number, got %T instead", value)
 
 				}
 			}
@@ -16906,7 +16897,81 @@ func awsRestjson1_deserializeDocumentCvss3(v **types.Cvss3, value interface{}) e
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Cvss3ScoringVector to be of type string, got %T instead", value)
+					return fmt.Errorf("expected CvssScoringVector to be of type string, got %T instead", value)
+				}
+				sv.ScoringVector = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCvss4(v **types.Cvss4, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Cvss4
+	if *v == nil {
+		sv = &types.Cvss4{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "baseScore":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.BaseScore = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.BaseScore = f64
+
+				default:
+					return fmt.Errorf("expected CvssBaseScore to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "scoringVector":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CvssScoringVector to be of type string, got %T instead", value)
 				}
 				sv.ScoringVector = ptr.String(jtv)
 			}
@@ -24818,6 +24883,11 @@ func awsRestjson1_deserializeDocumentVulnerability(v **types.Vulnerability, valu
 
 		case "cvss3":
 			if err := awsRestjson1_deserializeDocumentCvss3(&sv.Cvss3, value); err != nil {
+				return err
+			}
+
+		case "cvss4":
+			if err := awsRestjson1_deserializeDocumentCvss4(&sv.Cvss4, value); err != nil {
 				return err
 			}
 

@@ -45,6 +45,7 @@
         "api_op_DescribeConnectClientAddIns.go",
         "api_op_DescribeConnectionAliasPermissions.go",
         "api_op_DescribeConnectionAliases.go",
+        "api_op_DescribeCustomWorkspaceImageImport.go",
         "api_op_DescribeImageAssociations.go",
         "api_op_DescribeIpGroups.go",
         "api_op_DescribeTags.go",
@@ -63,6 +64,7 @@
         "api_op_DisassociateWorkspaceApplication.go",
         "api_op_GetAccountLink.go",
         "api_op_ImportClientBranding.go",
+        "api_op_ImportCustomWorkspaceImage.go",
         "api_op_ImportWorkspaceImage.go",
         "api_op_ListAccountLinks.go",
         "api_op_ListAvailableManagementCidrRanges.go",
@@ -114,6 +116,7 @@
         "types/enums.go",
         "types/errors.go",
         "types/types.go",
+        "types/types_exported_test.go",
         "validators.go"
     ],
     "go": "1.22",

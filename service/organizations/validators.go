@@ -510,6 +510,26 @@ func (m *validateOpListAccountsForParent) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAccountsWithInvalidEffectivePolicy struct {
+}
+
+func (*validateOpListAccountsWithInvalidEffectivePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAccountsWithInvalidEffectivePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAccountsWithInvalidEffectivePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAccountsWithInvalidEffectivePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListChildren struct {
 }
 
@@ -545,6 +565,26 @@ func (m *validateOpListDelegatedServicesForAccount) HandleInitialize(ctx context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListDelegatedServicesForAccountInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListEffectivePolicyValidationErrors struct {
+}
+
+func (*validateOpListEffectivePolicyValidationErrors) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListEffectivePolicyValidationErrors) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListEffectivePolicyValidationErrorsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListEffectivePolicyValidationErrorsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -930,12 +970,20 @@ func addOpListAccountsForParentValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpListAccountsForParent{}, middleware.After)
 }
 
+func addOpListAccountsWithInvalidEffectivePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAccountsWithInvalidEffectivePolicy{}, middleware.After)
+}
+
 func addOpListChildrenValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListChildren{}, middleware.After)
 }
 
 func addOpListDelegatedServicesForAccountValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDelegatedServicesForAccount{}, middleware.After)
+}
+
+func addOpListEffectivePolicyValidationErrorsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListEffectivePolicyValidationErrors{}, middleware.After)
 }
 
 func addOpListOrganizationalUnitsForParentValidationMiddleware(stack *middleware.Stack) error {
@@ -1484,6 +1532,21 @@ func validateOpListAccountsForParentInput(v *ListAccountsForParentInput) error {
 	}
 }
 
+func validateOpListAccountsWithInvalidEffectivePolicyInput(v *ListAccountsWithInvalidEffectivePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAccountsWithInvalidEffectivePolicyInput"}
+	if len(v.PolicyType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListChildrenInput(v *ListChildrenInput) error {
 	if v == nil {
 		return nil
@@ -1509,6 +1572,24 @@ func validateOpListDelegatedServicesForAccountInput(v *ListDelegatedServicesForA
 	invalidParams := smithy.InvalidParamsError{Context: "ListDelegatedServicesForAccountInput"}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListEffectivePolicyValidationErrorsInput(v *ListEffectivePolicyValidationErrorsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListEffectivePolicyValidationErrorsInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if len(v.PolicyType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

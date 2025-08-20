@@ -18,16 +18,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
 	"strings"
-	"time"
 )
-
-func deserializeS3Expires(v string) (*time.Time, error) {
-	t, err := smithytime.ParseHTTPDate(v)
-	if err != nil {
-		return nil, nil
-	}
-	return &t, nil
-}
 
 type awsRestjson1_deserializeOpCancelJob struct {
 }
@@ -1424,6 +1415,11 @@ func awsRestjson1_deserializeOpDocumentGetQuantumTaskOutput(v **GetQuantumTaskOu
 
 	for key, value := range shape {
 		switch key {
+		case "actionMetadata":
+			if err := awsRestjson1_deserializeDocumentActionMetadata(&sv.ActionMetadata, value); err != nil {
+				return err
+			}
+
 		case "associations":
 			if err := awsRestjson1_deserializeDocumentAssociations(&sv.Associations, value); err != nil {
 				return err
@@ -1489,6 +1485,19 @@ func awsRestjson1_deserializeOpDocumentGetQuantumTaskOutput(v **GetQuantumTaskOu
 					return fmt.Errorf("expected JobArn to be of type string, got %T instead", value)
 				}
 				sv.JobArn = ptr.String(jtv)
+			}
+
+		case "numSuccessfulShots":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.NumSuccessfulShots = ptr.Int64(i64)
 			}
 
 		case "outputS3Bucket":
@@ -2779,6 +2788,72 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentActionMetadata(v **types.ActionMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ActionMetadata
+	if *v == nil {
+		sv = &types.ActionMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "actionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ActionType = ptr.String(jtv)
+			}
+
+		case "executableCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ExecutableCount = ptr.Int64(i64)
+			}
+
+		case "programCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ProgramCount = ptr.Int64(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAlgorithmSpecification(v **types.AlgorithmSpecification, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4012,6 +4087,138 @@ func awsRestjson1_deserializeDocumentJobSummaryList(v *[]types.JobSummary, value
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentProgramSetValidationFailure(v **types.ProgramSetValidationFailure, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ProgramSetValidationFailure
+	if *v == nil {
+		sv = &types.ProgramSetValidationFailure{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "errors":
+			if err := awsRestjson1_deserializeDocumentProgramValidationFailuresList(&sv.Errors, value); err != nil {
+				return err
+			}
+
+		case "inputsIndex":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.InputsIndex = ptr.Int64(i64)
+			}
+
+		case "programIndex":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ProgramIndex = ptr.Int64(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentProgramSetValidationFailuresList(v *[]types.ProgramSetValidationFailure, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ProgramSetValidationFailure
+	if *v == nil {
+		cv = []types.ProgramSetValidationFailure{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ProgramSetValidationFailure
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentProgramSetValidationFailure(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentProgramValidationFailuresList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentQuantumTaskQueueInfo(v **types.QuantumTaskQueueInfo, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4516,6 +4723,20 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		case "programSetValidationFailures":
+			if err := awsRestjson1_deserializeDocumentProgramSetValidationFailuresList(&sv.ProgramSetValidationFailures, value); err != nil {
+				return err
+			}
+
+		case "reason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ValidationExceptionReason to be of type string, got %T instead", value)
+				}
+				sv.Reason = types.ValidationExceptionReason(jtv)
 			}
 
 		default:

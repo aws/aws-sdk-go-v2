@@ -469,6 +469,51 @@ func (ConnectionState) Values() []ConnectionState {
 	}
 }
 
+type CustomImageProtocol string
+
+// Enum values for CustomImageProtocol
+const (
+	CustomImageProtocolPcoip CustomImageProtocol = "PCOIP"
+	CustomImageProtocolDcv   CustomImageProtocol = "DCV"
+	CustomImageProtocolByop  CustomImageProtocol = "BYOP"
+)
+
+// Values returns all known values for CustomImageProtocol. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CustomImageProtocol) Values() []CustomImageProtocol {
+	return []CustomImageProtocol{
+		"PCOIP",
+		"DCV",
+		"BYOP",
+	}
+}
+
+type CustomWorkspaceImageImportState string
+
+// Enum values for CustomWorkspaceImageImportState
+const (
+	CustomWorkspaceImageImportStatePending    CustomWorkspaceImageImportState = "PENDING"
+	CustomWorkspaceImageImportStateInProgress CustomWorkspaceImageImportState = "IN_PROGRESS"
+	CustomWorkspaceImageImportStateCompleted  CustomWorkspaceImageImportState = "COMPLETED"
+	CustomWorkspaceImageImportStateError      CustomWorkspaceImageImportState = "ERROR"
+)
+
+// Values returns all known values for CustomWorkspaceImageImportState. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CustomWorkspaceImageImportState) Values() []CustomWorkspaceImageImportState {
+	return []CustomWorkspaceImageImportState{
+		"PENDING",
+		"IN_PROGRESS",
+		"COMPLETED",
+		"ERROR",
+	}
+}
+
 type DataReplication string
 
 // Enum values for DataReplication
@@ -701,6 +746,25 @@ func (ImageAssociatedResourceType) Values() []ImageAssociatedResourceType {
 	}
 }
 
+type ImageComputeType string
+
+// Enum values for ImageComputeType
+const (
+	ImageComputeTypeBase         ImageComputeType = "BASE"
+	ImageComputeTypeGraphicsG4dn ImageComputeType = "GRAPHICS_G4DN"
+)
+
+// Values returns all known values for ImageComputeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ImageComputeType) Values() []ImageComputeType {
+	return []ImageComputeType{
+		"BASE",
+		"GRAPHICS_G4DN",
+	}
+}
+
 type ImageType string
 
 // Enum values for ImageType
@@ -853,6 +917,42 @@ func (OperatingSystemType) Values() []OperatingSystemType {
 	return []OperatingSystemType{
 		"WINDOWS",
 		"LINUX",
+	}
+}
+
+type OSVersion string
+
+// Enum values for OSVersion
+const (
+	OSVersionWindows10 OSVersion = "Windows_10"
+	OSVersionWindows11 OSVersion = "Windows_11"
+)
+
+// Values returns all known values for OSVersion. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OSVersion) Values() []OSVersion {
+	return []OSVersion{
+		"Windows_10",
+		"Windows_11",
+	}
+}
+
+type Platform string
+
+// Enum values for Platform
+const (
+	PlatformWindows Platform = "WINDOWS"
+)
+
+// Values returns all known values for Platform. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Platform) Values() []Platform {
+	return []Platform{
+		"WINDOWS",
 	}
 }
 

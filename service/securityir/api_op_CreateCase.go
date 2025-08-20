@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Grants permission to create a new case.
+// Creates a new case.
 func (c *Client) CreateCase(ctx context.Context, params *CreateCaseInput, optFns ...func(*Options)) (*CreateCaseOutput, error) {
 	if params == nil {
 		params = &CreateCaseInput{}
@@ -30,8 +30,9 @@ func (c *Client) CreateCase(ctx context.Context, params *CreateCaseInput, optFns
 
 type CreateCaseInput struct {
 
-	// Required element used in combination with CreateCase to provide a description
-	// for the new case.
+	// Required element used in combination with CreateCase
+	//
+	// to provide a description for the new case.
 	//
 	// This member is required.
 	Description *string
@@ -46,6 +47,11 @@ type CreateCaseInput struct {
 	// Required element used in combination with CreateCase to provide a list of
 	// impacted accounts.
 	//
+	// AWS account ID's may appear less than 12 characters and need to be
+	// zero-prepended. An example would be 123123123 which is nine digits, and with
+	// zero-prepend would be 000123123123 . Not zero-prepending to 12 digits could
+	// result in errors.
+	//
 	// This member is required.
 	ImpactedAccounts []string
 
@@ -56,7 +62,7 @@ type CreateCaseInput struct {
 	ReportedIncidentStartDate *time.Time
 
 	// Required element used in combination with CreateCase to identify the resolver
-	// type. Available resolvers include self-supported | aws-supported.
+	// type.
 	//
 	// This member is required.
 	ResolverType types.ResolverType
@@ -73,7 +79,9 @@ type CreateCaseInput struct {
 	// This member is required.
 	Watchers []types.Watcher
 
-	// Required element used in combination with CreateCase.
+	// The clientToken field is an idempotency key used to ensure that repeated
+	// attempts for a single action will be ignored by the server during retries. A
+	// caller supplied unique ID (typically a UUID) should be provided.
 	ClientToken *string
 
 	// An optional element used in combination with CreateCase to provide a list of

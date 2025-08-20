@@ -10,8 +10,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change.
-//
 // Disassociates a set of quick connects from a queue.
 func (c *Client) DisassociateQueueQuickConnects(ctx context.Context, params *DisassociateQueueQuickConnectsInput, optFns ...func(*Options)) (*DisassociateQueueQuickConnectsOutput, error) {
 	if params == nil {

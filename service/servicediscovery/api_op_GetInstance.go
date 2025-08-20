@@ -34,7 +34,12 @@ type GetInstanceInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The ID of the service that the instance is associated with.
+	// The ID or Amazon Resource Name (ARN) of the service that the instance is
+	// associated with. For services created in a shared namespace, specify the service
+	// ARN. For more information about shared namespaces, see [Cross-account Cloud Map namespace sharing]in the Cloud Map
+	// Developer Guide.
+	//
+	// [Cross-account Cloud Map namespace sharing]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
 	//
 	// This member is required.
 	ServiceId *string
@@ -46,6 +51,12 @@ type GetInstanceOutput struct {
 
 	// A complex type that contains information about a specified instance.
 	Instance *types.Instance
+
+	// The ID of the Amazon Web Services account that created the namespace that
+	// contains the service that the instance is associated with. If this isn't your
+	// account ID, it's the ID of the account that shared the namespace with your
+	// account.
+	ResourceOwner *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

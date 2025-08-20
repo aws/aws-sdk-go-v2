@@ -51,6 +51,11 @@ func (in *DescribeContributorInsightsInput) bindEndpointParams(p *EndpointParame
 
 type DescribeContributorInsightsOutput struct {
 
+	// The mode of CloudWatch Contributor Insights for DynamoDB that determines which
+	// events are emitted. Can be set to track all access and throttled events or
+	// throttled events only.
+	ContributorInsightsMode types.ContributorInsightsMode
+
 	// List of names of the associated contributor insights rules.
 	ContributorInsightsRuleList []string
 

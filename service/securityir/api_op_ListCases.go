@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Grants permission to list all cases the requester has access to.
+// Lists all cases the requester has access to.
 func (c *Client) ListCases(ctx context.Context, params *ListCasesInput, optFns ...func(*Options)) (*ListCasesOutput, error) {
 	if params == nil {
 		params = &ListCasesInput{}
@@ -32,7 +32,9 @@ type ListCasesInput struct {
 	// Optional element for ListCases to limit the number of responses.
 	MaxResults *int32
 
-	// Optional element.
+	// An optional string that, if supplied, must be copied from the output of a
+	// previous call to ListCases. When provided in this manner, the API fetches the
+	// next page of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -45,7 +47,8 @@ type ListCasesOutput struct {
 	// resolverType, and title for each response.
 	Items []types.ListCasesItem
 
-	// Optional element.
+	// An optional string that, if supplied on subsequent calls to ListCases, allows
+	// the API to fetch the next page of results.
 	NextToken *string
 
 	// Response element for ListCases providing the total number of responses.

@@ -70,6 +70,26 @@ func (m *validateOpConverseStream) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCountTokens struct {
+}
+
+func (*validateOpCountTokens) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCountTokens) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CountTokensInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCountTokensInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetAsyncInvoke struct {
 }
 
@@ -160,6 +180,10 @@ func addOpConverseValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpConverseStreamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpConverseStream{}, middleware.After)
+}
+
+func addOpCountTokensValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCountTokens{}, middleware.After)
 }
 
 func addOpGetAsyncInvokeValidationMiddleware(stack *middleware.Stack) error {
@@ -305,6 +329,52 @@ func validateContentBlocks(v []types.ContentBlock) error {
 		if err := validateContentBlock(v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConverseTokensRequest(v *types.ConverseTokensRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConverseTokensRequest"}
+	if v.Messages != nil {
+		if err := validateMessages(v.Messages); err != nil {
+			invalidParams.AddNested("Messages", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.System != nil {
+		if err := validateSystemContentBlocks(v.System); err != nil {
+			invalidParams.AddNested("System", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCountTokensInput(v types.CountTokensInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CountTokensInput"}
+	switch uv := v.(type) {
+	case *types.CountTokensInputMemberConverse:
+		if err := validateConverseTokensRequest(&uv.Value); err != nil {
+			invalidParams.AddNested("[converse]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.CountTokensInputMemberInvokeModel:
+		if err := validateInvokeModelTokensRequest(&uv.Value); err != nil {
+			invalidParams.AddNested("[invokeModel]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -559,6 +629,21 @@ func validateImageSource(v types.ImageSource) error {
 			invalidParams.AddNested("[s3Location]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInvokeModelTokensRequest(v *types.InvokeModelTokensRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InvokeModelTokensRequest"}
+	if v.Body == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Body"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1067,6 +1152,28 @@ func validateOpConverseStreamInput(v *ConverseStreamInput) error {
 	if v.GuardrailConfig != nil {
 		if err := validateGuardrailStreamConfiguration(v.GuardrailConfig); err != nil {
 			invalidParams.AddNested("GuardrailConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCountTokensInput(v *CountTokensInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CountTokensInput"}
+	if v.ModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
+	}
+	if v.Input == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Input"))
+	} else if v.Input != nil {
+		if err := validateCountTokensInput(v.Input); err != nil {
+			invalidParams.AddNested("Input", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

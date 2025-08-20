@@ -11,8 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists information about operations performed on a Managed Service for Apache
-// Flink application
+// Lists all the operations performed for the specified application such as
+// UpdateApplication, StartApplication etc. The response also includes a summary of
+// the operation.
+//
+// To get the complete description of a specific operation, invoke the DescribeApplicationOperation operation.
+//
+// This operation is supported only for Managed Service for Apache Flink.
 func (c *Client) ListApplicationOperations(ctx context.Context, params *ListApplicationOperationsInput, optFns ...func(*Options)) (*ListApplicationOperationsOutput, error) {
 	if params == nil {
 		params = &ListApplicationOperationsInput{}
@@ -28,38 +33,37 @@ func (c *Client) ListApplicationOperations(ctx context.Context, params *ListAppl
 	return out, nil
 }
 
-// Request to list operations performed on an application
+// A request for a list of operations performed on an application.
 type ListApplicationOperationsInput struct {
 
-	// The name of the application
+	// The name of the application.
 	//
 	// This member is required.
 	ApplicationName *string
 
-	// Limit on the number of records returned in the response
+	// The limit on the number of records to be returned in the response.
 	Limit *int32
 
-	// If a previous command returned a pagination token, pass it into this value to
-	// retrieve the next set of results
+	// A pagination token that can be used in a subsequent request.
 	NextToken *string
 
-	// Type of operation performed on an application
+	// The type of operation that is performed on an application.
 	Operation *string
 
-	// Status of the operation performed on an application
+	// The status of the operation.
 	OperationStatus types.OperationStatus
 
 	noSmithyDocumentSerde
 }
 
-// Response with the list of operations for an application
+// A response that returns a list of operations for an application.
 type ListApplicationOperationsOutput struct {
 
-	// List of ApplicationOperationInfo for an application
+	// A list of ApplicationOperationInfo objects that are associated with an
+	// application.
 	ApplicationOperationInfoList []types.ApplicationOperationInfo
 
-	// If a previous command returned a pagination token, pass it into this value to
-	// retrieve the next set of results
+	// A pagination token that can be used in a subsequent request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -204,7 +208,7 @@ func (c *Client) addOperationListApplicationOperationsMiddlewares(stack *middlew
 // ListApplicationOperationsPaginatorOptions is the paginator options for
 // ListApplicationOperations
 type ListApplicationOperationsPaginatorOptions struct {
-	// Limit on the number of records returned in the response
+	// The limit on the number of records to be returned in the response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

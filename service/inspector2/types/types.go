@@ -1929,6 +1929,21 @@ type Cvss3 struct {
 	noSmithyDocumentSerde
 }
 
+// The Common Vulnerability Scoring System (CVSS) version 4 details for the
+// vulnerability.
+type Cvss4 struct {
+
+	// The base CVSS v4 score for the vulnerability finding, which rates the severity
+	// of the vulnerability on a scale from 0 to 10.
+	BaseScore float64
+
+	// The CVSS v4 scoring vector, which contains the metrics and measurements that
+	// were used to calculate the base score.
+	ScoringVector *string
+
+	noSmithyDocumentSerde
+}
+
 // The CVSS score for a finding.
 type CvssScore struct {
 
@@ -3798,7 +3813,7 @@ type ScanStatus struct {
 	// resource. Amazon Inspector service will automatically resolve the issue and
 	// resume the scanning. No action required from the user.
 	//
-	// NO INVENTORY - Amazon Inspector couldn't find software application inventory to
+	// NO_INVENTORY - Amazon Inspector couldn't find software application inventory to
 	// scan for vulnerabilities. This might be caused due to required Amazon Inspector
 	// associations being deleted or failing to run on your resource. Please verify the
 	// status of InspectorInventoryCollection-do-not-delete association in the SSM
@@ -4361,6 +4376,10 @@ type Vulnerability struct {
 	// An object that contains the Common Vulnerability Scoring System (CVSS) Version
 	// 3 details for the vulnerability.
 	Cvss3 *Cvss3
+
+	// An object that contains the Common Vulnerability Scoring System (CVSS) Version
+	// 4 details for the vulnerability.
+	Cvss4 *Cvss4
 
 	// The Common Weakness Enumeration (CWE) associated with the vulnerability.
 	Cwes []string
