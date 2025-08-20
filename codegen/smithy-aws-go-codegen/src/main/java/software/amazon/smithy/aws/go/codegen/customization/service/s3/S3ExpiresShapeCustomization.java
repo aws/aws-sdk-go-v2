@@ -73,7 +73,9 @@ public class S3ExpiresShapeCustomization implements GoIntegration {
 
     @Override
     public void writeAdditionalFiles(GoSettings settings, Model model, SymbolProvider symbolProvider, GoDelegator goDelegator) {
-        goDelegator.useFileWriter("deserializers.go", settings.getModuleName(), deserializeS3Expires());
+        if (isServiceS3(model, settings.getService(model))) {
+            goDelegator.useFileWriter("deserializers.go", settings.getModuleName(), deserializeS3Expires());
+        }
     }
 
     private Shape addExpiresString(Shape shape) {
