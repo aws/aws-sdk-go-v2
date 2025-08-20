@@ -49,6 +49,9 @@
                 },
                 {
                     "target": "com.amazonaws.bedrockruntime#InferenceResource"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#TokenizerResource"
                 }
             ],
             "traits": {
@@ -2039,6 +2042,26 @@
                 "smithy.api#documentation": "<p>The trace object in a response from <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html\">ConverseStream</a>. Currently, you can only trace guardrails.</p>"
             }
         },
+        "com.amazonaws.bedrockruntime#ConverseTokensRequest": {
+            "type": "structure",
+            "members": {
+                "messages": {
+                    "target": "com.amazonaws.bedrockruntime#Messages",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of messages to count tokens for.</p>"
+                    }
+                },
+                "system": {
+                    "target": "com.amazonaws.bedrockruntime#SystemContentBlocks",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The system content blocks to count tokens for. System content provides instructions or context to the model about how it should behave or respond. The token count will include any system content provided.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The inputs from a <code>Converse</code> API request for token counting.</p> <p>This structure mirrors the input format for the <code>Converse</code> operation, allowing you to count tokens for conversation-based inference requests.</p>"
+            }
+        },
         "com.amazonaws.bedrockruntime#ConverseTrace": {
             "type": "structure",
             "members": {
@@ -2057,6 +2080,102 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The trace object in a response from <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html\">Converse</a>. Currently, you can only trace guardrails.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#CountTokens": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockruntime#CountTokensRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockruntime#CountTokensResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockruntime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the token count for a given inference request. This operation helps you estimate token usage before sending requests to foundation models by returning the token count that would be used if the same input were sent to the model in an inference request.</p> <p>Token counting is model-specific because different models use different tokenization strategies. The token count returned by this operation will match the token count that would be charged if the same input were sent to the model in an <code>InvokeModel</code> or <code>Converse</code> request.</p> <p>You can use this operation to:</p> <ul> <li> <p>Estimate costs before sending inference requests.</p> </li> <li> <p>Optimize prompts to fit within token limits.</p> </li> <li> <p>Plan for token usage in your applications.</p> </li> </ul> <p>This operation accepts the same input formats as <code>InvokeModel</code> and <code>Converse</code>, allowing you to count tokens for both raw text inputs and structured conversation formats.</p> <p>The following operations are related to <code>CountTokens</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/API/API_runtime_InvokeModel.html\">InvokeModel</a> - Sends inference requests to foundation models</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/API/API_runtime_Converse.html\">Converse</a> - Sends conversation-based inference requests to foundation models</p> </li> </ul>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/model/{modelId}/count-tokens"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockruntime#CountTokensInput": {
+            "type": "union",
+            "members": {
+                "invokeModel": {
+                    "target": "com.amazonaws.bedrockruntime#InvokeModelTokensRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An <code>InvokeModel</code> request for which to count tokens. Use this field when you want to count tokens for a raw text input that would be sent to the <code>InvokeModel</code> operation.</p>"
+                    }
+                },
+                "converse": {
+                    "target": "com.amazonaws.bedrockruntime#ConverseTokensRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>Converse</code> request for which to count tokens. Use this field when you want to count tokens for a conversation-based input that would be sent to the <code>Converse</code> operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input value for token counting. The value should be either an <code>InvokeModel</code> or <code>Converse</code> request body. </p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#CountTokensRequest": {
+            "type": "structure",
+            "members": {
+                "modelId": {
+                    "target": "com.amazonaws.bedrockruntime#FoundationModelVersionIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier or ARN of the foundation model to use for token counting. Each model processes tokens differently, so the token count is specific to the model you specify.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "input": {
+                    "target": "com.amazonaws.bedrockruntime#CountTokensInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input for which to count tokens. The structure of this parameter depends on whether you're counting tokens for an <code>InvokeModel</code> or <code>Converse</code> request:</p> <ul> <li> <p>For <code>InvokeModel</code> requests, provide the request body in the <code>invokeModel</code> field</p> </li> <li> <p>For <code>Converse</code> requests, provide the messages and system content in the <code>converse</code> field</p> </li> </ul> <p>The input format must be compatible with the model specified in the <code>modelId</code> parameter.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockruntime#CountTokensResponse": {
+            "type": "structure",
+            "members": {
+                "inputTokens": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of tokens in the provided input according to the specified model's tokenization rules. This count represents the number of input tokens that would be processed if the same input were sent to the model in an inference request. Use this value to estimate costs and ensure your inputs stay within model token limits.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.bedrockruntime#DocumentBlock": {
@@ -2324,6 +2443,17 @@
                 "smithy.api#documentation": "<p>Contains the content of a document.</p>"
             }
         },
+        "com.amazonaws.bedrockruntime#FoundationModelVersionIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "ARN or ID of a Bedrock model",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z_\\.\\-/0-9:]+$"
+            }
+        },
         "com.amazonaws.bedrockruntime#GetAsyncInvoke": {
             "type": "operation",
             "input": {
@@ -2545,25 +2675,46 @@
             "type": "union",
             "members": {
                 "valid": {
-                    "target": "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningValidFinding"
+                    "target": "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningValidFinding",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the result when the automated reasoning evaluation determines that the claims in the input are logically valid and definitively true based on the provided premises and policy rules.</p>"
+                    }
                 },
                 "invalid": {
-                    "target": "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningInvalidFinding"
+                    "target": "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningInvalidFinding",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the result when the automated reasoning evaluation determines that the claims in the input are logically invalid and contradict the established premises or policy rules.</p>"
+                    }
                 },
                 "satisfiable": {
-                    "target": "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningSatisfiableFinding"
+                    "target": "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningSatisfiableFinding",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the result when the automated reasoning evaluation determines that the claims in the input could be either true or false depending on additional assumptions not provided in the input context.</p>"
+                    }
                 },
                 "impossible": {
-                    "target": "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningImpossibleFinding"
+                    "target": "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningImpossibleFinding",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the result when the automated reasoning evaluation determines that no valid logical conclusions can be drawn due to contradictions in the premises or policy rules themselves.</p>"
+                    }
                 },
                 "translationAmbiguous": {
-                    "target": "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningTranslationAmbiguousFinding"
+                    "target": "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningTranslationAmbiguousFinding",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the result when the automated reasoning evaluation detects that the input has multiple valid logical interpretations, requiring additional context or clarification to proceed with validation.</p>"
+                    }
                 },
                 "tooComplex": {
-                    "target": "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningTooComplexFinding"
+                    "target": "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningTooComplexFinding",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the result when the automated reasoning evaluation cannot process the input due to its complexity or volume exceeding the system's processing capacity for logical analysis.</p>"
+                    }
                 },
                 "noTranslations": {
-                    "target": "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningNoTranslationsFinding"
+                    "target": "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningNoTranslationsFinding",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the result when the automated reasoning evaluation cannot extract any relevant logical information from the input that can be validated against the policy rules.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4775,6 +4926,21 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrockruntime#InvokeModelTokensRequest": {
+            "type": "structure",
+            "members": {
+                "body": {
+                    "target": "com.amazonaws.bedrockruntime#Body",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request body to count tokens for, formatted according to the model's expected input format. To learn about the input format for different models, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Model inference parameters and responses</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The body of an <code>InvokeModel</code> API request for token counting. This structure mirrors the input format for the <code>InvokeModel</code> operation, allowing you to count tokens for raw text inference requests.</p>"
+            }
+        },
         "com.amazonaws.bedrockruntime#InvokeModelWithBidirectionalStream": {
             "type": "operation",
             "input": {
@@ -6095,6 +6261,14 @@
             "traits": {
                 "smithy.api#documentation": "<p>The tokens used in a message API inference call. </p>"
             }
+        },
+        "com.amazonaws.bedrockruntime#TokenizerResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.bedrockruntime#CountTokens"
+                }
+            ]
         },
         "com.amazonaws.bedrockruntime#Tool": {
             "type": "union",

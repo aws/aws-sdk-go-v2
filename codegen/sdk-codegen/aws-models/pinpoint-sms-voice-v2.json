@@ -7324,6 +7324,13 @@
                         "smithy.api#required": {}
                     }
                 },
+                "InternationalSendingEnabled": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>When set to true the international sending of phone number is Enabled.</p>"
+                    }
+                },
                 "DeletionProtectionEnabled": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
@@ -11032,6 +11039,12 @@
                         "smithy.api#documentation": "<p>Use this field to attach your phone number for an external registration process.</p>"
                     }
                 },
+                "InternationalSendingEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>By default this is set to false. When set to true the international sending of phone number is Enabled. </p>"
+                    }
+                },
                 "DeletionProtectionEnabled": {
                     "target": "smithy.api#Boolean",
                     "traits": {
@@ -11143,6 +11156,13 @@
                     "target": "com.amazonaws.pinpointsmsvoicev2#OptOutListName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the OptOutList that is associated with the requested phone number.</p>"
+                    }
+                },
+                "InternationalSendingEnabled": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>By default this is set to false. When set to true the international sending of phone number is Enabled. </p>"
                     }
                 },
                 "DeletionProtectionEnabled": {
@@ -11446,6 +11466,10 @@
                     {
                         "value": "protect-configuration",
                         "name": "PROTECT_CONFIGURATION"
+                    },
+                    {
+                        "value": "message-template",
+                        "name": "MESSAGE_TEMPLATE"
                     },
                     {
                         "value": "policy",
@@ -13513,6 +13537,12 @@
                         "smithy.api#documentation": "<p>The OptOutList to add the phone number to. Valid values for this field can be either the OutOutListName or OutOutListArn.</p>"
                     }
                 },
+                "InternationalSendingEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>By default this is set to false. When set to true the international sending of phone number is Enabled. </p>"
+                    }
+                },
                 "DeletionProtectionEnabled": {
                     "target": "smithy.api#Boolean",
                     "traits": {
@@ -13611,6 +13641,13 @@
                     "target": "com.amazonaws.pinpointsmsvoicev2#OptOutListName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the OptOutList associated with the phone number.</p>"
+                    }
+                },
+                "InternationalSendingEnabled": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>When set to true the international sending of phone number is Enabled.</p>"
                     }
                 },
                 "DeletionProtectionEnabled": {
@@ -14200,6 +14237,10 @@
                     {
                         "value": "ATTACHMENT_TYPE_NOT_SUPPORTED",
                         "name": "ATTACHMENT_TYPE_NOT_SUPPORTED"
+                    },
+                    {
+                        "value": "INTERNATIONAL_SENDING_NOT_SUPPORTED",
+                        "name": "INTERNATIONAL_SENDING_NOT_SUPPORTED"
                     },
                     {
                         "value": "INVALID_ARN",

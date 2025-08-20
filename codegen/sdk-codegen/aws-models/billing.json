@@ -46,16 +46,36 @@
                 "aws.auth#sigv4": {
                     "name": "billing"
                 },
-                "aws.endpoints#dualStackOnlyEndpoints": {},
                 "aws.endpoints#standardPartitionalEndpoints": {
-                    "endpointPatternType": "service_region_dnsSuffix"
+                    "endpointPatternType": "service_region_dnsSuffix",
+                    "partitionEndpointSpecialCases": {
+                        "aws": [
+                            {
+                                "endpoint": "https://billing.us-east-1.api.aws",
+                                "region": "us-east-1",
+                                "dualStack": true
+                            },
+                            {
+                                "endpoint": "https://billing.us-east-1.api.aws",
+                                "region": "us-east-1",
+                                "dualStack": false
+                            }
+                        ]
+                    }
                 },
                 "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<p>\n        You can use the Billing API to programatically list the billing views available to you for a given time period. A billing view represents a set of billing data.\n      </p>\n         <p>The Billing API provides the following endpoint:</p>\n         <p>\n            <code>https://billing.us-east-1.api.aws</code>\n         </p>",
+                "smithy.api#documentation": "<p> You can use the Billing API to programatically list the billing views available to you for a given time period. A billing view represents a set of billing data. </p> <p>The Billing API provides the following endpoint:</p> <p> <code>https://billing.us-east-1.api.aws</code> </p>",
                 "smithy.api#title": "AWS Billing",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
@@ -106,14 +126,35 @@
                                 },
                                 {
                                     "conditions": [],
-                                    "endpoint": {
-                                        "url": {
-                                            "ref": "Endpoint"
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
                                         },
-                                        "properties": {},
-                                        "headers": {}
-                                    },
-                                    "type": "endpoint"
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ],
+                                    "type": "tree"
                                 }
                             ],
                             "type": "tree"
@@ -149,22 +190,46 @@
                                                 {
                                                     "conditions": [
                                                         {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws"
+                                                            ]
+                                                        },
+                                                        {
                                                             "fn": "booleanEquals",
                                                             "argv": [
                                                                 {
                                                                     "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
                                                                 },
                                                                 true
                                                             ]
                                                         }
                                                     ],
                                                     "endpoint": {
-                                                        "url": "https://billing-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "url": "https://billing.us-east-1.api.aws",
                                                         "properties": {
                                                             "authSchemes": [
                                                                 {
                                                                     "name": "sigv4",
-                                                                    "signingRegion": "{PartitionResult#implicitGlobalRegion}"
+                                                                    "signingRegion": "us-east-1"
                                                                 }
                                                             ]
                                                         },
@@ -173,9 +238,278 @@
                                                     "type": "endpoint"
                                                 },
                                                 {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                false
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://billing.us-east-1.api.aws",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingRegion": "us-east-1"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://billing-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}",
+                                                                        "properties": {
+                                                                            "authSchemes": [
+                                                                                {
+                                                                                    "name": "sigv4",
+                                                                                    "signingRegion": "{PartitionResult#implicitGlobalRegion}"
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                false
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://billing-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dnsSuffix}",
+                                                                        "properties": {
+                                                                            "authSchemes": [
+                                                                                {
+                                                                                    "name": "sigv4",
+                                                                                    "signingRegion": "{PartitionResult#implicitGlobalRegion}"
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://billing.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}",
+                                                                        "properties": {
+                                                                            "authSchemes": [
+                                                                                {
+                                                                                    "name": "sigv4",
+                                                                                    "signingRegion": "{PartitionResult#implicitGlobalRegion}"
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
                                                     "conditions": [],
                                                     "endpoint": {
-                                                        "url": "https://billing.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "url": "https://billing.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dnsSuffix}",
                                                         "properties": {
                                                             "authSchemes": [
                                                                 {
@@ -229,6 +563,17 @@
                             }
                         },
                         {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
                             "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
@@ -245,7 +590,29 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://billing-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -265,7 +632,29 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://billing.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -285,7 +674,29 @@
                             },
                             "params": {
                                 "Region": "cn-northwest-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "cn-northwest-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://billing-fips.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -305,7 +716,29 @@
                             },
                             "params": {
                                 "Region": "cn-northwest-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "cn-northwest-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://billing.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -325,7 +758,29 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-gov-west-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://billing-fips.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -345,7 +800,239 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-gov-west-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://billing.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-iso-east-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://billing-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-iso-east-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://billing.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-isob-east-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://billing-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-isob-east-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://billing.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-isoe-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "eu-isoe-west-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://billing-fips.eu-isoe-west-1.cloud.adc-e.uk"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-isoe-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-isoe-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "eu-isoe-west-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://billing.eu-isoe-west-1.cloud.adc-e.uk"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-isoe-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isof-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-isof-south-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://billing-fips.us-isof-south-1.csp.hci.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isof-south-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isof-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-isof-south-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://billing.us-isof-south-1.csp.hci.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isof-south-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eusc-de-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "eusc-de-east-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://billing-fips.eusc-de-east-1.amazonaws.eu"
+                                }
+                            },
+                            "params": {
+                                "Region": "eusc-de-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eusc-de-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "eusc-de-east-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://billing.eusc-de-east-1.amazonaws.eu"
+                                }
+                            },
+                            "params": {
+                                "Region": "eusc-de-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -398,7 +1085,7 @@
                 "activeBeforeInclusive": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The inclusive time range end date.\n    </p>",
+                        "smithy.api#documentation": "<p> The inclusive time range end date. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -442,54 +1129,54 @@
                 "arn": {
                     "target": "com.amazonaws.billing#BillingViewArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view.\n    </p>"
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view. </p>"
                     }
                 },
                 "name": {
                     "target": "com.amazonaws.billing#BillingViewName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      A list of names of the billing view.\n    </p>"
+                        "smithy.api#documentation": "<p> The account name of the billing view. </p>"
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.billing#BillingViewDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The description of the billing view.\n    </p>"
+                        "smithy.api#documentation": "<p> The description of the billing view. </p>"
                     }
                 },
                 "billingViewType": {
                     "target": "com.amazonaws.billing#BillingViewType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of billing group.\n    </p>"
+                        "smithy.api#documentation": "<p>The type of billing group. </p>"
                     }
                 },
                 "ownerAccountId": {
                     "target": "com.amazonaws.billing#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The list of owners of the billing view.\n    </p>"
+                        "smithy.api#documentation": "<p>The account owner of the billing view. </p>"
                     }
                 },
                 "dataFilterExpression": {
                     "target": "com.amazonaws.billing#Expression",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      See <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>. Billing view only supports <code>LINKED_ACCOUNT</code> and <code>Tags</code>.\n    </p>"
+                        "smithy.api#documentation": "<p> See <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_billing_Expression.html\">Expression</a>. Billing view only supports <code>LINKED_ACCOUNT</code> and <code>Tags</code>. </p>"
                     }
                 },
                 "createdAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time when the billing view was created.\n    </p>"
+                        "smithy.api#documentation": "<p>The time when the billing view was created. </p>"
                     }
                 },
                 "updatedAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time when the billing view was last updated.\n    </p>"
+                        "smithy.api#documentation": "<p>The time when the billing view was last updated. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The metadata associated to the billing view.\n    </p>"
+                "smithy.api#documentation": "<p>The metadata associated to the billing view. </p>"
             }
         },
         "com.amazonaws.billing#BillingViewList": {
@@ -504,25 +1191,25 @@
                 "arn": {
                     "target": "com.amazonaws.billing#BillingViewArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view.\n      </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view. </p>"
                     }
                 },
                 "name": {
                     "target": "com.amazonaws.billing#BillingViewName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      A list of names of the Billing view.\n    </p>"
+                        "smithy.api#documentation": "<p> A list of names of the Billing view. </p>"
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.billing#BillingViewDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The description of the billing view.\n    </p>"
+                        "smithy.api#documentation": "<p> The description of the billing view. </p>"
                     }
                 },
                 "ownerAccountId": {
                     "target": "com.amazonaws.billing#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The list of owners of the Billing view.\n    </p>"
+                        "smithy.api#documentation": "<p> The list of owners of the Billing view. </p>"
                     }
                 },
                 "billingViewType": {
@@ -615,14 +1302,14 @@
                 "resourceId": {
                     "target": "com.amazonaws.billing#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The identifier for the service resource associated with the request.\n    </p>",
+                        "smithy.api#documentation": "<p> The identifier for the service resource associated with the request. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "resourceType": {
                     "target": "com.amazonaws.billing#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The type of resource associated with the request.\n    </p>",
+                        "smithy.api#documentation": "<p> The type of resource associated with the request. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -632,7 +1319,7 @@
                     "code": "BillingConflict",
                     "httpResponseCode": 409
                 },
-                "smithy.api#documentation": "<p>\n      The requested operation would cause a conflict with the current state of a service resource associated with the request. Resolve the conflict before retrying this request.\n    </p>",
+                "smithy.api#documentation": "<p> The requested operation would cause a conflict with the current state of a service resource associated with the request. Resolve the conflict before retrying this request. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -666,7 +1353,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nCreates a billing view with the specified billing view attributes.\n    </p>",
+                "smithy.api#documentation": "<p> Creates a billing view with the specified billing view attributes. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "Invoke CreateBillingView",
@@ -700,14 +1387,14 @@
                 "name": {
                     "target": "com.amazonaws.billing#BillingViewName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n     The name of the billing view.\n    </p>",
+                        "smithy.api#documentation": "<p> The name of the billing view. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.billing#BillingViewDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The description of the billing view.\n    </p>"
+                        "smithy.api#documentation": "<p> The description of the billing view. </p>"
                     }
                 },
                 "sourceViews": {
@@ -720,13 +1407,13 @@
                 "dataFilterExpression": {
                     "target": "com.amazonaws.billing#Expression",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      See <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>. Billing view only supports <code>LINKED_ACCOUNT</code> and <code>Tags</code>.\n    </p>"
+                        "smithy.api#documentation": "<p> See <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_billing_Expression.html\">Expression</a>. Billing view only supports <code>LINKED_ACCOUNT</code> and <code>Tags</code>. </p>"
                     }
                 },
                 "clientToken": {
                     "target": "com.amazonaws.billing#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier you specify to ensure idempotency of the request. Idempotency ensures that an API request completes no more than one time. If the original request completes successfully, any subsequent retries complete successfully without performing any further actions with an idempotent request.\n    </p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier you specify to ensure idempotency of the request. Idempotency ensures that an API request completes no more than one time. If the original request completes successfully, any subsequent retries complete successfully without performing any further actions with an idempotent request. </p>",
                         "smithy.api#httpHeader": "X-Amzn-Client-Token",
                         "smithy.api#idempotencyToken": {}
                     }
@@ -734,7 +1421,7 @@
                 "resourceTags": {
                     "target": "com.amazonaws.billing#ResourceTagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of key value map specifying tags associated to the billing view being created.\n    </p>"
+                        "smithy.api#documentation": "<p>A list of key value map specifying tags associated to the billing view being created. </p>"
                     }
                 }
             },
@@ -748,14 +1435,14 @@
                 "arn": {
                     "target": "com.amazonaws.billing#BillingViewArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view.\n    </p>",
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "createdAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The time when the billing view was created.\n    </p>"
+                        "smithy.api#documentation": "<p> The time when the billing view was created. </p>"
                     }
                 }
             },
@@ -810,7 +1497,7 @@
                 "arn": {
                     "target": "com.amazonaws.billing#BillingViewArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view.\n    </p>",
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -825,7 +1512,7 @@
                 "arn": {
                     "target": "com.amazonaws.billing#BillingViewArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view.\n    </p>",
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -851,20 +1538,20 @@
                 "key": {
                     "target": "com.amazonaws.billing#Dimension",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The names of the metadata types that you can use to filter and group your results. \n    </p>",
+                        "smithy.api#documentation": "<p> The names of the metadata types that you can use to filter and group your results. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "values": {
                     "target": "com.amazonaws.billing#Values",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The metadata values that you can use to filter and group your results. \n    </p>",
+                        "smithy.api#documentation": "<p> The metadata values that you can use to filter and group your results. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      The metadata that you can use to filter and group your results.\n    </p>"
+                "smithy.api#documentation": "<p> The metadata that you can use to filter and group your results. </p>"
             }
         },
         "com.amazonaws.billing#ErrorMessage": {
@@ -881,18 +1568,18 @@
                 "dimensions": {
                     "target": "com.amazonaws.billing#DimensionValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The specific <code>Dimension</code> to use for <code>Expression</code>.\n    </p>"
+                        "smithy.api#documentation": "<p> The specific <code>Dimension</code> to use for <code>Expression</code>. </p>"
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.billing#TagValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The specific <code>Tag</code> to use for <code>Expression</code>.\n    </p>"
+                        "smithy.api#documentation": "<p> The specific <code>Tag</code> to use for <code>Expression</code>. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      See <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>. Billing view only supports <code>LINKED_ACCOUNT</code> and <code>Tags</code>.\n    </p>"
+                "smithy.api#documentation": "<p> See <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_billing_Expression.html\">Expression</a>. Billing view only supports <code>LINKED_ACCOUNT</code> and <code>Tags</code>. </p>"
             }
         },
         "com.amazonaws.billing#FieldName": {
@@ -929,7 +1616,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the metadata associated to the specified billing view ARN.\n    </p>",
+                "smithy.api#documentation": "<p>Returns the metadata associated to the specified billing view ARN. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "Invoke GetBillingView",
@@ -964,7 +1651,7 @@
                 "arn": {
                     "target": "com.amazonaws.billing#BillingViewArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view.\n    </p>",
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -979,7 +1666,7 @@
                 "billingView": {
                     "target": "com.amazonaws.billing#BillingViewElement",
                     "traits": {
-                        "smithy.api#documentation": "<p>The billing view element associated with the specified ARN.\n    </p>",
+                        "smithy.api#documentation": "<p>The billing view element associated with the specified ARN. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1014,7 +1701,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the resource-based policy document attached to the resource in <code>JSON</code> format.\n    </p>",
+                "smithy.api#documentation": "<p>Returns the resource-based policy document attached to the resource in <code>JSON</code> format. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "Invoke GetResourcePolicy",
@@ -1036,7 +1723,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.billing#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the billing view resource to which the policy is attached to.\n    </p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the billing view resource to which the policy is attached to. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1051,14 +1738,14 @@
                 "resourceArn": {
                     "target": "com.amazonaws.billing#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the billing view resource to which the policy is attached to.\n    </p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the billing view resource to which the policy is attached to. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "policy": {
                     "target": "com.amazonaws.billing#PolicyDocument",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource-based policy document attached to the resource in <code>JSON</code> format.\n    </p>"
+                        "smithy.api#documentation": "<p>The resource-based policy document attached to the resource in <code>JSON</code> format. </p>"
                     }
                 }
             },
@@ -1081,7 +1768,7 @@
                     "code": "BillingInternalServer",
                     "httpResponseCode": 500
                 },
-                "smithy.api#documentation": "<p>The request processing failed because of an unknown error, exception, or failure.\n      </p>",
+                "smithy.api#documentation": "<p>The request processing failed because of an unknown error, exception, or failure. </p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
             }
@@ -1109,7 +1796,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the billing views available for a given time period.\n      </p>\n         <p>Every Amazon Web Services account has a unique <code>PRIMARY</code> billing view that represents the billing data available by default. Accounts that use Billing Conductor also have <code>BILLING_GROUP</code> billing views representing pro forma costs associated with each created billing group.</p>",
+                "smithy.api#documentation": "<p>Lists the billing views available for a given time period. </p> <p>Every Amazon Web Services account has a unique <code>PRIMARY</code> billing view that represents the billing data available by default. Accounts that use Billing Conductor also have <code>BILLING_GROUP</code> billing views representing pro forma costs associated with each created billing group.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Invoke ListBillingViews",
@@ -1186,13 +1873,13 @@
                 "activeTimeRange": {
                     "target": "com.amazonaws.billing#ActiveTimeRange",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The time range for the billing views listed. <code>PRIMARY</code> billing view is always listed. <code>BILLING_GROUP</code> billing views are listed for time ranges when the associated billing group resource in Billing Conductor is active. The time range must be within one calendar month.\n    </p>"
+                        "smithy.api#documentation": "<p> The time range for the billing views listed. <code>PRIMARY</code> billing view is always listed. <code>BILLING_GROUP</code> billing views are listed for time ranges when the associated billing group resource in Billing Conductor is active. The time range must be within one calendar month. </p>"
                     }
                 },
                 "arns": {
                     "target": "com.amazonaws.billing#BillingViewArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view.\n      </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view. </p>"
                     }
                 },
                 "billingViewTypes": {
@@ -1204,13 +1891,13 @@
                 "ownerAccountId": {
                     "target": "com.amazonaws.billing#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The list of owners of the billing view.\n    </p>"
+                        "smithy.api#documentation": "<p> The list of owners of the billing view. </p>"
                     }
                 },
                 "maxResults": {
                     "target": "com.amazonaws.billing#BillingViewsMaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of billing views to retrieve. Default is 100.\n      </p>"
+                        "smithy.api#documentation": "<p>The maximum number of billing views to retrieve. Default is 100. </p>"
                     }
                 },
                 "nextToken": {
@@ -1237,7 +1924,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.billing#PageToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pagination token to use on subsequent calls to list billing views.\n      </p>"
+                        "smithy.api#documentation": "<p>The pagination token to use on subsequent calls to list billing views. </p>"
                     }
                 }
             },
@@ -1271,7 +1958,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the source views (managed Amazon Web Services billing views) associated with the billing view.\n    </p>",
+                "smithy.api#documentation": "<p>Lists the source views (managed Amazon Web Services billing views) associated with the billing view. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "Invoke ListSourceViewsForBillingView",
@@ -1300,20 +1987,20 @@
                 "arn": {
                     "target": "com.amazonaws.billing#BillingViewArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view.\n    </p>",
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "maxResults": {
                     "target": "com.amazonaws.billing#BillingViewsMaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The number of entries a paginated response contains.\n    </p>"
+                        "smithy.api#documentation": "<p> The number of entries a paginated response contains. </p>"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.billing#PageToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The pagination token that is used on subsequent calls to list billing views.\n    </p>"
+                        "smithy.api#documentation": "<p> The pagination token that is used on subsequent calls to list billing views. </p>"
                     }
                 }
             },
@@ -1327,14 +2014,14 @@
                 "sourceViews": {
                     "target": "com.amazonaws.billing#BillingViewSourceViewsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of billing views used as the data source for the custom billing view.\n    </p>",
+                        "smithy.api#documentation": "<p>A list of billing views used as the data source for the custom billing view. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.billing#PageToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The pagination token that is used on subsequent calls to list billing views.\n    </p>"
+                        "smithy.api#documentation": "<p> The pagination token that is used on subsequent calls to list billing views. </p>"
                     }
                 }
             },
@@ -1368,7 +2055,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists tags associated with the billing view resource.\n    </p>",
+                "smithy.api#documentation": "<p>Lists tags associated with the billing view resource. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "Invoke ListTagsForResource",
@@ -1394,7 +2081,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.billing#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The Amazon Resource Name (ARN) of the resource. \n    </p>",
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the resource. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1409,7 +2096,7 @@
                 "resourceTags": {
                     "target": "com.amazonaws.billing#ResourceTagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      A list of tag key value pairs that are associated with the resource.\n    </p>"
+                        "smithy.api#documentation": "<p> A list of tag key value pairs that are associated with the resource. </p>"
                     }
                 }
             },
@@ -1465,14 +2152,14 @@
                 "resourceId": {
                     "target": "com.amazonaws.billing#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Value is a list of resource IDs that were not found.\n    </p>",
+                        "smithy.api#documentation": "<p> Value is a list of resource IDs that were not found. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "resourceType": {
                     "target": "com.amazonaws.billing#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Value is the type of resource that was not found.\n    </p>",
+                        "smithy.api#documentation": "<p> Value is the type of resource that was not found. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1482,7 +2169,7 @@
                     "code": "BillingResourceNotFound",
                     "httpResponseCode": 404
                 },
-                "smithy.api#documentation": "<p>\n      The specified ARN in the request doesn't exist.\n    </p>",
+                "smithy.api#documentation": "<p> The specified ARN in the request doesn't exist. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -1493,19 +2180,19 @@
                 "key": {
                     "target": "com.amazonaws.billing#ResourceTagKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The key that's associated with the tag.\n    </p>",
+                        "smithy.api#documentation": "<p> The key that's associated with the tag. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "value": {
                     "target": "com.amazonaws.billing#ResourceTagValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The value that's associated with the tag.\n    </p>"
+                        "smithy.api#documentation": "<p> The value that's associated with the tag. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      The tag structure that contains a tag key and value.\n    </p>"
+                "smithy.api#documentation": "<p> The tag structure that contains a tag key and value. </p>"
             }
         },
         "com.amazonaws.billing#ResourceTagKey": {
@@ -1580,28 +2267,28 @@
                 "resourceId": {
                     "target": "com.amazonaws.billing#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The ID of the resource.\n    </p>",
+                        "smithy.api#documentation": "<p> The ID of the resource. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "resourceType": {
                     "target": "com.amazonaws.billing#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The type of Amazon Web Services resource.\n    </p>",
+                        "smithy.api#documentation": "<p> The type of Amazon Web Services resource. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "serviceCode": {
                     "target": "com.amazonaws.billing#ServiceCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The container for the <code>serviceCode</code>.\n    </p>",
+                        "smithy.api#documentation": "<p> The container for the <code>serviceCode</code>. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "quotaCode": {
                     "target": "com.amazonaws.billing#QuotaCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The container for the <code>quotaCode</code>.\n    </p>",
+                        "smithy.api#documentation": "<p> The container for the <code>quotaCode</code>. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1611,7 +2298,7 @@
                     "code": "BillingServiceQuotaExceeded",
                     "httpResponseCode": 402
                 },
-                "smithy.api#documentation": "<p>\n      You've reached the limit of resources you can create, or exceeded the size of an individual resource.\n    </p>",
+                "smithy.api#documentation": "<p> You've reached the limit of resources you can create, or exceeded the size of an individual resource. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
             }
@@ -1652,7 +2339,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n      An API operation for adding one or more tags (key-value pairs) to a resource.\n    </p>",
+                "smithy.api#documentation": "<p> An API operation for adding one or more tags (key-value pairs) to a resource. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "Invoke TagResource",
@@ -1676,14 +2363,14 @@
                 "resourceArn": {
                     "target": "com.amazonaws.billing#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The Amazon Resource Name (ARN) of the resource.\n    </p>",
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the resource. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "resourceTags": {
                     "target": "com.amazonaws.billing#ResourceTagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      A list of tag key value pairs that are associated with the resource.\n    </p>",
+                        "smithy.api#documentation": "<p> A list of tag key value pairs that are associated with the resource. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1705,20 +2392,20 @@
                 "key": {
                     "target": "com.amazonaws.billing#TagKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The key for the tag.\n    </p>",
+                        "smithy.api#documentation": "<p> The key for the tag. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "values": {
                     "target": "com.amazonaws.billing#Values",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The specific value of the tag.\n    </p>",
+                        "smithy.api#documentation": "<p> The specific value of the tag. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      The values that are available for a tag.\n    </p>"
+                "smithy.api#documentation": "<p> The values that are available for a tag. </p>"
             }
         },
         "com.amazonaws.billing#ThrottlingException": {
@@ -1736,7 +2423,7 @@
                     "code": "BillingThrottling",
                     "httpResponseCode": 429
                 },
-                "smithy.api#documentation": "<p>The request was denied due to request throttling.\n      </p>",
+                "smithy.api#documentation": "<p>The request was denied due to request throttling. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
             }
@@ -1767,7 +2454,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n      Removes one or more tags from a resource. Specify only tag keys in your request. Don't specify the value.\n    </p>",
+                "smithy.api#documentation": "<p> Removes one or more tags from a resource. Specify only tag keys in your request. Don't specify the value. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "Invoke UntagResource",
@@ -1788,14 +2475,14 @@
                 "resourceArn": {
                     "target": "com.amazonaws.billing#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The Amazon Resource Name (ARN) of the resource.\n    </p>",
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the resource. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "resourceTagKeys": {
                     "target": "com.amazonaws.billing#ResourceTagKeyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      A list of tag key value pairs that are associated with the resource.\n    </p>",
+                        "smithy.api#documentation": "<p> A list of tag key value pairs that are associated with the resource. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1843,7 +2530,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>An API to update the attributes of the billing view.\n    </p>",
+                "smithy.api#documentation": "<p>An API to update the attributes of the billing view. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "Invoke UpdateBillingView",
@@ -1875,26 +2562,26 @@
                 "arn": {
                     "target": "com.amazonaws.billing#BillingViewArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view.\n    </p>",
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "name": {
                     "target": "com.amazonaws.billing#BillingViewName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The name of the billing view.\n    </p>"
+                        "smithy.api#documentation": "<p> The name of the billing view. </p>"
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.billing#BillingViewDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The description of the billing view.\n    </p>"
+                        "smithy.api#documentation": "<p> The description of the billing view. </p>"
                     }
                 },
                 "dataFilterExpression": {
                     "target": "com.amazonaws.billing#Expression",
                     "traits": {
-                        "smithy.api#documentation": "<p>See <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>. Billing view only supports <code>LINKED_ACCOUNT</code> and <code>Tags</code>.\n    </p>"
+                        "smithy.api#documentation": "<p>See <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_billing_Expression.html\">Expression</a>. Billing view only supports <code>LINKED_ACCOUNT</code> and <code>Tags</code>. </p>"
                     }
                 }
             },
@@ -1908,14 +2595,14 @@
                 "arn": {
                     "target": "com.amazonaws.billing#BillingViewArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view.\n    </p>",
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "updatedAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The time when the billing view was last updated.\n    </p>"
+                        "smithy.api#documentation": "<p> The time when the billing view was last updated. </p>"
                     }
                 }
             },
@@ -1951,7 +2638,7 @@
                     "code": "BillingValidation",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an Amazon Web Services service.\n      </p>",
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an Amazon Web Services service. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -1975,7 +2662,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The field's information of a request that resulted in an exception.\n      </p>"
+                "smithy.api#documentation": "<p>The field's information of a request that resulted in an exception. </p>"
             }
         },
         "com.amazonaws.billing#ValidationExceptionFieldList": {

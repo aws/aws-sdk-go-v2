@@ -1631,6 +1631,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An array of EKS Pod Identity associations owned by the add-on. Each association maps a role to a service\n            account in a namespace in the cluster.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/add-ons-iam.html\">Attach an IAM Role to an Amazon EKS add-on\n                using EKS Pod Identity</a> in the <i>Amazon EKS User Guide</i>.</p>"
                     }
+                },
+                "namespaceConfig": {
+                    "target": "com.amazonaws.eks#AddonNamespaceConfigResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace configuration for the addon. This specifies the Kubernetes namespace where the addon is installed.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1714,6 +1720,12 @@
                     "target": "com.amazonaws.eks#MarketplaceInformation",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the add-on from the Amazon Web Services Marketplace.</p>"
+                    }
+                },
+                "defaultNamespace": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default Kubernetes namespace where this addon is typically installed if no custom namespace is specified.</p>"
                     }
                 }
             },
@@ -1816,6 +1828,34 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.eks#AddonIssue"
+            }
+        },
+        "com.amazonaws.eks#AddonNamespaceConfigRequest": {
+            "type": "structure",
+            "members": {
+                "namespace": {
+                    "target": "com.amazonaws.eks#namespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Kubernetes namespace to install the addon in. Must be a valid RFC 1123 DNS label.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The namespace configuration request object for specifying a custom namespace when creating an addon.</p>"
+            }
+        },
+        "com.amazonaws.eks#AddonNamespaceConfigResponse": {
+            "type": "structure",
+            "members": {
+                "namespace": {
+                    "target": "com.amazonaws.eks#namespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Kubernetes namespace where the addon is installed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The namespace configuration response object containing information about the namespace where an addon is installed.</p>"
             }
         },
         "com.amazonaws.eks#AddonPodIdentityAssociations": {
@@ -3450,6 +3490,12 @@
                     "target": "com.amazonaws.eks#AddonPodIdentityAssociationsList",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of EKS Pod Identity associations to be created. Each association maps a Kubernetes service account to\n            an IAM role.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/add-ons-iam.html\">Attach an IAM Role to an Amazon EKS add-on\n                using EKS Pod Identity</a> in the <i>Amazon EKS User Guide</i>.</p>"
+                    }
+                },
+                "namespaceConfig": {
+                    "target": "com.amazonaws.eks#AddonNamespaceConfigRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace configuration for the addon. If specified, this will override the default namespace for the addon.</p>"
                     }
                 }
             },
@@ -11955,6 +12001,15 @@
             },
             "value": {
                 "target": "com.amazonaws.eks#labelValue"
+            }
+        },
+        "com.amazonaws.eks#namespace": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                }
             }
         },
         "com.amazonaws.eks#requiredClaimsKey": {
