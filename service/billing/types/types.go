@@ -38,16 +38,16 @@ type BillingViewElement struct {
 
 	//  See [Expression]. Billing view only supports LINKED_ACCOUNT and Tags .
 	//
-	// [Expression]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
+	// [Expression]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_billing_Expression.html
 	DataFilterExpression *Expression
 
 	//  The description of the billing view.
 	Description *string
 
-	//  A list of names of the billing view.
+	//  The account name of the billing view.
 	Name *string
 
-	//  The list of owners of the billing view.
+	// The account owner of the billing view.
 	OwnerAccountId *string
 
 	// The time when the billing view was last updated.
@@ -97,7 +97,7 @@ type DimensionValues struct {
 
 //	See [Expression]. Billing view only supports LINKED_ACCOUNT and Tags .
 //
-// [Expression]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
+// [Expression]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_billing_Expression.html
 type Expression struct {
 
 	//  The specific Dimension to use for Expression .

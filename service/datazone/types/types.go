@@ -4285,6 +4285,9 @@ type PolicyGrantMember struct {
 	// The details of the policy grant member.
 	Detail PolicyGrantDetail
 
+	// The ID of the policy grant.
+	GrantId *string
+
 	// The principal of the policy grant member.
 	Principal PolicyGrantPrincipal
 

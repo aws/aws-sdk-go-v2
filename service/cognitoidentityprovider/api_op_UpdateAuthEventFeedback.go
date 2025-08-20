@@ -22,9 +22,9 @@ import (
 // to notification emails when users have potentially suspicious authentication
 // events. Users invoke this operation when they select the link that corresponds
 // to {one-click-link-valid} or {one-click-link-invalid} in your notification
-// template. Because FeedbackToken is a required parameter, you can' make requests
-// to UpdateAuthEventFeedback without the contents of the notification email
-// message.
+// template. Because FeedbackToken is a required parameter, you can't make
+// requests to UpdateAuthEventFeedback without the contents of the notification
+// email message.
 //
 // Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies
 // in requests for this API operation. For this operation, you can't use IAM

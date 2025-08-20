@@ -1,0 +1,8 @@
+{
+    "id": "fa539711-ff01-43f7-a536-83d7446c20cf",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/costexplorer"
+    ]
+}

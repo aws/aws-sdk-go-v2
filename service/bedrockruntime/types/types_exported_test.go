@@ -246,6 +246,28 @@ var _ *types.ContentBlockDeltaEvent
 var _ *types.ContentBlockStartEvent
 var _ *types.ConverseStreamMetadataEvent
 
+func ExampleCountTokensInput_outputUsage() {
+	var union types.CountTokensInput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CountTokensInputMemberConverse:
+		_ = v.Value // Value is types.ConverseTokensRequest
+
+	case *types.CountTokensInputMemberInvokeModel:
+		_ = v.Value // Value is types.InvokeModelTokensRequest
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ConverseTokensRequest
+var _ *types.InvokeModelTokensRequest
+
 func ExampleDocumentContentBlock_outputUsage() {
 	var union types.DocumentContentBlock
 	// type switches can be used to check the union value

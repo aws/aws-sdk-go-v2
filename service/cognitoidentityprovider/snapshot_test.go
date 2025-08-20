@@ -506,6 +506,18 @@ func TestCheckSnapshot_CreateResourceServer(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateTerms(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateTerms(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateTerms")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateUserImportJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateUserImportJob(context.Background(), nil, func(o *Options) {
@@ -595,6 +607,18 @@ func TestCheckSnapshot_DeleteResourceServer(t *testing.T) {
 	_, err := svc.DeleteResourceServer(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteResourceServer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteTerms(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTerms(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteTerms")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -727,6 +751,18 @@ func TestCheckSnapshot_DescribeRiskConfiguration(t *testing.T) {
 	_, err := svc.DescribeRiskConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeRiskConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeTerms(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTerms(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeTerms")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1027,6 +1063,18 @@ func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListTerms(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTerms(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListTerms")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1351,6 +1399,18 @@ func TestCheckSnapshot_UpdateResourceServer(t *testing.T) {
 	_, err := svc.UpdateResourceServer(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateResourceServer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateTerms(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateTerms(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateTerms")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1873,6 +1933,18 @@ func TestUpdateSnapshot_CreateResourceServer(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateTerms(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateTerms(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateTerms")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateUserImportJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateUserImportJob(context.Background(), nil, func(o *Options) {
@@ -1962,6 +2034,18 @@ func TestUpdateSnapshot_DeleteResourceServer(t *testing.T) {
 	_, err := svc.DeleteResourceServer(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteResourceServer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteTerms(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTerms(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteTerms")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2094,6 +2178,18 @@ func TestUpdateSnapshot_DescribeRiskConfiguration(t *testing.T) {
 	_, err := svc.DescribeRiskConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeRiskConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeTerms(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTerms(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeTerms")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2394,6 +2490,18 @@ func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListTerms(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTerms(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListTerms")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2718,6 +2826,18 @@ func TestUpdateSnapshot_UpdateResourceServer(t *testing.T) {
 	_, err := svc.UpdateResourceServer(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateResourceServer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateTerms(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateTerms(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateTerms")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

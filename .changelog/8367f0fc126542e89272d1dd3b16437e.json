@@ -1,0 +1,8 @@
+{
+    "id": "8367f0fc-1265-42e8-9272-d1dd3b16437e",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/efs"
+    ]
+}

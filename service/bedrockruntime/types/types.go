@@ -654,6 +654,23 @@ type ConverseStreamTrace struct {
 	noSmithyDocumentSerde
 }
 
+// The inputs from a Converse API request for token counting.
+//
+// This structure mirrors the input format for the Converse operation, allowing
+// you to count tokens for conversation-based inference requests.
+type ConverseTokensRequest struct {
+
+	// An array of messages to count tokens for.
+	Messages []Message
+
+	// The system content blocks to count tokens for. System content provides
+	// instructions or context to the model about how it should behave or respond. The
+	// token count will include any system content provided.
+	System []SystemContentBlock
+
+	noSmithyDocumentSerde
+}
+
 // The trace object in a response from [Converse]. Currently, you can only trace guardrails.
 //
 // [Converse]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
@@ -667,6 +684,39 @@ type ConverseTrace struct {
 
 	noSmithyDocumentSerde
 }
+
+// The input value for token counting. The value should be either an InvokeModel
+// or Converse request body.
+//
+// The following types satisfy this interface:
+//
+//	CountTokensInputMemberConverse
+//	CountTokensInputMemberInvokeModel
+type CountTokensInput interface {
+	isCountTokensInput()
+}
+
+// A Converse request for which to count tokens. Use this field when you want to
+// count tokens for a conversation-based input that would be sent to the Converse
+// operation.
+type CountTokensInputMemberConverse struct {
+	Value ConverseTokensRequest
+
+	noSmithyDocumentSerde
+}
+
+func (*CountTokensInputMemberConverse) isCountTokensInput() {}
+
+// An InvokeModel request for which to count tokens. Use this field when you want
+// to count tokens for a raw text input that would be sent to the InvokeModel
+// operation.
+type CountTokensInputMemberInvokeModel struct {
+	Value InvokeModelTokensRequest
+
+	noSmithyDocumentSerde
+}
+
+func (*CountTokensInputMemberInvokeModel) isCountTokensInput() {}
 
 // A document to include in a message.
 type DocumentBlock struct {
@@ -875,8 +925,9 @@ type GuardrailAutomatedReasoningFinding interface {
 	isGuardrailAutomatedReasoningFinding()
 }
 
-// Indicates that no valid claims can be made due to logical contradictions in the
-// premises or rules.
+// Contains the result when the automated reasoning evaluation determines that no
+// valid logical conclusions can be drawn due to contradictions in the premises or
+// policy rules themselves.
 type GuardrailAutomatedReasoningFindingMemberImpossible struct {
 	Value GuardrailAutomatedReasoningImpossibleFinding
 
@@ -885,8 +936,9 @@ type GuardrailAutomatedReasoningFindingMemberImpossible struct {
 
 func (*GuardrailAutomatedReasoningFindingMemberImpossible) isGuardrailAutomatedReasoningFinding() {}
 
-// Indicates that the claims are logically false and contradictory to the
-// established rules or premises.
+// Contains the result when the automated reasoning evaluation determines that the
+// claims in the input are logically invalid and contradict the established
+// premises or policy rules.
 type GuardrailAutomatedReasoningFindingMemberInvalid struct {
 	Value GuardrailAutomatedReasoningInvalidFinding
 
@@ -895,8 +947,9 @@ type GuardrailAutomatedReasoningFindingMemberInvalid struct {
 
 func (*GuardrailAutomatedReasoningFindingMemberInvalid) isGuardrailAutomatedReasoningFinding() {}
 
-// Indicates that no relevant logical information could be extracted from the
-// input for validation.
+// Contains the result when the automated reasoning evaluation cannot extract any
+// relevant logical information from the input that can be validated against the
+// policy rules.
 type GuardrailAutomatedReasoningFindingMemberNoTranslations struct {
 	Value GuardrailAutomatedReasoningNoTranslationsFinding
 
@@ -906,8 +959,9 @@ type GuardrailAutomatedReasoningFindingMemberNoTranslations struct {
 func (*GuardrailAutomatedReasoningFindingMemberNoTranslations) isGuardrailAutomatedReasoningFinding() {
 }
 
-// Indicates that the claims could be either true or false depending on additional
-// assumptions not provided in the input.
+// Contains the result when the automated reasoning evaluation determines that the
+// claims in the input could be either true or false depending on additional
+// assumptions not provided in the input context.
 type GuardrailAutomatedReasoningFindingMemberSatisfiable struct {
 	Value GuardrailAutomatedReasoningSatisfiableFinding
 
@@ -916,8 +970,9 @@ type GuardrailAutomatedReasoningFindingMemberSatisfiable struct {
 
 func (*GuardrailAutomatedReasoningFindingMemberSatisfiable) isGuardrailAutomatedReasoningFinding() {}
 
-// Indicates that the input exceeds the processing capacity due to the volume or
-// complexity of the logical information.
+// Contains the result when the automated reasoning evaluation cannot process the
+// input due to its complexity or volume exceeding the system's processing capacity
+// for logical analysis.
 type GuardrailAutomatedReasoningFindingMemberTooComplex struct {
 	Value GuardrailAutomatedReasoningTooComplexFinding
 
@@ -926,8 +981,9 @@ type GuardrailAutomatedReasoningFindingMemberTooComplex struct {
 
 func (*GuardrailAutomatedReasoningFindingMemberTooComplex) isGuardrailAutomatedReasoningFinding() {}
 
-// Indicates that the input has multiple valid logical interpretations, requiring
-// additional context or clarification.
+// Contains the result when the automated reasoning evaluation detects that the
+// input has multiple valid logical interpretations, requiring additional context
+// or clarification to proceed with validation.
 type GuardrailAutomatedReasoningFindingMemberTranslationAmbiguous struct {
 	Value GuardrailAutomatedReasoningTranslationAmbiguousFinding
 
@@ -937,8 +993,9 @@ type GuardrailAutomatedReasoningFindingMemberTranslationAmbiguous struct {
 func (*GuardrailAutomatedReasoningFindingMemberTranslationAmbiguous) isGuardrailAutomatedReasoningFinding() {
 }
 
-// Indicates that the claims are definitively true and logically implied by the
-// premises, with no possible alternative interpretations.
+// Contains the result when the automated reasoning evaluation determines that the
+// claims in the input are logically valid and definitively true based on the
+// provided premises and policy rules.
 type GuardrailAutomatedReasoningFindingMemberValid struct {
 	Value GuardrailAutomatedReasoningValidFinding
 
@@ -1830,6 +1887,23 @@ type InferenceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The body of an InvokeModel API request for token counting. This structure
+// mirrors the input format for the InvokeModel operation, allowing you to count
+// tokens for raw text inference requests.
+type InvokeModelTokensRequest struct {
+
+	// The request body to count tokens for, formatted according to the model's
+	// expected input format. To learn about the input format for different models, see
+	// [Model inference parameters and responses].
+	//
+	// [Model inference parameters and responses]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
+	//
+	// This member is required.
+	Body []byte
+
+	noSmithyDocumentSerde
+}
+
 // A message input, or returned from, a call to [Converse] or [ConverseStream].
 //
 // [Converse]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
@@ -2489,6 +2563,7 @@ func (*UnknownUnionMember) isContentBlockDelta()                  {}
 func (*UnknownUnionMember) isContentBlockStart()                  {}
 func (*UnknownUnionMember) isConverseOutput()                     {}
 func (*UnknownUnionMember) isConverseStreamOutput()               {}
+func (*UnknownUnionMember) isCountTokensInput()                   {}
 func (*UnknownUnionMember) isDocumentContentBlock()               {}
 func (*UnknownUnionMember) isDocumentSource()                     {}
 func (*UnknownUnionMember) isGuardrailAutomatedReasoningFinding() {}

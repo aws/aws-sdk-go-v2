@@ -7901,6 +7901,11 @@ func awsAwsjson10_serializeOpDocumentRequestPhoneNumberInput(v *RequestPhoneNumb
 		ok.Boolean(*v.DeletionProtectionEnabled)
 	}
 
+	if v.InternationalSendingEnabled != nil {
+		ok := object.Key("InternationalSendingEnabled")
+		ok.Boolean(*v.InternationalSendingEnabled)
+	}
+
 	if v.IsoCountryCode != nil {
 		ok := object.Key("IsoCountryCode")
 		ok.String(*v.IsoCountryCode)
@@ -8452,6 +8457,11 @@ func awsAwsjson10_serializeOpDocumentUpdatePhoneNumberInput(v *UpdatePhoneNumber
 	if v.DeletionProtectionEnabled != nil {
 		ok := object.Key("DeletionProtectionEnabled")
 		ok.Boolean(*v.DeletionProtectionEnabled)
+	}
+
+	if v.InternationalSendingEnabled != nil {
+		ok := object.Key("InternationalSendingEnabled")
+		ok.Boolean(*v.InternationalSendingEnabled)
 	}
 
 	if v.OptOutListName != nil {

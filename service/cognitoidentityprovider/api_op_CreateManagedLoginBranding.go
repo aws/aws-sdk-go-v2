@@ -14,7 +14,7 @@ import (
 
 // Creates a new set of branding settings for a user pool style and associates it
 // with an app client. This operation is the programmatic option for the creation
-// of a new style in the branding designer.
+// of a new style in the branding editor.
 //
 // Provides values for UI customization in a Settings JSON object and image files
 // in an Assets array. To send the JSON object Document type parameter in Settings
@@ -77,11 +77,23 @@ type CreateManagedLoginBrandingInput struct {
 
 	// A JSON file, encoded as a Document type, with the the settings that you want to
 	// apply to your style.
+	//
+	// The following components are not currently implemented and reserved for future
+	// use:
+	//
+	//   - signUp
+	//
+	//   - instructions
+	//
+	//   - sessionTimerDisplay
+	//
+	//   - languageSelector (for localization, see [Managed login localization)]
+	//
+	// [Managed login localization)]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html#managed-login-localization
 	Settings document.Interface
 
 	// When true, applies the default branding style options. These default options
-	// are managed by Amazon Cognito. You can modify them later in the branding
-	// designer.
+	// are managed by Amazon Cognito. You can modify them later in the branding editor.
 	//
 	// When you specify true for this option, you must also omit values for Settings
 	// and Assets in the request.

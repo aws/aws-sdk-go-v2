@@ -645,6 +645,34 @@ func (m *awsRestjson1_deserializeOpAddPolicyGrant) HandleDeserialize(ctx context
 	output := &AddPolicyGrantOutput{}
 	out.Result = output
 
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentAddPolicyGrantOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
 	span.End()
 	return out, metadata, err
 }
@@ -719,6 +747,46 @@ func awsRestjson1_deserializeOpErrorAddPolicyGrant(response *smithyhttp.Response
 		return genericError
 
 	}
+}
+
+func awsRestjson1_deserializeOpDocumentAddPolicyGrantOutput(v **AddPolicyGrantOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *AddPolicyGrantOutput
+	if *v == nil {
+		sv = &AddPolicyGrantOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "grantId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GrantIdentifier to be of type string, got %T instead", value)
+				}
+				sv.GrantId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
 }
 
 type awsRestjson1_deserializeOpAssociateEnvironmentRole struct {
@@ -48252,6 +48320,15 @@ func awsRestjson1_deserializeDocumentPolicyGrantMember(v **types.PolicyGrantMemb
 		case "detail":
 			if err := awsRestjson1_deserializeDocumentPolicyGrantDetail(&sv.Detail, value); err != nil {
 				return err
+			}
+
+		case "grantId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GrantIdentifier to be of type string, got %T instead", value)
+				}
+				sv.GrantId = ptr.String(jtv)
 			}
 
 		case "principal":

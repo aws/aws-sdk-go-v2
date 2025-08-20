@@ -1,0 +1,8 @@
+{
+    "id": "9066d8d3-c367-4c3a-945d-307a6bd79be6",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/sesv2"
+    ]
+}

@@ -49,7 +49,7 @@ type CreateBillingViewInput struct {
 
 	//  See [Expression]. Billing view only supports LINKED_ACCOUNT and Tags .
 	//
-	// [Expression]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
+	// [Expression]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_billing_Expression.html
 	DataFilterExpression *types.Expression
 
 	//  The description of the billing view.

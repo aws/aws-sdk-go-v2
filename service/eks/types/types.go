@@ -138,6 +138,10 @@ type Addon struct {
 	// The Unix epoch timestamp for the last modification to the object.
 	ModifiedAt *time.Time
 
+	// The namespace configuration for the addon. This specifies the Kubernetes
+	// namespace where the addon is installed.
+	NamespaceConfig *AddonNamespaceConfigResponse
+
 	// The owner of the add-on.
 	Owner *string
 
@@ -200,6 +204,10 @@ type AddonInfo struct {
 	// compatible Kubernetes versions.
 	AddonVersions []AddonVersionInfo
 
+	// The default Kubernetes namespace where this addon is typically installed if no
+	// custom namespace is specified.
+	DefaultNamespace *string
+
 	// Information about the add-on from the Amazon Web Services Marketplace.
 	MarketplaceInformation *MarketplaceInformation
 
@@ -226,6 +234,27 @@ type AddonIssue struct {
 
 	// The resource IDs of the issue.
 	ResourceIds []string
+
+	noSmithyDocumentSerde
+}
+
+// The namespace configuration request object for specifying a custom namespace
+// when creating an addon.
+type AddonNamespaceConfigRequest struct {
+
+	// The name of the Kubernetes namespace to install the addon in. Must be a valid
+	// RFC 1123 DNS label.
+	Namespace *string
+
+	noSmithyDocumentSerde
+}
+
+// The namespace configuration response object containing information about the
+// namespace where an addon is installed.
+type AddonNamespaceConfigResponse struct {
+
+	// The name of the Kubernetes namespace where the addon is installed.
+	Namespace *string
 
 	noSmithyDocumentSerde
 }

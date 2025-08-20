@@ -75,7 +75,7 @@ type AddApplicationVpcConfigurationOutput struct {
 	// updates the ApplicationVersionId each time you update the application.
 	ApplicationVersionId *int64
 
-	// Operation ID for tracking AddApplicationVpcConfiguration request
+	// The operation ID that can be used to track the request.
 	OperationId *string
 
 	// The parameters of the new VPC configuration.

@@ -13043,6 +13043,11 @@ func awsRestjson1_serializeOpDocumentRemovePolicyGrantInput(v *RemovePolicyGrant
 		ok.String(*v.ClientToken)
 	}
 
+	if v.GrantIdentifier != nil {
+		ok := object.Key("grantIdentifier")
+		ok.String(*v.GrantIdentifier)
+	}
+
 	if len(v.PolicyType) > 0 {
 		ok := object.Key("policyType")
 		ok.String(string(v.PolicyType))

@@ -1,0 +1,8 @@
+{
+    "id": "0c5b7fd2-5a23-4e81-8c02-b975b2875edb",
+    "type": "feature",
+    "description": "Launch CountTokens API to allow token counting",
+    "modules": [
+        "service/bedrockruntime"
+    ]
+}

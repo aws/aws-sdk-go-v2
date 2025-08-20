@@ -1,0 +1,8 @@
+{
+    "id": "3b4b8937-890b-4be5-a5c9-bb88f8d46ed2",
+    "type": "feature",
+    "description": "This change added InternationalSendingEnbaled as part of describe/Update/Request phone number API response, and as part of update/Request phone number API request",
+    "modules": [
+        "service/pinpointsmsvoicev2"
+    ]
+}

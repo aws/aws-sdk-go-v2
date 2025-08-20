@@ -1,0 +1,8 @@
+{
+    "id": "9633e76b-b89e-4539-8f9a-bf81c74200b8",
+    "type": "feature",
+    "description": "Clarify IPv4 and IPv6 endpoints",
+    "modules": [
+        "service/billing"
+    ]
+}

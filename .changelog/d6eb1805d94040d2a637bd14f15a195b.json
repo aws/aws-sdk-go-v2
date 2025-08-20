@@ -1,0 +1,8 @@
+{
+    "id": "d6eb1805-d940-40d2-a637-bd14f15a195b",
+    "type": "feature",
+    "description": "EKS Add-ons Custom Namespace Support",
+    "modules": [
+        "service/eks"
+    ]
+}

@@ -853,6 +853,33 @@ func (e *SoftwareTokenMFANotFoundException) ErrorCode() string {
 }
 func (e *SoftwareTokenMFANotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Terms document names must be unique to the app client. This exception is thrown
+// when you attempt to create terms documents with a duplicate TermsName .
+type TermsExistsException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *TermsExistsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TermsExistsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TermsExistsException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "TermsExistsException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *TermsExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // This exception is thrown when you've attempted to change your feature plan but
 // the operation isn't permitted.
 type TierChangeNotAllowedException struct {

@@ -8989,6 +8989,11 @@ func validateCustomFileSystem(v types.CustomFileSystem) error {
 			invalidParams.AddNested("[FSxLustreFileSystem]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.CustomFileSystemMemberS3FileSystem:
+		if err := validateS3FileSystem(&uv.Value); err != nil {
+			invalidParams.AddNested("[S3FileSystem]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -9011,6 +9016,11 @@ func validateCustomFileSystemConfig(v types.CustomFileSystemConfig) error {
 	case *types.CustomFileSystemConfigMemberFSxLustreFileSystemConfig:
 		if err := validateFSxLustreFileSystemConfig(&uv.Value); err != nil {
 			invalidParams.AddNested("[FSxLustreFileSystemConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.CustomFileSystemConfigMemberS3FileSystemConfig:
+		if err := validateS3FileSystemConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[S3FileSystemConfig]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -13207,6 +13217,36 @@ func validateS3DataSource(v *types.S3DataSource) error {
 		if err := validateHubAccessConfig(v.HubAccessConfig); err != nil {
 			invalidParams.AddNested("HubAccessConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3FileSystem(v *types.S3FileSystem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3FileSystem"}
+	if v.S3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3FileSystemConfig(v *types.S3FileSystemConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3FileSystemConfig"}
+	if v.S3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

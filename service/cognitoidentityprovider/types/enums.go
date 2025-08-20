@@ -884,6 +884,40 @@ func (StatusType) Values() []StatusType {
 	}
 }
 
+type TermsEnforcementType string
+
+// Enum values for TermsEnforcementType
+const (
+	TermsEnforcementTypeNone TermsEnforcementType = "NONE"
+)
+
+// Values returns all known values for TermsEnforcementType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TermsEnforcementType) Values() []TermsEnforcementType {
+	return []TermsEnforcementType{
+		"NONE",
+	}
+}
+
+type TermsSourceType string
+
+// Enum values for TermsSourceType
+const (
+	TermsSourceTypeLink TermsSourceType = "LINK"
+)
+
+// Values returns all known values for TermsSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TermsSourceType) Values() []TermsSourceType {
+	return []TermsSourceType{
+		"LINK",
+	}
+}
+
 type TimeUnitsType string
 
 // Enum values for TimeUnitsType

@@ -68,6 +68,10 @@ type AddPolicyGrantInput struct {
 }
 
 type AddPolicyGrantOutput struct {
+
+	// The ID of the policy grant that was added to a specified entity.
+	GrantId *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

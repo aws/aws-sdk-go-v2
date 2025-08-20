@@ -60,7 +60,7 @@ type RollbackApplicationOutput struct {
 	// This member is required.
 	ApplicationDetail *types.ApplicationDetail
 
-	// Operation ID for tracking RollbackApplication request
+	// The operation ID that can be used to track the request.
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

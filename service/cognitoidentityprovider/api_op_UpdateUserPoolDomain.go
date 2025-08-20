@@ -93,7 +93,7 @@ type UpdateUserPoolDomainInput struct {
 
 	// A version number that indicates the state of managed login for your domain.
 	// Version 1 is hosted UI (classic). Version 2 is the newer managed login with the
-	// branding designer. For more information, see [Managed login].
+	// branding editor. For more information, see [Managed login].
 	//
 	// [Managed login]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html
 	ManagedLoginVersion *int32
@@ -114,7 +114,7 @@ type UpdateUserPoolDomainOutput struct {
 
 	// A version number that indicates the state of managed login for your domain.
 	// Version 1 is hosted UI (classic). Version 2 is the newer managed login with the
-	// branding designer. For more information, see [Managed login].
+	// branding editor. For more information, see [Managed login].
 	//
 	// [Managed login]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html
 	ManagedLoginVersion *int32

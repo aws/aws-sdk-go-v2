@@ -11,9 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sends a password-reset confirmation code for the currently signed-in user.
+// Sends a password-reset confirmation code to the email address or phone number
+// of the requested username. The message delivery method is determined by the
+// user's available attributes and the AccountRecoverySetting configuration of the
+// user pool.
 //
-// For the Username parameter, you can use the username or user alias.
+// For the Username parameter, you can use the username or an email, phone, or
+// preferred username alias.
 //
 // If neither a verified phone number nor a verified email exists, Amazon Cognito
 // responds with an InvalidParameterException error . If your app client has a

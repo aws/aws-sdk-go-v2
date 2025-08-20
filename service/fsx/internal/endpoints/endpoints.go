@@ -624,6 +624,9 @@ var defaultPartitions = endpoints.Partitions{
 			}: {
 				Hostname: "fsx-fips.us-iso-east-1.c2s.ic.gov",
 			},
+			endpoints.EndpointKey{
+				Region: "us-iso-west-1",
+			}: endpoints.Endpoint{},
 		},
 	},
 	{

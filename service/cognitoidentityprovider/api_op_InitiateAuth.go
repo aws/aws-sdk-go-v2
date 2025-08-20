@@ -113,25 +113,37 @@ type InitiateAuthInput struct {
 	// The authentication parameters. These are inputs corresponding to the AuthFlow
 	// that you're invoking.
 	//
-	// The required values are specific to the InitiateAuthRequest$AuthFlow.
-	//
 	// The following are some authentication flows and their parameters. Add a
-	// SECRET_HASH parameter if your app client has a client secret.
+	// SECRET_HASH parameter if your app client has a client secret. Add DEVICE_KEY if
+	// you want to bypass multi-factor authentication with a remembered device.
 	//
-	//   - USER_AUTH : USERNAME (required), PREFERRED_CHALLENGE . If you don't provide
-	//   a value for PREFERRED_CHALLENGE , Amazon Cognito responds with the
-	//   AvailableChallenges parameter that specifies the available sign-in methods.
+	// USER_AUTH
+	//   - USERNAME (required)
 	//
-	//   - USER_SRP_AUTH : USERNAME (required), SRP_A (required), DEVICE_KEY .
+	//   - PREFERRED_CHALLENGE . If you don't provide a value for PREFERRED_CHALLENGE ,
+	//   Amazon Cognito responds with the AvailableChallenges parameter that specifies
+	//   the available sign-in methods.
 	//
-	//   - USER_PASSWORD_AUTH : USERNAME (required), PASSWORD (required), DEVICE_KEY .
+	// USER_SRP_AUTH
+	//   - USERNAME (required)
 	//
-	//   - REFRESH_TOKEN_AUTH/REFRESH_TOKEN : REFRESH_TOKEN (required), DEVICE_KEY .
+	//   - SRP_A (required)
 	//
-	//   - CUSTOM_AUTH : USERNAME (required), SECRET_HASH (if app client is configured
-	//   with client secret), DEVICE_KEY . To start the authentication flow with
-	//   password verification, include ChallengeName: SRP_A and SRP_A: (The SRP_A
-	//   Value) .
+	// USER_PASSWORD_AUTH
+	//   - USERNAME (required)
+	//
+	//   - PASSWORD (required)
+	//
+	// REFRESH_TOKEN_AUTH/REFRESH_TOKEN
+	//   - REFRESH_TOKEN (required)
+	//
+	// CUSTOM_AUTH
+	//   - USERNAME (required)
+	//
+	//   - ChallengeName: SRP_A (when doing SRP authentication before custom challenges)
+	//
+	//   - SRP_A: (An SRP_A value) (when doing SRP authentication before custom
+	//   challenges)
 	//
 	// For more information about SECRET_HASH , see [Computing secret hash values]. For information about DEVICE_KEY
 	// , see [Working with user devices in your user pool].
@@ -241,36 +253,40 @@ type InitiateAuthOutput struct {
 	// Possible challenges include the following:
 	//
 	// All of the following challenges require USERNAME and, when the app client has a
-	// client secret, SECRET_HASH in the parameters.
+	// client secret, SECRET_HASH in the parameters. Include a DEVICE_KEY for device
+	// authentication.
 	//
 	//   - WEB_AUTHN : Respond to the challenge with the results of a successful
-	//   authentication with a WebAuthn authenticator, or passkey. Examples of WebAuthn
-	//   authenticators include biometric devices and security keys.
+	//   authentication with a WebAuthn authenticator, or passkey, as CREDENTIAL .
+	//   Examples of WebAuthn authenticators include biometric devices and security keys.
 	//
-	//   - PASSWORD : Respond with USER_PASSWORD_AUTH parameters: USERNAME (required),
-	//   PASSWORD (required), SECRET_HASH (required if the app client is configured
-	//   with a client secret), DEVICE_KEY .
+	//   - PASSWORD : Respond with the user's password as PASSWORD .
 	//
-	//   - PASSWORD_SRP : Respond with USER_SRP_AUTH parameters: USERNAME (required),
-	//   SRP_A (required), SECRET_HASH (required if the app client is configured with a
-	//   client secret), DEVICE_KEY .
+	//   - PASSWORD_SRP : Respond with the initial SRP secret as SRP_A .
 	//
-	//   - SELECT_CHALLENGE : Respond to the challenge with USERNAME and an ANSWER that
-	//   matches one of the challenge types in the AvailableChallenges response
-	//   parameter.
+	//   - SELECT_CHALLENGE : Respond with a challenge selection as ANSWER . It must be
+	//   one of the challenge types in the AvailableChallenges response parameter. Add
+	//   the parameters of the selected challenge, for example USERNAME and SMS_OTP .
 	//
-	//   - SMS_MFA : Respond with an SMS_MFA_CODE that your user pool delivered in an
-	//   SMS message.
+	//   - SMS_MFA : Respond with the code that your user pool delivered in an SMS
+	//   message, as SMS_MFA_CODE
 	//
-	//   - EMAIL_OTP : Respond with an EMAIL_OTP_CODE that your user pool delivered in
-	//   an email message.
+	//   - EMAIL_MFA : Respond with the code that your user pool delivered in an email
+	//   message, as EMAIL_MFA_CODE
 	//
-	//   - PASSWORD_VERIFIER : Respond with PASSWORD_CLAIM_SIGNATURE ,
-	//   PASSWORD_CLAIM_SECRET_BLOCK , and TIMESTAMP after client-side SRP calculations.
+	//   - EMAIL_OTP : Respond with the code that your user pool delivered in an email
+	//   message, as EMAIL_OTP_CODE .
+	//
+	//   - SMS_OTP : Respond with the code that your user pool delivered in an SMS
+	//   message, as SMS_OTP_CODE .
+	//
+	//   - PASSWORD_VERIFIER : Respond with the second stage of SRP secrets as
+	//   PASSWORD_CLAIM_SIGNATURE , PASSWORD_CLAIM_SECRET_BLOCK , and TIMESTAMP .
 	//
 	//   - CUSTOM_CHALLENGE : This is returned if your custom authentication flow
 	//   determines that the user should pass another challenge before tokens are issued.
-	//   The parameters of the challenge are determined by your Lambda function.
+	//   The parameters of the challenge are determined by your Lambda function and
+	//   issued in the ChallengeParameters of a challenge response.
 	//
 	//   - DEVICE_SRP_AUTH : Respond with the initial parameters of device SRP
 	//   authentication. For more information, see [Signing in with a device].

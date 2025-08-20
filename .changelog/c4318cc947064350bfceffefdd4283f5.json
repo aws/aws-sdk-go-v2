@@ -1,0 +1,8 @@
+{
+    "id": "c4318cc9-4706-4350-bfce-ffefdd4283f5",
+    "type": "feature",
+    "description": "This release adds 1/ Launch ml.p5.4xlarge instance in Processing jobs, Training jobs and Training Plan 2/ Makes S3Uri to be required for S3FileSystem and S3FileSystemConfig.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

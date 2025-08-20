@@ -17863,6 +17863,8 @@ type S3FileSystem struct {
 	// The Amazon S3 URI that specifies the location in S3 where files are stored,
 	// which is mounted within the Studio environment. For example:
 	// s3://<bucket-name>/<prefix>/ .
+	//
+	// This member is required.
 	S3Uri *string
 
 	noSmithyDocumentSerde
@@ -17871,12 +17873,14 @@ type S3FileSystem struct {
 // Configuration for the custom Amazon S3 file system.
 type S3FileSystemConfig struct {
 
+	// The Amazon S3 URI of the S3 file system configuration.
+	//
+	// This member is required.
+	S3Uri *string
+
 	// The file system path where the Amazon S3 storage location will be mounted
 	// within the Amazon SageMaker Studio environment.
 	MountPath *string
-
-	// The Amazon S3 URI of the S3 file system configuration.
-	S3Uri *string
 
 	noSmithyDocumentSerde
 }

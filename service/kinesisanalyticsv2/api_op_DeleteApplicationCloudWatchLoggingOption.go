@@ -70,7 +70,7 @@ type DeleteApplicationCloudWatchLoggingOptionOutput struct {
 	// application.
 	CloudWatchLoggingOptionDescriptions []types.CloudWatchLoggingOptionDescription
 
-	// Operation ID for tracking DeleteApplicationCloudWatchLoggingOption request
+	// The operation ID that can be used to track the request.
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

@@ -157,6 +157,25 @@ func (InputStartingPosition) Values() []InputStartingPosition {
 	}
 }
 
+type KeyType string
+
+// Enum values for KeyType
+const (
+	KeyTypeAwsOwnedKey        KeyType = "AWS_OWNED_KEY"
+	KeyTypeCustomerManagedKey KeyType = "CUSTOMER_MANAGED_KEY"
+)
+
+// Values returns all known values for KeyType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (KeyType) Values() []KeyType {
+	return []KeyType{
+		"AWS_OWNED_KEY",
+		"CUSTOMER_MANAGED_KEY",
+	}
+}
+
 type LogLevel string
 
 // Enum values for LogLevel

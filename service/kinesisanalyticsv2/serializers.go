@@ -2078,6 +2078,13 @@ func awsAwsjson11_serializeDocumentApplicationConfiguration(v *types.Application
 		}
 	}
 
+	if v.ApplicationEncryptionConfiguration != nil {
+		ok := object.Key("ApplicationEncryptionConfiguration")
+		if err := awsAwsjson11_serializeDocumentApplicationEncryptionConfiguration(v.ApplicationEncryptionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ApplicationSnapshotConfiguration != nil {
 		ok := object.Key("ApplicationSnapshotConfiguration")
 		if err := awsAwsjson11_serializeDocumentApplicationSnapshotConfiguration(v.ApplicationSnapshotConfiguration, ok); err != nil {
@@ -2141,6 +2148,13 @@ func awsAwsjson11_serializeDocumentApplicationConfigurationUpdate(v *types.Appli
 		}
 	}
 
+	if v.ApplicationEncryptionConfigurationUpdate != nil {
+		ok := object.Key("ApplicationEncryptionConfigurationUpdate")
+		if err := awsAwsjson11_serializeDocumentApplicationEncryptionConfigurationUpdate(v.ApplicationEncryptionConfigurationUpdate, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ApplicationSnapshotConfigurationUpdate != nil {
 		ok := object.Key("ApplicationSnapshotConfigurationUpdate")
 		if err := awsAwsjson11_serializeDocumentApplicationSnapshotConfigurationUpdate(v.ApplicationSnapshotConfigurationUpdate, ok); err != nil {
@@ -2188,6 +2202,40 @@ func awsAwsjson11_serializeDocumentApplicationConfigurationUpdate(v *types.Appli
 		if err := awsAwsjson11_serializeDocumentZeppelinApplicationConfigurationUpdate(v.ZeppelinApplicationConfigurationUpdate, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentApplicationEncryptionConfiguration(v *types.ApplicationEncryptionConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KeyId != nil {
+		ok := object.Key("KeyId")
+		ok.String(*v.KeyId)
+	}
+
+	if len(v.KeyType) > 0 {
+		ok := object.Key("KeyType")
+		ok.String(string(v.KeyType))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentApplicationEncryptionConfigurationUpdate(v *types.ApplicationEncryptionConfigurationUpdate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KeyIdUpdate != nil {
+		ok := object.Key("KeyIdUpdate")
+		ok.String(*v.KeyIdUpdate)
+	}
+
+	if len(v.KeyTypeUpdate) > 0 {
+		ok := object.Key("KeyTypeUpdate")
+		ok.String(string(v.KeyTypeUpdate))
 	}
 
 	return nil
