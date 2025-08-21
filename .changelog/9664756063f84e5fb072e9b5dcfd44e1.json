@@ -1,8 +1,0 @@
-{
-    "id": "96647560-63f8-4e5f-b072-e9b5dcfd44e1",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/iotthingsgraph"
-    ]
-}

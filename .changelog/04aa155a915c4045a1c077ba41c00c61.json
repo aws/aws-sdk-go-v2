@@ -1,8 +1,0 @@
-{
-    "id": "04aa155a-915c-4045-a1c0-77ba41c00c61",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/pinpointemail"
-    ]
-}

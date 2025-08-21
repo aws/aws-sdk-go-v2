@@ -1,8 +1,0 @@
-{
-    "id": "4c92b5a5-90ed-4236-ad84-e480ce590d8e",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/appfabric"
-    ]
-}

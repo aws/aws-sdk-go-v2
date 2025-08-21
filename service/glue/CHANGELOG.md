@@ -1,3 +1,8 @@
+# v1.127.0 (2025-08-21)
+
+* **Feature**: Added support for preprocessing queries in Data Quality operations through new DataQualityGlueTable structure.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.126.1 (2025-08-20)
 
 * **Bug Fix**: Remove unused deserialization code.

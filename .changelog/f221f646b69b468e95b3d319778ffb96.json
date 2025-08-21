@@ -1,8 +1,0 @@
-{
-    "id": "f221f646-b69b-468e-95b3-d319778ffb96",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/dynamodbstreams"
-    ]
-}

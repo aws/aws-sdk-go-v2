@@ -1,8 +1,0 @@
-{
-    "id": "ffe06653-841d-4f6b-ae37-bdc947d1660a",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/sts"
-    ]
-}

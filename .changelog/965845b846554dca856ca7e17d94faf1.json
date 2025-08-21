@@ -1,8 +1,0 @@
-{
-    "id": "965845b8-4655-4dca-856c-a7e17d94faf1",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/mediapackage"
-    ]
-}

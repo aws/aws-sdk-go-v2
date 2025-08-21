@@ -1,8 +1,0 @@
-{
-    "id": "856721fa-8401-4fa2-9e49-909818f312eb",
-    "type": "feature",
-    "description": "Added support for preprocessing queries in Data Quality operations through new DataQualityGlueTable structure.",
-    "modules": [
-        "service/glue"
-    ]
-}

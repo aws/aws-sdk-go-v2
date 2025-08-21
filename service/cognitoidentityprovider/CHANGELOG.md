@@ -1,3 +1,7 @@
+# v1.57.1 (2025-08-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.57.0 (2025-08-20)
 
 * **Feature**: This release adds support for the new Terms APIs which allow displaying Terms of Use and Privacy Policy on the Managed Login user-registration page.

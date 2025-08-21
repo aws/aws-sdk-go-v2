@@ -1,8 +1,0 @@
-{
-    "id": "11721fee-e142-47ca-93b6-b06e7743bcae",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/observabilityadmin"
-    ]
-}

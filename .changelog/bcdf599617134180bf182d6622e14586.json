@@ -1,8 +1,0 @@
-{
-    "id": "bcdf5996-1713-4180-bf18-2d6622e14586",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/ssmquicksetup"
-    ]
-}

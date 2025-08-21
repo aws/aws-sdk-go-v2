@@ -1,8 +1,0 @@
-{
-    "id": "2de395ff-bba9-41fa-b74f-653fd44c2eaf",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/cloudfront"
-    ]
-}

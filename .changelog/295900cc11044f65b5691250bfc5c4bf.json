@@ -1,8 +1,0 @@
-{
-    "id": "295900cc-1104-4f65-b569-1250bfc5c4bf",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/mediatailor"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "971b14ef-1550-449f-bc55-eebb7186bfd6",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/mediaconvert"
-    ]
-}

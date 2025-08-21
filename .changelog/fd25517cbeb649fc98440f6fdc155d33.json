@@ -1,8 +1,0 @@
-{
-    "id": "fd25517c-beb6-49fc-9844-0f6fdc155d33",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/elasticbeanstalk"
-    ]
-}

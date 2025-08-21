@@ -1,8 +1,0 @@
-{
-    "id": "331fe056-418e-4333-896f-e3144c81e637",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/iotevents"
-    ]
-}

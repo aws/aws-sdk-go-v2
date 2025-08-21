@@ -1,3 +1,7 @@
+# v1.211.1 (2025-08-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.211.0 (2025-08-20)
 
 * **Feature**: This release adds 1/ Launch ml.p5.4xlarge instance in Processing jobs, Training jobs and Training Plan 2/ Makes S3Uri to be required for S3FileSystem and S3FileSystemConfig.

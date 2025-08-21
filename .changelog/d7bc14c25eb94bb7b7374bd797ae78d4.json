@@ -1,8 +1,0 @@
-{
-    "id": "d7bc14c2-5eb9-4bb7-b737-4bd797ae78d4",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/cloudtrail"
-    ]
-}

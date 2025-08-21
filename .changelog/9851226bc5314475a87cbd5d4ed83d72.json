@@ -1,8 +1,0 @@
-{
-    "id": "9851226b-c531-4475-a87c-bd5d4ed83d72",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/mediaconnect"
-    ]
-}

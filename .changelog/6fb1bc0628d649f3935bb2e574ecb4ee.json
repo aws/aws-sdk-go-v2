@@ -1,8 +1,0 @@
-{
-    "id": "6fb1bc06-28d6-49f3-935b-b2e574ecb4ee",
-    "type": "feature",
-    "description": "The default application in a stream group can now be changed at any time using UpdateStreamGroup to update the DefaultApplicationIdentifier.",
-    "modules": [
-        "service/gameliftstreams"
-    ]
-}

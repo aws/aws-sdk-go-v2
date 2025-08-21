@@ -1,8 +1,0 @@
-{
-    "id": "83591e6e-dff5-4229-a2cb-5e69e98e65ce",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/kinesisvideowebrtcstorage"
-    ]
-}

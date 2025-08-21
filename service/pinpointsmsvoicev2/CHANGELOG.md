@@ -1,3 +1,7 @@
+# v1.24.1 (2025-08-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.0 (2025-08-20)
 
 * **Feature**: This change added InternationalSendingEnbaled as part of describe/Update/Request phone number API response, and as part of update/Request phone number API request

@@ -1,8 +1,0 @@
-{
-    "id": "66cabff2-71fe-4989-8c23-1a6c78aed83d",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/lightsail"
-    ]
-}

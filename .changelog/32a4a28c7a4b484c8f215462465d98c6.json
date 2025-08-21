@@ -1,8 +1,0 @@
-{
-    "id": "32a4a28c-7a4b-484c-8f21-5462465d98c6",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/accessanalyzer"
-    ]
-}

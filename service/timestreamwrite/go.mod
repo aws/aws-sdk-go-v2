@@ -3,10 +3,10 @@ module github.com/aws/aws-sdk-go-v2/service/timestreamwrite
 go 1.22
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.38.0
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.3
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.3
-	github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery v1.11.3
+	github.com/aws/aws-sdk-go-v2 v1.38.1
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.4
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.4
+	github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery v1.11.4
 	github.com/aws/smithy-go v1.22.5
 )
 

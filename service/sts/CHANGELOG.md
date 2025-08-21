@@ -1,3 +1,8 @@
+# v1.38.0 (2025-08-21)
+
+* **Feature**: Remove incorrect endpoint tests
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.37.1 (2025-08-20)
 
 * **Bug Fix**: Remove unused deserialization code.

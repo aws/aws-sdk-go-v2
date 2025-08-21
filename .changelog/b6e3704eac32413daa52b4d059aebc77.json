@@ -1,8 +1,0 @@
-{
-    "id": "b6e3704e-ac32-413d-aa52-b4d059aebc77",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/resourcegroups"
-    ]
-}

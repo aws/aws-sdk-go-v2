@@ -1,8 +1,0 @@
-{
-    "id": "b54401ac-4d19-4b45-b26a-ad8542da4fdb",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/backupgateway"
-    ]
-}

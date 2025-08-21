@@ -1,8 +1,0 @@
-{
-    "id": "a0f24a6d-94ca-4fa6-a427-6d45def40510",
-    "type": "feature",
-    "description": "Add control for request checksum calculation.",
-    "modules": [
-        "feature/s3/manager"
-    ]
-}

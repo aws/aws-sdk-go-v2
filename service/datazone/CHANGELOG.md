@@ -1,3 +1,7 @@
+# v1.38.1 (2025-08-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.38.0 (2025-08-20)
 
 * **Feature**: This release supports policy grant identifier for cloud formation integration

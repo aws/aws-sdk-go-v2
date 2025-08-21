@@ -1,8 +1,0 @@
-{
-    "id": "ed22febd-a3cc-4a4c-a47a-5cb2d9f263b8",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/panorama"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "6127510b-d871-40d9-ad87-d63122055027",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/appintegrations"
-    ]
-}

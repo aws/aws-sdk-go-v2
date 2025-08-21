@@ -1,8 +1,0 @@
-{
-    "id": "e4a6eab2-2572-4efb-9f3f-3a3627703540",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/verifiedpermissions"
-    ]
-}

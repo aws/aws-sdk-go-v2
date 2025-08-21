@@ -1,3 +1,7 @@
+# v1.0.2 (2025-08-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.0.1 (2025-08-20)
 
 * **Bug Fix**: Remove unused deserialization code.

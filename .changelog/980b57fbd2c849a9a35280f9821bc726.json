@@ -1,8 +1,0 @@
-{
-    "id": "980b57fb-d2c8-49a9-a352-80f9821bc726",
-    "type": "documentation",
-    "description": "Doc-only updates for Incident Manager Contacts August 2025",
-    "modules": [
-        "service/ssmcontacts"
-    ]
-}

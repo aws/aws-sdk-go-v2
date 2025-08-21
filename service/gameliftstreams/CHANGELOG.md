@@ -1,3 +1,8 @@
+# v1.6.0 (2025-08-21)
+
+* **Feature**: The default application in a stream group can now be changed at any time using UpdateStreamGroup to update the DefaultApplicationIdentifier.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.5.1 (2025-08-20)
 
 * **Bug Fix**: Remove unused deserialization code.

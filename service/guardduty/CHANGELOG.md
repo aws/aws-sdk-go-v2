@@ -1,3 +1,8 @@
+# v1.63.0 (2025-08-21)
+
+* **Feature**: Remove Pattern trait from email field
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.62.1 (2025-08-20)
 
 * **Bug Fix**: Remove unused deserialization code.

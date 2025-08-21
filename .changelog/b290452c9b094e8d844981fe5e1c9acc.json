@@ -1,8 +1,0 @@
-{
-    "id": "b290452c-9b09-4e8d-8449-81fe5e1c9acc",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/workspacesweb"
-    ]
-}

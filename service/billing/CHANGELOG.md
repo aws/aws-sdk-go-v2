@@ -1,3 +1,7 @@
+# v1.7.1 (2025-08-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.7.0 (2025-08-20)
 
 * **Feature**: Clarify IPv4 and IPv6 endpoints

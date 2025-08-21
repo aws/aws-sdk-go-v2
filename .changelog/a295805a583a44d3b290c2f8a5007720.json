@@ -1,8 +1,0 @@
-{
-    "id": "a295805a-583a-44d3-b290-c2f8a5007720",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/managedblockchain"
-    ]
-}
