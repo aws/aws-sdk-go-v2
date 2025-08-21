@@ -2768,7 +2768,7 @@
                     "target": "com.amazonaws.guardduty#Name",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>A user-friendly name to identify the threat entity set.</p>\n         <p>\n            <b>List naming constraints</b> - The name of your list can include \n                                lowercase letters, uppercase letters, numbers, dash (-), and underscore (_).</p>",
+                        "smithy.api#documentation": "<p>A user-friendly name to identify the threat entity set.</p>\n         <p>The name of your list can include \n                                lowercase letters, uppercase letters, numbers, dash (-), and underscore (_).</p>",
                         "smithy.api#jsonName": "name",
                         "smithy.api#required": {}
                     }
@@ -3005,7 +3005,7 @@
                     "target": "com.amazonaws.guardduty#Name",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>A user-friendly name to identify the trusted entity set.</p>\n         <p>\n            <b>List naming constraints</b> - The name of your list can include \n                                lowercase letters, uppercase letters, numbers, dash (-), and underscore (_).</p>",
+                        "smithy.api#documentation": "<p>A user-friendly name to identify the trusted entity set.</p>\n         <p>The name of your list can include \n                                lowercase letters, uppercase letters, numbers, dash (-), and underscore (_).</p>",
                         "smithy.api#jsonName": "name",
                         "smithy.api#required": {}
                     }
@@ -5584,7 +5584,6 @@
                     "min": 6,
                     "max": 64
                 },
-                "smithy.api#pattern": "^See rules in parameter description$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -9307,17 +9306,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -9328,17 +9316,6 @@
                                 "Region": "us-iso-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         },
                         {
@@ -9355,17 +9332,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -9376,17 +9342,6 @@
                                 "Region": "us-isob-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         },
                         {
@@ -18096,7 +18051,7 @@
                 "Name": {
                     "target": "com.amazonaws.guardduty#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p>A user-friendly name to identify the trusted entity set.</p>\n         <p>\n            <b>List naming constraints</b> - The name of your list can include \n                                lowercase letters, uppercase letters, numbers, dash (-), and underscore (_).</p>",
+                        "smithy.api#documentation": "<p>A user-friendly name to identify the trusted entity set.</p>\n         <p>The name of your list can include \n                                lowercase letters, uppercase letters, numbers, dash (-), and underscore (_).</p>",
                         "smithy.api#jsonName": "name"
                     }
                 },
@@ -18271,7 +18226,7 @@
                 "Name": {
                     "target": "com.amazonaws.guardduty#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p>A user-friendly name to identify the trusted entity set.</p>\n         <p>\n            <b>List naming constraints</b> - The name of your list can include \n                                lowercase letters, uppercase letters, numbers, dash (-), and underscore (_).</p>",
+                        "smithy.api#documentation": "<p>A user-friendly name to identify the trusted entity set.</p>\n         <p>The name of your list can include \n                                lowercase letters, uppercase letters, numbers, dash (-), and underscore (_).</p>",
                         "smithy.api#jsonName": "name"
                     }
                 },

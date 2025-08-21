@@ -1630,17 +1630,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -1651,17 +1640,6 @@
                                 "Region": "us-iso-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         },
                         {
@@ -1678,17 +1656,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -1699,17 +1666,6 @@
                                 "Region": "us-isob-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         },
                         {
@@ -4129,7 +4085,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Annotate datapoints over time for a specific data quality statistic.</p>"
+                "smithy.api#documentation": "<p>Annotate datapoints over time for a specific data quality statistic.\n        The API requires both profileID and statisticID as part of the InclusionAnnotation input.\n        The API only works for a single statisticId across multiple profiles.</p>"
             }
         },
         "com.amazonaws.glue#BatchPutDataQualityStatisticAnnotationRequest": {
@@ -4138,7 +4094,7 @@
                 "InclusionAnnotations": {
                     "target": "com.amazonaws.glue#InclusionAnnotationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>DatapointInclusionAnnotation</code>'s.</p>",
+                        "smithy.api#documentation": "<p>A list of <code>DatapointInclusionAnnotation</code>'s. The InclusionAnnotations must contain a profileId and statisticId.\n        If there are multiple InclusionAnnotations, the list must refer to a single statisticId across multiple profileIds.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -13564,6 +13520,52 @@
                 "smithy.api#documentation": "<p>Additional run options you can specify for an evaluation run.</p>"
             }
         },
+        "com.amazonaws.glue#DataQualityGlueTable": {
+            "type": "structure",
+            "members": {
+                "DatabaseName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A database name in the Glue Data Catalog.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A table name in the Glue Data Catalog.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CatalogId": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the Glue Data Catalog.</p>"
+                    }
+                },
+                "ConnectionName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the connection to the Glue Data Catalog.</p>"
+                    }
+                },
+                "AdditionalOptions": {
+                    "target": "com.amazonaws.glue#GlueTableAdditionalOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional options for the table. Currently there are two keys supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>pushDownPredicate</code>: to filter on partitions without having to list and read all the files in your dataset.</p>\n            </li>\n            <li>\n               <p>\n                  <code>catalogPartitionPredicate</code>: to use server-side partition pruning using partition indexes in the Glue Data Catalog.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "PreProcessingQuery": {
+                    "target": "com.amazonaws.glue#PreProcessingQueryString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>SQL Query of SparkSQL format that can be used to pre-process the data for the table in Glue Data Catalog,\n            before running the Data Quality Operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The database and table in the Glue Data Catalog that is used for input or output data\n            for Data Quality Operations.</p>"
+            }
+        },
         "com.amazonaws.glue#DataQualityMetricValues": {
             "type": "structure",
             "members": {
@@ -14247,8 +14249,13 @@
                 "GlueTable": {
                     "target": "com.amazonaws.glue#GlueTable",
                     "traits": {
-                        "smithy.api#documentation": "<p>An Glue table.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>An Glue table.</p>"
+                    }
+                },
+                "DataQualityGlueTable": {
+                    "target": "com.amazonaws.glue#DataQualityGlueTable",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Glue table for Data Quality Operations.</p>"
                     }
                 }
             },
@@ -34525,6 +34532,17 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies a target that uses Postgres SQL.</p>"
+            }
+        },
+        "com.amazonaws.glue#PreProcessingQueryString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>SQL Query of SparkSQL format that can be used to pre-process data before running Data Quality Operations.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 51200
+                },
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
             }
         },
         "com.amazonaws.glue#Predecessor": {

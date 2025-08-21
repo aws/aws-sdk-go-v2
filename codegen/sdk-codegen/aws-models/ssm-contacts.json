@@ -289,7 +289,7 @@
                 "RetryIntervalInMinutes": {
                     "target": "com.amazonaws.ssmcontacts#RetryIntervalInMinutes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of minutes to wait to retry sending engagement in the case the engagement\n         initially fails.</p>"
+                        "smithy.api#documentation": "<p>The number of minutes to wait before retrying to send engagement if the engagement\n         initially failed.</p>"
                     }
                 }
             },
@@ -382,7 +382,7 @@
                 "Type": {
                     "target": "com.amazonaws.ssmcontacts#ContactType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Refers to the type of contact. A single contact is type <code>PERSONAL</code> and an\n         escalation plan is type <code>ESCALATION</code>.</p>",
+                        "smithy.api#documentation": "<p>The type of contact.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PERSONAL</code>: A single, individual contact.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ESCALATION</code>: An escalation plan.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ONCALL_SCHEDULE</code>: An on-call schedule.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -716,7 +716,7 @@
                 "Type": {
                     "target": "com.amazonaws.ssmcontacts#ContactType",
                     "traits": {
-                        "smithy.api#documentation": "<p>To create an escalation plan use <code>ESCALATION</code>. To create a contact use\n            <code>PERSONAL</code>.</p>",
+                        "smithy.api#documentation": "<p>The type of contact to create.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PERSONAL</code>: A single, individual contact.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ESCALATION</code>: An escalation plan.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ONCALL_SCHEDULE</code>: An on-call schedule.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -894,7 +894,7 @@
                 "ContactIds": {
                     "target": "com.amazonaws.ssmcontacts#RotationContactsArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the contacts to add to the rotation.</p>\n         <p>The order that you list the contacts in is their shift order in the rotation schedule.\n         To change the order of the contact's shifts, use the <a>UpdateRotation</a>\n         operation.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the contacts to add to the rotation.</p>\n         <note>\n            <p>Only the <code>PERSONAL</code> contact type is supported. The contact types\n               <code>ESCALATION</code> and <code>ONCALL_SCHEDULE</code> are not supported for this\n            operation. </p>\n         </note>\n         <p>The order that you list the contacts in is their shift order in the rotation schedule.\n         To change the order of the contact's shifts, use the <a>UpdateRotation</a>\n         operation.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -907,7 +907,7 @@
                 "TimeZoneId": {
                     "target": "com.amazonaws.ssmcontacts#TimeZoneId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time zone to base the rotation’s activity on in Internet Assigned Numbers Authority\n         (IANA) format. For example: \"America/Los_Angeles\", \"UTC\", or \"Asia/Seoul\". For more\n         information, see the <a href=\"https://www.iana.org/time-zones\">Time Zone\n            Database</a> on the IANA website.</p>\n         <note>\n            <p>Designators for time zones that don’t support Daylight Savings Time rules, such as\n            Pacific Standard Time (PST) and Pacific Daylight Time (PDT), are not supported.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The time zone to base the rotation’s activity on in Internet Assigned Numbers Authority\n         (IANA) format. For example: \"America/Los_Angeles\", \"UTC\", or \"Asia/Seoul\". For more\n         information, see the <a href=\"https://www.iana.org/time-zones\">Time Zone\n            Database</a> on the IANA website.</p>\n         <note>\n            <p>Designators for time zones that don’t support Daylight Savings Time rules, such as\n            Pacific Standard Time (PST), are not supported.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1114,7 +1114,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>To remove a contact from Incident Manager, you can delete the contact. Deleting a contact\n         removes them from all escalation plans and related response plans. Deleting an escalation\n         plan removes it from all related response plans. You will have to recreate the contact and\n         its contact channels before you can use it again.</p>"
+                "smithy.api#documentation": "<p>To remove a contact from Incident Manager, you can delete the contact. However, deleting a\n         contact does not remove it from escalation plans and related response plans. Deleting an\n         escalation plan also does not remove it from all related response plans. To modify an\n         escalation plan, we recommend using the <a>UpdateContact</a> action to specify a\n         different existing contact.</p>"
             }
         },
         "com.amazonaws.ssmcontacts#DeleteContactChannel": {
@@ -1143,7 +1143,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>To no longer receive engagements on a contact channel, you can delete the channel from a\n         contact. Deleting the contact channel removes it from the contact's engagement plan. If you\n         delete the only contact channel for a contact, you won't be able to engage that contact\n         during an incident.</p>"
+                "smithy.api#documentation": "<p>To stop receiving engagements on a contact channel, you can delete the channel from a\n         contact. Deleting the contact channel does not remove it from the contact's engagement\n         plan, but the stage that includes the channel will be ignored. If you delete the only\n         contact channel for a contact, you'll no longer be able to engage that contact during an\n         incident.</p>"
             }
         },
         "com.amazonaws.ssmcontacts#DeleteContactChannelRequest": {
@@ -1869,7 +1869,7 @@
                 "Type": {
                     "target": "com.amazonaws.ssmcontacts#ContactType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of contact, either <code>PERSONAL</code> or <code>ESCALATION</code>.</p>",
+                        "smithy.api#documentation": "<p>The type of contact.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2297,7 +2297,7 @@
                 "Type": {
                     "target": "com.amazonaws.ssmcontacts#ContactType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of contact. A contact is type <code>PERSONAL</code> and an escalation plan is\n         type <code>ESCALATION</code>.</p>"
+                        "smithy.api#documentation": "<p>The type of contact.</p>"
                     }
                 }
             },
@@ -3154,7 +3154,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the tags of an escalation plan or contact.</p>"
+                "smithy.api#documentation": "<p>Lists the tags of a contact, escalation plan, rotation, or on-call schedule.</p>"
             }
         },
         "com.amazonaws.ssmcontacts#ListTagsForResourceRequest": {
@@ -3163,7 +3163,7 @@
                 "ResourceARN": {
                     "target": "com.amazonaws.ssmcontacts#AmazonResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact or escalation plan.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact, escalation plan, rotation, or on-call\n         schedule.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3588,14 +3588,14 @@
                 "NumberOfOnCalls": {
                     "target": "com.amazonaws.ssmcontacts#NumberOfOnCalls",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of contacts, or shift team members designated to be on call concurrently\n         during a shift. For example, in an on-call schedule containing ten contacts, a value of\n            <code>2</code> designates that two of them are on call at any given time.</p>",
+                        "smithy.api#documentation": "<p>The number of contacts, or shift team members designated to be on call concurrently\n         during a shift. For example, in an on-call schedule that contains ten contacts, a value of\n            <code>2</code> designates that two of them are on call at any given time.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ShiftCoverages": {
                     "target": "com.amazonaws.ssmcontacts#ShiftCoveragesMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the days of the week included in on-call rotation coverage.</p>"
+                        "smithy.api#documentation": "<p>Information about the days of the week that the on-call rotation coverage\n         includes.</p>"
                     }
                 },
                 "RecurrenceMultiplier": {
@@ -4073,7 +4073,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -4116,7 +4115,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -4129,7 +4129,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -4143,7 +4142,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -4166,7 +4164,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -4201,7 +4198,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -4212,14 +4208,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -4233,14 +4231,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -4249,11 +4245,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -4264,14 +4260,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -4285,7 +4283,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -4305,7 +4302,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -4316,14 +4312,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -4334,9 +4332,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -4504,17 +4504,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -4525,17 +4514,6 @@
                                 "Region": "us-iso-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         },
                         {
@@ -4552,17 +4530,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -4573,17 +4540,6 @@
                                 "Region": "us-isob-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         },
                         {
@@ -5208,13 +5164,13 @@
                 "ChannelTargetInfo": {
                     "target": "com.amazonaws.ssmcontacts#ChannelTargetInfo",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the contact channel Incident Manager is engaging.</p>"
+                        "smithy.api#documentation": "<p>Information about the contact channel that Incident Manager engages.</p>"
                     }
                 },
                 "ContactTargetInfo": {
                     "target": "com.amazonaws.ssmcontacts#ContactTargetInfo",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the contact that Incident Manager is engaging.</p>"
+                        "smithy.api#documentation": "<p>Information about the contact that Incident Manager engages.</p>"
                     }
                 }
             },
@@ -5535,7 +5491,7 @@
                 "ContactIds": {
                     "target": "com.amazonaws.ssmcontacts#RotationContactsArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the contacts to include in the updated rotation. </p>\n         <p>The order in which you list the contacts is their shift order in the rotation\n         schedule.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the contacts to include in the updated rotation. </p>\n         <note>\n            <p>Only the <code>PERSONAL</code> contact type is supported. The contact types\n               <code>ESCALATION</code> and <code>ONCALL_SCHEDULE</code> are not supported for this\n            operation. </p>\n         </note>\n         <p>The order in which you list the contacts is their shift order in the rotation\n         schedule.</p>"
                     }
                 },
                 "StartTime": {
@@ -5547,7 +5503,7 @@
                 "TimeZoneId": {
                     "target": "com.amazonaws.ssmcontacts#TimeZoneId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time zone to base the updated rotation’s activity on, in Internet Assigned Numbers\n         Authority (IANA) format. For example: \"America/Los_Angeles\", \"UTC\", or \"Asia/Seoul\". For\n         more information, see the <a href=\"https://www.iana.org/time-zones\">Time Zone\n            Database</a> on the IANA website.</p>\n         <note>\n            <p>Designators for time zones that don’t support Daylight Savings Time Rules, such as\n            Pacific Standard Time (PST) and Pacific Daylight Time (PDT), aren't supported.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The time zone to base the updated rotation’s activity on, in Internet Assigned Numbers\n         Authority (IANA) format. For example: \"America/Los_Angeles\", \"UTC\", or \"Asia/Seoul\". For\n         more information, see the <a href=\"https://www.iana.org/time-zones\">Time Zone\n            Database</a> on the IANA website.</p>\n         <note>\n            <p>Designators for time zones that don’t support Daylight Savings Time Rules, such as\n            Pacific Standard Time (PST), aren't supported.</p>\n         </note>"
                     }
                 },
                 "Recurrence": {
