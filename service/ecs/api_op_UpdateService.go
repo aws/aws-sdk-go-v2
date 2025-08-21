@@ -154,6 +154,8 @@ type UpdateServiceInput struct {
 	// For more information, see [Balancing an Amazon ECS service across Availability Zones] in the Amazon Elastic Container Service Developer
 	// Guide .
 	//
+	// This parameter doesn't trigger a new service deployment.
+	//
 	// [Balancing an Amazon ECS service across Availability Zones]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-rebalancing.html
 	AvailabilityZoneRebalancing types.AvailabilityZoneRebalancing
 
@@ -185,6 +187,8 @@ type UpdateServiceInput struct {
 	//
 	// For information about Amazon Web Services CDK considerations, see [Amazon Web Services CDK considerations].
 	//
+	// This parameter doesn't trigger a new service deployment.
+	//
 	// [Amazon Web Services CDK considerations]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service-parameters.html
 	CapacityProviderStrategy []types.CapacityProviderStrategyItem
 
@@ -197,6 +201,8 @@ type UpdateServiceInput struct {
 
 	// Optional deployment parameters that control how many tasks run during the
 	// deployment and the ordering of stopping and starting tasks.
+	//
+	// This parameter doesn't trigger a new service deployment.
 	DeploymentConfiguration *types.DeploymentConfiguration
 
 	// The deployment controller to use for the service.
@@ -204,6 +210,8 @@ type UpdateServiceInput struct {
 
 	// The number of instantiations of the task to place and keep running in your
 	// service.
+	//
+	// This parameter doesn't trigger a new service deployment.
 	DesiredCount *int32
 
 	// Determines whether to turn on Amazon ECS managed tags for the tasks in the
@@ -214,6 +222,8 @@ type UpdateServiceInput struct {
 	// tags on all tasks, set forceNewDeployment to true , so that Amazon ECS starts
 	// new tasks with the updated tags.
 	//
+	// This parameter doesn't trigger a new service deployment.
+	//
 	// [Tagging Your Amazon ECS Resources]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
 	EnableECSManagedTags *bool
 
@@ -221,6 +231,8 @@ type UpdateServiceInput struct {
 	//
 	// If you do not want to override the value that was set when the service was
 	// created, you can set this to null when performing this action.
+	//
+	// This parameter doesn't trigger a new service deployment.
 	EnableExecuteCommand *bool
 
 	// Determines whether to force a new deployment of the service. By default,
@@ -241,6 +253,8 @@ type UpdateServiceInput struct {
 	// years). During that time, the Amazon ECS service scheduler ignores health check
 	// status. This grace period can prevent the service scheduler from marking tasks
 	// as unhealthy and stopping them before they have time to come up.
+	//
+	// This parameter doesn't trigger a new service deployment.
 	HealthCheckGracePeriodSeconds *int32
 
 	// You must have a service-linked role when you update this property
@@ -269,12 +283,16 @@ type UpdateServiceInput struct {
 	//
 	// You can remove existing loadBalancers by passing an empty list.
 	//
+	// This parameter triggers a new service deployment.
+	//
 	// [CreateTaskSet]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateTaskSet.html
 	// [Register multiple target groups with a service]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/register-multiple-targetgroups.html
 	// [CreateDeployment]: https://docs.aws.amazon.com/codedeploy/latest/APIReference/API_CreateDeployment.html
 	LoadBalancers []types.LoadBalancer
 
 	// An object representing the network configuration for the service.
+	//
+	// This parameter triggers a new service deployment.
 	NetworkConfiguration *types.NetworkConfiguration
 
 	// An array of task placement constraint objects to update the service to use. If
@@ -285,6 +303,8 @@ type UpdateServiceInput struct {
 	//
 	// You can specify a maximum of 10 constraints for each task. This limit includes
 	// constraints in the task definition and those specified at runtime.
+	//
+	// This parameter doesn't trigger a new service deployment.
 	PlacementConstraints []types.PlacementConstraint
 
 	// The task placement strategy objects to update the service to use. If no value
@@ -294,12 +314,16 @@ type UpdateServiceInput struct {
 	// specify an empty object.
 	//
 	// You can specify a maximum of five strategy rules for each service.
+	//
+	// This parameter doesn't trigger a new service deployment.
 	PlacementStrategy []types.PlacementStrategy
 
 	// The platform version that your tasks in the service run on. A platform version
 	// is only specified for tasks using the Fargate launch type. If a platform version
 	// is not specified, the LATEST platform version is used. For more information,
 	// see [Fargate Platform Versions]in the Amazon Elastic Container Service Developer Guide.
+	//
+	// This parameter triggers a new service deployment.
 	//
 	// [Fargate Platform Versions]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
 	PlatformVersion *string
@@ -310,6 +334,8 @@ type UpdateServiceInput struct {
 	// Only tasks launched after the update will reflect the update. To update the
 	// tags on all tasks, set forceNewDeployment to true , so that Amazon ECS starts
 	// new tasks with the updated tags.
+	//
+	// This parameter doesn't trigger a new service deployment.
 	PropagateTags types.PropagateTags
 
 	// The configuration for this service to discover and connect to services, and be
@@ -321,6 +347,8 @@ type UpdateServiceInput struct {
 	// and metrics for increased visibility. Only the tasks that Amazon ECS services
 	// create are supported with Service Connect. For more information, see [Service Connect]in the
 	// Amazon Elastic Container Service Developer Guide.
+	//
+	// This parameter triggers a new service deployment.
 	//
 	// [Service Connect]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
 	ServiceConnectConfiguration *types.ServiceConnectConfiguration
@@ -339,6 +367,8 @@ type UpdateServiceInput struct {
 	//
 	// You can remove existing serviceRegistries by passing an empty list.
 	//
+	// This parameter triggers a new service deployment.
+	//
 	// [role]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html#ECS-CreateService-request-role
 	// [Service Discovery]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
 	ServiceRegistries []types.ServiceRegistry
@@ -348,6 +378,8 @@ type UpdateServiceInput struct {
 	// revision is used. If you modify the task definition with UpdateService , Amazon
 	// ECS spawns a task with the new version of the task definition and then stops an
 	// old task after the new version is running.
+	//
+	// This parameter triggers a new service deployment.
 	TaskDefinition *string
 
 	// The details of the volume that was configuredAtLaunch . You can configure the
@@ -356,11 +388,15 @@ type UpdateServiceInput struct {
 	// deployment is triggered. Otherwise, if this configuration differs from the
 	// existing one, it triggers a new deployment.
 	//
+	// This parameter triggers a new service deployment.
+	//
 	// [ServiceManagedEBSVolumeConfiguration]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ServiceManagedEBSVolumeConfiguration.html
 	VolumeConfigurations []types.ServiceVolumeConfiguration
 
 	// An object representing the VPC Lattice configuration for the service being
 	// updated.
+	//
+	// This parameter triggers a new service deployment.
 	VpcLatticeConfigurations []types.VpcLatticeConfiguration
 
 	noSmithyDocumentSerde

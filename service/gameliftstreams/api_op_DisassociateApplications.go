@@ -15,13 +15,15 @@ import (
 // no longer stream this application by using that stream group's allocated compute
 // resources. Any streams in process will continue until they terminate, which
 // helps avoid interrupting an end-user's stream. Amazon GameLift Streams will not
-// initiate new streams using this stream group. The disassociate action does not
-// affect the stream capacity of a stream group.
+// initiate new streams in the stream group using the disassociated application.
+// The disassociate action does not affect the stream capacity of a stream group.
 //
-// You can only disassociate an application if it's not a default application of
-// the stream group. Check DefaultApplicationIdentifier by calling [GetStreamGroup].
+// If you disassociate the default application, Amazon GameLift Streams will
+// automatically choose a new default application from the remaining associated
+// applications. To change which application is the default application, call [UpdateStreamGroup]and
+// specify a new DefaultApplicationIdentifier .
 //
-// [GetStreamGroup]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_GetStreamGroup.html
+// [UpdateStreamGroup]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_UpdateStreamGroup.html
 func (c *Client) DisassociateApplications(ctx context.Context, params *DisassociateApplicationsInput, optFns ...func(*Options)) (*DisassociateApplicationsOutput, error) {
 	if params == nil {
 		params = &DisassociateApplicationsInput{}

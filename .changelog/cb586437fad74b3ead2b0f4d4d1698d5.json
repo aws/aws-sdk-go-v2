@@ -1,0 +1,8 @@
+{
+    "id": "cb586437-fad7-4b3e-ad2b-0f4d4d1698d5",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/route53resolver"
+    ]
+}

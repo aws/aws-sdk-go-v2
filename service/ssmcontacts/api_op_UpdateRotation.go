@@ -44,6 +44,9 @@ type UpdateRotationInput struct {
 	// The Amazon Resource Names (ARNs) of the contacts to include in the updated
 	// rotation.
 	//
+	// Only the PERSONAL contact type is supported. The contact types ESCALATION and
+	// ONCALL_SCHEDULE are not supported for this operation.
+	//
 	// The order in which you list the contacts is their shift order in the rotation
 	// schedule.
 	ContactIds []string
@@ -56,8 +59,7 @@ type UpdateRotationInput struct {
 	// "Asia/Seoul". For more information, see the [Time Zone Database]on the IANA website.
 	//
 	// Designators for time zones that don’t support Daylight Savings Time Rules, such
-	// as Pacific Standard Time (PST) and Pacific Daylight Time (PDT), aren't
-	// supported.
+	// as Pacific Standard Time (PST), aren't supported.
 	//
 	// [Time Zone Database]: https://www.iana.org/time-zones
 	TimeZoneId *string

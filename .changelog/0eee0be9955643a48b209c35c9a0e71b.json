@@ -1,0 +1,8 @@
+{
+    "id": "0eee0be9-9556-43a4-8b20-9c35c9a0e71b",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/lookoutmetrics"
+    ]
+}

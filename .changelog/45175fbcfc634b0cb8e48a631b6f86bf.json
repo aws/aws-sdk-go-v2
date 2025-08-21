@@ -1,0 +1,8 @@
+{
+    "id": "45175fbc-fc63-4b0c-b8e4-8a631b6f86bf",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/greengrassv2"
+    ]
+}

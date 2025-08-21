@@ -49,11 +49,10 @@ type RemoveStreamGroupLocationsInput struct {
 	// This member is required.
 	Identifier *string
 
-	//  A set of locations to remove this stream group.
+	//  A set of locations to remove this stream group. For example, us-east-1 .
 	//
-	// A set of location names. For example, us-east-1 . For a complete list of
-	// locations that Amazon GameLift Streams supports, refer to [Regions, quotas, and limitations]in the Amazon
-	// GameLift Streams Developer Guide.
+	// For a complete list of locations that Amazon GameLift Streams supports, refer
+	// to [Regions, quotas, and limitations]in the Amazon GameLift Streams Developer Guide.
 	//
 	// [Regions, quotas, and limitations]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
 	//

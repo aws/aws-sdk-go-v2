@@ -16,8 +16,8 @@ type ChannelTargetInfo struct {
 	// This member is required.
 	ContactChannelId *string
 
-	// The number of minutes to wait to retry sending engagement in the case the
-	// engagement initially fails.
+	// The number of minutes to wait before retrying to send engagement if the
+	// engagement initially failed.
 	RetryIntervalInMinutes *int32
 
 	noSmithyDocumentSerde
@@ -37,8 +37,13 @@ type Contact struct {
 	// This member is required.
 	ContactArn *string
 
-	// Refers to the type of contact. A single contact is type PERSONAL and an
-	// escalation plan is type ESCALATION .
+	// The type of contact.
+	//
+	//   - PERSONAL : A single, individual contact.
+	//
+	//   - ESCALATION : An escalation plan.
+	//
+	//   - ONCALL_SCHEDULE : An on-call schedule.
 	//
 	// This member is required.
 	Type ContactType
@@ -315,8 +320,8 @@ type Receipt struct {
 type RecurrenceSettings struct {
 
 	// The number of contacts, or shift team members designated to be on call
-	// concurrently during a shift. For example, in an on-call schedule containing ten
-	// contacts, a value of 2 designates that two of them are on call at any given
+	// concurrently during a shift. For example, in an on-call schedule that contains
+	// ten contacts, a value of 2 designates that two of them are on call at any given
 	// time.
 	//
 	// This member is required.
@@ -333,7 +338,8 @@ type RecurrenceSettings struct {
 	// Information about on-call rotations that recur monthly.
 	MonthlySettings []MonthlySetting
 
-	// Information about the days of the week included in on-call rotation coverage.
+	// Information about the days of the week that the on-call rotation coverage
+	// includes.
 	ShiftCoverages map[string][]CoverageTime
 
 	// Information about on-call rotations that recur weekly.
@@ -504,10 +510,10 @@ type Tag struct {
 // The contact or contact channel that's being engaged.
 type Target struct {
 
-	// Information about the contact channel Incident Manager is engaging.
+	// Information about the contact channel that Incident Manager engages.
 	ChannelTargetInfo *ChannelTargetInfo
 
-	// Information about the contact that Incident Manager is engaging.
+	// Information about the contact that Incident Manager engages.
 	ContactTargetInfo *ContactTargetInfo
 
 	noSmithyDocumentSerde

@@ -1,0 +1,8 @@
+{
+    "id": "4a7d3c4b-0dd8-49ec-8ef2-ee47bc9d5086",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/directoryservice"
+    ]
+}

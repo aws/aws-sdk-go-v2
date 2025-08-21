@@ -1,0 +1,8 @@
+{
+    "id": "f42982e5-9c82-4e7f-96ca-aa24bfb435f1",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/elasticsearchservice"
+    ]
+}

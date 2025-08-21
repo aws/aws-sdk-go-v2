@@ -1,0 +1,8 @@
+{
+    "id": "1c549159-85b5-456c-9441-5858ffe0fd46",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/databasemigrationservice"
+    ]
+}

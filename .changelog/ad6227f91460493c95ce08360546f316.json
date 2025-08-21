@@ -1,0 +1,8 @@
+{
+    "id": "ad6227f9-1460-493c-95ce-08360546f316",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/kinesisvideosignaling"
+    ]
+}

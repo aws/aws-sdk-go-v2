@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the tags of an escalation plan or contact.
+// Lists the tags of a contact, escalation plan, rotation, or on-call schedule.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -29,7 +29,8 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the contact or escalation plan.
+	// The Amazon Resource Name (ARN) of the contact, escalation plan, rotation, or
+	// on-call schedule.
 	//
 	// This member is required.
 	ResourceARN *string

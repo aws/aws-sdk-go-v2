@@ -6555,6 +6555,24 @@ func validateDataCatalogEncryptionSettings(v *types.DataCatalogEncryptionSetting
 	}
 }
 
+func validateDataQualityGlueTable(v *types.DataQualityGlueTable) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataQualityGlueTable"}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDataQualityResultFilterCriteria(v *types.DataQualityResultFilterCriteria) error {
 	if v == nil {
 		return nil
@@ -6650,11 +6668,14 @@ func validateDataSource(v *types.DataSource) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DataSource"}
-	if v.GlueTable == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GlueTable"))
-	} else if v.GlueTable != nil {
+	if v.GlueTable != nil {
 		if err := validateGlueTable(v.GlueTable); err != nil {
 			invalidParams.AddNested("GlueTable", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataQualityGlueTable != nil {
+		if err := validateDataQualityGlueTable(v.DataQualityGlueTable); err != nil {
+			invalidParams.AddNested("DataQualityGlueTable", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

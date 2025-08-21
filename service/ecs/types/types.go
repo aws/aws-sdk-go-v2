@@ -321,9 +321,19 @@ type CapacityProviderStrategyItem struct {
 	CapacityProvider *string
 
 	// The base value designates how many tasks, at a minimum, to run on the specified
-	// capacity provider. Only one capacity provider in a capacity provider strategy
-	// can have a base defined. If no value is specified, the default value of 0 is
-	// used.
+	// capacity provider for each service. Only one capacity provider in a capacity
+	// provider strategy can have a base defined. If no value is specified, the default
+	// value of 0 is used.
+	//
+	// Base value characteristics:
+	//
+	//   - Only one capacity provider in a strategy can have a base defined
+	//
+	//   - Default value is 0 if not specified
+	//
+	//   - Valid range: 0 to 100,000
+	//
+	//   - Base requirements are satisfied first before weight distribution
 	Base int32
 
 	// The weight value designates the relative percentage of the total number of
@@ -339,12 +349,33 @@ type CapacityProviderStrategyItem struct {
 	// any RunTask or CreateService actions using the capacity provider strategy will
 	// fail.
 	//
-	// An example scenario for using weights is defining a strategy that contains two
-	// capacity providers and both have a weight of 1 , then when the base is
-	// satisfied, the tasks will be split evenly across the two capacity providers.
-	// Using that same logic, if you specify a weight of 1 for capacityProviderA and a
-	// weight of 4 for capacityProviderB, then for every one task that's run using
-	// capacityProviderA, four tasks would use capacityProviderB.
+	// Weight value characteristics:
+	//
+	//   - Weight is considered after the base value is satisfied
+	//
+	//   - Default value is 0 if not specified
+	//
+	//   - Valid range: 0 to 1,000
+	//
+	//   - At least one capacity provider must have a weight greater than zero
+	//
+	//   - Capacity providers with weight of 0 cannot place tasks
+	//
+	// Task distribution logic:
+	//
+	//   - Base satisfaction: The minimum number of tasks specified by the base value
+	//   are placed on that capacity provider
+	//
+	//   - Weight distribution: After base requirements are met, additional tasks are
+	//   distributed according to weight ratios
+	//
+	// Examples:
+	//
+	// Equal Distribution: Two capacity providers both with weight 1 will split tasks
+	// evenly after base requirements are met.
+	//
+	// Weighted Distribution: If capacityProviderA has weight 1 and capacityProviderB
+	// has weight 4 , then for every 1 task on A, 4 tasks will run on B.
 	Weight int32
 
 	noSmithyDocumentSerde
@@ -357,9 +388,9 @@ type CapacityProviderStrategyItem struct {
 type Cluster struct {
 
 	// The number of services that are running on the cluster in an ACTIVE state. You
-	// can view these services with [PListServices].
+	// can view these services with [ListServices].
 	//
-	// [PListServices]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListServices.html
+	// [ListServices]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListServices.html
 	ActiveServicesCount int32
 
 	// The resources attached to a cluster. When using a capacity provider with a
@@ -3293,7 +3324,7 @@ type LogConfiguration struct {
 	//
 	// max-buffer-size Required: No
 	//
-	// Default value: 1m
+	// Default value: 10m
 	//
 	// When non-blocking mode is used, the max-buffer-size log option controls the
 	// size of the buffer that's used for intermediate message storage. Make sure to
@@ -3421,11 +3452,6 @@ type ManagedScaling struct {
 	// When additional capacity is required, Amazon ECS will scale up the minimum
 	// scaling step size even if the actual demand is less than the minimum scaling
 	// step size.
-	//
-	// If you use a capacity provider with an Auto Scaling group configured with more
-	// than one Amazon EC2 instance type or Availability Zone, Amazon ECS will scale up
-	// by the exact minimum scaling step size value and will ignore both the maximum
-	// scaling step size as well as the capacity demand.
 	MinimumScalingStepSize *int32
 
 	// Determines whether to use managed scaling for the capacity provider.

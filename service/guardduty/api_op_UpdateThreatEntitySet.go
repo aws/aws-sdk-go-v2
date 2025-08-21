@@ -59,8 +59,8 @@ type UpdateThreatEntitySetInput struct {
 
 	// A user-friendly name to identify the trusted entity set.
 	//
-	// List naming constraints - The name of your list can include lowercase letters,
-	// uppercase letters, numbers, dash (-), and underscore (_).
+	// The name of your list can include lowercase letters, uppercase letters,
+	// numbers, dash (-), and underscore (_).
 	Name *string
 
 	noSmithyDocumentSerde

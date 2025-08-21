@@ -1,0 +1,8 @@
+{
+    "id": "09b564d8-27d0-4fb7-8500-4aff11683e0b",
+    "type": "feature",
+    "description": "Remove Pattern trait from email field",
+    "modules": [
+        "service/guardduty"
+    ]
+}

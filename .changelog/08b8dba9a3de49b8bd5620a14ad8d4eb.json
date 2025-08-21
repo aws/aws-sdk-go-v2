@@ -1,0 +1,8 @@
+{
+    "id": "08b8dba9-a3de-49b8-bd56-20a14ad8d4eb",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/appstream"
+    ]
+}

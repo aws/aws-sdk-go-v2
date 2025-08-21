@@ -1,0 +1,8 @@
+{
+    "id": "6afbea18-93e8-48b9-9137-e7ff91cafeff",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/mwaa"
+    ]
+}

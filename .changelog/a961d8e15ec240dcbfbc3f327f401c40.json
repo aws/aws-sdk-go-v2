@@ -1,0 +1,8 @@
+{
+    "id": "a961d8e1-5ec2-40dc-bfbc-3f327f401c40",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/grafana"
+    ]
+}

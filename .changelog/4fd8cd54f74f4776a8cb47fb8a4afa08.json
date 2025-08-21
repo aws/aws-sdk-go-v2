@@ -1,0 +1,8 @@
+{
+    "id": "4fd8cd54-f74f-4776-a8cb-47fb8a4afa08",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/timestreaminfluxdb"
+    ]
+}

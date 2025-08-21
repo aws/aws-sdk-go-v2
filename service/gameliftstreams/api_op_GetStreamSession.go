@@ -103,9 +103,11 @@ type GetStreamSessionOutput struct {
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	Arn *string
 
-	// The maximum length of time (in seconds) that Amazon GameLift Streams keeps the
-	// stream session open. At this point, Amazon GameLift Streams ends the stream
-	// session regardless of any existing client connections.
+	// The length of time that Amazon GameLift Streams should wait for a client to
+	// connect or reconnect to the stream session. This time span starts when the
+	// stream session reaches ACTIVE or PENDING_CLIENT_RECONNECTION state. If no
+	// client connects (or reconnects) before the timeout, Amazon GameLift Streams
+	// terminates the stream session.
 	ConnectionTimeoutSeconds *int32
 
 	// A timestamp that indicates when this resource was created. Timestamps are
@@ -123,11 +125,9 @@ type GetStreamSessionOutput struct {
 	// expressed using in ISO8601 format, such as: 2022-12-27T22:29:40+00:00 (UTC).
 	LastUpdatedAt *time.Time
 
-	// The location where Amazon GameLift Streams is hosting the stream session.
-	//
-	// A location's name. For example, us-east-1 . For a complete list of locations
-	// that Amazon GameLift Streams supports, refer to [Regions, quotas, and limitations]in the Amazon GameLift Streams
-	// Developer Guide.
+	// The location where Amazon GameLift Streams hosts and streams your application.
+	// For example, us-east-1 . For a complete list of locations that Amazon GameLift
+	// Streams supports, refer to [Regions, quotas, and limitations]in the Amazon GameLift Streams Developer Guide.
 	//
 	// [Regions, quotas, and limitations]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
 	Location *string
@@ -141,7 +141,9 @@ type GetStreamSessionOutput struct {
 	// The data transfer protocol in use with the stream session.
 	Protocol types.Protocol
 
-	// The length of time that Amazon GameLift Streams keeps the game session open.
+	// The maximum duration of a session. Amazon GameLift Streams will automatically
+	// terminate a session after this amount of time has elapsed, regardless of any
+	// existing client connections.
 	SessionLengthSeconds *int32
 
 	// The WebRTC ICE offer string that a client generates to initiate a connection to
@@ -152,8 +154,36 @@ type GetStreamSessionOutput struct {
 	// SignalRequest .
 	SignalResponse *string
 
-	// The current status of the stream session. A stream session can host clients
-	// when in ACTIVE status.
+	// The current status of the stream session. A stream session is ready for a
+	// client to connect when in ACTIVE status.
+	//
+	//   - ACTIVATING : The stream session is starting and preparing to stream.
+	//
+	//   - ACTIVE : The stream session is ready and waiting for a client connection. A
+	//   client has ConnectionTimeoutSeconds (specified in StartStreamSession ) from
+	//   when the session reaches ACTIVE state to establish a connection. If no client
+	//   connects within this timeframe, the session automatically terminates.
+	//
+	//   - CONNECTED : The stream session has a connected client. A session will
+	//   automatically terminate if there is no user input for 60 minutes, or if the
+	//   maximum length of a session specified by SessionLengthSeconds in
+	//   StartStreamSession is exceeded.
+	//
+	//   - ERROR : The stream session failed to activate.
+	//
+	//   - PENDING_CLIENT_RECONNECTION : A client has recently disconnected and the
+	//   stream session is waiting for the client to reconnect. A client has
+	//   ConnectionTimeoutSeconds (specified in StartStreamSession ) from when the
+	//   session reaches PENDING_CLIENT_RECONNECTION state to re-establish a
+	//   connection. If no client connects within this timeframe, the session
+	//   automatically terminates.
+	//
+	//   - RECONNECTING : A client has initiated a reconnect to a session that was in
+	//   PENDING_CLIENT_RECONNECTION state.
+	//
+	//   - TERMINATING : The stream session is ending.
+	//
+	//   - TERMINATED : The stream session has ended.
 	Status types.StreamSessionStatus
 
 	// A short description of the reason the stream session is in ERROR status.

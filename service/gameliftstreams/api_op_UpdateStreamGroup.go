@@ -24,12 +24,14 @@ import (
 //
 //   - Always-on: The streaming capacity that is allocated and ready to handle
 //     stream requests without delay. You pay for this capacity whether it's in use or
-//     not. Best for quickest time from streaming request to streaming session.
+//     not. Best for quickest time from streaming request to streaming session. Default
+//     is 1 when creating a stream group or adding a location.
 //
 //   - On-demand: The streaming capacity that Amazon GameLift Streams can allocate
 //     in response to stream requests, and then de-allocate when the session has
 //     terminated. This offers a cost control measure at the expense of a greater
-//     startup time (typically under 5 minutes).
+//     startup time (typically under 5 minutes). Default is 0 when creating a stream
+//     group or adding a location.
 //
 // To update a stream group, specify the stream group's Amazon Resource Name (ARN)
 // and provide the new values. If the request is successful, Amazon GameLift
@@ -59,6 +61,27 @@ type UpdateStreamGroupInput struct {
 	//
 	// This member is required.
 	Identifier *string
+
+	// The unique identifier of the Amazon GameLift Streams application that you want
+	// to set as the default application in a stream group. The application that you
+	// specify must be in READY status. The default application is pre-cached on
+	// always-on compute resources, reducing stream startup times. Other applications
+	// are automatically cached as needed.
+	//
+	// Note that this parameter only sets the default application in a stream group.
+	// To associate a new application to an existing stream group, you must use [AssociateApplications].
+	//
+	// When you switch default applications in a stream group, it can take up to a few
+	// hours for the new default application to be pre-cached.
+	//
+	// This value is an [Amazon Resource Name (ARN)] or ID that uniquely identifies the application resource.
+	// Example ARN:
+	// arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6 . Example
+	// ID: a-9ZY8X7Wv6 .
+	//
+	// [AssociateApplications]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_AssociateApplications.html
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+	DefaultApplicationIdentifier *string
 
 	// A descriptive label for the stream group.
 	Description *string
@@ -113,18 +136,18 @@ type UpdateStreamGroupOutput struct {
 	//
 	// A location can be in one of the following states:
 	//
-	//   - ACTIVATING: Amazon GameLift Streams is preparing the location. You cannot
+	//   - ACTIVATING : Amazon GameLift Streams is preparing the location. You cannot
 	//   stream from, scale the capacity of, or remove this location yet.
 	//
-	//   - ACTIVE: The location is provisioned with initial capacity. You can now
+	//   - ACTIVE : The location is provisioned with initial capacity. You can now
 	//   stream from, scale the capacity of, or remove this location.
 	//
-	//   - ERROR: Amazon GameLift Streams failed to set up this location. The
-	//   StatusReason field describes the error. You can remove this location and try to
-	//   add it again.
+	//   - ERROR : Amazon GameLift Streams failed to set up this location. The
+	//   StatusReason field describes the error. You can remove this location and try
+	//   to add it again.
 	//
-	//   - REMOVING: Amazon GameLift Streams is working to remove this location. It
-	//   releases all provisioned capacity for this location in this stream group.
+	//   - REMOVING : Amazon GameLift Streams is working to remove this location. This
+	//   will release all provisioned capacity for this location in this stream group.
 	LocationStates []types.LocationState
 
 	// The current status of the stream group resource. Possible statuses include the

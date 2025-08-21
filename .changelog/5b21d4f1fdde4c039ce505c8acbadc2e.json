@@ -1,0 +1,8 @@
+{
+    "id": "5b21d4f1-fdde-4c03-9ce5-05c8acbadc2e",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/ivs"
+    ]
+}

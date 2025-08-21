@@ -1,0 +1,8 @@
+{
+    "id": "81055f65-3ffc-4cc9-be5c-b6704a23fa1d",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/securitylake"
+    ]
+}

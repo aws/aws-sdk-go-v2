@@ -17,38 +17,97 @@ import (
 // that clients can use to access the stream. A stream session refers to an
 // instance of a stream that Amazon GameLift Streams transmits from the server to
 // the end-user. A stream session runs on a compute resource that a stream group
-// has allocated.
+// has allocated. The start stream session process works as follows:
 //
-// To start a new stream session, specify a stream group and application ID, along
-// with the transport protocol and signal request settings to use with the stream.
-// You must have associated at least one application to the stream group before
-// starting a stream session, either when creating the stream group, or by using [AssociateApplications].
+//   - Prerequisites:
+//
+//   - You must have a stream group in ACTIVE state
+//
+//   - You must have idle or on-demand capacity in a stream group in the location
+//     you want to stream from
+//
+//   - You must have at least one application associated to the stream group (use [AssociateApplications]
+//     if needed)
+//
+//   - Start stream request:
+//
+//   - Your backend server calls StartStreamSession to initiate connection
+//
+//   - Amazon GameLift Streams creates the stream session resource, assigns an
+//     Amazon Resource Name (ARN) value, and begins searching for available stream
+//     capacity to run the stream
+//
+//   - Session transitions to ACTIVATING status
+//
+//   - Placement completion:
+//
+//   - If Amazon GameLift Streams is successful in finding capacity for the
+//     stream, the stream session status changes to ACTIVE status and
+//     StartStreamSession returns stream connection information
+//
+//   - If Amazon GameLift Streams was not successful in finding capacity within
+//     the placement timeout period (defined according to the capacity type and
+//     platform type), the stream session status changes to ERROR status and
+//     StartStreamSession returns a StatusReason of placementTimeout
+//
+//   - Connection completion:
+//
+//   - Provide the new connection information to the requesting client
+//
+//   - Client must establish connection within ConnectionTimeoutSeconds (specified
+//     in StartStreamSession parameters)
+//
+//   - Session terminates automatically if client fails to connect in time
+//
+// For more information about the stream session lifecycle, see [Stream sessions] in the Amazon
+// GameLift Streams Developer Guide.
+//
+// Timeouts to be aware of that affect a stream session:
+//
+//   - Placement timeout: The amount of time that Amazon GameLift Streams has to
+//     find capacity for a stream request. Placement timeout varies based on the
+//     capacity type used to fulfill your stream request:
+//
+//   - Always-on capacity: 75 seconds
+//
+//   - On-demand capacity:
+//
+//   - Linux/Proton runtimes: 90 seconds
+//
+//   - Windows runtime: 10 minutes
+//
+//   - Connection timeout: The amount of time that Amazon GameLift Streams waits
+//     for a client to connect to a stream session in ACTIVE status, or reconnect to
+//     a stream session in PENDING_CLIENT_RECONNECTION status, the latter of which
+//     occurs when a client disconnects or loses connection from a stream session. If
+//     no client connects before the timeout, Amazon GameLift Streams terminates the
+//     stream session. This value is specified by ConnectionTimeoutSeconds in the
+//     StartStreamSession parameters.
+//
+//   - Idle timeout: A stream session will be terminated if no user input has been
+//     received for 60 minutes.
+//
+//   - Maximum session length: A stream session will be terminated after this
+//     amount of time has elapsed since it started, regardless of any existing client
+//     connections. This value is specified by SessionLengthSeconds in the
+//     StartStreamSession parameters.
+//
+// To start a new stream session, specify a stream group ID and application ID,
+// along with the transport protocol and signal request to use with the stream
+// session.
 //
 // For stream groups that have multiple locations, provide a set of locations
 // ordered by priority using a Locations parameter. Amazon GameLift Streams will
 // start a single stream session in the next available location. An application
-// must be finished replicating in a remote location before the remote location can
+// must be finished replicating to a remote location before the remote location can
 // host a stream.
 //
-// If the request is successful, Amazon GameLift Streams begins to prepare the
-// stream. Amazon GameLift Streams assigns an Amazon Resource Name (ARN) value to
-// the stream session resource and sets the status to ACTIVATING . During the
-// stream preparation process, Amazon GameLift Streams queues the request and
-// searches for available stream capacity to run the stream. This results in one of
-// the following:
+// To reconnect to a stream session after a client disconnects or loses
+// connection, use [CreateStreamSessionConnection].
 //
-//   - Amazon GameLift Streams identifies an available compute resource to run the
-//     application content and start the stream. When the stream is ready, the stream
-//     session's status changes to ACTIVE and includes stream connection information.
-//     Provide the connection information to the requesting client to join the stream
-//     session.
-//
-//   - Amazon GameLift Streams doesn't identify an available resource within a
-//     certain time, set by ClientToken . In this case, Amazon GameLift Streams stops
-//     processing the request, and the stream session object status changes to ERROR
-//     with status reason placementTimeout .
-//
+// [Stream sessions]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/stream-sessions.html
 // [AssociateApplications]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_AssociateApplications.html
+// [CreateStreamSessionConnection]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_CreateStreamSessionConnection.html
 func (c *Client) StartStreamSession(ctx context.Context, params *StartStreamSessionInput, optFns ...func(*Options)) (*StartStreamSessionOutput, error) {
 	if params == nil {
 		params = &StartStreamSessionInput{}
@@ -137,31 +196,30 @@ type StartStreamSessionInput struct {
 	ClientToken *string
 
 	// Length of time (in seconds) that Amazon GameLift Streams should wait for a
-	// client to connect or reconnect to the stream session. This time span starts when
-	// the stream session reaches ACTIVE status. If no client connects before the
-	// timeout, Amazon GameLift Streams stops the stream session with status of
-	// TERMINATED . Default value is 120.
+	// client to connect or reconnect to the stream session. Applies to both connection
+	// and reconnection scenarios. This time span starts when the stream session
+	// reaches ACTIVE state. If no client connects before the timeout, Amazon GameLift
+	// Streams terminates the stream session. Default value is 120.
 	ConnectionTimeoutSeconds *int32
 
 	// A human-readable label for the stream session. You can update this value later.
 	Description *string
 
 	//  A list of locations, in order of priority, where you want Amazon GameLift
-	// Streams to start a stream from. Amazon GameLift Streams selects the location
-	// with the next available capacity to start a single stream session in. If this
-	// value is empty, Amazon GameLift Streams attempts to start a stream session in
-	// the primary location.
+	// Streams to start a stream from. For example, us-east-1 . Amazon GameLift Streams
+	// selects the location with the next available capacity to start a single stream
+	// session in. If this value is empty, Amazon GameLift Streams attempts to start a
+	// stream session in the primary location.
 	//
-	// This value is A set of location names. For example, us-east-1 . For a complete
-	// list of locations that Amazon GameLift Streams supports, refer to [Regions, quotas, and limitations]in the Amazon
-	// GameLift Streams Developer Guide.
+	// For a complete list of locations that Amazon GameLift Streams supports, refer
+	// to [Regions, quotas, and limitations]in the Amazon GameLift Streams Developer Guide.
 	//
 	// [Regions, quotas, and limitations]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
 	Locations []string
 
-	// The maximum length of time (in seconds) that Amazon GameLift Streams keeps the
-	// stream session open. At this point, Amazon GameLift Streams ends the stream
-	// session regardless of any existing client connections. Default value is 43200.
+	// The maximum duration of a session. Amazon GameLift Streams will automatically
+	// terminate a session after this amount of time has elapsed, regardless of any
+	// existing client connections. Default value is 43200 (12 hours).
 	SessionLengthSeconds *int32
 
 	//  An opaque, unique identifier for an end-user, defined by the developer.
@@ -197,8 +255,10 @@ type StartStreamSessionOutput struct {
 	// AdditionalLaunchArgs passes data using command-line arguments.
 	AdditionalLaunchArgs []string
 
-	// An [Amazon Resource Name (ARN)] that uniquely identifies the application resource. Example ARN:
-	// arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6 .
+	// The application streaming in this session.
+	//
+	// This value is an [Amazon Resource Name (ARN)] that uniquely identifies the application resource. Example
+	// ARN: arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6 .
 	//
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	ApplicationArn *string
@@ -212,9 +272,11 @@ type StartStreamSessionOutput struct {
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	Arn *string
 
-	// The maximum length of time (in seconds) that Amazon GameLift Streams keeps the
-	// stream session open. At this point, Amazon GameLift Streams ends the stream
-	// session regardless of any existing client connections.
+	// The length of time that Amazon GameLift Streams should wait for a client to
+	// connect or reconnect to the stream session. This time span starts when the
+	// stream session reaches ACTIVE or PENDING_CLIENT_RECONNECTION state. If no
+	// client connects (or reconnects) before the timeout, Amazon GameLift Streams
+	// terminates the stream session.
 	ConnectionTimeoutSeconds *int32
 
 	// A timestamp that indicates when this resource was created. Timestamps are
@@ -232,11 +294,9 @@ type StartStreamSessionOutput struct {
 	// expressed using in ISO8601 format, such as: 2022-12-27T22:29:40+00:00 (UTC).
 	LastUpdatedAt *time.Time
 
-	//  The location where Amazon GameLift Streams is streaming your application from.
-	//
-	// A location's name. For example, us-east-1 . For a complete list of locations
-	// that Amazon GameLift Streams supports, refer to [Regions, quotas, and limitations]in the Amazon GameLift Streams
-	// Developer Guide.
+	// The location where Amazon GameLift Streams hosts and streams your application.
+	// For example, us-east-1 . For a complete list of locations that Amazon GameLift
+	// Streams supports, refer to [Regions, quotas, and limitations]in the Amazon GameLift Streams Developer Guide.
 	//
 	// [Regions, quotas, and limitations]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
 	Location *string
@@ -250,7 +310,9 @@ type StartStreamSessionOutput struct {
 	// The data transfer protocol in use with the stream session.
 	Protocol types.Protocol
 
-	// The length of time that Amazon GameLift Streams keeps the game session open.
+	// The maximum duration of a session. Amazon GameLift Streams will automatically
+	// terminate a session after this amount of time has elapsed, regardless of any
+	// existing client connections.
 	SessionLengthSeconds *int32
 
 	// The WebRTC ICE offer string that a client generates to initiate a connection to
@@ -261,8 +323,36 @@ type StartStreamSessionOutput struct {
 	// SignalRequest .
 	SignalResponse *string
 
-	// The current status of the stream session. A stream session can host clients
-	// when in ACTIVE status.
+	// The current status of the stream session. A stream session is ready for a
+	// client to connect when in ACTIVE status.
+	//
+	//   - ACTIVATING : The stream session is starting and preparing to stream.
+	//
+	//   - ACTIVE : The stream session is ready and waiting for a client connection. A
+	//   client has ConnectionTimeoutSeconds (specified in StartStreamSession ) from
+	//   when the session reaches ACTIVE state to establish a connection. If no client
+	//   connects within this timeframe, the session automatically terminates.
+	//
+	//   - CONNECTED : The stream session has a connected client. A session will
+	//   automatically terminate if there is no user input for 60 minutes, or if the
+	//   maximum length of a session specified by SessionLengthSeconds in
+	//   StartStreamSession is exceeded.
+	//
+	//   - ERROR : The stream session failed to activate.
+	//
+	//   - PENDING_CLIENT_RECONNECTION : A client has recently disconnected and the
+	//   stream session is waiting for the client to reconnect. A client has
+	//   ConnectionTimeoutSeconds (specified in StartStreamSession ) from when the
+	//   session reaches PENDING_CLIENT_RECONNECTION state to re-establish a
+	//   connection. If no client connects within this timeframe, the session
+	//   automatically terminates.
+	//
+	//   - RECONNECTING : A client has initiated a reconnect to a session that was in
+	//   PENDING_CLIENT_RECONNECTION state.
+	//
+	//   - TERMINATING : The stream session is ending.
+	//
+	//   - TERMINATED : The stream session has ended.
 	Status types.StreamSessionStatus
 
 	// A short description of the reason the stream session is in ERROR status.

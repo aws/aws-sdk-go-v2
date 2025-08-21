@@ -1,0 +1,8 @@
+{
+    "id": "df406e83-9295-407b-8428-7c1468b5211d",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/connectcases"
+    ]
+}

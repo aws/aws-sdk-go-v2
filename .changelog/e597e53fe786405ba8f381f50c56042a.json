@@ -1,0 +1,8 @@
+{
+    "id": "e597e53f-e786-405b-a8f3-81f50c56042a",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/auditmanager"
+    ]
+}

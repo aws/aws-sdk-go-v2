@@ -18769,6 +18769,45 @@ func awsAwsjson11_serializeDocumentDataQualityEvaluationRunAdditionalRunOptions(
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentDataQualityGlueTable(v *types.DataQualityGlueTable, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AdditionalOptions != nil {
+		ok := object.Key("AdditionalOptions")
+		if err := awsAwsjson11_serializeDocumentGlueTableAdditionalOptions(v.AdditionalOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CatalogId != nil {
+		ok := object.Key("CatalogId")
+		ok.String(*v.CatalogId)
+	}
+
+	if v.ConnectionName != nil {
+		ok := object.Key("ConnectionName")
+		ok.String(*v.ConnectionName)
+	}
+
+	if v.DatabaseName != nil {
+		ok := object.Key("DatabaseName")
+		ok.String(*v.DatabaseName)
+	}
+
+	if v.PreProcessingQuery != nil {
+		ok := object.Key("PreProcessingQuery")
+		ok.String(*v.PreProcessingQuery)
+	}
+
+	if v.TableName != nil {
+		ok := object.Key("TableName")
+		ok.String(*v.TableName)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDataQualityResultFilterCriteria(v *types.DataQualityResultFilterCriteria, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -18931,6 +18970,13 @@ func awsAwsjson11_serializeDocumentDataQualityTargetTable(v *types.DataQualityTa
 func awsAwsjson11_serializeDocumentDataSource(v *types.DataSource, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.DataQualityGlueTable != nil {
+		ok := object.Key("DataQualityGlueTable")
+		if err := awsAwsjson11_serializeDocumentDataQualityGlueTable(v.DataQualityGlueTable, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.GlueTable != nil {
 		ok := object.Key("GlueTable")

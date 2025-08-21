@@ -2158,6 +2158,11 @@ func awsRestjson1_serializeOpDocumentUpdateStreamGroupInput(v *UpdateStreamGroup
 	object := value.Object()
 	defer object.Close()
 
+	if v.DefaultApplicationIdentifier != nil {
+		ok := object.Key("DefaultApplicationIdentifier")
+		ok.String(*v.DefaultApplicationIdentifier)
+	}
+
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)

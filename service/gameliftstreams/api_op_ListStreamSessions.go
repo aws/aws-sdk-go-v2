@@ -48,12 +48,12 @@ type ListStreamSessionsInput struct {
 	//
 	// Exported files can be in one of the following states:
 	//
-	//   - SUCCEEDED: The exported files are successfully stored in S3 bucket.
+	//   - SUCCEEDED : The exported files are successfully stored in an S3 bucket.
 	//
-	//   - FAILED: The session ended but Amazon GameLift Streams couldn't collect and
-	//   upload the to S3.
+	//   - FAILED : The session ended but Amazon GameLift Streams couldn't collect and
+	//   upload the files to S3.
 	//
-	//   - PENDING: Either the stream session is still in progress, or uploading the
+	//   - PENDING : Either the stream session is still in progress, or uploading the
 	//   exported files to the S3 bucket is in progress.
 	ExportFilesStatus types.ExportFilesStatus
 

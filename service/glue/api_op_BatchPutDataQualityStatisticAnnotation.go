@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Annotate datapoints over time for a specific data quality statistic.
+// Annotate datapoints over time for a specific data quality statistic. The API
+// requires both profileID and statisticID as part of the InclusionAnnotation
+// input. The API only works for a single statisticId across multiple profiles.
 func (c *Client) BatchPutDataQualityStatisticAnnotation(ctx context.Context, params *BatchPutDataQualityStatisticAnnotationInput, optFns ...func(*Options)) (*BatchPutDataQualityStatisticAnnotationOutput, error) {
 	if params == nil {
 		params = &BatchPutDataQualityStatisticAnnotationInput{}
@@ -29,7 +31,9 @@ func (c *Client) BatchPutDataQualityStatisticAnnotation(ctx context.Context, par
 
 type BatchPutDataQualityStatisticAnnotationInput struct {
 
-	// A list of DatapointInclusionAnnotation 's.
+	// A list of DatapointInclusionAnnotation 's. The InclusionAnnotations must contain
+	// a profileId and statisticId. If there are multiple InclusionAnnotations, the
+	// list must refer to a single statisticId across multiple profileIds.
 	//
 	// This member is required.
 	InclusionAnnotations []types.DatapointInclusionAnnotation

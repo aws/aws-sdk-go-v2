@@ -1586,28 +1586,8 @@ func TestEndpointCase41(t *testing.T) {
 	}
 }
 
-// For region us-iso-east-1 with FIPS enabled and DualStack enabled
-func TestEndpointCase42(t *testing.T) {
-	var params = EndpointParameters{
-		Region:       ptr.String("us-iso-east-1"),
-		UseFIPS:      ptr.Bool(true),
-		UseDualStack: ptr.Bool(true),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err == nil {
-		t.Fatalf("expect error, got none")
-	}
-	if e, a := "FIPS and DualStack are enabled, but this partition does not support one or both", err.Error(); !strings.Contains(a, e) {
-		t.Errorf("expect %v error in %v", e, a)
-	}
-}
-
 // For region us-iso-east-1 with FIPS enabled and DualStack disabled
-func TestEndpointCase43(t *testing.T) {
+func TestEndpointCase42(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-iso-east-1"),
 		UseFIPS:      ptr.Bool(true),
@@ -1643,28 +1623,8 @@ func TestEndpointCase43(t *testing.T) {
 	}
 }
 
-// For region us-iso-east-1 with FIPS disabled and DualStack enabled
-func TestEndpointCase44(t *testing.T) {
-	var params = EndpointParameters{
-		Region:       ptr.String("us-iso-east-1"),
-		UseFIPS:      ptr.Bool(false),
-		UseDualStack: ptr.Bool(true),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err == nil {
-		t.Fatalf("expect error, got none")
-	}
-	if e, a := "DualStack is enabled but this partition does not support DualStack", err.Error(); !strings.Contains(a, e) {
-		t.Errorf("expect %v error in %v", e, a)
-	}
-}
-
 // For region us-isob-east-1 with FIPS disabled and DualStack disabled
-func TestEndpointCase45(t *testing.T) {
+func TestEndpointCase43(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-isob-east-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -1700,28 +1660,8 @@ func TestEndpointCase45(t *testing.T) {
 	}
 }
 
-// For region us-isob-east-1 with FIPS enabled and DualStack enabled
-func TestEndpointCase46(t *testing.T) {
-	var params = EndpointParameters{
-		Region:       ptr.String("us-isob-east-1"),
-		UseFIPS:      ptr.Bool(true),
-		UseDualStack: ptr.Bool(true),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err == nil {
-		t.Fatalf("expect error, got none")
-	}
-	if e, a := "FIPS and DualStack are enabled, but this partition does not support one or both", err.Error(); !strings.Contains(a, e) {
-		t.Errorf("expect %v error in %v", e, a)
-	}
-}
-
 // For region us-isob-east-1 with FIPS enabled and DualStack disabled
-func TestEndpointCase47(t *testing.T) {
+func TestEndpointCase44(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-isob-east-1"),
 		UseFIPS:      ptr.Bool(true),
@@ -1757,28 +1697,8 @@ func TestEndpointCase47(t *testing.T) {
 	}
 }
 
-// For region us-isob-east-1 with FIPS disabled and DualStack enabled
-func TestEndpointCase48(t *testing.T) {
-	var params = EndpointParameters{
-		Region:       ptr.String("us-isob-east-1"),
-		UseFIPS:      ptr.Bool(false),
-		UseDualStack: ptr.Bool(true),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err == nil {
-		t.Fatalf("expect error, got none")
-	}
-	if e, a := "DualStack is enabled but this partition does not support DualStack", err.Error(); !strings.Contains(a, e) {
-		t.Errorf("expect %v error in %v", e, a)
-	}
-}
-
 // For custom endpoint with region set and fips disabled and dualstack disabled
-func TestEndpointCase49(t *testing.T) {
+func TestEndpointCase45(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -1816,7 +1736,7 @@ func TestEndpointCase49(t *testing.T) {
 }
 
 // For custom endpoint with region not set and fips disabled and dualstack disabled
-func TestEndpointCase50(t *testing.T) {
+func TestEndpointCase46(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(false),
@@ -1853,7 +1773,7 @@ func TestEndpointCase50(t *testing.T) {
 }
 
 // For custom endpoint with fips enabled and dualstack disabled
-func TestEndpointCase51(t *testing.T) {
+func TestEndpointCase47(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		UseFIPS:      ptr.Bool(true),
@@ -1874,7 +1794,7 @@ func TestEndpointCase51(t *testing.T) {
 }
 
 // For custom endpoint with fips disabled and dualstack enabled
-func TestEndpointCase52(t *testing.T) {
+func TestEndpointCase48(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -1895,7 +1815,7 @@ func TestEndpointCase52(t *testing.T) {
 }
 
 // Missing region
-func TestEndpointCase53(t *testing.T) {
+func TestEndpointCase49(t *testing.T) {
 	var params = EndpointParameters{}
 
 	resolver := NewDefaultEndpointResolverV2()
@@ -1911,7 +1831,7 @@ func TestEndpointCase53(t *testing.T) {
 }
 
 // UseGlobalEndpoint with legacy region `ap-northeast-1`
-func TestEndpointCase54(t *testing.T) {
+func TestEndpointCase50(t *testing.T) {
 	var params = EndpointParameters{
 		Region:            ptr.String("ap-northeast-1"),
 		UseFIPS:           ptr.Bool(false),
@@ -1965,7 +1885,7 @@ func TestEndpointCase54(t *testing.T) {
 }
 
 // UseGlobalEndpoint with legacy region `ap-south-1`
-func TestEndpointCase55(t *testing.T) {
+func TestEndpointCase51(t *testing.T) {
 	var params = EndpointParameters{
 		Region:            ptr.String("ap-south-1"),
 		UseFIPS:           ptr.Bool(false),
@@ -2019,7 +1939,7 @@ func TestEndpointCase55(t *testing.T) {
 }
 
 // UseGlobalEndpoint with legacy region `ap-southeast-1`
-func TestEndpointCase56(t *testing.T) {
+func TestEndpointCase52(t *testing.T) {
 	var params = EndpointParameters{
 		Region:            ptr.String("ap-southeast-1"),
 		UseFIPS:           ptr.Bool(false),
@@ -2073,7 +1993,7 @@ func TestEndpointCase56(t *testing.T) {
 }
 
 // UseGlobalEndpoint with legacy region `ap-southeast-2`
-func TestEndpointCase57(t *testing.T) {
+func TestEndpointCase53(t *testing.T) {
 	var params = EndpointParameters{
 		Region:            ptr.String("ap-southeast-2"),
 		UseFIPS:           ptr.Bool(false),
@@ -2127,7 +2047,7 @@ func TestEndpointCase57(t *testing.T) {
 }
 
 // UseGlobalEndpoint with legacy region `aws-global`
-func TestEndpointCase58(t *testing.T) {
+func TestEndpointCase54(t *testing.T) {
 	var params = EndpointParameters{
 		Region:            ptr.String("aws-global"),
 		UseFIPS:           ptr.Bool(false),
@@ -2181,7 +2101,7 @@ func TestEndpointCase58(t *testing.T) {
 }
 
 // UseGlobalEndpoint with legacy region `ca-central-1`
-func TestEndpointCase59(t *testing.T) {
+func TestEndpointCase55(t *testing.T) {
 	var params = EndpointParameters{
 		Region:            ptr.String("ca-central-1"),
 		UseFIPS:           ptr.Bool(false),
@@ -2235,7 +2155,7 @@ func TestEndpointCase59(t *testing.T) {
 }
 
 // UseGlobalEndpoint with legacy region `eu-central-1`
-func TestEndpointCase60(t *testing.T) {
+func TestEndpointCase56(t *testing.T) {
 	var params = EndpointParameters{
 		Region:            ptr.String("eu-central-1"),
 		UseFIPS:           ptr.Bool(false),
@@ -2289,7 +2209,7 @@ func TestEndpointCase60(t *testing.T) {
 }
 
 // UseGlobalEndpoint with legacy region `eu-north-1`
-func TestEndpointCase61(t *testing.T) {
+func TestEndpointCase57(t *testing.T) {
 	var params = EndpointParameters{
 		Region:            ptr.String("eu-north-1"),
 		UseFIPS:           ptr.Bool(false),
@@ -2343,7 +2263,7 @@ func TestEndpointCase61(t *testing.T) {
 }
 
 // UseGlobalEndpoint with legacy region `eu-west-1`
-func TestEndpointCase62(t *testing.T) {
+func TestEndpointCase58(t *testing.T) {
 	var params = EndpointParameters{
 		Region:            ptr.String("eu-west-1"),
 		UseFIPS:           ptr.Bool(false),
@@ -2397,7 +2317,7 @@ func TestEndpointCase62(t *testing.T) {
 }
 
 // UseGlobalEndpoint with legacy region `eu-west-2`
-func TestEndpointCase63(t *testing.T) {
+func TestEndpointCase59(t *testing.T) {
 	var params = EndpointParameters{
 		Region:            ptr.String("eu-west-2"),
 		UseFIPS:           ptr.Bool(false),
@@ -2451,7 +2371,7 @@ func TestEndpointCase63(t *testing.T) {
 }
 
 // UseGlobalEndpoint with legacy region `eu-west-3`
-func TestEndpointCase64(t *testing.T) {
+func TestEndpointCase60(t *testing.T) {
 	var params = EndpointParameters{
 		Region:            ptr.String("eu-west-3"),
 		UseFIPS:           ptr.Bool(false),
@@ -2505,7 +2425,7 @@ func TestEndpointCase64(t *testing.T) {
 }
 
 // UseGlobalEndpoint with legacy region `sa-east-1`
-func TestEndpointCase65(t *testing.T) {
+func TestEndpointCase61(t *testing.T) {
 	var params = EndpointParameters{
 		Region:            ptr.String("sa-east-1"),
 		UseFIPS:           ptr.Bool(false),
@@ -2559,7 +2479,7 @@ func TestEndpointCase65(t *testing.T) {
 }
 
 // UseGlobalEndpoint with legacy region `us-east-1`
-func TestEndpointCase66(t *testing.T) {
+func TestEndpointCase62(t *testing.T) {
 	var params = EndpointParameters{
 		Region:            ptr.String("us-east-1"),
 		UseFIPS:           ptr.Bool(false),
@@ -2613,7 +2533,7 @@ func TestEndpointCase66(t *testing.T) {
 }
 
 // UseGlobalEndpoint with legacy region `us-east-2`
-func TestEndpointCase67(t *testing.T) {
+func TestEndpointCase63(t *testing.T) {
 	var params = EndpointParameters{
 		Region:            ptr.String("us-east-2"),
 		UseFIPS:           ptr.Bool(false),
@@ -2667,7 +2587,7 @@ func TestEndpointCase67(t *testing.T) {
 }
 
 // UseGlobalEndpoint with legacy region `us-west-1`
-func TestEndpointCase68(t *testing.T) {
+func TestEndpointCase64(t *testing.T) {
 	var params = EndpointParameters{
 		Region:            ptr.String("us-west-1"),
 		UseFIPS:           ptr.Bool(false),
@@ -2721,7 +2641,7 @@ func TestEndpointCase68(t *testing.T) {
 }
 
 // UseGlobalEndpoint with legacy region `us-west-2`
-func TestEndpointCase69(t *testing.T) {
+func TestEndpointCase65(t *testing.T) {
 	var params = EndpointParameters{
 		Region:            ptr.String("us-west-2"),
 		UseFIPS:           ptr.Bool(false),
@@ -2775,7 +2695,7 @@ func TestEndpointCase69(t *testing.T) {
 }
 
 // UseGlobalEndpoint with Non-legacy region `us-east-3`
-func TestEndpointCase70(t *testing.T) {
+func TestEndpointCase66(t *testing.T) {
 	var params = EndpointParameters{
 		Region:            ptr.String("us-east-3"),
 		UseFIPS:           ptr.Bool(false),
@@ -2829,7 +2749,7 @@ func TestEndpointCase70(t *testing.T) {
 }
 
 // UseGlobalEndpoint with legacy region and custom endpoint
-func TestEndpointCase71(t *testing.T) {
+func TestEndpointCase67(t *testing.T) {
 	var params = EndpointParameters{
 		Region:            ptr.String("us-west-1"),
 		UseFIPS:           ptr.Bool(false),
@@ -2868,7 +2788,7 @@ func TestEndpointCase71(t *testing.T) {
 }
 
 // UseGlobalEndpoint with unset region and custom endpoint
-func TestEndpointCase72(t *testing.T) {
+func TestEndpointCase68(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:           ptr.Bool(false),
 		UseDualStack:      ptr.Bool(false),

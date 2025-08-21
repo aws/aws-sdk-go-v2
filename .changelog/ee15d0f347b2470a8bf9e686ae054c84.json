@@ -1,0 +1,8 @@
+{
+    "id": "ee15d0f3-47b2-470a-8bf9-e686ae054c84",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/cognitoidentity"
+    ]
+}

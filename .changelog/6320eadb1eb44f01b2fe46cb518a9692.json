@@ -1,0 +1,8 @@
+{
+    "id": "6320eadb-1eb4-4f01-b2fe-46cb518a9692",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/s3outposts"
+    ]
+}

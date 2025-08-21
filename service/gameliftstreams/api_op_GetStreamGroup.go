@@ -91,18 +91,18 @@ type GetStreamGroupOutput struct {
 	//
 	// A location can be in one of the following states:
 	//
-	//   - ACTIVATING: Amazon GameLift Streams is preparing the location. You cannot
+	//   - ACTIVATING : Amazon GameLift Streams is preparing the location. You cannot
 	//   stream from, scale the capacity of, or remove this location yet.
 	//
-	//   - ACTIVE: The location is provisioned with initial capacity. You can now
+	//   - ACTIVE : The location is provisioned with initial capacity. You can now
 	//   stream from, scale the capacity of, or remove this location.
 	//
-	//   - ERROR: Amazon GameLift Streams failed to set up this location. The
-	//   StatusReason field describes the error. You can remove this location and try to
-	//   add it again.
+	//   - ERROR : Amazon GameLift Streams failed to set up this location. The
+	//   StatusReason field describes the error. You can remove this location and try
+	//   to add it again.
 	//
-	//   - REMOVING: Amazon GameLift Streams is working to remove this location. It
-	//   releases all provisioned capacity for this location in this stream group.
+	//   - REMOVING : Amazon GameLift Streams is working to remove this location. This
+	//   will release all provisioned capacity for this location in this stream group.
 	LocationStates []types.LocationState
 
 	// The current status of the stream group resource. Possible statuses include the

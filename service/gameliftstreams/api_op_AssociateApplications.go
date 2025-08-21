@@ -15,6 +15,10 @@ import (
 // compute resources. The stream group must be in ACTIVE status. You can reverse
 // this action by using [DisassociateApplications].
 //
+// If a stream group does not already have a linked application, Amazon GameLift
+// Streams will automatically assign the first application provided in
+// ApplicationIdentifiers as the default.
+//
 // [DisassociateApplications]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_DisassociateApplications.html
 func (c *Client) AssociateApplications(ctx context.Context, params *AssociateApplicationsInput, optFns ...func(*Options)) (*AssociateApplicationsOutput, error) {
 	if params == nil {

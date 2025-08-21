@@ -1,0 +1,8 @@
+{
+    "id": "fa64d9aa-d48b-47e6-8e14-d50c935ad879",
+    "type": "documentation",
+    "description": "This is a documentation only release that adds additional information for the update-service request parameters.",
+    "modules": [
+        "service/ecs"
+    ]
+}

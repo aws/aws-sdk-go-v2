@@ -1,0 +1,8 @@
+{
+    "id": "82770906-3ec4-427f-be63-3e3708c8f81b",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/route53profiles"
+    ]
+}

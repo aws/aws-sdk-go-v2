@@ -44,7 +44,13 @@ type CreateContactInput struct {
 	// This member is required.
 	Plan *types.Plan
 
-	// To create an escalation plan use ESCALATION . To create a contact use PERSONAL .
+	// The type of contact to create.
+	//
+	//   - PERSONAL : A single, individual contact.
+	//
+	//   - ESCALATION : An escalation plan.
+	//
+	//   - ONCALL_SCHEDULE : An on-call schedule.
 	//
 	// This member is required.
 	Type types.ContactType

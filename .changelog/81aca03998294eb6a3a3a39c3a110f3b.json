@@ -1,0 +1,8 @@
+{
+    "id": "81aca039-9829-4eb6-a3a3-a39c3a110f3b",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/bedrockagentruntime"
+    ]
+}

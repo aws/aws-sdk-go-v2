@@ -1,0 +1,8 @@
+{
+    "id": "de506bd2-ca49-49eb-8155-2a0220b7ba7f",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/marketplaceagreement"
+    ]
+}

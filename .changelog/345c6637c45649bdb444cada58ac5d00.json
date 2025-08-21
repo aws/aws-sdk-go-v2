@@ -1,0 +1,8 @@
+{
+    "id": "345c6637-c456-49bd-b444-cada58ac5d00",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/billingconductor"
+    ]
+}

@@ -38,8 +38,7 @@ type ListContactsInput struct {
 	// The pagination token to continue to the next page of results.
 	NextToken *string
 
-	// The type of contact. A contact is type PERSONAL and an escalation plan is type
-	// ESCALATION .
+	// The type of contact.
 	Type types.ContactType
 
 	noSmithyDocumentSerde

@@ -1,0 +1,8 @@
+{
+    "id": "4a1926ea-fea5-4e80-b311-b895e6aad698",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/costoptimizationhub"
+    ]
+}

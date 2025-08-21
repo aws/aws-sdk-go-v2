@@ -147,13 +147,15 @@ type LocationConfiguration struct {
 
 	// The streaming capacity that is allocated and ready to handle stream requests
 	// without delay. You pay for this capacity whether it's in use or not. Best for
-	// quickest time from streaming request to streaming session.
+	// quickest time from streaming request to streaming session. Default is 1 when
+	// creating a stream group or adding a location.
 	AlwaysOnCapacity *int32
 
 	// The streaming capacity that Amazon GameLift Streams can allocate in response to
 	// stream requests, and then de-allocate when the session has terminated. This
 	// offers a cost control measure at the expense of a greater startup time
-	// (typically under 5 minutes).
+	// (typically under 5 minutes). Default is 0 when creating a stream group or adding
+	// a location.
 	OnDemandCapacity *int32
 
 	noSmithyDocumentSerde
@@ -169,7 +171,8 @@ type LocationState struct {
 
 	// The streaming capacity that is allocated and ready to handle stream requests
 	// without delay. You pay for this capacity whether it's in use or not. Best for
-	// quickest time from streaming request to streaming session.
+	// quickest time from streaming request to streaming session. Default is 1 when
+	// creating a stream group or adding a location.
 	AlwaysOnCapacity *int32
 
 	// This value is the amount of allocated capacity that is not currently streaming.
@@ -187,7 +190,8 @@ type LocationState struct {
 	// The streaming capacity that Amazon GameLift Streams can allocate in response to
 	// stream requests, and then de-allocate when the session has terminated. This
 	// offers a cost control measure at the expense of a greater startup time
-	// (typically under 5 minutes).
+	// (typically under 5 minutes). Default is 0 when creating a stream group or adding
+	// a location.
 	OnDemandCapacity *int32
 
 	// This value is the total number of compute resources that you request for a
@@ -201,18 +205,18 @@ type LocationState struct {
 	//
 	// A location can be in one of the following states:
 	//
-	//   - ACTIVATING: Amazon GameLift Streams is preparing the location. You cannot
+	//   - ACTIVATING : Amazon GameLift Streams is preparing the location. You cannot
 	//   stream from, scale the capacity of, or remove this location yet.
 	//
-	//   - ACTIVE: The location is provisioned with initial capacity. You can now
+	//   - ACTIVE : The location is provisioned with initial capacity. You can now
 	//   stream from, scale the capacity of, or remove this location.
 	//
-	//   - ERROR: Amazon GameLift Streams failed to set up this location. The
-	//   StatusReason field describes the error. You can remove this location and try to
-	//   add it again.
+	//   - ERROR : Amazon GameLift Streams failed to set up this location. The
+	//   StatusReason field describes the error. You can remove this location and try
+	//   to add it again.
 	//
-	//   - REMOVING: Amazon GameLift Streams is working to remove this location. It
-	//   releases all provisioned capacity for this location in this stream group.
+	//   - REMOVING : Amazon GameLift Streams is working to remove this location. This
+	//   will release all provisioned capacity for this location in this stream group.
 	Status StreamGroupLocationStatus
 
 	noSmithyDocumentSerde
@@ -402,7 +406,7 @@ type StreamGroupSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a Amazon GameLift Streams stream session. To retrieve additional
+// Describes an Amazon GameLift Streams stream session. To retrieve additional
 // details for the stream session, call [GetStreamSession].
 //
 // [GetStreamSession]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_GetStreamSession.html
@@ -432,11 +436,9 @@ type StreamSessionSummary struct {
 	// expressed using in ISO8601 format, such as: 2022-12-27T22:29:40+00:00 (UTC).
 	LastUpdatedAt *time.Time
 
-	// The location where Amazon GameLift Streams is hosting the stream session.
-	//
-	// A location's name. For example, us-east-1 . For a complete list of locations
-	// that Amazon GameLift Streams supports, refer to [Regions, quotas, and limitations]in the Amazon GameLift Streams
-	// Developer Guide.
+	// The location where Amazon GameLift Streams hosts and streams your application.
+	// For example, us-east-1 . For a complete list of locations that Amazon GameLift
+	// Streams supports, refer to [Regions, quotas, and limitations]in the Amazon GameLift Streams Developer Guide.
 	//
 	// [Regions, quotas, and limitations]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
 	Location *string
@@ -444,25 +446,35 @@ type StreamSessionSummary struct {
 	// The data transfer protocol in use with the stream session.
 	Protocol Protocol
 
-	// The current status of the stream session resource. Possible statuses include
-	// the following:
+	// The current status of the stream session resource.
 	//
 	//   - ACTIVATING : The stream session is starting and preparing to stream.
 	//
-	//   - ACTIVE : The stream session is ready to accept client connections.
+	//   - ACTIVE : The stream session is ready and waiting for a client connection. A
+	//   client has ConnectionTimeoutSeconds (specified in StartStreamSession ) from
+	//   when the session reaches ACTIVE state to establish a connection. If no client
+	//   connects within this timeframe, the session automatically terminates.
 	//
-	//   - CONNECTED : The stream session has a connected client.
+	//   - CONNECTED : The stream session has a connected client. A session will
+	//   automatically terminate if there is no user input for 60 minutes, or if the
+	//   maximum length of a session specified by SessionLengthSeconds in
+	//   StartStreamSession is exceeded.
 	//
-	//   - PENDING_CLIENT_RECONNECTION : A client has recently disconnected, and the
-	//   stream session is waiting for the client to reconnect. After a short time, if
-	//   the client doesn't reconnect, the stream session status transitions to
-	//   TERMINATED .
+	//   - ERROR : The stream session failed to activate.
+	//
+	//   - PENDING_CLIENT_RECONNECTION : A client has recently disconnected and the
+	//   stream session is waiting for the client to reconnect. A client has
+	//   ConnectionTimeoutSeconds (specified in StartStreamSession ) from when the
+	//   session reaches PENDING_CLIENT_RECONNECTION state to re-establish a
+	//   connection. If no client connects within this timeframe, the session
+	//   automatically terminates.
+	//
+	//   - RECONNECTING : A client has initiated a reconnect to a session that was in
+	//   PENDING_CLIENT_RECONNECTION state.
 	//
 	//   - TERMINATING : The stream session is ending.
 	//
 	//   - TERMINATED : The stream session has ended.
-	//
-	//   - ERROR : The stream session failed to activate.
 	Status StreamSessionStatus
 
 	//  An opaque, unique identifier for an end-user, defined by the developer.

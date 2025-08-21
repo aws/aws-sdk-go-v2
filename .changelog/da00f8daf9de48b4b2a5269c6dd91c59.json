@@ -1,0 +1,8 @@
+{
+    "id": "da00f8da-f9de-48b4-b2a5-269c6dd91c59",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/iotdeviceadvisor"
+    ]
+}

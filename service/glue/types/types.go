@@ -3333,6 +3333,42 @@ type DataQualityEvaluationRunAdditionalRunOptions struct {
 	noSmithyDocumentSerde
 }
 
+// The database and table in the Glue Data Catalog that is used for input or
+// output data for Data Quality Operations.
+type DataQualityGlueTable struct {
+
+	// A database name in the Glue Data Catalog.
+	//
+	// This member is required.
+	DatabaseName *string
+
+	// A table name in the Glue Data Catalog.
+	//
+	// This member is required.
+	TableName *string
+
+	// Additional options for the table. Currently there are two keys supported:
+	//
+	//   - pushDownPredicate : to filter on partitions without having to list and read
+	//   all the files in your dataset.
+	//
+	//   - catalogPartitionPredicate : to use server-side partition pruning using
+	//   partition indexes in the Glue Data Catalog.
+	AdditionalOptions map[string]string
+
+	// A unique identifier for the Glue Data Catalog.
+	CatalogId *string
+
+	// The name of the connection to the Glue Data Catalog.
+	ConnectionName *string
+
+	// SQL Query of SparkSQL format that can be used to pre-process the data for the
+	// table in Glue Data Catalog, before running the Data Quality Operation.
+	PreProcessingQuery *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the data quality metric value according to the analysis of historical
 // data.
 type DataQualityMetricValues struct {
@@ -3644,9 +3680,10 @@ type DataQualityTargetTable struct {
 // A data source (an Glue table) for which you want data quality results.
 type DataSource struct {
 
+	// An Glue table for Data Quality Operations.
+	DataQualityGlueTable *DataQualityGlueTable
+
 	// An Glue table.
-	//
-	// This member is required.
 	GlueTable *GlueTable
 
 	noSmithyDocumentSerde
