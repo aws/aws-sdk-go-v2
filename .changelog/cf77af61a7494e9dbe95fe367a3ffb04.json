@@ -1,0 +1,8 @@
+{
+    "id": "cf77af61-a749-4e9d-be95-fe367a3ffb04",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/codepipeline"
+    ]
+}

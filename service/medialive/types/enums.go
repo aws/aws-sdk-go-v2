@@ -809,6 +809,28 @@ func (BurnInBackgroundColor) Values() []BurnInBackgroundColor {
 	}
 }
 
+type BurnInDestinationSubtitleRows string
+
+// Enum values for BurnInDestinationSubtitleRows
+const (
+	BurnInDestinationSubtitleRowsRows16 BurnInDestinationSubtitleRows = "ROWS_16"
+	BurnInDestinationSubtitleRowsRows20 BurnInDestinationSubtitleRows = "ROWS_20"
+	BurnInDestinationSubtitleRowsRows24 BurnInDestinationSubtitleRows = "ROWS_24"
+)
+
+// Values returns all known values for BurnInDestinationSubtitleRows. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BurnInDestinationSubtitleRows) Values() []BurnInDestinationSubtitleRows {
+	return []BurnInDestinationSubtitleRows{
+		"ROWS_16",
+		"ROWS_20",
+		"ROWS_24",
+	}
+}
+
 type BurnInFontColor string
 
 // Enum values for BurnInFontColor
@@ -1656,6 +1678,28 @@ func (DvbSubDestinationShadowColor) Values() []DvbSubDestinationShadowColor {
 		"BLACK",
 		"NONE",
 		"WHITE",
+	}
+}
+
+type DvbSubDestinationSubtitleRows string
+
+// Enum values for DvbSubDestinationSubtitleRows
+const (
+	DvbSubDestinationSubtitleRowsRows16 DvbSubDestinationSubtitleRows = "ROWS_16"
+	DvbSubDestinationSubtitleRowsRows20 DvbSubDestinationSubtitleRows = "ROWS_20"
+	DvbSubDestinationSubtitleRowsRows24 DvbSubDestinationSubtitleRows = "ROWS_24"
+)
+
+// Values returns all known values for DvbSubDestinationSubtitleRows. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DvbSubDestinationSubtitleRows) Values() []DvbSubDestinationSubtitleRows {
+	return []DvbSubDestinationSubtitleRows{
+		"ROWS_16",
+		"ROWS_20",
+		"ROWS_24",
 	}
 }
 

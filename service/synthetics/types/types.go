@@ -54,6 +54,15 @@ type BaseScreenshot struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that specifies the browser type to use for a canary run.
+type BrowserConfig struct {
+
+	// The browser type associated with this browser configuration.
+	BrowserType BrowserType
+
+	noSmithyDocumentSerde
+}
+
 // This structure contains all information about one canary in your account.
 type Canary struct {
 
@@ -64,6 +73,12 @@ type Canary struct {
 	// The location in Amazon S3 where Synthetics stores artifacts from the runs of
 	// this canary. Artifacts include the log file, screenshots, and HAR files.
 	ArtifactS3Location *string
+
+	// A structure that specifies the browser type to use for a canary run. CloudWatch
+	// Synthetics supports running canaries on both CHROME and FIREFOX browsers.
+	//
+	// If not specified, browserConfigs defaults to Chrome.
+	BrowserConfigs []BrowserConfig
 
 	// This structure contains information about the canary's Lambda handler and where
 	// its code is stored by CloudWatch Synthetics.
@@ -77,6 +92,18 @@ type Canary struct {
 	//
 	// [Resources and Conditions for Lambda Actions]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-api-permissions-ref.html
 	EngineArn *string
+
+	// A list of engine configurations for the canary, one for each browser type that
+	// the canary is configured to run on.
+	//
+	// All runtime versions syn-nodejs-puppeteer-11.0 and above, and
+	// syn-nodejs-playwright-3.0 and above, use engineConfigs only. You can no longer
+	// use engineArn in these versions.
+	//
+	// Runtime versions older than syn-nodejs-puppeteer-11.0 and
+	// syn-nodejs-playwright-3.0 continue to support engineArn to ensure backward
+	// compatibility.
+	EngineConfigs []EngineConfig
 
 	// The ARN of the IAM role used to run the canary. This role must include
 	// lambda.amazonaws.com as a principal in the trust policy.
@@ -143,6 +170,18 @@ type Canary struct {
 	// screenshots, and the coordinates of any parts of the screen to ignore during the
 	// visual monitoring comparison.
 	VisualReference *VisualReferenceOutput
+
+	// A list of visual reference configurations for the canary, one for each browser
+	// type that the canary is configured to run on. Visual references are used for
+	// visual monitoring comparisons.
+	//
+	// syn-nodejs-puppeteer-11.0 and above, and syn-nodejs-playwright-3.0 and above,
+	// only supports visualReferences . visualReference field is not supported.
+	//
+	// Versions older than syn-nodejs-puppeteer-11.0 supports both visualReference and
+	// visualReferences for backward compatibility. It is recommended to use
+	// visualReferences for consistency and future compatibility.
+	VisualReferences []VisualReferenceOutput
 
 	// If this canary is to test an endpoint in a VPC, this structure contains
 	// information about the subnets and security groups of the VPC endpoint. For more
@@ -261,6 +300,9 @@ type CanaryRun struct {
 	// The location where the canary stored artifacts from the run. Artifacts include
 	// the log file, screenshots, and HAR files.
 	ArtifactS3Location *string
+
+	// The browser type associated with this canary run.
+	BrowserType BrowserType
 
 	// Returns the dry run configurations for a canary.
 	DryRunConfig *CanaryDryRunConfigOutput
@@ -546,6 +588,20 @@ type DryRunConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+// A structure of engine configurations for the canary, one for each browser type
+// that the canary is configured to run on.
+type EngineConfig struct {
+
+	// The browser type associated with this engine configuration.
+	BrowserType BrowserType
+
+	// Each engine configuration contains the ARN of the Lambda function that is used
+	// as the canary's engine for a specific browser type.
+	EngineArn *string
+
+	noSmithyDocumentSerde
+}
+
 // This structure contains information about one group.
 type Group struct {
 
@@ -690,6 +746,9 @@ type VisualReferenceInput struct {
 	// be used for visual monitoring, remove it from this array.
 	BaseScreenshots []BaseScreenshot
 
+	// The browser type associated with this visual reference.
+	BrowserType BrowserType
+
 	noSmithyDocumentSerde
 }
 
@@ -709,6 +768,9 @@ type VisualReferenceOutput struct {
 	// An array of screenshots that are used as the baseline for comparisons during
 	// visual monitoring.
 	BaseScreenshots []BaseScreenshot
+
+	// The browser type associated with this visual reference.
+	BrowserType BrowserType
 
 	noSmithyDocumentSerde
 }

@@ -7959,6 +7959,11 @@ func awsRestjson1_serializeOpDocumentUpdateAIPromptInput(v *UpdateAIPromptInput,
 		ok.String(*v.Description)
 	}
 
+	if v.ModelId != nil {
+		ok := object.Key("modelId")
+		ok.String(*v.ModelId)
+	}
+
 	if v.TemplateConfiguration != nil {
 		ok := object.Key("templateConfiguration")
 		if err := awsRestjson1_serializeDocumentAIPromptTemplateConfiguration(v.TemplateConfiguration, ok); err != nil {

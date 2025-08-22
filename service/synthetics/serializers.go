@@ -194,6 +194,13 @@ func awsRestjson1_serializeOpDocumentCreateCanaryInput(v *CreateCanaryInput, val
 		ok.String(*v.ArtifactS3Location)
 	}
 
+	if v.BrowserConfigs != nil {
+		ok := object.Key("BrowserConfigs")
+		if err := awsRestjson1_serializeDocumentBrowserConfigs(v.BrowserConfigs, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Code != nil {
 		ok := object.Key("Code")
 		if err := awsRestjson1_serializeDocumentCanaryCodeInput(v.Code, ok); err != nil {
@@ -668,6 +675,11 @@ func awsRestjson1_serializeOpHttpBindingsDescribeCanariesLastRunInput(v *Describ
 func awsRestjson1_serializeOpDocumentDescribeCanariesLastRunInput(v *DescribeCanariesLastRunInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.BrowserType) > 0 {
+		ok := object.Key("BrowserType")
+		ok.String(string(v.BrowserType))
+	}
 
 	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
@@ -1648,6 +1660,13 @@ func awsRestjson1_serializeOpDocumentStartCanaryDryRunInput(v *StartCanaryDryRun
 		ok.String(*v.ArtifactS3Location)
 	}
 
+	if v.BrowserConfigs != nil {
+		ok := object.Key("BrowserConfigs")
+		if err := awsRestjson1_serializeDocumentBrowserConfigs(v.BrowserConfigs, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Code != nil {
 		ok := object.Key("Code")
 		if err := awsRestjson1_serializeDocumentCanaryCodeInput(v.Code, ok); err != nil {
@@ -1690,6 +1709,13 @@ func awsRestjson1_serializeOpDocumentStartCanaryDryRunInput(v *StartCanaryDryRun
 	if v.VisualReference != nil {
 		ok := object.Key("VisualReference")
 		if err := awsRestjson1_serializeDocumentVisualReferenceInput(v.VisualReference, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VisualReferences != nil {
+		ok := object.Key("VisualReferences")
+		if err := awsRestjson1_serializeDocumentVisualReferences(v.VisualReferences, ok); err != nil {
 			return err
 		}
 	}
@@ -2046,6 +2072,13 @@ func awsRestjson1_serializeOpDocumentUpdateCanaryInput(v *UpdateCanaryInput, val
 		ok.String(*v.ArtifactS3Location)
 	}
 
+	if v.BrowserConfigs != nil {
+		ok := object.Key("BrowserConfigs")
+		if err := awsRestjson1_serializeDocumentBrowserConfigs(v.BrowserConfigs, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Code != nil {
 		ok := object.Key("Code")
 		if err := awsRestjson1_serializeDocumentCanaryCodeInput(v.Code, ok); err != nil {
@@ -2100,6 +2133,13 @@ func awsRestjson1_serializeOpDocumentUpdateCanaryInput(v *UpdateCanaryInput, val
 	if v.VisualReference != nil {
 		ok := object.Key("VisualReference")
 		if err := awsRestjson1_serializeDocumentVisualReferenceInput(v.VisualReference, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VisualReferences != nil {
+		ok := object.Key("VisualReferences")
+		if err := awsRestjson1_serializeDocumentVisualReferences(v.VisualReferences, ok); err != nil {
 			return err
 		}
 	}
@@ -2165,6 +2205,31 @@ func awsRestjson1_serializeDocumentBaseScreenshots(v []types.BaseScreenshot, val
 	for i := range v {
 		av := array.Value()
 		if err := awsRestjson1_serializeDocumentBaseScreenshot(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBrowserConfig(v *types.BrowserConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.BrowserType) > 0 {
+		ok := object.Key("BrowserType")
+		ok.String(string(v.BrowserType))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBrowserConfigs(v []types.BrowserConfig, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentBrowserConfig(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -2420,6 +2485,24 @@ func awsRestjson1_serializeDocumentVisualReferenceInput(v *types.VisualReference
 		}
 	}
 
+	if len(v.BrowserType) > 0 {
+		ok := object.Key("BrowserType")
+		ok.String(string(v.BrowserType))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVisualReferences(v []types.VisualReferenceInput, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentVisualReferenceInput(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

@@ -15,11 +15,11 @@ import (
 // databases by using backup files. You can create a backup of your on-premises
 // database, store it on Amazon Simple Storage Service (Amazon S3), and then
 // restore the backup file onto a new Amazon RDS DB instance running MySQL. For
-// more information, see [Importing Data into an Amazon RDS MySQL DB Instance]in the Amazon RDS User Guide.
+// more information, see [Restoring a backup into an Amazon RDS for MySQL DB instance]in the Amazon RDS User Guide.
 //
 // This operation doesn't apply to RDS Custom.
 //
-// [Importing Data into an Amazon RDS MySQL DB Instance]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.html
+// [Restoring a backup into an Amazon RDS for MySQL DB instance]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.html
 func (c *Client) RestoreDBInstanceFromS3(ctx context.Context, params *RestoreDBInstanceFromS3Input, optFns ...func(*Options)) (*RestoreDBInstanceFromS3Output, error) {
 	if params == nil {
 		params = &RestoreDBInstanceFromS3Input{}

@@ -1,0 +1,8 @@
+{
+    "id": "258677d1-6d68-49d1-a93a-72ab80386121",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/launchwizard"
+    ]
+}

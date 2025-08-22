@@ -1,0 +1,8 @@
+{
+    "id": "420a8e74-3210-486e-b338-e98fee098c61",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/firehose"
+    ]
+}

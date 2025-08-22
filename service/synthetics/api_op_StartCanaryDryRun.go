@@ -47,6 +47,12 @@ type StartCanaryDryRunInput struct {
 	// the Amazon S3 bucket can't include a period (.).
 	ArtifactS3Location *string
 
+	// A structure that specifies the browser type to use for a canary run. CloudWatch
+	// Synthetics supports running canaries on both CHROME and FIREFOX browsers.
+	//
+	// If not specified, browserConfigs defaults to Chrome.
+	BrowserConfigs []types.BrowserConfig
+
 	// Use this structure to input your script code for the canary. This structure
 	// contains the Lambda handler with the location where the canary should start
 	// running the script. If the script is stored in an Amazon S3 bucket, the bucket
@@ -123,6 +129,18 @@ type StartCanaryDryRunInput struct {
 	// [Visual monitoring]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Library_SyntheticsLogger_VisualTesting.html
 	// [Visual monitoring blueprint]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Blueprints_VisualTesting.html
 	VisualReference *types.VisualReferenceInput
+
+	// A list of visual reference configurations for the canary, one for each browser
+	// type that the canary is configured to run on. Visual references are used for
+	// visual monitoring comparisons.
+	//
+	// syn-nodejs-puppeteer-11.0 and above, and syn-nodejs-playwright-3.0 and above,
+	// only supports visualReferences . visualReference field is not supported.
+	//
+	// Versions older than syn-nodejs-puppeteer-11.0 supports both visualReference and
+	// visualReferences for backward compatibility. It is recommended to use
+	// visualReferences for consistency and future compatibility.
+	VisualReferences []types.VisualReferenceInput
 
 	// If this canary is to test an endpoint in a VPC, this structure contains
 	// information about the subnets and security groups of the VPC endpoint. For more

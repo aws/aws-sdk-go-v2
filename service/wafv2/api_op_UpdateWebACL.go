@@ -122,6 +122,19 @@ type UpdateWebACLInput struct {
 	// This member is required.
 	VisibilityConfig *types.VisibilityConfig
 
+	// Configures the ability for the WAF console to store and retrieve application
+	// attributes. Application attributes help WAF give recommendations for protection
+	// packs.
+	//
+	// When using UpdateWebACL , ApplicationConfig follows these rules:
+	//
+	//   - If you omit ApplicationConfig from the request, all existing entries in the
+	//   web ACL are retained.
+	//
+	//   - If you include ApplicationConfig , entries must match the existing values
+	//   exactly. Any attempt to modify existing entries will result in an error.
+	ApplicationConfig *types.ApplicationConfig
+
 	// Specifies custom configurations for the associations between the web ACL and
 	// protected resources.
 	//

@@ -1,0 +1,8 @@
+{
+    "id": "513b4216-8dd2-4087-af57-fd0b1aee4066",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/sqs"
+    ]
+}

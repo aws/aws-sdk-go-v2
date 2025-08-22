@@ -1,0 +1,8 @@
+{
+    "id": "70d7e842-36c0-4d2f-ba9e-692e89a139fe",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/networkmonitor"
+    ]
+}

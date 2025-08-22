@@ -2064,12 +2064,12 @@ type DBInstance struct {
 	ReadReplicaSourceDBInstanceIdentifier *string
 
 	// The open mode of a Db2 or an Oracle read replica. The default is open-read-only
-	// . For more information, see [Working with read replicas for Amazon RDS for Db2]and [Working with read replicas for Amazon RDS for Oracle] in the Amazon RDS User Guide.
+	// . For more information, see [Working with replicas for Amazon RDS for Db2]and [Working with read replicas for Amazon RDS for Oracle] in the Amazon RDS User Guide.
 	//
 	// This attribute is only supported in RDS for Db2, RDS for Oracle, and RDS Custom
 	// for Oracle.
 	//
-	// [Working with read replicas for Amazon RDS for Db2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-replication.html
+	// [Working with replicas for Amazon RDS for Db2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-replication.html
 	// [Working with read replicas for Amazon RDS for Oracle]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
 	ReplicaMode ReplicaMode
 
@@ -2408,13 +2408,11 @@ type DBProxy struct {
 	// your Amazon Web Services account in the specified Amazon Web Services Region.
 	DBProxyName *string
 
-	// Indicates whether the proxy includes detailed information about SQL statements
-	// in its logs. This information helps you to debug issues involving SQL behavior
-	// or the performance and scalability of the proxy connections. The debug
-	// information includes the text of SQL statements that you submit through the
-	// proxy. Thus, only enable this setting when needed for debugging, and only when
-	// you have security measures in place to safeguard any sensitive information that
-	// appears in the logs.
+	// Specifies whether the proxy logs detailed connection and query information.
+	// When you enable DebugLogging , the proxy captures connection details and
+	// connection pool behavior from your queries. Debug logging increases CloudWatch
+	// costs and can impact proxy performance. Enable this option only when you need to
+	// troubleshoot connection or performance issues.
 	DebugLogging *bool
 
 	// The endpoint that you can use to connect to the DB proxy. You include the

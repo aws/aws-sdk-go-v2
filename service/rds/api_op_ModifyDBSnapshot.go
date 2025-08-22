@@ -14,8 +14,8 @@ import (
 // Updates a manual DB snapshot with a new engine version. The snapshot can be
 // encrypted or unencrypted, but not shared or public.
 //
-// Amazon RDS supports upgrading DB snapshots for MySQL, PostgreSQL, and Oracle.
-// This operation doesn't apply to RDS Custom or RDS for Db2.
+// Amazon RDS supports upgrading DB snapshots for MariaDB, MySQL, PostgreSQL, and
+// Oracle. This operation doesn't apply to RDS Custom or RDS for Db2.
 func (c *Client) ModifyDBSnapshot(ctx context.Context, params *ModifyDBSnapshotInput, optFns ...func(*Options)) (*ModifyDBSnapshotOutput, error) {
 	if params == nil {
 		params = &ModifyDBSnapshotInput{}
@@ -43,12 +43,27 @@ type ModifyDBSnapshotInput struct {
 	// The following are the database engines and engine versions that are available
 	// when you upgrade a DB snapshot.
 	//
+	// MariaDB
+	//
+	// For the list of engine versions that are available for upgrading a DB snapshot,
+	// see [Upgrading a MariaDB DB snapshot engine version]in the Amazon RDS User Guide.
+	//
 	// MySQL
 	//
 	// For the list of engine versions that are available for upgrading a DB snapshot,
 	// see [Upgrading a MySQL DB snapshot engine version]in the Amazon RDS User Guide.
 	//
 	// Oracle
+	//
+	//   - 21.0.0.0.ru-2025-04.rur-2025-04.r1 (supported for
+	//   21.0.0.0.ru-2022-01.rur-2022-01.r1, 21.0.0.0.ru-2022-04.rur-2022-04.r1,
+	//   21.0.0.0.ru-2022-07.rur-2022-07.r1, 21.0.0.0.ru-2022-10.rur-2022-10.r1,
+	//   21.0.0.0.ru-2023-01.rur-2023-01.r1 and 21.0.0.0.ru-2023-01.rur-2023-01.r2 DB
+	//   snapshots)
+	//
+	//   - 19.0.0.0.ru-2025-04.rur-2025-04.r1 (supported for
+	//   19.0.0.0.ru-2019-07.rur-2019-07.r1, 19.0.0.0.ru-2019-10.rur-2019-10.r1 and
+	//   0.0.0.ru-2020-01.rur-2020-01.r1 DB snapshots)
 	//
 	//   - 19.0.0.0.ru-2022-01.rur-2022-01.r1 (supported for 12.2.0.1 DB snapshots)
 	//
@@ -66,6 +81,7 @@ type ModifyDBSnapshotInput struct {
 	// see [Upgrading a PostgreSQL DB snapshot engine version]in the Amazon RDS User Guide.
 	//
 	// [Upgrading a PostgreSQL DB snapshot engine version]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBSnapshot.PostgreSQL.html
+	// [Upgrading a MariaDB DB snapshot engine version]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mariadb-upgrade-snapshot.html
 	// [Upgrading a MySQL DB snapshot engine version]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql-upgrade-snapshot.html
 	EngineVersion *string
 

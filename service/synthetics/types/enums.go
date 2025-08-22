@@ -2,6 +2,25 @@
 
 package types
 
+type BrowserType string
+
+// Enum values for BrowserType
+const (
+	BrowserTypeChrome  BrowserType = "CHROME"
+	BrowserTypeFirefox BrowserType = "FIREFOX"
+)
+
+// Values returns all known values for BrowserType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BrowserType) Values() []BrowserType {
+	return []BrowserType{
+		"CHROME",
+		"FIREFOX",
+	}
+}
+
 type CanaryRunState string
 
 // Enum values for CanaryRunState

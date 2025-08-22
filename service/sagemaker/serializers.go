@@ -26245,6 +26245,11 @@ func awsAwsjson11_serializeDocumentDockerSettings(v *types.DockerSettings, value
 		ok.String(string(v.EnableDockerAccess))
 	}
 
+	if len(v.RootlessDocker) > 0 {
+		ok := object.Key("RootlessDocker")
+		ok.String(string(v.RootlessDocker))
+	}
+
 	if v.VpcOnlyTrustedAccounts != nil {
 		ok := object.Key("VpcOnlyTrustedAccounts")
 		if err := awsAwsjson11_serializeDocumentVpcOnlyTrustedAccounts(v.VpcOnlyTrustedAccounts, ok); err != nil {

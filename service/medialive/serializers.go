@@ -12452,6 +12452,11 @@ func awsRestjson1_serializeDocumentBurnInDestinationSettings(v *types.BurnInDest
 		ok.Integer(*v.ShadowYOffset)
 	}
 
+	if len(v.SubtitleRows) > 0 {
+		ok := object.Key("subtitleRows")
+		ok.String(string(v.SubtitleRows))
+	}
+
 	if len(v.TeletextGridControl) > 0 {
 		ok := object.Key("teletextGridControl")
 		ok.String(string(v.TeletextGridControl))
@@ -13162,6 +13167,11 @@ func awsRestjson1_serializeDocumentDvbSubDestinationSettings(v *types.DvbSubDest
 	if v.ShadowYOffset != nil {
 		ok := object.Key("shadowYOffset")
 		ok.Integer(*v.ShadowYOffset)
+	}
+
+	if len(v.SubtitleRows) > 0 {
+		ok := object.Key("subtitleRows")
+		ok.String(string(v.SubtitleRows))
 	}
 
 	if len(v.TeletextGridControl) > 0 {

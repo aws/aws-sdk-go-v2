@@ -55,6 +55,13 @@ type UpdateAIPromptInput struct {
 	// The description of the Amazon Q in Connect AI Prompt.
 	Description *string
 
+	// The identifier of the model used for this AI Prompt.
+	//
+	// For more information on supported models, see [Supported models for system and custom prompts].
+	//
+	// [Supported models for system and custom prompts]: https://docs.aws.amazon.com/connect/latest/adminguide/create-ai-prompts.html#cli-create-aiprompt
+	ModelId *string
+
 	// The configuration of the prompt template for this AI Prompt.
 	TemplateConfiguration types.AIPromptTemplateConfiguration
 

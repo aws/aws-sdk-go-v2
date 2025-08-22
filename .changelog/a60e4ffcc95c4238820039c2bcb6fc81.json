@@ -1,0 +1,8 @@
+{
+    "id": "a60e4ffc-c95c-4238-8200-39c2bcb6fc81",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/memorydb"
+    ]
+}

@@ -13,6 +13,14 @@ import (
 
 // Updates the configuration of a canary that has already been created.
 //
+// For multibrowser canaries, you can add or remove browsers by updating the
+// browserConfig list in the update call. For example:
+//
+//   - To add Firefox to a canary that currently uses Chrome, specify
+//     browserConfigs as [CHROME, FIREFOX]
+//
+//   - To remove Firefox and keep only Chrome, specify browserConfigs as [CHROME]
+//
 // You can't use this operation to update the tags of an existing canary. To
 // change the tags of an existing canary, use [TagResource].
 //
@@ -56,6 +64,12 @@ type UpdateCanaryInput struct {
 	// of this canary. Artifacts include the log file, screenshots, and HAR files. The
 	// name of the Amazon S3 bucket can't include a period (.).
 	ArtifactS3Location *string
+
+	// A structure that specifies the browser type to use for a canary run. CloudWatch
+	// Synthetics supports running canaries on both CHROME and FIREFOX browsers.
+	//
+	// If not specified, browserConfigs defaults to Chrome.
+	BrowserConfigs []types.BrowserConfig
 
 	// A structure that includes the entry point from which the canary should start
 	// running your script. If the script is stored in an Amazon S3 bucket, the bucket
@@ -144,6 +158,29 @@ type UpdateCanaryInput struct {
 	// [Visual monitoring]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Library_SyntheticsLogger_VisualTesting.html
 	// [Visual monitoring blueprint]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Blueprints_VisualTesting.html
 	VisualReference *types.VisualReferenceInput
+
+	// A list of visual reference configurations for the canary, one for each browser
+	// type that the canary is configured to run on. Visual references are used for
+	// visual monitoring comparisons.
+	//
+	// syn-nodejs-puppeteer-11.0 and above, and syn-nodejs-playwright-3.0 and above,
+	// only supports visualReferences . visualReference field is not supported.
+	//
+	// Versions older than syn-nodejs-puppeteer-11.0 supports both visualReference and
+	// visualReferences for backward compatibility. It is recommended to use
+	// visualReferences for consistency and future compatibility.
+	//
+	// For multibrowser visual monitoring, you can update the baseline for all
+	// configured browsers in a single update call by specifying a list of
+	// VisualReference objects, one per browser. Each VisualReference object maps to a
+	// specific browser configuration, allowing you to manage visual baselines for
+	// multiple browsers simultaneously.
+	//
+	// For single configuration canaries using Chrome browser (default browser), use
+	// visualReferences for syn-nodejs-puppeteer-11.0 and above, and
+	// syn-nodejs-playwright-3.0 and above canaries. The browserType in the
+	// visualReference object is not mandatory.
+	VisualReferences []types.VisualReferenceInput
 
 	// If this canary is to test an endpoint in a VPC, this structure contains
 	// information about the subnet and security groups of the VPC endpoint. For more

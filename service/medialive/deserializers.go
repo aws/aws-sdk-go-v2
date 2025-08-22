@@ -29865,6 +29865,15 @@ func awsRestjson1_deserializeDocumentBurnInDestinationSettings(v **types.BurnInD
 				sv.ShadowYOffset = ptr.Int32(int32(i64))
 			}
 
+		case "subtitleRows":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BurnInDestinationSubtitleRows to be of type string, got %T instead", value)
+				}
+				sv.SubtitleRows = types.BurnInDestinationSubtitleRows(jtv)
+			}
+
 		case "teletextGridControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -32511,6 +32520,15 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 					return err
 				}
 				sv.ShadowYOffset = ptr.Int32(int32(i64))
+			}
+
+		case "subtitleRows":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DvbSubDestinationSubtitleRows to be of type string, got %T instead", value)
+				}
+				sv.SubtitleRows = types.DvbSubDestinationSubtitleRows(jtv)
 			}
 
 		case "teletextGridControl":

@@ -42,6 +42,9 @@ func (c *Client) DescribeCanariesLastRun(ctx context.Context, params *DescribeCa
 
 type DescribeCanariesLastRunInput struct {
 
+	// The type of browser to use for the canary run.
+	BrowserType types.BrowserType
+
 	// Specify this parameter to limit how many runs are returned each time you use
 	// the DescribeLastRun operation. If you omit this parameter, the default of 100
 	// is used.

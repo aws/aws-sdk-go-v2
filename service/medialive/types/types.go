@@ -947,6 +947,15 @@ type BurnInDestinationSettings struct {
 	// burn-in and DVB-Sub font settings must match.
 	ShadowYOffset *int32
 
+	// Applies only when the input captions are Teletext and the output captions are
+	// DVB-Sub or Burn-In. Choose the number of lines for the captions bitmap. The
+	// captions bitmap is 700 wide × 576 high and will be laid over the video. For
+	// example, a value of 16 divides the bitmap into 16 lines, with each line 36
+	// pixels high (16 × 36 = 576). The default is 24 (24 pixels high). Enter the same
+	// number in every encode in every output that converts the same Teletext source to
+	// DVB-Sub or Burn-in.
+	SubtitleRows BurnInDestinationSubtitleRows
+
 	// Controls whether a fixed grid size will be used to generate the output
 	// subtitles bitmap. Only applicable for Teletext inputs and DVB-Sub/Burn-in
 	// outputs.
@@ -2016,6 +2025,15 @@ type DvbSubDestinationSettings struct {
 	// A value of -2 would result in a shadow offset 2 pixels above the text. All
 	// burn-in and DVB-Sub font settings must match.
 	ShadowYOffset *int32
+
+	// Applies only when the input captions are Teletext and the output captions are
+	// DVB-Sub or Burn-In. Choose the number of lines for the captions bitmap. The
+	// captions bitmap is 700 wide × 576 high and will be laid over the video. For
+	// example, a value of 16 divides the bitmap into 16 lines, with each line 36
+	// pixels high (16 × 36 = 576). The default is 24 (24 pixels high). Enter the same
+	// number in every encode in every output that converts the same Teletext source to
+	// DVB-Sub or Burn-in.
+	SubtitleRows DvbSubDestinationSubtitleRows
 
 	// Controls whether a fixed grid size will be used to generate the output
 	// subtitles bitmap. Only applicable for Teletext inputs and DVB-Sub/Burn-in

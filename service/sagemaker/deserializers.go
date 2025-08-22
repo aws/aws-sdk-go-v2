@@ -53462,6 +53462,15 @@ func awsAwsjson11_deserializeDocumentDockerSettings(v **types.DockerSettings, va
 				sv.EnableDockerAccess = types.FeatureStatus(jtv)
 			}
 
+		case "RootlessDocker":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FeatureStatus to be of type string, got %T instead", value)
+				}
+				sv.RootlessDocker = types.FeatureStatus(jtv)
+			}
+
 		case "VpcOnlyTrustedAccounts":
 			if err := awsAwsjson11_deserializeDocumentVpcOnlyTrustedAccounts(&sv.VpcOnlyTrustedAccounts, value); err != nil {
 				return err

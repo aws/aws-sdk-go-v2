@@ -3658,6 +3658,80 @@ func awsRestjson1_deserializeDocumentBaseScreenshots(v *[]types.BaseScreenshot, 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentBrowserConfig(v **types.BrowserConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BrowserConfig
+	if *v == nil {
+		sv = &types.BrowserConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BrowserType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BrowserType to be of type string, got %T instead", value)
+				}
+				sv.BrowserType = types.BrowserType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBrowserConfigs(v *[]types.BrowserConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.BrowserConfig
+	if *v == nil {
+		cv = []types.BrowserConfig{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.BrowserConfig
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentBrowserConfig(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCanaries(v *[]types.Canary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3762,6 +3836,11 @@ func awsRestjson1_deserializeDocumentCanary(v **types.Canary, value interface{})
 				sv.ArtifactS3Location = ptr.String(jtv)
 			}
 
+		case "BrowserConfigs":
+			if err := awsRestjson1_deserializeDocumentBrowserConfigs(&sv.BrowserConfigs, value); err != nil {
+				return err
+			}
+
 		case "Code":
 			if err := awsRestjson1_deserializeDocumentCanaryCodeOutput(&sv.Code, value); err != nil {
 				return err
@@ -3779,6 +3858,11 @@ func awsRestjson1_deserializeDocumentCanary(v **types.Canary, value interface{})
 					return fmt.Errorf("expected FunctionArn to be of type string, got %T instead", value)
 				}
 				sv.EngineArn = ptr.String(jtv)
+			}
+
+		case "EngineConfigs":
+			if err := awsRestjson1_deserializeDocumentEngineConfigs(&sv.EngineConfigs, value); err != nil {
+				return err
 			}
 
 		case "ExecutionRoleArn":
@@ -3879,6 +3963,11 @@ func awsRestjson1_deserializeDocumentCanary(v **types.Canary, value interface{})
 
 		case "VisualReference":
 			if err := awsRestjson1_deserializeDocumentVisualReferenceOutput(&sv.VisualReference, value); err != nil {
+				return err
+			}
+
+		case "VisualReferences":
+			if err := awsRestjson1_deserializeDocumentVisualReferencesOutput(&sv.VisualReferences, value); err != nil {
 				return err
 			}
 
@@ -4064,6 +4153,15 @@ func awsRestjson1_deserializeDocumentCanaryRun(v **types.CanaryRun, value interf
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ArtifactS3Location = ptr.String(jtv)
+			}
+
+		case "BrowserType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BrowserType to be of type string, got %T instead", value)
+				}
+				sv.BrowserType = types.BrowserType(jtv)
 			}
 
 		case "DryRunConfig":
@@ -4769,6 +4867,89 @@ func awsRestjson1_deserializeDocumentDryRunConfigOutput(v **types.DryRunConfigOu
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEngineConfig(v **types.EngineConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EngineConfig
+	if *v == nil {
+		sv = &types.EngineConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BrowserType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BrowserType to be of type string, got %T instead", value)
+				}
+				sv.BrowserType = types.BrowserType(jtv)
+			}
+
+		case "EngineArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FunctionArn to be of type string, got %T instead", value)
+				}
+				sv.EngineArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEngineConfigs(v *[]types.EngineConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.EngineConfig
+	if *v == nil {
+		cv = []types.EngineConfig{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.EngineConfig
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentEngineConfig(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -5667,12 +5848,55 @@ func awsRestjson1_deserializeDocumentVisualReferenceOutput(v **types.VisualRefer
 				return err
 			}
 
+		case "BrowserType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BrowserType to be of type string, got %T instead", value)
+				}
+				sv.BrowserType = types.BrowserType(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVisualReferencesOutput(v *[]types.VisualReferenceOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.VisualReferenceOutput
+	if *v == nil {
+		cv = []types.VisualReferenceOutput{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.VisualReferenceOutput
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentVisualReferenceOutput(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

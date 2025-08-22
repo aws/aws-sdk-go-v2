@@ -7571,6 +7571,13 @@ func awsAwsjson11_serializeOpDocumentUpdateWebACLInput(v *UpdateWebACLInput, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.ApplicationConfig != nil {
+		ok := object.Key("ApplicationConfig")
+		if err := awsAwsjson11_serializeDocumentApplicationConfig(v.ApplicationConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.AssociationConfig != nil {
 		ok := object.Key("AssociationConfig")
 		if err := awsAwsjson11_serializeDocumentAssociationConfig(v.AssociationConfig, ok); err != nil {

@@ -1,0 +1,8 @@
+{
+    "id": "c0881bfe-8097-416c-9b51-6c646cbe3624",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/marketplacecommerceanalytics"
+    ]
+}

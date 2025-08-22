@@ -1,0 +1,8 @@
+{
+    "id": "2959a846-b789-40a7-bd28-d36540369864",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/b2bi"
+    ]
+}

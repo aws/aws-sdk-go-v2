@@ -1,0 +1,8 @@
+{
+    "id": "d281a37d-52a6-41a1-a7e7-c5253b6602c5",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/redshiftdata"
+    ]
+}

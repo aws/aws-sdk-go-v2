@@ -1,0 +1,8 @@
+{
+    "id": "d6ca88d2-92d1-4fca-b1de-4a6008e33d61",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/healthlake"
+    ]
+}

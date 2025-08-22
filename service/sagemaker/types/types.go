@@ -3792,7 +3792,7 @@ type ClusterInstanceGroupSpecification struct {
 	//
 	//   - default : Use the default latest system image
 	//
-	// f you choose to use a custom AMI ( CustomAmiId ), ensure it meets the following
+	// If you choose to use a custom AMI ( CustomAmiId ), ensure it meets the following
 	// requirements:
 	//
 	//   - Encryption: The custom AMI must be unencrypted.
@@ -3805,7 +3805,9 @@ type ClusterInstanceGroupSpecification struct {
 	//
 	// When updating the instance group's AMI through the UpdateClusterSoftware
 	// operation, if an instance group uses a custom AMI, you must provide an ImageId
-	// or use the default as input.
+	// or use the default as input. Note that if you don't specify an instance group in
+	// your UpdateClusterSoftware request, then all of the instance groups are patched
+	// with the specified image.
 	ImageId *string
 
 	// Specifies the additional storage configurations for the instances in the
@@ -5831,6 +5833,9 @@ type DockerSettings struct {
 
 	// Indicates whether the domain can access Docker.
 	EnableDockerAccess FeatureStatus
+
+	// Indicates whether to use rootless Docker. Default value is DISABLED .
+	RootlessDocker FeatureStatus
 
 	// The list of Amazon Web Services accounts that are trusted when the domain is
 	// created in VPC-only mode.

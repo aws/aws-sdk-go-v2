@@ -915,7 +915,7 @@ type ModifyDBInstanceInput struct {
 	// can't serve a read-only workload.
 	//
 	// You can create a combination of standby and read-only DB replicas for the same
-	// primary DB instance. For more information, see [Working with read replicas for Amazon RDS for Db2]in the Amazon RDS User Guide.
+	// primary DB instance. For more information, see [Working with replicas for Amazon RDS for Db2]in the Amazon RDS User Guide.
 	//
 	// To create standby DB replicas for RDS for Db2, set this parameter to mounted .
 	//
@@ -932,7 +932,7 @@ type ModifyDBInstanceInput struct {
 	// value won't be set by default. After replica creation, you can manage the open
 	// mode manually.
 	//
-	// [Working with read replicas for Amazon RDS for Db2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-replication.html
+	// [Working with replicas for Amazon RDS for Db2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-replication.html
 	// [Working with read replicas for Amazon RDS for Oracle]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
 	ReplicaMode types.ReplicaMode
 

@@ -581,6 +581,23 @@ func validateVisualReferenceInput(v *types.VisualReferenceInput) error {
 	}
 }
 
+func validateVisualReferences(v []types.VisualReferenceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VisualReferences"}
+	for i := range v {
+		if err := validateVisualReferenceInput(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateResourceInput(v *AssociateResourceInput) error {
 	if v == nil {
 		return nil
@@ -808,6 +825,11 @@ func validateOpStartCanaryDryRunInput(v *StartCanaryDryRunInput) error {
 			invalidParams.AddNested("VisualReference", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.VisualReferences != nil {
+		if err := validateVisualReferences(v.VisualReferences); err != nil {
+			invalidParams.AddNested("VisualReferences", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -902,6 +924,11 @@ func validateOpUpdateCanaryInput(v *UpdateCanaryInput) error {
 	if v.VisualReference != nil {
 		if err := validateVisualReferenceInput(v.VisualReference); err != nil {
 			invalidParams.AddNested("VisualReference", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VisualReferences != nil {
+		if err := validateVisualReferences(v.VisualReferences); err != nil {
+			invalidParams.AddNested("VisualReferences", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

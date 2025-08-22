@@ -15,13 +15,9 @@ import (
 
 // Creates a new DB instance that acts as a read replica for an existing source DB
 // instance or Multi-AZ DB cluster. You can create a read replica for a DB instance
-// running MariaDB, MySQL, Oracle, PostgreSQL, or SQL Server. You can create a read
-// replica for a Multi-AZ DB cluster running MySQL or PostgreSQL. For more
+// running Db2, MariaDB, MySQL, Oracle, PostgreSQL, or SQL Server. You can create a
+// read replica for a Multi-AZ DB cluster running MySQL or PostgreSQL. For more
 // information, see [Working with read replicas]and [Migrating from a Multi-AZ DB cluster to a DB instance using a read replica] in the Amazon RDS User Guide.
-//
-// Amazon RDS for Db2 supports this operation for standby replicas. To create a
-// standby replica for a DB instance running Db2, you must set ReplicaMode to
-// mounted .
 //
 // Amazon Aurora doesn't support this operation. To create a DB instance for an
 // Aurora DB cluster, use the CreateDBInstance operation.
@@ -551,7 +547,7 @@ type CreateDBInstanceReadReplicaInput struct {
 	// can't serve a read-only workload.
 	//
 	// You can create a combination of standby and read-only DB replicas for the same
-	// primary DB instance. For more information, see [Working with read replicas for Amazon RDS for Db2]in the Amazon RDS User Guide.
+	// primary DB instance. For more information, see [Working with replicas for Amazon RDS for Db2]in the Amazon RDS User Guide.
 	//
 	// To create standby DB replicas for RDS for Db2, set this parameter to mounted .
 	//
@@ -568,7 +564,7 @@ type CreateDBInstanceReadReplicaInput struct {
 	// value won't be set by default. After replica creation, you can manage the open
 	// mode manually.
 	//
-	// [Working with read replicas for Amazon RDS for Db2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-replication.html
+	// [Working with replicas for Amazon RDS for Db2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-replication.html
 	// [Working with read replicas for Amazon RDS for Oracle]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
 	ReplicaMode types.ReplicaMode
 

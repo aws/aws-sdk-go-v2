@@ -1,0 +1,8 @@
+{
+    "id": "73de40dd-f31d-45eb-9f55-e90450fe63f1",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/iotanalytics"
+    ]
+}

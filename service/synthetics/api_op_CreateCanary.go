@@ -114,6 +114,15 @@ type CreateCanaryInput struct {
 	// encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.
 	ArtifactConfig *types.ArtifactConfigInput
 
+	// CloudWatch Synthetics now supports multibrowser canaries for
+	// syn-nodejs-puppeteer-11.0 and syn-nodejs-playwright-3.0 runtimes. This feature
+	// allows you to run your canaries on both Firefox and Chrome browsers. To create a
+	// multibrowser canary, you need to specify the BrowserConfigs with a list of
+	// browsers you want to use.
+	//
+	// If not specified, browserConfigs defaults to Chrome.
+	BrowserConfigs []types.BrowserConfig
+
 	// The number of days to retain data about failed runs of this canary. If you omit
 	// this field, the default of 31 days is used. The valid range is 1 to 455 days.
 	//

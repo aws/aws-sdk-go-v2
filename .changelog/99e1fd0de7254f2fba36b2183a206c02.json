@@ -1,0 +1,8 @@
+{
+    "id": "99e1fd0d-e725-4f2f-ba36-b2183a206c02",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/simspaceweaver"
+    ]
+}
