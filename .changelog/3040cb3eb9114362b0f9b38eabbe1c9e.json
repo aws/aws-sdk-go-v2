@@ -1,8 +1,0 @@
-{
-    "id": "3040cb3e-b911-4362-b0f9-b38eabbe1c9e",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/rolesanywhere"
-    ]
-}

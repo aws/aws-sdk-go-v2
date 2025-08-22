@@ -1,8 +1,0 @@
-{
-    "id": "5a327bbb-274f-4323-8870-25b954ccad46",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/qldb"
-    ]
-}

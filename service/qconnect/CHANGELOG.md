@@ -1,3 +1,7 @@
+# v1.22.0 (2025-08-22)
+
+* **Feature**: Releasing model ID support for UpdateAIPrompt
+
 # v1.21.2 (2025-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

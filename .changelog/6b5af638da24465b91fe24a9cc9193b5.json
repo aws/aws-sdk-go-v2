@@ -1,8 +1,0 @@
-{
-    "id": "6b5af638-da24-465b-91fe-24a9cc9193b5",
-    "type": "documentation",
-    "description": "Updates Amazon RDS documentation for Db2 read-only replicas.",
-    "modules": [
-        "service/rds"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.67.0 (2025-08-22)
+
+* **Feature**: test and verified, safe to release
+
 # v1.66.2 (2025-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

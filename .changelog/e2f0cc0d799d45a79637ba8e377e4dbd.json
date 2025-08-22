@@ -1,8 +1,0 @@
-{
-    "id": "e2f0cc0d-799d-45a7-9637-ba8e377e4dbd",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/cognitosync"
-    ]
-}

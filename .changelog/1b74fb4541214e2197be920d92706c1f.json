@@ -1,8 +1,0 @@
-{
-    "id": "1b74fb45-4121-4e21-97be-920d92706c1f",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/emrserverless"
-    ]
-}

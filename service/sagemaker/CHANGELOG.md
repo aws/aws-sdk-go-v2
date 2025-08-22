@@ -1,3 +1,7 @@
+# v1.212.0 (2025-08-22)
+
+* **Feature**: Launch SageMaker Notebook Instances support for AL2023 along with P6-B200 instance type and Rootless Docker support for SageMaker Studio.
+
 # v1.211.1 (2025-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "99676aa8-e4d5-4642-9a93-a15ceeb69990",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/clouddirectory"
-    ]
-}

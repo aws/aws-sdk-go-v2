@@ -1,8 +1,0 @@
-{
-    "id": "405200d1-566d-4782-9cad-1546490850de",
-    "type": "feature",
-    "description": "Releasing model ID support for UpdateAIPrompt",
-    "modules": [
-        "service/qconnect"
-    ]
-}

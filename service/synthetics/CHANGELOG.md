@@ -1,3 +1,7 @@
+# v1.40.0 (2025-08-22)
+
+* **Feature**: Added multi browser support for synthetics canaries, Increased ephemeral storage limit from 5GB to 10GB
+
 # v1.39.2 (2025-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

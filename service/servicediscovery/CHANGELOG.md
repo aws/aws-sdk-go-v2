@@ -1,3 +1,7 @@
+# v1.39.3 (2025-08-22)
+
+* **Documentation**: Updating SDK examples after launch of shared AWS Cloud Map namespaces
+
 # v1.39.2 (2025-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

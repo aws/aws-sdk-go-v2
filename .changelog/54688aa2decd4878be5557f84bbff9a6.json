@@ -1,8 +1,0 @@
-{
-    "id": "54688aa2-decd-4878-be55-57f84bbff9a6",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/route53recoveryreadiness"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "b980d77c-a957-4cea-9ff5-b3097efc7ebe",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/macie2"
-    ]
-}

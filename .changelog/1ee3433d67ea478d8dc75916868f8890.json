@@ -1,8 +1,0 @@
-{
-    "id": "1ee3433d-67ea-478d-8dc7-5916868f8890",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/proton"
-    ]
-}

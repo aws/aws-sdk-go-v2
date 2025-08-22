@@ -1,8 +1,0 @@
-{
-    "id": "14712a84-105e-463b-be46-4076b3f51ff9",
-    "type": "documentation",
-    "description": "Updating SDK examples after launch of shared AWS Cloud Map namespaces",
-    "modules": [
-        "service/servicediscovery"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "ba4373be-2808-4d04-9fac-cbf2a6cfacd8",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/apigateway"
-    ]
-}

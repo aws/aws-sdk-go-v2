@@ -1,8 +1,0 @@
-{
-    "id": "4e1b4ace-e5bb-417a-8521-1262c1e91787",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/docdb"
-    ]
-}

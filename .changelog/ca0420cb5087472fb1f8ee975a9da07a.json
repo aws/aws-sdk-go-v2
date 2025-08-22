@@ -1,8 +1,0 @@
-{
-    "id": "ca0420cb-5087-472f-b1f8-ee975a9da07a",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/sagemakera2iruntime"
-    ]
-}

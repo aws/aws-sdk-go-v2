@@ -1,8 +1,0 @@
-{
-    "id": "da7c6c91-cd4a-412a-b490-f0e5ec1a903c",
-    "type": "feature",
-    "description": "Added multi browser support for synthetics canaries, Increased ephemeral storage limit from 5GB to 10GB",
-    "modules": [
-        "service/synthetics"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "b0854e62-7927-4763-854d-efeb1eb9cbd5",
-    "type": "feature",
-    "description": "test and verified, safe to release",
-    "modules": [
-        "service/wafv2"
-    ]
-}

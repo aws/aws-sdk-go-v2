@@ -1,3 +1,7 @@
+# v1.46.0 (2025-08-22)
+
+* **Feature**: Remove incorrect endpoint tests
+
 # v1.45.2 (2025-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

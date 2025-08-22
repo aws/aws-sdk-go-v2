@@ -1,3 +1,89 @@
+# Release (2025-08-22)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/account`: [v1.28.0](service/account/CHANGELOG.md#v1280-2025-08-22)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/apigateway`: [v1.35.0](service/apigateway/CHANGELOG.md#v1350-2025-08-22)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/apigatewayv2`: [v1.32.0](service/apigatewayv2/CHANGELOG.md#v1320-2025-08-22)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/b2bi`: [v1.0.0-preview.78](service/b2bi/CHANGELOG.md#v100-preview78-2025-08-22)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/clouddirectory`: [v1.29.0](service/clouddirectory/CHANGELOG.md#v1290-2025-08-22)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/codepipeline`: [v1.46.0](service/codepipeline/CHANGELOG.md#v1460-2025-08-22)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/cognitosync`: [v1.28.0](service/cognitosync/CHANGELOG.md#v1280-2025-08-22)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/dataexchange`: [v1.39.0](service/dataexchange/CHANGELOG.md#v1390-2025-08-22)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/docdb`: [v1.46.0](service/docdb/CHANGELOG.md#v1460-2025-08-22)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing`: [v1.33.0](service/elasticloadbalancing/CHANGELOG.md#v1330-2025-08-22)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.36.0](service/emrserverless/CHANGELOG.md#v1360-2025-08-22)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/firehose`: [v1.41.0](service/firehose/CHANGELOG.md#v1410-2025-08-22)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/healthlake`: [v1.34.0](service/healthlake/CHANGELOG.md#v1340-2025-08-22)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/iotanalytics`: [v1.31.0](service/iotanalytics/CHANGELOG.md#v1310-2025-08-22)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/launchwizard`: [v1.13.0](service/launchwizard/CHANGELOG.md#v1130-2025-08-22)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.49.0](service/location/CHANGELOG.md#v1490-2025-08-22)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/macie2`: [v1.49.0](service/macie2/CHANGELOG.md#v1490-2025-08-22)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics`: [v1.29.0](service/marketplacecommerceanalytics/CHANGELOG.md#v1290-2025-08-22)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.81.0](service/medialive/CHANGELOG.md#v1810-2025-08-22)
+  * **Feature**: AWS Elemental MediaLive now has a field called "SubtitleRows" for controlling subtitle row count for DVB-Sub and Burn-In captions outputs
+* `github.com/aws/aws-sdk-go-v2/service/memorydb`: [v1.31.0](service/memorydb/CHANGELOG.md#v1310-2025-08-22)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator`: [v1.18.0](service/migrationhuborchestrator/CHANGELOG.md#v1180-2025-08-22)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/networkmonitor`: [v1.12.0](service/networkmonitor/CHANGELOG.md#v1120-2025-08-22)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.44.0](service/organizations/CHANGELOG.md#v1440-2025-08-22)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptography`: [v1.23.0](service/paymentcryptography/CHANGELOG.md#v1230-2025-08-22)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/pricing`: [v1.39.0](service/pricing/CHANGELOG.md#v1390-2025-08-22)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/proton`: [v1.38.0](service/proton/CHANGELOG.md#v1380-2025-08-22)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.22.0](service/qconnect/CHANGELOG.md#v1220-2025-08-22)
+  * **Feature**: Releasing model ID support for UpdateAIPrompt
+* `github.com/aws/aws-sdk-go-v2/service/qldb`: [v1.30.0](service/qldb/CHANGELOG.md#v1300-2025-08-22)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.103.3](service/rds/CHANGELOG.md#v11033-2025-08-22)
+  * **Documentation**: Updates Amazon RDS documentation for Db2 read-only replicas.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftdata`: [v1.37.0](service/redshiftdata/CHANGELOG.md#v1370-2025-08-22)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/rolesanywhere`: [v1.21.0](service/rolesanywhere/CHANGELOG.md#v1210-2025-08-22)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness`: [v1.26.0](service/route53recoveryreadiness/CHANGELOG.md#v1260-2025-08-22)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/rum`: [v1.28.0](service/rum/CHANGELOG.md#v1280-2025-08-22)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.212.0](service/sagemaker/CHANGELOG.md#v12120-2025-08-22)
+  * **Feature**: Launch SageMaker Notebook Instances support for AL2023 along with P6-B200 instance type and Rootless Docker support for SageMaker Studio.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakera2iruntime`: [v1.32.0](service/sagemakera2iruntime/CHANGELOG.md#v1320-2025-08-22)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/sagemakermetrics`: [v1.18.0](service/sagemakermetrics/CHANGELOG.md#v1180-2025-08-22)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/servicediscovery`: [v1.39.3](service/servicediscovery/CHANGELOG.md#v1393-2025-08-22)
+  * **Documentation**: Updating SDK examples after launch of shared AWS Cloud Map namespaces
+* `github.com/aws/aws-sdk-go-v2/service/simspaceweaver`: [v1.19.0](service/simspaceweaver/CHANGELOG.md#v1190-2025-08-22)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/sqs`: [v1.42.0](service/sqs/CHANGELOG.md#v1420-2025-08-22)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/synthetics`: [v1.40.0](service/synthetics/CHANGELOG.md#v1400-2025-08-22)
+  * **Feature**: Added multi browser support for synthetics canaries, Increased ephemeral storage limit from 5GB to 10GB
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.67.0](service/wafv2/CHANGELOG.md#v1670-2025-08-22)
+  * **Feature**: test and verified, safe to release
+
 # Release (2025-08-21)
 
 ## General Highlights

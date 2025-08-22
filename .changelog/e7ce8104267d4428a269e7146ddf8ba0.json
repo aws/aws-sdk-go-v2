@@ -1,8 +1,0 @@
-{
-    "id": "e7ce8104-267d-4428-a269-e7146ddf8ba0",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/sagemakermetrics"
-    ]
-}

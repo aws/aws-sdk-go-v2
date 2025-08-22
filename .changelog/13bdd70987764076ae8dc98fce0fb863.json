@@ -1,8 +1,0 @@
-{
-    "id": "13bdd709-8776-4076-ae8d-c98fce0fb863",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/dataexchange"
-    ]
-}

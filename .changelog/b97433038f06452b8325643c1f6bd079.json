@@ -1,8 +1,0 @@
-{
-    "id": "b9743303-8f06-452b-8325-643c1f6bd079",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/elasticloadbalancing"
-    ]
-}
