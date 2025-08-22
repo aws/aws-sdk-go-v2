@@ -1482,17 +1482,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -1503,17 +1492,6 @@
                                 "Region": "us-iso-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         },
                         {
@@ -1530,17 +1508,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -1551,17 +1518,6 @@
                                 "Region": "us-isob-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         },
                         {
@@ -1975,7 +1931,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 10
+                    "max": 50
                 }
             }
         },
@@ -11380,7 +11336,7 @@
                 "Name": {
                     "target": "com.amazonaws.wafv2#EntityName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the rule to override.</p>\n         <note>\n            <p>Take care to verify the rule names in your overrides. If you provide a rule name that doesn't match the name of any rule in the rule group, WAF doesn't return an error and doesn't apply the override setting.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The name of the rule to override.</p>\n         <note>\n            <p>Verify the rule names in your overrides carefully. With managed rule groups, WAF silently ignores any override that uses an invalid rule name. With customer-owned rule groups, invalid rule names in your overrides will cause web ACL updates to fail. An invalid rule name is any name that doesn't exactly match the case-sensitive name of an existing rule in the rule group.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11393,7 +11349,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Action setting to use in the place of a rule action that is configured inside the rule group. You specify one override for each rule whose action you want to change. </p>\n         <note>\n            <p>Take care to verify the rule names in your overrides. If you provide a rule name that doesn't match the name of any rule in the rule group, WAF doesn't return an error and doesn't apply the override setting.</p>\n         </note>\n         <p>You can use overrides for testing, for example you can override all of rule actions to <code>Count</code> and then monitor the resulting count metrics to understand how the rule group would handle your web traffic. You can also permanently override some or all actions, to modify how the rule group manages your web traffic.</p>"
+                "smithy.api#documentation": "<p>Action setting to use in the place of a rule action that is configured inside the rule group. You specify one override for each rule whose action you want to change. </p>\n         <note>\n            <p>Verify the rule names in your overrides carefully. With managed rule groups, WAF silently ignores any override that uses an invalid rule name. With customer-owned rule groups, invalid rule names in your overrides will cause web ACL updates to fail. An invalid rule name is any name that doesn't exactly match the case-sensitive name of an existing rule in the rule group.</p>\n         </note>\n         <p>You can use overrides for testing, for example you can override all of rule actions to <code>Count</code> and then monitor the resulting count metrics to understand how the rule group would handle your web traffic. You can also permanently override some or all actions, to modify how the rule group manages your web traffic.</p>"
             }
         },
         "com.amazonaws.wafv2#RuleActionOverrides": {
@@ -13045,6 +13001,12 @@
                     "target": "com.amazonaws.wafv2#OnSourceDDoSProtectionConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the type of DDoS protection to apply to web request data for a web ACL. For most scenarios, it is recommended to use the default protection level, <code>ACTIVE_UNDER_DDOS</code>. \n   If a web ACL is associated with multiple Application Load Balancers, the changes you make to DDoS protection in that web ACL will apply to all associated Application Load Balancers.</p>"
+                    }
+                },
+                "ApplicationConfig": {
+                    "target": "com.amazonaws.wafv2#ApplicationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configures the ability for the WAF console to store and retrieve application attributes. \n         Application attributes help WAF give recommendations for protection packs.</p>\n         <p>When using <code>UpdateWebACL</code>, <code>ApplicationConfig</code> follows these rules:</p>\n         <ul>\n            <li>\n               <p>If you omit <code>ApplicationConfig</code> from the request, all existing entries in the web ACL are retained.</p>\n            </li>\n            <li>\n               <p>If you include <code>ApplicationConfig</code>, entries must match the existing values exactly. Any attempt to modify existing entries will result in an error.</p>\n            </li>\n         </ul>"
                     }
                 }
             },

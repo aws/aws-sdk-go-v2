@@ -201,6 +201,49 @@
                 }
             }
         },
+        "com.amazonaws.synthetics#BrowserConfig": {
+            "type": "structure",
+            "members": {
+                "BrowserType": {
+                    "target": "com.amazonaws.synthetics#BrowserType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The browser type associated with this browser configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that specifies the browser type to use for a canary run.</p>"
+            }
+        },
+        "com.amazonaws.synthetics#BrowserConfigs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.synthetics#BrowserConfig"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.synthetics#BrowserType": {
+            "type": "enum",
+            "members": {
+                "CHROME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CHROME"
+                    }
+                },
+                "FIREFOX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIREFOX"
+                    }
+                }
+            }
+        },
         "com.amazonaws.synthetics#Canaries": {
             "type": "list",
             "member": {
@@ -301,6 +344,24 @@
                     "target": "com.amazonaws.synthetics#ProvisionedResourceCleanupSetting",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether to also delete the Lambda functions and layers used by this canary\n         when the canary is deleted. If it is <code>AUTOMATIC</code>, the Lambda functions and layers will be deleted\n         when the canary is deleted.</p>\n         <p>If the value of this parameter is <code>OFF</code>, then the value of the <code>DeleteLambda</code> parameter\n         of the <a href=\"https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DeleteCanary.html\">DeleteCanary</a> operation\n         determines whether the Lambda functions and layers will be deleted.</p>"
+                    }
+                },
+                "BrowserConfigs": {
+                    "target": "com.amazonaws.synthetics#BrowserConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that specifies the browser type to use for a canary run. CloudWatch Synthetics supports running canaries on both <code>CHROME</code> and <code>FIREFOX</code> browsers.</p>\n         <note>\n            <p>If not specified, <code>browserConfigs</code> defaults to Chrome.</p>\n         </note>"
+                    }
+                },
+                "EngineConfigs": {
+                    "target": "com.amazonaws.synthetics#EngineConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of engine configurations for the canary, one for each browser type that the canary is configured to run on.</p>\n         <p>All runtime versions <code>syn-nodejs-puppeteer-11.0</code> and above, and <code>syn-nodejs-playwright-3.0</code> and above, use <code>engineConfigs</code> only. \n         You can no longer use <code>engineArn</code> in these versions.</p>\n         <p>Runtime versions older than <code>syn-nodejs-puppeteer-11.0</code> and <code>syn-nodejs-playwright-3.0</code> continue to support <code>engineArn</code> to ensure backward compatibility.</p>"
+                    }
+                },
+                "VisualReferences": {
+                    "target": "com.amazonaws.synthetics#VisualReferencesOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of visual reference configurations for the canary, one for each browser type that the canary is configured to run on. Visual references are used for visual monitoring comparisons.</p>\n         <p>\n            <code>syn-nodejs-puppeteer-11.0</code> and above, and <code>syn-nodejs-playwright-3.0</code> and above, only supports <code>visualReferences</code>. <code>visualReference</code> field is not supported.</p>\n         <p>Versions older than <code>syn-nodejs-puppeteer-11.0</code> supports both <code>visualReference</code> and <code>visualReferences</code> for backward compatibility. It is recommended to use <code>visualReferences</code>\n         for consistency and future compatibility.</p>"
                     }
                 },
                 "Tags": {
@@ -500,6 +561,12 @@
                     "target": "com.amazonaws.synthetics#CanaryDryRunConfigOutput",
                     "traits": {
                         "smithy.api#documentation": "<p>Returns the dry run configurations for a canary.</p>"
+                    }
+                },
+                "BrowserType": {
+                    "target": "com.amazonaws.synthetics#BrowserType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The browser type associated with this canary run.</p>"
                     }
                 }
             },
@@ -1083,6 +1150,12 @@
                         "smithy.api#documentation": "<p>Specifies whether to also delete the Lambda functions and layers used by this canary\n      when the canary is deleted. If you omit this parameter, the default of <code>AUTOMATIC</code> is used, which means\n         that the Lambda functions and layers will be deleted when the canary is deleted.</p>\n         <p>If the value of this parameter is <code>OFF</code>, then the value of the <code>DeleteLambda</code> parameter\n         of the <a href=\"https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DeleteCanary.html\">DeleteCanary</a> operation\n         determines whether the Lambda functions and layers will be deleted.</p>"
                     }
                 },
+                "BrowserConfigs": {
+                    "target": "com.amazonaws.synthetics#BrowserConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>CloudWatch Synthetics now supports multibrowser canaries for <code>syn-nodejs-puppeteer-11.0</code> and <code>syn-nodejs-playwright-3.0</code> runtimes. This feature allows you to run your canaries on both \n         Firefox and Chrome browsers. To create a multibrowser canary, you need to specify the BrowserConfigs with a list of browsers you want to use.</p>\n         <note>\n            <p>If not specified, <code>browserConfigs</code> defaults to Chrome.</p>\n         </note>"
+                    }
+                },
                 "Tags": {
                     "target": "com.amazonaws.synthetics#TagMap",
                     "traits": {
@@ -1432,6 +1505,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Use this parameter to return only canaries that match the names that you specify here. You can\n         specify as many as five canary names.</p>\n         <p>If you specify this parameter, the operation is successful only if you have authorization to view\n         all the canaries that you specify in your request. If you do not have permission to view any of \n         the canaries, the request fails with a 403 response.</p>\n         <p>You are required to use the <code>Names</code> parameter if you are logged on to a user or role that has an \n         IAM policy that restricts which canaries that you are allowed to view. For more information, \n         see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html\">\n            Limiting a user to viewing specific canaries</a>.</p>"
                     }
+                },
+                "BrowserType": {
+                    "target": "com.amazonaws.synthetics#BrowserType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of browser to use for the canary run.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1684,6 +1763,32 @@
                 }
             }
         },
+        "com.amazonaws.synthetics#EngineConfig": {
+            "type": "structure",
+            "members": {
+                "EngineArn": {
+                    "target": "com.amazonaws.synthetics#FunctionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Each engine configuration contains the ARN of the Lambda function that is used as the canary's engine for a specific browser type.\n         </p>"
+                    }
+                },
+                "BrowserType": {
+                    "target": "com.amazonaws.synthetics#BrowserType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The browser type associated with this engine configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure of engine configurations for the canary, one for each browser type that the canary is configured to run on.</p>"
+            }
+        },
+        "com.amazonaws.synthetics#EngineConfigs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.synthetics#EngineConfig"
+            }
+        },
         "com.amazonaws.synthetics#EnvironmentVariableName": {
             "type": "string",
             "traits": {
@@ -1707,7 +1812,7 @@
             "traits": {
                 "smithy.api#range": {
                     "min": 1024,
-                    "max": 5120
+                    "max": 10240
                 }
             }
         },
@@ -2830,6 +2935,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether to also delete the Lambda functions and layers used by this canary\n         when the canary is deleted. If you omit this parameter, the default of <code>AUTOMATIC</code> is used, which means\n\n         that the Lambda functions and layers will be deleted when the canary is deleted.</p>\n         <p>If the value of this parameter is <code>OFF</code>, then the value of the <code>DeleteLambda</code> parameter\n         of the <a href=\"https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DeleteCanary.html\">DeleteCanary</a> operation\n         determines whether the Lambda functions and layers will be deleted.</p>"
                     }
+                },
+                "BrowserConfigs": {
+                    "target": "com.amazonaws.synthetics#BrowserConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that specifies the browser type to use for a canary run. CloudWatch Synthetics supports running canaries on both <code>CHROME</code> and <code>FIREFOX</code> browsers.</p>\n         <note>\n            <p>If not specified, <code>browserConfigs</code> defaults to Chrome.</p>\n         </note>"
+                    }
+                },
+                "VisualReferences": {
+                    "target": "com.amazonaws.synthetics#VisualReferences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of visual reference configurations for the canary, one for each browser type that the canary is configured to run on. Visual references are used for visual monitoring comparisons.</p>\n         <p>\n            <code>syn-nodejs-puppeteer-11.0</code> and above, and <code>syn-nodejs-playwright-3.0</code> and above, only supports <code>visualReferences</code>. <code>visualReference</code> field is not supported.</p>\n         <p>Versions older than <code>syn-nodejs-puppeteer-11.0</code> supports both <code>visualReference</code> and <code>visualReferences</code> for backward compatibility. It is recommended to use <code>visualReferences</code>\n         for consistency and future compatibility.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3879,17 +3996,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -3900,17 +4006,6 @@
                                 "Region": "us-iso-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         },
                         {
@@ -3927,17 +4022,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -3948,17 +4032,6 @@
                                 "Region": "us-isob-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         },
                         {
@@ -4258,7 +4331,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the configuration of a canary that has \n         already been created.</p>\n         <p>You can't use this operation to update the tags of an existing canary. To \n         change the tags of an existing canary, use\n         <a href=\"https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_TagResource.html\">TagResource</a>.</p>\n         <note>\n            <p>When you use the <code>dryRunId</code> field when updating a canary, the only other field you can provide is the <code>Schedule</code>. Adding any other field will thrown an exception.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Updates the configuration of a canary that has already been created.</p>\n         <p>For multibrowser canaries, you can add or remove browsers by updating the browserConfig list in the update call. For example:</p>\n         <ul>\n            <li>\n               <p>To add Firefox to a canary that currently uses Chrome, specify browserConfigs as [CHROME, FIREFOX]</p>\n            </li>\n            <li>\n               <p>To remove Firefox and keep only Chrome, specify browserConfigs as [CHROME]</p>\n            </li>\n         </ul>\n         <p>You can't use this operation to update the tags of an existing canary. To change the tags of an existing canary, use\n         <a href=\"https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_TagResource.html\">TagResource</a>.</p>\n         <note>\n            <p>When you use the <code>dryRunId</code> field when updating a canary, the only other field you can provide is the <code>Schedule</code>. Adding any other field will thrown an exception.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/canary/{Name}",
@@ -4354,6 +4427,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Update the existing canary using the updated configurations from the DryRun associated with the DryRunId.</p>\n         <note>\n            <p>When you use the <code>dryRunId</code> field when updating a canary, the only other field you can provide is the <code>Schedule</code>. Adding any other field will thrown an exception.</p>\n         </note>"
                     }
+                },
+                "VisualReferences": {
+                    "target": "com.amazonaws.synthetics#VisualReferences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of visual reference configurations for the canary, one for each browser type that the canary is configured to run on. Visual references are used for visual monitoring comparisons.</p>\n         <p>\n            <code>syn-nodejs-puppeteer-11.0</code> and above, and <code>syn-nodejs-playwright-3.0</code> and above, only supports <code>visualReferences</code>. <code>visualReference</code> field is not supported.</p>\n         <p>Versions older than <code>syn-nodejs-puppeteer-11.0</code> supports both <code>visualReference</code> and <code>visualReferences</code> for backward compatibility. It is recommended to use <code>visualReferences</code>\n         for consistency and future compatibility.</p>\n         <p>For multibrowser visual monitoring,  you can update the baseline for all configured browsers in a single update call by specifying a list of VisualReference objects, one per browser. \n         Each VisualReference object maps to a specific browser configuration, allowing you to manage visual baselines for multiple browsers simultaneously.</p>\n         <p>For single configuration canaries using Chrome browser (default browser), use visualReferences for <code>syn-nodejs-puppeteer-11.0</code> and above, and <code>syn-nodejs-playwright-3.0</code> and \n         above canaries. The browserType in the visualReference object is not mandatory.</p>"
+                    }
+                },
+                "BrowserConfigs": {
+                    "target": "com.amazonaws.synthetics#BrowserConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that specifies the browser type to use for a canary run. CloudWatch Synthetics supports running canaries on both <code>CHROME</code> and <code>FIREFOX</code> browsers.</p>\n         <note>\n            <p>If not specified, <code>browserConfigs</code> defaults to Chrome.</p>\n         </note>"
+                    }
                 }
             },
             "traits": {
@@ -4395,6 +4480,12 @@
                         "smithy.api#documentation": "<p>Specifies which canary run to use the screenshots from as the baseline for future visual monitoring with this canary. Valid values are \n         <code>nextrun</code> to use the screenshots from the next run after this update is made, <code>lastrun</code> to use the screenshots from the most recent run \n         before this update was made, or the value of <code>Id</code> in the <a href=\"https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_CanaryRun.html\">\n            CanaryRun</a> from a run of this a canary in the past 31 days. If you specify the <code>Id</code> of a canary run older than 31 days, \n         the operation returns a 400 validation exception error..</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "BrowserType": {
+                    "target": "com.amazonaws.synthetics#BrowserType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The browser type associated with this visual reference.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4415,10 +4506,40 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the canary run that produced the baseline screenshots \n         that are used for visual monitoring comparisons by this canary.</p>"
                     }
+                },
+                "BrowserType": {
+                    "target": "com.amazonaws.synthetics#BrowserType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The browser type associated with this visual reference.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>If this canary performs visual monitoring by comparing screenshots, this structure contains the ID of the canary run that is used as the baseline for screenshots, and the coordinates\n         of any parts of those screenshots that are ignored during visual monitoring comparison.</p>\n         <p>Visual monitoring is supported only on canaries running the <b>syn-puppeteer-node-3.2</b> runtime or later.</p>"
+            }
+        },
+        "com.amazonaws.synthetics#VisualReferences": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.synthetics#VisualReferenceInput"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.synthetics#VisualReferencesOutput": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.synthetics#VisualReferenceOutput"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
             }
         },
         "com.amazonaws.synthetics#VpcConfigInput": {

@@ -431,6 +431,7 @@
                                 "Arn": "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-p5zdwlg5uvvzjita",
                                 "CreateDate": 1.587081768334E9,
                                 "CreatorRequestId": "567c1193-6b00-4308-bd57-ad38a8822d25",
+                                "CreatedByAccount": "123456789012",
                                 "DnsConfig": {
                                     "DnsRecords": [
                                         {
@@ -442,8 +443,54 @@
                                     "RoutingPolicy": "MULTIVALUE"
                                 },
                                 "Id": "srv-p5zdwlg5uvvzjita",
+                                "InstanceCount": 0,
                                 "Name": "myservice",
-                                "NamespaceId": "ns-ylexjili4cdxy3xm"
+                                "NamespaceId": "ns-ylexjili4cdxy3xm",
+                                "ResourceOwner": "123456789012",
+                                "Type": "DNS_HTTP"
+                            }
+                        }
+                    },
+                    {
+                        "title": "Create service using namespace ARN",
+                        "documentation": "Namespace sharee creates a service using a namespace ARN instead of namespace ID, useful when working with shared namespaces.",
+                        "input": {
+                            "Name": "example-service",
+                            "NamespaceId": "arn:aws:servicediscovery:us-west-2:123456789012:namespace/ns-abcd1234xmpl5678",
+                            "Description": "Example service using namespace ARN",
+                            "DnsConfig": {
+                                "DnsRecords": [
+                                    {
+                                        "Type": "A",
+                                        "TTL": 300
+                                    }
+                                ],
+                                "RoutingPolicy": "MULTIVALUE"
+                            }
+                        },
+                        "output": {
+                            "Service": {
+                                "Id": "srv-abcd1234xmpl5678",
+                                "Arn": "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-abcd1234xmpl5678",
+                                "ResourceOwner": "123456789012",
+                                "Name": "example-service",
+                                "NamespaceId": "ns-abcd1234xmpl5678",
+                                "Description": "Example service using namespace ARN",
+                                "InstanceCount": 0,
+                                "DnsConfig": {
+                                    "NamespaceId": "ns-abcd1234xmpl5678",
+                                    "RoutingPolicy": "MULTIVALUE",
+                                    "DnsRecords": [
+                                        {
+                                            "Type": "A",
+                                            "TTL": 300
+                                        }
+                                    ]
+                                },
+                                "Type": "DNS_HTTP",
+                                "CreateDate": 1.7051616E9,
+                                "CreatorRequestId": "abcd1234-xmpl-5678-9012-abcd1234xmpl",
+                                "CreatedByAccount": "111122223333"
                             }
                         }
                     }
@@ -590,7 +637,17 @@
                             "Id": "ns-ylexjili4cdxy3xm"
                         },
                         "output": {
-                            "OperationId": "gv4g5meo7ndmeh4fqskygvk23d2fijwa-k98y6drk"
+                            "OperationId": "abcd1234-xmpl-5678-9012-abcd1234xmplabcd"
+                        }
+                    },
+                    {
+                        "title": "Delete namespace using namespace ARN",
+                        "documentation": "Deletes a namespace using a namespace ARN instead of namespace ID, useful when working with shared namespaces.",
+                        "input": {
+                            "Id": "arn:aws:servicediscovery:us-west-2:123456789012:namespace/ns-abcd1234xmpl5678"
+                        },
+                        "output": {
+                            "OperationId": "abcd1234-xmpl-5678-9012-abcd1234xmplabcd"
                         }
                     }
                 ]
@@ -654,6 +711,14 @@
                             "Id": "srv-p5zdwlg5uvvzjita"
                         },
                         "output": {}
+                    },
+                    {
+                        "title": "Delete service using service ARN",
+                        "documentation": "Deletes a service using a service ARN instead of service ID, useful when working with shared namespaces.",
+                        "input": {
+                            "Id": "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-abcd1234xmpl5678"
+                        },
+                        "output": {}
                     }
                 ]
             }
@@ -685,6 +750,17 @@
                                 "port"
                             ],
                             "ServiceId": "srv-e4anhexample0004"
+                        },
+                        "output": {}
+                    },
+                    {
+                        "title": "Delete service attributes using service ARN",
+                        "documentation": "Deletes service attributes using a service ARN instead of service ID, useful for cross-account scenarios or when working with shared namespaces.",
+                        "input": {
+                            "ServiceId": "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-abcd1234xmpl5678",
+                            "Attributes": [
+                                "Port"
+                            ]
                         },
                         "output": {}
                     }
@@ -780,6 +856,17 @@
                         "output": {
                             "OperationId": "4yejorelbukcjzpnr6tlmrghsjwpngf4-k98rnaiq"
                         }
+                    },
+                    {
+                        "title": "Deregister instance using service ARN",
+                        "documentation": "Deregisters an instance using a service ARN instead of service ID, useful when working with shared namespaces.",
+                        "input": {
+                            "InstanceId": "i-abcd1234xmpl5678",
+                            "ServiceId": "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-abcd1234xmpl5678"
+                        },
+                        "output": {
+                            "OperationId": "abcd1234-xmpl-5678-9012-abcd1234xmpl"
+                        }
                     }
                 ]
             }
@@ -848,6 +935,39 @@
                     "hostPrefix": "data-"
                 },
                 "smithy.api#examples": [
+                    {
+                        "title": "Discover instances using owner account",
+                        "documentation": "Discovers instances in a shared namespace by specifying the OwnerAccount parameter, useful when working with shared namespaces.",
+                        "input": {
+                            "NamespaceName": "example-shared-namespace",
+                            "ServiceName": "shared-namespace-service",
+                            "OwnerAccount": "123456789012"
+                        },
+                        "output": {
+                            "Instances": [
+                                {
+                                    "InstanceId": "i-abcd1234xmpl5678",
+                                    "NamespaceName": "example-shared-namespace",
+                                    "ServiceName": "shared-service",
+                                    "HealthStatus": "HEALTHY",
+                                    "Attributes": {
+                                        "AWS_INSTANCE_IPV4": "192.0.2.44",
+                                        "AWS_INSTANCE_PORT": "80"
+                                    }
+                                },
+                                {
+                                    "InstanceId": "i-efgh5678xmpl9012",
+                                    "NamespaceName": "example-shared-namespace",
+                                    "ServiceName": "shared-service",
+                                    "HealthStatus": "HEALTHY",
+                                    "Attributes": {
+                                        "AWS_INSTANCE_IPV4": "192.0.2.45",
+                                        "AWS_INSTANCE_PORT": "80"
+                                    }
+                                }
+                            ]
+                        }
+                    },
                     {
                         "title": "Example: Discover registered instances",
                         "documentation": "Example: Discover registered instances",
@@ -975,6 +1095,18 @@
                     "hostPrefix": "data-"
                 },
                 "smithy.api#examples": [
+                    {
+                        "title": "Discover instances revision using owner account",
+                        "documentation": "Discovers the instances revision in a shared namespace by specifying the OwnerAccount parameter, useful when working with shared namespaces.",
+                        "input": {
+                            "NamespaceName": "example-shared-namespace",
+                            "ServiceName": "shared-service",
+                            "OwnerAccount": "123456789012"
+                        },
+                        "output": {
+                            "InstancesRevision": 1001
+                        }
+                    },
                     {
                         "title": "To discover the revision for a registered instance",
                         "documentation": "The following example discovers the revision ID for a registered instance.",
@@ -1241,6 +1373,7 @@
                             "ServiceId": "srv-e4anhexample0004"
                         },
                         "output": {
+                            "ResourceOwner": "123456789012",
                             "Instance": {
                                 "Id": "i-abcd1234",
                                 "Attributes": {
@@ -1249,7 +1382,30 @@
                                     "color": "green",
                                     "region": "us-west-2",
                                     "stage": "beta"
-                                }
+                                },
+                                "CreatedByAccount": "123456789012"
+                            }
+                        }
+                    },
+                    {
+                        "title": "Get instance details using service ARN for shared namespace",
+                        "documentation": "This example gets information about an instance using a service ARN instead of service ID. This is useful for listing instances associated with shared namespaces.",
+                        "input": {
+                            "InstanceId": "i-abcd1234",
+                            "ServiceId": "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-e4anhexample0004"
+                        },
+                        "output": {
+                            "ResourceOwner": "123456789012",
+                            "Instance": {
+                                "Id": "i-abcd1234",
+                                "Attributes": {
+                                    "AWS_INSTANCE_IPV4": "192.0.2.44",
+                                    "AWS_INSTANCE_PORT": "80",
+                                    "color": "green",
+                                    "region": "us-west-2",
+                                    "stage": "beta"
+                                },
+                                "CreatedByAccount": "111122223333"
                             }
                         }
                     }
@@ -1325,6 +1481,19 @@
                         "documentation": "This example gets the current health status of one or more instances that are associate with a specified service.",
                         "input": {
                             "ServiceId": "srv-e4anhexample0004"
+                        },
+                        "output": {
+                            "Status": {
+                                "i-abcd1234": "HEALTHY",
+                                "i-abcd1235": "UNHEALTHY"
+                            }
+                        }
+                    },
+                    {
+                        "title": "Get instances health status using service ARN for shared namespace",
+                        "documentation": "This example gets the current health status of instances using a service ARN instead of service ID. This is useful for checking health status of instances associated with shared namespaces.",
+                        "input": {
+                            "ServiceId": "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-e4anhexample0004"
                         },
                         "output": {
                             "Status": {
@@ -1536,7 +1705,41 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the settings for a specified service.</p>"
+                "smithy.api#documentation": "<p>Gets the settings for a specified service.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Get service using service ARN",
+                        "documentation": "Gets service settings using a service ARN instead of service ID, useful when working with shared namespaces. Shows a service created by a sharee (111122223333) in a namespace owned by another account (123456789012).",
+                        "input": {
+                            "Id": "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-abcd1234xmpl5678"
+                        },
+                        "output": {
+                            "Service": {
+                                "Id": "srv-abcd1234xmpl5678",
+                                "Arn": "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-abcd1234xmpl5678",
+                                "ResourceOwner": "123456789012",
+                                "Name": "example-service",
+                                "NamespaceId": "ns-abcd1234xmpl5678",
+                                "Description": "Example service",
+                                "InstanceCount": 2,
+                                "DnsConfig": {
+                                    "NamespaceId": "ns-abcd1234xmpl5678",
+                                    "RoutingPolicy": "MULTIVALUE",
+                                    "DnsRecords": [
+                                        {
+                                            "Type": "A",
+                                            "TTL": 300
+                                        }
+                                    ]
+                                },
+                                "Type": "DNS_HTTP",
+                                "CreateDate": 1.7051616E9,
+                                "CreatorRequestId": "abcd1234-xmpl-5678-9012-abcd1234xmpl",
+                                "CreatedByAccount": "111122223333"
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.servicediscovery#GetServiceAttributes": {
@@ -1559,6 +1762,22 @@
                 "smithy.api#documentation": "<p>Returns the attributes associated with a specified service.</p>",
                 "smithy.api#examples": [
                     {
+                        "title": "Get service attributes using service ARN",
+                        "documentation": "Gets service attributes using a service ARN instead of service ID, useful when working with shared namespaces. Shows attributes for a service created by a sharee in a namespace owned by another account.",
+                        "input": {
+                            "ServiceId": "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-abcd1234xmpl5678"
+                        },
+                        "output": {
+                            "ServiceAttributes": {
+                                "ServiceArn": "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-abcd1234xmpl5678",
+                                "Attributes": {
+                                    "Port": "80"
+                                },
+                                "ResourceOwner": "123456789012"
+                            }
+                        }
+                    },
+                    {
                         "title": "GetServiceAttributes Example",
                         "documentation": "This example gets the attributes for a specified service.",
                         "input": {
@@ -1566,10 +1785,11 @@
                         },
                         "output": {
                             "ServiceAttributes": {
+                                "ServiceArn": "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-e4anhexample0004",
                                 "Attributes": {
                                     "port": "80"
                                 },
-                                "ServiceArn": "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-e4anhexample0004"
+                                "ResourceOwner": "123456789012"
                             }
                         }
                     }
@@ -1989,6 +2209,25 @@
                                 }
                             ]
                         }
+                    },
+                    {
+                        "title": "List instances using service ARN for shared namespace",
+                        "documentation": "This example lists instances using a service ARN instead of service ID. This is useful for listing instances associated with shared namespaces.",
+                        "input": {
+                            "ServiceId": "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-e4anhexample0004"
+                        },
+                        "output": {
+                            "Instances": [
+                                {
+                                    "Id": "i-abcd1234",
+                                    "Attributes": {
+                                        "AWS_INSTANCE_IPV4": "192.0.2.44",
+                                        "AWS_INSTANCE_PORT": "80"
+                                    }
+                                }
+                            ],
+                            "ResourceOwner": "123456789012"
+                        }
                     }
                 ],
                 "smithy.api#paginated": {
@@ -2073,48 +2312,103 @@
                         "output": {
                             "Namespaces": [
                                 {
-                                    "Arn": "arn:aws:servicediscovery:us-west-2:123456789012:namespace/ns-a3ccy2e7e3a7rile",
-                                    "CreateDate": 1.585354387357E9,
                                     "Id": "ns-a3ccy2e7e3a7rile",
+                                    "Arn": "arn:aws:servicediscovery:us-west-2:123456789012:namespace/ns-a3ccy2e7e3a7rile",
+                                    "ResourceOwner": "123456789012",
                                     "Name": "local",
+                                    "Type": "DNS_PRIVATE",
                                     "Properties": {
                                         "DnsProperties": {
-                                            "HostedZoneId": "Z06752353VBUDTC32S84S"
+                                            "HostedZoneId": "Z06752353VBUDTC32S84S",
+                                            "SOA": {
+                                                "TTL": 60
+                                            }
                                         },
                                         "HttpProperties": {
                                             "HttpName": "local"
                                         }
                                     },
-                                    "Type": "DNS_PRIVATE"
+                                    "CreateDate": 1.7051616E9,
+                                    "ServiceCount": 2
                                 },
                                 {
-                                    "Arn": "arn:aws:servicediscovery:us-west-2:123456789012:namespace/ns-pocfyjtrsmwtvcxx",
-                                    "CreateDate": 1.586468974698E9,
-                                    "Description": "My second namespace",
                                     "Id": "ns-pocfyjtrsmwtvcxx",
+                                    "Arn": "arn:aws:servicediscovery:us-west-2:123456789012:namespace/ns-pocfyjtrsmwtvcxx",
+                                    "ResourceOwner": "123456789012",
                                     "Name": "My-second-namespace",
+                                    "Type": "HTTP",
+                                    "Description": "My second namespace",
                                     "Properties": {
-                                        "DnsProperties": {},
+                                        "DnsProperties": {
+                                            "SOA": {
+                                                "TTL": 60
+                                            }
+                                        },
                                         "HttpProperties": {
                                             "HttpName": "My-second-namespace"
                                         }
                                     },
-                                    "Type": "HTTP"
+                                    "CreateDate": 1.7051616E9,
+                                    "ServiceCount": 1
                                 },
                                 {
-                                    "Arn": "arn:aws:servicediscovery:us-west-2:123456789012:namespace/ns-ylexjili4cdxy3xm",
-                                    "CreateDate": 1.587055896798E9,
                                     "Id": "ns-ylexjili4cdxy3xm",
+                                    "Arn": "arn:aws:servicediscovery:us-west-2:123456789012:namespace/ns-ylexjili4cdxy3xm",
+                                    "ResourceOwner": "123456789012",
                                     "Name": "example.com",
+                                    "Type": "DNS_PRIVATE",
                                     "Properties": {
                                         "DnsProperties": {
-                                            "HostedZoneId": "Z09983722P0QME1B3KC8I"
+                                            "HostedZoneId": "Z09983722P0QME1B3KC8I",
+                                            "SOA": {
+                                                "TTL": 60
+                                            }
                                         },
                                         "HttpProperties": {
                                             "HttpName": "example.com"
                                         }
                                     },
-                                    "Type": "DNS_PRIVATE"
+                                    "CreateDate": 1.7051616E9,
+                                    "ServiceCount": 3
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "List namespaces filtered by resource owner",
+                        "documentation": "This example shows how to list namespaces that are shared with you from other AWS accounts using the RESOURCE_OWNER filter.",
+                        "input": {
+                            "Filters": [
+                                {
+                                    "Name": "RESOURCE_OWNER",
+                                    "Values": [
+                                        "OTHER_ACCOUNTS"
+                                    ]
+                                }
+                            ]
+                        },
+                        "output": {
+                            "Namespaces": [
+                                {
+                                    "Id": "ns-abcd1234xmpl5678",
+                                    "Arn": "arn:aws:servicediscovery:us-west-2:111122223333:namespace/ns-abcd1234xmpl5678",
+                                    "ResourceOwner": "111122223333",
+                                    "Name": "example-namespace",
+                                    "Type": "DNS_PRIVATE",
+                                    "Description": "Example private DNS namespace",
+                                    "Properties": {
+                                        "DnsProperties": {
+                                            "HostedZoneId": "Z1D633PJN98FT9",
+                                            "SOA": {
+                                                "TTL": 60
+                                            }
+                                        },
+                                        "HttpProperties": {
+                                            "HttpName": "example-namespace"
+                                        }
+                                    },
+                                    "CreateDate": 1.7051616E9,
+                                    "ServiceCount": 2
                                 }
                             ]
                         }
@@ -2297,8 +2591,11 @@
                         "output": {
                             "Services": [
                                 {
+                                    "Id": "srv-p5zdwlg5uvvzjita",
                                     "Arn": "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-p5zdwlg5uvvzjita",
-                                    "CreateDate": 1.587081768334E9,
+                                    "ResourceOwner": "123456789012",
+                                    "Name": "myservice",
+                                    "Type": "DNS",
                                     "DnsConfig": {
                                         "DnsRecords": [
                                             {
@@ -2308,8 +2605,8 @@
                                         ],
                                         "RoutingPolicy": "MULTIVALUE"
                                     },
-                                    "Id": "srv-p5zdwlg5uvvzjita",
-                                    "Name": "myservice"
+                                    "CreateDate": 1.587081768334E9,
+                                    "CreatedByAccount": "123456789012"
                                 }
                             ]
                         }
@@ -3309,6 +3606,21 @@
                         },
                         "output": {
                             "OperationId": "4yejorelbukcjzpnr6tlmrghsjwpngf4-k95yg2u7"
+                        }
+                    },
+                    {
+                        "title": "Register instance using service ARN",
+                        "documentation": "Registers an instance using a service ARN instead of service ID, useful when working with shared namespaces. Shows registering an instance to a service created by a sharee in a namespace owned by another account.",
+                        "input": {
+                            "InstanceId": "i-abcd1234xmpl5678",
+                            "ServiceId": "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-abcd1234xmpl5678",
+                            "Attributes": {
+                                "AWS_INSTANCE_IPV4": "192.0.2.44",
+                                "AWS_INSTANCE_PORT": "80"
+                            }
+                        },
+                        "output": {
+                            "OperationId": "abcd1234-xmpl-5678-9012-abcd1234xmpl"
                         }
                     }
                 ]
@@ -4444,17 +4756,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -4465,17 +4766,6 @@
                                 "Region": "us-iso-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         },
                         {
@@ -4492,17 +4782,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -4513,17 +4792,6 @@
                                 "Region": "us-isob-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         },
                         {
@@ -5332,6 +5600,19 @@
                         "output": {
                             "OperationId": "ft52xe2koxhoeormaceymagglsdjyvEXAMPLE"
                         }
+                    },
+                    {
+                        "title": "Update HTTP namespace using namespace ARN for shared namespace",
+                        "documentation": "This example updates an HTTP namespace using a namespace ARN instead of namespace ID.",
+                        "input": {
+                            "Id": "arn:aws:servicediscovery:us-west-2:123456789012:namespace/ns-vh4nbmexample",
+                            "Namespace": {
+                                "Description": "Updated description for shared HTTP namespace."
+                            }
+                        },
+                        "output": {
+                            "OperationId": "ft52xe2koxhoeormaceymagglsdjyvexample"
+                        }
                     }
                 ]
             }
@@ -5404,6 +5685,16 @@
             "traits": {
                 "smithy.api#documentation": "<p>Submits a request to change the health status of a custom health check to healthy or\n   unhealthy.</p>\n         <p>You can use <code>UpdateInstanceCustomHealthStatus</code> to change the status only for\n   custom health checks, which you define using <code>HealthCheckCustomConfig</code> when you create\n   a service. You can't use it to change the status for Route 53 health checks, which you define using\n    <code>HealthCheckConfig</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_HealthCheckCustomConfig.html\">HealthCheckCustomConfig</a>.</p>",
                 "smithy.api#examples": [
+                    {
+                        "title": "Update instance custom health status using service ARN",
+                        "documentation": "Updates instance custom health status using a service ARN instead of service ID, useful when working with shared namespaces.",
+                        "input": {
+                            "InstanceId": "i-abcd1234xmpl5678",
+                            "ServiceId": "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-abcd1234xmpl5678",
+                            "Status": "HEALTHY"
+                        },
+                        "output": {}
+                    },
                     {
                         "title": "UpdateInstanceCustomHealthStatus Example",
                         "documentation": "This example submits a request to change the health status of an instance associated with a service with a custom health check to HEALTHY.",
@@ -5485,17 +5776,16 @@
                         }
                     },
                     {
-                        "title": "To update a public DNS namespace",
-                        "documentation": "The following example updates the description of a public DNS namespace.",
+                        "title": "Update private DNS namespace using namespace ARN for shared namespace",
+                        "documentation": "This example updates a private DNS namespace using a namespace ARN instead of namespace ID.",
                         "input": {
-                            "Id": "ns-bk3aEXAMPLE",
-                            "UpdaterRequestId": "",
+                            "Id": "arn:aws:servicediscovery:us-west-2:123456789012:namespace/ns-bk3aexample",
                             "Namespace": {
-                                "Description": "The updated namespace description."
+                                "Description": "Updated description for shared private DNS namespace."
                             }
                         },
                         "output": {
-                            "OperationId": "ft52xe2koxhoeormaceymagglsdjEXAMPLE"
+                            "OperationId": "ft52xe2koxhoeormaceymagglsdjyvexample"
                         }
                     }
                 ]
@@ -5567,7 +5857,36 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a public DNS namespace.</p>"
+                "smithy.api#documentation": "<p>Updates a public DNS namespace.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To update a public DNS namespace",
+                        "documentation": "The following example updates the description of a public DNS namespace.",
+                        "input": {
+                            "Id": "ns-bk3aEXAMPLE",
+                            "UpdaterRequestId": "",
+                            "Namespace": {
+                                "Description": "The updated namespace description."
+                            }
+                        },
+                        "output": {
+                            "OperationId": "ft52xe2koxhoeormaceymagglsdjEXAMPLE"
+                        }
+                    },
+                    {
+                        "title": "Update public DNS namespace using namespace ARN for shared namespace",
+                        "documentation": "This example updates a public DNS namespace using a namespace ARN instead of namespace ID.",
+                        "input": {
+                            "Id": "arn:aws:servicediscovery:us-west-2:123456789012:namespace/ns-bk3aexample",
+                            "Namespace": {
+                                "Description": "Updated description for shared public DNS namespace."
+                            }
+                        },
+                        "output": {
+                            "OperationId": "ft52xe2koxhoeormaceymagglsdjexample"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.servicediscovery#UpdatePublicDnsNamespaceRequest": {
@@ -5659,6 +5978,19 @@
                         "output": {
                             "OperationId": "m35hsdrkxwjffm3xef4bxyy6vc3ewakx-jdn3y5g5"
                         }
+                    },
+                    {
+                        "title": "Update service using service ARN for shared namespace",
+                        "documentation": "This example updates a service using a service ARN instead of service ID. This is useful for updating services associated with shared namespaces.",
+                        "input": {
+                            "Id": "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-e4anhexample0004",
+                            "Service": {
+                                "Description": "Updated service description for shared namespace"
+                            }
+                        },
+                        "output": {
+                            "OperationId": "m35hsdrkxwjffm3xef4bxyy6vc3ewakx-jdn3y5g5"
+                        }
                     }
                 ]
             }
@@ -5685,6 +6017,18 @@
             "traits": {
                 "smithy.api#documentation": "<p>Submits a request to update a specified service to add service-level attributes.</p>",
                 "smithy.api#examples": [
+                    {
+                        "title": "Update service attributes using service ARN",
+                        "documentation": "Updates service attributes using a service ARN instead of service ID, useful when working with shared namespaces.",
+                        "input": {
+                            "ServiceId": "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-abcd1234xmpl5678",
+                            "Attributes": {
+                                "Port": "8080",
+                                "Protocol": "HTTP"
+                            }
+                        },
+                        "output": {}
+                    },
                     {
                         "title": "UpdateServiceAttributes Example",
                         "documentation": "This example submits a request to update the specified service to add a port attribute with the value 80.",
