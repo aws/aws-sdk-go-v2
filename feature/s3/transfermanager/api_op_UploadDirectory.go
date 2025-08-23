@@ -315,22 +315,22 @@ func (u *directoryUploader) uploadFile(ctx context.Context, ch chan fileEntry) {
 		f, err := os.Open(data.path)
 		if err != nil {
 			u.setErr(fmt.Errorf("error when opening file %s: %v", data.path, err))
-		} else {
-			input := &PutObjectInput{
-				Bucket: u.in.Bucket,
-				Key:    data.key,
-				Body:   f,
-			}
-			if u.in.Callback != nil {
-				u.in.Callback.UpdateRequest(input)
-			}
-			_, err := u.c.PutObject(ctx, input)
-			if err != nil {
-				u.setErr(fmt.Errorf("error when uploading file %s: %v", data.path, err))
-			} else {
-				u.incrFilesUploaded(1)
-			}
+			break
 		}
+		input := &PutObjectInput{
+			Bucket: u.in.Bucket,
+			Key:    data.key,
+			Body:   f,
+		}
+		if u.in.Callback != nil {
+			u.in.Callback.UpdateRequest(input)
+		}
+		_, err = u.c.PutObject(ctx, input)
+		if err != nil {
+			u.setErr(fmt.Errorf("error when uploading file %s: %v", data.path, err))
+			break
+		}
+		u.incrFilesUploaded(1)
 	}
 }
 
