@@ -1,8 +1,0 @@
-{
-    "id": "7608f953-3e99-46c7-9bcd-124dde4d9cc1",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/costandusagereportservice"
-    ]
-}

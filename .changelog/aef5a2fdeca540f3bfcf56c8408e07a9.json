@@ -1,8 +1,0 @@
-{
-    "id": "aef5a2fd-eca5-40f3-bfcf-56c8408e07a9",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/odb"
-    ]
-}

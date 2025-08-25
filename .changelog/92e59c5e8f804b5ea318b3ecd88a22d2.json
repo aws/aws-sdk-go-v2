@@ -1,8 +1,0 @@
-{
-    "id": "92e59c5e-8f80-4b5e-a318-b3ecd88a22d2",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/dax"
-    ]
-}

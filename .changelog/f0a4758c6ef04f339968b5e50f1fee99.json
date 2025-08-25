@@ -1,8 +1,0 @@
-{
-    "id": "f0a4758c-6ef0-4f33-9968-b5e50f1fee99",
-    "type": "feature",
-    "description": "Added IPv6 support for AWS Client VPN.",
-    "modules": [
-        "service/ec2"
-    ]
-}

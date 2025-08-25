@@ -1,8 +1,0 @@
-{
-    "id": "84981b3b-8f18-4c24-a72c-3e6b9c4cb88f",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/iotsitewise"
-    ]
-}

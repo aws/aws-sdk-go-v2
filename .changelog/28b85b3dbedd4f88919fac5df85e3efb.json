@@ -1,8 +1,0 @@
-{
-    "id": "28b85b3d-bedd-4f88-919f-ac5df85e3efb",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/resourcegroupstaggingapi"
-    ]
-}

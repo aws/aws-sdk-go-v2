@@ -1,8 +1,0 @@
-{
-    "id": "8af96e82-546f-4398-81f3-e53f621df52b",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/serverlessapplicationrepository"
-    ]
-}

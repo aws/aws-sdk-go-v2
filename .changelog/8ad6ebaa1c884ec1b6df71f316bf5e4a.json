@@ -1,8 +1,0 @@
-{
-    "id": "8ad6ebaa-1c88-4ec1-b6df-71f316bf5e4a",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/finspacedata"
-    ]
-}

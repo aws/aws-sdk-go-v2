@@ -1,8 +1,0 @@
-{
-    "id": "787b93d2-da9b-47c3-87d6-dc185001e957",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/directconnect"
-    ]
-}

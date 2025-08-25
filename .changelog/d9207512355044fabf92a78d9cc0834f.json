@@ -1,8 +1,0 @@
-{
-    "id": "d9207512-3550-44fa-bf92-a78d9cc0834f",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/shield"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "78f1686d-8383-4e3d-8394-c5601526a3bd",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/snowball"
-    ]
-}

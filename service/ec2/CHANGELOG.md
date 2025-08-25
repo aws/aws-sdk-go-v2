@@ -1,3 +1,7 @@
+# v1.246.0 (2025-08-25)
+
+* **Feature**: Added IPv6 support for AWS Client VPN.
+
 # v1.245.2 (2025-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

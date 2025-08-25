@@ -1,8 +1,0 @@
-{
-    "id": "91a01275-14fc-4152-a292-51284cf4f32a",
-    "type": "documentation",
-    "description": "Documentation update to notify users of the discontinuation of Amazon CodeGuru Security.",
-    "modules": [
-        "service/codegurusecurity"
-    ]
-}

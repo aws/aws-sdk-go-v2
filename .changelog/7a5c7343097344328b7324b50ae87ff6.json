@@ -1,8 +1,0 @@
-{
-    "id": "7a5c7343-0973-4432-8b73-24b50ae87ff6",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/storagegateway"
-    ]
-}

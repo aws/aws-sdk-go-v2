@@ -1,8 +1,0 @@
-{
-    "id": "cd53365d-fb62-47df-a33e-6e314df47d7e",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/health"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "9773c59a-607a-4f3b-8fd8-d008cb0d7173",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/opensearchserverless"
-    ]
-}

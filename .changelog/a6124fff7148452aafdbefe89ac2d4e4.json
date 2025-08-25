@@ -1,8 +1,0 @@
-{
-    "id": "a6124fff-7148-452a-afdb-efe89ac2d4e4",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/iotdataplane"
-    ]
-}

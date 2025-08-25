@@ -1,3 +1,7 @@
+# v1.42.1 (2025-08-25)
+
+* **Documentation**: Documentation update for Amazon SQS Supports Large Payload Message feature
+
 # v1.42.0 (2025-08-22)
 
 * **Feature**: Remove incorrect endpoint tests

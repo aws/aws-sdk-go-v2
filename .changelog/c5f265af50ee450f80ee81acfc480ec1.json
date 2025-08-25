@@ -1,8 +1,0 @@
-{
-    "id": "c5f265af-50ee-450f-80ee-81acfc480ec1",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/repostspace"
-    ]
-}

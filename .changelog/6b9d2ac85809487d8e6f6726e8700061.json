@@ -1,8 +1,0 @@
-{
-    "id": "6b9d2ac8-5809-487d-8e6f-6726e8700061",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/mailmanager"
-    ]
-}

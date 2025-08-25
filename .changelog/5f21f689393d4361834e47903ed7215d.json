@@ -1,8 +1,0 @@
-{
-    "id": "5f21f689-393d-4361-834e-47903ed7215d",
-    "type": "feature",
-    "description": "Add MAINTENANCE status for DbInstance and DbCluster",
-    "modules": [
-        "service/timestreaminfluxdb"
-    ]
-}

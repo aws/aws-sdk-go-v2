@@ -1,8 +1,0 @@
-{
-    "id": "f068933b-a4a5-49f4-8d41-7700dba30c45",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/kinesisvideoarchivedmedia"
-    ]
-}

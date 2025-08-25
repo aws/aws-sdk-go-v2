@@ -1,8 +1,0 @@
-{
-    "id": "fa4589a8-e36e-4718-86b2-106eabf2454d",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/lexruntimeservice"
-    ]
-}

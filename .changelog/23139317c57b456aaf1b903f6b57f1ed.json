@@ -1,8 +1,0 @@
-{
-    "id": "23139317-c57b-456a-af1b-903f6b57f1ed",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/wellarchitected"
-    ]
-}

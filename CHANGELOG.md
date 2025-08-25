@@ -1,3 +1,187 @@
+# Release (2025-08-25)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acm`: [v1.37.0](service/acm/CHANGELOG.md#v1370-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/aiops`: [v1.6.0](service/aiops/CHANGELOG.md#v160-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.50.0](service/appflow/CHANGELOG.md#v1500-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.51.0](service/appsync/CHANGELOG.md#v1510-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.55.0](service/athena/CHANGELOG.md#v1550-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.58.0](service/autoscaling/CHANGELOG.md#v1580-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/b2bi`: [v1.0.0-preview.79](service/b2bi/CHANGELOG.md#v100-preview79-2025-08-25)
+  * **Feature**: Updated APIs to support custom validation rules.
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.45.0](service/bedrock/CHANGELOG.md#v1450-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.50.0](service/bedrockagent/CHANGELOG.md#v1500-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation`: [v1.9.0](service/bedrockdataautomation/CHANGELOG.md#v190-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/bedrockdataautomationruntime`: [v1.7.0](service/bedrockdataautomationruntime/CHANGELOG.md#v170-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/braket`: [v1.37.0](service/braket/CHANGELOG.md#v1370-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/chatbot`: [v1.14.0](service/chatbot/CHANGELOG.md#v1140-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines`: [v1.26.0](service/chimesdkmediapipelines/CHANGELOG.md#v1260-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging`: [v1.31.0](service/chimesdkmessaging/CHANGELOG.md#v1310-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/cloudcontrol`: [v1.28.0](service/cloudcontrol/CHANGELOG.md#v1280-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.65.0](service/cloudformation/CHANGELOG.md#v1650-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/cloudsearch`: [v1.31.0](service/cloudsearch/CHANGELOG.md#v1310-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/cloudtraildata`: [v1.16.0](service/cloudtraildata/CHANGELOG.md#v1160-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchevents`: [v1.32.0](service/cloudwatchevents/CHANGELOG.md#v1320-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.57.0](service/cloudwatchlogs/CHANGELOG.md#v1570-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/codeartifact`: [v1.38.0](service/codeartifact/CHANGELOG.md#v1380-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/codegurusecurity`: [v1.16.3](service/codegurusecurity/CHANGELOG.md#v1163-2025-08-25)
+  * **Documentation**: Documentation update to notify users of the discontinuation of Amazon CodeGuru Security.
+* `github.com/aws/aws-sdk-go-v2/service/codestarnotifications`: [v1.31.0](service/codestarnotifications/CHANGELOG.md#v1310-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/connectparticipant`: [v1.34.0](service/connectparticipant/CHANGELOG.md#v1340-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/controltower`: [v1.26.0](service/controltower/CHANGELOG.md#v1260-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/costandusagereportservice`: [v1.33.0](service/costandusagereportservice/CHANGELOG.md#v1330-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.39.0](service/datazone/CHANGELOG.md#v1390-2025-08-25)
+  * **Feature**: Releasing the following features - Asset classification that lets users use restricted terms for classifying assets if they have the right permissions. Also adding a new enum value "Moving" to project status.
+* `github.com/aws/aws-sdk-go-v2/service/dax`: [v1.28.0](service/dax/CHANGELOG.md#v1280-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/devicefarm`: [v1.35.0](service/devicefarm/CHANGELOG.md#v1350-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/devopsguru`: [v1.39.0](service/devopsguru/CHANGELOG.md#v1390-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/directconnect`: [v1.37.0](service/directconnect/CHANGELOG.md#v1370-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/docdbelastic`: [v1.19.0](service/docdbelastic/CHANGELOG.md#v1190-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.246.0](service/ec2/CHANGELOG.md#v12460-2025-08-25)
+  * **Feature**: Added IPv6 support for AWS Client VPN.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.72.0](service/eks/CHANGELOG.md#v1720-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/emrcontainers`: [v1.39.0](service/emrcontainers/CHANGELOG.md#v1390-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/finspacedata`: [v1.33.0](service/finspacedata/CHANGELOG.md#v1330-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/forecast`: [v1.41.0](service/forecast/CHANGELOG.md#v1410-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.61.0](service/fsx/CHANGELOG.md#v1610-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/groundstation`: [v1.37.0](service/groundstation/CHANGELOG.md#v1370-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/health`: [v1.34.0](service/health/CHANGELOG.md#v1340-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/iotdataplane`: [v1.32.0](service/iotdataplane/CHANGELOG.md#v1320-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/iotfleethub`: [v1.29.0](service/iotfleethub/CHANGELOG.md#v1290-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/iotsitewise`: [v1.51.0](service/iotsitewise/CHANGELOG.md#v1510-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.60.0](service/kendra/CHANGELOG.md#v1600-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/keyspaces`: [v1.23.0](service/keyspaces/CHANGELOG.md#v1230-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/kinesisanalytics`: [v1.30.0](service/kinesisanalytics/CHANGELOG.md#v1300-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia`: [v1.32.0](service/kinesisvideoarchivedmedia/CHANGELOG.md#v1320-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.77.0](service/lambda/CHANGELOG.md#v1770-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.56.0](service/lexmodelsv2/CHANGELOG.md#v1560-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/lexruntimeservice`: [v1.29.0](service/lexruntimeservice/CHANGELOG.md#v1290-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/licensemanager`: [v1.36.0](service/licensemanager/CHANGELOG.md#v1360-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/lookoutequipment`: [v1.35.0](service/lookoutequipment/CHANGELOG.md#v1350-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/mailmanager`: [v1.17.0](service/mailmanager/CHANGELOG.md#v1170-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecatalog`: [v1.36.0](service/marketplacecatalog/CHANGELOG.md#v1360-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.82.0](service/mediaconvert/CHANGELOG.md#v1820-2025-08-25)
+  * **Feature**: This release adds support for input rendition selection for HLS input, adds new Share API to enable sharing jobs with AWS Support for support investigations, and adds INCLUDE_AS_TS to iFrameOnlyManifest setting for HLS outputs.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagevod`: [v1.39.0](service/mediapackagevod/CHANGELOG.md#v1390-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/mediastore`: [v1.29.0](service/mediastore/CHANGELOG.md#v1290-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy`: [v1.26.0](service/migrationhubstrategy/CHANGELOG.md#v1260-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/odb`: [v1.4.0](service/odb/CHANGELOG.md#v140-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/opensearchserverless`: [v1.25.0](service/opensearchserverless/CHANGELOG.md#v1250-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/opsworkscm`: [v1.32.0](service/opsworkscm/CHANGELOG.md#v1320-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.56.0](service/outposts/CHANGELOG.md#v1560-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/pcaconnectorad`: [v1.15.0](service/pcaconnectorad/CHANGELOG.md#v1150-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/personalizeruntime`: [v1.32.0](service/personalizeruntime/CHANGELOG.md#v1320-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.33.0](service/qbusiness/CHANGELOG.md#v1330-2025-08-25)
+  * **Feature**: The Amazon Q Business GetDocumentContent operation now supports retrieval of the extracted text content in JSON format.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.31.0](service/redshiftserverless/CHANGELOG.md#v1310-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/repostspace`: [v1.14.0](service/repostspace/CHANGELOG.md#v1140-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/resiliencehub`: [v1.34.0](service/resiliencehub/CHANGELOG.md#v1340-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi`: [v1.30.0](service/resourcegroupstaggingapi/CHANGELOG.md#v1300-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/sagemakeredge`: [v1.30.0](service/sagemakeredge/CHANGELOG.md#v1300-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime`: [v1.34.0](service/sagemakerfeaturestoreruntime/CHANGELOG.md#v1340-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerruntime`: [v1.37.0](service/sagemakerruntime/CHANGELOG.md#v1370-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository`: [v1.29.0](service/serverlessapplicationrepository/CHANGELOG.md#v1290-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalog`: [v1.38.0](service/servicecatalog/CHANGELOG.md#v1380-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/sfn`: [v1.39.0](service/sfn/CHANGELOG.md#v1390-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/shield`: [v1.34.0](service/shield/CHANGELOG.md#v1340-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/snowball`: [v1.35.0](service/snowball/CHANGELOG.md#v1350-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/sqs`: [v1.42.1](service/sqs/CHANGELOG.md#v1421-2025-08-25)
+  * **Documentation**: Documentation update for Amazon SQS Supports Large Payload Message feature
+* `github.com/aws/aws-sdk-go-v2/service/ssoadmin`: [v1.35.0](service/ssoadmin/CHANGELOG.md#v1350-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/storagegateway`: [v1.42.0](service/storagegateway/CHANGELOG.md#v1420-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/support`: [v1.31.0](service/support/CHANGELOG.md#v1310-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/supportapp`: [v1.18.0](service/supportapp/CHANGELOG.md#v1180-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/taxsettings`: [v1.16.0](service/taxsettings/CHANGELOG.md#v1160-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb`: [v1.16.0](service/timestreaminfluxdb/CHANGELOG.md#v1160-2025-08-25)
+  * **Feature**: Add MAINTENANCE status for DbInstance and DbCluster
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.52.0](service/transcribe/CHANGELOG.md#v1520-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/transcribestreaming`: [v1.31.0](service/transcribestreaming/CHANGELOG.md#v1310-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/translate`: [v1.33.0](service/translate/CHANGELOG.md#v1330-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/wellarchitected`: [v1.39.0](service/wellarchitected/CHANGELOG.md#v1390-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+* `github.com/aws/aws-sdk-go-v2/service/workspacesthinclient`: [v1.20.0](service/workspacesthinclient/CHANGELOG.md#v1200-2025-08-25)
+  * **Feature**: Remove incorrect endpoint tests
+
 # Release (2025-08-22)
 
 ## Module Highlights

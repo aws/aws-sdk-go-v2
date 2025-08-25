@@ -1,3 +1,7 @@
+# v1.82.0 (2025-08-25)
+
+* **Feature**: This release adds support for input rendition selection for HLS input, adds new Share API to enable sharing jobs with AWS Support for support investigations, and adds INCLUDE_AS_TS to iFrameOnlyManifest setting for HLS outputs.
+
 # v1.81.0 (2025-08-21)
 
 * **Feature**: Remove incorrect endpoint tests

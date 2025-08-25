@@ -1,8 +1,0 @@
-{
-    "id": "7d6e0c49-1ba3-479d-b93f-b4a87bb5d2d5",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/mediapackagevod"
-    ]
-}

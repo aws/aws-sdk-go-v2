@@ -1,8 +1,0 @@
-{
-    "id": "57d2660e-287b-4bd9-b307-9c502d3e7879",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/bedrock"
-    ]
-}

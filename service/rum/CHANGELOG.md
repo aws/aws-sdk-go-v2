@@ -1,3 +1,7 @@
+# v1.28.1 (2025-08-25)
+
+* No change notes available for this release.
+
 # v1.28.0 (2025-08-22)
 
 * **Feature**: Remove incorrect endpoint tests

@@ -1,8 +1,0 @@
-{
-    "id": "f5f3fa10-5b57-4cff-9691-4d64e0a8e817",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/aiops"
-    ]
-}

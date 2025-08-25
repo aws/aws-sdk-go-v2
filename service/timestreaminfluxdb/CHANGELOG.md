@@ -1,3 +1,7 @@
+# v1.16.0 (2025-08-25)
+
+* **Feature**: Add MAINTENANCE status for DbInstance and DbCluster
+
 # v1.15.0 (2025-08-21)
 
 * **Feature**: Remove incorrect endpoint tests

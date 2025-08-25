@@ -1,8 +1,0 @@
-{
-    "id": "9c89a1b8-24f0-49fe-9d73-1b6580f13e92",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/connectparticipant"
-    ]
-}

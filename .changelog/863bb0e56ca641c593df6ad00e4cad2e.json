@@ -1,8 +1,0 @@
-{
-    "id": "863bb0e5-6ca6-41c5-93df-6ad00e4cad2e",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/sagemakerfeaturestoreruntime"
-    ]
-}

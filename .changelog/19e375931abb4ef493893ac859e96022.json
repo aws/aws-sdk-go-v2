@@ -1,8 +1,0 @@
-{
-    "id": "19e37593-1abb-4ef4-9389-3ac859e96022",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/bedrockdataautomationruntime"
-    ]
-}

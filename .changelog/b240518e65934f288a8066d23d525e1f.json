@@ -1,8 +1,0 @@
-{
-    "id": "b240518e-6593-4f28-8a80-66d23d525e1f",
-    "type": "documentation",
-    "description": "Documentation update for Amazon SQS Supports Large Payload Message feature",
-    "modules": [
-        "service/sqs"
-    ]
-}

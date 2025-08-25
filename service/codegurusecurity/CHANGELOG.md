@@ -1,3 +1,7 @@
+# v1.16.3 (2025-08-25)
+
+* **Documentation**: Documentation update to notify users of the discontinuation of Amazon CodeGuru Security.
+
 # v1.16.2 (2025-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

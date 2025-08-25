@@ -1,8 +1,0 @@
-{
-    "id": "47ed2505-903a-4102-92a1-fc8c8a2060e4",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/iotfleethub"
-    ]
-}

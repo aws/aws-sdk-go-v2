@@ -1,3 +1,7 @@
+# v1.33.0 (2025-08-25)
+
+* **Feature**: The Amazon Q Business GetDocumentContent operation now supports retrieval of the extracted text content in JSON format.
+
 # v1.32.2 (2025-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

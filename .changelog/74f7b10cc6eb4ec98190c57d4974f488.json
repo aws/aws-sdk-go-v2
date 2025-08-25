@@ -1,8 +1,0 @@
-{
-    "id": "74f7b10c-c6eb-4ec9-8190-c57d4974f488",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/outposts"
-    ]
-}

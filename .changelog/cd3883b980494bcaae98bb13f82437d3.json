@@ -1,8 +1,0 @@
-{
-    "id": "cd3883b9-8049-4bca-ae98-bb13f82437d3",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/cloudwatchevents"
-    ]
-}

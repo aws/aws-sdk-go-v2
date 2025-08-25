@@ -1,3 +1,7 @@
+# v1.39.0 (2025-08-25)
+
+* **Feature**: Releasing the following features - Asset classification that lets users use restricted terms for classifying assets if they have the right permissions. Also adding a new enum value "Moving" to project status.
+
 # v1.38.1 (2025-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

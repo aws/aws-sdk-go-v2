@@ -1,8 +1,0 @@
-{
-    "id": "c9d87e92-d3ae-4928-8c9b-9b94fef6b2ba",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/personalizeruntime"
-    ]
-}

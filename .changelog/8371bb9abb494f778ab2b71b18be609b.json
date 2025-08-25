@@ -1,8 +1,0 @@
-{
-    "id": "8371bb9a-bb49-4f77-8ab2-b71b18be609b",
-    "type": "feature",
-    "description": "Releasing the following features - Asset classification that lets users use restricted terms for classifying assets if they have the right permissions. Also adding a new enum value \"Moving\" to project status.",
-    "modules": [
-        "service/datazone"
-    ]
-}

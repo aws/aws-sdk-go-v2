@@ -1,8 +1,0 @@
-{
-    "id": "a9bbeefc-d928-4cf8-ad4d-d02b335e7665",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/emrcontainers"
-    ]
-}

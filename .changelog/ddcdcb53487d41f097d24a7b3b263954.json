@@ -1,8 +1,0 @@
-{
-    "id": "ddcdcb53-487d-41f0-97d2-4a7b3b263954",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/taxsettings"
-    ]
-}

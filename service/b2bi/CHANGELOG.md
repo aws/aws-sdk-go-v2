@@ -1,3 +1,7 @@
+# v1.0.0-preview.79 (2025-08-25)
+
+* **Feature**: Updated APIs to support custom validation rules.
+
 # v1.0.0-preview.78 (2025-08-22)
 
 * **Feature**: Remove incorrect endpoint tests

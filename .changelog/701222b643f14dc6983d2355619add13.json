@@ -1,8 +1,0 @@
-{
-    "id": "701222b6-43f1-4dc6-983d-2355619add13",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/groundstation"
-    ]
-}

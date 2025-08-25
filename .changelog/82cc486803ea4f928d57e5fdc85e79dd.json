@@ -1,8 +1,0 @@
-{
-    "id": "82cc4868-03ea-4f92-8d57-e5fdc85e79dd",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/lexmodelsv2"
-    ]
-}

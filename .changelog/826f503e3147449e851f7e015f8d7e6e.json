@@ -1,8 +1,0 @@
-{
-    "id": "826f503e-3147-449e-851f-7e015f8d7e6e",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/bedrockagent"
-    ]
-}
