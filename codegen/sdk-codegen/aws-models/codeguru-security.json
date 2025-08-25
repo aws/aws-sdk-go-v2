@@ -67,7 +67,7 @@
                 "meanTimeToClose": {
                     "target": "com.amazonaws.codegurusecurity#FindingMetricsValuePerSeverity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The average time in days it takes to close findings of each severity as of a specified\n      date.</p>"
+                        "smithy.api#documentation": "<p>The average time in days it takes to close findings of each severity as of a specified date.</p>"
                     }
                 }
             },
@@ -167,7 +167,7 @@
                     ],
                     "origin": "*"
                 },
-                "smithy.api#documentation": "<note>\n            <p>Amazon CodeGuru Security is in preview release and is subject to change.</p>\n         </note>\n         <p>This section provides documentation for the Amazon CodeGuru Security API operations.\n      CodeGuru Security is a service that uses program analysis and machine learning to detect\n      security policy violations and vulnerabilities, and recommends ways to address these security\n      risks.</p>\n         <p>By proactively detecting and providing recommendations for addressing security risks,\n      CodeGuru Security improves the overall security of your application code. For more information\n      about CodeGuru Security, see the \n      <a href=\"https://docs.aws.amazon.com/codeguru/latest/security-ug/what-is-codeguru-security.html\">Amazon CodeGuru Security User Guide</a>. </p>",
+                "smithy.api#documentation": "<note> <p>On November 20, 2025, AWS will discontinue support for Amazon CodeGuru Security. After November 20, 2025, you will no longer be able to access the /codeguru/security console, service resources, or documentation. For more information, see <a href=\"https://docs.aws.amazon.com/codeguru/latest/security-ug/end-of-support.html\">https://docs.aws.amazon.com/codeguru/latest/security-ug/end-of-support.html</a>.</p> </note> <p>This section provides documentation for the Amazon CodeGuru Security API operations. CodeGuru Security is a service that uses program analysis and machine learning to detect security policy violations and vulnerabilities, and recommends ways to address these security risks.</p> <p>By proactively detecting and providing recommendations for addressing security risks, CodeGuru Security improves the overall security of your application code. For more information about CodeGuru Security, see the <a href=\"https://docs.aws.amazon.com/codeguru/latest/security-ug/what-is-codeguru-security.html\">Amazon CodeGuru Security User Guide</a>. </p>",
                 "smithy.api#title": "Amazon CodeGuru Security",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -678,17 +678,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -699,17 +688,6 @@
                                 "Region": "us-iso-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         },
                         {
@@ -726,17 +704,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -747,17 +714,6 @@
                                 "Region": "us-isob-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         },
                         {
@@ -915,7 +871,7 @@
                 "findingIdentifiers": {
                     "target": "com.amazonaws.codegurusecurity#FindingIdentifiers",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of finding identifiers. Each identifier consists of a <code>scanName</code> and a\n        <code>findingId</code>. You retrieve the <code>findingId</code> when you call\n        <code>GetFindings</code>.</p>",
+                        "smithy.api#documentation": "<p>A list of finding identifiers. Each identifier consists of a <code>scanName</code> and a <code>findingId</code>. You retrieve the <code>findingId</code> when you call <code>GetFindings</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -937,7 +893,7 @@
                 "failedFindings": {
                     "target": "com.amazonaws.codegurusecurity#BatchGetFindingsErrors",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of errors for individual findings which were not fetched. Each\n      BatchGetFindingsError contains the <code>scanName</code>, <code>findingId</code>,\n      <code>errorCode</code> and error <code>message</code>.</p>",
+                        "smithy.api#documentation": "<p>A list of errors for individual findings which were not fetched. Each BatchGetFindingsError contains the <code>scanName</code>, <code>findingId</code>, <code>errorCode</code> and error <code>message</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -963,7 +919,7 @@
                 "categoryName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the finding category. A finding category is determined by the detector that\n      detected the finding.</p>"
+                        "smithy.api#documentation": "<p>The name of the finding category. A finding category is determined by the detector that detected the finding.</p>"
                     }
                 },
                 "findingNumber": {
@@ -1046,7 +1002,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The requested operation would cause a conflict with the current state of a service\n      resource associated with the request. Resolve the conflict before retrying this\n      request.</p>",
+                "smithy.api#documentation": "<p>The requested operation would cause a conflict with the current state of a service resource associated with the request. Resolve the conflict before retrying this request.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -1094,7 +1050,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.codegurusecurity#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The idempotency token for the request. Amazon CodeGuru Security uses this value to prevent\n      the accidental creation of duplicate scans if there are failures and retries.</p>",
+                        "smithy.api#documentation": "<p>The idempotency token for the request. Amazon CodeGuru Security uses this value to prevent the accidental creation of duplicate scans if there are failures and retries.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -1108,26 +1064,26 @@
                 "scanName": {
                     "target": "com.amazonaws.codegurusecurity#ScanName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique name that CodeGuru Security uses to track revisions across multiple scans of\n      the same resource. Only allowed for a <code>STANDARD</code> scan type. </p>",
+                        "smithy.api#documentation": "<p>The unique name that CodeGuru Security uses to track revisions across multiple scans of the same resource. Only allowed for a <code>STANDARD</code> scan type. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "scanType": {
                     "target": "com.amazonaws.codegurusecurity#ScanType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of scan, either <code>Standard</code> or <code>Express</code>. Defaults to\n      <code>Standard</code> type if missing.</p>\n         <p>\n            <code>Express</code> scans run on limited resources and use a limited set of detectors to\n      analyze your code in near-real time. <code>Standard</code> scans have standard resource limits\n      and use the full set of detectors to analyze your code.</p>"
+                        "smithy.api#documentation": "<p>The type of scan, either <code>Standard</code> or <code>Express</code>. Defaults to <code>Standard</code> type if missing.</p> <p> <code>Express</code> scans run on limited resources and use a limited set of detectors to analyze your code in near-real time. <code>Standard</code> scans have standard resource limits and use the full set of detectors to analyze your code.</p>"
                     }
                 },
                 "analysisType": {
                     "target": "com.amazonaws.codegurusecurity#AnalysisType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of analysis you want CodeGuru Security to perform in the scan, either\n        <code>Security</code> or <code>All</code>. The <code>Security</code> type only generates\n      findings related to security. The <code>All</code> type generates both security findings and\n      quality findings. Defaults to <code>Security</code> type if missing.</p>"
+                        "smithy.api#documentation": "<p>The type of analysis you want CodeGuru Security to perform in the scan, either <code>Security</code> or <code>All</code>. The <code>Security</code> type only generates findings related to security. The <code>All</code> type generates both security findings and quality findings. Defaults to <code>Security</code> type if missing.</p>"
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.codegurusecurity#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of key-value pairs used to tag a scan. A tag is a custom attribute\n      label with two parts:</p>\n         <ul>\n            <li>\n               <p>A tag key. For example, <code>CostCenter</code>, <code>Environment</code>, or\n            <code>Secret</code>. Tag keys are case sensitive.</p>\n            </li>\n            <li>\n               <p>An optional tag value field. For example, <code>111122223333</code>,\n            <code>Production</code>, or a team name. Omitting the tag value is the same as using an\n            empty string. Tag values are case sensitive.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>An array of key-value pairs used to tag a scan. A tag is a custom attribute label with two parts:</p> <ul> <li> <p>A tag key. For example, <code>CostCenter</code>, <code>Environment</code>, or <code>Secret</code>. Tag keys are case sensitive.</p> </li> <li> <p>An optional tag value field. For example, <code>111122223333</code>, <code>Production</code>, or a team name. Omitting the tag value is the same as using an empty string. Tag values are case sensitive.</p> </li> </ul>"
                     }
                 }
             },
@@ -1162,7 +1118,7 @@
                 "scanState": {
                     "target": "com.amazonaws.codegurusecurity#ScanState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current state of the scan. Returns either <code>InProgress</code>,\n      <code>Successful</code>, or <code>Failed</code>.</p>",
+                        "smithy.api#documentation": "<p>The current state of the scan. Returns either <code>InProgress</code>, <code>Successful</code>, or <code>Failed</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1200,7 +1156,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Generates a pre-signed URL, request headers used to upload a code resource, and code\n      artifact identifier for the uploaded resource.</p>\n         <p>You can upload your code resource to the URL with the request headers using any HTTP\n      client.</p>",
+                "smithy.api#documentation": "<p>Generates a pre-signed URL, request headers used to upload a code resource, and code artifact identifier for the uploaded resource.</p> <p>You can upload your code resource to the URL with the request headers using any HTTP client.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1214,7 +1170,7 @@
                 "scanName": {
                     "target": "com.amazonaws.codegurusecurity#ScanName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the scan that will use the uploaded resource. CodeGuru Security uses the\n      unique scan name to track revisions across multiple scans of the same resource. Use this \n      <code>scanName</code> when you call <code>CreateScan</code> on the code resource you upload to this URL.</p>",
+                        "smithy.api#documentation": "<p>The name of the scan that will use the uploaded resource. CodeGuru Security uses the unique scan name to track revisions across multiple scans of the same resource. Use this <code>scanName</code> when you call <code>CreateScan</code> on the code resource you upload to this URL.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1229,21 +1185,21 @@
                 "s3Url": {
                     "target": "com.amazonaws.codegurusecurity#S3Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>A pre-signed S3 URL. You can upload the code file you want to scan with the required\n      <code>requestHeaders</code> using any HTTP client.</p>",
+                        "smithy.api#documentation": "<p>A pre-signed S3 URL. You can upload the code file you want to scan with the required <code>requestHeaders</code> using any HTTP client.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "requestHeaders": {
                     "target": "com.amazonaws.codegurusecurity#RequestHeaderMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of key-value pairs that contain the required headers when uploading your\n      resource.</p>",
+                        "smithy.api#documentation": "<p>A set of key-value pairs that contain the required headers when uploading your resource.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "codeArtifactId": {
                     "target": "com.amazonaws.codegurusecurity#Uuid",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the uploaded code resource. Pass this to <code>CreateScan</code> to use\n      the uploaded resources.</p>",
+                        "smithy.api#documentation": "<p>The identifier for the uploaded code resource. Pass this to <code>CreateScan</code> to use the uploaded resources.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1264,12 +1220,12 @@
                 "kmsKeyArn": {
                     "target": "com.amazonaws.codegurusecurity#KmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key ARN that is used for encryption. If an AWS-managed key is used for encryption,\n      returns empty.</p>"
+                        "smithy.api#documentation": "<p>The KMS key ARN that is used for encryption. If an AWS-managed key is used for encryption, returns empty.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the encryption configuration for an account. Required to call\n      <code>UpdateAccountConfiguration</code>.</p>"
+                "smithy.api#documentation": "<p>Information about the encryption configuration for an account. Required to call <code>UpdateAccountConfiguration</code>.</p>"
             }
         },
         "com.amazonaws.codegurusecurity#ErrorCode": {
@@ -1339,18 +1295,18 @@
                 "endLine": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The last line number of the code snippet where the security vulnerability appears in your\n      code.</p>"
+                        "smithy.api#documentation": "<p>The last line number of the code snippet where the security vulnerability appears in your code.</p>"
                     }
                 },
                 "codeSnippet": {
                     "target": "com.amazonaws.codegurusecurity#CodeSnippet",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>CodeLine</code> objects that describe where the security vulnerability\n      appears in your code.</p>"
+                        "smithy.api#documentation": "<p>A list of <code>CodeLine</code> objects that describe where the security vulnerability appears in your code.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the location of security vulnerabilities that Amazon CodeGuru Security\n      detected in your code.</p>"
+                "smithy.api#documentation": "<p>Information about the location of security vulnerabilities that Amazon CodeGuru Security detected in your code.</p>"
             }
         },
         "com.amazonaws.codegurusecurity#Finding": {
@@ -1383,7 +1339,7 @@
                 "updatedAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time when the finding was last updated. Findings are updated when you remediate them\n      or when the finding code location changes. </p>"
+                        "smithy.api#documentation": "<p>The time when the finding was last updated. Findings are updated when you remediate them or when the finding code location changes. </p>"
                     }
                 },
                 "type": {
@@ -1413,7 +1369,7 @@
                 "severity": {
                     "target": "com.amazonaws.codegurusecurity#Severity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The severity of the finding. Severity can be critical, high, medium, low, or\n      informational. For information on severity levels, see \n      <a href=\"https://docs.aws.amazon.com/codeguru/latest/security-ug/findings-overview.html#severity-distribution\">Finding severity</a> in the \n      <i>Amazon CodeGuru Security User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The severity of the finding. Severity can be critical, high, medium, low, or informational. For information on severity levels, see <a href=\"https://docs.aws.amazon.com/codeguru/latest/security-ug/findings-overview.html#severity-distribution\">Finding severity</a> in the <i>Amazon CodeGuru Security User Guide</i>.</p>"
                     }
                 },
                 "remediation": {
@@ -1431,13 +1387,13 @@
                 "detectorTags": {
                     "target": "com.amazonaws.codegurusecurity#DetectorTags",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more tags or categorizations that are associated with a detector. These tags are\n      defined by type, programming language, or other classification such as maintainability or\n      consistency.</p>"
+                        "smithy.api#documentation": "<p>One or more tags or categorizations that are associated with a detector. These tags are defined by type, programming language, or other classification such as maintainability or consistency.</p>"
                     }
                 },
                 "detectorId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the detector that detected the finding in your code. A detector is a\n      defined rule based on industry standards and AWS best practices. </p>"
+                        "smithy.api#documentation": "<p>The identifier for the detector that detected the finding in your code. A detector is a defined rule based on industry standards and AWS best practices. </p>"
                     }
                 },
                 "detectorName": {
@@ -1526,7 +1482,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A numeric value corresponding to the severity of a finding, such as the number of open\n      findings or the average time it takes to close findings of a given severity.</p>"
+                "smithy.api#documentation": "<p>A numeric value corresponding to the severity of a finding, such as the number of open findings or the average time it takes to close findings of a given severity.</p>"
             }
         },
         "com.amazonaws.codegurusecurity#Findings": {
@@ -1586,7 +1542,7 @@
                 "encryptionConfig": {
                     "target": "com.amazonaws.codegurusecurity#EncryptionConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>An <code>EncryptionConfig</code> object that contains the KMS key ARN that is used for\n      encryption. By default, CodeGuru Security uses an AWS-managed key for encryption. To specify\n      your own key, call <code>UpdateAccountConfiguration</code>. If you do not specify a\n      customer-managed key, returns empty.</p>",
+                        "smithy.api#documentation": "<p>An <code>EncryptionConfig</code> object that contains the KMS key ARN that is used for encryption. By default, CodeGuru Security uses an AWS-managed key for encryption. To specify your own key, call <code>UpdateAccountConfiguration</code>. If you do not specify a customer-managed key, returns empty.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1653,14 +1609,14 @@
                 "nextToken": {
                     "target": "com.amazonaws.codegurusecurity#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token to use for paginating results that are returned in the response. Set the value of\n      this parameter to null for the first request. For subsequent calls, use the <code>nextToken</code> value\n      returned from the previous request to continue listing results after the first page.</p>",
+                        "smithy.api#documentation": "<p>A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request. For subsequent calls, use the <code>nextToken</code> value returned from the previous request to continue listing results after the first page.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
                 "maxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return in the response. Use this parameter when\n      paginating results. If additional results exist beyond the number you specify, the <code>nextToken</code>\n      element is returned in the response. Use <code>nextToken</code> in a subsequent request to retrieve\n      additional results. If not specified, returns 1000 results.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response. Use this parameter when paginating results. If additional results exist beyond the number you specify, the <code>nextToken</code> element is returned in the response. Use <code>nextToken</code> in a subsequent request to retrieve additional results. If not specified, returns 1000 results.</p>",
                         "smithy.api#httpQuery": "maxResults",
                         "smithy.api#range": {
                             "min": 1,
@@ -1671,7 +1627,7 @@
                 "status": {
                     "target": "com.amazonaws.codegurusecurity#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the findings you want to get. Pass either <code>Open</code>,\n      <code>Closed</code>, or <code>All</code>.</p>",
+                        "smithy.api#documentation": "<p>The status of the findings you want to get. Pass either <code>Open</code>, <code>Closed</code>, or <code>All</code>.</p>",
                         "smithy.api#httpQuery": "status"
                     }
                 }
@@ -1692,7 +1648,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.codegurusecurity#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A pagination token. You can use this in future calls to <code>GetFindings</code> to continue listing\n      results after the current page. </p>"
+                        "smithy.api#documentation": "<p>A pagination token. You can use this in future calls to <code>GetFindings</code> to continue listing results after the current page. </p>"
                     }
                 }
             },
@@ -1723,7 +1679,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a summary of metrics for an account from a specified date, including number of open\n      findings, the categories with most findings, the scans with most open findings, and scans with\n      most open critical findings. </p>",
+                "smithy.api#documentation": "<p>Returns a summary of metrics for an account from a specified date, including number of open findings, the categories with most findings, the scans with most open findings, and scans with most open critical findings. </p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -1738,7 +1694,7 @@
                 "date": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date you want to retrieve summary metrics from, rounded to the nearest day. The date\n      must be within the past two years.</p>",
+                        "smithy.api#documentation": "<p>The date you want to retrieve summary metrics from, rounded to the nearest day. The date must be within the past two years.</p>",
                         "smithy.api#httpQuery": "date",
                         "smithy.api#required": {}
                     }
@@ -1811,7 +1767,7 @@
                 "runId": {
                     "target": "com.amazonaws.codegurusecurity#Uuid",
                     "traits": {
-                        "smithy.api#documentation": "<p>UUID that identifies the individual scan run you want to view details about. You retrieve\n      this when you call the <code>CreateScan</code> operation. Defaults to the latest scan run if missing.</p>",
+                        "smithy.api#documentation": "<p>UUID that identifies the individual scan run you want to view details about. You retrieve this when you call the <code>CreateScan</code> operation. Defaults to the latest scan run if missing.</p>",
                         "smithy.api#httpQuery": "runId"
                     }
                 }
@@ -1840,7 +1796,7 @@
                 "scanState": {
                     "target": "com.amazonaws.codegurusecurity#ScanState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current state of the scan. Returns either <code>InProgress</code>,\n      <code>Successful</code>, or <code>Failed</code>.</p>",
+                        "smithy.api#documentation": "<p>The current state of the scan. Returns either <code>InProgress</code>, <code>Successful</code>, or <code>Failed</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1854,7 +1810,7 @@
                 "analysisType": {
                     "target": "com.amazonaws.codegurusecurity#AnalysisType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of analysis CodeGuru Security performed in the scan, either\n      <code>Security</code> or <code>All</code>. The <code>Security</code> type only generates\n      findings related to security. The <code>All</code> type generates both security findings and\n      quality findings.</p>",
+                        "smithy.api#documentation": "<p>The type of analysis CodeGuru Security performed in the scan, either <code>Security</code> or <code>All</code>. The <code>Security</code> type only generates findings related to security. The <code>All</code> type generates both security findings and quality findings.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1980,14 +1936,14 @@
                 "nextToken": {
                     "target": "com.amazonaws.codegurusecurity#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token to use for paginating results that are returned in the response. Set the\n      value of this parameter to null for the first request. For subsequent calls, use the <code>nextToken</code>\n      value returned from the previous request to continue listing results after the first\n      page.</p>",
+                        "smithy.api#documentation": "<p>A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request. For subsequent calls, use the <code>nextToken</code> value returned from the previous request to continue listing results after the first page.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
                 "maxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return in the response. Use this parameter when\n      paginating results. If additional results exist beyond the number you specify, the <code>nextToken</code>\n      element is returned in the response. Use <code>nextToken</code> in a subsequent request to retrieve\n      additional results. If not specified, returns 1000 results.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response. Use this parameter when paginating results. If additional results exist beyond the number you specify, the <code>nextToken</code> element is returned in the response. Use <code>nextToken</code> in a subsequent request to retrieve additional results. If not specified, returns 1000 results.</p>",
                         "smithy.api#httpQuery": "maxResults",
                         "smithy.api#range": {
                             "min": 1,
@@ -1998,7 +1954,7 @@
                 "startDate": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The start date of the interval which you want to retrieve metrics from. Rounds to the\n      nearest day.</p>",
+                        "smithy.api#documentation": "<p>The start date of the interval which you want to retrieve metrics from. Rounds to the nearest day.</p>",
                         "smithy.api#httpQuery": "startDate",
                         "smithy.api#required": {}
                     }
@@ -2006,7 +1962,7 @@
                 "endDate": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The end date of the interval which you want to retrieve metrics from. Round to the nearest\n      day.</p>",
+                        "smithy.api#documentation": "<p>The end date of the interval which you want to retrieve metrics from. Round to the nearest day.</p>",
                         "smithy.api#httpQuery": "endDate",
                         "smithy.api#required": {}
                     }
@@ -2028,7 +1984,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.codegurusecurity#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A pagination token. You can use this in future calls to <code>ListFindingMetrics</code> to continue\n      listing results after the current page. </p>"
+                        "smithy.api#documentation": "<p>A pagination token. You can use this in future calls to <code>ListFindingMetrics</code> to continue listing results after the current page. </p>"
                     }
                 }
             },
@@ -2059,7 +2015,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of all scans in an account. Does not return <code>EXPRESS</code>\n      scans.</p>",
+                "smithy.api#documentation": "<p>Returns a list of all scans in an account. Does not return <code>EXPRESS</code> scans.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -2080,14 +2036,14 @@
                 "nextToken": {
                     "target": "com.amazonaws.codegurusecurity#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token to use for paginating results that are returned in the response. Set the value of\n      this parameter to null for the first request. For subsequent calls, use the <code>nextToken</code> value\n      returned from the previous request to continue listing results after the first page.</p>",
+                        "smithy.api#documentation": "<p>A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request. For subsequent calls, use the <code>nextToken</code> value returned from the previous request to continue listing results after the first page.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
                 "maxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return in the response. Use this parameter when\n      paginating results. If additional results exist beyond the number you specify, the <code>nextToken</code>\n      element is returned in the response. Use <code>nextToken</code> in a subsequent request to retrieve\n      additional results. If not specified, returns 100 results.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response. Use this parameter when paginating results. If additional results exist beyond the number you specify, the <code>nextToken</code> element is returned in the response. Use <code>nextToken</code> in a subsequent request to retrieve additional results. If not specified, returns 100 results.</p>",
                         "smithy.api#httpQuery": "maxResults",
                         "smithy.api#range": {
                             "min": 1,
@@ -2112,7 +2068,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.codegurusecurity#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A pagination token. You can use this in future calls to <code>ListScans</code> to continue listing\n      results after the current page.</p>"
+                        "smithy.api#documentation": "<p>A pagination token. You can use this in future calls to <code>ListScans</code> to continue listing results after the current page.</p>"
                     }
                 }
             },
@@ -2164,7 +2120,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.codegurusecurity#ScanNameArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the <code>ScanName</code> object. You can retrieve this ARN by calling\n        <code>CreateScan</code>, <code>ListScans</code>, or <code>GetScan</code>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the <code>ScanName</code> object. You can retrieve this ARN by calling <code>CreateScan</code>, <code>ListScans</code>, or <code>GetScan</code>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2180,7 +2136,7 @@
                 "tags": {
                     "target": "com.amazonaws.codegurusecurity#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of key-value pairs used to tag an existing scan. A tag is a custom attribute\n      label with two parts:</p>\n         <ul>\n            <li>\n               <p>A tag key. For example, <code>CostCenter</code>, <code>Environment</code>, or\n            <code>Secret</code>. Tag keys are case sensitive.</p>\n            </li>\n            <li>\n               <p>An optional tag value field. For example, <code>111122223333</code>,\n            <code>Production</code>, or a team name. Omitting the tag value is the same as using an\n          empty string. Tag values are case sensitive.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>An array of key-value pairs used to tag an existing scan. A tag is a custom attribute label with two parts:</p> <ul> <li> <p>A tag key. For example, <code>CostCenter</code>, <code>Environment</code>, or <code>Secret</code>. Tag keys are case sensitive.</p> </li> <li> <p>An optional tag value field. For example, <code>111122223333</code>, <code>Production</code>, or a team name. Omitting the tag value is the same as using an empty string. Tag values are case sensitive.</p> </li> </ul>"
                     }
                 }
             },
@@ -2206,19 +2162,19 @@
                 "categoriesWithMostFindings": {
                     "target": "com.amazonaws.codegurusecurity#CategoriesWithMostFindings",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>CategoryWithFindingNum</code> objects for the top 5 finding categories\n      with the most findings.</p>"
+                        "smithy.api#documentation": "<p>A list of <code>CategoryWithFindingNum</code> objects for the top 5 finding categories with the most findings.</p>"
                     }
                 },
                 "scansWithMostOpenFindings": {
                     "target": "com.amazonaws.codegurusecurity#ScansWithMostOpenFindings",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>ScanNameWithFindingNum</code> objects for the top 3 scans with the most\n      number of open findings.</p>"
+                        "smithy.api#documentation": "<p>A list of <code>ScanNameWithFindingNum</code> objects for the top 3 scans with the most number of open findings.</p>"
                     }
                 },
                 "scansWithMostOpenCriticalFindings": {
                     "target": "com.amazonaws.codegurusecurity#ScansWithMostOpenCriticalFindings",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>ScanNameWithFindingNum</code> objects for the top 3 scans with the most\n      number of open critical findings.</p>"
+                        "smithy.api#documentation": "<p>A list of <code>ScanNameWithFindingNum</code> objects for the top 3 scans with the most number of open critical findings.</p>"
                     }
                 }
             },
@@ -2280,7 +2236,7 @@
                 "suggestedFixes": {
                     "target": "com.amazonaws.codegurusecurity#SuggestedFixes",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>SuggestedFix</code> objects. Each object contains information about a suggested code\n      fix to remediate the finding.</p>"
+                        "smithy.api#documentation": "<p>A list of <code>SuggestedFix</code> objects. Each object contains information about a suggested code fix to remediate the finding.</p>"
                     }
                 }
             },
@@ -2326,12 +2282,12 @@
                 "codeArtifactId": {
                     "target": "com.amazonaws.codegurusecurity#Uuid",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the code file uploaded to the resource object. Returned by\n      <code>CreateUploadUrl</code> when you upload resources to be scanned.</p>"
+                        "smithy.api#documentation": "<p>The identifier for the code file uploaded to the resource object. Returned by <code>CreateUploadUrl</code> when you upload resources to be scanned.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The identifier for a resource object that contains resources to scan. Specifying a\n      codeArtifactId is required to create a scan.</p>"
+                "smithy.api#documentation": "<p>The identifier for a resource object that contains resources to scan. Specifying a codeArtifactId is required to create a scan.</p>"
             }
         },
         "com.amazonaws.codegurusecurity#ResourceNotFoundException": {
@@ -2456,7 +2412,7 @@
                 "scanState": {
                     "target": "com.amazonaws.codegurusecurity#ScanState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the scan. A scan can be <code>In Progress</code>, \n      <code>Complete</code>, or <code>Failed</code>. </p>",
+                        "smithy.api#documentation": "<p>The state of the scan. A scan can be <code>In Progress</code>, <code>Complete</code>, or <code>Failed</code>. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2700,7 +2656,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.codegurusecurity#ScanNameArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the <code>ScanName</code> object. You can retrieve this ARN by calling\n        <code>CreateScan</code>, <code>ListScans</code>, or <code>GetScan</code>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the <code>ScanName</code> object. You can retrieve this ARN by calling <code>CreateScan</code>, <code>ListScans</code>, or <code>GetScan</code>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2708,7 +2664,7 @@
                 "tags": {
                     "target": "com.amazonaws.codegurusecurity#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of key-value pairs used to tag an existing scan. A tag is a custom attribute\n    label with two parts:</p>\n         <ul>\n            <li>\n               <p>A tag key. For example, <code>CostCenter</code>, <code>Environment</code>, or\n          <code>Secret</code>. Tag keys are case sensitive.</p>\n            </li>\n            <li>\n               <p>An optional tag value field. For example, <code>111122223333</code>,\n          <code>Production</code>, or a team name. Omitting the tag value is the same as using an\n          empty string. Tag values are case sensitive.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>An array of key-value pairs used to tag an existing scan. A tag is a custom attribute label with two parts:</p> <ul> <li> <p>A tag key. For example, <code>CostCenter</code>, <code>Environment</code>, or <code>Secret</code>. Tag keys are case sensitive.</p> </li> <li> <p>An optional tag value field. For example, <code>111122223333</code>, <code>Production</code>, or a team name. Omitting the tag value is the same as using an empty string. Tag values are case sensitive.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2816,7 +2772,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.codegurusecurity#ScanNameArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the <code>ScanName</code> object. You can retrieve this ARN by calling\n        <code>CreateScan</code>, <code>ListScans</code>, or <code>GetScan</code>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the <code>ScanName</code> object. You can retrieve this ARN by calling <code>CreateScan</code>, <code>ListScans</code>, or <code>GetScan</code>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2881,7 +2837,7 @@
                 "encryptionConfig": {
                     "target": "com.amazonaws.codegurusecurity#EncryptionConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The customer-managed KMS key ARN you want to use for encryption. If not specified,\n      CodeGuru Security will use an AWS-managed key for encryption. If you previously specified a\n      customer-managed KMS key and want CodeGuru Security to use an AWS-managed key for encryption\n      instead, pass nothing.</p>",
+                        "smithy.api#documentation": "<p>The customer-managed KMS key ARN you want to use for encryption. If not specified, CodeGuru Security will use an AWS-managed key for encryption. If you previously specified a customer-managed KMS key and want CodeGuru Security to use an AWS-managed key for encryption instead, pass nothing.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2896,7 +2852,7 @@
                 "encryptionConfig": {
                     "target": "com.amazonaws.codegurusecurity#EncryptionConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>An <code>EncryptionConfig</code> object that contains the KMS key ARN that is used for\n      encryption. If you did not specify a customer-managed KMS key in the request, returns empty.\n    </p>",
+                        "smithy.api#documentation": "<p>An <code>EncryptionConfig</code> object that contains the KMS key ARN that is used for encryption. If you did not specify a customer-managed KMS key in the request, returns empty. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3035,7 +2991,7 @@
                 "filePath": {
                     "target": "com.amazonaws.codegurusecurity#FilePath",
                     "traits": {
-                        "smithy.api#documentation": "<p> An object that describes the location of the detected security vulnerability in your\n      code.</p>"
+                        "smithy.api#documentation": "<p> An object that describes the location of the detected security vulnerability in your code.</p>"
                     }
                 },
                 "itemCount": {

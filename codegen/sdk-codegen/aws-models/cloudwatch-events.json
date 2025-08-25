@@ -192,7 +192,7 @@
                     "sdkId": "CloudWatch Events",
                     "arnNamespace": "events",
                     "cloudFormationName": "Events",
-                    "cloudTrailEventSource": "cloudwatchevents.amazonaws.com",
+                    "cloudTrailEventSource": "events.amazonaws.com",
                     "docId": "events-2015-10-07",
                     "endpointPrefix": "events"
                 },
@@ -247,7 +247,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -290,7 +289,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -303,7 +303,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -317,7 +316,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -340,7 +338,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -375,7 +372,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -386,14 +382,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -407,14 +405,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -423,11 +419,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
@@ -476,14 +472,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -497,7 +495,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -517,7 +514,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -528,14 +524,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -546,9 +544,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1093,17 +1093,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -1114,17 +1103,6 @@
                                 "Region": "us-iso-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         },
                         {
@@ -1141,17 +1119,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -1162,17 +1129,6 @@
                                 "Region": "us-isob-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         },
                         {
@@ -6408,7 +6364,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds the specified targets to the specified rule, or updates the targets if they are\n      already associated with the rule.</p>\n         <p>Targets are the resources that are invoked when a rule is triggered.</p>\n         <p>You can configure the following as targets for Events:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-destinations.html\">API\n          destination</a>\n               </p>\n            </li>\n            <li>\n               <p>Amazon API Gateway REST API endpoints</p>\n            </li>\n            <li>\n               <p>API Gateway</p>\n            </li>\n            <li>\n               <p>Batch job queue</p>\n            </li>\n            <li>\n               <p>CloudWatch Logs group</p>\n            </li>\n            <li>\n               <p>CodeBuild project</p>\n            </li>\n            <li>\n               <p>CodePipeline</p>\n            </li>\n            <li>\n               <p>Amazon EC2 <code>CreateSnapshot</code> API call</p>\n            </li>\n            <li>\n               <p>Amazon EC2 <code>RebootInstances</code> API call</p>\n            </li>\n            <li>\n               <p>Amazon EC2 <code>StopInstances</code> API call</p>\n            </li>\n            <li>\n               <p>Amazon EC2 <code>TerminateInstances</code> API call</p>\n            </li>\n            <li>\n               <p>Amazon ECS tasks</p>\n            </li>\n            <li>\n               <p>Event bus in a different Amazon Web Services account or Region.</p>\n               <p>You can use an event bus in the US East (N. Virginia) us-east-1, US West (Oregon)\n          us-west-2, or Europe (Ireland) eu-west-1 Regions as a target for a rule.</p>\n            </li>\n            <li>\n               <p>Firehose delivery stream (Kinesis Data Firehose)</p>\n            </li>\n            <li>\n               <p>Inspector assessment template (Amazon Inspector)</p>\n            </li>\n            <li>\n               <p>Kinesis stream (Kinesis Data Stream)</p>\n            </li>\n            <li>\n               <p>Lambda function</p>\n            </li>\n            <li>\n               <p>Redshift clusters (Data API statement execution)</p>\n            </li>\n            <li>\n               <p>Amazon SNS topic</p>\n            </li>\n            <li>\n               <p>Amazon SQS queues (includes FIFO queues</p>\n            </li>\n            <li>\n               <p>SSM Automation</p>\n            </li>\n            <li>\n               <p>SSM OpsItem</p>\n            </li>\n            <li>\n               <p>SSM Run Command</p>\n            </li>\n            <li>\n               <p>Step Functions state machines</p>\n            </li>\n         </ul>\n         <p>Creating rules with built-in targets is supported only in the Amazon Web Services Management Console. The\n      built-in targets are <code>EC2 CreateSnapshot API call</code>, <code>EC2 RebootInstances API\n        call</code>, <code>EC2 StopInstances API call</code>, and <code>EC2 TerminateInstances API\n        call</code>. </p>\n         <p>For some target types, <code>PutTargets</code> provides target-specific parameters. If the\n      target is a Kinesis data stream, you can optionally specify which shard the event goes to by\n      using the <code>KinesisParameters</code> argument. To invoke a command on multiple EC2\n      instances with one rule, you can use the <code>RunCommandParameters</code> field.</p>\n         <p>To be able to make API calls against the resources that you own, Amazon EventBridge\n      needs the appropriate permissions. For Lambda and Amazon SNS\n      resources, EventBridge relies on resource-based policies. For EC2 instances, Kinesis Data Streams, \n      Step Functions state machines and API Gateway REST APIs, EventBridge relies on\n      IAM roles that you specify in the <code>RoleARN</code> argument in <code>PutTargets</code>.\n      For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html\">Authentication\n        and Access Control</a> in the <i>Amazon EventBridge User Guide</i>.</p>\n         <p>If another Amazon Web Services account is in the same region and has granted you permission (using\n        <code>PutPermission</code>), you can send events to that account. Set that account's event\n      bus as a target of the rules in your account. To send the matched events to the other account,\n      specify that account's event bus as the <code>Arn</code> value when you run\n        <code>PutTargets</code>. If your account sends events to another account, your account is\n      charged for each sent event. Each event sent to another account is charged as a custom event.\n      The account receiving the event is not charged. For more information, see <a href=\"http://aws.amazon.com/eventbridge/pricing/\">Amazon EventBridge\n        Pricing</a>.</p>\n         <note>\n            <p>\n               <code>Input</code>, <code>InputPath</code>, and <code>InputTransformer</code> are not\n        available with <code>PutTarget</code> if the target is an event bus of a different Amazon Web Services \n        account.</p>\n         </note>\n         <p>If you are setting the event bus of another account as the target, and that account\n      granted permission to your account through an organization instead of directly by the account\n      ID, then you must specify a <code>RoleArn</code> with proper permissions in the\n        <code>Target</code> structure. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html\">Sending and\n          Receiving Events Between Amazon Web Services Accounts</a> in the <i>Amazon EventBridge User\n        Guide</i>.</p>\n         <p>For more information about enabling cross-account events, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutPermission.html\">PutPermission</a>.</p>\n         <p>\n            <b>Input</b>, <b>InputPath</b>, and\n        <b>InputTransformer</b> are mutually exclusive and optional\n      parameters of a target. When a rule is triggered due to a matched event:</p>\n         <ul>\n            <li>\n               <p>If none of the following arguments are specified for a target, then the entire event\n          is passed to the target in JSON format (unless the target is Amazon EC2 Run Command or\n          Amazon ECS task, in which case nothing from the event is passed to the target).</p>\n            </li>\n            <li>\n               <p>If <b>Input</b> is specified in the form of valid JSON, then\n          the matched event is overridden with this constant.</p>\n            </li>\n            <li>\n               <p>If <b>InputPath</b> is specified in the form of JSONPath\n          (for example, <code>$.detail</code>), then only the part of the event specified in the\n          path is passed to the target (for example, only the detail part of the event is\n          passed).</p>\n            </li>\n            <li>\n               <p>If <b>InputTransformer</b> is specified, then one or more\n          specified JSONPaths are extracted from the event and used as values in a template that you\n          specify as the input to the target.</p>\n            </li>\n         </ul>\n         <p>When you specify <code>InputPath</code> or <code>InputTransformer</code>, you must use\n      JSON dot notation, not bracket notation.</p>\n         <p>When you add targets to a rule and the associated rule triggers soon after, new or updated\n      targets might not be immediately invoked. Allow a short period of time for changes to take\n      effect.</p>\n         <p>This action can partially fail if too many requests are made at the same time. If that\n      happens, <code>FailedEntryCount</code> is non-zero in the response and each entry in\n        <code>FailedEntries</code> provides the ID of the failed target and the error code.</p>"
+                "smithy.api#documentation": "<p>Adds the specified targets to the specified rule, or updates the targets if they are\n      already associated with the rule.</p>\n         <p>Targets are the resources that are invoked when a rule is triggered.</p>\n         <p>You can configure the following as targets for Events:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-destinations.html\">API\n          destination</a>\n               </p>\n            </li>\n            <li>\n               <p>Amazon API Gateway REST API endpoints</p>\n            </li>\n            <li>\n               <p>API Gateway</p>\n            </li>\n            <li>\n               <p>Batch job queue</p>\n            </li>\n            <li>\n               <p>CloudWatch Logs group</p>\n            </li>\n            <li>\n               <p>CodeBuild project</p>\n            </li>\n            <li>\n               <p>CodePipeline</p>\n            </li>\n            <li>\n               <p>Amazon EC2 <code>CreateSnapshot</code> API call</p>\n            </li>\n            <li>\n               <p>Amazon EC2 <code>RebootInstances</code> API call</p>\n            </li>\n            <li>\n               <p>Amazon EC2 <code>StopInstances</code> API call</p>\n            </li>\n            <li>\n               <p>Amazon EC2 <code>TerminateInstances</code> API call</p>\n            </li>\n            <li>\n               <p>Amazon ECS tasks</p>\n            </li>\n            <li>\n               <p>Event bus in a different Amazon Web Services account or Region.</p>\n               <p>You can use an event bus in the US East (N. Virginia) us-east-1, US West (Oregon)\n          us-west-2, or Europe (Ireland) eu-west-1 Regions as a target for a rule.</p>\n            </li>\n            <li>\n               <p>Firehose delivery stream (Firehose)</p>\n            </li>\n            <li>\n               <p>Inspector assessment template (Amazon Inspector)</p>\n            </li>\n            <li>\n               <p>Kinesis stream (Kinesis Data Stream)</p>\n            </li>\n            <li>\n               <p>Lambda function</p>\n            </li>\n            <li>\n               <p>Redshift clusters (Data API statement execution)</p>\n            </li>\n            <li>\n               <p>Amazon SNS topic</p>\n            </li>\n            <li>\n               <p>Amazon SQS queues (includes FIFO queues</p>\n            </li>\n            <li>\n               <p>SSM Automation</p>\n            </li>\n            <li>\n               <p>SSM OpsItem</p>\n            </li>\n            <li>\n               <p>SSM Run Command</p>\n            </li>\n            <li>\n               <p>Step Functions state machines</p>\n            </li>\n         </ul>\n         <p>Creating rules with built-in targets is supported only in the Amazon Web Services Management Console. The\n      built-in targets are <code>EC2 CreateSnapshot API call</code>, <code>EC2 RebootInstances API\n        call</code>, <code>EC2 StopInstances API call</code>, and <code>EC2 TerminateInstances API\n        call</code>. </p>\n         <p>For some target types, <code>PutTargets</code> provides target-specific parameters. If the\n      target is a Kinesis data stream, you can optionally specify which shard the event goes to by\n      using the <code>KinesisParameters</code> argument. To invoke a command on multiple EC2\n      instances with one rule, you can use the <code>RunCommandParameters</code> field.</p>\n         <p>To be able to make API calls against the resources that you own, Amazon EventBridge\n      needs the appropriate permissions. For Lambda and Amazon SNS\n      resources, EventBridge relies on resource-based policies. For EC2 instances, Kinesis Data Streams, \n      Step Functions state machines and API Gateway REST APIs, EventBridge relies on\n      IAM roles that you specify in the <code>RoleARN</code> argument in <code>PutTargets</code>.\n      For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html\">Authentication\n        and Access Control</a> in the <i>Amazon EventBridge User Guide</i>.</p>\n         <p>If another Amazon Web Services account is in the same region and has granted you permission (using\n        <code>PutPermission</code>), you can send events to that account. Set that account's event\n      bus as a target of the rules in your account. To send the matched events to the other account,\n      specify that account's event bus as the <code>Arn</code> value when you run\n        <code>PutTargets</code>. If your account sends events to another account, your account is\n      charged for each sent event. Each event sent to another account is charged as a custom event.\n      The account receiving the event is not charged. For more information, see <a href=\"http://aws.amazon.com/eventbridge/pricing/\">Amazon EventBridge\n        Pricing</a>.</p>\n         <note>\n            <p>\n               <code>Input</code>, <code>InputPath</code>, and <code>InputTransformer</code> are not\n        available with <code>PutTarget</code> if the target is an event bus of a different Amazon Web Services \n        account.</p>\n         </note>\n         <p>If you are setting the event bus of another account as the target, and that account\n      granted permission to your account through an organization instead of directly by the account\n      ID, then you must specify a <code>RoleArn</code> with proper permissions in the\n        <code>Target</code> structure. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html\">Sending and\n          Receiving Events Between Amazon Web Services Accounts</a> in the <i>Amazon EventBridge User\n        Guide</i>.</p>\n         <p>For more information about enabling cross-account events, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutPermission.html\">PutPermission</a>.</p>\n         <p>\n            <b>Input</b>, <b>InputPath</b>, and\n        <b>InputTransformer</b> are mutually exclusive and optional\n      parameters of a target. When a rule is triggered due to a matched event:</p>\n         <ul>\n            <li>\n               <p>If none of the following arguments are specified for a target, then the entire event\n          is passed to the target in JSON format (unless the target is Amazon EC2 Run Command or\n          Amazon ECS task, in which case nothing from the event is passed to the target).</p>\n            </li>\n            <li>\n               <p>If <b>Input</b> is specified in the form of valid JSON, then\n          the matched event is overridden with this constant.</p>\n            </li>\n            <li>\n               <p>If <b>InputPath</b> is specified in the form of JSONPath\n          (for example, <code>$.detail</code>), then only the part of the event specified in the\n          path is passed to the target (for example, only the detail part of the event is\n          passed).</p>\n            </li>\n            <li>\n               <p>If <b>InputTransformer</b> is specified, then one or more\n          specified JSONPaths are extracted from the event and used as values in a template that you\n          specify as the input to the target.</p>\n            </li>\n         </ul>\n         <p>When you specify <code>InputPath</code> or <code>InputTransformer</code>, you must use\n      JSON dot notation, not bracket notation.</p>\n         <p>When you add targets to a rule and the associated rule triggers soon after, new or updated\n      targets might not be immediately invoked. Allow a short period of time for changes to take\n      effect.</p>\n         <p>This action can partially fail if too many requests are made at the same time. If that\n      happens, <code>FailedEntryCount</code> is non-zero in the response and each entry in\n        <code>FailedEntries</code> provides the ID of the failed target and the error code.</p>"
             }
         },
         "com.amazonaws.cloudwatchevents#PutTargetsRequest": {
@@ -7216,20 +7172,20 @@
                 "Name": {
                     "target": "com.amazonaws.cloudwatchevents#SageMakerPipelineParameterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of parameter to start execution of a SageMaker Model Building Pipeline.</p>",
+                        "smithy.api#documentation": "<p>Name of parameter to start execution of a SageMaker AI Model Building Pipeline.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Value": {
                     "target": "com.amazonaws.cloudwatchevents#SageMakerPipelineParameterValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>Value of parameter to start execution of a SageMaker Model Building Pipeline.</p>",
+                        "smithy.api#documentation": "<p>Value of parameter to start execution of a SageMaker AI Model Building Pipeline.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Name/Value pair of a parameter to start execution of a SageMaker Model Building\n      Pipeline.</p>"
+                "smithy.api#documentation": "<p>Name/Value pair of a parameter to start execution of a SageMaker AI Model Building\n      Pipeline.</p>"
             }
         },
         "com.amazonaws.cloudwatchevents#SageMakerPipelineParameterList": {
@@ -7269,12 +7225,12 @@
                 "PipelineParameterList": {
                     "target": "com.amazonaws.cloudwatchevents#SageMakerPipelineParameterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of Parameter names and values for SageMaker Model Building Pipeline execution.</p>"
+                        "smithy.api#documentation": "<p>List of Parameter names and values for SageMaker AI Model Building Pipeline execution.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>These are custom parameters to use when the target is a SageMaker Model Building Pipeline\n      that starts based on EventBridge events.</p>"
+                "smithy.api#documentation": "<p>These are custom parameters to use when the target is a SageMaker AI Model Building Pipeline\n      that starts based on EventBridge events.</p>"
             }
         },
         "com.amazonaws.cloudwatchevents#ScheduleExpression": {
@@ -7656,7 +7612,7 @@
                 "SageMakerPipelineParameters": {
                     "target": "com.amazonaws.cloudwatchevents#SageMakerPipelineParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the SageMaker Model Building Pipeline parameters to start execution of a\n      SageMaker Model Building Pipeline.</p>\n         <p>If you specify a SageMaker Model Building Pipeline as a target, you can use this to\n      specify parameters to start a pipeline execution based on EventBridge events.</p>"
+                        "smithy.api#documentation": "<p>Contains the SageMaker AI Model Building Pipeline parameters to start execution of a\n      SageMaker AI Model Building Pipeline.</p>\n         <p>If you specify a SageMaker AI Model Building Pipeline as a target, you can use this to\n      specify parameters to start a pipeline execution based on EventBridge events.</p>"
                     }
                 },
                 "DeadLetterConfig": {

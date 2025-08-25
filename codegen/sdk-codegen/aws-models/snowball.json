@@ -1109,17 +1109,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -1130,17 +1119,6 @@
                                 "Region": "us-iso-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         },
                         {
@@ -1157,17 +1135,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -1178,17 +1145,6 @@
                                 "Region": "us-isob-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         },
                         {
@@ -1611,7 +1567,7 @@
                 "SnowballType": {
                     "target": "com.amazonaws.snowball#SnowballType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of Snowcone device to use for this cluster.\n      </p>\n         <note>\n            <p>For cluster jobs, Amazon Web Services Snow Family currently supports only the\n          <code>EDGE</code> device type.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The type of Snowball Edge device to use for this cluster.\n      </p>\n         <note>\n            <p>For cluster jobs, Amazon Web Services Snow Family currently supports only the\n          <code>EDGE</code> device type.</p>\n         </note>"
                     }
                 },
                 "CreationDate": {
@@ -2157,7 +2113,7 @@
                 "DeviceConfiguration": {
                     "target": "com.amazonaws.snowball#DeviceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the device configuration for an Snowcone job.</p>\n         <p>For more information, see\n      \"https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i> or\n      \"https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Defines the device configuration for an Snowball Edge job.</p>\n         <p>For more information, see\n      \"https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i> or\n      \"https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i>.</p>"
                     }
                 },
                 "RemoteManagement": {
@@ -2724,7 +2680,7 @@
                 "SnowconeDeviceConfiguration": {
                     "target": "com.amazonaws.snowball#SnowconeDeviceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns information about the device configuration for an Snowcone\n      job.</p>"
+                        "smithy.api#documentation": "<p>Returns information about the device configuration for an Snowball Edge\n      job.</p>"
                     }
                 }
             },
@@ -4896,12 +4852,12 @@
                 "WirelessConnection": {
                     "target": "com.amazonaws.snowball#WirelessConnection",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configures the wireless connection for the Snowcone device.</p>"
+                        "smithy.api#documentation": "<p>Configures the wireless connection for the Snowball Edge device.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the device configuration for an Snowcone job.</p>"
+                "smithy.api#documentation": "<p>Specifies the device configuration for an Snowball Edge job.</p>"
             }
         },
         "com.amazonaws.snowball#SnsTopicARN": {
@@ -5381,12 +5337,12 @@
                     "target": "com.amazonaws.snowball#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Enables the Wi-Fi adapter on an Snowcone device.</p>"
+                        "smithy.api#documentation": "<p>Enables the Wi-Fi adapter on an Snowball Edge device.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configures the wireless connection on an Snowcone device.</p>"
+                "smithy.api#documentation": "<p>Configures the wireless connection on an Snowball Edge device.</p>"
             }
         }
     }

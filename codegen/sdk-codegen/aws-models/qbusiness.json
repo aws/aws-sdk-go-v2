@@ -1591,7 +1591,7 @@
                 "documents": {
                     "target": "com.amazonaws.qbusiness#Documents",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more documents to add to the index.</p>",
+                        "smithy.api#documentation": "<p>One or more documents to add to the index.</p> <important> <p>Ensure that the name of your document doesn't contain any confidential information. Amazon Q Business returns document names in chat responses and citations when relevant.</p> </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1650,7 +1650,7 @@
                 "blockedPhrases": {
                     "target": "com.amazonaws.qbusiness#BlockedPhrases",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of phrases blocked from a Amazon Q Business web experience chat.</p>"
+                        "smithy.api#documentation": "<p>A list of phrases blocked from a Amazon Q Business web experience chat.</p> <note> <p>Each phrase can contain a maximum of 36 characters. The list can contain a maximum of 20 phrases.</p> </note>"
                     }
                 },
                 "systemMessageOverride": {
@@ -3417,7 +3417,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.qbusiness#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role with permission to access the data source and required resources.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role with permission to access the data source and required resources. This field is required for all connector types except custom connectors, where it is optional.</p>"
                     }
                 },
                 "clientToken": {
@@ -4137,7 +4137,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.qbusiness#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service role attached to your web experience.</p> <note> <p>You must provide this value if you're using IAM Identity Center to manage end user access to your application. If you're using legacy identity management to manage user access, you don't need to provide this value.</p> </note>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service role attached to your web experience.</p> <note> <p>The <code>roleArn</code> parameter is required when your Amazon Q Business application is created with IAM Identity Center. It is not required for SAML-based applications.</p> </note>"
                     }
                 },
                 "tags": {
@@ -5178,6 +5178,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.qbusiness#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qbusiness#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.qbusiness#InternalServerException"
@@ -8204,7 +8207,7 @@
                 "outputFormat": {
                     "target": "com.amazonaws.qbusiness#OutputFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>Raw document outputFormat.</p>",
+                        "smithy.api#documentation": "<p>Document outputFormat. Defaults to RAW if not selected.</p>",
                         "smithy.api#httpQuery": "outputFormat"
                     }
                 }
@@ -8226,7 +8229,7 @@
                 "mimeType": {
                     "target": "com.amazonaws.qbusiness#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The MIME type of the document content (e.g., application/pdf, text/plain, application/vnd.openxmlformats-officedocument.wordprocessingml.document).</p>",
+                        "smithy.api#documentation": "<p>The MIME type of the document content. When outputFormat is RAW, this corresponds to the original document's MIME type (e.g., application/pdf, text/plain, application/vnd.openxmlformats-officedocument.wordprocessingml.document). When outputFormat is EXTRACTED, the MIME type is always application/json.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -11761,7 +11764,13 @@
             "type": "long"
         },
         "com.amazonaws.qbusiness#MaxResults": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
         },
         "com.amazonaws.qbusiness#MaxResultsIntegerForGetTopicConfigurations": {
             "type": "integer",
@@ -12535,6 +12544,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "RAW"
+                    }
+                },
+                "EXTRACTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXTRACTED"
                     }
                 }
             }
@@ -14087,6 +14102,8 @@
                 "maxResults": {
                     "target": "com.amazonaws.qbusiness#MaxResults",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": 10,
                         "smithy.api#documentation": "<p>The maximum number of results to return.</p>"
                     }
                 },

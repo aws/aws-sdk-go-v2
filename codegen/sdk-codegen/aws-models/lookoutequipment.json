@@ -694,17 +694,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -715,17 +704,6 @@
                                 "Region": "us-iso-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         },
                         {
@@ -742,17 +720,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -763,17 +730,6 @@
                                 "Region": "us-isob-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         },
                         {
@@ -1655,13 +1611,13 @@
                 "smithy.api#documentation": "<p>Creates a retraining scheduler on the specified model. </p>",
                 "smithy.api#examples": [
                     {
-                        "title": "Creates a retraining scheduler with manual promote mode",
+                        "title": "Creates a retraining scheduler with a specific start date",
                         "documentation": "",
                         "input": {
                             "ModelName": "sample-model",
+                            "RetrainingStartDate": "2024-01-01T00:00:00Z",
                             "RetrainingFrequency": "P1M",
                             "LookbackWindow": "P360D",
-                            "PromoteMode": "MANUAL",
                             "ClientToken": "sample-client-token"
                         },
                         "output": {
@@ -1671,13 +1627,13 @@
                         }
                     },
                     {
-                        "title": "Creates a retraining scheduler with a specific start date",
+                        "title": "Creates a retraining scheduler with manual promote mode",
                         "documentation": "",
                         "input": {
                             "ModelName": "sample-model",
-                            "RetrainingStartDate": "2024-01-01T00:00:00Z",
                             "RetrainingFrequency": "P1M",
                             "LookbackWindow": "P360D",
+                            "PromoteMode": "MANUAL",
                             "ClientToken": "sample-client-token"
                         },
                         "output": {

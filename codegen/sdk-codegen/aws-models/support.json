@@ -94,7 +94,7 @@
                     "name": "support"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>Amazon Web Services Support</fullname>\n         <p>The <i>Amazon Web Services Support API Reference</i> is intended for programmers who need detailed\n            information about the Amazon Web Services Support operations and data types. You can use the API to manage\n            your support cases programmatically. The Amazon Web Services Support API uses HTTP methods that return\n            results in JSON format.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to use the Amazon Web Services Support\n                        API. </p>\n               </li>\n               <li>\n                  <p>If you call the Amazon Web Services Support API from an account that doesn't have a\n                        Business, Enterprise On-Ramp, or Enterprise Support plan, the\n                            <code>SubscriptionRequiredException</code> error message appears. For\n                        information about changing your support plan, see <a href=\"http://aws.amazon.com/premiumsupport/\">Amazon Web Services Support</a>.</p>\n               </li>\n            </ul>\n         </note>\n         <p>You can also use the Amazon Web Services Support API to access features for <a href=\"http://aws.amazon.com/premiumsupport/trustedadvisor/\">Trusted Advisor</a>. You can return a list of\n            checks and their descriptions, get check results, specify checks to refresh, and get the\n            refresh status of checks.</p>\n         <p>You can manage your support cases with the following Amazon Web Services Support API operations:</p>\n         <ul>\n            <li>\n               <p>The <a>CreateCase</a>, <a>DescribeCases</a>, <a>DescribeAttachment</a>, and <a>ResolveCase</a> operations\n                    create Amazon Web Services Support cases, retrieve information about cases, and resolve cases.</p>\n            </li>\n            <li>\n               <p>The <a>DescribeCommunications</a>, <a>AddCommunicationToCase</a>, and <a>AddAttachmentsToSet</a> operations retrieve and add communications and attachments to Amazon Web Services Support\n                    cases.</p>\n            </li>\n            <li>\n               <p>The <a>DescribeServices</a> and <a>DescribeSeverityLevels</a> operations return Amazon Web Service names, service codes, service categories, and problem\n                    severity levels. You use these values when you call the <a>CreateCase</a> operation.</p>\n            </li>\n         </ul>\n         <p>You can also use the Amazon Web Services Support API to call the  Trusted Advisor operations. For more\n            information, see <a href=\"https://docs.aws.amazon.com/awssupport/latest/user/trusted-advisor.html\">Trusted Advisor</a> in the\n                <i>Amazon Web Services Support User Guide</i>.</p>\n         <p>For authentication of requests, Amazon Web Services Support uses <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 Signing\n                Process</a>.</p>\n         <p>For more information about this service and the endpoints to use, see <a href=\"https://docs.aws.amazon.com/awssupport/latest/user/about-support-api.html\">About the\n                Amazon Web Services Support API</a> in the <i>Amazon Web Services Support User Guide</i>.</p>",
+                "smithy.api#documentation": "<fullname>Amazon Web Services Support</fullname>\n         <p>The <i>Amazon Web Services Support API Reference</i> is intended for programmers who need detailed\n            information about the Amazon Web Services Support operations and data types. You can use the API to manage\n            your support cases programmatically. The Amazon Web Services Support API uses HTTP methods that return\n            results in JSON format.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to use the Amazon Web Services Support\n                        API. </p>\n               </li>\n               <li>\n                  <p>If you call the Amazon Web Services Support API from an account that doesn't have a\n                        Business, Enterprise On-Ramp, or Enterprise Support plan, the\n                            <code>SubscriptionRequiredException</code> error message appears. For\n                        information about changing your support plan, see <a href=\"http://aws.amazon.com/premiumsupport/\">Amazon Web Services Support</a>.</p>\n               </li>\n            </ul>\n         </note>\n         <p>You can also use the Amazon Web Services Support API to access features for <a href=\"http://aws.amazon.com/premiumsupport/trustedadvisor/\">Trusted Advisor</a>. You can return a list of\n            checks and their descriptions, get check results, specify checks to refresh, and get the\n            refresh status of checks.</p>\n         <p>You can manage your support cases with the following Amazon Web Services Support API operations:</p>\n         <ul>\n            <li>\n               <p>The <a>CreateCase</a>, <a>DescribeCases</a>, <a>DescribeAttachment</a>, and <a>ResolveCase</a> operations\n                    create Amazon Web Services Support cases, retrieve information about cases, and resolve cases.</p>\n            </li>\n            <li>\n               <p>The <a>DescribeCommunications</a>, <a>AddCommunicationToCase</a>, and <a>AddAttachmentsToSet</a> operations retrieve and add communications and attachments to Amazon Web Services Support\n                    cases.</p>\n            </li>\n            <li>\n               <p>The <a>DescribeServices</a> and <a>DescribeSeverityLevels</a> operations return Amazon Web Services service names, service codes, service categories, and problem\n                    severity levels. You use these values when you call the <a>CreateCase</a> operation.</p>\n            </li>\n         </ul>\n         <p>You can also use the Amazon Web Services Support API to call the  Trusted Advisor operations. For more\n            information, see <a href=\"https://docs.aws.amazon.com/awssupport/latest/user/trusted-advisor.html\">Trusted Advisor</a> in the\n                <i>Amazon Web Services Support User Guide</i>.</p>\n         <p>For authentication of requests, Amazon Web Services Support uses <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 Signing\n                Process</a>.</p>\n         <p>For more information about this service and the endpoints to use, see <a href=\"https://docs.aws.amazon.com/awssupport/latest/user/about-support-api.html\">About the\n                Amazon Web Services Support API</a> in the <i>Amazon Web Services Support User Guide</i>.</p>",
                 "smithy.api#title": "AWS Support",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://support.amazonaws.com/doc/2013-04-15/"
@@ -1024,17 +1024,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -1045,17 +1034,6 @@
                                 "Region": "us-iso-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         },
                         {
@@ -1103,17 +1081,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -1124,17 +1091,6 @@
                                 "Region": "us-isob-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         },
                         {

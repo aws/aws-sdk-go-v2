@@ -782,6 +782,12 @@
                     "traits": {
                         "smithy.api#enumValue": "DELETED"
                     }
+                },
+                "MAINTENANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MAINTENANCE"
+                    }
                 }
             }
         },
@@ -3814,6 +3820,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "UPDATING_INSTANCE_TYPE"
+                    }
+                },
+                "MAINTENANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MAINTENANCE"
                     }
                 }
             }

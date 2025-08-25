@@ -78,7 +78,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Specify the AAC profile. For the widest player compatibility and where higher bitrates are acceptable: Keep the default profile, LC (AAC-LC) For improved audio performance at lower bitrates: Choose HEV1 or HEV2. HEV1 (AAC-HE v1) adds spectral band replication to improve speech audio at low bitrates. HEV2 (AAC-HE v2) adds parametric stereo, which optimizes for encoding stereo audio at very low bitrates."
+                "smithy.api#documentation": "Specify the AAC profile. For the widest player compatibility and where higher bitrates are acceptable: Keep the default profile, LC (AAC-LC) For improved audio performance at lower bitrates: Choose HEV1 or HEV2. HEV1 (AAC-HE v1) adds spectral band replication to improve speech audio at low bitrates. HEV2 (AAC-HE v2) adds parametric stereo, which optimizes for encoding stereo audio at very low bitrates. For improved audio quality at lower bitrates, adaptive audio bitrate switching, and loudness control: Choose XHE."
             }
         },
         "com.amazonaws.mediaconvert#AacCodingMode": {
@@ -199,7 +199,7 @@
                 "CodecProfile": {
                     "target": "com.amazonaws.mediaconvert#AacCodecProfile",
                     "traits": {
-                        "smithy.api#documentation": "Specify the AAC profile. For the widest player compatibility and where higher bitrates are acceptable: Keep the default profile, LC (AAC-LC) For improved audio performance at lower bitrates: Choose HEV1 or HEV2. HEV1 (AAC-HE v1) adds spectral band replication to improve speech audio at low bitrates. HEV2 (AAC-HE v2) adds parametric stereo, which optimizes for encoding stereo audio at very low bitrates.",
+                        "smithy.api#documentation": "Specify the AAC profile. For the widest player compatibility and where higher bitrates are acceptable: Keep the default profile, LC (AAC-LC) For improved audio performance at lower bitrates: Choose HEV1 or HEV2. HEV1 (AAC-HE v1) adds spectral band replication to improve speech audio at low bitrates. HEV2 (AAC-HE v2) adds parametric stereo, which optimizes for encoding stereo audio at very low bitrates. For improved audio quality at lower bitrates, adaptive audio bitrate switching, and loudness control: Choose XHE.",
                         "smithy.api#jsonName": "codecProfile"
                     }
                 },
@@ -6279,6 +6279,76 @@
                     }
                 }
             },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.mediaconvert#CreateResourceShare": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mediaconvert#CreateResourceShareRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mediaconvert#CreateResourceShareResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mediaconvert#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Create a new resource share request for MediaConvert resources with AWS Support.",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2017-08-29/resourceShares",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.mediaconvert#CreateResourceShareRequest": {
+            "type": "structure",
+            "members": {
+                "JobId": {
+                    "target": "com.amazonaws.mediaconvert#__string",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "Specify MediaConvert Job ID or ARN to share",
+                        "smithy.api#jsonName": "jobId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SupportCaseId": {
+                    "target": "com.amazonaws.mediaconvert#__string",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "AWS Support case identifier",
+                        "smithy.api#jsonName": "supportCaseId",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.mediaconvert#CreateResourceShareResponse": {
+            "type": "structure",
+            "members": {},
             "traits": {
                 "smithy.api#output": {}
             }
@@ -13203,6 +13273,12 @@
                         "smithy.api#enumValue": "INCLUDE"
                     }
                 },
+                "INCLUDE_AS_TS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCLUDE_AS_TS"
+                    }
+                },
                 "EXCLUDE": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -13211,7 +13287,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Choose Include to have MediaConvert generate a child manifest that lists only the I-frames for this rendition, in addition to your regular manifest for this rendition. You might use this manifest as part of a workflow that creates preview functions for your video. MediaConvert adds both the I-frame only child manifest and the regular child manifest to the parent manifest. When you don't need the I-frame only child manifest, keep the default value Exclude."
+                "smithy.api#documentation": "Generate a variant manifest that lists only the I-frames for this rendition. You might use this manifest as part of a workflow that creates preview functions for your video. MediaConvert adds both the I-frame only variant manifest and the regular variant manifest to the multivariant manifest. To have MediaConvert write a variant manifest that references I-frames from your output content using EXT-X-BYTERANGE tags: Choose Include. To have MediaConvert output I-frames as single frame TS files and a corresponding variant manifest that references them: Choose Include as TS. When you don't need the I-frame only variant manifest: Keep the default value, Exclude."
             }
         },
         "com.amazonaws.mediaconvert#HlsImageBasedTrickPlay": {
@@ -13592,7 +13668,7 @@
                 "IFrameOnlyManifest": {
                     "target": "com.amazonaws.mediaconvert#HlsIFrameOnlyManifest",
                     "traits": {
-                        "smithy.api#documentation": "Choose Include to have MediaConvert generate a child manifest that lists only the I-frames for this rendition, in addition to your regular manifest for this rendition. You might use this manifest as part of a workflow that creates preview functions for your video. MediaConvert adds both the I-frame only child manifest and the regular child manifest to the parent manifest. When you don't need the I-frame only child manifest, keep the default value Exclude.",
+                        "smithy.api#documentation": "Generate a variant manifest that lists only the I-frames for this rendition. You might use this manifest as part of a workflow that creates preview functions for your video. MediaConvert adds both the I-frame only variant manifest and the regular variant manifest to the multivariant manifest. To have MediaConvert write a variant manifest that references I-frames from your output content using EXT-X-BYTERANGE tags: Choose Include. To have MediaConvert output I-frames as single frame TS files and a corresponding variant manifest that references them: Choose Include as TS. When you don't need the I-frame only variant manifest: Keep the default value, Exclude.",
                         "smithy.api#jsonName": "iFrameOnlyManifest"
                     }
                 },
@@ -14260,7 +14336,7 @@
                 "AuthConnectionArn": {
                     "target": "com.amazonaws.mediaconvert#__stringPatternArnAwsAZ09EventsAZ090912ConnectionAZAZ09AF0936",
                     "traits": {
-                        "smithy.api#documentation": "Specify the ARN (Amazon Resource Name) of an EventBridge Connection to authenticate with your TAMS server. The EventBridge Connection stores your authentication credentials securely. MediaConvert assumes your job's IAM role to access this connection, so ensure the role has the events:RetrieveConnectionCredentials, secretsmanager:DescribeSecret, and secretsmanager:GetSecretValue permissions. Format: arn:aws:events:region:account-id:connection/connection-name/unique-id",
+                        "smithy.api#documentation": "Specify the ARN (Amazon Resource Name) of an EventBridge Connection to authenticate with your TAMS server. The EventBridge Connection stores your authentication credentials securely. MediaConvert assumes your job's IAM role to access this connection, so ensure the role has the events:RetrieveConnectionCredentials, secretsmanager:DescribeSecret, and secretsmanager:GetSecretValue permissions. Format: arn:aws:events:region:account-id:connection/connection-name/unique-id This setting is required when you include TAMS settings in your job.",
                         "smithy.api#jsonName": "authConnectionArn"
                     }
                 },
@@ -14274,14 +14350,14 @@
                 "SourceId": {
                     "target": "com.amazonaws.mediaconvert#__string",
                     "traits": {
-                        "smithy.api#documentation": "Specify the unique identifier for the media source in your TAMS server. MediaConvert uses this source ID to locate the appropriate flows containing the media segments you want to process. The source ID corresponds to a specific media source registered in your TAMS server. This source must be of type urn:x-nmos:format:multi, and can can reference multiple flows for audio, video, or combined audio/video content. MediaConvert automatically selects the highest quality flows available for your job. This setting is required when include TAMS settings in your job.",
+                        "smithy.api#documentation": "Specify the unique identifier for the media source in your TAMS server. MediaConvert uses this source ID to locate the appropriate flows containing the media segments you want to process. The source ID corresponds to a specific media source registered in your TAMS server. This source must be of type urn:x-nmos:format:multi, and can can reference multiple flows for audio, video, or combined audio/video content. MediaConvert automatically selects the highest quality flows available for your job. This setting is required when you include TAMS settings in your job.",
                         "smithy.api#jsonName": "sourceId"
                     }
                 },
                 "Timerange": {
                     "target": "com.amazonaws.mediaconvert#__stringPattern019090190908019090190908",
                     "traits": {
-                        "smithy.api#documentation": "Specify the time range of media segments to retrieve from your TAMS server. MediaConvert fetches only the segments that fall within this range. Use the format specified by your TAMS server implementation. This must be two timestamp values with the format {sign?}{seconds}:{nanoseconds}, separated by an underscore, surrounded by either parentheses or square brackets.  Example: [15:0_35:0) This setting is required when include TAMS settings in your job.",
+                        "smithy.api#documentation": "Specify the time range of media segments to retrieve from your TAMS server. MediaConvert fetches only the segments that fall within this range. Use the format specified by your TAMS server implementation. This must be two timestamp values with the format {sign?}{seconds}:{nanoseconds}, separated by an underscore, surrounded by either parentheses or square brackets.  Example: [15:0_35:0) This setting is required when you include TAMS settings in your job.",
                         "smithy.api#jsonName": "timerange"
                     }
                 }
@@ -14730,6 +14806,13 @@
                         "smithy.api#jsonName": "jobTemplate"
                     }
                 },
+                "LastShareDetails": {
+                    "target": "com.amazonaws.mediaconvert#__string",
+                    "traits": {
+                        "smithy.api#documentation": "Contains information about the most recent share attempt for the job. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/creating-resource-share.html",
+                        "smithy.api#jsonName": "lastShareDetails"
+                    }
+                },
                 "Messages": {
                     "target": "com.amazonaws.mediaconvert#JobMessages",
                     "traits": {
@@ -14788,6 +14871,13 @@
                         "smithy.api#documentation": "JobSettings contains all the transcode settings for a job.",
                         "smithy.api#jsonName": "settings",
                         "smithy.api#required": {}
+                    }
+                },
+                "ShareStatus": {
+                    "target": "com.amazonaws.mediaconvert#ShareStatus",
+                    "traits": {
+                        "smithy.api#documentation": "A job's share status can be NOT_SHARED, INITIATED, or SHARED",
+                        "smithy.api#jsonName": "shareStatus"
                     }
                 },
                 "SimulateReservedQueue": {
@@ -18208,6 +18298,9 @@
                     "target": "com.amazonaws.mediaconvert#CreateQueue"
                 },
                 {
+                    "target": "com.amazonaws.mediaconvert#CreateResourceShare"
+                },
+                {
                     "target": "com.amazonaws.mediaconvert#DeleteJobTemplate"
                 },
                 {
@@ -19573,9 +19666,36 @@
                 "smithy.api#documentation": "These settings relate to your QuickTime MOV output container."
             }
         },
+        "com.amazonaws.mediaconvert#Mp2AudioDescriptionMix": {
+            "type": "enum",
+            "members": {
+                "BROADCASTER_MIXED_AD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BROADCASTER_MIXED_AD"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Choose BROADCASTER_MIXED_AD when the input contains pre-mixed main audio + audio description (AD) as a stereo pair. The value for AudioType will be set to 3, which signals to downstream systems that this stream contains \"broadcaster mixed AD\". Note that the input received by the encoder must contain pre-mixed audio; the encoder does not perform the mixing. When you choose BROADCASTER_MIXED_AD, the encoder ignores any values you provide in AudioType and FollowInputAudioType. Choose NONE when the input does not contain pre-mixed audio + audio description (AD). In this case, the encoder will use any values you provide for AudioType and FollowInputAudioType."
+            }
+        },
         "com.amazonaws.mediaconvert#Mp2Settings": {
             "type": "structure",
             "members": {
+                "AudioDescriptionMix": {
+                    "target": "com.amazonaws.mediaconvert#Mp2AudioDescriptionMix",
+                    "traits": {
+                        "smithy.api#documentation": "Choose BROADCASTER_MIXED_AD when the input contains pre-mixed main audio + audio description (AD) as a stereo pair. The value for AudioType will be set to 3, which signals to downstream systems that this stream contains \"broadcaster mixed AD\". Note that the input received by the encoder must contain pre-mixed audio; the encoder does not perform the mixing. When you choose BROADCASTER_MIXED_AD, the encoder ignores any values you provide in AudioType and FollowInputAudioType. Choose NONE when the input does not contain pre-mixed audio + audio description (AD). In this case, the encoder will use any values you provide for AudioType and FollowInputAudioType.",
+                        "smithy.api#jsonName": "audioDescriptionMix"
+                    }
+                },
                 "Bitrate": {
                     "target": "com.amazonaws.mediaconvert#__integerMin32000Max384000",
                     "traits": {
@@ -23671,6 +23791,29 @@
                 "smithy.api#documentation": "A service override applied by MediaConvert to the settings that you have configured. If you see any overrides, we recommend that you contact AWS Support."
             }
         },
+        "com.amazonaws.mediaconvert#ShareStatus": {
+            "type": "enum",
+            "members": {
+                "NOT_SHARED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_SHARED"
+                    }
+                },
+                "INITIATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INITIATED"
+                    }
+                },
+                "SHARED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHARED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.mediaconvert#SimulateReservedQueue": {
             "type": "enum",
             "members": {
@@ -26379,10 +26522,44 @@
                         "smithy.api#documentation": "If the sample range metadata in your input video is accurate, or if you don't know about sample range, keep the default value, Follow, for this setting. When you do, the service automatically detects your input sample range. If your input video has metadata indicating the wrong sample range, specify the accurate sample range here. When you do, MediaConvert ignores any sample range information in the input metadata. Regardless of whether MediaConvert uses the input sample range or the sample range that you specify, MediaConvert uses the sample range for transcoding and also writes it to the output metadata.",
                         "smithy.api#jsonName": "sampleRange"
                     }
+                },
+                "SelectorType": {
+                    "target": "com.amazonaws.mediaconvert#VideoSelectorType",
+                    "traits": {
+                        "smithy.api#documentation": "Choose the video selector type for your HLS input. Use to specify which video rendition MediaConvert uses from your HLS input. To have MediaConvert automatically use the highest bitrate rendition from your HLS input: Keep the default value, Auto. To manually specify a rendition: Choose Stream. Then enter the unique stream number in the Streams array, starting at 1, corresponding to the stream order in the manifest.",
+                        "smithy.api#jsonName": "selectorType"
+                    }
+                },
+                "Streams": {
+                    "target": "com.amazonaws.mediaconvert#__listOf__integerMin1Max2147483647",
+                    "traits": {
+                        "smithy.api#documentation": "Specify a stream for MediaConvert to use from your HLS input. Enter an integer corresponding to the stream order in your HLS manifest.",
+                        "smithy.api#jsonName": "streams"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "Input video selectors contain the video settings for the input. Each of your inputs can have up to one video selector."
+            }
+        },
+        "com.amazonaws.mediaconvert#VideoSelectorType": {
+            "type": "enum",
+            "members": {
+                "AUTO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTO"
+                    }
+                },
+                "STREAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STREAM"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Choose the video selector type for your HLS input. Use to specify which video rendition MediaConvert uses from your HLS input. To have MediaConvert automatically use the highest bitrate rendition from your HLS input: Keep the default value, Auto. To manually specify a rendition: Choose Stream. Then enter the unique stream number in the Streams array, starting at 1, corresponding to the stream order in the manifest."
             }
         },
         "com.amazonaws.mediaconvert#VideoTimecodeInsertion": {
