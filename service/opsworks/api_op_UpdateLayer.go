@@ -17,6 +17,8 @@ import (
 // permissions level for the stack, or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) UpdateLayer(ctx context.Context, params *UpdateLayerInput, optFns ...func(*Options)) (*UpdateLayerOutput, error) {
 	if params == nil {
@@ -38,9 +40,13 @@ type UpdateLayerInput struct {
 	// The layer ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LayerId *string
 
 	// One or more user-defined key/value pairs to be added to the stack attributes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Attributes map[string]string
 
 	// Whether to automatically assign an [Elastic IP address] to the layer's instances. For more
@@ -48,22 +54,30 @@ type UpdateLayerInput struct {
 	//
 	// [How to Edit a Layer]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
 	// [Elastic IP address]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AutoAssignElasticIps *bool
 
 	// For stacks that are running in a VPC, whether to automatically assign a public
 	// IP address to the layer's instances. For more information, see [How to Edit a Layer].
 	//
 	// [How to Edit a Layer]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AutoAssignPublicIps *bool
 
 	// Specifies CloudWatch Logs configuration options for the layer. For more
 	// information, see CloudWatchLogsLogStream.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CloudWatchLogsConfiguration *types.CloudWatchLogsConfiguration
 
 	// The ARN of an IAM profile to be used for all of the layer's EC2 instances. For
 	// more information about IAM ARNs, see [Using Identifiers].
 	//
 	// [Using Identifiers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CustomInstanceProfileArn *string
 
 	// A JSON-formatted string containing custom stack configuration and deployment
@@ -71,15 +85,23 @@ type UpdateLayerInput struct {
 	// .
 	//
 	// [Using Custom JSON]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CustomJson *string
 
 	// A LayerCustomRecipes object that specifies the layer's custom recipes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CustomRecipes *types.Recipes
 
 	// An array containing the layer's custom security group IDs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CustomSecurityGroupIds []string
 
 	// Whether to disable auto healing for the layer.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnableAutoHealing *bool
 
 	// Whether to install operating system and package updates when the instance
@@ -90,16 +112,24 @@ type UpdateLayerInput struct {
 	//
 	// We strongly recommend using the default value of true , to ensure that your
 	// instances have the latest security updates.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstallUpdatesOnBoot *bool
 
 	//
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LifecycleEventConfiguration *types.LifecycleEventConfiguration
 
 	// The layer name, which is used by the console. Layer names can be a maximum of
 	// 32 characters.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// An array of Package objects that describe the layer's packages.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Packages []string
 
 	// For custom layers only, use this parameter to specify the layer's short name,
@@ -112,12 +142,18 @@ type UpdateLayerInput struct {
 	// information, see the [Layer reference]in the OpsWorks User Guide.
 	//
 	// [Layer reference]: https://docs.aws.amazon.com/opsworks/latest/userguide/layers.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Shortname *string
 
 	// Whether to use Amazon EBS-optimized instances.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UseEbsOptimizedInstances *bool
 
 	// A VolumeConfigurations object that describes the layer's Amazon EBS volumes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VolumeConfigurations []types.VolumeConfiguration
 
 	noSmithyDocumentSerde

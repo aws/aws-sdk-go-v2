@@ -24,6 +24,8 @@ import (
 // Otherwise, an InvalidStateException is raised. A ResourceNotFoundException is
 // thrown when the server does not exist. A ValidationException is raised when
 // parameters of the request are not valid.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateServerEngineAttributes(ctx context.Context, params *UpdateServerEngineAttributesInput, optFns ...func(*Options)) (*UpdateServerEngineAttributesOutput, error) {
 	if params == nil {
 		params = &UpdateServerEngineAttributesInput{}
@@ -44,14 +46,20 @@ type UpdateServerEngineAttributesInput struct {
 	// The name of the engine attribute to update.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AttributeName *string
 
 	// The name of the server to update.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerName *string
 
 	// The value to set for the attribute.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AttributeValue *string
 
 	noSmithyDocumentSerde
@@ -60,6 +68,8 @@ type UpdateServerEngineAttributesInput struct {
 type UpdateServerEngineAttributesOutput struct {
 
 	// Contains the response to an UpdateServerEngineAttributes request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Server *types.Server
 
 	// Metadata pertaining to the operation's result.

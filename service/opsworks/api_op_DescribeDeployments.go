@@ -22,6 +22,8 @@ import (
 // or Manage permissions level for the stack, or an attached policy that explicitly
 // grants permissions. For more information about user permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) DescribeDeployments(ctx context.Context, params *DescribeDeploymentsInput, optFns ...func(*Options)) (*DescribeDeploymentsOutput, error) {
 	if params == nil {
@@ -42,15 +44,21 @@ type DescribeDeploymentsInput struct {
 
 	// The app ID. If you include this parameter, the command returns a description of
 	// the commands associated with the specified app.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppId *string
 
 	// An array of deployment IDs to be described. If you include this parameter, the
 	// command returns a description of the specified deployments. Otherwise, it
 	// returns a description of every deployment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeploymentIds []string
 
 	// The stack ID. If you include this parameter, the command returns a description
 	// of the commands associated with the specified stack.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	noSmithyDocumentSerde
@@ -60,6 +68,8 @@ type DescribeDeploymentsInput struct {
 type DescribeDeploymentsOutput struct {
 
 	// An array of Deployment objects that describe the deployments.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Deployments []types.Deployment
 
 	// Metadata pertaining to the operation's result.

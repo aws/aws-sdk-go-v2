@@ -17,6 +17,8 @@ import (
 // policy that explicitly grants permissions. For more information about user
 // permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Create a New Stack]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-edit.html
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) CreateStack(ctx context.Context, params *CreateStackInput, optFns ...func(*Options)) (*CreateStackOutput, error) {
@@ -42,11 +44,15 @@ type CreateStackInput struct {
 	// [Using Identifiers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DefaultInstanceProfileArn *string
 
 	// The stack name. Stack names can be a maximum of 64 characters.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The stack's Amazon Web Services Region, such as ap-south-1 . For more
@@ -70,6 +76,8 @@ type CreateStackInput struct {
 	// [Regions and Endpoints]: https://docs.aws.amazon.com/general/latest/gr/rande.html
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Region *string
 
 	// The stack's IAM role, which allows OpsWorks Stacks to work with Amazon Web
@@ -80,6 +88,8 @@ type CreateStackInput struct {
 	// [Using Identifiers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServiceRoleArn *string
 
 	// The default OpsWorks Stacks agent version. You have the following options:
@@ -99,21 +109,29 @@ type CreateStackInput struct {
 	//
 	// You can also specify an agent version when you create or update an instance,
 	// which overrides the stack's default setting.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AgentVersion *string
 
 	// One or more user-defined key-value pairs to be added to the stack attributes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Attributes map[string]string
 
 	// A ChefConfiguration object that specifies whether to enable Berkshelf and the
 	// Berkshelf version on Chef 11.10 stacks. For more information, see [Create a New Stack].
 	//
 	// [Create a New Stack]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChefConfiguration *types.ChefConfiguration
 
 	// The configuration manager. When you create a stack we recommend that you use
 	// the configuration manager to specify the Chef version: 12, 11.10, or 11.4 for
 	// Linux stacks, or 12.2 for Windows stacks. The default value for Linux stacks is
 	// currently 12.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ConfigurationManager *types.StackConfigurationManager
 
 	// Contains the information required to retrieve an app or cookbook from a
@@ -121,6 +139,8 @@ type CreateStackInput struct {
 	//
 	// [Cookbooks and Recipes]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html
 	// [Adding Apps]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CustomCookbooksSource *types.Source
 
 	// A string that contains user-defined, custom JSON. It can be used to override
@@ -132,6 +152,8 @@ type CreateStackInput struct {
 	// For more information about custom JSON, see [Use Custom JSON to Modify the Stack Configuration Attributes].
 	//
 	// [Use Custom JSON to Modify the Stack Configuration Attributes]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CustomJson *string
 
 	// The stack's default Availability Zone, which must be in the specified region.
@@ -140,6 +162,8 @@ type CreateStackInput struct {
 	// parameter description.
 	//
 	// [Regions and Endpoints]: https://docs.aws.amazon.com/general/latest/gr/rande.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DefaultAvailabilityZone *string
 
 	// The stack's default operating system, which is installed on every instance
@@ -172,6 +196,8 @@ type CreateStackInput struct {
 	//
 	// [Using Custom AMIs]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
 	// [OpsWorks Stacks Operating Systems]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DefaultOs *string
 
 	// The default root device type. This value is the default for all instances in
@@ -179,6 +205,8 @@ type CreateStackInput struct {
 	// option is instance-store . For more information, see [Storage for the Root Device].
 	//
 	// [Storage for the Root Device]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DefaultRootDeviceType types.RootDeviceType
 
 	// A default Amazon EC2 key pair name. The default value is none. If you specify a
@@ -190,6 +218,8 @@ type CreateStackInput struct {
 	// [Using SSH to Communicate with an Instance]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-ssh.html
 	// [Managing SSH Access]: https://docs.aws.amazon.com/opsworks/latest/userguide/security-ssh-access.html
 	// [create an instance]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-add.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DefaultSshKeyName *string
 
 	// The stack's default VPC subnet ID. This parameter is required if you specify a
@@ -198,6 +228,8 @@ type CreateStackInput struct {
 	// value for DefaultAvailabilityZone , the subnet must be in that zone. For
 	// information on default values and when this parameter is required, see the VpcId
 	// parameter description.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DefaultSubnetId *string
 
 	// The stack's host name theme, with spaces replaced by underscores. The theme is
@@ -229,9 +261,13 @@ type CreateStackInput struct {
 	//
 	// To obtain a generated host name, call GetHostNameSuggestion , which returns a
 	// host name based on the current theme.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	HostnameTheme *string
 
 	// Whether the stack uses custom cookbooks.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UseCustomCookbooks *bool
 
 	// Whether to associate the OpsWorks Stacks built-in security groups with the
@@ -256,6 +292,8 @@ type CreateStackInput struct {
 	// For more information, see [Create a New Stack].
 	//
 	// [Create a New Stack]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UseOpsworksSecurityGroups *bool
 
 	// The ID of the VPC that the stack is to be launched into. The VPC must be in the
@@ -284,6 +322,8 @@ type CreateStackInput struct {
 	//
 	// [Supported Platforms]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
 	// [Running a Stack in a VPC]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-vpc.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VpcId *string
 
 	noSmithyDocumentSerde
@@ -294,6 +334,8 @@ type CreateStackOutput struct {
 
 	// The stack ID, which is an opaque string that you use to identify the stack when
 	// performing actions such as DescribeStacks .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	// Metadata pertaining to the operation's result.

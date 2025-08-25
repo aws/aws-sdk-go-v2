@@ -22,6 +22,8 @@ import (
 // or Manage permissions level for the stack, or an attached policy that explicitly
 // grants permissions. For more information about user permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) DescribeApps(ctx context.Context, params *DescribeAppsInput, optFns ...func(*Options)) (*DescribeAppsOutput, error) {
 	if params == nil {
@@ -43,10 +45,14 @@ type DescribeAppsInput struct {
 	// An array of app IDs for the apps to be described. If you use this parameter,
 	// DescribeApps returns a description of the specified apps. Otherwise, it returns
 	// a description of every app.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppIds []string
 
 	// The app stack ID. If you use this parameter, DescribeApps returns a description
 	// of the apps in the specified stack.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	noSmithyDocumentSerde
@@ -56,6 +62,8 @@ type DescribeAppsInput struct {
 type DescribeAppsOutput struct {
 
 	// An array of App objects that describe the specified apps.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Apps []types.App
 
 	// Metadata pertaining to the operation's result.

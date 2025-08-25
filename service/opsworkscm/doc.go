@@ -73,6 +73,8 @@
 // All API operations allow for five requests per second with a burst of 10
 // requests per second.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [OpsWorks endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/opsworks-service.html
 // [Amazon Web Services re:Post]: https://repost.aws/
 // [Amazon Web Services Premium Support]: https://aws.amazon.com/support

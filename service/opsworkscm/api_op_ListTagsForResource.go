@@ -13,6 +13,8 @@ import (
 
 // Returns a list of tags that are applied to the specified OpsWorks for Chef
 // Automate or OpsWorks for Puppet Enterprise servers or backups.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -37,12 +39,16 @@ type ListTagsForResourceInput struct {
 	// .
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResourceArn *string
 
 	// To receive a paginated response, use this parameter to specify the maximum
 	// number of results to be returned with a single call. If the number of available
 	// results exceeds this maximum, the response includes a NextToken value that you
 	// can assign to the NextToken request parameter to get the next set of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// NextToken is a string that is returned in some command responses. It indicates
@@ -53,6 +59,8 @@ type ListTagsForResourceInput struct {
 	// object's nextToken parameter value is null . Setting a nextToken value that was
 	// not returned in your previous results causes an InvalidNextTokenException to
 	// occur.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -62,9 +70,13 @@ type ListTagsForResourceOutput struct {
 
 	// A token that you can use as the value of NextToken in subsequent calls to the
 	// API to show more results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Tags that have been applied to the resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.

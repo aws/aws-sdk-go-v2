@@ -19,6 +19,8 @@ import (
 //
 // A ResourceNotFoundException is thrown when the server does not exist. A
 // ValidationException is raised when parameters of the request are not valid.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribeEvents(ctx context.Context, params *DescribeEventsInput, optFns ...func(*Options)) (*DescribeEventsOutput, error) {
 	if params == nil {
 		params = &DescribeEventsInput{}
@@ -39,12 +41,16 @@ type DescribeEventsInput struct {
 	// The name of the server for which you want to view events.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerName *string
 
 	// To receive a paginated response, use this parameter to specify the maximum
 	// number of results to be returned with a single call. If the number of available
 	// results exceeds this maximum, the response includes a NextToken value that you
 	// can assign to the NextToken request parameter to get the next set of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// NextToken is a string that is returned in some command responses. It indicates
@@ -54,6 +60,8 @@ type DescribeEventsInput struct {
 	// nextToken parameter. If there are no more results, the response object's
 	// nextToken parameter value is null . Setting a nextToken value that was not
 	// returned in your previous results causes an InvalidNextTokenException to occur.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -68,9 +76,13 @@ type DescribeEventsOutput struct {
 	// nextToken parameter. If there are no more results, the response object's
 	// nextToken parameter value is null . Setting a nextToken value that was not
 	// returned in your previous results causes an InvalidNextTokenException to occur.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Contains the response to a DescribeEvents request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerEvents []types.ServerEvent
 
 	// Metadata pertaining to the operation's result.

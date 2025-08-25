@@ -16,6 +16,8 @@ import (
 // policy that explicitly grants permissions. For more information about user
 // permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) DeleteUserProfile(ctx context.Context, params *DeleteUserProfileInput, optFns ...func(*Options)) (*DeleteUserProfileOutput, error) {
 	if params == nil {
@@ -37,6 +39,8 @@ type DeleteUserProfileInput struct {
 	// The user's IAM ARN. This can also be a federated user's ARN.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IamUserArn *string
 
 	noSmithyDocumentSerde

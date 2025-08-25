@@ -12,6 +12,8 @@ import (
 )
 
 // Describes the operating systems that are supported by OpsWorks Stacks.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribeOperatingSystems(ctx context.Context, params *DescribeOperatingSystemsInput, optFns ...func(*Options)) (*DescribeOperatingSystemsOutput, error) {
 	if params == nil {
 		params = &DescribeOperatingSystemsInput{}
@@ -35,6 +37,8 @@ type DescribeOperatingSystemsInput struct {
 type DescribeOperatingSystemsOutput struct {
 
 	// Contains information in response to a DescribeOperatingSystems request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OperatingSystems []types.OperatingSystem
 
 	// Metadata pertaining to the operation's result.

@@ -14,6 +14,8 @@ import (
 //	Updates settings for a server.
 //
 // This operation is synchronous.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateServer(ctx context.Context, params *UpdateServerInput, optFns ...func(*Options)) (*UpdateServerOutput, error) {
 	if params == nil {
 		params = &UpdateServerInput{}
@@ -34,25 +36,35 @@ type UpdateServerInput struct {
 	// The name of the server to update.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerName *string
 
 	// Sets the number of automated backups that you want to keep.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BackupRetentionCount *int32
 
 	// Setting DisableAutomatedBackup to true disables automated or scheduled backups.
 	// Automated backups are enabled by default.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DisableAutomatedBackup *bool
 
 	// DDD:HH:MM (weekly start time) or HH:MM (daily start time).
 	//
 	// Time windows always use coordinated universal time (UTC). Valid strings for day
 	// of week ( DDD ) are: Mon , Tue , Wed , Thr , Fri , Sat , or Sun .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PreferredBackupWindow *string
 
 	// DDD:HH:MM (weekly start time) or HH:MM (daily start time).
 	//
 	// Time windows always use coordinated universal time (UTC). Valid strings for day
 	// of week ( DDD ) are: Mon , Tue , Wed , Thr , Fri , Sat , or Sun .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PreferredMaintenanceWindow *string
 
 	noSmithyDocumentSerde
@@ -61,6 +73,8 @@ type UpdateServerInput struct {
 type UpdateServerOutput struct {
 
 	// Contains the response to a UpdateServer request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Server *types.Server
 
 	// Metadata pertaining to the operation's result.

@@ -18,6 +18,8 @@ import (
 // permissions level for the stack, or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Resource Management]: https://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) RegisterElasticIp(ctx context.Context, params *RegisterElasticIpInput, optFns ...func(*Options)) (*RegisterElasticIpOutput, error) {
@@ -40,11 +42,15 @@ type RegisterElasticIpInput struct {
 	// The Elastic IP address.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ElasticIp *string
 
 	// The stack ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	noSmithyDocumentSerde
@@ -54,6 +60,8 @@ type RegisterElasticIpInput struct {
 type RegisterElasticIpOutput struct {
 
 	// The Elastic IP address.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ElasticIp *string
 
 	// Metadata pertaining to the operation's result.

@@ -19,6 +19,8 @@ import (
 // permissions level for the stack, or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Resource Management]: https://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) AssignVolume(ctx context.Context, params *AssignVolumeInput, optFns ...func(*Options)) (*AssignVolumeOutput, error) {
@@ -41,9 +43,13 @@ type AssignVolumeInput struct {
 	// The volume ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VolumeId *string
 
 	// The instance ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceId *string
 
 	noSmithyDocumentSerde

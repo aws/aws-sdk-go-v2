@@ -19,6 +19,8 @@ import (
 // or Manage permissions level for the stack, or an attached policy that explicitly
 // grants permissions. For more information about user permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) DescribeVolumes(ctx context.Context, params *DescribeVolumesInput, optFns ...func(*Options)) (*DescribeVolumesOutput, error) {
 	if params == nil {
@@ -39,18 +41,26 @@ type DescribeVolumesInput struct {
 
 	// The instance ID. If you use this parameter, DescribeVolumes returns
 	// descriptions of the volumes associated with the specified instance.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceId *string
 
 	// The RAID array ID. If you use this parameter, DescribeVolumes returns
 	// descriptions of the volumes associated with the specified RAID array.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RaidArrayId *string
 
 	// A stack ID. The action describes the stack's registered Amazon EBS volumes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	// Am array of volume IDs. If you use this parameter, DescribeVolumes returns
 	// descriptions of the specified volumes. Otherwise, it returns a description of
 	// every volume.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VolumeIds []string
 
 	noSmithyDocumentSerde
@@ -60,6 +70,8 @@ type DescribeVolumesInput struct {
 type DescribeVolumesOutput struct {
 
 	// An array of volume IDs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Volumes []types.Volume
 
 	// Metadata pertaining to the operation's result.

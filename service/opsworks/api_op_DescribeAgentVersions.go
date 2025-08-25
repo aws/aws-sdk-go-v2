@@ -14,6 +14,8 @@ import (
 // Describes the available OpsWorks Stacks agent versions. You must specify a
 // stack ID or a configuration manager. DescribeAgentVersions returns a list of
 // available agent versions for the specified stack or configuration manager.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribeAgentVersions(ctx context.Context, params *DescribeAgentVersionsInput, optFns ...func(*Options)) (*DescribeAgentVersionsOutput, error) {
 	if params == nil {
 		params = &DescribeAgentVersionsInput{}
@@ -32,9 +34,13 @@ func (c *Client) DescribeAgentVersions(ctx context.Context, params *DescribeAgen
 type DescribeAgentVersionsInput struct {
 
 	// The configuration manager.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ConfigurationManager *types.StackConfigurationManager
 
 	// The stack ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	noSmithyDocumentSerde
@@ -46,6 +52,8 @@ type DescribeAgentVersionsOutput struct {
 	// The agent versions for the specified stack or configuration manager. Note that
 	// this value is the complete version number, not the abbreviated number used by
 	// the console.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AgentVersions []types.AgentVersion
 
 	// Metadata pertaining to the operation's result.

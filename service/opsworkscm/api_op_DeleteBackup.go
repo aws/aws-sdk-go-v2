@@ -17,6 +17,8 @@ import (
 // An InvalidStateException is thrown when a backup deletion is already in
 // progress. A ResourceNotFoundException is thrown when the backup does not exist.
 // A ValidationException is thrown when parameters of the request are not valid.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteBackup(ctx context.Context, params *DeleteBackupInput, optFns ...func(*Options)) (*DeleteBackupOutput, error) {
 	if params == nil {
 		params = &DeleteBackupInput{}
@@ -38,6 +40,8 @@ type DeleteBackupInput struct {
 	// of backup IDs. Backup IDs are in the format ServerName-yyyyMMddHHmmssSSS .
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BackupId *string
 
 	noSmithyDocumentSerde

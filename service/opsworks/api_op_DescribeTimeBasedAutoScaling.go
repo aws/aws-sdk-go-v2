@@ -19,6 +19,8 @@ import (
 // or Manage permissions level for the stack, or an attached policy that explicitly
 // grants permissions. For more information about user permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) DescribeTimeBasedAutoScaling(ctx context.Context, params *DescribeTimeBasedAutoScalingInput, optFns ...func(*Options)) (*DescribeTimeBasedAutoScalingOutput, error) {
 	if params == nil {
@@ -40,6 +42,8 @@ type DescribeTimeBasedAutoScalingInput struct {
 	// An array of instance IDs.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceIds []string
 
 	noSmithyDocumentSerde
@@ -50,6 +54,8 @@ type DescribeTimeBasedAutoScalingOutput struct {
 
 	// An array of TimeBasedAutoScalingConfiguration objects that describe the
 	// configuration for the specified instances.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TimeBasedAutoScalingConfigurations []types.TimeBasedAutoScalingConfiguration
 
 	// Metadata pertaining to the operation's result.

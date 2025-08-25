@@ -18,6 +18,8 @@ import (
 // permissions level for the stack or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Resource Management]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-ecscluster.html
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) RegisterEcsCluster(ctx context.Context, params *RegisterEcsClusterInput, optFns ...func(*Options)) (*RegisterEcsClusterOutput, error) {
@@ -40,11 +42,15 @@ type RegisterEcsClusterInput struct {
 	// The cluster's ARN.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EcsClusterArn *string
 
 	// The stack ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	noSmithyDocumentSerde
@@ -54,6 +60,8 @@ type RegisterEcsClusterInput struct {
 type RegisterEcsClusterOutput struct {
 
 	// The cluster's ARN.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EcsClusterArn *string
 
 	// Metadata pertaining to the operation's result.

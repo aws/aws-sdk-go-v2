@@ -11,6 +11,8 @@ import (
 )
 
 // Returns a list of tags that are applied to the specified stack or layer.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...func(*Options)) (*ListTagsOutput, error) {
 	if params == nil {
 		params = &ListTagsInput{}
@@ -31,14 +33,20 @@ type ListTagsInput struct {
 	// The stack or layer's Amazon Resource Number (ARN).
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResourceArn *string
 
 	// Do not use. A validation exception occurs if you add a MaxResults parameter to
 	// a ListTagsRequest call.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults int32
 
 	// Do not use. A validation exception occurs if you add a NextToken parameter to a
 	// ListTagsRequest call.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -51,10 +59,14 @@ type ListTagsOutput struct {
 	// parameter is set to a token that you can assign to the request object's
 	// NextToken parameter to get the next set of results. If the previous paginated
 	// request returned all of the remaining results, this parameter is set to null .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// A set of key-value pairs that contain tag keys and tag values that are attached
 	// to a stack or layer.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

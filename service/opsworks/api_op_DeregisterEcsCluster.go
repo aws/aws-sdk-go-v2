@@ -17,6 +17,8 @@ import (
 // permissions level for the stack or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see [https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 // [Resource Management]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-ecscluster.html#workinglayers-ecscluster-delete
 func (c *Client) DeregisterEcsCluster(ctx context.Context, params *DeregisterEcsClusterInput, optFns ...func(*Options)) (*DeregisterEcsClusterOutput, error) {
@@ -39,6 +41,8 @@ type DeregisterEcsClusterInput struct {
 	// The cluster's Amazon Resource Number (ARN).
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EcsClusterArn *string
 
 	noSmithyDocumentSerde

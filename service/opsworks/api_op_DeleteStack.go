@@ -17,6 +17,8 @@ import (
 // permissions level for the stack, or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Shut Down a Stack]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-shutting.html
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) DeleteStack(ctx context.Context, params *DeleteStackInput, optFns ...func(*Options)) (*DeleteStackOutput, error) {
@@ -39,6 +41,8 @@ type DeleteStackInput struct {
 	// The stack ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	noSmithyDocumentSerde

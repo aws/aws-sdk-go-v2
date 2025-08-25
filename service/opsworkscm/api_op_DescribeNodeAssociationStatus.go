@@ -22,6 +22,8 @@ import (
 // disassociation request with the specified token is found, or when the server
 // does not exist. A ValidationException is raised when parameters of the request
 // are not valid.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribeNodeAssociationStatus(ctx context.Context, params *DescribeNodeAssociationStatusInput, optFns ...func(*Options)) (*DescribeNodeAssociationStatusOutput, error) {
 	if params == nil {
 		params = &DescribeNodeAssociationStatusInput{}
@@ -43,11 +45,15 @@ type DescribeNodeAssociationStatusInput struct {
 	// DisassociateNodeResponse.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NodeAssociationStatusToken *string
 
 	// The name of the server from which to disassociate the node.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerName *string
 
 	noSmithyDocumentSerde
@@ -57,6 +63,8 @@ type DescribeNodeAssociationStatusOutput struct {
 
 	// Attributes specific to the node association. In Puppet, the attribute
 	// PUPPET_NODE_CERT contains the signed certificate (the result of the CSR).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EngineAttributes []types.EngineAttribute
 
 	// The status of the association or disassociation request.
@@ -68,6 +76,8 @@ type DescribeNodeAssociationStatusOutput struct {
 	//   - FAILED : The association or disassociation failed.
 	//
 	//   - IN_PROGRESS : The association or disassociation is still in progress.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NodeAssociationStatus types.NodeAssociationStatus
 
 	// Metadata pertaining to the operation's result.

@@ -17,6 +17,8 @@ import (
 // permissions level for the stack, or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) DescribePermissions(ctx context.Context, params *DescribePermissionsInput, optFns ...func(*Options)) (*DescribePermissionsOutput, error) {
 	if params == nil {
@@ -39,9 +41,13 @@ type DescribePermissionsInput struct {
 	// information about IAM ARNs, see [Using Identifiers].
 	//
 	// [Using Identifiers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IamUserArn *string
 
 	// The stack ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	noSmithyDocumentSerde
@@ -60,6 +66,8 @@ type DescribePermissionsOutput struct {
 	//
 	//   - If the request contains a stack ID and an IAM ARN, the array contains a
 	//   single Permission object with permissions for the specified stack and IAM ARN.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Permissions []types.Permission
 
 	// Metadata pertaining to the operation's result.

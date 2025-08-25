@@ -16,6 +16,8 @@ import (
 // permissions level for the stack, or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Resource Management]: https://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) UpdateElasticIp(ctx context.Context, params *UpdateElasticIpInput, optFns ...func(*Options)) (*UpdateElasticIpOutput, error) {
@@ -38,9 +40,13 @@ type UpdateElasticIpInput struct {
 	// The IP address for which you want to update the name.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ElasticIp *string
 
 	// The new name, which can be a maximum of 32 characters.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	noSmithyDocumentSerde

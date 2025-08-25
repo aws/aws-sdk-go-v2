@@ -30,6 +30,8 @@ import (
 // permissions level for the stack or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Preparing the Instance]: https://docs.aws.amazon.com/opsworks/latest/userguide/registered-instances-register-registering-preparer.html
 // [Registering an Instance with an OpsWorks Stacks Stack]: https://docs.aws.amazon.com/opsworks/latest/userguide/registered-instances-register.html
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
@@ -53,6 +55,8 @@ type RegisterInstanceInput struct {
 	// The ID of the stack that the instance is to be registered with.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	// The instance's host name. The following are character limits for instance host
@@ -61,22 +65,34 @@ type RegisterInstanceInput struct {
 	//   - Linux-based instances: 63 characters
 	//
 	//   - Windows-based instances: 15 characters
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Hostname *string
 
 	// An InstanceIdentity object that contains the instance's identity.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceIdentity *types.InstanceIdentity
 
 	// The instance's private IP address.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PrivateIp *string
 
 	// The instance's public IP address.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PublicIp *string
 
 	// The instances public RSA key. This key is used to encrypt communication between
 	// the instance and the service.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RsaPublicKey *string
 
 	// The instances public RSA key fingerprint.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RsaPublicKeyFingerprint *string
 
 	noSmithyDocumentSerde
@@ -86,6 +102,8 @@ type RegisterInstanceInput struct {
 type RegisterInstanceOutput struct {
 
 	// The registered instance's OpsWorks Stacks ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceId *string
 
 	// Metadata pertaining to the operation's result.

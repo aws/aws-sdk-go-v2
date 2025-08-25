@@ -16,6 +16,8 @@ import (
 // permissions level for the stack, or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) UpdateRdsDbInstance(ctx context.Context, params *UpdateRdsDbInstanceInput, optFns ...func(*Options)) (*UpdateRdsDbInstanceOutput, error) {
 	if params == nil {
@@ -37,12 +39,18 @@ type UpdateRdsDbInstanceInput struct {
 	// The Amazon RDS instance's ARN.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RdsDbInstanceArn *string
 
 	// The database password.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DbPassword *string
 
 	// The master user name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DbUser *string
 
 	noSmithyDocumentSerde

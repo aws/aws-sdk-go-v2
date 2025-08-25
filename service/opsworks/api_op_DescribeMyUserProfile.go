@@ -17,6 +17,8 @@ import (
 // enabled or an attached policy that explicitly grants permissions. For more
 // information about user permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) DescribeMyUserProfile(ctx context.Context, params *DescribeMyUserProfileInput, optFns ...func(*Options)) (*DescribeMyUserProfileOutput, error) {
 	if params == nil {
@@ -41,6 +43,8 @@ type DescribeMyUserProfileInput struct {
 type DescribeMyUserProfileOutput struct {
 
 	// A UserProfile object that describes the user's SSH information.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserProfile *types.SelfUserProfile
 
 	// Metadata pertaining to the operation's result.

@@ -17,6 +17,8 @@ import (
 // Manage permissions level for the stack, or an attached policy that explicitly
 // grants permissions. For more information on user permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Run Stack Commands]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-commands.html
 // [Deploying Apps]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-deploying.html
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
@@ -41,18 +43,26 @@ type CreateDeploymentInput struct {
 	// associated arguments.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Command *types.DeploymentCommand
 
 	// The stack ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	// The app ID. This parameter is required for app deployments, but not for other
 	// deployment commands.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppId *string
 
 	// A user-defined comment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Comment *string
 
 	// A string that contains user-defined, custom JSON. You can use this parameter to
@@ -65,12 +75,18 @@ type CreateDeploymentInput struct {
 	//
 	// [Overriding Attributes With Custom JSON]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html
 	// [Use Custom JSON to Modify the Stack Configuration Attributes]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CustomJson *string
 
 	// The instance IDs for the deployment targets.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceIds []string
 
 	// The layer IDs for the deployment targets.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LayerIds []string
 
 	noSmithyDocumentSerde
@@ -81,6 +97,8 @@ type CreateDeploymentOutput struct {
 
 	// The deployment ID, which can be used with other requests to identify the
 	// deployment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeploymentId *string
 
 	// Metadata pertaining to the operation's result.

@@ -19,6 +19,8 @@ import (
 // permissions level for the stack or an attached policy that explicitly grants
 // permissions. For more information about user permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) UnassignInstance(ctx context.Context, params *UnassignInstanceInput, optFns ...func(*Options)) (*UnassignInstanceOutput, error) {
 	if params == nil {
@@ -40,6 +42,8 @@ type UnassignInstanceInput struct {
 	// The instance ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceId *string
 
 	noSmithyDocumentSerde

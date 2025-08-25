@@ -18,6 +18,8 @@ import (
 // permissions level for the stack, or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Managing Load with Time-based and Load-based Instances]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-autoscaling.html
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) SetTimeBasedAutoScaling(ctx context.Context, params *SetTimeBasedAutoScalingInput, optFns ...func(*Options)) (*SetTimeBasedAutoScalingOutput, error) {
@@ -40,9 +42,13 @@ type SetTimeBasedAutoScalingInput struct {
 	// The instance ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceId *string
 
 	// An AutoScalingSchedule with the instance schedule.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AutoScalingSchedule *types.WeeklyAutoScalingSchedule
 
 	noSmithyDocumentSerde

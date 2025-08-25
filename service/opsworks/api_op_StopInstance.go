@@ -18,6 +18,8 @@ import (
 // permissions level for the stack, or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Starting, Stopping, and Rebooting Instances]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-starting.html
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) StopInstance(ctx context.Context, params *StopInstanceInput, optFns ...func(*Options)) (*StopInstanceOutput, error) {
@@ -40,6 +42,8 @@ type StopInstanceInput struct {
 	// The instance ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceId *string
 
 	// Specifies whether to force an instance to stop. If the instance's root device
@@ -48,6 +52,8 @@ type StopInstanceInput struct {
 	// deletion of only the OpsWorks Stacks instance. You must also delete the
 	// formerly-associated instance in EC2 after troubleshooting and replacing the
 	// OpsWorks Stacks instance with a new one.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Force *bool
 
 	noSmithyDocumentSerde

@@ -17,6 +17,8 @@ import (
 // policy that explicitly grants permissions. For more information about user
 // permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) DescribeUserProfiles(ctx context.Context, params *DescribeUserProfilesInput, optFns ...func(*Options)) (*DescribeUserProfilesOutput, error) {
 	if params == nil {
@@ -36,6 +38,8 @@ func (c *Client) DescribeUserProfiles(ctx context.Context, params *DescribeUserP
 type DescribeUserProfilesInput struct {
 
 	// An array of IAM or federated user ARNs that identify the users to be described.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IamUserArns []string
 
 	noSmithyDocumentSerde
@@ -45,6 +49,8 @@ type DescribeUserProfilesInput struct {
 type DescribeUserProfilesOutput struct {
 
 	// A Users object that describes the specified users.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserProfiles []types.UserProfile
 
 	// Metadata pertaining to the operation's result.

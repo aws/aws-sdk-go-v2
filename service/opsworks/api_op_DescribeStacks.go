@@ -17,6 +17,8 @@ import (
 // or Manage permissions level for the stack, or an attached policy that explicitly
 // grants permissions. For more information about user permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) DescribeStacks(ctx context.Context, params *DescribeStacksInput, optFns ...func(*Options)) (*DescribeStacksOutput, error) {
 	if params == nil {
@@ -41,6 +43,8 @@ type DescribeStacksInput struct {
 	// attached to an IAM user limits the DescribeStacks action to specific stack
 	// ARNs, this parameter is required, and the user must specify a stack ARN that is
 	// allowed by the policy. Otherwise, DescribeStacks returns an AccessDenied error.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackIds []string
 
 	noSmithyDocumentSerde
@@ -50,6 +54,8 @@ type DescribeStacksInput struct {
 type DescribeStacksOutput struct {
 
 	// An array of Stack objects that describe the stacks.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Stacks []types.Stack
 
 	// Metadata pertaining to the operation's result.

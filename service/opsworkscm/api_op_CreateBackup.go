@@ -26,6 +26,8 @@ import (
 // the following states: RUNNING, HEALTHY, or UNHEALTHY. A
 // ResourceNotFoundException is thrown when the server is not found. A
 // ValidationException is thrown when parameters of the request are not valid.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateBackup(ctx context.Context, params *CreateBackupInput, optFns ...func(*Options)) (*CreateBackupOutput, error) {
 	if params == nil {
 		params = &CreateBackupInput{}
@@ -46,9 +48,13 @@ type CreateBackupInput struct {
 	// The name of the server that you want to back up.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerName *string
 
 	//  A user-defined description of the backup.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// A map that contains tag keys and tag values to attach to an OpsWorks CM server
@@ -68,6 +74,8 @@ type CreateBackupInput struct {
 	//
 	//   - A maximum of 50 user-applied tags is allowed for tag-supported OpsWorks CM
 	//   resources.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -76,6 +84,8 @@ type CreateBackupInput struct {
 type CreateBackupOutput struct {
 
 	// Backup created by request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Backup *types.Backup
 
 	// Metadata pertaining to the operation's result.

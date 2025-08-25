@@ -16,6 +16,8 @@ import (
 // policy that explicitly grants permissions. For more information about user
 // permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) UpdateUserProfile(ctx context.Context, params *UpdateUserProfileInput, optFns ...func(*Options)) (*UpdateUserProfileOutput, error) {
 	if params == nil {
@@ -37,15 +39,21 @@ type UpdateUserProfileInput struct {
 	// The user IAM ARN. This can also be a federated user's ARN.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IamUserArn *string
 
 	// Whether users can specify their own SSH public key through the My Settings
 	// page. For more information, see [Managing User Permissions].
 	//
 	// [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AllowSelfManagement *bool
 
 	// The user's new SSH public key.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SshPublicKey *string
 
 	// The user's SSH user name. The allowable characters are [a-z], [A-Z], [0-9],
@@ -53,6 +61,8 @@ type UpdateUserProfileInput struct {
 	// Stacks removes them. For example, my.name will be changed to myname . If you do
 	// not specify an SSH user name, OpsWorks Stacks generates one from the IAM user
 	// name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SshUsername *string
 
 	noSmithyDocumentSerde

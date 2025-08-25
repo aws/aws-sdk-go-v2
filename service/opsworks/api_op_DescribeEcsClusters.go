@@ -22,6 +22,8 @@ import (
 //
 // This call accepts only one resource-identifying parameter.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) DescribeEcsClusters(ctx context.Context, params *DescribeEcsClustersInput, optFns ...func(*Options)) (*DescribeEcsClustersOutput, error) {
 	if params == nil {
@@ -41,12 +43,16 @@ func (c *Client) DescribeEcsClusters(ctx context.Context, params *DescribeEcsClu
 type DescribeEcsClustersInput struct {
 
 	// A list of ARNs, one for each cluster to be described.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EcsClusterArns []string
 
 	// To receive a paginated response, use this parameter to specify the maximum
 	// number of results to be returned with a single call. If the number of available
 	// results exceeds this maximum, the response includes a NextToken value that you
 	// can assign to the NextToken request parameter to get the next set of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// If the previous paginated request did not return all of the remaining results,
@@ -54,10 +60,14 @@ type DescribeEcsClustersInput struct {
 	// the next set of results, call DescribeEcsClusters again and assign that token
 	// to the request object's NextToken parameter. If there are no remaining results,
 	// the previous response object's NextToken parameter is set to null .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// A stack ID. DescribeEcsClusters returns a description of the cluster that is
 	// registered with the stack.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	noSmithyDocumentSerde
@@ -67,6 +77,8 @@ type DescribeEcsClustersInput struct {
 type DescribeEcsClustersOutput struct {
 
 	// A list of EcsCluster objects containing the cluster descriptions.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EcsClusters []types.EcsCluster
 
 	// If a paginated request does not return all of the remaining results, this
@@ -74,6 +86,8 @@ type DescribeEcsClustersOutput struct {
 	// NextToken parameter to retrieve the next set of results. If the previous
 	// paginated request returned all of the remaining results, this parameter is set
 	// to null .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

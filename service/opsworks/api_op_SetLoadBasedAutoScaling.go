@@ -23,6 +23,8 @@ import (
 // permissions level for the stack, or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Managing Load with Time-based and Load-based Instances]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-autoscaling.html
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) SetLoadBasedAutoScaling(ctx context.Context, params *SetLoadBasedAutoScalingInput, optFns ...func(*Options)) (*SetLoadBasedAutoScalingOutput, error) {
@@ -45,19 +47,27 @@ type SetLoadBasedAutoScalingInput struct {
 	// The layer ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LayerId *string
 
 	// An AutoScalingThresholds object with the downscaling threshold configuration.
 	// If the load falls below these thresholds for a specified amount of time,
 	// OpsWorks Stacks stops a specified number of instances.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DownScaling *types.AutoScalingThresholds
 
 	// Enables load-based auto scaling for the layer.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Enable *bool
 
 	// An AutoScalingThresholds object with the upscaling threshold configuration. If
 	// the load exceeds these thresholds for a specified amount of time, OpsWorks
 	// Stacks starts a specified number of instances.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UpScaling *types.AutoScalingThresholds
 
 	noSmithyDocumentSerde

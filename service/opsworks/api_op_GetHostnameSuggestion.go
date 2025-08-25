@@ -17,6 +17,8 @@ import (
 // permissions level for the stack, or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) GetHostnameSuggestion(ctx context.Context, params *GetHostnameSuggestionInput, optFns ...func(*Options)) (*GetHostnameSuggestionOutput, error) {
 	if params == nil {
@@ -38,6 +40,8 @@ type GetHostnameSuggestionInput struct {
 	// The layer ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LayerId *string
 
 	noSmithyDocumentSerde
@@ -47,9 +51,13 @@ type GetHostnameSuggestionInput struct {
 type GetHostnameSuggestionOutput struct {
 
 	// The generated host name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Hostname *string
 
 	// The layer ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LayerId *string
 
 	// Metadata pertaining to the operation's result.

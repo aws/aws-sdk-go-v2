@@ -19,6 +19,8 @@ import (
 //
 // This call accepts only one resource-identifying parameter.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) DescribeServiceErrors(ctx context.Context, params *DescribeServiceErrorsInput, optFns ...func(*Options)) (*DescribeServiceErrorsOutput, error) {
 	if params == nil {
@@ -39,15 +41,21 @@ type DescribeServiceErrorsInput struct {
 
 	// The instance ID. If you use this parameter, DescribeServiceErrors returns
 	// descriptions of the errors associated with the specified instance.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceId *string
 
 	// An array of service error IDs. If you use this parameter, DescribeServiceErrors
 	// returns descriptions of the specified errors. Otherwise, it returns a
 	// description of every error.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServiceErrorIds []string
 
 	// The stack ID. If you use this parameter, DescribeServiceErrors returns
 	// descriptions of the errors associated with the specified stack.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	noSmithyDocumentSerde
@@ -57,6 +65,8 @@ type DescribeServiceErrorsInput struct {
 type DescribeServiceErrorsOutput struct {
 
 	// An array of ServiceError objects that describe the specified service errors.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServiceErrors []types.ServiceError
 
 	// Metadata pertaining to the operation's result.

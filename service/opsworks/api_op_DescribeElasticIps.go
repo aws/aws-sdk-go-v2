@@ -19,6 +19,8 @@ import (
 // or Manage permissions level for the stack, or an attached policy that explicitly
 // grants permissions. For more information about user permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Elastic IP addresses]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) DescribeElasticIps(ctx context.Context, params *DescribeElasticIpsInput, optFns ...func(*Options)) (*DescribeElasticIpsOutput, error) {
@@ -40,16 +42,22 @@ type DescribeElasticIpsInput struct {
 
 	// The instance ID. If you include this parameter, DescribeElasticIps returns a
 	// description of the Elastic IP addresses associated with the specified instance.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceId *string
 
 	// An array of Elastic IP addresses to be described. If you include this
 	// parameter, DescribeElasticIps returns a description of the specified Elastic IP
 	// addresses. Otherwise, it returns a description of every Elastic IP address.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Ips []string
 
 	// A stack ID. If you include this parameter, DescribeElasticIps returns a
 	// description of the Elastic IP addresses that are registered with the specified
 	// stack.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	noSmithyDocumentSerde
@@ -59,6 +67,8 @@ type DescribeElasticIpsInput struct {
 type DescribeElasticIpsOutput struct {
 
 	// An ElasticIps object that describes the specified Elastic IP addresses.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ElasticIps []types.ElasticIp
 
 	// Metadata pertaining to the operation's result.

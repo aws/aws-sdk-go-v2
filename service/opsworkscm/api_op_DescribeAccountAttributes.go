@@ -14,6 +14,8 @@ import (
 //	Describes your OpsWorks CM account attributes.
 //
 // This operation is synchronous.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribeAccountAttributes(ctx context.Context, params *DescribeAccountAttributesInput, optFns ...func(*Options)) (*DescribeAccountAttributesOutput, error) {
 	if params == nil {
 		params = &DescribeAccountAttributesInput{}
@@ -36,6 +38,8 @@ type DescribeAccountAttributesInput struct {
 type DescribeAccountAttributesOutput struct {
 
 	//  The attributes that are currently set for the account.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Attributes []types.AccountAttribute
 
 	// Metadata pertaining to the operation's result.

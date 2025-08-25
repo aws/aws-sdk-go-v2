@@ -22,6 +22,8 @@ import (
 // ResourceNotFoundException is thrown when the server does not exist. An
 // InvalidStateException is thrown when the server is in any of the following
 // states: CREATING, TERMINATED, FAILED or DELETING.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ExportServerEngineAttribute(ctx context.Context, params *ExportServerEngineAttributeInput, optFns ...func(*Options)) (*ExportServerEngineAttributeOutput, error) {
 	if params == nil {
 		params = &ExportServerEngineAttributeInput{}
@@ -44,11 +46,15 @@ type ExportServerEngineAttributeInput struct {
 	// provided in the InputAttributes list.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ExportAttributeName *string
 
 	// The name of the server from which you are exporting the attribute.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerName *string
 
 	// The list of engine attributes. The list type is EngineAttribute . An
@@ -69,6 +75,8 @@ type ExportServerEngineAttributeInput struct {
 	//   separated by dots, such as 13.8.5). If this attribute is empty, OpsWorks for
 	//   Chef Automate uses the most current version. In Puppet, this parameter is
 	//   ignored.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InputAttributes []types.EngineAttribute
 
 	noSmithyDocumentSerde
@@ -77,9 +85,13 @@ type ExportServerEngineAttributeInput struct {
 type ExportServerEngineAttributeOutput struct {
 
 	// The requested engine attribute pair with attribute name and value.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EngineAttribute *types.EngineAttribute
 
 	// The server name used in the request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerName *string
 
 	// Metadata pertaining to the operation's result.

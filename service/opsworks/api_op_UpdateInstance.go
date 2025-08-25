@@ -17,6 +17,8 @@ import (
 // permissions level for the stack, or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) UpdateInstance(ctx context.Context, params *UpdateInstanceInput, optFns ...func(*Options)) (*UpdateInstanceOutput, error) {
 	if params == nil {
@@ -38,6 +40,8 @@ type UpdateInstanceInput struct {
 	// The instance ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceId *string
 
 	// The default OpsWorks Stacks agent version. You have the following options:
@@ -54,12 +58,16 @@ type UpdateInstanceInput struct {
 	// list of available agent version numbers, call DescribeAgentVersions.
 	//
 	// AgentVersion cannot be set to Chef 12.2.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AgentVersion *string
 
 	// The ID of the AMI that was used to create the instance. The value of this
 	// parameter must be the same AMI ID that the instance is already using. You cannot
 	// apply a new AMI to an instance by running UpdateInstance. UpdateInstance does
 	// not work on instances that are using custom AMIs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AmiId *string
 
 	// The instance architecture. Instance types do not necessarily support both
@@ -67,13 +75,19 @@ type UpdateInstanceInput struct {
 	// different instance types, see [Instance Families and Types].
 	//
 	// [Instance Families and Types]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Architecture types.Architecture
 
 	// For load-based or time-based instances, the type. Windows stacks can use only
 	// time-based instances.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AutoScalingType types.AutoScalingType
 
 	// This property cannot be updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EbsOptimized *bool
 
 	// The instance host name. The following are character limits for instance host
@@ -82,6 +96,8 @@ type UpdateInstanceInput struct {
 	//   - Linux-based instances: 63 characters
 	//
 	//   - Windows-based instances: 15 characters
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Hostname *string
 
 	// Whether to install operating system and package updates when the instance
@@ -92,6 +108,8 @@ type UpdateInstanceInput struct {
 	//
 	// We strongly recommend using the default value of true , to ensure that your
 	// instances have the latest security updates.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstallUpdatesOnBoot *bool
 
 	// The instance type, such as t2.micro . For a list of supported instance types,
@@ -101,9 +119,13 @@ type UpdateInstanceInput struct {
 	// column of the Available Instance Types table.
 	//
 	// [Instance Families and Types]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceType *string
 
 	// The instance's layer IDs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LayerIds []string
 
 	// The instance's operating system, which must be set to one of the following. You
@@ -139,9 +161,13 @@ type UpdateInstanceInput struct {
 	//
 	// [Using Custom AMIs]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
 	// [OpsWorks Stacks Operating Systems]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Os *string
 
 	// The instance's Amazon EC2 key name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SshKeyName *string
 
 	noSmithyDocumentSerde
