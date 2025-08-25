@@ -1,3 +1,11 @@
+# Release (2025-08-25.2)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/opsworks`: [v1.31.0](service/opsworks/CHANGELOG.md#v1310-2025-08-252)
+  * **Feature**: Mark service/opsworks and service/opsworkscm as deprecated. These services are no longer available for use.
+* `github.com/aws/aws-sdk-go-v2/service/opsworkscm`: [v1.33.0](service/opsworkscm/CHANGELOG.md#v1330-2025-08-252)
+  * **Feature**: Mark service/opsworks and service/opsworkscm as deprecated. These services are no longer available for use.
+
 # Release (2025-08-25)
 
 ## Module Highlights

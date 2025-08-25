@@ -1,3 +1,7 @@
+# v1.31.0 (2025-08-25.2)
+
+* **Feature**: Mark service/opsworks and service/opsworkscm as deprecated. These services are no longer available for use.
+
 # v1.30.2 (2025-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

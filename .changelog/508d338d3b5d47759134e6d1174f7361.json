@@ -1,9 +1,0 @@
-{
-    "id": "508d338d-3b5d-4775-9134-e6d1174f7361",
-    "type": "feature",
-    "description": "Mark service/opsworks and service/opsworkscm as deprecated. These services are no longer available for use.",
-    "modules": [
-        "service/opsworks",
-        "service/opsworkscm"
-    ]
-}

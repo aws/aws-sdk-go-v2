@@ -1,3 +1,7 @@
+# v1.33.0 (2025-08-25.2)
+
+* **Feature**: Mark service/opsworks and service/opsworkscm as deprecated. These services are no longer available for use.
+
 # v1.32.0 (2025-08-25)
 
 * **Feature**: Remove incorrect endpoint tests
