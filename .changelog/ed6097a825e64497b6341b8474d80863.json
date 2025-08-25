@@ -1,0 +1,8 @@
+{
+    "id": "ed6097a8-25e6-4497-b634-1b8474d80863",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/pcaconnectorad"
+    ]
+}

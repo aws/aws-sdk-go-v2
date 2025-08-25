@@ -1,0 +1,8 @@
+{
+    "id": "aa0a970e-d173-434d-9e2f-5bed01638b5e",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/redshiftserverless"
+    ]
+}

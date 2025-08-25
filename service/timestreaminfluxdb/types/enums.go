@@ -23,12 +23,13 @@ type ClusterStatus string
 
 // Enum values for ClusterStatus
 const (
-	ClusterStatusCreating  ClusterStatus = "CREATING"
-	ClusterStatusUpdating  ClusterStatus = "UPDATING"
-	ClusterStatusDeleting  ClusterStatus = "DELETING"
-	ClusterStatusAvailable ClusterStatus = "AVAILABLE"
-	ClusterStatusFailed    ClusterStatus = "FAILED"
-	ClusterStatusDeleted   ClusterStatus = "DELETED"
+	ClusterStatusCreating    ClusterStatus = "CREATING"
+	ClusterStatusUpdating    ClusterStatus = "UPDATING"
+	ClusterStatusDeleting    ClusterStatus = "DELETING"
+	ClusterStatusAvailable   ClusterStatus = "AVAILABLE"
+	ClusterStatusFailed      ClusterStatus = "FAILED"
+	ClusterStatusDeleted     ClusterStatus = "DELETED"
+	ClusterStatusMaintenance ClusterStatus = "MAINTENANCE"
 )
 
 // Values returns all known values for ClusterStatus. Note that this can be
@@ -43,6 +44,7 @@ func (ClusterStatus) Values() []ClusterStatus {
 		"AVAILABLE",
 		"FAILED",
 		"DELETED",
+		"MAINTENANCE",
 	}
 }
 
@@ -235,6 +237,7 @@ const (
 	StatusFailed                 Status = "FAILED"
 	StatusUpdatingDeploymentType Status = "UPDATING_DEPLOYMENT_TYPE"
 	StatusUpdatingInstanceType   Status = "UPDATING_INSTANCE_TYPE"
+	StatusMaintenance            Status = "MAINTENANCE"
 )
 
 // Values returns all known values for Status. Note that this can be expanded in
@@ -252,6 +255,7 @@ func (Status) Values() []Status {
 		"FAILED",
 		"UPDATING_DEPLOYMENT_TYPE",
 		"UPDATING_INSTANCE_TYPE",
+		"MAINTENANCE",
 	}
 }
 

@@ -1,0 +1,8 @@
+{
+    "id": "2dedd13b-7473-425a-a7dd-e1f09c52d606",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

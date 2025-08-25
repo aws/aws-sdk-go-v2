@@ -54,6 +54,9 @@ type CreateGlossaryInput struct {
 	// The status of this business glossary.
 	Status types.GlossaryStatus
 
+	// The usage restriction of the restricted glossary.
+	UsageRestrictions []types.GlossaryUsageRestriction
+
 	noSmithyDocumentSerde
 }
 
@@ -84,6 +87,9 @@ type CreateGlossaryOutput struct {
 
 	// The status of this business glossary.
 	Status types.GlossaryStatus
+
+	// The usage restriction of the restricted glossary.
+	UsageRestrictions []types.GlossaryUsageRestriction
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

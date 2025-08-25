@@ -113,6 +113,9 @@ type GetAssetOutput struct {
 	// The business glossary terms attached to the asset.
 	GlossaryTerms []string
 
+	// The restricted glossary terms attached to an asset.
+	GovernedGlossaryTerms []string
+
 	// The latest data point that was imported into the time series form for the
 	// asset.
 	LatestTimeSeriesDataPointFormsOutput []types.TimeSeriesDataPointSummaryFormOutput

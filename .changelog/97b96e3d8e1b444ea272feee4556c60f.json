@@ -1,0 +1,8 @@
+{
+    "id": "97b96e3d-8e1b-444e-a272-feee4556c60f",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/fsx"
+    ]
+}

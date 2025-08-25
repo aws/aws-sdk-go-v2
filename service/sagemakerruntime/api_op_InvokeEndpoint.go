@@ -10,14 +10,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// After you deploy a model into production using Amazon SageMaker hosting
+// After you deploy a model into production using Amazon SageMaker AI hosting
 // services, your client applications use this API to get inferences from the model
 // hosted at the specified endpoint.
 //
-// For an overview of Amazon SageMaker, see [How It Works].
+// For an overview of Amazon SageMaker AI, see [How It Works].
 //
-// Amazon SageMaker strips all POST headers except those supported by the API.
-// Amazon SageMaker might add additional headers. You should not rely on the
+// Amazon SageMaker AI strips all POST headers except those supported by the API.
+// Amazon SageMaker AI might add additional headers. You should not rely on the
 // behavior of headers outside those enumerated in the request syntax.
 //
 // Calls to InvokeEndpoint are authenticated by using Amazon Web Services
@@ -29,8 +29,8 @@ import (
 // the SDK socket timeout should be set to be 70 seconds.
 //
 // Endpoints are scoped to an individual account, and are not public. The URL does
-// not contain the account ID, but Amazon SageMaker determines the account ID from
-// the authentication token that is supplied by the caller.
+// not contain the account ID, but Amazon SageMaker AI determines the account ID
+// from the authentication token that is supplied by the caller.
 //
 // [How It Works]: https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html
 // [Authenticating Requests (Amazon Web Services Signature Version 4)]: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
@@ -52,7 +52,7 @@ func (c *Client) InvokeEndpoint(ctx context.Context, params *InvokeEndpointInput
 type InvokeEndpointInput struct {
 
 	// Provides input data, in the format specified in the ContentType request header.
-	// Amazon SageMaker passes all of the data in the body to the model.
+	// Amazon SageMaker AI passes all of the data in the body to the model.
 	//
 	// For information about the format of the request body, see [Common Data Formats-Inference].
 	//
@@ -76,12 +76,12 @@ type InvokeEndpointInput struct {
 	ContentType *string
 
 	// Provides additional information about a request for an inference submitted to a
-	// model hosted at an Amazon SageMaker endpoint. The information is an opaque value
-	// that is forwarded verbatim. You could use this value, for example, to provide an
-	// ID that you can use to track a request or to provide other metadata that a
-	// service endpoint was programmed to process. The value must consist of no more
-	// than 1024 visible US-ASCII characters as specified in [Section 3.3.6. Field Value Components]of the Hypertext Transfer
-	// Protocol (HTTP/1.1).
+	// model hosted at an Amazon SageMaker AI endpoint. The information is an opaque
+	// value that is forwarded verbatim. You could use this value, for example, to
+	// provide an ID that you can use to track a request or to provide other metadata
+	// that a service endpoint was programmed to process. The value must consist of no
+	// more than 1024 visible US-ASCII characters as specified in [Section 3.3.6. Field Value Components]of the Hypertext
+	// Transfer Protocol (HTTP/1.1).
 	//
 	// The code in your model is responsible for setting or updating any custom
 	// attributes in the response. If your code does not set this value in the
@@ -90,7 +90,7 @@ type InvokeEndpointInput struct {
 	// ID: in your post-processing function.
 	//
 	// This feature is currently supported in the Amazon Web Services SDKs but not in
-	// the Amazon SageMaker Python SDK.
+	// the Amazon SageMaker AI Python SDK.
 	//
 	// [Section 3.3.6. Field Value Components]: https://datatracker.ietf.org/doc/html/rfc7230#section-3.2.6
 	CustomAttributes *string
@@ -125,8 +125,8 @@ type InvokeEndpointInput struct {
 	// session ID and set the expiration time. The model must also provide that
 	// information in the response to your request. You can get the ID and timestamp
 	// from the NewSessionId response parameter. For any subsequent request where you
-	// specify that session ID, SageMaker routes the request to the same instance that
-	// supports the session.
+	// specify that session ID, SageMaker AI routes the request to the same instance
+	// that supports the session.
 	SessionId *string
 
 	// If the endpoint hosts multiple containers and is configured to use direct
@@ -172,7 +172,7 @@ type InvokeEndpointOutput struct {
 	ContentType *string
 
 	// Provides additional information in the response about the inference returned by
-	// a model hosted at an Amazon SageMaker endpoint. The information is an opaque
+	// a model hosted at an Amazon SageMaker AI endpoint. The information is an opaque
 	// value that is forwarded verbatim. You could use this value, for example, to
 	// return an ID received in the CustomAttributes header of a request or other
 	// metadata that a service endpoint was programmed to produce. The value must
@@ -188,7 +188,7 @@ type InvokeEndpointOutput struct {
 	// ID: in your post-processing function.
 	//
 	// This feature is currently supported in the Amazon Web Services SDKs but not in
-	// the Amazon SageMaker Python SDK.
+	// the Amazon SageMaker AI Python SDK.
 	//
 	// [Section 3.3.6. Field Value Components]: https://tools.ietf.org/html/rfc7230#section-3.2.6
 	CustomAttributes *string

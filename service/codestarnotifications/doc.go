@@ -3,10 +3,9 @@
 // Package codestarnotifications provides the API client, operations, and
 // parameter types for AWS CodeStar Notifications.
 //
-// This AWS CodeStar Notifications API Reference provides descriptions and usage
-// examples of the operations and data types for the AWS CodeStar Notifications
-// API. You can use the AWS CodeStar Notifications API to work with the following
-// objects:
+// This CodeStar Notifications API Reference provides descriptions and usage
+// examples of the operations and data types for the CodeStar Notifications API.
+// You can use the CodeStar Notifications API to work with the following objects:
 //
 // Notification rules, by calling the following:
 //
@@ -58,7 +57,7 @@
 // UntagResource
 //   - , which removes a tag from a notification rule in your account.
 //
-// For information about how to use AWS CodeStar Notifications, see the [Amazon Web Services Developer Tools Console User Guide].
+// For information about how to use CodeStar Notifications, see the [Amazon Web Services Developer Tools Console User Guide].
 //
 // [Amazon Web Services Developer Tools Console User Guide]: https://docs.aws.amazon.com/dtconsole/latest/userguide/what-is-dtconsole.html
 package codestarnotifications

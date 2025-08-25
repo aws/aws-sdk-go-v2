@@ -1,0 +1,8 @@
+{
+    "id": "65c9e31b-fbd4-4c2b-947f-a70536b9b321",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/cloudformation"
+    ]
+}

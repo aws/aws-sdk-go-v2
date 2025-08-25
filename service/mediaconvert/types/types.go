@@ -39,7 +39,8 @@ type AacSettings struct {
 	// audio performance at lower bitrates: Choose HEV1 or HEV2. HEV1 (AAC-HE v1) adds
 	// spectral band replication to improve speech audio at low bitrates. HEV2 (AAC-HE
 	// v2) adds parametric stereo, which optimizes for encoding stereo audio at very
-	// low bitrates.
+	// low bitrates. For improved audio quality at lower bitrates, adaptive audio
+	// bitrate switching, and loudness control: Choose XHE.
 	CodecProfile AacCodecProfile
 
 	// The Coding mode that you specify determines the number of audio channels and
@@ -4815,12 +4816,15 @@ type HlsSettings struct {
 	// on Apple devices. For more information, see the Apple documentation.
 	DescriptiveVideoServiceFlag HlsDescriptiveVideoServiceFlag
 
-	// Choose Include to have MediaConvert generate a child manifest that lists only
-	// the I-frames for this rendition, in addition to your regular manifest for this
-	// rendition. You might use this manifest as part of a workflow that creates
-	// preview functions for your video. MediaConvert adds both the I-frame only child
-	// manifest and the regular child manifest to the parent manifest. When you don't
-	// need the I-frame only child manifest, keep the default value Exclude.
+	// Generate a variant manifest that lists only the I-frames for this rendition.
+	// You might use this manifest as part of a workflow that creates preview functions
+	// for your video. MediaConvert adds both the I-frame only variant manifest and the
+	// regular variant manifest to the multivariant manifest. To have MediaConvert
+	// write a variant manifest that references I-frames from your output content using
+	// EXT-X-BYTERANGE tags: Choose Include. To have MediaConvert output I-frames as
+	// single frame TS files and a corresponding variant manifest that references them:
+	// Choose Include as TS. When you don't need the I-frame only variant manifest:
+	// Keep the default value, Exclude.
 	IFrameOnlyManifest HlsIFrameOnlyManifest
 
 	// Use this setting to add an identifying string to the filename of each segment.
@@ -5206,7 +5210,8 @@ type InputTamsSettings struct {
 	// access this connection, so ensure the role has the
 	// events:RetrieveConnectionCredentials, secretsmanager:DescribeSecret, and
 	// secretsmanager:GetSecretValue permissions. Format:
-	// arn:aws:events:region:account-id:connection/connection-name/unique-id
+	// arn:aws:events:region:account-id:connection/connection-name/unique-id This
+	// setting is required when you include TAMS settings in your job.
 	AuthConnectionArn *string
 
 	// Specify how MediaConvert handles gaps between media segments in your TAMS
@@ -5226,8 +5231,8 @@ type InputTamsSettings struct {
 	// media source registered in your TAMS server. This source must be of type
 	// urn:x-nmos:format:multi, and can can reference multiple flows for audio, video,
 	// or combined audio/video content. MediaConvert automatically selects the highest
-	// quality flows available for your job. This setting is required when include TAMS
-	// settings in your job.
+	// quality flows available for your job. This setting is required when you include
+	// TAMS settings in your job.
 	SourceId *string
 
 	// Specify the time range of media segments to retrieve from your TAMS server.
@@ -5235,7 +5240,7 @@ type InputTamsSettings struct {
 	// format specified by your TAMS server implementation. This must be two timestamp
 	// values with the format {sign?}{seconds}:{nanoseconds}, separated by an
 	// underscore, surrounded by either parentheses or square brackets. Example:
-	// [15:0_35:0) This setting is required when include TAMS settings in your job.
+	// [15:0_35:0) This setting is required when you include TAMS settings in your job.
 	Timerange *string
 
 	noSmithyDocumentSerde
@@ -5586,6 +5591,11 @@ type Job struct {
 	// template.
 	JobTemplate *string
 
+	// Contains information about the most recent share attempt for the job. For more
+	// information, see
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/creating-resource-share.html
+	LastShareDetails *string
+
 	// Provides messages from the service about jobs that you have already
 	// successfully submitted.
 	Messages *JobMessages
@@ -5608,6 +5618,9 @@ type Job struct {
 	// The number of times that the service automatically attempted to process your
 	// job after encountering an error.
 	RetryCount *int32
+
+	// A job's share status can be NOT_SHARED, INITIATED, or SHARED
+	ShareStatus ShareStatus
 
 	// Enable this setting when you run a test job to estimate how many reserved
 	// transcoding slots (RTS) you need. When this is enabled, MediaConvert runs your
@@ -6546,6 +6559,17 @@ type MovSettings struct {
 
 // Required when you set Codec to the value MP2.
 type Mp2Settings struct {
+
+	// Choose BROADCASTER_MIXED_AD when the input contains pre-mixed main audio +
+	// audio description (AD) as a stereo pair. The value for AudioType will be set to
+	// 3, which signals to downstream systems that this stream contains "broadcaster
+	// mixed AD". Note that the input received by the encoder must contain pre-mixed
+	// audio; the encoder does not perform the mixing. When you choose
+	// BROADCASTER_MIXED_AD, the encoder ignores any values you provide in AudioType
+	// and FollowInputAudioType. Choose NONE when the input does not contain pre-mixed
+	// audio + audio description (AD). In this case, the encoder will use any values
+	// you provide for AudioType and FollowInputAudioType.
+	AudioDescriptionMix Mp2AudioDescriptionMix
 
 	// Specify the average bitrate in bits per second.
 	Bitrate *int32
@@ -9242,6 +9266,18 @@ type VideoSelector struct {
 	// input sample range or the sample range that you specify, MediaConvert uses the
 	// sample range for transcoding and also writes it to the output metadata.
 	SampleRange InputSampleRange
+
+	// Choose the video selector type for your HLS input. Use to specify which video
+	// rendition MediaConvert uses from your HLS input. To have MediaConvert
+	// automatically use the highest bitrate rendition from your HLS input: Keep the
+	// default value, Auto. To manually specify a rendition: Choose Stream. Then enter
+	// the unique stream number in the Streams array, starting at 1, corresponding to
+	// the stream order in the manifest.
+	SelectorType VideoSelectorType
+
+	// Specify a stream for MediaConvert to use from your HLS input. Enter an integer
+	// corresponding to the stream order in your HLS manifest.
+	Streams []int32
 
 	noSmithyDocumentSerde
 }

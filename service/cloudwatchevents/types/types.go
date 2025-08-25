@@ -1133,16 +1133,16 @@ type RunCommandTarget struct {
 	noSmithyDocumentSerde
 }
 
-// Name/Value pair of a parameter to start execution of a SageMaker Model Building
-// Pipeline.
+// Name/Value pair of a parameter to start execution of a SageMaker AI Model
+// Building Pipeline.
 type SageMakerPipelineParameter struct {
 
-	// Name of parameter to start execution of a SageMaker Model Building Pipeline.
+	// Name of parameter to start execution of a SageMaker AI Model Building Pipeline.
 	//
 	// This member is required.
 	Name *string
 
-	// Value of parameter to start execution of a SageMaker Model Building Pipeline.
+	// Value of parameter to start execution of a SageMaker AI Model Building Pipeline.
 	//
 	// This member is required.
 	Value *string
@@ -1150,11 +1150,11 @@ type SageMakerPipelineParameter struct {
 	noSmithyDocumentSerde
 }
 
-// These are custom parameters to use when the target is a SageMaker Model
+// These are custom parameters to use when the target is a SageMaker AI Model
 // Building Pipeline that starts based on EventBridge events.
 type SageMakerPipelineParameters struct {
 
-	// List of Parameter names and values for SageMaker Model Building Pipeline
+	// List of Parameter names and values for SageMaker AI Model Building Pipeline
 	// execution.
 	PipelineParameterList []SageMakerPipelineParameter
 
@@ -1283,10 +1283,10 @@ type Target struct {
 	// Parameters used when you are using the rule to invoke Amazon EC2 Run Command.
 	RunCommandParameters *RunCommandParameters
 
-	// Contains the SageMaker Model Building Pipeline parameters to start execution of
-	// a SageMaker Model Building Pipeline.
+	// Contains the SageMaker AI Model Building Pipeline parameters to start execution
+	// of a SageMaker AI Model Building Pipeline.
 	//
-	// If you specify a SageMaker Model Building Pipeline as a target, you can use
+	// If you specify a SageMaker AI Model Building Pipeline as a target, you can use
 	// this to specify parameters to start a pipeline execution based on EventBridge
 	// events.
 	SageMakerPipelineParameters *SageMakerPipelineParameters

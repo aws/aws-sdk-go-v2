@@ -1,0 +1,8 @@
+{
+    "id": "14115b99-d9a8-4b00-95a6-045ee400c866",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/appsync"
+    ]
+}

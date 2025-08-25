@@ -1,0 +1,8 @@
+{
+    "id": "dd56b220-48f2-463b-b0d5-a8887687fc96",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/licensemanager"
+    ]
+}

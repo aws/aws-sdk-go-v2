@@ -1,0 +1,8 @@
+{
+    "id": "f2050b43-668e-463e-ad8e-c808102664a4",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/kendra"
+    ]
+}

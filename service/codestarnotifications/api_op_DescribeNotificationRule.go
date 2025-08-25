@@ -53,7 +53,7 @@ type DescribeNotificationRuleOutput struct {
 
 	// The level of detail included in the notifications for this resource. BASIC will
 	// include only the contents of the event as it would appear in Amazon CloudWatch.
-	// FULL will include any supplemental information provided by AWS CodeStar
+	// FULL will include any supplemental information provided by CodeStar
 	// Notifications and/or the service for the resource for which the notification is
 	// created.
 	DetailType types.DetailType
@@ -79,8 +79,8 @@ type DescribeNotificationRuleOutput struct {
 	// The tags associated with the notification rule.
 	Tags map[string]string
 
-	// A list of the Chatbot topics and Chatbot clients associated with the
-	// notification rule.
+	// A list of the Amazon Q Developer in chat applications topics and Amazon Q
+	// Developer in chat applications clients associated with the notification rule.
 	Targets []types.TargetSummary
 
 	// Metadata pertaining to the operation's result.

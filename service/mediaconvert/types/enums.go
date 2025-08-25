@@ -5356,8 +5356,9 @@ type HlsIFrameOnlyManifest string
 
 // Enum values for HlsIFrameOnlyManifest
 const (
-	HlsIFrameOnlyManifestInclude HlsIFrameOnlyManifest = "INCLUDE"
-	HlsIFrameOnlyManifestExclude HlsIFrameOnlyManifest = "EXCLUDE"
+	HlsIFrameOnlyManifestInclude     HlsIFrameOnlyManifest = "INCLUDE"
+	HlsIFrameOnlyManifestIncludeAsTs HlsIFrameOnlyManifest = "INCLUDE_AS_TS"
+	HlsIFrameOnlyManifestExclude     HlsIFrameOnlyManifest = "EXCLUDE"
 )
 
 // Values returns all known values for HlsIFrameOnlyManifest. Note that this can
@@ -5367,6 +5368,7 @@ const (
 func (HlsIFrameOnlyManifest) Values() []HlsIFrameOnlyManifest {
 	return []HlsIFrameOnlyManifest{
 		"INCLUDE",
+		"INCLUDE_AS_TS",
 		"EXCLUDE",
 	}
 }
@@ -6942,6 +6944,25 @@ func (MovReference) Values() []MovReference {
 	return []MovReference{
 		"SELF_CONTAINED",
 		"EXTERNAL",
+	}
+}
+
+type Mp2AudioDescriptionMix string
+
+// Enum values for Mp2AudioDescriptionMix
+const (
+	Mp2AudioDescriptionMixBroadcasterMixedAd Mp2AudioDescriptionMix = "BROADCASTER_MIXED_AD"
+	Mp2AudioDescriptionMixNone               Mp2AudioDescriptionMix = "NONE"
+)
+
+// Values returns all known values for Mp2AudioDescriptionMix. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Mp2AudioDescriptionMix) Values() []Mp2AudioDescriptionMix {
+	return []Mp2AudioDescriptionMix{
+		"BROADCASTER_MIXED_AD",
+		"NONE",
 	}
 }
 
@@ -8540,6 +8561,27 @@ func (SccDestinationFramerate) Values() []SccDestinationFramerate {
 	}
 }
 
+type ShareStatus string
+
+// Enum values for ShareStatus
+const (
+	ShareStatusNotShared ShareStatus = "NOT_SHARED"
+	ShareStatusInitiated ShareStatus = "INITIATED"
+	ShareStatusShared    ShareStatus = "SHARED"
+)
+
+// Values returns all known values for ShareStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ShareStatus) Values() []ShareStatus {
+	return []ShareStatus{
+		"NOT_SHARED",
+		"INITIATED",
+		"SHARED",
+	}
+}
+
 type SimulateReservedQueue string
 
 // Enum values for SimulateReservedQueue
@@ -9273,6 +9315,25 @@ func (VideoOverlayUnit) Values() []VideoOverlayUnit {
 	return []VideoOverlayUnit{
 		"PIXELS",
 		"PERCENTAGE",
+	}
+}
+
+type VideoSelectorType string
+
+// Enum values for VideoSelectorType
+const (
+	VideoSelectorTypeAuto   VideoSelectorType = "AUTO"
+	VideoSelectorTypeStream VideoSelectorType = "STREAM"
+)
+
+// Values returns all known values for VideoSelectorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VideoSelectorType) Values() []VideoSelectorType {
+	return []VideoSelectorType{
+		"AUTO",
+		"STREAM",
 	}
 }
 

@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// AWS CodeStar Notifications can't create the notification rule because you do
-// not have sufficient permissions.
+// CodeStar Notifications can't create the notification rule because you do not
+// have sufficient permissions.
 type AccessDeniedException struct {
 	Message *string
 
@@ -34,8 +34,8 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// AWS CodeStar Notifications can't complete the request because the resource is
-// being modified by another process. Wait a few minutes and try again.
+// CodeStar Notifications can't complete the request because the resource is being
+// modified by another process. Wait a few minutes and try again.
 type ConcurrentModificationException struct {
 	Message *string
 
@@ -114,7 +114,7 @@ func (e *InvalidNextTokenException) ErrorCode() string {
 }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// One of the AWS CodeStar Notifications limits has been exceeded. Limits apply to
+// One of the CodeStar Notifications limits has been exceeded. Limits apply to
 // accounts, notification rules, notifications, resources, and targets. For more
 // information, see Limits.
 type LimitExceededException struct {
@@ -169,7 +169,7 @@ func (e *ResourceAlreadyExistsException) ErrorCode() string {
 }
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// AWS CodeStar Notifications can't find a resource that matches the provided ARN.
+// CodeStar Notifications can't find a resource that matches the provided ARN.
 type ResourceNotFoundException struct {
 	Message *string
 

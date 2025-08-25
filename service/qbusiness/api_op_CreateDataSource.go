@@ -99,7 +99,8 @@ type CreateDataSourceInput struct {
 	MediaExtractionConfiguration *types.MediaExtractionConfiguration
 
 	// The Amazon Resource Name (ARN) of an IAM role with permission to access the
-	// data source and required resources.
+	// data source and required resources. This field is required for all connector
+	// types except custom connectors, where it is optional.
 	RoleArn *string
 
 	// Sets the frequency for Amazon Q Business to check the documents in your data

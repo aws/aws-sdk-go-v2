@@ -1,0 +1,8 @@
+{
+    "id": "46b7d3de-5140-4531-8555-4b1bd211da27",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/controltower"
+    ]
+}

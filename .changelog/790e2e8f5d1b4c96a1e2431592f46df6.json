@@ -1,0 +1,8 @@
+{
+    "id": "790e2e8f-5d1b-4c96-a1e2-431592f46df6",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/transcribe"
+    ]
+}

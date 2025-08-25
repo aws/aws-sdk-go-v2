@@ -1,0 +1,8 @@
+{
+    "id": "f5561e49-0c81-4993-8ca1-4fff03dee2e7",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/workspacesthinclient"
+    ]
+}

@@ -110,6 +110,26 @@ func (m *validateOpAssociateEnvironmentRole) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateGovernedTerms struct {
+}
+
+func (*validateOpAssociateGovernedTerms) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateGovernedTerms) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateGovernedTermsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateGovernedTermsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCancelMetadataGenerationRun struct {
 }
 
@@ -1205,6 +1225,26 @@ func (m *validateOpDisassociateEnvironmentRole) HandleInitialize(ctx context.Con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDisassociateEnvironmentRoleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateGovernedTerms struct {
+}
+
+func (*validateOpDisassociateGovernedTerms) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateGovernedTerms) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateGovernedTermsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateGovernedTermsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3290,6 +3330,10 @@ func addOpAssociateEnvironmentRoleValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpAssociateEnvironmentRole{}, middleware.After)
 }
 
+func addOpAssociateGovernedTermsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateGovernedTerms{}, middleware.After)
+}
+
 func addOpCancelMetadataGenerationRunValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelMetadataGenerationRun{}, middleware.After)
 }
@@ -3508,6 +3552,10 @@ func addOpDeleteTimeSeriesDataPointsValidationMiddleware(stack *middleware.Stack
 
 func addOpDisassociateEnvironmentRoleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateEnvironmentRole{}, middleware.After)
+}
+
+func addOpDisassociateGovernedTermsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateGovernedTerms{}, middleware.After)
 }
 
 func addOpGetAccountPoolValidationMiddleware(stack *middleware.Stack) error {
@@ -5909,6 +5957,30 @@ func validateOpAssociateEnvironmentRoleInput(v *AssociateEnvironmentRoleInput) e
 	}
 }
 
+func validateOpAssociateGovernedTermsInput(v *AssociateGovernedTermsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateGovernedTermsInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.EntityIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityIdentifier"))
+	}
+	if len(v.EntityType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityType"))
+	}
+	if v.GovernedGlossaryTerms == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GovernedGlossaryTerms"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCancelMetadataGenerationRunInput(v *CancelMetadataGenerationRunInput) error {
 	if v == nil {
 		return nil
@@ -7133,6 +7205,30 @@ func validateOpDisassociateEnvironmentRoleInput(v *DisassociateEnvironmentRoleIn
 	}
 	if v.EnvironmentRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentRoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateGovernedTermsInput(v *DisassociateGovernedTermsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateGovernedTermsInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.EntityIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityIdentifier"))
+	}
+	if len(v.EntityType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityType"))
+	}
+	if v.GovernedGlossaryTerms == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GovernedGlossaryTerms"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1,0 +1,8 @@
+{
+    "id": "4a5004fc-3a88-4e24-8cfc-49cfeab870b8",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/forecast"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "c05fc6bf-f71b-4c80-a925-1df687a86c12",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/braket"
+    ]
+}

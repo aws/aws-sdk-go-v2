@@ -1,0 +1,8 @@
+{
+    "id": "b97e9b9e-7859-4e34-8586-abe7fbc08714",
+    "type": "feature",
+    "description": "The Amazon Q Business GetDocumentContent operation now supports retrieval of the extracted text content in JSON format.",
+    "modules": [
+        "service/qbusiness"
+    ]
+}

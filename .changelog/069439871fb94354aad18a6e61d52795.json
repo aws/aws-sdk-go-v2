@@ -1,0 +1,8 @@
+{
+    "id": "06943987-1fb9-4354-aad1-8a6e61d52795",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/ssoadmin"
+    ]
+}

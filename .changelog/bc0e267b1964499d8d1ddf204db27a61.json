@@ -1,0 +1,8 @@
+{
+    "id": "bc0e267b-1964-499d-8d1d-df204db27a61",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/appflow"
+    ]
+}

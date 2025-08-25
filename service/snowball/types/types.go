@@ -153,7 +153,7 @@ type ClusterMetadata struct {
 	//   - In the US, you have access to one-day shipping and two-day shipping.
 	ShippingOption ShippingOption
 
-	// The type of Snowcone device to use for this cluster.
+	// The type of Snowball Edge device to use for this cluster.
 	//
 	// For cluster jobs, Amazon Web Services Snow Family currently supports only the
 	// EDGE device type.
@@ -219,7 +219,7 @@ type DependentService struct {
 // The container for SnowconeDeviceConfiguration .
 type DeviceConfiguration struct {
 
-	// Returns information about the device configuration for an Snowcone job.
+	// Returns information about the device configuration for an Snowball Edge job.
 	SnowconeDeviceConfiguration *SnowconeDeviceConfiguration
 
 	noSmithyDocumentSerde
@@ -751,10 +751,10 @@ type ShippingDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the device configuration for an Snowcone job.
+// Specifies the device configuration for an Snowball Edge job.
 type SnowconeDeviceConfiguration struct {
 
-	// Configures the wireless connection for the Snowcone device.
+	// Configures the wireless connection for the Snowball Edge device.
 	WirelessConnection *WirelessConnection
 
 	noSmithyDocumentSerde
@@ -800,10 +800,10 @@ type TGWOnDeviceServiceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Configures the wireless connection on an Snowcone device.
+// Configures the wireless connection on an Snowball Edge device.
 type WirelessConnection struct {
 
-	// Enables the Wi-Fi adapter on an Snowcone device.
+	// Enables the Wi-Fi adapter on an Snowball Edge device.
 	IsWifiEnabled bool
 
 	noSmithyDocumentSerde

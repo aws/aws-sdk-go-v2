@@ -3,7 +3,10 @@
 // Package codegurusecurity provides the API client, operations, and parameter
 // types for Amazon CodeGuru Security.
 //
-// Amazon CodeGuru Security is in preview release and is subject to change.
+// On November 20, 2025, AWS will discontinue support for Amazon CodeGuru
+// Security. After November 20, 2025, you will no longer be able to access the
+// /codeguru/security console, service resources, or documentation. For more
+// information, see [https://docs.aws.amazon.com/codeguru/latest/security-ug/end-of-support.html].
 //
 // This section provides documentation for the Amazon CodeGuru Security API
 // operations. CodeGuru Security is a service that uses program analysis and
@@ -14,5 +17,6 @@
 // risks, CodeGuru Security improves the overall security of your application code.
 // For more information about CodeGuru Security, see the [Amazon CodeGuru Security User Guide].
 //
+// [https://docs.aws.amazon.com/codeguru/latest/security-ug/end-of-support.html]: https://docs.aws.amazon.com/codeguru/latest/security-ug/end-of-support.html
 // [Amazon CodeGuru Security User Guide]: https://docs.aws.amazon.com/codeguru/latest/security-ug/what-is-codeguru-security.html
 package codegurusecurity

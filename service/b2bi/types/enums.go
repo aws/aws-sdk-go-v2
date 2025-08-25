@@ -74,6 +74,25 @@ func (ConversionTargetFormat) Values() []ConversionTargetFormat {
 	}
 }
 
+type ElementRequirement string
+
+// Enum values for ElementRequirement
+const (
+	ElementRequirementOptional  ElementRequirement = "OPTIONAL"
+	ElementRequirementMandatory ElementRequirement = "MANDATORY"
+)
+
+// Values returns all known values for ElementRequirement. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ElementRequirement) Values() []ElementRequirement {
+	return []ElementRequirement{
+		"OPTIONAL",
+		"MANDATORY",
+	}
+}
+
 type FileFormat string
 
 // Enum values for FileFormat

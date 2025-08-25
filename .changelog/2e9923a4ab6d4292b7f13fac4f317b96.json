@@ -1,0 +1,8 @@
+{
+    "id": "2e9923a4-ab6d-4292-b7f1-3fac4f317b96",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/cloudtraildata"
+    ]
+}

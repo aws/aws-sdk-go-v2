@@ -150,3 +150,29 @@ func ExampleTemplateDetails_outputUsage() {
 }
 
 var _ *types.X12Details
+
+func ExampleX12ValidationRule_outputUsage() {
+	var union types.X12ValidationRule
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.X12ValidationRuleMemberCodeListValidationRule:
+		_ = v.Value // Value is types.X12CodeListValidationRule
+
+	case *types.X12ValidationRuleMemberElementLengthValidationRule:
+		_ = v.Value // Value is types.X12ElementLengthValidationRule
+
+	case *types.X12ValidationRuleMemberElementRequirementValidationRule:
+		_ = v.Value // Value is types.X12ElementRequirementValidationRule
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.X12CodeListValidationRule
+var _ *types.X12ElementRequirementValidationRule
+var _ *types.X12ElementLengthValidationRule

@@ -718,6 +718,11 @@ func validateConversionTarget(v *types.ConversionTarget) error {
 	if len(v.FileFormat) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("FileFormat"))
 	}
+	if v.AdvancedOptions != nil {
+		if err := validateAdvancedOptions(v.AdvancedOptions); err != nil {
+			invalidParams.AddNested("AdvancedOptions", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -828,6 +833,11 @@ func validateOutputConversion(v *types.OutputConversion) error {
 	if len(v.ToFormat) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ToFormat"))
 	}
+	if v.AdvancedOptions != nil {
+		if err := validateAdvancedOptions(v.AdvancedOptions); err != nil {
+			invalidParams.AddNested("AdvancedOptions", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -931,6 +941,65 @@ func validateX12AdvancedOptions(v *types.X12AdvancedOptions) error {
 			invalidParams.AddNested("SplitOptions", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ValidationOptions != nil {
+		if err := validateX12ValidationOptions(v.ValidationOptions); err != nil {
+			invalidParams.AddNested("ValidationOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateX12CodeListValidationRule(v *types.X12CodeListValidationRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "X12CodeListValidationRule"}
+	if v.ElementId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ElementId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateX12ElementLengthValidationRule(v *types.X12ElementLengthValidationRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "X12ElementLengthValidationRule"}
+	if v.ElementId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ElementId"))
+	}
+	if v.MaxLength == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxLength"))
+	}
+	if v.MinLength == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MinLength"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateX12ElementRequirementValidationRule(v *types.X12ElementRequirementValidationRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "X12ElementRequirementValidationRule"}
+	if v.ElementPosition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ElementPosition"))
+	}
+	if len(v.Requirement) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Requirement"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -979,6 +1048,69 @@ func validateX12SplitOptions(v *types.X12SplitOptions) error {
 	invalidParams := smithy.InvalidParamsError{Context: "X12SplitOptions"}
 	if len(v.SplitBy) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("SplitBy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateX12ValidationOptions(v *types.X12ValidationOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "X12ValidationOptions"}
+	if v.ValidationRules != nil {
+		if err := validateX12ValidationRules(v.ValidationRules); err != nil {
+			invalidParams.AddNested("ValidationRules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateX12ValidationRule(v types.X12ValidationRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "X12ValidationRule"}
+	switch uv := v.(type) {
+	case *types.X12ValidationRuleMemberCodeListValidationRule:
+		if err := validateX12CodeListValidationRule(&uv.Value); err != nil {
+			invalidParams.AddNested("[codeListValidationRule]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.X12ValidationRuleMemberElementLengthValidationRule:
+		if err := validateX12ElementLengthValidationRule(&uv.Value); err != nil {
+			invalidParams.AddNested("[elementLengthValidationRule]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.X12ValidationRuleMemberElementRequirementValidationRule:
+		if err := validateX12ElementRequirementValidationRule(&uv.Value); err != nil {
+			invalidParams.AddNested("[elementRequirementValidationRule]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateX12ValidationRules(v []types.X12ValidationRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "X12ValidationRules"}
+	for i := range v {
+		if err := validateX12ValidationRule(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

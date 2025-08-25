@@ -12,8 +12,9 @@ import (
 )
 
 // Creates a notification rule for a resource. The rule specifies the events you
-// want notifications about and the targets (such as Chatbot topics or Chatbot
-// clients configured for Slack) where you want to receive them.
+// want notifications about and the targets (such as Amazon Q Developer in chat
+// applications topics or Amazon Q Developer in chat applications clients
+// configured for Slack) where you want to receive them.
 func (c *Client) CreateNotificationRule(ctx context.Context, params *CreateNotificationRuleInput, optFns ...func(*Options)) (*CreateNotificationRuleOutput, error) {
 	if params == nil {
 		params = &CreateNotificationRuleInput{}
@@ -33,9 +34,9 @@ type CreateNotificationRuleInput struct {
 
 	// The level of detail to include in the notifications for this resource. BASIC
 	// will include only the contents of the event as it would appear in Amazon
-	// CloudWatch. FULL will include any supplemental information provided by AWS
-	// CodeStar Notifications and/or the service for the resource for which the
-	// notification is created.
+	// CloudWatch. FULL will include any supplemental information provided by CodeStar
+	// Notifications and/or the service for the resource for which the notification is
+	// created.
 	//
 	// This member is required.
 	DetailType types.DetailType
@@ -60,7 +61,8 @@ type CreateNotificationRuleInput struct {
 	Resource *string
 
 	// A list of Amazon Resource Names (ARNs) of Amazon Simple Notification Service
-	// topics and Chatbot clients to associate with the notification rule.
+	// topics and Amazon Q Developer in chat applications clients to associate with the
+	// notification rule.
 	//
 	// This member is required.
 	Targets []types.Target

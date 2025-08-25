@@ -1,0 +1,8 @@
+{
+    "id": "ec5b4c1a-81d6-44e8-b609-6725039e1957",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/chatbot"
+    ]
+}

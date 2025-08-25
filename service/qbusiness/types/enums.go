@@ -829,7 +829,8 @@ type OutputFormat string
 
 // Enum values for OutputFormat
 const (
-	OutputFormatRaw OutputFormat = "RAW"
+	OutputFormatRaw       OutputFormat = "RAW"
+	OutputFormatExtracted OutputFormat = "EXTRACTED"
 )
 
 // Values returns all known values for OutputFormat. Note that this can be
@@ -839,6 +840,7 @@ const (
 func (OutputFormat) Values() []OutputFormat {
 	return []OutputFormat{
 		"RAW",
+		"EXTRACTED",
 	}
 }
 

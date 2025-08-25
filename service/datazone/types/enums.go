@@ -716,6 +716,23 @@ func (GlossaryTermStatus) Values() []GlossaryTermStatus {
 	}
 }
 
+type GlossaryUsageRestriction string
+
+// Enum values for GlossaryUsageRestriction
+const (
+	GlossaryUsageRestrictionAssetGovernedTerms GlossaryUsageRestriction = "ASSET_GOVERNED_TERMS"
+)
+
+// Values returns all known values for GlossaryUsageRestriction. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GlossaryUsageRestriction) Values() []GlossaryUsageRestriction {
+	return []GlossaryUsageRestriction{
+		"ASSET_GOVERNED_TERMS",
+	}
+}
+
 type GlueConnectionType string
 
 // Enum values for GlueConnectionType
@@ -773,6 +790,23 @@ func (GovernanceType) Values() []GovernanceType {
 	return []GovernanceType{
 		"AWS_MANAGED",
 		"USER_MANAGED",
+	}
+}
+
+type GovernedEntityType string
+
+// Enum values for GovernedEntityType
+const (
+	GovernedEntityTypeAsset GovernedEntityType = "ASSET"
+)
+
+// Values returns all known values for GovernedEntityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GovernedEntityType) Values() []GovernedEntityType {
+	return []GovernedEntityType{
+		"ASSET",
 	}
 }
 
@@ -1258,6 +1292,7 @@ const (
 	ProjectStatusDeleteFailed ProjectStatus = "DELETE_FAILED"
 	ProjectStatusUpdating     ProjectStatus = "UPDATING"
 	ProjectStatusUpdateFailed ProjectStatus = "UPDATE_FAILED"
+	ProjectStatusMoving       ProjectStatus = "MOVING"
 )
 
 // Values returns all known values for ProjectStatus. Note that this can be
@@ -1271,6 +1306,7 @@ func (ProjectStatus) Values() []ProjectStatus {
 		"DELETE_FAILED",
 		"UPDATING",
 		"UPDATE_FAILED",
+		"MOVING",
 	}
 }
 

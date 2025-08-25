@@ -41,8 +41,8 @@ func (c *Client) SendMessage(ctx context.Context, params *SendMessageInput, optF
 
 type SendMessageInput struct {
 
-	// The message to send. The minimum size is one character. The maximum size is 256
-	// KiB.
+	// The message to send. The minimum size is one character. The maximum size is 1
+	// MiB or 1,048,576 bytes
 	//
 	// A message can include only XML, JSON, and unformatted text. The following
 	// Unicode characters are allowed. For more information, see the [W3C specification for characters].

@@ -1,0 +1,8 @@
+{
+    "id": "3bc3a5c0-c7bf-43cc-8c23-085b5e9cd2b6",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/bedrockdataautomation"
+    ]
+}

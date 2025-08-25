@@ -28,15 +28,16 @@ func (c *Client) DeleteTarget(ctx context.Context, params *DeleteTargetInput, op
 
 type DeleteTargetInput struct {
 
-	// The Amazon Resource Name (ARN) of the Chatbot topic or Chatbot client to delete.
+	// The Amazon Resource Name (ARN) of the Amazon Q Developer in chat applications
+	// topic or Amazon Q Developer in chat applications client to delete.
 	//
 	// This member is required.
 	TargetAddress *string
 
-	// A Boolean value that can be used to delete all associations with this Chatbot
-	// topic. The default value is FALSE. If set to TRUE, all associations between that
-	// target and every notification rule in your Amazon Web Services account are
-	// deleted.
+	// A Boolean value that can be used to delete all associations with this Amazon Q
+	// Developer in chat applications topic. The default value is FALSE. If set to
+	// TRUE, all associations between that target and every notification rule in your
+	// Amazon Web Services account are deleted.
 	ForceUnsubscribeAll bool
 
 	noSmithyDocumentSerde

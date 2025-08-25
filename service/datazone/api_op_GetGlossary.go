@@ -85,6 +85,9 @@ type GetGlossaryOutput struct {
 	// The Amazon DataZone user who updated the business glossary.
 	UpdatedBy *string
 
+	// The usage restriction of the restricted glossary.
+	UsageRestrictions []types.GlossaryUsageRestriction
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

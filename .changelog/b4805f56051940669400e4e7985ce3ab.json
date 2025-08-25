@@ -1,0 +1,8 @@
+{
+    "id": "b4805f56-0519-4066-9400-e4e7985ce3ab",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/sagemakeredge"
+    ]
+}

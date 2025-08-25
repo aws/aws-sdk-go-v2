@@ -2182,6 +2182,27 @@ func (EndDateType) Values() []EndDateType {
 	}
 }
 
+type EndpointIpAddressType string
+
+// Enum values for EndpointIpAddressType
+const (
+	EndpointIpAddressTypeIpv4      EndpointIpAddressType = "ipv4"
+	EndpointIpAddressTypeIpv6      EndpointIpAddressType = "ipv6"
+	EndpointIpAddressTypeDualStack EndpointIpAddressType = "dual-stack"
+)
+
+// Values returns all known values for EndpointIpAddressType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EndpointIpAddressType) Values() []EndpointIpAddressType {
+	return []EndpointIpAddressType{
+		"ipv4",
+		"ipv6",
+		"dual-stack",
+	}
+}
+
 type EphemeralNvmeSupport string
 
 // Enum values for EphemeralNvmeSupport
@@ -9365,6 +9386,27 @@ func (TrafficDirection) Values() []TrafficDirection {
 	return []TrafficDirection{
 		"ingress",
 		"egress",
+	}
+}
+
+type TrafficIpAddressType string
+
+// Enum values for TrafficIpAddressType
+const (
+	TrafficIpAddressTypeIpv4      TrafficIpAddressType = "ipv4"
+	TrafficIpAddressTypeIpv6      TrafficIpAddressType = "ipv6"
+	TrafficIpAddressTypeDualStack TrafficIpAddressType = "dual-stack"
+)
+
+// Values returns all known values for TrafficIpAddressType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TrafficIpAddressType) Values() []TrafficIpAddressType {
+	return []TrafficIpAddressType{
+		"ipv4",
+		"ipv6",
+		"dual-stack",
 	}
 }
 

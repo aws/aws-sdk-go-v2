@@ -180,7 +180,10 @@ func (e *ThrottlingException) ErrorCode() string {
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Occurs when a B2BI object cannot be validated against a request from another
-// object.
+// object. This exception can be thrown during standard EDI validation or when
+// custom validation rules fail, such as when element length constraints are
+// violated, invalid codes are used in code list validations, or required elements
+// are missing based on configured element requirement rules.
 type ValidationException struct {
 	Message *string
 

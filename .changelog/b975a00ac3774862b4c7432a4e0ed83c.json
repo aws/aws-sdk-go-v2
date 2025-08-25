@@ -1,0 +1,8 @@
+{
+    "id": "b975a00a-c377-4862-b4c7-432a4e0ed83c",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/opsworkscm"
+    ]
+}

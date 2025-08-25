@@ -1,0 +1,8 @@
+{
+    "id": "9da63455-b7b8-4f19-a85e-9da9f857bbb9",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/codestarnotifications"
+    ]
+}

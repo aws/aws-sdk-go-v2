@@ -1,0 +1,8 @@
+{
+    "id": "60ede457-970f-407d-bbfe-915b2a70f7ff",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/resiliencehub"
+    ]
+}

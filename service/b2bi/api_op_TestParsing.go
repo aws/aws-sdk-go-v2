@@ -70,6 +70,13 @@ type TestParsingOutput struct {
 	// split file's parsed content.
 	ParsedSplitFileContents []string
 
+	// Returns an array of validation messages generated during EDI validation. These
+	// messages provide detailed information about validation errors, warnings, or
+	// confirmations based on the configured X12 validation rules such as element
+	// length constraints, code list validations, and element requirement checks. This
+	// field is populated when the TestParsing API validates EDI documents.
+	ValidationMessages []string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

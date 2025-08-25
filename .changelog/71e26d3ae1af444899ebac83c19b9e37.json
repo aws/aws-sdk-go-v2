@@ -1,0 +1,8 @@
+{
+    "id": "71e26d3a-e1af-4448-99eb-ac83c19b9e37",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/cloudsearch"
+    ]
+}

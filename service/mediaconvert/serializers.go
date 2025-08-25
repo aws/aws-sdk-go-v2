@@ -678,6 +678,92 @@ func awsRestjson1_serializeOpDocumentCreateQueueInput(v *CreateQueueInput, value
 	return nil
 }
 
+type awsRestjson1_serializeOpCreateResourceShare struct {
+}
+
+func (*awsRestjson1_serializeOpCreateResourceShare) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateResourceShare) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateResourceShareInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2017-08-29/resourceShares")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateResourceShareInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateResourceShareInput(v *CreateResourceShareInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateResourceShareInput(v *CreateResourceShareInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.JobId != nil {
+		ok := object.Key("jobId")
+		ok.String(*v.JobId)
+	}
+
+	if v.SupportCaseId != nil {
+		ok := object.Key("supportCaseId")
+		ok.String(*v.SupportCaseId)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDeleteJobTemplate struct {
 }
 
@@ -8714,6 +8800,11 @@ func awsRestjson1_serializeDocumentMp2Settings(v *types.Mp2Settings, value smith
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.AudioDescriptionMix) > 0 {
+		ok := object.Key("audioDescriptionMix")
+		ok.String(string(v.AudioDescriptionMix))
+	}
+
 	if v.Bitrate != nil {
 		ok := object.Key("bitrate")
 		ok.Integer(*v.Bitrate)
@@ -10774,6 +10865,18 @@ func awsRestjson1_serializeDocumentVideoSelector(v *types.VideoSelector, value s
 	if len(v.SampleRange) > 0 {
 		ok := object.Key("sampleRange")
 		ok.String(string(v.SampleRange))
+	}
+
+	if len(v.SelectorType) > 0 {
+		ok := object.Key("selectorType")
+		ok.String(string(v.SelectorType))
+	}
+
+	if v.Streams != nil {
+		ok := object.Key("streams")
+		if err := awsRestjson1_serializeDocument__listOf__integerMin1Max2147483647(v.Streams, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

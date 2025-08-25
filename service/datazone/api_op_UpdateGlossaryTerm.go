@@ -98,6 +98,9 @@ type UpdateGlossaryTermOutput struct {
 	// The term relations to be updated as part of the UpdateGlossaryTerm action.
 	TermRelations *types.TermRelations
 
+	// The usage restriction of a term within a restricted glossary.
+	UsageRestrictions []types.GlossaryUsageRestriction
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

@@ -1,0 +1,8 @@
+{
+    "id": "f0dff3b9-4f24-4169-8fe0-5d2548d82e48",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/devopsguru"
+    ]
+}

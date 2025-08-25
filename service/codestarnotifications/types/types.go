@@ -67,9 +67,9 @@ type ListNotificationRulesFilter struct {
 
 // Information about a filter to apply to the list of returned targets. You can
 // filter by target type, address, or status. For example, to filter results to
-// notification rules that have active Chatbot topics as targets, you could specify
-// a ListTargetsFilter Name as TargetType and a Value of SNS , and a Name of
-// TARGET_STATUS and a Value of ACTIVE .
+// notification rules that have active Amazon Q Developer in chat applications
+// topics as targets, you could specify a ListTargetsFilter Name as TargetType and
+// a Value of SNS , and a Name of TARGET_STATUS and a Value of ACTIVE .
 type ListTargetsFilter struct {
 
 	// The name of the attribute you want to use to filter the returned targets.
@@ -99,18 +99,21 @@ type NotificationRuleSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the Chatbot topics or Chatbot clients associated with a
-// notification rule.
+// Information about the Amazon Q Developer in chat applications topics or Amazon
+// Q Developer in chat applications clients associated with a notification rule.
 type Target struct {
 
-	// The Amazon Resource Name (ARN) of the Chatbot topic or Chatbot client.
+	// The Amazon Resource Name (ARN) of the Amazon Q Developer in chat applications
+	// topic or Amazon Q Developer in chat applications client.
 	TargetAddress *string
 
-	// The target type. Can be an Chatbot topic or Chatbot client.
+	// The target type. Can be an Amazon Q Developer in chat applications topic or
+	// Amazon Q Developer in chat applications client.
 	//
-	//   - Chatbot topics are specified as SNS .
+	//   - Amazon Q Developer in chat applications topics are specified as SNS .
 	//
-	//   - Chatbot clients are specified as AWSChatbotSlack .
+	//   - Amazon Q Developer in chat applications clients are specified as
+	//   AWSChatbotSlack .
 	TargetType *string
 
 	noSmithyDocumentSerde
@@ -119,7 +122,8 @@ type Target struct {
 // Information about the targets specified for a notification rule.
 type TargetSummary struct {
 
-	// The Amazon Resource Name (ARN) of the Chatbot topic or Chatbot client.
+	// The Amazon Resource Name (ARN) of the Amazon Q Developer in chat applications
+	// topic or Amazon Q Developer in chat applications client.
 	TargetAddress *string
 
 	// The status of the target.
@@ -127,9 +131,10 @@ type TargetSummary struct {
 
 	// The type of the target (for example, SNS ).
 	//
-	//   - Chatbot topics are specified as SNS .
+	//   - Amazon Q Developer in chat applications topics are specified as SNS .
 	//
-	//   - Chatbot clients are specified as AWSChatbotSlack .
+	//   - Amazon Q Developer in chat applications clients are specified as
+	//   AWSChatbotSlack .
 	TargetType *string
 
 	noSmithyDocumentSerde

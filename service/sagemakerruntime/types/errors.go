@@ -150,7 +150,7 @@ func (e *ModelNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.
 // following error codes:
 //
 // ModelInvocationTimeExceeded The model failed to finish sending the response
-// within the timeout period allowed by Amazon SageMaker.
+// within the timeout period allowed by Amazon SageMaker AI.
 //
 // StreamBroken The Transmission Control Protocol (TCP) connection between the
 // client and the model was reset or closed.

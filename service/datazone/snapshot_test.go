@@ -122,6 +122,18 @@ func TestCheckSnapshot_AssociateEnvironmentRole(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AssociateGovernedTerms(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateGovernedTerms(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateGovernedTerms")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CancelMetadataGenerationRun(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CancelMetadataGenerationRun(context.Background(), nil, func(o *Options) {
@@ -775,6 +787,18 @@ func TestCheckSnapshot_DisassociateEnvironmentRole(t *testing.T) {
 	_, err := svc.DisassociateEnvironmentRole(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DisassociateEnvironmentRole")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DisassociateGovernedTerms(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateGovernedTerms(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateGovernedTerms")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2089,6 +2113,18 @@ func TestUpdateSnapshot_AssociateEnvironmentRole(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_AssociateGovernedTerms(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateGovernedTerms(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateGovernedTerms")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CancelMetadataGenerationRun(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CancelMetadataGenerationRun(context.Background(), nil, func(o *Options) {
@@ -2742,6 +2778,18 @@ func TestUpdateSnapshot_DisassociateEnvironmentRole(t *testing.T) {
 	_, err := svc.DisassociateEnvironmentRole(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DisassociateEnvironmentRole")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DisassociateGovernedTerms(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateGovernedTerms(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateGovernedTerms")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

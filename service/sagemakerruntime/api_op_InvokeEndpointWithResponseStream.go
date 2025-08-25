@@ -15,22 +15,22 @@ import (
 // Invokes a model at the specified endpoint to return the inference response as a
 // stream. The inference stream provides the response payload incrementally as a
 // series of parts. Before you can get an inference stream, you must have access to
-// a model that's deployed using Amazon SageMaker hosting services, and the
+// a model that's deployed using Amazon SageMaker AI hosting services, and the
 // container for that model must support inference streaming.
 //
 // For more information that can help you use this API, see the following sections
-// in the Amazon SageMaker Developer Guide:
+// in the Amazon SageMaker AI Developer Guide:
 //
 //   - For information about how to add streaming support to a model, see [How Containers Serve Requests].
 //
 //   - For information about how to process the streaming response, see [Invoke real-time endpoints].
 //
 // Before you can use this operation, your IAM permissions must allow the
-// sagemaker:InvokeEndpoint action. For more information about Amazon SageMaker
-// actions for IAM policies, see [Actions, resources, and condition keys for Amazon SageMaker]in the IAM Service Authorization Reference.
+// sagemaker:InvokeEndpoint action. For more information about Amazon SageMaker AI
+// actions for IAM policies, see [Actions, resources, and condition keys for Amazon SageMaker AI]in the IAM Service Authorization Reference.
 //
-// Amazon SageMaker strips all POST headers except those supported by the API.
-// Amazon SageMaker might add additional headers. You should not rely on the
+// Amazon SageMaker AI strips all POST headers except those supported by the API.
+// Amazon SageMaker AI might add additional headers. You should not rely on the
 // behavior of headers outside those enumerated in the request syntax.
 //
 // Calls to InvokeEndpointWithResponseStream are authenticated by using Amazon Web
@@ -39,7 +39,7 @@ import (
 //
 // [How Containers Serve Requests]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-inference-code.html#your-algorithms-inference-code-how-containe-serves-requests
 // [Invoke real-time endpoints]: https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints-test-endpoints.html
-// [Actions, resources, and condition keys for Amazon SageMaker]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonsagemaker.html
+// [Actions, resources, and condition keys for Amazon SageMaker AI]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonsagemaker.html
 // [Authenticating Requests (Amazon Web Services Signature Version 4)]: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
 func (c *Client) InvokeEndpointWithResponseStream(ctx context.Context, params *InvokeEndpointWithResponseStreamInput, optFns ...func(*Options)) (*InvokeEndpointWithResponseStreamOutput, error) {
 	if params == nil {
@@ -59,7 +59,7 @@ func (c *Client) InvokeEndpointWithResponseStream(ctx context.Context, params *I
 type InvokeEndpointWithResponseStreamInput struct {
 
 	// Provides input data, in the format specified in the ContentType request header.
-	// Amazon SageMaker passes all of the data in the body to the model.
+	// Amazon SageMaker AI passes all of the data in the body to the model.
 	//
 	// For information about the format of the request body, see [Common Data Formats-Inference].
 	//
@@ -83,12 +83,12 @@ type InvokeEndpointWithResponseStreamInput struct {
 	ContentType *string
 
 	// Provides additional information about a request for an inference submitted to a
-	// model hosted at an Amazon SageMaker endpoint. The information is an opaque value
-	// that is forwarded verbatim. You could use this value, for example, to provide an
-	// ID that you can use to track a request or to provide other metadata that a
-	// service endpoint was programmed to process. The value must consist of no more
-	// than 1024 visible US-ASCII characters as specified in [Section 3.3.6. Field Value Components]of the Hypertext Transfer
-	// Protocol (HTTP/1.1).
+	// model hosted at an Amazon SageMaker AI endpoint. The information is an opaque
+	// value that is forwarded verbatim. You could use this value, for example, to
+	// provide an ID that you can use to track a request or to provide other metadata
+	// that a service endpoint was programmed to process. The value must consist of no
+	// more than 1024 visible US-ASCII characters as specified in [Section 3.3.6. Field Value Components]of the Hypertext
+	// Transfer Protocol (HTTP/1.1).
 	//
 	// The code in your model is responsible for setting or updating any custom
 	// attributes in the response. If your code does not set this value in the
@@ -97,7 +97,7 @@ type InvokeEndpointWithResponseStreamInput struct {
 	// ID: in your post-processing function.
 	//
 	// This feature is currently supported in the Amazon Web Services SDKs but not in
-	// the Amazon SageMaker Python SDK.
+	// the Amazon SageMaker AI Python SDK.
 	//
 	// [Section 3.3.6. Field Value Components]: https://datatracker.ietf.org/doc/html/rfc7230#section-3.2.6
 	CustomAttributes *string
@@ -141,7 +141,7 @@ type InvokeEndpointWithResponseStreamOutput struct {
 	ContentType *string
 
 	// Provides additional information in the response about the inference returned by
-	// a model hosted at an Amazon SageMaker endpoint. The information is an opaque
+	// a model hosted at an Amazon SageMaker AI endpoint. The information is an opaque
 	// value that is forwarded verbatim. You could use this value, for example, to
 	// return an ID received in the CustomAttributes header of a request or other
 	// metadata that a service endpoint was programmed to produce. The value must
@@ -157,7 +157,7 @@ type InvokeEndpointWithResponseStreamOutput struct {
 	// ID: in your post-processing function.
 	//
 	// This feature is currently supported in the Amazon Web Services SDKs but not in
-	// the Amazon SageMaker Python SDK.
+	// the Amazon SageMaker AI Python SDK.
 	//
 	// [Section 3.3.6. Field Value Components]: https://tools.ietf.org/html/rfc7230#section-3.2.6
 	CustomAttributes *string

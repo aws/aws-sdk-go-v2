@@ -587,6 +587,120 @@ func awsRestjson1_serializeOpHttpBindingsAssociateEnvironmentRoleInput(v *Associ
 	return nil
 }
 
+type awsRestjson1_serializeOpAssociateGovernedTerms struct {
+}
+
+func (*awsRestjson1_serializeOpAssociateGovernedTerms) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpAssociateGovernedTerms) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*AssociateGovernedTermsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v2/domains/{domainIdentifier}/entities/{entityType}/{entityIdentifier}/associate-governed-terms")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PATCH"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsAssociateGovernedTermsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentAssociateGovernedTermsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsAssociateGovernedTermsInput(v *AssociateGovernedTermsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.DomainIdentifier == nil || len(*v.DomainIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member domainIdentifier must not be empty")}
+	}
+	if v.DomainIdentifier != nil {
+		if err := encoder.SetURI("domainIdentifier").String(*v.DomainIdentifier); err != nil {
+			return err
+		}
+	}
+
+	if v.EntityIdentifier == nil || len(*v.EntityIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member entityIdentifier must not be empty")}
+	}
+	if v.EntityIdentifier != nil {
+		if err := encoder.SetURI("entityIdentifier").String(*v.EntityIdentifier); err != nil {
+			return err
+		}
+	}
+
+	if len(v.EntityType) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member entityType must not be empty")}
+	}
+	if len(v.EntityType) > 0 {
+		if err := encoder.SetURI("entityType").String(string(v.EntityType)); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentAssociateGovernedTermsInput(v *AssociateGovernedTermsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GovernedGlossaryTerms != nil {
+		ok := object.Key("governedGlossaryTerms")
+		if err := awsRestjson1_serializeDocumentGovernedGlossaryTerms(v.GovernedGlossaryTerms, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCancelMetadataGenerationRun struct {
 }
 
@@ -2770,6 +2884,13 @@ func awsRestjson1_serializeOpDocumentCreateGlossaryInput(v *CreateGlossaryInput,
 	if len(v.Status) > 0 {
 		ok := object.Key("status")
 		ok.String(string(v.Status))
+	}
+
+	if v.UsageRestrictions != nil {
+		ok := object.Key("usageRestrictions")
+		if err := awsRestjson1_serializeDocumentGlossaryUsageRestrictions(v.UsageRestrictions, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -6241,6 +6362,120 @@ func awsRestjson1_serializeOpHttpBindingsDisassociateEnvironmentRoleInput(v *Dis
 	}
 	if v.EnvironmentRoleArn != nil {
 		if err := encoder.SetURI("environmentRoleArn").String(*v.EnvironmentRoleArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDisassociateGovernedTerms struct {
+}
+
+func (*awsRestjson1_serializeOpDisassociateGovernedTerms) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDisassociateGovernedTerms) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DisassociateGovernedTermsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v2/domains/{domainIdentifier}/entities/{entityType}/{entityIdentifier}/disassociate-governed-terms")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PATCH"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDisassociateGovernedTermsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentDisassociateGovernedTermsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDisassociateGovernedTermsInput(v *DisassociateGovernedTermsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.DomainIdentifier == nil || len(*v.DomainIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member domainIdentifier must not be empty")}
+	}
+	if v.DomainIdentifier != nil {
+		if err := encoder.SetURI("domainIdentifier").String(*v.DomainIdentifier); err != nil {
+			return err
+		}
+	}
+
+	if v.EntityIdentifier == nil || len(*v.EntityIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member entityIdentifier must not be empty")}
+	}
+	if v.EntityIdentifier != nil {
+		if err := encoder.SetURI("entityIdentifier").String(*v.EntityIdentifier); err != nil {
+			return err
+		}
+	}
+
+	if len(v.EntityType) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member entityType must not be empty")}
+	}
+	if len(v.EntityType) > 0 {
+		if err := encoder.SetURI("entityType").String(string(v.EntityType)); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentDisassociateGovernedTermsInput(v *DisassociateGovernedTermsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GovernedGlossaryTerms != nil {
+		ok := object.Key("governedGlossaryTerms")
+		if err := awsRestjson1_serializeDocumentGovernedGlossaryTerms(v.GovernedGlossaryTerms, ok); err != nil {
 			return err
 		}
 	}
@@ -18016,6 +18251,17 @@ func awsRestjson1_serializeDocumentGlossaryTerms(v []string, value smithyjson.Va
 	return nil
 }
 
+func awsRestjson1_serializeDocumentGlossaryUsageRestrictions(v []types.GlossaryUsageRestriction, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentGlueConnectionInput(v *types.GlueConnectionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -18204,6 +18450,17 @@ func awsRestjson1_serializeDocumentGlueRunConfigurationInput(v *types.GlueRunCon
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGovernedGlossaryTerms(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 

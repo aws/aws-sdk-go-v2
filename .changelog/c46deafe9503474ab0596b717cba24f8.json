@@ -1,0 +1,8 @@
+{
+    "id": "c46deafe-9503-474a-b059-6b717cba24f8",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/translate"
+    ]
+}

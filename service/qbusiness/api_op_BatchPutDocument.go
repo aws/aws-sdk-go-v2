@@ -49,6 +49,10 @@ type BatchPutDocumentInput struct {
 
 	// One or more documents to add to the index.
 	//
+	// Ensure that the name of your document doesn't contain any confidential
+	// information. Amazon Q Business returns document names in chat responses and
+	// citations when relevant.
+	//
 	// This member is required.
 	Documents []types.Document
 

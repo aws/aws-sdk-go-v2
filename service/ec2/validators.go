@@ -13482,9 +13482,6 @@ func validateOpCreateClientVpnEndpointInput(v *CreateClientVpnEndpointInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateClientVpnEndpointInput"}
-	if v.ClientCidrBlock == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientCidrBlock"))
-	}
 	if v.ServerCertificateArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServerCertificateArn"))
 	}

@@ -208,7 +208,7 @@ type Message struct {
 //
 // Name , type , value and the message body must not be empty or null. All parts
 // of the message attribute, including Name , Type , and Value , are part of the
-// message size restriction (256 KiB or 262,144 bytes).
+// message size restriction (1 MiB or 1,048,576 bytes).
 type MessageAttributeValue struct {
 
 	// Amazon SQS supports the following logical data types: String , Number , and

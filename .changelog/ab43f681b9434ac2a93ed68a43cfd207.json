@@ -1,0 +1,8 @@
+{
+    "id": "ab43f681-b943-4ac2-a93e-d68a43cfd207",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/chimesdkmediapipelines"
+    ]
+}

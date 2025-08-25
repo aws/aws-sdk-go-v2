@@ -681,6 +681,9 @@ type BasicAuthConfiguration struct {
 type BlockedPhrasesConfiguration struct {
 
 	// A list of phrases blocked from a Amazon Q Business web experience chat.
+	//
+	// Each phrase can contain a maximum of 36 characters. The list can contain a
+	// maximum of 20 phrases.
 	BlockedPhrases []string
 
 	// The configured custom message displayed to an end user informing them that

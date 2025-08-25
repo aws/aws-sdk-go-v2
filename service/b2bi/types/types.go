@@ -106,6 +106,10 @@ type ConversionTarget struct {
 	// This member is required.
 	FileFormat ConversionTargetFormat
 
+	// A structure that contains advanced options for EDI processing. Currently, only
+	// X12 advanced options are supported.
+	AdvancedOptions *AdvancedOptions
+
 	// A structure that contains the formatting details for the conversion target.
 	FormatDetails ConversionTargetFormatDetails
 
@@ -311,6 +315,10 @@ type OutputConversion struct {
 	//
 	// This member is required.
 	ToFormat ToFormat
+
+	// A structure that contains advanced options for EDI processing. Currently, only
+	// X12 advanced options are supported.
+	AdvancedOptions *AdvancedOptions
 
 	// A structure that contains the X12 transaction set and version for the
 	// transformer output.
@@ -655,6 +663,39 @@ type X12AdvancedOptions struct {
 	// X12 files are divided into smaller, more manageable units.
 	SplitOptions *X12SplitOptions
 
+	// Specifies validation options for X12 EDI processing. These options control how
+	// validation rules are applied during EDI document processing, including custom
+	// validation rules for element length constraints, code list validations, and
+	// element requirement checks.
+	ValidationOptions *X12ValidationOptions
+
+	noSmithyDocumentSerde
+}
+
+// Defines a validation rule that modifies the allowed code values for a specific
+// X12 element. This rule allows you to add or remove valid codes from an element's
+// standard code list, providing flexibility to accommodate trading
+// partner-specific requirements or industry variations. You can specify codes to
+// add to expand the allowed values beyond the X12 standard, or codes to remove to
+// restrict the allowed values for stricter validation.
+type X12CodeListValidationRule struct {
+
+	// Specifies the four-digit element ID to which the code list modifications apply.
+	// This identifies which X12 element will have its allowed code values modified.
+	//
+	// This member is required.
+	ElementId *string
+
+	// Specifies a list of code values to add to the element's allowed values. These
+	// codes will be considered valid for the specified element in addition to the
+	// standard codes defined by the X12 specification.
+	CodesToAdd []string
+
+	// Specifies a list of code values to remove from the element's allowed values.
+	// These codes will be considered invalid for the specified element, even if they
+	// are part of the standard codes defined by the X12 specification.
+	CodesToRemove []string
+
 	noSmithyDocumentSerde
 }
 
@@ -716,6 +757,64 @@ type X12Details struct {
 
 	// Returns the version to use for the specified X12 transaction set.
 	Version X12Version
+
+	noSmithyDocumentSerde
+}
+
+// Defines a validation rule that specifies custom length constraints for a
+// specific X12 element. This rule allows you to override the standard minimum and
+// maximum length requirements for an element, enabling validation of trading
+// partner-specific length requirements that may differ from the X12 specification.
+// Both minimum and maximum length values must be specified and must be between 1
+// and 200 characters.
+type X12ElementLengthValidationRule struct {
+
+	// Specifies the four-digit element ID to which the length constraints will be
+	// applied. This identifies which X12 element will have its length requirements
+	// modified.
+	//
+	// This member is required.
+	ElementId *string
+
+	// Specifies the maximum allowed length for the identified element. This value
+	// must be between 1 and 200 characters and defines the upper limit for the
+	// element's content length.
+	//
+	// This member is required.
+	MaxLength *int32
+
+	// Specifies the minimum required length for the identified element. This value
+	// must be between 1 and 200 characters and defines the lower limit for the
+	// element's content length.
+	//
+	// This member is required.
+	MinLength *int32
+
+	noSmithyDocumentSerde
+}
+
+// Defines a validation rule that modifies the requirement status of a specific
+// X12 element within a segment. This rule allows you to make optional elements
+// mandatory or mandatory elements optional, providing flexibility to accommodate
+// different trading partner requirements and business rules. The rule targets a
+// specific element position within a segment and sets its requirement status to
+// either OPTIONAL or MANDATORY.
+type X12ElementRequirementValidationRule struct {
+
+	// Specifies the position of the element within an X12 segment for which the
+	// requirement status will be modified. The format follows the pattern of segment
+	// identifier followed by element position (e.g., "ST-01" for the first element of
+	// the ST segment).
+	//
+	// This member is required.
+	ElementPosition *string
+
+	// Specifies the requirement status for the element at the specified position.
+	// Valid values are OPTIONAL (the element may be omitted) or MANDATORY (the element
+	// must be present).
+	//
+	// This member is required.
+	Requirement ElementRequirement
 
 	noSmithyDocumentSerde
 }
@@ -864,7 +963,11 @@ type X12OutboundEdiHeaders struct {
 	// elements, and are defined in the interchange control header.
 	InterchangeControlHeaders *X12InterchangeControlHeaders
 
-	// Specifies whether or not to validate the EDI for this X12 object: TRUE or FALSE .
+	// Specifies whether or not to validate the EDI for this X12 object: TRUE or FALSE
+	// . When enabled, this performs both standard EDI validation and applies any
+	// configured custom validation rules including element length constraints, code
+	// list validations, and element requirement checks. Validation results are
+	// returned in the response validation messages.
 	ValidateEdi *bool
 
 	noSmithyDocumentSerde
@@ -882,6 +985,76 @@ type X12SplitOptions struct {
 
 	noSmithyDocumentSerde
 }
+
+// Contains configuration options for X12 EDI validation. This structure allows
+// you to specify custom validation rules that will be applied during EDI document
+// processing, including element length constraints, code list modifications, and
+// element requirement changes. These validation options provide flexibility to
+// accommodate trading partner-specific requirements while maintaining EDI
+// compliance. The validation rules are applied in addition to standard X12
+// validation to ensure documents meet both standard and custom requirements.
+type X12ValidationOptions struct {
+
+	// Specifies a list of validation rules to apply during EDI document processing.
+	// These rules can include code list modifications, element length constraints, and
+	// element requirement changes.
+	ValidationRules []X12ValidationRule
+
+	noSmithyDocumentSerde
+}
+
+// Represents a single validation rule that can be applied during X12 EDI
+// processing. This is a union type that can contain one of several specific
+// validation rule types: code list validation rules for modifying allowed element
+// codes, element length validation rules for enforcing custom length constraints,
+// or element requirement validation rules for changing mandatory/optional status.
+// Each validation rule targets specific aspects of EDI document validation to
+// ensure compliance with trading partner requirements and business rules.
+//
+// The following types satisfy this interface:
+//
+//	X12ValidationRuleMemberCodeListValidationRule
+//	X12ValidationRuleMemberElementLengthValidationRule
+//	X12ValidationRuleMemberElementRequirementValidationRule
+type X12ValidationRule interface {
+	isX12ValidationRule()
+}
+
+// Specifies a code list validation rule that modifies the allowed code values for
+// a specific X12 element. This rule enables you to customize which codes are
+// considered valid for an element, allowing for trading partner-specific code
+// requirements.
+type X12ValidationRuleMemberCodeListValidationRule struct {
+	Value X12CodeListValidationRule
+
+	noSmithyDocumentSerde
+}
+
+func (*X12ValidationRuleMemberCodeListValidationRule) isX12ValidationRule() {}
+
+// Specifies an element length validation rule that defines custom length
+// constraints for a specific X12 element. This rule allows you to enforce minimum
+// and maximum length requirements that may differ from the standard X12
+// specification.
+type X12ValidationRuleMemberElementLengthValidationRule struct {
+	Value X12ElementLengthValidationRule
+
+	noSmithyDocumentSerde
+}
+
+func (*X12ValidationRuleMemberElementLengthValidationRule) isX12ValidationRule() {}
+
+// Specifies an element requirement validation rule that modifies whether a
+// specific X12 element is required or optional within a segment. This rule
+// provides flexibility to accommodate different trading partner requirements for
+// element presence.
+type X12ValidationRuleMemberElementRequirementValidationRule struct {
+	Value X12ElementRequirementValidationRule
+
+	noSmithyDocumentSerde
+}
+
+func (*X12ValidationRuleMemberElementRequirementValidationRule) isX12ValidationRule() {}
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
@@ -902,3 +1075,4 @@ func (*UnknownUnionMember) isInputFileSource()               {}
 func (*UnknownUnionMember) isOutboundEdiOptions()            {}
 func (*UnknownUnionMember) isOutputSampleFileSource()        {}
 func (*UnknownUnionMember) isTemplateDetails()               {}
+func (*UnknownUnionMember) isX12ValidationRule()             {}

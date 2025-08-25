@@ -101,6 +101,9 @@ type CreateGlossaryTermOutput struct {
 	// The term relations of this business glossary term.
 	TermRelations *types.TermRelations
 
+	// The usage restriction of the restricted glossary.
+	UsageRestrictions []types.GlossaryUsageRestriction
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

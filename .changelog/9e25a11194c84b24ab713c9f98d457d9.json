@@ -1,0 +1,8 @@
+{
+    "id": "9e25a111-94c8-4b24-ab71-3c9f98d457d9",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/sagemakerruntime"
+    ]
+}

@@ -4133,6 +4133,42 @@ func awsAwsjson10_deserializeDocumentCapabilitySummary(v **types.CapabilitySumma
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentCodeList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentConflictException(v **types.ConflictException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4635,6 +4671,11 @@ func awsAwsjson10_deserializeDocumentOutputConversion(v **types.OutputConversion
 
 	for key, value := range shape {
 		switch key {
+		case "advancedOptions":
+			if err := awsAwsjson10_deserializeDocumentAdvancedOptions(&sv.AdvancedOptions, value); err != nil {
+				return err
+			}
+
 		case "formatOptions":
 			if err := awsAwsjson10_deserializeDocumentFormatOptions(&sv.FormatOptions, value); err != nil {
 				return err
@@ -5816,6 +5857,61 @@ func awsAwsjson10_deserializeDocumentX12AdvancedOptions(v **types.X12AdvancedOpt
 				return err
 			}
 
+		case "validationOptions":
+			if err := awsAwsjson10_deserializeDocumentX12ValidationOptions(&sv.ValidationOptions, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentX12CodeListValidationRule(v **types.X12CodeListValidationRule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.X12CodeListValidationRule
+	if *v == nil {
+		sv = &types.X12CodeListValidationRule{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "codesToAdd":
+			if err := awsAwsjson10_deserializeDocumentCodeList(&sv.CodesToAdd, value); err != nil {
+				return err
+			}
+
+		case "codesToRemove":
+			if err := awsAwsjson10_deserializeDocumentCodeList(&sv.CodesToRemove, value); err != nil {
+				return err
+			}
+
+		case "elementId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ElementId to be of type string, got %T instead", value)
+				}
+				sv.ElementId = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -5991,6 +6087,121 @@ func awsAwsjson10_deserializeDocumentX12Details(v **types.X12Details, value inte
 					return fmt.Errorf("expected X12Version to be of type string, got %T instead", value)
 				}
 				sv.Version = types.X12Version(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentX12ElementLengthValidationRule(v **types.X12ElementLengthValidationRule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.X12ElementLengthValidationRule
+	if *v == nil {
+		sv = &types.X12ElementLengthValidationRule{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "elementId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ElementId to be of type string, got %T instead", value)
+				}
+				sv.ElementId = ptr.String(jtv)
+			}
+
+		case "maxLength":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxLength = ptr.Int32(int32(i64))
+			}
+
+		case "minLength":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MinLength = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentX12ElementRequirementValidationRule(v **types.X12ElementRequirementValidationRule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.X12ElementRequirementValidationRule
+	if *v == nil {
+		sv = &types.X12ElementRequirementValidationRule{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "elementPosition":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ElementPosition to be of type string, got %T instead", value)
+				}
+				sv.ElementPosition = ptr.String(jtv)
+			}
+
+		case "requirement":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ElementRequirement to be of type string, got %T instead", value)
+				}
+				sv.Requirement = types.ElementRequirement(jtv)
 			}
 
 		default:
@@ -6337,6 +6548,134 @@ func awsAwsjson10_deserializeDocumentX12SplitOptions(v **types.X12SplitOptions, 
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentX12ValidationOptions(v **types.X12ValidationOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.X12ValidationOptions
+	if *v == nil {
+		sv = &types.X12ValidationOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "validationRules":
+			if err := awsAwsjson10_deserializeDocumentX12ValidationRules(&sv.ValidationRules, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentX12ValidationRule(v *types.X12ValidationRule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.X12ValidationRule
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "codeListValidationRule":
+			var mv types.X12CodeListValidationRule
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentX12CodeListValidationRule(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.X12ValidationRuleMemberCodeListValidationRule{Value: mv}
+			break loop
+
+		case "elementLengthValidationRule":
+			var mv types.X12ElementLengthValidationRule
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentX12ElementLengthValidationRule(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.X12ValidationRuleMemberElementLengthValidationRule{Value: mv}
+			break loop
+
+		case "elementRequirementValidationRule":
+			var mv types.X12ElementRequirementValidationRule
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentX12ElementRequirementValidationRule(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.X12ValidationRuleMemberElementRequirementValidationRule{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentX12ValidationRules(v *[]types.X12ValidationRule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.X12ValidationRule
+	if *v == nil {
+		cv = []types.X12ValidationRule{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.X12ValidationRule
+		if err := awsAwsjson10_deserializeDocumentX12ValidationRule(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -7844,6 +8183,11 @@ func awsAwsjson10_deserializeOpDocumentTestParsingOutput(v **TestParsingOutput, 
 
 		case "parsedSplitFileContents":
 			if err := awsAwsjson10_deserializeDocumentParsedSplitFileContentsList(&sv.ParsedSplitFileContents, value); err != nil {
+				return err
+			}
+
+		case "validationMessages":
+			if err := awsAwsjson10_deserializeDocumentValidationMessages(&sv.ValidationMessages, value); err != nil {
 				return err
 			}
 

@@ -1,0 +1,8 @@
+{
+    "id": "065914e2-e8b9-4643-8a44-6c0e8e9c89e8",
+    "type": "feature",
+    "description": "Updated APIs to support custom validation rules.",
+    "modules": [
+        "service/b2bi"
+    ]
+}

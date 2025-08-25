@@ -1,0 +1,8 @@
+{
+    "id": "5b407dc1-3532-4fd3-966c-1ed6d9bd4e8b",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/transcribestreaming"
+    ]
+}

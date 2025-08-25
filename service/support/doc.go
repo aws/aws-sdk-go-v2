@@ -32,9 +32,9 @@
 //   - The DescribeCommunications, AddCommunicationToCase, and AddAttachmentsToSetoperations retrieve and add communications and attachments to
 //     Amazon Web Services Support cases.
 //
-//   - The DescribeServicesand DescribeSeverityLevelsoperations return Amazon Web Service names, service codes, service
-//     categories, and problem severity levels. You use these values when you call the CreateCase
-//     operation.
+//   - The DescribeServicesand DescribeSeverityLevelsoperations return Amazon Web Services service names, service codes,
+//     service categories, and problem severity levels. You use these values when you
+//     call the CreateCaseoperation.
 //
 // You can also use the Amazon Web Services Support API to call the Trusted
 // Advisor operations. For more information, see [Trusted Advisor]in the Amazon Web Services

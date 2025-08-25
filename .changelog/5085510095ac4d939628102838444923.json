@@ -1,0 +1,8 @@
+{
+    "id": "50855100-95ac-4d93-9628-102838444923",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/devicefarm"
+    ]
+}

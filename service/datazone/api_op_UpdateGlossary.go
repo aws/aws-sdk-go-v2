@@ -85,6 +85,9 @@ type UpdateGlossaryOutput struct {
 	// The status to be updated as part of the UpdateGlossary action.
 	Status types.GlossaryStatus
 
+	// The usage restriction of the restricted glossary.
+	UsageRestrictions []types.GlossaryUsageRestriction
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

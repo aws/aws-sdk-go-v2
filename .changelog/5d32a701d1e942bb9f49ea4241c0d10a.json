@@ -1,0 +1,8 @@
+{
+    "id": "5d32a701-d1e9-42bb-9f49-ea4241c0d10a",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/cloudcontrol"
+    ]
+}

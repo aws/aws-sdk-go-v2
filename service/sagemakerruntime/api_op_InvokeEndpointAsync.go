@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// After you deploy a model into production using Amazon SageMaker hosting
+// After you deploy a model into production using Amazon SageMaker AI hosting
 // services, your client applications use this API to get inferences from the model
 // hosted at the specified endpoint in an asynchronous manner.
 //
@@ -20,8 +20,8 @@ import (
 // the result of the inference request but contain information about where you can
 // locate it.
 //
-// Amazon SageMaker strips all POST headers except those supported by the API.
-// Amazon SageMaker might add additional headers. You should not rely on the
+// Amazon SageMaker AI strips all POST headers except those supported by the API.
+// Amazon SageMaker AI might add additional headers. You should not rely on the
 // behavior of headers outside those enumerated in the request syntax.
 //
 // Calls to InvokeEndpointAsync are authenticated by using Amazon Web Services
@@ -65,12 +65,12 @@ type InvokeEndpointAsyncInput struct {
 	ContentType *string
 
 	// Provides additional information about a request for an inference submitted to a
-	// model hosted at an Amazon SageMaker endpoint. The information is an opaque value
-	// that is forwarded verbatim. You could use this value, for example, to provide an
-	// ID that you can use to track a request or to provide other metadata that a
-	// service endpoint was programmed to process. The value must consist of no more
-	// than 1024 visible US-ASCII characters as specified in [Section 3.3.6. Field Value Components]of the Hypertext Transfer
-	// Protocol (HTTP/1.1).
+	// model hosted at an Amazon SageMaker AI endpoint. The information is an opaque
+	// value that is forwarded verbatim. You could use this value, for example, to
+	// provide an ID that you can use to track a request or to provide other metadata
+	// that a service endpoint was programmed to process. The value must consist of no
+	// more than 1024 visible US-ASCII characters as specified in [Section 3.3.6. Field Value Components]of the Hypertext
+	// Transfer Protocol (HTTP/1.1).
 	//
 	// The code in your model is responsible for setting or updating any custom
 	// attributes in the response. If your code does not set this value in the
@@ -79,12 +79,12 @@ type InvokeEndpointAsyncInput struct {
 	// ID: in your post-processing function.
 	//
 	// This feature is currently supported in the Amazon Web Services SDKs but not in
-	// the Amazon SageMaker Python SDK.
+	// the Amazon SageMaker AI Python SDK.
 	//
 	// [Section 3.3.6. Field Value Components]: https://datatracker.ietf.org/doc/html/rfc7230#section-3.2.6
 	CustomAttributes *string
 
-	// The identifier for the inference request. Amazon SageMaker will generate an
+	// The identifier for the inference request. Amazon SageMaker AI will generate an
 	// identifier for you if none is specified.
 	InferenceId *string
 
@@ -105,8 +105,8 @@ type InvokeEndpointAsyncOutput struct {
 	FailureLocation *string
 
 	// Identifier for an inference request. This will be the same as the InferenceId
-	// specified in the input. Amazon SageMaker will generate an identifier for you if
-	// you do not specify one.
+	// specified in the input. Amazon SageMaker AI will generate an identifier for you
+	// if you do not specify one.
 	InferenceId *string
 
 	// The Amazon S3 URI where the inference response payload is stored.

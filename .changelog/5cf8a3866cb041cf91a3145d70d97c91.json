@@ -1,0 +1,8 @@
+{
+    "id": "5cf8a386-6cb0-41cf-91a3-145d70d97c91",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/docdbelastic"
+    ]
+}

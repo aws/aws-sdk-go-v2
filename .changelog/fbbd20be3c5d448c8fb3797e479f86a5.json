@@ -1,0 +1,8 @@
+{
+    "id": "fbbd20be-3c5d-448c-8fb3-797e479f86a5",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/keyspaces"
+    ]
+}

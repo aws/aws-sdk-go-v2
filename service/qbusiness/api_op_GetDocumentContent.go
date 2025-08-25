@@ -56,7 +56,7 @@ type GetDocumentContentInput struct {
 	// datasource will be "uploaded-docs-file-stat-datasourceid".
 	DataSourceId *string
 
-	// Raw document outputFormat.
+	// Document outputFormat. Defaults to RAW if not selected.
 	OutputFormat types.OutputFormat
 
 	noSmithyDocumentSerde
@@ -64,8 +64,11 @@ type GetDocumentContentInput struct {
 
 type GetDocumentContentOutput struct {
 
-	// The MIME type of the document content (e.g., application/pdf, text/plain,
-	// application/vnd.openxmlformats-officedocument.wordprocessingml.document).
+	// The MIME type of the document content. When outputFormat is RAW, this
+	// corresponds to the original document's MIME type (e.g., application/pdf,
+	// text/plain,
+	// application/vnd.openxmlformats-officedocument.wordprocessingml.document). When
+	// outputFormat is EXTRACTED, the MIME type is always application/json.
 	//
 	// This member is required.
 	MimeType *string

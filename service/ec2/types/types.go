@@ -2384,6 +2384,12 @@ type ClientVpnConnection struct {
 	// The IP address of the client.
 	ClientIp *string
 
+	// The IPv6 address assigned to the client connection when using a dual-stack
+	// Client VPN endpoint. This field is only populated when the endpoint is
+	// configured for dual-stack addressing, and the client is using IPv6 for
+	// connectivity.
+	ClientIpv6Address *string
+
 	// The ID of the Client VPN endpoint to which the client is connected.
 	ClientVpnEndpointId *string
 
@@ -2506,6 +2512,11 @@ type ClientVpnEndpoint struct {
 	// Information about the DNS servers to be used for DNS resolution.
 	DnsServers []string
 
+	// The IP address type of the Client VPN endpoint. Possible values are ipv4 for
+	// IPv4 addressing only, ipv6 for IPv6 addressing only, or dual-stack for both
+	// IPv4 and IPv6 addressing.
+	EndpointIpAddressType EndpointIpAddressType
+
 	// The IDs of the security groups for the target network.
 	SecurityGroupIds []string
 
@@ -2535,6 +2546,11 @@ type ClientVpnEndpoint struct {
 
 	// Any tags assigned to the Client VPN endpoint.
 	Tags []Tag
+
+	// The IP address type of the Client VPN endpoint. Possible values are either ipv4
+	// for IPv4 addressing only, ipv6 for IPv6 addressing only, or dual-stack for both
+	// IPv4 and IPv6 addressing.
+	TrafficIpAddressType TrafficIpAddressType
 
 	// The transport protocol used by the Client VPN endpoint.
 	TransportProtocol TransportProtocol

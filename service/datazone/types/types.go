@@ -362,6 +362,9 @@ type AssetItem struct {
 	// The glossary terms attached to the Amazon DataZone inventory asset.
 	GlossaryTerms []string
 
+	// The restricted glossary terms accociated with an asset.
+	GovernedGlossaryTerms []string
+
 	noSmithyDocumentSerde
 }
 
@@ -407,6 +410,9 @@ type AssetListing struct {
 	// The glossary terms attached to an asset published in an Amazon DataZone
 	// catalog.
 	GlossaryTerms []DetailedGlossaryTerm
+
+	// The restricted glossary terms associated with an asset.
+	GovernedGlossaryTerms []DetailedGlossaryTerm
 
 	// The latest time series data points forms included in the additional attributes
 	// of an asset.
@@ -459,6 +465,9 @@ type AssetListingItem struct {
 
 	// Glossary terms attached to the inventory asset.
 	GlossaryTerms []DetailedGlossaryTerm
+
+	// The restricted glossary terms associated with an asset.
+	GovernedGlossaryTerms []DetailedGlossaryTerm
 
 	// The Amazon DataZone user who created the listing.
 	ListingCreatedBy *string
@@ -2610,6 +2619,9 @@ type GlossaryItem struct {
 	// The Amazon DataZone user who updated the business glossary.
 	UpdatedBy *string
 
+	// The usage restrictions associated with a goverened glossary term.
+	UsageRestrictions []GlossaryUsageRestriction
+
 	noSmithyDocumentSerde
 }
 
@@ -2674,6 +2686,9 @@ type GlossaryTermItem struct {
 
 	// The Amazon DataZone user who updated the business glossary term.
 	UpdatedBy *string
+
+	// The usage restrictions associated with a goverened glossary term.
+	UsageRestrictions []GlossaryUsageRestriction
 
 	noSmithyDocumentSerde
 }

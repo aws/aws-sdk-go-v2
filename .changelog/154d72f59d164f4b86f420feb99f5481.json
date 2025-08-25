@@ -1,0 +1,8 @@
+{
+    "id": "154d72f5-9d16-4f4b-86f4-20feb99f5481",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/athena"
+    ]
+}

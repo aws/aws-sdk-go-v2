@@ -134,6 +134,18 @@ func TestCheckSnapshot_CreateQueue(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateResourceShare(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateResourceShare(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateResourceShare")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteJobTemplate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteJobTemplate(context.Background(), nil, func(o *Options) {
@@ -498,6 +510,18 @@ func TestUpdateSnapshot_CreateQueue(t *testing.T) {
 	_, err := svc.CreateQueue(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateQueue")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateResourceShare(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateResourceShare(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateResourceShare")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

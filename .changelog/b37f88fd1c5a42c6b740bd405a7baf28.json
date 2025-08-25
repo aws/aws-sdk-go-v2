@@ -1,0 +1,8 @@
+{
+    "id": "b37f88fd-1c5a-42c6-b740-bd405a7baf28",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/lambda"
+    ]
+}

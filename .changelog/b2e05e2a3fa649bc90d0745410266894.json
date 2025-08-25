@@ -1,0 +1,8 @@
+{
+    "id": "b2e05e2a-3fa6-49bc-90d0-745410266894",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/codeartifact"
+    ]
+}

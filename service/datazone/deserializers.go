@@ -895,6 +895,112 @@ func awsRestjson1_deserializeOpErrorAssociateEnvironmentRole(response *smithyhtt
 	}
 }
 
+type awsRestjson1_deserializeOpAssociateGovernedTerms struct {
+}
+
+func (*awsRestjson1_deserializeOpAssociateGovernedTerms) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpAssociateGovernedTerms) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorAssociateGovernedTerms(response, &metadata)
+	}
+	output := &AssociateGovernedTermsOutput{}
+	out.Result = output
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorAssociateGovernedTerms(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("UnauthorizedException", errorCode):
+		return awsRestjson1_deserializeErrorUnauthorizedException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsRestjson1_deserializeOpCancelMetadataGenerationRun struct {
 }
 
@@ -1788,6 +1894,11 @@ func awsRestjson1_deserializeOpDocumentCreateAssetOutput(v **CreateAssetOutput, 
 				return err
 			}
 
+		case "governedGlossaryTerms":
+			if err := awsRestjson1_deserializeDocumentGovernedGlossaryTerms(&sv.GovernedGlossaryTerms, value); err != nil {
+				return err
+			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2377,6 +2488,11 @@ func awsRestjson1_deserializeOpDocumentCreateAssetRevisionOutput(v **CreateAsset
 
 		case "glossaryTerms":
 			if err := awsRestjson1_deserializeDocumentGlossaryTerms(&sv.GlossaryTerms, value); err != nil {
+				return err
+			}
+
+		case "governedGlossaryTerms":
+			if err := awsRestjson1_deserializeDocumentGovernedGlossaryTerms(&sv.GovernedGlossaryTerms, value); err != nil {
 				return err
 			}
 
@@ -5728,6 +5844,11 @@ func awsRestjson1_deserializeOpDocumentCreateGlossaryOutput(v **CreateGlossaryOu
 				sv.Status = types.GlossaryStatus(jtv)
 			}
 
+		case "usageRestrictions":
+			if err := awsRestjson1_deserializeDocumentGlossaryUsageRestrictions(&sv.UsageRestrictions, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -5961,6 +6082,11 @@ func awsRestjson1_deserializeOpDocumentCreateGlossaryTermOutput(v **CreateGlossa
 
 		case "termRelations":
 			if err := awsRestjson1_deserializeDocumentTermRelations(&sv.TermRelations, value); err != nil {
+				return err
+			}
+
+		case "usageRestrictions":
+			if err := awsRestjson1_deserializeDocumentGlossaryUsageRestrictions(&sv.UsageRestrictions, value); err != nil {
 				return err
 			}
 
@@ -11660,6 +11786,112 @@ func awsRestjson1_deserializeOpErrorDisassociateEnvironmentRole(response *smithy
 	}
 }
 
+type awsRestjson1_deserializeOpDisassociateGovernedTerms struct {
+}
+
+func (*awsRestjson1_deserializeOpDisassociateGovernedTerms) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpDisassociateGovernedTerms) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorDisassociateGovernedTerms(response, &metadata)
+	}
+	output := &DisassociateGovernedTermsOutput{}
+	out.Result = output
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorDisassociateGovernedTerms(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("UnauthorizedException", errorCode):
+		return awsRestjson1_deserializeErrorUnauthorizedException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsRestjson1_deserializeOpGetAccountPool struct {
 }
 
@@ -12162,6 +12394,11 @@ func awsRestjson1_deserializeOpDocumentGetAssetOutput(v **GetAssetOutput, value 
 
 		case "glossaryTerms":
 			if err := awsRestjson1_deserializeDocumentGlossaryTerms(&sv.GlossaryTerms, value); err != nil {
+				return err
+			}
+
+		case "governedGlossaryTerms":
+			if err := awsRestjson1_deserializeDocumentGovernedGlossaryTerms(&sv.GovernedGlossaryTerms, value); err != nil {
 				return err
 			}
 
@@ -16606,6 +16843,11 @@ func awsRestjson1_deserializeOpDocumentGetGlossaryOutput(v **GetGlossaryOutput, 
 				sv.UpdatedBy = ptr.String(jtv)
 			}
 
+		case "usageRestrictions":
+			if err := awsRestjson1_deserializeDocumentGlossaryUsageRestrictions(&sv.UsageRestrictions, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -16884,6 +17126,11 @@ func awsRestjson1_deserializeOpDocumentGetGlossaryTermOutput(v **GetGlossaryTerm
 					return fmt.Errorf("expected UpdatedBy to be of type string, got %T instead", value)
 				}
 				sv.UpdatedBy = ptr.String(jtv)
+			}
+
+		case "usageRestrictions":
+			if err := awsRestjson1_deserializeDocumentGlossaryUsageRestrictions(&sv.UsageRestrictions, value); err != nil {
+				return err
 			}
 
 		default:
@@ -32641,6 +32888,11 @@ func awsRestjson1_deserializeOpDocumentUpdateGlossaryOutput(v **UpdateGlossaryOu
 				sv.Status = types.GlossaryStatus(jtv)
 			}
 
+		case "usageRestrictions":
+			if err := awsRestjson1_deserializeDocumentGlossaryUsageRestrictions(&sv.UsageRestrictions, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -32871,6 +33123,11 @@ func awsRestjson1_deserializeOpDocumentUpdateGlossaryTermOutput(v **UpdateGlossa
 
 		case "termRelations":
 			if err := awsRestjson1_deserializeDocumentTermRelations(&sv.TermRelations, value); err != nil {
+				return err
+			}
+
+		case "usageRestrictions":
+			if err := awsRestjson1_deserializeDocumentGlossaryUsageRestrictions(&sv.UsageRestrictions, value); err != nil {
 				return err
 			}
 
@@ -36383,6 +36640,11 @@ func awsRestjson1_deserializeDocumentAssetItem(v **types.AssetItem, value interf
 				return err
 			}
 
+		case "governedGlossaryTerms":
+			if err := awsRestjson1_deserializeDocumentGovernedGlossaryTerms(&sv.GovernedGlossaryTerms, value); err != nil {
+				return err
+			}
+
 		case "identifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -36567,6 +36829,11 @@ func awsRestjson1_deserializeDocumentAssetListing(v **types.AssetListing, value 
 				return err
 			}
 
+		case "governedGlossaryTerms":
+			if err := awsRestjson1_deserializeDocumentDetailedGlossaryTerms(&sv.GovernedGlossaryTerms, value); err != nil {
+				return err
+			}
+
 		case "latestTimeSeriesDataPointForms":
 			if err := awsRestjson1_deserializeDocumentTimeSeriesDataPointSummaryFormOutputList(&sv.LatestTimeSeriesDataPointForms, value); err != nil {
 				return err
@@ -36720,6 +36987,11 @@ func awsRestjson1_deserializeDocumentAssetListingItem(v **types.AssetListingItem
 
 		case "glossaryTerms":
 			if err := awsRestjson1_deserializeDocumentDetailedGlossaryTerms(&sv.GlossaryTerms, value); err != nil {
+				return err
+			}
+
+		case "governedGlossaryTerms":
+			if err := awsRestjson1_deserializeDocumentDetailedGlossaryTerms(&sv.GovernedGlossaryTerms, value); err != nil {
 				return err
 			}
 
@@ -43327,6 +43599,11 @@ func awsRestjson1_deserializeDocumentGlossaryItem(v **types.GlossaryItem, value 
 				sv.UpdatedBy = ptr.String(jtv)
 			}
 
+		case "usageRestrictions":
+			if err := awsRestjson1_deserializeDocumentGlossaryUsageRestrictions(&sv.UsageRestrictions, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -43517,6 +43794,11 @@ func awsRestjson1_deserializeDocumentGlossaryTermItem(v **types.GlossaryTermItem
 				sv.UpdatedBy = ptr.String(jtv)
 			}
 
+		case "usageRestrictions":
+			if err := awsRestjson1_deserializeDocumentGlossaryUsageRestrictions(&sv.UsageRestrictions, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -43590,6 +43872,42 @@ func awsRestjson1_deserializeDocumentGlossaryTerms(v *[]string, value interface{
 				return fmt.Errorf("expected GlossaryTermId to be of type string, got %T instead", value)
 			}
 			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGlossaryUsageRestrictions(v *[]types.GlossaryUsageRestriction, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.GlossaryUsageRestriction
+	if *v == nil {
+		cv = []types.GlossaryUsageRestriction{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.GlossaryUsageRestriction
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected GlossaryUsageRestriction to be of type string, got %T instead", value)
+			}
+			col = types.GlossaryUsageRestriction(jtv)
 		}
 		cv = append(cv, col)
 
@@ -44014,6 +44332,42 @@ func awsRestjson1_deserializeDocumentGlueSelfGrantStatusOutput(v **types.GlueSel
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGovernedGlossaryTerms(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected GlossaryTermId to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

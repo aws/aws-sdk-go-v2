@@ -385,7 +385,7 @@ func (r *resolver) ResolveEndpoint(
 				}
 			}
 			if _UseFIPS == true {
-				if true == _PartitionResult.SupportsFIPS {
+				if _PartitionResult.SupportsFIPS == true {
 					if _Region == "us-gov-east-1" {
 						uriString := "https://events.us-gov-east-1.amazonaws.com"
 
