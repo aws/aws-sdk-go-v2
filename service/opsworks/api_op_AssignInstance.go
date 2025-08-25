@@ -24,6 +24,8 @@ import (
 // policy that explicitly grants permissions. For more information on user
 // permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) AssignInstance(ctx context.Context, params *AssignInstanceInput, optFns ...func(*Options)) (*AssignInstanceOutput, error) {
 	if params == nil {
@@ -45,12 +47,16 @@ type AssignInstanceInput struct {
 	// The instance ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceId *string
 
 	// The layer ID, which must correspond to a custom layer. You cannot assign a
 	// registered instance to a built-in layer.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LayerIds []string
 
 	noSmithyDocumentSerde

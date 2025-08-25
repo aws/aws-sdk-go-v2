@@ -18,6 +18,8 @@ import (
 // permissions level for the stack, or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Resource Management]: https://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) RegisterVolume(ctx context.Context, params *RegisterVolumeInput, optFns ...func(*Options)) (*RegisterVolumeOutput, error) {
@@ -40,9 +42,13 @@ type RegisterVolumeInput struct {
 	// The stack ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	// The Amazon EBS volume ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Ec2VolumeId *string
 
 	noSmithyDocumentSerde
@@ -52,6 +58,8 @@ type RegisterVolumeInput struct {
 type RegisterVolumeOutput struct {
 
 	// The volume ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VolumeId *string
 
 	// Metadata pertaining to the operation's result.

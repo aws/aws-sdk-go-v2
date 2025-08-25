@@ -18,6 +18,8 @@ import (
 // policy that explicitly grants permissions. For more information about user
 // permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 // [Clone a Stack]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-cloning.html
 func (c *Client) CloneStack(ctx context.Context, params *CloneStackInput, optFns ...func(*Options)) (*CloneStackOutput, error) {
@@ -51,11 +53,15 @@ type CloneStackInput struct {
 	// [Using Identifiers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServiceRoleArn *string
 
 	// The source stack ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SourceStackId *string
 
 	// The default OpsWorks Stacks agent version. You have the following options:
@@ -76,28 +82,40 @@ type CloneStackInput struct {
 	//
 	// You can also specify an agent version when you create or update an instance,
 	// which overrides the stack's default setting.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AgentVersion *string
 
 	// A list of stack attributes and values as key/value pairs to be added to the
 	// cloned stack.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Attributes map[string]string
 
 	// A ChefConfiguration object that specifies whether to enable Berkshelf and the
 	// Berkshelf version on Chef 11.10 stacks. For more information, see [Create a New Stack].
 	//
 	// [Create a New Stack]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChefConfiguration *types.ChefConfiguration
 
 	// A list of source stack app IDs to be included in the cloned stack.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CloneAppIds []string
 
 	// Whether to clone the source stack's permissions.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClonePermissions *bool
 
 	// The configuration manager. When you clone a stack we recommend that you use the
 	// configuration manager to specify the Chef version: 12, 11.10, or 11.4 for Linux
 	// stacks, or 12.2 for Windows stacks. The default value for Linux stacks is
 	// currently 12.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ConfigurationManager *types.StackConfigurationManager
 
 	// Contains the information required to retrieve an app or cookbook from a
@@ -105,6 +123,8 @@ type CloneStackInput struct {
 	//
 	// [Cookbooks and Recipes]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html
 	// [Adding Apps]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CustomCookbooksSource *types.Source
 
 	// A string that contains user-defined, custom JSON. It is used to override the
@@ -116,6 +136,8 @@ type CloneStackInput struct {
 	// For more information about custom JSON, see [Use Custom JSON to Modify the Stack Configuration Attributes]
 	//
 	// [Use Custom JSON to Modify the Stack Configuration Attributes]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CustomJson *string
 
 	// The cloned stack's default Availability Zone, which must be in the specified
@@ -124,12 +146,16 @@ type CloneStackInput struct {
 	// the VpcId parameter description.
 	//
 	// [Regions and Endpoints]: https://docs.aws.amazon.com/general/latest/gr/rande.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DefaultAvailabilityZone *string
 
 	// The Amazon Resource Name (ARN) of an IAM profile that is the default profile
 	// for all of the stack's EC2 instances. For more information about IAM ARNs, see [Using Identifiers].
 	//
 	// [Using Identifiers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DefaultInstanceProfileArn *string
 
 	// The stack's operating system, which must be set to one of the following.
@@ -163,6 +189,8 @@ type CloneStackInput struct {
 	//
 	// [Using Custom AMIs]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
 	// [OpsWorks Stacks Operating Systems]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DefaultOs *string
 
 	// The default root device type. This value is used by default for all instances
@@ -170,6 +198,8 @@ type CloneStackInput struct {
 	// more information, see [Storage for the Root Device].
 	//
 	// [Storage for the Root Device]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DefaultRootDeviceType types.RootDeviceType
 
 	// A default Amazon EC2 key pair name. The default value is none. If you specify a
@@ -181,6 +211,8 @@ type CloneStackInput struct {
 	// [Using SSH to Communicate with an Instance]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-ssh.html
 	// [Managing SSH Access]: https://docs.aws.amazon.com/opsworks/latest/userguide/security-ssh-access.html
 	// [create an instance]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-add.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DefaultSshKeyName *string
 
 	// The stack's default VPC subnet ID. This parameter is required if you specify a
@@ -189,6 +221,8 @@ type CloneStackInput struct {
 	// value for DefaultAvailabilityZone , the subnet must be in that zone. For
 	// information on default values and when this parameter is required, see the VpcId
 	// parameter description.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DefaultSubnetId *string
 
 	// The stack's host name theme, with spaces are replaced by underscores. The theme
@@ -220,18 +254,26 @@ type CloneStackInput struct {
 	//
 	// To obtain a generated host name, call GetHostNameSuggestion , which returns a
 	// host name based on the current theme.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	HostnameTheme *string
 
 	// The cloned stack name. Stack names can be a maximum of 64 characters.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The cloned stack Amazon Web Services Region, such as ap-northeast-2 . For more
 	// information about Amazon Web Services Regions, see [Regions and Endpoints].
 	//
 	// [Regions and Endpoints]: https://docs.aws.amazon.com/general/latest/gr/rande.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Region *string
 
 	// Whether to use custom cookbooks.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UseCustomCookbooks *bool
 
 	// Whether to associate the OpsWorks Stacks built-in security groups with the
@@ -256,6 +298,8 @@ type CloneStackInput struct {
 	// For more information, see [Create a New Stack].
 	//
 	// [Create a New Stack]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UseOpsworksSecurityGroups *bool
 
 	// The ID of the VPC that the cloned stack is to be launched into. It must be in
@@ -284,6 +328,8 @@ type CloneStackInput struct {
 	//
 	// [Supported Platforms]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
 	// [Running a Stack in a VPC]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-vpc.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VpcId *string
 
 	noSmithyDocumentSerde
@@ -293,6 +339,8 @@ type CloneStackInput struct {
 type CloneStackOutput struct {
 
 	// The cloned stack ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	// Metadata pertaining to the operation's result.

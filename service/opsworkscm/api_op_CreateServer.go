@@ -43,6 +43,8 @@ import (
 // To specify your own domain for a server, and provide your own self-signed or
 // CA-signed certificate and private key, specify values for CustomDomain ,
 // CustomCertificate , and CustomPrivateKey .
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateServer(ctx context.Context, params *CreateServerInput, optFns ...func(*Options)) (*CreateServerOutput, error) {
 	if params == nil {
 		params = &CreateServerInput{}
@@ -64,17 +66,23 @@ type CreateServerInput struct {
 	// and Puppet .
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Engine *string
 
 	//  The ARN of the instance profile that your Amazon EC2 instances use. The
 	// OpsWorks console typically creates the instance profile for you
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceProfileArn *string
 
 	//  The Amazon EC2 instance type to use. For example, m5.large .
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceType *string
 
 	//  The name of the server. The server name must be unique within your Amazon Web
@@ -83,25 +91,35 @@ type CreateServerInput struct {
 	// characters.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerName *string
 
 	//  The service role that the OpsWorks CM service backend uses to work with your
 	// account.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServiceRoleArn *string
 
 	//  Associate a public IP address with a server that you are launching. Valid
 	// values are true or false . The default value is true .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AssociatePublicIpAddress *bool
 
 	//  If you specify this field, OpsWorks CM creates the server by using the backup
 	// represented by BackupId.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BackupId *string
 
 	//  The number of automated backups that you want to keep. Whenever a new backup
 	// is created, OpsWorks CM deletes the oldest backups if this number is exceeded.
 	// The default value is 1 .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BackupRetentionCount *int32
 
 	// A PEM-formatted HTTPS certificate. The value can be be a single, self-signed
@@ -123,6 +141,8 @@ type CreateServerInput struct {
 	//   present, must match the value of CustomDomain .
 	//
 	//   - The certificate must match the value of CustomPrivateKey .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CustomCertificate *string
 
 	// An optional public endpoint of a server, such as https://aws.my-company.com . To
@@ -132,16 +152,22 @@ type CreateServerInput struct {
 	// the server by using the generated Endpoint value if the server is using a
 	// custom domain. If you specify a custom domain, you must also specify values for
 	// CustomCertificate and CustomPrivateKey .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CustomDomain *string
 
 	// A private key in PEM format for connecting to the server by using HTTPS. The
 	// private key must not be encrypted; it cannot be protected by a password or
 	// passphrase. If you specify a custom private key, you must also specify values
 	// for CustomDomain and CustomCertificate .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CustomPrivateKey *string
 
 	//  Enable or disable scheduled backups. Valid values are true or false . The
 	// default value is true .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DisableAutomatedBackup *bool
 
 	// Optional engine attributes on a specified server.
@@ -172,20 +198,28 @@ type CreateServerInput struct {
 	//
 	//   - PUPPET_R10K_PRIVATE_KEY : If you are using a private Git repository, add
 	//   PUPPET_R10K_PRIVATE_KEY to specify a PEM-encoded private SSH key.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EngineAttributes []types.EngineAttribute
 
 	//  The engine model of the server. Valid values in this release include Monolithic
 	// for Puppet and Single for Chef.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EngineModel *string
 
 	//  The major release version of the engine that you want to use. For a Chef
 	// server, the valid value for EngineVersion is currently 2 . For a Puppet server,
 	// valid values are 2019 or 2017 .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EngineVersion *string
 
 	//  The Amazon EC2 key pair to set for the instance. This parameter is optional;
 	// if desired, you may specify this parameter to connect to your instances by using
 	// SSH.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KeyPair *string
 
 	//  The start time for a one-hour period during which OpsWorks CM backs up
@@ -203,6 +237,8 @@ type CreateServerInput struct {
 	//
 	// Example: Mon:08:00 , which represents a start time of every Monday at 08:00 UTC.
 	// (8:00 a.m.)
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PreferredBackupWindow *string
 
 	//  The start time for a one-hour period each week during which OpsWorks CM
@@ -214,6 +250,8 @@ type CreateServerInput struct {
 	//
 	// Example: Mon:08:00 , which represents a start time of every Monday at 08:00 UTC.
 	// (8:00 a.m.)
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PreferredMaintenanceWindow *string
 
 	//  A list of security group IDs to attach to the Amazon EC2 instance. If you add
@@ -222,6 +260,8 @@ type CreateServerInput struct {
 	//
 	// If you do not specify this parameter, OpsWorks CM creates one new security
 	// group that uses TCP ports 22 and 443, open to 0.0.0.0/0 (everyone).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SecurityGroupIds []string
 
 	//  The IDs of subnets in which to launch the server EC2 instance.
@@ -237,6 +277,8 @@ type CreateServerInput struct {
 	// For more information about supported Amazon EC2 platforms, see [Supported Platforms].
 	//
 	// [Supported Platforms]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SubnetIds []string
 
 	// A map that contains tag keys and tag values to attach to an OpsWorks for Chef
@@ -255,6 +297,8 @@ type CreateServerInput struct {
 	//   - Leading and trailing spaces are trimmed from both the key and value.
 	//
 	//   - A maximum of 50 user-applied tags is allowed for any OpsWorks CM server.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -263,6 +307,8 @@ type CreateServerInput struct {
 type CreateServerOutput struct {
 
 	// The server that is created by the request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Server *types.Server
 
 	// Metadata pertaining to the operation's result.

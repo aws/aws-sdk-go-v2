@@ -17,6 +17,8 @@ import (
 // permissions level for the stack, or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Adding an Instance to a Layer]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-add.html
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) CreateInstance(ctx context.Context, params *CreateInstanceInput, optFns ...func(*Options)) (*CreateInstanceOutput, error) {
@@ -45,16 +47,22 @@ type CreateInstanceInput struct {
 	// [Instance Families and Types]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceType *string
 
 	// An array that contains the instance's layer IDs.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LayerIds []string
 
 	// The stack ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	// The default OpsWorks Stacks agent version. You have the following options:
@@ -70,6 +78,8 @@ type CreateInstanceInput struct {
 	// complete version number, not the abbreviated number shown on the console. For a
 	// list of available agent version numbers, call DescribeAgentVersions. AgentVersion cannot be set to
 	// Chef 12.2.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AgentVersion *string
 
 	// A custom AMI ID to be used to create the instance. The AMI should be based on
@@ -78,6 +88,8 @@ type CreateInstanceInput struct {
 	// If you specify a custom AMI, you must set Os to Custom .
 	//
 	// [Using Custom AMIs]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AmiId *string
 
 	// The instance architecture. The default option is x86_64 . Instance types do not
@@ -85,15 +97,21 @@ type CreateInstanceInput struct {
 	// supported by the different instance types, see [Instance Families and Types].
 	//
 	// [Instance Families and Types]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Architecture types.Architecture
 
 	// For load-based or time-based instances, the type. Windows stacks can use only
 	// time-based instances.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AutoScalingType types.AutoScalingType
 
 	// The instance Availability Zone. For more information, see [Regions and Endpoints].
 	//
 	// [Regions and Endpoints]: https://docs.aws.amazon.com/general/latest/gr/rande.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AvailabilityZone *string
 
 	// An array of BlockDeviceMapping objects that specify the instance's block
@@ -101,9 +119,13 @@ type CreateInstanceInput struct {
 	// supported for custom AMIs.
 	//
 	// [Block Device Mapping]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BlockDeviceMappings []types.BlockDeviceMapping
 
 	// Whether to create an Amazon EBS-optimized instance.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EbsOptimized *bool
 
 	// The instance host name. The following are character limits for instance host
@@ -112,6 +134,8 @@ type CreateInstanceInput struct {
 	//   - Linux-based instances: 63 characters
 	//
 	//   - Windows-based instances: 15 characters
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Hostname *string
 
 	// Whether to install operating system and package updates when the instance
@@ -122,6 +146,8 @@ type CreateInstanceInput struct {
 	//
 	// We strongly recommend using the default value of true to ensure that your
 	// instances have the latest security updates.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstallUpdatesOnBoot *bool
 
 	// The instance's operating system, which must be set to one of the following.
@@ -156,19 +182,27 @@ type CreateInstanceInput struct {
 	//
 	// [Using Custom AMIs]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
 	// [OpsWorks Stacks Operating Systems]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Os *string
 
 	// The instance root device type. For more information, see [Storage for the Root Device].
 	//
 	// [Storage for the Root Device]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RootDeviceType types.RootDeviceType
 
 	// The instance's Amazon EC2 key-pair name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SshKeyName *string
 
 	// The ID of the instance's subnet. If the stack is running in a VPC, you can use
 	// this parameter to override the stack's default subnet ID value and direct
 	// OpsWorks Stacks to launch the instance in a different subnet.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SubnetId *string
 
 	// The instance's tenancy option. The default option is no tenancy, or if the
@@ -183,9 +217,13 @@ type CreateInstanceInput struct {
 	// [Dedicated Instances]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/dedicated-instance.html
 	// [Amazon EC2 Dedicated Hosts]: http://aws.amazon.com/ec2/dedicated-hosts/
 	// [Amazon EC2 Dedicated Instances]: http://aws.amazon.com/ec2/purchasing-options/dedicated-instances/
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tenancy *string
 
 	// The instance's virtualization type, paravirtual or hvm .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VirtualizationType *string
 
 	noSmithyDocumentSerde
@@ -195,6 +233,8 @@ type CreateInstanceInput struct {
 type CreateInstanceOutput struct {
 
 	// The instance ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceId *string
 
 	// Metadata pertaining to the operation's result.

@@ -18,6 +18,8 @@ import (
 // or Manage permissions level for the stack, or an attached policy that explicitly
 // grants permissions. For more information about user permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) DescribeStackSummary(ctx context.Context, params *DescribeStackSummaryInput, optFns ...func(*Options)) (*DescribeStackSummaryOutput, error) {
 	if params == nil {
@@ -39,6 +41,8 @@ type DescribeStackSummaryInput struct {
 	// The stack ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	noSmithyDocumentSerde
@@ -48,6 +52,8 @@ type DescribeStackSummaryInput struct {
 type DescribeStackSummaryOutput struct {
 
 	// A StackSummary object that contains the results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackSummary *types.StackSummary
 
 	// Metadata pertaining to the operation's result.

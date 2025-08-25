@@ -19,6 +19,8 @@ import (
 //
 // This call accepts only one resource-identifying parameter.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) DescribeRdsDbInstances(ctx context.Context, params *DescribeRdsDbInstancesInput, optFns ...func(*Options)) (*DescribeRdsDbInstancesOutput, error) {
 	if params == nil {
@@ -41,9 +43,13 @@ type DescribeRdsDbInstancesInput struct {
 	// returns descriptions of all registered Amazon RDS instances.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	// An array containing the ARNs of the instances to be described.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RdsDbInstanceArns []string
 
 	noSmithyDocumentSerde
@@ -53,6 +59,8 @@ type DescribeRdsDbInstancesInput struct {
 type DescribeRdsDbInstancesOutput struct {
 
 	// An a array of RdsDbInstance objects that describe the instances.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RdsDbInstances []types.RdsDbInstance
 
 	// Metadata pertaining to the operation's result.

@@ -18,6 +18,8 @@ import (
 // permissions level for the stack, or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Resource Management]: https://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) AssociateElasticIp(ctx context.Context, params *AssociateElasticIpInput, optFns ...func(*Options)) (*AssociateElasticIpOutput, error) {
@@ -40,9 +42,13 @@ type AssociateElasticIpInput struct {
 	// The Elastic IP address.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ElasticIp *string
 
 	// The instance ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceId *string
 
 	noSmithyDocumentSerde

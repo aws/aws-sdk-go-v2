@@ -22,6 +22,8 @@ import (
 // An InvalidStateException is thrown when a server deletion is already in
 // progress. A ResourceNotFoundException is thrown when the server does not exist.
 // A ValidationException is raised when parameters of the request are not valid.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteServer(ctx context.Context, params *DeleteServerInput, optFns ...func(*Options)) (*DeleteServerOutput, error) {
 	if params == nil {
 		params = &DeleteServerInput{}
@@ -42,6 +44,8 @@ type DeleteServerInput struct {
 	// The ID of the server to delete.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerName *string
 
 	noSmithyDocumentSerde

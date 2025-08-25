@@ -10,9 +10,13 @@ import (
 type AgentVersion struct {
 
 	// The configuration manager.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ConfigurationManager *StackConfigurationManager
 
 	// The agent version.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Version *string
 
 	noSmithyDocumentSerde
@@ -22,28 +26,44 @@ type AgentVersion struct {
 type App struct {
 
 	// The app ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppId *string
 
 	// A Source object that describes the app repository.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppSource *Source
 
 	// The stack attributes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Attributes map[string]string
 
 	// When the app was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *string
 
 	// The app's data sources.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DataSources []DataSource
 
 	// A description of the app.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The app vhost settings with multiple domains separated by commas. For example:
 	// 'www.example.com, example.com'
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Domains []string
 
 	// Whether to enable SSL for the app.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnableSsl *bool
 
 	// An array of EnvironmentVariable objects that specify environment variables to
@@ -58,21 +78,33 @@ type App struct {
 	// message.
 	//
 	// [Environment Variables]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Environment []EnvironmentVariable
 
 	// The app name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The app's short name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Shortname *string
 
 	// An SslConfiguration object with the SSL configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SslConfiguration *SslConfiguration
 
 	// The app stack ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	// The app type.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type AppType
 
 	noSmithyDocumentSerde
@@ -93,10 +125,14 @@ type AutoScalingThresholds struct {
 	// more information, see [Allowing OpsWorks Stacks to Act on Your Behalf].
 	//
 	// [Allowing OpsWorks Stacks to Act on Your Behalf]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-servicerole.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Alarms []string
 
 	// The CPU utilization threshold, as a percent of the available CPU. A value of -1
 	// disables the threshold.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CpuThreshold *float64
 
 	// The amount of time (in minutes) after a scaling event occurs that OpsWorks
@@ -107,23 +143,33 @@ type AutoScalingThresholds struct {
 	// operation, which typically takes several minutes. IgnoreMetricsTime allows you
 	// to direct OpsWorks Stacks to suppress scaling events long enough to get the new
 	// instances online.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IgnoreMetricsTime *int32
 
 	// The number of instances to add or remove when the load exceeds a threshold.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceCount *int32
 
 	// The load threshold. A value of -1 disables the threshold. For more information
 	// about how load is computed, see [Load (computing)].
 	//
 	// [Load (computing)]: http://en.wikipedia.org/wiki/Load_%28computing%29
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LoadThreshold *float64
 
 	// The memory utilization threshold, as a percent of the available memory. A value
 	// of -1 disables the threshold.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MemoryThreshold *float64
 
 	// The amount of time, in minutes, that the load must exceed a threshold before
 	// more instances are added or removed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ThresholdsWaitTime *int32
 
 	noSmithyDocumentSerde
@@ -138,18 +184,26 @@ type BlockDeviceMapping struct {
 	// The device name that is exposed to the instance, such as /dev/sdh . For the root
 	// device, you can use the explicit device name or you can set this parameter to
 	// ROOT_DEVICE and OpsWorks Stacks will provide the correct device name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeviceName *string
 
 	// An EBSBlockDevice that defines how to configure an Amazon EBS volume when the
 	// instance is launched.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Ebs *EbsBlockDevice
 
 	// Suppresses the specified device included in the AMI's block device mapping.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NoDevice *string
 
 	// The virtual device name. For more information, see [BlockDeviceMapping].
 	//
 	// [BlockDeviceMapping]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_BlockDeviceMapping.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VirtualName *string
 
 	noSmithyDocumentSerde
@@ -159,9 +213,13 @@ type BlockDeviceMapping struct {
 type ChefConfiguration struct {
 
 	// The Berkshelf version.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BerkshelfVersion *string
 
 	// Whether to enable Berkshelf.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ManageBerkshelf *bool
 
 	noSmithyDocumentSerde
@@ -171,9 +229,13 @@ type ChefConfiguration struct {
 type CloudWatchLogsConfiguration struct {
 
 	// Whether CloudWatch Logs is enabled for a layer.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Enabled *bool
 
 	// A list of configuration options for CloudWatch Logs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LogStreams []CloudWatchLogsLogStream
 
 	noSmithyDocumentSerde
@@ -187,26 +249,36 @@ type CloudWatchLogsLogStream struct {
 
 	// Specifies the max number of log events in a batch, up to 10000. The default
 	// value is 1000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BatchCount *int32
 
 	// Specifies the maximum size of log events in a batch, in bytes, up to 1048576
 	// bytes. The default value is 32768 bytes. This size is calculated as the sum of
 	// all event messages in UTF-8, plus 26 bytes for each log event.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BatchSize *int32
 
 	// Specifies the time duration for the batching of log events. The minimum value
 	// is 5000ms and default value is 5000ms.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BufferDuration *int32
 
 	// Specifies how the time stamp is extracted from logs. For more information, see
 	// the [CloudWatch Logs Agent Reference].
 	//
 	// [CloudWatch Logs Agent Reference]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AgentReference.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatetimeFormat *string
 
 	// Specifies the encoding of the log file so that the file can be read correctly.
 	// The default is utf_8 . Encodings supported by Python codecs.decode() can be
 	// used here.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Encoding CloudWatchLogsEncoding
 
 	// Specifies log files that you want to push to CloudWatch Logs.
@@ -222,29 +294,41 @@ type CloudWatchLogsLogStream struct {
 	// file type is stored in a different log group.
 	//
 	// Zipped files are not supported.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	File *string
 
 	// Specifies the range of lines for identifying a file. The valid values are one
 	// number, or two dash-delimited numbers, such as '1', '2-5'. The default value is
 	// '1', meaning the first line is used to calculate the fingerprint. Fingerprint
 	// lines are not sent to CloudWatch Logs unless all specified lines are available.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FileFingerprintLines *string
 
 	// Specifies where to start to read data (start_of_file or end_of_file). The
 	// default is start_of_file. This setting is only used if there is no state
 	// persisted for that log stream.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InitialPosition CloudWatchLogsInitialPosition
 
 	// Specifies the destination log group. A log group is created automatically if it
 	// doesn't already exist. Log group names can be between 1 and 512 characters long.
 	// Allowed characters include a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen), '/'
 	// (forward slash), and '.' (period).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LogGroupName *string
 
 	// Specifies the pattern for identifying the start of a log message.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MultiLineStartPattern *string
 
 	// Specifies the time zone of log event time stamps.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TimeZone CloudWatchLogsTimeZone
 
 	noSmithyDocumentSerde
@@ -254,27 +338,43 @@ type CloudWatchLogsLogStream struct {
 type Command struct {
 
 	// Date and time when the command was acknowledged.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AcknowledgedAt *string
 
 	// The command ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CommandId *string
 
 	// Date when the command completed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CompletedAt *string
 
 	// Date and time when the command was run.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *string
 
 	// The command deployment ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeploymentId *string
 
 	// The command exit code.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ExitCode *int32
 
 	// The ID of the instance where the command was executed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceId *string
 
 	// The URL of the command log.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LogUrl *string
 
 	// The command status:
@@ -286,6 +386,8 @@ type Command struct {
 	//   - skipped
 	//
 	//   - pending
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status *string
 
 	// The command type:
@@ -313,6 +415,8 @@ type Command struct {
 	//   - update_custom_cookbooks
 	//
 	//   - update_dependencies
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type *string
 
 	noSmithyDocumentSerde
@@ -322,13 +426,19 @@ type Command struct {
 type DataSource struct {
 
 	// The data source's ARN.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The database name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatabaseName *string
 
 	// The data source's type, AutoSelectOpsworksMysqlInstance , OpsworksMysqlInstance
 	// , RdsDbInstance , or None .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type *string
 
 	noSmithyDocumentSerde
@@ -338,18 +448,28 @@ type DataSource struct {
 type Deployment struct {
 
 	// The app ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppId *string
 
 	// Used to specify a stack or deployment command.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Command *DeploymentCommand
 
 	// A user-defined comment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Comment *string
 
 	// Date when the deployment completed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CompletedAt *string
 
 	// Date when the deployment was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *string
 
 	// A string that contains user-defined custom JSON. It can be used to override the
@@ -361,21 +481,33 @@ type Deployment struct {
 	// For more information on custom JSON, see [Use Custom JSON to Modify the Stack Configuration Attributes].
 	//
 	// [Use Custom JSON to Modify the Stack Configuration Attributes]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CustomJson *string
 
 	// The deployment ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeploymentId *string
 
 	// The deployment duration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Duration *int32
 
 	// The user's IAM ARN.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IamUserArn *string
 
 	// The IDs of the target instances.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceIds []string
 
 	// The stack ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	// The deployment status:
@@ -385,6 +517,8 @@ type Deployment struct {
 	//   - successful
 	//
 	//   - failed
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status *string
 
 	noSmithyDocumentSerde
@@ -431,6 +565,8 @@ type DeploymentCommand struct {
 	//   - undeploy : Undeploy the app.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name DeploymentCommandName
 
 	// The arguments of those commands that take arguments. It should be set to a JSON
@@ -453,6 +589,8 @@ type DeploymentCommand struct {
 	// following.
 	//
 	//     { "upgrade_os_to":["Amazon Linux 2018.03"], "allow_reboot":["true"] }
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Args map[string][]string
 
 	noSmithyDocumentSerde
@@ -465,20 +603,28 @@ type DeploymentCommand struct {
 type EbsBlockDevice struct {
 
 	// Whether the volume is deleted on instance termination.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeleteOnTermination *bool
 
 	// The number of I/O operations per second (IOPS) that the volume supports. For
 	// more information, see [EbsBlockDevice].
 	//
 	// [EbsBlockDevice]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Iops *int32
 
 	// The snapshot ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SnapshotId *string
 
 	// The volume size, in GiB. For more information, see [EbsBlockDevice].
 	//
 	// [EbsBlockDevice]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VolumeSize *int32
 
 	// The volume type. gp2 for General Purpose (SSD) volumes, io1 for Provisioned
@@ -489,6 +635,8 @@ type EbsBlockDevice struct {
 	// attribute. The maximum ratio of provisioned IOPS to requested volume size (in
 	// GiB) is 50:1. Amazon Web Services uses the default volume size (in GiB)
 	// specified in the AMI attributes to set IOPS to 50 x (volume size).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VolumeType VolumeType
 
 	noSmithyDocumentSerde
@@ -498,15 +646,23 @@ type EbsBlockDevice struct {
 type EcsCluster struct {
 
 	// The cluster's ARN.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EcsClusterArn *string
 
 	// The cluster name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EcsClusterName *string
 
 	// The time and date that the cluster was registered with the stack.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RegisteredAt *string
 
 	// The stack ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	noSmithyDocumentSerde
@@ -516,20 +672,30 @@ type EcsCluster struct {
 type ElasticIp struct {
 
 	// The domain.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Domain *string
 
 	// The ID of the instance that the address is attached to.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceId *string
 
 	// The IP address.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Ip *string
 
 	// The name, which can be a maximum of 32 characters.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The Amazon Web Services Region. For more information, see [Regions and Endpoints].
 	//
 	// [Regions and Endpoints]: https://docs.aws.amazon.com/general/latest/gr/rande.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Region *string
 
 	noSmithyDocumentSerde
@@ -539,31 +705,49 @@ type ElasticIp struct {
 type ElasticLoadBalancer struct {
 
 	// A list of Availability Zones.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AvailabilityZones []string
 
 	// The instance's public DNS name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DnsName *string
 
 	// A list of the EC2 instances for which the Elastic Load Balancing instance is
 	// managing traffic.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Ec2InstanceIds []string
 
 	// The Elastic Load Balancing instance name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ElasticLoadBalancerName *string
 
 	// The ID of the layer to which the instance is attached.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LayerId *string
 
 	// The instance's Amazon Web Services Region.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Region *string
 
 	// The ID of the stack with which the instance is associated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	// A list of subnet IDs, if the stack is running in a VPC.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SubnetIds []string
 
 	// The VPC ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VpcId *string
 
 	noSmithyDocumentSerde
@@ -578,6 +762,8 @@ type EnvironmentVariable struct {
 	// underscore.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Key *string
 
 	// (Optional) The environment variable's value, which can be left empty. If you
@@ -585,12 +771,16 @@ type EnvironmentVariable struct {
 	// printable.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Value *string
 
 	// (Optional) Whether the variable's value is returned by the DescribeApps action. To hide an
 	// environment variable's value, set Secure to true . DescribeApps returns
 	// *****FILTERED***** instead of the actual value. The default value for Secure is
 	// false .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Secure *bool
 
 	noSmithyDocumentSerde
@@ -601,49 +791,75 @@ type Instance struct {
 
 	// The agent version. This parameter is set to INHERIT if the instance inherits
 	// the default stack setting or to a a version number for a fixed agent version.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AgentVersion *string
 
 	// A custom AMI ID to be used to create the instance. For more information, see [Instances]
 	//
 	// [Instances]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AmiId *string
 
 	// The instance architecture: "i386" or "x86_64".
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Architecture Architecture
 
 	// The instance's Amazon Resource Number (ARN).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// For load-based or time-based instances, the type.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AutoScalingType AutoScalingType
 
 	// The instance Availability Zone. For more information, see [Regions and Endpoints].
 	//
 	// [Regions and Endpoints]: https://docs.aws.amazon.com/general/latest/gr/rande.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AvailabilityZone *string
 
 	// An array of BlockDeviceMapping objects that specify the instance's block device
 	// mappings.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BlockDeviceMappings []BlockDeviceMapping
 
 	// The time that the instance was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *string
 
 	// Whether this is an Amazon EBS-optimized instance.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EbsOptimized *bool
 
 	// The ID of the associated Amazon EC2 instance.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Ec2InstanceId *string
 
 	// For container instances, the Amazon ECS cluster's ARN.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EcsClusterArn *string
 
 	// For container instances, the instance's ARN.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EcsContainerInstanceArn *string
 
 	// The instance [Elastic IP address].
 	//
 	// [Elastic IP address]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ElasticIp *string
 
 	// The instance host name. The following are character limits for instance host
@@ -652,9 +868,13 @@ type Instance struct {
 	//   - Linux-based instances: 63 characters
 	//
 	//   - Windows-based instances: 15 characters
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Hostname *string
 
 	// For registered instances, the infrastructure class: ec2 or on-premises .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InfrastructureClass *string
 
 	// Whether to install operating system and package updates when the instance
@@ -664,74 +884,118 @@ type Instance struct {
 	//
 	// We strongly recommend using the default value of true to ensure that your
 	// instances have the latest security updates.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstallUpdatesOnBoot *bool
 
 	// The instance ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceId *string
 
 	// The ARN of the instance's IAM profile. For more information about IAM ARNs, see [Using Identifiers]
 	// .
 	//
 	// [Using Identifiers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceProfileArn *string
 
 	// The instance type, such as t2.micro .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceType *string
 
 	// The ID of the last service error. For more information, call DescribeServiceErrors.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastServiceErrorId *string
 
 	// An array containing the instance layer IDs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LayerIds []string
 
 	// The instance's operating system.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Os *string
 
 	// The instance's platform.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Platform *string
 
 	// The instance's private DNS name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PrivateDns *string
 
 	// The instance's private IP address.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PrivateIp *string
 
 	// The instance public DNS name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PublicDns *string
 
 	// The instance public IP address.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PublicIp *string
 
 	// For registered instances, who performed the registration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RegisteredBy *string
 
 	// The instance's reported OpsWorks Stacks agent version.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ReportedAgentVersion *string
 
 	// For registered instances, the reported operating system.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ReportedOs *ReportedOs
 
 	// The instance's root device type. For more information, see [Storage for the Root Device].
 	//
 	// [Storage for the Root Device]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RootDeviceType RootDeviceType
 
 	// The root device volume ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RootDeviceVolumeId *string
 
 	// An array containing the instance security group IDs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SecurityGroupIds []string
 
 	// The SSH key's Deep Security Agent (DSA) fingerprint.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SshHostDsaKeyFingerprint *string
 
 	// The SSH key's RSA fingerprint.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SshHostRsaKeyFingerprint *string
 
 	// The instance's Amazon EC2 key-pair name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SshKeyName *string
 
 	// The stack ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	// The instance status:
@@ -765,15 +1029,23 @@ type Instance struct {
 	//   - terminated
 	//
 	//   - terminating
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status *string
 
 	// The instance's subnet ID; applicable only if the stack is running in a VPC.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SubnetId *string
 
 	// The instance's tenancy option, such as dedicated or host .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tenancy *string
 
 	// The instance's virtualization type: paravirtual or hvm .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VirtualizationType VirtualizationType
 
 	noSmithyDocumentSerde
@@ -786,9 +1058,13 @@ type Instance struct {
 type InstanceIdentity struct {
 
 	// A JSON document that contains the metadata.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Document *string
 
 	// A signature that can be used to verify the document's accuracy and authenticity.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Signature *string
 
 	noSmithyDocumentSerde
@@ -798,63 +1074,103 @@ type InstanceIdentity struct {
 type InstancesCount struct {
 
 	// The number of instances in the Assigning state.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Assigning *int32
 
 	// The number of instances with booting status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Booting *int32
 
 	// The number of instances with connection_lost status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ConnectionLost *int32
 
 	// The number of instances in the Deregistering state.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Deregistering *int32
 
 	// The number of instances with online status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Online *int32
 
 	// The number of instances with pending status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Pending *int32
 
 	// The number of instances with rebooting status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Rebooting *int32
 
 	// The number of instances in the Registered state.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Registered *int32
 
 	// The number of instances in the Registering state.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Registering *int32
 
 	// The number of instances with requested status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Requested *int32
 
 	// The number of instances with running_setup status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RunningSetup *int32
 
 	// The number of instances with setup_failed status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SetupFailed *int32
 
 	// The number of instances with shutting_down status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ShuttingDown *int32
 
 	// The number of instances with start_failed status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StartFailed *int32
 
 	// The number of instances with stop_failed status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StopFailed *int32
 
 	// The number of instances with stopped status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Stopped *int32
 
 	// The number of instances with stopping status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Stopping *int32
 
 	// The number of instances with terminated status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Terminated *int32
 
 	// The number of instances with terminating status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Terminating *int32
 
 	// The number of instances in the Unassigning state.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Unassigning *int32
 
 	noSmithyDocumentSerde
@@ -864,6 +1180,8 @@ type InstancesCount struct {
 type Layer struct {
 
 	// The Amazon Resource Number (ARN) of a layer.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The layer attributes.
@@ -874,6 +1192,8 @@ type Layer struct {
 	//
 	// For an ECS Cluster layer, OpsWorks Stacks the EcsClusterArn attribute is set to
 	// the cluster's ARN.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Attributes map[string]string
 
 	// Whether to automatically assign an [Elastic IP address] to the layer's instances. For more
@@ -881,34 +1201,50 @@ type Layer struct {
 	//
 	// [How to Edit a Layer]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
 	// [Elastic IP address]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AutoAssignElasticIps *bool
 
 	// For stacks that are running in a VPC, whether to automatically assign a public
 	// IP address to the layer's instances. For more information, see [How to Edit a Layer].
 	//
 	// [How to Edit a Layer]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AutoAssignPublicIps *bool
 
 	// The Amazon CloudWatch Logs configuration settings for the layer.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CloudWatchLogsConfiguration *CloudWatchLogsConfiguration
 
 	// Date when the layer was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *string
 
 	// The ARN of the default IAM profile to be used for the layer's EC2 instances.
 	// For more information about IAM ARNs, see [Using Identifiers].
 	//
 	// [Using Identifiers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CustomInstanceProfileArn *string
 
 	// A JSON formatted string containing the layer's custom stack configuration and
 	// deployment attributes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CustomJson *string
 
 	// A LayerCustomRecipes object that specifies the layer's custom recipes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CustomRecipes *Recipes
 
 	// An array containing the layer's custom security group IDs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CustomSecurityGroupIds []string
 
 	// OpsWorks Stacks supports five lifecycle events: setup, configuration, deploy,
@@ -922,12 +1258,18 @@ type Layer struct {
 	// followed by two colons and the recipe name, which is the recipe's file name
 	// without the .rb extension. For example: phpapp2::dbsetup specifies the
 	// dbsetup.rb recipe in the repository's phpapp2 folder.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DefaultRecipes *Recipes
 
 	// An array containing the layer's security group names.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DefaultSecurityGroupNames []string
 
 	// Whether auto healing is disabled for the layer.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnableAutoHealing *bool
 
 	// Whether to install operating system and package updates when the instance
@@ -938,34 +1280,54 @@ type Layer struct {
 	//
 	// We strongly recommend using the default value of true , to ensure that your
 	// instances have the latest security updates.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstallUpdatesOnBoot *bool
 
 	// The layer ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LayerId *string
 
 	// A LifeCycleEventConfiguration object that specifies the Shutdown event
 	// configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LifecycleEventConfiguration *LifecycleEventConfiguration
 
 	// The layer name. Layer names can be a maximum of 32 characters.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// An array of Package objects that describe the layer's packages.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Packages []string
 
 	// The layer short name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Shortname *string
 
 	// The layer stack ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	// The layer type.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type LayerType
 
 	// Whether the layer uses Amazon EBS-optimized instances.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UseEbsOptimizedInstances *bool
 
 	// A VolumeConfigurations object that describes the layer's Amazon EBS volumes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VolumeConfigurations []VolumeConfiguration
 
 	noSmithyDocumentSerde
@@ -976,6 +1338,8 @@ type LifecycleEventConfiguration struct {
 
 	// A ShutdownEventConfiguration object that specifies the Shutdown event
 	// configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Shutdown *ShutdownEventConfiguration
 
 	noSmithyDocumentSerde
@@ -986,16 +1350,24 @@ type LoadBasedAutoScalingConfiguration struct {
 
 	// An AutoScalingThresholds object that describes the downscaling configuration,
 	// which defines how and when OpsWorks Stacks reduces the number of instances.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DownScaling *AutoScalingThresholds
 
 	// Whether load-based auto scaling is enabled for the layer.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Enable *bool
 
 	// The layer ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LayerId *string
 
 	// An AutoScalingThresholds object that describes the upscaling configuration,
 	// which defines how and when OpsWorks Stacks increases the number of instances.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UpScaling *AutoScalingThresholds
 
 	noSmithyDocumentSerde
@@ -1006,25 +1378,39 @@ type OperatingSystem struct {
 
 	// Supported configuration manager name and versions for an OpsWorks Stacks
 	// operating system.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ConfigurationManagers []OperatingSystemConfigurationManager
 
 	// The ID of a supported operating system, such as Amazon Linux 2 .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Id *string
 
 	// The name of the operating system, such as Amazon Linux 2 .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// A short name for the operating system manufacturer.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ReportedName *string
 
 	// The version of the operating system, including the release and edition, if
 	// applicable.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ReportedVersion *string
 
 	// Indicates that an operating system is not supported for new instances.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Supported *bool
 
 	// The type of a supported operating system, either Linux or Windows .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type *string
 
 	noSmithyDocumentSerde
@@ -1036,10 +1422,14 @@ type OperatingSystem struct {
 type OperatingSystemConfigurationManager struct {
 
 	// The name of the configuration manager, which is Chef.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The versions of the configuration manager that are supported by an operating
 	// system.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Version *string
 
 	noSmithyDocumentSerde
@@ -1049,15 +1439,21 @@ type OperatingSystemConfigurationManager struct {
 type Permission struct {
 
 	// Whether the user can use SSH.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AllowSsh *bool
 
 	// Whether the user can use sudo.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AllowSudo *bool
 
 	// The Amazon Resource Name (ARN) for an Identity and Access Management (IAM)
 	// role. For more information about IAM ARNs, see [Using Identifiers].
 	//
 	// [Using Identifiers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IamUserArn *string
 
 	// The user's permission level, which must be the following:
@@ -1075,9 +1471,13 @@ type Permission struct {
 	// For more information on the permissions associated with these levels, see [Managing User Permissions]
 	//
 	// [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Level *string
 
 	// A stack ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	noSmithyDocumentSerde
@@ -1089,44 +1489,70 @@ type RaidArray struct {
 	// The array's Availability Zone. For more information, see [Regions and Endpoints].
 	//
 	// [Regions and Endpoints]: https://docs.aws.amazon.com/general/latest/gr/rande.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AvailabilityZone *string
 
 	// When the RAID array was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *string
 
 	// The array's Linux device. For example /dev/mdadm0.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Device *string
 
 	// The instance ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceId *string
 
 	// For PIOPS volumes, the IOPS per disk.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Iops *int32
 
 	// The array's mount point.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MountPoint *string
 
 	// The array name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The number of disks in the array.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NumberOfDisks *int32
 
 	// The array ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RaidArrayId *string
 
 	// The [RAID level].
 	//
 	// [RAID level]: http://en.wikipedia.org/wiki/Standard_RAID_levels
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RaidLevel *int32
 
 	// The array's size.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Size *int32
 
 	// The stack ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	// The volume type, standard or PIOPS.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VolumeType *string
 
 	noSmithyDocumentSerde
@@ -1136,32 +1562,50 @@ type RaidArray struct {
 type RdsDbInstance struct {
 
 	// The instance's address.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Address *string
 
 	// The database instance identifier.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DbInstanceIdentifier *string
 
 	// OpsWorks Stacks returns *****FILTERED***** instead of the actual value.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DbPassword *string
 
 	// The master user name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DbUser *string
 
 	// The instance's database engine.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Engine *string
 
 	// Set to true if OpsWorks Stacks is unable to discover the Amazon RDS instance.
 	// OpsWorks Stacks attempts to discover the instance only once. If this value is
 	// set to true , you must deregister the instance, and then register it again.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MissingOnRds *bool
 
 	// The instance's ARN.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RdsDbInstanceArn *string
 
 	// The instance's Amazon Web Services Region.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Region *string
 
 	// The ID of the stack with which the instance is registered.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	noSmithyDocumentSerde
@@ -1181,18 +1625,28 @@ type RdsDbInstance struct {
 type Recipes struct {
 
 	// An array of custom recipe names to be run following a configure event.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Configure []string
 
 	// An array of custom recipe names to be run following a deploy event.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Deploy []string
 
 	// An array of custom recipe names to be run following a setup event.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Setup []string
 
 	// An array of custom recipe names to be run following a shutdown event.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Shutdown []string
 
 	// An array of custom recipe names to be run following a undeploy event.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Undeploy []string
 
 	noSmithyDocumentSerde
@@ -1202,12 +1656,18 @@ type Recipes struct {
 type ReportedOs struct {
 
 	// The operating system family.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Family *string
 
 	// The operating system name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The operating system version.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Version *string
 
 	noSmithyDocumentSerde
@@ -1217,15 +1677,23 @@ type ReportedOs struct {
 type SelfUserProfile struct {
 
 	// The user's IAM ARN.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IamUserArn *string
 
 	// The user's name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The user's SSH public key.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SshPublicKey *string
 
 	// The user's SSH user name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SshUsername *string
 
 	noSmithyDocumentSerde
@@ -1235,21 +1703,33 @@ type SelfUserProfile struct {
 type ServiceError struct {
 
 	// When the error occurred.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *string
 
 	// The instance ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceId *string
 
 	// A message that describes the error.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Message *string
 
 	// The error ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServiceErrorId *string
 
 	// The stack ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	// The error type.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type *string
 
 	noSmithyDocumentSerde
@@ -1262,10 +1742,14 @@ type ShutdownEventConfiguration struct {
 	// information, see [Connection Draining]
 	//
 	// [Connection Draining]: https://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/TerminologyandKeyConcepts.html#conn-drain
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DelayUntilElbConnectionsDrained *bool
 
 	// The time, in seconds, that OpsWorks Stacks waits after triggering a Shutdown
 	// event before shutting down an instance.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ExecutionTimeout *int32
 
 	noSmithyDocumentSerde
@@ -1290,25 +1774,35 @@ type Source struct {
 	// value.
 	//
 	// [https://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html]: https://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Password *string
 
 	// The application's version. OpsWorks Stacks enables you to easily deploy new
 	// versions of an application. One of the simplest approaches is to have branches
 	// or revisions in your repository that represent different versions that can
 	// potentially be deployed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Revision *string
 
 	// In requests, the repository's SSH key.
 	//
 	// In responses, OpsWorks Stacks returns *****FILTERED***** instead of the actual
 	// value.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SshKey *string
 
 	// The repository type.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type SourceType
 
 	// The source URL. The following is an example of an Amazon S3 source URL:
 	// https://s3.amazonaws.com/opsworks-demo-bucket/opsworks_cookbook_demo.tar.gz .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Url *string
 
 	// This parameter depends on the repository type.
@@ -1317,6 +1811,8 @@ type Source struct {
 	//
 	//   - For HTTP bundles, Git repositories, and Subversion repositories, set
 	//   Username to the user name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Username *string
 
 	noSmithyDocumentSerde
@@ -1328,15 +1824,21 @@ type SslConfiguration struct {
 	// The contents of the certificate's domain.crt file.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Certificate *string
 
 	// The private key; the contents of the certificate's domain.kex file.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PrivateKey *string
 
 	// Optional. Can be used to specify an intermediate certificate authority key or
 	// client authentication.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Chain *string
 
 	noSmithyDocumentSerde
@@ -1347,24 +1849,36 @@ type Stack struct {
 
 	// The agent version. This parameter is set to LATEST for auto-update. or a
 	// version number for a fixed agent version.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AgentVersion *string
 
 	// The stack's ARN.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The stack's attributes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Attributes map[string]string
 
 	// A ChefConfiguration object that specifies whether to enable Berkshelf and the
 	// Berkshelf version. For more information, see [Create a New Stack].
 	//
 	// [Create a New Stack]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChefConfiguration *ChefConfiguration
 
 	// The configuration manager.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ConfigurationManager *StackConfigurationManager
 
 	// The date when the stack was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *string
 
 	// Contains the information required to retrieve an app or cookbook from a
@@ -1372,6 +1886,8 @@ type Stack struct {
 	//
 	// [Cookbooks and Recipes]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html
 	// [Adding Apps]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CustomCookbooksSource *Source
 
 	// A JSON object that contains user-defined attributes to be added to the stack
@@ -1384,20 +1900,28 @@ type Stack struct {
 	// For more information on custom JSON, see [Use Custom JSON to Modify the Stack Configuration Attributes].
 	//
 	// [Use Custom JSON to Modify the Stack Configuration Attributes]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CustomJson *string
 
 	// The stack's default Availability Zone. For more information, see [Regions and Endpoints].
 	//
 	// [Regions and Endpoints]: https://docs.aws.amazon.com/general/latest/gr/rande.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DefaultAvailabilityZone *string
 
 	// The ARN of an IAM profile that is the default profile for all of the stack's
 	// EC2 instances. For more information about IAM ARNs, see [Using Identifiers].
 	//
 	// [Using Identifiers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DefaultInstanceProfileArn *string
 
 	// The stack's default operating system.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DefaultOs *string
 
 	// The default root device type. This value is used by default for all instances
@@ -1405,41 +1929,63 @@ type Stack struct {
 	// information, see [Storage for the Root Device].
 	//
 	// [Storage for the Root Device]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DefaultRootDeviceType RootDeviceType
 
 	// A default Amazon EC2 key pair for the stack's instances. You can override this
 	// value when you create or update an instance.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DefaultSshKeyName *string
 
 	// The default subnet ID; applicable only if the stack is running in a VPC.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DefaultSubnetId *string
 
 	// The stack host name theme, with spaces replaced by underscores.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	HostnameTheme *string
 
 	// The stack name. Stack names can be a maximum of 64 characters.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The stack Amazon Web Services Region, such as ap-northeast-2 . For more
 	// information about Amazon Web Services Regions, see [Regions and Endpoints].
 	//
 	// [Regions and Endpoints]: https://docs.aws.amazon.com/general/latest/gr/rande.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Region *string
 
 	// The stack Identity and Access Management (IAM) role.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServiceRoleArn *string
 
 	// The stack ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	// Whether the stack uses custom cookbooks.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UseCustomCookbooks *bool
 
 	// Whether the stack automatically associates the OpsWorks Stacks built-in
 	// security groups with the stack's layers.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UseOpsworksSecurityGroups *bool
 
 	// The VPC ID; applicable only if the stack is running in a VPC.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VpcId *string
 
 	noSmithyDocumentSerde
@@ -1449,11 +1995,15 @@ type Stack struct {
 type StackConfigurationManager struct {
 
 	// The name. This parameter must be set to Chef .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The Chef version. This parameter must be set to 12, 11.10, or 11.4 for Linux
 	// stacks, and to 12.2 for Windows stacks. The default value for Linux stacks is
 	// 12.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Version *string
 
 	noSmithyDocumentSerde
@@ -1463,21 +2013,33 @@ type StackConfigurationManager struct {
 type StackSummary struct {
 
 	// The number of apps.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppsCount *int32
 
 	// The stack's ARN.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// An InstancesCount object with the number of instances in each status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstancesCount *InstancesCount
 
 	// The number of layers.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LayersCount *int32
 
 	// The stack name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The stack ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	noSmithyDocumentSerde
@@ -1488,18 +2050,26 @@ type StackSummary struct {
 type TemporaryCredential struct {
 
 	// The instance's OpsWorks Stacks ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceId *string
 
 	// The password.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Password *string
 
 	// The user name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Username *string
 
 	// The length of time (in minutes) that the grant is valid. When the grant
 	// expires, at the end of this period, the user will no longer be able to use the
 	// credentials to log in. If they are logged in at the time, they are automatically
 	// logged out.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ValidForInMinutes *int32
 
 	noSmithyDocumentSerde
@@ -1509,9 +2079,13 @@ type TemporaryCredential struct {
 type TimeBasedAutoScalingConfiguration struct {
 
 	// A WeeklyAutoScalingSchedule object with the instance schedule.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AutoScalingSchedule *WeeklyAutoScalingSchedule
 
 	// The instance ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceId *string
 
 	noSmithyDocumentSerde
@@ -1524,18 +2098,28 @@ type UserProfile struct {
 	// page. For more information, see [Managing User Permissions].
 	//
 	// [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AllowSelfManagement *bool
 
 	// The user's IAM ARN.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IamUserArn *string
 
 	// The user's name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The user's SSH public key.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SshPublicKey *string
 
 	// The user's SSH user name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SshUsername *string
 
 	noSmithyDocumentSerde
@@ -1547,49 +2131,75 @@ type Volume struct {
 	// The volume Availability Zone. For more information, see [Regions and Endpoints].
 	//
 	// [Regions and Endpoints]: https://docs.aws.amazon.com/general/latest/gr/rande.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AvailabilityZone *string
 
 	// The device name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Device *string
 
 	// The Amazon EC2 volume ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Ec2VolumeId *string
 
 	// Specifies whether an Amazon EBS volume is encrypted. For more information, see [Amazon EBS Encryption].
 	//
 	// [Amazon EBS Encryption]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Encrypted *bool
 
 	// The instance ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceId *string
 
 	// For PIOPS volumes, the IOPS per disk.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Iops *int32
 
 	// The volume mount point. For example, "/mnt/disk1".
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MountPoint *string
 
 	// The volume name. Volume names are a maximum of 128 characters.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The RAID array ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RaidArrayId *string
 
 	// The Amazon Web Services Region. For more information about Amazon Web Services
 	// Regions, see [Regions and Endpoints].
 	//
 	// [Regions and Endpoints]: https://docs.aws.amazon.com/general/latest/gr/rande.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Region *string
 
 	// The volume size.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Size *int32
 
 	// The value returned by [DescribeVolumes].
 	//
 	// [DescribeVolumes]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeVolumes.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status *string
 
 	// The volume ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VolumeId *string
 
 	// The volume type. For more information, see [Amazon EBS Volume Types].
@@ -1610,6 +2220,8 @@ type Volume struct {
 	//   maximum size of 16384 GiB.
 	//
 	// [Amazon EBS Volume Types]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VolumeType *string
 
 	noSmithyDocumentSerde
@@ -1621,29 +2233,41 @@ type VolumeConfiguration struct {
 	// The volume mount point. For example "/dev/sdh".
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MountPoint *string
 
 	// The number of disks in the volume.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NumberOfDisks *int32
 
 	// The volume size.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Size *int32
 
 	// Specifies whether an Amazon EBS volume is encrypted. For more information, see [Amazon EBS Encryption].
 	//
 	// [Amazon EBS Encryption]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Encrypted *bool
 
 	// For PIOPS volumes, the IOPS per disk.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Iops *int32
 
 	// The volume [RAID level].
 	//
 	// [RAID level]: http://en.wikipedia.org/wiki/Standard_RAID_levels
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RaidLevel *int32
 
 	// The volume type. For more information, see [Amazon EBS Volume Types].
@@ -1664,6 +2288,8 @@ type VolumeConfiguration struct {
 	//   maximum size of 16384 GiB.
 	//
 	// [Amazon EBS Volume Types]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VolumeType *string
 
 	noSmithyDocumentSerde
@@ -1689,24 +2315,38 @@ type VolumeConfiguration struct {
 type WeeklyAutoScalingSchedule struct {
 
 	// The schedule for Friday.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Friday map[string]string
 
 	// The schedule for Monday.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Monday map[string]string
 
 	// The schedule for Saturday.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Saturday map[string]string
 
 	// The schedule for Sunday.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Sunday map[string]string
 
 	// The schedule for Thursday.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Thursday map[string]string
 
 	// The schedule for Tuesday.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tuesday map[string]string
 
 	// The schedule for Wednesday.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Wednesday map[string]string
 
 	noSmithyDocumentSerde

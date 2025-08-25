@@ -19,6 +19,8 @@ import (
 // or Manage permissions level for the stack, or an attached policy that explicitly
 // grants permissions. For more information about user permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) DescribeElasticLoadBalancers(ctx context.Context, params *DescribeElasticLoadBalancersInput, optFns ...func(*Options)) (*DescribeElasticLoadBalancersOutput, error) {
 	if params == nil {
@@ -39,9 +41,13 @@ type DescribeElasticLoadBalancersInput struct {
 
 	// A list of layer IDs. The action describes the Elastic Load Balancing instances
 	// for the specified layers.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LayerIds []string
 
 	// A stack ID. The action describes the stack's Elastic Load Balancing instances.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	noSmithyDocumentSerde
@@ -52,6 +58,8 @@ type DescribeElasticLoadBalancersOutput struct {
 
 	// A list of ElasticLoadBalancer objects that describe the specified Elastic Load
 	// Balancing instances.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ElasticLoadBalancers []types.ElasticLoadBalancer
 
 	// Metadata pertaining to the operation's result.

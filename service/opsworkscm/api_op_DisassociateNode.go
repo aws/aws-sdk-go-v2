@@ -21,6 +21,8 @@ import (
 // Otherwise, an InvalidStateException is thrown. A ResourceNotFoundException is
 // thrown when the server does not exist. A ValidationException is raised when
 // parameters of the request are not valid.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DisassociateNode(ctx context.Context, params *DisassociateNodeInput, optFns ...func(*Options)) (*DisassociateNodeOutput, error) {
 	if params == nil {
 		params = &DisassociateNodeInput{}
@@ -41,11 +43,15 @@ type DisassociateNodeInput struct {
 	// The name of the client node.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NodeName *string
 
 	// The name of the server from which to disassociate the node.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerName *string
 
 	// Engine attributes that are used for disassociating the node. No attributes are
@@ -55,6 +61,8 @@ type DisassociateNodeInput struct {
 	//
 	//   - CHEF_ORGANIZATION : The Chef organization with which the node was
 	//   associated. By default only one organization named default can exist.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EngineAttributes []types.EngineAttribute
 
 	noSmithyDocumentSerde
@@ -64,6 +72,8 @@ type DisassociateNodeOutput struct {
 
 	// Contains a token which can be passed to the DescribeNodeAssociationStatus API
 	// call to get the status of the disassociation request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NodeAssociationStatusToken *string
 
 	// Metadata pertaining to the operation's result.

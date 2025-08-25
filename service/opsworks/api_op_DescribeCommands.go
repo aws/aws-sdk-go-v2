@@ -19,6 +19,8 @@ import (
 // or Manage permissions level for the stack, or an attached policy that explicitly
 // grants permissions. For more information about user permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) DescribeCommands(ctx context.Context, params *DescribeCommandsInput, optFns ...func(*Options)) (*DescribeCommandsOutput, error) {
 	if params == nil {
@@ -40,14 +42,20 @@ type DescribeCommandsInput struct {
 	// An array of command IDs. If you include this parameter, DescribeCommands
 	// returns a description of the specified commands. Otherwise, it returns a
 	// description of every command.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CommandIds []string
 
 	// The deployment ID. If you include this parameter, DescribeCommands returns a
 	// description of the commands associated with the specified deployment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeploymentId *string
 
 	// The instance ID. If you include this parameter, DescribeCommands returns a
 	// description of the commands associated with the specified instance.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceId *string
 
 	noSmithyDocumentSerde
@@ -57,6 +65,8 @@ type DescribeCommandsInput struct {
 type DescribeCommandsOutput struct {
 
 	// An array of Command objects that describe each of the specified commands.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Commands []types.Command
 
 	// Metadata pertaining to the operation's result.

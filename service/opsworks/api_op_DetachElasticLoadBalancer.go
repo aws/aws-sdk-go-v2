@@ -16,6 +16,8 @@ import (
 // permissions level for the stack, or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) DetachElasticLoadBalancer(ctx context.Context, params *DetachElasticLoadBalancerInput, optFns ...func(*Options)) (*DetachElasticLoadBalancerOutput, error) {
 	if params == nil {
@@ -37,11 +39,15 @@ type DetachElasticLoadBalancerInput struct {
 	// The Elastic Load Balancing instance's name.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ElasticLoadBalancerName *string
 
 	// The ID of the layer that the Elastic Load Balancing instance is attached to.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LayerId *string
 
 	noSmithyDocumentSerde

@@ -17,6 +17,8 @@ import (
 // Manage permissions level for the stack, or an attached policy that explicitly
 // grants permissions. For more information on user permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) UpdateApp(ctx context.Context, params *UpdateAppInput, optFns ...func(*Options)) (*UpdateAppOutput, error) {
 	if params == nil {
@@ -38,25 +40,39 @@ type UpdateAppInput struct {
 	// The app ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppId *string
 
 	// A Source object that specifies the app repository.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppSource *types.Source
 
 	// One or more user-defined key/value pairs to be added to the stack attributes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Attributes map[string]string
 
 	// The app's data sources.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DataSources []types.DataSource
 
 	// A description of the app.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The app's virtual host settings, with multiple domains separated by commas. For
 	// example: 'www.example.com, example.com'
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Domains []string
 
 	// Whether SSL is enabled for the app.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnableSsl *bool
 
 	// An array of EnvironmentVariable objects that specify environment variables to
@@ -73,15 +89,23 @@ type UpdateAppInput struct {
 	// stack's Chef version.
 	//
 	// [Environment Variables]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Environment []types.EnvironmentVariable
 
 	// The app name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// An SslConfiguration object with the SSL configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SslConfiguration *types.SslConfiguration
 
 	// The app type.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type types.AppType
 
 	noSmithyDocumentSerde

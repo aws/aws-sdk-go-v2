@@ -16,6 +16,8 @@ import (
 // permissions level for the stack, or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Security and Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingsecurity.html
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) SetPermission(ctx context.Context, params *SetPermissionInput, optFns ...func(*Options)) (*SetPermissionOutput, error) {
@@ -38,17 +40,25 @@ type SetPermissionInput struct {
 	// The user's IAM ARN. This can also be a federated user's ARN.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IamUserArn *string
 
 	// The stack ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	// The user is allowed to use SSH to communicate with the instance.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AllowSsh *bool
 
 	// The user is allowed to use sudo to elevate privileges.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AllowSudo *bool
 
 	// The user's permission level, which must be set to one of the following strings.
@@ -67,6 +77,8 @@ type SetPermissionInput struct {
 	// For more information about the permissions associated with these levels, see [Managing User Permissions].
 	//
 	// [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Level *string
 
 	noSmithyDocumentSerde

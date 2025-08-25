@@ -21,6 +21,8 @@ import (
 // Otherwise, an InvalidStateException is thrown. A ResourceNotFoundException is
 // thrown when the server does not exist. A ValidationException is raised when
 // parameters of the request are not valid.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) StartMaintenance(ctx context.Context, params *StartMaintenanceInput, optFns ...func(*Options)) (*StartMaintenanceOutput, error) {
 	if params == nil {
 		params = &StartMaintenanceInput{}
@@ -41,6 +43,8 @@ type StartMaintenanceInput struct {
 	// The name of the server on which to run maintenance.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerName *string
 
 	// Engine attributes that are specific to the server on which you want to run
@@ -54,6 +58,8 @@ type StartMaintenanceInput struct {
 	//   information, see [Upgrade an OpsWorks for Chef Automate Server to Chef Automate 2].
 	//
 	// [Upgrade an OpsWorks for Chef Automate Server to Chef Automate 2]: https://docs.aws.amazon.com/opsworks/latest/userguide/opscm-a2upgrade.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EngineAttributes []types.EngineAttribute
 
 	noSmithyDocumentSerde
@@ -62,6 +68,8 @@ type StartMaintenanceInput struct {
 type StartMaintenanceOutput struct {
 
 	// Contains the response to a StartMaintenance request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Server *types.Server
 
 	// Metadata pertaining to the operation's result.

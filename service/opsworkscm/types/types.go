@@ -11,6 +11,8 @@ import (
 type AccountAttribute struct {
 
 	//  The maximum allowed value.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Maximum *int32
 
 	//  The attribute name. The following are supported attribute names.
@@ -20,10 +22,14 @@ type AccountAttribute struct {
 	//
 	//   - ManualBackupLimit: The number of current manual backups/maximum number of
 	//   backups allowed. By default, you can have a maximum of 50 manual backups saved.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	//  The current usage, such as the current number of servers that are associated
 	// with the account.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Used *int32
 
 	noSmithyDocumentSerde
@@ -33,49 +39,75 @@ type AccountAttribute struct {
 type Backup struct {
 
 	// The ARN of the backup.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BackupArn *string
 
 	//  The generated ID of the backup. Example: myServerName-yyyyMMddHHmmssSSS
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BackupId *string
 
 	//  The backup type. Valid values are automated or manual .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BackupType BackupType
 
 	//  The time stamp when the backup was created in the database. Example:
 	// 2016-07-29T13:38:47.520Z
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	//  A user-provided description for a manual backup. This field is empty for
 	// automated backups.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	//  The engine type that is obtained from the server when the backup is created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Engine *string
 
 	//  The engine model that is obtained from the server when the backup is created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EngineModel *string
 
 	//  The engine version that is obtained from the server when the backup is
 	// created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EngineVersion *string
 
 	//  The EC2 instance profile ARN that is obtained from the server when the backup
 	// is created. Because this value is stored, you are not required to provide the
 	// InstanceProfileArn again if you restore a backup.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceProfileArn *string
 
 	//  The instance type that is obtained from the server when the backup is created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceType *string
 
 	//  The key pair that is obtained from the server when the backup is created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KeyPair *string
 
 	//  The preferred backup period that is obtained from the server when the backup
 	// is created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PreferredBackupWindow *string
 
 	//  The preferred maintenance period that is obtained from the server when the
 	// backup is created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PreferredMaintenanceWindow *string
 
 	//  This field is deprecated and is no longer used.
@@ -89,34 +121,52 @@ type Backup struct {
 	S3DataUrl *string
 
 	//  The Amazon S3 URL of the backup's log file.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3LogUrl *string
 
 	//  The security group IDs that are obtained from the server when the backup is
 	// created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SecurityGroupIds []string
 
 	//  The name of the server from which the backup was made.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerName *string
 
 	//  The service role ARN that is obtained from the server when the backup is
 	// created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServiceRoleArn *string
 
 	// The status of a backup while in progress.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status BackupStatus
 
 	//  An informational message about backup status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusDescription *string
 
 	//  The subnet IDs that are obtained from the server when the backup is created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SubnetIds []string
 
 	//  The version of OpsWorks CM-specific tools that is obtained from the server
 	// when the backup is created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ToolsVersion *string
 
 	//  The user ARN of the requester for manual backups. This field is empty for
 	// automated backups.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserArn *string
 
 	noSmithyDocumentSerde
@@ -126,9 +176,13 @@ type Backup struct {
 type EngineAttribute struct {
 
 	// The name of the engine attribute.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The value of the engine attribute.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Value *string
 
 	noSmithyDocumentSerde
@@ -138,33 +192,49 @@ type EngineAttribute struct {
 type Server struct {
 
 	// Associate a public IP address with a server that you are launching.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AssociatePublicIpAddress *bool
 
 	// The number of automated backups to keep.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BackupRetentionCount *int32
 
 	// The ARN of the CloudFormation stack that was used to create the server.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CloudFormationStackArn *string
 
 	// Time stamp of server creation. Example 2016-07-29T13:38:47.520Z
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// An optional public endpoint of a server, such as https://aws.my-company.com .
 	// You cannot access the server by using the Endpoint value if the server has a
 	// CustomDomain specified.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CustomDomain *string
 
 	// Disables automated backups. The number of stored backups is dependent on the
 	// value of PreferredBackupCount.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DisableAutomatedBackup *bool
 
 	//  A DNS name that can be used to access the engine. Example:
 	// myserver-asdfghjkl.us-east-1.opsworks.io . You cannot access the server by using
 	// the Endpoint value if the server has a CustomDomain specified.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Endpoint *string
 
 	// The engine type of the server. Valid values in this release include ChefAutomate
 	// and Puppet .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Engine *string
 
 	// The response of a createServer() request returns the master credential to
@@ -192,61 +262,93 @@ type Server struct {
 	//
 	//   - PUPPET_ADMIN_PASSWORD : An administrator password that you can use to sign
 	//   in to the Puppet Enterprise console after the server is online.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EngineAttributes []EngineAttribute
 
 	// The engine model of the server. Valid values in this release include Monolithic
 	// for Puppet and Single for Chef.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EngineModel *string
 
 	// The engine version of the server. For a Chef server, the valid value for
 	// EngineVersion is currently 2 . For a Puppet server, specify either 2019 or 2017
 	// .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EngineVersion *string
 
 	// The instance profile ARN of the server.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceProfileArn *string
 
 	//  The instance type for the server, as specified in the CloudFormation stack.
 	// This might not be the same instance type that is shown in the EC2 console.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceType *string
 
 	// The key pair associated with the server.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KeyPair *string
 
 	// The status of the most recent server maintenance run. Shows SUCCESS or FAILED .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaintenanceStatus MaintenanceStatus
 
 	// The preferred backup period specified for the server.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PreferredBackupWindow *string
 
 	// The preferred maintenance period specified for the server.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PreferredMaintenanceWindow *string
 
 	//  The security group IDs for the server, as specified in the CloudFormation
 	// stack. These might not be the same security groups that are shown in the EC2
 	// console.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SecurityGroupIds []string
 
 	// The ARN of the server.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerArn *string
 
 	// The name of the server.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerName *string
 
 	// The service role ARN used to create the server.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServiceRoleArn *string
 
 	//  The server's status. This field displays the states of actions in progress,
 	// such as creating, running, or backing up the server, as well as the server's
 	// health state.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status ServerStatus
 
 	//  Depending on the server status, this field has either a human-readable message
 	// (such as a create or backup error), or an escaped block of JSON (used for health
 	// check results).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusReason *string
 
 	//  The subnet IDs specified in a CreateServer request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SubnetIds []string
 
 	noSmithyDocumentSerde
@@ -257,15 +359,23 @@ type Server struct {
 type ServerEvent struct {
 
 	// The time when the event occurred.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// The Amazon S3 URL of the event's log file.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LogUrl *string
 
 	// A human-readable informational or status message.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Message *string
 
 	// The name of the server on or for which the event occurred.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerName *string
 
 	noSmithyDocumentSerde
@@ -282,6 +392,8 @@ type Tag struct {
 	// separators, or the following special characters: + - = . _ : /
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Key *string
 
 	// An optional tag value, such as Production or test-owcm-server . The value can be
@@ -289,6 +401,8 @@ type Tag struct {
 	// separators, or the following special characters: + - = . _ : /
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Value *string
 
 	noSmithyDocumentSerde

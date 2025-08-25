@@ -35,6 +35,8 @@ import (
 // parameters of the request are not valid. The AssociateNode API call can be
 // integrated into Auto Scaling configurations, CloudFormation templates, or the
 // user data of a server's instance.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) AssociateNode(ctx context.Context, params *AssociateNodeInput, optFns ...func(*Options)) (*AssociateNodeOutput, error) {
 	if params == nil {
 		params = &AssociateNodeInput{}
@@ -68,16 +70,22 @@ type AssociateNodeInput struct {
 	//   created by the node.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EngineAttributes []types.EngineAttribute
 
 	// The name of the node.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NodeName *string
 
 	// The name of the server with which to associate the node.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerName *string
 
 	noSmithyDocumentSerde
@@ -87,6 +95,8 @@ type AssociateNodeOutput struct {
 
 	// Contains a token which can be passed to the DescribeNodeAssociationStatus API
 	// call to get the status of the association request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NodeAssociationStatusToken *string
 
 	// Metadata pertaining to the operation's result.

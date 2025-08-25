@@ -19,6 +19,8 @@ import (
 // or Manage permissions level for the stack, or an attached policy that explicitly
 // grants permissions. For more information about user permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) DescribeRaidArrays(ctx context.Context, params *DescribeRaidArraysInput, optFns ...func(*Options)) (*DescribeRaidArraysOutput, error) {
 	if params == nil {
@@ -39,14 +41,20 @@ type DescribeRaidArraysInput struct {
 
 	// The instance ID. If you use this parameter, DescribeRaidArrays returns
 	// descriptions of the RAID arrays associated with the specified instance.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceId *string
 
 	// An array of RAID array IDs. If you use this parameter, DescribeRaidArrays
 	// returns descriptions of the specified arrays. Otherwise, it returns a
 	// description of every array.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RaidArrayIds []string
 
 	// The stack ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	noSmithyDocumentSerde
@@ -56,6 +64,8 @@ type DescribeRaidArraysInput struct {
 type DescribeRaidArraysOutput struct {
 
 	// A RaidArrays object that describes the specified RAID arrays.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RaidArrays []types.RaidArray
 
 	// Metadata pertaining to the operation's result.

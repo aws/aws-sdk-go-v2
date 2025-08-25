@@ -19,6 +19,8 @@ import (
 //
 // A ResourceNotFoundException is thrown when the backup does not exist. A
 // ValidationException is raised when parameters of the request are not valid.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribeBackups(ctx context.Context, params *DescribeBackupsInput, optFns ...func(*Options)) (*DescribeBackupsOutput, error) {
 	if params == nil {
 		params = &DescribeBackupsInput{}
@@ -37,15 +39,23 @@ func (c *Client) DescribeBackups(ctx context.Context, params *DescribeBackupsInp
 type DescribeBackupsInput struct {
 
 	// Describes a single backup.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BackupId *string
 
 	// This is not currently implemented for DescribeBackups requests.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// This is not currently implemented for DescribeBackups requests.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Returns backups for the server with the specified ServerName.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerName *string
 
 	noSmithyDocumentSerde
@@ -54,9 +64,13 @@ type DescribeBackupsInput struct {
 type DescribeBackupsOutput struct {
 
 	// Contains the response to a DescribeBackups request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Backups []types.Backup
 
 	// This is not currently implemented for DescribeBackups requests.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

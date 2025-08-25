@@ -23,6 +23,8 @@ import (
 // or Manage permissions level for the stack, or an attached policy that explicitly
 // grants permissions. For more information about user permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) DescribeInstances(ctx context.Context, params *DescribeInstancesInput, optFns ...func(*Options)) (*DescribeInstancesOutput, error) {
 	if params == nil {
@@ -44,14 +46,20 @@ type DescribeInstancesInput struct {
 	// An array of instance IDs to be described. If you use this parameter,
 	// DescribeInstances returns a description of the specified instances. Otherwise,
 	// it returns a description of every instance.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceIds []string
 
 	// A layer ID. If you use this parameter, DescribeInstances returns descriptions
 	// of the instances associated with the specified layer.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LayerId *string
 
 	// A stack ID. If you use this parameter, DescribeInstances returns descriptions
 	// of the instances associated with the specified stack.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	noSmithyDocumentSerde
@@ -61,6 +69,8 @@ type DescribeInstancesInput struct {
 type DescribeInstancesOutput struct {
 
 	// An array of Instance objects that describe the instances.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Instances []types.Instance
 
 	// Metadata pertaining to the operation's result.

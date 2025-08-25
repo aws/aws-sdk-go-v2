@@ -29,6 +29,8 @@ import (
 // An InvalidStateException is thrown when the server is not in a valid state. A
 // ResourceNotFoundException is thrown when the server does not exist. A
 // ValidationException is raised when parameters of the request are not valid.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) RestoreServer(ctx context.Context, params *RestoreServerInput, optFns ...func(*Options)) (*RestoreServerOutput, error) {
 	if params == nil {
 		params = &RestoreServerInput{}
@@ -49,21 +51,29 @@ type RestoreServerInput struct {
 	//  The ID of the backup that you want to use to restore a server.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BackupId *string
 
 	//  The name of the server that you want to restore.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerName *string
 
 	//  The type of instance to restore. Valid values must be specified in the
 	// following format: ^([cm][34]|t2).* For example, m5.large . Valid values are
 	// m5.large , r5.xlarge , and r5.2xlarge . If you do not specify this parameter,
 	// RestoreServer uses the instance type from the specified backup.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceType *string
 
 	//  The name of the key pair to set on the new EC2 instance. This can be helpful
 	// if the administrator no longer has the SSH key.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KeyPair *string
 
 	noSmithyDocumentSerde
@@ -72,6 +82,8 @@ type RestoreServerInput struct {
 type RestoreServerOutput struct {
 
 	// Describes a configuration management server.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Server *types.Server
 
 	// Metadata pertaining to the operation's result.

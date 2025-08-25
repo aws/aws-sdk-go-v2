@@ -24,6 +24,8 @@ import (
 // permissions level for the stack, or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see [Managing User Permissions].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [How to Create a Layer]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-create.html
 // [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) CreateLayer(ctx context.Context, params *CreateLayerInput, optFns ...func(*Options)) (*CreateLayerOutput, error) {
@@ -47,6 +49,8 @@ type CreateLayerInput struct {
 	// 32 characters.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// For custom layers only, use this parameter to specify the layer's short name,
@@ -61,11 +65,15 @@ type CreateLayerInput struct {
 	// [Layer Reference]: https://docs.aws.amazon.com/opsworks/latest/userguide/layers.html
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Shortname *string
 
 	// The layer stack ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	// The layer type. A stack cannot have more than one built-in layer of the same
@@ -73,11 +81,15 @@ type CreateLayerInput struct {
 	// in Chef 12 stacks.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type types.LayerType
 
 	// One or more user-defined key-value pairs to be added to the stack attributes.
 	//
 	// To create a cluster layer, set the EcsClusterArn attribute to the cluster's ARN.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Attributes map[string]string
 
 	// Whether to automatically assign an [Elastic IP address] to the layer's instances. For more
@@ -85,22 +97,30 @@ type CreateLayerInput struct {
 	//
 	// [How to Edit a Layer]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
 	// [Elastic IP address]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AutoAssignElasticIps *bool
 
 	// For stacks that are running in a VPC, whether to automatically assign a public
 	// IP address to the layer's instances. For more information, see [How to Edit a Layer].
 	//
 	// [How to Edit a Layer]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AutoAssignPublicIps *bool
 
 	// Specifies CloudWatch Logs configuration options for the layer. For more
 	// information, see CloudWatchLogsLogStream.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CloudWatchLogsConfiguration *types.CloudWatchLogsConfiguration
 
 	// The ARN of an IAM profile to be used for the layer's EC2 instances. For more
 	// information about IAM ARNs, see [Using Identifiers].
 	//
 	// [Using Identifiers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CustomInstanceProfileArn *string
 
 	// A JSON-formatted string containing custom stack configuration and deployment
@@ -108,15 +128,23 @@ type CreateLayerInput struct {
 	// . This feature is supported as of version 1.7.42 of the CLI.
 	//
 	// [Using Custom JSON]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CustomJson *string
 
 	// A LayerCustomRecipes object that specifies the layer custom recipes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CustomRecipes *types.Recipes
 
 	// An array containing the layer custom security group IDs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CustomSecurityGroupIds []string
 
 	// Whether to disable auto healing for the layer.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnableAutoHealing *bool
 
 	// Whether to install operating system and package updates when the instance
@@ -127,20 +155,30 @@ type CreateLayerInput struct {
 	//
 	// To ensure that your instances have the latest security updates, we strongly
 	// recommend using the default value of true .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstallUpdatesOnBoot *bool
 
 	// A LifeCycleEventConfiguration object that you can use to configure the Shutdown
 	// event to specify an execution timeout and enable or disable Elastic Load
 	// Balancer connection draining.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LifecycleEventConfiguration *types.LifecycleEventConfiguration
 
 	// An array of Package objects that describes the layer packages.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Packages []string
 
 	// Whether to use Amazon EBS-optimized instances.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UseEbsOptimizedInstances *bool
 
 	// A VolumeConfigurations object that describes the layer's Amazon EBS volumes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VolumeConfigurations []types.VolumeConfiguration
 
 	noSmithyDocumentSerde
@@ -150,6 +188,8 @@ type CreateLayerInput struct {
 type CreateLayerOutput struct {
 
 	// The layer ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LayerId *string
 
 	// Metadata pertaining to the operation's result.

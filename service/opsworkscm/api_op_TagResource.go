@@ -13,6 +13,8 @@ import (
 
 // Applies tags to an OpsWorks for Chef Automate or OpsWorks for Puppet Enterprise
 // server, or to server backups.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -36,6 +38,8 @@ type TagResourceInput struct {
 	// .
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResourceArn *string
 
 	// A map that contains tag keys and tag values to attach to OpsWorks CM servers or
@@ -57,6 +61,8 @@ type TagResourceInput struct {
 	//   backup.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

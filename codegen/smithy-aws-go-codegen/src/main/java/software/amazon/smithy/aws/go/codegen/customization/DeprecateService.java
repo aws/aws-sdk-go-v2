@@ -21,7 +21,9 @@ public class DeprecateService implements GoIntegration {
             "com.amazonaws.iot1clickdevicesservice#IoT1ClickDevicesService",
             "com.amazonaws.iot1clickprojects#AWSIoT1ClickProjects",
             "com.amazonaws.elasticinference#EC2MatterhornCfSoothsayerApiGatewayLambda",
-	    "com.amazonaws.privatenetworks#E5GNetworkControllerLambda"
+	    "com.amazonaws.privatenetworks#E5GNetworkControllerLambda",
+	    "com.amazonaws.opsworks#OpsWorks_20130218",
+	    "com.amazonaws.opsworkscm#OpsWorksCM_V2016_11_01"
     );
 
     @Override

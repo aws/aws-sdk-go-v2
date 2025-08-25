@@ -79,6 +79,8 @@
 // You can specify Chef 12, 11.10, or 11.4 for your Linux stack. We recommend
 // migrating your existing Linux stacks to Chef 12 as soon as possible.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [CLI]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html
 // [OpsWorks]: http://aws.amazon.com/opsworks/
 // [SDK for Python (Boto)]: http://docs.pythonboto.org/en/latest/ref/opsworks.html

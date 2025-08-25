@@ -14,6 +14,8 @@ import (
 // This action can be used only with Windows stacks.
 //
 // Grants RDP access to a Windows instance for a specified time period.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GrantAccess(ctx context.Context, params *GrantAccessInput, optFns ...func(*Options)) (*GrantAccessOutput, error) {
 	if params == nil {
 		params = &GrantAccessInput{}
@@ -34,12 +36,16 @@ type GrantAccessInput struct {
 	// The instance's OpsWorks Stacks ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceId *string
 
 	// The length of time (in minutes) that the grant is valid. When the grant expires
 	// at the end of this period, the user will no longer be able to use the
 	// credentials to log in. If the user is logged in at the time, they are logged
 	// out.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ValidForInMinutes *int32
 
 	noSmithyDocumentSerde
@@ -50,6 +56,8 @@ type GrantAccessOutput struct {
 
 	// A TemporaryCredential object that contains the data needed to log in to the
 	// instance by RDP clients, such as the Microsoft Remote Desktop Connection.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TemporaryCredential *types.TemporaryCredential
 
 	// Metadata pertaining to the operation's result.

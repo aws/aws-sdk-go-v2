@@ -20,6 +20,8 @@ import (
 //
 // A ResourceNotFoundException is thrown when the server does not exist. A
 // ValidationException is raised when parameters of the request are not valid.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DescribeServers(ctx context.Context, params *DescribeServersInput, optFns ...func(*Options)) (*DescribeServersOutput, error) {
 	if params == nil {
 		params = &DescribeServersInput{}
@@ -38,12 +40,18 @@ func (c *Client) DescribeServers(ctx context.Context, params *DescribeServersInp
 type DescribeServersInput struct {
 
 	// This is not currently implemented for DescribeServers requests.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// This is not currently implemented for DescribeServers requests.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Describes the server with the specified ServerName.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerName *string
 
 	noSmithyDocumentSerde
@@ -52,6 +60,8 @@ type DescribeServersInput struct {
 type DescribeServersOutput struct {
 
 	// This is not currently implemented for DescribeServers requests.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Contains the response to a DescribeServers request.
@@ -73,6 +83,8 @@ type DescribeServersOutput struct {
 	//   Puppet certificate revocation list, see [Man Page: puppet certificate_revocation_list]in the Puppet documentation.
 	//
 	// [Man Page: puppet certificate_revocation_list]: https://puppet.com/docs/puppet/5.5/man/certificate_revocation_list.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Servers []types.Server
 
 	// Metadata pertaining to the operation's result.

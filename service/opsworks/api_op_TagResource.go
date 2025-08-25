@@ -13,6 +13,8 @@ import (
 // Apply cost-allocation tags to a specified stack or layer in OpsWorks Stacks.
 // For more information about how tagging works, see [Tags]in the OpsWorks User Guide.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Tags]: https://docs.aws.amazon.com/opsworks/latest/userguide/tagging.html
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
@@ -34,6 +36,8 @@ type TagResourceInput struct {
 	// The stack or layer's Amazon Resource Number (ARN).
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResourceArn *string
 
 	// A map that contains tag keys and tag values that are attached to a stack or
@@ -54,6 +58,8 @@ type TagResourceInput struct {
 	//   - A maximum of 40 tags is allowed for any resource.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
