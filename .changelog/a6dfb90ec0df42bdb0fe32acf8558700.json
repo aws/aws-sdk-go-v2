@@ -1,8 +1,0 @@
-{
-    "id": "a6dfb90e-c0df-42bd-b0fe-32acf8558700",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/servicecatalogappregistry"
-    ]
-}

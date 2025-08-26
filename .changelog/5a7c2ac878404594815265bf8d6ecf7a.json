@@ -1,8 +1,0 @@
-{
-    "id": "5a7c2ac8-7840-4594-8152-65bf8d6ecf7a",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/wafregional"
-    ]
-}

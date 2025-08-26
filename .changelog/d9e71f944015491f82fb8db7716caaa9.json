@@ -1,8 +1,0 @@
-{
-    "id": "d9e71f94-4015-491f-82fb-8db7716caaa9",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/glacier"
-    ]
-}

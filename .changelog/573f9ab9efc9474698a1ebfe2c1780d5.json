@@ -1,8 +1,0 @@
-{
-    "id": "573f9ab9-efc9-4746-98a1-ebfe2c1780d5",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/securityhub"
-    ]
-}

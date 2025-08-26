@@ -1,8 +1,0 @@
-{
-    "id": "7d8928fc-bde0-40cb-b23d-c36ef6f144cb",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/pinpoint"
-    ]
-}

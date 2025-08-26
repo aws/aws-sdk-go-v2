@@ -1,8 +1,0 @@
-{
-    "id": "44127c49-5319-4098-be41-bf8fc831ddd8",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/iottwinmaker"
-    ]
-}

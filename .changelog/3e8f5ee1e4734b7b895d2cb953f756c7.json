@@ -1,8 +1,0 @@
-{
-    "id": "3e8f5ee1-e473-4b7b-895d-2cb953f756c7",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/gamelift"
-    ]
-}

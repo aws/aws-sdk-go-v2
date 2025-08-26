@@ -1,3 +1,7 @@
+# v1.19.1 (2025-08-26)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2025-08-21)
 
 * **Feature**: Add control for request checksum calculation.

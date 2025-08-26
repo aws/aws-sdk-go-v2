@@ -1,8 +1,0 @@
-{
-    "id": "51081d28-5b00-410f-ad1a-aa8cc02f6049",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/datasync"
-    ]
-}

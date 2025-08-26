@@ -1,8 +1,0 @@
-{
-    "id": "70a71f9f-53e3-4ffc-9d55-99a599d2b888",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/ssmsap"
-    ]
-}

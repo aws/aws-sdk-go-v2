@@ -1,8 +1,0 @@
-{
-    "id": "bb23f168-a71e-4c17-8e0d-e09f4634b7a4",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/mq"
-    ]
-}

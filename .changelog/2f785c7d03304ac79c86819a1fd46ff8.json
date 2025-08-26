@@ -1,8 +1,0 @@
-{
-    "id": "2f785c7d-0330-4ac7-9c86-819a1fd46ff8",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/ssm"
-    ]
-}

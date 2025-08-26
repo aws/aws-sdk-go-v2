@@ -1,8 +1,0 @@
-{
-    "id": "8f7625f6-40b0-40f9-9225-d3618b64315b",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/migrationhub"
-    ]
-}

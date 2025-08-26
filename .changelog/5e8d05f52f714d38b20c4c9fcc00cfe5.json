@@ -1,8 +1,0 @@
-{
-    "id": "5e8d05f5-2f71-4d38-b20c-4c9fcc00cfe5",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/greengrass"
-    ]
-}

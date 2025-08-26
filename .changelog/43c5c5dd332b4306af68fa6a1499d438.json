@@ -1,8 +1,0 @@
-{
-    "id": "43c5c5dd-332b-4306-af68-fa6a1499d438",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/bedrockagentcorecontrol"
-    ]
-}

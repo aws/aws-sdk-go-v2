@@ -1,8 +1,0 @@
-{
-    "id": "29b0e396-0774-41f7-8139-3f8b6d25b140",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/elastictranscoder"
-    ]
-}

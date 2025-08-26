@@ -1,8 +1,0 @@
-{
-    "id": "58410288-3d86-4893-af1f-a554800e76d3",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/socialmessaging"
-    ]
-}

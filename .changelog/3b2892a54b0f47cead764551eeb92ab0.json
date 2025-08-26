@@ -1,8 +1,0 @@
-{
-    "id": "3b2892a5-4b0f-47ce-ad76-4551eeb92ab0",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/rbin"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.35.0 (2025-08-26)
+
+* **Feature**: Amazon Connect Participant Service: Remove unused fields from WebRTCConnection
+
 # v1.34.0 (2025-08-25)
 
 * **Feature**: Remove incorrect endpoint tests

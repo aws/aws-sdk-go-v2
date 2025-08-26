@@ -1,8 +1,0 @@
-{
-    "id": "474b3e1a-34e5-479b-a2cb-981ef498be0f",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/pcaconnectorscep"
-    ]
-}

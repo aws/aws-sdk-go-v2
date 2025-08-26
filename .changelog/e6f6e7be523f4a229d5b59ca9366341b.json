@@ -1,8 +1,0 @@
-{
-    "id": "e6f6e7be-523f-4a22-9d5b-59ca9366341b",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/trustedadvisor"
-    ]
-}

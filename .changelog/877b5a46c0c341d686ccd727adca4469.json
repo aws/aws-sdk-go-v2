@@ -1,8 +1,0 @@
-{
-    "id": "877b5a46-c0c3-41d6-86cc-d727adca4469",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/ssooidc"
-    ]
-}

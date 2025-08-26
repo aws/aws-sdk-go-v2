@@ -1,8 +1,0 @@
-{
-    "id": "fa50a4cd-4452-49a5-9027-28837d180ae4",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/drs"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.33.1 (2025-08-26)
+
+* No change notes available for this release.
+
 # v1.33.0 (2025-08-21)
 
 * **Feature**: Remove incorrect endpoint tests

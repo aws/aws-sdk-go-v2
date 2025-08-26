@@ -1,3 +1,7 @@
+# v1.22.0 (2025-08-26)
+
+* **Feature**: This release adds new API options to enable allowed windows and multiple alarms for practice runs.
+
 # v1.21.2 (2025-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

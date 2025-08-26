@@ -1,8 +1,0 @@
-{
-    "id": "94151df9-2636-4dfa-be9e-d9e03d64ddba",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/appconfig"
-    ]
-}

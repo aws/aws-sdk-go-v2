@@ -1,8 +1,0 @@
-{
-    "id": "5a727bdb-bac2-483b-a83e-c0a15c47a879",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/connectcontactlens"
-    ]
-}

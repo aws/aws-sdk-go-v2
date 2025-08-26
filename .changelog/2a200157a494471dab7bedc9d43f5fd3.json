@@ -1,8 +1,0 @@
-{
-    "id": "2a200157-a494-471d-ab7b-edc9d43f5fd3",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/polly"
-    ]
-}

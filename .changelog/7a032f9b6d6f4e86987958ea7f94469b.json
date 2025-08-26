@@ -1,8 +1,0 @@
-{
-    "id": "7a032f9b-6d6f-4e86-9879-58ea7f94469b",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/licensemanagerlinuxsubscriptions"
-    ]
-}

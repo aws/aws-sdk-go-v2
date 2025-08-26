@@ -1,8 +1,0 @@
-{
-    "id": "b09e8023-c390-4595-8e92-282da8e564b2",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/sagemakergeospatial"
-    ]
-}

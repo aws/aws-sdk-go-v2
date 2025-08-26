@@ -1,8 +1,0 @@
-{
-    "id": "e9e76628-1c17-404b-b05d-b2b183a48f97",
-    "type": "feature",
-    "description": "Amazon Connect Participant Service: Remove unused fields from WebRTCConnection",
-    "modules": [
-        "service/connectparticipant"
-    ]
-}

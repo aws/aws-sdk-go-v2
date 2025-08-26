@@ -1,8 +1,0 @@
-{
-    "id": "b8e69b62-749e-4589-9a53-97041b89ac0a",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/secretsmanager"
-    ]
-}

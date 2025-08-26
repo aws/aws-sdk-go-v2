@@ -1,3 +1,7 @@
+# v1.6.0 (2025-08-26)
+
+* **Feature**: Added RouteFerryNotice PotentialViolatedVehicleRestrictionUsage value for CalculateRoutes. This value indicates when the Route is potentially forbidden for the given vehicle profile.
+
 # v1.5.2 (2025-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

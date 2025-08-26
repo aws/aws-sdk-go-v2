@@ -1,8 +1,0 @@
-{
-    "id": "2bb291f2-448d-44cf-b21c-9bd45a26d60d",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/dlm"
-    ]
-}

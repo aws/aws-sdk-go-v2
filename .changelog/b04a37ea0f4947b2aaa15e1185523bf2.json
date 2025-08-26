@@ -1,8 +1,0 @@
-{
-    "id": "b04a37ea-0f49-47b2-aaa1-5e1185523bf2",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/imagebuilder"
-    ]
-}

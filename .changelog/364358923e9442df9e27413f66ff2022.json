@@ -1,8 +1,0 @@
-{
-    "id": "36435892-3e94-42df-9e27-413f66ff2022",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/identitystore"
-    ]
-}
