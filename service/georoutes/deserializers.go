@@ -1340,7 +1340,7 @@ func awsRestjson1_deserializeDocumentCircle(v **types.Circle, value interface{})
 					sv.Radius = ptr.Float64(f64)
 
 				default:
-					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+					return fmt.Errorf("expected SensitiveDouble to be a JSON Number, got %T instead", value)
 
 				}
 			}
@@ -1882,7 +1882,7 @@ func awsRestjson1_deserializeDocumentLocalizedString(v **types.LocalizedString, 
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Value = ptr.String(jtv)
 			}
@@ -2123,7 +2123,7 @@ func awsRestjson1_deserializeDocumentRoadSnapNotice(v **types.RoadSnapNotice, va
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Title = ptr.String(jtv)
 			}
@@ -2272,7 +2272,7 @@ func awsRestjson1_deserializeDocumentRoadSnapSnappedTracePoint(v **types.RoadSna
 					sv.Confidence = ptr.Float64(f64)
 
 				default:
-					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+					return fmt.Errorf("expected SensitiveDouble to be a JSON Number, got %T instead", value)
 
 				}
 			}
@@ -2659,7 +2659,7 @@ func awsRestjson1_deserializeDocumentRouteExitStepDetails(v **types.RouteExitSte
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected SensitiveInteger to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -2768,7 +2768,7 @@ func awsRestjson1_deserializeDocumentRouteFerryAfterTravelStep(v **types.RouteFe
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Instruction = ptr.String(jtv)
 			}
@@ -2909,7 +2909,7 @@ func awsRestjson1_deserializeDocumentRouteFerryBeforeTravelStep(v **types.RouteF
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Instruction = ptr.String(jtv)
 			}
@@ -3067,7 +3067,7 @@ func awsRestjson1_deserializeDocumentRouteFerryLegDetails(v **types.RouteFerryLe
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.RouteName = ptr.String(jtv)
 			}
@@ -3262,7 +3262,7 @@ func awsRestjson1_deserializeDocumentRouteFerryPlace(v **types.RouteFerryPlace, 
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
 			}
@@ -3281,7 +3281,7 @@ func awsRestjson1_deserializeDocumentRouteFerryPlace(v **types.RouteFerryPlace, 
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected SensitiveInteger to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -3378,7 +3378,7 @@ func awsRestjson1_deserializeDocumentRouteFerrySpan(v **types.RouteFerrySpan, va
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Region = ptr.String(jtv)
 			}
@@ -3576,7 +3576,7 @@ func awsRestjson1_deserializeDocumentRouteFerryTravelStep(v **types.RouteFerryTr
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Instruction = ptr.String(jtv)
 			}
@@ -4143,7 +4143,7 @@ func awsRestjson1_deserializeDocumentRouteMatrixBoundary(v **types.RouteMatrixBo
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected SensitiveBoolean to be of type *bool, got %T instead", value)
 				}
 				sv.Unbounded = ptr.Bool(jtv)
 			}
@@ -4409,7 +4409,7 @@ func awsRestjson1_deserializeDocumentRouteNumber(v **types.RouteNumber, value in
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Value = ptr.String(jtv)
 			}
@@ -4493,7 +4493,7 @@ func awsRestjson1_deserializeDocumentRoutePassThroughPlace(v **types.RoutePassTh
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected SensitiveInteger to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -4916,7 +4916,7 @@ func awsRestjson1_deserializeDocumentRoutePedestrianPlace(v **types.RoutePedestr
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
 			}
@@ -4944,7 +4944,7 @@ func awsRestjson1_deserializeDocumentRoutePedestrianPlace(v **types.RoutePedestr
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected SensitiveInteger to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -5041,7 +5041,7 @@ func awsRestjson1_deserializeDocumentRoutePedestrianSpan(v **types.RoutePedestri
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected SensitiveInteger to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -5082,7 +5082,7 @@ func awsRestjson1_deserializeDocumentRoutePedestrianSpan(v **types.RoutePedestri
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Region = ptr.String(jtv)
 			}
@@ -5323,7 +5323,7 @@ func awsRestjson1_deserializeDocumentRoutePedestrianTravelStep(v **types.RoutePe
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Instruction = ptr.String(jtv)
 			}
@@ -5760,7 +5760,7 @@ func awsRestjson1_deserializeDocumentRouteRoundaboutExitStepDetails(v **types.Ro
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected SensitiveInteger to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -6336,7 +6336,7 @@ func awsRestjson1_deserializeDocumentRouteSpanSpeedLimitDetails(v **types.RouteS
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected SensitiveBoolean to be of type *bool, got %T instead", value)
 				}
 				sv.Unlimited = ptr.Bool(jtv)
 			}
@@ -6563,7 +6563,7 @@ func awsRestjson1_deserializeDocumentRouteTollPass(v **types.RouteTollPass, valu
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected SensitiveBoolean to be of type *bool, got %T instead", value)
 				}
 				sv.IncludesReturnTrip = ptr.Bool(jtv)
 			}
@@ -6572,7 +6572,7 @@ func awsRestjson1_deserializeDocumentRouteTollPass(v **types.RouteTollPass, valu
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected SensitiveBoolean to be of type *bool, got %T instead", value)
 				}
 				sv.SeniorPass = ptr.Bool(jtv)
 			}
@@ -6581,7 +6581,7 @@ func awsRestjson1_deserializeDocumentRouteTollPass(v **types.RouteTollPass, valu
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected SensitiveInteger to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -6594,7 +6594,7 @@ func awsRestjson1_deserializeDocumentRouteTollPass(v **types.RouteTollPass, valu
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected SensitiveInteger to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -6652,7 +6652,7 @@ func awsRestjson1_deserializeDocumentRouteTollPassValidityPeriod(v **types.Route
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected SensitiveInteger to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -6820,7 +6820,7 @@ func awsRestjson1_deserializeDocumentRouteTollPrice(v **types.RouteTollPrice, va
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected SensitiveBoolean to be of type *bool, got %T instead", value)
 				}
 				sv.Estimate = ptr.Bool(jtv)
 			}
@@ -6842,7 +6842,7 @@ func awsRestjson1_deserializeDocumentRouteTollPrice(v **types.RouteTollPrice, va
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected SensitiveBoolean to be of type *bool, got %T instead", value)
 				}
 				sv.Range = ptr.Bool(jtv)
 			}
@@ -6881,7 +6881,7 @@ func awsRestjson1_deserializeDocumentRouteTollPrice(v **types.RouteTollPrice, va
 					sv.Value = ptr.Float64(f64)
 
 				default:
-					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+					return fmt.Errorf("expected SensitiveDouble to be a JSON Number, got %T instead", value)
 
 				}
 			}
@@ -6930,7 +6930,7 @@ func awsRestjson1_deserializeDocumentRouteTollPriceSummary(v **types.RouteTollPr
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected SensitiveBoolean to be of type *bool, got %T instead", value)
 				}
 				sv.Estimate = ptr.Bool(jtv)
 			}
@@ -6939,7 +6939,7 @@ func awsRestjson1_deserializeDocumentRouteTollPriceSummary(v **types.RouteTollPr
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected SensitiveBoolean to be of type *bool, got %T instead", value)
 				}
 				sv.Range = ptr.Bool(jtv)
 			}
@@ -6978,7 +6978,7 @@ func awsRestjson1_deserializeDocumentRouteTollPriceSummary(v **types.RouteTollPr
 					sv.Value = ptr.Float64(f64)
 
 				default:
-					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+					return fmt.Errorf("expected SensitiveDouble to be a JSON Number, got %T instead", value)
 
 				}
 			}
@@ -7043,7 +7043,7 @@ func awsRestjson1_deserializeDocumentRouteTollPriceValueRange(v **types.RouteTol
 					sv.Max = ptr.Float64(f64)
 
 				default:
-					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+					return fmt.Errorf("expected SensitiveDouble to be a JSON Number, got %T instead", value)
 
 				}
 			}
@@ -7077,7 +7077,7 @@ func awsRestjson1_deserializeDocumentRouteTollPriceValueRange(v **types.RouteTol
 					sv.Min = ptr.Float64(f64)
 
 				default:
-					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+					return fmt.Errorf("expected SensitiveDouble to be a JSON Number, got %T instead", value)
 
 				}
 			}
@@ -7117,7 +7117,7 @@ func awsRestjson1_deserializeDocumentRouteTollRate(v **types.RouteTollRate, valu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.ApplicableTimes = ptr.String(jtv)
 			}
@@ -7131,7 +7131,7 @@ func awsRestjson1_deserializeDocumentRouteTollRate(v **types.RouteTollRate, valu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
 			}
@@ -7145,7 +7145,7 @@ func awsRestjson1_deserializeDocumentRouteTollRate(v **types.RouteTollRate, valu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
 			}
@@ -7270,7 +7270,7 @@ func awsRestjson1_deserializeDocumentRouteTollSystem(v **types.RouteTollSystem, 
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
 			}
@@ -7344,7 +7344,7 @@ func awsRestjson1_deserializeDocumentRouteTransponder(v **types.RouteTransponder
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.SystemName = ptr.String(jtv)
 			}
@@ -7684,7 +7684,7 @@ func awsRestjson1_deserializeDocumentRouteVehicleIncident(v **types.RouteVehicle
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
 			}
@@ -7939,7 +7939,7 @@ func awsRestjson1_deserializeDocumentRouteVehicleNoticeDetail(v **types.RouteVeh
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Title = ptr.String(jtv)
 			}
@@ -8135,7 +8135,7 @@ func awsRestjson1_deserializeDocumentRouteVehiclePlace(v **types.RouteVehiclePla
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
 			}
@@ -8163,7 +8163,7 @@ func awsRestjson1_deserializeDocumentRouteVehiclePlace(v **types.RouteVehiclePla
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected SensitiveInteger to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -8265,7 +8265,7 @@ func awsRestjson1_deserializeDocumentRouteVehicleSpan(v **types.RouteVehicleSpan
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected SensitiveInteger to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -8324,7 +8324,7 @@ func awsRestjson1_deserializeDocumentRouteVehicleSpan(v **types.RouteVehicleSpan
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Region = ptr.String(jtv)
 			}
@@ -8631,7 +8631,7 @@ func awsRestjson1_deserializeDocumentRouteVehicleTravelStep(v **types.RouteVehic
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Instruction = ptr.String(jtv)
 			}
@@ -8759,7 +8759,7 @@ func awsRestjson1_deserializeDocumentRouteViolatedConstraints(v **types.RouteVio
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected SensitiveBoolean to be of type *bool, got %T instead", value)
 				}
 				sv.AllHazardsRestricted = ptr.Bool(jtv)
 			}
@@ -8880,7 +8880,7 @@ func awsRestjson1_deserializeDocumentRouteViolatedConstraints(v **types.RouteVio
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected SensitiveBoolean to be of type *bool, got %T instead", value)
 				}
 				sv.TimeDependent = ptr.Bool(jtv)
 			}
@@ -8894,7 +8894,7 @@ func awsRestjson1_deserializeDocumentRouteViolatedConstraints(v **types.RouteVio
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected SensitiveBoolean to be of type *bool, got %T instead", value)
 				}
 				sv.TravelMode = ptr.Bool(jtv)
 			}
@@ -9023,7 +9023,7 @@ func awsRestjson1_deserializeDocumentRouteZone(v **types.RouteZone, value interf
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
 			}
@@ -9454,7 +9454,7 @@ func awsRestjson1_deserializeDocumentWaypointOptimizationFailedConstraint(v **ty
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Reason = ptr.String(jtv)
 			}

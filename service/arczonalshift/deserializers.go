@@ -3272,6 +3272,42 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAllowedWindows(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected AllowedWindow to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAppliedWeights(v *map[string]float32, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3655,6 +3691,40 @@ func awsRestjson1_deserializeDocumentBlockedWindows(v *[]string, value interface
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentBlockingAlarms(v *[]types.ControlCondition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ControlCondition
+	if *v == nil {
+		cv = []types.ControlCondition{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ControlCondition
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentControlCondition(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3759,40 +3829,6 @@ func awsRestjson1_deserializeDocumentControlCondition(v **types.ControlCondition
 		}
 	}
 	*v = sv
-	return nil
-}
-
-func awsRestjson1_deserializeDocumentControlConditions(v *[]types.ControlCondition, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
-	}
-
-	shape, ok := value.([]interface{})
-	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
-	}
-
-	var cv []types.ControlCondition
-	if *v == nil {
-		cv = []types.ControlCondition{}
-	} else {
-		cv = *v
-	}
-
-	for _, value := range shape {
-		var col types.ControlCondition
-		destAddr := &col
-		if err := awsRestjson1_deserializeDocumentControlCondition(&destAddr, value); err != nil {
-			return err
-		}
-		col = *destAddr
-		cv = append(cv, col)
-
-	}
-	*v = cv
 	return nil
 }
 
@@ -3957,6 +3993,40 @@ func awsRestjson1_deserializeDocumentManagedResourceSummary(v **types.ManagedRes
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentOutcomeAlarms(v *[]types.ControlCondition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ControlCondition
+	if *v == nil {
+		cv = []types.ControlCondition{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ControlCondition
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentControlCondition(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentPracticeRunConfiguration(v **types.PracticeRunConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3979,6 +4049,11 @@ func awsRestjson1_deserializeDocumentPracticeRunConfiguration(v **types.Practice
 
 	for key, value := range shape {
 		switch key {
+		case "allowedWindows":
+			if err := awsRestjson1_deserializeDocumentAllowedWindows(&sv.AllowedWindows, value); err != nil {
+				return err
+			}
+
 		case "blockedDates":
 			if err := awsRestjson1_deserializeDocumentBlockedDates(&sv.BlockedDates, value); err != nil {
 				return err
@@ -3990,12 +4065,12 @@ func awsRestjson1_deserializeDocumentPracticeRunConfiguration(v **types.Practice
 			}
 
 		case "blockingAlarms":
-			if err := awsRestjson1_deserializeDocumentControlConditions(&sv.BlockingAlarms, value); err != nil {
+			if err := awsRestjson1_deserializeDocumentBlockingAlarms(&sv.BlockingAlarms, value); err != nil {
 				return err
 			}
 
 		case "outcomeAlarms":
-			if err := awsRestjson1_deserializeDocumentControlConditions(&sv.OutcomeAlarms, value); err != nil {
+			if err := awsRestjson1_deserializeDocumentOutcomeAlarms(&sv.OutcomeAlarms, value); err != nil {
 				return err
 			}
 

@@ -1,0 +1,8 @@
+{
+    "id": "ffc22594-fffe-4f4a-a2d8-156e4ad4d92f",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/appmesh"
+    ]
+}

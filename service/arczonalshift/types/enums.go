@@ -94,6 +94,7 @@ const (
 	ConflictExceptionReasonPracticeBlockingAlarmsRed          ConflictExceptionReason = "PracticeBlockingAlarmsRed"
 	ConflictExceptionReasonPracticeInBlockedDates             ConflictExceptionReason = "PracticeInBlockedDates"
 	ConflictExceptionReasonPracticeInBlockedWindows           ConflictExceptionReason = "PracticeInBlockedWindows"
+	ConflictExceptionReasonPracticeOutsideAllowedWindows      ConflictExceptionReason = "PracticeOutsideAllowedWindows"
 )
 
 // Values returns all known values for ConflictExceptionReason. Note that this can
@@ -113,6 +114,7 @@ func (ConflictExceptionReason) Values() []ConflictExceptionReason {
 		"PracticeBlockingAlarmsRed",
 		"PracticeInBlockedDates",
 		"PracticeInBlockedWindows",
+		"PracticeOutsideAllowedWindows",
 	}
 }
 
@@ -198,6 +200,8 @@ const (
 	ValidationExceptionReasonFisExperimentUpdateNotAllowed      ValidationExceptionReason = "FISExperimentUpdateNotAllowed"
 	ValidationExceptionReasonAutoshiftUpdateNotAllowed          ValidationExceptionReason = "AutoshiftUpdateNotAllowed"
 	ValidationExceptionReasonUnsupportedPracticeCancelShiftType ValidationExceptionReason = "UnsupportedPracticeCancelShiftType"
+	ValidationExceptionReasonInvalidPracticeAllowedWindow       ValidationExceptionReason = "InvalidPracticeAllowedWindow"
+	ValidationExceptionReasonConflictingPracticeWindows         ValidationExceptionReason = "InvalidPracticeWindows"
 )
 
 // Values returns all known values for ValidationExceptionReason. Note that this
@@ -219,6 +223,8 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"FISExperimentUpdateNotAllowed",
 		"AutoshiftUpdateNotAllowed",
 		"UnsupportedPracticeCancelShiftType",
+		"InvalidPracticeAllowedWindow",
+		"InvalidPracticeWindows",
 	}
 }
 

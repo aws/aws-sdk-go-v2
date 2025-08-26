@@ -1,0 +1,8 @@
+{
+    "id": "70f13d75-5edc-43ab-a18c-334d58112bdd",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/neptunedata"
+    ]
+}

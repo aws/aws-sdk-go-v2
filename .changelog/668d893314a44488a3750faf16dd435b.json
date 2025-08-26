@@ -1,0 +1,8 @@
+{
+    "id": "668d8933-14a4-4488-a375-0faf16dd435b",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/tnb"
+    ]
+}

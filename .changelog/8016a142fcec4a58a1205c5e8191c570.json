@@ -1,0 +1,8 @@
+{
+    "id": "8016a142-fcec-4a58-a120-5c5e8191c570",
+    "type": "feature",
+    "description": "This release adds new API options to enable allowed windows and multiple alarms for practice runs.",
+    "modules": [
+        "service/arczonalshift"
+    ]
+}

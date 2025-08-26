@@ -1,0 +1,8 @@
+{
+    "id": "9c5273a3-65d4-4c12-917e-62993ee8db38",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/codecommit"
+    ]
+}

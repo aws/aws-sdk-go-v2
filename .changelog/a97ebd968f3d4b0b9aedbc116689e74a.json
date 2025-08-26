@@ -1,0 +1,8 @@
+{
+    "id": "a97ebd96-8f3d-4b0b-9aed-bc116689e74a",
+    "type": "feature",
+    "description": "Add new APIs for viewing how your shared AMIs are used by other accounts, and identify resources in your account that are dependent on particular AMIs",
+    "modules": [
+        "service/ec2"
+    ]
+}

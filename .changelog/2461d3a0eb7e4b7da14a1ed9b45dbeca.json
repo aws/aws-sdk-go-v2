@@ -1,0 +1,8 @@
+{
+    "id": "2461d3a0-eb7e-4b7d-a14a-1ed9b45dbeca",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/iotsecuretunneling"
+    ]
+}

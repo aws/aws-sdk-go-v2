@@ -1,0 +1,8 @@
+{
+    "id": "479dbdb8-9179-4c36-bfcd-ee0d350af01a",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/kafka"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "2b269c98-fc89-440c-8da3-2a6fcd1d474f",
+    "type": "feature",
+    "description": "Added RouteFerryNotice PotentialViolatedVehicleRestrictionUsage value for CalculateRoutes. This value indicates when the Route is potentially forbidden for the given vehicle profile.",
+    "modules": [
+        "service/georoutes"
+    ]
+}

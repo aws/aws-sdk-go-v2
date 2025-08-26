@@ -1,0 +1,8 @@
+{
+    "id": "0ec53a42-8ff7-4858-ab73-e359fbe7cac0",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/codestarconnections"
+    ]
+}

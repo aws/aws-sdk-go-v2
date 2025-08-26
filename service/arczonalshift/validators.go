@@ -274,6 +274,23 @@ func addOpUpdateZonalShiftValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateZonalShift{}, middleware.After)
 }
 
+func validateBlockingAlarms(v []types.ControlCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BlockingAlarms"}
+	for i := range v {
+		if err := validateControlCondition(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateControlCondition(v *types.ControlCondition) error {
 	if v == nil {
 		return nil
@@ -292,11 +309,11 @@ func validateControlCondition(v *types.ControlCondition) error {
 	}
 }
 
-func validateControlConditions(v []types.ControlCondition) error {
+func validateOutcomeAlarms(v []types.ControlCondition) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "ControlConditions"}
+	invalidParams := smithy.InvalidParamsError{Context: "OutcomeAlarms"}
 	for i := range v {
 		if err := validateControlCondition(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
@@ -348,14 +365,14 @@ func validateOpCreatePracticeRunConfigurationInput(v *CreatePracticeRunConfigura
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceIdentifier"))
 	}
 	if v.BlockingAlarms != nil {
-		if err := validateControlConditions(v.BlockingAlarms); err != nil {
+		if err := validateBlockingAlarms(v.BlockingAlarms); err != nil {
 			invalidParams.AddNested("BlockingAlarms", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.OutcomeAlarms == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutcomeAlarms"))
 	} else if v.OutcomeAlarms != nil {
-		if err := validateControlConditions(v.OutcomeAlarms); err != nil {
+		if err := validateOutcomeAlarms(v.OutcomeAlarms); err != nil {
 			invalidParams.AddNested("OutcomeAlarms", err.(smithy.InvalidParamsError))
 		}
 	}
@@ -465,12 +482,12 @@ func validateOpUpdatePracticeRunConfigurationInput(v *UpdatePracticeRunConfigura
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceIdentifier"))
 	}
 	if v.BlockingAlarms != nil {
-		if err := validateControlConditions(v.BlockingAlarms); err != nil {
+		if err := validateBlockingAlarms(v.BlockingAlarms); err != nil {
 			invalidParams.AddNested("BlockingAlarms", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.OutcomeAlarms != nil {
-		if err := validateControlConditions(v.OutcomeAlarms); err != nil {
+		if err := validateOutcomeAlarms(v.OutcomeAlarms); err != nil {
 			invalidParams.AddNested("OutcomeAlarms", err.(smithy.InvalidParamsError))
 		}
 	}

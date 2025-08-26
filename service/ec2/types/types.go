@@ -5543,11 +5543,16 @@ type FleetCapacityReservation struct {
 // Describes an EC2 Fleet.
 type FleetData struct {
 
-	// The progress of the EC2 Fleet. If there is an error, the status is error . After
-	// all requests are placed, the status is pending_fulfillment . If the size of the
-	// EC2 Fleet is equal to or greater than its target capacity, the status is
-	// fulfilled . If the size of the EC2 Fleet is decreased, the status is
-	// pending_termination while instances are terminating.
+	// The progress of the EC2 Fleet.
+	//
+	// For fleets of type instant , the status is fulfilled after all requests are
+	// placed, regardless of whether target capacity is met (this is the only possible
+	// status for instant fleets).
+	//
+	// For fleets of type request or maintain , the status is pending_fulfillment
+	// after all requests are placed, fulfilled when the fleet size meets or exceeds
+	// target capacity, pending_termination while instances are terminating when fleet
+	// size is decreased, and error if there's an error.
 	ActivityStatus FleetActivityStatus
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
@@ -7132,6 +7137,149 @@ type ImageRecycleBinInfo struct {
 	// The date and time when the AMI is to be permanently deleted from the Recycle
 	// Bin.
 	RecycleBinExitTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// A resource that is referencing an image.
+type ImageReference struct {
+
+	// The Amazon Resource Name (ARN) of the resource referencing the image.
+	Arn *string
+
+	// The ID of the referenced image.
+	ImageId *string
+
+	// The type of resource referencing the image.
+	ResourceType ImageReferenceResourceType
+
+	noSmithyDocumentSerde
+}
+
+// The configuration and status of an image usage report.
+type ImageUsageReport struct {
+
+	// The IDs of the Amazon Web Services accounts that were specified when the report
+	// was created.
+	AccountIds []string
+
+	// The date and time when the report was created.
+	CreationTime *time.Time
+
+	// The date and time when Amazon EC2 will delete the report (30 days after the
+	// report was created).
+	ExpirationTime *time.Time
+
+	// The ID of the image that was specified when the report was created.
+	ImageId *string
+
+	// The ID of the report.
+	ReportId *string
+
+	// The resource types that were specified when the report was created.
+	ResourceTypes []ImageUsageResourceType
+
+	// The current state of the report. Possible values:
+	//
+	//   - available - The report is available to view.
+	//
+	//   - pending - The report is being created and not available to view.
+	//
+	//   - error - The report could not be created.
+	State *string
+
+	// Provides additional details when the report is in an error state.
+	StateReason *string
+
+	// Any tags assigned to the report.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// A single entry in an image usage report, detailing how an image is being used
+// by a specific Amazon Web Services account and resource type.
+type ImageUsageReportEntry struct {
+
+	// The ID of the account that uses the image.
+	AccountId *string
+
+	// The ID of the image.
+	ImageId *string
+
+	// The date and time the report creation was initiated.
+	ReportCreationTime *time.Time
+
+	// The ID of the report.
+	ReportId *string
+
+	// The type of resource ( ec2:Instance or ec2:LaunchTemplate ).
+	ResourceType *string
+
+	// The number of times resources of this type reference this image in the account.
+	UsageCount *int64
+
+	noSmithyDocumentSerde
+}
+
+// A resource type to include in the report. Associated options can also be
+// specified if the resource type is a launch template.
+type ImageUsageResourceType struct {
+
+	// The resource type.
+	//
+	// Valid values: ec2:Instance | ec2:LaunchTemplate
+	ResourceType *string
+
+	// The options that affect the scope of the report. Valid only when ResourceType
+	// is ec2:LaunchTemplate .
+	ResourceTypeOptions []ImageUsageResourceTypeOption
+
+	noSmithyDocumentSerde
+}
+
+// The options that affect the scope of the report.
+type ImageUsageResourceTypeOption struct {
+
+	// The name of the option.
+	OptionName *string
+
+	// The number of launch template versions to check.
+	OptionValues []string
+
+	noSmithyDocumentSerde
+}
+
+// The options that affect the scope of the report.
+type ImageUsageResourceTypeOptionRequest struct {
+
+	// The name of the option.
+	//
+	// Valid value: version-depth - The number of launch template versions to check.
+	OptionName *string
+
+	// A value for the specified option.
+	//
+	// Valid values: Integers between 1 and 10000
+	//
+	// Default: 20
+	OptionValues []string
+
+	noSmithyDocumentSerde
+}
+
+// A resource type to include in the report. Associated options can also be
+// specified if the resource type is a launch template.
+type ImageUsageResourceTypeRequest struct {
+
+	// The resource type.
+	//
+	// Valid values: ec2:Instance | ec2:LaunchTemplate
+	ResourceType *string
+
+	// The options that affect the scope of the report. Valid only when ResourceType
+	// is ec2:LaunchTemplate .
+	ResourceTypeOptions []ImageUsageResourceTypeOptionRequest
 
 	noSmithyDocumentSerde
 }
@@ -16582,6 +16730,54 @@ type ResourceStatementRequest struct {
 
 	// The resources.
 	Resources []string
+
+	noSmithyDocumentSerde
+}
+
+// The options that affect the scope of the response.
+type ResourceTypeOption struct {
+
+	// The name of the option.
+	//
+	//   - For ec2:Instance :
+	//
+	// Specify state-name - The current state of the EC2 instance.
+	//
+	//   - For ec2:LaunchTemplate :
+	//
+	// Specify version-depth - The number of launch template versions to check,
+	//   starting from the most recent version.
+	OptionName ImageReferenceOptionName
+
+	// A value for the specified option.
+	//
+	//   - For state-name :
+	//
+	//   - Valid values: pending | running | shutting-down | terminated | stopping |
+	//   stopped
+	//
+	//   - Default: All states
+	//
+	//   - For version-depth :
+	//
+	//   - Valid values: Integers between 1 and 10000
+	//
+	//   - Default: 10
+	OptionValues []string
+
+	noSmithyDocumentSerde
+}
+
+// A resource type to check for image references. Associated options can also be
+// specified if the resource type is an EC2 instance or launch template.
+type ResourceTypeRequest struct {
+
+	// The resource type.
+	ResourceType ImageReferenceResourceType
+
+	// The options that affect the scope of the response. Valid only when ResourceType
+	// is ec2:Instance or ec2:LaunchTemplate .
+	ResourceTypeOptions []ResourceTypeOption
 
 	noSmithyDocumentSerde
 }

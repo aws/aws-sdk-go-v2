@@ -2999,6 +2999,50 @@ func (ImageBlockPublicAccessEnabledState) Values() []ImageBlockPublicAccessEnabl
 	}
 }
 
+type ImageReferenceOptionName string
+
+// Enum values for ImageReferenceOptionName
+const (
+	ImageReferenceOptionNameStateName    ImageReferenceOptionName = "state-name"
+	ImageReferenceOptionNameVersionDepth ImageReferenceOptionName = "version-depth"
+)
+
+// Values returns all known values for ImageReferenceOptionName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ImageReferenceOptionName) Values() []ImageReferenceOptionName {
+	return []ImageReferenceOptionName{
+		"state-name",
+		"version-depth",
+	}
+}
+
+type ImageReferenceResourceType string
+
+// Enum values for ImageReferenceResourceType
+const (
+	ImageReferenceResourceTypeEc2Instance                 ImageReferenceResourceType = "ec2:Instance"
+	ImageReferenceResourceTypeEc2LaunchTemplate           ImageReferenceResourceType = "ec2:LaunchTemplate"
+	ImageReferenceResourceTypeSsmParameter                ImageReferenceResourceType = "ssm:Parameter"
+	ImageReferenceResourceTypeImageBuilderImageRecipe     ImageReferenceResourceType = "imagebuilder:ImageRecipe"
+	ImageReferenceResourceTypeImageBuilderContainerRecipe ImageReferenceResourceType = "imagebuilder:ContainerRecipe"
+)
+
+// Values returns all known values for ImageReferenceResourceType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ImageReferenceResourceType) Values() []ImageReferenceResourceType {
+	return []ImageReferenceResourceType{
+		"ec2:Instance",
+		"ec2:LaunchTemplate",
+		"ssm:Parameter",
+		"imagebuilder:ImageRecipe",
+		"imagebuilder:ContainerRecipe",
+	}
+}
+
 type ImageState string
 
 // Enum values for ImageState
@@ -7920,6 +7964,7 @@ const (
 	ResourceTypeFpgaImage                                              ResourceType = "fpga-image"
 	ResourceTypeHostReservation                                        ResourceType = "host-reservation"
 	ResourceTypeImage                                                  ResourceType = "image"
+	ResourceTypeImageUsageReport                                       ResourceType = "image-usage-report"
 	ResourceTypeImportImageTask                                        ResourceType = "import-image-task"
 	ResourceTypeImportSnapshotTask                                     ResourceType = "import-snapshot-task"
 	ResourceTypeInstance                                               ResourceType = "instance"
@@ -8024,6 +8069,7 @@ func (ResourceType) Values() []ResourceType {
 		"fpga-image",
 		"host-reservation",
 		"image",
+		"image-usage-report",
 		"import-image-task",
 		"import-snapshot-task",
 		"instance",

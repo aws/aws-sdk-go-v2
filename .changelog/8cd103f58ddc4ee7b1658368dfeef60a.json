@@ -1,0 +1,8 @@
+{
+    "id": "8cd103f5-8ddc-4ee7-b165-8368dfeef60a",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/rdsdata"
+    ]
+}

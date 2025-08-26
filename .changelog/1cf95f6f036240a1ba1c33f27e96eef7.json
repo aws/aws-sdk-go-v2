@@ -1,0 +1,8 @@
+{
+    "id": "1cf95f6f-0362-40a1-ba1c-33f27e96eef7",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/transfer"
+    ]
+}

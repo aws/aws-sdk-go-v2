@@ -1,0 +1,8 @@
+{
+    "id": "cc1ef452-1724-4628-a4e8-1d156848a993",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/ram"
+    ]
+}

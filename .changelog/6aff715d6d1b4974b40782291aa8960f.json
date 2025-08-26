@@ -1,0 +1,8 @@
+{
+    "id": "6aff715d-6d1b-4974-b407-82291aa8960f",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/signer"
+    ]
+}

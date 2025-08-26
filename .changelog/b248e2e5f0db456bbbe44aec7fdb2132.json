@@ -1,0 +1,8 @@
+{
+    "id": "b248e2e5-f0db-456b-bbe4-4aec7fdb2132",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/apprunner"
+    ]
+}

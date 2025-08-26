@@ -372,7 +372,7 @@ func awsRestjson1_deserializeOpDocumentCreateParticipantConnectionOutput(v **Cre
 			}
 
 		case "WebRTCConnection":
-			if err := awsRestjson1_deserializeDocumentConnectionData(&sv.WebRTCConnection, value); err != nil {
+			if err := awsRestjson1_deserializeDocumentWebRTCConnection(&sv.WebRTCConnection, value); err != nil {
 				return err
 			}
 
@@ -2277,47 +2277,6 @@ func awsRestjson1_deserializeDocumentConnectionCredentials(v **types.ConnectionC
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentConnectionData(v **types.ConnectionData, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
-	}
-
-	shape, ok := value.(map[string]interface{})
-	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
-	}
-
-	var sv *types.ConnectionData
-	if *v == nil {
-		sv = &types.ConnectionData{}
-	} else {
-		sv = *v
-	}
-
-	for key, value := range shape {
-		switch key {
-		case "Attendee":
-			if err := awsRestjson1_deserializeDocumentAttendee(&sv.Attendee, value); err != nil {
-				return err
-			}
-
-		case "Meeting":
-			if err := awsRestjson1_deserializeDocumentMeeting(&sv.Meeting, value); err != nil {
-				return err
-			}
-
-		default:
-			_, _ = key, value
-
-		}
-	}
-	*v = sv
-	return nil
-}
-
 func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalServerException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2478,141 +2437,6 @@ func awsRestjson1_deserializeDocumentItem(v **types.Item, value interface{}) err
 					return fmt.Errorf("expected ChatItemType to be of type string, got %T instead", value)
 				}
 				sv.Type = types.ChatItemType(jtv)
-			}
-
-		default:
-			_, _ = key, value
-
-		}
-	}
-	*v = sv
-	return nil
-}
-
-func awsRestjson1_deserializeDocumentMediaPlacement(v **types.MediaPlacement, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
-	}
-
-	shape, ok := value.(map[string]interface{})
-	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
-	}
-
-	var sv *types.MediaPlacement
-	if *v == nil {
-		sv = &types.MediaPlacement{}
-	} else {
-		sv = *v
-	}
-
-	for key, value := range shape {
-		switch key {
-		case "AudioFallbackUrl":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected URI to be of type string, got %T instead", value)
-				}
-				sv.AudioFallbackUrl = ptr.String(jtv)
-			}
-
-		case "AudioHostUrl":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected URI to be of type string, got %T instead", value)
-				}
-				sv.AudioHostUrl = ptr.String(jtv)
-			}
-
-		case "EventIngestionUrl":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected URI to be of type string, got %T instead", value)
-				}
-				sv.EventIngestionUrl = ptr.String(jtv)
-			}
-
-		case "SignalingUrl":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected URI to be of type string, got %T instead", value)
-				}
-				sv.SignalingUrl = ptr.String(jtv)
-			}
-
-		case "TurnControlUrl":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected URI to be of type string, got %T instead", value)
-				}
-				sv.TurnControlUrl = ptr.String(jtv)
-			}
-
-		default:
-			_, _ = key, value
-
-		}
-	}
-	*v = sv
-	return nil
-}
-
-func awsRestjson1_deserializeDocumentMeeting(v **types.Meeting, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
-	}
-
-	shape, ok := value.(map[string]interface{})
-	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
-	}
-
-	var sv *types.Meeting
-	if *v == nil {
-		sv = &types.Meeting{}
-	} else {
-		sv = *v
-	}
-
-	for key, value := range shape {
-		switch key {
-		case "MediaPlacement":
-			if err := awsRestjson1_deserializeDocumentMediaPlacement(&sv.MediaPlacement, value); err != nil {
-				return err
-			}
-
-		case "MediaRegion":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected MediaRegion to be of type string, got %T instead", value)
-				}
-				sv.MediaRegion = ptr.String(jtv)
-			}
-
-		case "MeetingFeatures":
-			if err := awsRestjson1_deserializeDocumentMeetingFeaturesConfiguration(&sv.MeetingFeatures, value); err != nil {
-				return err
-			}
-
-		case "MeetingId":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected MeetingId to be of type string, got %T instead", value)
-				}
-				sv.MeetingId = ptr.String(jtv)
 			}
 
 		default:
@@ -3254,6 +3078,164 @@ func awsRestjson1_deserializeDocumentViewContent(v **types.ViewContent, value in
 					return fmt.Errorf("expected ViewTemplate to be of type string, got %T instead", value)
 				}
 				sv.Template = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWebRTCConnection(v **types.WebRTCConnection, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WebRTCConnection
+	if *v == nil {
+		sv = &types.WebRTCConnection{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Attendee":
+			if err := awsRestjson1_deserializeDocumentAttendee(&sv.Attendee, value); err != nil {
+				return err
+			}
+
+		case "Meeting":
+			if err := awsRestjson1_deserializeDocumentWebRTCMeeting(&sv.Meeting, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWebRTCMediaPlacement(v **types.WebRTCMediaPlacement, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WebRTCMediaPlacement
+	if *v == nil {
+		sv = &types.WebRTCMediaPlacement{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AudioFallbackUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected URI to be of type string, got %T instead", value)
+				}
+				sv.AudioFallbackUrl = ptr.String(jtv)
+			}
+
+		case "AudioHostUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected URI to be of type string, got %T instead", value)
+				}
+				sv.AudioHostUrl = ptr.String(jtv)
+			}
+
+		case "EventIngestionUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected URI to be of type string, got %T instead", value)
+				}
+				sv.EventIngestionUrl = ptr.String(jtv)
+			}
+
+		case "SignalingUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected URI to be of type string, got %T instead", value)
+				}
+				sv.SignalingUrl = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWebRTCMeeting(v **types.WebRTCMeeting, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WebRTCMeeting
+	if *v == nil {
+		sv = &types.WebRTCMeeting{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MediaPlacement":
+			if err := awsRestjson1_deserializeDocumentWebRTCMediaPlacement(&sv.MediaPlacement, value); err != nil {
+				return err
+			}
+
+		case "MeetingFeatures":
+			if err := awsRestjson1_deserializeDocumentMeetingFeaturesConfiguration(&sv.MeetingFeatures, value); err != nil {
+				return err
+			}
+
+		case "MeetingId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GuidString to be of type string, got %T instead", value)
+				}
+				sv.MeetingId = ptr.String(jtv)
 			}
 
 		default:

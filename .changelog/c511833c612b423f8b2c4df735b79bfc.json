@@ -1,0 +1,8 @@
+{
+    "id": "c511833c-612b-423f-8b2c-4df735b79bfc",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/migrationhubrefactorspaces"
+    ]
+}

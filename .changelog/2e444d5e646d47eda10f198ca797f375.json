@@ -1,0 +1,8 @@
+{
+    "id": "2e444d5e-646d-47ed-a10f-198ca797f375",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/globalaccelerator"
+    ]
+}

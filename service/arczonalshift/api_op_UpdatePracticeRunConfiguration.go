@@ -38,6 +38,23 @@ type UpdatePracticeRunConfigurationInput struct {
 	// This member is required.
 	ResourceIdentifier *string
 
+	// Add, change, or remove windows of days and times for when you can, optionally,
+	// allow ARC to start a practice run for a resource.
+	//
+	// The format for allowed windows is: DAY:HH:SS-DAY:HH:SS. Keep in mind, when you
+	// specify dates, that dates and times for practice runs are in UTC. Also, be aware
+	// of potential time adjustments that might be required for daylight saving time
+	// differences. Separate multiple allowed windows with spaces.
+	//
+	// For example, say you want to allow practice runs only on Wednesdays and Fridays
+	// from noon to 5 p.m. For this scenario, you could set the following recurring
+	// days and times as allowed windows, for example: Wed-12:00-Wed:17:00
+	// Fri-12:00-Fri:17:00 .
+	//
+	// The allowedWindows have to start and end on the same day. Windows that span
+	// multiple days aren't supported.
+	AllowedWindows []string
+
 	// Add, change, or remove blocked dates for a practice run in zonal autoshift.
 	//
 	// Optionally, you can block practice runs for specific calendar dates. The format
@@ -63,11 +80,11 @@ type UpdatePracticeRunConfigurationInput struct {
 	// windows, for example: MON-20:30-21:30 WED-20:30-21:30 FRI-20:30-21:30 .
 	BlockedWindows []string
 
-	// Add, change, or remove the Amazon CloudWatch alarm that you optionally specify
-	// as the blocking alarm for practice runs.
+	// Add, change, or remove the Amazon CloudWatch alarms that you optionally specify
+	// as the blocking alarms for practice runs.
 	BlockingAlarms []types.ControlCondition
 
-	// Specify a new the Amazon CloudWatch alarm as the outcome alarm for practice
+	// Specify one or more Amazon CloudWatch alarms as the outcome alarms for practice
 	// runs.
 	OutcomeAlarms []types.ControlCondition
 

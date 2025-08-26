@@ -128,7 +128,7 @@ type CreateParticipantConnectionOutput struct {
 
 	// Creates the participant's WebRTC connection data required for the client
 	// application (mobile application or website) to connect to the call.
-	WebRTCConnection *types.ConnectionData
+	WebRTCConnection *types.WebRTCConnection
 
 	// Creates the participant's websocket connection.
 	Websocket *types.Websocket

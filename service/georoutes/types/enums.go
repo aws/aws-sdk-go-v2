@@ -406,12 +406,13 @@ type RouteFerryNoticeCode string
 
 // Enum values for RouteFerryNoticeCode
 const (
-	RouteFerryNoticeCodeAccuratePolylineUnavailable RouteFerryNoticeCode = "AccuratePolylineUnavailable"
-	RouteFerryNoticeCodeNoSchedule                  RouteFerryNoticeCode = "NoSchedule"
-	RouteFerryNoticeCodeOther                       RouteFerryNoticeCode = "Other"
-	RouteFerryNoticeCodeViolatedAvoidFerry          RouteFerryNoticeCode = "ViolatedAvoidFerry"
-	RouteFerryNoticeCodeViolatedAvoidRailFerry      RouteFerryNoticeCode = "ViolatedAvoidRailFerry"
-	RouteFerryNoticeCodeSeasonalClosure             RouteFerryNoticeCode = "SeasonalClosure"
+	RouteFerryNoticeCodeAccuratePolylineUnavailable              RouteFerryNoticeCode = "AccuratePolylineUnavailable"
+	RouteFerryNoticeCodeNoSchedule                               RouteFerryNoticeCode = "NoSchedule"
+	RouteFerryNoticeCodeOther                                    RouteFerryNoticeCode = "Other"
+	RouteFerryNoticeCodeViolatedAvoidFerry                       RouteFerryNoticeCode = "ViolatedAvoidFerry"
+	RouteFerryNoticeCodeViolatedAvoidRailFerry                   RouteFerryNoticeCode = "ViolatedAvoidRailFerry"
+	RouteFerryNoticeCodeSeasonalClosure                          RouteFerryNoticeCode = "SeasonalClosure"
+	RouteFerryNoticeCodePotentialViolatedVehicleRestrictionUsage RouteFerryNoticeCode = "PotentialViolatedVehicleRestrictionUsage"
 )
 
 // Values returns all known values for RouteFerryNoticeCode. Note that this can be
@@ -426,6 +427,7 @@ func (RouteFerryNoticeCode) Values() []RouteFerryNoticeCode {
 		"ViolatedAvoidFerry",
 		"ViolatedAvoidRailFerry",
 		"SeasonalClosure",
+		"PotentialViolatedVehicleRestrictionUsage",
 	}
 }
 

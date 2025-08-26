@@ -1,0 +1,8 @@
+{
+    "id": "4a7a4e59-89f0-4bf1-80a3-29b50328ace4",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/cloudwatch"
+    ]
+}

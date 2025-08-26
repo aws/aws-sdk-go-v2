@@ -998,6 +998,18 @@ func TestCheckSnapshot_CreateImage(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateImageUsageReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateImageUsageReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateImageUsageReport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateInstanceConnectEndpoint(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateInstanceConnectEndpoint(context.Background(), nil, func(o *Options) {
@@ -2011,6 +2023,18 @@ func TestCheckSnapshot_DeleteFpgaImage(t *testing.T) {
 	_, err := svc.DeleteFpgaImage(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteFpgaImage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteImageUsageReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteImageUsageReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteImageUsageReport")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3530,11 +3554,47 @@ func TestCheckSnapshot_DescribeImageAttribute(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeImageReferences(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeImageReferences(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeImageReferences")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeImages(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeImages(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeImages")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeImageUsageReportEntries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeImageUsageReportEntries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeImageUsageReportEntries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeImageUsageReports(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeImageUsageReports(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeImageUsageReports")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -9265,6 +9325,18 @@ func TestUpdateSnapshot_CreateImage(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateImageUsageReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateImageUsageReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateImageUsageReport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateInstanceConnectEndpoint(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateInstanceConnectEndpoint(context.Background(), nil, func(o *Options) {
@@ -10278,6 +10350,18 @@ func TestUpdateSnapshot_DeleteFpgaImage(t *testing.T) {
 	_, err := svc.DeleteFpgaImage(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteFpgaImage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteImageUsageReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteImageUsageReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteImageUsageReport")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -11797,11 +11881,47 @@ func TestUpdateSnapshot_DescribeImageAttribute(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeImageReferences(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeImageReferences(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeImageReferences")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeImages(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeImages(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeImages")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeImageUsageReportEntries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeImageUsageReportEntries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeImageUsageReportEntries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeImageUsageReports(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeImageUsageReports(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeImageUsageReports")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

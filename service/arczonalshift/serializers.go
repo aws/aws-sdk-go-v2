@@ -230,6 +230,13 @@ func awsRestjson1_serializeOpDocumentCreatePracticeRunConfigurationInput(v *Crea
 	object := value.Object()
 	defer object.Close()
 
+	if v.AllowedWindows != nil {
+		ok := object.Key("allowedWindows")
+		if err := awsRestjson1_serializeDocumentAllowedWindows(v.AllowedWindows, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.BlockedDates != nil {
 		ok := object.Key("blockedDates")
 		if err := awsRestjson1_serializeDocumentBlockedDates(v.BlockedDates, ok); err != nil {
@@ -246,14 +253,14 @@ func awsRestjson1_serializeOpDocumentCreatePracticeRunConfigurationInput(v *Crea
 
 	if v.BlockingAlarms != nil {
 		ok := object.Key("blockingAlarms")
-		if err := awsRestjson1_serializeDocumentControlConditions(v.BlockingAlarms, ok); err != nil {
+		if err := awsRestjson1_serializeDocumentBlockingAlarms(v.BlockingAlarms, ok); err != nil {
 			return err
 		}
 	}
 
 	if v.OutcomeAlarms != nil {
 		ok := object.Key("outcomeAlarms")
-		if err := awsRestjson1_serializeDocumentControlConditions(v.OutcomeAlarms, ok); err != nil {
+		if err := awsRestjson1_serializeDocumentOutcomeAlarms(v.OutcomeAlarms, ok); err != nil {
 			return err
 		}
 	}
@@ -1042,6 +1049,13 @@ func awsRestjson1_serializeOpDocumentUpdatePracticeRunConfigurationInput(v *Upda
 	object := value.Object()
 	defer object.Close()
 
+	if v.AllowedWindows != nil {
+		ok := object.Key("allowedWindows")
+		if err := awsRestjson1_serializeDocumentAllowedWindows(v.AllowedWindows, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.BlockedDates != nil {
 		ok := object.Key("blockedDates")
 		if err := awsRestjson1_serializeDocumentBlockedDates(v.BlockedDates, ok); err != nil {
@@ -1058,14 +1072,14 @@ func awsRestjson1_serializeOpDocumentUpdatePracticeRunConfigurationInput(v *Upda
 
 	if v.BlockingAlarms != nil {
 		ok := object.Key("blockingAlarms")
-		if err := awsRestjson1_serializeDocumentControlConditions(v.BlockingAlarms, ok); err != nil {
+		if err := awsRestjson1_serializeDocumentBlockingAlarms(v.BlockingAlarms, ok); err != nil {
 			return err
 		}
 	}
 
 	if v.OutcomeAlarms != nil {
 		ok := object.Key("outcomeAlarms")
-		if err := awsRestjson1_serializeDocumentControlConditions(v.OutcomeAlarms, ok); err != nil {
+		if err := awsRestjson1_serializeDocumentOutcomeAlarms(v.OutcomeAlarms, ok); err != nil {
 			return err
 		}
 	}
@@ -1266,6 +1280,17 @@ func awsRestjson1_serializeOpDocumentUpdateZonalShiftInput(v *UpdateZonalShiftIn
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAllowedWindows(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentBlockedDates(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -1288,6 +1313,19 @@ func awsRestjson1_serializeDocumentBlockedWindows(v []string, value smithyjson.V
 	return nil
 }
 
+func awsRestjson1_serializeDocumentBlockingAlarms(v []types.ControlCondition, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentControlCondition(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentControlCondition(v *types.ControlCondition, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1305,7 +1343,7 @@ func awsRestjson1_serializeDocumentControlCondition(v *types.ControlCondition, v
 	return nil
 }
 
-func awsRestjson1_serializeDocumentControlConditions(v []types.ControlCondition, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentOutcomeAlarms(v []types.ControlCondition, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 

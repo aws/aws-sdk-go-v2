@@ -1,0 +1,8 @@
+{
+    "id": "5a9b6083-84c9-4710-848c-4175ecbfbe18",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/resourceexplorer2"
+    ]
+}
