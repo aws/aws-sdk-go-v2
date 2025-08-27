@@ -3,8 +3,8 @@ module github.com/aws/aws-sdk-go-v2/service/internal/checksum
 go 1.22
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.38.1
-	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.13.4
+	github.com/aws/aws-sdk-go-v2 v1.38.2
+	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.13.5
 	github.com/aws/smithy-go v1.23.0
 )
 

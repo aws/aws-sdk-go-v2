@@ -1,8 +1,0 @@
-{
-    "id": "5bf8841f-2565-4d8e-badd-6f7d57f9a060",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/acmpca"
-    ]
-}

@@ -1,3 +1,8 @@
+# v1.103.4 (2025-08-27)
+
+* **Dependency Update**: Update to smithy-go v1.23.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.103.3 (2025-08-22)
 
 * **Documentation**: Updates Amazon RDS documentation for Db2 read-only replicas.

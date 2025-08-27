@@ -1,3 +1,9 @@
+# v1.37.2 (2025-08-27)
+
+* **Bug Fix**: Ensure document.Interface values with maps serialize keys in a stable order. This should improve prompt cache hit rates with various inputs.
+* **Dependency Update**: Update to smithy-go v1.23.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.37.1 (2025-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

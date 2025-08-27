@@ -1,8 +1,0 @@
-{
-    "id": "318e79a6-c381-4839-99fb-0e5020c9f5ce",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/timestreamwrite"
-    ]
-}

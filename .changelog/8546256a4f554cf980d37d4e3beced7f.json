@@ -1,8 +1,0 @@
-{
-    "id": "8546256a-4f55-4cf9-80d3-7d4e3beced7f",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/chimesdkmeetings"
-    ]
-}

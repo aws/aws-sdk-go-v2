@@ -1,3 +1,8 @@
+# v1.247.1 (2025-08-27)
+
+* **Dependency Update**: Update to smithy-go v1.23.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.247.0 (2025-08-26)
 
 * **Feature**: Add new APIs for viewing how your shared AMIs are used by other accounts, and identify resources in your account that are dependent on particular AMIs

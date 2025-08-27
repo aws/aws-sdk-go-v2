@@ -1,8 +1,0 @@
-{
-    "id": "740b637d-e970-4b1a-a684-35c560452e9b",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/datapipeline"
-    ]
-}

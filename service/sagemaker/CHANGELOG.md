@@ -1,3 +1,9 @@
+# v1.213.0 (2025-08-27)
+
+* **Feature**: This release adds support for AutoScaling on SageMaker HyperPod.
+* **Dependency Update**: Update to smithy-go v1.23.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.212.0 (2025-08-22)
 
 * **Feature**: Launch SageMaker Notebook Instances support for AL2023 along with P6-B200 instance type and Rootless Docker support for SageMaker Studio.

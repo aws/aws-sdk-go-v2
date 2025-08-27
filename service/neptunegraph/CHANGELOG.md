@@ -1,3 +1,9 @@
+# v1.21.0 (2025-08-27)
+
+* **Feature**: Add StartGraph and StopGraph operations to Neptune Analytics
+* **Dependency Update**: Update to smithy-go v1.23.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.2 (2025-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

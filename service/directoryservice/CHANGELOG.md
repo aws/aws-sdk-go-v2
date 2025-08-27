@@ -1,3 +1,9 @@
+# v1.37.0 (2025-08-27)
+
+* **Feature**: Add APIs for CA AutoEnrollment support: DescribeCAEnrollmentPolicy, EnableCAEnrollmentPolicy and DisableCAEnrollmentPolicy.
+* **Dependency Update**: Update to smithy-go v1.23.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.36.0 (2025-08-21)
 
 * **Feature**: Remove incorrect endpoint tests

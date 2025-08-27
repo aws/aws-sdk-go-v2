@@ -1,8 +1,0 @@
-{
-    "id": "9702a245-2ad5-4952-9210-600aeaf9d5b9",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/snowdevicemanagement"
-    ]
-}

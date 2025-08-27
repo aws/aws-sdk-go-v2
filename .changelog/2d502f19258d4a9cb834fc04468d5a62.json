@@ -1,8 +1,0 @@
-{
-    "id": "2d502f19-258d-4a9c-b834-fc04468d5a62",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/codebuild"
-    ]
-}

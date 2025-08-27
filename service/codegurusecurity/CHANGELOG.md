@@ -1,3 +1,8 @@
+# v1.16.4 (2025-08-27)
+
+* **Dependency Update**: Update to smithy-go v1.23.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.3 (2025-08-25)
 
 * **Documentation**: Documentation update to notify users of the discontinuation of Amazon CodeGuru Security.

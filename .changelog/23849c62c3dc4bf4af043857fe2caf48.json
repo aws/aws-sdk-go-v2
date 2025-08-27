@@ -1,8 +1,0 @@
-{
-    "id": "23849c62-c3dc-4bf4-af04-3857fe2caf48",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/sns"
-    ]
-}

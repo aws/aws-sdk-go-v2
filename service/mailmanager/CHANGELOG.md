@@ -1,3 +1,8 @@
+# v1.17.1 (2025-08-27)
+
+* **Dependency Update**: Update to smithy-go v1.23.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.0 (2025-08-25)
 
 * **Feature**: Remove incorrect endpoint tests

@@ -1,8 +1,0 @@
-{
-    "id": "8eab7218-cf0e-4b98-8060-4d14f23be0e0",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/amplifybackend"
-    ]
-}

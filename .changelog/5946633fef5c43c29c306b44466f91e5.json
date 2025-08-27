@@ -1,8 +1,0 @@
-{
-    "id": "5946633f-ef5c-43c2-9c30-6b44466f91e5",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/kms"
-    ]
-}

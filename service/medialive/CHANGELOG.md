@@ -1,3 +1,8 @@
+# v1.81.1 (2025-08-27)
+
+* **Dependency Update**: Update to smithy-go v1.23.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.81.0 (2025-08-22)
 
 * **Feature**: AWS Elemental MediaLive now has a field called "SubtitleRows" for controlling subtitle row count for DVB-Sub and Burn-In captions outputs

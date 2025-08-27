@@ -1,8 +1,0 @@
-{
-    "id": "5f8daa6d-a40d-47eb-aec7-c63a30007cac",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/vpclattice"
-    ]
-}

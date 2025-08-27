@@ -1,8 +1,0 @@
-{
-    "id": "d632388d-6cf3-4b88-9191-62b233b21d38",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/kinesisvideo"
-    ]
-}

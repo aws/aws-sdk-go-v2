@@ -1,8 +1,0 @@
-{
-    "id": "a34d84cd-c6c0-4fad-aa7a-5933a1b9077f",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/workmail"
-    ]
-}

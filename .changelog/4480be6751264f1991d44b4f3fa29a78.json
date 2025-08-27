@@ -1,8 +1,0 @@
-{
-    "id": "4480be67-5126-4f19-91d4-4b4f3fa29a78",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/frauddetector"
-    ]
-}

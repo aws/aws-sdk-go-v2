@@ -1,8 +1,0 @@
-{
-    "id": "de471679-024a-42ec-abea-b4074bebffea",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/lakeformation"
-    ]
-}

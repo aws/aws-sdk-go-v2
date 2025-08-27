@@ -1,8 +1,0 @@
-{
-    "id": "6f500193-10a3-4736-93ad-5ee4758ad975",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/iotwireless"
-    ]
-}

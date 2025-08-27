@@ -1,8 +1,0 @@
-{
-    "id": "7881fdd8-fb42-4a3f-a81e-43924d55e0b8",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/applicationdiscoveryservice"
-    ]
-}

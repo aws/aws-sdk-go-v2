@@ -1,8 +1,0 @@
-{
-    "id": "ced30c90-7041-45e2-9de0-977f5af8b3cd",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/iot"
-    ]
-}

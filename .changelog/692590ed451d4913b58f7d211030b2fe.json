@@ -1,8 +1,0 @@
-{
-    "id": "692590ed-451d-4913-b58f-7d211030b2fe",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/computeoptimizer"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "1ef9fb01-0d21-4be8-ab66-c655bcf3d05e",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/omics"
-    ]
-}

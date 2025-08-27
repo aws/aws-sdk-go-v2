@@ -1,8 +1,0 @@
-{
-    "id": "32b100d7-9ea6-4ddb-b8a9-d7538ad2f6b8",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/paymentcryptographydata"
-    ]
-}

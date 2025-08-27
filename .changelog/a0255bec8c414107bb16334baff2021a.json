@@ -1,8 +1,0 @@
-{
-    "id": "a0255bec-8c41-4107-bb16-334baff2021a",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/mgn"
-    ]
-}

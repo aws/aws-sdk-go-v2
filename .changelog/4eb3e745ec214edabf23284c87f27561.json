@@ -1,8 +1,0 @@
-{
-    "id": "4eb3e745-ec21-4eda-bf23-284c87f27561",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/kafkaconnect"
-    ]
-}
