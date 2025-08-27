@@ -1,0 +1,8 @@
+{
+    "id": "0913e576-7e83-4cb8-b31d-e1b8b7dfeea7",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/robomaker"
+    ]
+}

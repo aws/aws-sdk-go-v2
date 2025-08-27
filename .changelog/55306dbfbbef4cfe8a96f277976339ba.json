@@ -1,0 +1,8 @@
+{
+    "id": "55306dbf-bbef-4cfe-8a96-f277976339ba",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/ivsrealtime"
+    ]
+}

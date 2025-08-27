@@ -1,0 +1,8 @@
+{
+    "id": "7c366f6f-12be-41ca-b967-8aebb2a7f249",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/schemas"
+    ]
+}

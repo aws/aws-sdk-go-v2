@@ -2,6 +2,33 @@
 
 package types
 
+type CaEnrollmentPolicyStatus string
+
+// Enum values for CaEnrollmentPolicyStatus
+const (
+	CaEnrollmentPolicyStatusInProgress CaEnrollmentPolicyStatus = "InProgress"
+	CaEnrollmentPolicyStatusSuccess    CaEnrollmentPolicyStatus = "Success"
+	CaEnrollmentPolicyStatusFailed     CaEnrollmentPolicyStatus = "Failed"
+	CaEnrollmentPolicyStatusDisabling  CaEnrollmentPolicyStatus = "Disabling"
+	CaEnrollmentPolicyStatusDisabled   CaEnrollmentPolicyStatus = "Disabled"
+	CaEnrollmentPolicyStatusImpaired   CaEnrollmentPolicyStatus = "Impaired"
+)
+
+// Values returns all known values for CaEnrollmentPolicyStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CaEnrollmentPolicyStatus) Values() []CaEnrollmentPolicyStatus {
+	return []CaEnrollmentPolicyStatus{
+		"InProgress",
+		"Success",
+		"Failed",
+		"Disabling",
+		"Disabled",
+		"Impaired",
+	}
+}
+
 type CertificateState string
 
 // Enum values for CertificateState

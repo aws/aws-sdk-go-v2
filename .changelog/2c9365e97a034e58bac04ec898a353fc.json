@@ -1,0 +1,8 @@
+{
+    "id": "2c9365e9-7a03-4e58-bac0-4ec898a353fc",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/cleanroomsml"
+    ]
+}

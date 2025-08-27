@@ -1,0 +1,8 @@
+{
+    "id": "ab65a6ab-6b1a-4f6b-a0e2-4d8bf1b7fb10",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/neptune"
+    ]
+}

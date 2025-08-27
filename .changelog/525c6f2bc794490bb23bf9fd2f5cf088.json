@@ -1,0 +1,8 @@
+{
+    "id": "525c6f2b-c794-490b-b23b-f9fd2f5cf088",
+    "type": "feature",
+    "description": "This release adds support for AutoScaling on SageMaker HyperPod.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

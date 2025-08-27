@@ -517,6 +517,27 @@ func (FargateProfileStatus) Values() []FargateProfileStatus {
 	}
 }
 
+type InsightsRefreshStatus string
+
+// Enum values for InsightsRefreshStatus
+const (
+	InsightsRefreshStatusInProgress InsightsRefreshStatus = "IN_PROGRESS"
+	InsightsRefreshStatusFailed     InsightsRefreshStatus = "FAILED"
+	InsightsRefreshStatusCompleted  InsightsRefreshStatus = "COMPLETED"
+)
+
+// Values returns all known values for InsightsRefreshStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InsightsRefreshStatus) Values() []InsightsRefreshStatus {
+	return []InsightsRefreshStatus{
+		"IN_PROGRESS",
+		"FAILED",
+		"COMPLETED",
+	}
+}
+
 type InsightStatusValue string
 
 // Enum values for InsightStatusValue

@@ -1,0 +1,8 @@
+{
+    "id": "4bf80aaf-b502-4d3f-8955-0e79877dfacf",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/applicationinsights"
+    ]
+}

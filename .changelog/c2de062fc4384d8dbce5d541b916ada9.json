@@ -1,0 +1,8 @@
+{
+    "id": "c2de062f-c438-4d8d-bce5-d541b916ada9",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/personalize"
+    ]
+}

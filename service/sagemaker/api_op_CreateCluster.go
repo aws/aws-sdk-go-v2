@@ -39,6 +39,17 @@ type CreateClusterInput struct {
 	// This member is required.
 	ClusterName *string
 
+	// The autoscaling configuration for the cluster. Enables automatic scaling of
+	// cluster nodes based on workload demand using a Karpenter-based system.
+	AutoScaling *types.ClusterAutoScalingConfig
+
+	// The Amazon Resource Name (ARN) of the IAM role that HyperPod assumes to perform
+	// cluster autoscaling operations. This role must have permissions for
+	// sagemaker:BatchAddClusterNodes and sagemaker:BatchDeleteClusterNodes . This is
+	// only required when autoscaling is enabled and when HyperPod is performing
+	// autoscaling operations.
+	ClusterRole *string
+
 	// The instance groups to be created in the SageMaker HyperPod cluster.
 	InstanceGroups []types.ClusterInstanceGroupSpecification
 

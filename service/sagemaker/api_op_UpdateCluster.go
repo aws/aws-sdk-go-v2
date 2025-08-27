@@ -34,6 +34,14 @@ type UpdateClusterInput struct {
 	// This member is required.
 	ClusterName *string
 
+	// Updates the autoscaling configuration for the cluster. Use to enable or disable
+	// automatic node scaling.
+	AutoScaling *types.ClusterAutoScalingConfig
+
+	// The Amazon Resource Name (ARN) of the IAM role that HyperPod assumes for
+	// cluster autoscaling operations. Cannot be updated while autoscaling is enabled.
+	ClusterRole *string
+
 	// Specify the instance groups to update.
 	InstanceGroups []types.ClusterInstanceGroupSpecification
 

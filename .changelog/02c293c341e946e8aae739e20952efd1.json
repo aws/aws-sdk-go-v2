@@ -1,0 +1,8 @@
+{
+    "id": "02c293c3-41e9-46e8-aae7-39e20952efd1",
+    "type": "feature",
+    "description": "Add support for on-demand refresh of EKS cluster insights",
+    "modules": [
+        "service/eks"
+    ]
+}

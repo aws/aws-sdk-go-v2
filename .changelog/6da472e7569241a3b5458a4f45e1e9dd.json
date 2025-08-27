@@ -1,0 +1,8 @@
+{
+    "id": "6da472e7-5692-41a3-b545-8a4f45e1e9dd",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/codeguruprofiler"
+    ]
+}

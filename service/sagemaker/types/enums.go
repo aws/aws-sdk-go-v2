@@ -1643,6 +1643,65 @@ func (ClarifyTextLanguage) Values() []ClarifyTextLanguage {
 	}
 }
 
+type ClusterAutoScalerType string
+
+// Enum values for ClusterAutoScalerType
+const (
+	ClusterAutoScalerTypeKarpenter ClusterAutoScalerType = "Karpenter"
+)
+
+// Values returns all known values for ClusterAutoScalerType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterAutoScalerType) Values() []ClusterAutoScalerType {
+	return []ClusterAutoScalerType{
+		"Karpenter",
+	}
+}
+
+type ClusterAutoScalingMode string
+
+// Enum values for ClusterAutoScalingMode
+const (
+	ClusterAutoScalingModeEnable  ClusterAutoScalingMode = "Enable"
+	ClusterAutoScalingModeDisable ClusterAutoScalingMode = "Disable"
+)
+
+// Values returns all known values for ClusterAutoScalingMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterAutoScalingMode) Values() []ClusterAutoScalingMode {
+	return []ClusterAutoScalingMode{
+		"Enable",
+		"Disable",
+	}
+}
+
+type ClusterAutoScalingStatus string
+
+// Enum values for ClusterAutoScalingStatus
+const (
+	ClusterAutoScalingStatusInservice ClusterAutoScalingStatus = "InService"
+	ClusterAutoScalingStatusFailed    ClusterAutoScalingStatus = "Failed"
+	ClusterAutoScalingStatusCreating  ClusterAutoScalingStatus = "Creating"
+	ClusterAutoScalingStatusDeleting  ClusterAutoScalingStatus = "Deleting"
+)
+
+// Values returns all known values for ClusterAutoScalingStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterAutoScalingStatus) Values() []ClusterAutoScalingStatus {
+	return []ClusterAutoScalingStatus{
+		"InService",
+		"Failed",
+		"Creating",
+		"Deleting",
+	}
+}
+
 type ClusterEventResourceType string
 
 // Enum values for ClusterEventResourceType

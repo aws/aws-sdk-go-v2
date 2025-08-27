@@ -24486,6 +24486,23 @@ func awsAwsjson11_serializeDocumentClarifyTextConfig(v *types.ClarifyTextConfig,
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentClusterAutoScalingConfig(v *types.ClusterAutoScalingConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AutoScalerType) > 0 {
+		ok := object.Key("AutoScalerType")
+		ok.String(string(v.AutoScalerType))
+	}
+
+	if len(v.Mode) > 0 {
+		ok := object.Key("Mode")
+		ok.String(string(v.Mode))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentClusterEbsVolumeConfig(v *types.ClusterEbsVolumeConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -35818,9 +35835,21 @@ func awsAwsjson11_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.AutoScaling != nil {
+		ok := object.Key("AutoScaling")
+		if err := awsAwsjson11_serializeDocumentClusterAutoScalingConfig(v.AutoScaling, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ClusterName != nil {
 		ok := object.Key("ClusterName")
 		ok.String(*v.ClusterName)
+	}
+
+	if v.ClusterRole != nil {
+		ok := object.Key("ClusterRole")
+		ok.String(*v.ClusterRole)
 	}
 
 	if v.InstanceGroups != nil {
@@ -45540,9 +45569,21 @@ func awsAwsjson11_serializeOpDocumentUpdateClusterInput(v *UpdateClusterInput, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.AutoScaling != nil {
+		ok := object.Key("AutoScaling")
+		if err := awsAwsjson11_serializeDocumentClusterAutoScalingConfig(v.AutoScaling, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ClusterName != nil {
 		ok := object.Key("ClusterName")
 		ok.String(*v.ClusterName)
+	}
+
+	if v.ClusterRole != nil {
+		ok := object.Key("ClusterRole")
+		ok.String(*v.ClusterRole)
 	}
 
 	if v.InstanceGroups != nil {

@@ -1,0 +1,8 @@
+{
+    "id": "a37a20b9-50c8-49b9-a0ee-fd5b9ee154c6",
+    "type": "feature",
+    "description": "Add StartGraph and StopGraph operations to Neptune Analytics",
+    "modules": [
+        "service/neptunegraph"
+    ]
+}

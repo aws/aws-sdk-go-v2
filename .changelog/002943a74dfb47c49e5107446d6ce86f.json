@@ -1,0 +1,8 @@
+{
+    "id": "002943a7-4dfb-47c4-9e51-07446d6ce86f",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/voiceid"
+    ]
+}

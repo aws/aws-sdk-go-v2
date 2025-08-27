@@ -56,8 +56,15 @@ type DescribeClusterOutput struct {
 	// This member is required.
 	InstanceGroups []types.ClusterInstanceGroupDetails
 
+	// The current autoscaling configuration and status for the autoscaler.
+	AutoScaling *types.ClusterAutoScalingConfigOutput
+
 	// The name of the SageMaker HyperPod cluster.
 	ClusterName *string
+
+	// The Amazon Resource Name (ARN) of the IAM role that HyperPod uses for cluster
+	// autoscaling operations.
+	ClusterRole *string
 
 	// The time when the SageMaker Cluster is created.
 	CreationTime *time.Time

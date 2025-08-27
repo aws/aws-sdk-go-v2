@@ -1,0 +1,8 @@
+{
+    "id": "fdbd7718-fcba-49e4-995b-3832b1242e6a",
+    "type": "feature",
+    "description": "Add APIs for CA AutoEnrollment support: DescribeCAEnrollmentPolicy, EnableCAEnrollmentPolicy and DisableCAEnrollmentPolicy.",
+    "modules": [
+        "service/directoryservice"
+    ]
+}

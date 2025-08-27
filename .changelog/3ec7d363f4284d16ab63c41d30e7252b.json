@@ -1,0 +1,8 @@
+{
+    "id": "3ec7d363-f428-4d16-ab63-c41d30e7252b",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/workdocs"
+    ]
+}

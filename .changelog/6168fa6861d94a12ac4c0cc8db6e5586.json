@@ -1,0 +1,8 @@
+{
+    "id": "6168fa68-61d9-4a12-ac4c-0cc8db6e5586",
+    "type": "documentation",
+    "description": "Added ECS_AL2023_NVIDIA as an option for Ec2Configuration.imageType.",
+    "modules": [
+        "service/batch"
+    ]
+}

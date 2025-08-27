@@ -1,0 +1,8 @@
+{
+    "id": "07fa5d1b-c84c-46b1-8c91-890b7046757a",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/chimesdkvoice"
+    ]
+}

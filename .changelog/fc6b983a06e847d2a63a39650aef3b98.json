@@ -1,0 +1,8 @@
+{
+    "id": "fc6b983a-06e8-47d2-a63a-39650aef3b98",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/iotfleetwise"
+    ]
+}

@@ -490,6 +490,26 @@ func (m *validateOpStartExportTask) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartGraph struct {
+}
+
+func (*validateOpStartGraph) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartGraph) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartGraphInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartGraphInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartImportTask struct {
 }
 
@@ -505,6 +525,26 @@ func (m *validateOpStartImportTask) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartImportTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopGraph struct {
+}
+
+func (*validateOpStopGraph) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopGraph) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopGraphInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopGraphInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -666,8 +706,16 @@ func addOpStartExportTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartExportTask{}, middleware.After)
 }
 
+func addOpStartGraphValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartGraph{}, middleware.After)
+}
+
 func addOpStartImportTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartImportTask{}, middleware.After)
+}
+
+func addOpStopGraphValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopGraph{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1163,6 +1211,21 @@ func validateOpStartExportTaskInput(v *StartExportTaskInput) error {
 	}
 }
 
+func validateOpStartGraphInput(v *StartGraphInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartGraphInput"}
+	if v.GraphIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GraphIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartImportTaskInput(v *StartImportTaskInput) error {
 	if v == nil {
 		return nil
@@ -1181,6 +1244,21 @@ func validateOpStartImportTaskInput(v *StartImportTaskInput) error {
 	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopGraphInput(v *StopGraphInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopGraphInput"}
+	if v.GraphIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GraphIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

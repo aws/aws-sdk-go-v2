@@ -530,6 +530,26 @@ func (m *validateOpDescribeInsight) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeInsightsRefresh struct {
+}
+
+func (*validateOpDescribeInsightsRefresh) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeInsightsRefresh) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeInsightsRefreshInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeInsightsRefreshInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeNodegroup struct {
 }
 
@@ -850,6 +870,26 @@ func (m *validateOpRegisterCluster) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartInsightsRefresh struct {
+}
+
+func (*validateOpStartInsightsRefresh) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartInsightsRefresh) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartInsightsRefreshInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartInsightsRefreshInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -1154,6 +1194,10 @@ func addOpDescribeInsightValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeInsight{}, middleware.After)
 }
 
+func addOpDescribeInsightsRefreshValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeInsightsRefresh{}, middleware.After)
+}
+
 func addOpDescribeNodegroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeNodegroup{}, middleware.After)
 }
@@ -1216,6 +1260,10 @@ func addOpListUpdatesValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpRegisterClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRegisterCluster{}, middleware.After)
+}
+
+func addOpStartInsightsRefreshValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartInsightsRefresh{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1863,6 +1911,21 @@ func validateOpDescribeInsightInput(v *DescribeInsightInput) error {
 	}
 }
 
+func validateOpDescribeInsightsRefreshInput(v *DescribeInsightsRefreshInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeInsightsRefreshInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeNodegroupInput(v *DescribeNodegroupInput) error {
 	if v == nil {
 		return nil
@@ -2127,6 +2190,21 @@ func validateOpRegisterClusterInput(v *RegisterClusterInput) error {
 		if err := validateConnectorConfigRequest(v.ConnectorConfig); err != nil {
 			invalidParams.AddNested("ConnectorConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartInsightsRefreshInput(v *StartInsightsRefreshInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartInsightsRefreshInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

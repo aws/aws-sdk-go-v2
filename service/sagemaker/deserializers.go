@@ -47074,6 +47074,73 @@ func awsAwsjson11_deserializeDocumentClarifyTextConfig(v **types.ClarifyTextConf
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentClusterAutoScalingConfigOutput(v **types.ClusterAutoScalingConfigOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClusterAutoScalingConfigOutput
+	if *v == nil {
+		sv = &types.ClusterAutoScalingConfigOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AutoScalerType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterAutoScalerType to be of type string, got %T instead", value)
+				}
+				sv.AutoScalerType = types.ClusterAutoScalerType(jtv)
+			}
+
+		case "FailureMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.FailureMessage = ptr.String(jtv)
+			}
+
+		case "Mode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterAutoScalingMode to be of type string, got %T instead", value)
+				}
+				sv.Mode = types.ClusterAutoScalingMode(jtv)
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterAutoScalingStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.ClusterAutoScalingStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentClusterEbsVolumeConfig(v **types.ClusterEbsVolumeConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -98272,6 +98339,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeClusterOutput(v **DescribeCluster
 
 	for key, value := range shape {
 		switch key {
+		case "AutoScaling":
+			if err := awsAwsjson11_deserializeDocumentClusterAutoScalingConfigOutput(&sv.AutoScaling, value); err != nil {
+				return err
+			}
+
 		case "ClusterArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -98288,6 +98360,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeClusterOutput(v **DescribeCluster
 					return fmt.Errorf("expected ClusterName to be of type string, got %T instead", value)
 				}
 				sv.ClusterName = ptr.String(jtv)
+			}
+
+		case "ClusterRole":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.ClusterRole = ptr.String(jtv)
 			}
 
 		case "ClusterStatus":

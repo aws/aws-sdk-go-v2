@@ -1,0 +1,8 @@
+{
+    "id": "384d0441-15f5-4701-bb18-a8b0a27e7858",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/appconfigdata"
+    ]
+}

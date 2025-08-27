@@ -1,0 +1,8 @@
+{
+    "id": "a473fdfb-6a2c-4fa5-8694-87c44d517524",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/qapps"
+    ]
+}

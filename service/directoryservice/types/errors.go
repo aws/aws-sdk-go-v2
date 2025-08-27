@@ -446,6 +446,35 @@ func (e *DirectoryUnavailableException) ErrorCode() string {
 }
 func (e *DirectoryUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// A disable operation for CA enrollment policy is already in progress for this
+// directory.
+type DisableAlreadyInProgressException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	RequestId *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *DisableAlreadyInProgressException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DisableAlreadyInProgressException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DisableAlreadyInProgressException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "DisableAlreadyInProgressException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *DisableAlreadyInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The maximum allowed number of domain controllers per directory was exceeded.
 // The default limit per directory is 20 domain controllers.
 type DomainControllerLimitExceededException struct {
@@ -476,6 +505,35 @@ func (e *DomainControllerLimitExceededException) ErrorCode() string {
 func (e *DomainControllerLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+
+// An enable operation for CA enrollment policy is already in progress for this
+// directory.
+type EnableAlreadyInProgressException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	RequestId *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *EnableAlreadyInProgressException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *EnableAlreadyInProgressException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *EnableAlreadyInProgressException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "EnableAlreadyInProgressException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *EnableAlreadyInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified entity already exists.
 type EntityAlreadyExistsException struct {

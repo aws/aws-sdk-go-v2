@@ -1,0 +1,8 @@
+{
+    "id": "921c054e-0d30-4b45-b24c-c56250a89715",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/textract"
+    ]
+}

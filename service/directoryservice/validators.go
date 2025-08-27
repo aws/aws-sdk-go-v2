@@ -490,6 +490,26 @@ func (m *validateOpDescribeADAssessment) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeCAEnrollmentPolicy struct {
+}
+
+func (*validateOpDescribeCAEnrollmentPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeCAEnrollmentPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeCAEnrollmentPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeCAEnrollmentPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeCertificate struct {
 }
 
@@ -710,6 +730,26 @@ func (m *validateOpDescribeUpdateDirectory) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisableCAEnrollmentPolicy struct {
+}
+
+func (*validateOpDisableCAEnrollmentPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisableCAEnrollmentPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisableCAEnrollmentPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisableCAEnrollmentPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisableClientAuthentication struct {
 }
 
@@ -805,6 +845,26 @@ func (m *validateOpDisableSso) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDisableSsoInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpEnableCAEnrollmentPolicy struct {
+}
+
+func (*validateOpEnableCAEnrollmentPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpEnableCAEnrollmentPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*EnableCAEnrollmentPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpEnableCAEnrollmentPolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1506,6 +1566,10 @@ func addOpDescribeADAssessmentValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpDescribeADAssessment{}, middleware.After)
 }
 
+func addOpDescribeCAEnrollmentPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeCAEnrollmentPolicy{}, middleware.After)
+}
+
 func addOpDescribeCertificateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeCertificate{}, middleware.After)
 }
@@ -1550,6 +1614,10 @@ func addOpDescribeUpdateDirectoryValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpDescribeUpdateDirectory{}, middleware.After)
 }
 
+func addOpDisableCAEnrollmentPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisableCAEnrollmentPolicy{}, middleware.After)
+}
+
 func addOpDisableClientAuthenticationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisableClientAuthentication{}, middleware.After)
 }
@@ -1568,6 +1636,10 @@ func addOpDisableRadiusValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDisableSsoValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisableSso{}, middleware.After)
+}
+
+func addOpEnableCAEnrollmentPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpEnableCAEnrollmentPolicy{}, middleware.After)
 }
 
 func addOpEnableClientAuthenticationValidationMiddleware(stack *middleware.Stack) error {
@@ -2375,6 +2447,21 @@ func validateOpDescribeADAssessmentInput(v *DescribeADAssessmentInput) error {
 	}
 }
 
+func validateOpDescribeCAEnrollmentPolicyInput(v *DescribeCAEnrollmentPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeCAEnrollmentPolicyInput"}
+	if v.DirectoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeCertificateInput(v *DescribeCertificateInput) error {
 	if v == nil {
 		return nil
@@ -2546,6 +2633,21 @@ func validateOpDescribeUpdateDirectoryInput(v *DescribeUpdateDirectoryInput) err
 	}
 }
 
+func validateOpDisableCAEnrollmentPolicyInput(v *DisableCAEnrollmentPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisableCAEnrollmentPolicyInput"}
+	if v.DirectoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisableClientAuthenticationInput(v *DisableClientAuthenticationInput) error {
 	if v == nil {
 		return nil
@@ -2619,6 +2721,24 @@ func validateOpDisableSsoInput(v *DisableSsoInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DisableSsoInput"}
 	if v.DirectoryId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpEnableCAEnrollmentPolicyInput(v *EnableCAEnrollmentPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EnableCAEnrollmentPolicyInput"}
+	if v.DirectoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
+	}
+	if v.PcaConnectorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PcaConnectorArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

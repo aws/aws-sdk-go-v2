@@ -138,6 +138,9 @@ const (
 	GraphStatusSnapshotting GraphStatus = "SNAPSHOTTING"
 	GraphStatusFailed       GraphStatus = "FAILED"
 	GraphStatusImporting    GraphStatus = "IMPORTING"
+	GraphStatusStarting     GraphStatus = "STARTING"
+	GraphStatusStopping     GraphStatus = "STOPPING"
+	GraphStatusStopped      GraphStatus = "STOPPED"
 )
 
 // Values returns all known values for GraphStatus. Note that this can be expanded
@@ -154,6 +157,9 @@ func (GraphStatus) Values() []GraphStatus {
 		"SNAPSHOTTING",
 		"FAILED",
 		"IMPORTING",
+		"STARTING",
+		"STOPPING",
+		"STOPPED",
 	}
 }
 

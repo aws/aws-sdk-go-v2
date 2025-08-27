@@ -1,0 +1,8 @@
+{
+    "id": "20db4085-6888-4c77-b989-2bd9c050ff9a",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/elasticache"
+    ]
+}

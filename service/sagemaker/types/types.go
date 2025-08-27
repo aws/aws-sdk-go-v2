@@ -3535,6 +3535,45 @@ type ClarifyTextConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the autoscaling configuration for a HyperPod cluster.
+type ClusterAutoScalingConfig struct {
+
+	// Describes whether autoscaling is enabled or disabled for the cluster. Valid
+	// values are Enable and Disable .
+	//
+	// This member is required.
+	Mode ClusterAutoScalingMode
+
+	// The type of autoscaler to use. Currently supported value is Karpenter .
+	AutoScalerType ClusterAutoScalerType
+
+	noSmithyDocumentSerde
+}
+
+// The autoscaling configuration and status information for a HyperPod cluster.
+type ClusterAutoScalingConfigOutput struct {
+
+	// Describes whether autoscaling is enabled or disabled for the cluster.
+	//
+	// This member is required.
+	Mode ClusterAutoScalingMode
+
+	// The current status of the autoscaling configuration. Valid values are InService
+	// , Failed , Creating , and Deleting .
+	//
+	// This member is required.
+	Status ClusterAutoScalingStatus
+
+	// The type of autoscaler configured for the cluster.
+	AutoScalerType ClusterAutoScalerType
+
+	// If the autoscaling status is Failed , this field contains a message describing
+	// the failure.
+	FailureMessage *string
+
+	noSmithyDocumentSerde
+}
+
 // Defines the configuration for attaching an additional Amazon Elastic Block
 // Store (EBS) volume to each instance of the SageMaker HyperPod cluster instance
 // group. To learn more, see [SageMaker HyperPod release notes: June 20, 2024].

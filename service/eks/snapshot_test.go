@@ -398,6 +398,18 @@ func TestCheckSnapshot_DescribeInsight(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeInsightsRefresh(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeInsightsRefresh(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeInsightsRefresh")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeNodegroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeNodegroup(context.Background(), nil, func(o *Options) {
@@ -619,6 +631,18 @@ func TestCheckSnapshot_RegisterCluster(t *testing.T) {
 	_, err := svc.RegisterCluster(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "RegisterCluster")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartInsightsRefresh(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartInsightsRefresh(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartInsightsRefresh")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1081,6 +1105,18 @@ func TestUpdateSnapshot_DescribeInsight(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeInsightsRefresh(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeInsightsRefresh(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeInsightsRefresh")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeNodegroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeNodegroup(context.Background(), nil, func(o *Options) {
@@ -1302,6 +1338,18 @@ func TestUpdateSnapshot_RegisterCluster(t *testing.T) {
 	_, err := svc.RegisterCluster(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RegisterCluster")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartInsightsRefresh(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartInsightsRefresh(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartInsightsRefresh")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

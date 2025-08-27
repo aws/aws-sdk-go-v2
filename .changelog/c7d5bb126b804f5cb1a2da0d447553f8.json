@@ -1,0 +1,8 @@
+{
+    "id": "c7d5bb12-6b80-4f5c-b1a2-da0d447553f8",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/ivschat"
+    ]
+}

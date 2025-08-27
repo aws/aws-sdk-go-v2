@@ -350,6 +350,18 @@ func TestCheckSnapshot_DescribeADAssessment(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeCAEnrollmentPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCAEnrollmentPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeCAEnrollmentPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeCertificate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeCertificate(context.Background(), nil, func(o *Options) {
@@ -530,6 +542,18 @@ func TestCheckSnapshot_DescribeUpdateDirectory(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisableCAEnrollmentPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableCAEnrollmentPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisableCAEnrollmentPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DisableClientAuthentication(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisableClientAuthentication(context.Background(), nil, func(o *Options) {
@@ -583,6 +607,18 @@ func TestCheckSnapshot_DisableSso(t *testing.T) {
 	_, err := svc.DisableSso(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DisableSso")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_EnableCAEnrollmentPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableCAEnrollmentPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "EnableCAEnrollmentPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1273,6 +1309,18 @@ func TestUpdateSnapshot_DescribeADAssessment(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeCAEnrollmentPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCAEnrollmentPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeCAEnrollmentPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeCertificate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeCertificate(context.Background(), nil, func(o *Options) {
@@ -1453,6 +1501,18 @@ func TestUpdateSnapshot_DescribeUpdateDirectory(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisableCAEnrollmentPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableCAEnrollmentPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisableCAEnrollmentPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DisableClientAuthentication(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisableClientAuthentication(context.Background(), nil, func(o *Options) {
@@ -1506,6 +1566,18 @@ func TestUpdateSnapshot_DisableSso(t *testing.T) {
 	_, err := svc.DisableSso(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DisableSso")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_EnableCAEnrollmentPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableCAEnrollmentPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "EnableCAEnrollmentPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

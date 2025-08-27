@@ -1,0 +1,8 @@
+{
+    "id": "cca8f2d2-e53b-40cd-9636-8e18c8fe1e50",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/supplychain"
+    ]
+}

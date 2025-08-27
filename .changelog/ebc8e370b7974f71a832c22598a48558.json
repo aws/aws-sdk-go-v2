@@ -1,0 +1,8 @@
+{
+    "id": "ebc8e370-b797-4f71-a832-c22598a48558",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/s3tables"
+    ]
+}

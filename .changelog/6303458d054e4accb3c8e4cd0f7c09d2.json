@@ -1,0 +1,8 @@
+{
+    "id": "6303458d-054e-4acc-b3c8-e4cd0f7c09d2",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/codeconnections"
+    ]
+}

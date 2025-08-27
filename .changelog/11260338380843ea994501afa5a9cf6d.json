@@ -1,0 +1,8 @@
+{
+    "id": "11260338-3808-43ea-9945-01afa5a9cf6d",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/medicalimaging"
+    ]
+}

@@ -398,11 +398,35 @@ func TestCheckSnapshot_StartExportTask(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartGraph(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartGraph(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartGraph")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartImportTask(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartImportTask(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartImportTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StopGraph(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopGraph(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopGraph")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -781,11 +805,35 @@ func TestUpdateSnapshot_StartExportTask(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartGraph(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartGraph(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartGraph")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartImportTask(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartImportTask(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartImportTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopGraph(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopGraph(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopGraph")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
