@@ -237,6 +237,9 @@
                     "target": "com.amazonaws.eks#DescribeInsight"
                 },
                 {
+                    "target": "com.amazonaws.eks#DescribeInsightsRefresh"
+                },
+                {
                     "target": "com.amazonaws.eks#DescribeNodegroup"
                 },
                 {
@@ -292,6 +295,9 @@
                 },
                 {
                     "target": "com.amazonaws.eks#RegisterCluster"
+                },
+                {
+                    "target": "com.amazonaws.eks#StartInsightsRefresh"
                 },
                 {
                     "target": "com.amazonaws.eks#TagResource"
@@ -5783,6 +5789,85 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.eks#DescribeInsightsRefresh": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.eks#DescribeInsightsRefreshRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.eks#DescribeInsightsRefreshResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.eks#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.eks#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the status of the latest on-demand cluster insights refresh operation.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/clusters/{clusterName}/insights-refresh",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.eks#DescribeInsightsRefreshRequest": {
+            "type": "structure",
+            "members": {
+                "clusterName": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the cluster associated with the insights refresh operation.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.eks#DescribeInsightsRefreshResponse": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message associated with the insights refresh operation.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.eks#InsightsRefreshStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the insights refresh operation.</p>"
+                    }
+                },
+                "startedAt": {
+                    "target": "com.amazonaws.eks#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the insights refresh operation started.</p>"
+                    }
+                },
+                "endedAt": {
+                    "target": "com.amazonaws.eks#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the insights refresh operation ended.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.eks#DescribeNodegroup": {
             "type": "operation",
             "input": {
@@ -7140,6 +7225,29 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The criteria to use for the insights.</p>"
+            }
+        },
+        "com.amazonaws.eks#InsightsRefreshStatus": {
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                }
             }
         },
         "com.amazonaws.eks#Integer": {
@@ -10129,6 +10237,73 @@
                 "smithy.api#documentation": "<p>The service is unavailable. Back off and retry the operation.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 503
+            }
+        },
+        "com.amazonaws.eks#StartInsightsRefresh": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.eks#StartInsightsRefreshRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.eks#StartInsightsRefreshResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.eks#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.eks#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Initiates an on-demand refresh operation for cluster insights, getting the latest analysis outside of the standard refresh schedule.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/clusters/{clusterName}/insights-refresh",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.eks#StartInsightsRefreshRequest": {
+            "type": "structure",
+            "members": {
+                "clusterName": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the cluster for the refresh insights operation.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.eks#StartInsightsRefreshResponse": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message associated with the insights refresh operation.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.eks#InsightsRefreshStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the insights refresh operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.eks#StorageConfigRequest": {

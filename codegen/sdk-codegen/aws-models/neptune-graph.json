@@ -95,7 +95,7 @@
                         "date"
                     ]
                 },
-                "smithy.api#documentation": "<p>Neptune Analytics is a new analytics database engine for Amazon Neptune that helps customers get to \n    insights faster by quickly processing large amounts of graph data, invoking popular graph analytic \n    algorithms in low-latency queries, and getting analytics results in seconds.</p>",
+                "smithy.api#documentation": "<p>Neptune Analytics is a new analytics database engine for Amazon Neptune that helps customers get to insights faster by quickly processing large amounts of graph data, invoking popular graph analytic algorithms in low-latency queries, and getting analytics results in seconds.</p>",
                 "smithy.api#title": "Amazon Neptune Graph",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -1628,7 +1628,7 @@
                 "status": {
                     "target": "com.amazonaws.neptunegraph#ExportTaskStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the export task. The status is <code>CANCELLING</code> when the \n      export task is cancelled.</p>",
+                        "smithy.api#documentation": "<p>The current status of the export task. The status is <code>CANCELLING</code> when the export task is cancelled.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1749,14 +1749,14 @@
                 "source": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A URL identifying to the location of the data to be imported. This can be an Amazon S3 path,\n      or can point to a Neptune database endpoint or snapshot.</p>",
+                        "smithy.api#documentation": "<p>A URL identifying to the location of the data to be imported. This can be an Amazon S3 path, or can point to a Neptune database endpoint or snapshot.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "format": {
                     "target": "com.amazonaws.neptunegraph#Format",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the format of S3 data to be imported. Valid values are <code>CSV</code>, which identifies\n      the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html\">Gremlin\n      CSV format</a> or <code>OPENCYPHER</code>, which identies the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html\">openCypher\n      load format</a>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the format of S3 data to be imported. Valid values are <code>CSV</code>, which identifies the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html\">Gremlin CSV format</a> or <code>OPENCYPHER</code>, which identies the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html\">openCypher load format</a>.</p>"
                     }
                 },
                 "parquetType": {
@@ -1933,20 +1933,20 @@
                 "graphName": {
                     "target": "com.amazonaws.neptunegraph#GraphName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A name for the new Neptune Analytics graph to be created.</p>\n         <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its\n      first character must be a letter. It cannot end with a hyphen or contain two\n      consecutive hyphens. Only lowercase letters are allowed.</p>",
+                        "smithy.api#documentation": "<p>A name for the new Neptune Analytics graph to be created.</p> <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its first character must be a letter. It cannot end with a hyphen or contain two consecutive hyphens. Only lowercase letters are allowed.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.neptunegraph#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Adds metadata tags to the new graph.\n        These tags can also be used with cost allocation reporting, or used in a Condition statement in an IAM policy.</p>"
+                        "smithy.api#documentation": "<p>Adds metadata tags to the new graph. These tags can also be used with cost allocation reporting, or used in a Condition statement in an IAM policy.</p>"
                     }
                 },
                 "publicConnectivity": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether or not the graph can be reachable over the internet. All access to graphs is IAM authenticated.\n       (<code>true</code> to enable, or <code>false</code> to disable.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether or not the graph can be reachable over the internet. All access to graphs is IAM authenticated. (<code>true</code> to enable, or <code>false</code> to disable.</p>"
                     }
                 },
                 "kmsKeyIdentifier": {
@@ -1958,19 +1958,19 @@
                 "vectorSearchConfiguration": {
                     "target": "com.amazonaws.neptunegraph#VectorSearchConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the number of dimensions for vector embeddings that will be loaded into the graph.\n      The value is specified as <code>dimension=</code>value. Max = 65,535</p>"
+                        "smithy.api#documentation": "<p>Specifies the number of dimensions for vector embeddings that will be loaded into the graph. The value is specified as <code>dimension=</code>value. Max = 65,535</p>"
                     }
                 },
                 "replicaCount": {
                     "target": "com.amazonaws.neptunegraph#ReplicaCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of replicas in other AZs. Min =0, Max = 2, Default = 1.</p>\n         <important>\n            <p>\n        Additional charges equivalent to the m-NCUs selected for the graph apply for each replica.\n      </p>\n         </important>"
+                        "smithy.api#documentation": "<p>The number of replicas in other AZs. Min =0, Max = 2, Default = 1.</p> <important> <p> Additional charges equivalent to the m-NCUs selected for the graph apply for each replica. </p> </important>"
                     }
                 },
                 "deletionProtection": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether or not to enable deletion protection on the graph. The graph can’t be deleted when deletion protection is enabled.\n      (<code>true</code> or <code>false</code>).</p>"
+                        "smithy.api#documentation": "<p>Indicates whether or not to enable deletion protection on the graph. The graph can’t be deleted when deletion protection is enabled. (<code>true</code> or <code>false</code>).</p>"
                     }
                 },
                 "provisionedMemory": {
@@ -1998,7 +1998,7 @@
                 "name": {
                     "target": "com.amazonaws.neptunegraph#GraphName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The graph name. For example: <code>my-graph-1</code>.</p>\n         <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its\n      first character must be a letter. It cannot end with a hyphen or contain two\n      consecutive hyphens. Only lowercase letters are allowed.</p>",
+                        "smithy.api#documentation": "<p>The graph name. For example: <code>my-graph-1</code>.</p> <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its first character must be a letter. It cannot end with a hyphen or contain two consecutive hyphens. Only lowercase letters are allowed.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2030,7 +2030,7 @@
                 "provisionedMemory": {
                     "target": "com.amazonaws.neptunegraph#ProvisionedMemory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph.</p>\n         <p>Min = 16</p>"
+                        "smithy.api#documentation": "<p>The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph.</p> <p>Min = 16</p>"
                     }
                 },
                 "endpoint": {
@@ -2042,19 +2042,19 @@
                 "publicConnectivity": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether or not the graph can be reachable over the internet. All access to graphs is IAM authenticated.</p>\n         <note>\n            <p>If enabling public connectivity for the first time, there will be a delay while it is enabled.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies whether or not the graph can be reachable over the internet. All access to graphs is IAM authenticated.</p> <note> <p>If enabling public connectivity for the first time, there will be a delay while it is enabled.</p> </note>"
                     }
                 },
                 "vectorSearchConfiguration": {
                     "target": "com.amazonaws.neptunegraph#VectorSearchConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The vector-search configuration for the graph, which specifies the vector dimension\n      to use in the vector index, if any.</p>"
+                        "smithy.api#documentation": "<p>The vector-search configuration for the graph, which specifies the vector dimension to use in the vector index, if any.</p>"
                     }
                 },
                 "replicaCount": {
                     "target": "com.amazonaws.neptunegraph#ReplicaCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of replicas in other AZs.</p>\n         <p>Default: If not specified, the default value is 1.</p>"
+                        "smithy.api#documentation": "<p>The number of replicas in other AZs.</p> <p>Default: If not specified, the default value is 1.</p>"
                     }
                 },
                 "kmsKeyIdentifier": {
@@ -2072,7 +2072,7 @@
                 "deletionProtection": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that indicates whether the graph has deletion protection enabled.\n      The graph can't be deleted when deletion protection is enabled.</p>"
+                        "smithy.api#documentation": "<p>A value that indicates whether the graph has deletion protection enabled. The graph can't be deleted when deletion protection is enabled.</p>"
                     }
                 },
                 "buildNumber": {
@@ -2142,14 +2142,14 @@
                 "snapshotName": {
                     "target": "com.amazonaws.neptunegraph#SnapshotName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The snapshot name. For example: <code>my-snapshot-1</code>.</p>\n         <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its\n      first character must be a letter. It cannot end with a hyphen or contain two\n      consecutive hyphens. Only lowercase letters are allowed.</p>",
+                        "smithy.api#documentation": "<p>The snapshot name. For example: <code>my-snapshot-1</code>.</p> <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its first character must be a letter. It cannot end with a hyphen or contain two consecutive hyphens. Only lowercase letters are allowed.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.neptunegraph#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Adds metadata tags to the new graph.\n        These tags can also be used with cost allocation reporting, or used in a Condition statement in an IAM policy.</p>"
+                        "smithy.api#documentation": "<p>Adds metadata tags to the new graph. These tags can also be used with cost allocation reporting, or used in a Condition statement in an IAM policy.</p>"
                     }
                 }
             },
@@ -2237,7 +2237,7 @@
             ],
             "traits": {
                 "aws.api#controlPlane": {},
-                "smithy.api#documentation": "<p>Creates a new Neptune Analytics graph and imports data into it, either from Amazon Simple Storage Service (S3) or from a Neptune database\n    or a Neptune database snapshot.</p>\n         <p>The data can be loaded from files in S3 that in either the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html\">Gremlin CSV\n      format</a> or the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html\">openCypher\n      load format</a>.</p>",
+                "smithy.api#documentation": "<p>Creates a new Neptune Analytics graph and imports data into it, either from Amazon Simple Storage Service (S3) or from a Neptune database or a Neptune database snapshot.</p> <p>The data can be loaded from files in S3 that in either the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html\">Gremlin CSV format</a> or the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html\">openCypher load format</a>.</p>",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "POST",
@@ -2256,20 +2256,20 @@
                 "graphName": {
                     "target": "com.amazonaws.neptunegraph#GraphName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A name for the new Neptune Analytics graph to be created.</p>\n         <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its\n      first character must be a letter. It cannot end with a hyphen or contain two\n      consecutive hyphens. Only lowercase letters are allowed.</p>",
+                        "smithy.api#documentation": "<p>A name for the new Neptune Analytics graph to be created.</p> <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its first character must be a letter. It cannot end with a hyphen or contain two consecutive hyphens. Only lowercase letters are allowed.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.neptunegraph#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Adds metadata tags to the new graph. These tags can also be used with cost allocation\n     reporting, or used in a Condition statement in an IAM policy.</p>"
+                        "smithy.api#documentation": "<p>Adds metadata tags to the new graph. These tags can also be used with cost allocation reporting, or used in a Condition statement in an IAM policy.</p>"
                     }
                 },
                 "publicConnectivity": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether or not the graph can be reachable over the internet. All access to graphs is IAM authenticated.\n       (<code>true</code> to enable, or <code>false</code> to disable).</p>"
+                        "smithy.api#documentation": "<p>Specifies whether or not the graph can be reachable over the internet. All access to graphs is IAM authenticated. (<code>true</code> to enable, or <code>false</code> to disable).</p>"
                     }
                 },
                 "kmsKeyIdentifier": {
@@ -2281,31 +2281,31 @@
                 "vectorSearchConfiguration": {
                     "target": "com.amazonaws.neptunegraph#VectorSearchConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the number of dimensions for vector embeddings that will be loaded into the graph.\n    The value is specified as <code>dimension=</code>value. Max = 65,535 </p>"
+                        "smithy.api#documentation": "<p>Specifies the number of dimensions for vector embeddings that will be loaded into the graph. The value is specified as <code>dimension=</code>value. Max = 65,535 </p>"
                     }
                 },
                 "replicaCount": {
                     "target": "com.amazonaws.neptunegraph#ReplicaCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of replicas in other AZs to provision on the new graph after import. Default = 0, Min = 0, Max = 2.</p>\n         <important>\n            <p>\n        Additional charges equivalent to the m-NCUs selected for the graph apply for each replica.\n      </p>\n         </important>"
+                        "smithy.api#documentation": "<p>The number of replicas in other AZs to provision on the new graph after import. Default = 0, Min = 0, Max = 2.</p> <important> <p> Additional charges equivalent to the m-NCUs selected for the graph apply for each replica. </p> </important>"
                     }
                 },
                 "deletionProtection": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether or not to enable deletion protection on the graph. The graph can’t be deleted when deletion protection is enabled.\n      (<code>true</code> or <code>false</code>).</p>"
+                        "smithy.api#documentation": "<p>Indicates whether or not to enable deletion protection on the graph. The graph can’t be deleted when deletion protection is enabled. (<code>true</code> or <code>false</code>).</p>"
                     }
                 },
                 "importOptions": {
                     "target": "com.amazonaws.neptunegraph#ImportOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains options for controlling the import process. For example, if the <code>failOnError</code> key\n      is set to <code>false</code>, the import skips problem data and attempts to continue (whereas if set to\n    <code>true</code>, the default, or if omitted, the import operation halts immediately when an error is\n      encountered.</p>"
+                        "smithy.api#documentation": "<p>Contains options for controlling the import process. For example, if the <code>failOnError</code> key is set to <code>false</code>, the import skips problem data and attempts to continue (whereas if set to <code>true</code>, the default, or if omitted, the import operation halts immediately when an error is encountered.</p>"
                     }
                 },
                 "maxProvisionedMemory": {
                     "target": "com.amazonaws.neptunegraph#ProvisionedMemory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph. Default: 1024,\n       or the approved upper limit for your account.</p>\n         <p> If both the minimum and maximum values are specified, the final\n    <code>provisioned-memory</code> will be chosen per the actual size of your imported data. If neither value is specified, \n     128 m-NCUs are used.</p>"
+                        "smithy.api#documentation": "<p>The maximum provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph. Default: 1024, or the approved upper limit for your account.</p> <p> If both the minimum and maximum values are specified, the final <code>provisioned-memory</code> will be chosen per the actual size of your imported data. If neither value is specified, 128 m-NCUs are used.</p>"
                     }
                 },
                 "minProvisionedMemory": {
@@ -2317,20 +2317,20 @@
                 "failOnError": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>If set to <code>true</code>, the task halts when an import error is encountered. If set to <code>false</code>,\n      the task skips the data that caused the error and continues if possible.</p>"
+                        "smithy.api#documentation": "<p>If set to <code>true</code>, the task halts when an import error is encountered. If set to <code>false</code>, the task skips the data that caused the error and continues if possible.</p>"
                     }
                 },
                 "source": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A URL identifying to the location of the data to be imported. This can be an Amazon S3 path,\n      or can point to a Neptune database endpoint or snapshot.</p>",
+                        "smithy.api#documentation": "<p>A URL identifying to the location of the data to be imported. This can be an Amazon S3 path, or can point to a Neptune database endpoint or snapshot.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "format": {
                     "target": "com.amazonaws.neptunegraph#Format",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the format of S3 data to be imported. Valid values are <code>CSV</code>, which identifies\n      the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html\">Gremlin\n        CSV format</a>, <code>OPEN_CYPHER</code>, which identifies the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html\">openCypher\n          load format</a>, or <code>ntriples</code>, which identifies the\n      <a href=\"https://docs.aws.amazon.com/neptune-analytics/latest/userguide/using-rdf-data.html\">RDF n-triples</a> format.</p>"
+                        "smithy.api#documentation": "<p>Specifies the format of S3 data to be imported. Valid values are <code>CSV</code>, which identifies the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html\">Gremlin CSV format</a>, <code>OPEN_CYPHER</code>, which identifies the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html\">openCypher load format</a>, or <code>ntriples</code>, which identifies the <a href=\"https://docs.aws.amazon.com/neptune-analytics/latest/userguide/using-rdf-data.html\">RDF n-triples</a> format.</p>"
                     }
                 },
                 "parquetType": {
@@ -2342,7 +2342,7 @@
                 "blankNodeHandling": {
                     "target": "com.amazonaws.neptunegraph#BlankNodeHandling",
                     "traits": {
-                        "smithy.api#documentation": "<p>The method to handle blank nodes in the dataset. Currently, only <code>convertToIri</code> is supported, \n      meaning blank nodes are converted to unique IRIs at load time. Must be provided when format is <code>ntriples</code>. \n      For more information, see <a href=\"https://docs.aws.amazon.com/neptune-analytics/latest/userguide/using-rdf-data.html#rdf-handling\">Handling RDF values</a>.</p>"
+                        "smithy.api#documentation": "<p>The method to handle blank nodes in the dataset. Currently, only <code>convertToIri</code> is supported, meaning blank nodes are converted to unique IRIs at load time. Must be provided when format is <code>ntriples</code>. For more information, see <a href=\"https://docs.aws.amazon.com/neptune-analytics/latest/userguide/using-rdf-data.html#rdf-handling\">Handling RDF values</a>.</p>"
                     }
                 },
                 "roleArn": {
@@ -2376,14 +2376,14 @@
                 "source": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A URL identifying to the location of the data to be imported. This can be an Amazon S3 path,\n      or can point to a Neptune database endpoint or snapshot.</p>",
+                        "smithy.api#documentation": "<p>A URL identifying to the location of the data to be imported. This can be an Amazon S3 path, or can point to a Neptune database endpoint or snapshot.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "format": {
                     "target": "com.amazonaws.neptunegraph#Format",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the format of S3 data to be imported. Valid values are <code>CSV</code>, which identifies\n      the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html\">Gremlin\n      CSV format</a>, <code>OPENCYPHER</code>, which identifies the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html\">openCypher\n      load format</a>, or <code>ntriples</code>, which identifies the\n     <a href=\"https://docs.aws.amazon.com/neptune-analytics/latest/userguide/using-rdf-data.html\">RDF n-triples</a> format.</p>"
+                        "smithy.api#documentation": "<p>Specifies the format of S3 data to be imported. Valid values are <code>CSV</code>, which identifies the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html\">Gremlin CSV format</a>, <code>OPENCYPHER</code>, which identifies the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html\">openCypher load format</a>, or <code>ntriples</code>, which identifies the <a href=\"https://docs.aws.amazon.com/neptune-analytics/latest/userguide/using-rdf-data.html\">RDF n-triples</a> format.</p>"
                     }
                 },
                 "parquetType": {
@@ -2409,7 +2409,7 @@
                 "importOptions": {
                     "target": "com.amazonaws.neptunegraph#ImportOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains options for controlling the import process. For example, if the <code>failOnError</code> key\n      is set to <code>false</code>, the import skips problem data and attempts to continue (whereas if set to\n    <code>true</code>, the default, or if omitted, the import operation halts immediately when an error is\n      encountered.</p>"
+                        "smithy.api#documentation": "<p>Contains options for controlling the import process. For example, if the <code>failOnError</code> key is set to <code>false</code>, the import skips problem data and attempts to continue (whereas if set to <code>true</code>, the default, or if omitted, the import operation halts immediately when an error is encountered.</p>"
                     }
                 }
             },
@@ -2447,7 +2447,7 @@
             ],
             "traits": {
                 "aws.api#controlPlane": {},
-                "smithy.api#documentation": "<p>Create a private graph endpoint to allow private access from to the graph from within\n    a VPC. You can attach security groups to the private graph endpoint.</p>\n         <note>\n            <p>VPC endpoint charges apply.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Create a private graph endpoint to allow private access from to the graph from within a VPC. You can attach security groups to the private graph endpoint.</p> <note> <p>VPC endpoint charges apply.</p> </note>",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "POST",
@@ -2583,7 +2583,7 @@
                 "skipSnapshot": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Determines whether a final graph snapshot is created before the graph is deleted.\n      If <code>true</code> is specified, no graph snapshot is created. If <code>false</code>\n      is specified, a graph snapshot is created before the graph is deleted.</p>",
+                        "smithy.api#documentation": "<p>Determines whether a final graph snapshot is created before the graph is deleted. If <code>true</code> is specified, no graph snapshot is created. If <code>false</code> is specified, a graph snapshot is created before the graph is deleted.</p>",
                         "smithy.api#httpQuery": "skipSnapshot",
                         "smithy.api#required": {}
                     }
@@ -2760,7 +2760,7 @@
                 "name": {
                     "target": "com.amazonaws.neptunegraph#SnapshotName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The snapshot name. For example: <code>my-snapshot-1</code>.</p>\n         <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its\n      first character must be a letter. It cannot end with a hyphen or contain two\n      consecutive hyphens. Only lowercase letters are allowed.</p>",
+                        "smithy.api#documentation": "<p>The snapshot name. For example: <code>my-snapshot-1</code>.</p> <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its first character must be a letter. It cannot end with a hyphen or contain two consecutive hyphens. Only lowercase letters are allowed.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2976,7 +2976,7 @@
             ],
             "traits": {
                 "aws.api#dataPlane": {},
-                "smithy.api#documentation": "<p>Execute an openCypher query.</p>\n         <p>\n      When invoking this operation in a Neptune Analytics cluster, the IAM user or role making the request must have a policy attached \n      that allows one of the following IAM actions in that cluster, depending on the query:\n    </p>\n         <ul>\n            <li>\n               <p>neptune-graph:ReadDataViaQuery</p>\n            </li>\n            <li>\n               <p>neptune-graph:WriteDataViaQuery</p>\n            </li>\n            <li>\n               <p>neptune-graph:DeleteDataViaQuery</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Execute an openCypher query.</p> <p> When invoking this operation in a Neptune Analytics cluster, the IAM user or role making the request must have a policy attached that allows one of the following IAM actions in that cluster, depending on the query: </p> <ul> <li> <p>neptune-graph:ReadDataViaQuery</p> </li> <li> <p>neptune-graph:WriteDataViaQuery</p> </li> <li> <p>neptune-graph:DeleteDataViaQuery</p> </li> </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{graphIdentifier}."
                 },
@@ -3028,13 +3028,13 @@
                 "planCache": {
                     "target": "com.amazonaws.neptunegraph#PlanCacheType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Query plan cache is a feature that saves the query plan and reuses it on successive executions of the same query. \n      This reduces query latency, and works for both <code>READ</code> and <code>UPDATE</code> queries. The plan cache is an \n      LRU cache with a 5 minute TTL and a capacity of 1000.</p>"
+                        "smithy.api#documentation": "<p>Query plan cache is a feature that saves the query plan and reuses it on successive executions of the same query. This reduces query latency, and works for both <code>READ</code> and <code>UPDATE</code> queries. The plan cache is an LRU cache with a 5 minute TTL and a capacity of 1000.</p>"
                     }
                 },
                 "explainMode": {
                     "target": "com.amazonaws.neptunegraph#ExplainMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The explain mode parameter returns a query explain instead of the actual query results. A query explain can \n      be used to gather insights about the query execution such as planning decisions, time spent on each operator, solutions \n      flowing etc.</p>",
+                        "smithy.api#documentation": "<p>The explain mode parameter returns a query explain instead of the actual query results. A query explain can be used to gather insights about the query execution such as planning decisions, time spent on each operator, solutions flowing etc.</p>",
                         "smithy.api#jsonName": "explain"
                     }
                 },
@@ -3088,18 +3088,18 @@
                 "vertexFilter": {
                     "target": "com.amazonaws.neptunegraph#ExportFilterPerLabelMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Used to specify filters on a per-label basis for vertices. This allows you to control which vertex labels \n      and properties are included in the export.</p>"
+                        "smithy.api#documentation": "<p>Used to specify filters on a per-label basis for vertices. This allows you to control which vertex labels and properties are included in the export.</p>"
                     }
                 },
                 "edgeFilter": {
                     "target": "com.amazonaws.neptunegraph#ExportFilterPerLabelMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Used to specify filters on a per-label basis for edges. This allows you to control which edge labels \n      and properties are included in the export.</p>"
+                        "smithy.api#documentation": "<p>Used to specify filters on a per-label basis for edges. This allows you to control which edge labels and properties are included in the export.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This is the top-level field for specifying vertex or edge filters. If the ExportFilter is not provided, \n      then all properties for all labels will be exported. If the ExportFilter is provided but is an empty object, \n      then no data will be exported.</p>"
+                "smithy.api#documentation": "<p>This is the top-level field for specifying vertex or edge filters. If the ExportFilter is not provided, then all properties for all labels will be exported. If the ExportFilter is provided but is an empty object, then no data will be exported.</p>"
             }
         },
         "com.amazonaws.neptunegraph#ExportFilterElement": {
@@ -3108,7 +3108,7 @@
                 "properties": {
                     "target": "com.amazonaws.neptunegraph#ExportFilterPropertyMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Each property is defined by a key-value pair, where the key is the desired output property name (e.g. \"name\"), \n      and the value is an object.</p>"
+                        "smithy.api#documentation": "<p>Each property is defined by a key-value pair, where the key is the desired output property name (e.g. \"name\"), and the value is an object.</p>"
                     }
                 }
             },
@@ -3156,25 +3156,25 @@
                 "outputType": {
                     "target": "com.amazonaws.neptunegraph#ExportFilterOutputDataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the data type to use for the property in the exported data (e.g. \"String\", \"Int\", \"Float\"). \n       If a type is not provided, the export process will determine the type. If a given property is present as multiple \n       types (e.g. one vertex has \"height\" stored as a double, and another edge has it stored as a string), the type \n       will be of Any type, otherwise, it will be the type of the property as present in vertices.</p>"
+                        "smithy.api#documentation": "<p>Specifies the data type to use for the property in the exported data (e.g. \"String\", \"Int\", \"Float\"). If a type is not provided, the export process will determine the type. If a given property is present as multiple types (e.g. one vertex has \"height\" stored as a double, and another edge has it stored as a string), the type will be of Any type, otherwise, it will be the type of the property as present in vertices.</p>"
                     }
                 },
                 "sourcePropertyName": {
                     "target": "com.amazonaws.neptunegraph#ExportFilterSourcePropertyName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the property as it exists in the original graph data. If not provided, it is assumed that the key \n       matches the desired sourcePropertyName.</p>"
+                        "smithy.api#documentation": "<p>The name of the property as it exists in the original graph data. If not provided, it is assumed that the key matches the desired sourcePropertyName.</p>"
                     }
                 },
                 "multiValueHandling": {
                     "target": "com.amazonaws.neptunegraph#MultiValueHandlingType",
                     "traits": {
                         "smithy.api#default": "PICK_FIRST",
-                        "smithy.api#documentation": "<p>Specifies how to handle properties that have multiple values. Can be either <code>TO_LIST</code> to export all \n      values as a list, or <code>PICK_FIRST</code> to export the first value encountered. If not specified, the default \n      value is <code>PICK_FIRST</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies how to handle properties that have multiple values. Can be either <code>TO_LIST</code> to export all values as a list, or <code>PICK_FIRST</code> to export the first value encountered. If not specified, the default value is <code>PICK_FIRST</code>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure representing a property's attributes. It is a map object of outputType, sourcePropertyName \n       and multiValueHandling.</p>"
+                "smithy.api#documentation": "<p>A structure representing a property's attributes. It is a map object of outputType, sourcePropertyName and multiValueHandling.</p>"
             }
         },
         "com.amazonaws.neptunegraph#ExportFilterPropertyMap": {
@@ -3725,6 +3725,33 @@
                                 }
                             }
                         ]
+                    },
+                    "GraphStopped": {
+                        "documentation": "Wait until Graph is Stopped",
+                        "minDelay": 20,
+                        "maxDelay": 1800,
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "STOPPED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status != 'STOPPING'",
+                                        "expected": "true",
+                                        "comparator": "booleanEquals"
+                                    }
+                                }
+                            }
+                        ]
                     }
                 }
             }
@@ -3972,7 +3999,7 @@
                 "name": {
                     "target": "com.amazonaws.neptunegraph#SnapshotName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The snapshot name. For example: <code>my-snapshot-1</code>.</p>\n         <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its\n      first character must be a letter. It cannot end with a hyphen or contain two\n      consecutive hyphens. Only lowercase letters are allowed.</p>",
+                        "smithy.api#documentation": "<p>The snapshot name. For example: <code>my-snapshot-1</code>.</p> <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its first character must be a letter. It cannot end with a hyphen or contain two consecutive hyphens. Only lowercase letters are allowed.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4071,7 +4098,7 @@
                 "mode": {
                     "target": "com.amazonaws.neptunegraph#GraphSummaryMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The summary mode can take one of two values: <code>basic</code> (the default), and\n   <code>detailed</code>.</p>",
+                        "smithy.api#documentation": "<p>The summary mode can take one of two values: <code>basic</code> (the default), and <code>detailed</code>.</p>",
                         "smithy.api#httpQuery": "mode"
                     }
                 }
@@ -4266,14 +4293,14 @@
                 "source": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A URL identifying to the location of the data to be imported. This can be an Amazon S3 path,\n      or can point to a Neptune database endpoint or snapshot</p>",
+                        "smithy.api#documentation": "<p>A URL identifying to the location of the data to be imported. This can be an Amazon S3 path, or can point to a Neptune database endpoint or snapshot</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "format": {
                     "target": "com.amazonaws.neptunegraph#Format",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the format of S3 data to be imported. Valid values are <code>CSV</code>, which identifies\n      the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html\">Gremlin\n      CSV format</a> or <code>OPENCYPHER</code>, which identies the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html\">openCypher\n      load format</a>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the format of S3 data to be imported. Valid values are <code>CSV</code>, which identifies the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html\">Gremlin CSV format</a> or <code>OPENCYPHER</code>, which identies the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html\">openCypher load format</a>.</p>"
                     }
                 },
                 "parquetType": {
@@ -4292,14 +4319,14 @@
                 "status": {
                     "target": "com.amazonaws.neptunegraph#ImportTaskStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the import task:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>INITIALIZING</b>   –  \n        The necessary resources needed to create the graph are being prepared.</p>\n            </li>\n            <li>\n               <p>\n                  <b>ANALYZING_DATA</b>   –  \n        The data is being analyzed to determine the optimal infrastructure configuration\n        for the new graph.</p>\n            </li>\n            <li>\n               <p>\n                  <b>RE_PROVISIONING</b>   –  \n        The data did not fit into the provisioned graph, so it is being re-provisioned\n        with more capacity.</p>\n            </li>\n            <li>\n               <p>\n                  <b>IMPORTING</b>   –  \n        The data is being loaded.</p>\n            </li>\n            <li>\n               <p>\n                  <b>ERROR_ENCOUNTERED</b>   –  \n        An error has been encountered while trying to create the graph and import the data.</p>\n            </li>\n            <li>\n               <p>\n                  <b>ERROR_ENCOUNTERED_ROLLING_BACK</b>   –  \n        Because of the error that was encountered, the graph is being rolled back and all\n        its resources released.</p>\n            </li>\n            <li>\n               <p>\n                  <b>SUCCEEDED</b>   –  \n        Graph creation and data loading succeeded.</p>\n            </li>\n            <li>\n               <p>\n                  <b>FAILED</b>   –  \n        Graph creation or data loading failed. When the status is <code>FAILED</code>,\n        you can use <code>get-graphs</code> to get more information about the state of\n        the graph.</p>\n            </li>\n            <li>\n               <p>\n                  <b>CANCELLING</b>   –  \n        Because you cancelled the import task, cancellation is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <b>CANCELLED</b>   –  \n        You have successfully cancelled the import task.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The status of the import task:</p> <ul> <li> <p> <b>INITIALIZING</b>   –   The necessary resources needed to create the graph are being prepared.</p> </li> <li> <p> <b>ANALYZING_DATA</b>   –   The data is being analyzed to determine the optimal infrastructure configuration for the new graph.</p> </li> <li> <p> <b>RE_PROVISIONING</b>   –   The data did not fit into the provisioned graph, so it is being re-provisioned with more capacity.</p> </li> <li> <p> <b>IMPORTING</b>   –   The data is being loaded.</p> </li> <li> <p> <b>ERROR_ENCOUNTERED</b>   –   An error has been encountered while trying to create the graph and import the data.</p> </li> <li> <p> <b>ERROR_ENCOUNTERED_ROLLING_BACK</b>   –   Because of the error that was encountered, the graph is being rolled back and all its resources released.</p> </li> <li> <p> <b>SUCCEEDED</b>   –   Graph creation and data loading succeeded.</p> </li> <li> <p> <b>FAILED</b>   –   Graph creation or data loading failed. When the status is <code>FAILED</code>, you can use <code>get-graphs</code> to get more information about the state of the graph.</p> </li> <li> <p> <b>CANCELLING</b>   –   Because you cancelled the import task, cancellation is in progress.</p> </li> <li> <p> <b>CANCELLED</b>   –   You have successfully cancelled the import task.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "importOptions": {
                     "target": "com.amazonaws.neptunegraph#ImportOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains options for controlling the import process. For example, if the <code>failOnError</code> key\n      is set to <code>false</code>, the import skips problem data and attempts to continue (whereas if set to\n    <code>true</code>, the default, or if omitted, the import operation halts immediately when an error is\n      encountered.</p>"
+                        "smithy.api#documentation": "<p>Contains options for controlling the import process. For example, if the <code>failOnError</code> key is set to <code>false</code>, the import skips problem data and attempts to continue (whereas if set to <code>true</code>, the default, or if omitted, the import operation halts immediately when an error is encountered.</p>"
                     }
                 },
                 "importTaskDetails": {
@@ -4511,7 +4538,7 @@
             ],
             "traits": {
                 "aws.api#dataPlane": {},
-                "smithy.api#documentation": "<p>Retrieves the status of a specified query.</p>\n         <note>\n            <p>\n        When invoking this operation in a Neptune Analytics cluster, the IAM user or role making the request must have the \n        <code>neptune-graph:GetQueryStatus</code> IAM action attached.\n      </p>\n         </note>",
+                "smithy.api#documentation": "<p>Retrieves the status of a specified query.</p> <note> <p> When invoking this operation in a Neptune Analytics cluster, the IAM user or role making the request must have the <code>neptune-graph:GetQueryStatus</code> IAM action attached. </p> </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{graphIdentifier}."
                 },
@@ -4651,7 +4678,7 @@
                 "edgeProperties": {
                     "target": "com.amazonaws.neptunegraph#LongValuedMapList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of the distinct edge properties in the graph, along with the count of edges\n      where each property is used.</p>"
+                        "smithy.api#documentation": "<p>A list of the distinct edge properties in the graph, along with the count of edges where each property is used.</p>"
                     }
                 },
                 "totalNodePropertyValues": {
@@ -4727,6 +4754,12 @@
                     "target": "com.amazonaws.neptunegraph#RestoreGraphFromSnapshot"
                 },
                 {
+                    "target": "com.amazonaws.neptunegraph#StartGraph"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#StopGraph"
+                },
+                {
                     "target": "com.amazonaws.neptunegraph#UpdateGraph"
                 }
             ]
@@ -4744,7 +4777,7 @@
                 "name": {
                     "target": "com.amazonaws.neptunegraph#SnapshotName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The snapshot name. For example: <code>my-snapshot-1</code>.</p>\n         <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its\n      first character must be a letter. It cannot end with a hyphen or contain two\n      consecutive hyphens. Only lowercase letters are allowed.</p>",
+                        "smithy.api#documentation": "<p>The snapshot name. For example: <code>my-snapshot-1</code>.</p> <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its first character must be a letter. It cannot end with a hyphen or contain two consecutive hyphens. Only lowercase letters are allowed.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4839,6 +4872,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "IMPORTING"
+                    }
+                },
+                "STARTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STARTING"
+                    }
+                },
+                "STOPPING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPING"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
                     }
                 }
             }
@@ -5104,14 +5155,14 @@
                 "source": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A URL identifying to the location of the data to be imported. This can be an Amazon S3 path,\n      or can point to a Neptune database endpoint or snapshot</p>",
+                        "smithy.api#documentation": "<p>A URL identifying to the location of the data to be imported. This can be an Amazon S3 path, or can point to a Neptune database endpoint or snapshot</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "format": {
                     "target": "com.amazonaws.neptunegraph#Format",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the format of S3 data to be imported. Valid values are <code>CSV</code>, which identifies\n      the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html\">Gremlin\n      CSV format</a> or <code>OPENCYPHER</code>, which identies the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html\">openCypher\n      load format</a>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the format of S3 data to be imported. Valid values are <code>CSV</code>, which identifies the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html\">Gremlin CSV format</a> or <code>OPENCYPHER</code>, which identies the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html\">openCypher load format</a>.</p>"
                     }
                 },
                 "parquetType": {
@@ -5324,14 +5375,14 @@
                 "nextToken": {
                     "target": "com.amazonaws.neptunegraph#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Pagination token used to paginate output.</p>\n         <p>When this value is provided as input, the service returns results from where\n      the previous response left off. When this value is present in output, it indicates\n      that there are more results to retrieve.</p>",
+                        "smithy.api#documentation": "<p>Pagination token used to paginate output.</p> <p>When this value is provided as input, the service returns results from where the previous response left off. When this value is present in output, it indicates that there are more results to retrieve.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
                 "maxResults": {
                     "target": "com.amazonaws.neptunegraph#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total number of records to return in the command's output.</p>\n         <p>If the total number of records available is more than the value specified,\n      <code>nextToken</code> is provided in the command's output. To resume pagination,\n      provide the <code>nextToken</code> output value in the <code>nextToken</code> argument\n      of a subsequent command. Do not use the <code>nextToken</code> response element directly\n      outside of the Amazon CLI.</p>",
+                        "smithy.api#documentation": "<p>The total number of records to return in the command's output.</p> <p>If the total number of records available is more than the value specified, <code>nextToken</code> is provided in the command's output. To resume pagination, provide the <code>nextToken</code> output value in the <code>nextToken</code> argument of a subsequent command. Do not use the <code>nextToken</code> response element directly outside of the Amazon CLI.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
@@ -5353,7 +5404,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.neptunegraph#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Pagination token used to paginate output.</p>\n         <p>When this value is provided as input, the service returns results from where\n      the previous response left off. When this value is present in output, it indicates\n      that there are more results to retrieve.</p>"
+                        "smithy.api#documentation": "<p>Pagination token used to paginate output.</p> <p>When this value is provided as input, the service returns results from where the previous response left off. When this value is present in output, it indicates that there are more results to retrieve.</p>"
                     }
                 }
             },
@@ -5408,14 +5459,14 @@
                 "nextToken": {
                     "target": "com.amazonaws.neptunegraph#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Pagination token used to paginate output.</p>\n         <p>When this value is provided as input, the service returns results from where\n      the previous response left off. When this value is present in output, it indicates\n      that there are more results to retrieve.</p>",
+                        "smithy.api#documentation": "<p>Pagination token used to paginate output.</p> <p>When this value is provided as input, the service returns results from where the previous response left off. When this value is present in output, it indicates that there are more results to retrieve.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
                 "maxResults": {
                     "target": "com.amazonaws.neptunegraph#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total number of records to return in the command's output.</p>\n         <p>If the total number of records available is more than the value specified,\n      <code>nextToken</code> is provided in the command's output. To resume pagination,\n      provide the <code>nextToken</code> output value in the <code>nextToken</code> argument\n      of a subsequent command. Do not use the <code>nextToken</code> response element directly\n      outside of the Amazon CLI.</p>",
+                        "smithy.api#documentation": "<p>The total number of records to return in the command's output.</p> <p>If the total number of records available is more than the value specified, <code>nextToken</code> is provided in the command's output. To resume pagination, provide the <code>nextToken</code> output value in the <code>nextToken</code> argument of a subsequent command. Do not use the <code>nextToken</code> response element directly outside of the Amazon CLI.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
@@ -5437,7 +5488,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.neptunegraph#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Pagination token used to paginate output.</p>\n         <p>When this value is provided as input, the service returns results from where\n      the previous response left off. When this value is present in output, it indicates\n      that there are more results to retrieve.</p>"
+                        "smithy.api#documentation": "<p>Pagination token used to paginate output.</p> <p>When this value is provided as input, the service returns results from where the previous response left off. When this value is present in output, it indicates that there are more results to retrieve.</p>"
                     }
                 }
             },
@@ -5495,14 +5546,14 @@
                 "nextToken": {
                     "target": "com.amazonaws.neptunegraph#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Pagination token used to paginate output.</p>\n         <p>When this value is provided as input, the service returns results from where\n      the previous response left off. When this value is present in output, it indicates\n      that there are more results to retrieve.</p>",
+                        "smithy.api#documentation": "<p>Pagination token used to paginate output.</p> <p>When this value is provided as input, the service returns results from where the previous response left off. When this value is present in output, it indicates that there are more results to retrieve.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
                 "maxResults": {
                     "target": "com.amazonaws.neptunegraph#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total number of records to return in the command's output.</p>\n         <p>If the total number of records available is more than the value specified,\n      <code>nextToken</code> is provided in the command's output. To resume pagination,\n      provide the <code>nextToken</code> output value in the <code>nextToken</code> argument\n      of a subsequent command. Do not use the <code>nextToken</code> response element directly\n      outside of the Amazon CLI.</p>",
+                        "smithy.api#documentation": "<p>The total number of records to return in the command's output.</p> <p>If the total number of records available is more than the value specified, <code>nextToken</code> is provided in the command's output. To resume pagination, provide the <code>nextToken</code> output value in the <code>nextToken</code> argument of a subsequent command. Do not use the <code>nextToken</code> response element directly outside of the Amazon CLI.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
@@ -5524,7 +5575,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.neptunegraph#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Pagination token used to paginate output.</p>\n         <p>When this value is provided as input, the service returns results from where\n      the previous response left off. When this value is present in output, it indicates\n      that there are more results to retrieve.</p>"
+                        "smithy.api#documentation": "<p>Pagination token used to paginate output.</p> <p>When this value is provided as input, the service returns results from where the previous response left off. When this value is present in output, it indicates that there are more results to retrieve.</p>"
                     }
                 }
             },
@@ -5590,14 +5641,14 @@
                 "nextToken": {
                     "target": "com.amazonaws.neptunegraph#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Pagination token used to paginate output.</p>\n         <p>When this value is provided as input, the service returns results from where\n      the previous response left off. When this value is present in output, it indicates\n      that there are more results to retrieve.</p>",
+                        "smithy.api#documentation": "<p>Pagination token used to paginate output.</p> <p>When this value is provided as input, the service returns results from where the previous response left off. When this value is present in output, it indicates that there are more results to retrieve.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
                 "maxResults": {
                     "target": "com.amazonaws.neptunegraph#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total number of records to return in the command's output.</p>\n         <p>If the total number of records available is more than the value specified,\n      <code>nextToken</code> is provided in the command's output. To resume pagination,\n      provide the <code>nextToken</code> output value in the <code>nextToken</code> argument\n      of a subsequent command. Do not use the <code>nextToken</code> response element directly\n      outside of the Amazon CLI.</p>",
+                        "smithy.api#documentation": "<p>The total number of records to return in the command's output.</p> <p>If the total number of records available is more than the value specified, <code>nextToken</code> is provided in the command's output. To resume pagination, provide the <code>nextToken</code> output value in the <code>nextToken</code> argument of a subsequent command. Do not use the <code>nextToken</code> response element directly outside of the Amazon CLI.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
@@ -5619,7 +5670,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.neptunegraph#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Pagination token used to paginate output.</p>\n         <p>When this value is provided as input, the service returns results from where\n      the previous response left off. When this value is present in output, it indicates\n      that there are more results to retrieve.</p>"
+                        "smithy.api#documentation": "<p>Pagination token used to paginate output.</p> <p>When this value is provided as input, the service returns results from where the previous response left off. When this value is present in output, it indicates that there are more results to retrieve.</p>"
                     }
                 }
             },
@@ -5851,13 +5902,13 @@
                 "preserveDefaultVertexLabels": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Neptune Analytics supports label-less vertices and no labels are assigned unless one is explicitly\n           provided. Neptune assigns default labels when none is explicitly provided. When importing the data into\n           Neptune Analytics, the default vertex labels can be omitted by setting\n           <i>preserveDefaultVertexLabels</i> to false. Note that if the vertex only has default labels,\n           and has no other properties or edges, then the vertex will effectively not get\n           imported into Neptune Analytics when preserveDefaultVertexLabels is set to false.</p>"
+                        "smithy.api#documentation": "<p>Neptune Analytics supports label-less vertices and no labels are assigned unless one is explicitly provided. Neptune assigns default labels when none is explicitly provided. When importing the data into Neptune Analytics, the default vertex labels can be omitted by setting <i>preserveDefaultVertexLabels</i> to false. Note that if the vertex only has default labels, and has no other properties or edges, then the vertex will effectively not get imported into Neptune Analytics when preserveDefaultVertexLabels is set to false.</p>"
                     }
                 },
                 "preserveEdgeIds": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Neptune Analytics currently does not support user defined edge ids. The edge ids are not imported by\n          default. They are imported if <i>preserveEdgeIds</i> is set to true, and ids are stored as\n          properties on the relationships with the property name <i>neptuneEdgeId</i>.</p>"
+                        "smithy.api#documentation": "<p>Neptune Analytics currently does not support user defined edge ids. The edge ids are not imported by default. They are imported if <i>preserveEdgeIds</i> is set to true, and ids are stored as properties on the relationships with the property name <i>neptuneEdgeId</i>.</p>"
                     }
                 }
             },
@@ -6230,7 +6281,7 @@
                 "skipSnapshot": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Determines whether a final graph snapshot is created before the graph data is deleted.\n      If set to <code>true</code>, no graph snapshot is created. If set to <code>false</code>,\n      a graph snapshot is created before the data is deleted.</p>",
+                        "smithy.api#documentation": "<p>Determines whether a final graph snapshot is created before the graph data is deleted. If set to <code>true</code>, no graph snapshot is created. If set to <code>false</code>, a graph snapshot is created before the data is deleted.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6411,38 +6462,38 @@
                 "graphName": {
                     "target": "com.amazonaws.neptunegraph#GraphName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A name for the new Neptune Analytics graph to be created from the snapshot.</p>\n         <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its\n      first character must be a letter. It cannot end with a hyphen or contain two\n      consecutive hyphens. Only lowercase letters are allowed.</p>",
+                        "smithy.api#documentation": "<p>A name for the new Neptune Analytics graph to be created from the snapshot.</p> <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its first character must be a letter. It cannot end with a hyphen or contain two consecutive hyphens. Only lowercase letters are allowed.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "provisionedMemory": {
                     "target": "com.amazonaws.neptunegraph#ProvisionedMemory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph.</p>\n         <p>Min = 16</p>"
+                        "smithy.api#documentation": "<p>The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph.</p> <p>Min = 16</p>"
                     }
                 },
                 "deletionProtection": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that indicates whether the graph has deletion protection enabled.\n      The graph can't be deleted when deletion protection is enabled.</p>"
+                        "smithy.api#documentation": "<p>A value that indicates whether the graph has deletion protection enabled. The graph can't be deleted when deletion protection is enabled.</p>"
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.neptunegraph#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Adds metadata tags to the snapshot.\n        These tags can also be used with cost allocation reporting, or used in a Condition statement in an IAM policy.</p>"
+                        "smithy.api#documentation": "<p>Adds metadata tags to the snapshot. These tags can also be used with cost allocation reporting, or used in a Condition statement in an IAM policy.</p>"
                     }
                 },
                 "replicaCount": {
                     "target": "com.amazonaws.neptunegraph#ReplicaCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of replicas in other AZs. Min =0, Max = 2, Default =1</p>\n         <important>\n            <p>\n        Additional charges equivalent to the m-NCUs selected for the graph apply for each replica.\n      </p>\n         </important>"
+                        "smithy.api#documentation": "<p>The number of replicas in other AZs. Min =0, Max = 2, Default =1</p> <important> <p> Additional charges equivalent to the m-NCUs selected for the graph apply for each replica. </p> </important>"
                     }
                 },
                 "publicConnectivity": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether or not the graph can be reachable over the internet. All access to graphs is IAM authenticated.\n      (<code>true</code> to enable, or <code>false</code> to disable).</p>"
+                        "smithy.api#documentation": "<p>Specifies whether or not the graph can be reachable over the internet. All access to graphs is IAM authenticated. (<code>true</code> to enable, or <code>false</code> to disable).</p>"
                     }
                 }
             },
@@ -6865,6 +6916,160 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.neptunegraph#StartGraph": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.neptunegraph#StartGraphInput"
+            },
+            "output": {
+                "target": "com.amazonaws.neptunegraph#StartGraphOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.neptunegraph#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "smithy.api#documentation": "<p>Starts the specific graph.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/graphs/{graphIdentifier}/start"
+                },
+                "smithy.rules#staticContextParams": {
+                    "ApiType": {
+                        "value": "ControlPlane"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.neptunegraph#StartGraphInput": {
+            "type": "structure",
+            "members": {
+                "graphIdentifier": {
+                    "target": "com.amazonaws.neptunegraph#GraphIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Neptune Analytics graph.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.neptunegraph#StartGraphOutput": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.neptunegraph#GraphId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the graph.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.neptunegraph#GraphName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the graph.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN associated with the graph.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.neptunegraph#GraphStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the graph.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason that the graph has this status.</p>"
+                    }
+                },
+                "createTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the graph was created.</p>"
+                    }
+                },
+                "provisionedMemory": {
+                    "target": "com.amazonaws.neptunegraph#ProvisionedMemory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of memory-optimized Neptune Capacity Units (m-NCUs) allocated to the graph.</p>"
+                    }
+                },
+                "endpoint": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The graph endpoint.</p>"
+                    }
+                },
+                "publicConnectivity": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>true</code>, the graph has a public endpoint, otherwise not.</p>"
+                    }
+                },
+                "vectorSearchConfiguration": {
+                    "target": "com.amazonaws.neptunegraph#VectorSearchConfiguration"
+                },
+                "replicaCount": {
+                    "target": "com.amazonaws.neptunegraph#ReplicaCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of replicas for the graph.</p>"
+                    }
+                },
+                "kmsKeyIdentifier": {
+                    "target": "com.amazonaws.neptunegraph#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the KMS key used to encrypt and decrypt graph data.</p>"
+                    }
+                },
+                "sourceSnapshotId": {
+                    "target": "com.amazonaws.neptunegraph#SnapshotId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the snapshot from which the graph was created, if it was created from a snapshot.</p>"
+                    }
+                },
+                "deletionProtection": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>true</code>, deletion protection is enabled for the graph.</p>"
+                    }
+                },
+                "buildNumber": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The build number of the graph.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.neptunegraph#StartImportTask": {
             "type": "operation",
             "input": {
@@ -6914,20 +7119,20 @@
                 "failOnError": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>If set to true, the task halts when an import error is encountered. If set to false, the task skips the data that \n      caused the error and continues if possible.</p>"
+                        "smithy.api#documentation": "<p>If set to true, the task halts when an import error is encountered. If set to false, the task skips the data that caused the error and continues if possible.</p>"
                     }
                 },
                 "source": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A URL identifying the location of the data to be imported. This can be an Amazon S3 path, or can point to a \n      Neptune database endpoint or snapshot.</p>",
+                        "smithy.api#documentation": "<p>A URL identifying the location of the data to be imported. This can be an Amazon S3 path, or can point to a Neptune database endpoint or snapshot.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "format": {
                     "target": "com.amazonaws.neptunegraph#Format",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the format of Amazon S3 data to be imported. Valid values are CSV, which identifies the Gremlin CSV format or \n      OPENCYPHER, which identies the openCypher load format.</p>"
+                        "smithy.api#documentation": "<p>Specifies the format of Amazon S3 data to be imported. Valid values are CSV, which identifies the Gremlin CSV format or OPENCYPHER, which identies the openCypher load format.</p>"
                     }
                 },
                 "parquetType": {
@@ -6939,7 +7144,7 @@
                 "blankNodeHandling": {
                     "target": "com.amazonaws.neptunegraph#BlankNodeHandling",
                     "traits": {
-                        "smithy.api#documentation": "<p>The method to handle blank nodes in the dataset. Currently, only <code>convertToIri</code> is supported, \n      meaning blank nodes are converted to unique IRIs at load time. Must be provided when format is <code>ntriples</code>. \n      For more information, see <a href=\"https://docs.aws.amazon.com/neptune-analytics/latest/userguide/using-rdf-data.html#rdf-handling\">Handling RDF values</a>.</p>"
+                        "smithy.api#documentation": "<p>The method to handle blank nodes in the dataset. Currently, only <code>convertToIri</code> is supported, meaning blank nodes are converted to unique IRIs at load time. Must be provided when format is <code>ntriples</code>. For more information, see <a href=\"https://docs.aws.amazon.com/neptune-analytics/latest/userguide/using-rdf-data.html#rdf-handling\">Handling RDF values</a>.</p>"
                     }
                 },
                 "graphIdentifier": {
@@ -6981,14 +7186,14 @@
                 "source": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A URL identifying the location of the data to be imported. This can be an Amazon S3 path, or can point to a \n      Neptune database endpoint or snapshot.</p>",
+                        "smithy.api#documentation": "<p>A URL identifying the location of the data to be imported. This can be an Amazon S3 path, or can point to a Neptune database endpoint or snapshot.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "format": {
                     "target": "com.amazonaws.neptunegraph#Format",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the format of Amazon S3 data to be imported. Valid values are CSV, which identifies the Gremlin CSV format or \n      OPENCYPHER, which identies the openCypher load format.</p>"
+                        "smithy.api#documentation": "<p>Specifies the format of Amazon S3 data to be imported. Valid values are CSV, which identifies the Gremlin CSV format or OPENCYPHER, which identies the openCypher load format.</p>"
                     }
                 },
                 "parquetType": {
@@ -7013,6 +7218,160 @@
                 },
                 "importOptions": {
                     "target": "com.amazonaws.neptunegraph#ImportOptions"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.neptunegraph#StopGraph": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.neptunegraph#StopGraphInput"
+            },
+            "output": {
+                "target": "com.amazonaws.neptunegraph#StopGraphOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.neptunegraph#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "smithy.api#documentation": "<p>Stops the specific graph.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/graphs/{graphIdentifier}/stop"
+                },
+                "smithy.rules#staticContextParams": {
+                    "ApiType": {
+                        "value": "ControlPlane"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.neptunegraph#StopGraphInput": {
+            "type": "structure",
+            "members": {
+                "graphIdentifier": {
+                    "target": "com.amazonaws.neptunegraph#GraphIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Neptune Analytics graph.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.neptunegraph#StopGraphOutput": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.neptunegraph#GraphId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the graph.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.neptunegraph#GraphName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the graph.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN associated with the graph.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.neptunegraph#GraphStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the graph.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason that the graph has this status.</p>"
+                    }
+                },
+                "createTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the graph was created.</p>"
+                    }
+                },
+                "provisionedMemory": {
+                    "target": "com.amazonaws.neptunegraph#ProvisionedMemory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of memory-optimized Neptune Capacity Units (m-NCUs) allocated to the graph.</p>"
+                    }
+                },
+                "endpoint": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The graph endpoint.</p>"
+                    }
+                },
+                "publicConnectivity": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If true, the graph has a public endpoint, otherwise not.</p>"
+                    }
+                },
+                "vectorSearchConfiguration": {
+                    "target": "com.amazonaws.neptunegraph#VectorSearchConfiguration"
+                },
+                "replicaCount": {
+                    "target": "com.amazonaws.neptunegraph#ReplicaCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of replicas for the graph.</p>"
+                    }
+                },
+                "kmsKeyIdentifier": {
+                    "target": "com.amazonaws.neptunegraph#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the KMS key used to encrypt and decrypt graph data.</p>"
+                    }
+                },
+                "sourceSnapshotId": {
+                    "target": "com.amazonaws.neptunegraph#SnapshotId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the snapshot from which the graph was created, if it was created from a snapshot.</p>"
+                    }
+                },
+                "deletionProtection": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>true</code>, deletion protection is enabled for the graph.</p>"
+                    }
+                },
+                "buildNumber": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The build number of the graph.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7126,7 +7485,7 @@
                 "tags": {
                     "target": "com.amazonaws.neptunegraph#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags to be assigned to the Neptune Analytics resource.</p>\n         <p>The tags are metadata that are specified as a list of key-value pairs:</p>\n         <p>\n            <b>Key</b> (string)   –  \n       A key is the required name of the tag. The string value can be\n       from 1 to 128 Unicode characters in length. It can't be\n       prefixed with <code>aws:</code> and can only contain the\n       set of Unicode characters specified by this Java regular expression:\n     <code>\"^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$\")</code>.</p>\n         <p>\n            <b>Value</b> (string)   –  \n       A value is the optional value of the tag. The string value can\n       be from 1 to 256 Unicode characters in length. It can't be\n       prefixed with <code>aws:</code> and can only contain the\n       set of Unicode characters specified by this Java regular expression:\n     <code>\"^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$\")</code>.</p>",
+                        "smithy.api#documentation": "<p>The tags to be assigned to the Neptune Analytics resource.</p> <p>The tags are metadata that are specified as a list of key-value pairs:</p> <p> <b>Key</b> (string)   –   A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length. It can't be prefixed with <code>aws:</code> and can only contain the set of Unicode characters specified by this Java regular expression: <code>\"^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$\")</code>.</p> <p> <b>Value</b> (string)   –   A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length. It can't be prefixed with <code>aws:</code> and can only contain the set of Unicode characters specified by this Java regular expression: <code>\"^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$\")</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7389,19 +7748,19 @@
                 "publicConnectivity": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether or not the graph can be reachable over the internet. All access to graphs is IAM authenticated.\n      (<code>true</code> to enable, or <code>false</code> to disable.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether or not the graph can be reachable over the internet. All access to graphs is IAM authenticated. (<code>true</code> to enable, or <code>false</code> to disable.</p>"
                     }
                 },
                 "provisionedMemory": {
                     "target": "com.amazonaws.neptunegraph#ProvisionedMemory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph.</p>\n         <p>Min = 16</p>"
+                        "smithy.api#documentation": "<p>The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph.</p> <p>Min = 16</p>"
                     }
                 },
                 "deletionProtection": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that indicates whether the graph has deletion protection enabled.\n      The graph can't be deleted when deletion protection is enabled.</p>"
+                        "smithy.api#documentation": "<p>A value that indicates whether the graph has deletion protection enabled. The graph can't be deleted when deletion protection is enabled.</p>"
                     }
                 }
             },

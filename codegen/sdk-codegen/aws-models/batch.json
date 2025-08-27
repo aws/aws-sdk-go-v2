@@ -1042,17 +1042,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -1063,17 +1052,6 @@
                                 "Region": "us-iso-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         },
                         {
@@ -1090,17 +1068,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -1111,17 +1078,6 @@
                                 "Region": "us-isob-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         },
                         {
@@ -4631,7 +4587,7 @@
                     "target": "com.amazonaws.batch#ImageType",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The image type to match with the instance type to select an AMI. The supported values are\n   different for <code>ECS</code> and <code>EKS</code> resources.</p>\n         <dl>\n            <dt>ECS</dt>\n            <dd>\n               <p>If the <code>imageIdOverride</code> parameter isn't specified, then a recent <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami\">Amazon ECS-optimized Amazon Linux 2 AMI</a> (<code>ECS_AL2</code>) is used. If a new image type is\n      specified in an update, but neither an <code>imageId</code> nor a <code>imageIdOverride</code>\n      parameter is specified, then the latest Amazon ECS optimized AMI for that image type that's\n      supported by Batch is used.</p>\n               <dl>\n                  <dt>ECS_AL2</dt>\n                  <dd>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami\">Amazon Linux\n         2</a>: Default for all non-GPU instance families.</p>\n                  </dd>\n                  <dt>ECS_AL2_NVIDIA</dt>\n                  <dd>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#gpuami\">Amazon Linux 2\n          (GPU)</a>: Default for all GPU instance families (for example <code>P4</code> and\n          <code>G4</code>) and can be used for all non Amazon Web Services Graviton-based instance types.</p>\n                  </dd>\n                  <dt>ECS_AL2023</dt>\n                  <dd>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html\">Amazon Linux 2023</a>: Batch\n         supports Amazon Linux 2023.</p>\n                     <note>\n                        <p>Amazon Linux 2023 does not support <code>A1</code> instances.</p>\n                     </note>\n                  </dd>\n                  <dt>ECS_AL1</dt>\n                  <dd>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#alami\">Amazon Linux</a>. Amazon Linux has\n         reached the end-of-life of standard support. For more information, see <a href=\"http://aws.amazon.com/amazon-linux-ami/\">Amazon Linux AMI</a>.</p>\n                  </dd>\n               </dl>\n            </dd>\n            <dt>EKS</dt>\n            <dd>\n               <p>If the <code>imageIdOverride</code> parameter isn't specified, then a recent <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html\">Amazon EKS-optimized Amazon Linux\n       AMI</a> (<code>EKS_AL2</code>) is used. If a new image type is specified in an update,\n      but neither an <code>imageId</code> nor a <code>imageIdOverride</code> parameter is specified,\n      then the latest Amazon EKS optimized AMI for that image type that Batch supports is used.</p>\n               <dl>\n                  <dt>EKS_AL2</dt>\n                  <dd>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html\">Amazon\n          Linux 2</a>: Default for all non-GPU instance families.</p>\n                  </dd>\n                  <dt>EKS_AL2_NVIDIA</dt>\n                  <dd>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html\">Amazon\n          Linux 2 (accelerated)</a>: Default for all GPU instance families (for example,\n          <code>P4</code> and <code>G4</code>) and can be used for all non Amazon Web Services Graviton-based\n         instance types.</p>\n                  </dd>\n                  <dt>EKS_AL2023</dt>\n                  <dd>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html\">Amazon\n          Linux 2023</a>: Batch supports Amazon Linux 2023.</p>\n                     <note>\n                        <p>Amazon Linux 2023 does not support <code>A1</code> instances.</p>\n                     </note>\n                  </dd>\n                  <dt>EKS_AL2023_NVIDIA</dt>\n                  <dd>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html\">Amazon\n          Linux 2023 (accelerated)</a>: GPU instance families and can be used for all non Amazon Web Services\n         Graviton-based instance types.</p>\n                  </dd>\n               </dl>\n            </dd>\n         </dl>",
+                        "smithy.api#documentation": "<p>The image type to match with the instance type to select an AMI. The supported values are\n   different for <code>ECS</code> and <code>EKS</code> resources.</p>\n         <dl>\n            <dt>ECS</dt>\n            <dd>\n               <p>If the <code>imageIdOverride</code> parameter isn't specified, then a recent <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami\">Amazon ECS-optimized Amazon Linux 2 AMI</a> (<code>ECS_AL2</code>) is used. If a new image type is\n      specified in an update, but neither an <code>imageId</code> nor a <code>imageIdOverride</code>\n      parameter is specified, then the latest Amazon ECS optimized AMI for that image type that's\n      supported by Batch is used.</p>\n               <dl>\n                  <dt>ECS_AL2</dt>\n                  <dd>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami\">Amazon Linux\n         2</a>: Default for all non-GPU instance families.</p>\n                  </dd>\n                  <dt>ECS_AL2_NVIDIA</dt>\n                  <dd>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#gpuami\">Amazon Linux 2\n          (GPU)</a>: Default for all GPU instance families (for example <code>P4</code> and\n          <code>G4</code>) and can be used for all non Amazon Web Services Graviton-based instance types.</p>\n                  </dd>\n                  <dt>ECS_AL2023</dt>\n                  <dd>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html\">Amazon Linux 2023</a>: Batch\n         supports Amazon Linux 2023.</p>\n                     <note>\n                        <p>Amazon Linux 2023 does not support <code>A1</code> instances.</p>\n                     </note>\n                  </dd>\n                  <dt>ECS_AL2023_NVIDIA</dt>\n                  <dd>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#gpuami\">Amazon Linux 2023\n          (GPU)</a>: For all GPU instance families and can be used for all non Amazon Web Services Graviton-based instance types.</p>\n                     <note>\n                        <p>ECS_AL2023_NVIDIA doesn't support <code>p3</code> and <code>g3</code> instance types.</p>\n                     </note>\n                  </dd>\n                  <dt>ECS_AL1</dt>\n                  <dd>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#alami\">Amazon Linux</a>. Amazon Linux has\n         reached the end-of-life of standard support. For more information, see <a href=\"http://aws.amazon.com/amazon-linux-ami/\">Amazon Linux AMI</a>.</p>\n                  </dd>\n               </dl>\n            </dd>\n            <dt>EKS</dt>\n            <dd>\n               <p>If the <code>imageIdOverride</code> parameter isn't specified, then a recent <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html\">Amazon EKS-optimized Amazon Linux\n       AMI</a> (<code>EKS_AL2</code>) is used. If a new image type is specified in an update,\n      but neither an <code>imageId</code> nor a <code>imageIdOverride</code> parameter is specified,\n      then the latest Amazon EKS optimized AMI for that image type that Batch supports is used.</p>\n               <important>\n                  <p>Starting end of October 2025 Amazon EKS optimized Amazon Linux 2023 AMIs will be the\n       default on Batch for EKS versions prior to 1.33. Starting from Kubernetes version 1.33,\n       EKS optimized Amazon Linux 2023 AMIs will be the default when it becomes supported on\n       Batch.</p>\n                  <p>Amazon Web Services will end\n       support for Amazon EKS AL2-optimized and AL2-accelerated AMIs, starting 11/26/25. You can continue\n       using Batch-provided Amazon EKS optimized Amazon Linux 2 AMIs on your Amazon EKS compute\n       environments beyond the 11/26/25 end-of-support date, these compute environments will no\n       longer receive any new software updates, security patches, or bug fixes from\n       Amazon Web Services. For more information on upgrading from AL2 to AL2023, see <a href=\"\">How to upgrade from EKS AL2 to EKS AL2023</a> in the <i>Batch User Guide</i>.</p>\n               </important>\n               <dl>\n                  <dt>EKS_AL2</dt>\n                  <dd>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html\">Amazon\n          Linux 2</a>: Default for all non-GPU instance families.</p>\n                  </dd>\n                  <dt>EKS_AL2_NVIDIA</dt>\n                  <dd>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html\">Amazon\n          Linux 2 (accelerated)</a>: Default for all GPU instance families (for example,\n          <code>P4</code> and <code>G4</code>) and can be used for all non Amazon Web Services Graviton-based\n         instance types.</p>\n                  </dd>\n                  <dt>EKS_AL2023</dt>\n                  <dd>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html\">Amazon\n          Linux 2023</a>: Batch supports Amazon Linux 2023.</p>\n                     <note>\n                        <p>Amazon Linux 2023 does not support <code>A1</code> instances.</p>\n                     </note>\n                  </dd>\n                  <dt>EKS_AL2023_NVIDIA</dt>\n                  <dd>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html\">Amazon\n          Linux 2023 (accelerated)</a>: GPU instance families and can be used for all non Amazon Web Services\n         Graviton-based instance types.</p>\n                  </dd>\n               </dl>\n            </dd>\n         </dl>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9131,7 +9087,7 @@
                     "target": "com.amazonaws.batch#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>A share identifier or share identifier prefix. If the string ends with an asterisk\n   (*), this entry specifies the weight factor to use for share identifiers that start with\n   that prefix. The list of share identifiers in a fair-share policy can't overlap. For\n   example, you can't have one that specifies a <code>shareIdentifier</code> of <code>UserA*</code>\n   and another that specifies a <code>shareIdentifier</code> of <code>UserA-1</code>.</p>\n         <p>There can be no more than 500 share identifiers active in a job queue.</p>\n         <p>The string is limited to 255 alphanumeric characters, and can be followed by an asterisk\n   (*).</p>",
+                        "smithy.api#documentation": "<p>A share identifier or share identifier prefix. If the string ends with an asterisk\n   (*), this entry specifies the weight factor to use for share identifiers that start with\n   that prefix. The list of share identifiers in a fair-share policy can't overlap. For\n   example, you can't have one that specifies a <code>shareIdentifier</code> of <code>UserA*</code>\n   and another that specifies a <code>shareIdentifier</code> of <code>UserA1</code>.</p>\n         <p>There can be no more than 500 share identifiers active in a job queue.</p>\n         <p>The string is limited to 255 alphanumeric characters, and can be followed by an asterisk\n   (*).</p>",
                         "smithy.api#required": {}
                     }
                 },

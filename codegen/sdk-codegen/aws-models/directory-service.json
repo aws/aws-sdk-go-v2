@@ -804,6 +804,50 @@
                 "target": "com.amazonaws.directoryservice#AvailabilityZone"
             }
         },
+        "com.amazonaws.directoryservice#CaEnrollmentPolicyStatus": {
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InProgress"
+                    }
+                },
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Success"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "DISABLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Disabling"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Disabled"
+                    }
+                },
+                "IMPAIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Impaired"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.directoryservice#CaEnrollmentPolicyStatusReason": {
+            "type": "string"
+        },
         "com.amazonaws.directoryservice#CancelSchemaExtension": {
             "type": "operation",
             "input": {
@@ -2999,6 +3043,87 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.directoryservice#DescribeCAEnrollmentPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directoryservice#DescribeCAEnrollmentPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directoryservice#DescribeCAEnrollmentPolicyResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directoryservice#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#DirectoryDoesNotExistException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves detailed information about the certificate authority (CA) enrollment policy for\n      the specified directory. This policy determines how client certificates are automatically enrolled and\n      managed through Amazon Web Services Private Certificate Authority. </p>"
+            }
+        },
+        "com.amazonaws.directoryservice#DescribeCAEnrollmentPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservice#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the directory for which to retrieve the CA enrollment policy\n      information.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the inputs for the <a>DescribeCAEnrollmentPolicy</a> operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directoryservice#DescribeCAEnrollmentPolicyResult": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservice#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the directory associated with this CA enrollment policy.</p>"
+                    }
+                },
+                "PcaConnectorArn": {
+                    "target": "com.amazonaws.directoryservice#PcaConnectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Private Certificate Authority (PCA) connector\n      that is configured for automatic certificate enrollment in this directory.</p>"
+                    }
+                },
+                "CaEnrollmentPolicyStatus": {
+                    "target": "com.amazonaws.directoryservice#CaEnrollmentPolicyStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the CA enrollment policy. This indicates if automatic certificate\n      enrollment is currently active, inactive, or in a transitional state.</p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code> - The policy is being activated T</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCESS</code> - The policy is active and automatic certificate enrollment is\n          operational</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - The policy activation or deactivation failed</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLING</code> - The policy is being deactivated</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> - The policy is inactive and automatic certificate enrollment is\n          not available</p>\n            </li>\n            <li>\n               <p>\n                  <code>IMPAIRED</code> - Network connectivity is impaired.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "LastUpdatedDateTime": {
+                    "target": "com.amazonaws.directoryservice#LastUpdatedDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the CA enrollment policy was last modified or updated.</p>"
+                    }
+                },
+                "CaEnrollmentPolicyStatusReason": {
+                    "target": "com.amazonaws.directoryservice#CaEnrollmentPolicyStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information explaining the current status of the CA enrollment policy,\n      particularly useful when the policy is in an error or transitional state.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the results of the <a>DescribeCAEnrollmentPolicy</a> operation.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.directoryservice#DescribeCertificate": {
             "type": "operation",
             "input": {
@@ -5028,6 +5153,9 @@
                     "target": "com.amazonaws.directoryservice#DescribeADAssessment"
                 },
                 {
+                    "target": "com.amazonaws.directoryservice#DescribeCAEnrollmentPolicy"
+                },
+                {
                     "target": "com.amazonaws.directoryservice#DescribeCertificate"
                 },
                 {
@@ -5073,6 +5201,9 @@
                     "target": "com.amazonaws.directoryservice#DescribeUpdateDirectory"
                 },
                 {
+                    "target": "com.amazonaws.directoryservice#DisableCAEnrollmentPolicy"
+                },
+                {
                     "target": "com.amazonaws.directoryservice#DisableClientAuthentication"
                 },
                 {
@@ -5086,6 +5217,9 @@
                 },
                 {
                     "target": "com.amazonaws.directoryservice#DisableSso"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#EnableCAEnrollmentPolicy"
                 },
                 {
                     "target": "com.amazonaws.directoryservice#EnableClientAuthentication"
@@ -6340,6 +6474,83 @@
                 "smithy.api#documentation": "<p>Contains information about the directory.</p>"
             }
         },
+        "com.amazonaws.directoryservice#DisableAlreadyInProgressException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.directoryservice#ExceptionMessage"
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.directoryservice#RequestId"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A disable operation for CA enrollment policy is already in progress for this directory.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.directoryservice#DisableCAEnrollmentPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directoryservice#DisableCAEnrollmentPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directoryservice#DisableCAEnrollmentPolicyResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directoryservice#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#DirectoryDoesNotExistException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#DirectoryUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#DisableAlreadyInProgressException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#EntityDoesNotExistException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#ServiceException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disables the certificate authority (CA) enrollment policy for the specified directory. This stops\n      automatic certificate enrollment and management for domain-joined clients, but does not affect\n      existing certificates.</p>\n         <important>\n            <p>Disabling the CA enrollment policy prevents new certificates from being automatically\n        enrolled, but existing certificates remain valid and functional until they expire.</p>\n         </important>"
+            }
+        },
+        "com.amazonaws.directoryservice#DisableCAEnrollmentPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservice#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the directory for which to disable the CA enrollment policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the inputs for the <a>DisableCAEnrollmentPolicy</a> operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directoryservice#DisableCAEnrollmentPolicyResult": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the results of the <a>DisableCAEnrollmentPolicy</a> operation.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.directoryservice#DisableClientAuthentication": {
             "type": "operation",
             "input": {
@@ -6817,6 +7028,93 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.directoryservice#DomainController"
+            }
+        },
+        "com.amazonaws.directoryservice#EnableAlreadyInProgressException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.directoryservice#ExceptionMessage"
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.directoryservice#RequestId"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An enable operation for CA enrollment policy is already in progress for this directory.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.directoryservice#EnableCAEnrollmentPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directoryservice#EnableCAEnrollmentPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directoryservice#EnableCAEnrollmentPolicyResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directoryservice#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#DirectoryDoesNotExistException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#DirectoryUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#EnableAlreadyInProgressException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#EntityAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#EntityDoesNotExistException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#ServiceException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Enables certificate authority (CA) enrollment policy for the specified directory. This allows\n      domain-joined clients to automatically request and receive certificates from the specified\n      Amazon Web Services Private Certificate Authority.</p>\n         <note>\n            <p>Before enabling CA enrollment, ensure that the PCA connector is properly configured and\n        accessible from the directory. The connector must be in an active state and have the\n        necessary permissions.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.directoryservice#EnableCAEnrollmentPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservice#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the directory for which to enable the CA enrollment policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PcaConnectorArn": {
+                    "target": "com.amazonaws.directoryservice#PcaConnectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Private Certificate Authority (PCA) connector to use\n      for automatic certificate enrollment. This connector must be properly configured and\n      accessible from the directory.</p>\n         <p>The ARN format is:\n      <code>arn:aws:pca-connector-ad:<i>region</i>:<i>account-id</i>:connector/<i>connector-id</i>\n            </code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the inputs for the <a>EnableCAEnrollmentPolicy</a> operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directoryservice#EnableCAEnrollmentPolicyResult": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the results of the <a>EnableCAEnrollmentPolicy</a> operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#EnableClientAuthentication": {
@@ -8694,6 +8992,12 @@
             "traits": {
                 "smithy.api#pattern": "^(?=^.{8,64}$)((?=.*\\d)(?=.*[A-Z])(?=.*[a-z])|(?=.*\\d)(?=.*[^A-Za-z0-9\\s])(?=.*[a-z])|(?=.*[^A-Za-z0-9\\s])(?=.*[A-Z])(?=.*[a-z])|(?=.*\\d)(?=.*[A-Z])(?=.*[^A-Za-z0-9\\s]))^",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.directoryservice#PcaConnectorArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:[\\w-]+:pca-connector-ad:[\\w-]+:[0-9]+:connector\\/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$"
             }
         },
         "com.amazonaws.directoryservice#PortNumber": {
