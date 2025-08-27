@@ -1,0 +1,8 @@
+{
+    "id": "8664e784-16cb-4cef-aeee-47e66b16efd9",
+    "type": "bugfix",
+    "description": "Ensure document.Interface values with maps serialize keys in a stable order. This should improve prompt cache hit rates with various inputs.",
+    "modules": [
+        "service/bedrockruntime"
+    ]
+}
