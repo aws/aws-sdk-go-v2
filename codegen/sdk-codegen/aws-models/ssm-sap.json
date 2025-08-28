@@ -96,7 +96,7 @@
                 "AssociatedApplicationArns": {
                     "target": "com.amazonaws.ssmsap#ApplicationArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Names of the associated AWS Systems Manager for SAP\n         applications.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Names of the associated AWS Systems Manager for SAP applications.</p>"
                     }
                 }
             },
@@ -130,7 +130,7 @@
                 "SecretId": {
                     "target": "com.amazonaws.ssmsap#SecretId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The secret ID created in AWS Secrets Manager to store the credentials of the SAP\n         application. </p>",
+                        "smithy.api#documentation": "<p>The secret ID created in AWS Secrets Manager to store the credentials of the SAP application. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -284,7 +284,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The summary of the SAP application registered with AWS Systems Manager for SAP.\n      </p>"
+                "smithy.api#documentation": "<p>The summary of the SAP application registered with AWS Systems Manager for SAP. </p>"
             }
         },
         "com.amazonaws.ssmsap#ApplicationSummaryList": {
@@ -308,6 +308,12 @@
                         "smithy.api#enumValue": "SAP_ABAP"
                     }
                 }
+            }
+        },
+        "com.amazonaws.ssmsap#ApplicationTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmsap#ApplicationType"
             }
         },
         "com.amazonaws.ssmsap#Arn": {
@@ -367,7 +373,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration parameters for AWS Backint Agent for SAP HANA. You can backup your SAP\n         HANA database with AWS Backup or Amazon S3.</p>"
+                "smithy.api#documentation": "<p>Configuration parameters for AWS Backint Agent for SAP HANA. You can backup your SAP HANA database with AWS Backup or Amazon S3.</p>"
             }
         },
         "com.amazonaws.ssmsap#BackintMode": {
@@ -440,13 +446,13 @@
                 "ParentComponent": {
                     "target": "com.amazonaws.ssmsap#ComponentId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parent component of a highly available environment. For example, in a highly\n         available SAP on AWS workload, the parent component consists of the entire setup,\n         including the child components.</p>"
+                        "smithy.api#documentation": "<p>The parent component of a highly available environment. For example, in a highly available SAP on AWS workload, the parent component consists of the entire setup, including the child components.</p>"
                     }
                 },
                 "ChildComponents": {
                     "target": "com.amazonaws.ssmsap#ComponentIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The child components of a highly available environment. For example, in a highly\n         available SAP on AWS workload, the child component consists of the primary and secondar\n         instances.</p>"
+                        "smithy.api#documentation": "<p>The child components of a highly available environment. For example, in a highly available SAP on AWS workload, the child component consists of the primary and secondar instances.</p>"
                     }
                 },
                 "ApplicationId": {
@@ -464,7 +470,7 @@
                 "Status": {
                     "target": "com.amazonaws.ssmsap#ComponentStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the component.</p>\n         <ul>\n            <li>\n               <p>ACTIVATED - this status has been deprecated.</p>\n            </li>\n            <li>\n               <p>STARTING - the component is in the process of being started.</p>\n            </li>\n            <li>\n               <p>STOPPED - the component is not running.</p>\n            </li>\n            <li>\n               <p>STOPPING - the component is in the process of being stopped.</p>\n            </li>\n            <li>\n               <p>RUNNING - the component is running.</p>\n            </li>\n            <li>\n               <p>RUNNING_WITH_ERROR - one or more child component(s) of the parent component is not\n               running. Call <a href=\"https://docs.aws.amazon.com/ssmsap/latest/APIReference/API_GetComponent.html\">\n                     <code>GetComponent</code>\n                  </a> to review the status of each child\n               component.</p>\n            </li>\n            <li>\n               <p>UNDEFINED - AWS Systems Manager for SAP cannot provide the component status\n               based on the discovered information. Verify your SAP application.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of the component.</p> <ul> <li> <p>ACTIVATED - this status has been deprecated.</p> </li> <li> <p>STARTING - the component is in the process of being started.</p> </li> <li> <p>STOPPED - the component is not running.</p> </li> <li> <p>STOPPING - the component is in the process of being stopped.</p> </li> <li> <p>RUNNING - the component is running.</p> </li> <li> <p>RUNNING_WITH_ERROR - one or more child component(s) of the parent component is not running. Call <a href=\"https://docs.aws.amazon.com/ssmsap/latest/APIReference/API_GetComponent.html\"> <code>GetComponent</code> </a> to review the status of each child component.</p> </li> <li> <p>UNDEFINED - AWS Systems Manager for SAP cannot provide the component status based on the discovered information. Verify your SAP application.</p> </li> </ul>"
                     }
                 },
                 "SapHostname": {
@@ -578,27 +584,27 @@
                 "ComponentType": {
                     "target": "com.amazonaws.ssmsap#ComponentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>This string is the type of the component.</p>\n         <p>Accepted value is <code>WD</code>.</p>",
+                        "smithy.api#documentation": "<p>This string is the type of the component.</p> <p>Accepted value is <code>WD</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Sid": {
                     "target": "com.amazonaws.ssmsap#SID",
                     "traits": {
-                        "smithy.api#documentation": "<p>This string is the SAP System ID of the component.</p>\n         <p>Accepted values are alphanumeric.</p>",
+                        "smithy.api#documentation": "<p>This string is the SAP System ID of the component.</p> <p>Accepted values are alphanumeric.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Ec2InstanceId": {
                     "target": "com.amazonaws.ssmsap#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>This is the Amazon EC2 instance on which your SAP component is running.</p>\n         <p>Accepted values are alphanumeric.</p>",
+                        "smithy.api#documentation": "<p>This is the Amazon EC2 instance on which your SAP component is running.</p> <p>Accepted values are alphanumeric.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This is information about the component of \n         your SAP application, such as Web Dispatcher.</p>"
+                "smithy.api#documentation": "<p>This is information about the component of your SAP application, such as Web Dispatcher.</p>"
             }
         },
         "com.amazonaws.ssmsap#ComponentInfoList": {
@@ -757,6 +763,164 @@
                 }
             }
         },
+        "com.amazonaws.ssmsap#ConfigurationCheckDefinition": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.ssmsap#ConfigurationCheckType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the configuration check.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the configuration check.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of what the configuration check validates.</p>"
+                    }
+                },
+                "ApplicableApplicationTypes": {
+                    "target": "com.amazonaws.ssmsap#ApplicationTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of SSMSAP application types that this configuration check can be evaluated against.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a configuration check definition supported by AWS Systems Manager for SAP.</p>"
+            }
+        },
+        "com.amazonaws.ssmsap#ConfigurationCheckDefinitionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmsap#ConfigurationCheckDefinition"
+            }
+        },
+        "com.amazonaws.ssmsap#ConfigurationCheckOperation": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.ssmsap#OperationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the configuration check operation.</p>"
+                    }
+                },
+                "ApplicationId": {
+                    "target": "com.amazonaws.ssmsap#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the application against which the configuration check was performed.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.ssmsap#OperationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the configuration check operation.</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message providing additional details about the status of the configuration check operation.</p>"
+                    }
+                },
+                "ConfigurationCheckId": {
+                    "target": "com.amazonaws.ssmsap#ConfigurationCheckType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the configuration check that was performed.</p>"
+                    }
+                },
+                "ConfigurationCheckName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the configuration check that was performed.</p>"
+                    }
+                },
+                "ConfigurationCheckDescription": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the configuration check that was performed.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the configuration check operation started.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the configuration check operation completed.</p>"
+                    }
+                },
+                "RuleStatusCounts": {
+                    "target": "com.amazonaws.ssmsap#RuleStatusCounts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of all the rule results, showing counts for each status type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a configuration check operation that has been executed against an application.</p>"
+            }
+        },
+        "com.amazonaws.ssmsap#ConfigurationCheckOperationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmsap#ConfigurationCheckOperation"
+            }
+        },
+        "com.amazonaws.ssmsap#ConfigurationCheckOperationListingMode": {
+            "type": "enum",
+            "members": {
+                "ALL_OPERATIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL_OPERATIONS"
+                    }
+                },
+                "LATEST_PER_CHECK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LATEST_PER_CHECK"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#ConfigurationCheckType": {
+            "type": "enum",
+            "members": {
+                "SAP_CHECK_01": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAP_CHECK_01"
+                    }
+                },
+                "SAP_CHECK_02": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAP_CHECK_02"
+                    }
+                },
+                "SAP_CHECK_03": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAP_CHECK_03"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#ConfigurationCheckTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmsap#ConfigurationCheckType"
+            }
+        },
         "com.amazonaws.ssmsap#ConflictException": {
             "type": "structure",
             "members": {
@@ -864,12 +1028,12 @@
                 "ConnectedComponentArns": {
                     "target": "com.amazonaws.ssmsap#ComponentArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Names of the connected AWS Systems Manager for SAP\n         components.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Names of the connected AWS Systems Manager for SAP components.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The SAP HANA database of the application registered with AWS Systems Manager for\n         SAP.</p>"
+                "smithy.api#documentation": "<p>The SAP HANA database of the application registered with AWS Systems Manager for SAP.</p>"
             }
         },
         "com.amazonaws.ssmsap#DatabaseConnection": {
@@ -1131,7 +1295,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deregister an SAP application with AWS Systems Manager for SAP. This action does not\n         aﬀect the existing setup of your SAP workloads on Amazon EC2.</p>",
+                "smithy.api#documentation": "<p>Deregister an SAP application with AWS Systems Manager for SAP. This action does not aﬀect the existing setup of your SAP workloads on Amazon EC2.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1168,7 +1332,7 @@
                 "Value": {
                     "target": "com.amazonaws.ssmsap#FilterValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filter values. Filter values are case-sensitive. If you specify multiple values for\n         a filter, the values are joined with an OR, and the request returns all results that match\n         any of the specified values</p>",
+                        "smithy.api#documentation": "<p>The filter values. Filter values are case-sensitive. If you specify multiple values for a filter, the values are joined with an OR, and the request returns all results that match any of the specified values</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1254,7 +1418,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets an application registered with AWS Systems Manager for SAP. It also returns the\n         components of the application.</p>",
+                "smithy.api#documentation": "<p>Gets an application registered with AWS Systems Manager for SAP. It also returns the components of the application.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1292,7 +1456,7 @@
                 "Application": {
                     "target": "com.amazonaws.ssmsap#Application",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns all of the metadata of an application registered with AWS Systems Manager for\n         SAP.</p>"
+                        "smithy.api#documentation": "<p>Returns all of the metadata of an application registered with AWS Systems Manager for SAP.</p>"
                     }
                 },
                 "Tags": {
@@ -1323,7 +1487,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the component of an application registered with AWS Systems Manager for\n         SAP.</p>",
+                "smithy.api#documentation": "<p>Gets the component of an application registered with AWS Systems Manager for SAP.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1368,6 +1532,61 @@
                 }
             }
         },
+        "com.amazonaws.ssmsap#GetConfigurationCheckOperation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmsap#GetConfigurationCheckOperationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmsap#GetConfigurationCheckOperationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmsap#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the details of a configuration check operation by specifying the operation ID.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/get-configuration-check-operation"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ssmsap#GetConfigurationCheckOperationInput": {
+            "type": "structure",
+            "members": {
+                "OperationId": {
+                    "target": "com.amazonaws.ssmsap#OperationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the configuration check operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssmsap#GetConfigurationCheckOperationOutput": {
+            "type": "structure",
+            "members": {
+                "ConfigurationCheckOperation": {
+                    "target": "com.amazonaws.ssmsap#ConfigurationCheckOperation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the details of a configuration check operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ssmsap#GetDatabase": {
             "type": "operation",
             "input": {
@@ -1385,7 +1604,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the SAP HANA database of an application registered with AWS Systems Manager for\n         SAP.</p>",
+                "smithy.api#documentation": "<p>Gets the SAP HANA database of an application registered with AWS Systems Manager for SAP.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1429,7 +1648,7 @@
                 "Database": {
                     "target": "com.amazonaws.ssmsap#Database",
                     "traits": {
-                        "smithy.api#documentation": "<p>The SAP HANA database of an application registered with AWS Systems Manager for\n         SAP.</p>"
+                        "smithy.api#documentation": "<p>The SAP HANA database of an application registered with AWS Systems Manager for SAP.</p>"
                     }
                 },
                 "Tags": {
@@ -1736,7 +1955,7 @@
                     "target": "com.amazonaws.ssmsap#MaxResults",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining\n         results, make another call with the returned nextToken value.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.</p>"
                     }
                 },
                 "Filters": {
@@ -1759,7 +1978,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.ssmsap#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are\n         no more results to return.</p>"
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>"
                     }
                 }
             }
@@ -1821,7 +2040,7 @@
                     "target": "com.amazonaws.ssmsap#MaxResults",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining\n         results, make another call with the returned nextToken value.</p>\n         <p>If you do not specify a value for MaxResults, the request returns 50 items per page by\n         default.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.</p> <p>If you do not specify a value for MaxResults, the request returns 50 items per page by default.</p>"
                     }
                 }
             }
@@ -1838,9 +2057,178 @@
                 "NextToken": {
                     "target": "com.amazonaws.ssmsap#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are\n         no more results to return.</p>"
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.ssmsap#ListConfigurationCheckDefinitions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmsap#ListConfigurationCheckDefinitionsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmsap#ListConfigurationCheckDefinitionsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmsap#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all configuration check types supported by AWS Systems Manager for SAP.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/list-configuration-check-definitions"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "ConfigurationChecks"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ssmsap#ListConfigurationCheckDefinitionsInput": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.ssmsap#MaxResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssmsap#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssmsap#ListConfigurationCheckDefinitionsOutput": {
+            "type": "structure",
+            "members": {
+                "ConfigurationChecks": {
+                    "target": "com.amazonaws.ssmsap#ConfigurationCheckDefinitionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration check types supported by AWS Systems Manager for SAP.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssmsap#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ssmsap#ListConfigurationCheckOperations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmsap#ListConfigurationCheckOperationsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmsap#ListConfigurationCheckOperationsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmsap#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the configuration check operations performed by AWS Systems Manager for SAP.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/list-configuration-check-operations"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "ConfigurationCheckOperations"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ssmsap#ListConfigurationCheckOperationsInput": {
+            "type": "structure",
+            "members": {
+                "ApplicationId": {
+                    "target": "com.amazonaws.ssmsap#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the application.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ListMode": {
+                    "target": "com.amazonaws.ssmsap#ConfigurationCheckOperationListingMode",
+                    "traits": {
+                        "smithy.api#default": "LATEST_PER_CHECK",
+                        "smithy.api#documentation": "<p>The mode for listing configuration check operations. Defaults to \"LATEST_PER_CHECK\".</p> <ul> <li> <p>LATEST_PER_CHECK - Will list the latest configuration check operation per check type.</p> </li> <li> <p>ALL_OPERATIONS - Will list all configuration check operations performed on the application.</p> </li> </ul>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ssmsap#MaxResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssmsap#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.ssmsap#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters of an operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssmsap#ListConfigurationCheckOperationsOutput": {
+            "type": "structure",
+            "members": {
+                "ConfigurationCheckOperations": {
+                    "target": "com.amazonaws.ssmsap#ConfigurationCheckOperationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration check operations performed by AWS Systems Manager for SAP.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssmsap#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssmsap#ListDatabases": {
@@ -1863,7 +2251,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the SAP HANA databases of an application registered with AWS Systems Manager for\n         SAP.</p>",
+                "smithy.api#documentation": "<p>Lists the SAP HANA databases of an application registered with AWS Systems Manager for SAP.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1903,7 +2291,7 @@
                     "target": "com.amazonaws.ssmsap#MaxResults",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining\n         results, make another call with the returned nextToken value. If you do not specify a value\n         for MaxResults, the request returns 50 items per page by default.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value. If you do not specify a value for MaxResults, the request returns 50 items per page by default.</p>"
                     }
                 }
             }
@@ -1920,7 +2308,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.ssmsap#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are\n         no more results to return.</p>"
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>"
                     }
                 }
             }
@@ -1942,7 +2330,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of operations events.</p>\n         <p>Available parameters include <code>OperationID</code>, as well as optional parameters\n            <code>MaxResults</code>, <code>NextToken</code>, and <code>Filters</code>.</p>",
+                "smithy.api#documentation": "<p>Returns a list of operations events.</p> <p>Available parameters include <code>OperationID</code>, as well as optional parameters <code>MaxResults</code>, <code>NextToken</code>, and <code>Filters</code>.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1971,19 +2359,19 @@
                     "target": "com.amazonaws.ssmsap#MaxResults",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining\n         results, make another call with the returned nextToken value.</p>\n         <p>If you do not specify a value for <code>MaxResults</code>, the request returns 50 items\n         per page by default.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.</p> <p>If you do not specify a value for <code>MaxResults</code>, the request returns 50 items per page by default.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.ssmsap#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are\n         no more results to return.</p>"
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>"
                     }
                 },
                 "Filters": {
                     "target": "com.amazonaws.ssmsap#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optionally specify filters to narrow the returned operation event items.</p>\n         <p>Valid filter names include <code>status</code>, <code>resourceID</code>, and\n            <code>resourceType</code>. The valid operator for all three filters is\n            <code>Equals</code>.</p>"
+                        "smithy.api#documentation": "<p>Optionally specify filters to narrow the returned operation event items.</p> <p>Valid filter names include <code>status</code>, <code>resourceID</code>, and <code>resourceType</code>. The valid operator for all three filters is <code>Equals</code>.</p>"
                     }
                 }
             },
@@ -2003,7 +2391,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.ssmsap#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are\n         no more results to return.</p>"
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>"
                     }
                 }
             },
@@ -2057,7 +2445,7 @@
                     "target": "com.amazonaws.ssmsap#MaxResults",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining\n         results, make another call with the returned nextToken value. If you do not specify a value\n         for MaxResults, the request returns 50 items per page by default.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value. If you do not specify a value for MaxResults, the request returns 50 items per page by default.</p>"
                     }
                 },
                 "NextToken": {
@@ -2086,9 +2474,169 @@
                 "NextToken": {
                     "target": "com.amazonaws.ssmsap#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are\n         no more results to return.</p>"
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.ssmsap#ListSubCheckResults": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmsap#ListSubCheckResultsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmsap#ListSubCheckResultsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmsap#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the sub-check results of a specified configuration check operation.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/list-sub-check-results"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "SubCheckResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ssmsap#ListSubCheckResultsInput": {
+            "type": "structure",
+            "members": {
+                "OperationId": {
+                    "target": "com.amazonaws.ssmsap#OperationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the configuration check operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ssmsap#MaxResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssmsap#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssmsap#ListSubCheckResultsOutput": {
+            "type": "structure",
+            "members": {
+                "SubCheckResults": {
+                    "target": "com.amazonaws.ssmsap#SubCheckResultList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sub-check results of a configuration check operation.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssmsap#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ssmsap#ListSubCheckRuleResults": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmsap#ListSubCheckRuleResultsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmsap#ListSubCheckRuleResultsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmsap#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the rules of a specified sub-check belonging to a configuration check operation.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/list-sub-check-rule-results"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "RuleResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ssmsap#ListSubCheckRuleResultsInput": {
+            "type": "structure",
+            "members": {
+                "SubCheckResultId": {
+                    "target": "com.amazonaws.ssmsap#SubCheckResultId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the sub check result.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ssmsap#MaxResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssmsap#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssmsap#ListSubCheckRuleResultsOutput": {
+            "type": "structure",
+            "members": {
+                "RuleResults": {
+                    "target": "com.amazonaws.ssmsap#RuleResultList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rule results of a sub-check belonging to a configuration check operation.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssmsap#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssmsap#ListTagsForResource": {
@@ -2111,7 +2659,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all tags on an SAP HANA application and/or database registered with AWS Systems\n         Manager for SAP.</p>",
+                "smithy.api#documentation": "<p>Lists all tags on an SAP HANA application and/or database registered with AWS Systems Manager for SAP.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/tags/{resourceArn}"
@@ -2156,7 +2704,7 @@
         "com.amazonaws.ssmsap#NextToken": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^.{16,1024}$"
+                "smithy.api#pattern": "^.{16,2048}$"
             }
         },
         "com.amazonaws.ssmsap#Operation": {
@@ -2239,19 +2787,19 @@
                 "Description": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description of the operation event. For example, \"Stop the EC2 instance\n         i-abcdefgh987654321\".</p>"
+                        "smithy.api#documentation": "<p>A description of the operation event. For example, \"Stop the EC2 instance i-abcdefgh987654321\".</p>"
                     }
                 },
                 "Resource": {
                     "target": "com.amazonaws.ssmsap#Resource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource involved in the operations event.</p>\n         <p>Contains <code>ResourceArn</code> ARN and <code>ResourceType</code>.</p>"
+                        "smithy.api#documentation": "<p>The resource involved in the operations event.</p> <p>Contains <code>ResourceArn</code> ARN and <code>ResourceType</code>.</p>"
                     }
                 },
                 "Status": {
                     "target": "com.amazonaws.ssmsap#OperationEventStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the operation event. The possible statuses are: <code>IN_PROGRESS</code>,\n            <code>COMPLETED</code>, and <code>FAILED</code>.</p>"
+                        "smithy.api#documentation": "<p>The status of the operation event. The possible statuses are: <code>IN_PROGRESS</code>, <code>COMPLETED</code>, and <code>FAILED</code>.</p>"
                     }
                 },
                 "StatusMessage": {
@@ -2268,7 +2816,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An operation event returns details for an operation, including key milestones which can\n         be used to monitor and track operations in progress.</p>\n         <p>Operation events contain:</p>\n         <ul>\n            <li>\n               <p>Description string</p>\n            </li>\n            <li>\n               <p>Resource, including its ARN and type</p>\n            </li>\n            <li>\n               <p>Status</p>\n            </li>\n            <li>\n               <p>StatusMessage string</p>\n            </li>\n            <li>\n               <p>TimeStamp</p>\n            </li>\n         </ul>\n         <p>Operation event examples include StartApplication or StopApplication.</p>"
+                "smithy.api#documentation": "<p>An operation event returns details for an operation, including key milestones which can be used to monitor and track operations in progress.</p> <p>Operation events contain:</p> <ul> <li> <p>Description string</p> </li> <li> <p>Resource, including its ARN and type</p> </li> <li> <p>Status</p> </li> <li> <p>StatusMessage string</p> </li> <li> <p>TimeStamp</p> </li> </ul> <p>Operation event examples include StartApplication or StopApplication.</p>"
             }
         },
         "com.amazonaws.ssmsap#OperationEventList": {
@@ -2496,7 +3044,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Register an SAP application with AWS Systems Manager for SAP. You must meet the\n         following requirements before registering. </p>\n         <p>The SAP application you want to register with AWS Systems Manager for SAP is running\n         on Amazon EC2.</p>\n         <p>AWS Systems Manager Agent must be setup on an Amazon EC2 instance along with the required\n         IAM permissions.</p>\n         <p>Amazon EC2 instance(s) must have access to the secrets created in AWS Secrets Manager to\n         manage SAP applications and components.</p>",
+                "smithy.api#documentation": "<p>Register an SAP application with AWS Systems Manager for SAP. You must meet the following requirements before registering. </p> <p>The SAP application you want to register with AWS Systems Manager for SAP is running on Amazon EC2.</p> <p>AWS Systems Manager Agent must be setup on an Amazon EC2 instance along with the required IAM permissions.</p> <p>Amazon EC2 instance(s) must have access to the secrets created in AWS Secrets Manager to manage SAP applications and components.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -2563,7 +3111,7 @@
                 "ComponentsInfo": {
                     "target": "com.amazonaws.ssmsap#ComponentInfoList",
                     "traits": {
-                        "smithy.api#documentation": "<p>This is an optional parameter for component details \n         to which the SAP ABAP application is attached, \n         such as Web Dispatcher.</p>\n         <p>This is an array of ApplicationComponent objects. \n         You may input 0 to 5 items.</p>"
+                        "smithy.api#documentation": "<p>This is an optional parameter for component details to which the SAP ABAP application is attached, such as Web Dispatcher.</p> <p>This is an array of ApplicationComponent objects. You may input 0 to 5 items.</p>"
                     }
                 }
             }
@@ -2664,18 +3212,18 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.ssmsap#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the source resource.</p>\n         <p>Example of <code>ResourceArn</code>:\n            \"<code>arn:aws:ec2:us-east-1:111111111111:instance/i-abcdefgh987654321</code>\"</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the source resource.</p> <p>Example of <code>ResourceArn</code>: \"<code>arn:aws:ec2:us-east-1:111111111111:instance/i-abcdefgh987654321</code>\"</p>"
                     }
                 },
                 "ResourceType": {
                     "target": "com.amazonaws.ssmsap#OperationEventResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource type.</p>\n         <p>Example of <code>ResourceType</code>: \"<code>AWS::SystemsManagerSAP::Component</code>\"\n         or \"<code>AWS::EC2::Instance</code>\".</p>"
+                        "smithy.api#documentation": "<p>The resource type.</p> <p>Example of <code>ResourceType</code>: \"<code>AWS::SystemsManagerSAP::Component</code>\" or \"<code>AWS::EC2::Instance</code>\".</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The resource contains a <code>ResourceArn</code> and the\n         <code>ResourceType</code>.</p>"
+                "smithy.api#documentation": "<p>The resource contains a <code>ResourceArn</code> and the <code>ResourceType</code>.</p>"
             }
         },
         "com.amazonaws.ssmsap#ResourceId": {
@@ -2707,6 +3255,162 @@
                     "min": 1,
                     "max": 64
                 }
+            }
+        },
+        "com.amazonaws.ssmsap#RuleResult": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.ssmsap#RuleResultId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the rule result.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of what the rule validates.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.ssmsap#RuleResultStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the rule result.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message providing details about the rule result.</p>"
+                    }
+                },
+                "Metadata": {
+                    "target": "com.amazonaws.ssmsap#RuleResultMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional metadata associated with the rule result.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the result of a single rule within a configuration check.</p>"
+            }
+        },
+        "com.amazonaws.ssmsap#RuleResultId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$"
+            }
+        },
+        "com.amazonaws.ssmsap#RuleResultList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmsap#RuleResult"
+            }
+        },
+        "com.amazonaws.ssmsap#RuleResultMetadata": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.ssmsap#RuleResultMetadataKey"
+            },
+            "value": {
+                "target": "com.amazonaws.ssmsap#RuleResultMetadataValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#RuleResultMetadataKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#RuleResultMetadataValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#RuleResultStatus": {
+            "type": "enum",
+            "members": {
+                "PASSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASSED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "WARNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WARNING"
+                    }
+                },
+                "INFO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INFO"
+                    }
+                },
+                "UNKNOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#RuleStatusCounts": {
+            "type": "structure",
+            "members": {
+                "Failed": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of rules that failed.</p>"
+                    }
+                },
+                "Warning": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of rules that returned warnings.</p>"
+                    }
+                },
+                "Info": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of rules that returned informational results.</p>"
+                    }
+                },
+                "Passed": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of rules that passed.</p>"
+                    }
+                },
+                "Unknown": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of rules with unknown status.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of rule results, providing counts for each status type.</p>"
             }
         },
         "com.amazonaws.ssmsap#SAPInstanceNumber": {
@@ -2748,6 +3452,9 @@
                     "target": "com.amazonaws.ssmsap#GetComponent"
                 },
                 {
+                    "target": "com.amazonaws.ssmsap#GetConfigurationCheckOperation"
+                },
+                {
                     "target": "com.amazonaws.ssmsap#GetDatabase"
                 },
                 {
@@ -2763,6 +3470,12 @@
                     "target": "com.amazonaws.ssmsap#ListComponents"
                 },
                 {
+                    "target": "com.amazonaws.ssmsap#ListConfigurationCheckDefinitions"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ListConfigurationCheckOperations"
+                },
+                {
                     "target": "com.amazonaws.ssmsap#ListDatabases"
                 },
                 {
@@ -2770,6 +3483,12 @@
                 },
                 {
                     "target": "com.amazonaws.ssmsap#ListOperations"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ListSubCheckResults"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ListSubCheckRuleResults"
                 },
                 {
                     "target": "com.amazonaws.ssmsap#ListTagsForResource"
@@ -2785,6 +3504,9 @@
                 },
                 {
                     "target": "com.amazonaws.ssmsap#StartApplicationRefresh"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#StartConfigurationChecks"
                 },
                 {
                     "target": "com.amazonaws.ssmsap#StopApplication"
@@ -2822,7 +3544,7 @@
                     ],
                     "origin": "*"
                 },
-                "smithy.api#documentation": "<p>This API reference provides descriptions, syntax, and other details about each of the\n         actions and data types for AWS Systems Manager for SAP. The topic for each action shows\n         the API request parameters and responses. </p>",
+                "smithy.api#documentation": "<p>This API reference provides descriptions, syntax, and other details about each of the actions and data types for AWS Systems Manager for SAP. The topic for each action shows the API request parameters and responses. </p>",
                 "smithy.api#title": "AWS Systems Manager for SAP",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -3475,7 +4197,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Request is an operation which starts an application.</p>\n         <p>Parameter <code>ApplicationId</code> is required.</p>",
+                "smithy.api#documentation": "<p>Request is an operation which starts an application.</p> <p>Parameter <code>ApplicationId</code> is required.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -3575,6 +4297,72 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ssmsap#StartConfigurationChecks": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmsap#StartConfigurationChecksInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmsap#StartConfigurationChecksOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmsap#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Initiates configuration check operations against a specified application.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/start-configuration-checks"
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#StartConfigurationChecksInput": {
+            "type": "structure",
+            "members": {
+                "ApplicationId": {
+                    "target": "com.amazonaws.ssmsap#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the application.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConfigurationCheckIds": {
+                    "target": "com.amazonaws.ssmsap#ConfigurationCheckTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of configuration checks to perform.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssmsap#StartConfigurationChecksOutput": {
+            "type": "structure",
+            "members": {
+                "ConfigurationCheckOperations": {
+                    "target": "com.amazonaws.ssmsap#ConfigurationCheckOperationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration check operations that were started.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ssmsap#StopApplication": {
             "type": "operation",
             "input": {
@@ -3598,7 +4386,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Request is an operation to stop an application.</p>\n         <p>Parameter <code>ApplicationId</code> is required. Parameters\n            <code>StopConnectedEntity</code> and <code>IncludeEc2InstanceShutdown</code> are\n         optional.</p>",
+                "smithy.api#documentation": "<p>Request is an operation to stop an application.</p> <p>Parameter <code>ApplicationId</code> is required. Parameters <code>StopConnectedEntity</code> and <code>IncludeEc2InstanceShutdown</code> are optional.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -3619,13 +4407,13 @@
                 "StopConnectedEntity": {
                     "target": "com.amazonaws.ssmsap#ConnectedEntityType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the <code>ConnectedEntityType</code>. Accepted type is <code>DBMS</code>.</p>\n         <p>If this parameter is included, the connected DBMS (Database Management System) will be\n         stopped.</p>"
+                        "smithy.api#documentation": "<p>Specify the <code>ConnectedEntityType</code>. Accepted type is <code>DBMS</code>.</p> <p>If this parameter is included, the connected DBMS (Database Management System) will be stopped.</p>"
                     }
                 },
                 "IncludeEc2InstanceShutdown": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Boolean. If included and if set to <code>True</code>, the StopApplication operation will\n         shut down the associated Amazon EC2 instance in addition to the application.</p>"
+                        "smithy.api#documentation": "<p>Boolean. If included and if set to <code>True</code>, the StopApplication operation will shut down the associated Amazon EC2 instance in addition to the application.</p>"
                     }
                 }
             },
@@ -3645,6 +4433,56 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ssmsap#SubCheckReferencesList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.ssmsap#SubCheckResult": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.ssmsap#SubCheckResultId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the sub-check result.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the sub-check.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of what the sub-check validates.</p>"
+                    }
+                },
+                "References": {
+                    "target": "com.amazonaws.ssmsap#SubCheckReferencesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of references or documentation links related to the sub-check.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the result of a sub-check within a configuration check operation.</p>"
+            }
+        },
+        "com.amazonaws.ssmsap#SubCheckResultId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$"
+            }
+        },
+        "com.amazonaws.ssmsap#SubCheckResultList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmsap#SubCheckResult"
             }
         },
         "com.amazonaws.ssmsap#TagKey": {
@@ -3783,7 +4621,7 @@
                 "tagKeys": {
                     "target": "com.amazonaws.ssmsap#TagKeyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Adds/updates or removes credentials for applications registered with AWS Systems\n         Manager for SAP.</p>",
+                        "smithy.api#documentation": "<p>Adds/updates or removes credentials for applications registered with AWS Systems Manager for SAP.</p>",
                         "smithy.api#httpQuery": "tagKeys",
                         "smithy.api#required": {}
                     }
@@ -3820,7 +4658,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the settings of an application registered with AWS Systems Manager for\n         SAP.</p>",
+                "smithy.api#documentation": "<p>Updates the settings of an application registered with AWS Systems Manager for SAP.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -3859,7 +4697,7 @@
                 "DatabaseArn": {
                     "target": "com.amazonaws.ssmsap#SsmSapArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name of the SAP HANA database that replaces the current SAP HANA\n         connection with the SAP_ABAP application.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name of the SAP HANA database that replaces the current SAP HANA connection with the SAP_ABAP application.</p>"
                     }
                 }
             }

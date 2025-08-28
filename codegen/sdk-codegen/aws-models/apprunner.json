@@ -1811,7 +1811,7 @@
                 "Subnets": {
                     "target": "com.amazonaws.apprunner#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of IDs of subnets that App Runner should use when it associates your service with a custom Amazon VPC. Specify IDs of subnets of a single\n        Amazon VPC. App Runner determines the Amazon VPC from the subnets you specify.</p>\n         <note>\n            <p>\n        App Runner currently only provides support for IPv4.\n      </p>\n         </note>",
+                        "smithy.api#documentation": "<p>A list of IDs of subnets that App Runner should use when it associates your service with a custom Amazon VPC. Specify IDs of subnets of a single\n        Amazon VPC. App Runner determines the Amazon VPC from the subnets you specify.</p>\n         <note>\n            <p>\n        App Runner only supports subnets of IP address type <i>IPv4</i> and <i>dual stack</i> (IPv4 and IPv6).</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3945,7 +3945,7 @@
                 "IpAddressType": {
                     "target": "com.amazonaws.apprunner#IpAddressType",
                     "traits": {
-                        "smithy.api#documentation": "<p>App Runner provides you with the option to choose between <i>Internet Protocol version 4 (IPv4)</i> and <i>dual stack</i> (IPv4 and IPv6) \n      for your incoming public network configuration. This is an optional parameter. \n      If you do not specify an <code>IpAddressType</code>, it defaults to select IPv4.</p>\n         <note>\n            <p>\n        Currently, App Runner supports dual stack for only Public endpoint. Only IPv4 is supported for Private endpoint. \n        If you update a service that's using dual-stack Public endpoint to a Private endpoint, your App Runner service will default to support only IPv4 for Private endpoint and fail to receive traffic originating from IPv6 endpoint.  \n      </p>\n         </note>"
+                        "smithy.api#documentation": "<p>App Runner provides you with the option to choose between <i>IPv4</i> and <i>dual stack</i> (IPv4 and IPv6). \n      This is an optional parameter. If you do not specify an <code>IpAddressType</code>, it defaults to select IPv4.</p>"
                     }
                 }
             },

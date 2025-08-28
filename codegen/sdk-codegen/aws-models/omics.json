@@ -37,7 +37,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to abort multipart read set uploads",
-                "smithy.api#documentation": "<p>Stops a multipart upload.</p>",
+                "smithy.api#documentation": "<p>Stops a multipart read set upload into a sequence store and returns a response with no body if the operation is successful. To confirm that a multipart read set upload has been stopped, use the <code>ListMultipartReadSetUploads</code> API operation to view all active multipart read set uploads.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "control-storage-"
                 },
@@ -841,7 +841,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to batch delete Read Sets in the given Sequence Store",
-                "smithy.api#documentation": "<p>Deletes one or more read sets.</p>",
+                "smithy.api#documentation": "<p>Deletes one or more read sets. If the operation is successful, it returns a response with no body. If there is an error with deleting one of the read sets, the operation returns an error list. If the operation successfully deletes only a subset of files, it will return an error list for the remaining files that fail to be deleted. There is a limit of 100 read sets that can be deleted in each <code>BatchDeleteReadSet</code> API call.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "control-storage-"
                 },
@@ -1147,7 +1147,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to complete a multipart read set upload",
-                "smithy.api#documentation": "<p>Concludes a multipart upload once you have uploaded all the components.</p>",
+                "smithy.api#documentation": "<p>Completes a multipart read set upload into a sequence store after you have initiated the upload process with <code>CreateMultipartReadSetUpload</code> and uploaded all read set parts using <code>UploadReadSetPart</code>. You must specify the parts you uploaded using the parts parameter. If the operation is successful, it returns the read set ID(s) of the uploaded read set(s).</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/synchronous-uploads.html\">Direct upload to a sequence store</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "storage-"
                 },
@@ -1277,6 +1277,26 @@
                     "max": 256
                 },
                 "smithy.api#pattern": "^arn:aws(-[\\w]+)*:.+:.+:[0-9]{12}:.+$"
+            }
+        },
+        "com.amazonaws.omics#ContainerRegistryMap": {
+            "type": "structure",
+            "members": {
+                "registryMappings": {
+                    "target": "com.amazonaws.omics#RegistryMappingsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Mapping that provides the ECR repository path where upstream container images are pulled and synchronized.</p>"
+                    }
+                },
+                "imageMappings": {
+                    "target": "com.amazonaws.omics#ImageMappingsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Image mappings specify path mappings between the ECR private repository and their corresponding external repositories.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Use a container registry map to specify mappings between the ECR private repository and one or more upstream registries. For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/workflows-ecr.html\">Container images</a> in the <i>Amazon Web Services HealthOmics User Guide</i>. </p>"
             }
         },
         "com.amazonaws.omics#CreateAnnotationStore": {
@@ -1619,7 +1639,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to create a multipart read set upload",
-                "smithy.api#documentation": "<p>Begins a multipart read set upload.</p>",
+                "smithy.api#documentation": "<p>Initiates a multipart read set upload for uploading partitioned source files into a sequence store. You can directly import source files from an EC2 instance and other local compute, or from an S3 bucket. To separate these source files into parts, use the <code>split</code> operation. Each part cannot be larger than 100 MB. If the operation is successful, it provides an <code>uploadId</code> which is required by the <code>UploadReadSetPart</code> API operation to upload parts into a sequence store.</p> <p>To continue uploading a multipart read set into your sequence store, you must use the <code>UploadReadSetPart</code> API operation to upload each part individually following the steps below:</p> <ul> <li> <p>Specify the <code>uploadId</code> obtained from the previous call to <code>CreateMultipartReadSetUpload</code>.</p> </li> <li> <p>Upload parts for that <code>uploadId</code>.</p> </li> </ul> <p>When you have finished uploading parts, use the <code>CompleteMultipartReadSetUpload</code> API to complete the multipart read set upload and to retrieve the final read set IDs in the response.</p> <p>To learn more about creating parts and the <code>split</code> operation, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/synchronous-uploads.html\">Direct upload to a sequence store</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "control-storage-"
                 },
@@ -1819,7 +1839,7 @@
                     "aws:RequestTag/${TagKey}",
                     "aws:TagKeys"
                 ],
-                "smithy.api#documentation": "<p>Creates a reference store.</p>",
+                "smithy.api#documentation": "<p>Creates a reference store and returns metadata in JSON format. Reference stores are used to store reference genomes in FASTA format. A reference store is created when the first reference genome is imported. To import additional reference genomes from an Amazon S3 bucket, use the <code>StartReferenceImportJob</code> API operation. </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/create-reference-store.html\">Creating a HealthOmics reference store</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "control-storage-"
                 },
@@ -2221,7 +2241,7 @@
                     "aws:RequestTag/${TagKey}",
                     "aws:TagKeys"
                 ],
-                "smithy.api#documentation": "<p>Creates a sequence store.</p>",
+                "smithy.api#documentation": "<p>Creates a sequence store and returns its metadata. Sequence stores are used to store sequence data files called read sets that are saved in FASTQ, BAM, uBAM, or CRAM formats. For aligned formats (BAM and CRAM), a sequence store can only use one reference genome. For unaligned formats (FASTQ and uBAM), a reference genome is not required. You can create multiple sequence stores per region per account. </p> <p>The following are optional parameters you can specify for your sequence store:</p> <ul> <li> <p>Use <code>s3AccessConfig</code> to configure your sequence store with S3 access logs (recommended).</p> </li> <li> <p>Use <code>sseConfig</code> to define your own KMS key for encryption.</p> </li> <li> <p>Use <code>eTagAlgorithmFamily</code> to define which algorithm to use for the HealthOmics eTag on objects.</p> </li> <li> <p>Use <code>fallbackLocation</code> to define a backup location for storing files that have failed a direct upload.</p> </li> <li> <p>Use <code>propagatedSetLevelTags</code> to configure tags that propagate to all objects in your store.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/create-sequence-store.html\">Creating a HealthOmics sequence store</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "control-storage-"
                 },
@@ -2256,38 +2276,38 @@
                 "tags": {
                     "target": "com.amazonaws.omics#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags for the store.</p>"
+                        "smithy.api#documentation": "<p>Tags for the store. You can configure up to 50 tags.</p>"
                     }
                 },
                 "clientToken": {
                     "target": "com.amazonaws.omics#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>To ensure that requests don't run multiple times, specify a unique token for each request.</p>",
+                        "smithy.api#documentation": "<p>An idempotency token used to dedupe retry requests so that duplicate runs are not created.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
                 "fallbackLocation": {
                     "target": "com.amazonaws.omics#FallbackLocation",
                     "traits": {
-                        "smithy.api#documentation": "<p>An S3 location that is used to store files that have failed a direct upload.</p>"
+                        "smithy.api#documentation": "<p>An S3 location that is used to store files that have failed a direct upload. You can add or change the <code>fallbackLocation</code> after creating a sequence store. This is not required if you are uploading files from a different S3 bucket.</p>"
                     }
                 },
                 "eTagAlgorithmFamily": {
                     "target": "com.amazonaws.omics#ETagAlgorithmFamily",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ETag algorithm family to use for ingested read sets.</p>"
+                        "smithy.api#documentation": "<p>The ETag algorithm family to use for ingested read sets. The default value is MD5up. For more information on ETags, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/etags-and-provenance.html\">ETags and data provenance</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>"
                     }
                 },
                 "propagatedSetLevelTags": {
                     "target": "com.amazonaws.omics#PropagatedSetLevelTags",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags keys to propagate to the S3 objects associated with read sets in the sequence store.</p>"
+                        "smithy.api#documentation": "<p>The tags keys to propagate to the S3 objects associated with read sets in the sequence store. These tags can be used as input to add metadata to your read sets.</p>"
                     }
                 },
                 "s3AccessConfig": {
                     "target": "com.amazonaws.omics#S3AccessConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>S3 access configuration parameters</p>"
+                        "smithy.api#documentation": "<p>S3 access configuration parameters. This specifies the parameters needed to access logs stored in S3 buckets. The S3 bucket must be in the same region and account as the sequence store. </p>"
                     }
                 }
             },
@@ -2327,7 +2347,7 @@
                 "sseConfig": {
                     "target": "com.amazonaws.omics#SseConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The store's SSE settings.</p>"
+                        "smithy.api#documentation": "<p>Server-side encryption (SSE) settings for the store. This contains the KMS key ARN that is used to encrypt read set objects.</p>"
                     }
                 },
                 "creationTime": {
@@ -2635,7 +2655,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a private workflow. Before you create a private workflow, you must create and configure these required resources:</p> <ul> <li> <p> <i>Workflow definition files</i>: Define your workflow in one or more workflow definition files, written in WDL, Nextflow, or CWL. The workflow definition specifies the inputs and outputs for runs that use the workflow. It also includes specifications for the runs and run tasks for your workflow, including compute and memory requirements. The workflow definition file must be in .zip format.</p> </li> <li> <p>(Optional) <i>Parameter template</i>: You can create a parameter template file that defines the run parameters, or Amazon Web Services HealthOmics can generate the parameter template for you.</p> </li> <li> <p> <i>ECR container images</i>: Create one or more container images for the workflow. Store the images in a private ECR repository.</p> </li> <li> <p>(Optional) <i>Sentieon licenses</i>: Request a Sentieon license if using the Sentieon software in a private workflow.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/creating-private-workflows.html\">Creating or updating a private workflow in Amazon Web Services HealthOmics</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates a private workflow. Before you create a private workflow, you must create and configure these required resources:</p> <ul> <li> <p> <i>Workflow definition files</i>: Define your workflow in one or more workflow definition files, written in WDL, Nextflow, or CWL. The workflow definition specifies the inputs and outputs for runs that use the workflow. It also includes specifications for the runs and run tasks for your workflow, including compute and memory requirements. The workflow definition file must be in .zip format.</p> </li> <li> <p>(Optional) <i>Parameter template</i>: You can create a parameter template file that defines the run parameters, or Amazon Web Services HealthOmics can generate the parameter template for you.</p> </li> <li> <p> <i>ECR container images</i>: Create container images for the workflow in a private ECR repository, or synchronize images from a supported upstream registry with your Amazon ECR private repository.</p> </li> <li> <p>(Optional) <i>Sentieon licenses</i>: Request a Sentieon license if using the Sentieon software in a private workflow.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/creating-private-workflows.html\">Creating or updating a private workflow in Amazon Web Services HealthOmics</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "workflows-"
                 },
@@ -2726,6 +2746,18 @@
                     "target": "com.amazonaws.omics#StorageType",
                     "traits": {
                         "smithy.api#documentation": "<p>The default storage type for runs that use this workflow. The <code>storageType</code> can be overridden at run time. <code>DYNAMIC</code> storage dynamically scales the storage up or down, based on file system utilization. <code>STATIC</code> storage allocates a fixed amount of storage. For more information about dynamic and static storage types, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/workflows-run-types.html\">Run storage types</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>"
+                    }
+                },
+                "containerRegistryMap": {
+                    "target": "com.amazonaws.omics#ContainerRegistryMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>(Optional) Use a container registry map to specify mappings between the ECR private repository and one or more upstream registries. For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/workflows-ecr.html\">Container images</a> in the <i>Amazon Web Services HealthOmics User Guide</i>. </p>"
+                    }
+                },
+                "containerRegistryMapUri": {
+                    "target": "com.amazonaws.omics#Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>(Optional) URI of the S3 location for the registry mapping file.</p>"
                     }
                 },
                 "readmeMarkdown": {
@@ -2842,7 +2874,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new workflow version for the workflow that you specify with the <code>workflowId</code> parameter.</p> <p>When you create a new version of a workflow, you need to specify the configuration for the new version. It doesn't inherit any configuration values from the workflow.</p> <p>Provide a version name that is unique for this workflow. You cannot change the name after HealthOmics creates the version.</p> <note> <p>Don’t include any personally identifiable information (PII) in the version name. Version names appear in the workflow version ARN.</p> </note> <p>For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/workflow-versions.html\">Workflow versioning in Amazon Web Services HealthOmics</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates a new workflow version for the workflow that you specify with the <code>workflowId</code> parameter.</p> <p>When you create a new version of a workflow, you need to specify the configuration for the new version. It doesn't inherit any configuration values from the workflow.</p> <p>Provide a version name that is unique for this workflow. You cannot change the name after HealthOmics creates the version.</p> <note> <p>Don't include any personally identifiable information (PII) in the version name. Version names appear in the workflow version ARN.</p> </note> <p>For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/workflow-versions.html\">Workflow versioning in Amazon Web Services HealthOmics</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "workflows-"
                 },
@@ -2860,7 +2892,7 @@
                 "workflowId": {
                     "target": "com.amazonaws.omics#WorkflowId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the workflow where you are creating the new version.</p>",
+                        "smithy.api#documentation": "<p>The ID of the workflow where you are creating the new version. The <code>workflowId</code> is not the UUID.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {},
                         "smithy.api#resourceIdentifier": "id"
@@ -2877,13 +2909,13 @@
                     "target": "smithy.api#Blob",
                     "traits": {
                         "aws.cloudformation#cfnExcludeProperty": {},
-                        "smithy.api#documentation": "<p>A zip archive containing the workflow definition for this workflow version.</p>"
+                        "smithy.api#documentation": "<p>A ZIP archive containing the main workflow definition file and dependencies that it imports for this workflow version. You can use a file with a ://fileb prefix instead of the Base64 string. For more information, see Workflow definition requirements in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>"
                     }
                 },
                 "definitionUri": {
                     "target": "com.amazonaws.omics#WorkflowDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URI specifies the location of the workflow definition for this workflow version.</p>"
+                        "smithy.api#documentation": "<p>The S3 URI of a definition for this workflow version. The S3 bucket must be in the same region as this workflow version.</p>"
                     }
                 },
                 "accelerators": {
@@ -2901,25 +2933,25 @@
                 "engine": {
                     "target": "com.amazonaws.omics#WorkflowEngine",
                     "traits": {
-                        "smithy.api#documentation": "<p>The workflow engine for this workflow version.</p>"
+                        "smithy.api#documentation": "<p>The workflow engine for this workflow version. This is only required if you have workflow definition files from more than one engine in your zip file. Otherwise, the service can detect the engine automatically from your workflow definition.</p>"
                     }
                 },
                 "main": {
                     "target": "com.amazonaws.omics#WorkflowMain",
                     "traits": {
-                        "smithy.api#documentation": "<p>The path of the main definition file for this workflow version.</p>"
+                        "smithy.api#documentation": "<p>The path of the main definition file for this workflow version. This parameter is not required if the ZIP archive contains only one workflow definition file, or if the main definition file is named “main”. An example path is: <code>workflow-definition/main-file.wdl</code>. </p>"
                     }
                 },
                 "parameterTemplate": {
                     "target": "com.amazonaws.omics#WorkflowParameterTemplate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameter template defines the input parameters for runs that use this workflow version.</p>"
+                        "smithy.api#documentation": "<p>A parameter template for this workflow version. If this field is blank, Amazon Web Services HealthOmics will automatically parse the parameter template values from your workflow definition file. To override these service generated default values, provide a parameter template. To view an example of a parameter template, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/parameter-templates.html\">Parameter template files</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>"
                     }
                 },
                 "requestId": {
                     "target": "com.amazonaws.omics#WorkflowRequestId",
                     "traits": {
-                        "smithy.api#documentation": "<p>To ensure that requests don't run multiple times, specify a unique ID for each request.</p>",
+                        "smithy.api#documentation": "<p>An idempotency token to ensure that duplicate workflows are not created when Amazon Web Services HealthOmics submits retry requests.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
@@ -2927,13 +2959,13 @@
                 "storageType": {
                     "target": "com.amazonaws.omics#StorageType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default storage type for runs that use this workflow. STATIC storage allocates a fixed amount of storage. DYNAMIC storage dynamically scales the storage up or down, based on file system utilization. For more information about static and dynamic storage, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/Using-workflows.html\">Running workflows</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The default storage type for runs that use this workflow version. The <code>storageType</code> can be overridden at run time. <code>DYNAMIC</code> storage dynamically scales the storage up or down, based on file system utilization. STATIC storage allocates a fixed amount of storage. For more information about dynamic and static storage types, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/workflows-run-types.html\">Run storage types</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>"
                     }
                 },
                 "storageCapacity": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default static storage capacity (in gibibytes) for runs that use this workflow or workflow version.</p>",
+                        "smithy.api#documentation": "<p>The default static storage capacity (in gibibytes) for runs that use this workflow version. The <code>storageCapacity</code> can be overwritten at run time. The storage capacity is not required for runs with a <code>DYNAMIC</code> storage type.</p>",
                         "smithy.api#range": {
                             "min": 0,
                             "max": 100000
@@ -2943,13 +2975,25 @@
                 "tags": {
                     "target": "com.amazonaws.omics#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional tags to associate with this workflow version.</p>"
+                        "smithy.api#documentation": "<p>Tags for this workflow version. You can define up to 50 tags for the workflow. For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/add-a-tag.html\">Adding a tag</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>"
                     }
                 },
                 "workflowBucketOwnerId": {
                     "target": "com.amazonaws.omics#WorkflowBucketOwnerId",
                     "traits": {
                         "smithy.api#documentation": "<p>Amazon Web Services Id of the owner of the S3 bucket that contains the workflow definition. You need to specify this parameter if your account is not the bucket owner.</p>"
+                    }
+                },
+                "containerRegistryMap": {
+                    "target": "com.amazonaws.omics#ContainerRegistryMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>(Optional) Use a container registry map to specify mappings between the ECR private repository and one or more upstream registries. For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/workflows-ecr.html\">Container images</a> in the <i>Amazon Web Services HealthOmics User Guide</i>. </p>"
+                    }
+                },
+                "containerRegistryMapUri": {
+                    "target": "com.amazonaws.omics#Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>(Optional) URI of the S3 location for the registry mapping file.</p>"
                     }
                 },
                 "readmeMarkdown": {
@@ -3336,7 +3380,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to delete a Reference in the given Reference Store",
-                "smithy.api#documentation": "<p>Deletes a genome reference.</p>",
+                "smithy.api#documentation": "<p>Deletes a reference genome and returns a response with no body if the operation is successful. The read set associated with the reference genome must first be deleted before deleting the reference genome. After the reference genome is deleted, you can delete the reference store using the <code>DeleteReferenceStore</code> API operation.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/deleting-reference-and-sequence-stores.html\">Deleting HealthOmics reference and sequence stores</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "control-storage-"
                 },
@@ -3412,7 +3456,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to delete a Reference Store",
-                "smithy.api#documentation": "<p>Deletes a genome reference store.</p>",
+                "smithy.api#documentation": "<p>Deletes a reference store and returns a response with no body if the operation is successful. You can only delete a reference store when it does not contain any reference genomes. To empty a reference store, use <code>DeleteReference</code>.</p> <p>For more information about your workflow status, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/deleting-reference-and-sequence-stores.html\">Deleting HealthOmics reference and sequence stores</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "control-storage-"
                 },
@@ -3738,7 +3782,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to delete a Sequence Store",
-                "smithy.api#documentation": "<p>Deletes a sequence store.</p>",
+                "smithy.api#documentation": "<p>Deletes a sequence store and returns a response with no body if the operation is successful. You can only delete a sequence store when it does not contain any read sets.</p> <p>Use the <code>BatchDeleteReadSet</code> API operation to ensure that all read sets in the sequence store are deleted. When a sequence store is deleted, all tags associated with the store are also deleted.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/deleting-reference-and-sequence-stores.html\">Deleting HealthOmics reference and sequence stores</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "control-storage-"
                 },
@@ -3965,7 +4009,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a workflow by specifying its ID. No response is returned if the deletion is successful.</p> <p>To verify that the workflow is deleted:</p> <ul> <li> <p>Use <code>ListWorkflows</code> to confirm the workflow no longer appears in the list.</p> </li> <li> <p>Use <code>GetWorkflow</code> to verify the workflow cannot be found.</p> </li> </ul>",
+                "smithy.api#documentation": "<p>Deletes a workflow by specifying its ID. This operation returns a response with no body if the deletion is successful.</p> <p>To verify that the workflow is deleted:</p> <ul> <li> <p>Use <code>ListWorkflows</code> to confirm the workflow no longer appears in the list.</p> </li> <li> <p>Use <code>GetWorkflow</code> to verify the workflow cannot be found.</p> </li> </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "workflows-"
                 },
@@ -4160,6 +4204,16 @@
                         "name": "SHA512UP"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.omics#EcrRepositoryPrefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"
             }
         },
         "com.amazonaws.omics#Encoding": {
@@ -5293,7 +5347,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to get a Read Set in the given Sequence Store",
-                "smithy.api#documentation": "<p>Gets a file from a read set.</p>",
+                "smithy.api#documentation": "<p>Retrieves detailed information from parts of a read set and returns the read set in the same format that it was uploaded. You must have read sets uploaded to your sequence store in order to run this operation.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "storage-"
                 },
@@ -5334,7 +5388,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to get details about a Read Set activation job for the given Sequence Store",
-                "smithy.api#documentation": "<p>Gets information about a read set activation job.</p>",
+                "smithy.api#documentation": "<p>Returns detailed information about the status of a read set activation job in JSON format.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "control-storage-"
                 },
@@ -5534,7 +5588,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to get details about a Read Set export job for the given Sequence Store",
-                "smithy.api#documentation": "<p>Gets information about a read set export job.</p>",
+                "smithy.api#documentation": "<p>Retrieves status information about a read set export job and returns the data in JSON format. Use this operation to actively monitor the progress of an export job.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "control-storage-"
                 },
@@ -5741,7 +5795,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to get details about a Read Set import job for the given Sequence Store",
-                "smithy.api#documentation": "<p>Gets information about a read set import job.</p>",
+                "smithy.api#documentation": "<p>Gets detailed and status information about a read set import job and returns the data in JSON format.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "control-storage-"
                 },
@@ -5949,7 +6003,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to get details about a Read Set in the given Sequence Store",
-                "smithy.api#documentation": "<p>Gets details about a read set.</p>",
+                "smithy.api#documentation": "<p>Retrieves the metadata for a read set from a sequence store in JSON format. This operation does not return tags. To retrieve the list of tags for a read set, use the <code>ListTagsForResource</code> API operation.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "control-storage-"
                 },
@@ -6195,7 +6249,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to get a Reference in the given Reference Store",
-                "smithy.api#documentation": "<p>Gets a reference file.</p>",
+                "smithy.api#documentation": "<p>Downloads parts of data from a reference genome and returns the reference file in the same format that it was uploaded.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/create-reference-store.html\">Creating a HealthOmics reference store</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "storage-"
                 },
@@ -6236,7 +6290,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to get details about a Reference import job for the given Reference Store",
-                "smithy.api#documentation": "<p>Gets information about a reference import job.</p>",
+                "smithy.api#documentation": "<p>Monitors the status of a reference import job. This operation can be called after calling the <code>StartReferenceImportJob</code> operation.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "control-storage-"
                 },
@@ -6444,7 +6498,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to get details about a Reference in the given Reference Store",
-                "smithy.api#documentation": "<p>Gets information about a genome reference's metadata.</p>",
+                "smithy.api#documentation": "<p>Retrieves metadata for a reference genome. This operation returns the number of parts, part size, and MD5 of an entire file. This operation does not return tags. To retrieve the list of tags for a read set, use the <code>ListTagsForResource</code> API operation.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "control-storage-"
                 },
@@ -7739,6 +7793,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The reason a task has failed.</p>"
                     }
+                },
+                "imageDetails": {
+                    "target": "com.amazonaws.omics#ImageDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the container image that this task uses.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7880,7 +7940,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to get details about a Sequence Store",
-                "smithy.api#documentation": "<p>Gets information about a sequence store.</p>",
+                "smithy.api#documentation": "<p>Retrieves metadata for a sequence store using its ID and returns it in JSON format.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "control-storage-"
                 },
@@ -8758,6 +8818,12 @@
                         "smithy.api#documentation": "<p>The universally unique identifier (UUID) value for this workflow.</p>"
                     }
                 },
+                "containerRegistryMap": {
+                    "target": "com.amazonaws.omics#ContainerRegistryMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The registry map that this workflow is using.</p>"
+                    }
+                },
                 "readme": {
                     "target": "com.amazonaws.omics#ReadmeS3PresignedUrl",
                     "traits": {
@@ -8884,7 +8950,7 @@
                 "workflowId": {
                     "target": "com.amazonaws.omics#WorkflowId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The workflow's ID.</p>",
+                        "smithy.api#documentation": "<p>The workflow's ID. The <code>workflowId</code> is not the UUID.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {},
                         "smithy.api#resourceIdentifier": "id"
@@ -8915,7 +8981,7 @@
                 "workflowOwnerId": {
                     "target": "com.amazonaws.omics#WorkflowOwnerId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon Web Services Id of the owner of the workflow.</p>",
+                        "smithy.api#documentation": "<p>The 12-digit account ID of the workflow owner. The workflow owner ID can be retrieved using the <code>GetShare</code> API operation. If you are the workflow owner, you do not need to include this ID.</p>",
                         "smithy.api#httpQuery": "workflowOwnerId"
                     }
                 }
@@ -9054,6 +9120,12 @@
                         "smithy.api#documentation": "<p>Amazon Web Services Id of the owner of the bucket.</p>"
                     }
                 },
+                "containerRegistryMap": {
+                    "target": "com.amazonaws.omics#ContainerRegistryMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The registry map that this workflow version uses.</p>"
+                    }
+                },
                 "readme": {
                     "target": "com.amazonaws.omics#ReadmeS3PresignedUrl",
                     "traits": {
@@ -9088,6 +9160,58 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.omics#ResourceIdentifier"
+            }
+        },
+        "com.amazonaws.omics#ImageDetails": {
+            "type": "structure",
+            "members": {
+                "image": {
+                    "target": "com.amazonaws.omics#Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URI of the container image.</p>"
+                    }
+                },
+                "imageDigest": {
+                    "target": "com.amazonaws.omics#TaskImageDigest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container image digest. If the image URI was transformed, this will be the digest of the container image referenced by the transformed URI.</p>"
+                    }
+                },
+                "sourceImage": {
+                    "target": "com.amazonaws.omics#Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>URI of the source registry. If the URI is from a third-party registry, Amazon Web Services HealthOmics transforms the URI to the corresponding ECR path, using the pull-through cache mapping rules.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the container image used for a task.</p>"
+            }
+        },
+        "com.amazonaws.omics#ImageMapping": {
+            "type": "structure",
+            "members": {
+                "sourceImage": {
+                    "target": "com.amazonaws.omics#Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the URI of the source image in the upstream registry.</p>"
+                    }
+                },
+                "destinationImage": {
+                    "target": "com.amazonaws.omics#Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the URI of the corresponding image in the private ECR registry.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies image mappings that workflow tasks can use. For example, you can replace all the task references of a public image to use an equivalent image in your private ECR repository. You can use image mappings with upstream registries that don't support pull through cache. You need to manually synchronize the upstream registry with your private repository. </p>"
+            }
+        },
+        "com.amazonaws.omics#ImageMappingsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.omics#ImageMapping"
             }
         },
         "com.amazonaws.omics#ImportJobId": {
@@ -9909,7 +10033,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to list multipart read set uploads",
-                "smithy.api#documentation": "<p>Lists multipart read set uploads and for in progress uploads. Once the upload is completed, a read set is created and the upload will no longer be returned in the response.</p>",
+                "smithy.api#documentation": "<p>Lists in-progress multipart read set uploads for a sequence store and returns it in a JSON formatted output. Multipart read set uploads are initiated by the <code>CreateMultipartReadSetUploads</code> API operation. This operation returns a response with no body when the upload is complete. </p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "control-storage-"
                 },
@@ -10010,7 +10134,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to list Read Set activation jobs for the given Sequence Store",
-                "smithy.api#documentation": "<p>Retrieves a list of read set activation jobs.</p>",
+                "smithy.api#documentation": "<p>Retrieves a list of read set activation jobs and returns the metadata in a JSON formatted output. To extract metadata from a read set activation job, use the <code>GetReadSetActivationJob</code> API operation.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "control-storage-"
                 },
@@ -10117,7 +10241,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to list Read Set export jobs for the given Sequence Store",
-                "smithy.api#documentation": "<p>Retrieves a list of read set export jobs.</p>",
+                "smithy.api#documentation": "<p>Retrieves a list of read set export jobs in a JSON formatted response. This API operation is used to check the status of a read set export job initiated by the <code>StartReadSetExportJob</code> API operation.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "control-storage-"
                 },
@@ -10224,7 +10348,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to list Read Set import jobs for the given Sequence Store",
-                "smithy.api#documentation": "<p>Retrieves a list of read set import jobs.</p>",
+                "smithy.api#documentation": "<p>Retrieves a list of read set import jobs and returns the data in JSON format.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "control-storage-"
                 },
@@ -10337,7 +10461,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to list read set upload parts",
-                "smithy.api#documentation": "<p>This operation will list all parts in a requested multipart upload for a sequence store.</p>",
+                "smithy.api#documentation": "<p>Lists all parts in a multipart read set upload for a sequence store and returns the metadata in a JSON formatted output.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "control-storage-"
                 },
@@ -10459,7 +10583,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to list Read Sets in the given Sequence Store",
-                "smithy.api#documentation": "<p>Retrieves a list of read sets.</p>",
+                "smithy.api#documentation": "<p>Retrieves a list of read sets from a sequence store ID and returns the metadata in JSON format.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "control-storage-"
                 },
@@ -10567,7 +10691,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to list Reference import jobs for the given Reference Store",
-                "smithy.api#documentation": "<p>Retrieves a list of reference import jobs.</p>",
+                "smithy.api#documentation": "<p>Retrieves the metadata of one or more reference import jobs for a reference store.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "control-storage-"
                 },
@@ -10671,7 +10795,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to list Reference Stores",
-                "smithy.api#documentation": "<p>Retrieves a list of reference stores.</p>",
+                "smithy.api#documentation": "<p>Retrieves a list of reference stores linked to your account and returns their metadata in JSON format.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/create-reference-store.html\">Creating a reference store</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "control-storage-"
                 },
@@ -10771,7 +10895,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to list References in the given Reference Store",
-                "smithy.api#documentation": "<p>Retrieves a list of references.</p>",
+                "smithy.api#documentation": "<p>Retrieves the metadata of one or more reference genomes in a reference store.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/create-reference-store.html\">Creating a reference store</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "control-storage-"
                 },
@@ -11315,7 +11439,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to list Sequence Stores",
-                "smithy.api#documentation": "<p>Retrieves a list of sequence stores.</p>",
+                "smithy.api#documentation": "<p>Retrieves a list of sequence stores and returns each sequence store's metadata.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/create-sequence-store.html\">Creating a HealthOmics sequence store</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "control-storage-"
                 },
@@ -11895,7 +12019,7 @@
                 "workflowId": {
                     "target": "com.amazonaws.omics#WorkflowId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The workflow's ID.</p>",
+                        "smithy.api#documentation": "<p>The workflow's ID. The <code>workflowId</code> is not the UUID.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {},
                         "smithy.api#resourceIdentifier": "id"
@@ -11911,7 +12035,7 @@
                 "workflowOwnerId": {
                     "target": "com.amazonaws.omics#WorkflowOwnerId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon Web Services Id of the owner of the workflow.</p>",
+                        "smithy.api#documentation": "<p>The 12-digit account ID of the workflow owner. The workflow owner ID can be retrieved using the <code>GetShare</code> API operation. If you are the workflow owner, you do not need to include this ID.</p>",
                         "smithy.api#httpQuery": "workflowOwnerId"
                     }
                 },
@@ -14379,6 +14503,44 @@
                 "smithy.api#streaming": {}
             }
         },
+        "com.amazonaws.omics#RegistryMapping": {
+            "type": "structure",
+            "members": {
+                "upstreamRegistryUrl": {
+                    "target": "com.amazonaws.omics#Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URI of the upstream registry.</p>"
+                    }
+                },
+                "ecrRepositoryPrefix": {
+                    "target": "com.amazonaws.omics#EcrRepositoryPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The repository prefix to use in the ECR private repository.</p>"
+                    }
+                },
+                "upstreamRepositoryPrefix": {
+                    "target": "com.amazonaws.omics#UpstreamRepositoryPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The repository prefix of the corresponding repository in the upstream registry.</p>"
+                    }
+                },
+                "ecrAccountId": {
+                    "target": "com.amazonaws.omics#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account ID of the account that owns the upstream container image.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>If you are using the ECR pull through cache feature, the registry mapping maps between the ECR repository and the upstream registry where container images are pulled and synchronized.</p>"
+            }
+        },
+        "com.amazonaws.omics#RegistryMappingsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.omics#RegistryMapping"
+            }
+        },
         "com.amazonaws.omics#RequestTimeoutException": {
             "type": "structure",
             "members": {
@@ -16118,7 +16280,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to start a Read Set activation job from the given Sequence Store",
-                "smithy.api#documentation": "<p>Activates an archived read set. To reduce storage charges, Amazon Omics archives unused read sets after 30 days.</p>",
+                "smithy.api#documentation": "<p>Activates an archived read set and returns its metadata in a JSON formatted output. AWS HealthOmics automatically archives unused read sets after 30 days. To monitor the status of your read set activation job, use the <code>GetReadSetActivationJob</code> operation.</p> <p>To learn more, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/activating-read-sets.html\">Activating read sets</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "control-storage-"
                 },
@@ -16252,7 +16414,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to start a Read Set export job from the given Sequence Store",
-                "smithy.api#documentation": "<p>Exports a read set to Amazon S3.</p>",
+                "smithy.api#documentation": "<p>Starts a read set export job. When the export job is finished, the read set is exported to an Amazon S3 bucket which can be retrieved using the <code>GetReadSetExportJob</code> API operation.</p> <p>To monitor the status of the export job, use the <code>ListReadSetExportJobs</code> API operation. </p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "control-storage-"
                 },
@@ -16386,7 +16548,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to start a Read Set import job into the given Sequence Store",
-                "smithy.api#documentation": "<p>Starts a read set import job.</p>",
+                "smithy.api#documentation": "<p>Imports a read set from the sequence store. Read set import jobs support a maximum of 100 read sets of different types. Monitor the progress of your read set import job by calling the <code>GetReadSetImportJob</code> API operation.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "control-storage-"
                 },
@@ -16585,7 +16747,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to start a Reference import job into the given Reference Store",
-                "smithy.api#documentation": "<p>Starts a reference import job.</p>",
+                "smithy.api#documentation": "<p>Imports a reference genome from Amazon S3 into a specified reference store. You can have multiple reference genomes in a reference store. You can only import reference genomes one at a time into each reference store. Monitor the status of your reference import job by using the <code>GetReferenceImportJob</code> API operation.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "control-storage-"
                 },
@@ -16846,7 +17008,8 @@
                 "outputUri": {
                     "target": "com.amazonaws.omics#RunOutputUri",
                     "traits": {
-                        "smithy.api#documentation": "<p>An output S3 URI for the run. The S3 bucket must be in the same region as the workflow. The role ARN must have permission to write to this S3 bucket.</p>"
+                        "smithy.api#documentation": "<p>An output S3 URI for the run. The S3 bucket must be in the same region as the workflow. The role ARN must have permission to write to this S3 bucket.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "logLevel": {
@@ -17367,6 +17530,16 @@
                     "max": 18
                 },
                 "smithy.api#pattern": "^[0-9]+$"
+            }
+        },
+        "com.amazonaws.omics#TaskImageDigest": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^sha[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"
             }
         },
         "com.amazonaws.omics#TaskInstanceType": {
@@ -18654,7 +18827,7 @@
                 "workflowId": {
                     "target": "com.amazonaws.omics#WorkflowId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The workflow's ID.</p>",
+                        "smithy.api#documentation": "<p>The workflow's ID. The <code>workflowId</code> is not the UUID.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {},
                         "smithy.api#resourceIdentifier": "id"
@@ -18677,13 +18850,13 @@
                 "storageType": {
                     "target": "com.amazonaws.omics#StorageType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default storage type for runs that use this workflow. STATIC storage allocates a fixed amount of storage. DYNAMIC storage dynamically scales the storage up or down, based on file system utilization. For more information about static and dynamic storage, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/Using-workflows.html\">Running workflows</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The default storage type for runs that use this workflow version. The <code>storageType</code> can be overridden at run time. <code>DYNAMIC</code> storage dynamically scales the storage up or down, based on file system utilization. STATIC storage allocates a fixed amount of storage. For more information about dynamic and static storage types, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/workflows-run-types.html\">Run storage types</a> in the <i>in the <i>Amazon Web Services HealthOmics User Guide</i> </i>.</p>"
                     }
                 },
                 "storageCapacity": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default static storage capacity (in gibibytes) for runs that use this workflow or workflow version.</p>",
+                        "smithy.api#documentation": "<p>The default static storage capacity (in gibibytes) for runs that use this workflow version. The <code>storageCapacity</code> can be overwritten at run time. The storage capacity is not required for runs with a <code>DYNAMIC</code> storage type.</p>",
                         "smithy.api#range": {
                             "min": 0,
                             "max": 100000
@@ -18748,7 +18921,7 @@
             "traits": {
                 "aws.auth#unsignedPayload": {},
                 "aws.iam#actionPermissionDescription": "Grants permission to upload read set parts",
-                "smithy.api#documentation": "<p>This operation uploads a specific part of a read set. If you upload a new part using a previously used part number, the previously uploaded part will be overwritten.</p>",
+                "smithy.api#documentation": "<p>Uploads a specific part of a read set into a sequence store. When you a upload a read set part with a part number that already exists, the new part replaces the existing one. This operation returns a JSON formatted response containing a string identifier that is used to confirm that parts are being added to the intended upload.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/synchronous-uploads.html\">Direct upload to a sequence store</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "storage-"
                 },
@@ -18823,6 +18996,26 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.omics#UpstreamRepositoryPrefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 30
+                },
+                "smithy.api#pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"
+            }
+        },
+        "com.amazonaws.omics#Uri": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 750
+                },
+                "smithy.api#pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"
             }
         },
         "com.amazonaws.omics#UserCustomDescription": {

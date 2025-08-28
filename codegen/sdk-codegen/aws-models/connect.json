@@ -632,6 +632,26 @@
         "com.amazonaws.connect#AgentStatusId": {
             "type": "string"
         },
+        "com.amazonaws.connect#AgentStatusIdentifier": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the agent status.</p>"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.connect#AgentStatusId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the agent status.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the agent status assigned to the user.</p>"
+            }
+        },
         "com.amazonaws.connect#AgentStatusList": {
             "type": "list",
             "member": {
@@ -828,6 +848,12 @@
                     "min": 0,
                     "max": 3
                 }
+            }
+        },
+        "com.amazonaws.connect#AgentStatuses": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#AgentStatusId"
             }
         },
         "com.amazonaws.connect#AgentUsername": {
@@ -4429,7 +4455,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change. To \nrequest access to this API, contact Amazon Web ServicesSupport.</p>\n         <p>Information about an authentication profile. An authentication profile is a resource that\n   stores the authentication settings for users in your contact center. You use authentication\n   profiles to set up IP address range restrictions and session timeouts. For more information, see\n    <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html\">Set IP\n    address restrictions or session timeouts</a>. </p>"
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change. To \nrequest access to this API, contact Amazon Web Services Support.</p>\n         <p>Information about an authentication profile. An authentication profile is a resource that\n   stores the authentication settings for users in your contact center. You use authentication\n   profiles to set up IP address range restrictions and session timeouts. For more information, see\n    <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html\">Set IP\n    address restrictions or session timeouts</a>. </p>"
             }
         },
         "com.amazonaws.connect#AuthenticationProfileDescription": {
@@ -4501,7 +4527,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change. To \nrequest access to this API, contact Amazon Web ServicesSupport.</p>\n         <p>A summary of a given authentication profile.</p>"
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change. To \nrequest access to this API, contact Amazon Web Services Support.</p>\n         <p>A summary of a given authentication profile.</p>"
             }
         },
         "com.amazonaws.connect#AuthenticationProfileSummaryList": {
@@ -8786,7 +8812,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds a new participant into an on-going chat contact or webRTC call. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat-customize-flow.html\">Customize chat\n   flow experiences by integrating custom participants</a> \n   or <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-multiuser-inapp.html\">Enable multi-user web, in-app, and video calling</a>.</p>",
+                "smithy.api#documentation": "<p>Adds a new participant into an on-going chat contact or webRTC call. For more information,\n   see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat-customize-flow.html\">Customize chat flow experiences by integrating custom participants</a> or <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-multiuser-inapp.html\">Enable\n    multi-user web, in-app, and video calling</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact/create-participant",
@@ -8807,7 +8833,7 @@
                 "ContactId": {
                     "target": "com.amazonaws.connect#ContactId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the contact in this instance of Amazon Connect.  Supports contacts in the CHAT channel and VOICE (WebRTC) channels. \n   For WebRTC calls, this should be the initial contact ID that was generated when \n   the contact was first created (from the StartWebRTCContact API) in the VOICE channel</p>",
+                        "smithy.api#documentation": "<p>The identifier of the contact in this instance of Amazon Connect.  Supports contacts in the CHAT channel and VOICE (WebRTC) channels. For WebRTC\n   calls, this should be the initial contact ID that was generated when the contact was first\n   created (from the StartWebRTCContact API) in the VOICE channel</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8821,7 +8847,7 @@
                 "ParticipantDetails": {
                     "target": "com.amazonaws.connect#ParticipantDetailsToAdd",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information identifying the participant.</p>\n         <important>\n            <p>The only valid value for <code>ParticipantRole</code> is <code>CUSTOM_BOT</code> \n    for chat contact and <code>CUSTOMER</code> for voice contact.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>Information identifying the participant.</p>\n         <important>\n            <p>The only valid value for <code>ParticipantRole</code> is <code>CUSTOM_BOT</code> for chat\n    contact and <code>CUSTOMER</code> for voice contact.</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 }
@@ -13151,7 +13177,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change. To \nrequest access to this API, contact Amazon Web ServicesSupport.</p>\n         <p>Describes the target authentication profile.</p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change. To \nrequest access to this API, contact Amazon Web Services Support.</p>\n         <p>Describes the target authentication profile.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/authentication-profiles/{InstanceId}/{AuthenticationProfileId}",
@@ -15177,6 +15203,12 @@
                     "target": "com.amazonaws.connect#RoutingExpression",
                     "traits": {
                         "smithy.api#documentation": "<p>The expression of a step in a routing criteria.</p>"
+                    }
+                },
+                "AgentStatus": {
+                    "target": "com.amazonaws.connect#AgentStatusIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the agent status assigned to the user.</p>"
                     }
                 }
             },
@@ -18642,6 +18674,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of expressions as a filter, in which an expression is an object of a step in a\n   routing criteria.</p>"
                     }
+                },
+                "AgentStatuses": {
+                    "target": "com.amazonaws.connect#AgentStatuses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of up to 50 agent status IDs or ARNs.</p>"
+                    }
                 }
             },
             "traits": {
@@ -19098,7 +19136,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the real-time metric data from the specified Amazon Connect instance.</p>\n         <p>For a description of each metric, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html\">Metrics definitions</a> in the\n     <i>Amazon Connect Administrator Guide</i>.</p>\n         <note>\n            <p>When you make a successful API request, you can expect the following metric values in the response:</p>\n            <ol>\n               <li>\n                  <p>\n                     <b>Metric value is null</b>: The calculation cannot be performed due to divide by zero or insufficient data</p>\n               </li>\n               <li>\n                  <p>\n                     <b>Metric value is a number (including 0) of defined type</b>: The number provided is the calculation result</p>\n               </li>\n               <li>\n                  <p>\n                     <b>MetricResult list is empty</b>: The request cannot find any data in the system</p>\n               </li>\n            </ol>\n            <p>The following guidelines can help you work with the API:</p>\n            <ul>\n               <li>\n                  <p>Each dimension in the metric response must contain a value</p>\n               </li>\n               <li>\n                  <p>Each item in MetricResult must include all requested metrics</p>\n               </li>\n               <li>\n                  <p>If the response is slow due to large result sets, try these approaches:</p>\n                  <ul>\n                     <li>\n                        <p>Add filters to reduce the amount of data returned</p>\n                     </li>\n                  </ul>\n               </li>\n            </ul>\n         </note>",
+                "smithy.api#documentation": "<p>Gets the real-time metric data from the specified Amazon Connect instance.</p>\n         <p>For a description of each metric, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html\">Metrics definitions</a> in the\n     <i>Amazon Connect Administrator Guide</i>.</p>\n         <note>\n            <p>When you make a successful API request, you can expect the following metric values in the\n    response:</p>\n            <ol>\n               <li>\n                  <p>\n                     <b>Metric value is null</b>: The calculation cannot be\n      performed due to divide by zero or insufficient data</p>\n               </li>\n               <li>\n                  <p>\n                     <b>Metric value is a number (including 0) of defined type</b>:\n      The number provided is the calculation result</p>\n               </li>\n               <li>\n                  <p>\n                     <b>MetricResult list is empty</b>: The request cannot find any\n      data in the system</p>\n               </li>\n            </ol>\n            <p>The following guidelines can help you work with the API:</p>\n            <ul>\n               <li>\n                  <p>Each dimension in the metric response must contain a value</p>\n               </li>\n               <li>\n                  <p>Each item in MetricResult must include all requested metrics</p>\n               </li>\n               <li>\n                  <p>If the response is slow due to large result sets, try these approaches:</p>\n                  <ul>\n                     <li>\n                        <p>Add filters to reduce the amount of data returned</p>\n                     </li>\n                  </ul>\n               </li>\n            </ul>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/metrics/current/{InstanceId}",
@@ -19125,14 +19163,14 @@
                 "Filters": {
                     "target": "com.amazonaws.connect#Filters",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters to apply to returned metrics. You can filter up to the following limits:</p>\n         <ul>\n            <li>\n               <p>Queues: 100</p>\n            </li>\n            <li>\n               <p>Routing profiles: 100</p>\n            </li>\n            <li>\n               <p>Channels: 3 (VOICE, CHAT, and TASK channels are supported.)</p>\n            </li>\n            <li>\n               <p>RoutingStepExpressions: 50</p>\n            </li>\n         </ul>\n         <p>Metric data is retrieved only for the resources associated with the queues or routing\n   profiles, and by any channels included in the filter. (You cannot filter by both queue AND\n   routing profile.) You can include both resource IDs and resource ARNs in the same request.</p>\n         <p>When using the <code>RoutingStepExpression</code> filter, you need to pass exactly one\n    <code>QueueId</code>. The filter is also case sensitive so when using the\n    <code>RoutingStepExpression</code> filter, grouping by <code>ROUTING_STEP_EXPRESSION</code> is\n   required.</p>\n         <p>Currently tagging is only supported on the resources that are passed in the filter.</p>",
+                        "smithy.api#documentation": "<p>The filters to apply to returned metrics. You can filter up to the following limits:</p>\n         <ul>\n            <li>\n               <p>Queues: 100</p>\n            </li>\n            <li>\n               <p>Routing profiles: 100</p>\n            </li>\n            <li>\n               <p>Channels: 3 (VOICE, CHAT, and TASK channels are supported.)</p>\n            </li>\n            <li>\n               <p>RoutingStepExpressions: 50</p>\n            </li>\n            <li>\n               <p>AgentStatuses: 50</p>\n            </li>\n         </ul>\n         <p>Metric data is retrieved only for the resources associated with the queues or routing\n   profiles, and by any channels included in the filter. (You cannot filter by both queue AND\n   routing profile.) You can include both resource IDs and resource ARNs in the same request.</p>\n         <p>When using <code>AgentStatuses</code> as filter make sure Queues is added as primary\n   filter.</p>\n         <p>When using the <code>RoutingStepExpression</code> filter, you need to pass exactly one\n    <code>QueueId</code>. The filter is also case sensitive so when using the\n    <code>RoutingStepExpression</code> filter, grouping by <code>ROUTING_STEP_EXPRESSION</code> is\n   required.</p>\n         <p>Currently tagging is only supported on the resources that are passed in the filter.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Groupings": {
                     "target": "com.amazonaws.connect#Groupings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The grouping applied to the metrics returned. For example, when grouped by\n    <code>QUEUE</code>, the metrics returned apply to each queue rather than aggregated for all\n   queues. </p>\n         <ul>\n            <li>\n               <p>If you group by <code>CHANNEL</code>, you should include a Channels filter.\n     VOICE, CHAT, and TASK channels are supported.</p>\n            </li>\n            <li>\n               <p>If you group by <code>ROUTING_PROFILE</code>, you must include either a queue or routing\n     profile filter. In addition, a routing profile filter is required for metrics\n      <code>CONTACTS_SCHEDULED</code>, <code>CONTACTS_IN_QUEUE</code>, and <code>\n      OLDEST_CONTACT_AGE</code>.</p>\n            </li>\n            <li>\n               <p>If no <code>Grouping</code> is included in the request, a summary of metrics is\n     returned.</p>\n            </li>\n            <li>\n               <p>When using the <code>RoutingStepExpression</code> filter, group by\n      <code>ROUTING_STEP_EXPRESSION</code> is required.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Defines the level of aggregation for metrics data by a dimension(s). Its similar to sorting\n   items into buckets based on a common characteristic, then counting or calculating something for\n   each bucket. For example, when grouped by <code>QUEUE</code>, the metrics returned apply to each\n   queue rather than aggregated for all queues. </p>\n         <p>The grouping list is an ordered list, with the first item in the list defined as the primary\n   grouping. If no grouping is included in the request, the aggregation happens at the\n   instance-level.</p>\n         <ul>\n            <li>\n               <p>If you group by <code>CHANNEL</code>, you should include a Channels filter.\n     VOICE, CHAT, and TASK channels are supported.</p>\n            </li>\n            <li>\n               <p>If you group by <code>AGENT_STATUS</code>, you must include the <code>QUEUE</code> as the\n     primary grouping and use queue filter. When you group by <code>AGENT_STATUS</code>, the only\n     metric available is the <code>AGENTS_ONLINE</code> metric.</p>\n            </li>\n            <li>\n               <p>If you group by <code>ROUTING_PROFILE</code>, you must include either a queue or routing\n     profile filter. In addition, a routing profile filter is required for metrics\n      <code>CONTACTS_SCHEDULED</code>, <code>CONTACTS_IN_QUEUE</code>, and <code>\n      OLDEST_CONTACT_AGE</code>.</p>\n            </li>\n            <li>\n               <p>When using the <code>RoutingStepExpression</code> filter, group by\n      <code>ROUTING_STEP_EXPRESSION</code> is required.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "CurrentMetrics": {
@@ -19718,7 +19756,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets metric data from the specified Amazon Connect instance. </p>\n         <p>\n            <code>GetMetricDataV2</code> offers more features than <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_GetMetricData.html\">GetMetricData</a>, the previous\n   version of this API. It has new metrics, offers filtering at a metric level, and offers the\n   ability to filter and group data by channels, queues, routing profiles, agents, and agent\n   hierarchy levels. It can retrieve historical data for the last 3 months, at varying intervals. It\n   does not support agent queues.</p>\n         <p>For a description of the historical metrics that are supported by\n    <code>GetMetricDataV2</code> and <code>GetMetricData</code>, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html\">Metrics definitions</a> in the\n     <i>Amazon Connect Administrator Guide</i>.</p>\n         <note>\n            <p>When you make a successful API request, you can expect the following metric values in the response:</p>\n            <ol>\n               <li>\n                  <p>\n                     <b>Metric value is null</b>: The calculation cannot be performed due to divide by zero or insufficient data</p>\n               </li>\n               <li>\n                  <p>\n                     <b>Metric value is a number (including 0) of defined type</b>: The number provided is the calculation result</p>\n               </li>\n               <li>\n                  <p>\n                     <b>MetricResult list is empty</b>: The request cannot find any data in the system</p>\n               </li>\n            </ol>\n            <p>The following guidelines can help you work with the API:</p>\n            <ul>\n               <li>\n                  <p>Each dimension in the metric response must contain a value</p>\n               </li>\n               <li>\n                  <p>Each item in MetricResult must include all requested metrics</p>\n               </li>\n               <li>\n                  <p>If the response is slow due to large result sets, try these approaches:</p>\n                  <ul>\n                     <li>\n                        <p>Narrow the time range of your request</p>\n                     </li>\n                     <li>\n                        <p>Add filters to reduce the amount of data returned</p>\n                     </li>\n                  </ul>\n               </li>\n            </ul>\n         </note>",
+                "smithy.api#documentation": "<p>Gets metric data from the specified Amazon Connect instance. </p>\n         <p>\n            <code>GetMetricDataV2</code> offers more features than <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_GetMetricData.html\">GetMetricData</a>, the previous\n   version of this API. It has new metrics, offers filtering at a metric level, and offers the\n   ability to filter and group data by channels, queues, routing profiles, agents, and agent\n   hierarchy levels. It can retrieve historical data for the last 3 months, at varying intervals. It\n   does not support agent queues.</p>\n         <p>For a description of the historical metrics that are supported by\n    <code>GetMetricDataV2</code> and <code>GetMetricData</code>, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html\">Metrics definitions</a> in the\n     <i>Amazon Connect Administrator Guide</i>.</p>\n         <note>\n            <p>When you make a successful API request, you can expect the following metric values in the\n    response:</p>\n            <ol>\n               <li>\n                  <p>\n                     <b>Metric value is null</b>: The calculation cannot be\n      performed due to divide by zero or insufficient data</p>\n               </li>\n               <li>\n                  <p>\n                     <b>Metric value is a number (including 0) of defined type</b>:\n      The number provided is the calculation result</p>\n               </li>\n               <li>\n                  <p>\n                     <b>MetricResult list is empty</b>: The request cannot find any\n      data in the system</p>\n               </li>\n            </ol>\n            <p>The following guidelines can help you work with the API:</p>\n            <ul>\n               <li>\n                  <p>Each dimension in the metric response must contain a value</p>\n               </li>\n               <li>\n                  <p>Each item in MetricResult must include all requested metrics</p>\n               </li>\n               <li>\n                  <p>If the response is slow due to large result sets, try these approaches:</p>\n                  <ul>\n                     <li>\n                        <p>Narrow the time range of your request</p>\n                     </li>\n                     <li>\n                        <p>Add filters to reduce the amount of data returned</p>\n                     </li>\n                  </ul>\n               </li>\n            </ul>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/metrics/data",
@@ -20184,6 +20222,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ROUTING_STEP_EXPRESSION"
+                    }
+                },
+                "AGENT_STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AGENT_STATUS"
                     }
                 }
             }
@@ -21399,7 +21443,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Imports a claimed phone number from an external service, such as Amazon Web Services End User\n   Messaging, into an Amazon Connect instance. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance was created.</p>\n         <important>\n            <p>Call the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html\">DescribePhoneNumber</a> API\n    to verify the status of a previous <code>ImportPhoneNumber</code> operation. </p>\n         </important>\n         <p>If you plan to claim or import numbers and then release numbers frequently, contact us for a\n   service quota exception. Otherwise, it is possible you will be blocked from claiming and\n   releasing any more numbers until up to 180 days past the oldest number released has expired. </p>\n         <p> By default you can claim or import and then release up to 200% of your maximum number of\n   active phone numbers. If you claim or import and then release phone numbers using the UI or API\n   during a rolling 180 day cycle that exceeds 200% of your phone number service level quota, you\n   will be blocked from claiming or importing any more numbers until 180 days past the oldest number\n   released has expired. </p>\n         <p>For example, if you already have 99 claimed or imported numbers and a service level quota of\n   99 phone numbers, and in any 180 day period you release 99, claim 99, and then release 99, you\n   will have exceeded the 200% limit. At that point you are blocked from claiming any more numbers\n   until you open an Amazon Web ServicesSupport ticket. </p>",
+                "smithy.api#documentation": "<p>Imports a claimed phone number from an external service, such as Amazon Web Services End User\n   Messaging, into an Amazon Connect instance. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance was created.</p>\n         <important>\n            <p>Call the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html\">DescribePhoneNumber</a> API\n    to verify the status of a previous <code>ImportPhoneNumber</code> operation. </p>\n         </important>\n         <p>If you plan to claim or import numbers and then release numbers frequently, contact us for a\n   service quota exception. Otherwise, it is possible you will be blocked from claiming and\n   releasing any more numbers until up to 180 days past the oldest number released has expired. </p>\n         <p> By default you can claim or import and then release up to 200% of your maximum number of\n   active phone numbers. If you claim or import and then release phone numbers using the UI or API\n   during a rolling 180 day cycle that exceeds 200% of your phone number service level quota, you\n   will be blocked from claiming or importing any more numbers until 180 days past the oldest number\n   released has expired. </p>\n         <p>For example, if you already have 99 claimed or imported numbers and a service level quota of\n   99 phone numbers, and in any 180 day period you release 99, claim 99, and then release 99, you\n   will have exceeded the 200% limit. At that point you are blocked from claiming any more numbers\n   until you open an Amazon Web Services Support ticket. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/phone-number/import",
@@ -23137,7 +23181,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change. To \nrequest access to this API, contact Amazon Web ServicesSupport.</p>\n         <p>Provides summary information about the authentication profiles in a specified Amazon Connect instance.</p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change. To \nrequest access to this API, contact Amazon Web Services Support.</p>\n         <p>Provides summary information about the authentication profiles in a specified Amazon Connect instance.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/authentication-profiles-summary/{InstanceId}",
@@ -33332,7 +33376,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Releases a phone number previously claimed to an Amazon Connect instance or traffic distribution group. You\n   can call this API only in the Amazon Web Services Region where the number was claimed.</p>\n         <important>\n            <p>To release phone numbers from a traffic distribution group, use the <code>ReleasePhoneNumber</code> API, not the\n    Amazon Connect admin website.</p>\n            <p>After releasing a phone number, the phone number enters into a cooldown period for up to\n    180 days. It cannot be searched for or claimed again until the period has ended. If you\n    accidentally release a phone number, contact Amazon Web ServicesSupport.</p>\n         </important>\n         <p>If you plan to claim and release numbers frequently,\n                contact us for a service quota exception. Otherwise, it is possible you will be blocked from\n                claiming and releasing any more numbers until up to 180 days past the oldest number\n                released has expired.</p>\n         <p>By default you can claim and release up to 200% of your maximum number of active\n                phone numbers. If you claim and release phone numbers using\n                the UI or API during a rolling 180 day cycle that exceeds 200% of your phone number\n                service level quota, you will be blocked from claiming any more numbers until 180\n                days past the oldest number released has expired. </p>\n         <p>For example, if you already have 99 claimed numbers and a service level quota of 99 phone numbers, and in any 180\n                day period you release 99, claim 99, and then release 99, you will have exceeded the\n                200% limit. At that point you are blocked from claiming any more numbers until you\n                open an Amazon Web Services support ticket.</p>",
+                "smithy.api#documentation": "<p>Releases a phone number previously claimed to an Amazon Connect instance or traffic distribution group. You\n   can call this API only in the Amazon Web Services Region where the number was claimed.</p>\n         <important>\n            <p>To release phone numbers from a traffic distribution group, use the <code>ReleasePhoneNumber</code> API, not the\n    Amazon Connect admin website.</p>\n            <p>After releasing a phone number, the phone number enters into a cooldown period for up to\n    180 days. It cannot be searched for or claimed again until the period has ended. If you\n    accidentally release a phone number, contact Amazon Web Services Support.</p>\n         </important>\n         <p>If you plan to claim and release numbers frequently,\n                contact us for a service quota exception. Otherwise, it is possible you will be blocked from\n                claiming and releasing any more numbers until up to 180 days past the oldest number\n                released has expired.</p>\n         <p>By default you can claim and release up to 200% of your maximum number of active\n                phone numbers. If you claim and release phone numbers using\n                the UI or API during a rolling 180 day cycle that exceeds 200% of your phone number\n                service level quota, you will be blocked from claiming any more numbers until 180\n                days past the oldest number released has expired. </p>\n         <p>For example, if you already have 99 claimed numbers and a service level quota of 99 phone numbers, and in any 180\n                day period you release 99, claim 99, and then release 99, you will have exceeded the\n                200% limit. At that point you are blocked from claiming any more numbers until you\n                open an Amazon Web Services support ticket.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/phone-number/{PhoneNumberId}",
@@ -38058,7 +38102,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Initiates a flow to start a new chat for the customer. Response of this API provides a token\n   required to obtain credentials from the <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> API in the Amazon Connect Participant Service.</p>\n         <p>When a new chat contact is successfully created, clients must subscribe to the participant’s\n   connection for the created chat within 5 minutes. This is achieved by invoking <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> with WEBSOCKET and CONNECTION_CREDENTIALS. </p>\n         <p>A 429 error occurs in the following situations:</p>\n         <ul>\n            <li>\n               <p>API rate limit is exceeded. API TPS throttling returns a <code>TooManyRequests</code>\n     exception.</p>\n            </li>\n            <li>\n               <p>The <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">quota for concurrent active\n      chats</a> is exceeded. Active chat throttling returns a\n      <code>LimitExceededException</code>.</p>\n            </li>\n         </ul>\n         <p>If you use the <code>ChatDurationInMinutes</code> parameter and receive a 400 error, your\n   account may not support the ability to configure custom chat durations. For more information,\n   contact Amazon Web ServicesSupport. </p>\n         <p>For more information about chat, see the following topics in the <i>Amazon Connect\n   Administrator Guide</i>: </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/web-and-mobile-chat.html\">Concepts: Web and mobile messaging capabilities in Amazon Connect</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Amazon Connect Chat security best practices</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Initiates a flow to start a new chat for the customer. Response of this API provides a token\n   required to obtain credentials from the <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> API in the Amazon Connect Participant Service.</p>\n         <p>When a new chat contact is successfully created, clients must subscribe to the participant’s\n   connection for the created chat within 5 minutes. This is achieved by invoking <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> with WEBSOCKET and CONNECTION_CREDENTIALS. </p>\n         <p>A 429 error occurs in the following situations:</p>\n         <ul>\n            <li>\n               <p>API rate limit is exceeded. API TPS throttling returns a <code>TooManyRequests</code>\n     exception.</p>\n            </li>\n            <li>\n               <p>The <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">quota for concurrent active\n      chats</a> is exceeded. Active chat throttling returns a\n      <code>LimitExceededException</code>.</p>\n            </li>\n         </ul>\n         <p>If you use the <code>ChatDurationInMinutes</code> parameter and receive a 400 error, your\n   account may not support the ability to configure custom chat durations. For more information,\n   contact Amazon Web Services Support. </p>\n         <p>For more information about chat, see the following topics in the <i>Amazon Connect\n   Administrator Guide</i>: </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/web-and-mobile-chat.html\">Concepts: Web and mobile messaging capabilities in Amazon Connect</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Amazon Connect Chat security best practices</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/contact/chat",
@@ -41605,7 +41649,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change. To \nrequest access to this API, contact Amazon Web ServicesSupport.</p>\n         <p>Updates the selected authentication profile.</p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change. To \nrequest access to this API, contact Amazon Web Services Support.</p>\n         <p>Updates the selected authentication profile.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/authentication-profiles/{InstanceId}/{AuthenticationProfileId}",
@@ -43010,7 +43054,7 @@
                 "AttributeType": {
                     "target": "com.amazonaws.connect#InstanceAttributeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of attribute.</p>\n         <note>\n            <p>Only allowlisted customers can consume USE_CUSTOM_TTS_VOICES. To access this feature,\n    contact Amazon Web ServicesSupport for allowlisting.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The type of attribute.</p>\n         <note>\n            <p>Only allowlisted customers can consume USE_CUSTOM_TTS_VOICES. To access this feature,\n    contact Amazon Web Services Support for allowlisting.</p>\n         </note>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }

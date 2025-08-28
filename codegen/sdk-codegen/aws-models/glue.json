@@ -14343,6 +14343,12 @@
                     "traits": {
                         "smithy.api#enumValue": "NAME"
                     }
+                },
+                "TARGET_DATABASE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TARGET_DATABASE"
+                    }
                 }
             }
         },
