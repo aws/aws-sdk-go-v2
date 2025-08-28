@@ -1,8 +1,0 @@
-{
-    "id": "6a65c456-550f-41f0-93da-5e0a297c696c",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/machinelearning"
-    ]
-}

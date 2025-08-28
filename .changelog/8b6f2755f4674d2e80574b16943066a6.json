@@ -1,8 +1,0 @@
-{
-    "id": "8b6f2755-f467-4d2e-8057-4b16943066a6",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/timestreamquery"
-    ]
-}

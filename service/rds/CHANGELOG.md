@@ -1,3 +1,7 @@
+# v1.104.0 (2025-08-28)
+
+* **Feature**: Added RDS HTTP Endpoint feature support flag to DescribeOrderableDBInstanceOptions API
+
 # v1.103.4 (2025-08-27)
 
 * **Dependency Update**: Update to smithy-go v1.23.0.

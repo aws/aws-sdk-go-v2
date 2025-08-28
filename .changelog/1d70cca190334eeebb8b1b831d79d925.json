@@ -1,8 +1,0 @@
-{
-    "id": "1d70cca1-9033-4eee-bb8b-1b831d79d925",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/autoscalingplans"
-    ]
-}

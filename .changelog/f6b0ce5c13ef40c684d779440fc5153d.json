@@ -1,8 +1,0 @@
-{
-    "id": "f6b0ce5c-13ef-40c6-84d7-79440fc5153d",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/geomaps"
-    ]
-}

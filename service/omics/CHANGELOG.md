@@ -1,3 +1,7 @@
+# v1.36.0 (2025-08-28)
+
+* **Feature**: Adds Amazon ECR pull through cache support to AWS HealthOmics, so you can more easily use container images from external sources.
+
 # v1.35.0 (2025-08-27)
 
 * **Feature**: Remove incorrect endpoint tests

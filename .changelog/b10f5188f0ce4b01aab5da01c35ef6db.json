@@ -1,8 +1,0 @@
-{
-    "id": "b10f5188-f0ce-4b01-aab5-da01c35ef6db",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/codegurureviewer"
-    ]
-}

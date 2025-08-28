@@ -1,3 +1,7 @@
+# v1.128.0 (2025-08-28)
+
+* **Feature**: Adding support to fetch TargetDatabase field during GetDatabases with AttributesToGet
+
 # v1.127.1 (2025-08-27)
 
 * **Dependency Update**: Update to smithy-go v1.23.0.

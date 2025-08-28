@@ -1,8 +1,0 @@
-{
-    "id": "73f0760a-c4ad-44cb-986f-3a198ffcfcc7",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/internetmonitor"
-    ]
-}

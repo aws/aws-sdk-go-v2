@@ -1,3 +1,7 @@
+# v1.248.0 (2025-08-28)
+
+* **Feature**: This release adds support for copying Amazon EBS snapshot and AMIs to and from Local Zones.
+
 # v1.247.1 (2025-08-27)
 
 * **Dependency Update**: Update to smithy-go v1.23.0.

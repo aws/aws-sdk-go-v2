@@ -1,8 +1,0 @@
-{
-    "id": "93574fa0-8c46-4eaa-9c60-e4a19e51c454",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/ssmguiconnect"
-    ]
-}

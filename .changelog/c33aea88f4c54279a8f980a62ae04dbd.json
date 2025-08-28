@@ -1,8 +1,0 @@
-{
-    "id": "c33aea88-f4c5-4279-a8f9-80a62ae04dbd",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/osis"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.35.0 (2025-08-28)
+
+* **Feature**: Add ValidationLevel parameter to StartFHIRImportJob API, allowing users to specify a FHIR validation level for their asynchronous import jobs.
+
 # v1.34.1 (2025-08-27)
 
 * **Dependency Update**: Update to smithy-go v1.23.0.

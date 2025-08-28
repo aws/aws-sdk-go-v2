@@ -1,8 +1,0 @@
-{
-    "id": "fd84a8e3-0719-4785-aa04-02219e634893",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/fis"
-    ]
-}

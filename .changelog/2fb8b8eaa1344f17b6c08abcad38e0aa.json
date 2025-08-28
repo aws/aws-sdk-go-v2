@@ -1,8 +1,0 @@
-{
-    "id": "2fb8b8ea-a134-4f17-b6c0-8abcad38e0aa",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/ssmincidents"
-    ]
-}

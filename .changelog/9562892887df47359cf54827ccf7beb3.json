@@ -1,8 +1,0 @@
-{
-    "id": "95628928-87df-4735-9cf5-4827ccf7beb3",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/networkfirewall"
-    ]
-}

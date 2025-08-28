@@ -1,8 +1,0 @@
-{
-    "id": "1f2a0c80-ee68-4982-bb82-cd3e6c741696",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/eventbridge"
-    ]
-}

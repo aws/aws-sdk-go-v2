@@ -1,8 +1,0 @@
-{
-    "id": "46b430ba-ad96-43b1-97d3-694f428b70b0",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/sso"
-    ]
-}

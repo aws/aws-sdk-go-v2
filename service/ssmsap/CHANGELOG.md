@@ -1,3 +1,7 @@
+# v1.25.0 (2025-08-28)
+
+* **Feature**: Added support for Configuration Checks on SAP HANA Applications.
+
 # v1.24.1 (2025-08-27)
 
 * **Dependency Update**: Update to smithy-go v1.23.0.

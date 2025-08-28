@@ -1,8 +1,0 @@
-{
-    "id": "f24f5019-9f00-4a91-b7e5-6e70b9782fbe",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/ec2instanceconnect"
-    ]
-}

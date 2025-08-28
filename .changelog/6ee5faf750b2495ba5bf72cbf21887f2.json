@@ -1,8 +1,0 @@
-{
-    "id": "6ee5faf7-50b2-495b-a5bf-72cbf21887f2",
-    "type": "feature",
-    "description": "Adding support to fetch TargetDatabase field during GetDatabases with AttributesToGet",
-    "modules": [
-        "service/glue"
-    ]
-}

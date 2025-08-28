@@ -1,8 +1,0 @@
-{
-    "id": "0d90b98d-b2bc-4beb-9f20-7e527cabdb49",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/mturk"
-    ]
-}

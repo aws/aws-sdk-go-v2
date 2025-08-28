@@ -1,8 +1,0 @@
-{
-    "id": "c36e7174-761c-48ba-b2c7-314eddf9153a",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/geoplaces"
-    ]
-}

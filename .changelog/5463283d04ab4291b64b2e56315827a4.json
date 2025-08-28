@@ -1,8 +1,0 @@
-{
-    "id": "5463283d-04ab-4291-b64b-2e56315827a4",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/ecr"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.38.2 (2025-08-28)
+
+* **Documentation**: Doc only updates for APIs and and datatypes related to IPAddressType and Subnets for IPv6 dualstack support.
+
 # v1.38.1 (2025-08-27)
 
 * **Dependency Update**: Update to smithy-go v1.23.0.

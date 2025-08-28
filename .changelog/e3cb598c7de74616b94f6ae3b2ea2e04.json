@@ -1,8 +1,0 @@
-{
-    "id": "e3cb598c-7de7-4616-b94f-6ae3b2ea2e04",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/waf"
-    ]
-}

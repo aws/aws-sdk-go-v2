@@ -1,8 +1,0 @@
-{
-    "id": "cd4ddfcc-40ef-470a-8b8c-7e62ef2467f1",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/xray"
-    ]
-}

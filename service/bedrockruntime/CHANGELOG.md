@@ -1,3 +1,7 @@
+# v1.38.0 (2025-08-28)
+
+* **Feature**: Remove incorrect endpoint tests
+
 # v1.37.2 (2025-08-27)
 
 * **Bug Fix**: Ensure document.Interface values with maps serialize keys in a stable order. This should improve prompt cache hit rates with various inputs.

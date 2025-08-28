@@ -1,8 +1,0 @@
-{
-    "id": "457ca230-af53-4720-b919-51eb6b15ebcd",
-    "type": "feature",
-    "description": "Remove incorrect endpoint tests",
-    "modules": [
-        "service/codedeploy"
-    ]
-}
