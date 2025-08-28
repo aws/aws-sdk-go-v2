@@ -70,6 +70,26 @@ func (m *validateOpGetComponent) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetConfigurationCheckOperation struct {
+}
+
+func (*validateOpGetConfigurationCheckOperation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetConfigurationCheckOperation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetConfigurationCheckOperationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetConfigurationCheckOperationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetOperation struct {
 }
 
@@ -130,6 +150,26 @@ func (m *validateOpListApplications) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListConfigurationCheckOperations struct {
+}
+
+func (*validateOpListConfigurationCheckOperations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListConfigurationCheckOperations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListConfigurationCheckOperationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListConfigurationCheckOperationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListOperationEvents struct {
 }
 
@@ -165,6 +205,46 @@ func (m *validateOpListOperations) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListOperationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListSubCheckResults struct {
+}
+
+func (*validateOpListSubCheckResults) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSubCheckResults) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSubCheckResultsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSubCheckResultsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListSubCheckRuleResults struct {
+}
+
+func (*validateOpListSubCheckRuleResults) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSubCheckRuleResults) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSubCheckRuleResultsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSubCheckRuleResultsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -270,6 +350,26 @@ func (m *validateOpStartApplicationRefresh) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartConfigurationChecks struct {
+}
+
+func (*validateOpStartConfigurationChecks) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartConfigurationChecks) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartConfigurationChecksInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartConfigurationChecksInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStopApplication struct {
 }
 
@@ -362,6 +462,10 @@ func addOpGetComponentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetComponent{}, middleware.After)
 }
 
+func addOpGetConfigurationCheckOperationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetConfigurationCheckOperation{}, middleware.After)
+}
+
 func addOpGetOperationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetOperation{}, middleware.After)
 }
@@ -374,12 +478,24 @@ func addOpListApplicationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListApplications{}, middleware.After)
 }
 
+func addOpListConfigurationCheckOperationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListConfigurationCheckOperations{}, middleware.After)
+}
+
 func addOpListOperationEventsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListOperationEvents{}, middleware.After)
 }
 
 func addOpListOperationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListOperations{}, middleware.After)
+}
+
+func addOpListSubCheckResultsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSubCheckResults{}, middleware.After)
+}
+
+func addOpListSubCheckRuleResultsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSubCheckRuleResults{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -400,6 +516,10 @@ func addOpStartApplicationValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpStartApplicationRefreshValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartApplicationRefresh{}, middleware.After)
+}
+
+func addOpStartConfigurationChecksValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartConfigurationChecks{}, middleware.After)
 }
 
 func addOpStopApplicationValidationMiddleware(stack *middleware.Stack) error {
@@ -598,6 +718,21 @@ func validateOpGetComponentInput(v *GetComponentInput) error {
 	}
 }
 
+func validateOpGetConfigurationCheckOperationInput(v *GetConfigurationCheckOperationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetConfigurationCheckOperationInput"}
+	if v.OperationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OperationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetOperationInput(v *GetOperationInput) error {
 	if v == nil {
 		return nil
@@ -645,6 +780,26 @@ func validateOpListApplicationsInput(v *ListApplicationsInput) error {
 	}
 }
 
+func validateOpListConfigurationCheckOperationsInput(v *ListConfigurationCheckOperationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListConfigurationCheckOperationsInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.Filters != nil {
+		if err := validateFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListOperationEventsInput(v *ListOperationEventsInput) error {
 	if v == nil {
 		return nil
@@ -677,6 +832,36 @@ func validateOpListOperationsInput(v *ListOperationsInput) error {
 		if err := validateFilterList(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListSubCheckResultsInput(v *ListSubCheckResultsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSubCheckResultsInput"}
+	if v.OperationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OperationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListSubCheckRuleResultsInput(v *ListSubCheckRuleResultsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSubCheckRuleResultsInput"}
+	if v.SubCheckResultId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubCheckResultId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -772,6 +957,21 @@ func validateOpStartApplicationRefreshInput(v *StartApplicationRefreshInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartApplicationRefreshInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartConfigurationChecksInput(v *StartConfigurationChecksInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartConfigurationChecksInput"}
 	if v.ApplicationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
 	}

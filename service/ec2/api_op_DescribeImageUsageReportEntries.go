@@ -16,7 +16,7 @@ import (
 //
 // For more information, see [View your AMI usage] in the Amazon EC2 User Guide.
 //
-// [View your AMI usage]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-ami-usage.html
+// [View your AMI usage]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/your-ec2-ami-usage.html
 func (c *Client) DescribeImageUsageReportEntries(ctx context.Context, params *DescribeImageUsageReportEntriesInput, optFns ...func(*Options)) (*DescribeImageUsageReportEntriesOutput, error) {
 	if params == nil {
 		params = &DescribeImageUsageReportEntriesInput{}

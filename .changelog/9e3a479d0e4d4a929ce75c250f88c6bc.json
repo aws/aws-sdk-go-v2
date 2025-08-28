@@ -1,0 +1,8 @@
+{
+    "id": "9e3a479d-0e4d-4a92-9ce7-5c250f88c6bc",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/opensearch"
+    ]
+}

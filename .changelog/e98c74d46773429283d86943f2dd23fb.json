@@ -1,0 +1,8 @@
+{
+    "id": "e98c74d4-6773-4292-83d8-6943f2dd23fb",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/inspectorscan"
+    ]
+}

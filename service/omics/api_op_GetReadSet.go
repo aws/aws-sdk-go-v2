@@ -12,7 +12,9 @@ import (
 	"io"
 )
 
-// Gets a file from a read set.
+// Retrieves detailed information from parts of a read set and returns the read
+// set in the same format that it was uploaded. You must have read sets uploaded to
+// your sequence store in order to run this operation.
 func (c *Client) GetReadSet(ctx context.Context, params *GetReadSetInput, optFns ...func(*Options)) (*GetReadSetOutput, error) {
 	if params == nil {
 		params = &GetReadSetInput{}

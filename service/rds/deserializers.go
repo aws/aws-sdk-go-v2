@@ -48854,6 +48854,22 @@ func awsAwsquery_deserializeDocumentOrderableDBInstanceOption(v **types.Orderabl
 				sv.SupportsGlobalDatabases = ptr.Bool(xtv)
 			}
 
+		case strings.EqualFold("SupportsHttpEndpoint", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.SupportsHttpEndpoint = ptr.Bool(xtv)
+			}
+
 		case strings.EqualFold("SupportsIAMDatabaseAuthentication", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

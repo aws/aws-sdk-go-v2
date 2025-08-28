@@ -1,0 +1,8 @@
+{
+    "id": "d0a2eab4-ea4c-46ac-849b-67bf4f0c96a3",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/cloudhsmv2"
+    ]
+}

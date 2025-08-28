@@ -1,0 +1,8 @@
+{
+    "id": "b7343ae3-f6df-407c-8c98-d3a4e92fa878",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/databrew"
+    ]
+}

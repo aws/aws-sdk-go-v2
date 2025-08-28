@@ -1,0 +1,8 @@
+{
+    "id": "9cada911-ca81-49e7-932d-d70ce5eb2295",
+    "type": "feature",
+    "description": "Added RDS HTTP Endpoint feature support flag to DescribeOrderableDBInstanceOptions API",
+    "modules": [
+        "service/rds"
+    ]
+}

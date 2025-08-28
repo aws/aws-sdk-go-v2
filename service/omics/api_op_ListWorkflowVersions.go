@@ -32,7 +32,7 @@ func (c *Client) ListWorkflowVersions(ctx context.Context, params *ListWorkflowV
 
 type ListWorkflowVersionsInput struct {
 
-	// The workflow's ID.
+	// The workflow's ID. The workflowId is not the UUID.
 	//
 	// This member is required.
 	WorkflowId *string
@@ -47,7 +47,9 @@ type ListWorkflowVersionsInput struct {
 	// The workflow type.
 	Type types.WorkflowType
 
-	// Amazon Web Services Id of the owner of the workflow.
+	// The 12-digit account ID of the workflow owner. The workflow owner ID can be
+	// retrieved using the GetShare API operation. If you are the workflow owner, you
+	// do not need to include this ID.
 	WorkflowOwnerId *string
 
 	noSmithyDocumentSerde

@@ -40,7 +40,7 @@ type GetWorkflowVersionInput struct {
 	// This member is required.
 	VersionName *string
 
-	// The workflow's ID.
+	// The workflow's ID. The workflowId is not the UUID.
 	//
 	// This member is required.
 	WorkflowId *string
@@ -51,7 +51,9 @@ type GetWorkflowVersionInput struct {
 	// The workflow's type.
 	Type types.WorkflowType
 
-	// Amazon Web Services Id of the owner of the workflow.
+	// The 12-digit account ID of the workflow owner. The workflow owner ID can be
+	// retrieved using the GetShare API operation. If you are the workflow owner, you
+	// do not need to include this ID.
 	WorkflowOwnerId *string
 
 	noSmithyDocumentSerde
@@ -64,6 +66,9 @@ type GetWorkflowVersionOutput struct {
 
 	// ARN of the workflow version.
 	Arn *string
+
+	// The registry map that this workflow version uses.
+	ContainerRegistryMap *types.ContainerRegistryMap
 
 	// When the workflow version was created.
 	CreationTime *time.Time

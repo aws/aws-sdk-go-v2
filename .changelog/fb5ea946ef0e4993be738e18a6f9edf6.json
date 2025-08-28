@@ -1,0 +1,8 @@
+{
+    "id": "fb5ea946-ef0e-4993-be73-8e18a6f9edf6",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/cloud9"
+    ]
+}

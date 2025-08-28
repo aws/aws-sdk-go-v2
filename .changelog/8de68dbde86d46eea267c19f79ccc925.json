@@ -1,0 +1,8 @@
+{
+    "id": "8de68dbd-e86d-46ee-a267-c19f79ccc925",
+    "type": "feature",
+    "description": "Add ValidationLevel parameter to StartFHIRImportJob API, allowing users to specify a FHIR validation level for their asynchronous import jobs.",
+    "modules": [
+        "service/healthlake"
+    ]
+}

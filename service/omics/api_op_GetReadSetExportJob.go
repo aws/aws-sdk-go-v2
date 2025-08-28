@@ -14,7 +14,9 @@ import (
 	"time"
 )
 
-// Gets information about a read set export job.
+// Retrieves status information about a read set export job and returns the data
+// in JSON format. Use this operation to actively monitor the progress of an export
+// job.
 func (c *Client) GetReadSetExportJob(ctx context.Context, params *GetReadSetExportJobInput, optFns ...func(*Options)) (*GetReadSetExportJobOutput, error) {
 	if params == nil {
 		params = &GetReadSetExportJobInput{}

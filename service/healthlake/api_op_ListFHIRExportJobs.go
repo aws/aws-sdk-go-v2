@@ -30,34 +30,28 @@ func (c *Client) ListFHIRExportJobs(ctx context.Context, params *ListFHIRExportJ
 
 type ListFHIRExportJobsInput struct {
 
-	//  This parameter limits the response to the export job with the specified data
-	// store ID.
+	// Limits the response to the export job with the specified data store ID.
 	//
 	// This member is required.
 	DatastoreId *string
 
-	//  This parameter limits the response to the export job with the specified job
-	// name.
+	// Limits the response to the export job with the specified job name.
 	JobName *string
 
-	//  This parameter limits the response to the export jobs with the specified job
-	// status.
+	// Limits the response to export jobs with the specified job status.
 	JobStatus types.JobStatus
 
-	//  This parameter limits the number of results returned for a ListFHIRExportJobs
-	// to a maximum quantity specified by the user.
+	// Limits the number of results returned for a ListFHIRExportJobs to a maximum
+	// quantity specified by the user.
 	MaxResults *int32
 
-	//  A pagination token used to identify the next page of results to return for a
-	// ListFHIRExportJobs query.
+	// A pagination token used to identify the next page of results to return.
 	NextToken *string
 
-	//  This parameter limits the response to FHIR export jobs submitted after a user
-	// specified date.
+	// Limits the response to FHIR export jobs submitted after a user-specified date.
 	SubmittedAfter *time.Time
 
-	//  This parameter limits the response to FHIR export jobs submitted before a user
-	// specified date.
+	// Limits the response to FHIR export jobs submitted before a user- specified date.
 	SubmittedBefore *time.Time
 
 	noSmithyDocumentSerde
@@ -65,14 +59,12 @@ type ListFHIRExportJobsInput struct {
 
 type ListFHIRExportJobsOutput struct {
 
-	//  The properties of listed FHIR export jobs, including the ID, ARN, name, and
-	// the status of the job.
+	// The properties of listed FHIR export jobs.
 	//
 	// This member is required.
 	ExportJobPropertiesList []types.ExportJobProperties
 
-	//  A pagination token used to identify the next page of results to return for a
-	// ListFHIRExportJobs query.
+	// The pagination token used to identify the next page of results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -217,8 +209,8 @@ func (c *Client) addOperationListFHIRExportJobsMiddlewares(stack *middleware.Sta
 // ListFHIRExportJobsPaginatorOptions is the paginator options for
 // ListFHIRExportJobs
 type ListFHIRExportJobsPaginatorOptions struct {
-	//  This parameter limits the number of results returned for a ListFHIRExportJobs
-	// to a maximum quantity specified by the user.
+	// Limits the number of results returned for a ListFHIRExportJobs to a maximum
+	// quantity specified by the user.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -1,0 +1,8 @@
+{
+    "id": "6d0830e5-4726-49be-8dce-4d8404277460",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/scheduler"
+    ]
+}

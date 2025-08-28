@@ -61277,6 +61277,16 @@ func awsEc2query_serializeOpDocumentCopyImageInput(v *CopyImageInput, value quer
 		objectKey.String(*v.Description)
 	}
 
+	if v.DestinationAvailabilityZone != nil {
+		objectKey := object.Key("DestinationAvailabilityZone")
+		objectKey.String(*v.DestinationAvailabilityZone)
+	}
+
+	if v.DestinationAvailabilityZoneId != nil {
+		objectKey := object.Key("DestinationAvailabilityZoneId")
+		objectKey.String(*v.DestinationAvailabilityZoneId)
+	}
+
 	if v.DestinationOutpostArn != nil {
 		objectKey := object.Key("DestinationOutpostArn")
 		objectKey.String(*v.DestinationOutpostArn)
@@ -61339,6 +61349,11 @@ func awsEc2query_serializeOpDocumentCopySnapshotInput(v *CopySnapshotInput, valu
 	if v.Description != nil {
 		objectKey := object.Key("Description")
 		objectKey.String(*v.Description)
+	}
+
+	if v.DestinationAvailabilityZone != nil {
+		objectKey := object.Key("DestinationAvailabilityZone")
+		objectKey.String(*v.DestinationAvailabilityZone)
 	}
 
 	if v.DestinationOutpostArn != nil {

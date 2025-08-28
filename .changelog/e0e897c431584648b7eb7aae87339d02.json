@@ -1,0 +1,8 @@
+{
+    "id": "e0e897c4-3158-4648-b7eb-7aae87339d02",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/savingsplans"
+    ]
+}

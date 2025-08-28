@@ -25,8 +25,9 @@ import (
 //     that defines the run parameters, or Amazon Web Services HealthOmics can generate
 //     the parameter template for you.
 //
-//   - ECR container images: Create one or more container images for the workflow.
-//     Store the images in a private ECR repository.
+//   - ECR container images: Create container images for the workflow in a private
+//     ECR repository, or synchronize images from a supported upstream registry with
+//     your Amazon ECR private repository.
 //
 //   - (Optional) Sentieon licenses: Request a Sentieon license if using the
 //     Sentieon software in a private workflow.
@@ -59,6 +60,16 @@ type CreateWorkflowInput struct {
 
 	// The computational accelerator specified to run the workflow.
 	Accelerators types.Accelerators
+
+	// (Optional) Use a container registry map to specify mappings between the ECR
+	// private repository and one or more upstream registries. For more information,
+	// see [Container images]in the Amazon Web Services HealthOmics User Guide.
+	//
+	// [Container images]: https://docs.aws.amazon.com/omics/latest/dev/workflows-ecr.html
+	ContainerRegistryMap *types.ContainerRegistryMap
+
+	// (Optional) URI of the S3 location for the registry mapping file.
+	ContainerRegistryMapUri *string
 
 	// The repository information for the workflow definition. This allows you to
 	// source your workflow definition directly from a code repository.

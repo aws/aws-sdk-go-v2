@@ -82,6 +82,12 @@ func (c *Client) StartRun(ctx context.Context, params *StartRunInput, optFns ...
 
 type StartRunInput struct {
 
+	// An output S3 URI for the run. The S3 bucket must be in the same region as the
+	// workflow. The role ARN must have permission to write to this S3 bucket.
+	//
+	// This member is required.
+	OutputUri *string
+
 	// An idempotency token used to dedupe retry requests so that duplicate runs are
 	// not created.
 	//
@@ -115,10 +121,6 @@ type StartRunInput struct {
 	// A name for the run. This is recommended to view and organize runs in the Amazon
 	// Web Services HealthOmics console and CloudWatch logs.
 	Name *string
-
-	// An output S3 URI for the run. The S3 bucket must be in the same region as the
-	// workflow. The role ARN must have permission to write to this S3 bucket.
-	OutputUri *string
 
 	// Parameters for the run. The run needs all required parameters and can include
 	// optional parameters. The run cannot include any parameters that are not defined

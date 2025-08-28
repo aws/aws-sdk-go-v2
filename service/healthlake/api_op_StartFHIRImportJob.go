@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Begins a FHIR Import job.
+// Start importing bulk FHIR data into an ACTIVE data store. The import job
+// imports FHIR data found in the InputDataConfig object and stores processing
+// results in the JobOutputDataConfig object.
 func (c *Client) StartFHIRImportJob(ctx context.Context, params *StartFHIRImportJobInput, optFns ...func(*Options)) (*StartFHIRImportJobOutput, error) {
 	if params == nil {
 		params = &StartFHIRImportJobInput{}
@@ -29,48 +31,51 @@ func (c *Client) StartFHIRImportJob(ctx context.Context, params *StartFHIRImport
 
 type StartFHIRImportJobInput struct {
 
-	// The Amazon Resource Name (ARN) that gives AWS HealthLake access permission.
+	// The Amazon Resource Name (ARN) that grants access permission to AWS HealthLake.
 	//
 	// This member is required.
 	DataAccessRoleArn *string
 
-	// The AWS-generated data store ID.
+	// The data store identifier.
 	//
 	// This member is required.
 	DatastoreId *string
 
-	// The input properties of the FHIR Import job in the StartFHIRImport job request.
+	// The input properties for the import job request.
 	//
 	// This member is required.
 	InputDataConfig types.InputDataConfig
 
-	// The output data configuration that was supplied when the export job was created.
+	// The output data configuration supplied when the export job was created.
 	//
 	// This member is required.
 	JobOutputDataConfig types.OutputDataConfig
 
-	// Optional user provided token used for ensuring idempotency.
+	// The optional user-provided token used for ensuring API idempotency.
 	ClientToken *string
 
-	// The name of the FHIR Import job in the StartFHIRImport job request.
+	// The import job name.
 	JobName *string
+
+	// The validation level of the import job.
+	ValidationLevel types.ValidationLevel
 
 	noSmithyDocumentSerde
 }
 
 type StartFHIRImportJobOutput struct {
 
-	// The AWS-generated job ID.
+	// The import job identifier.
 	//
 	// This member is required.
 	JobId *string
 
-	// The status of an import job.
+	// The import job status.
 	//
 	// This member is required.
 	JobStatus types.JobStatus
 
-	// The AWS-generated data store ID.
+	// The data store identifier.
 	DatastoreId *string
 
 	// Metadata pertaining to the operation's result.

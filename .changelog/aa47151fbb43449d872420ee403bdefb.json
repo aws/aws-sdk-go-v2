@@ -1,0 +1,8 @@
+{
+    "id": "aa47151f-bb43-449d-8724-20ee403bdefb",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/emr"
+    ]
+}

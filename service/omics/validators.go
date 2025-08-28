@@ -3674,6 +3674,9 @@ func validateOpStartRunInput(v *StartRunInput) error {
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
+	if v.OutputUri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputUri"))
+	}
 	if v.RequestId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RequestId"))
 	}

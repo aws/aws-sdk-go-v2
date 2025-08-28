@@ -12,7 +12,9 @@ import (
 	"time"
 )
 
-// Starts a read set import job.
+// Imports a read set from the sequence store. Read set import jobs support a
+// maximum of 100 read sets of different types. Monitor the progress of your read
+// set import job by calling the GetReadSetImportJob API operation.
 func (c *Client) StartReadSetImportJob(ctx context.Context, params *StartReadSetImportJobInput, optFns ...func(*Options)) (*StartReadSetImportJobOutput, error) {
 	if params == nil {
 		params = &StartReadSetImportJobInput{}

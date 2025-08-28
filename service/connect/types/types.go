@@ -215,6 +215,18 @@ type AgentStatus struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the agent status assigned to the user.
+type AgentStatusIdentifier struct {
+
+	// The Amazon Resource Name (ARN) of the agent status.
+	Arn *string
+
+	// The identifier of the agent status.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about the agent's status.
 type AgentStatusReference struct {
 
@@ -605,7 +617,7 @@ type AudioQualityMetricsInfo struct {
 }
 
 // This API is in preview release for Amazon Connect and is subject to change. To
-// request access to this API, contact Amazon Web ServicesSupport.
+// request access to this API, contact Amazon Web Services Support.
 //
 // Information about an authentication profile. An authentication profile is a
 // resource that stores the authentication settings for users in your contact
@@ -676,7 +688,7 @@ type AuthenticationProfile struct {
 }
 
 // This API is in preview release for Amazon Connect and is subject to change. To
-// request access to this API, contact Amazon Web ServicesSupport.
+// request access to this API, contact Amazon Web Services Support.
 //
 // A summary of a given authentication profile.
 type AuthenticationProfileSummary struct {
@@ -1974,6 +1986,9 @@ type DeviceInfo struct {
 // Contains information about the dimensions for a set of metrics.
 type Dimensions struct {
 
+	// Information about the agent status assigned to the user.
+	AgentStatus *AgentStatusIdentifier
+
 	// The channel used for grouping and filters.
 	Channel Channel
 
@@ -3048,6 +3063,9 @@ type FieldValueUnion struct {
 
 // Contains the filter to apply when retrieving metrics.
 type Filters struct {
+
+	// A list of up to 50 agent status IDs or ARNs.
+	AgentStatuses []string
 
 	// The channel to use to filter the metrics.
 	Channels []Channel

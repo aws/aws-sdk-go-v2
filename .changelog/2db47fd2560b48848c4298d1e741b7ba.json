@@ -1,0 +1,8 @@
+{
+    "id": "2db47fd2-560b-4884-8c42-98d1e741b7ba",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/entityresolution"
+    ]
+}

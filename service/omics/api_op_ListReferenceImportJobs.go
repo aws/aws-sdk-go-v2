@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list of reference import jobs.
+// Retrieves the metadata of one or more reference import jobs for a reference
+// store.
 func (c *Client) ListReferenceImportJobs(ctx context.Context, params *ListReferenceImportJobsInput, optFns ...func(*Options)) (*ListReferenceImportJobsOutput, error) {
 	if params == nil {
 		params = &ListReferenceImportJobsInput{}

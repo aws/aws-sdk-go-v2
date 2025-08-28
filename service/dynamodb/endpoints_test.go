@@ -12012,32 +12012,9 @@ func TestEndpointCase314(t *testing.T) {
 	}
 }
 
-// {UseFIPS=true, UseDualStack=true, AccountId=111111111111,
-// AccountIdEndpointMode=preferred, Region=us-iso-east-1}
-func TestEndpointCase315(t *testing.T) {
-	var params = EndpointParameters{
-		UseFIPS:               ptr.Bool(true),
-		UseDualStack:          ptr.Bool(true),
-		AccountId:             ptr.String("111111111111"),
-		AccountIdEndpointMode: ptr.String("preferred"),
-		Region:                ptr.String("us-iso-east-1"),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err == nil {
-		t.Fatalf("expect error, got none")
-	}
-	if e, a := "FIPS and DualStack are enabled, but this partition does not support one or both", err.Error(); !strings.Contains(a, e) {
-		t.Errorf("expect %v error in %v", e, a)
-	}
-}
-
 // {UseFIPS=true, UseDualStack=false, AccountId=111111111111,
 // AccountIdEndpointMode=preferred, Region=us-iso-east-1}
-func TestEndpointCase316(t *testing.T) {
+func TestEndpointCase315(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(true),
 		UseDualStack:          ptr.Bool(false),
@@ -12075,32 +12052,9 @@ func TestEndpointCase316(t *testing.T) {
 	}
 }
 
-// {UseFIPS=false, UseDualStack=true, AccountId=111111111111,
-// AccountIdEndpointMode=preferred, Region=us-iso-east-1}
-func TestEndpointCase317(t *testing.T) {
-	var params = EndpointParameters{
-		UseFIPS:               ptr.Bool(false),
-		UseDualStack:          ptr.Bool(true),
-		AccountId:             ptr.String("111111111111"),
-		AccountIdEndpointMode: ptr.String("preferred"),
-		Region:                ptr.String("us-iso-east-1"),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err == nil {
-		t.Fatalf("expect error, got none")
-	}
-	if e, a := "DualStack is enabled but this partition does not support DualStack", err.Error(); !strings.Contains(a, e) {
-		t.Errorf("expect %v error in %v", e, a)
-	}
-}
-
 // {UseFIPS=false, UseDualStack=false, AccountId=111111111111,
 // AccountIdEndpointMode=preferred, Region=us-iso-east-1}
-func TestEndpointCase318(t *testing.T) {
+func TestEndpointCase316(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(false),
 		UseDualStack:          ptr.Bool(false),
@@ -12139,6 +12093,93 @@ func TestEndpointCase318(t *testing.T) {
 }
 
 // {UseFIPS=false, UseDualStack=false, AccountId=111111111111,
+// ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name],
+// AccountIdEndpointMode=preferred, Region=us-iso-east-1}
+func TestEndpointCase317(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String("111111111111"),
+		ResourceArnList:       []string{"arn:aws:dynamodb:us-east-1:333333333333:table/table_name"},
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-iso-east-1"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://dynamodb.us-iso-east-1.c2s.ic.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountId=111111111111,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name],
+// AccountIdEndpointMode=preferred, Region=us-iso-east-1}
+func TestEndpointCase318(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String("111111111111"),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		ResourceArnList:       []string{"arn:aws:dynamodb:us-east-1:333333333333:table/table_name"},
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-iso-east-1"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://dynamodb.us-iso-east-1.c2s.ic.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountId=111111111111,
+// ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name,
 // ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name],
 // AccountIdEndpointMode=preferred, Region=us-iso-east-1}
 func TestEndpointCase319(t *testing.T) {
@@ -12146,93 +12187,6 @@ func TestEndpointCase319(t *testing.T) {
 		UseFIPS:               ptr.Bool(false),
 		UseDualStack:          ptr.Bool(false),
 		AccountId:             ptr.String("111111111111"),
-		ResourceArnList:       []string{"arn:aws:dynamodb:us-east-1:333333333333:table/table_name"},
-		AccountIdEndpointMode: ptr.String("preferred"),
-		Region:                ptr.String("us-iso-east-1"),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
-	}
-
-	uri, _ := url.Parse("https://dynamodb.us-iso-east-1.c2s.ic.gov")
-
-	expectEndpoint := smithyendpoints.Endpoint{
-		URI:        *uri,
-		Headers:    http.Header{},
-		Properties: smithy.Properties{},
-	}
-
-	if e, a := expectEndpoint.URI, result.URI; e != a {
-		t.Errorf("expect %v URI, got %v", e, a)
-	}
-
-	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
-		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
-	}
-
-	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
-		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
-	}
-}
-
-// {UseFIPS=false, UseDualStack=false, AccountId=111111111111,
-// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
-// ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name],
-// AccountIdEndpointMode=preferred, Region=us-iso-east-1}
-func TestEndpointCase320(t *testing.T) {
-	var params = EndpointParameters{
-		UseFIPS:               ptr.Bool(false),
-		UseDualStack:          ptr.Bool(false),
-		AccountId:             ptr.String("111111111111"),
-		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
-		ResourceArnList:       []string{"arn:aws:dynamodb:us-east-1:333333333333:table/table_name"},
-		AccountIdEndpointMode: ptr.String("preferred"),
-		Region:                ptr.String("us-iso-east-1"),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
-	}
-
-	uri, _ := url.Parse("https://dynamodb.us-iso-east-1.c2s.ic.gov")
-
-	expectEndpoint := smithyendpoints.Endpoint{
-		URI:        *uri,
-		Headers:    http.Header{},
-		Properties: smithy.Properties{},
-	}
-
-	if e, a := expectEndpoint.URI, result.URI; e != a {
-		t.Errorf("expect %v URI, got %v", e, a)
-	}
-
-	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
-		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
-	}
-
-	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
-		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
-	}
-}
-
-// {UseFIPS=false, UseDualStack=false, AccountId=111111111111,
-// ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name,
-// ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name],
-// AccountIdEndpointMode=preferred, Region=us-iso-east-1}
-func TestEndpointCase321(t *testing.T) {
-	var params = EndpointParameters{
-		UseFIPS:               ptr.Bool(false),
-		UseDualStack:          ptr.Bool(false),
-		AccountId:             ptr.String("111111111111"),
 		ResourceArn:           ptr.String("arn:aws:dynamodb:us-west-2:222222222222:table/table_name"),
 		ResourceArnList:       []string{"arn:aws:dynamodb:us-east-1:333333333333:table/table_name"},
 		AccountIdEndpointMode: ptr.String("preferred"),
@@ -12272,7 +12226,7 @@ func TestEndpointCase321(t *testing.T) {
 // ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream,
 // ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name],
 // AccountIdEndpointMode=preferred, Region=us-iso-east-1}
-func TestEndpointCase322(t *testing.T) {
+func TestEndpointCase320(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(false),
 		UseDualStack:          ptr.Bool(false),
@@ -12316,7 +12270,7 @@ func TestEndpointCase322(t *testing.T) {
 // ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name,
 // ResourceArnList=[arn:aws:dynamodb:us-west-2:333333333333:table/table_name],
 // AccountIdEndpointMode=preferred, Region=us-iso-east-1}
-func TestEndpointCase323(t *testing.T) {
+func TestEndpointCase321(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(false),
 		UseDualStack:          ptr.Bool(false),
@@ -12360,7 +12314,7 @@ func TestEndpointCase323(t *testing.T) {
 // ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream,
 // ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream],
 // AccountIdEndpointMode=preferred, Region=us-iso-east-1}
-func TestEndpointCase324(t *testing.T) {
+func TestEndpointCase322(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(false),
 		UseDualStack:          ptr.Bool(false),
@@ -12402,7 +12356,7 @@ func TestEndpointCase324(t *testing.T) {
 
 // {UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred,
 // Region=us-iso-east-1}
-func TestEndpointCase325(t *testing.T) {
+func TestEndpointCase323(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(false),
 		UseDualStack:          ptr.Bool(false),
@@ -12440,34 +12394,10 @@ func TestEndpointCase325(t *testing.T) {
 	}
 }
 
-// {UseFIPS=true, UseDualStack=true,
-// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
-// AccountIdEndpointMode=preferred, Region=us-iso-east-1}
-func TestEndpointCase326(t *testing.T) {
-	var params = EndpointParameters{
-		UseFIPS:               ptr.Bool(true),
-		UseDualStack:          ptr.Bool(true),
-		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
-		AccountIdEndpointMode: ptr.String("preferred"),
-		Region:                ptr.String("us-iso-east-1"),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err == nil {
-		t.Fatalf("expect error, got none")
-	}
-	if e, a := "FIPS and DualStack are enabled, but this partition does not support one or both", err.Error(); !strings.Contains(a, e) {
-		t.Errorf("expect %v error in %v", e, a)
-	}
-}
-
 // {UseFIPS=true, UseDualStack=false,
 // ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
 // AccountIdEndpointMode=preferred, Region=us-iso-east-1}
-func TestEndpointCase327(t *testing.T) {
+func TestEndpointCase324(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(true),
 		UseDualStack:          ptr.Bool(false),
@@ -12505,34 +12435,10 @@ func TestEndpointCase327(t *testing.T) {
 	}
 }
 
-// {UseFIPS=false, UseDualStack=true,
-// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
-// AccountIdEndpointMode=preferred, Region=us-iso-east-1}
-func TestEndpointCase328(t *testing.T) {
-	var params = EndpointParameters{
-		UseFIPS:               ptr.Bool(false),
-		UseDualStack:          ptr.Bool(true),
-		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
-		AccountIdEndpointMode: ptr.String("preferred"),
-		Region:                ptr.String("us-iso-east-1"),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err == nil {
-		t.Fatalf("expect error, got none")
-	}
-	if e, a := "DualStack is enabled but this partition does not support DualStack", err.Error(); !strings.Contains(a, e) {
-		t.Errorf("expect %v error in %v", e, a)
-	}
-}
-
 // {UseFIPS=false, UseDualStack=false,
 // ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
 // AccountIdEndpointMode=preferred, Region=us-iso-east-1}
-func TestEndpointCase329(t *testing.T) {
+func TestEndpointCase325(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(false),
 		UseDualStack:          ptr.Bool(false),
@@ -12573,7 +12479,7 @@ func TestEndpointCase329(t *testing.T) {
 // {UseFIPS=false, UseDualStack=false,
 // ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name,
 // AccountIdEndpointMode=preferred, Region=us-iso-east-1}
-func TestEndpointCase330(t *testing.T) {
+func TestEndpointCase326(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(false),
 		UseDualStack:          ptr.Bool(false),
@@ -12614,7 +12520,7 @@ func TestEndpointCase330(t *testing.T) {
 // {UseFIPS=false, UseDualStack=false,
 // ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream,
 // AccountIdEndpointMode=preferred, Region=us-iso-east-1}
-func TestEndpointCase331(t *testing.T) {
+func TestEndpointCase327(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(false),
 		UseDualStack:          ptr.Bool(false),
@@ -12654,7 +12560,7 @@ func TestEndpointCase331(t *testing.T) {
 
 // {UseFIPS=false, UseDualStack=false, ResourceArn=,
 // AccountIdEndpointMode=preferred, Region=us-iso-east-1}
-func TestEndpointCase332(t *testing.T) {
+func TestEndpointCase328(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(false),
 		UseDualStack:          ptr.Bool(false),
@@ -12692,34 +12598,10 @@ func TestEndpointCase332(t *testing.T) {
 	}
 }
 
-// {UseFIPS=true, UseDualStack=true,
-// ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name],
-// AccountIdEndpointMode=preferred, Region=us-iso-east-1}
-func TestEndpointCase333(t *testing.T) {
-	var params = EndpointParameters{
-		UseFIPS:               ptr.Bool(true),
-		UseDualStack:          ptr.Bool(true),
-		ResourceArnList:       []string{"arn:aws:dynamodb:us-east-1:333333333333:table/table_name"},
-		AccountIdEndpointMode: ptr.String("preferred"),
-		Region:                ptr.String("us-iso-east-1"),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err == nil {
-		t.Fatalf("expect error, got none")
-	}
-	if e, a := "FIPS and DualStack are enabled, but this partition does not support one or both", err.Error(); !strings.Contains(a, e) {
-		t.Errorf("expect %v error in %v", e, a)
-	}
-}
-
 // {UseFIPS=true, UseDualStack=false,
 // ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name],
 // AccountIdEndpointMode=preferred, Region=us-iso-east-1}
-func TestEndpointCase334(t *testing.T) {
+func TestEndpointCase329(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(true),
 		UseDualStack:          ptr.Bool(false),
@@ -12757,34 +12639,10 @@ func TestEndpointCase334(t *testing.T) {
 	}
 }
 
-// {UseFIPS=false, UseDualStack=true,
-// ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name],
-// AccountIdEndpointMode=preferred, Region=us-iso-east-1}
-func TestEndpointCase335(t *testing.T) {
-	var params = EndpointParameters{
-		UseFIPS:               ptr.Bool(false),
-		UseDualStack:          ptr.Bool(true),
-		ResourceArnList:       []string{"arn:aws:dynamodb:us-east-1:333333333333:table/table_name"},
-		AccountIdEndpointMode: ptr.String("preferred"),
-		Region:                ptr.String("us-iso-east-1"),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err == nil {
-		t.Fatalf("expect error, got none")
-	}
-	if e, a := "DualStack is enabled but this partition does not support DualStack", err.Error(); !strings.Contains(a, e) {
-		t.Errorf("expect %v error in %v", e, a)
-	}
-}
-
 // {UseFIPS=false, UseDualStack=false,
 // ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name],
 // AccountIdEndpointMode=preferred, Region=us-iso-east-1}
-func TestEndpointCase336(t *testing.T) {
+func TestEndpointCase330(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(false),
 		UseDualStack:          ptr.Bool(false),
@@ -12826,7 +12684,7 @@ func TestEndpointCase336(t *testing.T) {
 // ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
 // ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name],
 // AccountIdEndpointMode=preferred, Region=us-iso-east-1}
-func TestEndpointCase337(t *testing.T) {
+func TestEndpointCase331(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(false),
 		UseDualStack:          ptr.Bool(false),
@@ -12867,7 +12725,7 @@ func TestEndpointCase337(t *testing.T) {
 
 // {UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred,
 // Region=us-iso-east-1}
-func TestEndpointCase338(t *testing.T) {
+func TestEndpointCase332(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(false),
 		UseDualStack:          ptr.Bool(false),
@@ -12906,7 +12764,7 @@ func TestEndpointCase338(t *testing.T) {
 
 // {UseFIPS=true, UseDualStack=true, AccountId=111111111111,
 // AccountIdEndpointMode=preferred, Region=us-gov-east-1}
-func TestEndpointCase339(t *testing.T) {
+func TestEndpointCase333(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(true),
 		UseDualStack:          ptr.Bool(true),
@@ -12946,7 +12804,7 @@ func TestEndpointCase339(t *testing.T) {
 
 // {UseFIPS=true, UseDualStack=false, AccountId=111111111111,
 // AccountIdEndpointMode=preferred, Region=us-gov-east-1}
-func TestEndpointCase340(t *testing.T) {
+func TestEndpointCase334(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(true),
 		UseDualStack:          ptr.Bool(false),
@@ -12986,7 +12844,7 @@ func TestEndpointCase340(t *testing.T) {
 
 // {UseFIPS=false, UseDualStack=true, AccountId=111111111111,
 // AccountIdEndpointMode=preferred, Region=us-gov-east-1}
-func TestEndpointCase341(t *testing.T) {
+func TestEndpointCase335(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(false),
 		UseDualStack:          ptr.Bool(true),
@@ -13026,7 +12884,7 @@ func TestEndpointCase341(t *testing.T) {
 
 // {UseFIPS=false, UseDualStack=false, AccountId=111111111111,
 // AccountIdEndpointMode=preferred, Region=us-gov-east-1}
-func TestEndpointCase342(t *testing.T) {
+func TestEndpointCase336(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(false),
 		UseDualStack:          ptr.Bool(false),
@@ -13067,7 +12925,7 @@ func TestEndpointCase342(t *testing.T) {
 // {UseFIPS=false, UseDualStack=false, AccountId=111111111111,
 // ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name],
 // AccountIdEndpointMode=preferred, Region=us-gov-east-1}
-func TestEndpointCase343(t *testing.T) {
+func TestEndpointCase337(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(false),
 		UseDualStack:          ptr.Bool(false),
@@ -13110,7 +12968,7 @@ func TestEndpointCase343(t *testing.T) {
 // ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
 // ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name],
 // AccountIdEndpointMode=preferred, Region=us-gov-east-1}
-func TestEndpointCase344(t *testing.T) {
+func TestEndpointCase338(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(false),
 		UseDualStack:          ptr.Bool(false),
@@ -13154,7 +13012,7 @@ func TestEndpointCase344(t *testing.T) {
 // ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name,
 // ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name],
 // AccountIdEndpointMode=preferred, Region=us-gov-east-1}
-func TestEndpointCase345(t *testing.T) {
+func TestEndpointCase339(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(false),
 		UseDualStack:          ptr.Bool(false),
@@ -13198,7 +13056,7 @@ func TestEndpointCase345(t *testing.T) {
 // ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream,
 // ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name],
 // AccountIdEndpointMode=preferred, Region=us-gov-east-1}
-func TestEndpointCase346(t *testing.T) {
+func TestEndpointCase340(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(false),
 		UseDualStack:          ptr.Bool(false),
@@ -13242,7 +13100,7 @@ func TestEndpointCase346(t *testing.T) {
 // ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name,
 // ResourceArnList=[arn:aws:dynamodb:us-west-2:333333333333:table/table_name],
 // AccountIdEndpointMode=preferred, Region=us-gov-east-1}
-func TestEndpointCase347(t *testing.T) {
+func TestEndpointCase341(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(false),
 		UseDualStack:          ptr.Bool(false),
@@ -13286,7 +13144,7 @@ func TestEndpointCase347(t *testing.T) {
 // ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream,
 // ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream],
 // AccountIdEndpointMode=preferred, Region=us-gov-east-1}
-func TestEndpointCase348(t *testing.T) {
+func TestEndpointCase342(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(false),
 		UseDualStack:          ptr.Bool(false),
@@ -13328,7 +13186,7 @@ func TestEndpointCase348(t *testing.T) {
 
 // {UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred,
 // Region=us-gov-east-1}
-func TestEndpointCase349(t *testing.T) {
+func TestEndpointCase343(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(false),
 		UseDualStack:          ptr.Bool(false),
@@ -13369,7 +13227,7 @@ func TestEndpointCase349(t *testing.T) {
 // {UseFIPS=true, UseDualStack=true,
 // ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
 // AccountIdEndpointMode=preferred, Region=us-gov-east-1}
-func TestEndpointCase350(t *testing.T) {
+func TestEndpointCase344(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(true),
 		UseDualStack:          ptr.Bool(true),
@@ -13410,7 +13268,7 @@ func TestEndpointCase350(t *testing.T) {
 // {UseFIPS=true, UseDualStack=false,
 // ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
 // AccountIdEndpointMode=preferred, Region=us-gov-east-1}
-func TestEndpointCase351(t *testing.T) {
+func TestEndpointCase345(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(true),
 		UseDualStack:          ptr.Bool(false),
@@ -13451,7 +13309,7 @@ func TestEndpointCase351(t *testing.T) {
 // {UseFIPS=false, UseDualStack=true,
 // ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
 // AccountIdEndpointMode=preferred, Region=us-gov-east-1}
-func TestEndpointCase352(t *testing.T) {
+func TestEndpointCase346(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(false),
 		UseDualStack:          ptr.Bool(true),
@@ -13492,7 +13350,7 @@ func TestEndpointCase352(t *testing.T) {
 // {UseFIPS=false, UseDualStack=false,
 // ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
 // AccountIdEndpointMode=preferred, Region=us-gov-east-1}
-func TestEndpointCase353(t *testing.T) {
+func TestEndpointCase347(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(false),
 		UseDualStack:          ptr.Bool(false),
@@ -13533,7 +13391,7 @@ func TestEndpointCase353(t *testing.T) {
 // {UseFIPS=false, UseDualStack=false,
 // ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name,
 // AccountIdEndpointMode=preferred, Region=us-gov-east-1}
-func TestEndpointCase354(t *testing.T) {
+func TestEndpointCase348(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(false),
 		UseDualStack:          ptr.Bool(false),
@@ -13574,7 +13432,7 @@ func TestEndpointCase354(t *testing.T) {
 // {UseFIPS=false, UseDualStack=false,
 // ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream,
 // AccountIdEndpointMode=preferred, Region=us-gov-east-1}
-func TestEndpointCase355(t *testing.T) {
+func TestEndpointCase349(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(false),
 		UseDualStack:          ptr.Bool(false),
@@ -13614,7 +13472,7 @@ func TestEndpointCase355(t *testing.T) {
 
 // {UseFIPS=false, UseDualStack=false, ResourceArn=,
 // AccountIdEndpointMode=preferred, Region=us-gov-east-1}
-func TestEndpointCase356(t *testing.T) {
+func TestEndpointCase350(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(false),
 		UseDualStack:          ptr.Bool(false),
@@ -13655,7 +13513,7 @@ func TestEndpointCase356(t *testing.T) {
 // {UseFIPS=true, UseDualStack=true,
 // ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name],
 // AccountIdEndpointMode=preferred, Region=us-gov-east-1}
-func TestEndpointCase357(t *testing.T) {
+func TestEndpointCase351(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(true),
 		UseDualStack:          ptr.Bool(true),
@@ -13696,7 +13554,7 @@ func TestEndpointCase357(t *testing.T) {
 // {UseFIPS=true, UseDualStack=false,
 // ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name],
 // AccountIdEndpointMode=preferred, Region=us-gov-east-1}
-func TestEndpointCase358(t *testing.T) {
+func TestEndpointCase352(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(true),
 		UseDualStack:          ptr.Bool(false),
@@ -13737,7 +13595,7 @@ func TestEndpointCase358(t *testing.T) {
 // {UseFIPS=false, UseDualStack=true,
 // ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name],
 // AccountIdEndpointMode=preferred, Region=us-gov-east-1}
-func TestEndpointCase359(t *testing.T) {
+func TestEndpointCase353(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(false),
 		UseDualStack:          ptr.Bool(true),
@@ -13778,7 +13636,7 @@ func TestEndpointCase359(t *testing.T) {
 // {UseFIPS=false, UseDualStack=false,
 // ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name],
 // AccountIdEndpointMode=preferred, Region=us-gov-east-1}
-func TestEndpointCase360(t *testing.T) {
+func TestEndpointCase354(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(false),
 		UseDualStack:          ptr.Bool(false),
@@ -13820,7 +13678,7 @@ func TestEndpointCase360(t *testing.T) {
 // ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
 // ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name],
 // AccountIdEndpointMode=preferred, Region=us-gov-east-1}
-func TestEndpointCase361(t *testing.T) {
+func TestEndpointCase355(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(false),
 		UseDualStack:          ptr.Bool(false),
@@ -13861,7 +13719,7 @@ func TestEndpointCase361(t *testing.T) {
 
 // {UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred,
 // Region=us-gov-east-1}
-func TestEndpointCase362(t *testing.T) {
+func TestEndpointCase356(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:               ptr.Bool(false),
 		UseDualStack:          ptr.Bool(false),

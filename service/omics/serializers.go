@@ -1692,6 +1692,18 @@ func awsRestjson1_serializeOpDocumentCreateWorkflowInput(v *CreateWorkflowInput,
 		ok.String(string(v.Accelerators))
 	}
 
+	if v.ContainerRegistryMap != nil {
+		ok := object.Key("containerRegistryMap")
+		if err := awsRestjson1_serializeDocumentContainerRegistryMap(v.ContainerRegistryMap, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ContainerRegistryMapUri != nil {
+		ok := object.Key("containerRegistryMapUri")
+		ok.String(*v.ContainerRegistryMapUri)
+	}
+
 	if v.DefinitionRepository != nil {
 		ok := object.Key("definitionRepository")
 		if err := awsRestjson1_serializeDocumentDefinitionRepository(v.DefinitionRepository, ok); err != nil {
@@ -1875,6 +1887,18 @@ func awsRestjson1_serializeOpDocumentCreateWorkflowVersionInput(v *CreateWorkflo
 	if len(v.Accelerators) > 0 {
 		ok := object.Key("accelerators")
 		ok.String(string(v.Accelerators))
+	}
+
+	if v.ContainerRegistryMap != nil {
+		ok := object.Key("containerRegistryMap")
+		if err := awsRestjson1_serializeDocumentContainerRegistryMap(v.ContainerRegistryMap, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ContainerRegistryMapUri != nil {
+		ok := object.Key("containerRegistryMapUri")
+		ok.String(*v.ContainerRegistryMapUri)
 	}
 
 	if v.DefinitionRepository != nil {
@@ -9060,6 +9084,27 @@ func awsRestjson1_serializeDocumentCompleteReadSetUploadPartListItem(v *types.Co
 	return nil
 }
 
+func awsRestjson1_serializeDocumentContainerRegistryMap(v *types.ContainerRegistryMap, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ImageMappings != nil {
+		ok := object.Key("imageMappings")
+		if err := awsRestjson1_serializeDocumentImageMappingsList(v.ImageMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RegistryMappings != nil {
+		ok := object.Key("registryMappings")
+		if err := awsRestjson1_serializeDocumentRegistryMappingsList(v.RegistryMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDefinitionRepository(v *types.DefinitionRepository, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -9219,6 +9264,36 @@ func awsRestjson1_serializeDocumentIdList(v []string, value smithyjson.Value) er
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentImageMapping(v *types.ImageMapping, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DestinationImage != nil {
+		ok := object.Key("destinationImage")
+		ok.String(*v.DestinationImage)
+	}
+
+	if v.SourceImage != nil {
+		ok := object.Key("sourceImage")
+		ok.String(*v.SourceImage)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentImageMappingsList(v []types.ImageMapping, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentImageMapping(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -9542,6 +9617,46 @@ func awsRestjson1_serializeDocumentReferenceStoreFilter(v *types.ReferenceStoreF
 		ok.String(*v.Name)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRegistryMapping(v *types.RegistryMapping, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EcrAccountId != nil {
+		ok := object.Key("ecrAccountId")
+		ok.String(*v.EcrAccountId)
+	}
+
+	if v.EcrRepositoryPrefix != nil {
+		ok := object.Key("ecrRepositoryPrefix")
+		ok.String(*v.EcrRepositoryPrefix)
+	}
+
+	if v.UpstreamRegistryUrl != nil {
+		ok := object.Key("upstreamRegistryUrl")
+		ok.String(*v.UpstreamRegistryUrl)
+	}
+
+	if v.UpstreamRepositoryPrefix != nil {
+		ok := object.Key("upstreamRepositoryPrefix")
+		ok.String(*v.UpstreamRepositoryPrefix)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRegistryMappingsList(v []types.RegistryMapping, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentRegistryMapping(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

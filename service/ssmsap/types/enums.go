@@ -202,6 +202,47 @@ func (ComponentType) Values() []ComponentType {
 	}
 }
 
+type ConfigurationCheckOperationListingMode string
+
+// Enum values for ConfigurationCheckOperationListingMode
+const (
+	ConfigurationCheckOperationListingModeAllOperations  ConfigurationCheckOperationListingMode = "ALL_OPERATIONS"
+	ConfigurationCheckOperationListingModeLatestPerCheck ConfigurationCheckOperationListingMode = "LATEST_PER_CHECK"
+)
+
+// Values returns all known values for ConfigurationCheckOperationListingMode.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConfigurationCheckOperationListingMode) Values() []ConfigurationCheckOperationListingMode {
+	return []ConfigurationCheckOperationListingMode{
+		"ALL_OPERATIONS",
+		"LATEST_PER_CHECK",
+	}
+}
+
+type ConfigurationCheckType string
+
+// Enum values for ConfigurationCheckType
+const (
+	ConfigurationCheckTypeSapCheck01 ConfigurationCheckType = "SAP_CHECK_01"
+	ConfigurationCheckTypeSapCheck02 ConfigurationCheckType = "SAP_CHECK_02"
+	ConfigurationCheckTypeSapCheck03 ConfigurationCheckType = "SAP_CHECK_03"
+)
+
+// Values returns all known values for ConfigurationCheckType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConfigurationCheckType) Values() []ConfigurationCheckType {
+	return []ConfigurationCheckType{
+		"SAP_CHECK_01",
+		"SAP_CHECK_02",
+		"SAP_CHECK_03",
+	}
+}
+
 type ConnectedEntityType string
 
 // Enum values for ConnectedEntityType
@@ -451,5 +492,30 @@ func (ReplicationMode) Values() []ReplicationMode {
 		"SYNC",
 		"SYNCMEM",
 		"ASYNC",
+	}
+}
+
+type RuleResultStatus string
+
+// Enum values for RuleResultStatus
+const (
+	RuleResultStatusPassed  RuleResultStatus = "PASSED"
+	RuleResultStatusFailed  RuleResultStatus = "FAILED"
+	RuleResultStatusWarning RuleResultStatus = "WARNING"
+	RuleResultStatusInfo    RuleResultStatus = "INFO"
+	RuleResultStatusUnknown RuleResultStatus = "UNKNOWN"
+)
+
+// Values returns all known values for RuleResultStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RuleResultStatus) Values() []RuleResultStatus {
+	return []RuleResultStatus{
+		"PASSED",
+		"FAILED",
+		"WARNING",
+		"INFO",
+		"UNKNOWN",
 	}
 }

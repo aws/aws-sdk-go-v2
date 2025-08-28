@@ -943,6 +943,7 @@ const (
 	GroupingChannel               Grouping = "CHANNEL"
 	GroupingRoutingProfile        Grouping = "ROUTING_PROFILE"
 	GroupingRoutingStepExpression Grouping = "ROUTING_STEP_EXPRESSION"
+	GroupingAgentStatus           Grouping = "AGENT_STATUS"
 )
 
 // Values returns all known values for Grouping. Note that this can be expanded in
@@ -955,6 +956,7 @@ func (Grouping) Values() []Grouping {
 		"CHANNEL",
 		"ROUTING_PROFILE",
 		"ROUTING_STEP_EXPRESSION",
+		"AGENT_STATUS",
 	}
 }
 

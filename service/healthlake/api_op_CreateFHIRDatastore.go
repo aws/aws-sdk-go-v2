@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a data store that can ingest and export FHIR formatted data.
+// Create a FHIR-enabled data store.
 func (c *Client) CreateFHIRDatastore(ctx context.Context, params *CreateFHIRDatastoreInput, optFns ...func(*Options)) (*CreateFHIRDatastoreOutput, error) {
 	if params == nil {
 		params = &CreateFHIRDatastoreInput{}
@@ -29,30 +29,30 @@ func (c *Client) CreateFHIRDatastore(ctx context.Context, params *CreateFHIRData
 
 type CreateFHIRDatastoreInput struct {
 
-	// The FHIR version of the data store. The only supported version is R4.
+	// The FHIR release version supported by the data store. Current support is for
+	// version R4 .
 	//
 	// This member is required.
 	DatastoreTypeVersion types.FHIRVersion
 
-	// Optional user provided token used for ensuring idempotency.
+	// An optional user-provided token to ensure API idempotency.
 	ClientToken *string
 
-	// The user generated name for the data store.
+	// The data store name (user-generated).
 	DatastoreName *string
 
-	// The configuration of the identity provider that you want to use for your data
-	// store.
+	// The identity provider configuration to use for the data store.
 	IdentityProviderConfiguration *types.IdentityProviderConfiguration
 
-	// Optional parameter to preload data upon creation of the data store. Currently,
-	// the only supported preloaded data is synthetic data generated from Synthea.
+	// An optional parameter to preload (import) open source Synthea FHIR data upon
+	// creation of the data store.
 	PreloadDataConfig *types.PreloadDataConfig
 
-	//  The server-side encryption key configuration for a customer provided
-	// encryption key specified for creating a data store.
+	// The server-side encryption key configuration for a customer-provided encryption
+	// key specified for creating a data store.
 	SseConfiguration *types.SseConfiguration
 
-	//  Resource tags that are applied to a data store when it is created.
+	// The resource tags applied to a data store when it is created.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -60,24 +60,22 @@ type CreateFHIRDatastoreInput struct {
 
 type CreateFHIRDatastoreOutput struct {
 
-	// The data store ARN is generated during the creation of the data store and can
-	// be found in the output from the initial data store creation call.
+	// The Amazon Resource Name (ARN) for the data store.
 	//
 	// This member is required.
 	DatastoreArn *string
 
-	// The AWS endpoint for the created data store.
+	// The AWS endpoint created for the data store.
 	//
 	// This member is required.
 	DatastoreEndpoint *string
 
-	// The AWS-generated data store id. This id is in the output from the initial data
-	// store creation call.
+	// The data store identifier.
 	//
 	// This member is required.
 	DatastoreId *string
 
-	// The status of the FHIR data store.
+	// The data store status.
 	//
 	// This member is required.
 	DatastoreStatus types.DatastoreStatus

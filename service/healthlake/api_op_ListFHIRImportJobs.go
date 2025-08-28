@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Lists all FHIR import jobs associated with an account and their statuses.
+// List all FHIR import jobs associated with an account and their statuses.
 func (c *Client) ListFHIRImportJobs(ctx context.Context, params *ListFHIRImportJobsInput, optFns ...func(*Options)) (*ListFHIRImportJobsOutput, error) {
 	if params == nil {
 		params = &ListFHIRImportJobsInput{}
@@ -30,34 +30,29 @@ func (c *Client) ListFHIRImportJobs(ctx context.Context, params *ListFHIRImportJ
 
 type ListFHIRImportJobsInput struct {
 
-	//  This parameter limits the response to the import job with the specified data
-	// store ID.
+	// Limits the response to the import job with the specified data store ID.
 	//
 	// This member is required.
 	DatastoreId *string
 
-	//  This parameter limits the response to the import job with the specified job
-	// name.
+	// Limits the response to the import job with the specified job name.
 	JobName *string
 
-	//  This parameter limits the response to the import job with the specified job
-	// status.
+	// Limits the response to the import job with the specified job status.
 	JobStatus types.JobStatus
 
-	//  This parameter limits the number of results returned for a ListFHIRImportJobs
-	// to a maximum quantity specified by the user.
+	// Limits the number of results returned for ListFHIRImportJobs to a maximum
+	// quantity specified by the user.
 	MaxResults *int32
 
-	//  A pagination token used to identify the next page of results to return for a
-	// ListFHIRImportJobs query.
+	// The pagination token used to identify the next page of results to return.
 	NextToken *string
 
-	//  This parameter limits the response to FHIR import jobs submitted after a user
-	// specified date.
+	// Limits the response to FHIR import jobs submitted after a user-specified date.
 	SubmittedAfter *time.Time
 
-	//  This parameter limits the response to FHIR import jobs submitted before a user
-	// specified date.
+	// Limits the response to FHIR import jobs submitted before a user- specified
+	// date.
 	SubmittedBefore *time.Time
 
 	noSmithyDocumentSerde
@@ -65,14 +60,12 @@ type ListFHIRImportJobsInput struct {
 
 type ListFHIRImportJobsOutput struct {
 
-	//  The properties of a listed FHIR import jobs, including the ID, ARN, name, the
-	// status of the job, and the progress report of the job.
+	// The properties for listed import jobs.
 	//
 	// This member is required.
 	ImportJobPropertiesList []types.ImportJobProperties
 
-	//  A pagination token used to identify the next page of results to return for a
-	// ListFHIRImportJobs query.
+	// The pagination token used to identify the next page of results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -217,8 +210,8 @@ func (c *Client) addOperationListFHIRImportJobsMiddlewares(stack *middleware.Sta
 // ListFHIRImportJobsPaginatorOptions is the paginator options for
 // ListFHIRImportJobs
 type ListFHIRImportJobsPaginatorOptions struct {
-	//  This parameter limits the number of results returned for a ListFHIRImportJobs
-	// to a maximum quantity specified by the user.
+	// Limits the number of results returned for ListFHIRImportJobs to a maximum
+	// quantity specified by the user.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

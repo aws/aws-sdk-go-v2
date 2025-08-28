@@ -1,0 +1,8 @@
+{
+    "id": "aeb9c79b-8c3b-4315-a09f-3cc9f80fccf7",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/applicationcostprofiler"
+    ]
+}

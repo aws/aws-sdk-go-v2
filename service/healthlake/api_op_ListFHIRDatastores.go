@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all FHIR data stores that are in the user’s account, regardless of data
-// store status.
+// List all FHIR-enabled data stores in a user’s account, regardless of data store
+// status.
 func (c *Client) ListFHIRDatastores(ctx context.Context, params *ListFHIRDatastoresInput, optFns ...func(*Options)) (*ListFHIRDatastoresOutput, error) {
 	if params == nil {
 		params = &ListFHIRDatastoresInput{}
@@ -30,14 +30,14 @@ func (c *Client) ListFHIRDatastores(ctx context.Context, params *ListFHIRDatasto
 
 type ListFHIRDatastoresInput struct {
 
-	// Lists all filters associated with a FHIR data store request.
+	// List all filters associated with a FHIR data store request.
 	Filter *types.DatastoreFilter
 
-	// The maximum number of data stores returned in a single page of a
-	// ListFHIRDatastoresRequest call.
+	// The maximum number of data stores returned on a page.
 	MaxResults *int32
 
-	// Fetches the next page of data stores when results are paginated.
+	// The token used to retrieve the next page of data stores when results are
+	// paginated.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -45,12 +45,12 @@ type ListFHIRDatastoresInput struct {
 
 type ListFHIRDatastoresOutput struct {
 
-	// All properties associated with the listed data stores.
+	// The properties associated with all listed data stores.
 	//
 	// This member is required.
 	DatastorePropertiesList []types.DatastoreProperties
 
-	// Pagination token that can be used to retrieve the next page of results.
+	// The pagination token used to retrieve the next page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -192,8 +192,7 @@ func (c *Client) addOperationListFHIRDatastoresMiddlewares(stack *middleware.Sta
 // ListFHIRDatastoresPaginatorOptions is the paginator options for
 // ListFHIRDatastores
 type ListFHIRDatastoresPaginatorOptions struct {
-	// The maximum number of data stores returned in a single page of a
-	// ListFHIRDatastoresRequest call.
+	// The maximum number of data stores returned on a page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

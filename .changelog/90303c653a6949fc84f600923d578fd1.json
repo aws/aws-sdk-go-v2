@@ -1,0 +1,8 @@
+{
+    "id": "90303c65-3a69-49fc-84f6-00923d578fd1",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/pinpointsmsvoicev2"
+    ]
+}

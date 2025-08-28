@@ -1,0 +1,8 @@
+{
+    "id": "92f057dc-9985-4982-9293-4327d2691a56",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/swf"
+    ]
+}

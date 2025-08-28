@@ -3569,9 +3569,11 @@ type GlobalCluster struct {
 	// The list of primary and secondary clusters within the global database cluster.
 	GlobalClusterMembers []GlobalClusterMember
 
-	// The Amazon Web Services Region-unique, immutable identifier for the global
-	// database cluster. This identifier is found in Amazon Web Services CloudTrail log
-	// entries whenever the Amazon Web Services KMS key for the DB cluster is accessed.
+	// The Amazon Web Services [partition]-unique, immutable identifier for the global database
+	// cluster. This identifier is found in Amazon Web Services CloudTrail log entries
+	// whenever the Amazon Web Services KMS key for the DB cluster is accessed.
+	//
+	// [partition]: https://docs.aws.amazon.com/glossary/latest/reference/glos-chap.html?id=docs_gateway#partition
 	GlobalClusterResourceId *string
 
 	// Specifies the current state of this global database cluster.
@@ -4195,6 +4197,9 @@ type OrderableDBInstanceOption struct {
 	// Indicates whether you can use Aurora global databases with a specific
 	// combination of other DB engine attributes.
 	SupportsGlobalDatabases *bool
+
+	// Indicates whether a DB instance supports HTTP endpoints.
+	SupportsHttpEndpoint *bool
 
 	// Indicates whether a DB instance supports IAM database authentication.
 	SupportsIAMDatabaseAuthentication *bool

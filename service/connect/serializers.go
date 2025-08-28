@@ -27934,6 +27934,17 @@ func awsRestjson1_serializeDocumentAgentsMinOneMaxHundred(v []string, value smit
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAgentStatuses(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAgentStatusSearchConditionList(v []types.AgentStatusSearchCriteria, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -29798,6 +29809,13 @@ func awsRestjson1_serializeDocumentFileIdList(v []string, value smithyjson.Value
 func awsRestjson1_serializeDocumentFilters(v *types.Filters, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AgentStatuses != nil {
+		ok := object.Key("AgentStatuses")
+		if err := awsRestjson1_serializeDocumentAgentStatuses(v.AgentStatuses, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Channels != nil {
 		ok := object.Key("Channels")

@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list of read set activation jobs.
+// Retrieves a list of read set activation jobs and returns the metadata in a JSON
+// formatted output. To extract metadata from a read set activation job, use the
+// GetReadSetActivationJob API operation.
 func (c *Client) ListReadSetActivationJobs(ctx context.Context, params *ListReadSetActivationJobsInput, optFns ...func(*Options)) (*ListReadSetActivationJobsOutput, error) {
 	if params == nil {
 		params = &ListReadSetActivationJobsInput{}

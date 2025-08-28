@@ -21,7 +21,7 @@ import (
 // Provide a version name that is unique for this workflow. You cannot change the
 // name after HealthOmics creates the version.
 //
-// Don’t include any personally identifiable information (PII) in the version
+// Don't include any personally identifiable information (PII) in the version
 // name. Version names appear in the workflow version ARN.
 //
 // For more information, see [Workflow versioning in Amazon Web Services HealthOmics] in the Amazon Web Services HealthOmics User Guide.
@@ -44,8 +44,8 @@ func (c *Client) CreateWorkflowVersion(ctx context.Context, params *CreateWorkfl
 
 type CreateWorkflowVersionInput struct {
 
-	// To ensure that requests don't run multiple times, specify a unique ID for each
-	// request.
+	// An idempotency token to ensure that duplicate workflows are not created when
+	// Amazon Web Services HealthOmics submits retry requests.
 	//
 	// This member is required.
 	RequestId *string
@@ -62,7 +62,8 @@ type CreateWorkflowVersionInput struct {
 	// This member is required.
 	VersionName *string
 
-	// The ID of the workflow where you are creating the new version.
+	// The ID of the workflow where you are creating the new version. The workflowId
+	// is not the UUID.
 	//
 	// This member is required.
 	WorkflowId *string
@@ -70,28 +71,52 @@ type CreateWorkflowVersionInput struct {
 	// The computational accelerator for this workflow version.
 	Accelerators types.Accelerators
 
+	// (Optional) Use a container registry map to specify mappings between the ECR
+	// private repository and one or more upstream registries. For more information,
+	// see [Container images]in the Amazon Web Services HealthOmics User Guide.
+	//
+	// [Container images]: https://docs.aws.amazon.com/omics/latest/dev/workflows-ecr.html
+	ContainerRegistryMap *types.ContainerRegistryMap
+
+	// (Optional) URI of the S3 location for the registry mapping file.
+	ContainerRegistryMapUri *string
+
 	// The repository information for the workflow version definition. This allows you
 	// to source your workflow version definition directly from a code repository.
 	DefinitionRepository *types.DefinitionRepository
 
-	// The URI specifies the location of the workflow definition for this workflow
-	// version.
+	// The S3 URI of a definition for this workflow version. The S3 bucket must be in
+	// the same region as this workflow version.
 	DefinitionUri *string
 
-	// A zip archive containing the workflow definition for this workflow version.
+	// A ZIP archive containing the main workflow definition file and dependencies
+	// that it imports for this workflow version. You can use a file with a ://fileb
+	// prefix instead of the Base64 string. For more information, see Workflow
+	// definition requirements in the Amazon Web Services HealthOmics User Guide.
 	DefinitionZip []byte
 
 	// A description for this workflow version.
 	Description *string
 
-	// The workflow engine for this workflow version.
+	// The workflow engine for this workflow version. This is only required if you
+	// have workflow definition files from more than one engine in your zip file.
+	// Otherwise, the service can detect the engine automatically from your workflow
+	// definition.
 	Engine types.WorkflowEngine
 
-	// The path of the main definition file for this workflow version.
+	// The path of the main definition file for this workflow version. This parameter
+	// is not required if the ZIP archive contains only one workflow definition file,
+	// or if the main definition file is named “main”. An example path is:
+	// workflow-definition/main-file.wdl .
 	Main *string
 
-	// The parameter template defines the input parameters for runs that use this
-	// workflow version.
+	// A parameter template for this workflow version. If this field is blank, Amazon
+	// Web Services HealthOmics will automatically parse the parameter template values
+	// from your workflow definition file. To override these service generated default
+	// values, provide a parameter template. To view an example of a parameter
+	// template, see [Parameter template files]in the Amazon Web Services HealthOmics User Guide.
+	//
+	// [Parameter template files]: https://docs.aws.amazon.com/omics/latest/dev/parameter-templates.html
 	ParameterTemplate map[string]types.WorkflowParameter
 
 	// The path to the workflow version parameter template JSON file within the
@@ -124,19 +149,23 @@ type CreateWorkflowVersionInput struct {
 	ReadmeUri *string
 
 	// The default static storage capacity (in gibibytes) for runs that use this
-	// workflow or workflow version.
+	// workflow version. The storageCapacity can be overwritten at run time. The
+	// storage capacity is not required for runs with a DYNAMIC storage type.
 	StorageCapacity *int32
 
-	// The default storage type for runs that use this workflow. STATIC storage
-	// allocates a fixed amount of storage. DYNAMIC storage dynamically scales the
-	// storage up or down, based on file system utilization. For more information about
-	// static and dynamic storage, see [Running workflows]in the Amazon Web Services HealthOmics User
-	// Guide.
+	// The default storage type for runs that use this workflow version. The
+	// storageType can be overridden at run time. DYNAMIC storage dynamically scales
+	// the storage up or down, based on file system utilization. STATIC storage
+	// allocates a fixed amount of storage. For more information about dynamic and
+	// static storage types, see [Run storage types]in the Amazon Web Services HealthOmics User Guide.
 	//
-	// [Running workflows]: https://docs.aws.amazon.com/omics/latest/dev/Using-workflows.html
+	// [Run storage types]: https://docs.aws.amazon.com/omics/latest/dev/workflows-run-types.html
 	StorageType types.StorageType
 
-	// Optional tags to associate with this workflow version.
+	// Tags for this workflow version. You can define up to 50 tags for the workflow.
+	// For more information, see [Adding a tag]in the Amazon Web Services HealthOmics User Guide.
+	//
+	// [Adding a tag]: https://docs.aws.amazon.com/omics/latest/dev/add-a-tag.html
 	Tags map[string]string
 
 	// Amazon Web Services Id of the owner of the S3 bucket that contains the workflow

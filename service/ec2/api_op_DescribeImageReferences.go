@@ -14,9 +14,9 @@ import (
 // Describes your Amazon Web Services resources that are referencing the specified
 // images.
 //
-// For more information, see [Identiy your resources referencing selected AMIs] in the Amazon EC2 User Guide.
+// For more information, see [Identify your resources referencing specified AMIs] in the Amazon EC2 User Guide.
 //
-// [Identiy your resources referencing selected AMIs]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-ami-references.html
+// [Identify your resources referencing specified AMIs]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-ami-references.html
 func (c *Client) DescribeImageReferences(ctx context.Context, params *DescribeImageReferencesInput, optFns ...func(*Options)) (*DescribeImageReferencesOutput, error) {
 	if params == nil {
 		params = &DescribeImageReferencesInput{}

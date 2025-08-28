@@ -14,7 +14,8 @@ import (
 	"time"
 )
 
-// Gets information about a read set activation job.
+// Returns detailed information about the status of a read set activation job in
+// JSON format.
 func (c *Client) GetReadSetActivationJob(ctx context.Context, params *GetReadSetActivationJobInput, optFns ...func(*Options)) (*GetReadSetActivationJobOutput, error) {
 	if params == nil {
 		params = &GetReadSetActivationJobInput{}

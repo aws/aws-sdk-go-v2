@@ -1857,23 +1857,3 @@ func TestEndpointCase51(t *testing.T) {
 		t.Errorf("expect %v error in %v", e, a)
 	}
 }
-
-// Valid EndpointId with DualStack enabled and partition does not support DualStack
-func TestEndpointCase52(t *testing.T) {
-	var params = EndpointParameters{
-		EndpointId:   ptr.String("abc123.456def"),
-		UseDualStack: ptr.Bool(true),
-		Region:       ptr.String("us-isob-east-1"),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err == nil {
-		t.Fatalf("expect error, got none")
-	}
-	if e, a := "DualStack is enabled but this partition does not support DualStack", err.Error(); !strings.Contains(a, e) {
-		t.Errorf("expect %v error in %v", e, a)
-	}
-}

@@ -154,3 +154,24 @@ func (PreloadDataType) Values() []PreloadDataType {
 		"SYNTHEA",
 	}
 }
+
+type ValidationLevel string
+
+// Enum values for ValidationLevel
+const (
+	ValidationLevelStrict        ValidationLevel = "strict"
+	ValidationLevelStructureOnly ValidationLevel = "structure-only"
+	ValidationLevelMinimal       ValidationLevel = "minimal"
+)
+
+// Values returns all known values for ValidationLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ValidationLevel) Values() []ValidationLevel {
+	return []ValidationLevel{
+		"strict",
+		"structure-only",
+		"minimal",
+	}
+}

@@ -1,0 +1,8 @@
+{
+    "id": "c3bd42e9-bfe3-4a49-8305-21de65de042c",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/ses"
+    ]
+}

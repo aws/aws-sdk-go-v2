@@ -12,7 +12,8 @@ import (
 	"time"
 )
 
-// Gets information about a sequence store.
+// Retrieves metadata for a sequence store using its ID and returns it in JSON
+// format.
 func (c *Client) GetSequenceStore(ctx context.Context, params *GetSequenceStoreInput, optFns ...func(*Options)) (*GetSequenceStoreOutput, error) {
 	if params == nil {
 		params = &GetSequenceStoreInput{}

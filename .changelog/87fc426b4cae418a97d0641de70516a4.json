@@ -1,0 +1,8 @@
+{
+    "id": "87fc426b-4cae-418a-97d0-641de70516a4",
+    "type": "feature",
+    "description": "AgentStatusDrillDown feature in GetCurrentMetricData API. Adding AGENT_STATUS as filter and grouping in GetCurrentMetricData API",
+    "modules": [
+        "service/connect"
+    ]
+}

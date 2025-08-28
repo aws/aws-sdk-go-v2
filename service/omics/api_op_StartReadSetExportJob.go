@@ -12,7 +12,12 @@ import (
 	"time"
 )
 
-// Exports a read set to Amazon S3.
+// Starts a read set export job. When the export job is finished, the read set is
+// exported to an Amazon S3 bucket which can be retrieved using the
+// GetReadSetExportJob API operation.
+//
+// To monitor the status of the export job, use the ListReadSetExportJobs API
+// operation.
 func (c *Client) StartReadSetExportJob(ctx context.Context, params *StartReadSetExportJobInput, optFns ...func(*Options)) (*StartReadSetExportJobOutput, error) {
 	if params == nil {
 		params = &StartReadSetExportJobInput{}

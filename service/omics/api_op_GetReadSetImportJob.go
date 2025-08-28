@@ -14,7 +14,8 @@ import (
 	"time"
 )
 
-// Gets information about a read set import job.
+// Gets detailed and status information about a read set import job and returns
+// the data in JSON format.
 func (c *Client) GetReadSetImportJob(ctx context.Context, params *GetReadSetImportJobInput, optFns ...func(*Options)) (*GetReadSetImportJobOutput, error) {
 	if params == nil {
 		params = &GetReadSetImportJobInput{}

@@ -1,0 +1,8 @@
+{
+    "id": "baf01376-876c-4f23-87a0-77702314a8e9",
+    "type": "feature",
+    "description": "Added support for Configuration Checks on SAP HANA Applications.",
+    "modules": [
+        "service/ssmsap"
+    ]
+}

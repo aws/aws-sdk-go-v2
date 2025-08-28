@@ -64,6 +64,9 @@ type GetWorkflowOutput struct {
 	// The workflow's ARN.
 	Arn *string
 
+	// The registry map that this workflow is using.
+	ContainerRegistryMap *types.ContainerRegistryMap
+
 	// When the workflow was created.
 	CreationTime *time.Time
 

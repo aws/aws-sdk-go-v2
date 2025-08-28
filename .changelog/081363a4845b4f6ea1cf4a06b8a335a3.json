@@ -1,0 +1,8 @@
+{
+    "id": "081363a4-845b-4f6e-a1cf-4a06b8a335a3",
+    "type": "feature",
+    "description": "This release adds support for copying Amazon EBS snapshot and AMIs to and from Local Zones.",
+    "modules": [
+        "service/ec2"
+    ]
+}

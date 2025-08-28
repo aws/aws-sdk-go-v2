@@ -14,7 +14,8 @@ import (
 	"time"
 )
 
-// Gets information about a reference import job.
+// Monitors the status of a reference import job. This operation can be called
+// after calling the StartReferenceImportJob operation.
 func (c *Client) GetReferenceImportJob(ctx context.Context, params *GetReferenceImportJobInput, optFns ...func(*Options)) (*GetReferenceImportJobOutput, error) {
 	if params == nil {
 		params = &GetReferenceImportJobInput{}

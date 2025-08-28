@@ -1,0 +1,8 @@
+{
+    "id": "4c6b4587-0215-4567-ba65-6df80002c37a",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/mediastoredata"
+    ]
+}

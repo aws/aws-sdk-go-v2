@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Begins a FHIR export job.
+// Start a FHIR export job.
 func (c *Client) StartFHIRExportJob(ctx context.Context, params *StartFHIRExportJobInput, optFns ...func(*Options)) (*StartFHIRExportJobOutput, error) {
 	if params == nil {
 		params = &StartFHIRExportJobInput{}
@@ -29,26 +29,25 @@ func (c *Client) StartFHIRExportJob(ctx context.Context, params *StartFHIRExport
 
 type StartFHIRExportJobInput struct {
 
-	// The Amazon Resource Name used during the initiation of the job.
+	// The Amazon Resource Name (ARN) used during initiation of the export job.
 	//
 	// This member is required.
 	DataAccessRoleArn *string
 
-	// The AWS generated ID for the data store from which files are being exported for
-	// an export job.
+	// The data store identifier from which files are being exported.
 	//
 	// This member is required.
 	DatastoreId *string
 
-	// The output data configuration that was supplied when the export job was created.
+	// The output data configuration supplied when the export job was started.
 	//
 	// This member is required.
 	OutputDataConfig types.OutputDataConfig
 
-	// An optional user provided token used for ensuring idempotency.
+	// An optional user provided token used for ensuring API idempotency.
 	ClientToken *string
 
-	// The user generated name for an export job.
+	// The export job name.
 	JobName *string
 
 	noSmithyDocumentSerde
@@ -56,19 +55,17 @@ type StartFHIRExportJobInput struct {
 
 type StartFHIRExportJobOutput struct {
 
-	// The AWS generated ID for an export job.
+	// The export job identifier.
 	//
 	// This member is required.
 	JobId *string
 
-	// The status of a FHIR export job. Possible statuses are SUBMITTED, IN_PROGRESS,
-	// COMPLETED, or FAILED.
+	// The export job status.
 	//
 	// This member is required.
 	JobStatus types.JobStatus
 
-	// The AWS generated ID for the data store from which files are being exported for
-	// an export job.
+	// The data store identifier from which files are being exported.
 	DatastoreId *string
 
 	// Metadata pertaining to the operation's result.

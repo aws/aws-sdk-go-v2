@@ -1,0 +1,8 @@
+{
+    "id": "33775d63-8f48-4d65-bffd-2b33f017e0f0",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/connectcampaigns"
+    ]
+}

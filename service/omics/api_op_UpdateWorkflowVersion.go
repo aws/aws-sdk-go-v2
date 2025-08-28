@@ -37,7 +37,7 @@ type UpdateWorkflowVersionInput struct {
 	// This member is required.
 	VersionName *string
 
-	// The workflow's ID.
+	// The workflow's ID. The workflowId is not the UUID.
 	//
 	// This member is required.
 	WorkflowId *string
@@ -52,16 +52,18 @@ type UpdateWorkflowVersionInput struct {
 	ReadmeMarkdown *string
 
 	// The default static storage capacity (in gibibytes) for runs that use this
-	// workflow or workflow version.
+	// workflow version. The storageCapacity can be overwritten at run time. The
+	// storage capacity is not required for runs with a DYNAMIC storage type.
 	StorageCapacity *int32
 
-	// The default storage type for runs that use this workflow. STATIC storage
-	// allocates a fixed amount of storage. DYNAMIC storage dynamically scales the
-	// storage up or down, based on file system utilization. For more information about
-	// static and dynamic storage, see [Running workflows]in the Amazon Web Services HealthOmics User
-	// Guide.
+	// The default storage type for runs that use this workflow version. The
+	// storageType can be overridden at run time. DYNAMIC storage dynamically scales
+	// the storage up or down, based on file system utilization. STATIC storage
+	// allocates a fixed amount of storage. For more information about dynamic and
+	// static storage types, see [Run storage types]in the in the Amazon Web Services HealthOmics User
+	// Guide .
 	//
-	// [Running workflows]: https://docs.aws.amazon.com/omics/latest/dev/Using-workflows.html
+	// [Run storage types]: https://docs.aws.amazon.com/omics/latest/dev/workflows-run-types.html
 	StorageType types.StorageType
 
 	noSmithyDocumentSerde

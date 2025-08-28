@@ -1,0 +1,8 @@
+{
+    "id": "4231e76d-413d-4aa9-bd65-2c1472480c43",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/quicksight"
+    ]
+}

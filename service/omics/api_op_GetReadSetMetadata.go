@@ -12,7 +12,9 @@ import (
 	"time"
 )
 
-// Gets details about a read set.
+// Retrieves the metadata for a read set from a sequence store in JSON format.
+// This operation does not return tags. To retrieve the list of tags for a read
+// set, use the ListTagsForResource API operation.
 func (c *Client) GetReadSetMetadata(ctx context.Context, params *GetReadSetMetadataInput, optFns ...func(*Options)) (*GetReadSetMetadataOutput, error) {
 	if params == nil {
 		params = &GetReadSetMetadataInput{}

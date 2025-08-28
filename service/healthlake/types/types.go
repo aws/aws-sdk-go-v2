@@ -7,158 +7,163 @@ import (
 	"time"
 )
 
-// The filters applied to data store query.
+// The filters applied to a data store query.
 type DatastoreFilter struct {
 
-	// A filter that allows the user to set cutoff dates for records. All data stores
-	// created after the specified date will be included in the results.
+	// Filter to set cutoff dates for records. All data stores created after the
+	// specified date are included in the results.
 	CreatedAfter *time.Time
 
-	// A filter that allows the user to set cutoff dates for records. All data stores
-	// created before the specified date will be included in the results.
+	// Filter to set cutoff dates for records. All data stores created before the
+	// specified date are included in the results.
 	CreatedBefore *time.Time
 
-	// Allows the user to filter data store results by name.
+	// Filter data store results by name.
 	DatastoreName *string
 
-	// Allows the user to filter data store results by status.
+	// Filter data store results by status.
 	DatastoreStatus DatastoreStatus
 
 	noSmithyDocumentSerde
 }
 
-// Displays the properties of the data store, including the ID, ARN, name, and the
-// status of the data store.
+// The data store properties.
 type DatastoreProperties struct {
 
-	// The Amazon Resource Name used in the creation of the data store.
+	// The Amazon Resource Name (ARN) used in the creation of the data store.
 	//
 	// This member is required.
 	DatastoreArn *string
 
-	// The AWS endpoint for the data store. Each data store will have it's own
-	// endpoint with data store ID in the endpoint URL.
+	// The AWS endpoint for the data store.
 	//
 	// This member is required.
 	DatastoreEndpoint *string
 
-	// The AWS-generated ID number for the data store.
+	// The data store identifier.
 	//
 	// This member is required.
 	DatastoreId *string
 
-	// The status of the data store.
+	// The data store status.
 	//
 	// This member is required.
 	DatastoreStatus DatastoreStatus
 
-	// The FHIR version. Only R4 version data is supported.
+	// The FHIR release version supported by the data store. Current support is for
+	// version R4 .
 	//
 	// This member is required.
 	DatastoreTypeVersion FHIRVersion
 
-	// The time that a data store was created.
+	// The time the data store was created.
 	CreatedAt *time.Time
 
-	// The user-generated name for the data store.
+	// The data store name.
 	DatastoreName *string
 
 	// The error cause for the current data store operation.
 	ErrorCause *ErrorCause
 
-	// The identity provider that you selected when you created the data store.
+	// The identity provider selected during data store creation.
 	IdentityProviderConfiguration *IdentityProviderConfiguration
 
-	// The preloaded data configuration for the data store. Only data preloaded from
-	// Synthea is supported.
+	// The preloaded Synthea data configuration for the data store.
 	PreloadDataConfig *PreloadDataConfig
 
 	//  The server-side encryption key configuration for a customer provided
-	// encryption key (CMK).
+	// encryption key.
 	SseConfiguration *SseConfiguration
 
 	noSmithyDocumentSerde
 }
 
-// The error info of the create/delete data store operation.
+// The error information for CreateFHIRDatastore and DeleteFHIRDatastore actions.
 type ErrorCause struct {
 
-	// The error category of the create/delete data store operation. Possible statuses
-	// are RETRYABLE_ERROR or NON_RETRYABLE_ERROR.
+	// The error category for ErrorCause .
 	ErrorCategory ErrorCategory
 
-	// The text of the error message.
+	// The error message text for ErrorCause .
 	ErrorMessage *string
 
 	noSmithyDocumentSerde
 }
 
-// The properties of a FHIR export job, including the ID, ARN, name, and the
-// status of the job.
+// The properties of a FHIR export job.
 type ExportJobProperties struct {
 
-	// The AWS generated ID for the data store from which files are being exported for
-	// an export job.
+	// The data store identifier from which files are being exported.
 	//
 	// This member is required.
 	DatastoreId *string
 
-	// The AWS generated ID for an export job.
+	// The export job identifier.
 	//
 	// This member is required.
 	JobId *string
 
-	// The status of a FHIR export job. Possible statuses are SUBMITTED, IN_PROGRESS,
-	// COMPLETED, or FAILED.
+	// The export job status.
 	//
 	// This member is required.
 	JobStatus JobStatus
 
-	// The output data configuration that was supplied when the export job was created.
+	// The output data configuration supplied when the export job was created.
 	//
 	// This member is required.
 	OutputDataConfig OutputDataConfig
 
-	// The time an export job was initiated.
+	// The time the export job was initiated.
 	//
 	// This member is required.
 	SubmitTime *time.Time
 
-	// The Amazon Resource Name used during the initiation of the job.
+	// The Amazon Resource Name (ARN) used during the initiation of the export job.
 	DataAccessRoleArn *string
 
-	// The time an export job completed.
+	// The time the export job completed.
 	EndTime *time.Time
 
-	// The user generated name for an export job.
+	// The export job name.
 	JobName *string
 
-	// An explanation of any errors that may have occurred during the export job.
+	// An explanation of any errors that might have occurred during the export job.
 	Message *string
 
 	noSmithyDocumentSerde
 }
 
-// The identity provider configuration that you gave when the data store was
-// created.
+// The identity provider configuration selected when the data store was created.
 type IdentityProviderConfiguration struct {
 
-	// The authorization strategy that you selected when you created the data store.
+	// The authorization strategy selected when the HealthLake data store is created.
+	//
+	// HealthLake provides support for both SMART on FHIR V1 and V2 as described below.
+	//
+	//   - SMART_ON_FHIR_V1 – Support for only SMART on FHIR V1, which includes read
+	//   (read/search) and write (create/update/delete) permissions.
+	//
+	//   - SMART_ON_FHIR – Support for both SMART on FHIR V1 and V2, which includes
+	//   create , read , update , delete , and search permissions.
+	//
+	//   - AWS_AUTH – The default HealthLake authorization strategy; not affiliated
+	//   with SMART on FHIR.
 	//
 	// This member is required.
 	AuthorizationStrategy AuthorizationStrategy
 
-	// If you enabled fine-grained authorization when you created the data store.
+	// The parameter to enable SMART on FHIR fine-grained authorization for the data
+	// store.
 	FineGrainedAuthorizationEnabled bool
 
-	// The Amazon Resource Name (ARN) of the Lambda function that you want to use to
-	// decode the access token created by the authorization server.
+	// The Amazon Resource Name (ARN) of the Lambda function to use to decode the
+	// access token created by the authorization server.
 	IdpLambdaArn *string
 
-	// The JSON metadata elements that you want to use in your identity provider
-	// configuration. Required elements are listed based on the launch specification of
-	// the SMART application. For more information on all possible elements, see [Metadata]in
-	// SMART's App Launch specification.
+	// The JSON metadata elements to use in your identity provider configuration.
+	// Required elements are listed based on the launch specification of the SMART
+	// application. For more information on all possible elements, see [Metadata]in SMART's App
+	// Launch specification.
 	//
 	// authorization_endpoint : The URL to the OAuth2 authorization endpoint.
 	//
@@ -181,60 +186,62 @@ type IdentityProviderConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Displays the properties of the import job, including the ID, Arn, Name, the
-// status of the job, and the progress report of the job.
+// The import job properties.
 type ImportJobProperties struct {
 
-	// The datastore id used when the Import job was created.
+	// The data store identifier.
 	//
 	// This member is required.
 	DatastoreId *string
 
-	// The input data configuration that was supplied when the Import job was created.
+	// The input data configuration supplied when the import job was created.
 	//
 	// This member is required.
 	InputDataConfig InputDataConfig
 
-	// The AWS-generated id number for the Import job.
+	// The import job identifier.
 	//
 	// This member is required.
 	JobId *string
 
-	// The job status for an Import job. Possible statuses are SUBMITTED, IN_PROGRESS,
-	// COMPLETED_WITH_ERRORS, COMPLETED, FAILED.
+	// The import job status.
 	//
 	// This member is required.
 	JobStatus JobStatus
 
-	// The time that the Import job was submitted for processing.
+	// The time the import job was submitted for processing.
 	//
 	// This member is required.
 	SubmitTime *time.Time
 
-	// The Amazon Resource Name (ARN) that gives AWS HealthLake access to your input
+	// The Amazon Resource Name (ARN) that grants AWS HealthLake access to the input
 	// data.
 	DataAccessRoleArn *string
 
-	// The time that the Import job was completed.
+	// The time the import job was completed.
 	EndTime *time.Time
 
-	// The user-generated name for an Import job.
+	// The import job name.
 	JobName *string
 
-	// The output data configuration that was supplied when the export job was created.
+	// The output data configuration supplied when the export job was created.
 	JobOutputDataConfig OutputDataConfig
 
 	// Displays the progress of the import job, including total resources scanned,
-	// total resources ingested, and total size of data ingested.
+	// total resources imported, and total size of data imported.
 	JobProgressReport *JobProgressReport
 
-	// An explanation of any errors that may have occurred during the FHIR import job.
+	// An explanation of any errors that might have occurred during the FHIR import
+	// job.
 	Message *string
+
+	// The validation level of the import job.
+	ValidationLevel ValidationLevel
 
 	noSmithyDocumentSerde
 }
 
-//	The input properties for an import job.
+//	The import job input properties.
 //
 // The following types satisfy this interface:
 //
@@ -243,7 +250,7 @@ type InputDataConfig interface {
 	isInputDataConfig()
 }
 
-// The S3Uri is the user specified S3 location of the FHIR data to be imported
+// The S3Uri is the user-specified S3 location of the FHIR data to be imported
 // into AWS HealthLake.
 type InputDataConfigMemberS3Uri struct {
 	Value string
@@ -253,56 +260,54 @@ type InputDataConfigMemberS3Uri struct {
 
 func (*InputDataConfigMemberS3Uri) isInputDataConfig() {}
 
-// The progress report of an import job.
+// The progress report for the import job.
 type JobProgressReport struct {
 
-	// The throughput (in MB/sec) of the import job.
+	// The transaction rate the import job is processed at.
 	Throughput *float64
 
-	// The number of files that failed to be read from the input S3 bucket due to
+	// The number of files that failed to be read from the S3 input bucket due to
 	// customer error.
 	TotalNumberOfFilesReadWithCustomerError *int64
 
-	// The number of files imported so far.
+	// The number of files imported.
 	TotalNumberOfImportedFiles *int64
 
-	// The number of resources imported so far.
+	// The number of resources imported.
 	TotalNumberOfResourcesImported *int64
 
-	// The number of resources scanned from the input S3 bucket.
+	// The number of resources scanned from the S3 input bucket.
 	TotalNumberOfResourcesScanned *int64
 
 	// The number of resources that failed due to customer error.
 	TotalNumberOfResourcesWithCustomerError *int64
 
-	// The number of files scanned from input S3 bucket.
+	// The number of files scanned from the S3 input bucket.
 	TotalNumberOfScannedFiles *int64
 
-	// The size (in MB) of the files scanned from the input S3 bucket.
+	// The size (in MB) of files scanned from the S3 input bucket.
 	TotalSizeOfScannedFilesInMB *float64
 
 	noSmithyDocumentSerde
 }
 
-//	The customer-managed-key(CMK) used when creating a data store. If a customer
-//
-// owned key is not specified, an AWS owned key will be used for encryption.
+// The customer-managed-key (CMK) used when creating a data store. If a
+// customer-owned key is not specified, an AWS-owned key is used for encryption.
 type KmsEncryptionConfig struct {
 
-	//  The type of customer-managed-key(CMK) used for encryption. The two types of
-	// supported CMKs are customer owned CMKs and AWS owned CMKs.
+	// The type of customer-managed-key (CMK) used for encryption.
 	//
 	// This member is required.
 	CmkType CmkType
 
-	//  The KMS encryption key id/alias used to encrypt the data store contents at
-	// rest.
+	// The Key Management Service (KMS) encryption key id/alias used to encrypt the
+	// data store contents at rest.
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
 }
 
-// The output data configuration that was supplied when the export job was created.
+// The output data configuration supplied when the export job was created.
 //
 // The following types satisfy this interface:
 //
@@ -311,9 +316,7 @@ type OutputDataConfig interface {
 	isOutputDataConfig()
 }
 
-//	The output data configuration that was supplied when the export job was
-//
-// created.
+// The output data configuration supplied when the export job was created.
 type OutputDataConfigMemberS3Configuration struct {
 	Value S3Configuration
 
@@ -322,9 +325,7 @@ type OutputDataConfigMemberS3Configuration struct {
 
 func (*OutputDataConfigMemberS3Configuration) isOutputDataConfig() {}
 
-//	The input properties for the preloaded data store. Only data preloaded from
-//
-// Synthea is supported.
+// The input properties for the preloaded (Synthea) data store.
 type PreloadDataConfig struct {
 
 	// The type of preloaded data. Only Synthea preloaded data is supported.
@@ -335,17 +336,16 @@ type PreloadDataConfig struct {
 	noSmithyDocumentSerde
 }
 
-//	The configuration of the S3 bucket for either an import or export job. This
-//
-// includes assigning permissions for access.
+// The configuration of the S3 bucket for either an import or export job. This
+// includes assigning access permissions.
 type S3Configuration struct {
 
-	//  The KMS key ID used to access the S3 bucket.
+	// The Key Management Service (KMS) key ID used to access the S3 bucket.
 	//
 	// This member is required.
 	KmsKeyId *string
 
-	//  The S3Uri is the user specified S3 location of the FHIR data to be imported
+	// The S3Uri is the user-specified S3 location of the FHIR data to be imported
 	// into AWS HealthLake.
 	//
 	// This member is required.
@@ -354,12 +354,12 @@ type S3Configuration struct {
 	noSmithyDocumentSerde
 }
 
-//	The server-side encryption key configuration for a customer provided
-//
-// encryption key.
+// The server-side encryption key configuration for a customer-provided encryption
+// key.
 type SseConfiguration struct {
 
-	//  The KMS encryption configuration used to provide details for data encryption.
+	// The Key Management Service (KMS) encryption configuration used to provide
+	// details for data encryption.
 	//
 	// This member is required.
 	KmsEncryptionConfig *KmsEncryptionConfig
@@ -367,17 +367,16 @@ type SseConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-//	A tag is a label consisting of a user-defined key and value. The form for tags
-//
-// is {"Key", "Value"}
+// A label consisting of a user-defined key and value. The form for tags is
+// {"Key", "Value"}
 type Tag struct {
 
-	//  The key portion of a tag. Tag keys are case sensitive.
+	// The key portion of a tag. Tag keys are case sensitive.
 	//
 	// This member is required.
 	Key *string
 
-	//  The value portion of a tag. Tag values are case sensitive.
+	//  The value portion of a tag. Tag values are case-sensitive.
 	//
 	// This member is required.
 	Value *string

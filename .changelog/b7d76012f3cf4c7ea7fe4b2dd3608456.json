@@ -1,0 +1,8 @@
+{
+    "id": "b7d76012-f3cf-4c7e-a7fe-4b2dd3608456",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/rekognition"
+    ]
+}

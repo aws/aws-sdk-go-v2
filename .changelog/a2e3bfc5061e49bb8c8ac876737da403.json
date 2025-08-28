@@ -1,0 +1,8 @@
+{
+    "id": "a2e3bfc5-061e-49bb-8c8a-c876737da403",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/marketplacedeployment"
+    ]
+}

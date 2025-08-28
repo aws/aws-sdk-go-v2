@@ -296,6 +296,24 @@ type CompleteReadSetUploadPartListItem struct {
 	noSmithyDocumentSerde
 }
 
+// Use a container registry map to specify mappings between the ECR private
+// repository and one or more upstream registries. For more information, see [Container images]in
+// the Amazon Web Services HealthOmics User Guide.
+//
+// [Container images]: https://docs.aws.amazon.com/omics/latest/dev/workflows-ecr.html
+type ContainerRegistryMap struct {
+
+	// Image mappings specify path mappings between the ECR private repository and
+	// their corresponding external repositories.
+	ImageMappings []ImageMapping
+
+	// Mapping that provides the ECR repository path where upstream container images
+	// are pulled and synchronized.
+	RegistryMappings []RegistryMapping
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a source code repository that hosts the workflow
 // definition files.
 type DefinitionRepository struct {
@@ -504,6 +522,40 @@ type FormatOptionsMemberVcfOptions struct {
 }
 
 func (*FormatOptionsMemberVcfOptions) isFormatOptions() {}
+
+// Information about the container image used for a task.
+type ImageDetails struct {
+
+	// The URI of the container image.
+	Image *string
+
+	// The container image digest. If the image URI was transformed, this will be the
+	// digest of the container image referenced by the transformed URI.
+	ImageDigest *string
+
+	// URI of the source registry. If the URI is from a third-party registry, Amazon
+	// Web Services HealthOmics transforms the URI to the corresponding ECR path, using
+	// the pull-through cache mapping rules.
+	SourceImage *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies image mappings that workflow tasks can use. For example, you can
+// replace all the task references of a public image to use an equivalent image in
+// your private ECR repository. You can use image mappings with upstream registries
+// that don't support pull through cache. You need to manually synchronize the
+// upstream registry with your private repository.
+type ImageMapping struct {
+
+	// Specifies the URI of the corresponding image in the private ECR registry.
+	DestinationImage *string
+
+	// Specifies the URI of the source image in the upstream registry.
+	SourceImage *string
+
+	noSmithyDocumentSerde
+}
 
 // A filter for import read set jobs.
 type ImportReadSetFilter struct {
@@ -1150,6 +1202,26 @@ type ReferenceStoreFilter struct {
 
 	// The name to filter on.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// If you are using the ECR pull through cache feature, the registry mapping maps
+// between the ECR repository and the upstream registry where container images are
+// pulled and synchronized.
+type RegistryMapping struct {
+
+	// Account ID of the account that owns the upstream container image.
+	EcrAccountId *string
+
+	// The repository prefix to use in the ECR private repository.
+	EcrRepositoryPrefix *string
+
+	// The URI of the upstream registry.
+	UpstreamRegistryUrl *string
+
+	// The repository prefix of the corresponding repository in the upstream registry.
+	UpstreamRepositoryPrefix *string
 
 	noSmithyDocumentSerde
 }

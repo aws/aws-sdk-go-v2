@@ -140,13 +140,13 @@ type CreateDBInstanceReadReplicaInput struct {
 	// The name of the DB parameter group to associate with this read replica DB
 	// instance.
 	//
-	// For the Db2 DB engine, if your source DB instance uses the Bring Your Own
-	// License model, then a custom parameter group must be associated with the
+	// For the Db2 DB engine, if your source DB instance uses the bring your own
+	// license (BYOL) model, then a custom parameter group must be associated with the
 	// replica. For a same Amazon Web Services Region replica, if you don't specify a
 	// custom parameter group, Amazon RDS associates the custom parameter group
 	// associated with the source DB instance. For a cross-Region replica, you must
 	// specify a custom parameter group. This custom parameter group must include your
-	// IBM Site ID and IBM Customer ID. For more information, see [IBM IDs for Bring Your Own License for Db2].
+	// IBM Site ID and IBM Customer ID. For more information, see [IBM IDs for bring your own license (BYOL) for Db2].
 	//
 	// For Single-AZ or Multi-AZ DB instance read replica instances, if you don't
 	// specify a value for DBParameterGroupName , then Amazon RDS uses the
@@ -171,7 +171,7 @@ type CreateDBInstanceReadReplicaInput struct {
 	//
 	//   - Can't end with a hyphen or contain two consecutive hyphens.
 	//
-	// [IBM IDs for Bring Your Own License for Db2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html#db2-prereqs-ibm-info
+	// [IBM IDs for bring your own license (BYOL) for Db2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html#db2-prereqs-ibm-info
 	DBParameterGroupName *string
 
 	// A DB subnet group for the DB instance. The new DB instance is created in the

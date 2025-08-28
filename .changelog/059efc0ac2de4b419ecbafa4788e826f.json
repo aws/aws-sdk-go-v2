@@ -1,0 +1,8 @@
+{
+    "id": "059efc0a-c2de-4b41-9ecb-afa4788e826f",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/pipes"
+    ]
+}

@@ -774,7 +774,8 @@ type DatabaseAttributes string
 
 // Enum values for DatabaseAttributes
 const (
-	DatabaseAttributesName DatabaseAttributes = "NAME"
+	DatabaseAttributesName           DatabaseAttributes = "NAME"
+	DatabaseAttributesTargetDatabase DatabaseAttributes = "TARGET_DATABASE"
 )
 
 // Values returns all known values for DatabaseAttributes. Note that this can be
@@ -784,6 +785,7 @@ const (
 func (DatabaseAttributes) Values() []DatabaseAttributes {
 	return []DatabaseAttributes{
 		"NAME",
+		"TARGET_DATABASE",
 	}
 }
 

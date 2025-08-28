@@ -33,8 +33,8 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The data store is in a transition state and the user requested action can not
-// be performed.
+// The data store is in a transition state and the user requested action cannot be
+// performed.
 type ConflictException struct {
 	Message *string
 
@@ -60,7 +60,7 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Unknown error occurs in the service.
+// An unknown internal error occurred in the service.
 type InternalServerException struct {
 	Message *string
 

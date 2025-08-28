@@ -263,6 +263,64 @@ type ComponentSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Represents a configuration check definition supported by AWS Systems Manager
+// for SAP.
+type ConfigurationCheckDefinition struct {
+
+	// The list of SSMSAP application types that this configuration check can be
+	// evaluated against.
+	ApplicableApplicationTypes []ApplicationType
+
+	// A description of what the configuration check validates.
+	Description *string
+
+	// The unique identifier of the configuration check.
+	Id ConfigurationCheckType
+
+	// The name of the configuration check.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a configuration check operation that has been executed against an
+// application.
+type ConfigurationCheckOperation struct {
+
+	// The ID of the application against which the configuration check was performed.
+	ApplicationId *string
+
+	// A description of the configuration check that was performed.
+	ConfigurationCheckDescription *string
+
+	// The unique identifier of the configuration check that was performed.
+	ConfigurationCheckId ConfigurationCheckType
+
+	// The name of the configuration check that was performed.
+	ConfigurationCheckName *string
+
+	// The time at which the configuration check operation completed.
+	EndTime *time.Time
+
+	// The unique identifier of the configuration check operation.
+	Id *string
+
+	// A summary of all the rule results, showing counts for each status type.
+	RuleStatusCounts *RuleStatusCounts
+
+	// The time at which the configuration check operation started.
+	StartTime *time.Time
+
+	// The current status of the configuration check operation.
+	Status OperationStatus
+
+	// A message providing additional details about the status of the configuration
+	// check operation.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
 // The SAP HANA database of the application registered with AWS Systems Manager
 // for SAP.
 type Database struct {
@@ -522,6 +580,66 @@ type Resource struct {
 	// Example of ResourceType : " AWS::SystemsManagerSAP::Component " or "
 	// AWS::EC2::Instance ".
 	ResourceType *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents the result of a single rule within a configuration check.
+type RuleResult struct {
+
+	// A description of what the rule validates.
+	Description *string
+
+	// The unique identifier of the rule result.
+	Id *string
+
+	// A message providing details about the rule result.
+	Message *string
+
+	// Additional metadata associated with the rule result.
+	Metadata map[string]string
+
+	// The status of the rule result.
+	Status RuleResultStatus
+
+	noSmithyDocumentSerde
+}
+
+// A summary of rule results, providing counts for each status type.
+type RuleStatusCounts struct {
+
+	// The number of rules that failed.
+	Failed *int32
+
+	// The number of rules that returned informational results.
+	Info *int32
+
+	// The number of rules that passed.
+	Passed *int32
+
+	// The number of rules with unknown status.
+	Unknown *int32
+
+	// The number of rules that returned warnings.
+	Warning *int32
+
+	noSmithyDocumentSerde
+}
+
+// Represents the result of a sub-check within a configuration check operation.
+type SubCheckResult struct {
+
+	// A description of what the sub-check validates.
+	Description *string
+
+	// The unique identifier of the sub-check result.
+	Id *string
+
+	// The name of the sub-check.
+	Name *string
+
+	// A list of references or documentation links related to the sub-check.
+	References []string
 
 	noSmithyDocumentSerde
 }

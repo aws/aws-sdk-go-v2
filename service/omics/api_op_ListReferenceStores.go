@@ -11,7 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list of reference stores.
+// Retrieves a list of reference stores linked to your account and returns their
+// metadata in JSON format.
+//
+// For more information, see [Creating a reference store] in the Amazon Web Services HealthOmics User Guide.
+//
+// [Creating a reference store]: https://docs.aws.amazon.com/omics/latest/dev/create-reference-store.html
 func (c *Client) ListReferenceStores(ctx context.Context, params *ListReferenceStoresInput, optFns ...func(*Options)) (*ListReferenceStoresOutput, error) {
 	if params == nil {
 		params = &ListReferenceStoresInput{}

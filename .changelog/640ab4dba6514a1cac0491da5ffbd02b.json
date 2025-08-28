@@ -1,0 +1,8 @@
+{
+    "id": "640ab4db-a651-4a1c-ac04-91da5ffbd02b",
+    "type": "feature",
+    "description": "Adds Amazon ECR pull through cache support to AWS HealthOmics, so you can more easily use container images from external sources.",
+    "modules": [
+        "service/omics"
+    ]
+}

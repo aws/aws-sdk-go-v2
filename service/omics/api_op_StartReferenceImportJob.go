@@ -12,7 +12,10 @@ import (
 	"time"
 )
 
-// Starts a reference import job.
+// Imports a reference genome from Amazon S3 into a specified reference store. You
+// can have multiple reference genomes in a reference store. You can only import
+// reference genomes one at a time into each reference store. Monitor the status of
+// your reference import job by using the GetReferenceImportJob API operation.
 func (c *Client) StartReferenceImportJob(ctx context.Context, params *StartReferenceImportJobInput, optFns ...func(*Options)) (*StartReferenceImportJobOutput, error) {
 	if params == nil {
 		params = &StartReferenceImportJobInput{}

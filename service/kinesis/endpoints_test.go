@@ -1966,30 +1966,8 @@ func TestEndpointCase57(t *testing.T) {
 	}
 }
 
-// Dual Stack not supported region.
-func TestEndpointCase58(t *testing.T) {
-	var params = EndpointParameters{
-		Region:        ptr.String("us-iso-west-1"),
-		UseFIPS:       ptr.Bool(true),
-		UseDualStack:  ptr.Bool(true),
-		StreamARN:     ptr.String("arn:aws-iso:kinesis:us-iso-west-1:123456789012:stream/testStream"),
-		OperationType: ptr.String("control"),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err == nil {
-		t.Fatalf("expect error, got none")
-	}
-	if e, a := "FIPS and DualStack are enabled, but this partition does not support one or both", err.Error(); !strings.Contains(a, e) {
-		t.Errorf("expect %v error in %v", e, a)
-	}
-}
-
 // OperationType not set
-func TestEndpointCase59(t *testing.T) {
+func TestEndpointCase58(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -2010,7 +1988,7 @@ func TestEndpointCase59(t *testing.T) {
 }
 
 // Custom Endpoint is specified
-func TestEndpointCase60(t *testing.T) {
+func TestEndpointCase59(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -2050,7 +2028,7 @@ func TestEndpointCase60(t *testing.T) {
 }
 
 // Account endpoint targeting control operation type
-func TestEndpointCase61(t *testing.T) {
+func TestEndpointCase60(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -2089,7 +2067,7 @@ func TestEndpointCase61(t *testing.T) {
 }
 
 // Account endpoint targeting data operation type
-func TestEndpointCase62(t *testing.T) {
+func TestEndpointCase61(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -2128,7 +2106,7 @@ func TestEndpointCase62(t *testing.T) {
 }
 
 // Account endpoint with fips targeting data operation type
-func TestEndpointCase63(t *testing.T) {
+func TestEndpointCase62(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(true),
@@ -2167,7 +2145,7 @@ func TestEndpointCase63(t *testing.T) {
 }
 
 // Account endpoint with fips targeting control operation type
-func TestEndpointCase64(t *testing.T) {
+func TestEndpointCase63(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(true),
@@ -2206,7 +2184,7 @@ func TestEndpointCase64(t *testing.T) {
 }
 
 // Account endpoint with Dual Stack and FIPS enabled
-func TestEndpointCase65(t *testing.T) {
+func TestEndpointCase64(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(true),
@@ -2245,7 +2223,7 @@ func TestEndpointCase65(t *testing.T) {
 }
 
 // Account endpoint with Dual Stack enabled
-func TestEndpointCase66(t *testing.T) {
+func TestEndpointCase65(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-west-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -2284,7 +2262,7 @@ func TestEndpointCase66(t *testing.T) {
 }
 
 // Account endpoint with FIPS and DualStack disabled
-func TestEndpointCase67(t *testing.T) {
+func TestEndpointCase66(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-west-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -2323,7 +2301,7 @@ func TestEndpointCase67(t *testing.T) {
 }
 
 // RegionMismatch: client region should be used for endpoint region
-func TestEndpointCase68(t *testing.T) {
+func TestEndpointCase67(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -2362,7 +2340,7 @@ func TestEndpointCase68(t *testing.T) {
 }
 
 // Account endpoint with FIPS enabled
-func TestEndpointCase69(t *testing.T) {
+func TestEndpointCase68(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("cn-northwest-1"),
 		UseFIPS:       ptr.Bool(true),
@@ -2401,7 +2379,7 @@ func TestEndpointCase69(t *testing.T) {
 }
 
 // Account endpoint with FIPS and DualStack enabled for cn regions.
-func TestEndpointCase70(t *testing.T) {
+func TestEndpointCase69(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("cn-northwest-1"),
 		UseFIPS:       ptr.Bool(true),
@@ -2440,7 +2418,7 @@ func TestEndpointCase70(t *testing.T) {
 }
 
 // Account endpoint targeting control operation type in ADC regions
-func TestEndpointCase71(t *testing.T) {
+func TestEndpointCase70(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-iso-east-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -2479,7 +2457,7 @@ func TestEndpointCase71(t *testing.T) {
 }
 
 // Account endpoint targeting control operation type in ADC regions
-func TestEndpointCase72(t *testing.T) {
+func TestEndpointCase71(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-iso-west-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -2518,7 +2496,7 @@ func TestEndpointCase72(t *testing.T) {
 }
 
 // Account endpoint targeting data operation type in ADC regions
-func TestEndpointCase73(t *testing.T) {
+func TestEndpointCase72(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-isob-east-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -2557,7 +2535,7 @@ func TestEndpointCase73(t *testing.T) {
 }
 
 // Account endpoint with fips targeting control operation type in ADC regions
-func TestEndpointCase74(t *testing.T) {
+func TestEndpointCase73(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-iso-east-1"),
 		UseFIPS:       ptr.Bool(true),
@@ -2596,7 +2574,7 @@ func TestEndpointCase74(t *testing.T) {
 }
 
 // Account endpoint with fips targeting data operation type in ADC regions
-func TestEndpointCase75(t *testing.T) {
+func TestEndpointCase74(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-isob-east-1"),
 		UseFIPS:       ptr.Bool(true),
@@ -2635,7 +2613,7 @@ func TestEndpointCase75(t *testing.T) {
 }
 
 // Invalid ConsumerARN: Failed to parse ARN.
-func TestEndpointCase76(t *testing.T) {
+func TestEndpointCase75(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -2656,7 +2634,7 @@ func TestEndpointCase76(t *testing.T) {
 }
 
 // Invalid ConsumerARN: partition missing from ARN.
-func TestEndpointCase77(t *testing.T) {
+func TestEndpointCase76(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -2677,7 +2655,7 @@ func TestEndpointCase77(t *testing.T) {
 }
 
 // Invalid ARN: partitions mismatch.
-func TestEndpointCase78(t *testing.T) {
+func TestEndpointCase77(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-gov-west-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -2698,7 +2676,7 @@ func TestEndpointCase78(t *testing.T) {
 }
 
 // Invalid ARN: Not Kinesis
-func TestEndpointCase79(t *testing.T) {
+func TestEndpointCase78(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -2719,7 +2697,7 @@ func TestEndpointCase79(t *testing.T) {
 }
 
 // Invalid ARN: Region is missing in ARN
-func TestEndpointCase80(t *testing.T) {
+func TestEndpointCase79(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -2740,7 +2718,7 @@ func TestEndpointCase80(t *testing.T) {
 }
 
 // Invalid ARN: Region is empty string in ARN
-func TestEndpointCase81(t *testing.T) {
+func TestEndpointCase80(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -2761,7 +2739,7 @@ func TestEndpointCase81(t *testing.T) {
 }
 
 // Invalid ARN: Invalid account id
-func TestEndpointCase82(t *testing.T) {
+func TestEndpointCase81(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -2783,7 +2761,7 @@ func TestEndpointCase82(t *testing.T) {
 }
 
 // Invalid ARN: Invalid account id
-func TestEndpointCase83(t *testing.T) {
+func TestEndpointCase82(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -2805,7 +2783,7 @@ func TestEndpointCase83(t *testing.T) {
 }
 
 // Invalid ARN: Kinesis ARNs only support stream arn/consumer arn types
-func TestEndpointCase84(t *testing.T) {
+func TestEndpointCase83(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -2825,30 +2803,8 @@ func TestEndpointCase84(t *testing.T) {
 	}
 }
 
-// Dual Stack not supported region.
-func TestEndpointCase85(t *testing.T) {
-	var params = EndpointParameters{
-		Region:        ptr.String("us-iso-west-1"),
-		UseFIPS:       ptr.Bool(true),
-		UseDualStack:  ptr.Bool(true),
-		ConsumerARN:   ptr.String("arn:aws-iso:kinesis:us-iso-west-1:123456789012:stream/testStream/consumer/test-consumer:1525898737"),
-		OperationType: ptr.String("control"),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err == nil {
-		t.Fatalf("expect error, got none")
-	}
-	if e, a := "FIPS and DualStack are enabled, but this partition does not support one or both", err.Error(); !strings.Contains(a, e) {
-		t.Errorf("expect %v error in %v", e, a)
-	}
-}
-
 // OperationType not set
-func TestEndpointCase86(t *testing.T) {
+func TestEndpointCase84(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -2869,7 +2825,7 @@ func TestEndpointCase86(t *testing.T) {
 }
 
 // Custom Endpoint is specified
-func TestEndpointCase87(t *testing.T) {
+func TestEndpointCase85(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -2909,7 +2865,7 @@ func TestEndpointCase87(t *testing.T) {
 }
 
 // Account endpoint targeting control operation type
-func TestEndpointCase88(t *testing.T) {
+func TestEndpointCase86(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -2948,7 +2904,7 @@ func TestEndpointCase88(t *testing.T) {
 }
 
 // Account endpoint targeting data operation type
-func TestEndpointCase89(t *testing.T) {
+func TestEndpointCase87(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -2987,7 +2943,7 @@ func TestEndpointCase89(t *testing.T) {
 }
 
 // Account endpoint with fips targeting data operation type
-func TestEndpointCase90(t *testing.T) {
+func TestEndpointCase88(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(true),
@@ -3026,7 +2982,7 @@ func TestEndpointCase90(t *testing.T) {
 }
 
 // Account endpoint with fips targeting control operation type
-func TestEndpointCase91(t *testing.T) {
+func TestEndpointCase89(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(true),
@@ -3065,7 +3021,7 @@ func TestEndpointCase91(t *testing.T) {
 }
 
 // Account endpoint with Dual Stack and FIPS enabled
-func TestEndpointCase92(t *testing.T) {
+func TestEndpointCase90(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(true),
@@ -3104,7 +3060,7 @@ func TestEndpointCase92(t *testing.T) {
 }
 
 // Account endpoint with Dual Stack enabled
-func TestEndpointCase93(t *testing.T) {
+func TestEndpointCase91(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-west-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -3143,7 +3099,7 @@ func TestEndpointCase93(t *testing.T) {
 }
 
 // Account endpoint with FIPS and DualStack disabled
-func TestEndpointCase94(t *testing.T) {
+func TestEndpointCase92(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-west-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -3182,7 +3138,7 @@ func TestEndpointCase94(t *testing.T) {
 }
 
 // RegionMismatch: client region should be used for endpoint region
-func TestEndpointCase95(t *testing.T) {
+func TestEndpointCase93(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -3221,7 +3177,7 @@ func TestEndpointCase95(t *testing.T) {
 }
 
 // Account endpoint with FIPS enabled
-func TestEndpointCase96(t *testing.T) {
+func TestEndpointCase94(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("cn-northwest-1"),
 		UseFIPS:       ptr.Bool(true),
@@ -3260,7 +3216,7 @@ func TestEndpointCase96(t *testing.T) {
 }
 
 // Account endpoint with FIPS and DualStack enabled for cn regions.
-func TestEndpointCase97(t *testing.T) {
+func TestEndpointCase95(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("cn-northwest-1"),
 		UseFIPS:       ptr.Bool(true),
@@ -3299,7 +3255,7 @@ func TestEndpointCase97(t *testing.T) {
 }
 
 // Account endpoint targeting control operation type in ADC regions
-func TestEndpointCase98(t *testing.T) {
+func TestEndpointCase96(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-iso-east-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -3338,7 +3294,7 @@ func TestEndpointCase98(t *testing.T) {
 }
 
 // Account endpoint targeting control operation type in ADC regions
-func TestEndpointCase99(t *testing.T) {
+func TestEndpointCase97(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-iso-west-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -3377,7 +3333,7 @@ func TestEndpointCase99(t *testing.T) {
 }
 
 // Account endpoint targeting data operation type in ADC regions
-func TestEndpointCase100(t *testing.T) {
+func TestEndpointCase98(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-isob-east-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -3416,7 +3372,7 @@ func TestEndpointCase100(t *testing.T) {
 }
 
 // Account endpoint with fips targeting control operation type in ADC regions
-func TestEndpointCase101(t *testing.T) {
+func TestEndpointCase99(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-iso-east-1"),
 		UseFIPS:       ptr.Bool(true),
@@ -3455,7 +3411,7 @@ func TestEndpointCase101(t *testing.T) {
 }
 
 // Account endpoint with fips targeting data operation type in ADC regions
-func TestEndpointCase102(t *testing.T) {
+func TestEndpointCase100(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-isob-east-1"),
 		UseFIPS:       ptr.Bool(true),
@@ -3494,7 +3450,7 @@ func TestEndpointCase102(t *testing.T) {
 }
 
 // ConsumerARN targeting US-EAST-1
-func TestEndpointCase103(t *testing.T) {
+func TestEndpointCase101(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -3533,7 +3489,7 @@ func TestEndpointCase103(t *testing.T) {
 }
 
 // Both StreamARN and ConsumerARN specified. StreamARN should take precedence
-func TestEndpointCase104(t *testing.T) {
+func TestEndpointCase102(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -3573,7 +3529,7 @@ func TestEndpointCase104(t *testing.T) {
 }
 
 // ResourceARN test: Invalid ARN: Failed to parse ARN.
-func TestEndpointCase105(t *testing.T) {
+func TestEndpointCase103(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -3594,7 +3550,7 @@ func TestEndpointCase105(t *testing.T) {
 }
 
 // ResourceARN as StreamARN test: Invalid ARN: partition missing from ARN.
-func TestEndpointCase106(t *testing.T) {
+func TestEndpointCase104(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -3615,7 +3571,7 @@ func TestEndpointCase106(t *testing.T) {
 }
 
 // ResourceARN as StreamARN test: Invalid ARN: partitions mismatch.
-func TestEndpointCase107(t *testing.T) {
+func TestEndpointCase105(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-gov-west-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -3636,7 +3592,7 @@ func TestEndpointCase107(t *testing.T) {
 }
 
 // ResourceARN as StreamARN test: Invalid ARN: Not Kinesis
-func TestEndpointCase108(t *testing.T) {
+func TestEndpointCase106(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -3657,7 +3613,7 @@ func TestEndpointCase108(t *testing.T) {
 }
 
 // ResourceARN as StreamARN test: Invalid ARN: Region is missing in ARN
-func TestEndpointCase109(t *testing.T) {
+func TestEndpointCase107(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -3678,7 +3634,7 @@ func TestEndpointCase109(t *testing.T) {
 }
 
 // ResourceARN as StreamARN test: Invalid ARN: Region is empty string in ARN
-func TestEndpointCase110(t *testing.T) {
+func TestEndpointCase108(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -3699,7 +3655,7 @@ func TestEndpointCase110(t *testing.T) {
 }
 
 // ResourceARN as StreamARN test: Invalid ARN: Invalid account id
-func TestEndpointCase111(t *testing.T) {
+func TestEndpointCase109(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -3721,7 +3677,7 @@ func TestEndpointCase111(t *testing.T) {
 }
 
 // ResourceARN as StreamARN test: Invalid ARN: Invalid account id
-func TestEndpointCase112(t *testing.T) {
+func TestEndpointCase110(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -3744,7 +3700,7 @@ func TestEndpointCase112(t *testing.T) {
 
 // ResourceARN as StreamARN test: Invalid ARN: Kinesis ARNs only support stream arn
 // types
-func TestEndpointCase113(t *testing.T) {
+func TestEndpointCase111(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -3764,30 +3720,8 @@ func TestEndpointCase113(t *testing.T) {
 	}
 }
 
-// ResourceARN as StreamARN test: Dual Stack not supported region.
-func TestEndpointCase114(t *testing.T) {
-	var params = EndpointParameters{
-		Region:        ptr.String("us-iso-west-1"),
-		UseFIPS:       ptr.Bool(true),
-		UseDualStack:  ptr.Bool(true),
-		ResourceARN:   ptr.String("arn:aws-iso:kinesis:us-iso-west-1:123456789012:stream/testStream"),
-		OperationType: ptr.String("control"),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err == nil {
-		t.Fatalf("expect error, got none")
-	}
-	if e, a := "FIPS and DualStack are enabled, but this partition does not support one or both", err.Error(); !strings.Contains(a, e) {
-		t.Errorf("expect %v error in %v", e, a)
-	}
-}
-
 // ResourceARN as StreamARN test: OperationType not set
-func TestEndpointCase115(t *testing.T) {
+func TestEndpointCase112(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -3808,7 +3742,7 @@ func TestEndpointCase115(t *testing.T) {
 }
 
 // ResourceARN as StreamARN test: Custom Endpoint is specified
-func TestEndpointCase116(t *testing.T) {
+func TestEndpointCase113(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -3848,7 +3782,7 @@ func TestEndpointCase116(t *testing.T) {
 }
 
 // ResourceARN as StreamARN test: Account endpoint targeting control operation type
-func TestEndpointCase117(t *testing.T) {
+func TestEndpointCase114(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -3887,7 +3821,7 @@ func TestEndpointCase117(t *testing.T) {
 }
 
 // ResourceARN as StreamARN test: Account endpoint targeting data operation type
-func TestEndpointCase118(t *testing.T) {
+func TestEndpointCase115(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -3927,7 +3861,7 @@ func TestEndpointCase118(t *testing.T) {
 
 // ResourceARN as StreamARN test: Account endpoint with fips targeting data
 // operation type
-func TestEndpointCase119(t *testing.T) {
+func TestEndpointCase116(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(true),
@@ -3967,7 +3901,7 @@ func TestEndpointCase119(t *testing.T) {
 
 // ResourceARN as StreamARN test: Account endpoint with fips targeting control
 // operation type
-func TestEndpointCase120(t *testing.T) {
+func TestEndpointCase117(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(true),
@@ -4006,7 +3940,7 @@ func TestEndpointCase120(t *testing.T) {
 }
 
 // ResourceARN as StreamARN test: Account endpoint with Dual Stack and FIPS enabled
-func TestEndpointCase121(t *testing.T) {
+func TestEndpointCase118(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(true),
@@ -4045,7 +3979,7 @@ func TestEndpointCase121(t *testing.T) {
 }
 
 // ResourceARN as StreamARN test: Account endpoint with Dual Stack enabled
-func TestEndpointCase122(t *testing.T) {
+func TestEndpointCase119(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-west-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -4084,7 +4018,7 @@ func TestEndpointCase122(t *testing.T) {
 }
 
 // ResourceARN as StreamARN test: Account endpoint with FIPS and DualStack disabled
-func TestEndpointCase123(t *testing.T) {
+func TestEndpointCase120(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-west-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -4124,7 +4058,7 @@ func TestEndpointCase123(t *testing.T) {
 
 // ResourceARN as StreamARN test: RegionMismatch: client region should be used for
 // endpoint region
-func TestEndpointCase124(t *testing.T) {
+func TestEndpointCase121(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -4163,7 +4097,7 @@ func TestEndpointCase124(t *testing.T) {
 }
 
 // ResourceARN as StreamARN test: Account endpoint with FIPS enabled
-func TestEndpointCase125(t *testing.T) {
+func TestEndpointCase122(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("cn-northwest-1"),
 		UseFIPS:       ptr.Bool(true),
@@ -4203,7 +4137,7 @@ func TestEndpointCase125(t *testing.T) {
 
 // ResourceARN as StreamARN test: Account endpoint with FIPS and DualStack enabled
 // for cn regions.
-func TestEndpointCase126(t *testing.T) {
+func TestEndpointCase123(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("cn-northwest-1"),
 		UseFIPS:       ptr.Bool(true),
@@ -4243,7 +4177,7 @@ func TestEndpointCase126(t *testing.T) {
 
 // ResourceARN as StreamARN test: Account endpoint targeting control operation type
 // in ADC regions
-func TestEndpointCase127(t *testing.T) {
+func TestEndpointCase124(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-iso-east-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -4283,7 +4217,7 @@ func TestEndpointCase127(t *testing.T) {
 
 // ResourceARN as StreamARN test: Account endpoint targeting control operation type
 // in ADC regions
-func TestEndpointCase128(t *testing.T) {
+func TestEndpointCase125(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-iso-west-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -4323,7 +4257,7 @@ func TestEndpointCase128(t *testing.T) {
 
 // ResourceARN as StreamARN test: Account endpoint targeting data operation type in
 // ADC regions
-func TestEndpointCase129(t *testing.T) {
+func TestEndpointCase126(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-isob-east-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -4363,7 +4297,7 @@ func TestEndpointCase129(t *testing.T) {
 
 // ResourceARN as StreamARN test: Account endpoint with fips targeting control
 // operation type in ADC regions
-func TestEndpointCase130(t *testing.T) {
+func TestEndpointCase127(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-iso-east-1"),
 		UseFIPS:       ptr.Bool(true),
@@ -4403,7 +4337,7 @@ func TestEndpointCase130(t *testing.T) {
 
 // ResourceARN as StreamARN test: Account endpoint with fips targeting data
 // operation type in ADC regions
-func TestEndpointCase131(t *testing.T) {
+func TestEndpointCase128(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-isob-east-1"),
 		UseFIPS:       ptr.Bool(true),
@@ -4442,7 +4376,7 @@ func TestEndpointCase131(t *testing.T) {
 }
 
 // ResourceARN as ConsumerARN test: Invalid ARN: partition missing from ARN.
-func TestEndpointCase132(t *testing.T) {
+func TestEndpointCase129(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -4463,7 +4397,7 @@ func TestEndpointCase132(t *testing.T) {
 }
 
 // ResourceARN as ConsumerARN test: Invalid ARN: partitions mismatch.
-func TestEndpointCase133(t *testing.T) {
+func TestEndpointCase130(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-gov-west-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -4484,7 +4418,7 @@ func TestEndpointCase133(t *testing.T) {
 }
 
 // ResourceARN as ConsumerARN test: Invalid ARN: Not Kinesis
-func TestEndpointCase134(t *testing.T) {
+func TestEndpointCase131(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -4505,7 +4439,7 @@ func TestEndpointCase134(t *testing.T) {
 }
 
 // ResourceARN as ConsumerARN test: Invalid ARN: Region is missing in ARN
-func TestEndpointCase135(t *testing.T) {
+func TestEndpointCase132(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -4526,7 +4460,7 @@ func TestEndpointCase135(t *testing.T) {
 }
 
 // ResourceARN as ConsumerARN test: Invalid ARN: Region is empty string in ARN
-func TestEndpointCase136(t *testing.T) {
+func TestEndpointCase133(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -4547,7 +4481,7 @@ func TestEndpointCase136(t *testing.T) {
 }
 
 // ResourceARN as ConsumerARN test: Invalid ARN: Invalid account id
-func TestEndpointCase137(t *testing.T) {
+func TestEndpointCase134(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -4569,7 +4503,7 @@ func TestEndpointCase137(t *testing.T) {
 }
 
 // ResourceARN as ConsumerARN test: Invalid ARN: Invalid account id
-func TestEndpointCase138(t *testing.T) {
+func TestEndpointCase135(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -4592,7 +4526,7 @@ func TestEndpointCase138(t *testing.T) {
 
 // ResourceARN as ConsumerARN test: Invalid ARN: Kinesis ARNs only support stream
 // arn/consumer arn types
-func TestEndpointCase139(t *testing.T) {
+func TestEndpointCase136(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -4612,30 +4546,8 @@ func TestEndpointCase139(t *testing.T) {
 	}
 }
 
-// ResourceARN as ConsumerARN test: Dual Stack not supported region.
-func TestEndpointCase140(t *testing.T) {
-	var params = EndpointParameters{
-		Region:        ptr.String("us-iso-west-1"),
-		UseFIPS:       ptr.Bool(true),
-		UseDualStack:  ptr.Bool(true),
-		ResourceARN:   ptr.String("arn:aws-iso:kinesis:us-iso-west-1:123456789012:stream/testStream/consumer/test-consumer:1525898737"),
-		OperationType: ptr.String("control"),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err == nil {
-		t.Fatalf("expect error, got none")
-	}
-	if e, a := "FIPS and DualStack are enabled, but this partition does not support one or both", err.Error(); !strings.Contains(a, e) {
-		t.Errorf("expect %v error in %v", e, a)
-	}
-}
-
 // ResourceARN as ConsumerARN test: OperationType not set
-func TestEndpointCase141(t *testing.T) {
+func TestEndpointCase137(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -4656,7 +4568,7 @@ func TestEndpointCase141(t *testing.T) {
 }
 
 // ResourceARN as ConsumerARN test: Custom Endpoint is specified
-func TestEndpointCase142(t *testing.T) {
+func TestEndpointCase138(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -4697,7 +4609,7 @@ func TestEndpointCase142(t *testing.T) {
 
 // ResourceARN as ConsumerARN test: Account endpoint targeting control operation
 // type
-func TestEndpointCase143(t *testing.T) {
+func TestEndpointCase139(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -4736,7 +4648,7 @@ func TestEndpointCase143(t *testing.T) {
 }
 
 // ResourceARN as ConsumerARN test: Account endpoint targeting data operation type
-func TestEndpointCase144(t *testing.T) {
+func TestEndpointCase140(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -4776,7 +4688,7 @@ func TestEndpointCase144(t *testing.T) {
 
 // ResourceARN as ConsumerARN test: Account endpoint with fips targeting data
 // operation type
-func TestEndpointCase145(t *testing.T) {
+func TestEndpointCase141(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(true),
@@ -4816,7 +4728,7 @@ func TestEndpointCase145(t *testing.T) {
 
 // ResourceARN as ConsumerARN test: Account endpoint with fips targeting control
 // operation type
-func TestEndpointCase146(t *testing.T) {
+func TestEndpointCase142(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(true),
@@ -4856,7 +4768,7 @@ func TestEndpointCase146(t *testing.T) {
 
 // ResourceARN as ConsumerARN test: Account endpoint with Dual Stack and FIPS
 // enabled
-func TestEndpointCase147(t *testing.T) {
+func TestEndpointCase143(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(true),
@@ -4895,7 +4807,7 @@ func TestEndpointCase147(t *testing.T) {
 }
 
 // ResourceARN as ConsumerARN test: Account endpoint with Dual Stack enabled
-func TestEndpointCase148(t *testing.T) {
+func TestEndpointCase144(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-west-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -4935,7 +4847,7 @@ func TestEndpointCase148(t *testing.T) {
 
 // ResourceARN as ConsumerARN test: Account endpoint with FIPS and DualStack
 // disabled
-func TestEndpointCase149(t *testing.T) {
+func TestEndpointCase145(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-west-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -4975,7 +4887,7 @@ func TestEndpointCase149(t *testing.T) {
 
 // ResourceARN as ConsumerARN test: RegionMismatch: client region should be used
 // for endpoint region
-func TestEndpointCase150(t *testing.T) {
+func TestEndpointCase146(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-east-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -5014,7 +4926,7 @@ func TestEndpointCase150(t *testing.T) {
 }
 
 // ResourceARN as ConsumerARN test: Account endpoint with FIPS enabled
-func TestEndpointCase151(t *testing.T) {
+func TestEndpointCase147(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("cn-northwest-1"),
 		UseFIPS:       ptr.Bool(true),
@@ -5054,7 +4966,7 @@ func TestEndpointCase151(t *testing.T) {
 
 // ResourceARN as ConsumerARN test: Account endpoint with FIPS and DualStack
 // enabled for cn regions.
-func TestEndpointCase152(t *testing.T) {
+func TestEndpointCase148(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("cn-northwest-1"),
 		UseFIPS:       ptr.Bool(true),
@@ -5094,7 +5006,7 @@ func TestEndpointCase152(t *testing.T) {
 
 // ResourceARN as ConsumerARN test: Account endpoint targeting control operation
 // type in ADC regions
-func TestEndpointCase153(t *testing.T) {
+func TestEndpointCase149(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-iso-east-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -5134,7 +5046,7 @@ func TestEndpointCase153(t *testing.T) {
 
 // ResourceARN as ConsumerARN test: Account endpoint targeting control operation
 // type in ADC regions
-func TestEndpointCase154(t *testing.T) {
+func TestEndpointCase150(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-iso-west-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -5174,7 +5086,7 @@ func TestEndpointCase154(t *testing.T) {
 
 // ResourceARN as ConsumerARN test: Account endpoint targeting data operation type
 // in ADC regions
-func TestEndpointCase155(t *testing.T) {
+func TestEndpointCase151(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-isob-east-1"),
 		UseFIPS:       ptr.Bool(false),
@@ -5214,7 +5126,7 @@ func TestEndpointCase155(t *testing.T) {
 
 // ResourceARN as ConsumerARN test: Account endpoint with fips targeting control
 // operation type in ADC regions
-func TestEndpointCase156(t *testing.T) {
+func TestEndpointCase152(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-iso-east-1"),
 		UseFIPS:       ptr.Bool(true),
@@ -5254,7 +5166,7 @@ func TestEndpointCase156(t *testing.T) {
 
 // ResourceARN as ConsumerARN test: Account endpoint with fips targeting data
 // operation type in ADC regions
-func TestEndpointCase157(t *testing.T) {
+func TestEndpointCase153(t *testing.T) {
 	var params = EndpointParameters{
 		Region:        ptr.String("us-isob-east-1"),
 		UseFIPS:       ptr.Bool(true),

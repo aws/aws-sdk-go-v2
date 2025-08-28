@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list of read set export jobs.
+// Retrieves a list of read set export jobs in a JSON formatted response. This API
+// operation is used to check the status of a read set export job initiated by the
+// StartReadSetExportJob API operation.
 func (c *Client) ListReadSetExportJobs(ctx context.Context, params *ListReadSetExportJobsInput, optFns ...func(*Options)) (*ListReadSetExportJobsOutput, error) {
 	if params == nil {
 		params = &ListReadSetExportJobsInput{}

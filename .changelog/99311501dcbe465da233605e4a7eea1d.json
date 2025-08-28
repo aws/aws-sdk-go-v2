@@ -1,0 +1,8 @@
+{
+    "id": "99311501-dcbe-465d-a233-605e4a7eea1d",
+    "type": "feature",
+    "description": "Remove incorrect endpoint tests",
+    "modules": [
+        "service/amplify"
+    ]
+}

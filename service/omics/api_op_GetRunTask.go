@@ -66,6 +66,9 @@ type GetRunTaskOutput struct {
 	// The number of Graphics Processing Units (GPU) specified in the task.
 	Gpus *int32
 
+	// Details about the container image that this task uses.
+	ImageDetails *types.ImageDetails
+
 	// The instance type for a task.
 	InstanceType *string
 

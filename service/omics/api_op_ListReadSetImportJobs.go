@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list of read set import jobs.
+// Retrieves a list of read set import jobs and returns the data in JSON format.
 func (c *Client) ListReadSetImportJobs(ctx context.Context, params *ListReadSetImportJobsInput, optFns ...func(*Options)) (*ListReadSetImportJobsOutput, error) {
 	if params == nil {
 		params = &ListReadSetImportJobsInput{}

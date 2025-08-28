@@ -12,7 +12,7 @@ import (
 )
 
 // This API is in preview release for Amazon Connect and is subject to change. To
-// request access to this API, contact Amazon Web ServicesSupport.
+// request access to this API, contact Amazon Web Services Support.
 //
 // Describes the target authentication profile.
 func (c *Client) DescribeAuthenticationProfile(ctx context.Context, params *DescribeAuthenticationProfileInput, optFns ...func(*Options)) (*DescribeAuthenticationProfileOutput, error) {

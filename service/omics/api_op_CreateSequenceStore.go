@@ -12,7 +12,32 @@ import (
 	"time"
 )
 
-// Creates a sequence store.
+// Creates a sequence store and returns its metadata. Sequence stores are used to
+// store sequence data files called read sets that are saved in FASTQ, BAM, uBAM,
+// or CRAM formats. For aligned formats (BAM and CRAM), a sequence store can only
+// use one reference genome. For unaligned formats (FASTQ and uBAM), a reference
+// genome is not required. You can create multiple sequence stores per region per
+// account.
+//
+// The following are optional parameters you can specify for your sequence store:
+//
+//   - Use s3AccessConfig to configure your sequence store with S3 access logs
+//     (recommended).
+//
+//   - Use sseConfig to define your own KMS key for encryption.
+//
+//   - Use eTagAlgorithmFamily to define which algorithm to use for the HealthOmics
+//     eTag on objects.
+//
+//   - Use fallbackLocation to define a backup location for storing files that have
+//     failed a direct upload.
+//
+//   - Use propagatedSetLevelTags to configure tags that propagate to all objects
+//     in your store.
+//
+// For more information, see [Creating a HealthOmics sequence store] in the Amazon Web Services HealthOmics User Guide.
+//
+// [Creating a HealthOmics sequence store]: https://docs.aws.amazon.com/omics/latest/dev/create-sequence-store.html
 func (c *Client) CreateSequenceStore(ctx context.Context, params *CreateSequenceStoreInput, optFns ...func(*Options)) (*CreateSequenceStoreOutput, error) {
 	if params == nil {
 		params = &CreateSequenceStoreInput{}
@@ -35,30 +60,39 @@ type CreateSequenceStoreInput struct {
 	// This member is required.
 	Name *string
 
-	// To ensure that requests don't run multiple times, specify a unique token for
-	// each request.
+	// An idempotency token used to dedupe retry requests so that duplicate runs are
+	// not created.
 	ClientToken *string
 
 	// A description for the store.
 	Description *string
 
-	// The ETag algorithm family to use for ingested read sets.
+	// The ETag algorithm family to use for ingested read sets. The default value is
+	// MD5up. For more information on ETags, see [ETags and data provenance]in the Amazon Web Services
+	// HealthOmics User Guide.
+	//
+	// [ETags and data provenance]: https://docs.aws.amazon.com/omics/latest/dev/etags-and-provenance.html
 	ETagAlgorithmFamily types.ETagAlgorithmFamily
 
 	// An S3 location that is used to store files that have failed a direct upload.
+	// You can add or change the fallbackLocation after creating a sequence store.
+	// This is not required if you are uploading files from a different S3 bucket.
 	FallbackLocation *string
 
 	// The tags keys to propagate to the S3 objects associated with read sets in the
-	// sequence store.
+	// sequence store. These tags can be used as input to add metadata to your read
+	// sets.
 	PropagatedSetLevelTags []string
 
-	// S3 access configuration parameters
+	// S3 access configuration parameters. This specifies the parameters needed to
+	// access logs stored in S3 buckets. The S3 bucket must be in the same region and
+	// account as the sequence store.
 	S3AccessConfig *types.S3AccessConfig
 
 	// Server-side encryption (SSE) settings for the store.
 	SseConfig *types.SseConfig
 
-	// Tags for the store.
+	// Tags for the store. You can configure up to 50 tags.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -100,7 +134,8 @@ type CreateSequenceStoreOutput struct {
 	// The S3 access metadata of the sequence store.
 	S3Access *types.SequenceStoreS3Access
 
-	// The store's SSE settings.
+	// Server-side encryption (SSE) settings for the store. This contains the KMS key
+	// ARN that is used to encrypt read set objects.
 	SseConfig *types.SseConfig
 
 	// The status of the sequence store.

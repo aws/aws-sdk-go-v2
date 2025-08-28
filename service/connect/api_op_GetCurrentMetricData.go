@@ -155,10 +155,14 @@ type GetCurrentMetricDataInput struct {
 	//
 	//   - RoutingStepExpressions: 50
 	//
+	//   - AgentStatuses: 50
+	//
 	// Metric data is retrieved only for the resources associated with the queues or
 	// routing profiles, and by any channels included in the filter. (You cannot filter
 	// by both queue AND routing profile.) You can include both resource IDs and
 	// resource ARNs in the same request.
+	//
+	// When using AgentStatuses as filter make sure Queues is added as primary filter.
 	//
 	// When using the RoutingStepExpression filter, you need to pass exactly one
 	// QueueId . The filter is also case sensitive so when using the
@@ -178,18 +182,26 @@ type GetCurrentMetricDataInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The grouping applied to the metrics returned. For example, when grouped by QUEUE
-	// , the metrics returned apply to each queue rather than aggregated for all
+	// Defines the level of aggregation for metrics data by a dimension(s). Its
+	// similar to sorting items into buckets based on a common characteristic, then
+	// counting or calculating something for each bucket. For example, when grouped by
+	// QUEUE , the metrics returned apply to each queue rather than aggregated for all
 	// queues.
+	//
+	// The grouping list is an ordered list, with the first item in the list defined
+	// as the primary grouping. If no grouping is included in the request, the
+	// aggregation happens at the instance-level.
 	//
 	//   - If you group by CHANNEL , you should include a Channels filter. VOICE, CHAT,
 	//   and TASK channels are supported.
 	//
+	//   - If you group by AGENT_STATUS , you must include the QUEUE as the primary
+	//   grouping and use queue filter. When you group by AGENT_STATUS , the only
+	//   metric available is the AGENTS_ONLINE metric.
+	//
 	//   - If you group by ROUTING_PROFILE , you must include either a queue or routing
 	//   profile filter. In addition, a routing profile filter is required for metrics
 	//   CONTACTS_SCHEDULED , CONTACTS_IN_QUEUE , and OLDEST_CONTACT_AGE .
-	//
-	//   - If no Grouping is included in the request, a summary of metrics is returned.
 	//
 	//   - When using the RoutingStepExpression filter, group by
 	//   ROUTING_STEP_EXPRESSION is required.

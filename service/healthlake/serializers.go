@@ -1298,6 +1298,11 @@ func awsAwsjson10_serializeOpDocumentStartFHIRImportJobInput(v *StartFHIRImportJ
 		}
 	}
 
+	if len(v.ValidationLevel) > 0 {
+		ok := object.Key("ValidationLevel")
+		ok.String(string(v.ValidationLevel))
+	}
+
 	return nil
 }
 
