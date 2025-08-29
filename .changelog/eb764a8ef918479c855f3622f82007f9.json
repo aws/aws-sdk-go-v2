@@ -1,0 +1,8 @@
+{
+    "id": "eb764a8e-f918-479c-855f-3622f82007f9",
+    "type": "feature",
+    "description": "Release shows new route types such as filtered and advertisement.",
+    "modules": [
+        "service/ec2"
+    ]
+}

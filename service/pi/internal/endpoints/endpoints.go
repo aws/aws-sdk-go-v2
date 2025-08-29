@@ -289,6 +289,9 @@ var defaultPartitions = endpoints.Partitions{
 				Protocols: []string{"https"},
 			},
 			endpoints.EndpointKey{
+				Region: "ap-southeast-6",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
 				Region: "ap-southeast-7",
 			}: endpoints.Endpoint{
 				Protocols: []string{"https"},

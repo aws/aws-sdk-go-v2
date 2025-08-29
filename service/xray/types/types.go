@@ -832,6 +832,85 @@ type RootCauseException struct {
 	noSmithyDocumentSerde
 }
 
+// Temporary boost sampling rate. X-Ray calculates sampling boost for each service
+// based on the recent sampling boost stats of all services that called [GetSamplingTargets].
+//
+// [GetSamplingTargets]: https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingTargets.html
+type SamplingBoost struct {
+
+	// The calculated sampling boost rate for this service
+	//
+	// This member is required.
+	BoostRate float64
+
+	// When the sampling boost expires.
+	//
+	// This member is required.
+	BoostRateTTL *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Request anomaly stats for a single rule from a service. Results are for the
+// last 10 seconds unless the service has been assigned a longer reporting interval
+// after a previous call to [GetSamplingTargets].
+//
+// [GetSamplingTargets]: https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingTargets.html
+type SamplingBoostStatisticsDocument struct {
+
+	// The number of requests with anomaly.
+	//
+	// This member is required.
+	AnomalyCount int32
+
+	// The name of the sampling rule.
+	//
+	// This member is required.
+	RuleName *string
+
+	// The number of requests with anomaly recorded.
+	//
+	// This member is required.
+	SampledAnomalyCount int32
+
+	// Matches the name that the service uses to identify itself in segments.
+	//
+	// This member is required.
+	ServiceName *string
+
+	// The current time.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	// The number of requests that associated to the rule.
+	//
+	// This member is required.
+	TotalCount int32
+
+	noSmithyDocumentSerde
+}
+
+// Enable temporary sampling rate increases when you detect anomalies to improve
+// visibility.
+type SamplingRateBoost struct {
+
+	// Sets the time window (in minutes) in which only one sampling rate boost can be
+	// triggered. After a boost occurs, no further boosts are allowed until the next
+	// window.
+	//
+	// This member is required.
+	CooldownWindowMinutes int32
+
+	// Defines max temporary sampling rate to apply when a boost is triggered.
+	// Calculated boost rate by X-Ray will be less than or equal to this max rate.
+	//
+	// This member is required.
+	MaxRate float64
+
+	noSmithyDocumentSerde
+}
+
 // A sampling rule that services use to decide whether to instrument a request.
 // Rule fields can match properties of the service, or properties of a request. The
 // service can ignore rules that don't match its properties.
@@ -901,6 +980,10 @@ type SamplingRule struct {
 	// both.
 	RuleName *string
 
+	// Specifies the multiplier applied to the base sampling rate. This boost allows
+	// you to temporarily increase sampling without changing the rule's configuration.
+	SamplingRateBoost *SamplingRateBoost
+
 	noSmithyDocumentSerde
 }
 
@@ -955,6 +1038,10 @@ type SamplingRuleUpdate struct {
 	// The name of the sampling rule. Specify a rule by either name or ARN, but not
 	// both.
 	RuleName *string
+
+	// Specifies the multiplier applied to the base sampling rate. This boost allows
+	// you to temporarily increase sampling without changing the rule's configuration.
+	SamplingRateBoost *SamplingRateBoost
 
 	// Matches the name that the service uses to identify itself in segments.
 	ServiceName *string
@@ -1063,6 +1150,9 @@ type SamplingTargetDocument struct {
 
 	// The name of the sampling rule.
 	RuleName *string
+
+	// The sampling boost that X-Ray allocated for this service.
+	SamplingBoost *SamplingBoost
 
 	noSmithyDocumentSerde
 }
@@ -1281,8 +1371,8 @@ type TimeSeriesServiceStatistics struct {
 // A collection of segment documents with matching trace IDs.
 type Trace struct {
 
-	// The length of time in seconds between the start time of the root segment and
-	// the end time of the last segment that completed.
+	// The length of time in seconds between the start time of the earliest segment
+	// that started and the end time of the last segment that completed.
 	Duration *float64
 
 	// The unique identifier for the request that generated the trace's segments and
@@ -1311,8 +1401,8 @@ type TraceSummary struct {
 	// A list of Availability Zones for any zone corresponding to the trace segments.
 	AvailabilityZones []AvailabilityZoneDetail
 
-	// The length of time in seconds between the start time of the root segment and
-	// the end time of the last segment that completed.
+	//  The length of time in seconds between the start time of the earliest segment
+	// that started and the end time of the last segment that completed.
 	Duration *float64
 
 	// The root of a trace.

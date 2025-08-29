@@ -1642,6 +1642,13 @@ func awsRestjson1_serializeOpDocumentGetSamplingTargetsInput(v *GetSamplingTarge
 	object := value.Object()
 	defer object.Close()
 
+	if v.SamplingBoostStatisticsDocuments != nil {
+		ok := object.Key("SamplingBoostStatisticsDocuments")
+		if err := awsRestjson1_serializeDocumentSamplingBoostStatisticsDocumentList(v.SamplingBoostStatisticsDocuments, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SamplingStatisticsDocuments != nil {
 		ok := object.Key("SamplingStatisticsDocuments")
 		if err := awsRestjson1_serializeDocumentSamplingStatisticsDocumentList(v.SamplingStatisticsDocuments, ok); err != nil {
@@ -3487,6 +3494,86 @@ func awsRestjson1_serializeDocumentProbabilisticRuleValueUpdate(v *types.Probabi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSamplingBoostStatisticsDocument(v *types.SamplingBoostStatisticsDocument, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("AnomalyCount")
+		ok.Integer(v.AnomalyCount)
+	}
+
+	if v.RuleName != nil {
+		ok := object.Key("RuleName")
+		ok.String(*v.RuleName)
+	}
+
+	{
+		ok := object.Key("SampledAnomalyCount")
+		ok.Integer(v.SampledAnomalyCount)
+	}
+
+	if v.ServiceName != nil {
+		ok := object.Key("ServiceName")
+		ok.String(*v.ServiceName)
+	}
+
+	if v.Timestamp != nil {
+		ok := object.Key("Timestamp")
+		ok.Double(smithytime.FormatEpochSeconds(*v.Timestamp))
+	}
+
+	{
+		ok := object.Key("TotalCount")
+		ok.Integer(v.TotalCount)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSamplingBoostStatisticsDocumentList(v []types.SamplingBoostStatisticsDocument, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSamplingBoostStatisticsDocument(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSamplingRateBoost(v *types.SamplingRateBoost, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("CooldownWindowMinutes")
+		ok.Integer(v.CooldownWindowMinutes)
+	}
+
+	{
+		ok := object.Key("MaxRate")
+		switch {
+		case math.IsNaN(v.MaxRate):
+			ok.String("NaN")
+
+		case math.IsInf(v.MaxRate, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.MaxRate, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.MaxRate)
+
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSamplingRule(v *types.SamplingRule, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3549,6 +3636,13 @@ func awsRestjson1_serializeDocumentSamplingRule(v *types.SamplingRule, value smi
 	if v.RuleName != nil {
 		ok := object.Key("RuleName")
 		ok.String(*v.RuleName)
+	}
+
+	if v.SamplingRateBoost != nil {
+		ok := object.Key("SamplingRateBoost")
+		if err := awsRestjson1_serializeDocumentSamplingRateBoost(v.SamplingRateBoost, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ServiceName != nil {
@@ -3636,6 +3730,13 @@ func awsRestjson1_serializeDocumentSamplingRuleUpdate(v *types.SamplingRuleUpdat
 	if v.RuleName != nil {
 		ok := object.Key("RuleName")
 		ok.String(*v.RuleName)
+	}
+
+	if v.SamplingRateBoost != nil {
+		ok := object.Key("SamplingRateBoost")
+		if err := awsRestjson1_serializeDocumentSamplingRateBoost(v.SamplingRateBoost, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ServiceName != nil {

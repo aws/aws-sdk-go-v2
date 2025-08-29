@@ -36,6 +36,9 @@ type GetSamplingTargetsInput struct {
 	// This member is required.
 	SamplingStatisticsDocuments []types.SamplingStatisticsDocument
 
+	// Information about rules that the service is using to boost sampling rate.
+	SamplingBoostStatisticsDocuments []types.SamplingBoostStatisticsDocument
+
 	noSmithyDocumentSerde
 }
 
@@ -50,6 +53,11 @@ type GetSamplingTargetsOutput struct {
 
 	// Updated rules that the service should use to sample requests.
 	SamplingTargetDocuments []types.SamplingTargetDocument
+
+	// Information about [SamplingBoostStatisticsDocument] that X-Ray could not process.
+	//
+	// [SamplingBoostStatisticsDocument]: https://docs.aws.amazon.com/xray/latest/api/API_SamplingBoostStatisticsDocument.html
+	UnprocessedBoostStatistics []types.UnprocessedStatistics
 
 	// Information about [SamplingStatisticsDocument] that X-Ray could not process.
 	//

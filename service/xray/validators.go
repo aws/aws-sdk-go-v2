@@ -668,6 +668,56 @@ func validateProbabilisticRuleValueUpdate(v *types.ProbabilisticRuleValueUpdate)
 	}
 }
 
+func validateSamplingBoostStatisticsDocument(v *types.SamplingBoostStatisticsDocument) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SamplingBoostStatisticsDocument"}
+	if v.RuleName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleName"))
+	}
+	if v.ServiceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
+	}
+	if v.Timestamp == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Timestamp"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSamplingBoostStatisticsDocumentList(v []types.SamplingBoostStatisticsDocument) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SamplingBoostStatisticsDocumentList"}
+	for i := range v {
+		if err := validateSamplingBoostStatisticsDocument(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSamplingRateBoost(v *types.SamplingRateBoost) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SamplingRateBoost"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSamplingRule(v *types.SamplingRule) error {
 	if v == nil {
 		return nil
@@ -696,6 +746,28 @@ func validateSamplingRule(v *types.SamplingRule) error {
 	}
 	if v.Version == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Version"))
+	}
+	if v.SamplingRateBoost != nil {
+		if err := validateSamplingRateBoost(v.SamplingRateBoost); err != nil {
+			invalidParams.AddNested("SamplingRateBoost", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSamplingRuleUpdate(v *types.SamplingRuleUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SamplingRuleUpdate"}
+	if v.SamplingRateBoost != nil {
+		if err := validateSamplingRateBoost(v.SamplingRateBoost); err != nil {
+			invalidParams.AddNested("SamplingRateBoost", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -994,6 +1066,11 @@ func validateOpGetSamplingTargetsInput(v *GetSamplingTargetsInput) error {
 			invalidParams.AddNested("SamplingStatisticsDocuments", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SamplingBoostStatisticsDocuments != nil {
+		if err := validateSamplingBoostStatisticsDocumentList(v.SamplingBoostStatisticsDocuments); err != nil {
+			invalidParams.AddNested("SamplingBoostStatisticsDocuments", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1257,6 +1334,10 @@ func validateOpUpdateSamplingRuleInput(v *UpdateSamplingRuleInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateSamplingRuleInput"}
 	if v.SamplingRuleUpdate == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SamplingRuleUpdate"))
+	} else if v.SamplingRuleUpdate != nil {
+		if err := validateSamplingRuleUpdate(v.SamplingRuleUpdate); err != nil {
+			invalidParams.AddNested("SamplingRuleUpdate", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

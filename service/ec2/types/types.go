@@ -13221,8 +13221,10 @@ type ModifyTransitGatewayOptions struct {
 	// table.
 	DefaultRouteTableAssociation DefaultRouteTableAssociationValue
 
-	// Enable or disable automatic propagation of routes to the default propagation
-	// route table.
+	// Indicates whether resource attachments automatically propagate routes to the
+	// default propagation route table. Enabled by default. If
+	// defaultRouteTablePropagation is set to enable , Amazon Web Services Transit
+	// Gateway will create the default transit gateway route table.
 	DefaultRouteTablePropagation DefaultRouteTablePropagationValue
 
 	// Enable or disable DNS support.
@@ -21029,15 +21031,16 @@ type TransitGatewayOptions struct {
 	AutoAcceptSharedAttachments AutoAcceptSharedAttachmentsValue
 
 	// Indicates whether resource attachments are automatically associated with the
-	// default association route table. Enabled by default. If
-	// defaultRouteTableAssociation is set to enable , Amazon Web Services Transit
-	// Gateway will create the default transit gateway route table.
+	// default association route table. Enabled by default. Either
+	// defaultRouteTableAssociation or defaultRouteTablePropagation must be set to
+	// enable for Amazon Web Services Transit Gateway to create the default transit
+	// gateway route table.
 	DefaultRouteTableAssociation DefaultRouteTableAssociationValue
 
 	// Indicates whether resource attachments automatically propagate routes to the
 	// default propagation route table. Enabled by default. If
 	// defaultRouteTablePropagation is set to enable , Amazon Web Services Transit
-	// Gateway will create the default transit gateway route table.
+	// Gateway creates the default transit gateway route table.
 	DefaultRouteTablePropagation DefaultRouteTablePropagationValue
 
 	// Indicates whether DNS support is enabled.

@@ -229,6 +229,9 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.DualStackVariant,
 			}: {},
 			endpoints.EndpointKey{
+				Region: "ap-southeast-6",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
 				Region: "ap-southeast-7",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{

@@ -271,6 +271,9 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "internetmonitor.ap-southeast-5.api.aws",
 			},
 			endpoints.EndpointKey{
+				Region: "ap-southeast-6",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
 				Region: "ap-southeast-7",
 			}: endpoints.Endpoint{
 				Hostname: "internetmonitor.ap-southeast-7.api.aws",

@@ -8201,6 +8201,7 @@ const (
 	RouteOriginCreateRouteTable          RouteOrigin = "CreateRouteTable"
 	RouteOriginCreateRoute               RouteOrigin = "CreateRoute"
 	RouteOriginEnableVgwRoutePropagation RouteOrigin = "EnableVgwRoutePropagation"
+	RouteOriginAdvertisement             RouteOrigin = "Advertisement"
 )
 
 // Values returns all known values for RouteOrigin. Note that this can be expanded
@@ -8212,6 +8213,7 @@ func (RouteOrigin) Values() []RouteOrigin {
 		"CreateRouteTable",
 		"CreateRoute",
 		"EnableVgwRoutePropagation",
+		"Advertisement",
 	}
 }
 
@@ -8490,6 +8492,7 @@ type RouteState string
 const (
 	RouteStateActive    RouteState = "active"
 	RouteStateBlackhole RouteState = "blackhole"
+	RouteStateFiltered  RouteState = "filtered"
 )
 
 // Values returns all known values for RouteState. Note that this can be expanded
@@ -8500,6 +8503,7 @@ func (RouteState) Values() []RouteState {
 	return []RouteState{
 		"active",
 		"blackhole",
+		"filtered",
 	}
 }
 
