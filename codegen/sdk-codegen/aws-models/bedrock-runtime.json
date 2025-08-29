@@ -4674,7 +4674,7 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of stop sequences. A stop sequence is a sequence of characters that causes the model to stop generating the response. </p>",
                         "smithy.api#length": {
-                            "max": 4
+                            "max": 2500
                         }
                     }
                 }
