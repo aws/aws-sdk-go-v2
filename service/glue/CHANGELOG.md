@@ -1,3 +1,7 @@
+# v1.128.1 (2025-08-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.128.0 (2025-08-28)
 
 * **Feature**: Adding support to fetch TargetDatabase field during GetDatabases with AttributesToGet

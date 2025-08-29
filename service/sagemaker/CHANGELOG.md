@@ -1,3 +1,7 @@
+# v1.213.1 (2025-08-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.213.0 (2025-08-27)
 
 * **Feature**: This release adds support for AutoScaling on SageMaker HyperPod.

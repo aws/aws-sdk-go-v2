@@ -1,3 +1,8 @@
+# v1.249.0 (2025-08-29)
+
+* **Feature**: Release shows new route types such as filtered and advertisement.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.248.0 (2025-08-28)
 
 * **Feature**: This release adds support for copying Amazon EBS snapshot and AMIs to and from Local Zones.

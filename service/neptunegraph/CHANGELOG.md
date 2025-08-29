@@ -1,3 +1,7 @@
+# v1.21.1 (2025-08-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2025-08-27)
 
 * **Feature**: Add StartGraph and StopGraph operations to Neptune Analytics

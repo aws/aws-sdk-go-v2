@@ -1,3 +1,8 @@
+# v1.36.0 (2025-08-29)
+
+* **Feature**: AWS X-Ray Features: Support Sampling Rate Boost On Anomaly
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.35.0 (2025-08-28)
 
 * **Feature**: Remove incorrect endpoint tests

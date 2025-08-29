@@ -1,3 +1,7 @@
+# v1.35.1 (2025-08-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.35.0 (2025-08-28)
 
 * **Feature**: Add ValidationLevel parameter to StartFHIRImportJob API, allowing users to specify a FHIR validation level for their asynchronous import jobs.

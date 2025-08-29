@@ -1,3 +1,7 @@
+# v1.36.1 (2025-08-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.36.0 (2025-08-28)
 
 * **Feature**: Adds Amazon ECR pull through cache support to AWS HealthOmics, so you can more easily use container images from external sources.

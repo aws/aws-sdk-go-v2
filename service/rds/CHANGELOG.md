@@ -1,3 +1,7 @@
+# v1.104.1 (2025-08-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.104.0 (2025-08-28)
 
 * **Feature**: Added RDS HTTP Endpoint feature support flag to DescribeOrderableDBInstanceOptions API

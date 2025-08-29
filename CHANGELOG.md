@@ -1,3 +1,18 @@
+# Release (2025-08-29)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.39.0](service/bedrockruntime/CHANGELOG.md#v1390-2025-08-29)
+  * **Feature**: Fixed stop sequence limit for converse API.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.249.0](service/ec2/CHANGELOG.md#v12490-2025-08-29)
+  * **Feature**: Release shows new route types such as filtered and advertisement.
+* `github.com/aws/aws-sdk-go-v2/service/sms`: [v1.29.0](service/sms/CHANGELOG.md#v1290-2025-08-29)
+  * **Feature**: Mark service/sms as deprecated. This service is no longer available for use.
+* `github.com/aws/aws-sdk-go-v2/service/xray`: [v1.36.0](service/xray/CHANGELOG.md#v1360-2025-08-29)
+  * **Feature**: AWS X-Ray Features: Support Sampling Rate Boost On Anomaly
+
 # Release (2025-08-28)
 
 ## General Highlights

@@ -1,3 +1,8 @@
+# v1.39.0 (2025-08-29)
+
+* **Feature**: Fixed stop sequence limit for converse API.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.38.0 (2025-08-28)
 
 * **Feature**: Remove incorrect endpoint tests

@@ -1,8 +1,0 @@
-{
-    "id": "0bf56719-f552-414e-b4ee-a7780e31d5c8",
-    "type": "feature",
-    "description": "Fixed stop sequence limit for converse API.",
-    "modules": [
-        "service/bedrockruntime"
-    ]
-}

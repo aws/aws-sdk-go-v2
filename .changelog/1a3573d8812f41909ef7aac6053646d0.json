@@ -1,8 +1,0 @@
-{
-    "id": "1a3573d8-812f-4190-9ef7-aac6053646d0",
-    "type": "feature",
-    "description": "AWS X-Ray Features: Support Sampling Rate Boost On Anomaly",
-    "modules": [
-        "service/xray"
-    ]
-}

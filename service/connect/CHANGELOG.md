@@ -1,3 +1,7 @@
+# v1.138.1 (2025-08-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.138.0 (2025-08-28)
 
 * **Feature**: AgentStatusDrillDown feature in GetCurrentMetricData API. Adding AGENT_STATUS as filter and grouping in GetCurrentMetricData API
