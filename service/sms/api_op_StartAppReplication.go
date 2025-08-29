@@ -12,6 +12,8 @@ import (
 
 // Starts replicating the specified application by creating replication jobs for
 // each server in the application.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) StartAppReplication(ctx context.Context, params *StartAppReplicationInput, optFns ...func(*Options)) (*StartAppReplicationOutput, error) {
 	if params == nil {
 		params = &StartAppReplicationInput{}
@@ -30,6 +32,8 @@ func (c *Client) StartAppReplication(ctx context.Context, params *StartAppReplic
 type StartAppReplicationInput struct {
 
 	// The ID of the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppId *string
 
 	noSmithyDocumentSerde

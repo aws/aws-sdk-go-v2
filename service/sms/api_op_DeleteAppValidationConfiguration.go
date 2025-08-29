@@ -11,6 +11,8 @@ import (
 )
 
 // Deletes the validation configuration for the specified application.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteAppValidationConfiguration(ctx context.Context, params *DeleteAppValidationConfigurationInput, optFns ...func(*Options)) (*DeleteAppValidationConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteAppValidationConfigurationInput{}
@@ -31,6 +33,8 @@ type DeleteAppValidationConfigurationInput struct {
 	// The ID of the application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppId *string
 
 	noSmithyDocumentSerde

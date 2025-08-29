@@ -12,6 +12,8 @@ import (
 )
 
 // Creates or updates the replication configuration for the specified application.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) PutAppReplicationConfiguration(ctx context.Context, params *PutAppReplicationConfigurationInput, optFns ...func(*Options)) (*PutAppReplicationConfigurationOutput, error) {
 	if params == nil {
 		params = &PutAppReplicationConfigurationInput{}
@@ -30,10 +32,14 @@ func (c *Client) PutAppReplicationConfiguration(ctx context.Context, params *Put
 type PutAppReplicationConfigurationInput struct {
 
 	// The ID of the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppId *string
 
 	// Information about the replication configurations for server groups in the
 	// application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerGroupReplicationConfigurations []types.ServerGroupReplicationConfiguration
 
 	noSmithyDocumentSerde

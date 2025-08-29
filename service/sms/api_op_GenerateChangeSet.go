@@ -13,6 +13,8 @@ import (
 
 // Generates a target change set for a currently launched stack and writes it to
 // an Amazon S3 object in the customer’s Amazon S3 bucket.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GenerateChangeSet(ctx context.Context, params *GenerateChangeSetInput, optFns ...func(*Options)) (*GenerateChangeSetOutput, error) {
 	if params == nil {
 		params = &GenerateChangeSetInput{}
@@ -31,9 +33,13 @@ func (c *Client) GenerateChangeSet(ctx context.Context, params *GenerateChangeSe
 type GenerateChangeSetInput struct {
 
 	// The ID of the application associated with the change set.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppId *string
 
 	// The format for the change set.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChangesetFormat types.OutputFormat
 
 	noSmithyDocumentSerde
@@ -42,6 +48,8 @@ type GenerateChangeSetInput struct {
 type GenerateChangeSetOutput struct {
 
 	// The location of the Amazon S3 object.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3Location *types.S3Location
 
 	// Metadata pertaining to the operation's result.

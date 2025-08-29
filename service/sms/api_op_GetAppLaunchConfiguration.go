@@ -13,6 +13,8 @@ import (
 
 // Retrieves the application launch configuration associated with the specified
 // application.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetAppLaunchConfiguration(ctx context.Context, params *GetAppLaunchConfigurationInput, optFns ...func(*Options)) (*GetAppLaunchConfigurationOutput, error) {
 	if params == nil {
 		params = &GetAppLaunchConfigurationInput{}
@@ -31,6 +33,8 @@ func (c *Client) GetAppLaunchConfiguration(ctx context.Context, params *GetAppLa
 type GetAppLaunchConfigurationInput struct {
 
 	// The ID of the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppId *string
 
 	noSmithyDocumentSerde
@@ -39,17 +43,25 @@ type GetAppLaunchConfigurationInput struct {
 type GetAppLaunchConfigurationOutput struct {
 
 	// The ID of the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppId *string
 
 	// Indicates whether the application is configured to launch automatically after
 	// replication is complete.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AutoLaunch *bool
 
 	// The name of the service role in the customer's account that CloudFormation uses
 	// to launch the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleName *string
 
 	// The launch configurations for server groups in this application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerGroupLaunchConfigurations []types.ServerGroupLaunchConfiguration
 
 	// Metadata pertaining to the operation's result.

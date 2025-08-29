@@ -13,6 +13,8 @@ import (
 
 // Retrieves the application replication configuration associated with the
 // specified application.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetAppReplicationConfiguration(ctx context.Context, params *GetAppReplicationConfigurationInput, optFns ...func(*Options)) (*GetAppReplicationConfigurationOutput, error) {
 	if params == nil {
 		params = &GetAppReplicationConfigurationInput{}
@@ -31,6 +33,8 @@ func (c *Client) GetAppReplicationConfiguration(ctx context.Context, params *Get
 type GetAppReplicationConfigurationInput struct {
 
 	// The ID of the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppId *string
 
 	noSmithyDocumentSerde
@@ -40,6 +44,8 @@ type GetAppReplicationConfigurationOutput struct {
 
 	// The replication configurations associated with server groups in this
 	// application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerGroupReplicationConfigurations []types.ServerGroupReplicationConfiguration
 
 	// Metadata pertaining to the operation's result.

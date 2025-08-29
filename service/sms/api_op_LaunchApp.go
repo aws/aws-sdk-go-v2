@@ -11,6 +11,8 @@ import (
 )
 
 // Launches the specified application as a stack in CloudFormation.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) LaunchApp(ctx context.Context, params *LaunchAppInput, optFns ...func(*Options)) (*LaunchAppOutput, error) {
 	if params == nil {
 		params = &LaunchAppInput{}
@@ -29,6 +31,8 @@ func (c *Client) LaunchApp(ctx context.Context, params *LaunchAppInput, optFns .
 type LaunchAppInput struct {
 
 	// The ID of the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppId *string
 
 	noSmithyDocumentSerde

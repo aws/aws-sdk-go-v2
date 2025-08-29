@@ -11,6 +11,8 @@ import (
 )
 
 // Terminates the stack for the specified application.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) TerminateApp(ctx context.Context, params *TerminateAppInput, optFns ...func(*Options)) (*TerminateAppOutput, error) {
 	if params == nil {
 		params = &TerminateAppInput{}
@@ -29,6 +31,8 @@ func (c *Client) TerminateApp(ctx context.Context, params *TerminateAppInput, op
 type TerminateAppInput struct {
 
 	// The ID of the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppId *string
 
 	noSmithyDocumentSerde

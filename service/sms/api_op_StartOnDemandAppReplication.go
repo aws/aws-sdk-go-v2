@@ -11,6 +11,8 @@ import (
 )
 
 // Starts an on-demand replication run for the specified application.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) StartOnDemandAppReplication(ctx context.Context, params *StartOnDemandAppReplicationInput, optFns ...func(*Options)) (*StartOnDemandAppReplicationOutput, error) {
 	if params == nil {
 		params = &StartOnDemandAppReplicationInput{}
@@ -31,9 +33,13 @@ type StartOnDemandAppReplicationInput struct {
 	// The ID of the application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppId *string
 
 	// The description of the replication run.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	noSmithyDocumentSerde

@@ -13,6 +13,8 @@ import (
 )
 
 // Updates the specified settings for the specified replication job.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateReplicationJob(ctx context.Context, params *UpdateReplicationJobInput, optFns ...func(*Options)) (*UpdateReplicationJobOutput, error) {
 	if params == nil {
 		params = &UpdateReplicationJobInput{}
@@ -33,16 +35,24 @@ type UpdateReplicationJobInput struct {
 	// The ID of the replication job.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ReplicationJobId *string
 
 	// The description of the replication job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// When true, the replication job produces encrypted AMIs. For more information,
 	// KmsKeyId .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Encrypted *bool
 
 	// The time between consecutive replication runs, in hours.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Frequency *int32
 
 	// The ID of the KMS key for replication jobs that produce encrypted AMIs. This
@@ -58,19 +68,29 @@ type UpdateReplicationJobInput struct {
 	//
 	// If encrypted is enabled but a KMS key ID is not specified, the customer's
 	// default KMS key for Amazon EBS is used.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KmsKeyId *string
 
 	// The license type to be used for the AMI created by a successful replication run.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LicenseType types.LicenseType
 
 	// The start time of the next replication run.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextReplicationRunStartTime *time.Time
 
 	// The maximum number of SMS-created AMIs to retain. The oldest is deleted after
 	// the maximum number is reached and a new AMI is created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NumberOfRecentAmisToKeep *int32
 
 	// The name of the IAM role to be used by Server Migration Service.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleName *string
 
 	noSmithyDocumentSerde

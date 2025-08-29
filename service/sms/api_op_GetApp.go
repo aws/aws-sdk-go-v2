@@ -12,6 +12,8 @@ import (
 )
 
 // Retrieve information about the specified application.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetApp(ctx context.Context, params *GetAppInput, optFns ...func(*Options)) (*GetAppOutput, error) {
 	if params == nil {
 		params = &GetAppInput{}
@@ -30,6 +32,8 @@ func (c *Client) GetApp(ctx context.Context, params *GetAppInput, optFns ...func
 type GetAppInput struct {
 
 	// The ID of the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppId *string
 
 	noSmithyDocumentSerde
@@ -38,12 +42,18 @@ type GetAppInput struct {
 type GetAppOutput struct {
 
 	// Information about the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppSummary *types.AppSummary
 
 	// The server groups that belong to the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerGroups []types.ServerGroup
 
 	// The tags associated with the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.

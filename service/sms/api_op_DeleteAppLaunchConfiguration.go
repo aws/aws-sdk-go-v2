@@ -11,6 +11,8 @@ import (
 )
 
 // Deletes the launch configuration for the specified application.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteAppLaunchConfiguration(ctx context.Context, params *DeleteAppLaunchConfigurationInput, optFns ...func(*Options)) (*DeleteAppLaunchConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteAppLaunchConfigurationInput{}
@@ -29,6 +31,8 @@ func (c *Client) DeleteAppLaunchConfiguration(ctx context.Context, params *Delet
 type DeleteAppLaunchConfigurationInput struct {
 
 	// The ID of the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppId *string
 
 	noSmithyDocumentSerde

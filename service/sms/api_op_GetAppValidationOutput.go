@@ -12,6 +12,8 @@ import (
 )
 
 // Retrieves output from validating an application.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetAppValidationOutput(ctx context.Context, params *GetAppValidationOutputInput, optFns ...func(*Options)) (*GetAppValidationOutputOutput, error) {
 	if params == nil {
 		params = &GetAppValidationOutputInput{}
@@ -32,6 +34,8 @@ type GetAppValidationOutputInput struct {
 	// The ID of the application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppId *string
 
 	noSmithyDocumentSerde
@@ -40,6 +44,8 @@ type GetAppValidationOutputInput struct {
 type GetAppValidationOutputOutput struct {
 
 	// The validation output.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ValidationOutputList []types.ValidationOutput
 
 	// Metadata pertaining to the operation's result.

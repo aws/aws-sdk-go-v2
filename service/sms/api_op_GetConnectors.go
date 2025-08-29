@@ -12,6 +12,8 @@ import (
 )
 
 // Describes the connectors registered with the Server Migration Service.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetConnectors(ctx context.Context, params *GetConnectorsInput, optFns ...func(*Options)) (*GetConnectorsOutput, error) {
 	if params == nil {
 		params = &GetConnectorsInput{}
@@ -32,9 +34,13 @@ type GetConnectorsInput struct {
 	// The maximum number of results to return in a single call. The default value is
 	// 50. To retrieve the remaining results, make another call with the returned
 	// NextToken value.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// The token for the next set of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -43,10 +49,14 @@ type GetConnectorsInput struct {
 type GetConnectorsOutput struct {
 
 	// Information about the registered connectors.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ConnectorList []types.Connector
 
 	// The token required to retrieve the next set of results. This value is null when
 	// there are no more results to return.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

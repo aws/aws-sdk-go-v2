@@ -12,6 +12,8 @@ import (
 )
 
 // Updates the specified application.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateApp(ctx context.Context, params *UpdateAppInput, optFns ...func(*Options)) (*UpdateAppOutput, error) {
 	if params == nil {
 		params = &UpdateAppInput{}
@@ -30,22 +32,34 @@ func (c *Client) UpdateApp(ctx context.Context, params *UpdateAppInput, optFns .
 type UpdateAppInput struct {
 
 	// The ID of the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppId *string
 
 	// The new description of the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The new name of the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The name of the service role in the customer's account used by Server Migration
 	// Service.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleName *string
 
 	// The server groups in the application to update.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerGroups []types.ServerGroup
 
 	// The tags to associate with the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -54,12 +68,18 @@ type UpdateAppInput struct {
 type UpdateAppOutput struct {
 
 	// A summary description of the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppSummary *types.AppSummary
 
 	// The updated server groups in the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerGroups []types.ServerGroup
 
 	// The tags associated with the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
