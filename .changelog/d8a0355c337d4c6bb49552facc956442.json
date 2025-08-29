@@ -1,0 +1,8 @@
+{
+    "id": "d8a0355c-337d-4c6b-b495-52facc956442",
+    "type": "feature",
+    "description": "Mark service/sms as deprecated. This service is no longer available for use.",
+    "modules": [
+        "service/sms"
+    ]
+}
