@@ -11,61 +11,99 @@ import (
 type AppSummary struct {
 
 	// The unique ID of the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppId *string
 
 	// The creation time of the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTime *time.Time
 
 	// The description of the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The ID of the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ImportedAppId *string
 
 	// The last modified time of the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastModified *time.Time
 
 	// The timestamp of the application's most recent successful replication.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LatestReplicationTime *time.Time
 
 	// Status of the launch configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchConfigurationStatus AppLaunchConfigurationStatus
 
 	// Details about the latest launch of the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchDetails *LaunchDetails
 
 	// The launch status of the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchStatus AppLaunchStatus
 
 	// A message related to the launch status of the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchStatusMessage *string
 
 	// The name of the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// Status of the replication configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ReplicationConfigurationStatus AppReplicationConfigurationStatus
 
 	// The replication status of the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ReplicationStatus AppReplicationStatus
 
 	// A message related to the replication status of the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ReplicationStatusMessage *string
 
 	// The name of the service role in the customer's account used by Server Migration
 	// Service.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleName *string
 
 	// Status of the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status AppStatus
 
 	// A message related to the status of the application
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusMessage *string
 
 	// The number of server groups present in the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TotalServerGroups *int32
 
 	// The number of servers present in the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TotalServers *int32
 
 	noSmithyDocumentSerde
@@ -75,15 +113,23 @@ type AppSummary struct {
 type AppValidationConfiguration struct {
 
 	// The validation strategy.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppValidationStrategy AppValidationStrategy
 
 	// The name of the configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The validation parameters.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SsmValidationParameters *SSMValidationParameters
 
 	// The ID of the validation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ValidationId *string
 
 	noSmithyDocumentSerde
@@ -93,6 +139,8 @@ type AppValidationConfiguration struct {
 type AppValidationOutput struct {
 
 	// Output from using SSM to validate the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SsmOutput *SSMOutput
 
 	noSmithyDocumentSerde
@@ -102,33 +150,53 @@ type AppValidationOutput struct {
 type Connector struct {
 
 	// The time the connector was associated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AssociatedOn *time.Time
 
 	// The capabilities of the connector.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CapabilityList []ConnectorCapability
 
 	// The ID of the connector.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ConnectorId *string
 
 	// The IP address of the connector.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IpAddress *string
 
 	// The MAC address of the connector.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MacAddress *string
 
 	// The status of the connector.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status ConnectorStatus
 
 	// The connector version.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Version *string
 
 	// The ID of the VM manager.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VmManagerId *string
 
 	// The name of the VM manager.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VmManagerName *string
 
 	// The VM management product.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VmManagerType VmManagerType
 
 	noSmithyDocumentSerde
@@ -138,12 +206,18 @@ type Connector struct {
 type LaunchDetails struct {
 
 	// The latest time that this application was launched successfully.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LatestLaunchTime *time.Time
 
 	// The ID of the latest stack launched for this application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackId *string
 
 	// The name of the latest stack launched for this application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StackName *string
 
 	noSmithyDocumentSerde
@@ -153,12 +227,18 @@ type LaunchDetails struct {
 type NotificationContext struct {
 
 	// The status of the validation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status ValidationStatus
 
 	// The status message.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusMessage *string
 
 	// The ID of the validation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ValidationId *string
 
 	noSmithyDocumentSerde
@@ -168,12 +248,18 @@ type NotificationContext struct {
 type ReplicationJob struct {
 
 	// The description of the replication job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// Indicates whether the replication job should produce encrypted AMIs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Encrypted *bool
 
 	// The time between consecutive replication runs, in hours.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Frequency *int32
 
 	// The ID of the KMS key for replication jobs that produce encrypted AMIs. This
@@ -189,49 +275,79 @@ type ReplicationJob struct {
 	//
 	// If encrypted is enabled but a KMS key ID is not specified, the customer's
 	// default KMS key for Amazon EBS is used.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KmsKeyId *string
 
 	// The ID of the latest Amazon Machine Image (AMI).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LatestAmiId *string
 
 	// The license type to be used for the AMI created by a successful replication run.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LicenseType LicenseType
 
 	// The start time of the next replication run.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextReplicationRunStartTime *time.Time
 
 	// The number of recent AMIs to keep in the customer's account for a replication
 	// job. By default, the value is set to zero, meaning that all AMIs are kept.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NumberOfRecentAmisToKeep *int32
 
 	// The ID of the replication job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ReplicationJobId *string
 
 	// Information about the replication runs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ReplicationRunList []ReplicationRun
 
 	// The name of the IAM role to be used by Server Migration Service.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleName *string
 
 	// Indicates whether to run the replication job one time.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RunOnce *bool
 
 	// The seed replication time.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SeedReplicationTime *time.Time
 
 	// The ID of the server.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerId *string
 
 	// The type of server.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerType ServerType
 
 	// The state of the replication job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	State ReplicationJobState
 
 	// The description of the current status of the replication job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusMessage *string
 
 	// Information about the VM server.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VmServer *VmServer
 
 	noSmithyDocumentSerde
@@ -241,15 +357,23 @@ type ReplicationJob struct {
 type ReplicationRun struct {
 
 	// The ID of the Amazon Machine Image (AMI) from the replication run.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AmiId *string
 
 	// The completion time of the last replication run.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CompletedTime *time.Time
 
 	// The description of the replication run.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// Indicates whether the replication run should produce an encrypted AMI.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Encrypted *bool
 
 	// The ID of the KMS key for replication jobs that produce encrypted AMIs. This
@@ -265,24 +389,38 @@ type ReplicationRun struct {
 	//
 	// If encrypted is true but a KMS key ID is not specified, the customer's default
 	// KMS key for Amazon EBS is used.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KmsKeyId *string
 
 	// The ID of the replication run.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ReplicationRunId *string
 
 	// The start time of the next replication run.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ScheduledStartTime *time.Time
 
 	// Details about the current stage of the replication run.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StageDetails *ReplicationRunStageDetails
 
 	// The state of the replication run.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	State ReplicationRunState
 
 	// The description of the current status of the replication job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusMessage *string
 
 	// The type of replication run.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type ReplicationRunType
 
 	noSmithyDocumentSerde
@@ -292,9 +430,13 @@ type ReplicationRun struct {
 type ReplicationRunStageDetails struct {
 
 	// The current stage of a replication run.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Stage *string
 
 	// The progress of the current stage of a replication run.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StageProgress *string
 
 	noSmithyDocumentSerde
@@ -304,9 +446,13 @@ type ReplicationRunStageDetails struct {
 type S3Location struct {
 
 	// The Amazon S3 bucket name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Bucket *string
 
 	// The Amazon S3 bucket key.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Key *string
 
 	noSmithyDocumentSerde
@@ -316,18 +462,28 @@ type S3Location struct {
 type Server struct {
 
 	// The ID of the replication job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ReplicationJobId *string
 
 	// Indicates whether the replication job is deleted or failed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ReplicationJobTerminated *bool
 
 	// The ID of the server.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerId *string
 
 	// The type of server.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerType ServerType
 
 	// Information about the VM server.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VmServer *VmServer
 
 	noSmithyDocumentSerde
@@ -337,12 +493,18 @@ type Server struct {
 type ServerGroup struct {
 
 	// The name of a server group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The ID of a server group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerGroupId *string
 
 	// The servers that belong to a server group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerList []Server
 
 	noSmithyDocumentSerde
@@ -352,12 +514,18 @@ type ServerGroup struct {
 type ServerGroupLaunchConfiguration struct {
 
 	// The launch order of servers in the server group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchOrder *int32
 
 	// The ID of the server group with which the launch configuration is associated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerGroupId *string
 
 	// The launch configuration for servers in the server group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerLaunchConfigurations []ServerLaunchConfiguration
 
 	noSmithyDocumentSerde
@@ -368,9 +536,13 @@ type ServerGroupReplicationConfiguration struct {
 
 	// The ID of the server group with which this replication configuration is
 	// associated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerGroupId *string
 
 	// The replication configuration for servers in the server group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerReplicationConfigurations []ServerReplicationConfiguration
 
 	noSmithyDocumentSerde
@@ -380,9 +552,13 @@ type ServerGroupReplicationConfiguration struct {
 type ServerGroupValidationConfiguration struct {
 
 	// The ID of the server group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerGroupId *string
 
 	// The validation configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerValidationConfigurations []ServerValidationConfiguration
 
 	noSmithyDocumentSerde
@@ -393,40 +569,64 @@ type ServerLaunchConfiguration struct {
 
 	// Indicates whether a publicly accessible IP address is created when launching
 	// the server.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AssociatePublicIpAddress *bool
 
 	// Location of an Amazon S3 object.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ConfigureScript *S3Location
 
 	// The type of configuration script.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ConfigureScriptType ScriptType
 
 	// The name of the Amazon EC2 SSH key to be used for connecting to the launched
 	// server.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Ec2KeyName *string
 
 	// The name of the IAM instance profile.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IamInstanceProfileName *string
 
 	// The instance type to use when launching the server.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceType *string
 
 	// The logical ID of the server in the CloudFormation template.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LogicalId *string
 
 	// The ID of the security group that applies to the launched server.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SecurityGroup *string
 
 	// The ID of the server with which the launch configuration is associated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Server *Server
 
 	// The ID of the subnet the server should be launched into.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Subnet *string
 
 	// Location of the user-data script to be executed when launching the server.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserData *UserData
 
 	// The ID of the VPC into which the server should be launched.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Vpc *string
 
 	noSmithyDocumentSerde
@@ -436,9 +636,13 @@ type ServerLaunchConfiguration struct {
 type ServerReplicationConfiguration struct {
 
 	// The ID of the server with which this replication configuration is associated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Server *Server
 
 	// The parameters for replicating the server.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerReplicationParameters *ServerReplicationParameters
 
 	noSmithyDocumentSerde
@@ -448,9 +652,13 @@ type ServerReplicationConfiguration struct {
 type ServerReplicationParameters struct {
 
 	// Indicates whether the replication job produces encrypted AMIs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Encrypted *bool
 
 	// The frequency of creating replication jobs for the server.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Frequency *int32
 
 	// The ID of the KMS key for replication jobs that produce encrypted AMIs. This
@@ -466,19 +674,29 @@ type ServerReplicationParameters struct {
 	//
 	// If encrypted is enabled but a KMS key ID is not specified, the customer's
 	// default KMS key for Amazon EBS is used.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KmsKeyId *string
 
 	// The license type for creating a replication job for the server.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LicenseType LicenseType
 
 	// The number of recent AMIs to keep when creating a replication job for this
 	// server.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NumberOfRecentAmisToKeep *int32
 
 	// Indicates whether to run the replication job one time.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RunOnce *bool
 
 	// The seed time for creating a replication job for the server.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SeedTime *time.Time
 
 	noSmithyDocumentSerde
@@ -488,18 +706,28 @@ type ServerReplicationParameters struct {
 type ServerValidationConfiguration struct {
 
 	// The name of the configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// Represents a server.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Server *Server
 
 	// The validation strategy.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerValidationStrategy ServerValidationStrategy
 
 	// The validation parameters.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserDataValidationParameters *UserDataValidationParameters
 
 	// The ID of the validation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ValidationId *string
 
 	noSmithyDocumentSerde
@@ -509,6 +737,8 @@ type ServerValidationConfiguration struct {
 type ServerValidationOutput struct {
 
 	// Represents a server.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Server *Server
 
 	noSmithyDocumentSerde
@@ -518,6 +748,8 @@ type ServerValidationOutput struct {
 type Source struct {
 
 	// Location of an Amazon S3 object.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3Location *S3Location
 
 	noSmithyDocumentSerde
@@ -527,6 +759,8 @@ type Source struct {
 type SSMOutput struct {
 
 	// Location of an Amazon S3 object.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3Location *S3Location
 
 	noSmithyDocumentSerde
@@ -536,22 +770,34 @@ type SSMOutput struct {
 type SSMValidationParameters struct {
 
 	// The command to run the validation script.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Command *string
 
 	// The timeout interval, in seconds.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ExecutionTimeoutSeconds int32
 
 	// The ID of the instance. The instance must have the following tag:
 	// UserForSMSApplicationValidation=true.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstanceId *string
 
 	// The name of the S3 bucket for output.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OutputS3BucketName *string
 
 	// The type of validation script.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ScriptType ScriptType
 
 	// The location of the validation script.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Source *Source
 
 	noSmithyDocumentSerde
@@ -561,9 +807,13 @@ type SSMValidationParameters struct {
 type Tag struct {
 
 	// The tag key.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Key *string
 
 	// The tag value.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Value *string
 
 	noSmithyDocumentSerde
@@ -574,6 +824,8 @@ type Tag struct {
 type UserData struct {
 
 	// Amazon S3 location of the user-data script.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3Location *S3Location
 
 	noSmithyDocumentSerde
@@ -583,9 +835,13 @@ type UserData struct {
 type UserDataValidationParameters struct {
 
 	// The type of validation script.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ScriptType ScriptType
 
 	// The location of the validation script.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Source *Source
 
 	noSmithyDocumentSerde
@@ -595,24 +851,38 @@ type UserDataValidationParameters struct {
 type ValidationOutput struct {
 
 	// The output from validating an application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppValidationOutput *AppValidationOutput
 
 	// The latest time that the validation was performed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LatestValidationTime *time.Time
 
 	// The name of the validation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The output from validation an instance.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerValidationOutput *ServerValidationOutput
 
 	// The status of the validation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status ValidationStatus
 
 	// The status message.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusMessage *string
 
 	// The ID of the validation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ValidationId *string
 
 	noSmithyDocumentSerde
@@ -622,18 +892,28 @@ type ValidationOutput struct {
 type VmServer struct {
 
 	// The name of the VM manager.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VmManagerName *string
 
 	// The type of VM management product.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VmManagerType VmManagerType
 
 	// The name of the VM.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VmName *string
 
 	// The VM folder path in the vCenter Server virtual machine inventory tree.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VmPath *string
 
 	// The VM server location.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VmServerAddress *VmServerAddress
 
 	noSmithyDocumentSerde
@@ -643,9 +923,13 @@ type VmServer struct {
 type VmServerAddress struct {
 
 	// The ID of the VM.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VmId *string
 
 	// The ID of the VM manager.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VmManagerId *string
 
 	noSmithyDocumentSerde

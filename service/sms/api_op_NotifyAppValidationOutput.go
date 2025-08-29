@@ -13,6 +13,8 @@ import (
 
 // Provides information to Server Migration Service about whether application
 // validation is successful.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) NotifyAppValidationOutput(ctx context.Context, params *NotifyAppValidationOutputInput, optFns ...func(*Options)) (*NotifyAppValidationOutputOutput, error) {
 	if params == nil {
 		params = &NotifyAppValidationOutputInput{}
@@ -33,9 +35,13 @@ type NotifyAppValidationOutputInput struct {
 	// The ID of the application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppId *string
 
 	// The notification information.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NotificationContext *types.NotificationContext
 
 	noSmithyDocumentSerde

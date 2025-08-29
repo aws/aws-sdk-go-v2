@@ -13,6 +13,8 @@ import (
 
 // Generates an CloudFormation template based on the current launch configuration
 // and writes it to an Amazon S3 object in the customer’s Amazon S3 bucket.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GenerateTemplate(ctx context.Context, params *GenerateTemplateInput, optFns ...func(*Options)) (*GenerateTemplateOutput, error) {
 	if params == nil {
 		params = &GenerateTemplateInput{}
@@ -31,9 +33,13 @@ func (c *Client) GenerateTemplate(ctx context.Context, params *GenerateTemplateI
 type GenerateTemplateInput struct {
 
 	// The ID of the application associated with the CloudFormation template.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppId *string
 
 	// The format for generating the CloudFormation template.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TemplateFormat types.OutputFormat
 
 	noSmithyDocumentSerde
@@ -42,6 +48,8 @@ type GenerateTemplateInput struct {
 type GenerateTemplateOutput struct {
 
 	// The location of the Amazon S3 object.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3Location *types.S3Location
 
 	// Metadata pertaining to the operation's result.

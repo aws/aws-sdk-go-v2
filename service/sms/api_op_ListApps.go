@@ -12,6 +12,8 @@ import (
 )
 
 // Retrieves summaries for all applications.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListApps(ctx context.Context, params *ListAppsInput, optFns ...func(*Options)) (*ListAppsOutput, error) {
 	if params == nil {
 		params = &ListAppsInput{}
@@ -30,14 +32,20 @@ func (c *Client) ListApps(ctx context.Context, params *ListAppsInput, optFns ...
 type ListAppsInput struct {
 
 	// The unique application IDs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppIds []string
 
 	// The maximum number of results to return in a single call. The default value is
 	// 100. To retrieve the remaining results, make another call with the returned
 	// NextToken value.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// The token for the next set of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -46,10 +54,14 @@ type ListAppsInput struct {
 type ListAppsOutput struct {
 
 	// The application summaries.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Apps []types.AppSummary
 
 	// The token required to retrieve the next set of results. This value is null when
 	// there are no more results to return.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -13,6 +13,8 @@ import (
 
 // Creates an application. An application consists of one or more server groups.
 // Each server group contain one or more servers.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateApp(ctx context.Context, params *CreateAppInput, optFns ...func(*Options)) (*CreateAppOutput, error) {
 	if params == nil {
 		params = &CreateAppInput{}
@@ -32,22 +34,34 @@ type CreateAppInput struct {
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of application creation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// The description of the new application
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The name of the new application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The name of the service role in the customer's account to be used by Server
 	// Migration Service.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleName *string
 
 	// The server groups to include in the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerGroups []types.ServerGroup
 
 	// The tags to be associated with the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -56,12 +70,18 @@ type CreateAppInput struct {
 type CreateAppOutput struct {
 
 	// A summary description of the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppSummary *types.AppSummary
 
 	// The server groups included in the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerGroups []types.ServerGroup
 
 	// The tags associated with the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.

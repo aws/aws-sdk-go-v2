@@ -12,6 +12,8 @@ import (
 )
 
 // Creates or updates a validation configuration for the specified application.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) PutAppValidationConfiguration(ctx context.Context, params *PutAppValidationConfigurationInput, optFns ...func(*Options)) (*PutAppValidationConfigurationOutput, error) {
 	if params == nil {
 		params = &PutAppValidationConfigurationInput{}
@@ -32,12 +34,18 @@ type PutAppValidationConfigurationInput struct {
 	// The ID of the application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppId *string
 
 	// The configuration for application validation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppValidationConfigurations []types.AppValidationConfiguration
 
 	// The configuration for instance validation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerGroupValidationConfigurations []types.ServerGroupValidationConfiguration
 
 	noSmithyDocumentSerde

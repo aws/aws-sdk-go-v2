@@ -12,6 +12,8 @@ import (
 )
 
 // Creates or updates the launch configuration for the specified application.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) PutAppLaunchConfiguration(ctx context.Context, params *PutAppLaunchConfigurationInput, optFns ...func(*Options)) (*PutAppLaunchConfigurationOutput, error) {
 	if params == nil {
 		params = &PutAppLaunchConfigurationInput{}
@@ -30,18 +32,26 @@ func (c *Client) PutAppLaunchConfiguration(ctx context.Context, params *PutAppLa
 type PutAppLaunchConfigurationInput struct {
 
 	// The ID of the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppId *string
 
 	// Indicates whether the application is configured to launch automatically after
 	// replication is complete.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AutoLaunch *bool
 
 	// The name of service role in the customer's account that CloudFormation uses to
 	// launch the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleName *string
 
 	// Information about the launch configurations for server groups in the
 	// application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerGroupLaunchConfigurations []types.ServerGroupLaunchConfiguration
 
 	noSmithyDocumentSerde

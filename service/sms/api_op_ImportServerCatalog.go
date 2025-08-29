@@ -15,6 +15,8 @@ import (
 //
 // This call returns immediately, but might take additional time to retrieve all
 // the servers.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ImportServerCatalog(ctx context.Context, params *ImportServerCatalogInput, optFns ...func(*Options)) (*ImportServerCatalogOutput, error) {
 	if params == nil {
 		params = &ImportServerCatalogInput{}

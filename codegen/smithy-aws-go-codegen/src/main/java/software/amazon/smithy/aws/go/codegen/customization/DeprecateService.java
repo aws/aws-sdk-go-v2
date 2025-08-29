@@ -23,7 +23,8 @@ public class DeprecateService implements GoIntegration {
             "com.amazonaws.elasticinference#EC2MatterhornCfSoothsayerApiGatewayLambda",
 	    "com.amazonaws.privatenetworks#E5GNetworkControllerLambda",
 	    "com.amazonaws.opsworks#OpsWorks_20130218",
-	    "com.amazonaws.opsworkscm#OpsWorksCM_V2016_11_01"
+	    "com.amazonaws.opsworkscm#OpsWorksCM_V2016_11_01",
+        "com.amazonaws.sms#AWSServerMigrationService_V2016_10_24"
     );
 
     @Override

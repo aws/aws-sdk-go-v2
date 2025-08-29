@@ -11,6 +11,8 @@ import (
 )
 
 // Allows application import from Migration Hub.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ImportAppCatalog(ctx context.Context, params *ImportAppCatalogInput, optFns ...func(*Options)) (*ImportAppCatalogOutput, error) {
 	if params == nil {
 		params = &ImportAppCatalogInput{}
@@ -33,6 +35,8 @@ type ImportAppCatalogInput struct {
 	// you provide must have the [policy and trust policy]described in the Migration Hub User Guide.
 	//
 	// [policy and trust policy]: https://docs.aws.amazon.com/migrationhub/latest/ug/new-customer-setup.html#sms-managed
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleName *string
 
 	noSmithyDocumentSerde

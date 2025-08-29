@@ -12,6 +12,8 @@ import (
 )
 
 // Describes the specified replication job or all of your replication jobs.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetReplicationJobs(ctx context.Context, params *GetReplicationJobsInput, optFns ...func(*Options)) (*GetReplicationJobsOutput, error) {
 	if params == nil {
 		params = &GetReplicationJobsInput{}
@@ -32,12 +34,18 @@ type GetReplicationJobsInput struct {
 	// The maximum number of results to return in a single call. The default value is
 	// 50. To retrieve the remaining results, make another call with the returned
 	// NextToken value.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// The token for the next set of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// The ID of the replication job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ReplicationJobId *string
 
 	noSmithyDocumentSerde
@@ -47,9 +55,13 @@ type GetReplicationJobsOutput struct {
 
 	// The token required to retrieve the next set of results. This value is null when
 	// there are no more results to return.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Information about the replication jobs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ReplicationJobList []types.ReplicationJob
 
 	// Metadata pertaining to the operation's result.

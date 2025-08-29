@@ -16,6 +16,8 @@ import (
 // Amazon Web Services deletes the contents of the Amazon S3 bucket used to store
 // Server Migration Service artifacts. The AMIs created by the replication runs are
 // not deleted.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteReplicationJob(ctx context.Context, params *DeleteReplicationJobInput, optFns ...func(*Options)) (*DeleteReplicationJobOutput, error) {
 	if params == nil {
 		params = &DeleteReplicationJobInput{}
@@ -36,6 +38,8 @@ type DeleteReplicationJobInput struct {
 	// The ID of the replication job.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ReplicationJobId *string
 
 	noSmithyDocumentSerde

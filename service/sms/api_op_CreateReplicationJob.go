@@ -15,6 +15,8 @@ import (
 // Creates a replication job. The replication job schedules periodic replication
 // runs to replicate your server to Amazon Web Services. Each replication run
 // creates an Amazon Machine Image (AMI).
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateReplicationJob(ctx context.Context, params *CreateReplicationJobInput, optFns ...func(*Options)) (*CreateReplicationJobOutput, error) {
 	if params == nil {
 		params = &CreateReplicationJobInput{}
@@ -35,20 +37,30 @@ type CreateReplicationJobInput struct {
 	// The seed replication time.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SeedReplicationTime *time.Time
 
 	// The ID of the server.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerId *string
 
 	// The description of the replication job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// Indicates whether the replication job produces encrypted AMIs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Encrypted *bool
 
 	// The time between consecutive replication runs, in hours.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Frequency *int32
 
 	// The ID of the KMS key for replication jobs that produce encrypted AMIs. This
@@ -64,19 +76,29 @@ type CreateReplicationJobInput struct {
 	//
 	// If encrypted is true but a KMS key ID is not specified, the customer's default
 	// KMS key for Amazon EBS is used.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KmsKeyId *string
 
 	// The license type to be used for the AMI created by a successful replication run.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LicenseType types.LicenseType
 
 	// The maximum number of SMS-created AMIs to retain. The oldest is deleted after
 	// the maximum number is reached and a new AMI is created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NumberOfRecentAmisToKeep *int32
 
 	// The name of the IAM role to be used by the Server Migration Service.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoleName *string
 
 	// Indicates whether to run the replication job one time.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RunOnce *bool
 
 	noSmithyDocumentSerde
@@ -85,6 +107,8 @@ type CreateReplicationJobInput struct {
 type CreateReplicationJobOutput struct {
 
 	// The unique identifier of the replication job.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ReplicationJobId *string
 
 	// Metadata pertaining to the operation's result.

@@ -15,6 +15,8 @@ import (
 // Describes the servers in your server catalog.
 //
 // Before you can describe your servers, you must import them using ImportServerCatalog.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetServers(ctx context.Context, params *GetServersInput, optFns ...func(*Options)) (*GetServersOutput, error) {
 	if params == nil {
 		params = &GetServersInput{}
@@ -35,12 +37,18 @@ type GetServersInput struct {
 	// The maximum number of results to return in a single call. The default value is
 	// 50. To retrieve the remaining results, make another call with the returned
 	// NextToken value.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// The token for the next set of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// The server addresses.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VmServerAddressList []types.VmServerAddress
 
 	noSmithyDocumentSerde
@@ -49,16 +57,24 @@ type GetServersInput struct {
 type GetServersOutput struct {
 
 	// The time when the server was last modified.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastModifiedOn *time.Time
 
 	// The token required to retrieve the next set of results. This value is null when
 	// there are no more results to return.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// The status of the server catalog.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerCatalogStatus types.ServerCatalogStatus
 
 	// Information about the servers.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerList []types.Server
 
 	// Metadata pertaining to the operation's result.

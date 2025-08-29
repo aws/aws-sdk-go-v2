@@ -11,6 +11,8 @@ import (
 )
 
 // Deletes the replication configuration for the specified application.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteAppReplicationConfiguration(ctx context.Context, params *DeleteAppReplicationConfigurationInput, optFns ...func(*Options)) (*DeleteAppReplicationConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteAppReplicationConfigurationInput{}
@@ -29,6 +31,8 @@ func (c *Client) DeleteAppReplicationConfiguration(ctx context.Context, params *
 type DeleteAppReplicationConfigurationInput struct {
 
 	// The ID of the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppId *string
 
 	noSmithyDocumentSerde

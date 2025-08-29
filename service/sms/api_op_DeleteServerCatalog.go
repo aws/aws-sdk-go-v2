@@ -11,6 +11,8 @@ import (
 )
 
 // Deletes all servers from your server catalog.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteServerCatalog(ctx context.Context, params *DeleteServerCatalogInput, optFns ...func(*Options)) (*DeleteServerCatalogOutput, error) {
 	if params == nil {
 		params = &DeleteServerCatalogInput{}

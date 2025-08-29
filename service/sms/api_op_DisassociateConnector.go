@@ -14,6 +14,8 @@ import (
 //
 // After you disassociate a connector, it is no longer available to support
 // replication jobs.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DisassociateConnector(ctx context.Context, params *DisassociateConnectorInput, optFns ...func(*Options)) (*DisassociateConnectorOutput, error) {
 	if params == nil {
 		params = &DisassociateConnectorInput{}
@@ -34,6 +36,8 @@ type DisassociateConnectorInput struct {
 	// The ID of the connector.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ConnectorId *string
 
 	noSmithyDocumentSerde

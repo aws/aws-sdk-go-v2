@@ -13,6 +13,8 @@ import (
 // Deletes the specified application. Optionally deletes the launched stack
 // associated with the application and all Server Migration Service replication
 // jobs for servers in the application.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteApp(ctx context.Context, params *DeleteAppInput, optFns ...func(*Options)) (*DeleteAppOutput, error) {
 	if params == nil {
 		params = &DeleteAppInput{}
@@ -31,14 +33,20 @@ func (c *Client) DeleteApp(ctx context.Context, params *DeleteAppInput, optFns .
 type DeleteAppInput struct {
 
 	// The ID of the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppId *string
 
 	// Indicates whether to stop all replication jobs corresponding to the servers in
 	// the application while deleting the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ForceStopAppReplication *bool
 
 	// Indicates whether to terminate the stack corresponding to the application while
 	// deleting the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ForceTerminateApp *bool
 
 	noSmithyDocumentSerde

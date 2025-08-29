@@ -12,6 +12,8 @@ import (
 )
 
 // Retrieves information about a configuration for validating an application.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetAppValidationConfiguration(ctx context.Context, params *GetAppValidationConfigurationInput, optFns ...func(*Options)) (*GetAppValidationConfigurationOutput, error) {
 	if params == nil {
 		params = &GetAppValidationConfigurationInput{}
@@ -32,6 +34,8 @@ type GetAppValidationConfigurationInput struct {
 	// The ID of the application.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppId *string
 
 	noSmithyDocumentSerde
@@ -40,9 +44,13 @@ type GetAppValidationConfigurationInput struct {
 type GetAppValidationConfigurationOutput struct {
 
 	// The configuration for application validation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppValidationConfigurations []types.AppValidationConfiguration
 
 	// The configuration for instance validation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ServerGroupValidationConfigurations []types.ServerGroupValidationConfiguration
 
 	// Metadata pertaining to the operation's result.

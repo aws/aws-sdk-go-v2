@@ -16,6 +16,8 @@ import (
 //
 // There is a limit on the number of on-demand replications runs that you can
 // request in a 24-hour period.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) StartOnDemandReplicationRun(ctx context.Context, params *StartOnDemandReplicationRunInput, optFns ...func(*Options)) (*StartOnDemandReplicationRunOutput, error) {
 	if params == nil {
 		params = &StartOnDemandReplicationRunInput{}
@@ -36,9 +38,13 @@ type StartOnDemandReplicationRunInput struct {
 	// The ID of the replication job.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ReplicationJobId *string
 
 	// The description of the replication run.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	noSmithyDocumentSerde
@@ -47,6 +53,8 @@ type StartOnDemandReplicationRunInput struct {
 type StartOnDemandReplicationRunOutput struct {
 
 	// The ID of the replication run.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ReplicationRunId *string
 
 	// Metadata pertaining to the operation's result.

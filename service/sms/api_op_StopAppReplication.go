@@ -12,6 +12,8 @@ import (
 
 // Stops replicating the specified application by deleting the replication job for
 // each server in the application.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) StopAppReplication(ctx context.Context, params *StopAppReplicationInput, optFns ...func(*Options)) (*StopAppReplicationOutput, error) {
 	if params == nil {
 		params = &StopAppReplicationInput{}
@@ -30,6 +32,8 @@ func (c *Client) StopAppReplication(ctx context.Context, params *StopAppReplicat
 type StopAppReplicationInput struct {
 
 	// The ID of the application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AppId *string
 
 	noSmithyDocumentSerde
