@@ -1,3 +1,7 @@
+# v1.36.0 (2025-09-02)
+
+* **Feature**: Make RoleArn an optional parameter for the PutEmailMonitoringConfiguration API, and add UnsupportedOperationException to RegisterToWorkMail.
+
 # v1.35.1 (2025-08-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

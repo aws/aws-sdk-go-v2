@@ -1,3 +1,7 @@
+# v1.7.0 (2025-09-02)
+
+* **Feature**: Added Org support for notifications:  - `ListMemberAccounts` gets member accounts list, `AssociateOrganizationalUnit` links OU to notification configuration, `DisassociateOrganizationalUnit` removes OU from notification configuration, `ListOrganizationalUnits` shows OUs configured for notifications.
+
 # v1.6.4 (2025-08-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

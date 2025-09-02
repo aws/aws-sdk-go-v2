@@ -1,8 +1,0 @@
-{
-    "id": "f30a2ee0-1db3-4e1b-8c8b-f639f71a0236",
-    "type": "feature",
-    "description": "MaximumEbsAttachments and AttachmentLimitType fields added to DescribeInstanceTypesResponse. G6f, Gr6f, R8i, R8i-flex and p5.4xlarge instance types added to InstanceTypes enum.",
-    "modules": [
-        "service/ec2"
-    ]
-}

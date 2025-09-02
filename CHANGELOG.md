@@ -1,3 +1,15 @@
+# Release (2025-09-02)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.250.0](service/ec2/CHANGELOG.md#v12500-2025-09-02)
+  * **Feature**: MaximumEbsAttachments and AttachmentLimitType fields added to DescribeInstanceTypesResponse. G6f, Gr6f, R8i, R8i-flex and p5.4xlarge instance types added to InstanceTypes enum.
+* `github.com/aws/aws-sdk-go-v2/service/neptune`: [v1.42.0](service/neptune/CHANGELOG.md#v1420-2025-09-02)
+  * **Feature**: Removed the deprecated marker from publiclyAccessible parameter from DbInstance, CreateDbInstance and ModifyDbInstance and added relevant usage information for the parameter.
+* `github.com/aws/aws-sdk-go-v2/service/notifications`: [v1.7.0](service/notifications/CHANGELOG.md#v170-2025-09-02)
+  * **Feature**: Added Org support for notifications:  - `ListMemberAccounts` gets member accounts list, `AssociateOrganizationalUnit` links OU to notification configuration, `DisassociateOrganizationalUnit` removes OU from notification configuration, `ListOrganizationalUnits` shows OUs configured for notifications.
+* `github.com/aws/aws-sdk-go-v2/service/workmail`: [v1.36.0](service/workmail/CHANGELOG.md#v1360-2025-09-02)
+  * **Feature**: Make RoleArn an optional parameter for the PutEmailMonitoringConfiguration API, and add UnsupportedOperationException to RegisterToWorkMail.
+
 # Release (2025-08-29)
 
 ## General Highlights

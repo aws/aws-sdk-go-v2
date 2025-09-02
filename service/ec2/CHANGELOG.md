@@ -1,3 +1,7 @@
+# v1.250.0 (2025-09-02)
+
+* **Feature**: MaximumEbsAttachments and AttachmentLimitType fields added to DescribeInstanceTypesResponse. G6f, Gr6f, R8i, R8i-flex and p5.4xlarge instance types added to InstanceTypes enum.
+
 # v1.249.0 (2025-08-29)
 
 * **Feature**: Release shows new route types such as filtered and advertisement.

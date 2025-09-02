@@ -1,8 +1,0 @@
-{
-    "id": "7f60aae1-4b30-412b-b876-6ce96923e4aa",
-    "type": "feature",
-    "description": "Added Org support for notifications:  - `ListMemberAccounts` gets member accounts list, `AssociateOrganizationalUnit` links OU to notification configuration, `DisassociateOrganizationalUnit` removes OU from notification configuration, `ListOrganizationalUnits` shows OUs configured for notifications.",
-    "modules": [
-        "service/notifications"
-    ]
-}

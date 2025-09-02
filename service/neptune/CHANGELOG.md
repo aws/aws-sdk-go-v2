@@ -1,3 +1,7 @@
+# v1.42.0 (2025-09-02)
+
+* **Feature**: Removed the deprecated marker from publiclyAccessible parameter from DbInstance, CreateDbInstance and ModifyDbInstance and added relevant usage information for the parameter.
+
 # v1.41.1 (2025-08-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions
