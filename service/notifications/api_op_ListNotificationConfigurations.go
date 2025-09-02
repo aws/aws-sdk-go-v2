@@ -74,6 +74,9 @@ type ListNotificationConfigurationsInput struct {
 	//   - Only GET and LIST calls can be run.
 	Status types.NotificationConfigurationStatus
 
+	// The subtype used to filter the notification configurations in the request.
+	Subtype types.NotificationConfigurationSubtype
+
 	noSmithyDocumentSerde
 }
 

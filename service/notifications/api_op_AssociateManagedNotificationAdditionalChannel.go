@@ -13,8 +13,8 @@ import (
 // Associates an additional Channel with a particular
 // ManagedNotificationConfiguration .
 //
-// Supported Channels include Chatbot, the Console Mobile Application, and emails
-// (notifications-contacts).
+// Supported Channels include Amazon Q Developer in chat applications, the Console
+// Mobile Application, and emails (notifications-contacts).
 func (c *Client) AssociateManagedNotificationAdditionalChannel(ctx context.Context, params *AssociateManagedNotificationAdditionalChannelInput, optFns ...func(*Options)) (*AssociateManagedNotificationAdditionalChannelOutput, error) {
 	if params == nil {
 		params = &AssociateManagedNotificationAdditionalChannelInput{}
@@ -35,8 +35,8 @@ type AssociateManagedNotificationAdditionalChannelInput struct {
 	// The Amazon Resource Name (ARN) of the Channel to associate with the
 	// ManagedNotificationConfiguration .
 	//
-	// Supported ARNs include Chatbot, the Console Mobile Application, and email
-	// (notifications-contacts).
+	// Supported ARNs include Amazon Q Developer in chat applications, the Console
+	// Mobile Application, and email (notifications-contacts).
 	//
 	// This member is required.
 	ChannelArn *string

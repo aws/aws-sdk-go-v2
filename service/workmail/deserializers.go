@@ -9470,6 +9470,9 @@ func awsAwsjson11_deserializeOpErrorRegisterToWorkMail(response *smithyhttp.Resp
 	case strings.EqualFold("OrganizationStateException", errorCode):
 		return awsAwsjson11_deserializeErrorOrganizationStateException(response, errorBody)
 
+	case strings.EqualFold("UnsupportedOperationException", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedOperationException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,

@@ -3,9 +3,9 @@
 // Package notifications provides the API client, operations, and parameter types
 // for AWS User Notifications.
 //
-// The Amazon Web Services User Notifications API Reference provides descriptions,
-// API request parameters, and the JSON response for each of the User Notification
-// API actions.
+// The User Notifications API Reference provides descriptions, API request
+// parameters, and the JSON response for each of the User Notifications API
+// actions.
 //
 // User Notification control plane APIs are currently available in US East
 // (Virginia) - us-east-1 .
@@ -17,8 +17,12 @@
 // data however, is stored in each Region chosen as a [notification hub]in addition to US East
 // (Virginia).
 //
+// For information about descriptions, API request parameters, and the JSON
+// response for email contact related API actions, see the [User Notifications Contacts API Reference Guide].
+//
 // [GetNotificationEvent]: https://docs.aws.amazon.com/notifications/latest/APIReference/API_GetNotificationEvent.html
 // [notification hub]: https://docs.aws.amazon.com/notifications/latest/userguide/notification-hubs.html
 // [ListNotificationEvents]: https://docs.aws.amazon.com/notifications/latest/APIReference/API_ListNotificationEvents.html
 // [commercial partition Regions]: https://docs.aws.amazon.com/notifications/latest/userguide/supported-regions.html
+// [User Notifications Contacts API Reference Guide]: https://docs.aws.amazon.com/notificationscontacts/latest/APIReference/Welcome.html
 package notifications

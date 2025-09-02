@@ -11,8 +11,8 @@ import (
 )
 
 // Associates a delivery [Channel] with a particular NotificationConfiguration . Supported
-// Channels include Chatbot, the Console Mobile Application, and emails
-// (notifications-contacts).
+// Channels include Amazon Q Developer in chat applications, the Console Mobile
+// Application, and emails (notifications-contacts).
 //
 // [Channel]: https://docs.aws.amazon.com/notifications/latest/userguide/managing-delivery-channels.html
 func (c *Client) AssociateChannel(ctx context.Context, params *AssociateChannelInput, optFns ...func(*Options)) (*AssociateChannelOutput, error) {
@@ -35,8 +35,8 @@ type AssociateChannelInput struct {
 	// The Amazon Resource Name (ARN) of the Channel to associate with the
 	// NotificationConfiguration .
 	//
-	// Supported ARNs include Chatbot, the Console Mobile Application, and
-	// notifications-contacts.
+	// Supported ARNs include Amazon Q Developer in chat applications, the Console
+	// Mobile Application, and notifications-contacts.
 	//
 	// This member is required.
 	Arn *string

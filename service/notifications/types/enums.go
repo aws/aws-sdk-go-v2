@@ -9,6 +9,7 @@ const (
 	AccessStatusEnabled  AccessStatus = "ENABLED"
 	AccessStatusDisabled AccessStatus = "DISABLED"
 	AccessStatusPending  AccessStatus = "PENDING"
+	AccessStatusFailed   AccessStatus = "FAILED"
 )
 
 // Values returns all known values for AccessStatus. Note that this can be
@@ -20,6 +21,7 @@ func (AccessStatus) Values() []AccessStatus {
 		"ENABLED",
 		"DISABLED",
 		"PENDING",
+		"FAILED",
 	}
 }
 
@@ -275,6 +277,37 @@ func (MediaElementType) Values() []MediaElementType {
 	}
 }
 
+type MemberAccountNotificationConfigurationStatus string
+
+// Enum values for MemberAccountNotificationConfigurationStatus
+const (
+	// The member account Notification Configuration status is ACTIVE.
+	MemberAccountNotificationConfigurationStatusActive MemberAccountNotificationConfigurationStatus = "ACTIVE"
+	// The member account Notification Configuration status is PENDING.
+	MemberAccountNotificationConfigurationStatusPending MemberAccountNotificationConfigurationStatus = "PENDING"
+	// The member account Notification Configuration status is INACTIVE.
+	MemberAccountNotificationConfigurationStatusInactive MemberAccountNotificationConfigurationStatus = "INACTIVE"
+	// The member account Notification Configuration status is CREATING.
+	MemberAccountNotificationConfigurationStatusCreating MemberAccountNotificationConfigurationStatus = "CREATING"
+	// The member account Notification Configuration status is DELETING.
+	MemberAccountNotificationConfigurationStatusDeleting MemberAccountNotificationConfigurationStatus = "DELETING"
+)
+
+// Values returns all known values for
+// MemberAccountNotificationConfigurationStatus. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MemberAccountNotificationConfigurationStatus) Values() []MemberAccountNotificationConfigurationStatus {
+	return []MemberAccountNotificationConfigurationStatus{
+		"ACTIVE",
+		"PENDING",
+		"INACTIVE",
+		"CREATING",
+		"DELETING",
+	}
+}
+
 type NotificationConfigurationStatus string
 
 // Enum values for NotificationConfigurationStatus
@@ -302,6 +335,28 @@ func (NotificationConfigurationStatus) Values() []NotificationConfigurationStatu
 		"PARTIALLY_ACTIVE",
 		"INACTIVE",
 		"DELETING",
+	}
+}
+
+type NotificationConfigurationSubtype string
+
+// Enum values for NotificationConfigurationSubtype
+const (
+	// Notification configuration created by the account
+	NotificationConfigurationSubtypeAccount NotificationConfigurationSubtype = "ACCOUNT"
+	// Notification configuration managed by an administrator account
+	NotificationConfigurationSubtypeAdminManaged NotificationConfigurationSubtype = "ADMIN_MANAGED"
+)
+
+// Values returns all known values for NotificationConfigurationSubtype. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NotificationConfigurationSubtype) Values() []NotificationConfigurationSubtype {
+	return []NotificationConfigurationSubtype{
+		"ACCOUNT",
+		"ADMIN_MANAGED",
 	}
 }
 

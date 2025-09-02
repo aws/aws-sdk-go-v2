@@ -3657,9 +3657,6 @@ func validateOpPutEmailMonitoringConfigurationInput(v *PutEmailMonitoringConfigu
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
-	}
 	if v.LogGroupArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LogGroupArn"))
 	}

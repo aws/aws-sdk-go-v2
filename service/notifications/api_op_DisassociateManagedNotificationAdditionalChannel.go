@@ -13,8 +13,8 @@ import (
 // Disassociates an additional Channel from a particular
 // ManagedNotificationConfiguration .
 //
-// Supported Channels include Chatbot, the Console Mobile Application, and emails
-// (notifications-contacts).
+// Supported Channels include Amazon Q Developer in chat applications, the Console
+// Mobile Application, and emails (notifications-contacts).
 func (c *Client) DisassociateManagedNotificationAdditionalChannel(ctx context.Context, params *DisassociateManagedNotificationAdditionalChannelInput, optFns ...func(*Options)) (*DisassociateManagedNotificationAdditionalChannelOutput, error) {
 	if params == nil {
 		params = &DisassociateManagedNotificationAdditionalChannelInput{}

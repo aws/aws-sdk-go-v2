@@ -223,8 +223,8 @@ type ManagedNotificationChannelAssociationSummary struct {
 	//
 	//   - CHATBOT
 	//
-	//   - Delivers notifications through Chatbot to collaboration platforms (Slack,
-	//   Chime).
+	//   - Delivers notifications through Amazon Q Developer in chat applications to
+	//   collaboration platforms (Slack, Chime).
 	//
 	//   - EMAIL
 	//
@@ -586,8 +586,7 @@ type ManagedNotificationEventOverview struct {
 	// This member is required.
 	ManagedNotificationConfigurationArn *string
 
-	// A short summary of a ManagedNotificationEvent . This is only used when listing
-	// managed notification events.
+	//
 	//
 	// This member is required.
 	NotificationEvent *ManagedNotificationEventSummary
@@ -743,6 +742,36 @@ type MediaElement struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about a member account.
+type MemberAccount struct {
+
+	// The AWS account ID of the member account.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The unique identifier of the organizational unit containing the member account.
+	//
+	// This member is required.
+	OrganizationalUnitId *string
+
+	// The current status of the member account.
+	//
+	// This member is required.
+	Status MemberAccountNotificationConfigurationStatus
+
+	// The reason for the current status of the member account.
+	//
+	// This member is required.
+	StatusReason *string
+
+	// The Amazon Resource Name (ARN) of the notification configuration associated
+	// with the member account.
+	NotificationConfigurationArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the components of a notification message.
 type MessageComponents struct {
 
@@ -759,8 +788,8 @@ type MessageComponents struct {
 	// A sentence long summary. For example, titles or an email subject line.
 	Headline *string
 
-	// A paragraph long or multiple sentence summary. For example, Chatbot
-	// notifications.
+	// A paragraph long or multiple sentence summary. For example, Amazon Q Developer
+	// in chat applications notifications.
 	ParagraphSummary *string
 
 	noSmithyDocumentSerde
@@ -823,6 +852,9 @@ type NotificationConfigurationStructure struct {
 	//   - Don't aggregate notifications.
 	AggregationDuration AggregationDuration
 
+	// The subtype of the notification configuration.
+	Subtype NotificationConfigurationSubtype
+
 	noSmithyDocumentSerde
 }
 
@@ -880,6 +912,10 @@ type NotificationEventOverview struct {
 
 	// Provides an aggregated summary data for notification events.
 	AggregationSummary *AggregationSummary
+
+	// The unique identifier of the organizational unit in the notification event
+	// overview.
+	OrganizationalUnitId *string
 
 	noSmithyDocumentSerde
 }
@@ -987,6 +1023,10 @@ type NotificationEventSchema struct {
 	//
 	//   - Some EventRules are ACTIVE and some are INACTIVE . Any call can be run.
 	EventStatus EventStatus
+
+	// The unique identifier of the organizational unit associated with the
+	// notification event.
+	OrganizationalUnitId *string
 
 	// The source event URL.
 	SourceEventDetailUrl *string

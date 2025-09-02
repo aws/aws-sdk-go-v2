@@ -1,0 +1,8 @@
+{
+    "id": "560e61cb-1b7f-4e94-9a19-85090d588f28",
+    "type": "feature",
+    "description": "Make RoleArn an optional parameter for the PutEmailMonitoringConfiguration API, and add UnsupportedOperationException to RegisterToWorkMail.",
+    "modules": [
+        "service/workmail"
+    ]
+}

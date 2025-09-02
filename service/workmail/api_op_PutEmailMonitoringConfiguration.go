@@ -41,9 +41,8 @@ type PutEmailMonitoringConfigurationInput struct {
 	OrganizationId *string
 
 	// The Amazon Resource Name (ARN) of the IAM Role associated with the email
-	// monitoring configuration.
-	//
-	// This member is required.
+	// monitoring configuration. If absent, the IAM Role Arn of
+	// AWSServiceRoleForAmazonWorkMailEvents will be used.
 	RoleArn *string
 
 	noSmithyDocumentSerde

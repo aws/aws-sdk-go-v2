@@ -1019,7 +1019,9 @@ type BlobAttributeValue struct {
 // store volumes to attach to an instance at launch.
 type BlockDeviceMapping struct {
 
-	// The device name (for example, /dev/sdh or xvdh ).
+	// The device name. For available device names, see [Device names for volumes].
+	//
+	// [Device names for volumes]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/device_naming.html
 	DeviceName *string
 
 	// Parameters used to automatically set up EBS volumes when the instance is
@@ -4316,6 +4318,12 @@ type EbsBlockDeviceResponse struct {
 // Describes the Amazon EBS features supported by the instance type.
 type EbsInfo struct {
 
+	// Indicates whether the instance type features a shared or dedicated Amazon EBS
+	// volume attachment limit. For more information, see [Amazon EBS volume limits for Amazon EC2 instances]in the Amazon EC2 User Guide.
+	//
+	// [Amazon EBS volume limits for Amazon EC2 instances]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html
+	AttachmentLimitType AttachmentLimitType
+
 	// Describes the optimized EBS performance for the instance type.
 	EbsOptimizedInfo *EbsOptimizedInfo
 
@@ -4327,6 +4335,12 @@ type EbsInfo struct {
 
 	// Indicates whether Amazon EBS encryption is supported.
 	EncryptionSupport EbsEncryptionSupport
+
+	// Indicates the maximum number of Amazon EBS volumes that can be attached to the
+	// instance type. For more information, see [Amazon EBS volume limits for Amazon EC2 instances]in the Amazon EC2 User Guide.
+	//
+	// [Amazon EBS volume limits for Amazon EC2 instances]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html
+	MaximumEbsAttachments *int32
 
 	// Indicates whether non-volatile memory express (NVMe) is supported.
 	NvmeSupport EbsNvmeSupport
@@ -7855,7 +7869,7 @@ type InstanceAttachmentEnaSrdUdpSpecification struct {
 // Describes a block device mapping.
 type InstanceBlockDeviceMapping struct {
 
-	// The device name (for example, /dev/sdh or xvdh ).
+	// The device name.
 	DeviceName *string
 
 	// Parameters used to automatically set up EBS volumes when the instance is
@@ -7868,7 +7882,9 @@ type InstanceBlockDeviceMapping struct {
 // Describes a block device mapping entry.
 type InstanceBlockDeviceMappingSpecification struct {
 
-	// The device name (for example, /dev/sdh or xvdh ).
+	// The device name. For available device names, see [Device names for volumes].
+	//
+	// [Device names for volumes]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/device_naming.html
 	DeviceName *string
 
 	// Parameters used to automatically set up EBS volumes when the instance is
@@ -15209,9 +15225,9 @@ type Placement struct {
 
 	// The Availability Zone of the instance.
 	//
-	// Either AvailabilityZone or AvailabilityZoneId can be specified, but not both.
-	// If neither is specified, Amazon EC2 automatically selects an Availability Zone
-	// based on the load balancing criteria for the Region.
+	// On input, you can specify AvailabilityZone or AvailabilityZoneId , but not both.
+	// If you specify neither one, Amazon EC2 automatically selects an Availability
+	// Zone for you.
 	//
 	// This parameter is not supported for [CreateFleet].
 	//
@@ -15220,21 +15236,23 @@ type Placement struct {
 
 	// The ID of the Availability Zone of the instance.
 	//
-	// Either AvailabilityZone or AvailabilityZoneId can be specified, but not both.
-	// If neither is specified, Amazon EC2 automatically selects an Availability Zone
-	// based on the load balancing criteria for the Region.
+	// On input, you can specify AvailabilityZone or AvailabilityZoneId , but not both.
+	// If you specify neither one, Amazon EC2 automatically selects an Availability
+	// Zone for you.
 	//
 	// This parameter is not supported for [CreateFleet].
 	//
 	// [CreateFleet]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet
 	AvailabilityZoneId *string
 
-	// The ID of the placement group that the instance is in. If you specify GroupId ,
-	// you can't specify GroupName .
+	// The ID of the placement group that the instance is in.
+	//
+	// On input, you can specify GroupId or GroupName , but not both.
 	GroupId *string
 
-	// The name of the placement group that the instance is in. If you specify
-	// GroupName , you can't specify GroupId .
+	// The name of the placement group that the instance is in.
+	//
+	// On input, you can specify GroupId or GroupName , but not both.
 	GroupName *string
 
 	// The ID of the Dedicated Host on which the instance resides.
@@ -15247,8 +15265,8 @@ type Placement struct {
 
 	// The ARN of the host resource group in which to launch the instances.
 	//
-	// If you specify this parameter, either omit the Tenancy parameter or set it to
-	// host .
+	// On input, if you specify this parameter, either omit the Tenancy parameter or
+	// set it to host .
 	//
 	// This parameter is not supported for [CreateFleet].
 	//

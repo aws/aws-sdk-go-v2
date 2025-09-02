@@ -11,8 +11,8 @@ import (
 )
 
 // Disassociates a Channel from a specified NotificationConfiguration . Supported
-// Channels include Chatbot, the Console Mobile Application, and emails
-// (notifications-contacts).
+// Channels include Amazon Q Developer in chat applications, the Console Mobile
+// Application, and emails (notifications-contacts).
 func (c *Client) DisassociateChannel(ctx context.Context, params *DisassociateChannelInput, optFns ...func(*Options)) (*DisassociateChannelOutput, error) {
 	if params == nil {
 		params = &DisassociateChannelInput{}

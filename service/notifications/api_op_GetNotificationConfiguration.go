@@ -82,6 +82,9 @@ type GetNotificationConfigurationOutput struct {
 	//   - Don't aggregate notifications.
 	AggregationDuration types.AggregationDuration
 
+	// The subtype of the notification configuration returned in the response.
+	Subtype types.NotificationConfigurationSubtype
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

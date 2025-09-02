@@ -1,0 +1,8 @@
+{
+    "id": "d8490cb5-46bf-4258-b4ca-551f924d9cdc",
+    "type": "feature",
+    "description": "Removed the deprecated marker from publiclyAccessible parameter from DbInstance, CreateDbInstance and ModifyDbInstance and added relevant usage information for the parameter.",
+    "modules": [
+        "service/neptune"
+    ]
+}

@@ -69,6 +69,26 @@ func (m *validateOpAssociateManagedNotificationAdditionalChannel) HandleInitiali
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateOrganizationalUnit struct {
+}
+
+func (*validateOpAssociateOrganizationalUnit) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateOrganizationalUnit) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateOrganizationalUnitInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateOrganizationalUnitInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateEventRule struct {
 }
 
@@ -224,6 +244,26 @@ func (m *validateOpDisassociateManagedNotificationAdditionalChannel) HandleIniti
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDisassociateManagedNotificationAdditionalChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateOrganizationalUnit struct {
+}
+
+func (*validateOpDisassociateOrganizationalUnit) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateOrganizationalUnit) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateOrganizationalUnitInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateOrganizationalUnitInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -429,6 +469,46 @@ func (m *validateOpListManagedNotificationChildEvents) HandleInitialize(ctx cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListMemberAccounts struct {
+}
+
+func (*validateOpListMemberAccounts) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListMemberAccounts) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListMemberAccountsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListMemberAccountsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListOrganizationalUnits struct {
+}
+
+func (*validateOpListOrganizationalUnits) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListOrganizationalUnits) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListOrganizationalUnitsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListOrganizationalUnitsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -561,6 +641,10 @@ func addOpAssociateManagedNotificationAdditionalChannelValidationMiddleware(stac
 	return stack.Initialize.Add(&validateOpAssociateManagedNotificationAdditionalChannel{}, middleware.After)
 }
 
+func addOpAssociateOrganizationalUnitValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateOrganizationalUnit{}, middleware.After)
+}
+
 func addOpCreateEventRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateEventRule{}, middleware.After)
 }
@@ -591,6 +675,10 @@ func addOpDisassociateManagedNotificationAccountContactValidationMiddleware(stac
 
 func addOpDisassociateManagedNotificationAdditionalChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateManagedNotificationAdditionalChannel{}, middleware.After)
+}
+
+func addOpDisassociateOrganizationalUnitValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateOrganizationalUnit{}, middleware.After)
 }
 
 func addOpGetEventRuleValidationMiddleware(stack *middleware.Stack) error {
@@ -631,6 +719,14 @@ func addOpListManagedNotificationChannelAssociationsValidationMiddleware(stack *
 
 func addOpListManagedNotificationChildEventsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListManagedNotificationChildEvents{}, middleware.After)
+}
+
+func addOpListMemberAccountsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListMemberAccounts{}, middleware.After)
+}
+
+func addOpListOrganizationalUnitsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListOrganizationalUnits{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -703,6 +799,24 @@ func validateOpAssociateManagedNotificationAdditionalChannelInput(v *AssociateMa
 	}
 	if v.ManagedNotificationConfigurationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ManagedNotificationConfigurationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateOrganizationalUnitInput(v *AssociateOrganizationalUnitInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateOrganizationalUnitInput"}
+	if v.OrganizationalUnitId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationalUnitId"))
+	}
+	if v.NotificationConfigurationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NotificationConfigurationArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -844,6 +958,24 @@ func validateOpDisassociateManagedNotificationAdditionalChannelInput(v *Disassoc
 	}
 	if v.ManagedNotificationConfigurationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ManagedNotificationConfigurationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateOrganizationalUnitInput(v *DisassociateOrganizationalUnitInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateOrganizationalUnitInput"}
+	if v.OrganizationalUnitId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationalUnitId"))
+	}
+	if v.NotificationConfigurationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NotificationConfigurationArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -994,6 +1126,36 @@ func validateOpListManagedNotificationChildEventsInput(v *ListManagedNotificatio
 	invalidParams := smithy.InvalidParamsError{Context: "ListManagedNotificationChildEventsInput"}
 	if v.AggregateManagedNotificationEventArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AggregateManagedNotificationEventArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListMemberAccountsInput(v *ListMemberAccountsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListMemberAccountsInput"}
+	if v.NotificationConfigurationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NotificationConfigurationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListOrganizationalUnitsInput(v *ListOrganizationalUnitsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOrganizationalUnitsInput"}
+	if v.NotificationConfigurationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NotificationConfigurationArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

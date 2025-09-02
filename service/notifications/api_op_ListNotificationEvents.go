@@ -61,6 +61,10 @@ type ListNotificationEventsInput struct {
 	// ListEventRules call. Next token uses Base64 encoding.
 	NextToken *string
 
+	// The unique identifier of the organizational unit used to filter notification
+	// events.
+	OrganizationalUnitId *string
+
 	// The matched event source.
 	//
 	// Must match one of the valid EventBridge sources. Only Amazon Web Services
