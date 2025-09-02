@@ -2666,8 +2666,7 @@
                 "PubliclyAccessible": {
                     "target": "com.amazonaws.neptune#BooleanOptional",
                     "traits": {
-                        "smithy.api#deprecated": {},
-                        "smithy.api#documentation": "<p>This flag should no longer be used.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the DB instance is publicly accessible.</p>\n         <p>When the DB instance is publicly accessible and you connect from outside of the DB instance's virtual private \n      cloud (VPC), its Domain Name System (DNS) endpoint resolves to the public IP address. When you connect from within \n      the same VPC as the DB instance, the endpoint resolves to the private IP address. Access to the DB instance is \n      ultimately controlled by the security group it uses. That public access isn't permitted if the security group assigned \n      to the DB cluster doesn't permit it.</p>\n         <p>When the DB instance isn't publicly accessible, it is an internal DB instance with a DNS name that resolves to a \n      private IP address.</p>"
                     }
                 },
                 "Tags": {
@@ -4483,8 +4482,7 @@
                 "PubliclyAccessible": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#deprecated": {},
-                        "smithy.api#documentation": "<p>This flag should no longer be used.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the DB instance is publicly accessible.</p>\n         <p>When the DB instance is publicly accessible and you connect from outside of the DB instance's virtual private \n      cloud (VPC), its Domain Name System (DNS) endpoint resolves to the public IP address. When you connect from within \n      the same VPC as the DB instance, the endpoint resolves to the private IP address. Access to the DB instance is \n      ultimately controlled by the security group it uses. That public access isn't permitted if the security group assigned \n      to the DB cluster doesn't permit it.</p>\n         <p>When the DB instance isn't publicly accessible, it is an internal DB instance with a DNS name that resolves to a \n      private IP address.</p>"
                     }
                 },
                 "StatusInfos": {
@@ -8974,8 +8972,7 @@
                 "PubliclyAccessible": {
                     "target": "com.amazonaws.neptune#BooleanOptional",
                     "traits": {
-                        "smithy.api#deprecated": {},
-                        "smithy.api#documentation": "<p>This flag should no longer be used.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the DB instance is publicly accessible.</p>\n         <p>When the DB instance is publicly accessible and you connect from outside of the DB instance's virtual private \n      cloud (VPC), its Domain Name System (DNS) endpoint resolves to the public IP address. When you connect from within \n      the same VPC as the DB instance, the endpoint resolves to the private IP address. Access to the DB instance is \n      ultimately controlled by the security group it uses. That public access isn't permitted if the security group assigned \n      to the DB cluster doesn't permit it.</p>\n         <p>When the DB instance isn't publicly accessible, it is an internal DB instance with a DNS name that resolves to a \n      private IP address.</p>"
                     }
                 },
                 "MonitoringRoleArn": {

@@ -37,6 +37,12 @@
                     "traits": {
                         "smithy.api#enumValue": "PENDING"
                     }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
                 }
             }
         },
@@ -253,7 +259,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to associate a new Channel with a particular NotificationConfiguration"
                 },
-                "smithy.api#documentation": "<p>Associates a delivery <a href=\"https://docs.aws.amazon.com/notifications/latest/userguide/managing-delivery-channels.html\">Channel</a> with a particular <code>NotificationConfiguration</code>. Supported Channels include Chatbot,\nthe Console Mobile Application, and emails (notifications-contacts).</p>",
+                "smithy.api#documentation": "<p>Associates a delivery <a href=\"https://docs.aws.amazon.com/notifications/latest/userguide/managing-delivery-channels.html\">Channel</a> with a particular <code>NotificationConfiguration</code>. Supported Channels include Amazon Q Developer in chat applications, the Console Mobile Application, and emails (notifications-contacts).</p>",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "POST",
@@ -268,7 +274,7 @@
                 "arn": {
                     "target": "com.amazonaws.notifications#ChannelArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Channel to associate with the <code>NotificationConfiguration</code>.</p>\n         <p>Supported ARNs include Chatbot, the Console Mobile Application, and notifications-contacts.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Channel to associate with the <code>NotificationConfiguration</code>.</p> <p>Supported ARNs include Amazon Q Developer in chat applications, the Console Mobile Application, and notifications-contacts.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -276,7 +282,7 @@
                 "notificationConfigurationArn": {
                     "target": "com.amazonaws.notifications#NotificationConfigurationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the <code>NotificationConfiguration</code> to associate with the\n         Channel.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the <code>NotificationConfiguration</code> to associate with the Channel.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -403,7 +409,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to associate a Channel\n    to a particular Managed Notification Configuration"
                 },
-                "smithy.api#documentation": "<p>Associates an additional Channel with a particular <code>ManagedNotificationConfiguration</code>.</p>\n         <p>Supported Channels include Chatbot, the Console Mobile Application, and emails (notifications-contacts).</p>",
+                "smithy.api#documentation": "<p>Associates an additional Channel with a particular <code>ManagedNotificationConfiguration</code>.</p> <p>Supported Channels include Amazon Q Developer in chat applications, the Console Mobile Application, and emails (notifications-contacts).</p>",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "PUT",
@@ -418,7 +424,7 @@
                 "channelArn": {
                     "target": "com.amazonaws.notifications#ChannelArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Channel to associate with the <code>ManagedNotificationConfiguration</code>.</p>\n         <p>Supported ARNs include Chatbot, the Console Mobile Application, and email (notifications-contacts).</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Channel to associate with the <code>ManagedNotificationConfiguration</code>.</p> <p>Supported ARNs include Amazon Q Developer in chat applications, the Console Mobile Application, and email (notifications-contacts).</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -436,6 +442,81 @@
             }
         },
         "com.amazonaws.notifications#AssociateManagedNotificationAdditionalChannelResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.notifications#AssociateOrganizationalUnit": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.notifications#AssociateOrganizationalUnitRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.notifications#AssociateOrganizationalUnitResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.notifications#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.notifications#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.notifications#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.notifications#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.notifications#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.notifications#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.notifications#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to associate an Organizational Unit with a particular NotificationConfiguration"
+                },
+                "smithy.api#documentation": "<p>Associates an organizational unit with a notification configuration.</p>",
+                "smithy.api#http": {
+                    "code": 201,
+                    "method": "POST",
+                    "uri": "/organizational-units/associate/{organizationalUnitId}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.notifications#AssociateOrganizationalUnitRequest": {
+            "type": "structure",
+            "members": {
+                "organizationalUnitId": {
+                    "target": "com.amazonaws.notifications#OrganizationalUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the organizational unit to associate.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "notificationConfigurationArn": {
+                    "target": "com.amazonaws.notifications#NotificationConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the notification configuration to associate with the organizational unit.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.notifications#AssociateOrganizationalUnitResponse": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -587,7 +668,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to create a new EventRule, associating it with a NotificationConfiguration"
                 },
-                "smithy.api#documentation": "<p>Creates an <a href=\"https://docs.aws.amazon.com/notifications/latest/userguide/glossary.html\">\n               <code>EventRule</code>\n            </a> that\n         is associated with a specified <code>NotificationConfiguration</code>.</p>",
+                "smithy.api#documentation": "<p>Creates an <a href=\"https://docs.aws.amazon.com/notifications/latest/userguide/glossary.html\"> <code>EventRule</code> </a> that is associated with a specified <code>NotificationConfiguration</code>.</p>",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "POST",
@@ -602,34 +683,34 @@
                 "notificationConfigurationArn": {
                     "target": "com.amazonaws.notifications#NotificationConfigurationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the <code>NotificationConfiguration</code> associated\n         with this <code>EventRule</code>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the <code>NotificationConfiguration</code> associated with this <code>EventRule</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "source": {
                     "target": "com.amazonaws.notifications#Source",
                     "traits": {
-                        "smithy.api#documentation": "<p>The matched event source.</p>\n         <p>Must match one of the valid EventBridge sources. Only Amazon Web Services service sourced events are supported. For example, <code>aws.ec2</code> and <code>aws.cloudwatch</code>. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level\">Event delivery from Amazon Web Services services</a> in the <i>Amazon EventBridge User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The matched event source.</p> <p>Must match one of the valid EventBridge sources. Only Amazon Web Services service sourced events are supported. For example, <code>aws.ec2</code> and <code>aws.cloudwatch</code>. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level\">Event delivery from Amazon Web Services services</a> in the <i>Amazon EventBridge User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "eventType": {
                     "target": "com.amazonaws.notifications#EventType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The event type to match.</p>\n         <p>Must match one of the valid Amazon EventBridge event types. For example, EC2 Instance State-change Notification and Amazon CloudWatch Alarm State Change. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level\">Event delivery from Amazon Web Services services</a> in the <i>Amazon EventBridge User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The event type to match.</p> <p>Must match one of the valid Amazon EventBridge event types. For example, EC2 Instance State-change Notification and Amazon CloudWatch Alarm State Change. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level\">Event delivery from Amazon Web Services services</a> in the <i>Amazon EventBridge User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "eventPattern": {
                     "target": "com.amazonaws.notifications#EventRuleEventPattern",
                     "traits": {
-                        "smithy.api#documentation": "<p>An additional event pattern used to further filter the events this\n            <code>EventRule</code> receives.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html\">Amazon EventBridge event patterns</a> in the <i>Amazon EventBridge User Guide.</i>\n         </p>"
+                        "smithy.api#documentation": "<p>An additional event pattern used to further filter the events this <code>EventRule</code> receives.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html\">Amazon EventBridge event patterns</a> in the <i>Amazon EventBridge User Guide.</i> </p>"
                     }
                 },
                 "regions": {
                     "target": "com.amazonaws.notifications#Regions",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of Amazon Web Services Regions that send events to this\n         <code>EventRule</code>.</p>",
+                        "smithy.api#documentation": "<p>A list of Amazon Web Services Regions that send events to this <code>EventRule</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -729,7 +810,7 @@
                 "aggregationDuration": {
                     "target": "com.amazonaws.notifications#AggregationDuration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The aggregation preference of the <code>NotificationConfiguration</code>.</p>\n         <ul>\n            <li>\n               <p>Values:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>LONG</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Aggregate notifications for long periods of time (12 hours).</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>SHORT</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Aggregate notifications for short periods of time (5 minutes).</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>NONE</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Don't aggregate notifications.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The aggregation preference of the <code>NotificationConfiguration</code>.</p> <ul> <li> <p>Values:</p> <ul> <li> <p> <code>LONG</code> </p> <ul> <li> <p>Aggregate notifications for long periods of time (12 hours).</p> </li> </ul> </li> <li> <p> <code>SHORT</code> </p> <ul> <li> <p>Aggregate notifications for short periods of time (5 minutes).</p> </li> </ul> </li> <li> <p> <code>NONE</code> </p> <ul> <li> <p>Don't aggregate notifications.</p> </li> </ul> </li> </ul> </li> </ul>"
                     }
                 },
                 "tags": {
@@ -884,7 +965,7 @@
                 "arn": {
                     "target": "com.amazonaws.notifications#NotificationConfigurationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the <code>NotificationConfiguration</code> to\n         delete.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the <code>NotificationConfiguration</code> to delete.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -934,7 +1015,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to deregister a NotificationHub"
                 },
-                "smithy.api#documentation": "<p>Deregisters a <code>NotificationConfiguration</code> in the specified Region.</p>\n         <note>\n            <p>You can't deregister the last <code>NotificationHub</code> in the account.\n               <code>NotificationEvents</code> stored in the deregistered <code>NotificationConfiguration</code> are no\n            longer be visible. Recreating a new <code>NotificationConfiguration</code> in the same Region restores access\n            to those <code>NotificationEvents</code>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Deregisters a <code>NotificationConfiguration</code> in the specified Region.</p> <note> <p>You can't deregister the last <code>NotificationHub</code> in the account. <code>NotificationEvents</code> stored in the deregistered <code>NotificationConfiguration</code> are no longer be visible. Recreating a new <code>NotificationConfiguration</code> in the same Region restores access to those <code>NotificationEvents</code>.</p> </note>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "DELETE",
@@ -972,7 +1053,7 @@
                 "statusSummary": {
                     "target": "com.amazonaws.notifications#NotificationHubStatusSummary",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <code>NotificationConfiguration</code> status information.</p>",
+                        "smithy.api#documentation": "<p> <code>NotificationConfiguration</code> status information.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1106,7 +1187,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to remove a Channel from a NotificationConfiguration"
                 },
-                "smithy.api#documentation": "<p>Disassociates a Channel from a specified <code>NotificationConfiguration</code>. Supported Channels include Chatbot, the Console Mobile Application, and emails (notifications-contacts).</p>",
+                "smithy.api#documentation": "<p>Disassociates a Channel from a specified <code>NotificationConfiguration</code>. Supported Channels include Amazon Q Developer in chat applications, the Console Mobile Application, and emails (notifications-contacts).</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1247,7 +1328,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to remove a Channel from a Managed Notification Configuration"
                 },
-                "smithy.api#documentation": "<p>Disassociates an additional Channel from a particular <code>ManagedNotificationConfiguration</code>.</p>\n         <p>Supported Channels include Chatbot, the Console Mobile Application, and emails (notifications-contacts).</p>",
+                "smithy.api#documentation": "<p>Disassociates an additional Channel from a particular <code>ManagedNotificationConfiguration</code>.</p> <p>Supported Channels include Amazon Q Developer in chat applications, the Console Mobile Application, and emails (notifications-contacts).</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "PUT",
@@ -1280,6 +1361,75 @@
             }
         },
         "com.amazonaws.notifications#DisassociateManagedNotificationAdditionalChannelResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.notifications#DisassociateOrganizationalUnit": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.notifications#DisassociateOrganizationalUnitRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.notifications#DisassociateOrganizationalUnitResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.notifications#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.notifications#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.notifications#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.notifications#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.notifications#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to remove an Organizational Unit from a NotificationConfiguration"
+                },
+                "smithy.api#documentation": "<p>Removes the association between an organizational unit and a notification configuration.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/organizational-units/disassociate/{organizationalUnitId}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.notifications#DisassociateOrganizationalUnitRequest": {
+            "type": "structure",
+            "members": {
+                "organizationalUnitId": {
+                    "target": "com.amazonaws.notifications#OrganizationalUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the organizational unit to disassociate.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "notificationConfigurationArn": {
+                    "target": "com.amazonaws.notifications#NotificationConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the notification configuration to disassociate from the organizational unit.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.notifications#DisassociateOrganizationalUnitResponse": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -1442,7 +1592,7 @@
                 "status": {
                     "target": "com.amazonaws.notifications#EventRuleStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the <code>EventRule</code>.</p>\n         <ul>\n            <li>\n               <p>Values:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ACTIVE</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>The <code>EventRule</code> can process events.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>INACTIVE</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>The <code>EventRule</code> may be unable to process events.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>CREATING</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>The <code>EventRule</code> is being created.</p>\n                           <p>Only <code>GET</code> and <code>LIST</code> calls can be run.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>UPDATING</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>The <code>EventRule</code> is being updated.</p>\n                           <p>Only <code>GET</code> and <code>LIST</code> calls can be run.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>DELETING</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>The <code>EventRule</code> is being deleted.</p>\n                           <p>Only <code>GET</code> and <code>LIST</code> calls can be run.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The status of the <code>EventRule</code>.</p> <ul> <li> <p>Values:</p> <ul> <li> <p> <code>ACTIVE</code> </p> <ul> <li> <p>The <code>EventRule</code> can process events.</p> </li> </ul> </li> <li> <p> <code>INACTIVE</code> </p> <ul> <li> <p>The <code>EventRule</code> may be unable to process events.</p> </li> </ul> </li> <li> <p> <code>CREATING</code> </p> <ul> <li> <p>The <code>EventRule</code> is being created.</p> <p>Only <code>GET</code> and <code>LIST</code> calls can be run.</p> </li> </ul> </li> <li> <p> <code>UPDATING</code> </p> <ul> <li> <p>The <code>EventRule</code> is being updated.</p> <p>Only <code>GET</code> and <code>LIST</code> calls can be run.</p> </li> </ul> </li> <li> <p> <code>DELETING</code> </p> <ul> <li> <p>The <code>EventRule</code> is being deleted.</p> <p>Only <code>GET</code> and <code>LIST</code> calls can be run.</p> </li> </ul> </li> </ul> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1464,7 +1614,7 @@
                 "arn": {
                     "target": "com.amazonaws.notifications#EventRuleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the <code>EventRule</code>. CloudFormation stack generates this ARN and\n         then uses this ARN to associate with the <code>NotificationConfiguration</code>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the <code>EventRule</code>. CloudFormation stack generates this ARN and then uses this ARN to associate with the <code>NotificationConfiguration</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1485,21 +1635,21 @@
                 "source": {
                     "target": "com.amazonaws.notifications#Source",
                     "traits": {
-                        "smithy.api#documentation": "<p>The event source this rule should match with the EventBridge event sources. It must match with atleast one of the valid EventBridge event sources. Only Amazon Web Services service sourced events are supported. \n         For example, <code>aws.ec2</code> and <code>aws.cloudwatch</code>. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level\">Event delivery from Amazon Web Services services</a> in the <i>\n               Amazon EventBridge User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The event source this rule should match with the EventBridge event sources. It must match with atleast one of the valid EventBridge event sources. Only Amazon Web Services service sourced events are supported. For example, <code>aws.ec2</code> and <code>aws.cloudwatch</code>. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level\">Event delivery from Amazon Web Services services</a> in the <i> Amazon EventBridge User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "eventType": {
                     "target": "com.amazonaws.notifications#EventType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The event type this rule should match with the EventBridge events. It must match with atleast one of the valid EventBridge event types. For example, Amazon EC2 Instance State change Notification and Amazon CloudWatch State Change. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level\">Event delivery from Amazon Web Services services</a> in the <i>\n            Amazon EventBridge User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The event type this rule should match with the EventBridge events. It must match with atleast one of the valid EventBridge event types. For example, Amazon EC2 Instance State change Notification and Amazon CloudWatch State Change. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level\">Event delivery from Amazon Web Services services</a> in the <i> Amazon EventBridge User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "eventPattern": {
                     "target": "com.amazonaws.notifications#EventRuleEventPattern",
                     "traits": {
-                        "smithy.api#documentation": "<p>An additional event pattern used to further filter the events this <code>EventRule</code> receives.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html\">Amazon EventBridge event patterns</a> in the <i>Amazon EventBridge User Guide.</i>\n         </p>",
+                        "smithy.api#documentation": "<p>An additional event pattern used to further filter the events this <code>EventRule</code> receives.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html\">Amazon EventBridge event patterns</a> in the <i>Amazon EventBridge User Guide.</i> </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1513,7 +1663,7 @@
                 "managedRules": {
                     "target": "com.amazonaws.notifications#ManagedRuleArns",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of Amazon EventBridge Managed Rule ARNs associated with this <code>EventRule</code>.</p>\n         <note>\n            <p>These are created by User Notifications within your account so your <code>EventRules</code> can function.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>A list of Amazon EventBridge Managed Rule ARNs associated with this <code>EventRule</code>.</p> <note> <p>These are created by User Notifications within your account so your <code>EventRules</code> can function.</p> </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1642,21 +1792,21 @@
                 "source": {
                     "target": "com.amazonaws.notifications#Source",
                     "traits": {
-                        "smithy.api#documentation": "<p>The matched event source.</p>\n         <p>Must match one of the valid EventBridge sources. Only Amazon Web Services service sourced events are supported. For example, <code>aws.ec2</code> and <code>aws.cloudwatch</code>. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level\">Event delivery from Amazon Web Services services</a> in the <i>Amazon EventBridge User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The matched event source.</p> <p>Must match one of the valid EventBridge sources. Only Amazon Web Services service sourced events are supported. For example, <code>aws.ec2</code> and <code>aws.cloudwatch</code>. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level\">Event delivery from Amazon Web Services services</a> in the <i>Amazon EventBridge User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "eventType": {
                     "target": "com.amazonaws.notifications#EventType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The event type to match.</p>\n         <p>Must match one of the valid Amazon EventBridge event types. For example, EC2 Instance State-change Notification and Amazon CloudWatch Alarm State Change. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level\">Event delivery from Amazon Web Services services</a> in the <i>Amazon EventBridge User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The event type to match.</p> <p>Must match one of the valid Amazon EventBridge event types. For example, EC2 Instance State-change Notification and Amazon CloudWatch Alarm State Change. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level\">Event delivery from Amazon Web Services services</a> in the <i>Amazon EventBridge User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "eventPattern": {
                     "target": "com.amazonaws.notifications#EventRuleEventPattern",
                     "traits": {
-                        "smithy.api#documentation": "<p>An additional event pattern used to further filter the events this <code>EventRule</code> receives.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html\">Amazon EventBridge event patterns</a> in the <i>Amazon EventBridge User Guide.</i>\n         </p>",
+                        "smithy.api#documentation": "<p>An additional event pattern used to further filter the events this <code>EventRule</code> receives.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html\">Amazon EventBridge event patterns</a> in the <i>Amazon EventBridge User Guide.</i> </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1670,7 +1820,7 @@
                 "managedRules": {
                     "target": "com.amazonaws.notifications#ManagedRuleArns",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of managed rules from EventBridge that are associated with this\n         <code>EventRule</code>.</p>\n         <note>\n            <p>These are created by User Notifications within your account so this <code>EventRule</code> functions.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>A list of managed rules from EventBridge that are associated with this <code>EventRule</code>.</p> <note> <p>These are created by User Notifications within your account so this <code>EventRule</code> functions.</p> </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2076,7 +2226,13 @@
                 "aggregationDuration": {
                     "target": "com.amazonaws.notifications#AggregationDuration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The aggregation preference of the <code>NotificationConfiguration</code>.</p>\n         <ul>\n            <li>\n               <p>Values:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>LONG</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Aggregate notifications for long periods of time (12 hours).</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>SHORT</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Aggregate notifications for short periods of time (5 minutes).</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>NONE</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Don't aggregate notifications.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The aggregation preference of the <code>NotificationConfiguration</code>.</p> <ul> <li> <p>Values:</p> <ul> <li> <p> <code>LONG</code> </p> <ul> <li> <p>Aggregate notifications for long periods of time (12 hours).</p> </li> </ul> </li> <li> <p> <code>SHORT</code> </p> <ul> <li> <p>Aggregate notifications for short periods of time (5 minutes).</p> </li> </ul> </li> <li> <p> <code>NONE</code> </p> <ul> <li> <p>Don't aggregate notifications.</p> </li> </ul> </li> </ul> </li> </ul>"
+                    }
+                },
+                "subtype": {
+                    "target": "com.amazonaws.notifications#NotificationConfigurationSubtype",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subtype of the notification configuration returned in the response.</p>"
                     }
                 }
             },
@@ -2114,7 +2270,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to get a NotificationEvent"
                 },
-                "smithy.api#documentation": "<p>Returns a specified <code>NotificationEvent</code>.</p>\n         <important>\n            <p>User Notifications stores notifications in the individual Regions you register as notification hubs and the Region of the source event rule. <code>GetNotificationEvent</code> only returns notifications stored in the same Region in which the action is called.\n\t  User Notifications doesn't backfill notifications to new Regions selected as notification hubs. For this reason, we recommend that you make calls in your oldest registered notification hub. \n\t  For more information, see <a href=\"https://docs.aws.amazon.com/notifications/latest/userguide/notification-hubs.html\">Notification hubs</a> in the <i>Amazon Web Services User Notifications User Guide</i>.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Returns a specified <code>NotificationEvent</code>.</p> <important> <p>User Notifications stores notifications in the individual Regions you register as notification hubs and the Region of the source event rule. <code>GetNotificationEvent</code> only returns notifications stored in the same Region in which the action is called. User Notifications doesn't backfill notifications to new Regions selected as notification hubs. For this reason, we recommend that you make calls in your oldest registered notification hub. For more information, see <a href=\"https://docs.aws.amazon.com/notifications/latest/userguide/notification-hubs.html\">Notification hubs</a> in the <i>Amazon Web Services User Notifications User Guide</i>.</p> </important>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -2333,7 +2489,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.notifications#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The start token for paginated calls. Retrieved from the response of a previous\n         ListNotificationEvents call. <code>NextToken</code> uses Base64 encoding.</p>",
+                        "smithy.api#documentation": "<p>The start token for paginated calls. Retrieved from the response of a previous ListNotificationEvents call. <code>NextToken</code> uses Base64 encoding.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
@@ -2433,7 +2589,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.notifications#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The start token for paginated calls. Retrieved from the response of a previous\n            <code>ListEventRules</code> call. Next token uses Base64 encoding.</p>",
+                        "smithy.api#documentation": "<p>The start token for paginated calls. Retrieved from the response of a previous <code>ListEventRules</code> call. Next token uses Base64 encoding.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
@@ -2941,6 +3097,127 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.notifications#ListMemberAccounts": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.notifications#ListMemberAccountsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.notifications#ListMemberAccountsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.notifications#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.notifications#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.notifications#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.notifications#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.notifications#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list MemberAccounts by AdminNotificationConfiguration"
+                },
+                "smithy.api#documentation": "<p>Returns a list of member accounts associated with a notification configuration.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/list-member-accounts"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "memberAccounts"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.notifications#ListMemberAccountsRequest": {
+            "type": "structure",
+            "members": {
+                "notificationConfigurationArn": {
+                    "target": "com.amazonaws.notifications#NotificationConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the notification configuration used to filter the member accounts.</p>",
+                        "smithy.api#httpQuery": "notificationConfigurationArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. Valid values are 1-100.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.notifications#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results. Use the value returned in the previous response.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "memberAccount": {
+                    "target": "com.amazonaws.notifications#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The member account identifier used to filter the results.</p>",
+                        "smithy.api#httpQuery": "memberAccount"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.notifications#MemberAccountNotificationConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status used to filter the member accounts.</p>",
+                        "smithy.api#httpQuery": "status"
+                    }
+                },
+                "organizationalUnitId": {
+                    "target": "com.amazonaws.notifications#OrganizationalUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The organizational unit ID used to filter the member accounts.</p>",
+                        "smithy.api#httpQuery": "organizationalUnitId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.notifications#ListMemberAccountsResponse": {
+            "type": "structure",
+            "members": {
+                "memberAccounts": {
+                    "target": "com.amazonaws.notifications#MemberAccounts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of member accounts that match the specified criteria.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.notifications#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use for the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.notifications#ListNotificationConfigurations": {
             "type": "operation",
             "input": {
@@ -2968,7 +3245,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to list NotificationConfigurations"
                 },
-                "smithy.api#documentation": "<p>Returns a list of abbreviated <code>NotificationConfigurations</code> according to\n         specified filters, in reverse chronological order (newest first).</p>",
+                "smithy.api#documentation": "<p>Returns a list of abbreviated <code>NotificationConfigurations</code> according to specified filters, in reverse chronological order (newest first).</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -3005,7 +3282,7 @@
                 "eventRuleSource": {
                     "target": "com.amazonaws.notifications#Source",
                     "traits": {
-                        "smithy.api#documentation": "<p>The matched event source.</p>\n         <p>Must match one of the valid EventBridge sources. Only Amazon Web Services service sourced events are supported. For example, <code>aws.ec2</code> and <code>aws.cloudwatch</code>. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level\">Event delivery from Amazon Web Services services</a> in the <i>Amazon EventBridge User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The matched event source.</p> <p>Must match one of the valid EventBridge sources. Only Amazon Web Services service sourced events are supported. For example, <code>aws.ec2</code> and <code>aws.cloudwatch</code>. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level\">Event delivery from Amazon Web Services services</a> in the <i>Amazon EventBridge User Guide</i>.</p>",
                         "smithy.api#httpQuery": "eventRuleSource"
                     }
                 },
@@ -3019,8 +3296,15 @@
                 "status": {
                     "target": "com.amazonaws.notifications#NotificationConfigurationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>NotificationConfiguration</code> status to match.</p>\n         <ul>\n            <li>\n               <p>Values:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ACTIVE</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>All <code>EventRules</code> are <code>ACTIVE</code> and any call can be run.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>PARTIALLY_ACTIVE</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Some <code>EventRules</code> are <code>ACTIVE</code> and some are <code>INACTIVE</code>. Any call can be run.</p>\n                        </li>\n                        <li>\n                           <p>Any call can be run.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>INACTIVE</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>All <code>EventRules</code> are <code>INACTIVE</code> and any call can be run.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>DELETING</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>This <code>NotificationConfiguration</code> is being deleted.</p>\n                        </li>\n                        <li>\n                           <p>Only <code>GET</code> and <code>LIST</code> calls can be run.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The <code>NotificationConfiguration</code> status to match.</p> <ul> <li> <p>Values:</p> <ul> <li> <p> <code>ACTIVE</code> </p> <ul> <li> <p>All <code>EventRules</code> are <code>ACTIVE</code> and any call can be run.</p> </li> </ul> </li> <li> <p> <code>PARTIALLY_ACTIVE</code> </p> <ul> <li> <p>Some <code>EventRules</code> are <code>ACTIVE</code> and some are <code>INACTIVE</code>. Any call can be run.</p> </li> <li> <p>Any call can be run.</p> </li> </ul> </li> <li> <p> <code>INACTIVE</code> </p> <ul> <li> <p>All <code>EventRules</code> are <code>INACTIVE</code> and any call can be run.</p> </li> </ul> </li> <li> <p> <code>DELETING</code> </p> <ul> <li> <p>This <code>NotificationConfiguration</code> is being deleted.</p> </li> <li> <p>Only <code>GET</code> and <code>LIST</code> calls can be run.</p> </li> </ul> </li> </ul> </li> </ul>",
                         "smithy.api#httpQuery": "status"
+                    }
+                },
+                "subtype": {
+                    "target": "com.amazonaws.notifications#NotificationConfigurationSubtype",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subtype used to filter the notification configurations in the request.</p>",
+                        "smithy.api#httpQuery": "subtype"
                     }
                 },
                 "maxResults": {
@@ -3037,7 +3321,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.notifications#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The start token for paginated calls. Retrieved from the response of a previous\n            <code>ListEventRules</code> call. Next token uses Base64 encoding.</p>",
+                        "smithy.api#documentation": "<p>The start token for paginated calls. Retrieved from the response of a previous <code>ListEventRules</code> call. Next token uses Base64 encoding.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
@@ -3094,7 +3378,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to list NotificationEvents"
                 },
-                "smithy.api#documentation": "<p>Returns a list of <code>NotificationEvents</code> according to specified filters, in reverse chronological order (newest first).</p>\n         <important>\n            <p>User Notifications stores notifications in the individual Regions you register as notification hubs and the Region of the source event rule. ListNotificationEvents only returns notifications stored in the same Region in which the action is called.\n\t  User Notifications doesn't backfill notifications to new Regions selected as notification hubs. For this reason, we recommend that you make calls in your oldest registered notification hub.\n\t  For more information, see <a href=\"https://docs.aws.amazon.com/notifications/latest/userguide/notification-hubs.html\">Notification hubs</a> in the <i>Amazon Web Services User Notifications User Guide</i>.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Returns a list of <code>NotificationEvents</code> according to specified filters, in reverse chronological order (newest first).</p> <important> <p>User Notifications stores notifications in the individual Regions you register as notification hubs and the Region of the source event rule. ListNotificationEvents only returns notifications stored in the same Region in which the action is called. User Notifications doesn't backfill notifications to new Regions selected as notification hubs. For this reason, we recommend that you make calls in your oldest registered notification hub. For more information, see <a href=\"https://docs.aws.amazon.com/notifications/latest/userguide/notification-hubs.html\">Notification hubs</a> in the <i>Amazon Web Services User Notifications User Guide</i>.</p> </important>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -3154,7 +3438,7 @@
                 "source": {
                     "target": "com.amazonaws.notifications#Source",
                     "traits": {
-                        "smithy.api#documentation": "<p>The matched event source.</p>\n         <p>Must match one of the valid EventBridge sources. Only Amazon Web Services service sourced events are supported. For example, <code>aws.ec2</code> and <code>aws.cloudwatch</code>. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level\">Event delivery from Amazon Web Services services</a> in the <i>Amazon EventBridge User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The matched event source.</p> <p>Must match one of the valid EventBridge sources. Only Amazon Web Services service sourced events are supported. For example, <code>aws.ec2</code> and <code>aws.cloudwatch</code>. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level\">Event delivery from Amazon Web Services services</a> in the <i>Amazon EventBridge User Guide</i>.</p>",
                         "smithy.api#httpQuery": "source"
                     }
                 },
@@ -3168,7 +3452,7 @@
                 "aggregateNotificationEventArn": {
                     "target": "com.amazonaws.notifications#NotificationEventArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the <code>aggregatedNotificationEventArn</code> to\n         match.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the <code>aggregatedNotificationEventArn</code> to match.</p>",
                         "smithy.api#httpQuery": "aggregateNotificationEventArn"
                     }
                 },
@@ -3186,8 +3470,15 @@
                 "nextToken": {
                     "target": "com.amazonaws.notifications#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The start token for paginated calls. Retrieved from the response of a previous\n            <code>ListEventRules</code> call. Next token uses Base64 encoding.</p>",
+                        "smithy.api#documentation": "<p>The start token for paginated calls. Retrieved from the response of a previous <code>ListEventRules</code> call. Next token uses Base64 encoding.</p>",
                         "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "organizationalUnitId": {
+                    "target": "com.amazonaws.notifications#OrganizationalUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the organizational unit used to filter notification events.</p>",
+                        "smithy.api#httpQuery": "organizationalUnitId"
                     }
                 }
             },
@@ -3320,6 +3611,106 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.notifications#ListOrganizationalUnits": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.notifications#ListOrganizationalUnitsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.notifications#ListOrganizationalUnitsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.notifications#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.notifications#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.notifications#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.notifications#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.notifications#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list Organizational Units by NotificationConfiguration"
+                },
+                "smithy.api#documentation": "<p>Returns a list of organizational units associated with a notification configuration.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/organizational-units"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "organizationalUnits"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.notifications#ListOrganizationalUnitsRequest": {
+            "type": "structure",
+            "members": {
+                "notificationConfigurationArn": {
+                    "target": "com.amazonaws.notifications#NotificationConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the notification configuration used to filter the organizational units.</p>",
+                        "smithy.api#httpQuery": "notificationConfigurationArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of organizational units to return in a single call. Valid values are 1-100.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.notifications#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results. Use the value returned in the previous response.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.notifications#ListOrganizationalUnitsResponse": {
+            "type": "structure",
+            "members": {
+                "organizationalUnits": {
+                    "target": "com.amazonaws.notifications#OrganizationalUnits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of organizational units that match the specified criteria.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.notifications#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use for the next page of results. If there are no additional results, this value is null.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.notifications#ListTagsForResource": {
             "type": "operation",
             "input": {
@@ -3350,7 +3741,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to get tags for a resource"
                 },
-                "smithy.api#documentation": "<p>Returns a list of tags for a specified Amazon Resource Name (ARN).</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html\">Tagging your Amazon Web Services resources</a> in the <i>Tagging Amazon Web Services Resources User Guide</i>.</p>\n         <note>\n            <p>This is only supported for <code>NotificationConfigurations</code>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Returns a list of tags for a specified Amazon Resource Name (ARN).</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html\">Tagging your Amazon Web Services resources</a> in the <i>Tagging Amazon Web Services Resources User Guide</i>.</p> <note> <p>This is only supported for <code>NotificationConfigurations</code>.</p> </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/tags/{arn}"
@@ -3526,14 +3917,14 @@
                 "channelType": {
                     "target": "com.amazonaws.notifications#ChannelType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of notification channel used for message delivery.</p>\n         <ul>\n            <li>\n               <p>Values:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ACCOUNT_CONTACT</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Delivers notifications to Account Managed contacts through the User Notification Service.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>MOBILE</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Delivers notifications through the Amazon Web Services Console Mobile Application to mobile devices.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>CHATBOT</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Delivers notifications through Chatbot to collaboration platforms (Slack, Chime).</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>EMAIL</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Delivers notifications to email addresses.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The type of notification channel used for message delivery.</p> <ul> <li> <p>Values:</p> <ul> <li> <p> <code>ACCOUNT_CONTACT</code> </p> <ul> <li> <p>Delivers notifications to Account Managed contacts through the User Notification Service.</p> </li> </ul> </li> <li> <p> <code>MOBILE</code> </p> <ul> <li> <p>Delivers notifications through the Amazon Web Services Console Mobile Application to mobile devices.</p> </li> </ul> </li> <li> <p> <code>CHATBOT</code> </p> <ul> <li> <p>Delivers notifications through Amazon Q Developer in chat applications to collaboration platforms (Slack, Chime).</p> </li> </ul> </li> <li> <p> <code>EMAIL</code> </p> <ul> <li> <p>Delivers notifications to email addresses.</p> </li> </ul> </li> </ul> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "overrideOption": {
                     "target": "com.amazonaws.notifications#ChannelAssociationOverrideOption",
                     "traits": {
-                        "smithy.api#documentation": "<p>Controls whether users can modify channel associations for a notification configuration.</p>\n         <ul>\n            <li>\n               <p>Values:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ENABLED</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Users can associate or disassociate channels with the notification configuration.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>DISABLED</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Users cannot associate or disassociate channels with the notification configuration.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Controls whether users can modify channel associations for a notification configuration.</p> <ul> <li> <p>Values:</p> <ul> <li> <p> <code>ENABLED</code> </p> <ul> <li> <p>Users can associate or disassociate channels with the notification configuration.</p> </li> </ul> </li> <li> <p> <code>DISABLED</code> </p> <ul> <li> <p>Users cannot associate or disassociate channels with the notification configuration.</p> </li> </ul> </li> </ul> </li> </ul>"
                     }
                 }
             },
@@ -3585,14 +3976,14 @@
                 "notificationType": {
                     "target": "com.amazonaws.notifications#NotificationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of event causing the notification.</p>\n         <ul>\n            <li>\n               <p>Values:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ALERT</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>A notification about an event where something was triggered, initiated, reopened, deployed, or a threshold was breached.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>WARNING</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>A notification about an event where an issue is about to arise. For example, something is approaching a threshold.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ANNOUNCEMENT</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>A notification about an important event. For example, a step in a workflow or escalation path or that a workflow was updated.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>INFORMATIONAL</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>A notification about informational messages. For example, recommendations, service announcements, or reminders.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The type of event causing the notification.</p> <ul> <li> <p>Values:</p> <ul> <li> <p> <code>ALERT</code> </p> <ul> <li> <p>A notification about an event where something was triggered, initiated, reopened, deployed, or a threshold was breached.</p> </li> </ul> </li> <li> <p> <code>WARNING</code> </p> <ul> <li> <p>A notification about an event where an issue is about to arise. For example, something is approaching a threshold.</p> </li> </ul> </li> <li> <p> <code>ANNOUNCEMENT</code> </p> <ul> <li> <p>A notification about an important event. For example, a step in a workflow or escalation path or that a workflow was updated.</p> </li> </ul> </li> <li> <p> <code>INFORMATIONAL</code> </p> <ul> <li> <p>A notification about informational messages. For example, recommendations, service announcements, or reminders.</p> </li> </ul> </li> </ul> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "eventStatus": {
                     "target": "com.amazonaws.notifications#EventStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The assesed nature of the event.</p>\n         <ul>\n            <li>\n               <p>Values:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>HEALTHY</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>All <code>EventRules</code> are <code>ACTIVE</code>.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>UNHEALTHY</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Some <code>EventRules</code> are <code>ACTIVE</code> and some are <code>INACTIVE</code>.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The assesed nature of the event.</p> <ul> <li> <p>Values:</p> <ul> <li> <p> <code>HEALTHY</code> </p> <ul> <li> <p>All <code>EventRules</code> are <code>ACTIVE</code>.</p> </li> </ul> </li> <li> <p> <code>UNHEALTHY</code> </p> <ul> <li> <p>Some <code>EventRules</code> are <code>ACTIVE</code> and some are <code>INACTIVE</code>.</p> </li> </ul> </li> </ul> </li> </ul>"
                     }
                 },
                 "aggregateManagedNotificationEventArn": {
@@ -3759,14 +4150,14 @@
                 "eventStatus": {
                     "target": "com.amazonaws.notifications#EventStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The perceived nature of the event.</p>\n         <ul>\n            <li>\n               <p>Values:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>HEALTHY</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>All EventRules are <code>ACTIVE</code> and any call can be run.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>UNHEALTHY</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Some EventRules are <code>ACTIVE</code> and some are <code>INACTIVE</code>. Any call can be run.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The perceived nature of the event.</p> <ul> <li> <p>Values:</p> <ul> <li> <p> <code>HEALTHY</code> </p> <ul> <li> <p>All EventRules are <code>ACTIVE</code> and any call can be run.</p> </li> </ul> </li> <li> <p> <code>UNHEALTHY</code> </p> <ul> <li> <p>Some EventRules are <code>ACTIVE</code> and some are <code>INACTIVE</code>. Any call can be run.</p> </li> </ul> </li> </ul> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "notificationType": {
                     "target": "com.amazonaws.notifications#NotificationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Type of the event causing this notification.</p>\n         <ul>\n            <li>\n               <p>Values:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ALERT</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>A notification about an event where something was triggered, initiated, reopened, deployed, or a threshold was breached.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>WARNING</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>A notification about an event where an issue is about to arise. For example, something is approaching a threshold.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ANNOUNCEMENT</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>A notification about an important event. For example, a step in a workflow or escalation path or that a workflow was updated.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>INFORMATIONAL</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>A notification about informational messages. For example, recommendations, service announcements, or reminders.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Type of the event causing this notification.</p> <ul> <li> <p>Values:</p> <ul> <li> <p> <code>ALERT</code> </p> <ul> <li> <p>A notification about an event where something was triggered, initiated, reopened, deployed, or a threshold was breached.</p> </li> </ul> </li> <li> <p> <code>WARNING</code> </p> <ul> <li> <p>A notification about an event where an issue is about to arise. For example, something is approaching a threshold.</p> </li> </ul> </li> <li> <p> <code>ANNOUNCEMENT</code> </p> <ul> <li> <p>A notification about an important event. For example, a step in a workflow or escalation path or that a workflow was updated.</p> </li> </ul> </li> <li> <p> <code>INFORMATIONAL</code> </p> <ul> <li> <p>A notification about informational messages. For example, recommendations, service announcements, or reminders.</p> </li> </ul> </li> </ul> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3901,14 +4292,14 @@
                 "notificationType": {
                     "target": "com.amazonaws.notifications#NotificationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The nature of the event causing this notification.</p>\n         <ul>\n            <li>\n               <p>Values:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ALERT</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>A notification about an event where something was triggered, initiated, reopened, deployed, or a threshold was breached.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>WARNING</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>A notification about an event where an issue is about to arise. For example, something is approaching a threshold.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ANNOUNCEMENT</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>A notification about an important event. For example, a step in a workflow or escalation path or that a workflow was updated.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>INFORMATIONAL</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>A notification about informational messages. For example, recommendations, service announcements, or reminders.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The nature of the event causing this notification.</p> <ul> <li> <p>Values:</p> <ul> <li> <p> <code>ALERT</code> </p> <ul> <li> <p>A notification about an event where something was triggered, initiated, reopened, deployed, or a threshold was breached.</p> </li> </ul> </li> <li> <p> <code>WARNING</code> </p> <ul> <li> <p>A notification about an event where an issue is about to arise. For example, something is approaching a threshold.</p> </li> </ul> </li> <li> <p> <code>ANNOUNCEMENT</code> </p> <ul> <li> <p>A notification about an important event. For example, a step in a workflow or escalation path or that a workflow was updated.</p> </li> </ul> </li> <li> <p> <code>INFORMATIONAL</code> </p> <ul> <li> <p>A notification about informational messages. For example, recommendations, service announcements, or reminders.</p> </li> </ul> </li> </ul> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "eventStatus": {
                     "target": "com.amazonaws.notifications#EventStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of an event.</p>\n         <ul>\n            <li>\n               <p>Values:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>HEALTHY</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>All EventRules are <code>ACTIVE</code> and any call can be run.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>UNHEALTHY</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Some EventRules are <code>ACTIVE</code> and some are <code>INACTIVE</code>. Any call can be run.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of an event.</p> <ul> <li> <p>Values:</p> <ul> <li> <p> <code>HEALTHY</code> </p> <ul> <li> <p>All EventRules are <code>ACTIVE</code> and any call can be run.</p> </li> </ul> </li> <li> <p> <code>UNHEALTHY</code> </p> <ul> <li> <p>Some EventRules are <code>ACTIVE</code> and some are <code>INACTIVE</code>. Any call can be run.</p> </li> </ul> </li> </ul> </li> </ul>"
                     }
                 },
                 "aggregationEventType": {
@@ -3996,13 +4387,14 @@
                 "notificationEvent": {
                     "target": "com.amazonaws.notifications#ManagedNotificationEventSummary",
                     "traits": {
+                        "smithy.api#documentation": "<p/>",
                         "smithy.api#required": {}
                     }
                 },
                 "aggregationEventType": {
                     "target": "com.amazonaws.notifications#AggregationEventType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The notifications aggregation type.</p>\n         <ul>\n            <li>\n               <p>Values:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>AGGREGATE</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>The notification event is an aggregate notification. Aggregate notifications summarize grouped events over a specified time period.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>CHILD</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Some <code>EventRules</code> are <code>ACTIVE</code> and some are <code>INACTIVE</code>. Any call can be run.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>NONE</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>The notification isn't aggregated.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The notifications aggregation type.</p> <ul> <li> <p>Values:</p> <ul> <li> <p> <code>AGGREGATE</code> </p> <ul> <li> <p>The notification event is an aggregate notification. Aggregate notifications summarize grouped events over a specified time period.</p> </li> </ul> </li> <li> <p> <code>CHILD</code> </p> <ul> <li> <p>Some <code>EventRules</code> are <code>ACTIVE</code> and some are <code>INACTIVE</code>. Any call can be run.</p> </li> </ul> </li> <li> <p> <code>NONE</code> </p> <ul> <li> <p>The notification isn't aggregated.</p> </li> </ul> </li> </ul> </li> </ul>"
                     }
                 },
                 "organizationalUnitId": {
@@ -4071,14 +4463,14 @@
                 "eventStatus": {
                     "target": "com.amazonaws.notifications#EventStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The managed notification event status.</p>\n         <ul>\n            <li>\n               <p>Values:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>HEALTHY</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>All <code>EventRules</code> are <code>ACTIVE</code>.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>UNHEALTHY</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Some <code>EventRules</code> are <code>ACTIVE</code> and some are <code>INACTIVE</code>.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The managed notification event status.</p> <ul> <li> <p>Values:</p> <ul> <li> <p> <code>HEALTHY</code> </p> <ul> <li> <p>All <code>EventRules</code> are <code>ACTIVE</code>.</p> </li> </ul> </li> <li> <p> <code>UNHEALTHY</code> </p> <ul> <li> <p>Some <code>EventRules</code> are <code>ACTIVE</code> and some are <code>INACTIVE</code>.</p> </li> </ul> </li> </ul> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "notificationType": {
                     "target": "com.amazonaws.notifications#NotificationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Type of event causing the notification.</p>\n         <ul>\n            <li>\n               <p>Values:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ALERT</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>A notification about an event where something was triggered, initiated, reopened, deployed, or a threshold was breached.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>WARNING</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>A notification about an event where an issue is about to arise. For example, something is approaching a threshold.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ANNOUNCEMENT</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>A notification about an important event. For example, a step in a workflow or escalation path or that a workflow was updated.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>INFORMATIONAL</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>A notification about informational messages. For example, recommendations, service announcements, or reminders.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Type of event causing the notification.</p> <ul> <li> <p>Values:</p> <ul> <li> <p> <code>ALERT</code> </p> <ul> <li> <p>A notification about an event where something was triggered, initiated, reopened, deployed, or a threshold was breached.</p> </li> </ul> </li> <li> <p> <code>WARNING</code> </p> <ul> <li> <p>A notification about an event where an issue is about to arise. For example, something is approaching a threshold.</p> </li> </ul> </li> <li> <p> <code>ANNOUNCEMENT</code> </p> <ul> <li> <p>A notification about an important event. For example, a step in a workflow or escalation path or that a workflow was updated.</p> </li> </ul> </li> <li> <p> <code>INFORMATIONAL</code> </p> <ul> <li> <p>A notification about informational messages. For example, recommendations, service announcements, or reminders.</p> </li> </ul> </li> </ul> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4121,7 +4513,7 @@
                 "source": {
                     "target": "com.amazonaws.notifications#Source",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source service of the notification.</p>\n         <p>Must match one of the valid EventBridge sources. Only Amazon Web Services service sourced events are supported. For example, <code>aws.ec2</code> and <code>aws.cloudwatch</code>. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level\">Event delivery from Amazon Web Services services</a> in the <i>Amazon EventBridge User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The source service of the notification.</p> <p>Must match one of the valid EventBridge sources. Only Amazon Web Services service sourced events are supported. For example, <code>aws.ec2</code> and <code>aws.cloudwatch</code>. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level\">Event delivery from Amazon Web Services services</a> in the <i>Amazon EventBridge User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4203,6 +4595,86 @@
                 }
             }
         },
+        "com.amazonaws.notifications#MemberAccount": {
+            "type": "structure",
+            "members": {
+                "notificationConfigurationArn": {
+                    "target": "com.amazonaws.notifications#NotificationConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the notification configuration associated with the member account.</p>"
+                    }
+                },
+                "accountId": {
+                    "target": "com.amazonaws.notifications#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID of the member account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.notifications#MemberAccountNotificationConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the member account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the current status of the member account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "organizationalUnitId": {
+                    "target": "com.amazonaws.notifications#OrganizationalUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the organizational unit containing the member account.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a member account.</p>"
+            }
+        },
+        "com.amazonaws.notifications#MemberAccountNotificationConfigurationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "ACTIVE",
+                        "value": "ACTIVE",
+                        "documentation": "The member account Notification Configuration status is ACTIVE."
+                    },
+                    {
+                        "name": "PENDING",
+                        "value": "PENDING",
+                        "documentation": "The member account Notification Configuration status is PENDING."
+                    },
+                    {
+                        "name": "INACTIVE",
+                        "value": "INACTIVE",
+                        "documentation": "The member account Notification Configuration status is INACTIVE."
+                    },
+                    {
+                        "name": "CREATING",
+                        "value": "CREATING",
+                        "documentation": "The member account Notification Configuration status is CREATING."
+                    },
+                    {
+                        "name": "DELETING",
+                        "value": "DELETING",
+                        "documentation": "The member account Notification Configuration status is DELETING."
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.notifications#MemberAccounts": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.notifications#MemberAccount"
+            }
+        },
         "com.amazonaws.notifications#MessageComponents": {
             "type": "structure",
             "members": {
@@ -4215,7 +4687,7 @@
                 "paragraphSummary": {
                     "target": "com.amazonaws.notifications#TextPartReference",
                     "traits": {
-                        "smithy.api#documentation": "<p>A paragraph long or multiple sentence summary. For example, Chatbot notifications.</p>"
+                        "smithy.api#documentation": "<p>A paragraph long or multiple sentence summary. For example, Amazon Q Developer in chat applications notifications.</p>"
                     }
                 },
                 "completeDescription": {
@@ -4227,7 +4699,7 @@
                 "dimensions": {
                     "target": "com.amazonaws.notifications#Dimensions",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of properties in key-value pairs. Pairs are shown in order of importance from most important to least important. Channels may limit the number of dimensions shown to the notification viewer.</p>\n         <note>\n            <p>Included dimensions, keys, and values are subject to change.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A list of properties in key-value pairs. Pairs are shown in order of importance from most important to least important. Channels may limit the number of dimensions shown to the notification viewer.</p> <note> <p>Included dimensions, keys, and values are subject to change.</p> </note>"
                     }
                 }
             },
@@ -4357,14 +4829,14 @@
                 "arn": {
                     "target": "com.amazonaws.notifications#NotificationConfigurationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the <code>NotificationConfiguration</code>\n         resource.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the <code>NotificationConfiguration</code> resource.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "name": {
                     "target": "com.amazonaws.notifications#NotificationConfigurationName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the <code>NotificationConfiguration</code>. Supports RFC 3986's\n         unreserved characters.</p>",
+                        "smithy.api#documentation": "<p>The name of the <code>NotificationConfiguration</code>. Supports RFC 3986's unreserved characters.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4392,12 +4864,35 @@
                 "aggregationDuration": {
                     "target": "com.amazonaws.notifications#AggregationDuration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The aggregation preference of the <code>NotificationConfiguration</code>.</p>\n         <ul>\n            <li>\n               <p>Values:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>LONG</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Aggregate notifications for long periods of time (12 hours).</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>SHORT</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Aggregate notifications for short periods of time (5 minutes).</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>NONE</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Don't aggregate notifications.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The aggregation preference of the <code>NotificationConfiguration</code>.</p> <ul> <li> <p>Values:</p> <ul> <li> <p> <code>LONG</code> </p> <ul> <li> <p>Aggregate notifications for long periods of time (12 hours).</p> </li> </ul> </li> <li> <p> <code>SHORT</code> </p> <ul> <li> <p>Aggregate notifications for short periods of time (5 minutes).</p> </li> </ul> </li> <li> <p> <code>NONE</code> </p> <ul> <li> <p>Don't aggregate notifications.</p> </li> </ul> </li> </ul> </li> </ul>"
+                    }
+                },
+                "subtype": {
+                    "target": "com.amazonaws.notifications#NotificationConfigurationSubtype",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subtype of the notification configuration.</p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains the complete list of fields for a NotificationConfiguration.</p>"
+            }
+        },
+        "com.amazonaws.notifications#NotificationConfigurationSubtype": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "ACCOUNT",
+                        "value": "ACCOUNT",
+                        "documentation": "Notification configuration created by the account"
+                    },
+                    {
+                        "name": "ADMIN_MANAGED",
+                        "value": "ADMIN_MANAGED",
+                        "documentation": "Notification configuration managed by an administrator account"
+                    }
+                ]
             }
         },
         "com.amazonaws.notifications#NotificationConfigurations": {
@@ -4456,14 +4951,14 @@
                 "notificationEvent": {
                     "target": "com.amazonaws.notifications#NotificationEventSummary",
                     "traits": {
-                        "smithy.api#documentation": "<p>Refers to a <code>NotificationEventSummary</code> object.</p>\n         <p>Similar in structure to <code>content</code> in the <code>GetNotificationEvent</code> response.</p>",
+                        "smithy.api#documentation": "<p>Refers to a <code>NotificationEventSummary</code> object.</p> <p>Similar in structure to <code>content</code> in the <code>GetNotificationEvent</code> response.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "aggregationEventType": {
                     "target": "com.amazonaws.notifications#AggregationEventType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>NotificationConfiguration</code>'s aggregation type.</p>\n         <ul>\n            <li>\n               <p>Values:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>AGGREGATE</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>The notification event is an aggregate notification. Aggregate notifications summarize grouped events over a specified time period.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>CHILD</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Some <code>EventRules</code> are <code>ACTIVE</code> and some are <code>INACTIVE</code>. Any call can be run.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>NONE</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>The notification isn't aggregated.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The <code>NotificationConfiguration</code>'s aggregation type.</p> <ul> <li> <p>Values:</p> <ul> <li> <p> <code>AGGREGATE</code> </p> <ul> <li> <p>The notification event is an aggregate notification. Aggregate notifications summarize grouped events over a specified time period.</p> </li> </ul> </li> <li> <p> <code>CHILD</code> </p> <ul> <li> <p>Some <code>EventRules</code> are <code>ACTIVE</code> and some are <code>INACTIVE</code>. Any call can be run.</p> </li> </ul> </li> <li> <p> <code>NONE</code> </p> <ul> <li> <p>The notification isn't aggregated.</p> </li> </ul> </li> </ul> </li> </ul>"
                     }
                 },
                 "aggregateNotificationEventArn": {
@@ -4476,6 +4971,12 @@
                     "target": "com.amazonaws.notifications#AggregationSummary",
                     "traits": {
                         "smithy.api#documentation": "<p>Provides an aggregated summary data for notification events.</p>"
+                    }
+                },
+                "organizationalUnitId": {
+                    "target": "com.amazonaws.notifications#OrganizationalUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the organizational unit in the notification event overview.</p>"
                     }
                 }
             },
@@ -4548,26 +5049,26 @@
                 "notificationType": {
                     "target": "com.amazonaws.notifications#NotificationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of event causing the notification.</p>\n         <ul>\n            <li>\n               <p>Values:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ALERT</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>A notification about an event where something was triggered, initiated, reopened, deployed, or a threshold was breached.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>WARNING</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>A notification about an event where an issue is about to arise. For example, something is approaching a threshold.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ANNOUNCEMENT</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>A notification about an important event. For example, a step in a workflow or escalation path or that a workflow was updated.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>INFORMATIONAL</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>A notification about informational messages. For example, recommendations, service announcements, or reminders.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The type of event causing the notification.</p> <ul> <li> <p>Values:</p> <ul> <li> <p> <code>ALERT</code> </p> <ul> <li> <p>A notification about an event where something was triggered, initiated, reopened, deployed, or a threshold was breached.</p> </li> </ul> </li> <li> <p> <code>WARNING</code> </p> <ul> <li> <p>A notification about an event where an issue is about to arise. For example, something is approaching a threshold.</p> </li> </ul> </li> <li> <p> <code>ANNOUNCEMENT</code> </p> <ul> <li> <p>A notification about an important event. For example, a step in a workflow or escalation path or that a workflow was updated.</p> </li> </ul> </li> <li> <p> <code>INFORMATIONAL</code> </p> <ul> <li> <p>A notification about informational messages. For example, recommendations, service announcements, or reminders.</p> </li> </ul> </li> </ul> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "eventStatus": {
                     "target": "com.amazonaws.notifications#EventStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The assessed nature of the event.</p>\n         <ul>\n            <li>\n               <p>Values:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>HEALTHY</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>All <code>EventRules</code> are <code>ACTIVE</code> and any call can be run.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>UNHEALTHY</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Some <code>EventRules</code> are <code>ACTIVE</code> and some are <code>INACTIVE</code>. Any call can be run.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The assessed nature of the event.</p> <ul> <li> <p>Values:</p> <ul> <li> <p> <code>HEALTHY</code> </p> <ul> <li> <p>All <code>EventRules</code> are <code>ACTIVE</code> and any call can be run.</p> </li> </ul> </li> <li> <p> <code>UNHEALTHY</code> </p> <ul> <li> <p>Some <code>EventRules</code> are <code>ACTIVE</code> and some are <code>INACTIVE</code>. Any call can be run.</p> </li> </ul> </li> </ul> </li> </ul>"
                     }
                 },
                 "aggregationEventType": {
                     "target": "com.amazonaws.notifications#AggregationEventType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The aggregation type of the <code>NotificationConfiguration</code>.</p>\n         <ul>\n            <li>\n               <p>Values:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>AGGREGATE</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>The notification event is an aggregate notification. Aggregate notifications summarize grouped events over a specified time period.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>CHILD</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Some <code>EventRules</code> are <code>ACTIVE</code> and some are <code>INACTIVE</code>. Any call can be run.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>NONE</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>The notification isn't aggregated.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The aggregation type of the <code>NotificationConfiguration</code>.</p> <ul> <li> <p>Values:</p> <ul> <li> <p> <code>AGGREGATE</code> </p> <ul> <li> <p>The notification event is an aggregate notification. Aggregate notifications summarize grouped events over a specified time period.</p> </li> </ul> </li> <li> <p> <code>CHILD</code> </p> <ul> <li> <p>Some <code>EventRules</code> are <code>ACTIVE</code> and some are <code>INACTIVE</code>. Any call can be run.</p> </li> </ul> </li> <li> <p> <code>NONE</code> </p> <ul> <li> <p>The notification isn't aggregated.</p> </li> </ul> </li> </ul> </li> </ul>"
                     }
                 },
                 "aggregateNotificationEventArn": {
                     "target": "com.amazonaws.notifications#NotificationEventArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the value of <code>aggregationEventType</code> is not <code>NONE</code>, this is the\n         Amazon Resource Event (ARN) of the parent aggregate notification.</p>\n         <p>This is omitted if notification isn't aggregated.</p>"
+                        "smithy.api#documentation": "<p>If the value of <code>aggregationEventType</code> is not <code>NONE</code>, this is the Amazon Resource Event (ARN) of the parent aggregate notification.</p> <p>This is omitted if notification isn't aggregated.</p>"
                     }
                 },
                 "aggregationSummary": {
@@ -4603,6 +5104,12 @@
                         "smithy.api#documentation": "<p>A list of media elements.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "organizationalUnitId": {
+                    "target": "com.amazonaws.notifications#OrganizationalUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the organizational unit associated with the notification event.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4636,14 +5143,14 @@
                 "eventStatus": {
                     "target": "com.amazonaws.notifications#EventStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides additional information about the current status of the <code>NotificationEvent</code>.</p>\n         <ul>\n            <li>\n               <p>Values:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>HEALTHY</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>All <code>EventRules</code> are <code>ACTIVE</code>.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>UNHEALTHY</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Some <code>EventRules</code> are <code>ACTIVE</code> and some are <code>INACTIVE</code>.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Provides additional information about the current status of the <code>NotificationEvent</code>.</p> <ul> <li> <p>Values:</p> <ul> <li> <p> <code>HEALTHY</code> </p> <ul> <li> <p>All <code>EventRules</code> are <code>ACTIVE</code>.</p> </li> </ul> </li> <li> <p> <code>UNHEALTHY</code> </p> <ul> <li> <p>Some <code>EventRules</code> are <code>ACTIVE</code> and some are <code>INACTIVE</code>.</p> </li> </ul> </li> </ul> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "notificationType": {
                     "target": "com.amazonaws.notifications#NotificationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of event causing the notification.</p>\n         <ul>\n            <li>\n               <p>Values:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ALERT</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>A notification about an event where something was triggered, initiated, reopened, deployed, or a threshold was breached.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>WARNING</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>A notification about an event where an issue is about to arise. For example, something is approaching a threshold.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ANNOUNCEMENT</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>A notification about an important event. For example, a step in a workflow or escalation path or that a workflow was updated.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>INFORMATIONAL</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>A notification about informational messages. For example, recommendations, service announcements, or reminders.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The type of event causing the notification.</p> <ul> <li> <p>Values:</p> <ul> <li> <p> <code>ALERT</code> </p> <ul> <li> <p>A notification about an event where something was triggered, initiated, reopened, deployed, or a threshold was breached.</p> </li> </ul> </li> <li> <p> <code>WARNING</code> </p> <ul> <li> <p>A notification about an event where an issue is about to arise. For example, something is approaching a threshold.</p> </li> </ul> </li> <li> <p> <code>ANNOUNCEMENT</code> </p> <ul> <li> <p>A notification about an important event. For example, a step in a workflow or escalation path or that a workflow was updated.</p> </li> </ul> </li> <li> <p> <code>INFORMATIONAL</code> </p> <ul> <li> <p>A notification about informational messages. For example, recommendations, service announcements, or reminders.</p> </li> </ul> </li> </ul> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4712,7 +5219,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes an overview of a <code>NotificationHub</code>.</p>\n         <p>A <code>NotificationConfiguration</code> is an account-level setting used to select the Regions where you want to store, process and replicate your notifications.</p>"
+                "smithy.api#documentation": "<p>Describes an overview of a <code>NotificationHub</code>.</p> <p>A <code>NotificationConfiguration</code> is an account-level setting used to select the Regions where you want to store, process and replicate your notifications.</p>"
             }
         },
         "com.amazonaws.notifications#NotificationHubStatus": {
@@ -4751,7 +5258,7 @@
                 "status": {
                     "target": "com.amazonaws.notifications#NotificationHubStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Status information about the <code>NotificationHub</code>.</p>\n         <ul>\n            <li>\n               <p>Values:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ACTIVE</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Incoming <code>NotificationEvents</code> are replicated to this\n                              <code>NotificationHub</code>.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>REGISTERING</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>The <code>NotificationConfiguration</code> is initializing. A <code>NotificationConfiguration</code> with this status can't be deregistered.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>DEREGISTERING</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>The <code>NotificationConfiguration</code> is being deleted. You can't register additional\n                              <code>NotificationHubs</code> in the same Region as a\n                              <code>NotificationConfiguration</code> with this status.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Status information about the <code>NotificationHub</code>.</p> <ul> <li> <p>Values:</p> <ul> <li> <p> <code>ACTIVE</code> </p> <ul> <li> <p>Incoming <code>NotificationEvents</code> are replicated to this <code>NotificationHub</code>.</p> </li> </ul> </li> <li> <p> <code>REGISTERING</code> </p> <ul> <li> <p>The <code>NotificationConfiguration</code> is initializing. A <code>NotificationConfiguration</code> with this status can't be deregistered.</p> </li> </ul> </li> <li> <p> <code>DEREGISTERING</code> </p> <ul> <li> <p>The <code>NotificationConfiguration</code> is being deleted. You can't register additional <code>NotificationHubs</code> in the same Region as a <code>NotificationConfiguration</code> with this status.</p> </li> </ul> </li> </ul> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4804,6 +5311,9 @@
                     "target": "com.amazonaws.notifications#ListManagedNotificationChannelAssociations"
                 },
                 {
+                    "target": "com.amazonaws.notifications#ListMemberAccounts"
+                },
+                {
                     "target": "com.amazonaws.notifications#ListTagsForResource"
                 },
                 {
@@ -4846,6 +5356,9 @@
                 },
                 {
                     "target": "com.amazonaws.notifications#OrganizationAccess"
+                },
+                {
+                    "target": "com.amazonaws.notifications#OrganizationalUnit"
                 }
             ],
             "traits": {
@@ -4883,7 +5396,7 @@
                     ],
                     "maxAge": 86400
                 },
-                "smithy.api#documentation": "<p>The <i>Amazon Web Services User Notifications API Reference</i> provides descriptions, API request parameters, and the JSON response for each of the User Notification API actions.</p>\n         <p>User Notification control plane APIs are currently available in US East (Virginia) - <code>us-east-1</code>.</p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/notifications/latest/APIReference/API_GetNotificationEvent.html\">GetNotificationEvent</a>\n\t and <a href=\"https://docs.aws.amazon.com/notifications/latest/APIReference/API_ListNotificationEvents.html\">ListNotificationEvents</a> APIs are currently available in\n\t <a href=\"https://docs.aws.amazon.com/notifications/latest/userguide/supported-regions.html\">commercial partition Regions</a> and only return notifications stored in the same Region in which they're called.</p>\n         <p>The User Notifications console can only be used in US East (Virginia). Your data however, is stored in each Region chosen as a \n\t <a href=\"https://docs.aws.amazon.com/notifications/latest/userguide/notification-hubs.html\">notification hub</a> in addition to US East (Virginia).</p>",
+                "smithy.api#documentation": "<p>The <i>User Notifications API Reference</i> provides descriptions, API request parameters, and the JSON response for each of the User Notifications API actions.</p> <p>User Notification control plane APIs are currently available in US East (Virginia) - <code>us-east-1</code>.</p> <p> <a href=\"https://docs.aws.amazon.com/notifications/latest/APIReference/API_GetNotificationEvent.html\">GetNotificationEvent</a> and <a href=\"https://docs.aws.amazon.com/notifications/latest/APIReference/API_ListNotificationEvents.html\">ListNotificationEvents</a> APIs are currently available in <a href=\"https://docs.aws.amazon.com/notifications/latest/userguide/supported-regions.html\">commercial partition Regions</a> and only return notifications stored in the same Region in which they're called.</p> <p>The User Notifications console can only be used in US East (Virginia). Your data however, is stored in each Region chosen as a <a href=\"https://docs.aws.amazon.com/notifications/latest/userguide/notification-hubs.html\">notification hub</a> in addition to US East (Virginia).</p> <note> <p>For information about descriptions, API request parameters, and the JSON response for email contact related API actions, see the <a href=\"https://docs.aws.amazon.com/notificationscontacts/latest/APIReference/Welcome.html\">User Notifications Contacts API Reference Guide</a>.</p> </note>",
                 "smithy.api#title": "AWS User Notifications",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -5156,10 +5669,36 @@
                 "target": "com.amazonaws.notifications#DisableNotificationsAccessForOrganization"
             }
         },
+        "com.amazonaws.notifications#OrganizationalUnit": {
+            "type": "resource",
+            "identifiers": {
+                "notificationConfigurationArn": {
+                    "target": "com.amazonaws.notifications#NotificationConfigurationArn"
+                },
+                "organizationalUnitId": {
+                    "target": "com.amazonaws.notifications#OrganizationalUnitId"
+                }
+            },
+            "put": {
+                "target": "com.amazonaws.notifications#AssociateOrganizationalUnit"
+            },
+            "delete": {
+                "target": "com.amazonaws.notifications#DisassociateOrganizationalUnit"
+            },
+            "list": {
+                "target": "com.amazonaws.notifications#ListOrganizationalUnits"
+            }
+        },
         "com.amazonaws.notifications#OrganizationalUnitId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^Root|ou-[0-9a-z]{4,32}-[a-z0-9]{8,32}$"
+                "smithy.api#pattern": "^(Root|r-[0-9a-z]{4,32}|ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$"
+            }
+        },
+        "com.amazonaws.notifications#OrganizationalUnits": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.notifications#OrganizationalUnitId"
             }
         },
         "com.amazonaws.notifications#QuotaCode": {
@@ -5219,7 +5758,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to register a NotificationHub"
                 },
-                "smithy.api#documentation": "<p>Registers a <code>NotificationConfiguration</code> in the specified Region.</p>\n         <p>There is a maximum of one <code>NotificationConfiguration</code> per Region. You can have a\n         maximum of 3 <code>NotificationHub</code> resources at a time.</p>",
+                "smithy.api#documentation": "<p>Registers a <code>NotificationConfiguration</code> in the specified Region.</p> <p>There is a maximum of one <code>NotificationConfiguration</code> per Region. You can have a maximum of 3 <code>NotificationHub</code> resources at a time.</p>",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "POST",
@@ -5256,7 +5795,7 @@
                 "statusSummary": {
                     "target": "com.amazonaws.notifications#NotificationHubStatusSummary",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides additional information about the current <code>NotificationConfiguration</code>\n         status information.</p>",
+                        "smithy.api#documentation": "<p>Provides additional information about the current <code>NotificationConfiguration</code> status information.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5284,7 +5823,7 @@
                 "id": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the resource.</p>\n         <p>At least one id or ARN is required.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier for the resource.</p> <p>At least one id or ARN is required.</p>"
                     }
                 },
                 "arn": {
@@ -5501,7 +6040,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the metadata for a source event.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-events-structure.html\">Event structure reference</a> in the <i>Amazon EventBridge User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Describes the metadata for a source event.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-events-structure.html\">Event structure reference</a> in the <i>Amazon EventBridge User Guide</i>.</p>"
             }
         },
         "com.amazonaws.notifications#SourceEventMetadataSummary": {
@@ -5510,7 +6049,7 @@
                 "eventOriginRegion": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Region where the notification originated.</p>\n         <p>Unavailable for aggregated notifications.</p>",
+                        "smithy.api#documentation": "<p>The Region where the notification originated.</p> <p>Unavailable for aggregated notifications.</p>",
                         "smithy.api#length": {
                             "max": 32
                         }
@@ -5519,14 +6058,14 @@
                 "source": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The matched event source.</p>\n         <p>Must match one of the valid EventBridge sources. Only Amazon Web Services service sourced events are supported. For example, <code>aws.ec2</code> and <code>aws.cloudwatch</code>. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level\">Event delivery from Amazon Web Services services</a> in the <i>Amazon EventBridge User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The matched event source.</p> <p>Must match one of the valid EventBridge sources. Only Amazon Web Services service sourced events are supported. For example, <code>aws.ec2</code> and <code>aws.cloudwatch</code>. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level\">Event delivery from Amazon Web Services services</a> in the <i>Amazon EventBridge User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "eventType": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The event type to match.</p>\n         <p>Must match one of the valid Amazon EventBridge event types. For example, EC2 Instance State-change Notification and Amazon CloudWatch Alarm State Change. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level\">Event delivery from Amazon Web Services services</a> in the <i>Amazon EventBridge User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The event type to match.</p> <p>Must match one of the valid Amazon EventBridge event types. For example, EC2 Instance State-change Notification and Amazon CloudWatch Alarm State Change. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level\">Event delivery from Amazon Web Services services</a> in the <i>Amazon EventBridge User Guide</i>.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 256
@@ -5536,7 +6075,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains metadata about the event that caused the <code>NotificationEvent</code>. For\n         other specific values, see <code>sourceEventMetadata</code>.</p>"
+                "smithy.api#documentation": "<p>Contains metadata about the event that caused the <code>NotificationEvent</code>. For other specific values, see <code>sourceEventMetadata</code>.</p>"
             }
         },
         "com.amazonaws.notifications#StatusSummaryByRegion": {
@@ -5673,7 +6212,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to tag a resource"
                 },
-                "smithy.api#documentation": "<p>Tags the resource with a tag key and value.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html\">Tagging your Amazon Web Services resources</a> in the <i>Tagging Amazon Web Services Resources User Guide</i>.</p>\n         <note>\n            <p>This is only supported for <code>NotificationConfigurations</code>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Tags the resource with a tag key and value.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html\">Tagging your Amazon Web Services resources</a> in the <i>Tagging Amazon Web Services Resources User Guide</i>.</p> <note> <p>This is only supported for <code>NotificationConfigurations</code>.</p> </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/tags/{arn}"
@@ -5791,7 +6330,7 @@
                 "displayText": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A short single line description of the link. Must be hyper-linked with the URL itself. </p>\n         <p>Used for text parts with the type <code>URL</code>.</p>",
+                        "smithy.api#documentation": "<p>A short single line description of the link. Must be hyper-linked with the URL itself. </p> <p>Used for text parts with the type <code>URL</code>.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 1024
@@ -5892,7 +6431,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to remove tags from a resource"
                 },
-                "smithy.api#documentation": "<p>Untags a resource with a specified Amazon Resource Name (ARN).</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html\">Tagging your Amazon Web Services resources</a> in the <i>Tagging Amazon Web Services Resources User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Untags a resource with a specified Amazon Resource Name (ARN).</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html\">Tagging your Amazon Web Services resources</a> in the <i>Tagging Amazon Web Services Resources User Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/tags/{arn}"
@@ -5987,7 +6526,7 @@
                 "eventPattern": {
                     "target": "com.amazonaws.notifications#EventRuleEventPattern",
                     "traits": {
-                        "smithy.api#documentation": "<p>An additional event pattern used to further filter the events this <code>EventRule</code> receives.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html\">Amazon EventBridge event patterns</a> in the <i>Amazon EventBridge User Guide.</i>\n         </p>"
+                        "smithy.api#documentation": "<p>An additional event pattern used to further filter the events this <code>EventRule</code> receives.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html\">Amazon EventBridge event patterns</a> in the <i>Amazon EventBridge User Guide.</i> </p>"
                     }
                 },
                 "regions": {
@@ -6098,7 +6637,7 @@
                 "aggregationDuration": {
                     "target": "com.amazonaws.notifications#AggregationDuration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The aggregation preference of the <code>NotificationConfiguration</code>.</p>\n         <ul>\n            <li>\n               <p>Values:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>LONG</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Aggregate notifications for long periods of time (12 hours).</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>SHORT</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Aggregate notifications for short periods of time (5 minutes).</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>NONE</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Don't aggregate notifications.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The aggregation preference of the <code>NotificationConfiguration</code>.</p> <ul> <li> <p>Values:</p> <ul> <li> <p> <code>LONG</code> </p> <ul> <li> <p>Aggregate notifications for long periods of time (12 hours).</p> </li> </ul> </li> <li> <p> <code>SHORT</code> </p> <ul> <li> <p>Aggregate notifications for short periods of time (5 minutes).</p> </li> </ul> </li> <li> <p> <code>NONE</code> </p> <ul> <li> <p>Don't aggregate notifications.</p> </li> </ul> </li> </ul> </li> </ul>"
                     }
                 }
             },

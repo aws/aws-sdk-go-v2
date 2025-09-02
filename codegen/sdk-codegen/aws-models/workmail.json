@@ -7964,8 +7964,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.workmail#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM Role associated with the email monitoring configuration.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM Role associated with the email monitoring configuration. If absent, the IAM Role Arn of AWSServiceRoleForAmazonWorkMailEvents will be used.</p>"
                     }
                 },
                 "LogGroupArn": {
@@ -8460,6 +8459,9 @@
                 },
                 {
                     "target": "com.amazonaws.workmail#OrganizationStateException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#UnsupportedOperationException"
                 }
             ],
             "traits": {
