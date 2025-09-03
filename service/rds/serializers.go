@@ -12829,6 +12829,11 @@ func awsAwsquery_serializeOpDocumentCreateDBClusterInput(v *CreateDBClusterInput
 		objectKey.Boolean(*v.ManageMasterUserPassword)
 	}
 
+	if len(v.MasterUserAuthenticationType) > 0 {
+		objectKey := object.Key("MasterUserAuthenticationType")
+		objectKey.String(string(v.MasterUserAuthenticationType))
+	}
+
 	if v.MasterUsername != nil {
 		objectKey := object.Key("MasterUsername")
 		objectKey.String(*v.MasterUsername)
@@ -13198,6 +13203,11 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceInput(v *CreateDBInstanceInp
 	if v.ManageMasterUserPassword != nil {
 		objectKey := object.Key("ManageMasterUserPassword")
 		objectKey.Boolean(*v.ManageMasterUserPassword)
+	}
+
+	if len(v.MasterUserAuthenticationType) > 0 {
+		objectKey := object.Key("MasterUserAuthenticationType")
+		objectKey.String(string(v.MasterUserAuthenticationType))
 	}
 
 	if v.MasterUsername != nil {
@@ -16421,6 +16431,11 @@ func awsAwsquery_serializeOpDocumentModifyDBClusterInput(v *ModifyDBClusterInput
 		objectKey.Boolean(*v.ManageMasterUserPassword)
 	}
 
+	if len(v.MasterUserAuthenticationType) > 0 {
+		objectKey := object.Key("MasterUserAuthenticationType")
+		objectKey.String(string(v.MasterUserAuthenticationType))
+	}
+
 	if v.MasterUserPassword != nil {
 		objectKey := object.Key("MasterUserPassword")
 		objectKey.String(*v.MasterUserPassword)
@@ -16748,6 +16763,11 @@ func awsAwsquery_serializeOpDocumentModifyDBInstanceInput(v *ModifyDBInstanceInp
 	if v.ManageMasterUserPassword != nil {
 		objectKey := object.Key("ManageMasterUserPassword")
 		objectKey.Boolean(*v.ManageMasterUserPassword)
+	}
+
+	if len(v.MasterUserAuthenticationType) > 0 {
+		objectKey := object.Key("MasterUserAuthenticationType")
+		objectKey.String(string(v.MasterUserAuthenticationType))
 	}
 
 	if v.MasterUserPassword != nil {

@@ -1,0 +1,8 @@
+{
+    "id": "a9616671-6631-4e90-9fe3-94074b67009d",
+    "type": "feature",
+    "description": "Adding an optional field IpAddressType in CustomOriginConfig",
+    "modules": [
+        "service/cloudfront"
+    ]
+}

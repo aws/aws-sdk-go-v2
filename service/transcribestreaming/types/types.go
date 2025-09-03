@@ -164,6 +164,21 @@ type CallAnalyticsItem struct {
 	noSmithyDocumentSerde
 }
 
+// The language code that represents the language identified in your audio,
+// including the associated confidence score.
+type CallAnalyticsLanguageWithScore struct {
+
+	// The language code of the identified language.
+	LanguageCode CallAnalyticsLanguageCode
+
+	// The confidence score associated with the identified language code. Confidence
+	// scores are values between zero and one; larger values indicate a higher
+	// confidence in the identified language.
+	Score float64
+
+	noSmithyDocumentSerde
+}
+
 // Contains detailed information about your real-time Call Analytics session.
 // These details are provided in the UtteranceEvent and CategoryEvent objects.
 //
@@ -1320,6 +1335,12 @@ type UtteranceEvent struct {
 	// Contains words, phrases, or punctuation marks that are associated with the
 	// specified UtteranceEvent .
 	Items []CallAnalyticsItem
+
+	// The language code that represents the language spoken in your audio stream.
+	LanguageCode CallAnalyticsLanguageCode
+
+	// The language code of the dominant language identified in your stream.
+	LanguageIdentification []CallAnalyticsLanguageWithScore
 
 	// Provides the role of the speaker for each audio channel, either CUSTOMER or
 	// AGENT .

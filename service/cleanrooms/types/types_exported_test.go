@@ -95,6 +95,24 @@ func ExampleAnalysisSourceMetadata_outputUsage() {
 
 var _ *types.AnalysisTemplateArtifactMetadata
 
+func ExampleChangeSpecification_outputUsage() {
+	var union types.ChangeSpecification
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ChangeSpecificationMemberMember:
+		_ = v.Value // Value is types.MemberChangeSpecification
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.MemberChangeSpecification
+
 func ExampleComputeConfiguration_outputUsage() {
 	var union types.ComputeConfiguration
 	// type switches can be used to check the union value

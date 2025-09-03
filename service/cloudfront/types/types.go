@@ -1603,6 +1603,11 @@ type CustomOriginConfig struct {
 	// This member is required.
 	OriginProtocolPolicy OriginProtocolPolicy
 
+	// Specifies which IP protocol CloudFront uses when connecting to your origin. If
+	// your origin uses both IPv4 and IPv6 protocols, you can choose dualstack to help
+	// optimize reliability.
+	IpAddressType IpAddressType
+
 	// Specifies how long, in seconds, CloudFront persists its connection to the
 	// origin. The minimum timeout is 1 second, the maximum is 120 seconds, and the
 	// default (if you don't specify otherwise) is 5 seconds.

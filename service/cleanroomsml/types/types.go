@@ -770,6 +770,20 @@ type ContainerConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for defining custom patterns to be redacted from logs and
+// error messages. This is for the CUSTOM config under entitiesToRedact. Both
+// CustomEntityConfig and entitiesToRedact need to be present or not present.
+type CustomEntityConfig struct {
+
+	// Defines data identifiers for the custom entity configuration. Provide this only
+	// if CUSTOM redaction is configured.
+	//
+	// This member is required.
+	CustomDataIdentifiers []string
+
+	noSmithyDocumentSerde
+}
+
 // Defines where the training dataset is located, what type of data it contains,
 // and how to access the data.
 type Dataset struct {
@@ -997,6 +1011,23 @@ type InputChannelDataSourceMemberProtectedQueryInputParameters struct {
 
 func (*InputChannelDataSourceMemberProtectedQueryInputParameters) isInputChannelDataSource() {}
 
+// The configuration for log redaction.
+type LogRedactionConfiguration struct {
+
+	// Specifies the entities to be redacted from logs. Entities to redact are
+	// "ALL_PERSONALLY_IDENTIFIABLE_INFORMATION", "NUMBERS","CUSTOM". If CUSTOM is
+	// supplied or configured, custom patterns (customDataIdentifiers) should be
+	// provided, and the patterns will be redacted in logs or error messages.
+	//
+	// This member is required.
+	EntitiesToRedact []EntityType
+
+	// Specifies the configuration for custom entities in the context of log redaction.
+	CustomEntityConfig *CustomEntityConfig
+
+	noSmithyDocumentSerde
+}
+
 // Provides the information necessary for a user to access the logs.
 type LogsConfigurationPolicy struct {
 
@@ -1008,6 +1039,13 @@ type LogsConfigurationPolicy struct {
 	// A regular expression pattern that is used to parse the logs and return
 	// information that matches the pattern.
 	FilterPattern *string
+
+	// Specifies the log redaction configuration for this policy.
+	LogRedactionConfiguration *LogRedactionConfiguration
+
+	// Specifies the type of log this policy applies to. The currently supported
+	// policies are ALL or ERROR_SUMMARY.
+	LogType LogType
 
 	noSmithyDocumentSerde
 }

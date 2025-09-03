@@ -314,6 +314,15 @@ func awsRestjson1_deserializeOpHttpBindingsStartCallAnalyticsStreamTranscription
 		v.EnablePartialResultsStabilization = vv
 	}
 
+	if headerValues := response.Header.Values("x-amzn-transcribe-identify-language"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		vv, err := strconv.ParseBool(headerValues[0])
+		if err != nil {
+			return err
+		}
+		v.IdentifyLanguage = vv
+	}
+
 	if headerValues := response.Header.Values("x-amzn-transcribe-language-code"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
 		v.LanguageCode = types.CallAnalyticsLanguageCode(headerValues[0])
@@ -322,6 +331,11 @@ func awsRestjson1_deserializeOpHttpBindingsStartCallAnalyticsStreamTranscription
 	if headerValues := response.Header.Values("x-amzn-transcribe-language-model-name"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
 		v.LanguageModelName = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amzn-transcribe-language-options"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.LanguageOptions = ptr.String(headerValues[0])
 	}
 
 	if headerValues := response.Header.Values("x-amzn-transcribe-media-encoding"); len(headerValues) != 0 {
@@ -348,6 +362,11 @@ func awsRestjson1_deserializeOpHttpBindingsStartCallAnalyticsStreamTranscription
 		v.PiiEntityTypes = ptr.String(headerValues[0])
 	}
 
+	if headerValues := response.Header.Values("x-amzn-transcribe-preferred-language"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.PreferredLanguage = types.CallAnalyticsLanguageCode(headerValues[0])
+	}
+
 	if headerValues := response.Header.Values("x-amzn-request-id"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
 		v.RequestId = ptr.String(headerValues[0])
@@ -368,9 +387,19 @@ func awsRestjson1_deserializeOpHttpBindingsStartCallAnalyticsStreamTranscription
 		v.VocabularyFilterName = ptr.String(headerValues[0])
 	}
 
+	if headerValues := response.Header.Values("x-amzn-transcribe-vocabulary-filter-names"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.VocabularyFilterNames = ptr.String(headerValues[0])
+	}
+
 	if headerValues := response.Header.Values("x-amzn-transcribe-vocabulary-name"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
 		v.VocabularyName = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amzn-transcribe-vocabulary-names"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.VocabularyNames = ptr.String(headerValues[0])
 	}
 
 	return nil
@@ -2308,6 +2337,114 @@ func awsRestjson1_deserializeDocumentCallAnalyticsItemList(v *[]types.CallAnalyt
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCallAnalyticsLanguageIdentification(v *[]types.CallAnalyticsLanguageWithScore, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.CallAnalyticsLanguageWithScore
+	if *v == nil {
+		cv = []types.CallAnalyticsLanguageWithScore{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.CallAnalyticsLanguageWithScore
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentCallAnalyticsLanguageWithScore(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCallAnalyticsLanguageWithScore(v **types.CallAnalyticsLanguageWithScore, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CallAnalyticsLanguageWithScore
+	if *v == nil {
+		sv = &types.CallAnalyticsLanguageWithScore{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "LanguageCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CallAnalyticsLanguageCode to be of type string, got %T instead", value)
+				}
+				sv.LanguageCode = types.CallAnalyticsLanguageCode(jtv)
+			}
+
+		case "Score":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Score = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Score = f64
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCategoryEvent(v **types.CategoryEvent, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2743,6 +2880,20 @@ func awsRestjson1_deserializeDocumentUtteranceEvent(v **types.UtteranceEvent, va
 
 		case "Items":
 			if err := awsRestjson1_deserializeDocumentCallAnalyticsItemList(&sv.Items, value); err != nil {
+				return err
+			}
+
+		case "LanguageCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CallAnalyticsLanguageCode to be of type string, got %T instead", value)
+				}
+				sv.LanguageCode = types.CallAnalyticsLanguageCode(jtv)
+			}
+
+		case "LanguageIdentification":
+			if err := awsRestjson1_deserializeDocumentCallAnalyticsLanguageIdentification(&sv.LanguageIdentification, value); err != nil {
 				return err
 			}
 

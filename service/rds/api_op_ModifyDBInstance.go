@@ -592,6 +592,19 @@ type ModifyDBInstanceInput struct {
 	// [Password management with Amazon Web Services Secrets Manager]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html
 	ManageMasterUserPassword *bool
 
+	// Specifies the authentication type for the master user. With IAM master user
+	// authentication, you can change the master DB user to use IAM database
+	// authentication.
+	//
+	// You can specify one of the following values:
+	//
+	//   - password - Use standard database authentication with a password.
+	//
+	//   - iam-db-auth - Use IAM database authentication for the master user.
+	//
+	// This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL engines.
+	MasterUserAuthenticationType types.MasterUserAuthenticationType
+
 	// The new password for the master user.
 	//
 	// Changing this parameter doesn't result in an outage and the change is

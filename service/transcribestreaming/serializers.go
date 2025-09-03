@@ -163,6 +163,11 @@ func awsRestjson1_serializeOpHttpBindingsStartCallAnalyticsStreamTranscriptionIn
 		encoder.SetHeader(locationName).Boolean(v.EnablePartialResultsStabilization)
 	}
 
+	if v.IdentifyLanguage {
+		locationName := "X-Amzn-Transcribe-Identify-Language"
+		encoder.SetHeader(locationName).Boolean(v.IdentifyLanguage)
+	}
+
 	if len(v.LanguageCode) > 0 {
 		locationName := "X-Amzn-Transcribe-Language-Code"
 		encoder.SetHeader(locationName).String(string(v.LanguageCode))
@@ -171,6 +176,11 @@ func awsRestjson1_serializeOpHttpBindingsStartCallAnalyticsStreamTranscriptionIn
 	if v.LanguageModelName != nil {
 		locationName := "X-Amzn-Transcribe-Language-Model-Name"
 		encoder.SetHeader(locationName).String(*v.LanguageModelName)
+	}
+
+	if v.LanguageOptions != nil {
+		locationName := "X-Amzn-Transcribe-Language-Options"
+		encoder.SetHeader(locationName).String(*v.LanguageOptions)
 	}
 
 	if len(v.MediaEncoding) > 0 {
@@ -193,6 +203,11 @@ func awsRestjson1_serializeOpHttpBindingsStartCallAnalyticsStreamTranscriptionIn
 		encoder.SetHeader(locationName).String(*v.PiiEntityTypes)
 	}
 
+	if len(v.PreferredLanguage) > 0 {
+		locationName := "X-Amzn-Transcribe-Preferred-Language"
+		encoder.SetHeader(locationName).String(string(v.PreferredLanguage))
+	}
+
 	if v.SessionId != nil {
 		locationName := "X-Amzn-Transcribe-Session-Id"
 		encoder.SetHeader(locationName).String(*v.SessionId)
@@ -208,9 +223,19 @@ func awsRestjson1_serializeOpHttpBindingsStartCallAnalyticsStreamTranscriptionIn
 		encoder.SetHeader(locationName).String(*v.VocabularyFilterName)
 	}
 
+	if v.VocabularyFilterNames != nil {
+		locationName := "X-Amzn-Transcribe-Vocabulary-Filter-Names"
+		encoder.SetHeader(locationName).String(*v.VocabularyFilterNames)
+	}
+
 	if v.VocabularyName != nil {
 		locationName := "X-Amzn-Transcribe-Vocabulary-Name"
 		encoder.SetHeader(locationName).String(*v.VocabularyName)
+	}
+
+	if v.VocabularyNames != nil {
+		locationName := "X-Amzn-Transcribe-Vocabulary-Names"
+		encoder.SetHeader(locationName).String(*v.VocabularyNames)
 	}
 
 	return nil

@@ -162,6 +162,27 @@ func (DatasetType) Values() []DatasetType {
 	}
 }
 
+type EntityType string
+
+// Enum values for EntityType
+const (
+	EntityTypeAllPersonallyIdentifiableInformation EntityType = "ALL_PERSONALLY_IDENTIFIABLE_INFORMATION"
+	EntityTypeNumbers                              EntityType = "NUMBERS"
+	EntityTypeCustom                               EntityType = "CUSTOM"
+)
+
+// Values returns all known values for EntityType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EntityType) Values() []EntityType {
+	return []EntityType{
+		"ALL_PERSONALLY_IDENTIFIABLE_INFORMATION",
+		"NUMBERS",
+		"CUSTOM",
+	}
+}
+
 type InferenceInstanceType string
 
 // Enum values for InferenceInstanceType
@@ -184,7 +205,6 @@ const (
 	InferenceInstanceTypeMlR6iLarge     InferenceInstanceType = "ml.r6i.large"
 	InferenceInstanceTypeMlG52xlarge    InferenceInstanceType = "ml.g5.2xlarge"
 	InferenceInstanceTypeMlM5Large      InferenceInstanceType = "ml.m5.large"
-	InferenceInstanceTypeMlP316xlarge   InferenceInstanceType = "ml.p3.16xlarge"
 	InferenceInstanceTypeMlM7i48xlarge  InferenceInstanceType = "ml.m7i.48xlarge"
 	InferenceInstanceTypeMlM6i16xlarge  InferenceInstanceType = "ml.m6i.16xlarge"
 	InferenceInstanceTypeMlP216xlarge   InferenceInstanceType = "ml.p2.16xlarge"
@@ -232,7 +252,6 @@ const (
 	InferenceInstanceTypeMlM6i2xlarge   InferenceInstanceType = "ml.m6i.2xlarge"
 	InferenceInstanceTypeMlG516xlarge   InferenceInstanceType = "ml.g5.16xlarge"
 	InferenceInstanceTypeMlM7i4xlarge   InferenceInstanceType = "ml.m7i.4xlarge"
-	InferenceInstanceTypeMlP32xlarge    InferenceInstanceType = "ml.p3.2xlarge"
 	InferenceInstanceTypeMlR6i32xlarge  InferenceInstanceType = "ml.r6i.32xlarge"
 	InferenceInstanceTypeMlM6i4xlarge   InferenceInstanceType = "ml.m6i.4xlarge"
 	InferenceInstanceTypeMlM5Xlarge     InferenceInstanceType = "ml.m5.xlarge"
@@ -258,8 +277,10 @@ const (
 	InferenceInstanceTypeMlP28xlarge    InferenceInstanceType = "ml.p2.8xlarge"
 	InferenceInstanceTypeMlR6i4xlarge   InferenceInstanceType = "ml.r6i.4xlarge"
 	InferenceInstanceTypeMlM6i32xlarge  InferenceInstanceType = "ml.m6i.32xlarge"
-	InferenceInstanceTypeMlP38xlarge    InferenceInstanceType = "ml.p3.8xlarge"
 	InferenceInstanceTypeMlM44xlarge    InferenceInstanceType = "ml.m4.4xlarge"
+	InferenceInstanceTypeMlP316xlarge   InferenceInstanceType = "ml.p3.16xlarge"
+	InferenceInstanceTypeMlP32xlarge    InferenceInstanceType = "ml.p3.2xlarge"
+	InferenceInstanceTypeMlP38xlarge    InferenceInstanceType = "ml.p3.8xlarge"
 )
 
 // Values returns all known values for InferenceInstanceType. Note that this can
@@ -286,7 +307,6 @@ func (InferenceInstanceType) Values() []InferenceInstanceType {
 		"ml.r6i.large",
 		"ml.g5.2xlarge",
 		"ml.m5.large",
-		"ml.p3.16xlarge",
 		"ml.m7i.48xlarge",
 		"ml.m6i.16xlarge",
 		"ml.p2.16xlarge",
@@ -334,7 +354,6 @@ func (InferenceInstanceType) Values() []InferenceInstanceType {
 		"ml.m6i.2xlarge",
 		"ml.g5.16xlarge",
 		"ml.m7i.4xlarge",
-		"ml.p3.2xlarge",
 		"ml.r6i.32xlarge",
 		"ml.m6i.4xlarge",
 		"ml.m5.xlarge",
@@ -360,8 +379,10 @@ func (InferenceInstanceType) Values() []InferenceInstanceType {
 		"ml.p2.8xlarge",
 		"ml.r6i.4xlarge",
 		"ml.m6i.32xlarge",
-		"ml.p3.8xlarge",
 		"ml.m4.4xlarge",
+		"ml.p3.16xlarge",
+		"ml.p3.2xlarge",
+		"ml.p3.8xlarge",
 	}
 }
 
@@ -393,10 +414,6 @@ const (
 	InstanceTypeMlP2Xlarge      InstanceType = "ml.p2.xlarge"
 	InstanceTypeMlP28xlarge     InstanceType = "ml.p2.8xlarge"
 	InstanceTypeMlP216xlarge    InstanceType = "ml.p2.16xlarge"
-	InstanceTypeMlP32xlarge     InstanceType = "ml.p3.2xlarge"
-	InstanceTypeMlP38xlarge     InstanceType = "ml.p3.8xlarge"
-	InstanceTypeMlP316xlarge    InstanceType = "ml.p3.16xlarge"
-	InstanceTypeMlP3dn24xlarge  InstanceType = "ml.p3dn.24xlarge"
 	InstanceTypeMlP4d24xlarge   InstanceType = "ml.p4d.24xlarge"
 	InstanceTypeMlP4de24xlarge  InstanceType = "ml.p4de.24xlarge"
 	InstanceTypeMlP548xlarge    InstanceType = "ml.p5.48xlarge"
@@ -458,6 +475,54 @@ const (
 	InstanceTypeMlR512xlarge    InstanceType = "ml.r5.12xlarge"
 	InstanceTypeMlR516xlarge    InstanceType = "ml.r5.16xlarge"
 	InstanceTypeMlR524xlarge    InstanceType = "ml.r5.24xlarge"
+	InstanceTypeMlC7iLarge      InstanceType = "ml.c7i.large"
+	InstanceTypeMlC7iXlarge     InstanceType = "ml.c7i.xlarge"
+	InstanceTypeMlC7i2xlarge    InstanceType = "ml.c7i.2xlarge"
+	InstanceTypeMlC7i4xlarge    InstanceType = "ml.c7i.4xlarge"
+	InstanceTypeMlC7i8xlarge    InstanceType = "ml.c7i.8xlarge"
+	InstanceTypeMlC7i12xlarge   InstanceType = "ml.c7i.12xlarge"
+	InstanceTypeMlC7i16xlarge   InstanceType = "ml.c7i.16xlarge"
+	InstanceTypeMlC7i24xlarge   InstanceType = "ml.c7i.24xlarge"
+	InstanceTypeMlC7i48xlarge   InstanceType = "ml.c7i.48xlarge"
+	InstanceTypeMlM7iLarge      InstanceType = "ml.m7i.large"
+	InstanceTypeMlM7iXlarge     InstanceType = "ml.m7i.xlarge"
+	InstanceTypeMlM7i2xlarge    InstanceType = "ml.m7i.2xlarge"
+	InstanceTypeMlM7i4xlarge    InstanceType = "ml.m7i.4xlarge"
+	InstanceTypeMlM7i8xlarge    InstanceType = "ml.m7i.8xlarge"
+	InstanceTypeMlM7i12xlarge   InstanceType = "ml.m7i.12xlarge"
+	InstanceTypeMlM7i16xlarge   InstanceType = "ml.m7i.16xlarge"
+	InstanceTypeMlM7i24xlarge   InstanceType = "ml.m7i.24xlarge"
+	InstanceTypeMlM7i48xlarge   InstanceType = "ml.m7i.48xlarge"
+	InstanceTypeMlR7iLarge      InstanceType = "ml.r7i.large"
+	InstanceTypeMlR7iXlarge     InstanceType = "ml.r7i.xlarge"
+	InstanceTypeMlR7i2xlarge    InstanceType = "ml.r7i.2xlarge"
+	InstanceTypeMlR7i4xlarge    InstanceType = "ml.r7i.4xlarge"
+	InstanceTypeMlR7i8xlarge    InstanceType = "ml.r7i.8xlarge"
+	InstanceTypeMlR7i12xlarge   InstanceType = "ml.r7i.12xlarge"
+	InstanceTypeMlR7i16xlarge   InstanceType = "ml.r7i.16xlarge"
+	InstanceTypeMlR7i24xlarge   InstanceType = "ml.r7i.24xlarge"
+	InstanceTypeMlR7i48xlarge   InstanceType = "ml.r7i.48xlarge"
+	InstanceTypeMlG6Xlarge      InstanceType = "ml.g6.xlarge"
+	InstanceTypeMlG62xlarge     InstanceType = "ml.g6.2xlarge"
+	InstanceTypeMlG64xlarge     InstanceType = "ml.g6.4xlarge"
+	InstanceTypeMlG68xlarge     InstanceType = "ml.g6.8xlarge"
+	InstanceTypeMlG612xlarge    InstanceType = "ml.g6.12xlarge"
+	InstanceTypeMlG616xlarge    InstanceType = "ml.g6.16xlarge"
+	InstanceTypeMlG624xlarge    InstanceType = "ml.g6.24xlarge"
+	InstanceTypeMlG648xlarge    InstanceType = "ml.g6.48xlarge"
+	InstanceTypeMlG6eXlarge     InstanceType = "ml.g6e.xlarge"
+	InstanceTypeMlG6e2xlarge    InstanceType = "ml.g6e.2xlarge"
+	InstanceTypeMlG6e4xlarge    InstanceType = "ml.g6e.4xlarge"
+	InstanceTypeMlG6e8xlarge    InstanceType = "ml.g6e.8xlarge"
+	InstanceTypeMlG6e12xlarge   InstanceType = "ml.g6e.12xlarge"
+	InstanceTypeMlG6e16xlarge   InstanceType = "ml.g6e.16xlarge"
+	InstanceTypeMlG6e24xlarge   InstanceType = "ml.g6e.24xlarge"
+	InstanceTypeMlG6e48xlarge   InstanceType = "ml.g6e.48xlarge"
+	InstanceTypeMlP5en48xlarge  InstanceType = "ml.p5en.48xlarge"
+	InstanceTypeMlP32xlarge     InstanceType = "ml.p3.2xlarge"
+	InstanceTypeMlP38xlarge     InstanceType = "ml.p3.8xlarge"
+	InstanceTypeMlP316xlarge    InstanceType = "ml.p3.16xlarge"
+	InstanceTypeMlP3dn24xlarge  InstanceType = "ml.p3dn.24xlarge"
 )
 
 // Values returns all known values for InstanceType. Note that this can be
@@ -490,10 +555,6 @@ func (InstanceType) Values() []InstanceType {
 		"ml.p2.xlarge",
 		"ml.p2.8xlarge",
 		"ml.p2.16xlarge",
-		"ml.p3.2xlarge",
-		"ml.p3.8xlarge",
-		"ml.p3.16xlarge",
-		"ml.p3dn.24xlarge",
 		"ml.p4d.24xlarge",
 		"ml.p4de.24xlarge",
 		"ml.p5.48xlarge",
@@ -555,6 +616,54 @@ func (InstanceType) Values() []InstanceType {
 		"ml.r5.12xlarge",
 		"ml.r5.16xlarge",
 		"ml.r5.24xlarge",
+		"ml.c7i.large",
+		"ml.c7i.xlarge",
+		"ml.c7i.2xlarge",
+		"ml.c7i.4xlarge",
+		"ml.c7i.8xlarge",
+		"ml.c7i.12xlarge",
+		"ml.c7i.16xlarge",
+		"ml.c7i.24xlarge",
+		"ml.c7i.48xlarge",
+		"ml.m7i.large",
+		"ml.m7i.xlarge",
+		"ml.m7i.2xlarge",
+		"ml.m7i.4xlarge",
+		"ml.m7i.8xlarge",
+		"ml.m7i.12xlarge",
+		"ml.m7i.16xlarge",
+		"ml.m7i.24xlarge",
+		"ml.m7i.48xlarge",
+		"ml.r7i.large",
+		"ml.r7i.xlarge",
+		"ml.r7i.2xlarge",
+		"ml.r7i.4xlarge",
+		"ml.r7i.8xlarge",
+		"ml.r7i.12xlarge",
+		"ml.r7i.16xlarge",
+		"ml.r7i.24xlarge",
+		"ml.r7i.48xlarge",
+		"ml.g6.xlarge",
+		"ml.g6.2xlarge",
+		"ml.g6.4xlarge",
+		"ml.g6.8xlarge",
+		"ml.g6.12xlarge",
+		"ml.g6.16xlarge",
+		"ml.g6.24xlarge",
+		"ml.g6.48xlarge",
+		"ml.g6e.xlarge",
+		"ml.g6e.2xlarge",
+		"ml.g6e.4xlarge",
+		"ml.g6e.8xlarge",
+		"ml.g6e.12xlarge",
+		"ml.g6e.16xlarge",
+		"ml.g6e.24xlarge",
+		"ml.g6e.48xlarge",
+		"ml.p5en.48xlarge",
+		"ml.p3.2xlarge",
+		"ml.p3.8xlarge",
+		"ml.p3.16xlarge",
+		"ml.p3dn.24xlarge",
 	}
 }
 
@@ -574,6 +683,25 @@ func (LogsStatus) Values() []LogsStatus {
 	return []LogsStatus{
 		"PUBLISH_SUCCEEDED",
 		"PUBLISH_FAILED",
+	}
+}
+
+type LogType string
+
+// Enum values for LogType
+const (
+	LogTypeAll          LogType = "ALL"
+	LogTypeErrorSummary LogType = "ERROR_SUMMARY"
+)
+
+// Values returns all known values for LogType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LogType) Values() []LogType {
+	return []LogType{
+		"ALL",
+		"ERROR_SUMMARY",
 	}
 }
 

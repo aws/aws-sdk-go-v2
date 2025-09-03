@@ -13871,6 +13871,17 @@ func awsRestxml_serializeDocumentCustomOriginConfig(v *types.CustomOriginConfig,
 		el := value.MemberElement(root)
 		el.Integer(*v.HTTPSPort)
 	}
+	if len(v.IpAddressType) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "IpAddressType",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.IpAddressType))
+	}
 	if v.OriginKeepaliveTimeout != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{

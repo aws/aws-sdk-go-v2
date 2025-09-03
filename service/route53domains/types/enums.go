@@ -614,6 +614,9 @@ const (
 	ExtraParamNameUkCompanyNumber               ExtraParamName = "UK_COMPANY_NUMBER"
 	ExtraParamNameEuCountryOfCitizenship        ExtraParamName = "EU_COUNTRY_OF_CITIZENSHIP"
 	ExtraParamNameAuPriorityToken               ExtraParamName = "AU_PRIORITY_TOKEN"
+	ExtraParamNameAuEligibilityType             ExtraParamName = "AU_ELIGIBILITY_TYPE"
+	ExtraParamNameAuPolicyReason                ExtraParamName = "AU_POLICY_REASON"
+	ExtraParamNameAuRegistrantName              ExtraParamName = "AU_REGISTRANT_NAME"
 )
 
 // Values returns all known values for ExtraParamName. Note that this can be
@@ -653,6 +656,9 @@ func (ExtraParamName) Values() []ExtraParamName {
 		"UK_COMPANY_NUMBER",
 		"EU_COUNTRY_OF_CITIZENSHIP",
 		"AU_PRIORITY_TOKEN",
+		"AU_ELIGIBILITY_TYPE",
+		"AU_POLICY_REASON",
+		"AU_REGISTRANT_NAME",
 	}
 }
 

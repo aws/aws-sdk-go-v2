@@ -13018,6 +13018,78 @@ func awsRestjson1_deserializeDocumentContainerEntrypoint(v *[]string, value inte
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCustomDataIdentifierList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected CustomDataIdentifier to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCustomEntityConfig(v **types.CustomEntityConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomEntityConfig
+	if *v == nil {
+		sv = &types.CustomEntityConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "customDataIdentifiers":
+			if err := awsRestjson1_deserializeDocumentCustomDataIdentifierList(&sv.CustomDataIdentifiers, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDataset(v **types.Dataset, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13241,6 +13313,42 @@ func awsRestjson1_deserializeDocumentDestination(v **types.Destination, value in
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEntityTypeList(v *[]types.EntityType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.EntityType
+	if *v == nil {
+		cv = []types.EntityType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.EntityType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected EntityType to be of type string, got %T instead", value)
+			}
+			col = types.EntityType(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -13883,6 +13991,47 @@ func awsRestjson1_deserializeDocumentInternalServiceException(v **types.Internal
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentLogRedactionConfiguration(v **types.LogRedactionConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LogRedactionConfiguration
+	if *v == nil {
+		sv = &types.LogRedactionConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "customEntityConfig":
+			if err := awsRestjson1_deserializeDocumentCustomEntityConfig(&sv.CustomEntityConfig, value); err != nil {
+				return err
+			}
+
+		case "entitiesToRedact":
+			if err := awsRestjson1_deserializeDocumentEntityTypeList(&sv.EntitiesToRedact, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentLogsConfigurationPolicy(v **types.LogsConfigurationPolicy, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13917,6 +14066,20 @@ func awsRestjson1_deserializeDocumentLogsConfigurationPolicy(v **types.LogsConfi
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.FilterPattern = ptr.String(jtv)
+			}
+
+		case "logRedactionConfiguration":
+			if err := awsRestjson1_deserializeDocumentLogRedactionConfiguration(&sv.LogRedactionConfiguration, value); err != nil {
+				return err
+			}
+
+		case "logType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LogType to be of type string, got %T instead", value)
+				}
+				sv.LogType = types.LogType(jtv)
 			}
 
 		default:

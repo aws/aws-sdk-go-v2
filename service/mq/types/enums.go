@@ -6,8 +6,9 @@ type AuthenticationStrategy string
 
 // Enum values for AuthenticationStrategy
 const (
-	AuthenticationStrategySimple AuthenticationStrategy = "SIMPLE"
-	AuthenticationStrategyLdap   AuthenticationStrategy = "LDAP"
+	AuthenticationStrategySimple        AuthenticationStrategy = "SIMPLE"
+	AuthenticationStrategyLdap          AuthenticationStrategy = "LDAP"
+	AuthenticationStrategyConfigManaged AuthenticationStrategy = "CONFIG_MANAGED"
 )
 
 // Values returns all known values for AuthenticationStrategy. Note that this can
@@ -18,6 +19,7 @@ func (AuthenticationStrategy) Values() []AuthenticationStrategy {
 	return []AuthenticationStrategy{
 		"SIMPLE",
 		"LDAP",
+		"CONFIG_MANAGED",
 	}
 }
 

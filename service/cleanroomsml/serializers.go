@@ -5427,6 +5427,31 @@ func awsRestjson1_serializeDocumentContainerEntrypoint(v []string, value smithyj
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCustomDataIdentifierList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCustomEntityConfig(v *types.CustomEntityConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CustomDataIdentifiers != nil {
+		ok := object.Key("customDataIdentifiers")
+		if err := awsRestjson1_serializeDocumentCustomDataIdentifierList(v.CustomDataIdentifiers, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDataset(v *types.Dataset, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5518,6 +5543,17 @@ func awsRestjson1_serializeDocumentDestination(v *types.Destination, value smith
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEntityTypeList(v []types.EntityType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 
@@ -5733,6 +5769,27 @@ func awsRestjson1_serializeDocumentInputChannelDataSource(v types.InputChannelDa
 	return nil
 }
 
+func awsRestjson1_serializeDocumentLogRedactionConfiguration(v *types.LogRedactionConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CustomEntityConfig != nil {
+		ok := object.Key("customEntityConfig")
+		if err := awsRestjson1_serializeDocumentCustomEntityConfig(v.CustomEntityConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EntitiesToRedact != nil {
+		ok := object.Key("entitiesToRedact")
+		if err := awsRestjson1_serializeDocumentEntityTypeList(v.EntitiesToRedact, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentLogsConfigurationPolicy(v *types.LogsConfigurationPolicy, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5747,6 +5804,18 @@ func awsRestjson1_serializeDocumentLogsConfigurationPolicy(v *types.LogsConfigur
 	if v.FilterPattern != nil {
 		ok := object.Key("filterPattern")
 		ok.String(*v.FilterPattern)
+	}
+
+	if v.LogRedactionConfiguration != nil {
+		ok := object.Key("logRedactionConfiguration")
+		if err := awsRestjson1_serializeDocumentLogRedactionConfiguration(v.LogRedactionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.LogType) > 0 {
+		ok := object.Key("logType")
+		ok.String(string(v.LogType))
 	}
 
 	return nil

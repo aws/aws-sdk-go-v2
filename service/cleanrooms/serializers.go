@@ -520,6 +520,13 @@ func awsRestjson1_serializeOpDocumentCreateCollaborationInput(v *CreateCollabora
 		ok.String(string(v.AnalyticsEngine))
 	}
 
+	if v.AutoApprovedChangeRequestTypes != nil {
+		ok := object.Key("autoApprovedChangeRequestTypes")
+		if err := awsRestjson1_serializeDocumentAutoApprovedChangeTypeList(v.AutoApprovedChangeRequestTypes, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CreatorDisplayName != nil {
 		ok := object.Key("creatorDisplayName")
 		ok.String(*v.CreatorDisplayName)
@@ -583,6 +590,102 @@ func awsRestjson1_serializeOpDocumentCreateCollaborationInput(v *CreateCollabora
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpCreateCollaborationChangeRequest struct {
+}
+
+func (*awsRestjson1_serializeOpCreateCollaborationChangeRequest) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateCollaborationChangeRequest) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateCollaborationChangeRequestInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/collaborations/{collaborationIdentifier}/changeRequests")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCreateCollaborationChangeRequestInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateCollaborationChangeRequestInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateCollaborationChangeRequestInput(v *CreateCollaborationChangeRequestInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.CollaborationIdentifier == nil || len(*v.CollaborationIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member collaborationIdentifier must not be empty")}
+	}
+	if v.CollaborationIdentifier != nil {
+		if err := encoder.SetURI("collaborationIdentifier").String(*v.CollaborationIdentifier); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateCollaborationChangeRequestInput(v *CreateCollaborationChangeRequestInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Changes != nil {
+		ok := object.Key("changes")
+		if err := awsRestjson1_serializeDocumentChangeInputList(v.Changes, ok); err != nil {
 			return err
 		}
 	}
@@ -2795,6 +2898,86 @@ func awsRestjson1_serializeOpHttpBindingsGetCollaborationAnalysisTemplateInput(v
 	return nil
 }
 
+type awsRestjson1_serializeOpGetCollaborationChangeRequest struct {
+}
+
+func (*awsRestjson1_serializeOpGetCollaborationChangeRequest) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetCollaborationChangeRequest) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetCollaborationChangeRequestInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/collaborations/{collaborationIdentifier}/changeRequests/{changeRequestIdentifier}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetCollaborationChangeRequestInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetCollaborationChangeRequestInput(v *GetCollaborationChangeRequestInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ChangeRequestIdentifier == nil || len(*v.ChangeRequestIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member changeRequestIdentifier must not be empty")}
+	}
+	if v.ChangeRequestIdentifier != nil {
+		if err := encoder.SetURI("changeRequestIdentifier").String(*v.ChangeRequestIdentifier); err != nil {
+			return err
+		}
+	}
+
+	if v.CollaborationIdentifier == nil || len(*v.CollaborationIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member collaborationIdentifier must not be empty")}
+	}
+	if v.CollaborationIdentifier != nil {
+		if err := encoder.SetURI("collaborationIdentifier").String(*v.CollaborationIdentifier); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetCollaborationConfiguredAudienceModelAssociation struct {
 }
 
@@ -4228,6 +4411,89 @@ func awsRestjson1_serializeOpHttpBindingsListCollaborationAnalysisTemplatesInput
 
 	if v.NextToken != nil {
 		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListCollaborationChangeRequests struct {
+}
+
+func (*awsRestjson1_serializeOpListCollaborationChangeRequests) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListCollaborationChangeRequests) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListCollaborationChangeRequestsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/collaborations/{collaborationIdentifier}/changeRequests")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListCollaborationChangeRequestsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListCollaborationChangeRequestsInput(v *ListCollaborationChangeRequestsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.CollaborationIdentifier == nil || len(*v.CollaborationIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member collaborationIdentifier must not be empty")}
+	}
+	if v.CollaborationIdentifier != nil {
+		if err := encoder.SetURI("collaborationIdentifier").String(*v.CollaborationIdentifier); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	if len(v.Status) > 0 {
+		encoder.SetQuery("status").String(string(v.Status))
 	}
 
 	return nil
@@ -8077,6 +8343,67 @@ func awsRestjson1_serializeDocumentAthenaTableReference(v *types.AthenaTableRefe
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAutoApprovedChangeTypeList(v []types.AutoApprovedChangeType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentChangeInput(v *types.ChangeInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Specification != nil {
+		ok := object.Key("specification")
+		if err := awsRestjson1_serializeDocumentChangeSpecification(v.Specification, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.SpecificationType) > 0 {
+		ok := object.Key("specificationType")
+		ok.String(string(v.SpecificationType))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentChangeInputList(v []types.ChangeInput, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentChangeInput(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentChangeSpecification(v types.ChangeSpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.ChangeSpecificationMemberMember:
+		av := object.Key("member")
+		if err := awsRestjson1_serializeDocumentMemberChangeSpecification(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentComputeConfiguration(v types.ComputeConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8488,6 +8815,30 @@ func awsRestjson1_serializeDocumentMemberAbilities(v []types.MemberAbility, valu
 		av := array.Value()
 		av.String(string(v[i]))
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMemberChangeSpecification(v *types.MemberChangeSpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccountId != nil {
+		ok := object.Key("accountId")
+		ok.String(*v.AccountId)
+	}
+
+	if v.DisplayName != nil {
+		ok := object.Key("displayName")
+		ok.String(*v.DisplayName)
+	}
+
+	if v.MemberAbilities != nil {
+		ok := object.Key("memberAbilities")
+		if err := awsRestjson1_serializeDocumentMemberAbilities(v.MemberAbilities, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

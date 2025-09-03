@@ -510,6 +510,26 @@ func (LocalWriteForwardingStatus) Values() []LocalWriteForwardingStatus {
 	}
 }
 
+type MasterUserAuthenticationType string
+
+// Enum values for MasterUserAuthenticationType
+const (
+	MasterUserAuthenticationTypePassword  MasterUserAuthenticationType = "password"
+	MasterUserAuthenticationTypeIamDbAuth MasterUserAuthenticationType = "iam-db-auth"
+)
+
+// Values returns all known values for MasterUserAuthenticationType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MasterUserAuthenticationType) Values() []MasterUserAuthenticationType {
+	return []MasterUserAuthenticationType{
+		"password",
+		"iam-db-auth",
+	}
+}
+
 type ReplicaMode string
 
 // Enum values for ReplicaMode

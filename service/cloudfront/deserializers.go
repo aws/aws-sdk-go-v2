@@ -35574,6 +35574,19 @@ func awsRestxml_deserializeDocumentCustomOriginConfig(v **types.CustomOriginConf
 				sv.HTTPSPort = ptr.Int32(int32(i64))
 			}
 
+		case strings.EqualFold("IpAddressType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.IpAddressType = types.IpAddressType(xtv)
+			}
+
 		case strings.EqualFold("OriginKeepaliveTimeout", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

@@ -413,9 +413,6 @@ func validateOpStartCallAnalyticsStreamTranscriptionInput(v *StartCallAnalyticsS
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartCallAnalyticsStreamTranscriptionInput"}
-	if len(v.LanguageCode) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
-	}
 	if v.MediaSampleRateHertz == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MediaSampleRateHertz"))
 	}

@@ -1417,6 +1417,21 @@ func validateContainerConfig(v *types.ContainerConfig) error {
 	}
 }
 
+func validateCustomEntityConfig(v *types.CustomEntityConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomEntityConfig"}
+	if v.CustomDataIdentifiers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomDataIdentifiers"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDataset(v *types.Dataset) error {
 	if v == nil {
 		return nil
@@ -1712,6 +1727,26 @@ func validateInputChannelDataSource(v types.InputChannelDataSource) error {
 	}
 }
 
+func validateLogRedactionConfiguration(v *types.LogRedactionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LogRedactionConfiguration"}
+	if v.EntitiesToRedact == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntitiesToRedact"))
+	}
+	if v.CustomEntityConfig != nil {
+		if err := validateCustomEntityConfig(v.CustomEntityConfig); err != nil {
+			invalidParams.AddNested("CustomEntityConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateLogsConfigurationPolicy(v *types.LogsConfigurationPolicy) error {
 	if v == nil {
 		return nil
@@ -1719,6 +1754,11 @@ func validateLogsConfigurationPolicy(v *types.LogsConfigurationPolicy) error {
 	invalidParams := smithy.InvalidParamsError{Context: "LogsConfigurationPolicy"}
 	if v.AllowedAccountIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AllowedAccountIds"))
+	}
+	if v.LogRedactionConfiguration != nil {
+		if err := validateLogRedactionConfiguration(v.LogRedactionConfiguration); err != nil {
+			invalidParams.AddNested("LogRedactionConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

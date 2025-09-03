@@ -216,8 +216,9 @@ type ModifyDBClusterInput struct {
 	// PerformanceInsightsEnabled parameter to true and the
 	// PerformanceInsightsRetentionPeriod parameter to 465.
 	//
-	// If you change the value from advanced to standard , you must set the
-	// PerformanceInsightsEnabled parameter to false .
+	// If you change the value from advanced to standard , you can set the
+	// PerformanceInsightsEnabled parameter to true to collect detailed database
+	// counter and per-query metrics.
 	//
 	// Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 	DatabaseInsightsMode types.DatabaseInsightsMode
@@ -398,6 +399,21 @@ type ModifyDBClusterInput struct {
 	//
 	// [Password management with Amazon Web Services Secrets Manager]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html
 	ManageMasterUserPassword *bool
+
+	// Specifies the authentication type for the master user. With IAM master user
+	// authentication, you can change the master DB user to use IAM database
+	// authentication.
+	//
+	// You can specify one of the following values:
+	//
+	//   - password - Use standard database authentication with a password.
+	//
+	//   - iam-db-auth - Use IAM database authentication for the master user.
+	//
+	// Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+	//
+	// This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL engines.
+	MasterUserAuthenticationType types.MasterUserAuthenticationType
 
 	// The new password for the master database user.
 	//

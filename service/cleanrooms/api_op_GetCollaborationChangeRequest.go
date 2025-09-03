@@ -11,104 +11,43 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new collaboration.
-func (c *Client) CreateCollaboration(ctx context.Context, params *CreateCollaborationInput, optFns ...func(*Options)) (*CreateCollaborationOutput, error) {
+// Retrieves detailed information about a specific collaboration change request.
+func (c *Client) GetCollaborationChangeRequest(ctx context.Context, params *GetCollaborationChangeRequestInput, optFns ...func(*Options)) (*GetCollaborationChangeRequestOutput, error) {
 	if params == nil {
-		params = &CreateCollaborationInput{}
+		params = &GetCollaborationChangeRequestInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateCollaboration", params, optFns, c.addOperationCreateCollaborationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCollaborationChangeRequest", params, optFns, c.addOperationGetCollaborationChangeRequestMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*CreateCollaborationOutput)
+	out := result.(*GetCollaborationChangeRequestOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type CreateCollaborationInput struct {
+type GetCollaborationChangeRequestInput struct {
 
-	// The display name of the collaboration creator.
+	// A unique identifier for the change request to retrieve.
 	//
 	// This member is required.
-	CreatorDisplayName *string
+	ChangeRequestIdentifier *string
 
-	// The abilities granted to the collaboration creator.
+	// The identifier of the collaboration that the change request is made against.
 	//
 	// This member is required.
-	CreatorMemberAbilities []types.MemberAbility
-
-	// A description of the collaboration provided by the collaboration owner.
-	//
-	// This member is required.
-	Description *string
-
-	// A list of initial members, not including the creator. This list is immutable.
-	//
-	// This member is required.
-	Members []types.MemberSpecification
-
-	// The display name for a collaboration.
-	//
-	// This member is required.
-	Name *string
-
-	// An indicator as to whether query logging has been enabled or disabled for the
-	// collaboration.
-	//
-	// When ENABLED , Clean Rooms logs details about queries run within this
-	// collaboration and those logs can be viewed in Amazon CloudWatch Logs. The
-	// default value is DISABLED .
-	//
-	// This member is required.
-	QueryLogStatus types.CollaborationQueryLogStatus
-
-	//  The analytics engine.
-	//
-	// After July 16, 2025, the CLEAN_ROOMS_SQL parameter will no longer be available.
-	AnalyticsEngine types.AnalyticsEngine
-
-	// The types of change requests that are automatically approved for this
-	// collaboration.
-	AutoApprovedChangeRequestTypes []types.AutoApprovedChangeType
-
-	// The ML abilities granted to the collaboration creator.
-	CreatorMLMemberAbilities *types.MLMemberAbilities
-
-	// The collaboration creator's payment responsibilities set by the collaboration
-	// creator.
-	//
-	// If the collaboration creator hasn't specified anyone as the member paying for
-	// query compute costs, then the member who can query is the default payer.
-	CreatorPaymentConfiguration *types.PaymentConfiguration
-
-	// The settings for client-side encryption with Cryptographic Computing for Clean
-	// Rooms.
-	DataEncryptionMetadata *types.DataEncryptionMetadata
-
-	// Specifies whether job logs are enabled for this collaboration.
-	//
-	// When ENABLED , Clean Rooms logs details about jobs run within this
-	// collaboration; those logs can be viewed in Amazon CloudWatch Logs. The default
-	// value is DISABLED .
-	JobLogStatus types.CollaborationJobLogStatus
-
-	// An optional label that you can assign to a resource when you create it. Each
-	// tag consists of a key and an optional value, both of which you define. When you
-	// use tagging, you can also use tag-based access control in IAM policies to
-	// control access to this resource.
-	Tags map[string]string
+	CollaborationIdentifier *string
 
 	noSmithyDocumentSerde
 }
 
-type CreateCollaborationOutput struct {
+type GetCollaborationChangeRequestOutput struct {
 
-	// The collaboration.
+	// The collaboration change request that was requested.
 	//
 	// This member is required.
-	Collaboration *types.Collaboration
+	CollaborationChangeRequest *types.CollaborationChangeRequest
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -116,19 +55,19 @@ type CreateCollaborationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationCreateCollaborationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCollaborationChangeRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCollaboration{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCollaborationChangeRequest{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCollaboration{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCollaborationChangeRequest{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCollaboration"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCollaborationChangeRequest"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -183,10 +122,10 @@ func (c *Client) addOperationCreateCollaborationMiddlewares(stack *middleware.St
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
-	if err = addOpCreateCollaborationValidationMiddleware(stack); err != nil {
+	if err = addOpGetCollaborationChangeRequestValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCollaboration(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCollaborationChangeRequest(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -249,10 +188,10 @@ func (c *Client) addOperationCreateCollaborationMiddlewares(stack *middleware.St
 	return nil
 }
 
-func newServiceMetadataMiddleware_opCreateCollaboration(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opGetCollaborationChangeRequest(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "CreateCollaboration",
+		OperationName: "GetCollaborationChangeRequest",
 	}
 }

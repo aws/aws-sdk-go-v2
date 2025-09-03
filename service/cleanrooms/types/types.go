@@ -699,6 +699,64 @@ type BilledResourceUtilization struct {
 	noSmithyDocumentSerde
 }
 
+// Represents a single change within a collaboration change request, containing
+// the change identifier and specification.
+type Change struct {
+
+	// The specification details for this change.
+	//
+	// This member is required.
+	Specification ChangeSpecification
+
+	// The type of specification for this change.
+	//
+	// This member is required.
+	SpecificationType ChangeSpecificationType
+
+	// The list of change types that were applied.
+	//
+	// This member is required.
+	Types []ChangeType
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a change to apply to a collaboration.
+type ChangeInput struct {
+
+	// The specification details for the change. The structure depends on the
+	// specification type.
+	//
+	// This member is required.
+	Specification ChangeSpecification
+
+	// The type of specification for the change. Currently supports MEMBER for
+	// member-related changes.
+	//
+	// This member is required.
+	SpecificationType ChangeSpecificationType
+
+	noSmithyDocumentSerde
+}
+
+// A union that contains the specification details for different types of changes.
+//
+// The following types satisfy this interface:
+//
+//	ChangeSpecificationMemberMember
+type ChangeSpecification interface {
+	isChangeSpecification()
+}
+
+// The member change specification when the change type is MEMBER .
+type ChangeSpecificationMemberMember struct {
+	Value MemberChangeSpecification
+
+	noSmithyDocumentSerde
+}
+
+func (*ChangeSpecificationMemberMember) isChangeSpecification() {}
+
 // The multi-party data share environment. The collaboration contains metadata
 // about its purpose and participants.
 type Collaboration struct {
@@ -759,6 +817,10 @@ type Collaboration struct {
 	//
 	// After July 16, 2025, the CLEAN_ROOMS_SQL parameter will no longer be available.
 	AnalyticsEngine AnalyticsEngine
+
+	// The types of change requests that are automatically approved for this
+	// collaboration.
+	AutoApprovedChangeTypes []AutoApprovedChangeType
 
 	// The settings for client-side encryption for cryptographic computing.
 	DataEncryptionMetadata *DataEncryptionMetadata
@@ -912,6 +974,91 @@ type CollaborationAnalysisTemplateSummary struct {
 
 	// The description of the analysis template.
 	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a request to modify a collaboration. Change requests enable
+// structured modifications to collaborations after they have been created.
+type CollaborationChangeRequest struct {
+
+	// The list of changes specified in this change request.
+	//
+	// This member is required.
+	Changes []Change
+
+	// The unique identifier for the collaboration being modified.
+	//
+	// This member is required.
+	CollaborationId *string
+
+	// The time when the change request was created.
+	//
+	// This member is required.
+	CreateTime *time.Time
+
+	// The unique identifier for the change request.
+	//
+	// This member is required.
+	Id *string
+
+	// Whether the change request was automatically approved based on the
+	// collaboration's auto-approval settings.
+	//
+	// This member is required.
+	IsAutoApproved *bool
+
+	// The current status of the change request. Valid values are PENDING , APPROVED ,
+	// DENIED , COMMITTED , and CANCELLED .
+	//
+	// This member is required.
+	Status ChangeRequestStatus
+
+	// The time when the change request was last updated.
+	//
+	// This member is required.
+	UpdateTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a collaboration change request.
+type CollaborationChangeRequestSummary struct {
+
+	// Summary of the changes in this change request.
+	//
+	// This member is required.
+	Changes []Change
+
+	// The unique identifier for the collaboration.
+	//
+	// This member is required.
+	CollaborationId *string
+
+	// The time when the change request was created.
+	//
+	// This member is required.
+	CreateTime *time.Time
+
+	// The unique identifier for the change request.
+	//
+	// This member is required.
+	Id *string
+
+	// Whether the change request was automatically approved.
+	//
+	// This member is required.
+	IsAutoApproved *bool
+
+	// The current status of the change request.
+	//
+	// This member is required.
+	Status ChangeRequestStatus
+
+	// The time when the change request was last updated.
+	//
+	// This member is required.
+	UpdateTime *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -2948,6 +3095,34 @@ type JobComputePaymentConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies changes to collaboration membership, including adding new members
+// with their abilities and display names.
+type MemberChangeSpecification struct {
+
+	// The Amazon Web Services account ID of the member to add to the collaboration.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The abilities granted to the collaboration member. These determine what actions
+	// the member can perform within the collaboration.
+	//
+	// The following values are currently not supported: CAN_QUERY ,
+	// CAN_RECEIVE_RESULTS, and CAN_RUN_JOB .
+	//
+	// Set the value of memberAbilities to [] to allow a member to contribute data.
+	//
+	// This member is required.
+	MemberAbilities []MemberAbility
+
+	// Specifies the display name that will be shown for this member in the
+	// collaboration. While this field is required when inviting new members, it
+	// becomes optional when modifying abilities of existing collaboration members.
+	DisplayName *string
+
+	noSmithyDocumentSerde
+}
+
 // The membership object.
 type Membership struct {
 
@@ -4979,6 +5154,7 @@ func (*UnknownUnionMember) isAnalysisRulePolicy()                               
 func (*UnknownUnionMember) isAnalysisRulePolicyV1()                                {}
 func (*UnknownUnionMember) isAnalysisSource()                                      {}
 func (*UnknownUnionMember) isAnalysisSourceMetadata()                              {}
+func (*UnknownUnionMember) isChangeSpecification()                                 {}
 func (*UnknownUnionMember) isComputeConfiguration()                                {}
 func (*UnknownUnionMember) isConfigurationDetails()                                {}
 func (*UnknownUnionMember) isConfiguredTableAnalysisRulePolicy()                   {}

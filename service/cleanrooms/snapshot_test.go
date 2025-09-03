@@ -122,6 +122,18 @@ func TestCheckSnapshot_CreateCollaboration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateCollaborationChangeRequest(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCollaborationChangeRequest(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateCollaborationChangeRequest")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateConfiguredAudienceModelAssociation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateConfiguredAudienceModelAssociation(context.Background(), nil, func(o *Options) {
@@ -410,6 +422,18 @@ func TestCheckSnapshot_GetCollaborationAnalysisTemplate(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetCollaborationChangeRequest(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCollaborationChangeRequest(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCollaborationChangeRequest")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetCollaborationConfiguredAudienceModelAssociation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCollaborationConfiguredAudienceModelAssociation(context.Background(), nil, func(o *Options) {
@@ -619,6 +643,18 @@ func TestCheckSnapshot_ListCollaborationAnalysisTemplates(t *testing.T) {
 	_, err := svc.ListCollaborationAnalysisTemplates(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListCollaborationAnalysisTemplates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListCollaborationChangeRequests(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCollaborationChangeRequests(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCollaborationChangeRequests")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1129,6 +1165,18 @@ func TestUpdateSnapshot_CreateCollaboration(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateCollaborationChangeRequest(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCollaborationChangeRequest(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateCollaborationChangeRequest")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateConfiguredAudienceModelAssociation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateConfiguredAudienceModelAssociation(context.Background(), nil, func(o *Options) {
@@ -1417,6 +1465,18 @@ func TestUpdateSnapshot_GetCollaborationAnalysisTemplate(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetCollaborationChangeRequest(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCollaborationChangeRequest(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCollaborationChangeRequest")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetCollaborationConfiguredAudienceModelAssociation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCollaborationConfiguredAudienceModelAssociation(context.Background(), nil, func(o *Options) {
@@ -1626,6 +1686,18 @@ func TestUpdateSnapshot_ListCollaborationAnalysisTemplates(t *testing.T) {
 	_, err := svc.ListCollaborationAnalysisTemplates(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListCollaborationAnalysisTemplates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCollaborationChangeRequests(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCollaborationChangeRequests(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCollaborationChangeRequests")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

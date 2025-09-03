@@ -1,0 +1,8 @@
+{
+    "id": "7798be86-c4e0-4bc7-b488-99774bb1ab8e",
+    "type": "feature",
+    "description": "Add CONFIG_MANAGED as a supported AuthenticationStrategy for Amazon MQ for RabbitMQ brokers. Make username and password optional on broker creation for CONFIG_MANAGED brokers.",
+    "modules": [
+        "service/mq"
+    ]
+}

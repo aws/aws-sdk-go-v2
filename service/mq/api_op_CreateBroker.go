@@ -103,15 +103,6 @@ type CreateBrokerInput struct {
 	// This member is required.
 	PubliclyAccessible *bool
 
-	// The list of broker users (persons or applications) who can access queues and
-	// topics. For Amazon MQ for RabbitMQ brokers, one and only one administrative user
-	// is accepted and created when a broker is first provisioned. All subsequent
-	// broker users are created by making RabbitMQ API calls directly to brokers or via
-	// the RabbitMQ web console.
-	//
-	// This member is required.
-	Users []types.User
-
 	// Optional. The authentication strategy used to secure the broker. The default is
 	// SIMPLE.
 	AuthenticationStrategy types.AuthenticationStrategy
@@ -192,6 +183,15 @@ type CreateBrokerInput struct {
 
 	// Create tags when creating the broker.
 	Tags map[string]string
+
+	// The list of broker users (persons or applications) who can access queues and
+	// topics. For Amazon MQ for RabbitMQ brokers, an administrative user is required
+	// if using simple authentication and authorization. For brokers using OAuth2, this
+	// user is optional. When provided, one and only one administrative user is
+	// accepted and created when a broker is first provisioned. All subsequent broker
+	// users are created by making RabbitMQ API calls directly to brokers or via the
+	// RabbitMQ web console.
+	Users []types.User
 
 	noSmithyDocumentSerde
 }

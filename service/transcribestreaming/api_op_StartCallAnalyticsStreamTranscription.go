@@ -21,7 +21,7 @@ import (
 //
 // The following parameters are required:
 //
-//   - language-code
+//   - language-code or identify-language
 //
 //   - media-encoding
 //
@@ -47,16 +47,6 @@ func (c *Client) StartCallAnalyticsStreamTranscription(ctx context.Context, para
 }
 
 type StartCallAnalyticsStreamTranscriptionInput struct {
-
-	// Specify the language code that represents the language spoken in your audio.
-	//
-	// For a list of languages supported with real-time Call Analytics, refer to the [Supported languages]
-	// table.
-	//
-	// [Supported languages]: https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html
-	//
-	// This member is required.
-	LanguageCode types.CallAnalyticsLanguageCode
 
 	// Specify the encoding of your input audio. Supported formats are:
 	//
@@ -119,6 +109,28 @@ type StartCallAnalyticsStreamTranscriptionInput struct {
 	// [Partial-result stabilization]: https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization
 	EnablePartialResultsStabilization bool
 
+	// Enables automatic language identification for your Call Analytics transcription.
+	//
+	// If you include IdentifyLanguage , you must include a list of language codes,
+	// using LanguageOptions , that you think may be present in your audio stream. You
+	// must provide a minimum of two language selections.
+	//
+	// You can also include a preferred language using PreferredLanguage . Adding a
+	// preferred language can help Amazon Transcribe identify the language faster than
+	// if you omit this parameter.
+	//
+	// Note that you must include either LanguageCode or IdentifyLanguage in your
+	// request. If you include both parameters, your transcription job fails.
+	IdentifyLanguage bool
+
+	// Specify the language code that represents the language spoken in your audio.
+	//
+	// For a list of languages supported with real-time Call Analytics, refer to the [Supported languages]
+	// table.
+	//
+	// [Supported languages]: https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html
+	LanguageCode types.CallAnalyticsLanguageCode
+
 	// Specify the name of the custom language model that you want to use when
 	// processing your transcription. Note that language model names are case
 	// sensitive.
@@ -132,6 +144,23 @@ type StartCallAnalyticsStreamTranscriptionInput struct {
 	//
 	// [Custom language models]: https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html
 	LanguageModelName *string
+
+	// Specify two or more language codes that represent the languages you think may
+	// be present in your media.
+	//
+	// Including language options can improve the accuracy of language identification.
+	//
+	// If you include LanguageOptions in your request, you must also include
+	// IdentifyLanguage .
+	//
+	// For a list of languages supported with Call Analytics streaming, refer to the [Supported languages]
+	// table.
+	//
+	// You can only include one language dialect per language per stream. For example,
+	// you cannot include en-US and en-AU in the same request.
+	//
+	// [Supported languages]: https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html
+	LanguageOptions *string
 
 	// Specify the level of stability to use when you enable partial results
 	// stabilization ( EnablePartialResultsStabilization ).
@@ -158,6 +187,13 @@ type StartCallAnalyticsStreamTranscriptionInput struct {
 	// If you include ContentRedactionType or ContentIdentificationType in your
 	// request, but do not include PiiEntityTypes , all PII is redacted or identified.
 	PiiEntityTypes *string
+
+	// Specify a preferred language from the subset of languages codes you specified
+	// in LanguageOptions .
+	//
+	// You can only use this parameter if you've included IdentifyLanguage and
+	// LanguageOptions in your request.
+	PreferredLanguage types.CallAnalyticsLanguageCode
 
 	// Specify a name for your Call Analytics transcription session. If you don't
 	// include this parameter in your request, Amazon Transcribe generates an ID and
@@ -186,6 +222,22 @@ type StartCallAnalyticsStreamTranscriptionInput struct {
 	// [Using vocabulary filtering with unwanted words]: https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html
 	VocabularyFilterName *string
 
+	// Specify the names of the custom vocabulary filters that you want to use when
+	// processing your Call Analytics transcription. Note that vocabulary filter names
+	// are case sensitive.
+	//
+	// These filters serve to customize the transcript output.
+	//
+	// This parameter is only intended for use with the IdentifyLanguage parameter. If
+	// you're not including IdentifyLanguage in your request and want to use a custom
+	// vocabulary filter with your transcription, use the VocabularyFilterName
+	// parameter instead.
+	//
+	// For more information, see [Using vocabulary filtering with unwanted words].
+	//
+	// [Using vocabulary filtering with unwanted words]: https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html
+	VocabularyFilterNames *string
+
 	// Specify the name of the custom vocabulary that you want to use when processing
 	// your transcription. Note that vocabulary names are case sensitive.
 	//
@@ -197,6 +249,22 @@ type StartCallAnalyticsStreamTranscriptionInput struct {
 	//
 	// [Custom vocabularies]: https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html
 	VocabularyName *string
+
+	// Specify the names of the custom vocabularies that you want to use when
+	// processing your Call Analytics transcription. Note that vocabulary names are
+	// case sensitive.
+	//
+	// If the custom vocabulary's language doesn't match the identified media
+	// language, it won't be applied to the transcription.
+	//
+	// This parameter is only intended for use with the IdentifyLanguage parameter. If
+	// you're not including IdentifyLanguage in your request and want to use a custom
+	// vocabulary with your transcription, use the VocabularyName parameter instead.
+	//
+	// For more information, see [Custom vocabularies].
+	//
+	// [Custom vocabularies]: https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html
+	VocabularyNames *string
 
 	noSmithyDocumentSerde
 }
@@ -215,12 +283,19 @@ type StartCallAnalyticsStreamTranscriptionOutput struct {
 	// transcription.
 	EnablePartialResultsStabilization bool
 
+	// Shows whether automatic language identification was enabled for your Call
+	// Analytics transcription.
+	IdentifyLanguage bool
+
 	// Provides the language code that you specified in your Call Analytics request.
 	LanguageCode types.CallAnalyticsLanguageCode
 
 	// Provides the name of the custom language model that you specified in your Call
 	// Analytics request.
 	LanguageModelName *string
+
+	// Provides the language codes that you specified in your Call Analytics request.
+	LanguageOptions *string
 
 	// Provides the media encoding you specified in your Call Analytics request.
 	MediaEncoding types.MediaEncoding
@@ -233,6 +308,10 @@ type StartCallAnalyticsStreamTranscriptionOutput struct {
 
 	// Lists the PII entity types you specified in your Call Analytics request.
 	PiiEntityTypes *string
+
+	// Provides the preferred language that you specified in your Call Analytics
+	// request.
+	PreferredLanguage types.CallAnalyticsLanguageCode
 
 	// Provides the identifier for your real-time Call Analytics request.
 	RequestId *string
@@ -248,9 +327,17 @@ type StartCallAnalyticsStreamTranscriptionOutput struct {
 	// Call Analytics request.
 	VocabularyFilterName *string
 
+	// Provides the names of the custom vocabulary filters that you specified in your
+	// Call Analytics request.
+	VocabularyFilterNames *string
+
 	// Provides the name of the custom vocabulary that you specified in your Call
 	// Analytics request.
 	VocabularyName *string
+
+	// Provides the names of the custom vocabularies that you specified in your Call
+	// Analytics request.
+	VocabularyNames *string
 
 	eventStream *StartCallAnalyticsStreamTranscriptionEventStream
 

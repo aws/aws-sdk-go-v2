@@ -223,6 +223,82 @@ func (AnalyticsEngine) Values() []AnalyticsEngine {
 	}
 }
 
+type AutoApprovedChangeType string
+
+// Enum values for AutoApprovedChangeType
+const (
+	AutoApprovedChangeTypeAddMember AutoApprovedChangeType = "ADD_MEMBER"
+)
+
+// Values returns all known values for AutoApprovedChangeType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutoApprovedChangeType) Values() []AutoApprovedChangeType {
+	return []AutoApprovedChangeType{
+		"ADD_MEMBER",
+	}
+}
+
+type ChangeRequestStatus string
+
+// Enum values for ChangeRequestStatus
+const (
+	ChangeRequestStatusPending   ChangeRequestStatus = "PENDING"
+	ChangeRequestStatusApproved  ChangeRequestStatus = "APPROVED"
+	ChangeRequestStatusCancelled ChangeRequestStatus = "CANCELLED"
+	ChangeRequestStatusDenied    ChangeRequestStatus = "DENIED"
+	ChangeRequestStatusCommitted ChangeRequestStatus = "COMMITTED"
+)
+
+// Values returns all known values for ChangeRequestStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChangeRequestStatus) Values() []ChangeRequestStatus {
+	return []ChangeRequestStatus{
+		"PENDING",
+		"APPROVED",
+		"CANCELLED",
+		"DENIED",
+		"COMMITTED",
+	}
+}
+
+type ChangeSpecificationType string
+
+// Enum values for ChangeSpecificationType
+const (
+	ChangeSpecificationTypeMember ChangeSpecificationType = "MEMBER"
+)
+
+// Values returns all known values for ChangeSpecificationType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChangeSpecificationType) Values() []ChangeSpecificationType {
+	return []ChangeSpecificationType{
+		"MEMBER",
+	}
+}
+
+type ChangeType string
+
+// Enum values for ChangeType
+const (
+	ChangeTypeAddMember ChangeType = "ADD_MEMBER"
+)
+
+// Values returns all known values for ChangeType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChangeType) Values() []ChangeType {
+	return []ChangeType{
+		"ADD_MEMBER",
+	}
+}
+
 type CollaborationJobLogStatus string
 
 // Enum values for CollaborationJobLogStatus

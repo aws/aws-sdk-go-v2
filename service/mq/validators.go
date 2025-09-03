@@ -646,9 +646,7 @@ func validateOpCreateBrokerInput(v *CreateBrokerInput) error {
 	if v.PubliclyAccessible == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PubliclyAccessible"))
 	}
-	if v.Users == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Users"))
-	} else if v.Users != nil {
+	if v.Users != nil {
 		if err := validate__listOfUser(v.Users); err != nil {
 			invalidParams.AddNested("Users", err.(smithy.InvalidParamsError))
 		}
