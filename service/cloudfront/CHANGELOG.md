@@ -1,3 +1,7 @@
+# v1.54.0 (2025-09-03)
+
+* **Feature**: Adding an optional field IpAddressType in CustomOriginConfig
+
 # v1.53.2 (2025-08-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

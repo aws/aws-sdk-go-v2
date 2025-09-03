@@ -1,8 +1,0 @@
-{
-    "id": "9315ee0c-8fba-4575-ba1b-90a235993baa",
-    "type": "feature",
-    "description": "Amazon Route 53 now supports the Asia Pacific (New Zealand) Region (ap-southeast-6) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.",
-    "modules": [
-        "service/route53"
-    ]
-}

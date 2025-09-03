@@ -1,8 +1,0 @@
-{
-    "id": "e689b6ad-c0f7-4472-9380-3f3c72507fd0",
-    "type": "feature",
-    "description": "Added support for adding new data provider members to an existing collaboration.",
-    "modules": [
-        "service/cleanrooms"
-    ]
-}

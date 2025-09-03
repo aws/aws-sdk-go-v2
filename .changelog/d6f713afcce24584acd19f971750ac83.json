@@ -1,8 +1,0 @@
-{
-    "id": "d6f713af-cce2-4584-acd1-9f971750ac83",
-    "type": "feature",
-    "description": "This release adds support for automatic language identification in AWS Transcribe Call Analytics",
-    "modules": [
-        "service/transcribestreaming"
-    ]
-}

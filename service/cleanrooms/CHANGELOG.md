@@ -1,3 +1,7 @@
+# v1.32.0 (2025-09-03)
+
+* **Feature**: Added support for adding new data provider members to an existing collaboration.
+
 # v1.31.2 (2025-08-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

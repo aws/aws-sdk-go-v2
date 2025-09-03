@@ -1,8 +1,0 @@
-{
-    "id": "6b0fdf03-8382-4e2b-80fc-e6e4df9d4b63",
-    "type": "feature",
-    "description": "This release adds support for MasterUserAuthenticationType parameter on CreateDBInstance, ModifyDBInstance, CreateDBCluster, and ModifyDBCluster operations.",
-    "modules": [
-        "service/rds"
-    ]
-}

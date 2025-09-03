@@ -1,3 +1,23 @@
+# Release (2025-09-03)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.32.0](service/cleanrooms/CHANGELOG.md#v1320-2025-09-03)
+  * **Feature**: Added support for adding new data provider members to an existing collaboration.
+* `github.com/aws/aws-sdk-go-v2/service/cleanroomsml`: [v1.19.0](service/cleanroomsml/CHANGELOG.md#v1190-2025-09-03)
+  * **Feature**: AWS Clean Rooms ML adds log sanitization for privacy-enhanced error summaries, supports new instance types for custom models providing better performance and lower costs, and deprecates P3-series instances.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.54.0](service/cloudfront/CHANGELOG.md#v1540-2025-09-03)
+  * **Feature**: Adding an optional field IpAddressType in CustomOriginConfig
+* `github.com/aws/aws-sdk-go-v2/service/mq`: [v1.34.0](service/mq/CHANGELOG.md#v1340-2025-09-03)
+  * **Feature**: Add CONFIG_MANAGED as a supported AuthenticationStrategy for Amazon MQ for RabbitMQ brokers. Make username and password optional on broker creation for CONFIG_MANAGED brokers.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.105.0](service/rds/CHANGELOG.md#v11050-2025-09-03)
+  * **Feature**: This release adds support for MasterUserAuthenticationType parameter on CreateDBInstance, ModifyDBInstance, CreateDBCluster, and ModifyDBCluster operations.
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.58.0](service/route53/CHANGELOG.md#v1580-2025-09-03)
+  * **Feature**: Amazon Route 53 now supports the Asia Pacific (New Zealand) Region (ap-southeast-6) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
+* `github.com/aws/aws-sdk-go-v2/service/route53domains`: [v1.34.0](service/route53domains/CHANGELOG.md#v1340-2025-09-03)
+  * **Feature**: Added new ExtraParams AU_ELIGIBILITY_TYPE, AU_POLICY_REASON, and AU_REGISTRANT_NAME
+* `github.com/aws/aws-sdk-go-v2/service/transcribestreaming`: [v1.32.0](service/transcribestreaming/CHANGELOG.md#v1320-2025-09-03)
+  * **Feature**: This release adds support for automatic language identification in AWS Transcribe Call Analytics
+
 # Release (2025-09-02)
 
 ## Module Highlights

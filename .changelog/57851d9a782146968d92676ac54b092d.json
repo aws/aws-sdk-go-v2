@@ -1,8 +1,0 @@
-{
-    "id": "57851d9a-7821-4696-8d92-676ac54b092d",
-    "type": "feature",
-    "description": "AWS Clean Rooms ML adds log sanitization for privacy-enhanced error summaries, supports new instance types for custom models providing better performance and lower costs, and deprecates P3-series instances.",
-    "modules": [
-        "service/cleanroomsml"
-    ]
-}

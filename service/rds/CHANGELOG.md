@@ -1,3 +1,7 @@
+# v1.105.0 (2025-09-03)
+
+* **Feature**: This release adds support for MasterUserAuthenticationType parameter on CreateDBInstance, ModifyDBInstance, CreateDBCluster, and ModifyDBCluster operations.
+
 # v1.104.1 (2025-08-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

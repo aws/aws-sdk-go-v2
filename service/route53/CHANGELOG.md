@@ -1,3 +1,7 @@
+# v1.58.0 (2025-09-03)
+
+* **Feature**: Amazon Route 53 now supports the Asia Pacific (New Zealand) Region (ap-southeast-6) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
+
 # v1.57.2 (2025-08-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions
