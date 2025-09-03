@@ -3103,6 +3103,24 @@
                     "traits": {
                         "smithy.api#enumValue": "AU_PRIORITY_TOKEN"
                     }
+                },
+                "AU_ELIGIBILITY_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AU_ELIGIBILITY_TYPE"
+                    }
+                },
+                "AU_POLICY_REASON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AU_POLICY_REASON"
+                    }
+                },
+                "AU_REGISTRANT_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AU_REGISTRANT_NAME"
+                    }
                 }
             }
         },

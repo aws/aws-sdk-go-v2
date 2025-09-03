@@ -6592,6 +6592,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies how long, in seconds, CloudFront persists its connection to the origin. The minimum timeout is 1 second, the maximum is 120 seconds, and the default (if you don't specify otherwise) is 5 seconds.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginKeepaliveTimeout\">Keep-alive timeout (custom origins only)</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>"
                     }
+                },
+                "IpAddressType": {
+                    "target": "com.amazonaws.cloudfront#IpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies which IP protocol CloudFront uses when connecting to your origin. If your origin uses both IPv4 and IPv6 protocols, you can choose <code>dualstack</code> to help optimize reliability.</p>"
+                    }
                 }
             },
             "traits": {
@@ -13390,6 +13396,29 @@
                 "target": "com.amazonaws.cloudfront#InvalidationSummary",
                 "traits": {
                     "smithy.api#xmlName": "InvalidationSummary"
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#IpAddressType": {
+            "type": "enum",
+            "members": {
+                "Ipv4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ipv4"
+                    }
+                },
+                "Ipv6": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ipv6"
+                    }
+                },
+                "DualStack": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "dualstack"
+                    }
                 }
             }
         },

@@ -295,6 +295,33 @@
                 }
             }
         },
+        "com.amazonaws.transcribestreaming#CallAnalyticsLanguageIdentification": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transcribestreaming#CallAnalyticsLanguageWithScore"
+            }
+        },
+        "com.amazonaws.transcribestreaming#CallAnalyticsLanguageWithScore": {
+            "type": "structure",
+            "members": {
+                "LanguageCode": {
+                    "target": "com.amazonaws.transcribestreaming#CallAnalyticsLanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language code of the identified language.</p>"
+                    }
+                },
+                "Score": {
+                    "target": "com.amazonaws.transcribestreaming#Double",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The confidence score associated with the identified language code. Confidence scores are values between zero and one; larger values indicate a higher confidence in the identified language.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The language code that represents the language identified in your audio, including the associated\n      confidence score.</p>"
+            }
+        },
         "com.amazonaws.transcribestreaming#CallAnalyticsTranscriptResultStream": {
             "type": "union",
             "members": {
@@ -2551,7 +2578,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a bidirectional HTTP/2 or WebSocket stream where audio is streamed to \n      Amazon Transcribe and the transcription results are streamed to your application. Use this operation\n      for <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics.html\">Call Analytics</a> transcriptions.</p>\n         <p>The following parameters are required:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>language-code</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>media-encoding</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sample-rate</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more information on streaming with Amazon Transcribe, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html\">Transcribing streaming audio</a>.</p>",
+                "smithy.api#documentation": "<p>Starts a bidirectional HTTP/2 or WebSocket stream where audio is streamed to \n      Amazon Transcribe and the transcription results are streamed to your application. Use this operation\n      for <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics.html\">Call Analytics</a> transcriptions.</p>\n         <p>The following parameters are required:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>language-code</code> or <code>identify-language</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>media-encoding</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sample-rate</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more information on streaming with Amazon Transcribe, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html\">Transcribing streaming audio</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/call-analytics-stream-transcription",
@@ -2566,8 +2593,7 @@
                     "target": "com.amazonaws.transcribestreaming#CallAnalyticsLanguageCode",
                     "traits": {
                         "smithy.api#documentation": "<p>Specify the language code that represents the language spoken in your audio.</p>\n         <p>For a list of languages supported with real-time Call Analytics, refer to the \n      <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html\">Supported \n        languages</a> table.</p>",
-                        "smithy.api#httpHeader": "x-amzn-transcribe-language-code",
-                        "smithy.api#required": {}
+                        "smithy.api#httpHeader": "x-amzn-transcribe-language-code"
                     }
                 },
                 "MediaSampleRateHertz": {
@@ -2627,6 +2653,42 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specify the name of the custom language model that you want to use when processing your\n      transcription. Note that language model names are case sensitive.</p>\n         <p>The language of the specified language model must match the language code you specify\n      in your transcription request. If the languages don't match, the custom language model isn't applied. \n      There are no errors or warnings associated with a language mismatch.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html\">Custom language models</a>.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-language-model-name"
+                    }
+                },
+                "IdentifyLanguage": {
+                    "target": "com.amazonaws.transcribestreaming#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Enables automatic language identification for your Call Analytics transcription.</p>\n         <p>If you include <code>IdentifyLanguage</code>, you must include a list of\n      language codes, using <code>LanguageOptions</code>, that you think may be present in \n      your audio stream. You must provide a minimum of two language selections.</p>\n         <p>You can also include a preferred language using <code>PreferredLanguage</code>. Adding a \n      preferred language can help Amazon Transcribe identify the language faster than if you omit this \n      parameter.</p>\n         <p>Note that you must include either <code>LanguageCode</code> or \n      <code>IdentifyLanguage</code> in your request. If you include both parameters, your transcription job\n      fails.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-identify-language"
+                    }
+                },
+                "LanguageOptions": {
+                    "target": "com.amazonaws.transcribestreaming#LanguageOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify two or more language codes that represent the languages you think may be present \n      in your media.</p>\n         <p>Including language options can improve the accuracy of language identification.</p>\n         <p>If you include <code>LanguageOptions</code> in your request, you must also include \n      <code>IdentifyLanguage</code>.</p>\n         <p>For a list of languages supported with Call Analytics streaming, refer to the \n      <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html\">Supported \n        languages</a> table.</p>\n         <important>\n            <p>You can only include one language dialect per language per stream. For example, you\n        cannot include <code>en-US</code> and <code>en-AU</code> in the same request.</p>\n         </important>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-language-options"
+                    }
+                },
+                "PreferredLanguage": {
+                    "target": "com.amazonaws.transcribestreaming#CallAnalyticsLanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify a preferred language from the subset of languages codes you specified in \n      <code>LanguageOptions</code>.</p>\n         <p>You can only use this parameter if you've included <code>IdentifyLanguage</code> and\n        <code>LanguageOptions</code> in your request.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-preferred-language"
+                    }
+                },
+                "VocabularyNames": {
+                    "target": "com.amazonaws.transcribestreaming#VocabularyNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the names of the custom vocabularies that you want to use when processing your\n      Call Analytics transcription. Note that vocabulary names are case sensitive.</p>\n         <p>If the custom vocabulary's language doesn't match the identified media language, it won't be applied to the transcription.</p>\n         <important>\n            <p>This parameter is only intended for use <b>with</b> the\n          <code>IdentifyLanguage</code> parameter. If you're <b>not</b>\n        including <code>IdentifyLanguage</code> in your request and want to use a custom vocabulary\n        with your transcription, use the <code>VocabularyName</code> parameter instead.</p>\n         </important>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html\">Custom vocabularies</a>.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-vocabulary-names"
+                    }
+                },
+                "VocabularyFilterNames": {
+                    "target": "com.amazonaws.transcribestreaming#VocabularyFilterNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the names of the custom vocabulary filters that you want to use when processing\n      your Call Analytics transcription. Note that vocabulary filter names are case sensitive.</p>\n         <p>These filters serve to customize the transcript output.</p>\n         <important>\n            <p>This parameter is only intended for use <b>with</b> \n        the <code>IdentifyLanguage</code> parameter. If you're <b>not</b> \n        including <code>IdentifyLanguage</code> in your request and want to use a custom vocabulary filter \n        with your transcription, use the <code>VocabularyFilterName</code> parameter instead.</p>\n         </important>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html\">Using vocabulary filtering with unwanted \n      words</a>.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-vocabulary-filter-names"
                     }
                 },
                 "EnablePartialResultsStabilization": {
@@ -2741,6 +2803,42 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Provides the name of the custom language model that you specified in your Call Analytics \n      request.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-language-model-name"
+                    }
+                },
+                "IdentifyLanguage": {
+                    "target": "com.amazonaws.transcribestreaming#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Shows whether automatic language identification was enabled for your Call Analytics transcription.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-identify-language"
+                    }
+                },
+                "LanguageOptions": {
+                    "target": "com.amazonaws.transcribestreaming#LanguageOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the language codes that you specified in your Call Analytics request.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-language-options"
+                    }
+                },
+                "PreferredLanguage": {
+                    "target": "com.amazonaws.transcribestreaming#CallAnalyticsLanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the preferred language that you specified in your Call Analytics request.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-preferred-language"
+                    }
+                },
+                "VocabularyNames": {
+                    "target": "com.amazonaws.transcribestreaming#VocabularyNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the names of the custom vocabularies that you specified in your Call Analytics request.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-vocabulary-names"
+                    }
+                },
+                "VocabularyFilterNames": {
+                    "target": "com.amazonaws.transcribestreaming#VocabularyFilterNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the names of the custom vocabulary filters that you specified in your Call Analytics request.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-vocabulary-filter-names"
                     }
                 },
                 "EnablePartialResultsStabilization": {
@@ -4522,6 +4620,18 @@
                     "target": "com.amazonaws.transcribestreaming#IssuesDetected",
                     "traits": {
                         "smithy.api#documentation": "<p>Provides the issue that was detected in the specified segment.</p>"
+                    }
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.transcribestreaming#CallAnalyticsLanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language code that represents the language spoken in your audio stream.</p>"
+                    }
+                },
+                "LanguageIdentification": {
+                    "target": "com.amazonaws.transcribestreaming#CallAnalyticsLanguageIdentification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language code of the dominant language identified in your stream.</p>"
                     }
                 }
             },

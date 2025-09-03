@@ -97,7 +97,7 @@
                     ],
                     "maxAge": 86400
                 },
-                "smithy.api#documentation": "<p>Welcome to the <i>Amazon Web Services Clean Rooms ML API Reference</i>.</p> <p>Amazon Web Services Clean Rooms ML provides a privacy-enhancing method for two parties to identify similar users in their data without the need to share their data with each other. The first party brings the training data to Clean Rooms so that they can create and configure an audience model (lookalike model) and associate it with a collaboration. The second party then brings their seed data to Clean Rooms and generates an audience (lookalike segment) that resembles the training data.</p> <p>To learn more about Amazon Web Services Clean Rooms ML concepts, procedures, and best practices, see the <a href=\"https://docs.aws.amazon.com/clean-rooms/latest/userguide/machine-learning.html\">Clean Rooms User Guide</a>.</p> <p>To learn more about SQL commands, functions, and conditions supported in Clean Rooms, see the <a href=\"https://docs.aws.amazon.com/clean-rooms/latest/sql-reference/sql-reference.html\">Clean Rooms SQL Reference</a>.</p>",
+                "smithy.api#documentation": "<p>Welcome to the <i>Amazon Web Services Clean Rooms ML API Reference</i>.</p> <p>Amazon Web Services Clean Rooms ML provides a privacy-enhancing method for two parties to identify similar users in their data without the need to share their data with each other. The first party brings the training data to Clean Rooms so that they can create and configure an audience model (lookalike model) and associate it with a collaboration. The second party then brings their seed data to Clean Rooms and generates an audience (lookalike segment) that resembles the training data.</p> <p>To learn more about Amazon Web Services Clean Rooms ML concepts, procedures, and best practices, see the <a href=\"https://docs.aws.amazon.com/clean-rooms/latest/userguide/machine-learning.html\">Clean Rooms User Guide</a>.</p> <p>To learn more about SQL commands, functions, and conditions supported in Clean Rooms, see the <a href=\"https://docs.aws.amazon.com/clean-rooms/latest/sql-reference/sql-reference.html\">Clean Rooms SQL Reference</a>.</p> <p/>",
                 "smithy.api#title": "AWS Clean Rooms ML",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -3346,6 +3346,44 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cleanroomsml#CustomDataIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\_\\#\\=\\@/\\;\\,\\-\\ \\^\\$\\?\\[\\]\\{\\}\\|\\\\\\*\\+\\.\\(\\)]+$"
+            }
+        },
+        "com.amazonaws.cleanroomsml#CustomDataIdentifierList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cleanroomsml#CustomDataIdentifier"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.cleanroomsml#CustomEntityConfig": {
+            "type": "structure",
+            "members": {
+                "customDataIdentifiers": {
+                    "target": "com.amazonaws.cleanroomsml#CustomDataIdentifierList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines data identifiers for the custom entity configuration. Provide this only if CUSTOM redaction is configured. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for defining custom patterns to be redacted from logs and error messages. This is for the CUSTOM config under entitiesToRedact. Both CustomEntityConfig and entitiesToRedact need to be present or not present.</p>"
+            }
+        },
         "com.amazonaws.cleanroomsml#DataSource": {
             "type": "structure",
             "members": {
@@ -3962,6 +4000,41 @@
                 "smithy.api#documentation": "<p>The Amazon S3 location where the exported model artifacts are stored.</p>"
             }
         },
+        "com.amazonaws.cleanroomsml#EntityType": {
+            "type": "enum",
+            "members": {
+                "ALL_PERSONALLY_IDENTIFIABLE_INFORMATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL_PERSONALLY_IDENTIFIABLE_INFORMATION"
+                    }
+                },
+                "NUMBERS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NUMBERS"
+                    }
+                },
+                "CUSTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cleanroomsml#EntityTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cleanroomsml#EntityType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
         "com.amazonaws.cleanroomsml#Environment": {
             "type": "map",
             "key": {
@@ -4467,29 +4540,6 @@
         "com.amazonaws.cleanroomsml#GetCollaborationMLInputChannelResponse": {
             "type": "structure",
             "members": {
-                "createTime": {
-                    "target": "smithy.api#Timestamp",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The time at which the ML input channel was created.</p>",
-                        "smithy.api#required": {},
-                        "smithy.api#timestampFormat": "date-time"
-                    }
-                },
-                "updateTime": {
-                    "target": "smithy.api#Timestamp",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The most recent time at which the ML input channel was updated.</p>",
-                        "smithy.api#required": {},
-                        "smithy.api#timestampFormat": "date-time"
-                    }
-                },
-                "creatorAccountId": {
-                    "target": "com.amazonaws.cleanroomsml#AccountId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The account ID of the member who created the ML input channel.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
                 "membershipIdentifier": {
                     "target": "com.amazonaws.cleanroomsml#UUID",
                     "traits": {
@@ -4564,6 +4614,29 @@
                     "target": "com.amazonaws.cleanroomsml#ResourceDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>The description of the ML input channel.</p>"
+                    }
+                },
+                "createTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the ML input channel was created.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "updateTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The most recent time at which the ML input channel was updated.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "creatorAccountId": {
+                    "target": "com.amazonaws.cleanroomsml#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the member who created the ML input channel.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -5389,22 +5462,6 @@
         "com.amazonaws.cleanroomsml#GetMLInputChannelResponse": {
             "type": "structure",
             "members": {
-                "createTime": {
-                    "target": "smithy.api#Timestamp",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The time at which the ML input channel was created.</p>",
-                        "smithy.api#required": {},
-                        "smithy.api#timestampFormat": "date-time"
-                    }
-                },
-                "updateTime": {
-                    "target": "smithy.api#Timestamp",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The most recent time at which the ML input channel was updated.</p>",
-                        "smithy.api#required": {},
-                        "smithy.api#timestampFormat": "date-time"
-                    }
-                },
                 "membershipIdentifier": {
                     "target": "com.amazonaws.cleanroomsml#UUID",
                     "traits": {
@@ -5417,19 +5474,6 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The collaboration ID of the collaboration that contains the ML input channel.</p>",
                         "smithy.api#required": {}
-                    }
-                },
-                "inputChannel": {
-                    "target": "com.amazonaws.cleanroomsml#InputChannel",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The input channel that was used to create the ML input channel.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "protectedQueryIdentifier": {
-                    "target": "com.amazonaws.cleanroomsml#UUID",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The ID of the protected query that was used to create the ML input channel.</p>"
                     }
                 },
                 "mlInputChannelArn": {
@@ -5488,6 +5532,41 @@
                         }
                     }
                 },
+                "description": {
+                    "target": "com.amazonaws.cleanroomsml#ResourceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the ML input channel.</p>"
+                    }
+                },
+                "createTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the ML input channel was created.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "updateTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The most recent time at which the ML input channel was updated.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "inputChannel": {
+                    "target": "com.amazonaws.cleanroomsml#InputChannel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input channel that was used to create the ML input channel.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "protectedQueryIdentifier": {
+                    "target": "com.amazonaws.cleanroomsml#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the protected query that was used to create the ML input channel.</p>"
+                    }
+                },
                 "numberOfFiles": {
                     "target": "smithy.api#Double",
                     "traits": {
@@ -5506,12 +5585,6 @@
                             "min": 0,
                             "max": 1000000
                         }
-                    }
-                },
-                "description": {
-                    "target": "com.amazonaws.cleanroomsml#ResourceDescription",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The description of the ML input channel.</p>"
                     }
                 },
                 "kmsKeyArn": {
@@ -6440,12 +6513,6 @@
                         "smithy.api#enumValue": "ml.m5.large"
                     }
                 },
-                "ML_P3_16XLARGE": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "ml.p3.16xlarge"
-                    }
-                },
                 "ML_M7I_48XLARGE": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -6728,12 +6795,6 @@
                         "smithy.api#enumValue": "ml.m7i.4xlarge"
                     }
                 },
-                "ML_P3_2XLARGE": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "ml.p3.2xlarge"
-                    }
-                },
                 "ML_R6I_32XLARGE": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -6884,16 +6945,40 @@
                         "smithy.api#enumValue": "ml.m6i.32xlarge"
                     }
                 },
-                "ML_P3_8XLARGE": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "ml.p3.8xlarge"
-                    }
-                },
                 "ML_M4_4XLARGE": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ml.m4.4xlarge"
+                    }
+                },
+                "ML_P3_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "P3 instance types are deprecated. Use P4 or newer instance types for better performance and cost efficiency.",
+                            "since": "2025-09-02"
+                        },
+                        "smithy.api#enumValue": "ml.p3.16xlarge"
+                    }
+                },
+                "ML_P3_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "P3 instance types are deprecated. Use P4 or newer instance types for better performance and cost efficiency.",
+                            "since": "2025-09-02"
+                        },
+                        "smithy.api#enumValue": "ml.p3.2xlarge"
+                    }
+                },
+                "ML_P3_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "P3 instance types are deprecated. Use P4 or newer instance types for better performance and cost efficiency.",
+                            "since": "2025-09-02"
+                        },
+                        "smithy.api#enumValue": "ml.p3.8xlarge"
                     }
                 }
             }
@@ -7155,30 +7240,6 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ml.p2.16xlarge"
-                    }
-                },
-                "ML_P3_2XLARGE": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "ml.p3.2xlarge"
-                    }
-                },
-                "ML_P3_8XLARGE": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "ml.p3.8xlarge"
-                    }
-                },
-                "ML_P3_16XLARGE": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "ml.p3.16xlarge"
-                    }
-                },
-                "ML_P3DN_24XLARGE": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "ml.p3dn.24xlarge"
                     }
                 },
                 "ML_P4D_24XLARGE": {
@@ -7545,6 +7606,310 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ml.r5.24xlarge"
+                    }
+                },
+                "ML_C7I_LARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c7i.large"
+                    }
+                },
+                "ML_C7I_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c7i.xlarge"
+                    }
+                },
+                "ML_C7I_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c7i.2xlarge"
+                    }
+                },
+                "ML_C7I_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c7i.4xlarge"
+                    }
+                },
+                "ML_C7I_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c7i.8xlarge"
+                    }
+                },
+                "ML_C7I_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c7i.12xlarge"
+                    }
+                },
+                "ML_C7I_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c7i.16xlarge"
+                    }
+                },
+                "ML_C7I_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c7i.24xlarge"
+                    }
+                },
+                "ML_C7I_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c7i.48xlarge"
+                    }
+                },
+                "ML_M7I_LARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m7i.large"
+                    }
+                },
+                "ML_M7I_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m7i.xlarge"
+                    }
+                },
+                "ML_M7I_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m7i.2xlarge"
+                    }
+                },
+                "ML_M7I_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m7i.4xlarge"
+                    }
+                },
+                "ML_M7I_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m7i.8xlarge"
+                    }
+                },
+                "ML_M7I_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m7i.12xlarge"
+                    }
+                },
+                "ML_M7I_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m7i.16xlarge"
+                    }
+                },
+                "ML_M7I_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m7i.24xlarge"
+                    }
+                },
+                "ML_M7I_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m7i.48xlarge"
+                    }
+                },
+                "ML_R7I_LARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r7i.large"
+                    }
+                },
+                "ML_R7I_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r7i.xlarge"
+                    }
+                },
+                "ML_R7I_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r7i.2xlarge"
+                    }
+                },
+                "ML_R7I_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r7i.4xlarge"
+                    }
+                },
+                "ML_R7I_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r7i.8xlarge"
+                    }
+                },
+                "ML_R7I_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r7i.12xlarge"
+                    }
+                },
+                "ML_R7I_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r7i.16xlarge"
+                    }
+                },
+                "ML_R7I_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r7i.24xlarge"
+                    }
+                },
+                "ML_R7I_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r7i.48xlarge"
+                    }
+                },
+                "ML_G6_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.xlarge"
+                    }
+                },
+                "ML_G6_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.2xlarge"
+                    }
+                },
+                "ML_G6_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.4xlarge"
+                    }
+                },
+                "ML_G6_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.8xlarge"
+                    }
+                },
+                "ML_G6_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.12xlarge"
+                    }
+                },
+                "ML_G6_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.16xlarge"
+                    }
+                },
+                "ML_G6_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.24xlarge"
+                    }
+                },
+                "ML_G6_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.48xlarge"
+                    }
+                },
+                "ML_G6E_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.xlarge"
+                    }
+                },
+                "ML_G6E_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.2xlarge"
+                    }
+                },
+                "ML_G6E_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.4xlarge"
+                    }
+                },
+                "ML_G6E_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.8xlarge"
+                    }
+                },
+                "ML_G6E_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.12xlarge"
+                    }
+                },
+                "ML_G6E_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.16xlarge"
+                    }
+                },
+                "ML_G6E_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.24xlarge"
+                    }
+                },
+                "ML_G6E_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.48xlarge"
+                    }
+                },
+                "ML_P5EN_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.p5en.48xlarge"
+                    }
+                },
+                "ML_P3_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "P3 instance types are deprecated. Use P4 or newer instance types for better performance and cost efficiency.",
+                            "since": "2025-09-02"
+                        },
+                        "smithy.api#enumValue": "ml.p3.2xlarge"
+                    }
+                },
+                "ML_P3_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "P3 instance types are deprecated. Use P4 or newer instance types for better performance and cost efficiency.",
+                            "since": "2025-09-02"
+                        },
+                        "smithy.api#enumValue": "ml.p3.8xlarge"
+                    }
+                },
+                "ML_P3_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "P3 instance types are deprecated. Use P4 or newer instance types for better performance and cost efficiency.",
+                            "since": "2025-09-02"
+                        },
+                        "smithy.api#enumValue": "ml.p3.16xlarge"
+                    }
+                },
+                "ML_P3DN_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "P3 instance types are deprecated. Use P4 or newer instance types for better performance and cost efficiency.",
+                            "since": "2025-09-02"
+                        },
+                        "smithy.api#enumValue": "ml.p3dn.24xlarge"
                     }
                 }
             }
@@ -9029,6 +9394,44 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cleanroomsml#LogRedactionConfiguration": {
+            "type": "structure",
+            "members": {
+                "entitiesToRedact": {
+                    "target": "com.amazonaws.cleanroomsml#EntityTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the entities to be redacted from logs. Entities to redact are \"ALL_PERSONALLY_IDENTIFIABLE_INFORMATION\", \"NUMBERS\",\"CUSTOM\". If CUSTOM is supplied or configured, custom patterns (customDataIdentifiers) should be provided, and the patterns will be redacted in logs or error messages.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "customEntityConfig": {
+                    "target": "com.amazonaws.cleanroomsml#CustomEntityConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the configuration for custom entities in the context of log redaction.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for log redaction.</p>"
+            }
+        },
+        "com.amazonaws.cleanroomsml#LogType": {
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                },
+                "ERROR_SUMMARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR_SUMMARY"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cleanroomsml#LogsConfigurationPolicy": {
             "type": "structure",
             "members": {
@@ -9047,6 +9450,19 @@
                             "min": 0,
                             "max": 1024
                         }
+                    }
+                },
+                "logType": {
+                    "target": "com.amazonaws.cleanroomsml#LogType",
+                    "traits": {
+                        "smithy.api#default": "ALL",
+                        "smithy.api#documentation": "<p>Specifies the type of log this policy applies to. The currently supported policies are ALL or ERROR_SUMMARY.</p>"
+                    }
+                },
+                "logRedactionConfiguration": {
+                    "target": "com.amazonaws.cleanroomsml#LogRedactionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the log redaction configuration for this policy.</p>"
                     }
                 }
             },

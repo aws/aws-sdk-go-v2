@@ -4528,6 +4528,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The life cycle type for this DB cluster.</p>\n         <note>\n            <p>By default, this value is set to <code>open-source-rds-extended-support</code>, which enrolls your DB cluster into Amazon RDS Extended Support. \n              At the end of standard support, you can avoid charges for Extended Support by setting the value to <code>open-source-rds-extended-support-disabled</code>. In this case, \n             creating the DB cluster will fail if the DB major version is past its end of standard support date.</p>\n         </note>\n         <p>You can use this setting to enroll your DB cluster into Amazon RDS Extended Support. With RDS Extended Support, \n        you can run the selected major engine version on your DB cluster past the end of standard support for that engine version. For more information, see the following sections:</p>\n         <ul>\n            <li>\n               <p>Amazon Aurora - <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html\">Amazon RDS Extended Support with Amazon Aurora</a> in the <i>Amazon Aurora User Guide</i>\n               </p>\n            </li>\n            <li>\n               <p>Amazon RDS - <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html\">Amazon RDS Extended Support with Amazon RDS</a> in the <i>Amazon RDS User Guide</i>\n               </p>\n            </li>\n         </ul>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>\n         <p>Valid Values: <code>open-source-rds-extended-support | open-source-rds-extended-support-disabled</code>\n         </p>\n         <p>Default: <code>open-source-rds-extended-support</code>\n         </p>"
                     }
+                },
+                "MasterUserAuthenticationType": {
+                    "target": "com.amazonaws.rds#MasterUserAuthenticationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the authentication type for the master user. With IAM master user authentication, you can configure the master DB user with IAM database authentication when you create a DB cluster.</p>\n         <p>You can specify one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>password</code> - Use standard database authentication with a password.</p>\n            </li>\n            <li>\n               <p>\n                  <code>iam-db-auth</code> - Use IAM database authentication for the master user.</p>\n            </li>\n         </ul>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>\n         <p>This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL engines.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5318,6 +5324,12 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The life cycle type for this DB instance.</p>\n         <note>\n            <p>By default, this value is set to <code>open-source-rds-extended-support</code>, which enrolls your DB instance into Amazon RDS Extended Support. \n              At the end of standard support, you can avoid charges for Extended Support by setting the value to <code>open-source-rds-extended-support-disabled</code>. In this case, \n              creating the DB instance will fail if the DB major version is past its end of standard support date.</p>\n         </note>\n         <p>This setting applies only to RDS for MySQL and RDS for PostgreSQL. For Amazon Aurora DB instances, the life cycle type is managed by the DB cluster.</p>\n         <p>You can use this setting to enroll your DB instance into Amazon RDS Extended Support. With RDS Extended Support, \n        you can run the selected major engine version on your DB instance past the end of standard support for that engine version. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html\">Amazon RDS Extended Support with Amazon RDS</a> in the <i>Amazon RDS User Guide</i>.</p>\n         <p>Valid Values: <code>open-source-rds-extended-support | open-source-rds-extended-support-disabled</code>\n         </p>\n         <p>Default: <code>open-source-rds-extended-support</code>\n         </p>"
+                    }
+                },
+                "MasterUserAuthenticationType": {
+                    "target": "com.amazonaws.rds#MasterUserAuthenticationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the authentication type for the master user. With IAM master user authentication, you can configure the master DB user with IAM database authentication when you create a DB instance.</p>\n         <p>You can specify one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>password</code> - Use standard database authentication with a password.</p>\n            </li>\n            <li>\n               <p>\n                  <code>iam-db-auth</code> - Use IAM database authentication for the master user.</p>\n            </li>\n         </ul>\n         <p>This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL engines.</p>"
                     }
                 }
             },
@@ -21178,6 +21190,23 @@
                 }
             }
         },
+        "com.amazonaws.rds#MasterUserAuthenticationType": {
+            "type": "enum",
+            "members": {
+                "PASSWORD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "password"
+                    }
+                },
+                "IAM_DB_AUTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "iam-db-auth"
+                    }
+                }
+            }
+        },
         "com.amazonaws.rds#MasterUserSecret": {
             "type": "structure",
             "members": {
@@ -22037,7 +22066,7 @@
                 "DatabaseInsightsMode": {
                     "target": "com.amazonaws.rds#DatabaseInsightsMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the mode of Database Insights to enable for the DB cluster.</p>\n         <p>If you change the value from <code>standard</code> to <code>advanced</code>, you must set the \n            <code>PerformanceInsightsEnabled</code> parameter to <code>true</code> and the \n            <code>PerformanceInsightsRetentionPeriod</code> parameter to 465.</p>\n         <p>If you change the value from <code>advanced</code> to <code>standard</code>, you must \n            set the <code>PerformanceInsightsEnabled</code> parameter to <code>false</code>.</p>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>"
+                        "smithy.api#documentation": "<p>Specifies the mode of Database Insights to enable for the DB cluster.</p>\n         <p>If you change the value from <code>standard</code> to <code>advanced</code>, you must set the \n            <code>PerformanceInsightsEnabled</code> parameter to <code>true</code> and the \n            <code>PerformanceInsightsRetentionPeriod</code> parameter to 465.</p>\n         <p>If you change the value from <code>advanced</code> to <code>standard</code>, you can set the <code>PerformanceInsightsEnabled</code> parameter to <code>true</code> to collect detailed database counter and per-query metrics.</p>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>"
                     }
                 },
                 "EnablePerformanceInsights": {
@@ -22119,6 +22148,12 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The CA certificate identifier to use for the DB cluster's server certificate.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html\">Using SSL/TLS to encrypt a connection to a DB \n            instance</a> in the <i>Amazon RDS User Guide</i>.</p>\n         <p>Valid for Cluster Type: Multi-AZ DB clusters</p>"
+                    }
+                },
+                "MasterUserAuthenticationType": {
+                    "target": "com.amazonaws.rds#MasterUserAuthenticationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the authentication type for the master user. With IAM master user authentication, you can change the master DB user to use IAM database authentication.</p>\n         <p>You can specify one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>password</code> - Use standard database authentication with a password.</p>\n            </li>\n            <li>\n               <p>\n                  <code>iam-db-auth</code> - Use IAM database authentication for the master user.</p>\n            </li>\n         </ul>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>\n         <p>This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL engines.</p>"
                     }
                 }
             },
@@ -22795,6 +22830,12 @@
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether the to convert your DB instance from the single-tenant conﬁguration\n            to the multi-tenant conﬁguration. This parameter is supported only for RDS for Oracle\n            CDB instances.</p>\n         <p>During the conversion, RDS creates an initial tenant database and associates the DB\n            name, master user name, character set, and national character set metadata with this\n            database. The tags associated with the instance also propagate to the initial tenant\n            database. You can add more tenant databases to your DB instance by using the\n                <code>CreateTenantDatabase</code> operation.</p>\n         <important>\n            <p>The conversion to the multi-tenant configuration is permanent and irreversible, so\n                you can't later convert back to the single-tenant configuration. When you specify\n                this parameter, you must also specify <code>ApplyImmediately</code>.</p>\n         </important>"
+                    }
+                },
+                "MasterUserAuthenticationType": {
+                    "target": "com.amazonaws.rds#MasterUserAuthenticationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the authentication type for the master user. With IAM master user authentication, you can change the master DB user to use IAM database authentication.</p>\n         <p>You can specify one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>password</code> - Use standard database authentication with a password.</p>\n            </li>\n            <li>\n               <p>\n                  <code>iam-db-auth</code> - Use IAM database authentication for the master user.</p>\n            </li>\n         </ul>\n         <p>This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL engines.</p>"
                     }
                 }
             },
