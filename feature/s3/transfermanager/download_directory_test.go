@@ -51,6 +51,7 @@ func TestDownloadDirectory(t *testing.T) {
 		continuationTokens      []string
 		filter                  ObjectFilter
 		s3Delimiter             string
+		concurrency             int
 		callback                GetRequestCallback
 		getobjectFn             func(*s3testing.TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error)
 		expectTokens            []string
@@ -58,6 +59,7 @@ func TestDownloadDirectory(t *testing.T) {
 		expectFiles             []string
 		expectErr               string
 		expectObjectsDownloaded int
+		listenerValidationFn    func(*testing.T, *mockDirectoryListener, any, any, error)
 	}{
 		"single object": {
 			destination: "single-object",
@@ -72,6 +74,11 @@ func TestDownloadDirectory(t *testing.T) {
 			expectKeys:              []string{"foo/bar"},
 			expectFiles:             []string{"foo/bar"},
 			expectObjectsDownloaded: 1,
+			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
+				l.expectStart(t, in)
+				l.expectComplete(t, in, out, 1)
+				l.expectObjectsTransferred(t, 1)
+			},
 		},
 		"multiple objects": {
 			destination: "multiple-objects",
@@ -95,6 +102,11 @@ func TestDownloadDirectory(t *testing.T) {
 			expectKeys:              []string{"foo/bar", "baz", "foo/zoo/bar", "foo/zoo/oii/bababoii"},
 			expectFiles:             []string{"foo/bar", "baz", "foo/zoo/bar", "foo/zoo/oii/bababoii"},
 			expectObjectsDownloaded: 4,
+			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
+				l.expectStart(t, in)
+				l.expectComplete(t, in, out, 4)
+				l.expectObjectsTransferred(t, 1, 2, 3, 4)
+			},
 		},
 		"multiple objects paginated": {
 			destination: "multiple-objects-paginated",
@@ -128,6 +140,11 @@ func TestDownloadDirectory(t *testing.T) {
 			expectTokens:            []string{"", "token1", "token2"},
 			expectKeys:              []string{"foo/bar", "baz", "foo/zoo/bar", "foo/zoo/oii/bababoii", "foo/zoo/baz", "foo/zoo/oii/yee"},
 			expectObjectsDownloaded: 6,
+			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
+				l.expectStart(t, in)
+				l.expectComplete(t, in, out, 6)
+				l.expectObjectsTransferred(t, 1, 2, 3, 4, 5, 6)
+			},
 		},
 		"multiple objects containing folder object": {
 			destination: "multiple-objects-with-folder-object",
@@ -148,6 +165,11 @@ func TestDownloadDirectory(t *testing.T) {
 			expectKeys:              []string{"foo/bar", "baz"},
 			expectFiles:             []string{"foo/bar", "baz"},
 			expectObjectsDownloaded: 2,
+			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
+				l.expectStart(t, in)
+				l.expectComplete(t, in, out, 2)
+				l.expectObjectsTransferred(t, 1, 2)
+			},
 		},
 		"single object named with keyprefix": {
 			destination: "single-object-named-with-keyprefix",
@@ -163,6 +185,11 @@ func TestDownloadDirectory(t *testing.T) {
 			expectKeys:              []string{"a"},
 			expectFiles:             []string{"a"},
 			expectObjectsDownloaded: 1,
+			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
+				l.expectStart(t, in)
+				l.expectComplete(t, in, out, 1)
+				l.expectObjectsTransferred(t, 1)
+			},
 		},
 		"multiple objects with keyprefix without delimiter suffix": {
 			destination: "multiple-objects-with-keyprefix-no-delimiter",
@@ -190,6 +217,11 @@ func TestDownloadDirectory(t *testing.T) {
 			expectKeys:              []string{"a/b", "ad", "ab/c", "ae"},
 			expectFiles:             []string{"b", "ad", "ab/c", "ae"},
 			expectObjectsDownloaded: 4,
+			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
+				l.expectStart(t, in)
+				l.expectComplete(t, in, out, 4)
+				l.expectObjectsTransferred(t, 1, 2, 3, 4)
+			},
 		},
 		"multiple objects with keyprefix with default delimiter suffix": {
 			destination: "multiple-objects-with-keyprefix-default-delimiter",
@@ -220,6 +252,11 @@ func TestDownloadDirectory(t *testing.T) {
 			expectKeys:              []string{"a/b", "a/c", "ad", "ab/c/d", "ab/c/e"},
 			expectFiles:             []string{"b", "c", "ad", "ab/c/d", "ab/c/e"},
 			expectObjectsDownloaded: 5,
+			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
+				l.expectStart(t, in)
+				l.expectComplete(t, in, out, 5)
+				l.expectObjectsTransferred(t, 1, 2, 3, 4, 5)
+			},
 		},
 		"multiple objects with keyprefix with customized delimiter suffix": {
 			destination: "multiple-objects-with-keyprefix-customized-delimiter",
@@ -242,9 +279,15 @@ func TestDownloadDirectory(t *testing.T) {
 			expectKeys:              []string{"ab/c*d", "ab/c/e", "ab/c*f*g"},
 			expectFiles:             []string{"d", "ab/c/e", "f*g"},
 			expectObjectsDownloaded: 3,
+			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
+				l.expectStart(t, in)
+				l.expectComplete(t, in, out, 3)
+				l.expectObjectsTransferred(t, 1, 2, 3)
+			},
 		},
 		"error when path resolved from objects key out of destination scope": {
 			destination: "error-bucket",
+			concurrency: 1,
 			objectsLists: [][]s3types.Object{
 				{
 					{
@@ -254,14 +297,19 @@ func TestDownloadDirectory(t *testing.T) {
 						Key: aws.String("a/b"),
 					},
 					{
-						Key: aws.String("a/c"),
+						Key: aws.String(filepath.Join("a", "..", "..", "d")),
 					},
 					{
-						Key: aws.String(filepath.Join("a", "..", "..", "d")),
+						Key: aws.String("a/c"),
 					},
 				},
 			},
 			expectErr: "outside of destination",
+			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
+				// only validate failure listener since start listener
+				// might never be triggerred if the error response is returned first
+				l.expectFailed(t, in, err)
+			},
 		},
 		"multiple objects with filter applied": {
 			destination: "multiple-objects-with-filter-applied",
@@ -286,6 +334,11 @@ func TestDownloadDirectory(t *testing.T) {
 			expectKeys:              []string{"foo/bar", "baz", "foo/zoo/bar"},
 			expectFiles:             []string{"foo/bar", "baz", "foo/zoo/bar"},
 			expectObjectsDownloaded: 3,
+			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
+				l.expectStart(t, in)
+				l.expectComplete(t, in, out, 3)
+				l.expectObjectsTransferred(t, 1, 2, 3)
+			},
 		},
 		"multiple objects with keyprefix and filter": {
 			destination: "multiple-objects-with-keyprefix-and-filter",
@@ -314,6 +367,11 @@ func TestDownloadDirectory(t *testing.T) {
 			expectKeys:              []string{"a/b", "ad", "ab/c"},
 			expectFiles:             []string{"b", "ad", "ab/c"},
 			expectObjectsDownloaded: 3,
+			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
+				l.expectStart(t, in)
+				l.expectComplete(t, in, out, 3)
+				l.expectObjectsTransferred(t, 1, 2, 3)
+			},
 		},
 		"multiple objects with keyprefix and request callback": {
 			destination: "multiple-objects-with-keyprefix-and-callback",
@@ -342,6 +400,11 @@ func TestDownloadDirectory(t *testing.T) {
 			expectKeys:              []string{"a/b", "adgotyou", "ab/c", "ae"},
 			expectFiles:             []string{"b", "ad", "ab/c", "ae"},
 			expectObjectsDownloaded: 4,
+			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
+				l.expectStart(t, in)
+				l.expectComplete(t, in, out, 4)
+				l.expectObjectsTransferred(t, 1, 2, 3, 4)
+			},
 		},
 		"multiple objects paginated with keyprefix, delimiter, filter and callback": {
 			destination: "multiple-objects-with-keyprefix-delimiter-filter-callback",
@@ -386,6 +449,11 @@ func TestDownloadDirectory(t *testing.T) {
 			expectKeys:              []string{"a&b", "a@b", "a&foo&bar", "ac", "ac@d&e", "a&k.bgotyou"},
 			expectFiles:             []string{"b", "a@b", "foo&bar", "ac", "ac@d&e", "k.b"},
 			expectObjectsDownloaded: 6,
+			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
+				l.expectStart(t, in)
+				l.expectComplete(t, in, out, 6)
+				l.expectObjectsTransferred(t, 1, 2, 3, 4, 5, 6)
+			},
 		},
 		"error when getting object": {
 			destination: "error-bucket",
@@ -415,6 +483,7 @@ func TestDownloadDirectory(t *testing.T) {
 					},
 				},
 			},
+			concurrency:        1,
 			continuationTokens: []string{"token1", "token2"},
 			getobjectFn: func(c *s3testing.TransferManagerLoggingClient, in *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
 				if aws.ToString(in.Key) == "foo/zoo/bar" {
@@ -428,6 +497,9 @@ func TestDownloadDirectory(t *testing.T) {
 				}, nil
 			},
 			expectErr: "mocking error",
+			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
+				l.expectFailed(t, in, err)
+			},
 		},
 	}
 
@@ -447,13 +519,22 @@ func TestDownloadDirectory(t *testing.T) {
 
 			dstPath := filepath.Join(root, c.destination)
 			defer os.RemoveAll(dstPath)
-			resp, err := mgr.DownloadDirectory(context.Background(), &DownloadDirectoryInput{
+
+			req := &DownloadDirectoryInput{
 				Bucket:      "mock-bucket",
 				Destination: dstPath,
 				KeyPrefix:   c.keyPrefix,
 				S3Delimiter: c.s3Delimiter,
 				Filter:      c.filter,
 				Callback:    c.callback,
+			}
+			listener := &mockDirectoryListener{}
+
+			resp, err := mgr.DownloadDirectory(context.Background(), req, func(o *Options) {
+				o.DirectoryProgressListeners.Register(listener)
+				if c.concurrency > 0 {
+					o.DirectoryConcurrency = c.concurrency
+				}
 			})
 
 			if err != nil {
@@ -465,6 +546,11 @@ func TestDownloadDirectory(t *testing.T) {
 			} else if c.expectErr != "" {
 				t.Fatalf("expect error %s, got none", c.expectErr)
 			}
+
+			if c.listenerValidationFn != nil {
+				c.listenerValidationFn(t, listener, req, resp, err)
+			}
+
 			if c.expectErr != "" {
 				return
 			}

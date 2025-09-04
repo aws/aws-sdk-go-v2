@@ -567,6 +567,9 @@ type PutObjectOutput struct {
 	// The base64-encoded, 256-bit SHA-256 digest of the object.
 	ChecksumSHA256 string
 
+	// Total length of the object
+	ContentLength int64
+
 	// Entity tag for the uploaded object.
 	ETag string
 
@@ -604,12 +607,13 @@ type PutObjectOutput struct {
 	ResultMetadata smithymiddleware.Metadata
 }
 
-func (o *PutObjectOutput) mapFromPutObjectOutput(out *s3.PutObjectOutput, bucket, key string) {
+func (o *PutObjectOutput) mapFromPutObjectOutput(out *s3.PutObjectOutput, bucket, key string, contentLength int64) {
 	o.BucketKeyEnabled = aws.ToBool(out.BucketKeyEnabled)
 	o.ChecksumCRC32 = aws.ToString(out.ChecksumCRC32)
 	o.ChecksumCRC32C = aws.ToString(out.ChecksumCRC32C)
 	o.ChecksumSHA1 = aws.ToString(out.ChecksumSHA1)
 	o.ChecksumSHA256 = aws.ToString(out.ChecksumSHA256)
+	o.ContentLength = contentLength
 	o.ETag = aws.ToString(out.ETag)
 	o.Expiration = aws.ToString(out.Expiration)
 	o.Bucket = bucket
@@ -621,7 +625,7 @@ func (o *PutObjectOutput) mapFromPutObjectOutput(out *s3.PutObjectOutput, bucket
 	o.ResultMetadata = out.ResultMetadata.Clone()
 }
 
-func (o *PutObjectOutput) mapFromCompleteMultipartUploadOutput(out *s3.CompleteMultipartUploadOutput, bucket, uploadID string, completedParts completedParts) {
+func (o *PutObjectOutput) mapFromCompleteMultipartUploadOutput(out *s3.CompleteMultipartUploadOutput, bucket, uploadID string, contentLength int64, completedParts completedParts) {
 	o.UploadID = uploadID
 	o.CompletedParts = completedParts
 	o.BucketKeyEnabled = aws.ToBool(out.BucketKeyEnabled)
@@ -629,6 +633,7 @@ func (o *PutObjectOutput) mapFromCompleteMultipartUploadOutput(out *s3.CompleteM
 	o.ChecksumCRC32C = aws.ToString(out.ChecksumCRC32C)
 	o.ChecksumSHA1 = aws.ToString(out.ChecksumSHA1)
 	o.ChecksumSHA256 = aws.ToString(out.ChecksumSHA256)
+	o.ContentLength = contentLength
 	o.ETag = aws.ToString(out.ETag)
 	o.Expiration = aws.ToString(out.Expiration)
 	o.Bucket = bucket
@@ -753,7 +758,7 @@ func (u *uploader) singleUpload(ctx context.Context, r io.Reader, sz int, cleanU
 	}
 
 	var output PutObjectOutput
-	output.mapFromPutObjectOutput(out, u.in.Bucket, u.in.Key)
+	output.mapFromPutObjectOutput(out, u.in.Bucket, u.in.Key, objectSize)
 
 	u.progressEmitter.BytesTransferred(ctx, objectSize)
 	u.progressEmitter.Complete(ctx, &output)
@@ -882,7 +887,7 @@ func (u *multiUploader) upload(ctx context.Context, firstBuf io.Reader, firstBuf
 	}
 
 	var out PutObjectOutput
-	out.mapFromCompleteMultipartUploadOutput(completeOut, aws.ToString(params.Bucket), aws.ToString(u.uploadID), u.parts)
+	out.mapFromCompleteMultipartUploadOutput(completeOut, aws.ToString(params.Bucket), aws.ToString(u.uploadID), u.progressEmitter.bytesTransferred.Load(), u.parts)
 
 	u.progressEmitter.Complete(ctx, &out)
 	return &out, nil

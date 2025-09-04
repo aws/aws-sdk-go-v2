@@ -98,8 +98,11 @@ type directoryUploader struct {
 
 	err error
 
-	mu sync.Mutex
-	wg sync.WaitGroup
+	mu           sync.Mutex
+	wg           sync.WaitGroup
+	progressOnce sync.Once
+
+	emitter *directoryObjectsProgressEmitter
 }
 
 func (u *directoryUploader) uploadDirectory(ctx context.Context) (*UploadDirectoryOutput, error) {
@@ -156,11 +159,15 @@ func (u *directoryUploader) uploadDirectory(ctx context.Context) (*UploadDirecto
 	u.wg.Wait()
 
 	if u.err != nil {
+		u.emitter.Failed(ctx, u.err)
 		return nil, u.err
 	}
-	return &UploadDirectoryOutput{
+
+	out := &UploadDirectoryOutput{
 		ObjectsUploaded: u.filesUploaded,
-	}, nil
+	}
+	u.emitter.Complete(ctx, out)
+	return out, nil
 }
 
 func (u *directoryUploader) init() {
@@ -169,6 +176,10 @@ func (u *directoryUploader) init() {
 	}
 
 	u.traversed = make(map[string]interface{})
+
+	u.emitter = &directoryObjectsProgressEmitter{
+		Listeners: u.options.DirectoryProgressListeners,
+	}
 }
 
 type fileEntry struct {
@@ -325,12 +336,17 @@ func (u *directoryUploader) uploadFile(ctx context.Context, ch chan fileEntry) {
 		if u.in.Callback != nil {
 			u.in.Callback.UpdateRequest(input)
 		}
-		_, err = u.c.PutObject(ctx, input)
+		out, err := u.c.PutObject(ctx, input)
 		if err != nil {
 			u.setErr(fmt.Errorf("error when uploading file %s: %v", data.path, err))
 			break
 		}
+
+		u.progressOnce.Do(func() {
+			u.emitter.Start(ctx, u.in)
+		})
 		u.incrFilesUploaded(1)
+		u.emitter.ObjectsTransferred(ctx, out.ContentLength)
 	}
 }
 

@@ -45,6 +45,12 @@ type Options struct {
 	// the original client-level registry will not be affected.
 	ProgressListeners ProgressListeners
 
+	// Registry of directory progress listener hooks.
+	//
+	// It is safe to modify the registry in per-operation functional options,
+	// the original client-level registry will not be affected.
+	DirectoryProgressListeners DirectoryProgressListeners
+
 	// The number of goroutines to spin up in parallel per call to UploadDirectory when
 	// transfering files. If this is set to zero, the DefaultUploadConcurrency value
 	// will be used.

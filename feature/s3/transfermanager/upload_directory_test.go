@@ -42,24 +42,30 @@ func TestUploadDirectory(t *testing.T) {
 	root := filepath.Join(filepath.Dir(filename), "testdata")
 
 	cases := map[string]struct {
-		source              string
-		followSymLinks      bool
-		recursive           bool
-		keyPrefix           string
-		filter              FileFilter
-		s3Delimiter         string
-		callback            PutRequestCallback
-		putobjectFunc       func(*s3testing.TransferManagerLoggingClient, *s3.PutObjectInput) (*s3.PutObjectOutput, error)
-		preprocessFunc      func(string) (func() error, error)
-		expectKeys          []string
-		expectErr           string
-		expectFilesUploaded int
+		source               string
+		followSymLinks       bool
+		recursive            bool
+		keyPrefix            string
+		filter               FileFilter
+		s3Delimiter          string
+		callback             PutRequestCallback
+		putobjectFunc        func(*s3testing.TransferManagerLoggingClient, *s3.PutObjectInput) (*s3.PutObjectOutput, error)
+		preprocessFunc       func(string) (func() error, error)
+		expectKeys           []string
+		expectErr            string
+		expectFilesUploaded  int
+		listenerValidationFn func(*testing.T, *mockDirectoryListener, any, any, error)
 	}{
 		"single file recursively": {
 			source:              filepath.Join(root, "single-file-dir"),
 			recursive:           true,
 			expectKeys:          []string{"foo"},
 			expectFilesUploaded: 1,
+			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
+				l.expectStart(t, in)
+				l.expectComplete(t, in, out, 1)
+				l.expectObjectsTransferred(t, 1)
+			},
 		},
 		"multi file at root recursively": {
 			source:              filepath.Join(root, "multi-file-at-root"),
@@ -393,7 +399,7 @@ func TestUploadDirectory(t *testing.T) {
 				}
 			}
 
-			resp, err := mgr.UploadDirectory(context.Background(), &UploadDirectoryInput{
+			req := &UploadDirectoryInput{
 				Bucket:              "mock-bucket",
 				Source:              c.source,
 				FollowSymbolicLinks: c.followSymLinks,
@@ -402,6 +408,12 @@ func TestUploadDirectory(t *testing.T) {
 				Filter:              c.filter,
 				Callback:            c.callback,
 				S3Delimiter:         c.s3Delimiter,
+			}
+
+			listener := &mockDirectoryListener{}
+
+			resp, err := mgr.UploadDirectory(context.Background(), req, func(o *Options) {
+				o.DirectoryProgressListeners.Register(listener)
 			})
 			if err != nil {
 				if c.expectErr == "" {
@@ -412,6 +424,10 @@ func TestUploadDirectory(t *testing.T) {
 			} else if c.expectErr != "" {
 				t.Fatalf("expect error %s, got none", c.expectErr)
 
+			}
+
+			if c.listenerValidationFn != nil {
+				c.listenerValidationFn(t, listener, req, resp, err)
 			}
 
 			if err != nil {

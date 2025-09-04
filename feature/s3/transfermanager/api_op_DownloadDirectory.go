@@ -102,8 +102,11 @@ type directoryDownloader struct {
 
 	err error
 
-	mu sync.Mutex
-	wg sync.WaitGroup
+	mu           sync.Mutex
+	wg           sync.WaitGroup
+	progressOnce sync.Once
+
+	emitter *directoryObjectsProgressEmitter
 }
 
 func (d *directoryDownloader) downloadDirectory(ctx context.Context) (*DownloadDirectoryOutput, error) {
@@ -132,6 +135,9 @@ func (d *directoryDownloader) downloadDirectory(ctx context.Context) (*DownloadD
 		}
 
 		for _, o := range listOutput.Contents {
+			if d.getErr() != nil {
+				break
+			}
 			key := aws.ToString(o.Key)
 			if strings.HasSuffix(key, "/") || strings.HasSuffix(key, d.in.S3Delimiter) {
 				continue // skip folder object
@@ -155,17 +161,25 @@ func (d *directoryDownloader) downloadDirectory(ctx context.Context) (*DownloadD
 	d.wg.Wait()
 
 	if d.err != nil {
+		d.emitter.Failed(ctx, d.err)
 		return nil, d.err
 	}
 
-	return &DownloadDirectoryOutput{
+	out := &DownloadDirectoryOutput{
 		ObjectsDownloaded: d.objectsDownloaded,
-	}, nil
+	}
+
+	d.emitter.Complete(ctx, out)
+
+	return out, nil
 }
 
 func (d *directoryDownloader) init() {
 	if d.in.S3Delimiter == "" {
 		d.in.S3Delimiter = "/"
+	}
+	d.emitter = &directoryObjectsProgressEmitter{
+		Listeners: d.options.DirectoryProgressListeners,
 	}
 }
 
@@ -193,8 +207,11 @@ func (d *directoryDownloader) downloadObject(ctx context.Context, ch chan object
 		if !ok {
 			break
 		}
+		fmt.Println("receive object: ", data.key)
 		if d.getErr() != nil {
-			break
+			// fmt.Printf("skip downloading object %s: %v", data.key, err)
+			continue
+			//break
 		}
 
 		input := &GetObjectInput{
@@ -204,29 +221,37 @@ func (d *directoryDownloader) downloadObject(ctx context.Context, ch chan object
 		if d.in.Callback != nil {
 			d.in.Callback.UpdateRequest(input)
 		}
+		fmt.Println("get object: ", data.key)
 		out, err := d.c.GetObject(ctx, input)
 		if err != nil {
 			d.setErr(fmt.Errorf("error when downloading object %s: %v", data.key, err))
-			break
+			continue
 		}
+
+		d.progressOnce.Do(func() {
+			d.emitter.Start(ctx, d.in)
+		})
 
 		err = os.MkdirAll(filepath.Dir(data.path), os.ModePerm)
 		if err != nil {
 			d.setErr(fmt.Errorf("error when creating directory for file %s: %v", data.path, err))
-			break
+			continue
 		}
 		file, err := os.Create(data.path)
 		if err != nil {
 			d.setErr(fmt.Errorf("error when creating file %s: %v", data.path, err))
-			break
+			continue
 		}
-		_, err = io.Copy(file, out.Body)
+		n, err := io.Copy(file, out.Body)
 		if err != nil {
+			fmt.Printf("skip downloading object %s: %v\n", data.key, err)
 			d.setErr(fmt.Errorf("error when writing to local file %s: %v", data.path, err))
 			os.Remove(data.path)
-			break
+			continue
 		}
+
 		d.incrObjectsDownloaded(1)
+		d.emitter.ObjectsTransferred(ctx, n)
 	}
 }
 
