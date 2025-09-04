@@ -127,6 +127,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An attribute value of <a href=\"https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-decimal\">decimal</a> type.</p> <p>Example: <code>{\"decimal\": \"1.1\"}</code> </p>"
                     }
+                },
+                "datetime": {
+                    "target": "com.amazonaws.verifiedpermissions#DatetimeAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An attribute value of <a href=\"https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-datetime\">datetime</a> type.</p> <p>Example: <code>{\"datetime\": \"2024-10-15T11:35:00Z\"}</code> </p>"
+                    }
+                },
+                "duration": {
+                    "target": "com.amazonaws.verifiedpermissions#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An attribute value of <a href=\"https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-duration\">duration</a> type.</p> <p>Example: <code>{\"duration\": \"1h30m\"}</code> </p>"
+                    }
                 }
             },
             "traits": {
@@ -164,7 +176,14 @@
             },
             "traits": {
                 "aws.iam#iamAction": {
-                    "name": "GetPolicy"
+                    "name": "GetPolicy",
+                    "documentation": "Grants permission to retrieve information about the specified policy",
+                    "relativeDocumentation": "API_GetPolicy.html",
+                    "resources": {
+                        "required": {
+                            "policy-store": {}
+                        }
+                    }
                 },
                 "smithy.api#documentation": "<p>Retrieves information about a group (batch) of policies.</p> <note> <p>The <code>BatchGetPolicy</code> operation doesn't have its own IAM permission. To authorize this operation for Amazon Web Services principals, include the permission <code>verifiedpermissions:GetPolicy</code> in their IAM policies.</p> </note>",
                 "smithy.api#examples": [
@@ -445,8 +464,14 @@
             ],
             "traits": {
                 "aws.iam#iamAction": {
-                    "documentation": "Grants permission to make a batch authorization decision about a service request described in the parameters",
-                    "name": "IsAuthorized"
+                    "documentation": "Grants permission to make authorization decisions about the service requests described in the parameters",
+                    "name": "IsAuthorized",
+                    "relativeDocumentation": "API_IsAuthorized.html",
+                    "resources": {
+                        "required": {
+                            "policy-store": {}
+                        }
+                    }
                 },
                 "smithy.api#documentation": "<p>Makes a series of decisions about multiple authorization requests for one principal or resource. Each request contains the equivalent content of an <code>IsAuthorized</code> request: principal, action, resource, and context. Either the <code>principal</code> or the <code>resource</code> parameter must be identical across all requests. For example, Verified Permissions won't evaluate a pair of requests where <code>bob</code> views <code>photo1</code> and <code>alice</code> views <code>photo2</code>. Authorization of <code>bob</code> to view <code>photo1</code> and <code>photo2</code>, or <code>bob</code> and <code>alice</code> to view <code>photo1</code>, are valid batches. </p> <p>The request is evaluated against all policies in the specified policy store that match the entities that you declare. The result of the decisions is a series of <code>Allow</code> or <code>Deny</code> responses, along with the IDs of the policies that produced each decision.</p> <p>The <code>entities</code> of a <code>BatchIsAuthorized</code> API request can contain up to 100 principals and up to 100 resources. The <code>requests</code> of a <code>BatchIsAuthorized</code> API request can contain up to 30 requests.</p> <note> <p>The <code>BatchIsAuthorized</code> operation doesn't have its own IAM permission. To authorize this operation for Amazon Web Services principals, include the permission <code>verifiedpermissions:IsAuthorized</code> in their IAM policies.</p> </note>",
                 "smithy.api#examples": [
@@ -752,8 +777,14 @@
             ],
             "traits": {
                 "aws.iam#iamAction": {
-                    "documentation": "Grants permission to make a batch authorization decision about a service request described in the parameters. The principal in this request comes from an external identity source",
-                    "name": "IsAuthorizedWithToken"
+                    "documentation": "Grants permission to make authorization decisions about the service requests described in the parameters. The principal in this request comes from an external identity source",
+                    "name": "IsAuthorizedWithToken",
+                    "relativeDocumentation": "API_IsAuthorizedWithToken.html",
+                    "resources": {
+                        "required": {
+                            "policy-store": {}
+                        }
+                    }
                 },
                 "smithy.api#documentation": "<p>Makes a series of decisions about multiple authorization requests for one token. The principal in this request comes from an external identity source in the form of an identity or access token, formatted as a <a href=\"https://wikipedia.org/wiki/JSON_Web_Token\">JSON web token (JWT)</a>. The information in the parameters can also define additional context that Verified Permissions can include in the evaluations.</p> <p>The request is evaluated against all policies in the specified policy store that match the entities that you provide in the entities declaration and in the token. The result of the decisions is a series of <code>Allow</code> or <code>Deny</code> responses, along with the IDs of the policies that produced each decision.</p> <p>The <code>entities</code> of a <code>BatchIsAuthorizedWithToken</code> API request can contain up to 100 resources and up to 99 user groups. The <code>requests</code> of a <code>BatchIsAuthorizedWithToken</code> API request can contain up to 30 requests.</p> <note> <p>The <code>BatchIsAuthorizedWithToken</code> operation doesn't have its own IAM permission. To authorize this operation for Amazon Web Services principals, include the permission <code>verifiedpermissions:IsAuthorizedWithToken</code> in their IAM policies.</p> </note>",
                 "smithy.api#examples": [
@@ -1918,6 +1949,17 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.verifiedpermissions#DatetimeAttribute": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 28
+                },
+                "smithy.api#pattern": "^\\d{4}-\\d{2}-\\d{2}(T\\d{2}:\\d{2}:\\d{2}(\\.\\d{3})?(Z|[+-]\\d{4}))?$",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.verifiedpermissions#Decimal": {
             "type": "string",
             "traits": {
@@ -2242,6 +2284,17 @@
                 "smithy.api#pattern": "^https://.*$"
             }
         },
+        "com.amazonaws.verifiedpermissions#Duration": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^-?(\\d+d)?(\\d+h)?(\\d+m)?(\\d+s)?(\\d+ms)?$",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.verifiedpermissions#EntitiesDefinition": {
             "type": "union",
             "members": {
@@ -2547,7 +2600,14 @@
             ],
             "traits": {
                 "aws.iam#iamAction": {
-                    "documentation": "Grants permission to retrieve information about the specified policy"
+                    "name": "GetPolicy",
+                    "documentation": "Grants permission to retrieve information about the specified policy",
+                    "relativeDocumentation": "API_GetPolicy.html",
+                    "resources": {
+                        "required": {
+                            "policy-store": {}
+                        }
+                    }
                 },
                 "smithy.api#documentation": "<p>Retrieves information about the specified policy.</p>",
                 "smithy.api#examples": [
@@ -3323,7 +3383,7 @@
             ],
             "traits": {
                 "aws.iam#iamAction": {
-                    "documentation": "Grants permission to make an authorization decision about a service request described in the parameters"
+                    "documentation": "Grants permission to make authorization decisions about the service requests described in the parameters"
                 },
                 "smithy.api#documentation": "<p>Makes an authorization decision about a service request described in the parameters. The information in the parameters can also define additional context that Verified Permissions can include in the evaluation. The request is evaluated against all matching policies in the specified policy store. The result of the decision is either <code>Allow</code> or <code>Deny</code>, along with a list of the policies that resulted in the decision.</p>",
                 "smithy.api#examples": [
@@ -3472,7 +3532,7 @@
             ],
             "traits": {
                 "aws.iam#iamAction": {
-                    "documentation": "Grants permission to make an authorization decision about a service request described in the parameters. The principal in this request comes from an external identity source"
+                    "documentation": "Grants permission to make authorization decisions about the service requests described in the parameters. The principal in this request comes from an external identity source"
                 },
                 "smithy.api#documentation": "<p>Makes an authorization decision about a service request described in the parameters. The principal in this request comes from an external identity source in the form of an identity token formatted as a <a href=\"https://wikipedia.org/wiki/JSON_Web_Token\">JSON web token (JWT)</a>. The information in the parameters can also define additional context that Verified Permissions can include in the evaluation. The request is evaluated against all matching policies in the specified policy store. The result of the decision is either <code>Allow</code> or <code>Deny</code>, along with a list of the policies that resulted in the decision.</p> <p>Verified Permissions validates each token that is specified in a request by checking its expiration date and its signature.</p> <important> <p>Tokens from an identity source user continue to be usable until they expire. Token revocation and resource deletion have no effect on the validity of a token in your policy store</p> </important>",
                 "smithy.api#examples": [
@@ -5700,7 +5760,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about a policy created by instantiating a policy template. </p> <p>This </p>"
+                "smithy.api#documentation": "<p>Contains information about a policy created by instantiating a policy template. </p>"
             }
         },
         "com.amazonaws.verifiedpermissions#ThrottlingException": {

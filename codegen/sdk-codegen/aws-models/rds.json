@@ -5936,6 +5936,12 @@
                 },
                 "Tags": {
                     "target": "com.amazonaws.rds#TagList"
+                },
+                "EndpointNetworkType": {
+                    "target": "com.amazonaws.rds#EndpointNetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type of the DB proxy endpoint. The network type determines the IP version that the proxy endpoint supports.</p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IPV4</code> - The proxy endpoint supports IPv4 only.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IPV6</code> - The proxy endpoint supports IPv6 only.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DUAL</code> - The proxy endpoint supports both IPv4 and IPv6.</p>\n            </li>\n         </ul>\n         <p>Default: <code>IPV4</code>\n         </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>If you specify <code>IPV6</code> or <code>DUAL</code>, the VPC and all subnets must have an IPv6 CIDR block.</p>\n            </li>\n            <li>\n               <p>If you specify <code>IPV6</code> or <code>DUAL</code>, the VPC tenancy cannot be <code>dedicated</code>.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -6027,6 +6033,18 @@
                     "target": "com.amazonaws.rds#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>An optional set of key-value pairs to associate arbitrary data of your choosing with the proxy.</p>"
+                    }
+                },
+                "EndpointNetworkType": {
+                    "target": "com.amazonaws.rds#EndpointNetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type of the DB proxy endpoint. The network type determines the IP version that the proxy endpoint supports.</p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IPV4</code> - The proxy endpoint supports IPv4 only.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IPV6</code> - The proxy endpoint supports IPv6 only.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DUAL</code> - The proxy endpoint supports both IPv4 and IPv6.</p>\n            </li>\n         </ul>\n         <p>Default: <code>IPV4</code>\n         </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>If you specify <code>IPV6</code> or <code>DUAL</code>, the VPC and all subnets must have an IPv6 CIDR block.</p>\n            </li>\n            <li>\n               <p>If you specify <code>IPV6</code> or <code>DUAL</code>, the VPC tenancy cannot be <code>dedicated</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "TargetConnectionNetworkType": {
+                    "target": "com.amazonaws.rds#TargetConnectionNetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type that the proxy uses to connect to the target database. The network type determines the IP version that the proxy uses for connections to the database.</p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IPV4</code> - The proxy connects to the database using IPv4 only.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IPV6</code> - The proxy connects to the database using IPv6 only.</p>\n            </li>\n         </ul>\n         <p>Default: <code>IPV4</code>\n         </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>If you specify <code>IPV6</code>, the database must support dual-stack mode. RDS doesn't support IPv6-only databases.</p>\n            </li>\n            <li>\n               <p>All targets registered with the proxy must be compatible with the specified network type.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -10400,6 +10418,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time when the proxy was last updated.</p>"
                     }
+                },
+                "EndpointNetworkType": {
+                    "target": "com.amazonaws.rds#EndpointNetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type of the DB proxy endpoint. The network type determines the IP version that the proxy endpoint supports.</p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IPV4</code> - The proxy endpoint supports IPv4 only.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IPV6</code> - The proxy endpoint supports IPv6 only.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DUAL</code> - The proxy endpoint supports both IPv4 and IPv6.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "TargetConnectionNetworkType": {
+                    "target": "com.amazonaws.rds#TargetConnectionNetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type that the proxy uses to connect to the target database. The network type determines the IP version that the proxy uses for connections to the database.</p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IPV4</code> - The proxy connects to the database using IPv4 only.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IPV6</code> - The proxy connects to the database using IPv6 only.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -10490,6 +10520,12 @@
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether this endpoint is the default endpoint for the associated DB proxy.\n        Default DB proxy endpoints always have read/write capability. Other endpoints that you associate with the\n        DB proxy can be either read/write or read-only.</p>"
+                    }
+                },
+                "EndpointNetworkType": {
+                    "target": "com.amazonaws.rds#EndpointNetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type of the DB proxy endpoint. The network type determines the IP version that the proxy endpoint supports.</p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IPV4</code> - The proxy endpoint supports IPv4 only.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IPV6</code> - The proxy endpoint supports IPv6 only.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DUAL</code> - The proxy endpoint supports both IPv4 and IPv6.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -18960,6 +18996,29 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>This data type represents the information you need to connect to an Amazon RDS DB instance.\n      This data type is used as a response element in the following actions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CreateDBInstance</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeDBInstances</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteDBInstance</code>\n               </p>\n            </li>\n         </ul>\n         <p>For the data structure that represents Amazon Aurora DB cluster endpoints,\n        see <code>DBClusterEndpoint</code>.</p>"
+            }
+        },
+        "com.amazonaws.rds#EndpointNetworkType": {
+            "type": "enum",
+            "members": {
+                "IPV4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPV4"
+                    }
+                },
+                "IPV6": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPV6"
+                    }
+                },
+                "DUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DUAL"
+                    }
+                }
             }
         },
         "com.amazonaws.rds#Engine": {
@@ -31379,6 +31438,23 @@
             "traits": {
                 "smithy.api#documentation": "<p></p>",
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.rds#TargetConnectionNetworkType": {
+            "type": "enum",
+            "members": {
+                "IPV4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPV4"
+                    }
+                },
+                "IPV6": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPV6"
+                    }
+                }
             }
         },
         "com.amazonaws.rds#TargetDBClusterParameterGroupName": {

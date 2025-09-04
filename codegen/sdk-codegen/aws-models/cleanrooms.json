@@ -13587,6 +13587,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The error from the protected job.</p>"
                     }
+                },
+                "computeConfiguration": {
+                    "target": "com.amazonaws.cleanrooms#ProtectedJobComputeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compute configuration for the protected job.</p>"
+                    }
                 }
             },
             "traits": {
@@ -13602,6 +13608,20 @@
                         "smithy.api#enumValue": "DIRECT_ANALYSIS"
                     }
                 }
+            }
+        },
+        "com.amazonaws.cleanrooms#ProtectedJobComputeConfiguration": {
+            "type": "union",
+            "members": {
+                "worker": {
+                    "target": "com.amazonaws.cleanrooms#ProtectedJobWorkerComputeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The worker configuration for the compute environment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of the compute resources for a PySpark job.</p>"
             }
         },
         "com.amazonaws.cleanrooms#ProtectedJobConfigurationDetails": {
@@ -14054,6 +14074,49 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "PYSPARK"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cleanrooms#ProtectedJobWorkerComputeConfiguration": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.cleanrooms#ProtectedJobWorkerComputeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The worker compute configuration type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "number": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of workers for a PySpark job.</p>",
+                        "smithy.api#range": {
+                            "min": 4,
+                            "max": 128
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of the compute resources for a PySpark job.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#ProtectedJobWorkerComputeType": {
+            "type": "enum",
+            "members": {
+                "CR1X": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CR.1X"
+                    }
+                },
+                "CR4X": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CR.4X"
                     }
                 }
             }
@@ -15614,6 +15677,12 @@
                     "target": "com.amazonaws.cleanrooms#ProtectedJobResultConfigurationInput",
                     "traits": {
                         "smithy.api#documentation": "<p>The details needed to write the job results.</p>"
+                    }
+                },
+                "computeConfiguration": {
+                    "target": "com.amazonaws.cleanrooms#ProtectedJobComputeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compute configuration for the protected job.</p>"
                     }
                 }
             },
@@ -17214,7 +17283,7 @@
                 "number": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p> The number of workers.</p>",
+                        "smithy.api#documentation": "<p> The number of workers.</p> <p>SQL queries support a minimum value of 2 and a maximum value of 400. </p> <p>PySpark jobs support a minimum value of 4 and a maximum value of 128.</p>",
                         "smithy.api#range": {
                             "min": 2,
                             "max": 400
