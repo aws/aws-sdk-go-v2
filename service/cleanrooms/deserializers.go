@@ -24514,6 +24514,11 @@ func awsRestjson1_deserializeDocumentProtectedJob(v **types.ProtectedJob, value 
 
 	for key, value := range shape {
 		switch key {
+		case "computeConfiguration":
+			if err := awsRestjson1_deserializeDocumentProtectedJobComputeConfiguration(&sv.ComputeConfiguration, value); err != nil {
+				return err
+			}
+
 		case "createTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -24597,6 +24602,46 @@ func awsRestjson1_deserializeDocumentProtectedJob(v **types.ProtectedJob, value 
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentProtectedJobComputeConfiguration(v *types.ProtectedJobComputeConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.ProtectedJobComputeConfiguration
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "worker":
+			var mv types.ProtectedJobWorkerComputeConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentProtectedJobWorkerComputeConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ProtectedJobComputeConfigurationMemberWorker{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 
@@ -25470,6 +25515,59 @@ func awsRestjson1_deserializeDocumentProtectedJobSummaryList(v *[]types.Protecte
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentProtectedJobWorkerComputeConfiguration(v **types.ProtectedJobWorkerComputeConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ProtectedJobWorkerComputeConfiguration
+	if *v == nil {
+		sv = &types.ProtectedJobWorkerComputeConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "number":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Number = ptr.Int32(int32(i64))
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProtectedJobWorkerComputeType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.ProtectedJobWorkerComputeType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

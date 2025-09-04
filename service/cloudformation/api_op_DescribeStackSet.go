@@ -32,7 +32,7 @@ func (c *Client) DescribeStackSet(ctx context.Context, params *DescribeStackSetI
 
 type DescribeStackSetInput struct {
 
-	// The name or unique ID of the stack set whose description you want.
+	// The name or unique ID of the StackSet whose description you want.
 	//
 	// This member is required.
 	StackSetName *string
@@ -41,7 +41,7 @@ type DescribeStackSetInput struct {
 	// administrator in the organization's management account or as a delegated
 	// administrator in a member account.
 	//
-	// By default, SELF is specified. Use SELF for stack sets with self-managed
+	// By default, SELF is specified. Use SELF for StackSets with self-managed
 	// permissions.
 	//
 	//   - If you are signed in to the management account, specify SELF .
@@ -61,7 +61,7 @@ type DescribeStackSetInput struct {
 
 type DescribeStackSetOutput struct {
 
-	// The specified stack set.
+	// The specified StackSet.
 	StackSet *types.StackSet
 
 	// Metadata pertaining to the operation's result.

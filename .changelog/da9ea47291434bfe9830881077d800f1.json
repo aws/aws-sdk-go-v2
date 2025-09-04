@@ -1,0 +1,8 @@
+{
+    "id": "da9ea472-9143-4bfe-9830-881077d800f1",
+    "type": "feature",
+    "description": "Add support for configurable compute sizes for PySpark jobs.",
+    "modules": [
+        "service/cleanrooms"
+    ]
+}

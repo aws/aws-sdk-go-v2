@@ -12,7 +12,8 @@ import (
 	"time"
 )
 
-// Returns detailed information about an extension that has been registered.
+// Returns detailed information about an extension from the CloudFormation
+// registry in your current account and Region.
 //
 // If you specify a VersionId , DescribeType returns information about that
 // specific extension version. Otherwise, it returns information about the default

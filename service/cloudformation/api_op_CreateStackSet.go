@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a stack set.
+// Creates a StackSet.
 func (c *Client) CreateStackSet(ctx context.Context, params *CreateStackSetInput, optFns ...func(*Options)) (*CreateStackSetOutput, error) {
 	if params == nil {
 		params = &CreateStackSetInput{}
@@ -29,8 +29,8 @@ func (c *Client) CreateStackSet(ctx context.Context, params *CreateStackSetInput
 
 type CreateStackSetInput struct {
 
-	// The name to associate with the stack set. The name must be unique in the Region
-	// where you create your stack set.
+	// The name to associate with the StackSet. The name must be unique in the Region
+	// where you create your StackSet.
 	//
 	// A stack name can contain only alphanumeric characters (case-sensitive) and
 	// hyphens. It must start with an alphabetic character and can't be longer than 128
@@ -39,10 +39,10 @@ type CreateStackSetInput struct {
 	// This member is required.
 	StackSetName *string
 
-	// The Amazon Resource Name (ARN) of the IAM role to use to create this stack set.
+	// The Amazon Resource Name (ARN) of the IAM role to use to create this StackSet.
 	//
 	// Specify an IAM role only if you are using customized administrator roles to
-	// control which users or groups can manage specific stack sets within the same
+	// control which users or groups can manage specific StackSets within the same
 	// administrator account. For more information, see [Grant self-managed permissions]in the CloudFormation User
 	// Guide.
 	//
@@ -53,49 +53,49 @@ type CreateStackSetInput struct {
 
 	// Describes whether StackSets automatically deploys to Organizations accounts
 	// that are added to the target organization or organizational unit (OU). For more
-	// information, see [Manage automatic deployments for CloudFormation StackSets that use service-managed permissions]in the CloudFormation User Guide.
+	// information, see [Enable or disable automatic deployments for StackSets in Organizations]in the CloudFormation User Guide.
 	//
 	// Required if the permissions model is SERVICE_MANAGED . (Not used with
 	// self-managed permissions.)
 	//
-	// [Manage automatic deployments for CloudFormation StackSets that use service-managed permissions]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-manage-auto-deployment.html
+	// [Enable or disable automatic deployments for StackSets in Organizations]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-manage-auto-deployment.html
 	AutoDeployment *types.AutoDeployment
 
 	// Specifies whether you are acting as an account administrator in the
 	// organization's management account or as a delegated administrator in a member
 	// account.
 	//
-	// By default, SELF is specified. Use SELF for stack sets with self-managed
+	// By default, SELF is specified. Use SELF for StackSets with self-managed
 	// permissions.
 	//
-	//   - To create a stack set with service-managed permissions while signed in to
+	//   - To create a StackSet with service-managed permissions while signed in to
 	//   the management account, specify SELF .
 	//
-	//   - To create a stack set with service-managed permissions while signed in to a
+	//   - To create a StackSet with service-managed permissions while signed in to a
 	//   delegated administrator account, specify DELEGATED_ADMIN .
 	//
 	// Your Amazon Web Services account must be registered as a delegated admin in the
 	//   management account. For more information, see [Register a delegated administrator]in the CloudFormation User
 	//   Guide.
 	//
-	// Stack sets with service-managed permissions are created in the management
-	// account, including stack sets that are created by delegated administrators.
+	// StackSets with service-managed permissions are created in the management
+	// account, including StackSets that are created by delegated administrators.
 	//
 	// Valid only if the permissions model is SERVICE_MANAGED .
 	//
 	// [Register a delegated administrator]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html
 	CallAs types.CallAs
 
-	// In some cases, you must explicitly acknowledge that your stack set template
-	// contains certain capabilities in order for CloudFormation to create the stack
-	// set and related stack instances.
+	// In some cases, you must explicitly acknowledge that your StackSet template
+	// contains certain capabilities in order for CloudFormation to create the StackSet
+	// and related stack instances.
 	//
 	//   - CAPABILITY_IAM and CAPABILITY_NAMED_IAM
 	//
 	// Some stack templates might include resources that can affect permissions in
 	//   your Amazon Web Services account; for example, by creating new IAM users. For
-	//   those stack sets, you must explicitly acknowledge this by specifying one of
-	//   these capabilities.
+	//   those StackSets, you must explicitly acknowledge this by specifying one of these
+	//   capabilities.
 	//
 	// The following IAM resources require you to specify either the CAPABILITY_IAM or
 	//   CAPABILITY_NAMED_IAM capability.
@@ -129,17 +129,17 @@ type CreateStackSetInput struct {
 	//
 	//   - CAPABILITY_AUTO_EXPAND
 	//
-	// Some templates reference macros. If your stack set template references one or
-	//   more macros, you must create the stack set directly from the processed template,
+	// Some templates reference macros. If your StackSet template references one or
+	//   more macros, you must create the StackSet directly from the processed template,
 	//   without first reviewing the resulting changes in a change set. To create the
-	//   stack set directly, you must acknowledge this capability. For more information,
+	//   StackSet directly, you must acknowledge this capability. For more information,
 	//   see [Perform custom processing on CloudFormation templates with template macros].
 	//
-	// Stack sets with service-managed permissions don't currently support the use of
+	// StackSets with service-managed permissions don't currently support the use of
 	//   macros in templates. (This includes the [AWS::Include]and [AWS::Serverless]transforms, which are macros
-	//   hosted by CloudFormation.) Even if you specify this capability for a stack set
+	//   hosted by CloudFormation.) Even if you specify this capability for a StackSet
 	//   with service-managed permissions, if you reference a macro in your template the
-	//   stack set operation will fail.
+	//   StackSet operation will fail.
 	//
 	// [AWS::IAM::AccessKey]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-accesskey.html
 	// [AWS::Include]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-include.html
@@ -156,34 +156,34 @@ type CreateStackSetInput struct {
 
 	// A unique identifier for this CreateStackSet request. Specify this token if you
 	// plan to retry requests so that CloudFormation knows that you're not attempting
-	// to create another stack set with the same name. You might retry CreateStackSet
+	// to create another StackSet with the same name. You might retry CreateStackSet
 	// requests to ensure that CloudFormation successfully received them.
 	//
 	// If you don't specify an operation ID, the SDK generates one automatically.
 	ClientRequestToken *string
 
-	// A description of the stack set. You can use the description to identify the
-	// stack set's purpose or other important information.
+	// A description of the StackSet. You can use the description to identify the
+	// StackSet's purpose or other important information.
 	Description *string
 
-	// The name of the IAM execution role to use to create the stack set. If you do
-	// not specify an execution role, CloudFormation uses the
-	// AWSCloudFormationStackSetExecutionRole role for the stack set operation.
+	// The name of the IAM execution role to use to create the StackSet. If you do not
+	// specify an execution role, CloudFormation uses the
+	// AWSCloudFormationStackSetExecutionRole role for the StackSet operation.
 	//
 	// Specify an IAM role only if you are using customized execution roles to control
-	// which stack resources users and groups can include in their stack sets.
+	// which stack resources users and groups can include in their StackSets.
 	//
 	// Valid only if the permissions model is SELF_MANAGED .
 	ExecutionRoleName *string
 
-	// Describes whether StackSets performs non-conflicting operations concurrently
-	// and queues conflicting operations.
+	// Describes whether CloudFormation performs non-conflicting operations
+	// concurrently and queues conflicting operations.
 	ManagedExecution *types.ManagedExecution
 
-	// The input parameters for the stack set template.
+	// The input parameters for the StackSet template.
 	Parameters []types.Parameter
 
-	// Describes how the IAM roles required for stack set operations are created. By
+	// Describes how the IAM roles required for StackSet operations are created. By
 	// default, SELF-MANAGED is specified.
 	//
 	//   - With self-managed permissions, you must create the administrator and
@@ -192,24 +192,24 @@ type CreateStackSetInput struct {
 	//
 	//   - With service-managed permissions, StackSets automatically creates the IAM
 	//   roles required to deploy to accounts managed by Organizations. For more
-	//   information, see [Activate trusted access for stack sets with Organizations].
+	//   information, see [Activate trusted access for StackSets with Organizations].
 	//
-	// [Activate trusted access for stack sets with Organizations]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-activate-trusted-access.html
+	// [Activate trusted access for StackSets with Organizations]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-activate-trusted-access.html
 	// [Grant self-managed permissions]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html
 	PermissionModel types.PermissionModels
 
-	// The stack ID you are importing into a new stack set. Specify the Amazon
-	// Resource Name (ARN) of the stack.
+	// The stack ID you are importing into a new StackSet. Specify the Amazon Resource
+	// Name (ARN) of the stack.
 	StackId *string
 
-	// The key-value pairs to associate with this stack set and the stacks created
-	// from it. CloudFormation also propagates these tags to supported resources that
-	// are created in the stacks. A maximum number of 50 tags can be specified.
+	// The key-value pairs to associate with this StackSet and the stacks created from
+	// it. CloudFormation also propagates these tags to supported resources that are
+	// created in the stacks. A maximum number of 50 tags can be specified.
 	//
 	// If you specify tags as part of a CreateStackSet action, CloudFormation checks
 	// to see if you have the required IAM permission to tag resources. If you don't,
 	// the entire CreateStackSet action fails with an access denied error, and the
-	// stack set is not created.
+	// StackSet is not created.
 	Tags []types.Tag
 
 	// The structure that contains the template body, with a minimum length of 1 byte
@@ -233,7 +233,7 @@ type CreateStackSetInput struct {
 
 type CreateStackSetOutput struct {
 
-	// The ID of the stack set that you're creating.
+	// The ID of the StackSet that you're creating.
 	StackSetId *string
 
 	// Metadata pertaining to the operation's result.

@@ -97,7 +97,8 @@ type CapacityLimits struct {
 }
 
 // Details about each OpenSearch Serverless collection, including the collection
-// endpoint and the OpenSearch Dashboards endpoint.
+// endpoint, the OpenSearch Dashboards endpoint, and FIPS-compliant endpoints for
+// federal government workloads.
 type CollectionDetail struct {
 
 	// The Amazon Resource Name (ARN) of the collection.
@@ -121,6 +122,11 @@ type CollectionDetail struct {
 
 	// A message associated with the failure code.
 	FailureMessage *string
+
+	// FIPS-compliant endpoints for the collection. These endpoints use FIPS 140-3
+	// validated cryptographic modules and are required for federal government
+	// workloads that must comply with FedRAMP security standards.
+	FipsEndpoints *FipsEndpoints
 
 	// A unique identifier for the collection.
 	Id *string
@@ -345,6 +351,24 @@ type EffectiveLifecyclePolicyErrorDetail struct {
 
 	// The type of lifecycle policy.
 	Type LifecyclePolicyType
+
+	noSmithyDocumentSerde
+}
+
+// FIPS-compliant endpoint URLs for an OpenSearch Serverless collection. These
+// endpoints ensure all data transmission uses FIPS 140-3 validated cryptographic
+// implementations, meeting federal security requirements for government workloads.
+type FipsEndpoints struct {
+
+	// FIPS-compliant collection endpoint used to submit index, search, and data
+	// upload requests to an OpenSearch Serverless collection. This endpoint uses FIPS
+	// 140-3 validated cryptography and is required for federal government workloads.
+	CollectionEndpoint *string
+
+	// FIPS-compliant endpoint used to access OpenSearch Dashboards. This endpoint
+	// uses FIPS 140-3 validated cryptography and is required for federal government
+	// workloads that need dashboard visualization capabilities.
+	DashboardEndpoint *string
 
 	noSmithyDocumentSerde
 }

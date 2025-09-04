@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops an in-progress operation on a stack set and its associated stack
+// Stops an in-progress operation on a StackSet and its associated stack
 // instances. StackSets will cancel all the unstarted stack instance deployments
 // and wait for those are in-progress to complete.
 func (c *Client) StopStackSetOperation(ctx context.Context, params *StopStackSetOperationInput, optFns ...func(*Options)) (*StopStackSetOperationOutput, error) {
@@ -36,16 +36,16 @@ type StopStackSetOperationInput struct {
 	// This member is required.
 	OperationId *string
 
-	// The name or unique ID of the stack set that you want to stop the operation for.
+	// The name or unique ID of the StackSet that you want to stop the operation for.
 	//
 	// This member is required.
 	StackSetName *string
 
-	// [Service-managed permissions] Specifies whether you are acting as an account
-	// administrator in the organization's management account or as a delegated
-	// administrator in a member account.
+	// Specifies whether you are acting as an account administrator in the
+	// organization's management account or as a delegated administrator in a member
+	// account. Valid only if the StackSet uses service-managed permissions.
 	//
-	// By default, SELF is specified. Use SELF for stack sets with self-managed
+	// By default, SELF is specified. Use SELF for StackSets with self-managed
 	// permissions.
 	//
 	//   - If you are signed in to the management account, specify SELF .

@@ -3013,6 +3013,25 @@ func validatePrivacyBudgetTemplateParametersInput(v types.PrivacyBudgetTemplateP
 	}
 }
 
+func validateProtectedJobComputeConfiguration(v types.ProtectedJobComputeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProtectedJobComputeConfiguration"}
+	switch uv := v.(type) {
+	case *types.ProtectedJobComputeConfigurationMemberWorker:
+		if err := validateProtectedJobWorkerComputeConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[worker]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateProtectedJobMemberOutputConfigurationInput(v *types.ProtectedJobMemberOutputConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -3073,6 +3092,24 @@ func validateProtectedJobS3OutputConfigurationInput(v *types.ProtectedJobS3Outpu
 	invalidParams := smithy.InvalidParamsError{Context: "ProtectedJobS3OutputConfigurationInput"}
 	if v.Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProtectedJobWorkerComputeConfiguration(v *types.ProtectedJobWorkerComputeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProtectedJobWorkerComputeConfiguration"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Number == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Number"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4715,6 +4752,11 @@ func validateOpStartProtectedJobInput(v *StartProtectedJobInput) error {
 	if v.ResultConfiguration != nil {
 		if err := validateProtectedJobResultConfigurationInput(v.ResultConfiguration); err != nil {
 			invalidParams.AddNested("ResultConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ComputeConfiguration != nil {
+		if err := validateProtectedJobComputeConfiguration(v.ComputeConfiguration); err != nil {
+			invalidParams.AddNested("ComputeConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -8393,6 +8393,11 @@ func awsAwsquery_serializeOpDocumentListHookResultsInput(v *ListHookResultsInput
 		objectKey.String(*v.NextToken)
 	}
 
+	if len(v.Status) > 0 {
+		objectKey := object.Key("Status")
+		objectKey.String(string(v.Status))
+	}
+
 	if v.TargetId != nil {
 		objectKey := object.Key("TargetId")
 		objectKey.String(*v.TargetId)
@@ -8401,6 +8406,11 @@ func awsAwsquery_serializeOpDocumentListHookResultsInput(v *ListHookResultsInput
 	if len(v.TargetType) > 0 {
 		objectKey := object.Key("TargetType")
 		objectKey.String(string(v.TargetType))
+	}
+
+	if v.TypeArn != nil {
+		objectKey := object.Key("TypeArn")
+		objectKey.String(*v.TypeArn)
 	}
 
 	return nil

@@ -304,6 +304,27 @@ func (DBProxyStatus) Values() []DBProxyStatus {
 	}
 }
 
+type EndpointNetworkType string
+
+// Enum values for EndpointNetworkType
+const (
+	EndpointNetworkTypeIpv4 EndpointNetworkType = "IPV4"
+	EndpointNetworkTypeIpv6 EndpointNetworkType = "IPV6"
+	EndpointNetworkTypeDual EndpointNetworkType = "DUAL"
+)
+
+// Values returns all known values for EndpointNetworkType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EndpointNetworkType) Values() []EndpointNetworkType {
+	return []EndpointNetworkType{
+		"IPV4",
+		"IPV6",
+		"DUAL",
+	}
+}
+
 type EngineFamily string
 
 // Enum values for EngineFamily
@@ -579,6 +600,25 @@ func (SourceType) Values() []SourceType {
 		"custom-engine-version",
 		"db-proxy",
 		"blue-green-deployment",
+	}
+}
+
+type TargetConnectionNetworkType string
+
+// Enum values for TargetConnectionNetworkType
+const (
+	TargetConnectionNetworkTypeIpv4 TargetConnectionNetworkType = "IPV4"
+	TargetConnectionNetworkTypeIpv6 TargetConnectionNetworkType = "IPV6"
+)
+
+// Values returns all known values for TargetConnectionNetworkType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TargetConnectionNetworkType) Values() []TargetConnectionNetworkType {
+	return []TargetConnectionNetworkType{
+		"IPV4",
+		"IPV6",
 	}
 }
 

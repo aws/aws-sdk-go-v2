@@ -11,33 +11,33 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Detect drift on a stack set. When CloudFormation performs drift detection on a
-// stack set, it performs drift detection on the stack associated with each stack
-// instance in the stack set. For more information, see [Performing drift detection on CloudFormation StackSets].
+// Detect drift on a StackSet. When CloudFormation performs drift detection on a
+// StackSet, it performs drift detection on the stack associated with each stack
+// instance in the StackSet. For more information, see [Performing drift detection on CloudFormation StackSets].
 //
-// DetectStackSetDrift returns the OperationId of the stack set drift detection
+// DetectStackSetDrift returns the OperationId of the StackSet drift detection
 // operation. Use this operation id with DescribeStackSetOperationto monitor the progress of the drift
 // detection operation. The drift detection operation may take some time, depending
-// on the number of stack instances included in the stack set, in addition to the
+// on the number of stack instances included in the StackSet, in addition to the
 // number of resources included in each stack.
 //
 // Once the operation has completed, use the following actions to return drift
 // information:
 //
 //   - Use DescribeStackSetto return detailed information about the stack set, including detailed
-//     information about the last completed drift operation performed on the stack set.
+//     information about the last completed drift operation performed on the StackSet.
 //     (Information about drift operations that are in progress isn't included.)
 //
-//   - Use ListStackInstancesto return a list of stack instances belonging to the stack set,
+//   - Use ListStackInstancesto return a list of stack instances belonging to the StackSet,
 //     including the drift status and last drift time checked of each instance.
 //
 //   - Use DescribeStackInstanceto return detailed information about a specific stack instance,
 //     including its drift status and last drift time checked.
 //
-// You can only run a single drift detection operation on a given stack set at one
+// You can only run a single drift detection operation on a given StackSet at one
 // time.
 //
-// To stop a drift detection stack set operation, use StopStackSetOperation.
+// To stop a drift detection StackSet operation, use StopStackSetOperation.
 //
 // [Performing drift detection on CloudFormation StackSets]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html
 func (c *Client) DetectStackSetDrift(ctx context.Context, params *DetectStackSetDriftInput, optFns ...func(*Options)) (*DetectStackSetDriftOutput, error) {
@@ -57,7 +57,7 @@ func (c *Client) DetectStackSetDrift(ctx context.Context, params *DetectStackSet
 
 type DetectStackSetDriftInput struct {
 
-	// The name of the stack set on which to perform the drift detection operation.
+	// The name of the StackSet on which to perform the drift detection operation.
 	//
 	// This member is required.
 	StackSetName *string
@@ -66,7 +66,7 @@ type DetectStackSetDriftInput struct {
 	// administrator in the organization's management account or as a delegated
 	// administrator in a member account.
 	//
-	// By default, SELF is specified. Use SELF for stack sets with self-managed
+	// By default, SELF is specified. Use SELF for StackSets with self-managed
 	// permissions.
 	//
 	//   - If you are signed in to the management account, specify SELF .
@@ -81,16 +81,16 @@ type DetectStackSetDriftInput struct {
 	// [Register a delegated administrator]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html
 	CallAs types.CallAs
 
-	//  The ID of the stack set operation.
+	//  The ID of the StackSet operation.
 	OperationId *string
 
-	// The user-specified preferences for how CloudFormation performs a stack set
+	// The user-specified preferences for how CloudFormation performs a StackSet
 	// operation.
 	//
 	// For more information about maximum concurrent accounts and failure tolerance,
-	// see [Stack set operation options].
+	// see [StackSet operation options].
 	//
-	// [Stack set operation options]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html#stackset-ops-options
+	// [StackSet operation options]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options
 	OperationPreferences *types.StackSetOperationPreferences
 
 	noSmithyDocumentSerde
@@ -98,7 +98,7 @@ type DetectStackSetDriftInput struct {
 
 type DetectStackSetDriftOutput struct {
 
-	// The ID of the drift detection stack set operation.
+	// The ID of the drift detection StackSet operation.
 	//
 	// You can use this operation ID with DescribeStackSetOperation to monitor the progress of the drift
 	// detection operation.

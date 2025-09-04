@@ -1871,8 +1871,16 @@ func awsAwsjson10_serializeDocumentAttributeValue(v types.AttributeValue, value 
 		av := object.Key("boolean")
 		av.Boolean(uv.Value)
 
+	case *types.AttributeValueMemberDatetime:
+		av := object.Key("datetime")
+		av.String(uv.Value)
+
 	case *types.AttributeValueMemberDecimal:
 		av := object.Key("decimal")
+		av.String(uv.Value)
+
+	case *types.AttributeValueMemberDuration:
+		av := object.Key("duration")
 		av.String(uv.Value)
 
 	case *types.AttributeValueMemberEntityIdentifier:

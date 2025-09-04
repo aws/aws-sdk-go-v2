@@ -12,7 +12,7 @@ import (
 )
 
 // Returns configuration data for the specified CloudFormation extensions, from
-// the CloudFormation registry for the account and Region.
+// the CloudFormation registry in your current account and Region.
 //
 // For more information, see [Edit configuration data for extensions in your account] in the CloudFormation User Guide.
 //

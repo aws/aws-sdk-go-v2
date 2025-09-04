@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Import existing stacks into a new stack sets. Use the stack import operation to
-// import up to 10 stacks into a new stack set in the same account as the source
+// Import existing stacks into a new StackSets. Use the stack import operation to
+// import up to 10 stacks into a new StackSet in the same account as the source
 // stack or in a different administrator account and Region, by specifying the
 // stack ID of the stack you intend to import.
 func (c *Client) ImportStacksToStackSet(ctx context.Context, params *ImportStacksToStackSetInput, optFns ...func(*Options)) (*ImportStacksToStackSetOutput, error) {
@@ -32,38 +32,38 @@ func (c *Client) ImportStacksToStackSet(ctx context.Context, params *ImportStack
 
 type ImportStacksToStackSetInput struct {
 
-	// The name of the stack set. The name must be unique in the Region where you
-	// create your stack set.
+	// The name of the StackSet. The name must be unique in the Region where you
+	// create your StackSet.
 	//
 	// This member is required.
 	StackSetName *string
 
-	// By default, SELF is specified. Use SELF for stack sets with self-managed
+	// By default, SELF is specified. Use SELF for StackSets with self-managed
 	// permissions.
 	//
 	//   - If you are signed in to the management account, specify SELF .
 	//
-	//   - For service managed stack sets, specify DELEGATED_ADMIN .
+	//   - For service managed StackSets, specify DELEGATED_ADMIN .
 	CallAs types.CallAs
 
-	// A unique, user defined, identifier for the stack set operation.
+	// A unique, user defined, identifier for the StackSet operation.
 	OperationId *string
 
-	// The user-specified preferences for how CloudFormation performs a stack set
+	// The user-specified preferences for how CloudFormation performs a StackSet
 	// operation.
 	//
 	// For more information about maximum concurrent accounts and failure tolerance,
-	// see [Stack set operation options].
+	// see [StackSet operation options].
 	//
-	// [Stack set operation options]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html#stackset-ops-options
+	// [StackSet operation options]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options
 	OperationPreferences *types.StackSetOperationPreferences
 
-	// The list of OU ID's to which the stacks being imported has to be mapped as
-	// deployment target.
+	// The list of OU ID's to which the imported stacks must be mapped as deployment
+	// targets.
 	OrganizationalUnitIds []string
 
-	// The IDs of the stacks you are importing into a stack set. You import up to 10
-	// stacks per stack set at a time.
+	// The IDs of the stacks you are importing into a StackSet. You import up to 10
+	// stacks per StackSet at a time.
 	//
 	// Specify either StackIds or StackIdsUrl .
 	StackIds []string
@@ -78,7 +78,7 @@ type ImportStacksToStackSetInput struct {
 
 type ImportStacksToStackSetOutput struct {
 
-	// The unique identifier for the stack set operation.
+	// The unique identifier for the StackSet operation.
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

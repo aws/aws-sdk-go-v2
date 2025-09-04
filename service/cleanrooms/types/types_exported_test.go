@@ -425,6 +425,24 @@ func ExamplePrivacyImpact_outputUsage() {
 
 var _ *types.DifferentialPrivacyPrivacyImpact
 
+func ExampleProtectedJobComputeConfiguration_outputUsage() {
+	var union types.ProtectedJobComputeConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ProtectedJobComputeConfigurationMemberWorker:
+		_ = v.Value // Value is types.ProtectedJobWorkerComputeConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ProtectedJobWorkerComputeConfiguration
+
 func ExampleProtectedJobConfigurationDetails_outputUsage() {
 	var union types.ProtectedJobConfigurationDetails
 	// type switches can be used to check the union value

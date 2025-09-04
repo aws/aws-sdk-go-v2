@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns summary information about the results of a stack set operation.
+// Returns summary information about the results of a StackSet operation.
 //
 // This API provides eventually consistent reads meaning it may take some time but
 // will eventually return the most up-to-date data.
@@ -32,12 +32,12 @@ func (c *Client) ListStackSetOperationResults(ctx context.Context, params *ListS
 
 type ListStackSetOperationResultsInput struct {
 
-	// The ID of the stack set operation.
+	// The ID of the StackSet operation.
 	//
 	// This member is required.
 	OperationId *string
 
-	// The name or unique ID of the stack set that you want to get operation results
+	// The name or unique ID of the StackSet that you want to get operation results
 	// for.
 	//
 	// This member is required.
@@ -47,7 +47,7 @@ type ListStackSetOperationResultsInput struct {
 	// administrator in the organization's management account or as a delegated
 	// administrator in a member account.
 	//
-	// By default, SELF is specified. Use SELF for stack sets with self-managed
+	// By default, SELF is specified. Use SELF for StackSets with self-managed
 	// permissions.
 	//
 	//   - If you are signed in to the management account, specify SELF .

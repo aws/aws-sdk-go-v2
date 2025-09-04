@@ -389,7 +389,7 @@ func (e *OperationIdAlreadyExistsException) ErrorCode() string {
 }
 func (e *OperationIdAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Another operation is currently in progress for this stack set. Only one
+// Another operation is currently in progress for this StackSet. Only one
 // operation can be performed for a stack set at a given time.
 type OperationInProgressException struct {
 	Message *string
@@ -641,9 +641,9 @@ func (e *StackRefactorNotFoundException) ErrorCode() string {
 }
 func (e *StackRefactorNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You can't yet delete this stack set, because it still contains one or more
-// stack instances. Delete all stack instances from the stack set before deleting
-// the stack set.
+// You can't yet delete this StackSet, because it still contains one or more stack
+// instances. Delete all stack instances from the StackSet before deleting the
+// StackSet.
 type StackSetNotEmptyException struct {
 	Message *string
 
@@ -669,7 +669,7 @@ func (e *StackSetNotEmptyException) ErrorCode() string {
 }
 func (e *StackSetNotEmptyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified stack set doesn't exist.
+// The specified StackSet doesn't exist.
 type StackSetNotFoundException struct {
 	Message *string
 
@@ -695,7 +695,7 @@ func (e *StackSetNotFoundException) ErrorCode() string {
 }
 func (e *StackSetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Another operation has been performed on this stack set since the specified
+// Another operation has been performed on this StackSet since the specified
 // operation was performed.
 type StaleRequestException struct {
 	Message *string

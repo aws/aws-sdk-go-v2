@@ -49,7 +49,7 @@ type ListStackInstanceResourceDriftsInput struct {
 	// This member is required.
 	StackInstanceRegion *string
 
-	// The name or unique ID of the stack set that you want to list drifted resources
+	// The name or unique ID of the StackSet that you want to list drifted resources
 	// for.
 	//
 	// This member is required.
@@ -59,7 +59,7 @@ type ListStackInstanceResourceDriftsInput struct {
 	// administrator in the organization's management account or as a delegated
 	// administrator in a member account.
 	//
-	// By default, SELF is specified. Use SELF for stack sets with self-managed
+	// By default, SELF is specified. Use SELF for StackSets with self-managed
 	// permissions.
 	//
 	//   - If you are signed in to the management account, specify SELF .

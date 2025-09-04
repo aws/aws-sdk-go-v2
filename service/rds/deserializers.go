@@ -36176,6 +36176,19 @@ func awsAwsquery_deserializeDocumentDBProxy(v **types.DBProxy, decoder smithyxml
 				sv.Endpoint = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("EndpointNetworkType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.EndpointNetworkType = types.EndpointNetworkType(xtv)
+			}
+
 		case strings.EqualFold("EngineFamily", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -36246,6 +36259,19 @@ func awsAwsquery_deserializeDocumentDBProxy(v **types.DBProxy, decoder smithyxml
 			{
 				xtv := string(val)
 				sv.Status = types.DBProxyStatus(xtv)
+			}
+
+		case strings.EqualFold("TargetConnectionNetworkType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.TargetConnectionNetworkType = types.TargetConnectionNetworkType(xtv)
 			}
 
 		case strings.EqualFold("UpdatedDate", t.Name.Local):
@@ -36442,6 +36468,19 @@ func awsAwsquery_deserializeDocumentDBProxyEndpoint(v **types.DBProxyEndpoint, d
 			{
 				xtv := string(val)
 				sv.Endpoint = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("EndpointNetworkType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.EndpointNetworkType = types.EndpointNetworkType(xtv)
 			}
 
 		case strings.EqualFold("IsDefault", t.Name.Local):

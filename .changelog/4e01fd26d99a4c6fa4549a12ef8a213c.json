@@ -1,0 +1,8 @@
+{
+    "id": "4e01fd26-d99a-4c6f-a454-9a12ef8a213c",
+    "type": "feature",
+    "description": "Add support for Federal Information Processing Standards (FIPS) and Federal Risk and Authorization Management Program (FedRAMP) compliance",
+    "modules": [
+        "service/opensearchserverless"
+    ]
+}

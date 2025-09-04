@@ -176,6 +176,11 @@ type CreateStackInput struct {
 	// of: DO_NOTHING , ROLLBACK , or DELETE . You can specify either OnFailure or
 	// DisableRollback , but not both.
 	//
+	// Although the default setting is ROLLBACK , there is one exception. This
+	// exception occurs when a StackSet attempts to deploy a stack instance and the
+	// stack instance fails to create successfully. In this case, the CreateStack call
+	// overrides the default setting and sets the value of OnFailure to DELETE .
+	//
 	// Default: ROLLBACK
 	OnFailure types.OnFailure
 

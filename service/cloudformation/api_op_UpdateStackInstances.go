@@ -18,16 +18,16 @@ import (
 // You can only update stack instances in Amazon Web Services Regions and accounts
 // where they already exist; to create additional stack instances, use [CreateStackInstances].
 //
-// During stack set updates, any parameters overridden for a stack instance aren't
+// During StackSet updates, any parameters overridden for a stack instance aren't
 // updated, but retain their overridden value.
 //
-// You can only update the parameter values that are specified in the stack set;
-// to add or delete a parameter itself, use [UpdateStackSet]to update the stack set template. If
-// you add a parameter to a template, before you can override the parameter value
-// specified in the stack set you must first use [UpdateStackSet]to update all stack instances
-// with the updated template and parameter value specified in the stack set. Once a
-// stack instance has been updated with the new parameter, you can then override
-// the parameter value using UpdateStackInstances .
+// You can only update the parameter values that are specified in the StackSet. To
+// add or delete a parameter itself, use [UpdateStackSet]to update the StackSet template. If you
+// add a parameter to a template, before you can override the parameter value
+// specified in the StackSet you must first use [UpdateStackSet]to update all stack instances with
+// the updated template and parameter value specified in the StackSet. Once a stack
+// instance has been updated with the new parameter, you can then override the
+// parameter value using UpdateStackInstances .
 //
 // The maximum number of organizational unit (OUs) supported by a
 // UpdateStackInstances operation is 50.
@@ -67,13 +67,13 @@ type UpdateStackInstancesInput struct {
 	// This member is required.
 	Regions []string
 
-	// The name or unique ID of the stack set associated with the stack instances.
+	// The name or unique ID of the StackSet associated with the stack instances.
 	//
 	// This member is required.
 	StackSetName *string
 
 	// [Self-managed permissions] The account IDs of one or more Amazon Web Services
-	// accounts for which you want to update parameter values for stack instances. The
+	// accounts in which you want to update parameter values for stack instances. The
 	// overridden parameter values will be applied to all stack instances in the
 	// specified accounts and Amazon Web Services Regions.
 	//
@@ -84,7 +84,7 @@ type UpdateStackInstancesInput struct {
 	// administrator in the organization's management account or as a delegated
 	// administrator in a member account.
 	//
-	// By default, SELF is specified. Use SELF for stack sets with self-managed
+	// By default, SELF is specified. Use SELF for StackSets with self-managed
 	// permissions.
 	//
 	//   - If you are signed in to the management account, specify SELF .
@@ -99,7 +99,7 @@ type UpdateStackInstancesInput struct {
 	// [Register a delegated administrator]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html
 	CallAs types.CallAs
 
-	// [Service-managed permissions] The Organizations accounts for which you want to
+	// [Service-managed permissions] The Organizations accounts in which you want to
 	// update parameter values for stack instances. If your update targets OUs, the
 	// overridden parameter values only apply to the accounts that are currently in the
 	// target OUs and their child OUs. Accounts added to the target OUs and their child
@@ -108,17 +108,17 @@ type UpdateStackInstancesInput struct {
 	// You can specify Accounts or DeploymentTargets , but not both.
 	DeploymentTargets *types.DeploymentTargets
 
-	// The unique identifier for this stack set operation.
+	// The unique identifier for this StackSet operation.
 	//
 	// The operation ID also functions as an idempotency token, to ensure that
-	// CloudFormation performs the stack set operation only once, even if you retry the
-	// request multiple times. You might retry stack set operation requests to ensure
+	// CloudFormation performs the StackSet operation only once, even if you retry the
+	// request multiple times. You might retry StackSet operation requests to ensure
 	// that CloudFormation successfully received them.
 	//
 	// If you don't specify an operation ID, the SDK generates one automatically.
 	OperationId *string
 
-	// Preferences for how CloudFormation performs this stack set operation.
+	// Preferences for how CloudFormation performs this StackSet operation.
 	OperationPreferences *types.StackSetOperationPreferences
 
 	// A list of input parameters whose values you want to update for the specified
@@ -136,22 +136,22 @@ type UpdateStackInstancesInput struct {
 	//   parameter and specify UsePreviousValue as true . (You can't specify both a
 	//   value and set UsePreviousValue to true .)
 	//
-	//   - To set an overridden parameter back to the value specified in the stack
-	//   set, specify a parameter list but don't include the parameter in the list.
+	//   - To set an overridden parameter back to the value specified in the StackSet,
+	//   specify a parameter list but don't include the parameter in the list.
 	//
 	//   - To leave all parameters set to their present values, don't specify this
 	//   property at all.
 	//
-	// During stack set updates, any parameter values overridden for a stack instance
+	// During StackSet updates, any parameter values overridden for a stack instance
 	// aren't updated, but retain their overridden value.
 	//
-	// You can only override the parameter values that are specified in the stack set;
-	// to add or delete a parameter itself, use UpdateStackSet to update the stack set
+	// You can only override the parameter values that are specified in the StackSet.
+	// To add or delete a parameter itself, use UpdateStackSet to update the StackSet
 	// template. If you add a parameter to a template, before you can override the
-	// parameter value specified in the stack set you must first use [UpdateStackSet]to update all
+	// parameter value specified in the StackSet you must first use [UpdateStackSet]to update all
 	// stack instances with the updated template and parameter value specified in the
-	// stack set. Once a stack instance has been updated with the new parameter, you
-	// can then override the parameter value using UpdateStackInstances .
+	// StackSet. Once a stack instance has been updated with the new parameter, you can
+	// then override the parameter value using UpdateStackInstances .
 	//
 	// [UpdateStackSet]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html
 	ParameterOverrides []types.Parameter
@@ -161,7 +161,7 @@ type UpdateStackInstancesInput struct {
 
 type UpdateStackInstancesOutput struct {
 
-	// The unique identifier for this stack set operation.
+	// The unique identifier for this StackSet operation.
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

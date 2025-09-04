@@ -11,8 +11,22 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns summaries of invoked Hooks when a change set or Cloud Control API
-// operation target is provided.
+// Returns summaries of invoked Hooks. For more information, see [View CloudFormation Hooks invocations] in the
+// CloudFormation Hooks User Guide.
+//
+// This operation supports the following parameter combinations:
+//
+//   - No parameters: Returns all Hook invocation summaries.
+//
+//   - TypeArn only: Returns summaries for a specific Hook.
+//
+//   - TypeArn and Status : Returns summaries for a specific Hook filtered by
+//     status.
+//
+//   - TargetId and TargetType : Returns summaries for a specific Hook invocation
+//     target.
+//
+// [View CloudFormation Hooks invocations]: https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/hooks-view-invocations.html
 func (c *Client) ListHookResults(ctx context.Context, params *ListHookResultsInput, optFns ...func(*Options)) (*ListHookResultsOutput, error) {
 	if params == nil {
 		params = &ListHookResultsInput{}
@@ -30,25 +44,42 @@ func (c *Client) ListHookResults(ctx context.Context, params *ListHookResultsInp
 
 type ListHookResultsInput struct {
 
-	// The logical ID of the target the operation is acting on by the Hook. If the
-	// target is a change set, it's the ARN of the change set.
-	//
-	// If the target is a Cloud Control API operation, this will be the
-	// HookRequestToken returned by the Cloud Control API operation request. For more
-	// information on the HookRequestToken , see [ProgressEvent].
-	//
-	// [ProgressEvent]: https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_ProgressEvent.html
-	//
-	// This member is required.
-	TargetId *string
-
-	// The type of operation being targeted by the Hook.
-	//
-	// This member is required.
-	TargetType types.ListHookResultsTargetType
-
 	// A string that identifies the next page of events that you want to retrieve.
 	NextToken *string
+
+	// Filters results by the status of Hook invocations. Can only be used in
+	// combination with TypeArn . Valid values are:
+	//
+	//   - HOOK_IN_PROGRESS : The Hook is currently running.
+	//
+	//   - HOOK_COMPLETE_SUCCEEDED : The Hook completed successfully.
+	//
+	//   - HOOK_COMPLETE_FAILED : The Hook completed but failed validation.
+	//
+	//   - HOOK_FAILED : The Hook encountered an error during execution.
+	Status types.HookStatus
+
+	// Filters results by the unique identifier of the target the Hook was invoked
+	// against.
+	//
+	// For change sets, this is the change set ARN. When the target is a Cloud Control
+	// API operation, this value must be the HookRequestToken returned by the Cloud
+	// Control API request. For more information on the HookRequestToken , see [ProgressEvent].
+	//
+	// Required when TargetType is specified and cannot be used otherwise.
+	//
+	// [ProgressEvent]: https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_ProgressEvent.html
+	TargetId *string
+
+	// Filters results by target type. Currently, only CHANGE_SET and CLOUD_CONTROL
+	// are supported filter options.
+	//
+	// Required when TargetId is specified and cannot be used otherwise.
+	TargetType types.ListHookResultsTargetType
+
+	// Filters results by the ARN of the Hook. Can be used alone or in combination
+	// with Status .
+	TypeArn *string
 
 	noSmithyDocumentSerde
 }
@@ -62,17 +93,10 @@ type ListHookResultsOutput struct {
 	// Pagination token, null or empty if no more results.
 	NextToken *string
 
-	// The logical ID of the target the operation is acting on by the Hook. If the
-	// target is a change set, it's the ARN of the change set.
-	//
-	// If the target is a Cloud Control API operation, this will be the
-	// HooksRequestToken returned by the Cloud Control API operation request. For more
-	// information on the HooksRequestToken , see [ProgressEvent].
-	//
-	// [ProgressEvent]: https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_ProgressEvent.html
+	// The unique identifier of the Hook invocation target.
 	TargetId *string
 
-	// The type of operation being targeted by the Hook.
+	// The target type.
 	TargetType types.ListHookResultsTargetType
 
 	// Metadata pertaining to the operation's result.
@@ -146,9 +170,6 @@ func (c *Client) addOperationListHookResultsMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = addOpListHookResultsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListHookResults(options.Region), middleware.Before); err != nil {

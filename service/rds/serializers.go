@@ -13654,6 +13654,11 @@ func awsAwsquery_serializeOpDocumentCreateDBProxyEndpointInput(v *CreateDBProxyE
 		objectKey.String(*v.DBProxyName)
 	}
 
+	if len(v.EndpointNetworkType) > 0 {
+		objectKey := object.Key("EndpointNetworkType")
+		objectKey.String(string(v.EndpointNetworkType))
+	}
+
 	if v.Tags != nil {
 		objectKey := object.Key("Tags")
 		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {
@@ -13704,6 +13709,11 @@ func awsAwsquery_serializeOpDocumentCreateDBProxyInput(v *CreateDBProxyInput, va
 		objectKey.Boolean(*v.DebugLogging)
 	}
 
+	if len(v.EndpointNetworkType) > 0 {
+		objectKey := object.Key("EndpointNetworkType")
+		objectKey.String(string(v.EndpointNetworkType))
+	}
+
 	if len(v.EngineFamily) > 0 {
 		objectKey := object.Key("EngineFamily")
 		objectKey.String(string(v.EngineFamily))
@@ -13729,6 +13739,11 @@ func awsAwsquery_serializeOpDocumentCreateDBProxyInput(v *CreateDBProxyInput, va
 		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {
 			return err
 		}
+	}
+
+	if len(v.TargetConnectionNetworkType) > 0 {
+		objectKey := object.Key("TargetConnectionNetworkType")
+		objectKey.String(string(v.TargetConnectionNetworkType))
 	}
 
 	if v.VpcSecurityGroupIds != nil {

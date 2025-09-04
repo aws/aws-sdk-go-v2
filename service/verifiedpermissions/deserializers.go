@@ -4228,6 +4228,18 @@ loop:
 			uv = &types.AttributeValueMemberBoolean{Value: mv}
 			break loop
 
+		case "datetime":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DatetimeAttribute to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.AttributeValueMemberDatetime{Value: mv}
+			break loop
+
 		case "decimal":
 			var mv string
 			if value != nil {
@@ -4238,6 +4250,18 @@ loop:
 				mv = jtv
 			}
 			uv = &types.AttributeValueMemberDecimal{Value: mv}
+			break loop
+
+		case "duration":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Duration to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.AttributeValueMemberDuration{Value: mv}
 			break loop
 
 		case "entityIdentifier":

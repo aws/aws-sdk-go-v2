@@ -2419,6 +2419,18 @@ type DBProxy struct {
 	// endpoint value in the connection string for a database client application.
 	Endpoint *string
 
+	// The network type of the DB proxy endpoint. The network type determines the IP
+	// version that the proxy endpoint supports.
+	//
+	// Valid values:
+	//
+	//   - IPV4 - The proxy endpoint supports IPv4 only.
+	//
+	//   - IPV6 - The proxy endpoint supports IPv6 only.
+	//
+	//   - DUAL - The proxy endpoint supports both IPv4 and IPv6.
+	EndpointNetworkType EndpointNetworkType
+
 	// The kinds of databases that the proxy can connect to. This value determines
 	// which database network protocol the proxy recognizes when it interprets network
 	// traffic to and from the database. MYSQL supports Aurora MySQL, RDS for MariaDB,
@@ -2448,6 +2460,17 @@ type DBProxy struct {
 	// ready to handle requests. Other values indicate that you must wait for the proxy
 	// to be ready, or take some action to resolve an issue.
 	Status DBProxyStatus
+
+	// The network type that the proxy uses to connect to the target database. The
+	// network type determines the IP version that the proxy uses for connections to
+	// the database.
+	//
+	// Valid values:
+	//
+	//   - IPV4 - The proxy connects to the database using IPv4 only.
+	//
+	//   - IPV6 - The proxy connects to the database using IPv6 only.
+	TargetConnectionNetworkType TargetConnectionNetworkType
 
 	// The date and time when the proxy was last updated.
 	UpdatedDate *time.Time
@@ -2491,6 +2514,18 @@ type DBProxyEndpoint struct {
 	// The endpoint that you can use to connect to the DB proxy. You include the
 	// endpoint value in the connection string for a database client application.
 	Endpoint *string
+
+	// The network type of the DB proxy endpoint. The network type determines the IP
+	// version that the proxy endpoint supports.
+	//
+	// Valid values:
+	//
+	//   - IPV4 - The proxy endpoint supports IPv4 only.
+	//
+	//   - IPV6 - The proxy endpoint supports IPv6 only.
+	//
+	//   - DUAL - The proxy endpoint supports both IPv4 and IPv6.
+	EndpointNetworkType EndpointNetworkType
 
 	// Indicates whether this endpoint is the default endpoint for the associated DB
 	// proxy. Default DB proxy endpoints always have read/write capability. Other

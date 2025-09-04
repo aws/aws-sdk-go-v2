@@ -45,6 +45,9 @@ type StartProtectedJobInput struct {
 	// This member is required.
 	Type types.ProtectedJobType
 
+	// The compute configuration for the protected job.
+	ComputeConfiguration types.ProtectedJobComputeConfiguration
+
 	// The details needed to write the job results.
 	ResultConfiguration *types.ProtectedJobResultConfigurationInput
 

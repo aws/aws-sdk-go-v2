@@ -48,6 +48,27 @@ type CreateDBProxyEndpointInput struct {
 	// This member is required.
 	VpcSubnetIds []string
 
+	// The network type of the DB proxy endpoint. The network type determines the IP
+	// version that the proxy endpoint supports.
+	//
+	// Valid values:
+	//
+	//   - IPV4 - The proxy endpoint supports IPv4 only.
+	//
+	//   - IPV6 - The proxy endpoint supports IPv6 only.
+	//
+	//   - DUAL - The proxy endpoint supports both IPv4 and IPv6.
+	//
+	// Default: IPV4
+	//
+	// Constraints:
+	//
+	//   - If you specify IPV6 or DUAL , the VPC and all subnets must have an IPv6 CIDR
+	//   block.
+	//
+	//   - If you specify IPV6 or DUAL , the VPC tenancy cannot be dedicated .
+	EndpointNetworkType types.EndpointNetworkType
+
 	// A list of tags.
 	//
 	// For more information, see [Tagging Amazon RDS resources] in the Amazon RDS User Guide or [Tagging Amazon Aurora and Amazon RDS resources] in the Amazon

@@ -12,7 +12,8 @@ import (
 )
 
 // Returns attributes for one or more collections, including the collection
-// endpoint and the OpenSearch Dashboards endpoint. For more information, see [Creating and managing Amazon OpenSearch Serverless collections].
+// endpoint, the OpenSearch Dashboards endpoint, and FIPS-compliant endpoints. For
+// more information, see [Creating and managing Amazon OpenSearch Serverless collections].
 //
 // [Creating and managing Amazon OpenSearch Serverless collections]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html
 func (c *Client) BatchGetCollection(ctx context.Context, params *BatchGetCollectionInput, optFns ...func(*Options)) (*BatchGetCollectionOutput, error) {

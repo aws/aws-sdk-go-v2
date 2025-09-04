@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns summary information about extension that have been registered with
-// CloudFormation.
+// Returns summary information about all extensions, including your private
+// resource types, modules, and Hooks as well as all public extensions from Amazon
+// Web Services and third-party publishers.
 func (c *Client) ListTypes(ctx context.Context, params *ListTypesInput, optFns ...func(*Options)) (*ListTypesOutput, error) {
 	if params == nil {
 		params = &ListTypesInput{}

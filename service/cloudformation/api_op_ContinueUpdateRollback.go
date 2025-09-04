@@ -10,20 +10,24 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// For a specified stack that's in the UPDATE_ROLLBACK_FAILED state, continues
-// rolling it back to the UPDATE_ROLLBACK_COMPLETE state. Depending on the cause
-// of the failure, you can manually [fix the error]and continue the rollback. By continuing the
-// rollback, you can return your stack to a working state (the
-// UPDATE_ROLLBACK_COMPLETE state), and then try to update the stack again.
+// Continues rolling back a stack from UPDATE_ROLLBACK_FAILED to
+// UPDATE_ROLLBACK_COMPLETE state. Depending on the cause of the failure, you can
+// manually fix the error and continue the rollback. By continuing the rollback,
+// you can return your stack to a working state (the UPDATE_ROLLBACK_COMPLETE
+// state) and then try to update the stack again.
 //
-// A stack goes into the UPDATE_ROLLBACK_FAILED state when CloudFormation can't
-// roll back all changes after a failed stack update. For example, you might have a
-// stack that's rolling back to an old database instance that was deleted outside
-// of CloudFormation. Because CloudFormation doesn't know the database was deleted,
-// it assumes that the database instance still exists and attempts to roll back to
-// it, causing the update rollback to fail.
+// A stack enters the UPDATE_ROLLBACK_FAILED state when CloudFormation can't roll
+// back all changes after a failed stack update. For example, this might occur when
+// a stack attempts to roll back to an old database that was deleted outside of
+// CloudFormation. Because CloudFormation doesn't know the instance was deleted, it
+// assumes the instance still exists and attempts to roll back to it, causing the
+// update rollback to fail.
 //
-// [fix the error]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed
+// For more information, see [Continue rolling back an update] in the CloudFormation User Guide. For information
+// for troubleshooting a failed update rollback, see [Update rollback failed].
+//
+// [Continue rolling back an update]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html
+// [Update rollback failed]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed
 func (c *Client) ContinueUpdateRollback(ctx context.Context, params *ContinueUpdateRollbackInput, optFns ...func(*Options)) (*ContinueUpdateRollbackOutput, error) {
 	if params == nil {
 		params = &ContinueUpdateRollbackInput{}

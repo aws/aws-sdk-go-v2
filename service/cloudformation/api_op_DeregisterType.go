@@ -27,7 +27,10 @@ import (
 //
 // To view the deprecation status of an extension or extension version, use [DescribeType].
 //
+// For more information, see [Remove third-party private extensions from your account] in the CloudFormation User Guide.
+//
 // [DescribeType]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html
+// [Remove third-party private extensions from your account]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-private-deregister-extension.html
 func (c *Client) DeregisterType(ctx context.Context, params *DeregisterTypeInput, optFns ...func(*Options)) (*DeregisterTypeOutput, error) {
 	if params == nil {
 		params = &DeregisterTypeInput{}

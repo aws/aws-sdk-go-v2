@@ -32,12 +32,12 @@ func (c *Client) DescribeStackSetOperation(ctx context.Context, params *Describe
 
 type DescribeStackSetOperationInput struct {
 
-	// The unique ID of the stack set operation.
+	// The unique ID of the StackSet operation.
 	//
 	// This member is required.
 	OperationId *string
 
-	// The name or the unique stack ID of the stack set for the stack operation.
+	// The name or the unique stack ID of the StackSet for the stack operation.
 	//
 	// This member is required.
 	StackSetName *string
@@ -46,7 +46,7 @@ type DescribeStackSetOperationInput struct {
 	// administrator in the organization's management account or as a delegated
 	// administrator in a member account.
 	//
-	// By default, SELF is specified. Use SELF for stack sets with self-managed
+	// By default, SELF is specified. Use SELF for StackSets with self-managed
 	// permissions.
 	//
 	//   - If you are signed in to the management account, specify SELF .
@@ -66,7 +66,7 @@ type DescribeStackSetOperationInput struct {
 
 type DescribeStackSetOperationOutput struct {
 
-	// The specified stack set operation.
+	// The specified StackSet operation.
 	StackSetOperation *types.StackSetOperation
 
 	// Metadata pertaining to the operation's result.

@@ -43,7 +43,9 @@ type ActionIdentifier struct {
 // The following types satisfy this interface:
 //
 //	AttributeValueMemberBoolean
+//	AttributeValueMemberDatetime
 //	AttributeValueMemberDecimal
+//	AttributeValueMemberDuration
 //	AttributeValueMemberEntityIdentifier
 //	AttributeValueMemberIpaddr
 //	AttributeValueMemberLong
@@ -72,6 +74,19 @@ type AttributeValueMemberBoolean struct {
 
 func (*AttributeValueMemberBoolean) isAttributeValue() {}
 
+// An attribute value of [datetime] type.
+//
+// Example: {"datetime": "2024-10-15T11:35:00Z"}
+//
+// [datetime]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-datetime
+type AttributeValueMemberDatetime struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*AttributeValueMemberDatetime) isAttributeValue() {}
+
 // An attribute value of [decimal] type.
 //
 // Example: {"decimal": "1.1"}
@@ -84,6 +99,19 @@ type AttributeValueMemberDecimal struct {
 }
 
 func (*AttributeValueMemberDecimal) isAttributeValue() {}
+
+// An attribute value of [duration] type.
+//
+// Example: {"duration": "1h30m"}
+//
+// [duration]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-duration
+type AttributeValueMemberDuration struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*AttributeValueMemberDuration) isAttributeValue() {}
 
 // An attribute value of type [EntityIdentifier].
 //
@@ -1915,8 +1943,6 @@ type TemplateLinkedPolicyDefinitionDetail struct {
 }
 
 // Contains information about a policy created by instantiating a policy template.
-//
-// This
 type TemplateLinkedPolicyDefinitionItem struct {
 
 	// The unique identifier of the policy template used to create this policy.

@@ -13097,6 +13097,32 @@ func awsAwsquery_deserializeDocumentHookResultSummary(v **types.HookResultSummar
 				sv.FailureMode = types.HookFailureMode(xtv)
 			}
 
+		case strings.EqualFold("HookExecutionTarget", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.HookExecutionTarget = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("HookResultId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.HookResultId = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("HookStatusReason", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -13123,6 +13149,23 @@ func awsAwsquery_deserializeDocumentHookResultSummary(v **types.HookResultSummar
 				sv.InvocationPoint = types.HookInvocationPoint(xtv)
 			}
 
+		case strings.EqualFold("InvokedAt", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				t, err := smithytime.ParseDateTime(xtv)
+				if err != nil {
+					return err
+				}
+				sv.InvokedAt = ptr.Time(t)
+			}
+
 		case strings.EqualFold("Status", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -13134,6 +13177,45 @@ func awsAwsquery_deserializeDocumentHookResultSummary(v **types.HookResultSummar
 			{
 				xtv := string(val)
 				sv.Status = types.HookStatus(xtv)
+			}
+
+		case strings.EqualFold("TargetId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.TargetId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("TargetType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.TargetType = types.ListHookResultsTargetType(xtv)
+			}
+
+		case strings.EqualFold("TypeArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.TypeArn = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("TypeConfigurationVersionId", t.Name.Local):
@@ -18076,6 +18158,19 @@ func awsAwsquery_deserializeDocumentStackEvent(v **types.StackEvent, decoder smi
 			{
 				xtv := string(val)
 				sv.HookFailureMode = types.HookFailureMode(xtv)
+			}
+
+		case strings.EqualFold("HookInvocationId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.HookInvocationId = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("HookInvocationPoint", t.Name.Local):

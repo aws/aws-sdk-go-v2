@@ -810,6 +810,26 @@ func (ProtectedJobType) Values() []ProtectedJobType {
 	}
 }
 
+type ProtectedJobWorkerComputeType string
+
+// Enum values for ProtectedJobWorkerComputeType
+const (
+	ProtectedJobWorkerComputeTypeCr1x ProtectedJobWorkerComputeType = "CR.1X"
+	ProtectedJobWorkerComputeTypeCr4x ProtectedJobWorkerComputeType = "CR.4X"
+)
+
+// Values returns all known values for ProtectedJobWorkerComputeType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProtectedJobWorkerComputeType) Values() []ProtectedJobWorkerComputeType {
+	return []ProtectedJobWorkerComputeType{
+		"CR.1X",
+		"CR.4X",
+	}
+}
+
 type ProtectedQueryStatus string
 
 // Enum values for ProtectedQueryStatus

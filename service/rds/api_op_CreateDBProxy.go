@@ -70,6 +70,27 @@ type CreateDBProxyInput struct {
 	// troubleshoot connection or performance issues.
 	DebugLogging *bool
 
+	// The network type of the DB proxy endpoint. The network type determines the IP
+	// version that the proxy endpoint supports.
+	//
+	// Valid values:
+	//
+	//   - IPV4 - The proxy endpoint supports IPv4 only.
+	//
+	//   - IPV6 - The proxy endpoint supports IPv6 only.
+	//
+	//   - DUAL - The proxy endpoint supports both IPv4 and IPv6.
+	//
+	// Default: IPV4
+	//
+	// Constraints:
+	//
+	//   - If you specify IPV6 or DUAL , the VPC and all subnets must have an IPv6 CIDR
+	//   block.
+	//
+	//   - If you specify IPV6 or DUAL , the VPC tenancy cannot be dedicated .
+	EndpointNetworkType types.EndpointNetworkType
+
 	// The number of seconds that a connection to the proxy can be inactive before the
 	// proxy disconnects it. You can set this value higher or lower than the connection
 	// timeout limit for the associated database.
@@ -83,6 +104,27 @@ type CreateDBProxyInput struct {
 	// An optional set of key-value pairs to associate arbitrary data of your choosing
 	// with the proxy.
 	Tags []types.Tag
+
+	// The network type that the proxy uses to connect to the target database. The
+	// network type determines the IP version that the proxy uses for connections to
+	// the database.
+	//
+	// Valid values:
+	//
+	//   - IPV4 - The proxy connects to the database using IPv4 only.
+	//
+	//   - IPV6 - The proxy connects to the database using IPv6 only.
+	//
+	// Default: IPV4
+	//
+	// Constraints:
+	//
+	//   - If you specify IPV6 , the database must support dual-stack mode. RDS doesn't
+	//   support IPv6-only databases.
+	//
+	//   - All targets registered with the proxy must be compatible with the specified
+	//   network type.
+	TargetConnectionNetworkType types.TargetConnectionNetworkType
 
 	// One or more VPC security group IDs to associate with the new proxy.
 	VpcSecurityGroupIds []string

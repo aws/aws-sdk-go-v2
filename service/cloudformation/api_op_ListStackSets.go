@@ -11,22 +11,22 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns summary information about stack sets that are associated with the user.
+// Returns summary information about StackSets that are associated with the user.
 //
 // This API provides strongly consistent reads meaning it will always return the
 // most up-to-date data.
 //
 //   - [Self-managed permissions] If you set the CallAs parameter to SELF while
 //     signed in to your Amazon Web Services account, ListStackSets returns all
-//     self-managed stack sets in your Amazon Web Services account.
+//     self-managed StackSets in your Amazon Web Services account.
 //
 //   - [Service-managed permissions] If you set the CallAs parameter to SELF while
 //     signed in to the organization's management account, ListStackSets returns all
-//     stack sets in the management account.
+//     StackSets in the management account.
 //
 //   - [Service-managed permissions] If you set the CallAs parameter to
 //     DELEGATED_ADMIN while signed in to your member account, ListStackSets returns
-//     all stack sets with service-managed permissions in the management account.
+//     all StackSets with service-managed permissions in the management account.
 func (c *Client) ListStackSets(ctx context.Context, params *ListStackSetsInput, optFns ...func(*Options)) (*ListStackSetsOutput, error) {
 	if params == nil {
 		params = &ListStackSetsInput{}
@@ -48,7 +48,7 @@ type ListStackSetsInput struct {
 	// administrator in the management account or as a delegated administrator in a
 	// member account.
 	//
-	// By default, SELF is specified. Use SELF for stack sets with self-managed
+	// By default, SELF is specified. Use SELF for StackSets with self-managed
 	// permissions.
 	//
 	//   - If you are signed in to the management account, specify SELF .
@@ -76,7 +76,7 @@ type ListStackSetsInput struct {
 	// previous response object's NextToken parameter is set to null .
 	NextToken *string
 
-	// The status of the stack sets that you want to get summary information about.
+	// The status of the StackSets that you want to get summary information about.
 	Status types.StackSetStatus
 
 	noSmithyDocumentSerde
@@ -91,7 +91,7 @@ type ListStackSetsOutput struct {
 	NextToken *string
 
 	// A list of StackSetSummary structures that contain information about the user's
-	// stack sets.
+	// StackSets.
 	Summaries []types.StackSetSummary
 
 	// Metadata pertaining to the operation's result.

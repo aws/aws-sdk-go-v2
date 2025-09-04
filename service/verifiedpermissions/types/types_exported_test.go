@@ -14,7 +14,13 @@ func ExampleAttributeValue_outputUsage() {
 	case *types.AttributeValueMemberBoolean:
 		_ = v.Value // Value is bool
 
+	case *types.AttributeValueMemberDatetime:
+		_ = v.Value // Value is string
+
 	case *types.AttributeValueMemberDecimal:
+		_ = v.Value // Value is string
+
+	case *types.AttributeValueMemberDuration:
 		_ = v.Value // Value is string
 
 	case *types.AttributeValueMemberEntityIdentifier:
@@ -45,6 +51,8 @@ func ExampleAttributeValue_outputUsage() {
 }
 
 var _ *types.EntityIdentifier
+var _ *string
+var _ *string
 var _ *string
 var _ *string
 var _ *string

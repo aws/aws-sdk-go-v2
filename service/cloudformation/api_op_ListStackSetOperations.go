@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns summary information about operations performed on a stack set.
+// Returns summary information about operations performed on a StackSet.
 //
 // This API provides eventually consistent reads meaning it may take some time but
 // will eventually return the most up-to-date data.
@@ -32,7 +32,7 @@ func (c *Client) ListStackSetOperations(ctx context.Context, params *ListStackSe
 
 type ListStackSetOperationsInput struct {
 
-	// The name or unique ID of the stack set that you want to get operation summaries
+	// The name or unique ID of the StackSet that you want to get operation summaries
 	// for.
 	//
 	// This member is required.
@@ -42,7 +42,7 @@ type ListStackSetOperationsInput struct {
 	// administrator in the organization's management account or as a delegated
 	// administrator in a member account.
 	//
-	// By default, SELF is specified. Use SELF for stack sets with self-managed
+	// By default, SELF is specified. Use SELF for StackSets with self-managed
 	// permissions.
 	//
 	//   - If you are signed in to the management account, specify SELF .
@@ -82,7 +82,7 @@ type ListStackSetOperationsOutput struct {
 	NextToken *string
 
 	// A list of StackSetOperationSummary structures that contain summary information
-	// about operations for the specified stack set.
+	// about operations for the specified StackSet.
 	Summaries []types.StackSetOperationSummary
 
 	// Metadata pertaining to the operation's result.

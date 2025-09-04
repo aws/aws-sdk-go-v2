@@ -4533,6 +4533,37 @@ const (
 	InstanceTypeR8iFlex8xlarge     InstanceType = "r8i-flex.8xlarge"
 	InstanceTypeR8iFlex12xlarge    InstanceType = "r8i-flex.12xlarge"
 	InstanceTypeR8iFlex16xlarge    InstanceType = "r8i-flex.16xlarge"
+	InstanceTypeM8iLarge           InstanceType = "m8i.large"
+	InstanceTypeM8iXlarge          InstanceType = "m8i.xlarge"
+	InstanceTypeM8i2xlarge         InstanceType = "m8i.2xlarge"
+	InstanceTypeM8i4xlarge         InstanceType = "m8i.4xlarge"
+	InstanceTypeM8i8xlarge         InstanceType = "m8i.8xlarge"
+	InstanceTypeM8i12xlarge        InstanceType = "m8i.12xlarge"
+	InstanceTypeM8i16xlarge        InstanceType = "m8i.16xlarge"
+	InstanceTypeM8i24xlarge        InstanceType = "m8i.24xlarge"
+	InstanceTypeM8i32xlarge        InstanceType = "m8i.32xlarge"
+	InstanceTypeM8i48xlarge        InstanceType = "m8i.48xlarge"
+	InstanceTypeM8i96xlarge        InstanceType = "m8i.96xlarge"
+	InstanceTypeM8iMetal48xl       InstanceType = "m8i.metal-48xl"
+	InstanceTypeM8iMetal96xl       InstanceType = "m8i.metal-96xl"
+	InstanceTypeM8iFlexLarge       InstanceType = "m8i-flex.large"
+	InstanceTypeM8iFlexXlarge      InstanceType = "m8i-flex.xlarge"
+	InstanceTypeM8iFlex2xlarge     InstanceType = "m8i-flex.2xlarge"
+	InstanceTypeM8iFlex4xlarge     InstanceType = "m8i-flex.4xlarge"
+	InstanceTypeM8iFlex8xlarge     InstanceType = "m8i-flex.8xlarge"
+	InstanceTypeM8iFlex12xlarge    InstanceType = "m8i-flex.12xlarge"
+	InstanceTypeM8iFlex16xlarge    InstanceType = "m8i-flex.16xlarge"
+	InstanceTypeI8geLarge          InstanceType = "i8ge.large"
+	InstanceTypeI8geXlarge         InstanceType = "i8ge.xlarge"
+	InstanceTypeI8ge2xlarge        InstanceType = "i8ge.2xlarge"
+	InstanceTypeI8ge3xlarge        InstanceType = "i8ge.3xlarge"
+	InstanceTypeI8ge6xlarge        InstanceType = "i8ge.6xlarge"
+	InstanceTypeI8ge12xlarge       InstanceType = "i8ge.12xlarge"
+	InstanceTypeI8ge18xlarge       InstanceType = "i8ge.18xlarge"
+	InstanceTypeI8ge24xlarge       InstanceType = "i8ge.24xlarge"
+	InstanceTypeI8ge48xlarge       InstanceType = "i8ge.48xlarge"
+	InstanceTypeI8geMetal24xl      InstanceType = "i8ge.metal-24xl"
+	InstanceTypeI8geMetal48xl      InstanceType = "i8ge.metal-48xl"
 )
 
 // Values returns all known values for InstanceType. Note that this can be
@@ -5526,6 +5557,37 @@ func (InstanceType) Values() []InstanceType {
 		"r8i-flex.8xlarge",
 		"r8i-flex.12xlarge",
 		"r8i-flex.16xlarge",
+		"m8i.large",
+		"m8i.xlarge",
+		"m8i.2xlarge",
+		"m8i.4xlarge",
+		"m8i.8xlarge",
+		"m8i.12xlarge",
+		"m8i.16xlarge",
+		"m8i.24xlarge",
+		"m8i.32xlarge",
+		"m8i.48xlarge",
+		"m8i.96xlarge",
+		"m8i.metal-48xl",
+		"m8i.metal-96xl",
+		"m8i-flex.large",
+		"m8i-flex.xlarge",
+		"m8i-flex.2xlarge",
+		"m8i-flex.4xlarge",
+		"m8i-flex.8xlarge",
+		"m8i-flex.12xlarge",
+		"m8i-flex.16xlarge",
+		"i8ge.large",
+		"i8ge.xlarge",
+		"i8ge.2xlarge",
+		"i8ge.3xlarge",
+		"i8ge.6xlarge",
+		"i8ge.12xlarge",
+		"i8ge.18xlarge",
+		"i8ge.24xlarge",
+		"i8ge.48xlarge",
+		"i8ge.metal-24xl",
+		"i8ge.metal-48xl",
 	}
 }
 

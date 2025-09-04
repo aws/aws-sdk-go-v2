@@ -5506,6 +5506,11 @@ func awsAwsjson10_deserializeDocumentCollectionDetail(v **types.CollectionDetail
 				sv.FailureMessage = ptr.String(jtv)
 			}
 
+		case "fipsEndpoints":
+			if err := awsAwsjson10_deserializeDocumentFipsEndpoints(&sv.FipsEndpoints, value); err != nil {
+				return err
+			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6378,6 +6383,55 @@ func awsAwsjson10_deserializeDocumentEffectiveLifecyclePolicyErrorDetails(v *[]t
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentFipsEndpoints(v **types.FipsEndpoints, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FipsEndpoints
+	if *v == nil {
+		sv = &types.FipsEndpoints{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "collectionEndpoint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CollectionEndpoint = ptr.String(jtv)
+			}
+
+		case "dashboardEndpoint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.DashboardEndpoint = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

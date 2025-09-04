@@ -4000,6 +4000,9 @@ type ProtectedJob struct {
 	// This member is required.
 	Status ProtectedJobStatus
 
+	// The compute configuration for the protected job.
+	ComputeConfiguration ProtectedJobComputeConfiguration
+
 	//  The error from the protected job.
 	Error *ProtectedJobError
 
@@ -4017,6 +4020,24 @@ type ProtectedJob struct {
 
 	noSmithyDocumentSerde
 }
+
+// The configuration of the compute resources for a PySpark job.
+//
+// The following types satisfy this interface:
+//
+//	ProtectedJobComputeConfigurationMemberWorker
+type ProtectedJobComputeConfiguration interface {
+	isProtectedJobComputeConfiguration()
+}
+
+// The worker configuration for the compute environment.
+type ProtectedJobComputeConfigurationMemberWorker struct {
+	Value ProtectedJobWorkerComputeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ProtectedJobComputeConfigurationMemberWorker) isProtectedJobComputeConfiguration() {}
 
 // The protected job configuration details.
 //
@@ -4311,6 +4332,22 @@ type ProtectedJobSummary struct {
 	//
 	// This member is required.
 	Status ProtectedJobStatus
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of the compute resources for a PySpark job.
+type ProtectedJobWorkerComputeConfiguration struct {
+
+	// The number of workers for a PySpark job.
+	//
+	// This member is required.
+	Number *int32
+
+	// The worker compute configuration type.
+	//
+	// This member is required.
+	Type ProtectedJobWorkerComputeType
 
 	noSmithyDocumentSerde
 }
@@ -5131,6 +5168,10 @@ type ValidationExceptionField struct {
 type WorkerComputeConfiguration struct {
 
 	//  The number of workers.
+	//
+	// SQL queries support a minimum value of 2 and a maximum value of 400.
+	//
+	// PySpark jobs support a minimum value of 4 and a maximum value of 128.
 	Number *int32
 
 	//  The worker compute configuration type.
@@ -5171,6 +5212,7 @@ func (*UnknownUnionMember) isPrivacyBudgetTemplateParametersInput()             
 func (*UnknownUnionMember) isPrivacyBudgetTemplateParametersOutput()               {}
 func (*UnknownUnionMember) isPrivacyBudgetTemplateUpdateParameters()               {}
 func (*UnknownUnionMember) isPrivacyImpact()                                       {}
+func (*UnknownUnionMember) isProtectedJobComputeConfiguration()                    {}
 func (*UnknownUnionMember) isProtectedJobConfigurationDetails()                    {}
 func (*UnknownUnionMember) isProtectedJobOutput()                                  {}
 func (*UnknownUnionMember) isProtectedJobOutputConfigurationInput()                {}

@@ -58,7 +58,7 @@ type DescribeChangeSetHooksOutput struct {
 	// The change set name.
 	ChangeSetName *string
 
-	// List of hook objects.
+	// List of Hook objects.
 	Hooks []types.ChangeSetHook
 
 	// Pagination token, null or empty if no more results.

@@ -6176,6 +6176,13 @@ func awsRestjson1_serializeOpDocumentStartProtectedJobInput(v *StartProtectedJob
 	object := value.Object()
 	defer object.Close()
 
+	if v.ComputeConfiguration != nil {
+		ok := object.Key("computeConfiguration")
+		if err := awsRestjson1_serializeDocumentProtectedJobComputeConfiguration(v.ComputeConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.JobParameters != nil {
 		ok := object.Key("jobParameters")
 		if err := awsRestjson1_serializeDocumentProtectedJobParameters(v.JobParameters, ok); err != nil {
@@ -9216,6 +9223,24 @@ func awsRestjson1_serializeDocumentPrivacyBudgetTemplateUpdateParameters(v types
 	return nil
 }
 
+func awsRestjson1_serializeDocumentProtectedJobComputeConfiguration(v types.ProtectedJobComputeConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.ProtectedJobComputeConfigurationMemberWorker:
+		av := object.Key("worker")
+		if err := awsRestjson1_serializeDocumentProtectedJobWorkerComputeConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentProtectedJobMemberOutputConfigurationInput(v *types.ProtectedJobMemberOutputConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -9284,6 +9309,23 @@ func awsRestjson1_serializeDocumentProtectedJobS3OutputConfigurationInput(v *typ
 	if v.KeyPrefix != nil {
 		ok := object.Key("keyPrefix")
 		ok.String(*v.KeyPrefix)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentProtectedJobWorkerComputeConfiguration(v *types.ProtectedJobWorkerComputeConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Number != nil {
+		ok := object.Key("number")
+		ok.Integer(*v.Number)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
 	}
 
 	return nil

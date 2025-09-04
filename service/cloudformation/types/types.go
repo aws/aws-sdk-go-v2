@@ -8,56 +8,56 @@ import (
 )
 
 // Structure that contains the results of the account gate function which
-// CloudFormation invokes, if present, before proceeding with a stack set operation
+// CloudFormation invokes, if present, before proceeding with a StackSet operation
 // in an account and Region.
 //
 // For each account and Region, CloudFormation lets you specify a Lambda function
 // that encapsulates any requirements that must be met before CloudFormation can
-// proceed with a stack set operation in that account and Region. CloudFormation
-// invokes the function each time a stack set operation is requested for that
+// proceed with a StackSet operation in that account and Region. CloudFormation
+// invokes the function each time a StackSet operation is requested for that
 // account and Region; if the function returns FAILED , CloudFormation cancels the
-// operation in that account and Region, and sets the stack set operation result
+// operation in that account and Region, and sets the StackSet operation result
 // status for that account and Region to FAILED .
 //
-// For more information, see [Configuring a target account gate in StackSets] in the CloudFormation User Guide.
+// For more information, see [Prevent failed StackSets deployments using target account gates] in the CloudFormation User Guide.
 //
-// [Configuring a target account gate in StackSets]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-account-gating.html
+// [Prevent failed StackSets deployments using target account gates]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-account-gating.html
 type AccountGateResult struct {
 
 	// The status of the account gate function.
 	//
 	//   - SUCCEEDED : The account gate function has determined that the account and
-	//   Region passes any requirements for a stack set operation to occur.
-	//   CloudFormation proceeds with the stack operation in that account and Region.
+	//   Region passes any requirements for a StackSet operation to occur. CloudFormation
+	//   proceeds with the stack operation in that account and Region.
 	//
 	//   - FAILED : The account gate function has determined that the account and
-	//   Region doesn't meet the requirements for a stack set operation to occur.
-	//   CloudFormation cancels the stack set operation in that account and Region, and
-	//   sets the stack set operation result status for that account and Region to
+	//   Region doesn't meet the requirements for a StackSet operation to occur.
+	//   CloudFormation cancels the StackSet operation in that account and Region, and
+	//   sets the StackSet operation result status for that account and Region to
 	//   FAILED .
 	//
 	//   - SKIPPED : CloudFormation has skipped calling the account gate function for
 	//   this account and Region, for one of the following reasons:
 	//
 	//   - An account gate function hasn't been specified for the account and Region.
-	//   CloudFormation proceeds with the stack set operation in this account and Region.
+	//   CloudFormation proceeds with the StackSet operation in this account and Region.
 	//
-	//   - The AWSCloudFormationStackSetExecutionRole of the stack set administration
-	//   account lacks permissions to invoke the function. CloudFormation proceeds with
-	//   the stack set operation in this account and Region.
+	//   - The AWSCloudFormationStackSetExecutionRole of the administration account
+	//   lacks permissions to invoke the function. CloudFormation proceeds with the
+	//   StackSet operation in this account and Region.
 	//
 	//   - Either no action is necessary, or no action is possible, on the stack.
-	//   CloudFormation skips the stack set operation in this account and Region.
+	//   CloudFormation skips the StackSet operation in this account and Region.
 	Status AccountGateStatus
 
 	// The reason for the account gate status assigned to this account and Region for
-	// the stack set operation.
+	// the StackSet operation.
 	StatusReason *string
 
 	noSmithyDocumentSerde
 }
 
-// The AccountLimit data type.
+// Describes the current CloudFormation limits for your account.
 //
 // CloudFormation has the following limits per account:
 //
@@ -67,8 +67,7 @@ type AccountGateResult struct {
 //
 //   - Number of stack outputs
 //
-// For more information about these account limits, and other CloudFormation
-// limits, see [Understand CloudFormation quotas]in the CloudFormation User Guide.
+// For more information, see [Understand CloudFormation quotas] in the CloudFormation User Guide.
 //
 // [Understand CloudFormation quotas]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html
 type AccountLimit struct {
@@ -84,9 +83,11 @@ type AccountLimit struct {
 	noSmithyDocumentSerde
 }
 
-// [Service-managed permissions] Describes whether StackSets automatically deploys
-// to Organizations accounts that are added to a target organization or
-// organizational unit (OU).
+// Describes whether StackSets automatically deploys to Organizations accounts
+// that are added to a target organization or organizational unit (OU). For more
+// information, see [Enable or disable automatic deployments for StackSets in Organizations]in the CloudFormation User Guide.
+//
+// [Enable or disable automatic deployments for StackSets in Organizations]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-manage-auto-deployment.html
 type AutoDeployment struct {
 
 	// If set to true , StackSets automatically deploys additional stack instances to
@@ -140,10 +141,10 @@ type Change struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the resource, the hook, and the hook version to be invoked.
+// Specifies the resource, the Hook, and the Hook version to be invoked.
 type ChangeSetHook struct {
 
-	// Specify the hook failure mode for non-compliant resources in the followings
+	// Specify the Hook failure mode for non-compliant resources in the followings
 	// ways.
 	//
 	//   - FAIL Stops provisioning resources.
@@ -151,20 +152,20 @@ type ChangeSetHook struct {
 	//   - WARN Allows provisioning to continue with a warning message.
 	FailureMode HookFailureMode
 
-	// Specifies the points in provisioning logic where a hook is invoked.
+	// The specific point in the provisioning process where the Hook is invoked.
 	InvocationPoint HookInvocationPoint
 
-	// Specifies details about the target that the hook will run against.
+	// Specifies details about the target that the Hook will run against.
 	TargetDetails *ChangeSetHookTargetDetails
 
 	// The version ID of the type configuration.
 	TypeConfigurationVersionId *string
 
-	// The unique name for your hook. Specifies a three-part namespace for your hook,
+	// The unique name for your Hook. Specifies a three-part namespace for your Hook,
 	// with a recommended pattern of Organization::Service::Hook .
 	//
 	// The following organization namespaces are reserved and can't be used in your
-	// hook type names:
+	// Hook type names:
 	//
 	//   - Alexa
 	//
@@ -202,7 +203,7 @@ type ChangeSetHookResourceTargetDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies target details for an activated hook.
+// Specifies target details for an activated Hook.
 type ChangeSetHookTargetDetails struct {
 
 	// Required if TargetType is RESOURCE .
@@ -265,53 +266,71 @@ type ChangeSetSummary struct {
 	noSmithyDocumentSerde
 }
 
-// [Service-managed permissions] The Organizations accounts to which StackSets
-// deploys. StackSets doesn't deploy stack instances to the organization management
+// Specifies the Organizations accounts where you want to create, update, or
+// delete stack instances. You can target either your entire organization or
+// specific accounts using organizational units (OUs) and account filter options.
+//
+// CloudFormation doesn't deploy stack instances to the organization management
 // account, even if the organization management account is in your organization or
 // in an OU in your organization.
 //
-// For update operations, you can specify either Accounts or OrganizationalUnitIds
-// . For create and delete operations, specify OrganizationalUnitIds .
+// When performing create operations, if you specify both OrganizationalUnitIds
+// and Accounts , you must also specify the AccountFilterType property.
 type DeploymentTargets struct {
 
-	// Limit deployment targets to individual accounts or include additional accounts
-	// with provided OUs.
+	// Refines which accounts will have stack operations performed on them by
+	// specifying how to use the Accounts and OrganizationalUnitIds properties
+	// together.
 	//
-	// The following is a list of possible values for the AccountFilterType operation.
+	// The following values determine how CloudFormation selects target accounts:
 	//
-	//   - INTERSECTION : StackSets deploys to the accounts specified in Accounts
-	//   parameter.
+	//   - INTERSECTION : Performs stack operations only on specific individual
+	//   accounts within the selected OUs. Only accounts that are both specified in the
+	//   Accounts property and belong to the specified OUs will be targeted.
 	//
-	//   - DIFFERENCE : StackSets excludes the accounts specified in Accounts
-	//   parameter. This enables user to avoid certain accounts within an OU such as
-	//   suspended accounts.
+	//   - DIFFERENCE : Performs stack operations on all accounts in the selected OUs
+	//   except for specific accounts listed in the Accounts property. This enables you
+	//   to exclude certain accounts within an OU, such as suspended accounts.
 	//
-	//   - UNION : StackSets includes additional accounts deployment targets.
+	//   - UNION : Performs stack operations on the specified OUs plus additional
+	//   individual accounts listed in the Accounts property. This is the default value
+	//   if AccountFilterType is not provided. This lets you target an entire OU and
+	//   individual accounts from a different OU in one request. Note that UNION is not
+	//   supported for CreateStackInstances operations.
 	//
-	// This is the default value if AccountFilterType is not provided. This enables
-	//   user to update an entire OU and individual accounts from a different OU in one
-	//   request, which used to be two separate requests.
-	//
-	//   - NONE : Deploys to all the accounts in specified organizational units (OU).
+	//   - NONE : Performs stack operations on all accounts in the specified
+	//   organizational units (OUs).
 	AccountFilterType AccountFilterType
 
-	// The account IDs of the Amazon Web Services accounts. If you have many account
-	// numbers, you can provide those accounts using the AccountsUrl property instead.
+	// The Amazon Web Services account IDs where you want to perform stack operations.
+	// How these accounts are used depends on the AccountFilterType property.
+	//
+	// If you have many account numbers, you can provide those accounts using the
+	// AccountsUrl property instead.
 	Accounts []string
 
 	// The Amazon S3 URL path to a file that contains a list of Amazon Web Services
 	// account IDs. The file format must be either .csv or .txt , and the data can be
 	// comma-separated or new-line-separated. There is currently a 10MB limit for the
 	// data (approximately 800,000 accounts).
+	//
+	// This property serves the same purpose as Accounts but allows you to specify a
+	// large number of accounts.
 	AccountsUrl *string
 
-	// The organization root ID or organizational unit (OU) IDs.
+	// The organization root ID or organizational unit (OU) IDs where you want to
+	// perform stack operations. CloudFormation will perform operations on accounts
+	// within these OUs and their child OUs.
 	OrganizationalUnitIds []string
 
 	noSmithyDocumentSerde
 }
 
 // The Export structure describes the exported output values for a stack.
+//
+// For more information, see [Get exported outputs from a deployed CloudFormation stack].
+//
+// [Get exported outputs from a deployed CloudFormation stack]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-exports.html
 type Export struct {
 
 	// The stack that contains the exported output name and value.
@@ -332,32 +351,58 @@ type Export struct {
 // Describes a Hook invocation, its status, and the reason for its status.
 type HookResultSummary struct {
 
-	// The failure mode of the invocation. The following are potential modes:
-	//
-	//   - FAIL : If the hook invocation returns a failure, then the requested target
-	//   operation should fail.
-	//
-	//   - WARN : If the hook invocation returns a failure, then the requested target
-	//   operation should warn.
+	// The failure mode of the invocation.
 	FailureMode HookFailureMode
 
+	// The ARN of the target stack or request token of the Cloud Control API operation.
+	//
+	// Only shown in responses when the request does not specify TargetType and
+	// TargetId filters.
+	HookExecutionTarget *string
+
+	// The unique identifier for this Hook invocation result.
+	HookResultId *string
+
 	// A description of the Hook results status. For example, if the Hook result is in
-	// a FAILED state, this may contain additional information for the FAILED state.
+	// a failed state, this may contain additional information for the failed state.
 	HookStatusReason *string
 
-	// The exact point in the provisioning logic where the Hook runs.
+	// The specific point in the provisioning process where the Hook is invoked.
 	InvocationPoint HookInvocationPoint
 
-	// The state of the Hook invocation.
+	// The timestamp when the Hook was invoked.
+	//
+	// Only shown in responses when the request does not specify TargetType and
+	// TargetId filters.
+	InvokedAt *time.Time
+
+	// The status of the Hook invocation. The following statuses are possible:
+	//
+	//   - HOOK_IN_PROGRESS : The Hook is currently running.
+	//
+	//   - HOOK_COMPLETE_SUCCEEDED : The Hook completed successfully.
+	//
+	//   - HOOK_COMPLETE_FAILED : The Hook completed but failed validation.
+	//
+	//   - HOOK_FAILED : The Hook encountered an error during execution.
 	Status HookStatus
 
-	// The version of the Hook type configuration.
+	// The unique identifier of the Hook invocation target.
+	TargetId *string
+
+	// The target type that the Hook was invoked against.
+	TargetType ListHookResultsTargetType
+
+	// The ARN of the Hook that was invoked.
+	TypeArn *string
+
+	// The version of the Hook configuration.
 	TypeConfigurationVersionId *string
 
-	// The type name of the Hook being invoked.
+	// The name of the Hook that was invoked.
 	TypeName *string
 
-	// The version of the Hook being invoked.
+	// The version of the Hook that was invoked.
 	TypeVersionId *string
 
 	noSmithyDocumentSerde
@@ -385,15 +430,15 @@ type LoggingConfig struct {
 // and queues conflicting operations.
 type ManagedExecution struct {
 
-	// When true , StackSets performs non-conflicting operations concurrently and
-	// queues conflicting operations. After conflicting operations finish, StackSets
-	// starts queued operations in request order.
+	// When true , CloudFormation performs non-conflicting operations concurrently and
+	// queues conflicting operations. After conflicting operations finish,
+	// CloudFormation starts queued operations in request order.
 	//
-	// If there are already running or queued operations, StackSets queues all
+	// If there are already running or queued operations, CloudFormation queues all
 	// incoming operations even if they are non-conflicting.
 	//
-	// You can't modify your stack set's execution configuration while there are
-	// running or queued operations for that stack set.
+	// You can't modify your StackSet's execution configuration while there are
+	// running or queued operations for that StackSet.
 	//
 	// When false (default), StackSets performs one operation at a time in request
 	// order.
@@ -1215,7 +1260,7 @@ type Stack struct {
 
 	// The detailed status of the resource or stack. If CONFIGURATION_COMPLETE is
 	// present, the resource or resource configuration phase has completed and the
-	// stabilization of the resources is in progress. The stack sets
+	// stabilization of the resources is in progress. The StackSets
 	// CONFIGURATION_COMPLETE when all of the resources in the stack have reached that
 	// event. For more information, see [Understand CloudFormation stack creation events]in the CloudFormation User Guide.
 	//
@@ -1389,7 +1434,7 @@ type StackDriftInformationSummary struct {
 // The StackEvent data type.
 type StackEvent struct {
 
-	// The unique ID of this event.
+	// The unique identifier of this event.
 	//
 	// This member is required.
 	EventId *string
@@ -1437,7 +1482,7 @@ type StackEvent struct {
 	// [Understand CloudFormation stack creation events]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stack-resource-configuration-complete.html
 	DetailedStatus DetailedStatus
 
-	// Specify the hook failure mode for non-compliant resources in the followings
+	// Specify the Hook failure mode for non-compliant resources in the followings
 	// ways.
 	//
 	//   - FAIL Stops provisioning resources.
@@ -1445,16 +1490,19 @@ type StackEvent struct {
 	//   - WARN Allows provisioning to continue with a warning message.
 	HookFailureMode HookFailureMode
 
-	// Invocation points are points in provisioning logic where Hooks are initiated.
+	// The unique identifier of the Hook invocation.
+	HookInvocationId *string
+
+	// The specific point in the provisioning process where the Hook is invoked.
 	HookInvocationPoint HookInvocationPoint
 
-	// Provides the status of the change set hook.
+	// Provides the status of the change set Hook.
 	HookStatus HookStatus
 
-	// Provides the reason for the hook status.
+	// Provides the reason for the Hook status.
 	HookStatusReason *string
 
-	// The name of the hook.
+	// The name of the Hook.
 	HookType *string
 
 	// The logical name of the resource specified in the template.
@@ -1482,11 +1530,11 @@ type StackEvent struct {
 }
 
 // A CloudFormation stack, in a specific account and Region, that's part of a
-// stack set operation. A stack instance is a reference to an attempted or actual
+// StackSet operation. A stack instance is a reference to an attempted or actual
 // stack in a given account within a given Region. A stack instance can exist
 // without a stack—for example, if the stack couldn't be created for some reason. A
-// stack instance is associated with only one stack set. Each stack instance
-// contains the ID of its associated stack set, in addition to the ID of the actual
+// stack instance is associated with only one StackSet. Each stack instance
+// contains the ID of its associated StackSet, in addition to the ID of the actual
 // stack and the stack status.
 type StackInstance struct {
 
@@ -1495,25 +1543,25 @@ type StackInstance struct {
 	Account *string
 
 	// Status of the stack instance's actual configuration compared to the expected
-	// template and parameter configuration of the stack set to which it belongs.
+	// template and parameter configuration of the StackSet it belongs to.
 	//
 	//   - DRIFTED : The stack differs from the expected template and parameter
-	//   configuration of the stack set to which it belongs. A stack instance is
-	//   considered to have drifted if one or more of the resources in the associated
-	//   stack have drifted.
+	//   configuration of the StackSet it belongs to. A stack instance is considered to
+	//   have drifted if one or more of the resources in the associated stack have
+	//   drifted.
 	//
 	//   - NOT_CHECKED : CloudFormation hasn't checked if the stack instance differs
-	//   from its expected stack set configuration.
+	//   from its expected StackSet configuration.
 	//
 	//   - IN_SYNC : The stack instance's actual configuration matches its expected
-	//   stack set configuration.
+	//   StackSset configuration.
 	//
 	//   - UNKNOWN : This value is reserved for future use.
 	DriftStatus StackDriftStatus
 
 	// Most recent time when CloudFormation performed a drift detection operation on
-	// the stack instance. This value will be NULL for any stack instance on which
-	// drift detection hasn't yet been performed.
+	// the stack instance. This value will be NULL for any stack instance that drift
+	// detection hasn't yet been performed on.
 	LastDriftCheckTimestamp *time.Time
 
 	// The last unique ID of a StackSet operation performed on a stack instance.
@@ -1525,7 +1573,7 @@ type StackInstance struct {
 	// [DeploymentTargets]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html
 	OrganizationalUnitId *string
 
-	// A list of parameters from the stack set template whose values have been
+	// A list of parameters from the StackSet template whose values have been
 	// overridden in this stack instance.
 	ParameterOverrides []Parameter
 
@@ -1539,7 +1587,7 @@ type StackInstance struct {
 	// The detailed status of the stack instance.
 	StackInstanceStatus *StackInstanceComprehensiveStatus
 
-	// The name or unique ID of the stack set that the stack instance is associated
+	// The name or unique ID of the StackSet that the stack instance is associated
 	// with.
 	StackSetId *string
 
@@ -1556,7 +1604,7 @@ type StackInstance struct {
 	//   the DetailedStatus member in the StackInstanceSummary member that is a peer to
 	//   this Status member.
 	//
-	//   - OUTDATED : The stack isn't currently up to date with the stack set because:
+	//   - OUTDATED : The stack isn't currently up to date with the StackSet because:
 	//
 	//   - The associated stack failed during a CreateStackSet or UpdateStackSet
 	//   operation.
@@ -1564,7 +1612,7 @@ type StackInstance struct {
 	//   - The stack was part of a CreateStackSet or UpdateStackSet operation that
 	//   failed or was stopped before the stack was created or updated.
 	//
-	//   - CURRENT : The stack is currently up to date with the stack set.
+	//   - CURRENT : The stack is currently up to date with the StackSet.
 	Status StackInstanceStatus
 
 	// The explanation for the specific status code that's assigned to this stack
@@ -1578,18 +1626,18 @@ type StackInstance struct {
 type StackInstanceComprehensiveStatus struct {
 
 	//   - CANCELLED : The operation in the specified account and Region has been
-	//   canceled. This is either because a user has stopped the stack set operation, or
-	//   because the failure tolerance of the stack set operation has been exceeded.
+	//   canceled. This is either because a user has stopped the StackSet operation, or
+	//   because the failure tolerance of the StackSet operation has been exceeded.
 	//
 	//   - FAILED : The operation in the specified account and Region failed. If the
-	//   stack set operation fails in enough accounts within a Region, the failure
-	//   tolerance for the stack set operation as a whole might be exceeded.
+	//   StackSet operation fails in enough accounts within a Region, the failure
+	//   tolerance for the StackSet operation as a whole might be exceeded.
 	//
 	//   - FAILED_IMPORT : The import of the stack instance in the specified account
 	//   and Region failed and left the stack in an unstable state. Once the issues
 	//   causing the failure are fixed, the import operation can be retried. If enough
-	//   stack set operations fail in enough accounts within a Region, the failure
-	//   tolerance for the stack set operation as a whole might be exceeded.
+	//   StackSet operations fail in enough accounts within a Region, the failure
+	//   tolerance for the StackSet operation as a whole might be exceeded.
 	//
 	//   - INOPERABLE : A DeleteStackInstances operation has failed and left the stack
 	//   in an unstable state. Stacks in this state are excluded from further
@@ -1694,25 +1742,25 @@ type StackInstanceSummary struct {
 	Account *string
 
 	// Status of the stack instance's actual configuration compared to the expected
-	// template and parameter configuration of the stack set to which it belongs.
+	// template and parameter configuration of the StackSet it belongs to.
 	//
 	//   - DRIFTED : The stack differs from the expected template and parameter
-	//   configuration of the stack set to which it belongs. A stack instance is
-	//   considered to have drifted if one or more of the resources in the associated
-	//   stack have drifted.
+	//   configuration of the StackSet it belongs to. A stack instance is considered to
+	//   have drifted if one or more of the resources in the associated stack have
+	//   drifted.
 	//
 	//   - NOT_CHECKED : CloudFormation hasn't checked if the stack instance differs
-	//   from its expected stack set configuration.
+	//   from its expected StackSet configuration.
 	//
 	//   - IN_SYNC : The stack instance's actual configuration matches its expected
-	//   stack set configuration.
+	//   StackSet configuration.
 	//
 	//   - UNKNOWN : This value is reserved for future use.
 	DriftStatus StackDriftStatus
 
 	// Most recent time when CloudFormation performed a drift detection operation on
-	// the stack instance. This value will be NULL for any stack instance on which
-	// drift detection hasn't yet been performed.
+	// the stack instance. This value will be NULL for any stack instance that drift
+	// detection hasn't yet been performed on.
 	LastDriftCheckTimestamp *time.Time
 
 	// The last unique ID of a StackSet operation performed on a stack instance.
@@ -1734,7 +1782,7 @@ type StackInstanceSummary struct {
 	// The detailed status of the stack instance.
 	StackInstanceStatus *StackInstanceComprehensiveStatus
 
-	// The name or unique ID of the stack set that the stack instance is associated
+	// The name or unique ID of the StackSet that the stack instance is associated
 	// with.
 	StackSetId *string
 
@@ -1751,7 +1799,7 @@ type StackInstanceSummary struct {
 	//   API operation, look at the DetailedStatus member returned in the
 	//   StackInstanceSummary member.
 	//
-	//   - OUTDATED : The stack isn't currently up to date with the stack set because:
+	//   - OUTDATED : The stack isn't currently up to date with the StackSet because:
 	//
 	//   - The associated stack failed during a CreateStackSet or UpdateStackSet
 	//   operation.
@@ -1759,7 +1807,7 @@ type StackInstanceSummary struct {
 	//   - The stack was part of a CreateStackSet or UpdateStackSet operation that
 	//   failed or was stopped before the stack was created or updated.
 	//
-	//   - CURRENT : The stack is currently up to date with the stack set.
+	//   - CURRENT : The stack is currently up to date with the StackSet.
 	Status StackInstanceStatus
 
 	// The explanation for the specific status code assigned to this stack instance.
@@ -2169,29 +2217,28 @@ type StackResourceSummary struct {
 	noSmithyDocumentSerde
 }
 
-// A structure that contains information about a stack set. A stack set enables
-// you to provision stacks into Amazon Web Services accounts and across Regions by
-// using a single CloudFormation template. In the stack set, you specify the
-// template to use, in addition to any parameters and capabilities that the
-// template requires.
+// A structure that contains information about a StackSet. With StackSets, you can
+// provision stacks across Amazon Web Services accounts and Regions from a single
+// CloudFormation template. Each stack is based on the same CloudFormation
+// template, but you can customize individual stacks using parameters.
 type StackSet struct {
 
 	// The Amazon Resource Name (ARN) of the IAM role used to create or update the
 	// stack set.
 	//
 	// Use customized administrator roles to control which users or groups can manage
-	// specific stack sets within the same administrator account. For more information,
+	// specific StackSets within the same administrator account. For more information,
 	// see [Prerequisites for using CloudFormation StackSets]in the CloudFormation User Guide.
 	//
 	// [Prerequisites for using CloudFormation StackSets]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html
 	AdministrationRoleARN *string
 
-	// [Service-managed permissions] Describes whether StackSets automatically deploys
-	// to Organizations accounts that are added to a target organization or
-	// organizational unit (OU).
+	// Describes whether StackSets automatically deploys to Organizations accounts
+	// that are added to a target organization or organizational unit (OU). Valid only
+	// if the StackSet uses service-managed permissions.
 	AutoDeployment *AutoDeployment
 
-	// The capabilities that are allowed in the stack set. Some stack set templates
+	// The capabilities that are allowed in the StackSet. Some StackSet templates
 	// might include resources that can affect permissions in your Amazon Web Services
 	// account—for example, by creating new Identity and Access Management (IAM) users.
 	// For more information, see [Acknowledging IAM resources in CloudFormation templates].
@@ -2199,14 +2246,14 @@ type StackSet struct {
 	// [Acknowledging IAM resources in CloudFormation templates]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html#using-iam-capabilities
 	Capabilities []Capability
 
-	// A description of the stack set that you specify when the stack set is created
-	// or updated.
+	// A description of the StackSet that you specify when the StackSet is created or
+	// updated.
 	Description *string
 
-	// The name of the IAM execution role used to create or update the stack set.
+	// The name of the IAM execution role used to create or update the StackSet.
 	//
 	// Use customized execution roles to control which stack resources users and
-	// groups can include in their stack sets.
+	// groups can include in their StackSets.
 	ExecutionRoleName *string
 
 	// Describes whether StackSets performs non-conflicting operations concurrently
@@ -2219,10 +2266,10 @@ type StackSet struct {
 	// [DeploymentTargets]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html
 	OrganizationalUnitIds []string
 
-	// A list of input parameters for a stack set.
+	// A list of input parameters for a StackSet.
 	Parameters []Parameter
 
-	// Describes how the IAM roles required for stack set operations are created.
+	// Describes how the IAM roles required for StackSet operations are created.
 	//
 	//   - With self-managed permissions, you must create the administrator and
 	//   execution roles required to deploy to target accounts. For more information, see
@@ -2230,9 +2277,9 @@ type StackSet struct {
 	//
 	//   - With service-managed permissions, StackSets automatically creates the IAM
 	//   roles required to deploy to accounts managed by Organizations. For more
-	//   information, see [Activate trusted access for stack sets with Organizations].
+	//   information, see [Activate trusted access for StackSets with Organizations].
 	//
-	// [Activate trusted access for stack sets with Organizations]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-activate-trusted-access.html
+	// [Activate trusted access for StackSets with Organizations]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-activate-trusted-access.html
 	// [Grant self-managed permissions]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html
 	PermissionModel PermissionModels
 
@@ -2241,42 +2288,42 @@ type StackSet struct {
 	// particular order.
 	Regions []string
 
-	// The Amazon Resource Name (ARN) of the stack set.
+	// The Amazon Resource Name (ARN) of the StackSet.
 	StackSetARN *string
 
-	// Detailed information about the drift status of the stack set.
+	// Detailed information about the drift status of the StackSet.
 	//
-	// For stack sets, contains information about the last completed drift operation
-	// performed on the stack set. Information about drift operations currently in
+	// For StackSets, contains information about the last completed drift operation
+	// performed on the StackSet. Information about drift operations currently in
 	// progress isn't included.
 	StackSetDriftDetectionDetails *StackSetDriftDetectionDetails
 
-	// The ID of the stack set.
+	// The ID of the StackSet.
 	StackSetId *string
 
-	// The name that's associated with the stack set.
+	// The name that's associated with the StackSet.
 	StackSetName *string
 
-	// The status of the stack set.
+	// The status of the StackSet.
 	Status StackSetStatus
 
-	// A list of tags that specify information about the stack set. A maximum number
-	// of 50 tags can be specified.
+	// A list of tags that specify information about the StackSet. A maximum number of
+	// 50 tags can be specified.
 	Tags []Tag
 
 	// The structure that contains the body of the template that was used to create or
-	// update the stack set.
+	// update the StackSet.
 	TemplateBody *string
 
 	noSmithyDocumentSerde
 }
 
-// One of the targets for the stack set. Returned by the [ListStackSetAutoDeploymentTargets] API operation.
+// One of the targets for the StackSet. Returned by the [ListStackSetAutoDeploymentTargets] API operation.
 //
 // [ListStackSetAutoDeploymentTargets]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListStackSetAutoDeploymentTargets.html
 type StackSetAutoDeploymentTargetSummary struct {
 
-	// The organization root ID or organizational unit (OU) IDs where the stack set is
+	// The organization root ID or organizational unit (OU) IDs where the StackSet is
 	// targeted.
 	OrganizationalUnitId *string
 
@@ -2286,21 +2333,21 @@ type StackSetAutoDeploymentTargetSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Detailed information about the drift status of the stack set.
+// Detailed information about the drift status of the StackSet.
 //
-// For stack sets, contains information about the last completed drift operation
-// performed on the stack set. Information about drift operations in-progress isn't
+// For StackSets, contains information about the last completed drift operation
+// performed on the StackSet. Information about drift operations in-progress isn't
 // included.
 //
-// For stack set operations, includes information about drift operations currently
-// being performed on the stack set.
+// For StackSet operations, includes information about drift operations currently
+// being performed on the StackSet.
 //
 // For more information, see [Performing drift detection on CloudFormation StackSets] in the CloudFormation User Guide.
 //
 // [Performing drift detection on CloudFormation StackSets]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html
 type StackSetDriftDetectionDetails struct {
 
-	// The status of the stack set drift detection operation.
+	// The status of the StackSet drift detection operation.
 	//
 	//   - COMPLETED : The drift detection operation completed without failing on any
 	//   stack instances.
@@ -2316,24 +2363,22 @@ type StackSetDriftDetectionDetails struct {
 	//   - STOPPED : The user has canceled the drift detection operation.
 	DriftDetectionStatus StackSetDriftDetectionStatus
 
-	// Status of the stack set's actual configuration compared to its expected
-	// template and parameter configuration. A stack set is considered to have drifted
-	// if one or more of its stack instances have drifted from their expected template
+	// Status of the StackSet's actual configuration compared to its expected template
 	// and parameter configuration.
 	//
-	//   - DRIFTED : One or more of the stack instances belonging to the stack set
-	//   stack differs from the expected template and parameter configuration. A stack
-	//   instance is considered to have drifted if one or more of the resources in the
-	//   associated stack have drifted.
+	//   - DRIFTED : One or more of the stack instances belonging to the StackSet
+	//   differs from the expected template and parameter configuration. A stack instance
+	//   is considered to have drifted if one or more of the resources in the associated
+	//   stack have drifted.
 	//
-	//   - NOT_CHECKED : CloudFormation hasn't checked the stack set for drift.
+	//   - NOT_CHECKED : CloudFormation hasn't checked the StackSet for drift.
 	//
-	//   - IN_SYNC : All of the stack instances belonging to the stack set stack match
-	//   from the expected template and parameter configuration.
+	//   - IN_SYNC : All of the stack instances belonging to the StackSet stack match
+	//   the expected template and parameter configuration.
 	DriftStatus StackSetDriftStatus
 
 	// The number of stack instances that have drifted from the expected template and
-	// parameter configuration of the stack set. A stack instance is considered to have
+	// parameter configuration of the StackSet. A stack instance is considered to have
 	// drifted if one or more of the resources in the associated stack don't match
 	// their expected configuration.
 	DriftedStackInstancesCount *int32
@@ -2345,21 +2390,21 @@ type StackSetDriftDetectionDetails struct {
 	InProgressStackInstancesCount *int32
 
 	// The number of stack instances which match the expected template and parameter
-	// configuration of the stack set.
+	// configuration of the StackSet.
 	InSyncStackInstancesCount *int32
 
 	// Most recent time when CloudFormation performed a drift detection operation on
-	// the stack set. This value will be NULL for any stack set on which drift
-	// detection hasn't yet been performed.
+	// the StackSet. This value will be NULL for any StackSet that drift detection
+	// hasn't yet been performed on.
 	LastDriftCheckTimestamp *time.Time
 
-	// The total number of stack instances belonging to this stack set.
+	// The total number of stack instances belonging to this StackSet.
 	//
 	// The total number of stack instances is equal to the total of:
 	//
-	//   - Stack instances that match the stack set configuration.
+	//   - Stack instances that match the StackSet configuration.
 	//
-	//   - Stack instances that have drifted from the stack set configuration.
+	//   - Stack instances that have drifted from the StackSet configuration.
 	//
 	//   - Stack instances where the drift detection operation has failed.
 	//
@@ -2369,20 +2414,20 @@ type StackSetDriftDetectionDetails struct {
 	noSmithyDocumentSerde
 }
 
-// The structure that contains information about a stack set operation.
+// The structure that contains information about a StackSet operation.
 type StackSetOperation struct {
 
-	// The type of stack set operation: CREATE , UPDATE , or DELETE . Create and delete
-	// operations affect only the specified stack set instances that are associated
-	// with the specified stack set. Update operations affect both the stack set
-	// itself, in addition to all associated stack set instances.
+	// The type of StackSet operation: CREATE , UPDATE , or DELETE . Create and delete
+	// operations affect only the specified stack instances that are associated with
+	// the specified StackSet. Update operations affect both the StackSet itself, in
+	// addition to all associated stack instances.
 	Action StackSetOperationAction
 
-	// The Amazon Resource Name (ARN) of the IAM role used to perform this stack set
+	// The Amazon Resource Name (ARN) of the IAM role used to perform this StackSet
 	// operation.
 	//
 	// Use customized administrator roles to control which users or groups can manage
-	// specific stack sets within the same administrator account. For more information,
+	// specific StackSets within the same administrator account. For more information,
 	// see [Grant self-managed permissions]in the CloudFormation User Guide.
 	//
 	// [Grant self-managed permissions]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html
@@ -2395,45 +2440,45 @@ type StackSetOperation struct {
 	// before actually creating the first stacks.
 	CreationTimestamp *time.Time
 
-	// [Service-managed permissions] The Organizations accounts affected by the stack
-	// operation.
+	// The Organizations accounts affected by the stack operation. Valid only if the
+	// StackSet uses service-managed permissions.
 	DeploymentTargets *DeploymentTargets
 
-	// The time at which the stack set operation ended, across all accounts and
-	// Regions specified. Note that this doesn't necessarily mean that the stack set
-	// operation was successful, or even attempted, in each account or Region.
+	// The time at which the StackSet operation ended, across all accounts and Regions
+	// specified. Note that this doesn't necessarily mean that the StackSet operation
+	// was successful, or even attempted, in each account or Region.
 	EndTimestamp *time.Time
 
-	// The name of the IAM execution role used to create or update the stack set.
+	// The name of the IAM execution role used to create or update the StackSet.
 	//
 	// Use customized execution roles to control which stack resources users and
-	// groups can include in their stack sets.
+	// groups can include in their StackSets.
 	ExecutionRoleName *string
 
-	// The unique ID of a stack set operation.
+	// The unique ID of a StackSet operation.
 	OperationId *string
 
-	// The preferences for how CloudFormation performs this stack set operation.
+	// The preferences for how CloudFormation performs this StackSet operation.
 	OperationPreferences *StackSetOperationPreferences
 
-	// For stack set operations of action type DELETE , specifies whether to remove the
-	// stack instances from the specified stack set, but doesn't delete the stacks. You
+	// For StackSet operations of action type DELETE , specifies whether to remove the
+	// stack instances from the specified StackSet, but doesn't delete the stacks. You
 	// can't re-associate a retained stack, or add an existing, saved stack to a new
-	// stack set.
+	// StackSet.
 	RetainStacks *bool
 
-	// Detailed information about the drift status of the stack set. This includes
-	// information about drift operations currently being performed on the stack set.
+	// Detailed information about the drift status of the StackSet. This includes
+	// information about drift operations currently being performed on the StackSet.
 	//
-	// This information will only be present for stack set operations whose Action
-	// type is DETECT_DRIFT .
+	// This information will only be present for StackSet operations whose Action type
+	// is DETECT_DRIFT .
 	//
 	// For more information, see [Performing drift detection on CloudFormation StackSets] in the CloudFormation User Guide.
 	//
 	// [Performing drift detection on CloudFormation StackSets]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html
 	StackSetDriftDetectionDetails *StackSetDriftDetectionDetails
 
-	// The ID of the stack set.
+	// The ID of the StackSet.
 	StackSetId *string
 
 	// The status of the operation.
@@ -2459,7 +2504,7 @@ type StackSetOperation struct {
 	//   - SUCCEEDED : The operation completed creating or updating all the specified
 	//   stacks without exceeding the failure tolerance for the operation.
 	//
-	// [StackSets status codes]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html#stackset-status-codes
+	// [StackSets status codes]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-status-codes
 	Status StackSetOperationStatus
 
 	// Detailed information about the StackSet operation.
@@ -2471,16 +2516,16 @@ type StackSetOperation struct {
 	noSmithyDocumentSerde
 }
 
-// The user-specified preferences for how CloudFormation performs a stack set
+// The user-specified preferences for how CloudFormation performs a StackSet
 // operation.
 //
 // For more information about maximum concurrent accounts and failure tolerance,
-// see [Stack set operation options].
+// see [StackSet operation options].
 //
 // StackSetOperationPreferences don't apply to AutoDeployment , even if it's
 // enabled.
 //
-// [Stack set operation options]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html#stackset-ops-options
+// [StackSet operation options]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options
 type StackSetOperationPreferences struct {
 
 	// Specifies how the concurrency level behaves during the operation execution.
@@ -2496,12 +2541,12 @@ type StackSetOperationPreferences struct {
 	//   behavior is similar.
 	//
 	//   - SOFT_FAILURE_TOLERANCE : This option decouples FailureToleranceCount from
-	//   the actual concurrency. This allows stack set operations to run at the
+	//   the actual concurrency. This allows StackSet operations to run at the
 	//   concurrency level set by the MaxConcurrentCount value, or
 	//   MaxConcurrentPercentage , regardless of the number of failures.
 	ConcurrencyMode ConcurrencyMode
 
-	// The number of accounts, per Region, for which this operation can fail before
+	// The number of accounts per Region this operation can fail in before
 	// CloudFormation stops the operation in that Region. If the operation is stopped
 	// in a Region, CloudFormation doesn't attempt the operation in any subsequent
 	// Regions.
@@ -2512,10 +2557,10 @@ type StackSetOperationPreferences struct {
 	// By default, 0 is specified.
 	FailureToleranceCount *int32
 
-	// The percentage of accounts, per Region, for which this stack operation can fail
-	// before CloudFormation stops the operation in that Region. If the operation is
-	// stopped in a Region, CloudFormation doesn't attempt the operation in any
-	// subsequent Regions.
+	// The percentage of accounts per Region this stack operation can fail in before
+	// CloudFormation stops the operation in that Region. If the operation is stopped
+	// in a Region, CloudFormation doesn't attempt the operation in any subsequent
+	// Regions.
 	//
 	// When calculating the number of accounts based on the specified percentage,
 	// CloudFormation rounds down to the next whole number.
@@ -2578,7 +2623,7 @@ type StackSetOperationResultSummary struct {
 	Account *string
 
 	// The results of the account gate function CloudFormation invokes, if present,
-	// before proceeding with stack set operations in an account.
+	// before proceeding with StackSet operations in an account.
 	AccountGateResult *AccountGateResult
 
 	// [Service-managed permissions] The organization root ID or organizational unit
@@ -2590,17 +2635,17 @@ type StackSetOperationResultSummary struct {
 	// The name of the Amazon Web Services Region for this operation result.
 	Region *string
 
-	// The result status of the stack set operation for the given account in the given
+	// The result status of the StackSet operation for the given account in the given
 	// Region.
 	//
 	//   - CANCELLED : The operation in the specified account and Region has been
-	//   canceled. This is either because a user has stopped the stack set operation, or
-	//   because the failure tolerance of the stack set operation has been exceeded.
+	//   canceled. This is either because a user has stopped the StackSet operation, or
+	//   because the failure tolerance of the StackSet operation has been exceeded.
 	//
 	//   - FAILED : The operation in the specified account and Region failed.
 	//
-	// If the stack set operation fails in enough accounts within a Region, the
-	//   failure tolerance for the stack set operation as a whole might be exceeded.
+	// If the StackSet operation fails in enough accounts within a Region, the failure
+	//   tolerance for the StackSet operation as a whole might be exceeded.
 	//
 	//   - RUNNING : The operation in the specified account and Region is currently in
 	//   progress.
@@ -2631,32 +2676,32 @@ type StackSetOperationSummary struct {
 
 	// The type of operation: CREATE , UPDATE , or DELETE . Create and delete
 	// operations affect only the specified stack instances that are associated with
-	// the specified stack set. Update operations affect both the stack set itself and
-	// all associated stack set instances.
+	// the specified StackSet. Update operations affect both the StackSet itself and
+	// all associated StackSet instances.
 	Action StackSetOperationAction
 
 	// The time at which the operation was initiated. Note that the creation times for
-	// the stack set operation might differ from the creation time of the individual
+	// the StackSet operation might differ from the creation time of the individual
 	// stacks themselves. This is because CloudFormation needs to perform preparatory
 	// work for the operation, such as dispatching the work to the requested Regions,
 	// before actually creating the first stacks.
 	CreationTimestamp *time.Time
 
-	// The time at which the stack set operation ended, across all accounts and
-	// Regions specified. Note that this doesn't necessarily mean that the stack set
-	// operation was successful, or even attempted, in each account or Region.
+	// The time at which the StackSet operation ended, across all accounts and Regions
+	// specified. Note that this doesn't necessarily mean that the StackSet operation
+	// was successful, or even attempted, in each account or Region.
 	EndTimestamp *time.Time
 
-	// The unique ID of the stack set operation.
+	// The unique ID of the StackSet operation.
 	OperationId *string
 
-	// The user-specified preferences for how CloudFormation performs a stack set
+	// The user-specified preferences for how CloudFormation performs a StackSet
 	// operation.
 	//
 	// For more information about maximum concurrent accounts and failure tolerance,
-	// see [Stack set operation options].
+	// see [StackSet operation options].
 	//
-	// [Stack set operation options]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html#stackset-ops-options
+	// [StackSet operation options]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options
 	OperationPreferences *StackSetOperationPreferences
 
 	// The overall status of the operation.
@@ -2671,7 +2716,7 @@ type StackSetOperationSummary struct {
 	//
 	//   - QUEUED : [Service-managed permissions] For automatic deployments that
 	//   require a sequence of operations, the operation is queued to be performed. For
-	//   more information, see the [stack set operation status codes]in the CloudFormation User Guide.
+	//   more information, see the [StackSet status codes]in the CloudFormation User Guide.
 	//
 	//   - RUNNING : The operation is currently being performed.
 	//
@@ -2682,10 +2727,10 @@ type StackSetOperationSummary struct {
 	//   - SUCCEEDED : The operation completed creating or updating all the specified
 	//   stacks without exceeding the failure tolerance for the operation.
 	//
-	// [stack set operation status codes]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html#stackset-status-codes
+	// [StackSet status codes]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-status-codes
 	Status StackSetOperationStatus
 
-	// Detailed information about the stack set operation.
+	// Detailed information about the StackSet operation.
 	StatusDetails *StackSetOperationStatusDetails
 
 	// The status of the operation in details.
@@ -2694,45 +2739,43 @@ type StackSetOperationSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The structures that contain summary information about the specified stack set.
+// The structures that contain summary information about the specified StackSet.
 type StackSetSummary struct {
 
 	// [Service-managed permissions] Describes whether StackSets automatically deploys
 	// to Organizations accounts that are added to a target organizational unit (OU).
 	AutoDeployment *AutoDeployment
 
-	// A description of the stack set that you specify when the stack set is created
-	// or updated.
+	// A description of the StackSet that you specify when the StackSet is created or
+	// updated.
 	Description *string
 
-	// Status of the stack set's actual configuration compared to its expected
-	// template and parameter configuration. A stack set is considered to have drifted
-	// if one or more of its stack instances have drifted from their expected template
+	// Status of the StackSet's actual configuration compared to its expected template
 	// and parameter configuration.
 	//
-	//   - DRIFTED : One or more of the stack instances belonging to the stack set
-	//   stack differs from the expected template and parameter configuration. A stack
-	//   instance is considered to have drifted if one or more of the resources in the
-	//   associated stack have drifted.
+	//   - DRIFTED : One or more of the stack instances belonging to the StackSet
+	//   differs from the expected template and parameter configuration. A stack instance
+	//   is considered to have drifted if one or more of the resources in the associated
+	//   stack have drifted.
 	//
-	//   - NOT_CHECKED : CloudFormation hasn't checked the stack set for drift.
+	//   - NOT_CHECKED : CloudFormation hasn't checked the StackSet for drift.
 	//
-	//   - IN_SYNC : All the stack instances belonging to the stack set stack match
-	//   from the expected template and parameter configuration.
+	//   - IN_SYNC : All the stack instances belonging to the StackSet match the
+	//   expected template and parameter configuration.
 	//
 	//   - UNKNOWN : This value is reserved for future use.
 	DriftStatus StackDriftStatus
 
 	// Most recent time when CloudFormation performed a drift detection operation on
-	// the stack set. This value will be NULL for any stack set on which drift
-	// detection hasn't yet been performed.
+	// the StackSet. This value will be NULL for any StackSet that drift detection
+	// hasn't yet been performed on.
 	LastDriftCheckTimestamp *time.Time
 
 	// Describes whether StackSets performs non-conflicting operations concurrently
 	// and queues conflicting operations.
 	ManagedExecution *ManagedExecution
 
-	// Describes how the IAM roles required for stack set operations are created.
+	// Describes how the IAM roles required for StackSet operations are created.
 	//
 	//   - With self-managed permissions, you must create the administrator and
 	//   execution roles required to deploy to target accounts. For more information, see
@@ -2740,19 +2783,19 @@ type StackSetSummary struct {
 	//
 	//   - With service-managed permissions, StackSets automatically creates the IAM
 	//   roles required to deploy to accounts managed by Organizations. For more
-	//   information, see [Activate trusted access for stack sets with Organizations].
+	//   information, see [Activate trusted access for StackSets with Organizations].
 	//
-	// [Activate trusted access for stack sets with Organizations]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-activate-trusted-access.html
+	// [Activate trusted access for StackSets with Organizations]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-activate-trusted-access.html
 	// [Grant self-managed permissions]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html
 	PermissionModel PermissionModels
 
-	// The ID of the stack set.
+	// The ID of the StackSet.
 	StackSetId *string
 
-	// The name of the stack set.
+	// The name of the StackSet.
 	StackSetName *string
 
-	// The status of the stack set.
+	// The status of the StackSet.
 	Status StackSetStatus
 
 	noSmithyDocumentSerde
@@ -2979,8 +3022,7 @@ type TypeConfigurationDetails struct {
 	// configuration was set.
 	Alias *string
 
-	// The Amazon Resource Name (ARN) for the configuration data, in this account and
-	// Region.
+	// The ARN for the configuration data, in this account and Region.
 	Arn *string
 
 	// A JSON string specifying the configuration data for the extension, in this
@@ -2999,7 +3041,7 @@ type TypeConfigurationDetails struct {
 	// returns null .
 	LastUpdated *time.Time
 
-	// The Amazon Resource Name (ARN) for the extension, in this account and Region.
+	// The ARN for the extension, in this account and Region.
 	//
 	// For public extensions, this will be the ARN assigned when you call the [ActivateType] API
 	// operation in this account and Region. For private extensions, this will be the
@@ -3021,7 +3063,7 @@ type TypeConfigurationIdentifier struct {
 	// The type of extension.
 	Type ThirdPartyType
 
-	// The Amazon Resource Name (ARN) for the extension, in this account and Region.
+	// The ARN for the extension, in this account and Region.
 	//
 	// For public extensions, this will be the ARN assigned when you call the [ActivateType] API
 	// operation in this account and Region. For private extensions, this will be the
@@ -3035,8 +3077,7 @@ type TypeConfigurationIdentifier struct {
 	// configuration was set.
 	TypeConfigurationAlias *string
 
-	// The Amazon Resource Name (ARN) for the configuration, in this account and
-	// Region.
+	// The ARN for the configuration, in this account and Region.
 	TypeConfigurationArn *string
 
 	// The name of the extension type to which this configuration applies.
@@ -3171,7 +3212,7 @@ type TypeSummary struct {
 	// The kind of extension.
 	Type RegistryType
 
-	// The Amazon Resource Name (ARN) of the extension.
+	// The ARN of the extension.
 	TypeArn *string
 
 	// The name of the extension.
@@ -3189,7 +3230,7 @@ type TypeSummary struct {
 // extension.
 type TypeVersionSummary struct {
 
-	// The Amazon Resource Name (ARN) of the extension version.
+	// The ARN of the extension version.
 	Arn *string
 
 	// The description of the extension version.
@@ -3225,8 +3266,7 @@ type TypeVersionSummary struct {
 	TypeName *string
 
 	// The ID of a specific version of the extension. The version ID is the value at
-	// the end of the Amazon Resource Name (ARN) assigned to the extension version when
-	// it's registered.
+	// the end of the ARN assigned to the extension version when it's registered.
 	VersionId *string
 
 	noSmithyDocumentSerde

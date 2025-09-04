@@ -13,10 +13,10 @@ import (
 
 // Returns information about a new or existing template. The GetTemplateSummary
 // action is useful for viewing parameter information, such as default parameter
-// values and parameter types, before you create or update a stack or stack set.
+// values and parameter types, before you create or update a stack or StackSet.
 //
 // You can use the GetTemplateSummary action when you submit a template, or you
-// can get template information for a stack set, or a running or deleted stack.
+// can get template information for a StackSet, or a running or deleted stack.
 //
 // For deleted stacks, GetTemplateSummary returns the template information for up
 // to 90 days after the stack has been deleted. If the template doesn't exist, a
@@ -43,7 +43,7 @@ type GetTemplateSummaryInput struct {
 	// administrator in the organization's management account or as a delegated
 	// administrator in a member account.
 	//
-	// By default, SELF is specified. Use SELF for stack sets with self-managed
+	// By default, SELF is specified. Use SELF for StackSets with self-managed
 	// permissions.
 	//
 	//   - If you are signed in to the management account, specify SELF .
@@ -66,7 +66,7 @@ type GetTemplateSummaryInput struct {
 	// StackSetName , TemplateBody , or TemplateURL .
 	StackName *string
 
-	// The name or unique ID of the stack set from which the stack was created.
+	// The name or unique ID of the StackSet from which the stack was created.
 	//
 	// Conditional: You must specify only one of the following parameters: StackName ,
 	// StackSetName , TemplateBody , or TemplateURL .

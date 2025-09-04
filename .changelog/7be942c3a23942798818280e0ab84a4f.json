@@ -1,0 +1,8 @@
+{
+    "id": "7be942c3-a239-4279-8818-280e0ab84a4f",
+    "type": "feature",
+    "description": "Amazon Verified Permissions / Features : Adds support for datetime and duration attribute values.",
+    "modules": [
+        "service/verifiedpermissions"
+    ]
+}
