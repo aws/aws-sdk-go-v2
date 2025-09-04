@@ -1,3 +1,7 @@
+# v1.106.0 (2025-09-04)
+
+* **Feature**: Added new EndpointNetworkType and TargetConnectionNetworkType fields in Proxy APIs to support IPv6
+
 # v1.105.0 (2025-09-03)
 
 * **Feature**: This release adds support for MasterUserAuthenticationType parameter on CreateDBInstance, ModifyDBInstance, CreateDBCluster, and ModifyDBCluster operations.

@@ -1,8 +1,0 @@
-{
-    "id": "ad218c1d-0c79-4a02-b554-9b39c625fdbb",
-    "type": "feature",
-    "description": "Add m8i, m8i-flex and i8ge instance types.",
-    "modules": [
-        "service/ec2"
-    ]
-}

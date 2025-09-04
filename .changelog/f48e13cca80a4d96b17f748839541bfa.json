@@ -1,8 +1,0 @@
-{
-    "id": "f48e13cc-a80a-4d96-b17f-748839541bfa",
-    "type": "feature",
-    "description": "ListHookResults API now supports retrieving invocation results for all CloudFormation Hooks (previously limited to create change set and Cloud Control operations) with new optional parameters for filtering by Hook status and ARN.",
-    "modules": [
-        "service/cloudformation"
-    ]
-}

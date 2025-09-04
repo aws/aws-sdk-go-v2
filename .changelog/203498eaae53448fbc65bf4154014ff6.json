@@ -1,8 +1,0 @@
-{
-    "id": "203498ea-ae53-448f-bc65-bf4154014ff6",
-    "type": "feature",
-    "description": "Added new EndpointNetworkType and TargetConnectionNetworkType fields in Proxy APIs to support IPv6",
-    "modules": [
-        "service/rds"
-    ]
-}

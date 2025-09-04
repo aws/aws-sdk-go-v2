@@ -1,3 +1,7 @@
+# v1.29.0 (2025-09-04)
+
+* **Feature**: Amazon Verified Permissions / Features : Adds support for datetime and duration attribute values.
+
 # v1.28.3 (2025-08-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

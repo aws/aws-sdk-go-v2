@@ -1,3 +1,7 @@
+# v1.33.0 (2025-09-04)
+
+* **Feature**: Add support for configurable compute sizes for PySpark jobs.
+
 # v1.32.0 (2025-09-03)
 
 * **Feature**: Added support for adding new data provider members to an existing collaboration.

@@ -1,3 +1,19 @@
+# Release (2025-09-04)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.33.0](service/cleanrooms/CHANGELOG.md#v1330-2025-09-04)
+  * **Feature**: Add support for configurable compute sizes for PySpark jobs.
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.66.0](service/cloudformation/CHANGELOG.md#v1660-2025-09-04)
+  * **Feature**: ListHookResults API now supports retrieving invocation results for all CloudFormation Hooks (previously limited to create change set and Cloud Control operations) with new optional parameters for filtering by Hook status and ARN.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.251.0](service/ec2/CHANGELOG.md#v12510-2025-09-04)
+  * **Feature**: Add m8i, m8i-flex and i8ge instance types.
+* `github.com/aws/aws-sdk-go-v2/service/opensearchserverless`: [v1.26.0](service/opensearchserverless/CHANGELOG.md#v1260-2025-09-04)
+  * **Feature**: Add support for Federal Information Processing Standards (FIPS) and Federal Risk and Authorization Management Program (FedRAMP) compliance
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.106.0](service/rds/CHANGELOG.md#v11060-2025-09-04)
+  * **Feature**: Added new EndpointNetworkType and TargetConnectionNetworkType fields in Proxy APIs to support IPv6
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.29.0](service/verifiedpermissions/CHANGELOG.md#v1290-2025-09-04)
+  * **Feature**: Amazon Verified Permissions / Features : Adds support for datetime and duration attribute values.
+
 # Release (2025-09-03)
 
 ## Module Highlights
