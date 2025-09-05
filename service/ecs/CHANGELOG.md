@@ -1,3 +1,7 @@
+# v1.63.5 (2025-09-05)
+
+* **Documentation**: This is a documentation only release that adds additional information for Amazon ECS Availability Zone rebalancing.
+
 # v1.63.4 (2025-08-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

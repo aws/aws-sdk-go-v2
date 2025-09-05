@@ -1,3 +1,7 @@
+# v1.214.0 (2025-09-05)
+
+* **Feature**: Release IPv6 support with dualstack in SageMaker Notebooks, Tiered Storage Checkpointing Support in SageMaker HyperPod and P5.4xlarge instance type for SageMaker Hosting.
+
 # v1.213.1 (2025-08-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

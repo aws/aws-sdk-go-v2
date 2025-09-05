@@ -1,8 +1,0 @@
-{
-    "id": "df0d8f97-9081-4100-ad35-123ed5207302",
-    "type": "documentation",
-    "description": "Documentation-only update to add AccountingStorageEnforce to SlurmCustomSetting.",
-    "modules": [
-        "service/pcs"
-    ]
-}

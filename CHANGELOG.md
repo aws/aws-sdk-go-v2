@@ -1,3 +1,13 @@
+# Release (2025-09-05)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.63.5](service/ecs/CHANGELOG.md#v1635-2025-09-05)
+  * **Documentation**: This is a documentation only release that adds additional information for Amazon ECS Availability Zone rebalancing.
+* `github.com/aws/aws-sdk-go-v2/service/pcs`: [v1.12.2](service/pcs/CHANGELOG.md#v1122-2025-09-05)
+  * **Documentation**: Documentation-only update to add AccountingStorageEnforce to SlurmCustomSetting.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.214.0](service/sagemaker/CHANGELOG.md#v12140-2025-09-05)
+  * **Feature**: Release IPv6 support with dualstack in SageMaker Notebooks, Tiered Storage Checkpointing Support in SageMaker HyperPod and P5.4xlarge instance type for SageMaker Hosting.
+
 # Release (2025-09-04)
 
 ## Module Highlights

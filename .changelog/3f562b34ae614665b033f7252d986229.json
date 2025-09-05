@@ -1,8 +1,0 @@
-{
-    "id": "3f562b34-ae61-4665-b033-f7252d986229",
-    "type": "documentation",
-    "description": "This is a documentation only release that adds additional information for Amazon ECS Availability Zone rebalancing.",
-    "modules": [
-        "service/ecs"
-    ]
-}
