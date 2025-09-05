@@ -28,10 +28,7 @@ import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.model.Model;
-import software.amazon.smithy.model.shapes.MemberShape;
-import software.amazon.smithy.model.shapes.Shape;
-import software.amazon.smithy.model.shapes.ShapeId;
-import software.amazon.smithy.model.shapes.StringShape;
+import software.amazon.smithy.model.shapes.*;
 import software.amazon.smithy.model.traits.DeprecatedTrait;
 import software.amazon.smithy.model.traits.DocumentationTrait;
 import software.amazon.smithy.model.traits.HttpHeaderTrait;
@@ -64,6 +61,10 @@ public class S3ExpiresShapeCustomization implements GoIntegration {
         }
 
         var withExpiresString = model.toBuilder()
+                .removeShape(S3_EXPIRES)
+                .addShape(TimestampShape.builder()
+                        .id(S3_EXPIRES)
+                        .build())
                 .addShape(StringShape.builder()
                         .id(S3_EXPIRES_STRING)
                         .build())
