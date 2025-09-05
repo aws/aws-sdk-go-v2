@@ -84,7 +84,7 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Amazon Web Services PCS can't process your request right now. Try again later.
+// PCS can't process your request right now. Try again later.
 type InternalServerException struct {
 	Message *string
 

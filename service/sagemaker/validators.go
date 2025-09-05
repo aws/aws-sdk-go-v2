@@ -8663,6 +8663,21 @@ func validateClusterRestrictedInstanceGroupSpecifications(v []types.ClusterRestr
 	}
 }
 
+func validateClusterTieredStorageConfig(v *types.ClusterTieredStorageConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClusterTieredStorageConfig"}
+	if len(v.Mode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCodeEditorAppSettings(v *types.CodeEditorAppSettings) error {
 	if v == nil {
 		return nil
@@ -14878,6 +14893,11 @@ func validateOpCreateClusterInput(v *CreateClusterInput) error {
 			invalidParams.AddNested("Orchestrator", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.TieredStorageConfig != nil {
+		if err := validateClusterTieredStorageConfig(v.TieredStorageConfig); err != nil {
+			invalidParams.AddNested("TieredStorageConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.AutoScaling != nil {
 		if err := validateClusterAutoScalingConfig(v.AutoScaling); err != nil {
 			invalidParams.AddNested("AutoScaling", err.(smithy.InvalidParamsError))
@@ -19957,6 +19977,11 @@ func validateOpUpdateClusterInput(v *UpdateClusterInput) error {
 	if v.RestrictedInstanceGroups != nil {
 		if err := validateClusterRestrictedInstanceGroupSpecifications(v.RestrictedInstanceGroups); err != nil {
 			invalidParams.AddNested("RestrictedInstanceGroups", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TieredStorageConfig != nil {
+		if err := validateClusterTieredStorageConfig(v.TieredStorageConfig); err != nil {
+			invalidParams.AddNested("TieredStorageConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.AutoScaling != nil {

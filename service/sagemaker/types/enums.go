@@ -1702,6 +1702,25 @@ func (ClusterAutoScalingStatus) Values() []ClusterAutoScalingStatus {
 	}
 }
 
+type ClusterConfigMode string
+
+// Enum values for ClusterConfigMode
+const (
+	ClusterConfigModeEnable  ClusterConfigMode = "Enable"
+	ClusterConfigModeDisable ClusterConfigMode = "Disable"
+)
+
+// Values returns all known values for ClusterConfigMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterConfigMode) Values() []ClusterConfigMode {
+	return []ClusterConfigMode{
+		"Enable",
+		"Disable",
+	}
+}
+
 type ClusterEventResourceType string
 
 // Enum values for ClusterEventResourceType
@@ -4017,6 +4036,25 @@ func (InstanceType) Values() []InstanceType {
 		"ml.g6.16xlarge",
 		"ml.g6.24xlarge",
 		"ml.g6.48xlarge",
+	}
+}
+
+type IPAddressType string
+
+// Enum values for IPAddressType
+const (
+	IPAddressTypeIpv4      IPAddressType = "ipv4"
+	IPAddressTypeDualstack IPAddressType = "dualstack"
+)
+
+// Values returns all known values for IPAddressType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IPAddressType) Values() []IPAddressType {
+	return []IPAddressType{
+		"ipv4",
+		"dualstack",
 	}
 }
 
@@ -6336,6 +6374,7 @@ const (
 	ProductionVariantInstanceTypeMlC6in32xlarge     ProductionVariantInstanceType = "ml.c6in.32xlarge"
 	ProductionVariantInstanceTypeMlP6B20048xlarge   ProductionVariantInstanceType = "ml.p6-b200.48xlarge"
 	ProductionVariantInstanceTypeMlP6eGb20036xlarge ProductionVariantInstanceType = "ml.p6e-gb200.36xlarge"
+	ProductionVariantInstanceTypeMlP54xlarge        ProductionVariantInstanceType = "ml.p5.4xlarge"
 )
 
 // Values returns all known values for ProductionVariantInstanceType. Note that
@@ -6608,6 +6647,7 @@ func (ProductionVariantInstanceType) Values() []ProductionVariantInstanceType {
 		"ml.c6in.32xlarge",
 		"ml.p6-b200.48xlarge",
 		"ml.p6e-gb200.36xlarge",
+		"ml.p5.4xlarge",
 	}
 }
 

@@ -240,8 +240,7 @@ type ComputeNodeGroup struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// An Amazon EC2 launch template Amazon Web Services PCS uses to launch compute
-	// nodes.
+	// An Amazon EC2 launch template PCS uses to launch compute nodes.
 	//
 	// This member is required.
 	CustomLaunchTemplate *CustomLaunchTemplate
@@ -306,9 +305,8 @@ type ComputeNodeGroup struct {
 	// This member is required.
 	SubnetIds []string
 
-	// The ID of the Amazon Machine Image (AMI) that Amazon Web Services PCS uses to
-	// launch instances. If not provided, Amazon Web Services PCS uses the AMI ID
-	// specified in the custom launch template.
+	// The ID of the Amazon Machine Image (AMI) that PCS uses to launch instances. If
+	// not provided, PCS uses the AMI ID specified in the custom launch template.
 	AmiId *string
 
 	// The list of errors that occurred during compute node group provisioning.
@@ -412,8 +410,7 @@ type ComputeNodeGroupSummary struct {
 	noSmithyDocumentSerde
 }
 
-// An Amazon EC2 launch template Amazon Web Services PCS uses to launch compute
-// nodes.
+// An Amazon EC2 launch template PCS uses to launch compute nodes.
 type CustomLaunchTemplate struct {
 
 	// The ID of the EC2 launch template to use to provision instances.
@@ -480,12 +477,10 @@ type ErrorInfo struct {
 	noSmithyDocumentSerde
 }
 
-// An EC2 instance configuration Amazon Web Services PCS uses to launch compute
-// nodes.
+// An EC2 instance configuration PCS uses to launch compute nodes.
 type InstanceConfig struct {
 
-	// The EC2 instance type that Amazon Web Services PCS can provision in the compute
-	// node group.
+	// The EC2 instance type that PCS can provision in the compute node group.
 	//
 	// Example: t2.xlarge
 	InstanceType *string
@@ -529,10 +524,10 @@ type Networking struct {
 	//   - Destination: Self
 	SecurityGroupIds []string
 
-	// The ID of the subnet where Amazon Web Services PCS creates an Elastic Network
-	// Interface (ENI) to enable communication between managed controllers and Amazon
-	// Web Services PCS resources. The subnet must have an available IP address, cannot
-	// reside in AWS Outposts, AWS Wavelength, or an AWS Local Zone.
+	// The ID of the subnet where PCS creates an Elastic Network Interface (ENI) to
+	// enable communication between managed controllers and PCS resources. The subnet
+	// must have an available IP address, cannot reside in Outposts, Wavelength, or an
+	// Amazon Web Services Local Zone.
 	//
 	// Example: subnet-abcd1234
 	SubnetIds []string
@@ -710,19 +705,18 @@ type ScalingConfigurationRequest struct {
 // The cluster management and job scheduling software associated with the cluster.
 type Scheduler struct {
 
-	// The software Amazon Web Services PCS uses to manage cluster scaling and job
-	// scheduling.
+	// The software PCS uses to manage cluster scaling and job scheduling.
 	//
 	// This member is required.
 	Type SchedulerType
 
-	// The version of the specified scheduling software that Amazon Web Services PCS
-	// uses to manage cluster scaling and job scheduling. For more information, see [Slurm versions in Amazon Web Services PCS]in
-	// the Amazon Web Services PCS User Guide.
+	// The version of the specified scheduling software that PCS uses to manage
+	// cluster scaling and job scheduling. For more information, see [Slurm versions in PCS]in the PCS User
+	// Guide.
 	//
 	// Valid Values: 23.11 | 24.05 | 24.11
 	//
-	// [Slurm versions in Amazon Web Services PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html
+	// [Slurm versions in PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html
 	//
 	// This member is required.
 	Version *string
@@ -733,19 +727,18 @@ type Scheduler struct {
 // The cluster management and job scheduling software associated with the cluster.
 type SchedulerRequest struct {
 
-	// The software Amazon Web Services PCS uses to manage cluster scaling and job
-	// scheduling.
+	// The software PCS uses to manage cluster scaling and job scheduling.
 	//
 	// This member is required.
 	Type SchedulerType
 
-	// The version of the specified scheduling software that Amazon Web Services PCS
-	// uses to manage cluster scaling and job scheduling. For more information, see [Slurm versions in Amazon Web Services PCS]in
-	// the Amazon Web Services PCS User Guide.
+	// The version of the specified scheduling software that PCS uses to manage
+	// cluster scaling and job scheduling. For more information, see [Slurm versions in PCS]in the PCS User
+	// Guide.
 	//
 	// Valid Values: 23.11 | 24.05 | 24.11
 	//
-	// [Slurm versions in Amazon Web Services PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html
+	// [Slurm versions in PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html
 	//
 	// This member is required.
 	Version *string
@@ -772,8 +765,7 @@ type SlurmAuthKey struct {
 // Additional settings that directly map to Slurm settings.
 type SlurmCustomSetting struct {
 
-	// Amazon Web Services PCS supports configuration of the following Slurm
-	// parameters:
+	// PCS supports configuration of the following Slurm parameters:
 	//
 	//   - For clusters
 	//
@@ -786,6 +778,12 @@ type SlurmCustomSetting struct {
 	// [SelectTypeParameters]
 	//   - SelectTypeParameters
 	//
+	// [AccountingStorageEnforce]
+	//   - AccountingStorageEnforce
+	//
+	// PCS supports a subset of the options for AccountingStorageEnforce . For more
+	//   information, see [Slurm accounting in PCS]in the PCS User Guide.
+	//
 	//   - For compute node groups
 	//
 	// [Weight]
@@ -794,10 +792,12 @@ type SlurmCustomSetting struct {
 	// [RealMemory]
 	//   - RealMemory
 	//
+	// [Slurm accounting in PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-accounting.html
 	// [SelectTypeParameters]: https://slurm.schedmd.com/slurm.conf.html#OPT_SelectTypeParameters
 	// [Prolog]: https://slurm.schedmd.com/slurm.conf.html#OPT_Prolog_1
 	// [Epilog]: https://slurm.schedmd.com/slurm.conf.html#OPT_Epilog_1
 	// [Weight]: https://slurm.schedmd.com/slurm.conf.html#OPT_Weight
+	// [AccountingStorageEnforce]: https://slurm.schedmd.com/slurm.conf.html#OPT_AccountingStorageEnforce
 	// [RealMemory]: https://slurm.schedmd.com/slurm.conf.html#OPT_Weight
 	//
 	// This member is required.

@@ -94,6 +94,12 @@ type UpdateNotebookInstanceInput struct {
 	// The Amazon ML compute instance type.
 	InstanceType types.InstanceType
 
+	// The IP address type for the notebook instance. Specify ipv4 for IPv4-only
+	// connectivity or dualstack for both IPv4 and IPv6 connectivity. The notebook
+	// instance must be stopped before updating this setting. When you specify
+	// dualstack , the subnet must support IPv6 addressing.
+	IpAddressType types.IPAddressType
+
 	// The name of a lifecycle configuration to associate with the notebook instance.
 	// For information about lifestyle configurations, see [Step 2.1: (Optional) Customize a Notebook Instance].
 	//

@@ -4374,6 +4374,29 @@ type ClusterSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Defines the configuration for managed tier checkpointing in a HyperPod cluster.
+// Managed tier checkpointing uses multiple storage tiers, including cluster CPU
+// memory, to provide faster checkpoint operations and improved fault tolerance for
+// large-scale model training. The system automatically saves checkpoints at high
+// frequency to memory and periodically persists them to durable storage, like
+// Amazon S3.
+type ClusterTieredStorageConfig struct {
+
+	// Specifies whether managed tier checkpointing is enabled or disabled for the
+	// HyperPod cluster. When set to Enable , the system installs a memory management
+	// daemon that provides disaggregated memory as a service for checkpoint storage.
+	// When set to Disable , the feature is turned off and the memory management daemon
+	// is removed from the cluster.
+	//
+	// This member is required.
+	Mode ClusterConfigMode
+
+	// The percentage (int) of cluster memory to allocate for checkpointing.
+	InstanceMemoryAllocationPercentage *int32
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for the file system and kernels in a SageMaker image running
 // as a Code Editor app. The FileSystemConfig object is not supported.
 type CodeEditorAppImageConfig struct {
@@ -5873,7 +5896,7 @@ type DockerSettings struct {
 	// Indicates whether the domain can access Docker.
 	EnableDockerAccess FeatureStatus
 
-	// Indicates whether to use rootless Docker. Default value is DISABLED .
+	// Indicates whether to use rootless Docker.
 	RootlessDocker FeatureStatus
 
 	// The list of Amazon Web Services accounts that are trusted when the domain is

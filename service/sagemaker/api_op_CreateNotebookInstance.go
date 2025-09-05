@@ -134,6 +134,12 @@ type CreateNotebookInstanceInput struct {
 	// Information on the IMDS configuration of the notebook instance
 	InstanceMetadataServiceConfiguration *types.InstanceMetadataServiceConfiguration
 
+	// The IP address type for the notebook instance. Specify ipv4 for IPv4-only
+	// connectivity or dualstack for both IPv4 and IPv6 connectivity. When you specify
+	// dualstack , the subnet must support IPv6 CIDR blocks. If not specified, defaults
+	// to ipv4 .
+	IpAddressType types.IPAddressType
+
 	// The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service
 	// key that SageMaker AI uses to encrypt data on the storage volume attached to
 	// your notebook instance. The KMS key you provide must be enabled. For

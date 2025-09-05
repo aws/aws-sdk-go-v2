@@ -82,6 +82,25 @@ type DescribePartnerAppOutput struct {
 	Name *string
 
 	// The status of the SageMaker Partner AI App.
+	//
+	//   - Creating: SageMaker AI is creating the partner AI app. The partner AI app
+	//   is not available during creation.
+	//
+	//   - Updating: SageMaker AI is updating the partner AI app. The partner AI app
+	//   is not available when updating.
+	//
+	//   - Deleting: SageMaker AI is deleting the partner AI app. The partner AI app
+	//   is not available during deletion.
+	//
+	//   - Available: The partner AI app is provisioned and accessible.
+	//
+	//   - Failed: The partner AI app is in a failed state and isn't available.
+	//   SageMaker AI is investigating the issue. For further guidance, contact Amazon
+	//   Web Services Support.
+	//
+	//   - UpdateFailed: The partner AI app couldn't be updated but is available.
+	//
+	//   - Deleted: The partner AI app is permanently deleted and not available.
 	Status types.PartnerAppStatus
 
 	// The instance type and size of the cluster attached to the SageMaker Partner AI

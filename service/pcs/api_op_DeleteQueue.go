@@ -11,8 +11,8 @@ import (
 )
 
 // Deletes a job queue. If the compute node group associated with this queue isn't
-// associated with any other queues, Amazon Web Services PCS terminates all the
-// compute nodes for this queue.
+// associated with any other queues, PCS terminates all the compute nodes for this
+// queue.
 func (c *Client) DeleteQueue(ctx context.Context, params *DeleteQueueInput, optFns ...func(*Options)) (*DeleteQueueOutput, error) {
 	if params == nil {
 		params = &DeleteQueueInput{}

@@ -4124,6 +4124,17 @@ type Service struct {
 	// For more information, see [Balancing an Amazon ECS service across Availability Zones] in the Amazon Elastic Container Service Developer
 	// Guide .
 	//
+	// The default behavior of AvailabilityZoneRebalancing differs between create and
+	// update requests:
+	//
+	//   - For create service requests, when when no value is specified for
+	//   AvailabilityZoneRebalancing , Amazon ECS defaults the value to to ENABLED .
+	//
+	//   - For update service requests, when no value is specified for
+	//   AvailabilityZoneRebalancing , Amazon ECS defaults to the existing service’s
+	//   AvailabilityZoneRebalancing value. If the service never had an
+	//   AvailabilityZoneRebalancing value set, Amazon ECS treats this as DISABLED .
+	//
 	// [Balancing an Amazon ECS service across Availability Zones]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-rebalancing.html
 	AvailabilityZoneRebalancing AvailabilityZoneRebalancing
 
@@ -4176,8 +4187,8 @@ type Service struct {
 	Events []ServiceEvent
 
 	// The period of time, in seconds, that the Amazon ECS service scheduler ignores
-	// unhealthy Elastic Load Balancing target health checks after a task has first
-	// started.
+	// unhealthy Elastic Load Balancing, VPC Lattice, and container health checks after
+	// a task has first started.
 	HealthCheckGracePeriodSeconds *int32
 
 	// The launch type the service is using. When using the DescribeServices API, this

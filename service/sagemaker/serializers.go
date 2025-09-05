@@ -24810,6 +24810,23 @@ func awsAwsjson11_serializeDocumentClusterRestrictedInstanceGroupSpecifications(
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentClusterTieredStorageConfig(v *types.ClusterTieredStorageConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InstanceMemoryAllocationPercentage != nil {
+		ok := object.Key("InstanceMemoryAllocationPercentage")
+		ok.Integer(*v.InstanceMemoryAllocationPercentage)
+	}
+
+	if len(v.Mode) > 0 {
+		ok := object.Key("Mode")
+		ok.String(string(v.Mode))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentCodeEditorAppImageConfig(v *types.CodeEditorAppImageConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -35890,6 +35907,13 @@ func awsAwsjson11_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 		}
 	}
 
+	if v.TieredStorageConfig != nil {
+		ok := object.Key("TieredStorageConfig")
+		if err := awsAwsjson11_serializeDocumentClusterTieredStorageConfig(v.TieredStorageConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.VpcConfig != nil {
 		ok := object.Key("VpcConfig")
 		if err := awsAwsjson11_serializeDocumentVpcConfig(v.VpcConfig, ok); err != nil {
@@ -37831,6 +37855,11 @@ func awsAwsjson11_serializeOpDocumentCreateNotebookInstanceInput(v *CreateNotebo
 	if len(v.InstanceType) > 0 {
 		ok := object.Key("InstanceType")
 		ok.String(string(v.InstanceType))
+	}
+
+	if len(v.IpAddressType) > 0 {
+		ok := object.Key("IpAddressType")
+		ok.String(string(v.IpAddressType))
 	}
 
 	if v.KmsKeyId != nil {
@@ -45612,6 +45641,13 @@ func awsAwsjson11_serializeOpDocumentUpdateClusterInput(v *UpdateClusterInput, v
 		}
 	}
 
+	if v.TieredStorageConfig != nil {
+		ok := object.Key("TieredStorageConfig")
+		if err := awsAwsjson11_serializeDocumentClusterTieredStorageConfig(v.TieredStorageConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -46564,6 +46600,11 @@ func awsAwsjson11_serializeOpDocumentUpdateNotebookInstanceInput(v *UpdateNotebo
 	if len(v.InstanceType) > 0 {
 		ok := object.Key("InstanceType")
 		ok.String(string(v.InstanceType))
+	}
+
+	if len(v.IpAddressType) > 0 {
+		ok := object.Key("IpAddressType")
+		ok.String(string(v.IpAddressType))
 	}
 
 	if v.LifecycleConfigName != nil {

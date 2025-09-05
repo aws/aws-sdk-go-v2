@@ -12,12 +12,11 @@ import (
 )
 
 // Creates a managed set of compute nodes. You associate a compute node group with
-// a cluster through 1 or more Amazon Web Services PCS queues or as part of the
-// login fleet. A compute node group includes the definition of the compute
-// properties and lifecycle management. Amazon Web Services PCS uses the
-// information you provide to this API action to launch compute nodes in your
-// account. You can only specify subnets in the same Amazon VPC as your cluster.
-// You receive billing charges for the compute nodes that Amazon Web Services PCS
+// a cluster through 1 or more PCS queues or as part of the login fleet. A compute
+// node group includes the definition of the compute properties and lifecycle
+// management. PCS uses the information you provide to this API action to launch
+// compute nodes in your account. You can only specify subnets in the same Amazon
+// VPC as your cluster. You receive billing charges for the compute nodes that PCS
 // launches in your account. You must already have a launch template before you
 // call this API. For more information, see [Launch an instance from a launch template]in the Amazon Elastic Compute Cloud
 // User Guide for Linux Instances.
@@ -50,8 +49,7 @@ type CreateComputeNodeGroupInput struct {
 	// This member is required.
 	ComputeNodeGroupName *string
 
-	// An Amazon EC2 launch template Amazon Web Services PCS uses to launch compute
-	// nodes.
+	// An Amazon EC2 launch template PCS uses to launch compute nodes.
 	//
 	// This member is required.
 	CustomLaunchTemplate *types.CustomLaunchTemplate
@@ -84,9 +82,9 @@ type CreateComputeNodeGroupInput struct {
 	// This member is required.
 	SubnetIds []string
 
-	//  The ID of the Amazon Machine Image (AMI) that Amazon Web Services PCS uses to
-	// launch compute nodes (Amazon EC2 instances). If you don't provide this value,
-	// Amazon Web Services PCS uses the AMI ID specified in the custom launch template.
+	//  The ID of the Amazon Machine Image (AMI) that PCS uses to launch compute nodes
+	// (Amazon EC2 instances). If you don't provide this value, PCS uses the AMI ID
+	// specified in the custom launch template.
 	AmiId *string
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency

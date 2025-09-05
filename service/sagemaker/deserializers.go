@@ -48865,6 +48865,59 @@ func awsAwsjson11_deserializeDocumentClusterSummary(v **types.ClusterSummary, va
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentClusterTieredStorageConfig(v **types.ClusterTieredStorageConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClusterTieredStorageConfig
+	if *v == nil {
+		sv = &types.ClusterTieredStorageConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "InstanceMemoryAllocationPercentage":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ClusterInstanceMemoryAllocationPercentage to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.InstanceMemoryAllocationPercentage = ptr.Int32(int32(i64))
+			}
+
+		case "Mode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterConfigMode to be of type string, got %T instead", value)
+				}
+				sv.Mode = types.ClusterConfigMode(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentCodeEditorAppImageConfig(v **types.CodeEditorAppImageConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -98438,6 +98491,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeClusterOutput(v **DescribeCluster
 				return err
 			}
 
+		case "TieredStorageConfig":
+			if err := awsAwsjson11_deserializeDocumentClusterTieredStorageConfig(&sv.TieredStorageConfig, value); err != nil {
+				return err
+			}
+
 		case "VpcConfig":
 			if err := awsAwsjson11_deserializeDocumentVpcConfig(&sv.VpcConfig, value); err != nil {
 				return err
@@ -104108,6 +104166,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeNotebookInstanceOutput(v **Descri
 					return fmt.Errorf("expected InstanceType to be of type string, got %T instead", value)
 				}
 				sv.InstanceType = types.InstanceType(jtv)
+			}
+
+		case "IpAddressType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IPAddressType to be of type string, got %T instead", value)
+				}
+				sv.IpAddressType = types.IPAddressType(jtv)
 			}
 
 		case "KmsKeyId":

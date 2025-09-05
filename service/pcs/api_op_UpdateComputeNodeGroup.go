@@ -41,9 +41,8 @@ type UpdateComputeNodeGroupInput struct {
 	// This member is required.
 	ComputeNodeGroupIdentifier *string
 
-	// The ID of the Amazon Machine Image (AMI) that Amazon Web Services PCS uses to
-	// launch instances. If not provided, Amazon Web Services PCS uses the AMI ID
-	// specified in the custom launch template.
+	// The ID of the Amazon Machine Image (AMI) that PCS uses to launch instances. If
+	// not provided, PCS uses the AMI ID specified in the custom launch template.
 	AmiId *string
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
@@ -54,8 +53,7 @@ type UpdateComputeNodeGroupInput struct {
 	// specify a client token, the CLI and SDK automatically generate 1 for you.
 	ClientToken *string
 
-	// An Amazon EC2 launch template Amazon Web Services PCS uses to launch compute
-	// nodes.
+	// An Amazon EC2 launch template PCS uses to launch compute nodes.
 	CustomLaunchTemplate *types.CustomLaunchTemplate
 
 	// The Amazon Resource Name (ARN) of the IAM instance profile used to pass an IAM

@@ -13,8 +13,8 @@ import (
 
 // This API action isn't intended for you to use.
 //
-// Amazon Web Services PCS uses this API action to register the compute nodes it
-// launches in your account.
+// PCS uses this API action to register the compute nodes it launches in your
+// account.
 func (c *Client) RegisterComputeNodeGroupInstance(ctx context.Context, params *RegisterComputeNodeGroupInstanceInput, optFns ...func(*Options)) (*RegisterComputeNodeGroupInstanceOutput, error) {
 	if params == nil {
 		params = &RegisterComputeNodeGroupInstanceInput{}

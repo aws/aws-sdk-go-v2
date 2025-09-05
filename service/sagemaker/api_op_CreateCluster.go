@@ -87,6 +87,12 @@ type CreateClusterInput struct {
 	// [Tagging Amazon Web Services Resources User Guide]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
 	Tags []types.Tag
 
+	// The configuration for managed tier checkpointing on the HyperPod cluster. When
+	// enabled, this feature uses a multi-tier storage approach for storing model
+	// checkpoints, providing faster checkpoint operations and improved fault tolerance
+	// across cluster nodes.
+	TieredStorageConfig *types.ClusterTieredStorageConfig
+
 	// Specifies the Amazon Virtual Private Cloud (VPC) that is associated with the
 	// Amazon SageMaker HyperPod cluster. You can control access to and from your
 	// resources by configuring your VPC. For more information, see [Give SageMaker access to resources in your Amazon VPC].

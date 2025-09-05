@@ -94,6 +94,10 @@ type DescribeNotebookInstanceOutput struct {
 	// The type of ML compute instance running on the notebook instance.
 	InstanceType types.InstanceType
 
+	// The IP address type configured for the notebook instance. Returns ipv4 for
+	// IPv4-only connectivity or dualstack for both IPv4 and IPv6 connectivity.
+	IpAddressType types.IPAddressType
+
 	// The Amazon Web Services KMS key ID SageMaker AI uses to encrypt data when
 	// storing it on the ML storage volume attached to the instance.
 	KmsKeyId *string

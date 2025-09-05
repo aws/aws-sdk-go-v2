@@ -85,6 +85,11 @@ type DescribeClusterOutput struct {
 	// created in the SageMaker HyperPod cluster.
 	RestrictedInstanceGroups []types.ClusterRestrictedInstanceGroupDetails
 
+	// The current configuration for managed tier checkpointing on the HyperPod
+	// cluster. For example, this shows whether the feature is enabled and the
+	// percentage of cluster memory allocated for checkpoint storage.
+	TieredStorageConfig *types.ClusterTieredStorageConfig
+
 	// Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs,
 	// hosted models, and compute resources have access to. You can control access to
 	// and from your resources by configuring a VPC. For more information, see [Give SageMaker Access to Resources in your Amazon VPC].
