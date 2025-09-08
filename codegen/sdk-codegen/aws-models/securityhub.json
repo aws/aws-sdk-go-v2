@@ -39656,6 +39656,12 @@
                         "smithy.api#enumValue": "NOT_FOUND"
                     }
                 },
+                "RESOURCE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE_NOT_FOUND"
+                    }
+                },
                 "LIMIT_EXCEEDED": {
                     "target": "smithy.api#Unit",
                     "traits": {

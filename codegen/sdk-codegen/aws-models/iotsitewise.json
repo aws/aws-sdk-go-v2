@@ -5069,6 +5069,12 @@
                 }
             }
         },
+        "com.amazonaws.iotsitewise#ComputationModelVersionFilter": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(LATEST|ACTIVE|[1-9]{1}\\d{0,9})$"
+            }
+        },
         "com.amazonaws.iotsitewise#ComputeLocation": {
             "type": "enum",
             "members": {
@@ -5265,7 +5271,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an access policy that grants the specified identity (IAM Identity Center user, IAM Identity Center group, or\n      IAM user) access to the specified IoT SiteWise Monitor portal or project resource.</p>",
+                "smithy.api#documentation": "<p>Creates an access policy that grants the specified identity (IAM Identity Center user, IAM Identity Center group, or\n      IAM user) access to the specified IoT SiteWise Monitor portal or project resource.</p>\n         <note>\n            <p>Support for access policies that use an SSO Group as the identity is not supported at this time.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "monitor."
                 },
@@ -9295,6 +9301,13 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
+                },
+                "computationModelVersion": {
+                    "target": "com.amazonaws.iotsitewise#ComputationModelVersionFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the computation model.</p>",
+                        "smithy.api#httpQuery": "computationModelVersion"
+                    }
                 }
             },
             "traits": {
@@ -11149,7 +11162,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.iotsitewise#ExecuteQueryMaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return at one time.</p>\n         <ul>\n            <li>\n               <p>Minimum is 1</p>\n            </li>\n            <li>\n               <p>Maximum is 20000</p>\n            </li>\n            <li>\n               <p>Default is 250</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return at one time.</p>\n         <ul>\n            <li>\n               <p>Minimum is 1</p>\n            </li>\n            <li>\n               <p>Maximum is 20000</p>\n            </li>\n            <li>\n               <p>Default is 20000</p>\n            </li>\n         </ul>"
                     }
                 },
                 "clientToken": {
