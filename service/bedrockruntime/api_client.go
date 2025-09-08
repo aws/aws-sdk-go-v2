@@ -847,6 +847,15 @@ func resolveEnvBearerToken(options *Options) {
 		return bearer.Token{Value: token}, nil
 	})
 	options.AuthSchemePreference = []string{"httpBearerAuth"}
+	options.APIOptions = append(options.APIOptions, func(stack *middleware.Stack) error {
+		ua, err := getOrAddRequestUserAgent(stack)
+		if err != nil {
+			return err
+		}
+
+		ua.AddUserAgentFeature(awsmiddleware.UserAgentFeatureBearerServiceEnvVars)
+		return nil
+	})
 }
 
 func resolveTracerProvider(options *Options) {
