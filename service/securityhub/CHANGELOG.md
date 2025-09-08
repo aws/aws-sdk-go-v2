@@ -1,3 +1,8 @@
+# v1.64.0 (2025-09-08)
+
+* **Feature**: This release adds the RESOURCE_NOT_FOUND error code as a possible value in responses to the following operations: BatchGetStandardsControlAssociations, BatchUpdateStandardsControlAssociations, and BatchGetSecurityControls.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.63.2 (2025-08-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

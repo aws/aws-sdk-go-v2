@@ -1,3 +1,7 @@
+# v1.251.1 (2025-09-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.251.0 (2025-09-04)
 
 * **Feature**: Add m8i, m8i-flex and i8ge instance types.

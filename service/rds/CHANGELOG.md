@@ -1,3 +1,7 @@
+# v1.106.1 (2025-09-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.106.0 (2025-09-04)
 
 * **Feature**: Added new EndpointNetworkType and TargetConnectionNetworkType fields in Proxy APIs to support IPv6

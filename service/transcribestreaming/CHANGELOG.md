@@ -1,3 +1,7 @@
+# v1.32.1 (2025-09-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.32.0 (2025-09-03)
 
 * **Feature**: This release adds support for automatic language identification in AWS Transcribe Call Analytics

@@ -1,3 +1,7 @@
+# v1.26.1 (2025-09-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.26.0 (2025-09-04)
 
 * **Feature**: Add support for Federal Information Processing Standards (FIPS) and Federal Risk and Authorization Management Program (FedRAMP) compliance

@@ -1,8 +1,0 @@
-{
-    "id": "e0d549de-6196-49c6-a5a2-7f682db2cebc",
-    "type": "feature",
-    "description": "This release includes backward compatibility work on the \"Expires\" parameter.",
-    "modules": [
-        "service/s3"
-    ]
-}

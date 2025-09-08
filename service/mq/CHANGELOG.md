@@ -1,3 +1,7 @@
+# v1.34.1 (2025-09-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.34.0 (2025-09-03)
 
 * **Feature**: Add CONFIG_MANAGED as a supported AuthenticationStrategy for Amazon MQ for RabbitMQ brokers. Make username and password optional on broker creation for CONFIG_MANAGED brokers.

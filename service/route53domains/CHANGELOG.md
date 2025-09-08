@@ -1,3 +1,7 @@
+# v1.34.1 (2025-09-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.34.0 (2025-09-03)
 
 * **Feature**: Added new ExtraParams AU_ELIGIBILITY_TYPE, AU_POLICY_REASON, and AU_REGISTRANT_NAME

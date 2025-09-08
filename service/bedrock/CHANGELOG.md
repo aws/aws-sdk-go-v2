@@ -1,3 +1,8 @@
+# v1.46.0 (2025-09-08)
+
+* **Feature**: Emit user-agent business metrics for use of env-based bearer tokens.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.45.2 (2025-08-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

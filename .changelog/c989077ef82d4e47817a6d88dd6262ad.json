@@ -1,8 +1,0 @@
-{
-    "id": "c989077e-f82d-4e47-817a-6d88dd6262ad",
-    "type": "bugfix",
-    "description": "Statically define s3 expires shape as timestamp, this patch should guarantee s3 operations backwards compatibility after s3 team removes the expires reshape.",
-    "modules": [
-        "."
-    ]
-}

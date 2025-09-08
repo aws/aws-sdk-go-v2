@@ -1,3 +1,7 @@
+# v1.36.1 (2025-09-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.36.0 (2025-08-29)
 
 * **Feature**: AWS X-Ray Features: Support Sampling Rate Boost On Anomaly

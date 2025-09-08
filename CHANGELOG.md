@@ -1,3 +1,23 @@
+# Release (2025-09-08)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.39.0
+  * **Feature**: Emit user-agent business metrics for use of env-based bearer tokens.
+  * **Bug Fix**: Statically define s3 expires shape as timestamp, this patch should guarantee s3 operations backwards compatibility after s3 team removes the expires reshape.
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.46.0](service/bedrock/CHANGELOG.md#v1460-2025-09-08)
+  * **Feature**: Emit user-agent business metrics for use of env-based bearer tokens.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.40.0](service/bedrockruntime/CHANGELOG.md#v1400-2025-09-08)
+  * **Feature**: Emit user-agent business metrics for use of env-based bearer tokens.
+* `github.com/aws/aws-sdk-go-v2/service/iotsitewise`: [v1.52.0](service/iotsitewise/CHANGELOG.md#v1520-2025-09-08)
+  * **Feature**: Add ComputationModelVersion support in IoT SiteWise APIs
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.88.0](service/s3/CHANGELOG.md#v1880-2025-09-08)
+  * **Feature**: This release includes backward compatibility work on the "Expires" parameter.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.64.0](service/securityhub/CHANGELOG.md#v1640-2025-09-08)
+  * **Feature**: This release adds the RESOURCE_NOT_FOUND error code as a possible value in responses to the following operations: BatchGetStandardsControlAssociations, BatchUpdateStandardsControlAssociations, and BatchGetSecurityControls.
+
 # Release (2025-09-05)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.12.3 (2025-09-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.12.2 (2025-09-05)
 
 * **Documentation**: Documentation-only update to add AccountingStorageEnforce to SlurmCustomSetting.
