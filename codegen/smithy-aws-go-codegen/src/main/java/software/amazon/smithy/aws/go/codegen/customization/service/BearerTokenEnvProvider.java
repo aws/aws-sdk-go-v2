@@ -5,6 +5,7 @@ import static software.amazon.smithy.go.codegen.SymbolUtils.buildPackageSymbol;
 
 import java.util.List;
 import java.util.Map;
+import software.amazon.smithy.aws.go.codegen.customization.AwsCustomGoDependency;
 import software.amazon.smithy.aws.traits.auth.SigV4Trait;
 import software.amazon.smithy.go.codegen.GoCodegenContext;
 import software.amazon.smithy.go.codegen.GoWriter;
@@ -59,7 +60,7 @@ public class BearerTokenEnvProvider implements GoIntegration {
                 .replace(' ', '_')
                 .replace('-', '_');
         return goTemplate("""
-                $context:D $os:D $bearer:D
+                $context:D $os:D $bearer:D $awsmiddleware:D
                 func resolveEnvBearerToken(options *Options) {
                     token := os.Getenv("AWS_BEARER_TOKEN_$envSuffix:L")
                     if len(token) == 0 { return }
@@ -68,12 +69,22 @@ public class BearerTokenEnvProvider implements GoIntegration {
                         return bearer.Token{Value: token}, nil
                     })
                     options.AuthSchemePreference = []string{"httpBearerAuth"}
+                    options.APIOptions = append(options.APIOptions, func(stack *middleware.Stack) error {
+                        ua, err := getOrAddRequestUserAgent(stack)
+                        if err != nil {
+                            return err
+                        }
+
+                        ua.AddUserAgentFeature(awsmiddleware.UserAgentFeatureBearerServiceEnvVars)
+                        return nil
+                    })
                 }
                 """,
                 Map.of(
                         "context", SmithyGoDependency.CONTEXT,
                         "os", SmithyGoDependency.OS,
                         "bearer", SmithyGoDependency.SMITHY_AUTH_BEARER,
+                        "awsmiddleware", AwsCustomGoDependency.AWS_MIDDLEWARE,
                         "envSuffix", envSuffix
                 ));
     }
