@@ -536,6 +536,9 @@ var defaultPartitions = endpoints.Partitions{
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			endpoints.EndpointKey{
+				Region: "us-isof-east-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
 				Region: "us-isof-south-1",
 			}: endpoints.Endpoint{
 				Hostname: "compute-optimizer.us-isof-south-1.csp.hci.ic.gov",

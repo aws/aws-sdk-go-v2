@@ -1,0 +1,8 @@
+{
+    "id": "1eae52d7-72bc-4a34-93c4-49f632672357",
+    "type": "feature",
+    "description": "Add ComputationModelVersion support in IoT SiteWise APIs",
+    "modules": [
+        "service/iotsitewise"
+    ]
+}

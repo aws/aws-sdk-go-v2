@@ -46,7 +46,7 @@ type ExecuteQueryInput struct {
 	//
 	//   - Maximum is 20000
 	//
-	//   - Default is 250
+	//   - Default is 20000
 	MaxResults *int32
 
 	// The string that specifies the next page of results.
@@ -219,7 +219,7 @@ type ExecuteQueryPaginatorOptions struct {
 	//
 	//   - Maximum is 20000
 	//
-	//   - Default is 250
+	//   - Default is 20000
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

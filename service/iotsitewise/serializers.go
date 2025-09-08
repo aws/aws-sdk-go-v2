@@ -3806,6 +3806,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeComputationModelInput(v *Descri
 		}
 	}
 
+	if v.ComputationModelVersion != nil {
+		encoder.SetQuery("computationModelVersion").String(*v.ComputationModelVersion)
+	}
+
 	return nil
 }
 

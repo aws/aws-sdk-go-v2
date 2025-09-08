@@ -1386,10 +1386,11 @@ type UnprocessedErrorCode string
 
 // Enum values for UnprocessedErrorCode
 const (
-	UnprocessedErrorCodeInvalidInput  UnprocessedErrorCode = "INVALID_INPUT"
-	UnprocessedErrorCodeAccessDenied  UnprocessedErrorCode = "ACCESS_DENIED"
-	UnprocessedErrorCodeNotFound      UnprocessedErrorCode = "NOT_FOUND"
-	UnprocessedErrorCodeLimitExceeded UnprocessedErrorCode = "LIMIT_EXCEEDED"
+	UnprocessedErrorCodeInvalidInput     UnprocessedErrorCode = "INVALID_INPUT"
+	UnprocessedErrorCodeAccessDenied     UnprocessedErrorCode = "ACCESS_DENIED"
+	UnprocessedErrorCodeNotFound         UnprocessedErrorCode = "NOT_FOUND"
+	UnprocessedErrorCodeResourceNotFound UnprocessedErrorCode = "RESOURCE_NOT_FOUND"
+	UnprocessedErrorCodeLimitExceeded    UnprocessedErrorCode = "LIMIT_EXCEEDED"
 )
 
 // Values returns all known values for UnprocessedErrorCode. Note that this can be
@@ -1401,6 +1402,7 @@ func (UnprocessedErrorCode) Values() []UnprocessedErrorCode {
 		"INVALID_INPUT",
 		"ACCESS_DENIED",
 		"NOT_FOUND",
+		"RESOURCE_NOT_FOUND",
 		"LIMIT_EXCEEDED",
 	}
 }

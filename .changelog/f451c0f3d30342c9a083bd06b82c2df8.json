@@ -1,0 +1,8 @@
+{
+    "id": "f451c0f3-d303-42c9-a083-bd06b82c2df8",
+    "type": "feature",
+    "description": "This release adds the RESOURCE_NOT_FOUND error code as a possible value in responses to the following operations: BatchGetStandardsControlAssociations, BatchUpdateStandardsControlAssociations, and BatchGetSecurityControls.",
+    "modules": [
+        "service/securityhub"
+    ]
+}

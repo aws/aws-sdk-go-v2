@@ -35,6 +35,9 @@ type DescribeComputationModelInput struct {
 	// This member is required.
 	ComputationModelId *string
 
+	// The version of the computation model.
+	ComputationModelVersion *string
+
 	noSmithyDocumentSerde
 }
 
