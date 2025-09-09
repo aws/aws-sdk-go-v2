@@ -161,7 +161,7 @@ func (d *directoryDownloader) downloadDirectory(ctx context.Context) (*DownloadD
 	d.wg.Wait()
 
 	if d.err != nil {
-		d.emitter.Failed(ctx, d.err)
+		d.emitter.Failed(ctx, d.in, d.err)
 		return nil, d.err
 	}
 
@@ -207,11 +207,16 @@ func (d *directoryDownloader) downloadObject(ctx context.Context, ch chan object
 		if !ok {
 			break
 		}
-		fmt.Println("receive object: ", data.key)
-		if d.getErr() != nil {
-			// fmt.Printf("skip downloading object %s: %v", data.key, err)
+
+		select {
+		case <-ctx.Done():
+			d.setErr(fmt.Errorf("context error: %v", ctx.Err()))
 			continue
-			//break
+		default:
+		}
+
+		if d.getErr() != nil {
+			continue
 		}
 
 		input := &GetObjectInput{
@@ -221,7 +226,6 @@ func (d *directoryDownloader) downloadObject(ctx context.Context, ch chan object
 		if d.in.Callback != nil {
 			d.in.Callback.UpdateRequest(input)
 		}
-		fmt.Println("get object: ", data.key)
 		out, err := d.c.GetObject(ctx, input)
 		if err != nil {
 			d.setErr(fmt.Errorf("error when downloading object %s: %v", data.key, err))
@@ -244,7 +248,6 @@ func (d *directoryDownloader) downloadObject(ctx context.Context, ch chan object
 		}
 		n, err := io.Copy(file, out.Body)
 		if err != nil {
-			fmt.Printf("skip downloading object %s: %v\n", data.key, err)
 			d.setErr(fmt.Errorf("error when writing to local file %s: %v", data.path, err))
 			os.Remove(data.path)
 			continue

@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -593,5 +594,33 @@ func TestDownloadDirectory(t *testing.T) {
 				}
 			}
 		})
+	}
+}
+
+func TestDownloadDirectoryWithContextCanceled(t *testing.T) {
+	_, filename, _, _ := runtime.Caller(0)
+	root := filepath.Join(filepath.Dir(filename), "testdata")
+	dstPath := filepath.Join(root, "context-canceled")
+	defer os.RemoveAll(dstPath)
+	c := s3.New(s3.Options{
+		UsePathStyle: true,
+		Region:       "mock-region",
+	})
+	u := New(c, Options{})
+
+	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{})}
+	ctx.Error = fmt.Errorf("context canceled")
+	close(ctx.DoneCh)
+
+	_, err := u.DownloadDirectory(ctx, &DownloadDirectoryInput{
+		Bucket:      "mock-bucket",
+		Destination: dstPath,
+	})
+	if err == nil {
+		t.Fatalf("expect error, got nil")
+	}
+
+	if e, a := "canceled", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expected error message to contain %q, but did not %q", e, a)
 	}
 }

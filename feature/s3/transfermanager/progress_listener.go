@@ -189,6 +189,13 @@ func (e *singleObjectProgressEmitter) Failed(ctx context.Context, err error) {
 	})
 }
 
+// DirectoryProgressListeners holds various "directory transfer progress" hooks that a caller can
+// supply to receive progress updates for potentially long-running transfer
+// manager operations.
+//
+// Directory Progress listeners are invoked synchronously within the outer directory transfer
+// operation. Callers SHOULD NOT perform long-lived operations in these hooks,
+// such as submitting the progress snapshot to some other network agent.
 type DirectoryProgressListeners struct {
 	ObjectsTransferStart    []ObjectsTransferStartListener
 	ObjectsTransferred      []ObjectsTransferredListener
@@ -352,9 +359,9 @@ func (e *directoryObjectsProgressEmitter) Complete(ctx context.Context, out any)
 	})
 }
 
-func (e *directoryObjectsProgressEmitter) Failed(ctx context.Context, err error) {
+func (e *directoryObjectsProgressEmitter) Failed(ctx context.Context, in any, err error) {
 	e.Listeners.emitObjectsTransferFailed(ctx, &ObjectsTransferFailedEvent{
-		Input:              e.input,
+		Input:              in,
 		BytesTransferred:   e.bytesTransferred.Load(),
 		ObjectsTransferred: e.objectsTransferred.Load(),
 		Error:              err,

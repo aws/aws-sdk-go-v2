@@ -137,6 +137,10 @@ func (u *directoryUploader) uploadDirectory(ctx context.Context) (*UploadDirecto
 			}
 
 			fileInfo, err := os.Lstat(absPath)
+			if err != nil {
+				u.setErr(fmt.Errorf("error when stating abs path %s: %v", absPath, err))
+				break
+			}
 			if fileInfo.IsDir() {
 				continue
 			}
@@ -159,7 +163,7 @@ func (u *directoryUploader) uploadDirectory(ctx context.Context) (*UploadDirecto
 	u.wg.Wait()
 
 	if u.err != nil {
-		u.emitter.Failed(ctx, u.err)
+		u.emitter.Failed(ctx, u.in, u.err)
 		return nil, u.err
 	}
 
@@ -320,13 +324,21 @@ func (u *directoryUploader) uploadFile(ctx context.Context, ch chan fileEntry) {
 		if !ok {
 			break
 		}
+
+		select {
+		case <-ctx.Done():
+			u.setErr(fmt.Errorf("context error: %v", ctx.Err()))
+			continue
+		default:
+		}
+
 		if u.getErr() != nil {
-			break
+			continue
 		}
 		f, err := os.Open(data.path)
 		if err != nil {
 			u.setErr(fmt.Errorf("error when opening file %s: %v", data.path, err))
-			break
+			continue
 		}
 		input := &PutObjectInput{
 			Bucket: u.in.Bucket,
@@ -339,7 +351,7 @@ func (u *directoryUploader) uploadFile(ctx context.Context, ch chan fileEntry) {
 		out, err := u.c.PutObject(ctx, input)
 		if err != nil {
 			u.setErr(fmt.Errorf("error when uploading file %s: %v", data.path, err))
-			break
+			continue
 		}
 
 		u.progressOnce.Do(func() {
