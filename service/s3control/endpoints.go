@@ -391,7 +391,9 @@ func (r *resolver) ResolveEndpoint(
 		return endpoint, fmt.Errorf("endpoint parameters are not valid, %w", err)
 	}
 	_UseFIPS := *params.UseFIPS
+	_ = _UseFIPS
 	_UseDualStack := *params.UseDualStack
+	_ = _UseDualStack
 
 	if exprVal := params.Region; exprVal != nil {
 		_Region := *exprVal
