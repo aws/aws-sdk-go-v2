@@ -2403,7 +2403,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels the metadata generation run.</p>",
+                "smithy.api#documentation": "<p>Cancels the metadata generation run.</p> <p>Prerequisites:</p> <ul> <li> <p>The run must exist and be in a cancelable status (e.g., SUBMITTED, IN_PROGRESS). </p> </li> <li> <p>Runs in SUCCEEDED status cannot be cancelled.</p> </li> <li> <p>User must have access to the run and cancel permissions.</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -3436,7 +3436,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an asset in Amazon DataZone catalog.</p>",
+                "smithy.api#documentation": "<p>Creates an asset in Amazon DataZone catalog.</p> <p>Before creating assets, make sure that the following requirements are met:</p> <ul> <li> <p> <code>--domain-identifier</code> must refer to an existing domain.</p> </li> <li> <p> <code>--owning-project-identifier</code> must be a valid project within the domain.</p> </li> <li> <p>Asset type must be created beforehand using <code>create-asset-type</code>, or be a supported system-defined type. For more information, see <a href=\"https://docs.aws.amazon.com/cli/latest/reference/datazone/create-asset-type.html\">create-asset-type</a>.</p> </li> <li> <p> <code>--type-revision</code> (if used) must match a valid revision of the asset type.</p> </li> <li> <p>Form type must exist and be associated with the asset type. Use <code>create-form-type</code> to define. For more information, see <a href=\"https://docs.aws.amazon.com/cli/latest/reference/datazone/create-form-type.html\">create-form-type</a>.</p> </li> <li> <p>Form content must include all required fields as per the form schema (e.g., <code>bucketArn</code>).</p> </li> </ul> <p>You must invoke the following pre-requisite commands before invoking this API:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/datazone/latest/APIReference/API_CreateFormType.html\">CreateFormType</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/datazone/latest/APIReference/API_CreateAssetType.html\">CreateAssetType</a> </p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "POST",
@@ -3477,7 +3477,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a data asset filter.</p>",
+                "smithy.api#documentation": "<p>Creates a data asset filter.</p> <p>Asset filters provide a sophisticated way to create controlled views of data assets by selecting specific columns or applying row-level filters. This capability is crucial for organizations that need to share data while maintaining security and privacy controls. For example, your database might be filtered to show only non-PII fields to certain users, or sales data might be filtered by region for different regional teams. Asset filters enable fine-grained access control while maintaining a single source of truth.</p> <p>Prerequisites:</p> <ul> <li> <p>A valid domain (<code>--domain-identifier</code>) must exist. </p> </li> <li> <p>A data asset (<code>--asset-identifier</code>) must already be created under that domain.</p> </li> <li> <p>The asset must have the referenced columns available in its schema for column-based filtering.</p> </li> <li> <p>You cannot specify both (<code>columnConfiguration</code>, <code>rowConfiguration</code>)at the same time.</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "POST",
@@ -3867,7 +3867,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a revision of the asset.</p>",
+                "smithy.api#documentation": "<p>Creates a revision of the asset.</p> <p>Asset revisions represent new versions of existing assets, capturing changes to either the underlying data or its metadata. They maintain a historical record of how assets evolve over time, who made changes, and when those changes occurred. This versioning capability is crucial for governance and compliance, allowing organizations to track changes, understand their impact, and roll back if necessary.</p> <p>Prerequisites:</p> <ul> <li> <p>Asset must already exist in the domain with identifier. </p> </li> <li> <p>The form type with correct revision must be registered in the same domain.</p> </li> <li> <p>The form content must include all required fields (e.g., <code>bucketArn</code> for <code>S3ObjectCollectionForm</code>).</p> </li> <li> <p>The owning project of the original asset must still exist and be active.</p> </li> <li> <p>User must have write access to the project and domain.</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -4115,7 +4115,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a custom asset type.</p>",
+                "smithy.api#documentation": "<p>Creates a custom asset type.</p> <p>Prerequisites:</p> <ul> <li> <p>The form type with <code>typeIdentifier</code> and <code>typeRevision</code> must exist and be published. </p> </li> <li> <p>You must have <code>CreateAssetType</code> permissions.</p> </li> <li> <p>The domain-identifier and owning-project-identifier must be valid and active.</p> </li> <li> <p>The name of the asset type must be unique within the domain — duplicate names will cause failure.</p> </li> <li> <p>JSON input must be valid — incorrect formatting causes Invalid JSON errors.</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "POST",
@@ -4472,7 +4472,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a data product.</p>",
+                "smithy.api#documentation": "<p>Creates a data product.</p> <p>A data product is a comprehensive package that combines data assets with their associated metadata, documentation, and access controls. It's designed to serve specific business needs or use cases, making it easier for users to find and consume data appropriately. Data products include important information about data quality, freshness, and usage guidelines, effectively bridging the gap between data producers and consumers while ensuring proper governance.</p> <p>Prerequisites:</p> <ul> <li> <p>The domain must exist and be accessible. </p> </li> <li> <p>The owning project must be valid and active.</p> </li> <li> <p>The name must be unique within the domain (no existing data product with the same name).</p> </li> <li> <p>User must have create permissions for data products in the project.</p> </li> <li> <p>The domain must have Amazon DataZone publishing enabled.</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "POST",
@@ -4670,7 +4670,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a data product revision.</p>",
+                "smithy.api#documentation": "<p>Creates a data product revision.</p> <p>Prerequisites:</p> <ul> <li> <p>The original data product must exist in the given domain. </p> </li> <li> <p>User must have permissions on the data product.</p> </li> <li> <p>The domain must be valid and accessible.</p> </li> <li> <p>The new revision name must comply with naming constraints (if required).</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "POST",
@@ -5650,6 +5650,162 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.datazone#CreateEnvironmentBlueprint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#CreateEnvironmentBlueprintInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#CreateEnvironmentBlueprintOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a Amazon DataZone blueprint.</p>",
+                "smithy.api#http": {
+                    "code": 201,
+                    "method": "POST",
+                    "uri": "/v2/domains/{domainIdentifier}/environment-blueprints"
+                }
+            }
+        },
+        "com.amazonaws.datazone#CreateEnvironmentBlueprintInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the domain in which this blueprint is created.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#EnvironmentBlueprintName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of this Amazon DataZone blueprint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the Amazon DataZone blueprint.</p>"
+                    }
+                },
+                "provisioningProperties": {
+                    "target": "com.amazonaws.datazone#ProvisioningProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The provisioning properties of this Amazon DataZone blueprint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "userParameters": {
+                    "target": "com.amazonaws.datazone#CustomParameterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user parameters of this Amazon DataZone blueprint.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#CreateEnvironmentBlueprintOutput": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.datazone#EnvironmentBlueprintId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of this Amazon DataZone blueprint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#EnvironmentBlueprintName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of this Amazon DataZone blueprint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of this Amazon DataZone blueprint.</p>"
+                    }
+                },
+                "provider": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The provider of this Amazon DataZone blueprint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "provisioningProperties": {
+                    "target": "com.amazonaws.datazone#ProvisioningProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The provisioning properties of this Amazon DataZone blueprint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "deploymentProperties": {
+                    "target": "com.amazonaws.datazone#DeploymentProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment properties of this Amazon DataZone blueprint.</p>"
+                    }
+                },
+                "userParameters": {
+                    "target": "com.amazonaws.datazone#CustomParameterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user parameters of this Amazon DataZone blueprint.</p>"
+                    }
+                },
+                "glossaryTerms": {
+                    "target": "com.amazonaws.datazone#GlossaryTerms",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The glossary terms attached to this Amazon DataZone blueprint.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the environment blueprint was created.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when this blueprint was updated.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.datazone#CreateEnvironmentInput": {
             "type": "structure",
             "members": {
@@ -6114,7 +6270,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a metadata form type.</p>",
+                "smithy.api#documentation": "<p>Creates a metadata form type.</p> <p>Prerequisites:</p> <ul> <li> <p>The domain must exist and be in an <code>ENABLED</code> state. </p> </li> <li> <p>The owning project must exist and be accessible.</p> </li> <li> <p>The name must be unique within the domain.</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "POST",
@@ -6267,7 +6423,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon DataZone business glossary.</p>",
+                "smithy.api#documentation": "<p>Creates an Amazon DataZone business glossary.</p> <p>Specifies that this is a create glossary policy.</p> <p>A glossary serves as the central repository for business terminology and definitions within an organization. It helps establish and maintain a common language across different departments and teams, reducing miscommunication and ensuring consistent interpretation of business concepts. Glossaries can include hierarchical relationships between terms, cross-references, and links to actual data assets, making them invaluable for both business users and technical teams trying to understand and use data correctly.</p> <p>Prerequisites:</p> <ul> <li> <p>Domain must exist and be in an active state. </p> </li> <li> <p>Owning project must exist and be accessible by the caller.</p> </li> <li> <p>The glossary name must be unique within the domain.</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "POST",
@@ -6431,7 +6587,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a business glossary term.</p>",
+                "smithy.api#documentation": "<p>Creates a business glossary term.</p> <p>A glossary term represents an individual entry within the Amazon DataZone glossary, serving as a standardized definition for a specific business concept or data element. Each term can include rich metadata such as detailed definitions, synonyms, related terms, and usage examples. Glossary terms can be linked directly to data assets, providing business context to technical data elements. This linking capability helps users understand the business meaning of data fields and ensures consistent interpretation across different systems and teams. Terms can also have relationships with other terms, creating a semantic network that reflects the complexity of business concepts.</p> <p>Prerequisites:</p> <ul> <li> <p>Domain must exist. </p> </li> <li> <p>Glossary must exist and be in an ENABLED state.</p> </li> <li> <p>The term name must be unique within the glossary.</p> </li> <li> <p>Ensure term does not conflict with existing terms in hierarchy.</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "POST",
@@ -8235,6 +8391,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether the custom parameter is optional.</p>"
                     }
+                },
+                "isUpdateSupported": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether a parameter value can be updated after creation. </p>"
+                    }
                 }
             },
             "traits": {
@@ -9532,6 +9694,9 @@
                     "target": "com.amazonaws.datazone#CreateEnvironmentAction"
                 },
                 {
+                    "target": "com.amazonaws.datazone#CreateEnvironmentBlueprint"
+                },
+                {
                     "target": "com.amazonaws.datazone#CreateEnvironmentProfile"
                 },
                 {
@@ -9575,6 +9740,9 @@
                 },
                 {
                     "target": "com.amazonaws.datazone#DeleteEnvironmentAction"
+                },
+                {
+                    "target": "com.amazonaws.datazone#DeleteEnvironmentBlueprint"
                 },
                 {
                     "target": "com.amazonaws.datazone#DeleteEnvironmentProfile"
@@ -9803,6 +9971,9 @@
                 },
                 {
                     "target": "com.amazonaws.datazone#UpdateEnvironmentAction"
+                },
+                {
+                    "target": "com.amazonaws.datazone#UpdateEnvironmentBlueprint"
                 },
                 {
                     "target": "com.amazonaws.datazone#UpdateEnvironmentProfile"
@@ -10419,7 +10590,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an asset in Amazon DataZone.</p>",
+                "smithy.api#documentation": "<p>Deletes an asset in Amazon DataZone.</p> <ul> <li> <p>--domain-identifier must refer to a valid and existing domain. </p> </li> <li> <p>--identifier must refer to an existing asset in the specified domain.</p> </li> <li> <p>Asset must not be referenced in any existing asset filters.</p> </li> <li> <p>Asset must not be linked to any draft or published data product.</p> </li> <li> <p>User must have delete permissions for the domain and project.</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 204,
                     "method": "DELETE",
@@ -10457,7 +10628,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an asset filter.</p>",
+                "smithy.api#documentation": "<p>Deletes an asset filter.</p> <p>Prerequisites:</p> <ul> <li> <p>The asset filter must exist. </p> </li> <li> <p>The domain and asset must not have been deleted.</p> </li> <li> <p>Ensure the --identifier refers to a valid filter ID.</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 204,
                     "method": "DELETE",
@@ -10558,7 +10729,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an asset type in Amazon DataZone.</p>",
+                "smithy.api#documentation": "<p>Deletes an asset type in Amazon DataZone.</p> <p>Prerequisites:</p> <ul> <li> <p>The asset type must exist in the domain. </p> </li> <li> <p>You must have DeleteAssetType permission.</p> </li> <li> <p>The asset type must not be in use (e.g., assigned to any asset). If used, deletion will fail.</p> </li> <li> <p>You should retrieve the asset type using get-asset-type to confirm its presence before deletion.</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 204,
                     "method": "DELETE",
@@ -10699,7 +10870,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a data product in Amazon DataZone.</p>",
+                "smithy.api#documentation": "<p>Deletes a data product in Amazon DataZone.</p> <p>Prerequisites:</p> <ul> <li> <p>The data product must exist and not be deleted or archived. </p> </li> <li> <p>The user must have delete permissions for the data product.</p> </li> <li> <p>Ensure there are no active dependencies (e.g., published links, assets using the product).</p> </li> <li> <p>Domain and project must be active.</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 204,
                     "method": "DELETE",
@@ -11234,6 +11405,44 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.datazone#DeleteEnvironmentBlueprint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#DeleteEnvironmentBlueprintInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a blueprint in Amazon DataZone.</p>",
+                "smithy.api#http": {
+                    "code": 204,
+                    "method": "DELETE",
+                    "uri": "/v2/domains/{domainIdentifier}/environment-blueprints/{identifier}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
         "com.amazonaws.datazone#DeleteEnvironmentBlueprintConfiguration": {
             "type": "operation",
             "input": {
@@ -11295,6 +11504,30 @@
             "members": {},
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.datazone#DeleteEnvironmentBlueprintInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon DataZone domain in which the blueprint is deleted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "identifier": {
+                    "target": "com.amazonaws.datazone#EnvironmentBlueprintId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the blueprint that is deleted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.datazone#DeleteEnvironmentInput": {
@@ -11409,7 +11642,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Delets and metadata form type in Amazon DataZone.</p>",
+                "smithy.api#documentation": "<p>Deletes and metadata form type in Amazon DataZone.</p> <p>Prerequisites:</p> <ul> <li> <p>The form type must exist in the domain. </p> </li> <li> <p>The form type must not be in use by any asset types or assets.</p> </li> <li> <p>The domain must be valid and accessible.</p> </li> <li> <p>User must have delete permissions on the form type.</p> </li> <li> <p>Any dependencies (such as linked asset types) must be removed first.</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 204,
                     "method": "DELETE",
@@ -11477,7 +11710,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a business glossary in Amazon DataZone.</p>",
+                "smithy.api#documentation": "<p>Deletes a business glossary in Amazon DataZone.</p> <p>Prerequisites:</p> <ul> <li> <p>The glossary must be in DISABLED state. </p> </li> <li> <p>The glossary must not have any glossary terms associated with it.</p> </li> <li> <p>The glossary must exist in the specified domain.</p> </li> <li> <p>The caller must have the <code>datazone:DeleteGlossary</code> permission in the domain and glossary.</p> </li> <li> <p>There should be no active assets or metadata linked to the glossary.</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 204,
                     "method": "DELETE",
@@ -11546,7 +11779,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a business glossary term in Amazon DataZone.</p>",
+                "smithy.api#documentation": "<p>Deletes a business glossary term in Amazon DataZone.</p> <p>Prerequisites:</p> <ul> <li> <p>Glossary term must exist and be active. </p> </li> <li> <p>The term must not be linked to other assets or child terms.</p> </li> <li> <p>Caller must have delete permissions in the domain/glossary.</p> </li> <li> <p>Ensure all associations (such as to assets or parent terms) are removed before deletion.</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 204,
                     "method": "DELETE",
@@ -14921,7 +15154,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets an Amazon DataZone asset.</p>",
+                "smithy.api#documentation": "<p>Gets an Amazon DataZone asset.</p> <p>An asset is the fundamental building block in Amazon DataZone, representing any data resource that needs to be cataloged and managed. It can take many forms, from Amazon S3 buckets and database tables to dashboards and machine learning models. Each asset contains comprehensive metadata about the resource, including its location, schema, ownership, and lineage information. Assets are essential for organizing and managing data resources across an organization, making them discoverable and usable while maintaining proper governance.</p> <p>Before using the Amazon DataZone GetAsset command, ensure the following prerequisites are met:</p> <ul> <li> <p>Domain identifier must exist and be valid</p> </li> <li> <p>Asset identifier must exist</p> </li> <li> <p>User must have the required permissions to perform the action</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -14956,7 +15189,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets an asset filter.</p>",
+                "smithy.api#documentation": "<p>Gets an asset filter.</p> <p>Prerequisites:</p> <ul> <li> <p>Domain (<code>--domain-identifier</code>), asset (<code>--asset-identifier</code>), and filter (<code>--identifier</code>) must all exist. </p> </li> <li> <p>The asset filter should not have been deleted.</p> </li> <li> <p>The asset must still exist (since the filter is linked to it).</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -15267,7 +15500,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets an Amazon DataZone asset type.</p>",
+                "smithy.api#documentation": "<p>Gets an Amazon DataZone asset type.</p> <p>Asset types define the categories and characteristics of different kinds of data assets within Amazon DataZone.. They determine what metadata fields are required, what operations are possible, and how the asset integrates with other Amazon Web Services services. Asset types can range from built-in types like Amazon S3 buckets and Amazon Web Services Glue tables to custom types defined for specific organizational needs. Understanding asset types is crucial for properly organizing and managing different kinds of data resources.</p> <p>Prerequisites:</p> <ul> <li> <p>The asset type with identifier must exist in the domain. ResourceNotFoundException.</p> </li> <li> <p>You must have the GetAssetType permission.</p> </li> <li> <p>Ensure the domain-identifier value is correct and accessible.</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -15570,7 +15803,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the data product.</p>",
+                "smithy.api#documentation": "<p>Gets the data product.</p> <p>Prerequisites:</p> <ul> <li> <p>The data product ID must exist. </p> </li> <li> <p>The domain must be valid and accessible.</p> </li> <li> <p>User must have read or discovery permissions for the data product.</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -17237,7 +17470,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a metadata form type in Amazon DataZone.</p>",
+                "smithy.api#documentation": "<p>Gets a metadata form type in Amazon DataZone.</p> <p>Form types define the structure and validation rules for collecting metadata about assets in Amazon DataZone. They act as templates that ensure consistent metadata capture across similar types of assets, while allowing for customization to meet specific organizational needs. Form types can include required fields, validation rules, and dependencies, helping maintain high-quality metadata that makes data assets more discoverable and usable.</p> <ul> <li> <p>The form type with the specified identifier must exist in the given domain. </p> </li> <li> <p>The domain must be valid and active.</p> </li> <li> <p>User must have permission on the form type.</p> </li> <li> <p>The form type should not be deleted or in an invalid state.</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -17387,7 +17620,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a business glossary in Amazon DataZone.</p>",
+                "smithy.api#documentation": "<p>Gets a business glossary in Amazon DataZone.</p> <p>Prerequisites:</p> <ul> <li> <p>The specified glossary ID must exist and be associated with the given domain. </p> </li> <li> <p>The caller must have the <code>datazone:GetGlossary</code> permission on the domain.</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -17525,7 +17758,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a business glossary term in Amazon DataZone.</p>",
+                "smithy.api#documentation": "<p>Gets a business glossary term in Amazon DataZone.</p> <p>Prerequisites:</p> <ul> <li> <p>Glossary term with identifier must exist in the domain. </p> </li> <li> <p>User must have permission on the glossary term.</p> </li> <li> <p>Domain must be accessible and active.</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -18406,7 +18639,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a metadata generation run in Amazon DataZone.</p>",
+                "smithy.api#documentation": "<p>Gets a metadata generation run in Amazon DataZone.</p> <p>Prerequisites:</p> <ul> <li> <p>Valid domain and run identifier. </p> </li> <li> <p>The metadata generation run must exist.</p> </li> <li> <p>User must have read access to the metadata run.</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -19808,6 +20041,15 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.datazone#GlobalParameterMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#String"
             }
         },
         "com.amazonaws.datazone#Glossary": {
@@ -22276,7 +22518,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists asset filters.</p>",
+                "smithy.api#documentation": "<p>Lists asset filters.</p> <p>Prerequisites:</p> <ul> <li> <p>A valid domain and asset must exist. </p> </li> <li> <p>The asset must have at least one filter created to return results. </p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -22383,7 +22625,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the revisions for the asset.</p>",
+                "smithy.api#documentation": "<p>Lists the revisions for the asset.</p> <p>Prerequisites:</p> <ul> <li> <p>The asset must exist in the domain. </p> </li> <li> <p>There must be at least one revision of the asset (which happens automatically after creation).</p> </li> <li> <p>The domain must be valid and active.</p> </li> <li> <p>User must have permissions on the asset and domain.</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -22609,7 +22851,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists data product revisions.</p>",
+                "smithy.api#documentation": "<p>Lists data product revisions.</p> <p>Prerequisites:</p> <ul> <li> <p>The data product ID must exist within the domain. </p> </li> <li> <p>User must have view permissions on the data product.</p> </li> <li> <p>The domain must be in a valid and accessible state.</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -24307,7 +24549,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all metadata generation runs.</p>",
+                "smithy.api#documentation": "<p>Lists all metadata generation runs.</p> <p>Metadata generation runs represent automated processes that leverage AI/ML capabilities to create or enhance asset metadata at scale. This feature helps organizations maintain comprehensive and consistent metadata across large numbers of assets without manual intervention. It can automatically generate business descriptions, tags, and other metadata elements, significantly reducing the time and effort required for metadata management while improving consistency and completeness.</p> <p>Prerequisites:</p> <ul> <li> <p>Valid domain identifier. </p> </li> <li> <p>User must have access to metadata generation runs in the domain.</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -27366,7 +27608,7 @@
                 "createGlossary": {
                     "target": "com.amazonaws.datazone#CreateGlossaryPolicyGrantDetail",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies that this is a create glossary policy.</p>"
+                        "smithy.api#documentation": "<p> Specifies that this is a create glossary policy.</p>"
                     }
                 },
                 "createFormType": {
@@ -28295,6 +28537,13 @@
                     "target": "com.amazonaws.datazone#RegionalParameterMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The regional parameters in the environment blueprint.</p>"
+                    }
+                },
+                "globalParameters": {
+                    "target": "com.amazonaws.datazone#GlobalParameterMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Region-agnostic environment blueprint parameters. </p>",
+                        "smithy.api#notProperty": {}
                     }
                 },
                 "provisioningConfigurations": {
@@ -30425,7 +30674,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Searches for assets in Amazon DataZone.</p>",
+                "smithy.api#documentation": "<p>Searches for assets in Amazon DataZone.</p> <p>Search in Amazon DataZone is a powerful capability that enables users to discover and explore data assets, glossary terms, and data products across their organization. It provides both basic and advanced search functionality, allowing users to find resources based on names, descriptions, metadata, and other attributes. Search can be scoped to specific types of resources (like assets, glossary terms, or data products) and can be filtered using various criteria such as creation date, owner, or status. The search functionality is essential for making the wealth of data resources in an organization discoverable and usable, helping users find the right data for their needs quickly and efficiently.</p> <p>Many search commands in Amazon DataZone are paginated, including <code>search</code> and <code>search-types</code>. When the result set is large, Amazon DataZone returns a <code>nextToken</code> in the response. This token can be used to retrieve the next page of results. </p> <p>Prerequisites:</p> <ul> <li> <p>The --domain-identifier must refer to an existing Amazon DataZone domain. </p> </li> <li> <p>--search-scope must be one of: ASSET, GLOSSARY_TERM, DATA_PRODUCT, or GLOSSARY.</p> </li> <li> <p>The user must have search permissions in the specified domain.</p> </li> <li> <p>If using --filters, ensure that the JSON is well-formed and that each filter includes valid attribute and value keys. </p> </li> <li> <p>For paginated results, be prepared to use --next-token to fetch additional pages.</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -30949,7 +31198,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Searches for types in Amazon DataZone.</p>",
+                "smithy.api#documentation": "<p>Searches for types in Amazon DataZone.</p> <p>Prerequisites:</p> <ul> <li> <p>The --domain-identifier must refer to an existing Amazon DataZone domain. </p> </li> <li> <p>--search-scope must be one of the valid values including: ASSET_TYPE, GLOSSARY_TERM_TYPE, DATA_PRODUCT_TYPE.</p> </li> <li> <p>The --managed flag must be present without a value.</p> </li> <li> <p>The user must have permissions for form or asset types in the domain.</p> </li> <li> <p>If using --filters, ensure that the JSON is valid.</p> </li> <li> <p>Filters contain correct structure (attribute, value, operator).</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -32027,7 +32276,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts the metadata generation run.</p>",
+                "smithy.api#documentation": "<p>Starts the metadata generation run.</p> <p>Prerequisites:</p> <ul> <li> <p>Asset must be created and belong to the specified domain and project. </p> </li> <li> <p>Asset type must be supported for metadata generation (e.g., Amazon Web Services Glue table).</p> </li> <li> <p>Asset must have a structured schema with valid rows and columns.</p> </li> <li> <p>Valid values for --type: BUSINESS_DESCRIPTIONS, BUSINESS_NAMES.</p> </li> <li> <p>The user must have permission to run metadata generation in the domain/project.</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -32663,7 +32912,7 @@
                 "updatedAt": {
                     "target": "com.amazonaws.datazone#UpdatedAt",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestampf of when the subscription grant was updated.</p>",
+                        "smithy.api#documentation": "<p>The timestamp of when the subscription grant was updated.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -34331,7 +34580,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an asset filter.</p>",
+                "smithy.api#documentation": "<p>Updates an asset filter.</p> <p>Prerequisites:</p> <ul> <li> <p>The domain, asset, and asset filter identifier must all exist. </p> </li> <li> <p>The asset must contain the columns being referenced in the update.</p> </li> <li> <p>If applying a row filter, ensure the column referenced in the expression exists in the asset schema.</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "PATCH",
@@ -35379,6 +35628,163 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.datazone#UpdateEnvironmentBlueprint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#UpdateEnvironmentBlueprintInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#UpdateEnvironmentBlueprintOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an environment blueprint in Amazon DataZone.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PATCH",
+                    "uri": "/v2/domains/{domainIdentifier}/environment-blueprints/{identifier}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.datazone#UpdateEnvironmentBlueprintInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon DataZone domain in which an environment blueprint is to be updated.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "identifier": {
+                    "target": "com.amazonaws.datazone#EnvironmentBlueprintId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the environment blueprint to be updated.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description to be updated as part of the <code>UpdateEnvironmentBlueprint</code> action.</p>"
+                    }
+                },
+                "provisioningProperties": {
+                    "target": "com.amazonaws.datazone#ProvisioningProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The provisioning properties to be updated as part of the <code>UpdateEnvironmentBlueprint</code> action.</p>"
+                    }
+                },
+                "userParameters": {
+                    "target": "com.amazonaws.datazone#CustomParameterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user parameters to be updated as part of the <code>UpdateEnvironmentBlueprint</code> action.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#UpdateEnvironmentBlueprintOutput": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.datazone#EnvironmentBlueprintId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the blueprint to be updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#EnvironmentBlueprintName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name to be updated as part of the <code>UpdateEnvironmentBlueprint</code> action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description to be updated as part of the <code>UpdateEnvironmentBlueprint</code> action.</p>"
+                    }
+                },
+                "provider": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The provider of the blueprint to be udpated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "provisioningProperties": {
+                    "target": "com.amazonaws.datazone#ProvisioningProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The provisioning properties to be updated as part of the <code>UpdateEnvironmentBlueprint</code> action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "deploymentProperties": {
+                    "target": "com.amazonaws.datazone#DeploymentProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment properties to be updated as part of the <code>UpdateEnvironmentBlueprint</code> action.</p>"
+                    }
+                },
+                "userParameters": {
+                    "target": "com.amazonaws.datazone#CustomParameterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user parameters to be updated as part of the <code>UpdateEnvironmentBlueprint</code> action.</p>"
+                    }
+                },
+                "glossaryTerms": {
+                    "target": "com.amazonaws.datazone#GlossaryTerms",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The glossary terms to be updated as part of the <code>UpdateEnvironmentBlueprint</code> action.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the environment blueprint was created.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the blueprint was updated.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.datazone#UpdateEnvironmentInput": {
             "type": "structure",
             "members": {
@@ -35792,7 +36198,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the business glossary in Amazon DataZone.</p>",
+                "smithy.api#documentation": "<p>Updates the business glossary in Amazon DataZone.</p> <p>Prerequisites:</p> <ul> <li> <p>The glossary must exist in the given domain. </p> </li> <li> <p>The caller must have the <code>datazone:UpdateGlossary</code> permission to update it.</p> </li> <li> <p>When updating the name, the new name must be unique within the domain.</p> </li> <li> <p>The glossary must not be deleted or in a terminal state.</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "PATCH",
@@ -35933,7 +36339,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a business glossary term in Amazon DataZone.</p>",
+                "smithy.api#documentation": "<p>Updates a business glossary term in Amazon DataZone.</p> <p>Prerequisites:</p> <ul> <li> <p>Glossary term must exist in the specified domain. </p> </li> <li> <p>New name must not conflict with existing terms in the same glossary.</p> </li> <li> <p>User must have permissions on the term.</p> </li> <li> <p>The term must not be in DELETED status.</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "PATCH",

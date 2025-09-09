@@ -1655,6 +1655,12 @@
                         "smithy.api#enumValue": "ml.p5en.48xlarge"
                     }
                 },
+                "ML_P6_B200_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.p6-b200.48xlarge"
+                    }
+                },
                 "ML_M6I_LARGE": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -30813,6 +30819,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The settings that apply to an SageMaker AI domain when you use it in Amazon SageMaker Unified Studio.</p>"
                     }
+                },
+                "IpAddressType": {
+                    "target": "com.amazonaws.sagemaker#IPAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type for the domain. Specify <code>ipv4</code> for IPv4-only connectivity or <code>dualstack</code> for both IPv4 and IPv6 connectivity. When you specify <code>dualstack</code>, the subnet must support IPv6 CIDR blocks. If not specified, defaults to <code>ipv4</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -30862,6 +30874,12 @@
                     "target": "com.amazonaws.sagemaker#UnifiedStudioSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>The settings that apply to an SageMaker AI domain when you use it in Amazon SageMaker Unified Studio.</p>"
+                    }
+                },
+                "IpAddressType": {
+                    "target": "com.amazonaws.sagemaker#IPAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type for the domain. Specify <code>ipv4</code> for IPv4-only connectivity or <code>dualstack</code> for both IPv4 and IPv6 connectivity. When you specify <code>dualstack</code>, the subnet must support IPv6 CIDR blocks.</p>"
                     }
                 }
             },

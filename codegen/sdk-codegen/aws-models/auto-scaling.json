@@ -2581,6 +2581,9 @@
                 "target": "com.amazonaws.autoscaling#BlockDeviceMapping"
             }
         },
+        "com.amazonaws.autoscaling#BooleanType": {
+            "type": "boolean"
+        },
         "com.amazonaws.autoscaling#BurstablePerformance": {
             "type": "enum",
             "members": {
@@ -2659,6 +2662,12 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the Auto Scaling group.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "WaitForTransitioningInstances": {
+                    "target": "com.amazonaws.autoscaling#BooleanType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When cancelling an instance refresh, this indicates whether to wait for in-flight launches \n            and terminations to complete. The default is true.</p>\n         <p>When set to false, Amazon EC2 Auto Scaling cancels the instance refresh \n            without waiting for any pending launches or terminations to complete.</p>"
                     }
                 }
             }

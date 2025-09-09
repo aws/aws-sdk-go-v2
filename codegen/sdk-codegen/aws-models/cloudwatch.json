@@ -95,6 +95,50 @@
                 }
             }
         },
+        "com.amazonaws.cloudwatch#AlarmContributor": {
+            "type": "structure",
+            "members": {
+                "ContributorId": {
+                    "target": "com.amazonaws.cloudwatch#ContributorId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier for this alarm contributor.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContributorAttributes": {
+                    "target": "com.amazonaws.cloudwatch#ContributorAttributes",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A map of attributes that describe the contributor, such as metric dimensions and other identifying characteristics.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StateReason": {
+                    "target": "com.amazonaws.cloudwatch#StateReason",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>An explanation for the contributor's current state, providing context about why it is in its current condition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StateTransitionedTimestamp": {
+                    "target": "com.amazonaws.cloudwatch#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the contributor last transitioned to its current state.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents an individual contributor to a multi-timeseries alarm, containing information about a specific time series and its contribution to the alarm's state.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatch#AlarmContributors": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatch#AlarmContributor"
+            }
+        },
         "com.amazonaws.cloudwatch#AlarmDescription": {
             "type": "string",
             "traits": {
@@ -111,6 +155,12 @@
                     "target": "com.amazonaws.cloudwatch#AlarmName",
                     "traits": {
                         "smithy.api#documentation": "<p>The descriptive name for the alarm.</p>"
+                    }
+                },
+                "AlarmContributorId": {
+                    "target": "com.amazonaws.cloudwatch#ContributorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the alarm contributor associated with this history item, if applicable.</p>"
                     }
                 },
                 "AlarmType": {
@@ -141,6 +191,12 @@
                     "target": "com.amazonaws.cloudwatch#HistoryData",
                     "traits": {
                         "smithy.api#documentation": "<p>Data about the alarm, in JSON format.</p>"
+                    }
+                },
+                "AlarmContributorAttributes": {
+                    "target": "com.amazonaws.cloudwatch#ContributorAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of attributes that describe the alarm contributor associated with this history item, providing context about the contributor's characteristics at the time of the event.</p>"
                     }
                 }
             },
@@ -403,6 +459,24 @@
                 "target": "com.amazonaws.cloudwatch#AnomalyDetector"
             }
         },
+        "com.amazonaws.cloudwatch#AttributeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.cloudwatch#AttributeValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
         "com.amazonaws.cloudwatch#AwsQueryErrorMessage": {
             "type": "string"
         },
@@ -615,6 +689,30 @@
                 "smithy.api#documentation": "<p>This operation attempted to create a resource that already exists.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.cloudwatch#ContributorAttributes": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.cloudwatch#AttributeName"
+            },
+            "value": {
+                "target": "com.amazonaws.cloudwatch#AttributeValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 30
+                }
+            }
+        },
+        "com.amazonaws.cloudwatch#ContributorId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
             }
         },
         "com.amazonaws.cloudwatch#Counts": {
@@ -1106,6 +1204,70 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudwatch#DescribeAlarmContributors": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatch#DescribeAlarmContributorsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatch#DescribeAlarmContributorsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatch#InvalidNextToken"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatch#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the information of the current alarm contributors that are in <code>ALARM</code> state. This operation returns details about the individual time series that contribute to the alarm's state.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatch#DescribeAlarmContributorsInput": {
+            "type": "structure",
+            "members": {
+                "AlarmName": {
+                    "target": "com.amazonaws.cloudwatch#AlarmName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the alarm for which to retrieve contributor information.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cloudwatch#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token returned by a previous call to indicate that there is more data available.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatch#DescribeAlarmContributorsOutput": {
+            "type": "structure",
+            "members": {
+                "AlarmContributors": {
+                    "target": "com.amazonaws.cloudwatch#AlarmContributors",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A list of alarm contributors that provide details about the individual time series contributing to the alarm's state.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cloudwatch#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that marks the start of the next batch of returned results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudwatch#DescribeAlarmHistory": {
             "type": "operation",
             "input": {
@@ -1136,6 +1298,12 @@
                     "target": "com.amazonaws.cloudwatch#AlarmName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the alarm.</p>"
+                    }
+                },
+                "AlarmContributorId": {
+                    "target": "com.amazonaws.cloudwatch#ContributorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of a specific alarm contributor to filter the alarm history results.</p>"
                     }
                 },
                 "AlarmTypes": {
@@ -2622,6 +2790,9 @@
                     "target": "com.amazonaws.cloudwatch#DeleteMetricStream"
                 },
                 {
+                    "target": "com.amazonaws.cloudwatch#DescribeAlarmContributors"
+                },
+                {
                     "target": "com.amazonaws.cloudwatch#DescribeAlarmHistory"
                 },
                 {
@@ -3742,6 +3913,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Action"
+                    }
+                },
+                "AlarmContributorStateUpdate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AlarmContributorStateUpdate"
+                    }
+                },
+                "AlarmContributorAction": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AlarmContributorAction"
                     }
                 }
             }
@@ -5854,7 +6037,7 @@
                 "ApplyOnTransformedLogs": {
                     "target": "com.amazonaws.cloudwatch#InsightRuleOnTransformedLogs",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify <code>true</code> to have this rule evalute log events after they have been transformed by  \n            <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html\">Log transformation</a>. If you specify <code>true</code>, then the log events in log groups that have transformers will \n       be evaluated by Contributor Insights after being transformed. Log groups that don't have\n        transformers will still have their original log events evaluated by Contributor Insights.</p>\n         <p>The default is <code>false</code>\n         </p>\n         <note>\n            <p>If a log group has a transformer, and transformation fails for some log events, those log events won't be evaluated by\n        Contributor Insights. For information about investigating log transformation failures, see\n            <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Transformation-Errors-Metrics.html\">Transformation metrics and errors</a>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specify <code>true</code> to have this rule evaluate log events after they have been transformed by  \n            <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html\">Log transformation</a>. If you specify <code>true</code>, then the log events in log groups that have transformers will \n       be evaluated by Contributor Insights after being transformed. Log groups that don't have\n        transformers will still have their original log events evaluated by Contributor Insights.</p>\n         <p>The default is <code>false</code>\n         </p>\n         <note>\n            <p>If a log group has a transformer, and transformation fails for some log events, those log events won't be evaluated by\n        Contributor Insights. For information about investigating log transformation failures, see\n            <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Transformation-Errors-Metrics.html\">Transformation metrics and errors</a>.</p>\n         </note>"
                     }
                 }
             },

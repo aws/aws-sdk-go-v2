@@ -7252,6 +7252,9 @@
             },
             "value": {
                 "target": "com.amazonaws.connect#ContactSearchSummarySegmentAttributeValue"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.connect#ContactState": {
@@ -9003,7 +9006,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new predefined attribute for the specified Amazon Connect instance. <i>Predefined\n    attributes</i> are attributes in an Amazon Connect instance that can be used to route\n   contacts to an agent or pools of agents within a queue. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html\">Create\n    predefined attributes for routing contacts to agents</a>.</p>",
+                "smithy.api#documentation": "<p>Creates a new predefined attribute for the specified Amazon Connect instance. A <i>predefined\n    attribute</i> is made up of a name and a value.</p>\n         <p>For the predefined attributes per instance quota, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#connect-quotas\">Amazon Connect quotas</a>.</p>\n         <p>\n            <b>Use cases</b>\n         </p>\n         <p>Following are common uses cases for this API:</p>\n         <ul>\n            <li>\n               <p>Create an attribute for routing proficiency (for example, agent certification) that has\n     predefined values (for example, a list of possible certifications). For more information, see\n      <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html\">Create\n      predefined attributes for routing contacts to agents</a>.</p>\n            </li>\n            <li>\n               <p>Create an attribute for business unit name that has a list of predefined business unit\n     names used in your organization. This is a use case where information for a contact varies between transfers or conferences. For more information, see\n     <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/use-contact-segment-attributes.html\">Use contact segment attributes</a>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Endpoints</b>: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect endpoints and\n   quotas</a>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/predefined-attributes/{InstanceId}",
@@ -9032,8 +9035,19 @@
                 "Values": {
                     "target": "com.amazonaws.connect#PredefinedAttributeValues",
                     "traits": {
-                        "smithy.api#documentation": "<p> The values of the predefined attribute. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p> The values of the predefined attribute. </p>"
+                    }
+                },
+                "Purposes": {
+                    "target": "com.amazonaws.connect#PredefinedAttributePurposeNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Values that enable you to categorize your predefined attributes. You can use them in custom UI elements across the Amazon Connect admin website.</p>"
+                    }
+                },
+                "AttributeConfiguration": {
+                    "target": "com.amazonaws.connect#InputPredefinedAttributeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Custom metadata that is associated to predefined attributes to control behavior \nin upstream services, such as controlling \nhow a predefined attribute should be displayed in the Amazon Connect admin website.</p>"
                     }
                 }
             },
@@ -14175,7 +14189,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes a predefined attribute for the specified Amazon Connect instance. <i>Predefined\n    attributes</i> are attributes in an Amazon Connect instance that can be used to route\n   contacts to an agent or pools of agents within a queue. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html\">Create\n    predefined attributes for routing contacts to agents</a>.</p>",
+                "smithy.api#documentation": "<p>Describes a predefined attribute for the specified Amazon Connect instance.  A <i>predefined\n    attribute</i> is made up of a name and a value. You can use predefined attributes for:</p>\n         <ul>\n            <li>\n               <p>Routing proficiency (for example, agent certification) that has\n     predefined values (for example, a list of possible certifications). For more information, see\n     <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html\">Create\n      predefined attributes for routing contacts to agents</a>.</p>\n            </li>\n            <li>\n               <p>Contact information that varies between transfers or conferences, such as the name of the business unit handling the contact. For more information, see\n     <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/use-contact-segment-attributes.html\">Use contact segment attributes</a>.</p>\n            </li>\n         </ul>\n         <p>For the predefined attributes per instance quota, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#connect-quotas\">Amazon Connect quotas</a>.</p>\n         <p>\n            <b>Endpoints</b>: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect endpoints and\n    quotas</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/predefined-attributes/{InstanceId}/{Name}",
@@ -16711,6 +16725,12 @@
             "members": {},
             "traits": {
                 "smithy.api#documentation": "<p>An empty value.</p>"
+            }
+        },
+        "com.amazonaws.connect#EnableValueValidationOnAssociation": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
             }
         },
         "com.amazonaws.connect#EncryptionConfig": {
@@ -21644,6 +21664,21 @@
                 "target": "com.amazonaws.connect#ContactInitiationMethod"
             }
         },
+        "com.amazonaws.connect#InputPredefinedAttributeConfiguration": {
+            "type": "structure",
+            "members": {
+                "EnableValueValidationOnAssociation": {
+                    "target": "com.amazonaws.connect#EnableValueValidationOnAssociation",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>When this parameter is set to true, Amazon Connect enforces strict validation on the\n   specific values, if the values are predefined in attributes. The contact will store only valid\n   and predefined values for the predefined attribute key.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Custom metadata that is associated to predefined attributes to control behavior in upstream\n   services, such as controlling how a predefined attribute should be displayed in the Amazon Connect admin website.</p>"
+            }
+        },
         "com.amazonaws.connect#Instance": {
             "type": "structure",
             "members": {
@@ -22484,6 +22519,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.connect#IpCidr"
+            }
+        },
+        "com.amazonaws.connect#IsReadOnly": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
             }
         },
         "com.amazonaws.connect#IvrRecordingTrack": {
@@ -25305,7 +25346,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists predefined attributes for the specified Amazon Connect instance. <i>Predefined\n    attributes</i> are attributes in an Amazon Connect instance that can be used to route\n   contacts to an agent or pools of agents within a queue. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html\">Create\n    predefined attributes for routing contacts to agents</a>.</p>",
+                "smithy.api#documentation": "<p>Lists predefined attributes for the specified Amazon Connect instance.  A <i>predefined\n   attribute</i> is made up of a name and a value. You can use predefined attributes for:</p>\n         <ul>\n            <li>\n               <p>Routing proficiency (for example, agent certification) that has\n     predefined values (for example, a list of possible certifications). For more information, see\n     <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html\">Create\n      predefined attributes for routing contacts to agents</a>.</p>\n            </li>\n            <li>\n               <p>Contact information that varies between transfers or conferences, such as the name of the business unit handling the contact. For more information, see\n     <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/use-contact-segment-attributes.html\">Use contact segment attributes</a>.</p>\n            </li>\n         </ul>\n         <p>For the predefined attributes per instance quota, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#connect-quotas\">Amazon Connect quotas</a>.</p>\n         <p>\n            <b>Endpoints</b>: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect endpoints and\n    quotas</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/predefined-attributes/{InstanceId}",
@@ -30957,6 +30998,18 @@
                         "smithy.api#documentation": "<p>The values of the predefined attribute.</p>"
                     }
                 },
+                "Purposes": {
+                    "target": "com.amazonaws.connect#PredefinedAttributePurposeNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Values that enable you to categorize your predefined attributes. You can use them in custom UI elements across the Amazon Connect admin website.</p>"
+                    }
+                },
+                "AttributeConfiguration": {
+                    "target": "com.amazonaws.connect#PredefinedAttributeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Custom metadata that is associated to predefined attributes to control behavior \nin upstream services, such as controlling \nhow a predefined attribute should be displayed in the Amazon Connect admin website.</p>"
+                    }
+                },
                 "LastModifiedTime": {
                     "target": "com.amazonaws.connect#Timestamp",
                     "traits": {
@@ -30974,12 +31027,55 @@
                 "smithy.api#documentation": "<p>Information about a predefined attribute.</p>"
             }
         },
+        "com.amazonaws.connect#PredefinedAttributeConfiguration": {
+            "type": "structure",
+            "members": {
+                "EnableValueValidationOnAssociation": {
+                    "target": "com.amazonaws.connect#EnableValueValidationOnAssociation",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>When this parameter is set to true, Amazon Connect enforces strict validation on the\n   specific values, if the values are predefined in attributes. The contact will store only valid\n   and predefined values for teh predefined attribute key.</p>"
+                    }
+                },
+                "IsReadOnly": {
+                    "target": "com.amazonaws.connect#IsReadOnly",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A boolean flag used to indicate whether a predefined attribute should be displayed in the\n   Amazon Connect admin website.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Custom metadata that is associated to predefined attributes to control behavior in upstream\n   services, such as controlling how a predefined attribute should be displayed in the Amazon Connect admin website.</p>"
+            }
+        },
         "com.amazonaws.connect#PredefinedAttributeName": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 64
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.connect#PredefinedAttributePurposeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.connect#PredefinedAttributePurposeNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#PredefinedAttributePurposeName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
                 }
             }
         },
@@ -31023,7 +31119,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 64
+                    "max": 100
                 }
             }
         },
@@ -31034,8 +31130,8 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
-                    "max": 128
+                    "min": 0,
+                    "max": 500
                 }
             }
         },
@@ -35764,7 +35860,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Searches predefined attributes that meet certain criteria. <i>Predefined\n    attributes</i> are attributes in an Amazon Connect instance that can be used to route\n   contacts to an agent or pools of agents within a queue. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html\">Create\n    predefined attributes for routing contacts to agents</a>.</p>",
+                "smithy.api#documentation": "<p>Searches predefined attributes that meet certain criteria.  A <i>predefined\n    attribute</i> is made up of a name and a value. You can use predefined attributes for:</p>\n         <ul>\n            <li>\n               <p>Routing proficiency (for example, agent certification) that has\n     predefined values (for example, a list of possible certifications). For more information, see\n     <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html\">Create\n      predefined attributes for routing contacts to agents</a>.</p>\n            </li>\n            <li>\n               <p>Contact information that varies between transfers or conferences, such as the name of the business unit handling the contact. For more information, see\n     <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/use-contact-segment-attributes.html\">Use contact segment attributes</a>.</p>\n            </li>\n         </ul>\n         <p>For the predefined attributes per instance quota, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#connect-quotas\">Amazon Connect quotas</a>.</p>\n         <p>\n            <b>Endpoints</b>: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect endpoints and\n    quotas</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/search-predefined-attributes",
@@ -37317,6 +37413,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The value of a segment attribute.</p>"
                     }
+                },
+                "ValueList": {
+                    "target": "com.amazonaws.connect#SegmentAttributeValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of a segment attribute. This is only supported for system-defined attributes, not\n   for user-defined attributes.</p>"
+                    }
+                },
+                "ValueArn": {
+                    "target": "com.amazonaws.connect#SegmentAttributeValueString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of a segment attribute that has to be a valid ARN. This is only supported for\n   system-defined attributes, not for user-defined attributes.</p>"
+                    }
                 }
             },
             "traits": {
@@ -37325,6 +37433,12 @@
         },
         "com.amazonaws.connect#SegmentAttributeValueInteger": {
             "type": "integer"
+        },
+        "com.amazonaws.connect#SegmentAttributeValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#SegmentAttributeValue"
+            }
         },
         "com.amazonaws.connect#SegmentAttributeValueMap": {
             "type": "map",
@@ -42370,7 +42484,7 @@
                 "SegmentAttributes": {
                     "target": "com.amazonaws.connect#SegmentAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of system defined key-value pairs stored on individual contact segments (unique\n   contact ID) using an attribute map. The attributes are standard Amazon Connect attributes.\n   They can be accessed in flows.</p>\n         <p>Attribute keys can include only alphanumeric, -, and _.</p>\n         <p>This field can be used to show channel subtype, such as <code>connect:Guide</code>.</p>\n         <p>Currently Contact Expiry is the only segment attribute which can be updated by using the\n   UpdateContact API.</p>"
+                        "smithy.api#documentation": "<p>A set of system defined key-value pairs stored on individual contact segments (unique\n   contact ID) using an attribute map. The attributes are standard Amazon Connect attributes.\n   They can be accessed in flows.</p>\n         <p>Attribute keys can include only alphanumeric, -, and _.</p>\n         <p>This field can be used to show channel subtype, such as <code>connect:Guide</code>.</p>\n         <p>Contact Expiry, and user-defined attributes (String - String) that are defined in predefined\n   attributes, can be updated by using the UpdateContact API.</p>"
                     }
                 },
                 "QueueInfo": {
@@ -43523,7 +43637,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a predefined attribute for the specified Amazon Connect instance. <i>Predefined\n    attributes</i> are attributes in an Amazon Connect instance that can be used to route\n   contacts to an agent or pools of agents within a queue. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html\">Create\n    predefined attributes for routing contacts to agents</a>.</p>",
+                "smithy.api#documentation": "<p>Updates a predefined attribute for the specified Amazon Connect instance.  A <i>predefined\n    attribute</i> is made up of a name and a value.</p>\n         <p>For the predefined attributes per instance quota, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#connect-quotas\">Amazon Connect quotas</a>.</p>\n         <p>\n            <b>Use cases</b>\n         </p>\n         <p>Following are common uses cases for this API:</p>\n         <ul>\n            <li>\n               <p>Update routing proficiency (for example, agent certification) that has\n     predefined values (for example, a list of possible certifications). For more information, see\n     <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html\">Create\n      predefined attributes for routing contacts to agents</a>.</p>\n            </li>\n            <li>\n               <p>Update an attribute for business unit name that has a list of predefined business unit\n       names used in your organization. This is a use case where information for a contact varies between transfers or conferences. For more information, see\n       <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/use-contact-segment-attributes.html\">Use contact segment attributes</a>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Endpoints</b>: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect endpoints and\n    quotas</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/predefined-attributes/{InstanceId}/{Name}",
@@ -43554,6 +43668,18 @@
                     "target": "com.amazonaws.connect#PredefinedAttributeValues",
                     "traits": {
                         "smithy.api#documentation": "<p>The values of the predefined attribute.</p>"
+                    }
+                },
+                "Purposes": {
+                    "target": "com.amazonaws.connect#PredefinedAttributePurposeNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Values that enable you to categorize your predefined attributes. You can use them in custom UI elements across the Amazon Connect admin website.</p>"
+                    }
+                },
+                "AttributeConfiguration": {
+                    "target": "com.amazonaws.connect#InputPredefinedAttributeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Custom metadata that is associated to predefined attributes to control behavior \nin upstream services, such as controlling \nhow a predefined attribute should be displayed in the Amazon Connect admin website.</p>"
                     }
                 }
             },
