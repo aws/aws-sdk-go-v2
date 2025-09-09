@@ -65,7 +65,6 @@ func TestUploadDirectory(t *testing.T) {
 			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
 				l.expectStart(t, in)
 				l.expectComplete(t, in, out, 1)
-				l.expectObjectsTransferred(t, 1)
 			},
 		},
 		"multi file at root recursively": {
@@ -76,7 +75,6 @@ func TestUploadDirectory(t *testing.T) {
 			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
 				l.expectStart(t, in)
 				l.expectComplete(t, in, out, 3)
-				l.expectObjectsTransferred(t, 1, 2, 3)
 			},
 		},
 		"multi file with subdir recursively": {
@@ -87,7 +85,6 @@ func TestUploadDirectory(t *testing.T) {
 			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
 				l.expectStart(t, in)
 				l.expectComplete(t, in, out, 4)
-				l.expectObjectsTransferred(t, 1, 2, 3, 4)
 			},
 		},
 		"multi file with subdir non-recursively": {
@@ -97,7 +94,6 @@ func TestUploadDirectory(t *testing.T) {
 			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
 				l.expectStart(t, in)
 				l.expectComplete(t, in, out, 2)
-				l.expectObjectsTransferred(t, 1, 2)
 			},
 		},
 		"multi file with subdir and filter recursively": {
@@ -109,7 +105,6 @@ func TestUploadDirectory(t *testing.T) {
 			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
 				l.expectStart(t, in)
 				l.expectComplete(t, in, out, 3)
-				l.expectObjectsTransferred(t, 1, 2, 3)
 			},
 		},
 		"folder with single file and symlink recursively": {
@@ -132,7 +127,6 @@ func TestUploadDirectory(t *testing.T) {
 			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
 				l.expectStart(t, in)
 				l.expectComplete(t, in, out, 2)
-				l.expectObjectsTransferred(t, 1, 2)
 			},
 		},
 		"folder containing both file and symlink": {
@@ -155,7 +149,6 @@ func TestUploadDirectory(t *testing.T) {
 			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
 				l.expectStart(t, in)
 				l.expectComplete(t, in, out, 5)
-				l.expectObjectsTransferred(t, 1, 2, 3, 4, 5)
 			},
 		},
 		"folder containing multi symlinks": {
@@ -186,7 +179,6 @@ func TestUploadDirectory(t *testing.T) {
 			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
 				l.expectStart(t, in)
 				l.expectComplete(t, in, out, 6)
-				l.expectObjectsTransferred(t, 1, 2, 3, 4, 5, 6)
 			},
 		},
 		"folder containing multi symlinks but not follow": {
@@ -216,7 +208,6 @@ func TestUploadDirectory(t *testing.T) {
 			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
 				l.expectStart(t, in)
 				l.expectComplete(t, in, out, 4)
-				l.expectObjectsTransferred(t, 1, 2, 3, 4)
 			},
 		},
 		"folder containing files and symlink referring to folder": {
@@ -239,7 +230,6 @@ func TestUploadDirectory(t *testing.T) {
 			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
 				l.expectStart(t, in)
 				l.expectComplete(t, in, out, 5)
-				l.expectObjectsTransferred(t, 1, 2, 3, 4, 5)
 			},
 		},
 		"folder containing files and empty folder": {
@@ -262,7 +252,6 @@ func TestUploadDirectory(t *testing.T) {
 			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
 				l.expectStart(t, in)
 				l.expectComplete(t, in, out, 4)
-				l.expectObjectsTransferred(t, 1, 2, 3, 4)
 			},
 		},
 		"error when a file upload fails": {
@@ -350,7 +339,6 @@ func TestUploadDirectory(t *testing.T) {
 			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
 				l.expectStart(t, in)
 				l.expectComplete(t, in, out, 1)
-				l.expectObjectsTransferred(t, 1)
 			},
 		},
 		"multi file with subdir and filter recursively with keyprefix": {
@@ -363,7 +351,6 @@ func TestUploadDirectory(t *testing.T) {
 			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
 				l.expectStart(t, in)
 				l.expectComplete(t, in, out, 3)
-				l.expectObjectsTransferred(t, 1, 2, 3)
 			},
 		},
 		"folder containing both file and symlink with keyprefix": {
@@ -392,7 +379,6 @@ func TestUploadDirectory(t *testing.T) {
 			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
 				l.expectStart(t, in)
 				l.expectComplete(t, in, out, 6)
-				l.expectObjectsTransferred(t, 1, 2, 3, 4, 5, 6)
 			},
 		},
 		"folder containing symlink folder with prefix but non-recursive": {
@@ -415,7 +401,6 @@ func TestUploadDirectory(t *testing.T) {
 			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
 				l.expectStart(t, in)
 				l.expectComplete(t, in, out, 2)
-				l.expectObjectsTransferred(t, 1, 2)
 			},
 		},
 		"folder containing both file and symlink with keyprefix and custome delimiter": {
@@ -445,7 +430,6 @@ func TestUploadDirectory(t *testing.T) {
 			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
 				l.expectStart(t, in)
 				l.expectComplete(t, in, out, 6)
-				l.expectObjectsTransferred(t, 1, 2, 3, 4, 5, 6)
 			},
 		},
 		"folder containing both file and symlink with keyprefix, custome delimiter and request callback": {
@@ -476,7 +460,6 @@ func TestUploadDirectory(t *testing.T) {
 			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
 				l.expectStart(t, in)
 				l.expectComplete(t, in, out, 6)
-				l.expectObjectsTransferred(t, 1, 2, 3, 4, 5, 6)
 			},
 		},
 	}
@@ -550,6 +533,57 @@ func TestUploadDirectory(t *testing.T) {
 			if e, a := c.expectKeys, actualKeys; !reflect.DeepEqual(e, a) {
 				t.Errorf("expect upload keys to be %v, got %v", e, a)
 			}
+		})
+	}
+}
+
+func TestUploadDirectoryObjectsTransferred(t *testing.T) {
+	_, filename, _, _ := runtime.Caller(0)
+	root := filepath.Join(filepath.Dir(filename), "testdata")
+
+	cases := map[string]struct {
+		source       string
+		recursive    bool
+		objectsCount []int64
+	}{
+		"single file": {
+			source:       filepath.Join(root, "single-file-dir"),
+			recursive:    true,
+			objectsCount: []int64{1},
+		},
+		"multi file with subdir non-recursively": {
+			source:       filepath.Join(root, "multi-file-with-subdir"),
+			objectsCount: []int64{1, 2},
+		},
+		"multi file with subdir recursively": {
+			source:       filepath.Join(root, "multi-file-with-subdir"),
+			recursive:    true,
+			objectsCount: []int64{1, 2, 3, 4},
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			s3Client, _ := s3testing.NewUploadDirectoryClient([]string{"UploadPart", "CompleteMultipartUpload"})
+			mgr := New(s3Client, Options{})
+
+			req := &UploadDirectoryInput{
+				Bucket:    "mock-bucket",
+				Source:    c.source,
+				Recursive: c.recursive,
+			}
+
+			listener := &mockDirectoryListener{}
+
+			_, err := mgr.UploadDirectory(context.Background(), req, func(o *Options) {
+				o.DirectoryProgressListeners.Register(listener)
+				o.DirectoryConcurrency = 1
+			})
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+
+			listener.expectObjectsTransferred(t, c.objectsCount...)
 		})
 	}
 }

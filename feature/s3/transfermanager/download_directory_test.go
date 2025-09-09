@@ -78,7 +78,6 @@ func TestDownloadDirectory(t *testing.T) {
 			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
 				l.expectStart(t, in)
 				l.expectComplete(t, in, out, 1)
-				l.expectObjectsTransferred(t, 1)
 			},
 		},
 		"multiple objects": {
@@ -106,7 +105,6 @@ func TestDownloadDirectory(t *testing.T) {
 			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
 				l.expectStart(t, in)
 				l.expectComplete(t, in, out, 4)
-				l.expectObjectsTransferred(t, 1, 2, 3, 4)
 			},
 		},
 		"multiple objects paginated": {
@@ -144,7 +142,6 @@ func TestDownloadDirectory(t *testing.T) {
 			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
 				l.expectStart(t, in)
 				l.expectComplete(t, in, out, 6)
-				l.expectObjectsTransferred(t, 1, 2, 3, 4, 5, 6)
 			},
 		},
 		"multiple objects containing folder object": {
@@ -169,7 +166,6 @@ func TestDownloadDirectory(t *testing.T) {
 			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
 				l.expectStart(t, in)
 				l.expectComplete(t, in, out, 2)
-				l.expectObjectsTransferred(t, 1, 2)
 			},
 		},
 		"single object named with keyprefix": {
@@ -189,7 +185,6 @@ func TestDownloadDirectory(t *testing.T) {
 			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
 				l.expectStart(t, in)
 				l.expectComplete(t, in, out, 1)
-				l.expectObjectsTransferred(t, 1)
 			},
 		},
 		"multiple objects with keyprefix without delimiter suffix": {
@@ -221,7 +216,6 @@ func TestDownloadDirectory(t *testing.T) {
 			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
 				l.expectStart(t, in)
 				l.expectComplete(t, in, out, 4)
-				l.expectObjectsTransferred(t, 1, 2, 3, 4)
 			},
 		},
 		"multiple objects with keyprefix with default delimiter suffix": {
@@ -256,7 +250,6 @@ func TestDownloadDirectory(t *testing.T) {
 			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
 				l.expectStart(t, in)
 				l.expectComplete(t, in, out, 5)
-				l.expectObjectsTransferred(t, 1, 2, 3, 4, 5)
 			},
 		},
 		"multiple objects with keyprefix with customized delimiter suffix": {
@@ -283,7 +276,6 @@ func TestDownloadDirectory(t *testing.T) {
 			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
 				l.expectStart(t, in)
 				l.expectComplete(t, in, out, 3)
-				l.expectObjectsTransferred(t, 1, 2, 3)
 			},
 		},
 		"error when path resolved from objects key out of destination scope": {
@@ -338,7 +330,6 @@ func TestDownloadDirectory(t *testing.T) {
 			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
 				l.expectStart(t, in)
 				l.expectComplete(t, in, out, 3)
-				l.expectObjectsTransferred(t, 1, 2, 3)
 			},
 		},
 		"multiple objects with keyprefix and filter": {
@@ -371,7 +362,6 @@ func TestDownloadDirectory(t *testing.T) {
 			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
 				l.expectStart(t, in)
 				l.expectComplete(t, in, out, 3)
-				l.expectObjectsTransferred(t, 1, 2, 3)
 			},
 		},
 		"multiple objects with keyprefix and request callback": {
@@ -404,7 +394,6 @@ func TestDownloadDirectory(t *testing.T) {
 			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
 				l.expectStart(t, in)
 				l.expectComplete(t, in, out, 4)
-				l.expectObjectsTransferred(t, 1, 2, 3, 4)
 			},
 		},
 		"multiple objects paginated with keyprefix, delimiter, filter and callback": {
@@ -453,7 +442,6 @@ func TestDownloadDirectory(t *testing.T) {
 			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
 				l.expectStart(t, in)
 				l.expectComplete(t, in, out, 6)
-				l.expectObjectsTransferred(t, 1, 2, 3, 4, 5, 6)
 			},
 		},
 		"error when getting object": {
@@ -593,6 +581,115 @@ func TestDownloadDirectory(t *testing.T) {
 					t.Errorf("expect %s to be downloaded, got none", path)
 				}
 			}
+		})
+	}
+}
+
+func TestDownloadDirectoryObjectsTransferred(t *testing.T) {
+	_, filename, _, _ := runtime.Caller(0)
+	root := filepath.Join(filepath.Dir(filename), "testdata")
+	cases := map[string]struct {
+		destination        string
+		objectsLists       [][]s3types.Object
+		continuationTokens []string
+		objectsCount       []int64
+	}{
+		"single object": {
+			destination: "single-object",
+			objectsLists: [][]s3types.Object{
+				{
+					{
+						Key: aws.String("foo/bar"),
+					},
+				},
+			},
+			objectsCount: []int64{1},
+		},
+		"multiple objects": {
+			destination: "multiple-objects",
+			objectsLists: [][]s3types.Object{
+				{
+					{
+						Key: aws.String("foo/bar"),
+					},
+					{
+						Key: aws.String("baz"),
+					},
+					{
+						Key: aws.String("foo/zoo/bar"),
+					},
+					{
+						Key: aws.String("foo/zoo/oii/bababoii"),
+					},
+				},
+			},
+			objectsCount: []int64{1, 2, 3, 4},
+		},
+		"multiple objects paginated": {
+			destination: "multiple-objects-with-keyprefix-delimiter-filter-callback",
+			objectsLists: [][]s3types.Object{
+				{
+					{
+						Key: aws.String("a/"),
+					},
+					{
+						Key: aws.String("a/b"),
+					},
+					{
+						Key: aws.String("a/b"),
+					},
+				},
+				{
+					{
+						Key: aws.String("a/foo/bar"),
+					},
+					{
+						Key: aws.String("ac"),
+					},
+					{
+						Key: aws.String("ac@d/e"),
+					},
+				},
+				{
+					{
+						Key: aws.String("a/k.b"),
+					},
+				},
+			},
+			continuationTokens: []string{"token1", "token2"},
+			objectsCount:       []int64{1, 2, 3, 4, 5, 6},
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			s3Client, _ := s3testing.NewDownloadDirectoryClient()
+			s3Client.ListObjectsData = c.objectsLists
+			s3Client.ContinuationTokens = c.continuationTokens
+			s3Client.GetObjectFn = s3testing.PartGetObjectFn
+
+			s3Client.Data = make([]byte, 0)
+			s3Client.PartsCount = 1
+			mgr := New(s3Client, Options{})
+
+			dstPath := filepath.Join(root, c.destination)
+			defer os.RemoveAll(dstPath)
+
+			req := &DownloadDirectoryInput{
+				Bucket:      "mock-bucket",
+				Destination: dstPath,
+			}
+			listener := &mockDirectoryListener{}
+
+			_, err := mgr.DownloadDirectory(context.Background(), req, func(o *Options) {
+				o.DirectoryProgressListeners.Register(listener)
+				o.DirectoryConcurrency = 1
+			})
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+
+			listener.expectObjectsTransferred(t, c.objectsCount...)
 		})
 	}
 }

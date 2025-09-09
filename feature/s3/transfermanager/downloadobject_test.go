@@ -249,6 +249,7 @@ func TestDownloadObject(t *testing.T) {
 			data:        buf20MB,
 			getObjectFn: s3testing.RangeGetObjectFn,
 			options: Options{
+				Concurrency:   1,
 				GetObjectType: types.GetObjectRanges,
 			},
 			downloadRange:     "bytes=0-10485759",
