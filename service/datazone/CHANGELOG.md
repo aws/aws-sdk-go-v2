@@ -1,3 +1,7 @@
+# v1.40.0 (2025-09-09)
+
+* **Feature**: Adds support for custom blueprints
+
 # v1.39.3 (2025-09-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

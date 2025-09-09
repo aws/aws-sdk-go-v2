@@ -1,3 +1,21 @@
+# Release (2025-09-09)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.59.0](service/autoscaling/CHANGELOG.md#v1590-2025-09-09)
+  * **Feature**: Added WaitForTransitioningInstances parameter to the CancelInstanceRefresh API, allowing the caller to cancel an instance refresh without waiting for on-going launches and terminations.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.50.0](service/cloudwatch/CHANGELOG.md#v1500-2025-09-09)
+  * **Feature**: Added a new API - DescribeAlarmContributors API, to retrieve alarm contributors in ALARM state. Added support in DescribeAlarmHistory API to query alarm contributor history
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.139.0](service/connect/CHANGELOG.md#v11390-2025-09-09)
+  * **Feature**: SDK release for user defined predefined attributes.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.40.0](service/datazone/CHANGELOG.md#v1400-2025-09-09)
+  * **Feature**: Adds support for custom blueprints
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.31.0](service/mediapackagev2/CHANGELOG.md#v1310-2025-09-09)
+  * **Feature**: Added CUE tag SCTE output to MediaPackageV2 HLS and LL-HLS manifests.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.45.0](service/organizations/CHANGELOG.md#v1450-2025-09-09)
+  * **Feature**: Documentation updates for AWS Organizations APIs.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.215.0](service/sagemaker/CHANGELOG.md#v12150-2025-09-09)
+  * **Feature**: Released IPv6 support with dual-stack domain options on SageMaker Studio and introduced support for p6-b200.48xlarge instance type on SageMaker Studio for JupyterLab and CodeEditor applications.
+
 # Release (2025-09-08)
 
 ## General Highlights

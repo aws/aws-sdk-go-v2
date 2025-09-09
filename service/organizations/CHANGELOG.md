@@ -1,3 +1,7 @@
+# v1.45.0 (2025-09-09)
+
+* **Feature**: Documentation updates for AWS Organizations APIs.
+
 # v1.44.3 (2025-09-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

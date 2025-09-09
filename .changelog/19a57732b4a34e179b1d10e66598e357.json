@@ -1,8 +1,0 @@
-{
-    "id": "19a57732-b4a3-4e17-9b1d-10e66598e357",
-    "type": "feature",
-    "description": "Added WaitForTransitioningInstances parameter to the CancelInstanceRefresh API, allowing the caller to cancel an instance refresh without waiting for on-going launches and terminations.",
-    "modules": [
-        "service/autoscaling"
-    ]
-}

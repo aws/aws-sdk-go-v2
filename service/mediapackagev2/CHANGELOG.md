@@ -1,3 +1,7 @@
+# v1.31.0 (2025-09-09)
+
+* **Feature**: Added CUE tag SCTE output to MediaPackageV2 HLS and LL-HLS manifests.
+
 # v1.30.3 (2025-09-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

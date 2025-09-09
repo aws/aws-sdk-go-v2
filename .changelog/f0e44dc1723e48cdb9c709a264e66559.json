@@ -1,8 +1,0 @@
-{
-    "id": "f0e44dc1-723e-48cd-b9c7-09a264e66559",
-    "type": "feature",
-    "description": "Released IPv6 support with dual-stack domain options on SageMaker Studio and introduced support for p6-b200.48xlarge instance type on SageMaker Studio for JupyterLab and CodeEditor applications.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

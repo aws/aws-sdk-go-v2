@@ -1,3 +1,7 @@
+# v1.139.0 (2025-09-09)
+
+* **Feature**: SDK release for user defined predefined attributes.
+
 # v1.138.2 (2025-09-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

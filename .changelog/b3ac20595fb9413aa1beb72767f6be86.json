@@ -1,8 +1,0 @@
-{
-    "id": "b3ac2059-5fb9-413a-a1be-b72767f6be86",
-    "type": "feature",
-    "description": "Documentation updates for AWS Organizations APIs.",
-    "modules": [
-        "service/organizations"
-    ]
-}
