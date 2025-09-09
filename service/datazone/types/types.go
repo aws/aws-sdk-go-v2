@@ -1270,6 +1270,9 @@ type CustomParameter struct {
 	// Specifies whether the custom parameter is optional.
 	IsOptional *bool
 
+	// Specifies whether a parameter value can be updated after creation.
+	IsUpdateSupported *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -5999,7 +6002,7 @@ type SubscriptionGrantSummary struct {
 	// This member is required.
 	SubscriptionTargetId *string
 
-	// The timestampf of when the subscription grant was updated.
+	// The timestamp of when the subscription grant was updated.
 	//
 	// This member is required.
 	UpdatedAt *time.Time

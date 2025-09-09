@@ -12,6 +12,16 @@ import (
 )
 
 // Updates the business glossary in Amazon DataZone.
+//
+// Prerequisites:
+//
+//   - The glossary must exist in the given domain.
+//
+//   - The caller must have the datazone:UpdateGlossary permission to update it.
+//
+//   - When updating the name, the new name must be unique within the domain.
+//
+//   - The glossary must not be deleted or in a terminal state.
 func (c *Client) UpdateGlossary(ctx context.Context, params *UpdateGlossaryInput, optFns ...func(*Options)) (*UpdateGlossaryOutput, error) {
 	if params == nil {
 		params = &UpdateGlossaryInput{}

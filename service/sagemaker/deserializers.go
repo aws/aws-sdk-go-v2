@@ -53824,6 +53824,15 @@ func awsAwsjson11_deserializeDocumentDomainSettings(v **types.DomainSettings, va
 				sv.ExecutionRoleIdentityConfig = types.ExecutionRoleIdentityConfig(jtv)
 			}
 
+		case "IpAddressType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IPAddressType to be of type string, got %T instead", value)
+				}
+				sv.IpAddressType = types.IPAddressType(jtv)
+			}
+
 		case "RStudioServerProDomainSettings":
 			if err := awsAwsjson11_deserializeDocumentRStudioServerProDomainSettings(&sv.RStudioServerProDomainSettings, value); err != nil {
 				return err

@@ -13,6 +13,15 @@ import (
 )
 
 // Updates an asset filter.
+//
+// Prerequisites:
+//
+//   - The domain, asset, and asset filter identifier must all exist.
+//
+//   - The asset must contain the columns being referenced in the update.
+//
+//   - If applying a row filter, ensure the column referenced in the expression
+//     exists in the asset schema.
 func (c *Client) UpdateAssetFilter(ctx context.Context, params *UpdateAssetFilterInput, optFns ...func(*Options)) (*UpdateAssetFilterOutput, error) {
 	if params == nil {
 		params = &UpdateAssetFilterInput{}

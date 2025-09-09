@@ -48,6 +48,12 @@ type DescribeAccountInput struct {
 type DescribeAccountOutput struct {
 
 	// A structure that contains information about the requested account.
+	//
+	// The Status parameter in the API response will be retired on September 9, 2026.
+	// Although both the account State and account Status parameters are currently
+	// available in the Organizations APIs ( DescribeAccount , ListAccounts ,
+	// ListAccountsForParent ), we recommend that you update your scripts or other code
+	// to use the State parameter instead of Status before September 9, 2026.
 	Account *types.Account
 
 	// Metadata pertaining to the operation's result.

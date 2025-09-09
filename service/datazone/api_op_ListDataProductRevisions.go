@@ -12,6 +12,14 @@ import (
 )
 
 // Lists data product revisions.
+//
+// Prerequisites:
+//
+//   - The data product ID must exist within the domain.
+//
+//   - User must have view permissions on the data product.
+//
+//   - The domain must be in a valid and accessible state.
 func (c *Client) ListDataProductRevisions(ctx context.Context, params *ListDataProductRevisionsInput, optFns ...func(*Options)) (*ListDataProductRevisionsOutput, error) {
 	if params == nil {
 		params = &ListDataProductRevisionsInput{}

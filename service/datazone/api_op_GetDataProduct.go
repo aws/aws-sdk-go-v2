@@ -13,6 +13,14 @@ import (
 )
 
 // Gets the data product.
+//
+// Prerequisites:
+//
+//   - The data product ID must exist.
+//
+//   - The domain must be valid and accessible.
+//
+//   - User must have read or discovery permissions for the data product.
 func (c *Client) GetDataProduct(ctx context.Context, params *GetDataProductInput, optFns ...func(*Options)) (*GetDataProductOutput, error) {
 	if params == nil {
 		params = &GetDataProductInput{}

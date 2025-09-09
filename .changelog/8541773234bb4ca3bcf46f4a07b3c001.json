@@ -1,0 +1,8 @@
+{
+    "id": "85417732-34bb-4ca3-bcf4-6f4a07b3c001",
+    "type": "feature",
+    "description": "SDK release for user defined predefined attributes.",
+    "modules": [
+        "service/connect"
+    ]
+}

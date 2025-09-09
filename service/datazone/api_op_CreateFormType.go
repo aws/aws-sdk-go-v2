@@ -12,6 +12,14 @@ import (
 )
 
 // Creates a metadata form type.
+//
+// Prerequisites:
+//
+//   - The domain must exist and be in an ENABLED state.
+//
+//   - The owning project must exist and be accessible.
+//
+//   - The name must be unique within the domain.
 func (c *Client) CreateFormType(ctx context.Context, params *CreateFormTypeInput, optFns ...func(*Options)) (*CreateFormTypeOutput, error) {
 	if params == nil {
 		params = &CreateFormTypeInput{}

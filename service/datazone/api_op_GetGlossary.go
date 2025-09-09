@@ -13,6 +13,13 @@ import (
 )
 
 // Gets a business glossary in Amazon DataZone.
+//
+// Prerequisites:
+//
+//   - The specified glossary ID must exist and be associated with the given
+//     domain.
+//
+//   - The caller must have the datazone:GetGlossary permission on the domain.
 func (c *Client) GetGlossary(ctx context.Context, params *GetGlossaryInput, optFns ...func(*Options)) (*GetGlossaryOutput, error) {
 	if params == nil {
 		params = &GetGlossaryInput{}

@@ -11,11 +11,29 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new predefined attribute for the specified Amazon Connect instance.
-// Predefined attributes are attributes in an Amazon Connect instance that can be
-// used to route contacts to an agent or pools of agents within a queue. For more
-// information, see [Create predefined attributes for routing contacts to agents].
+// Creates a new predefined attribute for the specified Amazon Connect instance. A
+// predefined attribute is made up of a name and a value.
 //
+// For the predefined attributes per instance quota, see [Amazon Connect quotas].
+//
+// # Use cases
+//
+// Following are common uses cases for this API:
+//
+//   - Create an attribute for routing proficiency (for example, agent
+//     certification) that has predefined values (for example, a list of possible
+//     certifications). For more information, see [Create predefined attributes for routing contacts to agents].
+//
+//   - Create an attribute for business unit name that has a list of predefined
+//     business unit names used in your organization. This is a use case where
+//     information for a contact varies between transfers or conferences. For more
+//     information, see [Use contact segment attributes].
+//
+// Endpoints: See [Amazon Connect endpoints and quotas].
+//
+// [Use contact segment attributes]: https://docs.aws.amazon.com/connect/latest/adminguide/use-contact-segment-attributes.html
+// [Amazon Connect endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
+// [Amazon Connect quotas]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#connect-quotas
 // [Create predefined attributes for routing contacts to agents]: https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html
 func (c *Client) CreatePredefinedAttribute(ctx context.Context, params *CreatePredefinedAttributeInput, optFns ...func(*Options)) (*CreatePredefinedAttributeOutput, error) {
 	if params == nil {
@@ -45,9 +63,16 @@ type CreatePredefinedAttributeInput struct {
 	// This member is required.
 	Name *string
 
+	// Custom metadata that is associated to predefined attributes to control behavior
+	// in upstream services, such as controlling how a predefined attribute should be
+	// displayed in the Amazon Connect admin website.
+	AttributeConfiguration *types.InputPredefinedAttributeConfiguration
+
+	// Values that enable you to categorize your predefined attributes. You can use
+	// them in custom UI elements across the Amazon Connect admin website.
+	Purposes []string
+
 	//  The values of the predefined attribute.
-	//
-	// This member is required.
 	Values types.PredefinedAttributeValues
 
 	noSmithyDocumentSerde

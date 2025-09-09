@@ -1,0 +1,8 @@
+{
+    "id": "db149a77-622c-4d2d-8503-a7d89d129c96",
+    "type": "feature",
+    "description": "Adds support for custom blueprints",
+    "modules": [
+        "service/datazone"
+    ]
+}

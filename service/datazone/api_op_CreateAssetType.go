@@ -13,6 +13,21 @@ import (
 )
 
 // Creates a custom asset type.
+//
+// Prerequisites:
+//
+//   - The form type with typeIdentifier and typeRevision must exist and be
+//     published.
+//
+//   - You must have CreateAssetType permissions.
+//
+//   - The domain-identifier and owning-project-identifier must be valid and
+//     active.
+//
+//   - The name of the asset type must be unique within the domain — duplicate
+//     names will cause failure.
+//
+//   - JSON input must be valid — incorrect formatting causes Invalid JSON errors.
 func (c *Client) CreateAssetType(ctx context.Context, params *CreateAssetTypeInput, optFns ...func(*Options)) (*CreateAssetTypeOutput, error) {
 	if params == nil {
 		params = &CreateAssetTypeInput{}

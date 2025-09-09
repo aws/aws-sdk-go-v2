@@ -39,6 +39,10 @@ func (c *Client) DescribeAlarmHistory(ctx context.Context, params *DescribeAlarm
 
 type DescribeAlarmHistoryInput struct {
 
+	// The unique identifier of a specific alarm contributor to filter the alarm
+	// history results.
+	AlarmContributorId *string
+
 	// The name of the alarm.
 	AlarmName *string
 

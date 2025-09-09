@@ -11,6 +11,14 @@ import (
 )
 
 // Deletes an asset filter.
+//
+// Prerequisites:
+//
+//   - The asset filter must exist.
+//
+//   - The domain and asset must not have been deleted.
+//
+//   - Ensure the --identifier refers to a valid filter ID.
 func (c *Client) DeleteAssetFilter(ctx context.Context, params *DeleteAssetFilterInput, optFns ...func(*Options)) (*DeleteAssetFilterOutput, error) {
 	if params == nil {
 		params = &DeleteAssetFilterInput{}

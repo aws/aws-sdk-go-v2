@@ -48,7 +48,23 @@ type Account struct {
 	// [regex pattern]: http://wikipedia.org/wiki/regex
 	Name *string
 
+	// Each state represents a specific phase in the account lifecycle. Use this
+	// information to manage account access, automate workflows, or trigger actions
+	// based on account state changes.
+	//
+	// For more information about account states and their implications, see [Monitor the state of your Amazon Web Services accounts] in the
+	// Organizations User Guide.
+	//
+	// [Monitor the state of your Amazon Web Services accounts]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_account_state.html
+	State AccountState
+
 	// The status of the account in the organization.
+	//
+	// The Status parameter in the Account object will be retired on September 9,
+	// 2026. Although both the account State and account Status parameters are
+	// currently available in the Organizations APIs ( DescribeAccount , ListAccounts ,
+	// ListAccountsForParent ), we recommend that you update your scripts or other code
+	// to use the State parameter instead of Status before September 9, 2026.
 	Status AccountStatus
 
 	noSmithyDocumentSerde

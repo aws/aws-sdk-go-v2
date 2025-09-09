@@ -24,7 +24,7 @@ import (
 //
 // You can enable a policy type in a root only if that policy type is available in
 // the organization. To view the status of available policy types in the
-// organization, use DescribeOrganization.
+// organization, use ListRoots.
 func (c *Client) EnablePolicyType(ctx context.Context, params *EnablePolicyTypeInput, optFns ...func(*Options)) (*EnablePolicyTypeOutput, error) {
 	if params == nil {
 		params = &EnablePolicyTypeInput{}

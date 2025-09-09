@@ -45,6 +45,13 @@ type CancelInstanceRefreshInput struct {
 	// This member is required.
 	AutoScalingGroupName *string
 
+	// When cancelling an instance refresh, this indicates whether to wait for
+	// in-flight launches and terminations to complete. The default is true.
+	//
+	// When set to false, Amazon EC2 Auto Scaling cancels the instance refresh without
+	// waiting for any pending launches or terminations to complete.
+	WaitForTransitioningInstances *bool
+
 	noSmithyDocumentSerde
 }
 

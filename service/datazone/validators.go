@@ -410,6 +410,26 @@ func (m *validateOpCreateEnvironmentAction) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateEnvironmentBlueprint struct {
+}
+
+func (*validateOpCreateEnvironmentBlueprint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateEnvironmentBlueprint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateEnvironmentBlueprintInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateEnvironmentBlueprintInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateEnvironment struct {
 }
 
@@ -925,6 +945,26 @@ func (m *validateOpDeleteEnvironmentBlueprintConfiguration) HandleInitialize(ctx
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteEnvironmentBlueprintConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteEnvironmentBlueprint struct {
+}
+
+func (*validateOpDeleteEnvironmentBlueprint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteEnvironmentBlueprint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteEnvironmentBlueprintInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteEnvironmentBlueprintInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3070,6 +3110,26 @@ func (m *validateOpUpdateEnvironmentAction) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateEnvironmentBlueprint struct {
+}
+
+func (*validateOpUpdateEnvironmentBlueprint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateEnvironmentBlueprint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateEnvironmentBlueprintInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateEnvironmentBlueprintInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateEnvironment struct {
 }
 
@@ -3390,6 +3450,10 @@ func addOpCreateEnvironmentActionValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpCreateEnvironmentAction{}, middleware.After)
 }
 
+func addOpCreateEnvironmentBlueprintValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateEnvironmentBlueprint{}, middleware.After)
+}
+
 func addOpCreateEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateEnvironment{}, middleware.After)
 }
@@ -3492,6 +3556,10 @@ func addOpDeleteEnvironmentActionValidationMiddleware(stack *middleware.Stack) e
 
 func addOpDeleteEnvironmentBlueprintConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteEnvironmentBlueprintConfiguration{}, middleware.After)
+}
+
+func addOpDeleteEnvironmentBlueprintValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteEnvironmentBlueprint{}, middleware.After)
 }
 
 func addOpDeleteEnvironmentValidationMiddleware(stack *middleware.Stack) error {
@@ -3922,6 +3990,10 @@ func addOpUpdateEnvironmentActionValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpUpdateEnvironmentAction{}, middleware.After)
 }
 
+func addOpUpdateEnvironmentBlueprintValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateEnvironmentBlueprint{}, middleware.After)
+}
+
 func addOpUpdateEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateEnvironment{}, middleware.After)
 }
@@ -4197,6 +4269,21 @@ func validateAssetTypesForRule(v *types.AssetTypesForRule) error {
 	}
 }
 
+func validateCloudFormationProperties(v *types.CloudFormationProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CloudFormationProperties"}
+	if v.TemplateUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateUrl"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateConnectionPropertiesInput(v types.ConnectionPropertiesInput) error {
 	if v == nil {
 		return nil
@@ -4257,6 +4344,41 @@ func validateCustomAccountPoolHandler(v *types.CustomAccountPoolHandler) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CustomAccountPoolHandler"}
 	if v.LambdaFunctionArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LambdaFunctionArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomParameter(v *types.CustomParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomParameter"}
+	if v.KeyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyName"))
+	}
+	if v.FieldType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FieldType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomParameterList(v []types.CustomParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomParameterList"}
+	for i := range v {
+		if err := validateCustomParameter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5169,6 +5291,25 @@ func validateProjectsForRule(v *types.ProjectsForRule) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ProjectsForRule"}
 	if len(v.SelectionMode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("SelectionMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProvisioningProperties(v types.ProvisioningProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProvisioningProperties"}
+	switch uv := v.(type) {
+	case *types.ProvisioningPropertiesMemberCloudFormation:
+		if err := validateCloudFormationProperties(&uv.Value); err != nil {
+			invalidParams.AddNested("[cloudFormation]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6341,6 +6482,36 @@ func validateOpCreateEnvironmentActionInput(v *CreateEnvironmentActionInput) err
 	}
 }
 
+func validateOpCreateEnvironmentBlueprintInput(v *CreateEnvironmentBlueprintInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateEnvironmentBlueprintInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ProvisioningProperties == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProvisioningProperties"))
+	} else if v.ProvisioningProperties != nil {
+		if err := validateProvisioningProperties(v.ProvisioningProperties); err != nil {
+			invalidParams.AddNested("ProvisioningProperties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.UserParameters != nil {
+		if err := validateCustomParameterList(v.UserParameters); err != nil {
+			invalidParams.AddNested("UserParameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateEnvironmentInput(v *CreateEnvironmentInput) error {
 	if v == nil {
 		return nil
@@ -6920,6 +7091,24 @@ func validateOpDeleteEnvironmentBlueprintConfigurationInput(v *DeleteEnvironment
 	}
 	if v.EnvironmentBlueprintIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentBlueprintIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteEnvironmentBlueprintInput(v *DeleteEnvironmentBlueprintInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteEnvironmentBlueprintInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -8990,6 +9179,34 @@ func validateOpUpdateEnvironmentActionInput(v *UpdateEnvironmentActionInput) err
 	}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateEnvironmentBlueprintInput(v *UpdateEnvironmentBlueprintInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateEnvironmentBlueprintInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.ProvisioningProperties != nil {
+		if err := validateProvisioningProperties(v.ProvisioningProperties); err != nil {
+			invalidParams.AddNested("ProvisioningProperties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.UserParameters != nil {
+		if err := validateCustomParameterList(v.UserParameters); err != nil {
+			invalidParams.AddNested("UserParameters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

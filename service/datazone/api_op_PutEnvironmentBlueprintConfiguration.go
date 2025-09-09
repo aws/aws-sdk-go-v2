@@ -49,6 +49,9 @@ type PutEnvironmentBlueprintConfigurationInput struct {
 	// The environment role permissions boundary.
 	EnvironmentRolePermissionBoundary *string
 
+	// Region-agnostic environment blueprint parameters.
+	GlobalParameters map[string]string
+
 	// The ARN of the manage access role.
 	ManageAccessRoleArn *string
 

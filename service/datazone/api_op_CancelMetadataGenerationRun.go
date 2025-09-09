@@ -11,6 +11,15 @@ import (
 )
 
 // Cancels the metadata generation run.
+//
+// Prerequisites:
+//
+//   - The run must exist and be in a cancelable status (e.g., SUBMITTED,
+//     IN_PROGRESS).
+//
+//   - Runs in SUCCEEDED status cannot be cancelled.
+//
+//   - User must have access to the run and cancel permissions.
 func (c *Client) CancelMetadataGenerationRun(ctx context.Context, params *CancelMetadataGenerationRunInput, optFns ...func(*Options)) (*CancelMetadataGenerationRunOutput, error) {
 	if params == nil {
 		params = &CancelMetadataGenerationRunInput{}

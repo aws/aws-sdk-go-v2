@@ -3809,6 +3809,19 @@ type InboundRawMessage struct {
 	noSmithyDocumentSerde
 }
 
+// Custom metadata that is associated to predefined attributes to control behavior
+// in upstream services, such as controlling how a predefined attribute should be
+// displayed in the Amazon Connect admin website.
+type InputPredefinedAttributeConfiguration struct {
+
+	// When this parameter is set to true, Amazon Connect enforces strict validation
+	// on the specific values, if the values are predefined in attributes. The contact
+	// will store only valid and predefined values for the predefined attribute key.
+	EnableValueValidationOnAssociation bool
+
+	noSmithyDocumentSerde
+}
+
 // The Amazon Connect instance.
 type Instance struct {
 
@@ -4835,6 +4848,11 @@ type PhoneNumberSummary struct {
 // Information about a predefined attribute.
 type PredefinedAttribute struct {
 
+	// Custom metadata that is associated to predefined attributes to control behavior
+	// in upstream services, such as controlling how a predefined attribute should be
+	// displayed in the Amazon Connect admin website.
+	AttributeConfiguration *PredefinedAttributeConfiguration
+
 	// Last modified region.
 	LastModifiedRegion *string
 
@@ -4844,8 +4862,29 @@ type PredefinedAttribute struct {
 	// The name of the predefined attribute.
 	Name *string
 
+	// Values that enable you to categorize your predefined attributes. You can use
+	// them in custom UI elements across the Amazon Connect admin website.
+	Purposes []string
+
 	// The values of the predefined attribute.
 	Values PredefinedAttributeValues
+
+	noSmithyDocumentSerde
+}
+
+// Custom metadata that is associated to predefined attributes to control behavior
+// in upstream services, such as controlling how a predefined attribute should be
+// displayed in the Amazon Connect admin website.
+type PredefinedAttributeConfiguration struct {
+
+	// When this parameter is set to true, Amazon Connect enforces strict validation
+	// on the specific values, if the values are predefined in attributes. The contact
+	// will store only valid and predefined values for teh predefined attribute key.
+	EnableValueValidationOnAssociation bool
+
+	// A boolean flag used to indicate whether a predefined attribute should be
+	// displayed in the Amazon Connect admin website.
+	IsReadOnly bool
 
 	noSmithyDocumentSerde
 }
@@ -6669,8 +6708,16 @@ type SecurityProfileSummary struct {
 // valueString and the value is a string.
 type SegmentAttributeValue struct {
 
+	// The value of a segment attribute that has to be a valid ARN. This is only
+	// supported for system-defined attributes, not for user-defined attributes.
+	ValueArn *string
+
 	// The value of a segment attribute.
 	ValueInteger *int32
+
+	// The value of a segment attribute. This is only supported for system-defined
+	// attributes, not for user-defined attributes.
+	ValueList []SegmentAttributeValue
 
 	// The value of a segment attribute.
 	ValueMap map[string]SegmentAttributeValue

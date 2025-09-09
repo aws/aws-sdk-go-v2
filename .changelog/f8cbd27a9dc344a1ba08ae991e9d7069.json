@@ -1,0 +1,8 @@
+{
+    "id": "f8cbd27a-9dc3-44a1-ba08-ae991e9d7069",
+    "type": "feature",
+    "description": "Added CUE tag SCTE output to MediaPackageV2 HLS and LL-HLS manifests.",
+    "modules": [
+        "service/mediapackagev2"
+    ]
+}

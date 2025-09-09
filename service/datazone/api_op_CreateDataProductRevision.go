@@ -13,6 +13,16 @@ import (
 )
 
 // Creates a data product revision.
+//
+// Prerequisites:
+//
+//   - The original data product must exist in the given domain.
+//
+//   - User must have permissions on the data product.
+//
+//   - The domain must be valid and accessible.
+//
+//   - The new revision name must comply with naming constraints (if required).
 func (c *Client) CreateDataProductRevision(ctx context.Context, params *CreateDataProductRevisionInput, optFns ...func(*Options)) (*CreateDataProductRevisionOutput, error) {
 	if params == nil {
 		params = &CreateDataProductRevisionInput{}

@@ -122,6 +122,18 @@ func TestCheckSnapshot_DeleteMetricStream(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeAlarmContributors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAlarmContributors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeAlarmContributors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeAlarmHistory(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeAlarmHistory(context.Background(), nil, func(o *Options) {
@@ -570,6 +582,18 @@ func TestUpdateSnapshot_DeleteMetricStream(t *testing.T) {
 	_, err := svc.DeleteMetricStream(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteMetricStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeAlarmContributors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAlarmContributors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeAlarmContributors")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

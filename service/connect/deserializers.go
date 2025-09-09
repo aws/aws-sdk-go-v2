@@ -57831,6 +57831,11 @@ func awsRestjson1_deserializeDocumentPredefinedAttribute(v **types.PredefinedAtt
 
 	for key, value := range shape {
 		switch key {
+		case "AttributeConfiguration":
+			if err := awsRestjson1_deserializeDocumentPredefinedAttributeConfiguration(&sv.AttributeConfiguration, value); err != nil {
+				return err
+			}
+
 		case "LastModifiedRegion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -57865,6 +57870,11 @@ func awsRestjson1_deserializeDocumentPredefinedAttribute(v **types.PredefinedAtt
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "Purposes":
+			if err := awsRestjson1_deserializeDocumentPredefinedAttributePurposeNameList(&sv.Purposes, value); err != nil {
+				return err
+			}
+
 		case "Values":
 			if err := awsRestjson1_deserializeDocumentPredefinedAttributeValues(&sv.Values, value); err != nil {
 				return err
@@ -57876,6 +57886,91 @@ func awsRestjson1_deserializeDocumentPredefinedAttribute(v **types.PredefinedAtt
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPredefinedAttributeConfiguration(v **types.PredefinedAttributeConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PredefinedAttributeConfiguration
+	if *v == nil {
+		sv = &types.PredefinedAttributeConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EnableValueValidationOnAssociation":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected EnableValueValidationOnAssociation to be of type *bool, got %T instead", value)
+				}
+				sv.EnableValueValidationOnAssociation = jtv
+			}
+
+		case "IsReadOnly":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected IsReadOnly to be of type *bool, got %T instead", value)
+				}
+				sv.IsReadOnly = jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPredefinedAttributePurposeNameList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected PredefinedAttributePurposeName to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -63077,6 +63172,15 @@ func awsRestjson1_deserializeDocumentSegmentAttributeValue(v **types.SegmentAttr
 
 	for key, value := range shape {
 		switch key {
+		case "ValueArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SegmentAttributeValueString to be of type string, got %T instead", value)
+				}
+				sv.ValueArn = ptr.String(jtv)
+			}
+
 		case "ValueInteger":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -63088,6 +63192,11 @@ func awsRestjson1_deserializeDocumentSegmentAttributeValue(v **types.SegmentAttr
 					return err
 				}
 				sv.ValueInteger = ptr.Int32(int32(i64))
+			}
+
+		case "ValueList":
+			if err := awsRestjson1_deserializeDocumentSegmentAttributeValueList(&sv.ValueList, value); err != nil {
+				return err
 			}
 
 		case "ValueMap":
@@ -63110,6 +63219,40 @@ func awsRestjson1_deserializeDocumentSegmentAttributeValue(v **types.SegmentAttr
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSegmentAttributeValueList(v *[]types.SegmentAttributeValue, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SegmentAttributeValue
+	if *v == nil {
+		cv = []types.SegmentAttributeValue{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SegmentAttributeValue
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSegmentAttributeValue(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

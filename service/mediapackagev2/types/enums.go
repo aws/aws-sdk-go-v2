@@ -25,7 +25,8 @@ type AdMarkerHls string
 
 // Enum values for AdMarkerHls
 const (
-	AdMarkerHlsDaterange AdMarkerHls = "DATERANGE"
+	AdMarkerHlsDaterange      AdMarkerHls = "DATERANGE"
+	AdMarkerHlsScte35Enhanced AdMarkerHls = "SCTE35_ENHANCED"
 )
 
 // Values returns all known values for AdMarkerHls. Note that this can be expanded
@@ -35,6 +36,7 @@ const (
 func (AdMarkerHls) Values() []AdMarkerHls {
 	return []AdMarkerHls{
 		"DATERANGE",
+		"SCTE35_ENHANCED",
 	}
 }
 

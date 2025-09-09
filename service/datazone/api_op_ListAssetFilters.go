@@ -12,6 +12,12 @@ import (
 )
 
 // Lists asset filters.
+//
+// Prerequisites:
+//
+//   - A valid domain and asset must exist.
+//
+//   - The asset must have at least one filter created to return results.
 func (c *Client) ListAssetFilters(ctx context.Context, params *ListAssetFiltersInput, optFns ...func(*Options)) (*ListAssetFiltersOutput, error) {
 	if params == nil {
 		params = &ListAssetFiltersInput{}

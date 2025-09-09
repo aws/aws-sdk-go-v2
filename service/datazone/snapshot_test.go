@@ -314,6 +314,18 @@ func TestCheckSnapshot_CreateEnvironmentAction(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateEnvironmentBlueprint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateEnvironmentBlueprint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateEnvironmentBlueprint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateEnvironmentProfile(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateEnvironmentProfile(context.Background(), nil, func(o *Options) {
@@ -607,6 +619,18 @@ func TestCheckSnapshot_DeleteEnvironmentAction(t *testing.T) {
 	_, err := svc.DeleteEnvironmentAction(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteEnvironmentAction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteEnvironmentBlueprint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteEnvironmentBlueprint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteEnvironmentBlueprint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1922,6 +1946,18 @@ func TestCheckSnapshot_UpdateEnvironmentAction(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateEnvironmentBlueprint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateEnvironmentBlueprint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateEnvironmentBlueprint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateEnvironmentProfile(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateEnvironmentProfile(context.Background(), nil, func(o *Options) {
@@ -2305,6 +2341,18 @@ func TestUpdateSnapshot_CreateEnvironmentAction(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateEnvironmentBlueprint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateEnvironmentBlueprint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateEnvironmentBlueprint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateEnvironmentProfile(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateEnvironmentProfile(context.Background(), nil, func(o *Options) {
@@ -2598,6 +2646,18 @@ func TestUpdateSnapshot_DeleteEnvironmentAction(t *testing.T) {
 	_, err := svc.DeleteEnvironmentAction(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteEnvironmentAction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteEnvironmentBlueprint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteEnvironmentBlueprint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteEnvironmentBlueprint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3906,6 +3966,18 @@ func TestUpdateSnapshot_UpdateEnvironmentAction(t *testing.T) {
 	_, err := svc.UpdateEnvironmentAction(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateEnvironmentAction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateEnvironmentBlueprint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateEnvironmentBlueprint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateEnvironmentBlueprint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

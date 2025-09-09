@@ -13,6 +13,14 @@ import (
 )
 
 // Gets a metadata generation run in Amazon DataZone.
+//
+// Prerequisites:
+//
+//   - Valid domain and run identifier.
+//
+//   - The metadata generation run must exist.
+//
+//   - User must have read access to the metadata run.
 func (c *Client) GetMetadataGenerationRun(ctx context.Context, params *GetMetadataGenerationRunInput, optFns ...func(*Options)) (*GetMetadataGenerationRunOutput, error) {
 	if params == nil {
 		params = &GetMetadataGenerationRunInput{}

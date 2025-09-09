@@ -26328,6 +26328,11 @@ func awsAwsjson11_serializeDocumentDomainSettings(v *types.DomainSettings, value
 		ok.String(string(v.ExecutionRoleIdentityConfig))
 	}
 
+	if len(v.IpAddressType) > 0 {
+		ok := object.Key("IpAddressType")
+		ok.String(string(v.IpAddressType))
+	}
+
 	if v.RStudioServerProDomainSettings != nil {
 		ok := object.Key("RStudioServerProDomainSettings")
 		if err := awsAwsjson11_serializeDocumentRStudioServerProDomainSettings(v.RStudioServerProDomainSettings, ok); err != nil {
@@ -26380,6 +26385,11 @@ func awsAwsjson11_serializeDocumentDomainSettingsForUpdate(v *types.DomainSettin
 	if len(v.ExecutionRoleIdentityConfig) > 0 {
 		ok := object.Key("ExecutionRoleIdentityConfig")
 		ok.String(string(v.ExecutionRoleIdentityConfig))
+	}
+
+	if len(v.IpAddressType) > 0 {
+		ok := object.Key("IpAddressType")
+		ok.String(string(v.IpAddressType))
 	}
 
 	if v.RStudioServerProDomainSettingsForUpdate != nil {

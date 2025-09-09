@@ -9595,9 +9595,6 @@ func validateOpCreatePredefinedAttributeInput(v *CreatePredefinedAttributeInput)
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.Values == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Values"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

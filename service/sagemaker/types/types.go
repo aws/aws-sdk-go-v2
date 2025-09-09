@@ -5950,6 +5950,11 @@ type DomainSettings struct {
 	// [sts:SourceIdentity key]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html
 	ExecutionRoleIdentityConfig ExecutionRoleIdentityConfig
 
+	// The IP address type for the domain. Specify ipv4 for IPv4-only connectivity or
+	// dualstack for both IPv4 and IPv6 connectivity. When you specify dualstack , the
+	// subnet must support IPv6 CIDR blocks. If not specified, defaults to ipv4 .
+	IpAddressType IPAddressType
+
 	// A collection of settings that configure the RStudioServerPro Domain-level app.
 	RStudioServerProDomainSettings *RStudioServerProDomainSettings
 
@@ -5985,6 +5990,11 @@ type DomainSettingsForUpdate struct {
 	//
 	// [sts:SourceIdentity key]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html
 	ExecutionRoleIdentityConfig ExecutionRoleIdentityConfig
+
+	// The IP address type for the domain. Specify ipv4 for IPv4-only connectivity or
+	// dualstack for both IPv4 and IPv6 connectivity. When you specify dualstack , the
+	// subnet must support IPv6 CIDR blocks.
+	IpAddressType IPAddressType
 
 	// A collection of RStudioServerPro Domain-level app settings to update. A single
 	// RStudioServerPro application is created for a domain.

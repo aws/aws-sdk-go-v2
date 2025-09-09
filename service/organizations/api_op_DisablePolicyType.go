@@ -26,7 +26,7 @@ import (
 // This operation can be called only from the organization's management account or
 // by a member account that is a delegated administrator.
 //
-// To view the status of available policy types in the organization, use DescribeOrganization.
+// To view the status of available policy types in the organization, use ListRoots.
 //
 // [all features]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
 func (c *Client) DisablePolicyType(ctx context.Context, params *DisablePolicyTypeInput, optFns ...func(*Options)) (*DisablePolicyTypeOutput, error) {

@@ -9025,6 +9025,15 @@ func awsAwsjson11_deserializeDocumentAccount(v **types.Account, value interface{
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "State":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountState to be of type string, got %T instead", value)
+				}
+				sv.State = types.AccountState(jtv)
+			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)

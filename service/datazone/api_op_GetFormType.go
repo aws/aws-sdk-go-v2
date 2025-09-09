@@ -13,6 +13,21 @@ import (
 )
 
 // Gets a metadata form type in Amazon DataZone.
+//
+// Form types define the structure and validation rules for collecting metadata
+// about assets in Amazon DataZone. They act as templates that ensure consistent
+// metadata capture across similar types of assets, while allowing for
+// customization to meet specific organizational needs. Form types can include
+// required fields, validation rules, and dependencies, helping maintain
+// high-quality metadata that makes data assets more discoverable and usable.
+//
+//   - The form type with the specified identifier must exist in the given domain.
+//
+//   - The domain must be valid and active.
+//
+//   - User must have permission on the form type.
+//
+//   - The form type should not be deleted or in an invalid state.
 func (c *Client) GetFormType(ctx context.Context, params *GetFormTypeInput, optFns ...func(*Options)) (*GetFormTypeOutput, error) {
 	if params == nil {
 		params = &GetFormTypeInput{}

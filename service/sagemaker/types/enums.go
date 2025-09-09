@@ -244,6 +244,7 @@ const (
 	AppInstanceTypeMlTrn1n32xlarge         AppInstanceType = "ml.trn1n.32xlarge"
 	AppInstanceTypeMlP548xlarge            AppInstanceType = "ml.p5.48xlarge"
 	AppInstanceTypeMlP5en48xlarge          AppInstanceType = "ml.p5en.48xlarge"
+	AppInstanceTypeMlP6B20048xlarge        AppInstanceType = "ml.p6-b200.48xlarge"
 	AppInstanceTypeMlM6iLarge              AppInstanceType = "ml.m6i.large"
 	AppInstanceTypeMlM6iXlarge             AppInstanceType = "ml.m6i.xlarge"
 	AppInstanceTypeMlM6i2xlarge            AppInstanceType = "ml.m6i.2xlarge"
@@ -414,6 +415,7 @@ func (AppInstanceType) Values() []AppInstanceType {
 		"ml.trn1n.32xlarge",
 		"ml.p5.48xlarge",
 		"ml.p5en.48xlarge",
+		"ml.p6-b200.48xlarge",
 		"ml.m6i.large",
 		"ml.m6i.xlarge",
 		"ml.m6i.2xlarge",

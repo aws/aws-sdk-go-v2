@@ -1,0 +1,8 @@
+{
+    "id": "6a351227-5fab-4bc0-bdc0-195fe89d1573",
+    "type": "feature",
+    "description": "Added a new API - DescribeAlarmContributors API, to retrieve alarm contributors in ALARM state. Added support in DescribeAlarmHistory API to query alarm contributor history",
+    "modules": [
+        "service/cloudwatch"
+    ]
+}

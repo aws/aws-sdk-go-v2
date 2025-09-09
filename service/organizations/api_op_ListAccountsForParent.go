@@ -70,6 +70,12 @@ type ListAccountsForParentInput struct {
 type ListAccountsForParentOutput struct {
 
 	// A list of the accounts in the specified root or OU.
+	//
+	// The Status parameter in the API response will be retired on September 9, 2026.
+	// Although both the account State and account Status parameters are currently
+	// available in the Organizations APIs ( DescribeAccount , ListAccounts ,
+	// ListAccountsForParent ), we recommend that you update your scripts or other code
+	// to use the State parameter instead of Status before September 9, 2026.
 	Accounts []types.Account
 
 	// If present, indicates that more output is available than is included in the

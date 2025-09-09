@@ -11,6 +11,19 @@ import (
 )
 
 // Deletes a business glossary in Amazon DataZone.
+//
+// Prerequisites:
+//
+//   - The glossary must be in DISABLED state.
+//
+//   - The glossary must not have any glossary terms associated with it.
+//
+//   - The glossary must exist in the specified domain.
+//
+//   - The caller must have the datazone:DeleteGlossary permission in the domain
+//     and glossary.
+//
+//   - There should be no active assets or metadata linked to the glossary.
 func (c *Client) DeleteGlossary(ctx context.Context, params *DeleteGlossaryInput, optFns ...func(*Options)) (*DeleteGlossaryOutput, error) {
 	if params == nil {
 		params = &DeleteGlossaryInput{}

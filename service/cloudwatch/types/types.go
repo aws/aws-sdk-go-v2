@@ -7,8 +7,45 @@ import (
 	"time"
 )
 
+// Represents an individual contributor to a multi-timeseries alarm, containing
+// information about a specific time series and its contribution to the alarm's
+// state.
+type AlarmContributor struct {
+
+	// A map of attributes that describe the contributor, such as metric dimensions
+	// and other identifying characteristics.
+	//
+	// This member is required.
+	ContributorAttributes map[string]string
+
+	// The unique identifier for this alarm contributor.
+	//
+	// This member is required.
+	ContributorId *string
+
+	// An explanation for the contributor's current state, providing context about why
+	// it is in its current condition.
+	//
+	// This member is required.
+	StateReason *string
+
+	// The timestamp when the contributor last transitioned to its current state.
+	StateTransitionedTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Represents the history of a specific alarm.
 type AlarmHistoryItem struct {
+
+	// A map of attributes that describe the alarm contributor associated with this
+	// history item, providing context about the contributor's characteristics at the
+	// time of the event.
+	AlarmContributorAttributes map[string]string
+
+	// The unique identifier of the alarm contributor associated with this history
+	// item, if applicable.
+	AlarmContributorId *string
 
 	// The descriptive name for the alarm.
 	AlarmName *string

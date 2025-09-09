@@ -3885,9 +3885,23 @@ func awsRestjson1_serializeOpDocumentCreatePredefinedAttributeInput(v *CreatePre
 	object := value.Object()
 	defer object.Close()
 
+	if v.AttributeConfiguration != nil {
+		ok := object.Key("AttributeConfiguration")
+		if err := awsRestjson1_serializeDocumentInputPredefinedAttributeConfiguration(v.AttributeConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if v.Purposes != nil {
+		ok := object.Key("Purposes")
+		if err := awsRestjson1_serializeDocumentPredefinedAttributePurposeNameList(v.Purposes, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Values != nil {
@@ -24784,6 +24798,20 @@ func awsRestjson1_serializeOpDocumentUpdatePredefinedAttributeInput(v *UpdatePre
 	object := value.Object()
 	defer object.Close()
 
+	if v.AttributeConfiguration != nil {
+		ok := object.Key("AttributeConfiguration")
+		if err := awsRestjson1_serializeDocumentInputPredefinedAttributeConfiguration(v.AttributeConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Purposes != nil {
+		ok := object.Key("Purposes")
+		if err := awsRestjson1_serializeDocumentPredefinedAttributePurposeNameList(v.Purposes, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Values != nil {
 		ok := object.Key("Values")
 		if err := awsRestjson1_serializeDocumentPredefinedAttributeValues(v.Values, ok); err != nil {
@@ -30326,6 +30354,18 @@ func awsRestjson1_serializeDocumentInitiationMethodList(v []types.ContactInitiat
 	return nil
 }
 
+func awsRestjson1_serializeDocumentInputPredefinedAttributeConfiguration(v *types.InputPredefinedAttributeConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EnableValueValidationOnAssociation {
+		ok := object.Key("EnableValueValidationOnAssociation")
+		ok.Boolean(v.EnableValueValidationOnAssociation)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentInstanceStorageConfig(v *types.InstanceStorageConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -31036,6 +31076,17 @@ func awsRestjson1_serializeDocumentPhoneNumberTypes(v []types.PhoneNumberType, v
 	for i := range v {
 		av := array.Value()
 		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPredefinedAttributePurposeNameList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }
@@ -32188,9 +32239,21 @@ func awsRestjson1_serializeDocumentSegmentAttributeValue(v *types.SegmentAttribu
 	object := value.Object()
 	defer object.Close()
 
+	if v.ValueArn != nil {
+		ok := object.Key("ValueArn")
+		ok.String(*v.ValueArn)
+	}
+
 	if v.ValueInteger != nil {
 		ok := object.Key("ValueInteger")
 		ok.Integer(*v.ValueInteger)
+	}
+
+	if v.ValueList != nil {
+		ok := object.Key("ValueList")
+		if err := awsRestjson1_serializeDocumentSegmentAttributeValueList(v.ValueList, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ValueMap != nil {
@@ -32205,6 +32268,19 @@ func awsRestjson1_serializeDocumentSegmentAttributeValue(v *types.SegmentAttribu
 		ok.String(*v.ValueString)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSegmentAttributeValueList(v []types.SegmentAttributeValue, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSegmentAttributeValue(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
