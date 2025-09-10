@@ -1,0 +1,9 @@
+{
+    "id": "f49eb497-56e1-4d8b-ae16-7c5fd441810f",
+    "type": "dependency",
+    "collapse": true,
+    "description": "Bump smithy-go version",
+    "modules": [
+        "."
+    ]
+}
