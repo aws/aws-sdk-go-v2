@@ -95,7 +95,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to create a monitor"
                 },
-                "smithy.api#documentation": "<p>Create a monitor for specific network flows between local and remote resources, so that you can monitor network performance for one or several of your workloads. For each monitor, Network Flow Monitor publishes detailed end-to-end performance metrics and a network health indicators (NHI) that informs you whether there were Amazon Web Services network issues for one or more of the network flows tracked by a monitor, during a time period that you choose. </p>",
+                "smithy.api#documentation": "<p>Create a monitor for specific network flows between local and remote resources, so that you can monitor network performance for one or several of your workloads. For each monitor, Network Flow Monitor publishes detailed end-to-end performance metrics and a network health indicator (NHI) that informs you whether there were Amazon Web Services network issues for one or more of the network flows tracked by a monitor, during a time period that you choose. </p>",
                 "smithy.api#http": {
                     "uri": "/monitors",
                     "method": "POST"
@@ -116,7 +116,7 @@
                 "localResources": {
                     "target": "com.amazonaws.networkflowmonitor#MonitorLocalResources",
                     "traits": {
-                        "smithy.api#documentation": "<p>The local resources to monitor. A local resource, in a bi-directional flow of a workload, is the host where the agent is installed. For example, if a workload consists of an interaction between a web service and a backend database (for example, Amazon Relational Database Service (RDS)), the EC2 instance hosting the web service, which also runs the agent, is the local resource.</p>",
+                        "smithy.api#documentation": "<p>The local resources to monitor. A local resource in a workload is the location of the host, or hosts, where the Network Flow Monitor agent is installed. For example, if a workload consists of an interaction between a web service and a backend database (for example, Amazon Dynamo DB), the subnet with the EC2 instance that hosts the web service, which also runs the agent, is the local resource.</p> <p>Be aware that all local resources must belong to the current Region.</p>",
                         "smithy.api#length": {
                             "min": 1
                         },
@@ -126,7 +126,7 @@
                 "remoteResources": {
                     "target": "com.amazonaws.networkflowmonitor#MonitorRemoteResources",
                     "traits": {
-                        "smithy.api#documentation": "<p>The remote resources to monitor. A remote resource is the other endpoint in the bi-directional flow of a workload, with a local resource. For example, Amazon Relational Database Service (RDS) can be a remote resource.</p>"
+                        "smithy.api#documentation": "<p>The remote resources to monitor. A remote resource is the other endpoint in the bi-directional flow of a workload, with a local resource. For example, Amazon Dynamo DB can be a remote resource.</p> <p>When you specify remote resources, be aware that specific combinations of resources are allowed and others are not, including the following constraints:</p> <ul> <li> <p>All remote resources that you specify must all belong to a single Region.</p> </li> <li> <p>If you specify Amazon Web Services services as remote resources, any other remote resources that you specify must be in the current Region.</p> </li> <li> <p>When you specify a remote resource for another Region, you can only specify the <code>Region</code> resource type. You cannot specify a subnet, VPC, or Availability Zone in another Region.</p> </li> <li> <p>If you leave the <code>RemoteResources</code> parameter empty, the monitor will include all network flows that terminate in the current Region.</p> </li> </ul>"
                     }
                 },
                 "scopeArn": {
@@ -181,14 +181,14 @@
                 "localResources": {
                     "target": "com.amazonaws.networkflowmonitor#MonitorLocalResources",
                     "traits": {
-                        "smithy.api#documentation": "<p>The local resources to monitor. A local resource, in a bi-directional flow of a workload, is the host where the agent is installed. </p>",
+                        "smithy.api#documentation": "<p>The local resources to monitor. A local resource in a workload is the location of hosts where the Network Flow Monitor agent is installed. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "remoteResources": {
                     "target": "com.amazonaws.networkflowmonitor#MonitorRemoteResources",
                     "traits": {
-                        "smithy.api#documentation": "<p>The remote resources to monitor. A remote resource is the other endpoint in the bi-directional flow of a workload, with a local resource. For example, Amazon Relational Database Service (RDS) can be a remote resource. The remote resource is identified by its ARN or an identifier.</p>",
+                        "smithy.api#documentation": "<p>The remote resources to monitor. A remote resource is the other endpoint specified for the network flow of a workload, with a local resource. For example, Amazon Dynamo DB can be a remote resource. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -253,7 +253,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to create a scope"
                 },
-                "smithy.api#documentation": "<p>Create a scope of resources that you want to be available for Network Flow Monitor to generate metrics for, when you have active agents on those resources sending metrics reports to the Network Flow Monitor backend. This call returns a scope ID to identify the scope.</p> <p>When you create a scope, you enable permissions for Network Flow Monitor. The scope is set to the resources for the Amazon Web Services that enables the feature.</p>",
+                "smithy.api#documentation": "<p>In Network Flow Monitor, you specify a scope for the service to generate metrics for. By using the scope, Network Flow Monitor can generate a topology of all the resources to measure performance metrics for. When you create a scope, you enable permissions for Network Flow Monitor.</p> <p>A scope is a Region-account pair or multiple Region-account pairs. Network Flow Monitor uses your scope to determine all the resources (the topology) where Network Flow Monitor will gather network flow performance metrics for you. To provide performance metrics, Network Flow Monitor uses the data that is sent by the Network Flow Monitor agents you install on the resources.</p> <p>To define the Region-account pairs for your scope, the Network Flow Monitor API uses the following constucts, which allow for future flexibility in defining scopes:</p> <ul> <li> <p> <i>Targets</i>, which are arrays of targetResources.</p> </li> <li> <p> <i>Target resources</i>, which are Region-targetIdentifier pairs.</p> </li> <li> <p> <i>Target identifiers</i>, made up of a targetID (currently always an account ID) and a targetType (currently always an account). </p> </li> </ul>",
                 "smithy.api#http": {
                     "uri": "/scopes",
                     "method": "POST"
@@ -267,7 +267,7 @@
                 "targets": {
                     "target": "com.amazonaws.networkflowmonitor#TargetResourceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The targets to define the scope to be monitored. Currently, a target is an Amazon Web Services account.</p>",
+                        "smithy.api#documentation": "<p>The targets to define the scope to be monitored. A target is an array of targetResources, which are currently Region-account pairs, defined by targetResource constructs.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 100
@@ -339,6 +339,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.networkflowmonitor#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkflowmonitor#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.networkflowmonitor#InternalServerException"
@@ -492,6 +495,12 @@
                     "traits": {
                         "smithy.api#enumValue": "AMAZON_DYNAMODB"
                     }
+                },
+                "INTER_REGION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTER_REGION"
+                    }
                 }
             }
         },
@@ -575,14 +584,14 @@
                 "localResources": {
                     "target": "com.amazonaws.networkflowmonitor#MonitorLocalResources",
                     "traits": {
-                        "smithy.api#documentation": "<p>The local resources for this monitor.</p>",
+                        "smithy.api#documentation": "<p>The local resources to monitor. A local resource in a workload is the location of the hosts where the Network Flow Monitor agent is installed. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "remoteResources": {
                     "target": "com.amazonaws.networkflowmonitor#MonitorRemoteResources",
                     "traits": {
-                        "smithy.api#documentation": "<p>The remote resources for this monitor.</p>",
+                        "smithy.api#documentation": "<p>The remote resources to monitor. A remote resource is the other endpoint specified for the network flow of a workload, with a local resource. For example, Amazon Dynamo DB can be a remote resource. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1257,7 +1266,7 @@
                 "targets": {
                     "target": "com.amazonaws.networkflowmonitor#TargetResourceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The targets for a scope</p>",
+                        "smithy.api#documentation": "<p>The targets to define the scope to be monitored. A target is an array of targetResources, which are currently Region-account pairs, defined by targetResource constructs.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1822,20 +1831,20 @@
                 "type": {
                     "target": "com.amazonaws.networkflowmonitor#MonitorLocalResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the local resource. Valid values are <code>AWS::EC2::VPC</code> <code>AWS::AvailabilityZone</code> or <code>AWS::EC2::Subnet</code>.</p>",
+                        "smithy.api#documentation": "<p>The type of the local resource. Valid values are <code>AWS::EC2::VPC</code> <code>AWS::AvailabilityZone</code>, <code>AWS::EC2::Subnet</code>, or <code>AWS::Region</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "identifier": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the local resource, such as an ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the local resource. For a VPC or subnet, this identifier is the VPC Amazon Resource Name (ARN) or subnet ARN. For an Availability Zone, this identifier is the AZ name, for example, us-west-2b.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A local resource is the host where the agent is installed. Local resources can be a a subnet, a VPC, or an Availability Zone.</p>"
+                "smithy.api#documentation": "<p>A local resource is the host where the agent is installed. Local resources can be a a subnet, a VPC, an Availability Zone, or an Amazon Web Services service.</p>"
             }
         },
         "com.amazonaws.networkflowmonitor#MonitorLocalResourceType": {
@@ -1857,6 +1866,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "AWS::EC2::Subnet"
+                    }
+                },
+                "AWS_REGION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Region"
                     }
                 }
             }
@@ -1902,20 +1917,20 @@
                 "type": {
                     "target": "com.amazonaws.networkflowmonitor#MonitorRemoteResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the remote resource. Valid values are <code>AWS::EC2::VPC</code> <code>AWS::AvailabilityZone</code>, <code>AWS::EC2::Subnet</code>, or <code>AWS::AWSService</code>.</p>",
+                        "smithy.api#documentation": "<p>The type of the remote resource. Valid values are <code>AWS::EC2::VPC</code> <code>AWS::AvailabilityZone</code>, <code>AWS::EC2::Subnet</code>, <code>AWS::AWSService</code>, or <code>AWS::Region</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "identifier": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the remote resource, such as an ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the remote resource. For a VPC or subnet, this identifier is the VPC Amazon Resource Name (ARN) or subnet ARN. For an Availability Zone, this identifier is the AZ name, for example, us-west-2b. For an Amazon Web Services Region , this identifier is the Region name, for example, us-west-2. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A remote resource is the other endpoint in a network flow. That is, one endpoint is the local resource and the other is the remote resource. Remote resources can be a a subnet, a VPC, an Availability Zone, or an Amazon Web Services service. </p>"
+                "smithy.api#documentation": "<p>A remote resource is the other endpoint in a network flow. That is, one endpoint is the local resource and the other is the remote resource. Remote resources can be a a subnet, a VPC, an Availability Zone, an Amazon Web Services service, or an Amazon Web Services Region.</p> <p>When a remote resource is an Amazon Web Services Region, Network Flow Monitor provides network performance measurements up to the edge of the Region that you specify.</p>"
             }
         },
         "com.amazonaws.networkflowmonitor#MonitorRemoteResourceType": {
@@ -1943,6 +1958,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "AWS::AWSService"
+                    }
+                },
+                "AWS_REGION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Region"
                     }
                 }
             }
@@ -2063,7 +2084,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A summary of information about a monitor, includ the ARN, the name, and the status.</p>"
+                "smithy.api#documentation": "<p>A summary of information about a monitor, including the ARN, the name, and the status.</p>"
             }
         },
         "com.amazonaws.networkflowmonitor#MonitorTopContributorsRow": {
@@ -2120,7 +2141,7 @@
                 "destinationCategory": {
                     "target": "com.amazonaws.networkflowmonitor#DestinationCategory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The destination category for a top contributors row. Destination categories can be one of the following: </p> <ul> <li> <p> <code>INTRA_AZ</code>: Top contributor network flows within a single Availability Zone</p> </li> <li> <p> <code>INTER_AZ</code>: Top contributor network flows between Availability Zones</p> </li> <li> <p> <code>INTER_VPC</code>: Top contributor network flows between VPCs</p> </li> <li> <p> <code>AWS_SERVICES</code>: Top contributor network flows to or from Amazon Web Services services</p> </li> <li> <p> <code>UNCLASSIFIED</code>: Top contributor network flows that do not have a bucket classification</p> </li> </ul>"
+                        "smithy.api#documentation": "<p>The destination category for a top contributors row. Destination categories can be one of the following: </p> <ul> <li> <p> <code>INTRA_AZ</code>: Top contributor network flows within a single Availability Zone</p> </li> <li> <p> <code>INTER_AZ</code>: Top contributor network flows between Availability Zones</p> </li> <li> <p> <code>INTER_REGION</code>: Top contributor network flows between Regions (to the edge of another Region)</p> </li> <li> <p> <code>INTER_VPC</code>: Top contributor network flows between VPCs</p> </li> <li> <p> <code>AWS_SERVICES</code>: Top contributor network flows to or from Amazon Web Services services</p> </li> <li> <p> <code>UNCLASSIFIED</code>: Top contributor network flows that do not have a bucket classification</p> </li> </ul>"
                     }
                 },
                 "remoteVpcId": {
@@ -2702,7 +2723,7 @@
                 "scopeId": {
                     "target": "com.amazonaws.networkflowmonitor#ScopeId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the scope that includes the resources you want to get data results for. A scope ID is an internally-generated identifier that includes all the resources for a specific root account.</p>",
+                        "smithy.api#documentation": "<p>The identifier for the scope that includes the resources that you want to get data results for. A scope ID is an internally-generated identifier that includes all the resources for the accounts in a scope.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2795,7 +2816,7 @@
                 "startTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp that is the date and time beginning of the period that you want to retrieve results for with your query.</p>",
+                        "smithy.api#documentation": "<p>The timestamp that is the date and time that is the beginning of the period that you want to retrieve results for with your query.</p>",
                         "smithy.api#required": {},
                         "smithy.api#timestampFormat": "date-time"
                     }
@@ -2818,7 +2839,7 @@
                 "destinationCategory": {
                     "target": "com.amazonaws.networkflowmonitor#DestinationCategory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The category that you want to query top contributors for, for a specific monitor. Destination categories can be one of the following: </p> <ul> <li> <p> <code>INTRA_AZ</code>: Top contributor network flows within a single Availability Zone</p> </li> <li> <p> <code>INTER_AZ</code>: Top contributor network flows between Availability Zones</p> </li> <li> <p> <code>INTER_VPC</code>: Top contributor network flows between VPCs</p> </li> <li> <p> <code>AMAZON_S3</code>: Top contributor network flows to or from Amazon S3</p> </li> <li> <p> <code>AMAZON_DYNAMODB</code>: Top contributor network flows to or from Amazon Dynamo DB</p> </li> <li> <p> <code>UNCLASSIFIED</code>: Top contributor network flows that do not have a bucket classification</p> </li> </ul>",
+                        "smithy.api#documentation": "<p>The category that you want to query top contributors for, for a specific monitor. Destination categories can be one of the following: </p> <ul> <li> <p> <code>INTRA_AZ</code>: Top contributor network flows within a single Availability Zone</p> </li> <li> <p> <code>INTER_AZ</code>: Top contributor network flows between Availability Zones</p> </li> <li> <p> <code>INTER_REGION</code>: Top contributor network flows between Regions (to the edge of another Region)</p> </li> <li> <p> <code>INTER_VPC</code>: Top contributor network flows between VPCs</p> </li> <li> <p> <code>AMAZON_S3</code>: Top contributor network flows to or from Amazon S3</p> </li> <li> <p> <code>AMAZON_DYNAMODB</code>: Top contributor network flows to or from Amazon Dynamo DB</p> </li> <li> <p> <code>UNCLASSIFIED</code>: Top contributor network flows that do not have a bucket classification</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2938,7 +2959,7 @@
                 "startTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp that is the date and time beginning of the period that you want to retrieve results for with your query.</p>",
+                        "smithy.api#documentation": "<p>The timestamp that is the date and time that is the beginning of the period that you want to retrieve results for with your query.</p>",
                         "smithy.api#required": {},
                         "smithy.api#timestampFormat": "date-time"
                     }
@@ -2961,7 +2982,7 @@
                 "destinationCategory": {
                     "target": "com.amazonaws.networkflowmonitor#DestinationCategory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The destination category for a top contributors. Destination categories can be one of the following: </p> <ul> <li> <p> <code>INTRA_AZ</code>: Top contributor network flows within a single Availability Zone</p> </li> <li> <p> <code>INTER_AZ</code>: Top contributor network flows between Availability Zones</p> </li> <li> <p> <code>INTER_VPC</code>: Top contributor network flows between VPCs</p> </li> <li> <p> <code>AWS_SERVICES</code>: Top contributor network flows to or from Amazon Web Services services</p> </li> <li> <p> <code>UNCLASSIFIED</code>: Top contributor network flows that do not have a bucket classification</p> </li> </ul>",
+                        "smithy.api#documentation": "<p>The destination category for a top contributors. Destination categories can be one of the following: </p> <ul> <li> <p> <code>INTRA_AZ</code>: Top contributor network flows within a single Availability Zone</p> </li> <li> <p> <code>INTER_AZ</code>: Top contributor network flows between Availability Zones</p> </li> <li> <p> <code>INTER_REGION</code>: Top contributor network flows between Regions (to the edge of another Region)</p> </li> <li> <p> <code>INTER_VPC</code>: Top contributor network flows between VPCs</p> </li> <li> <p> <code>AWS_SERVICES</code>: Top contributor network flows to or from Amazon Web Services services</p> </li> <li> <p> <code>UNCLASSIFIED</code>: Top contributor network flows that do not have a bucket classification</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2999,7 +3020,7 @@
                 "startTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp that is the date and time beginning of the period that you want to retrieve results for with your query.</p>",
+                        "smithy.api#documentation": "<p>The timestamp that is the date and time that is the beginning of the period that you want to retrieve results for with your query.</p>",
                         "smithy.api#required": {},
                         "smithy.api#timestampFormat": "date-time"
                     }
@@ -3022,7 +3043,7 @@
                 "destinationCategory": {
                     "target": "com.amazonaws.networkflowmonitor#DestinationCategory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The destination category for a top contributors row. Destination categories can be one of the following: </p> <ul> <li> <p> <code>INTRA_AZ</code>: Top contributor network flows within a single Availability Zone</p> </li> <li> <p> <code>INTER_AZ</code>: Top contributor network flows between Availability Zones</p> </li> <li> <p> <code>INTER_VPC</code>: Top contributor network flows between VPCs</p> </li> <li> <p> <code>AWS_SERVICES</code>: Top contributor network flows to or from Amazon Web Services services</p> </li> <li> <p> <code>UNCLASSIFIED</code>: Top contributor network flows that do not have a bucket classification</p> </li> </ul>",
+                        "smithy.api#documentation": "<p>The destination category for a top contributors row. Destination categories can be one of the following: </p> <ul> <li> <p> <code>INTRA_AZ</code>: Top contributor network flows within a single Availability Zone</p> </li> <li> <p> <code>INTER_AZ</code>: Top contributor network flows between Availability Zones</p> </li> <li> <p> <code>INTER_REGION</code>: Top contributor network flows between Regions (to the edge of another Region)</p> </li> <li> <p> <code>INTER_VPC</code>: Top contributor network flows between VPCs</p> </li> <li> <p> <code>AWS_SERVICES</code>: Top contributor network flows to or from Amazon Web Services services</p> </li> <li> <p> <code>UNCLASSIFIED</code>: Top contributor network flows that do not have a bucket classification</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3422,20 +3443,20 @@
                 "targetId": {
                     "target": "com.amazonaws.networkflowmonitor#TargetId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for a target.</p>",
+                        "smithy.api#documentation": "<p>The identifier for a target, which is currently always an account ID .</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "targetType": {
                     "target": "com.amazonaws.networkflowmonitor#TargetType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of a target. A target type is currently always <code>ACCOUNT</code> because a target is currently a single Amazon Web Services account.</p>",
+                        "smithy.api#documentation": "<p>The type of a target. A target type is currently always <code>ACCOUNT</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A target identifier is a pair of identifying information for a resource that is included in a target. A target identifier includes the target ID and the target type.</p>"
+                "smithy.api#documentation": "<p>A target identifier is a pair of identifying information for a scope that is included in a target. A target identifier is made up of a target ID and a target type. Currently the target ID is always an account ID and the target type is always ACCOUNT.</p>"
             }
         },
         "com.amazonaws.networkflowmonitor#TargetResource": {
@@ -3444,20 +3465,20 @@
                 "targetIdentifier": {
                     "target": "com.amazonaws.networkflowmonitor#TargetIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>A target identifier is a pair of identifying information for a resource that is included in a target. A target identifier includes the target ID and the target type.</p>",
+                        "smithy.api#documentation": "<p>A target identifier is a pair of identifying information for a scope. A target identifier is made up of a targetID (currently always an account ID) and a targetType (currently always an account).</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "region": {
                     "target": "com.amazonaws.networkflowmonitor#AwsRegion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Region where the target resource is located.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region for the scope.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A target resource in a scope. The resource is identified by a Region and a target identifier, which includes a target ID and a target type.</p>"
+                "smithy.api#documentation": "<p>A target resource in a scope. The resource is identified by a Region and an account, defined by a target identifier. A target identifier is made up of a target ID (currently always an account ID) and a target type (currently always <code>ACCOUNT</code>).</p>"
             }
         },
         "com.amazonaws.networkflowmonitor#TargetResourceList": {
@@ -3511,7 +3532,7 @@
                 "componentArn": {
                     "target": "com.amazonaws.networkflowmonitor#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a tranversed component.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a traversed component.</p>"
                     }
                 },
                 "serviceName": {
@@ -3671,7 +3692,7 @@
                 "localResourcesToAdd": {
                     "target": "com.amazonaws.networkflowmonitor#MonitorLocalResources",
                     "traits": {
-                        "smithy.api#documentation": "<p>The local resources to add, as an array of resources with identifiers and types.</p>"
+                        "smithy.api#documentation": "<p>Additional local resources to specify network flows for a monitor, as an array of resources with identifiers and types. A local resource in a workload is the location of hosts where the Network Flow Monitor agent is installed. </p>"
                     }
                 },
                 "localResourcesToRemove": {
@@ -3683,13 +3704,13 @@
                 "remoteResourcesToAdd": {
                     "target": "com.amazonaws.networkflowmonitor#MonitorRemoteResources",
                     "traits": {
-                        "smithy.api#documentation": "<p>The remove resources to add, as an array of resources with identifiers and types.</p>"
+                        "smithy.api#documentation": "<p>The remote resources to add, as an array of resources with identifiers and types.</p> <p>A remote resource is the other endpoint in the flow of a workload, with a local resource. For example, Amazon Dynamo DB can be a remote resource. </p>"
                     }
                 },
                 "remoteResourcesToRemove": {
                     "target": "com.amazonaws.networkflowmonitor#MonitorRemoteResources",
                     "traits": {
-                        "smithy.api#documentation": "<p>The remove resources to remove, as an array of resources with identifiers and types.</p>"
+                        "smithy.api#documentation": "<p>The remote resources to remove, as an array of resources with identifiers and types.</p> <p>A remote resource is the other endpoint specified for the network flow of a workload, with a local resource. For example, Amazon Dynamo DB can be a remote resource. </p>"
                     }
                 },
                 "clientToken": {
@@ -3731,14 +3752,14 @@
                 "localResources": {
                     "target": "com.amazonaws.networkflowmonitor#MonitorLocalResources",
                     "traits": {
-                        "smithy.api#documentation": "<p>The local resources updated for a monitor, as an array of resources with identifiers and types.</p>",
+                        "smithy.api#documentation": "<p>The local resources to monitor. A local resource in a workload is the location of hosts where the Network Flow Monitor agent is installed. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "remoteResources": {
                     "target": "com.amazonaws.networkflowmonitor#MonitorRemoteResources",
                     "traits": {
-                        "smithy.api#documentation": "<p>The remote resources updated for a monitor, as an array of resources with identifiers and types.</p>",
+                        "smithy.api#documentation": "<p>The remote resources updated for a monitor, as an array of resources with identifiers and types.</p> <p>A remote resource is the other endpoint specified for the network flow of a workload, with a local resource. For example, Amazon Dynamo DB can be a remote resource.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4007,7 +4028,7 @@
                 "remoteIdentifier": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of a remote resource.</p>"
+                        "smithy.api#documentation": "<p>The identifier of a remote resource. For a VPC or subnet, this identifier is the VPC Amazon Resource Name (ARN) or subnet ARN. For an Availability Zone, this identifier is the AZ name, for example, us-west-2b. For an Amazon Web Services Region , this identifier is the Region name, for example, us-west-2.</p>"
                     }
                 },
                 "value": {
