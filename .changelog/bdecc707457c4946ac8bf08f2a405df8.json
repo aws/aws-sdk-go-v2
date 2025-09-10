@@ -1,0 +1,8 @@
+{
+    "id": "bdecc707-457c-4946-ac8b-f08f2a405df8",
+    "type": "feature",
+    "description": "AWS Payment Cryptography Service now supports Multi-Region key replication. Customers can choose to automatically distribute keys across AWS Regions.",
+    "modules": [
+        "service/paymentcryptography"
+    ]
+}

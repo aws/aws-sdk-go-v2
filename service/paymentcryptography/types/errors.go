@@ -8,6 +8,11 @@ import (
 )
 
 // You do not have sufficient access to perform this action.
+//
+// This exception is thrown when the caller lacks the necessary IAM permissions to
+// perform the requested operation. Verify that your IAM policy includes the
+// required permissions for the specific Amazon Web Services Payment Cryptography
+// action you're attempting.
 type AccessDeniedException struct {
 	Message *string
 
@@ -34,6 +39,10 @@ func (e *AccessDeniedException) ErrorCode() string {
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This request can cause an inconsistent state for the resource.
+//
+// The requested operation conflicts with the current state of the resource. For
+// example, attempting to delete a key that is currently being used, or trying to
+// create a resource that already exists.
 type ConflictException struct {
 	Message *string
 
@@ -61,6 +70,9 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 
 // The request processing has failed because of an unknown error, exception, or
 // failure.
+//
+// This indicates a server-side error within the Amazon Web Services Payment
+// Cryptography service. If this error persists, contact support for assistance.
 type InternalServerException struct {
 	Message *string
 
@@ -86,7 +98,11 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The request was denied due to an invalid resource error.
+// The request was denied due to resource not found.
+//
+// The specified key, alias, or other resource does not exist in your account or
+// region. Verify that the resource identifier is correct and that the resource
+// exists in the expected region.
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -115,6 +131,10 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This request would cause a service quota to be exceeded.
+//
+// You have reached the maximum number of keys, aliases, or other resources
+// allowed in your account. Review your current usage and consider deleting unused
+// resources or requesting a quota increase.
 type ServiceQuotaExceededException struct {
 	Message *string
 
@@ -141,6 +161,10 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The service cannot complete the request.
+//
+// The Amazon Web Services Payment Cryptography service is temporarily
+// unavailable. This is typically a temporary condition - retry your request after
+// a brief delay.
 type ServiceUnavailableException struct {
 	Message *string
 
@@ -167,6 +191,10 @@ func (e *ServiceUnavailableException) ErrorCode() string {
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The request was denied due to request throttling.
+//
+// You have exceeded the rate limits for Amazon Web Services Payment Cryptography
+// API calls. Implement exponential backoff and retry logic in your application to
+// handle throttling gracefully.
 type ThrottlingException struct {
 	Message *string
 
@@ -193,6 +221,9 @@ func (e *ThrottlingException) ErrorCode() string {
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was denied due to an invalid request error.
+//
+// One or more parameters in your request are invalid. Check the parameter values,
+// formats, and constraints specified in the API documentation.
 type ValidationException struct {
 	Message *string
 

@@ -12,6 +12,7 @@ const (
 	DestinationCategoryUnclassified   DestinationCategory = "UNCLASSIFIED"
 	DestinationCategoryAmazonS3       DestinationCategory = "AMAZON_S3"
 	DestinationCategoryAmazonDynamodb DestinationCategory = "AMAZON_DYNAMODB"
+	DestinationCategoryInterRegion    DestinationCategory = "INTER_REGION"
 )
 
 // Values returns all known values for DestinationCategory. Note that this can be
@@ -26,6 +27,7 @@ func (DestinationCategory) Values() []DestinationCategory {
 		"UNCLASSIFIED",
 		"AMAZON_S3",
 		"AMAZON_DYNAMODB",
+		"INTER_REGION",
 	}
 }
 
@@ -105,6 +107,7 @@ const (
 	MonitorLocalResourceTypeAwsVpc    MonitorLocalResourceType = "AWS::EC2::VPC"
 	MonitorLocalResourceTypeAwsAz     MonitorLocalResourceType = "AWS::AvailabilityZone"
 	MonitorLocalResourceTypeAwsSubnet MonitorLocalResourceType = "AWS::EC2::Subnet"
+	MonitorLocalResourceTypeAwsRegion MonitorLocalResourceType = "AWS::Region"
 )
 
 // Values returns all known values for MonitorLocalResourceType. Note that this
@@ -116,6 +119,7 @@ func (MonitorLocalResourceType) Values() []MonitorLocalResourceType {
 		"AWS::EC2::VPC",
 		"AWS::AvailabilityZone",
 		"AWS::EC2::Subnet",
+		"AWS::Region",
 	}
 }
 
@@ -150,6 +154,7 @@ const (
 	MonitorRemoteResourceTypeAwsAz      MonitorRemoteResourceType = "AWS::AvailabilityZone"
 	MonitorRemoteResourceTypeAwsSubnet  MonitorRemoteResourceType = "AWS::EC2::Subnet"
 	MonitorRemoteResourceTypeAwsService MonitorRemoteResourceType = "AWS::AWSService"
+	MonitorRemoteResourceTypeAwsRegion  MonitorRemoteResourceType = "AWS::Region"
 )
 
 // Values returns all known values for MonitorRemoteResourceType. Note that this
@@ -162,6 +167,7 @@ func (MonitorRemoteResourceType) Values() []MonitorRemoteResourceType {
 		"AWS::AvailabilityZone",
 		"AWS::EC2::Subnet",
 		"AWS::AWSService",
+		"AWS::Region",
 	}
 }
 

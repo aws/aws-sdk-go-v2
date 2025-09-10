@@ -107,6 +107,7 @@ const (
 	KeyCheckValueAlgorithmCmac     KeyCheckValueAlgorithm = "CMAC"
 	KeyCheckValueAlgorithmAnsiX924 KeyCheckValueAlgorithm = "ANSI_X9_24"
 	KeyCheckValueAlgorithmHmac     KeyCheckValueAlgorithm = "HMAC"
+	KeyCheckValueAlgorithmSha1     KeyCheckValueAlgorithm = "SHA_1"
 )
 
 // Values returns all known values for KeyCheckValueAlgorithm. Note that this can
@@ -118,6 +119,7 @@ func (KeyCheckValueAlgorithm) Values() []KeyCheckValueAlgorithm {
 		"CMAC",
 		"ANSI_X9_24",
 		"HMAC",
+		"SHA_1",
 	}
 }
 
@@ -249,6 +251,29 @@ func (KeyOrigin) Values() []KeyOrigin {
 	}
 }
 
+type KeyReplicationState string
+
+// Enum values for KeyReplicationState
+const (
+	KeyReplicationStateInProgress       KeyReplicationState = "IN_PROGRESS"
+	KeyReplicationStateDeleteInProgress KeyReplicationState = "DELETE_IN_PROGRESS"
+	KeyReplicationStateFailed           KeyReplicationState = "FAILED"
+	KeyReplicationStateSynchronized     KeyReplicationState = "SYNCHRONIZED"
+)
+
+// Values returns all known values for KeyReplicationState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (KeyReplicationState) Values() []KeyReplicationState {
+	return []KeyReplicationState{
+		"IN_PROGRESS",
+		"DELETE_IN_PROGRESS",
+		"FAILED",
+		"SYNCHRONIZED",
+	}
+}
+
 type KeyState string
 
 // Enum values for KeyState
@@ -330,6 +355,25 @@ func (KeyUsage) Values() []KeyUsage {
 		"TR31_V1_IBM3624_PIN_VERIFICATION_KEY",
 		"TR31_V2_VISA_PIN_VERIFICATION_KEY",
 		"TR31_K2_TR34_ASYMMETRIC_KEY",
+	}
+}
+
+type MultiRegionKeyType string
+
+// Enum values for MultiRegionKeyType
+const (
+	MultiRegionKeyTypePrimary MultiRegionKeyType = "PRIMARY"
+	MultiRegionKeyTypeReplica MultiRegionKeyType = "REPLICA"
+)
+
+// Values returns all known values for MultiRegionKeyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MultiRegionKeyType) Values() []MultiRegionKeyType {
+	return []MultiRegionKeyType{
+		"PRIMARY",
+		"REPLICA",
 	}
 }
 

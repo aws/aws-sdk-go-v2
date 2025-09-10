@@ -6,62 +6,75 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the key metadata for an Amazon Web Services Payment Cryptography key,
-// including the immutable and mutable attributes specified when the key was
-// created. Returns key metadata including attributes, state, and timestamps, but
-// does not return the actual cryptographic key material.
+// Disables multi-region key replication settings for the specified Amazon Web
+// Services Regions in your account, preventing new keys from being automatically
+// replicated to those regions.
+//
+// After disabling default replication for specific regions, new keys created in
+// your account will not be automatically replicated to those regions. You can
+// still manually add replication to those regions for individual keys using the
+// AddKeyReplicationRegions operation.
+//
+// This operation does not affect existing keys or their current replication
+// configuration.
 //
 // Cross-account use: This operation can't be used across different Amazon Web
 // Services accounts.
 //
 // Related operations:
 //
-// [CreateKey]
+// [EnableDefaultKeyReplicationRegions]
 //
-// [DeleteKey]
+// [GetDefaultKeyReplicationRegions]
 //
-// [ListKeys]
-//
-// [DeleteKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteKey.html
-// [ListKeys]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListKeys.html
-// [CreateKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
-func (c *Client) GetKey(ctx context.Context, params *GetKeyInput, optFns ...func(*Options)) (*GetKeyOutput, error) {
+// [EnableDefaultKeyReplicationRegions]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_EnableDefaultKeyReplicationRegions.html
+// [GetDefaultKeyReplicationRegions]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetDefaultKeyReplicationRegions.html
+func (c *Client) DisableDefaultKeyReplicationRegions(ctx context.Context, params *DisableDefaultKeyReplicationRegionsInput, optFns ...func(*Options)) (*DisableDefaultKeyReplicationRegionsOutput, error) {
 	if params == nil {
-		params = &GetKeyInput{}
+		params = &DisableDefaultKeyReplicationRegionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetKey", params, optFns, c.addOperationGetKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisableDefaultKeyReplicationRegions", params, optFns, c.addOperationDisableDefaultKeyReplicationRegionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetKeyOutput)
+	out := result.(*DisableDefaultKeyReplicationRegionsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetKeyInput struct {
+// Input parameters for disabling default key replication regions for the account.
+type DisableDefaultKeyReplicationRegionsInput struct {
 
-	// The KeyARN of the Amazon Web Services Payment Cryptography key.
+	// The list of Amazon Web Services Regions to remove from the account's default
+	// replication regions.
+	//
+	// New keys created after this operation will not automatically be replicated to
+	// these regions, though existing keys with replication to these regions will be
+	// unaffected.
 	//
 	// This member is required.
-	KeyIdentifier *string
+	ReplicationRegions []string
 
 	noSmithyDocumentSerde
 }
 
-type GetKeyOutput struct {
+// Output from disabling default key replication regions for the account.
+type DisableDefaultKeyReplicationRegionsOutput struct {
 
-	// Contains the key metadata, including both immutable and mutable attributes for
-	// the key, but does not include actual cryptographic key material.
+	// The remaining list of regions where default key replication is still enabled
+	// for the account.
+	//
+	// This reflects the account's default replication configuration after removing
+	// the specified regions.
 	//
 	// This member is required.
-	Key *types.Key
+	EnabledReplicationRegions []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -69,19 +82,19 @@ type GetKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisableDefaultKeyReplicationRegionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetKey{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDisableDefaultKeyReplicationRegions{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetKey{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDisableDefaultKeyReplicationRegions{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetKey"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "DisableDefaultKeyReplicationRegions"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -136,10 +149,10 @@ func (c *Client) addOperationGetKeyMiddlewares(stack *middleware.Stack, options 
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
-	if err = addOpGetKeyValidationMiddleware(stack); err != nil {
+	if err = addOpDisableDefaultKeyReplicationRegionsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetKey(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisableDefaultKeyReplicationRegions(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -202,10 +215,10 @@ func (c *Client) addOperationGetKeyMiddlewares(stack *middleware.Stack, options 
 	return nil
 }
 
-func newServiceMetadataMiddleware_opGetKey(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDisableDefaultKeyReplicationRegions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "GetKey",
+		OperationName: "DisableDefaultKeyReplicationRegions",
 	}
 }

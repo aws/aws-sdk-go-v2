@@ -565,6 +565,30 @@ type Key struct {
 	// the TR-31 spec.
 	DeriveKeyUsage DeriveKeyUsage
 
+	// Indicates whether this key is a multi-region key and its role in the
+	// multi-region key hierarchy.
+	//
+	// Multi-region keys allow the same key material to be used across multiple Amazon
+	// Web Services Regions. This field specifies whether the key is a primary key
+	// (which can be replicated to other regions) or a replica key (which is a copy of
+	// a primary key in another region).
+	MultiRegionKeyType MultiRegionKeyType
+
+	// An Amazon Web Services Region identifier in the standard format (e.g., us-east-1
+	// , eu-west-1 ).
+	//
+	// Used to specify regions for key replication operations. The region must be a
+	// valid Amazon Web Services Region where Amazon Web Services Payment Cryptography
+	// is available.
+	PrimaryRegion *string
+
+	// Information about the replication status of the key across different regions.
+	//
+	// This field provides details about the current state of key replication,
+	// including any status messages or operational information. It helps track the
+	// progress and health of key replication operations.
+	ReplicationStatus map[string]ReplicationStatusType
+
 	// The date and time after which Amazon Web Services Payment Cryptography will
 	// start using the key material for cryptographic operations.
 	UsageStartTimestamp *time.Time
@@ -572,6 +596,14 @@ type Key struct {
 	// The date and time after which Amazon Web Services Payment Cryptography will
 	// stop using the key material for cryptographic operations.
 	UsageStopTimestamp *time.Time
+
+	// Indicates whether this key is using the account's default replication regions
+	// configuration.
+	//
+	// When set to true , the key automatically replicates to the regions specified in
+	// the account's default replication settings. When set to false , the key has a
+	// custom replication configuration that overrides the account defaults.
+	UsingDefaultReplicationRegions *bool
 
 	noSmithyDocumentSerde
 }
@@ -734,6 +766,40 @@ type KeySummary struct {
 	//
 	// This member is required.
 	KeyState KeyState
+
+	// Defines the replication type of a key
+	MultiRegionKeyType MultiRegionKeyType
+
+	// An Amazon Web Services Region identifier in the standard format (e.g., us-east-1
+	// , eu-west-1 ).
+	//
+	// Used to specify regions for key replication operations. The region must be a
+	// valid Amazon Web Services Region where Amazon Web Services Payment Cryptography
+	// is available.
+	PrimaryRegion *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents the replication status information for a key in a replication region.
+//
+// This structure contains details about the current state of key replication,
+// including any status messages and operational information about the replication
+// process.
+type ReplicationStatusType struct {
+
+	// Defines the replication state of a key
+	//
+	// This member is required.
+	Status KeyReplicationState
+
+	// A message that provides additional information about the current replication
+	// status of the key.
+	//
+	// This field contains details about any issues or progress updates related to key
+	// replication operations. It may include information about replication failures,
+	// synchronization status, or other operational details.
+	StatusMessage *string
 
 	noSmithyDocumentSerde
 }

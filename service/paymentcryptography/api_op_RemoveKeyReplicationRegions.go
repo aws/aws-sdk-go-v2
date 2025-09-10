@@ -11,54 +11,74 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the key metadata for an Amazon Web Services Payment Cryptography key,
-// including the immutable and mutable attributes specified when the key was
-// created. Returns key metadata including attributes, state, and timestamps, but
-// does not return the actual cryptographic key material.
+// Removes Replication Regions from an existing Amazon Web Services Payment
+// Cryptography key, disabling the key's availability for cryptographic operations
+// in the specified Amazon Web Services Regions.
+//
+// When you remove Replication Regions, the key material is securely deleted from
+// those regions and can no longer be used for cryptographic operations there. This
+// operation is irreversible for the specified Amazon Web Services Regions.
+//
+// Ensure that no active cryptographic operations or applications depend on the
+// key in the regions you're removing before performing this operation.
 //
 // Cross-account use: This operation can't be used across different Amazon Web
 // Services accounts.
 //
 // Related operations:
 //
-// [CreateKey]
+// [AddKeyReplicationRegions]
 //
-// [DeleteKey]
+// [DisableDefaultKeyReplicationRegions]
 //
-// [ListKeys]
-//
-// [DeleteKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteKey.html
-// [ListKeys]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListKeys.html
-// [CreateKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
-func (c *Client) GetKey(ctx context.Context, params *GetKeyInput, optFns ...func(*Options)) (*GetKeyOutput, error) {
+// [DisableDefaultKeyReplicationRegions]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DisableDefaultKeyReplicationRegions.html
+// [AddKeyReplicationRegions]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_AddKeyReplicationRegions.html
+func (c *Client) RemoveKeyReplicationRegions(ctx context.Context, params *RemoveKeyReplicationRegionsInput, optFns ...func(*Options)) (*RemoveKeyReplicationRegionsOutput, error) {
 	if params == nil {
-		params = &GetKeyInput{}
+		params = &RemoveKeyReplicationRegionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetKey", params, optFns, c.addOperationGetKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveKeyReplicationRegions", params, optFns, c.addOperationRemoveKeyReplicationRegionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetKeyOutput)
+	out := result.(*RemoveKeyReplicationRegionsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetKeyInput struct {
+// Input parameters for removing replication regions from a specific key.
+type RemoveKeyReplicationRegionsInput struct {
 
-	// The KeyARN of the Amazon Web Services Payment Cryptography key.
+	// The key identifier (ARN or alias) of the key from which to remove replication
+	// regions.
+	//
+	// This key must exist and have replication enabled in the specified regions.
 	//
 	// This member is required.
 	KeyIdentifier *string
 
+	// The list of Amazon Web Services Regions to remove from the key's replication
+	// configuration.
+	//
+	// The key will no longer be available for cryptographic operations in these
+	// regions after removal. Ensure no active operations depend on the key in these
+	// regions before removal.
+	//
+	// This member is required.
+	ReplicationRegions []string
+
 	noSmithyDocumentSerde
 }
 
-type GetKeyOutput struct {
+// Output from removing replication regions from a key.
+type RemoveKeyReplicationRegionsOutput struct {
 
-	// Contains the key metadata, including both immutable and mutable attributes for
-	// the key, but does not include actual cryptographic key material.
+	// The updated key metadata after removing the replication regions.
+	//
+	// This reflects the current state of the key and its updated replication
+	// configuration.
 	//
 	// This member is required.
 	Key *types.Key
@@ -69,19 +89,19 @@ type GetKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRemoveKeyReplicationRegionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetKey{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRemoveKeyReplicationRegions{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetKey{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpRemoveKeyReplicationRegions{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetKey"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "RemoveKeyReplicationRegions"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -136,10 +156,10 @@ func (c *Client) addOperationGetKeyMiddlewares(stack *middleware.Stack, options 
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
-	if err = addOpGetKeyValidationMiddleware(stack); err != nil {
+	if err = addOpRemoveKeyReplicationRegionsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetKey(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveKeyReplicationRegions(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -202,10 +222,10 @@ func (c *Client) addOperationGetKeyMiddlewares(stack *middleware.Stack, options 
 	return nil
 }
 
-func newServiceMetadataMiddleware_opGetKey(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opRemoveKeyReplicationRegions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "GetKey",
+		OperationName: "RemoveKeyReplicationRegions",
 	}
 }

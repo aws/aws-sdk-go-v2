@@ -40,19 +40,28 @@ type UpdateMonitorInput struct {
 	// API requests.
 	ClientToken *string
 
-	// The local resources to add, as an array of resources with identifiers and types.
+	// Additional local resources to specify network flows for a monitor, as an array
+	// of resources with identifiers and types. A local resource in a workload is the
+	// location of hosts where the Network Flow Monitor agent is installed.
 	LocalResourcesToAdd []types.MonitorLocalResource
 
 	// The local resources to remove, as an array of resources with identifiers and
 	// types.
 	LocalResourcesToRemove []types.MonitorLocalResource
 
-	// The remove resources to add, as an array of resources with identifiers and
+	// The remote resources to add, as an array of resources with identifiers and
 	// types.
+	//
+	// A remote resource is the other endpoint in the flow of a workload, with a local
+	// resource. For example, Amazon Dynamo DB can be a remote resource.
 	RemoteResourcesToAdd []types.MonitorRemoteResource
 
-	// The remove resources to remove, as an array of resources with identifiers and
+	// The remote resources to remove, as an array of resources with identifiers and
 	// types.
+	//
+	// A remote resource is the other endpoint specified for the network flow of a
+	// workload, with a local resource. For example, Amazon Dynamo DB can be a remote
+	// resource.
 	RemoteResourcesToRemove []types.MonitorRemoteResource
 
 	noSmithyDocumentSerde
@@ -65,8 +74,8 @@ type UpdateMonitorOutput struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The local resources updated for a monitor, as an array of resources with
-	// identifiers and types.
+	// The local resources to monitor. A local resource in a workload is the location
+	// of hosts where the Network Flow Monitor agent is installed.
 	//
 	// This member is required.
 	LocalResources []types.MonitorLocalResource
@@ -103,6 +112,10 @@ type UpdateMonitorOutput struct {
 
 	// The remote resources updated for a monitor, as an array of resources with
 	// identifiers and types.
+	//
+	// A remote resource is the other endpoint specified for the network flow of a
+	// workload, with a local resource. For example, Amazon Dynamo DB can be a remote
+	// resource.
 	//
 	// This member is required.
 	RemoteResources []types.MonitorRemoteResource

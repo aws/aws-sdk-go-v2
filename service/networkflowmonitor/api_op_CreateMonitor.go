@@ -15,7 +15,7 @@ import (
 // Create a monitor for specific network flows between local and remote resources,
 // so that you can monitor network performance for one or several of your
 // workloads. For each monitor, Network Flow Monitor publishes detailed end-to-end
-// performance metrics and a network health indicators (NHI) that informs you
+// performance metrics and a network health indicator (NHI) that informs you
 // whether there were Amazon Web Services network issues for one or more of the
 // network flows tracked by a monitor, during a time period that you choose.
 func (c *Client) CreateMonitor(ctx context.Context, params *CreateMonitorInput, optFns ...func(*Options)) (*CreateMonitorOutput, error) {
@@ -35,11 +35,14 @@ func (c *Client) CreateMonitor(ctx context.Context, params *CreateMonitorInput, 
 
 type CreateMonitorInput struct {
 
-	// The local resources to monitor. A local resource, in a bi-directional flow of a
-	// workload, is the host where the agent is installed. For example, if a workload
-	// consists of an interaction between a web service and a backend database (for
-	// example, Amazon Relational Database Service (RDS)), the EC2 instance hosting the
-	// web service, which also runs the agent, is the local resource.
+	// The local resources to monitor. A local resource in a workload is the location
+	// of the host, or hosts, where the Network Flow Monitor agent is installed. For
+	// example, if a workload consists of an interaction between a web service and a
+	// backend database (for example, Amazon Dynamo DB), the subnet with the EC2
+	// instance that hosts the web service, which also runs the agent, is the local
+	// resource.
+	//
+	// Be aware that all local resources must belong to the current Region.
 	//
 	// This member is required.
 	LocalResources []types.MonitorLocalResource
@@ -61,7 +64,22 @@ type CreateMonitorInput struct {
 
 	// The remote resources to monitor. A remote resource is the other endpoint in the
 	// bi-directional flow of a workload, with a local resource. For example, Amazon
-	// Relational Database Service (RDS) can be a remote resource.
+	// Dynamo DB can be a remote resource.
+	//
+	// When you specify remote resources, be aware that specific combinations of
+	// resources are allowed and others are not, including the following constraints:
+	//
+	//   - All remote resources that you specify must all belong to a single Region.
+	//
+	//   - If you specify Amazon Web Services services as remote resources, any other
+	//   remote resources that you specify must be in the current Region.
+	//
+	//   - When you specify a remote resource for another Region, you can only specify
+	//   the Region resource type. You cannot specify a subnet, VPC, or Availability
+	//   Zone in another Region.
+	//
+	//   - If you leave the RemoteResources parameter empty, the monitor will include
+	//   all network flows that terminate in the current Region.
 	RemoteResources []types.MonitorRemoteResource
 
 	// The tags for a monitor. You can add a maximum of 200 tags.
@@ -77,8 +95,8 @@ type CreateMonitorOutput struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The local resources to monitor. A local resource, in a bi-directional flow of a
-	// workload, is the host where the agent is installed.
+	// The local resources to monitor. A local resource in a workload is the location
+	// of hosts where the Network Flow Monitor agent is installed.
 	//
 	// This member is required.
 	LocalResources []types.MonitorLocalResource
@@ -113,10 +131,9 @@ type CreateMonitorOutput struct {
 	// This member is required.
 	MonitorStatus types.MonitorStatus
 
-	// The remote resources to monitor. A remote resource is the other endpoint in the
-	// bi-directional flow of a workload, with a local resource. For example, Amazon
-	// Relational Database Service (RDS) can be a remote resource. The remote resource
-	// is identified by its ARN or an identifier.
+	// The remote resources to monitor. A remote resource is the other endpoint
+	// specified for the network flow of a workload, with a local resource. For
+	// example, Amazon Dynamo DB can be a remote resource.
 	//
 	// This member is required.
 	RemoteResources []types.MonitorRemoteResource

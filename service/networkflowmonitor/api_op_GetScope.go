@@ -66,7 +66,9 @@ type GetScopeOutput struct {
 	// This member is required.
 	Status types.ScopeStatus
 
-	// The targets for a scope
+	// The targets to define the scope to be monitored. A target is an array of
+	// targetResources, which are currently Region-account pairs, defined by
+	// targetResource constructs.
 	//
 	// This member is required.
 	Targets []types.TargetResource

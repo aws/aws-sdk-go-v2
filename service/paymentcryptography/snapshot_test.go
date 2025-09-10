@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_AddKeyReplicationRegions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AddKeyReplicationRegions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AddKeyReplicationRegions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateAlias(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateAlias(context.Background(), nil, func(o *Options) {
@@ -110,6 +122,30 @@ func TestCheckSnapshot_DeleteKey(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisableDefaultKeyReplicationRegions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableDefaultKeyReplicationRegions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisableDefaultKeyReplicationRegions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_EnableDefaultKeyReplicationRegions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableDefaultKeyReplicationRegions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "EnableDefaultKeyReplicationRegions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ExportKey(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ExportKey(context.Background(), nil, func(o *Options) {
@@ -127,6 +163,18 @@ func TestCheckSnapshot_GetAlias(t *testing.T) {
 	_, err := svc.GetAlias(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetDefaultKeyReplicationRegions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDefaultKeyReplicationRegions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDefaultKeyReplicationRegions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -230,6 +278,18 @@ func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_RemoveKeyReplicationRegions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RemoveKeyReplicationRegions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RemoveKeyReplicationRegions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_RestoreKey(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RestoreKey(context.Background(), nil, func(o *Options) {
@@ -301,6 +361,18 @@ func TestCheckSnapshot_UpdateAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_AddKeyReplicationRegions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AddKeyReplicationRegions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AddKeyReplicationRegions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateAlias(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateAlias(context.Background(), nil, func(o *Options) {
@@ -349,6 +421,30 @@ func TestUpdateSnapshot_DeleteKey(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisableDefaultKeyReplicationRegions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableDefaultKeyReplicationRegions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisableDefaultKeyReplicationRegions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_EnableDefaultKeyReplicationRegions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableDefaultKeyReplicationRegions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "EnableDefaultKeyReplicationRegions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ExportKey(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ExportKey(context.Background(), nil, func(o *Options) {
@@ -366,6 +462,18 @@ func TestUpdateSnapshot_GetAlias(t *testing.T) {
 	_, err := svc.GetAlias(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetDefaultKeyReplicationRegions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDefaultKeyReplicationRegions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDefaultKeyReplicationRegions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -462,6 +570,18 @@ func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RemoveKeyReplicationRegions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RemoveKeyReplicationRegions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RemoveKeyReplicationRegions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

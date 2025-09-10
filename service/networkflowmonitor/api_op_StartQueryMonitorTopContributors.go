@@ -49,6 +49,9 @@ type StartQueryMonitorTopContributorsInput struct {
 	//
 	//   - INTER_AZ : Top contributor network flows between Availability Zones
 	//
+	//   - INTER_REGION : Top contributor network flows between Regions (to the edge of
+	//   another Region)
+	//
 	//   - INTER_VPC : Top contributor network flows between VPCs
 	//
 	//   - AMAZON_S3 : Top contributor network flows to or from Amazon S3
@@ -80,8 +83,8 @@ type StartQueryMonitorTopContributorsInput struct {
 	// This member is required.
 	MonitorName *string
 
-	// The timestamp that is the date and time beginning of the period that you want
-	// to retrieve results for with your query.
+	// The timestamp that is the date and time that is the beginning of the period
+	// that you want to retrieve results for with your query.
 	//
 	// This member is required.
 	StartTime *time.Time

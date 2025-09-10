@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAddKeyReplicationRegions struct {
+}
+
+func (*validateOpAddKeyReplicationRegions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAddKeyReplicationRegions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AddKeyReplicationRegionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAddKeyReplicationRegionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateAlias struct {
 }
 
@@ -85,6 +105,46 @@ func (m *validateOpDeleteKey) HandleInitialize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisableDefaultKeyReplicationRegions struct {
+}
+
+func (*validateOpDisableDefaultKeyReplicationRegions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisableDefaultKeyReplicationRegions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisableDefaultKeyReplicationRegionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisableDefaultKeyReplicationRegionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpEnableDefaultKeyReplicationRegions struct {
+}
+
+func (*validateOpEnableDefaultKeyReplicationRegions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpEnableDefaultKeyReplicationRegions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*EnableDefaultKeyReplicationRegionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpEnableDefaultKeyReplicationRegionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -250,6 +310,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRemoveKeyReplicationRegions struct {
+}
+
+func (*validateOpRemoveKeyReplicationRegions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRemoveKeyReplicationRegions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RemoveKeyReplicationRegionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRemoveKeyReplicationRegionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRestoreKey struct {
 }
 
@@ -370,6 +450,10 @@ func (m *validateOpUpdateAlias) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAddKeyReplicationRegionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAddKeyReplicationRegions{}, middleware.After)
+}
+
 func addOpCreateAliasValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAlias{}, middleware.After)
 }
@@ -384,6 +468,14 @@ func addOpDeleteAliasValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteKey{}, middleware.After)
+}
+
+func addOpDisableDefaultKeyReplicationRegionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisableDefaultKeyReplicationRegions{}, middleware.After)
+}
+
+func addOpEnableDefaultKeyReplicationRegionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpEnableDefaultKeyReplicationRegions{}, middleware.After)
 }
 
 func addOpExportKeyValidationMiddleware(stack *middleware.Stack) error {
@@ -416,6 +508,10 @@ func addOpImportKeyValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpRemoveKeyReplicationRegionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRemoveKeyReplicationRegions{}, middleware.After)
 }
 
 func addOpRestoreKeyValidationMiddleware(stack *middleware.Stack) error {
@@ -857,6 +953,24 @@ func validateTrustedCertificatePublicKey(v *types.TrustedCertificatePublicKey) e
 	}
 }
 
+func validateOpAddKeyReplicationRegionsInput(v *AddKeyReplicationRegionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddKeyReplicationRegionsInput"}
+	if v.KeyIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyIdentifier"))
+	}
+	if v.ReplicationRegions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicationRegions"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateAliasInput(v *CreateAliasInput) error {
 	if v == nil {
 		return nil
@@ -921,6 +1035,36 @@ func validateOpDeleteKeyInput(v *DeleteKeyInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteKeyInput"}
 	if v.KeyIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KeyIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisableDefaultKeyReplicationRegionsInput(v *DisableDefaultKeyReplicationRegionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisableDefaultKeyReplicationRegionsInput"}
+	if v.ReplicationRegions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicationRegions"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpEnableDefaultKeyReplicationRegionsInput(v *EnableDefaultKeyReplicationRegionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EnableDefaultKeyReplicationRegionsInput"}
+	if v.ReplicationRegions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicationRegions"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1068,6 +1212,24 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRemoveKeyReplicationRegionsInput(v *RemoveKeyReplicationRegionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemoveKeyReplicationRegionsInput"}
+	if v.KeyIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyIdentifier"))
+	}
+	if v.ReplicationRegions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicationRegions"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

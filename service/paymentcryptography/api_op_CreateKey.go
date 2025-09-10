@@ -116,6 +116,14 @@ type CreateKeyInput struct {
 	// the encrypted result.
 	KeyCheckValueAlgorithm types.KeyCheckValueAlgorithm
 
+	// A list of Amazon Web Services Regions for key replication operations.
+	//
+	// Each region in the list must be a valid Amazon Web Services Region identifier
+	// where Amazon Web Services Payment Cryptography is available. This list is used
+	// to specify which regions should be added to or removed from a key's replication
+	// configuration.
+	ReplicationRegions []string
+
 	// Assigns one or more tags to the Amazon Web Services Payment Cryptography key.
 	// Use this parameter to tag a key when it is created. To tag an existing Amazon
 	// Web Services Payment Cryptography key, use the [TagResource]operation.
