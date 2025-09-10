@@ -1,3 +1,7 @@
+# v1.31.1 (2025-09-10)
+
+* No change notes available for this release.
+
 # v1.31.0 (2025-09-09)
 
 * **Feature**: Added CUE tag SCTE output to MediaPackageV2 HLS and LL-HLS manifests.

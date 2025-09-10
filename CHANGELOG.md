@@ -1,3 +1,14 @@
+# Release (2025-09-10)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/networkflowmonitor`: [v1.9.0](service/networkflowmonitor/CHANGELOG.md#v190-2025-09-10)
+  * **Feature**: Added new enum value (AWS::Region) for type field under MonitorLocalResource and MonitorRemoteResource. Workload Insights and Monitor top contributors queries now support a new DestinationCategory (INTER_REGION).
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptography`: [v1.24.0](service/paymentcryptography/CHANGELOG.md#v1240-2025-09-10)
+  * **Feature**: AWS Payment Cryptography Service now supports Multi-Region key replication. Customers can choose to automatically distribute keys across AWS Regions.
+
 # Release (2025-09-09)
 
 ## Module Highlights

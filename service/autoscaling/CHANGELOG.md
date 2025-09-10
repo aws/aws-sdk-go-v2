@@ -1,3 +1,7 @@
+# v1.59.1 (2025-09-10)
+
+* No change notes available for this release.
+
 # v1.59.0 (2025-09-09)
 
 * **Feature**: Added WaitForTransitioningInstances parameter to the CancelInstanceRefresh API, allowing the caller to cancel an instance refresh without waiting for on-going launches and terminations.

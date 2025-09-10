@@ -1,3 +1,7 @@
+# v1.50.1 (2025-09-10)
+
+* No change notes available for this release.
+
 # v1.50.0 (2025-09-09)
 
 * **Feature**: Added a new API - DescribeAlarmContributors API, to retrieve alarm contributors in ALARM state. Added support in DescribeAlarmHistory API to query alarm contributor history

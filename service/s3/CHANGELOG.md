@@ -1,3 +1,7 @@
+# v1.88.1 (2025-09-10)
+
+* No change notes available for this release.
+
 # v1.88.0 (2025-09-08)
 
 * **Feature**: This release includes backward compatibility work on the "Expires" parameter.

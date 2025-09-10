@@ -1,3 +1,7 @@
+# v1.52.1 (2025-09-10)
+
+* No change notes available for this release.
+
 # v1.52.0 (2025-09-08)
 
 * **Feature**: Add ComputationModelVersion support in IoT SiteWise APIs

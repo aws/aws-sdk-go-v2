@@ -1,3 +1,7 @@
+# v1.139.1 (2025-09-10)
+
+* No change notes available for this release.
+
 # v1.139.0 (2025-09-09)
 
 * **Feature**: SDK release for user defined predefined attributes.

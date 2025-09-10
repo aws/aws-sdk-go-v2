@@ -1,3 +1,7 @@
+# v1.40.1 (2025-09-10)
+
+* No change notes available for this release.
+
 # v1.40.0 (2025-09-09)
 
 * **Feature**: Adds support for custom blueprints

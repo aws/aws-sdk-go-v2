@@ -1,3 +1,7 @@
+# v1.24.0 (2025-09-10)
+
+* **Feature**: AWS Payment Cryptography Service now supports Multi-Region key replication. Customers can choose to automatically distribute keys across AWS Regions.
+
 # v1.23.3 (2025-09-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

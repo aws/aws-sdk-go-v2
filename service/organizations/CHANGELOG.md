@@ -1,3 +1,7 @@
+# v1.45.1 (2025-09-10)
+
+* No change notes available for this release.
+
 # v1.45.0 (2025-09-09)
 
 * **Feature**: Documentation updates for AWS Organizations APIs.

@@ -1,3 +1,7 @@
+# v1.40.1 (2025-09-10)
+
+* No change notes available for this release.
+
 # v1.40.0 (2025-09-08)
 
 * **Feature**: Emit user-agent business metrics for use of env-based bearer tokens.
