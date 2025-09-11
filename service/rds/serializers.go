@@ -13709,6 +13709,11 @@ func awsAwsquery_serializeOpDocumentCreateDBProxyInput(v *CreateDBProxyInput, va
 		objectKey.Boolean(*v.DebugLogging)
 	}
 
+	if len(v.DefaultAuthScheme) > 0 {
+		objectKey := object.Key("DefaultAuthScheme")
+		objectKey.String(string(v.DefaultAuthScheme))
+	}
+
 	if len(v.EndpointNetworkType) > 0 {
 		objectKey := object.Key("EndpointNetworkType")
 		objectKey.String(string(v.EndpointNetworkType))
@@ -16984,6 +16989,11 @@ func awsAwsquery_serializeOpDocumentModifyDBProxyInput(v *ModifyDBProxyInput, va
 	if v.DebugLogging != nil {
 		objectKey := object.Key("DebugLogging")
 		objectKey.Boolean(*v.DebugLogging)
+	}
+
+	if len(v.DefaultAuthScheme) > 0 {
+		objectKey := object.Key("DefaultAuthScheme")
+		objectKey.String(string(v.DefaultAuthScheme))
 	}
 
 	if v.IdleClientTimeout != nil {

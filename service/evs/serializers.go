@@ -16,6 +16,67 @@ import (
 	"path"
 )
 
+type awsAwsjson10_serializeOpAssociateEipToVlan struct {
+}
+
+func (*awsAwsjson10_serializeOpAssociateEipToVlan) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpAssociateEipToVlan) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*AssociateEipToVlanInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonElasticVMwareService.AssociateEipToVlan")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentAssociateEipToVlanInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpCreateEnvironment struct {
 }
 
@@ -243,6 +304,67 @@ func (m *awsAwsjson10_serializeOpDeleteEnvironmentHost) HandleSerialize(ctx cont
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson10_serializeOpDocumentDeleteEnvironmentHostInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpDisassociateEipFromVlan struct {
+}
+
+func (*awsAwsjson10_serializeOpDisassociateEipFromVlan) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpDisassociateEipFromVlan) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DisassociateEipFromVlanInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonElasticVMwareService.DisassociateEipFromVlan")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentDisassociateEipFromVlanInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -800,6 +922,16 @@ func awsAwsjson10_serializeDocumentInitialVlans(v *types.InitialVlans, value smi
 		}
 	}
 
+	if v.HcxNetworkAclId != nil {
+		ok := object.Key("hcxNetworkAclId")
+		ok.String(*v.HcxNetworkAclId)
+	}
+
+	if v.IsHcxPublic {
+		ok := object.Key("isHcxPublic")
+		ok.Boolean(v.IsHcxPublic)
+	}
+
 	if v.NsxUplink != nil {
 		ok := object.Key("nsxUplink")
 		if err := awsAwsjson10_serializeDocumentInitialVlanInfo(v.NsxUplink, ok); err != nil {
@@ -985,6 +1117,33 @@ func awsAwsjson10_serializeDocumentVcfHostnames(v *types.VcfHostnames, value smi
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentAssociateEipToVlanInput(v *AssociateEipToVlanInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllocationId != nil {
+		ok := object.Key("allocationId")
+		ok.String(*v.AllocationId)
+	}
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.EnvironmentId != nil {
+		ok := object.Key("environmentId")
+		ok.String(*v.EnvironmentId)
+	}
+
+	if v.VlanName != nil {
+		ok := object.Key("vlanName")
+		ok.String(*v.VlanName)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentCreateEnvironmentHostInput(v *CreateEnvironmentHostInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1139,6 +1298,33 @@ func awsAwsjson10_serializeOpDocumentDeleteEnvironmentInput(v *DeleteEnvironment
 	if v.EnvironmentId != nil {
 		ok := object.Key("environmentId")
 		ok.String(*v.EnvironmentId)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentDisassociateEipFromVlanInput(v *DisassociateEipFromVlanInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AssociationId != nil {
+		ok := object.Key("associationId")
+		ok.String(*v.AssociationId)
+	}
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.EnvironmentId != nil {
+		ok := object.Key("environmentId")
+		ok.String(*v.EnvironmentId)
+	}
+
+	if v.VlanName != nil {
+		ok := object.Key("vlanName")
+		ok.String(*v.VlanName)
 	}
 
 	return nil

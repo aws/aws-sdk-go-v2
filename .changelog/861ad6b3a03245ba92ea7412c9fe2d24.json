@@ -1,0 +1,8 @@
+{
+    "id": "861ad6b3-a032-45ba-92ea-7412c9fe2d24",
+    "type": "feature",
+    "description": "Adds support for end-to-end IAM authentication in RDS Proxy for MySQL, MariaDB, and PostgreSQL engines.",
+    "modules": [
+        "service/rds"
+    ]
+}

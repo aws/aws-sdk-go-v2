@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the settings that were used when your Amazon QuickSight subscription
-// was first created in this Amazon Web Services account.
+// Describes the settings that were used when your QuickSight subscription was
+// first created in this Amazon Web Services account.
 func (c *Client) DescribeAccountSettings(ctx context.Context, params *DescribeAccountSettingsInput, optFns ...func(*Options)) (*DescribeAccountSettingsOutput, error) {
 	if params == nil {
 		params = &DescribeAccountSettingsInput{}
@@ -41,16 +41,15 @@ type DescribeAccountSettingsInput struct {
 
 type DescribeAccountSettingsOutput struct {
 
-	// The Amazon QuickSight settings for this Amazon Web Services account. This
-	// information includes the edition of Amazon Amazon QuickSight that you subscribed
-	// to (Standard or Enterprise) and the notification email for the Amazon QuickSight
-	// subscription.
+	// The QuickSight settings for this Amazon Web Services account. This information
+	// includes the edition of Amazon QuickSight that you subscribed to (Standard or
+	// Enterprise) and the notification email for the QuickSight subscription.
 	//
-	// In the QuickSight console, the Amazon QuickSight subscription is sometimes
-	// referred to as a QuickSight "account" even though it's technically not an
-	// account by itself. Instead, it's a subscription to the Amazon QuickSight service
-	// for your Amazon Web Services account. The edition that you subscribe to applies
-	// to Amazon QuickSight in every Amazon Web Services Region where you use it.
+	// In the QuickSight console, the QuickSight subscription is sometimes referred to
+	// as a QuickSight "account" even though it's technically not an account by itself.
+	// Instead, it's a subscription to the QuickSight service for your Amazon Web
+	// Services account. The edition that you subscribe to applies to QuickSight in
+	// every Amazon Web Services Region where you use it.
 	AccountSettings *types.AccountSettings
 
 	// The Amazon Web Services request ID for this operation.

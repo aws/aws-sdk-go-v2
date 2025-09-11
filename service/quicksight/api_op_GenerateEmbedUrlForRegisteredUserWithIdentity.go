@@ -11,21 +11,20 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Generates an embed URL that you can use to embed an Amazon QuickSight
-// experience in your website. This action can be used for any type of user that is
-// registered in an Amazon QuickSight account that uses IAM Identity Center for
-// authentication. This API requires [identity-enhanced IAM Role sessions]for the authenticated user that the API call
-// is being made for.
+// Generates an embed URL that you can use to embed an QuickSight experience in
+// your website. This action can be used for any type of user that is registered in
+// an QuickSight account that uses IAM Identity Center for authentication. This API
+// requires [identity-enhanced IAM Role sessions]for the authenticated user that the API call is being made for.
 //
 // This API uses [trusted identity propagation] to ensure that an end user is authenticated and receives the
 // embed URL that is specific to that user. The IAM Identity Center application
-// that the user has logged into needs to have [trusted Identity Propagation enabled for Amazon QuickSight]with the scope value set to
+// that the user has logged into needs to have [trusted Identity Propagation enabled for QuickSight]with the scope value set to
 // quicksight:read . Before you use this action, make sure that you have configured
-// the relevant Amazon QuickSight resource and permissions.
+// the relevant QuickSight resource and permissions.
 //
-// [trusted Identity Propagation enabled for Amazon QuickSight]: https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-using-customermanagedapps-specify-trusted-apps.html
 // [identity-enhanced IAM Role sessions]: https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-overview.html#types-identity-enhanced-iam-role-sessions
 // [trusted identity propagation]: https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation.html
+// [trusted Identity Propagation enabled for QuickSight]: https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-using-customermanagedapps-specify-trusted-apps.html
 func (c *Client) GenerateEmbedUrlForRegisteredUserWithIdentity(ctx context.Context, params *GenerateEmbedUrlForRegisteredUserWithIdentityInput, optFns ...func(*Options)) (*GenerateEmbedUrlForRegisteredUserWithIdentityOutput, error) {
 	if params == nil {
 		params = &GenerateEmbedUrlForRegisteredUserWithIdentityInput{}
@@ -49,7 +48,7 @@ type GenerateEmbedUrlForRegisteredUserWithIdentityInput struct {
 	AwsAccountId *string
 
 	// The type of experience you want to embed. For registered users, you can embed
-	// Amazon QuickSight dashboards or the Amazon QuickSight console.
+	// QuickSight dashboards or the QuickSight console.
 	//
 	// Exactly one of the experience configurations is required. You can choose
 	// Dashboard or QuickSightConsole . You cannot choose more than one experience

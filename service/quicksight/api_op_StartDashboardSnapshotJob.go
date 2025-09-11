@@ -31,14 +31,13 @@ import (
 //
 // # StartDashboardSnapshotJob API throttling
 //
-// Amazon QuickSight utilizes API throttling to create a more consistent user
-// experience within a time span for customers when they call the
-// StartDashboardSnapshotJob . By default, 12 jobs can run simlutaneously in one
-// Amazon Web Services account and users can submit up 10 API requests per second
-// before an account is throttled. If an overwhelming number of API requests are
-// made by the same user in a short period of time, Amazon QuickSight throttles the
-// API calls to maintin an optimal experience and reliability for all Amazon
-// QuickSight users.
+// QuickSight utilizes API throttling to create a more consistent user experience
+// within a time span for customers when they call the StartDashboardSnapshotJob .
+// By default, 12 jobs can run simlutaneously in one Amazon Web Services account
+// and users can submit up 10 API requests per second before an account is
+// throttled. If an overwhelming number of API requests are made by the same user
+// in a short period of time, QuickSight throttles the API calls to maintin an
+// optimal experience and reliability for all QuickSight users.
 //
 // # Common throttling scenarios
 //
@@ -52,8 +51,8 @@ import (
 //     comlpete before you resubmit the new job.
 //
 //   - A large number of API requests are submitted on an Amazon Web Services
-//     account. When a user makes more than 10 API calls to the Amazon QuickSight API
-//     in one second, a ThrottlingException is returned.
+//     account. When a user makes more than 10 API calls to the QuickSight API in one
+//     second, a ThrottlingException is returned.
 //
 // If your use case requires a higher throttling limit, contact your account admin
 // or [Amazon Web ServicesSupport]to explore options to tailor a more optimal expereince for your account.
@@ -64,9 +63,9 @@ import (
 // of frequency and parallelism of API calls as much as you can to avoid
 // throttling. You can also perform a timing test to calculate an estimate for the
 // total processing time of your projected load that stays within the throttling
-// limits of the Amazon QuickSight APIs. For example, if your projected traffic is
-// 100 snapshot jobs before 12:00 PM per day, start 12 jobs in parallel and measure
-// the amount of time it takes to proccess all 12 jobs. Once you obtain the result,
+// limits of the QuickSight APIs. For example, if your projected traffic is 100
+// snapshot jobs before 12:00 PM per day, start 12 jobs in parallel and measure the
+// amount of time it takes to proccess all 12 jobs. Once you obtain the result,
 // multiply the duration by 9, for example (12 minutes * 9 = 108 minutes) . Use the
 // new result to determine the latest time at which the jobs need to be started to
 // meet your target deadline.
@@ -133,7 +132,7 @@ type StartDashboardSnapshotJobInput struct {
 
 	//  A structure that contains information about the anonymous users that the
 	// generated snapshot is for. This API will not return information about registered
-	// Amazon QuickSight.
+	// QuickSight.
 	//
 	// This member is required.
 	UserConfiguration *types.SnapshotUserConfiguration

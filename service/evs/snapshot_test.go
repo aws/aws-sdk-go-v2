@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_AssociateEipToVlan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateEipToVlan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateEipToVlan")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateEnvironment(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateEnvironment(context.Background(), nil, func(o *Options) {
@@ -103,6 +115,18 @@ func TestCheckSnapshot_DeleteEnvironmentHost(t *testing.T) {
 	_, err := svc.DeleteEnvironmentHost(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteEnvironmentHost")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DisassociateEipFromVlan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateEipFromVlan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateEipFromVlan")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -193,6 +217,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_AssociateEipToVlan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateEipToVlan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateEipToVlan")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateEnvironment(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateEnvironment(context.Background(), nil, func(o *Options) {
@@ -234,6 +270,18 @@ func TestUpdateSnapshot_DeleteEnvironmentHost(t *testing.T) {
 	_, err := svc.DeleteEnvironmentHost(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteEnvironmentHost")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DisassociateEipFromVlan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateEipFromVlan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateEipFromVlan")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

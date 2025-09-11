@@ -29,11 +29,6 @@ func (c *Client) CreateDBProxy(ctx context.Context, params *CreateDBProxyInput, 
 
 type CreateDBProxyInput struct {
 
-	// The authorization mechanism that the proxy uses.
-	//
-	// This member is required.
-	Auth []types.UserAuthConfig
-
 	// The identifier for the proxy. This name must be unique for all proxies owned by
 	// your Amazon Web Services account in the specified Amazon Web Services Region. An
 	// identifier must begin with a letter and must contain only ASCII letters, digits,
@@ -63,12 +58,23 @@ type CreateDBProxyInput struct {
 	// This member is required.
 	VpcSubnetIds []string
 
+	// The authorization mechanism that the proxy uses.
+	Auth []types.UserAuthConfig
+
 	// Specifies whether the proxy logs detailed connection and query information.
 	// When you enable DebugLogging , the proxy captures connection details and
 	// connection pool behavior from your queries. Debug logging increases CloudWatch
 	// costs and can impact proxy performance. Enable this option only when you need to
 	// troubleshoot connection or performance issues.
 	DebugLogging *bool
+
+	// The default authentication scheme that the proxy uses for client connections to
+	// the proxy and connections from the proxy to the underlying database. Valid
+	// values are NONE and IAM_AUTH . When set to IAM_AUTH , the proxy uses end-to-end
+	// IAM authentication to connect to the database. If you don't specify
+	// DefaultAuthScheme or specify this parameter as NONE , you must specify the Auth
+	// option.
+	DefaultAuthScheme types.DefaultAuthScheme
 
 	// The network type of the DB proxy endpoint. The network type determines the IP
 	// version that the proxy endpoint supports.

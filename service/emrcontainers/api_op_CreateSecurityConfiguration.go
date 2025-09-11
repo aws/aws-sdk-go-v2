@@ -48,6 +48,9 @@ type CreateSecurityConfigurationInput struct {
 	// This member is required.
 	SecurityConfigurationData *types.SecurityConfigurationData
 
+	// The container provider associated with the security configuration.
+	ContainerProvider *types.ContainerProvider
+
 	// The tags to add to the security configuration.
 	Tags map[string]string
 

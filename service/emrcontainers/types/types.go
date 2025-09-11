@@ -158,6 +158,10 @@ type EksInfo struct {
 	// The namespaces of the Amazon EKS cluster.
 	Namespace *string
 
+	// The nodeLabel of the nodes where the resources of this virtual cluster can get
+	// scheduled. It requires relevant scaling and policy engine addons.
+	NodeLabel *string
+
 	noSmithyDocumentSerde
 }
 

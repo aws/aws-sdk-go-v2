@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches for any Q topic that exists in an Amazon QuickSight account.
+// Searches for any Q topic that exists in an QuickSight account.
 func (c *Client) SearchTopics(ctx context.Context, params *SearchTopicsInput, optFns ...func(*Options)) (*SearchTopicsOutput, error) {
 	if params == nil {
 		params = &SearchTopicsInput{}

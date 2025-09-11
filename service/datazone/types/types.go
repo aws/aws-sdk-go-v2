@@ -3121,6 +3121,9 @@ type IamUserProfileDetails struct {
 	// The ARN of an IAM user profile in Amazon DataZone.
 	Arn *string
 
+	// Principal ID of the IAM user.
+	PrincipalId *string
+
 	noSmithyDocumentSerde
 }
 

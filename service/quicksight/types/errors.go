@@ -96,8 +96,8 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The customer managed key that is registered to your Amazon QuickSight account
-// is unavailable.
+// The customer managed key that is registered to your QuickSight account is
+// unavailable.
 type CustomerManagedKeyUnavailableException struct {
 	Message *string
 
@@ -560,8 +560,8 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // This error indicates that you are calling an embedding operation in Amazon
 // QuickSight without the required pricing plan on your Amazon Web Services
 // account. Before you can use embedding for anonymous users, a QuickSight
-// administrator needs to add capacity pricing to Amazon QuickSight. You can do
-// this on the Manage Amazon QuickSight page.
+// administrator needs to add capacity pricing to QuickSight. You can do this on
+// the Manage QuickSight page.
 //
 // After capacity pricing is added, you can use the [GetDashboardEmbedUrl] API operation with the
 // --identity-type ANONYMOUS option.
@@ -596,8 +596,8 @@ func (e *UnsupportedPricingPlanException) ErrorFault() smithy.ErrorFault { retur
 
 // This error indicates that you are calling an operation on an Amazon QuickSight
 // subscription where the edition doesn't include support for that operation.
-// Amazon Amazon QuickSight currently has Standard Edition and Enterprise Edition.
-// Not every operation and capability is available in every edition.
+// Amazon QuickSight currently has Standard Edition and Enterprise Edition. Not
+// every operation and capability is available in every edition.
 type UnsupportedUserEditionException struct {
 	Message *string
 

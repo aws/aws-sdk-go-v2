@@ -570,6 +570,26 @@ func (m *validateOpDeleteAccountCustomization) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteAccountCustomPermission struct {
+}
+
+func (*validateOpDeleteAccountCustomPermission) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAccountCustomPermission) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAccountCustomPermissionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAccountCustomPermissionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAccountSubscription struct {
 }
 
@@ -1185,6 +1205,26 @@ func (m *validateOpDescribeAccountCustomization) HandleInitialize(ctx context.Co
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeAccountCustomizationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeAccountCustomPermission struct {
+}
+
+func (*validateOpDescribeAccountCustomPermission) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAccountCustomPermission) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAccountCustomPermissionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAccountCustomPermissionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3330,6 +3370,26 @@ func (m *validateOpUpdateAccountCustomization) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateAccountCustomPermission struct {
+}
+
+func (*validateOpUpdateAccountCustomPermission) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAccountCustomPermission) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAccountCustomPermissionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAccountCustomPermissionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateAccountSettings struct {
 }
 
@@ -4302,6 +4362,10 @@ func addOpDeleteAccountCustomizationValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpDeleteAccountCustomization{}, middleware.After)
 }
 
+func addOpDeleteAccountCustomPermissionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAccountCustomPermission{}, middleware.After)
+}
+
 func addOpDeleteAccountSubscriptionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAccountSubscription{}, middleware.After)
 }
@@ -4424,6 +4488,10 @@ func addOpDeleteVPCConnectionValidationMiddleware(stack *middleware.Stack) error
 
 func addOpDescribeAccountCustomizationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeAccountCustomization{}, middleware.After)
+}
+
+func addOpDescribeAccountCustomPermissionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAccountCustomPermission{}, middleware.After)
 }
 
 func addOpDescribeAccountSettingsValidationMiddleware(stack *middleware.Stack) error {
@@ -4852,6 +4920,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateAccountCustomizationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAccountCustomization{}, middleware.After)
+}
+
+func addOpUpdateAccountCustomPermissionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAccountCustomPermission{}, middleware.After)
 }
 
 func addOpUpdateAccountSettingsValidationMiddleware(stack *middleware.Stack) error {
@@ -21970,6 +22042,21 @@ func validateOpDeleteAccountCustomizationInput(v *DeleteAccountCustomizationInpu
 	}
 }
 
+func validateOpDeleteAccountCustomPermissionInput(v *DeleteAccountCustomPermissionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAccountCustomPermissionInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteAccountSubscriptionInput(v *DeleteAccountSubscriptionInput) error {
 	if v == nil {
 		return nil
@@ -22554,6 +22641,21 @@ func validateOpDescribeAccountCustomizationInput(v *DescribeAccountCustomization
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeAccountCustomizationInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeAccountCustomPermissionInput(v *DescribeAccountCustomPermissionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAccountCustomPermissionInput"}
 	if v.AwsAccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
 	}
@@ -24584,6 +24686,24 @@ func validateOpUpdateAccountCustomizationInput(v *UpdateAccountCustomizationInpu
 	}
 	if v.AccountCustomization == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountCustomization"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAccountCustomPermissionInput(v *UpdateAccountCustomPermissionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAccountCustomPermissionInput"}
+	if v.CustomPermissionsName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomPermissionsName"))
+	}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

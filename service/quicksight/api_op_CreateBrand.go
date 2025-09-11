@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Amazon QuickSight brand.
+// Creates an QuickSight brand.
 func (c *Client) CreateBrand(ctx context.Context, params *CreateBrandInput, optFns ...func(*Options)) (*CreateBrandOutput, error) {
 	if params == nil {
 		params = &CreateBrandInput{}
@@ -34,7 +34,7 @@ type CreateBrandInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// The ID of the Amazon QuickSight brand.
+	// The ID of the QuickSight brand.
 	//
 	// This member is required.
 	BrandId *string

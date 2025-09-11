@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAssociateEipToVlan struct {
+}
+
+func (*validateOpAssociateEipToVlan) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateEipToVlan) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateEipToVlanInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateEipToVlanInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateEnvironmentHost struct {
 }
 
@@ -85,6 +105,26 @@ func (m *validateOpDeleteEnvironment) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteEnvironmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateEipFromVlan struct {
+}
+
+func (*validateOpDisassociateEipFromVlan) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateEipFromVlan) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateEipFromVlanInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateEipFromVlanInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -210,6 +250,10 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAssociateEipToVlanValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateEipToVlan{}, middleware.After)
+}
+
 func addOpCreateEnvironmentHostValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateEnvironmentHost{}, middleware.After)
 }
@@ -224,6 +268,10 @@ func addOpDeleteEnvironmentHostValidationMiddleware(stack *middleware.Stack) err
 
 func addOpDeleteEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteEnvironment{}, middleware.After)
+}
+
+func addOpDisassociateEipFromVlanValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateEipFromVlan{}, middleware.After)
 }
 
 func addOpGetEnvironmentValidationMiddleware(stack *middleware.Stack) error {
@@ -474,6 +522,27 @@ func validateVcfHostnames(v *types.VcfHostnames) error {
 	}
 }
 
+func validateOpAssociateEipToVlanInput(v *AssociateEipToVlanInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateEipToVlanInput"}
+	if v.EnvironmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if v.VlanName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VlanName"))
+	}
+	if v.AllocationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AllocationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateEnvironmentHostInput(v *CreateEnvironmentHostInput) error {
 	if v == nil {
 		return nil
@@ -583,6 +652,27 @@ func validateOpDeleteEnvironmentInput(v *DeleteEnvironmentInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteEnvironmentInput"}
 	if v.EnvironmentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateEipFromVlanInput(v *DisassociateEipFromVlanInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateEipFromVlanInput"}
+	if v.EnvironmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if v.VlanName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VlanName"))
+	}
+	if v.AssociationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssociationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -8,6 +8,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/ecs/internal/document"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 	smithy "github.com/aws/smithy-go"
 	smithyio "github.com/aws/smithy-go/io"
@@ -11449,6 +11451,11 @@ func awsAwsjson11_deserializeDocumentDeploymentLifecycleHook(v **types.Deploymen
 
 	for key, value := range shape {
 		switch key {
+		case "hookDetails":
+			if err := awsAwsjson11_deserializeDocumentHookDetails(&sv.HookDetails, value); err != nil {
+				return err
+			}
+
 		case "hookTargetArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12714,6 +12721,14 @@ func awsAwsjson11_deserializeDocumentHealthCheck(v **types.HealthCheck, value in
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentHookDetails(v *document.Interface, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	*v = internaldocument.NewDocumentUnmarshaler(value)
 	return nil
 }
 

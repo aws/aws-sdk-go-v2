@@ -304,6 +304,25 @@ func (DBProxyStatus) Values() []DBProxyStatus {
 	}
 }
 
+type DefaultAuthScheme string
+
+// Enum values for DefaultAuthScheme
+const (
+	DefaultAuthSchemeIamAuth DefaultAuthScheme = "IAM_AUTH"
+	DefaultAuthSchemeNone    DefaultAuthScheme = "NONE"
+)
+
+// Values returns all known values for DefaultAuthScheme. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DefaultAuthScheme) Values() []DefaultAuthScheme {
+	return []DefaultAuthScheme{
+		"IAM_AUTH",
+		"NONE",
+	}
+}
+
 type EndpointNetworkType string
 
 // Enum values for EndpointNetworkType

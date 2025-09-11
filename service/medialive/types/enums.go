@@ -3372,6 +3372,27 @@ func (HlsAkamaiHttpTransferMode) Values() []HlsAkamaiHttpTransferMode {
 	}
 }
 
+type HlsAutoSelect string
+
+// Enum values for HlsAutoSelect
+const (
+	HlsAutoSelectNo   HlsAutoSelect = "NO"
+	HlsAutoSelectOmit HlsAutoSelect = "OMIT"
+	HlsAutoSelectYes  HlsAutoSelect = "YES"
+)
+
+// Values returns all known values for HlsAutoSelect. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HlsAutoSelect) Values() []HlsAutoSelect {
+	return []HlsAutoSelect{
+		"NO",
+		"OMIT",
+		"YES",
+	}
+}
+
 type HlsCaptionLanguageSetting string
 
 // Enum values for HlsCaptionLanguageSetting
@@ -3428,6 +3449,27 @@ func (HlsCodecSpecification) Values() []HlsCodecSpecification {
 	return []HlsCodecSpecification{
 		"RFC_4281",
 		"RFC_6381",
+	}
+}
+
+type HlsDefault string
+
+// Enum values for HlsDefault
+const (
+	HlsDefaultNo   HlsDefault = "NO"
+	HlsDefaultOmit HlsDefault = "OMIT"
+	HlsDefaultYes  HlsDefault = "YES"
+)
+
+// Values returns all known values for HlsDefault. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HlsDefault) Values() []HlsDefault {
+	return []HlsDefault{
+		"NO",
+		"OMIT",
+		"YES",
 	}
 }
 

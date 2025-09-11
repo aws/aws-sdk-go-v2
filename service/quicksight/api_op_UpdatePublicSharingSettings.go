@@ -11,17 +11,17 @@ import (
 )
 
 // Use the UpdatePublicSharingSettings operation to turn on or turn off the public
-// sharing settings of an Amazon QuickSight dashboard.
+// sharing settings of an QuickSight dashboard.
 //
-// To use this operation, turn on session capacity pricing for your Amazon
-// QuickSight account.
+// To use this operation, turn on session capacity pricing for your QuickSight
+// account.
 //
 // Before you can turn on public sharing on your account, make sure to give public
 // sharing permissions to an administrative user in the Identity and Access
-// Management (IAM) console. For more information on using IAM with Amazon
-// QuickSight, see [Using Amazon QuickSight with IAM]in the Amazon QuickSight User Guide.
+// Management (IAM) console. For more information on using IAM with QuickSight, see
+// [Using QuickSight with IAM]in the QuickSight User Guide.
 //
-// [Using Amazon QuickSight with IAM]: https://docs.aws.amazon.com/quicksight/latest/user/security_iam_service-with-iam.html
+// [Using QuickSight with IAM]: https://docs.aws.amazon.com/quicksight/latest/user/security_iam_service-with-iam.html
 func (c *Client) UpdatePublicSharingSettings(ctx context.Context, params *UpdatePublicSharingSettingsInput, optFns ...func(*Options)) (*UpdatePublicSharingSettingsOutput, error) {
 	if params == nil {
 		params = &UpdatePublicSharingSettingsInput{}
@@ -39,14 +39,13 @@ func (c *Client) UpdatePublicSharingSettings(ctx context.Context, params *Update
 
 type UpdatePublicSharingSettingsInput struct {
 
-	// The Amazon Web Services account ID associated with your Amazon QuickSight
-	// subscription.
+	// The Amazon Web Services account ID associated with your QuickSight subscription.
 	//
 	// This member is required.
 	AwsAccountId *string
 
 	// A Boolean value that indicates whether public sharing is turned on for an
-	// Amazon QuickSight account.
+	// QuickSight account.
 	PublicSharingEnabled bool
 
 	noSmithyDocumentSerde

@@ -825,6 +825,11 @@ func validateOpCreateSecurityConfigurationInput(v *CreateSecurityConfigurationIn
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
+	if v.ContainerProvider != nil {
+		if err := validateContainerProvider(v.ContainerProvider); err != nil {
+			invalidParams.AddNested("ContainerProvider", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.SecurityConfigurationData == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SecurityConfigurationData"))
 	}

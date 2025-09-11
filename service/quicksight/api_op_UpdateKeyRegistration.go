@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a customer managed key in a Amazon QuickSight account.
+// Updates a customer managed key in a QuickSight account.
 func (c *Client) UpdateKeyRegistration(ctx context.Context, params *UpdateKeyRegistrationInput, optFns ...func(*Options)) (*UpdateKeyRegistrationOutput, error) {
 	if params == nil {
 		params = &UpdateKeyRegistrationInput{}
@@ -35,8 +35,8 @@ type UpdateKeyRegistrationInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// A list of RegisteredCustomerManagedKey objects to be updated to the Amazon
-	// QuickSight account.
+	// A list of RegisteredCustomerManagedKey objects to be updated to the QuickSight
+	// account.
 	//
 	// This member is required.
 	KeyRegistration []types.RegisteredCustomerManagedKey

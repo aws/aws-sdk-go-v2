@@ -56,7 +56,7 @@ type UpdateTemplateInput struct {
 	// require an Amazon Resource Name (ARN). For SourceTemplate , specify the ARN of
 	// the source template. For SourceAnalysis , specify the ARN of the source
 	// analysis. The SourceTemplate ARN can contain any Amazon Web Services account
-	// and any Amazon QuickSight-supported Amazon Web Services Region;.
+	// and any QuickSight-supported Amazon Web Services Region;.
 	//
 	// Use the DataSetReferences entity within SourceTemplate or SourceAnalysis to
 	// list the replacement datasets for the placeholders listed in the original. The

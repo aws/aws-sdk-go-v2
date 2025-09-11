@@ -1,0 +1,8 @@
+{
+    "id": "c3b32720-7b87-451c-b436-7d08dcca0f86",
+    "type": "feature",
+    "description": "Added nodeLabel support in container provider to aid hardware isolation support for virtual cluster and security configuration.",
+    "modules": [
+        "service/emrcontainers"
+    ]
+}

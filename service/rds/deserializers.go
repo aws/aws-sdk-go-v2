@@ -36163,6 +36163,19 @@ func awsAwsquery_deserializeDocumentDBProxy(v **types.DBProxy, decoder smithyxml
 				sv.DebugLogging = ptr.Bool(xtv)
 			}
 
+		case strings.EqualFold("DefaultAuthScheme", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DefaultAuthScheme = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("Endpoint", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

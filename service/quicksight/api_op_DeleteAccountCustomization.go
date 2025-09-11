@@ -11,7 +11,7 @@ import (
 )
 
 // Deletes all Amazon QuickSight customizations in this Amazon Web Services Region
-// for the specified Amazon Web Services account and Amazon QuickSight namespace.
+// for the specified Amazon Web Services account and QuickSight namespace.
 func (c *Client) DeleteAccountCustomization(ctx context.Context, params *DeleteAccountCustomizationInput, optFns ...func(*Options)) (*DeleteAccountCustomizationOutput, error) {
 	if params == nil {
 		params = &DeleteAccountCustomizationInput{}
@@ -29,13 +29,13 @@ func (c *Client) DeleteAccountCustomization(ctx context.Context, params *DeleteA
 
 type DeleteAccountCustomizationInput struct {
 
-	// The ID for the Amazon Web Services account that you want to delete Amazon
-	// QuickSight customizations from in this Amazon Web Services Region.
+	// The ID for the Amazon Web Services account that you want to delete QuickSight
+	// customizations from in this Amazon Web Services Region.
 	//
 	// This member is required.
 	AwsAccountId *string
 
-	// The Amazon QuickSight namespace that you're deleting the customizations from.
+	// The QuickSight namespace that you're deleting the customizations from.
 	Namespace *string
 
 	noSmithyDocumentSerde

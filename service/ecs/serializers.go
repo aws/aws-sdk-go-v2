@@ -6,6 +6,8 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/ecs/internal/document"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/encoding/httpbinding"
@@ -4576,6 +4578,13 @@ func awsAwsjson11_serializeDocumentDeploymentLifecycleHook(v *types.DeploymentLi
 	object := value.Object()
 	defer object.Close()
 
+	if v.HookDetails != nil {
+		ok := object.Key("hookDetails")
+		if err := awsAwsjson11_serializeDocumentHookDetails(v.HookDetails, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.HookTargetArn != nil {
 		ok := object.Key("hookTargetArn")
 		ok.String(*v.HookTargetArn)
@@ -5016,6 +5025,21 @@ func awsAwsjson11_serializeDocumentHealthCheck(v *types.HealthCheck, value smith
 		ok.Integer(*v.Timeout)
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentHookDetails(v document.Interface, value smithyjson.Value) error {
+	if v == nil {
+		return nil
+	}
+	if !internaldocument.IsInterface(v) {
+		return fmt.Errorf("%T is not a compatible document type", v)
+	}
+	db, err := v.MarshalSmithyDocument()
+	if err != nil {
+		return err
+	}
+	value.Write(db)
 	return nil
 }
 

@@ -4408,6 +4408,15 @@ func awsRestjson1_deserializeDocumentEksInfo(v **types.EksInfo, value interface{
 				sv.Namespace = ptr.String(jtv)
 			}
 
+		case "nodeLabel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceNameString to be of type string, got %T instead", value)
+				}
+				sv.NodeLabel = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

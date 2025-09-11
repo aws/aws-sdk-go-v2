@@ -1,0 +1,8 @@
+{
+    "id": "dbea0831-be74-4197-a6ff-fb1589c05e35",
+    "type": "feature",
+    "description": "This release supports hook details for Amazon ECS lifecycle hooks.",
+    "modules": [
+        "service/ecs"
+    ]
+}

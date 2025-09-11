@@ -1,0 +1,8 @@
+{
+    "id": "be0665e5-4b87-4d4c-b0d2-40239004df86",
+    "type": "feature",
+    "description": "This release adds support for Account level custom permissions, additional Dashboard Options, and Null support for Q\u0026A.",
+    "modules": [
+        "service/quicksight"
+    ]
+}

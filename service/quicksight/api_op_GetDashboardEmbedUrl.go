@@ -12,7 +12,7 @@ import (
 )
 
 // Generates a temporary session URL and authorization code(bearer token) that you
-// can use to embed an Amazon QuickSight read-only dashboard in your website or
+// can use to embed an QuickSight read-only dashboard in your website or
 // application. Before you use this command, make sure that you have configured the
 // dashboards and permissions.
 //
@@ -26,7 +26,7 @@ import (
 //   - They are valid for 5 minutes after you run this command.
 //
 //   - You are charged only when the URL is used or there is interaction with
-//     Amazon QuickSight.
+//     QuickSight.
 //
 //   - The resulting user session is valid for 15 minutes (default) up to 10 hours
 //     (maximum). You can use the optional SessionLifetimeInMinutes parameter to
@@ -75,13 +75,13 @@ type GetDashboardEmbedUrlInput struct {
 
 	// A list of one or more dashboard IDs that you want anonymous users to have
 	// tempporary access to. Currently, the IdentityType parameter must be set to
-	// ANONYMOUS because other identity types authenticate as Amazon QuickSight or IAM
-	// users. For example, if you set " --dashboard-id dash_id1 --dashboard-id dash_id2
+	// ANONYMOUS because other identity types authenticate as QuickSight or IAM users.
+	// For example, if you set " --dashboard-id dash_id1 --dashboard-id dash_id2
 	// dash_id3 identity-type ANONYMOUS ", the session can access all three dashboards.
 	AdditionalDashboardIds []string
 
-	// The Amazon QuickSight namespace that contains the dashboard IDs in this
-	// request. If you're not using a custom namespace, set Namespace = default .
+	// The QuickSight namespace that contains the dashboard IDs in this request. If
+	// you're not using a custom namespace, set Namespace = default .
 	Namespace *string
 
 	// Remove the reset button on the embedded dashboard. The default is FALSE, which
@@ -94,11 +94,11 @@ type GetDashboardEmbedUrlInput struct {
 
 	// Adds persistence of state for the user session in an embedded dashboard.
 	// Persistence applies to the sheet and the parameter settings. These are control
-	// settings that the dashboard subscriber (Amazon QuickSight reader) chooses while
-	// viewing the dashboard. If this is set to TRUE , the settings are the same when
-	// the subscriber reopens the same dashboard URL. The state is stored in Amazon
-	// QuickSight, not in a browser cookie. If this is set to FALSE, the state of the
-	// user session is not persisted. The default is FALSE .
+	// settings that the dashboard subscriber (QuickSight reader) chooses while viewing
+	// the dashboard. If this is set to TRUE , the settings are the same when the
+	// subscriber reopens the same dashboard URL. The state is stored in QuickSight,
+	// not in a browser cookie. If this is set to FALSE, the state of the user session
+	// is not persisted. The default is FALSE .
 	StatePersistenceEnabled bool
 
 	// Remove the undo/redo button on the embedded dashboard. The default is FALSE,

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Amazon QuickSight brand.
+// Deletes an QuickSight brand.
 func (c *Client) DeleteBrand(ctx context.Context, params *DeleteBrandInput, optFns ...func(*Options)) (*DeleteBrandOutput, error) {
 	if params == nil {
 		params = &DeleteBrandInput{}
@@ -33,7 +33,7 @@ type DeleteBrandInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// The ID of the Amazon QuickSight brand.
+	// The ID of the QuickSight brand.
 	//
 	// This member is required.
 	BrandId *string

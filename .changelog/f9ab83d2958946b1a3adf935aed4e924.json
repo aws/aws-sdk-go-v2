@@ -1,0 +1,8 @@
+{
+    "id": "f9ab83d2-9589-46b1-a3ad-f935aed4e924",
+    "type": "feature",
+    "description": "Add Vended Logs APIs for Amazon Prometheus Managed Collector",
+    "modules": [
+        "service/amp"
+    ]
+}

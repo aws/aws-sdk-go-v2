@@ -3,6 +3,7 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/ecs/document"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -1145,11 +1146,11 @@ type ContainerDefinition struct {
 	// There's no loopback for port mappings on Windows, so you can't access a
 	// container's mapped port from the host itself.
 	//
-	// This parameter maps to PortBindings in the the docker container create command
-	// and the --publish option to docker run. If the network mode of a task
-	// definition is set to none , then you can't specify port mappings. If the network
-	// mode of a task definition is set to host , then host ports must either be
-	// undefined or they must match the container port in the port mapping.
+	// This parameter maps to PortBindings in the docker container create command and
+	// the --publish option to docker run. If the network mode of a task definition is
+	// set to none , then you can't specify port mappings. If the network mode of a
+	// task definition is set to host , then host ports must either be undefined or
+	// they must match the container port in the port mapping.
 	//
 	// After a task reaches the RUNNING status, manual and automatic host and
 	// container port assignments are visible in the Network Bindings section of a
@@ -2167,6 +2168,10 @@ type DeploymentEphemeralStorage struct {
 //
 // [Lifecycle hooks for Amazon ECS service deployments]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-lifecycle-hooks.html
 type DeploymentLifecycleHook struct {
+
+	// Use this field to specify custom parameters that Amazon ECS will pass to your
+	// hook target invocations (such as a Lambda function).
+	HookDetails document.Interface
 
 	// The Amazon Resource Name (ARN) of the hook target. Currently, only Lambda
 	// function ARNs are supported.
@@ -4127,8 +4132,8 @@ type Service struct {
 	// The default behavior of AvailabilityZoneRebalancing differs between create and
 	// update requests:
 	//
-	//   - For create service requests, when when no value is specified for
-	//   AvailabilityZoneRebalancing , Amazon ECS defaults the value to to ENABLED .
+	//   - For create service requests, when no value is specified for
+	//   AvailabilityZoneRebalancing , Amazon ECS defaults the value to ENABLED .
 	//
 	//   - For update service requests, when no value is specified for
 	//   AvailabilityZoneRebalancing , Amazon ECS defaults to the existing service’s

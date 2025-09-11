@@ -54,8 +54,8 @@ func (c *Client) GenerateEmbedUrlForAnonymousUser(ctx context.Context, params *G
 
 type GenerateEmbedUrlForAnonymousUserInput struct {
 
-	// The Amazon Resource Names (ARNs) for the Amazon QuickSight resources that the
-	// user is authorized to access during the lifetime of the session.
+	// The Amazon Resource Names (ARNs) for the QuickSight resources that the user is
+	// authorized to access during the lifetime of the session.
 	//
 	// If you choose Dashboard embedding experience, pass the list of dashboard ARNs
 	// in the account that you want the user to be able to view.
@@ -79,17 +79,17 @@ type GenerateEmbedUrlForAnonymousUserInput struct {
 	// This member is required.
 	ExperienceConfiguration *types.AnonymousUserEmbeddingExperienceConfiguration
 
-	// The Amazon QuickSight namespace that the anonymous user virtually belongs to.
-	// If you are not using an Amazon QuickSight custom namespace, set this to default .
+	// The QuickSight namespace that the anonymous user virtually belongs to. If you
+	// are not using an Amazon QuickSight custom namespace, set this to default .
 	//
 	// This member is required.
 	Namespace *string
 
 	// The domains that you want to add to the allow list for access to the generated
 	// URL that is then embedded. This optional parameter overrides the static domains
-	// that are configured in the Manage QuickSight menu in the Amazon QuickSight
-	// console. Instead, it allows only the domains that you include in this parameter.
-	// You can list up to three domains or subdomains in each API call.
+	// that are configured in the Manage QuickSight menu in the QuickSight console.
+	// Instead, it allows only the domains that you include in this parameter. You can
+	// list up to three domains or subdomains in each API call.
 	//
 	// To include all subdomains under a specific domain to the allow list, use * . For
 	// example, https://*.sapp.amazon.com includes all subdomains under

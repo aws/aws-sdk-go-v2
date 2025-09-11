@@ -8,10 +8,12 @@
     "files": [
         "api_client.go",
         "api_client_test.go",
+        "api_op_AssociateEipToVlan.go",
         "api_op_CreateEnvironment.go",
         "api_op_CreateEnvironmentHost.go",
         "api_op_DeleteEnvironment.go",
         "api_op_DeleteEnvironmentHost.go",
+        "api_op_DisassociateEipFromVlan.go",
         "api_op_GetEnvironment.go",
         "api_op_ListEnvironmentHosts.go",
         "api_op_ListEnvironmentVlans.go",

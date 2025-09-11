@@ -12,10 +12,10 @@ import (
 )
 
 // Deletes all access scopes and authorized targets that are associated with a
-// service from the Amazon QuickSight IAM Identity Center application.
+// service from the QuickSight IAM Identity Center application.
 //
-// This operation is only supported for Amazon QuickSight accounts that use IAM
-// Identity Center.
+// This operation is only supported for QuickSight accounts that use IAM Identity
+// Center.
 func (c *Client) DeleteIdentityPropagationConfig(ctx context.Context, params *DeleteIdentityPropagationConfigInput, optFns ...func(*Options)) (*DeleteIdentityPropagationConfigOutput, error) {
 	if params == nil {
 		params = &DeleteIdentityPropagationConfigInput{}

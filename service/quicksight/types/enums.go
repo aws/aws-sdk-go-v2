@@ -1641,6 +1641,7 @@ const (
 	DataSourceTypeStarburst           DataSourceType = "STARBURST"
 	DataSourceTypeTrino               DataSourceType = "TRINO"
 	DataSourceTypeBigquery            DataSourceType = "BIGQUERY"
+	DataSourceTypeGooglesheets        DataSourceType = "GOOGLESHEETS"
 )
 
 // Values returns all known values for DataSourceType. Note that this can be
@@ -1678,6 +1679,7 @@ func (DataSourceType) Values() []DataSourceType {
 		"STARBURST",
 		"TRINO",
 		"BIGQUERY",
+		"GOOGLESHEETS",
 	}
 }
 
@@ -3218,6 +3220,7 @@ const (
 	NamedFilterTypeNumericRangeFilter    NamedFilterType = "NUMERIC_RANGE_FILTER"
 	NamedFilterTypeDateRangeFilter       NamedFilterType = "DATE_RANGE_FILTER"
 	NamedFilterTypeRelativeDateFilter    NamedFilterType = "RELATIVE_DATE_FILTER"
+	NamedFilterTypeNullFilter            NamedFilterType = "NULL_FILTER"
 )
 
 // Values returns all known values for NamedFilterType. Note that this can be
@@ -3231,6 +3234,7 @@ func (NamedFilterType) Values() []NamedFilterType {
 		"NUMERIC_RANGE_FILTER",
 		"DATE_RANGE_FILTER",
 		"RELATIVE_DATE_FILTER",
+		"NULL_FILTER",
 	}
 }
 
@@ -3347,6 +3351,27 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (NullFilterOption) Values() []NullFilterOption {
 	return []NullFilterOption{
+		"ALL_VALUES",
+		"NON_NULLS_ONLY",
+		"NULLS_ONLY",
+	}
+}
+
+type NullFilterType string
+
+// Enum values for NullFilterType
+const (
+	NullFilterTypeAllValues    NullFilterType = "ALL_VALUES"
+	NullFilterTypeNonNullsOnly NullFilterType = "NON_NULLS_ONLY"
+	NullFilterTypeNullsOnly    NullFilterType = "NULLS_ONLY"
+)
+
+// Values returns all known values for NullFilterType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NullFilterType) Values() []NullFilterType {
+	return []NullFilterType{
 		"ALL_VALUES",
 		"NON_NULLS_ONLY",
 		"NULLS_ONLY",
@@ -3837,6 +3862,25 @@ func (QBusinessInsightsStatus) Values() []QBusinessInsightsStatus {
 	return []QBusinessInsightsStatus{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type QDataKeyType string
+
+// Enum values for QDataKeyType
+const (
+	QDataKeyTypeAwsOwned QDataKeyType = "AWS_OWNED"
+	QDataKeyTypeCmk      QDataKeyType = "CMK"
+)
+
+// Values returns all known values for QDataKeyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QDataKeyType) Values() []QDataKeyType {
+	return []QDataKeyType{
+		"AWS_OWNED",
+		"CMK",
 	}
 }
 

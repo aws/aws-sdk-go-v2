@@ -28,27 +28,26 @@ func (c *Client) UpdateAccountSettings(ctx context.Context, params *UpdateAccoun
 
 type UpdateAccountSettingsInput struct {
 
-	// The ID for the Amazon Web Services account that contains the Amazon QuickSight
+	// The ID for the Amazon Web Services account that contains the QuickSight
 	// settings that you want to list.
 	//
 	// This member is required.
 	AwsAccountId *string
 
 	// The default namespace for this Amazon Web Services account. Currently, the
-	// default is default . IAM users that register for the first time with Amazon
-	// QuickSight provide an email address that becomes associated with the default
-	// namespace.
+	// default is default . IAM users that register for the first time with QuickSight
+	// provide an email address that becomes associated with the default namespace.
 	//
 	// This member is required.
 	DefaultNamespace *string
 
-	// The email address that you want Amazon QuickSight to send notifications to
-	// regarding your Amazon Web Services account or Amazon QuickSight subscription.
+	// The email address that you want QuickSight to send notifications to regarding
+	// your Amazon Web Services account or QuickSight subscription.
 	NotificationEmail *string
 
-	// A boolean value that determines whether or not an Amazon QuickSight account can
-	// be deleted. A True value doesn't allow the account to be deleted and results in
-	// an error message if a user tries to make a DeleteAccountSubscription request. A
+	// A boolean value that determines whether or not an QuickSight account can be
+	// deleted. A True value doesn't allow the account to be deleted and results in an
+	// error message if a user tries to make a DeleteAccountSubscription request. A
 	// False value will allow the account to be deleted.
 	TerminationProtectionEnabled bool
 

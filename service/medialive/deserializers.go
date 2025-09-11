@@ -40285,6 +40285,11 @@ func awsRestjson1_deserializeDocumentMediaPackageGroupSettings(v **types.MediaPa
 				return err
 			}
 
+		case "mediapackageV2GroupSettings":
+			if err := awsRestjson1_deserializeDocumentMediaPackageV2GroupSettings(&sv.MediapackageV2GroupSettings, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -40374,6 +40379,114 @@ func awsRestjson1_deserializeDocumentMediaPackageOutputSettings(v **types.MediaP
 
 	for key, value := range shape {
 		switch key {
+		case "mediaPackageV2DestinationSettings":
+			if err := awsRestjson1_deserializeDocumentMediaPackageV2DestinationSettings(&sv.MediaPackageV2DestinationSettings, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMediaPackageV2DestinationSettings(v **types.MediaPackageV2DestinationSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MediaPackageV2DestinationSettings
+	if *v == nil {
+		sv = &types.MediaPackageV2DestinationSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "audioGroupId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.AudioGroupId = ptr.String(jtv)
+			}
+
+		case "audioRenditionSets":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.AudioRenditionSets = ptr.String(jtv)
+			}
+
+		case "hlsAutoSelect":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HlsAutoSelect to be of type string, got %T instead", value)
+				}
+				sv.HlsAutoSelect = types.HlsAutoSelect(jtv)
+			}
+
+		case "hlsDefault":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HlsDefault to be of type string, got %T instead", value)
+				}
+				sv.HlsDefault = types.HlsDefault(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMediaPackageV2GroupSettings(v **types.MediaPackageV2GroupSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MediaPackageV2GroupSettings
+	if *v == nil {
+		sv = &types.MediaPackageV2GroupSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "captionLanguageMappings":
+			if err := awsRestjson1_deserializeDocument__listOfCaptionLanguageMapping(&sv.CaptionLanguageMappings, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 

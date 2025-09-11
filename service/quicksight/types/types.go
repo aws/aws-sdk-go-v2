@@ -14,7 +14,7 @@ type AccountCustomization struct {
 	// The default email customization template.
 	DefaultEmailCustomizationTemplate *string
 
-	// The default theme for this Amazon QuickSight subscription.
+	// The default theme for this QuickSight subscription.
 	DefaultTheme *string
 
 	noSmithyDocumentSerde
@@ -22,72 +22,70 @@ type AccountCustomization struct {
 
 // A structure that contains the following account information elements:
 //
-//   - Your Amazon QuickSight account name.
+//   - Your QuickSight account name.
 //
-//   - The edition of Amazon QuickSight that your account is using.
+//   - The edition of QuickSight that your account is using.
 //
-//   - The notification email address that is associated with the Amazon
-//     QuickSight account.
+//   - The notification email address that is associated with the QuickSight
+//     account.
 //
-//   - The authentication type of the Amazon QuickSight account.
+//   - The authentication type of the QuickSight account.
 //
-//   - The status of the Amazon QuickSight account's subscription.
+//   - The status of the QuickSight account's subscription.
 type AccountInfo struct {
 
-	// The account name that you provided for the Amazon QuickSight subscription in
-	// your Amazon Web Services account. You create this name when you sign up for
-	// Amazon QuickSight. It's unique over all of Amazon Web Services, and it appears
-	// only when users sign in.
+	// The account name that you provided for the QuickSight subscription in your
+	// Amazon Web Services account. You create this name when you sign up for
+	// QuickSight. It's unique over all of Amazon Web Services, and it appears only
+	// when users sign in.
 	AccountName *string
 
 	// The status of your account subscription.
 	AccountSubscriptionStatus *string
 
-	// The way that your Amazon QuickSight account is authenticated.
+	// The way that your QuickSight account is authenticated.
 	AuthenticationType *string
 
-	// The edition of your Amazon QuickSight account.
+	// The edition of your QuickSight account.
 	Edition Edition
 
 	// The Amazon Resource Name (ARN) for the IAM Identity Center instance.
 	IAMIdentityCenterInstanceArn *string
 
-	// The email address that will be used for Amazon QuickSight to send notifications
-	// regarding your Amazon Web Services account or Amazon QuickSight subscription.
+	// The email address that will be used for QuickSight to send notifications
+	// regarding your Amazon Web Services account or QuickSight subscription.
 	NotificationEmail *string
 
 	noSmithyDocumentSerde
 }
 
-// The Amazon QuickSight settings associated with your Amazon Web Services account.
+// The QuickSight settings associated with your Amazon Web Services account.
 type AccountSettings struct {
 
-	// The "account name" you provided for the Amazon QuickSight subscription in your
-	// Amazon Web Services account. You create this name when you sign up for Amazon
-	// QuickSight. It is unique in all of Amazon Web Services and it appears only when
-	// users sign in.
+	// The "account name" you provided for the QuickSight subscription in your Amazon
+	// Web Services account. You create this name when you sign up for QuickSight. It
+	// is unique in all of Amazon Web Services and it appears only when users sign in.
 	AccountName *string
 
-	// The default Amazon QuickSight namespace for your Amazon Web Services account.
+	// The default QuickSight namespace for your Amazon Web Services account.
 	DefaultNamespace *string
 
-	// The edition of Amazon QuickSight that you're currently subscribed to:
-	// Enterprise edition or Standard edition.
+	// The edition of QuickSight that you're currently subscribed to: Enterprise
+	// edition or Standard edition.
 	Edition Edition
 
-	// The main notification email for your Amazon QuickSight subscription.
+	// The main notification email for your QuickSight subscription.
 	NotificationEmail *string
 
 	// A Boolean value that indicates whether public sharing is turned on for an
-	// Amazon QuickSight account. For more information about turning on public sharing,
-	// see [UpdatePublicSharingSettings].
+	// QuickSight account. For more information about turning on public sharing, see [UpdatePublicSharingSettings].
 	//
 	// [UpdatePublicSharingSettings]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdatePublicSharingSettings.html
 	PublicSharingEnabled bool
 
-	// A boolean value that determines whether or not an Amazon QuickSight account can
-	// be deleted. A True value doesn't allow the account to be deleted and results in
-	// an error message if a user tries to make a DeleteAccountSubsctiption request. A
+	// A boolean value that determines whether or not an QuickSight account can be
+	// deleted. A True value doesn't allow the account to be deleted and results in an
+	// error message if a user tries to make a DeleteAccountSubsctiption request. A
 	// False value will allow the ccount to be deleted.
 	TerminationProtectionEnabled bool
 
@@ -233,31 +231,30 @@ type AmazonOpenSearchParameters struct {
 	noSmithyDocumentSerde
 }
 
-// A collection of Amazon Q feature configurations in an embedded Amazon
-// QuickSight console.
+// A collection of Amazon Q feature configurations in an embedded QuickSight
+// console.
 type AmazonQInQuickSightConsoleConfigurations struct {
 
-	// Adds generative Q&A capabilitiees to an embedded Amazon QuickSight console.
+	// Adds generative Q&A capabilitiees to an embedded QuickSight console.
 	DataQnA *DataQnAConfigurations
 
-	// Adds the data stories feature to an embedded Amazon QuickSight console.
+	// Adds the data stories feature to an embedded QuickSight console.
 	DataStories *DataStoriesConfigurations
 
-	// Adds the executive summaries feature to an embedded Amazon QuickSight console.
+	// Adds the executive summaries feature to an embedded QuickSight console.
 	ExecutiveSummary *ExecutiveSummaryConfigurations
 
-	// Adds the generative BI authoring experience to an embedded Amazon QuickSight
-	// console.
+	// Adds the generative BI authoring experience to an embedded QuickSight console.
 	GenerativeAuthoring *GenerativeAuthoringConfigurations
 
 	noSmithyDocumentSerde
 }
 
-// A collection of Amazon Q feature configurations in an embedded Amazon
-// QuickSight dashboard.
+// A collection of Amazon Q feature configurations in an embedded QuickSight
+// dashboard.
 type AmazonQInQuickSightDashboardConfigurations struct {
 
-	// A generated executive summary of an embedded Amazon QuickSight dashboard.
+	// A generated executive summary of an embedded QuickSight dashboard.
 	ExecutiveSummary *ExecutiveSummaryConfigurations
 
 	noSmithyDocumentSerde
@@ -474,8 +471,7 @@ type AnalysisSummary struct {
 	// The time that the analysis was last updated.
 	LastUpdatedTime *time.Time
 
-	// The name of the analysis. This name is displayed in the Amazon QuickSight
-	// console.
+	// The name of the analysis. This name is displayed in the QuickSight console.
 	Name *string
 
 	// The last known status for the analysis.
@@ -517,8 +513,8 @@ type AnchorDateConfiguration struct {
 type AnonymousUserDashboardEmbeddingConfiguration struct {
 
 	// The dashboard ID for the dashboard that you want the user to see first. This ID
-	// is included in the output URL. When the URL in response is accessed, Amazon
-	// QuickSight renders this dashboard.
+	// is included in the output URL. When the URL in response is accessed, QuickSight
+	// renders this dashboard.
 	//
 	// The Amazon Resource Name (ARN) of this dashboard must be included in the
 	// AuthorizedResourceArns parameter. Otherwise, the request will fail with
@@ -553,8 +549,8 @@ type AnonymousUserDashboardFeatureConfigurations struct {
 type AnonymousUserDashboardVisualEmbeddingConfiguration struct {
 
 	// The visual ID for the visual that you want the user to see. This ID is included
-	// in the output URL. When the URL in response is accessed, Amazon QuickSight
-	// renders this visual.
+	// in the output URL. When the URL in response is accessed, QuickSight renders this
+	// visual.
 	//
 	// The Amazon Resource Name (ARN) of the dashboard that the visual belongs to must
 	// be included in the AuthorizedResourceArns parameter. Otherwise, the request
@@ -567,13 +563,13 @@ type AnonymousUserDashboardVisualEmbeddingConfiguration struct {
 }
 
 // The type of experience you want to embed. For anonymous users, you can embed
-// Amazon QuickSight dashboards.
+// QuickSight dashboards.
 type AnonymousUserEmbeddingExperienceConfiguration struct {
 
-	// The type of embedding experience. In this case, Amazon QuickSight dashboards.
+	// The type of embedding experience. In this case, QuickSight dashboards.
 	Dashboard *AnonymousUserDashboardEmbeddingConfiguration
 
-	// The type of embedding experience. In this case, Amazon QuickSight visuals.
+	// The type of embedding experience. In this case, QuickSight visuals.
 	DashboardVisual *AnonymousUserDashboardVisualEmbeddingConfiguration
 
 	// The Generative Q&A experience that you want to use for anonymous user embedding.
@@ -588,10 +584,10 @@ type AnonymousUserEmbeddingExperienceConfiguration struct {
 // The settings that you want to use for the Generative Q&A experience.
 type AnonymousUserGenerativeQnAEmbeddingConfiguration struct {
 
-	// The Amazon QuickSight Q topic ID of the new reader experience topic that you
-	// want the anonymous user to see first. This ID is included in the output URL.
-	// When the URL in response is accessed, Amazon QuickSight renders the Generative
-	// Q&A experience with this new reader experience topic pre selected.
+	// The QuickSight Q topic ID of the new reader experience topic that you want the
+	// anonymous user to see first. This ID is included in the output URL. When the URL
+	// in response is accessed, QuickSight renders the Generative Q&A experience with
+	// this new reader experience topic pre selected.
 	//
 	// The Amazon Resource Name (ARN) of this Q new reader experience topic must be
 	// included in the AuthorizedResourceArns parameter. Otherwise, the request fails
@@ -606,10 +602,10 @@ type AnonymousUserGenerativeQnAEmbeddingConfiguration struct {
 // The settings that you want to use with the Q search bar.
 type AnonymousUserQSearchBarEmbeddingConfiguration struct {
 
-	// The Amazon QuickSight Q topic ID of the legacy topic that you want the
-	// anonymous user to see first. This ID is included in the output URL. When the URL
-	// in response is accessed, Amazon QuickSight renders the Q search bar with this
-	// legacy topic pre-selected.
+	// The QuickSight Q topic ID of the legacy topic that you want the anonymous user
+	// to see first. This ID is included in the output URL. When the URL in response is
+	// accessed, QuickSight renders the Q search bar with this legacy topic
+	// pre-selected.
 	//
 	// The Amazon Resource Name (ARN) of this Q legacy topic must be included in the
 	// AuthorizedResourceArns parameter. Otherwise, the request fails with an
@@ -1176,8 +1172,8 @@ type AssetBundleImportJobDataSourceOverrideParameters struct {
 	// A new name for the data source.
 	Name *string
 
-	// Secure Socket Layer (SSL) properties that apply when Amazon QuickSight connects
-	// to your underlying data source.
+	// Secure Socket Layer (SSL) properties that apply when QuickSight connects to
+	// your underlying data source.
 	SslProperties *SslProperties
 
 	// VPC connection properties.
@@ -1614,8 +1610,8 @@ type AssetBundleImportSourceDescription struct {
 	noSmithyDocumentSerde
 }
 
-// A structure that contains the configuration of a shared link to an Amazon
-// QuickSight dashboard.
+// A structure that contains the configuration of a shared link to an QuickSight
+// dashboard.
 type AssetBundleResourceLinkSharingConfiguration struct {
 
 	// A list of link sharing permissions for the dashboards that you want to apply
@@ -1668,10 +1664,10 @@ type AssetOptions struct {
 type AthenaParameters struct {
 
 	// An optional parameter that configures IAM Identity Center authentication to
-	// grant Amazon QuickSight access to your workgroup.
+	// grant QuickSight access to your workgroup.
 	//
-	// This parameter can only be specified if your Amazon QuickSight account is
-	// configured with IAM Identity Center.
+	// This parameter can only be specified if your QuickSight account is configured
+	// with IAM Identity Center.
 	IdentityCenterConfiguration *IdentityCenterConfiguration
 
 	// Use the RoleArn structure to override an account-wide role for a specific
@@ -2473,7 +2469,7 @@ type BrandDefinition struct {
 // The details of the brand.
 type BrandDetail struct {
 
-	// The ID of the Amazon QuickSight brand.
+	// The ID of the QuickSight brand.
 	//
 	// This member is required.
 	BrandId *string
@@ -2520,7 +2516,7 @@ type BrandSummary struct {
 	// The Amazon Resource Name (ARN) of the brand.
 	Arn *string
 
-	// The ID of the Amazon QuickSight brand.
+	// The ID of the QuickSight brand.
 	BrandId *string
 
 	// The name of the brand.
@@ -2601,11 +2597,14 @@ type CalculatedMeasureField struct {
 	noSmithyDocumentSerde
 }
 
-// A set of actions that correspond to Amazon QuickSight permissions.
+// A set of actions that correspond to QuickSight permissions.
 type Capabilities struct {
 
 	// The ability to add or run anomaly detection.
 	AddOrRunAnomalyDetectionForAnalyses CapabilityState
+
+	// The ability to perform analysis-related actions.
+	Analysis CapabilityState
 
 	// The ability to create and update email reports.
 	CreateAndUpdateDashboardEmailReports CapabilityState
@@ -2627,6 +2626,9 @@ type Capabilities struct {
 
 	// The ability to create shared folders.
 	CreateSharedFolders CapabilityState
+
+	// The ability to perform dashboard-related actions.
+	Dashboard CapabilityState
 
 	// The ability to export to CSV files from the UI.
 	ExportToCsv CapabilityState
@@ -2825,12 +2827,12 @@ type CategoryFilterConfiguration struct {
 	// partially matched.
 	CustomFilterConfiguration *CustomFilterConfiguration
 
-	// A list of custom filter values. In the Amazon QuickSight console, this filter
-	// type is called a custom filter list.
+	// A list of custom filter values. In the QuickSight console, this filter type is
+	// called a custom filter list.
 	CustomFilterListConfiguration *CustomFilterListConfiguration
 
-	// A list of filter configurations. In the Amazon QuickSight console, this filter
-	// type is called a filter list.
+	// A list of filter configurations. In the QuickSight console, this filter type is
+	// called a filter list.
 	FilterListConfiguration *FilterListConfiguration
 
 	noSmithyDocumentSerde
@@ -3061,7 +3063,7 @@ type ColumnLevelPermissionRule struct {
 	// An array of column names.
 	ColumnNames []string
 
-	// An array of Amazon Resource Names (ARNs) for Amazon QuickSight users or groups.
+	// An array of Amazon Resource Names (ARNs) for QuickSight users or groups.
 	Principals []string
 
 	noSmithyDocumentSerde
@@ -3734,6 +3736,15 @@ type CustomColor struct {
 	noSmithyDocumentSerde
 }
 
+// The parameters that are required to connect to a custom connection data source.
+type CustomConnectionParameters struct {
+
+	// The type of custom connector.
+	ConnectionType *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration of a CustomContentVisual .
 type CustomContentConfiguration struct {
 
@@ -4023,11 +4034,17 @@ type DashboardPublishOptions struct {
 	// The data point tool tip options of a dashboard.
 	DataPointTooltipOption *DataPointTooltipOption
 
-	// Adds Q&A capabilities to an Amazon QuickSight dashboard. If no topic is linked,
+	// Adds Q&A capabilities to an QuickSight dashboard. If no topic is linked,
 	// Dashboard Q&A uses the data values that are rendered on the dashboard. End users
 	// can use Dashboard Q&A to ask for different slices of the data that they see on
 	// the dashboard. If a topic is linked, Topic Q&A is used.
 	DataQAEnabledOption *DataQAEnabledOption
+
+	// Data stories sharing option.
+	DataStoriesSharingOption *DataStoriesSharingOption
+
+	// Executive summary option.
+	ExecutiveSummaryOption *ExecutiveSummaryOption
 
 	// Export to .csv option.
 	ExportToCSVOption *ExportToCSVOption
@@ -4285,29 +4302,29 @@ type DashboardVersionSummary struct {
 //   - The VisualId of the visual that you want to embed.
 //
 // The DashboardId , SheetId , and VisualId can be found in the IDs for developers
-// section of the Embed visual pane of the visual's on-visual menu of the Amazon
+// section of the Embed visual pane of the visual's on-visual menu of the
 // QuickSight console. You can also get the DashboardId with a ListDashboards API
 // operation.
 type DashboardVisualId struct {
 
 	// The ID of the dashboard that has the visual that you want to embed. The
 	// DashboardId can be found in the IDs for developers section of the Embed visual
-	// pane of the visual's on-visual menu of the Amazon QuickSight console. You can
-	// also get the DashboardId with a ListDashboards API operation.
+	// pane of the visual's on-visual menu of the QuickSight console. You can also get
+	// the DashboardId with a ListDashboards API operation.
 	//
 	// This member is required.
 	DashboardId *string
 
 	// The ID of the sheet that the has visual that you want to embed. The SheetId can
 	// be found in the IDs for developers section of the Embed visual pane of the
-	// visual's on-visual menu of the Amazon QuickSight console.
+	// visual's on-visual menu of the QuickSight console.
 	//
 	// This member is required.
 	SheetId *string
 
 	// The ID of the visual that you want to embed. The VisualID can be found in the
 	// IDs for developers section of the Embed visual pane of the visual's on-visual
-	// menu of the Amazon QuickSight console.
+	// menu of the QuickSight console.
 	//
 	// This member is required.
 	VisualId *string
@@ -4644,10 +4661,10 @@ type DataQAEnabledOption struct {
 	noSmithyDocumentSerde
 }
 
-// The generative Q&A settings of an embedded Amazon QuickSight console.
+// The generative Q&A settings of an embedded QuickSight console.
 type DataQnAConfigurations struct {
 
-	// The generative Q&A settings of an embedded Amazon QuickSight console.
+	// The generative Q&A settings of an embedded QuickSight console.
 	//
 	// This member is required.
 	Enabled bool
@@ -4998,8 +5015,8 @@ type DataSource struct {
 	// Amazon Secrets Manager.
 	SecretArn *string
 
-	// Secure Socket Layer (SSL) properties that apply when Amazon QuickSight connects
-	// to your underlying source.
+	// Secure Socket Layer (SSL) properties that apply when QuickSight connects to
+	// your underlying source.
 	SslProperties *SslProperties
 
 	// The HTTP status of the request.
@@ -5010,8 +5027,8 @@ type DataSource struct {
 	Type DataSourceType
 
 	// The VPC connection information. You need to use this parameter only when you
-	// want Amazon QuickSight to use a VPC connection when connecting to your
-	// underlying source.
+	// want QuickSight to use a VPC connection when connecting to your underlying
+	// source.
 	VpcConnectionProperties *VpcConnectionProperties
 
 	noSmithyDocumentSerde
@@ -5064,6 +5081,7 @@ type DataSourceErrorInfo struct {
 //	DataSourceParametersMemberAuroraPostgreSqlParameters
 //	DataSourceParametersMemberAwsIotAnalyticsParameters
 //	DataSourceParametersMemberBigQueryParameters
+//	DataSourceParametersMemberCustomConnectionParameters
 //	DataSourceParametersMemberDatabricksParameters
 //	DataSourceParametersMemberExasolParameters
 //	DataSourceParametersMemberImpalaParameters
@@ -5150,6 +5168,15 @@ type DataSourceParametersMemberBigQueryParameters struct {
 }
 
 func (*DataSourceParametersMemberBigQueryParameters) isDataSourceParameters() {}
+
+// The parameters for custom connectors.
+type DataSourceParametersMemberCustomConnectionParameters struct {
+	Value CustomConnectionParameters
+
+	noSmithyDocumentSerde
+}
+
+func (*DataSourceParametersMemberCustomConnectionParameters) isDataSourceParameters() {}
 
 // The parameters that are required to connect to a Databricks data source.
 type DataSourceParametersMemberDatabricksParameters struct {
@@ -5411,13 +5438,22 @@ type DataSourceSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The data story settings of an embedded Amazon QuickSight console.
+// The data story settings of an embedded QuickSight console.
 type DataStoriesConfigurations struct {
 
-	// The data story settings of an embedded Amazon QuickSight console.
+	// The data story settings of an embedded QuickSight console.
 	//
 	// This member is required.
 	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
+// Executive summary option.
+type DataStoriesSharingOption struct {
+
+	// Availability status.
+	AvailabilityStatus DashboardBehavior
 
 	noSmithyDocumentSerde
 }
@@ -6130,8 +6166,8 @@ type DisplayFormatOptions struct {
 // chart. This option isn't available for pie charts.
 type DonutCenterOptions struct {
 
-	// Determines the visibility of the label in a donut chart. In the Amazon
-	// QuickSight console, this option is called 'Show total' .
+	// Determines the visibility of the label in a donut chart. In the QuickSight
+	// console, this option is called 'Show total' .
 	LabelVisibility Visibility
 
 	noSmithyDocumentSerde
@@ -6213,7 +6249,7 @@ type DynamicDefaultValue struct {
 // An empty visual.
 //
 // Empty visuals are used in layouts but have not been configured to show any
-// data. A new visual created in the Amazon QuickSight console is considered an
+// data. A new visual created in the QuickSight console is considered an
 // EmptyVisual until a visual type is selected.
 type EmptyVisual struct {
 
@@ -6297,15 +6333,22 @@ type ExcludePeriodConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The executive summary settings of an embedded Amazon QuickSight console or
-// dashboard.
+// The executive summary settings of an embedded QuickSight console or dashboard.
 type ExecutiveSummaryConfigurations struct {
 
-	// The executive summary settings of an embedded Amazon QuickSight console or
-	// dashboard.
+	// The executive summary settings of an embedded QuickSight console or dashboard.
 	//
 	// This member is required.
 	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
+// Data stories sharing option.
+type ExecutiveSummaryOption struct {
+
+	// Availability status.
+	AvailabilityStatus DashboardBehavior
 
 	noSmithyDocumentSerde
 }
@@ -6357,7 +6400,7 @@ type ExportWithHiddenFieldsOption struct {
 	noSmithyDocumentSerde
 }
 
-// An entry that appears when a KeyRegistration update to Amazon QuickSight fails.
+// An entry that appears when a KeyRegistration update to QuickSight fails.
 type FailedKeyRegistrationEntry struct {
 
 	// A message that provides information about why a FailedKeyRegistrationEntry
@@ -6370,7 +6413,7 @@ type FailedKeyRegistrationEntry struct {
 	// user error. If the value of this property is True , the error was caused by user
 	// error. If the value of this property is False , the error occurred on the
 	// backend. If your job continues fail and with a False SenderFault value, contact
-	// Amazon Web ServicesSupport.
+	// Amazon Web Services Support.
 	//
 	// This member is required.
 	SenderFault bool
@@ -7140,7 +7183,7 @@ type FilterTextFieldControl struct {
 	noSmithyDocumentSerde
 }
 
-// A folder in Amazon QuickSight.
+// A folder in QuickSight.
 type Folder struct {
 
 	// The Amazon Resource Name (ARN) for the folder.
@@ -7170,8 +7213,7 @@ type Folder struct {
 	noSmithyDocumentSerde
 }
 
-// An asset in a Amazon QuickSight folder, such as a dashboard, analysis, or
-// dataset.
+// An asset in a QuickSight folder, such as a dashboard, analysis, or dataset.
 type FolderMember struct {
 
 	// The ID of an asset in the folder.
@@ -7183,7 +7225,7 @@ type FolderMember struct {
 	noSmithyDocumentSerde
 }
 
-// A filter to use to search an Amazon QuickSight folder.
+// A filter to use to search an QuickSight folder.
 type FolderSearchFilter struct {
 
 	// The name of a value that you want to use in the filter. For example, "Name":
@@ -7242,7 +7284,7 @@ type FolderSearchFilter struct {
 	noSmithyDocumentSerde
 }
 
-// A summary of information about an existing Amazon QuickSight folder.
+// A summary of information about an existing QuickSight folder.
 type FolderSummary struct {
 
 	// The Amazon Resource Name (ARN) of the folder.
@@ -7845,10 +7887,10 @@ type GeneratedAnswerResult struct {
 	noSmithyDocumentSerde
 }
 
-// The generative BI authoring settings of an embedded Amazon QuickSight console.
+// The generative BI authoring settings of an embedded QuickSight console.
 type GenerativeAuthoringConfigurations struct {
 
-	// The generative BI authoring settings of an embedded Amazon QuickSight console.
+	// The generative BI authoring settings of an embedded QuickSight console.
 	//
 	// This member is required.
 	Enabled bool
@@ -8556,11 +8598,11 @@ type GridLayoutScreenCanvasSizeOptions struct {
 
 	// This value determines the layout behavior when the viewport is resized.
 	//
-	//   - FIXED : A fixed width will be used when optimizing the layout. In the Amazon
+	//   - FIXED : A fixed width will be used when optimizing the layout. In the
 	//   QuickSight console, this option is called Classic .
 	//
 	//   - RESPONSIVE : The width of the canvas will be responsive and optimized to the
-	//   view port. In the Amazon QuickSight console, this option is called Tiled .
+	//   view port. In the QuickSight console, this option is called Tiled .
 	//
 	// This member is required.
 	ResizeOption ResizeOption
@@ -9475,8 +9517,7 @@ type JoinInstruction struct {
 type JoinKeyProperties struct {
 
 	// A value that indicates that a row in a table is uniquely identified by the
-	// columns in a join key. This is used by Amazon QuickSight to optimize query
-	// performance.
+	// columns in a join key. This is used by QuickSight to optimize query performance.
 	UniqueKey *bool
 
 	noSmithyDocumentSerde
@@ -11360,7 +11401,7 @@ type ParameterListControl struct {
 	noSmithyDocumentSerde
 }
 
-// A list of Amazon QuickSight parameters and the list's override values.
+// A list of QuickSight parameters and the list's override values.
 type Parameters struct {
 
 	// The parameters that have a data type of date-time.
@@ -12153,7 +12194,7 @@ type PivotTotalOptions struct {
 }
 
 // A flexible visualization type that allows engineers to create new custom charts
-// in Amazon QuickSight.
+// in QuickSight.
 type PluginVisual struct {
 
 	// The Amazon Resource Name (ARN) that reflects the plugin and version.
@@ -12368,6 +12409,19 @@ type QAResult struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that contains information about the QDataKey .
+type QDataKey struct {
+
+	// The ARN of the KMS key that is registered to a QuickSight account for
+	// encryption and decryption use as a QDataKey .
+	QDataKeyArn *string
+
+	// The type of QDataKey .
+	QDataKeyType QDataKeyType
+
+	noSmithyDocumentSerde
+}
+
 // A structure that describes the query execution options.
 type QueryExecutionOptions struct {
 
@@ -12576,10 +12630,10 @@ type RdsParameters struct {
 	noSmithyDocumentSerde
 }
 
-// The recent snapshots configuration for an embedded Amazon QuickSight dashboard.
+// The recent snapshots configuration for an embedded QuickSight dashboard.
 type RecentSnapshotsConfigurations struct {
 
-	// The recent snapshots configuration for an embedded Amazon QuickSight dashboard.
+	// The recent snapshots configuration for an embedded QuickSight dashboard.
 	//
 	// This member is required.
 	Enabled bool
@@ -12587,17 +12641,17 @@ type RecentSnapshotsConfigurations struct {
 	noSmithyDocumentSerde
 }
 
-// A structure that grants Amazon QuickSight access to your cluster and make a
-// call to the redshift:GetClusterCredentials API. For more information on the
+// A structure that grants QuickSight access to your cluster and make a call to
+// the redshift:GetClusterCredentials API. For more information on the
 // redshift:GetClusterCredentials API, see [GetClusterCredentials]GetClusterCredentials .
 //
 // [GetClusterCredentials]: https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html
 type RedshiftIAMParameters struct {
 
-	// Use the RoleArn structure to allow Amazon QuickSight to call
+	// Use the RoleArn structure to allow QuickSight to call
 	// redshift:GetClusterCredentials on your cluster. The calling principal must have
-	// iam:PassRole access to pass the role to Amazon QuickSight. The role's trust
-	// policy must allow the Amazon QuickSight service principal to assume the role.
+	// iam:PassRole access to pass the role to QuickSight. The role's trust policy must
+	// allow the QuickSight service principal to assume the role.
 	//
 	// This member is required.
 	RoleArn *string
@@ -12609,17 +12663,17 @@ type RedshiftIAMParameters struct {
 	// create the user.
 	AutoCreateDatabaseUser bool
 
-	// A list of groups whose permissions will be granted to Amazon QuickSight to
-	// access the cluster. These permissions are combined with the permissions granted
-	// to Amazon QuickSight by the DatabaseUser . If you choose to include this
-	// parameter, the RoleArn must grant access to redshift:JoinGroup .
+	// A list of groups whose permissions will be granted to QuickSight to access the
+	// cluster. These permissions are combined with the permissions granted to
+	// QuickSight by the DatabaseUser . If you choose to include this parameter, the
+	// RoleArn must grant access to redshift:JoinGroup .
 	DatabaseGroups []string
 
-	// The user whose permissions and group memberships will be used by Amazon
-	// QuickSight to access the cluster. If this user already exists in your database,
-	// Amazon QuickSight is granted the same permissions that the user has. If the user
-	// doesn't exist, set the value of AutoCreateDatabaseUser to True to create a new
-	// user with PUBLIC permissions.
+	// The user whose permissions and group memberships will be used by QuickSight to
+	// access the cluster. If this user already exists in your database, QuickSight is
+	// granted the same permissions that the user has. If the user doesn't exist, set
+	// the value of AutoCreateDatabaseUser to True to create a new user with PUBLIC
+	// permissions.
 	DatabaseUser *string
 
 	noSmithyDocumentSerde
@@ -12641,17 +12695,17 @@ type RedshiftParameters struct {
 	// Host. This field can be blank if ClusterId is provided.
 	Host *string
 
-	// An optional parameter that uses IAM authentication to grant Amazon QuickSight
-	// access to your cluster. This parameter can be used instead of [DataSourceCredentials].
+	// An optional parameter that uses IAM authentication to grant QuickSight access
+	// to your cluster. This parameter can be used instead of [DataSourceCredentials].
 	//
 	// [DataSourceCredentials]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DataSourceCredentials.html
 	IAMParameters *RedshiftIAMParameters
 
 	// An optional parameter that configures IAM Identity Center authentication to
-	// grant Amazon QuickSight access to your cluster.
+	// grant QuickSight access to your cluster.
 	//
-	// This parameter can only be specified if your Amazon QuickSight account is
-	// configured with IAM Identity Center.
+	// This parameter can only be specified if your QuickSight account is configured
+	// with IAM Identity Center.
 	IdentityCenterConfiguration *IdentityCenterConfiguration
 
 	// Port. This field can be blank if the ClusterId is provided.
@@ -12933,8 +12987,8 @@ type RefreshSchedule struct {
 
 // A customer managed key structure that contains the information listed below:
 //
-//   - KeyArn - The ARN of a KMS key that is registered to a Amazon QuickSight
-//     account for encryption and decryption use.
+//   - KeyArn - The ARN of a KMS key that is registered to a QuickSight account for
+//     encryption and decryption use.
 //
 //   - DefaultKey - Indicates whether the current key is set as the default key for
 //     encryption and decryption use.
@@ -12944,32 +12998,32 @@ type RegisteredCustomerManagedKey struct {
 	// encryption and decryption use.
 	DefaultKey bool
 
-	// The ARN of the KMS key that is registered to a Amazon QuickSight account for
+	// The ARN of the KMS key that is registered to a QuickSight account for
 	// encryption and decryption use.
 	KeyArn *string
 
 	noSmithyDocumentSerde
 }
 
-// The feature configurations of an embedded Amazon QuickSight console.
+// The feature configurations of an embedded QuickSight console.
 type RegisteredUserConsoleFeatureConfigurations struct {
 
-	// The Amazon Q configurations of an embedded Amazon QuickSight console.
+	// The Amazon Q configurations of an embedded QuickSight console.
 	AmazonQInQuickSight *AmazonQInQuickSightConsoleConfigurations
 
-	// The recent snapshots configuration for an embedded Amazon QuickSight dashboard.
+	// The recent snapshots configuration for an embedded QuickSight dashboard.
 	RecentSnapshots *RecentSnapshotsConfigurations
 
-	// The schedules configuration for an embedded Amazon QuickSight dashboard.
+	// The schedules configuration for an embedded QuickSight dashboard.
 	Schedules *SchedulesConfigurations
 
 	// The shared view settings of an embedded dashboard.
 	SharedView *SharedViewConfigurations
 
-	// The state persistence configurations of an embedded Amazon QuickSight console.
+	// The state persistence configurations of an embedded QuickSight console.
 	StatePersistence *StatePersistenceConfigurations
 
-	// The threshold alerts configuration for an embedded Amazon QuickSight dashboard.
+	// The threshold alerts configuration for an embedded QuickSight dashboard.
 	ThresholdAlerts *ThresholdAlertsConfigurations
 
 	noSmithyDocumentSerde
@@ -12979,8 +13033,8 @@ type RegisteredUserConsoleFeatureConfigurations struct {
 type RegisteredUserDashboardEmbeddingConfiguration struct {
 
 	// The dashboard ID for the dashboard that you want the user to see first. This ID
-	// is included in the output URL. When the URL in response is accessed, Amazon
-	// QuickSight renders this dashboard if the user has permissions to view it.
+	// is included in the output URL. When the URL in response is accessed, QuickSight
+	// renders this dashboard if the user has permissions to view it.
 	//
 	// If the user does not have permission to view this dashboard, they see a
 	// permissions error message.
@@ -12988,7 +13042,7 @@ type RegisteredUserDashboardEmbeddingConfiguration struct {
 	// This member is required.
 	InitialDashboardId *string
 
-	// The feature configurations of an embbedded Amazon QuickSight dashboard.
+	// The feature configurations of an embbedded QuickSight dashboard.
 	FeatureConfigurations *RegisteredUserDashboardFeatureConfigurations
 
 	noSmithyDocumentSerde
@@ -12997,16 +13051,16 @@ type RegisteredUserDashboardEmbeddingConfiguration struct {
 // The feature configuration for an embedded dashboard.
 type RegisteredUserDashboardFeatureConfigurations struct {
 
-	// The Amazon Q configurations of an embedded Amazon QuickSight dashboard.
+	// The Amazon Q configurations of an embedded QuickSight dashboard.
 	AmazonQInQuickSight *AmazonQInQuickSightDashboardConfigurations
 
-	// The bookmarks configuration for an embedded dashboard in Amazon QuickSight.
+	// The bookmarks configuration for an embedded dashboard in QuickSight.
 	Bookmarks *BookmarksConfigurations
 
-	// The recent snapshots configuration for an Amazon QuickSight embedded dashboard
+	// The recent snapshots configuration for an QuickSight embedded dashboard
 	RecentSnapshots *RecentSnapshotsConfigurations
 
-	// The schedules configuration for an embedded Amazon QuickSight dashboard.
+	// The schedules configuration for an embedded QuickSight dashboard.
 	Schedules *SchedulesConfigurations
 
 	// The shared view settings of an embedded dashboard.
@@ -13015,7 +13069,7 @@ type RegisteredUserDashboardFeatureConfigurations struct {
 	// The state persistence settings of an embedded dashboard.
 	StatePersistence *StatePersistenceConfigurations
 
-	// The threshold alerts configuration for an Amazon QuickSight embedded dashboard.
+	// The threshold alerts configuration for an QuickSight embedded dashboard.
 	ThresholdAlerts *ThresholdAlertsConfigurations
 
 	noSmithyDocumentSerde
@@ -13026,8 +13080,8 @@ type RegisteredUserDashboardFeatureConfigurations struct {
 type RegisteredUserDashboardVisualEmbeddingConfiguration struct {
 
 	// The visual ID for the visual that you want the user to embed. This ID is
-	// included in the output URL. When the URL in response is accessed, Amazon
-	// QuickSight renders this visual.
+	// included in the output URL. When the URL in response is accessed, QuickSight
+	// renders this visual.
 	//
 	// The Amazon Resource Name (ARN) of the dashboard that the visual belongs to must
 	// be included in the AuthorizedResourceArns parameter. Otherwise, the request
@@ -13040,7 +13094,7 @@ type RegisteredUserDashboardVisualEmbeddingConfiguration struct {
 }
 
 // The type of experience you want to embed. For registered users, you can embed
-// Amazon QuickSight dashboards or the Amazon QuickSight console.
+// QuickSight dashboards or the QuickSight console.
 //
 // Exactly one of the experience configurations is required. You can choose
 // Dashboard or QuickSightConsole . You cannot choose more than one experience
@@ -13050,40 +13104,38 @@ type RegisteredUserEmbeddingExperienceConfiguration struct {
 	// The configuration details for providing a dashboard embedding experience.
 	Dashboard *RegisteredUserDashboardEmbeddingConfiguration
 
-	// The type of embedding experience. In this case, Amazon QuickSight visuals.
+	// The type of embedding experience. In this case, QuickSight visuals.
 	DashboardVisual *RegisteredUserDashboardVisualEmbeddingConfiguration
 
 	// The configuration details for embedding the Generative Q&A experience.
 	//
 	// For more information about embedding the Generative Q&A experience, see [Embedding Overview] in the
-	// Amazon QuickSight User Guide.
+	// QuickSight User Guide.
 	//
 	// [Embedding Overview]: https://docs.aws.amazon.com/quicksight/latest/user/embedding-overview.html
 	GenerativeQnA *RegisteredUserGenerativeQnAEmbeddingConfiguration
 
 	// The configuration details for embedding the Q search bar.
 	//
-	// For more information about embedding the Q search bar, see [Embedding Overview] in the Amazon
-	// QuickSight User Guide.
+	// For more information about embedding the Q search bar, see [Embedding Overview] in the QuickSight
+	// User Guide.
 	//
 	// [Embedding Overview]: https://docs.aws.amazon.com/quicksight/latest/user/embedding-overview.html
 	QSearchBar *RegisteredUserQSearchBarEmbeddingConfiguration
 
-	// The configuration details for providing each Amazon QuickSight console
-	// embedding experience. This can be used along with custom permissions to restrict
-	// access to certain features. For more information, see [Customizing Access to the Amazon QuickSight Console]in the Amazon QuickSight
-	// User Guide.
+	// The configuration details for providing each QuickSight console embedding
+	// experience. This can be used along with custom permissions to restrict access to
+	// certain features. For more information, see [Customizing Access to the QuickSight Console]in the Amazon QuickSight User Guide.
 	//
 	// Use [GenerateEmbedUrlForRegisteredUser] where you want to provide an authoring portal that allows users to create
 	// data sources, datasets, analyses, and dashboards. The users who accesses an
-	// embedded Amazon QuickSight console needs to belong to the author or admin
-	// security cohort. If you want to restrict permissions to some of these features,
-	// add a custom permissions profile to the user with the [UpdateUser]API operation. Use the [RegisterUser]
-	// API operation to add a new user with a custom permission profile attached. For
-	// more information, see the following sections in the Amazon QuickSight User
-	// Guide:
+	// embedded QuickSight console needs to belong to the author or admin security
+	// cohort. If you want to restrict permissions to some of these features, add a
+	// custom permissions profile to the user with the [UpdateUser]API operation. Use the [RegisterUser] API
+	// operation to add a new user with a custom permission profile attached. For more
+	// information, see the following sections in the Amazon QuickSight User Guide:
 	//
-	// [Embedding the Full Functionality of the Amazon QuickSight Console for Authenticated Users]
+	// [Embedding the Full Functionality of the QuickSight Console for Authenticated Users]
 	//
 	// [Customizing Access to the Amazon QuickSight Console]
 	//
@@ -13092,7 +13144,8 @@ type RegisteredUserEmbeddingExperienceConfiguration struct {
 	//
 	// [Customizing Access to the Amazon QuickSight Console]: https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html
 	// [Amazon QuickSight Developer Portal]: https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html
-	// [Embedding the Full Functionality of the Amazon QuickSight Console for Authenticated Users]: https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-full-console-for-authenticated-users.html
+	// [Embedding the Full Functionality of the QuickSight Console for Authenticated Users]: https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-full-console-for-authenticated-users.html
+	// [Customizing Access to the QuickSight Console]: https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html
 	// [UpdateUser]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateUser.html
 	// [GenerateEmbedUrlForRegisteredUser]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForRegisteredUser.html
 	// [RegisterUser]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_RegisterUser.html
@@ -13107,8 +13160,8 @@ type RegisteredUserGenerativeQnAEmbeddingConfiguration struct {
 
 	// The ID of the new Q reader experience topic that you want to make the starting
 	// topic in the Generative Q&A experience. You can find a topic ID by navigating to
-	// the Topics pane in the Amazon QuickSight application and opening a topic. The ID
-	// is in the URL for the topic that you open.
+	// the Topics pane in the QuickSight application and opening a topic. The ID is in
+	// the URL for the topic that you open.
 	//
 	// If you don't specify an initial topic or you specify a legacy topic, a list of
 	// all shared new reader experience topics is shown in the Generative Q&A
@@ -13125,7 +13178,7 @@ type RegisteredUserQSearchBarEmbeddingConfiguration struct {
 
 	// The ID of the legacy Q topic that you want to use as the starting topic in the
 	// Q search bar. To locate the topic ID of the topic that you want to use, open the
-	// [Amazon QuickSight console], navigate to the Topics pane, and choose thre topic that you want to use. The
+	// [QuickSight console], navigate to the Topics pane, and choose thre topic that you want to use. The
 	// TopicID is located in the URL of the topic that opens. When you select an
 	// initial topic, you can specify whether or not readers are allowed to select
 	// other topics from the list of available topics.
@@ -13133,19 +13186,19 @@ type RegisteredUserQSearchBarEmbeddingConfiguration struct {
 	// If you don't specify an initial topic or if you specify a new reader experience
 	// topic, a list of all shared legacy topics is shown in the Q bar.
 	//
-	// [Amazon QuickSight console]: https://quicksight.aws.amazon.com/
+	// [QuickSight console]: https://quicksight.aws.amazon.com/
 	InitialTopicId *string
 
 	noSmithyDocumentSerde
 }
 
-// Information about the Amazon QuickSight console that you want to embed.
+// Information about the QuickSight console that you want to embed.
 type RegisteredUserQuickSightConsoleEmbeddingConfiguration struct {
 
-	// The embedding configuration of an embedded Amazon QuickSight console.
+	// The embedding configuration of an embedded QuickSight console.
 	FeatureConfigurations *RegisteredUserConsoleFeatureConfigurations
 
-	// The initial URL path for the Amazon QuickSight console. InitialPath is required.
+	// The initial URL path for the QuickSight console. InitialPath is required.
 	//
 	// The entry point URL is constrained to the following paths:
 	//
@@ -13157,11 +13210,11 @@ type RegisteredUserQuickSightConsoleEmbeddingConfiguration struct {
 	//
 	//   - /start/favorites
 	//
-	//   - /dashboards/DashboardId . DashboardId is the actual ID key from the Amazon
+	//   - /dashboards/DashboardId . DashboardId is the actual ID key from the
 	//   QuickSight console URL of the dashboard.
 	//
-	//   - /analyses/AnalysisId . AnalysisId is the actual ID key from the Amazon
-	//   QuickSight console URL of the analysis.
+	//   - /analyses/AnalysisId . AnalysisId is the actual ID key from the QuickSight
+	//   console URL of the analysis.
 	InitialPath *string
 
 	noSmithyDocumentSerde
@@ -13453,7 +13506,7 @@ type RowLevelPermissionTagRule struct {
 
 // An optional structure that contains the Amazon S3 bucket configuration that the
 // generated snapshots are stored in. If you don't provide this information,
-// generated snapshots are stored in the default Amazon QuickSight bucket.
+// generated snapshots are stored in the default QuickSight bucket.
 type S3BucketConfiguration struct {
 
 	// The name of an existing Amazon S3 bucket where the generated snapshot artifacts
@@ -13480,7 +13533,7 @@ type S3BucketConfiguration struct {
 type S3Parameters struct {
 
 	// Location of the Amazon S3 manifest file. This is NULL if the manifest file was
-	// uploaded into Amazon QuickSight.
+	// uploaded into QuickSight.
 	//
 	// This member is required.
 	ManifestFileLocation *ManifestFileLocation
@@ -13794,10 +13847,10 @@ type ScheduleRefreshOnEntity struct {
 	noSmithyDocumentSerde
 }
 
-// The schedules configuration for an embedded Amazon QuickSight dashboard.
+// The schedules configuration for an embedded QuickSight dashboard.
 type SchedulesConfigurations struct {
 
-	// The schedules configuration for an embedded Amazon QuickSight dashboard.
+	// The schedules configuration for an embedded QuickSight dashboard.
 	//
 	// This member is required.
 	Enabled bool
@@ -14080,7 +14133,7 @@ type Sheet struct {
 	// A list of images on a sheet.
 	Images []SheetImage
 
-	// The name of a sheet. This name is displayed on the sheet's tab in the Amazon
+	// The name of a sheet. This name is displayed on the sheet's tab in the
 	// QuickSight console.
 	Name *string
 
@@ -14174,7 +14227,7 @@ type SheetDefinition struct {
 	// [Types of layout]: https://docs.aws.amazon.com/quicksight/latest/user/types-of-layout.html
 	Layouts []Layout
 
-	// The name of the sheet. This name is displayed on the sheet's tab in the Amazon
+	// The name of the sheet. This name is displayed on the sheet's tab in the
 	// QuickSight console.
 	Name *string
 
@@ -14407,19 +14460,17 @@ type ShortFormatText struct {
 // A SignupResponse object that contains a summary of a newly created account.
 type SignupResponse struct {
 
-	// The name of your Amazon QuickSight account.
+	// The name of your QuickSight account.
 	AccountName *string
 
-	// The type of Active Directory that is being used to authenticate the Amazon
-	// QuickSight account. Valid values are SIMPLE_AD , AD_CONNECTOR , and MICROSOFT_AD
-	// .
+	// The type of Active Directory that is being used to authenticate the QuickSight
+	// account. Valid values are SIMPLE_AD , AD_CONNECTOR , and MICROSOFT_AD .
 	DirectoryType *string
 
-	// A Boolean that is TRUE if the Amazon QuickSight uses IAM as an authentication
-	// method.
+	// A Boolean that is TRUE if the QuickSight uses IAM as an authentication method.
 	IAMUser bool
 
-	// The user login name for your Amazon QuickSight account.
+	// The user login name for your QuickSight account.
 	UserLoginName *string
 
 	noSmithyDocumentSerde
@@ -14521,8 +14572,8 @@ type SnapshotAnonymousUser struct {
 	// DataSet$RowLevelPermissionTagConfiguration API call.
 	//
 	// These are not the tags that are used for Amazon Web Services resource tagging.
-	// For more information on row level security in Amazon QuickSight, see [Using Row-Level Security (RLS) with Tags]in the
-	// Amazon QuickSight User Guide.
+	// For more information on row level security in QuickSight, see [Using Row-Level Security (RLS) with Tags]in the Amazon
+	// QuickSight User Guide.
 	//
 	// [Using Row-Level Security (RLS) with Tags]: https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-rls-tags.html
 	RowLevelPermissionTags []SessionTag
@@ -14554,7 +14605,7 @@ type SnapshotConfiguration struct {
 	// generated snapshot is stored in.
 	DestinationConfiguration *SnapshotDestinationConfiguration
 
-	// A list of Amazon QuickSight parameters and the list's override values.
+	// A list of QuickSight parameters and the list's override values.
 	Parameters *Parameters
 
 	noSmithyDocumentSerde
@@ -14768,7 +14819,7 @@ type SnowflakeParameters struct {
 	DatabaseAccessControlRole *string
 
 	// An object that contains information needed to create a data source connection
-	// between an Amazon QuickSight account and Snowflake.
+	// between an QuickSight account and Snowflake.
 	OAuthParameters *OAuthParameters
 
 	noSmithyDocumentSerde
@@ -14843,8 +14894,8 @@ type SqlServerParameters struct {
 	noSmithyDocumentSerde
 }
 
-// Secure Socket Layer (SSL) properties that apply when Amazon QuickSight connects
-// to your underlying data source.
+// Secure Socket Layer (SSL) properties that apply when QuickSight connects to
+// your underlying data source.
 type SslProperties struct {
 
 	// A Boolean option to control whether SSL should be disabled.
@@ -14879,7 +14930,7 @@ type StarburstParameters struct {
 	DatabaseAccessControlRole *string
 
 	// An object that contains information needed to create a data source connection
-	// between an Amazon QuickSight account and Starburst.
+	// between an QuickSight account and Starburst.
 	OAuthParameters *OAuthParameters
 
 	// The product type for the Starburst data source.
@@ -14891,8 +14942,8 @@ type StarburstParameters struct {
 // The state perssitence configuration of an embedded dashboard.
 type StatePersistenceConfigurations struct {
 
-	// Determines if a Amazon QuickSight dashboard's state persistence settings are
-	// turned on or off.
+	// Determines if a QuickSight dashboard's state persistence settings are turned on
+	// or off.
 	//
 	// This member is required.
 	Enabled bool
@@ -15119,7 +15170,7 @@ type SucceededTopicReviewedAnswer struct {
 }
 
 // A success entry that occurs when a KeyRegistration job is successfully applied
-// to the Amazon QuickSight account.
+// to the QuickSight account.
 type SuccessfulKeyRegistrationEntry struct {
 
 	// The ARN of the KMS key that is associated with the
@@ -15591,12 +15642,12 @@ type TagColumnOperation struct {
 	noSmithyDocumentSerde
 }
 
-// A template object. A template is an entity in Amazon QuickSight that
-// encapsulates the metadata required to create an analysis and that you can use to
-// create a dashboard. A template adds a layer of abstraction by using placeholders
-// to replace the dataset associated with an analysis. You can use templates to
-// create dashboards by replacing dataset placeholders with datasets that follow
-// the same schema that was used to create the source analysis and template.
+// A template object. A template is an entity in QuickSight that encapsulates the
+// metadata required to create an analysis and that you can use to create a
+// dashboard. A template adds a layer of abstraction by using placeholders to
+// replace the dataset associated with an analysis. You can use templates to create
+// dashboards by replacing dataset placeholders with datasets that follow the same
+// schema that was used to create the source analysis and template.
 //
 // You can share templates across Amazon Web Services accounts by allowing users
 // in other Amazon Web Services accounts to create a template or a dashboard from
@@ -16044,7 +16095,7 @@ type ThemeVersion struct {
 	Arn *string
 
 	// The Amazon QuickSight-defined ID of the theme that a custom theme inherits
-	// from. All themes initially inherit from a default Amazon QuickSight theme.
+	// from. All themes initially inherit from a default QuickSight theme.
 	BaseThemeId *string
 
 	// The theme configuration, which contains all the theme display properties.
@@ -16107,10 +16158,10 @@ type ThousandSeparatorOptions struct {
 	noSmithyDocumentSerde
 }
 
-// The threshold alerts configuration for an embedded Amazon QuickSight dashboard.
+// The threshold alerts configuration for an embedded QuickSight dashboard.
 type ThresholdAlertsConfigurations struct {
 
-	// The threshold alerts configuration for an embedded Amazon QuickSight dashboard.
+	// The threshold alerts configuration for an embedded QuickSight dashboard.
 	//
 	// This member is required.
 	Enabled bool
@@ -16718,6 +16769,9 @@ type TopicFilter struct {
 	// RELATIVE_DATE_FILTER .
 	FilterType NamedFilterType
 
+	// The null filter.
+	NullFilter *TopicNullFilter
+
 	// The numeric equality filter.
 	NumericEqualityFilter *TopicNumericEqualityFilter
 
@@ -16923,6 +16977,23 @@ type TopicNamedEntity struct {
 
 	// The type of named entity that a topic represents.
 	SemanticEntityType *SemanticEntityType
+
+	noSmithyDocumentSerde
+}
+
+// The structure that represents a null filter.
+type TopicNullFilter struct {
+
+	// A structure that represents a singular filter constant, used in filters to
+	// specify a single value to match against.
+	Constant *TopicSingularFilterConstant
+
+	// A Boolean value that indicates if the filter is inverse.
+	Inverse bool
+
+	// The type of the null filter. Valid values for this type are NULLS_ONLY ,
+	// NON_NULLS_ONLY , and ALL_VALUES .
+	NullFilterType NullFilterType
 
 	noSmithyDocumentSerde
 }
@@ -17743,12 +17814,12 @@ type User struct {
 	//   - AUTHOR : A user who can create data sources, datasets, analyses, and
 	//   dashboards.
 	//
-	//   - ADMIN : A user who is an author, who can also manage Amazon Amazon
-	//   QuickSight settings.
+	//   - ADMIN : A user who is an author, who can also manage Amazon QuickSight
+	//   settings.
 	//
 	//   - READER_PRO : Reader Pro adds Generative BI capabilities to the Reader role.
-	//   Reader Pros have access to Amazon Q in Amazon QuickSight, can build stories with
-	//   Amazon Q, and can generate executive summaries from dashboards.
+	//   Reader Pros have access to Amazon Q in QuickSight, can build stories with Amazon
+	//   Q, and can generate executive summaries from dashboards.
 	//
 	//   - AUTHOR_PRO : Author Pro adds Generative BI capabilities to the Author role.
 	//   Author Pros can author dashboards with natural language with Amazon Q, build
@@ -17764,8 +17835,8 @@ type User struct {
 	Role UserRole
 
 	// The user's user name. This value is required if you are registering a user that
-	// will be managed in Amazon QuickSight. In the output, the value for UserName is
-	// N/A when the value for IdentityType is IAM and the corresponding IAM user is
+	// will be managed in QuickSight. In the output, the value for UserName is N/A
+	// when the value for IdentityType is IAM and the corresponding IAM user is
 	// deleted.
 	UserName *string
 

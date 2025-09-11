@@ -100,9 +100,9 @@ func (e *TagPolicyException) ErrorCode() string {
 }
 func (e *TagPolicyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The CreateEnvironmentHost operation couldn't be performed because the service
-// is throttling requests. This exception is thrown when the CreateEnvironmentHost
-// request exceeds concurrency of 1 transaction per second (TPS).
+// The operation couldn't be performed because the service is throttling requests.
+// This exception is thrown when there are too many requests accepted concurrently
+// from the service endpoint.
 type ThrottlingException struct {
 	Message *string
 

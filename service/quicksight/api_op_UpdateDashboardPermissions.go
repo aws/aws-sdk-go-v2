@@ -63,7 +63,7 @@ type UpdateDashboardPermissionsOutput struct {
 	// The ID for the dashboard.
 	DashboardId *string
 
-	// Updates the permissions of a shared link to an Amazon QuickSight dashboard.
+	// Updates the permissions of a shared link to an QuickSight dashboard.
 	LinkSharingConfiguration *types.LinkSharingConfiguration
 
 	// Information about the permissions on the dashboard.

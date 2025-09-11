@@ -398,6 +398,18 @@ func TestCheckSnapshot_DeleteAccountCustomization(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteAccountCustomPermission(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAccountCustomPermission(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAccountCustomPermission")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteAccountSubscription(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteAccountSubscription(context.Background(), nil, func(o *Options) {
@@ -763,6 +775,18 @@ func TestCheckSnapshot_DescribeAccountCustomization(t *testing.T) {
 	_, err := svc.DescribeAccountCustomization(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeAccountCustomization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeAccountCustomPermission(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAccountCustomPermission(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeAccountCustomPermission")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2054,6 +2078,18 @@ func TestCheckSnapshot_UpdateAccountCustomization(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateAccountCustomPermission(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAccountCustomPermission(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateAccountCustomPermission")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateAccountSettings(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateAccountSettings(context.Background(), nil, func(o *Options) {
@@ -2905,6 +2941,18 @@ func TestUpdateSnapshot_DeleteAccountCustomization(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteAccountCustomPermission(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAccountCustomPermission(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAccountCustomPermission")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteAccountSubscription(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteAccountSubscription(context.Background(), nil, func(o *Options) {
@@ -3270,6 +3318,18 @@ func TestUpdateSnapshot_DescribeAccountCustomization(t *testing.T) {
 	_, err := svc.DescribeAccountCustomization(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeAccountCustomization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeAccountCustomPermission(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAccountCustomPermission(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeAccountCustomPermission")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4554,6 +4614,18 @@ func TestUpdateSnapshot_UpdateAccountCustomization(t *testing.T) {
 	_, err := svc.UpdateAccountCustomization(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateAccountCustomization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateAccountCustomPermission(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAccountCustomPermission(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateAccountCustomPermission")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -53,7 +53,7 @@ type CreateIAMPolicyAssignmentInput struct {
 	AssignmentStatus types.AssignmentStatus
 
 	// The ID of the Amazon Web Services account where you want to assign an IAM
-	// policy to Amazon QuickSight users or groups.
+	// policy to QuickSight users or groups.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -63,11 +63,10 @@ type CreateIAMPolicyAssignmentInput struct {
 	// This member is required.
 	Namespace *string
 
-	// The Amazon QuickSight users, groups, or both that you want to assign the policy
-	// to.
+	// The QuickSight users, groups, or both that you want to assign the policy to.
 	Identities map[string][]string
 
-	// The ARN for the IAM policy to apply to the Amazon QuickSight users and groups
+	// The ARN for the IAM policy to apply to the QuickSight users and groups
 	// specified in this assignment.
 	PolicyArn *string
 
@@ -94,11 +93,11 @@ type CreateIAMPolicyAssignmentOutput struct {
 	//   the data source.
 	AssignmentStatus types.AssignmentStatus
 
-	// The Amazon QuickSight users, groups, or both that the IAM policy is assigned to.
+	// The QuickSight users, groups, or both that the IAM policy is assigned to.
 	Identities map[string][]string
 
-	// The ARN for the IAM policy that is applied to the Amazon QuickSight users and
-	// groups specified in this assignment.
+	// The ARN for the IAM policy that is applied to the QuickSight users and groups
+	// specified in this assignment.
 	PolicyArn *string
 
 	// The Amazon Web Services request ID for this operation.

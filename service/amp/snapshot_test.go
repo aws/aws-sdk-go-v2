@@ -206,6 +206,18 @@ func TestCheckSnapshot_DeleteScraper(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteScraperLoggingConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteScraperLoggingConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteScraperLoggingConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteWorkspace(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteWorkspace(context.Background(), nil, func(o *Options) {
@@ -283,6 +295,18 @@ func TestCheckSnapshot_DescribeScraper(t *testing.T) {
 	_, err := svc.DescribeScraper(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeScraper")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeScraperLoggingConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeScraperLoggingConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeScraperLoggingConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -470,6 +494,18 @@ func TestCheckSnapshot_UpdateScraper(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateScraperLoggingConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateScraperLoggingConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateScraperLoggingConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateWorkspaceAlias(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateWorkspaceAlias(context.Background(), nil, func(o *Options) {
@@ -637,6 +673,18 @@ func TestUpdateSnapshot_DeleteScraper(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteScraperLoggingConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteScraperLoggingConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteScraperLoggingConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteWorkspace(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteWorkspace(context.Background(), nil, func(o *Options) {
@@ -714,6 +762,18 @@ func TestUpdateSnapshot_DescribeScraper(t *testing.T) {
 	_, err := svc.DescribeScraper(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeScraper")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeScraperLoggingConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeScraperLoggingConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeScraperLoggingConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -894,6 +954,18 @@ func TestUpdateSnapshot_UpdateScraper(t *testing.T) {
 	_, err := svc.UpdateScraper(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateScraper")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateScraperLoggingConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateScraperLoggingConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateScraperLoggingConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

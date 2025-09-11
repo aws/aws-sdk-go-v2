@@ -55,6 +55,22 @@ type ConnectivityInfo struct {
 	noSmithyDocumentSerde
 }
 
+// An Elastic IP address association with the elastic network interface in the
+// VLAN subnet.
+type EipAssociation struct {
+
+	// The Elastic IP address allocation ID.
+	AllocationId *string
+
+	// A unique ID for the elastic IP address association with the VLAN subnet.
+	AssociationId *string
+
+	// The Elastic IP address.
+	IpAddress *string
+
+	noSmithyDocumentSerde
+}
+
 // An object that represents an Amazon EVS environment.
 type Environment struct {
 
@@ -321,6 +337,18 @@ type InitialVlans struct {
 	// Network Extension (NE) to reach their peers and enable HCX Service Mesh
 	// creation.
 	//
+	// If you plan to use a public HCX VLAN subnet, the following requirements must be
+	// met:
+	//
+	//   - Must have a /28 netmask and be allocated from the IPAM public pool.
+	//   Required for HCX internet access configuration.
+	//
+	//   - The HCX public VLAN CIDR block must be added to the VPC as a secondary CIDR
+	//   block.
+	//
+	//   - Must have at least three Elastic IP addresses to be allocated from the
+	//   public IPAM pool for HCX components.
+	//
 	// This member is required.
 	Hcx *InitialVlanInfo
 
@@ -358,6 +386,13 @@ type InitialVlans struct {
 	//
 	// This member is required.
 	VmkManagement *InitialVlanInfo
+
+	// A unique ID for a network access control list that the HCX VLAN uses. Required
+	// when isHcxPublic is set to true .
+	HcxNetworkAclId *string
+
+	// Determines if the HCX VLAN that Amazon EVS provisions is public or private.
+	IsHcxPublic bool
 
 	noSmithyDocumentSerde
 }
@@ -508,12 +543,21 @@ type Vlan struct {
 	// The date and time that the VLAN was created.
 	CreatedAt *time.Time
 
+	// An array of Elastic IP address associations.
+	EipAssociations []EipAssociation
+
 	// The VMware VCF traffic type that is carried over the VLAN. For example, a VLAN
 	// with a functionName of hcx is being used to carry VMware HCX traffic.
 	FunctionName *string
 
+	// Determines if the VLAN that Amazon EVS provisions is public or private.
+	IsPublic *bool
+
 	//  The date and time that the VLAN was modified.
 	ModifiedAt *time.Time
+
+	// A unique ID for a network access control list.
+	NetworkAclId *string
 
 	// The state details of the VLAN.
 	StateDetails *string

@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an Amazon QuickSight application with a token exchange grant. This
-// operation only supports Amazon QuickSight applications that are registered with
-// IAM Identity Center.
+// Updates an QuickSight application with a token exchange grant. This operation
+// only supports QuickSight applications that are registered with IAM Identity
+// Center.
 func (c *Client) UpdateApplicationWithTokenExchangeGrant(ctx context.Context, params *UpdateApplicationWithTokenExchangeGrantInput, optFns ...func(*Options)) (*UpdateApplicationWithTokenExchangeGrantOutput, error) {
 	if params == nil {
 		params = &UpdateApplicationWithTokenExchangeGrantInput{}
@@ -36,7 +36,7 @@ type UpdateApplicationWithTokenExchangeGrantInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// The namespace of the Amazon QuickSight application.
+	// The namespace of the QuickSight application.
 	//
 	// This member is required.
 	Namespace *string

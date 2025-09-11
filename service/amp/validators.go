@@ -230,6 +230,26 @@ func (m *validateOpDeleteScraper) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteScraperLoggingConfiguration struct {
+}
+
+func (*validateOpDeleteScraperLoggingConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteScraperLoggingConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteScraperLoggingConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteScraperLoggingConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteWorkspace struct {
 }
 
@@ -365,6 +385,26 @@ func (m *validateOpDescribeScraper) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeScraperInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeScraperLoggingConfiguration struct {
+}
+
+func (*validateOpDescribeScraperLoggingConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeScraperLoggingConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeScraperLoggingConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeScraperLoggingConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -610,6 +650,26 @@ func (m *validateOpUpdateScraper) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateScraperLoggingConfiguration struct {
+}
+
+func (*validateOpUpdateScraperLoggingConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateScraperLoggingConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateScraperLoggingConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateScraperLoggingConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateWorkspaceAlias struct {
 }
 
@@ -694,6 +754,10 @@ func addOpDeleteScraperValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteScraper{}, middleware.After)
 }
 
+func addOpDeleteScraperLoggingConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteScraperLoggingConfiguration{}, middleware.After)
+}
+
 func addOpDeleteWorkspaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteWorkspace{}, middleware.After)
 }
@@ -720,6 +784,10 @@ func addOpDescribeRuleGroupsNamespaceValidationMiddleware(stack *middleware.Stac
 
 func addOpDescribeScraperValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeScraper{}, middleware.After)
+}
+
+func addOpDescribeScraperLoggingConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeScraperLoggingConfiguration{}, middleware.After)
 }
 
 func addOpDescribeWorkspaceConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -768,6 +836,10 @@ func addOpUpdateQueryLoggingConfigurationValidationMiddleware(stack *middleware.
 
 func addOpUpdateScraperValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateScraper{}, middleware.After)
+}
+
+func addOpUpdateScraperLoggingConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateScraperLoggingConfiguration{}, middleware.After)
 }
 
 func addOpUpdateWorkspaceAliasValidationMiddleware(stack *middleware.Stack) error {
@@ -930,6 +1002,57 @@ func validateLoggingFilter(v *types.LoggingFilter) error {
 	invalidParams := smithy.InvalidParamsError{Context: "LoggingFilter"}
 	if v.QspThreshold == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QspThreshold"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScraperComponent(v *types.ScraperComponent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScraperComponent"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScraperComponents(v []types.ScraperComponent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScraperComponents"}
+	for i := range v {
+		if err := validateScraperComponent(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScraperLoggingDestination(v types.ScraperLoggingDestination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScraperLoggingDestination"}
+	switch uv := v.(type) {
+	case *types.ScraperLoggingDestinationMemberCloudWatchLogs:
+		if err := validateCloudWatchLogDestination(&uv.Value); err != nil {
+			invalidParams.AddNested("[cloudWatchLogs]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1158,6 +1281,21 @@ func validateOpDeleteScraperInput(v *DeleteScraperInput) error {
 	}
 }
 
+func validateOpDeleteScraperLoggingConfigurationInput(v *DeleteScraperLoggingConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteScraperLoggingConfigurationInput"}
+	if v.ScraperId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScraperId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteWorkspaceInput(v *DeleteWorkspaceInput) error {
 	if v == nil {
 		return nil
@@ -1256,6 +1394,21 @@ func validateOpDescribeScraperInput(v *DescribeScraperInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeScraperInput"}
+	if v.ScraperId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScraperId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeScraperLoggingConfigurationInput(v *DescribeScraperLoggingConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeScraperLoggingConfigurationInput"}
 	if v.ScraperId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ScraperId"))
 	}
@@ -1470,6 +1623,33 @@ func validateOpUpdateScraperInput(v *UpdateScraperInput) error {
 	if v.Destination != nil {
 		if err := validateDestination(v.Destination); err != nil {
 			invalidParams.AddNested("Destination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateScraperLoggingConfigurationInput(v *UpdateScraperLoggingConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateScraperLoggingConfigurationInput"}
+	if v.ScraperId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScraperId"))
+	}
+	if v.LoggingDestination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LoggingDestination"))
+	} else if v.LoggingDestination != nil {
+		if err := validateScraperLoggingDestination(v.LoggingDestination); err != nil {
+			invalidParams.AddNested("LoggingDestination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ScraperComponents != nil {
+		if err := validateScraperComponents(v.ScraperComponents); err != nil {
+			invalidParams.AddNested("ScraperComponents", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

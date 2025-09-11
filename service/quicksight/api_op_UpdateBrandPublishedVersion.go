@@ -33,7 +33,7 @@ type UpdateBrandPublishedVersionInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// The ID of the Amazon QuickSight brand.
+	// The ID of the QuickSight brand.
 	//
 	// This member is required.
 	BrandId *string

@@ -56,7 +56,7 @@ type UpdateDataSetInput struct {
 	// This member is required.
 	PhysicalTableMap map[string]types.PhysicalTable
 
-	// Groupings of columns that work together in certain Amazon QuickSight features.
+	// Groupings of columns that work together in certain QuickSight features.
 	// Currently, only geospatial hierarchy is supported.
 	ColumnGroups []types.ColumnGroup
 

@@ -150,6 +150,64 @@ func (RuleGroupsNamespaceStatusCode) Values() []RuleGroupsNamespaceStatusCode {
 	}
 }
 
+type ScraperComponentType string
+
+// Enum values for ScraperComponentType
+const (
+	// Scraper service discoverer component
+	ScraperComponentTypeServiceDiscovery ScraperComponentType = "SERVICE_DISCOVERY"
+	// Scraper collector component
+	ScraperComponentTypeCollector ScraperComponentType = "COLLECTOR"
+	// Scraper exporter component
+	ScraperComponentTypeExporter ScraperComponentType = "EXPORTER"
+)
+
+// Values returns all known values for ScraperComponentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScraperComponentType) Values() []ScraperComponentType {
+	return []ScraperComponentType{
+		"SERVICE_DISCOVERY",
+		"COLLECTOR",
+		"EXPORTER",
+	}
+}
+
+type ScraperLoggingConfigurationStatusCode string
+
+// Enum values for ScraperLoggingConfigurationStatusCode
+const (
+	// Scraper logging configuration is being created.
+	ScraperLoggingConfigurationStatusCodeCreating ScraperLoggingConfigurationStatusCode = "CREATING"
+	// Scraper logging configuration is active.
+	ScraperLoggingConfigurationStatusCodeActive ScraperLoggingConfigurationStatusCode = "ACTIVE"
+	// Scraper logging configuration is being updated.
+	ScraperLoggingConfigurationStatusCodeUpdating ScraperLoggingConfigurationStatusCode = "UPDATING"
+	// Scraper logging configuration is being deleted.
+	ScraperLoggingConfigurationStatusCodeDeleting ScraperLoggingConfigurationStatusCode = "DELETING"
+	// Scraper logging configuration creation failed.
+	ScraperLoggingConfigurationStatusCodeCreationFailed ScraperLoggingConfigurationStatusCode = "CREATION_FAILED"
+	// Scraper logging configuration update failed.
+	ScraperLoggingConfigurationStatusCodeUpdateFailed ScraperLoggingConfigurationStatusCode = "UPDATE_FAILED"
+)
+
+// Values returns all known values for ScraperLoggingConfigurationStatusCode. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScraperLoggingConfigurationStatusCode) Values() []ScraperLoggingConfigurationStatusCode {
+	return []ScraperLoggingConfigurationStatusCode{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"DELETING",
+		"CREATION_FAILED",
+		"UPDATE_FAILED",
+	}
+}
+
 type ScraperStatusCode string
 
 // Enum values for ScraperStatusCode

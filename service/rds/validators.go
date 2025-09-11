@@ -4278,9 +4278,6 @@ func validateOpCreateDBProxyInput(v *CreateDBProxyInput) error {
 	if len(v.EngineFamily) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("EngineFamily"))
 	}
-	if v.Auth == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Auth"))
-	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}

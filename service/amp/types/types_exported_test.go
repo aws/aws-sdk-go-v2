@@ -43,6 +43,24 @@ func ExampleScrapeConfiguration_outputUsage() {
 
 var _ []byte
 
+func ExampleScraperLoggingDestination_outputUsage() {
+	var union types.ScraperLoggingDestination
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ScraperLoggingDestinationMemberCloudWatchLogs:
+		_ = v.Value // Value is types.CloudWatchLogDestination
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CloudWatchLogDestination
+
 func ExampleSource_outputUsage() {
 	var union types.Source
 	// type switches can be used to check the union value

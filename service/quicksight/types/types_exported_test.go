@@ -32,6 +32,9 @@ func ExampleDataSourceParameters_outputUsage() {
 	case *types.DataSourceParametersMemberBigQueryParameters:
 		_ = v.Value // Value is types.BigQueryParameters
 
+	case *types.DataSourceParametersMemberCustomConnectionParameters:
+		_ = v.Value // Value is types.CustomConnectionParameters
+
 	case *types.DataSourceParametersMemberDatabricksParameters:
 		_ = v.Value // Value is types.DatabricksParameters
 
@@ -108,6 +111,7 @@ var _ *types.ImpalaParameters
 var _ *types.MySqlParameters
 var _ *types.SnowflakeParameters
 var _ *types.BigQueryParameters
+var _ *types.CustomConnectionParameters
 var _ *types.ServiceNowParameters
 var _ *types.PrestoParameters
 var _ *types.AuroraParameters

@@ -30,7 +30,7 @@ func (c *Client) ListNamespaces(ctx context.Context, params *ListNamespacesInput
 
 type ListNamespacesInput struct {
 
-	// The ID for the Amazon Web Services account that contains the Amazon QuickSight
+	// The ID for the Amazon Web Services account that contains the QuickSight
 	// namespaces that you want to list.
 	//
 	// This member is required.

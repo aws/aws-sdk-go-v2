@@ -45,20 +45,19 @@ type UpdateDataSourceInput struct {
 	// This member is required.
 	Name *string
 
-	// The credentials that Amazon QuickSight that uses to connect to your underlying
-	// source. Currently, only credentials based on user name and password are
-	// supported.
+	// The credentials that QuickSight that uses to connect to your underlying source.
+	// Currently, only credentials based on user name and password are supported.
 	Credentials *types.DataSourceCredentials
 
-	// The parameters that Amazon QuickSight uses to connect to your underlying source.
+	// The parameters that QuickSight uses to connect to your underlying source.
 	DataSourceParameters types.DataSourceParameters
 
-	// Secure Socket Layer (SSL) properties that apply when Amazon QuickSight connects
-	// to your underlying source.
+	// Secure Socket Layer (SSL) properties that apply when QuickSight connects to
+	// your underlying source.
 	SslProperties *types.SslProperties
 
-	// Use this parameter only when you want Amazon QuickSight to use a VPC connection
-	// when connecting to your underlying source.
+	// Use this parameter only when you want QuickSight to use a VPC connection when
+	// connecting to your underlying source.
 	VpcConnectionProperties *types.VpcConnectionProperties
 
 	noSmithyDocumentSerde

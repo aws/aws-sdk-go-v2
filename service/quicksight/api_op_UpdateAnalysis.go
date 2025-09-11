@@ -42,7 +42,7 @@ type UpdateAnalysisInput struct {
 	AwsAccountId *string
 
 	// A descriptive name for the analysis that you're updating. This name displays
-	// for the analysis in the Amazon QuickSight console.
+	// for the analysis in the QuickSight console.
 	//
 	// This member is required.
 	Name *string
@@ -63,8 +63,8 @@ type UpdateAnalysisInput struct {
 	SourceEntity *types.AnalysisSourceEntity
 
 	// The Amazon Resource Name (ARN) for the theme to apply to the analysis that
-	// you're creating. To see the theme in the Amazon QuickSight console, make sure
-	// that you have access to it.
+	// you're creating. To see the theme in the QuickSight console, make sure that you
+	// have access to it.
 	ThemeArn *string
 
 	// The option to relax the validation needed to update an analysis with definition

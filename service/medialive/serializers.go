@@ -16229,6 +16229,13 @@ func awsRestjson1_serializeDocumentMediaPackageGroupSettings(v *types.MediaPacka
 		}
 	}
 
+	if v.MediapackageV2GroupSettings != nil {
+		ok := object.Key("mediapackageV2GroupSettings")
+		if err := awsRestjson1_serializeDocumentMediaPackageV2GroupSettings(v.MediapackageV2GroupSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -16257,6 +16264,54 @@ func awsRestjson1_serializeDocumentMediaPackageOutputDestinationSettings(v *type
 func awsRestjson1_serializeDocumentMediaPackageOutputSettings(v *types.MediaPackageOutputSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.MediaPackageV2DestinationSettings != nil {
+		ok := object.Key("mediaPackageV2DestinationSettings")
+		if err := awsRestjson1_serializeDocumentMediaPackageV2DestinationSettings(v.MediaPackageV2DestinationSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMediaPackageV2DestinationSettings(v *types.MediaPackageV2DestinationSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AudioGroupId != nil {
+		ok := object.Key("audioGroupId")
+		ok.String(*v.AudioGroupId)
+	}
+
+	if v.AudioRenditionSets != nil {
+		ok := object.Key("audioRenditionSets")
+		ok.String(*v.AudioRenditionSets)
+	}
+
+	if len(v.HlsAutoSelect) > 0 {
+		ok := object.Key("hlsAutoSelect")
+		ok.String(string(v.HlsAutoSelect))
+	}
+
+	if len(v.HlsDefault) > 0 {
+		ok := object.Key("hlsDefault")
+		ok.String(string(v.HlsDefault))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMediaPackageV2GroupSettings(v *types.MediaPackageV2GroupSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CaptionLanguageMappings != nil {
+		ok := object.Key("captionLanguageMappings")
+		if err := awsRestjson1_serializeDocument__listOfCaptionLanguageMapping(v.CaptionLanguageMappings, ok); err != nil {
+			return err
+		}
+	}
 
 	return nil
 }

@@ -2415,6 +2415,12 @@ type DBProxy struct {
 	// troubleshoot connection or performance issues.
 	DebugLogging *bool
 
+	// The default authentication scheme that the proxy uses for client connections to
+	// the proxy and connections from the proxy to the underlying database. Valid
+	// values are NONE and IAM_AUTH . When set to IAM_AUTH , the proxy uses end-to-end
+	// IAM authentication to connect to the database.
+	DefaultAuthScheme *string
+
 	// The endpoint that you can use to connect to the DB proxy. You include the
 	// endpoint value in the connection string for a database client application.
 	Endpoint *string

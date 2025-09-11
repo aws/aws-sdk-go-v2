@@ -44,6 +44,12 @@ type ModifyDBProxyInput struct {
 	// troubleshoot connection or performance issues.
 	DebugLogging *bool
 
+	// The default authentication scheme that the proxy uses for client connections to
+	// the proxy and connections from the proxy to the underlying database. Valid
+	// values are NONE and IAM_AUTH . When set to IAM_AUTH , the proxy uses end-to-end
+	// IAM authentication to connect to the database.
+	DefaultAuthScheme types.DefaultAuthScheme
+
 	// The number of seconds that a connection to the proxy can be inactive before the
 	// proxy disconnects it. You can set this value higher or lower than the connection
 	// timeout limit for the associated database.

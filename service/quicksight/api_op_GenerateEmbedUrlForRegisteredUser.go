@@ -64,9 +64,8 @@ type GenerateEmbedUrlForRegisteredUserInput struct {
 	AwsAccountId *string
 
 	// The experience that you want to embed. For registered users, you can embed
-	// Amazon QuickSight dashboards, Amazon QuickSight visuals, the Amazon QuickSight Q
-	// search bar, the Amazon QuickSight Generative Q&A experience, or the entire
-	// Amazon QuickSight console.
+	// QuickSight dashboards, QuickSight visuals, the QuickSight Q search bar, the
+	// QuickSight Generative Q&A experience, or the entire QuickSight console.
 	//
 	// This member is required.
 	ExperienceConfiguration *types.RegisteredUserEmbeddingExperienceConfiguration
@@ -78,9 +77,9 @@ type GenerateEmbedUrlForRegisteredUserInput struct {
 
 	// The domains that you want to add to the allow list for access to the generated
 	// URL that is then embedded. This optional parameter overrides the static domains
-	// that are configured in the Manage QuickSight menu in the Amazon QuickSight
-	// console. Instead, it allows only the domains that you include in this parameter.
-	// You can list up to three domains or subdomains in each API call.
+	// that are configured in the Manage QuickSight menu in the QuickSight console.
+	// Instead, it allows only the domains that you include in this parameter. You can
+	// list up to three domains or subdomains in each API call.
 	//
 	// To include all subdomains under a specific domain to the allow list, use * . For
 	// example, https://*.sapp.amazon.com includes all subdomains under
@@ -96,8 +95,8 @@ type GenerateEmbedUrlForRegisteredUserInput struct {
 
 type GenerateEmbedUrlForRegisteredUserOutput struct {
 
-	// The embed URL for the Amazon QuickSight dashboard, visual, Q search bar,
-	// Generative Q&A experience, or console.
+	// The embed URL for the QuickSight dashboard, visual, Q search bar, Generative
+	// Q&A experience, or console.
 	//
 	// This member is required.
 	EmbedUrl *string

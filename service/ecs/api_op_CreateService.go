@@ -194,8 +194,8 @@ type CreateServiceInput struct {
 	// The default behavior of AvailabilityZoneRebalancing differs between create and
 	// update requests:
 	//
-	//   - For create service requests, when when no value is specified for
-	//   AvailabilityZoneRebalancing , Amazon ECS defaults the value to to ENABLED .
+	//   - For create service requests, when no value is specified for
+	//   AvailabilityZoneRebalancing , Amazon ECS defaults the value to ENABLED .
 	//
 	//   - For update service requests, when no value is specified for
 	//   AvailabilityZoneRebalancing , Amazon ECS defaults to the existing service’s

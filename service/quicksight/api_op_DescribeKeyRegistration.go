@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes all customer managed key registrations in a Amazon QuickSight account.
+// Describes all customer managed key registrations in a QuickSight account.
 func (c *Client) DescribeKeyRegistration(ctx context.Context, params *DescribeKeyRegistrationInput, optFns ...func(*Options)) (*DescribeKeyRegistrationOutput, error) {
 	if params == nil {
 		params = &DescribeKeyRegistrationInput{}
@@ -47,8 +47,11 @@ type DescribeKeyRegistrationOutput struct {
 	// key registration specified in the request.
 	AwsAccountId *string
 
-	// A list of RegisteredCustomerManagedKey objects in a Amazon QuickSight account.
+	// A list of RegisteredCustomerManagedKey objects in a QuickSight account.
 	KeyRegistration []types.RegisteredCustomerManagedKey
+
+	// A list of QDataKey objects in a QuickSight account.
+	QDataKey *types.QDataKey
 
 	// The Amazon Web Services request ID for this operation.
 	RequestId *string

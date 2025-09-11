@@ -76,6 +76,15 @@ type CloudWatchLogDestination struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration settings for a scraper component.
+type ComponentConfig struct {
+
+	// Configuration options for the scraper component.
+	Options map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // Where to send the metrics from a scraper.
 //
 // The following types satisfy this interface:
@@ -415,6 +424,21 @@ type ScrapeConfigurationMemberConfigurationBlob struct {
 
 func (*ScrapeConfigurationMemberConfigurationBlob) isScrapeConfiguration() {}
 
+// A component of a Amazon Managed Service for Prometheus scraper that can be
+// configured for logging.
+type ScraperComponent struct {
+
+	// The type of the scraper component.
+	//
+	// This member is required.
+	Type ScraperComponentType
+
+	// The configuration settings for the scraper component.
+	Config *ComponentConfig
+
+	noSmithyDocumentSerde
+}
+
 // The ScraperDescription structure contains the full details about one scraper in
 // your account.
 type ScraperDescription struct {
@@ -486,6 +510,38 @@ type ScraperDescription struct {
 
 	noSmithyDocumentSerde
 }
+
+// The status of a scraper logging configuration.
+type ScraperLoggingConfigurationStatus struct {
+
+	// The status code of the scraper logging configuration.
+	//
+	// This member is required.
+	StatusCode ScraperLoggingConfigurationStatusCode
+
+	// The reason for the current status of the scraper logging configuration.
+	StatusReason *string
+
+	noSmithyDocumentSerde
+}
+
+// The destination where scraper logs are sent.
+//
+// The following types satisfy this interface:
+//
+//	ScraperLoggingDestinationMemberCloudWatchLogs
+type ScraperLoggingDestination interface {
+	isScraperLoggingDestination()
+}
+
+// The CloudWatch Logs configuration for the scraper logging destination.
+type ScraperLoggingDestinationMemberCloudWatchLogs struct {
+	Value CloudWatchLogDestination
+
+	noSmithyDocumentSerde
+}
+
+func (*ScraperLoggingDestinationMemberCloudWatchLogs) isScraperLoggingDestination() {}
 
 // The ScraperStatus structure contains status information about the scraper.
 type ScraperStatus struct {
@@ -734,6 +790,7 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isDestination()         {}
-func (*UnknownUnionMember) isScrapeConfiguration() {}
-func (*UnknownUnionMember) isSource()              {}
+func (*UnknownUnionMember) isDestination()               {}
+func (*UnknownUnionMember) isScrapeConfiguration()       {}
+func (*UnknownUnionMember) isScraperLoggingDestination() {}
+func (*UnknownUnionMember) isSource()                    {}

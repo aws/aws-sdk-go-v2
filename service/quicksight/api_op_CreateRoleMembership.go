@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use CreateRoleMembership to add an existing Amazon QuickSight group to an
-// existing role.
+// Use CreateRoleMembership to add an existing QuickSight group to an existing
+// role.
 func (c *Client) CreateRoleMembership(ctx context.Context, params *CreateRoleMembershipInput, optFns ...func(*Options)) (*CreateRoleMembershipOutput, error) {
 	if params == nil {
 		params = &CreateRoleMembershipInput{}

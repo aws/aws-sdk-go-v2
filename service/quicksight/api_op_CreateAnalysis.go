@@ -42,7 +42,7 @@ type CreateAnalysisInput struct {
 	AwsAccountId *string
 
 	// A descriptive name for the analysis that you're creating. This name displays
-	// for the analysis in the Amazon QuickSight console.
+	// for the analysis in the QuickSight console.
 	//
 	// This member is required.
 	Name *string
@@ -56,8 +56,7 @@ type CreateAnalysisInput struct {
 	// to be valid.
 	Definition *types.AnalysisDefinition
 
-	// When you create the analysis, Amazon QuickSight adds the analysis to these
-	// folders.
+	// When you create the analysis, QuickSight adds the analysis to these folders.
 	FolderArns []string
 
 	// The parameter names and override values that you want to use. An analysis can
@@ -85,7 +84,7 @@ type CreateAnalysisInput struct {
 	Tags []types.Tag
 
 	// The ARN for the theme to apply to the analysis that you're creating. To see the
-	// theme in the Amazon QuickSight console, make sure that you have access to it.
+	// theme in the QuickSight console, make sure that you have access to it.
 	ThemeArn *string
 
 	// The option to relax the validation needed to create an analysis with definition

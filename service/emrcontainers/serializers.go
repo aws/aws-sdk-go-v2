@@ -412,6 +412,13 @@ func awsRestjson1_serializeOpDocumentCreateSecurityConfigurationInput(v *CreateS
 		ok.String(*v.ClientToken)
 	}
 
+	if v.ContainerProvider != nil {
+		ok := object.Key("containerProvider")
+		if err := awsRestjson1_serializeDocumentContainerProvider(v.ContainerProvider, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -2262,6 +2269,11 @@ func awsRestjson1_serializeDocumentEksInfo(v *types.EksInfo, value smithyjson.Va
 	if v.Namespace != nil {
 		ok := object.Key("namespace")
 		ok.String(*v.Namespace)
+	}
+
+	if v.NodeLabel != nil {
+		ok := object.Key("nodeLabel")
+		ok.String(*v.NodeLabel)
 	}
 
 	return nil
