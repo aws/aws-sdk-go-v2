@@ -5981,12 +5981,16 @@
                         "smithy.api#required": {}
                     }
                 },
+                "DefaultAuthScheme": {
+                    "target": "com.amazonaws.rds#DefaultAuthScheme",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default authentication scheme that the proxy uses for client connections to the proxy and connections from the proxy to the underlying database. \n            Valid values are <code>NONE</code> and <code>IAM_AUTH</code>. \n            When set to <code>IAM_AUTH</code>, the proxy uses end-to-end IAM authentication to connect to the database. \n            If you don't specify <code>DefaultAuthScheme</code> or specify this parameter \n            as <code>NONE</code>, you must specify the <code>Auth</code> option.</p>"
+                    }
+                },
                 "Auth": {
                     "target": "com.amazonaws.rds#UserAuthConfigList",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The authorization mechanism that the proxy uses.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The authorization mechanism that the proxy uses.</p>"
                     }
                 },
                 "RoleArn": {
@@ -10371,6 +10375,12 @@
                         "smithy.api#documentation": "<p>The EC2 subnet IDs for the proxy.</p>"
                     }
                 },
+                "DefaultAuthScheme": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default authentication scheme that the proxy uses for client connections to the proxy and connections from the proxy to the underlying database. \n            Valid values are <code>NONE</code> and <code>IAM_AUTH</code>. \n            When set to <code>IAM_AUTH</code>, the proxy uses end-to-end IAM authentication to connect to the database. \n        </p>"
+                    }
+                },
                 "Auth": {
                     "target": "com.amazonaws.rds#UserAuthConfigInfoList",
                     "traits": {
@@ -12106,6 +12116,23 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "advanced"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rds#DefaultAuthScheme": {
+            "type": "enum",
+            "members": {
+                "IAM_AUTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAM_AUTH"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
                     }
                 }
             }
@@ -23086,6 +23113,12 @@
                         "smithy.api#documentation": "<p>The new identifier for the <code>DBProxy</code>. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it can't end with a hyphen or contain two consecutive hyphens.</p>"
                     }
                 },
+                "DefaultAuthScheme": {
+                    "target": "com.amazonaws.rds#DefaultAuthScheme",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default authentication scheme that the proxy uses for client connections to the proxy and connections from the proxy to the underlying database. \n            Valid values are <code>NONE</code> and <code>IAM_AUTH</code>. \n            When set to <code>IAM_AUTH</code>, the proxy uses end-to-end IAM authentication to connect to the database.</p>"
+                    }
+                },
                 "Auth": {
                     "target": "com.amazonaws.rds#UserAuthConfigList",
                     "traits": {
@@ -32037,6 +32070,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.rds#UserAuthConfig"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
             }
         },
         "com.amazonaws.rds#ValidDBInstanceModificationsMessage": {

@@ -21405,6 +21405,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of an IAM user profile in Amazon DataZone.</p>"
                     }
+                },
+                "principalId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Principal ID of the IAM user.</p>"
+                    }
                 }
             },
             "traits": {

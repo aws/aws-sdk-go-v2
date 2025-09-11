@@ -1,6 +1,16 @@
 {
     "smithy": "2.0",
     "shapes": {
+        "com.amazonaws.evs#AllocationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 9,
+                    "max": 26
+                },
+                "smithy.api#pattern": "^eipalloc-[a-zA-Z0-9_-]+$"
+            }
+        },
         "com.amazonaws.evs#AmazonElasticVMwareService": {
             "type": "service",
             "version": "2023-07-27",
@@ -685,6 +695,91 @@
                 "smithy.api#pattern": "^arn:aws:evs:[a-z]{2}-[a-z]+-[0-9]:[0-9]{12}:environment/[a-zA-Z0-9_-]+$"
             }
         },
+        "com.amazonaws.evs#AssociateEipToVlan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.evs#AssociateEipToVlanRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.evs#AssociateEipToVlanResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.evs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.evs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.evs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates an Elastic IP address with a public HCX VLAN. This operation is only allowed for public HCX VLANs at this time.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.evs#AssociateEipToVlanRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.evs#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<note> <p>This parameter is not used in Amazon EVS currently. If you supply input for this parameter, it will have no effect.</p> </note> <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the environment creation request. If you do not specify a client token, a randomly generated token is used for the request to ensure idempotency.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "environmentId": {
+                    "target": "com.amazonaws.evs#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique ID for the environment containing the VLAN that the Elastic IP address associates with.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "vlanName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the VLAN. <code>hcx</code> is the only accepted VLAN name at this time.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 200
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "allocationId": {
+                    "target": "com.amazonaws.evs#AllocationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Elastic IP address allocation ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.evs#AssociateEipToVlanResponse": {
+            "type": "structure",
+            "members": {
+                "vlan": {
+                    "target": "com.amazonaws.evs#Vlan"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.evs#AssociationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 9,
+                    "max": 26
+                },
+                "smithy.api#pattern": "^eipassoc-[a-zA-Z0-9_-]+$"
+            }
+        },
         "com.amazonaws.evs#Check": {
             "type": "structure",
             "members": {
@@ -1153,6 +1248,113 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.evs#DisassociateEipFromVlan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.evs#DisassociateEipFromVlanRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.evs#DisassociateEipFromVlanResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.evs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.evs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.evs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disassociates an Elastic IP address from a public HCX VLAN. This operation is only allowed for public HCX VLANs at this time.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.evs#DisassociateEipFromVlanRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.evs#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<note> <p>This parameter is not used in Amazon EVS currently. If you supply input for this parameter, it will have no effect.</p> </note> <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the environment creation request. If you do not specify a client token, a randomly generated token is used for the request to ensure idempotency.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "environmentId": {
+                    "target": "com.amazonaws.evs#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique ID for the environment containing the VLAN that the Elastic IP address disassociates from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "vlanName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the VLAN. <code>hcx</code> is the only accepted VLAN name at this time.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 200
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "associationId": {
+                    "target": "com.amazonaws.evs#AssociationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A unique ID for the Elastic IP address association.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.evs#DisassociateEipFromVlanResponse": {
+            "type": "structure",
+            "members": {
+                "vlan": {
+                    "target": "com.amazonaws.evs#Vlan"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.evs#EipAssociation": {
+            "type": "structure",
+            "members": {
+                "associationId": {
+                    "target": "com.amazonaws.evs#AssociationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique ID for the elastic IP address association with the VLAN subnet.</p>"
+                    }
+                },
+                "allocationId": {
+                    "target": "com.amazonaws.evs#AllocationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Elastic IP address allocation ID.</p>"
+                    }
+                },
+                "ipAddress": {
+                    "target": "com.amazonaws.evs#IpAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Elastic IP address.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An Elastic IP address association with the elastic network interface in the VLAN subnet.</p>"
+            }
+        },
+        "com.amazonaws.evs#EipAssociationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.evs#EipAssociation"
+            }
+        },
         "com.amazonaws.evs#Environment": {
             "type": "structure",
             "members": {
@@ -1318,10 +1520,16 @@
             },
             "operations": [
                 {
+                    "target": "com.amazonaws.evs#AssociateEipToVlan"
+                },
+                {
                     "target": "com.amazonaws.evs#CreateEnvironmentHost"
                 },
                 {
                     "target": "com.amazonaws.evs#DeleteEnvironmentHost"
+                },
+                {
+                    "target": "com.amazonaws.evs#DisassociateEipFromVlan"
                 },
                 {
                     "target": "com.amazonaws.evs#ListEnvironmentHosts"
@@ -1775,7 +1983,7 @@
                 "hcx": {
                     "target": "com.amazonaws.evs#InitialVlanInfo",
                     "traits": {
-                        "smithy.api#documentation": "<p>The HCX VLAN subnet. This VLAN subnet allows the HCX Interconnnect (IX) and HCX Network Extension (NE) to reach their peers and enable HCX Service Mesh creation.</p>",
+                        "smithy.api#documentation": "<p>The HCX VLAN subnet. This VLAN subnet allows the HCX Interconnnect (IX) and HCX Network Extension (NE) to reach their peers and enable HCX Service Mesh creation.</p> <p>If you plan to use a public HCX VLAN subnet, the following requirements must be met:</p> <ul> <li> <p>Must have a /28 netmask and be allocated from the IPAM public pool. Required for HCX internet access configuration.</p> </li> <li> <p>The HCX public VLAN CIDR block must be added to the VPC as a secondary CIDR block.</p> </li> <li> <p>Must have at least three Elastic IP addresses to be allocated from the public IPAM pool for HCX components.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1791,6 +1999,19 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An additional VLAN subnet that can be used to extend VCF capabilities once configured. For example, you can configure an expansion VLAN subnet to use NSX Federation for centralized management and synchronization of multiple NSX deployments across different locations.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "isHcxPublic": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Determines if the HCX VLAN that Amazon EVS provisions is public or private.</p>"
+                    }
+                },
+                "hcxNetworkAclId": {
+                    "target": "com.amazonaws.evs#NetworkAclId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique ID for a network access control list that the HCX VLAN uses. Required when <code>isHcxPublic</code> is set to <code>true</code>.</p>"
                     }
                 }
             },
@@ -2184,6 +2405,16 @@
                 }
             }
         },
+        "com.amazonaws.evs#NetworkAclId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 21
+                },
+                "smithy.api#pattern": "^acl-[a-zA-Z0-9_-]+$"
+            }
+        },
         "com.amazonaws.evs#NetworkInterface": {
             "type": "structure",
             "members": {
@@ -2535,7 +2766,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <code>CreateEnvironmentHost</code> operation couldn't be performed because the service is throttling requests. This exception is thrown when the <code>CreateEnvironmentHost</code> request exceeds concurrency of 1 transaction per second (TPS).</p>",
+                "smithy.api#documentation": "<p>The operation couldn't be performed because the service is throttling requests. This exception is thrown when there are too many requests accepted concurrently from the service endpoint.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429,
                 "smithy.api#retryable": {}
@@ -2851,6 +3082,24 @@
                     "target": "com.amazonaws.evs#StateDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>The state details of the VLAN.</p>"
+                    }
+                },
+                "eipAssociations": {
+                    "target": "com.amazonaws.evs#EipAssociationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of Elastic IP address associations.</p>"
+                    }
+                },
+                "isPublic": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines if the VLAN that Amazon EVS provisions is public or private.</p>"
+                    }
+                },
+                "networkAclId": {
+                    "target": "com.amazonaws.evs#NetworkAclId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique ID for a network access control list.</p>"
                     }
                 }
             },

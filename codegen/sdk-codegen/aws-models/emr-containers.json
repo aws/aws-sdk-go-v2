@@ -1640,6 +1640,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "containerProvider": {
+                    "target": "com.amazonaws.emrcontainers#ContainerProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container provider associated with the security configuration.</p>"
+                    }
+                },
                 "securityConfigurationData": {
                     "target": "com.amazonaws.emrcontainers#SecurityConfigurationData",
                     "traits": {
@@ -2318,6 +2324,12 @@
                     "target": "com.amazonaws.emrcontainers#KubernetesNamespace",
                     "traits": {
                         "smithy.api#documentation": "<p>The namespaces of the Amazon EKS cluster.</p>"
+                    }
+                },
+                "nodeLabel": {
+                    "target": "com.amazonaws.emrcontainers#ResourceNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The nodeLabel of the nodes where the resources of this virtual cluster can get scheduled. It requires relevant scaling and policy engine addons.</p>"
                     }
                 }
             },

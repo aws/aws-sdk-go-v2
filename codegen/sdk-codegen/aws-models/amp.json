@@ -948,6 +948,20 @@
                 "smithy.api#pattern": "^arn:aws[-a-z]*:eks:[-a-z0-9]+:[0-9]{12}:cluster/.+$"
             }
         },
+        "com.amazonaws.amp#ComponentConfig": {
+            "type": "structure",
+            "members": {
+                "options": {
+                    "target": "com.amazonaws.amp#StringMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration options for the scraper component.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration settings for a scraper component.</p>"
+            }
+        },
         "com.amazonaws.amp#ConflictException": {
             "type": "structure",
             "members": {
@@ -1995,6 +2009,65 @@
                 "smithy.api#idempotent": {}
             }
         },
+        "com.amazonaws.amp#DeleteScraperLoggingConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amp#DeleteScraperLoggingConfigurationRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amp#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.amp#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the logging configuration for a Amazon Managed Service for Prometheus scraper.</p>",
+                "smithy.api#http": {
+                    "code": 202,
+                    "method": "DELETE",
+                    "uri": "/scrapers/{scraperId}/logging-configuration"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.amp#DeleteScraperLoggingConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "scraperId": {
+                    "target": "com.amazonaws.amp#ScraperId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the scraper whose logging configuration will be deleted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.amp#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the request is processed exactly once.</p>",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.amp#DeleteScraperRequest": {
             "type": "structure",
             "members": {
@@ -2575,6 +2648,97 @@
                         ]
                     }
                 }
+            }
+        },
+        "com.amazonaws.amp#DescribeScraperLoggingConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amp#DescribeScraperLoggingConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amp#DescribeScraperLoggingConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amp#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.amp#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the logging configuration for a Amazon Managed Service for Prometheus scraper.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/scrapers/{scraperId}/logging-configuration"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.amp#DescribeScraperLoggingConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "scraperId": {
+                    "target": "com.amazonaws.amp#ScraperId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the scraper whose logging configuration will be described.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.amp#DescribeScraperLoggingConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.amp#ScraperLoggingConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the scraper logging configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scraperId": {
+                    "target": "com.amazonaws.amp#ScraperId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the scraper.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "loggingDestination": {
+                    "target": "com.amazonaws.amp#ScraperLoggingDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination where scraper logs are sent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scraperComponents": {
+                    "target": "com.amazonaws.amp#ScraperComponents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of scraper components configured for logging.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "modifiedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the logging configuration was last modified.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.amp#DescribeScraperRequest": {
@@ -4321,7 +4485,7 @@
                 "smithy.api#documentation": "<p>The name of the namespace that the rule group belong to.</p>",
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 64
+                    "max": 128
                 },
                 "smithy.api#pattern": "[0-9A-Za-z][-.0-9A-Z_a-z]*"
             }
@@ -4479,6 +4643,11 @@
             "list": {
                 "target": "com.amazonaws.amp#ListScrapers"
             },
+            "resources": [
+                {
+                    "target": "com.amazonaws.amp#ScraperLoggingConfiguration"
+                }
+            ],
             "traits": {
                 "aws.api#arn": {
                     "template": "scraper/{scraperId}"
@@ -4506,6 +4675,61 @@
                     "resource": "Scraper"
                 },
                 "smithy.api#documentation": "<p>An ARN identifying a scrape configuration.</p>"
+            }
+        },
+        "com.amazonaws.amp#ScraperComponent": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.amp#ScraperComponentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the scraper component.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "config": {
+                    "target": "com.amazonaws.amp#ComponentConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings for the scraper component.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A component of a Amazon Managed Service for Prometheus scraper that can be configured for logging.</p>"
+            }
+        },
+        "com.amazonaws.amp#ScraperComponentType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "SERVICE_DISCOVERY",
+                        "value": "SERVICE_DISCOVERY",
+                        "documentation": "Scraper service discoverer component"
+                    },
+                    {
+                        "name": "COLLECTOR",
+                        "value": "COLLECTOR",
+                        "documentation": "Scraper collector component"
+                    },
+                    {
+                        "name": "EXPORTER",
+                        "value": "EXPORTER",
+                        "documentation": "Scraper exporter component"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.amp#ScraperComponents": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amp#ScraperComponent"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                },
+                "smithy.api#uniqueItems": {}
             }
         },
         "com.amazonaws.amp#ScraperDescription": {
@@ -4639,6 +4863,103 @@
                     "max": 64
                 },
                 "smithy.api#pattern": "^[0-9A-Za-z][-.0-9A-Z_a-z]*$"
+            }
+        },
+        "com.amazonaws.amp#ScraperLoggingConfiguration": {
+            "type": "resource",
+            "identifiers": {
+                "scraperId": {
+                    "target": "com.amazonaws.amp#ScraperId"
+                }
+            },
+            "put": {
+                "target": "com.amazonaws.amp#UpdateScraperLoggingConfiguration"
+            },
+            "read": {
+                "target": "com.amazonaws.amp#DescribeScraperLoggingConfiguration"
+            },
+            "update": {
+                "target": "com.amazonaws.amp#UpdateScraperLoggingConfiguration"
+            },
+            "delete": {
+                "target": "com.amazonaws.amp#DeleteScraperLoggingConfiguration"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "scraper/{scraperId}"
+                }
+            }
+        },
+        "com.amazonaws.amp#ScraperLoggingConfigurationStatus": {
+            "type": "structure",
+            "members": {
+                "statusCode": {
+                    "target": "com.amazonaws.amp#ScraperLoggingConfigurationStatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status code of the scraper logging configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the current status of the scraper logging configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a scraper logging configuration.</p>"
+            }
+        },
+        "com.amazonaws.amp#ScraperLoggingConfigurationStatusCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "CREATING",
+                        "value": "CREATING",
+                        "documentation": "Scraper logging configuration is being created."
+                    },
+                    {
+                        "name": "ACTIVE",
+                        "value": "ACTIVE",
+                        "documentation": "Scraper logging configuration is active."
+                    },
+                    {
+                        "name": "UPDATING",
+                        "value": "UPDATING",
+                        "documentation": "Scraper logging configuration is being updated."
+                    },
+                    {
+                        "name": "DELETING",
+                        "value": "DELETING",
+                        "documentation": "Scraper logging configuration is being deleted."
+                    },
+                    {
+                        "name": "CREATION_FAILED",
+                        "value": "CREATION_FAILED",
+                        "documentation": "Scraper logging configuration creation failed."
+                    },
+                    {
+                        "name": "UPDATE_FAILED",
+                        "value": "UPDATE_FAILED",
+                        "documentation": "Scraper logging configuration update failed."
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.amp#ScraperLoggingDestination": {
+            "type": "union",
+            "members": {
+                "cloudWatchLogs": {
+                    "target": "com.amazonaws.amp#CloudWatchLogDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CloudWatch Logs configuration for the scraper logging destination.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The destination where scraper logs are sent.</p>"
             }
         },
         "com.amazonaws.amp#ScraperStatus": {
@@ -4892,6 +5213,15 @@
                     "min": 1,
                     "max": 256
                 }
+            }
+        },
+        "com.amazonaws.amp#StringMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#String"
             }
         },
         "com.amazonaws.amp#SubnetId": {
@@ -5345,6 +5675,85 @@
                     "uri": "/scrapers/{scraperId}"
                 },
                 "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.amp#UpdateScraperLoggingConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amp#UpdateScraperLoggingConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amp#UpdateScraperLoggingConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amp#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.amp#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the logging configuration for a Amazon Managed Service for Prometheus scraper.</p>",
+                "smithy.api#http": {
+                    "code": 202,
+                    "method": "PUT",
+                    "uri": "/scrapers/{scraperId}/logging-configuration"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.amp#UpdateScraperLoggingConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "scraperId": {
+                    "target": "com.amazonaws.amp#ScraperId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the scraper whose logging configuration will be updated.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "loggingDestination": {
+                    "target": "com.amazonaws.amp#ScraperLoggingDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination where scraper logs will be sent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scraperComponents": {
+                    "target": "com.amazonaws.amp#ScraperComponents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of scraper components to configure for logging.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.amp#UpdateScraperLoggingConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.amp#ScraperLoggingConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the updated scraper logging configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.amp#UpdateScraperRequest": {
