@@ -1,3 +1,7 @@
+# v1.5.0 (2025-09-11)
+
+* **Feature**: CreateEnvironment API now supports parameters (isHcxPublic & hcxNetworkAclId) for HCX migration via public internet, adding flexibility for migration scenarios. New APIs have been added for associating (AssociateEipToVlan) & disassociating (DisassociateEipFromVlan) Elastic IP (EIP) addresses.
+
 # v1.4.4 (2025-09-10)
 
 * No change notes available for this release.

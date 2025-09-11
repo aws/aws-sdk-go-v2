@@ -1,3 +1,7 @@
+# v1.41.0 (2025-09-11)
+
+* **Feature**: adding IAM principal id to IAM user profile details
+
 # v1.40.1 (2025-09-10)
 
 * No change notes available for this release.

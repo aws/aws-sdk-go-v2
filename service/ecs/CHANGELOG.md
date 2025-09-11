@@ -1,3 +1,7 @@
+# v1.64.0 (2025-09-11)
+
+* **Feature**: This release supports hook details for Amazon ECS lifecycle hooks.
+
 # v1.63.7 (2025-09-10)
 
 * No change notes available for this release.

@@ -3,4 +3,4 @@
 package medialive
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.81.4"
+const goModuleVersion = "1.82.0"

@@ -1,8 +1,0 @@
-{
-    "id": "5be401ca-b8eb-4ed6-9cda-75ca7fb7043b",
-    "type": "feature",
-    "description": "adding IAM principal id to IAM user profile details",
-    "modules": [
-        "service/datazone"
-    ]
-}

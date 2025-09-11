@@ -1,3 +1,7 @@
+# v1.82.0 (2025-09-11)
+
+* **Feature**: AWS Elemental MediaLive adds a new feature in MediaPackage output group that enables MediaPackage V2 users to control HLS-related parameters directly in MediaLive. These parameter settings are then reflected in MediaPackage outputs, providing more streamlined control over HLS configurations.
+
 # v1.81.4 (2025-09-10)
 
 * No change notes available for this release.

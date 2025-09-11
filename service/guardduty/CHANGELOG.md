@@ -1,3 +1,7 @@
+# v1.64.0 (2025-09-11)
+
+* **Feature**: Updated Java SDK implementation of entity set status in GuardDuty API.
+
 # v1.63.4 (2025-09-10)
 
 * No change notes available for this release.

@@ -1,3 +1,7 @@
+# v1.94.0 (2025-09-11)
+
+* **Feature**: This release adds support for Account level custom permissions, additional Dashboard Options, and Null support for Q&A.
+
 # v1.93.4 (2025-09-10)
 
 * No change notes available for this release.

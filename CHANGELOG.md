@@ -1,3 +1,25 @@
+# Release (2025-09-11)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/amp`: [v1.40.0](service/amp/CHANGELOG.md#v1400-2025-09-11)
+  * **Feature**: Add Vended Logs APIs for Amazon Prometheus Managed Collector
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.41.0](service/datazone/CHANGELOG.md#v1410-2025-09-11)
+  * **Feature**: adding IAM principal id to IAM user profile details
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.64.0](service/ecs/CHANGELOG.md#v1640-2025-09-11)
+  * **Feature**: This release supports hook details for Amazon ECS lifecycle hooks.
+* `github.com/aws/aws-sdk-go-v2/service/emrcontainers`: [v1.40.0](service/emrcontainers/CHANGELOG.md#v1400-2025-09-11)
+  * **Feature**: Added nodeLabel support in container provider to aid hardware isolation support for virtual cluster and security configuration.
+* `github.com/aws/aws-sdk-go-v2/service/evs`: [v1.5.0](service/evs/CHANGELOG.md#v150-2025-09-11)
+  * **Feature**: CreateEnvironment API now supports parameters (isHcxPublic & hcxNetworkAclId) for HCX migration via public internet, adding flexibility for migration scenarios. New APIs have been added for associating (AssociateEipToVlan) & disassociating (DisassociateEipFromVlan) Elastic IP (EIP) addresses.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.64.0](service/guardduty/CHANGELOG.md#v1640-2025-09-11)
+  * **Feature**: Updated Java SDK implementation of entity set status in GuardDuty API.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.82.0](service/medialive/CHANGELOG.md#v1820-2025-09-11)
+  * **Feature**: AWS Elemental MediaLive adds a new feature in MediaPackage output group that enables MediaPackage V2 users to control HLS-related parameters directly in MediaLive. These parameter settings are then reflected in MediaPackage outputs, providing more streamlined control over HLS configurations.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.94.0](service/quicksight/CHANGELOG.md#v1940-2025-09-11)
+  * **Feature**: This release adds support for Account level custom permissions, additional Dashboard Options, and Null support for Q&A.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.107.0](service/rds/CHANGELOG.md#v11070-2025-09-11)
+  * **Feature**: Adds support for end-to-end IAM authentication in RDS Proxy for MySQL, MariaDB, and PostgreSQL engines.
+
 # Release (2025-09-10)
 
 ## General Highlights

@@ -1,3 +1,7 @@
+# v1.40.0 (2025-09-11)
+
+* **Feature**: Add Vended Logs APIs for Amazon Prometheus Managed Collector
+
 # v1.39.4 (2025-09-10)
 
 * No change notes available for this release.

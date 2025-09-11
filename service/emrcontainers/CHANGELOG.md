@@ -1,3 +1,7 @@
+# v1.40.0 (2025-09-11)
+
+* **Feature**: Added nodeLabel support in container provider to aid hardware isolation support for virtual cluster and security configuration.
+
 # v1.39.4 (2025-09-10)
 
 * No change notes available for this release.

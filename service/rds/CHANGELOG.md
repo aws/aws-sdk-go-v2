@@ -1,3 +1,7 @@
+# v1.107.0 (2025-09-11)
+
+* **Feature**: Adds support for end-to-end IAM authentication in RDS Proxy for MySQL, MariaDB, and PostgreSQL engines.
+
 # v1.106.2 (2025-09-10)
 
 * No change notes available for this release.
