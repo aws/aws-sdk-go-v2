@@ -17,6 +17,7 @@
         "api_op_EnableDefaultKeyReplicationRegions.go",
         "api_op_ExportKey.go",
         "api_op_GetAlias.go",
+        "api_op_GetCertificateSigningRequest.go",
         "api_op_GetDefaultKeyReplicationRegions.go",
         "api_op_GetKey.go",
         "api_op_GetParametersForExport.go",

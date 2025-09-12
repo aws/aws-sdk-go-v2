@@ -565,6 +565,67 @@ func (m *awsAwsjson10_serializeOpGetAlias) HandleSerialize(ctx context.Context, 
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpGetCertificateSigningRequest struct {
+}
+
+func (*awsAwsjson10_serializeOpGetCertificateSigningRequest) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpGetCertificateSigningRequest) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetCertificateSigningRequestInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PaymentCryptographyControlPlane.GetCertificateSigningRequest")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentGetCertificateSigningRequestInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpGetDefaultKeyReplicationRegions struct {
 }
 
@@ -1540,6 +1601,48 @@ func (m *awsAwsjson10_serializeOpUpdateAlias) HandleSerialize(ctx context.Contex
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson10_serializeDocumentCertificateSubjectType(v *types.CertificateSubjectType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.City != nil {
+		ok := object.Key("City")
+		ok.String(*v.City)
+	}
+
+	if v.CommonName != nil {
+		ok := object.Key("CommonName")
+		ok.String(*v.CommonName)
+	}
+
+	if v.Country != nil {
+		ok := object.Key("Country")
+		ok.String(*v.Country)
+	}
+
+	if v.EmailAddress != nil {
+		ok := object.Key("EmailAddress")
+		ok.String(*v.EmailAddress)
+	}
+
+	if v.Organization != nil {
+		ok := object.Key("Organization")
+		ok.String(*v.Organization)
+	}
+
+	if v.OrganizationUnit != nil {
+		ok := object.Key("OrganizationUnit")
+		ok.String(*v.OrganizationUnit)
+	}
+
+	if v.StateOrProvince != nil {
+		ok := object.Key("StateOrProvince")
+		ok.String(*v.StateOrProvince)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentDiffieHellmanDerivationData(v types.DiffieHellmanDerivationData, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1746,6 +1849,16 @@ func awsAwsjson10_serializeDocumentExportTr34KeyBlock(v *types.ExportTr34KeyBloc
 		ok.String(*v.RandomNonce)
 	}
 
+	if v.SigningKeyCertificate != nil {
+		ok := object.Key("SigningKeyCertificate")
+		ok.String(*v.SigningKeyCertificate)
+	}
+
+	if v.SigningKeyIdentifier != nil {
+		ok := object.Key("SigningKeyIdentifier")
+		ok.String(*v.SigningKeyIdentifier)
+	}
+
 	if v.WrappingKeyCertificate != nil {
 		ok := object.Key("WrappingKeyCertificate")
 		ok.String(*v.WrappingKeyCertificate)
@@ -1934,6 +2047,16 @@ func awsAwsjson10_serializeDocumentImportTr34KeyBlock(v *types.ImportTr34KeyBloc
 	if v.WrappedKeyBlock != nil {
 		ok := object.Key("WrappedKeyBlock")
 		ok.String(*v.WrappedKeyBlock)
+	}
+
+	if v.WrappingKeyCertificate != nil {
+		ok := object.Key("WrappingKeyCertificate")
+		ok.String(*v.WrappingKeyCertificate)
+	}
+
+	if v.WrappingKeyIdentifier != nil {
+		ok := object.Key("WrappingKeyIdentifier")
+		ok.String(*v.WrappingKeyIdentifier)
 	}
 
 	return nil
@@ -2331,6 +2454,30 @@ func awsAwsjson10_serializeOpDocumentGetAliasInput(v *GetAliasInput, value smith
 	if v.AliasName != nil {
 		ok := object.Key("AliasName")
 		ok.String(*v.AliasName)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentGetCertificateSigningRequestInput(v *GetCertificateSigningRequestInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CertificateSubject != nil {
+		ok := object.Key("CertificateSubject")
+		if err := awsAwsjson10_serializeDocumentCertificateSubjectType(v.CertificateSubject, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.KeyIdentifier != nil {
+		ok := object.Key("KeyIdentifier")
+		ok.String(*v.KeyIdentifier)
+	}
+
+	if len(v.SigningAlgorithm) > 0 {
+		ok := object.Key("SigningAlgorithm")
+		ok.String(string(v.SigningAlgorithm))
 	}
 
 	return nil

@@ -25,6 +25,35 @@ type Alias struct {
 	noSmithyDocumentSerde
 }
 
+// Metadata used in generating the CSR
+type CertificateSubjectType struct {
+
+	// Common Name to be used in the certificate signing request
+	//
+	// This member is required.
+	CommonName *string
+
+	// City to be used in the certificate signing request
+	City *string
+
+	// Country to be used in the certificate signing request
+	Country *string
+
+	// Email to be used in the certificate signing request
+	EmailAddress *string
+
+	// Organization to be used in the certificate signing request
+	Organization *string
+
+	// Organization Unit to be used in the certificate signing request
+	OrganizationUnit *string
+
+	// State Or Province to be used in the certificate signing request
+	StateOrProvince *string
+
+	noSmithyDocumentSerde
+}
+
 // The shared information used when deriving a key using ECDH.
 //
 // The following types satisfy this interface:
@@ -236,17 +265,6 @@ type ExportTr34KeyBlock struct {
 	// This member is required.
 	CertificateAuthorityPublicKeyIdentifier *string
 
-	// The export token to initiate key export from Amazon Web Services Payment
-	// Cryptography. It also contains the signing key certificate that will sign the
-	// wrapped key during TR-34 key block generation. Call [GetParametersForExport]to receive an export token.
-	// It expires after 30 days. You can use the same export token to export multiple
-	// keys from the same service account.
-	//
-	// [GetParametersForExport]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetParametersForExport.html
-	//
-	// This member is required.
-	ExportToken *string
-
 	// The format of key block that Amazon Web Services Payment Cryptography will use
 	// during key export.
 	//
@@ -259,6 +277,15 @@ type ExportTr34KeyBlock struct {
 	// This member is required.
 	WrappingKeyCertificate *string
 
+	// The export token to initiate key export from Amazon Web Services Payment
+	// Cryptography. It also contains the signing key certificate that will sign the
+	// wrapped key during TR-34 key block generation. Call [GetParametersForExport]to receive an export token.
+	// It expires after 30 days. You can use the same export token to export multiple
+	// keys from the same service account.
+	//
+	// [GetParametersForExport]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetParametersForExport.html
+	ExportToken *string
+
 	// Optional metadata for export associated with the key material. This data is
 	// signed but transmitted in clear text.
 	KeyBlockHeaders *KeyBlockHeaders
@@ -267,6 +294,12 @@ type ExportTr34KeyBlock struct {
 	// pass. The operation will fail, if a random nonce value is not provided for a
 	// TR-34 key block generated using 2 pass.
 	RandomNonce *string
+
+	// Certificate used for signing the export key
+	SigningKeyCertificate *string
+
+	// Key Identifier used for signing the export key
+	SigningKeyIdentifier *string
 
 	noSmithyDocumentSerde
 }
@@ -457,14 +490,6 @@ type ImportTr34KeyBlock struct {
 	// This member is required.
 	CertificateAuthorityPublicKeyIdentifier *string
 
-	// The import token that initiates key import using the asymmetric TR-34 key
-	// exchange method into Amazon Web Services Payment Cryptography. It expires after
-	// 30 days. You can use the same import token to import multiple keys to the same
-	// service account.
-	//
-	// This member is required.
-	ImportToken *string
-
 	// The key block format to use during key import. The only value allowed is
 	// X9_TR34_2012 .
 	//
@@ -482,10 +507,22 @@ type ImportTr34KeyBlock struct {
 	// This member is required.
 	WrappedKeyBlock *string
 
+	// The import token that initiates key import using the asymmetric TR-34 key
+	// exchange method into Amazon Web Services Payment Cryptography. It expires after
+	// 30 days. You can use the same import token to import multiple keys to the same
+	// service account.
+	ImportToken *string
+
 	// A random number value that is unique to the TR-34 key block generated using 2
 	// pass. The operation will fail, if a random nonce value is not provided for a
 	// TR-34 key block generated using 2 pass.
 	RandomNonce *string
+
+	// Key Identifier used for unwrapping the import key
+	WrappingKeyCertificate *string
+
+	// Key Identifier used for unwrapping the import key
+	WrappingKeyIdentifier *string
 
 	noSmithyDocumentSerde
 }
@@ -767,7 +804,13 @@ type KeySummary struct {
 	// This member is required.
 	KeyState KeyState
 
-	// Defines the replication type of a key
+	// Indicates whether this key is a multi-region key and its role in the
+	// multi-region key hierarchy.
+	//
+	// Multi-region keys allow the same key material to be used across multiple Amazon
+	// Web Services Regions. This field specifies whether the key is a primary key
+	// (which can be replicated to other regions) or a replica key (which is a copy of
+	// a primary key in another region).
 	MultiRegionKeyType MultiRegionKeyType
 
 	// An Amazon Web Services Region identifier in the standard format (e.g., us-east-1
@@ -788,7 +831,13 @@ type KeySummary struct {
 // process.
 type ReplicationStatusType struct {
 
-	// Defines the replication state of a key
+	// The current status of key replication in this region.
+	//
+	// This field indicates whether the key replication is in progress, completed
+	// successfully, or has encountered an error. Possible values include states such
+	// as SYNCRHONIZED, IN_PROGRESS, DELETE_IN_PROGRESS, or FAILED. This provides
+	// visibility into the replication process for monitoring and troubleshooting
+	// purposes.
 	//
 	// This member is required.
 	Status KeyReplicationState

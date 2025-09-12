@@ -1,0 +1,8 @@
+{
+    "id": "4e8c1654-519f-41a5-92d9-168a60ef39a5",
+    "type": "feature",
+    "description": "Add support for certificates to be signed by 3rd party certificate authorities.  New API GetCertificateSigningRequest API and support for providing certificates at run-time for tr-34 import/export",
+    "modules": [
+        "service/paymentcryptography"
+    ]
+}

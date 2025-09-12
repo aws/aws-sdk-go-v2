@@ -190,6 +190,26 @@ func (m *validateOpGetAlias) HandleInitialize(ctx context.Context, in middleware
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetCertificateSigningRequest struct {
+}
+
+func (*validateOpGetCertificateSigningRequest) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCertificateSigningRequest) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCertificateSigningRequestInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCertificateSigningRequestInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetKey struct {
 }
 
@@ -486,6 +506,10 @@ func addOpGetAliasValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAlias{}, middleware.After)
 }
 
+func addOpGetCertificateSigningRequestValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCertificateSigningRequest{}, middleware.After)
+}
+
 func addOpGetKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetKey{}, middleware.After)
 }
@@ -536,6 +560,21 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateAliasValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAlias{}, middleware.After)
+}
+
+func validateCertificateSubjectType(v *types.CertificateSubjectType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CertificateSubjectType"}
+	if v.CommonName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CommonName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateExportAttributes(v *types.ExportAttributes) error {
@@ -680,9 +719,6 @@ func validateExportTr34KeyBlock(v *types.ExportTr34KeyBlock) error {
 	}
 	if v.WrappingKeyCertificate == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WrappingKeyCertificate"))
-	}
-	if v.ExportToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ExportToken"))
 	}
 	if len(v.KeyBlockFormat) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("KeyBlockFormat"))
@@ -830,9 +866,6 @@ func validateImportTr34KeyBlock(v *types.ImportTr34KeyBlock) error {
 	}
 	if v.SigningKeyCertificate == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SigningKeyCertificate"))
-	}
-	if v.ImportToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ImportToken"))
 	}
 	if v.WrappedKeyBlock == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WrappedKeyBlock"))
@@ -1107,6 +1140,31 @@ func validateOpGetAliasInput(v *GetAliasInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetAliasInput"}
 	if v.AliasName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AliasName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCertificateSigningRequestInput(v *GetCertificateSigningRequestInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCertificateSigningRequestInput"}
+	if v.KeyIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyIdentifier"))
+	}
+	if len(v.SigningAlgorithm) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SigningAlgorithm"))
+	}
+	if v.CertificateSubject == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateSubject"))
+	} else if v.CertificateSubject != nil {
+		if err := validateCertificateSubjectType(v.CertificateSubject); err != nil {
+			invalidParams.AddNested("CertificateSubject", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

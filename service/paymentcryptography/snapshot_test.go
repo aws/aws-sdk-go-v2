@@ -170,6 +170,18 @@ func TestCheckSnapshot_GetAlias(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetCertificateSigningRequest(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCertificateSigningRequest(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCertificateSigningRequest")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetDefaultKeyReplicationRegions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDefaultKeyReplicationRegions(context.Background(), nil, func(o *Options) {
@@ -462,6 +474,18 @@ func TestUpdateSnapshot_GetAlias(t *testing.T) {
 	_, err := svc.GetAlias(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetCertificateSigningRequest(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCertificateSigningRequest(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCertificateSigningRequest")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

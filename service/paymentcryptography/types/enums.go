@@ -377,6 +377,29 @@ func (MultiRegionKeyType) Values() []MultiRegionKeyType {
 	}
 }
 
+type SigningAlgorithmType string
+
+// Enum values for SigningAlgorithmType
+const (
+	SigningAlgorithmTypeSha224 SigningAlgorithmType = "SHA224"
+	SigningAlgorithmTypeSha256 SigningAlgorithmType = "SHA256"
+	SigningAlgorithmTypeSha384 SigningAlgorithmType = "SHA384"
+	SigningAlgorithmTypeSha512 SigningAlgorithmType = "SHA512"
+)
+
+// Values returns all known values for SigningAlgorithmType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SigningAlgorithmType) Values() []SigningAlgorithmType {
+	return []SigningAlgorithmType{
+		"SHA224",
+		"SHA256",
+		"SHA384",
+		"SHA512",
+	}
+}
+
 type SymmetricKeyAlgorithm string
 
 // Enum values for SymmetricKeyAlgorithm
