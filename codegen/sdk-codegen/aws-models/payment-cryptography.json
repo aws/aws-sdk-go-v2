@@ -165,6 +165,103 @@
                 "target": "com.amazonaws.paymentcryptography#Alias"
             }
         },
+        "com.amazonaws.paymentcryptography#CertificateSigningRequestType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32768
+                },
+                "smithy.api#pattern": "^[^\\[;\\]<>]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#CertificateSubjectType": {
+            "type": "structure",
+            "members": {
+                "CommonName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Common Name to be used in the certificate signing request",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 64
+                        },
+                        "smithy.api#pattern": "^[A-Za-z]+$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OrganizationUnit": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Organization Unit to be used in the certificate signing request",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 64
+                        },
+                        "smithy.api#pattern": "^[A-Za-z]+$"
+                    }
+                },
+                "Organization": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Organization to be used in the certificate signing request",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 64
+                        },
+                        "smithy.api#pattern": "^[A-Za-z]+$"
+                    }
+                },
+                "City": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "City to be used in the certificate signing request",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 128
+                        },
+                        "smithy.api#pattern": "^[A-Za-z]+$"
+                    }
+                },
+                "Country": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Country to be used in the certificate signing request",
+                        "smithy.api#length": {
+                            "min": 2,
+                            "max": 2
+                        },
+                        "smithy.api#pattern": "^[A-Za-z]+$"
+                    }
+                },
+                "StateOrProvince": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "State Or Province to be used in the certificate signing request",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 128
+                        },
+                        "smithy.api#pattern": "^[A-Za-z]+$"
+                    }
+                },
+                "EmailAddress": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Email to be used in the certificate signing request",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 128
+                        },
+                        "smithy.api#pattern": "^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Metadata used in generating the CSR"
+            }
+        },
         "com.amazonaws.paymentcryptography#CertificateType": {
             "type": "string",
             "traits": {
@@ -1076,8 +1173,21 @@
                 "ExportToken": {
                     "target": "com.amazonaws.paymentcryptography#ExportTokenId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The export token to initiate key export from Amazon Web Services Payment Cryptography. It also contains the signing key certificate that will sign the wrapped key during TR-34 key block generation. Call <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetParametersForExport.html\">GetParametersForExport</a> to receive an export token. It expires after 30 days. You can use the same export token to export multiple keys from the same service account.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>The export token to initiate key export from Amazon Web Services Payment Cryptography. It also contains the signing key certificate that will sign the wrapped key during TR-34 key block generation. Call <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetParametersForExport.html\">GetParametersForExport</a> to receive an export token. It expires after 30 days. You can use the same export token to export multiple keys from the same service account.</p>"
+                    }
+                },
+                "SigningKeyIdentifier": {
+                    "target": "com.amazonaws.paymentcryptography#KeyArnOrKeyAliasType",
+                    "traits": {
+                        "smithy.api#documentation": "Key Identifier used for signing the export key"
+                    }
+                },
+                "SigningKeyCertificate": {
+                    "target": "com.amazonaws.paymentcryptography#CertificateType",
+                    "traits": {
+                        "smithy.api#documentation": "Certificate used for signing the export key"
                     }
                 },
                 "KeyBlockFormat": {
@@ -1165,6 +1275,83 @@
                         "smithy.api#suppress": [
                             "UnstableTrait"
                         ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#GetCertificateSigningRequest": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.paymentcryptography#GetCertificateSigningRequestInput"
+            },
+            "output": {
+                "target": "com.amazonaws.paymentcryptography#GetCertificateSigningRequestOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.paymentcryptography#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "smithy.api#documentation": "Used to retrieve the public key for a keypair."
+            }
+        },
+        "com.amazonaws.paymentcryptography#GetCertificateSigningRequestInput": {
+            "type": "structure",
+            "members": {
+                "KeyIdentifier": {
+                    "target": "com.amazonaws.paymentcryptography#KeyArnOrKeyAliasType",
+                    "traits": {
+                        "smithy.api#documentation": "Asymmetric key used for generating the certificate signing request",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SigningAlgorithm": {
+                    "target": "com.amazonaws.paymentcryptography#SigningAlgorithmType",
+                    "traits": {
+                        "smithy.api#documentation": "Algorithm used to generate the certificate signing request",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CertificateSubject": {
+                    "target": "com.amazonaws.paymentcryptography#CertificateSubjectType",
+                    "traits": {
+                        "smithy.api#documentation": "Certificate subject data",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#GetCertificateSigningRequestOutput": {
+            "type": "structure",
+            "members": {
+                "CertificateSigningRequest": {
+                    "target": "com.amazonaws.paymentcryptography#CertificateSigningRequestType",
+                    "traits": {
+                        "smithy.api#documentation": "Certificate signing request",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -1876,8 +2063,21 @@
                 "ImportToken": {
                     "target": "com.amazonaws.paymentcryptography#ImportTokenId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The import token that initiates key import using the asymmetric TR-34 key exchange method into Amazon Web Services Payment Cryptography. It expires after 30 days. You can use the same import token to import multiple keys to the same service account.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>The import token that initiates key import using the asymmetric TR-34 key exchange method into Amazon Web Services Payment Cryptography. It expires after 30 days. You can use the same import token to import multiple keys to the same service account.</p>"
+                    }
+                },
+                "WrappingKeyIdentifier": {
+                    "target": "com.amazonaws.paymentcryptography#KeyArnOrKeyAliasType",
+                    "traits": {
+                        "smithy.api#documentation": "Key Identifier used for unwrapping the import key"
+                    }
+                },
+                "WrappingKeyCertificate": {
+                    "target": "com.amazonaws.paymentcryptography#CertificateType",
+                    "traits": {
+                        "smithy.api#documentation": "Key Identifier used for unwrapping the import key"
                     }
                 },
                 "WrappedKeyBlock": {
@@ -2641,7 +2841,10 @@
                     }
                 },
                 "MultiRegionKeyType": {
-                    "target": "com.amazonaws.paymentcryptography#MultiRegionKeyType"
+                    "target": "com.amazonaws.paymentcryptography#MultiRegionKeyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether this key is a multi-region key and its role in the multi-region key hierarchy.</p> <p>Multi-region keys allow the same key material to be used across multiple Amazon Web Services Regions. This field specifies whether the key is a primary key (which can be replicated to other regions) or a replica key (which is a copy of a primary key in another region).</p>"
+                    }
                 },
                 "PrimaryRegion": {
                     "target": "com.amazonaws.paymentcryptography#Region"
@@ -3113,6 +3316,9 @@
                 },
                 {
                     "target": "com.amazonaws.paymentcryptography#ExportKey"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#GetCertificateSigningRequest"
                 },
                 {
                     "target": "com.amazonaws.paymentcryptography#GetDefaultKeyReplicationRegions"
@@ -3893,6 +4099,7 @@
                 "Status": {
                     "target": "com.amazonaws.paymentcryptography#KeyReplicationState",
                     "traits": {
+                        "smithy.api#documentation": "<p>The current status of key replication in this region.</p> <p>This field indicates whether the key replication is in progress, completed successfully, or has encountered an error. Possible values include states such as SYNCRHONIZED, IN_PROGRESS, DELETE_IN_PROGRESS, or FAILED. This provides visibility into the replication process for monitoring and troubleshooting purposes.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4062,6 +4269,30 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^(?:[0-9a-fA-F][0-9a-fA-F])+$"
+            }
+        },
+        "com.amazonaws.paymentcryptography#SigningAlgorithmType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Defines the Algorithm used to generate the certificate signing request",
+                "smithy.api#enum": [
+                    {
+                        "value": "SHA224",
+                        "name": "SHA224"
+                    },
+                    {
+                        "value": "SHA256",
+                        "name": "SHA256"
+                    },
+                    {
+                        "value": "SHA384",
+                        "name": "SHA384"
+                    },
+                    {
+                        "value": "SHA512",
+                        "name": "SHA512"
+                    }
+                ]
             }
         },
         "com.amazonaws.paymentcryptography#StartKeyUsage": {
