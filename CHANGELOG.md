@@ -1,3 +1,9 @@
+# Release (2025-09-12)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptography`: [v1.25.0](service/paymentcryptography/CHANGELOG.md#v1250-2025-09-12)
+  * **Feature**: Add support for certificates to be signed by 3rd party certificate authorities.  New API GetCertificateSigningRequest API and support for providing certificates at run-time for tr-34 import/export
+
 # Release (2025-09-11)
 
 ## Module Highlights

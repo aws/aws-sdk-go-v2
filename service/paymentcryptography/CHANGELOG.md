@@ -1,3 +1,7 @@
+# v1.25.0 (2025-09-12)
+
+* **Feature**: Add support for certificates to be signed by 3rd party certificate authorities.  New API GetCertificateSigningRequest API and support for providing certificates at run-time for tr-34 import/export
+
 # v1.24.0 (2025-09-10)
 
 * **Feature**: AWS Payment Cryptography Service now supports Multi-Region key replication. Customers can choose to automatically distribute keys across AWS Regions.
