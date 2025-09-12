@@ -15,6 +15,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	s3types "github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 var etag = "myetag"
@@ -46,7 +47,12 @@ type TransferManagerLoggingClient struct {
 	Etags           []string
 
 	ErrReaders []TestErrReader
-	index      int
+
+	// params for keyprefix download test
+	ListObjectsData    [][]s3types.Object
+	ContinuationTokens []string
+
+	index int
 
 	m sync.Mutex
 
@@ -213,6 +219,7 @@ func (c *TransferManagerLoggingClient) GetObject(ctx context.Context, params *s3
 	c.m.Lock()
 	defer c.m.Unlock()
 
+	c.traceOperation("GetObject", params)
 	c.GetObjectInvocations++
 
 	if params.Range != nil {
@@ -241,6 +248,30 @@ func (c *TransferManagerLoggingClient) HeadObject(ctx context.Context, params *s
 		ContentLength: aws.Int64(int64(len(c.Data))),
 		ETag:          aws.String(etag),
 	}, nil
+}
+
+// ListObjectsV2 is the S3 ListObjectsV2 API
+func (c *TransferManagerLoggingClient) ListObjectsV2(ctx context.Context, params *s3.ListObjectsV2Input, optFns ...func(*s3.Options)) (*s3.ListObjectsV2Output, error) {
+	c.m.Lock()
+	defer c.m.Unlock()
+
+	c.traceOperation("ListObjectsV2", params)
+
+	var nextToken *string
+	var isTruncated bool
+	if c.index < len(c.ContinuationTokens) {
+		nextToken = aws.String(c.ContinuationTokens[c.index])
+		isTruncated = true
+	}
+
+	out := &s3.ListObjectsV2Output{
+		Contents:              c.ListObjectsData[c.index],
+		NextContinuationToken: nextToken,
+		IsTruncated:           aws.Bool(isTruncated),
+	}
+	c.index++
+
+	return out, nil
 }
 
 // NewUploadLoggingClient returns a new TransferManagerLoggingClient for upload testing.
@@ -397,6 +428,13 @@ func NewUploadDirectoryClient(ignoredOps []string) (*TransferManagerLoggingClien
 	c := &TransferManagerLoggingClient{
 		ignoredOperations: ignoredOps,
 	}
+
+	return c, &c.Params
+}
+
+// NewDownloadDirectoryClient returns a new TransferManagerLoggingClient for download directory testing
+func NewDownloadDirectoryClient() (*TransferManagerLoggingClient, *[]interface{}) {
+	c := &TransferManagerLoggingClient{}
 
 	return c, &c.Params
 }

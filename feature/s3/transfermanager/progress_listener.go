@@ -188,3 +188,182 @@ func (e *singleObjectProgressEmitter) Failed(ctx context.Context, err error) {
 		Error:            err,
 	})
 }
+
+// DirectoryProgressListeners holds various "directory transfer progress" hooks that a caller can
+// supply to receive progress updates for potentially long-running transfer
+// manager operations.
+//
+// Directory Progress listeners are invoked synchronously within the outer directory transfer
+// operation. Callers SHOULD NOT perform long-lived operations in these hooks,
+// such as submitting the progress snapshot to some other network agent.
+type DirectoryProgressListeners struct {
+	ObjectsTransferStart    []ObjectsTransferStartListener
+	ObjectsTransferred      []ObjectsTransferredListener
+	ObjectsTransferComplete []ObjectsTransferCompleteListener
+	ObjectsTransferFailed   []ObjectsTransferFailedListener
+}
+
+// Register registers the input with all progress listener hooks that it implements.
+//
+// If the input does not implement a specific listener, it is a no-op for one
+// instance. Callers should generally use compile-time type assertions to
+// verify that their implementations satisfy the desired listener interfaces.
+func (p *DirectoryProgressListeners) Register(v any) {
+	if l, ok := v.(ObjectsTransferStartListener); ok {
+		p.ObjectsTransferStart = append(p.ObjectsTransferStart, l)
+	}
+	if l, ok := v.(ObjectsTransferredListener); ok {
+		p.ObjectsTransferred = append(p.ObjectsTransferred, l)
+	}
+	if l, ok := v.(ObjectsTransferCompleteListener); ok {
+		p.ObjectsTransferComplete = append(p.ObjectsTransferComplete, l)
+	}
+	if l, ok := v.(ObjectsTransferFailedListener); ok {
+		p.ObjectsTransferFailed = append(p.ObjectsTransferFailed, l)
+	}
+}
+
+// Copy creates a clone where all hook lists are deep-copied.
+func (p *DirectoryProgressListeners) Copy() DirectoryProgressListeners {
+	objectsTransferStart := make([]ObjectsTransferStartListener, len(p.ObjectsTransferStart))
+	objectsTransferred := make([]ObjectsTransferredListener, len(p.ObjectsTransferred))
+	objectsTransferComplete := make([]ObjectsTransferCompleteListener, len(p.ObjectsTransferComplete))
+	objectsTransferFailed := make([]ObjectsTransferFailedListener, len(p.ObjectsTransferFailed))
+	copy(objectsTransferStart, p.ObjectsTransferStart)
+	copy(objectsTransferred, p.ObjectsTransferred)
+	copy(objectsTransferComplete, p.ObjectsTransferComplete)
+	copy(objectsTransferFailed, p.ObjectsTransferFailed)
+	return DirectoryProgressListeners{
+		ObjectsTransferStart:    objectsTransferStart,
+		ObjectsTransferred:      objectsTransferred,
+		ObjectsTransferComplete: objectsTransferComplete,
+		ObjectsTransferFailed:   objectsTransferFailed,
+	}
+}
+
+// ObjectsTransferStartListener is invoked when a directory transfer begins.
+type ObjectsTransferStartListener interface {
+	OnObjectsTransferStart(context.Context, *ObjectsTransferStartEvent)
+}
+
+// ObjectsTransferStartEvent is the event payload for directory transfer start.
+type ObjectsTransferStartEvent struct {
+	Input any
+}
+
+// ObjectsTransferredListener is invoked on progress in a directory
+// transfer.
+//
+// This hook is ALWAYS invoked exactly once for a single object transfer
+type ObjectsTransferredListener interface {
+	OnObjectsTransferred(context.Context, *ObjectsTransferredEvent)
+}
+
+// ObjectsTransferredEvent is the event payload for object bytes/counts
+// transferred.
+type ObjectsTransferredEvent struct {
+	Input              any
+	BytesTransferred   int64
+	ObjectsTransferred int64
+}
+
+// ObjectsTransferCompleteListener is invoked when a directory transfer
+// completes without error.
+type ObjectsTransferCompleteListener interface {
+	OnObjectsTransferComplete(context.Context, *ObjectsTransferCompleteEvent)
+}
+
+// ObjectsTransferCompleteEvent is the event payload for objects transfer
+// complete.
+type ObjectsTransferCompleteEvent struct {
+	Input              any
+	Output             any
+	BytesTransferred   int64
+	ObjectsTransferred int64
+}
+
+// ObjectsTransferFailedListener is invoked when a directory transfer fails.
+//
+// This hook is only invoked for overall operation failure.
+type ObjectsTransferFailedListener interface {
+	OnObjectsTransferFailed(context.Context, *ObjectsTransferFailedEvent)
+}
+
+// ObjectsTransferFailedEvent is the event payload for objects transfer failure.
+type ObjectsTransferFailedEvent struct {
+	Input              any
+	Error              error
+	BytesTransferred   int64
+	ObjectsTransferred int64
+}
+
+func (p *DirectoryProgressListeners) emitObjectsTransferStart(ctx context.Context, event *ObjectsTransferStartEvent) {
+	for _, l := range p.ObjectsTransferStart {
+		l.OnObjectsTransferStart(ctx, event)
+	}
+}
+
+func (p *DirectoryProgressListeners) emitObjectsTransferred(ctx context.Context, event *ObjectsTransferredEvent) {
+	for _, l := range p.ObjectsTransferred {
+		l.OnObjectsTransferred(ctx, event)
+	}
+}
+
+func (p *DirectoryProgressListeners) emitObjectsTransferComplete(ctx context.Context, event *ObjectsTransferCompleteEvent) {
+	for _, l := range p.ObjectsTransferComplete {
+		l.OnObjectsTransferComplete(ctx, event)
+	}
+}
+
+func (p *DirectoryProgressListeners) emitObjectsTransferFailed(ctx context.Context, event *ObjectsTransferFailedEvent) {
+	for _, l := range p.ObjectsTransferFailed {
+		l.OnObjectsTransferFailed(ctx, event)
+	}
+}
+
+// reusable directory progress event emitter
+// used for implementations of:
+//   - DirectoryUpload
+//   - DirectoryDownload
+type directoryObjectsProgressEmitter struct {
+	Listeners DirectoryProgressListeners
+
+	input              any
+	bytesTransferred   atomic.Int64
+	objectsTransferred atomic.Int64
+}
+
+func (e *directoryObjectsProgressEmitter) Start(ctx context.Context, in any) {
+	e.input = in
+	e.Listeners.emitObjectsTransferStart(ctx, &ObjectsTransferStartEvent{
+		Input: in,
+	})
+}
+
+func (e *directoryObjectsProgressEmitter) ObjectsTransferred(ctx context.Context, transferred int64) {
+	bytesTransferred := e.bytesTransferred.Add(transferred)
+	objectsTransferred := e.objectsTransferred.Add(1)
+	e.Listeners.emitObjectsTransferred(ctx, &ObjectsTransferredEvent{
+		Input:              e.input,
+		BytesTransferred:   bytesTransferred,
+		ObjectsTransferred: objectsTransferred,
+	})
+}
+
+func (e *directoryObjectsProgressEmitter) Complete(ctx context.Context, out any) {
+	e.Listeners.emitObjectsTransferComplete(ctx, &ObjectsTransferCompleteEvent{
+		Input:              e.input,
+		BytesTransferred:   e.bytesTransferred.Load(),
+		ObjectsTransferred: e.objectsTransferred.Load(),
+		Output:             out,
+	})
+}
+
+func (e *directoryObjectsProgressEmitter) Failed(ctx context.Context, in any, err error) {
+	e.Listeners.emitObjectsTransferFailed(ctx, &ObjectsTransferFailedEvent{
+		Input:              in,
+		BytesTransferred:   e.bytesTransferred.Load(),
+		ObjectsTransferred: e.objectsTransferred.Load(),
+		Error:              err,
+	})
+}
