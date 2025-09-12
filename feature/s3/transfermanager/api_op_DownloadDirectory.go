@@ -236,7 +236,7 @@ func (d *directoryDownloader) downloadObject(ctx context.Context, ch chan object
 			d.emitter.Start(ctx, d.in)
 		})
 
-		err = os.MkdirAll(filepath.Dir(data.path), os.ModePerm)
+		err = os.MkdirAll(filepath.Dir(data.path), 0755)
 		if err != nil {
 			d.setErr(fmt.Errorf("error when creating directory for file %s: %v", data.path, err))
 			continue
