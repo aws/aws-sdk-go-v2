@@ -216,6 +216,11 @@ func awsRestjson1_serializeOpDocumentCreateDatastoreInput(v *CreateDatastoreInpu
 		ok.String(*v.KmsKeyArn)
 	}
 
+	if v.LambdaAuthorizerArn != nil {
+		ok := object.Key("lambdaAuthorizerArn")
+		ok.String(*v.LambdaAuthorizerArn)
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {

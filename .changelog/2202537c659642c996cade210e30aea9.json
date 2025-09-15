@@ -1,0 +1,8 @@
+{
+    "id": "2202537c-6596-42c9-96ca-de210e30aea9",
+    "type": "feature",
+    "description": "Added support for OpenID Connect (OIDC) custom authorizer",
+    "modules": [
+        "service/medicalimaging"
+    ]
+}

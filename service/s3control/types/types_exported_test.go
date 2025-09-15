@@ -25,6 +25,40 @@ func ExampleJobManifestGenerator_outputUsage() {
 
 var _ *types.S3JobManifestGenerator
 
+func ExampleObjectEncryptionFilter_outputUsage() {
+	var union types.ObjectEncryptionFilter
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ObjectEncryptionFilterMemberDSSEKMS:
+		_ = v.Value // Value is types.DSSEKMSFilter
+
+	case *types.ObjectEncryptionFilterMemberNOTSSE:
+		_ = v.Value // Value is types.NotSSEFilter
+
+	case *types.ObjectEncryptionFilterMemberSSEC:
+		_ = v.Value // Value is types.SSECFilter
+
+	case *types.ObjectEncryptionFilterMemberSSEKMS:
+		_ = v.Value // Value is types.SSEKMSFilter
+
+	case *types.ObjectEncryptionFilterMemberSSES3:
+		_ = v.Value // Value is types.SSES3Filter
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.SSES3Filter
+var _ *types.NotSSEFilter
+var _ *types.DSSEKMSFilter
+var _ *types.SSECFilter
+var _ *types.SSEKMSFilter
+
 func ExampleObjectLambdaContentTransformation_outputUsage() {
 	var union types.ObjectLambdaContentTransformation
 	// type switches can be used to check the union value

@@ -9180,6 +9180,22 @@ func awsRestxml_serializeDocumentDetailedStatusCodesMetrics(v *types.DetailedSta
 	return nil
 }
 
+func awsRestxml_serializeDocumentDSSEKMSFilter(v *types.DSSEKMSFilter, value smithyxml.Value) error {
+	defer value.Close()
+	if v.KmsKeyArn != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "KmsKeyArn",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.KmsKeyArn)
+	}
+	return nil
+}
+
 func awsRestxml_serializeDocumentEncryptionConfiguration(v *types.EncryptionConfiguration, value smithyxml.Value) error {
 	defer value.Close()
 	if v.ReplicaKmsKeyID != nil {
@@ -9444,6 +9460,19 @@ func awsRestxml_serializeDocumentJobManifestGeneratorFilter(v *types.JobManifest
 		}
 		el := value.MemberElement(root)
 		if err := awsRestxml_serializeDocumentKeyNameConstraint(v.KeyNameConstraint, el); err != nil {
+			return err
+		}
+	}
+	if v.MatchAnyObjectEncryption != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "MatchAnyObjectEncryption",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentObjectEncryptionFilterList(v.MatchAnyObjectEncryption, el); err != nil {
 			return err
 		}
 	}
@@ -10421,6 +10450,113 @@ func awsRestxml_serializeDocumentNonEmptyMaxLength1024StringList(v []string, val
 	for i := range v {
 		am := array.Member()
 		am.String(v[i])
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentNotSSEFilter(v *types.NotSSEFilter, value smithyxml.Value) error {
+	defer value.Close()
+	return nil
+}
+
+func awsRestxml_serializeDocumentObjectEncryptionFilter(v types.ObjectEncryptionFilter, value smithyxml.Value) error {
+	defer value.Close()
+	switch uv := v.(type) {
+	case *types.ObjectEncryptionFilterMemberDSSEKMS:
+		customMemberNameAttr := []smithyxml.Attr{}
+		customMemberName := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "DSSE-KMS",
+			},
+			Attr: customMemberNameAttr,
+		}
+		av := value.MemberElement(customMemberName)
+		if err := awsRestxml_serializeDocumentDSSEKMSFilter(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ObjectEncryptionFilterMemberNOTSSE:
+		customMemberNameAttr := []smithyxml.Attr{}
+		customMemberName := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "NOT-SSE",
+			},
+			Attr: customMemberNameAttr,
+		}
+		av := value.MemberElement(customMemberName)
+		if err := awsRestxml_serializeDocumentNotSSEFilter(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ObjectEncryptionFilterMemberSSEC:
+		customMemberNameAttr := []smithyxml.Attr{}
+		customMemberName := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "SSE-C",
+			},
+			Attr: customMemberNameAttr,
+		}
+		av := value.MemberElement(customMemberName)
+		if err := awsRestxml_serializeDocumentSSECFilter(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ObjectEncryptionFilterMemberSSEKMS:
+		customMemberNameAttr := []smithyxml.Attr{}
+		customMemberName := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "SSE-KMS",
+			},
+			Attr: customMemberNameAttr,
+		}
+		av := value.MemberElement(customMemberName)
+		if err := awsRestxml_serializeDocumentSSEKMSFilter(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ObjectEncryptionFilterMemberSSES3:
+		customMemberNameAttr := []smithyxml.Attr{}
+		customMemberName := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "SSE-S3",
+			},
+			Attr: customMemberNameAttr,
+		}
+		av := value.MemberElement(customMemberName)
+		if err := awsRestxml_serializeDocumentSSES3Filter(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentObjectEncryptionFilterList(v []types.ObjectEncryptionFilter, value smithyxml.Value) error {
+	var array *smithyxml.Array
+	if !value.IsFlattened() {
+		defer value.Close()
+	}
+	customMemberNameAttr := []smithyxml.Attr{}
+	customMemberName := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "ObjectEncryption",
+		},
+		Attr: customMemberNameAttr,
+	}
+	array = value.ArrayWithCustomName(customMemberName)
+	for i := range v {
+		if v[i] == nil {
+			am := array.Member()
+			am.Close()
+			continue
+		}
+		am := array.Member()
+		if err := awsRestxml_serializeDocumentObjectEncryptionFilter(v[i], am); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -12247,6 +12383,11 @@ func awsRestxml_serializeDocumentSourceSelectionCriteria(v *types.SourceSelectio
 	return nil
 }
 
+func awsRestxml_serializeDocumentSSECFilter(v *types.SSECFilter, value smithyxml.Value) error {
+	defer value.Close()
+	return nil
+}
+
 func awsRestxml_serializeDocumentSSEKMS(v *types.SSEKMS, value smithyxml.Value) error {
 	defer value.Close()
 	if v.KeyId != nil {
@@ -12295,12 +12436,44 @@ func awsRestxml_serializeDocumentSSEKMSEncryption(v *types.SSEKMSEncryption, val
 	return nil
 }
 
+func awsRestxml_serializeDocumentSSEKMSFilter(v *types.SSEKMSFilter, value smithyxml.Value) error {
+	defer value.Close()
+	if v.BucketKeyEnabled != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "BucketKeyEnabled",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Boolean(*v.BucketKeyEnabled)
+	}
+	if v.KmsKeyArn != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "KmsKeyArn",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.KmsKeyArn)
+	}
+	return nil
+}
+
 func awsRestxml_serializeDocumentSSES3(v *types.SSES3, value smithyxml.Value) error {
 	defer value.Close()
 	return nil
 }
 
 func awsRestxml_serializeDocumentSSES3Encryption(v *types.SSES3Encryption, value smithyxml.Value) error {
+	defer value.Close()
+	return nil
+}
+
+func awsRestxml_serializeDocumentSSES3Filter(v *types.SSES3Filter, value smithyxml.Value) error {
 	defer value.Close()
 	return nil
 }

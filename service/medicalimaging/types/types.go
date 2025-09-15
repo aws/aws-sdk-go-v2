@@ -142,6 +142,9 @@ type DatastoreProperties struct {
 	// for accessing encrypted data.
 	KmsKeyArn *string
 
+	// The ARN of the authorizer's Lambda function.
+	LambdaAuthorizerArn *string
+
 	// The timestamp when the data store was last updated.
 	UpdatedAt *time.Time
 

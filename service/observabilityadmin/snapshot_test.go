@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_CreateCentralizationRuleForOrganization(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCentralizationRuleForOrganization(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateCentralizationRuleForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateTelemetryRule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateTelemetryRule(context.Background(), nil, func(o *Options) {
@@ -86,6 +98,18 @@ func TestCheckSnapshot_CreateTelemetryRuleForOrganization(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteCentralizationRuleForOrganization(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCentralizationRuleForOrganization(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteCentralizationRuleForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteTelemetryRule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteTelemetryRule(context.Background(), nil, func(o *Options) {
@@ -103,6 +127,18 @@ func TestCheckSnapshot_DeleteTelemetryRuleForOrganization(t *testing.T) {
 	_, err := svc.DeleteTelemetryRuleForOrganization(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteTelemetryRuleForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetCentralizationRuleForOrganization(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCentralizationRuleForOrganization(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCentralizationRuleForOrganization")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -151,6 +187,18 @@ func TestCheckSnapshot_GetTelemetryRuleForOrganization(t *testing.T) {
 	_, err := svc.GetTelemetryRuleForOrganization(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetTelemetryRuleForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListCentralizationRulesForOrganization(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCentralizationRulesForOrganization(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCentralizationRulesForOrganization")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -290,6 +338,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateCentralizationRuleForOrganization(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCentralizationRuleForOrganization(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateCentralizationRuleForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateTelemetryRule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateTelemetryRule(context.Background(), nil, func(o *Options) {
@@ -313,6 +373,18 @@ func TestCheckSnapshot_UpdateTelemetryRuleForOrganization(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_CreateCentralizationRuleForOrganization(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCentralizationRuleForOrganization(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateCentralizationRuleForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateTelemetryRule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateTelemetryRule(context.Background(), nil, func(o *Options) {
@@ -337,6 +409,18 @@ func TestUpdateSnapshot_CreateTelemetryRuleForOrganization(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteCentralizationRuleForOrganization(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCentralizationRuleForOrganization(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteCentralizationRuleForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteTelemetryRule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteTelemetryRule(context.Background(), nil, func(o *Options) {
@@ -354,6 +438,18 @@ func TestUpdateSnapshot_DeleteTelemetryRuleForOrganization(t *testing.T) {
 	_, err := svc.DeleteTelemetryRuleForOrganization(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteTelemetryRuleForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetCentralizationRuleForOrganization(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCentralizationRuleForOrganization(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCentralizationRuleForOrganization")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -402,6 +498,18 @@ func TestUpdateSnapshot_GetTelemetryRuleForOrganization(t *testing.T) {
 	_, err := svc.GetTelemetryRuleForOrganization(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetTelemetryRuleForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCentralizationRulesForOrganization(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCentralizationRulesForOrganization(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCentralizationRulesForOrganization")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -534,6 +642,18 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateCentralizationRuleForOrganization(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCentralizationRuleForOrganization(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateCentralizationRuleForOrganization")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

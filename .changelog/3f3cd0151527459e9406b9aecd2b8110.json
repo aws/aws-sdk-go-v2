@@ -1,0 +1,8 @@
+{
+    "id": "3f3cd015-1527-459e-9406-b9aecd2b8110",
+    "type": "feature",
+    "description": "CloudWatch Observability Admin adds the ability to enable telemetry centralization in customers' Organizations. The release introduces new APIs to manage centralization rules, which define settings to replicate telemetry data to a central destination in the customers' Organization.",
+    "modules": [
+        "service/observabilityadmin"
+    ]
+}

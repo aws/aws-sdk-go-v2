@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpCreateCentralizationRuleForOrganization struct {
+}
+
+func (*validateOpCreateCentralizationRuleForOrganization) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCentralizationRuleForOrganization) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCentralizationRuleForOrganizationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCentralizationRuleForOrganizationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateTelemetryRuleForOrganization struct {
 }
 
@@ -50,6 +70,26 @@ func (m *validateOpCreateTelemetryRule) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteCentralizationRuleForOrganization struct {
+}
+
+func (*validateOpDeleteCentralizationRuleForOrganization) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCentralizationRuleForOrganization) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCentralizationRuleForOrganizationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCentralizationRuleForOrganizationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteTelemetryRuleForOrganization struct {
 }
 
@@ -85,6 +125,26 @@ func (m *validateOpDeleteTelemetryRule) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteTelemetryRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCentralizationRuleForOrganization struct {
+}
+
+func (*validateOpGetCentralizationRuleForOrganization) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCentralizationRuleForOrganization) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCentralizationRuleForOrganizationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCentralizationRuleForOrganizationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -190,6 +250,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateCentralizationRuleForOrganization struct {
+}
+
+func (*validateOpUpdateCentralizationRuleForOrganization) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCentralizationRuleForOrganization) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCentralizationRuleForOrganizationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCentralizationRuleForOrganizationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateTelemetryRuleForOrganization struct {
 }
 
@@ -230,6 +310,10 @@ func (m *validateOpUpdateTelemetryRule) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpCreateCentralizationRuleForOrganizationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCentralizationRuleForOrganization{}, middleware.After)
+}
+
 func addOpCreateTelemetryRuleForOrganizationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateTelemetryRuleForOrganization{}, middleware.After)
 }
@@ -238,12 +322,20 @@ func addOpCreateTelemetryRuleValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpCreateTelemetryRule{}, middleware.After)
 }
 
+func addOpDeleteCentralizationRuleForOrganizationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCentralizationRuleForOrganization{}, middleware.After)
+}
+
 func addOpDeleteTelemetryRuleForOrganizationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteTelemetryRuleForOrganization{}, middleware.After)
 }
 
 func addOpDeleteTelemetryRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteTelemetryRule{}, middleware.After)
+}
+
+func addOpGetCentralizationRuleForOrganizationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCentralizationRuleForOrganization{}, middleware.After)
 }
 
 func addOpGetTelemetryRuleForOrganizationValidationMiddleware(stack *middleware.Stack) error {
@@ -266,12 +358,152 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func addOpUpdateCentralizationRuleForOrganizationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCentralizationRuleForOrganization{}, middleware.After)
+}
+
 func addOpUpdateTelemetryRuleForOrganizationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateTelemetryRuleForOrganization{}, middleware.After)
 }
 
 func addOpUpdateTelemetryRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateTelemetryRule{}, middleware.After)
+}
+
+func validateCentralizationRule(v *types.CentralizationRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CentralizationRule"}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	} else if v.Source != nil {
+		if err := validateCentralizationRuleSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Destination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
+	} else if v.Destination != nil {
+		if err := validateCentralizationRuleDestination(v.Destination); err != nil {
+			invalidParams.AddNested("Destination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCentralizationRuleDestination(v *types.CentralizationRuleDestination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CentralizationRuleDestination"}
+	if v.Region == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Region"))
+	}
+	if v.DestinationLogsConfiguration != nil {
+		if err := validateDestinationLogsConfiguration(v.DestinationLogsConfiguration); err != nil {
+			invalidParams.AddNested("DestinationLogsConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCentralizationRuleSource(v *types.CentralizationRuleSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CentralizationRuleSource"}
+	if v.Regions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Regions"))
+	}
+	if v.SourceLogsConfiguration != nil {
+		if err := validateSourceLogsConfiguration(v.SourceLogsConfiguration); err != nil {
+			invalidParams.AddNested("SourceLogsConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDestinationLogsConfiguration(v *types.DestinationLogsConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DestinationLogsConfiguration"}
+	if v.LogsEncryptionConfiguration != nil {
+		if err := validateLogsEncryptionConfiguration(v.LogsEncryptionConfiguration); err != nil {
+			invalidParams.AddNested("LogsEncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BackupConfiguration != nil {
+		if err := validateLogsBackupConfiguration(v.BackupConfiguration); err != nil {
+			invalidParams.AddNested("BackupConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLogsBackupConfiguration(v *types.LogsBackupConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LogsBackupConfiguration"}
+	if v.Region == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Region"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLogsEncryptionConfiguration(v *types.LogsEncryptionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LogsEncryptionConfiguration"}
+	if len(v.EncryptionStrategy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EncryptionStrategy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSourceLogsConfiguration(v *types.SourceLogsConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SourceLogsConfiguration"}
+	if v.LogGroupSelectionCriteria == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LogGroupSelectionCriteria"))
+	}
+	if len(v.EncryptedLogGroupStrategy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EncryptedLogGroupStrategy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateTelemetryRule(v *types.TelemetryRule) error {
@@ -281,6 +513,28 @@ func validateTelemetryRule(v *types.TelemetryRule) error {
 	invalidParams := smithy.InvalidParamsError{Context: "TelemetryRule"}
 	if len(v.TelemetryType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("TelemetryType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateCentralizationRuleForOrganizationInput(v *CreateCentralizationRuleForOrganizationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCentralizationRuleForOrganizationInput"}
+	if v.RuleName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleName"))
+	}
+	if v.Rule == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Rule"))
+	} else if v.Rule != nil {
+		if err := validateCentralizationRule(v.Rule); err != nil {
+			invalidParams.AddNested("Rule", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -333,6 +587,21 @@ func validateOpCreateTelemetryRuleInput(v *CreateTelemetryRuleInput) error {
 	}
 }
 
+func validateOpDeleteCentralizationRuleForOrganizationInput(v *DeleteCentralizationRuleForOrganizationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCentralizationRuleForOrganizationInput"}
+	if v.RuleIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteTelemetryRuleForOrganizationInput(v *DeleteTelemetryRuleForOrganizationInput) error {
 	if v == nil {
 		return nil
@@ -353,6 +622,21 @@ func validateOpDeleteTelemetryRuleInput(v *DeleteTelemetryRuleInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteTelemetryRuleInput"}
+	if v.RuleIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCentralizationRuleForOrganizationInput(v *GetCentralizationRuleForOrganizationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCentralizationRuleForOrganizationInput"}
 	if v.RuleIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RuleIdentifier"))
 	}
@@ -436,6 +720,28 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCentralizationRuleForOrganizationInput(v *UpdateCentralizationRuleForOrganizationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCentralizationRuleForOrganizationInput"}
+	if v.RuleIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleIdentifier"))
+	}
+	if v.Rule == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Rule"))
+	} else if v.Rule != nil {
+		if err := validateCentralizationRule(v.Rule); err != nil {
+			invalidParams.AddNested("Rule", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -316,6 +316,9 @@ func awsRestjson1_deserializeOpErrorCreateDatastore(response *smithyhttp.Respons
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
 	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
 		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
 
@@ -3808,6 +3811,15 @@ func awsRestjson1_deserializeDocumentDatastoreProperties(v **types.DatastoreProp
 					return fmt.Errorf("expected KmsKeyArn to be of type string, got %T instead", value)
 				}
 				sv.KmsKeyArn = ptr.String(jtv)
+			}
+
+		case "lambdaAuthorizerArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LambdaArn to be of type string, got %T instead", value)
+				}
+				sv.LambdaAuthorizerArn = ptr.String(jtv)
 			}
 
 		case "updatedAt":

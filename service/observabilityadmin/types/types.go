@@ -6,6 +6,174 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
+// Defines how telemetry data should be centralized across an Amazon Web Services
+// Organization, including source and destination configurations.
+type CentralizationRule struct {
+
+	// Configuration determining where the telemetry data should be centralized,
+	// backed up, as well as encryption configuration for the primary and backup
+	// destinations.
+	//
+	// This member is required.
+	Destination *CentralizationRuleDestination
+
+	// Configuration determining the source of the telemetry data to be centralized.
+	//
+	// This member is required.
+	Source *CentralizationRuleSource
+
+	noSmithyDocumentSerde
+}
+
+// Configuration specifying the primary destination for centralized telemetry data.
+type CentralizationRuleDestination struct {
+
+	// The primary destination region to which telemetry data should be centralized.
+	//
+	// This member is required.
+	Region *string
+
+	// The destination account (within the organization) to which the telemetry data
+	// should be centralized.
+	Account *string
+
+	// Log specific configuration for centralization destination log groups.
+	DestinationLogsConfiguration *DestinationLogsConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Configuration specifying the source of telemetry data to be centralized.
+type CentralizationRuleSource struct {
+
+	// The list of source regions from which telemetry data should be centralized.
+	//
+	// This member is required.
+	Regions []string
+
+	// The organizational scope from which telemetry data should be centralized,
+	// specified using organization id, accounts or organizational unit ids.
+	Scope *string
+
+	// Log specific configuration for centralization source log groups.
+	SourceLogsConfiguration *SourceLogsConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// A summary of a centralization rule's key properties and status.
+type CentralizationRuleSummary struct {
+
+	// The Amazon Web Services region where the organization centralization rule was
+	// created.
+	CreatedRegion *string
+
+	// The timestamp when the organization centralization rule was created.
+	CreatedTimeStamp *int64
+
+	// The Amazon Web Services Account that created the organization centralization
+	// rule.
+	CreatorAccountId *string
+
+	// The primary destination account of the organization centralization rule.
+	DestinationAccountId *string
+
+	// The primary destination region of the organization centralization rule.
+	DestinationRegion *string
+
+	// The reason why an organization centralization rule is marked UNHEALTHY.
+	FailureReason CentralizationFailureReason
+
+	// The timestamp when the organization centralization rule was last updated.
+	LastUpdateTimeStamp *int64
+
+	// The Amazon Resource Name (ARN) of the organization centralization rule.
+	RuleArn *string
+
+	// The health status of the organization centralization rule.
+	RuleHealth RuleHealth
+
+	// The name of the organization centralization rule.
+	RuleName *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for centralization destination log groups, including encryption
+// and backup settings.
+type DestinationLogsConfiguration struct {
+
+	// Configuration defining the backup region and an optional KMS key for the backup
+	// destination.
+	BackupConfiguration *LogsBackupConfiguration
+
+	// The encryption configuration for centralization destination log groups.
+	LogsEncryptionConfiguration *LogsEncryptionConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for backing up centralized log data to a secondary region.
+type LogsBackupConfiguration struct {
+
+	// Logs specific backup destination region within the primary destination account
+	// to which log data should be centralized.
+	//
+	// This member is required.
+	Region *string
+
+	// KMS Key arn belonging to the primary destination account and backup region, to
+	// encrypt newly created central log groups in the backup destination.
+	KmsKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for encrypting centralized log groups. This configuration is only
+// applied to destination log groups for which the corresponding source log groups
+// are encrypted using Customer Managed KMS Keys.
+type LogsEncryptionConfiguration struct {
+
+	// Configuration that determines the encryption strategy of the destination log
+	// groups. CUSTOMER_MANAGED uses the configured KmsKeyArn to encrypt newly created
+	// destination log groups.
+	//
+	// This member is required.
+	EncryptionStrategy EncryptionStrategy
+
+	// Conflict resolution strategy for centralization if the encryption strategy is
+	// set to CUSTOMER_MANAGED and the destination log group is encrypted with an
+	// AWS_OWNED KMS Key. ALLOW lets centralization go through while SKIP prevents
+	// centralization into the destination log group.
+	EncryptionConflictResolutionStrategy EncryptionConflictResolutionStrategy
+
+	// KMS Key arn belonging to the primary destination account and region, to encrypt
+	// newly created central log groups in the primary destination.
+	KmsKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for selecting and handling source log groups for centralization.
+type SourceLogsConfiguration struct {
+
+	// A strategy determining whether to centralize source log groups that are
+	// encrypted with customer managed KMS keys (CMK). ALLOW will consider CMK
+	// encrypted source log groups for centralization while SKIP will skip CMK
+	// encrypted source log groups from centralization.
+	//
+	// This member is required.
+	EncryptedLogGroupStrategy EncryptedLogGroupStrategy
+
+	// The selection criteria that specifies which source log groups to centralize.
+	// The selection criteria uses the same format as OAM link filters.
+	//
+	// This member is required.
+	LogGroupSelectionCriteria *string
+
+	noSmithyDocumentSerde
+}
+
 //	A model representing the state of a resource within an account according to
 //
 // telemetry config.

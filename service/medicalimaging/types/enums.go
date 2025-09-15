@@ -62,6 +62,9 @@ const (
 	ImageSetWorkflowStatusUpdateFailed              ImageSetWorkflowStatus = "UPDATE_FAILED"
 	ImageSetWorkflowStatusDeleting                  ImageSetWorkflowStatus = "DELETING"
 	ImageSetWorkflowStatusDeleted                   ImageSetWorkflowStatus = "DELETED"
+	ImageSetWorkflowStatusImporting                 ImageSetWorkflowStatus = "IMPORTING"
+	ImageSetWorkflowStatusImported                  ImageSetWorkflowStatus = "IMPORTED"
+	ImageSetWorkflowStatusImportFailed              ImageSetWorkflowStatus = "IMPORT_FAILED"
 )
 
 // Values returns all known values for ImageSetWorkflowStatus. Note that this can
@@ -80,6 +83,9 @@ func (ImageSetWorkflowStatus) Values() []ImageSetWorkflowStatus {
 		"UPDATE_FAILED",
 		"DELETING",
 		"DELETED",
+		"IMPORTING",
+		"IMPORTED",
+		"IMPORT_FAILED",
 	}
 }
 

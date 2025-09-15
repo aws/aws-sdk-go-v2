@@ -2,6 +2,27 @@
 
 package types
 
+type CentralizationFailureReason string
+
+// Enum values for CentralizationFailureReason
+const (
+	CentralizationFailureReasonTrustedAccessNotEnabled             CentralizationFailureReason = "TRUSTED_ACCESS_NOT_ENABLED"
+	CentralizationFailureReasonDestinationAccountNotInOrganization CentralizationFailureReason = "DESTINATION_ACCOUNT_NOT_IN_ORGANIZATION"
+	CentralizationFailureReasonInternalServerError                 CentralizationFailureReason = "INTERNAL_SERVER_ERROR"
+)
+
+// Values returns all known values for CentralizationFailureReason. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CentralizationFailureReason) Values() []CentralizationFailureReason {
+	return []CentralizationFailureReason{
+		"TRUSTED_ACCESS_NOT_ENABLED",
+		"DESTINATION_ACCOUNT_NOT_IN_ORGANIZATION",
+		"INTERNAL_SERVER_ERROR",
+	}
+}
+
 type DestinationType string
 
 // Enum values for DestinationType
@@ -16,6 +37,64 @@ const (
 func (DestinationType) Values() []DestinationType {
 	return []DestinationType{
 		"cloud-watch-logs",
+	}
+}
+
+type EncryptedLogGroupStrategy string
+
+// Enum values for EncryptedLogGroupStrategy
+const (
+	EncryptedLogGroupStrategyAllow EncryptedLogGroupStrategy = "ALLOW"
+	EncryptedLogGroupStrategySkip  EncryptedLogGroupStrategy = "SKIP"
+)
+
+// Values returns all known values for EncryptedLogGroupStrategy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptedLogGroupStrategy) Values() []EncryptedLogGroupStrategy {
+	return []EncryptedLogGroupStrategy{
+		"ALLOW",
+		"SKIP",
+	}
+}
+
+type EncryptionConflictResolutionStrategy string
+
+// Enum values for EncryptionConflictResolutionStrategy
+const (
+	EncryptionConflictResolutionStrategyAllow EncryptionConflictResolutionStrategy = "ALLOW"
+	EncryptionConflictResolutionStrategySkip  EncryptionConflictResolutionStrategy = "SKIP"
+)
+
+// Values returns all known values for EncryptionConflictResolutionStrategy. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionConflictResolutionStrategy) Values() []EncryptionConflictResolutionStrategy {
+	return []EncryptionConflictResolutionStrategy{
+		"ALLOW",
+		"SKIP",
+	}
+}
+
+type EncryptionStrategy string
+
+// Enum values for EncryptionStrategy
+const (
+	EncryptionStrategyCustomerManaged EncryptionStrategy = "CUSTOMER_MANAGED"
+	EncryptionStrategyAwsOwned        EncryptionStrategy = "AWS_OWNED"
+)
+
+// Values returns all known values for EncryptionStrategy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionStrategy) Values() []EncryptionStrategy {
+	return []EncryptionStrategy{
+		"CUSTOMER_MANAGED",
+		"AWS_OWNED",
 	}
 }
 
@@ -37,6 +116,27 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::EC2::Instance",
 		"AWS::EC2::VPC",
 		"AWS::Lambda::Function",
+	}
+}
+
+type RuleHealth string
+
+// Enum values for RuleHealth
+const (
+	RuleHealthHealthy      RuleHealth = "Healthy"
+	RuleHealthUnhealthy    RuleHealth = "Unhealthy"
+	RuleHealthProvisioning RuleHealth = "Provisioning"
+)
+
+// Values returns all known values for RuleHealth. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RuleHealth) Values() []RuleHealth {
+	return []RuleHealth{
+		"Healthy",
+		"Unhealthy",
+		"Provisioning",
 	}
 }
 

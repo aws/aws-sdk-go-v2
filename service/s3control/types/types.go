@@ -491,6 +491,29 @@ type DetailedStatusCodesMetrics struct {
 	noSmithyDocumentSerde
 }
 
+// A filter that returns objects that are encrypted by dual-layer server-side
+// encryption with Amazon Web Services Key Management Service (KMS) keys
+// (DSSE-KMS). You can further refine your filtering by optionally providing a KMS
+// Key ARN to create an object list of DSSE-KMS objects with that specific KMS Key
+// ARN.
+type DSSEKMSFilter struct {
+
+	// The Amazon Resource Name (ARN) of the customer managed KMS key to use for the
+	// filter to return objects that are encrypted by the specified key. For best
+	// performance, we recommend using the KMSKeyArn filter in conjunction with other
+	// object metadata filters, like MatchAnyPrefix , CreatedAfter , or
+	// MatchAnyStorageClass .
+	//
+	// You must provide the full KMS Key ARN. You can't use an alias name or alias
+	// ARN. For more information, see [KMS keys]in the Amazon Web Services Key Management
+	// Service Developer Guide.
+	//
+	// [KMS keys]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN
+	KmsKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies encryption-related information for an Amazon S3 bucket that is a
 // destination for replicated objects. If you're specifying a customer managed KMS
 // key, we recommend using a fully qualified KMS key ARN. If you use a KMS key
@@ -791,6 +814,13 @@ type JobManifestGeneratorFilter struct {
 	// object keys match the string constraints specified for MatchAnyPrefix ,
 	// MatchAnySuffix , and MatchAnySubstring .
 	KeyNameConstraint *KeyNameConstraint
+
+	// If provided, the generated object list includes only source bucket objects with
+	// the indicated server-side encryption type (SSE-S3, SSE-KMS, DSSE-KMS, SSE-C, or
+	// NOT-SSE). If you select SSE-KMS or DSSE-KMS, you can optionally further filter
+	// your results by specifying a specific KMS Key ARN. If you select SSE-KMS, you
+	// can also optionally further filter your results by Bucket Key enabled status.
+	MatchAnyObjectEncryption []ObjectEncryptionFilter
 
 	// If provided, the generated manifest includes only source bucket objects that
 	// are stored with the specified storage class.
@@ -1108,7 +1138,7 @@ type LifecycleRule struct {
 	NoncurrentVersionExpiration *NoncurrentVersionExpiration
 
 	//  Specifies the transition rule for the lifecycle rule that describes when
-	// noncurrent objects transition to a specific storage class. If your bucket is
+	// non-current objects transition to a specific storage class. If your bucket is
 	// versioning-enabled (or versioning is suspended), you can set this action to
 	// request that Amazon S3 transition noncurrent object versions to a specific
 	// storage class at a set period in the object's lifetime.
@@ -1592,6 +1622,76 @@ type NoncurrentVersionTransition struct {
 
 	noSmithyDocumentSerde
 }
+
+// A filter that returns objects that aren't server-side encrypted.
+type NotSSEFilter struct {
+	noSmithyDocumentSerde
+}
+
+// An optional filter for the S3JobManifestGenerator that identifies the subset of
+// objects by encryption type. This filter is used to create an object list for S3
+// Batch Operations jobs. If provided, this filter will generate an object list
+// that only includes objects with the specified encryption type.
+//
+// The following types satisfy this interface:
+//
+//	ObjectEncryptionFilterMemberDSSEKMS
+//	ObjectEncryptionFilterMemberNOTSSE
+//	ObjectEncryptionFilterMemberSSEC
+//	ObjectEncryptionFilterMemberSSEKMS
+//	ObjectEncryptionFilterMemberSSES3
+type ObjectEncryptionFilter interface {
+	isObjectEncryptionFilter()
+}
+
+// Filters for objects that are encrypted by dual-layer server-side encryption
+// with Amazon Web Services Key Management Service (KMS) keys (DSSE-KMS).
+type ObjectEncryptionFilterMemberDSSEKMS struct {
+	Value DSSEKMSFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*ObjectEncryptionFilterMemberDSSEKMS) isObjectEncryptionFilter() {}
+
+// Filters for objects that are not encrypted by server-side encryption.
+type ObjectEncryptionFilterMemberNOTSSE struct {
+	Value NotSSEFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*ObjectEncryptionFilterMemberNOTSSE) isObjectEncryptionFilter() {}
+
+// Filters for objects that are encrypted by server-side encryption with
+// customer-provided keys (SSE-C).
+type ObjectEncryptionFilterMemberSSEC struct {
+	Value SSECFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*ObjectEncryptionFilterMemberSSEC) isObjectEncryptionFilter() {}
+
+// Filters for objects that are encrypted by server-side encryption with Amazon
+// Web Services Key Management Service (KMS) keys (SSE-KMS).
+type ObjectEncryptionFilterMemberSSEKMS struct {
+	Value SSEKMSFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*ObjectEncryptionFilterMemberSSEKMS) isObjectEncryptionFilter() {}
+
+// Filters for objects that are encrypted by server-side encryption with Amazon S3
+// managed keys (SSE-S3).
+type ObjectEncryptionFilterMemberSSES3 struct {
+	Value SSES3Filter
+
+	noSmithyDocumentSerde
+}
+
+func (*ObjectEncryptionFilterMemberSSES3) isObjectEncryptionFilter() {}
 
 // An access point with an attached Lambda function used to access transformed
 // data from an Amazon S3 bucket.
@@ -2705,6 +2805,12 @@ type SourceSelectionCriteria struct {
 	noSmithyDocumentSerde
 }
 
+// A filter that returns objects that are encrypted by server-side encryption with
+// customer-provided keys (SSE-C).
+type SSECFilter struct {
+	noSmithyDocumentSerde
+}
+
 type SSEKMS struct {
 
 	// A container for the ARN of the SSE-KMS encryption. This property is read-only
@@ -2745,12 +2851,47 @@ type SSEKMSEncryption struct {
 	noSmithyDocumentSerde
 }
 
+// A filter that returns objects that are encrypted by server-side encryption with
+// Amazon Web Services KMS (SSE-KMS).
+type SSEKMSFilter struct {
+
+	// Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption
+	// with server-side encryption using Amazon Web Services Key Management Service
+	// (Amazon Web Services KMS) keys (SSE-KMS). If specified, will filter SSE-KMS
+	// encrypted objects by S3 Bucket Key status. For more information, see [Reducing the cost of SSE-KMS with Amazon S3 Bucket Keys]in the
+	// Amazon S3 User Guide.
+	//
+	// [Reducing the cost of SSE-KMS with Amazon S3 Bucket Keys]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html
+	BucketKeyEnabled *bool
+
+	// The Amazon Resource Name (ARN) of the customer managed KMS key to use for the
+	// filter to return objects that are encrypted by the specified key. For best
+	// performance, we recommend using the KMSKeyArn filter in conjunction with other
+	// object metadata filters, like MatchAnyPrefix , CreatedAfter , or
+	// MatchAnyStorageClass .
+	//
+	// You must provide the full KMS Key ARN. You can't use an alias name or alias
+	// ARN. For more information, see [KMS keys]in the Amazon Web Services Key Management
+	// Service Developer Guide.
+	//
+	// [KMS keys]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN
+	KmsKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
 type SSES3 struct {
 	noSmithyDocumentSerde
 }
 
 // Configuration for the use of SSE-S3 to encrypt generated manifest objects.
 type SSES3Encryption struct {
+	noSmithyDocumentSerde
+}
+
+// A filter that returns objects that are encrypted by server-side encryption with
+// Amazon S3 managed keys (SSE-S3).
+type SSES3Filter struct {
 	noSmithyDocumentSerde
 }
 
@@ -3095,4 +3236,5 @@ type UnknownUnionMember struct {
 }
 
 func (*UnknownUnionMember) isJobManifestGenerator()              {}
+func (*UnknownUnionMember) isObjectEncryptionFilter()            {}
 func (*UnknownUnionMember) isObjectLambdaContentTransformation() {}
