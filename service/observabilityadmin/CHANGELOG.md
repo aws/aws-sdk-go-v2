@@ -1,3 +1,7 @@
+# v1.7.0 (2025-09-15)
+
+* **Feature**: CloudWatch Observability Admin adds the ability to enable telemetry centralization in customers' Organizations. The release introduces new APIs to manage centralization rules, which define settings to replicate telemetry data to a central destination in the customers' Organization.
+
 # v1.6.4 (2025-09-10)
 
 * No change notes available for this release.

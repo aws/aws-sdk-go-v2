@@ -1,3 +1,7 @@
+# v1.56.0 (2025-09-15)
+
+* **Feature**: Added endpoint support for eusc-de-east-1 region.
+
 # v1.55.5 (2025-09-10)
 
 * No change notes available for this release.

@@ -1,3 +1,15 @@
+# Release (2025-09-15)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.56.0](service/costexplorer/CHANGELOG.md#v1560-2025-09-15)
+  * **Feature**: Added endpoint support for eusc-de-east-1 region.
+* `github.com/aws/aws-sdk-go-v2/service/medicalimaging`: [v1.21.0](service/medicalimaging/CHANGELOG.md#v1210-2025-09-15)
+  * **Feature**: Added support for OpenID Connect (OIDC) custom authorizer
+* `github.com/aws/aws-sdk-go-v2/service/observabilityadmin`: [v1.7.0](service/observabilityadmin/CHANGELOG.md#v170-2025-09-15)
+  * **Feature**: CloudWatch Observability Admin adds the ability to enable telemetry centralization in customers' Organizations. The release introduces new APIs to manage centralization rules, which define settings to replicate telemetry data to a central destination in the customers' Organization.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.66.0](service/s3control/CHANGELOG.md#v1660-2025-09-15)
+  * **Feature**: Introduce three new encryption filters: EncryptionType (SSE-S3, SSE-KMS, DSSE-KMS, SSE-C, NOT-SSE), KmsKeyArn (for SSE-KMS and DSSE-KMS), and BucketKeyEnabled (for SSE-KMS).
+
 # Release (2025-09-12)
 
 ## Module Highlights

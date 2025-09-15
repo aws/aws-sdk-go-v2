@@ -1,8 +1,0 @@
-{
-    "id": "e9c955ef-0581-4fee-a163-2c25c6f7a1a8",
-    "type": "feature",
-    "description": "Introduce three new encryption filters: EncryptionType (SSE-S3, SSE-KMS, DSSE-KMS, SSE-C, NOT-SSE), KmsKeyArn (for SSE-KMS and DSSE-KMS), and BucketKeyEnabled (for SSE-KMS).",
-    "modules": [
-        "service/s3control"
-    ]
-}

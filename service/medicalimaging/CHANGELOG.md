@@ -1,3 +1,7 @@
+# v1.21.0 (2025-09-15)
+
+* **Feature**: Added support for OpenID Connect (OIDC) custom authorizer
+
 # v1.20.3 (2025-09-10)
 
 * No change notes available for this release.

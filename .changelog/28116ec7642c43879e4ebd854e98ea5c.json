@@ -1,8 +1,0 @@
-{
-    "id": "28116ec7-642c-4387-9e4e-bd854e98ea5c",
-    "type": "feature",
-    "description": "Added endpoint support for eusc-de-east-1 region.",
-    "modules": [
-        "service/costexplorer"
-    ]
-}

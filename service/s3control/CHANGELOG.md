@@ -1,3 +1,7 @@
+# v1.66.0 (2025-09-15)
+
+* **Feature**: Introduce three new encryption filters: EncryptionType (SSE-S3, SSE-KMS, DSSE-KMS, SSE-C, NOT-SSE), KmsKeyArn (for SSE-KMS and DSSE-KMS), and BucketKeyEnabled (for SSE-KMS).
+
 # v1.65.6 (2025-09-10)
 
 * No change notes available for this release.
