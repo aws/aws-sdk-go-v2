@@ -11105,6 +11105,20 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.s3control#DSSEKMSFilter": {
+            "type": "structure",
+            "members": {
+                "KmsKeyArn": {
+                    "target": "com.amazonaws.s3control#NonEmptyKmsKeyArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the customer managed KMS key to use for the filter \n         to return objects that are encrypted by the specified key. For best performance, \n         we recommend using the <code>KMSKeyArn</code> filter in conjunction with other object metadata filters, like <code>MatchAnyPrefix</code>, <code>CreatedAfter</code>, or \n         <code>MatchAnyStorageClass</code>.</p>\n         <note>\n            <p>You must provide the full KMS Key ARN. You can't use an alias name or alias ARN. \n         For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN\"> \n            KMS keys</a> in the <i>Amazon Web Services Key Management Service Developer Guide</i>.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter that returns objects that are encrypted by dual-layer server-side encryption with Amazon Web Services Key Management\n         Service (KMS) keys (DSSE-KMS). You can further refine your filtering by optionally providing a KMS Key ARN \n         to create an object list of DSSE-KMS objects with that specific KMS Key ARN.</p>"
+            }
+        },
         "com.amazonaws.s3control#DataSourceId": {
             "type": "string",
             "traits": {
@@ -15557,6 +15571,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>If provided, the generated manifest includes only source bucket objects that are stored\n         with the specified storage class.</p>"
                     }
+                },
+                "MatchAnyObjectEncryption": {
+                    "target": "com.amazonaws.s3control#ObjectEncryptionFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If provided, the generated object list includes \n         only source bucket objects with the indicated server-side encryption type (SSE-S3, SSE-KMS, DSSE-KMS, SSE-C, or NOT-SSE). \n         If you select SSE-KMS or DSSE-KMS, you can optionally further filter your results by specifying a specific KMS Key ARN. \n         If you select SSE-KMS, you can also optionally further filter your results by Bucket Key enabled status.</p>"
+                    }
                 }
             },
             "traits": {
@@ -16097,7 +16117,7 @@
                 "NoncurrentVersionTransitions": {
                     "target": "com.amazonaws.s3control#NoncurrentVersionTransitionList",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies the transition rule for the lifecycle rule that describes when noncurrent\n         objects transition to a specific storage class. If your bucket is versioning-enabled (or\n         versioning is suspended), you can set this action to request that Amazon S3 transition\n         noncurrent object versions to a specific storage class at a set period in the object's\n         lifetime. </p>\n         <note>\n            <p>This is not supported by Amazon S3 on Outposts buckets.</p>\n         </note>"
+                        "smithy.api#documentation": "<p> Specifies the transition rule for the lifecycle rule that describes when non-current\n         objects transition to a specific storage class. If your bucket is versioning-enabled (or\n         versioning is suspended), you can set this action to request that Amazon S3 transition\n         noncurrent object versions to a specific storage class at a set period in the object's\n         lifetime. </p>\n         <note>\n            <p>This is not supported by Amazon S3 on Outposts buckets.</p>\n         </note>"
                     }
                 },
                 "NoncurrentVersionExpiration": {
@@ -18082,6 +18102,16 @@
         "com.amazonaws.s3control#NoSuchPublicAccessBlockConfigurationMessage": {
             "type": "string"
         },
+        "com.amazonaws.s3control#NonEmptyKmsKeyArnString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2000
+                },
+                "smithy.api#pattern": "^arn:aws[a-zA-Z0-9-]*:kms:[a-z0-9-]+:[0-9]{12}:key/[a-zA-Z0-9-]+$"
+            }
+        },
         "com.amazonaws.s3control#NonEmptyMaxLength1024String": {
             "type": "string",
             "traits": {
@@ -18194,6 +18224,13 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.s3control#NotSSEFilter": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>A filter that returns objects that aren't server-side encrypted.</p>"
+            }
+        },
         "com.amazonaws.s3control#ObjectAgeValue": {
             "type": "integer",
             "traits": {
@@ -18202,6 +18239,64 @@
         },
         "com.amazonaws.s3control#ObjectCreationTime": {
             "type": "timestamp"
+        },
+        "com.amazonaws.s3control#ObjectEncryptionFilter": {
+            "type": "union",
+            "members": {
+                "SSES3": {
+                    "target": "com.amazonaws.s3control#SSES3Filter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters for objects that are encrypted by server-side encryption with Amazon S3 managed keys (SSE-S3).</p>",
+                        "smithy.api#xmlName": "SSE-S3"
+                    }
+                },
+                "SSEKMS": {
+                    "target": "com.amazonaws.s3control#SSEKMSFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters for objects that are encrypted by server-side encryption with Amazon Web Services Key Management Service (KMS) keys (SSE-KMS).</p>",
+                        "smithy.api#xmlName": "SSE-KMS"
+                    }
+                },
+                "DSSEKMS": {
+                    "target": "com.amazonaws.s3control#DSSEKMSFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters for objects that are encrypted by dual-layer server-side encryption with Amazon Web Services Key Management\n         Service (KMS) keys (DSSE-KMS).</p>",
+                        "smithy.api#xmlName": "DSSE-KMS"
+                    }
+                },
+                "SSEC": {
+                    "target": "com.amazonaws.s3control#SSECFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters for objects that are encrypted by server-side encryption with customer-provided keys (SSE-C).</p>",
+                        "smithy.api#xmlName": "SSE-C"
+                    }
+                },
+                "NOTSSE": {
+                    "target": "com.amazonaws.s3control#NotSSEFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters for objects that are not encrypted by server-side encryption. </p>",
+                        "smithy.api#xmlName": "NOT-SSE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An optional filter for the \n         <code>S3JobManifestGenerator</code> that identifies the subset of objects by encryption type. \n         This filter is used to create an object list for S3 Batch Operations jobs. If provided, this filter will generate an object list \n         that only includes objects with the specified encryption type.</p>"
+            }
+        },
+        "com.amazonaws.s3control#ObjectEncryptionFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3control#ObjectEncryptionFilter",
+                "traits": {
+                    "smithy.api#xmlName": "ObjectEncryption"
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
         },
         "com.amazonaws.s3control#ObjectLambdaAccessPoint": {
             "type": "structure",
@@ -21396,6 +21491,13 @@
                 }
             }
         },
+        "com.amazonaws.s3control#SSECFilter": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>A filter that returns objects that are encrypted by server-side encryption with customer-provided keys (SSE-C).</p>"
+            }
+        },
         "com.amazonaws.s3control#SSEKMS": {
             "type": "structure",
             "members": {
@@ -21428,6 +21530,27 @@
                 "smithy.api#xmlName": "SSE-KMS"
             }
         },
+        "com.amazonaws.s3control#SSEKMSFilter": {
+            "type": "structure",
+            "members": {
+                "KmsKeyArn": {
+                    "target": "com.amazonaws.s3control#NonEmptyKmsKeyArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the customer managed KMS key to use for the filter \n         to return objects that are encrypted by the specified key. For best performance, \n         we recommend using the <code>KMSKeyArn</code> filter in conjunction with other object metadata filters, like <code>MatchAnyPrefix</code>, <code>CreatedAfter</code>, or \n         <code>MatchAnyStorageClass</code>.</p>\n         <note>\n            <p>You must provide the full KMS Key ARN. You can't use an alias name or alias ARN. \n         For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN\"> \n            KMS keys</a> in the <i>Amazon Web Services Key Management Service Developer Guide</i>.</p>\n         </note>"
+                    }
+                },
+                "BucketKeyEnabled": {
+                    "target": "com.amazonaws.s3control#Boolean",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption with server-side encryption \n            using Amazon Web Services Key Management Service (Amazon Web Services KMS) keys (SSE-KMS). If specified, will filter SSE-KMS encrypted objects by S3 Bucket Key status. \n            For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html\">Reducing the cost of SSE-KMS with Amazon S3 Bucket Keys</a>\n            in the <i>Amazon S3 User Guide</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter that returns objects that are encrypted by server-side encryption with Amazon Web Services KMS (SSE-KMS).</p>"
+            }
+        },
         "com.amazonaws.s3control#SSEKMSKeyId": {
             "type": "string"
         },
@@ -21445,6 +21568,13 @@
             "traits": {
                 "smithy.api#documentation": "<p>Configuration for the use of SSE-S3 to encrypt generated manifest objects.</p>",
                 "smithy.api#xmlName": "SSE-S3"
+            }
+        },
+        "com.amazonaws.s3control#SSES3Filter": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>A filter that returns objects that are encrypted by server-side encryption with Amazon S3 managed keys (SSE-S3).</p>"
             }
         },
         "com.amazonaws.s3control#Scope": {

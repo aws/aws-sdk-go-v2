@@ -44,6 +44,179 @@
                 "smithy.api#uniqueItems": {}
             }
         },
+        "com.amazonaws.observabilityadmin#CentralizationFailureReason": {
+            "type": "enum",
+            "members": {
+                "TRUSTED_ACCESS_NOT_ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRUSTED_ACCESS_NOT_ENABLED"
+                    }
+                },
+                "DESTINATION_ACCOUNT_NOT_IN_ORGANIZATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DESTINATION_ACCOUNT_NOT_IN_ORGANIZATION"
+                    }
+                },
+                "INTERNAL_SERVER_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_SERVER_ERROR"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#CentralizationRule": {
+            "type": "structure",
+            "members": {
+                "Source": {
+                    "target": "com.amazonaws.observabilityadmin#CentralizationRuleSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration determining the source of the telemetry data to be centralized.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Destination": {
+                    "target": "com.amazonaws.observabilityadmin#CentralizationRuleDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration determining where the telemetry data should be centralized, backed up, as well as encryption configuration for the primary and backup destinations.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines how telemetry data should be centralized across an Amazon Web Services Organization, including source and destination configurations.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#CentralizationRuleDestination": {
+            "type": "structure",
+            "members": {
+                "Region": {
+                    "target": "com.amazonaws.observabilityadmin#Region",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The primary destination region to which telemetry data should be centralized.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Account": {
+                    "target": "com.amazonaws.observabilityadmin#AccountIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination account (within the organization) to which the telemetry data should be centralized.</p>"
+                    }
+                },
+                "DestinationLogsConfiguration": {
+                    "target": "com.amazonaws.observabilityadmin#DestinationLogsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Log specific configuration for centralization destination log groups.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration specifying the primary destination for centralized telemetry data.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#CentralizationRuleSource": {
+            "type": "structure",
+            "members": {
+                "Regions": {
+                    "target": "com.amazonaws.observabilityadmin#Regions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of source regions from which telemetry data should be centralized.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Scope": {
+                    "target": "com.amazonaws.observabilityadmin#SourceFilterString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The organizational scope from which telemetry data should be centralized, specified using organization id, accounts or organizational unit ids.</p>"
+                    }
+                },
+                "SourceLogsConfiguration": {
+                    "target": "com.amazonaws.observabilityadmin#SourceLogsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Log specific configuration for centralization source log groups.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration specifying the source of telemetry data to be centralized.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#CentralizationRuleSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.observabilityadmin#CentralizationRuleSummary"
+            }
+        },
+        "com.amazonaws.observabilityadmin#CentralizationRuleSummary": {
+            "type": "structure",
+            "members": {
+                "RuleName": {
+                    "target": "com.amazonaws.observabilityadmin#RuleName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the organization centralization rule.</p>"
+                    }
+                },
+                "RuleArn": {
+                    "target": "com.amazonaws.observabilityadmin#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the organization centralization rule.</p>"
+                    }
+                },
+                "CreatorAccountId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Account that created the organization centralization rule.</p>"
+                    }
+                },
+                "CreatedTimeStamp": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the organization centralization rule was created.</p>"
+                    }
+                },
+                "CreatedRegion": {
+                    "target": "com.amazonaws.observabilityadmin#Region",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services region where the organization centralization rule was created.</p>"
+                    }
+                },
+                "LastUpdateTimeStamp": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the organization centralization rule was last updated.</p>"
+                    }
+                },
+                "RuleHealth": {
+                    "target": "com.amazonaws.observabilityadmin#RuleHealth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The health status of the organization centralization rule.</p>"
+                    }
+                },
+                "FailureReason": {
+                    "target": "com.amazonaws.observabilityadmin#CentralizationFailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason why an organization centralization rule is marked UNHEALTHY.</p>"
+                    }
+                },
+                "DestinationAccountId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The primary destination account of the organization centralization rule.</p>"
+                    }
+                },
+                "DestinationRegion": {
+                    "target": "com.amazonaws.observabilityadmin#Region",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The primary destination region of the organization centralization rule.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a centralization rule's key properties and status.</p>"
+            }
+        },
         "com.amazonaws.observabilityadmin#ConflictException": {
             "type": "structure",
             "members": {
@@ -55,6 +228,84 @@
                 "smithy.api#documentation": "<p>\n      The requested operation conflicts with the current state of the specified resource or with another request.\n    </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.observabilityadmin#CreateCentralizationRuleForOrganization": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.observabilityadmin#CreateCentralizationRuleForOrganizationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.observabilityadmin#CreateCentralizationRuleForOrganizationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.observabilityadmin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a centralization rule that applies across an Amazon Web Services Organization. This operation can only be called by the organization's management account or a delegated administrator account.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/CreateCentralizationRuleForOrganization"
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#CreateCentralizationRuleForOrganizationInput": {
+            "type": "structure",
+            "members": {
+                "RuleName": {
+                    "target": "com.amazonaws.observabilityadmin#RuleName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique name for the organization-wide centralization rule being created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Rule": {
+                    "target": "com.amazonaws.observabilityadmin#CentralizationRule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration details for the organization-wide centralization rule, including the source configuration and the destination configuration to centralize telemetry data across the organization.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.observabilityadmin#TagMapInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key-value pairs to associate with the organization telemetry rule resource for categorization and management purposes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#CreateCentralizationRuleForOrganizationOutput": {
+            "type": "structure",
+            "members": {
+                "RuleArn": {
+                    "target": "com.amazonaws.observabilityadmin#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the created organization centralization rule.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.observabilityadmin#CreateTelemetryRule": {
@@ -213,6 +464,54 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.observabilityadmin#DeleteCentralizationRuleForOrganization": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.observabilityadmin#DeleteCentralizationRuleForOrganizationInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.observabilityadmin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an organization-wide centralization rule. This operation can only be called by the organization's management account or a delegated administrator account.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/DeleteCentralizationRuleForOrganization"
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#DeleteCentralizationRuleForOrganizationInput": {
+            "type": "structure",
+            "members": {
+                "RuleIdentifier": {
+                    "target": "com.amazonaws.observabilityadmin#RuleIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier (name or ARN) of the organization centralization rule to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.observabilityadmin#DeleteTelemetryRule": {
             "type": "operation",
             "input": {
@@ -309,6 +608,26 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.observabilityadmin#DestinationLogsConfiguration": {
+            "type": "structure",
+            "members": {
+                "LogsEncryptionConfiguration": {
+                    "target": "com.amazonaws.observabilityadmin#LogsEncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption configuration for centralization destination log groups.</p>"
+                    }
+                },
+                "BackupConfiguration": {
+                    "target": "com.amazonaws.observabilityadmin#LogsBackupConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration defining the backup region and an optional KMS key for the backup destination.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for centralization destination log groups, including encryption and backup settings.</p>"
+            }
+        },
         "com.amazonaws.observabilityadmin#DestinationType": {
             "type": "enum",
             "members": {
@@ -320,8 +639,170 @@
                 }
             }
         },
+        "com.amazonaws.observabilityadmin#EncryptedLogGroupStrategy": {
+            "type": "enum",
+            "members": {
+                "ALLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALLOW"
+                    }
+                },
+                "SKIP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SKIP"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#EncryptionConflictResolutionStrategy": {
+            "type": "enum",
+            "members": {
+                "ALLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALLOW"
+                    }
+                },
+                "SKIP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SKIP"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#EncryptionStrategy": {
+            "type": "enum",
+            "members": {
+                "CUSTOMER_MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER_MANAGED"
+                    }
+                },
+                "AWS_OWNED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_OWNED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.observabilityadmin#FailureReason": {
             "type": "string"
+        },
+        "com.amazonaws.observabilityadmin#GetCentralizationRuleForOrganization": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.observabilityadmin#GetCentralizationRuleForOrganizationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.observabilityadmin#GetCentralizationRuleForOrganizationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.observabilityadmin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the details of a specific organization centralization rule. This operation can only be called by the organization's management account or a delegated administrator account.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetCentralizationRuleForOrganization"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#GetCentralizationRuleForOrganizationInput": {
+            "type": "structure",
+            "members": {
+                "RuleIdentifier": {
+                    "target": "com.amazonaws.observabilityadmin#RuleIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier (name or ARN) of the organization centralization rule to retrieve.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#GetCentralizationRuleForOrganizationOutput": {
+            "type": "structure",
+            "members": {
+                "RuleName": {
+                    "target": "com.amazonaws.observabilityadmin#RuleName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the organization centralization rule.</p>"
+                    }
+                },
+                "RuleArn": {
+                    "target": "com.amazonaws.observabilityadmin#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the organization centralization rule.</p>"
+                    }
+                },
+                "CreatorAccountId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Account that created the organization centralization rule.</p>"
+                    }
+                },
+                "CreatedTimeStamp": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the organization centralization rule was created.</p>"
+                    }
+                },
+                "CreatedRegion": {
+                    "target": "com.amazonaws.observabilityadmin#Region",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services region where the organization centralization rule was created.</p>"
+                    }
+                },
+                "LastUpdateTimeStamp": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the organization centralization rule was last updated.</p>"
+                    }
+                },
+                "RuleHealth": {
+                    "target": "com.amazonaws.observabilityadmin#RuleHealth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The health status of the organization centralization rule.</p>"
+                    }
+                },
+                "FailureReason": {
+                    "target": "com.amazonaws.observabilityadmin#CentralizationFailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason why an organization centralization rule is marked UNHEALTHY.</p>"
+                    }
+                },
+                "CentralizationRule": {
+                    "target": "com.amazonaws.observabilityadmin#CentralizationRule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration details for the organization centralization rule.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.observabilityadmin#GetTelemetryEvaluationStatus": {
             "type": "operation",
@@ -644,6 +1125,109 @@
                 "smithy.api#httpError": 500
             }
         },
+        "com.amazonaws.observabilityadmin#ListCentralizationRulesForOrganization": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.observabilityadmin#ListCentralizationRulesForOrganizationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.observabilityadmin#ListCentralizationRulesForOrganizationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.observabilityadmin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all centralization rules in your organization. This operation can only be called by the organization's management account or a delegated administrator account.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListCentralizationRulesForOrganization"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "CentralizationRuleSummaries"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#ListCentralizationRulesForOrganizationInput": {
+            "type": "structure",
+            "members": {
+                "RuleNamePrefix": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string to filter organization centralization rules whose names begin with the specified prefix.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "AllRegions": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A flag determining whether to return organization centralization rules from all regions or only the current region.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.observabilityadmin#ListCentralizationRulesForOrganizationMaxResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of organization centralization rules to return in a single call.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.observabilityadmin#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. A previous call generates this token.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#ListCentralizationRulesForOrganizationMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#ListCentralizationRulesForOrganizationOutput": {
+            "type": "structure",
+            "members": {
+                "CentralizationRuleSummaries": {
+                    "target": "com.amazonaws.observabilityadmin#CentralizationRuleSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of centralization rule summaries.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.observabilityadmin#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to resume pagination of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.observabilityadmin#ListResourceTelemetry": {
             "type": "operation",
             "input": {
@@ -902,7 +1486,8 @@
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ListTagsForResource"
-                }
+                },
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.observabilityadmin#ListTagsForResourceInput": {
@@ -1133,6 +1718,63 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.observabilityadmin#LogsBackupConfiguration": {
+            "type": "structure",
+            "members": {
+                "Region": {
+                    "target": "com.amazonaws.observabilityadmin#Region",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Logs specific backup destination region within the primary destination account to which log data should be centralized.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KmsKeyArn": {
+                    "target": "com.amazonaws.observabilityadmin#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>KMS Key arn belonging to the primary destination account and backup region, to encrypt newly created central log groups in the backup destination.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for backing up centralized log data to a secondary region.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#LogsEncryptionConfiguration": {
+            "type": "structure",
+            "members": {
+                "EncryptionStrategy": {
+                    "target": "com.amazonaws.observabilityadmin#EncryptionStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration that determines the encryption strategy of the destination log groups. CUSTOMER_MANAGED uses the configured KmsKeyArn to encrypt newly created destination log groups.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KmsKeyArn": {
+                    "target": "com.amazonaws.observabilityadmin#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>KMS Key arn belonging to the primary destination account and region, to encrypt newly created central log groups in the primary destination.</p>"
+                    }
+                },
+                "EncryptionConflictResolutionStrategy": {
+                    "target": "com.amazonaws.observabilityadmin#EncryptionConflictResolutionStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Conflict resolution strategy for centralization if the encryption strategy is set to CUSTOMER_MANAGED and the destination log group is encrypted with an AWS_OWNED KMS Key. ALLOW lets centralization go through while SKIP prevents centralization into the destination log group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for encrypting centralized log groups. This configuration is only applied to destination log groups for which the corresponding source log groups are encrypted using Customer Managed KMS Keys.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#LogsFilterString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2000
+                }
+            }
+        },
         "com.amazonaws.observabilityadmin#NextToken": {
             "type": "string"
         },
@@ -1141,16 +1783,25 @@
             "version": "2018-05-10",
             "operations": [
                 {
+                    "target": "com.amazonaws.observabilityadmin#CreateCentralizationRuleForOrganization"
+                },
+                {
                     "target": "com.amazonaws.observabilityadmin#CreateTelemetryRule"
                 },
                 {
                     "target": "com.amazonaws.observabilityadmin#CreateTelemetryRuleForOrganization"
                 },
                 {
+                    "target": "com.amazonaws.observabilityadmin#DeleteCentralizationRuleForOrganization"
+                },
+                {
                     "target": "com.amazonaws.observabilityadmin#DeleteTelemetryRule"
                 },
                 {
                     "target": "com.amazonaws.observabilityadmin#DeleteTelemetryRuleForOrganization"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#GetCentralizationRuleForOrganization"
                 },
                 {
                     "target": "com.amazonaws.observabilityadmin#GetTelemetryEvaluationStatus"
@@ -1163,6 +1814,9 @@
                 },
                 {
                     "target": "com.amazonaws.observabilityadmin#GetTelemetryRuleForOrganization"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ListCentralizationRulesForOrganization"
                 },
                 {
                     "target": "com.amazonaws.observabilityadmin#ListResourceTelemetry"
@@ -1196,6 +1850,9 @@
                 },
                 {
                     "target": "com.amazonaws.observabilityadmin#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#UpdateCentralizationRuleForOrganization"
                 },
                 {
                     "target": "com.amazonaws.observabilityadmin#UpdateTelemetryRule"
@@ -1855,6 +2512,26 @@
                 "smithy.api#uniqueItems": {}
             }
         },
+        "com.amazonaws.observabilityadmin#Region": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#Regions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.observabilityadmin#Region"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
         "com.amazonaws.observabilityadmin#ResourceArn": {
             "type": "string",
             "traits": {
@@ -1862,7 +2539,7 @@
                     "min": 1,
                     "max": 1011
                 },
-                "smithy.api#pattern": "^arn:aws:([a-zA-Z0-9\\-]+):([a-z0-9\\-]+)?:([0-9]{12})?:(.+)$"
+                "smithy.api#pattern": "^arn:aws([a-z0-9\\-]+)?:([a-zA-Z0-9\\-]+):([a-z0-9\\-]+)?:([0-9]{12})?:(.+)$"
             }
         },
         "com.amazonaws.observabilityadmin#ResourceIdentifier": {
@@ -1935,6 +2612,29 @@
                 }
             }
         },
+        "com.amazonaws.observabilityadmin#RuleHealth": {
+            "type": "enum",
+            "members": {
+                "HEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Healthy"
+                    }
+                },
+                "UNHEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Unhealthy"
+                    }
+                },
+                "PROVISIONING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Provisioning"
+                    }
+                }
+            }
+        },
         "com.amazonaws.observabilityadmin#RuleIdentifier": {
             "type": "string",
             "traits": {
@@ -1951,7 +2651,7 @@
                     "min": 1,
                     "max": 100
                 },
-                "smithy.api#pattern": "^[0-9A-Za-z-]+$"
+                "smithy.api#pattern": "^[0-9A-Za-z-_.#/]+$"
             }
         },
         "com.amazonaws.observabilityadmin#ServiceQuotaExceededException": {
@@ -1972,6 +2672,37 @@
                 "smithy.api#documentation": "<p>\n      The requested operation would exceed the allowed quota for the specified resource type.\n    </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.observabilityadmin#SourceFilterString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2000
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#SourceLogsConfiguration": {
+            "type": "structure",
+            "members": {
+                "LogGroupSelectionCriteria": {
+                    "target": "com.amazonaws.observabilityadmin#LogsFilterString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The selection criteria that specifies which source log groups to centralize. The selection criteria uses the same format as OAM link filters.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EncryptedLogGroupStrategy": {
+                    "target": "com.amazonaws.observabilityadmin#EncryptedLogGroupStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A strategy determining whether to centralize source log groups that are encrypted with customer managed KMS keys (CMK). ALLOW will consider CMK encrypted source log groups for centralization while SKIP will skip CMK encrypted source log groups from centralization.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for selecting and handling source log groups for centralization.</p>"
             }
         },
         "com.amazonaws.observabilityadmin#StartTelemetryEvaluation": {
@@ -2549,6 +3280,78 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#UpdateCentralizationRuleForOrganization": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.observabilityadmin#UpdateCentralizationRuleForOrganizationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.observabilityadmin#UpdateCentralizationRuleForOrganizationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.observabilityadmin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an existing centralization rule that applies across an Amazon Web Services Organization. This operation can only be called by the organization's management account or a delegated administrator account.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/UpdateCentralizationRuleForOrganization"
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#UpdateCentralizationRuleForOrganizationInput": {
+            "type": "structure",
+            "members": {
+                "RuleIdentifier": {
+                    "target": "com.amazonaws.observabilityadmin#RuleIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier (name or ARN) of the organization centralization rule to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Rule": {
+                    "target": "com.amazonaws.observabilityadmin#CentralizationRule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration details for the organization-wide centralization rule, including the source configuration and the destination configuration to centralize telemetry data across the organization.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#UpdateCentralizationRuleForOrganizationOutput": {
+            "type": "structure",
+            "members": {
+                "RuleArn": {
+                    "target": "com.amazonaws.observabilityadmin#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the updated organization centralization rule.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.observabilityadmin#UpdateTelemetryRule": {
