@@ -50,7 +50,16 @@
                     "target": "com.amazonaws.osis#CreatePipeline"
                 },
                 {
+                    "target": "com.amazonaws.osis#CreatePipelineEndpoint"
+                },
+                {
                     "target": "com.amazonaws.osis#DeletePipeline"
+                },
+                {
+                    "target": "com.amazonaws.osis#DeletePipelineEndpoint"
+                },
+                {
+                    "target": "com.amazonaws.osis#DeleteResourcePolicy"
                 },
                 {
                     "target": "com.amazonaws.osis#GetPipeline"
@@ -62,13 +71,28 @@
                     "target": "com.amazonaws.osis#GetPipelineChangeProgress"
                 },
                 {
+                    "target": "com.amazonaws.osis#GetResourcePolicy"
+                },
+                {
                     "target": "com.amazonaws.osis#ListPipelineBlueprints"
+                },
+                {
+                    "target": "com.amazonaws.osis#ListPipelineEndpointConnections"
+                },
+                {
+                    "target": "com.amazonaws.osis#ListPipelineEndpoints"
                 },
                 {
                     "target": "com.amazonaws.osis#ListPipelines"
                 },
                 {
                     "target": "com.amazonaws.osis#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.osis#PutResourcePolicy"
+                },
+                {
+                    "target": "com.amazonaws.osis#RevokePipelineEndpointConnections"
                 },
                 {
                     "target": "com.amazonaws.osis#StartPipeline"
@@ -728,6 +752,16 @@
                 }
             }
         },
+        "com.amazonaws.osis#AwsAccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^\\\\d{12}$"
+            }
+        },
         "com.amazonaws.osis#BlueprintFormat": {
             "type": "string",
             "traits": {
@@ -953,12 +987,103 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html\">Creating Amazon OpenSearch Ingestion pipelines</a>.</p>",
+                "smithy.api#documentation": "<p>Creates an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html\">Creating Amazon OpenSearch\n    Ingestion pipelines</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2022-01-01/osis/createPipeline",
                     "code": 200
                 }
+            }
+        },
+        "com.amazonaws.osis#CreatePipelineEndpoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.osis#CreatePipelineEndpointRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.osis#CreatePipelineEndpointResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.osis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.osis#DisabledOperationException"
+                },
+                {
+                    "target": "com.amazonaws.osis#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.osis#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a VPC endpoint for an OpenSearch Ingestion pipeline. Pipeline endpoints allow you to\n   ingest data from your VPC into pipelines that you have access to.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2022-01-01/osis/createPipelineEndpoint",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.osis#CreatePipelineEndpointRequest": {
+            "type": "structure",
+            "members": {
+                "PipelineArn": {
+                    "target": "com.amazonaws.osis#PipelineArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the pipeline to create the endpoint for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VpcOptions": {
+                    "target": "com.amazonaws.osis#PipelineEndpointVpcOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container for the VPC configuration for the pipeline endpoint, including subnet IDs and\n   security group IDs.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.osis#CreatePipelineEndpointResponse": {
+            "type": "structure",
+            "members": {
+                "PipelineArn": {
+                    "target": "com.amazonaws.osis#PipelineArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the pipeline associated with the endpoint.</p>"
+                    }
+                },
+                "EndpointId": {
+                    "target": "com.amazonaws.osis#PipelineEndpointId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the pipeline endpoint.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.osis#PipelineEndpointStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the pipeline endpoint.</p>"
+                    }
+                },
+                "VpcId": {
+                    "target": "com.amazonaws.osis#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the VPC where the pipeline endpoint was created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.osis#CreatePipelineRequest": {
@@ -967,7 +1092,7 @@
                 "PipelineName": {
                     "target": "com.amazonaws.osis#PipelineName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the OpenSearch Ingestion pipeline to create. Pipeline names are unique across the pipelines\n   owned by an account within an Amazon Web Services Region.</p>",
+                        "smithy.api#documentation": "<p>The name of the OpenSearch Ingestion pipeline to create. Pipeline names are unique across the\n   pipelines owned by an account within an Amazon Web Services Region.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1001,7 +1126,7 @@
                 "VpcOptions": {
                     "target": "com.amazonaws.osis#VpcOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Container for the values required to configure VPC access for the pipeline. If you don't specify\n   these values, OpenSearch Ingestion creates the pipeline with a public endpoint.</p>"
+                        "smithy.api#documentation": "<p>Container for the values required to configure VPC access for the pipeline. If you don't\n   specify these values, OpenSearch Ingestion creates the pipeline with a public endpoint.</p>"
                     }
                 },
                 "BufferOptions": {
@@ -1013,7 +1138,7 @@
                 "EncryptionAtRestOptions": {
                     "target": "com.amazonaws.osis#EncryptionAtRestOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Key-value pairs to configure encryption for data that is written to a persistent buffer.</p>"
+                        "smithy.api#documentation": "<p>Key-value pairs to configure encryption for data that is written to a persistent\n   buffer.</p>"
                     }
                 },
                 "Tags": {
@@ -1025,7 +1150,7 @@
                 "PipelineRoleArn": {
                     "target": "com.amazonaws.osis#PipelineRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that provides\n   the required permissions for a pipeline to read from the source and write to the sink.\n   For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/pipeline-security-overview.html\">Setting up roles and users in Amazon OpenSearch Ingestion</a>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that grants the pipeline permission to access\n    Amazon Web Services resources.</p>"
                     }
                 }
             },
@@ -1076,12 +1201,67 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/delete-pipeline.html\">Deleting Amazon OpenSearch Ingestion pipelines</a>.</p>",
+                "smithy.api#documentation": "<p>Deletes an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/delete-pipeline.html\">Deleting Amazon OpenSearch\n    Ingestion pipelines</a>.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/2022-01-01/osis/deletePipeline/{PipelineName}",
                     "code": 200
                 }
+            }
+        },
+        "com.amazonaws.osis#DeletePipelineEndpoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.osis#DeletePipelineEndpointRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.osis#DeletePipelineEndpointResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.osis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.osis#DisabledOperationException"
+                },
+                {
+                    "target": "com.amazonaws.osis#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a VPC endpoint for an OpenSearch Ingestion pipeline.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/2022-01-01/osis/deletePipelineEndpoint/{EndpointId}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.osis#DeletePipelineEndpointRequest": {
+            "type": "structure",
+            "members": {
+                "EndpointId": {
+                    "target": "com.amazonaws.osis#PipelineEndpointId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the pipeline endpoint to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.osis#DeletePipelineEndpointResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.osis#DeletePipelineRequest": {
@@ -1101,6 +1281,67 @@
             }
         },
         "com.amazonaws.osis#DeletePipelineResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.osis#DeleteResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.osis#DeleteResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.osis#DeleteResourcePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.osis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.osis#DisabledOperationException"
+                },
+                {
+                    "target": "com.amazonaws.osis#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.osis#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a resource-based policy from an OpenSearch Ingestion resource.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/2022-01-01/osis/resourcePolicy/{ResourceArn}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.osis#DeleteResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.osis#PipelineArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource from which to delete the policy.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.osis#DeleteResourcePolicyResponse": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -1343,6 +1584,79 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.osis#GetResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.osis#GetResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.osis#GetResourcePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.osis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.osis#DisabledOperationException"
+                },
+                {
+                    "target": "com.amazonaws.osis#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.osis#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the resource-based policy attached to an OpenSearch Ingestion resource.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2022-01-01/osis/resourcePolicy/{ResourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.osis#GetResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.osis#PipelineArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource for which to retrieve the policy.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.osis#GetResourcePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.osis#PipelineArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>"
+                    }
+                },
+                "Policy": {
+                    "target": "com.amazonaws.osis#ResourcePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource-based policy document in JSON format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.osis#IngestEndpointUrlsList": {
             "type": "list",
             "member": {
@@ -1429,7 +1743,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of all available blueprints for Data Prepper. For more information, see\n   <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html#pipeline-blueprint\">Using blueprints to create a pipeline</a>.</p>",
+                "smithy.api#documentation": "<p>Retrieves a list of all available blueprints for Data Prepper. For more information, see\n    <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html#pipeline-blueprint\">Using\n    blueprints to create a pipeline</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2022-01-01/osis/listPipelineBlueprints",
@@ -1451,6 +1765,170 @@
                     "target": "com.amazonaws.osis#PipelineBlueprintsSummaryList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of available blueprints for Data Prepper.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.osis#ListPipelineEndpointConnections": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.osis#ListPipelineEndpointConnectionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.osis#ListPipelineEndpointConnectionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.osis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.osis#DisabledOperationException"
+                },
+                {
+                    "target": "com.amazonaws.osis#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.osis#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the pipeline endpoints connected to pipelines in your account.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2022-01-01/osis/listPipelineEndpointConnections",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "PipelineEndpointConnections",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.osis#ListPipelineEndpointConnectionsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.osis#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of pipeline endpoint connections to return in the response.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.osis#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If your initial <code>ListPipelineEndpointConnections</code> operation returns a\n    <code>nextToken</code>, you can include the returned <code>nextToken</code> in subsequent\n    <code>ListPipelineEndpointConnections</code> operations, which returns results in the next\n   page.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.osis#ListPipelineEndpointConnectionsResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.osis#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Make the call again using the\n   returned token to retrieve the next page.</p>"
+                    }
+                },
+                "PipelineEndpointConnections": {
+                    "target": "com.amazonaws.osis#PipelineEndpointConnectionsSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of pipeline endpoint connections.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.osis#ListPipelineEndpoints": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.osis#ListPipelineEndpointsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.osis#ListPipelineEndpointsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.osis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.osis#DisabledOperationException"
+                },
+                {
+                    "target": "com.amazonaws.osis#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.osis#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all pipeline endpoints in your account.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2022-01-01/osis/listPipelineEndpoints",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "PipelineEndpoints",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.osis#ListPipelineEndpointsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.osis#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of pipeline endpoints to return in the response.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.osis#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If your initial <code>ListPipelineEndpoints</code> operation returns a\n    <code>NextToken</code>, you can include the returned <code>NextToken</code> in subsequent\n    <code>ListPipelineEndpoints</code> operations, which returns results in the next page.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.osis#ListPipelineEndpointsResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.osis#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When <code>NextToken</code> is returned, there are more results available. The value of\n    <code>NextToken</code> is a unique pagination token for each page. Make the call again using the\n   returned token to retrieve the next page.</p>"
+                    }
+                },
+                "PipelineEndpoints": {
+                    "target": "com.amazonaws.osis#PipelineEndpointsSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of pipeline endpoints.</p>"
                     }
                 }
             },
@@ -1484,7 +1962,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all OpenSearch Ingestion pipelines in the current Amazon Web Services account and Region. For\n   more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/list-pipeline.html\">Viewing Amazon OpenSearch Ingestion pipelines</a>.</p>",
+                "smithy.api#documentation": "<p>Lists all OpenSearch Ingestion pipelines in the current Amazon Web Services account and Region.\n   For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/list-pipeline.html\">Viewing Amazon OpenSearch\n    Ingestion pipelines</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2022-01-01/osis/listPipelines",
@@ -1503,7 +1981,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.osis#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return. You can use\n   <code>nextToken</code> to get the next page of results.</p>",
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return. You can use\n    <code>nextToken</code> to get the next page of results.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
@@ -1525,7 +2003,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.osis#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n   <code>nextToken</code> is a unique pagination token for each page. Make the call again using\n   the returned token to retrieve the next page.</p>"
+                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Make the call again using the\n   returned token to retrieve the next page.</p>"
                     }
                 },
                 "Pipelines": {
@@ -1762,7 +2240,7 @@
                 "PipelineRoleArn": {
                     "target": "com.amazonaws.osis#PipelineRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that provides\n   the required permissions for a pipeline to read from the source and write to the sink.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that the pipeline uses to access AWS\n   resources.</p>"
                     }
                 }
             },
@@ -1901,6 +2379,171 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.osis#PipelineDestination"
+            }
+        },
+        "com.amazonaws.osis#PipelineEndpoint": {
+            "type": "structure",
+            "members": {
+                "PipelineArn": {
+                    "target": "com.amazonaws.osis#PipelineArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the pipeline associated with this endpoint.</p>"
+                    }
+                },
+                "EndpointId": {
+                    "target": "com.amazonaws.osis#PipelineEndpointId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the pipeline endpoint.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.osis#PipelineEndpointStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the pipeline endpoint.</p>"
+                    }
+                },
+                "VpcId": {
+                    "target": "com.amazonaws.osis#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the VPC where the pipeline endpoint is created.</p>"
+                    }
+                },
+                "VpcOptions": {
+                    "target": "com.amazonaws.osis#PipelineEndpointVpcOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration options for the VPC endpoint, including subnet and security group\n   settings.</p>"
+                    }
+                },
+                "IngestEndpointUrl": {
+                    "target": "com.amazonaws.osis#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL used to ingest data to the pipeline through the VPC endpoint.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a VPC endpoint for an OpenSearch Ingestion pipeline, enabling private\n   connectivity between your VPC and the pipeline.</p>"
+            }
+        },
+        "com.amazonaws.osis#PipelineEndpointConnection": {
+            "type": "structure",
+            "members": {
+                "PipelineArn": {
+                    "target": "com.amazonaws.osis#PipelineArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the pipeline in the endpoint connection.</p>"
+                    }
+                },
+                "EndpointId": {
+                    "target": "com.amazonaws.osis#PipelineEndpointId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the endpoint in the connection.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.osis#PipelineEndpointStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the pipeline endpoint connection.</p>"
+                    }
+                },
+                "VpcEndpointOwner": {
+                    "target": "com.amazonaws.osis#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the VPC endpoint used in this connection.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a connection to a pipeline endpoint, containing details about the endpoint\n   association.</p>"
+            }
+        },
+        "com.amazonaws.osis#PipelineEndpointConnectionsSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.osis#PipelineEndpointConnection"
+            }
+        },
+        "com.amazonaws.osis#PipelineEndpointId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]+$"
+            }
+        },
+        "com.amazonaws.osis#PipelineEndpointIdsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.osis#PipelineEndpointId"
+            }
+        },
+        "com.amazonaws.osis#PipelineEndpointStatus": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "CREATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_FAILED"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "REVOKING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REVOKING"
+                    }
+                },
+                "REVOKED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REVOKED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.osis#PipelineEndpointVpcOptions": {
+            "type": "structure",
+            "members": {
+                "SubnetIds": {
+                    "target": "com.amazonaws.osis#SubnetIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of subnet IDs where the pipeline endpoint network interfaces are created.</p>"
+                    }
+                },
+                "SecurityGroupIds": {
+                    "target": "com.amazonaws.osis#SecurityGroupIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of security group IDs that control network access to the pipeline endpoint.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration settings for the VPC endpoint, specifying network access controls.</p>"
+            }
+        },
+        "com.amazonaws.osis#PipelineEndpointsSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.osis#PipelineEndpoint"
             }
         },
         "com.amazonaws.osis#PipelineName": {
@@ -2081,6 +2724,87 @@
                 }
             }
         },
+        "com.amazonaws.osis#PutResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.osis#PutResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.osis#PutResourcePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.osis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.osis#DisabledOperationException"
+                },
+                {
+                    "target": "com.amazonaws.osis#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.osis#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Attaches a resource-based policy to an OpenSearch Ingestion resource. Resource-based\n   policies grant permissions to principals to perform actions on the resource.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/2022-01-01/osis/resourcePolicy/{ResourceArn}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.osis#PutResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.osis#PipelineArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to attach the policy to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Policy": {
+                    "target": "com.amazonaws.osis#ResourcePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource-based policy document in JSON format.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.osis#PutResourcePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.osis#PipelineArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>"
+                    }
+                },
+                "Policy": {
+                    "target": "com.amazonaws.osis#ResourcePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource-based policy document that was attached to the resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.osis#ResourceAlreadyExistsException": {
             "type": "structure",
             "members": {
@@ -2105,6 +2829,86 @@
                 "smithy.api#documentation": "<p>You attempted to access or delete a resource that does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.osis#ResourcePolicy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 204800
+                }
+            }
+        },
+        "com.amazonaws.osis#RevokePipelineEndpointConnections": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.osis#RevokePipelineEndpointConnectionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.osis#RevokePipelineEndpointConnectionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.osis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.osis#DisabledOperationException"
+                },
+                {
+                    "target": "com.amazonaws.osis#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.osis#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.osis#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Revokes pipeline endpoints from specified endpoint IDs.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2022-01-01/osis/revokePipelineEndpointConnections",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.osis#RevokePipelineEndpointConnectionsRequest": {
+            "type": "structure",
+            "members": {
+                "PipelineArn": {
+                    "target": "com.amazonaws.osis#PipelineArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the pipeline from which to revoke endpoint\n   connections.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndpointIds": {
+                    "target": "com.amazonaws.osis#PipelineEndpointIdsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of endpoint IDs for which to revoke access to the pipeline.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.osis#RevokePipelineEndpointConnectionsResponse": {
+            "type": "structure",
+            "members": {
+                "PipelineArn": {
+                    "target": "com.amazonaws.osis#PipelineArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the pipeline from which endpoint connections were\n   revoked.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.osis#SecurityGroupId": {
@@ -2248,7 +3052,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Stops an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/pipeline--stop-start.html#pipeline--stop\">Stopping an OpenSearch Ingestion pipeline</a>.</p>",
+                "smithy.api#documentation": "<p>Stops an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/pipeline--stop-start.html#pipeline--stop\">Stopping\n    an OpenSearch Ingestion pipeline</a>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/2022-01-01/osis/stopPipeline/{PipelineName}",
@@ -2381,7 +3185,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Tags an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-pipeline.html\">Tagging Amazon OpenSearch Ingestion pipelines</a>.</p>",
+                "smithy.api#documentation": "<p>Tags an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-pipeline.html\">Tagging Amazon OpenSearch\n    Ingestion pipelines</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2022-01-01/osis/tagResource",
@@ -2458,7 +3262,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes one or more tags from an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-pipeline.html\">Tagging Amazon\n    OpenSearch Ingestion pipelines</a>.</p>",
+                "smithy.api#documentation": "<p>Removes one or more tags from an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-pipeline.html\">Tagging\n    Amazon OpenSearch Ingestion pipelines</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2022-01-01/osis/untagResource",
@@ -2525,7 +3329,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/update-pipeline.html\">Updating Amazon OpenSearch Ingestion pipelines</a>.</p>",
+                "smithy.api#documentation": "<p>Updates an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/update-pipeline.html\">Updating Amazon OpenSearch\n    Ingestion pipelines</a>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/2022-01-01/osis/updatePipeline/{PipelineName}",
@@ -2577,13 +3381,13 @@
                 "EncryptionAtRestOptions": {
                     "target": "com.amazonaws.osis#EncryptionAtRestOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Key-value pairs to configure encryption for data that is written to a persistent buffer.</p>"
+                        "smithy.api#documentation": "<p>Key-value pairs to configure encryption for data that is written to a persistent\n   buffer.</p>"
                     }
                 },
                 "PipelineRoleArn": {
                     "target": "com.amazonaws.osis#PipelineRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that provides\n   the required permissions for a pipeline to read from the source and write to the sink.\n   For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/pipeline-security-overview.html\">Setting up roles and users in Amazon OpenSearch Ingestion</a>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that grants the pipeline permission to access\n   Amazon Web Services resources.</p>"
                     }
                 }
             },

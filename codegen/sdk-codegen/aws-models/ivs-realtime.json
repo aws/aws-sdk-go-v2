@@ -2369,7 +2369,7 @@
                     "target": "com.amazonaws.ivsrealtime#Replica",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>If true, this indicates the <code>participantId</code> is a replicated participant. \n\t  If this is a subscribe event, then this flag refers to <code>remoteParticipantId</code>.</p>"
+                        "smithy.api#documentation": "<p>If true, this indicates the <code>participantId</code> is a replicated participant. \n\t  If this is a subscribe event, then this flag refers to <code>remoteParticipantId</code>. Default: <code>false</code>.</p>"
                     }
                 }
             },
@@ -3063,6 +3063,12 @@
                     "traits": {
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the spacing between participant tiles in pixels. Default:\n         <code>2</code>.</p>"
+                    }
+                },
+                "participantOrderAttribute": {
+                    "target": "com.amazonaws.ivsrealtime#AttributeKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Attribute name in  <a>ParticipantTokenConfiguration</a> identifying the participant ordering key.\n        Participants with <code>participantOrderAttribute</code> set to <code>\"\"</code> or not specified are ordered based\n\ton their arrival time into the stage.</p>"
                     }
                 }
             },
@@ -4926,7 +4932,7 @@
                 "sourceStageArn": {
                     "target": "com.amazonaws.ivsrealtime#StageArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>ARN of the stage from which this participant is replicated.</p>"
+                        "smithy.api#documentation": "<p>Source stage ARN from which this participant is replicated, if <code>replicationType</code> is <code>REPLICA</code>.</p>"
                     }
                 },
                 "sourceSessionId": {
@@ -5295,6 +5301,12 @@
                     "target": "com.amazonaws.ivsrealtime#PipHeight",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the height of the PiP window in pixels. When this is not set explicitly,\n            <code>pipHeight</code>’s value will be based on the size of the composition and the\n         aspect ratio of the participant’s video.</p>"
+                    }
+                },
+                "participantOrderAttribute": {
+                    "target": "com.amazonaws.ivsrealtime#AttributeKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Attribute name in  <a>ParticipantTokenConfiguration</a> identifying the participant ordering key.\n        Participants with <code>participantOrderAttribute</code> set to <code>\"\"</code> or not specified are ordered based\n\ton their arrival time into the stage.</p>"
                     }
                 }
             },
