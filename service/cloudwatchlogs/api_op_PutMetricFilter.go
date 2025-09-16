@@ -89,6 +89,19 @@ type PutMetricFilterInput struct {
 	// [PutTransformer]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutTransformer.html
 	ApplyOnTransformedLogs bool
 
+	// A list of system fields to emit as additional dimensions in the generated
+	// metrics. Valid values are @aws.account and @aws.region . These dimensions help
+	// identify the source of centralized log data and count toward the total dimension
+	// limit for metric filters.
+	EmitSystemFieldDimensions []string
+
+	// A filter expression that specifies which log events should be processed by this
+	// metric filter based on system fields such as source account and source region.
+	// Uses selection criteria syntax with operators like = , != , AND , OR , IN , NOT
+	// IN . Example: @aws.region = "us-east-1" or @aws.account IN ["123456789012",
+	// "987654321098"] . Maximum length: 2000 characters.
+	FieldSelectionCriteria *string
+
 	noSmithyDocumentSerde
 }
 

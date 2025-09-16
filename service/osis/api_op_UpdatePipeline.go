@@ -57,11 +57,8 @@ type UpdatePipelineInput struct {
 	// configuration as a string, each new line must be escaped with \n .
 	PipelineConfigurationBody *string
 
-	// The Amazon Resource Name (ARN) of an IAM role that provides the required
-	// permissions for a pipeline to read from the source and write to the sink. For
-	// more information, see [Setting up roles and users in Amazon OpenSearch Ingestion].
-	//
-	// [Setting up roles and users in Amazon OpenSearch Ingestion]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/pipeline-security-overview.html
+	// The Amazon Resource Name (ARN) of the IAM role that grants the pipeline
+	// permission to access Amazon Web Services resources.
 	PipelineRoleArn *string
 
 	noSmithyDocumentSerde

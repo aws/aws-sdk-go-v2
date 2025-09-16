@@ -3703,6 +3703,11 @@ func awsRestjson1_serializeDocumentGridConfiguration(v *types.GridConfiguration,
 		ok.Boolean(v.OmitStoppedVideo)
 	}
 
+	if v.ParticipantOrderAttribute != nil {
+		ok := object.Key("participantOrderAttribute")
+		ok.String(*v.ParticipantOrderAttribute)
+	}
+
 	if len(v.VideoAspectRatio) > 0 {
 		ok := object.Key("videoAspectRatio")
 		ok.String(string(v.VideoAspectRatio))
@@ -3878,6 +3883,11 @@ func awsRestjson1_serializeDocumentPipConfiguration(v *types.PipConfiguration, v
 	if v.OmitStoppedVideo {
 		ok := object.Key("omitStoppedVideo")
 		ok.Boolean(v.OmitStoppedVideo)
+	}
+
+	if v.ParticipantOrderAttribute != nil {
+		ok := object.Key("participantOrderAttribute")
+		ok.String(*v.ParticipantOrderAttribute)
 	}
 
 	if len(v.PipBehavior) > 0 {

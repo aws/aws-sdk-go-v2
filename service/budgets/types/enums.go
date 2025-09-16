@@ -296,9 +296,10 @@ type HealthStatusReason string
 
 // Enum values for HealthStatusReason
 const (
-	HealthStatusReasonBillingViewNoAccess  HealthStatusReason = "BILLING_VIEW_NO_ACCESS"
-	HealthStatusReasonBillingViewUnhealthy HealthStatusReason = "BILLING_VIEW_UNHEALTHY"
-	HealthStatusReasonFilterInvalid        HealthStatusReason = "FILTER_INVALID"
+	HealthStatusReasonBillingViewNoAccess             HealthStatusReason = "BILLING_VIEW_NO_ACCESS"
+	HealthStatusReasonBillingViewUnhealthy            HealthStatusReason = "BILLING_VIEW_UNHEALTHY"
+	HealthStatusReasonFilterInvalid                   HealthStatusReason = "FILTER_INVALID"
+	HealthStatusReasonMultiYearHistoricalDataDisabled HealthStatusReason = "MULTI_YEAR_HISTORICAL_DATA_DISABLED"
 )
 
 // Values returns all known values for HealthStatusReason. Note that this can be
@@ -310,6 +311,7 @@ func (HealthStatusReason) Values() []HealthStatusReason {
 		"BILLING_VIEW_NO_ACCESS",
 		"BILLING_VIEW_UNHEALTHY",
 		"FILTER_INVALID",
+		"MULTI_YEAR_HISTORICAL_DATA_DISABLED",
 	}
 }
 
@@ -478,6 +480,7 @@ const (
 	TimeUnitMonthly   TimeUnit = "MONTHLY"
 	TimeUnitQuarterly TimeUnit = "QUARTERLY"
 	TimeUnitAnnually  TimeUnit = "ANNUALLY"
+	TimeUnitCustom    TimeUnit = "CUSTOM"
 )
 
 // Values returns all known values for TimeUnit. Note that this can be expanded in
@@ -490,5 +493,6 @@ func (TimeUnit) Values() []TimeUnit {
 		"MONTHLY",
 		"QUARTERLY",
 		"ANNUALLY",
+		"CUSTOM",
 	}
 }

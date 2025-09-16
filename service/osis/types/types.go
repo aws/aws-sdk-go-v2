@@ -142,8 +142,8 @@ type Pipeline struct {
 	// The name of the pipeline.
 	PipelineName *string
 
-	// The Amazon Resource Name (ARN) of the IAM role that provides the required
-	// permissions for a pipeline to read from the source and write to the sink.
+	// The Amazon Resource Name (ARN) of the IAM role that the pipeline uses to access
+	// AWS resources.
 	PipelineRoleArn *string
 
 	// A list of VPC endpoints that OpenSearch Ingestion has created to other Amazon
@@ -221,6 +221,65 @@ type PipelineDestination struct {
 
 	// The name of the service receiving data from the pipeline.
 	ServiceName *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a VPC endpoint for an OpenSearch Ingestion pipeline, enabling
+// private connectivity between your VPC and the pipeline.
+type PipelineEndpoint struct {
+
+	// The unique identifier for the pipeline endpoint.
+	EndpointId *string
+
+	// The URL used to ingest data to the pipeline through the VPC endpoint.
+	IngestEndpointUrl *string
+
+	// The Amazon Resource Name (ARN) of the pipeline associated with this endpoint.
+	PipelineArn *string
+
+	// The current status of the pipeline endpoint.
+	Status PipelineEndpointStatus
+
+	// The ID of the VPC where the pipeline endpoint is created.
+	VpcId *string
+
+	// Configuration options for the VPC endpoint, including subnet and security group
+	// settings.
+	VpcOptions *PipelineEndpointVpcOptions
+
+	noSmithyDocumentSerde
+}
+
+// Represents a connection to a pipeline endpoint, containing details about the
+// endpoint association.
+type PipelineEndpointConnection struct {
+
+	// The unique identifier of the endpoint in the connection.
+	EndpointId *string
+
+	// The Amazon Resource Name (ARN) of the pipeline in the endpoint connection.
+	PipelineArn *string
+
+	// The current status of the pipeline endpoint connection.
+	Status PipelineEndpointStatus
+
+	// The Amazon Web Services account ID that owns the VPC endpoint used in this
+	// connection.
+	VpcEndpointOwner *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings for the VPC endpoint, specifying network access controls.
+type PipelineEndpointVpcOptions struct {
+
+	// A list of security group IDs that control network access to the pipeline
+	// endpoint.
+	SecurityGroupIds []string
+
+	// A list of subnet IDs where the pipeline endpoint network interfaces are created.
+	SubnetIds []string
 
 	noSmithyDocumentSerde
 }

@@ -13805,6 +13805,42 @@ func awsAwsjson11_deserializeDocumentDimensions(v *map[string]string, value inte
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentEmitSystemFields(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected SystemField to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentEnumerations(v *map[string]int64, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -15936,6 +15972,20 @@ func awsAwsjson11_deserializeDocumentMetricFilter(v **types.MetricFilter, value 
 					return err
 				}
 				sv.CreationTime = ptr.Int64(i64)
+			}
+
+		case "emitSystemFieldDimensions":
+			if err := awsAwsjson11_deserializeDocumentEmitSystemFields(&sv.EmitSystemFieldDimensions, value); err != nil {
+				return err
+			}
+
+		case "fieldSelectionCriteria":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FieldSelectionCriteria to be of type string, got %T instead", value)
+				}
+				sv.FieldSelectionCriteria = ptr.String(jtv)
 			}
 
 		case "filterName":
@@ -19434,6 +19484,20 @@ func awsAwsjson11_deserializeDocumentSubscriptionFilter(v **types.SubscriptionFi
 					return fmt.Errorf("expected Distribution to be of type string, got %T instead", value)
 				}
 				sv.Distribution = types.Distribution(jtv)
+			}
+
+		case "emitSystemFields":
+			if err := awsAwsjson11_deserializeDocumentEmitSystemFields(&sv.EmitSystemFields, value); err != nil {
+				return err
+			}
+
+		case "fieldSelectionCriteria":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FieldSelectionCriteria to be of type string, got %T instead", value)
+				}
+				sv.FieldSelectionCriteria = ptr.String(jtv)
 			}
 
 		case "filterName":

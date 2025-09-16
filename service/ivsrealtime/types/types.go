@@ -394,7 +394,8 @@ type Event struct {
 	RemoteParticipantId *string
 
 	// If true, this indicates the participantId is a replicated participant. If this
-	// is a subscribe event, then this flag refers to remoteParticipantId .
+	// is a subscribe event, then this flag refers to remoteParticipantId . Default:
+	// false .
 	Replica bool
 
 	noSmithyDocumentSerde
@@ -417,6 +418,11 @@ type GridConfiguration struct {
 	// Determines whether to omit participants with stopped video in the composition.
 	// Default: false .
 	OmitStoppedVideo bool
+
+	// Attribute name in ParticipantTokenConfiguration identifying the participant ordering key. Participants with
+	// participantOrderAttribute set to "" or not specified are ordered based on their
+	// arrival time into the stage.
+	ParticipantOrderAttribute *string
 
 	// Sets the non-featured participant display mode, to control the aspect ratio of
 	// video tiles. VIDEO is 16:9, SQUARE is 1:1, and PORTRAIT is 3:4. Default: VIDEO .
@@ -706,7 +712,8 @@ type ParticipantSummary struct {
 	// ID of the session within the source stage, if replicationType is REPLICA .
 	SourceSessionId *string
 
-	// ARN of the stage from which this participant is replicated.
+	// Source stage ARN from which this participant is replicated, if replicationType
+	// is REPLICA .
 	SourceStageArn *string
 
 	// Whether the participant is connected to or disconnected from the stage.
@@ -820,6 +827,11 @@ type PipConfiguration struct {
 	// Determines whether to omit participants with stopped video in the composition.
 	// Default: false .
 	OmitStoppedVideo bool
+
+	// Attribute name in ParticipantTokenConfiguration identifying the participant ordering key. Participants with
+	// participantOrderAttribute set to "" or not specified are ordered based on their
+	// arrival time into the stage.
+	ParticipantOrderAttribute *string
 
 	// Defines PiP behavior when all participants have left: STATIC (maintains
 	// original position/size) or DYNAMIC (expands to full composition). Default:

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the field index policies of one or more log groups. For more
+// Returns the field index policies of the specified log group. For more
 // information about field index policies, see [PutIndexPolicy].
 //
 // If a specified log group has a log-group level index policy, that policy is

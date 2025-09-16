@@ -7833,6 +7833,15 @@ func awsRestjson1_deserializeDocumentGridConfiguration(v **types.GridConfigurati
 				sv.OmitStoppedVideo = jtv
 			}
 
+		case "participantOrderAttribute":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AttributeKey to be of type string, got %T instead", value)
+				}
+				sv.ParticipantOrderAttribute = ptr.String(jtv)
+			}
+
 		case "videoAspectRatio":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9280,6 +9289,15 @@ func awsRestjson1_deserializeDocumentPipConfiguration(v **types.PipConfiguration
 					return fmt.Errorf("expected OmitStoppedVideo to be of type *bool, got %T instead", value)
 				}
 				sv.OmitStoppedVideo = jtv
+			}
+
+		case "participantOrderAttribute":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AttributeKey to be of type string, got %T instead", value)
+				}
+				sv.ParticipantOrderAttribute = ptr.String(jtv)
 			}
 
 		case "pipBehavior":

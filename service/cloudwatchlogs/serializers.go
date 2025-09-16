@@ -5863,6 +5863,17 @@ func awsAwsjson11_serializeDocumentDimensions(v map[string]string, value smithyj
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentEmitSystemFields(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentEntity(v *types.Entity, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8552,6 +8563,18 @@ func awsAwsjson11_serializeOpDocumentPutMetricFilterInput(v *PutMetricFilterInpu
 		ok.Boolean(v.ApplyOnTransformedLogs)
 	}
 
+	if v.EmitSystemFieldDimensions != nil {
+		ok := object.Key("emitSystemFieldDimensions")
+		if err := awsAwsjson11_serializeDocumentEmitSystemFields(v.EmitSystemFieldDimensions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FieldSelectionCriteria != nil {
+		ok := object.Key("fieldSelectionCriteria")
+		ok.String(*v.FieldSelectionCriteria)
+	}
+
 	if v.FilterName != nil {
 		ok := object.Key("filterName")
 		ok.String(*v.FilterName)
@@ -8677,6 +8700,18 @@ func awsAwsjson11_serializeOpDocumentPutSubscriptionFilterInput(v *PutSubscripti
 	if len(v.Distribution) > 0 {
 		ok := object.Key("distribution")
 		ok.String(string(v.Distribution))
+	}
+
+	if v.EmitSystemFields != nil {
+		ok := object.Key("emitSystemFields")
+		if err := awsAwsjson11_serializeDocumentEmitSystemFields(v.EmitSystemFields, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FieldSelectionCriteria != nil {
+		ok := object.Key("fieldSelectionCriteria")
+		ok.String(*v.FieldSelectionCriteria)
 	}
 
 	if v.FilterName != nil {

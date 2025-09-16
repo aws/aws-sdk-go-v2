@@ -271,13 +271,13 @@ type Budget struct {
 	// before 06/15/87 00:00 UTC .
 	//
 	// If you create your budget and don't specify a start date, Amazon Web Services
-	// defaults to the start of your chosen time period (DAILY, MONTHLY, QUARTERLY, or
-	// ANNUALLY). For example, if you created your budget on January 24, 2018, chose
-	// DAILY , and didn't set a start date, Amazon Web Services set your start date to
-	// 01/24/18 00:00 UTC . If you chose MONTHLY , Amazon Web Services set your start
-	// date to 01/01/18 00:00 UTC . If you didn't specify an end date, Amazon Web
-	// Services set your end date to 06/15/87 00:00 UTC . The defaults are the same for
-	// the Billing and Cost Management console and the API.
+	// defaults to the start of your chosen time period (DAILY, MONTHLY, QUARTERLY,
+	// ANNUALLY, or CUSTOM). For example, if you created your budget on January 24,
+	// 2018, chose DAILY , and didn't set a start date, Amazon Web Services set your
+	// start date to 01/24/18 00:00 UTC . If you chose MONTHLY , Amazon Web Services
+	// set your start date to 01/01/18 00:00 UTC . If you didn't specify an end date,
+	// Amazon Web Services set your end date to 06/15/87 00:00 UTC . The defaults are
+	// the same for the Billing and Cost Management console and the API.
 	//
 	// You can change either date with the UpdateBudget operation.
 	//
@@ -536,6 +536,9 @@ type HealthStatus struct {
 	//
 	//   - FILTER_INVALID : The filter contains reference to an account you do not have
 	//   access to.
+	//
+	//   - MULTI_YEAR_HISTORICAL_DATA_DISABLED : The budget is not being updated.
+	//   Enable multi-year historical data in your Cost Management preferences.
 	StatusReason HealthStatusReason
 
 	noSmithyDocumentSerde
@@ -810,11 +813,11 @@ type TimePeriod struct {
 
 	// The start date for a budget. If you created your budget and didn't specify a
 	// start date, Amazon Web Services defaults to the start of your chosen time period
-	// (DAILY, MONTHLY, QUARTERLY, or ANNUALLY). For example, if you created your
-	// budget on January 24, 2018, chose DAILY , and didn't set a start date, Amazon
-	// Web Services set your start date to 01/24/18 00:00 UTC . If you chose MONTHLY ,
-	// Amazon Web Services set your start date to 01/01/18 00:00 UTC . The defaults are
-	// the same for the Billing and Cost Management console and the API.
+	// (DAILY, MONTHLY, QUARTERLY, ANNUALLY, or CUSTOM). For example, if you created
+	// your budget on January 24, 2018, chose DAILY , and didn't set a start date,
+	// Amazon Web Services set your start date to 01/24/18 00:00 UTC . If you chose
+	// MONTHLY , Amazon Web Services set your start date to 01/01/18 00:00 UTC . The
+	// defaults are the same for the Billing and Cost Management console and the API.
 	//
 	// You can change your start date with the UpdateBudget operation.
 	Start *time.Time

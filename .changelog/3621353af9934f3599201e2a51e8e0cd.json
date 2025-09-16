@@ -1,0 +1,8 @@
+{
+    "id": "3621353a-f993-4f35-9920-1e2a51e8e0cd",
+    "type": "feature",
+    "description": "Add support for custom time periods in budget configuration",
+    "modules": [
+        "service/budgets"
+    ]
+}

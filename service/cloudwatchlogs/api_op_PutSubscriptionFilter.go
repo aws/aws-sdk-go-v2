@@ -125,6 +125,18 @@ type PutSubscriptionFilterInput struct {
 	// Kinesis data stream.
 	Distribution types.Distribution
 
+	// A list of system fields to include in the log events sent to the subscription
+	// destination. Valid values are @aws.account and @aws.region . These fields
+	// provide source information for centralized log data in the forwarded payload.
+	EmitSystemFields []string
+
+	// A filter expression that specifies which log events should be processed by this
+	// subscription filter based on system fields such as source account and source
+	// region. Uses selection criteria syntax with operators like = , != , AND , OR ,
+	// IN , NOT IN . Example: @aws.region NOT IN ["cn-north-1"] or @aws.account =
+	// "123456789012" AND @aws.region = "us-east-1" . Maximum length: 2000 characters.
+	FieldSelectionCriteria *string
+
 	// The ARN of an IAM role that grants CloudWatch Logs permissions to deliver
 	// ingested log events to the destination stream. You don't need to provide the ARN
 	// when you are working with a logical destination for cross-account delivery.

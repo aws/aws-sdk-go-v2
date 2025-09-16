@@ -833,13 +833,13 @@ func (*GetLogObjectResponseStreamMemberFields) isGetLogObjectResponseStream() {}
 // For more information about this processor including examples, see [grok] in the
 // CloudWatch Logs User Guide.
 //
-// [grok]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-Grok
+// [grok]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation-Processors.html#CloudWatch-Logs-Transformation-Grok
 type Grok struct {
 
 	// The grok pattern to match against the log event. For a list of supported grok
 	// patterns, see [Supported grok patterns].
 	//
-	// [Supported grok patterns]: https://docs.aws.amazon.com/mazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation-Processors.html#Grok-Patterns
+	// [Supported grok patterns]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation-Processors.html#Grok-Patterns
 	//
 	// This member is required.
 	Match *string
@@ -1289,6 +1289,16 @@ type MetricFilter struct {
 	// The creation time of the metric filter, expressed as the number of milliseconds
 	// after Jan 1, 1970 00:00:00 UTC .
 	CreationTime *int64
+
+	// The list of system fields that are emitted as additional dimensions in the
+	// generated metrics. Returns the emitSystemFieldDimensions value if it was
+	// specified when the metric filter was created.
+	EmitSystemFieldDimensions []string
+
+	// The filter expression that specifies which log events are processed by this
+	// metric filter based on system fields. Returns the fieldSelectionCriteria value
+	// if it was specified when the metric filter was created.
+	FieldSelectionCriteria *string
 
 	// The name of the metric filter.
 	FilterName *string
@@ -2493,6 +2503,16 @@ type SubscriptionFilter struct {
 	// The method used to distribute log data to the destination, which can be either
 	// random or grouped by log stream.
 	Distribution Distribution
+
+	// The list of system fields that are included in the log events sent to the
+	// subscription destination. Returns the emitSystemFields value if it was
+	// specified when the subscription filter was created.
+	EmitSystemFields []string
+
+	// The filter expression that specifies which log events are processed by this
+	// subscription filter based on system fields. Returns the fieldSelectionCriteria
+	// value if it was specified when the subscription filter was created.
+	FieldSelectionCriteria *string
 
 	// The name of the subscription filter.
 	FilterName *string

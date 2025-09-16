@@ -137,6 +137,22 @@ import (
 // groups that start with my-log , you can't have another field index policy
 // filtered to my-logpprod or my-logging .
 //
+// CloudWatch Logs provides default field indexes for all log groups in the
+// Standard log class. Default field indexes are automatically available for the
+// following fields:
+//
+//   - @aws.region
+//
+//   - @aws.account
+//
+//   - @source.log
+//
+//   - traceId
+//
+// Default field indexes are in addition to any custom field indexes you define
+// within your policy. Default field indexes are not counted towards your field
+// index quota.
+//
 // You can also set up a transformer at the log-group level. For more information,
 // see [PutTransformer]. If there is both a log-group level transformer created with PutTransformer
 // and an account-level transformer that could apply to the same log group, the log
