@@ -478,7 +478,7 @@ type AssumeRoleTokenProviderNotSetError struct{}
 
 // Error is the error message
 func (e AssumeRoleTokenProviderNotSetError) Error() string {
-	return fmt.Sprintf("assume role with MFA enabled, but AssumeRoleTokenProvider session option not set.")
+	return "assume role with MFA enabled, but AssumeRoleTokenProvider session option not set."
 }
 
 func assumeWebIdentity(ctx context.Context, cfg *aws.Config, filepath string, roleARN, sessionName string, configs configs) error {
