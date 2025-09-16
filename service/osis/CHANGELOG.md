@@ -1,3 +1,7 @@
+# v1.20.0 (2025-09-16)
+
+* **Feature**: Adds support for cross-account ingestion for push-based sources. This includes resource policies for sharing pipelines across accounts and features for managing pipeline endpoints which enable accessing pipelines across different VPCs, including VPCs in other accounts.
+
 # v1.19.3 (2025-09-10)
 
 * No change notes available for this release.

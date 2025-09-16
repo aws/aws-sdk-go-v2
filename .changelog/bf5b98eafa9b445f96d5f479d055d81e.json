@@ -1,8 +1,0 @@
-{
-    "id": "bf5b98ea-fa9b-445f-96d5-f479d055d81e",
-    "type": "feature",
-    "description": "Cloudwatch Logs added support for 2 new API parameters in metric and subscription filter APIs to filter log events based on system field values and emit system field values as dimensions and send them to customer destination as additional metadata.",
-    "modules": [
-        "service/cloudwatchlogs"
-    ]
-}

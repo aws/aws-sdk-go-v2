@@ -1,8 +1,0 @@
-{
-    "id": "3b3c6708-459c-44f5-8b04-89130903934f",
-    "type": "feature",
-    "description": "IVS now offers customers the ability to control the positioning of participants in both grid and PiP layouts based on custom attribute values in participant tokens.",
-    "modules": [
-        "service/ivsrealtime"
-    ]
-}

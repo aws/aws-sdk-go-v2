@@ -1,3 +1,7 @@
+# v1.30.0 (2025-09-16)
+
+* **Feature**: IVS now offers customers the ability to control the positioning of participants in both grid and PiP layouts based on custom attribute values in participant tokens.
+
 # v1.29.3 (2025-09-10)
 
 * No change notes available for this release.

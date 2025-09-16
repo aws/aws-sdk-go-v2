@@ -1,3 +1,15 @@
+# Release (2025-09-16)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/budgets`: [v1.38.0](service/budgets/CHANGELOG.md#v1380-2025-09-16)
+  * **Feature**: Add support for custom time periods in budget configuration
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.58.0](service/cloudwatchlogs/CHANGELOG.md#v1580-2025-09-16)
+  * **Feature**: Cloudwatch Logs added support for 2 new API parameters in metric and subscription filter APIs to filter log events based on system field values and emit system field values as dimensions and send them to customer destination as additional metadata.
+* `github.com/aws/aws-sdk-go-v2/service/ivsrealtime`: [v1.30.0](service/ivsrealtime/CHANGELOG.md#v1300-2025-09-16)
+  * **Feature**: IVS now offers customers the ability to control the positioning of participants in both grid and PiP layouts based on custom attribute values in participant tokens.
+* `github.com/aws/aws-sdk-go-v2/service/osis`: [v1.20.0](service/osis/CHANGELOG.md#v1200-2025-09-16)
+  * **Feature**: Adds support for cross-account ingestion for push-based sources. This includes resource policies for sharing pipelines across accounts and features for managing pipeline endpoints which enable accessing pipelines across different VPCs, including VPCs in other accounts.
+
 # Release (2025-09-15)
 
 ## Module Highlights

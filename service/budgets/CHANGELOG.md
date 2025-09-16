@@ -1,3 +1,7 @@
+# v1.38.0 (2025-09-16)
+
+* **Feature**: Add support for custom time periods in budget configuration
+
 # v1.37.5 (2025-09-10)
 
 * No change notes available for this release.
