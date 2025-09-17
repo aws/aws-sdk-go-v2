@@ -65,8 +65,8 @@ type CreateComputeNodeGroupInput struct {
 	// This member is required.
 	IamInstanceProfileArn *string
 
-	// A list of EC2 instance configurations that Amazon Web Services PCS can
-	// provision in the compute node group.
+	// A list of EC2 instance configurations that PCS can provision in the compute
+	// node group.
 	//
 	// This member is required.
 	InstanceConfigs []types.InstanceConfig
@@ -95,12 +95,14 @@ type CreateComputeNodeGroupInput struct {
 	// specify a client token, the CLI and SDK automatically generate 1 for you.
 	ClientToken *string
 
-	// Specifies how EC2 instances are purchased on your behalf. Amazon Web Services
-	// PCS supports On-Demand and Spot instances. For more information, see [Instance purchasing options]in the
-	// Amazon Elastic Compute Cloud User Guide. If you don't provide this option, it
-	// defaults to On-Demand.
+	// Specifies how EC2 instances are purchased on your behalf. PCS supports
+	// On-Demand Instances, Spot Instances, and Amazon EC2 Capacity Blocks for ML. For
+	// more information, see [Amazon EC2 billing and purchasing options]in the Amazon Elastic Compute Cloud User Guide. For more
+	// information about PCS support for Capacity Blocks, see [Using Amazon EC2 Capacity Blocks for ML with PCS]in the PCS User Guide.
+	// If you don't provide this option, it defaults to On-Demand.
 	//
-	// [Instance purchasing options]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html
+	// [Using Amazon EC2 Capacity Blocks for ML with PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/capacity-blocks.html
+	// [Amazon EC2 billing and purchasing options]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html
 	PurchaseOption types.PurchaseOption
 
 	// Additional options related to the Slurm scheduler.

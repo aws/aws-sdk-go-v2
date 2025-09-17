@@ -3673,6 +3673,11 @@ func awsAwsjson10_serializeDocumentFirewallPolicy(v *types.FirewallPolicy, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.EnableTLSSessionHolding != nil {
+		ok := object.Key("EnableTLSSessionHolding")
+		ok.Boolean(*v.EnableTLSSessionHolding)
+	}
+
 	if v.PolicyVariables != nil {
 		ok := object.Key("PolicyVariables")
 		if err := awsAwsjson10_serializeDocumentPolicyVariables(v.PolicyVariables, ok); err != nil {

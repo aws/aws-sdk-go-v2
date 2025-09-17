@@ -8796,6 +8796,15 @@ func awsAwsjson10_deserializeDocumentFirewallPolicy(v **types.FirewallPolicy, va
 
 	for key, value := range shape {
 		switch key {
+		case "EnableTLSSessionHolding":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected EnableTLSSessionHolding to be of type *bool, got %T instead", value)
+				}
+				sv.EnableTLSSessionHolding = ptr.Bool(jtv)
+			}
+
 		case "PolicyVariables":
 			if err := awsAwsjson10_deserializeDocumentPolicyVariables(&sv.PolicyVariables, value); err != nil {
 				return err

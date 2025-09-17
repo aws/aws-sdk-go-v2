@@ -261,8 +261,8 @@ type ComputeNodeGroup struct {
 	// This member is required.
 	Id *string
 
-	// A list of EC2 instance configurations that Amazon Web Services PCS can
-	// provision in the compute node group.
+	// A list of EC2 instance configurations that PCS can provision in the compute
+	// node group.
 	//
 	// This member is required.
 	InstanceConfigs []InstanceConfig
@@ -312,12 +312,14 @@ type ComputeNodeGroup struct {
 	// The list of errors that occurred during compute node group provisioning.
 	ErrorInfo []ErrorInfo
 
-	// Specifies how EC2 instances are purchased on your behalf. Amazon Web Services
-	// PCS supports On-Demand and Spot instances. For more information, see [Instance purchasing options]in the
-	// Amazon Elastic Compute Cloud User Guide. If you don't provide this option, it
-	// defaults to On-Demand.
+	// Specifies how EC2 instances are purchased on your behalf. PCS supports
+	// On-Demand Instances, Spot Instances, and Amazon EC2 Capacity Blocks for ML. For
+	// more information, see [Amazon EC2 billing and purchasing options]in the Amazon Elastic Compute Cloud User Guide. For more
+	// information about PCS support for Capacity Blocks, see [Using Amazon EC2 Capacity Blocks for ML with PCS]in the PCS User Guide.
+	// If you don't provide this option, it defaults to On-Demand.
 	//
-	// [Instance purchasing options]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html
+	// [Using Amazon EC2 Capacity Blocks for ML with PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/capacity-blocks.html
+	// [Amazon EC2 billing and purchasing options]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html
 	PurchaseOption PurchaseOption
 
 	// Additional options related to the Slurm scheduler.
@@ -545,13 +547,13 @@ type NetworkingRequest struct {
 	// (ENI) created in subnets.
 	SecurityGroupIds []string
 
-	// The list of subnet IDs where Amazon Web Services PCS creates an Elastic Network
-	// Interface (ENI) to enable communication between managed controllers and Amazon
-	// Web Services PCS resources. Subnet IDs have the form subnet-0123456789abcdef0 .
+	// The list of subnet IDs where PCS creates an Elastic Network Interface (ENI) to
+	// enable communication between managed controllers and PCS resources. Subnet IDs
+	// have the form subnet-0123456789abcdef0 .
 	//
 	// Subnets can't be in Outposts, Wavelength or an Amazon Web Services Local Zone.
 	//
-	// Amazon Web Services PCS currently supports only 1 subnet in this list.
+	// PCS currently supports only 1 subnet in this list.
 	SubnetIds []string
 
 	noSmithyDocumentSerde
@@ -749,7 +751,7 @@ type SchedulerRequest struct {
 // The shared Slurm key for authentication, also known as the cluster secret.
 type SlurmAuthKey struct {
 
-	// The Amazon Resource Name (ARN) of the the shared Slurm key.
+	// The Amazon Resource Name (ARN) of the shared Slurm key.
 	//
 	// This member is required.
 	SecretArn *string
@@ -815,11 +817,10 @@ type SlurmCustomSetting struct {
 // CreateComputeNodeGroup API action.
 type SpotOptions struct {
 
-	// The Amazon EC2 allocation strategy Amazon Web Services PCS uses to provision
-	// EC2 instances. Amazon Web Services PCS supports lowest price, capacity
-	// optimized, and price capacity optimized. For more information, see [Use allocation strategies to determine how EC2 Fleet or Spot Fleet fulfills Spot and On-Demand capacity]in the
-	// Amazon Elastic Compute Cloud User Guide. If you don't provide this option, it
-	// defaults to price capacity optimized.
+	// The Amazon EC2 allocation strategy PCS uses to provision EC2 instances. PCS
+	// supports lowest price, capacity optimized, and price capacity optimized. For
+	// more information, see [Use allocation strategies to determine how EC2 Fleet or Spot Fleet fulfills Spot and On-Demand capacity]in the Amazon Elastic Compute Cloud User Guide. If you
+	// don't provide this option, it defaults to price capacity optimized.
 	//
 	// [Use allocation strategies to determine how EC2 Fleet or Spot Fleet fulfills Spot and On-Demand capacity]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-allocation-strategy.html
 	AllocationStrategy SpotAllocationStrategy

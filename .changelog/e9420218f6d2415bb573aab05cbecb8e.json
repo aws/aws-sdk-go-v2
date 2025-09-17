@@ -1,0 +1,8 @@
+{
+    "id": "e9420218-f6d2-415b-b573-aab05cbecb8e",
+    "type": "feature",
+    "description": "Network Firewall now prevents TLS handshakes with the target server until after the Server Name Indication (SNI) has been seen and verified. The monitoring dashboard now provides deeper insights into PrivateLink endpoint candidates and offers filters based on IP addresses and protocol.",
+    "modules": [
+        "service/networkfirewall"
+    ]
+}

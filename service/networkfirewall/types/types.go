@@ -580,6 +580,11 @@ type FirewallPolicy struct {
 	// This member is required.
 	StatelessFragmentDefaultActions []string
 
+	// When true, prevents TCP and TLS packets from reaching destination servers until
+	// TLS Inspection has evaluated Server Name Indication (SNI) rules. Requires an
+	// associated TLS Inspection configuration.
+	EnableTLSSessionHolding *bool
+
 	// Contains variables that you can use to override default Suricata settings in
 	// your firewall policy.
 	PolicyVariables *PolicyVariables

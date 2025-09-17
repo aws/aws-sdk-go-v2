@@ -69,7 +69,7 @@ type CreateFirewallInput struct {
 	// Required. The Availability Zones where you want to create firewall endpoints
 	// for a transit gateway-attached firewall. You must specify at least one
 	// Availability Zone. Consider enabling the firewall in every Availability Zone
-	// where you have workloads to maintain Availability Zone independence.
+	// where you have workloads to maintain Availability Zone isolation.
 	//
 	// You can modify Availability Zones later using AssociateAvailabilityZones or DisassociateAvailabilityZones, but this may briefly
 	// disrupt traffic. The AvailabilityZoneChangeProtection setting controls whether

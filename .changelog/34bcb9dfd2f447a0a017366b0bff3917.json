@@ -1,0 +1,8 @@
+{
+    "id": "34bcb9df-d2f4-47a0-a017-366b0bff3917",
+    "type": "feature",
+    "description": "Add mac-m4.metal and mac-m4pro.metal instance types.",
+    "modules": [
+        "service/ec2"
+    ]
+}
