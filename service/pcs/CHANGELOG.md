@@ -1,3 +1,7 @@
+# v1.13.0 (2025-09-17)
+
+* **Feature**: Add support for Amazon EC2 Capacity Blocks for ML
+
 # v1.12.4 (2025-09-10)
 
 * No change notes available for this release.

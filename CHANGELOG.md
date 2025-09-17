@@ -1,3 +1,13 @@
+# Release (2025-09-17)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.252.0](service/ec2/CHANGELOG.md#v12520-2025-09-17)
+  * **Feature**: Add mac-m4.metal and mac-m4pro.metal instance types.
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.56.0](service/networkfirewall/CHANGELOG.md#v1560-2025-09-17)
+  * **Feature**: Network Firewall now prevents TLS handshakes with the target server until after the Server Name Indication (SNI) has been seen and verified. The monitoring dashboard now provides deeper insights into PrivateLink endpoint candidates and offers filters based on IP addresses and protocol.
+* `github.com/aws/aws-sdk-go-v2/service/pcs`: [v1.13.0](service/pcs/CHANGELOG.md#v1130-2025-09-17)
+  * **Feature**: Add support for Amazon EC2 Capacity Blocks for ML
+
 # Release (2025-09-16)
 
 ## Module Highlights

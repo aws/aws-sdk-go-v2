@@ -1,8 +1,0 @@
-{
-    "id": "ab8b2e2a-7a91-42cc-b5f7-24ff3b75f882",
-    "type": "feature",
-    "description": "Add support for Amazon EC2 Capacity Blocks for ML",
-    "modules": [
-        "service/pcs"
-    ]
-}

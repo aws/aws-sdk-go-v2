@@ -1,3 +1,7 @@
+# v1.56.0 (2025-09-17)
+
+* **Feature**: Network Firewall now prevents TLS handshakes with the target server until after the Server Name Indication (SNI) has been seen and verified. The monitoring dashboard now provides deeper insights into PrivateLink endpoint candidates and offers filters based on IP addresses and protocol.
+
 # v1.55.3 (2025-09-10)
 
 * No change notes available for this release.

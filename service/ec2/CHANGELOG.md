@@ -1,3 +1,7 @@
+# v1.252.0 (2025-09-17)
+
+* **Feature**: Add mac-m4.metal and mac-m4pro.metal instance types.
+
 # v1.251.2 (2025-09-10)
 
 * No change notes available for this release.
