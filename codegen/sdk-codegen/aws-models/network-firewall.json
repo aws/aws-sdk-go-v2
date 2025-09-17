@@ -1088,7 +1088,7 @@
                 "AvailabilityZoneMappings": {
                     "target": "com.amazonaws.networkfirewall#AvailabilityZoneMappings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Required. The Availability Zones where you want to create firewall endpoints for a transit gateway-attached firewall. You must specify at least one Availability Zone. Consider enabling the firewall in every Availability Zone where you have workloads to maintain Availability Zone independence.</p>\n         <p>You can modify Availability Zones later using <a>AssociateAvailabilityZones</a> or <a>DisassociateAvailabilityZones</a>, but this may briefly disrupt traffic. The <code>AvailabilityZoneChangeProtection</code> setting controls whether you can make these modifications.</p>"
+                        "smithy.api#documentation": "<p>Required. The Availability Zones where you want to create firewall endpoints for a transit gateway-attached firewall. You must specify at least one Availability Zone. Consider enabling the firewall in every Availability Zone where you have workloads to maintain Availability Zone isolation.</p>\n         <p>You can modify Availability Zones later using <a>AssociateAvailabilityZones</a> or <a>DisassociateAvailabilityZones</a>, but this may briefly disrupt traffic. The <code>AvailabilityZoneChangeProtection</code> setting controls whether you can make these modifications.</p>"
                     }
                 },
                 "AvailabilityZoneChangeProtection": {
@@ -1629,7 +1629,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a transit gateway attachment from a Network Firewall. Either the firewall owner or the transit gateway owner can delete the attachment.</p>\n         <important>\n            <p>After you delete a transit gateway attachment, raffic will no longer flow through the firewall endpoints.</p>\n         </important>\n         <p>After you initiate the delete operation, use <a>DescribeFirewall</a> to monitor the deletion status.</p>"
+                "smithy.api#documentation": "<p>Deletes a transit gateway attachment from a Network Firewall. Either the firewall owner or the transit gateway owner can delete the attachment.</p>\n         <important>\n            <p>After you delete a transit gateway attachment, traffic will no longer flow through the firewall endpoints.</p>\n         </important>\n         <p>After you initiate the delete operation, use <a>DescribeFirewall</a> to monitor the deletion status.</p>"
             }
         },
         "com.amazonaws.networkfirewall#DeleteNetworkFirewallTransitGatewayAttachmentRequest": {
@@ -3068,6 +3068,9 @@
         "com.amazonaws.networkfirewall#EnableMonitoringDashboard": {
             "type": "boolean"
         },
+        "com.amazonaws.networkfirewall#EnableTLSSessionHolding": {
+            "type": "boolean"
+        },
         "com.amazonaws.networkfirewall#EnabledAnalysisType": {
             "type": "enum",
             "members": {
@@ -3351,6 +3354,12 @@
                     "target": "com.amazonaws.networkfirewall#PolicyVariables",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains variables that you can use to override default Suricata settings in your firewall policy.</p>"
+                    }
+                },
+                "EnableTLSSessionHolding": {
+                    "target": "com.amazonaws.networkfirewall#EnableTLSSessionHolding",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When true, prevents TCP and TLS packets from reaching destination servers until TLS Inspection has evaluated Server Name Indication (SNI) rules. Requires an associated TLS Inspection configuration.</p>"
                     }
                 }
             },
@@ -6617,7 +6626,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Rejects a transit gateway attachment request for Network Firewall. When you reject the attachment request, Network Firewall cancels the creation of routing components between the transit gateway and firewall endpoints.</p>\n         <p>Only the firewall owner can reject the attachment. After rejection, no traffic will flow through the firewall endpoints for this attachment.</p>\n         <p>Use <a>DescribeFirewall</a> to monitor the rejection status. To accept the attachment instead of rejecting it, use <a>AcceptNetworkFirewallTransitGatewayAttachment</a>.</p>\n         <note>\n            <p>Once rejected, you cannot reverse this action. To establish connectivity, you must create a new transit gateway-attached firewall.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Rejects a transit gateway attachment request for Network Firewall. When you reject the attachment request, Network Firewall cancels the creation of routing components between the transit gateway and firewall endpoints.</p>\n         <p>Only the transit gateway owner can reject the attachment. After rejection, no traffic will flow through the firewall endpoints for this attachment.</p>\n         <p>Use <a>DescribeFirewall</a> to monitor the rejection status. To accept the attachment instead of rejecting it, use <a>AcceptNetworkFirewallTransitGatewayAttachment</a>.</p>\n         <note>\n            <p>Once rejected, you cannot reverse this action. To establish connectivity, you must create a new transit gateway-attached firewall.</p>\n         </note>"
             }
         },
         "com.amazonaws.networkfirewall#RejectNetworkFirewallTransitGatewayAttachmentRequest": {
@@ -7652,7 +7661,7 @@
                 "RuleOrder": {
                     "target": "com.amazonaws.networkfirewall#RuleOrder",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates how to manage the order of stateful rule evaluation for the policy. <code>STRICT_ORDER</code> is the\n         recommended option, but <code>DEFAULT_ACTION_ORDER</code> is the default option. \n         With <code>STRICT_ORDER</code>, provide your rules in the order that you want them to be evaluated. \n         You can then choose one or more default actions for packets that don't match any rules. \n         Choose <code>STRICT_ORDER</code> to have the stateful rules engine determine the evaluation order of your rules. \n         The default action for this rule order is \n         <code>PASS</code>, followed by <code>DROP</code>, <code>REJECT</code>, and <code>ALERT</code> actions. \n         Stateful rules are provided to the rule engine as Suricata compatible strings, and Suricata evaluates them based on your settings. \n         For more information, see\n         <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html\">Evaluation order for stateful rules</a> in the <i>Network Firewall Developer Guide</i>.\n      </p>"
+                        "smithy.api#documentation": "<p>Indicates how to manage the order of stateful rule evaluation for the policy. <code>STRICT_ORDER</code> is the\n         recommended option, but <code>DEFAULT_ACTION_ORDER</code> is the default option. With <code>STRICT_ORDER</code>, \n         provide your rules in the order that you want them to be evaluated. \n         You can then choose one or more default actions for packets that don't match any rules. \n         Choose <code>STRICT_ORDER</code> to have the stateful rules engine determine the evaluation order of your rules. \n         The default action for this rule order is <code>PASS</code>, followed by <code>DROP</code>, <code>REJECT</code>, and <code>ALERT</code> actions. \n         Stateful rules are provided to the rule engine as Suricata compatible strings, and Suricata evaluates them based on your settings. \n         For more information, see\n         <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html\">Evaluation order for stateful rules</a> in the <i>Network Firewall Developer Guide</i>.\n      </p>"
                     }
                 },
                 "StreamExceptionPolicy": {
