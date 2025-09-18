@@ -1782,6 +1782,16 @@
                 "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyArn"
             }
         },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildDocumentBlob": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5000000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildDocumentContentType": {
             "type": "enum",
             "members": {
@@ -2025,13 +2035,9 @@
             "type": "structure",
             "members": {
                 "document": {
-                    "target": "smithy.api#Blob",
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildDocumentBlob",
                     "traits": {
                         "smithy.api#documentation": "<p>The actual content of the source document that will be analyzed to extract policy rules and concepts.</p>",
-                        "smithy.api#length": {
-                            "min": 1,
-                            "max": 4500000
-                        },
                         "smithy.api#required": {}
                     }
                 },
@@ -6605,6 +6611,9 @@
                 },
                 {
                     "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceInUseException"
                 },
                 {
                     "target": "com.amazonaws.bedrock#ResourceNotFoundException"
@@ -20529,12 +20538,6 @@
                     "target": "com.amazonaws.bedrock#AutomatedReasoningCheckTranslationConfidence",
                     "traits": {
                         "smithy.api#documentation": "<p>The updated minimum confidence level for logic validation. If null is provided, the threshold will be removed.</p>"
-                    }
-                },
-                "kmsKeyArn": {
-                    "target": "com.amazonaws.bedrock#KmsKeyArn",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The KMS key ARN for encrypting the test at rest. If not provided, the key will not be updated. Use <code>DISCARD</code> to remove the key.</p>"
                     }
                 },
                 "clientRequestToken": {

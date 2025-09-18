@@ -1536,7 +1536,7 @@
                     "name": "chime"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>The Amazon Chime SDK messaging APIs in this section allow software developers to send\n         and receive messages in custom messaging applications. These APIs depend on the frameworks\n         provided by the Amazon Chime SDK identity APIs. For more information about the messaging\n         APIs, see <a href=\"https://docs.aws.amazon.com/chime/latest/APIReference/API_Operations_Amazon_Chime_SDK_Messaging.html\">Amazon Chime SDK messaging</a>.</p>",
+                "smithy.api#documentation": "<p>The Amazon Chime SDK messaging APIs in this section allow software developers to send\n         and receive messages in custom messaging applications. These APIs depend on the frameworks\n         provided by the Amazon Chime SDK identity APIs. For more information about the messaging\n         APIs, see <a href=\"https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_Operations_Amazon_Chime_SDK_Messaging.html\">Amazon Chime SDK messaging</a>.</p>",
                 "smithy.api#title": "Amazon Chime SDK Messaging",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -2358,7 +2358,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a channel flow, a container for processors. Processors are AWS Lambda functions\n         that perform actions on chat messages, such as stripping out profanity. You can associate\n         channel flows with channels, and the processors in the channel flow then take action on all\n         messages sent to that channel. This is a developer API.</p>\n         <p>Channel flows process the following items:</p>\n         <ol>\n            <li>\n               <p>New and updated messages</p>\n            </li>\n            <li>\n               <p>Persistent and non-persistent messages</p>\n            </li>\n            <li>\n               <p>The Standard message type</p>\n            </li>\n         </ol>\n         <note>\n            <p>Channel flows don't process Control or System messages. For more information about the message types provided by Chime SDK messaging, refer to \n           <a href=\"https://docs.aws.amazon.com/chime/latest/dg/using-the-messaging-sdk.html#msg-types\">Message types</a> in the <i>Amazon Chime developer guide</i>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates a channel flow, a container for processors. Processors are AWS Lambda functions\n         that perform actions on chat messages, such as stripping out profanity. You can associate\n         channel flows with channels, and the processors in the channel flow then take action on all\n         messages sent to that channel. This is a developer API.</p>\n         <p>Channel flows process the following items:</p>\n         <ol>\n            <li>\n               <p>New and updated messages</p>\n            </li>\n            <li>\n               <p>Persistent and non-persistent messages</p>\n            </li>\n            <li>\n               <p>The Standard message type</p>\n            </li>\n         </ol>\n         <note>\n            <p>Channel flows don't process Control or System messages. For more information about the message types provided by Chime SDK messaging, refer to \n           <a href=\"https://docs.aws.amazon.com/chime-sdk/latest/dg/using-the-messaging-sdk.html#msg-types\">Message types</a> in the <i>Amazon Chime developer guide</i>.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/channel-flows",
@@ -2693,7 +2693,7 @@
                 "ChannelId": {
                     "target": "com.amazonaws.chimesdkmessaging#ChannelId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the channel in the request.</p>"
+                        "smithy.api#documentation": "<p>An ID for the channel being created. If you do not specify an ID, a UUID will be created for the channel.</p>"
                     }
                 },
                 "MemberArns": {
@@ -4382,7 +4382,15 @@
         },
         "com.amazonaws.chimesdkmessaging#GetMessagingSessionEndpointRequest": {
             "type": "structure",
-            "members": {},
+            "members": {
+                "NetworkType": {
+                    "target": "com.amazonaws.chimesdkmessaging#NetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of network for the messaging session endpoint. Either IPv4 only or dual-stack (IPv4 and IPv6).</p>",
+                        "smithy.api#httpQuery": "network-type"
+                    }
+                }
+            },
             "traits": {
                 "smithy.api#input": {}
             }
@@ -4761,7 +4769,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all channel memberships in a channel.</p>\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n            ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in\n            the header.</p>\n         </note>\n         <p>If you want to list the channels to which a specific app instance user belongs, see the \n         <a href=\"https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_ListChannelMembershipsForAppInstanceUser.html\">ListChannelMembershipsForAppInstanceUser</a> API.</p>",
+                "smithy.api#documentation": "<p>Lists all channel memberships in a channel.</p>\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n            ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in\n            the header.</p>\n         </note>\n         <p>If you want to list the channels to which a specific app instance user belongs, see the \n         <a href=\"https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_ListChannelMembershipsForAppInstanceUser.html\">ListChannelMembershipsForAppInstanceUser</a> API.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/channels/{ChannelArn}/memberships",
@@ -5818,6 +5826,23 @@
                 }
             }
         },
+        "com.amazonaws.chimesdkmessaging#NetworkType": {
+            "type": "enum",
+            "members": {
+                "IPV4_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPV4_ONLY"
+                    }
+                },
+                "DUAL_STACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DUAL_STACK"
+                    }
+                }
+            }
+        },
         "com.amazonaws.chimesdkmessaging#NextToken": {
             "type": "string",
             "traits": {
@@ -6327,7 +6352,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Redacts message content, but not metadata. The message exists in the back end, but the\n         action returns null content, and the state shows as redacted.</p>\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n            ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in\n            the header.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Redacts message content and metadata. The message exists in the back end, but the\n         action returns null content, and the state shows as redacted.</p>\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n            ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in\n            the header.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/channels/{ChannelArn}/messages/{MessageId}?operation=redact",
@@ -6455,7 +6480,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Allows the <code>ChimeBearer</code> to search channels by channel members. Users or bots can search \n         across the channels that they belong to. Users in the <code>AppInstanceAdmin</code> role can search across \n         all channels.</p>\n         <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n         ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in\n         the header.</p>",
+                "smithy.api#documentation": "<p>Allows the <code>ChimeBearer</code> to search channels by channel members. Users or bots can search \n         across the channels that they belong to. Users in the <code>AppInstanceAdmin</code> role can search across \n         all channels.</p>\n         <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n         ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in\n         the header.</p>\n         <note>\n            <p>This operation isn't supported for <code>AppInstanceUsers</code> with a large number of memberships.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/channels?operation=search",
@@ -6537,7 +6562,7 @@
                 "Values": {
                     "target": "com.amazonaws.chimesdkmessaging#SearchFieldValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>The values that you want to search for, a list of strings. The values must be <code>AppInstanceUserArns</code> specified as a list of strings.</p>\n         <note>\n            <p>This operation isn't supported for <code>AppInstanceUsers</code> with large number of memberships.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The values that you want to search for, a list of strings. The values must be <code>AppInstanceUserArns</code> specified as a list of strings.</p>\n         <note>\n            <p>This operation isn't supported for <code>AppInstanceUsers</code> with a large number of memberships.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6550,7 +6575,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A <code>Field</code> of the channel that you want to search.</p>"
+                "smithy.api#documentation": "<p>A <code>Field</code> of the channel that you want to search.</p>\n         <note>\n            <p>This operation isn't supported for <code>AppInstanceUsers</code> with a large number of memberships.</p>\n         </note>"
             }
         },
         "com.amazonaws.chimesdkmessaging#SearchFieldKey": {

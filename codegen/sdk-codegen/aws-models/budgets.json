@@ -1610,6 +1610,19 @@
                 "smithy.api#pattern": "^arn:aws[a-z-]*:(billing)::[0-9]{12}:billingview/[a-zA-Z0-9/:_\\+=\\.\\-@]{0,75}[a-zA-Z0-9]$"
             }
         },
+        "com.amazonaws.budgets#BillingViewHealthStatusException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.budgets#errorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The billing view status must be HEALTHY to perform this action. Try again when the status is HEALTHY.\n    </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.budgets#Budget": {
             "type": "structure",
             "members": {
@@ -2055,6 +2068,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.budgets#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#BillingViewHealthStatusException"
                 },
                 {
                     "target": "com.amazonaws.budgets#CreationLimitExceededException"
@@ -5288,6 +5304,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.budgets#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#BillingViewHealthStatusException"
                 },
                 {
                     "target": "com.amazonaws.budgets#InternalErrorException"
