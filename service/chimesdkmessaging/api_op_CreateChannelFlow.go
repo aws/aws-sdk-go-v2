@@ -29,7 +29,7 @@ import (
 // about the message types provided by Chime SDK messaging, refer to [Message types]in the Amazon
 // Chime developer guide.
 //
-// [Message types]: https://docs.aws.amazon.com/chime/latest/dg/using-the-messaging-sdk.html#msg-types
+// [Message types]: https://docs.aws.amazon.com/chime-sdk/latest/dg/using-the-messaging-sdk.html#msg-types
 func (c *Client) CreateChannelFlow(ctx context.Context, params *CreateChannelFlowInput, optFns ...func(*Options)) (*CreateChannelFlowOutput, error) {
 	if params == nil {
 		params = &CreateChannelFlowInput{}

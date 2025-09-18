@@ -261,6 +261,25 @@ func (MessagingDataType) Values() []MessagingDataType {
 	}
 }
 
+type NetworkType string
+
+// Enum values for NetworkType
+const (
+	NetworkTypeIpv4Only  NetworkType = "IPV4_ONLY"
+	NetworkTypeDualStack NetworkType = "DUAL_STACK"
+)
+
+// Values returns all known values for NetworkType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NetworkType) Values() []NetworkType {
+	return []NetworkType{
+		"IPV4_ONLY",
+		"DUAL_STACK",
+	}
+}
+
 type PushNotificationType string
 
 // Enum values for PushNotificationType

@@ -122,6 +122,9 @@ func awsAwsjson11_deserializeOpErrorCreateBudget(response *smithyhttp.Response, 
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
+	case strings.EqualFold("BillingViewHealthStatusException", errorCode):
+		return awsAwsjson11_deserializeErrorBillingViewHealthStatusException(response, errorBody)
+
 	case strings.EqualFold("CreationLimitExceededException", errorCode):
 		return awsAwsjson11_deserializeErrorCreationLimitExceededException(response, errorBody)
 
@@ -2903,6 +2906,9 @@ func awsAwsjson11_deserializeOpErrorUpdateBudget(response *smithyhttp.Response, 
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
+	case strings.EqualFold("BillingViewHealthStatusException", errorCode):
+		return awsAwsjson11_deserializeErrorBillingViewHealthStatusException(response, errorBody)
+
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
 
@@ -3323,6 +3329,41 @@ func awsAwsjson11_deserializeErrorAccessDeniedException(response *smithyhttp.Res
 
 	output := &types.AccessDeniedException{}
 	err := awsAwsjson11_deserializeDocumentAccessDeniedException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorBillingViewHealthStatusException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.BillingViewHealthStatusException{}
+	err := awsAwsjson11_deserializeDocumentBillingViewHealthStatusException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -4144,6 +4185,46 @@ func awsAwsjson11_deserializeDocumentAutoAdjustData(v **types.AutoAdjustData, va
 					return fmt.Errorf("expected GenericTimestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentBillingViewHealthStatusException(v **types.BillingViewHealthStatusException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BillingViewHealthStatusException
+	if *v == nil {
+		sv = &types.BillingViewHealthStatusException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected errorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:

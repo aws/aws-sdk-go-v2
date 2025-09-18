@@ -18,6 +18,9 @@ import (
 // The x-amz-chime-bearer request header is mandatory. Use the ARN of the
 // AppInstanceUser or AppInstanceBot that makes the API call as the value in the
 // header.
+//
+// This operation isn't supported for AppInstanceUsers with a large number of
+// memberships.
 func (c *Client) SearchChannels(ctx context.Context, params *SearchChannelsInput, optFns ...func(*Options)) (*SearchChannelsOutput, error) {
 	if params == nil {
 		params = &SearchChannelsInput{}

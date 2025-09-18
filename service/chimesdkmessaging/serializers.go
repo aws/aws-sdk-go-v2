@@ -2420,6 +2420,10 @@ func (m *awsRestjson1_serializeOpGetMessagingSessionEndpoint) HandleSerialize(ct
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	if err := awsRestjson1_serializeOpHttpBindingsGetMessagingSessionEndpointInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2432,6 +2436,10 @@ func (m *awsRestjson1_serializeOpGetMessagingSessionEndpoint) HandleSerialize(ct
 func awsRestjson1_serializeOpHttpBindingsGetMessagingSessionEndpointInput(v *GetMessagingSessionEndpointInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if len(v.NetworkType) > 0 {
+		encoder.SetQuery("network-type").String(string(v.NetworkType))
 	}
 
 	return nil

@@ -67,10 +67,6 @@ type UpdateAutomatedReasoningPolicyTestCaseInput struct {
 	// the threshold will be removed.
 	ConfidenceThreshold *float64
 
-	// The KMS key ARN for encrypting the test at rest. If not provided, the key will
-	// not be updated. Use DISCARD to remove the key.
-	KmsKeyArn *string
-
 	// The updated input query or prompt that generated the content.
 	QueryContent *string
 

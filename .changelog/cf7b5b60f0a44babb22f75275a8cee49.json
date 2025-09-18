@@ -1,0 +1,8 @@
+{
+    "id": "cf7b5b60-f0a4-4bab-b22f-75275a8cee49",
+    "type": "feature",
+    "description": "Allowed AMIs adds support for four new parameters - marketplaceProductCodes, deprecationTimeCondition, creationDateCondition and imageNames",
+    "modules": [
+        "service/ec2"
+    ]
+}

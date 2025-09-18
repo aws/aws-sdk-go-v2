@@ -658,6 +658,9 @@ type PushNotificationPreferences struct {
 }
 
 // A Field of the channel that you want to search.
+//
+// This operation isn't supported for AppInstanceUsers with a large number of
+// memberships.
 type SearchField struct {
 
 	// An enum value that indicates the key to search the channel on. MEMBERS allows
@@ -680,7 +683,7 @@ type SearchField struct {
 	// The values that you want to search for, a list of strings. The values must be
 	// AppInstanceUserArns specified as a list of strings.
 	//
-	// This operation isn't supported for AppInstanceUsers with large number of
+	// This operation isn't supported for AppInstanceUsers with a large number of
 	// memberships.
 	//
 	// This member is required.

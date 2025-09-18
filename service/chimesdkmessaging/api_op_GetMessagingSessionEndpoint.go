@@ -28,6 +28,11 @@ func (c *Client) GetMessagingSessionEndpoint(ctx context.Context, params *GetMes
 }
 
 type GetMessagingSessionEndpointInput struct {
+
+	// The type of network for the messaging session endpoint. Either IPv4 only or
+	// dual-stack (IPv4 and IPv6).
+	NetworkType types.NetworkType
+
 	noSmithyDocumentSerde
 }
 

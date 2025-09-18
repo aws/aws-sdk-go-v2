@@ -55,7 +55,8 @@ type CreateChannelInput struct {
 	// This member is required.
 	Name *string
 
-	// The ID of the channel in the request.
+	// An ID for the channel being created. If you do not specify an ID, a UUID will
+	// be created for the channel.
 	ChannelId *string
 
 	// The attributes required to configure and create an elastic channel. An elastic

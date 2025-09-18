@@ -7959,11 +7959,6 @@ func awsRestjson1_serializeOpDocumentUpdateAutomatedReasoningPolicyTestCaseInput
 		ok.String(*v.GuardContent)
 	}
 
-	if v.KmsKeyArn != nil {
-		ok := object.Key("kmsKeyArn")
-		ok.String(*v.KmsKeyArn)
-	}
-
 	if v.LastUpdatedAt != nil {
 		ok := object.Key("lastUpdatedAt")
 		ok.String(smithytime.FormatDateTime(*v.LastUpdatedAt))
