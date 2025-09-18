@@ -1,8 +1,0 @@
-{
-    "id": "d5e567d5-0264-4224-a532-0d8e9868516b",
-    "type": "feature",
-    "description": "Amazon Chime SDK Messaging GetMessagingSessionEndpoint API now returns dual-stack WebSocket endpoints supporting IPv4/IPv6.",
-    "modules": [
-        "service/chimesdkmessaging"
-    ]
-}

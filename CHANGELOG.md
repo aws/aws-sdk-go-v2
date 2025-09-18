@@ -1,3 +1,15 @@
+# Release (2025-09-18)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.47.0](service/bedrock/CHANGELOG.md#v1470-2025-09-18)
+  * **Feature**: Release includes an increase to the maximum policy build document size, an update to DeleteAutomatedReasoningPolicyBuildWorkflow to add ResourceInUseException, and corrections to UpdateAutomatedReasoningPolicyTestCaseRequest.
+* `github.com/aws/aws-sdk-go-v2/service/budgets`: [v1.39.0](service/budgets/CHANGELOG.md#v1390-2025-09-18)
+  * **Feature**: Added BillingViewHealthStatus Exception which is thrown when a Budget is created or updated with a Billing View that is not in the HEALTHY status
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging`: [v1.32.0](service/chimesdkmessaging/CHANGELOG.md#v1320-2025-09-18)
+  * **Feature**: Amazon Chime SDK Messaging GetMessagingSessionEndpoint API now returns dual-stack WebSocket endpoints supporting IPv4/IPv6.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.253.0](service/ec2/CHANGELOG.md#v12530-2025-09-18)
+  * **Feature**: Allowed AMIs adds support for four new parameters - marketplaceProductCodes, deprecationTimeCondition, creationDateCondition and imageNames
+
 # Release (2025-09-17)
 
 ## Module Highlights
