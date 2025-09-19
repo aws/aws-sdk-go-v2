@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Creates an Amazon Secure AgentEndpoint.
+// Creates an AgentCore Runtime endpoint.
 func (c *Client) CreateAgentRuntimeEndpoint(ctx context.Context, params *CreateAgentRuntimeEndpointInput, optFns ...func(*Options)) (*CreateAgentRuntimeEndpointOutput, error) {
 	if params == nil {
 		params = &CreateAgentRuntimeEndpointInput{}
@@ -30,51 +30,56 @@ func (c *Client) CreateAgentRuntimeEndpoint(ctx context.Context, params *CreateA
 
 type CreateAgentRuntimeEndpointInput struct {
 
-	// The unique identifier of the agent runtime to create an endpoint for.
+	// The unique identifier of the AgentCore Runtime to create an endpoint for.
 	//
 	// This member is required.
 	AgentRuntimeId *string
 
-	// The name of the agent runtime endpoint.
+	// The name of the AgentCore Runtime endpoint.
 	//
 	// This member is required.
 	Name *string
 
-	// The version of the agent runtime to use for the endpoint.
+	// The version of the AgentCore Runtime to use for the endpoint.
 	AgentRuntimeVersion *string
 
 	// A unique, case-sensitive identifier to ensure idempotency of the request.
 	ClientToken *string
 
-	// The description of the agent runtime endpoint.
+	// The description of the AgentCore Runtime endpoint.
 	Description *string
+
+	// A map of tag keys and values to assign to the agent runtime endpoint. Tags
+	// enable you to categorize your resources in different ways, for example, by
+	// purpose, owner, or environment.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
 
 type CreateAgentRuntimeEndpointOutput struct {
 
-	// The Amazon Resource Name (ARN) of the agent runtime.
+	// The Amazon Resource Name (ARN) of the AgentCore Runtime.
 	//
 	// This member is required.
 	AgentRuntimeArn *string
 
-	// The Amazon Resource Name (ARN) of the agent runtime endpoint.
+	// The Amazon Resource Name (ARN) of the AgentCore Runtime endpoint.
 	//
 	// This member is required.
 	AgentRuntimeEndpointArn *string
 
-	// The timestamp when the agent runtime endpoint was created.
+	// The timestamp when the AgentCore Runtime endpoint was created.
 	//
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The current status of the agent runtime endpoint.
+	// The current status of the AgentCore Runtime endpoint.
 	//
 	// This member is required.
-	Status types.AgentEndpointStatus
+	Status types.AgentRuntimeEndpointStatus
 
-	// The target version of the agent runtime for the endpoint.
+	// The target version of the AgentCore Runtime for the endpoint.
 	//
 	// This member is required.
 	TargetVersion *string

@@ -33155,6 +33155,11 @@ func awsRestjson1_serializeDocumentUserPhoneConfig(v *types.UserPhoneConfig, val
 		ok.String(*v.DeskPhoneNumber)
 	}
 
+	if v.PersistentConnection != nil {
+		ok := object.Key("PersistentConnection")
+		ok.Boolean(*v.PersistentConnection)
+	}
+
 	if len(v.PhoneType) > 0 {
 		ok := object.Key("PhoneType")
 		ok.String(string(v.PhoneType))

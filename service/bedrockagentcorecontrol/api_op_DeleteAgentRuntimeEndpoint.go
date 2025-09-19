@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Amazon Secure AgentEndpoint.
+// Deletes an AAgentCore Runtime endpoint.
 func (c *Client) DeleteAgentRuntimeEndpoint(ctx context.Context, params *DeleteAgentRuntimeEndpointInput, optFns ...func(*Options)) (*DeleteAgentRuntimeEndpointOutput, error) {
 	if params == nil {
 		params = &DeleteAgentRuntimeEndpointInput{}
@@ -29,12 +29,12 @@ func (c *Client) DeleteAgentRuntimeEndpoint(ctx context.Context, params *DeleteA
 
 type DeleteAgentRuntimeEndpointInput struct {
 
-	// The unique identifier of the agent runtime associated with the endpoint.
+	// The unique identifier of the AgentCore Runtime associated with the endpoint.
 	//
 	// This member is required.
 	AgentRuntimeId *string
 
-	// The name of the agent runtime endpoint to delete.
+	// The name of the AgentCore Runtime endpoint to delete.
 	//
 	// This member is required.
 	EndpointName *string
@@ -47,10 +47,10 @@ type DeleteAgentRuntimeEndpointInput struct {
 
 type DeleteAgentRuntimeEndpointOutput struct {
 
-	// The current status of the agent runtime endpoint deletion.
+	// The current status of the AgentCore Runtime endpoint deletion.
 	//
 	// This member is required.
-	Status types.AgentEndpointStatus
+	Status types.AgentRuntimeEndpointStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

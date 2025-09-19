@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all Gateways in the account.
+// Lists all gateways in the account.
 func (c *Client) ListGateways(ctx context.Context, params *ListGatewaysInput, optFns ...func(*Options)) (*ListGatewaysOutput, error) {
 	if params == nil {
 		params = &ListGatewaysInput{}
@@ -29,12 +29,15 @@ func (c *Client) ListGateways(ctx context.Context, params *ListGatewaysInput, op
 
 type ListGatewaysInput struct {
 
-	// The maximum number of results to return in a single call. The default value is
-	// 10. The maximum value is 50.
+	// The maximum number of results to return in the response. If the total number of
+	// results is greater than this value, use the token returned in the response in
+	// the nextToken field when making another request to return the next batch of
+	// results.
 	MaxResults *int32
 
-	// The token for the next set of results. Use the value returned in the previous
-	// response in the next request to retrieve the next set of results.
+	// If the total number of results is greater than the maxResults value provided in
+	// the request, enter the token returned in the nextToken field in the response in
+	// this field to return the next batch of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -42,12 +45,14 @@ type ListGatewaysInput struct {
 
 type ListGatewaysOutput struct {
 
-	// The list of Gateway summaries.
+	// The list of gateway summaries.
 	//
 	// This member is required.
 	Items []types.GatewaySummary
 
-	// Opaque continuation token for the next paginated response.
+	// If the total number of results is greater than the maxResults value provided in
+	// the request, use this token when making another request in the nextToken field
+	// to return the next batch of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -188,8 +193,10 @@ func (c *Client) addOperationListGatewaysMiddlewares(stack *middleware.Stack, op
 
 // ListGatewaysPaginatorOptions is the paginator options for ListGateways
 type ListGatewaysPaginatorOptions struct {
-	// The maximum number of results to return in a single call. The default value is
-	// 10. The maximum value is 50.
+	// The maximum number of results to return in the response. If the total number of
+	// results is greater than this value, use the token returned in the response in
+	// the nextToken field when making another request to return the next batch of
+	// results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

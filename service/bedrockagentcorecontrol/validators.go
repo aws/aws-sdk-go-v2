@@ -670,6 +670,26 @@ func (m *validateOpListGatewayTargets) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListTagsForResource struct {
+}
+
+func (*validateOpListTagsForResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTagsForResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSetTokenVaultCMK struct {
 }
 
@@ -685,6 +705,46 @@ func (m *validateOpSetTokenVaultCMK) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpSetTokenVaultCMKInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpTagResource struct {
+}
+
+func (*validateOpTagResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TagResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUntagResource struct {
+}
+
+func (*validateOpUntagResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UntagResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUntagResourceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -982,8 +1042,20 @@ func addOpListGatewayTargetsValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpListGatewayTargets{}, middleware.After)
 }
 
+func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
 func addOpSetTokenVaultCMKValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSetTokenVaultCMK{}, middleware.After)
+}
+
+func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
+}
+
+func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
 func addOpUpdateAgentRuntimeEndpointValidationMiddleware(stack *middleware.Stack) error {
@@ -1018,13 +1090,13 @@ func addOpUpdateWorkloadIdentityValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpUpdateWorkloadIdentity{}, middleware.After)
 }
 
-func validateAgentArtifact(v types.AgentArtifact) error {
+func validateAgentRuntimeArtifact(v types.AgentRuntimeArtifact) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "AgentArtifact"}
+	invalidParams := smithy.InvalidParamsError{Context: "AgentRuntimeArtifact"}
 	switch uv := v.(type) {
-	case *types.AgentArtifactMemberContainerConfiguration:
+	case *types.AgentRuntimeArtifactMemberContainerConfiguration:
 		if err := validateContainerConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[containerConfiguration]", err.(smithy.InvalidParamsError))
 		}
@@ -1064,6 +1136,11 @@ func validateBrowserNetworkConfiguration(v *types.BrowserNetworkConfiguration) e
 	if len(v.NetworkMode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("NetworkMode"))
 	}
+	if v.VpcConfig != nil {
+		if err := validateVpcConfig(v.VpcConfig); err != nil {
+			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1078,6 +1155,11 @@ func validateCodeInterpreterNetworkConfiguration(v *types.CodeInterpreterNetwork
 	invalidParams := smithy.InvalidParamsError{Context: "CodeInterpreterNetworkConfiguration"}
 	if len(v.NetworkMode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("NetworkMode"))
+	}
+	if v.VpcConfig != nil {
+		if err := validateVpcConfig(v.VpcConfig); err != nil {
+			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1644,6 +1726,11 @@ func validateNetworkConfiguration(v *types.NetworkConfiguration) error {
 	if len(v.NetworkMode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("NetworkMode"))
 	}
+	if v.NetworkModeConfig != nil {
+		if err := validateVpcConfig(v.NetworkModeConfig); err != nil {
+			invalidParams.AddNested("NetworkModeConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2163,6 +2250,24 @@ func validateUserPreferenceOverrideExtractionConfigurationInput(v *types.UserPre
 	}
 }
 
+func validateVpcConfig(v *types.VpcConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VpcConfig"}
+	if v.SecurityGroups == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroups"))
+	}
+	if v.Subnets == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Subnets"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateAgentRuntimeEndpointInput(v *CreateAgentRuntimeEndpointInput) error {
 	if v == nil {
 		return nil
@@ -2192,7 +2297,7 @@ func validateOpCreateAgentRuntimeInput(v *CreateAgentRuntimeInput) error {
 	if v.AgentRuntimeArtifact == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentRuntimeArtifact"))
 	} else if v.AgentRuntimeArtifact != nil {
-		if err := validateAgentArtifact(v.AgentRuntimeArtifact); err != nil {
+		if err := validateAgentRuntimeArtifact(v.AgentRuntimeArtifact); err != nil {
 			invalidParams.AddNested("AgentRuntimeArtifact", err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2773,6 +2878,21 @@ func validateOpListGatewayTargetsInput(v *ListGatewayTargetsInput) error {
 	}
 }
 
+func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpSetTokenVaultCMKInput(v *SetTokenVaultCMKInput) error {
 	if v == nil {
 		return nil
@@ -2784,6 +2904,42 @@ func validateOpSetTokenVaultCMKInput(v *SetTokenVaultCMKInput) error {
 		if err := validateKmsConfiguration(v.KmsConfiguration); err != nil {
 			invalidParams.AddNested("KmsConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTagResourceInput(v *TagResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUntagResourceInput(v *UntagResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2821,7 +2977,7 @@ func validateOpUpdateAgentRuntimeInput(v *UpdateAgentRuntimeInput) error {
 	if v.AgentRuntimeArtifact == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentRuntimeArtifact"))
 	} else if v.AgentRuntimeArtifact != nil {
-		if err := validateAgentArtifact(v.AgentRuntimeArtifact); err != nil {
+		if err := validateAgentRuntimeArtifact(v.AgentRuntimeArtifact); err != nil {
 			invalidParams.AddNested("AgentRuntimeArtifact", err.(smithy.InvalidParamsError))
 		}
 	}

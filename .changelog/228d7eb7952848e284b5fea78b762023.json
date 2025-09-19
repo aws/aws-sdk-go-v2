@@ -1,0 +1,8 @@
+{
+    "id": "228d7eb7-9528-48e2-84b5-fea78b762023",
+    "type": "feature",
+    "description": "Add tagging and VPC support to AgentCore Runtime, Code Interpreter, and Browser resources. Add support for configuring request headers in Runtime. Fix AgentCore Runtime shape names.",
+    "modules": [
+        "service/bedrockagentcorecontrol"
+    ]
+}

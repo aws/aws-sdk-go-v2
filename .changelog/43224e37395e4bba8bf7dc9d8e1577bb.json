@@ -1,0 +1,8 @@
+{
+    "id": "43224e37-395e-4bba-8bf7-dc9d8e1577bb",
+    "type": "feature",
+    "description": "Added support for cross-account Active Directories.",
+    "modules": [
+        "service/licensemanagerusersubscriptions"
+    ]
+}

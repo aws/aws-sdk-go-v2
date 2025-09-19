@@ -1,0 +1,8 @@
+{
+    "id": "17ac7850-1675-4d95-bb51-d7fea4fce41b",
+    "type": "feature",
+    "description": "Add UNKNOWN state to RemediationExecutionState and add IN_PROGRESS/EXITED/UNKNOWN states to RemediationExecutionStepState.",
+    "modules": [
+        "service/configservice"
+    ]
+}

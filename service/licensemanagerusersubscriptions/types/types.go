@@ -22,6 +22,10 @@ type ActiveDirectoryIdentityProvider struct {
 	// The directory ID for an Active Directory identity provider.
 	DirectoryId *string
 
+	// Whether this directory is shared from an Amazon Web Services Managed Active
+	// Directory. The default value is false.
+	IsSharedActiveDirectory *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -143,6 +147,9 @@ type IdentityProviderSummary struct {
 	// The Amazon Resource Name (ARN) of the identity provider.
 	IdentityProviderArn *string
 
+	// The AWS Account ID of the owner of this resource.
+	OwnerAccountId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -164,8 +171,14 @@ type InstanceSummary struct {
 	// This member is required.
 	Status *string
 
+	// The IdentityProvider resource specifies details about the identity provider.
+	IdentityProvider IdentityProvider
+
 	// The date of the last status check.
 	LastStatusCheckDate *string
+
+	// The AWS Account ID of the owner of this resource.
+	OwnerAccountId *string
 
 	// The status message for an EC2 instance.
 	StatusMessage *string

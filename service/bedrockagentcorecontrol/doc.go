@@ -3,12 +3,9 @@
 // Package bedrockagentcorecontrol provides the API client, operations, and
 // parameter types for Amazon Bedrock Agent Core Control Plane Fronting Layer.
 //
-// Amazon Bedrock AgentCore is in preview release and is subject to change.
+// is in preview release and is subject to change.
 //
-// Amazon Bedrock Agent Core Control is a service that enables you to manage
-// memory resources for your Amazon Bedrock agents.
-//
-// Use this API to create, retrieve, update, and delete memory resources and their
-// associated memory strategies. Memory resources enable your agents to store and
-// retrieve information from conversations and interactions.
+// Welcome to the Amazon Bedrock AgentCore Control plane API reference. Control
+// plane actions configure, create, modify, and monitor Amazon Web Services
+// resources.
 package bedrockagentcorecontrol

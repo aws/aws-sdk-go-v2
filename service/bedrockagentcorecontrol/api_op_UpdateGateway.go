@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Updates an existing Gateway.
+// Updates an existing gateway.
 func (c *Client) UpdateGateway(ctx context.Context, params *UpdateGatewayInput, optFns ...func(*Options)) (*UpdateGatewayOutput, error) {
 	if params == nil {
 		params = &UpdateGatewayInput{}
@@ -30,46 +30,50 @@ func (c *Client) UpdateGateway(ctx context.Context, params *UpdateGatewayInput, 
 
 type UpdateGatewayInput struct {
 
-	// The updated authorizer configuration for the Gateway.
+	// The updated authorizer configuration for the gateway.
 	//
 	// This member is required.
 	AuthorizerConfiguration types.AuthorizerConfiguration
 
-	// The updated authorizer type for the Gateway.
+	// The updated authorizer type for the gateway.
 	//
 	// This member is required.
 	AuthorizerType types.AuthorizerType
 
-	// The identifier of the gateway to update. This can be either the gateway ID or
-	// the gateway ARN.
+	// The identifier of the gateway to update.
 	//
 	// This member is required.
 	GatewayIdentifier *string
 
-	// The updated name for the Gateway.
+	// The name of the gateway. This name must be the same as the one when the gateway
+	// was created.
 	//
 	// This member is required.
 	Name *string
 
-	// The updated protocol type for the Gateway.
+	// The updated protocol type for the gateway.
 	//
 	// This member is required.
 	ProtocolType types.GatewayProtocolType
 
-	// The updated IAM role ARN that provides permissions for the Gateway.
+	// The updated IAM role ARN that provides permissions for the gateway.
 	//
 	// This member is required.
 	RoleArn *string
 
-	// The updated description for the Gateway.
+	// The updated description for the gateway.
 	Description *string
 
-	// The verbosity of exception messages. Use DEBUG mode to see granular exception
-	// messages from a Gateway. If this parameter is not set, exception messages are by
-	// default sanitized for presentation to end users.
+	// The level of detail in error messages returned when invoking the gateway.
+	//
+	//   - If the value is DEBUG , granular exception messages are returned to help a
+	//   user debug the gateway.
+	//
+	//   - If the value is omitted, a generic error message is returned to the end
+	//   user.
 	ExceptionLevel types.ExceptionLevel
 
-	// The updated ARN of the KMS key used to encrypt the Gateway.
+	// The updated ARN of the KMS key used to encrypt the gateway.
 	KmsKeyArn *string
 
 	// The configuration for a gateway protocol. This structure defines how the
@@ -81,74 +85,78 @@ type UpdateGatewayInput struct {
 
 type UpdateGatewayOutput struct {
 
-	// The updated authorizer type for the Gateway.
+	// The updated authorizer type for the gateway.
 	//
 	// This member is required.
 	AuthorizerType types.AuthorizerType
 
-	// The timestamp when the Gateway was created.
+	// The timestamp when the gateway was created.
 	//
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The Amazon Resource Name (ARN) of the updated Gateway.
+	// The Amazon Resource Name (ARN) of the updated gateway.
 	//
 	// This member is required.
 	GatewayArn *string
 
-	// The unique identifier of the updated Gateway.
+	// The unique identifier of the updated gateway.
 	//
 	// This member is required.
 	GatewayId *string
 
-	// The updated name of the Gateway.
+	// The name of the gateway.
 	//
 	// This member is required.
 	Name *string
 
-	// The updated protocol type for the Gateway.
+	// The updated protocol type for the gateway.
 	//
 	// This member is required.
 	ProtocolType types.GatewayProtocolType
 
-	// The current status of the updated Gateway.
+	// The current status of the updated gateway.
 	//
 	// This member is required.
 	Status types.GatewayStatus
 
-	// The timestamp when the Gateway was last updated.
+	// The timestamp when the gateway was last updated.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// The updated authorizer configuration for the Gateway.
+	// The updated authorizer configuration for the gateway.
 	AuthorizerConfiguration types.AuthorizerConfiguration
 
-	// The updated description of the Gateway.
+	// The updated description of the gateway.
 	Description *string
 
-	// The verbosity of exception messages. Use DEBUG mode to see granular exception
-	// messages from a Gateway. If this parameter is not set, exception messages are by
-	// default sanitized for presentation to end users.
+	// The level of detail in error messages returned when invoking the gateway.
+	//
+	//   - If the value is DEBUG , granular exception messages are returned to help a
+	//   user debug the gateway.
+	//
+	//   - If the value is omitted, a generic error message is returned to the end
+	//   user.
 	ExceptionLevel types.ExceptionLevel
 
-	// An endpoint for invoking the updated Gateway.
+	// An endpoint for invoking the updated gateway.
 	GatewayUrl *string
 
-	// The updated ARN of the KMS key used to encrypt the Gateway.
+	// The updated ARN of the KMS key used to encrypt the gateway.
 	KmsKeyArn *string
 
 	// The configuration for a gateway protocol. This structure defines how the
 	// gateway communicates with external services.
 	ProtocolConfiguration types.GatewayProtocolConfiguration
 
-	// The updated IAM role ARN that provides permissions for the Gateway.
+	// The updated IAM role ARN that provides permissions for the gateway.
 	RoleArn *string
 
-	// The reasons for the current status of the updated Gateway.
+	// The reasons for the current status of the updated gateway.
 	StatusReasons []string
 
-	// The workload identity details for the updated Gateway.
+	// The workload identity details for the updated gateway.
 	WorkloadIdentityDetails *types.WorkloadIdentityDetails
 
 	// Metadata pertaining to the operation's result.

@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the memory present.
+// Lists the available Amazon Bedrock AgentCore Memory resources in the current
+// Amazon Web Services Region.
 func (c *Client) ListMemories(ctx context.Context, params *ListMemoriesInput, optFns ...func(*Options)) (*ListMemoriesOutput, error) {
 	if params == nil {
 		params = &ListMemoriesInput{}
@@ -42,7 +43,7 @@ type ListMemoriesInput struct {
 
 type ListMemoriesOutput struct {
 
-	// The list of memory summaries.
+	// The list of AgentCore Memory resource summaries.
 	//
 	// This member is required.
 	Memories []types.MemorySummary

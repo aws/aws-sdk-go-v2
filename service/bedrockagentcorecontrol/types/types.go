@@ -9,7 +9,7 @@ import (
 
 // Contains information about an agent runtime. An agent runtime is the execution
 // environment for a Amazon Bedrock Agent.
-type Agent struct {
+type AgentRuntime struct {
 
 	// The Amazon Resource Name (ARN) of the agent runtime.
 	//
@@ -44,7 +44,7 @@ type Agent struct {
 	// The current status of the agent runtime.
 	//
 	// This member is required.
-	Status AgentStatus
+	Status AgentRuntimeStatus
 
 	noSmithyDocumentSerde
 }
@@ -53,23 +53,23 @@ type Agent struct {
 //
 // The following types satisfy this interface:
 //
-//	AgentArtifactMemberContainerConfiguration
-type AgentArtifact interface {
-	isAgentArtifact()
+//	AgentRuntimeArtifactMemberContainerConfiguration
+type AgentRuntimeArtifact interface {
+	isAgentRuntimeArtifact()
 }
 
 // The container configuration for the agent artifact.
-type AgentArtifactMemberContainerConfiguration struct {
+type AgentRuntimeArtifactMemberContainerConfiguration struct {
 	Value ContainerConfiguration
 
 	noSmithyDocumentSerde
 }
 
-func (*AgentArtifactMemberContainerConfiguration) isAgentArtifact() {}
+func (*AgentRuntimeArtifactMemberContainerConfiguration) isAgentRuntimeArtifact() {}
 
 // Contains information about an agent runtime endpoint. An endpoint provides a
 // way to connect to and interact with an agent runtime.
-type AgentEndpoint struct {
+type AgentRuntimeEndpoint struct {
 
 	// The Amazon Resource Name (ARN) of the agent runtime associated with the
 	// endpoint.
@@ -105,7 +105,7 @@ type AgentEndpoint struct {
 	// The current status of the agent runtime endpoint.
 	//
 	// This member is required.
-	Status AgentEndpointStatus
+	Status AgentRuntimeEndpointStatus
 
 	// The description of the agent runtime endpoint.
 	Description *string
@@ -206,6 +206,9 @@ type BrowserNetworkConfiguration struct {
 	// This member is required.
 	NetworkMode BrowserNetworkMode
 
+	// VpcConfig for the Agent.
+	VpcConfig *VpcConfig
+
 	noSmithyDocumentSerde
 }
 
@@ -254,6 +257,9 @@ type CodeInterpreterNetworkConfiguration struct {
 	//
 	// This member is required.
 	NetworkMode CodeInterpreterNetworkMode
+
+	// VpcConfig for the Agent.
+	VpcConfig *VpcConfig
 
 	noSmithyDocumentSerde
 }
@@ -1178,10 +1184,13 @@ type ModifyStrategyConfiguration struct {
 // SecurityConfig for the Agent.
 type NetworkConfiguration struct {
 
-	// The network mode for the agent runtime.
+	// The network mode for the AgentCore Runtime.
 	//
 	// This member is required.
 	NetworkMode NetworkMode
+
+	// The network mode configuration for the AgentCore Runtime.
+	NetworkModeConfig *VpcConfig
 
 	noSmithyDocumentSerde
 }
@@ -1458,6 +1467,26 @@ type RecordingConfig struct {
 
 	noSmithyDocumentSerde
 }
+
+// Configuration for HTTP request headers that will be passed through to the
+// runtime.
+//
+// The following types satisfy this interface:
+//
+//	RequestHeaderConfigurationMemberRequestHeaderAllowlist
+type RequestHeaderConfiguration interface {
+	isRequestHeaderConfiguration()
+}
+
+// A list of HTTP request headers that are allowed to be passed through to the
+// runtime.
+type RequestHeaderConfigurationMemberRequestHeaderAllowlist struct {
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+func (*RequestHeaderConfigurationMemberRequestHeaderAllowlist) isRequestHeaderConfiguration() {}
 
 // The Amazon S3 configuration for a gateway. This structure defines how the
 // gateway accesses files in Amazon S3.
@@ -1979,6 +2008,22 @@ type ValidationExceptionField struct {
 	noSmithyDocumentSerde
 }
 
+// VpcConfig for the Agent.
+type VpcConfig struct {
+
+	// The security groups associated with the VPC configuration.
+	//
+	// This member is required.
+	SecurityGroups []string
+
+	// The subnets associated with the VPC configuration.
+	//
+	// This member is required.
+	Subnets []string
+
+	noSmithyDocumentSerde
+}
+
 // The information about the workload identity.
 type WorkloadIdentityDetails struct {
 
@@ -2017,7 +2062,7 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isAgentArtifact()                         {}
+func (*UnknownUnionMember) isAgentRuntimeArtifact()                  {}
 func (*UnknownUnionMember) isApiSchemaConfiguration()                {}
 func (*UnknownUnionMember) isAuthorizerConfiguration()               {}
 func (*UnknownUnionMember) isConsolidationConfiguration()            {}
@@ -2036,5 +2081,6 @@ func (*UnknownUnionMember) isModifyExtractionConfiguration()         {}
 func (*UnknownUnionMember) isOauth2Discovery()                       {}
 func (*UnknownUnionMember) isOauth2ProviderConfigInput()             {}
 func (*UnknownUnionMember) isOauth2ProviderConfigOutput()            {}
+func (*UnknownUnionMember) isRequestHeaderConfiguration()            {}
 func (*UnknownUnionMember) isTargetConfiguration()                   {}
 func (*UnknownUnionMember) isToolSchema()                            {}

@@ -645,6 +645,7 @@ const (
 	RemediationExecutionStateInProgress RemediationExecutionState = "IN_PROGRESS"
 	RemediationExecutionStateSucceeded  RemediationExecutionState = "SUCCEEDED"
 	RemediationExecutionStateFailed     RemediationExecutionState = "FAILED"
+	RemediationExecutionStateUnknown    RemediationExecutionState = "UNKNOWN"
 )
 
 // Values returns all known values for RemediationExecutionState. Note that this
@@ -657,6 +658,7 @@ func (RemediationExecutionState) Values() []RemediationExecutionState {
 		"IN_PROGRESS",
 		"SUCCEEDED",
 		"FAILED",
+		"UNKNOWN",
 	}
 }
 
@@ -664,9 +666,12 @@ type RemediationExecutionStepState string
 
 // Enum values for RemediationExecutionStepState
 const (
-	RemediationExecutionStepStateSucceeded RemediationExecutionStepState = "SUCCEEDED"
-	RemediationExecutionStepStatePending   RemediationExecutionStepState = "PENDING"
-	RemediationExecutionStepStateFailed    RemediationExecutionStepState = "FAILED"
+	RemediationExecutionStepStateSucceeded  RemediationExecutionStepState = "SUCCEEDED"
+	RemediationExecutionStepStatePending    RemediationExecutionStepState = "PENDING"
+	RemediationExecutionStepStateFailed     RemediationExecutionStepState = "FAILED"
+	RemediationExecutionStepStateInProgress RemediationExecutionStepState = "IN_PROGRESS"
+	RemediationExecutionStepStateExited     RemediationExecutionStepState = "EXITED"
+	RemediationExecutionStepStateUnknown    RemediationExecutionStepState = "UNKNOWN"
 )
 
 // Values returns all known values for RemediationExecutionStepState. Note that
@@ -679,6 +684,9 @@ func (RemediationExecutionStepState) Values() []RemediationExecutionStepState {
 		"SUCCEEDED",
 		"PENDING",
 		"FAILED",
+		"IN_PROGRESS",
+		"EXITED",
+		"UNKNOWN",
 	}
 }
 

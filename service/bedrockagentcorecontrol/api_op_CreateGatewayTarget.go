@@ -14,9 +14,6 @@ import (
 
 // Creates a target for a gateway. A target defines an endpoint that the gateway
 // can connect to.
-//
-// To create a target, you must specify the gateway identifier and target
-// configuration.
 func (c *Client) CreateGatewayTarget(ctx context.Context, params *CreateGatewayTargetInput, optFns ...func(*Options)) (*CreateGatewayTargetOutput, error) {
 	if params == nil {
 		params = &CreateGatewayTargetInput{}
@@ -40,8 +37,7 @@ type CreateGatewayTargetInput struct {
 	// This member is required.
 	CredentialProviderConfigurations []types.CredentialProviderConfiguration
 
-	// The identifier of the gateway to create a target for. This can be either the
-	// gateway ID or the gateway ARN.
+	// The identifier of the gateway to create a target for.
 	//
 	// This member is required.
 	GatewayIdentifier *string
@@ -57,9 +53,11 @@ type CreateGatewayTargetInput struct {
 	// This member is required.
 	TargetConfiguration types.TargetConfiguration
 
-	// A unique, case-sensitive identifier to ensure that the operation completes no
-	// more than one time. If this token matches a previous request, Amazon Bedrock
-	// ignores the request but does not return an error.
+	// A unique, case-sensitive identifier to ensure that the API request completes no
+	// more than one time. If this token matches a previous request, the service
+	// ignores the request, but does not return an error. For more information, see [Ensuring idempotency].
+	//
+	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
 
 	// The description of the gateway target.

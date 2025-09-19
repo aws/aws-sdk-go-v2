@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a Gateway.
+// Deletes a gateway.
 func (c *Client) DeleteGateway(ctx context.Context, params *DeleteGatewayInput, optFns ...func(*Options)) (*DeleteGatewayOutput, error) {
 	if params == nil {
 		params = &DeleteGatewayInput{}
@@ -29,8 +29,7 @@ func (c *Client) DeleteGateway(ctx context.Context, params *DeleteGatewayInput, 
 
 type DeleteGatewayInput struct {
 
-	// The identifier of the gateway to delete. This can be either the gateway ID or
-	// the gateway ARN.
+	// The identifier of the gateway to delete.
 	//
 	// This member is required.
 	GatewayIdentifier *string
@@ -40,17 +39,17 @@ type DeleteGatewayInput struct {
 
 type DeleteGatewayOutput struct {
 
-	// The unique identifier of the deleted Gateway.
+	// The unique identifier of the deleted gateway.
 	//
 	// This member is required.
 	GatewayId *string
 
-	// The current status of the Gateway deletion.
+	// The current status of the gateway deletion.
 	//
 	// This member is required.
 	Status types.GatewayStatus
 
-	// The reasons for the current status of the Gateway deletion.
+	// The reasons for the current status of the gateway deletion.
 	StatusReasons []string
 
 	// Metadata pertaining to the operation's result.

@@ -7,11 +7,11 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
 )
 
-func ExampleAgentArtifact_outputUsage() {
-	var union types.AgentArtifact
+func ExampleAgentRuntimeArtifact_outputUsage() {
+	var union types.AgentRuntimeArtifact
 	// type switches can be used to check the union value
 	switch v := union.(type) {
-	case *types.AgentArtifactMemberContainerConfiguration:
+	case *types.AgentRuntimeArtifactMemberContainerConfiguration:
 		_ = v.Value // Value is types.ContainerConfiguration
 
 	case *types.UnknownUnionMember:
@@ -451,6 +451,24 @@ var _ *types.MicrosoftOauth2ProviderConfigOutput
 var _ *types.SlackOauth2ProviderConfigOutput
 var _ *types.SalesforceOauth2ProviderConfigOutput
 var _ *types.GoogleOauth2ProviderConfigOutput
+
+func ExampleRequestHeaderConfiguration_outputUsage() {
+	var union types.RequestHeaderConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RequestHeaderConfigurationMemberRequestHeaderAllowlist:
+		_ = v.Value // Value is []string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []string
 
 func ExampleTargetConfiguration_outputUsage() {
 	var union types.TargetConfiguration

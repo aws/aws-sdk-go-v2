@@ -18,10 +18,9 @@ import (
 //
 // #x9 | #xA | #xD | #x20 to #xD7FF | #xE000 to #xFFFD | #x10000 to #x10FFFF
 //
-// Amazon SQS does not throw an exception or completely reject the message if it
-// contains invalid characters. Instead, it replaces those invalid characters with
-// U+FFFD before storing the message in the queue, as long as the message body
-// contains at least one valid character.
+// If a message contains characters outside the allowed set, Amazon SQS rejects
+// the message and returns an InvalidMessageContents error. Ensure that your
+// message body includes only valid characters to avoid this exception.
 //
 // [W3C specification for characters]: http://www.w3.org/TR/REC-xml/#charsets
 func (c *Client) SendMessage(ctx context.Context, params *SendMessageInput, optFns ...func(*Options)) (*SendMessageOutput, error) {
@@ -49,10 +48,9 @@ type SendMessageInput struct {
 	//
 	// #x9 | #xA | #xD | #x20 to #xD7FF | #xE000 to #xFFFD | #x10000 to #x10FFFF
 	//
-	// Amazon SQS does not throw an exception or completely reject the message if it
-	// contains invalid characters. Instead, it replaces those invalid characters with
-	// U+FFFD before storing the message in the queue, as long as the message body
-	// contains at least one valid character.
+	// If a message contains characters outside the allowed set, Amazon SQS rejects
+	// the message and returns an InvalidMessageContents error. Ensure that your
+	// message body includes only valid characters to avoid this exception.
 	//
 	// [W3C specification for characters]: http://www.w3.org/TR/REC-xml/#charsets
 	//

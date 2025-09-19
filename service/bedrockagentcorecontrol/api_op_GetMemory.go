@@ -14,7 +14,7 @@ import (
 	"time"
 )
 
-// Retrieve an existing memory.
+// Retrieve an existing Amazon Bedrock AgentCore Memory resource.
 func (c *Client) GetMemory(ctx context.Context, params *GetMemoryInput, optFns ...func(*Options)) (*GetMemoryOutput, error) {
 	if params == nil {
 		params = &GetMemoryInput{}
@@ -42,7 +42,7 @@ type GetMemoryInput struct {
 
 type GetMemoryOutput struct {
 
-	// The retrieved memory details.
+	// The retrieved AgentCore Memory resource details.
 	//
 	// This member is required.
 	Memory *types.Memory

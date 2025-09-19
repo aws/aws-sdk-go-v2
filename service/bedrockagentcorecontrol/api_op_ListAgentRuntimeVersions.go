@@ -29,7 +29,7 @@ func (c *Client) ListAgentRuntimeVersions(ctx context.Context, params *ListAgent
 
 type ListAgentRuntimeVersionsInput struct {
 
-	// The unique identifier of the agent runtime to list versions for.
+	// The unique identifier of the AgentCore Runtime to list versions for.
 	//
 	// This member is required.
 	AgentRuntimeId *string
@@ -45,10 +45,10 @@ type ListAgentRuntimeVersionsInput struct {
 
 type ListAgentRuntimeVersionsOutput struct {
 
-	// The list of agent runtime versions.
+	// The list of AgentCore Runtime versions.
 	//
 	// This member is required.
-	AgentRuntimes []types.Agent
+	AgentRuntimes []types.AgentRuntime
 
 	// A token to retrieve the next page of results.
 	NextToken *string

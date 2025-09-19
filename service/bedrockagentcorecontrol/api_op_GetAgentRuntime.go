@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Gets an Amazon Secure Agent.
+// Gets an Amazon Bedrock AgentCore Runtime.
 func (c *Client) GetAgentRuntime(ctx context.Context, params *GetAgentRuntimeInput, optFns ...func(*Options)) (*GetAgentRuntimeOutput, error) {
 	if params == nil {
 		params = &GetAgentRuntimeInput{}
@@ -30,12 +30,12 @@ func (c *Client) GetAgentRuntime(ctx context.Context, params *GetAgentRuntimeInp
 
 type GetAgentRuntimeInput struct {
 
-	// The unique identifier of the agent runtime to retrieve.
+	// The unique identifier of the AgentCore Runtime to retrieve.
 	//
 	// This member is required.
 	AgentRuntimeId *string
 
-	// The version of the agent runtime to retrieve.
+	// The version of the AgentCore Runtime to retrieve.
 	AgentRuntimeVersion *string
 
 	noSmithyDocumentSerde
@@ -43,68 +43,72 @@ type GetAgentRuntimeInput struct {
 
 type GetAgentRuntimeOutput struct {
 
-	// The Amazon Resource Name (ARN) of the agent runtime.
+	// The Amazon Resource Name (ARN) of the AgentCore Runtime.
 	//
 	// This member is required.
 	AgentRuntimeArn *string
 
-	// The unique identifier of the agent runtime.
+	// The unique identifier of the AgentCore Runtime.
 	//
 	// This member is required.
 	AgentRuntimeId *string
 
-	// The name of the agent runtime.
+	// The name of the AgentCore Runtime.
 	//
 	// This member is required.
 	AgentRuntimeName *string
 
-	// The version of the agent runtime.
+	// The version of the AgentCore Runtime.
 	//
 	// This member is required.
 	AgentRuntimeVersion *string
 
-	// The timestamp when the agent runtime was created.
+	// The timestamp when the AgentCore Runtime was created.
 	//
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The timestamp when the agent runtime was last updated.
+	// The timestamp when the AgentCore Runtime was last updated.
 	//
 	// This member is required.
 	LastUpdatedAt *time.Time
 
-	// The network configuration for the agent runtime.
+	// The network configuration for the AgentCore Runtime.
 	//
 	// This member is required.
 	NetworkConfiguration *types.NetworkConfiguration
 
-	// The IAM role ARN that provides permissions for the agent runtime.
+	// The IAM role ARN that provides permissions for the AgentCore Runtime.
 	//
 	// This member is required.
 	RoleArn *string
 
-	// The current status of the agent runtime.
+	// The current status of the AgentCore Runtime.
 	//
 	// This member is required.
-	Status types.AgentStatus
+	Status types.AgentRuntimeStatus
 
-	// The artifact of the agent runtime.
-	AgentRuntimeArtifact types.AgentArtifact
+	// The artifact of the AgentCore Runtime.
+	AgentRuntimeArtifact types.AgentRuntimeArtifact
 
-	// The authorizer configuration for the agent runtime.
+	// The authorizer configuration for the AgentCore Runtime.
 	AuthorizerConfiguration types.AuthorizerConfiguration
 
-	// The description of the agent runtime.
+	// The description of the AgentCore Runtime.
 	Description *string
 
-	// Environment variables set in the agent runtime environment.
+	// Environment variables set in the AgentCore Runtime environment.
 	EnvironmentVariables map[string]string
 
 	// The protocol configuration for an agent runtime. This structure defines how the
 	// agent runtime communicates with clients.
 	ProtocolConfiguration *types.ProtocolConfiguration
 
-	// The workload identity details for the agent runtime.
+	// Configuration for HTTP request headers that will be passed through to the
+	// runtime.
+	RequestHeaderConfiguration types.RequestHeaderConfiguration
+
+	// The workload identity details for the AgentCore Runtime.
 	WorkloadIdentityDetails *types.WorkloadIdentityDetails
 
 	// Metadata pertaining to the operation's result.

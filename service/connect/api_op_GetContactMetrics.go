@@ -11,16 +11,33 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the real-time metrics of the specified contact.
+// Retrieves the position of the contact in the queue.
 //
 // # Use cases
 //
-// Following are common uses cases for this API:
+// Following are common uses cases for position in queue:
 //
-//   - You can use this API to retrieve the position of the contact in the queue.
+//   - Understand the expected wait experience of a contact.
+//
+//   - Inform customers of their position in queue and potentially offer a
+//     callback.
+//
+//   - Make data-driven routing decisions between primary and alternative queues.
+//
+//   - Enhance queue visibility and leverage agent proficiencies to streamline
+//     contact routing.
+//
+// Important things to know
+//
+//   - The only way to retrieve the position of the contact in queue is by using
+//     this API. You can't retrieve the position by using flows and attributes.
+//
+//   - For more information, see the [Position in queue]metric in the Amazon Connect Administrator
+//     Guide.
 //
 // Endpoints: See [Amazon Connect endpoints and quotas].
 //
+// [Position in queue]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html
 // [Amazon Connect endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
 func (c *Client) GetContactMetrics(ctx context.Context, params *GetContactMetricsInput, optFns ...func(*Options)) (*GetContactMetricsOutput, error) {
 	if params == nil {

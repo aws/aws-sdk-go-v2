@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Retrieves information about a specific Gateway Target.
+// Retrieves information about a specific gateway target.
 func (c *Client) GetGatewayTarget(ctx context.Context, params *GetGatewayTargetInput, optFns ...func(*Options)) (*GetGatewayTargetOutput, error) {
 	if params == nil {
 		params = &GetGatewayTargetInput{}
@@ -30,8 +30,7 @@ func (c *Client) GetGatewayTarget(ctx context.Context, params *GetGatewayTargetI
 
 type GetGatewayTargetInput struct {
 
-	// The identifier of the gateway that contains the target. This can be either the
-	// gateway ID or the gateway ARN.
+	// The identifier of the gateway that contains the target.
 	//
 	// This member is required.
 	GatewayIdentifier *string
@@ -46,27 +45,27 @@ type GetGatewayTargetInput struct {
 
 type GetGatewayTargetOutput struct {
 
-	// The timestamp when the Gateway Target was created.
+	// The timestamp when the gateway target was created.
 	//
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The credential provider configurations for the Gateway Target.
+	// The credential provider configurations for the gateway target.
 	//
 	// This member is required.
 	CredentialProviderConfigurations []types.CredentialProviderConfiguration
 
-	// The Amazon Resource Name (ARN) of the Gateway.
+	// The Amazon Resource Name (ARN) of the gateway.
 	//
 	// This member is required.
 	GatewayArn *string
 
-	// The name of the Gateway Target.
+	// The name of the gateway target.
 	//
 	// This member is required.
 	Name *string
 
-	// The current status of the Gateway Target.
+	// The current status of the gateway target.
 	//
 	// This member is required.
 	Status types.TargetStatus
@@ -77,20 +76,20 @@ type GetGatewayTargetOutput struct {
 	// This member is required.
 	TargetConfiguration types.TargetConfiguration
 
-	// The unique identifier of the Gateway Target.
+	// The unique identifier of the gateway target.
 	//
 	// This member is required.
 	TargetId *string
 
-	// The timestamp when the Gateway Target was last updated.
+	// The timestamp when the gateway target was last updated.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// The description of the Gateway Target.
+	// The description of the gateway target.
 	Description *string
 
-	// The reasons for the current status of the Gateway Target.
+	// The reasons for the current status of the gateway target.
 	StatusReasons []string
 
 	// Metadata pertaining to the operation's result.

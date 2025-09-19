@@ -30,8 +30,7 @@ func (c *Client) GetGateway(ctx context.Context, params *GetGatewayInput, optFns
 
 type GetGatewayInput struct {
 
-	// The identifier of the gateway to retrieve. This can be either the gateway ID or
-	// the gateway ARN.
+	// The identifier of the gateway to retrieve.
 	//
 	// This member is required.
 	GatewayIdentifier *string
@@ -46,69 +45,73 @@ type GetGatewayOutput struct {
 	// This member is required.
 	AuthorizerType types.AuthorizerType
 
-	// The timestamp when the Gateway was created.
+	// The timestamp when the gateway was created.
 	//
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The Amazon Resource Name (ARN) of the Gateway.
+	// The Amazon Resource Name (ARN) of the gateway.
 	//
 	// This member is required.
 	GatewayArn *string
 
-	// The unique identifier of the Gateway.
+	// The unique identifier of the gateway.
 	//
 	// This member is required.
 	GatewayId *string
 
-	// The name of the Gateway.
+	// The name of the gateway.
 	//
 	// This member is required.
 	Name *string
 
-	// Protocol applied to a Gateway.
+	// Protocol applied to a gateway.
 	//
 	// This member is required.
 	ProtocolType types.GatewayProtocolType
 
-	// The current status of the Gateway.
+	// The current status of the gateway.
 	//
 	// This member is required.
 	Status types.GatewayStatus
 
-	// The timestamp when the Gateway was last updated.
+	// The timestamp when the gateway was last updated.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// The authorizer configuration for the Gateway.
+	// The authorizer configuration for the gateway.
 	AuthorizerConfiguration types.AuthorizerConfiguration
 
-	// The description of the Gateway.
+	// The description of the gateway.
 	Description *string
 
-	// The verbosity of exception messages. Use DEBUG mode to see granular exception
-	// messages from a Gateway. If this parameter is not set, exception messages are by
-	// default sanitized for presentation to end users.
+	// The level of detail in error messages returned when invoking the gateway.
+	//
+	//   - If the value is DEBUG , granular exception messages are returned to help a
+	//   user debug the gateway.
+	//
+	//   - If the value is omitted, a generic error message is returned to the end
+	//   user.
 	ExceptionLevel types.ExceptionLevel
 
-	// An endpoint for invoking Gateway.
+	// An endpoint for invoking gateway.
 	GatewayUrl *string
 
-	// The ARN of the KMS key used to encrypt the Gateway.
+	// The Amazon Resource Name (ARN) of the KMS key used to encrypt the gateway.
 	KmsKeyArn *string
 
 	// The configuration for a gateway protocol. This structure defines how the
 	// gateway communicates with external services.
 	ProtocolConfiguration types.GatewayProtocolConfiguration
 
-	// The IAM role ARN that provides permissions for the Gateway.
+	// The IAM role ARN that provides permissions for the gateway.
 	RoleArn *string
 
-	// The reasons for the current status of the Gateway.
+	// The reasons for the current status of the gateway.
 	StatusReasons []string
 
-	// The workload identity details for the Gateway.
+	// The workload identity details for the gateway.
 	WorkloadIdentityDetails *types.WorkloadIdentityDetails
 
 	// Metadata pertaining to the operation's result.

@@ -35,7 +35,7 @@ func (c *Client) CreateGateway(ctx context.Context, params *CreateGatewayInput, 
 
 type CreateGatewayInput struct {
 
-	// The authorizer configuration for the Gateway.
+	// The authorizer configuration for the gateway.
 	//
 	// This member is required.
 	AuthorizerConfiguration types.AuthorizerConfiguration
@@ -50,8 +50,7 @@ type CreateGatewayInput struct {
 	// This member is required.
 	Name *string
 
-	// The protocol type for the gateway. Currently supports MCP (Model Context
-	// Protocol).
+	// The protocol type for the gateway.
 	//
 	// This member is required.
 	ProtocolType types.GatewayProtocolType
@@ -62,17 +61,23 @@ type CreateGatewayInput struct {
 	// This member is required.
 	RoleArn *string
 
-	// A unique, case-sensitive identifier to ensure that the operation completes no
-	// more than one time. If this token matches a previous request, Amazon Bedrock
-	// ignores the request but does not return an error.
+	// A unique, case-sensitive identifier to ensure that the API request completes no
+	// more than one time. If this token matches a previous request, the service
+	// ignores the request, but does not return an error. For more information, see [Ensuring idempotency].
+	//
+	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
 
 	// The description of the gateway.
 	Description *string
 
-	// The verbosity of exception messages. Use DEBUG mode to see granular exception
-	// messages from a Gateway. If this parameter is not set, exception messages are by
-	// default sanitized for presentation to end users.
+	// The level of detail in error messages returned when invoking the gateway.
+	//
+	//   - If the value is DEBUG , granular exception messages are returned to help a
+	//   user debug the gateway.
+	//
+	//   - If the value is omitted, a generic error message is returned to the end
+	//   user.
 	ExceptionLevel types.ExceptionLevel
 
 	// The Amazon Resource Name (ARN) of the KMS key used to encrypt data associated
@@ -128,15 +133,19 @@ type CreateGatewayOutput struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// The authorizer configuration for the created Gateway.
+	// The authorizer configuration for the created gateway.
 	AuthorizerConfiguration types.AuthorizerConfiguration
 
 	// The description of the gateway.
 	Description *string
 
-	// The verbosity of exception messages. Use DEBUG mode to see granular exception
-	// messages from a Gateway. If this parameter is not set, exception messages are by
-	// default sanitized for presentation to end users.
+	// The level of detail in error messages returned when invoking the gateway.
+	//
+	//   - If the value is DEBUG , granular exception messages are returned to help a
+	//   user debug the gateway.
+	//
+	//   - If the value is omitted, a generic error message is returned to the end
+	//   user.
 	ExceptionLevel types.ExceptionLevel
 
 	// The URL endpoint for the created gateway.
@@ -155,7 +164,7 @@ type CreateGatewayOutput struct {
 	// The reasons for the current status of the gateway.
 	StatusReasons []string
 
-	// The workload identity details for the created Gateway.
+	// The workload identity details for the created gateway.
 	WorkloadIdentityDetails *types.WorkloadIdentityDetails
 
 	// Metadata pertaining to the operation's result.

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new memory.
+// Creates a new Amazon Bedrock AgentCore Memory resource.
 func (c *Client) CreateMemory(ctx context.Context, params *CreateMemoryInput, optFns ...func(*Options)) (*CreateMemoryOutput, error) {
 	if params == nil {
 		params = &CreateMemoryInput{}

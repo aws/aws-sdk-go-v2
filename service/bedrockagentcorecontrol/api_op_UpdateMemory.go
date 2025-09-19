@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update memory.
+// Update an Amazon Bedrock AgentCore Memory resource memory.
 func (c *Client) UpdateMemory(ctx context.Context, params *UpdateMemoryInput, optFns ...func(*Options)) (*UpdateMemoryOutput, error) {
 	if params == nil {
 		params = &UpdateMemoryInput{}
@@ -39,14 +39,15 @@ type UpdateMemoryInput struct {
 	// identifier.
 	ClientToken *string
 
-	// The updated description of the memory.
+	// The updated description of the AgentCore Memory resource.
 	Description *string
 
 	// The number of days after which memory events will expire, between 7 and 365
 	// days.
 	EventExpiryDuration *int32
 
-	// The ARN of the IAM role that provides permissions for the memory.
+	// The ARN of the IAM role that provides permissions for the AgentCore Memory
+	// resource.
 	MemoryExecutionRoleArn *string
 
 	// The memory strategies to add, modify, or delete.
@@ -57,7 +58,7 @@ type UpdateMemoryInput struct {
 
 type UpdateMemoryOutput struct {
 
-	// The updated memory details.
+	// The updated AgentCore Memory resource details.
 	Memory *types.Memory
 
 	// Metadata pertaining to the operation's result.

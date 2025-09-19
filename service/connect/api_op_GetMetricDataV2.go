@@ -237,6 +237,8 @@ type GetMetricDataV2Input struct {
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
 	// Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
+	// Valid metric filter key: INITIATION_METHOD
+	//
 	// UI name: [Average queue abandon time]
 	//
 	// AVG_ACTIVE_TIME Unit: Seconds
@@ -526,7 +528,16 @@ type GetMetricDataV2Input struct {
 	//
 	// UI name: [Average queue answer time]
 	//
+	// Valid metric level filters: INITIATION_METHOD , FEATURE , DISCONNECT_REASON
+	//
 	// Feature is a valid filter but not a valid grouping.
+	//
+	// AVG_QUEUE_ANSWER_TIME_CUSTOMER_FIRST_CALLBACK Unit: Seconds
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Feature,
+	// contact/segmentAttributes/connect:Subtype, Q in Connect, Agent Hierarchy
+	//
+	// UI name: [Avg. queue answer time - customer first callback]
 	//
 	// AVG_RESPONSE_TIME_AGENT Unit: Seconds
 	//
@@ -590,6 +601,13 @@ type GetMetricDataV2Input struct {
 	// Valid groupings and filters: Campaign
 	//
 	// UI name: [Average wait time after customer connection]
+	//
+	// AVG_WAIT_TIME_AFTER_CUSTOMER_FIRST_CALLBACK_CONNECTION Unit: Seconds
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Feature,
+	// contact/segmentAttributes/connect:Subtype, Q in Connect, Agent Hierarchy
+	//
+	// UI name: [Avg. wait time after customer connection - customer first callback]
 	//
 	// AVG_WEIGHTED_EVALUATION_SCORE Unit: Percent
 	//
@@ -712,7 +730,7 @@ type GetMetricDataV2Input struct {
 	// Hierarchy, Feature, contact/segmentAttributes/connect:Subtype,
 	// RoutingStepExpression, Q in Connect
 	//
-	// UI name: [API contacts handled]
+	// UI name: [Contacts handled]
 	//
 	// Feature is a valid filter but not a valid grouping.
 	//
@@ -1120,6 +1138,7 @@ type GetMetricDataV2Input struct {
 	//
 	// Valid metric filter key: INITIATION_METHOD . This metric only supports the
 	// following filter keys as INITIATION_METHOD : INBOUND | OUTBOUND | CALLBACK | API
+	// | CALLBACK_CUSTOMER_FIRST_DIALED
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
 	// Hierarchy
@@ -1132,8 +1151,8 @@ type GetMetricDataV2Input struct {
 	//
 	// Metric filter:
 	//
-	//   - Valid values: API | Incoming | Outbound | Transfer | Callback |
-	//   Queue_Transfer | Disconnect
+	//   - Valid values: API | INCOMING | OUTBOUND | TRANSFER | CALLBACK |
+	//   QUEUE_TRANSFER | Disconnect | CALLBACK_CUSTOMER_FIRST_DIALED
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
 	// Hierarchy, contact/segmentAttributes/connect:Subtype, RoutingStepExpression, Q
@@ -1275,7 +1294,6 @@ type GetMetricDataV2Input struct {
 	// [Contacts hold disconnect]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-hold-disconnect
 	// [Average holds]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-holds
 	// [Bot conversations completed]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#bot-conversations-completed
-	// [API contacts handled]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#api-contacts-handled
 	// [Agent non-response without customer abandons]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-non-response-without-customer-abandons
 	// [Service level X]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#service-level
 	// [Recipients interacted]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#recipients-interacted
@@ -1311,6 +1329,7 @@ type GetMetricDataV2Input struct {
 	// [Non-adherent time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#non-adherent-time
 	// [Average agent interaction and customer hold time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-interaction-and-customer-hold-time
 	// [Average agent response time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-response-time-agent
+	// [Avg. queue answer time - customer first callback]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-queue-answer-time-customer-first-callback
 	// [After contact work time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#after-contact-work-time
 	// [Average customer talk time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-talk-time
 	// [Campaign contacts abandoned after X]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-contacts-abandoned-after-x
@@ -1333,8 +1352,10 @@ type GetMetricDataV2Input struct {
 	// [Agent talk time percent]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-talk-time-percent
 	// [Metrics definition]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html
 	// [Average resolution time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-resolution-time
+	// [Avg. wait time after customer connection - customer first callback]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-wait-time-after-customer-connection-customer-first-callback
 	// [Flows outcome percentage]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#flows-outcome-percentage
 	// [Cases resolved]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#cases-resolved
+	// [Contacts handled]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-handled
 	// [Contacts queued (enqueue timestamp)]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-queued-by-enqueue
 	// [Agent average contact first response wait time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-average-contact-first-response-wait-time
 	// [Online time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#online-time

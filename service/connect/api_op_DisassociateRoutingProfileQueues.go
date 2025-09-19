@@ -12,6 +12,10 @@ import (
 )
 
 // Disassociates a set of queues from a routing profile.
+//
+// Up to 10 queue references can be disassociated in a single API call. More than
+// 10 queue references results in a single call results in an
+// InvalidParameterException.
 func (c *Client) DisassociateRoutingProfileQueues(ctx context.Context, params *DisassociateRoutingProfileQueuesInput, optFns ...func(*Options)) (*DisassociateRoutingProfileQueuesOutput, error) {
 	if params == nil {
 		params = &DisassociateRoutingProfileQueuesInput{}

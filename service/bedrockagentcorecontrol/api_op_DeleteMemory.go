@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a memory.
+// Deletes an Amazon Bedrock AgentCore Memory resource.
 func (c *Client) DeleteMemory(ctx context.Context, params *DeleteMemoryInput, optFns ...func(*Options)) (*DeleteMemoryOutput, error) {
 	if params == nil {
 		params = &DeleteMemoryInput{}
@@ -44,12 +44,12 @@ type DeleteMemoryInput struct {
 
 type DeleteMemoryOutput struct {
 
-	// The unique identifier of the deleted memory.
+	// The unique identifier of the deleted AgentCore Memory resource.
 	//
 	// This member is required.
 	MemoryId *string
 
-	// The current status of the memory deletion.
+	// The current status of the AgentCore Memory resource deletion.
 	Status types.MemoryStatus
 
 	// Metadata pertaining to the operation's result.

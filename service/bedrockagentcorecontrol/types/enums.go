@@ -2,24 +2,24 @@
 
 package types
 
-type AgentEndpointStatus string
+type AgentRuntimeEndpointStatus string
 
-// Enum values for AgentEndpointStatus
+// Enum values for AgentRuntimeEndpointStatus
 const (
-	AgentEndpointStatusCreating     AgentEndpointStatus = "CREATING"
-	AgentEndpointStatusCreateFailed AgentEndpointStatus = "CREATE_FAILED"
-	AgentEndpointStatusUpdating     AgentEndpointStatus = "UPDATING"
-	AgentEndpointStatusUpdateFailed AgentEndpointStatus = "UPDATE_FAILED"
-	AgentEndpointStatusReady        AgentEndpointStatus = "READY"
-	AgentEndpointStatusDeleting     AgentEndpointStatus = "DELETING"
+	AgentRuntimeEndpointStatusCreating     AgentRuntimeEndpointStatus = "CREATING"
+	AgentRuntimeEndpointStatusCreateFailed AgentRuntimeEndpointStatus = "CREATE_FAILED"
+	AgentRuntimeEndpointStatusUpdating     AgentRuntimeEndpointStatus = "UPDATING"
+	AgentRuntimeEndpointStatusUpdateFailed AgentRuntimeEndpointStatus = "UPDATE_FAILED"
+	AgentRuntimeEndpointStatusReady        AgentRuntimeEndpointStatus = "READY"
+	AgentRuntimeEndpointStatusDeleting     AgentRuntimeEndpointStatus = "DELETING"
 )
 
-// Values returns all known values for AgentEndpointStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client.
+// Values returns all known values for AgentRuntimeEndpointStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
 //
 // The ordering of this slice is not guaranteed to be stable across updates.
-func (AgentEndpointStatus) Values() []AgentEndpointStatus {
-	return []AgentEndpointStatus{
+func (AgentRuntimeEndpointStatus) Values() []AgentRuntimeEndpointStatus {
+	return []AgentRuntimeEndpointStatus{
 		"CREATING",
 		"CREATE_FAILED",
 		"UPDATING",
@@ -29,24 +29,24 @@ func (AgentEndpointStatus) Values() []AgentEndpointStatus {
 	}
 }
 
-type AgentStatus string
+type AgentRuntimeStatus string
 
-// Enum values for AgentStatus
+// Enum values for AgentRuntimeStatus
 const (
-	AgentStatusCreating     AgentStatus = "CREATING"
-	AgentStatusCreateFailed AgentStatus = "CREATE_FAILED"
-	AgentStatusUpdating     AgentStatus = "UPDATING"
-	AgentStatusUpdateFailed AgentStatus = "UPDATE_FAILED"
-	AgentStatusReady        AgentStatus = "READY"
-	AgentStatusDeleting     AgentStatus = "DELETING"
+	AgentRuntimeStatusCreating     AgentRuntimeStatus = "CREATING"
+	AgentRuntimeStatusCreateFailed AgentRuntimeStatus = "CREATE_FAILED"
+	AgentRuntimeStatusUpdating     AgentRuntimeStatus = "UPDATING"
+	AgentRuntimeStatusUpdateFailed AgentRuntimeStatus = "UPDATE_FAILED"
+	AgentRuntimeStatusReady        AgentRuntimeStatus = "READY"
+	AgentRuntimeStatusDeleting     AgentRuntimeStatus = "DELETING"
 )
 
-// Values returns all known values for AgentStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client.
+// Values returns all known values for AgentRuntimeStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
 //
 // The ordering of this slice is not guaranteed to be stable across updates.
-func (AgentStatus) Values() []AgentStatus {
-	return []AgentStatus{
+func (AgentRuntimeStatus) Values() []AgentRuntimeStatus {
+	return []AgentRuntimeStatus{
 		"CREATING",
 		"CREATE_FAILED",
 		"UPDATING",
@@ -97,6 +97,7 @@ type BrowserNetworkMode string
 // Enum values for BrowserNetworkMode
 const (
 	BrowserNetworkModePublic BrowserNetworkMode = "PUBLIC"
+	BrowserNetworkModeVpc    BrowserNetworkMode = "VPC"
 )
 
 // Values returns all known values for BrowserNetworkMode. Note that this can be
@@ -106,6 +107,7 @@ const (
 func (BrowserNetworkMode) Values() []BrowserNetworkMode {
 	return []BrowserNetworkMode{
 		"PUBLIC",
+		"VPC",
 	}
 }
 
@@ -142,6 +144,7 @@ type CodeInterpreterNetworkMode string
 const (
 	CodeInterpreterNetworkModePublic  CodeInterpreterNetworkMode = "PUBLIC"
 	CodeInterpreterNetworkModeSandbox CodeInterpreterNetworkMode = "SANDBOX"
+	CodeInterpreterNetworkModeVpc     CodeInterpreterNetworkMode = "VPC"
 )
 
 // Values returns all known values for CodeInterpreterNetworkMode. Note that this
@@ -152,6 +155,7 @@ func (CodeInterpreterNetworkMode) Values() []CodeInterpreterNetworkMode {
 	return []CodeInterpreterNetworkMode{
 		"PUBLIC",
 		"SANDBOX",
+		"VPC",
 	}
 }
 
@@ -385,6 +389,7 @@ type NetworkMode string
 // Enum values for NetworkMode
 const (
 	NetworkModePublic NetworkMode = "PUBLIC"
+	NetworkModeVpc    NetworkMode = "VPC"
 )
 
 // Values returns all known values for NetworkMode. Note that this can be expanded
@@ -394,6 +399,7 @@ const (
 func (NetworkMode) Values() []NetworkMode {
 	return []NetworkMode{
 		"PUBLIC",
+		"VPC",
 	}
 }
 

@@ -82,6 +82,9 @@ type GetCodeInterpreterOutput struct {
 	// The IAM role ARN that provides permissions for the code interpreter.
 	ExecutionRoleArn *string
 
+	// The reason for failure if the code interpreter is in a failed state.
+	FailureReason *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

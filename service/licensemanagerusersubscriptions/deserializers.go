@@ -3126,6 +3126,15 @@ func awsRestjson1_deserializeDocumentActiveDirectoryIdentityProvider(v **types.A
 				sv.DirectoryId = ptr.String(jtv)
 			}
 
+		case "IsSharedActiveDirectory":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsSharedActiveDirectory = ptr.Bool(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -3391,6 +3400,15 @@ func awsRestjson1_deserializeDocumentIdentityProviderSummary(v **types.IdentityP
 				sv.IdentityProviderArn = ptr.String(jtv)
 			}
 
+		case "OwnerAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.OwnerAccountId = ptr.String(jtv)
+			}
+
 		case "Product":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3479,6 +3497,11 @@ func awsRestjson1_deserializeDocumentInstanceSummary(v **types.InstanceSummary, 
 
 	for key, value := range shape {
 		switch key {
+		case "IdentityProvider":
+			if err := awsRestjson1_deserializeDocumentIdentityProvider(&sv.IdentityProvider, value); err != nil {
+				return err
+			}
+
 		case "InstanceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3495,6 +3518,15 @@ func awsRestjson1_deserializeDocumentInstanceSummary(v **types.InstanceSummary, 
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.LastStatusCheckDate = ptr.String(jtv)
+			}
+
+		case "OwnerAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.OwnerAccountId = ptr.String(jtv)
 			}
 
 		case "Products":

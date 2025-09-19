@@ -30,78 +30,82 @@ func (c *Client) UpdateAgentRuntime(ctx context.Context, params *UpdateAgentRunt
 
 type UpdateAgentRuntimeInput struct {
 
-	// The updated artifact of the agent runtime.
+	// The updated artifact of the AgentCore Runtime.
 	//
 	// This member is required.
-	AgentRuntimeArtifact types.AgentArtifact
+	AgentRuntimeArtifact types.AgentRuntimeArtifact
 
-	// The unique identifier of the agent runtime to update.
+	// The unique identifier of the AgentCore Runtime to update.
 	//
 	// This member is required.
 	AgentRuntimeId *string
 
-	// The updated network configuration for the agent runtime.
+	// The updated network configuration for the AgentCore Runtime.
 	//
 	// This member is required.
 	NetworkConfiguration *types.NetworkConfiguration
 
-	// The updated IAM role ARN that provides permissions for the agent runtime.
+	// The updated IAM role ARN that provides permissions for the AgentCore Runtime.
 	//
 	// This member is required.
 	RoleArn *string
 
-	// The updated authorizer configuration for the agent runtime.
+	// The updated authorizer configuration for the AgentCore Runtime.
 	AuthorizerConfiguration types.AuthorizerConfiguration
 
 	// A unique, case-sensitive identifier to ensure idempotency of the request.
 	ClientToken *string
 
-	// The updated description of the agent runtime.
+	// The updated description of the AgentCore Runtime.
 	Description *string
 
-	// Updated environment variables to set in the agent runtime environment.
+	// Updated environment variables to set in the AgentCore Runtime environment.
 	EnvironmentVariables map[string]string
 
 	// The protocol configuration for an agent runtime. This structure defines how the
 	// agent runtime communicates with clients.
 	ProtocolConfiguration *types.ProtocolConfiguration
 
+	// The updated configuration for HTTP request headers that will be passed through
+	// to the runtime.
+	RequestHeaderConfiguration types.RequestHeaderConfiguration
+
 	noSmithyDocumentSerde
 }
 
 type UpdateAgentRuntimeOutput struct {
 
-	// The Amazon Resource Name (ARN) of the updated agent runtime.
+	// The Amazon Resource Name (ARN) of the updated AgentCore Runtime.
 	//
 	// This member is required.
 	AgentRuntimeArn *string
 
-	// The unique identifier of the updated agent runtime.
+	// The unique identifier of the updated AgentCore Runtime.
 	//
 	// This member is required.
 	AgentRuntimeId *string
 
-	// The version of the updated agent runtime.
+	// The version of the updated AgentCore Runtime.
 	//
 	// This member is required.
 	AgentRuntimeVersion *string
 
-	// The timestamp when the agent runtime was created.
+	// The timestamp when the AgentCore Runtime was created.
 	//
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The timestamp when the agent runtime was last updated.
+	// The timestamp when the AgentCore Runtime was last updated.
 	//
 	// This member is required.
 	LastUpdatedAt *time.Time
 
-	// The current status of the updated agent runtime.
+	// The current status of the updated AgentCore Runtime.
 	//
 	// This member is required.
-	Status types.AgentStatus
+	Status types.AgentRuntimeStatus
 
-	// The workload identity details for the updated agent runtime.
+	// The workload identity details for the updated AgentCore Runtime.
 	WorkloadIdentityDetails *types.WorkloadIdentityDetails
 
 	// Metadata pertaining to the operation's result.

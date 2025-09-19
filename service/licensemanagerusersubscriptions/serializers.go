@@ -1661,6 +1661,11 @@ func awsRestjson1_serializeDocumentActiveDirectoryIdentityProvider(v *types.Acti
 		ok.String(*v.DirectoryId)
 	}
 
+	if v.IsSharedActiveDirectory != nil {
+		ok := object.Key("IsSharedActiveDirectory")
+		ok.Boolean(*v.IsSharedActiveDirectory)
+	}
+
 	return nil
 }
 

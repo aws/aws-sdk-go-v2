@@ -12189,6 +12189,11 @@ func awsRestjson1_serializeDocumentAv1Settings(v *types.Av1Settings, value smith
 		ok.Integer(*v.MaxBitrate)
 	}
 
+	if v.MinBitrate != nil {
+		ok := object.Key("minBitrate")
+		ok.Integer(*v.MinBitrate)
+	}
+
 	if v.MinIInterval != nil {
 		ok := object.Key("minIInterval")
 		ok.Integer(*v.MinIInterval)
@@ -14176,6 +14181,11 @@ func awsRestjson1_serializeDocumentH264Settings(v *types.H264Settings, value smi
 		ok.Integer(*v.MaxBitrate)
 	}
 
+	if v.MinBitrate != nil {
+		ok := object.Key("minBitrate")
+		ok.Integer(*v.MinBitrate)
+	}
+
 	if v.MinIInterval != nil {
 		ok := object.Key("minIInterval")
 		ok.Integer(*v.MinIInterval)
@@ -14417,9 +14427,19 @@ func awsRestjson1_serializeDocumentH265Settings(v *types.H265Settings, value smi
 		ok.Integer(*v.FramerateNumerator)
 	}
 
+	if len(v.GopBReference) > 0 {
+		ok := object.Key("gopBReference")
+		ok.String(string(v.GopBReference))
+	}
+
 	if v.GopClosedCadence != nil {
 		ok := object.Key("gopClosedCadence")
 		ok.Integer(*v.GopClosedCadence)
+	}
+
+	if v.GopNumBFrames != nil {
+		ok := object.Key("gopNumBFrames")
+		ok.Integer(*v.GopNumBFrames)
 	}
 
 	if v.GopSize != nil {
@@ -14458,6 +14478,11 @@ func awsRestjson1_serializeDocumentH265Settings(v *types.H265Settings, value smi
 	if v.MaxBitrate != nil {
 		ok := object.Key("maxBitrate")
 		ok.Integer(*v.MaxBitrate)
+	}
+
+	if v.MinBitrate != nil {
+		ok := object.Key("minBitrate")
+		ok.Integer(*v.MinBitrate)
 	}
 
 	if v.MinIInterval != nil {
@@ -14518,6 +14543,11 @@ func awsRestjson1_serializeDocumentH265Settings(v *types.H265Settings, value smi
 	if v.Slices != nil {
 		ok := object.Key("slices")
 		ok.Integer(*v.Slices)
+	}
+
+	if len(v.SubgopLength) > 0 {
+		ok := object.Key("subgopLength")
+		ok.String(string(v.SubgopLength))
 	}
 
 	if len(v.Tier) > 0 {

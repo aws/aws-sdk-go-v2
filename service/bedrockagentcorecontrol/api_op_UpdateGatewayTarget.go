@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Updates an existing Gateway Target.
+// Updates an existing gateway target.
 func (c *Client) UpdateGatewayTarget(ctx context.Context, params *UpdateGatewayTargetInput, optFns ...func(*Options)) (*UpdateGatewayTargetOutput, error) {
 	if params == nil {
 		params = &UpdateGatewayTargetInput{}
@@ -30,17 +30,17 @@ func (c *Client) UpdateGatewayTarget(ctx context.Context, params *UpdateGatewayT
 
 type UpdateGatewayTargetInput struct {
 
-	// The updated credential provider configurations for the Gateway Target.
+	// The updated credential provider configurations for the gateway target.
 	//
 	// This member is required.
 	CredentialProviderConfigurations []types.CredentialProviderConfiguration
 
-	// The unique identifier of the Gateway associated with the target.
+	// The unique identifier of the gateway associated with the target.
 	//
 	// This member is required.
 	GatewayIdentifier *string
 
-	// The updated name for the Gateway Target.
+	// The updated name for the gateway target.
 	//
 	// This member is required.
 	Name *string
@@ -51,12 +51,12 @@ type UpdateGatewayTargetInput struct {
 	// This member is required.
 	TargetConfiguration types.TargetConfiguration
 
-	// The unique identifier of the Gateway Target to update.
+	// The unique identifier of the gateway target to update.
 	//
 	// This member is required.
 	TargetId *string
 
-	// The updated description for the Gateway Target.
+	// The updated description for the gateway target.
 	Description *string
 
 	noSmithyDocumentSerde
@@ -64,27 +64,27 @@ type UpdateGatewayTargetInput struct {
 
 type UpdateGatewayTargetOutput struct {
 
-	// The timestamp when the Gateway Target was created.
+	// The timestamp when the gateway target was created.
 	//
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The updated credential provider configurations for the Gateway Target.
+	// The updated credential provider configurations for the gateway target.
 	//
 	// This member is required.
 	CredentialProviderConfigurations []types.CredentialProviderConfiguration
 
-	// The Amazon Resource Name (ARN) of the Gateway.
+	// The Amazon Resource Name (ARN) of the gateway.
 	//
 	// This member is required.
 	GatewayArn *string
 
-	// The updated name of the Gateway Target.
+	// The updated name of the gateway target.
 	//
 	// This member is required.
 	Name *string
 
-	// The current status of the updated Gateway Target.
+	// The current status of the updated gateway target.
 	//
 	// This member is required.
 	Status types.TargetStatus
@@ -95,20 +95,20 @@ type UpdateGatewayTargetOutput struct {
 	// This member is required.
 	TargetConfiguration types.TargetConfiguration
 
-	// The unique identifier of the updated Gateway Target.
+	// The unique identifier of the updated gateway target.
 	//
 	// This member is required.
 	TargetId *string
 
-	// The timestamp when the Gateway Target was last updated.
+	// The timestamp when the gateway target was last updated.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// The updated description of the Gateway Target.
+	// The updated description of the gateway target.
 	Description *string
 
-	// The reasons for the current status of the updated Gateway Target.
+	// The reasons for the current status of the updated gateway target.
 	StatusReasons []string
 
 	// Metadata pertaining to the operation's result.

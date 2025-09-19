@@ -82,6 +82,9 @@ type GetBrowserOutput struct {
 	// The IAM role ARN that provides permissions for the browser.
 	ExecutionRoleArn *string
 
+	// The reason for failure if the browser is in a failed state.
+	FailureReason *string
+
 	// The recording configuration for a browser. This structure defines how browser
 	// sessions are recorded.
 	Recording *types.RecordingConfig

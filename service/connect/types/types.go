@@ -3624,7 +3624,7 @@ type HoursOfOperationOverride struct {
 	// The date from which the hours of operation override would be effective.
 	EffectiveFrom *string
 
-	// The date till which the hours of operation override would be effective.
+	// The date until the hours of operation override is effective.
 	EffectiveTill *string
 
 	// The Amazon Resource Name (ARN) for the hours of operation.
@@ -7645,6 +7645,9 @@ type UserPhoneConfig struct {
 
 	// The phone number for the user's desk phone.
 	DeskPhoneNumber *string
+
+	// The persistent connection setting for the user.
+	PersistentConnection *bool
 
 	noSmithyDocumentSerde
 }

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Amazon Secure Agent.
+// Deletes an Amazon Bedrock AgentCore Runtime.
 func (c *Client) DeleteAgentRuntime(ctx context.Context, params *DeleteAgentRuntimeInput, optFns ...func(*Options)) (*DeleteAgentRuntimeOutput, error) {
 	if params == nil {
 		params = &DeleteAgentRuntimeInput{}
@@ -29,7 +29,7 @@ func (c *Client) DeleteAgentRuntime(ctx context.Context, params *DeleteAgentRunt
 
 type DeleteAgentRuntimeInput struct {
 
-	// The unique identifier of the agent runtime to delete.
+	// The unique identifier of the AgentCore Runtime to delete.
 	//
 	// This member is required.
 	AgentRuntimeId *string
@@ -39,10 +39,10 @@ type DeleteAgentRuntimeInput struct {
 
 type DeleteAgentRuntimeOutput struct {
 
-	// The current status of the agent runtime deletion.
+	// The current status of the AgentCore Runtime deletion.
 	//
 	// This member is required.
-	Status types.AgentStatus
+	Status types.AgentRuntimeStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

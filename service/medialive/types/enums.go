@@ -3056,6 +3056,25 @@ func (H265FlickerAq) Values() []H265FlickerAq {
 	}
 }
 
+type H265GopBReference string
+
+// Enum values for H265GopBReference
+const (
+	H265GopBReferenceDisabled H265GopBReference = "DISABLED"
+	H265GopBReferenceEnabled  H265GopBReference = "ENABLED"
+)
+
+// Values returns all known values for H265GopBReference. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (H265GopBReference) Values() []H265GopBReference {
+	return []H265GopBReference{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
 type H265GopSizeUnits string
 
 // Enum values for H265GopSizeUnits
@@ -3252,6 +3271,25 @@ func (H265SceneChangeDetect) Values() []H265SceneChangeDetect {
 	return []H265SceneChangeDetect{
 		"DISABLED",
 		"ENABLED",
+	}
+}
+
+type H265SubGopLength string
+
+// Enum values for H265SubGopLength
+const (
+	H265SubGopLengthDynamic H265SubGopLength = "DYNAMIC"
+	H265SubGopLengthFixed   H265SubGopLength = "FIXED"
+)
+
+// Values returns all known values for H265SubGopLength. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (H265SubGopLength) Values() []H265SubGopLength {
+	return []H265SubGopLength{
+		"DYNAMIC",
+		"FIXED",
 	}
 }
 

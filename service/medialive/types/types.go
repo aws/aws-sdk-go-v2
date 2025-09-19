@@ -633,6 +633,11 @@ type Av1Settings struct {
 	// qvbrQualityLevel.
 	MaxBitrate *int32
 
+	// Used for QVBR rate control mode only. Optional. Enter a minimum bitrate if you
+	// want to keep the output bitrate about a threshold, in order to prevent the
+	// downstream system from de-allocating network bandwidth for this output.
+	MinBitrate *int32
+
 	// Applies only if you enable SceneChangeDetect. Sets the interval between frames.
 	// This property ensures a minimum separation between repeated (cadence) I-frames
 	// and any I-frames inserted by scene change detection (SCD frames). Enter a number
@@ -2866,6 +2871,11 @@ type H264Settings struct {
 	// complexity of the video.
 	MaxBitrate *int32
 
+	// Used for QVBR rate control mode only. Optional. Enter a minimum bitrate if you
+	// want to keep the output bitrate about a threshold, in order to prevent the
+	// downstream system from de-allocating network bandwidth for this output.
+	MinBitrate *int32
+
 	// Only meaningful if sceneChangeDetect is set to enabled. Defaults to 5 if
 	// multiplex rate control is used. Enforces separation between repeated (cadence)
 	// I-frames and I-frames inserted by Scene Change Detection. If a scene change
@@ -3102,10 +3112,20 @@ type H265Settings struct {
 	// quantization in the MediaLive user guide.
 	FlickerAq H265FlickerAq
 
+	// Allows the encoder to use a B-Frame as a reference frame as well. ENABLED:
+	// B-frames will also serve as reference frames. DISABLED: B-frames won't be
+	// reference frames. Must be DISABLED if resolution is greater than 1080p or when
+	// using tiled hevc encoding.
+	GopBReference H265GopBReference
+
 	// Frequency of closed GOPs. In streaming applications, it is recommended that
 	// this be set to 1 so a decoder joining mid-stream will receive an IDR frame as
 	// quickly as possible. Setting this value to 0 will break output segmenting.
 	GopClosedCadence *int32
+
+	// Sets the number of B-frames between reference frames. Set to 2 if resolution is
+	// greater than 1080p or when using tiled hevc encoding.
+	GopNumBFrames *int32
 
 	// GOP size (keyframe interval) in units of either frames or seconds per
 	// gopSizeUnits. If gopSizeUnits is frames, gopSize must be an integer and must be
@@ -3126,6 +3146,11 @@ type H265Settings struct {
 
 	// For QVBR: See the tooltip for Quality level
 	MaxBitrate *int32
+
+	// Used for QVBR rate control mode only. Optional. Enter a minimum bitrate if you
+	// want to keep the output bitrate about a threshold, in order to prevent the
+	// downstream system from de-allocating network bandwidth for this output.
+	MinBitrate *int32
 
 	// Only meaningful if sceneChangeDetect is set to enabled. Defaults to 5 if
 	// multiplex rate control is used. Enforces separation between repeated (cadence)
@@ -3193,6 +3218,12 @@ type H265Settings struct {
 	// no value is specified the encoder will choose the number of slices based on
 	// encode resolution.
 	Slices *int32
+
+	// Sets the number of B-frames in each sub-GOP. FIXED: Use the value in Num
+	// B-frames. DYNAMIC: Optimizes the number of B-frames in each sub-GOP to improve
+	// visual quality. Must be FIXED if resolution is greater than 1080p or when using
+	// tiled hevc encoding.
+	SubgopLength H265SubGopLength
 
 	// H.265 Tier.
 	Tier H265Tier

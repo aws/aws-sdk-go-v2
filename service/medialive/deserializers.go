@@ -29079,6 +29079,19 @@ func awsRestjson1_deserializeDocumentAv1Settings(v **types.Av1Settings, value in
 				sv.MaxBitrate = ptr.Int32(int32(i64))
 			}
 
+		case "minBitrate":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max8000000 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MinBitrate = ptr.Int32(int32(i64))
+			}
+
 		case "minIInterval":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -35094,6 +35107,19 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				sv.MaxBitrate = ptr.Int32(int32(i64))
 			}
 
+		case "minBitrate":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MinBitrate = ptr.Int32(int32(i64))
+			}
+
 		case "minIInterval":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -35555,6 +35581,15 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				sv.FramerateNumerator = ptr.Int32(int32(i64))
 			}
 
+		case "gopBReference":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected H265GopBReference to be of type string, got %T instead", value)
+				}
+				sv.GopBReference = types.H265GopBReference(jtv)
+			}
+
 		case "gopClosedCadence":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -35566,6 +35601,19 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 					return err
 				}
 				sv.GopClosedCadence = ptr.Int32(int32(i64))
+			}
+
+		case "gopNumBFrames":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max3 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.GopNumBFrames = ptr.Int32(int32(i64))
 			}
 
 		case "gopSize":
@@ -35640,6 +35688,19 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 					return err
 				}
 				sv.MaxBitrate = ptr.Int32(int32(i64))
+			}
+
+		case "minBitrate":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max40000000 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MinBitrate = ptr.Int32(int32(i64))
 			}
 
 		case "minIInterval":
@@ -35772,6 +35833,15 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 					return err
 				}
 				sv.Slices = ptr.Int32(int32(i64))
+			}
+
+		case "subgopLength":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected H265SubGopLength to be of type string, got %T instead", value)
+				}
+				sv.SubgopLength = types.H265SubGopLength(jtv)
 			}
 
 		case "tier":

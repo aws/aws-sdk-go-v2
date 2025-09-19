@@ -40,10 +40,10 @@ type ListAgentRuntimesInput struct {
 
 type ListAgentRuntimesOutput struct {
 
-	// The list of agent runtimes.
+	// The list of AgentCore Runtime resources.
 	//
 	// This member is required.
-	AgentRuntimes []types.Agent
+	AgentRuntimes []types.AgentRuntime
 
 	// A token to retrieve the next page of results.
 	NextToken *string

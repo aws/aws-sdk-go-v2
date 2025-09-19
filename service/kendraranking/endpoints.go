@@ -339,7 +339,7 @@ func (r *resolver) ResolveEndpoint(
 			_ = _PartitionResult
 			if true == _PartitionResult.SupportsDualStack {
 				if _UseFIPS == true {
-					if true == _PartitionResult.SupportsFIPS {
+					if _PartitionResult.SupportsFIPS == true {
 						uriString := func() string {
 							var out strings.Builder
 							out.WriteString("https://kendra-ranking-fips.")
@@ -381,7 +381,7 @@ func (r *resolver) ResolveEndpoint(
 				}, nil
 			}
 			if _UseFIPS == true {
-				if true == _PartitionResult.SupportsFIPS {
+				if _PartitionResult.SupportsFIPS == true {
 					uriString := func() string {
 						var out strings.Builder
 						out.WriteString("https://kendra-ranking-fips.")

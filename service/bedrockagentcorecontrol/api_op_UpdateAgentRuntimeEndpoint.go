@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Updates an existing Amazon Secure AgentEndpoint.
+// Updates an existing Amazon Bedrock AgentCore Runtime endpoint.
 func (c *Client) UpdateAgentRuntimeEndpoint(ctx context.Context, params *UpdateAgentRuntimeEndpointInput, optFns ...func(*Options)) (*UpdateAgentRuntimeEndpointOutput, error) {
 	if params == nil {
 		params = &UpdateAgentRuntimeEndpointInput{}
@@ -30,23 +30,23 @@ func (c *Client) UpdateAgentRuntimeEndpoint(ctx context.Context, params *UpdateA
 
 type UpdateAgentRuntimeEndpointInput struct {
 
-	// The unique identifier of the agent runtime associated with the endpoint.
+	// The unique identifier of the AgentCore Runtime associated with the endpoint.
 	//
 	// This member is required.
 	AgentRuntimeId *string
 
-	// The name of the agent runtime endpoint to update.
+	// The name of the AgentCore Runtime endpoint to update.
 	//
 	// This member is required.
 	EndpointName *string
 
-	// The updated version of the agent runtime for the endpoint.
+	// The updated version of the AgentCore Runtime for the endpoint.
 	AgentRuntimeVersion *string
 
 	// A unique, case-sensitive identifier to ensure idempotency of the request.
 	ClientToken *string
 
-	// The updated description of the agent runtime endpoint.
+	// The updated description of the AgentCore Runtime endpoint.
 	Description *string
 
 	noSmithyDocumentSerde
@@ -54,35 +54,35 @@ type UpdateAgentRuntimeEndpointInput struct {
 
 type UpdateAgentRuntimeEndpointOutput struct {
 
-	// The Amazon Resource Name (ARN) of the agent runtime.
+	// The Amazon Resource Name (ARN) of the AgentCore Runtime.
 	//
 	// This member is required.
 	AgentRuntimeArn *string
 
-	// The Amazon Resource Name (ARN) of the agent runtime endpoint.
+	// The Amazon Resource Name (ARN) of the AgentCore Runtime endpoint.
 	//
 	// This member is required.
 	AgentRuntimeEndpointArn *string
 
-	// The timestamp when the agent runtime endpoint was created.
+	// The timestamp when the AgentCore Runtime endpoint was created.
 	//
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The timestamp when the agent runtime endpoint was last updated.
+	// The timestamp when the AgentCore Runtime endpoint was last updated.
 	//
 	// This member is required.
 	LastUpdatedAt *time.Time
 
-	// The current status of the updated agent runtime endpoint.
+	// The current status of the updated AgentCore Runtime endpoint.
 	//
 	// This member is required.
-	Status types.AgentEndpointStatus
+	Status types.AgentRuntimeEndpointStatus
 
-	// The currently deployed version of the agent runtime on the endpoint.
+	// The currently deployed version of the AgentCore Runtime on the endpoint.
 	LiveVersion *string
 
-	// The target version of the agent runtime for the endpoint.
+	// The target version of the AgentCore Runtime for the endpoint.
 	TargetVersion *string
 
 	// Metadata pertaining to the operation's result.

@@ -1,0 +1,8 @@
+{
+    "id": "0324d27c-96a0-4735-ad5a-a913bdce4d5c",
+    "type": "feature",
+    "description": "Add MinBitrate for QVBR mode under H264/H265/AV1 output codec. Add GopBReference, GopNumBFrames, SubGopLength fields under H265 output codec.",
+    "modules": [
+        "service/medialive"
+    ]
+}

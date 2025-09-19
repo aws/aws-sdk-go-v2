@@ -1,0 +1,8 @@
+{
+    "id": "d2d1a492-9e9a-4c90-973b-c0984475fb2c",
+    "type": "documentation",
+    "description": "Model whitespace change - no client difference",
+    "modules": [
+        "service/kendraranking"
+    ]
+}

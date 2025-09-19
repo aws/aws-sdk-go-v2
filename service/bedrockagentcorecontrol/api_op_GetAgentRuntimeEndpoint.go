@@ -30,12 +30,12 @@ func (c *Client) GetAgentRuntimeEndpoint(ctx context.Context, params *GetAgentRu
 
 type GetAgentRuntimeEndpointInput struct {
 
-	// The unique identifier of the agent runtime associated with the endpoint.
+	// The unique identifier of the AgentCore Runtime associated with the endpoint.
 	//
 	// This member is required.
 	AgentRuntimeId *string
 
-	// The name of the agent runtime endpoint to retrieve.
+	// The name of the AgentCore Runtime endpoint to retrieve.
 	//
 	// This member is required.
 	EndpointName *string
@@ -45,51 +45,51 @@ type GetAgentRuntimeEndpointInput struct {
 
 type GetAgentRuntimeEndpointOutput struct {
 
-	// The Amazon Resource Name (ARN) of the agent runtime.
+	// The Amazon Resource Name (ARN) of the AgentCore Runtime.
 	//
 	// This member is required.
 	AgentRuntimeArn *string
 
-	// The Amazon Resource Name (ARN) of the agent runtime endpoint.
+	// The Amazon Resource Name (ARN) of the AgentCore Runtime endpoint.
 	//
 	// This member is required.
 	AgentRuntimeEndpointArn *string
 
-	// The timestamp when the agent runtime endpoint was created.
+	// The timestamp when the AgentCore Runtime endpoint was created.
 	//
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The unique identifier of the agent runtime endpoint.
+	// The unique identifier of the AgentCore Runtime endpoint.
 	//
 	// This member is required.
 	Id *string
 
-	// The timestamp when the agent runtime endpoint was last updated.
+	// The timestamp when the AgentCore Runtime endpoint was last updated.
 	//
 	// This member is required.
 	LastUpdatedAt *time.Time
 
-	// The name of the agent runtime endpoint.
+	// The name of the AgentCore Runtime endpoint.
 	//
 	// This member is required.
 	Name *string
 
-	// The current status of the agent runtime endpoint.
+	// The current status of the AgentCore Runtime endpoint.
 	//
 	// This member is required.
-	Status types.AgentEndpointStatus
+	Status types.AgentRuntimeEndpointStatus
 
-	// The description of the agent runtime endpoint.
+	// The description of the AgentCore Runtime endpoint.
 	Description *string
 
-	// The reason for failure if the agent runtime endpoint is in a failed state.
+	// The reason for failure if the AgentCore Runtime endpoint is in a failed state.
 	FailureReason *string
 
-	// The currently deployed version of the agent runtime on the endpoint.
+	// The currently deployed version of the AgentCore Runtime on the endpoint.
 	LiveVersion *string
 
-	// The target version of the agent runtime for the endpoint.
+	// The target version of the AgentCore Runtime for the endpoint.
 	TargetVersion *string
 
 	// Metadata pertaining to the operation's result.

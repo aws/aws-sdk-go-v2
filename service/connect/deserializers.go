@@ -66102,6 +66102,15 @@ func awsRestjson1_deserializeDocumentUserPhoneConfig(v **types.UserPhoneConfig, 
 				sv.DeskPhoneNumber = ptr.String(jtv)
 			}
 
+		case "PersistentConnection":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected PersistentConnection to be of type *bool, got %T instead", value)
+				}
+				sv.PersistentConnection = ptr.Bool(jtv)
+			}
+
 		case "PhoneType":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -29,7 +29,7 @@ func (c *Client) ListAgentRuntimeEndpoints(ctx context.Context, params *ListAgen
 
 type ListAgentRuntimeEndpointsInput struct {
 
-	// The unique identifier of the agent runtime to list endpoints for.
+	// The unique identifier of the AgentCore Runtime to list endpoints for.
 	//
 	// This member is required.
 	AgentRuntimeId *string
@@ -45,10 +45,10 @@ type ListAgentRuntimeEndpointsInput struct {
 
 type ListAgentRuntimeEndpointsOutput struct {
 
-	// The list of agent runtime endpoints.
+	// The list of AgentCore Runtime endpoints.
 	//
 	// This member is required.
-	RuntimeEndpoints []types.AgentEndpoint
+	RuntimeEndpoints []types.AgentRuntimeEndpoint
 
 	// A token to retrieve the next page of results.
 	NextToken *string
