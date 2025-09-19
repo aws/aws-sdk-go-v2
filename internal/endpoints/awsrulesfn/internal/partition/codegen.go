@@ -1,6 +1,17 @@
 //go:build ignore
 // +build ignore
 
+/*
+
+to regenerate:
+
+run the following from internal/endpoints/awsrulesfn:
+
+$ go run -tags codegen ./internal/partition/codegen.go -model partitions.json -output partitions.go
+$ gofmt -w -s .
+
+*/
+
 package main
 
 import (
@@ -41,7 +52,8 @@ package awsrulesfn
 
 
 // GetPartition returns an AWS [Partition] for the region provided. If the
-// partition cannot be determined nil will be returned.
+// partition cannot be determined then the default partition (AWS commercial)
+// will be returned.
 func GetPartition(region string) *PartitionConfig {
 	return getPartition(partitions, region)
 }
