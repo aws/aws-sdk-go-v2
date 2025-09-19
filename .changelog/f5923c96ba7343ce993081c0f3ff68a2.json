@@ -1,8 +1,0 @@
-{
-    "id": "f5923c96-ba73-43ce-9930-81c0f3ff68a2",
-    "type": "documentation",
-    "description": "Update invalid character handling documentation for SQS SendMessage API",
-    "modules": [
-        "service/sqs"
-    ]
-}

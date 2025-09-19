@@ -1,3 +1,21 @@
+# Release (2025-09-19)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.5.0](service/bedrockagentcorecontrol/CHANGELOG.md#v150-2025-09-19)
+  * **Feature**: Add tagging and VPC support to AgentCore Runtime, Code Interpreter, and Browser resources. Add support for configuring request headers in Runtime. Fix AgentCore Runtime shape names.
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.58.0](service/configservice/CHANGELOG.md#v1580-2025-09-19)
+  * **Feature**: Add UNKNOWN state to RemediationExecutionState and add IN_PROGRESS/EXITED/UNKNOWN states to RemediationExecutionStepState.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.140.0](service/connect/CHANGELOG.md#v11400-2025-09-19)
+  * **Feature**: This release adds a persistent connection field to UserPhoneConfig that maintains agent's softphone media connection for faster call connections.
+* `github.com/aws/aws-sdk-go-v2/service/kendraranking`: [v1.15.7](service/kendraranking/CHANGELOG.md#v1157-2025-09-19)
+  * **Documentation**: Model whitespace change - no client difference
+* `github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions`: [v1.20.0](service/licensemanagerusersubscriptions/CHANGELOG.md#v1200-2025-09-19)
+  * **Feature**: Added support for cross-account Active Directories.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.83.0](service/medialive/CHANGELOG.md#v1830-2025-09-19)
+  * **Feature**: Add MinBitrate for QVBR mode under H264/H265/AV1 output codec. Add GopBReference, GopNumBFrames, SubGopLength fields under H265 output codec.
+* `github.com/aws/aws-sdk-go-v2/service/sqs`: [v1.42.6](service/sqs/CHANGELOG.md#v1426-2025-09-19)
+  * **Documentation**: Update invalid character handling documentation for SQS SendMessage API
+
 # Release (2025-09-18)
 
 ## Module Highlights

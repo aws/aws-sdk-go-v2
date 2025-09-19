@@ -1,8 +1,0 @@
-{
-    "id": "924fd7c4-5886-430c-b21d-e3e40e3cfbac",
-    "type": "feature",
-    "description": "This release adds a persistent connection field to UserPhoneConfig that maintains agent's softphone media connection for faster call connections.",
-    "modules": [
-        "service/connect"
-    ]
-}

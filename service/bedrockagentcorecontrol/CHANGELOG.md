@@ -1,3 +1,7 @@
+# v1.5.0 (2025-09-19)
+
+* **Feature**: Add tagging and VPC support to AgentCore Runtime, Code Interpreter, and Browser resources. Add support for configuring request headers in Runtime. Fix AgentCore Runtime shape names.
+
 # v1.4.4 (2025-09-10)
 
 * No change notes available for this release.

@@ -1,3 +1,7 @@
+# v1.58.0 (2025-09-19)
+
+* **Feature**: Add UNKNOWN state to RemediationExecutionState and add IN_PROGRESS/EXITED/UNKNOWN states to RemediationExecutionStepState.
+
 # v1.57.4 (2025-09-10)
 
 * No change notes available for this release.

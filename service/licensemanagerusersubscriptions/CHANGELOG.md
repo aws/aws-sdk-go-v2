@@ -1,3 +1,7 @@
+# v1.20.0 (2025-09-19)
+
+* **Feature**: Added support for cross-account Active Directories.
+
 # v1.19.3 (2025-09-10)
 
 * No change notes available for this release.

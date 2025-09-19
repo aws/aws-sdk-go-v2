@@ -1,3 +1,7 @@
+# v1.15.7 (2025-09-19)
+
+* **Documentation**: Model whitespace change - no client difference
+
 # v1.15.6 (2025-09-10)
 
 * No change notes available for this release.

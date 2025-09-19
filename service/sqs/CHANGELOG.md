@@ -1,3 +1,7 @@
+# v1.42.6 (2025-09-19)
+
+* **Documentation**: Update invalid character handling documentation for SQS SendMessage API
+
 # v1.42.5 (2025-09-10)
 
 * No change notes available for this release.
