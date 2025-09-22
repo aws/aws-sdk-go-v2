@@ -1,3 +1,16 @@
+# Release (2025-09-22)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.57.8](service/batch/CHANGELOG.md#v1578-2025-09-22)
+  * **Documentation**: Starting in JAN 2026, AWS Batch will change the default AMI for new Amazon ECS compute environments from Amazon Linux 2 to Amazon Linux 2023. We recommend migrating AWS Batch Amazon ECS compute environments to Amazon Linux 2023 to maintain optimal performance and security.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.74.0](service/eks/CHANGELOG.md#v1740-2025-09-22)
+  * **Feature**: Adds support for RepairConfig overrides and configurations in EKS Managed Node Groups.
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.47.0](service/imagebuilder/CHANGELOG.md#v1470-2025-09-22)
+  * **Feature**: Version ARNs are no longer required for the EC2 Image Builder list-image-build-version, list-component-build-version, and list-workflow-build-version APIs. Calling these APIs without the ARN returns all build versions for the given resource type in the requesting account.
+
 # Release (2025-09-19)
 
 ## Module Highlights

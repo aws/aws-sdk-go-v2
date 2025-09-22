@@ -4,11 +4,11 @@ go 1.22
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.39.0
-	github.com/aws/aws-sdk-go-v2/credentials v1.18.12
+	github.com/aws/aws-sdk-go-v2/credentials v1.18.13
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.18.7
 	github.com/aws/aws-sdk-go-v2/internal/ini v1.8.3
 	github.com/aws/aws-sdk-go-v2/service/sso v1.29.3
-	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.34.4
+	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.34.5
 	github.com/aws/aws-sdk-go-v2/service/sts v1.38.4
 	github.com/aws/smithy-go v1.23.0
 )
