@@ -8899,10 +8899,78 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether to enable node auto repair for the node group. Node auto repair is\n            disabled by default.</p>"
                     }
+                },
+                "maxUnhealthyNodeThresholdCount": {
+                    "target": "com.amazonaws.eks#NonZeroInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify a count threshold of unhealthy nodes, above which node auto \n            repair actions will stop. When using this, you cannot also set \n            <code>maxUnhealthyNodeThresholdPercentage</code> at the same time.</p>"
+                    }
+                },
+                "maxUnhealthyNodeThresholdPercentage": {
+                    "target": "com.amazonaws.eks#PercentCapacity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify a percentage threshold of unhealthy nodes, above which node auto \n            repair actions will stop. When using this, you cannot also set \n            <code>maxUnhealthyNodeThresholdCount</code> at the same time.</p>"
+                    }
+                },
+                "maxParallelNodesRepairedCount": {
+                    "target": "com.amazonaws.eks#NonZeroInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the maximum number of nodes that can be repaired concurrently or in parallel, \n            expressed as a count of unhealthy nodes. This gives you finer-grained control over the \n            pace of node replacements. When using this, you cannot also set \n            <code>maxParallelNodesRepairedPercentage</code> at the same time.</p>"
+                    }
+                },
+                "maxParallelNodesRepairedPercentage": {
+                    "target": "com.amazonaws.eks#PercentCapacity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the maximum number of nodes that can be repaired concurrently or in parallel, \n            expressed as a percentage of unhealthy nodes. This gives you finer-grained control over the \n            pace of node replacements. When using this, you cannot also set \n            <code>maxParallelNodesRepairedCount</code> at the same time.</p>"
+                    }
+                },
+                "nodeRepairConfigOverrides": {
+                    "target": "com.amazonaws.eks#NodeRepairConfigOverridesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify granular overrides for specific repair actions. These overrides control the \n            repair action and the repair delay time before a node is considered eligible for repair.\n            If you use this, you must specify all the values.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The node auto repair configuration for the node group.</p>"
+            }
+        },
+        "com.amazonaws.eks#NodeRepairConfigOverrides": {
+            "type": "structure",
+            "members": {
+                "nodeMonitoringCondition": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify an unhealthy condition reported by the node monitoring agent that this\n            override would apply to.</p>"
+                    }
+                },
+                "nodeUnhealthyReason": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify a reason reported by the node monitoring agent that this\n            override would apply to.</p>"
+                    }
+                },
+                "minRepairWaitTimeMins": {
+                    "target": "com.amazonaws.eks#NonZeroInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the minimum time in minutes to wait before attempting to repair a node \n            with this specific <code>nodeMonitoringCondition</code> and\n            <code>nodeUnhealthyReason</code>.</p>"
+                    }
+                },
+                "repairAction": {
+                    "target": "com.amazonaws.eks#RepairAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the repair action to take for nodes when all of the specified conditions are\n            met.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specify granular overrides for specific repair actions. These overrides control the \n            repair action and the repair delay time before a node is considered eligible for repair.\n            If you use this, you must specify all the values.</p>"
+            }
+        },
+        "com.amazonaws.eks#NodeRepairConfigOverridesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.eks#NodeRepairConfigOverrides"
             }
         },
         "com.amazonaws.eks#Nodegroup": {
@@ -10018,6 +10086,29 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 1
+                }
+            }
+        },
+        "com.amazonaws.eks#RepairAction": {
+            "type": "enum",
+            "members": {
+                "Replace": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Replace"
+                    }
+                },
+                "Reboot": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Reboot"
+                    }
+                },
+                "NoAction": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NoAction"
+                    }
                 }
             }
         },
@@ -11653,6 +11744,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DeletionProtection"
+                    }
+                },
+                "NODE_REPAIR_CONFIG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NodeRepairConfig"
                     }
                 }
             }

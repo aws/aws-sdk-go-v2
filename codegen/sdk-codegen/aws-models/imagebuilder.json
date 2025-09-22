@@ -8414,8 +8414,7 @@
                 "componentVersionArn": {
                     "target": "com.amazonaws.imagebuilder#ComponentVersionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The component version Amazon Resource Name (ARN) whose versions you want to\n\t\t\tlist.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The component version Amazon Resource Name (ARN) whose versions you want to\n\t\t\tlist.</p>"
                     }
                 },
                 "maxResults": {
@@ -8826,8 +8825,7 @@
                 "imageVersionArn": {
                     "target": "com.amazonaws.imagebuilder#ImageVersionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image whose build versions you want to\n\t\t\tretrieve.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image whose build versions you want to\n\t\t\tretrieve.</p>"
                     }
                 },
                 "filters": {
@@ -10190,8 +10188,7 @@
                 "workflowVersionArn": {
                     "target": "com.amazonaws.imagebuilder#WorkflowWildcardVersionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the workflow resource for which to get a list of build versions.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the workflow resource for which to get a list of build versions.</p>"
                     }
                 },
                 "maxResults": {
