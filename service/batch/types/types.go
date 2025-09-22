@@ -338,6 +338,8 @@ type ComputeResource struct {
 	// the spotIamFleetRole parameter. For more information, see [Amazon EC2 spot fleet role] in the Batch User
 	// Guide.
 	//
+	// Multi-node parallel jobs aren't supported on Spot Instances.
+	//
 	// [Amazon EC2 spot fleet role]: https://docs.aws.amazon.com/batch/latest/userguide/spot_fleet_IAM_role.html
 	// [Compute environments]: https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html
 	//
@@ -1542,6 +1544,13 @@ type Ec2Configuration struct {
 	// nor a imageIdOverride parameter is specified, then the latest Amazon ECS
 	// optimized AMI for that image type that's supported by Batch is used.
 	//
+	// Amazon Web Services will end support for Amazon ECS optimized AL2-optimized and
+	// AL2-accelerated AMIs. Starting in January 2026, Batch will change the default
+	// AMI for new Amazon ECS compute environments from Amazon Linux 2 to Amazon Linux
+	// 2023. We recommend migrating Batch Amazon ECS compute environments to Amazon
+	// Linux 2023 to maintain optimal performance and security. For more information on
+	// upgrading from AL2 to AL2023, see [How to migrate from ECS AL2 to ECS AL2023]in the Batch User Guide.
+	//
 	// ECS_AL2 [Amazon Linux 2]: Default for all non-GPU instance families.
 	//
 	// ECS_AL2_NVIDIA [Amazon Linux 2 (GPU)]: Default for all GPU instance families (for example P4 and G4 )
@@ -1555,9 +1564,6 @@ type Ec2Configuration struct {
 	// Amazon Web Services Graviton-based instance types.
 	//
 	// ECS_AL2023_NVIDIA doesn't support p3 and g3 instance types.
-	//
-	// ECS_AL1 [Amazon Linux]. Amazon Linux has reached the end-of-life of standard support. For
-	// more information, see [Amazon Linux AMI].
 	//
 	// EKS If the imageIdOverride parameter isn't specified, then a recent [Amazon EKS-optimized Amazon Linux AMI] ( EKS_AL2 )
 	// is used. If a new image type is specified in an update, but neither an imageId
@@ -1574,7 +1580,7 @@ type Ec2Configuration struct {
 	// Amazon EKS optimized Amazon Linux 2 AMIs on your Amazon EKS compute environments
 	// beyond the 11/26/25 end-of-support date, these compute environments will no
 	// longer receive any new software updates, security patches, or bug fixes from
-	// Amazon Web Services. For more information on upgrading from AL2 to AL2023, see How to upgrade from EKS AL2 to EKS AL2023
+	// Amazon Web Services. For more information on upgrading from AL2 to AL2023, see [How to upgrade from EKS AL2 to EKS AL2023]
 	// in the Batch User Guide.
 	//
 	// EKS_AL2 [Amazon Linux 2]: Default for all non-GPU instance families.
@@ -1589,16 +1595,16 @@ type Ec2Configuration struct {
 	// EKS_AL2023_NVIDIA [Amazon Linux 2023 (accelerated)]: GPU instance families and can be used for all non Amazon
 	// Web Services Graviton-based instance types.
 	//
-	// [Amazon Linux AMI]: http://aws.amazon.com/amazon-linux-ami/
 	// [Amazon Linux 2023]: https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html
 	// [Amazon EKS-optimized Amazon Linux AMI]: https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html
+	// [How to upgrade from EKS AL2 to EKS AL2023]: https://docs.aws.amazon.com/batch/latest/userguide/eks-migration-2023.html
 	// [Amazon Linux 2 (GPU)]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#gpuami
 	// [Amazon Linux 2023 (GPU)]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#gpuami
 	// [Amazon Linux 2023 (accelerated)]: https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html
 	// [Amazon Linux 2 (accelerated)]: https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html
 	// [Amazon ECS-optimized Amazon Linux 2 AMI]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami
 	// [Amazon Linux 2]: https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html
-	// [Amazon Linux]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#alami
+	// [How to migrate from ECS AL2 to ECS AL2023]: https://docs.aws.amazon.com/batch/latest/userguide/ecs-migration-2023.html
 	//
 	// This member is required.
 	ImageType *string
@@ -1682,14 +1688,20 @@ type EcsTaskDetails struct {
 	// [Batch execution IAM role]: https://docs.aws.amazon.com/batch/latest/userguide/execution-IAM-role.html
 	ExecutionRoleArn *string
 
-	// The IPC resource namespace to use for the containers in the task.
+	// The IPC resource namespace to use for the containers in the task. The valid
+	// values are host , task , or none . For more information see ipcMode in [EcsTaskProperties].
+	//
+	// [EcsTaskProperties]: https://docs.aws.amazon.com/batch/latest/APIReference/API_EcsTaskProperties.html
 	IpcMode *string
 
 	// The network configuration for jobs that are running on Fargate resources. Jobs
 	// that are running on Amazon EC2 resources must not specify this parameter.
 	NetworkConfiguration *NetworkConfiguration
 
-	// The process namespace to use for the containers in the task.
+	// The process namespace to use for the containers in the task. The valid values
+	// are host , or task . For more information see pidMode in [EcsTaskProperties].
+	//
+	// [EcsTaskProperties]: https://docs.aws.amazon.com/batch/latest/APIReference/API_EcsTaskProperties.html
 	PidMode *string
 
 	// The Fargate platform version where the jobs are running.
@@ -3734,8 +3746,8 @@ type LogConfiguration struct {
 	// this parameter are log drivers that the Amazon ECS container agent can
 	// communicate with by default.
 	//
-	// The supported log drivers are awslogs , fluentd , gelf , json-file , journald ,
-	// logentries , syslog , and splunk .
+	// The supported log drivers are awsfirelens , awslogs , fluentd , gelf , json-file
+	// , journald , logentries , syslog , and splunk .
 	//
 	// Jobs that are running on Fargate resources are restricted to the awslogs and
 	// splunk log drivers.

@@ -1597,6 +1597,57 @@ type NodeRepairConfig struct {
 	// repair is disabled by default.
 	Enabled *bool
 
+	// Specify the maximum number of nodes that can be repaired concurrently or in
+	// parallel, expressed as a count of unhealthy nodes. This gives you finer-grained
+	// control over the pace of node replacements. When using this, you cannot also set
+	// maxParallelNodesRepairedPercentage at the same time.
+	MaxParallelNodesRepairedCount *int32
+
+	// Specify the maximum number of nodes that can be repaired concurrently or in
+	// parallel, expressed as a percentage of unhealthy nodes. This gives you
+	// finer-grained control over the pace of node replacements. When using this, you
+	// cannot also set maxParallelNodesRepairedCount at the same time.
+	MaxParallelNodesRepairedPercentage *int32
+
+	// Specify a count threshold of unhealthy nodes, above which node auto repair
+	// actions will stop. When using this, you cannot also set
+	// maxUnhealthyNodeThresholdPercentage at the same time.
+	MaxUnhealthyNodeThresholdCount *int32
+
+	// Specify a percentage threshold of unhealthy nodes, above which node auto repair
+	// actions will stop. When using this, you cannot also set
+	// maxUnhealthyNodeThresholdCount at the same time.
+	MaxUnhealthyNodeThresholdPercentage *int32
+
+	// Specify granular overrides for specific repair actions. These overrides control
+	// the repair action and the repair delay time before a node is considered eligible
+	// for repair. If you use this, you must specify all the values.
+	NodeRepairConfigOverrides []NodeRepairConfigOverrides
+
+	noSmithyDocumentSerde
+}
+
+// Specify granular overrides for specific repair actions. These overrides control
+// the repair action and the repair delay time before a node is considered eligible
+// for repair. If you use this, you must specify all the values.
+type NodeRepairConfigOverrides struct {
+
+	// Specify the minimum time in minutes to wait before attempting to repair a node
+	// with this specific nodeMonitoringCondition and nodeUnhealthyReason .
+	MinRepairWaitTimeMins *int32
+
+	// Specify an unhealthy condition reported by the node monitoring agent that this
+	// override would apply to.
+	NodeMonitoringCondition *string
+
+	// Specify a reason reported by the node monitoring agent that this override would
+	// apply to.
+	NodeUnhealthyReason *string
+
+	// Specify the repair action to take for nodes when all of the specified
+	// conditions are met.
+	RepairAction RepairAction
+
 	noSmithyDocumentSerde
 }
 

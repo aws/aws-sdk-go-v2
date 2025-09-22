@@ -810,46 +810,6 @@ func (m *validateOpImportVmImage) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpListComponentBuildVersions struct {
-}
-
-func (*validateOpListComponentBuildVersions) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpListComponentBuildVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*ListComponentBuildVersionsInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpListComponentBuildVersionsInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpListImageBuildVersions struct {
-}
-
-func (*validateOpListImageBuildVersions) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpListImageBuildVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*ListImageBuildVersionsInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpListImageBuildVersionsInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpListImagePackages struct {
 }
 
@@ -945,26 +905,6 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpListWorkflowBuildVersions struct {
-}
-
-func (*validateOpListWorkflowBuildVersions) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpListWorkflowBuildVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*ListWorkflowBuildVersionsInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpListWorkflowBuildVersionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1430,14 +1370,6 @@ func addOpImportVmImageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpImportVmImage{}, middleware.After)
 }
 
-func addOpListComponentBuildVersionsValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpListComponentBuildVersions{}, middleware.After)
-}
-
-func addOpListImageBuildVersionsValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpListImageBuildVersions{}, middleware.After)
-}
-
 func addOpListImagePackagesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListImagePackages{}, middleware.After)
 }
@@ -1456,10 +1388,6 @@ func addOpListLifecycleExecutionsValidationMiddleware(stack *middleware.Stack) e
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
-}
-
-func addOpListWorkflowBuildVersionsValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpListWorkflowBuildVersions{}, middleware.After)
 }
 
 func addOpListWorkflowExecutionsValidationMiddleware(stack *middleware.Stack) error {
@@ -2848,36 +2776,6 @@ func validateOpImportVmImageInput(v *ImportVmImageInput) error {
 	}
 }
 
-func validateOpListComponentBuildVersionsInput(v *ListComponentBuildVersionsInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "ListComponentBuildVersionsInput"}
-	if v.ComponentVersionArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ComponentVersionArn"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpListImageBuildVersionsInput(v *ListImageBuildVersionsInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "ListImageBuildVersionsInput"}
-	if v.ImageVersionArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ImageVersionArn"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateOpListImagePackagesInput(v *ListImagePackagesInput) error {
 	if v == nil {
 		return nil
@@ -2945,21 +2843,6 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpListWorkflowBuildVersionsInput(v *ListWorkflowBuildVersionsInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "ListWorkflowBuildVersionsInput"}
-	if v.WorkflowVersionArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("WorkflowVersionArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

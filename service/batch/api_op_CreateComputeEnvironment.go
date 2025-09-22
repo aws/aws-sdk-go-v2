@@ -24,8 +24,6 @@ import (
 // Spot Instances only launch when the Spot Instance price is less than a specified
 // percentage of the On-Demand price.
 //
-// Multi-node parallel jobs aren't supported on Spot Instances.
-//
 // In an unmanaged compute environment, you can manage your own EC2 compute
 // resources and have flexibility with how you configure your compute resources.
 // For example, you can use custom AMIs. However, you must verify that each of your
@@ -36,65 +34,13 @@ import (
 // container instances into that Amazon ECS cluster. For more information, see [Launching an Amazon ECS container instance]in
 // the Amazon Elastic Container Service Developer Guide.
 //
-// To create a compute environment that uses EKS resources, the caller must have
-// permissions to call eks:DescribeCluster .
-//
 // Batch doesn't automatically upgrade the AMIs in a compute environment after
-// it's created. For example, it also doesn't update the AMIs in your compute
-// environment when a newer version of the Amazon ECS optimized AMI is available.
-// You're responsible for the management of the guest operating system. This
-// includes any updates and security patches. You're also responsible for any
-// additional application software or utilities that you install on the compute
-// resources. There are two ways to use a new AMI for your Batch jobs. The original
-// method is to complete these steps:
-//
-//   - Create a new compute environment with the new AMI.
-//
-//   - Add the compute environment to an existing job queue.
-//
-//   - Remove the earlier compute environment from your job queue.
-//
-//   - Delete the earlier compute environment.
-//
-// In April 2022, Batch added enhanced support for updating compute environments.
-// For more information, see [Updating compute environments]. To use the enhanced updating of compute
-// environments to update AMIs, follow these rules:
-//
-//   - Either don't set the service role ( serviceRole ) parameter or set it to the
-//     AWSBatchServiceRole service-linked role.
-//
-//   - Set the allocation strategy ( allocationStrategy ) parameter to
-//     BEST_FIT_PROGRESSIVE , SPOT_CAPACITY_OPTIMIZED , or
-//     SPOT_PRICE_CAPACITY_OPTIMIZED .
-//
-//   - Set the update to latest image version ( updateToLatestImageVersion )
-//     parameter to true . The updateToLatestImageVersion parameter is used when you
-//     update a compute environment. This parameter is ignored when you create a
-//     compute environment.
-//
-//   - Don't specify an AMI ID in imageId , imageIdOverride (in [ec2Configuration]ec2Configuration ),
-//     or in the launch template ( launchTemplate ). In that case, Batch selects the
-//     latest Amazon ECS optimized AMI that's supported by Batch at the time the
-//     infrastructure update is initiated. Alternatively, you can specify the AMI ID in
-//     the imageId or imageIdOverride parameters, or the launch template identified
-//     by the LaunchTemplate properties. Changing any of these properties starts an
-//     infrastructure update. If the AMI ID is specified in the launch template, it
-//     can't be replaced by specifying an AMI ID in either the imageId or
-//     imageIdOverride parameters. It can only be replaced by specifying a different
-//     launch template, or if the launch template version is set to $Default or
-//     $Latest , by setting either a new default version for the launch template (if
-//     $Default ) or by adding a new version to the launch template (if $Latest ).
-//
-// If these rules are followed, any update that starts an infrastructure update
-// causes the AMI ID to be re-selected. If the version setting in the launch
-// template ( launchTemplate ) is set to $Latest or $Default , the latest or
-// default version of the launch template is evaluated up at the time of the
-// infrastructure update, even if the launchTemplate wasn't updated.
+// it's created. For more information on how to update a compute environment's AMI,
+// see [Updating compute environments]in the Batch User Guide.
 //
 // [Updating compute environments]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
 // [launch template]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html
 // [Launching an Amazon ECS container instance]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html
-// [ec2Configuration]: https://docs.aws.amazon.com/batch/latest/APIReference/API_Ec2Configuration.html
 // [container instance AMIs]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container_instance_AMIs.html
 func (c *Client) CreateComputeEnvironment(ctx context.Context, params *CreateComputeEnvironmentInput, optFns ...func(*Options)) (*CreateComputeEnvironmentOutput, error) {
 	if params == nil {
@@ -140,6 +86,9 @@ type CreateComputeEnvironmentInput struct {
 	Context *string
 
 	// The details for the Amazon EKS cluster that supports the compute environment.
+	//
+	// To create a compute environment that uses EKS resources, the caller must have
+	// permissions to call eks:DescribeCluster .
 	EksConfiguration *types.EksConfiguration
 
 	// The full Amazon Resource Name (ARN) of the IAM role that allows Batch to make

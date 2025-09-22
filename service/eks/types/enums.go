@@ -740,6 +740,27 @@ func (NodegroupUpdateStrategies) Values() []NodegroupUpdateStrategies {
 	}
 }
 
+type RepairAction string
+
+// Enum values for RepairAction
+const (
+	RepairActionReplace  RepairAction = "Replace"
+	RepairActionReboot   RepairAction = "Reboot"
+	RepairActionNoAction RepairAction = "NoAction"
+)
+
+// Values returns all known values for RepairAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RepairAction) Values() []RepairAction {
+	return []RepairAction{
+		"Replace",
+		"Reboot",
+		"NoAction",
+	}
+}
+
 type ResolveConflicts string
 
 // Enum values for ResolveConflicts
@@ -842,6 +863,7 @@ const (
 	UpdateParamTypeKubernetesNetworkConfig  UpdateParamType = "KubernetesNetworkConfig"
 	UpdateParamTypeRemoteNetworkConfig      UpdateParamType = "RemoteNetworkConfig"
 	UpdateParamTypeDeletionProtection       UpdateParamType = "DeletionProtection"
+	UpdateParamTypeNodeRepairConfig         UpdateParamType = "NodeRepairConfig"
 )
 
 // Values returns all known values for UpdateParamType. Note that this can be
@@ -887,6 +909,7 @@ func (UpdateParamType) Values() []UpdateParamType {
 		"KubernetesNetworkConfig",
 		"RemoteNetworkConfig",
 		"DeletionProtection",
+		"NodeRepairConfig",
 	}
 }
 

@@ -32,8 +32,6 @@ type ListComponentBuildVersionsInput struct {
 
 	// The component version Amazon Resource Name (ARN) whose versions you want to
 	// list.
-	//
-	// This member is required.
 	ComponentVersionArn *string
 
 	// The maximum items to return in a request.
@@ -130,9 +128,6 @@ func (c *Client) addOperationListComponentBuildVersionsMiddlewares(stack *middle
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = addOpListComponentBuildVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListComponentBuildVersions(options.Region), middleware.Before); err != nil {

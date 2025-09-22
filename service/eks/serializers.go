@@ -6187,6 +6187,73 @@ func awsRestjson1_serializeDocumentNodeRepairConfig(v *types.NodeRepairConfig, v
 		ok.Boolean(*v.Enabled)
 	}
 
+	if v.MaxParallelNodesRepairedCount != nil {
+		ok := object.Key("maxParallelNodesRepairedCount")
+		ok.Integer(*v.MaxParallelNodesRepairedCount)
+	}
+
+	if v.MaxParallelNodesRepairedPercentage != nil {
+		ok := object.Key("maxParallelNodesRepairedPercentage")
+		ok.Integer(*v.MaxParallelNodesRepairedPercentage)
+	}
+
+	if v.MaxUnhealthyNodeThresholdCount != nil {
+		ok := object.Key("maxUnhealthyNodeThresholdCount")
+		ok.Integer(*v.MaxUnhealthyNodeThresholdCount)
+	}
+
+	if v.MaxUnhealthyNodeThresholdPercentage != nil {
+		ok := object.Key("maxUnhealthyNodeThresholdPercentage")
+		ok.Integer(*v.MaxUnhealthyNodeThresholdPercentage)
+	}
+
+	if v.NodeRepairConfigOverrides != nil {
+		ok := object.Key("nodeRepairConfigOverrides")
+		if err := awsRestjson1_serializeDocumentNodeRepairConfigOverridesList(v.NodeRepairConfigOverrides, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentNodeRepairConfigOverrides(v *types.NodeRepairConfigOverrides, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MinRepairWaitTimeMins != nil {
+		ok := object.Key("minRepairWaitTimeMins")
+		ok.Integer(*v.MinRepairWaitTimeMins)
+	}
+
+	if v.NodeMonitoringCondition != nil {
+		ok := object.Key("nodeMonitoringCondition")
+		ok.String(*v.NodeMonitoringCondition)
+	}
+
+	if v.NodeUnhealthyReason != nil {
+		ok := object.Key("nodeUnhealthyReason")
+		ok.String(*v.NodeUnhealthyReason)
+	}
+
+	if len(v.RepairAction) > 0 {
+		ok := object.Key("repairAction")
+		ok.String(string(v.RepairAction))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentNodeRepairConfigOverridesList(v []types.NodeRepairConfigOverrides, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentNodeRepairConfigOverrides(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

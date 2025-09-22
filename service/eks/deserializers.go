@@ -15251,12 +15251,174 @@ func awsRestjson1_deserializeDocumentNodeRepairConfig(v **types.NodeRepairConfig
 				sv.Enabled = ptr.Bool(jtv)
 			}
 
+		case "maxParallelNodesRepairedCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NonZeroInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxParallelNodesRepairedCount = ptr.Int32(int32(i64))
+			}
+
+		case "maxParallelNodesRepairedPercentage":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PercentCapacity to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxParallelNodesRepairedPercentage = ptr.Int32(int32(i64))
+			}
+
+		case "maxUnhealthyNodeThresholdCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NonZeroInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxUnhealthyNodeThresholdCount = ptr.Int32(int32(i64))
+			}
+
+		case "maxUnhealthyNodeThresholdPercentage":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PercentCapacity to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxUnhealthyNodeThresholdPercentage = ptr.Int32(int32(i64))
+			}
+
+		case "nodeRepairConfigOverrides":
+			if err := awsRestjson1_deserializeDocumentNodeRepairConfigOverridesList(&sv.NodeRepairConfigOverrides, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNodeRepairConfigOverrides(v **types.NodeRepairConfigOverrides, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NodeRepairConfigOverrides
+	if *v == nil {
+		sv = &types.NodeRepairConfigOverrides{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "minRepairWaitTimeMins":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NonZeroInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MinRepairWaitTimeMins = ptr.Int32(int32(i64))
+			}
+
+		case "nodeMonitoringCondition":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.NodeMonitoringCondition = ptr.String(jtv)
+			}
+
+		case "nodeUnhealthyReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.NodeUnhealthyReason = ptr.String(jtv)
+			}
+
+		case "repairAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RepairAction to be of type string, got %T instead", value)
+				}
+				sv.RepairAction = types.RepairAction(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNodeRepairConfigOverridesList(v *[]types.NodeRepairConfigOverrides, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.NodeRepairConfigOverrides
+	if *v == nil {
+		cv = []types.NodeRepairConfigOverrides{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.NodeRepairConfigOverrides
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentNodeRepairConfigOverrides(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

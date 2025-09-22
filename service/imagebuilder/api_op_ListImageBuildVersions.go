@@ -29,12 +29,6 @@ func (c *Client) ListImageBuildVersions(ctx context.Context, params *ListImageBu
 
 type ListImageBuildVersionsInput struct {
 
-	// The Amazon Resource Name (ARN) of the image whose build versions you want to
-	// retrieve.
-	//
-	// This member is required.
-	ImageVersionArn *string
-
 	// Use the following filters to streamline results:
 	//
 	//   - name
@@ -47,6 +41,10 @@ type ListImageBuildVersionsInput struct {
 	//
 	//   - version
 	Filters []types.Filter
+
+	// The Amazon Resource Name (ARN) of the image whose build versions you want to
+	// retrieve.
+	ImageVersionArn *string
 
 	// The maximum items to return in a request.
 	MaxResults *int32
@@ -142,9 +140,6 @@ func (c *Client) addOperationListImageBuildVersionsMiddlewares(stack *middleware
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = addOpListImageBuildVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListImageBuildVersions(options.Region), middleware.Before); err != nil {

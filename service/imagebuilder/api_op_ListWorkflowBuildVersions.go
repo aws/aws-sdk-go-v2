@@ -29,18 +29,16 @@ func (c *Client) ListWorkflowBuildVersions(ctx context.Context, params *ListWork
 
 type ListWorkflowBuildVersionsInput struct {
 
-	// The Amazon Resource Name (ARN) of the workflow resource for which to get a list
-	// of build versions.
-	//
-	// This member is required.
-	WorkflowVersionArn *string
-
 	// The maximum items to return in a request.
 	MaxResults *int32
 
 	// A token to specify where to start paginating. This is the nextToken from a
 	// previously truncated response.
 	NextToken *string
+
+	// The Amazon Resource Name (ARN) of the workflow resource for which to get a list
+	// of build versions.
+	WorkflowVersionArn *string
 
 	noSmithyDocumentSerde
 }
@@ -127,9 +125,6 @@ func (c *Client) addOperationListWorkflowBuildVersionsMiddlewares(stack *middlew
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = addOpListWorkflowBuildVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListWorkflowBuildVersions(options.Region), middleware.Before); err != nil {

@@ -1,0 +1,8 @@
+{
+    "id": "769098c2-5055-4b56-b7a3-678b6800c8a2",
+    "type": "feature",
+    "description": "Adds support for RepairConfig overrides and configurations in EKS Managed Node Groups.",
+    "modules": [
+        "service/eks"
+    ]
+}
