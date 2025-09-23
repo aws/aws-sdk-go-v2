@@ -502,6 +502,27 @@ func (IdNamespaceType) Values() []IdNamespaceType {
 	}
 }
 
+type JobType string
+
+// Enum values for JobType
+const (
+	JobTypeBatch       JobType = "BATCH"
+	JobTypeIncremental JobType = "INCREMENTAL"
+	JobTypeDeleteOnly  JobType = "DELETE_ONLY"
+)
+
+// Values returns all known values for JobType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (JobType) Values() []JobType {
+	return []JobType{
+		"BATCH",
+		"INCREMENTAL",
+		"DELETE_ONLY",
+	}
+}
+
 type JoinOperator string
 
 // Enum values for JoinOperator

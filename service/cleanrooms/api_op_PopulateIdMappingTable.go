@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +39,25 @@ type PopulateIdMappingTableInput struct {
 	//
 	// This member is required.
 	MembershipIdentifier *string
+
+	// The job type of the rule-based ID mapping job. Valid values include:
+	//
+	// INCREMENTAL : Processes only new or changed data since the last job run. This is
+	// the default job type if the ID mapping workflow was created in Entity Resolution
+	// with incrementalRunConfig specified.
+	//
+	// BATCH : Processes all data from the input source, regardless of previous job
+	// runs. This is the default job type if the ID mapping workflow was created in
+	// Entity Resolution but incrementalRunConfig wasn't specified.
+	//
+	// DELETE_ONLY : Processes only deletion requests from BatchDeleteUniqueId , which
+	// is set in Entity Resolution.
+	//
+	// For more information about incrementalRunConfig and BatchDeleteUniqueId , see
+	// the [Entity Resolution API Reference].
+	//
+	// [Entity Resolution API Reference]: https://docs.aws.amazon.com/entityresolution/latest/apireference/Welcome.html
+	JobType types.JobType
 
 	noSmithyDocumentSerde
 }

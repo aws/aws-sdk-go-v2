@@ -67,6 +67,20 @@ type GetIdMappingJobOutput struct {
 	// An object containing an error message, if there was an error.
 	ErrorDetails *types.ErrorDetails
 
+	//  The job type of the ID mapping job.
+	//
+	// A value of INCREMENTAL indicates that only new or changed data was processed
+	// since the last job run. This is the default job type if the workflow was created
+	// with an incrementalRunConfig .
+	//
+	// A value of BATCH indicates that all data was processed from the input source,
+	// regardless of previous job runs. This is the default job type if the workflow
+	// wasn't created with an incrementalRunConfig .
+	//
+	// A value of DELETE_ONLY indicates that only deletion requests from
+	// BatchDeleteUniqueIds were processed.
+	JobType types.JobType
+
 	// Metrics associated with the execution, specifically total records processed,
 	// unique IDs generated, and records the execution skipped.
 	Metrics *types.IdMappingJobMetrics

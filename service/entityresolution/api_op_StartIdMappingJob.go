@@ -35,6 +35,20 @@ type StartIdMappingJobInput struct {
 	// This member is required.
 	WorkflowName *string
 
+	//  The job type for the ID mapping job.
+	//
+	// If the jobType value is set to INCREMENTAL , only new or changed data is
+	// processed since the last job run. This is the default value if the
+	// CreateIdMappingWorkflow API is configured with an incrementalRunConfig .
+	//
+	// If the jobType value is set to BATCH , all data is processed from the input
+	// source, regardless of previous job runs. This is the default value if the
+	// CreateIdMappingWorkflow API isn't configured with an incrementalRunConfig .
+	//
+	// If the jobType value is set to DELETE_ONLY , only deletion requests from
+	// BatchDeleteUniqueIds are processed.
+	JobType types.JobType
+
 	// A list of OutputSource objects.
 	OutputSourceConfig []types.IdMappingJobOutputSource
 
@@ -47,6 +61,20 @@ type StartIdMappingJobOutput struct {
 	//
 	// This member is required.
 	JobId *string
+
+	//  The job type for the started ID mapping job.
+	//
+	// A value of INCREMENTAL indicates that only new or changed data was processed
+	// since the last job run. This is the default job type if the workflow was created
+	// with an incrementalRunConfig .
+	//
+	// A value of BATCH indicates that all data was processed from the input source,
+	// regardless of previous job runs. This is the default job type if the workflow
+	// wasn't created with an incrementalRunConfig .
+	//
+	// A value of DELETE_ONLY indicates that only deletion requests from
+	// BatchDeleteUniqueIds were processed.
+	JobType types.JobType
 
 	// A list of OutputSource objects.
 	OutputSourceConfig []types.IdMappingJobOutputSource

@@ -1,0 +1,8 @@
+{
+    "id": "292eb62b-1c21-4eb2-abc2-17e86b74e8ef",
+    "type": "feature",
+    "description": "Added Dualstack support to GetDeployablePatchSnapshotForInstance",
+    "modules": [
+        "service/ssm"
+    ]
+}

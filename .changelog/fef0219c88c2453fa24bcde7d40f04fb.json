@@ -1,0 +1,8 @@
+{
+    "id": "fef0219c-88c2-453f-a24b-cde7d40f04fb",
+    "type": "feature",
+    "description": "Added support for running incremental ID mapping for rule-based workflows.",
+    "modules": [
+        "service/cleanrooms"
+    ]
+}

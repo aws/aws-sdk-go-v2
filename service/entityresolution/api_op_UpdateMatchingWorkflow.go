@@ -14,8 +14,8 @@ import (
 // Updates an existing matching workflow. The workflow must already exist for this
 // operation to succeed.
 //
-// For workflows where resolutionType is ML_MATCHING, incremental processing is
-// not supported.
+// For workflows where resolutionType is ML_MATCHING or PROVIDER , incremental
+// processing is not supported.
 func (c *Client) UpdateMatchingWorkflow(ctx context.Context, params *UpdateMatchingWorkflowInput, optFns ...func(*Options)) (*UpdateMatchingWorkflowOutput, error) {
 	if params == nil {
 		params = &UpdateMatchingWorkflowInput{}
@@ -67,8 +67,8 @@ type UpdateMatchingWorkflowInput struct {
 	// Optional. An object that defines the incremental run type. This object contains
 	// only the incrementalRunType field, which appears as "Automatic" in the console.
 	//
-	// For workflows where resolutionType is ML_MATCHING , incremental processing is
-	// not supported.
+	// For workflows where resolutionType is ML_MATCHING or PROVIDER , incremental
+	// processing is not supported.
 	IncrementalRunConfig *types.IncrementalRunConfig
 
 	noSmithyDocumentSerde

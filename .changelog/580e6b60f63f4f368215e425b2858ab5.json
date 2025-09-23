@@ -1,0 +1,8 @@
+{
+    "id": "580e6b60-f63f-4f36-8215-e425b2858ab5",
+    "type": "feature",
+    "description": "This release includes exception definition and documentation updates.",
+    "modules": [
+        "service/ssooidc"
+    ]
+}

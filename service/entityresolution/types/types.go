@@ -19,15 +19,22 @@ type DeletedUniqueId struct {
 	noSmithyDocumentSerde
 }
 
-// The Delete Unique Id error.
+// The error information provided when the delete unique ID operation doesn't
+// complete.
 type DeleteUniqueIdError struct {
 
-	//  The error type for the batch delete unique ID operation.
+	//  The error type for the delete unique ID operation.
+	//
+	// The SERVICE_ERROR value indicates that an internal service-side problem
+	// occurred during the deletion operation.
+	//
+	// The VALIDATION_ERROR value indicates that the deletion operation couldn't
+	// complete because of invalid input parameters or data.
 	//
 	// This member is required.
 	ErrorType DeleteUniqueIdErrorType
 
-	// The unique ID that could not be deleted.
+	// The unique ID that couldn't be deleted.
 	//
 	// This member is required.
 	UniqueId *string
@@ -65,13 +72,56 @@ type FailedRecord struct {
 	noSmithyDocumentSerde
 }
 
+// Incremental run configuration for an ID mapping workflow.
+type IdMappingIncrementalRunConfig struct {
+
+	//  The incremental run type for an ID mapping workflow.
+	//
+	// It takes only one value: ON_DEMAND . This setting runs the ID mapping workflow
+	// when it's manually triggered through the StartIdMappingJob API.
+	IncrementalRunType IdMappingIncrementalRunType
+
+	noSmithyDocumentSerde
+}
+
 // An object that contains metrics about an ID mapping job, including counts of
 // input records, processed records, and mapped records between source and target
 // identifiers.
 type IdMappingJobMetrics struct {
 
+	// The number of records processed that were marked for deletion in the input file
+	// using the DELETE schema mapping field. These are the records to be removed from
+	// the ID mapping table.
+	DeleteRecordsProcessed *int32
+
 	// The total number of records that were input for processing.
 	InputRecords *int32
+
+	//  The number of mapped records removed.
+	MappedRecordsRemoved *int32
+
+	//  The number of source records removed due to ID mapping.
+	MappedSourceRecordsRemoved *int32
+
+	//  The number of mapped target records removed.
+	MappedTargetRecordsRemoved *int32
+
+	//  The number of new mapped records.
+	NewMappedRecords *int32
+
+	//  The number of new source records mapped.
+	NewMappedSourceRecords *int32
+
+	//  The number of new mapped target records.
+	NewMappedTargetRecords *int32
+
+	// The number of new unique records processed in the current job run, after
+	// removing duplicates. This metric excludes deletion-related records. Duplicates
+	// are determined by the field marked as UNIQUE_ID in your schema mapping. Records
+	// sharing the same value in this field are considered duplicates. For example, if
+	// your current run processes five new records with the same UNIQUE_ID value, they
+	// would count as one new unique record in this metric.
+	NewUniqueRecordsLoaded *int32
 
 	// The total number of records that did not get processed.
 	RecordsNotProcessed *int32
@@ -88,12 +138,12 @@ type IdMappingJobMetrics struct {
 	// The total number of records that were processed.
 	TotalRecordsProcessed *int32
 
-	// The number of records remaining after loading and aggregating duplicate
-	// records. Duplicates are determined by the field marked as UNIQUE_ID in your
-	// schema mapping - records sharing the same value in this field are considered
-	// duplicates. For example, if you specified "customer_id" as a UNIQUE_ID field and
-	// had three records with the same customer_id value, they would count as one
-	// unique record in this metric.
+	// The number of de-duplicated processed records across all runs, excluding
+	// deletion-related records. Duplicates are determined by the field marked as
+	// UNIQUE_ID in your schema mapping. Records sharing the same value in this field
+	// are considered duplicates. For example, if you specified "customer_id" as a
+	// UNIQUE_ID field and had three records with the same customer_id value, they
+	// would count as one unique record in this metric.
 	UniqueRecordsLoaded *int32
 
 	noSmithyDocumentSerde
@@ -346,15 +396,15 @@ type IdNamespaceSummary struct {
 // Optional. An object that defines the incremental run type. This object contains
 // only the incrementalRunType field, which appears as "Automatic" in the console.
 //
-// For workflows where resolutionType is ML_MATCHING , incremental processing is
-// not supported.
+// For workflows where resolutionType is ML_MATCHING or PROVIDER , incremental
+// processing is not supported.
 type IncrementalRunConfig struct {
 
 	// The type of incremental run. The only valid value is IMMEDIATE . This appears as
 	// "Automatic" in the console.
 	//
-	// For workflows where resolutionType is ML_MATCHING , incremental processing is
-	// not supported.
+	// For workflows where resolutionType is ML_MATCHING or PROVIDER , incremental
+	// processing is not supported.
 	IncrementalRunType IncrementalRunType
 
 	noSmithyDocumentSerde
@@ -398,6 +448,11 @@ type IntermediateSourceConfiguration struct {
 // An object containing inputRecords , totalRecordsProcessed , matchIDs , and
 // recordsNotProcessed .
 type JobMetrics struct {
+
+	// The number of records processed that were marked for deletion ( DELETE = True)
+	// in the input file. This metric tracks records flagged for removal during the job
+	// execution.
+	DeleteRecordsProcessed *int32
 
 	// The total number of input records.
 	InputRecords *int32
@@ -827,8 +882,13 @@ type Record struct {
 // An object which defines the resolutionType and the ruleBasedProperties .
 type ResolutionTechniques struct {
 
-	// The type of matching. There are three types of matching: RULE_MATCHING ,
-	// ML_MATCHING , and PROVIDER .
+	// The type of matching workflow to create. Specify one of the following types:
+	//
+	//   - RULE_MATCHING : Match records using configurable rule-based criteria
+	//
+	//   - ML_MATCHING : Match records using machine learning models
+	//
+	//   - PROVIDER : Match records using a third-party matching provider
 	//
 	// This member is required.
 	ResolutionType ResolutionType

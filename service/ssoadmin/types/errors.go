@@ -13,6 +13,8 @@ type AccessDeniedException struct {
 
 	ErrorCodeOverride *string
 
+	Reason AccessDeniedExceptionReason
+
 	noSmithyDocumentSerde
 }
 
@@ -95,6 +97,8 @@ type ResourceNotFoundException struct {
 
 	ErrorCodeOverride *string
 
+	Reason ResourceNotFoundExceptionReason
+
 	noSmithyDocumentSerde
 }
 
@@ -149,6 +153,8 @@ type ThrottlingException struct {
 
 	ErrorCodeOverride *string
 
+	Reason ThrottlingExceptionReason
+
 	noSmithyDocumentSerde
 }
 
@@ -174,6 +180,8 @@ type ValidationException struct {
 	Message *string
 
 	ErrorCodeOverride *string
+
+	Reason ValidationExceptionReason
 
 	noSmithyDocumentSerde
 }

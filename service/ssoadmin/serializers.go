@@ -4745,6 +4745,23 @@ func awsAwsjson11_serializeDocumentCustomerManagedPolicyReference(v *types.Custo
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentEncryptionConfiguration(v *types.EncryptionConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.KeyType) > 0 {
+		ok := object.Key("KeyType")
+		ok.String(string(v.KeyType))
+	}
+
+	if v.KmsKeyArn != nil {
+		ok := object.Key("KmsKeyArn")
+		ok.String(*v.KmsKeyArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentGrant(v types.Grant, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6716,6 +6733,13 @@ func awsAwsjson11_serializeOpDocumentUpdateInstanceAccessControlAttributeConfigu
 func awsAwsjson11_serializeOpDocumentUpdateInstanceInput(v *UpdateInstanceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.EncryptionConfiguration != nil {
+		ok := object.Key("EncryptionConfiguration")
+		if err := awsAwsjson11_serializeDocumentEncryptionConfiguration(v.EncryptionConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.InstanceArn != nil {
 		ok := object.Key("InstanceArn")

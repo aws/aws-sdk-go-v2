@@ -55,6 +55,10 @@ type DescribeInstanceOutput struct {
 	// The date the instance was created.
 	CreatedDate *time.Time
 
+	// Contains the encryption configuration for your IAM Identity Center instance,
+	// including the encryption status, KMS key type, and KMS key ARN.
+	EncryptionConfigurationDetails *types.EncryptionConfigurationDetails
+
 	// The identifier of the identity store that is connected to the instance of IAM
 	// Identity Center.
 	IdentityStoreId *string
@@ -73,6 +77,14 @@ type DescribeInstanceOutput struct {
 
 	// The status of the instance.
 	Status types.InstanceStatus
+
+	// Provides additional context about the current status of the IAM Identity Center
+	// instance. This field is particularly useful when an instance is in a non-ACTIVE
+	// state, such as CREATE_FAILED. When an instance fails to create or update, this
+	// field contains information about the cause, which may include issues with KMS
+	// key configuration, permission problems with the specified KMS key, or
+	// service-related errors.
+	StatusReason *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

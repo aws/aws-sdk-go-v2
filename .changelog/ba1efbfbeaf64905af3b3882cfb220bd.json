@@ -1,0 +1,8 @@
+{
+    "id": "ba1efbfb-eaf6-4905-af3b-3882cfb220bd",
+    "type": "feature",
+    "description": "Add support for encryption at rest with Customer Managed KMS Key in AWS IAM Identity Center",
+    "modules": [
+        "service/ssoadmin"
+    ]
+}

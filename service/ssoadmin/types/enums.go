@@ -2,6 +2,23 @@
 
 package types
 
+type AccessDeniedExceptionReason string
+
+// Enum values for AccessDeniedExceptionReason
+const (
+	AccessDeniedExceptionReasonKmsAccessDeniedException AccessDeniedExceptionReason = "KMS_AccessDeniedException"
+)
+
+// Values returns all known values for AccessDeniedExceptionReason. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AccessDeniedExceptionReason) Values() []AccessDeniedExceptionReason {
+	return []AccessDeniedExceptionReason{
+		"KMS_AccessDeniedException",
+	}
+}
+
 type ApplicationStatus string
 
 // Enum values for ApplicationStatus
@@ -126,6 +143,7 @@ type InstanceStatus string
 // Enum values for InstanceStatus
 const (
 	InstanceStatusCreateInProgress InstanceStatus = "CREATE_IN_PROGRESS"
+	InstanceStatusCreateFailed     InstanceStatus = "CREATE_FAILED"
 	InstanceStatusDeleteInProgress InstanceStatus = "DELETE_IN_PROGRESS"
 	InstanceStatusActive           InstanceStatus = "ACTIVE"
 )
@@ -137,6 +155,7 @@ const (
 func (InstanceStatus) Values() []InstanceStatus {
 	return []InstanceStatus{
 		"CREATE_IN_PROGRESS",
+		"CREATE_FAILED",
 		"DELETE_IN_PROGRESS",
 		"ACTIVE",
 	}
@@ -156,6 +175,46 @@ const (
 func (JwksRetrievalOption) Values() []JwksRetrievalOption {
 	return []JwksRetrievalOption{
 		"OPEN_ID_DISCOVERY",
+	}
+}
+
+type KmsKeyStatus string
+
+// Enum values for KmsKeyStatus
+const (
+	KmsKeyStatusUpdating     KmsKeyStatus = "UPDATING"
+	KmsKeyStatusEnabled      KmsKeyStatus = "ENABLED"
+	KmsKeyStatusUpdateFailed KmsKeyStatus = "UPDATE_FAILED"
+)
+
+// Values returns all known values for KmsKeyStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (KmsKeyStatus) Values() []KmsKeyStatus {
+	return []KmsKeyStatus{
+		"UPDATING",
+		"ENABLED",
+		"UPDATE_FAILED",
+	}
+}
+
+type KmsKeyType string
+
+// Enum values for KmsKeyType
+const (
+	KmsKeyTypeAwsOwnedKmsKey     KmsKeyType = "AWS_OWNED_KMS_KEY"
+	KmsKeyTypeCustomerManagedKey KmsKeyType = "CUSTOMER_MANAGED_KEY"
+)
+
+// Values returns all known values for KmsKeyType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (KmsKeyType) Values() []KmsKeyType {
+	return []KmsKeyType{
+		"AWS_OWNED_KMS_KEY",
+		"CUSTOMER_MANAGED_KEY",
 	}
 }
 
@@ -216,6 +275,24 @@ func (ProvisionTargetType) Values() []ProvisionTargetType {
 	}
 }
 
+type ResourceNotFoundExceptionReason string
+
+// Enum values for ResourceNotFoundExceptionReason
+const (
+	ResourceNotFoundExceptionReasonKmsNotFoundException ResourceNotFoundExceptionReason = "KMS_NotFoundException"
+)
+
+// Values returns all known values for ResourceNotFoundExceptionReason. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceNotFoundExceptionReason) Values() []ResourceNotFoundExceptionReason {
+	return []ResourceNotFoundExceptionReason{
+		"KMS_NotFoundException",
+	}
+}
+
 type SignInOrigin string
 
 // Enum values for SignInOrigin
@@ -273,6 +350,23 @@ func (TargetType) Values() []TargetType {
 	}
 }
 
+type ThrottlingExceptionReason string
+
+// Enum values for ThrottlingExceptionReason
+const (
+	ThrottlingExceptionReasonKmsThrottlingException ThrottlingExceptionReason = "KMS_ThrottlingException"
+)
+
+// Values returns all known values for ThrottlingExceptionReason. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ThrottlingExceptionReason) Values() []ThrottlingExceptionReason {
+	return []ThrottlingExceptionReason{
+		"KMS_ThrottlingException",
+	}
+}
+
 type TrustedTokenIssuerType string
 
 // Enum values for TrustedTokenIssuerType
@@ -307,5 +401,26 @@ func (UserBackgroundSessionApplicationStatus) Values() []UserBackgroundSessionAp
 	return []UserBackgroundSessionApplicationStatus{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type ValidationExceptionReason string
+
+// Enum values for ValidationExceptionReason
+const (
+	ValidationExceptionReasonKmsInvalidKeyUsageException ValidationExceptionReason = "KMS_InvalidKeyUsageException"
+	ValidationExceptionReasonKmsInvalidStateException    ValidationExceptionReason = "KMS_InvalidStateException"
+	ValidationExceptionReasonKmsDisabledException        ValidationExceptionReason = "KMS_DisabledException"
+)
+
+// Values returns all known values for ValidationExceptionReason. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ValidationExceptionReason) Values() []ValidationExceptionReason {
+	return []ValidationExceptionReason{
+		"KMS_InvalidKeyUsageException",
+		"KMS_InvalidStateException",
+		"KMS_DisabledException",
 	}
 }

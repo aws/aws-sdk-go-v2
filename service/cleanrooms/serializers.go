@@ -5959,6 +5959,17 @@ func (m *awsRestjson1_serializeOpPopulateIdMappingTable) HandleSerialize(ctx con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentPopulateIdMappingTableInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -5989,6 +6000,18 @@ func awsRestjson1_serializeOpHttpBindingsPopulateIdMappingTableInput(v *Populate
 		if err := encoder.SetURI("membershipIdentifier").String(*v.MembershipIdentifier); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentPopulateIdMappingTableInput(v *PopulateIdMappingTableInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.JobType) > 0 {
+		ok := object.Key("jobType")
+		ok.String(string(v.JobType))
 	}
 
 	return nil

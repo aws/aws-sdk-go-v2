@@ -33,7 +33,7 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request could not be processed because of conflict in the current state of
+// The request couldn't be processed because of conflict in the current state of
 // the resource. Example: Workflow already exists, Schema already exists, Workflow
 // is currently running, etc.
 type ConflictException struct {
@@ -119,7 +119,7 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The resource could not be found.
+// The resource couldn't be found.
 type ResourceNotFoundException struct {
 	Message *string
 

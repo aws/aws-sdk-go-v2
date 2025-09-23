@@ -350,6 +350,47 @@ type DisplayData struct {
 	noSmithyDocumentSerde
 }
 
+//	A structure that specifies the KMS key type and KMS key ARN used to encrypt
+//
+// data in your IAM Identity Center instance.
+type EncryptionConfiguration struct {
+
+	// The type of KMS key used for encryption.
+	//
+	// This member is required.
+	KeyType KmsKeyType
+
+	// The ARN of the KMS key used to encrypt data. Required when KeyType is
+	// CUSTOMER_MANAGED_KEY. Cannot be specified when KeyType is AWS_OWNED_KMS_KEY.
+	KmsKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The encryption configuration of your IAM Identity Center instance, including
+// the key type, KMS key ARN, and current encryption status.
+type EncryptionConfigurationDetails struct {
+
+	// The current status of encryption configuration.
+	EncryptionStatus KmsKeyStatus
+
+	// Provides additional context about the current encryption status. This field is
+	// particularly useful when the encryption status is UPDATE_FAILED. When encryption
+	// configuration update fails, this field contains information about the cause,
+	// which may include KMS key access issues, key not found errors, invalid key
+	// configuration, key in an invalid state, or a disabled key.
+	EncryptionStatusReason *string
+
+	// The type of KMS key used for encryption.
+	KeyType KmsKeyType
+
+	// The ARN of the KMS key currently used to encrypt data in your IAM Identity
+	// Center instance.
+	KmsKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
 // The Grant union represents the set of possible configuration options for the
 // selected grant type. Exactly one member of the union must be specified, and must
 // match the grant type selected.
@@ -466,6 +507,13 @@ type InstanceMetadata struct {
 
 	// The current status of this Identity Center instance.
 	Status InstanceStatus
+
+	// Provides additional context about the current status of the IAM Identity Center
+	// instance. This field is particularly useful when an instance is in a non-ACTIVE
+	// state, such as CREATE_FAILED. When an instance creation fails, this field
+	// contains information about the cause, which may include issues with KMS key
+	// configuration or insufficient permissions.
+	StatusReason *string
 
 	noSmithyDocumentSerde
 }

@@ -226,6 +226,8 @@ type UpdateAssociationInput struct {
 	// A location is a combination of Amazon Web Services Regions and Amazon Web
 	// Services accounts where you want to run the association. Use this action to
 	// update an association in multiple Regions and multiple accounts.
+	//
+	// The IncludeChildOrganizationUnits parameter is not supported by State Manager.
 	TargetLocations []types.TargetLocation
 
 	// A key-value mapping of document parameters to target resources. Both Targets

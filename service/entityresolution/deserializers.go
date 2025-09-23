@@ -555,6 +555,11 @@ func awsRestjson1_deserializeOpDocumentCreateIdMappingWorkflowOutput(v **CreateI
 				return err
 			}
 
+		case "incrementalRunConfig":
+			if err := awsRestjson1_deserializeDocumentIdMappingIncrementalRunConfig(&sv.IncrementalRunConfig, value); err != nil {
+				return err
+			}
+
 		case "inputSourceConfig":
 			if err := awsRestjson1_deserializeDocumentIdMappingWorkflowInputSourceConfig(&sv.InputSourceConfig, value); err != nil {
 				return err
@@ -2474,6 +2479,15 @@ func awsRestjson1_deserializeOpDocumentGetIdMappingJobOutput(v **GetIdMappingJob
 				sv.JobId = ptr.String(jtv)
 			}
 
+		case "jobType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobType to be of type string, got %T instead", value)
+				}
+				sv.JobType = types.JobType(jtv)
+			}
+
 		case "metrics":
 			if err := awsRestjson1_deserializeDocumentIdMappingJobMetrics(&sv.Metrics, value); err != nil {
 				return err
@@ -2695,6 +2709,11 @@ func awsRestjson1_deserializeOpDocumentGetIdMappingWorkflowOutput(v **GetIdMappi
 
 		case "idMappingTechniques":
 			if err := awsRestjson1_deserializeDocumentIdMappingTechniques(&sv.IdMappingTechniques, value); err != nil {
+				return err
+			}
+
+		case "incrementalRunConfig":
+			if err := awsRestjson1_deserializeDocumentIdMappingIncrementalRunConfig(&sv.IncrementalRunConfig, value); err != nil {
 				return err
 			}
 
@@ -6048,6 +6067,15 @@ func awsRestjson1_deserializeOpDocumentStartIdMappingJobOutput(v **StartIdMappin
 				sv.JobId = ptr.String(jtv)
 			}
 
+		case "jobType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobType to be of type string, got %T instead", value)
+				}
+				sv.JobType = types.JobType(jtv)
+			}
+
 		case "outputSourceConfig":
 			if err := awsRestjson1_deserializeDocumentIdMappingJobOutputSourceConfig(&sv.OutputSourceConfig, value); err != nil {
 				return err
@@ -6582,6 +6610,11 @@ func awsRestjson1_deserializeOpDocumentUpdateIdMappingWorkflowOutput(v **UpdateI
 
 		case "idMappingTechniques":
 			if err := awsRestjson1_deserializeDocumentIdMappingTechniques(&sv.IdMappingTechniques, value); err != nil {
+				return err
+			}
+
+		case "incrementalRunConfig":
+			if err := awsRestjson1_deserializeDocumentIdMappingIncrementalRunConfig(&sv.IncrementalRunConfig, value); err != nil {
 				return err
 			}
 
@@ -7975,7 +8008,7 @@ func awsRestjson1_deserializeDocumentFailedRecord(v **types.FailedRecord, value 
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected InputSourceARN to be of type string, got %T instead", value)
 				}
 				sv.InputSourceARN = ptr.String(jtv)
 			}
@@ -8032,6 +8065,46 @@ func awsRestjson1_deserializeDocumentFailedRecordsList(v *[]types.FailedRecord, 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentIdMappingIncrementalRunConfig(v **types.IdMappingIncrementalRunConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IdMappingIncrementalRunConfig
+	if *v == nil {
+		sv = &types.IdMappingIncrementalRunConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "incrementalRunType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IdMappingIncrementalRunType to be of type string, got %T instead", value)
+				}
+				sv.IncrementalRunType = types.IdMappingIncrementalRunType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentIdMappingJobMetrics(v **types.IdMappingJobMetrics, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8054,6 +8127,19 @@ func awsRestjson1_deserializeDocumentIdMappingJobMetrics(v **types.IdMappingJobM
 
 	for key, value := range shape {
 		switch key {
+		case "deleteRecordsProcessed":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DeleteRecordsProcessed = ptr.Int32(int32(i64))
+			}
+
 		case "inputRecords":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8065,6 +8151,97 @@ func awsRestjson1_deserializeDocumentIdMappingJobMetrics(v **types.IdMappingJobM
 					return err
 				}
 				sv.InputRecords = ptr.Int32(int32(i64))
+			}
+
+		case "mappedRecordsRemoved":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MappedRecordsRemoved = ptr.Int32(int32(i64))
+			}
+
+		case "mappedSourceRecordsRemoved":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MappedSourceRecordsRemoved = ptr.Int32(int32(i64))
+			}
+
+		case "mappedTargetRecordsRemoved":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MappedTargetRecordsRemoved = ptr.Int32(int32(i64))
+			}
+
+		case "newMappedRecords":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.NewMappedRecords = ptr.Int32(int32(i64))
+			}
+
+		case "newMappedSourceRecords":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.NewMappedSourceRecords = ptr.Int32(int32(i64))
+			}
+
+		case "newMappedTargetRecords":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.NewMappedTargetRecords = ptr.Int32(int32(i64))
+			}
+
+		case "newUniqueRecordsLoaded":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.NewUniqueRecordsLoaded = ptr.Int32(int32(i64))
 			}
 
 		case "recordsNotProcessed":
@@ -8385,7 +8562,7 @@ func awsRestjson1_deserializeDocumentIdMappingWorkflowInputSource(v **types.IdMa
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected InputSourceARN to be of type string, got %T instead", value)
 				}
 				sv.InputSourceARN = ptr.String(jtv)
 			}
@@ -8869,7 +9046,7 @@ func awsRestjson1_deserializeDocumentIdNamespaceInputSource(v **types.IdNamespac
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected InputSourceARN to be of type string, got %T instead", value)
 				}
 				sv.InputSourceARN = ptr.String(jtv)
 			}
@@ -9139,7 +9316,7 @@ func awsRestjson1_deserializeDocumentInputSource(v **types.InputSource, value in
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected InputSourceARN to be of type string, got %T instead", value)
 				}
 				sv.InputSourceARN = ptr.String(jtv)
 			}
@@ -9332,6 +9509,19 @@ func awsRestjson1_deserializeDocumentJobMetrics(v **types.JobMetrics, value inte
 
 	for key, value := range shape {
 		switch key {
+		case "deleteRecordsProcessed":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DeleteRecordsProcessed = ptr.Int32(int32(i64))
+			}
+
 		case "inputRecords":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9592,7 +9782,7 @@ func awsRestjson1_deserializeDocumentMatchedRecord(v **types.MatchedRecord, valu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected InputSourceARN to be of type string, got %T instead", value)
 				}
 				sv.InputSourceARN = ptr.String(jtv)
 			}

@@ -14,6 +14,8 @@ import (
 // Creates an IdMappingWorkflow object which stores the configuration of the data
 // processing job to be run. Each IdMappingWorkflow must have a unique workflow
 // name. To modify an existing workflow, use the UpdateIdMappingWorkflow API.
+//
+// Incremental processing is not supported for ID mapping workflows.
 func (c *Client) CreateIdMappingWorkflow(ctx context.Context, params *CreateIdMappingWorkflowInput, optFns ...func(*Options)) (*CreateIdMappingWorkflowOutput, error) {
 	if params == nil {
 		params = &CreateIdMappingWorkflowInput{}
@@ -51,6 +53,9 @@ type CreateIdMappingWorkflowInput struct {
 
 	// A description of the workflow.
 	Description *string
+
+	//  The incremental run configuration for the ID mapping workflow.
+	IncrementalRunConfig *types.IdMappingIncrementalRunConfig
 
 	// A list of IdMappingWorkflowOutputSource objects, each of which contains fields
 	// outputS3Path and KMSArn .
@@ -93,6 +98,9 @@ type CreateIdMappingWorkflowOutput struct {
 
 	// A description of the workflow.
 	Description *string
+
+	//  The incremental run configuration for the ID mapping workflow.
+	IncrementalRunConfig *types.IdMappingIncrementalRunConfig
 
 	// A list of IdMappingWorkflowOutputSource objects, each of which contains fields
 	// outputS3Path and KMSArn .

@@ -76,6 +76,9 @@ type GetIdMappingWorkflowOutput struct {
 	// A description of the workflow.
 	Description *string
 
+	//  The incremental run configuration for the ID mapping workflow.
+	IncrementalRunConfig *types.IdMappingIncrementalRunConfig
+
 	// A list of OutputSource objects, each of which contains fields outputS3Path and
 	// KMSArn .
 	OutputSourceConfig []types.IdMappingWorkflowOutputSource

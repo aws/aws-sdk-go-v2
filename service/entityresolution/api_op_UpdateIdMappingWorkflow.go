@@ -14,6 +14,8 @@ import (
 // Updates an existing IdMappingWorkflow . This method is identical to
 // CreateIdMappingWorkflow, except it uses an HTTP PUT request instead of a POST
 // request, and the IdMappingWorkflow must already exist for the method to succeed.
+//
+// Incremental processing is not supported for ID mapping workflows.
 func (c *Client) UpdateIdMappingWorkflow(ctx context.Context, params *UpdateIdMappingWorkflowInput, optFns ...func(*Options)) (*UpdateIdMappingWorkflowOutput, error) {
 	if params == nil {
 		params = &UpdateIdMappingWorkflowInput{}
@@ -50,6 +52,9 @@ type UpdateIdMappingWorkflowInput struct {
 
 	// A description of the workflow.
 	Description *string
+
+	//  The incremental run configuration for the update ID mapping workflow.
+	IncrementalRunConfig *types.IdMappingIncrementalRunConfig
 
 	// A list of OutputSource objects, each of which contains fields outputS3Path and
 	// KMSArn .
@@ -89,6 +94,9 @@ type UpdateIdMappingWorkflowOutput struct {
 
 	// A description of the workflow.
 	Description *string
+
+	//  The incremental run configuration for the update ID mapping workflow output.
+	IncrementalRunConfig *types.IdMappingIncrementalRunConfig
 
 	// A list of OutputSource objects, each of which contains fields outputS3Path and
 	// KMSArn .

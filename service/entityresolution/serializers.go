@@ -319,6 +319,13 @@ func awsRestjson1_serializeOpDocumentCreateIdMappingWorkflowInput(v *CreateIdMap
 		}
 	}
 
+	if v.IncrementalRunConfig != nil {
+		ok := object.Key("incrementalRunConfig")
+		if err := awsRestjson1_serializeDocumentIdMappingIncrementalRunConfig(v.IncrementalRunConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.InputSourceConfig != nil {
 		ok := object.Key("inputSourceConfig")
 		if err := awsRestjson1_serializeDocumentIdMappingWorkflowInputSourceConfig(v.InputSourceConfig, ok); err != nil {
@@ -2625,6 +2632,11 @@ func awsRestjson1_serializeOpDocumentStartIdMappingJobInput(v *StartIdMappingJob
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.JobType) > 0 {
+		ok := object.Key("jobType")
+		ok.String(string(v.JobType))
+	}
+
 	if v.OutputSourceConfig != nil {
 		ok := object.Key("outputSourceConfig")
 		if err := awsRestjson1_serializeDocumentIdMappingJobOutputSourceConfig(v.OutputSourceConfig, ok); err != nil {
@@ -2973,6 +2985,13 @@ func awsRestjson1_serializeOpDocumentUpdateIdMappingWorkflowInput(v *UpdateIdMap
 	if v.IdMappingTechniques != nil {
 		ok := object.Key("idMappingTechniques")
 		if err := awsRestjson1_serializeDocumentIdMappingTechniques(v.IdMappingTechniques, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IncrementalRunConfig != nil {
+		ok := object.Key("incrementalRunConfig")
+		if err := awsRestjson1_serializeDocumentIdMappingIncrementalRunConfig(v.IncrementalRunConfig, ok); err != nil {
 			return err
 		}
 	}
@@ -3335,6 +3354,18 @@ func awsRestjson1_serializeOpDocumentUpdateSchemaMappingInput(v *UpdateSchemaMap
 		if err := awsRestjson1_serializeDocumentSchemaInputAttributes(v.MappedInputFields, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIdMappingIncrementalRunConfig(v *types.IdMappingIncrementalRunConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.IncrementalRunType) > 0 {
+		ok := object.Key("incrementalRunType")
+		ok.String(string(v.IncrementalRunType))
 	}
 
 	return nil

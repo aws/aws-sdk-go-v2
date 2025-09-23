@@ -1850,6 +1850,21 @@ func validateCustomerManagedPolicyReference(v *types.CustomerManagedPolicyRefere
 	}
 }
 
+func validateEncryptionConfiguration(v *types.EncryptionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EncryptionConfiguration"}
+	if len(v.KeyType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateIamAuthenticationMethod(v *types.IamAuthenticationMethod) error {
 	if v == nil {
 		return nil
@@ -3355,11 +3370,13 @@ func validateOpUpdateInstanceInput(v *UpdateInstanceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateInstanceInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.InstanceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
+	if v.EncryptionConfiguration != nil {
+		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

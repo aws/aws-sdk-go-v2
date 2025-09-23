@@ -53,6 +53,12 @@ type GetDeployablePatchSnapshotForInstanceInput struct {
 	// Defines the basic information about a patch baseline override.
 	BaselineOverride *types.BaselineOverride
 
+	// Specifies whether to use S3 dualstack endpoints for the patch snapshot download
+	// URL. Set to true to receive a presigned URL that supports both IPv4 and IPv6
+	// connectivity. Set to false to use standard IPv4-only endpoints. Default is false
+	// . This parameter is required for managed nodes in IPv6-only environments.
+	UseS3DualStackEndpoint bool
+
 	noSmithyDocumentSerde
 }
 

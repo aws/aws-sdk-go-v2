@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,9 +37,12 @@ type UpdateInstanceInput struct {
 	// This member is required.
 	InstanceArn *string
 
+	// Specifies the encryption configuration for your IAM Identity Center instance.
+	// You can use this to configure customer managed KMS keys (CMK) or Amazon Web
+	// Services owned KMS keys for encrypting your instance data.
+	EncryptionConfiguration *types.EncryptionConfiguration
+
 	// Updates the instance name.
-	//
-	// This member is required.
 	Name *string
 
 	noSmithyDocumentSerde
