@@ -1,3 +1,7 @@
+# v1.40.1 (2025-09-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.40.0 (2025-09-11)
 
 * **Feature**: Added nodeLabel support in container provider to aid hardware isolation support for virtual cluster and security configuration.

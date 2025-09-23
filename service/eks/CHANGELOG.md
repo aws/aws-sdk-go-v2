@@ -1,3 +1,7 @@
+# v1.74.1 (2025-09-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.74.0 (2025-09-22)
 
 * **Feature**: Adds support for RepairConfig overrides and configurations in EKS Managed Node Groups.

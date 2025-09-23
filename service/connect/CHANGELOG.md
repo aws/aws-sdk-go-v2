@@ -1,3 +1,7 @@
+# v1.140.1 (2025-09-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.140.0 (2025-09-19)
 
 * **Feature**: This release adds a persistent connection field to UserPhoneConfig that maintains agent's softphone media connection for faster call connections.

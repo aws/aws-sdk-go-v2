@@ -1,3 +1,7 @@
+# v1.21.1 (2025-09-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2025-09-15)
 
 * **Feature**: Added support for OpenID Connect (OIDC) custom authorizer

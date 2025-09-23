@@ -1,3 +1,7 @@
+# v1.83.1 (2025-09-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.83.0 (2025-09-19)
 
 * **Feature**: Add MinBitrate for QVBR mode under H264/H265/AV1 output codec. Add GopBReference, GopNumBFrames, SubGopLength fields under H265 output codec.

@@ -1,3 +1,8 @@
+# v1.34.0 (2025-09-23)
+
+* **Feature**: Added support for running incremental ID mapping for rule-based workflows.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.33.2 (2025-09-10)
 
 * No change notes available for this release.

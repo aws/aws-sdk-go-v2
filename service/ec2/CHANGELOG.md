@@ -1,3 +1,8 @@
+# v1.254.0 (2025-09-23)
+
+* **Feature**: Add Amazon EC2 R8gn instance types
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.253.0 (2025-09-18)
 
 * **Feature**: Allowed AMIs adds support for four new parameters - marketplaceProductCodes, deprecationTimeCondition, creationDateCondition and imageNames

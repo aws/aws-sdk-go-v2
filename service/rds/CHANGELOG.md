@@ -1,3 +1,7 @@
+# v1.107.1 (2025-09-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.107.0 (2025-09-11)
 
 * **Feature**: Adds support for end-to-end IAM authentication in RDS Proxy for MySQL, MariaDB, and PostgreSQL engines.

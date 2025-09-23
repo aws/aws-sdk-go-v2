@@ -1,3 +1,7 @@
+# v1.64.1 (2025-09-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.64.0 (2025-09-11)
 
 * **Feature**: This release supports hook details for Amazon ECS lifecycle hooks.

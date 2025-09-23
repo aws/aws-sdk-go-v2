@@ -1,3 +1,7 @@
+# v1.57.9 (2025-09-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.57.8 (2025-09-22)
 
 * **Documentation**: Starting in JAN 2026, AWS Batch will change the default AMI for new Amazon ECS compute environments from Amazon Linux 2 to Amazon Linux 2023. We recommend migrating AWS Batch Amazon ECS compute environments to Amazon Linux 2023 to maintain optimal performance and security.

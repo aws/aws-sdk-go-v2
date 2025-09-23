@@ -1,3 +1,7 @@
+# v1.20.1 (2025-09-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.0 (2025-09-19)
 
 * **Feature**: Added support for cross-account Active Directories.

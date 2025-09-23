@@ -1,3 +1,22 @@
+# Release (2025-09-23)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.34.0](service/cleanrooms/CHANGELOG.md#v1340-2025-09-23)
+  * **Feature**: Added support for running incremental ID mapping for rule-based workflows.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.254.0](service/ec2/CHANGELOG.md#v12540-2025-09-23)
+  * **Feature**: Add Amazon EC2 R8gn instance types
+* `github.com/aws/aws-sdk-go-v2/service/entityresolution`: [v1.25.0](service/entityresolution/CHANGELOG.md#v1250-2025-09-23)
+  * **Feature**: Support incremental id mapping workflow for AWS Entity Resolution
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.65.0](service/ssm/CHANGELOG.md#v1650-2025-09-23)
+  * **Feature**: Added Dualstack support to GetDeployablePatchSnapshotForInstance
+* `github.com/aws/aws-sdk-go-v2/service/ssoadmin`: [v1.36.0](service/ssoadmin/CHANGELOG.md#v1360-2025-09-23)
+  * **Feature**: Add support for encryption at rest with Customer Managed KMS Key in AWS IAM Identity Center
+* `github.com/aws/aws-sdk-go-v2/service/ssooidc`: [v1.35.0](service/ssooidc/CHANGELOG.md#v1350-2025-09-23)
+  * **Feature**: This release includes exception definition and documentation updates.
+
 # Release (2025-09-22)
 
 ## General Highlights

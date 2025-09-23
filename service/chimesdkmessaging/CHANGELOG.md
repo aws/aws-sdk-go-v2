@@ -1,3 +1,7 @@
+# v1.32.1 (2025-09-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.32.0 (2025-09-18)
 
 * **Feature**: Amazon Chime SDK Messaging GetMessagingSessionEndpoint API now returns dual-stack WebSocket endpoints supporting IPv4/IPv6.

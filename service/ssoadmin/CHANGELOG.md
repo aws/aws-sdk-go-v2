@@ -1,3 +1,8 @@
+# v1.36.0 (2025-09-23)
+
+* **Feature**: Add support for encryption at rest with Customer Managed KMS Key in AWS IAM Identity Center
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.35.4 (2025-09-10)
 
 * No change notes available for this release.

@@ -1,3 +1,7 @@
+# v1.39.1 (2025-09-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.39.0 (2025-09-18)
 
 * **Feature**: Added BillingViewHealthStatus Exception which is thrown when a Budget is created or updated with a Billing View that is not in the HEALTHY status

@@ -1,3 +1,7 @@
+# v1.25.1 (2025-09-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.25.0 (2025-09-12)
 
 * **Feature**: Add support for certificates to be signed by 3rd party certificate authorities.  New API GetCertificateSigningRequest API and support for providing certificates at run-time for tr-34 import/export

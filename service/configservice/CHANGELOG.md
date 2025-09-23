@@ -1,3 +1,7 @@
+# v1.58.1 (2025-09-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.58.0 (2025-09-19)
 
 * **Feature**: Add UNKNOWN state to RemediationExecutionState and add IN_PROGRESS/EXITED/UNKNOWN states to RemediationExecutionStepState.
