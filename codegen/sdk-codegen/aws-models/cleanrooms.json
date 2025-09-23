@@ -6338,6 +6338,9 @@
                     "target": "com.amazonaws.cleanrooms#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.cleanrooms#ServiceQuotaExceededException"
+                },
+                {
                     "target": "com.amazonaws.cleanrooms#ThrottlingException"
                 },
                 {
@@ -9943,6 +9946,29 @@
                 "smithy.api#documentation": "<p>An object representing the collaboration member's payment responsibilities set by the collaboration creator for query and job compute costs.</p>"
             }
         },
+        "com.amazonaws.cleanrooms#JobType": {
+            "type": "enum",
+            "members": {
+                "BATCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BATCH"
+                    }
+                },
+                "INCREMENTAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCREMENTAL"
+                    }
+                },
+                "DELETE_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_ONLY"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cleanrooms#JoinOperator": {
             "type": "string",
             "traits": {
@@ -13003,6 +13029,12 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {},
                         "smithy.api#resourceIdentifier": "MembershipId"
+                    }
+                },
+                "jobType": {
+                    "target": "com.amazonaws.cleanrooms#JobType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job type of the rule-based ID mapping job. Valid values include:</p> <p> <code>INCREMENTAL</code>: Processes only new or changed data since the last job run. This is the default job type if the ID mapping workflow was created in Entity Resolution with <code>incrementalRunConfig</code> specified.</p> <p> <code>BATCH</code>: Processes all data from the input source, regardless of previous job runs. This is the default job type if the ID mapping workflow was created in Entity Resolution but <code>incrementalRunConfig</code> wasn't specified.</p> <p> <code>DELETE_ONLY</code>: Processes only deletion requests from <code>BatchDeleteUniqueId</code>, which is set in Entity Resolution.</p> <p>For more information about <code>incrementalRunConfig</code> and <code>BatchDeleteUniqueId</code>, see the <a href=\"https://docs.aws.amazon.com/entityresolution/latest/apireference/Welcome.html\">Entity Resolution API Reference</a>.</p>"
                     }
                 }
             },
