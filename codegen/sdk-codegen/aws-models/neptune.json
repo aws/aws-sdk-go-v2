@@ -1778,7 +1778,7 @@
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The identifier of the DB cluster snapshot to copy. This parameter is not\n      case-sensitive.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must specify a valid system snapshot in the \"available\" state.</p>\n            </li>\n            <li>\n               <p>Specify a valid DB snapshot identifier.</p>\n            </li>\n         </ul>\n         <p>Example: <code>my-cluster-snapshot1</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The identifier of the DB cluster snapshot to copy. This parameter is not\n      case-sensitive. If the source DB cluster snapshot is in a different region or \n      owned by another account, specify the snapshot ARN.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must specify a valid system snapshot in the \"available\" state.</p>\n            </li>\n            <li>\n               <p>Specify a valid DB snapshot identifier.</p>\n            </li>\n         </ul>\n         <p>Example: <code>my-cluster-snapshot1</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
