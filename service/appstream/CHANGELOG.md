@@ -1,3 +1,7 @@
+# v1.49.6 (2025-09-24)
+
+* **Documentation**: G6f instance support for AppStream 2.0
+
 # v1.49.5 (2025-09-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

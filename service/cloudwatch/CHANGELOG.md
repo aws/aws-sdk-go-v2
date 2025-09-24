@@ -1,3 +1,7 @@
+# v1.51.0 (2025-09-24)
+
+* **Feature**: Fix default dualstack FIPS endpoints in AWS GovCloud(US) regions
+
 # v1.50.2 (2025-09-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

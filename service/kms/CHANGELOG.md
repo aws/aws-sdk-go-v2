@@ -1,3 +1,7 @@
+# v1.45.5 (2025-09-24)
+
+* **Documentation**: Documentation only updates for KMS.
+
 # v1.45.4 (2025-09-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

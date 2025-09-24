@@ -1,3 +1,7 @@
+# v1.42.4 (2025-09-24)
+
+* **Documentation**: Doc-only update to address customer use.
+
 # v1.42.3 (2025-09-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "083e37d2-d2f3-48e9-b6e3-e39fef735c03",
-    "type": "documentation",
-    "description": "Doc-only update to address customer use.",
-    "modules": [
-        "service/neptune"
-    ]
-}

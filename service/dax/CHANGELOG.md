@@ -1,3 +1,7 @@
+# v1.29.0 (2025-09-24)
+
+* **Feature**: This release adds support for IPv6-only, DUAL_STACK DAX instances
+
 # v1.28.5 (2025-09-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

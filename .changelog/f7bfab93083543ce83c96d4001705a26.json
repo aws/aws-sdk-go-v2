@@ -1,8 +1,0 @@
-{
-    "id": "f7bfab93-0835-43ce-83c9-6d4001705a26",
-    "type": "feature",
-    "description": "Fix default dualstack FIPS endpoints in AWS GovCloud(US) regions",
-    "modules": [
-        "service/cloudwatch"
-    ]
-}

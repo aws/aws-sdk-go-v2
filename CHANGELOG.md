@@ -1,3 +1,17 @@
+# Release (2025-09-24)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.49.6](service/appstream/CHANGELOG.md#v1496-2025-09-24)
+  * **Documentation**: G6f instance support for AppStream 2.0
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.51.0](service/cloudwatch/CHANGELOG.md#v1510-2025-09-24)
+  * **Feature**: Fix default dualstack FIPS endpoints in AWS GovCloud(US) regions
+* `github.com/aws/aws-sdk-go-v2/service/dax`: [v1.29.0](service/dax/CHANGELOG.md#v1290-2025-09-24)
+  * **Feature**: This release adds support for IPv6-only, DUAL_STACK DAX instances
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.45.5](service/kms/CHANGELOG.md#v1455-2025-09-24)
+  * **Documentation**: Documentation only updates for KMS.
+* `github.com/aws/aws-sdk-go-v2/service/neptune`: [v1.42.4](service/neptune/CHANGELOG.md#v1424-2025-09-24)
+  * **Documentation**: Doc-only update to address customer use.
+
 # Release (2025-09-23)
 
 ## General Highlights

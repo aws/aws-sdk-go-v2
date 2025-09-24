@@ -1,8 +1,0 @@
-{
-    "id": "10b0a56b-5822-4448-b14a-a51842ae5631",
-    "type": "documentation",
-    "description": "G6f instance support for AppStream 2.0",
-    "modules": [
-        "service/appstream"
-    ]
-}
