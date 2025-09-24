@@ -1,0 +1,8 @@
+{
+    "id": "ed67d716-63d6-47ec-80c6-730b901a907d",
+    "type": "documentation",
+    "description": "Documentation only updates for KMS.",
+    "modules": [
+        "service/kms"
+    ]
+}

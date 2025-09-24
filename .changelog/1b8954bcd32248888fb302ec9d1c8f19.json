@@ -1,0 +1,8 @@
+{
+    "id": "1b8954bc-d322-4888-8fb3-02ec9d1c8f19",
+    "type": "feature",
+    "description": "This release adds support for IPv6-only, DUAL_STACK DAX instances",
+    "modules": [
+        "service/dax"
+    ]
+}

@@ -59,8 +59,8 @@ func (e *ClusterNotFoundFault) ErrorCode() string {
 }
 func (e *ClusterNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have attempted to exceed the maximum number of DAX clusters for your AWS
-// account.
+// You have attempted to exceed the maximum number of DAX clusters for your Amazon
+// Web Services account.
 type ClusterQuotaForCustomerExceededFault struct {
 	Message *string
 
@@ -351,7 +351,8 @@ func (e *NodeQuotaForClusterExceededFault) ErrorCode() string {
 }
 func (e *NodeQuotaForClusterExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have attempted to exceed the maximum number of nodes for your AWS account.
+// You have attempted to exceed the maximum number of nodes for your Amazon Web
+// Services account.
 type NodeQuotaForCustomerExceededFault struct {
 	Message *string
 
@@ -482,8 +483,8 @@ func (e *ServiceLinkedRoleNotFoundFault) ErrorCode() string {
 func (e *ServiceLinkedRoleNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You have reached the maximum number of x509 certificates that can be created
-// for encrypted clusters in a 30 day period. Contact AWS customer support to
-// discuss options for continuing to create encrypted clusters.
+// for encrypted clusters in a 30 day period. Contact Amazon Web Services customer
+// support to discuss options for continuing to create encrypted clusters.
 type ServiceQuotaExceededException struct {
 	Message *string
 
@@ -639,6 +640,36 @@ func (e *SubnetInUse) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *SubnetInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The specified subnet can't be used for the requested network type. This error
+// occurs when either there aren't enough subnets of the required network type to
+// create the cluster, or when you try to use a subnet that doesn't support the
+// requested network type (for example, trying to create a dual-stack cluster with
+// a subnet that doesn't have IPv6 CIDR).
+type SubnetNotAllowedFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *SubnetNotAllowedFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *SubnetNotAllowedFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *SubnetNotAllowedFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "SubnetNotAllowedFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *SubnetNotAllowedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request cannot be processed because it would exceed the allowed number of
 // subnets in a subnet group.

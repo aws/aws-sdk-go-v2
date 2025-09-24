@@ -134,6 +134,16 @@ type CreateImageBuilderInput struct {
 	//
 	//   - stream.graphics.gr6.8xlarge
 	//
+	//   - stream.graphics.g6f.large
+	//
+	//   - stream.graphics.g6f.xlarge
+	//
+	//   - stream.graphics.g6f.2xlarge
+	//
+	//   - stream.graphics.g6f.4xlarge
+	//
+	//   - stream.graphics.gr6f.4xlarge
+	//
 	// This member is required.
 	InstanceType *string
 

@@ -326,8 +326,9 @@ type CreateKeyInput struct {
 
 	// Determines the [cryptographic operations] for which you can use the KMS key. The default value is
 	// ENCRYPT_DECRYPT . This parameter is optional when you are creating a symmetric
-	// encryption KMS key; otherwise, it is required. You can't change the KeyUsage
-	// value after the KMS key is created.
+	// encryption KMS key; otherwise, it is required. You can't change the [KeyUsage]KeyUsage
+	// value after the KMS key is created. Each KMS key can have only one key usage.
+	// This follows key usage best practices according to [NIST SP 800-57 Recommendations for Key Management], section 5.2, Key usage.
 	//
 	// Select only one valid value.
 	//
@@ -350,6 +351,8 @@ type CreateKeyInput struct {
 	//   ENCRYPT_DECRYPT , SIGN_VERIFY , or KEY_AGREEMENT .
 	//
 	// [cryptographic operations]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-cryptography.html#cryptographic-operations
+	// [NIST SP 800-57 Recommendations for Key Management]: https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final
+	// [KeyUsage]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html#key-usage
 	KeyUsage types.KeyUsageType
 
 	// Creates a multi-Region primary key that you can replicate into other Amazon Web

@@ -49,7 +49,7 @@ type IncreaseReplicationFactorInput struct {
 
 type IncreaseReplicationFactorOutput struct {
 
-	// A description of the DAX cluster. with its new replication factor.
+	// A description of the DAX cluster, with its new replication factor.
 	Cluster *types.Cluster
 
 	// Metadata pertaining to the operation's result.

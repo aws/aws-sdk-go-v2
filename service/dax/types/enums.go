@@ -62,6 +62,27 @@ func (IsModifiable) Values() []IsModifiable {
 	}
 }
 
+type NetworkType string
+
+// Enum values for NetworkType
+const (
+	NetworkTypeIpv4      NetworkType = "ipv4"
+	NetworkTypeIpv6      NetworkType = "ipv6"
+	NetworkTypeDualStack NetworkType = "dual_stack"
+)
+
+// Values returns all known values for NetworkType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NetworkType) Values() []NetworkType {
+	return []NetworkType{
+		"ipv4",
+		"ipv6",
+		"dual_stack",
+	}
+}
+
 type ParameterType string
 
 // Enum values for ParameterType

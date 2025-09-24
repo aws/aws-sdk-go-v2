@@ -1488,6 +1488,11 @@ func awsAwsjson11_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 		ok.String(*v.IamRoleArn)
 	}
 
+	if len(v.NetworkType) > 0 {
+		ok := object.Key("NetworkType")
+		ok.String(string(v.NetworkType))
+	}
+
 	if v.NodeType != nil {
 		ok := object.Key("NodeType")
 		ok.String(*v.NodeType)

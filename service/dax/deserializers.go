@@ -409,6 +409,9 @@ func awsAwsjson11_deserializeOpErrorCreateSubnetGroup(response *smithyhttp.Respo
 	case strings.EqualFold("SubnetGroupQuotaExceededFault", errorCode):
 		return awsAwsjson11_deserializeErrorSubnetGroupQuotaExceededFault(response, errorBody)
 
+	case strings.EqualFold("SubnetNotAllowedFault", errorCode):
+		return awsAwsjson11_deserializeErrorSubnetNotAllowedFault(response, errorBody)
+
 	case strings.EqualFold("SubnetQuotaExceededFault", errorCode):
 		return awsAwsjson11_deserializeErrorSubnetQuotaExceededFault(response, errorBody)
 
@@ -2626,6 +2629,9 @@ func awsAwsjson11_deserializeOpErrorUpdateSubnetGroup(response *smithyhttp.Respo
 	case strings.EqualFold("SubnetInUse", errorCode):
 		return awsAwsjson11_deserializeErrorSubnetInUse(response, errorBody)
 
+	case strings.EqualFold("SubnetNotAllowedFault", errorCode):
+		return awsAwsjson11_deserializeErrorSubnetNotAllowedFault(response, errorBody)
+
 	case strings.EqualFold("SubnetQuotaExceededFault", errorCode):
 		return awsAwsjson11_deserializeErrorSubnetQuotaExceededFault(response, errorBody)
 
@@ -3479,6 +3485,41 @@ func awsAwsjson11_deserializeErrorSubnetInUse(response *smithyhttp.Response, err
 	return output
 }
 
+func awsAwsjson11_deserializeErrorSubnetNotAllowedFault(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.SubnetNotAllowedFault{}
+	err := awsAwsjson11_deserializeDocumentSubnetNotAllowedFault(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
 func awsAwsjson11_deserializeErrorSubnetQuotaExceededFault(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -3667,6 +3708,15 @@ func awsAwsjson11_deserializeDocumentCluster(v **types.Cluster, value interface{
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.IamRoleArn = ptr.String(jtv)
+			}
+
+		case "NetworkType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkType to be of type string, got %T instead", value)
+				}
+				sv.NetworkType = types.NetworkType(jtv)
 			}
 
 		case "NodeIdsToRemove":
@@ -4398,6 +4448,42 @@ func awsAwsjson11_deserializeDocumentInvalidVPCNetworkStateFault(v **types.Inval
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentNetworkTypeList(v *[]types.NetworkType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.NetworkType
+	if *v == nil {
+		cv = []types.NetworkType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.NetworkType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected NetworkType to be of type string, got %T instead", value)
+			}
+			col = types.NetworkType(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -5453,6 +5539,11 @@ func awsAwsjson11_deserializeDocumentSubnet(v **types.Subnet, value interface{})
 				sv.SubnetIdentifier = ptr.String(jtv)
 			}
 
+		case "SupportedNetworkTypes":
+			if err := awsAwsjson11_deserializeDocumentNetworkTypeList(&sv.SupportedNetworkTypes, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -5504,6 +5595,11 @@ func awsAwsjson11_deserializeDocumentSubnetGroup(v **types.SubnetGroup, value in
 
 		case "Subnets":
 			if err := awsAwsjson11_deserializeDocumentSubnetList(&sv.Subnets, value); err != nil {
+				return err
+			}
+
+		case "SupportedNetworkTypes":
+			if err := awsAwsjson11_deserializeDocumentNetworkTypeList(&sv.SupportedNetworkTypes, value); err != nil {
 				return err
 			}
 
@@ -5790,6 +5886,46 @@ func awsAwsjson11_deserializeDocumentSubnetList(v *[]types.Subnet, value interfa
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSubnetNotAllowedFault(v **types.SubnetNotAllowedFault, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SubnetNotAllowedFault
+	if *v == nil {
+		sv = &types.SubnetNotAllowedFault{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExceptionMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

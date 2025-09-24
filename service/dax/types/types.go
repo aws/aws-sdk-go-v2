@@ -40,6 +40,15 @@ type Cluster struct {
 	// behalf.
 	IamRoleArn *string
 
+	// The IP address type of the cluster. Values are:
+	//
+	//   - ipv4 - IPv4 addresses only
+	//
+	//   - ipv6 - IPv6 addresses only
+	//
+	//   - dual_stack - Both IPv4 and IPv6 addresses
+	NetworkType NetworkType
+
 	// A list of nodes to be removed from the cluster.
 	NodeIdsToRemove []string
 
@@ -308,6 +317,11 @@ type Subnet struct {
 	// The system-assigned identifier for the subnet.
 	SubnetIdentifier *string
 
+	// The network types supported by this subnet. Returns an array of strings that
+	// can include ipv4 , ipv6 , or both, indicating whether the subnet supports IPv4
+	// only, IPv6 only, or dual-stack deployments.
+	SupportedNetworkTypes []NetworkType
+
 	noSmithyDocumentSerde
 }
 
@@ -327,6 +341,11 @@ type SubnetGroup struct {
 	// A list of subnets associated with the subnet group.
 	Subnets []Subnet
 
+	// The network types supported by this subnet. Returns an array of strings that
+	// can include ipv4 , ipv6 , or both, indicating whether the subnet group supports
+	// IPv4 only, IPv6 only, or dual-stack deployments.
+	SupportedNetworkTypes []NetworkType
+
 	// The Amazon Virtual Private Cloud identifier (VPC ID) of the subnet group.
 	VpcId *string
 
@@ -336,9 +355,10 @@ type SubnetGroup struct {
 // A description of a tag. Every tag is a key-value pair. You can add up to 50
 // tags to a single DAX cluster.
 //
-// AWS-assigned tag names and values are automatically assigned the aws: prefix,
-// which the user cannot assign. AWS-assigned tag names do not count towards the
-// tag limit of 50. User-assigned tag names have the prefix user: .
+// Amazon Web Services-assigned tag names and values are automatically assigned
+// the aws: prefix, which the user cannot assign. Amazon Web Services-assigned tag
+// names do not count towards the tag limit of 50. User-assigned tag names have the
+// prefix user: .
 //
 // You cannot backdate the application of a tag.
 type Tag struct {
