@@ -3782,6 +3782,18 @@
                     "traits": {
                         "smithy.api#enumValue": "DENYLIST"
                     }
+                },
+                "REJECTLIST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REJECTLIST"
+                    }
+                },
+                "ALERTLIST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALERTLIST"
+                    }
                 }
             }
         },
@@ -7187,7 +7199,7 @@
                 "GeneratedRulesType": {
                     "target": "com.amazonaws.networkfirewall#GeneratedRulesType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether you want to allow or deny access to the domains in your target list.</p>",
+                        "smithy.api#documentation": "<p>Whether you want to apply allow, reject, alert, or drop behavior to the domains in your target list.</p>\n         <note>\n            <p>When logging is enabled and you choose Alert, traffic that matches the domain specifications \n            generates an alert in the firewall's logs. Then, traffic either passes, is rejected, or drops based on other rules in the firewall policy.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 }

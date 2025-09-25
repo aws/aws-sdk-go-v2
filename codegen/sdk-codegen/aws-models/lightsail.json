@@ -199,7 +199,7 @@
                 "message": {
                     "target": "com.amazonaws.lightsail#BPAStatusMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>A message that provides a reason for a <code>Failed</code> or <code>Defaulted</code>\n      synchronization status.</p>\n         <p>The following messages are possible:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SYNC_ON_HOLD</code> - The synchronization has not yet happened. This status\n          message occurs immediately after you create your first Lightsail bucket. This status\n          message should change after the first synchronization happens, approximately 1 hour after\n          the first bucket is created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DEFAULTED_FOR_SLR_MISSING</code> - The synchronization failed because the\n          required service-linked role is missing from your Amazon Web Services account. The\n          account-level BPA configuration for your Lightsail buckets is defaulted to\n            <i>active</i> until the synchronization can occur. This means that all\n          your buckets are private and not publicly accessible. For more information about how to\n          create the required service-linked role to allow synchronization, see <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-using-service-linked-roles\">Using Service-Linked Roles for Amazon Lightsail</a> in the\n              <i>Amazon Lightsail Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DEFAULTED_FOR_SLR_MISSING_ON_HOLD</code> - The synchronization failed because\n          the required service-linked role is missing from your Amazon Web Services account.\n          Account-level BPA is not yet configured for your Lightsail buckets. Therefore, only the\n          bucket access permissions and individual object access permissions apply to your\n          Lightsail buckets. For more information about how to create the required service-linked\n          role to allow synchronization, see <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-using-service-linked-roles\">Using Service-Linked Roles for Amazon Lightsail</a> in the\n              <i>Amazon Lightsail Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Unknown</code> - The reason that synchronization failed is unknown. Contact\n            Amazon Web ServicesSupport for more information.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A message that provides a reason for a <code>Failed</code> or <code>Defaulted</code>\n      synchronization status.</p>\n         <p>The following messages are possible:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SYNC_ON_HOLD</code> - The synchronization has not yet happened. This status\n          message occurs immediately after you create your first Lightsail bucket. This status\n          message should change after the first synchronization happens, approximately 1 hour after\n          the first bucket is created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DEFAULTED_FOR_SLR_MISSING</code> - The synchronization failed because the\n          required service-linked role is missing from your Amazon Web Services account. The\n          account-level BPA configuration for your Lightsail buckets is defaulted to\n            <i>active</i> until the synchronization can occur. This means that all\n          your buckets are private and not publicly accessible. For more information about how to\n          create the required service-linked role to allow synchronization, see <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-using-service-linked-roles\">Using Service-Linked Roles for Amazon Lightsail</a> in the\n              <i>Amazon Lightsail Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DEFAULTED_FOR_SLR_MISSING_ON_HOLD</code> - The synchronization failed because\n          the required service-linked role is missing from your Amazon Web Services account.\n          Account-level BPA is not yet configured for your Lightsail buckets. Therefore, only the\n          bucket access permissions and individual object access permissions apply to your\n          Lightsail buckets. For more information about how to create the required service-linked\n          role to allow synchronization, see <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-using-service-linked-roles\">Using Service-Linked Roles for Amazon Lightsail</a> in the\n              <i>Amazon Lightsail Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Unknown</code> - The reason that synchronization failed is unknown. Contact\n            Amazon Web Services Support for more information.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "bpaImpactsLightsail": {
@@ -5727,7 +5727,7 @@
                 "smithy.api#documentation": "<p>Deletes an alarm.</p>\n         <p>An alarm is used to monitor a single metric for one of your resources. When a metric\n      condition is met, the alarm can notify you by email, SMS text message, and a banner displayed\n      on the Amazon Lightsail console. For more information, see <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-alarms\">Alarms\n        in Amazon Lightsail</a>.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
-                    "uri": "/ls/api/2016-11-28/DeleteAlarm",
+                    "uri": "/ls/api/2016-11-28/DeleteAlarm/{alarmName}",
                     "code": 200
                 }
             }
@@ -5739,6 +5739,7 @@
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the alarm to delete.</p>",
+                        "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 }
@@ -8907,19 +8908,22 @@
                 "alarmName": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the alarm.</p>\n         <p>Specify an alarm name to return information about a specific alarm.</p>"
+                        "smithy.api#documentation": "<p>The name of the alarm.</p>\n         <p>Specify an alarm name to return information about a specific alarm.</p>",
+                        "smithy.api#httpQuery": "alarmName"
                     }
                 },
                 "pageToken": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>To get a page token, perform an initial <code>GetAlarms</code> request. If your results\n      are paginated, the response will return a next page token that you can specify as the page\n      token in a subsequent request.</p>"
+                        "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>To get a page token, perform an initial <code>GetAlarms</code> request. If your results\n      are paginated, the response will return a next page token that you can specify as the page\n      token in a subsequent request.</p>",
+                        "smithy.api#httpQuery": "pageToken"
                     }
                 },
                 "monitoredResourceName": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Lightsail resource being monitored by the alarm.</p>\n         <p>Specify a monitored resource name to return information about all alarms for a specific\n      resource.</p>"
+                        "smithy.api#documentation": "<p>The name of the Lightsail resource being monitored by the alarm.</p>\n         <p>Specify a monitored resource name to return information about all alarms for a specific\n      resource.</p>",
+                        "smithy.api#httpQuery": "monitoredResourceName"
                     }
                 }
             },
@@ -9750,7 +9754,8 @@
                 "protocols": {
                     "target": "com.amazonaws.lightsail#ContactProtocolsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The protocols used to send notifications, such as <code>Email</code>, or <code>SMS</code>\n      (text messaging).</p>\n         <p>Specify a protocol in your request to return information about a specific contact method\n      protocol.</p>"
+                        "smithy.api#documentation": "<p>The protocols used to send notifications, such as <code>Email</code>, or <code>SMS</code>\n      (text messaging).</p>\n         <p>Specify a protocol in your request to return information about a specific contact method\n      protocol.</p>",
+                        "smithy.api#httpQuery": "protocols"
                     }
                 }
             },
@@ -22712,7 +22717,7 @@
                 "smithy.api#documentation": "<p>Tests an alarm by displaying a banner on the Amazon Lightsail console. If a notification\n      trigger is configured for the specified alarm, the test also sends a notification to the\n      notification protocol (<code>Email</code> and/or <code>SMS</code>) configured for the\n      alarm.</p>\n         <p>An alarm is used to monitor a single metric for one of your resources. When a metric\n      condition is met, the alarm can notify you by email, SMS text message, and a banner displayed\n      on the Amazon Lightsail console. For more information, see <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-alarms\">Alarms\n        in Amazon Lightsail</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/ls/api/2016-11-28/TestAlarm",
+                    "uri": "/ls/api/2016-11-28/TestAlarm/{alarmName}",
                     "code": 200
                 }
             }
@@ -22724,6 +22729,7 @@
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the alarm to test.</p>",
+                        "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 },
@@ -22731,6 +22737,7 @@
                     "target": "com.amazonaws.lightsail#AlarmState",
                     "traits": {
                         "smithy.api#documentation": "<p>The alarm state to test.</p>\n         <p>An alarm has the following possible states that can be tested:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALARM</code> - The metric is outside of the defined threshold.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INSUFFICIENT_DATA</code> - The alarm has just started, the metric is not\n          available, or not enough data is available for the metric to determine the alarm\n          state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OK</code> - The metric is within the defined threshold.</p>\n            </li>\n         </ul>",
+                        "smithy.api#httpQuery": "state",
                         "smithy.api#required": {}
                     }
                 }
