@@ -1,3 +1,7 @@
+# v1.57.0 (2025-09-25)
+
+* **Feature**: Network Firewall now introduces Reject and Alert action support for stateful domain list rule groups, providing customers with more granular control over their network traffic.
+
 # v1.56.1 (2025-09-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.129.0 (2025-09-25)
+
+* **Feature**: Update GetConnection(s) API to return KmsKeyArn & Add 63 missing connection types
+
 # v1.128.4 (2025-09-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

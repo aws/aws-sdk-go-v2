@@ -1,3 +1,13 @@
+# Release (2025-09-25)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.129.0](service/glue/CHANGELOG.md#v11290-2025-09-25)
+  * **Feature**: Update GetConnection(s) API to return KmsKeyArn & Add 63 missing connection types
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.49.0](service/lightsail/CHANGELOG.md#v1490-2025-09-25)
+  * **Feature**: Attribute HTTP binding update for Get/Delete operations
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.57.0](service/networkfirewall/CHANGELOG.md#v1570-2025-09-25)
+  * **Feature**: Network Firewall now introduces Reject and Alert action support for stateful domain list rule groups, providing customers with more granular control over their network traffic.
+
 # Release (2025-09-24)
 
 ## Module Highlights

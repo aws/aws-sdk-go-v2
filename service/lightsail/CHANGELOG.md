@@ -1,3 +1,7 @@
+# v1.49.0 (2025-09-25)
+
+* **Feature**: Attribute HTTP binding update for Get/Delete operations
+
 # v1.48.5 (2025-09-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

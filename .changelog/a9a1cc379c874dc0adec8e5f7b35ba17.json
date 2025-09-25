@@ -1,8 +1,0 @@
-{
-    "id": "a9a1cc37-9c87-4dc0-adec-8e5f7b35ba17",
-    "type": "feature",
-    "description": "Network Firewall now introduces Reject and Alert action support for stateful domain list rule groups, providing customers with more granular control over their network traffic.",
-    "modules": [
-        "service/networkfirewall"
-    ]
-}

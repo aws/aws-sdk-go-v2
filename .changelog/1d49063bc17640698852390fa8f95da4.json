@@ -1,8 +1,0 @@
-{
-    "id": "1d49063b-c176-4069-8852-390fa8f95da4",
-    "type": "feature",
-    "description": "Attribute HTTP binding update for Get/Delete operations",
-    "modules": [
-        "service/lightsail"
-    ]
-}
