@@ -569,35 +569,98 @@ type ConnectionType string
 
 // Enum values for ConnectionType
 const (
-	ConnectionTypeJdbc                     ConnectionType = "JDBC"
-	ConnectionTypeSftp                     ConnectionType = "SFTP"
-	ConnectionTypeMongodb                  ConnectionType = "MONGODB"
-	ConnectionTypeKafka                    ConnectionType = "KAFKA"
-	ConnectionTypeNetwork                  ConnectionType = "NETWORK"
-	ConnectionTypeMarketplace              ConnectionType = "MARKETPLACE"
-	ConnectionTypeCustom                   ConnectionType = "CUSTOM"
-	ConnectionTypeSalesforce               ConnectionType = "SALESFORCE"
-	ConnectionTypeViewValidationRedshift   ConnectionType = "VIEW_VALIDATION_REDSHIFT"
-	ConnectionTypeViewValidationAthena     ConnectionType = "VIEW_VALIDATION_ATHENA"
-	ConnectionTypeGoogleads                ConnectionType = "GOOGLEADS"
-	ConnectionTypeGooglesheets             ConnectionType = "GOOGLESHEETS"
-	ConnectionTypeGoogleanalytics4         ConnectionType = "GOOGLEANALYTICS4"
-	ConnectionTypeServicenow               ConnectionType = "SERVICENOW"
-	ConnectionTypeMarketo                  ConnectionType = "MARKETO"
-	ConnectionTypeSapodata                 ConnectionType = "SAPODATA"
-	ConnectionTypeZendesk                  ConnectionType = "ZENDESK"
-	ConnectionTypeJiracloud                ConnectionType = "JIRACLOUD"
-	ConnectionTypeNetsuiteerp              ConnectionType = "NETSUITEERP"
-	ConnectionTypeHubspot                  ConnectionType = "HUBSPOT"
-	ConnectionTypeFacebookads              ConnectionType = "FACEBOOKADS"
-	ConnectionTypeInstagramads             ConnectionType = "INSTAGRAMADS"
-	ConnectionTypeZohocrm                  ConnectionType = "ZOHOCRM"
-	ConnectionTypeSalesforcepardot         ConnectionType = "SALESFORCEPARDOT"
-	ConnectionTypeSalesforcemarketingcloud ConnectionType = "SALESFORCEMARKETINGCLOUD"
-	ConnectionTypeSlack                    ConnectionType = "SLACK"
-	ConnectionTypeStripe                   ConnectionType = "STRIPE"
-	ConnectionTypeIntercom                 ConnectionType = "INTERCOM"
-	ConnectionTypeSnapchatads              ConnectionType = "SNAPCHATADS"
+	ConnectionTypeJdbc                             ConnectionType = "JDBC"
+	ConnectionTypeSftp                             ConnectionType = "SFTP"
+	ConnectionTypeMongodb                          ConnectionType = "MONGODB"
+	ConnectionTypeKafka                            ConnectionType = "KAFKA"
+	ConnectionTypeNetwork                          ConnectionType = "NETWORK"
+	ConnectionTypeMarketplace                      ConnectionType = "MARKETPLACE"
+	ConnectionTypeCustom                           ConnectionType = "CUSTOM"
+	ConnectionTypeSalesforce                       ConnectionType = "SALESFORCE"
+	ConnectionTypeViewValidationRedshift           ConnectionType = "VIEW_VALIDATION_REDSHIFT"
+	ConnectionTypeViewValidationAthena             ConnectionType = "VIEW_VALIDATION_ATHENA"
+	ConnectionTypeGoogleads                        ConnectionType = "GOOGLEADS"
+	ConnectionTypeGooglesheets                     ConnectionType = "GOOGLESHEETS"
+	ConnectionTypeGoogleanalytics4                 ConnectionType = "GOOGLEANALYTICS4"
+	ConnectionTypeServicenow                       ConnectionType = "SERVICENOW"
+	ConnectionTypeMarketo                          ConnectionType = "MARKETO"
+	ConnectionTypeSapodata                         ConnectionType = "SAPODATA"
+	ConnectionTypeZendesk                          ConnectionType = "ZENDESK"
+	ConnectionTypeJiracloud                        ConnectionType = "JIRACLOUD"
+	ConnectionTypeNetsuiteerp                      ConnectionType = "NETSUITEERP"
+	ConnectionTypeHubspot                          ConnectionType = "HUBSPOT"
+	ConnectionTypeFacebookads                      ConnectionType = "FACEBOOKADS"
+	ConnectionTypeInstagramads                     ConnectionType = "INSTAGRAMADS"
+	ConnectionTypeZohocrm                          ConnectionType = "ZOHOCRM"
+	ConnectionTypeSalesforcepardot                 ConnectionType = "SALESFORCEPARDOT"
+	ConnectionTypeSalesforcemarketingcloud         ConnectionType = "SALESFORCEMARKETINGCLOUD"
+	ConnectionTypeAdobeanalytics                   ConnectionType = "ADOBEANALYTICS"
+	ConnectionTypeSlack                            ConnectionType = "SLACK"
+	ConnectionTypeLinkedin                         ConnectionType = "LINKEDIN"
+	ConnectionTypeMixpanel                         ConnectionType = "MIXPANEL"
+	ConnectionTypeAsana                            ConnectionType = "ASANA"
+	ConnectionTypeStripe                           ConnectionType = "STRIPE"
+	ConnectionTypeSmartsheet                       ConnectionType = "SMARTSHEET"
+	ConnectionTypeDatadog                          ConnectionType = "DATADOG"
+	ConnectionTypeWoocommerce                      ConnectionType = "WOOCOMMERCE"
+	ConnectionTypeIntercom                         ConnectionType = "INTERCOM"
+	ConnectionTypeSnapchatads                      ConnectionType = "SNAPCHATADS"
+	ConnectionTypePaypal                           ConnectionType = "PAYPAL"
+	ConnectionTypeQuickbooks                       ConnectionType = "QUICKBOOKS"
+	ConnectionTypeFacebookpageinsights             ConnectionType = "FACEBOOKPAGEINSIGHTS"
+	ConnectionTypeFreshdesk                        ConnectionType = "FRESHDESK"
+	ConnectionTypeTwilio                           ConnectionType = "TWILIO"
+	ConnectionTypeDocusignmonitor                  ConnectionType = "DOCUSIGNMONITOR"
+	ConnectionTypeFreshsales                       ConnectionType = "FRESHSALES"
+	ConnectionTypeZoom                             ConnectionType = "ZOOM"
+	ConnectionTypeGooglesearchconsole              ConnectionType = "GOOGLESEARCHCONSOLE"
+	ConnectionTypeSalesforcecommercecloud          ConnectionType = "SALESFORCECOMMERCECLOUD"
+	ConnectionTypeSapconcur                        ConnectionType = "SAPCONCUR"
+	ConnectionTypeDynatrace                        ConnectionType = "DYNATRACE"
+	ConnectionTypeMicrosoftdynamic365financeandops ConnectionType = "MICROSOFTDYNAMIC365FINANCEANDOPS"
+	ConnectionTypeMicrosoftteams                   ConnectionType = "MICROSOFTTEAMS"
+	ConnectionTypeBlackbaudraiseredgenxt           ConnectionType = "BLACKBAUDRAISEREDGENXT"
+	ConnectionTypeMailchimp                        ConnectionType = "MAILCHIMP"
+	ConnectionTypeGitlab                           ConnectionType = "GITLAB"
+	ConnectionTypePendo                            ConnectionType = "PENDO"
+	ConnectionTypeProductboard                     ConnectionType = "PRODUCTBOARD"
+	ConnectionTypeCircleci                         ConnectionType = "CIRCLECI"
+	ConnectionTypePipedive                         ConnectionType = "PIPEDIVE"
+	ConnectionTypeSendgrid                         ConnectionType = "SENDGRID"
+	ConnectionTypeAzurecosmos                      ConnectionType = "AZURECOSMOS"
+	ConnectionTypeAzuresql                         ConnectionType = "AZURESQL"
+	ConnectionTypeBigquery                         ConnectionType = "BIGQUERY"
+	ConnectionTypeBlackbaud                        ConnectionType = "BLACKBAUD"
+	ConnectionTypeClouderahive                     ConnectionType = "CLOUDERAHIVE"
+	ConnectionTypeClouderaimpala                   ConnectionType = "CLOUDERAIMPALA"
+	ConnectionTypeCloudwatch                       ConnectionType = "CLOUDWATCH"
+	ConnectionTypeCloudwatchmetrics                ConnectionType = "CLOUDWATCHMETRICS"
+	ConnectionTypeCmdb                             ConnectionType = "CMDB"
+	ConnectionTypeDatalakegen2                     ConnectionType = "DATALAKEGEN2"
+	ConnectionTypeDb2                              ConnectionType = "DB2"
+	ConnectionTypeDb2as400                         ConnectionType = "DB2AS400"
+	ConnectionTypeDocumentdb                       ConnectionType = "DOCUMENTDB"
+	ConnectionTypeDomo                             ConnectionType = "DOMO"
+	ConnectionTypeDynamodb                         ConnectionType = "DYNAMODB"
+	ConnectionTypeGooglecloudstorage               ConnectionType = "GOOGLECLOUDSTORAGE"
+	ConnectionTypeHbase                            ConnectionType = "HBASE"
+	ConnectionTypeKustomer                         ConnectionType = "KUSTOMER"
+	ConnectionTypeMicrosoftdynamics365crm          ConnectionType = "MICROSOFTDYNAMICS365CRM"
+	ConnectionTypeMonday                           ConnectionType = "MONDAY"
+	ConnectionTypeMysql                            ConnectionType = "MYSQL"
+	ConnectionTypeOkta                             ConnectionType = "OKTA"
+	ConnectionTypeOpensearch                       ConnectionType = "OPENSEARCH"
+	ConnectionTypeOracle                           ConnectionType = "ORACLE"
+	ConnectionTypePipedrive                        ConnectionType = "PIPEDRIVE"
+	ConnectionTypePostgresql                       ConnectionType = "POSTGRESQL"
+	ConnectionTypeSaphana                          ConnectionType = "SAPHANA"
+	ConnectionTypeSqlserver                        ConnectionType = "SQLSERVER"
+	ConnectionTypeSynapse                          ConnectionType = "SYNAPSE"
+	ConnectionTypeTeradata                         ConnectionType = "TERADATA"
+	ConnectionTypeTeradatanos                      ConnectionType = "TERADATANOS"
+	ConnectionTypeTimestream                       ConnectionType = "TIMESTREAM"
+	ConnectionTypeTpcds                            ConnectionType = "TPCDS"
+	ConnectionTypeVertica                          ConnectionType = "VERTICA"
 )
 
 // Values returns all known values for ConnectionType. Note that this can be
@@ -631,10 +694,73 @@ func (ConnectionType) Values() []ConnectionType {
 		"ZOHOCRM",
 		"SALESFORCEPARDOT",
 		"SALESFORCEMARKETINGCLOUD",
+		"ADOBEANALYTICS",
 		"SLACK",
+		"LINKEDIN",
+		"MIXPANEL",
+		"ASANA",
 		"STRIPE",
+		"SMARTSHEET",
+		"DATADOG",
+		"WOOCOMMERCE",
 		"INTERCOM",
 		"SNAPCHATADS",
+		"PAYPAL",
+		"QUICKBOOKS",
+		"FACEBOOKPAGEINSIGHTS",
+		"FRESHDESK",
+		"TWILIO",
+		"DOCUSIGNMONITOR",
+		"FRESHSALES",
+		"ZOOM",
+		"GOOGLESEARCHCONSOLE",
+		"SALESFORCECOMMERCECLOUD",
+		"SAPCONCUR",
+		"DYNATRACE",
+		"MICROSOFTDYNAMIC365FINANCEANDOPS",
+		"MICROSOFTTEAMS",
+		"BLACKBAUDRAISEREDGENXT",
+		"MAILCHIMP",
+		"GITLAB",
+		"PENDO",
+		"PRODUCTBOARD",
+		"CIRCLECI",
+		"PIPEDIVE",
+		"SENDGRID",
+		"AZURECOSMOS",
+		"AZURESQL",
+		"BIGQUERY",
+		"BLACKBAUD",
+		"CLOUDERAHIVE",
+		"CLOUDERAIMPALA",
+		"CLOUDWATCH",
+		"CLOUDWATCHMETRICS",
+		"CMDB",
+		"DATALAKEGEN2",
+		"DB2",
+		"DB2AS400",
+		"DOCUMENTDB",
+		"DOMO",
+		"DYNAMODB",
+		"GOOGLECLOUDSTORAGE",
+		"HBASE",
+		"KUSTOMER",
+		"MICROSOFTDYNAMICS365CRM",
+		"MONDAY",
+		"MYSQL",
+		"OKTA",
+		"OPENSEARCH",
+		"ORACLE",
+		"PIPEDRIVE",
+		"POSTGRESQL",
+		"SAPHANA",
+		"SQLSERVER",
+		"SYNAPSE",
+		"TERADATA",
+		"TERADATANOS",
+		"TIMESTREAM",
+		"TPCDS",
+		"VERTICA",
 	}
 }
 

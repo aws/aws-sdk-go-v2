@@ -155,8 +155,10 @@ type GeneratedRulesType string
 
 // Enum values for GeneratedRulesType
 const (
-	GeneratedRulesTypeAllowlist GeneratedRulesType = "ALLOWLIST"
-	GeneratedRulesTypeDenylist  GeneratedRulesType = "DENYLIST"
+	GeneratedRulesTypeAllowlist  GeneratedRulesType = "ALLOWLIST"
+	GeneratedRulesTypeDenylist   GeneratedRulesType = "DENYLIST"
+	GeneratedRulesTypeRejectlist GeneratedRulesType = "REJECTLIST"
+	GeneratedRulesTypeAlertlist  GeneratedRulesType = "ALERTLIST"
 )
 
 // Values returns all known values for GeneratedRulesType. Note that this can be
@@ -167,6 +169,8 @@ func (GeneratedRulesType) Values() []GeneratedRulesType {
 	return []GeneratedRulesType{
 		"ALLOWLIST",
 		"DENYLIST",
+		"REJECTLIST",
+		"ALERTLIST",
 	}
 }
 

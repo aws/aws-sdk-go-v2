@@ -176,7 +176,7 @@ type AccountLevelBpaSync struct {
 	//   Lightsail Developer Guide.
 	//
 	//   - Unknown - The reason that synchronization failed is unknown. Contact Amazon
-	//   Web ServicesSupport for more information.
+	//   Web Services Support for more information.
 	//
 	// [Using Service-Linked Roles for Amazon Lightsail]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-using-service-linked-roles
 	Message BPAStatusMessage

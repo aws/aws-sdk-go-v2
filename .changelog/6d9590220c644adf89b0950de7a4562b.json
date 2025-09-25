@@ -1,0 +1,8 @@
+{
+    "id": "6d959022-0c64-4adf-89b0-950de7a4562b",
+    "type": "feature",
+    "description": "Update GetConnection(s) API to return KmsKeyArn \u0026 Add 63 missing connection types",
+    "modules": [
+        "service/glue"
+    ]
+}

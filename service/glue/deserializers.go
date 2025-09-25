@@ -34406,6 +34406,15 @@ func awsAwsjson11_deserializeDocumentAuthenticationConfiguration(v **types.Authe
 				sv.AuthenticationType = types.AuthenticationType(jtv)
 			}
 
+		case "KmsKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyArn to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyArn = ptr.String(jtv)
+			}
+
 		case "OAuth2Properties":
 			if err := awsAwsjson11_deserializeDocumentOAuth2Properties(&sv.OAuth2Properties, value); err != nil {
 				return err
