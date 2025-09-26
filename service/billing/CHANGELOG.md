@@ -1,3 +1,8 @@
+# v1.8.0 (2025-09-26)
+
+* **Feature**: Add ability to combine custom billing views to create new consolidated views.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.7.6 (2025-09-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,26 @@
+# Release (2025-09-26)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.50.0](service/bedrockagentruntime/CHANGELOG.md#v1500-2025-09-26)
+  * **Feature**: This release enhances the information provided through Flow Traces. New information includes source/next node tracking, execution chains for complex nodes, dependency action (operation) details, and dependency traces.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation`: [v1.10.0](service/bedrockdataautomation/CHANGELOG.md#v1100-2025-09-26)
+  * **Feature**: Added support for configurable Speaker Labeling and Channel Labeling features for Audio modality.
+* `github.com/aws/aws-sdk-go-v2/service/billing`: [v1.8.0](service/billing/CHANGELOG.md#v180-2025-09-26)
+  * **Feature**: Add ability to combine custom billing views to create new consolidated views.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.141.0](service/connect/CHANGELOG.md#v11410-2025-09-26)
+  * **Feature**: Adds supports for manual contact picking (WorkList) operations on Routing Profiles, Agent Management and SearchContacts APIs.
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.57.0](service/costexplorer/CHANGELOG.md#v1570-2025-09-26)
+  * **Feature**: Support for payer account dimension and billing view health status.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodbstreams`: [v1.31.0](service/dynamodbstreams/CHANGELOG.md#v1310-2025-09-26)
+  * **Feature**: Added support for IPv6 compatible endpoints for DynamoDB Streams.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.254.1](service/ec2/CHANGELOG.md#v12541-2025-09-26)
+  * **Documentation**: This release includes documentation updates for Amazon EBS General Purpose SSD (gp3) volumes with larger size and higher IOPS and throughput.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.59.0](service/redshift/CHANGELOG.md#v1590-2025-09-26)
+  * **Feature**: Support tagging and tag propagation to IAM Identity Center for Redshift Idc Applications
+
 # Release (2025-09-25)
 
 ## Module Highlights

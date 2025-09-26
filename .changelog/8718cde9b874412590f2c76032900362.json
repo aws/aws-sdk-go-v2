@@ -1,8 +1,0 @@
-{
-    "id": "8718cde9-b874-4125-90f2-c76032900362",
-    "type": "feature",
-    "description": "Added support for configurable Speaker Labeling and Channel Labeling features for Audio modality.",
-    "modules": [
-        "service/bedrockdataautomation"
-    ]
-}

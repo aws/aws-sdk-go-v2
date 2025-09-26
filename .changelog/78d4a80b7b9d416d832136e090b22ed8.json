@@ -1,8 +1,0 @@
-{
-    "id": "78d4a80b-7b9d-416d-8321-36e090b22ed8",
-    "type": "feature",
-    "description": "This release enhances the information provided through Flow Traces. New information includes source/next node tracking, execution chains for complex nodes, dependency action (operation) details, and dependency traces.",
-    "modules": [
-        "service/bedrockagentruntime"
-    ]
-}

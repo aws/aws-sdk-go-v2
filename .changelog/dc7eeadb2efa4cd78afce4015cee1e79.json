@@ -1,8 +1,0 @@
-{
-    "id": "dc7eeadb-2efa-4cd7-8afc-e4015cee1e79",
-    "type": "feature",
-    "description": "Support tagging and tag propagation to IAM Identity Center for Redshift Idc Applications",
-    "modules": [
-        "service/redshift"
-    ]
-}

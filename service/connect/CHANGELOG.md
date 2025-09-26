@@ -1,3 +1,8 @@
+# v1.141.0 (2025-09-26)
+
+* **Feature**: Adds supports for manual contact picking (WorkList) operations on Routing Profiles, Agent Management and SearchContacts APIs.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.140.1 (2025-09-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

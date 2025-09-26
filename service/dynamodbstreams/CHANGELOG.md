@@ -1,3 +1,8 @@
+# v1.31.0 (2025-09-26)
+
+* **Feature**: Added support for IPv6 compatible endpoints for DynamoDB Streams.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.30.5 (2025-09-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

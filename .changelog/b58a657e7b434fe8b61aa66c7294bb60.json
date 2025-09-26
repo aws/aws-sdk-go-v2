@@ -1,8 +1,0 @@
-{
-    "id": "b58a657e-7b43-4fe8-b61a-a66c7294bb60",
-    "type": "documentation",
-    "description": "This release includes documentation updates for Amazon EBS General Purpose SSD (gp3) volumes with larger size and higher IOPS and throughput.",
-    "modules": [
-        "service/ec2"
-    ]
-}

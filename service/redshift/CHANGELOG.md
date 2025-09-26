@@ -1,3 +1,8 @@
+# v1.59.0 (2025-09-26)
+
+* **Feature**: Support tagging and tag propagation to IAM Identity Center for Redshift Idc Applications
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.58.4 (2025-09-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

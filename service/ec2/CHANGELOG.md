@@ -1,3 +1,8 @@
+# v1.254.1 (2025-09-26)
+
+* **Documentation**: This release includes documentation updates for Amazon EBS General Purpose SSD (gp3) volumes with larger size and higher IOPS and throughput.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.254.0 (2025-09-23)
 
 * **Feature**: Add Amazon EC2 R8gn instance types

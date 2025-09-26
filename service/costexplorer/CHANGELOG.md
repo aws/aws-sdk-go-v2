@@ -1,3 +1,8 @@
+# v1.57.0 (2025-09-26)
+
+* **Feature**: Support for payer account dimension and billing view health status.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.56.1 (2025-09-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

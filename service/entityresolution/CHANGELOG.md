@@ -1,3 +1,7 @@
+# v1.25.1 (2025-09-26)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.25.0 (2025-09-23)
 
 * **Feature**: Support incremental id mapping workflow for AWS Entity Resolution
