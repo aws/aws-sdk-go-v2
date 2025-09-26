@@ -6,10 +6,16 @@
             "version": "2023-09-07",
             "operations": [
                 {
+                    "target": "com.amazonaws.billing#AssociateSourceViews"
+                },
+                {
                     "target": "com.amazonaws.billing#CreateBillingView"
                 },
                 {
                     "target": "com.amazonaws.billing#DeleteBillingView"
+                },
+                {
+                    "target": "com.amazonaws.billing#DisassociateSourceViews"
                 },
                 {
                     "target": "com.amazonaws.billing#GetBillingView"
@@ -1094,10 +1100,101 @@
                 "smithy.api#documentation": "<p>A time range with a start and end time.</p>"
             }
         },
+        "com.amazonaws.billing#AssociateSourceViews": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.billing#AssociateSourceViewsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.billing#AssociateSourceViewsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.billing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.billing#BillingViewHealthStatusException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.billing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Associates one or more source billing views with an existing billing view. This allows creating aggregate billing views that combine data from multiple sources. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Invoke AssociateSourceViews",
+                        "input": {
+                            "arn": "arn:aws:billing::123456789012:billingview/custom-46f47cb2-a11d-43f3-983d-470b5708a899",
+                            "sourceViews": [
+                                "arn:aws:billing::123456789012:billingview/primary",
+                                "arn:aws:billing::123456789012:billingview/custom-d3f9c7e4-8b2f-4a6e-9d3b-2f7c8a1e5f6d"
+                            ]
+                        },
+                        "output": {
+                            "arn": "arn:aws:billing::123456789012:billingview/custom-46f47cb2-a11d-43f3-983d-470b5708a899"
+                        }
+                    }
+                ],
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.billing#AssociateSourceViewsRequest": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.billing#BillingViewArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the billing view to associate source views with. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sourceViews": {
+                    "target": "com.amazonaws.billing#BillingViewSourceViewsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A list of ARNs of the source billing views to associate. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.billing#AssociateSourceViewsResponse": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.billing#BillingViewArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The ARN of the billing view that the source views were associated with. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.billing#BillingViewArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws[a-z-]*:(billing)::[0-9]{12}:billingview/[a-zA-Z0-9/:_\\+=\\.\\-@]{0,59}[a-zA-Z0-9]$"
+                "smithy.api#pattern": "^arn:aws[a-z-]*:(billing)::[0-9]{12}:billingview/[a-zA-Z0-9/:_\\+=\\.\\-@]{0,75}[a-zA-Z0-9]$"
             }
         },
         "com.amazonaws.billing#BillingViewArnList": {
@@ -1156,6 +1253,12 @@
                         "smithy.api#documentation": "<p>The account owner of the billing view. </p>"
                     }
                 },
+                "sourceAccountId": {
+                    "target": "com.amazonaws.billing#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Web Services account ID that owns the source billing view, if this is a derived billing view. </p>"
+                    }
+                },
                 "dataFilterExpression": {
                     "target": "com.amazonaws.billing#Expression",
                     "traits": {
@@ -1173,10 +1276,70 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time when the billing view was last updated. </p>"
                     }
+                },
+                "derivedViewCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The number of billing views that use this billing view as a source. </p>"
+                    }
+                },
+                "sourceViewCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The number of source views associated with this billing view. </p>"
+                    }
+                },
+                "viewDefinitionLastUpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The timestamp of when the billing view definition was last updated. </p>"
+                    }
+                },
+                "healthStatus": {
+                    "target": "com.amazonaws.billing#BillingViewHealthStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The current health status of the billing view. </p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The metadata associated to the billing view. </p>"
+            }
+        },
+        "com.amazonaws.billing#BillingViewHealthStatus": {
+            "type": "structure",
+            "members": {
+                "statusCode": {
+                    "target": "com.amazonaws.billing#BillingViewStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current health status code of the billing view.</p>"
+                    }
+                },
+                "statusReasons": {
+                    "target": "com.amazonaws.billing#BillingViewStatusReasons",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of reasons explaining the current health status, if applicable.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Represents the health status of a billing view, including a status code and optional reasons for the status. </p>"
+            }
+        },
+        "com.amazonaws.billing#BillingViewHealthStatusException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.billing#ErrorMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Exception thrown when a billing view's health status prevents an operation from being performed. This may occur if the billing view is in a state other than <code>HEALTHY</code>.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
             }
         },
         "com.amazonaws.billing#BillingViewList": {
@@ -1212,10 +1375,22 @@
                         "smithy.api#documentation": "<p> The list of owners of the Billing view. </p>"
                     }
                 },
+                "sourceAccountId": {
+                    "target": "com.amazonaws.billing#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Web Services account ID that owns the source billing view, if this is a derived billing view. </p>"
+                    }
+                },
                 "billingViewType": {
                     "target": "com.amazonaws.billing#BillingViewType",
                     "traits": {
                         "smithy.api#documentation": "<p>The type of billing view.</p>"
+                    }
+                },
+                "healthStatus": {
+                    "target": "com.amazonaws.billing#BillingViewHealthStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The current health status of the billing view. </p>"
                     }
                 }
             },
@@ -1242,8 +1417,96 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 1
+                    "max": 10
                 }
+            }
+        },
+        "com.amazonaws.billing#BillingViewStatus": {
+            "type": "enum",
+            "members": {
+                "HEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HEALTHY"
+                    }
+                },
+                "UNHEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNHEALTHY"
+                    }
+                },
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.billing#BillingViewStatusReason": {
+            "type": "enum",
+            "members": {
+                "SOURCE_VIEW_UNHEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SOURCE_VIEW_UNHEALTHY"
+                    }
+                },
+                "SOURCE_VIEW_UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SOURCE_VIEW_UPDATING"
+                    }
+                },
+                "SOURCE_VIEW_ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SOURCE_VIEW_ACCESS_DENIED"
+                    }
+                },
+                "SOURCE_VIEW_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SOURCE_VIEW_NOT_FOUND"
+                    }
+                },
+                "CYCLIC_DEPENDENCY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CYCLIC_DEPENDENCY"
+                    }
+                },
+                "SOURCE_VIEW_DEPTH_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SOURCE_VIEW_DEPTH_EXCEEDED"
+                    }
+                },
+                "AGGREGATE_SOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AGGREGATE_SOURCE"
+                    }
+                },
+                "VIEW_OWNER_NOT_MANAGEMENT_ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VIEW_OWNER_NOT_MANAGEMENT_ACCOUNT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.billing#BillingViewStatusReasons": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billing#BillingViewStatusReason"
             }
         },
         "com.amazonaws.billing#BillingViewType": {
@@ -1337,10 +1600,16 @@
                     "target": "com.amazonaws.billing#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.billing#BillingViewHealthStatusException"
+                },
+                {
                     "target": "com.amazonaws.billing#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.billing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ResourceNotFoundException"
                 },
                 {
                     "target": "com.amazonaws.billing#ServiceQuotaExceededException"
@@ -1500,6 +1769,13 @@
                         "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view. </p>",
                         "smithy.api#required": {}
                     }
+                },
+                "force": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p> If set to true, forces deletion of the billing view even if it has derived resources (e.g. other billing views or budgets). Use with caution as this may break dependent resources. </p>"
+                    }
                 }
             },
             "traits": {
@@ -1554,6 +1830,94 @@
                 "smithy.api#documentation": "<p> The metadata that you can use to filter and group your results. </p>"
             }
         },
+        "com.amazonaws.billing#DisassociateSourceViews": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.billing#DisassociateSourceViewsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.billing#DisassociateSourceViewsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.billing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.billing#BillingViewHealthStatusException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.billing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Removes the association between one or more source billing views and an existing billing view. This allows modifying the composition of aggregate billing views. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Invoke DisassociateSourceViews",
+                        "input": {
+                            "arn": "arn:aws:billing::123456789012:billingview/custom-46f47cb2-a11d-43f3-983d-470b5708a899",
+                            "sourceViews": [
+                                "arn:aws:billing::123456789012:billingview/primary",
+                                "arn:aws:billing::123456789012:billingview/custom-d3f9c7e4-8b2f-4a6e-9d3b-2f7c8a1e5f6d"
+                            ]
+                        },
+                        "output": {
+                            "arn": "arn:aws:billing::123456789012:billingview/custom-46f47cb2-a11d-43f3-983d-470b5708a899"
+                        }
+                    }
+                ],
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.billing#DisassociateSourceViewsRequest": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.billing#BillingViewArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the billing view to disassociate source views from. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sourceViews": {
+                    "target": "com.amazonaws.billing#BillingViewSourceViewsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A list of ARNs of the source billing views to disassociate. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.billing#DisassociateSourceViewsResponse": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.billing#BillingViewArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The ARN of the billing view that the source views were disassociated from. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.billing#ErrorMessage": {
             "type": "string",
             "traits": {
@@ -1575,6 +1939,12 @@
                     "target": "com.amazonaws.billing#TagValues",
                     "traits": {
                         "smithy.api#documentation": "<p> The specific <code>Tag</code> to use for <code>Expression</code>. </p>"
+                    }
+                },
+                "timeRange": {
+                    "target": "com.amazonaws.billing#TimeRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Specifies a time range filter for the billing view data. </p>"
                     }
                 }
             },
@@ -1892,6 +2262,12 @@
                     "target": "com.amazonaws.billing#AccountId",
                     "traits": {
                         "smithy.api#documentation": "<p> The list of owners of the billing view. </p>"
+                    }
+                },
+                "sourceAccountId": {
+                    "target": "com.amazonaws.billing#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Filters the results to include only billing views that use the specified account as a source. </p>"
                     }
                 },
                 "maxResults": {
@@ -2428,6 +2804,26 @@
                 "smithy.api#httpError": 429
             }
         },
+        "com.amazonaws.billing#TimeRange": {
+            "type": "structure",
+            "members": {
+                "beginDateInclusive": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The inclusive start date of the time range. </p>"
+                    }
+                },
+                "endDateInclusive": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The inclusive end date of the time range. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Specifies a time range with inclusive begin and end dates. </p>"
+            }
+        },
         "com.amazonaws.billing#UntagResource": {
             "type": "operation",
             "input": {
@@ -2509,6 +2905,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.billing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.billing#BillingViewHealthStatusException"
                 },
                 {
                     "target": "com.amazonaws.billing#ConflictException"

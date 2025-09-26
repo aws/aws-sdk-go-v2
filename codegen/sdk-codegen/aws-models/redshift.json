@@ -3939,10 +3939,16 @@
                     "target": "com.amazonaws.redshift#DependentServiceUnavailableFault"
                 },
                 {
+                    "target": "com.amazonaws.redshift#InvalidTagFault"
+                },
+                {
                     "target": "com.amazonaws.redshift#RedshiftIdcApplicationAlreadyExistsFault"
                 },
                 {
                     "target": "com.amazonaws.redshift#RedshiftIdcApplicationQuotaExceededFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#TagLimitExceededFault"
                 },
                 {
                     "target": "com.amazonaws.redshift#UnsupportedOperationFault"
@@ -4003,6 +4009,18 @@
                     "target": "com.amazonaws.redshift#ServiceIntegrationList",
                     "traits": {
                         "smithy.api#documentation": "<p>A collection of service integrations for the Redshift IAM Identity Center application.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.redshift#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags.</p>"
+                    }
+                },
+                "SsoTagKeys": {
+                    "target": "com.amazonaws.redshift#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags keys that Redshift Identity Center applications copy to IAM Identity\n            Center. For each input key, the tag corresponding to the key-value pair is\n            propagated.</p>"
                     }
                 }
             },
@@ -14355,6 +14373,18 @@
                     "target": "com.amazonaws.redshift#ServiceIntegrationList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of service integrations for the Redshift IAM Identity Center application.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.redshift#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags.</p>"
+                    }
+                },
+                "SsoTagKeys": {
+                    "target": "com.amazonaws.redshift#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags keys that Redshift Identity Center applications copy to IAM Identity\n            Center. For each input key, the tag corresponding to the key-value pair is\n            propagated.</p>"
                     }
                 }
             },

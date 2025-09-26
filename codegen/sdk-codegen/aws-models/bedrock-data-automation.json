@@ -685,6 +685,9 @@
                 },
                 "types": {
                     "target": "com.amazonaws.bedrockdataautomation#AudioExtractionCategoryTypes"
+                },
+                "typeConfiguration": {
+                    "target": "com.amazonaws.bedrockdataautomation#AudioExtractionCategoryTypeConfiguration"
                 }
             },
             "traits": {
@@ -712,6 +715,17 @@
                         "smithy.api#enumValue": "TOPIC_CONTENT_MODERATION"
                     }
                 }
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#AudioExtractionCategoryTypeConfiguration": {
+            "type": "structure",
+            "members": {
+                "transcript": {
+                    "target": "com.amazonaws.bedrockdataautomation#TranscriptConfiguration"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Configuration for different audio extraction category types"
             }
         },
         "com.amazonaws.bedrockdataautomation#AudioExtractionCategoryTypes": {
@@ -1068,6 +1082,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "List of Blueprints"
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#ChannelLabelingConfiguration": {
+            "type": "structure",
+            "members": {
+                "state": {
+                    "target": "com.amazonaws.bedrockdataautomation#State",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Channel labeling configuration"
             }
         },
         "com.amazonaws.bedrockdataautomation#ClientToken": {
@@ -2753,6 +2781,20 @@
                 "smithy.api#httpError": 402
             }
         },
+        "com.amazonaws.bedrockdataautomation#SpeakerLabelingConfiguration": {
+            "type": "structure",
+            "members": {
+                "state": {
+                    "target": "com.amazonaws.bedrockdataautomation#State",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Speaker labeling configuration"
+            }
+        },
         "com.amazonaws.bedrockdataautomation#SplitterConfiguration": {
             "type": "structure",
             "members": {
@@ -2956,6 +2998,20 @@
                 "smithy.api#documentation": "This exception is thrown when the number of requests exceeds the limit",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#TranscriptConfiguration": {
+            "type": "structure",
+            "members": {
+                "speakerLabeling": {
+                    "target": "com.amazonaws.bedrockdataautomation#SpeakerLabelingConfiguration"
+                },
+                "channelLabeling": {
+                    "target": "com.amazonaws.bedrockdataautomation#ChannelLabelingConfiguration"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Configuration for transcript related features"
             }
         },
         "com.amazonaws.bedrockdataautomation#Type": {

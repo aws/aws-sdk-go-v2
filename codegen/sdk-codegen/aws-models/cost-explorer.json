@@ -1981,6 +1981,18 @@
                 "smithy.api#pattern": "^arn:aws[a-z-]*:(billing)::[0-9]{12}:billingview/[-a-zA-Z0-9/:_+=.-@]{1,43}$"
             }
         },
+        "com.amazonaws.costexplorer#BillingViewHealthStatusException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.costexplorer#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The billing view status must be <code>HEALTHY</code> to perform this action. Try again when the status is <code>HEALTHY</code>.\n        </p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.costexplorer#CommitmentPurchaseAnalysisConfiguration": {
             "type": "structure",
             "members": {
@@ -3522,6 +3534,12 @@
                         "smithy.api#enumValue": "LINKED_ACCOUNT"
                     }
                 },
+                "PAYER_ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PAYER_ACCOUNT"
+                    }
+                },
                 "LINKED_ACCOUNT_NAME": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -4891,6 +4909,9 @@
                     "target": "com.amazonaws.costexplorer#BillExpirationException"
                 },
                 {
+                    "target": "com.amazonaws.costexplorer#BillingViewHealthStatusException"
+                },
+                {
                     "target": "com.amazonaws.costexplorer#DataUnavailableException"
                 },
                 {
@@ -4919,6 +4940,9 @@
                 "target": "com.amazonaws.costexplorer#GetCostAndUsageComparisonsResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.costexplorer#BillingViewHealthStatusException"
+                },
                 {
                     "target": "com.amazonaws.costexplorer#DataUnavailableException"
                 },
@@ -5122,6 +5146,9 @@
                     "target": "com.amazonaws.costexplorer#BillExpirationException"
                 },
                 {
+                    "target": "com.amazonaws.costexplorer#BillingViewHealthStatusException"
+                },
+                {
                     "target": "com.amazonaws.costexplorer#DataUnavailableException"
                 },
                 {
@@ -5237,6 +5264,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.costexplorer#BillExpirationException"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#BillingViewHealthStatusException"
                 },
                 {
                     "target": "com.amazonaws.costexplorer#DataUnavailableException"
@@ -5358,6 +5388,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.costexplorer#BillingViewHealthStatusException"
+                },
+                {
                     "target": "com.amazonaws.costexplorer#DataUnavailableException"
                 },
                 {
@@ -5466,6 +5499,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.costexplorer#BillingViewHealthStatusException"
+                },
+                {
                     "target": "com.amazonaws.costexplorer#DataUnavailableException"
                 },
                 {
@@ -5557,6 +5593,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.costexplorer#BillExpirationException"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#BillingViewHealthStatusException"
                 },
                 {
                     "target": "com.amazonaws.costexplorer#DataUnavailableException"
@@ -6555,6 +6594,9 @@
                     "target": "com.amazonaws.costexplorer#BillExpirationException"
                 },
                 {
+                    "target": "com.amazonaws.costexplorer#BillingViewHealthStatusException"
+                },
+                {
                     "target": "com.amazonaws.costexplorer#DataUnavailableException"
                 },
                 {
@@ -6672,6 +6714,9 @@
                 "target": "com.amazonaws.costexplorer#GetUsageForecastResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.costexplorer#BillingViewHealthStatusException"
+                },
                 {
                     "target": "com.amazonaws.costexplorer#DataUnavailableException"
                 },

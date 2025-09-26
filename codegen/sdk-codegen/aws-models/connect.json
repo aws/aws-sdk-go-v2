@@ -964,6 +964,9 @@
                     "target": "com.amazonaws.connect#AssociateBot"
                 },
                 {
+                    "target": "com.amazonaws.connect#AssociateContactWithUser"
+                },
+                {
                     "target": "com.amazonaws.connect#AssociateDefaultVocabulary"
                 },
                 {
@@ -1448,6 +1451,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#ListRealtimeContactAnalysisSegmentsV2"
+                },
+                {
+                    "target": "com.amazonaws.connect#ListRoutingProfileManualAssignmentQueues"
                 },
                 {
                     "target": "com.amazonaws.connect#ListRoutingProfileQueues"
@@ -3094,6 +3100,81 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.connect#AssociateContactWithUser": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#AssociateContactWithUserRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#AssociateContactWithUserResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates a queued contact with an agent.</p>\n         <p>\n            <b>Use cases</b>\n         </p>\n         <p>Following are common uses cases for this API:</p>\n         <ul>\n            <li>\n               <p>Custom contact routing. You can build custom contact routing mechanisms beyond the default\n     system routing in Amazon Connect. You can create tailored contact distribution logic that\n     offers queued contacts directly to specific agents.</p>\n            </li>\n            <li>\n               <p>Manual contact assignment. You can programmatically assign queued contacts to available users. This \n     provides flexibility to contact centers that require manual oversight or specialized routing\n     workflows outside of standard queue management.</p>\n               <p>For information about how manual contact assignment works in the agent workspace, see the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/worklist-app.html\">Access the Worklist app in the Amazon Connect agent workspace</a> in the <i>Amazon Connect Administrator\n        Guide</i>. </p>\n            </li>\n         </ul>\n         <p>\n            <b>Important things to know</b>\n         </p>\n         <ul>\n            <li>\n               <p>Use this API chat/SMS, email, and task contacts. It does not support voice\n     contacts.</p>\n            </li>\n            <li>\n               <p>Use it to associate contacts with users regardless of their current state, including\n     custom states. Ensure your application logic accounts for user availability before making\n     associations.</p>\n            </li>\n            <li>\n               <p>It honors the IAM context key <code>connect:PreferredUserArn</code> to prevent\n     unauthorized contact associations.</p>\n            </li>\n            <li>\n               <p>It respects the IAM context key <code>connect:PreferredUserArn</code> to enforce\n     authorization controls and prevent unauthorized contact associations. Verify that your IAM\n     policies are properly configured to support your intended use cases.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Endpoints</b>: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect endpoints and\n   quotas</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/contacts/{InstanceId}/{ContactId}/associate-user",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#AssociateContactWithUserRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the contact in this instance of Amazon Connect. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "UserId": {
+                    "target": "com.amazonaws.connect#AgentResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the user. This can be the ID or the ARN of the user.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#AssociateContactWithUserResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#AssociateDefaultVocabulary": {
             "type": "operation",
             "input": {
@@ -3662,8 +3743,13 @@
                 "QueueConfigs": {
                     "target": "com.amazonaws.connect#RoutingProfileQueueConfigList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The queues to associate with this routing profile.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The queues to associate with this routing profile.</p>"
+                    }
+                },
+                "ManualAssignmentQueueConfigs": {
+                    "target": "com.amazonaws.connect#RoutingProfileManualAssignmentQueueConfigList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The manual assignment queues to associate with this routing profile.</p>"
                     }
                 }
             },
@@ -7074,7 +7160,7 @@
                     "code": "ContactNotFoundException",
                     "httpResponseCode": 410
                 },
-                "smithy.api#documentation": "<p>The contact with the specified ID is not active or does not exist. Applies to Voice calls\n   only, not to Chat or Task contacts.</p>",
+                "smithy.api#documentation": "<p>The contact with the specified ID is not active or does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 410
             }
@@ -7185,6 +7271,15 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Set of segment attributes for a contact.</p>"
                     }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates name of the contact.</p>"
+                    }
+                },
+                "RoutingCriteria": {
+                    "target": "com.amazonaws.connect#RoutingCriteria"
                 }
             },
             "traits": {
@@ -7238,6 +7333,12 @@
                     "target": "com.amazonaws.connect#SegmentAttributeValueString",
                     "traits": {
                         "smithy.api#documentation": "<p>The value of a segment attribute represented as a string.</p>"
+                    }
+                },
+                "ValueMap": {
+                    "target": "com.amazonaws.connect#SegmentAttributeValueMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key and value of a segment attribute.</p>"
                     }
                 }
             },
@@ -9562,6 +9663,12 @@
                     "target": "com.amazonaws.connect#RoutingProfileQueueConfigList",
                     "traits": {
                         "smithy.api#documentation": "<p>The inbound queues associated with the routing profile. If no queue is added, the agent can\n   make only outbound calls.</p>\n         <p>The limit of 10 array members applies to the maximum number of\n    <code>RoutingProfileQueueConfig</code> objects that can be passed during a CreateRoutingProfile\n   API request. It is different from the quota of 50 queues per routing profile per instance that is\n   listed in <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">Amazon Connect service\n    quotas</a>. </p>"
+                    }
+                },
+                "ManualAssignmentQueueConfigs": {
+                    "target": "com.amazonaws.connect#RoutingProfileManualAssignmentQueueConfigList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The manual assignment queues associated with the routing profile. If no queue is added,\n   agents and supervisors can't pick or assign any contacts from this routing profile. The limit of\n   10 array members applies to the maximum number of RoutingProfileManualAssignmentQueueConfig\n   objects that can be passed during a CreateRoutingProfile API request. It is different from the\n   quota of 50 queues per routing profile per instance that is listed in Amazon Connect service\n   quotas.</p>"
                     }
                 },
                 "MediaConcurrencies": {
@@ -15953,8 +16060,13 @@
                 "QueueReferences": {
                     "target": "com.amazonaws.connect#RoutingProfileQueueReferenceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The queues to disassociate from this routing profile.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The queues to disassociate from this routing profile.</p>"
+                    }
+                },
+                "ManualAssignmentQueueReferences": {
+                    "target": "com.amazonaws.connect#RoutingProfileQueueReferenceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The manual assignment queues to disassociate with this routing profile.</p>"
                     }
                 }
             },
@@ -19067,7 +19179,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the position of the contact in the queue.</p>\n         <p>\n            <b>Use cases</b>\n         </p>\n         <p>Following are common uses cases for position in queue:</p>\n         <ul>\n            <li>\n               <p>Understand the expected wait experience of a contact.</p>\n            </li>\n            <li>\n               <p>Inform customers of their position in queue and potentially offer a callback.</p>\n            </li>\n            <li>\n               <p>Make data-driven routing decisions between primary and alternative queues.</p>\n            </li>\n            <li>\n               <p>Enhance queue visibility and leverage agent proficiencies to streamline contact\n     routing.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Important things to know</b>\n         </p>\n         <ul>\n            <li>\n               <p>The only way to retrieve the position of the contact in queue is by using this API. You\n     can't retrieve the position by using flows and attributes.</p>\n            </li>\n            <li>\n               <p>For more information, see the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html\">Position in queue</a> metric in the\n       <i>Amazon Connect Administrator Guide</i>. </p>\n            </li>\n         </ul>\n         <p>\n            <b>Endpoints</b>: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect endpoints and\n   quotas</a>.</p>",
+                "smithy.api#documentation": "<p>Retrieves the position of the contact in the queue.</p>\n         <p>\n            <b>Use cases</b>\n         </p>\n         <p>Following are common uses cases for position in queue:</p>\n         <ul>\n            <li>\n               <p>Understand the expected wait experience of a contact.</p>\n            </li>\n            <li>\n               <p>Inform customers of their position in queue and potentially offer a callback.</p>\n            </li>\n            <li>\n               <p>Make data-driven routing decisions between primary and alternative queues.</p>\n            </li>\n            <li>\n               <p>Enhance queue visibility and leverage agent proficiencies to streamline contact\n     routing.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Important things to know</b>\n         </p>\n         <ul>\n            <li>\n               <p>The only way to retrieve the position of the contact in queue is by using this API. You\n     can't retrieve the position by using flows and attributes.</p>\n            </li>\n            <li>\n               <p>For more information, see the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html\">Position in queue</a> metric in\n     the <i>Amazon Connect Administrator Guide</i>. </p>\n            </li>\n         </ul>\n         <p>\n            <b>Endpoints</b>: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect endpoints and\n   quotas</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/metrics/contact",
@@ -25931,6 +26043,116 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#ListRoutingProfileManualAssignmentQueues": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#ListRoutingProfileManualAssignmentQueuesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#ListRoutingProfileManualAssignmentQueuesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the manual assignment queues associated with a routing profile.</p>\n         <p>\n            <b>Use cases</b>\n         </p>\n         <p>Following are common uses cases for this API:</p>\n         <ul>\n            <li>\n               <p>This API returns list of queues where contacts can be manually assigned or picked. The\n     user can additionally filter on queues, if they have access to those queues (otherwise a\n     invalid request exception will be thrown).</p>\n               <p>For information about how manual contact assignment works in the agent workspace, see the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/worklist-app.html\">Access the Worklist app in the Amazon Connect agent workspace</a> in the <i>Amazon Connect Administrator\n        Guide</i>. </p>\n            </li>\n         </ul>\n         <p>\n            <b>Important things to know</b>\n         </p>\n         <ul>\n            <li>\n               <p>This API only returns the manual assignment queues associated with a routing profile. Use\n     the ListRoutingProfileQueues API to list the auto assignment queues for the routing\n     profile.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Endpoints</b>: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect endpoints and\n   quotas</a>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/routing-profiles/{InstanceId}/{RoutingProfileId}/manual-assignment-queues",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "RoutingProfileManualAssignmentQueueConfigSummaryList",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.connect#ListRoutingProfileManualAssignmentQueuesRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoutingProfileId": {
+                    "target": "com.amazonaws.connect#RoutingProfileId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the routing profile.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#ListRoutingProfileManualAssignmentQueuesResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                },
+                "RoutingProfileManualAssignmentQueueConfigSummaryList": {
+                    "target": "com.amazonaws.connect#RoutingProfileManualAssignmentQueueConfigSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the manual assignment queues associated with the routing profile.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when this resource was last modified.</p>"
+                    }
+                },
+                "LastModifiedRegion": {
+                    "target": "com.amazonaws.connect#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where this resource was last modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#ListRoutingProfileQueues": {
             "type": "operation",
             "input": {
@@ -28186,6 +28408,28 @@
                     "max": 128
                 },
                 "smithy.api#pattern": "^(^[\\S].*[\\S]$)|(^[\\S]$)$"
+            }
+        },
+        "com.amazonaws.connect#NameCriteria": {
+            "type": "structure",
+            "members": {
+                "SearchText": {
+                    "target": "com.amazonaws.connect#SearchTextList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The words or phrases used to match the contact name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MatchType": {
+                    "target": "com.amazonaws.connect#SearchContactsMatchType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The match type combining name search criteria using multiple search texts in a name\n   criteria.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The search criteria based on the contact name</p>"
             }
         },
         "com.amazonaws.connect#Namespace": {
@@ -34210,6 +34454,12 @@
                         "smithy.api#documentation": "<p>The number of associated queues in routing profile.</p>"
                     }
                 },
+                "NumberOfAssociatedManualAssignmentQueues": {
+                    "target": "com.amazonaws.connect#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of associated manual assignment queues in routing profile.</p>"
+                    }
+                },
                 "NumberOfAssociatedUsers": {
                     "target": "com.amazonaws.connect#Long",
                     "traits": {
@@ -34246,6 +34496,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The IDs of the associated queue.</p>"
                     }
+                },
+                "AssociatedManualAssignmentQueueIds": {
+                    "target": "com.amazonaws.connect#AssociatedQueueIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the associated manual assignment queues.</p>"
+                    }
                 }
             },
             "traits": {
@@ -34268,6 +34524,74 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.connect#RoutingProfile"
+            }
+        },
+        "com.amazonaws.connect#RoutingProfileManualAssignmentQueueConfig": {
+            "type": "structure",
+            "members": {
+                "QueueReference": {
+                    "target": "com.amazonaws.connect#RoutingProfileQueueReference",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the queue and channel for manual assignment behaviour can be\n   enabled.</p>"
+            }
+        },
+        "com.amazonaws.connect#RoutingProfileManualAssignmentQueueConfigList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#RoutingProfileManualAssignmentQueueConfig"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.connect#RoutingProfileManualAssignmentQueueConfigSummary": {
+            "type": "structure",
+            "members": {
+                "QueueId": {
+                    "target": "com.amazonaws.connect#QueueId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the queue.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "QueueArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the queue.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "QueueName": {
+                    "target": "com.amazonaws.connect#QueueName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the queue.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Channel": {
+                    "target": "com.amazonaws.connect#Channel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channels this queue supports. Valid Values: CHAT | TASK | EMAIL </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains summary information about a routing profile manual assignment queue.</p>"
+            }
+        },
+        "com.amazonaws.connect#RoutingProfileManualAssignmentQueueConfigSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#RoutingProfileManualAssignmentQueueConfigSummary"
             }
         },
         "com.amazonaws.connect#RoutingProfileName": {
@@ -35327,6 +35651,51 @@
                 }
             }
         },
+        "com.amazonaws.connect#SearchContactsAdditionalTimeRange": {
+            "type": "structure",
+            "members": {
+                "Criteria": {
+                    "target": "com.amazonaws.connect#SearchContactsAdditionalTimeRangeCriteriaList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of criteria of the time range to additionally filter on.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MatchType": {
+                    "target": "com.amazonaws.connect#SearchContactsMatchType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The match type combining multiple time range filters.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Time range that you additionally want to filter on.</p>"
+            }
+        },
+        "com.amazonaws.connect#SearchContactsAdditionalTimeRangeCriteria": {
+            "type": "structure",
+            "members": {
+                "TimeRange": {
+                    "target": "com.amazonaws.connect#SearchContactsTimeRange"
+                },
+                "TimestampCondition": {
+                    "target": "com.amazonaws.connect#SearchContactsTimestampCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of the timestamp conditions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The criteria of the time range to additionally filter on.</p>"
+            }
+        },
+        "com.amazonaws.connect#SearchContactsAdditionalTimeRangeCriteriaList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#SearchContactsAdditionalTimeRangeCriteria"
+            }
+        },
         "com.amazonaws.connect#SearchContactsMatchType": {
             "type": "enum",
             "members": {
@@ -35340,6 +35709,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "MATCH_ANY"
+                    }
+                },
+                "MATCH_EXACT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MATCH_EXACT"
+                    }
+                },
+                "MATCH_NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MATCH_NONE"
                     }
                 }
             }
@@ -35446,6 +35827,17 @@
                 "smithy.api#documentation": "<p>A structure of time range that you want to search results.</p>"
             }
         },
+        "com.amazonaws.connect#SearchContactsTimeRangeConditionType": {
+            "type": "enum",
+            "members": {
+                "NOT_EXISTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_EXISTS"
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#SearchContactsTimeRangeType": {
             "type": "enum",
             "members": {
@@ -35472,12 +35864,46 @@
                     "traits": {
                         "smithy.api#enumValue": "DISCONNECT_TIMESTAMP"
                     }
+                },
+                "ENQUEUE_TIMESTAMP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENQUEUE_TIMESTAMP"
+                    }
                 }
+            }
+        },
+        "com.amazonaws.connect#SearchContactsTimestampCondition": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.connect#SearchContactsTimeRangeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of the timestamps to use for the filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConditionType": {
+                    "target": "com.amazonaws.connect#SearchContactsTimeRangeConditionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Condition of the timestamp on the contact.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The timestamp condition indicating which timestamp should be used and how it should be\n   filtered.</p>"
             }
         },
         "com.amazonaws.connect#SearchCriteria": {
             "type": "structure",
             "members": {
+                "Name": {
+                    "target": "com.amazonaws.connect#NameCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the contact.</p>"
+                    }
+                },
                 "AgentIds": {
                     "target": "com.amazonaws.connect#AgentResourceIdList",
                     "traits": {
@@ -35512,6 +35938,18 @@
                     "target": "com.amazonaws.connect#QueueIdList",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of queue IDs associated with contacts.</p>"
+                    }
+                },
+                "RoutingCriteria": {
+                    "target": "com.amazonaws.connect#SearchableRoutingCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Routing criteria for the contact.</p>"
+                    }
+                },
+                "AdditionalTimeRange": {
+                    "target": "com.amazonaws.connect#SearchContactsAdditionalTimeRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional TimeRange used to filter contacts.</p>"
                     }
                 },
                 "SearchableContactAttributes": {
@@ -36898,6 +37336,26 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#SearchableAgentCriteriaStep": {
+            "type": "structure",
+            "members": {
+                "AgentIds": {
+                    "target": "com.amazonaws.connect#AgentResourceIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifiers of agents used in preferred agents matching.</p>"
+                    }
+                },
+                "MatchType": {
+                    "target": "com.amazonaws.connect#SearchContactsMatchType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The match type combining multiple agent criteria steps.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The agent criteria to search for preferred agents on the routing criteria.</p>"
+            }
+        },
         "com.amazonaws.connect#SearchableContactAttributeKey": {
             "type": "string",
             "traits": {
@@ -36994,6 +37452,40 @@
                         "smithy.api#enumValue": "STANDARD"
                     }
                 }
+            }
+        },
+        "com.amazonaws.connect#SearchableRoutingCriteria": {
+            "type": "structure",
+            "members": {
+                "Steps": {
+                    "target": "com.amazonaws.connect#SearchableRoutingCriteriaStepList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Routing criteria steps of the contact routing.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Routing criteria of the contact to match on.</p>"
+            }
+        },
+        "com.amazonaws.connect#SearchableRoutingCriteriaStep": {
+            "type": "structure",
+            "members": {
+                "AgentCriteria": {
+                    "target": "com.amazonaws.connect#SearchableAgentCriteriaStep",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Agent matching the routing step of the routing criteria</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Routing criteria of the contact to match on.</p>"
+            }
+        },
+        "com.amazonaws.connect#SearchableRoutingCriteriaStepList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#SearchableRoutingCriteriaStep"
             }
         },
         "com.amazonaws.connect#SearchableSegmentAttributeKey": {
@@ -37978,6 +38470,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "CHANNEL"
+                    }
+                },
+                "EXPIRY_TIMESTAMP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPIRY_TIMESTAMP"
                     }
                 }
             }
