@@ -90,6 +90,26 @@ func (m *validateOpAssociateBot) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateContactWithUser struct {
+}
+
+func (*validateOpAssociateContactWithUser) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateContactWithUser) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateContactWithUserInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateContactWithUserInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAssociateDefaultVocabulary struct {
 }
 
@@ -3290,6 +3310,26 @@ func (m *validateOpListRealtimeContactAnalysisSegmentsV2) HandleInitialize(ctx c
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListRoutingProfileManualAssignmentQueues struct {
+}
+
+func (*validateOpListRoutingProfileManualAssignmentQueues) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListRoutingProfileManualAssignmentQueues) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListRoutingProfileManualAssignmentQueuesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListRoutingProfileManualAssignmentQueuesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListRoutingProfileQueues struct {
 }
 
@@ -5626,6 +5666,10 @@ func addOpAssociateBotValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateBot{}, middleware.After)
 }
 
+func addOpAssociateContactWithUserValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateContactWithUser{}, middleware.After)
+}
+
 func addOpAssociateDefaultVocabularyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateDefaultVocabulary{}, middleware.After)
 }
@@ -6264,6 +6308,10 @@ func addOpListQuickConnectsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListRealtimeContactAnalysisSegmentsV2ValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListRealtimeContactAnalysisSegmentsV2{}, middleware.After)
+}
+
+func addOpListRoutingProfileManualAssignmentQueuesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListRoutingProfileManualAssignmentQueues{}, middleware.After)
 }
 
 func addOpListRoutingProfileQueuesValidationMiddleware(stack *middleware.Stack) error {
@@ -7824,6 +7872,24 @@ func validateMediaConcurrency(v *types.MediaConcurrency) error {
 	}
 }
 
+func validateNameCriteria(v *types.NameCriteria) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NameCriteria"}
+	if v.SearchText == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SearchText"))
+	}
+	if len(v.MatchType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MatchType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateNewSessionDetails(v *types.NewSessionDetails) error {
 	if v == nil {
 		return nil
@@ -8065,6 +8131,42 @@ func validateReference(v *types.Reference) error {
 	invalidParams := smithy.InvalidParamsError{Context: "Reference"}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRoutingProfileManualAssignmentQueueConfig(v *types.RoutingProfileManualAssignmentQueueConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RoutingProfileManualAssignmentQueueConfig"}
+	if v.QueueReference == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueReference"))
+	} else if v.QueueReference != nil {
+		if err := validateRoutingProfileQueueReference(v.QueueReference); err != nil {
+			invalidParams.AddNested("QueueReference", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRoutingProfileManualAssignmentQueueConfigList(v []types.RoutingProfileManualAssignmentQueueConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RoutingProfileManualAssignmentQueueConfigList"}
+	for i := range v {
+		if err := validateRoutingProfileManualAssignmentQueueConfig(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -8363,6 +8465,67 @@ func validateSearchableSegmentAttributesCriteriaList(v []types.SearchableSegment
 	}
 }
 
+func validateSearchContactsAdditionalTimeRange(v *types.SearchContactsAdditionalTimeRange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchContactsAdditionalTimeRange"}
+	if v.Criteria == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Criteria"))
+	} else if v.Criteria != nil {
+		if err := validateSearchContactsAdditionalTimeRangeCriteriaList(v.Criteria); err != nil {
+			invalidParams.AddNested("Criteria", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.MatchType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MatchType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSearchContactsAdditionalTimeRangeCriteria(v *types.SearchContactsAdditionalTimeRangeCriteria) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchContactsAdditionalTimeRangeCriteria"}
+	if v.TimeRange != nil {
+		if err := validateSearchContactsTimeRange(v.TimeRange); err != nil {
+			invalidParams.AddNested("TimeRange", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TimestampCondition != nil {
+		if err := validateSearchContactsTimestampCondition(v.TimestampCondition); err != nil {
+			invalidParams.AddNested("TimestampCondition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSearchContactsAdditionalTimeRangeCriteriaList(v []types.SearchContactsAdditionalTimeRangeCriteria) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchContactsAdditionalTimeRangeCriteriaList"}
+	for i := range v {
+		if err := validateSearchContactsAdditionalTimeRangeCriteria(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSearchContactsTimeRange(v *types.SearchContactsTimeRange) error {
 	if v == nil {
 		return nil
@@ -8384,14 +8547,42 @@ func validateSearchContactsTimeRange(v *types.SearchContactsTimeRange) error {
 	}
 }
 
+func validateSearchContactsTimestampCondition(v *types.SearchContactsTimestampCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchContactsTimestampCondition"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if len(v.ConditionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ConditionType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSearchCriteria(v *types.SearchCriteria) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SearchCriteria"}
+	if v.Name != nil {
+		if err := validateNameCriteria(v.Name); err != nil {
+			invalidParams.AddNested("Name", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.ContactAnalysis != nil {
 		if err := validateContactAnalysis(v.ContactAnalysis); err != nil {
 			invalidParams.AddNested("ContactAnalysis", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AdditionalTimeRange != nil {
+		if err := validateSearchContactsAdditionalTimeRange(v.AdditionalTimeRange); err != nil {
+			invalidParams.AddNested("AdditionalTimeRange", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.SearchableContactAttributes != nil {
@@ -8910,6 +9101,27 @@ func validateOpAssociateBotInput(v *AssociateBotInput) error {
 	}
 }
 
+func validateOpAssociateContactWithUserInput(v *AssociateContactWithUserInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateContactWithUserInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
+	}
+	if v.UserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateDefaultVocabularyInput(v *AssociateDefaultVocabularyInput) error {
 	if v == nil {
 		return nil
@@ -9070,11 +9282,14 @@ func validateOpAssociateRoutingProfileQueuesInput(v *AssociateRoutingProfileQueu
 	if v.RoutingProfileId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoutingProfileId"))
 	}
-	if v.QueueConfigs == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("QueueConfigs"))
-	} else if v.QueueConfigs != nil {
+	if v.QueueConfigs != nil {
 		if err := validateRoutingProfileQueueConfigList(v.QueueConfigs); err != nil {
 			invalidParams.AddNested("QueueConfigs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ManualAssignmentQueueConfigs != nil {
+		if err := validateRoutingProfileManualAssignmentQueueConfigList(v.ManualAssignmentQueueConfigs); err != nil {
+			invalidParams.AddNested("ManualAssignmentQueueConfigs", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -9720,6 +9935,11 @@ func validateOpCreateRoutingProfileInput(v *CreateRoutingProfileInput) error {
 	if v.QueueConfigs != nil {
 		if err := validateRoutingProfileQueueConfigList(v.QueueConfigs); err != nil {
 			invalidParams.AddNested("QueueConfigs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ManualAssignmentQueueConfigs != nil {
+		if err := validateRoutingProfileManualAssignmentQueueConfigList(v.ManualAssignmentQueueConfigs); err != nil {
+			invalidParams.AddNested("ManualAssignmentQueueConfigs", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.MediaConcurrencies == nil {
@@ -11154,11 +11374,14 @@ func validateOpDisassociateRoutingProfileQueuesInput(v *DisassociateRoutingProfi
 	if v.RoutingProfileId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoutingProfileId"))
 	}
-	if v.QueueReferences == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("QueueReferences"))
-	} else if v.QueueReferences != nil {
+	if v.QueueReferences != nil {
 		if err := validateRoutingProfileQueueReferenceList(v.QueueReferences); err != nil {
 			invalidParams.AddNested("QueueReferences", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ManualAssignmentQueueReferences != nil {
+		if err := validateRoutingProfileQueueReferenceList(v.ManualAssignmentQueueReferences); err != nil {
+			invalidParams.AddNested("ManualAssignmentQueueReferences", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -12020,6 +12243,24 @@ func validateOpListRealtimeContactAnalysisSegmentsV2Input(v *ListRealtimeContact
 	}
 	if v.SegmentTypes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SegmentTypes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListRoutingProfileManualAssignmentQueuesInput(v *ListRoutingProfileManualAssignmentQueuesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListRoutingProfileManualAssignmentQueuesInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.RoutingProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoutingProfileId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

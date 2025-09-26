@@ -2688,8 +2688,10 @@ type SearchContactsMatchType string
 
 // Enum values for SearchContactsMatchType
 const (
-	SearchContactsMatchTypeMatchAll SearchContactsMatchType = "MATCH_ALL"
-	SearchContactsMatchTypeMatchAny SearchContactsMatchType = "MATCH_ANY"
+	SearchContactsMatchTypeMatchAll   SearchContactsMatchType = "MATCH_ALL"
+	SearchContactsMatchTypeMatchAny   SearchContactsMatchType = "MATCH_ANY"
+	SearchContactsMatchTypeMatchExact SearchContactsMatchType = "MATCH_EXACT"
+	SearchContactsMatchTypeMatchNone  SearchContactsMatchType = "MATCH_NONE"
 )
 
 // Values returns all known values for SearchContactsMatchType. Note that this can
@@ -2700,6 +2702,26 @@ func (SearchContactsMatchType) Values() []SearchContactsMatchType {
 	return []SearchContactsMatchType{
 		"MATCH_ALL",
 		"MATCH_ANY",
+		"MATCH_EXACT",
+		"MATCH_NONE",
+	}
+}
+
+type SearchContactsTimeRangeConditionType string
+
+// Enum values for SearchContactsTimeRangeConditionType
+const (
+	SearchContactsTimeRangeConditionTypeNotExists SearchContactsTimeRangeConditionType = "NOT_EXISTS"
+)
+
+// Values returns all known values for SearchContactsTimeRangeConditionType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SearchContactsTimeRangeConditionType) Values() []SearchContactsTimeRangeConditionType {
+	return []SearchContactsTimeRangeConditionType{
+		"NOT_EXISTS",
 	}
 }
 
@@ -2711,6 +2733,7 @@ const (
 	SearchContactsTimeRangeTypeScheduledTimestamp        SearchContactsTimeRangeType = "SCHEDULED_TIMESTAMP"
 	SearchContactsTimeRangeTypeConnectedToAgentTimestamp SearchContactsTimeRangeType = "CONNECTED_TO_AGENT_TIMESTAMP"
 	SearchContactsTimeRangeTypeDisconnectTimestamp       SearchContactsTimeRangeType = "DISCONNECT_TIMESTAMP"
+	SearchContactsTimeRangeTypeEnqueueTimestamp          SearchContactsTimeRangeType = "ENQUEUE_TIMESTAMP"
 )
 
 // Values returns all known values for SearchContactsTimeRangeType. Note that this
@@ -2723,6 +2746,7 @@ func (SearchContactsTimeRangeType) Values() []SearchContactsTimeRangeType {
 		"SCHEDULED_TIMESTAMP",
 		"CONNECTED_TO_AGENT_TIMESTAMP",
 		"DISCONNECT_TIMESTAMP",
+		"ENQUEUE_TIMESTAMP",
 	}
 }
 
@@ -2790,6 +2814,7 @@ const (
 	SortableFieldNameDisconnectTimestamp       SortableFieldName = "DISCONNECT_TIMESTAMP"
 	SortableFieldNameInitiationMethod          SortableFieldName = "INITIATION_METHOD"
 	SortableFieldNameChannel                   SortableFieldName = "CHANNEL"
+	SortableFieldNameExpiryTimestamp           SortableFieldName = "EXPIRY_TIMESTAMP"
 )
 
 // Values returns all known values for SortableFieldName. Note that this can be
@@ -2804,6 +2829,7 @@ func (SortableFieldName) Values() []SortableFieldName {
 		"DISCONNECT_TIMESTAMP",
 		"INITIATION_METHOD",
 		"CHANNEL",
+		"EXPIRY_TIMESTAMP",
 	}
 }
 

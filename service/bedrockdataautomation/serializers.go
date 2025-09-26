@@ -1404,9 +1404,30 @@ func awsRestjson1_serializeDocumentAudioExtractionCategory(v *types.AudioExtract
 		ok.String(string(v.State))
 	}
 
+	if v.TypeConfiguration != nil {
+		ok := object.Key("typeConfiguration")
+		if err := awsRestjson1_serializeDocumentAudioExtractionCategoryTypeConfiguration(v.TypeConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Types != nil {
 		ok := object.Key("types")
 		if err := awsRestjson1_serializeDocumentAudioExtractionCategoryTypes(v.Types, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAudioExtractionCategoryTypeConfiguration(v *types.AudioExtractionCategoryTypeConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Transcript != nil {
+		ok := object.Key("transcript")
+		if err := awsRestjson1_serializeDocumentTranscriptConfiguration(v.Transcript, ok); err != nil {
 			return err
 		}
 	}
@@ -1558,6 +1579,18 @@ func awsRestjson1_serializeDocumentBlueprintItems(v []types.BlueprintItem, value
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentChannelLabelingConfiguration(v *types.ChannelLabelingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.State) > 0 {
+		ok := object.Key("state")
+		ok.String(string(v.State))
+	}
+
 	return nil
 }
 
@@ -2008,6 +2041,18 @@ func awsRestjson1_serializeDocumentOverrideConfiguration(v *types.OverrideConfig
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSpeakerLabelingConfiguration(v *types.SpeakerLabelingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.State) > 0 {
+		ok := object.Key("state")
+		ok.String(string(v.State))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSplitterConfiguration(v *types.SplitterConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2093,6 +2138,27 @@ func awsRestjson1_serializeDocumentTagList(v []types.Tag, value smithyjson.Value
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTranscriptConfiguration(v *types.TranscriptConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ChannelLabeling != nil {
+		ok := object.Key("channelLabeling")
+		if err := awsRestjson1_serializeDocumentChannelLabelingConfiguration(v.ChannelLabeling, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SpeakerLabeling != nil {
+		ok := object.Key("speakerLabeling")
+		if err := awsRestjson1_serializeDocumentSpeakerLabelingConfiguration(v.SpeakerLabeling, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

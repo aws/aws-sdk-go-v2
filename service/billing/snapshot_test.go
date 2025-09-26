@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_AssociateSourceViews(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateSourceViews(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateSourceViews")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateBillingView(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateBillingView(context.Background(), nil, func(o *Options) {
@@ -79,6 +91,18 @@ func TestCheckSnapshot_DeleteBillingView(t *testing.T) {
 	_, err := svc.DeleteBillingView(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteBillingView")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DisassociateSourceViews(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateSourceViews(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateSourceViews")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -181,6 +205,18 @@ func TestCheckSnapshot_UpdateBillingView(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_AssociateSourceViews(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateSourceViews(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateSourceViews")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateBillingView(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateBillingView(context.Background(), nil, func(o *Options) {
@@ -198,6 +234,18 @@ func TestUpdateSnapshot_DeleteBillingView(t *testing.T) {
 	_, err := svc.DeleteBillingView(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteBillingView")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DisassociateSourceViews(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateSourceViews(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateSourceViews")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -11348,6 +11348,20 @@ func awsAwsquery_serializeOpDocumentCreateRedshiftIdcApplicationInput(v *CreateR
 		}
 	}
 
+	if v.SsoTagKeys != nil {
+		objectKey := object.Key("SsoTagKeys")
+		if err := awsAwsquery_serializeDocumentTagKeyList(v.SsoTagKeys, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

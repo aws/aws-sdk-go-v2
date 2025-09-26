@@ -41,15 +41,16 @@ type DisassociateRoutingProfileQueuesInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The queues to disassociate from this routing profile.
-	//
-	// This member is required.
-	QueueReferences []types.RoutingProfileQueueReference
-
 	// The identifier of the routing profile.
 	//
 	// This member is required.
 	RoutingProfileId *string
+
+	// The manual assignment queues to disassociate with this routing profile.
+	ManualAssignmentQueueReferences []types.RoutingProfileQueueReference
+
+	// The queues to disassociate from this routing profile.
+	QueueReferences []types.RoutingProfileQueueReference
 
 	noSmithyDocumentSerde
 }

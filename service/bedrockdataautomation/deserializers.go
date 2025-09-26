@@ -2543,8 +2543,49 @@ func awsRestjson1_deserializeDocumentAudioExtractionCategory(v **types.AudioExtr
 				sv.State = types.State(jtv)
 			}
 
+		case "typeConfiguration":
+			if err := awsRestjson1_deserializeDocumentAudioExtractionCategoryTypeConfiguration(&sv.TypeConfiguration, value); err != nil {
+				return err
+			}
+
 		case "types":
 			if err := awsRestjson1_deserializeDocumentAudioExtractionCategoryTypes(&sv.Types, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAudioExtractionCategoryTypeConfiguration(v **types.AudioExtractionCategoryTypeConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AudioExtractionCategoryTypeConfiguration
+	if *v == nil {
+		sv = &types.AudioExtractionCategoryTypeConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "transcript":
+			if err := awsRestjson1_deserializeDocumentTranscriptConfiguration(&sv.Transcript, value); err != nil {
 				return err
 			}
 
@@ -3120,6 +3161,46 @@ func awsRestjson1_deserializeDocumentBlueprintSummary(v **types.BlueprintSummary
 					return err
 				}
 				sv.LastModifiedTime = ptr.Time(t)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentChannelLabelingConfiguration(v **types.ChannelLabelingConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ChannelLabelingConfiguration
+	if *v == nil {
+		sv = &types.ChannelLabelingConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "state":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected State to be of type string, got %T instead", value)
+				}
+				sv.State = types.State(jtv)
 			}
 
 		default:
@@ -4515,6 +4596,46 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentSpeakerLabelingConfiguration(v **types.SpeakerLabelingConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SpeakerLabelingConfiguration
+	if *v == nil {
+		sv = &types.SpeakerLabelingConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "state":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected State to be of type string, got %T instead", value)
+				}
+				sv.State = types.State(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentSplitterConfiguration(v **types.SplitterConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4718,6 +4839,47 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 					return fmt.Errorf("expected NonBlankString to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTranscriptConfiguration(v **types.TranscriptConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TranscriptConfiguration
+	if *v == nil {
+		sv = &types.TranscriptConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "channelLabeling":
+			if err := awsRestjson1_deserializeDocumentChannelLabelingConfiguration(&sv.ChannelLabeling, value); err != nil {
+				return err
+			}
+
+		case "speakerLabeling":
+			if err := awsRestjson1_deserializeDocumentSpeakerLabelingConfiguration(&sv.SpeakerLabeling, value); err != nil {
+				return err
 			}
 
 		default:

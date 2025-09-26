@@ -426,6 +426,109 @@ func awsRestjson1_serializeOpDocumentAssociateBotInput(v *AssociateBotInput, val
 	return nil
 }
 
+type awsRestjson1_serializeOpAssociateContactWithUser struct {
+}
+
+func (*awsRestjson1_serializeOpAssociateContactWithUser) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpAssociateContactWithUser) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*AssociateContactWithUserInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/contacts/{InstanceId}/{ContactId}/associate-user")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsAssociateContactWithUserInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentAssociateContactWithUserInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsAssociateContactWithUserInput(v *AssociateContactWithUserInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ContactId == nil || len(*v.ContactId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ContactId must not be empty")}
+	}
+	if v.ContactId != nil {
+		if err := encoder.SetURI("ContactId").String(*v.ContactId); err != nil {
+			return err
+		}
+	}
+
+	if v.InstanceId == nil || len(*v.InstanceId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member InstanceId must not be empty")}
+	}
+	if v.InstanceId != nil {
+		if err := encoder.SetURI("InstanceId").String(*v.InstanceId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentAssociateContactWithUserInput(v *AssociateContactWithUserInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.UserId != nil {
+		ok := object.Key("UserId")
+		ok.String(*v.UserId)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpAssociateDefaultVocabulary struct {
 }
 
@@ -1237,6 +1340,13 @@ func awsRestjson1_serializeOpHttpBindingsAssociateRoutingProfileQueuesInput(v *A
 func awsRestjson1_serializeOpDocumentAssociateRoutingProfileQueuesInput(v *AssociateRoutingProfileQueuesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ManualAssignmentQueueConfigs != nil {
+		ok := object.Key("ManualAssignmentQueueConfigs")
+		if err := awsRestjson1_serializeDocumentRoutingProfileManualAssignmentQueueConfigList(v.ManualAssignmentQueueConfigs, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.QueueConfigs != nil {
 		ok := object.Key("QueueConfigs")
@@ -4490,6 +4600,13 @@ func awsRestjson1_serializeOpDocumentCreateRoutingProfileInput(v *CreateRoutingP
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
+	}
+
+	if v.ManualAssignmentQueueConfigs != nil {
+		ok := object.Key("ManualAssignmentQueueConfigs")
+		if err := awsRestjson1_serializeDocumentRoutingProfileManualAssignmentQueueConfigList(v.ManualAssignmentQueueConfigs, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.MediaConcurrencies != nil {
@@ -11076,6 +11193,13 @@ func awsRestjson1_serializeOpDocumentDisassociateRoutingProfileQueuesInput(v *Di
 	object := value.Object()
 	defer object.Close()
 
+	if v.ManualAssignmentQueueReferences != nil {
+		ok := object.Key("ManualAssignmentQueueReferences")
+		if err := awsRestjson1_serializeDocumentRoutingProfileQueueReferenceList(v.ManualAssignmentQueueReferences, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.QueueReferences != nil {
 		ok := object.Key("QueueReferences")
 		if err := awsRestjson1_serializeDocumentRoutingProfileQueueReferenceList(v.QueueReferences, ok); err != nil {
@@ -15525,6 +15649,94 @@ func awsRestjson1_serializeOpDocumentListRealtimeContactAnalysisSegmentsV2Input(
 	if v.SegmentTypes != nil {
 		ok := object.Key("SegmentTypes")
 		if err := awsRestjson1_serializeDocumentRealTimeContactAnalysisSegmentTypes(v.SegmentTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListRoutingProfileManualAssignmentQueues struct {
+}
+
+func (*awsRestjson1_serializeOpListRoutingProfileManualAssignmentQueues) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListRoutingProfileManualAssignmentQueues) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListRoutingProfileManualAssignmentQueuesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/routing-profiles/{InstanceId}/{RoutingProfileId}/manual-assignment-queues")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListRoutingProfileManualAssignmentQueuesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListRoutingProfileManualAssignmentQueuesInput(v *ListRoutingProfileManualAssignmentQueuesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.InstanceId == nil || len(*v.InstanceId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member InstanceId must not be empty")}
+	}
+	if v.InstanceId != nil {
+		if err := encoder.SetURI("InstanceId").String(*v.InstanceId); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	if v.RoutingProfileId == nil || len(*v.RoutingProfileId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member RoutingProfileId must not be empty")}
+	}
+	if v.RoutingProfileId != nil {
+		if err := encoder.SetURI("RoutingProfileId").String(*v.RoutingProfileId); err != nil {
 			return err
 		}
 	}
@@ -30700,6 +30912,25 @@ func awsRestjson1_serializeDocumentMetricV2(v *types.MetricV2, value smithyjson.
 	return nil
 }
 
+func awsRestjson1_serializeDocumentNameCriteria(v *types.NameCriteria, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.MatchType) > 0 {
+		ok := object.Key("MatchType")
+		ok.String(string(v.MatchType))
+	}
+
+	if v.SearchText != nil {
+		ok := object.Key("SearchText")
+		if err := awsRestjson1_serializeDocumentSearchTextList(v.SearchText, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentNewSessionDetails(v *types.NewSessionDetails, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -31673,6 +31904,33 @@ func awsRestjson1_serializeDocumentRoutingExpressions(v []string, value smithyjs
 	return nil
 }
 
+func awsRestjson1_serializeDocumentRoutingProfileManualAssignmentQueueConfig(v *types.RoutingProfileManualAssignmentQueueConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.QueueReference != nil {
+		ok := object.Key("QueueReference")
+		if err := awsRestjson1_serializeDocumentRoutingProfileQueueReference(v.QueueReference, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRoutingProfileManualAssignmentQueueConfigList(v []types.RoutingProfileManualAssignmentQueueConfig, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentRoutingProfileManualAssignmentQueueConfig(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentRoutingProfileQueueConfig(v *types.RoutingProfileQueueConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -31935,6 +32193,25 @@ func awsRestjson1_serializeDocumentS3Config(v *types.S3Config, value smithyjson.
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSearchableAgentCriteriaStep(v *types.SearchableAgentCriteriaStep, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AgentIds != nil {
+		ok := object.Key("AgentIds")
+		if err := awsRestjson1_serializeDocumentAgentResourceIdList(v.AgentIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.MatchType) > 0 {
+		ok := object.Key("MatchType")
+		ok.String(string(v.MatchType))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSearchableContactAttributes(v *types.SearchableContactAttributes, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -31993,6 +32270,47 @@ func awsRestjson1_serializeDocumentSearchableContactAttributeValueList(v []strin
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSearchableRoutingCriteria(v *types.SearchableRoutingCriteria, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Steps != nil {
+		ok := object.Key("Steps")
+		if err := awsRestjson1_serializeDocumentSearchableRoutingCriteriaStepList(v.Steps, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSearchableRoutingCriteriaStep(v *types.SearchableRoutingCriteriaStep, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AgentCriteria != nil {
+		ok := object.Key("AgentCriteria")
+		if err := awsRestjson1_serializeDocumentSearchableAgentCriteriaStep(v.AgentCriteria, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSearchableRoutingCriteriaStepList(v []types.SearchableRoutingCriteriaStep, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSearchableRoutingCriteriaStep(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -32059,6 +32377,59 @@ func awsRestjson1_serializeDocumentSearchableSegmentAttributeValueList(v []strin
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSearchContactsAdditionalTimeRange(v *types.SearchContactsAdditionalTimeRange, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Criteria != nil {
+		ok := object.Key("Criteria")
+		if err := awsRestjson1_serializeDocumentSearchContactsAdditionalTimeRangeCriteriaList(v.Criteria, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.MatchType) > 0 {
+		ok := object.Key("MatchType")
+		ok.String(string(v.MatchType))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSearchContactsAdditionalTimeRangeCriteria(v *types.SearchContactsAdditionalTimeRangeCriteria, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TimeRange != nil {
+		ok := object.Key("TimeRange")
+		if err := awsRestjson1_serializeDocumentSearchContactsTimeRange(v.TimeRange, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TimestampCondition != nil {
+		ok := object.Key("TimestampCondition")
+		if err := awsRestjson1_serializeDocumentSearchContactsTimestampCondition(v.TimestampCondition, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSearchContactsAdditionalTimeRangeCriteriaList(v []types.SearchContactsAdditionalTimeRangeCriteria, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSearchContactsAdditionalTimeRangeCriteria(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSearchContactsTimeRange(v *types.SearchContactsTimeRange, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -32081,9 +32452,33 @@ func awsRestjson1_serializeDocumentSearchContactsTimeRange(v *types.SearchContac
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSearchContactsTimestampCondition(v *types.SearchContactsTimestampCondition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ConditionType) > 0 {
+		ok := object.Key("ConditionType")
+		ok.String(string(v.ConditionType))
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSearchCriteria(v *types.SearchCriteria, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AdditionalTimeRange != nil {
+		ok := object.Key("AdditionalTimeRange")
+		if err := awsRestjson1_serializeDocumentSearchContactsAdditionalTimeRange(v.AdditionalTimeRange, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.AgentHierarchyGroups != nil {
 		ok := object.Key("AgentHierarchyGroups")
@@ -32120,9 +32515,23 @@ func awsRestjson1_serializeDocumentSearchCriteria(v *types.SearchCriteria, value
 		}
 	}
 
+	if v.Name != nil {
+		ok := object.Key("Name")
+		if err := awsRestjson1_serializeDocumentNameCriteria(v.Name, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.QueueIds != nil {
 		ok := object.Key("QueueIds")
 		if err := awsRestjson1_serializeDocumentQueueIdList(v.QueueIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RoutingCriteria != nil {
+		ok := object.Key("RoutingCriteria")
+		if err := awsRestjson1_serializeDocumentSearchableRoutingCriteria(v.RoutingCriteria, ok); err != nil {
 			return err
 		}
 	}

@@ -343,6 +343,7 @@ const (
 	DimensionAz                           Dimension = "AZ"
 	DimensionInstanceType                 Dimension = "INSTANCE_TYPE"
 	DimensionLinkedAccount                Dimension = "LINKED_ACCOUNT"
+	DimensionPayerAccount                 Dimension = "PAYER_ACCOUNT"
 	DimensionLinkedAccountName            Dimension = "LINKED_ACCOUNT_NAME"
 	DimensionOperation                    Dimension = "OPERATION"
 	DimensionPurchaseType                 Dimension = "PURCHASE_TYPE"
@@ -385,6 +386,7 @@ func (Dimension) Values() []Dimension {
 		"AZ",
 		"INSTANCE_TYPE",
 		"LINKED_ACCOUNT",
+		"PAYER_ACCOUNT",
 		"LINKED_ACCOUNT_NAME",
 		"OPERATION",
 		"PURCHASE_TYPE",

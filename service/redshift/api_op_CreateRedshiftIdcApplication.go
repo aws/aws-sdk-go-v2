@@ -65,6 +65,14 @@ type CreateRedshiftIdcApplicationInput struct {
 	// application.
 	ServiceIntegrations []types.ServiceIntegrationsUnion
 
+	// A list of tags keys that Redshift Identity Center applications copy to IAM
+	// Identity Center. For each input key, the tag corresponding to the key-value pair
+	// is propagated.
+	SsoTagKeys []string
+
+	// A list of tags.
+	Tags []types.Tag
+
 	noSmithyDocumentSerde
 }
 

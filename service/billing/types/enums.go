@@ -2,6 +2,60 @@
 
 package types
 
+type BillingViewStatus string
+
+// Enum values for BillingViewStatus
+const (
+	BillingViewStatusHealthy   BillingViewStatus = "HEALTHY"
+	BillingViewStatusUnhealthy BillingViewStatus = "UNHEALTHY"
+	BillingViewStatusCreating  BillingViewStatus = "CREATING"
+	BillingViewStatusUpdating  BillingViewStatus = "UPDATING"
+)
+
+// Values returns all known values for BillingViewStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BillingViewStatus) Values() []BillingViewStatus {
+	return []BillingViewStatus{
+		"HEALTHY",
+		"UNHEALTHY",
+		"CREATING",
+		"UPDATING",
+	}
+}
+
+type BillingViewStatusReason string
+
+// Enum values for BillingViewStatusReason
+const (
+	BillingViewStatusReasonSourceViewUnhealthy           BillingViewStatusReason = "SOURCE_VIEW_UNHEALTHY"
+	BillingViewStatusReasonSourceViewUpdating            BillingViewStatusReason = "SOURCE_VIEW_UPDATING"
+	BillingViewStatusReasonSourceViewAccessDenied        BillingViewStatusReason = "SOURCE_VIEW_ACCESS_DENIED"
+	BillingViewStatusReasonSourceViewNotFound            BillingViewStatusReason = "SOURCE_VIEW_NOT_FOUND"
+	BillingViewStatusReasonCyclicDependency              BillingViewStatusReason = "CYCLIC_DEPENDENCY"
+	BillingViewStatusReasonSourceViewDepthExceeded       BillingViewStatusReason = "SOURCE_VIEW_DEPTH_EXCEEDED"
+	BillingViewStatusReasonAggregateSource               BillingViewStatusReason = "AGGREGATE_SOURCE"
+	BillingViewStatusReasonViewOwnerNotManagementAccount BillingViewStatusReason = "VIEW_OWNER_NOT_MANAGEMENT_ACCOUNT"
+)
+
+// Values returns all known values for BillingViewStatusReason. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BillingViewStatusReason) Values() []BillingViewStatusReason {
+	return []BillingViewStatusReason{
+		"SOURCE_VIEW_UNHEALTHY",
+		"SOURCE_VIEW_UPDATING",
+		"SOURCE_VIEW_ACCESS_DENIED",
+		"SOURCE_VIEW_NOT_FOUND",
+		"CYCLIC_DEPENDENCY",
+		"SOURCE_VIEW_DEPTH_EXCEEDED",
+		"AGGREGATE_SOURCE",
+		"VIEW_OWNER_NOT_MANAGEMENT_ACCOUNT",
+	}
+}
+
 type BillingViewType string
 
 // Enum values for BillingViewType

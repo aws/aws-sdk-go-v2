@@ -41,8 +41,14 @@ type BillingViewElement struct {
 	// [Expression]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_billing_Expression.html
 	DataFilterExpression *Expression
 
+	//  The number of billing views that use this billing view as a source.
+	DerivedViewCount *int32
+
 	//  The description of the billing view.
 	Description *string
+
+	//  The current health status of the billing view.
+	HealthStatus *BillingViewHealthStatus
 
 	//  The account name of the billing view.
 	Name *string
@@ -50,8 +56,32 @@ type BillingViewElement struct {
 	// The account owner of the billing view.
 	OwnerAccountId *string
 
+	//  The Amazon Web Services account ID that owns the source billing view, if this
+	// is a derived billing view.
+	SourceAccountId *string
+
+	//  The number of source views associated with this billing view.
+	SourceViewCount *int32
+
 	// The time when the billing view was last updated.
 	UpdatedAt *time.Time
+
+	//  The timestamp of when the billing view definition was last updated.
+	ViewDefinitionLastUpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+//	Represents the health status of a billing view, including a status code and
+//
+// optional reasons for the status.
+type BillingViewHealthStatus struct {
+
+	// The current health status code of the billing view.
+	StatusCode BillingViewStatus
+
+	// A list of reasons explaining the current health status, if applicable.
+	StatusReasons []BillingViewStatusReason
 
 	noSmithyDocumentSerde
 }
@@ -69,11 +99,18 @@ type BillingViewListElement struct {
 	//  The description of the billing view.
 	Description *string
 
+	//  The current health status of the billing view.
+	HealthStatus *BillingViewHealthStatus
+
 	//  A list of names of the Billing view.
 	Name *string
 
 	//  The list of owners of the Billing view.
 	OwnerAccountId *string
+
+	//  The Amazon Web Services account ID that owns the source billing view, if this
+	// is a derived billing view.
+	SourceAccountId *string
 
 	noSmithyDocumentSerde
 }
@@ -106,6 +143,9 @@ type Expression struct {
 	//  The specific Tag to use for Expression .
 	Tags *TagValues
 
+	//  Specifies a time range filter for the billing view data.
+	TimeRange *TimeRange
+
 	noSmithyDocumentSerde
 }
 
@@ -135,6 +175,18 @@ type TagValues struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a time range with inclusive begin and end dates.
+type TimeRange struct {
+
+	//  The inclusive start date of the time range.
+	BeginDateInclusive *time.Time
+
+	//  The inclusive end date of the time range.
+	EndDateInclusive *time.Time
 
 	noSmithyDocumentSerde
 }

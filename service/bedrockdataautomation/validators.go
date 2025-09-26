@@ -354,6 +354,28 @@ func validateAudioExtractionCategory(v *types.AudioExtractionCategory) error {
 	if len(v.State) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("State"))
 	}
+	if v.TypeConfiguration != nil {
+		if err := validateAudioExtractionCategoryTypeConfiguration(v.TypeConfiguration); err != nil {
+			invalidParams.AddNested("TypeConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAudioExtractionCategoryTypeConfiguration(v *types.AudioExtractionCategoryTypeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AudioExtractionCategoryTypeConfiguration"}
+	if v.Transcript != nil {
+		if err := validateTranscriptConfiguration(v.Transcript); err != nil {
+			invalidParams.AddNested("Transcript", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -456,6 +478,21 @@ func validateBlueprintItems(v []types.BlueprintItem) error {
 		if err := validateBlueprintItem(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateChannelLabelingConfiguration(v *types.ChannelLabelingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChannelLabelingConfiguration"}
+	if len(v.State) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -720,6 +757,21 @@ func validateImageStandardOutputConfiguration(v *types.ImageStandardOutputConfig
 	}
 }
 
+func validateSpeakerLabelingConfiguration(v *types.SpeakerLabelingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SpeakerLabelingConfiguration"}
+	if len(v.State) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateStandardOutputConfiguration(v *types.StandardOutputConfiguration) error {
 	if v == nil {
 		return nil
@@ -778,6 +830,28 @@ func validateTagList(v []types.Tag) error {
 	for i := range v {
 		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTranscriptConfiguration(v *types.TranscriptConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TranscriptConfiguration"}
+	if v.SpeakerLabeling != nil {
+		if err := validateSpeakerLabelingConfiguration(v.SpeakerLabeling); err != nil {
+			invalidParams.AddNested("SpeakerLabeling", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ChannelLabeling != nil {
+		if err := validateChannelLabelingConfiguration(v.ChannelLabeling); err != nil {
+			invalidParams.AddNested("ChannelLabeling", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

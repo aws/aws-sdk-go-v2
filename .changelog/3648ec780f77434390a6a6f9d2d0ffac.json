@@ -1,0 +1,8 @@
+{
+    "id": "3648ec78-0f77-4343-90a6-a6f9d2d0ffac",
+    "type": "feature",
+    "description": "Added support for IPv6 compatible endpoints for DynamoDB Streams.",
+    "modules": [
+        "service/dynamodbstreams"
+    ]
+}

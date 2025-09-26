@@ -110,6 +110,18 @@ func TestCheckSnapshot_AssociateBot(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AssociateContactWithUser(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateContactWithUser(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateContactWithUser")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AssociateDefaultVocabulary(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateDefaultVocabulary(context.Background(), nil, func(o *Options) {
@@ -2054,6 +2066,18 @@ func TestCheckSnapshot_ListRealtimeContactAnalysisSegmentsV2(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListRoutingProfileManualAssignmentQueues(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRoutingProfileManualAssignmentQueues(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListRoutingProfileManualAssignmentQueues")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListRoutingProfileQueues(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListRoutingProfileQueues(context.Background(), nil, func(o *Options) {
@@ -3498,6 +3522,18 @@ func TestUpdateSnapshot_AssociateBot(t *testing.T) {
 	_, err := svc.AssociateBot(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AssociateBot")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AssociateContactWithUser(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateContactWithUser(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateContactWithUser")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5442,6 +5478,18 @@ func TestUpdateSnapshot_ListRealtimeContactAnalysisSegmentsV2(t *testing.T) {
 	_, err := svc.ListRealtimeContactAnalysisSegmentsV2(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListRealtimeContactAnalysisSegmentsV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListRoutingProfileManualAssignmentQueues(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRoutingProfileManualAssignmentQueues(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListRoutingProfileManualAssignmentQueues")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

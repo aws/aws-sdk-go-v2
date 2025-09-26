@@ -1024,6 +1024,8 @@ type FlowExecutionError struct {
 //	FlowExecutionEventMemberFlowFailureEvent
 //	FlowExecutionEventMemberFlowInputEvent
 //	FlowExecutionEventMemberFlowOutputEvent
+//	FlowExecutionEventMemberNodeActionEvent
+//	FlowExecutionEventMemberNodeDependencyEvent
 //	FlowExecutionEventMemberNodeFailureEvent
 //	FlowExecutionEventMemberNodeInputEvent
 //	FlowExecutionEventMemberNodeOutputEvent
@@ -1071,6 +1073,26 @@ type FlowExecutionEventMemberFlowOutputEvent struct {
 }
 
 func (*FlowExecutionEventMemberFlowOutputEvent) isFlowExecutionEvent() {}
+
+// Contains information about an action (operation) called by a node during
+// execution.
+type FlowExecutionEventMemberNodeActionEvent struct {
+	Value NodeActionEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowExecutionEventMemberNodeActionEvent) isFlowExecutionEvent() {}
+
+// Contains information about an internal trace of a specific node during
+// execution.
+type FlowExecutionEventMemberNodeDependencyEvent struct {
+	Value NodeDependencyEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowExecutionEventMemberNodeDependencyEvent) isFlowExecutionEvent() {}
 
 // Contains information about a failure that occurred at a specific node during
 // execution.
@@ -1438,6 +1460,7 @@ func (*FlowResponseStreamMemberFlowTraceEvent) isFlowResponseStream() {}
 //
 //	FlowTraceMemberConditionNodeResultTrace
 //	FlowTraceMemberNodeActionTrace
+//	FlowTraceMemberNodeDependencyTrace
 //	FlowTraceMemberNodeInputTrace
 //	FlowTraceMemberNodeOutputTrace
 //
@@ -1455,10 +1478,7 @@ type FlowTraceMemberConditionNodeResultTrace struct {
 
 func (*FlowTraceMemberConditionNodeResultTrace) isFlowTrace() {}
 
-// Contains information about an action (operation) called by a node. For more
-// information, see [Track each step in your prompt flow by viewing its trace in Amazon Bedrock].
-//
-// [Track each step in your prompt flow by viewing its trace in Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html
+// Contains information about an action (operation) called by a node.
 type FlowTraceMemberNodeActionTrace struct {
 	Value FlowTraceNodeActionEvent
 
@@ -1466,6 +1486,15 @@ type FlowTraceMemberNodeActionTrace struct {
 }
 
 func (*FlowTraceMemberNodeActionTrace) isFlowTrace() {}
+
+// Contains information about an internal trace of a node.
+type FlowTraceMemberNodeDependencyTrace struct {
+	Value FlowTraceDependencyEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowTraceMemberNodeDependencyTrace) isFlowTrace() {}
 
 // Contains information about the input into a node.
 type FlowTraceMemberNodeInputTrace struct {
@@ -1524,6 +1553,27 @@ type FlowTraceConditionNodeResultEvent struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about a dependency trace event in the flow.
+type FlowTraceDependencyEvent struct {
+
+	// The name of the node that generated the dependency trace.
+	//
+	// This member is required.
+	NodeName *string
+
+	// The date and time that the dependency trace was generated.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	// The trace elements containing detailed information about the dependency.
+	//
+	// This member is required.
+	TraceElements TraceElements
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a trace, which tracks an input or output for a node
 // in the flow. For more information, see [Track each step in your prompt flow by viewing its trace in Amazon Bedrock].
 //
@@ -1568,6 +1618,12 @@ type FlowTraceNodeActionEvent struct {
 	//
 	// This member is required.
 	Timestamp *time.Time
+
+	// The request payload sent to the downstream service.
+	OperationRequest document.Interface
+
+	// The response payload received from the downstream service.
+	OperationResponse document.Interface
 
 	noSmithyDocumentSerde
 }
@@ -1615,6 +1671,25 @@ type FlowTraceNodeInputEvent struct {
 	noSmithyDocumentSerde
 }
 
+// Represents an item in the execution chain for flow trace node input tracking.
+type FlowTraceNodeInputExecutionChainItem struct {
+
+	// The name of the node in the execution chain.
+	//
+	// This member is required.
+	NodeName *string
+
+	// The type of execution chain item. Supported values are Iterator and Loop.
+	//
+	// This member is required.
+	Type FlowControlNodeType
+
+	// The index position of this item in the execution chain.
+	Index *int32
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a field in the input into a node. For more
 // information, see [Track each step in your prompt flow by viewing its trace in Amazon Bedrock].
 //
@@ -1630,6 +1705,39 @@ type FlowTraceNodeInputField struct {
 	//
 	// This member is required.
 	NodeInputName *string
+
+	// The category of the input field.
+	Category FlowNodeInputCategory
+
+	// The execution path through nested nodes like iterators and loops.
+	ExecutionChain []FlowTraceNodeInputExecutionChainItem
+
+	// The source node that provides input data to this field.
+	Source *FlowTraceNodeInputSource
+
+	// The data type of the input field for compatibility validation.
+	Type FlowNodeIODataType
+
+	noSmithyDocumentSerde
+}
+
+// Represents the source of input data for a flow trace node field.
+type FlowTraceNodeInputSource struct {
+
+	// The expression used to extract data from the source.
+	//
+	// This member is required.
+	Expression *string
+
+	// The name of the source node that provides the input data.
+	//
+	// This member is required.
+	NodeName *string
+
+	// The name of the output field from the source node.
+	//
+	// This member is required.
+	OutputFieldName *string
 
 	noSmithyDocumentSerde
 }
@@ -1692,6 +1800,28 @@ type FlowTraceNodeOutputField struct {
 	//
 	// This member is required.
 	NodeOutputName *string
+
+	// The next node that receives output data from this field.
+	Next []FlowTraceNodeOutputNext
+
+	// The data type of the output field for compatibility validation.
+	Type FlowNodeIODataType
+
+	noSmithyDocumentSerde
+}
+
+// Represents the next node that receives output data from a flow trace.
+type FlowTraceNodeOutputNext struct {
+
+	// The name of the input field in the next node that receives the data.
+	//
+	// This member is required.
+	InputFieldName *string
+
+	// The name of the next node that receives the output data.
+	//
+	// This member is required.
+	NodeName *string
 
 	noSmithyDocumentSerde
 }
@@ -3120,6 +3250,66 @@ type ModelPerformanceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about an action (operation) called by a node during
+// execution.
+type NodeActionEvent struct {
+
+	// The name of the node that called the operation.
+	//
+	// This member is required.
+	NodeName *string
+
+	// The name of the operation that the node called.
+	//
+	// This member is required.
+	OperationName *string
+
+	// The ID of the request that the node made to the operation.
+	//
+	// This member is required.
+	RequestId *string
+
+	// The name of the service that the node called.
+	//
+	// This member is required.
+	ServiceName *string
+
+	// The date and time that the operation was called.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	// The request payload sent to the downstream service.
+	OperationRequest document.Interface
+
+	// The response payload received from the downstream service.
+	OperationResponse document.Interface
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about an internal trace of a specific node during
+// execution.
+type NodeDependencyEvent struct {
+
+	// The name of the node that generated the dependency trace.
+	//
+	// This member is required.
+	NodeName *string
+
+	// The date and time that the dependency trace was generated.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	// The trace elements containing detailed information about the node execution.
+	//
+	// This member is required.
+	TraceElements NodeTraceElements
+
+	noSmithyDocumentSerde
+}
+
 // Contains the content of a flow node's input or output field for a flow
 // execution.
 //
@@ -3197,6 +3387,25 @@ type NodeInputEvent struct {
 	noSmithyDocumentSerde
 }
 
+// Represents an item in the execution chain for node input tracking.
+type NodeInputExecutionChainItem struct {
+
+	// The name of the node in the execution chain.
+	//
+	// This member is required.
+	NodeName *string
+
+	// The type of execution chain item. Supported values are Iterator and Loop.
+	//
+	// This member is required.
+	Type FlowControlNodeType
+
+	// The index position of this item in the execution chain.
+	Index *int32
+
+	noSmithyDocumentSerde
+}
+
 // Represents an input field provided to a node during a flow execution.
 type NodeInputField struct {
 
@@ -3209,6 +3418,39 @@ type NodeInputField struct {
 	//
 	// This member is required.
 	Name *string
+
+	// The category of the input field.
+	Category FlowNodeInputCategory
+
+	// The execution path through nested nodes like iterators and loops.
+	ExecutionChain []NodeInputExecutionChainItem
+
+	// The source node that provides input data to this field.
+	Source *NodeInputSource
+
+	// The data type of the input field for compatibility validation.
+	Type FlowNodeIODataType
+
+	noSmithyDocumentSerde
+}
+
+// Represents the source of input data for a node field.
+type NodeInputSource struct {
+
+	// The expression used to extract data from the source.
+	//
+	// This member is required.
+	Expression *string
+
+	// The name of the source node that provides the input data.
+	//
+	// This member is required.
+	NodeName *string
+
+	// The name of the output field from the source node.
+	//
+	// This member is required.
+	OutputFieldName *string
 
 	noSmithyDocumentSerde
 }
@@ -3254,8 +3496,48 @@ type NodeOutputField struct {
 	// This member is required.
 	Name *string
 
+	// The next node that receives output data from this field.
+	Next []NodeOutputNext
+
+	// The data type of the output field for compatibility validation.
+	Type FlowNodeIODataType
+
 	noSmithyDocumentSerde
 }
+
+// Represents the next node that receives output data.
+type NodeOutputNext struct {
+
+	// The name of the input field in the next node that receives the data.
+	//
+	// This member is required.
+	InputFieldName *string
+
+	// The name of the next node that receives the output data.
+	//
+	// This member is required.
+	NodeName *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains trace elements for node execution tracking.
+//
+// The following types satisfy this interface:
+//
+//	NodeTraceElementsMemberAgentTraces
+type NodeTraceElements interface {
+	isNodeTraceElements()
+}
+
+// Agent trace information for the node execution.
+type NodeTraceElementsMemberAgentTraces struct {
+	Value []TracePart
+
+	noSmithyDocumentSerde
+}
+
+func (*NodeTraceElementsMemberAgentTraces) isNodeTraceElements() {}
 
 // Contains the result or output of an action group or knowledge base, or the
 // response to the user.
@@ -5265,6 +5547,24 @@ type TraceMemberRoutingClassifierTrace struct {
 
 func (*TraceMemberRoutingClassifierTrace) isTrace() {}
 
+// Contains trace elements for flow execution tracking.
+//
+// The following types satisfy this interface:
+//
+//	TraceElementsMemberAgentTraces
+type TraceElements interface {
+	isTraceElements()
+}
+
+// Agent trace information for the flow execution.
+type TraceElementsMemberAgentTraces struct {
+	Value []TracePart
+
+	noSmithyDocumentSerde
+}
+
+func (*TraceElementsMemberAgentTraces) isTraceElements() {}
+
 // Contains information about the agent and session, alongside the agent's
 // reasoning process and results from calling API actions and querying knowledge
 // bases and metadata about the trace. You can use the trace to understand how the
@@ -5413,6 +5713,7 @@ func (*UnknownUnionMember) isInvocationResultMember()                      {}
 func (*UnknownUnionMember) isInvocationStepPayload()                       {}
 func (*UnknownUnionMember) isMemory()                                      {}
 func (*UnknownUnionMember) isNodeExecutionContent()                        {}
+func (*UnknownUnionMember) isNodeTraceElements()                           {}
 func (*UnknownUnionMember) isOptimizedPrompt()                             {}
 func (*UnknownUnionMember) isOptimizedPromptStream()                       {}
 func (*UnknownUnionMember) isOrchestrationExecutor()                       {}
@@ -5426,3 +5727,4 @@ func (*UnknownUnionMember) isRetrievalFilter()                             {}
 func (*UnknownUnionMember) isRetrieveAndGenerateStreamResponseOutput()     {}
 func (*UnknownUnionMember) isRoutingClassifierTrace()                      {}
 func (*UnknownUnionMember) isTrace()                                       {}
+func (*UnknownUnionMember) isTraceElements()                               {}

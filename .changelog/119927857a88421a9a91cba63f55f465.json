@@ -1,0 +1,8 @@
+{
+    "id": "11992785-7a88-421a-9a91-cba63f55f465",
+    "type": "feature",
+    "description": "Support for payer account dimension and billing view health status.",
+    "modules": [
+        "service/costexplorer"
+    ]
+}

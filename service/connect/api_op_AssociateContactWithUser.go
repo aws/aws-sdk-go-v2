@@ -6,28 +6,73 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a set of queues with a routing profile.
-func (c *Client) AssociateRoutingProfileQueues(ctx context.Context, params *AssociateRoutingProfileQueuesInput, optFns ...func(*Options)) (*AssociateRoutingProfileQueuesOutput, error) {
+// Associates a queued contact with an agent.
+//
+// # Use cases
+//
+// Following are common uses cases for this API:
+//
+//   - Custom contact routing. You can build custom contact routing mechanisms
+//     beyond the default system routing in Amazon Connect. You can create tailored
+//     contact distribution logic that offers queued contacts directly to specific
+//     agents.
+//
+//   - Manual contact assignment. You can programmatically assign queued contacts
+//     to available users. This provides flexibility to contact centers that require
+//     manual oversight or specialized routing workflows outside of standard queue
+//     management.
+//
+// For information about how manual contact assignment works in the agent
+//
+//	workspace, see the [Access the Worklist app in the Amazon Connect agent workspace]in the Amazon Connect Administrator Guide.
+//
+// Important things to know
+//
+//   - Use this API chat/SMS, email, and task contacts. It does not support voice
+//     contacts.
+//
+//   - Use it to associate contacts with users regardless of their current state,
+//     including custom states. Ensure your application logic accounts for user
+//     availability before making associations.
+//
+//   - It honors the IAM context key connect:PreferredUserArn to prevent
+//     unauthorized contact associations.
+//
+//   - It respects the IAM context key connect:PreferredUserArn to enforce
+//     authorization controls and prevent unauthorized contact associations. Verify
+//     that your IAM policies are properly configured to support your intended use
+//     cases.
+//
+// Endpoints: See [Amazon Connect endpoints and quotas].
+//
+// [Amazon Connect endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
+//
+// [Access the Worklist app in the Amazon Connect agent workspace]: https://docs.aws.amazon.com/connect/latest/adminguide/worklist-app.html
+func (c *Client) AssociateContactWithUser(ctx context.Context, params *AssociateContactWithUserInput, optFns ...func(*Options)) (*AssociateContactWithUserOutput, error) {
 	if params == nil {
-		params = &AssociateRoutingProfileQueuesInput{}
+		params = &AssociateContactWithUserInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateRoutingProfileQueues", params, optFns, c.addOperationAssociateRoutingProfileQueuesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateContactWithUser", params, optFns, c.addOperationAssociateContactWithUserMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*AssociateRoutingProfileQueuesOutput)
+	out := result.(*AssociateContactWithUserOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type AssociateRoutingProfileQueuesInput struct {
+type AssociateContactWithUserInput struct {
+
+	// The identifier of the contact in this instance of Amazon Connect.
+	//
+	// This member is required.
+	ContactId *string
 
 	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
 	// Name (ARN) of the instance.
@@ -37,40 +82,34 @@ type AssociateRoutingProfileQueuesInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The identifier of the routing profile.
+	// The identifier for the user. This can be the ID or the ARN of the user.
 	//
 	// This member is required.
-	RoutingProfileId *string
-
-	// The manual assignment queues to associate with this routing profile.
-	ManualAssignmentQueueConfigs []types.RoutingProfileManualAssignmentQueueConfig
-
-	// The queues to associate with this routing profile.
-	QueueConfigs []types.RoutingProfileQueueConfig
+	UserId *string
 
 	noSmithyDocumentSerde
 }
 
-type AssociateRoutingProfileQueuesOutput struct {
+type AssociateContactWithUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationAssociateRoutingProfileQueuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateContactWithUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateRoutingProfileQueues{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateContactWithUser{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateRoutingProfileQueues{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateContactWithUser{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateRoutingProfileQueues"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateContactWithUser"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -125,10 +164,10 @@ func (c *Client) addOperationAssociateRoutingProfileQueuesMiddlewares(stack *mid
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
-	if err = addOpAssociateRoutingProfileQueuesValidationMiddleware(stack); err != nil {
+	if err = addOpAssociateContactWithUserValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateRoutingProfileQueues(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateContactWithUser(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -191,10 +230,10 @@ func (c *Client) addOperationAssociateRoutingProfileQueuesMiddlewares(stack *mid
 	return nil
 }
 
-func newServiceMetadataMiddleware_opAssociateRoutingProfileQueues(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opAssociateContactWithUser(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "AssociateRoutingProfileQueues",
+		OperationName: "AssociateContactWithUser",
 	}
 }

@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAssociateSourceViews struct {
+}
+
+func (*validateOpAssociateSourceViews) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateSourceViews) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateSourceViewsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateSourceViewsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateBillingView struct {
 }
 
@@ -45,6 +65,26 @@ func (m *validateOpDeleteBillingView) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteBillingViewInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateSourceViews struct {
+}
+
+func (*validateOpDisassociateSourceViews) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateSourceViews) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateSourceViewsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateSourceViewsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -210,12 +250,20 @@ func (m *validateOpUpdateBillingView) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAssociateSourceViewsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateSourceViews{}, middleware.After)
+}
+
 func addOpCreateBillingViewValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateBillingView{}, middleware.After)
 }
 
 func addOpDeleteBillingViewValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteBillingView{}, middleware.After)
+}
+
+func addOpDisassociateSourceViewsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateSourceViews{}, middleware.After)
 }
 
 func addOpGetBillingViewValidationMiddleware(stack *middleware.Stack) error {
@@ -358,6 +406,24 @@ func validateTagValues(v *types.TagValues) error {
 	}
 }
 
+func validateOpAssociateSourceViewsInput(v *AssociateSourceViewsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateSourceViewsInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.SourceViews == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceViews"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateBillingViewInput(v *CreateBillingViewInput) error {
 	if v == nil {
 		return nil
@@ -393,6 +459,24 @@ func validateOpDeleteBillingViewInput(v *DeleteBillingViewInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteBillingViewInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateSourceViewsInput(v *DisassociateSourceViewsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateSourceViewsInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.SourceViews == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceViews"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

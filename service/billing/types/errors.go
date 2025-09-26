@@ -33,6 +33,35 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+//	Exception thrown when a billing view's health status prevents an operation
+//
+// from being performed. This may occur if the billing view is in a state other
+// than HEALTHY .
+type BillingViewHealthStatusException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *BillingViewHealthStatusException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *BillingViewHealthStatusException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *BillingViewHealthStatusException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "BillingViewHealthStatusException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *BillingViewHealthStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 //	The requested operation would cause a conflict with the current state of a
 //
 // service resource associated with the request. Resolve the conflict before

@@ -87,6 +87,34 @@ func (e *BillExpirationException) ErrorCode() string {
 }
 func (e *BillExpirationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+//	The billing view status must be HEALTHY to perform this action. Try again when
+//
+// the status is HEALTHY .
+type BillingViewHealthStatusException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *BillingViewHealthStatusException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *BillingViewHealthStatusException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *BillingViewHealthStatusException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "BillingViewHealthStatusException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *BillingViewHealthStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The requested data is unavailable.
 type DataUnavailableException struct {
 	Message *string

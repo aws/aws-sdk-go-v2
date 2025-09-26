@@ -1,0 +1,8 @@
+{
+    "id": "ae5eb548-5210-4568-8975-d9c9f909a660",
+    "type": "feature",
+    "description": "Add ability to combine custom billing views to create new consolidated views.",
+    "modules": [
+        "service/billing"
+    ]
+}

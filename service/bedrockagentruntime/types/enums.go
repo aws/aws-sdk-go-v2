@@ -261,6 +261,25 @@ func (FlowCompletionReason) Values() []FlowCompletionReason {
 	}
 }
 
+type FlowControlNodeType string
+
+// Enum values for FlowControlNodeType
+const (
+	FlowControlNodeTypeIterator FlowControlNodeType = "Iterator"
+	FlowControlNodeTypeLoop     FlowControlNodeType = "Loop"
+)
+
+// Values returns all known values for FlowControlNodeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FlowControlNodeType) Values() []FlowControlNodeType {
+	return []FlowControlNodeType{
+		"Iterator",
+		"Loop",
+	}
+}
+
 type FlowErrorCode string
 
 // Enum values for FlowErrorCode
@@ -340,6 +359,52 @@ func (FlowExecutionStatus) Values() []FlowExecutionStatus {
 		"Failed",
 		"TimedOut",
 		"Aborted",
+	}
+}
+
+type FlowNodeInputCategory string
+
+// Enum values for FlowNodeInputCategory
+const (
+	FlowNodeInputCategoryLoopCondition          FlowNodeInputCategory = "LoopCondition"
+	FlowNodeInputCategoryReturnValueToLoopStart FlowNodeInputCategory = "ReturnValueToLoopStart"
+	FlowNodeInputCategoryExitLoop               FlowNodeInputCategory = "ExitLoop"
+)
+
+// Values returns all known values for FlowNodeInputCategory. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FlowNodeInputCategory) Values() []FlowNodeInputCategory {
+	return []FlowNodeInputCategory{
+		"LoopCondition",
+		"ReturnValueToLoopStart",
+		"ExitLoop",
+	}
+}
+
+type FlowNodeIODataType string
+
+// Enum values for FlowNodeIODataType
+const (
+	FlowNodeIODataTypeString  FlowNodeIODataType = "String"
+	FlowNodeIODataTypeNumber  FlowNodeIODataType = "Number"
+	FlowNodeIODataTypeBoolean FlowNodeIODataType = "Boolean"
+	FlowNodeIODataTypeObject  FlowNodeIODataType = "Object"
+	FlowNodeIODataTypeArray   FlowNodeIODataType = "Array"
+)
+
+// Values returns all known values for FlowNodeIODataType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FlowNodeIODataType) Values() []FlowNodeIODataType {
+	return []FlowNodeIODataType{
+		"String",
+		"Number",
+		"Boolean",
+		"Object",
+		"Array",
 	}
 }
 

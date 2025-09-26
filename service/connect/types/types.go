@@ -1609,12 +1609,18 @@ type ContactSearchSummary struct {
 	// started listening to a contact.
 	InitiationTimestamp *time.Time
 
+	// Indicates name of the contact.
+	Name *string
+
 	// If this contact is not the first contact, this is the ID of the previous
 	// contact.
 	PreviousContactId *string
 
 	// If this contact was queued, this contains information about the queue.
 	QueueInfo *ContactSearchSummaryQueueInfo
+
+	// Latest routing criteria on the contact.
+	RoutingCriteria *RoutingCriteria
 
 	// The timestamp, in Unix epoch time format, at which to start running the inbound
 	// flow.
@@ -1655,6 +1661,9 @@ type ContactSearchSummaryQueueInfo struct {
 // string, and its corresponding value is the actual string value of the segment
 // attribute.
 type ContactSearchSummarySegmentAttributeValue struct {
+
+	// The key and value of a segment attribute.
+	ValueMap map[string]SegmentAttributeValue
 
 	// The value of a segment attribute represented as a string.
 	ValueString *string
@@ -4384,6 +4393,23 @@ type MetricV2 struct {
 	noSmithyDocumentSerde
 }
 
+// The search criteria based on the contact name
+type NameCriteria struct {
+
+	// The match type combining name search criteria using multiple search texts in a
+	// name criteria.
+	//
+	// This member is required.
+	MatchType SearchContactsMatchType
+
+	// The words or phrases used to match the contact name.
+	//
+	// This member is required.
+	SearchText []string
+
+	noSmithyDocumentSerde
+}
+
 // Payload of chat properties to apply when starting a new contact.
 type NewSessionDetails struct {
 
@@ -6027,6 +6053,9 @@ type RoutingProfile struct {
 	// calculated based on time since their last inbound contact or longest idle time.
 	AgentAvailabilityTimer AgentAvailabilityTimer
 
+	// The IDs of the associated manual assignment queues.
+	AssociatedManualAssignmentQueueIds []string
+
 	// The IDs of the associated queue.
 	AssociatedQueueIds []string
 
@@ -6058,6 +6087,9 @@ type RoutingProfile struct {
 	// The name of the routing profile.
 	Name *string
 
+	// The number of associated manual assignment queues in routing profile.
+	NumberOfAssociatedManualAssignmentQueues *int64
+
 	// The number of associated queues in routing profile.
 	NumberOfAssociatedQueues *int64
 
@@ -6073,6 +6105,44 @@ type RoutingProfile struct {
 	// The tags used to organize, track, or control access for this resource. For
 	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the queue and channel for manual assignment
+// behaviour can be enabled.
+type RoutingProfileManualAssignmentQueueConfig struct {
+
+	// Contains the channel and queue identifier for a routing profile.
+	//
+	// This member is required.
+	QueueReference *RoutingProfileQueueReference
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a routing profile manual assignment queue.
+type RoutingProfileManualAssignmentQueueConfigSummary struct {
+
+	// The channels this queue supports. Valid Values: CHAT | TASK | EMAIL
+	//
+	// This member is required.
+	Channel Channel
+
+	// The Amazon Resource Name (ARN) of the queue.
+	//
+	// This member is required.
+	QueueArn *string
+
+	// The identifier for the queue.
+	//
+	// This member is required.
+	QueueId *string
+
+	// The name of the queue.
+	//
+	// This member is required.
+	QueueName *string
 
 	noSmithyDocumentSerde
 }
@@ -6436,6 +6506,18 @@ type S3Config struct {
 	noSmithyDocumentSerde
 }
 
+// The agent criteria to search for preferred agents on the routing criteria.
+type SearchableAgentCriteriaStep struct {
+
+	// The identifiers of agents used in preferred agents matching.
+	AgentIds []string
+
+	// The match type combining multiple agent criteria steps.
+	MatchType SearchContactsMatchType
+
+	noSmithyDocumentSerde
+}
+
 // A structure that defines search criteria based on user-defined contact
 // attributes that are configured for contact search.
 type SearchableContactAttributes struct {
@@ -6466,6 +6548,24 @@ type SearchableContactAttributesCriteria struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Routing criteria of the contact to match on.
+type SearchableRoutingCriteria struct {
+
+	// The list of Routing criteria steps of the contact routing.
+	Steps []SearchableRoutingCriteriaStep
+
+	noSmithyDocumentSerde
+}
+
+// Routing criteria of the contact to match on.
+type SearchableRoutingCriteriaStep struct {
+
+	// Agent matching the routing step of the routing criteria
+	AgentCriteria *SearchableAgentCriteriaStep
 
 	noSmithyDocumentSerde
 }
@@ -6502,6 +6602,34 @@ type SearchableSegmentAttributesCriteria struct {
 	noSmithyDocumentSerde
 }
 
+// Time range that you additionally want to filter on.
+type SearchContactsAdditionalTimeRange struct {
+
+	// List of criteria of the time range to additionally filter on.
+	//
+	// This member is required.
+	Criteria []SearchContactsAdditionalTimeRangeCriteria
+
+	// The match type combining multiple time range filters.
+	//
+	// This member is required.
+	MatchType SearchContactsMatchType
+
+	noSmithyDocumentSerde
+}
+
+// The criteria of the time range to additionally filter on.
+type SearchContactsAdditionalTimeRangeCriteria struct {
+
+	// A structure of time range that you want to search results.
+	TimeRange *SearchContactsTimeRange
+
+	// List of the timestamp conditions.
+	TimestampCondition *SearchContactsTimestampCondition
+
+	noSmithyDocumentSerde
+}
+
 // A structure of time range that you want to search results.
 type SearchContactsTimeRange struct {
 
@@ -6523,8 +6651,28 @@ type SearchContactsTimeRange struct {
 	noSmithyDocumentSerde
 }
 
+// The timestamp condition indicating which timestamp should be used and how it
+// should be filtered.
+type SearchContactsTimestampCondition struct {
+
+	// Condition of the timestamp on the contact.
+	//
+	// This member is required.
+	ConditionType SearchContactsTimeRangeConditionType
+
+	// Type of the timestamps to use for the filter.
+	//
+	// This member is required.
+	Type SearchContactsTimeRangeType
+
+	noSmithyDocumentSerde
+}
+
 // A structure of search criteria to be used to return contacts.
 type SearchCriteria struct {
+
+	// Additional TimeRange used to filter contacts.
+	AdditionalTimeRange *SearchContactsAdditionalTimeRange
 
 	// The agent hierarchy groups of the agent at the time of handling the contact.
 	AgentHierarchyGroups *AgentHierarchyGroups
@@ -6541,8 +6689,14 @@ type SearchCriteria struct {
 	// The list of initiation methods associated with contacts.
 	InitiationMethods []ContactInitiationMethod
 
+	// Name of the contact.
+	Name *NameCriteria
+
 	// The list of queue IDs associated with contacts.
 	QueueIds []string
+
+	// Routing criteria for the contact.
+	RoutingCriteria *SearchableRoutingCriteria
 
 	// The search criteria based on user-defined contact attributes that have been
 	// configured for contact search. For more information, see [Search by custom contact attributes]in the Amazon Connect

@@ -8,8 +8,10 @@
     "files": [
         "api_client.go",
         "api_client_test.go",
+        "api_op_AssociateSourceViews.go",
         "api_op_CreateBillingView.go",
         "api_op_DeleteBillingView.go",
+        "api_op_DisassociateSourceViews.go",
         "api_op_GetBillingView.go",
         "api_op_GetResourcePolicy.go",
         "api_op_ListBillingViews.go",

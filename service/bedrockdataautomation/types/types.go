@@ -15,8 +15,20 @@ type AudioExtractionCategory struct {
 	// This member is required.
 	State State
 
+	// Configuration for different audio extraction category types
+	TypeConfiguration *AudioExtractionCategoryTypeConfiguration
+
 	// List of Audio Extraction Category Type
 	Types []AudioExtractionCategoryType
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for different audio extraction category types
+type AudioExtractionCategoryTypeConfiguration struct {
+
+	// Configuration for transcript related features
+	Transcript *TranscriptConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -173,6 +185,17 @@ type BlueprintSummary struct {
 
 	// Time Stamp
 	LastModifiedTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Channel labeling configuration
+type ChannelLabelingConfiguration struct {
+
+	// State
+	//
+	// This member is required.
+	State State
 
 	noSmithyDocumentSerde
 }
@@ -522,6 +545,17 @@ type OverrideConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Speaker labeling configuration
+type SpeakerLabelingConfiguration struct {
+
+	// State
+	//
+	// This member is required.
+	State State
+
+	noSmithyDocumentSerde
+}
+
 // Configuration of Splitter
 type SplitterConfiguration struct {
 
@@ -561,6 +595,18 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for transcript related features
+type TranscriptConfiguration struct {
+
+	// Channel labeling configuration
+	ChannelLabeling *ChannelLabelingConfiguration
+
+	// Speaker labeling configuration
+	SpeakerLabeling *SpeakerLabelingConfiguration
 
 	noSmithyDocumentSerde
 }

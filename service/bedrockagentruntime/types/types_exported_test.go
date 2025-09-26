@@ -144,6 +144,12 @@ func ExampleFlowExecutionEvent_outputUsage() {
 	case *types.FlowExecutionEventMemberFlowOutputEvent:
 		_ = v.Value // Value is types.FlowExecutionOutputEvent
 
+	case *types.FlowExecutionEventMemberNodeActionEvent:
+		_ = v.Value // Value is types.NodeActionEvent
+
+	case *types.FlowExecutionEventMemberNodeDependencyEvent:
+		_ = v.Value // Value is types.NodeDependencyEvent
+
 	case *types.FlowExecutionEventMemberNodeFailureEvent:
 		_ = v.Value // Value is types.NodeFailureEvent
 
@@ -167,7 +173,9 @@ var _ *types.FlowFailureEvent
 var _ *types.FlowExecutionOutputEvent
 var _ *types.NodeOutputEvent
 var _ *types.FlowExecutionInputEvent
+var _ *types.NodeDependencyEvent
 var _ *types.ConditionResultEvent
+var _ *types.NodeActionEvent
 var _ *types.NodeInputEvent
 
 func ExampleFlowInputContent_outputUsage() {
@@ -264,6 +272,9 @@ func ExampleFlowTrace_outputUsage() {
 	case *types.FlowTraceMemberNodeActionTrace:
 		_ = v.Value // Value is types.FlowTraceNodeActionEvent
 
+	case *types.FlowTraceMemberNodeDependencyTrace:
+		_ = v.Value // Value is types.FlowTraceDependencyEvent
+
 	case *types.FlowTraceMemberNodeInputTrace:
 		_ = v.Value // Value is types.FlowTraceNodeInputEvent
 
@@ -280,6 +291,7 @@ func ExampleFlowTrace_outputUsage() {
 }
 
 var _ *types.FlowTraceNodeActionEvent
+var _ *types.FlowTraceDependencyEvent
 var _ *types.FlowTraceNodeInputEvent
 var _ *types.FlowTraceConditionNodeResultEvent
 var _ *types.FlowTraceNodeOutputEvent
@@ -523,6 +535,24 @@ func ExampleNodeExecutionContent_outputUsage() {
 }
 
 var _ document.Interface
+
+func ExampleNodeTraceElements_outputUsage() {
+	var union types.NodeTraceElements
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.NodeTraceElementsMemberAgentTraces:
+		_ = v.Value // Value is []types.TracePart
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.TracePart
 
 func ExampleOptimizedPrompt_outputUsage() {
 	var union types.OptimizedPrompt
@@ -885,3 +915,21 @@ var _ types.PreProcessingTrace
 var _ types.PostProcessingTrace
 var _ types.OrchestrationTrace
 var _ types.RoutingClassifierTrace
+
+func ExampleTraceElements_outputUsage() {
+	var union types.TraceElements
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.TraceElementsMemberAgentTraces:
+		_ = v.Value // Value is []types.TracePart
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.TracePart

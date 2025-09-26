@@ -56,6 +56,10 @@ type ListBillingViewsInput struct {
 	//  The list of owners of the billing view.
 	OwnerAccountId *string
 
+	//  Filters the results to include only billing views that use the specified
+	// account as a source.
+	SourceAccountId *string
+
 	noSmithyDocumentSerde
 }
 

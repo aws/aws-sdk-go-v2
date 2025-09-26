@@ -34,6 +34,11 @@ type DeleteBillingViewInput struct {
 	// This member is required.
 	Arn *string
 
+	//  If set to true, forces deletion of the billing view even if it has derived
+	// resources (e.g. other billing views or budgets). Use with caution as this may
+	// break dependent resources.
+	Force bool
+
 	noSmithyDocumentSerde
 }
 

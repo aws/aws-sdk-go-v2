@@ -13406,6 +13406,40 @@ func awsRestjson1_deserializeEventMessageFlowMultiTurnInputRequestEvent(v *types
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAgentTraces(v *[]types.TracePart, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.TracePart
+	if *v == nil {
+		cv = []types.TracePart{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.TracePart
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentTracePart(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentFlowCompletionEvent(v **types.FlowCompletionEvent, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13670,6 +13704,16 @@ loop:
 			uv = &types.FlowTraceMemberNodeActionTrace{Value: mv}
 			break loop
 
+		case "nodeDependencyTrace":
+			var mv types.FlowTraceDependencyEvent
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentFlowTraceDependencyEvent(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.FlowTraceMemberNodeDependencyTrace{Value: mv}
+			break loop
+
 		case "nodeInputTrace":
 			var mv types.FlowTraceNodeInputEvent
 			destAddr := &mv
@@ -13832,6 +13876,64 @@ func awsRestjson1_deserializeDocumentFlowTraceConditions(v *[]types.FlowTraceCon
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentFlowTraceDependencyEvent(v **types.FlowTraceDependencyEvent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FlowTraceDependencyEvent
+	if *v == nil {
+		sv = &types.FlowTraceDependencyEvent{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "nodeName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
+				}
+				sv.NodeName = ptr.String(jtv)
+			}
+
+		case "timestamp":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DateTimestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.Timestamp = ptr.Time(t)
+			}
+
+		case "traceElements":
+			if err := awsRestjson1_deserializeDocumentTraceElements(&sv.TraceElements, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentFlowTraceEvent(v **types.FlowTraceEvent, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13906,6 +14008,16 @@ func awsRestjson1_deserializeDocumentFlowTraceNodeActionEvent(v **types.FlowTrac
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.OperationName = ptr.String(jtv)
+			}
+
+		case "operationRequest":
+			if err := awsRestjson1_deserializeDocumentDocument(&sv.OperationRequest, value); err != nil {
+				return err
+			}
+
+		case "operationResponse":
+			if err := awsRestjson1_deserializeDocumentDocument(&sv.OperationResponse, value); err != nil {
+				return err
 			}
 
 		case "requestId":
@@ -14044,6 +14156,102 @@ func awsRestjson1_deserializeDocumentFlowTraceNodeInputEvent(v **types.FlowTrace
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentFlowTraceNodeInputExecutionChain(v *[]types.FlowTraceNodeInputExecutionChainItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.FlowTraceNodeInputExecutionChainItem
+	if *v == nil {
+		cv = []types.FlowTraceNodeInputExecutionChainItem{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.FlowTraceNodeInputExecutionChainItem
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentFlowTraceNodeInputExecutionChainItem(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFlowTraceNodeInputExecutionChainItem(v **types.FlowTraceNodeInputExecutionChainItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FlowTraceNodeInputExecutionChainItem
+	if *v == nil {
+		sv = &types.FlowTraceNodeInputExecutionChainItem{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "index":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Index = ptr.Int32(int32(i64))
+			}
+
+		case "nodeName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
+				}
+				sv.NodeName = ptr.String(jtv)
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FlowControlNodeType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.FlowControlNodeType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentFlowTraceNodeInputField(v **types.FlowTraceNodeInputField, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14066,8 +14274,22 @@ func awsRestjson1_deserializeDocumentFlowTraceNodeInputField(v **types.FlowTrace
 
 	for key, value := range shape {
 		switch key {
+		case "category":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FlowNodeInputCategory to be of type string, got %T instead", value)
+				}
+				sv.Category = types.FlowNodeInputCategory(jtv)
+			}
+
 		case "content":
 			if err := awsRestjson1_deserializeDocumentFlowTraceNodeInputContent(&sv.Content, value); err != nil {
+				return err
+			}
+
+		case "executionChain":
+			if err := awsRestjson1_deserializeDocumentFlowTraceNodeInputExecutionChain(&sv.ExecutionChain, value); err != nil {
 				return err
 			}
 
@@ -14078,6 +14300,20 @@ func awsRestjson1_deserializeDocumentFlowTraceNodeInputField(v **types.FlowTrace
 					return fmt.Errorf("expected NodeInputName to be of type string, got %T instead", value)
 				}
 				sv.NodeInputName = ptr.String(jtv)
+			}
+
+		case "source":
+			if err := awsRestjson1_deserializeDocumentFlowTraceNodeInputSource(&sv.Source, value); err != nil {
+				return err
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FlowNodeIODataType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.FlowNodeIODataType(jtv)
 			}
 
 		default:
@@ -14120,6 +14356,64 @@ func awsRestjson1_deserializeDocumentFlowTraceNodeInputFields(v *[]types.FlowTra
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFlowTraceNodeInputSource(v **types.FlowTraceNodeInputSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FlowTraceNodeInputSource
+	if *v == nil {
+		sv = &types.FlowTraceNodeInputSource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "expression":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FlowNodeInputExpression to be of type string, got %T instead", value)
+				}
+				sv.Expression = ptr.String(jtv)
+			}
+
+		case "nodeName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
+				}
+				sv.NodeName = ptr.String(jtv)
+			}
+
+		case "outputFieldName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FlowNodeOutputName to be of type string, got %T instead", value)
+				}
+				sv.OutputFieldName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -14246,6 +14540,11 @@ func awsRestjson1_deserializeDocumentFlowTraceNodeOutputField(v **types.FlowTrac
 				return err
 			}
 
+		case "next":
+			if err := awsRestjson1_deserializeDocumentFlowTraceNodeOutputNextList(&sv.Next, value); err != nil {
+				return err
+			}
+
 		case "nodeOutputName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14253,6 +14552,15 @@ func awsRestjson1_deserializeDocumentFlowTraceNodeOutputField(v **types.FlowTrac
 					return fmt.Errorf("expected NodeOutputName to be of type string, got %T instead", value)
 				}
 				sv.NodeOutputName = ptr.String(jtv)
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FlowNodeIODataType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.FlowNodeIODataType(jtv)
 			}
 
 		default:
@@ -14295,6 +14603,127 @@ func awsRestjson1_deserializeDocumentFlowTraceNodeOutputFields(v *[]types.FlowTr
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFlowTraceNodeOutputNext(v **types.FlowTraceNodeOutputNext, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FlowTraceNodeOutputNext
+	if *v == nil {
+		sv = &types.FlowTraceNodeOutputNext{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "inputFieldName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FlowNodeInputName to be of type string, got %T instead", value)
+				}
+				sv.InputFieldName = ptr.String(jtv)
+			}
+
+		case "nodeName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
+				}
+				sv.NodeName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFlowTraceNodeOutputNextList(v *[]types.FlowTraceNodeOutputNext, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.FlowTraceNodeOutputNext
+	if *v == nil {
+		cv = []types.FlowTraceNodeOutputNext{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.FlowTraceNodeOutputNext
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentFlowTraceNodeOutputNext(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTraceElements(v *types.TraceElements, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.TraceElements
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "agentTraces":
+			var mv []types.TracePart
+			if err := awsRestjson1_deserializeDocumentAgentTraces(&mv, value); err != nil {
+				return err
+			}
+			uv = &types.TraceElementsMemberAgentTraces{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 
@@ -14996,6 +15425,26 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.FlowExecutionEventMemberFlowOutputEvent{Value: mv}
+			break loop
+
+		case "nodeActionEvent":
+			var mv types.NodeActionEvent
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentNodeActionEvent(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.FlowExecutionEventMemberNodeActionEvent{Value: mv}
+			break loop
+
+		case "nodeDependencyEvent":
+			var mv types.NodeDependencyEvent
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentNodeDependencyEvent(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.FlowExecutionEventMemberNodeDependencyEvent{Value: mv}
 			break loop
 
 		case "nodeFailureEvent":
@@ -16311,6 +16760,154 @@ func awsRestjson1_deserializeDocumentMemorySessionSummary(v **types.MemorySessio
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentNodeActionEvent(v **types.NodeActionEvent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NodeActionEvent
+	if *v == nil {
+		sv = &types.NodeActionEvent{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "nodeName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
+				}
+				sv.NodeName = ptr.String(jtv)
+			}
+
+		case "operationName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.OperationName = ptr.String(jtv)
+			}
+
+		case "operationRequest":
+			if err := awsRestjson1_deserializeDocumentDocument(&sv.OperationRequest, value); err != nil {
+				return err
+			}
+
+		case "operationResponse":
+			if err := awsRestjson1_deserializeDocumentDocument(&sv.OperationResponse, value); err != nil {
+				return err
+			}
+
+		case "requestId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RequestId = ptr.String(jtv)
+			}
+
+		case "serviceName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ServiceName = ptr.String(jtv)
+			}
+
+		case "timestamp":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DateTimestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.Timestamp = ptr.Time(t)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNodeDependencyEvent(v **types.NodeDependencyEvent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NodeDependencyEvent
+	if *v == nil {
+		sv = &types.NodeDependencyEvent{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "nodeName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
+				}
+				sv.NodeName = ptr.String(jtv)
+			}
+
+		case "timestamp":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DateTimestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.Timestamp = ptr.Time(t)
+			}
+
+		case "traceElements":
+			if err := awsRestjson1_deserializeDocumentNodeTraceElements(&sv.TraceElements, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentNodeExecutionContent(v *types.NodeExecutionContent, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -16478,6 +17075,102 @@ func awsRestjson1_deserializeDocumentNodeInputEvent(v **types.NodeInputEvent, va
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentNodeInputExecutionChain(v *[]types.NodeInputExecutionChainItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.NodeInputExecutionChainItem
+	if *v == nil {
+		cv = []types.NodeInputExecutionChainItem{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.NodeInputExecutionChainItem
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentNodeInputExecutionChainItem(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNodeInputExecutionChainItem(v **types.NodeInputExecutionChainItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NodeInputExecutionChainItem
+	if *v == nil {
+		sv = &types.NodeInputExecutionChainItem{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "index":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Index = ptr.Int32(int32(i64))
+			}
+
+		case "nodeName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
+				}
+				sv.NodeName = ptr.String(jtv)
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FlowControlNodeType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.FlowControlNodeType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentNodeInputField(v **types.NodeInputField, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -16500,8 +17193,22 @@ func awsRestjson1_deserializeDocumentNodeInputField(v **types.NodeInputField, va
 
 	for key, value := range shape {
 		switch key {
+		case "category":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FlowNodeInputCategory to be of type string, got %T instead", value)
+				}
+				sv.Category = types.FlowNodeInputCategory(jtv)
+			}
+
 		case "content":
 			if err := awsRestjson1_deserializeDocumentNodeExecutionContent(&sv.Content, value); err != nil {
+				return err
+			}
+
+		case "executionChain":
+			if err := awsRestjson1_deserializeDocumentNodeInputExecutionChain(&sv.ExecutionChain, value); err != nil {
 				return err
 			}
 
@@ -16512,6 +17219,20 @@ func awsRestjson1_deserializeDocumentNodeInputField(v **types.NodeInputField, va
 					return fmt.Errorf("expected NodeInputName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "source":
+			if err := awsRestjson1_deserializeDocumentNodeInputSource(&sv.Source, value); err != nil {
+				return err
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FlowNodeIODataType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.FlowNodeIODataType(jtv)
 			}
 
 		default:
@@ -16554,6 +17275,64 @@ func awsRestjson1_deserializeDocumentNodeInputFields(v *[]types.NodeInputField, 
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNodeInputSource(v **types.NodeInputSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NodeInputSource
+	if *v == nil {
+		sv = &types.NodeInputSource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "expression":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FlowNodeInputExpression to be of type string, got %T instead", value)
+				}
+				sv.Expression = ptr.String(jtv)
+			}
+
+		case "nodeName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
+				}
+				sv.NodeName = ptr.String(jtv)
+			}
+
+		case "outputFieldName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FlowNodeOutputName to be of type string, got %T instead", value)
+				}
+				sv.OutputFieldName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -16651,6 +17430,20 @@ func awsRestjson1_deserializeDocumentNodeOutputField(v **types.NodeOutputField, 
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "next":
+			if err := awsRestjson1_deserializeDocumentNodeOutputNextList(&sv.Next, value); err != nil {
+				return err
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FlowNodeIODataType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.FlowNodeIODataType(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -16691,6 +17484,127 @@ func awsRestjson1_deserializeDocumentNodeOutputFields(v *[]types.NodeOutputField
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNodeOutputNext(v **types.NodeOutputNext, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NodeOutputNext
+	if *v == nil {
+		sv = &types.NodeOutputNext{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "inputFieldName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FlowNodeInputName to be of type string, got %T instead", value)
+				}
+				sv.InputFieldName = ptr.String(jtv)
+			}
+
+		case "nodeName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
+				}
+				sv.NodeName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNodeOutputNextList(v *[]types.NodeOutputNext, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.NodeOutputNext
+	if *v == nil {
+		cv = []types.NodeOutputNext{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.NodeOutputNext
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentNodeOutputNext(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNodeTraceElements(v *types.NodeTraceElements, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.NodeTraceElements
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "agentTraces":
+			var mv []types.TracePart
+			if err := awsRestjson1_deserializeDocumentAgentTraces(&mv, value); err != nil {
+				return err
+			}
+			uv = &types.NodeTraceElementsMemberAgentTraces{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 
