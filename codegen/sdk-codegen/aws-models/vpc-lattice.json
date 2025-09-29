@@ -201,7 +201,7 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "max": 10000
+                    "max": 36864
                 }
             }
         },
@@ -249,7 +249,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the listener rules in a batch. You can use this operation to change the priority of\n   listener rules. This can be useful when bulk updating or swapping rule priority.</p>\n         <p>\n            <b>Required permissions:</b>\n            <code>vpc-lattice:UpdateRule</code>\n         </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/security_iam_service-with-iam.html\">How Amazon VPC Lattice works with\n    IAM</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Updates the listener rules in a batch. You can use this operation to change the priority of listener rules. This can be useful when bulk updating or swapping rule priority.</p> <p> <b>Required permissions:</b> <code>vpc-lattice:UpdateRule</code> </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/security_iam_service-with-iam.html\">How Amazon VPC Lattice works with IAM</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "PATCH",
@@ -350,7 +350,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request conflicts with the current state of the resource. Updating or deleting a\n   resource can cause an inconsistent state.</p>",
+                "smithy.api#documentation": "<p>The request conflicts with the current state of the resource. Updating or deleting a resource can cause an inconsistent state.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -384,7 +384,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables access logs to be sent to Amazon CloudWatch, Amazon S3, and Amazon Kinesis Data Firehose. The service network owner\n   can use the access logs to audit the services in the network. The service network owner can only\n   see access logs from clients and services that are associated with their service network. Access\n   log entries represent traffic originated from VPCs associated with that network. For more\n   information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/monitoring-access-logs.html\">Access logs</a> in the\n    <i>Amazon VPC Lattice User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Enables access logs to be sent to Amazon CloudWatch, Amazon S3, and Amazon Kinesis Data Firehose. The service network owner can use the access logs to audit the services in the network. The service network owner can only see access logs from clients and services that are associated with their service network. Access log entries represent traffic originated from VPCs associated with that network. For more information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/monitoring-access-logs.html\">Access logs</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "POST",
@@ -399,7 +399,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.vpclattice#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure\n  the idempotency of the request. If you retry a request that completed successfully using\n  the same client token and parameters, the retry succeeds without performing any actions.\n  If the parameters aren't identical, the retry fails.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -413,7 +413,7 @@
                 "destinationArn": {
                     "target": "com.amazonaws.vpclattice#AccessLogDestinationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the destination. The supported destination types are\n   CloudWatch Log groups, Kinesis Data Firehose delivery streams, and Amazon S3 buckets.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the destination. The supported destination types are CloudWatch Log groups, Kinesis Data Firehose delivery streams, and Amazon S3 buckets.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -509,7 +509,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a listener for a service. Before you start using your Amazon VPC Lattice service, you must\n   add one or more listeners. A listener is a process that checks for connection requests to your\n   services. For more information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/listeners.html\">Listeners</a> in the\n   <i>Amazon VPC Lattice User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates a listener for a service. Before you start using your Amazon VPC Lattice service, you must add one or more listeners. A listener is a process that checks for connection requests to your services. For more information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/listeners.html\">Listeners</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "POST",
@@ -532,7 +532,7 @@
                 "name": {
                     "target": "com.amazonaws.vpclattice#ListenerName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the listener. A listener name must be unique within a service. The valid characters are a-z, 0-9, and hyphens (-). You can't use a \n  hyphen as the first or last character, or immediately after another hyphen.</p>",
+                        "smithy.api#documentation": "<p>The name of the listener. A listener name must be unique within a service. The valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last character, or immediately after another hyphen.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -546,20 +546,20 @@
                 "port": {
                     "target": "com.amazonaws.vpclattice#Port",
                     "traits": {
-                        "smithy.api#documentation": "<p>The listener port. You can specify a value from 1 to 65535. For HTTP, the default is 80. For\n   HTTPS, the default is 443.</p>"
+                        "smithy.api#documentation": "<p>The listener port. You can specify a value from 1 to 65535. For HTTP, the default is 80. For HTTPS, the default is 443.</p>"
                     }
                 },
                 "defaultAction": {
                     "target": "com.amazonaws.vpclattice#RuleAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>The action for the default rule. Each listener has a default rule. The default rule is used\n   if no other rules match.</p>",
+                        "smithy.api#documentation": "<p>The action for the default rule. Each listener has a default rule. The default rule is used if no other rules match.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "clientToken": {
                     "target": "com.amazonaws.vpclattice#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure\n  the idempotency of the request. If you retry a request that completed successfully using\n  the same client token and parameters, the retry succeeds without performing any actions.\n  If the parameters aren't identical, the retry fails.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -656,7 +656,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a resource configuration. A resource configuration defines a specific resource. You\n   can associate a resource configuration with a service network or a VPC endpoint.</p>",
+                "smithy.api#documentation": "<p>Creates a resource configuration. A resource configuration defines a specific resource. You can associate a resource configuration with a service network or a VPC endpoint.</p>",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "POST",
@@ -671,21 +671,21 @@
                 "name": {
                     "target": "com.amazonaws.vpclattice#ResourceConfigurationName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the resource configuration. The name must be unique within the account. The\n   valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last\n   character, or immediately after another hyphen.</p>",
+                        "smithy.api#documentation": "<p>The name of the resource configuration. The name must be unique within the account. The valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last character, or immediately after another hyphen.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "type": {
                     "target": "com.amazonaws.vpclattice#ResourceConfigurationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of resource configuration.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SINGLE</code> - A single resource.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GROUP</code> - A group of resources. You must create a group resource\n     configuration before you create a child resource configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CHILD</code> - A single resource that is part of a group resource configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ARN</code> - An Amazon Web Services resource.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The type of resource configuration. A resource configuration can be one of the following types:</p> <ul> <li> <p> <b>SINGLE</b> - A single resource.</p> </li> <li> <p> <b>GROUP</b> - A group of resources. You must create a group resource configuration before you create a child resource configuration.</p> </li> <li> <p> <b>CHILD</b> - A single resource that is part of a group resource configuration.</p> </li> <li> <p> <b>ARN</b> - An Amazon Web Services resource.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "portRanges": {
                     "target": "com.amazonaws.vpclattice#PortRangeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>(SINGLE, GROUP, CHILD) The TCP port ranges that a consumer can use to access a resource configuration \n   (for example: 1-65535). You can separate port ranges using commas (for example: 1,2,22-30).</p>"
+                        "smithy.api#documentation": "<p>(SINGLE, GROUP, CHILD) The TCP port ranges that a consumer can use to access a resource configuration (for example: 1-65535). You can separate port ranges using commas (for example: 1,2,22-30).</p>"
                     }
                 },
                 "protocol": {
@@ -697,31 +697,31 @@
                 "resourceGatewayIdentifier": {
                     "target": "com.amazonaws.vpclattice#ResourceGatewayIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>(SINGLE, GROUP, ARN) The ID or ARN of the resource gateway used to connect to the resource configuration.\n   For a child resource configuration, this value is inherited from the parent resource configuration.</p>"
+                        "smithy.api#documentation": "<p>(SINGLE, GROUP, ARN) The ID or ARN of the resource gateway used to connect to the resource configuration. For a child resource configuration, this value is inherited from the parent resource configuration.</p>"
                     }
                 },
                 "resourceConfigurationGroupIdentifier": {
                     "target": "com.amazonaws.vpclattice#ResourceConfigurationIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>(CHILD) The ID or ARN of the parent resource configuration (type is <code>GROUP</code>). \n   This is used to associate a child resource configuration with a group resource configuration.</p>"
+                        "smithy.api#documentation": "<p>(CHILD) The ID or ARN of the parent resource configuration of type <code>GROUP</code>. This is used to associate a child resource configuration with a group resource configuration.</p>"
                     }
                 },
                 "resourceConfigurationDefinition": {
                     "target": "com.amazonaws.vpclattice#ResourceConfigurationDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>(SINGLE, CHILD, ARN) The resource configuration.</p>"
+                        "smithy.api#documentation": "<p>Identifies the resource configuration in one of the following ways:</p> <ul> <li> <p> <b>Amazon Resource Name (ARN)</b> - Supported resource-types that are provisioned by Amazon Web Services services, such as RDS databases, can be identified by their ARN.</p> </li> <li> <p> <b>Domain name</b> - Any domain name that is publicly resolvable.</p> </li> <li> <p> <b>IP address</b> - For IPv4 and IPv6, only IP addresses in the VPC are supported.</p> </li> </ul>"
                     }
                 },
                 "allowAssociationToShareableServiceNetwork": {
                     "target": "com.amazonaws.vpclattice#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>(SINGLE, GROUP, ARN) Specifies whether the resource configuration can be associated with \n   a sharable service network. The default is false.</p>"
+                        "smithy.api#documentation": "<p>(SINGLE, GROUP, ARN) Specifies whether the resource configuration can be associated with a sharable service network. The default is false.</p>"
                     }
                 },
                 "clientToken": {
                     "target": "com.amazonaws.vpclattice#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure\n  the idempotency of the request. If you retry a request that completed successfully using\n  the same client token and parameters, the retry succeeds without performing any actions.\n  If the parameters aren't identical, the retry fails.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -766,13 +766,13 @@
                 "resourceConfigurationGroupId": {
                     "target": "com.amazonaws.vpclattice#ResourceConfigurationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the parent resource configuration (type is GROUP).</p>"
+                        "smithy.api#documentation": "<p>The ID of the parent resource configuration of type <code>GROUP</code>.</p>"
                     }
                 },
                 "type": {
                     "target": "com.amazonaws.vpclattice#ResourceConfigurationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of resource configuration.</p>"
+                        "smithy.api#documentation": "<p>The type of resource configuration. A resource configuration can be one of the following types:</p> <ul> <li> <p> <b>SINGLE</b> - A single resource.</p> </li> <li> <p> <b>GROUP</b> - A group of resources. You must create a group resource configuration before you create a child resource configuration.</p> </li> <li> <p> <b>CHILD</b> - A single resource that is part of a group resource configuration.</p> </li> <li> <p> <b>ARN</b> - An Amazon Web Services resource.</p> </li> </ul>"
                     }
                 },
                 "portRanges": {
@@ -796,13 +796,13 @@
                 "resourceConfigurationDefinition": {
                     "target": "com.amazonaws.vpclattice#ResourceConfigurationDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource configuration.</p>"
+                        "smithy.api#documentation": "<p>Identifies the resource configuration in one of the following ways:</p> <ul> <li> <p> <b>Amazon Resource Name (ARN)</b> - Supported resource-types that are provisioned by Amazon Web Services services, such as RDS databases, can be identified by their ARN.</p> </li> <li> <p> <b>Domain name</b> - Any domain name that is publicly resolvable.</p> </li> <li> <p> <b>IP address</b> - For IPv4 and IPv6, only IP addresses in the VPC are supported.</p> </li> </ul>"
                     }
                 },
                 "allowAssociationToShareableServiceNetwork": {
                     "target": "com.amazonaws.vpclattice#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the resource configuration can be associated with a sharable service\n   network.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the resource configuration can be associated with a sharable service network.</p>"
                     }
                 },
                 "createdAt": {
@@ -854,7 +854,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a resource gateway.</p>",
+                "smithy.api#documentation": "<p>A resource gateway is a point of ingress into the VPC where a resource resides. It spans multiple Availability Zones. For your resource to be accessible from all Availability Zones, you should create your resource gateways to span as many Availability Zones as possible. A VPC can have multiple resource gateways.</p>",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "POST",
@@ -869,7 +869,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.vpclattice#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure\n  the idempotency of the request. If you retry a request that completed successfully using\n  the same client token and parameters, the retry succeeds without performing any actions.\n  If the parameters aren't identical, the retry fails.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -883,21 +883,19 @@
                 "vpcIdentifier": {
                     "target": "com.amazonaws.vpclattice#VpcId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the VPC for the resource gateway.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The ID of the VPC for the resource gateway.</p>"
                     }
                 },
                 "subnetIds": {
                     "target": "com.amazonaws.vpclattice#SubnetList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IDs of the VPC subnets in which to create the resource gateway.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The IDs of the VPC subnets in which to create the resource gateway.</p>"
                     }
                 },
                 "securityGroupIds": {
                     "target": "com.amazonaws.vpclattice#SecurityGroupList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IDs of the security groups to apply to the resource gateway. The security groups must be\n   in the same VPC.</p>",
+                        "smithy.api#documentation": "<p>The IDs of the security groups to apply to the resource gateway. The security groups must be in the same VPC.</p>",
                         "smithy.api#length": {
                             "min": 0,
                             "max": 5
@@ -907,7 +905,13 @@
                 "ipAddressType": {
                     "target": "com.amazonaws.vpclattice#ResourceGatewayIpAddressType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of IP address used by the resource gateway.</p>"
+                        "smithy.api#documentation": "<p>A resource gateway can have IPv4, IPv6 or dualstack addresses. The IP address type of a resource gateway must be compatible with the subnets of the resource gateway and the IP address type of the resource, as described here: </p> <ul> <li> <p> <b>IPv4</b>Assign IPv4 addresses to your resource gateway network interfaces. This option is supported only if all selected subnets have IPv4 address ranges, and the resource also has an IPv4 address.</p> </li> <li> <p> <b>IPv6</b>Assign IPv6 addresses to your resource gateway network interfaces. This option is supported only if all selected subnets are IPv6 only subnets, and the resource also has an IPv6 address.</p> </li> <li> <p> <b>Dualstack</b>Assign both IPv4 and IPv6 addresses to your resource gateway network interfaces. This option is supported only if all selected subnets have both IPv4 and IPv6 address ranges, and the resource either has an IPv4 or IPv6 address.</p> </li> </ul> <p>The IP address type of the resource gateway is independent of the IP address type of the client or the VPC endpoint through which the resource is accessed.</p>"
+                    }
+                },
+                "ipv4AddressesPerEni": {
+                    "target": "com.amazonaws.vpclattice#Ipv4AddressesPerEni",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of IPv4 addresses in each ENI for the resource gateway.</p>"
                     }
                 },
                 "tags": {
@@ -971,6 +975,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The type of IP address for the resource gateway.</p>"
                     }
+                },
+                "ipv4AddressesPerEni": {
+                    "target": "com.amazonaws.vpclattice#Ipv4AddressesPerEni",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of IPv4 addresses in each ENI for the resource gateway.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1009,7 +1019,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a listener rule. Each listener has a default rule for checking connection requests,\n   but you can define additional rules. Each rule consists of a priority, one or more actions, and\n   one or more conditions. For more information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/listeners.html#listener-rules\">Listener rules</a> in the\n    <i>Amazon VPC Lattice User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates a listener rule. Each listener has a default rule for checking connection requests, but you can define additional rules. Each rule consists of a priority, one or more actions, and one or more conditions. For more information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/listeners.html#listener-rules\">Listener rules</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "POST",
@@ -1040,7 +1050,7 @@
                 "name": {
                     "target": "com.amazonaws.vpclattice#RuleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the rule. The name must be unique within the listener. The valid characters are a-z, 0-9, and hyphens (-). You can't use a \n  hyphen as the first or last character, or immediately after another hyphen.</p>",
+                        "smithy.api#documentation": "<p>The name of the rule. The name must be unique within the listener. The valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last character, or immediately after another hyphen.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1054,7 +1064,7 @@
                 "priority": {
                     "target": "com.amazonaws.vpclattice#RulePriority",
                     "traits": {
-                        "smithy.api#documentation": "<p>The priority assigned to the rule. Each rule for a specific listener must have a unique\n   priority. The lower the priority number the higher the priority.</p>",
+                        "smithy.api#documentation": "<p>The priority assigned to the rule. Each rule for a specific listener must have a unique priority. The lower the priority number the higher the priority.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1068,7 +1078,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.vpclattice#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure\n  the idempotency of the request. If you retry a request that completed successfully using\n  the same client token and parameters, the retry succeeds without performing any actions.\n  If the parameters aren't identical, the retry fails.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -1104,13 +1114,13 @@
                 "match": {
                     "target": "com.amazonaws.vpclattice#RuleMatch",
                     "traits": {
-                        "smithy.api#documentation": "<p>The rule match. The <code>RuleMatch</code> must be an <code>HttpMatch</code>. This means\n   that the rule should be an exact match on HTTP constraints which are made up of the HTTP method,\n   path, and header.</p>"
+                        "smithy.api#documentation": "<p>The rule match. The <code>RuleMatch</code> must be an <code>HttpMatch</code>. This means that the rule should be an exact match on HTTP constraints which are made up of the HTTP method, path, and header.</p>"
                     }
                 },
                 "priority": {
                     "target": "com.amazonaws.vpclattice#RulePriority",
                     "traits": {
-                        "smithy.api#documentation": "<p>The priority assigned to the rule. The lower the priority number the higher the\n   priority.</p>"
+                        "smithy.api#documentation": "<p>The priority assigned to the rule. The lower the priority number the higher the priority.</p>"
                     }
                 },
                 "action": {
@@ -1153,7 +1163,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a service. A service is any software application that can run on instances\n   containers, or serverless functions within an account or virtual private cloud (VPC).</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/services.html\">Services</a> in the\n   <i>Amazon VPC Lattice User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates a service. A service is any software application that can run on instances containers, or serverless functions within an account or virtual private cloud (VPC).</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/services.html\">Services</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "POST",
@@ -1194,7 +1204,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a service network. A service network is a logical boundary for a collection of\n   services. You can associate services and VPCs with a service network.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html\">Service networks</a> in the\n    <i>Amazon VPC Lattice User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates a service network. A service network is a logical boundary for a collection of services. You can associate services and VPCs with a service network.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html\">Service networks</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "POST",
@@ -1209,21 +1219,21 @@
                 "clientToken": {
                     "target": "com.amazonaws.vpclattice#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure\n  the idempotency of the request. If you retry a request that completed successfully using\n  the same client token and parameters, the retry succeeds without performing any actions.\n  If the parameters aren't identical, the retry fails.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
                 "name": {
                     "target": "com.amazonaws.vpclattice#ServiceNetworkName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the service network. The name must be unique to the account. The valid characters are a-z, 0-9, and hyphens (-). You can't use a \n  hyphen as the first or last character, or immediately after another hyphen.</p>",
+                        "smithy.api#documentation": "<p>The name of the service network. The name must be unique to the account. The valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last character, or immediately after another hyphen.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "authType": {
                     "target": "com.amazonaws.vpclattice#AuthType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of IAM policy.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NONE</code>: The resource does not use an IAM policy. This is the default.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_IAM</code>: The resource uses an IAM policy. When this type is used, auth is enabled and an auth policy is required.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of IAM policy.</p> <ul> <li> <p> <code>NONE</code>: The resource does not use an IAM policy. This is the default.</p> </li> <li> <p> <code>AWS_IAM</code>: The resource uses an IAM policy. When this type is used, auth is enabled and an auth policy is required.</p> </li> </ul>"
                     }
                 },
                 "tags": {
@@ -1272,7 +1282,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates the specified service network with the specified resource configuration.\n   This allows the resource configuration to receive connections through the service network,\n   including through a service network VPC endpoint.</p>",
+                "smithy.api#documentation": "<p>Associates the specified service network with the specified resource configuration. This allows the resource configuration to receive connections through the service network, including through a service network VPC endpoint.</p>",
                 "smithy.api#http": {
                     "code": 201,
                     "uri": "/servicenetworkresourceassociations",
@@ -1287,7 +1297,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.vpclattice#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure\n  the idempotency of the request. If you retry a request that completed successfully using\n  the same client token and parameters, the retry succeeds without performing any actions.\n  If the parameters aren't identical, the retry fails.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -1308,7 +1318,7 @@
                 "tags": {
                     "target": "com.amazonaws.vpclattice#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags for the association.</p>"
+                        "smithy.api#documentation": "<p>A key-value pair to associate with a resource.</p>"
                     }
                 }
             },
@@ -1415,7 +1425,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates the specified service with the specified service network. For more information, see \n   <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-network-associations.html#service-network-service-associations\">Manage service associations</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>\n         <p>You can't use this operation if the service and service network are already associated or if\n   there is a disassociation or deletion in progress. If the association fails, you can retry the\n   operation by deleting the association and recreating it.</p>\n         <p>You cannot associate a service and service network that are shared with a caller. The caller\n   must own either the service or the service network.</p>\n         <p>As a result of this operation, the association is created in the service network account and\n   the association owner account.</p>",
+                "smithy.api#documentation": "<p>Associates the specified service with the specified service network. For more information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-network-associations.html#service-network-service-associations\">Manage service associations</a> in the <i>Amazon VPC Lattice User Guide</i>.</p> <p>You can't use this operation if the service and service network are already associated or if there is a disassociation or deletion in progress. If the association fails, you can retry the operation by deleting the association and recreating it.</p> <p>You cannot associate a service and service network that are shared with a caller. The caller must own either the service or the service network.</p> <p>As a result of this operation, the association is created in the service network account and the association owner account.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "uri": "/servicenetworkserviceassociations",
@@ -1430,7 +1440,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.vpclattice#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure\n  the idempotency of the request. If you retry a request that completed successfully using\n  the same client token and parameters, the retry succeeds without performing any actions.\n  If the parameters aren't identical, the retry fails.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -1529,7 +1539,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates a VPC with a service network. When you associate a VPC with the service network,\n   it enables all the resources within that VPC to be clients and communicate with other services in\n   the service network. For more information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-network-associations.html#service-network-vpc-associations\">Manage VPC associations</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>\n         <p>You can't use this operation if there is a disassociation in progress. If the association\n   fails, retry by deleting the association and recreating it.</p>\n         <p>As a result of this operation, the association gets created in the service network account\n   and the VPC owner account.</p>\n         <p>If you add a security group to the service network and VPC association, the association must\n   continue to always have at least one security group. You can add or edit security groups at any\n   time. However, to remove all security groups, you must first delete the association and recreate\n   it without security groups.</p>",
+                "smithy.api#documentation": "<p>Associates a VPC with a service network. When you associate a VPC with the service network, it enables all the resources within that VPC to be clients and communicate with other services in the service network. For more information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-network-associations.html#service-network-vpc-associations\">Manage VPC associations</a> in the <i>Amazon VPC Lattice User Guide</i>.</p> <p>You can't use this operation if there is a disassociation in progress. If the association fails, retry by deleting the association and recreating it.</p> <p>As a result of this operation, the association gets created in the service network account and the VPC owner account.</p> <p>If you add a security group to the service network and VPC association, the association must continue to always have at least one security group. You can add or edit security groups at any time. However, to remove all security groups, you must first delete the association and recreate it without security groups.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "uri": "/servicenetworkvpcassociations",
@@ -1544,7 +1554,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.vpclattice#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure\n  the idempotency of the request. If you retry a request that completed successfully using\n  the same client token and parameters, the retry succeeds without performing any actions.\n  If the parameters aren't identical, the retry fails.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -1565,7 +1575,7 @@
                 "securityGroupIds": {
                     "target": "com.amazonaws.vpclattice#SecurityGroupList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IDs of the security groups. Security groups aren't added by default. You can add a\n   security group to apply network level controls to control which resources in a VPC are allowed to\n   access the service network and its services. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html\">Control traffic to\n    resources using security groups</a> in the <i>Amazon VPC User\n   Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The IDs of the security groups. Security groups aren't added by default. You can add a security group to apply network level controls to control which resources in a VPC are allowed to access the service network and its services. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html\">Control traffic to resources using security groups</a> in the <i>Amazon VPC User Guide</i>.</p>",
                         "smithy.api#length": {
                             "min": 0,
                             "max": 5
@@ -1621,14 +1631,14 @@
                 "clientToken": {
                     "target": "com.amazonaws.vpclattice#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure\n  the idempotency of the request. If you retry a request that completed successfully using\n  the same client token and parameters, the retry succeeds without performing any actions.\n  If the parameters aren't identical, the retry fails.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
                 "name": {
                     "target": "com.amazonaws.vpclattice#ServiceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the service. The name must be unique within the account. The valid characters are a-z, 0-9, and hyphens (-). You can't use a \n  hyphen as the first or last character, or immediately after another hyphen.</p>",
+                        "smithy.api#documentation": "<p>The name of the service. The name must be unique within the account. The valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last character, or immediately after another hyphen.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1653,7 +1663,7 @@
                 "authType": {
                     "target": "com.amazonaws.vpclattice#AuthType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of IAM policy.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NONE</code>: The resource does not use an IAM policy. This is the default.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_IAM</code>: The resource uses an IAM policy. When this type is used, auth is enabled and an auth policy is required.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of IAM policy.</p> <ul> <li> <p> <code>NONE</code>: The resource does not use an IAM policy. This is the default.</p> </li> <li> <p> <code>AWS_IAM</code>: The resource uses an IAM policy. When this type is used, auth is enabled and an auth policy is required.</p> </li> </ul>"
                     }
                 }
             }
@@ -1694,7 +1704,7 @@
                 "status": {
                     "target": "com.amazonaws.vpclattice#ServiceStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status. If the status is <code>CREATE_FAILED</code>, you must delete and recreate the\n   service.</p>"
+                        "smithy.api#documentation": "<p>The status. If the status is <code>CREATE_FAILED</code>, you must delete and recreate the service.</p>"
                     }
                 },
                 "authType": {
@@ -1743,7 +1753,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a target group. A target group is a collection of targets, or compute resources,\n   that run your application or service. A target group can only be used by a single service.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/target-groups.html\">Target groups</a> in the\n    <i>Amazon VPC Lattice User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates a target group. A target group is a collection of targets, or compute resources, that run your application or service. A target group can only be used by a single service.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/target-groups.html\">Target groups</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>",
                 "smithy.api#http": {
                     "code": 201,
                     "uri": "/targetgroups",
@@ -1758,7 +1768,7 @@
                 "name": {
                     "target": "com.amazonaws.vpclattice#TargetGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the target group. The name must be unique within the account. The valid characters are a-z, 0-9, and hyphens (-). You can't use a \n  hyphen as the first or last character, or immediately after another hyphen.</p>",
+                        "smithy.api#documentation": "<p>The name of the target group. The name must be unique within the account. The valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last character, or immediately after another hyphen.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1778,7 +1788,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.vpclattice#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure\n  the idempotency of the request. If you retry a request that completed successfully using\n  the same client token and parameters, the retry succeeds without performing any actions.\n  If the parameters aren't identical, the retry fails.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -1826,7 +1836,7 @@
                 "status": {
                     "target": "com.amazonaws.vpclattice#TargetGroupStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status. You can retry the operation if the status is <code>CREATE_FAILED</code>.\n   However, if you retry it while the status is <code>CREATE_IN_PROGRESS</code>, there is no change\n   in the status.</p>"
+                        "smithy.api#documentation": "<p>The status. You can retry the operation if the status is <code>CREATE_FAILED</code>. However, if you retry it while the status is <code>CREATE_IN_PROGRESS</code>, there is no change in the status.</p>"
                     }
                 }
             }
@@ -1909,7 +1919,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified auth policy. If an auth is set to <code>AWS_IAM</code> and the auth\n   policy is deleted, all requests are denied. If you are trying to remove the auth policy\n   completely, you must set the auth type to <code>NONE</code>. If auth is enabled on the resource,\n   but no auth policy is set, all requests are denied.</p>",
+                "smithy.api#documentation": "<p>Deletes the specified auth policy. If an auth is set to <code>AWS_IAM</code> and the auth policy is deleted, all requests are denied. If you are trying to remove the auth policy completely, you must set the auth type to <code>NONE</code>. If auth is enabled on the resource, but no auth policy is set, all requests are denied.</p>",
                 "smithy.api#http": {
                     "code": 204,
                     "method": "DELETE",
@@ -2134,7 +2144,7 @@
                 "resourceConfigurationArn": {
                     "target": "com.amazonaws.vpclattice#ResourceConfigurationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource configuration associated with the VPC\n   endpoint of type resource.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource configuration associated with the VPC endpoint of type resource.</p>"
                     }
                 },
                 "vpcEndpointId": {
@@ -2315,7 +2325,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a listener rule. Each listener has a default rule for checking connection requests,\n   but you can define additional rules. Each rule consists of a priority, one or more actions, and\n   one or more conditions. You can delete additional listener rules, but you cannot delete the\n   default rule.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/listeners.html#listener-rules\">Listener rules</a> in the\n    <i>Amazon VPC Lattice User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Deletes a listener rule. Each listener has a default rule for checking connection requests, but you can define additional rules. Each rule consists of a priority, one or more actions, and one or more conditions. You can delete additional listener rules, but you cannot delete the default rule.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/listeners.html#listener-rules\">Listener rules</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>",
                 "smithy.api#http": {
                     "code": 204,
                     "method": "DELETE",
@@ -2386,7 +2396,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a service. A service can't be deleted if it's associated with a service network. If\n   you delete a service, all resources related to the service, such as the resource policy, auth\n   policy, listeners, listener rules, and access log subscriptions, are also deleted. For more\n   information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/services.html#delete-service\">Delete a service</a> in the\n    <i>Amazon VPC Lattice User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Deletes a service. A service can't be deleted if it's associated with a service network. If you delete a service, all resources related to the service, such as the resource policy, auth policy, listeners, listener rules, and access log subscriptions, are also deleted. For more information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/services.html#delete-service\">Delete a service</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "uri": "/services/{serviceIdentifier}",
@@ -2424,7 +2434,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a service network. You can only delete the service network if there is no service or\n   VPC associated with it. If you delete a service network, all resources related to the service\n   network, such as the resource policy, auth policy, and access log subscriptions, are also\n   deleted. For more information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html#delete-service-network\">Delete a service\n    network</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Deletes a service network. You can only delete the service network if there is no service or VPC associated with it. If you delete a service network, all resources related to the service network, such as the resource policy, auth policy, and access log subscriptions, are also deleted. For more information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html#delete-service-network\">Delete a service network</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>",
                 "smithy.api#http": {
                     "code": 204,
                     "uri": "/servicenetworks/{serviceNetworkIdentifier}",
@@ -2559,7 +2569,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the association between a service and a service network. This\n   operation fails if an association is still in progress.</p>",
+                "smithy.api#documentation": "<p>Deletes the association between a service and a service network. This operation fails if an association is still in progress.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "uri": "/servicenetworkserviceassociations/{serviceNetworkServiceAssociationIdentifier}",
@@ -2593,7 +2603,7 @@
                 "status": {
                     "target": "com.amazonaws.vpclattice#ServiceNetworkServiceAssociationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status. You can retry the operation if the status is <code>DELETE_FAILED</code>.\n   However, if you retry it when the status is <code>DELETE_IN_PROGRESS</code>, there is no change\n   in the status.</p>"
+                        "smithy.api#documentation": "<p>The status. You can retry the operation if the status is <code>DELETE_FAILED</code>. However, if you retry it when the status is <code>DELETE_IN_PROGRESS</code>, there is no change in the status.</p>"
                     }
                 },
                 "arn": {
@@ -2633,7 +2643,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disassociates the VPC from the service network. You can't disassociate the VPC if there is a\n   create or update association in progress.</p>",
+                "smithy.api#documentation": "<p>Disassociates the VPC from the service network. You can't disassociate the VPC if there is a create or update association in progress.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "uri": "/servicenetworkvpcassociations/{serviceNetworkVpcAssociationIdentifier}",
@@ -2667,7 +2677,7 @@
                 "status": {
                     "target": "com.amazonaws.vpclattice#ServiceNetworkVpcAssociationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status. You can retry the operation if the status is <code>DELETE_FAILED</code>.\n   However, if you retry it while the status is <code>DELETE_IN_PROGRESS</code>, there is no change\n   in the status.</p>"
+                        "smithy.api#documentation": "<p>The status. You can retry the operation if the status is <code>DELETE_FAILED</code>. However, if you retry it while the status is <code>DELETE_IN_PROGRESS</code>, there is no change in the status.</p>"
                     }
                 },
                 "arn": {
@@ -2715,7 +2725,7 @@
                 "status": {
                     "target": "com.amazonaws.vpclattice#ServiceStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status. You can retry the operation if the status is <code>DELETE_FAILED</code>.\n   However, if you retry it while the status is <code>DELETE_IN_PROGRESS</code>, the status doesn't\n   change.</p>"
+                        "smithy.api#documentation": "<p>The status. You can retry the operation if the status is <code>DELETE_FAILED</code>. However, if you retry it while the status is <code>DELETE_IN_PROGRESS</code>, the status doesn't change.</p>"
                     }
                 }
             }
@@ -2746,7 +2756,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a target group. You can't delete a target group if it is used in a listener rule or\n   if the target group creation is in progress.</p>",
+                "smithy.api#documentation": "<p>Deletes a target group. You can't delete a target group if it is used in a listener rule or if the target group creation is in progress.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "uri": "/targetgroups/{targetGroupIdentifier}",
@@ -2786,7 +2796,7 @@
                 "status": {
                     "target": "com.amazonaws.vpclattice#TargetGroupStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status. You can retry the operation if the status is <code>DELETE_FAILED</code>.\n   However, if you retry it while the status is <code>DELETE_IN_PROGRESS</code>, the status doesn't\n   change.</p>"
+                        "smithy.api#documentation": "<p>The status. You can retry the operation if the status is <code>DELETE_FAILED</code>. However, if you retry it while the status is <code>DELETE_IN_PROGRESS</code>, the status doesn't change.</p>"
                     }
                 }
             }
@@ -2902,7 +2912,7 @@
                 "ipAddressType": {
                     "target": "com.amazonaws.vpclattice#ResourceConfigurationIpAddressType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of IP address.</p>"
+                        "smithy.api#documentation": "<p>The type of IP address. Dualstack is currently not supported.</p>"
                     }
                 }
             },
@@ -2931,7 +2941,7 @@
                 "statusCode": {
                     "target": "com.amazonaws.vpclattice#HttpStatusCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The HTTP response code.</p>",
+                        "smithy.api#documentation": "<p>The HTTP response code. Only <code>404</code> and <code>500</code> status codes are supported.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2946,13 +2956,13 @@
                 "targetGroups": {
                     "target": "com.amazonaws.vpclattice#WeightedTargetGroupList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The target groups. Traffic matching the rule is forwarded to the specified target groups.\n   With forward actions, you can assign a weight that controls the prioritization and selection of\n   each target group. This means that requests are distributed to individual target groups based on\n   their weights. For example, if two target groups have the same weight, each target group receives\n   half of the traffic.</p>\n         <p>The default value is 1. This means that if only one target group is provided, there is no\n   need to set the weight; 100% of the traffic goes to that target group.</p>",
+                        "smithy.api#documentation": "<p>The target groups. Traffic matching the rule is forwarded to the specified target groups. With forward actions, you can assign a weight that controls the prioritization and selection of each target group. This means that requests are distributed to individual target groups based on their weights. For example, if two target groups have the same weight, each target group receives half of the traffic.</p> <p>The default value is 1. This means that if only one target group is provided, there is no need to set the weight; 100% of the traffic goes to that target group.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a forward action. You can use forward actions to route requests to one or more\n   target groups.\n   </p>"
+                "smithy.api#documentation": "<p>Describes a forward action. You can use forward actions to route requests to one or more target groups. </p>"
             }
         },
         "com.amazonaws.vpclattice#GetAccessLogSubscription": {
@@ -3089,7 +3099,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves information about the auth policy for the specified service or service\n   network.</p>",
+                "smithy.api#documentation": "<p>Retrieves information about the auth policy for the specified service or service network.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -3123,7 +3133,7 @@
                 "state": {
                     "target": "com.amazonaws.vpclattice#AuthPolicyState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the auth policy. The auth policy is only active when the auth type is set to\n    <code>AWS_IAM</code>. If you provide a policy, then authentication and authorization decisions\n   are made based on this policy and the client's IAM policy. If the auth type is <code>NONE</code>,\n   then any auth policy that you provide remains inactive. For more information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html#create-service-network\">Create a service network</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The state of the auth policy. The auth policy is only active when the auth type is set to <code>AWS_IAM</code>. If you provide a policy, then authentication and authorization decisions are made based on this policy and the client's IAM policy. If the auth type is <code>NONE</code>, then any auth policy that you provide remains inactive. For more information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html#create-service-network\">Create a service network</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>"
                     }
                 },
                 "createdAt": {
@@ -3348,13 +3358,13 @@
                 "type": {
                     "target": "com.amazonaws.vpclattice#ResourceConfigurationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of resource configuration.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SINGLE</code> - A single resource.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GROUP</code> - A group of resources.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CHILD</code> - A single resource that is part of a group resource configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ARN</code> - An Amazon Web Services resource.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of resource configuration.</p> <ul> <li> <p> <code>SINGLE</code> - A single resource.</p> </li> <li> <p> <code>GROUP</code> - A group of resources.</p> </li> <li> <p> <code>CHILD</code> - A single resource that is part of a group resource configuration.</p> </li> <li> <p> <code>ARN</code> - An Amazon Web Services resource.</p> </li> </ul>"
                     }
                 },
                 "allowAssociationToShareableServiceNetwork": {
                     "target": "com.amazonaws.vpclattice#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the resource configuration is associated with a sharable service\n   network.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the resource configuration is associated with a sharable service network.</p>"
                     }
                 },
                 "portRanges": {
@@ -3518,6 +3528,12 @@
                         "smithy.api#documentation": "<p>The type of IP address for the resource gateway.</p>"
                     }
                 },
+                "ipv4AddressesPerEni": {
+                    "target": "com.amazonaws.vpclattice#Ipv4AddressesPerEni",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of IPv4 addresses in each ENI for the resource gateway.</p>"
+                    }
+                },
                 "createdAt": {
                     "target": "com.amazonaws.vpclattice#Timestamp",
                     "traits": {
@@ -3561,7 +3577,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves information about the specified resource policy. The resource policy is an IAM policy\n   created on behalf of the resource owner when they share a resource.</p>",
+                "smithy.api#documentation": "<p>Retrieves information about the specified resource policy. The resource policy is an IAM policy created on behalf of the resource owner when they share a resource.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -3620,7 +3636,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves information about the specified listener rules. You can also retrieve information about the\n   default listener rule. For more information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/listeners.html#listener-rules\">Listener rules</a> in the\n    <i>Amazon VPC Lattice User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Retrieves information about the specified listener rules. You can also retrieve information about the default listener rule. For more information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/listeners.html#listener-rules\">Listener rules</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -4528,7 +4544,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the constraints for a header match. Matches incoming requests with rule based on\n   request header value before applying rule action.</p>"
+                "smithy.api#documentation": "<p>Describes the constraints for a header match. Matches incoming requests with rule based on request header value before applying rule action.</p>"
             }
         },
         "com.amazonaws.vpclattice#HeaderMatchContains": {
@@ -4617,49 +4633,49 @@
                 "protocol": {
                     "target": "com.amazonaws.vpclattice#TargetGroupProtocol",
                     "traits": {
-                        "smithy.api#documentation": "<p>The protocol used when performing health checks on targets. The possible protocols are\n    <code>HTTP</code> and <code>HTTPS</code>. The default is <code>HTTP</code>.</p>"
+                        "smithy.api#documentation": "<p>The protocol used when performing health checks on targets. The possible protocols are <code>HTTP</code> and <code>HTTPS</code>. The default is <code>HTTP</code>.</p>"
                     }
                 },
                 "protocolVersion": {
                     "target": "com.amazonaws.vpclattice#HealthCheckProtocolVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The protocol version used when performing health checks on targets. The possible protocol\n   versions are <code>HTTP1</code> and <code>HTTP2</code>.</p>"
+                        "smithy.api#documentation": "<p>The protocol version used when performing health checks on targets. The possible protocol versions are <code>HTTP1</code> and <code>HTTP2</code>.</p>"
                     }
                 },
                 "port": {
                     "target": "com.amazonaws.vpclattice#HealthCheckPort",
                     "traits": {
-                        "smithy.api#documentation": "<p>The port used when performing health checks on targets. The default setting is the port that\n   a target receives traffic on.</p>"
+                        "smithy.api#documentation": "<p>The port used when performing health checks on targets. The default setting is the port that a target receives traffic on.</p>"
                     }
                 },
                 "path": {
                     "target": "com.amazonaws.vpclattice#HealthCheckPath",
                     "traits": {
-                        "smithy.api#documentation": "<p>The destination for health checks on the targets. If the protocol version is\n    <code>HTTP/1.1</code> or <code>HTTP/2</code>, specify a valid URI (for example,\n    <code>/path?query</code>). The default path is <code>/</code>. Health checks are not supported\n   if the protocol version is <code>gRPC</code>, however, you can choose <code>HTTP/1.1</code> or\n    <code>HTTP/2</code> and specify a valid URI.</p>"
+                        "smithy.api#documentation": "<p>The destination for health checks on the targets. If the protocol version is <code>HTTP/1.1</code> or <code>HTTP/2</code>, specify a valid URI (for example, <code>/path?query</code>). The default path is <code>/</code>. Health checks are not supported if the protocol version is <code>gRPC</code>, however, you can choose <code>HTTP/1.1</code> or <code>HTTP/2</code> and specify a valid URI.</p>"
                     }
                 },
                 "healthCheckIntervalSeconds": {
                     "target": "com.amazonaws.vpclattice#HealthCheckIntervalSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The approximate amount of time, in seconds, between health checks of an individual target.\n   The range is 5–300 seconds. The default is 30 seconds.</p>"
+                        "smithy.api#documentation": "<p>The approximate amount of time, in seconds, between health checks of an individual target. The range is 5–300 seconds. The default is 30 seconds.</p>"
                     }
                 },
                 "healthCheckTimeoutSeconds": {
                     "target": "com.amazonaws.vpclattice#HealthCheckTimeoutSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of time, in seconds, to wait before reporting a target as unhealthy. The range is\n   1–120 seconds. The default is 5 seconds.</p>"
+                        "smithy.api#documentation": "<p>The amount of time, in seconds, to wait before reporting a target as unhealthy. The range is 1–120 seconds. The default is 5 seconds.</p>"
                     }
                 },
                 "healthyThresholdCount": {
                     "target": "com.amazonaws.vpclattice#HealthyThresholdCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of consecutive successful health checks required before considering an unhealthy\n   target healthy. The range is 2–10. The default is 5.</p>"
+                        "smithy.api#documentation": "<p>The number of consecutive successful health checks required before considering an unhealthy target healthy. The range is 2–10. The default is 5.</p>"
                     }
                 },
                 "unhealthyThresholdCount": {
                     "target": "com.amazonaws.vpclattice#UnhealthyThresholdCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of consecutive failed health checks required before considering a target\n   unhealthy. The range is 2–10. The default is 2.</p>"
+                        "smithy.api#documentation": "<p>The number of consecutive failed health checks required before considering a target unhealthy. The range is 2–10. The default is 2.</p>"
                     }
                 },
                 "matcher": {
@@ -4670,7 +4686,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the health check configuration of a target group. Health check configurations\n   aren't used for target groups of type <code>LAMBDA</code> or <code>ALB</code>.</p>"
+                "smithy.api#documentation": "<p>Describes the health check configuration of a target group. Health check configurations aren't used for target groups of type <code>LAMBDA</code> or <code>ALB</code>.</p>"
             }
         },
         "com.amazonaws.vpclattice#HealthCheckIntervalSeconds": {
@@ -4764,7 +4780,7 @@
                 "headerMatches": {
                     "target": "com.amazonaws.vpclattice#HeaderMatchList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The header matches. Matches incoming requests with rule based on request header value before\n   applying rule action.</p>"
+                        "smithy.api#documentation": "<p>The header matches. Matches incoming requests with rule based on request header value before applying rule action.</p>"
                     }
                 }
             },
@@ -4851,6 +4867,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes an IP resource.</p>"
+            }
+        },
+        "com.amazonaws.vpclattice#Ipv4AddressesPerEni": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 62
+                }
             }
         },
         "com.amazonaws.vpclattice#LambdaEventStructureVersion": {
@@ -5090,7 +5115,7 @@
                 "resourceConfigurationGroupIdentifier": {
                     "target": "com.amazonaws.vpclattice#ResourceConfigurationIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the group resource configuration.</p>",
+                        "smithy.api#documentation": "<p>The ID of the resource configuration of type <code>Group</code>.</p>",
                         "smithy.api#httpQuery": "resourceConfigurationGroupIdentifier"
                     }
                 },
@@ -5468,7 +5493,7 @@
                 "resourceConfigurationIdentifier": {
                     "target": "com.amazonaws.vpclattice#ResourceConfigurationIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the resource configurationk.</p>",
+                        "smithy.api#documentation": "<p>The ID of the resource configuration.</p>",
                         "smithy.api#httpQuery": "resourceConfigurationIdentifier"
                     }
                 },
@@ -5484,6 +5509,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>If there are additional results, a pagination token for the next page of results.</p>",
                         "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "includeChildren": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Include service network resource associations of the child resource configuration with the grouped resource configuration.</p> <p>The type is boolean and the default value is false.</p>",
+                        "smithy.api#httpQuery": "includeChildren"
                     }
                 }
             },
@@ -5535,7 +5567,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the associations between a service network and a service. You can filter the list\n   either by service or service network. You must provide either the service network identifier or\n   the service identifier.</p>\n         <p>Every association in Amazon VPC Lattice has a unique Amazon Resource Name (ARN), such as when a\n   service network is associated with a VPC or when a service is associated with a service network.\n   If the association is for a resource is shared with another account, the association\n   includes the local account ID as the prefix in the ARN.</p>",
+                "smithy.api#documentation": "<p>Lists the associations between a service network and a service. You can filter the list either by service or service network. You must provide either the service network identifier or the service identifier.</p> <p>Every association in Amazon VPC Lattice has a unique Amazon Resource Name (ARN), such as when a service network is associated with a VPC or when a service is associated with a service network. If the association is for a resource is shared with another account, the association includes the local account ID as the prefix in the ARN.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "uri": "/servicenetworkserviceassociations",
@@ -5624,7 +5656,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the associations between a service network and a VPC. You can filter the list either by VPC or\n   service network. You must provide either the ID of the service network identifier or the ID of the VPC.</p>",
+                "smithy.api#documentation": "<p>Lists the associations between a service network and a VPC. You can filter the list either by VPC or service network. You must provide either the ID of the service network identifier or the ID of the VPC.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "uri": "/servicenetworkvpcassociations",
@@ -5802,7 +5834,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the service networks owned by or shared with this account. The account ID in the ARN\n   shows which account owns the service network.</p>",
+                "smithy.api#documentation": "<p>Lists the service networks owned by or shared with this account. The account ID in the ARN shows which account owns the service network.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "uri": "/servicenetworks",
@@ -6006,7 +6038,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists your target groups. You can narrow your search by using the filters below in your\n   request.</p>",
+                "smithy.api#documentation": "<p>Lists your target groups. You can narrow your search by using the filters below in your request.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "uri": "/targetgroups",
@@ -6097,7 +6129,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the targets for the target group. By default, all targets are included. You can use\n   this API to check the health status of targets. You can also ﬁlter the results by target.</p>",
+                "smithy.api#documentation": "<p>Lists the targets for the target group. By default, all targets are included. You can use this API to check the health status of targets. You can also ﬁlter the results by target.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "uri": "/targetgroups/{targetGroupIdentifier}/listtargets",
@@ -6322,7 +6354,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the codes to use when checking for a successful response from a target for health\n   checks.</p>"
+                "smithy.api#documentation": "<p>Describes the codes to use when checking for a successful response from a target for health checks.</p>"
             }
         },
         "com.amazonaws.vpclattice#MaxResults": {
@@ -6439,7 +6471,7 @@
                         "x-amzn-trace-id"
                     ]
                 },
-                "smithy.api#documentation": "<p>Amazon VPC Lattice is a fully managed application networking service that you use to connect, secure,\n   and monitor all of your services across multiple accounts and virtual private clouds (VPCs).\n   Amazon VPC Lattice interconnects your microservices and legacy services within a logical boundary, so that\n   you can discover and manage them more efficiently. For more information, see the <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/\">Amazon VPC Lattice User Guide</a>\n         </p>",
+                "smithy.api#documentation": "<p>Amazon VPC Lattice is a fully managed application networking service that you use to connect, secure, and monitor all of your services across multiple accounts and virtual private clouds (VPCs). Amazon VPC Lattice interconnects your microservices and legacy services within a logical boundary, so that you can discover and manage them more efficiently. For more information, see the <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/\">Amazon VPC Lattice User Guide</a> </p>",
                 "smithy.api#title": "Amazon VPC Lattice",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -7090,7 +7122,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the conditions that can be applied when matching a path for incoming\n   requests.</p>"
+                "smithy.api#documentation": "<p>Describes the conditions that can be applied when matching a path for incoming requests.</p>"
             }
         },
         "com.amazonaws.vpclattice#PathMatchExact": {
@@ -7130,7 +7162,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a path match type. Each rule can include only one of the following types of\n   paths.</p>"
+                "smithy.api#documentation": "<p>Describes a path match type. Each rule can include only one of the following types of paths.</p>"
             }
         },
         "com.amazonaws.vpclattice#PolicyString": {
@@ -7206,7 +7238,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates the auth policy. The policy string in JSON must not contain newlines or\n   blank lines.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/auth-policies.html\">Auth policies</a> in the <i>Amazon VPC\n    Lattice User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates or updates the auth policy. The policy string in JSON must not contain newlines or blank lines.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/auth-policies.html\">Auth policies</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "PUT",
@@ -7220,7 +7252,7 @@
                 "resourceIdentifier": {
                     "target": "com.amazonaws.vpclattice#ResourceIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID or ARN of the service network or service for which the policy\n   is created.</p>",
+                        "smithy.api#documentation": "<p>The ID or ARN of the service network or service for which the policy is created.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -7246,7 +7278,7 @@
                 "state": {
                     "target": "com.amazonaws.vpclattice#AuthPolicyState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the auth policy. The auth policy is only active when the auth type is set to\n    <code>AWS_IAM</code>. If you provide a policy, then authentication and authorization decisions\n   are made based on this policy and the client's IAM policy. If the Auth type is <code>NONE</code>,\n   then, any auth policy that you provide remains inactive. For more information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html#create-service-network\">Create a service network</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The state of the auth policy. The auth policy is only active when the auth type is set to <code>AWS_IAM</code>. If you provide a policy, then authentication and authorization decisions are made based on this policy and the client's IAM policy. If the Auth type is <code>NONE</code>, then, any auth policy that you provide remains inactive. For more information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html#create-service-network\">Create a service network</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>"
                     }
                 }
             }
@@ -7277,7 +7309,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Attaches a resource-based permission policy to a service or service network. The policy must\n   contain the same actions and condition statements as the Amazon Web Services Resource Access\n   Manager permission for sharing services and service networks.</p>",
+                "smithy.api#documentation": "<p>Attaches a resource-based permission policy to a service or service network. The policy must contain the same actions and condition statements as the Amazon Web Services Resource Access Manager permission for sharing services and service networks.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "PUT",
@@ -7292,7 +7324,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.vpclattice#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID or ARN of the service network or service for which the policy\n   is created.</p>",
+                        "smithy.api#documentation": "<p>The ID or ARN of the service network or service for which the policy is created.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -7300,7 +7332,7 @@
                 "policy": {
                     "target": "com.amazonaws.vpclattice#PolicyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>An IAM policy. The policy string in JSON must not contain newlines or blank\n   lines.</p>",
+                        "smithy.api#documentation": "<p>An IAM policy. The policy string in JSON must not contain newlines or blank lines.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7342,7 +7374,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Registers the targets with the target group. If it's a Lambda target, you can only have one\n   target in a target group.</p>",
+                "smithy.api#documentation": "<p>Registers the targets with the target group. If it's a Lambda target, you can only have one target in a target group.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "uri": "/targetgroups/{targetGroupIdentifier}/registertargets",
@@ -7590,7 +7622,7 @@
                 "type": {
                     "target": "com.amazonaws.vpclattice#ResourceConfigurationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of resource configuration.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SINGLE</code> - A single resource.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GROUP</code> - A group of resources.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CHILD</code> - A single resource that is part of a group resource configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ARN</code> - An Amazon Web Services resource.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of resource configuration.</p> <ul> <li> <p> <code>SINGLE</code> - A single resource.</p> </li> <li> <p> <code>GROUP</code> - A group of resources. You must create a group resource configuration before you create a child resource configuration.</p> </li> <li> <p> <code>CHILD</code> - A single resource that is part of a group resource configuration.</p> </li> <li> <p> <code>ARN</code> - An Amazon Web Services resource.</p> </li> </ul>"
                     }
                 },
                 "status": {
@@ -7951,6 +7983,12 @@
                         "smithy.api#documentation": "<p>The type of IP address used by the resource gateway.</p>"
                     }
                 },
+                "ipv4AddressesPerEni": {
+                    "target": "com.amazonaws.vpclattice#Ipv4AddressesPerEni",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of IPv4 addresses in each ENI for the resource gateway.</p>"
+                    }
+                },
                 "createdAt": {
                     "target": "com.amazonaws.vpclattice#Timestamp",
                     "traits": {
@@ -8053,7 +8091,7 @@
                 "forward": {
                     "target": "com.amazonaws.vpclattice#ForwardAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>The forward action. Traffic that matches the rule is forwarded to the specified target\n   groups.</p>"
+                        "smithy.api#documentation": "<p>The forward action. Traffic that matches the rule is forwarded to the specified target groups.</p>"
                     }
                 },
                 "fixedResponse": {
@@ -8126,7 +8164,7 @@
             "traits": {
                 "smithy.api#range": {
                     "min": 1,
-                    "max": 100
+                    "max": 2000
                 }
             }
         },
@@ -8259,7 +8297,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 5
+                    "max": 10
                 }
             }
         },
@@ -8711,7 +8749,7 @@
                 "status": {
                     "target": "com.amazonaws.vpclattice#ServiceNetworkResourceAssociationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the service network associated with the resource configuration.</p>"
+                        "smithy.api#documentation": "<p>The status of the service network’s association with the resource configuration. If the deletion fails, try to delete again. </p>"
                     }
                 },
                 "createdBy": {
@@ -8881,7 +8919,7 @@
                 "status": {
                     "target": "com.amazonaws.vpclattice#ServiceNetworkServiceAssociationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status. If the deletion fails, try to delete again.</p>"
+                        "smithy.api#documentation": "<p>The status of the service network’s association with the service. If the deletion fails, try to delete again.</p>"
                     }
                 },
                 "arn": {
@@ -9459,7 +9497,7 @@
                 "id": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the target. If the target group type is <code>INSTANCE</code>, this is an instance\n   ID. If the target group type is <code>IP</code>, this is an IP address. If the target group type\n   is <code>LAMBDA</code>, this is the ARN of a Lambda function. If the target group type is\n    <code>ALB</code>, this is the ARN of an Application Load Balancer.</p>",
+                        "smithy.api#documentation": "<p>The ID of the target. If the target group type is <code>INSTANCE</code>, this is an instance ID. If the target group type is <code>IP</code>, this is an IP address. If the target group type is <code>LAMBDA</code>, this is the ARN of a Lambda function. If the target group type is <code>ALB</code>, this is the ARN of an Application Load Balancer.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 200
@@ -9470,7 +9508,7 @@
                 "port": {
                     "target": "com.amazonaws.vpclattice#Port",
                     "traits": {
-                        "smithy.api#documentation": "<p>The port on which the target is listening. For HTTP, the default is 80. For HTTPS, the\n   default is 443.</p>"
+                        "smithy.api#documentation": "<p>The port on which the target is listening. For HTTP, the default is 80. For HTTPS, the default is 443.</p>"
                     }
                 }
             },
@@ -9484,13 +9522,13 @@
                 "id": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the target. If the target group type is <code>INSTANCE</code>, this is an instance\n   ID. If the target group type is <code>IP</code>, this is an IP address. If the target group type\n   is <code>LAMBDA</code>, this is the ARN of a Lambda function. If the target group type is\n    <code>ALB</code>, this is the ARN of an Application Load Balancer.</p>"
+                        "smithy.api#documentation": "<p>The ID of the target. If the target group type is <code>INSTANCE</code>, this is an instance ID. If the target group type is <code>IP</code>, this is an IP address. If the target group type is <code>LAMBDA</code>, this is the ARN of a Lambda function. If the target group type is <code>ALB</code>, this is the ARN of an Application Load Balancer.</p>"
                     }
                 },
                 "port": {
                     "target": "com.amazonaws.vpclattice#Port",
                     "traits": {
-                        "smithy.api#documentation": "<p>The port on which the target is listening. This parameter doesn't apply if the target is a\n   Lambda function.</p>"
+                        "smithy.api#documentation": "<p>The port on which the target is listening. This parameter doesn't apply if the target is a Lambda function.</p>"
                     }
                 },
                 "failureCode": {
@@ -9566,25 +9604,25 @@
                 "port": {
                     "target": "com.amazonaws.vpclattice#Port",
                     "traits": {
-                        "smithy.api#documentation": "<p>The port on which the targets are listening. For HTTP, the default is 80. For HTTPS, the\n   default is 443. Not supported if the target group type is <code>LAMBDA</code>.</p>"
+                        "smithy.api#documentation": "<p>The port on which the targets are listening. For HTTP, the default is 80. For HTTPS, the default is 443. Not supported if the target group type is <code>LAMBDA</code>.</p>"
                     }
                 },
                 "protocol": {
                     "target": "com.amazonaws.vpclattice#TargetGroupProtocol",
                     "traits": {
-                        "smithy.api#documentation": "<p>The protocol to use for routing traffic to the targets. The default is the protocol of the\n   target group. Not supported if the target group type is <code>LAMBDA</code>.</p>"
+                        "smithy.api#documentation": "<p>The protocol to use for routing traffic to the targets. The default is the protocol of the target group. Not supported if the target group type is <code>LAMBDA</code>.</p>"
                     }
                 },
                 "protocolVersion": {
                     "target": "com.amazonaws.vpclattice#TargetGroupProtocolVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The protocol version. The default is <code>HTTP1</code>. Not supported if the target group\n   type is <code>LAMBDA</code>.</p>"
+                        "smithy.api#documentation": "<p>The protocol version. The default is <code>HTTP1</code>. Not supported if the target group type is <code>LAMBDA</code>.</p>"
                     }
                 },
                 "ipAddressType": {
                     "target": "com.amazonaws.vpclattice#IpAddressType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of IP address used for the target group. Supported only if the target group type is\n    <code>IP</code>. The default is <code>IPV4</code>.</p>"
+                        "smithy.api#documentation": "<p>The type of IP address used for the target group. Supported only if the target group type is <code>IP</code>. The default is <code>IPV4</code>.</p>"
                     }
                 },
                 "vpcIdentifier": {
@@ -9596,18 +9634,18 @@
                 "healthCheck": {
                     "target": "com.amazonaws.vpclattice#HealthCheckConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The health check configuration. Not supported if the target group type is\n    <code>LAMBDA</code> or <code>ALB</code>.</p>"
+                        "smithy.api#documentation": "<p>The health check configuration. Not supported if the target group type is <code>LAMBDA</code> or <code>ALB</code>.</p>"
                     }
                 },
                 "lambdaEventStructureVersion": {
                     "target": "com.amazonaws.vpclattice#LambdaEventStructureVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the event structure that your Lambda function receives. Supported only if the\n   target group type is <code>LAMBDA</code>. The default is <code>V1</code>.</p>"
+                        "smithy.api#documentation": "<p>The version of the event structure that your Lambda function receives. Supported only if the target group type is <code>LAMBDA</code>. The default is <code>V1</code>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the configuration of a target group.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/target-groups.html\">Target groups</a> in the\n    <i>Amazon VPC Lattice User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Describes the configuration of a target group.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/target-groups.html\">Target groups</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>"
             }
         },
         "com.amazonaws.vpclattice#TargetGroupId": {
@@ -9770,7 +9808,7 @@
                 "ipAddressType": {
                     "target": "com.amazonaws.vpclattice#IpAddressType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of IP address used for the target group. The possible values are <code>IPV4</code>\n   and <code>IPV6</code>. This is an optional parameter. If not specified, the default is\n    <code>IPV4</code>.</p>"
+                        "smithy.api#documentation": "<p>The type of IP address used for the target group. The possible values are <code>IPV4</code> and <code>IPV6</code>. This is an optional parameter. If not specified, the default is <code>IPV4</code>.</p>"
                     }
                 },
                 "vpcIdentifier": {
@@ -9800,12 +9838,12 @@
                 "lambdaEventStructureVersion": {
                     "target": "com.amazonaws.vpclattice#LambdaEventStructureVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the event structure that your Lambda function receives. Supported only if the\n   target group type is <code>LAMBDA</code>.</p>"
+                        "smithy.api#documentation": "<p>The version of the event structure that your Lambda function receives. Supported only if the target group type is <code>LAMBDA</code>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Summary information about a target group.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/target-groups.html\">Target groups</a> in the\n    <i>Amazon VPC Lattice User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Summary information about a target group.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/target-groups.html\">Target groups</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>"
             }
         },
         "com.amazonaws.vpclattice#TargetGroupType": {
@@ -9893,7 +9931,7 @@
                 "id": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the target. If the target group type is <code>INSTANCE</code>, this is an instance\n   ID. If the target group type is <code>IP</code>, this is an IP address. If the target group type\n   is <code>LAMBDA</code>, this is the ARN of a Lambda function. If the target type is\n    <code>ALB</code>, this is the ARN of an Application Load Balancer.</p>"
+                        "smithy.api#documentation": "<p>The ID of the target. If the target group type is <code>INSTANCE</code>, this is an instance ID. If the target group type is <code>IP</code>, this is an IP address. If the target group type is <code>LAMBDA</code>, this is the ARN of a Lambda function. If the target type is <code>ALB</code>, this is the ARN of an Application Load Balancer.</p>"
                     }
                 },
                 "port": {
@@ -9905,7 +9943,7 @@
                 "status": {
                     "target": "com.amazonaws.vpclattice#TargetStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the target.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DRAINING</code>: The target is being deregistered. No new connections are sent to\n     this target while current connections are being drained. The default draining time is 5\n     minutes.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNAVAILABLE</code>: Health checks are unavailable for the target group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HEALTHY</code>: The target is healthy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNHEALTHY</code>: The target is unhealthy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INITIAL</code>: Initial health checks on the target are being performed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNUSED</code>: Target group is not used in a service.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of the target.</p> <ul> <li> <p> <code>DRAINING</code>: The target is being deregistered. No new connections are sent to this target while current connections are being drained. The default draining time is 5 minutes.</p> </li> <li> <p> <code>UNAVAILABLE</code>: Health checks are unavailable for the target group.</p> </li> <li> <p> <code>HEALTHY</code>: The target is healthy.</p> </li> <li> <p> <code>UNHEALTHY</code>: The target is unhealthy.</p> </li> <li> <p> <code>INITIAL</code>: Initial health checks on the target are being performed.</p> </li> <li> <p> <code>UNUSED</code>: Target group is not used in a service.</p> </li> </ul>"
                     }
                 },
                 "reasonCode": {
@@ -10305,7 +10343,7 @@
                 "resourceConfigurationDefinition": {
                     "target": "com.amazonaws.vpclattice#ResourceConfigurationDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource configuration.</p>"
+                        "smithy.api#documentation": "<p>Identifies the resource configuration in one of the following ways:</p> <ul> <li> <p> <b>Amazon Resource Name (ARN)</b> - Supported resource-types that are provisioned by Amazon Web Services services, such as RDS databases, can be identified by their ARN.</p> </li> <li> <p> <b>Domain name</b> - Any domain name that is publicly resolvable.</p> </li> <li> <p> <b>IP address</b> - For IPv4 and IPv6, only IP addresses in the VPC are supported.</p> </li> </ul>"
                     }
                 },
                 "allowAssociationToShareableServiceNetwork": {
@@ -10361,7 +10399,7 @@
                 "type": {
                     "target": "com.amazonaws.vpclattice#ResourceConfigurationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of resource configuration.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SINGLE</code> - A single resource.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GROUP</code> - A group of resources.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CHILD</code> - A single resource that is part of a group resource configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ARN</code> - An Amazon Web Services resource.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of resource configuration.</p> <ul> <li> <p> <code>SINGLE</code> - A single resource.</p> </li> <li> <p> <code>GROUP</code> - A group of resources.</p> </li> <li> <p> <code>CHILD</code> - A single resource that is part of a group resource configuration.</p> </li> <li> <p> <code>ARN</code> - An Amazon Web Services resource.</p> </li> </ul>"
                     }
                 },
                 "portRanges": {
@@ -10410,6 +10448,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.vpclattice#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.vpclattice#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.vpclattice#InternalServerException"
@@ -10547,7 +10588,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a specified rule for the listener. You can't modify a default listener rule. To modify a\n   default listener rule, use <code>UpdateListener</code>.</p>",
+                "smithy.api#documentation": "<p>Updates a specified rule for the listener. You can't modify a default listener rule. To modify a default listener rule, use <code>UpdateListener</code>.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "PATCH",
@@ -10742,7 +10783,7 @@
                 "authType": {
                     "target": "com.amazonaws.vpclattice#AuthType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of IAM policy.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NONE</code>: The resource does not use an IAM policy. This is the default.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_IAM</code>: The resource uses an IAM policy. When this type is used, auth is enabled and an auth policy is required.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The type of IAM policy.</p> <ul> <li> <p> <code>NONE</code>: The resource does not use an IAM policy. This is the default.</p> </li> <li> <p> <code>AWS_IAM</code>: The resource uses an IAM policy. When this type is used, auth is enabled and an auth policy is required.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -10806,7 +10847,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the service network and VPC association. If you add a security group to the service\n   network and VPC association, the association must continue to have at least one security\n   group. You can add or edit security groups at any time. However, to remove all security groups,\n   you must first delete the association and then recreate it without security groups.</p>",
+                "smithy.api#documentation": "<p>Updates the service network and VPC association. If you add a security group to the service network and VPC association, the association must continue to have at least one security group. You can add or edit security groups at any time. However, to remove all security groups, you must first delete the association and then recreate it without security groups.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "uri": "/servicenetworkvpcassociations/{serviceNetworkVpcAssociationIdentifier}",
@@ -10857,7 +10898,7 @@
                 "status": {
                     "target": "com.amazonaws.vpclattice#ServiceNetworkVpcAssociationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status. You can retry the operation if the status is <code>DELETE_FAILED</code>.\n   However, if you retry it while the status is <code>DELETE_IN_PROGRESS</code>, there is no change\n   in the status.</p>"
+                        "smithy.api#documentation": "<p>The status. You can retry the operation if the status is <code>DELETE_FAILED</code>. However, if you retry it while the status is <code>DELETE_IN_PROGRESS</code>, there is no change in the status.</p>"
                     }
                 },
                 "createdBy": {
@@ -10894,7 +10935,7 @@
                 "authType": {
                     "target": "com.amazonaws.vpclattice#AuthType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of IAM policy.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NONE</code>: The resource does not use an IAM policy. This is the default.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_IAM</code>: The resource uses an IAM policy. When this type is used, auth is enabled and an auth policy is required.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of IAM policy.</p> <ul> <li> <p> <code>NONE</code>: The resource does not use an IAM policy. This is the default.</p> </li> <li> <p> <code>AWS_IAM</code>: The resource uses an IAM policy. When this type is used, auth is enabled and an auth policy is required.</p> </li> </ul>"
                     }
                 }
             }
@@ -11066,7 +11107,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The input does not satisfy the constraints specified by an Amazon Web Services\n   service.</p>",
+                "smithy.api#documentation": "<p>The input does not satisfy the constraints specified by an Amazon Web Services service.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -11165,7 +11206,7 @@
                 "weight": {
                     "target": "com.amazonaws.vpclattice#TargetGroupWeight",
                     "traits": {
-                        "smithy.api#documentation": "<p>Only required if you specify multiple target groups for a forward action. The weight\n   determines how requests are distributed to the target group. For example, if you specify two\n   target groups, each with a weight of 10, each target group receives half the requests. If you\n   specify two target groups, one with a weight of 10 and the other with a weight of 20, the target\n   group with a weight of 20 receives twice as many requests as the other target group. If there's\n   only one target group specified, then the default value is 100.</p>"
+                        "smithy.api#documentation": "<p>Only required if you specify multiple target groups for a forward action. The weight determines how requests are distributed to the target group. For example, if you specify two target groups, each with a weight of 10, each target group receives half the requests. If you specify two target groups, one with a weight of 10 and the other with a weight of 20, the target group with a weight of 20 receives twice as many requests as the other target group. If there's only one target group specified, then the default value is 100.</p>"
                     }
                 }
             },

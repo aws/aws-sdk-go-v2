@@ -731,6 +731,9 @@
                     "target": "com.amazonaws.bedrockruntime#ServiceQuotaExceededException"
                 },
                 {
+                    "target": "com.amazonaws.bedrockruntime#ServiceUnavailableException"
+                },
+                {
                     "target": "com.amazonaws.bedrockruntime#ThrottlingException"
                 },
                 {
@@ -6047,6 +6050,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "content_filtered"
+                    }
+                },
+                "MODEL_CONTEXT_WINDOW_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "model_context_window_exceeded"
                     }
                 }
             }

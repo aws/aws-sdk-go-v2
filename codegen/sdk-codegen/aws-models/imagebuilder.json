@@ -158,7 +158,7 @@
                 "kmsKeyId": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key identifier used to encrypt the distributed image.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the KMS key used to encrypt the distributed image. \n\t\t\tThis can be either the Key ARN or the Alias ARN. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN\">Key identifiers (KeyId)</a> \n\t\t\tin the <i>Key Management Service Developer Guide</i>.</p>"
                     }
                 },
                 "launchPermission": {
@@ -190,6 +190,30 @@
         },
         "com.amazonaws.imagebuilder#Arn": {
             "type": "string"
+        },
+        "com.amazonaws.imagebuilder#AutoDisableFailureCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#AutoDisablePolicy": {
+            "type": "structure",
+            "members": {
+                "failureCount": {
+                    "target": "com.amazonaws.imagebuilder#AutoDisableFailureCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of consecutive scheduled image pipeline executions that must fail before Image Builder \n\t\t\tautomatically disables the pipeline.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the rules by which an image pipeline is automatically disabled when it fails.</p>"
+            }
         },
         "com.amazonaws.imagebuilder#Boolean": {
             "type": "boolean",
@@ -511,7 +535,7 @@
                 "kmsKeyId": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key identifier used to encrypt the component.</p>"
+                        "smithy.api#documentation": "<p>The KMS key identifier used to encrypt the component. This can be either the Key ARN or the Alias ARN. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN\">Key identifiers (KeyId)</a> \n\t\t\tin the <i>Key Management Service Developer Guide</i>.</p>"
                     }
                 },
                 "encrypted": {
@@ -977,6 +1001,14 @@
                 "target": "com.amazonaws.imagebuilder#ComponentVersion"
             }
         },
+        "com.amazonaws.imagebuilder#ConsecutiveFailures": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
         "com.amazonaws.imagebuilder#Container": {
             "type": "structure",
             "members": {
@@ -1096,7 +1128,7 @@
                 "kmsKeyId": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Identifies which KMS key is used to encrypt the container image for distribution to\n\t\t\tthe target Region.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies which KMS key is used to encrypt the container image \n\t\t\tfor distribution to the target Region. This can be either the Key ARN or the Alias ARN. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN\">Key identifiers (KeyId)</a> \n\t\t\tin the <i>Key Management Service Developer Guide</i>.</p>"
                     }
                 },
                 "encrypted": {
@@ -1189,6 +1221,12 @@
                     "target": "com.amazonaws.imagebuilder#DateTime",
                     "traits": {
                         "smithy.api#documentation": "<p>The date when this container recipe was created.</p>"
+                    }
+                },
+                "instanceImage": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The base image for a container build and test instance. This can contain an AMI ID \n\t\tor it can specify an Amazon Web Services Systems Manager (SSM) Parameter Store Parameter, prefixed by <code>ssm:</code>, \n\t\tfollowed by the parameter name or ARN.</p>\n         <p>If not specified, Image Builder uses the appropriate ECS-optimized AMI as a base image.</p>"
                     }
                 },
                 "tags": {
@@ -1339,7 +1377,7 @@
                 "kmsKeyId": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the KMS key that is used to encrypt this component.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the KMS key used to encrypt this component. This can be either the Key ARN or the Alias ARN. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN\">Key identifiers (KeyId)</a> \n\t\t\tin the <i>Key Management Service Developer Guide</i>.</p>"
                     }
                 },
                 "tags": {
@@ -1535,7 +1573,7 @@
                 "kmsKeyId": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Identifies which KMS key is used to encrypt the Dockerfile template.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies which KMS key is used to encrypt the Dockerfile \n\t\t\ttemplate. This can be either the Key ARN or the Alias ARN. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN\">Key identifiers (KeyId)</a> \n\t\t\tin the <i>Key Management Service Developer Guide</i>.</p>"
                     }
                 },
                 "clientToken": {
@@ -1888,6 +1926,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) for the IAM role you create that grants \n\t\t\tImage Builder access to perform workflow actions.</p>"
                     }
+                },
+                "loggingConfiguration": {
+                    "target": "com.amazonaws.imagebuilder#PipelineLoggingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Define logging configuration for the image build process.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2033,6 +2077,12 @@
                         "smithy.api#documentation": "<p>Specify additional settings and launch scripts for your build instances.</p>"
                     }
                 },
+                "amiTags": {
+                    "target": "com.amazonaws.imagebuilder#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags that are applied to the AMI that Image Builder creates during the Build phase \n\t\t\tprior to image distribution.</p>"
+                    }
+                },
                 "clientToken": {
                     "target": "com.amazonaws.imagebuilder#ClientToken",
                     "traits": {
@@ -2142,6 +2192,12 @@
                     "target": "com.amazonaws.imagebuilder#RoleNameOrArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) for the IAM role you create that grants \n\t\t\tImage Builder access to perform workflow actions.</p>"
+                    }
+                },
+                "loggingConfiguration": {
+                    "target": "com.amazonaws.imagebuilder#ImageLoggingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Define logging configuration for the image build process.</p>"
                     }
                 }
             },
@@ -2586,7 +2642,7 @@
                 "kmsKeyId": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the KMS key that is used to encrypt this workflow resource.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the KMS key used to encrypt this workflow resource. \n\t\t\tThis can be either the Key ARN or the Alias ARN. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN\">Key identifiers (KeyId)</a> \n\t\t\tin the <i>Key Management Service Developer Guide</i>.</p>"
                     }
                 },
                 "tags": {
@@ -3662,7 +3718,7 @@
                 "kmsKeyId": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use to configure the KMS key to use when encrypting the device.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the KMS key to use when encrypting the device. \n\t\t\tThis can be either the Key ARN or the Alias ARN. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN\">Key identifiers (KeyId)</a> \n\t\t\tin the <i>Key Management Service Developer Guide</i>.</p>"
                     }
                 },
                 "snapshotId": {
@@ -5556,10 +5612,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains the build and test workflows that are associated with the image.</p>"
                     }
+                },
+                "loggingConfiguration": {
+                    "target": "com.amazonaws.imagebuilder#ImageLoggingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The logging configuration that's defined for the image. Image Builder uses the defined settings \n\t\t\tto direct execution log output during image creation.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An Image Builder image. You must specify exactly one recipe for the image – either a\n\t\t\tcontainer recipe (<code>containerRecipe</code>), which creates a container image, or an\n\t\t\timage recipe (<code>imageRecipe</code>), which creates an AMI.</p>"
+                "smithy.api#documentation": "<p>An Image Builder image resource that keeps track of all of the settings used to create, configure, \n\t\t\tand distribute output for that image. You must specify exactly one recipe for the image – \n\t\t\teither a container recipe (<code>containerRecipe</code>), which creates a container image, or an\n\t\t\timage recipe (<code>imageRecipe</code>), which creates an AMI.</p>"
             }
         },
         "com.amazonaws.imagebuilder#ImageAggregation": {
@@ -5601,6 +5663,20 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws(?:-[a-z-]+)?):(?:image-recipe|container-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline|lifecycle-policy|workflow\\/(?:build|test|distribution))/[a-z0-9-_]+(?:/(?:(?:x|[0-9]+)\\.(?:x|[0-9]+)\\.(?:x|[0-9]+))(?:/[0-9]+)?)?$"
+            }
+        },
+        "com.amazonaws.imagebuilder#ImageLoggingConfiguration": {
+            "type": "structure",
+            "members": {
+                "logGroupName": {
+                    "target": "com.amazonaws.imagebuilder#LogGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The log group name that Image Builder uses for image creation. If not specified, the log group \n\t\t\tname defaults to <code>/aws/imagebuilder/image-name</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The logging configuration that's defined for the image. Image Builder uses the defined settings \n\t\t\tto direct execution log output during image creation.</p>"
             }
         },
         "com.amazonaws.imagebuilder#ImagePackage": {
@@ -5722,6 +5798,12 @@
                         "smithy.api#documentation": "<p>This is no longer supported, and does not return a value.</p>"
                     }
                 },
+                "lastRunStatus": {
+                    "target": "com.amazonaws.imagebuilder#ImageStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the last image that this pipeline built, such as \n\t\t\t<code>BUILDING</code>, <code>TESTING</code>, <code>FAILED</code>, \n\t\t\tor <code>AVAILABLE</code>.</p>"
+                    }
+                },
                 "dateNextRun": {
                     "target": "com.amazonaws.imagebuilder#DateTime",
                     "traits": {
@@ -5750,6 +5832,18 @@
                     "target": "com.amazonaws.imagebuilder#WorkflowConfigurationList",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains the workflows that run for the image pipeline.</p>"
+                    }
+                },
+                "loggingConfiguration": {
+                    "target": "com.amazonaws.imagebuilder#PipelineLoggingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines logging configuration for the output image.</p>"
+                    }
+                },
+                "consecutiveFailures": {
+                    "target": "com.amazonaws.imagebuilder#ConsecutiveFailures",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Image Builder tracks the number of consecutive failures for scheduled pipeline \n\t\t\texecutions and takes one of the following actions each time it runs on a schedule:</p>\n         <ul>\n            <li>\n               <p>If the pipeline execution is successful, the number of consecutive \n\t\t\t\t\tfailures resets to zero.</p>\n            </li>\n            <li>\n               <p>If the pipeline execution fails, Image Builder increments the number of \n\t\t\t\t\tconsecutive failures. If the failure count exceeds the limit defined in the \n\t\t\t\t\t<code>AutoDisablePolicy</code>, Image Builder disables the pipeline.</p>\n            </li>\n         </ul>\n         <p>The consecutive failure count is also reset to zero under the following \n\t\t\tconditions:</p>\n         <ul>\n            <li>\n               <p>The pipeline runs manually and succeeds.</p>\n            </li>\n            <li>\n               <p>The pipeline configuration is updated.</p>\n            </li>\n         </ul>\n         <p>If the pipeline runs manually and fails, the count remains the same. The next \n\t\t\tscheduled run continues to increment where it left off before.</p>"
                     }
                 }
             },
@@ -5874,6 +5968,12 @@
                     "target": "com.amazonaws.imagebuilder#AdditionalInstanceConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Before you create a new AMI, Image Builder launches temporary Amazon EC2 instances to build and test\n\t\t\tyour image configuration. Instance configuration adds a layer of control over those\n\t\t\tinstances. You can define settings and add scripts to run when an instance is launched\n\t\t\tfrom your AMI.</p>"
+                    }
+                },
+                "amiTags": {
+                    "target": "com.amazonaws.imagebuilder#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags that are applied to the AMI that Image Builder creates during the Build phase \n\t\t\tprior to image distribution.</p>"
                     }
                 }
             },
@@ -6434,6 +6534,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Identifies the last runtime instance of the lifecycle policy to take action on the image.</p>"
                     }
+                },
+                "loggingConfiguration": {
+                    "target": "com.amazonaws.imagebuilder#ImageLoggingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The logging configuration that's defined for the image.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6692,7 +6798,7 @@
                 "kmsKeyId": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the KMS key that should be used to encrypt this component.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the KMS key used to encrypt this component. This can be either the Key ARN or the Alias ARN. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN\">Key identifiers (KeyId)</a> \n\t\t\tin the <i>Key Management Service Developer Guide</i>.</p>"
                     }
                 },
                 "tags": {
@@ -6825,6 +6931,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "loggingConfiguration": {
+                    "target": "com.amazonaws.imagebuilder#ImageLoggingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Define logging configuration for the image build process.</p>"
+                    }
+                },
                 "tags": {
                     "target": "com.amazonaws.imagebuilder#TagMap",
                     "traits": {
@@ -6933,6 +7045,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The <code>importTaskId</code> (API) or <code>ImportTaskId</code> (CLI) from the\n\t\t\tAmazon EC2 VM import process. Image Builder retrieves information from the import process to pull in\n\t\t\tthe AMI that is created from the VM source as the base image for your recipe.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "loggingConfiguration": {
+                    "target": "com.amazonaws.imagebuilder#ImageLoggingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Define logging configuration for the image build process.</p>"
                     }
                 },
                 "tags": {
@@ -8420,7 +8538,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
+                        "smithy.api#documentation": "<p>Specify the maximum number of items to return in a request.</p>"
                     }
                 },
                 "nextToken": {
@@ -8531,7 +8649,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
+                        "smithy.api#documentation": "<p>Specify the maximum number of items to return in a request.</p>"
                     }
                 },
                 "nextToken": {
@@ -8635,7 +8753,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
+                        "smithy.api#documentation": "<p>Specify the maximum number of items to return in a request.</p>"
                     }
                 },
                 "nextToken": {
@@ -8733,7 +8851,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
+                        "smithy.api#documentation": "<p>Specify the maximum number of items to return in a request.</p>"
                     }
                 },
                 "nextToken": {
@@ -8837,7 +8955,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
+                        "smithy.api#documentation": "<p>Specify the maximum number of items to return in a request.</p>"
                     }
                 },
                 "nextToken": {
@@ -8939,7 +9057,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
+                        "smithy.api#documentation": "<p>Specify the maximum number of items to return in a request.</p>"
                     }
                 },
                 "nextToken": {
@@ -9047,7 +9165,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
+                        "smithy.api#documentation": "<p>Specify the maximum number of items to return in a request.</p>"
                     }
                 },
                 "nextToken": {
@@ -9145,7 +9263,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
+                        "smithy.api#documentation": "<p>Specify the maximum number of items to return in a request.</p>"
                     }
                 },
                 "nextToken": {
@@ -9237,7 +9355,7 @@
                 "owner": {
                     "target": "com.amazonaws.imagebuilder#Ownership",
                     "traits": {
-                        "smithy.api#documentation": "<p>The owner defines which image recipes you want to list. By default, this request will\n\t\t\tonly show image recipes owned by your account. You can use this field to specify if you\n\t\t\twant to view image recipes owned by yourself, by Amazon, or those image recipes that\n\t\t\thave been shared with you by other customers.</p>"
+                        "smithy.api#documentation": "<p>You can specify the recipe owner to filter results by that owner. By default, this request will\n\t\t\tonly show image recipes owned by your account. To filter by a different owner, specify one of the \n\t\t\t<code>Valid Values</code> that are listed for this parameter.</p>"
                     }
                 },
                 "filters": {
@@ -9249,7 +9367,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
+                        "smithy.api#documentation": "<p>Specify the maximum number of items to return in a request.</p>"
                     }
                 },
                 "nextToken": {
@@ -9275,7 +9393,7 @@
                 "imageRecipeSummaryList": {
                     "target": "com.amazonaws.imagebuilder#ImageRecipeSummaryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of image pipelines.</p>"
+                        "smithy.api#documentation": "<p>A list of <code>ImageRecipeSummary</code> objects that contain identifying characteristics for the \n\t\t\timage recipe, such as the name, the Amazon Resource Name (ARN), and the date created, along with other key details.</p>"
                     }
                 },
                 "nextToken": {
@@ -9441,7 +9559,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
+                        "smithy.api#documentation": "<p>Specify the maximum number of items to return in a request.</p>"
                     }
                 },
                 "nextToken": {
@@ -9552,7 +9670,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
+                        "smithy.api#documentation": "<p>Specify the maximum number of items to return in a request.</p>"
                     }
                 },
                 "nextToken": {
@@ -9656,7 +9774,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
+                        "smithy.api#documentation": "<p>Specify the maximum number of items to return in a request.</p>"
                     }
                 },
                 "nextToken": {
@@ -9761,7 +9879,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
+                        "smithy.api#documentation": "<p>Specify the maximum number of items to return in a request.</p>"
                     }
                 },
                 "nextToken": {
@@ -9859,7 +9977,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
+                        "smithy.api#documentation": "<p>Specify the maximum number of items to return in a request.</p>"
                     }
                 },
                 "nextToken": {
@@ -9958,7 +10076,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
+                        "smithy.api#documentation": "<p>Specify the maximum number of items to return in a request.</p>"
                     }
                 },
                 "nextToken": {
@@ -10102,7 +10220,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
+                        "smithy.api#documentation": "<p>Specify the maximum number of items to return in a request.</p>"
                     }
                 },
                 "nextToken": {
@@ -10194,7 +10312,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
+                        "smithy.api#documentation": "<p>Specify the maximum number of items to return in a request.</p>"
                     }
                 },
                 "nextToken": {
@@ -10280,7 +10398,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
+                        "smithy.api#documentation": "<p>Specify the maximum number of items to return in a request.</p>"
                     }
                 },
                 "nextToken": {
@@ -10391,7 +10509,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
+                        "smithy.api#documentation": "<p>Specify the maximum number of items to return in a request.</p>"
                     }
                 },
                 "nextToken": {
@@ -10533,7 +10651,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
+                        "smithy.api#documentation": "<p>Specify the maximum number of items to return in a request.</p>"
                     }
                 },
                 "nextToken": {
@@ -10565,6 +10683,16 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.imagebuilder#LogGroupName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\-_/\\.]{1,512}$"
             }
         },
         "com.amazonaws.imagebuilder#Logging": {
@@ -10884,6 +11012,26 @@
                         "smithy.api#enumValue": "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE"
                     }
                 }
+            }
+        },
+        "com.amazonaws.imagebuilder#PipelineLoggingConfiguration": {
+            "type": "structure",
+            "members": {
+                "imageLogGroupName": {
+                    "target": "com.amazonaws.imagebuilder#LogGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The log group name that Image Builder uses for image creation. If not specified, the log group \n\t\t\tname defaults to <code>/aws/imagebuilder/image-name</code>.</p>"
+                    }
+                },
+                "pipelineLogGroupName": {
+                    "target": "com.amazonaws.imagebuilder#LogGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The log group name that Image Builder uses for the log output during creation of a new pipeline. \n\t\t\tIf not specified, the pipeline log group name defaults to \n\t\t\t<code>/aws/imagebuilder/pipeline/pipeline-name</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The logging configuration that's defined for pipeline execution.</p>"
             }
         },
         "com.amazonaws.imagebuilder#PipelineStatus": {
@@ -11642,6 +11790,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The start condition configures when the pipeline should trigger a new image build, \n\t\t\tas follows. If no value is set Image Builder defaults to \n\t\t\t<code>EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE</code> (default) – \n\t\t\t\t\tWhen you use semantic version filters on the base image or components in your \n\t\t\t\t\timage recipe, EC2 Image Builder builds a new image only when there are new versions of \n\t\t\t\t\tthe base image or components in your recipe that match the filter.</p>\n               <note>\n                  <p>For semantic version syntax, see <a href=\"https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_CreateComponent.html\">CreateComponent</a>.</p>\n               </note>\n            </li>\n            <li>\n               <p>\n                  <code>EXPRESSION_MATCH_ONLY</code> – This condition builds a new \n\t\t\t\t\timage every time the CRON expression matches the current time.</p>\n            </li>\n         </ul>"
                     }
+                },
+                "autoDisablePolicy": {
+                    "target": "com.amazonaws.imagebuilder#AutoDisablePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The policy that configures when Image Builder should automatically disable a pipeline that \n\t\t\tis failing.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11978,6 +12132,12 @@
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
+                },
+                "tags": {
+                    "target": "com.amazonaws.imagebuilder#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify tags for Image Builder to apply to the image resource that's created \n\t\t\tWhen it starts pipeline execution.</p>"
+                    }
                 }
             },
             "traits": {
@@ -12142,7 +12302,7 @@
                 "uninstallAfterBuild": {
                     "target": "com.amazonaws.imagebuilder#NullableBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Controls whether the Systems Manager agent is removed from your final build image, prior to\n\t\t\tcreating the new AMI. If this is set to true, then the agent is removed from the final\n\t\t\timage. If it's set to false, then the agent is left in, so that it is included in the\n\t\t\tnew AMI. The default value is false.</p>"
+                        "smithy.api#documentation": "<p>Controls whether the Systems Manager agent is removed from your final build image, prior to\n\t\t\tcreating the new AMI. If this is set to true, then the agent is removed from the final\n\t\t\timage. If it's set to false, then the agent is left in, so that it is included in the\n\t\t\tnew AMI. default value is false.</p>\n         <p>The default behavior of uninstallAfterBuild is to remove the SSM Agent if it was installed by EC2 Image Builder</p>"
                     }
                 }
             },
@@ -12611,6 +12771,12 @@
                     "target": "com.amazonaws.imagebuilder#WorkflowConfigurationList",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains the workflows to run for the pipeline.</p>"
+                    }
+                },
+                "loggingConfiguration": {
+                    "target": "com.amazonaws.imagebuilder#PipelineLoggingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Update logging configuration for the output image that's created when \n\t\t\tthe pipeline runs.</p>"
                     }
                 },
                 "executionRole": {
@@ -13120,7 +13286,7 @@
                 "kmsKeyId": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key identifier used to encrypt the workflow resource.</p>"
+                        "smithy.api#documentation": "<p>The KMS key identifier used to encrypt the workflow resource. This can be either the Key ARN or the Alias ARN. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN\">Key identifiers (KeyId)</a> \n\t\t\tin the <i>Key Management Service Developer Guide</i>.</p>"
                     }
                 },
                 "dateCreated": {

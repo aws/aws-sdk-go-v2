@@ -6237,7 +6237,7 @@
                     "min": 20,
                     "max": 1011
                 },
-                "smithy.api#pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:custom-model/(imported|[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2})/[a-z0-9]{12}$"
+                "smithy.api#pattern": "^arn:aws(|-us-gov|-cn|-iso|-iso-b):bedrock:[a-z0-9-]{1,20}:[0-9]{12}:custom-model/(imported|[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2})/[a-z0-9]{12}$"
             }
         },
         "com.amazonaws.bedrock#CustomModelDeploymentArn": {
@@ -10111,11 +10111,21 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrock#GetFoundationModelIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}::foundation-model/[a-z0-9-]{1,63}[.]{1}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2})|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2})$"
+            }
+        },
         "com.amazonaws.bedrock#GetFoundationModelRequest": {
             "type": "structure",
             "members": {
                 "modelIdentifier": {
-                    "target": "com.amazonaws.bedrock#ModelIdentifier",
+                    "target": "com.amazonaws.bedrock#GetFoundationModelIdentifier",
                     "traits": {
                         "smithy.api#documentation": "<p>The model identifier. </p>",
                         "smithy.api#httpLabel": {},
@@ -13811,7 +13821,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
+                "smithy.api#pattern": "^[a-zA-Z0-9]([-a-zA-Z0-9]{0,254}[a-zA-Z0-9])?$"
             }
         },
         "com.amazonaws.bedrock#Identifier": {
@@ -19017,7 +19027,6 @@
         "com.amazonaws.bedrock#RoleArn": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "ARN of a IAM role",
                 "smithy.api#length": {
                     "max": 2048
                 },
