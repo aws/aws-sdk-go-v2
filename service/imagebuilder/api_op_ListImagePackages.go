@@ -35,7 +35,7 @@ type ListImagePackagesInput struct {
 	// This member is required.
 	ImageBuildVersionArn *string
 
-	// The maximum items to return in a request.
+	// Specify the maximum number of items to return in a request.
 	MaxResults *int32
 
 	// A token to specify where to start paginating. This is the nextToken from a
@@ -199,7 +199,7 @@ func (c *Client) addOperationListImagePackagesMiddlewares(stack *middleware.Stac
 
 // ListImagePackagesPaginatorOptions is the paginator options for ListImagePackages
 type ListImagePackagesPaginatorOptions struct {
-	// The maximum items to return in a request.
+	// Specify the maximum number of items to return in a request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

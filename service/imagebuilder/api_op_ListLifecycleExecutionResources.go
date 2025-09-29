@@ -36,7 +36,7 @@ type ListLifecycleExecutionResourcesInput struct {
 	// This member is required.
 	LifecycleExecutionId *string
 
-	// The maximum items to return in a request.
+	// Specify the maximum number of items to return in a request.
 	MaxResults *int32
 
 	// A token to specify where to start paginating. This is the nextToken from a
@@ -213,7 +213,7 @@ func (c *Client) addOperationListLifecycleExecutionResourcesMiddlewares(stack *m
 // ListLifecycleExecutionResourcesPaginatorOptions is the paginator options for
 // ListLifecycleExecutionResources
 type ListLifecycleExecutionResourcesPaginatorOptions struct {
-	// The maximum items to return in a request.
+	// Specify the maximum number of items to return in a request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

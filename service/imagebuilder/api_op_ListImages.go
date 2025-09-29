@@ -49,7 +49,7 @@ type ListImagesInput struct {
 	// Includes deprecated images in the response list.
 	IncludeDeprecated *bool
 
-	// The maximum items to return in a request.
+	// Specify the maximum number of items to return in a request.
 	MaxResults *int32
 
 	// A token to specify where to start paginating. This is the nextToken from a
@@ -224,7 +224,7 @@ func (c *Client) addOperationListImagesMiddlewares(stack *middleware.Stack, opti
 
 // ListImagesPaginatorOptions is the paginator options for ListImages
 type ListImagesPaginatorOptions struct {
-	// The maximum items to return in a request.
+	// Specify the maximum number of items to return in a request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

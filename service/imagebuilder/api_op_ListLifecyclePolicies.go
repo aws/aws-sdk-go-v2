@@ -32,7 +32,7 @@ type ListLifecyclePoliciesInput struct {
 	// Streamline results based on one of the following values: Name , Status .
 	Filters []types.Filter
 
-	// The maximum items to return in a request.
+	// Specify the maximum number of items to return in a request.
 	MaxResults *int32
 
 	// A token to specify where to start paginating. This is the nextToken from a
@@ -192,7 +192,7 @@ func (c *Client) addOperationListLifecyclePoliciesMiddlewares(stack *middleware.
 // ListLifecyclePoliciesPaginatorOptions is the paginator options for
 // ListLifecyclePolicies
 type ListLifecyclePoliciesPaginatorOptions struct {
-	// The maximum items to return in a request.
+	// Specify the maximum number of items to return in a request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

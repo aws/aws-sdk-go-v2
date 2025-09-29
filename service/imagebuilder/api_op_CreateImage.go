@@ -73,6 +73,9 @@ type CreateImageInput struct {
 	// The image tests configuration of the image.
 	ImageTestsConfiguration *types.ImageTestsConfiguration
 
+	// Define logging configuration for the image build process.
+	LoggingConfiguration *types.ImageLoggingConfiguration
+
 	// The tags of the image.
 	Tags map[string]string
 

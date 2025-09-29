@@ -84,6 +84,10 @@ type UpdateImagePipelineInput struct {
 	// The image test configuration of the image pipeline.
 	ImageTestsConfiguration *types.ImageTestsConfiguration
 
+	// Update logging configuration for the output image that's created when the
+	// pipeline runs.
+	LoggingConfiguration *types.PipelineLoggingConfiguration
+
 	// The schedule of the image pipeline.
 	Schedule *types.Schedule
 

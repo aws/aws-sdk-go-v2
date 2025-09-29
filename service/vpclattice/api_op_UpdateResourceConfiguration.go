@@ -42,7 +42,15 @@ type UpdateResourceConfigurationInput struct {
 	// You can separate port ranges with a comma. Example: 1-65535 or 1,2,22-30
 	PortRanges []string
 
-	// The resource configuration.
+	// Identifies the resource configuration in one of the following ways:
+	//
+	//   - Amazon Resource Name (ARN) - Supported resource-types that are provisioned
+	//   by Amazon Web Services services, such as RDS databases, can be identified by
+	//   their ARN.
+	//
+	//   - Domain name - Any domain name that is publicly resolvable.
+	//
+	//   - IP address - For IPv4 and IPv6, only IP addresses in the VPC are supported.
 	ResourceConfigurationDefinition types.ResourceConfigurationDefinition
 
 	noSmithyDocumentSerde

@@ -1826,12 +1826,6 @@ func validateOpCreateResourceGatewayInput(v *CreateResourceGatewayInput) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.VpcIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VpcIdentifier"))
-	}
-	if v.SubnetIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

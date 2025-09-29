@@ -99,7 +99,11 @@ type CreateContainerRecipeInput struct {
 	// testing container images.
 	InstanceConfiguration *types.InstanceConfiguration
 
-	// Identifies which KMS key is used to encrypt the Dockerfile template.
+	// The Amazon Resource Name (ARN) that uniquely identifies which KMS key is used
+	// to encrypt the Dockerfile template. This can be either the Key ARN or the Alias
+	// ARN. For more information, see [Key identifiers (KeyId)]in the Key Management Service Developer Guide.
+	//
+	// [Key identifiers (KeyId)]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN
 	KmsKeyId *string
 
 	// Specifies the operating system platform when you use a custom base image.

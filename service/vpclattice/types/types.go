@@ -80,7 +80,7 @@ type DnsResource struct {
 	// The domain name of the resource.
 	DomainName *string
 
-	// The type of IP address.
+	// The type of IP address. Dualstack is currently not supported.
 	IpAddressType ResourceConfigurationIpAddressType
 
 	noSmithyDocumentSerde
@@ -89,7 +89,7 @@ type DnsResource struct {
 // Describes an action that returns a custom HTTP response.
 type FixedResponseAction struct {
 
-	// The HTTP response code.
+	// The HTTP response code. Only 404 and 500 status codes are supported.
 	//
 	// This member is required.
 	StatusCode *int32
@@ -413,7 +413,8 @@ type ResourceConfigurationSummary struct {
 	//
 	//   - SINGLE - A single resource.
 	//
-	//   - GROUP - A group of resources.
+	//   - GROUP - A group of resources. You must create a group resource configuration
+	//   before you create a child resource configuration.
 	//
 	//   - CHILD - A single resource that is part of a group resource configuration.
 	//
@@ -472,6 +473,9 @@ type ResourceGatewaySummary struct {
 
 	// The type of IP address used by the resource gateway.
 	IpAddressType ResourceGatewayIpAddressType
+
+	// The number of IPv4 addresses in each ENI for the resource gateway.
+	Ipv4AddressesPerEni *int32
 
 	// The most recent date and time that the resource gateway was updated, in
 	// ISO-8601 format.
@@ -706,7 +710,8 @@ type ServiceNetworkResourceAssociationSummary struct {
 	// The name of the service network associated with the resource configuration.
 	ServiceNetworkName *string
 
-	// The status of the service network associated with the resource configuration.
+	// The status of the service network’s association with the resource
+	// configuration. If the deletion fails, try to delete again.
 	Status ServiceNetworkResourceAssociationStatus
 
 	noSmithyDocumentSerde
@@ -752,7 +757,8 @@ type ServiceNetworkServiceAssociationSummary struct {
 	// The name of the service network.
 	ServiceNetworkName *string
 
-	// The status. If the deletion fails, try to delete again.
+	// The status of the service network’s association with the service. If the
+	// deletion fails, try to delete again.
 	Status ServiceNetworkServiceAssociationStatus
 
 	noSmithyDocumentSerde

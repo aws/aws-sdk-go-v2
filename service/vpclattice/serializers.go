@@ -561,6 +561,11 @@ func awsRestjson1_serializeOpDocumentCreateResourceGatewayInput(v *CreateResourc
 		ok.String(string(v.IpAddressType))
 	}
 
+	if v.Ipv4AddressesPerEni != nil {
+		ok := object.Key("ipv4AddressesPerEni")
+		ok.Integer(*v.Ipv4AddressesPerEni)
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -3947,6 +3952,10 @@ func (m *awsRestjson1_serializeOpListServiceNetworkResourceAssociations) HandleS
 func awsRestjson1_serializeOpHttpBindingsListServiceNetworkResourceAssociationsInput(v *ListServiceNetworkResourceAssociationsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.IncludeChildren != nil {
+		encoder.SetQuery("includeChildren").Boolean(*v.IncludeChildren)
 	}
 
 	if v.MaxResults != nil {

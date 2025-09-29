@@ -35,7 +35,7 @@ type ListWorkflowsInput struct {
 	// Used to streamline search results.
 	Filters []types.Filter
 
-	// The maximum items to return in a request.
+	// Specify the maximum number of items to return in a request.
 	MaxResults *int32
 
 	// A token to specify where to start paginating. This is the nextToken from a
@@ -197,7 +197,7 @@ func (c *Client) addOperationListWorkflowsMiddlewares(stack *middleware.Stack, o
 
 // ListWorkflowsPaginatorOptions is the paginator options for ListWorkflows
 type ListWorkflowsPaginatorOptions struct {
-	// The maximum items to return in a request.
+	// Specify the maximum number of items to return in a request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -36,7 +36,7 @@ type ListWorkflowStepExecutionsInput struct {
 	// This member is required.
 	WorkflowExecutionId *string
 
-	// The maximum items to return in a request.
+	// Specify the maximum number of items to return in a request.
 	MaxResults *int32
 
 	// A token to specify where to start paginating. This is the nextToken from a
@@ -217,7 +217,7 @@ func (c *Client) addOperationListWorkflowStepExecutionsMiddlewares(stack *middle
 // ListWorkflowStepExecutionsPaginatorOptions is the paginator options for
 // ListWorkflowStepExecutions
 type ListWorkflowStepExecutionsPaginatorOptions struct {
-	// The maximum items to return in a request.
+	// Specify the maximum number of items to return in a request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

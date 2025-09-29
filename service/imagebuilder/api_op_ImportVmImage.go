@@ -84,6 +84,9 @@ type ImportVmImageInput struct {
 	// The description for the base image that is created by the import process.
 	Description *string
 
+	// Define logging configuration for the image build process.
+	LoggingConfiguration *types.ImageLoggingConfiguration
+
 	// The operating system version for the imported VM.
 	OsVersion *string
 

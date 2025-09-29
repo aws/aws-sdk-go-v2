@@ -680,12 +680,13 @@ type StopReason string
 
 // Enum values for StopReason
 const (
-	StopReasonEndTurn             StopReason = "end_turn"
-	StopReasonToolUse             StopReason = "tool_use"
-	StopReasonMaxTokens           StopReason = "max_tokens"
-	StopReasonStopSequence        StopReason = "stop_sequence"
-	StopReasonGuardrailIntervened StopReason = "guardrail_intervened"
-	StopReasonContentFiltered     StopReason = "content_filtered"
+	StopReasonEndTurn                    StopReason = "end_turn"
+	StopReasonToolUse                    StopReason = "tool_use"
+	StopReasonMaxTokens                  StopReason = "max_tokens"
+	StopReasonStopSequence               StopReason = "stop_sequence"
+	StopReasonGuardrailIntervened        StopReason = "guardrail_intervened"
+	StopReasonContentFiltered            StopReason = "content_filtered"
+	StopReasonModelContextWindowExceeded StopReason = "model_context_window_exceeded"
 )
 
 // Values returns all known values for StopReason. Note that this can be expanded
@@ -700,6 +701,7 @@ func (StopReason) Values() []StopReason {
 		"stop_sequence",
 		"guardrail_intervened",
 		"content_filtered",
+		"model_context_window_exceeded",
 	}
 }
 

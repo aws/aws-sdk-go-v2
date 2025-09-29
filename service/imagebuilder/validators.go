@@ -1450,6 +1450,21 @@ func addOpUpdateLifecyclePolicyValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpUpdateLifecyclePolicy{}, middleware.After)
 }
 
+func validateAutoDisablePolicy(v *types.AutoDisablePolicy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutoDisablePolicy"}
+	if v.FailureCount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FailureCount"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateComponentConfiguration(v *types.ComponentConfiguration) error {
 	if v == nil {
 		return nil
@@ -1882,6 +1897,23 @@ func validateS3ExportConfiguration(v *types.S3ExportConfiguration) error {
 	}
 }
 
+func validateSchedule(v *types.Schedule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Schedule"}
+	if v.AutoDisablePolicy != nil {
+		if err := validateAutoDisablePolicy(v.AutoDisablePolicy); err != nil {
+			invalidParams.AddNested("AutoDisablePolicy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSsmParameterConfiguration(v *types.SsmParameterConfiguration) error {
 	if v == nil {
 		return nil
@@ -2163,6 +2195,11 @@ func validateOpCreateImagePipelineInput(v *CreateImagePipelineInput) error {
 	}
 	if v.InfrastructureConfigurationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InfrastructureConfigurationArn"))
+	}
+	if v.Schedule != nil {
+		if err := validateSchedule(v.Schedule); err != nil {
+			invalidParams.AddNested("Schedule", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.ClientToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
@@ -3092,6 +3129,11 @@ func validateOpUpdateImagePipelineInput(v *UpdateImagePipelineInput) error {
 	}
 	if v.InfrastructureConfigurationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InfrastructureConfigurationArn"))
+	}
+	if v.Schedule != nil {
+		if err := validateSchedule(v.Schedule); err != nil {
+			invalidParams.AddNested("Schedule", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.ClientToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))

@@ -42,6 +42,10 @@ type StartImagePipelineExecutionInput struct {
 	// This member is required.
 	ImagePipelineArn *string
 
+	// Specify tags for Image Builder to apply to the image resource that's created
+	// When it starts pipeline execution.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 

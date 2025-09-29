@@ -79,6 +79,9 @@ type CreateImagePipelineInput struct {
 	// The image test configuration of the image pipeline.
 	ImageTestsConfiguration *types.ImageTestsConfiguration
 
+	// Define logging configuration for the image build process.
+	LoggingConfiguration *types.PipelineLoggingConfiguration
+
 	// The schedule of the image pipeline.
 	Schedule *types.Schedule
 

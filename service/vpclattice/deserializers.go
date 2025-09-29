@@ -1107,6 +1107,19 @@ func awsRestjson1_deserializeOpDocumentCreateResourceGatewayOutput(v **CreateRes
 				sv.IpAddressType = types.ResourceGatewayIpAddressType(jtv)
 			}
 
+		case "ipv4AddressesPerEni":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Ipv4AddressesPerEni to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Ipv4AddressesPerEni = ptr.Int32(int32(i64))
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6071,6 +6084,19 @@ func awsRestjson1_deserializeOpDocumentGetResourceGatewayOutput(v **GetResourceG
 					return fmt.Errorf("expected ResourceGatewayIpAddressType to be of type string, got %T instead", value)
 				}
 				sv.IpAddressType = types.ResourceGatewayIpAddressType(jtv)
+			}
+
+		case "ipv4AddressesPerEni":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Ipv4AddressesPerEni to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Ipv4AddressesPerEni = ptr.Int32(int32(i64))
 			}
 
 		case "lastUpdatedAt":
@@ -12213,6 +12239,9 @@ func awsRestjson1_deserializeOpErrorUpdateResourceGateway(response *smithyhttp.R
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
 
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
@@ -15360,6 +15389,19 @@ func awsRestjson1_deserializeDocumentResourceGatewaySummary(v **types.ResourceGa
 					return fmt.Errorf("expected ResourceGatewayIpAddressType to be of type string, got %T instead", value)
 				}
 				sv.IpAddressType = types.ResourceGatewayIpAddressType(jtv)
+			}
+
+		case "ipv4AddressesPerEni":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Ipv4AddressesPerEni to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Ipv4AddressesPerEni = ptr.Int32(int32(i64))
 			}
 
 		case "lastUpdatedAt":

@@ -47,7 +47,7 @@ type CreateServiceNetworkResourceAssociationInput struct {
 	// actions. If the parameters aren't identical, the retry fails.
 	ClientToken *string
 
-	// The tags for the association.
+	// A key-value pair to associate with a resource.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

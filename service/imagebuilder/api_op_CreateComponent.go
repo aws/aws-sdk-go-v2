@@ -84,7 +84,11 @@ type CreateComponentInput struct {
 	// Describes the contents of the component.
 	Description *string
 
-	// The ID of the KMS key that is used to encrypt this component.
+	// The Amazon Resource Name (ARN) that uniquely identifies the KMS key used to
+	// encrypt this component. This can be either the Key ARN or the Alias ARN. For
+	// more information, see [Key identifiers (KeyId)]in the Key Management Service Developer Guide.
+	//
+	// [Key identifiers (KeyId)]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN
 	KmsKeyId *string
 
 	// The operating system (OS) version supported by the component. If the OS

@@ -94,7 +94,11 @@ type AmiDistributionConfiguration struct {
 	// length are in characters.
 	Description *string
 
-	// The KMS key identifier used to encrypt the distributed image.
+	// The Amazon Resource Name (ARN) that uniquely identifies the KMS key used to
+	// encrypt the distributed image. This can be either the Key ARN or the Alias ARN.
+	// For more information, see [Key identifiers (KeyId)]in the Key Management Service Developer Guide.
+	//
+	// [Key identifiers (KeyId)]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN
 	KmsKeyId *string
 
 	// Launch permissions can be used to configure which Amazon Web Services accounts
@@ -106,6 +110,19 @@ type AmiDistributionConfiguration struct {
 
 	// The ID of an account to which you want to distribute an image.
 	TargetAccountIds []string
+
+	noSmithyDocumentSerde
+}
+
+// Defines the rules by which an image pipeline is automatically disabled when it
+// fails.
+type AutoDisablePolicy struct {
+
+	// The number of consecutive scheduled image pipeline executions that must fail
+	// before Image Builder automatically disables the pipeline.
+	//
+	// This member is required.
+	FailureCount *int32
 
 	noSmithyDocumentSerde
 }
@@ -132,7 +149,11 @@ type Component struct {
 	// The encryption status of the component.
 	Encrypted *bool
 
-	// The KMS key identifier used to encrypt the component.
+	// The KMS key identifier used to encrypt the component. This can be either the
+	// Key ARN or the Alias ARN. For more information, see [Key identifiers (KeyId)]in the Key Management
+	// Service Developer Guide.
+	//
+	// [Key identifiers (KeyId)]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN
 	KmsKeyId *string
 
 	// The name of the component.
@@ -449,8 +470,12 @@ type ContainerRecipe struct {
 	// testing container images.
 	InstanceConfiguration *InstanceConfiguration
 
-	// Identifies which KMS key is used to encrypt the container image for
-	// distribution to the target Region.
+	// The Amazon Resource Name (ARN) that uniquely identifies which KMS key is used
+	// to encrypt the container image for distribution to the target Region. This can
+	// be either the Key ARN or the Alias ARN. For more information, see [Key identifiers (KeyId)]in the Key
+	// Management Service Developer Guide.
+	//
+	// [Key identifiers (KeyId)]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN
 	KmsKeyId *string
 
 	// The name of the container recipe.
@@ -509,6 +534,14 @@ type ContainerRecipeSummary struct {
 
 	// The date when this container recipe was created.
 	DateCreated *string
+
+	// The base image for a container build and test instance. This can contain an AMI
+	// ID or it can specify an Amazon Web Services Systems Manager (SSM) Parameter
+	// Store Parameter, prefixed by ssm: , followed by the parameter name or ARN.
+	//
+	// If not specified, Image Builder uses the appropriate ECS-optimized AMI as a
+	// base image.
+	InstanceImage *string
 
 	// The name of the container recipe.
 	Name *string
@@ -701,7 +734,11 @@ type EbsInstanceBlockDeviceSpecification struct {
 	// Use to configure device IOPS.
 	Iops *int32
 
-	// Use to configure the KMS key to use when encrypting the device.
+	// The Amazon Resource Name (ARN) that uniquely identifies the KMS key to use when
+	// encrypting the device. This can be either the Key ARN or the Alias ARN. For more
+	// information, see [Key identifiers (KeyId)]in the Key Management Service Developer Guide.
+	//
+	// [Key identifiers (KeyId)]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN
 	KmsKeyId *string
 
 	// The snapshot that defines the device contents.
@@ -812,9 +849,11 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
-// An Image Builder image. You must specify exactly one recipe for the image –
-// either a container recipe ( containerRecipe ), which creates a container image,
-// or an image recipe ( imageRecipe ), which creates an AMI.
+// An Image Builder image resource that keeps track of all of the settings used to
+// create, configure, and distribute output for that image. You must specify
+// exactly one recipe for the image – either a container recipe ( containerRecipe
+// ), which creates a container image, or an image recipe ( imageRecipe ), which
+// creates an AMI.
 type Image struct {
 
 	// The Amazon Resource Name (ARN) of the image.
@@ -888,6 +927,10 @@ type Image struct {
 	// the image.
 	LifecycleExecutionId *string
 
+	// The logging configuration that's defined for the image. Image Builder uses the
+	// defined settings to direct execution log output during image creation.
+	LoggingConfiguration *ImageLoggingConfiguration
+
 	// The name of the image.
 	Name *string
 
@@ -957,6 +1000,17 @@ type ImageAggregation struct {
 	noSmithyDocumentSerde
 }
 
+// The logging configuration that's defined for the image. Image Builder uses the
+// defined settings to direct execution log output during image creation.
+type ImageLoggingConfiguration struct {
+
+	// The log group name that Image Builder uses for image creation. If not
+	// specified, the log group name defaults to /aws/imagebuilder/image-name .
+	LogGroupName *string
+
+	noSmithyDocumentSerde
+}
+
 // A software package that's installed on top of the base image to create a
 // customized image.
 type ImagePackage struct {
@@ -976,6 +1030,28 @@ type ImagePipeline struct {
 
 	// The Amazon Resource Name (ARN) of the image pipeline.
 	Arn *string
+
+	// Image Builder tracks the number of consecutive failures for scheduled pipeline
+	// executions and takes one of the following actions each time it runs on a
+	// schedule:
+	//
+	//   - If the pipeline execution is successful, the number of consecutive failures
+	//   resets to zero.
+	//
+	//   - If the pipeline execution fails, Image Builder increments the number of
+	//   consecutive failures. If the failure count exceeds the limit defined in the
+	//   AutoDisablePolicy , Image Builder disables the pipeline.
+	//
+	// The consecutive failure count is also reset to zero under the following
+	// conditions:
+	//
+	//   - The pipeline runs manually and succeeds.
+	//
+	//   - The pipeline configuration is updated.
+	//
+	// If the pipeline runs manually and fails, the count remains the same. The next
+	// scheduled run continues to increment where it left off before.
+	ConsecutiveFailures *int32
 
 	// The Amazon Resource Name (ARN) of the container recipe that is used for this
 	// pipeline.
@@ -1023,6 +1099,13 @@ type ImagePipeline struct {
 	// with this image pipeline.
 	InfrastructureConfigurationArn *string
 
+	// The status of the last image that this pipeline built, such as BUILDING ,
+	// TESTING , FAILED , or AVAILABLE .
+	LastRunStatus ImageStatus
+
+	// Defines logging configuration for the output image.
+	LoggingConfiguration *PipelineLoggingConfiguration
+
 	// The name of the image pipeline.
 	Name *string
 
@@ -1066,6 +1149,10 @@ type ImageRecipe struct {
 	// adds a layer of control over those instances. You can define settings and add
 	// scripts to run when an instance is launched from your AMI.
 	AdditionalInstanceConfiguration *AdditionalInstanceConfiguration
+
+	// Tags that are applied to the AMI that Image Builder creates during the Build
+	// phase prior to image distribution.
+	AmiTags map[string]string
 
 	// The Amazon Resource Name (ARN) of the image recipe.
 	Arn *string
@@ -1306,6 +1393,9 @@ type ImageSummary struct {
 	// Identifies the last runtime instance of the lifecycle policy to take action on
 	// the image.
 	LifecycleExecutionId *string
+
+	// The logging configuration that's defined for the image.
+	LoggingConfiguration *ImageLoggingConfiguration
 
 	// The name of the image.
 	Name *string
@@ -2109,6 +2199,21 @@ type PackageVulnerabilityDetails struct {
 	noSmithyDocumentSerde
 }
 
+// The logging configuration that's defined for pipeline execution.
+type PipelineLoggingConfiguration struct {
+
+	// The log group name that Image Builder uses for image creation. If not
+	// specified, the log group name defaults to /aws/imagebuilder/image-name .
+	ImageLogGroupName *string
+
+	// The log group name that Image Builder uses for the log output during creation
+	// of a new pipeline. If not specified, the pipeline log group name defaults to
+	// /aws/imagebuilder/pipeline/pipeline-name .
+	PipelineLogGroupName *string
+
+	noSmithyDocumentSerde
+}
+
 // By default, EC2 instances run on shared tenancy hardware. This means that
 // multiple Amazon Web Services accounts might share the same physical hardware.
 // When you use dedicated hardware, the physical server that hosts your instances
@@ -2274,6 +2379,10 @@ type S3Logs struct {
 // new image.
 type Schedule struct {
 
+	// The policy that configures when Image Builder should automatically disable a
+	// pipeline that is failing.
+	AutoDisablePolicy *AutoDisablePolicy
+
 	// The start condition configures when the pipeline should trigger a new image
 	// build, as follows. If no value is set Image Builder defaults to
 	// EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE .
@@ -2357,7 +2466,10 @@ type SystemsManagerAgent struct {
 	// Controls whether the Systems Manager agent is removed from your final build
 	// image, prior to creating the new AMI. If this is set to true, then the agent is
 	// removed from the final image. If it's set to false, then the agent is left in,
-	// so that it is included in the new AMI. The default value is false.
+	// so that it is included in the new AMI. default value is false.
+	//
+	// The default behavior of uninstallAfterBuild is to remove the SSM Agent if it
+	// was installed by EC2 Image Builder
 	UninstallAfterBuild *bool
 
 	noSmithyDocumentSerde
@@ -2451,7 +2563,11 @@ type Workflow struct {
 	// The description of the workflow.
 	Description *string
 
-	// The KMS key identifier used to encrypt the workflow resource.
+	// The KMS key identifier used to encrypt the workflow resource. This can be
+	// either the Key ARN or the Alias ARN. For more information, see [Key identifiers (KeyId)]in the Key
+	// Management Service Developer Guide.
+	//
+	// [Key identifiers (KeyId)]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN
 	KmsKeyId *string
 
 	// The name of the workflow resource.

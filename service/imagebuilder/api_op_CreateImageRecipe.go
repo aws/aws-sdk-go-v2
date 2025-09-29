@@ -86,6 +86,10 @@ type CreateImageRecipeInput struct {
 	// Specify additional settings and launch scripts for your build instances.
 	AdditionalInstanceConfiguration *types.AdditionalInstanceConfiguration
 
+	// Tags that are applied to the AMI that Image Builder creates during the Build
+	// phase prior to image distribution.
+	AmiTags map[string]string
+
 	// The block device mappings of the image recipe.
 	BlockDeviceMappings []types.InstanceBlockDeviceMapping
 

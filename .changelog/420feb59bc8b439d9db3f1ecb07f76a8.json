@@ -1,0 +1,8 @@
+{
+    "id": "420feb59-bc8b-439d-9db3-f1ecb07f76a8",
+    "type": "feature",
+    "description": "This release introduces several new features and improvements to enhance pipeline management, logging, and resource configuration.",
+    "modules": [
+        "service/imagebuilder"
+    ]
+}

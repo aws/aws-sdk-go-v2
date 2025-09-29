@@ -714,6 +714,13 @@ func awsRestjson1_serializeOpDocumentCreateImageInput(v *CreateImageInput, value
 		ok.String(*v.InfrastructureConfigurationArn)
 	}
 
+	if v.LoggingConfiguration != nil {
+		ok := object.Key("loggingConfiguration")
+		if err := awsRestjson1_serializeDocumentImageLoggingConfiguration(v.LoggingConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
@@ -858,6 +865,13 @@ func awsRestjson1_serializeOpDocumentCreateImagePipelineInput(v *CreateImagePipe
 		ok.String(*v.InfrastructureConfigurationArn)
 	}
 
+	if v.LoggingConfiguration != nil {
+		ok := object.Key("loggingConfiguration")
+		if err := awsRestjson1_serializeDocumentPipelineLoggingConfiguration(v.LoggingConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -968,6 +982,13 @@ func awsRestjson1_serializeOpDocumentCreateImageRecipeInput(v *CreateImageRecipe
 	if v.AdditionalInstanceConfiguration != nil {
 		ok := object.Key("additionalInstanceConfiguration")
 		if err := awsRestjson1_serializeDocumentAdditionalInstanceConfiguration(v.AdditionalInstanceConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AmiTags != nil {
+		ok := object.Key("amiTags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.AmiTags, ok); err != nil {
 			return err
 		}
 	}
@@ -3418,6 +3439,13 @@ func awsRestjson1_serializeOpDocumentImportDiskImageInput(v *ImportDiskImageInpu
 		ok.String(*v.InfrastructureConfigurationArn)
 	}
 
+	if v.LoggingConfiguration != nil {
+		ok := object.Key("loggingConfiguration")
+		if err := awsRestjson1_serializeDocumentImageLoggingConfiguration(v.LoggingConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -3534,6 +3562,13 @@ func awsRestjson1_serializeOpDocumentImportVmImageInput(v *ImportVmImageInput, v
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
+	}
+
+	if v.LoggingConfiguration != nil {
+		ok := object.Key("loggingConfiguration")
+		if err := awsRestjson1_serializeDocumentImageLoggingConfiguration(v.LoggingConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Name != nil {
@@ -6157,6 +6192,13 @@ func awsRestjson1_serializeOpDocumentStartImagePipelineExecutionInput(v *StartIm
 		ok.String(*v.ImagePipelineArn)
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -6680,6 +6722,13 @@ func awsRestjson1_serializeOpDocumentUpdateImagePipelineInput(v *UpdateImagePipe
 		ok.String(*v.InfrastructureConfigurationArn)
 	}
 
+	if v.LoggingConfiguration != nil {
+		ok := object.Key("loggingConfiguration")
+		if err := awsRestjson1_serializeDocumentPipelineLoggingConfiguration(v.LoggingConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Schedule != nil {
 		ok := object.Key("schedule")
 		if err := awsRestjson1_serializeDocumentSchedule(v.Schedule, ok); err != nil {
@@ -7053,6 +7102,18 @@ func awsRestjson1_serializeDocumentAmiDistributionConfiguration(v *types.AmiDist
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAutoDisablePolicy(v *types.AutoDisablePolicy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FailureCount != nil {
+		ok := object.Key("failureCount")
+		ok.Integer(*v.FailureCount)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentComponentConfiguration(v *types.ComponentConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7417,6 +7478,18 @@ func awsRestjson1_serializeDocumentFilterValues(v []string, value smithyjson.Val
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentImageLoggingConfiguration(v *types.ImageLoggingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LogGroupName != nil {
+		ok := object.Key("logGroupName")
+		ok.String(*v.LogGroupName)
+	}
+
 	return nil
 }
 
@@ -7954,6 +8027,23 @@ func awsRestjson1_serializeDocumentOsVersionList(v []string, value smithyjson.Va
 	return nil
 }
 
+func awsRestjson1_serializeDocumentPipelineLoggingConfiguration(v *types.PipelineLoggingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ImageLogGroupName != nil {
+		ok := object.Key("imageLogGroupName")
+		ok.String(*v.ImageLogGroupName)
+	}
+
+	if v.PipelineLogGroupName != nil {
+		ok := object.Key("pipelineLogGroupName")
+		ok.String(*v.PipelineLogGroupName)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentPlacement(v *types.Placement, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8087,6 +8177,13 @@ func awsRestjson1_serializeDocumentS3Logs(v *types.S3Logs, value smithyjson.Valu
 func awsRestjson1_serializeDocumentSchedule(v *types.Schedule, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AutoDisablePolicy != nil {
+		ok := object.Key("autoDisablePolicy")
+		if err := awsRestjson1_serializeDocumentAutoDisablePolicy(v.AutoDisablePolicy, ok); err != nil {
+			return err
+		}
+	}
 
 	if len(v.PipelineExecutionStartCondition) > 0 {
 		ok := object.Key("pipelineExecutionStartCondition")

@@ -42,7 +42,7 @@ type ListImagePipelineImagesInput struct {
 	//   - version
 	Filters []types.Filter
 
-	// The maximum items to return in a request.
+	// Specify the maximum number of items to return in a request.
 	MaxResults *int32
 
 	// A token to specify where to start paginating. This is the nextToken from a
@@ -207,7 +207,7 @@ func (c *Client) addOperationListImagePipelineImagesMiddlewares(stack *middlewar
 // ListImagePipelineImagesPaginatorOptions is the paginator options for
 // ListImagePipelineImages
 type ListImagePipelineImagesPaginatorOptions struct {
-	// The maximum items to return in a request.
+	// Specify the maximum number of items to return in a request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

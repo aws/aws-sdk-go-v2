@@ -77,7 +77,11 @@ type CreateWorkflowInput struct {
 	// Describes the workflow.
 	Description *string
 
-	// The ID of the KMS key that is used to encrypt this workflow resource.
+	// The Amazon Resource Name (ARN) that uniquely identifies the KMS key used to
+	// encrypt this workflow resource. This can be either the Key ARN or the Alias ARN.
+	// For more information, see [Key identifiers (KeyId)]in the Key Management Service Developer Guide.
+	//
+	// [Key identifiers (KeyId)]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN
 	KmsKeyId *string
 
 	// Tags that apply to the workflow resource.

@@ -38,17 +38,17 @@ type ListImageRecipesInput struct {
 	//   - platform
 	Filters []types.Filter
 
-	// The maximum items to return in a request.
+	// Specify the maximum number of items to return in a request.
 	MaxResults *int32
 
 	// A token to specify where to start paginating. This is the nextToken from a
 	// previously truncated response.
 	NextToken *string
 
-	// The owner defines which image recipes you want to list. By default, this
-	// request will only show image recipes owned by your account. You can use this
-	// field to specify if you want to view image recipes owned by yourself, by Amazon,
-	// or those image recipes that have been shared with you by other customers.
+	// You can specify the recipe owner to filter results by that owner. By default,
+	// this request will only show image recipes owned by your account. To filter by a
+	// different owner, specify one of the Valid Values that are listed for this
+	// parameter.
 	Owner types.Ownership
 
 	noSmithyDocumentSerde
@@ -56,7 +56,9 @@ type ListImageRecipesInput struct {
 
 type ListImageRecipesOutput struct {
 
-	// The list of image pipelines.
+	// A list of ImageRecipeSummary objects that contain identifying characteristics
+	// for the image recipe, such as the name, the Amazon Resource Name (ARN), and the
+	// date created, along with other key details.
 	ImageRecipeSummaryList []types.ImageRecipeSummary
 
 	// The next token used for paginated responses. When this field isn't empty, there
@@ -205,7 +207,7 @@ func (c *Client) addOperationListImageRecipesMiddlewares(stack *middleware.Stack
 
 // ListImageRecipesPaginatorOptions is the paginator options for ListImageRecipes
 type ListImageRecipesPaginatorOptions struct {
-	// The maximum items to return in a request.
+	// Specify the maximum number of items to return in a request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

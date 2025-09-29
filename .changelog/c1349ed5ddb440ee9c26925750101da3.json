@@ -1,0 +1,8 @@
+{
+    "id": "c1349ed5-ddb4-40ee-9c26-925750101da3",
+    "type": "feature",
+    "description": "Release for fixing GetFoundationModel API behavior. Imported and custom models have their own exclusive API and GetFM should not accept those ARNS as input",
+    "modules": [
+        "service/bedrock"
+    ]
+}

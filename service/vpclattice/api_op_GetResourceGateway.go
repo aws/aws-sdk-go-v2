@@ -52,6 +52,9 @@ type GetResourceGatewayOutput struct {
 	// The type of IP address for the resource gateway.
 	IpAddressType types.ResourceGatewayIpAddressType
 
+	// The number of IPv4 addresses in each ENI for the resource gateway.
+	Ipv4AddressesPerEni *int32
+
 	// The date and time that the resource gateway was last updated, in ISO-8601
 	// format.
 	LastUpdatedAt *time.Time

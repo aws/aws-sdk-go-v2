@@ -14991,6 +14991,50 @@ func awsRestjson1_deserializeDocumentAmiList(v *[]types.Ami, value interface{}) 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAutoDisablePolicy(v **types.AutoDisablePolicy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutoDisablePolicy
+	if *v == nil {
+		sv = &types.AutoDisablePolicy{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "failureCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected AutoDisableFailureCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FailureCount = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCallRateLimitExceededException(v **types.CallRateLimitExceededException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -16272,6 +16316,15 @@ func awsRestjson1_deserializeDocumentContainerRecipeSummary(v **types.ContainerR
 					return fmt.Errorf("expected DateTime to be of type string, got %T instead", value)
 				}
 				sv.DateCreated = ptr.String(jtv)
+			}
+
+		case "instanceImage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.InstanceImage = ptr.String(jtv)
 			}
 
 		case "name":
@@ -17580,6 +17633,11 @@ func awsRestjson1_deserializeDocumentImage(v **types.Image, value interface{}) e
 				sv.LifecycleExecutionId = ptr.String(jtv)
 			}
 
+		case "loggingConfiguration":
+			if err := awsRestjson1_deserializeDocumentImageLoggingConfiguration(&sv.LoggingConfiguration, value); err != nil {
+				return err
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17722,6 +17780,46 @@ func awsRestjson1_deserializeDocumentImageAggregation(v **types.ImageAggregation
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentImageLoggingConfiguration(v **types.ImageLoggingConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ImageLoggingConfiguration
+	if *v == nil {
+		sv = &types.ImageLoggingConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "logGroupName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LogGroupName to be of type string, got %T instead", value)
+				}
+				sv.LogGroupName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentImagePackage(v **types.ImagePackage, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17836,6 +17934,19 @@ func awsRestjson1_deserializeDocumentImagePipeline(v **types.ImagePipeline, valu
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "consecutiveFailures":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ConsecutiveFailures to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ConsecutiveFailures = ptr.Int32(int32(i64))
+			}
+
 		case "containerRecipeArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17943,6 +18054,20 @@ func awsRestjson1_deserializeDocumentImagePipeline(v **types.ImagePipeline, valu
 					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
 				sv.InfrastructureConfigurationArn = ptr.String(jtv)
+			}
+
+		case "lastRunStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImageStatus to be of type string, got %T instead", value)
+				}
+				sv.LastRunStatus = types.ImageStatus(jtv)
+			}
+
+		case "loggingConfiguration":
+			if err := awsRestjson1_deserializeDocumentPipelineLoggingConfiguration(&sv.LoggingConfiguration, value); err != nil {
+				return err
 			}
 
 		case "name":
@@ -18099,6 +18224,11 @@ func awsRestjson1_deserializeDocumentImageRecipe(v **types.ImageRecipe, value in
 		switch key {
 		case "additionalInstanceConfiguration":
 			if err := awsRestjson1_deserializeDocumentAdditionalInstanceConfiguration(&sv.AdditionalInstanceConfiguration, value); err != nil {
+				return err
+			}
+
+		case "amiTags":
+			if err := awsRestjson1_deserializeDocumentTagMap(&sv.AmiTags, value); err != nil {
 				return err
 			}
 
@@ -18867,6 +18997,11 @@ func awsRestjson1_deserializeDocumentImageSummary(v **types.ImageSummary, value 
 					return fmt.Errorf("expected LifecycleExecutionId to be of type string, got %T instead", value)
 				}
 				sv.LifecycleExecutionId = ptr.String(jtv)
+			}
+
+		case "loggingConfiguration":
+			if err := awsRestjson1_deserializeDocumentImageLoggingConfiguration(&sv.LoggingConfiguration, value); err != nil {
+				return err
 			}
 
 		case "name":
@@ -21901,6 +22036,55 @@ func awsRestjson1_deserializeDocumentPackageVulnerabilityDetails(v **types.Packa
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentPipelineLoggingConfiguration(v **types.PipelineLoggingConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PipelineLoggingConfiguration
+	if *v == nil {
+		sv = &types.PipelineLoggingConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "imageLogGroupName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LogGroupName to be of type string, got %T instead", value)
+				}
+				sv.ImageLogGroupName = ptr.String(jtv)
+			}
+
+		case "pipelineLogGroupName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LogGroupName to be of type string, got %T instead", value)
+				}
+				sv.PipelineLogGroupName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentPlacement(v **types.Placement, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -22506,6 +22690,11 @@ func awsRestjson1_deserializeDocumentSchedule(v **types.Schedule, value interfac
 
 	for key, value := range shape {
 		switch key {
+		case "autoDisablePolicy":
+			if err := awsRestjson1_deserializeDocumentAutoDisablePolicy(&sv.AutoDisablePolicy, value); err != nil {
+				return err
+			}
+
 		case "pipelineExecutionStartCondition":
 			if value != nil {
 				jtv, ok := value.(string)

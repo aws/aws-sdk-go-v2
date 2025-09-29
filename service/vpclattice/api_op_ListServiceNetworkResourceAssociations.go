@@ -29,6 +29,12 @@ func (c *Client) ListServiceNetworkResourceAssociations(ctx context.Context, par
 
 type ListServiceNetworkResourceAssociationsInput struct {
 
+	// Include service network resource associations of the child resource
+	// configuration with the grouped resource configuration.
+	//
+	// The type is boolean and the default value is false.
+	IncludeChildren *bool
+
 	// The maximum page size.
 	MaxResults *int32
 
@@ -36,7 +42,7 @@ type ListServiceNetworkResourceAssociationsInput struct {
 	// results.
 	NextToken *string
 
-	// The ID of the resource configurationk.
+	// The ID of the resource configuration.
 	ResourceConfigurationIdentifier *string
 
 	// The ID of the service network.

@@ -35,7 +35,7 @@ type ListResourceConfigurationsInput struct {
 	// A pagination token for the next page of results.
 	NextToken *string
 
-	// The ID of the group resource configuration.
+	// The ID of the resource configuration of type Group .
 	ResourceConfigurationGroupIdentifier *string
 
 	// The ID of the resource gateway for the resource configuration.

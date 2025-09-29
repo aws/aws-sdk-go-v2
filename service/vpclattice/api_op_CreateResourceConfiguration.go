@@ -39,12 +39,13 @@ type CreateResourceConfigurationInput struct {
 	// This member is required.
 	Name *string
 
-	// The type of resource configuration.
+	// The type of resource configuration. A resource configuration can be one of the
+	// following types:
 	//
 	//   - SINGLE - A single resource.
 	//
-	//   - GROUP - A group of resources. You must create a group resource configuration
-	//   before you create a child resource configuration.
+	//   - GROUP - A group of resources. You must create a group resource
+	//   configuration before you create a child resource configuration.
 	//
 	//   - CHILD - A single resource that is part of a group resource configuration.
 	//
@@ -71,11 +72,19 @@ type CreateResourceConfigurationInput struct {
 	// (SINGLE, GROUP) The protocol accepted by the resource configuration.
 	Protocol types.ProtocolType
 
-	// (SINGLE, CHILD, ARN) The resource configuration.
+	// Identifies the resource configuration in one of the following ways:
+	//
+	//   - Amazon Resource Name (ARN) - Supported resource-types that are provisioned
+	//   by Amazon Web Services services, such as RDS databases, can be identified by
+	//   their ARN.
+	//
+	//   - Domain name - Any domain name that is publicly resolvable.
+	//
+	//   - IP address - For IPv4 and IPv6, only IP addresses in the VPC are supported.
 	ResourceConfigurationDefinition types.ResourceConfigurationDefinition
 
-	// (CHILD) The ID or ARN of the parent resource configuration (type is GROUP ).
-	// This is used to associate a child resource configuration with a group resource
+	// (CHILD) The ID or ARN of the parent resource configuration of type GROUP . This
+	// is used to associate a child resource configuration with a group resource
 	// configuration.
 	ResourceConfigurationGroupIdentifier *string
 
@@ -118,10 +127,18 @@ type CreateResourceConfigurationOutput struct {
 	// The protocol.
 	Protocol types.ProtocolType
 
-	// The resource configuration.
+	// Identifies the resource configuration in one of the following ways:
+	//
+	//   - Amazon Resource Name (ARN) - Supported resource-types that are provisioned
+	//   by Amazon Web Services services, such as RDS databases, can be identified by
+	//   their ARN.
+	//
+	//   - Domain name - Any domain name that is publicly resolvable.
+	//
+	//   - IP address - For IPv4 and IPv6, only IP addresses in the VPC are supported.
 	ResourceConfigurationDefinition types.ResourceConfigurationDefinition
 
-	// The ID of the parent resource configuration (type is GROUP).
+	// The ID of the parent resource configuration of type GROUP .
 	ResourceConfigurationGroupId *string
 
 	// The ID of the resource gateway associated with the resource configuration.
@@ -130,7 +147,17 @@ type CreateResourceConfigurationOutput struct {
 	// The current status of the resource configuration.
 	Status types.ResourceConfigurationStatus
 
-	// The type of resource configuration.
+	// The type of resource configuration. A resource configuration can be one of the
+	// following types:
+	//
+	//   - SINGLE - A single resource.
+	//
+	//   - GROUP - A group of resources. You must create a group resource
+	//   configuration before you create a child resource configuration.
+	//
+	//   - CHILD - A single resource that is part of a group resource configuration.
+	//
+	//   - ARN - An Amazon Web Services resource.
 	Type types.ResourceConfigurationType
 
 	// Metadata pertaining to the operation's result.
