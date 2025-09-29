@@ -1,3 +1,7 @@
+# v1.41.0 (2025-09-29)
+
+* **Feature**: New stop reason for Converse and ConverseStream
+
 # v1.40.3 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions

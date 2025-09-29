@@ -1,8 +1,0 @@
-{
-    "id": "22e092e3-10fc-48e5-9ffc-770077d2149d",
-    "type": "feature",
-    "description": "Adds support for specifying the number of IPv4 addresses in each ENI for the resource gateway for VPC Lattice.",
-    "modules": [
-        "service/vpclattice"
-    ]
-}

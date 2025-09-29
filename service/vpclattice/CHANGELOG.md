@@ -1,3 +1,7 @@
+# v1.19.0 (2025-09-29)
+
+* **Feature**: Adds support for specifying the number of IPv4 addresses in each ENI for the resource gateway for VPC Lattice.
+
 # v1.18.5 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions

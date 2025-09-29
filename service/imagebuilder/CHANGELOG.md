@@ -1,3 +1,7 @@
+# v1.48.0 (2025-09-29)
+
+* **Feature**: This release introduces several new features and improvements to enhance pipeline management, logging, and resource configuration.
+
 # v1.47.2 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions

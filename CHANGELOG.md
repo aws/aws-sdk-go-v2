@@ -1,3 +1,16 @@
+# Release (2025-09-29)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.41.0](service/bedrockruntime/CHANGELOG.md#v1410-2025-09-29)
+  * **Feature**: New stop reason for Converse and ConverseStream
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.48.0](service/imagebuilder/CHANGELOG.md#v1480-2025-09-29)
+  * **Feature**: This release introduces several new features and improvements to enhance pipeline management, logging, and resource configuration.
+* `github.com/aws/aws-sdk-go-v2/service/vpclattice`: [v1.19.0](service/vpclattice/CHANGELOG.md#v1190-2025-09-29)
+  * **Feature**: Adds support for specifying the number of IPv4 addresses in each ENI for the resource gateway for VPC Lattice.
+
 # Release (2025-09-26)
 
 ## General Highlights

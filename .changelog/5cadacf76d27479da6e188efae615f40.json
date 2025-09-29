@@ -1,8 +1,0 @@
-{
-    "id": "5cadacf7-6d27-479d-a6e1-88efae615f40",
-    "type": "feature",
-    "description": "New stop reason for Converse and ConverseStream",
-    "modules": [
-        "service/bedrockruntime"
-    ]
-}
