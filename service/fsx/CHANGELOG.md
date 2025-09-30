@@ -1,3 +1,7 @@
+# v1.62.0 (2025-09-30)
+
+* **Feature**: Add Dual-Stack support for Amazon FSx for NetApp ONTAP and Windows File Server
+
 # v1.61.6 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions

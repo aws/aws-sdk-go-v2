@@ -1,8 +1,0 @@
-{
-    "id": "23200272-0f2d-4f36-bc7f-9daa0d8b0757",
-    "type": "feature",
-    "description": "Add Dual-Stack support for Amazon FSx for NetApp ONTAP and Windows File Server",
-    "modules": [
-        "service/fsx"
-    ]
-}

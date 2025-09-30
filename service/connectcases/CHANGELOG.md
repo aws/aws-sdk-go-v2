@@ -1,3 +1,7 @@
+# v1.31.0 (2025-09-30)
+
+* **Feature**: This release adds support for two new related item types: ConnectCase for linking Amazon Connect cases and Custom for user-defined related items with configurable fields.
+
 # v1.30.6 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions

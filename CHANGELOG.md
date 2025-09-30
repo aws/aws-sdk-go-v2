@@ -1,3 +1,35 @@
+# Release (2025-09-30)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationsignals`: [v1.16.0](service/applicationsignals/CHANGELOG.md#v1160-2025-09-30)
+  * **Feature**: Amazon CloudWatch Application Signals is introducing the Application Map to give users a more comprehensive view of their service health. Users will now be able to group services, track their latest deployments, and view automated audit findings concerning service performance.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.6.0](service/bedrockagentcorecontrol/CHANGELOG.md#v160-2025-09-30)
+  * **Feature**: Tagging support for AgentCore Gateway
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkvoice`: [v1.27.0](service/chimesdkvoice/CHANGELOG.md#v1270-2025-09-30)
+  * **Feature**: Added support for IPv4-only and dual-stack network configurations for VoiceConnector and CreateVoiceConnector API.
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.31.0](service/connectcases/CHANGELOG.md#v1310-2025-09-30)
+  * **Feature**: This release adds support for two new related item types: ConnectCase for linking Amazon Connect cases and Custom for user-defined related items with configurable fields.
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.53.0](service/customerprofiles/CHANGELOG.md#v1530-2025-09-30)
+  * **Feature**: This release introduces ListProfileHistoryRecords and GetProfileHistoryRecord APIs for comprehensive profile history tracking with complete audit trails of creation, updates, merges, deletions, and data ingestion events.
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.55.0](service/datasync/CHANGELOG.md#v1550-2025-09-30)
+  * **Feature**: Added support for FIPS VPC endpoints in FIPS-enabled AWS Regions.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.42.0](service/datazone/CHANGELOG.md#v1420-2025-09-30)
+  * **Feature**: This release adds support for creation of EMR on EKS Connections in Amazon DataZone.
+* `github.com/aws/aws-sdk-go-v2/service/directoryservice`: [v1.38.0](service/directoryservice/CHANGELOG.md#v1380-2025-09-30)
+  * **Feature**: AWS Directory service now supports IPv6-native and dual-stack configurations for AWS Managed Microsoft AD, AD Connector, and Simple AD (dual-stack only). Additionally, AWS Managed Microsoft AD Standard Edition directories can be upgraded to Enterprise Edition directories through a single API call.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.65.0](service/ecs/CHANGELOG.md#v1650-2025-09-30)
+  * **Feature**: This release adds support for Managed Instances on Amazon ECS.
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.62.0](service/fsx/CHANGELOG.md#v1620-2025-09-30)
+  * **Feature**: Add Dual-Stack support for Amazon FSx for NetApp ONTAP and Windows File Server
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.53.0](service/mediatailor/CHANGELOG.md#v1530-2025-09-30)
+  * **Feature**: Adding TPS Traffic Shaping to Prefetch Schedules
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.94.3](service/quicksight/CHANGELOG.md#v1943-2025-09-30)
+  * **Documentation**: added warnings to a few CLI pages
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.108.0](service/rds/CHANGELOG.md#v11080-2025-09-30)
+  * **Feature**: Enhanced RDS error handling: Added DBProxyEndpointNotFoundFault, DBShardGroupNotFoundFault, KMSKeyNotAccessibleFault for snapshots/restores/backups, NetworkTypeNotSupported, StorageTypeNotSupportedFault for restores, and granular state validation faults. Changed DBInstanceNotReadyFault to HTTP 400.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.66.0](service/transfer/CHANGELOG.md#v1660-2025-09-30)
+  * **Feature**: Add support for updating server identity provider type
+
 # Release (2025-09-29)
 
 ## General Highlights

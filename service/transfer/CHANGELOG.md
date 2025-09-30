@@ -1,3 +1,7 @@
+# v1.66.0 (2025-09-30)
+
+* **Feature**: Add support for updating server identity provider type
+
 # v1.65.7 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions

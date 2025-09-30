@@ -1,8 +1,0 @@
-{
-    "id": "eb2ae99c-6d2d-4e68-88c8-94a024a7029a",
-    "type": "feature",
-    "description": "This release introduces ListProfileHistoryRecords and GetProfileHistoryRecord APIs for comprehensive profile history tracking with complete audit trails of creation, updates, merges, deletions, and data ingestion events.",
-    "modules": [
-        "service/customerprofiles"
-    ]
-}

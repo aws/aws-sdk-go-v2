@@ -1,3 +1,7 @@
+# v1.53.0 (2025-09-30)
+
+* **Feature**: Adding TPS Traffic Shaping to Prefetch Schedules
+
 # v1.52.6 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions

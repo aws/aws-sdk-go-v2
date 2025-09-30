@@ -1,3 +1,7 @@
+# v1.38.0 (2025-09-30)
+
+* **Feature**: AWS Directory service now supports IPv6-native and dual-stack configurations for AWS Managed Microsoft AD, AD Connector, and Simple AD (dual-stack only). Additionally, AWS Managed Microsoft AD Standard Edition directories can be upgraded to Enterprise Edition directories through a single API call.
+
 # v1.37.5 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions

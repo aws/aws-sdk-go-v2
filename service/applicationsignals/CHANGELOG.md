@@ -1,3 +1,7 @@
+# v1.16.0 (2025-09-30)
+
+* **Feature**: Amazon CloudWatch Application Signals is introducing the Application Map to give users a more comprehensive view of their service health. Users will now be able to group services, track their latest deployments, and view automated audit findings concerning service performance.
+
 # v1.15.8 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions

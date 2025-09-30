@@ -1,3 +1,7 @@
+# v1.27.0 (2025-09-30)
+
+* **Feature**: Added support for IPv4-only and dual-stack network configurations for VoiceConnector and CreateVoiceConnector API.
+
 # v1.26.5 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions

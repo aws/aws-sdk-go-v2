@@ -1,3 +1,7 @@
+# v1.65.0 (2025-09-30)
+
+* **Feature**: This release adds support for Managed Instances on Amazon ECS.
+
 # v1.64.2 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions

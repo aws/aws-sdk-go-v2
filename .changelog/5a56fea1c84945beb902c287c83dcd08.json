@@ -1,8 +1,0 @@
-{
-    "id": "5a56fea1-c849-45be-b902-c287c83dcd08",
-    "type": "feature",
-    "description": "Add support for updating server identity provider type",
-    "modules": [
-        "service/transfer"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "0435ff53-61e6-46cd-bbb3-f72df56b95ba",
-    "type": "feature",
-    "description": "Added support for IPv4-only and dual-stack network configurations for VoiceConnector and CreateVoiceConnector API.",
-    "modules": [
-        "service/chimesdkvoice"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "0503d315-c20e-45cb-bee3-963221d96db3",
-    "type": "feature",
-    "description": "This release adds support for two new related item types: ConnectCase for linking Amazon Connect cases and Custom for user-defined related items with configurable fields.",
-    "modules": [
-        "service/connectcases"
-    ]
-}

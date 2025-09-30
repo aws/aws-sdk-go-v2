@@ -1,3 +1,7 @@
+# v1.94.3 (2025-09-30)
+
+* **Documentation**: added warnings to a few CLI pages
+
 # v1.94.2 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions

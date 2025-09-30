@@ -1,8 +1,0 @@
-{
-    "id": "a567d9af-abbd-46d8-9dd9-bf4f97503eaa",
-    "type": "feature",
-    "description": "Tagging support for AgentCore Gateway",
-    "modules": [
-        "service/bedrockagentcorecontrol"
-    ]
-}

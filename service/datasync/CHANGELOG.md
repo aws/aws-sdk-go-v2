@@ -1,3 +1,7 @@
+# v1.55.0 (2025-09-30)
+
+* **Feature**: Added support for FIPS VPC endpoints in FIPS-enabled AWS Regions.
+
 # v1.54.6 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions

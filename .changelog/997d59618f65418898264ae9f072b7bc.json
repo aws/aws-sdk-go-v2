@@ -1,8 +1,0 @@
-{
-    "id": "997d5961-8f65-4188-9826-4ae9f072b7bc",
-    "type": "feature",
-    "description": "Amazon CloudWatch Application Signals is introducing the Application Map to give users a more comprehensive view of their service health. Users will now be able to group services, track their latest deployments, and view automated audit findings concerning service performance.",
-    "modules": [
-        "service/applicationsignals"
-    ]
-}

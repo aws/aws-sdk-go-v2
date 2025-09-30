@@ -1,3 +1,7 @@
+# v1.53.0 (2025-09-30)
+
+* **Feature**: This release introduces ListProfileHistoryRecords and GetProfileHistoryRecord APIs for comprehensive profile history tracking with complete audit trails of creation, updates, merges, deletions, and data ingestion events.
+
 # v1.52.6 (2025-09-26)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "e9708104-04bd-4348-b0c9-2861f79de85b",
-    "type": "feature",
-    "description": "Adding TPS Traffic Shaping to Prefetch Schedules",
-    "modules": [
-        "service/mediatailor"
-    ]
-}
