@@ -16303,7 +16303,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes all Amazon QuickSight customizations in this Amazon Web Services Region for the specified\n            Amazon Web Services account and QuickSight namespace.</p>",
+                "smithy.api#documentation": "<important>\n            <p>This API permanently deletes all QuickSight customizations for the specified Amazon Web Services account and namespace in this Amazon Web Services Region. When you delete account customizations:</p>\n            <ul>\n               <li>\n                  <p>All customizations are removed including themes, branding, and visual settings</p>\n               </li>\n               <li>\n                  <p>The deletion affects only the specified Amazon Web Services Region - customizations in other regions remain unchanged</p>\n               </li>\n               <li>\n                  <p>This action cannot be undone through the API</p>\n               </li>\n               <li>\n                  <p>Users will see default QuickSight styling after customizations are deleted</p>\n               </li>\n            </ul>\n            <p>\n               <b>Before proceeding:</b> Ensure you have backups of any custom themes or branding elements you may want to recreate.</p>\n         </important>\n         <p>Deletes all Amazon QuickSight customizations in this Amazon Web Services Region for the specified\n            Amazon Web Services account and QuickSight namespace.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/accounts/{AwsAccountId}/customizations",
@@ -16388,7 +16388,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Use the <code>DeleteAccountSubscription</code> operation to delete an QuickSight account. This operation will result in an error message if you have configured your account termination protection settings to <code>True</code>. To change this setting and delete your account, call the <code>UpdateAccountSettings</code> API and set the value of the <code>TerminationProtectionEnabled</code> parameter to <code>False</code>, then make another call to the <code>DeleteAccountSubscription</code> API.</p>",
+                "smithy.api#documentation": "<important>\n            <p>Deleting your QuickSight account subscription has permanent, irreversible consequences across all Amazon Web Services regions:</p>\n            <ul>\n               <li>\n                  <p>Global deletion – Running this operation from any single region will delete your QuickSight account and all data in every Amazon Web Services region where you have QuickSight resources.</p>\n               </li>\n               <li>\n                  <p>Complete data loss – All dashboards, analyses, datasets, data sources, and custom visuals will be permanently deleted across all regions.</p>\n               </li>\n               <li>\n                  <p>Embedded content failure – All embedded dashboards and visuals in your applications will immediately stop working and display errors to end users.</p>\n               </li>\n               <li>\n                  <p>Shared resources removed – All shared dashboards, folders, and resources will become inaccessible to other users and external recipients.</p>\n               </li>\n               <li>\n                  <p>User access terminated – All QuickSight users in your account will lose access immediately, including authors, readers, and administrators.</p>\n               </li>\n               <li>\n                  <p>\n                     <b>No recovery possible</b> – Once deleted, your QuickSight account and all associated data cannot be restored.</p>\n               </li>\n            </ul>\n            <p>Consider exporting critical dashboards and data before proceeding with account deletion.</p>\n         </important>\n         <p>Use the <code>DeleteAccountSubscription</code> operation to delete an QuickSight account. This operation will result in an error message if you have configured your account termination protection settings to <code>True</code>. To change this setting and delete your account, call the <code>UpdateAccountSettings</code> API and set the value of the <code>TerminationProtectionEnabled</code> parameter to <code>False</code>, then make another call to the <code>DeleteAccountSubscription</code> API.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/account/{AwsAccountId}",
@@ -16579,7 +16579,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an QuickSight brand.</p>",
+                "smithy.api#documentation": "<important>\n            <p>This API permanently deletes the specified QuickSight brand. When you delete a brand:</p>\n            <ul>\n               <li>\n                  <p>The brand and all its associated branding elements are permanently removed</p>\n               </li>\n               <li>\n                  <p>Any applications or dashboards using this brand will revert to default styling</p>\n               </li>\n               <li>\n                  <p>This action cannot be undone through the API</p>\n               </li>\n            </ul>\n            <p>\n               <b>Before proceeding:</b> Verify that the brand is no longer needed and consider the impact on any applications currently using this brand.</p>\n         </important>\n         <p>Deletes an QuickSight brand.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/accounts/{AwsAccountId}/brands/{BrandId}",
@@ -20278,7 +20278,8 @@
                     "method": "GET",
                     "uri": "/accounts/{AwsAccountId}/brands/{BrandId}",
                     "code": 200
-                }
+                },
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.quicksight#DescribeBrandAssignment": {
@@ -20315,7 +20316,8 @@
                     "method": "GET",
                     "uri": "/accounts/{AwsAccountId}/brandassignments",
                     "code": 200
-                }
+                },
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.quicksight#DescribeBrandAssignmentRequest": {
@@ -20388,7 +20390,8 @@
                     "method": "GET",
                     "uri": "/accounts/{AwsAccountId}/brands/{BrandId}/publishedversion",
                     "code": 200
-                }
+                },
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.quicksight#DescribeBrandPublishedVersionRequest": {
@@ -34519,7 +34522,8 @@
                     "outputToken": "NextToken",
                     "items": "Brands",
                     "pageSize": "MaxResults"
-                }
+                },
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.quicksight#ListBrandsRequest": {
@@ -60455,7 +60459,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Use the <code>UpdatePublicSharingSettings</code> operation to turn on or turn off the\n            public sharing settings of an QuickSight dashboard.</p>\n         <p>To use this operation, turn on session capacity pricing for your QuickSight\n            account.</p>\n         <p>Before you can turn on public sharing on your account, make sure to give public sharing\n            permissions to an administrative user in the Identity and Access Management (IAM)\n            console. For more information on using IAM with QuickSight, see\n                <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/security_iam_service-with-iam.html\">Using QuickSight with IAM</a> in the <i>QuickSight\n                User Guide</i>.</p>",
+                "smithy.api#documentation": "<important>\n            <p>This API controls public sharing settings for your entire QuickSight account, affecting data security and access. When you enable public sharing:</p>\n            <ul>\n               <li>\n                  <p>Dashboards can be shared publicly</p>\n               </li>\n               <li>\n                  <p>This setting affects your entire Amazon Web Services account and all QuickSight users</p>\n               </li>\n            </ul>\n            <p>\n               <b>Before proceeding:</b> Ensure you understand the security implications and have proper IAM permissions configured.</p>\n         </important>\n         <p>Use the <code>UpdatePublicSharingSettings</code> operation to turn on or turn off the\n            public sharing settings of an QuickSight dashboard.</p>\n         <p>To use this operation, turn on session capacity pricing for your QuickSight\n            account.</p>\n         <p>Before you can turn on public sharing on your account, make sure to give public sharing\n            permissions to an administrative user in the Identity and Access Management (IAM)\n            console. For more information on using IAM with QuickSight, see\n                <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/security_iam_service-with-iam.html\">Using QuickSight with IAM</a> in the <i>QuickSight\n                User Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/accounts/{AwsAccountId}/public-sharing-settings",

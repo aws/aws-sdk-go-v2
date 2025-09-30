@@ -2346,6 +2346,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The connectors for use with Amazon Connect.</p>\n         <p>The following options are available:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CONNECT_CALL_TRANSFER_CONNECTOR</code> - Enables enterprises to integrate\n               Amazon Connect with other voice systems to directly transfer voice calls and\n               metadata without using the public telephone network. They can use Amazon Connect\n               telephony and Interactive Voice Response (IVR) with their existing voice systems to\n               modernize the IVR experience of their existing contact center and their enterprise\n               and branch voice systems. Additionally, enterprises migrating their contact center to\n               Amazon Connect can start with Connect telephony and IVR for immediate\n               modernization ahead of agent migration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CONNECT_ANALYTICS_CONNECTOR</code> - Enables enterprises to integrate\n               Amazon Connect with other voice systems for real-time and post-call analytics.\n               They can use Amazon Connect Contact Lens with their existing voice systems to\n               provides call recordings, conversational analytics (including contact transcript,\n               sensitive data redaction, content categorization, theme detection, sentiment\n               analysis, real-time alerts, and post-contact summary), and agent performance\n               evaluations (including evaluation forms, automated evaluation, supervisor review)\n               with a rich user experience to display, search and filter customer interactions, and\n               programmatic access to data streams and the data lake. Additionally, enterprises\n               migrating their contact center to Amazon Connect can start with Contact Lens\n               analytics and performance insights ahead of agent migration.</p>\n            </li>\n         </ul>"
                     }
+                },
+                "NetworkType": {
+                    "target": "com.amazonaws.chimesdkvoice#NetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of network for the Voice Connector. Either IPv4 only or dual-stack (IPv4 and IPv6).</p>"
+                    }
                 }
             },
             "traits": {
@@ -6660,6 +6666,23 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The configuration for a call analytics task.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkvoice#NetworkType": {
+            "type": "enum",
+            "members": {
+                "IPV4_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPV4_ONLY"
+                    }
+                },
+                "DUAL_STACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DUAL_STACK"
+                    }
+                }
             }
         },
         "com.amazonaws.chimesdkvoice#NextTokenString": {
@@ -11090,6 +11113,12 @@
                     "target": "com.amazonaws.chimesdkvoice#VoiceConnectorIntegrationType",
                     "traits": {
                         "smithy.api#documentation": "<p>The connectors for use with Amazon Connect.</p>"
+                    }
+                },
+                "NetworkType": {
+                    "target": "com.amazonaws.chimesdkvoice#NetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of network of the Voice Connector. Either IPv4 only or dual-stack (IPv4 and IPv6).</p>"
                     }
                 }
             },

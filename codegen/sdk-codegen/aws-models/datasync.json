@@ -3273,6 +3273,12 @@
                     "traits": {
                         "smithy.api#enumValue": "FIPS"
                     }
+                },
+                "FIPS_PRIVATE_LINK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIPS_PRIVATE_LINK"
+                    }
                 }
             }
         },

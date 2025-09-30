@@ -42,6 +42,65 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.customerprofiles#ActionType": {
+            "type": "enum",
+            "members": {
+                "ADDED_PROFILE_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADDED_PROFILE_KEY"
+                    }
+                },
+                "DELETED_PROFILE_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED_PROFILE_KEY"
+                    }
+                },
+                "CREATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATED"
+                    }
+                },
+                "UPDATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATED"
+                    }
+                },
+                "INGESTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INGESTED"
+                    }
+                },
+                "DELETED_BY_CUSTOMER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED_BY_CUSTOMER"
+                    }
+                },
+                "EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPIRED"
+                    }
+                },
+                "MERGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MERGED"
+                    }
+                },
+                "DELETED_BY_MERGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED_BY_MERGE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.customerprofiles#AddProfileKey": {
             "type": "operation",
             "input": {
@@ -3114,6 +3173,9 @@
                     "target": "com.amazonaws.customerprofiles#GetMatches"
                 },
                 {
+                    "target": "com.amazonaws.customerprofiles#GetProfileHistoryRecord"
+                },
+                {
                     "target": "com.amazonaws.customerprofiles#GetProfileObjectType"
                 },
                 {
@@ -3178,6 +3240,9 @@
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#ListProfileAttributeValues"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ListProfileHistoryRecords"
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#ListProfileObjects"
@@ -7335,6 +7400,132 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.customerprofiles#GetProfileHistoryRecord": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#GetProfileHistoryRecordRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#GetProfileHistoryRecordResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a history record for a specific profile, for a specific domain.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/domains/{DomainName}/profiles/{ProfileId}/history-records/{Id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#GetProfileHistoryRecordRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain for which to return a profile history record.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProfileId": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the profile for which to return a history record.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the profile history record to return.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#GetProfileHistoryRecordResponse": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the profile history record.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectTypeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the profile object type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the profile history record was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the profile history record was last updated.</p>"
+                    }
+                },
+                "ActionType": {
+                    "target": "com.amazonaws.customerprofiles#ActionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action type of the profile history record.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProfileObjectUniqueKey": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the profile object generated by the service.</p>"
+                    }
+                },
+                "Content": {
+                    "target": "com.amazonaws.customerprofiles#stringifiedJson",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing the customer profile, profile object, or profile key content.</p>"
+                    }
+                },
+                "PerformedBy": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the person or service principal who performed the action.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.customerprofiles#GetProfileObjectType": {
             "type": "operation",
             "input": {
@@ -7620,7 +7811,8 @@
                     "method": "GET",
                     "uri": "/domains/{DomainName}/segment-definitions/{SegmentDefinitionName}",
                     "code": 200
-                }
+                },
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.customerprofiles#GetSegmentDefinitionRequest": {
@@ -8196,7 +8388,8 @@
                     "method": "GET",
                     "uri": "/domains/{DomainName}/upload-jobs/{JobId}",
                     "code": 200
-                }
+                },
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.customerprofiles#GetUploadJobPath": {
@@ -8230,7 +8423,8 @@
                     "method": "GET",
                     "uri": "/domains/{DomainName}/upload-jobs/{JobId}/path",
                     "code": 200
-                }
+                },
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.customerprofiles#GetUploadJobPathRequest": {
@@ -10223,6 +10417,115 @@
                 }
             }
         },
+        "com.amazonaws.customerprofiles#ListProfileHistoryRecords": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#ListProfileHistoryRecordsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#ListProfileHistoryRecordsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of history records for a specific profile, for a specific domain.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/domains/{DomainName}/profiles/history-records",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ListProfileHistoryRecordsRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain for which to return profile history records.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProfileId": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the profile to be taken.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectTypeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Applies a filter to include profile history records only with the specified <code>ObjectTypeName</code> value in the response.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.customerprofiles#maxSize100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                },
+                "ActionType": {
+                    "target": "com.amazonaws.customerprofiles#ActionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Applies a filter to include profile history records only with the specified <code>ActionType</code> value in the response.</p>"
+                    }
+                },
+                "PerformedBy": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Applies a filter to include profile history records only with the specified <code>PerformedBy</code> value in the response. The <code>PerformedBy</code> value can be the Amazon Resource Name (ARN) of the person or service principal who performed the action.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#ListProfileHistoryRecordsResponse": {
+            "type": "structure",
+            "members": {
+                "ProfileHistoryRecords": {
+                    "target": "com.amazonaws.customerprofiles#ProfileHistoryRecords",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of profile history records.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.customerprofiles#ListProfileObjectTypeItem": {
             "type": "structure",
             "members": {
@@ -10718,7 +11021,8 @@
                     "outputToken": "NextToken",
                     "items": "Items",
                     "pageSize": "MaxResults"
-                }
+                },
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.customerprofiles#ListSegmentDefinitionsRequest": {
@@ -10868,7 +11172,8 @@
                     "outputToken": "NextToken",
                     "items": "Items",
                     "pageSize": "MaxResults"
-                }
+                },
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.customerprofiles#ListUploadJobsRequest": {
@@ -12300,6 +12605,66 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Object to hold the dimensions of a profile's fields to segment on.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#ProfileHistoryRecord": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the profile history record.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectTypeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the profile object type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the profile history record was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the profile history record was last updated.</p>"
+                    }
+                },
+                "ActionType": {
+                    "target": "com.amazonaws.customerprofiles#ActionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action type of the profile history record.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProfileObjectUniqueKey": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the profile object generated by the service.</p>"
+                    }
+                },
+                "PerformedBy": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the person or service principal who performed the action.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains profile history record metadata.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#ProfileHistoryRecords": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#ProfileHistoryRecord"
             }
         },
         "com.amazonaws.customerprofiles#ProfileId": {

@@ -1688,6 +1688,50 @@
                 "smithy.api#httpError": 409
             }
         },
+        "com.amazonaws.connectcases#ConnectCaseContent": {
+            "type": "structure",
+            "members": {
+                "caseId": {
+                    "target": "com.amazonaws.connectcases#CaseId",
+                    "traits": {
+                        "smithy.api#documentation": "The unique identifier of the related case",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Represents the content of a Case related item"
+            }
+        },
+        "com.amazonaws.connectcases#ConnectCaseFilter": {
+            "type": "structure",
+            "members": {
+                "caseId": {
+                    "target": "com.amazonaws.connectcases#CaseId",
+                    "traits": {
+                        "smithy.api#documentation": "The unique identifier of the case to filter by"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A filter for related items of type Case"
+            }
+        },
+        "com.amazonaws.connectcases#ConnectCaseInputContent": {
+            "type": "structure",
+            "members": {
+                "caseId": {
+                    "target": "com.amazonaws.connectcases#CaseId",
+                    "traits": {
+                        "smithy.api#documentation": "The unique identifier of the case to be related",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Represents the input content of a Case related item"
+            }
+        },
         "com.amazonaws.connectcases#ConnectedToSystemTime": {
             "type": "timestamp",
             "traits": {
@@ -2431,6 +2475,21 @@
                 "smithy.api#timestampFormat": "date-time"
             }
         },
+        "com.amazonaws.connectcases#CustomContent": {
+            "type": "structure",
+            "members": {
+                "fields": {
+                    "target": "com.amazonaws.connectcases#FieldValueList",
+                    "traits": {
+                        "smithy.api#documentation": "List of field values for the custom related item",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Represents the content of a Custom related item"
+            }
+        },
         "com.amazonaws.connectcases#CustomEntity": {
             "type": "string",
             "traits": {
@@ -2440,6 +2499,80 @@
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9_\\-\\.@:/ ]*[a-zA-Z0-9_\\-\\.@:/]$",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.connectcases#CustomFieldsFilter": {
+            "type": "union",
+            "members": {
+                "field": {
+                    "target": "com.amazonaws.connectcases#FieldFilter"
+                },
+                "not": {
+                    "target": "com.amazonaws.connectcases#CustomFieldsFilter",
+                    "traits": {
+                        "smithy.api#documentation": "Excludes items matching the filter"
+                    }
+                },
+                "andAll": {
+                    "target": "com.amazonaws.connectcases#CustomFieldsFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "Matches items that satisfy all of the specified filter conditions",
+                        "smithy.api#length": {
+                            "max": 10
+                        }
+                    }
+                },
+                "orAll": {
+                    "target": "com.amazonaws.connectcases#CustomFieldsFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "Matches items that satisfy any of the specified filter conditions",
+                        "smithy.api#length": {
+                            "max": 10
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A filter for fields in related items of type Custom"
+            }
+        },
+        "com.amazonaws.connectcases#CustomFieldsFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#CustomFieldsFilter"
+            }
+        },
+        "com.amazonaws.connectcases#CustomFilter": {
+            "type": "structure",
+            "members": {
+                "fields": {
+                    "target": "com.amazonaws.connectcases#CustomFieldsFilter",
+                    "traits": {
+                        "smithy.api#documentation": "Filter conditions for custom fields"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A filter for related items of type Custom"
+            }
+        },
+        "com.amazonaws.connectcases#CustomInputContent": {
+            "type": "structure",
+            "members": {
+                "fields": {
+                    "target": "com.amazonaws.connectcases#FieldValueList",
+                    "traits": {
+                        "smithy.api#documentation": "List of field values for the custom related item",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 50
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Represents the input content of a Custom related item"
             }
         },
         "com.amazonaws.connectcases#DeleteCase": {
@@ -2468,7 +2601,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> The DeleteCase API permanently deletes a case and all its associated resources from the cases data store. After a successful deletion, you cannot:</p> <ul> <li> <p>Retrieve related items</p> </li> <li> <p>Access audit history</p> </li> <li> <p>Perform any operations that require the CaseID</p> </li> </ul> <important> <p>This action is irreversible. Once you delete a case, you cannot recover its data.</p> </important>",
+                "smithy.api#documentation": "<p> The DeleteCase API permanently deletes a case and all its associated resources from the cases data store. After a successful deletion, you cannot:</p> <ul> <li> <p>Retrieve related items</p> </li> <li> <p>Access audit history</p> </li> <li> <p>Perform any operations that require the CaseID</p> </li> </ul> <important> <p>This action is irreversible. After you delete a case, you cannot recover its data.</p> </important>",
                 "smithy.api#http": {
                     "uri": "/domains/{domainId}/cases/{caseId}",
                     "method": "DELETE"
@@ -3696,7 +3829,7 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>The maximum number of audit events to return. The current maximum supported value is 25. This is also the default when no other value is provided.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of audit events to return. When no value is provided, 25 is the default.</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 25
@@ -5421,6 +5554,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Represents the content of an SLA to be returned to agents.</p>"
                     }
+                },
+                "connectCase": {
+                    "target": "com.amazonaws.connectcases#ConnectCaseContent",
+                    "traits": {
+                        "smithy.api#documentation": "Content for a related Connect case"
+                    }
+                },
+                "custom": {
+                    "target": "com.amazonaws.connectcases#CustomContent",
+                    "traits": {
+                        "smithy.api#documentation": "Content for a custom related item"
+                    }
                 }
             },
             "traits": {
@@ -5483,6 +5628,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Represents the content of an SLA to be created.</p>"
                     }
+                },
+                "connectCase": {
+                    "target": "com.amazonaws.connectcases#ConnectCaseInputContent",
+                    "traits": {
+                        "smithy.api#documentation": "Input content for a related Connect case"
+                    }
+                },
+                "custom": {
+                    "target": "com.amazonaws.connectcases#CustomInputContent",
+                    "traits": {
+                        "smithy.api#documentation": "Input content for a custom related item"
+                    }
                 }
             },
             "traits": {
@@ -5508,6 +5665,14 @@
                     {
                         "value": "Sla",
                         "name": "SLA"
+                    },
+                    {
+                        "value": "ConnectCase",
+                        "name": "CONNECT_CASE"
+                    },
+                    {
+                        "value": "Custom",
+                        "name": "CUSTOM"
                     }
                 ]
             }
@@ -5537,6 +5702,18 @@
                     "target": "com.amazonaws.connectcases#SlaFilter",
                     "traits": {
                         "smithy.api#documentation": "<p> Filter for related items of type <code>SLA</code>.</p>"
+                    }
+                },
+                "connectCase": {
+                    "target": "com.amazonaws.connectcases#ConnectCaseFilter",
+                    "traits": {
+                        "smithy.api#documentation": "Filter for related items of type Connect case"
+                    }
+                },
+                "custom": {
+                    "target": "com.amazonaws.connectcases#CustomFilter",
+                    "traits": {
+                        "smithy.api#documentation": "Filter for related items of type Custom"
                     }
                 }
             },
@@ -5688,7 +5865,7 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>The maximum number of cases to return. The current maximum supported value is 25. This is also the default value when no other value is provided.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of cases to return. When no value is provided, 25 is the default.</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 100
