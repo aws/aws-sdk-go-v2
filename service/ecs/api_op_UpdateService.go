@@ -154,17 +154,6 @@ type UpdateServiceInput struct {
 	// For more information, see [Balancing an Amazon ECS service across Availability Zones] in the Amazon Elastic Container Service Developer
 	// Guide .
 	//
-	// The default behavior of AvailabilityZoneRebalancing differs between create and
-	// update requests:
-	//
-	//   - For create service requests, when no value is specified for
-	//   AvailabilityZoneRebalancing , Amazon ECS defaults the value to ENABLED .
-	//
-	//   - For update service requests, when no value is specified for
-	//   AvailabilityZoneRebalancing , Amazon ECS defaults to the existing service’s
-	//   AvailabilityZoneRebalancing value. If the service never had an
-	//   AvailabilityZoneRebalancing value set, Amazon ECS treats this as DISABLED .
-	//
 	// This parameter doesn't trigger a new service deployment.
 	//
 	// [Balancing an Amazon ECS service across Availability Zones]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-rebalancing.html

@@ -98,6 +98,18 @@ func TestCheckSnapshot_CreateServiceLevelObjective(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteGroupingConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteGroupingConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteGroupingConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteServiceLevelObjective(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteServiceLevelObjective(context.Background(), nil, func(o *Options) {
@@ -127,6 +139,30 @@ func TestCheckSnapshot_GetServiceLevelObjective(t *testing.T) {
 	_, err := svc.GetServiceLevelObjective(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetServiceLevelObjective")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAuditFindings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAuditFindings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAuditFindings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListGroupingAttributeDefinitions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListGroupingAttributeDefinitions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListGroupingAttributeDefinitions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -206,11 +242,35 @@ func TestCheckSnapshot_ListServices(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListServiceStates(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListServiceStates(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListServiceStates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutGroupingConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutGroupingConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutGroupingConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -301,6 +361,18 @@ func TestUpdateSnapshot_CreateServiceLevelObjective(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteGroupingConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteGroupingConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteGroupingConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteServiceLevelObjective(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteServiceLevelObjective(context.Background(), nil, func(o *Options) {
@@ -330,6 +402,30 @@ func TestUpdateSnapshot_GetServiceLevelObjective(t *testing.T) {
 	_, err := svc.GetServiceLevelObjective(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetServiceLevelObjective")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAuditFindings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAuditFindings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAuditFindings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListGroupingAttributeDefinitions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListGroupingAttributeDefinitions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListGroupingAttributeDefinitions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -409,11 +505,35 @@ func TestUpdateSnapshot_ListServices(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListServiceStates(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListServiceStates(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListServiceStates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutGroupingConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutGroupingConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutGroupingConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

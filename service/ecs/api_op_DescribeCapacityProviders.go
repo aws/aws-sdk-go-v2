@@ -33,6 +33,11 @@ type DescribeCapacityProvidersInput struct {
 	// providers. Up to 100 capacity providers can be described in an action.
 	CapacityProviders []string
 
+	// The name of the cluster to describe capacity providers for. When specified,
+	// only capacity providers associated with this cluster are returned, including
+	// Amazon ECS Managed Instances capacity providers.
+	Cluster *string
+
 	// Specifies whether or not you want to see the resource tags for the capacity
 	// provider. If TAGS is specified, the tags are included in the response. If this
 	// field is omitted, tags aren't included in the response.

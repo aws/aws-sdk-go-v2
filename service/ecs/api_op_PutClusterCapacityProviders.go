@@ -28,6 +28,10 @@ import (
 // strategy for your cluster. However, you must specify an empty array ( [] ) to
 // bypass defining a default strategy.
 //
+// Amazon ECS Managed Instances doesn't support this, because when you create a
+// capacity provider with Amazon ECS Managed Instances, it becomes available only
+// within the specified cluster.
+//
 // [PutClusterCapacityProviders]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutClusterCapacityProviders.html
 func (c *Client) PutClusterCapacityProviders(ctx context.Context, params *PutClusterCapacityProvidersInput, optFns ...func(*Options)) (*PutClusterCapacityProvidersOutput, error) {
 	if params == nil {

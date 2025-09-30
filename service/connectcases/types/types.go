@@ -391,6 +391,37 @@ type CommentFilter struct {
 	noSmithyDocumentSerde
 }
 
+// Represents the content of a Case related item
+type ConnectCaseContent struct {
+
+	// The unique identifier of the related case
+	//
+	// This member is required.
+	CaseId *string
+
+	noSmithyDocumentSerde
+}
+
+// A filter for related items of type Case
+type ConnectCaseFilter struct {
+
+	// The unique identifier of the case to filter by
+	CaseId *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents the input content of a Case related item
+type ConnectCaseInputContent struct {
+
+	// The unique identifier of the case to be related
+	//
+	// This member is required.
+	CaseId *string
+
+	noSmithyDocumentSerde
+}
+
 // An object that represents an Amazon Connect contact object.
 type Contact struct {
 
@@ -432,6 +463,85 @@ type ContactFilter struct {
 
 	// A unique identifier of a contact in Amazon Connect.
 	ContactArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents the content of a Custom related item
+type CustomContent struct {
+
+	// List of field values for the custom related item
+	//
+	// This member is required.
+	Fields []FieldValue
+
+	noSmithyDocumentSerde
+}
+
+// A filter for fields in related items of type Custom
+//
+// The following types satisfy this interface:
+//
+//	CustomFieldsFilterMemberAndAll
+//	CustomFieldsFilterMemberField
+//	CustomFieldsFilterMemberNot
+//	CustomFieldsFilterMemberOrAll
+type CustomFieldsFilter interface {
+	isCustomFieldsFilter()
+}
+
+// Matches items that satisfy all of the specified filter conditions
+type CustomFieldsFilterMemberAndAll struct {
+	Value []CustomFieldsFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*CustomFieldsFilterMemberAndAll) isCustomFieldsFilter() {}
+
+// A filter for fields. Only one value can be provided.
+type CustomFieldsFilterMemberField struct {
+	Value FieldFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*CustomFieldsFilterMemberField) isCustomFieldsFilter() {}
+
+// Excludes items matching the filter
+type CustomFieldsFilterMemberNot struct {
+	Value CustomFieldsFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*CustomFieldsFilterMemberNot) isCustomFieldsFilter() {}
+
+// Matches items that satisfy any of the specified filter conditions
+type CustomFieldsFilterMemberOrAll struct {
+	Value []CustomFieldsFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*CustomFieldsFilterMemberOrAll) isCustomFieldsFilter() {}
+
+// A filter for related items of type Custom
+type CustomFilter struct {
+
+	// Filter conditions for custom fields
+	Fields CustomFieldsFilter
+
+	noSmithyDocumentSerde
+}
+
+// Represents the input content of a Custom related item
+type CustomInputContent struct {
+
+	// List of field values for the custom related item
+	//
+	// This member is required.
+	Fields []FieldValue
 
 	noSmithyDocumentSerde
 }
@@ -1031,7 +1141,9 @@ func (*OperandTwoMemberStringValue) isOperandTwo() {}
 // The following types satisfy this interface:
 //
 //	RelatedItemContentMemberComment
+//	RelatedItemContentMemberConnectCase
 //	RelatedItemContentMemberContact
+//	RelatedItemContentMemberCustom
 //	RelatedItemContentMemberFile
 //	RelatedItemContentMemberSla
 type RelatedItemContent interface {
@@ -1047,6 +1159,15 @@ type RelatedItemContentMemberComment struct {
 
 func (*RelatedItemContentMemberComment) isRelatedItemContent() {}
 
+// Content for a related Connect case
+type RelatedItemContentMemberConnectCase struct {
+	Value ConnectCaseContent
+
+	noSmithyDocumentSerde
+}
+
+func (*RelatedItemContentMemberConnectCase) isRelatedItemContent() {}
+
 // Represents the content of a contact to be returned to agents.
 type RelatedItemContentMemberContact struct {
 	Value ContactContent
@@ -1055,6 +1176,15 @@ type RelatedItemContentMemberContact struct {
 }
 
 func (*RelatedItemContentMemberContact) isRelatedItemContent() {}
+
+// Content for a custom related item
+type RelatedItemContentMemberCustom struct {
+	Value CustomContent
+
+	noSmithyDocumentSerde
+}
+
+func (*RelatedItemContentMemberCustom) isRelatedItemContent() {}
 
 // Represents the content of a File to be returned to agents.
 type RelatedItemContentMemberFile struct {
@@ -1090,7 +1220,9 @@ type RelatedItemEventIncludedData struct {
 // The following types satisfy this interface:
 //
 //	RelatedItemInputContentMemberComment
+//	RelatedItemInputContentMemberConnectCase
 //	RelatedItemInputContentMemberContact
+//	RelatedItemInputContentMemberCustom
 //	RelatedItemInputContentMemberFile
 //	RelatedItemInputContentMemberSla
 type RelatedItemInputContent interface {
@@ -1106,6 +1238,15 @@ type RelatedItemInputContentMemberComment struct {
 
 func (*RelatedItemInputContentMemberComment) isRelatedItemInputContent() {}
 
+// Input content for a related Connect case
+type RelatedItemInputContentMemberConnectCase struct {
+	Value ConnectCaseInputContent
+
+	noSmithyDocumentSerde
+}
+
+func (*RelatedItemInputContentMemberConnectCase) isRelatedItemInputContent() {}
+
 // Object representing a contact in Amazon Connect as an API request field.
 type RelatedItemInputContentMemberContact struct {
 	Value Contact
@@ -1114,6 +1255,15 @@ type RelatedItemInputContentMemberContact struct {
 }
 
 func (*RelatedItemInputContentMemberContact) isRelatedItemInputContent() {}
+
+// Input content for a custom related item
+type RelatedItemInputContentMemberCustom struct {
+	Value CustomInputContent
+
+	noSmithyDocumentSerde
+}
+
+func (*RelatedItemInputContentMemberCustom) isRelatedItemInputContent() {}
 
 // A file of related items.
 type RelatedItemInputContentMemberFile struct {
@@ -1138,7 +1288,9 @@ func (*RelatedItemInputContentMemberSla) isRelatedItemInputContent() {}
 // The following types satisfy this interface:
 //
 //	RelatedItemTypeFilterMemberComment
+//	RelatedItemTypeFilterMemberConnectCase
 //	RelatedItemTypeFilterMemberContact
+//	RelatedItemTypeFilterMemberCustom
 //	RelatedItemTypeFilterMemberFile
 //	RelatedItemTypeFilterMemberSla
 type RelatedItemTypeFilter interface {
@@ -1154,6 +1306,15 @@ type RelatedItemTypeFilterMemberComment struct {
 
 func (*RelatedItemTypeFilterMemberComment) isRelatedItemTypeFilter() {}
 
+// Filter for related items of type Connect case
+type RelatedItemTypeFilterMemberConnectCase struct {
+	Value ConnectCaseFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*RelatedItemTypeFilterMemberConnectCase) isRelatedItemTypeFilter() {}
+
 // A filter for related items of type Contact .
 type RelatedItemTypeFilterMemberContact struct {
 	Value ContactFilter
@@ -1162,6 +1323,15 @@ type RelatedItemTypeFilterMemberContact struct {
 }
 
 func (*RelatedItemTypeFilterMemberContact) isRelatedItemTypeFilter() {}
+
+// Filter for related items of type Custom
+type RelatedItemTypeFilterMemberCustom struct {
+	Value CustomFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*RelatedItemTypeFilterMemberCustom) isRelatedItemTypeFilter() {}
 
 // A filter for related items of this type of File .
 type RelatedItemTypeFilterMemberFile struct {
@@ -1501,6 +1671,7 @@ func (*UnknownUnionMember) isAuditEventFieldValueUnion() {}
 func (*UnknownUnionMember) isBooleanCondition()          {}
 func (*UnknownUnionMember) isCaseFilter()                {}
 func (*UnknownUnionMember) isCaseRuleDetails()           {}
+func (*UnknownUnionMember) isCustomFieldsFilter()        {}
 func (*UnknownUnionMember) isFieldFilter()               {}
 func (*UnknownUnionMember) isFieldValueUnion()           {}
 func (*UnknownUnionMember) isLayoutContent()             {}

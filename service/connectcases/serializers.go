@@ -4133,6 +4133,30 @@ func awsRestjson1_serializeDocumentCommentFilter(v *types.CommentFilter, value s
 	return nil
 }
 
+func awsRestjson1_serializeDocumentConnectCaseFilter(v *types.ConnectCaseFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CaseId != nil {
+		ok := object.Key("caseId")
+		ok.String(*v.CaseId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentConnectCaseInputContent(v *types.ConnectCaseInputContent, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CaseId != nil {
+		ok := object.Key("caseId")
+		ok.String(*v.CaseId)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentContact(v *types.Contact, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4159,6 +4183,86 @@ func awsRestjson1_serializeDocumentContactFilter(v *types.ContactFilter, value s
 	if v.ContactArn != nil {
 		ok := object.Key("contactArn")
 		ok.String(*v.ContactArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCustomFieldsFilter(v types.CustomFieldsFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.CustomFieldsFilterMemberAndAll:
+		av := object.Key("andAll")
+		if err := awsRestjson1_serializeDocumentCustomFieldsFilterList(uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.CustomFieldsFilterMemberField:
+		av := object.Key("field")
+		if err := awsRestjson1_serializeDocumentFieldFilter(uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.CustomFieldsFilterMemberNot:
+		av := object.Key("not")
+		if err := awsRestjson1_serializeDocumentCustomFieldsFilter(uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.CustomFieldsFilterMemberOrAll:
+		av := object.Key("orAll")
+		if err := awsRestjson1_serializeDocumentCustomFieldsFilterList(uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCustomFieldsFilterList(v []types.CustomFieldsFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentCustomFieldsFilter(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCustomFilter(v *types.CustomFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Fields != nil {
+		ok := object.Key("fields")
+		if err := awsRestjson1_serializeDocumentCustomFieldsFilter(v.Fields, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCustomInputContent(v *types.CustomInputContent, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Fields != nil {
+		ok := object.Key("fields")
+		if err := awsRestjson1_serializeDocumentFieldValueList(v.Fields, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -4615,9 +4719,21 @@ func awsRestjson1_serializeDocumentRelatedItemInputContent(v types.RelatedItemIn
 			return err
 		}
 
+	case *types.RelatedItemInputContentMemberConnectCase:
+		av := object.Key("connectCase")
+		if err := awsRestjson1_serializeDocumentConnectCaseInputContent(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.RelatedItemInputContentMemberContact:
 		av := object.Key("contact")
 		if err := awsRestjson1_serializeDocumentContact(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RelatedItemInputContentMemberCustom:
+		av := object.Key("custom")
+		if err := awsRestjson1_serializeDocumentCustomInputContent(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -4651,9 +4767,21 @@ func awsRestjson1_serializeDocumentRelatedItemTypeFilter(v types.RelatedItemType
 			return err
 		}
 
+	case *types.RelatedItemTypeFilterMemberConnectCase:
+		av := object.Key("connectCase")
+		if err := awsRestjson1_serializeDocumentConnectCaseFilter(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.RelatedItemTypeFilterMemberContact:
 		av := object.Key("contact")
 		if err := awsRestjson1_serializeDocumentContactFilter(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RelatedItemTypeFilterMemberCustom:
+		av := object.Key("custom")
+		if err := awsRestjson1_serializeDocumentCustomFilter(&uv.Value, av); err != nil {
 			return err
 		}
 

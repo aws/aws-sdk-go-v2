@@ -172,6 +172,7 @@ type ClusterScalabilityType string
 const (
 	ClusterScalabilityTypeStandard  ClusterScalabilityType = "standard"
 	ClusterScalabilityTypeLimitless ClusterScalabilityType = "limitless"
+	ClusterScalabilityTypeScaleout  ClusterScalabilityType = "scaleout"
 )
 
 // Values returns all known values for ClusterScalabilityType. Note that this can
@@ -182,6 +183,7 @@ func (ClusterScalabilityType) Values() []ClusterScalabilityType {
 	return []ClusterScalabilityType{
 		"standard",
 		"limitless",
+		"scaleout",
 	}
 }
 
@@ -602,6 +604,8 @@ const (
 	SourceTypeCustomEngineVersion SourceType = "custom-engine-version"
 	SourceTypeDbProxy             SourceType = "db-proxy"
 	SourceTypeBlueGreenDeployment SourceType = "blue-green-deployment"
+	SourceTypeDbShardGroup        SourceType = "db-shard-group"
+	SourceTypeZeroEtl             SourceType = "zero-etl"
 )
 
 // Values returns all known values for SourceType. Note that this can be expanded
@@ -619,6 +623,8 @@ func (SourceType) Values() []SourceType {
 		"custom-engine-version",
 		"db-proxy",
 		"blue-green-deployment",
+		"db-shard-group",
+		"zero-etl",
 	}
 }
 
@@ -650,6 +656,7 @@ const (
 	TargetHealthReasonAuthFailure             TargetHealthReason = "AUTH_FAILURE"
 	TargetHealthReasonPendingProxyCapacity    TargetHealthReason = "PENDING_PROXY_CAPACITY"
 	TargetHealthReasonInvalidReplicationState TargetHealthReason = "INVALID_REPLICATION_STATE"
+	TargetHealthReasonPromoted                TargetHealthReason = "PROMOTED"
 )
 
 // Values returns all known values for TargetHealthReason. Note that this can be
@@ -663,6 +670,7 @@ func (TargetHealthReason) Values() []TargetHealthReason {
 		"AUTH_FAILURE",
 		"PENDING_PROXY_CAPACITY",
 		"INVALID_REPLICATION_STATE",
+		"PROMOTED",
 	}
 }
 
@@ -694,6 +702,7 @@ const (
 	TargetStateRegistering TargetState = "REGISTERING"
 	TargetStateAvailable   TargetState = "AVAILABLE"
 	TargetStateUnavailable TargetState = "UNAVAILABLE"
+	TargetStateUnused      TargetState = "UNUSED"
 )
 
 // Values returns all known values for TargetState. Note that this can be expanded
@@ -705,6 +714,7 @@ func (TargetState) Values() []TargetState {
 		"REGISTERING",
 		"AVAILABLE",
 		"UNAVAILABLE",
+		"UNUSED",
 	}
 }
 

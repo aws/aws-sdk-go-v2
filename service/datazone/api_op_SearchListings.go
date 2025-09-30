@@ -11,7 +11,42 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches listings (records of an asset at a given time) in Amazon DataZone.
+// Searches listings in Amazon DataZone.
+//
+// SearchListings is a powerful capability that enables users to discover and
+// explore published assets and data products across their organization. It
+// provides both basic and advanced search functionality, allowing users to find
+// resources based on names, descriptions, metadata, and other attributes.
+// SearchListings also supports filtering using various criteria such as creation
+// date, owner, or status. This API is essential for making the wealth of data
+// resources in an organization discoverable and usable, helping users find the
+// right data for their needs quickly and efficiently.
+//
+// SearchListings returns results in a paginated format. When the result set is
+// large, the response will include a nextToken, which can be used to retrieve the
+// next page of results.
+//
+// The SearchListings API gives users flexibility in specifying what kind of
+// search is run.
+//
+// To run a free-text search, the searchText parameter must be supplied. By
+// default, all searchable fields are indexed for semantic search and will return
+// semantic matches for SearchListings queries. To prevent semantic search indexing
+// for a custom form attribute, see the [CreateFormType API documentation]. To run a lexical search query, enclose
+// the query with double quotes (""). This will disable semantic search even for
+// fields that have semantic search enabled and will only return results that
+// contain the keywords wrapped by double quotes (order of tokens in the query is
+// not enforced). Free-text search is supported for all attributes annotated with
+// @amazon.datazone#searchable.
+//
+// To run a filtered search, provide filter clause using the filters parameter. To
+// filter on glossary terms, use the special attribute __DataZoneGlossaryTerms .
+//
+// To find out whether an attribute has been annotated and indexed for a given
+// search type, use the GetFormType API to retrieve the form containing the
+// attribute.
+//
+// [CreateFormType API documentation]: https://docs.aws.amazon.com/datazone/latest/APIReference/API_CreateFormType.html
 func (c *Client) SearchListings(ctx context.Context, params *SearchListingsInput, optFns ...func(*Options)) (*SearchListingsOutput, error) {
 	if params == nil {
 		params = &SearchListingsInput{}

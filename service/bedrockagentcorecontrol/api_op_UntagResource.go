@@ -11,6 +11,9 @@ import (
 )
 
 // Removes the specified tags from the specified resource.
+//
+// This feature is currently available only for AgentCore Runtime, Browser, Code
+// Interpreter tool, and Gateway.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

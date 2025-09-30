@@ -11,14 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new capacity provider. Capacity providers are associated with an
-// Amazon ECS cluster and are used in capacity provider strategies to facilitate
-// cluster auto scaling.
-//
-// Only capacity providers that use an Auto Scaling group can be created. Amazon
-// ECS tasks on Fargate use the FARGATE and FARGATE_SPOT capacity providers. These
-// providers are available to all accounts in the Amazon Web Services Regions that
-// Fargate supports.
+// Creates a capacity provider. Capacity providers are associated with a cluster
+// and are used in capacity provider strategies to facilitate cluster auto scaling.
+// You can create capacity providers for Amazon ECS Managed Instances and EC2
+// instances. Fargate has the predefined FARGATE and FARGATE_SPOT capacity
+// providers.
 func (c *Client) CreateCapacityProvider(ctx context.Context, params *CreateCapacityProviderInput, optFns ...func(*Options)) (*CreateCapacityProviderOutput, error) {
 	if params == nil {
 		params = &CreateCapacityProviderInput{}
@@ -36,11 +33,6 @@ func (c *Client) CreateCapacityProvider(ctx context.Context, params *CreateCapac
 
 type CreateCapacityProviderInput struct {
 
-	// The details of the Auto Scaling group for the capacity provider.
-	//
-	// This member is required.
-	AutoScalingGroupProvider *types.AutoScalingGroupProvider
-
 	// The name of the capacity provider. Up to 255 characters are allowed. They
 	// include letters (both upper and lowercase letters), numbers, underscores (_),
 	// and hyphens (-). The name can't be prefixed with " aws ", " ecs ", or " fargate
@@ -48,6 +40,20 @@ type CreateCapacityProviderInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	// The details of the Auto Scaling group for the capacity provider.
+	AutoScalingGroupProvider *types.AutoScalingGroupProvider
+
+	// The name of the cluster to associate with the capacity provider. When you
+	// create a capacity provider with Amazon ECS Managed Instances, it becomes
+	// available only within the specified cluster.
+	Cluster *string
+
+	// The configuration for the Amazon ECS Managed Instances provider. This
+	// configuration specifies how Amazon ECS manages Amazon EC2 instances on your
+	// behalf, including the infrastructure role, instance launch template, and tag
+	// propagation settings.
+	ManagedInstancesProvider *types.CreateManagedInstancesProviderConfiguration
 
 	// The metadata that you apply to the capacity provider to categorize and organize
 	// them more conveniently. Each tag consists of a key and an optional value. You

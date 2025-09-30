@@ -3585,6 +3585,18 @@ type ListingSummaryItem struct {
 	noSmithyDocumentSerde
 }
 
+// The managed endpoint credentials of the EMR on EKS cluster.
+type ManagedEndpointCredentials struct {
+
+	// The identifier of the managed endpoint credentials.
+	Id *string
+
+	// The ARN of the managed endpoint credentials.
+	Token *string
+
+	noSmithyDocumentSerde
+}
+
 // The offset of a matched term.
 type MatchOffset struct {
 
@@ -5573,6 +5585,9 @@ type SparkEmrPropertiesInput struct {
 	// The log URI of the Spark EMR.
 	LogUri *string
 
+	// The managed endpoint ARN of the EMR on EKS cluster.
+	ManagedEndpointArn *string
+
 	// The Python virtual env of the Spark EMR.
 	PythonVirtualEnv *string
 
@@ -5587,6 +5602,9 @@ type SparkEmrPropertiesInput struct {
 
 // The Spark EMR properties.
 type SparkEmrPropertiesOutput struct {
+
+	// The certificate data of the EMR on EKS cluster.
+	CertificateData *string
 
 	// The compute ARN of the Spark EMR.
 	ComputeArn *string
@@ -5611,6 +5629,12 @@ type SparkEmrPropertiesOutput struct {
 
 	// The log URI of the Spark EMR.
 	LogUri *string
+
+	// The managed endpoint ARN of the EMR on EKS cluster.
+	ManagedEndpointArn *string
+
+	// The managed endpoint credentials of the EMR on EKS cluster.
+	ManagedEndpointCredentials *ManagedEndpointCredentials
 
 	// The Python virtual env of the Spark EMR.
 	PythonVirtualEnv *string
@@ -5638,6 +5662,9 @@ type SparkEmrPropertiesPatch struct {
 
 	// The log URI in the Spark EMR properties patch.
 	LogUri *string
+
+	// The managed endpoint ARN of the EMR on EKS cluster.
+	ManagedEndpointArn *string
 
 	// The Python virtual env in the Spark EMR properties patch.
 	PythonVirtualEnv *string

@@ -10,6 +10,23 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// This API permanently deletes all QuickSight customizations for the specified
+// Amazon Web Services account and namespace in this Amazon Web Services Region.
+// When you delete account customizations:
+//
+//   - All customizations are removed including themes, branding, and visual
+//     settings
+//
+//   - The deletion affects only the specified Amazon Web Services Region -
+//     customizations in other regions remain unchanged
+//
+//   - This action cannot be undone through the API
+//
+//   - Users will see default QuickSight styling after customizations are deleted
+//
+// Before proceeding: Ensure you have backups of any custom themes or branding
+// elements you may want to recreate.
+//
 // Deletes all Amazon QuickSight customizations in this Amazon Web Services Region
 // for the specified Amazon Web Services account and QuickSight namespace.
 func (c *Client) DeleteAccountCustomization(ctx context.Context, params *DeleteAccountCustomizationInput, optFns ...func(*Options)) (*DeleteAccountCustomizationOutput, error) {

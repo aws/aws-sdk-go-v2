@@ -2,6 +2,91 @@
 
 package types
 
+type AcceleratorManufacturer string
+
+// Enum values for AcceleratorManufacturer
+const (
+	AcceleratorManufacturerAmazonWebServices AcceleratorManufacturer = "amazon-web-services"
+	AcceleratorManufacturerAmd               AcceleratorManufacturer = "amd"
+	AcceleratorManufacturerNvidia            AcceleratorManufacturer = "nvidia"
+	AcceleratorManufacturerXilinx            AcceleratorManufacturer = "xilinx"
+	AcceleratorManufacturerHabana            AcceleratorManufacturer = "habana"
+)
+
+// Values returns all known values for AcceleratorManufacturer. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AcceleratorManufacturer) Values() []AcceleratorManufacturer {
+	return []AcceleratorManufacturer{
+		"amazon-web-services",
+		"amd",
+		"nvidia",
+		"xilinx",
+		"habana",
+	}
+}
+
+type AcceleratorName string
+
+// Enum values for AcceleratorName
+const (
+	AcceleratorNameA100          AcceleratorName = "a100"
+	AcceleratorNameInferentia    AcceleratorName = "inferentia"
+	AcceleratorNameK520          AcceleratorName = "k520"
+	AcceleratorNameK80           AcceleratorName = "k80"
+	AcceleratorNameM60           AcceleratorName = "m60"
+	AcceleratorNameRadeonProV520 AcceleratorName = "radeon-pro-v520"
+	AcceleratorNameT4            AcceleratorName = "t4"
+	AcceleratorNameVu9p          AcceleratorName = "vu9p"
+	AcceleratorNameV100          AcceleratorName = "v100"
+	AcceleratorNameA10g          AcceleratorName = "a10g"
+	AcceleratorNameH100          AcceleratorName = "h100"
+	AcceleratorNameT4g           AcceleratorName = "t4g"
+)
+
+// Values returns all known values for AcceleratorName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AcceleratorName) Values() []AcceleratorName {
+	return []AcceleratorName{
+		"a100",
+		"inferentia",
+		"k520",
+		"k80",
+		"m60",
+		"radeon-pro-v520",
+		"t4",
+		"vu9p",
+		"v100",
+		"a10g",
+		"h100",
+		"t4g",
+	}
+}
+
+type AcceleratorType string
+
+// Enum values for AcceleratorType
+const (
+	AcceleratorTypeGpu       AcceleratorType = "gpu"
+	AcceleratorTypeFpga      AcceleratorType = "fpga"
+	AcceleratorTypeInference AcceleratorType = "inference"
+)
+
+// Values returns all known values for AcceleratorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AcceleratorType) Values() []AcceleratorType {
+	return []AcceleratorType{
+		"gpu",
+		"fpga",
+		"inference",
+	}
+}
+
 type AgentUpdateStatus string
 
 // Enum values for AgentUpdateStatus
@@ -88,6 +173,48 @@ func (AvailabilityZoneRebalancing) Values() []AvailabilityZoneRebalancing {
 	}
 }
 
+type BareMetal string
+
+// Enum values for BareMetal
+const (
+	BareMetalIncluded BareMetal = "included"
+	BareMetalRequired BareMetal = "required"
+	BareMetalExcluded BareMetal = "excluded"
+)
+
+// Values returns all known values for BareMetal. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BareMetal) Values() []BareMetal {
+	return []BareMetal{
+		"included",
+		"required",
+		"excluded",
+	}
+}
+
+type BurstablePerformance string
+
+// Enum values for BurstablePerformance
+const (
+	BurstablePerformanceIncluded BurstablePerformance = "included"
+	BurstablePerformanceRequired BurstablePerformance = "required"
+	BurstablePerformanceExcluded BurstablePerformance = "excluded"
+)
+
+// Values returns all known values for BurstablePerformance. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BurstablePerformance) Values() []BurstablePerformance {
+	return []BurstablePerformance{
+		"included",
+		"required",
+		"excluded",
+	}
+}
+
 type CapacityProviderField string
 
 // Enum values for CapacityProviderField
@@ -109,8 +236,10 @@ type CapacityProviderStatus string
 
 // Enum values for CapacityProviderStatus
 const (
-	CapacityProviderStatusActive   CapacityProviderStatus = "ACTIVE"
-	CapacityProviderStatusInactive CapacityProviderStatus = "INACTIVE"
+	CapacityProviderStatusProvisioning   CapacityProviderStatus = "PROVISIONING"
+	CapacityProviderStatusActive         CapacityProviderStatus = "ACTIVE"
+	CapacityProviderStatusDeprovisioning CapacityProviderStatus = "DEPROVISIONING"
+	CapacityProviderStatusInactive       CapacityProviderStatus = "INACTIVE"
 )
 
 // Values returns all known values for CapacityProviderStatus. Note that this can
@@ -119,8 +248,33 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (CapacityProviderStatus) Values() []CapacityProviderStatus {
 	return []CapacityProviderStatus{
+		"PROVISIONING",
 		"ACTIVE",
+		"DEPROVISIONING",
 		"INACTIVE",
+	}
+}
+
+type CapacityProviderType string
+
+// Enum values for CapacityProviderType
+const (
+	CapacityProviderTypeEc2Autoscaling   CapacityProviderType = "EC2_AUTOSCALING"
+	CapacityProviderTypeManagedInstances CapacityProviderType = "MANAGED_INSTANCES"
+	CapacityProviderTypeFargate          CapacityProviderType = "FARGATE"
+	CapacityProviderTypeFargateSpot      CapacityProviderType = "FARGATE_SPOT"
+)
+
+// Values returns all known values for CapacityProviderType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapacityProviderType) Values() []CapacityProviderType {
+	return []CapacityProviderType{
+		"EC2_AUTOSCALING",
+		"MANAGED_INSTANCES",
+		"FARGATE",
+		"FARGATE_SPOT",
 	}
 }
 
@@ -128,6 +282,9 @@ type CapacityProviderUpdateStatus string
 
 // Enum values for CapacityProviderUpdateStatus
 const (
+	CapacityProviderUpdateStatusCreateInProgress CapacityProviderUpdateStatus = "CREATE_IN_PROGRESS"
+	CapacityProviderUpdateStatusCreateComplete   CapacityProviderUpdateStatus = "CREATE_COMPLETE"
+	CapacityProviderUpdateStatusCreateFailed     CapacityProviderUpdateStatus = "CREATE_FAILED"
 	CapacityProviderUpdateStatusDeleteInProgress CapacityProviderUpdateStatus = "DELETE_IN_PROGRESS"
 	CapacityProviderUpdateStatusDeleteComplete   CapacityProviderUpdateStatus = "DELETE_COMPLETE"
 	CapacityProviderUpdateStatusDeleteFailed     CapacityProviderUpdateStatus = "DELETE_FAILED"
@@ -143,6 +300,9 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (CapacityProviderUpdateStatus) Values() []CapacityProviderUpdateStatus {
 	return []CapacityProviderUpdateStatus{
+		"CREATE_IN_PROGRESS",
+		"CREATE_COMPLETE",
+		"CREATE_FAILED",
 		"DELETE_IN_PROGRESS",
 		"DELETE_COMPLETE",
 		"DELETE_FAILED",
@@ -198,9 +358,10 @@ type Compatibility string
 
 // Enum values for Compatibility
 const (
-	CompatibilityEc2      Compatibility = "EC2"
-	CompatibilityFargate  Compatibility = "FARGATE"
-	CompatibilityExternal Compatibility = "EXTERNAL"
+	CompatibilityEc2              Compatibility = "EC2"
+	CompatibilityFargate          Compatibility = "FARGATE"
+	CompatibilityExternal         Compatibility = "EXTERNAL"
+	CompatibilityManagedInstances Compatibility = "MANAGED_INSTANCES"
 )
 
 // Values returns all known values for Compatibility. Note that this can be
@@ -212,6 +373,7 @@ func (Compatibility) Values() []Compatibility {
 		"EC2",
 		"FARGATE",
 		"EXTERNAL",
+		"MANAGED_INSTANCES",
 	}
 }
 
@@ -317,6 +479,27 @@ func (CPUArchitecture) Values() []CPUArchitecture {
 	return []CPUArchitecture{
 		"X86_64",
 		"ARM64",
+	}
+}
+
+type CpuManufacturer string
+
+// Enum values for CpuManufacturer
+const (
+	CpuManufacturerIntel             CpuManufacturer = "intel"
+	CpuManufacturerAmd               CpuManufacturer = "amd"
+	CpuManufacturerAmazonWebServices CpuManufacturer = "amazon-web-services"
+)
+
+// Values returns all known values for CpuManufacturer. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CpuManufacturer) Values() []CpuManufacturer {
+	return []CpuManufacturer{
+		"intel",
+		"amd",
+		"amazon-web-services",
 	}
 }
 
@@ -586,6 +769,25 @@ func (HealthStatus) Values() []HealthStatus {
 	}
 }
 
+type InstanceGeneration string
+
+// Enum values for InstanceGeneration
+const (
+	InstanceGenerationCurrent  InstanceGeneration = "current"
+	InstanceGenerationPrevious InstanceGeneration = "previous"
+)
+
+// Values returns all known values for InstanceGeneration. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceGeneration) Values() []InstanceGeneration {
+	return []InstanceGeneration{
+		"current",
+		"previous",
+	}
+}
+
 type InstanceHealthCheckState string
 
 // Enum values for InstanceHealthCheckState
@@ -651,9 +853,10 @@ type LaunchType string
 
 // Enum values for LaunchType
 const (
-	LaunchTypeEc2      LaunchType = "EC2"
-	LaunchTypeFargate  LaunchType = "FARGATE"
-	LaunchTypeExternal LaunchType = "EXTERNAL"
+	LaunchTypeEc2              LaunchType = "EC2"
+	LaunchTypeFargate          LaunchType = "FARGATE"
+	LaunchTypeExternal         LaunchType = "EXTERNAL"
+	LaunchTypeManagedInstances LaunchType = "MANAGED_INSTANCES"
 )
 
 // Values returns all known values for LaunchType. Note that this can be expanded
@@ -665,6 +868,47 @@ func (LaunchType) Values() []LaunchType {
 		"EC2",
 		"FARGATE",
 		"EXTERNAL",
+		"MANAGED_INSTANCES",
+	}
+}
+
+type LocalStorage string
+
+// Enum values for LocalStorage
+const (
+	LocalStorageIncluded LocalStorage = "included"
+	LocalStorageRequired LocalStorage = "required"
+	LocalStorageExcluded LocalStorage = "excluded"
+)
+
+// Values returns all known values for LocalStorage. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LocalStorage) Values() []LocalStorage {
+	return []LocalStorage{
+		"included",
+		"required",
+		"excluded",
+	}
+}
+
+type LocalStorageType string
+
+// Enum values for LocalStorageType
+const (
+	LocalStorageTypeHdd LocalStorageType = "hdd"
+	LocalStorageTypeSsd LocalStorageType = "ssd"
+)
+
+// Values returns all known values for LocalStorageType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LocalStorageType) Values() []LocalStorageType {
+	return []LocalStorageType{
+		"hdd",
+		"ssd",
 	}
 }
 
@@ -732,6 +976,26 @@ func (ManagedDraining) Values() []ManagedDraining {
 	return []ManagedDraining{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type ManagedInstancesMonitoringOptions string
+
+// Enum values for ManagedInstancesMonitoringOptions
+const (
+	ManagedInstancesMonitoringOptionsBasic    ManagedInstancesMonitoringOptions = "BASIC"
+	ManagedInstancesMonitoringOptionsDetailed ManagedInstancesMonitoringOptions = "DETAILED"
+)
+
+// Values returns all known values for ManagedInstancesMonitoringOptions. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ManagedInstancesMonitoringOptions) Values() []ManagedInstancesMonitoringOptions {
+	return []ManagedInstancesMonitoringOptions{
+		"BASIC",
+		"DETAILED",
 	}
 }
 
@@ -905,6 +1169,25 @@ const (
 func (PlatformDeviceType) Values() []PlatformDeviceType {
 	return []PlatformDeviceType{
 		"GPU",
+	}
+}
+
+type PropagateMITags string
+
+// Enum values for PropagateMITags
+const (
+	PropagateMITagsCapacityProvider PropagateMITags = "CAPACITY_PROVIDER"
+	PropagateMITagsNone             PropagateMITags = "NONE"
+)
+
+// Values returns all known values for PropagateMITags. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PropagateMITags) Values() []PropagateMITags {
+	return []PropagateMITags{
+		"CAPACITY_PROVIDER",
+		"NONE",
 	}
 }
 

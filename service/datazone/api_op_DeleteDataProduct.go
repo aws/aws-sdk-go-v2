@@ -18,9 +18,6 @@ import (
 //
 //   - The user must have delete permissions for the data product.
 //
-//   - Ensure there are no active dependencies (e.g., published links, assets
-//     using the product).
-//
 //   - Domain and project must be active.
 func (c *Client) DeleteDataProduct(ctx context.Context, params *DeleteDataProductInput, optFns ...func(*Options)) (*DeleteDataProductOutput, error) {
 	if params == nil {

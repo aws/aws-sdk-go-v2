@@ -121,6 +121,38 @@ func (e *ClientException) ErrorCode() string {
 }
 func (e *ClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The cluster contains one or more capacity providers that prevent the requested
+// operation. This exception occurs when you try to delete a cluster that still has
+// active capacity providers, including Amazon ECS Managed Instances capacity
+// providers. You must first delete all capacity providers from the cluster before
+// you can delete the cluster itself.
+type ClusterContainsCapacityProviderException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ClusterContainsCapacityProviderException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ClusterContainsCapacityProviderException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ClusterContainsCapacityProviderException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ClusterContainsCapacityProviderException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ClusterContainsCapacityProviderException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // You can't delete a cluster that has registered container instances. First,
 // deregister the container instances before you can delete the cluster. For more
 // information, see [DeregisterContainerInstance].

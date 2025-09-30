@@ -1,0 +1,8 @@
+{
+    "id": "6b0c10e1-92ae-40fe-aba5-6d95a6de1006",
+    "type": "documentation",
+    "description": "added warnings to a few CLI pages",
+    "modules": [
+        "service/quicksight"
+    ]
+}

@@ -4701,6 +4701,13 @@ func awsRestjson1_serializeDocumentPrefetchRetrieval(v *types.PrefetchRetrieval,
 		}
 	}
 
+	if v.TrafficShapingTpsConfiguration != nil {
+		ok := object.Key("TrafficShapingTpsConfiguration")
+		if err := awsRestjson1_serializeDocumentTrafficShapingTpsConfiguration(v.TrafficShapingTpsConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.TrafficShapingType) > 0 {
 		ok := object.Key("TrafficShapingType")
 		ok.String(string(v.TrafficShapingType))
@@ -4778,6 +4785,13 @@ func awsRestjson1_serializeDocumentRecurringRetrieval(v *types.RecurringRetrieva
 	if v.TrafficShapingRetrievalWindow != nil {
 		ok := object.Key("TrafficShapingRetrievalWindow")
 		if err := awsRestjson1_serializeDocumentTrafficShapingRetrievalWindow(v.TrafficShapingRetrievalWindow, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TrafficShapingTpsConfiguration != nil {
+		ok := object.Key("TrafficShapingTpsConfiguration")
+		if err := awsRestjson1_serializeDocumentTrafficShapingTpsConfiguration(v.TrafficShapingTpsConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -5031,6 +5045,23 @@ func awsRestjson1_serializeDocumentTrafficShapingRetrievalWindow(v *types.Traffi
 	if v.RetrievalWindowDurationSeconds != nil {
 		ok := object.Key("RetrievalWindowDurationSeconds")
 		ok.Integer(*v.RetrievalWindowDurationSeconds)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTrafficShapingTpsConfiguration(v *types.TrafficShapingTpsConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PeakConcurrentUsers != nil {
+		ok := object.Key("PeakConcurrentUsers")
+		ok.Integer(*v.PeakConcurrentUsers)
+	}
+
+	if v.PeakTps != nil {
+		ok := object.Key("PeakTps")
+		ok.Integer(*v.PeakTps)
 	}
 
 	return nil

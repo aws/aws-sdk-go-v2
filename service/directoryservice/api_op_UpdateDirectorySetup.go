@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the directory for a particular update type.
+// Updates directory configuration for the specified update type.
 func (c *Client) UpdateDirectorySetup(ctx context.Context, params *UpdateDirectorySetupInput, optFns ...func(*Options)) (*UpdateDirectorySetupOutput, error) {
 	if params == nil {
 		params = &UpdateDirectorySetupInput{}
@@ -29,22 +29,26 @@ func (c *Client) UpdateDirectorySetup(ctx context.Context, params *UpdateDirecto
 
 type UpdateDirectorySetupInput struct {
 
-	//  The identifier of the directory on which you want to perform the update.
+	// The identifier of the directory to update.
 	//
 	// This member is required.
 	DirectoryId *string
 
-	//  The type of update that needs to be performed on the directory. For example,
-	// OS.
+	// The type of update to perform on the directory.
 	//
 	// This member is required.
 	UpdateType types.UpdateType
 
-	//  The boolean that specifies if a snapshot for the directory needs to be taken
-	// before updating the directory.
+	// Specifies whether to create a directory snapshot before performing the update.
 	CreateSnapshotBeforeUpdate *bool
 
-	//  The settings for the OS update that needs to be performed on the directory.
+	// Directory size configuration to apply during the update operation.
+	DirectorySizeUpdateSettings *types.DirectorySizeUpdateSettings
+
+	// Network configuration to apply during the directory update operation.
+	NetworkUpdateSettings *types.NetworkUpdateSettings
+
+	// Operating system configuration to apply during the directory update operation.
 	OSUpdateSettings *types.OSUpdateSettings
 
 	noSmithyDocumentSerde

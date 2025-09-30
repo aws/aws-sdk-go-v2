@@ -25,8 +25,8 @@ import (
 //
 //   - --type-revision (if used) must match a valid revision of the asset type.
 //
-//   - Form type must exist and be associated with the asset type. Use
-//     create-form-type to define. For more information, see [create-form-type].
+//   - formsInput is required when it is associated as required in the asset-type .
+//     For more information, see [create-form-type].
 //
 //   - Form content must include all required fields as per the form schema (e.g.,
 //     bucketArn ).

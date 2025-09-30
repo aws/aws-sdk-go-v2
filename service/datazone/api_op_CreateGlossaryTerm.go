@@ -27,7 +27,7 @@ import (
 //
 //   - Domain must exist.
 //
-//   - Glossary must exist and be in an ENABLED state.
+//   - Glossary must exist.
 //
 //   - The term name must be unique within the glossary.
 //

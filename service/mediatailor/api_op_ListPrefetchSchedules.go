@@ -38,18 +38,22 @@ type ListPrefetchSchedulesInput struct {
 	// response to the current request. If there are more than MaxResults prefetch
 	// schedules, use the value of NextToken in the response to get the next page of
 	// results.
+	//
+	// The default value is 100. MediaTailor uses DynamoDB-based pagination, which
+	// means that a response might contain fewer than MaxResults items, including 0
+	// items, even when more results are available. To retrieve all results, you must
+	// continue making requests using the NextToken value from each response until the
+	// response no longer includes a NextToken value.
 	MaxResults *int32
 
-	// (Optional) If the playback configuration has more than MaxResults prefetch
-	// schedules, use NextToken to get the second and subsequent pages of results.
+	// Pagination token returned by the list request when results exceed the maximum
+	// allowed. Use the token to fetch the next page of results.
 	//
-	// For the first ListPrefetchSchedulesRequest request, omit this value.
-	//
-	// For the second and subsequent requests, get the value of NextToken from the
-	// previous response and specify that value for NextToken in the request.
-	//
-	// If the previous response didn't include a NextToken element, there are no more
-	// prefetch schedules to get.
+	// For the first ListPrefetchSchedules request, omit this value. For subsequent
+	// requests, get the value of NextToken from the previous response and specify
+	// that value for NextToken in the request. Continue making requests until the
+	// response no longer includes a NextToken value, which indicates that all results
+	// have been retrieved.
 	NextToken *string
 
 	// The type of prefetch schedules that you want to list. SINGLE indicates that you
@@ -221,6 +225,12 @@ type ListPrefetchSchedulesPaginatorOptions struct {
 	// response to the current request. If there are more than MaxResults prefetch
 	// schedules, use the value of NextToken in the response to get the next page of
 	// results.
+	//
+	// The default value is 100. MediaTailor uses DynamoDB-based pagination, which
+	// means that a response might contain fewer than MaxResults items, including 0
+	// items, even when more results are available. To retrieve all results, you must
+	// continue making requests using the NextToken value from each response until the
+	// response no longer includes a NextToken value.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

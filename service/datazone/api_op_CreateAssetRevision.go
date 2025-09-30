@@ -25,7 +25,8 @@ import (
 //
 //   - Asset must already exist in the domain with identifier.
 //
-//   - The form type with correct revision must be registered in the same domain.
+//   - formsInput is required when asset has the form type. typeRevision should be
+//     the latest version of form type.
 //
 //   - The form content must include all required fields (e.g., bucketArn for
 //     S3ObjectCollectionForm ).

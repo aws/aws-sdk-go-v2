@@ -39,8 +39,8 @@ type GetCaseAuditEventsInput struct {
 	// This member is required.
 	DomainId *string
 
-	// The maximum number of audit events to return. The current maximum supported
-	// value is 25. This is also the default when no other value is provided.
+	// The maximum number of audit events to return. When no value is provided, 25 is
+	// the default.
 	MaxResults *int32
 
 	// The token for the next set of results. Use the value returned in the previous
@@ -203,8 +203,8 @@ func (c *Client) addOperationGetCaseAuditEventsMiddlewares(stack *middleware.Sta
 // GetCaseAuditEventsPaginatorOptions is the paginator options for
 // GetCaseAuditEvents
 type GetCaseAuditEventsPaginatorOptions struct {
-	// The maximum number of audit events to return. The current maximum supported
-	// value is 25. This is also the default when no other value is provided.
+	// The maximum number of audit events to return. When no value is provided, 25 is
+	// the default.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

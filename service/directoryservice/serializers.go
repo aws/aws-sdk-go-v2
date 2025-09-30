@@ -4987,6 +4987,17 @@ func awsAwsjson11_serializeDocumentCidrIps(v []string, value smithyjson.Value) e
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentCidrIpv6s(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentClientCertAuthSettings(v *types.ClientCertAuthSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5017,6 +5028,13 @@ func awsAwsjson11_serializeDocumentDirectoryConnectSettings(v *types.DirectoryCo
 	if v.CustomerDnsIps != nil {
 		ok := object.Key("CustomerDnsIps")
 		if err := awsAwsjson11_serializeDocumentDnsIpAddrs(v.CustomerDnsIps, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CustomerDnsIpsV6 != nil {
+		ok := object.Key("CustomerDnsIpsV6")
+		if err := awsAwsjson11_serializeDocumentDnsIpv6Addrs(v.CustomerDnsIpsV6, ok); err != nil {
 			return err
 		}
 	}
@@ -5052,6 +5070,18 @@ func awsAwsjson11_serializeDocumentDirectoryIds(v []string, value smithyjson.Val
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentDirectorySizeUpdateSettings(v *types.DirectorySizeUpdateSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DirectorySize) > 0 {
+		ok := object.Key("DirectorySize")
+		ok.String(string(v.DirectorySize))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDirectoryVpcSettings(v *types.DirectoryVpcSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5072,6 +5102,17 @@ func awsAwsjson11_serializeDocumentDirectoryVpcSettings(v *types.DirectoryVpcSet
 }
 
 func awsAwsjson11_serializeDocumentDnsIpAddrs(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDnsIpv6Addrs(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -5135,6 +5176,11 @@ func awsAwsjson11_serializeDocumentIpRoute(v *types.IpRoute, value smithyjson.Va
 		ok.String(*v.CidrIp)
 	}
 
+	if v.CidrIpv6 != nil {
+		ok := object.Key("CidrIpv6")
+		ok.String(*v.CidrIpv6)
+	}
+
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
@@ -5153,6 +5199,25 @@ func awsAwsjson11_serializeDocumentIpRoutes(v []types.IpRoute, value smithyjson.
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentNetworkUpdateSettings(v *types.NetworkUpdateSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CustomerDnsIpsV6 != nil {
+		ok := object.Key("CustomerDnsIpsV6")
+		if err := awsAwsjson11_serializeDocumentDnsIpv6Addrs(v.CustomerDnsIpsV6, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.NetworkType) > 0 {
+		ok := object.Key("NetworkType")
+		ok.String(string(v.NetworkType))
+	}
+
 	return nil
 }
 
@@ -5195,6 +5260,13 @@ func awsAwsjson11_serializeDocumentRadiusSettings(v *types.RadiusSettings, value
 	if v.RadiusServers != nil {
 		ok := object.Key("RadiusServers")
 		if err := awsAwsjson11_serializeDocumentServers(v.RadiusServers, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RadiusServersIpv6 != nil {
+		ok := object.Key("RadiusServersIpv6")
+		if err := awsAwsjson11_serializeDocumentServers(v.RadiusServersIpv6, ok); err != nil {
 			return err
 		}
 	}
@@ -5516,6 +5588,11 @@ func awsAwsjson11_serializeOpDocumentConnectDirectoryInput(v *ConnectDirectoryIn
 		ok.String(*v.Name)
 	}
 
+	if len(v.NetworkType) > 0 {
+		ok := object.Key("NetworkType")
+		ok.String(string(v.NetworkType))
+	}
+
 	if v.Password != nil {
 		ok := object.Key("Password")
 		ok.String(*v.Password)
@@ -5608,6 +5685,13 @@ func awsAwsjson11_serializeOpDocumentCreateConditionalForwarderInput(v *CreateCo
 		}
 	}
 
+	if v.DnsIpv6Addrs != nil {
+		ok := object.Key("DnsIpv6Addrs")
+		if err := awsAwsjson11_serializeDocumentDnsIpv6Addrs(v.DnsIpv6Addrs, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RemoteDomainName != nil {
 		ok := object.Key("RemoteDomainName")
 		ok.String(*v.RemoteDomainName)
@@ -5628,6 +5712,11 @@ func awsAwsjson11_serializeOpDocumentCreateDirectoryInput(v *CreateDirectoryInpu
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if len(v.NetworkType) > 0 {
+		ok := object.Key("NetworkType")
+		ok.String(string(v.NetworkType))
 	}
 
 	if v.Password != nil {
@@ -5722,6 +5811,11 @@ func awsAwsjson11_serializeOpDocumentCreateMicrosoftADInput(v *CreateMicrosoftAD
 		ok.String(*v.Name)
 	}
 
+	if len(v.NetworkType) > 0 {
+		ok := object.Key("NetworkType")
+		ok.String(string(v.NetworkType))
+	}
+
 	if v.Password != nil {
 		ok := object.Key("Password")
 		ok.String(*v.Password)
@@ -5773,6 +5867,13 @@ func awsAwsjson11_serializeOpDocumentCreateTrustInput(v *CreateTrustInput, value
 	if v.ConditionalForwarderIpAddrs != nil {
 		ok := object.Key("ConditionalForwarderIpAddrs")
 		if err := awsAwsjson11_serializeDocumentDnsIpAddrs(v.ConditionalForwarderIpAddrs, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ConditionalForwarderIpv6Addrs != nil {
+		ok := object.Key("ConditionalForwarderIpv6Addrs")
+		if err := awsAwsjson11_serializeDocumentDnsIpv6Addrs(v.ConditionalForwarderIpv6Addrs, ok); err != nil {
 			return err
 		}
 	}
@@ -6720,6 +6821,13 @@ func awsAwsjson11_serializeOpDocumentRemoveIpRoutesInput(v *RemoveIpRoutesInput,
 		}
 	}
 
+	if v.CidrIpv6s != nil {
+		ok := object.Key("CidrIpv6s")
+		if err := awsAwsjson11_serializeDocumentCidrIpv6s(v.CidrIpv6s, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DirectoryId != nil {
 		ok := object.Key("DirectoryId")
 		ok.String(*v.DirectoryId)
@@ -6903,6 +7011,13 @@ func awsAwsjson11_serializeOpDocumentUpdateConditionalForwarderInput(v *UpdateCo
 		}
 	}
 
+	if v.DnsIpv6Addrs != nil {
+		ok := object.Key("DnsIpv6Addrs")
+		if err := awsAwsjson11_serializeDocumentDnsIpv6Addrs(v.DnsIpv6Addrs, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RemoteDomainName != nil {
 		ok := object.Key("RemoteDomainName")
 		ok.String(*v.RemoteDomainName)
@@ -6923,6 +7038,20 @@ func awsAwsjson11_serializeOpDocumentUpdateDirectorySetupInput(v *UpdateDirector
 	if v.DirectoryId != nil {
 		ok := object.Key("DirectoryId")
 		ok.String(*v.DirectoryId)
+	}
+
+	if v.DirectorySizeUpdateSettings != nil {
+		ok := object.Key("DirectorySizeUpdateSettings")
+		if err := awsAwsjson11_serializeDocumentDirectorySizeUpdateSettings(v.DirectorySizeUpdateSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NetworkUpdateSettings != nil {
+		ok := object.Key("NetworkUpdateSettings")
+		if err := awsAwsjson11_serializeDocumentNetworkUpdateSettings(v.NetworkUpdateSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.OSUpdateSettings != nil {

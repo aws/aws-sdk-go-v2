@@ -130,6 +130,26 @@ func (m *validateOpGetServiceLevelObjective) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAuditFindings struct {
+}
+
+func (*validateOpListAuditFindings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAuditFindings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAuditFindingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAuditFindingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListServiceDependencies struct {
 }
 
@@ -250,6 +270,26 @@ func (m *validateOpListServices) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListServiceStates struct {
+}
+
+func (*validateOpListServiceStates) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListServiceStates) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListServiceStatesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListServiceStatesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -265,6 +305,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutGroupingConfiguration struct {
+}
+
+func (*validateOpPutGroupingConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutGroupingConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutGroupingConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutGroupingConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -354,6 +414,10 @@ func addOpGetServiceLevelObjectiveValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpGetServiceLevelObjective{}, middleware.After)
 }
 
+func addOpListAuditFindingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAuditFindings{}, middleware.After)
+}
+
 func addOpListServiceDependenciesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListServiceDependencies{}, middleware.After)
 }
@@ -378,8 +442,16 @@ func addOpListServicesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListServices{}, middleware.After)
 }
 
+func addOpListServiceStatesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListServiceStates{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpPutGroupingConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutGroupingConfiguration{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -392,6 +464,76 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateServiceLevelObjectiveValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateServiceLevelObjective{}, middleware.After)
+}
+
+func validateAttributeFilter(v *types.AttributeFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AttributeFilter"}
+	if v.AttributeFilterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttributeFilterName"))
+	}
+	if v.AttributeFilterValues == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttributeFilterValues"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAttributeFilters(v []types.AttributeFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AttributeFilters"}
+	for i := range v {
+		if err := validateAttributeFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAuditTarget(v *types.AuditTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AuditTarget"}
+	if v.Type == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Data == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Data"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAuditTargets(v []types.AuditTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AuditTargets"}
+	for i := range v {
+		if err := validateAuditTarget(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateBurnRateConfiguration(v *types.BurnRateConfiguration) error {
@@ -549,6 +691,38 @@ func validateGoal(v *types.Goal) error {
 	if v.Interval != nil {
 		if err := validateInterval(v.Interval); err != nil {
 			invalidParams.AddNested("Interval", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGroupingAttributeDefinition(v *types.GroupingAttributeDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GroupingAttributeDefinition"}
+	if v.GroupingName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupingName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGroupingAttributeDefinitions(v []types.GroupingAttributeDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GroupingAttributeDefinitions"}
+	for i := range v {
+		if err := validateGroupingAttributeDefinition(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -998,6 +1172,31 @@ func validateOpGetServiceLevelObjectiveInput(v *GetServiceLevelObjectiveInput) e
 	}
 }
 
+func validateOpListAuditFindingsInput(v *ListAuditFindingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAuditFindingsInput"}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if v.AuditTargets == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuditTargets"))
+	} else if v.AuditTargets != nil {
+		if err := validateAuditTargets(v.AuditTargets); err != nil {
+			invalidParams.AddNested("AuditTargets", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListServiceDependenciesInput(v *ListServiceDependenciesInput) error {
 	if v == nil {
 		return nil
@@ -1111,6 +1310,29 @@ func validateOpListServicesInput(v *ListServicesInput) error {
 	}
 }
 
+func validateOpListServiceStatesInput(v *ListServiceStatesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListServiceStatesInput"}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if v.AttributeFilters != nil {
+		if err := validateAttributeFilters(v.AttributeFilters); err != nil {
+			invalidParams.AddNested("AttributeFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	if v == nil {
 		return nil
@@ -1118,6 +1340,25 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutGroupingConfigurationInput(v *PutGroupingConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutGroupingConfigurationInput"}
+	if v.GroupingAttributeDefinitions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupingAttributeDefinitions"))
+	} else if v.GroupingAttributeDefinitions != nil {
+		if err := validateGroupingAttributeDefinitions(v.GroupingAttributeDefinitions); err != nil {
+			invalidParams.AddNested("GroupingAttributeDefinitions", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

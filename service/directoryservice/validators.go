@@ -1801,9 +1801,6 @@ func validateDirectoryConnectSettings(v *types.DirectoryConnectSettings) error {
 	if v.SubnetIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
 	}
-	if v.CustomerDnsIps == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CustomerDnsIps"))
-	}
 	if v.CustomerUserName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CustomerUserName"))
 	}
@@ -2151,9 +2148,6 @@ func validateOpCreateConditionalForwarderInput(v *CreateConditionalForwarderInpu
 	}
 	if v.RemoteDomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RemoteDomainName"))
-	}
-	if v.DnsIpAddrs == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DnsIpAddrs"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2965,9 +2959,6 @@ func validateOpRemoveIpRoutesInput(v *RemoveIpRoutesInput) error {
 	if v.DirectoryId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
 	}
-	if v.CidrIps == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CidrIps"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3139,9 +3130,6 @@ func validateOpUpdateConditionalForwarderInput(v *UpdateConditionalForwarderInpu
 	}
 	if v.RemoteDomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RemoteDomainName"))
-	}
-	if v.DnsIpAddrs == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DnsIpAddrs"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

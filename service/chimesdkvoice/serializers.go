@@ -1010,6 +1010,11 @@ func awsRestjson1_serializeOpDocumentCreateVoiceConnectorInput(v *CreateVoiceCon
 		ok.String(*v.Name)
 	}
 
+	if len(v.NetworkType) > 0 {
+		ok := object.Key("NetworkType")
+		ok.String(string(v.NetworkType))
+	}
+
 	if v.RequireEncryption != nil {
 		ok := object.Key("RequireEncryption")
 		ok.Boolean(*v.RequireEncryption)

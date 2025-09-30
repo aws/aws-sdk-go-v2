@@ -45,8 +45,8 @@ type SearchCasesInput struct {
 	// A list of filter objects.
 	Filter types.CaseFilter
 
-	// The maximum number of cases to return. The current maximum supported value is
-	// 25. This is also the default value when no other value is provided.
+	// The maximum number of cases to return. When no value is provided, 25 is the
+	// default.
 	MaxResults *int32
 
 	// The token for the next set of results. Use the value returned in the previous
@@ -216,8 +216,8 @@ func (c *Client) addOperationSearchCasesMiddlewares(stack *middleware.Stack, opt
 
 // SearchCasesPaginatorOptions is the paginator options for SearchCases
 type SearchCasesPaginatorOptions struct {
-	// The maximum number of cases to return. The current maximum supported value is
-	// 25. This is also the default value when no other value is provided.
+	// The maximum number of cases to return. When no value is provided, 25 is the
+	// default.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

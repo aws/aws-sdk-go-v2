@@ -124,6 +124,9 @@ func awsAwsjson11_deserializeOpErrorCreateCapacityProvider(response *smithyhttp.
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
+	case strings.EqualFold("ClusterNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorClusterNotFoundException(response, errorBody)
+
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
 
@@ -132,6 +135,9 @@ func awsAwsjson11_deserializeOpErrorCreateCapacityProvider(response *smithyhttp.
 
 	case strings.EqualFold("ServerException", errorCode):
 		return awsAwsjson11_deserializeErrorServerException(response, errorBody)
+
+	case strings.EqualFold("UnsupportedFeatureException", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedFeatureException(response, errorBody)
 
 	case strings.EqualFold("UpdateInProgressException", errorCode):
 		return awsAwsjson11_deserializeErrorUpdateInProgressException(response, errorBody)
@@ -877,11 +883,17 @@ func awsAwsjson11_deserializeOpErrorDeleteCapacityProvider(response *smithyhttp.
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
+	case strings.EqualFold("ClusterNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorClusterNotFoundException(response, errorBody)
+
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
 
 	case strings.EqualFold("ServerException", errorCode):
 		return awsAwsjson11_deserializeErrorServerException(response, errorBody)
+
+	case strings.EqualFold("UnsupportedFeatureException", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedFeatureException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -993,6 +1005,9 @@ func awsAwsjson11_deserializeOpErrorDeleteCluster(response *smithyhttp.Response,
 	switch {
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
+
+	case strings.EqualFold("ClusterContainsCapacityProviderException", errorCode):
+		return awsAwsjson11_deserializeErrorClusterContainsCapacityProviderException(response, errorBody)
 
 	case strings.EqualFold("ClusterContainsContainerInstancesException", errorCode):
 		return awsAwsjson11_deserializeErrorClusterContainsContainerInstancesException(response, errorBody)
@@ -1741,11 +1756,17 @@ func awsAwsjson11_deserializeOpErrorDescribeCapacityProviders(response *smithyht
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
+	case strings.EqualFold("ClusterNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorClusterNotFoundException(response, errorBody)
+
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
 
 	case strings.EqualFold("ServerException", errorCode):
 		return awsAwsjson11_deserializeErrorServerException(response, errorBody)
+
+	case strings.EqualFold("UnsupportedFeatureException", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedFeatureException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -6349,11 +6370,17 @@ func awsAwsjson11_deserializeOpErrorUpdateCapacityProvider(response *smithyhttp.
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
+	case strings.EqualFold("ClusterNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorClusterNotFoundException(response, errorBody)
+
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
 
 	case strings.EqualFold("ServerException", errorCode):
 		return awsAwsjson11_deserializeErrorServerException(response, errorBody)
+
+	case strings.EqualFold("UnsupportedFeatureException", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedFeatureException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -7537,6 +7564,41 @@ func awsAwsjson11_deserializeErrorClientException(response *smithyhttp.Response,
 	return output
 }
 
+func awsAwsjson11_deserializeErrorClusterContainsCapacityProviderException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.ClusterContainsCapacityProviderException{}
+	err := awsAwsjson11_deserializeDocumentClusterContainsCapacityProviderException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
 func awsAwsjson11_deserializeErrorClusterContainsContainerInstancesException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -8342,6 +8404,228 @@ func awsAwsjson11_deserializeErrorUpdateInProgressException(response *smithyhttp
 	return output
 }
 
+func awsAwsjson11_deserializeDocumentAcceleratorCountRequest(v **types.AcceleratorCountRequest, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AcceleratorCountRequest
+	if *v == nil {
+		sv = &types.AcceleratorCountRequest{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "max":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoxedInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Max = ptr.Int32(int32(i64))
+			}
+
+		case "min":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoxedInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Min = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAcceleratorManufacturerSet(v *[]types.AcceleratorManufacturer, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AcceleratorManufacturer
+	if *v == nil {
+		cv = []types.AcceleratorManufacturer{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AcceleratorManufacturer
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected AcceleratorManufacturer to be of type string, got %T instead", value)
+			}
+			col = types.AcceleratorManufacturer(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAcceleratorNameSet(v *[]types.AcceleratorName, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AcceleratorName
+	if *v == nil {
+		cv = []types.AcceleratorName{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AcceleratorName
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected AcceleratorName to be of type string, got %T instead", value)
+			}
+			col = types.AcceleratorName(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAcceleratorTotalMemoryMiBRequest(v **types.AcceleratorTotalMemoryMiBRequest, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AcceleratorTotalMemoryMiBRequest
+	if *v == nil {
+		sv = &types.AcceleratorTotalMemoryMiBRequest{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "max":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoxedInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Max = ptr.Int32(int32(i64))
+			}
+
+		case "min":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoxedInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Min = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAcceleratorTypeSet(v *[]types.AcceleratorType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AcceleratorType
+	if *v == nil {
+		cv = []types.AcceleratorType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AcceleratorType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected AcceleratorType to be of type string, got %T instead", value)
+			}
+			col = types.AcceleratorType(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentAccessDeniedException(v **types.AccessDeniedException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8446,6 +8730,42 @@ func awsAwsjson11_deserializeDocumentAdvancedConfiguration(v **types.AdvancedCon
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAllowedInstanceTypeSet(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected AllowedInstanceType to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -8834,6 +9154,63 @@ func awsAwsjson11_deserializeDocumentAwsVpcConfiguration(v **types.AwsVpcConfigu
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentBaselineEbsBandwidthMbpsRequest(v **types.BaselineEbsBandwidthMbpsRequest, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BaselineEbsBandwidthMbpsRequest
+	if *v == nil {
+		sv = &types.BaselineEbsBandwidthMbpsRequest{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "max":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoxedInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Max = ptr.Int32(int32(i64))
+			}
+
+		case "min":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoxedInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Min = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentBlockedException(v **types.BlockedException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8910,6 +9287,20 @@ func awsAwsjson11_deserializeDocumentCapacityProvider(v **types.CapacityProvider
 				sv.CapacityProviderArn = ptr.String(jtv)
 			}
 
+		case "cluster":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Cluster = ptr.String(jtv)
+			}
+
+		case "managedInstancesProvider":
+			if err := awsAwsjson11_deserializeDocumentManagedInstancesProvider(&sv.ManagedInstancesProvider, value); err != nil {
+				return err
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8931,6 +9322,15 @@ func awsAwsjson11_deserializeDocumentCapacityProvider(v **types.CapacityProvider
 		case "tags":
 			if err := awsAwsjson11_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapacityProviderType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.CapacityProviderType(jtv)
 			}
 
 		case "updateStatus":
@@ -9323,6 +9723,46 @@ func awsAwsjson11_deserializeDocumentClusterConfiguration(v **types.ClusterConfi
 		case "managedStorageConfiguration":
 			if err := awsAwsjson11_deserializeDocumentManagedStorageConfiguration(&sv.ManagedStorageConfiguration, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentClusterContainsCapacityProviderException(v **types.ClusterContainsCapacityProviderException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClusterContainsCapacityProviderException
+	if *v == nil {
+		sv = &types.ClusterContainsCapacityProviderException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -10930,6 +11370,42 @@ func awsAwsjson11_deserializeDocumentContainers(v *[]types.Container, value inte
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentCpuManufacturerSet(v *[]types.CpuManufacturer, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.CpuManufacturer
+	if *v == nil {
+		cv = []types.CpuManufacturer{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.CpuManufacturer
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected CpuManufacturer to be of type string, got %T instead", value)
+			}
+			col = types.CpuManufacturer(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentDeployment(v **types.Deployment, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12194,6 +12670,42 @@ func awsAwsjson11_deserializeDocumentEphemeralStorage(v **types.EphemeralStorage
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentExcludedInstanceTypeSet(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ExcludedInstanceType to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentExecuteCommandConfiguration(v **types.ExecuteCommandConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13021,6 +13533,42 @@ func awsAwsjson11_deserializeDocumentInferenceAccelerators(v *[]types.InferenceA
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentInstanceGenerationSet(v *[]types.InstanceGeneration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.InstanceGeneration
+	if *v == nil {
+		cv = []types.InstanceGeneration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.InstanceGeneration
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected InstanceGeneration to be of type string, got %T instead", value)
+			}
+			col = types.InstanceGeneration(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentInstanceHealthCheckResult(v **types.InstanceHealthCheckResult, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13133,6 +13681,261 @@ func awsAwsjson11_deserializeDocumentInstanceHealthCheckResultList(v *[]types.In
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentInstanceLaunchTemplate(v **types.InstanceLaunchTemplate, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InstanceLaunchTemplate
+	if *v == nil {
+		sv = &types.InstanceLaunchTemplate{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ec2InstanceProfileArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Ec2InstanceProfileArn = ptr.String(jtv)
+			}
+
+		case "instanceRequirements":
+			if err := awsAwsjson11_deserializeDocumentInstanceRequirementsRequest(&sv.InstanceRequirements, value); err != nil {
+				return err
+			}
+
+		case "monitoring":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ManagedInstancesMonitoringOptions to be of type string, got %T instead", value)
+				}
+				sv.Monitoring = types.ManagedInstancesMonitoringOptions(jtv)
+			}
+
+		case "networkConfiguration":
+			if err := awsAwsjson11_deserializeDocumentManagedInstancesNetworkConfiguration(&sv.NetworkConfiguration, value); err != nil {
+				return err
+			}
+
+		case "storageConfiguration":
+			if err := awsAwsjson11_deserializeDocumentManagedInstancesStorageConfiguration(&sv.StorageConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentInstanceRequirementsRequest(v **types.InstanceRequirementsRequest, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InstanceRequirementsRequest
+	if *v == nil {
+		sv = &types.InstanceRequirementsRequest{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "acceleratorCount":
+			if err := awsAwsjson11_deserializeDocumentAcceleratorCountRequest(&sv.AcceleratorCount, value); err != nil {
+				return err
+			}
+
+		case "acceleratorManufacturers":
+			if err := awsAwsjson11_deserializeDocumentAcceleratorManufacturerSet(&sv.AcceleratorManufacturers, value); err != nil {
+				return err
+			}
+
+		case "acceleratorNames":
+			if err := awsAwsjson11_deserializeDocumentAcceleratorNameSet(&sv.AcceleratorNames, value); err != nil {
+				return err
+			}
+
+		case "acceleratorTotalMemoryMiB":
+			if err := awsAwsjson11_deserializeDocumentAcceleratorTotalMemoryMiBRequest(&sv.AcceleratorTotalMemoryMiB, value); err != nil {
+				return err
+			}
+
+		case "acceleratorTypes":
+			if err := awsAwsjson11_deserializeDocumentAcceleratorTypeSet(&sv.AcceleratorTypes, value); err != nil {
+				return err
+			}
+
+		case "allowedInstanceTypes":
+			if err := awsAwsjson11_deserializeDocumentAllowedInstanceTypeSet(&sv.AllowedInstanceTypes, value); err != nil {
+				return err
+			}
+
+		case "bareMetal":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BareMetal to be of type string, got %T instead", value)
+				}
+				sv.BareMetal = types.BareMetal(jtv)
+			}
+
+		case "baselineEbsBandwidthMbps":
+			if err := awsAwsjson11_deserializeDocumentBaselineEbsBandwidthMbpsRequest(&sv.BaselineEbsBandwidthMbps, value); err != nil {
+				return err
+			}
+
+		case "burstablePerformance":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BurstablePerformance to be of type string, got %T instead", value)
+				}
+				sv.BurstablePerformance = types.BurstablePerformance(jtv)
+			}
+
+		case "cpuManufacturers":
+			if err := awsAwsjson11_deserializeDocumentCpuManufacturerSet(&sv.CpuManufacturers, value); err != nil {
+				return err
+			}
+
+		case "excludedInstanceTypes":
+			if err := awsAwsjson11_deserializeDocumentExcludedInstanceTypeSet(&sv.ExcludedInstanceTypes, value); err != nil {
+				return err
+			}
+
+		case "instanceGenerations":
+			if err := awsAwsjson11_deserializeDocumentInstanceGenerationSet(&sv.InstanceGenerations, value); err != nil {
+				return err
+			}
+
+		case "localStorage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LocalStorage to be of type string, got %T instead", value)
+				}
+				sv.LocalStorage = types.LocalStorage(jtv)
+			}
+
+		case "localStorageTypes":
+			if err := awsAwsjson11_deserializeDocumentLocalStorageTypeSet(&sv.LocalStorageTypes, value); err != nil {
+				return err
+			}
+
+		case "maxSpotPriceAsPercentageOfOptimalOnDemandPrice":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoxedInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxSpotPriceAsPercentageOfOptimalOnDemandPrice = ptr.Int32(int32(i64))
+			}
+
+		case "memoryGiBPerVCpu":
+			if err := awsAwsjson11_deserializeDocumentMemoryGiBPerVCpuRequest(&sv.MemoryGiBPerVCpu, value); err != nil {
+				return err
+			}
+
+		case "memoryMiB":
+			if err := awsAwsjson11_deserializeDocumentMemoryMiBRequest(&sv.MemoryMiB, value); err != nil {
+				return err
+			}
+
+		case "networkBandwidthGbps":
+			if err := awsAwsjson11_deserializeDocumentNetworkBandwidthGbpsRequest(&sv.NetworkBandwidthGbps, value); err != nil {
+				return err
+			}
+
+		case "networkInterfaceCount":
+			if err := awsAwsjson11_deserializeDocumentNetworkInterfaceCountRequest(&sv.NetworkInterfaceCount, value); err != nil {
+				return err
+			}
+
+		case "onDemandMaxPricePercentageOverLowestPrice":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoxedInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.OnDemandMaxPricePercentageOverLowestPrice = ptr.Int32(int32(i64))
+			}
+
+		case "requireHibernateSupport":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.RequireHibernateSupport = ptr.Bool(jtv)
+			}
+
+		case "spotMaxPricePercentageOverLowestPrice":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoxedInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SpotMaxPricePercentageOverLowestPrice = ptr.Int32(int32(i64))
+			}
+
+		case "totalLocalStorageGB":
+			if err := awsAwsjson11_deserializeDocumentTotalLocalStorageGBRequest(&sv.TotalLocalStorageGB, value); err != nil {
+				return err
+			}
+
+		case "vCpuCount":
+			if err := awsAwsjson11_deserializeDocumentVCpuCountRangeRequest(&sv.VCpuCount, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -13550,6 +14353,42 @@ func awsAwsjson11_deserializeDocumentLoadBalancers(v *[]types.LoadBalancer, valu
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentLocalStorageTypeSet(v *[]types.LocalStorageType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.LocalStorageType
+	if *v == nil {
+		cv = []types.LocalStorageType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.LocalStorageType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected LocalStorageType to be of type string, got %T instead", value)
+			}
+			col = types.LocalStorageType(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentLogConfiguration(v **types.LogConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13744,6 +14583,145 @@ func awsAwsjson11_deserializeDocumentManagedAgents(v *[]types.ManagedAgent, valu
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentManagedInstancesNetworkConfiguration(v **types.ManagedInstancesNetworkConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ManagedInstancesNetworkConfiguration
+	if *v == nil {
+		sv = &types.ManagedInstancesNetworkConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "securityGroups":
+			if err := awsAwsjson11_deserializeDocumentStringList(&sv.SecurityGroups, value); err != nil {
+				return err
+			}
+
+		case "subnets":
+			if err := awsAwsjson11_deserializeDocumentStringList(&sv.Subnets, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentManagedInstancesProvider(v **types.ManagedInstancesProvider, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ManagedInstancesProvider
+	if *v == nil {
+		sv = &types.ManagedInstancesProvider{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "infrastructureRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.InfrastructureRoleArn = ptr.String(jtv)
+			}
+
+		case "instanceLaunchTemplate":
+			if err := awsAwsjson11_deserializeDocumentInstanceLaunchTemplate(&sv.InstanceLaunchTemplate, value); err != nil {
+				return err
+			}
+
+		case "propagateTags":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PropagateMITags to be of type string, got %T instead", value)
+				}
+				sv.PropagateTags = types.PropagateMITags(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentManagedInstancesStorageConfiguration(v **types.ManagedInstancesStorageConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ManagedInstancesStorageConfiguration
+	if *v == nil {
+		sv = &types.ManagedInstancesStorageConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "storageSizeGiB":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TaskVolumeStorageGiB to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StorageSizeGiB = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentManagedScaling(v **types.ManagedScaling, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13874,6 +14852,162 @@ func awsAwsjson11_deserializeDocumentManagedStorageConfiguration(v **types.Manag
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.KmsKeyId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentMemoryGiBPerVCpuRequest(v **types.MemoryGiBPerVCpuRequest, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MemoryGiBPerVCpuRequest
+	if *v == nil {
+		sv = &types.MemoryGiBPerVCpuRequest{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "max":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Max = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Max = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected BoxedDouble to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "min":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Min = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Min = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected BoxedDouble to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentMemoryMiBRequest(v **types.MemoryMiBRequest, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MemoryMiBRequest
+	if *v == nil {
+		sv = &types.MemoryMiBRequest{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "max":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoxedInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Max = ptr.Int32(int32(i64))
+			}
+
+		case "min":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoxedInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Min = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -14046,6 +15180,105 @@ func awsAwsjson11_deserializeDocumentNamespaceNotFoundException(v **types.Namesp
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentNetworkBandwidthGbpsRequest(v **types.NetworkBandwidthGbpsRequest, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NetworkBandwidthGbpsRequest
+	if *v == nil {
+		sv = &types.NetworkBandwidthGbpsRequest{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "max":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Max = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Max = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected BoxedDouble to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "min":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Min = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Min = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected BoxedDouble to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		default:
@@ -14267,6 +15500,63 @@ func awsAwsjson11_deserializeDocumentNetworkInterface(v **types.NetworkInterface
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.PrivateIpv4Address = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentNetworkInterfaceCountRequest(v **types.NetworkInterfaceCountRequest, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NetworkInterfaceCountRequest
+	if *v == nil {
+		sv = &types.NetworkInterfaceCountRequest{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "max":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoxedInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Max = ptr.Int32(int32(i64))
+			}
+
+		case "min":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoxedInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Min = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -19935,6 +21225,105 @@ func awsAwsjson11_deserializeDocumentTmpfsList(v *[]types.Tmpfs, value interface
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentTotalLocalStorageGBRequest(v **types.TotalLocalStorageGBRequest, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TotalLocalStorageGBRequest
+	if *v == nil {
+		sv = &types.TotalLocalStorageGBRequest{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "max":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Max = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Max = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected BoxedDouble to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "min":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Min = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Min = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected BoxedDouble to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentUlimit(v **types.Ulimit, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -20104,6 +21493,63 @@ func awsAwsjson11_deserializeDocumentUpdateInProgressException(v **types.UpdateI
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentVCpuCountRangeRequest(v **types.VCpuCountRangeRequest, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VCpuCountRangeRequest
+	if *v == nil {
+		sv = &types.VCpuCountRangeRequest{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "max":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoxedInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Max = ptr.Int32(int32(i64))
+			}
+
+		case "min":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoxedInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Min = ptr.Int32(int32(i64))
 			}
 
 		default:

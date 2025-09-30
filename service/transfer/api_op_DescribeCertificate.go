@@ -12,6 +12,12 @@ import (
 )
 
 // Describes the certificate that's identified by the CertificateId .
+//
+// Transfer Family automatically publishes a Amazon CloudWatch metric called
+// DaysUntilExpiry for imported certificates. This metric tracks the number of days
+// until the certificate expires based on the InactiveDate . The metric is
+// available in the AWS/Transfer namespace and includes the CertificateId as a
+// dimension.
 func (c *Client) DescribeCertificate(ctx context.Context, params *DescribeCertificateInput, optFns ...func(*Options)) (*DescribeCertificateOutput, error) {
 	if params == nil {
 		params = &DescribeCertificateInput{}

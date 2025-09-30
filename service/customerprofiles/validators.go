@@ -750,6 +750,26 @@ func (m *validateOpGetMatches) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetProfileHistoryRecord struct {
+}
+
+func (*validateOpGetProfileHistoryRecord) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetProfileHistoryRecord) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetProfileHistoryRecordInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetProfileHistoryRecordInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetProfileObjectType struct {
 }
 
@@ -1165,6 +1185,26 @@ func (m *validateOpListProfileAttributeValues) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListProfileAttributeValuesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListProfileHistoryRecords struct {
+}
+
+func (*validateOpListProfileHistoryRecords) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListProfileHistoryRecords) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListProfileHistoryRecordsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListProfileHistoryRecordsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1738,6 +1778,10 @@ func addOpGetMatchesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMatches{}, middleware.After)
 }
 
+func addOpGetProfileHistoryRecordValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetProfileHistoryRecord{}, middleware.After)
+}
+
 func addOpGetProfileObjectTypeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetProfileObjectType{}, middleware.After)
 }
@@ -1820,6 +1864,10 @@ func addOpListObjectTypeAttributesValidationMiddleware(stack *middleware.Stack) 
 
 func addOpListProfileAttributeValuesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListProfileAttributeValues{}, middleware.After)
+}
+
+func addOpListProfileHistoryRecordsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListProfileHistoryRecords{}, middleware.After)
 }
 
 func addOpListProfileObjectsValidationMiddleware(stack *middleware.Stack) error {
@@ -4183,6 +4231,27 @@ func validateOpGetMatchesInput(v *GetMatchesInput) error {
 	}
 }
 
+func validateOpGetProfileHistoryRecordInput(v *GetProfileHistoryRecordInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetProfileHistoryRecordInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.ProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileId"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetProfileObjectTypeInput(v *GetProfileObjectTypeInput) error {
 	if v == nil {
 		return nil
@@ -4541,6 +4610,24 @@ func validateOpListProfileAttributeValuesInput(v *ListProfileAttributeValuesInpu
 	}
 	if v.AttributeName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AttributeName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListProfileHistoryRecordsInput(v *ListProfileHistoryRecordsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListProfileHistoryRecordsInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.ProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

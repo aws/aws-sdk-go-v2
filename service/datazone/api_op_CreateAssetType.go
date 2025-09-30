@@ -16,8 +16,8 @@ import (
 //
 // Prerequisites:
 //
-//   - The form type with typeIdentifier and typeRevision must exist and be
-//     published.
+//   - The formsInput field is required, however, can be passed as empty (e.g.
+//     -forms-input {}) .
 //
 //   - You must have CreateAssetType permissions.
 //

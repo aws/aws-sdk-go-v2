@@ -39,10 +39,22 @@ type ListLiveSourcesInput struct {
 	// response to the current request. If there are more than MaxResults live
 	// sources, use the value of NextToken in the response to get the next page of
 	// results.
+	//
+	// The default value is 100. MediaTailor uses DynamoDB-based pagination, which
+	// means that a response might contain fewer than MaxResults items, including 0
+	// items, even when more results are available. To retrieve all results, you must
+	// continue making requests using the NextToken value from each response until the
+	// response no longer includes a NextToken value.
 	MaxResults *int32
 
 	// Pagination token returned by the list request when results exceed the maximum
 	// allowed. Use the token to fetch the next page of results.
+	//
+	// For the first ListLiveSources request, omit this value. For subsequent
+	// requests, get the value of NextToken from the previous response and specify
+	// that value for NextToken in the request. Continue making requests until the
+	// response no longer includes a NextToken value, which indicates that all results
+	// have been retrieved.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -202,6 +214,12 @@ type ListLiveSourcesPaginatorOptions struct {
 	// response to the current request. If there are more than MaxResults live
 	// sources, use the value of NextToken in the response to get the next page of
 	// results.
+	//
+	// The default value is 100. MediaTailor uses DynamoDB-based pagination, which
+	// means that a response might contain fewer than MaxResults items, including 0
+	// items, even when more results are available. To retrieve all results, you must
+	// continue making requests using the NextToken value from each response until the
+	// response no longer includes a NextToken value.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -891,14 +891,23 @@ type CreateFileSystemOntapConfiguration struct {
 	// The SSD IOPS configuration for the FSx for ONTAP file system.
 	DiskIopsConfiguration *DiskIopsConfiguration
 
-	// (Multi-AZ only) Specifies the IP address range in which the endpoints to access
-	// your file system will be created. By default in the Amazon FSx API, Amazon FSx
-	// selects an unused IP address range for you from the 198.19.* range. By default
-	// in the Amazon FSx console, Amazon FSx chooses the last 64 IP addresses from the
-	// VPC’s primary CIDR range to use as the endpoint IP address range for the file
-	// system. You can have overlapping endpoint IP addresses for file systems deployed
-	// in the same VPC/route tables, as long as they don't overlap with any subnet.
+	// (Multi-AZ only) Specifies the IPv4 address range in which the endpoints to
+	// access your file system will be created. By default in the Amazon FSx API,
+	// Amazon FSx selects an unused IP address range for you from the 198.19.* range.
+	// By default in the Amazon FSx console, Amazon FSx chooses the last 64 IP
+	// addresses from the VPC’s primary CIDR range to use as the endpoint IP address
+	// range for the file system. You can have overlapping endpoint IP addresses for
+	// file systems deployed in the same VPC/route tables, as long as they don't
+	// overlap with any subnet.
 	EndpointIpAddressRange *string
+
+	// (Multi-AZ only) Specifies the IPv6 address range in which the endpoints to
+	// access your file system will be created. By default in the Amazon FSx API and
+	// Amazon FSx console, Amazon FSx selects an available /118 IP address range for
+	// you from one of the VPC's CIDR ranges. You can have overlapping endpoint IP
+	// addresses for file systems deployed in the same VPC/route tables, as long as
+	// they don't overlap with any subnet.
+	EndpointIpv6AddressRange *string
 
 	// The ONTAP administrative password for the fsxadmin user with which you
 	// administer your file system using the NetApp ONTAP CLI and REST API.
@@ -1081,20 +1090,20 @@ type CreateFileSystemOpenZFSConfiguration struct {
 	// was provisioned, or the mode (by the customer or by Amazon FSx).
 	DiskIopsConfiguration *DiskIopsConfiguration
 
-	// (Multi-AZ only) Specifies the IP address range in which the endpoints to access
-	// your file system will be created. By default in the Amazon FSx API and Amazon
-	// FSx console, Amazon FSx selects an available /28 IP address range for you from
-	// one of the VPC's CIDR ranges. You can have overlapping endpoint IP addresses for
-	// file systems deployed in the same VPC/route tables, as long as they don't
-	// overlap with any subnet.
+	// (Multi-AZ only) Specifies the IPv4 address range in which the endpoints to
+	// access your file system will be created. By default in the Amazon FSx API and
+	// Amazon FSx console, Amazon FSx selects an available /28 IP address range for you
+	// from one of the VPC's CIDR ranges. You can have overlapping endpoint IP
+	// addresses for file systems deployed in the same VPC/route tables, as long as
+	// they don't overlap with any subnet.
 	EndpointIpAddressRange *string
 
-	// (Multi-AZ only) Specifies the IP address range in which the endpoints to access
-	// your file system will be created. By default in the Amazon FSx API and Amazon
-	// FSx console, Amazon FSx selects an available /118 IP address range for you from
-	// one of the VPC's CIDR ranges. You can have overlapping endpoint IP addresses for
-	// file systems deployed in the same VPC/route tables, as long as they don't
-	// overlap with any subnet.
+	// (Multi-AZ only) Specifies the IPv6 address range in which the endpoints to
+	// access your file system will be created. By default in the Amazon FSx API and
+	// Amazon FSx console, Amazon FSx selects an available /118 IP address range for
+	// you from one of the VPC's CIDR ranges. You can have overlapping endpoint IP
+	// addresses for file systems deployed in the same VPC/route tables, as long as
+	// they don't overlap with any subnet.
 	EndpointIpv6AddressRange *string
 
 	// Required when DeploymentType is set to MULTI_AZ_1 . This specifies the subnet in
@@ -1148,10 +1157,7 @@ type CreateFileSystemWindowsConfiguration struct {
 	// create the file system using the AssociateFileSystemAliases operation. You can
 	// remove DNS aliases from the file system after it is created using the
 	// DisassociateFileSystemAliases operation. You only need to specify the alias name
-	// in the request payload.
-	//
-	// For more information, see [Working with DNS Aliases] and [Walkthrough 5: Using DNS aliases to access your file system], including additional steps you must take to be
-	// able to access your file system using a DNS alias.
+	// in the request payload. For more information, see [Managing DNS aliases]and [Accessing data using DNS aliases].
 	//
 	// An alias name has to meet the following requirements:
 	//
@@ -1168,8 +1174,8 @@ type CreateFileSystemWindowsConfiguration struct {
 	// letters (a-z), regardless of how you specify them: as uppercase letters,
 	// lowercase letters, or the corresponding letters in escape codes.
 	//
-	// [Walkthrough 5: Using DNS aliases to access your file system]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/walkthrough05-file-system-custom-CNAME.html
-	// [Working with DNS Aliases]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html
+	// [Accessing data using DNS aliases]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/dns-aliases.html
+	// [Managing DNS aliases]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html
 	Aliases []string
 
 	// The configuration that Amazon FSx for Windows File Server uses to audit and log
@@ -2699,8 +2705,11 @@ type FileSystemEndpoint struct {
 	// The file system's DNS name. You can mount your file system using its DNS name.
 	DNSName *string
 
-	// IP addresses of the file system endpoint.
+	// The IPv4 addresses of the file system endpoint.
 	IpAddresses []string
+
+	// The IPv6 addresses of the file system endpoint.
+	Ipv6Addresses []string
 
 	noSmithyDocumentSerde
 }
@@ -3118,14 +3127,22 @@ type OntapFileSystemConfiguration struct {
 	// provisioned IOPS and the provision mode.
 	DiskIopsConfiguration *DiskIopsConfiguration
 
-	// (Multi-AZ only) Specifies the IP address range in which the endpoints to access
-	// your file system will be created. By default in the Amazon FSx API, Amazon FSx
-	// selects an unused IP address range for you from the 198.19.* range. By default
-	// in the Amazon FSx console, Amazon FSx chooses the last 64 IP addresses from the
-	// VPC’s primary CIDR range to use as the endpoint IP address range for the file
-	// system. You can have overlapping endpoint IP addresses for file systems deployed
-	// in the same VPC/route tables.
+	// (Multi-AZ only) Specifies the IPv4 address range in which the endpoints to
+	// access your file system will be created. By default in the Amazon FSx API,
+	// Amazon FSx selects an unused IP address range for you from the 198.19.* range.
+	// By default in the Amazon FSx console, Amazon FSx chooses the last 64 IP
+	// addresses from the VPC’s primary CIDR range to use as the endpoint IP address
+	// range for the file system. You can have overlapping endpoint IP addresses for
+	// file systems deployed in the same VPC/route tables.
 	EndpointIpAddressRange *string
+
+	// (Multi-AZ only) Specifies the IPv6 address range in which the endpoints to
+	// access your file system will be created. By default in the Amazon FSx API and
+	// Amazon FSx console, Amazon FSx selects an available /118 IP address range for
+	// you from one of the VPC's CIDR ranges. You can have overlapping endpoint IP
+	// addresses for file systems deployed in the same VPC/route tables, as long as
+	// they don't overlap with any subnet.
+	EndpointIpv6AddressRange *string
 
 	// The Management and Intercluster endpoints that are used to access data or to
 	// manage the file system using the NetApp ONTAP CLI, REST API, or NetApp
@@ -3442,27 +3459,27 @@ type OpenZFSFileSystemConfiguration struct {
 	// was provisioned, or the mode (by the customer or by Amazon FSx).
 	DiskIopsConfiguration *DiskIopsConfiguration
 
-	// The IP address of the endpoint that is used to access data or to manage the
+	// The IPv4 address of the endpoint that is used to access data or to manage the
 	// file system.
 	EndpointIpAddress *string
 
-	// (Multi-AZ only) Specifies the IP address range in which the endpoints to access
-	// your file system will be created. By default in the Amazon FSx API and Amazon
-	// FSx console, Amazon FSx selects an available /28 IP address range for you from
-	// one of the VPC's CIDR ranges. You can have overlapping endpoint IP addresses for
-	// file systems deployed in the same VPC/route tables.
+	// (Multi-AZ only) Specifies the IPv4 address range in which the endpoints to
+	// access your file system will be created. By default in the Amazon FSx API and
+	// Amazon FSx console, Amazon FSx selects an available /28 IP address range for you
+	// from one of the VPC's CIDR ranges. You can have overlapping endpoint IP
+	// addresses for file systems deployed in the same VPC/route tables.
 	EndpointIpAddressRange *string
 
 	// The IPv6 address of the endpoint that is used to access data or to manage the
 	// file system.
 	EndpointIpv6Address *string
 
-	// (Multi-AZ only) Specifies the IP address range in which the endpoints to access
-	// your file system will be created. By default in the Amazon FSx API and Amazon
-	// FSx console, Amazon FSx selects an available /118 IP address range for you from
-	// one of the VPC's CIDR ranges. You can have overlapping endpoint IP addresses for
-	// file systems deployed in the same VPC/route tables, as long as they don't
-	// overlap with any subnet.
+	// (Multi-AZ only) Specifies the IPv6 address range in which the endpoints to
+	// access your file system will be created. By default in the Amazon FSx API and
+	// Amazon FSx console, Amazon FSx selects an available /118 IP address range for
+	// you from one of the VPC's CIDR ranges. You can have overlapping endpoint IP
+	// addresses for file systems deployed in the same VPC/route tables, as long as
+	// they don't overlap with any subnet.
 	EndpointIpv6AddressRange *string
 
 	// Required when DeploymentType is set to MULTI_AZ_1 . This specifies the subnet in
@@ -4299,8 +4316,11 @@ type SvmEndpoint struct {
 	// The file system's DNS name. You can mount your file system using its DNS name.
 	DNSName *string
 
-	// The SVM endpoint's IP addresses.
+	// The SVM endpoint's IPv4 addresses.
 	IpAddresses []string
+
+	// The SVM endpoint's IPv6 addresses.
+	Ipv6Addresses []string
 
 	noSmithyDocumentSerde
 }
@@ -4579,6 +4599,14 @@ type UpdateFileSystemOntapConfiguration struct {
 	// [File system storage capacity and IOPS]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/storage-capacity-and-IOPS.html
 	DiskIopsConfiguration *DiskIopsConfiguration
 
+	// (Multi-AZ only) Specifies the IPv6 address range in which the endpoints to
+	// access your file system will be created. By default in the Amazon FSx API and
+	// Amazon FSx console, Amazon FSx selects an available /118 IP address range for
+	// you from one of the VPC's CIDR ranges. You can have overlapping endpoint IP
+	// addresses for file systems deployed in the same VPC/route tables, as long as
+	// they don't overlap with any subnet.
+	EndpointIpv6AddressRange *string
+
 	// Update the password for the fsxadmin user by entering a new password. You use
 	// the fsxadmin user to access the NetApp ONTAP CLI and REST API to manage your
 	// file system resources. For more information, see [Managing resources using NetApp Application].
@@ -4700,12 +4728,12 @@ type UpdateFileSystemOpenZFSConfiguration struct {
 	// was provisioned, or the mode (by the customer or by Amazon FSx).
 	DiskIopsConfiguration *DiskIopsConfiguration
 
-	// (Multi-AZ only) Specifies the IP address range in which the endpoints to access
-	// your file system will be created. By default in the Amazon FSx API and Amazon
-	// FSx console, Amazon FSx selects an available /118 IP address range for you from
-	// one of the VPC's CIDR ranges. You can have overlapping endpoint IP addresses for
-	// file systems deployed in the same VPC/route tables, as long as they don't
-	// overlap with any subnet.
+	// (Multi-AZ only) Specifies the IPv6 address range in which the endpoints to
+	// access your file system will be created. By default in the Amazon FSx API and
+	// Amazon FSx console, Amazon FSx selects an available /118 IP address range for
+	// you from one of the VPC's CIDR ranges. You can have overlapping endpoint IP
+	// addresses for file systems deployed in the same VPC/route tables, as long as
+	// they don't overlap with any subnet.
 	EndpointIpv6AddressRange *string
 
 	//  The configuration for the optional provisioned SSD read cache on file systems
@@ -5169,9 +5197,9 @@ type WindowsFileSystemConfiguration struct {
 	// create the file system using the AssociateFileSystemAliases operation. You can
 	// remove DNS aliases from the file system after it is created using the
 	// DisassociateFileSystemAliases operation. You only need to specify the alias name
-	// in the request payload. For more information, see [DNS aliases].
+	// in the request payload. For more information, see [Managing DNS aliases].
 	//
-	// [DNS aliases]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html
+	// [Managing DNS aliases]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html
 	Aliases []Alias
 
 	// The configuration that Amazon FSx for Windows File Server uses to audit and log
@@ -5223,19 +5251,28 @@ type WindowsFileSystemConfiguration struct {
 	// The list of maintenance operations in progress for this file system.
 	MaintenanceOperationsInProgress []FileSystemMaintenanceOperation
 
-	// For MULTI_AZ_1 deployment types, the IP address of the primary, or preferred,
+	// For MULTI_AZ_1 deployment types, the IPv4 address of the primary, or preferred,
 	// file server.
 	//
 	// Use this IP address when mounting the file system on Linux SMB clients or
 	// Windows SMB clients that are not joined to a Microsoft Active Directory.
-	// Applicable for all Windows file system deployment types. This IP address is
+	// Applicable for all Windows file system deployment types. This IPv4 address is
 	// temporarily unavailable when the file system is undergoing maintenance. For
 	// Linux and Windows SMB clients that are joined to an Active Directory, use the
 	// file system's DNSName instead. For more information on mapping and mounting file
-	// shares, see [Accessing File Shares].
+	// shares, see [Accessing data using file shares].
 	//
-	// [Accessing File Shares]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/accessing-file-shares.html
+	// [Accessing data using file shares]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-file-shares.html
 	PreferredFileServerIp *string
+
+	// For MULTI_AZ_1 deployment types, the IPv6 address of the primary, or preferred,
+	// file server. Use this IP address when mounting the file system on Linux SMB
+	// clients or Windows SMB clients that are not joined to a Microsoft Active
+	// Directory. Applicable for all Windows file system deployment types. This IPv6
+	// address is temporarily unavailable when the file system is undergoing
+	// maintenance. For Linux and Windows SMB clients that are joined to an Active
+	// Directory, use the file system's DNSName instead.
+	PreferredFileServerIpv6 *string
 
 	// For MULTI_AZ_1 deployment types, it specifies the ID of the subnet where the
 	// preferred file server is located. Must be one of the two subnet IDs specified in

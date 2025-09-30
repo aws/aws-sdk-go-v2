@@ -10,6 +10,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// This API controls public sharing settings for your entire QuickSight account,
+// affecting data security and access. When you enable public sharing:
+//
+//   - Dashboards can be shared publicly
+//
+//   - This setting affects your entire Amazon Web Services account and all
+//     QuickSight users
+//
+// Before proceeding: Ensure you understand the security implications and have
+// proper IAM permissions configured.
+//
 // Use the UpdatePublicSharingSettings operation to turn on or turn off the public
 // sharing settings of an QuickSight dashboard.
 //

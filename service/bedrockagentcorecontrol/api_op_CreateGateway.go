@@ -88,6 +88,9 @@ type CreateGatewayInput struct {
 	// parameter.
 	ProtocolConfiguration types.GatewayProtocolConfiguration
 
+	// A map of key-value pairs to associate with the gateway as metadata tags.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 

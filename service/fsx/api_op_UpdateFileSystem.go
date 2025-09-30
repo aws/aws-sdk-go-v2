@@ -73,6 +73,8 @@ import (
 //
 //   - DiskIopsConfiguration
 //
+//   - EndpointIpv6AddressRange
+//
 //   - FsxAdminPassword
 //
 //   - HAPairs

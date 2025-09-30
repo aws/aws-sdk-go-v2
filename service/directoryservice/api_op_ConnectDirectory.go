@@ -60,6 +60,10 @@ type ConnectDirectoryInput struct {
 	// A description for the directory.
 	Description *string
 
+	// The network type for your directory. The default value is IPv4 or IPv6 based on
+	// the provided subnet capabilities.
+	NetworkType types.NetworkType
+
 	// The NetBIOS name of your self-managed directory, such as CORP .
 	ShortName *string
 

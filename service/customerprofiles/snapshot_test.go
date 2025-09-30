@@ -506,6 +506,18 @@ func TestCheckSnapshot_GetMatches(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetProfileHistoryRecord(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetProfileHistoryRecord(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetProfileHistoryRecord")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetProfileObjectType(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetProfileObjectType(context.Background(), nil, func(o *Options) {
@@ -763,6 +775,18 @@ func TestCheckSnapshot_ListProfileAttributeValues(t *testing.T) {
 	_, err := svc.ListProfileAttributeValues(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListProfileAttributeValues")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListProfileHistoryRecords(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListProfileHistoryRecords(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListProfileHistoryRecords")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1477,6 +1501,18 @@ func TestUpdateSnapshot_GetMatches(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetProfileHistoryRecord(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetProfileHistoryRecord(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetProfileHistoryRecord")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetProfileObjectType(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetProfileObjectType(context.Background(), nil, func(o *Options) {
@@ -1734,6 +1770,18 @@ func TestUpdateSnapshot_ListProfileAttributeValues(t *testing.T) {
 	_, err := svc.ListProfileAttributeValues(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListProfileAttributeValues")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListProfileHistoryRecords(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListProfileHistoryRecords(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListProfileHistoryRecords")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

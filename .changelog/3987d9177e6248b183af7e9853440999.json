@@ -1,0 +1,8 @@
+{
+    "id": "3987d917-7e62-48b1-83af-7e9853440999",
+    "type": "feature",
+    "description": "Added support for FIPS VPC endpoints in FIPS-enabled AWS Regions.",
+    "modules": [
+        "service/datasync"
+    ]
+}

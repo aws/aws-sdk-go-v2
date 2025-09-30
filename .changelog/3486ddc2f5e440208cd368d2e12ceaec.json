@@ -1,0 +1,8 @@
+{
+    "id": "3486ddc2-f5e4-4020-8cd3-68d2e12ceaec",
+    "type": "feature",
+    "description": "This release adds support for creation of EMR on EKS Connections in Amazon DataZone.",
+    "modules": [
+        "service/datazone"
+    ]
+}

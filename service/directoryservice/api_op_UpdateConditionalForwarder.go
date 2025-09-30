@@ -36,17 +36,19 @@ type UpdateConditionalForwarderInput struct {
 	// This member is required.
 	DirectoryId *string
 
-	// The updated IP addresses of the remote DNS server associated with the
-	// conditional forwarder.
-	//
-	// This member is required.
-	DnsIpAddrs []string
-
 	// The fully qualified domain name (FQDN) of the remote domain with which you will
 	// set up a trust relationship.
 	//
 	// This member is required.
 	RemoteDomainName *string
+
+	// The updated IP addresses of the remote DNS server associated with the
+	// conditional forwarder.
+	DnsIpAddrs []string
+
+	// The updated IPv6 addresses of the remote DNS server associated with the
+	// conditional forwarder.
+	DnsIpv6Addrs []string
 
 	noSmithyDocumentSerde
 }

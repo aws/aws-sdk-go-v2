@@ -2,6 +2,39 @@
 
 package types
 
+type ActionType string
+
+// Enum values for ActionType
+const (
+	ActionTypeAddedProfileKey   ActionType = "ADDED_PROFILE_KEY"
+	ActionTypeDeletedProfileKey ActionType = "DELETED_PROFILE_KEY"
+	ActionTypeCreated           ActionType = "CREATED"
+	ActionTypeUpdated           ActionType = "UPDATED"
+	ActionTypeIngested          ActionType = "INGESTED"
+	ActionTypeDeletedByCustomer ActionType = "DELETED_BY_CUSTOMER"
+	ActionTypeExpired           ActionType = "EXPIRED"
+	ActionTypeMerged            ActionType = "MERGED"
+	ActionTypeDeletedByMerge    ActionType = "DELETED_BY_MERGE"
+)
+
+// Values returns all known values for ActionType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ActionType) Values() []ActionType {
+	return []ActionType{
+		"ADDED_PROFILE_KEY",
+		"DELETED_PROFILE_KEY",
+		"CREATED",
+		"UPDATED",
+		"INGESTED",
+		"DELETED_BY_CUSTOMER",
+		"EXPIRED",
+		"MERGED",
+		"DELETED_BY_MERGE",
+	}
+}
+
 type AttributeDimensionType string
 
 // Enum values for AttributeDimensionType

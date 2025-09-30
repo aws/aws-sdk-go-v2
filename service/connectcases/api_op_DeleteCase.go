@@ -20,7 +20,7 @@ import (
 //
 //   - Perform any operations that require the CaseID
 //
-// This action is irreversible. Once you delete a case, you cannot recover its
+// This action is irreversible. After you delete a case, you cannot recover its
 // data.
 func (c *Client) DeleteCase(ctx context.Context, params *DeleteCaseInput, optFns ...func(*Options)) (*DeleteCaseOutput, error) {
 	if params == nil {

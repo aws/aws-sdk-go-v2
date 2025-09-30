@@ -40,6 +40,12 @@ func (c *Client) CreateGlobalCluster(ctx context.Context, params *CreateGlobalCl
 
 type CreateGlobalClusterInput struct {
 
+	// The cluster identifier for this global database cluster. This parameter is
+	// stored as a lowercase string.
+	//
+	// This member is required.
+	GlobalClusterIdentifier *string
+
 	// The name for your database of up to 64 alphanumeric characters. If you don't
 	// specify a name, Amazon Aurora doesn't create a database in the global database
 	// cluster.
@@ -96,10 +102,6 @@ type CreateGlobalClusterInput struct {
 	//   - Can't be specified if SourceDBClusterIdentifier is specified. In this case,
 	//   Amazon Aurora uses the engine version of the source DB cluster.
 	EngineVersion *string
-
-	// The cluster identifier for this global database cluster. This parameter is
-	// stored as a lowercase string.
-	GlobalClusterIdentifier *string
 
 	// The Amazon Resource Name (ARN) to use as the primary cluster of the global
 	// database.
@@ -208,6 +210,9 @@ func (c *Client) addOperationCreateGlobalClusterMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
+	if err = addOpCreateGlobalClusterValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateGlobalCluster(options.Region), middleware.Before); err != nil {

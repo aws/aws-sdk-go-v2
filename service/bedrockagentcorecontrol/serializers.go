@@ -716,6 +716,13 @@ func awsRestjson1_serializeOpDocumentCreateGatewayInput(v *CreateGatewayInput, v
 		ok.String(*v.RoleArn)
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagsMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

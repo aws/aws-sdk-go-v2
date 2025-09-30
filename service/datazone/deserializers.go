@@ -47287,6 +47287,55 @@ func awsRestjson1_deserializeDocumentListingSummaryItems(v *[]types.ListingSumma
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentManagedEndpointCredentials(v **types.ManagedEndpointCredentials, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ManagedEndpointCredentials
+	if *v == nil {
+		sv = &types.ManagedEndpointCredentials{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "id":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Id = ptr.String(jtv)
+			}
+
+		case "token":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Token = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentMatchCriteria(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -52683,6 +52732,15 @@ func awsRestjson1_deserializeDocumentSparkEmrPropertiesOutput(v **types.SparkEmr
 
 	for key, value := range shape {
 		switch key {
+		case "certificateData":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CertificateData = ptr.String(jtv)
+			}
+
 		case "computeArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -52753,6 +52811,20 @@ func awsRestjson1_deserializeDocumentSparkEmrPropertiesOutput(v **types.SparkEmr
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.LogUri = ptr.String(jtv)
+			}
+
+		case "managedEndpointArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ManagedEndpointArn = ptr.String(jtv)
+			}
+
+		case "managedEndpointCredentials":
+			if err := awsRestjson1_deserializeDocumentManagedEndpointCredentials(&sv.ManagedEndpointCredentials, value); err != nil {
+				return err
 			}
 
 		case "pythonVirtualEnv":

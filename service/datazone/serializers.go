@@ -20558,6 +20558,11 @@ func awsRestjson1_serializeDocumentSparkEmrPropertiesInput(v *types.SparkEmrProp
 		ok.String(*v.LogUri)
 	}
 
+	if v.ManagedEndpointArn != nil {
+		ok := object.Key("managedEndpointArn")
+		ok.String(*v.ManagedEndpointArn)
+	}
+
 	if v.PythonVirtualEnv != nil {
 		ok := object.Key("pythonVirtualEnv")
 		ok.String(*v.PythonVirtualEnv)
@@ -20598,6 +20603,11 @@ func awsRestjson1_serializeDocumentSparkEmrPropertiesPatch(v *types.SparkEmrProp
 	if v.LogUri != nil {
 		ok := object.Key("logUri")
 		ok.String(*v.LogUri)
+	}
+
+	if v.ManagedEndpointArn != nil {
+		ok := object.Key("managedEndpointArn")
+		ok.String(*v.ManagedEndpointArn)
 	}
 
 	if v.PythonVirtualEnv != nil {

@@ -384,11 +384,17 @@ func awsAwsquery_deserializeOpErrorAddTagsToResource(response *smithyhttp.Respon
 	case strings.EqualFold("DBInstanceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBInstanceNotFoundFault(response, errorBody)
 
+	case strings.EqualFold("DBProxyEndpointNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorDBProxyEndpointNotFoundFault(response, errorBody)
+
 	case strings.EqualFold("DBProxyNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorDBProxyNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("DBProxyTargetGroupNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorDBProxyTargetGroupNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("DBShardGroupNotFound", errorCode):
+		return awsAwsquery_deserializeErrorDBShardGroupNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("DBSnapshotNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBSnapshotNotFoundFault(response, errorBody)
@@ -398,6 +404,15 @@ func awsAwsquery_deserializeOpErrorAddTagsToResource(response *smithyhttp.Respon
 
 	case strings.EqualFold("IntegrationNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorIntegrationNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("InvalidDBClusterEndpointStateFault", errorCode):
+		return awsAwsquery_deserializeErrorInvalidDBClusterEndpointStateFault(response, errorBody)
+
+	case strings.EqualFold("InvalidDBClusterStateFault", errorCode):
+		return awsAwsquery_deserializeErrorInvalidDBClusterStateFault(response, errorBody)
+
+	case strings.EqualFold("InvalidDBInstanceState", errorCode):
+		return awsAwsquery_deserializeErrorInvalidDBInstanceStateFault(response, errorBody)
 
 	case strings.EqualFold("TenantDatabaseNotFound", errorCode):
 		return awsAwsquery_deserializeErrorTenantDatabaseNotFoundFault(response, errorBody)
@@ -1621,6 +1636,9 @@ func awsAwsquery_deserializeOpErrorCreateBlueGreenDeployment(response *smithyhtt
 	case strings.EqualFold("SourceDatabaseNotSupportedFault", errorCode):
 		return awsAwsquery_deserializeErrorSourceDatabaseNotSupportedFault(response, errorBody)
 
+	case strings.EqualFold("StorageQuotaExceeded", errorCode):
+		return awsAwsquery_deserializeErrorStorageQuotaExceededFault(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -1736,11 +1754,17 @@ func awsAwsquery_deserializeOpErrorCreateCustomDBEngineVersion(response *smithyh
 	case strings.EqualFold("CustomDBEngineVersionAlreadyExistsFault", errorCode):
 		return awsAwsquery_deserializeErrorCustomDBEngineVersionAlreadyExistsFault(response, errorBody)
 
+	case strings.EqualFold("CustomDBEngineVersionNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorCustomDBEngineVersionNotFoundFault(response, errorBody)
+
 	case strings.EqualFold("CustomDBEngineVersionQuotaExceededFault", errorCode):
 		return awsAwsquery_deserializeErrorCustomDBEngineVersionQuotaExceededFault(response, errorBody)
 
 	case strings.EqualFold("Ec2ImagePropertiesNotSupportedFault", errorCode):
 		return awsAwsquery_deserializeErrorEc2ImagePropertiesNotSupportedFault(response, errorBody)
+
+	case strings.EqualFold("InvalidCustomDBEngineVersionStateFault", errorCode):
+		return awsAwsquery_deserializeErrorInvalidCustomDBEngineVersionStateFault(response, errorBody)
 
 	case strings.EqualFold("KMSKeyNotAccessibleFault", errorCode):
 		return awsAwsquery_deserializeErrorKMSKeyNotAccessibleFault(response, errorBody)
@@ -1911,11 +1935,17 @@ func awsAwsquery_deserializeOpErrorCreateDBCluster(response *smithyhttp.Response
 	case strings.EqualFold("KMSKeyNotAccessibleFault", errorCode):
 		return awsAwsquery_deserializeErrorKMSKeyNotAccessibleFault(response, errorBody)
 
+	case strings.EqualFold("NetworkTypeNotSupported", errorCode):
+		return awsAwsquery_deserializeErrorNetworkTypeNotSupported(response, errorBody)
+
 	case strings.EqualFold("OptionGroupNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorOptionGroupNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("StorageQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorStorageQuotaExceededFault(response, errorBody)
+
+	case strings.EqualFold("StorageTypeNotSupported", errorCode):
+		return awsAwsquery_deserializeErrorStorageTypeNotSupportedFault(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -3740,6 +3770,12 @@ func awsAwsquery_deserializeOpErrorCreateGlobalCluster(response *smithyhttp.Resp
 	case strings.EqualFold("InvalidDBClusterStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBClusterStateFault(response, errorBody)
 
+	case strings.EqualFold("InvalidDBShardGroupState", errorCode):
+		return awsAwsquery_deserializeErrorInvalidDBShardGroupStateFault(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorResourceNotFoundFault(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -4460,6 +4496,12 @@ func awsAwsquery_deserializeOpErrorDeleteDBCluster(response *smithyhttp.Response
 	case strings.EqualFold("InvalidDBClusterStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBClusterStateFault(response, errorBody)
 
+	case strings.EqualFold("InvalidGlobalClusterStateFault", errorCode):
+		return awsAwsquery_deserializeErrorInvalidGlobalClusterStateFault(response, errorBody)
+
+	case strings.EqualFold("KMSKeyNotAccessibleFault", errorCode):
+		return awsAwsquery_deserializeErrorKMSKeyNotAccessibleFault(response, errorBody)
+
 	case strings.EqualFold("SnapshotQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorSnapshotQuotaExceededFault(response, errorBody)
 
@@ -5014,6 +5056,9 @@ func awsAwsquery_deserializeOpErrorDeleteDBInstance(response *smithyhttp.Respons
 
 	case strings.EqualFold("InvalidDBInstanceState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBInstanceStateFault(response, errorBody)
+
+	case strings.EqualFold("KMSKeyNotAccessibleFault", errorCode):
+		return awsAwsquery_deserializeErrorKMSKeyNotAccessibleFault(response, errorBody)
 
 	case strings.EqualFold("SnapshotQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorSnapshotQuotaExceededFault(response, errorBody)
@@ -6378,6 +6423,9 @@ func awsAwsquery_deserializeOpErrorDeleteTenantDatabase(response *smithyhttp.Res
 	switch {
 	case strings.EqualFold("DBInstanceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBInstanceNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("DBSnapshotAlreadyExists", errorCode):
+		return awsAwsquery_deserializeErrorDBSnapshotAlreadyExistsFault(response, errorBody)
 
 	case strings.EqualFold("InvalidDBInstanceState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBInstanceStateFault(response, errorBody)
@@ -12360,11 +12408,17 @@ func awsAwsquery_deserializeOpErrorListTagsForResource(response *smithyhttp.Resp
 	case strings.EqualFold("DBInstanceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBInstanceNotFoundFault(response, errorBody)
 
+	case strings.EqualFold("DBProxyEndpointNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorDBProxyEndpointNotFoundFault(response, errorBody)
+
 	case strings.EqualFold("DBProxyNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorDBProxyNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("DBProxyTargetGroupNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorDBProxyTargetGroupNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("DBShardGroupNotFound", errorCode):
+		return awsAwsquery_deserializeErrorDBShardGroupNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("DBSnapshotNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBSnapshotNotFoundFault(response, errorBody)
@@ -12962,6 +13016,9 @@ func awsAwsquery_deserializeOpErrorModifyDBCluster(response *smithyhttp.Response
 	case strings.EqualFold("DBInstanceAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorDBInstanceAlreadyExistsFault(response, errorBody)
 
+	case strings.EqualFold("DBParameterGroupNotFound", errorCode):
+		return awsAwsquery_deserializeErrorDBParameterGroupNotFoundFault(response, errorBody)
+
 	case strings.EqualFold("DBSubnetGroupNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorDBSubnetGroupNotFoundFault(response, errorBody)
 
@@ -12980,11 +13037,20 @@ func awsAwsquery_deserializeOpErrorModifyDBCluster(response *smithyhttp.Response
 	case strings.EqualFold("InvalidDBSubnetGroupStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBSubnetGroupStateFault(response, errorBody)
 
+	case strings.EqualFold("InvalidGlobalClusterStateFault", errorCode):
+		return awsAwsquery_deserializeErrorInvalidGlobalClusterStateFault(response, errorBody)
+
 	case strings.EqualFold("InvalidSubnet", errorCode):
 		return awsAwsquery_deserializeErrorInvalidSubnet(response, errorBody)
 
 	case strings.EqualFold("InvalidVPCNetworkStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidVPCNetworkStateFault(response, errorBody)
+
+	case strings.EqualFold("KMSKeyNotAccessibleFault", errorCode):
+		return awsAwsquery_deserializeErrorKMSKeyNotAccessibleFault(response, errorBody)
+
+	case strings.EqualFold("NetworkTypeNotSupported", errorCode):
+		return awsAwsquery_deserializeErrorNetworkTypeNotSupported(response, errorBody)
 
 	case strings.EqualFold("OptionGroupNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorOptionGroupNotFoundFault(response, errorBody)
@@ -12994,6 +13060,9 @@ func awsAwsquery_deserializeOpErrorModifyDBCluster(response *smithyhttp.Response
 
 	case strings.EqualFold("StorageTypeNotAvailableFault", errorCode):
 		return awsAwsquery_deserializeErrorStorageTypeNotAvailableFault(response, errorBody)
+
+	case strings.EqualFold("StorageTypeNotSupported", errorCode):
+		return awsAwsquery_deserializeErrorStorageTypeNotSupportedFault(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -14335,6 +14404,12 @@ func awsAwsquery_deserializeOpErrorModifyDBSnapshot(response *smithyhttp.Respons
 	case strings.EqualFold("DBSnapshotNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBSnapshotNotFoundFault(response, errorBody)
 
+	case strings.EqualFold("InvalidDBSnapshotState", errorCode):
+		return awsAwsquery_deserializeErrorInvalidDBSnapshotStateFault(response, errorBody)
+
+	case strings.EqualFold("KMSKeyNotAccessibleFault", errorCode):
+		return awsAwsquery_deserializeErrorKMSKeyNotAccessibleFault(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -14570,6 +14645,9 @@ func awsAwsquery_deserializeOpErrorModifyDBSubnetGroup(response *smithyhttp.Resp
 
 	case strings.EqualFold("DBSubnetQuotaExceededFault", errorCode):
 		return awsAwsquery_deserializeErrorDBSubnetQuotaExceededFault(response, errorBody)
+
+	case strings.EqualFold("InvalidDBSubnetGroupStateFault", errorCode):
+		return awsAwsquery_deserializeErrorInvalidDBSubnetGroupStateFault(response, errorBody)
 
 	case strings.EqualFold("InvalidSubnet", errorCode):
 		return awsAwsquery_deserializeErrorInvalidSubnet(response, errorBody)
@@ -15766,6 +15844,9 @@ func awsAwsquery_deserializeOpErrorRebootDBInstance(response *smithyhttp.Respons
 	case strings.EqualFold("InvalidDBInstanceState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBInstanceStateFault(response, errorBody)
 
+	case strings.EqualFold("KMSKeyNotAccessibleFault", errorCode):
+		return awsAwsquery_deserializeErrorKMSKeyNotAccessibleFault(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -16131,6 +16212,9 @@ func awsAwsquery_deserializeOpErrorRemoveFromGlobalCluster(response *smithyhttp.
 
 	case strings.EqualFold("GlobalClusterNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorGlobalClusterNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("InvalidDBClusterStateFault", errorCode):
+		return awsAwsquery_deserializeErrorInvalidDBClusterStateFault(response, errorBody)
 
 	case strings.EqualFold("InvalidGlobalClusterStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidGlobalClusterStateFault(response, errorBody)
@@ -16499,11 +16583,17 @@ func awsAwsquery_deserializeOpErrorRemoveTagsFromResource(response *smithyhttp.R
 	case strings.EqualFold("DBInstanceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBInstanceNotFoundFault(response, errorBody)
 
+	case strings.EqualFold("DBProxyEndpointNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorDBProxyEndpointNotFoundFault(response, errorBody)
+
 	case strings.EqualFold("DBProxyNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorDBProxyNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("DBProxyTargetGroupNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorDBProxyTargetGroupNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("DBShardGroupNotFound", errorCode):
+		return awsAwsquery_deserializeErrorDBShardGroupNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("DBSnapshotNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBSnapshotNotFoundFault(response, errorBody)
@@ -16513,6 +16603,15 @@ func awsAwsquery_deserializeOpErrorRemoveTagsFromResource(response *smithyhttp.R
 
 	case strings.EqualFold("IntegrationNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorIntegrationNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("InvalidDBClusterEndpointStateFault", errorCode):
+		return awsAwsquery_deserializeErrorInvalidDBClusterEndpointStateFault(response, errorBody)
+
+	case strings.EqualFold("InvalidDBClusterStateFault", errorCode):
+		return awsAwsquery_deserializeErrorInvalidDBClusterStateFault(response, errorBody)
+
+	case strings.EqualFold("InvalidDBInstanceState", errorCode):
+		return awsAwsquery_deserializeErrorInvalidDBInstanceStateFault(response, errorBody)
 
 	case strings.EqualFold("TenantDatabaseNotFound", errorCode):
 		return awsAwsquery_deserializeErrorTenantDatabaseNotFoundFault(response, errorBody)
@@ -16895,6 +16994,9 @@ func awsAwsquery_deserializeOpErrorRestoreDBClusterFromS3(response *smithyhttp.R
 	case strings.EqualFold("KMSKeyNotAccessibleFault", errorCode):
 		return awsAwsquery_deserializeErrorKMSKeyNotAccessibleFault(response, errorBody)
 
+	case strings.EqualFold("NetworkTypeNotSupported", errorCode):
+		return awsAwsquery_deserializeErrorNetworkTypeNotSupported(response, errorBody)
+
 	case strings.EqualFold("StorageQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorStorageQuotaExceededFault(response, errorBody)
 
@@ -17064,11 +17166,17 @@ func awsAwsquery_deserializeOpErrorRestoreDBClusterFromSnapshot(response *smithy
 	case strings.EqualFold("KMSKeyNotAccessibleFault", errorCode):
 		return awsAwsquery_deserializeErrorKMSKeyNotAccessibleFault(response, errorBody)
 
+	case strings.EqualFold("NetworkTypeNotSupported", errorCode):
+		return awsAwsquery_deserializeErrorNetworkTypeNotSupported(response, errorBody)
+
 	case strings.EqualFold("OptionGroupNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorOptionGroupNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("StorageQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorStorageQuotaExceededFault(response, errorBody)
+
+	case strings.EqualFold("StorageTypeNotSupported", errorCode):
+		return awsAwsquery_deserializeErrorStorageTypeNotSupportedFault(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -17233,11 +17341,17 @@ func awsAwsquery_deserializeOpErrorRestoreDBClusterToPointInTime(response *smith
 	case strings.EqualFold("KMSKeyNotAccessibleFault", errorCode):
 		return awsAwsquery_deserializeErrorKMSKeyNotAccessibleFault(response, errorBody)
 
+	case strings.EqualFold("NetworkTypeNotSupported", errorCode):
+		return awsAwsquery_deserializeErrorNetworkTypeNotSupported(response, errorBody)
+
 	case strings.EqualFold("OptionGroupNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorOptionGroupNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("StorageQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorStorageQuotaExceededFault(response, errorBody)
+
+	case strings.EqualFold("StorageTypeNotSupported", errorCode):
+		return awsAwsquery_deserializeErrorStorageTypeNotSupportedFault(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -18136,6 +18250,9 @@ func awsAwsquery_deserializeOpErrorStartDBCluster(response *smithyhttp.Response,
 	case strings.EqualFold("InvalidDBShardGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBShardGroupStateFault(response, errorBody)
 
+	case strings.EqualFold("KMSKeyNotAccessibleFault", errorCode):
+		return awsAwsquery_deserializeErrorKMSKeyNotAccessibleFault(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -18392,6 +18509,9 @@ func awsAwsquery_deserializeOpErrorStartDBInstanceAutomatedBackupsReplication(re
 
 	case strings.EqualFold("DBInstanceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBInstanceNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("InvalidDBInstanceAutomatedBackupState", errorCode):
+		return awsAwsquery_deserializeErrorInvalidDBInstanceAutomatedBackupStateFault(response, errorBody)
 
 	case strings.EqualFold("InvalidDBInstanceState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBInstanceStateFault(response, errorBody)

@@ -108,6 +108,35 @@ func ExampleCaseRuleDetails_outputUsage() {
 
 var _ *types.RequiredCaseRule
 
+func ExampleCustomFieldsFilter_outputUsage() {
+	var union types.CustomFieldsFilter
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CustomFieldsFilterMemberAndAll:
+		_ = v.Value // Value is []types.CustomFieldsFilter
+
+	case *types.CustomFieldsFilterMemberField:
+		_ = v.Value // Value is types.FieldFilter
+
+	case *types.CustomFieldsFilterMemberNot:
+		_ = v.Value // Value is types.CustomFieldsFilter
+
+	case *types.CustomFieldsFilterMemberOrAll:
+		_ = v.Value // Value is []types.CustomFieldsFilter
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.CustomFieldsFilter
+var _ types.FieldFilter
+var _ types.CustomFieldsFilter
+
 func ExampleFieldFilter_outputUsage() {
 	var union types.FieldFilter
 	// type switches can be used to check the union value
@@ -247,8 +276,14 @@ func ExampleRelatedItemContent_outputUsage() {
 	case *types.RelatedItemContentMemberComment:
 		_ = v.Value // Value is types.CommentContent
 
+	case *types.RelatedItemContentMemberConnectCase:
+		_ = v.Value // Value is types.ConnectCaseContent
+
 	case *types.RelatedItemContentMemberContact:
 		_ = v.Value // Value is types.ContactContent
+
+	case *types.RelatedItemContentMemberCustom:
+		_ = v.Value // Value is types.CustomContent
 
 	case *types.RelatedItemContentMemberFile:
 		_ = v.Value // Value is types.FileContent
@@ -265,7 +300,9 @@ func ExampleRelatedItemContent_outputUsage() {
 	}
 }
 
+var _ *types.CustomContent
 var _ *types.FileContent
+var _ *types.ConnectCaseContent
 var _ *types.ContactContent
 var _ *types.CommentContent
 var _ *types.SlaContent
@@ -277,8 +314,14 @@ func ExampleRelatedItemInputContent_outputUsage() {
 	case *types.RelatedItemInputContentMemberComment:
 		_ = v.Value // Value is types.CommentContent
 
+	case *types.RelatedItemInputContentMemberConnectCase:
+		_ = v.Value // Value is types.ConnectCaseInputContent
+
 	case *types.RelatedItemInputContentMemberContact:
 		_ = v.Value // Value is types.Contact
+
+	case *types.RelatedItemInputContentMemberCustom:
+		_ = v.Value // Value is types.CustomInputContent
 
 	case *types.RelatedItemInputContentMemberFile:
 		_ = v.Value // Value is types.FileContent
@@ -295,9 +338,11 @@ func ExampleRelatedItemInputContent_outputUsage() {
 	}
 }
 
+var _ *types.CustomInputContent
 var _ *types.FileContent
 var _ *types.CommentContent
 var _ types.SlaInputContent
+var _ *types.ConnectCaseInputContent
 var _ *types.Contact
 
 func ExampleRelatedItemTypeFilter_outputUsage() {
@@ -307,8 +352,14 @@ func ExampleRelatedItemTypeFilter_outputUsage() {
 	case *types.RelatedItemTypeFilterMemberComment:
 		_ = v.Value // Value is types.CommentFilter
 
+	case *types.RelatedItemTypeFilterMemberConnectCase:
+		_ = v.Value // Value is types.ConnectCaseFilter
+
 	case *types.RelatedItemTypeFilterMemberContact:
 		_ = v.Value // Value is types.ContactFilter
+
+	case *types.RelatedItemTypeFilterMemberCustom:
+		_ = v.Value // Value is types.CustomFilter
 
 	case *types.RelatedItemTypeFilterMemberFile:
 		_ = v.Value // Value is types.FileFilter
@@ -326,8 +377,10 @@ func ExampleRelatedItemTypeFilter_outputUsage() {
 }
 
 var _ *types.FileFilter
+var _ *types.CustomFilter
 var _ *types.ContactFilter
 var _ *types.SlaFilter
+var _ *types.ConnectCaseFilter
 var _ *types.CommentFilter
 
 func ExampleSection_outputUsage() {

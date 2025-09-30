@@ -31,8 +31,6 @@ import (
 //     the same name).
 //
 //   - User must have create permissions for data products in the project.
-//
-//   - The domain must have Amazon DataZone publishing enabled.
 func (c *Client) CreateDataProduct(ctx context.Context, params *CreateDataProductInput, optFns ...func(*Options)) (*CreateDataProductOutput, error) {
 	if params == nil {
 		params = &CreateDataProductInput{}

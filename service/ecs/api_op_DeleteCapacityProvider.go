@@ -52,6 +52,11 @@ type DeleteCapacityProviderInput struct {
 	// This member is required.
 	CapacityProvider *string
 
+	// The name of the cluster that contains the capacity provider to delete. Managed
+	// instances capacity providers are cluster-scoped and can only be deleted from
+	// their associated cluster.
+	Cluster *string
+
 	noSmithyDocumentSerde
 }
 

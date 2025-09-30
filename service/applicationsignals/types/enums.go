@@ -2,6 +2,42 @@
 
 package types
 
+type ChangeEventType string
+
+// Enum values for ChangeEventType
+const (
+	ChangeEventTypeDeployment ChangeEventType = "DEPLOYMENT"
+)
+
+// Values returns all known values for ChangeEventType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChangeEventType) Values() []ChangeEventType {
+	return []ChangeEventType{
+		"DEPLOYMENT",
+	}
+}
+
+type ConnectionType string
+
+// Enum values for ConnectionType
+const (
+	ConnectionTypeIndirect ConnectionType = "INDIRECT"
+	ConnectionTypeDirect   ConnectionType = "DIRECT"
+)
+
+// Values returns all known values for ConnectionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionType) Values() []ConnectionType {
+	return []ConnectionType{
+		"INDIRECT",
+		"DIRECT",
+	}
+}
+
 type DurationUnit string
 
 // Enum values for DurationUnit
@@ -130,6 +166,31 @@ func (ServiceLevelObjectiveBudgetStatus) Values() []ServiceLevelObjectiveBudgetS
 		"WARNING",
 		"BREACHED",
 		"INSUFFICIENT_DATA",
+	}
+}
+
+type Severity string
+
+// Enum values for Severity
+const (
+	SeverityCritical Severity = "CRITICAL"
+	SeverityHigh     Severity = "HIGH"
+	SeverityMedium   Severity = "MEDIUM"
+	SeverityLow      Severity = "LOW"
+	SeverityNone     Severity = "NONE"
+)
+
+// Values returns all known values for Severity. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Severity) Values() []Severity {
+	return []Severity{
+		"CRITICAL",
+		"HIGH",
+		"MEDIUM",
+		"LOW",
+		"NONE",
 	}
 }
 

@@ -571,6 +571,7 @@ type TrafficShapingType string
 // Enum values for TrafficShapingType
 const (
 	TrafficShapingTypeRetrievalWindow TrafficShapingType = "RETRIEVAL_WINDOW"
+	TrafficShapingTypeTps             TrafficShapingType = "TPS"
 )
 
 // Values returns all known values for TrafficShapingType. Note that this can be
@@ -580,6 +581,7 @@ const (
 func (TrafficShapingType) Values() []TrafficShapingType {
 	return []TrafficShapingType{
 		"RETRIEVAL_WINDOW",
+		"TPS",
 	}
 }
 

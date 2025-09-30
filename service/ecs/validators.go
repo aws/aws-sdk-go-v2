@@ -1508,6 +1508,28 @@ func validateContainerRestartPolicy(v *types.ContainerRestartPolicy) error {
 	}
 }
 
+func validateCreateManagedInstancesProviderConfiguration(v *types.CreateManagedInstancesProviderConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateManagedInstancesProviderConfiguration"}
+	if v.InfrastructureRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InfrastructureRoleArn"))
+	}
+	if v.InstanceLaunchTemplate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceLaunchTemplate"))
+	} else if v.InstanceLaunchTemplate != nil {
+		if err := validateInstanceLaunchTemplate(v.InstanceLaunchTemplate); err != nil {
+			invalidParams.AddNested("InstanceLaunchTemplate", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDeploymentAlarms(v *types.DeploymentAlarms) error {
 	if v == nil {
 		return nil
@@ -1841,6 +1863,72 @@ func validateInferenceAccelerators(v []types.InferenceAccelerator) error {
 	}
 }
 
+func validateInstanceLaunchTemplate(v *types.InstanceLaunchTemplate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InstanceLaunchTemplate"}
+	if v.Ec2InstanceProfileArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Ec2InstanceProfileArn"))
+	}
+	if v.NetworkConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkConfiguration"))
+	}
+	if v.InstanceRequirements != nil {
+		if err := validateInstanceRequirementsRequest(v.InstanceRequirements); err != nil {
+			invalidParams.AddNested("InstanceRequirements", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInstanceLaunchTemplateUpdate(v *types.InstanceLaunchTemplateUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InstanceLaunchTemplateUpdate"}
+	if v.InstanceRequirements != nil {
+		if err := validateInstanceRequirementsRequest(v.InstanceRequirements); err != nil {
+			invalidParams.AddNested("InstanceRequirements", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInstanceRequirementsRequest(v *types.InstanceRequirementsRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InstanceRequirementsRequest"}
+	if v.VCpuCount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VCpuCount"))
+	} else if v.VCpuCount != nil {
+		if err := validateVCpuCountRangeRequest(v.VCpuCount); err != nil {
+			invalidParams.AddNested("VCpuCount", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MemoryMiB == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemoryMiB"))
+	} else if v.MemoryMiB != nil {
+		if err := validateMemoryMiBRequest(v.MemoryMiB); err != nil {
+			invalidParams.AddNested("MemoryMiB", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateLinuxParameters(v *types.LinuxParameters) error {
 	if v == nil {
 		return nil
@@ -1913,6 +2001,21 @@ func validateManagedAgentStateChanges(v []types.ManagedAgentStateChange) error {
 		if err := validateManagedAgentStateChange(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMemoryMiBRequest(v *types.MemoryMiBRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MemoryMiBRequest"}
+	if v.Min == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Min"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2463,6 +2566,43 @@ func validateUlimitList(v []types.Ulimit) error {
 	}
 }
 
+func validateUpdateManagedInstancesProviderConfiguration(v *types.UpdateManagedInstancesProviderConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateManagedInstancesProviderConfiguration"}
+	if v.InfrastructureRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InfrastructureRoleArn"))
+	}
+	if v.InstanceLaunchTemplate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceLaunchTemplate"))
+	} else if v.InstanceLaunchTemplate != nil {
+		if err := validateInstanceLaunchTemplateUpdate(v.InstanceLaunchTemplate); err != nil {
+			invalidParams.AddNested("InstanceLaunchTemplate", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVCpuCountRangeRequest(v *types.VCpuCountRangeRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VCpuCountRangeRequest"}
+	if v.Min == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Min"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateVolume(v *types.Volume) error {
 	if v == nil {
 		return nil
@@ -2548,11 +2688,14 @@ func validateOpCreateCapacityProviderInput(v *CreateCapacityProviderInput) error
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.AutoScalingGroupProvider == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupProvider"))
-	} else if v.AutoScalingGroupProvider != nil {
+	if v.AutoScalingGroupProvider != nil {
 		if err := validateAutoScalingGroupProvider(v.AutoScalingGroupProvider); err != nil {
 			invalidParams.AddNested("AutoScalingGroupProvider", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ManagedInstancesProvider != nil {
+		if err := validateCreateManagedInstancesProviderConfiguration(v.ManagedInstancesProvider); err != nil {
+			invalidParams.AddNested("ManagedInstancesProvider", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3338,8 +3481,10 @@ func validateOpUpdateCapacityProviderInput(v *UpdateCapacityProviderInput) error
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.AutoScalingGroupProvider == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupProvider"))
+	if v.ManagedInstancesProvider != nil {
+		if err := validateUpdateManagedInstancesProviderConfiguration(v.ManagedInstancesProvider); err != nil {
+			invalidParams.AddNested("ManagedInstancesProvider", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

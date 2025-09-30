@@ -303,6 +303,11 @@ type ConditionalForwarder struct {
 	// to.
 	DnsIpAddrs []string
 
+	// The IPv6 addresses of the remote DNS server associated with RemoteDomainName.
+	// This is the IPv6 address of the DNS server that your conditional forwarder
+	// points to.
+	DnsIpv6Addrs []string
+
 	// The fully qualified domain name (FQDN) of the remote domains pointed to by the
 	// conditional forwarder.
 	RemoteDomainName *string
@@ -315,15 +320,8 @@ type ConditionalForwarder struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information for the ConnectDirectory operation when an AD Connector directory is being
-// created.
+// Contains connection settings for creating an AD Connector with the ConnectDirectory action.
 type DirectoryConnectSettings struct {
-
-	// A list of one or more IP addresses of DNS servers or domain controllers in your
-	// self-managed directory.
-	//
-	// This member is required.
-	CustomerDnsIps []string
 
 	// The user name of an account in your self-managed directory that is used to
 	// connect to the directory. This account must have the following permissions:
@@ -347,17 +345,28 @@ type DirectoryConnectSettings struct {
 	// This member is required.
 	VpcId *string
 
+	// The IP addresses of DNS servers or domain controllers in your self-managed
+	// directory.
+	CustomerDnsIps []string
+
+	// The IPv6 addresses of DNS servers or domain controllers in your self-managed
+	// directory.
+	CustomerDnsIpsV6 []string
+
 	noSmithyDocumentSerde
 }
 
 // Contains information about an AD Connector directory.
 type DirectoryConnectSettingsDescription struct {
 
-	// A list of the Availability Zones that the directory is in.
+	// The Availability Zones that the directory is in.
 	AvailabilityZones []string
 
 	// The IP addresses of the AD Connector servers.
 	ConnectIps []string
+
+	// The IPv6 addresses of the AD Connector servers.
+	ConnectIpsV6 []string
 
 	// The user name of the service account in your self-managed directory.
 	CustomerUserName *string
@@ -377,17 +386,16 @@ type DirectoryConnectSettingsDescription struct {
 // Contains information about an Directory Service directory.
 type DirectoryDescription struct {
 
-	// The access URL for the directory, such as http://.awsapps.com . If no alias has
-	// been created for the directory, is the directory identifier, such as
-	// d-XXXXXXXXXX .
+	// The access URL for the directory, such as http://.awsapps.com . If no alias
+	// exists, is the directory identifier, such as d-XXXXXXXXXX .
 	AccessUrl *string
 
-	// The alias for the directory. If no alias has been created for the directory,
-	// the alias is the directory identifier, such as d-XXXXXXXXXX .
+	// The alias for the directory. If no alias exists, the alias is the directory
+	// identifier, such as d-XXXXXXXXXX .
 	Alias *string
 
-	// A DirectoryConnectSettingsDescription object that contains additional information about an AD Connector directory.
-	// This member is only present if the directory is an AD Connector directory.
+	// DirectoryConnectSettingsDescription object that contains additional information about an AD Connector directory.
+	// Present only for AD Connector directories.
 	ConnectSettings *DirectoryConnectSettingsDescription
 
 	// The description for the directory.
@@ -403,9 +411,15 @@ type DirectoryDescription struct {
 	// The IP addresses of the DNS servers for the directory. For a Simple AD or
 	// Microsoft AD directory, these are the IP addresses of the Simple AD or Microsoft
 	// AD directory servers. For an AD Connector directory, these are the IP addresses
-	// of the DNS servers or domain controllers in your self-managed directory to which
-	// the AD Connector is connected.
+	// of self-managed directory to which the AD Connector is connected.
 	DnsIpAddrs []string
+
+	// The IPv6 addresses of the DNS servers for the directory. For a Simple AD or
+	// Microsoft AD directory, these are the IPv6 addresses of the Simple AD or
+	// Microsoft AD directory servers. For an AD Connector directory, these are the
+	// IPv6 addresses of the DNS servers or domain controllers in your self-managed
+	// directory to which the AD Connector is connected.
+	DnsIpv6Addrs []string
 
 	// The edition associated with this directory.
 	Edition DirectoryEdition
@@ -415,11 +429,14 @@ type DirectoryDescription struct {
 	// and DNS IPs.
 	HybridSettings *HybridSettingsDescription
 
-	// Specifies when the directory was created.
+	// The date and time when the directory was created.
 	LaunchTime *time.Time
 
 	// The fully qualified name of the directory.
 	Name *string
+
+	// The network type of the directory.
+	NetworkType NetworkType
 
 	// The operating system (OS) version of the directory.
 	OsVersion OSVersion
@@ -427,8 +444,7 @@ type DirectoryDescription struct {
 	// Describes the Managed Microsoft AD directory in the directory owner account.
 	OwnerDirectoryDescription *OwnerDirectoryDescription
 
-	// A RadiusSettings object that contains information about the RADIUS server configured for this
-	// directory.
+	// Information about the RadiusSettings object configured for this directory.
 	RadiusSettings *RadiusSettings
 
 	// The status of the RADIUS MFA server connection.
@@ -457,14 +473,14 @@ type DirectoryDescription struct {
 	// The directory size.
 	Size DirectorySize
 
-	// Indicates if single sign-on is enabled for the directory. For more information,
-	// see EnableSsoand DisableSso.
+	// Indicates whether single sign-on is enabled for the directory. For more
+	// information, see EnableSsoand DisableSso.
 	SsoEnabled bool
 
 	// The current stage of the directory.
 	Stage DirectoryStage
 
-	// The date and time that the stage was last updated.
+	// The date and time when the stage was last updated.
 	StageLastUpdatedDateTime *time.Time
 
 	// Additional information about the directory stage.
@@ -473,9 +489,8 @@ type DirectoryDescription struct {
 	// The directory type.
 	Type DirectoryType
 
-	// A DirectoryVpcSettingsDescription object that contains additional information about a directory. This member
-	// is only present if the directory is a Simple AD or Managed Microsoft AD
-	// directory.
+	// A DirectoryVpcSettingsDescription object that contains additional information about a directory. Present only
+	// for Simple AD and Managed Microsoft AD directories.
 	VpcSettings *DirectoryVpcSettingsDescription
 
 	noSmithyDocumentSerde
@@ -510,6 +525,15 @@ type DirectoryLimits struct {
 
 	// Indicates if the connected directory limit has been reached.
 	ConnectedDirectoriesLimitReached bool
+
+	noSmithyDocumentSerde
+}
+
+// Contains the directory size configuration for update operations.
+type DirectorySizeUpdateSettings struct {
+
+	// The target directory size for the update operation.
+	DirectorySize DirectorySize
 
 	noSmithyDocumentSerde
 }
@@ -561,6 +585,9 @@ type DomainController struct {
 
 	// The IP address of the domain controller.
 	DnsIpAddr *string
+
+	// The IPv6 address of the domain controller.
+	DnsIpv6Addr *string
 
 	// Identifies a specific domain controller in the directory.
 	DomainControllerId *string
@@ -719,14 +746,19 @@ type HybridUpdateValue struct {
 	noSmithyDocumentSerde
 }
 
-// IP address block. This is often the address block of the DNS server used for
-// your self-managed domain.
+// Contains the IP address block. This is often the address block of the DNS
+// server used for your self-managed domain.
 type IpRoute struct {
 
-	// IP address block using CIDR format, for example 10.0.0.0/24. This is often the
-	// address block of the DNS server used for your self-managed domain. For a single
-	// IP address use a CIDR address block with /32. For example 10.0.0.0/32.
+	// IP address block in CIDR format, such as 10.0.0.0/24. This is often the address
+	// block of the DNS server used for your self-managed domain. For a single IP
+	// address, use a CIDR address block with /32. For example, 10.0.0.0/32.
 	CidrIp *string
+
+	// IPv6 address block in CIDR format, such as 2001:db8::/32. This is often the
+	// address block of the DNS server used for your self-managed domain. For a single
+	// IPv6 address, use a CIDR address block with /128. For example, 2001:db8::1/128.
+	CidrIpv6 *string
 
 	// Description of the address block.
 	Description *string
@@ -742,6 +774,9 @@ type IpRouteInfo struct {
 
 	// IP address block in the IpRoute.
 	CidrIp *string
+
+	// IPv6 address block in the IpRoute.
+	CidrIpv6 *string
 
 	// Description of the IpRouteInfo.
 	Description *string
@@ -790,17 +825,30 @@ type LogSubscription struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the network configuration for directory update operations.
+type NetworkUpdateSettings struct {
+
+	// IPv6 addresses of DNS servers or domain controllers in the self-managed
+	// directory. Required only when updating an AD Connector directory.
+	CustomerDnsIpsV6 []string
+
+	// The target network type for the directory update.
+	NetworkType NetworkType
+
+	noSmithyDocumentSerde
+}
+
 // OS version that the directory needs to be updated to.
 type OSUpdateSettings struct {
 
-	//  OS version that the directory needs to be updated to.
+	// OS version that the directory needs to be updated to.
 	OSVersion OSVersion
 
 	noSmithyDocumentSerde
 }
 
-// Describes the directory owner account details that have been shared to the
-// directory consumer account.
+// Contains the directory owner account details shared with the directory consumer
+// account.
 type OwnerDirectoryDescription struct {
 
 	// Identifier of the directory owner account.
@@ -812,10 +860,16 @@ type OwnerDirectoryDescription struct {
 	// IP address of the directory’s domain controllers.
 	DnsIpAddrs []string
 
-	// A RadiusSettings object that contains information about the RADIUS server.
+	// IPv6 addresses of the directory’s domain controllers.
+	DnsIpv6Addrs []string
+
+	// Network type of the directory in the directory owner account.
+	NetworkType NetworkType
+
+	// Information about the RadiusSettings object server configuration.
 	RadiusSettings *RadiusSettings
 
-	// Information about the status of the RADIUS server.
+	// The status of the RADIUS server.
 	RadiusStatus RadiusStatus
 
 	// Information about the VPC settings for the directory.
@@ -843,10 +897,13 @@ type RadiusSettings struct {
 	// retried after the initial attempt.
 	RadiusRetries int32
 
-	// An array of strings that contains the fully qualified domain name (FQDN) or IP
-	// addresses of the RADIUS server endpoints, or the FQDN or IP addresses of your
-	// RADIUS server load balancer.
+	// The fully qualified domain name (FQDN) or IP addresses of the RADIUS server
+	// endpoints, or the FQDN or IP addresses of your RADIUS server load balancer.
 	RadiusServers []string
+
+	// The IPv6 addresses of the RADIUS server endpoints or RADIUS server load
+	// balancer.
+	RadiusServersIpv6 []string
 
 	// The amount of time, in seconds, to wait for the RADIUS server to respond.
 	RadiusTimeout *int32

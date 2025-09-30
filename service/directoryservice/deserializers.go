@@ -12984,6 +12984,11 @@ func awsAwsjson11_deserializeDocumentConditionalForwarder(v **types.ConditionalF
 				return err
 			}
 
+		case "DnsIpv6Addrs":
+			if err := awsAwsjson11_deserializeDocumentDnsIpv6Addrs(&sv.DnsIpv6Addrs, value); err != nil {
+				return err
+			}
+
 		case "RemoteDomainName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13247,6 +13252,11 @@ func awsAwsjson11_deserializeDocumentDirectoryConnectSettingsDescription(v **typ
 				return err
 			}
 
+		case "ConnectIpsV6":
+			if err := awsAwsjson11_deserializeDocumentIpV6Addrs(&sv.ConnectIpsV6, value); err != nil {
+				return err
+			}
+
 		case "CustomerUserName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13369,6 +13379,11 @@ func awsAwsjson11_deserializeDocumentDirectoryDescription(v **types.DirectoryDes
 				return err
 			}
 
+		case "DnsIpv6Addrs":
+			if err := awsAwsjson11_deserializeDocumentDnsIpv6Addrs(&sv.DnsIpv6Addrs, value); err != nil {
+				return err
+			}
+
 		case "Edition":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13406,6 +13421,15 @@ func awsAwsjson11_deserializeDocumentDirectoryDescription(v **types.DirectoryDes
 					return fmt.Errorf("expected DirectoryName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "NetworkType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkType to be of type string, got %T instead", value)
+				}
+				sv.NetworkType = types.NetworkType(jtv)
 			}
 
 		case "OsVersion":
@@ -14156,6 +14180,42 @@ func awsAwsjson11_deserializeDocumentDnsIpAddrs(v *[]string, value interface{}) 
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentDnsIpv6Addrs(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected Ipv6Addr to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentDomainController(v **types.DomainController, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14203,6 +14263,15 @@ func awsAwsjson11_deserializeDocumentDomainController(v **types.DomainController
 					return fmt.Errorf("expected IpAddr to be of type string, got %T instead", value)
 				}
 				sv.DnsIpAddr = ptr.String(jtv)
+			}
+
+		case "DnsIpv6Addr":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Ipv6Addr to be of type string, got %T instead", value)
+				}
+				sv.DnsIpv6Addr = ptr.String(jtv)
 			}
 
 		case "DomainControllerId":
@@ -15428,6 +15497,15 @@ func awsAwsjson11_deserializeDocumentIpRouteInfo(v **types.IpRouteInfo, value in
 				sv.CidrIp = ptr.String(jtv)
 			}
 
+		case "CidrIpv6":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CidrIpv6 to be of type string, got %T instead", value)
+				}
+				sv.CidrIpv6 = ptr.String(jtv)
+			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15549,6 +15627,42 @@ func awsAwsjson11_deserializeDocumentIpRoutesInfo(v *[]types.IpRouteInfo, value 
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentIpV6Addrs(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected Ipv6Addr to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
 		cv = append(cv, col)
 
 	}
@@ -15937,6 +16051,20 @@ func awsAwsjson11_deserializeDocumentOwnerDirectoryDescription(v **types.OwnerDi
 				return err
 			}
 
+		case "DnsIpv6Addrs":
+			if err := awsAwsjson11_deserializeDocumentDnsIpv6Addrs(&sv.DnsIpv6Addrs, value); err != nil {
+				return err
+			}
+
+		case "NetworkType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkType to be of type string, got %T instead", value)
+				}
+				sv.NetworkType = types.NetworkType(jtv)
+			}
+
 		case "RadiusSettings":
 			if err := awsAwsjson11_deserializeDocumentRadiusSettings(&sv.RadiusSettings, value); err != nil {
 				return err
@@ -16033,6 +16161,11 @@ func awsAwsjson11_deserializeDocumentRadiusSettings(v **types.RadiusSettings, va
 
 		case "RadiusServers":
 			if err := awsAwsjson11_deserializeDocumentServers(&sv.RadiusServers, value); err != nil {
+				return err
+			}
+
+		case "RadiusServersIpv6":
+			if err := awsAwsjson11_deserializeDocumentServers(&sv.RadiusServersIpv6, value); err != nil {
 				return err
 			}
 

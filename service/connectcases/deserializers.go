@@ -7689,6 +7689,46 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentConnectCaseContent(v **types.ConnectCaseContent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConnectCaseContent
+	if *v == nil {
+		sv = &types.ConnectCaseContent{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "caseId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CaseId to be of type string, got %T instead", value)
+				}
+				sv.CaseId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentContactContent(v **types.ContactContent, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7740,6 +7780,42 @@ func awsRestjson1_deserializeDocumentContactContent(v **types.ContactContent, va
 					return fmt.Errorf("expected ContactArn to be of type string, got %T instead", value)
 				}
 				sv.ContactArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCustomContent(v **types.CustomContent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomContent
+	if *v == nil {
+		sv = &types.CustomContent{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "fields":
+			if err := awsRestjson1_deserializeDocumentFieldValueList(&sv.Fields, value); err != nil {
+				return err
 			}
 
 		default:
@@ -9439,6 +9515,16 @@ loop:
 			uv = &types.RelatedItemContentMemberComment{Value: mv}
 			break loop
 
+		case "connectCase":
+			var mv types.ConnectCaseContent
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentConnectCaseContent(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.RelatedItemContentMemberConnectCase{Value: mv}
+			break loop
+
 		case "contact":
 			var mv types.ContactContent
 			destAddr := &mv
@@ -9447,6 +9533,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.RelatedItemContentMemberContact{Value: mv}
+			break loop
+
+		case "custom":
+			var mv types.CustomContent
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentCustomContent(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.RelatedItemContentMemberCustom{Value: mv}
 			break loop
 
 		case "file":

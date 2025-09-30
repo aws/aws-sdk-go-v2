@@ -929,7 +929,12 @@ type PrefetchRetrieval struct {
 	// ADS requests for all sessions at the same time.
 	TrafficShapingRetrievalWindow *TrafficShapingRetrievalWindow
 
-	// Indicates if this configuration uses a retrieval window for traffic shaping and
+	// The configuration for TPS-based traffic shaping that limits the number of
+	// requests to the ad decision server (ADS) based on transactions per second
+	// instead of time windows.
+	TrafficShapingTpsConfiguration *TrafficShapingTpsConfiguration
+
+	// Indicates the type of traffic shaping used for prefetch traffic shaping and
 	// limiting the number of requests to the ADS at one time.
 	TrafficShapingType TrafficShapingType
 
@@ -1049,8 +1054,13 @@ type RecurringRetrieval struct {
 	// ADS requests for all sessions at the same time.
 	TrafficShapingRetrievalWindow *TrafficShapingRetrievalWindow
 
-	// Indicates if this configuration uses a retrieval window for traffic shaping and
-	// limiting the number of requests to the ADS at one time.
+	// The configuration for TPS-based traffic shaping that limits the number of
+	// requests to the ad decision server (ADS) based on transactions per second
+	// instead of time windows.
+	TrafficShapingTpsConfiguration *TrafficShapingTpsConfiguration
+
+	// Indicates the type of traffic shaping used for traffic shaping and limiting the
+	// number of requests to the ADS at one time.
 	TrafficShapingType TrafficShapingType
 
 	noSmithyDocumentSerde
@@ -1412,6 +1422,26 @@ type TrafficShapingRetrievalWindow struct {
 	// The amount of time, in seconds, that MediaTailor spreads prefetch requests to
 	// the ADS.
 	RetrievalWindowDurationSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for TPS-based traffic shaping. This approach limits requests
+// to the ad decision server (ADS) based on transactions per second and concurrent
+// users, providing more intuitive capacity management compared to time-window
+// based traffic shaping.
+type TrafficShapingTpsConfiguration struct {
+
+	// The expected peak number of concurrent viewers for your content. MediaTailor
+	// uses this value along with peak TPS to determine how to distribute prefetch
+	// requests across the available capacity without exceeding your ADS limits.
+	PeakConcurrentUsers *int32
+
+	// The maximum number of transactions per second (TPS) that your ad decision
+	// server (ADS) can handle. MediaTailor uses this value along with concurrent users
+	// and headroom multiplier to calculate optimal traffic distribution and prevent
+	// ADS overload.
+	PeakTps *int32
 
 	noSmithyDocumentSerde
 }

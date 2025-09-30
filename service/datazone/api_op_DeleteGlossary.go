@@ -23,7 +23,7 @@ import (
 //   - The caller must have the datazone:DeleteGlossary permission in the domain
 //     and glossary.
 //
-//   - There should be no active assets or metadata linked to the glossary.
+//   - Glossary should not be linked to any active metadata forms.
 func (c *Client) DeleteGlossary(ctx context.Context, params *DeleteGlossaryInput, optFns ...func(*Options)) (*DeleteGlossaryOutput, error) {
 	if params == nil {
 		params = &DeleteGlossaryInput{}

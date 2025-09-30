@@ -879,7 +879,7 @@ func (e *DBInstanceNotReadyFault) ErrorCode() string {
 	}
 	return *e.ErrorCodeOverride
 }
-func (e *DBInstanceNotReadyFault) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (e *DBInstanceNotReadyFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified RoleArn or FeatureName value is already associated with the DB
 // instance.

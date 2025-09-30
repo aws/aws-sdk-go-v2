@@ -6880,6 +6880,11 @@ func awsAwsjson11_serializeOpDocumentUpdateServerInput(v *UpdateServerInput, val
 		}
 	}
 
+	if len(v.IdentityProviderType) > 0 {
+		ok := object.Key("IdentityProviderType")
+		ok.String(string(v.IdentityProviderType))
+	}
+
 	if len(v.IpAddressType) > 0 {
 		ok := object.Key("IpAddressType")
 		ok.String(string(v.IpAddressType))

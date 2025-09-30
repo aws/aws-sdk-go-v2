@@ -49,19 +49,18 @@ type CopyDBSnapshotInput struct {
 	// specify a valid DB snapshot identifier. For example, you might specify
 	// rds:mysql-instance1-snapshot-20130805 .
 	//
-	// If the source snapshot is in a different Amazon Web Services Region than the
-	// copy, specify a valid DB snapshot ARN. For example, you might specify
-	// arn:aws:rds:us-west-2:123456789012:snapshot:mysql-instance1-snapshot-20130805 .
-	//
 	// If you are copying from a shared manual DB snapshot, this parameter must be the
 	// Amazon Resource Name (ARN) of the shared DB snapshot.
 	//
-	// If you are copying an encrypted snapshot this parameter must be in the ARN
-	// format for the source Amazon Web Services Region.
+	// If the source snapshot is in a different Amazon Web Services Region than the
+	// copy, specify a valid DB snapshot ARN. You can also specify an ARN of a snapshot
+	// that is in a different account and a different Amazon Web Services Region. For
+	// example, you might specify
+	// arn:aws:rds:us-west-2:123456789012:snapshot:mysql-instance1-snapshot-20130805 .
 	//
 	// Constraints:
 	//
-	//   - Must specify a valid system snapshot in the "available" state.
+	//   - Must specify a valid source snapshot in the "available" state.
 	//
 	// Example: rds:mydb-2012-04-02-00-01
 	//

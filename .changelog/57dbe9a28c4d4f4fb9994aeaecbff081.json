@@ -1,0 +1,8 @@
+{
+    "id": "57dbe9a2-8c4d-4f4f-b999-4aeaecbff081",
+    "type": "feature",
+    "description": "This release adds support for Managed Instances on Amazon ECS.",
+    "modules": [
+        "service/ecs"
+    ]
+}

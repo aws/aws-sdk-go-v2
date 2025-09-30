@@ -1210,6 +1210,21 @@ func validateCommentContent(v *types.CommentContent) error {
 	}
 }
 
+func validateConnectCaseInputContent(v *types.ConnectCaseInputContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectCaseInputContent"}
+	if v.CaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CaseId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateContact(v *types.Contact) error {
 	if v == nil {
 		return nil
@@ -1217,6 +1232,93 @@ func validateContact(v *types.Contact) error {
 	invalidParams := smithy.InvalidParamsError{Context: "Contact"}
 	if v.ContactArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContactArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomFieldsFilter(v types.CustomFieldsFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomFieldsFilter"}
+	switch uv := v.(type) {
+	case *types.CustomFieldsFilterMemberAndAll:
+		if err := validateCustomFieldsFilterList(uv.Value); err != nil {
+			invalidParams.AddNested("[andAll]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.CustomFieldsFilterMemberField:
+		if err := validateFieldFilter(uv.Value); err != nil {
+			invalidParams.AddNested("[field]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.CustomFieldsFilterMemberNot:
+		if err := validateCustomFieldsFilter(uv.Value); err != nil {
+			invalidParams.AddNested("[not]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.CustomFieldsFilterMemberOrAll:
+		if err := validateCustomFieldsFilterList(uv.Value); err != nil {
+			invalidParams.AddNested("[orAll]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomFieldsFilterList(v []types.CustomFieldsFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomFieldsFilterList"}
+	for i := range v {
+		if err := validateCustomFieldsFilter(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomFilter(v *types.CustomFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomFilter"}
+	if v.Fields != nil {
+		if err := validateCustomFieldsFilter(v.Fields); err != nil {
+			invalidParams.AddNested("Fields", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomInputContent(v *types.CustomInputContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomInputContent"}
+	if v.Fields == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Fields"))
+	} else if v.Fields != nil {
+		if err := validateFieldValueList(v.Fields); err != nil {
+			invalidParams.AddNested("Fields", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1533,6 +1635,23 @@ func validateRelatedItemEventIncludedData(v *types.RelatedItemEventIncludedData)
 	}
 }
 
+func validateRelatedItemFilterList(v []types.RelatedItemTypeFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RelatedItemFilterList"}
+	for i := range v {
+		if err := validateRelatedItemTypeFilter(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRelatedItemInputContent(v types.RelatedItemInputContent) error {
 	if v == nil {
 		return nil
@@ -1544,9 +1663,19 @@ func validateRelatedItemInputContent(v types.RelatedItemInputContent) error {
 			invalidParams.AddNested("[comment]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.RelatedItemInputContentMemberConnectCase:
+		if err := validateConnectCaseInputContent(&uv.Value); err != nil {
+			invalidParams.AddNested("[connectCase]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.RelatedItemInputContentMemberContact:
 		if err := validateContact(&uv.Value); err != nil {
 			invalidParams.AddNested("[contact]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RelatedItemInputContentMemberCustom:
+		if err := validateCustomInputContent(&uv.Value); err != nil {
+			invalidParams.AddNested("[custom]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.RelatedItemInputContentMemberFile:
@@ -1557,6 +1686,25 @@ func validateRelatedItemInputContent(v types.RelatedItemInputContent) error {
 	case *types.RelatedItemInputContentMemberSla:
 		if err := validateSlaInputContent(uv.Value); err != nil {
 			invalidParams.AddNested("[sla]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRelatedItemTypeFilter(v types.RelatedItemTypeFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RelatedItemTypeFilter"}
+	switch uv := v.(type) {
+	case *types.RelatedItemTypeFilterMemberCustom:
+		if err := validateCustomFilter(&uv.Value); err != nil {
+			invalidParams.AddNested("[custom]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -2411,6 +2559,11 @@ func validateOpSearchRelatedItemsInput(v *SearchRelatedItemsInput) error {
 	}
 	if v.CaseId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CaseId"))
+	}
+	if v.Filters != nil {
+		if err := validateRelatedItemFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

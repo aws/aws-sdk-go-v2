@@ -977,7 +977,11 @@ type DescribedServer struct {
 	Protocols []Protocol
 
 	// Specifies whether or not performance for your Amazon S3 directories is
-	// optimized. This is disabled by default.
+	// optimized.
+	//
+	//   - If using the console, this is enabled by default.
+	//
+	//   - If using the API or CLI, this is disabled by default.
 	//
 	// By default, home directory mappings have a TYPE of DIRECTORY . If you enable
 	// this option, you would then need to explicitly set the HomeDirectoryMapEntry Type
@@ -1320,6 +1324,13 @@ type EndpointDetails struct {
 
 	// A list of security groups IDs that are available to attach to your server's
 	// endpoint.
+	//
+	// While SecurityGroupIds appears in the response syntax for consistency with
+	// CreateServer and UpdateServer operations, this field is not populated in
+	// DescribeServer responses. Security groups are managed at the VPC endpoint level
+	// and can be modified outside of the Transfer Family service. To retrieve current
+	// security group information, use the EC2 DescribeVpcEndpoints API with the
+	// VpcEndpointId returned in the response.
 	//
 	// This property can only be set when EndpointType is set to VPC .
 	//
@@ -2112,7 +2123,11 @@ type S3InputFileLocation struct {
 type S3StorageOptions struct {
 
 	// Specifies whether or not performance for your Amazon S3 directories is
-	// optimized. This is disabled by default.
+	// optimized.
+	//
+	//   - If using the console, this is enabled by default.
+	//
+	//   - If using the API or CLI, this is disabled by default.
 	//
 	// By default, home directory mappings have a TYPE of DIRECTORY . If you enable
 	// this option, you would then need to explicitly set the HomeDirectoryMapEntry Type
@@ -2156,7 +2171,10 @@ type ServiceMetadata struct {
 type SftpConnectorConfig struct {
 
 	// Specify the number of concurrent connections that your connector creates to the
-	// remote server. The default value is 5 (this is also the maximum value allowed).
+	// remote server. The default value is 1 . The maximum values is 5 .
+	//
+	// If you are using the Amazon Web Services Management Console, the default value
+	// is 5 .
 	//
 	// This parameter specifies the number of active connections that your connector
 	// can establish with the remote server at the same time. Increasing this value can

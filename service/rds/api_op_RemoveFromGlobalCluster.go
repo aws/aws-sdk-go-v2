@@ -35,9 +35,13 @@ type RemoveFromGlobalClusterInput struct {
 
 	// The Amazon Resource Name (ARN) identifying the cluster that was detached from
 	// the Aurora global database cluster.
+	//
+	// This member is required.
 	DbClusterIdentifier *string
 
 	// The cluster identifier to detach from the Aurora global database cluster.
+	//
+	// This member is required.
 	GlobalClusterIdentifier *string
 
 	noSmithyDocumentSerde
@@ -119,6 +123,9 @@ func (c *Client) addOperationRemoveFromGlobalClusterMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
+	if err = addOpRemoveFromGlobalClusterValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveFromGlobalCluster(options.Region), middleware.Before); err != nil {

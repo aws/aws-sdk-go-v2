@@ -805,6 +805,10 @@ type VoiceConnector struct {
 	// The Voice Connector's name.
 	Name *string
 
+	// The type of network of the Voice Connector. Either IPv4 only or dual-stack
+	// (IPv4 and IPv6).
+	NetworkType NetworkType
+
 	// The outbound host name for the Voice Connector.
 	OutboundHostName *string
 

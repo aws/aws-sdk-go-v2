@@ -28,15 +28,16 @@ func (c *Client) RemoveIpRoutes(ctx context.Context, params *RemoveIpRoutesInput
 
 type RemoveIpRoutesInput struct {
 
-	// IP address blocks that you want to remove.
-	//
-	// This member is required.
-	CidrIps []string
-
 	// Identifier (ID) of the directory from which you want to remove the IP addresses.
 	//
 	// This member is required.
 	DirectoryId *string
+
+	// IP address blocks that you want to remove.
+	CidrIps []string
+
+	// IPv6 address blocks that you want to remove.
+	CidrIpv6s []string
 
 	noSmithyDocumentSerde
 }

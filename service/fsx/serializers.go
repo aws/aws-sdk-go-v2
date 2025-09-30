@@ -3300,6 +3300,11 @@ func awsAwsjson11_serializeDocumentCreateFileSystemOntapConfiguration(v *types.C
 		ok.String(*v.EndpointIpAddressRange)
 	}
 
+	if v.EndpointIpv6AddressRange != nil {
+		ok := object.Key("EndpointIpv6AddressRange")
+		ok.String(*v.EndpointIpv6AddressRange)
+	}
+
 	if v.FsxAdminPassword != nil {
 		ok := object.Key("FsxAdminPassword")
 		ok.String(*v.FsxAdminPassword)
@@ -4963,6 +4968,11 @@ func awsAwsjson11_serializeDocumentUpdateFileSystemOntapConfiguration(v *types.U
 		if err := awsAwsjson11_serializeDocumentDiskIopsConfiguration(v.DiskIopsConfiguration, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.EndpointIpv6AddressRange != nil {
+		ok := object.Key("EndpointIpv6AddressRange")
+		ok.String(*v.EndpointIpv6AddressRange)
 	}
 
 	if v.FsxAdminPassword != nil {

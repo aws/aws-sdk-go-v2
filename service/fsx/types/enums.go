@@ -9,6 +9,7 @@ const (
 	ActiveDirectoryErrorTypeDomainNotFound         ActiveDirectoryErrorType = "DOMAIN_NOT_FOUND"
 	ActiveDirectoryErrorTypeIncompatibleDomainMode ActiveDirectoryErrorType = "INCOMPATIBLE_DOMAIN_MODE"
 	ActiveDirectoryErrorTypeWrongVpc               ActiveDirectoryErrorType = "WRONG_VPC"
+	ActiveDirectoryErrorTypeInvalidNetworkType     ActiveDirectoryErrorType = "INVALID_NETWORK_TYPE"
 	ActiveDirectoryErrorTypeInvalidDomainStage     ActiveDirectoryErrorType = "INVALID_DOMAIN_STAGE"
 )
 
@@ -21,6 +22,7 @@ func (ActiveDirectoryErrorType) Values() []ActiveDirectoryErrorType {
 		"DOMAIN_NOT_FOUND",
 		"INCOMPATIBLE_DOMAIN_MODE",
 		"WRONG_VPC",
+		"INVALID_NETWORK_TYPE",
 		"INVALID_DOMAIN_STAGE",
 	}
 }

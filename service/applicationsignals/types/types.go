@@ -7,6 +7,136 @@ import (
 	"time"
 )
 
+// A structure that defines a filter for narrowing down results based on specific
+// attribute values. This can be used to filter services by platform, environment,
+// or other service characteristics.
+type AttributeFilter struct {
+
+	// The name of the attribute to filter by, such as Platform , Environment , or
+	// BusinessUnit .
+	//
+	// This member is required.
+	AttributeFilterName *string
+
+	// An array of values to match for the specified attribute. Services that have any
+	// of these values for the attribute will be included in the results.
+	//
+	// This member is required.
+	AttributeFilterValues []string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains information about an audit finding, which represents
+// an automated analysis result about service behavior, performance issues, or
+// potential problems identified through heuristic algorithms.
+type AuditFinding struct {
+
+	// The key attributes that identify the service or entity this audit finding
+	// relates to. This is a string-to-string map that includes fields like Type, Name,
+	// and Environment.
+	//
+	// This member is required.
+	KeyAttributes map[string]string
+
+	// An array of auditor results that contain the specific findings, descriptions,
+	// and severity levels identified by different auditing algorithms.
+	AuditorResults []AuditorResult
+
+	// A structure containing nodes and edges that represent the dependency
+	// relationships relevant to this audit finding, helping to understand the context
+	// and potential impact.
+	DependencyGraph *DependencyGraph
+
+	// A structure containing metric data queries and time range information that
+	// provides context for the audit finding through relevant performance metrics.
+	MetricGraph *MetricGraph
+
+	// The name of the operation associated with this audit finding, if the finding is
+	// specific to a particular service operation.
+	Operation *string
+
+	// The type of audit finding.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains the result of an automated audit analysis, including
+// the auditor name, description of findings, and severity level.
+type AuditorResult struct {
+
+	// The name of the auditor algorithm that generated this result.
+	Auditor *string
+
+	// A detailed description of the audit finding, explaining what was observed and
+	// potential implications.
+	Description *string
+
+	// The severity level of this audit finding, indicating the importance and
+	// potential impact of the issue.
+	Severity Severity
+
+	noSmithyDocumentSerde
+}
+
+// A structure that specifies the target entity for audit analysis, such as a
+// service , SLO , or service_operation .
+type AuditTarget struct {
+
+	// The specific data identifying the audit target entity.
+	//
+	// This member is required.
+	Data AuditTargetEntity
+
+	// The type of entity being audited, such as Service , SLO , or ServiceOperation .
+	//
+	// This member is required.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// A union structure that contains the specific entity information for different
+// types of audit targets.
+//
+// The following types satisfy this interface:
+//
+//	AuditTargetEntityMemberService
+//	AuditTargetEntityMemberServiceOperation
+//	AuditTargetEntityMemberSlo
+type AuditTargetEntity interface {
+	isAuditTargetEntity()
+}
+
+// Service entity information when the audit target is a service.
+type AuditTargetEntityMemberService struct {
+	Value ServiceEntity
+
+	noSmithyDocumentSerde
+}
+
+func (*AuditTargetEntityMemberService) isAuditTargetEntity() {}
+
+// Service operation entity information when the audit target is a specific
+// service operation.
+type AuditTargetEntityMemberServiceOperation struct {
+	Value ServiceOperationEntity
+
+	noSmithyDocumentSerde
+}
+
+func (*AuditTargetEntityMemberServiceOperation) isAuditTargetEntity() {}
+
+// SLO entity information when the audit target is a service level objective.
+type AuditTargetEntityMemberSlo struct {
+	Value ServiceLevelObjectiveEntity
+
+	noSmithyDocumentSerde
+}
+
+func (*AuditTargetEntityMemberSlo) isAuditTargetEntity() {}
+
 // An array of structures, where each structure includes an error indicating that
 // one of the requests in the array was not valid.
 type BatchUpdateExclusionWindowsError struct {
@@ -85,6 +215,51 @@ type CalendarInterval struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that contains information about a change event that occurred for a
+// service, such as a deployment or configuration change.
+type ChangeEvent struct {
+
+	// The Amazon Web Services account ID where this change event occurred.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The type of change event that occurred, such as DEPLOYMENT .
+	//
+	// This member is required.
+	ChangeEventType ChangeEventType
+
+	// The entity (service or resource) that was affected by this change event,
+	// including its key attributes.
+	//
+	// This member is required.
+	Entity map[string]string
+
+	// A unique identifier for this change event.
+	//
+	// This member is required.
+	EventId *string
+
+	// The Amazon Web Services region where this change event occurred.
+	//
+	// This member is required.
+	Region *string
+
+	// The timestamp when this change event occurred. When used in a raw HTTP Query
+	// API, it is formatted as epoch time in seconds.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	// The name or description of this change event.
+	EventName *string
+
+	// The name of the user who initiated this change event, if available.
+	UserName *string
+
+	noSmithyDocumentSerde
+}
+
 // Identifies the dependency using the DependencyKeyAttributes and
 // DependencyOperationName .
 //
@@ -122,6 +297,22 @@ type DependencyConfig struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that represents the dependency relationships relevant to an audit
+// finding, containing nodes and edges that show how services and resources are
+// connected.
+type DependencyGraph struct {
+
+	// An array of edges representing the connections and relationships between the
+	// nodes in the dependency graph.
+	Edges []Edge
+
+	// An array of nodes representing the services, resources, or other entities in
+	// the dependency graph.
+	Nodes []Node
+
+	noSmithyDocumentSerde
+}
+
 // A dimension is a name/value pair that is part of the identity of a metric.
 // Because dimensions are part of the unique identifier for a metric, whenever you
 // add a unique name/value pair to one of your metrics, you are creating a new
@@ -146,6 +337,26 @@ type Dimension struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that represents a connection between two nodes in a dependency
+// graph, showing the relationship and characteristics of the connection.
+type Edge struct {
+
+	// The type of connection between the nodes, indicating the nature of the
+	// relationship.
+	ConnectionType ConnectionType
+
+	// The identifier of the destination node in this edge connection.
+	DestinationNodeId *string
+
+	// The duration or latency associated with this connection, if applicable.
+	Duration *float64
+
+	// The identifier of the source node in this edge connection.
+	SourceNodeId *string
 
 	noSmithyDocumentSerde
 }
@@ -200,6 +411,50 @@ type Goal struct {
 	// The percentage of remaining budget over total budget that you want to get
 	// warnings for. If you omit this parameter, the default of 50.0 is used.
 	WarningThreshold *float64
+
+	noSmithyDocumentSerde
+}
+
+// A structure that defines how services should be grouped based on specific
+// attributes. This includes the friendly name for the grouping, the source keys to
+// derive values from, and an optional default value.
+type GroupingAttributeDefinition struct {
+
+	// The friendly name for this grouping attribute, such as BusinessUnit or
+	// Environment . This name is used to identify the grouping in the console and APIs.
+	//
+	// This member is required.
+	GroupingName *string
+
+	// The default value to use for this grouping attribute when no value can be
+	// derived from the source keys. This ensures all services have a grouping value
+	// even if the source data is missing.
+	DefaultGroupingValue *string
+
+	// An array of source keys used to derive the grouping attribute value from
+	// telemetry data, Amazon Web Services tags, or other sources. For example,
+	// ["business_unit", "team"] would look for values in those fields.
+	GroupingSourceKeys []string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains the complete grouping configuration for an account,
+// including all defined grouping attributes and metadata about when it was last
+// updated.
+type GroupingConfiguration struct {
+
+	// An array of grouping attribute definitions that specify how services should be
+	// grouped based on various attributes and source keys.
+	//
+	// This member is required.
+	GroupingAttributeDefinitions []GroupingAttributeDefinition
+
+	// The timestamp when this grouping configuration was last updated. When used in a
+	// raw HTTP Query API, it is formatted as epoch time in seconds.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -352,6 +607,25 @@ type MetricDataQuery struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that contains metric data queries and time range information that
+// provides context for audit findings through relevant performance metrics.
+type MetricGraph struct {
+
+	// The end time for the metric data included in this graph. When used in a raw
+	// HTTP Query API, it is formatted as epoch time in seconds.
+	EndTime *time.Time
+
+	// An array of metric data queries that define the metrics to be retrieved and
+	// analyzed as part of the audit finding context.
+	MetricDataQueries []MetricDataQuery
+
+	// The start time for the metric data included in this graph. When used in a raw
+	// HTTP Query API, it is formatted as epoch time in seconds.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // This structure contains information about one CloudWatch metric associated with
 // this entity discovered by Application Signals.
 type MetricReference struct {
@@ -460,6 +734,41 @@ type MonitoredRequestCountMetricDataQueriesMemberGoodCountMetric struct {
 }
 
 func (*MonitoredRequestCountMetricDataQueriesMemberGoodCountMetric) isMonitoredRequestCountMetricDataQueries() {
+}
+
+// A structure that represents a node in a dependency graph, containing
+// information about a service, resource, or other entity and its characteristics.
+type Node struct {
+
+	// The key attributes that identify this node, including Type, Name, and
+	// Environment information.
+	//
+	// This member is required.
+	KeyAttributes map[string]string
+
+	// The name of the entity represented by this node.
+	//
+	// This member is required.
+	Name *string
+
+	// A unique identifier for this node within the dependency graph.
+	//
+	// This member is required.
+	NodeId *string
+
+	// The duration or processing time associated with this node, if applicable.
+	Duration *float64
+
+	// The operation associated with this node, if applicable.
+	Operation *string
+
+	// The status of the entity represented by this node.
+	Status *string
+
+	// The type of entity represented by this node, such as Service or Resource .
+	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // The recurrence rule for the SLO time window exclusion .
@@ -729,6 +1038,10 @@ type Service struct {
 	//   - "Identifier": "name-of-log-group"
 	LogGroupReferences []map[string]string
 
+	// An array of service groups that this service belongs to, based on the
+	// configured grouping attributes.
+	ServiceGroups []ServiceGroup
+
 	noSmithyDocumentSerde
 }
 
@@ -814,6 +1127,54 @@ type ServiceDependent struct {
 	// If the invoked entity is an operation on an entity, the name of that dependent
 	// operation is displayed here.
 	OperationName *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains identifying information for a service entity.
+type ServiceEntity struct {
+
+	// The Amazon Web Services account ID where the service is located. Provide this
+	// value only for cross-account access.
+	AwsAccountId *string
+
+	// The environment where the service is deployed.
+	Environment *string
+
+	// The name of the service.
+	Name *string
+
+	// The type of the service entity.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that represents a logical grouping of services based on shared
+// attributes such as business unit, environment, or entry point.
+type ServiceGroup struct {
+
+	// A unique identifier for this grouping attribute value, used for filtering and
+	// API operations.
+	//
+	// This member is required.
+	GroupIdentifier *string
+
+	// The name of the grouping attribute, such as BusinessUnit or Environment .
+	//
+	// This member is required.
+	GroupName *string
+
+	// The source of the grouping attribute, such as TAG , OTEL , or DEFAULT .
+	//
+	// This member is required.
+	GroupSource *string
+
+	// The value of the grouping attribute for this service, such as Payments or
+	// Production .
+	//
+	// This member is required.
+	GroupValue *string
 
 	noSmithyDocumentSerde
 }
@@ -942,6 +1303,10 @@ type ServiceLevelIndicatorMetricConfig struct {
 	// If this SLO monitors a CloudWatch metric or the result of a CloudWatch metric
 	// math expression, use this structure to specify that metric or expression.
 	MetricDataQueries []MetricDataQuery
+
+	// The name of the CloudWatch metric to use for the SLO, when using a custom
+	// metric rather than Application Signals standard metrics.
+	MetricName *string
 
 	// If the SLO is to monitor either the LATENCY or AVAILABILITY metric that
 	// Application Signals collects, use this field to specify which of those metrics
@@ -1158,6 +1523,20 @@ type ServiceLevelObjectiveBudgetReportError struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that contains identifying information for a service level objective
+// entity.
+type ServiceLevelObjectiveEntity struct {
+
+	// The ARN of the service level objective. The SLO must be provided with ARN for
+	// cross-account access.
+	SloArn *string
+
+	// The name of the service level objective.
+	SloName *string
+
+	noSmithyDocumentSerde
+}
+
 // A structure that contains information about one service level objective (SLO)
 // created in Application Signals.
 type ServiceLevelObjectiveSummary struct {
@@ -1233,6 +1612,46 @@ type ServiceOperation struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains identifying information for a service operation
+// entity.
+type ServiceOperationEntity struct {
+
+	// The type of metric associated with this service operation.
+	MetricType *string
+
+	// The name of the operation.
+	Operation *string
+
+	// The service entity that contains this operation.
+	Service *ServiceEntity
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains information about the current state of a service,
+// including its latest change events such as deployments and other state-changing
+// activities.
+type ServiceState struct {
+
+	// An array containing the most recent change events for this service, such as
+	// deployments, with information about when they occurred and who initiated them.
+	//
+	// This member is required.
+	LatestChangeEvents []ChangeEvent
+
+	// The key attributes that identify this service, including Type, Name, and
+	// Environment information.
+	//
+	// This member is required.
+	Service map[string]string
+
+	// The attribute filters that were applied when retrieving this service state
+	// information.
+	AttributeFilters []AttributeFilter
 
 	noSmithyDocumentSerde
 }
@@ -1317,6 +1736,10 @@ type ServiceSummary struct {
 	//   collected or specifies what was used for the source of telemetry data.
 	AttributeMaps []map[string]string
 
+	// An array of service groups that this service belongs to, based on the
+	// configured grouping attributes.
+	ServiceGroups []ServiceGroup
+
 	noSmithyDocumentSerde
 }
 
@@ -1366,5 +1789,6 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isAuditTargetEntity()                      {}
 func (*UnknownUnionMember) isInterval()                               {}
 func (*UnknownUnionMember) isMonitoredRequestCountMetricDataQueries() {}

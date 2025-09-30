@@ -28,6 +28,21 @@ import (
 //   - User must have permission on the form type.
 //
 //   - The form type should not be deleted or in an invalid state.
+//
+// One use case for this API is to determine whether a form field is indexed for
+// search.
+//
+// A searchable field will be annotated with @amazon.datazone#searchable . By
+// default, searchable fields are indexed for semantic search, where related query
+// terms will match the attribute value even if they are not stemmed or keyword
+// matches. If a field is indexed technical identifier search, it will be annotated
+// with @amazon.datazone#searchable(modes:["TECHNICAL"]) . If a field is indexed
+// for lexical search (supports stemmed and prefix matches but not semantic
+// matches), it will be annotated with
+// @amazon.datazone#searchable(modes:["LEXICAL"]) .
+//
+// A field storing glossary term IDs (which is filterable) will be annotated with
+// @amazon.datazone#glossaryterm("${glossaryId}") .
 func (c *Client) GetFormType(ctx context.Context, params *GetFormTypeInput, optFns ...func(*Options)) (*GetFormTypeOutput, error) {
 	if params == nil {
 		params = &GetFormTypeInput{}

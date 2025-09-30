@@ -120,9 +120,10 @@ type EndpointType string
 
 // Enum values for EndpointType
 const (
-	EndpointTypePublic      EndpointType = "PUBLIC"
-	EndpointTypePrivateLink EndpointType = "PRIVATE_LINK"
-	EndpointTypeFips        EndpointType = "FIPS"
+	EndpointTypePublic          EndpointType = "PUBLIC"
+	EndpointTypePrivateLink     EndpointType = "PRIVATE_LINK"
+	EndpointTypeFips            EndpointType = "FIPS"
+	EndpointTypeFipsPrivateLink EndpointType = "FIPS_PRIVATE_LINK"
 )
 
 // Values returns all known values for EndpointType. Note that this can be
@@ -134,6 +135,7 @@ func (EndpointType) Values() []EndpointType {
 		"PUBLIC",
 		"PRIVATE_LINK",
 		"FIPS",
+		"FIPS_PRIVATE_LINK",
 	}
 }
 

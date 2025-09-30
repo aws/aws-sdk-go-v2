@@ -10469,6 +10469,11 @@ func awsRestjson1_deserializeDocumentPrefetchRetrieval(v **types.PrefetchRetriev
 				return err
 			}
 
+		case "TrafficShapingTpsConfiguration":
+			if err := awsRestjson1_deserializeDocumentTrafficShapingTpsConfiguration(&sv.TrafficShapingTpsConfiguration, value); err != nil {
+				return err
+			}
+
 		case "TrafficShapingType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10742,6 +10747,11 @@ func awsRestjson1_deserializeDocumentRecurringRetrieval(v **types.RecurringRetri
 
 		case "TrafficShapingRetrievalWindow":
 			if err := awsRestjson1_deserializeDocumentTrafficShapingRetrievalWindow(&sv.TrafficShapingRetrievalWindow, value); err != nil {
+				return err
+			}
+
+		case "TrafficShapingTpsConfiguration":
+			if err := awsRestjson1_deserializeDocumentTrafficShapingTpsConfiguration(&sv.TrafficShapingTpsConfiguration, value); err != nil {
 				return err
 			}
 
@@ -11699,6 +11709,63 @@ func awsRestjson1_deserializeDocumentTrafficShapingRetrievalWindow(v **types.Tra
 					return err
 				}
 				sv.RetrievalWindowDurationSeconds = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTrafficShapingTpsConfiguration(v **types.TrafficShapingTpsConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TrafficShapingTpsConfiguration
+	if *v == nil {
+		sv = &types.TrafficShapingTpsConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "PeakConcurrentUsers":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PeakConcurrentUsers = ptr.Int32(int32(i64))
+			}
+
+		case "PeakTps":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PeakTps = ptr.Int32(int32(i64))
 			}
 
 		default:

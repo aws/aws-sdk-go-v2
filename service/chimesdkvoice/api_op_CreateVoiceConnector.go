@@ -73,6 +73,10 @@ type CreateVoiceConnectorInput struct {
 	//   migration.
 	IntegrationType types.VoiceConnectorIntegrationType
 
+	// The type of network for the Voice Connector. Either IPv4 only or dual-stack
+	// (IPv4 and IPv6).
+	NetworkType types.NetworkType
+
 	// The tags assigned to the Voice Connector.
 	Tags []types.Tag
 

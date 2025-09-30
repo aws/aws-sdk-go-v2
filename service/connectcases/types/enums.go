@@ -132,10 +132,12 @@ type RelatedItemType string
 
 // Enum values for RelatedItemType
 const (
-	RelatedItemTypeContact RelatedItemType = "Contact"
-	RelatedItemTypeComment RelatedItemType = "Comment"
-	RelatedItemTypeFile    RelatedItemType = "File"
-	RelatedItemTypeSla     RelatedItemType = "Sla"
+	RelatedItemTypeContact     RelatedItemType = "Contact"
+	RelatedItemTypeComment     RelatedItemType = "Comment"
+	RelatedItemTypeFile        RelatedItemType = "File"
+	RelatedItemTypeSla         RelatedItemType = "Sla"
+	RelatedItemTypeConnectCase RelatedItemType = "ConnectCase"
+	RelatedItemTypeCustom      RelatedItemType = "Custom"
 )
 
 // Values returns all known values for RelatedItemType. Note that this can be
@@ -148,6 +150,8 @@ func (RelatedItemType) Values() []RelatedItemType {
 		"Comment",
 		"File",
 		"Sla",
+		"ConnectCase",
+		"Custom",
 	}
 }
 

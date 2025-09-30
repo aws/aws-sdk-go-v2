@@ -84,6 +84,10 @@ type CreateDirectoryInput struct {
 	// A description for the directory.
 	Description *string
 
+	// The network type for your directory. Simple AD supports IPv4 and Dual-stack
+	// only.
+	NetworkType types.NetworkType
+
 	// The NetBIOS name of the directory, such as CORP .
 	ShortName *string
 

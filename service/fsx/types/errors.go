@@ -902,7 +902,7 @@ func (e *S3AccessPointAttachmentNotFound) ErrorCode() string {
 func (e *S3AccessPointAttachmentNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An error indicating that a particular service limit was exceeded. You can
-// increase some service limits by contacting Amazon Web ServicesSupport.
+// increase some service limits by contacting Amazon Web Services Support.
 type ServiceLimitExceeded struct {
 	Message *string
 

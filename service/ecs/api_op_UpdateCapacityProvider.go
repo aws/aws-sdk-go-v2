@@ -12,6 +12,9 @@ import (
 )
 
 // Modifies the parameters for a capacity provider.
+//
+// These changes only apply to new Amazon ECS Managed Instances, or EC2 instances,
+// not existing ones.
 func (c *Client) UpdateCapacityProvider(ctx context.Context, params *UpdateCapacityProviderInput, optFns ...func(*Options)) (*UpdateCapacityProviderOutput, error) {
 	if params == nil {
 		params = &UpdateCapacityProviderInput{}
@@ -29,16 +32,25 @@ func (c *Client) UpdateCapacityProvider(ctx context.Context, params *UpdateCapac
 
 type UpdateCapacityProviderInput struct {
 
-	// An object that represent the parameters to update for the Auto Scaling group
-	// capacity provider.
-	//
-	// This member is required.
-	AutoScalingGroupProvider *types.AutoScalingGroupProviderUpdate
-
 	// The name of the capacity provider to update.
 	//
 	// This member is required.
 	Name *string
+
+	// An object that represent the parameters to update for the Auto Scaling group
+	// capacity provider.
+	AutoScalingGroupProvider *types.AutoScalingGroupProviderUpdate
+
+	// The name of the cluster that contains the capacity provider to update. Managed
+	// instances capacity providers are cluster-scoped and can only be updated within
+	// their associated cluster.
+	Cluster *string
+
+	// The updated configuration for the Amazon ECS Managed Instances provider. You
+	// can modify the infrastructure role, instance launch template, and tag
+	// propagation settings. Changes take effect for new instances launched after the
+	// update.
+	ManagedInstancesProvider *types.UpdateManagedInstancesProviderConfiguration
 
 	noSmithyDocumentSerde
 }

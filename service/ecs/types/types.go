@@ -8,6 +8,38 @@ import (
 	"time"
 )
 
+// The minimum and maximum number of accelerators (such as GPUs) for instance type
+// selection. This is used for workloads that require specific numbers of
+// accelerators.
+type AcceleratorCountRequest struct {
+
+	// The maximum number of accelerators. Instance types with more accelerators are
+	// excluded from selection.
+	Max *int32
+
+	// The minimum number of accelerators. Instance types with fewer accelerators are
+	// excluded from selection.
+	Min *int32
+
+	noSmithyDocumentSerde
+}
+
+// The minimum and maximum total accelerator memory in mebibytes (MiB) for
+// instance type selection. This is important for GPU workloads that require
+// specific amounts of video memory.
+type AcceleratorTotalMemoryMiBRequest struct {
+
+	// The maximum total accelerator memory in MiB. Instance types with more
+	// accelerator memory are excluded from selection.
+	Max *int32
+
+	// The minimum total accelerator memory in MiB. Instance types with less
+	// accelerator memory are excluded from selection.
+	Min *int32
+
+	noSmithyDocumentSerde
+}
+
 // The advanced settings for a load balancer used in blue/green deployments.
 // Specify the alternate target group, listener rules, and IAM role required for
 // traffic shifting during blue/green deployments. For more information, see [Required resources for Amazon ECS blue/green deployments]in
@@ -220,6 +252,22 @@ type AwsVpcConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The minimum and maximum baseline Amazon EBS bandwidth in megabits per second
+// (Mbps) for instance type selection. This is important for workloads with high
+// storage I/O requirements.
+type BaselineEbsBandwidthMbpsRequest struct {
+
+	// The maximum baseline Amazon EBS bandwidth in Mbps. Instance types with higher
+	// Amazon EBS bandwidth are excluded from selection.
+	Max *int32
+
+	// The minimum baseline Amazon EBS bandwidth in Mbps. Instance types with lower
+	// Amazon EBS bandwidth are excluded from selection.
+	Min *int32
+
+	noSmithyDocumentSerde
+}
+
 // The details for a capacity provider.
 type CapacityProvider struct {
 
@@ -228,6 +276,16 @@ type CapacityProvider struct {
 
 	// The Amazon Resource Name (ARN) that identifies the capacity provider.
 	CapacityProviderArn *string
+
+	// The cluster that this capacity provider is associated with. Managed instances
+	// capacity providers are cluster-scoped, meaning they can only be used within
+	// their associated cluster.
+	Cluster *string
+
+	// The configuration for the Amazon ECS Managed Instances provider. This includes
+	// the infrastructure role, the launch template configuration, and tag propagation
+	// settings.
+	ManagedInstancesProvider *ManagedInstancesProvider
 
 	// The name of the capacity provider.
 	Name *string
@@ -263,6 +321,11 @@ type CapacityProvider struct {
 	//   You cannot edit or delete tag keys or values with this prefix. Tags with this
 	//   prefix do not count against your tags per resource limit.
 	Tags []Tag
+
+	// The type of capacity provider. For Amazon ECS Managed Instances, this value is
+	// MANAGED_INSTANCES , indicating that Amazon ECS manages the underlying Amazon EC2
+	// instances on your behalf.
+	Type CapacityProviderType
 
 	// The update status of the capacity provider. The following are the possible
 	// states that is returned.
@@ -1146,11 +1209,11 @@ type ContainerDefinition struct {
 	// There's no loopback for port mappings on Windows, so you can't access a
 	// container's mapped port from the host itself.
 	//
-	// This parameter maps to PortBindings in the docker container create command and
-	// the --publish option to docker run. If the network mode of a task definition is
-	// set to none , then you can't specify port mappings. If the network mode of a
-	// task definition is set to host , then host ports must either be undefined or
-	// they must match the container port in the port mapping.
+	// This parameter maps to PortBindings in the the docker container create command
+	// and the --publish option to docker run. If the network mode of a task
+	// definition is set to none , then you can't specify port mappings. If the network
+	// mode of a task definition is set to host , then host ports must either be
+	// undefined or they must match the container port in the port mapping.
 	//
 	// After a task reaches the RUNNING status, manual and automatic host and
 	// container port assignments are visible in the Network Bindings section of a
@@ -1707,6 +1770,44 @@ type CreatedAt struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for creating a Amazon ECS Managed Instances provider. This
+// specifies how Amazon ECS should manage Amazon EC2 instances, including the
+// infrastructure role, instance launch template, and whether to propagate tags
+// from the capacity provider to the instances.
+type CreateManagedInstancesProviderConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the infrastructure role that Amazon ECS uses
+	// to manage instances on your behalf. This role must have permissions to launch,
+	// terminate, and manage Amazon EC2 instances, as well as access to other Amazon
+	// Web Services services required for Amazon ECS Managed Instances functionality.
+	//
+	// For more information, see [Amazon ECS infrastructure IAM role] in the Amazon ECS Developer Guide.
+	//
+	// [Amazon ECS infrastructure IAM role]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/infrastructure_IAM_role.html
+	//
+	// This member is required.
+	InfrastructureRoleArn *string
+
+	// The launch template configuration that specifies how Amazon ECS should launch
+	// Amazon EC2 instances. This includes the instance profile, network configuration,
+	// storage settings, and instance requirements for attribute-based instance type
+	// selection.
+	//
+	// For more information, see [Store instance launch parameters in Amazon EC2 launch templates] in the Amazon EC2 User Guide.
+	//
+	// [Store instance launch parameters in Amazon EC2 launch templates]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html
+	//
+	// This member is required.
+	InstanceLaunchTemplate *InstanceLaunchTemplate
+
+	// Specifies whether to propagate tags from the capacity provider to the Amazon
+	// ECS Managed Instances. When enabled, tags applied to the capacity provider are
+	// automatically applied to all instances launched by this provider.
+	PropagateTags PropagateMITags
+
+	noSmithyDocumentSerde
+}
+
 // The details of an Amazon ECS service deployment. This is used only when a
 // service uses the ECS deployment controller type.
 type Deployment struct {
@@ -2169,8 +2270,9 @@ type DeploymentEphemeralStorage struct {
 // [Lifecycle hooks for Amazon ECS service deployments]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-lifecycle-hooks.html
 type DeploymentLifecycleHook struct {
 
-	// Use this field to specify custom parameters that Amazon ECS will pass to your
-	// hook target invocations (such as a Lambda function).
+	// The details of the deployment lifecycle hook. This provides additional
+	// configuration for how the hook should be executed during deployment operations
+	// on Amazon ECS Managed Instances.
 	HookDetails document.Interface
 
 	// The Amazon Resource Name (ARN) of the hook target. Currently, only Lambda
@@ -2919,6 +3021,227 @@ type InstanceHealthCheckResult struct {
 	noSmithyDocumentSerde
 }
 
+// The launch template configuration for Amazon ECS Managed Instances. This
+// defines how Amazon ECS launches Amazon EC2 instances, including the instance
+// profile for your tasks, network and storage configuration, capacity options, and
+// instance requirements for flexible instance type selection.
+type InstanceLaunchTemplate struct {
+
+	// The Amazon Resource Name (ARN) of the instance profile that Amazon ECS applies
+	// to Amazon ECS Managed Instances. This instance profile must include the
+	// necessary permissions for your tasks to access Amazon Web Services services and
+	// resources.
+	//
+	// For more information, see [Amazon ECS instance profile for Managed Instances] in the Amazon ECS Developer Guide.
+	//
+	// [Amazon ECS instance profile for Managed Instances]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/managed-instances-instance-profile.html
+	//
+	// This member is required.
+	Ec2InstanceProfileArn *string
+
+	// The network configuration for Amazon ECS Managed Instances. This specifies the
+	// subnets and security groups that instances use for network connectivity.
+	//
+	// This member is required.
+	NetworkConfiguration *ManagedInstancesNetworkConfiguration
+
+	// The instance requirements. You can specify:
+	//
+	//   - The instance types
+	//
+	//   - Instance requirements such as vCPU count, memory, network performance, and
+	//   accelerator specifications
+	//
+	// Amazon ECS automatically selects the instances that match the specified
+	// criteria.
+	InstanceRequirements *InstanceRequirementsRequest
+
+	// CloudWatch provides two categories of monitoring: basic monitoring and detailed
+	// monitoring. By default, your managed instance is configured for basic
+	// monitoring. You can optionally enable detailed monitoring to help you more
+	// quickly identify and act on operational issues. You can enable or turn off
+	// detailed monitoring at launch or when the managed instance is running or
+	// stopped. For more information, see [Detailed monitoring for Amazon ECS Managed Instances]in the Amazon ECS Developer Guide.
+	//
+	// [Detailed monitoring for Amazon ECS Managed Instances]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/detailed-monitoring-managed-instances.html
+	Monitoring ManagedInstancesMonitoringOptions
+
+	// The storage configuration for Amazon ECS Managed Instances. This defines the
+	// root volume size and type for the instances.
+	StorageConfiguration *ManagedInstancesStorageConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The updated launch template configuration for Amazon ECS Managed Instances. You
+// can modify the instance profile, network configuration, storage settings, and
+// instance requirements. Changes apply to new instances launched after the update.
+//
+// For more information, see [Store instance launch parameters in Amazon EC2 launch templates] in the Amazon EC2 User Guide.
+//
+// [Store instance launch parameters in Amazon EC2 launch templates]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html
+type InstanceLaunchTemplateUpdate struct {
+
+	// The updated Amazon Resource Name (ARN) of the instance profile. The new
+	// instance profile must have the necessary permissions for your tasks.
+	//
+	// For more information, see [Amazon ECS instance profile for Managed Instances] in the Amazon ECS Developer Guide.
+	//
+	// [Amazon ECS instance profile for Managed Instances]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/managed-instances-instance-profile.html
+	Ec2InstanceProfileArn *string
+
+	// The updated instance requirements for attribute-based instance type selection.
+	// Changes to instance requirements affect which instance types Amazon ECS selects
+	// for new instances.
+	InstanceRequirements *InstanceRequirementsRequest
+
+	// CloudWatch provides two categories of monitoring: basic monitoring and detailed
+	// monitoring. By default, your managed instance is configured for basic
+	// monitoring. You can optionally enable detailed monitoring to help you more
+	// quickly identify and act on operational issues. You can enable or turn off
+	// detailed monitoring at launch or when the managed instance is running or
+	// stopped. For more information, see [Detailed monitoring for Amazon ECS Managed Instances]in the Amazon ECS Developer Guide.
+	//
+	// [Detailed monitoring for Amazon ECS Managed Instances]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/detailed-monitoring-managed-instances.html
+	Monitoring ManagedInstancesMonitoringOptions
+
+	// The updated network configuration for Amazon ECS Managed Instances. Changes to
+	// subnets and security groups affect new instances launched after the update.
+	NetworkConfiguration *ManagedInstancesNetworkConfiguration
+
+	// The updated storage configuration for Amazon ECS Managed Instances. Changes to
+	// storage settings apply to new instances launched after the update.
+	StorageConfiguration *ManagedInstancesStorageConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The instance requirements for attribute-based instance type selection. Instead
+// of specifying exact instance types, you define requirements such as vCPU count,
+// memory size, network performance, and accelerator specifications. Amazon ECS
+// automatically selects Amazon EC2 instance types that match these requirements,
+// providing flexibility and helping to mitigate capacity constraints.
+type InstanceRequirementsRequest struct {
+
+	// The minimum and maximum amount of memory in mebibytes (MiB) for the instance
+	// types. Amazon ECS selects instance types that have memory within this range.
+	//
+	// This member is required.
+	MemoryMiB *MemoryMiBRequest
+
+	// The minimum and maximum number of vCPUs for the instance types. Amazon ECS
+	// selects instance types that have vCPU counts within this range.
+	//
+	// This member is required.
+	VCpuCount *VCpuCountRangeRequest
+
+	// The minimum and maximum number of accelerators for the instance types. This is
+	// used when you need instances with specific numbers of GPUs or other
+	// accelerators.
+	AcceleratorCount *AcceleratorCountRequest
+
+	// The accelerator manufacturers to include. You can specify nvidia , amd ,
+	// amazon-web-services , or xilinx depending on your accelerator requirements.
+	AcceleratorManufacturers []AcceleratorManufacturer
+
+	// The specific accelerator names to include. For example, you can specify a100 ,
+	// v100 , k80 , or other specific accelerator models.
+	AcceleratorNames []AcceleratorName
+
+	// The minimum and maximum total accelerator memory in mebibytes (MiB). This is
+	// important for GPU workloads that require specific amounts of video memory.
+	AcceleratorTotalMemoryMiB *AcceleratorTotalMemoryMiBRequest
+
+	// The accelerator types to include. You can specify gpu for graphics processing
+	// units, fpga for field programmable gate arrays, or inference for machine
+	// learning inference accelerators.
+	AcceleratorTypes []AcceleratorType
+
+	// The instance types to include in the selection. When specified, Amazon ECS only
+	// considers these instance types, subject to the other requirements specified.
+	AllowedInstanceTypes []string
+
+	// Indicates whether to include bare metal instance types. Set to included to
+	// allow bare metal instances, excluded to exclude them, or required to use only
+	// bare metal instances.
+	BareMetal BareMetal
+
+	// The minimum and maximum baseline Amazon EBS bandwidth in megabits per second
+	// (Mbps). This is important for workloads with high storage I/O requirements.
+	BaselineEbsBandwidthMbps *BaselineEbsBandwidthMbpsRequest
+
+	// Indicates whether to include burstable performance instance types (T2, T3, T3a,
+	// T4g). Set to included to allow burstable instances, excluded to exclude them,
+	// or required to use only burstable instances.
+	BurstablePerformance BurstablePerformance
+
+	// The CPU manufacturers to include or exclude. You can specify intel , amd , or
+	// amazon-web-services to control which CPU types are used for your workloads.
+	CpuManufacturers []CpuManufacturer
+
+	// The instance types to exclude from selection. Use this to prevent Amazon ECS
+	// from selecting specific instance types that may not be suitable for your
+	// workloads.
+	ExcludedInstanceTypes []string
+
+	// The instance generations to include. You can specify current to use the latest
+	// generation instances, or previous to include previous generation instances for
+	// cost optimization.
+	InstanceGenerations []InstanceGeneration
+
+	// Indicates whether to include instance types with local storage. Set to included
+	// to allow local storage, excluded to exclude it, or required to use only
+	// instances with local storage.
+	LocalStorage LocalStorage
+
+	// The local storage types to include. You can specify hdd for hard disk drives,
+	// ssd for solid state drives, or both.
+	LocalStorageTypes []LocalStorageType
+
+	// The maximum price for Spot instances as a percentage of the optimal On-Demand
+	// price. This provides more precise cost control for Spot instance selection.
+	MaxSpotPriceAsPercentageOfOptimalOnDemandPrice *int32
+
+	// The minimum and maximum amount of memory per vCPU in gibibytes (GiB). This
+	// helps ensure that instance types have the appropriate memory-to-CPU ratio for
+	// your workloads.
+	MemoryGiBPerVCpu *MemoryGiBPerVCpuRequest
+
+	// The minimum and maximum network bandwidth in gigabits per second (Gbps). This
+	// is crucial for network-intensive workloads that require high throughput.
+	NetworkBandwidthGbps *NetworkBandwidthGbpsRequest
+
+	// The minimum and maximum number of network interfaces for the instance types.
+	// This is useful for workloads that require multiple network interfaces.
+	NetworkInterfaceCount *NetworkInterfaceCountRequest
+
+	// The price protection threshold for On-Demand Instances, as a percentage higher
+	// than an identified On-Demand price. The identified On-Demand price is the price
+	// of the lowest priced current generation C, M, or R instance type with your
+	// specified attributes. If no current generation C, M, or R instance type matches
+	// your attributes, then the identified price is from either the lowest priced
+	// current generation instance types or, failing that, the lowest priced previous
+	// generation instance types that match your attributes. When Amazon ECS selects
+	// instance types with your attributes, we will exclude instance types whose price
+	// exceeds your specified threshold.
+	OnDemandMaxPricePercentageOverLowestPrice *int32
+
+	// Indicates whether the instance types must support hibernation. When set to true
+	// , only instance types that support hibernation are selected.
+	RequireHibernateSupport *bool
+
+	// The maximum price for Spot instances as a percentage over the lowest priced
+	// On-Demand instance. This helps control Spot instance costs while maintaining
+	// access to capacity.
+	SpotMaxPricePercentageOverLowestPrice *int32
+
+	// The minimum and maximum total local storage in gigabytes (GB) for instance
+	// types with local storage.
+	TotalLocalStorageGB *TotalLocalStorageGBRequest
+
+	noSmithyDocumentSerde
+}
+
 // The Linux capabilities to add or remove from the default Docker configuration
 // for a container defined in the task definition. For more detailed information
 // about these Linux capabilities, see the [capabilities(7)]Linux manual page.
@@ -3427,6 +3750,71 @@ type ManagedAgentStateChange struct {
 	noSmithyDocumentSerde
 }
 
+// The network configuration for Amazon ECS Managed Instances. This specifies the
+// VPC subnets and security groups that instances use for network connectivity.
+// Amazon ECS Managed Instances support multiple network modes including awsvpc
+// (instances receive ENIs for task isolation), host (instances share network
+// namespace with tasks), and none (no external network connectivity), ensuring
+// backward compatibility for migrating workloads from Fargate or Amazon EC2.
+type ManagedInstancesNetworkConfiguration struct {
+
+	// The list of security group IDs to apply to Amazon ECS Managed Instances. These
+	// security groups control the network traffic allowed to and from the instances.
+	SecurityGroups []string
+
+	// The list of subnet IDs where Amazon ECS can launch Amazon ECS Managed
+	// Instances. Instances are distributed across the specified subnets for high
+	// availability. All subnets must be in the same VPC.
+	Subnets []string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for a Amazon ECS Managed Instances provider. Amazon ECS uses
+// this configuration to automatically launch, manage, and terminate Amazon EC2
+// instances on your behalf. Managed instances provide access to the full range of
+// Amazon EC2 instance types and features while offloading infrastructure
+// management to Amazon Web Services.
+type ManagedInstancesProvider struct {
+
+	// The Amazon Resource Name (ARN) of the infrastructure role that Amazon ECS
+	// assumes to manage instances. This role must include permissions for Amazon EC2
+	// instance lifecycle management, networking, and any additional Amazon Web
+	// Services services required for your workloads.
+	//
+	// For more information, see [Amazon ECS infrastructure IAM role] in the Amazon ECS Developer Guide.
+	//
+	// [Amazon ECS infrastructure IAM role]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/infrastructure_IAM_role.html
+	InfrastructureRoleArn *string
+
+	// The launch template that defines how Amazon ECS launches Amazon ECS Managed
+	// Instances. This includes the instance profile for your tasks, network and
+	// storage configuration, and instance requirements that determine which Amazon EC2
+	// instance types can be used.
+	//
+	// For more information, see [Store instance launch parameters in Amazon EC2 launch templates] in the Amazon EC2 User Guide.
+	//
+	// [Store instance launch parameters in Amazon EC2 launch templates]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html
+	InstanceLaunchTemplate *InstanceLaunchTemplate
+
+	// Determines whether tags from the capacity provider are automatically applied to
+	// Amazon ECS Managed Instances. This helps with cost allocation and resource
+	// management by ensuring consistent tagging across your infrastructure.
+	PropagateTags PropagateMITags
+
+	noSmithyDocumentSerde
+}
+
+// The storage configuration for Amazon ECS Managed Instances. This defines the
+// root volume configuration for the instances.
+type ManagedInstancesStorageConfiguration struct {
+
+	// The size of the tasks volume.
+	StorageSizeGiB *int32
+
+	noSmithyDocumentSerde
+}
+
 // The managed scaling settings for the Auto Scaling group capacity provider.
 //
 // When managed scaling is turned on, Amazon ECS manages the scale-in and
@@ -3504,6 +3892,40 @@ type ManagedStorageConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The minimum and maximum amount of memory per vCPU in gibibytes (GiB). This
+// helps ensure that instance types have the appropriate memory-to-CPU ratio for
+// your workloads.
+type MemoryGiBPerVCpuRequest struct {
+
+	// The maximum amount of memory per vCPU in GiB. Instance types with a higher
+	// memory-to-vCPU ratio are excluded from selection.
+	Max *float64
+
+	// The minimum amount of memory per vCPU in GiB. Instance types with a lower
+	// memory-to-vCPU ratio are excluded from selection.
+	Min *float64
+
+	noSmithyDocumentSerde
+}
+
+// The minimum and maximum amount of memory in mebibytes (MiB) for instance type
+// selection. This ensures that selected instance types have adequate memory for
+// your workloads.
+type MemoryMiBRequest struct {
+
+	// The minimum amount of memory in MiB. Instance types with less memory than this
+	// value are excluded from selection.
+	//
+	// This member is required.
+	Min *int32
+
+	// The maximum amount of memory in MiB. Instance types with more memory than this
+	// value are excluded from selection.
+	Max *int32
+
+	noSmithyDocumentSerde
+}
+
 // The details for a volume mount point that's used in a container definition.
 type MountPoint struct {
 
@@ -3518,6 +3940,21 @@ type MountPoint struct {
 	// The name of the volume to mount. Must be a volume name referenced in the name
 	// parameter of task definition volume .
 	SourceVolume *string
+
+	noSmithyDocumentSerde
+}
+
+// The minimum and maximum network bandwidth in gigabits per second (Gbps) for
+// instance type selection. This is important for network-intensive workloads.
+type NetworkBandwidthGbpsRequest struct {
+
+	// The maximum network bandwidth in Gbps. Instance types with higher network
+	// bandwidth are excluded from selection.
+	Max *float64
+
+	// The minimum network bandwidth in Gbps. Instance types with lower network
+	// bandwidth are excluded from selection.
+	Min *float64
 
 	noSmithyDocumentSerde
 }
@@ -3624,6 +4061,22 @@ type NetworkInterface struct {
 
 	// The private IPv4 address for the network interface.
 	PrivateIpv4Address *string
+
+	noSmithyDocumentSerde
+}
+
+// The minimum and maximum number of network interfaces for instance type
+// selection. This is useful for workloads that require multiple network
+// interfaces.
+type NetworkInterfaceCountRequest struct {
+
+	// The maximum number of network interfaces. Instance types that support more
+	// network interfaces are excluded from selection.
+	Max *int32
+
+	// The minimum number of network interfaces. Instance types that support fewer
+	// network interfaces are excluded from selection.
+	Min *int32
 
 	noSmithyDocumentSerde
 }
@@ -4128,17 +4581,6 @@ type Service struct {
 	//
 	// For more information, see [Balancing an Amazon ECS service across Availability Zones] in the Amazon Elastic Container Service Developer
 	// Guide .
-	//
-	// The default behavior of AvailabilityZoneRebalancing differs between create and
-	// update requests:
-	//
-	//   - For create service requests, when no value is specified for
-	//   AvailabilityZoneRebalancing , Amazon ECS defaults the value to ENABLED .
-	//
-	//   - For update service requests, when no value is specified for
-	//   AvailabilityZoneRebalancing , Amazon ECS defaults to the existing service’s
-	//   AvailabilityZoneRebalancing value. If the service never had an
-	//   AvailabilityZoneRebalancing value set, Amazon ECS treats this as DISABLED .
 	//
 	// [Balancing an Amazon ECS service across Availability Zones]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-rebalancing.html
 	AvailabilityZoneRebalancing AvailabilityZoneRebalancing
@@ -6343,6 +6785,22 @@ type Tmpfs struct {
 	noSmithyDocumentSerde
 }
 
+// The minimum and maximum total local storage in gigabytes (GB) for instance
+// types with local storage. This is useful for workloads that require local
+// storage for temporary data or caching.
+type TotalLocalStorageGBRequest struct {
+
+	// The maximum total local storage in GB. Instance types with more local storage
+	// are excluded from selection.
+	Max *float64
+
+	// The minimum total local storage in GB. Instance types with less local storage
+	// are excluded from selection.
+	Min *float64
+
+	noSmithyDocumentSerde
+}
+
 // The ulimit settings to pass to the container.
 //
 // Amazon ECS tasks hosted on Fargate use the default resource limit values set by
@@ -6370,6 +6828,54 @@ type Ulimit struct {
 	//
 	// This member is required.
 	SoftLimit int32
+
+	noSmithyDocumentSerde
+}
+
+// The updated configuration for a Amazon ECS Managed Instances provider. You can
+// modify the infrastructure role, instance launch template, and tag propagation
+// settings. Changes apply to new instances launched after the update.
+type UpdateManagedInstancesProviderConfiguration struct {
+
+	// The updated Amazon Resource Name (ARN) of the infrastructure role. The new role
+	// must have the necessary permissions to manage instances and access required
+	// Amazon Web Services services.
+	//
+	// For more information, see [Amazon ECS infrastructure IAM role] in the Amazon ECS Developer Guide.
+	//
+	// [Amazon ECS infrastructure IAM role]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/infrastructure_IAM_role.html
+	//
+	// This member is required.
+	InfrastructureRoleArn *string
+
+	// The updated launch template configuration. Changes to the launch template
+	// affect new instances launched after the update, while existing instances
+	// continue to use their original configuration.
+	//
+	// This member is required.
+	InstanceLaunchTemplate *InstanceLaunchTemplateUpdate
+
+	// The updated tag propagation setting. When changed, this affects only new
+	// instances launched after the update.
+	PropagateTags PropagateMITags
+
+	noSmithyDocumentSerde
+}
+
+// The minimum and maximum number of vCPUs for instance type selection. This
+// allows you to specify a range of vCPU counts that meet your workload
+// requirements.
+type VCpuCountRangeRequest struct {
+
+	// The minimum number of vCPUs. Instance types with fewer vCPUs than this value
+	// are excluded from selection.
+	//
+	// This member is required.
+	Min *int32
+
+	// The maximum number of vCPUs. Instance types with more vCPUs than this value are
+	// excluded from selection.
+	Max *int32
 
 	noSmithyDocumentSerde
 }

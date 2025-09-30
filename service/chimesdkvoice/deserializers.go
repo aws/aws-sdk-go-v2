@@ -19876,6 +19876,15 @@ func awsRestjson1_deserializeDocumentVoiceConnector(v **types.VoiceConnector, va
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "NetworkType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkType to be of type string, got %T instead", value)
+				}
+				sv.NetworkType = types.NetworkType(jtv)
+			}
+
 		case "OutboundHostName":
 			if value != nil {
 				jtv, ok := value.(string)

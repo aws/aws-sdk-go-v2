@@ -10640,6 +10640,11 @@ func awsAwsjson11_deserializeDocumentFileSystemEndpoint(v **types.FileSystemEndp
 				return err
 			}
 
+		case "Ipv6Addresses":
+			if err := awsAwsjson11_deserializeDocumentOntapEndpointIpAddresses(&sv.Ipv6Addresses, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -12253,6 +12258,15 @@ func awsAwsjson11_deserializeDocumentOntapFileSystemConfiguration(v **types.Onta
 					return fmt.Errorf("expected IpAddressRange to be of type string, got %T instead", value)
 				}
 				sv.EndpointIpAddressRange = ptr.String(jtv)
+			}
+
+		case "EndpointIpv6AddressRange":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Ipv6AddressRange to be of type string, got %T instead", value)
+				}
+				sv.EndpointIpv6AddressRange = ptr.String(jtv)
 			}
 
 		case "Endpoints":
@@ -14811,6 +14825,11 @@ func awsAwsjson11_deserializeDocumentSvmEndpoint(v **types.SvmEndpoint, value in
 				return err
 			}
 
+		case "Ipv6Addresses":
+			if err := awsAwsjson11_deserializeDocumentOntapEndpointIpAddresses(&sv.Ipv6Addresses, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -15452,6 +15471,15 @@ func awsAwsjson11_deserializeDocumentWindowsFileSystemConfiguration(v **types.Wi
 					return fmt.Errorf("expected IpAddress to be of type string, got %T instead", value)
 				}
 				sv.PreferredFileServerIp = ptr.String(jtv)
+			}
+
+		case "PreferredFileServerIpv6":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IpAddress to be of type string, got %T instead", value)
+				}
+				sv.PreferredFileServerIpv6 = ptr.String(jtv)
 			}
 
 		case "PreferredSubnetId":

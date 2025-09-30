@@ -590,6 +590,26 @@ func (m *validateOpCreateEventSubscription) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateGlobalCluster struct {
+}
+
+func (*validateOpCreateGlobalCluster) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateGlobalCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateGlobalClusterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateGlobalClusterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateIntegration struct {
 }
 
@@ -2410,6 +2430,26 @@ func (m *validateOpModifyEventSubscription) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpModifyGlobalCluster struct {
+}
+
+func (*validateOpModifyGlobalCluster) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyGlobalCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyGlobalClusterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyGlobalClusterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpModifyIntegration struct {
 }
 
@@ -2605,6 +2645,26 @@ func (m *validateOpRegisterDBProxyTargets) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpRegisterDBProxyTargetsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRemoveFromGlobalCluster struct {
+}
+
+func (*validateOpRemoveFromGlobalCluster) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRemoveFromGlobalCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RemoveFromGlobalClusterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRemoveFromGlobalClusterInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3226,6 +3286,10 @@ func addOpCreateEventSubscriptionValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpCreateEventSubscription{}, middleware.After)
 }
 
+func addOpCreateGlobalClusterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateGlobalCluster{}, middleware.After)
+}
+
 func addOpCreateIntegrationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateIntegration{}, middleware.After)
 }
@@ -3590,6 +3654,10 @@ func addOpModifyEventSubscriptionValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpModifyEventSubscription{}, middleware.After)
 }
 
+func addOpModifyGlobalClusterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyGlobalCluster{}, middleware.After)
+}
+
 func addOpModifyIntegrationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyIntegration{}, middleware.After)
 }
@@ -3628,6 +3696,10 @@ func addOpRebootDBShardGroupValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpRegisterDBProxyTargetsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRegisterDBProxyTargets{}, middleware.After)
+}
+
+func addOpRemoveFromGlobalClusterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRemoveFromGlobalCluster{}, middleware.After)
 }
 
 func addOpRemoveRoleFromDBClusterValidationMiddleware(stack *middleware.Stack) error {
@@ -4379,6 +4451,21 @@ func validateOpCreateEventSubscriptionInput(v *CreateEventSubscriptionInput) err
 	}
 	if v.SnsTopicArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SnsTopicArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateGlobalClusterInput(v *CreateGlobalClusterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateGlobalClusterInput"}
+	if v.GlobalClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalClusterIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5928,6 +6015,21 @@ func validateOpModifyEventSubscriptionInput(v *ModifyEventSubscriptionInput) err
 	}
 }
 
+func validateOpModifyGlobalClusterInput(v *ModifyGlobalClusterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyGlobalClusterInput"}
+	if v.GlobalClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalClusterIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpModifyIntegrationInput(v *ModifyIntegrationInput) error {
 	if v == nil {
 		return nil
@@ -6078,6 +6180,24 @@ func validateOpRegisterDBProxyTargetsInput(v *RegisterDBProxyTargetsInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "RegisterDBProxyTargetsInput"}
 	if v.DBProxyName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DBProxyName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRemoveFromGlobalClusterInput(v *RemoveFromGlobalClusterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemoveFromGlobalClusterInput"}
+	if v.GlobalClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalClusterIdentifier"))
+	}
+	if v.DbClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DbClusterIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

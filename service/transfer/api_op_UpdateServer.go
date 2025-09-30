@@ -137,6 +137,26 @@ type UpdateServerInput struct {
 	// authentication API method.
 	IdentityProviderDetails *types.IdentityProviderDetails
 
+	// The mode of authentication for a server. The default value is SERVICE_MANAGED ,
+	// which allows you to store and access user credentials within the Transfer Family
+	// service.
+	//
+	// Use AWS_DIRECTORY_SERVICE to provide access to Active Directory groups in
+	// Directory Service for Microsoft Active Directory or Microsoft Active Directory
+	// in your on-premises environment or in Amazon Web Services using AD Connector.
+	// This option also requires you to provide a Directory ID by using the
+	// IdentityProviderDetails parameter.
+	//
+	// Use the API_GATEWAY value to integrate with an identity provider of your
+	// choosing. The API_GATEWAY setting requires you to provide an Amazon API Gateway
+	// endpoint URL to call for authentication by using the IdentityProviderDetails
+	// parameter.
+	//
+	// Use the AWS_LAMBDA value to directly use an Lambda function as your identity
+	// provider. If you choose this value, you must specify the ARN for the Lambda
+	// function in the Function parameter for the IdentityProviderDetails data type.
+	IdentityProviderType types.IdentityProviderType
+
 	// Specifies whether to use IPv4 only, or to use dual-stack (IPv4 and IPv6) for
 	// your Transfer Family endpoint. The default value is IPV4 .
 	//
@@ -230,7 +250,11 @@ type UpdateServerInput struct {
 	Protocols []types.Protocol
 
 	// Specifies whether or not performance for your Amazon S3 directories is
-	// optimized. This is disabled by default.
+	// optimized.
+	//
+	//   - If using the console, this is enabled by default.
+	//
+	//   - If using the API or CLI, this is disabled by default.
 	//
 	// By default, home directory mappings have a TYPE of DIRECTORY . If you enable
 	// this option, you would then need to explicitly set the HomeDirectoryMapEntry Type

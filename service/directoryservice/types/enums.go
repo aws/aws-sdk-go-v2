@@ -170,6 +170,7 @@ type DirectoryEdition string
 const (
 	DirectoryEditionEnterprise DirectoryEdition = "Enterprise"
 	DirectoryEditionStandard   DirectoryEdition = "Standard"
+	DirectoryEditionHybrid     DirectoryEdition = "Hybrid"
 )
 
 // Values returns all known values for DirectoryEdition. Note that this can be
@@ -180,6 +181,7 @@ func (DirectoryEdition) Values() []DirectoryEdition {
 	return []DirectoryEdition{
 		"Enterprise",
 		"Standard",
+		"Hybrid",
 	}
 }
 
@@ -378,6 +380,27 @@ const (
 func (LDAPSType) Values() []LDAPSType {
 	return []LDAPSType{
 		"Client",
+	}
+}
+
+type NetworkType string
+
+// Enum values for NetworkType
+const (
+	NetworkTypeDualStack NetworkType = "Dual-stack"
+	NetworkTypeIpv4Only  NetworkType = "IPv4"
+	NetworkTypeIpv6Only  NetworkType = "IPv6"
+)
+
+// Values returns all known values for NetworkType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NetworkType) Values() []NetworkType {
+	return []NetworkType{
+		"Dual-stack",
+		"IPv4",
+		"IPv6",
 	}
 }
 
@@ -767,7 +790,9 @@ type UpdateType string
 
 // Enum values for UpdateType
 const (
-	UpdateTypeOs UpdateType = "OS"
+	UpdateTypeOs      UpdateType = "OS"
+	UpdateTypeNetwork UpdateType = "NETWORK"
+	UpdateTypeSize    UpdateType = "SIZE"
 )
 
 // Values returns all known values for UpdateType. Note that this can be expanded
@@ -777,5 +802,7 @@ const (
 func (UpdateType) Values() []UpdateType {
 	return []UpdateType{
 		"OS",
+		"NETWORK",
+		"SIZE",
 	}
 }
