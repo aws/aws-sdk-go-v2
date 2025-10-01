@@ -1181,12 +1181,11 @@ func TestComputeInputPayloadChecksumRetry(t *testing.T) {
 
 					if attempt == 0 {
 						return output, metadata, fmt.Errorf("mock error in first attempt")
-					} else {
-						if diff := cmpDiff(string(c.expectPayload), string(actualPayload)); diff != "" {
-							t.Errorf("expect payload match:\n%s", diff)
-						}
 					}
 
+					if diff := cmpDiff(string(c.expectPayload), string(actualPayload)); diff != "" {
+						t.Errorf("expect payload match:\n%s", diff)
+					}
 					return &smithyhttp.Response{}, metadata, nil
 				},
 			)
