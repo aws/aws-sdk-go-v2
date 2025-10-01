@@ -617,6 +617,27 @@ type Queue struct {
 	// The list of errors that occurred during queue provisioning.
 	ErrorInfo []ErrorInfo
 
+	// Additional options related to the Slurm scheduler.
+	SlurmConfiguration *QueueSlurmConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Additional options related to the Slurm scheduler.
+type QueueSlurmConfiguration struct {
+
+	// Additional Slurm-specific configuration that directly maps to Slurm settings.
+	SlurmCustomSettings []SlurmCustomSetting
+
+	noSmithyDocumentSerde
+}
+
+// Additional options related to the Slurm scheduler.
+type QueueSlurmConfigurationRequest struct {
+
+	// Additional Slurm-specific configuration that directly maps to Slurm settings.
+	SlurmCustomSettings []SlurmCustomSetting
+
 	noSmithyDocumentSerde
 }
 
@@ -765,42 +786,17 @@ type SlurmAuthKey struct {
 }
 
 // Additional settings that directly map to Slurm settings.
+//
+// PCS supports a subset of Slurm settings. For more information, see [Configuring custom Slurm settings in PCS] in the PCS
+// User Guide.
+//
+// [Configuring custom Slurm settings in PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-custom-settings.html
 type SlurmCustomSetting struct {
 
-	// PCS supports configuration of the following Slurm parameters:
+	// PCS supports custom Slurm settings for clusters, compute node groups, and
+	// queues. For more information, see [Configuring custom Slurm settings in PCS]in the PCS User Guide.
 	//
-	//   - For clusters
-	//
-	// [Prolog]
-	//   - Prolog
-	//
-	// [Epilog]
-	//   - Epilog
-	//
-	// [SelectTypeParameters]
-	//   - SelectTypeParameters
-	//
-	// [AccountingStorageEnforce]
-	//   - AccountingStorageEnforce
-	//
-	// PCS supports a subset of the options for AccountingStorageEnforce . For more
-	//   information, see [Slurm accounting in PCS]in the PCS User Guide.
-	//
-	//   - For compute node groups
-	//
-	// [Weight]
-	//   - Weight
-	//
-	// [RealMemory]
-	//   - RealMemory
-	//
-	// [Slurm accounting in PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-accounting.html
-	// [SelectTypeParameters]: https://slurm.schedmd.com/slurm.conf.html#OPT_SelectTypeParameters
-	// [Prolog]: https://slurm.schedmd.com/slurm.conf.html#OPT_Prolog_1
-	// [Epilog]: https://slurm.schedmd.com/slurm.conf.html#OPT_Epilog_1
-	// [Weight]: https://slurm.schedmd.com/slurm.conf.html#OPT_Weight
-	// [AccountingStorageEnforce]: https://slurm.schedmd.com/slurm.conf.html#OPT_AccountingStorageEnforce
-	// [RealMemory]: https://slurm.schedmd.com/slurm.conf.html#OPT_Weight
+	// [Configuring custom Slurm settings in PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-custom-settings.html
 	//
 	// This member is required.
 	ParameterName *string
@@ -828,8 +824,59 @@ type SpotOptions struct {
 	noSmithyDocumentSerde
 }
 
+// The accounting configuration includes configurable settings for Slurm
+// accounting.
+type UpdateAccountingRequest struct {
+
+	// The default value for all purge settings for slurmdbd.conf . For more
+	// information, see the [slurmdbd.conf documentation at SchedMD].
+	//
+	// The default value for defaultPurgeTimeInDays is -1 .
+	//
+	// A value of -1 means there is no purge time and records persist as long as the
+	// cluster exists.
+	//
+	// 0 isn't a valid value.
+	//
+	// [slurmdbd.conf documentation at SchedMD]: https://slurm.schedmd.com/slurmdbd.conf.html
+	DefaultPurgeTimeInDays *int32
+
+	// The default value for mode is STANDARD . A value of STANDARD means Slurm
+	// accounting is enabled.
+	Mode AccountingMode
+
+	noSmithyDocumentSerde
+}
+
+// Additional options related to the Slurm scheduler.
+type UpdateClusterSlurmConfigurationRequest struct {
+
+	// The accounting configuration includes configurable settings for Slurm
+	// accounting.
+	Accounting *UpdateAccountingRequest
+
+	// The time (in seconds) before an idle node is scaled down.
+	//
+	// Default: 600
+	ScaleDownIdleTimeInSeconds *int32
+
+	// Additional Slurm-specific configuration that directly maps to Slurm settings.
+	SlurmCustomSettings []SlurmCustomSetting
+
+	noSmithyDocumentSerde
+}
+
 // Additional options related to the Slurm scheduler.
 type UpdateComputeNodeGroupSlurmConfigurationRequest struct {
+
+	// Additional Slurm-specific configuration that directly maps to Slurm settings.
+	SlurmCustomSettings []SlurmCustomSetting
+
+	noSmithyDocumentSerde
+}
+
+// Additional options related to the Slurm scheduler.
+type UpdateQueueSlurmConfigurationRequest struct {
 
 	// Additional Slurm-specific configuration that directly maps to Slurm settings.
 	SlurmCustomSettings []SlurmCustomSetting

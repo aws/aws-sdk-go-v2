@@ -24,6 +24,7 @@
         "api_op_RegisterComputeNodeGroupInstance.go",
         "api_op_TagResource.go",
         "api_op_UntagResource.go",
+        "api_op_UpdateCluster.go",
         "api_op_UpdateComputeNodeGroup.go",
         "api_op_UpdateQueue.go",
         "auth.go",

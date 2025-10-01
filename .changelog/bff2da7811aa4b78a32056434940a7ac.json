@@ -1,0 +1,8 @@
+{
+    "id": "bff2da78-11aa-4b78-a320-56434940a7ac",
+    "type": "feature",
+    "description": "Add support to receive dual stack MediaPlacement URLs in Chime Meetings SDK",
+    "modules": [
+        "service/chimesdkmeetings"
+    ]
+}

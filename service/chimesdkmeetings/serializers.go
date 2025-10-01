@@ -398,6 +398,11 @@ func awsRestjson1_serializeOpDocumentCreateMeetingInput(v *CreateMeetingInput, v
 		ok.String(*v.ExternalMeetingId)
 	}
 
+	if len(v.MediaPlacementNetworkType) > 0 {
+		ok := object.Key("MediaPlacementNetworkType")
+		ok.String(string(v.MediaPlacementNetworkType))
+	}
+
 	if v.MediaRegion != nil {
 		ok := object.Key("MediaRegion")
 		ok.String(*v.MediaRegion)
@@ -532,6 +537,11 @@ func awsRestjson1_serializeOpDocumentCreateMeetingWithAttendeesInput(v *CreateMe
 	if v.ExternalMeetingId != nil {
 		ok := object.Key("ExternalMeetingId")
 		ok.String(*v.ExternalMeetingId)
+	}
+
+	if len(v.MediaPlacementNetworkType) > 0 {
+		ok := object.Key("MediaPlacementNetworkType")
+		ok.String(string(v.MediaPlacementNetworkType))
 	}
 
 	if v.MediaRegion != nil {

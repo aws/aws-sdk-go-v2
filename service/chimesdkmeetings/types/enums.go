@@ -46,6 +46,25 @@ func (MediaCapabilities) Values() []MediaCapabilities {
 	}
 }
 
+type MediaPlacementNetworkType string
+
+// Enum values for MediaPlacementNetworkType
+const (
+	MediaPlacementNetworkTypeIpv4Only  MediaPlacementNetworkType = "Ipv4Only"
+	MediaPlacementNetworkTypeDualStack MediaPlacementNetworkType = "DualStack"
+)
+
+// Values returns all known values for MediaPlacementNetworkType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MediaPlacementNetworkType) Values() []MediaPlacementNetworkType {
+	return []MediaPlacementNetworkType{
+		"Ipv4Only",
+		"DualStack",
+	}
+}
+
 type MeetingFeatureStatus string
 
 // Enum values for MeetingFeatureStatus

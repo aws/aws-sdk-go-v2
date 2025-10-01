@@ -13921,6 +13921,250 @@ func awsRestjson1_deserializeErrorValidationException(response *smithyhttp.Respo
 	return output
 }
 
+func awsRestjson1_deserializeDocumentAccessBudget(v **types.AccessBudget, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AccessBudget
+	if *v == nil {
+		sv = &types.AccessBudget{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "aggregateRemainingBudget":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected RemainingBudget to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AggregateRemainingBudget = ptr.Int32(int32(i64))
+			}
+
+		case "details":
+			if err := awsRestjson1_deserializeDocumentAccessBudgetDetailsList(&sv.Details, value); err != nil {
+				return err
+			}
+
+		case "resourceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BudgetedResourceArn to be of type string, got %T instead", value)
+				}
+				sv.ResourceArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAccessBudgetDetails(v **types.AccessBudgetDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AccessBudgetDetails
+	if *v == nil {
+		sv = &types.AccessBudgetDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "autoRefresh":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutoRefreshMode to be of type string, got %T instead", value)
+				}
+				sv.AutoRefresh = types.AutoRefreshMode(jtv)
+			}
+
+		case "budget":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Budget to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Budget = ptr.Int32(int32(i64))
+			}
+
+		case "budgetType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccessBudgetType to be of type string, got %T instead", value)
+				}
+				sv.BudgetType = types.AccessBudgetType(jtv)
+			}
+
+		case "endTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.EndTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "remainingBudget":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected RemainingBudget to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RemainingBudget = ptr.Int32(int32(i64))
+			}
+
+		case "startTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.StartTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAccessBudgetDetailsList(v *[]types.AccessBudgetDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AccessBudgetDetails
+	if *v == nil {
+		cv = []types.AccessBudgetDetails{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AccessBudgetDetails
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAccessBudgetDetails(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAccessBudgetsPrivacyTemplateParametersOutput(v **types.AccessBudgetsPrivacyTemplateParametersOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AccessBudgetsPrivacyTemplateParametersOutput
+	if *v == nil {
+		sv = &types.AccessBudgetsPrivacyTemplateParametersOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "budgetParameters":
+			if err := awsRestjson1_deserializeDocumentBudgetParameters(&sv.BudgetParameters, value); err != nil {
+				return err
+			}
+
+		case "resourceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BudgetedResourceArn to be of type string, got %T instead", value)
+				}
+				sv.ResourceArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDeniedException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -16287,6 +16531,102 @@ func awsRestjson1_deserializeDocumentBilledResourceUtilization(v **types.BilledR
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBudgetParameter(v **types.BudgetParameter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BudgetParameter
+	if *v == nil {
+		sv = &types.BudgetParameter{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "autoRefresh":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutoRefreshMode to be of type string, got %T instead", value)
+				}
+				sv.AutoRefresh = types.AutoRefreshMode(jtv)
+			}
+
+		case "budget":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Budget to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Budget = ptr.Int32(int32(i64))
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccessBudgetType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.AccessBudgetType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBudgetParameters(v *[]types.BudgetParameter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.BudgetParameter
+	if *v == nil {
+		cv = []types.BudgetParameter{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.BudgetParameter
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentBudgetParameter(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -23921,6 +24261,16 @@ loop:
 			continue
 		}
 		switch key {
+		case "accessBudget":
+			var mv types.AccessBudget
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentAccessBudget(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.PrivacyBudgetMemberAccessBudget{Value: mv}
+			break loop
+
 		case "differentialPrivacy":
 			var mv types.DifferentialPrivacyPrivacyBudget
 			destAddr := &mv
@@ -24275,6 +24625,16 @@ loop:
 			continue
 		}
 		switch key {
+		case "accessBudget":
+			var mv types.AccessBudgetsPrivacyTemplateParametersOutput
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentAccessBudgetsPrivacyTemplateParametersOutput(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.PrivacyBudgetTemplateParametersOutputMemberAccessBudget{Value: mv}
+			break loop
+
 		case "differentialPrivacy":
 			var mv types.DifferentialPrivacyTemplateParametersOutput
 			destAddr := &mv
@@ -27085,6 +27445,15 @@ func awsRestjson1_deserializeDocumentSchema(v **types.Schema, value interface{})
 				return err
 			}
 
+		case "resourceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SchemaResourceArn to be of type string, got %T instead", value)
+				}
+				sv.ResourceArn = ptr.String(jtv)
+			}
+
 		case "schemaStatusDetails":
 			if err := awsRestjson1_deserializeDocumentSchemaStatusDetailList(&sv.SchemaStatusDetails, value); err != nil {
 				return err
@@ -27509,6 +27878,15 @@ func awsRestjson1_deserializeDocumentSchemaSummary(v **types.SchemaSummary, valu
 					return fmt.Errorf("expected TableAlias to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "resourceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SchemaResourceArn to be of type string, got %T instead", value)
+				}
+				sv.ResourceArn = ptr.String(jtv)
 			}
 
 		case "selectedAnalysisMethods":

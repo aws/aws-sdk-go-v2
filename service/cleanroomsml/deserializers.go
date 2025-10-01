@@ -3489,6 +3489,11 @@ func awsRestjson1_deserializeOpDocumentGetCollaborationMLInputChannelOutput(v **
 				sv.NumberOfRecords = ptr.Int64(i64)
 			}
 
+		case "privacyBudgets":
+			if err := awsRestjson1_deserializeDocumentPrivacyBudgets(&sv.PrivacyBudgets, value); err != nil {
+				return err
+			}
+
 		case "retentionInDays":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5271,6 +5276,11 @@ func awsRestjson1_deserializeOpDocumentGetMLInputChannelOutput(v **GetMLInputCha
 					return err
 				}
 				sv.NumberOfRecords = ptr.Int64(i64)
+			}
+
+		case "privacyBudgets":
+			if err := awsRestjson1_deserializeDocumentPrivacyBudgets(&sv.PrivacyBudgets, value); err != nil {
+				return err
 			}
 
 		case "protectedQueryIdentifier":
@@ -10549,6 +10559,233 @@ func awsRestjson1_deserializeErrorValidationException(response *smithyhttp.Respo
 	return output
 }
 
+func awsRestjson1_deserializeDocumentAccessBudget(v **types.AccessBudget, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AccessBudget
+	if *v == nil {
+		sv = &types.AccessBudget{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "aggregateRemainingBudget":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Budget to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AggregateRemainingBudget = ptr.Int32(int32(i64))
+			}
+
+		case "details":
+			if err := awsRestjson1_deserializeDocumentAccessBudgetDetailsList(&sv.Details, value); err != nil {
+				return err
+			}
+
+		case "resourceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BudgetedResourceArn to be of type string, got %T instead", value)
+				}
+				sv.ResourceArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAccessBudgetDetails(v **types.AccessBudgetDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AccessBudgetDetails
+	if *v == nil {
+		sv = &types.AccessBudgetDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "autoRefresh":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutoRefreshMode to be of type string, got %T instead", value)
+				}
+				sv.AutoRefresh = types.AutoRefreshMode(jtv)
+			}
+
+		case "budget":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Budget to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Budget = ptr.Int32(int32(i64))
+			}
+
+		case "budgetType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccessBudgetType to be of type string, got %T instead", value)
+				}
+				sv.BudgetType = types.AccessBudgetType(jtv)
+			}
+
+		case "endTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.EndTime = ptr.Time(t)
+			}
+
+		case "remainingBudget":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Budget to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RemainingBudget = ptr.Int32(int32(i64))
+			}
+
+		case "startTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.StartTime = ptr.Time(t)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAccessBudgetDetailsList(v *[]types.AccessBudgetDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AccessBudgetDetails
+	if *v == nil {
+		cv = []types.AccessBudgetDetails{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AccessBudgetDetails
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAccessBudgetDetails(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAccessBudgets(v *[]types.AccessBudget, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AccessBudget
+	if *v == nil {
+		cv = []types.AccessBudget{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AccessBudget
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAccessBudget(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDeniedException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14653,6 +14890,44 @@ func awsRestjson1_deserializeDocumentParameterMap(v *map[string]string, value in
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPrivacyBudgets(v *types.PrivacyBudgets, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.PrivacyBudgets
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "accessBudgets":
+			var mv []types.AccessBudget
+			if err := awsRestjson1_deserializeDocumentAccessBudgets(&mv, value); err != nil {
+				return err
+			}
+			uv = &types.PrivacyBudgetsMemberAccessBudgets{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 

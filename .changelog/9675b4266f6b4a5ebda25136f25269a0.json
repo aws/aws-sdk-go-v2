@@ -1,0 +1,8 @@
+{
+    "id": "9675b426-6f6b-4a5e-bda2-5136f25269a0",
+    "type": "feature",
+    "description": "Remove incorrect ReadOnly trait on IVS RealTime ImportPublicKey API",
+    "modules": [
+        "service/ivsrealtime"
+    ]
+}

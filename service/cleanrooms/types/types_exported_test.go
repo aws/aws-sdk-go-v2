@@ -339,6 +339,9 @@ func ExamplePrivacyBudget_outputUsage() {
 	var union types.PrivacyBudget
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.PrivacyBudgetMemberAccessBudget:
+		_ = v.Value // Value is types.AccessBudget
+
 	case *types.PrivacyBudgetMemberDifferentialPrivacy:
 		_ = v.Value // Value is types.DifferentialPrivacyPrivacyBudget
 
@@ -351,12 +354,16 @@ func ExamplePrivacyBudget_outputUsage() {
 	}
 }
 
+var _ *types.AccessBudget
 var _ *types.DifferentialPrivacyPrivacyBudget
 
 func ExamplePrivacyBudgetTemplateParametersInput_outputUsage() {
 	var union types.PrivacyBudgetTemplateParametersInput
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.PrivacyBudgetTemplateParametersInputMemberAccessBudget:
+		_ = v.Value // Value is types.AccessBudgetsPrivacyTemplateParametersInput
+
 	case *types.PrivacyBudgetTemplateParametersInputMemberDifferentialPrivacy:
 		_ = v.Value // Value is types.DifferentialPrivacyTemplateParametersInput
 
@@ -369,12 +376,16 @@ func ExamplePrivacyBudgetTemplateParametersInput_outputUsage() {
 	}
 }
 
+var _ *types.AccessBudgetsPrivacyTemplateParametersInput
 var _ *types.DifferentialPrivacyTemplateParametersInput
 
 func ExamplePrivacyBudgetTemplateParametersOutput_outputUsage() {
 	var union types.PrivacyBudgetTemplateParametersOutput
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.PrivacyBudgetTemplateParametersOutputMemberAccessBudget:
+		_ = v.Value // Value is types.AccessBudgetsPrivacyTemplateParametersOutput
+
 	case *types.PrivacyBudgetTemplateParametersOutputMemberDifferentialPrivacy:
 		_ = v.Value // Value is types.DifferentialPrivacyTemplateParametersOutput
 
@@ -387,12 +398,16 @@ func ExamplePrivacyBudgetTemplateParametersOutput_outputUsage() {
 	}
 }
 
+var _ *types.AccessBudgetsPrivacyTemplateParametersOutput
 var _ *types.DifferentialPrivacyTemplateParametersOutput
 
 func ExamplePrivacyBudgetTemplateUpdateParameters_outputUsage() {
 	var union types.PrivacyBudgetTemplateUpdateParameters
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.PrivacyBudgetTemplateUpdateParametersMemberAccessBudget:
+		_ = v.Value // Value is types.AccessBudgetsPrivacyTemplateUpdateParameters
+
 	case *types.PrivacyBudgetTemplateUpdateParametersMemberDifferentialPrivacy:
 		_ = v.Value // Value is types.DifferentialPrivacyTemplateUpdateParameters
 
@@ -405,6 +420,7 @@ func ExamplePrivacyBudgetTemplateUpdateParameters_outputUsage() {
 	}
 }
 
+var _ *types.AccessBudgetsPrivacyTemplateUpdateParameters
 var _ *types.DifferentialPrivacyTemplateUpdateParameters
 
 func ExamplePrivacyImpact_outputUsage() {

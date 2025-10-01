@@ -8,5 +8,5 @@
 // meetings, create and manage users, and send and receive meeting notifications.
 // For more information about the meeting APIs, see [Amazon Chime SDK meetings].
 //
-// [Amazon Chime SDK meetings]: https://docs.aws.amazon.com/chime/latest/APIReference/API_Operations_Amazon_Chime_SDK_Meetings.html
+// [Amazon Chime SDK meetings]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_Operations_Amazon_Chime_SDK_Meetings.html
 package chimesdkmeetings

@@ -14,7 +14,7 @@ import (
 // Creates up to 100 attendees for an active Amazon Chime SDK meeting. For more
 // information about the Amazon Chime SDK, see [Using the Amazon Chime SDK]in the Amazon Chime Developer Guide.
 //
-// [Using the Amazon Chime SDK]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
+// [Using the Amazon Chime SDK]: https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html
 func (c *Client) BatchCreateAttendee(ctx context.Context, params *BatchCreateAttendeeInput, optFns ...func(*Options)) (*BatchCreateAttendeeOutput, error) {
 	if params == nil {
 		params = &BatchCreateAttendeeInput{}

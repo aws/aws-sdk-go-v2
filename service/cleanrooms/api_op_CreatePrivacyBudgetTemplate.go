@@ -31,18 +31,6 @@ func (c *Client) CreatePrivacyBudgetTemplate(ctx context.Context, params *Create
 
 type CreatePrivacyBudgetTemplateInput struct {
 
-	// How often the privacy budget refreshes.
-	//
-	// If you plan to regularly bring new data into the collaboration, you can use
-	// CALENDAR_MONTH to automatically get a new privacy budget for the collaboration
-	// every calendar month. Choosing this option allows arbitrary amounts of
-	// information to be revealed about rows of the data when repeatedly queries across
-	// refreshes. Avoid choosing this if the same rows will be repeatedly queried
-	// between privacy budget refreshes.
-	//
-	// This member is required.
-	AutoRefresh types.PrivacyBudgetTemplateAutoRefresh
-
 	// A unique identifier for one of your memberships for a collaboration. The
 	// privacy budget template is created in the collaboration that this membership
 	// belongs to. Accepts a membership ID.
@@ -59,6 +47,16 @@ type CreatePrivacyBudgetTemplateInput struct {
 	//
 	// This member is required.
 	PrivacyBudgetType types.PrivacyBudgetType
+
+	// How often the privacy budget refreshes.
+	//
+	// If you plan to regularly bring new data into the collaboration, you can use
+	// CALENDAR_MONTH to automatically get a new privacy budget for the collaboration
+	// every calendar month. Choosing this option allows arbitrary amounts of
+	// information to be revealed about rows of the data when repeatedly queries across
+	// refreshes. Avoid choosing this if the same rows will be repeatedly queried
+	// between privacy budget refreshes.
+	AutoRefresh types.PrivacyBudgetTemplateAutoRefresh
 
 	// An optional label that you can assign to a resource when you create it. Each
 	// tag consists of a key and an optional value, both of which you define. When you

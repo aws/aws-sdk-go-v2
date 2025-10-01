@@ -41,6 +41,10 @@ type ListCollaborationPrivacyBudgetsInput struct {
 	// This member is required.
 	PrivacyBudgetType types.PrivacyBudgetType
 
+	// The Amazon Resource Name (ARN) of the Configured Table Association
+	// (ConfiguredTableAssociation) used to filter privacy budgets.
+	AccessBudgetResourceArn *string
+
 	// The maximum number of results that are returned for an API request call. The
 	// service chooses a default number if you don't set one. The service might return
 	// a `nextToken` even if the `maxResults` value has not been met.

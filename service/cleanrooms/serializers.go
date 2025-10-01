@@ -4716,6 +4716,10 @@ func awsRestjson1_serializeOpHttpBindingsListCollaborationPrivacyBudgetsInput(v 
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.AccessBudgetResourceArn != nil {
+		encoder.SetQuery("accessBudgetResourceArn").String(*v.AccessBudgetResourceArn)
+	}
+
 	if v.CollaborationIdentifier == nil || len(*v.CollaborationIdentifier) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member collaborationIdentifier must not be empty")}
 	}
@@ -5489,6 +5493,10 @@ func (m *awsRestjson1_serializeOpListPrivacyBudgets) HandleSerialize(ctx context
 func awsRestjson1_serializeOpHttpBindingsListPrivacyBudgetsInput(v *ListPrivacyBudgetsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AccessBudgetResourceArn != nil {
+		encoder.SetQuery("accessBudgetResourceArn").String(*v.AccessBudgetResourceArn)
 	}
 
 	if v.MaxResults != nil {
@@ -7935,6 +7943,39 @@ func awsRestjson1_serializeOpDocumentUpdateProtectedQueryInput(v *UpdateProtecte
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAccessBudgetsPrivacyTemplateParametersInput(v *types.AccessBudgetsPrivacyTemplateParametersInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BudgetParameters != nil {
+		ok := object.Key("budgetParameters")
+		if err := awsRestjson1_serializeDocumentBudgetParameters(v.BudgetParameters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ResourceArn != nil {
+		ok := object.Key("resourceArn")
+		ok.String(*v.ResourceArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAccessBudgetsPrivacyTemplateUpdateParameters(v *types.AccessBudgetsPrivacyTemplateUpdateParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BudgetParameters != nil {
+		ok := object.Key("budgetParameters")
+		if err := awsRestjson1_serializeDocumentBudgetParameters(v.BudgetParameters, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAggregateColumn(v *types.AggregateColumn, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8380,6 +8421,41 @@ func awsRestjson1_serializeDocumentAutoApprovedChangeTypeList(v []types.AutoAppr
 	for i := range v {
 		av := array.Value()
 		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBudgetParameter(v *types.BudgetParameter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AutoRefresh) > 0 {
+		ok := object.Key("autoRefresh")
+		ok.String(string(v.AutoRefresh))
+	}
+
+	if v.Budget != nil {
+		ok := object.Key("budget")
+		ok.Integer(*v.Budget)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBudgetParameters(v []types.BudgetParameter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentBudgetParameter(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -9215,6 +9291,12 @@ func awsRestjson1_serializeDocumentPrivacyBudgetTemplateParametersInput(v types.
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.PrivacyBudgetTemplateParametersInputMemberAccessBudget:
+		av := object.Key("accessBudget")
+		if err := awsRestjson1_serializeDocumentAccessBudgetsPrivacyTemplateParametersInput(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.PrivacyBudgetTemplateParametersInputMemberDifferentialPrivacy:
 		av := object.Key("differentialPrivacy")
 		if err := awsRestjson1_serializeDocumentDifferentialPrivacyTemplateParametersInput(&uv.Value, av); err != nil {
@@ -9233,6 +9315,12 @@ func awsRestjson1_serializeDocumentPrivacyBudgetTemplateUpdateParameters(v types
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.PrivacyBudgetTemplateUpdateParametersMemberAccessBudget:
+		av := object.Key("accessBudget")
+		if err := awsRestjson1_serializeDocumentAccessBudgetsPrivacyTemplateUpdateParameters(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.PrivacyBudgetTemplateUpdateParametersMemberDifferentialPrivacy:
 		av := object.Key("differentialPrivacy")
 		if err := awsRestjson1_serializeDocumentDifferentialPrivacyTemplateUpdateParameters(&uv.Value, av); err != nil {

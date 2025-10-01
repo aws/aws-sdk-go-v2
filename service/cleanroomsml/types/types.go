@@ -7,6 +7,66 @@ import (
 	"time"
 )
 
+// An access budget that defines consumption limits for a specific resource within
+// defined time periods.
+type AccessBudget struct {
+
+	// The total remaining budget across all active budget periods for this resource.
+	//
+	// This member is required.
+	AggregateRemainingBudget *int32
+
+	// A list of budget details for this resource. Contains active budget periods that
+	// apply to the resource.
+	//
+	// This member is required.
+	Details []AccessBudgetDetails
+
+	// The Amazon Resource Name (ARN) of the resource that this access budget applies
+	// to.
+	//
+	// This member is required.
+	ResourceArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The detailed information for a specific budget period, including time
+// boundaries and budget amounts.
+type AccessBudgetDetails struct {
+
+	// The total budget amount allocated for this period.
+	//
+	// This member is required.
+	Budget *int32
+
+	// The type of budget period. Calendar-based types reset automatically at regular
+	// intervals, while LIFETIME budgets never reset.
+	//
+	// This member is required.
+	BudgetType AccessBudgetType
+
+	// The amount of budget remaining in this period.
+	//
+	// This member is required.
+	RemainingBudget *int32
+
+	// The start time of this budget period.
+	//
+	// This member is required.
+	StartTime *time.Time
+
+	// Specifies whether this budget automatically refreshes when the current period
+	// ends.
+	AutoRefresh AutoRefreshMode
+
+	// The end time of this budget period. If not specified, the budget period
+	// continues indefinitely.
+	EndTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Defines the Amazon S3 bucket where the configured audience is stored.
 type AudienceDestination struct {
 
@@ -1187,6 +1247,26 @@ type ModelTrainingDataChannel struct {
 	noSmithyDocumentSerde
 }
 
+// The privacy budget information that controls access to Clean Rooms ML input
+// channels.
+//
+// The following types satisfy this interface:
+//
+//	PrivacyBudgetsMemberAccessBudgets
+type PrivacyBudgets interface {
+	isPrivacyBudgets()
+}
+
+// A list of access budgets that apply to resources associated with this Clean
+// Rooms ML input channel.
+type PrivacyBudgetsMemberAccessBudgets struct {
+	Value []AccessBudget
+
+	noSmithyDocumentSerde
+}
+
+func (*PrivacyBudgetsMemberAccessBudgets) isPrivacyBudgets() {}
+
 // Information about the privacy configuration for a configured model algorithm
 // association.
 type PrivacyConfiguration struct {
@@ -1638,3 +1718,4 @@ type UnknownUnionMember struct {
 
 func (*UnknownUnionMember) isComputeConfiguration()   {}
 func (*UnknownUnionMember) isInputChannelDataSource() {}
+func (*UnknownUnionMember) isPrivacyBudgets()         {}

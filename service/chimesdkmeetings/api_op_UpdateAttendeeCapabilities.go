@@ -33,6 +33,13 @@ import (
 //     code. However, you can set your video capability to receive and you set your
 //     content capability to not receive.
 //
+//   - If meeting features is defined as Video:MaxResolution:None but
+//     Content:MaxResolution is defined as something other than None and attendee
+//     capabilities are not defined in the API request, then the default attendee video
+//     capability is set to Receive and attendee content capability is set to
+//     SendReceive . This is because content SendReceive requires video to be at
+//     least Receive .
+//
 //   - When you change an audio capability from None or Receive to Send or
 //     SendReceive , and if the attendee left their microphone unmuted, audio will
 //     flow from the attendee to the other meeting participants.

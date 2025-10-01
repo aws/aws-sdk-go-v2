@@ -31,7 +31,7 @@ func (c *Client) GetCluster(ctx context.Context, params *GetClusterInput, optFns
 
 type GetClusterInput struct {
 
-	// The name or ID of the cluster of the queue.
+	// The name or ID of the cluster.
 	//
 	// This member is required.
 	ClusterIdentifier *string

@@ -8,6 +8,135 @@ import (
 	"time"
 )
 
+// Controls and tracks usage limits for associated configured tables within a
+// collaboration across queries and job. Supports both period-based budgets that
+// can renew (daily, weekly, or monthly) and fixed lifetime budgets. Contains the
+// resource ARN, remaining budget information, and up to two budget configurations
+// (period-based and lifetime). By default, table usage is unlimited unless a
+// budget is configured.
+type AccessBudget struct {
+
+	// The total remaining budget across all budget parameters, showing the lower
+	// value between the per-period budget and lifetime budget for this access budget.
+	// For individual parameter budgets, see remainingBudget .
+	//
+	// This member is required.
+	AggregateRemainingBudget *int32
+
+	// Detailed budget information including time bounds, remaining budget, and
+	// refresh settings.
+	//
+	// This member is required.
+	Details []AccessBudgetDetails
+
+	// The Amazon Resource Name (ARN) of the access budget resource.
+	//
+	// This member is required.
+	ResourceArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Detailed information about an access budget including time bounds, budget
+// allocation, and configuration settings.
+type AccessBudgetDetails struct {
+
+	// The total budget allocation amount for this access budget.
+	//
+	// This member is required.
+	Budget *int32
+
+	// Specifies the time period for limiting table usage in queries and jobs. For
+	// calendar-based periods, the budget can renew if auto refresh is enabled. For
+	// lifetime budgets, the limit applies to the total usage throughout the
+	// collaboration. Valid values are:
+	//
+	// CALENDAR_DAY - Limit table usage per day.
+	//
+	// CALENDAR_WEEK - Limit table usage per week.
+	//
+	// CALENDAR_MONTH - Limit table usage per month.
+	//
+	// LIFETIME - Limit total table usage for the collaboration duration.
+	//
+	// This member is required.
+	BudgetType AccessBudgetType
+
+	// The remaining budget amount available for use within this access budget.
+	//
+	// This member is required.
+	RemainingBudget *int32
+
+	// The start time for the access budget period.
+	//
+	// This member is required.
+	StartTime *time.Time
+
+	// Indicates whether the budget automatically refreshes for each time period
+	// specified in budgetType . Valid values are:
+	//
+	// ENABLED - The budget refreshes automatically at the start of each period.
+	//
+	// DISABLED - The budget must be refreshed manually.
+	//
+	// NULL - The value is null when budgetType is set to LIFETIME .
+	AutoRefresh AutoRefreshMode
+
+	// The end time for the access budget period.
+	EndTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Input parameters for privacy budget templates that support access budgets
+// functionality, enabling enhanced budget management capabilities.
+type AccessBudgetsPrivacyTemplateParametersInput struct {
+
+	// An array of budget parameters that define the access budget configuration for
+	// the privacy template.
+	//
+	// This member is required.
+	BudgetParameters []BudgetParameter
+
+	// The Amazon Resource Name (ARN) of the resource associated with this privacy
+	// budget template.
+	//
+	// This member is required.
+	ResourceArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Output parameters for privacy budget templates with access budgets support,
+// containing the configured budget information.
+type AccessBudgetsPrivacyTemplateParametersOutput struct {
+
+	// An array of budget parameters returned from the access budget configuration.
+	//
+	// This member is required.
+	BudgetParameters []BudgetParameter
+
+	// The Amazon Resource Name (ARN) of the resource associated with this privacy
+	// budget template.
+	//
+	// This member is required.
+	ResourceArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Update parameters for privacy budget templates with access budgets
+// functionality, allowing modification of existing budget configurations.
+type AccessBudgetsPrivacyTemplateUpdateParameters struct {
+
+	// Updated array of budget parameters for the access budget configuration.
+	//
+	// This member is required.
+	BudgetParameters []BudgetParameter
+
+	noSmithyDocumentSerde
+}
+
 // Column in configured table that can be used in aggregate function in query.
 type AggregateColumn struct {
 
@@ -695,6 +824,27 @@ type BilledResourceUtilization struct {
 	//
 	// This member is required.
 	Units *float64
+
+	noSmithyDocumentSerde
+}
+
+// Individual budget parameter configuration that defines specific budget
+// allocation settings for access budgets.
+type BudgetParameter struct {
+
+	// The budget allocation amount for this specific parameter.
+	//
+	// This member is required.
+	Budget *int32
+
+	// The type of budget parameter being configured.
+	//
+	// This member is required.
+	Type AccessBudgetType
+
+	// Whether this individual budget parameter automatically refreshes when the
+	// budget period resets.
+	AutoRefresh AutoRefreshMode
 
 	noSmithyDocumentSerde
 }
@@ -3692,10 +3842,20 @@ func (*PreviewPrivacyImpactParametersInputMemberDifferentialPrivacy) isPreviewPr
 //
 // The following types satisfy this interface:
 //
+//	PrivacyBudgetMemberAccessBudget
 //	PrivacyBudgetMemberDifferentialPrivacy
 type PrivacyBudget interface {
 	isPrivacyBudget()
 }
+
+// Access budget information associated with this privacy budget.
+type PrivacyBudgetMemberAccessBudget struct {
+	Value AccessBudget
+
+	noSmithyDocumentSerde
+}
+
+func (*PrivacyBudgetMemberAccessBudget) isPrivacyBudget() {}
 
 // An object that specifies the epsilon parameter and the utility in terms of
 // total aggregations, as well as the remaining aggregations available.
@@ -3845,9 +4005,21 @@ type PrivacyBudgetTemplate struct {
 //
 // The following types satisfy this interface:
 //
+//	PrivacyBudgetTemplateParametersInputMemberAccessBudget
 //	PrivacyBudgetTemplateParametersInputMemberDifferentialPrivacy
 type PrivacyBudgetTemplateParametersInput interface {
 	isPrivacyBudgetTemplateParametersInput()
+}
+
+// Access budget configuration for the privacy budget template input, enabling
+// integration with access budget functionality.
+type PrivacyBudgetTemplateParametersInputMemberAccessBudget struct {
+	Value AccessBudgetsPrivacyTemplateParametersInput
+
+	noSmithyDocumentSerde
+}
+
+func (*PrivacyBudgetTemplateParametersInputMemberAccessBudget) isPrivacyBudgetTemplateParametersInput() {
 }
 
 // An object that specifies the epsilon and noise parameters.
@@ -3864,9 +4036,21 @@ func (*PrivacyBudgetTemplateParametersInputMemberDifferentialPrivacy) isPrivacyB
 //
 // The following types satisfy this interface:
 //
+//	PrivacyBudgetTemplateParametersOutputMemberAccessBudget
 //	PrivacyBudgetTemplateParametersOutputMemberDifferentialPrivacy
 type PrivacyBudgetTemplateParametersOutput interface {
 	isPrivacyBudgetTemplateParametersOutput()
+}
+
+// Access budget configuration returned from the privacy budget template,
+// containing the configured access budget settings.
+type PrivacyBudgetTemplateParametersOutputMemberAccessBudget struct {
+	Value AccessBudgetsPrivacyTemplateParametersOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*PrivacyBudgetTemplateParametersOutputMemberAccessBudget) isPrivacyBudgetTemplateParametersOutput() {
 }
 
 // The epsilon and noise parameters.
@@ -3937,9 +4121,22 @@ type PrivacyBudgetTemplateSummary struct {
 //
 // The following types satisfy this interface:
 //
+//	PrivacyBudgetTemplateUpdateParametersMemberAccessBudget
 //	PrivacyBudgetTemplateUpdateParametersMemberDifferentialPrivacy
 type PrivacyBudgetTemplateUpdateParameters interface {
 	isPrivacyBudgetTemplateUpdateParameters()
+}
+
+//	The new access budget configuration that completely replaces the existing
+//
+// access budget settings in the privacy budget template.
+type PrivacyBudgetTemplateUpdateParametersMemberAccessBudget struct {
+	Value AccessBudgetsPrivacyTemplateUpdateParameters
+
+	noSmithyDocumentSerde
+}
+
+func (*PrivacyBudgetTemplateUpdateParametersMemberAccessBudget) isPrivacyBudgetTemplateUpdateParameters() {
 }
 
 // An object that specifies the new values for the epsilon and noise parameters.
@@ -4880,6 +5077,9 @@ type Schema struct {
 	// table.
 	AnalysisMethod AnalysisMethod
 
+	// The Amazon Resource Name (ARN) of the schema resource.
+	ResourceArn *string
+
 	// The schema type properties.
 	SchemaTypeProperties SchemaTypeProperties
 
@@ -5006,6 +5206,9 @@ type SchemaSummary struct {
 	// MULTIPLE allows both SQL queries and PySpark jobs to be run directly on this
 	// table.
 	AnalysisMethod AnalysisMethod
+
+	// The Amazon Resource Name (ARN) of the schema summary resource.
+	ResourceArn *string
 
 	//  The selected analysis methods for the schema.
 	SelectedAnalysisMethods []SelectedAnalysisMethod

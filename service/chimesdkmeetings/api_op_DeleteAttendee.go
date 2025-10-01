@@ -15,7 +15,7 @@ import (
 // meeting is deleted. For more information about the Amazon Chime SDK, see [Using the Amazon Chime SDK]in the
 // Amazon Chime Developer Guide.
 //
-// [Using the Amazon Chime SDK]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
+// [Using the Amazon Chime SDK]: https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html
 func (c *Client) DeleteAttendee(ctx context.Context, params *DeleteAttendeeInput, optFns ...func(*Options)) (*DeleteAttendeeOutput, error) {
 	if params == nil {
 		params = &DeleteAttendeeInput{}

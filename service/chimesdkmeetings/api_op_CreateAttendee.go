@@ -16,7 +16,7 @@ import (
 // information about the Amazon Chime SDK, see [Using the Amazon Chime SDK]in the Amazon Chime Developer
 // Guide.
 //
-// [Using the Amazon Chime SDK]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
+// [Using the Amazon Chime SDK]: https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html
 func (c *Client) CreateAttendee(ctx context.Context, params *CreateAttendeeInput, optFns ...func(*Options)) (*CreateAttendeeOutput, error) {
 	if params == nil {
 		params = &CreateAttendeeInput{}
@@ -73,6 +73,13 @@ type CreateAttendeeInput struct {
 	//   capability to receive, the response will contain an HTTP 400 Bad Request status
 	//   code. However, you can set your video capability to receive and you set your
 	//   content capability to not receive.
+	//
+	//   - If meeting features is defined as Video:MaxResolution:None but
+	//   Content:MaxResolution is defined as something other than None and attendee
+	//   capabilities are not defined in the API request, then the default attendee video
+	//   capability is set to Receive and attendee content capability is set to
+	//   SendReceive . This is because content SendReceive requires video to be at
+	//   least Receive .
 	//
 	//   - When you change an audio capability from None or Receive to Send or
 	//   SendReceive , and if the attendee left their microphone unmuted, audio will

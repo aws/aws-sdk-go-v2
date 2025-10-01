@@ -52,6 +52,9 @@ type UpdateQueueInput struct {
 	// Queues assign jobs to associated compute node groups.
 	ComputeNodeGroupConfigurations []types.ComputeNodeGroupConfiguration
 
+	// Additional options related to the Slurm scheduler.
+	SlurmConfiguration *types.UpdateQueueSlurmConfigurationRequest
+
 	noSmithyDocumentSerde
 }
 

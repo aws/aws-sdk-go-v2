@@ -2,6 +2,29 @@
 
 package types
 
+type AccessBudgetType string
+
+// Enum values for AccessBudgetType
+const (
+	AccessBudgetTypeCalendarDay   AccessBudgetType = "CALENDAR_DAY"
+	AccessBudgetTypeCalendarMonth AccessBudgetType = "CALENDAR_MONTH"
+	AccessBudgetTypeCalendarWeek  AccessBudgetType = "CALENDAR_WEEK"
+	AccessBudgetTypeLifetime      AccessBudgetType = "LIFETIME"
+)
+
+// Values returns all known values for AccessBudgetType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AccessBudgetType) Values() []AccessBudgetType {
+	return []AccessBudgetType{
+		"CALENDAR_DAY",
+		"CALENDAR_MONTH",
+		"CALENDAR_WEEK",
+		"LIFETIME",
+	}
+}
+
 type AccessDeniedExceptionReason string
 
 // Enum values for AccessDeniedExceptionReason
@@ -237,6 +260,25 @@ const (
 func (AutoApprovedChangeType) Values() []AutoApprovedChangeType {
 	return []AutoApprovedChangeType{
 		"ADD_MEMBER",
+	}
+}
+
+type AutoRefreshMode string
+
+// Enum values for AutoRefreshMode
+const (
+	AutoRefreshModeEnabled  AutoRefreshMode = "ENABLED"
+	AutoRefreshModeDisabled AutoRefreshMode = "DISABLED"
+)
+
+// Values returns all known values for AutoRefreshMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutoRefreshMode) Values() []AutoRefreshMode {
+	return []AutoRefreshMode{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 
@@ -758,6 +800,7 @@ type PrivacyBudgetType string
 // Enum values for PrivacyBudgetType
 const (
 	PrivacyBudgetTypeDifferentialPrivacy PrivacyBudgetType = "DIFFERENTIAL_PRIVACY"
+	PrivacyBudgetTypeAccessBudget        PrivacyBudgetType = "ACCESS_BUDGET"
 )
 
 // Values returns all known values for PrivacyBudgetType. Note that this can be
@@ -767,6 +810,7 @@ const (
 func (PrivacyBudgetType) Values() []PrivacyBudgetType {
 	return []PrivacyBudgetType{
 		"DIFFERENTIAL_PRIVACY",
+		"ACCESS_BUDGET",
 	}
 }
 

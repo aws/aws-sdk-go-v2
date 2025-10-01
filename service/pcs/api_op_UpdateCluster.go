@@ -11,34 +11,33 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a job queue. You must associate 1 or more compute node groups with the
-// queue. You can associate 1 compute node group with multiple queues.
-func (c *Client) CreateQueue(ctx context.Context, params *CreateQueueInput, optFns ...func(*Options)) (*CreateQueueOutput, error) {
+// Updates a cluster configuration. You can modify Slurm scheduler settings,
+// accounting configuration, and security groups for an existing cluster.
+//
+// You can only update clusters that are in ACTIVE , UPDATE_FAILED , or SUSPENDED
+// state. All associated resources (queues and compute node groups) must be in
+// ACTIVE state before you can update the cluster.
+func (c *Client) UpdateCluster(ctx context.Context, params *UpdateClusterInput, optFns ...func(*Options)) (*UpdateClusterOutput, error) {
 	if params == nil {
-		params = &CreateQueueInput{}
+		params = &UpdateClusterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateQueue", params, optFns, c.addOperationCreateQueueMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateCluster", params, optFns, c.addOperationUpdateClusterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*CreateQueueOutput)
+	out := result.(*UpdateClusterOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type CreateQueueInput struct {
+type UpdateClusterInput struct {
 
-	// The name or ID of the cluster for which to create a queue.
+	// The name or ID of the cluster to update.
 	//
 	// This member is required.
 	ClusterIdentifier *string
-
-	// A name to identify the queue.
-	//
-	// This member is required.
-	QueueName *string
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. Idempotency ensures that an API request completes only once.
@@ -48,24 +47,16 @@ type CreateQueueInput struct {
 	// specify a client token, the CLI and SDK automatically generate 1 for you.
 	ClientToken *string
 
-	// The list of compute node group configurations to associate with the queue.
-	// Queues assign jobs to associated compute node groups.
-	ComputeNodeGroupConfigurations []types.ComputeNodeGroupConfiguration
-
 	// Additional options related to the Slurm scheduler.
-	SlurmConfiguration *types.QueueSlurmConfigurationRequest
-
-	// 1 or more tags added to the resource. Each tag consists of a tag key and tag
-	// value. The tag value is optional and can be an empty string.
-	Tags map[string]string
+	SlurmConfiguration *types.UpdateClusterSlurmConfigurationRequest
 
 	noSmithyDocumentSerde
 }
 
-type CreateQueueOutput struct {
+type UpdateClusterOutput struct {
 
-	// A queue resource.
-	Queue *types.Queue
+	// The cluster resource and configuration.
+	Cluster *types.Cluster
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -73,19 +64,19 @@ type CreateQueueOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationCreateQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateQueue{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateCluster{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateQueue{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateCluster{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateQueue"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateCluster"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -140,13 +131,13 @@ func (c *Client) addOperationCreateQueueMiddlewares(stack *middleware.Stack, opt
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
-	if err = addIdempotencyToken_opCreateQueueMiddleware(stack, options); err != nil {
+	if err = addIdempotencyToken_opUpdateClusterMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addOpCreateQueueValidationMiddleware(stack); err != nil {
+	if err = addOpUpdateClusterValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateQueue(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateCluster(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -209,24 +200,24 @@ func (c *Client) addOperationCreateQueueMiddlewares(stack *middleware.Stack, opt
 	return nil
 }
 
-type idempotencyToken_initializeOpCreateQueue struct {
+type idempotencyToken_initializeOpUpdateCluster struct {
 	tokenProvider IdempotencyTokenProvider
 }
 
-func (*idempotencyToken_initializeOpCreateQueue) ID() string {
+func (*idempotencyToken_initializeOpUpdateCluster) ID() string {
 	return "OperationIdempotencyTokenAutoFill"
 }
 
-func (m *idempotencyToken_initializeOpCreateQueue) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+func (m *idempotencyToken_initializeOpUpdateCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
 	if m.tokenProvider == nil {
 		return next.HandleInitialize(ctx, in)
 	}
 
-	input, ok := in.Parameters.(*CreateQueueInput)
+	input, ok := in.Parameters.(*UpdateClusterInput)
 	if !ok {
-		return out, metadata, fmt.Errorf("expected middleware input to be of type *CreateQueueInput ")
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *UpdateClusterInput ")
 	}
 
 	if input.ClientToken == nil {
@@ -238,14 +229,14 @@ func (m *idempotencyToken_initializeOpCreateQueue) HandleInitialize(ctx context.
 	}
 	return next.HandleInitialize(ctx, in)
 }
-func addIdempotencyToken_opCreateQueueMiddleware(stack *middleware.Stack, cfg Options) error {
-	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateQueue{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
+func addIdempotencyToken_opUpdateClusterMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateCluster{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
-func newServiceMetadataMiddleware_opCreateQueue(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opUpdateCluster(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "CreateQueue",
+		OperationName: "UpdateCluster",
 	}
 }

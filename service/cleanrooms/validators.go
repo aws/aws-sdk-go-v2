@@ -2026,6 +2026,47 @@ func addOpUpdateProtectedQueryValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpUpdateProtectedQuery{}, middleware.After)
 }
 
+func validateAccessBudgetsPrivacyTemplateParametersInput(v *types.AccessBudgetsPrivacyTemplateParametersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AccessBudgetsPrivacyTemplateParametersInput"}
+	if v.BudgetParameters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BudgetParameters"))
+	} else if v.BudgetParameters != nil {
+		if err := validateBudgetParameters(v.BudgetParameters); err != nil {
+			invalidParams.AddNested("BudgetParameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAccessBudgetsPrivacyTemplateUpdateParameters(v *types.AccessBudgetsPrivacyTemplateUpdateParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AccessBudgetsPrivacyTemplateUpdateParameters"}
+	if v.BudgetParameters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BudgetParameters"))
+	} else if v.BudgetParameters != nil {
+		if err := validateBudgetParameters(v.BudgetParameters); err != nil {
+			invalidParams.AddNested("BudgetParameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAggregateColumn(v *types.AggregateColumn) error {
 	if v == nil {
 		return nil
@@ -2302,6 +2343,41 @@ func validateAthenaTableReference(v *types.AthenaTableReference) error {
 	}
 	if v.TableName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBudgetParameter(v *types.BudgetParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BudgetParameter"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Budget == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Budget"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBudgetParameters(v []types.BudgetParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BudgetParameters"}
+	for i := range v {
+		if err := validateBudgetParameter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3000,9 +3076,33 @@ func validatePrivacyBudgetTemplateParametersInput(v types.PrivacyBudgetTemplateP
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PrivacyBudgetTemplateParametersInput"}
 	switch uv := v.(type) {
+	case *types.PrivacyBudgetTemplateParametersInputMemberAccessBudget:
+		if err := validateAccessBudgetsPrivacyTemplateParametersInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[accessBudget]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.PrivacyBudgetTemplateParametersInputMemberDifferentialPrivacy:
 		if err := validateDifferentialPrivacyTemplateParametersInput(&uv.Value); err != nil {
 			invalidParams.AddNested("[differentialPrivacy]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePrivacyBudgetTemplateUpdateParameters(v types.PrivacyBudgetTemplateUpdateParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PrivacyBudgetTemplateUpdateParameters"}
+	switch uv := v.(type) {
+	case *types.PrivacyBudgetTemplateUpdateParametersMemberAccessBudget:
+		if err := validateAccessBudgetsPrivacyTemplateUpdateParameters(&uv.Value); err != nil {
+			invalidParams.AddNested("[accessBudget]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -3831,9 +3931,6 @@ func validateOpCreatePrivacyBudgetTemplateInput(v *CreatePrivacyBudgetTemplateIn
 	invalidParams := smithy.InvalidParamsError{Context: "CreatePrivacyBudgetTemplateInput"}
 	if v.MembershipIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
-	}
-	if len(v.AutoRefresh) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("AutoRefresh"))
 	}
 	if len(v.PrivacyBudgetType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PrivacyBudgetType"))
@@ -5045,6 +5142,11 @@ func validateOpUpdatePrivacyBudgetTemplateInput(v *UpdatePrivacyBudgetTemplateIn
 	}
 	if len(v.PrivacyBudgetType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PrivacyBudgetType"))
+	}
+	if v.Parameters != nil {
+		if err := validatePrivacyBudgetTemplateUpdateParameters(v.Parameters); err != nil {
+			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

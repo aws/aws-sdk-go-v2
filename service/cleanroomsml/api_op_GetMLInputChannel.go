@@ -110,6 +110,11 @@ type GetMLInputChannelOutput struct {
 	// The number of records in the ML input channel.
 	NumberOfRecords *int64
 
+	// Returns the privacy budgets that control access to this Clean Rooms ML input
+	// channel. Use these budgets to monitor and limit resource consumption over
+	// specified time periods.
+	PrivacyBudgets types.PrivacyBudgets
+
 	// The ID of the protected query that was used to create the ML input channel.
 	ProtectedQueryIdentifier *string
 

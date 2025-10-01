@@ -1209,11 +1209,11 @@ type ContainerDefinition struct {
 	// There's no loopback for port mappings on Windows, so you can't access a
 	// container's mapped port from the host itself.
 	//
-	// This parameter maps to PortBindings in the the docker container create command
-	// and the --publish option to docker run. If the network mode of a task
-	// definition is set to none , then you can't specify port mappings. If the network
-	// mode of a task definition is set to host , then host ports must either be
-	// undefined or they must match the container port in the port mapping.
+	// This parameter maps to PortBindings in the docker container create command and
+	// the --publish option to docker run. If the network mode of a task definition is
+	// set to none , then you can't specify port mappings. If the network mode of a
+	// task definition is set to host , then host ports must either be undefined or
+	// they must match the container port in the port mapping.
 	//
 	// After a task reaches the RUNNING status, manual and automatic host and
 	// container port assignments are visible in the Network Bindings section of a
@@ -2270,9 +2270,8 @@ type DeploymentEphemeralStorage struct {
 // [Lifecycle hooks for Amazon ECS service deployments]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-lifecycle-hooks.html
 type DeploymentLifecycleHook struct {
 
-	// The details of the deployment lifecycle hook. This provides additional
-	// configuration for how the hook should be executed during deployment operations
-	// on Amazon ECS Managed Instances.
+	// Use this field to specify custom parameters that Amazon ECS will pass to your
+	// hook target invocations (such as a Lambda function).
 	HookDetails document.Interface
 
 	// The Amazon Resource Name (ARN) of the hook target. Currently, only Lambda
@@ -4582,6 +4581,17 @@ type Service struct {
 	// For more information, see [Balancing an Amazon ECS service across Availability Zones] in the Amazon Elastic Container Service Developer
 	// Guide .
 	//
+	// The default behavior of AvailabilityZoneRebalancing differs between create and
+	// update requests:
+	//
+	//   - For create service requests, when no value is specified for
+	//   AvailabilityZoneRebalancing , Amazon ECS defaults the value to ENABLED .
+	//
+	//   - For update service requests, when no value is specified for
+	//   AvailabilityZoneRebalancing , Amazon ECS defaults to the existing service’s
+	//   AvailabilityZoneRebalancing value. If the service never had an
+	//   AvailabilityZoneRebalancing value set, Amazon ECS treats this as DISABLED .
+	//
 	// [Balancing an Amazon ECS service across Availability Zones]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-rebalancing.html
 	AvailabilityZoneRebalancing AvailabilityZoneRebalancing
 
@@ -4636,6 +4646,9 @@ type Service struct {
 	// The period of time, in seconds, that the Amazon ECS service scheduler ignores
 	// unhealthy Elastic Load Balancing, VPC Lattice, and container health checks after
 	// a task has first started.
+	//
+	// If your service has more running tasks than desired, unhealthy tasks in the
+	// grace period might be stopped to reach the desired count.
 	HealthCheckGracePeriodSeconds *int32
 
 	// The launch type the service is using. When using the DescribeServices API, this

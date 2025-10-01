@@ -280,7 +280,7 @@ type RunTaskInput struct {
 	Tags []types.Tag
 
 	// The details of the volume that was configuredAtLaunch . You can configure the
-	// size, volumeType, IOPS, throughput, snapshot and encryption in in [TaskManagedEBSVolumeConfiguration]. The name of
+	// size, volumeType, IOPS, throughput, snapshot and encryption in [TaskManagedEBSVolumeConfiguration]. The name of
 	// the volume must match the name from the task definition.
 	//
 	// [TaskManagedEBSVolumeConfiguration]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TaskManagedEBSVolumeConfiguration.html
